@@ -5,7 +5,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -56,7 +56,7 @@ kind: Pod
 metadata:
   name: '<POD_NAME>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: '[<CHECK_NAME>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: '[<INTEGRATION_NAME>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCE_CONFIG>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[<LOG_CONFIG>]'
@@ -76,12 +76,12 @@ kind: Pod
 metadata:
   name: '<POD_NAME>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.check_names: '[<CHECK_NAME_1>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.check_names: '[<INTEGRATION_NAME_1>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.init_configs: '[<INIT_CONFIG_1>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.instances: '[<INSTANCE_CONFIG_1>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.logs: '[<LOG_CONFIG_1>]'
     # (...)
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.check_names: '[<CHECK_NAME_2>]'
+    ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.check_names: '[<INTEGRATION_NAME_2>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.init_configs: '[<INIT_CONFIG_2>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.instances: '[<INSTANCE_CONFIG_2>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.logs: '[<LOG_CONFIG_2>]'
@@ -103,7 +103,7 @@ Integrations templates can be stored as Docker labels. With Autodiscovery, the A
 **Dockerfile**:
 
 ```yaml
-LABEL "com.datadoghq.ad.check_names"='[<CHECK_NAME>]'
+LABEL "com.datadoghq.ad.check_names"='[<INTEGRATION_NAME>]'
 LABEL "com.datadoghq.ad.init_configs"='[<INIT_CONFIG>]'
 LABEL "com.datadoghq.ad.instances"='[<INSTANCE_CONFIG>]'
 LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
@@ -113,7 +113,7 @@ LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 
 ```yaml
 labels:
-  com.datadoghq.ad.check_names: '[<CHECK_NAME>]'
+  com.datadoghq.ad.check_names: '[<INTEGRATION_NAME>]'
   com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
   com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
   com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
@@ -122,7 +122,7 @@ labels:
 **docker run command**:
 
 ```shell
--l com.datadoghq.ad.check_names='[<CHECK_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]' -l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'
+-l com.datadoghq.ad.check_names='[<INTEGRATION_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]' -l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'
 ```
 
 **Docker Swarm**:
@@ -136,7 +136,7 @@ services:
   project:
     image: '<IMAGE_NAME>'
     labels:
-      com.datadoghq.ad.check_names: '[<CHECK_NAME>]'
+      com.datadoghq.ad.check_names: '[<INTEGRATION_NAME>]'
       com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
       com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
       com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
@@ -157,7 +157,7 @@ These integration templates are meant for basic cases. If you need a custom Data
 
 **Example auto-configuration file**:
 
-```
+```text
 ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
@@ -178,11 +178,11 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 
 On Kubernetes, you can use [ConfigMaps][1]. Reference the template below and the [Kubernetes Custom Integrations][2] documentation.
 
-```
+```text
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: <NAME>-config-map
+  name: "<NAME>-config-map"
   namespace: default
 data:
   <INTEGRATION_NAME>-config: |-
@@ -264,6 +264,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 {{< /tabs >}}
 
 ## Examples
+
 ### Datadog Redis integration
 
 {{< tabs >}}
@@ -271,7 +272,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 
 The following pod annotation defines the integration template for `redis` containers with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -293,20 +294,18 @@ metadata:
 spec:
   containers:
     - name: redis
-      image: httpd
+      image: redis:latest
       ports:
-        - containerPort: 80
+        - containerPort: 6379
 ```
 
 **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
-
 
 [1]: /agent/autodiscovery/template_variables
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 The following `docker-compose.yml` file applies the correct Redis integration template with a custom `password` parameter:
-
 
 ```yaml
 labels:
@@ -360,7 +359,6 @@ logs:
 
 **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][3].
 
-
 [1]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
 [2]: /agent/autodiscovery/ad_identifiers
 [3]: /agent/autodiscovery/template_variables
@@ -369,7 +367,7 @@ logs:
 
 The following ConfigMap defines the integration template for `redis` containers with the `source` and `service` attributes for collecting logs:
 
-```
+```yaml
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -391,22 +389,22 @@ data:
 
 In the manifest, define the `volumeMounts` and `volumes`:
 
-```
-[...]
+```yaml
+# [...]
         volumeMounts:
-        [...]
+        # [...]
           - name: redisdb-config-map
             mountPath: /conf.d/redisdb.d
-        [...]
+        # [...]
       volumes:
-      [...]
+      # [...]
         - name: redisdb-config-map
           configMap:
             name: redisdb-config-map
             items:
               - key: redisdb-config
                 path: conf.yaml
-[...]
+# [...]
 ```
 
 {{% /tab %}}
@@ -414,7 +412,7 @@ In the manifest, define the `volumeMounts` and `volumes`:
 
 The following etcd commands create a Redis integration template with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
 
-```
+```conf
 etcdctl mkdir /datadog/check_configs/redis
 etcdctl set /datadog/check_configs/redis/check_names '["redisdb"]'
 etcdctl set /datadog/check_configs/redis/init_configs '[{}]'
@@ -441,7 +439,7 @@ Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, `<INSTANCE_CO
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -516,7 +514,7 @@ logs:
 * Next, create the folder `conf.d/http_check.d` on your host.
 * Add the custom auto-configuration below to `conf.d/http_check.d/conf.yaml` on your host.
 
-```
+```yaml
 ad_identifiers:
   - httpd
 
@@ -541,7 +539,7 @@ instances:
 
 The following ConfigMap defines the integration template for the `apache` and `http_check` containers with the `source` and `service` attributes for collecting `apache` logs:
 
-```
+```yaml
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -572,15 +570,15 @@ data:
 
 In the manifest, define the `volumeMounts` and `volumes`:
 
-```
-[...]
+```yaml
+# [...]
         volumeMounts:
-        [...]
+        # [...]
           - name: httpd-config-map
             mountPath: /conf.d
-        [...]
+        # [...]
       volumes:
-      [...]
+      # [...]
         - name: httpd-config-map
           configMap:
             name: httpd-config-map
@@ -589,13 +587,13 @@ In the manifest, define the `volumeMounts` and `volumes`:
                 path: /apache.d/conf.yaml
               - key: http-check-config
                 path: /http_check.d/conf.yaml
-[...]
+# [...]
 ```
 
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
-```
+```conf
 etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'
 etcdctl set /datadog/check_configs/httpd/init_configs '[{}, {}]'
 etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name": "<WEBSITE_1>", "url": "http://%%host%%/website_1", timeout: 1},{"name": "<WEBSITE_2>", "url": "http://%%host%%/website_2", timeout: 1}]]'
@@ -603,7 +601,6 @@ etcdctl set /datadog/check_configs/httpd/logs '[{"source": "apache", "service": 
 ```
 
 **Note**: The order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of its configuration have the same index across the three lists.
-
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -133,15 +133,12 @@ Besoin d'aide ? Contactez [l'assistance Datadog][17].
 [6]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [7]: https://app.datadoghq.com/account/settings#agent
 [8]: https://docs.datadoghq.com/fr/getting_started/integrations
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [10]: https://github.com/DataDog/integrations-extras/blob/master/lighthouse/datadog_checks/lighthouse/data/conf.yaml.example
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [12]: https://nodejs.org/en/download
 [13]: https://github.com/GoogleChrome/lighthouse
 [14]: https://github.com/GoogleChrome/puppeteer
 [15]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [16]: https://github.com/DataDog/integrations-extras/blob/master/lighthouse/datadog_checks/lighthouse/metadata.csv
 [17]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

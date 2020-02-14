@@ -1,7 +1,6 @@
 ---
 title: Community integration installation
 kind: guide
-disable_toc: true
 further_reading:
 - link: "agent/troubleshooting/"
   tag: "Documentation"
@@ -59,8 +58,8 @@ To install the `<INTEGRATION_NAME>` check on your host:
 
 The best way to use an integration from integrations-extra with the Docker Agent is to build the Agent with this integration installed. Use the following Dockerfile to build an updated version of the Agent that includes the `<INTEGRATION_NAME>` integration from integrations-extras.
 
-```
-FROM python:2.7 AS wheel_builder
+```text
+FROM python:3.8 AS wheel_builder
 WORKDIR /wheels
 RUN pip install "datadog-checks-dev[cli]"
 RUN git clone https://github.com/DataDog/integrations-extras.git

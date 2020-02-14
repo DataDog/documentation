@@ -9,9 +9,11 @@ further_reading:
 
 This page gives a high level overview of the capabilities for the Datadog [US site][1] and [EU site][2].
 
+**Note**: The navigation of the Datadog application switches based on browser width. It's possible to get three different types of navigation. To change navigation types, adjust the width of your browser.
+
 ## Integrations
 
-{{< img src="getting_started/integrations.png" alt="integrations" responsive="true" >}}
+{{< img src="getting_started/integrations.png" alt="integrations"  >}}
 
 * Datadog has over 350 integrations [officially listed][3].
 * Custom integrations are available [via the Datadog API][4].
@@ -20,7 +22,7 @@ This page gives a high level overview of the capabilities for the Datadog [US si
 
 ## Infrastructure
 
-{{< img src="getting_started/infrastructure.png" alt="infrastructure" responsive="true" >}}
+{{< img src="getting_started/infrastructure.png" alt="infrastructure"  >}}
 
 * All machines show up in the [infrastructure list][6].
 * You can see the tags applied to each machine. Tagging allows you to indicate which machines have a particular purpose.
@@ -28,7 +30,7 @@ This page gives a high level overview of the capabilities for the Datadog [US si
 
 ## Host Map
 
-{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview" responsive="true" >}}
+{{< img src="getting_started/hostmap-overview.png" alt="hostmap overview"  >}}
 
 [The Host Map][8] can be found under the Infrastructure menu. It offers the ability to:
 
@@ -41,7 +43,7 @@ To learn more about the Host Map, visit the [Host Map dedicated documentation pa
 
 ## Events
 
-{{< img src="getting_started/event_stream.png" alt="Event stream" responsive="true" >}}
+{{< img src="getting_started/event_stream.png" alt="Event stream"  >}}
 
 [The Event Stream][9] is based on the same conventions as a blog:
 
@@ -57,13 +59,13 @@ For each incident, users can:
 * [@ notify team members][12], who receive an email
 * `@support-datadog` to ask for [assistance][13]
 
-{{< img src="getting_started/event_stream_event.png" alt="event stream event" responsive="true" style="width:70%;">}}
+{{< img src="getting_started/event_stream_event.png" alt="event stream event"  style="width:70%;">}}
 
 ## Dashboards
 
-{{< img src="getting_started/dashboard.png" alt="dashboard" responsive="true" >}}
+{{< img src="getting_started/dashboard.png" alt="dashboard"  >}}
 
-Dashboards contain [graphs][14] with real-time performance metrics.
+[Dashboards][14] contain graphs with real-time performance metrics.
 
 * Synchronous mousing across all graphs in a [screenboard][15].
 * Vertical bars are events. They put a metric into context.
@@ -83,7 +85,7 @@ Dashboards contain [graphs][14] with real-time performance metrics.
 * Use `@` in alert messages to direct notifications to the right people
 * Schedule downtimes to suppress notifications for system shutdowns, off-line maintenance, etc.
 
-{{< img src="getting_started/application/metric_monitor.png" alt="alert setup" responsive="true" >}}
+{{< img src="getting_started/application/metric_monitor.png" alt="alert setup"  >}}
 
 ## Further Reading
 
@@ -94,16 +96,16 @@ Dashboards contain [graphs][14] with real-time performance metrics.
 [3]: http://www.datadoghq.com/integrations
 [4]: /api
 [5]: https://github.com/DataDog/dd-agent
-[6]: /graphing/infrastructure
+[6]: /infrastructure
 [7]: /tagging
-[8]: /graphing/infrastructure/hostmap
-[9]: /graphing/event_stream
-[10]: /account_management/team
+[8]: /infrastructure/hostmap
+[9]: /events
+[10]: /account_management/users
 [11]: https://www.datadoghq.com/blog/filter-datadog-events-stream-pinpoint-events-infrastructure
-[12]: /graphing/event_stream/#@-notifications
+[12]: /events/#@-notifications
 [13]: /help
-[14]: /graphing
-[15]: /graphing/dashboards/screenboard
-[16]: /graphing/functions
+[14]: /dashboards
+[15]: /dashboards/screenboard
+[16]: /dashboards/functions
 [17]: https://www.datadoghq.com/blog/rank-filter-performance-monitoring-metrics-top-function
 [18]: /monitors

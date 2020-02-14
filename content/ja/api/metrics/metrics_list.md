@@ -1,7 +1,7 @@
 ---
 title: アクティブなメトリクスのリストの取得
 type: apicontent
-order: 25.1
+order: 26.1
 external_redirect: '/api/#get-list-of-active-metrics'
 ---
 ## アクティブなメトリクスのリストの取得
@@ -10,7 +10,8 @@ external_redirect: '/api/#get-list-of-active-metrics'
 
 特定の時間から現在までアクティブに報告しているメトリクスのリストを取得します。Python および Ruby ライブラリでは、このエンドポイントを使用できません。
 
-##### 引数
+**引数**:
+
 * **`from`** [必須]:
     Unix Epoch 以降の秒数
 * **`host`** [オプション]:

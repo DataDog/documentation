@@ -20,10 +20,12 @@ short_description: Datadog オーガニゼーションの HSM 監査ログを収
 Datadog は、CloudHSM ログを Datadog のログ管理ソリューションに送信する Lambda 関数を介して AWS CloudHSM と統合されます。
 
 ## セットアップ
+
 ###         - containerPort: 8126
           hostPort: 8126
           name: traceport
           protocol: TCP
+
 #### CloudHSM ログの有効化
 
 CloudHSM では監査ログがデフォルトで有効になっています。
@@ -39,6 +41,7 @@ CloudHSM では監査ログがデフォルトで有効になっています。
 完了したら、[Datadog Log セクション][2]に移動し、ログを確認します。
 
 ## トラブルシューティング
+
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: /ja/integrations/amazon_web_services/#create-a-new-lambda-function

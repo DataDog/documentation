@@ -3,7 +3,7 @@ title: Datadog 101 - Collection
 kind: video
 language: en
 wistiaid: mug2bisg96
-videos:
+"video-categories":
     - Datadog 101
 
 summary: Comment transmettre les métriques et événements de vos hosts à Datadog

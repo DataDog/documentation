@@ -1,7 +1,6 @@
 ---
 title: Help
 kind: documentation
-disable_toc: true
 customclass: help
 ---
 

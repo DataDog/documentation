@@ -6,7 +6,8 @@ external_redirect: /api/#update-monitor-downtime
 ---
 
 ## モニターのダウンタイムの更新
-##### 引数
+
+**引数**:
 
 * **`id`** [必須]:
     更新するダウンタイムの整数 ID
@@ -31,4 +32,3 @@ external_redirect: /api/#update-monitor-downtime
     *   **`week_days`**: (オプション) 繰り返す曜日のリスト。`Mon`、`Tue`、`Wed`、`Thu`、`Fri`、`Sat`、`Sun` から選択します。`type` が `weeks` の場合にのみ適用されます。**最初の文字は大文字にする必要があります。**
     *   **`until_occurrences`**: (オプション) ダウンタイムを再スケジューリングする回数。**`until_occurences` と `until_date`** は相互に排他的です。
     *   **`until_date`**: (オプション) 繰り返しが終了する日付を指定する POSIX タイムスタンプ。**`until_occurences` と `until_date`** は相互に排他的です。
-

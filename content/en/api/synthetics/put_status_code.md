@@ -1,13 +1,13 @@
 ---
 title: Start or pause a test
 type: apicode
-order: 30.2
+order: 31.2
 external_redirect: /api/#start-or-pause-a-test
 ---
 
 **SIGNATURE**:
 
-`POST /v1/synthetics/tests/<SYNTHETICS_TEST_PUBLIC_ID>/status`
+`PUT /v1/synthetics/tests/<SYNTHETICS_TEST_PUBLIC_ID>/status`
 
 **EXAMPLE REQUEST**:
 

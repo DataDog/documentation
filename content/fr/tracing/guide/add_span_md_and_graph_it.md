@@ -1,7 +1,6 @@
 ---
 title: Ajouter des tags de span et filtrer les données de performance de votre application
 kind: guide
-disable_toc: true
 further_reading:
   - link: /tracing/guide/alert_anomalies_p99_database/
     tag: "3\_minutes"
@@ -21,7 +20,7 @@ further_reading:
 ---
 _Temps de lecture : 7 minutes_
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="Vue d'analyses" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="Vue Analytics" video="true"  style="width:90%;">}}
 
 L'APM Datadog vous permet de personnaliser vos [traces][1] pour inclure toute information supplémentaire dont vous pourriez avoir besoin pour optimiser votre visibilité sur votre entreprise. Vous pouvez l'utiliser pour détecter un pic de débit chez un certain client, pour identifier l'utilisateur affichant la latence la plus élevée ou pour localiser le fragment de base de données générant le plus d'erreurs.
 
@@ -227,57 +226,57 @@ L'interface utilisateur de Datadog utilise les tags pour définir des métadonn�
 
 2) **Accédez à la page Services** et cliquez sur le [service][5] auquel vous avez ajouté des tags. **Faites défiler la page et cliquez sur la ressource spécifique** à laquelle le tag a été ajouté dans le tableau des [ressources][6]. **Faites défiler la page jusqu'au tableau des traces.**
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Page Ressource" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Page Ressource" style="width:90%;">}}
 
 Le tableau des traces affiche la distribution de la latence globale pour l'ensemble des traces incluses dans le contexte actuel (service, ressource et intervalle) ainsi que les liens vers les traces individuelles. Vous pouvez trier ce tableau par durée ou par code d'erreur pour identifier facilement les opérations ayant généré une erreur ou les possibilités d'optimisation.
 
 3) **Cliquez sur l'une de vos traces.**
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="Flamegraph" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="Flamegraph"  style="width:90%;">}}
 
 L'écran qui apparaît affiche un **flamegraph** en haut et des fenêtres d’informations supplémentaires en dessous. Le flamegraph Datadog vous permet de visualiser instantanément la durée et le statut de chaque unité logique (span) ayant une incidence sur une requête. Le flamegraph est entièrement interactif : vous pouvez vous déplacer sur celui-ci (en le faisant glisser) ou zoomer et dézoomer (avec la molette de défilement). Cliquez sur une span pour afficher davantage d'informations sur cette dernière en bas de l'écran.
 
 La partie inférieure de cette vue comprend des informations supplémentaires sur la trace ou toute span sélectionnée. De là, vous pouvez voir l'ensemble des tags par défaut ainsi que ceux qui ont été inclus manuellement. Vous avez également la possibilité de basculer entre les vues pour afficher les informations sur le host et les logs associés.
 
-<div class="alert alert-info">Pour activer les logs dans cette vue, vous devez activer la collecte de logs puis <a href="https://docs.datadoghq.com/tracing/advanced/connect_logs_and_traces/?tab=java" target=_blank>associer vos logs à vos traces</a></div>
+<div class="alert alert-info">Pour activer les logs dans cette vue, vous devez activer la collecte de logs puis <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/?tab=java" target=_blank>associer vos logs à vos traces</a></div>
 
+## Exploiter vos tags de span personnalisés avec App Analytics
 
-## Exploiter vos tags de span personnalisés avec l'analyse et la recherche de traces
-<div class="alert alert-info">Cette section part du principe que vous avez <a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>activé la fonctionnalité Analyse et recherche de traces.</a></div>
+<div class="alert alert-info">Cette section part du principe que vous avez <a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>activé la fonctionnalité App Analytics.</a></div>
 
 4) **Accédez à la [page Recherche de traces][7]**.
 
-La page Recherche de traces vous permet d’identifier les [traces]8] et les événements APM spécifiques qui vous intéressent. Ici, vous pouvez appliquer un filtre d'intervalle à un ensemble de tags par défaut (tels que `Env`,` Service`, `Resource` et [bien d'autres][9]).
+La page Recherche de traces vous permet d'identifier les [traces]8] et les spans analysées spécifiques qui vous intéressent. De là, vous pouvez appliquer un filtre d'intervalle à un ensemble de tags par défaut (tels que `Env`,` Service`, `Resource` et [bien d'autres][9]).
 
 5) **Trouvez une trace qui possède le nouveau tag**. Pour ce faire, utilisez l'explorateur de facettes sur la gauche. Recherchez le nom de la ressource que vous avez définie au début de ce guide, puis cliquez sur l'une des lignes que vous voyez à cet endroit.
 
 6) **Trouvez le nouveau tag que vous avez ajouté à la trace**. Cliquez dessus et sélectionnez **Create facet** pour `@[nom de votre facette]` (dans notre exemple, il s'agit de customer_id)
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="Créer un menu Facette" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="Menu Créer une facette" style="width:90%;">}}
 
 Vous pouvez désormais spécifier le nom d'affichage de votre facette ainsi que son emplacement dans l'explorateur de facettes.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_8.png" alt="Fenêtre Créer une facette" responsive="true" style="width:60%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_8.png" alt="Fenêtre Créer une facette" style="width:60%;">}}
 
 La facette que vous avez créée devrait maintenant apparaître dans l'explorateur de facettes. Utilisez la case `Search facets` pour la retrouver facilement.
 
-6) **Accédez à la page [Analyse de traces][10].**
+6) **Accédez à la page [App Analytics][10].**
 
-La page Analyse de traces est un outil de création de requêtes visuel qui vous permet d'inspecter vos traces sans aucune limite de cardinalité. Il s'appuie sur les facettes pour filtrer et définir le contexte de la requête. Pour plus d'informations, consultez la section [Analyse de traces][11].
+La page App Analytics est un outil de création de requêtes visuel qui vous permet d'inspecter vos traces sans aucune limite de cardinalité. Il s'appuie sur les facettes pour filtrer et définir le contexte de la requête. Pour plus d'informations, consultez la section [App Analytics][11].
 
 7) **Choisissez le service** sur lequel vous avez travaillé dans la liste des facettes de service, **sélectionnez Error** dans la liste des statuts et **sélectionnez `customer_id** (ou tout autre tag que vous avez ajouté à vos spans) dans le champ group by.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt=" span md 6" responsive="true" video="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt=" span md 6"  video="true" style="width:90%;">}}
 
 8) **Désélectionnez l'option Error** de la requête, **faites passer la mesure de `count *` à `Duration`**, puis **définissez le type de graphique sur `Top List`**.
 
 La liste des clients associés aux requêtes moyennes les plus lentes s'affiche alors. **Remarque** : si vous souhaitez vous assurer que vos clients ne dépassent jamais un certain seuil de performance, vous pouvez [exporter cette requête vers un monitor][12]. Vous pouvez également enregistrer cette visualisation dans un dashboard afin de la surveiller.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="span md 7" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="span md 7" video="true"  style="width:90%;">}}
 
 Enfin, vous pouvez également afficher l'ensemble des traces associées à votre requête en cliquant sur la visualisation et en sélectionnant `View traces`.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.mp4" alt="span md 9" video="true" responsive="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.mp4" alt="span md 9" video="true"  style="width:90%;">}}
 
 ## Pour aller plus loin
 
@@ -291,7 +290,7 @@ Enfin, vous pouvez également afficher l'ensemble des traces associées à votre
 [6]: /fr/tracing/visualization/#resources
 [7]: https://app.datadoghq.com/apm/search
 [8]: https://docs.datadoghq.com/fr/tracing/visualization/#trace
-[9]: https://docs.datadoghq.com/fr/tracing/trace_search_and_analytics/search
+[9]: https://docs.datadoghq.com/fr/tracing/app_analytics/search
 [10]: https://app.datadoghq.com/apm/search/analytics
-[11]: https://docs.datadoghq.com/fr/tracing/trace_search_and_analytics/analytics
+[11]: https://docs.datadoghq.com/fr/tracing/app_analytics/analytics
 [12]: https://docs.datadoghq.com/fr/tracing/guide/alert_anomalies_p99_database

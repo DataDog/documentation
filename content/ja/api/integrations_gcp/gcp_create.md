@@ -1,7 +1,7 @@
 ---
 title: 新しい GCP インテグレーションの作成
 type: apicontent
-order: 17.2
+order: 18.2
 external_redirect: '/api/#create-a-gcp-integration'
 ---
 ## 新しい GCP インテグレーションの作成
@@ -13,7 +13,7 @@ Datadog-Google Cloud Platform インテグレーションを作成します。
 * `POST` メソッドを使用すると、Datadog Organization の既存の構成に新しい構成を**追加**して、インテグレーション構成が更新されます。
 * `PUT` メソッドを使用すると、現在の構成を Datadog Organization に送信された新しい構成に**置き換えて**、インテグレーション構成が更新されます。
 
-##### 引数
+**引数**:
 
 以下のすべてのフィールドの値は、[サービスアカウントの GCP コンソール][1]で作成された JSON サービスアカウントキーファイルから提供されます。現在の Organization に対してこのファイルを作成する方法については、[Datadog-Google Cloud Platform インテグレーションのインストール手順][2]を参照してください。
 詳細については、[Google Cloud のサービスアカウントキーの作成と管理に関するドキュメント][3]を参照してください。

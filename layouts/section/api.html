@@ -9,7 +9,8 @@
     <div class="row sticky api-nav no-gutters" style="">
         <div class="col-12 col-lg-6">
             <div class="d-lg-none" style="background:#fff;padding:10px;">
-                <select class="api-select custom-select">
+                <label class="sr-only" for="api-select">API Select</label>
+                <select id="api-select" class="api-select custom-select">
                     <option selected>API</option>
                     {{ range $index, $element := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}
                         {{ if (or (in (string $element.Params.order) ".") (eq $index 0)) }}

@@ -1,56 +1,202 @@
 ---
 title: カスタムメトリクスの課金
-kind: faq
+kind: documentation
 aliases:
   - /ja/integrations/faq/what-standard-integrations-emit-custom-metrics/
 ---
-## 概要
+メトリクスが [350 種以上の Datadog インテグレーション][1]以外から送信された場合、そのメトリクスは[カスタムメトリクス][2]<sup>[(1)](#標準インテグレーション)</sup>とみなされます。
 
-一般に、[カスタムメトリクス][1]とは、標準のインテグレーションセットに含まれないメトリクスのことです。たとえば、アプリケーションスタックで使用するカスタムチェックや API レベルのメトリクスです。
+**カスタムメトリクスはメトリクス名とタグ値 (ホストタグを含む) の組み合わせにより、一意に識別されます。**
 
-* 課金対象数は、各月の`カスタムメトリクス数/時間`の平均値です。
-* プロプランには、1 ホストあたり 100 個のカスタムメトリクスが含まれます。
-* エンタープライズプランには、1 ホストあたり 200 個のカスタムメトリクスが含まれます。
-* メトリクス数は、すべての有料ホストで平均化されます。
-* カスタムメトリクスパッケージを追加購入することもできます。
+## カスタムメトリクスの数え方
 
-お客様のアカウントのカスタムメトリクス数については、[営業担当者][2]または[カスタマーサクセス][3]マネージャーまでお問い合わせください。
+特定のメトリクス名に関連付けられたカスタムメトリクスの数は、メトリクスの[送信タイプ][3]により異なります。次のシナリオを使って、カスタムメトリクスの数え方をいくつかご紹介します。
 
-### 標準インテグレーション
+エンドポイントリクエストのレイテンシーを測定する 2 つのホスト (`host:A` と `host:B`) から、`request.Latency` というメトリクスを送信しているとします。このメトリクスを 2 つのタグキーと共に送信します。
+
+* `endpoint` の値は `endpoint:X` または `endpoint:Y` とします。
+* `status` の値は `status:200` または `status:400` とします。
+
+下記に示すように、データの `endpoint:X` は両ホストでサポートされていますが、`host:B` でのみ失敗するとします。また、`endpoint:Y` へのリクエストは常に成功し、`host:B` でのみ表示されます。
+
+{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="レイテンシーリクエスト" responsive="true" style="width:80%;">}}
+
+{{< tabs >}}
+{{% tab "Count, Rate, Gauge" %}}
+
+[COUNT][1]、[RATE][2]、[GAUGE][3] の各メトリクスタイプから送信されるカスタムメトリクスの数は、同じロジックにより計算されます。
+
+このタグスキームで GAUGE メトリクスに送信された一意のタグ値の組み合わせ数は **4** です。
+
+* `host:A`、`endpoint:X`、`status:200`
+* `host:B`、`endpoint:X`、`status:200`
+* `host:B`、`endpoint:X`、`status:400`
+* `host:B`、`endpoint:Y`、`status:200`
+
+これにより、`request.Latency` では **4 つの異なるカスタムメトリクス**が報告されます。
+
+### 追加タグの影響
+
+タグを追加してもカスタムメトリクスが増えるとは**限りません**。カスタムメトリクス数は、一般的に、最小粒度または最も詳細なタグに対応します。例えば、米国の気温を測定しており、国と地域ごとに `temperature` メトリクスでタグ付けしたとします。その場合、次のように Datadog に送信します。
+
+| メトリクス名   | タグ値                         |
+|---------------|------------------------------------|
+| `temperature` | `country:USA`、`region: Northeast` |
+| `temperature` | `country:USA`、`region: Southeast` |
+
+3 つの値 `NYC`、`Miami`、`Orlando`  を持つ `city` という タグを追加するとします。 このタグを追加すると、以下の表に示すように、より詳細でより粒度の小さい情報をデータセットに加えることになるため、カスタムメトリクスの数が増えます。
+
+| メトリクス名   | タグ値                                          |
+|---------------|-----------------------------------------------------|
+| `temperature` | `country:USA`、`region: Northeast`、`city: NYC`     |
+| `temperature` | `country:USA`、`region: Southeast`、`city: Orlando` |
+| `temperature` | `country:USA`、`region: Southeast`、`city: Miami`   |
+
+`temperature` から報告されるカスタムメトリクス数は、最小粒度のタグ `city` に対応します。
+
+次に、temperature メトリクスを `state` メトリクス (`NY` と `Florida` の 2 つの値を持つ) でタグ付けするとします。この場合、`country`、`region`、`state`、`city` で temperature をタグ付けしています。state タグを追加しても、データセットにすでに存在する city タグの粒度レベルは変わりません。
+
+Florida の気温を入手するには、単に次のようにカスタムメトリクスの組み合わせを変更します。
+
+* `temperature{country:USA, state:Florida, city:Orlando}`
+* `temperature{country:USA, state:Florida, city:Miami}`
+
+**注意**: タグ値の順序を変えても一意性は増えません。次の組み合わせは共に同じカスタムメトリクスです。
+
+* `temperature{country:USA, state:Florida, city:Miami}`
+* `temperature{state:Florida, city:Miami, country:USA}`
+
+[1]: /ja/developers/metrics/types/?tab=count#metric-submission-types
+[2]: /ja/developers/metrics/types/?tab=rate#metric-submission-types
+[3]: /ja/developers/metrics/types/?tab=gauge#metric-submission-types
+{{% /tab %}}
+{{% tab "Histogram" %}}
+
+**HISTOGRAM メトリクスは、一意のメトリクス名とタグ値の組み合わせごとに 5 つのカスタムメトリクスをデフォルトで生成し、Agent 側の `max`、`median`、`avg`、`95pc`、`count` の集計をサポートします。詳細については、[HISTOGRAM メトリクスタイプ][1]をご参照ください。
+
+このタグスキームで HISTOGRAM メトリクスに送信された一意のタグ値の組み合わせ数は **4** です。
+
+* `host:A`、`endpoint:X`、`status:200`
+* `host:B`、`endpoint:X`、`status:200`
+* `host:B`、`endpoint:X`、`status:400`
+* `host:B`、`endpoint:Y`、`status:200`
+
+デフォルトでは、Agent はオリジナルの 4 つの一意のタグ値の組み合わせごとに  5 つのカスタムメトリクスを生成して、`avg`、`count`、`median`、`95percentile`、`max` の [Agent 側の各集計を有効にします][2]。結果として、`request.Latency` は合計で **4 × 5 = 20 のカスタムメトリクス** を報告します。
+
+**注意**: HISTOGRAM メトリクスに集計を追加すると、個別のカスタムメトリクスの報告数が増えます。集計を削除すると、カスタムメトリクスの報告数が減ります。
+
+* どの集計を Datadog に送信するかは、[datadog.yaml 構成ファイル][3]の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の集計だけが Datadog に送信されます。必要に応じて `sum` および `min` も利用できます。
+* Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][3]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、パーセンタイル順位が 95 の `95percentile` だけが Datadog に送信されます。
+
+[1]: /ja/developers/metrics/types/?tab=histogram
+[2]: /ja/developers/metrics/types/?tab=histogram#metric-submission-types
+[3]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+{{% /tab %}}
+{{% tab "Distribution" %}}
+
+**DISTRIBUTION メトリクスは、一意のメトリクス名とタグ値の組み合わせごとに 5 つのカスタムメトリクスをデフォルトで生成し**、値の全体的な分布を表示します。これら 5 つのカスタムメトリクスは、サーバー側の `count`、`sum`、`min`、`max`、`avg` の集計をサポートします。詳細については、[DISTRIBUTION メトリクスタイプ][1]をご参照ください。
+
+このタグスキームで分布メトリクスに送信された一意のタグ値の組み合わせ数は **4** です。
+
+* `host:A`、`endpoint:X`、`status:200`
+* `host:B`、`endpoint:X`、`status:200`
+* `host:B`、`endpoint:X`、`status:400`
+* `host:B`、`endpoint:Y`、`status:200`
+
+[DISTRIBUTION メトリクス][1]のカスタムメトリクス数は、メトリクス名とタグ値の一意の組み合わせ数に 5 を掛けた数になります。結果として、`request.Latency` から報告される**カスタムメトリクスの総数は 5 × 4 = 20** になります。
+
+##### タグ付けのカスタマイズ
+
+DISTRIBUTION メトリクスを集計する[タグの組み合わせ][2]をカスタマイズできます。`request.Latency` メトリクスに関連付けられた `endpoint` タグと `status` タグのみを維持するとします。結果として、次の 3 つのタグの組み合わせができます。
+
+* `endpoint:X`、`status:200`
+* `endpoint:X`、`status:400`
+* `endpoint:Y`、`status:200`
+
+[DISTRIBUTION メトリクス][1]のカスタムメトリクス数は、メトリクス名とタグ値の一意の組み合わせ数に 5 を掛けた数になります。タグをカスタマイズした結果として、`request.Latency` から報告される**カスタムメトリクス総数は 5 × 3 = 20** になります。
+
+##### パーセンタイル集計の追加
+
+パーセンタイル集計の数え方は独特です。**Datadog は潜在的に問い合わせ可能なタグ値の組み合わせごとに 5 つのカスタムメトリクス**、`p50`、`p75`、`p90`、`p95`、`p99` **を保存**して、全体的に正確なパーセンタイルを提供します。たとえば、`endpoint` と `status` のタグの組み合わせの `request.Latency` に前述と同じタグ依存性で[パーセンタイル集計を追加][3]したとします。この場合、問い合わせ可能なタグ値の組み合わせ数は **8** になります。
+
+* `endpoint:X`、`status:200`
+* `endpoint:X`、`status:400`
+* `endpoint:Y`、`status:200`
+* `endpoint:X`
+* `endpoint:Y`
+* `status:200`
+* `status:400`
+* `*`
+
+`request.Latency` のパーセンタイル集計を有効にすると、このメトリクス名が追加で報告され、**カスタムメトリクス数は 5 × 8 = 40** になります。
+
+**注意**:  実際にデータに表示されるタグ値の組み合わせのみが問い合わせ可能な組み合わせとしてカウントされます。「`endpoint:Y` と `status:400`」の組み合わせは、データで一度も送信されていないため、この組み合わせは問い合わせが不可能となり、カスタムメトリクスのカウントに反映されません。
+
+[1]: /ja/developers/metrics/types/?tab=distribution
+[2]: /ja/metrics/distributions/#customize-tagging
+[3]: /ja/metrics/distributions/#aggregations
+{{% /tab %}}
+{{< /tabs >}}
+
+## カスタムメトリクスの追跡
+
+管理ユーザー ([Datadog 管理者の役割を持つユーザー][4]) は、[使用量の詳細ページ][5]で、アカウントの 1 時間当たりのカスタムメトリクスの月平均数と上位 500 個のカスタムメトリクスを参照できます。詳細については、[使用量の詳細][6]に関するドキュメントをご参照ください。
+
+特定のメトリクス名のカスタムメトリクス数をリアルタイムで追跡するには、[Metrics Summary ページ][7]でメトリクス名をクリックします。以下に示すように「Currently reporting # distinct metrics...」として一覧表示されます。
+
+{{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="メトリクスの追跡" video="true" responsive="true">}}
+
+## 割り当て
+
+Datadog では、料金プランごとに一定数のカスタムメトリクスが割り当てられています。
+
+* プロ : 1 ホストにつき 100 個のカスタムメトリクス。
+* エンタープライズ : 1 ホストにつき 200 個のカスタムメトリクス。
+
+割り当ては、インフラストラクチャー全体でカウントされます。たとえば、プロプランを利用しており、3 ホスト分のライセンスを取得している場合、300 個のカスタムメトリクスが割り当てられます。300 個のカスタムメトリクスは、ホストごとに均等に振り分けることも、1 つのホストでのみ使用することもできます。例として、割り当てられたカスタムメトリクス数を超えないシナリオを下記に示しています。
+
+{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="ホストのカスタムメトリクス" responsive="true" >}}
+
+課金されるカスタムメトリクス数は、特定の月の (有料ホストすべての) カスタムメトリクスの 1 時間当たりの平均数に基づきます。アカウントのカスタムメトリクスについてのご相談や、カスタムメトリクスパッケージの追加購入については、[セールス][3]チームまたは担当の[カスタマーサクセス][8]マネージャーまでお問い合わせください。
+
+## 標準インテグレーション
+
 以下の標準インテグレーションでは、カスタムメトリクスを生成することができます。
 
-デフォルトでカスタムメトリクスが 350 個に制限されているインテグレーション
-
-* [ActiveMQ XML][4]
-* [Go-Expvar][5]
-
-デフォルトで制限がないインテグレーション 
-
-* [Agent Metrics][6]
-* [Directory][7]
-* [Linux Proc Extras][8]
-* [Nagios][9]
-* [Prometheus][10]
-* [SNMP][11]
-* [Windows Services][12]
-* [WMI][13]
+| インテグレーションの種類                             | インテグレーション                                                                                                                                                  |
+|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| デフォルトで上限 350 個のカスタムメトリクス。        | [ActiveMQ XML][9] / [Go-Expvar][10]                                                                                                                           |
+| カスタムメトリクスの収集では既定の上限なし。 | [Agent Metrics][11] /[Directory][12] /[Linux Proc Extras][13] /[Nagios][14] /[PDH Check][15] /[Prometheus][16] /[SNMP][17] /[Windows Services][18] /[WMI][19] |
+| カスタムメトリクス収集の構成が可能。     | [MySQL][20] /[Oracle][21] /[Postgres][22] /[SQL Server][23]                                                                                                   |
 
 ## トラブルシューティング
-技術的な質問については、[Datadog のサポートチーム][14]にお問い合わせください。
 
-課金に関するご質問は、[カスタマーサクセス][3]マネージャーにお問い合わせください。
+技術的な質問については、[Datadog サポートチーム][24]にお問い合わせください。
 
-[1]: /ja/developers/metrics/custom_metrics
-[2]: mailto:sales@datadoghq.com
-[3]: mailto:success@datadoghq.com
-[4]: /ja/integrations/activemq/#activemq-xml-integration
-[5]: /ja/integrations/go_expvar
-[6]: /ja/integrations/agent_metrics
-[7]: /ja/integrations/directory
-[8]: /ja/integrations/linux_proc_extras
-[9]: /ja/integrations/nagios
-[10]: /ja/integrations/prometheus
-[11]: /ja/integrations/snmp
-[12]: /ja/integrations/windows_service
-[13]: /ja/integrations/wmi_check
-[14]: /ja/help
+請求に関するご質問は、[カスタマーサクセス][25]マネージャーにお問い合わせください。
+
+[1]: /ja/integrations
+[2]: /ja/developers/metrics/custom_metrics
+[3]: /ja/developers/metrics/types/#metric-submission-types
+[4]: https://app.datadoghq.com/account/usage/hourly
+[5]: /ja/account_management/billing/usage_details
+[6]: https://app.datadoghq.com/metric/summary
+[7]: mailto:sales@datadoghq.com
+[8]: /ja/account_management/team
+[9]: /ja/integrations/activemq/#activemq-xml-integration
+[10]: /ja/integrations/go_expvar
+[11]: /ja/integrations/agent_metrics
+[12]: /ja/integrations/directory
+[13]: /ja/integrations/linux_proc_extras
+[14]: /ja/integrations/nagios
+[15]: /ja/integrations/pdh_check
+[16]: /ja/integrations/prometheus
+[17]: /ja/integrations/snmp
+[18]: /ja/integrations/windows_service
+[19]: /ja/integrations/wmi_check
+[20]: /ja/integrations/mysql
+[21]: /ja/integrations/oracle
+[22]: /ja/integrations/postgres
+[23]: /ja/integrations/sqlserver
+[24]: /ja/help
+[25]: mailto:success@datadoghq.com

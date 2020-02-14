@@ -107,8 +107,5 @@ SortDB チェックは、すべての主要プラットフォームと互換性�
 [8]: https://docs.datadoghq.com/ja/agent/faq/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-extras/blob/master/sortdb/datadog_checks/sortdb/data/conf.yaml.example
 [10]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#start-stop-restart-the-agent
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#service-status
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-extras/blob/master/sortdb/metadata.csv
-
-
-{{< get-dependencies >}}

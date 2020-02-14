@@ -1,7 +1,7 @@
 ---
 title: インデックス順序の更新
 type: apicontent
-order: 23.5
+order: 24.5
 external_redirect: "/api/#update-indexes-order"
 ---
 
@@ -13,6 +13,6 @@ external_redirect: "/api/#update-indexes-order"
 
 このエンドポイントは、オーガニゼーションの `IndexOrder` を更新します。リクエストが正常に完了したときに、リクエスト本文で渡される `IndexOrder` オブジェクトを返します。
 
-##### 引数
+**引数**:
 
 * **`index_names`** [必須]: オーガニゼーションのインデックスを名前で識別する`文字列`の配列。ログは、配列の順序に従い、各インデックスのクエリフィルターに照らして 1 つずつテストされます。最終的に、ログは最初に一致したインデックスに保存されます。

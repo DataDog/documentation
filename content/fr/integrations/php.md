@@ -4,7 +4,7 @@ categories:
   - log collection
 ddtype: library
 dependencies: []
-description: Envoyez des métriques custom à partir de vos applications PHP à l'aide du PHP DogStatsD. client.
+description: Envoyez des métriques custom à partir de vos applications PHP à l'aide du client PHP DogStatsD.
 doc_link: 'https://docs.datadoghq.com/integrations/php/'
 git_integration_title: php
 has_logo: true
@@ -14,10 +14,10 @@ kind: integration
 manifest_version: '1.0'
 name: php
 public_title: Intégration Datadog/PHP
-short_description: Envoyer des métriques custom à partir de vos applications PHP à l'aide de DogStatsD PHP client.
+short_description: Envoyez des métriques custom à partir de vos applications PHP à l'aide du client PHP DogStatsD.
 version: '1.0'
 ---
-{{< img src="integrations/php/phpgraph.png" alt="graphique PHP" responsive="true" popup="true">}}
+{{< img src="integrations/php/phpgraph.png" alt="graphique PHP" popup="true">}}
 
 ## Présentation
 
@@ -82,8 +82,8 @@ $statsd = new BatchedDogStatsd();
 
 Le constructeur DogStatsD utilise un tableau de configuration. La configuration accepte l'ensemble de ces valeurs facultatives :
 
-| Valeur         | Description                                                                                                                      |
-|---------------|----------------------------------------------------------------------------------------------------------------------------------|
+| Valeur         | Description                                                                                                                       |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------|
 | `host`        | Le host de votre serveur DogStatsD (`localhost` par défaut).                                                                        |
 | `port`        | Le port de votre serveur DogStatsD (`8125` par défaut).                                                                             |
 | `socket_path` | Le chemin vers le socket UNIX de DogStatsD qui remplace `host` et `port` (uniquement pris en charge avec les versions >= 6 de `datadog-agent`). La valeur par défaut est `null`. |
@@ -138,7 +138,7 @@ Pour en savoir plus sur l'utilisation des paramètres d'événement, consultez l
 - **TCP** : envoi d'événements de confiance élevée. Permet de loguer les erreurs associées à l'envoi d'événements.
 - **UDP** : envoi d'événements selon la méthode du « Fire and Forget ». Les erreurs associées à l'envoi d'événements ne sont **pas** loguées. Aucun accusé de réception n'est transmis par Datadog à l'envoi d'un événement.
 
-La fonction `event` utilise la même API pour le transport TCP et UDP. 
+La fonction `event` utilise la même API pour le transport TCP et UDP.
 
 #### Envoi UDP vers DogStatsD local
 
@@ -230,6 +230,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [6]: https://docs.datadoghq.com/fr/api/#events
 [7]: https://app.datadoghq.com/account/settings#api
 [8]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

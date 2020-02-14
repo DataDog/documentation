@@ -61,7 +61,7 @@ L'exemple d'intégration Datadog/Kafka ci-dessous fait appel à JMX pour recueil
 
 4. [Activez Autodiscovery sur votre Agent][4].
 
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[1]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /fr/agent/autodiscovery/template_variables
 [3]: https://docs.datadoghq.com/fr/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
 [4]: /fr/agent/autodiscovery/?tab=agent#docker-autodiscovery
@@ -118,7 +118,7 @@ L'exemple d'intégration Datadog/Kafka ci-dessous fait appel à JMX pour recueil
 5. [Une fois Autodiscovery activé sur votre Agent][28], montez ces fichiers de configuration (`conf.yaml` et `metrics.yaml`) dans le dossier `conf.d/kafka.d/` de votre Agent.
 6. (Facultatif) Si vous ne pouvez pas monter ces fichiers dans le conteneur de l'Agent (par exemple si vous utilisez AWS ECS), créez une nouvelle image Docker de l'Agent en y intégrant ces deux fichiers de configuration :
 
-    ```
+    ```conf
     FROM datadog/agent:latest
     COPY <PATH_JMX_CONF_FILE> conf.d/kafka.d/
     COPY <PATH_JMX_METRICS_FILE> conf.d/kafka.d/
@@ -126,17 +126,17 @@ L'exemple d'intégration Datadog/Kafka ci-dessous fait appel à JMX pour recueil
 
    Ensuite, utilisez cette nouvelle image personnalisée en tant qu'Agent conteneurisé classique.
 
-[1]: /fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[1]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /fr/integrations/activemq
 [3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
-[5]: /fr/integartions/cassandra
+[5]: /fr/integrations/cassandra
 [6]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/metrics.yaml
 [7]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
 [8]: /fr/integrations/hive
 [9]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/metrics.yaml
 [10]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
-[11]: /fr/integrtions/jboss_wildfly
+[11]: /fr/integrations/jboss_wildfly
 [12]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
 [13]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
 [14]: /fr/integrations/kafka

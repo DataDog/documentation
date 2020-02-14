@@ -48,6 +48,16 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 2. [Redémarrez l'Agent][3].
 
+#### SSL
+
+Si votre endpoint est sécurisé, une configuration supplémentaire est requise :
+
+1. Identifiez le certificat utilisé pour sécuriser l'endpoint des métriques.
+
+2. Montez le fichier de certificat associé dans le pod de l'Agent.
+
+3. Appliquez votre configuration SSL. Référez-vous au [fichier de configuration par défaut][7] pour en savoir plus.
+
 ### Validation
 
 [Lancez la sous-commande status de l'Agent][4] et cherchez `kube_metrics_server` dans la section Checks.
@@ -74,10 +84,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 [1]: https://github.com/kubernetes-incubator/metrics-server
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/datadog_checks/kube_metrics_server/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#restart-the-agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/metadata.csv
 [6]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}
+[7]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example

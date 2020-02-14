@@ -2,20 +2,22 @@
 title: Sinatra
 name: Sinatra
 kind: integration
-description: "Gather Sinatra application logs."
-short_description: "Gather Sinatra application logs."
+description: 'Gather Sinatra application logs.'
+short_description: 'Gather Sinatra application logs.'
 categories:
-- log collection
+    - log collection
 aliases:
     - logs/log_collection/nxlog
 has_logo: true
 integration_title: Sinatra
 is_public: true
 public_title: Datadog-Sinatra Integration
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/sinatra.md']
 supported_os:
-- linux
-- mac_os
-- windows
+    - linux
+    - mac_os
+    - windows
 ---
 
 ## Overview
@@ -28,6 +30,7 @@ This integration enables you to get web access logging from your [Sinatra][1] ap
 - Number of bytes exchanged
 
 ## Setup
+
 ### Installation
 
 [Install the Agent][2] on the instance that runs your Sinatra application.
@@ -58,34 +61,34 @@ More details are available in the [Rack recipes documentation][6].
 
 This logger uses the common Apache Access format and generates logs in the following format:
 
-```
+```text
 127.0.0.1 - - [15/Jul/2018:17:41:40 +0000] "GET /uptime_status HTTP/1.1" 200 34 0.0004
 127.0.0.1 - - [15/Jul/2018 23:40:31] "GET /uptime_status HTTP/1.1" 200 6997 1.8096
 ```
 
 #### Log Collection
 
-**Available for Agent >6.0**
+_Available for Agent versions >6.0_
 
-* Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file with:
+1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file with:
 
-      ```yaml
-      logs_enabled: true
-      ```
+    ```yaml
+    logs_enabled: true
+    ```
 
-* Add this configuration block to your `sinatra.d/conf.yaml` file  at the root of your [Agent's configuration directory][7] to start collecting your Sinatra application logs:
+2. Add this configuration block to your `sinatra.d/conf.yaml` file at the root of your [Agent's configuration directory][7] to start collecting your Sinatra application logs:
 
-      ```yaml
-      logs:
-        - type: file
-          path: /var/log/sinatra/access.log
-          source: sinatra
-          service: webapp
-      ```
+    ```yaml
+    logs:
+      - type: file
+        path: /var/log/sinatra/access.log
+        source: sinatra
+        service: webapp
+    ```
 
-* Change the `path` and `service` parameter values and configure them for your environment.
+      Change the `path` and `service` parameter values and configure them for your environment.
 
-* [Restart the Agent][8]
+3. [Restart the Agent][8]
 
 [1]: http://sinatrarb.com
 [2]: https://app.datadoghq.com/account/settings#agent

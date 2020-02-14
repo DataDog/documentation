@@ -49,23 +49,23 @@ The `kubernetes_state` check, which monitors `kube-state-metrics`, is enabled au
 		- name: DD_EXTRA_CONFIG_PROVIDERS
 		  value: "kube_services"
 		- name: DD_EXTRA_LISTENERS
-		  value: "kube_services" 
-	```          
+		  value: "kube_services"
+	```
 
 3. Mount an empty file to override `/etc/datadog-agent/conf.d/kubernetes_state.d/auto_conf.yaml` in the Agent DaemonSet. Otherwise, the Autodiscovered check still runs and may still consume a significant amount of RAM. Configure Agent deployment to mount an empty directory in `/etc/datadog-agent/conf.d/kubernetes_state.d`
 
-	```
-	...
-	    volumeMounts:
-	    ...
-	      - name: empty-dir
-	      mountPath: /etc/datadog-agent/conf.d/kubernetes_state.d
-	    ...
-	  volumes:
-	    - name: empty-dir
-	    emptyDir: {}
-	    ...
-	```
+    ```
+    ...
+        volumeMounts:
+        ...
+          - name: empty-dir
+          mountPath: /etc/datadog-agent/conf.d/kubernetes_state.d
+        ...
+      volumes:
+        - name: empty-dir
+        emptyDir: {}
+        ...
+    ```
 
 4. Deploy the Agent.
 
@@ -75,13 +75,13 @@ Refer to the [Running Cluster Checks with Autodiscovery][2] documentation for mo
 
 Run:
 
-```
-kubectl exec -it <datadog-cluster-agent-leader> agent clusterchecks
+```shell
+kubectl exec -it <DATADOG_CLUSTER_AGENT_LEADER> agent clusterchecks
 ```
 
 This command displays something like:
 
-```
+```text
 ===== Checks on gke-my-cluster-default-pool-b969f074-npsw =====
 
 === kubernetes_state check ===

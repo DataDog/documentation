@@ -3,7 +3,7 @@ title: Autodiscovery avec l'Agent v5
 kind: guide
 private: true
 aliases:
-  - /agent/faq/agent-5-autodiscovery
+  - /fr/agent/faq/agent-5-autodiscovery
 ---
 <div class="alert alert-info">
 Autodiscovery était autrefois appelé Service Discovery. Il est toujours appelé Service Discovery dans l'ensemble du code de l'Agent et dans certaines options de configuration.
@@ -121,11 +121,11 @@ Autodiscovery peut utiliser Consul, etcd et Zookeeper comme sources de modèle. 
 
 Dans le fichier `datadog.conf`, définissez les options `sd_config_backend`, `sd_backend_host` et `sd_backend_port` sur le type de stockage clé/valeur utilisé (`etcd`, `consul`, ou `zookeeper`), l'adresse IP du stockage clé/valeur ainsi que le port du stockage clé/valeur, respectivement :
 
-```
+```text
 # Pour le moment, seul Docker est pris en charge. Vous pouvez donc simplement supprimer la mise en commentaire de cette ligne.
 service_discovery_backend: docker
 
-# Définissez le stockage clé/valeur à utiliser pour rechercher les modèles de configuration.
+# Définissez le stockage jey/value à utiliser pour rechercher les modèles de configuration.
 # Le paramètre par défaut est etcd. Consul est également pris en charge.
 sd_config_backend: etcd
 
@@ -150,14 +150,14 @@ Si vous utilisez Consul et que le cluster Consul requiert une authentification, 
 
 Si vous préférez utiliser des variables d'environnement, passez les mêmes options au conteneur lors de son démarrage :
 
-```
+```shell
 docker service create \
   --name dd-agent \
   --mode global \
   --mount type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock \
   --mount type=bind,source=/proc/,target=/host/proc/,ro=true \
   --mount type=bind,source=/sys/fs/cgroup/,target=/host/sys/fs/cgroup,ro=true \
-  -e API_KEY=<YOUR API KEY> \
+  -e API_KEY=<VOTRE CLÉ API> \
   -e SD_BACKEND=docker \
   -e SD_CONFIG_BACKEND=etcd \
   -e SD_BACKEND_HOST=127.0.0.1 \
@@ -171,7 +171,7 @@ Notez que l'option permettant d'activer Autodiscovery est appelée `service_disc
 
 Lorsque le stockage de clé/valeur est activé en tant que source de modèle, l'Agent recherche des modèles à partir de la clé `/datadog/check_configs`. Autodiscovery s'attend à une hiérarchie clé/valeur comme suit :
 
-```
+```text
 /datadog/
   check_configs/
     docker_image_1/                 # identificateur de conteneur, p. ex. httpd
@@ -187,7 +187,7 @@ Chaque modèle contient trois éléments : nom du check, `init_config`, et `ins
 
 Les commandes etcd suivantes créer un modèle de check Apache équivalent à celui de l'exemple de la section précédente :
 
-```
+```text
 etcdctl mkdir /datadog/check_configs/httpd
 etcdctl set /datadog/check_configs/httpd/check_names '["apache"]'
 etcdctl set /datadog/check_configs/httpd/init_configs '[{}]'
@@ -202,10 +202,10 @@ Contrairement aux fichiers auto-conf, **les stockages clé/valeur peuvent utilis
 
 La commande etcd suivante crée le même modèle Apache et ajoute un modèle de [check HTTP][23] pour surveiller la disponibilité du site Web créé par le conteneur Apache :
 
-```
+```text
 etcdctl set /datadog/check_configs/library/httpd:latest/check_names '["apache", "http_check"]'
 etcdctl set /datadog/check_configs/library/httpd:latest/init_configs '[{}, {}]'
-etcdctl set /datadog/check_configs/library/httpd:latest/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+etcdctl set /datadog/check_configs/library/httpd:latest/instances '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "Mon service", "url": "http://%%host%%", timeout: 1}]'
 ```
 
 Là encore, l'ordre de chaque liste est important. Pour que l'Agent soit en mesure de générer la configuration du check HTTP, toutes les parties de sa configuration doivent utiliser le même index sur l'ensemble des trois listes (ce qui est le cas : l'index est 1).
@@ -216,7 +216,7 @@ Là encore, l'ordre de chaque liste est important. Pour que l'Agent soit en mesu
 
 Autodiscovery s'attend à des annotations de ce type :
 
-```
+```text
 annotations:
   service-discovery.datadoghq.com/<identificateur de conteneur>.check_names: '[<NOM_CHECK>]'
   service-discovery.datadoghq.com/<identificateur de conteneur>.init_configs: '[<CONFIG_INIT>]'
@@ -225,8 +225,8 @@ annotations:
 
 Le format est semblable à celui des stockages clé/valeur. Voici les différences :
 
-- Les annotations doivent commencer par `service-discovery.datadoghq.com/` (pour les stockages clé/valeur, l'indicateur de début est `/datadog/check_configs/`).
-- Pour les annotations, Autodiscovery identifie les conteneurs via leur _nom_, et non via leur image (comme il le fait pour les fichiers de configuration automatique et les stockages clé/valeur). En d'autres termes, il cherche à faire correspondre `<identificateur de conteneur>` avec `.spec.containers[0].name`, pas avec `.spec.containers[0].image`.
+* Les annotations doivent commencer par `service-discovery.datadoghq.com/` (pour les stockages clé/valeur, l'indicateur de début est `/datadog/check_configs/`).
+* Pour les annotations, Autodiscovery identifie les conteneurs via leur _nom_, et non via leur image (comme il le fait pour les fichiers de configuration automatique et les stockages clé/valeur). En d'autres termes, il cherche à faire correspondre `<identificateur de conteneur>` avec `.spec.containers[0].name`, pas avec `.spec.containers[0].image`.
 
 Si vous définissez directement vos pods Kubernetes (c'est-à-dire avec `kind: Pod`), ajoutez les annotations de chaque pod directement dans sa section `metadata` (voir le premier exemple ci-dessous). Si vous définissez _indirectement_ les pods avec des ReplicationControllers, des ReplicaSets ou des Deployments, ajoutez les annotations de pod dans `.spec.templates.metadata` (voir le deuxième exemple ci-dessous).
 
@@ -234,7 +234,7 @@ Si vous définissez directement vos pods Kubernetes (c'est-à-dire avec `kind: P
 
 L'annotation de pod suivante définit deux modèles, équivalant à ceux présentés à la fin de la section précédente, pour les conteneurs `apache` :
 
-```
+```text
 apiVersion: v1
 kind: Pod
 metadata:
@@ -242,7 +242,7 @@ metadata:
   annotations:
     service-discovery.datadoghq.com/apache.check_names: '["apache","http_check"]'
     service-discovery.datadoghq.com/apache.init_configs: '[{},{}]'
-    service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+    service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "Mon service", "url": "http://%%host%%", timeout: 1}]'
   labels:
     name: apache
 spec:
@@ -257,7 +257,7 @@ spec:
 
 Si vous définissez vos pods via des Deployments, n'ajoutez pas d'annotations de modèle aux métadonnées du Deployment. L'Agent n'analyse pas ces métadonnées. Ajoutez-les comme suit :
 
-```
+```text
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata: # N'ajoutez pas les modèles ici
@@ -271,7 +271,7 @@ spec:
       annotations:
         service-discovery.datadoghq.com/apache.check_names: '["apache","http_check"]'
         service-discovery.datadoghq.com/apache.init_configs: '[{},{}]'
-        service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
+        service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "Mon service", "url": "http://%%host%%", timeout: 1}]'
     spec:
       containers:
       - name: apache # utilisez cette valeur comme identificateur de conteneur dans vos annotations
@@ -287,14 +287,16 @@ spec:
 Selon le type de fichier, Autodiscovery s'attend à des étiquettes de ce type :
 
 **Dockerfile**
-```
+
+```text
 LABEL "com.datadoghq.ad.check_names"='[<NOM_CHECK>]'
 LABEL "com.datadoghq.ad.init_configs"='[<CONFIG_INIT>]'
 LABEL "com.datadoghq.ad.instances"='[<CONFIG_INSTANCE>]'
 ```
 
 **docker-compose.yaml**
-```
+
+```text
 labels:
   com.datadoghq.ad.check_names: '[<NOM_CHECK>]'
   com.datadoghq.ad.init_configs: '[<CONFIG_INIT>]'
@@ -302,7 +304,8 @@ labels:
 ```
 
 **commande d'exécution du docker**
-```
+
+```text
 -l com.datadoghq.ad.check_names='[<NOM_CHECK>]' -l com.datadoghq.ad.init_configs='[<CONFIG_INIT>]' -l com.datadoghq.ad.instances='[<CONFIG_INSTANCE>]'
 ```
 
@@ -310,7 +313,7 @@ labels:
 
 Le Dockerfile suivant lance un conteneur NGINX avec Autodiscovery activé :
 
-```
+```text
 FROM nginx
 
 EXPOSE 8080
@@ -336,7 +339,7 @@ Les template variables suivantes sont prises en charge par l'Agent :
   - Si votre port cible est fixe, nous vous conseillons de le spécifier directement, sans utiliser la variable `port`
 
 - PID de conteneur : `pid` (ajouté dans 5.15.x)
-  - `%%pid%%` : récupère l'ID de processus de conteneur renvoyé par `docker inspect --format '{{.State.Pid}}' <conteneur>`
+  - `%%pid%%` : récupère l'ID de processus de conteneur renvoyé par `docker inspect --format '{{.State.Pid}}' <CONTENEUR>`.
 
 - Nom du conteneur : `container_name` (ajouté dans 5.15.x)
   - `%%container_name%%` : récupère le nom de conteneur.
@@ -361,8 +364,8 @@ Par conséquent, si vous configurez un modèle `redisdb` à la fois dans Consul 
 
 Pour vérifier qu'Autodiscovery charge bien certains checks que vous avez configurés, utilisez la commande de script d'initialisation `configcheck` de l'Agent. Par exemple, pour confirmer que votre modèle Redis est chargé à partir d'une annotation Kubernetes et non à partir du fichier par défaut `auto_conf/redisdb.yaml` :
 
-```
-# docker exec -it <nom_conteneur_agent> /etc/init.d/datadog-agent configcheck
+```text
+# docker exec -it <NOM_CONTENEUR_AGENT> /etc/init.d/datadog-agent configcheck
 .
 ..
 ...
@@ -373,8 +376,8 @@ Check "redisdb":
 
 Pour vérifier qu'Autodiscovery charge les checks basés sur JMX :
 
-```
-# docker exec -it <nom_conteneur_agent> cat /opt/datadog-agent/run/jmx_status.yaml
+```text
+# docker exec -it <NOM_CONTENEUR_AGENT> cat /opt/datadog-agent/run/jmx_status.yaml
 timestamp: 1499296559130
 checks:
   failed_checks: {}

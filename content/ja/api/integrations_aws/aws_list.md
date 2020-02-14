@@ -9,6 +9,6 @@ external_redirect: "/api/#list-all-aws-integrations"
 
 Datadog Organization で使用できるすべての Datadog-AWS インテグレーションをリストします。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

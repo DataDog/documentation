@@ -1,7 +1,7 @@
 ---
 title: Create a monitor
 type: apicontent
-order: 26.01
+order: 27.01
 external_redirect: /api/#create-a-monitor
 ---
 
@@ -30,12 +30,14 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 | network      | `service check`                  |
 | outlier      | `query alert`                    |
 | process      | `service check`                  |
+| rum          | `rum alert`                      |
 | watchdog     | `event alert`                    |
 
 *   **`query`** [*required*]:
     The query defines when the monitor triggers. Query syntax depends on what type of monitor you are creating:
 
     ##### Metric Alert Query
+
     `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`
 
     -   `time_aggr`: avg, sum, max, min, change, or pct_change
@@ -56,6 +58,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     Use this to create an outlier monitor using the following query: `avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host}, 'dbscan', 7) > 0`
 
     ##### Service Check Query
+
     `"check".over(tags).last(count).count_by_status()`
 
     *   **`check`** name of the check, e.g. datadog.agent.up
@@ -68,7 +71,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *  **`event`**, the event query string:
     *   **`string_query`** free text query to match against event title and text.
-    *   **`sources`** event sources (comma-separated). [Complete list of source attribute values][4]
+    *   **`sources`** event sources (comma-separated). 
     *   **`status`** event statuses (comma-separated). Valid options: error, warn, and info.
     *   **`priority`** event priorities (comma-separated). Valid options: low, normal, all.
     *   **`host`** event reporting host (comma-separated).
@@ -81,7 +84,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     `processes(search).over(tags).rollup('count').last(timeframe) operator #`
 
-    *   **`search`** free text search string for querying processes. Matching processes match results on the [Live Processes][5] page
+    *   **`search`** free text search string for querying processes. Matching processes match results on the [Live Processes][4] page
     *   **`tags`** one or more tags (comma-separated)
     *   **`timeframe`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d
     *   **`operator`** <, <=, >, >=, ==, or !=
@@ -130,28 +133,28 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
         *   False: `[Triggered] Monitor Title`
 
     ##### Anomaly Options
-    
+
     _These options only apply to anomaly monitors and are ignored for other monitor types._
 
     - **`threshold_windows`** a dictionary containing `recovery_window` and `trigger_window`.
-        
+
         - `recovery_window` describes how long an anomalous metric must be normal before the alert recovers
         - `trigger_window` describes how long a metric must be anomalous before an alert triggers
 
         Example: `{'threshold_windows': {'recovery_window': 'last_15m', 'trigger_window': 'last_15m'}}`
 
     ##### Metric Alert Options
-    
+
     _These options only apply to metric alerts._
 
-   - **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][6] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
+   - **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][5] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
 
     Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`
 
    - **`evaluation_delay`** Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to 300 (5min), the timeframe is set to last_5m and the time is 7:00, the monitor evaluates data from 6:50 to 6:55. This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor always has data during evaluation.
 
     ##### Service Check Options
-    
+
     _These options only apply to service checks and are ignored for other monitor types._
 
    - **`thresholds`** a dictionary of thresholds by status. Because service checks can have multiple thresholds, we don't define them directly in the query.
@@ -159,15 +162,13 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
 
     ##### Errors and Validation
-    
+
     - If an invalid monitor option is included in the request, the response will be:
 
     `Error: 400 - ["Invalid monitor option:<invalid option>"]`
 
-
 [1]: /monitors/monitor_types/#import
 [2]: /monitors/monitor_types
 [3]: /monitors/monitor_types/#define-the-conditions
-[4]: /integrations/faq/list-of-api-source-attribute-value
-[5]: /graphing/infrastructure/process
-[6]: /monitors/faq/what-are-recovery-thresholds
+[4]: /infrastructure/process
+[5]: /monitors/faq/what-are-recovery-thresholds

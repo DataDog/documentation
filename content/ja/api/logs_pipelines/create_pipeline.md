@@ -1,16 +1,14 @@
 ---
 title: パイプラインの作成
 type: apicontent
-order: 24.5
+order: 25.5
 external_redirect: '/api/#create-a-pipeline'
 ---
 ## パイプラインの作成
 
 オーガニゼーションにパイプラインを作成します。
 
-
-##### 引数
-
+**引数**:
 
 * **`name`** [必須]:
     パイプラインの名前。

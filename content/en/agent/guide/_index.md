@@ -2,7 +2,6 @@
 title: Agent Guides
 kind: guide
 private: true
-disable_toc: true
 ---
 
 {{< whatsnext desc="General Guides:" >}}
@@ -16,6 +15,7 @@ disable_toc: true
     {{< nextlink href="agent/guide/secrets-management" >}}Secrets Management{{< /nextlink >}}
     {{< nextlink href="agent/guide/community-integrations-installation-with-docker-agent" >}}Community integration installation{{< /nextlink >}}
     {{< nextlink href="agent/guide/datadog-agent-manager-windows" >}}Datadog Agent Manager for Windows{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Use Python 3 with Datadog Agent v6{{< /nextlink >}}
     {{< nextlink href="agent/guide/python-3" >}}Python 2 to 3 Custom Check Migration{{< /nextlink >}}
     {{< nextlink href="agent/guide/cluster-agent-custom-metrics-server" >}}Cluster Agent and Horizontal Pod Autoscaling: Custom Metrics Server{{< /nextlink >}}
     {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}Autodiscovery with JMX{{< /nextlink >}}

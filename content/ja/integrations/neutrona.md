@@ -34,7 +34,8 @@ supported_os:
 ## 概要
 
 このチェックは、Azure (ExpressRoute) への [Neutrona][1] クラウド接続サービスを監視します。
- - Azure (ExpressRoute)
+
+- Azure (ExpressRoute)
 
 ## セットアップ
 
@@ -45,35 +46,35 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 1. [開発ツールキット][5]をインストールします。
 2. integrations-extras リポジトリを複製します。
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. `ddev` 構成を `integrations-extras/` パスで更新します。
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. `neutrona` パッケージをビルドします。
 
-    ```
-    ddev -e release build neutrona
-    ```
+   ```shell
+   ddev -e release build neutrona
+   ```
 
 5. [Datadog Agent をダウンロードして起動][6]します。
 6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
-    ```
-    datadog-agent integration install -w <PATH_OF_NEUTRONA_ARTIFACT_>/<NEUTRONA_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_NEUTRONA_ARTIFACT_>/<NEUTRONA_ARTIFACT_NAME>.whl
+   ```
 
 7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
 ### コンフィグレーション
 
 1. Neutrona の[メトリクス](#metric-collection)の収集を開始するには、[Agent の構成ディレクトリ][8]のルートにある `conf.d/` フォルダーの `neutrona.d/conf.yaml` ファイルを編集します。
-  使用可能なすべての構成オプションの詳細については、[サンプル neutrona.d/conf.yaml][9] を参照してください。
+   使用可能なすべての構成オプションの詳細については、[サンプル neutrona.d/conf.yaml][9] を参照してください。
 
 2. [Agent を再起動します][10]。
 
@@ -106,12 +107,9 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 [5]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
 [6]: https://app.datadoghq.com/account/settings#agent
 [7]: https://docs.datadoghq.com/ja/getting_started/integrations
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-extras/blob/master/neutrona/datadog_checks/neutrona/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#service-status
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-core/blob/master/neutrona/metadata.csv
 [13]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

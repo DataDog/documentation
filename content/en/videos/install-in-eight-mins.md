@@ -4,7 +4,7 @@ kind: video
 wistiaid: ira7wzi1d4
 language: en
 summary: In about 8 minutes get Datadog setup and install integrations with PagerDuty, AWS, RDS, and Elasticsearch
-videos:
+"video-categories":
     - Installation
     - PagerDuty
     - AWS

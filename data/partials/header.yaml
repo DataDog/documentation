@@ -9,18 +9,24 @@ left:
           - name: product_integrations
             link: "https://www.datadoghq.com/product/integrations/"
             title: "Integrations"
-          - name: product_apm
-            link: "https://www.datadoghq.com/apm/"
-            title: "APM"
-          - name: product_logs
-            link: "https://www.datadoghq.com/log-management/"
-            title: "Log Management"
           - name: product_dashboards
             link: "https://www.datadoghq.com/dashboarding/"
             title: "Dashboards"
+          - name: product_logs
+            link: "https://www.datadoghq.com/log-management/"
+            title: "Log Management"
+          - name: product_apm
+            link: "https://www.datadoghq.com/apm/"
+            title: "APM"
+          - name: product_network
+            link: "https://www.datadoghq.com/network/"
+            title: "Network"
           - name: product_synthetics
             link: "https://www.datadoghq.com/synthetics/"
             title: "Synthetics"
+          - name: product_rum
+            link: "https://www.datadoghq.com/rum/"
+            title: "RUM"
           - name: product_alerts
             link: "https://www.datadoghq.com/alerts/"
             title: "Alerts"
@@ -64,6 +70,15 @@ left:
       - name: solutions_devops
         link: "https://www.datadoghq.com/solutions/devops/"
         title: "DevOps"
+      - name: solutions_hybridcloudmonitoring
+        link: "https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/"
+        title: "Hybrid Cloud Monitoring"
+      - name: solutions_iotmonitoring
+        link: "https://www.datadoghq.com/solutions/iot-monitoring/"
+        title: "IoT Monitoring"
+      - name: solutions_machinelearning
+        link: "https://www.datadoghq.com/solutions/machine-learning/"
+        title: "Machine Learning"
 
 right:
   - name: about
@@ -91,6 +106,9 @@ right:
           - name: about_investors
             link: "https://investors.datadoghq.com/"
             title: "Investor Relations"
+          - name: about_awards
+            link: "https://www.datadoghq.com/about/awards/"
+            title: "Awards"
           - name: about_timeline
             link: "https://www.datadoghq.com/about/timeline/"
             title: "Timeline"

@@ -1,7 +1,7 @@
 ---
 title: Obtenir l'utilisation horaire pour Synthetics
 type: apicode
-order: 34.6
+order: 35.6
 external_redirect: "/api/#obtenir-l-utilisation-horaire-pour-synthetics"
 ---
 

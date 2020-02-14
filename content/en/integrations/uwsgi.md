@@ -18,6 +18,7 @@ supported_os:
 - linux
 - mac_os
 - windows
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/uwsgi.md"]
 ---
 
 ## Overview
@@ -34,7 +35,7 @@ Collect uWSGI logs in order to track requests per second, bytes served, request 
 
 By default uWSGI server logs to stdout. Run the following command to start logging to a file or follow [uWSGI instructions to log to a file][2]:
 
-```
+```text
 uwsgi --socket :3031 --logger file:logfile=/var/log/uwsgi/uwsgi.log,maxsize=2000000
 ```
 
@@ -42,22 +43,22 @@ Create the `uwsgi.d/conf.yaml` file in the root of your Agent's configuration di
 
 #### Log Collection
 
-**Available for Agent version >6.0**
+_Available for Agent versions >6.0_
 
 Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file with:
 
-```
+```yaml
 logs_enabled: true
 ```
 
 Then add this configuration block to your `uwsgi.d/conf.yaml` file to start collecting your logs:
 
-```
+```yaml
 logs:
-  - type: file
-    path: /var/log/uwsgi/uwsgi.log
-    service: <MY_APPLICATION>
-    source: uwsgi
+    - type: file
+      path: /var/log/uwsgi/uwsgi.log
+      service: '<MY_APPLICATION>'
+      source: uwsgi
 ```
 
 Finally, [restart the agent][3].

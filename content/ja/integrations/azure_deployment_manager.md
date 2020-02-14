@@ -218,6 +218,3 @@ Azure Deployment Manager には、サービスのチェック機能は含まれ�
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview#rollout-template
 [6]: https://www.datadoghq.com/blog/canary-deployments-with-azure-and-datadog/
-
-
-{{< get-dependencies >}}

@@ -1,7 +1,6 @@
 ---
 title: Template variables Autodiscovery
 kind: documentation
-disable_toc: true
 further_reading:
 - link: /agent/autodiscovery/integrations
   tag: Documentation
@@ -15,7 +14,6 @@ further_reading:
 ---
 
 Utilisez les template variables suivantes lors de la configuration d'Autodiscovery afin d'attribuer de façon dynamique les valeurs de votre conteneur :
-
 
 | Template variable           | Description                                                                                                                                                                                                 |
 | --------------------------  | ---                                                                                                                                                                                                         |
@@ -40,7 +38,6 @@ Les template variables ne sont pas toutes prises en charge, selon votre platefor
 | Docker      | ✅                          | ✅   | ✅   | ✅  | ✅  | ✅  | ✅      |
 | ECS Fargate | ✅                          | ✅   | ❌   | ✅  | ❌  | ✅  | ❌      |
 | Kubernetes  | ✅                          | ✅   | ✅   | ✅  | ❌  | ✅  | ❌      |
-
 
 ## Pour aller plus loin
 

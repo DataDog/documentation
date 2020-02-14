@@ -9,11 +9,11 @@ creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md'
-display_name: "Kyoto\_Tycoon"
+display_name: Kyoto Tycoon
 git_integration_title: kyototycoon
 guid: 2661668b-d804-4c8d-96a7-8019525add8c
 integration_id: kyoto-tycoon
-integration_title: "Kyoto\_Tycoon"
+integration_title: Kyoto Tycoon
 is_public: true
 kind: integration
 maintainer: help@datadoghq.com
@@ -37,40 +37,31 @@ Le check KyotoTycoon de l'Agent surveille les opérations get, set et delete et 
 
 ## Implémentation
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][1] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
-Le check KyotoTycoon est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Kyoto Tycoon.
+Le check KyotoTycoon est inclus avec le paquet de l'[Agent Datadog][1] : vous n'avez donc rien d'autre à installer sur vos serveurs Kyoto Tycoon.
 
 ### Configuration
 
-1. Modifiez le fichier `kyototycoon.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3].
-    Consultez le [fichier d'exemple kyototycoon.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `kyototycoon.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2].
+    Consultez le [fichier d'exemple kyototycoon.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
 
     ```yaml
-    init_config:
+        init_config:
 
-    instances:
-        #  Each instance needs a report URL.
-        #  name, and optionally tags keys. The report URL should
-        #  be a URL to the Kyoto Tycoon "report" RPC endpoint.
-        #
-        #  Complete example:
-        #
-        - report_url: http://localhost:1978/rpc/report
-        #   name: my_kyoto_instance
-        #   tags:
-        #     foo: bar
-        #     baz: bat
+        instances:
+
+            ## @param report_url - string - required
+            ## The report URL should be a URL to the Kyoto Tycoon "report" RPC endpoint.
+            #
+          - report_url: http://localhost:1978/rpc/report
     ```
 
-2. [Redémarrez l'Agent][5] pour commencer à envoyer vos métriques Kong à Datadog.
-
+2. [Redémarrez l'Agent][4].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `kyototycoon` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][5] et cherchez `kyototycoon` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -87,16 +78,12 @@ Le check Kyoto Tycoon n'inclut aucun événement.
 Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à Kyoto Tycoon pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}
+[1]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/conf.yaml.example
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/metadata.csv
+[7]: https://docs.datadoghq.com/fr/help

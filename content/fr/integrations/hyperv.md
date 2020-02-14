@@ -35,6 +35,7 @@ supported_os:
 Ce check permet de surveiller [Hyper-V][1] avec l'Agent Datadog.
 
 ## Implémentation
+
 ### Installation
 
 Le check Hyper-V est inclus avec le paquet de l'[Agent Datadog][3]. Vous n'avez donc rien d'autre à installer sur votre serveur.
@@ -71,16 +72,13 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 Documentation, liens et articles supplémentaires utiles :
 
-* [Surveiller Microsoft Hyper-V avec Datadog][9]
+- [Surveiller Microsoft Hyper-V avec Datadog][9]
 
 [1]: https://docs.microsoft.com/en-us/windows-server/virtualization/hyper-v/hyper-v-on-windows-server
 [3]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/windows
 [4]: https://github.com/DataDog/integrations-core/blob/master/hyperv/datadog_checks/hyperv/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/hyperv/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
 [9]: https://www.datadoghq.com/blog/monitor-microsoft-hyperv-with-datadog
-
-
-{{< get-dependencies >}}

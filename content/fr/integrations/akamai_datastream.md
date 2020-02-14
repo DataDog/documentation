@@ -27,6 +27,7 @@ version: 1
 Associez Datadog à Akamai DataStream pour recueillir les métriques d'état, de latence, de déchargement et d'erreurs relatives à vos CDN.
 
 ## Implémentation
+
 ### Installation
 
 Installez l'intégration avec le [carré d'intégration Akamai][1] de Datadog.
@@ -49,6 +50,7 @@ Seuls les flux présentant le type « Aggregated metrics » sont pris en charg
 </div>
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "akamai_datastream" >}}
 
@@ -62,11 +64,9 @@ L'intégration Akamai n'inclut aucun événement.
 L'intégration Akamai n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/akamai-datastream
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
 [3]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

@@ -9,6 +9,6 @@ external_redirect: "/api/#list-namespace-rules"
 
 特定の Datadog-AWS インテグレーションのすべてのネームスペース規則をリストします。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

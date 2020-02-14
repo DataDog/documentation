@@ -1,7 +1,6 @@
 ---
 title: Agent のログファイル
 kind: ガイド
-disable_toc: true
 aliases:
   - /ja/agent/faq/agent-log-files
 further_reading:
@@ -20,7 +19,7 @@ Datadog Agent は 10 MB ごとにログロールオーバーを行います。�
 ## Agent のログディレクトリ
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | プラットフォーム                             | コマンド                       |
 |--------------------------------------|-------------------------------|
@@ -28,7 +27,6 @@ Datadog Agent は 10 MB ごとにログロールオーバーを行います。�
 | macOS                                | `/var/log/datadog/`           |
 | Windows Server 2008/Vista 以降 | `C:\ProgramData\Datadog\logs` |
 | Windows Server 2003/XP 以前     | サポートされないプラットフォーム        |
-
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -53,7 +51,7 @@ Datadog Agent は 10 MB ごとにログロールオーバーを行います。�
 ## Agent のログファイル
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 * `agent.log`
 * `process-agent.log`

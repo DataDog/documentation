@@ -1,7 +1,7 @@
 ---
 title: Slack インテグレーションの取得
 type: apicontent
-order: 19.1
+order: 20.1
 external_redirect: "/api/#get-slack-integration"
 ---
 
@@ -9,6 +9,6 @@ external_redirect: "/api/#get-slack-integration"
 
 Datadog-Slack インテグレーションのすべての情報を取得します。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

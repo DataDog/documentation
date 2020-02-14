@@ -1,7 +1,6 @@
 ---
 title: Serveur de métriques custom pour l'Agent de cluster
 kind: guide
-disable_toc: false
 further_reading:
   - link: agent/kubernetes/cluster/
     tag: Documentation
@@ -58,7 +57,7 @@ Pour lancer [l'Agent de cluster Datadog][6], effectuez les étapes suivantes :
 
 À ce stade, vous devriez voir ce qui suit :
 
-```
+```text
 PODS:
 
 NAMESPACE     NAME                                     READY     STATUS    RESTARTS   AGE
@@ -80,7 +79,7 @@ Une fois l'Agent de cluster Datadog opérationnel, enregistrez-le en tant que fo
 
 On obtient alors le résultat suivant :
 
-```
+```text
 clusterrolebinding.rbac.authorization.k8s.io "system:auth-delegator" created
 rolebinding.rbac.authorization.k8s.io "dca" created
 apiservice.apiregistration.k8s.io "v1beta1.external.metrics.k8s.io" created
@@ -94,7 +93,7 @@ Une fois l'Agent de cluster Datadog lancé et le service enregistré, créez un 
 
 À ce stade, vous devriez voir ce qui suit :
 
-```
+```text
 PODS
 
 NAMESPACE     NAME                                     READY     STATUS    RESTARTS   AGE
@@ -122,7 +121,7 @@ Pour les cas d'utilisation avancés, il est possible de configurer plusieurs mé
 
 Votre pod NGINX devrait maintenant être exécuté avec le service correspondant :
 
-```
+```text
 POD:
 
 default       nginx-6757dd8769-5xzp2                   1/1       Running   0          3m
@@ -131,7 +130,6 @@ SVC:
 
 NAMESPACE     NAME                  TYPE        CLUSTER-IP        EXTERNAL-IP   PORT(S)         AGE
 default       nginx                 ClusterIP   192.168.251.36    none          8090/TCP        3m
-
 
 HPAS:
 
@@ -151,7 +149,7 @@ Effectuez un cURL sur l'adresse IP du service NGINX, comme suit :
 
 La réponse devrait ressembler à ce qui suit :
 
-```
+```shell
 $ curl 192.168.254.216:8090/nginx_status
 
 Active connections: 1
@@ -167,7 +165,7 @@ Ainsi, exécutez la ligne suivante : `while true; do curl <nginx_svc>:8090/ngin
 Le nombre de requêtes par seconde devrait rapidement augmenter et dépasser 9, ce qui correspond au seuil d'autoscaling des pods NGINX.
 Vous pouvez alors constater que de nouveaux pods NGINX sont en train d'être créés :
 
-```
+```text
 PODS:
 
 NAMESPACE     NAME                                     READY     STATUS    RESTARTS   AGE

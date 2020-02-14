@@ -11,7 +11,7 @@ description: Surveillez des métriques clés d'Azure Event Hubs.
 doc_link: 'https://docs.datadoghq.com/integrations/azure_event_hub/'
 git_integration_title: azure_event_hub
 has_logo: true
-integration_title: Microsoft Azure Event Hubs
+integration_title: Microsoft Azure Event Hub
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -65,6 +65,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [2]: https://docs.datadoghq.com/fr/integrations/azure/#log-collection
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_event_hub/azure_event_hub_metadata.csv
 [4]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

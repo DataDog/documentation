@@ -15,11 +15,11 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-To send your logs to Datadog, it's recommend to log to a file with [`lograge`][1] and then tail this file with your Datadog Agent. When setting up logging with Ruby, make sure to keep in mind the [reserved attributes][2]).
+To send your logs to Datadog, it's recommend to log to a file with [`lograge`][1] and then tail this file with your Datadog Agent. When setting up logging with Ruby, make sure to keep in mind the [reserved attributes][2].
 
 Instead of having a Rail logging output like this:
 
-```
+```text
 Started GET "/" for 127.0.0.1 at 2012-03-10 14:28:14 +0100
 Processing by HomeController#index as HTML
   Rendered text template within layouts/application (0.0ms)
@@ -32,20 +32,20 @@ Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 
 After lograge formating you get a single log line with all the important information in a JSON format like this:
 
-```
+```json
 {
-  "timestamp":"2016-01-12T19:15:19.118829+01:00",
-  "level":"INFO",
-  "logger":"Rails",
-  "method":"GET",
-  "path":"/jobs/833552.json",
-  "format":"json",
-  "controller":"jobs",
-  "action":"show",
-  "status":200,
-  "duration":58.33,
-  "view":40.43,
-  "db":15.26
+  "timestamp": "2016-01-12T19:15:19.118829+01:00",
+  "level": "INFO",
+  "logger": "Rails",
+  "method": "GET",
+  "path": "/jobs/833552.json",
+  "format": "json",
+  "controller": "jobs",
+  "action": "show",
+  "status": 200,
+  "duration": 58.33,
+  "view": 40.43,
+  "db": 15.26
 }
 ```
 
@@ -68,11 +68,11 @@ This section describe the minimum setup required in order to forward your Rails 
     # This specifies to log in JSON format
     config.lograge.formatter = Lograge::Formatters::Json.new
 
-    ## Disables log collocration
+    ## Disables log coloration
     config.colorize_logging = false
 
     # Log to a dedicated file
-    config.lograge.logger = ActiveSupport::BufferedLogger.new(File.join(Rails.root, 'log', "#{Rails.env}.log"))
+    config.lograge.logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', "#{Rails.env}.log"))
 
     # This is useful if you want to log query parameters
     config.lograge.custom_options = lambda do |event|
@@ -89,7 +89,7 @@ This section describe the minimum setup required in order to forward your Rails 
     ```yaml
       logs:
         - type: file
-          path: <RUBY_LOG_FILE_PATH>.log
+          path: "<RUBY_LOG_FILE_PATH>.log"
           service: ruby
           source: ruby
           sourcecategory: sourcecode
@@ -129,20 +129,20 @@ The hash is going to get converted into JSON and you'll then be able to do analy
 
 ```json
 {
-    "timestamp":"2016-01-12T19:15:18.683575+01:00",
-    "level":"INFO",
-    "logger":"WelcomeController",
-    "message": {
-        "user":"1234",
-        "button_name":"save",
-        "message":"User 1234 clicked on button saved"
-            }
+  "timestamp": "2016-01-12T19:15:18.683575+01:00",
+  "level": "INFO",
+  "logger": "WelcomeController",
+  "message": {
+    "user": "1234",
+    "button_name": "save",
+    "message": "User 1234 clicked on button saved"
+  }
 }
 ```
 
 ### RocketPant's suggested logging configuration
 
-In the file `config/initializers/lograge_rocketpants.rb ` (it can change depending on your project):
+In the file `config/initializers/lograge_rocketpants.rb` (it can change depending on your project):
 
 ```ruby
 # Configure Lograge to work with rocket_pants' controllers
@@ -193,10 +193,10 @@ end
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: (https://github.com/roidrage/lograge
+[1]: https://github.com/roidrage/lograge
 [2]: https://docs.datadoghq.com/logs/?tab=ussite#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation
 [5]: /agent/logs
 [6]: /agent/guide/agent-commands/#restart-the-agent
-[7]: /tracing/advanced/connect_logs_and_traces/?tab=ruby
+[7]: /tracing/connect_logs_and_traces/?tab=ruby

@@ -6,7 +6,7 @@ external_redirect: /api/#get-a-monitor-downtime
 ---
 
 ## モニターのダウンタイムの取得
-##### 引数
+
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。
-

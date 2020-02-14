@@ -11,7 +11,7 @@ Heroku propose trois types de logs :
 * `API Logs` : actions d'administration effectuées par vous et par les autres développeurs travaillant sur votre application
 
 Les [drains HTTP/S de Heroku][1] mettent en mémoire tampon les messages de log et envoient ces messages par lots vers un endpoint HTTPS via une requête POST.  
-Le corps POST comprend les messages au format Syslog, tramés selon la méthode de comptage d'octets du protocole TCP Syslog.  
+Le corps POST comprend les messages au format Syslog, tramés selon la méthode de comptage d'octets du protocole TCP Syslog.
 L'API HTTP Datadog implémente et interprète le standard Logplex défini par l'en-tête de contenu `application/logplex-1`.
 
 Pour envoyer tous ces logs à Datadog :
@@ -22,14 +22,14 @@ Pour envoyer tous ces logs à Datadog :
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
 
-```
+```text
 heroku drains:add 'https://http-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DD>?ddsource=heroku&service=<SERVICE>&host=<HOST>' -a <NOM_APPLICATION>
 ```
 
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
 
-```
+```text
 heroku drains:add 'https://http-intake.logs.datadoghq.eu/v1/input/<CLÉ_API_DD>?ddsource=heroku&service=<SERVICE>&host=<HOST>' -a <NOM_APPLICATION>
 ```
 
@@ -47,14 +47,14 @@ Ajoutez des attributs personnalisés aux logs depuis votre application en rempla
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
 
-```
+```text
 https://http-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DD>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALEUR>
 ```
 
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
 
-```
+```text
 https://http-intake.logs.datadoghq.eu/v1/input/<CLÉ_API_DD>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALEUR>
 ```
 

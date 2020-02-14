@@ -1,11 +1,2 @@
-from datadog import initialize, api
-
-options = {
-    'api_key': '<YOUR_API_KEY>',
-    'app_key': '<YOUR_APP_KEY>'
-}
-
-initialize(**options)
-
-# Get one user
-api.User.get('test@datadoghq.com')
+# This is not yet supported by the Datadog API Python Client
+# Consult the curl example

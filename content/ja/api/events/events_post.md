@@ -5,9 +5,11 @@ order: 12.1
 external_redirect: '/api/#post-an-event'
 ---
 ## イベントのポスト
+
 このエンドポイントを使用して、イベントをストリームにポストできます。イベントにタグ付けし、優先度を設定し、他のイベントと統合します。
 
-##### 引数
+**引数**:
+
 * **`title`** [必須]:
     イベントのタイトル。上限は 100 文字です。
     [Datadog Ruby ライブラリ][1]では、`msg_title` を使用してください。
@@ -31,12 +33,11 @@ external_redirect: '/api/#post-an-event'
 * **`source_type_name`** [オプション、デフォルト = **None**]:
     ポストされるイベントのタイプ。
     オプションには、**nagios**、**hudson**、**jenkins**、**my_apps**、**chef**、**puppet**、**git**、**bitbucket** などがあります。
-    [ソース属性値のリストはこちら][3]を参照してください。
 * **`related_event_id`** [オプション、デフォルト = **None**]:
     親イベントの ID。整数として (引用符なしで) 送信する必要があります。
 * **`device_name`** [オプション、デフォルト = **None**]:
     イベントのポストに使用するデバイス名のリスト。
 
+
 [1]: https://github.com/DataDog/dogapi-rb
-[2]: /ja/graphing/event_stream/#markdown-events
-[3]: /ja/integrations/faq/list-of-api-source-attribute-value
+[2]: /ja/developers/events/email#markdown

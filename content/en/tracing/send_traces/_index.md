@@ -9,7 +9,7 @@ aliases:
   - /tracing/getting_further/first_class_dimensions/
   - /agent/apm/
 further_reading:
-- link: "tracing/send_traces/agent-apm-metrics/"
+- link: "tracing/troubleshooting/"
   tag: "Documentation"
   text: "APM metrics sent by the Datadog Agent"
 - link: "/agent/docker/apm"
@@ -67,10 +67,12 @@ There are several ways to specify [an environment][10] when reporting data:
 
 1. **Host tag**: Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
 2. **Agent configuration**: Override the default tag used by the Agent in the Agent configuration file. This tags all traces coming through the Agent, overriding the host tag value.
+
   ```
   apm_config:
   env: <ENVIRONMENT>
   ```
+
 3. **Per trace**: When submitting a single [trace][1], specify an environment by tagging one of its [spans][11] with the metadata key `env`. This overrides the Agent configuration and the host tag’s value (if any). Consult the [trace tagging documentation][12] to learn how to assign a tag to your traces.
 
 ## Next steps
@@ -90,7 +92,7 @@ Next, [Instrument your application][13]. For the full overview of all of the ste
 [7]: /integrations/amazon_xray/#overview
 [8]: /agent/basic_agent_usage/heroku/#installation
 [9]: /integrations/cloud_foundry/#trace-collection
-[10]: /tracing/advanced/setting_primary_tags_to_scope/#definition
+[10]: /tracing/guide/setting_primary_tags_to_scope/#definition
 [11]: /tracing/visualization/#spans
-[12]: /tracing/advanced/adding_metadata_to_spans/?tab=java
+[12]: /tracing/guide/adding_metadata_to_spans/?tab=java
 [13]: /tracing/setup

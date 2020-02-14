@@ -140,21 +140,36 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
-Par défaut, les logs PostgreSQL sont envoyés vers `stderr` et n'incluent aucune information détaillée. Il est conseillé d'enregistrer les logs dans un fichier en ajoutant des détails supplémentaires spécifiés en tant que préfixe dans la ligne de log.
+Par défaut, les logs PostgreSQL sont envoyés vers `stderr` et n'incluent aucune information détaillée. Il est conseillé d'enregistrer les logs dans un fichier en ajoutant des détails supplémentaires spécifiés en tant que préfixe dans la ligne de log. Consultez la [documentation PostgresSQL][14] à ce sujet pour en savoir plus.
 
-1. Modifiez votre fichier de configuration PostgreSQL `/etc/postgresql/<version>/main/postgresql.conf` et supprimez la mise en commentaire du paramètre suivant dans la section concernant les logs :
+1. La configuration du logging se fait depuis le fichier `/etc/postgresql/<VERSION>/main/postgresql.conf`. Pour recueillir des logs standard, y compris les sorties des déclarations, supprimez la mise en commentaire des paramètres suivants dans la section dédiée aux logs :
 
     ```conf
       logging_collector = on
       log_directory = 'pg_log'  # directory where log files are written,
                                 # can be absolute or relative to PGDATA
-      log_filename = 'pg.log'   #log file name, can include pattern
-      log_statement = 'all'     #log all queries
+      log_filename = 'pg.log'   # log file name, can include pattern
+      log_statement = 'all'     # log all queries
+      #log_duration = on
       log_line_prefix= '%m [%p] %d %a %u %h %c '
       log_file_mode = 0644
       ## For Windows
       #log_destination = 'eventlog'
     ```
+
+2. Pour recueillir des métriques de durée détaillées et les rechercher depuis l'interface Datadog, vous devez les configurer directement au sein des déclarations. Comparez la configuration recommandée qui suit avec celle ci-dessus : vous noterez que dans les deux cas, les options `log_statement` et `log_duration` ont été mises en commentaire. Pour en savoir plus à ce sujet, consultez [cette discussion][15].
+
+   Cette configuration enregistre toutes les déclarations dans les logs, mais vous pouvez choisir d'enregistrer uniquement celles qui présentent une certaine durée en définissant la valeur `log_min_duration_statement` sur la durée minimum souhaitée (en millisecondes) :
+
+    ```conf
+      log_min_duration_statement = 0    # -1 is disabled, 0 logs all statements
+                                        # and their durations, > 0 logs only
+                                        # statements running at least this number
+                                        # of milliseconds
+      #log_statement = 'all'
+      #log_duration = on
+    ```
+
 
 2. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -162,15 +177,15 @@ Par défaut, les logs PostgreSQL sont envoyés vers `stderr` et n'incluent aucun
       logs_enabled: true
     ```
 
-3.  Ajoutez ce bloc de configuration à votre fichier `postgres.d/conf.yaml` pour commencer à recueillir vos logs PostgreSQL :
+3.  Ajoutez ce bloc de configuration à votre fichier `postgres.d/conf.yaml` et modifiez-le pour commencer à recueillir vos logs PostgreSQL :
 
     ```yaml
       logs:
           - type: file
-            path: /var/log/pg_log/pg.log
+            path: <LOG_FILE_PATH>
             source: postgresql
             sourcecategory: database
-            service: myapp
+            service: <SERVICE_NAME>
             #To handle multi line that starts with yyyy-mm-dd use the following pattern
             #log_processing_rules:
             #  - type: multi_line
@@ -241,16 +256,15 @@ Documentation, liens et articles supplémentaires utiles :
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postgres/images/postgresql_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
 [6]: https://docs.datadoghq.com/fr/agent/docker/log/
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/postgres/metadata.csv
 [9]: https://docs.datadoghq.com/fr/integrations/faq/postgres-custom-metric-collection-explained
 [10]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
 [11]: https://www.datadoghq.com/blog/postgresql-monitoring
 [12]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
 [13]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
-
-
-{{< get-dependencies >}}
+[14]: https://www.postgresql.org/docs/11/runtime-config-logging.html
+[15]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com

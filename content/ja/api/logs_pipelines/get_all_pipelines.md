@@ -1,7 +1,7 @@
 ---
 title: すべてのパイプラインの取得
 type: apicontent
-order: 24.3
+order: 25.3
 external_redirect: "/api/#get-all-pipelines"
 ---
 
@@ -9,6 +9,6 @@ external_redirect: "/api/#get-all-pipelines"
 
 オーガニゼーションからすべてのパイプラインを取得します。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

@@ -1,16 +1,14 @@
 ---
 title: Créer un pipeline
 type: apicontent
-order: 24.5
+order: 25.5
 external_redirect: '/api/#creer-un-pipeline'
 ---
 ## Créer un pipeline
 
 Créez un pipeline dans votre organisation.
 
-
 **ARGUMENTS**:
-
 
 * **`name`** [*obligatoire*] :
   Le nom de votre pipeline.

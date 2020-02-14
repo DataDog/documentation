@@ -6,6 +6,7 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - data store
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -23,7 +24,7 @@ metric_prefix: oracle.
 metric_to_check: oracle.session_count
 name: Oracle
 public_title: Intégration Datadog/Oracle
-short_description: Système de base de données relationnelle Oracle conçu pour les infrastructures d'entreprise computing
+short_description: Système de base de données relationnelle Oracle conçu pour les architectures grid computing d'entreprise
 support: core
 supported_os:
   - linux
@@ -37,9 +38,6 @@ supported_os:
 Recueillez des métriques de serveurs d'Oracle Database en temps réel pour visualiser et surveiller leurs performances et leur disponibilité.
 
 ## Implémentation
-
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][11] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
 #### Prérequis
@@ -79,15 +77,15 @@ Le check Oracle nécessite un accès au module Python `cx_Oracle` ou au pilote J
 
 3. Mettez à jour votre `LD_LIBRARY_PATH` pour inclure l'emplacement des bibliothèques Instant Client lorsque vous démarrez/redémarrez l'Agent :
 
-  ```
-  export LD_LIBRARY_PATH=/opt/oracle/instantclient/lib:$LD_LIBRARY_PATH
-  ```
+    ```
+    export LD_LIBRARY_PATH=/opt/oracle/instantclient/lib:$LD_LIBRARY_PATH
+    ```
 
 **Remarque** : l'Agent 6 utilise Upstart ou systemd pour orchestrer le service `datadog-agent`. Il est possible que des variables d'environnement doivent être ajoutées aux fichiers de configuration du service aux emplacements par défaut de `/etc/init/datadog-agent.conf` (Upstart) ou `/lib/systemd/system/datadog-agent.service` (systemd). Consultez la documentation sur [Upstart][5] ou [systemd][6] pour en savoir plus sur la configuration de ces paramètres.
 
 Voici un exemple d'ajout de `LD_LIBRARY_PATH` aux fichiers de configuration du service de l'Agent Datadog (`/int/init/datadog-agent.conf`) sur un système par le biais d'Upstart.
 
-```
+```conf
 description "Datadog Agent"
 
 start on started networking
@@ -99,7 +97,7 @@ normal exit 0
 
 # La collecte de logs vers la console depuis l'Agent est désactivée, car elle est déjà assurée par l'Agent à l'aide du fichier ou
 # de syslog en fonction de sa configuration. On demande à Upstart de loguer ce que le processus génère
-# pour enregistrer les alertes/crashs dans le log de la console
+# pour enregistrer les alertes/incidents dans le log de la console
 /var/log/upstart/datadog-agent.log
 env DD_LOG_TO_CONSOLE=false
 env LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client64/lib/
@@ -142,35 +140,78 @@ ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 ```
 
 ### Configuration
+#### Host
 
-Modifiez le fichier `oracle.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple oracle.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+
+1. Modifiez le fichier `oracle.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7]. Mettez à jour les paramètres `server` et `port` pour définir les masters à surveiller. Consultez le [fichier d'exemple oracle.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+
+    ```yaml
+      init_config:
+
+      instances:
+
+          ## @param server - string - required
+          ## The IP address or hostname of the Oracle Database Server.
+          #
+        - server: localhost:1521
+
+          ## @param service_name - string - required
+          ## The Oracle Database service name. To view the services available on your server,
+          ## run the following query:
+          ## `SELECT value FROM v$parameter WHERE name='service_names'`
+          #
+          service_name: "<SERVICE_NAME>"
+
+          ## @param user - string - required
+          ## The username for the user account.
+          #
+          user: datadog
+
+          ## @param password - string - required
+          ## The password for the user account.
+          #
+          password: "<PASSWORD>"
+    ```
+
+2. [Redémarrez l'Agent][8].
+
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+| Paramètre            | Valeur                                                                                                     |
+|----------------------|-----------------------------------------------------------------------------------------------------------|
+| `<NOM_INTÉGRATION>` | `oracle`                                                                                                  |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                                             |
+| `<CONFIG_INSTANCE>`  | `{"server": "%%host%%:1521", "service_name":"<NOM_SERVICE>", "user":"datadog", "password":"<MOT_DE_PASSE>"}` |
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][8] et cherchez `oracle` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][10] et cherchez `oracle` dans la section Checks.
 
 ## Requête personnalisée
 
 L'utilisation de requêtes personnalisées est également prise en charge. Chaque requête doit comporter trois paramètres :
 
-| Paramètre | Description |
-| ----      | ---         |
-| `metric_prefix`  | Il s'agit du préfixe de chaque métrique. |
-| `query`  | Il s'agit du SQL à exécuter. Cela peut être une simple déclaration ou un script sur plusieurs lignes. Toutes les rangées du résultat sont évaluées. |
-| `columns` | Il s'agit d'une liste représentant toutes les colonnes, ordonnées séquentiellement de gauche à droite. Deux types d'informations sont obligatoires : <br> a. `type` : la méthode d'envoi (`gauge`, `count`, etc.). <br> b. nom : le suffixe à ajouter à `metric_prefix` afin de former un nom de métrique complet. Si `type` est `tag`, cette colonne est alors considérée comme un tag et sera appliquée à chaque métrique recueillie par cette requête spécifique. |
+| Paramètre       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `metric_prefix` | Il s'agit du préfixe de chaque métrique.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `query`         | Il s'agit du SQL à exécuter. Cela peut être une simple déclaration ou un script sur plusieurs lignes. Toutes les rangées du résultat sont évaluées.                                                                                                                                                                                                                                                                                                                        |
+| `columns`       | Il s'agit d'une liste représentant toutes les colonnes, ordonnées séquentiellement de gauche à droite. Deux types d'informations sont obligatoires : <br> a. `type` : la méthode d'envoi (`gauge`, `count`, etc.). <br> b. nom : le suffixe à ajouter à `metric_prefix` afin de former un nom de métrique complet. Si `type` est `tag`, cette colonne est alors considérée comme un tag et sera appliquée à chaque métrique recueillie par cette requête spécifique. |
 
 Utilisez le paramètre `tags` (facultatif) pour appliquer une liste de tags à chaque métrique recueillie.
 
-Les tags suivants :
+Les métriques suivantes :
 
-```
+```python
 self.gauge('oracle.custom_query.metric1', value, tags=['tester:oracle', 'tag1:value'])
 self.count('oracle.custom_query.metric2', value, tags=['tester:oracle', 'tag1:value'])
 ```
 
-représentent ce que va devenir l'exemple de configuration suivant :
+représentent ce que deviendrait l'exemple de configuration suivant :
 
-```
+```yaml
 - metric_prefix: oracle.custom_query
   query: |  # Utilisez une barre verticale si votre script comporte plusieurs lignes.
    SELECT columns
@@ -205,7 +246,7 @@ Le check Oracle Database n'inclut aucun événement.
 Permet de vérifier que la base de données est disponible et accepte les connexions.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][10].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
 [2]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
@@ -213,11 +254,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [4]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
 [5]: http://upstart.ubuntu.com/cookbook/#environment-variables
 [6]: https://www.freedesktop.org/software/systemd/man/systemd.service.html#Command%20lines
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[9]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
-[10]: https://docs.datadoghq.com/fr/help
-[11]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-
-
-{{< get-dependencies >}}
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
+[12]: https://docs.datadoghq.com/fr/help

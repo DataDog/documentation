@@ -1,7 +1,7 @@
 ---
 title: すべてのアプリケーションキーの取得
 type: apicontent
-order: 21.06
+order: 22.06
 external_redirect: "/api/#get-all-application-keys"
 ---
 
@@ -9,6 +9,6 @@ external_redirect: "/api/#get-all-application-keys"
 
 現在のアカウントで利用できるすべてのアプリケーションキーを取得します。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

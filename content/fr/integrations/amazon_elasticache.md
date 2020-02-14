@@ -13,7 +13,7 @@ description: "Surveillez des métriques clés d'Amazon\_ElastiCache."
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_elasticache/'
 git_integration_title: amazon_elasticache
 has_logo: true
-integration_title: "Amazon\_ElastiCache"
+integration_title: Amazon ElastiCache
 is_public: true
 kind: integration
 manifest_version: '1.0'
@@ -22,7 +22,7 @@ public_title: "Intégration Datadog/Amazon\_ElastiCache"
 short_description: "Surveillez des métriques clés d'Amazon\_ElastiCache."
 version: '1.0'
 ---
-{{< img src="integrations/awselasticache/elasticache-memcached.png" alt="Dashboard par défaut ElastiCache Memcached" responsive="true" popup="true">}}
+{{< img src="integrations/awselasticache/elasticache-memcached.png" alt="Dashboard par défaut ElastiCache Memcached" popup="true">}}
 
 ## Présentation
 
@@ -51,7 +51,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 
 Le diagramme suivant explique comment Datadog recueille des métriques directement à partir de CloudWatch via l'intégration native ElastiCache, mais également comment notre solution peut recueillir des métriques natives directement depuis une technologie en backend : Redis ou Memcached. En les recueillant directement à partir du backend, vous pouvez accéder à un plus grand nombre de métriques importantes, avec une meilleure résolution.
 
-{{< img src="integrations/awselasticache/elasticache1.png" alt="Intégrations ElastiCache, Redis et Memcached" responsive="true">}}
+{{< img src="integrations/awselasticache/elasticache1.png" alt="Intégrations ElastiCache, Redis et Memcached" >}}
 
 #### Fonctionnement
 
@@ -65,11 +65,11 @@ Puisque l'Agent ne s'exécute pas sur une instance ElastiCache, mais sur une mac
 
 Accédez d'abord à la console AWS, ouvrez la section ElastiCache, puis l'onglet Cache Clusters pour trouver le cluster que vous souhaitez surveiller. Voici ce qui s'affiche :
 
-{{< img src="integrations/awselasticache/elasticache2.png" alt="Clusters ElastiCache dans la console AWS" responsive="true">}}
+{{< img src="integrations/awselasticache/elasticache2.png" alt="Clusters ElastiCache dans la console AWS" >}}
 
 Cliquez ensuite sur le lien du « node » pour accéder à son URL d'endpoint :
 
-{{< img src="integrations/awselasticache/elasticache3.png" alt="Lien node dans la console AWS" responsive="true">}}
+{{< img src="integrations/awselasticache/elasticache3.png" alt="Lien node dans la console AWS" >}}
 
 Notez l'URL de l'endpoint (p. ex., **replica-001.xxxx.use1.cache.amazonaws.com**) et le `cacheclusterid` (p. ex., **replica-001**). Ces valeurs sont requises pour configurer l'Agent et créer des graphiques et dashboards.
 
@@ -98,7 +98,7 @@ Après quelques minutes, les métriques ElastiCache et Redis/Memcached apparaiss
 
 Voici un exemple de configuration d'un graphique. L'objectif de celui-ci consiste à combiner les métriques de correspondance dans le cache d'ElastiCache avec des métriques de latence natives de Redis grâce au tag `cacheclusterid` **replicaa-001**.
 
-{{< img src="integrations/awselasticache/elasticache4.png" alt="Métriques Cache et ElastiCache" responsive="true">}}
+{{< img src="integrations/awselasticache/elasticache4.png" alt="Métriques Cache et ElastiCache" >}}
 
 ## Données collectées
 ### Métriques
@@ -110,7 +110,7 @@ Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes
 ### Événements
 L'intégration AWS ElastiCache comprend des événements pour le cluster, des groupes de sécurité de cache et des groupes de paramètres de cache. Vous trouverez ci-dessous des exemples d'événements :
 
-{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Événements AWS Elasticache" responsive="true">}}
+{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Événements AWS Elasticache" >}}
 
 
 ### Checks de service
@@ -131,11 +131,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticache.html
 [7]: https://app.datadoghq.com/account/settings#integrations/amazon_elasticache
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticache/amazon_elasticache_metadata.csv
 [10]: https://docs.datadoghq.com/fr/help
 [11]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
 [12]: https://www.datadoghq.com/blog/collecting-elasticache-metrics-its-redis-memcached-metrics
-
-
-{{< get-dependencies >}}

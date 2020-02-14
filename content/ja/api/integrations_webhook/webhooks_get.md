@@ -1,7 +1,7 @@
 ---
 title: Webhooks インテグレーションの取得
 type: apicontent
-order: 20.1
+order: 21.1
 external_redirect: "/api/#get-a-webhooks-integration"
 ---
 
@@ -9,6 +9,6 @@ external_redirect: "/api/#get-a-webhooks-integration"
 
 Datadog-Webhooks インテグレーションのすべての情報を取得します。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

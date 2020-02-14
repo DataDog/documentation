@@ -15,22 +15,22 @@ further_reading:
 ---
 L'Agent a besoin d'un ensemble d'autorisations spécifique pour recueillir vos données sur votre host. Vous trouverez ci-dessous les problèmes courants liés aux autorisations ainsi que des solutions :
 
-- [Problèmes d'autorisation liés à la journalisation de l'Agent](#agent-logging-permission-issues)
-- [Problèmes d'autorisation liés aux sockets de l'Agent](#agent-socket-permission-issues)
-- [Problème d'autorisation lié aux métriques de processus](#process-metrics-permission-issue)
-- [Pour aller plus loin](#further-reading)
+* [Problèmes d'autorisation liés à la journalisation de l'Agent](#agent-logging-permission-issues)
+* [Problèmes d'autorisation liés aux sockets de l'Agent](#agent-socket-permission-issues)
+* [Problème d'autorisation lié aux métriques de processus](#process-metrics-permission-issue)
+* [Pour aller plus loin](#further-reading)
 
 ## Problèmes d'autorisation liés à la journalisation de l'Agent
 
 Lorsque vous exécutez l'Agent Datadog sur un host donné, vous pouvez rencontrer un certain nombre de problèmes entraînant une journalisation incorrecte de l'Agent. Par exemple :
 
-```
+```text
 IOError: [Errno 13] Permission denied: '/var/log/datadog/supervisord.log'
 ```
 
 Assurez-vous que les fichiers de log de l'Agent, ainsi que le répertoire qui contient ces fichiers, appartiennent à l'utilisateur de l'Agent Datadog : `dd-agent`. Si ce n'est pas le cas, l'Agent ne peut pas rédiger des entrées de log dans ces fichiers. La commande ci-dessous permet d'afficher les informations sur la propriété des fichiers sur les systèmes Unix :
 
-```
+```text
 ls -l /var/log/datadog/
 
 total 52300
@@ -48,18 +48,17 @@ total 52300
 
 Si ces fichiers n'appartiennent **PAS** à l'utilisateur `dd-agent`, modifiez la propriété avec la commande ci-dessous, puis [redémarrez l'Agent][1] :
 
-```
+```text
 sudo chown -R dd-agent:dd-agent /var/log/datadog/
 ```
 
 [En savoir plus sur les emplacements des logs de l'Agent][2].
 
-
 ## Problèmes d'autorisation liés aux sockets de l'Agent
 
 Lorsque vous démarrez l'Agent, le problème d'autorisation de sockets suivant peut se présenter :
 
-```
+```text
 Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: socket.error reported errno.EACCES (13)
 ```
 
@@ -67,13 +66,13 @@ Starting Datadog Agent (using supervisord):Error: Cannot open an HTTP server: so
 
 Pour les hosts Linux, le répertoire `/opt/datadog-agent/run` doit appartenir à l'utilisateur `dd-agent` pour démarrer correctement l'Agent. Dans de rares cas, la propriété de ce répertoire peut être modifiée et attribuée un utilisateur différent de `dd-agent`. Cela provoque l'erreur ci-dessus lors du démarrage de l'Agent. Vérifiez la propriété de ce répertoire en lançant la commande suivante :
 
-```
+```text
 ls -al /opt/datadog-agent/run
 ```
 
 Si le propriétaire du fichier n'est **PAS** `dd-agent`, lancez la commande suivante pour y remédier :
 
-```
+```text
 chown dd-agent -R /opt/datadog-agent/run
 ```
 
@@ -89,7 +88,7 @@ Cela se produit lorsque des processus surveillés par le check de processus s'ex
 
 Activez l'option `try_sudo` dans la configuration du check de processus et ajoutez les règles `sudoers` appropriées :
 
-```
+```text
 dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 ```
 
@@ -98,7 +97,7 @@ Cela permet au check de processus d'utiliser `sudo` pour exécuter la commande `
 Si la ligne `sudo: sorry, you must have a tty to run sudo` s'affiche dans le fichier `error.log` Datadog, vous devez utiliser `visudo` et mettre en commentaire la ligne `Default requiretty`.
 
 {{% /tab %}}
-{{% tab "Agent v6" %}}
+{{% tab "Agents v6 et v7" %}}
 
 Si vous exécutez un Agent v6 antérieur à 6.3, essayez de mettre à jour l'Agent et d'utiliser l'option `try_sudo`. Si vous ne parvenez pas à effectuer la mise à jour, vous pouvez toujours exécuter l'Agent en tant que `root`.
 
@@ -110,10 +109,9 @@ Si vous exécutez un Agent v6 antérieur à 6.3, essayez de mettre à jour l'Ag
 
 3. [Démarrez l'Agent][3].
 
-
 [1]: https://github.com/DataDog/datadog-agent
-[2]: /fr/agent/guide/agent-commands/?tab=agentv6#stop-the-agent
-[3]: /fr/agent/guide/agent-commands/?tab=agentv6#start-the-agent
+[2]: /fr/agent/guide/agent-commands/#stop-the-agent
+[3]: /fr/agent/guide/agent-commands/#start-the-agent
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -126,8 +124,6 @@ Si vous exécutez l'Agent v5, essayez d'effectuer une mise à jour vers la [der
 2. Ouvrez `/etc/dd-agent/supervisor.conf` et remplacez `dd-agent` par `root` à la [ligne 20][4] et la [ligne 30][5]. Effectuez à nouveau cette opération en cas de mise à niveau ou de réinstallation de l'Agent.
 
 3. [Démarrez l'Agent][6].
-
-
 
 [1]: /fr/agent/guide/upgrade-to-agent-v6
 [2]: https://github.com/DataDog/dd-agent
@@ -143,7 +139,6 @@ Consultez les issues GitHub suivantes pour en savoir plus à ce sujet et pour d�
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033
 
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -152,6 +147,6 @@ Consultez les issues GitHub suivantes pour en savoir plus à ce sujet et pour d�
 [2]: /fr/agent/guide/agent-log-files
 [3]: /fr/agent/faq/error-restarting-agent-already-listening-on-a-configured-port
 [4]: /fr/agent/faq/network
-[5]: /fr/agent/guide/agent-commands/?tab=agentv6#start-the-agent
+[5]: /fr/agent/guide/agent-commands/#start-the-agent
 [6]: /fr/help
 [7]: /fr/integrations/process

@@ -11,7 +11,7 @@ creates_events: false
 ddtype: check
 dependencies:
   - 'https://github.com/DataDog/integrations-core/blob/master/istio/README.md'
-description: L'intégration Istio recueille des données à partir du mélangeur et du maillage du service Istio.
+description: L'intégration Istio recueille des données à partir du mixer et du maillage de services Istio.
 display_name: Istio
 git_integration_title: istio
 guid: d8bd53c0-0884-4357-9517-11858bf6aa9d
@@ -25,7 +25,7 @@ metric_prefix: istio.
 metric_to_check: istio.mixer.process.cpu_seconds_total
 name: istio
 public_title: Intégration Datadog/Istio
-short_description: 'Récupérez des métriques de schéma de performance, le débit de requêtes, des métriques custom, et plus encore. and more.'
+short_description: 'Récupérez des métriques de schéma de performance, le débit de requêtes, des métriques custom, et plus encore.'
 support: core
 supported_os:
   - linux
@@ -114,7 +114,7 @@ Istio contient deux types de logs : les logs d'accès Envoy recueillis via l'[i
 
 2. Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste][5]. Si vous n'utilisez pas Docker, montez le répertoire `/var/log/pods`.
 
-3. [Redémarrez l'Agent][2].
+3. [Redémarrez l'Agent][13].
 
 
 ### Validation
@@ -140,19 +140,19 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 Documentation, liens et articles supplémentaires utiles :
 
 - [Surveiller votre maillage de services Istio avec Datadog][9]
+- [Découvrir comment Datadog recueille des métriques clés pour surveiller Istio][14]
 
 [1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/conf.yaml.example
 [5]: https://istio.io/docs/tasks/telemetry/metrics/querying-metrics
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/istio/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
 [9]: https://www.datadoghq.com/blog/monitor-istio-with-datadog
 [10]: https://docs.datadoghq.com/fr/agent/kubernetes
 [11]: https://istio.io/docs/tasks/telemetry/logs/collecting-logs/
 [12]: https://docs.datadoghq.com/fr/integrations/envoy/#log-collection
-
-
-{{< get-dependencies >}}
+[13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[14]: https://www.datadoghq.com/blog/istio-metrics/

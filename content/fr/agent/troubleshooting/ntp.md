@@ -1,7 +1,6 @@
 ---
 title: Problèmes liés au protocole NTP
 kind: documentation
-disable_toc: true
 aliases:
   - /fr/agent/faq/network-time-protocol-ntp-offset-issues
 ---
@@ -21,7 +20,7 @@ Pour vérifier le décalage NTP par rapport à un host, lancez la [commande stat
 ```
 
 Tout décalage significatif peut avoir des conséquences néfastes. Afin d'éviter les problèmes liés au NTP, utilisez le monitor Datadog dédié au décalage NTP pour être alerté lorsque le host se désynchronise du serveur, grâce à [l'intégration NTP][2].
-Vous pouvez également accéder à la [page Sommaire des checks][3] de Datadog et consulter le check `ntp.in_sync` pour visualiser la liste des hosts qui rencontrent des problèmes liés au NTP.
+Vous pouvez également accéder au [sommaire des checks][3] de Datadog et consulter le check `ntp.in_sync` pour visualiser la liste des hosts qui rencontrent des problèmes liés au NTP.
 
 **Remarque** : le trafic UDP sortant au niveau du port `123` doit être autorisé pour que l'Agent puisse vérifier que l'heure du serveur local est relativement exacte, d'après les serveurs NTP de Datadog.
 

@@ -1,7 +1,7 @@
 ---
 title: Webhooks インテグレーションの削除
 type: apicontent
-order: 20.4
+order: 21.4
 external_redirect: "/api/#delete-a-webhooks-integration"
 ---
 
@@ -9,6 +9,6 @@ external_redirect: "/api/#delete-a-webhooks-integration"
 
 特定の Datadog-Webhooks インテグレーションを削除します。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

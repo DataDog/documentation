@@ -1,7 +1,7 @@
 ---
 title: Supprimer une clé d'application
 type: apicontent
-order: 21.10
+order: 22.10
 external_redirect: "/api/#supprimer-une-cle-d-application"
 ---
 

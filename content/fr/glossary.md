@@ -62,8 +62,8 @@ Consultez la [documentation relative au tracing][10] pour en savoir plus.
 [1]: /fr/agent
 [2]: /fr/api
 [3]: /fr/developers/libraries
-[4]: /fr/graphing/dashboards/screenboard
-[5]: /fr/graphing/dashboards/timeboard
+[4]: /fr/dashboards/screenboard
+[5]: /fr/dashboards/timeboard
 [6]: https://www.datadoghq.com/blog/statsd
 [7]: /fr/developers/dogstatsd
 [8]: /fr/developers/integrations

@@ -1,7 +1,7 @@
 ---
 title: GCP インテグレーションの削除
 type: apicontent
-order: 17.3
+order: 18.3
 external_redirect: "/api/#delete-a-gcp-integration"
 ---
 
@@ -9,7 +9,7 @@ external_redirect: "/api/#delete-a-gcp-integration"
 
 特定の Datadog-GCP インテグレーションを削除します。
 
-##### 引数
+**引数**:
 
 * **`project_id`** [必須]:
 

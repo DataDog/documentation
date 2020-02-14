@@ -25,5 +25,5 @@ Remarque : si l'événement que vous interrogez comprend de la mise en forme Ma
 * **`unaggregated`** [*facultatif*, *défaut*=*false*] :
     Définissez ce paramètre sur `true` pour renvoyer tous les événements compris dans l'intervalle [`start`,`end`] indiqué. Si un événement est agrégé à un événement parent avec un timestamp en dehors de cet intervalle, il ne sera pas compris dans la sortie.
 
-[1]: /fr/graphing/event_stream
-[2]: /fr/graphing/event_stream/#event-query-language
+[1]: /fr/events
+[2]: /fr/events/#event-query-language

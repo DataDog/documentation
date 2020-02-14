@@ -7,6 +7,8 @@ further_reading:
   text: "Review the main categories of data submitted to Datadog"
 ---
 
+<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Security Monitoring product, see the <a href="/security_monitoring" target="_blank">Security Monitoring section</a>.</div>
+
 This article is part of a [series on data security][1].
 
 This article describes additional security considerations that customers might find relevant when using Datadog and the Agent.
@@ -37,8 +39,8 @@ Due to their sensitive nature, additional security guarantees are implemented wh
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security
-[2]: /graphing/infrastructure/process
-[3]: /graphing/infrastructure/process/#process-arguments-scrubbing
+[2]: /infrastructure/process
+[3]: /infrastructure/process/#process-arguments-scrubbing
 [4]: /integrations
 [5]: /integrations/amazon_web_services
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles

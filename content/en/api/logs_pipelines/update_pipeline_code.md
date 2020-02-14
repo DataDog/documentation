@@ -1,7 +1,7 @@
 ---
 title: Update a Pipeline
 type: apicode
-order: 24.6
+order: 25.6
 external_redirect: /api/#update-a-pipelines
 ---
 

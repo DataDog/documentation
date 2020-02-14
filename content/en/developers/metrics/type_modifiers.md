@@ -3,6 +3,7 @@ title: Metric Type Modifiers
 kind: documentation
 aliases:
  - /developers/metrics/metric_type_modifiers
+ - /graphing/faq/as_count_validation
 further_reading:
 - link: "developers/dogstatsd"
   tag: "Documentation"
@@ -52,7 +53,7 @@ Depending on the metric type you applied them to, the behavior differs:
 
 **Note**: There is no normalization on very small intervals (when no time aggregation occurs), thus the raw metric value counts are returned.
 
-[1]: /graphing/faq/interpolation-the-fill-modifier-explained
+[1]: /dashboards/faq/interpolation-the-fill-modifier-explained
 {{% /tab %}}
 {{% tab "RATE" %}}
 
@@ -64,7 +65,7 @@ Depending on the metric type you applied them to, the behavior differs:
   * Disables any [interpolation][1].
   * Sets the time aggregator to `SUM`.
 
-[1]: /graphing/faq/interpolation-the-fill-modifier-explained
+[1]: /dashboards/faq/interpolation-the-fill-modifier-explained
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
@@ -77,7 +78,7 @@ Depending on the metric type you applied them to, the behavior differs:
 
 While it is not normally required, it is possible to change a metric's type in the [metric summary page][4]:
 
-{{< img src="developers/metrics/type_modifiers/metric_type.png" alt="Metric Type" responsive="true" style="width:70%;">}}
+{{< img src="developers/metrics/type_modifiers/metric_type.png" alt="Metric Type"  style="width:70%;">}}
 
 Example use case:
 
@@ -96,6 +97,6 @@ If you are not willing to lose the historical data submitted as a `GAUGE`, creat
 **Note**: For the AgentCheck, `self.increment` does not calculate the delta for a monotonically increasing counter; instead, it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`.
 
 [1]: /developers/metrics/types
-[2]: /graphing/metrics/introduction/#time-aggregation
-[3]: /graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
+[2]: /metrics/introduction/#time-aggregation
+[3]: /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
 [4]: https://app.datadoghq.com/metric/summary
