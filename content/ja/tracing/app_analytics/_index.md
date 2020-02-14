@@ -9,7 +9,7 @@ aliases:
 </br>
 [App Analytics][1] (旧 Trace Search & Analytics) を使うと、`customer_id`、`error_type`、`app_name` などのユーザー定義タグで分析スパンを絞り込み、リクエストのトラブルシューティングやフィルタリングを行うことができます。次の方法で有効にできます。
 
-* サービスから関連する分析を出力するように APM トレーサーを構成します。これは[自動](#自動コンフィギュレーション)または[手動](#カスタムコンフィギュレーション)で設定できます。次に、[Datadog 内で App Analytics を有効にして][1]、これらの分析の転送を開始します。
+* サービスから関連する分析を出力するように APM トレーサーを構成します。これは[自動](#自動コンフィギュレーション)または[手動](#カスタムインスツルメンテーション)で設定できます。次に、[Datadog 内で App Analytics を有効にして][1]、これらの分析の転送を開始します。
 
 **注**: App Analytics を使用するには、Agent v6.7 以上を使用してください。
 
@@ -343,15 +343,15 @@ import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
 
 class MyClass {
-@Trace
-void myMethod() {
-  final Span span = GlobalTracer.get().activeSpan(); 
-  // @Trace アノテーションにより送信されるスパン。 
-  if (span != null) { 
-      span.setTag(DDTags.SERVICE_NAME, "my-custom-service"); 
-      span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0); 
-   } 
- }
+  @Trace
+  void myMethod() {
+    final Span span = GlobalTracer.get().activeSpan();
+    // @Trace アノテーションにより送信されるスパン。
+    if (span != null) {
+      span.setTag(DDTags.SERVICE_NAME, "my-custom-service");
+      span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
+    }
+  }
 }
 ```
 
@@ -426,9 +426,9 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 カスタムインスツルメンテーションを使用するアプリケーションは、サービスルートスパンで `ANALYTICS_KEY` タグを設定することで App Analytics を有効にすることができます:
 
 ```php
-<?php 
-// ... App Analytics を有効にする既存のスパン 
-$span->setTag(Tag::ANALYTICS_KEY, true);
+<?php
+  // ... App Analytics を有効にする既存のスパン
+  $span->setTag(Tag::ANALYTICS_KEY, true);
 ?>
 ```
 
