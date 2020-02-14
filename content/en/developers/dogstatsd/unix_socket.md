@@ -52,6 +52,7 @@ To enable the Agent DogStatsD server:
 **Note**: You can also set the socket path with the `DD_DOGSTATSD_SOCKET` environment variable for the container Agent.
 
 ### DogStatsD Client
+
 #### Native support in client libraries
 
 The following official DogStatsD client libraries natively support UDS traffic. Refer to the library's documentation on how to enable UDS traffic. **Note**: As with UDP, enabling client-side buffering is highly recommended to improve performance on heavy traffic:
