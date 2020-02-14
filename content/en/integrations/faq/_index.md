@@ -57,6 +57,7 @@ aliases:
 * [HAProxy in multi-process mode][21]
 
 ## Jira
+
 * [I've set up the JIRA integration, now how do I get events and tickets created?][22]
 
 ## JMX
