@@ -32,6 +32,7 @@ const commonConfig = env => {
         entry: {
             '@babel/polyfill': '@babel/polyfill',
             'main-dd-js': './scripts/main-dd-js.js',
+            'lang-redirects': './scripts/lang-redirects.js',
             'main-dd-css': './styles/style.scss',
             'dd-browser-logs-rum': './scripts/components/dd-browser-logs-rum.js'
         },
