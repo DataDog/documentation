@@ -1,5 +1,6 @@
 /* eslint no-console: ["error", { allow: ["log", "warn"] }] */
 import Cookies from 'js-cookie';
+import datadogLogs from './components/dd-browser-logs-rum';
 
 const allowedLanguages = ['en', 'ja', 'fr'];
 const redirectLanguages = ['ja', 'fr'];
@@ -81,9 +82,8 @@ export function handleLanguageBasedRedirects() {
 			}
 		}
 
-		/* eslint no-unused-expressions: "off", no-undef: "off" */
-		window.DD_LOGS && DD_LOGS.logger.debug(logMsg, { requested_url: baseURL, subdomain, uri, acceptLanguage });
-		// debug ? console.log(logMsg) : '';
+		datadogLogs.logger.debug(logMsg, { requested_url: baseURL, subdomain, uri, acceptLanguage })
+
 	}
 }
 
