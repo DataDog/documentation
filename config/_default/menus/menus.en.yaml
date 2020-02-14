@@ -680,65 +680,83 @@ main:
   - name: "Host"
     url: "monitors/monitor_types/host/"
     parent: "monitor_types"
+    identifier: "monitor_types_host"
     weight: 101
   - name: "Metric"
     url: "monitors/monitor_types/metric/"
     parent: "monitor_types"
+    identifier: "monitor_types_metrics"
     weight: 102
   - name: "Anomaly"
     url: "monitors/monitor_types/anomaly/"
     parent: "monitor_types"
+    identifier: "monitor_types_anomaly"
     weight: 103
   - name: "Outlier"
     url: "monitors/monitor_types/outlier/"
     parent: "monitor_types"
+    identifier: "monitor_types_outlier"
     weight: 104
   - name: "Forecast"
     url: "monitors/monitor_types/forecasts/"
     parent: "monitor_types"
+    identifier: "monitor_types_forecasts"
     weight: 105
   - name: "Integration"
     url: "monitors/monitor_types/integration/"
     parent: "monitor_types"
+    identifier: "monitor_types_integration"
     weight: 106
   - name: "Live Process"
     url: "monitors/monitor_types/process/"
     parent: "monitor_types"
+    identifier: "monitor_types_process"
     weight: 107
   - name: "Process Check"
     url: "monitors/monitor_types/process_check/"
     parent: "monitor_types"
+    identifier: "monitor_types_process_check"
     weight: 108
   - name: "Network"
     url: "monitors/monitor_types/network/"
     parent: "monitor_types"
+    identifier: "monitor_types_network"
     weight: 109
   - name: "Custom Check"
     url: "monitors/monitor_types/custom_check/"
     parent: "monitor_types"
+    identifier: "monitor_types_custom_check"
     weight: 110
   - name: "Event"
     url: "monitors/monitor_types/event/"
     parent: "monitor_types"
+    identifier: "monitor_types_event"
     weight: 111
   - name: "Logs"
     url: "monitors/monitor_types/log/"
     parent: "monitor_types"
+    identifier: "monitor_types_log"
     weight: 112
   - name: "APM"
     url: "monitors/monitor_types/apm/"
     parent: "monitor_types"
+    identifier: "monitor_types_apm"
     weight: 113
-    identifier: "monitor_apm"
+  - name: "Real User Monitoring"
+    url: "monitors/monitor_types/real_user_monitoring/"
+    parent: "monitor_types"
+    identifier: "monitor_types_rum"
+    weight: 114
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
     parent: "monitor_types"
-    weight: 114
-    identifier: "monitor_watchdog"
+    identifier: "monitor_types_watchdog"
+    weight: 115
   - name: "Composite"
     url: "monitors/monitor_types/composite/"
     parent: "monitor_types"
-    weight: 115
+    identifier: "monitor_types_composite"
+    weight: 116
 
 
   ## MONITORS -  Manage monitor
