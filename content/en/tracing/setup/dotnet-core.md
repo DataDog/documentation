@@ -77,6 +77,8 @@ To generate Tracer log files for troubleshooting, you must create the logs direc
 
 **Update:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. Remove it from your application when you update the .NET Tracer and add the new environment variable, `DD_DOTNET_TRACER_HOME`. See [Required Environment Variables][2] below for details.
 
+**Update:** .NET Tracer version `1.13.0` adds support for Alpine and other [Musl-based distributions][3].
+
 For Debian or Ubuntu, download and install the Debian package:
 
 ```bash
@@ -91,7 +93,7 @@ curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_V
 sudo rpm -Uvh datadog-dotnet-apm-<TRACER_VERSION>-1.x86_64.rpm
 ```
 
-For Alpine or other [Musl-based distributions][3] installing .NET Tracer version `1.13.0` or newer, download the tar archive with the musl-linked binary:
+For Alpine or other [Musl-based distributions][3], download the tar archive with the musl-linked binary:
 
 ```bash
 sudo mkdir -p /opt/datadog
