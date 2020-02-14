@@ -281,7 +281,7 @@ listen stats
 # For HAProxy 1.8 and newer
 resolvers my-dns
     nameserver dns1 <DNS_SERVER_IP>:53
-    nameserver dns2 XXX.XXX.XXX.XXX:53
+    nameserver dns2 <DNS_SERVER_IP>:53
     resolve_retries 3
     timeout resolve 2s
     timeout retry 1s
