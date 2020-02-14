@@ -26,6 +26,7 @@ external_redirect: /api/#schedule-monitor-downtime
 * **`recurrence`** [*optional*, *default*=**None**]:
     An object defining the recurrence of the downtime with a variety of parameters:
     *   **`type`** the type of recurrence. Choose from: `days`, `weeks`, `months`, `years`.
+      *   **`rrule`** standard for defining recurring events. For example to have a recurring event each month, select a type of `rrule` and a `FREQ` of `MONTHLY`.
     *   **`period`** how often to repeat as an integer. For example to repeat every 3 days, select a type of `days` and a period of `3`.
     *   **`week_days`** (optional) a list of week days to repeat on. Choose from: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat` or `Sun`. Only applicable when `type` is `weeks`. **First letter must be capitalized.**
     *   **`until_occurrences`** (optional) how many times the downtime is rescheduled. **`until_occurences` and `until_date`** are mutually exclusive
