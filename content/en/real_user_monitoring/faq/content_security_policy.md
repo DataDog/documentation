@@ -2,12 +2,12 @@
 title: Content Security Policy (CSP)
 kind: faq
 further_reading:
-- link: "/real_user_monitoring/installation/"
-  tag: "FAQ"
-  text: "How to Send Logs to Datadog via External Log Shippers?"
-- link: "/logs/log_collection/javascript/"
-  tag: "FAQ"
-  text: "Browser Log Collection"
+    - link: '/real_user_monitoring/installation/'
+      tag: 'FAQ'
+      text: 'How to Send Logs to Datadog via External Log Shippers?'
+    - link: '/logs/log_collection/javascript/'
+      tag: 'FAQ'
+      text: 'Browser Log Collection'
 ---
 
 If you are using [Content Security Policy (CSP)][1] on your websites, add the following URLs to your existing directives depending on how you setup your Real User Monitoring or browser log collection:
@@ -51,7 +51,8 @@ script-src https://www.datadoghq-browser-agent.com
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}[1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 [2]: /real_user_monitoring/installation/?tab=us#bundle-setup
 [3]: /logs/log_collection/javascript/?tab=us#bundle-setup
 [4]: /real_user_monitoring/installation/?tab=us#npm-setup
