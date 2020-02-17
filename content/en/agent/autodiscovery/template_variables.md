@@ -26,6 +26,11 @@ Use the following template variables when configuring Autodiscovery in order to 
 | `"%%hostname%%"`            | Retrieves the `hostname` value from the container configuration. Only use it if the `"%%host%%"` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][1]).                                       |
 | `"%%env_<ENV_VAR>%%"`       | Uses the contents of the `$<ENV_VAR>` environment variable **as seen by the Agent process**.                                                                                                                |
 
+**Note**:
+
+* Template variables need to be in quotations.
+* Replace `<NETWORK NAME>`, `<NAME>`, etc. with the actual name; angle brackets are not necessary.
+
 **Fall back**:
 
 * For the `"%%host%%"` template variable: in case the Agent is not able to find it, this template variable falls back to the `bridge` network IP.
