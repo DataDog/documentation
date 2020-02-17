@@ -52,20 +52,20 @@ Kubernetes Scheduler チェックは [Datadog Agent][2] パッケージに含ま
 
 #### ログの収集
 
-**Agent 6.0 以上で使用可能**
+_Agent バージョン 6.0 以降で利用可能_
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、[daemonset 構成][4]でこれを有効にします。
 
-    ```
-    (...)
-      env:
-        (...)
-        - name: DD_LOGS_ENABLED
-            value: "true"
-        - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-            value: "true"
-    (...)
-    ```
+   ```yaml
+     # (...)
+     env:
+       # (...)
+       - name: DD_LOGS_ENABLED
+           value: "true"
+       - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+           value: "true"
+     # (...)
+   ```
 
 2. [こちらのマニフェスト][5]のように、Docker ソケットを Datadog Agent にマウントします。
 
@@ -93,7 +93,6 @@ Kube Scheduler には、イベントは含まれません。
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
-
 
 [1]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/datadog_checks/kube_scheduler/data/conf.yaml.example
