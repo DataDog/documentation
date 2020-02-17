@@ -10,7 +10,7 @@
 {{- $video :=  .Get "video" -}}
 {{- $local_ref := (.Get "src") -}}
 {{- $hash_ref := $local_ref -}}
-{{- $.Scratch.Add "_img" (print .Site.Params.img_url "images/" $hash_ref) -}}
+{{- $.Scratch.Add "_img" (print "images/" $hash_ref) -}}
 {{- $img := $.Scratch.Get "_img" -}}
 {{- $image_type_arr := split (.Get "src") "." -}}
 {{- $image_ext := index $image_type_arr 1 -}}
