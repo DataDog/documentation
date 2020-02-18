@@ -21,3 +21,16 @@ curl -X POST \
       }
 }' \
     "https://api.datadoghq.com/api/v1/downtime"
+
+# # OR use RRULE reccurence
+
+-d '{
+      "scope": "env:prod",
+      "start": '"${start}"',
+      "end": '"${end}"',
+      "recurrence": {
+        "type": "rrule",
+        "rrule": "FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1"
+      }
+}' \
+    "https://api.datadoghq.com/api/v1/downtime"
