@@ -177,7 +177,7 @@ Endpoints that can be used to send logs to Datadog:
 |--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
 | `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
 
-[1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[1]: /agent/logs/#send-logs-over-https
 {{% /tab %}}
 {{% tab "EU Site" %}}
 
@@ -195,7 +195,7 @@ Endpoints that can be used to send logs to Datadog:
 |--------------------------------------|--------|-----------------------------------------------------------------------------------------------------------------|
 | `tcp-intake.logs.datadoghq.eu`       | `1883` | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection. |
 
-[1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[1]: /agent/logs/#send-logs-over-https
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -258,7 +258,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [9]: /integrations/nxlog
 [10]: /integrations/fluentd/#log-collection
 [11]: /integrations/logstash/#log-collection
-[12]: /agent/logs/?tab=tailexistingfiles#custom-log-collection
+[12]: /agent/logs/#custom-log-collection
 [13]: /logs/processing
 [14]: /logs/processing/parsing
 [15]: /logs/explorer/?tab=facets#setup
