@@ -21,7 +21,7 @@ Datadog's Process Monitoring allows for real-time visibility of the most granula
 
 ## Installation
 
-The following installation processes are for [Agent 6 only][1]. If you are using Agent 5, [follow this specific installation process][2].
+The following installation processes are for [Agent 6 and 7][1]. If you are using Agent 5, [follow this specific installation process][2].
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}

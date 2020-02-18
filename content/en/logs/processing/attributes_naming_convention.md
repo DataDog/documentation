@@ -205,7 +205,7 @@ Performance metrics attributes.
 |:-------------|:---------|:--------------------------------------------------------------------------------------------------|
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
 
-Datadog advises you to rely or at least remap on this attribute since Datadog displays and uses it as a default [measure][13] for [trace search][14].
+Datadog advises you to [remap][21] any durations within your logs on this attribute since Datadog displays and uses it as a default [measure][13] for [trace search][14].
 
 ### User related attributes
 
@@ -272,3 +272,4 @@ All attributes and measures are prefixed by `dns`.
 [18]: /integrations/fluentd
 [19]: /integrations/logstash
 [20]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+[21]: /logs/processing/processors/#remapper

@@ -156,7 +156,7 @@
           title: Android Trace Collection
           kind: documentation
           description: "Collect traces from your Android applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/dd-tracing/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
               tag: "Github"
