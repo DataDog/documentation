@@ -930,7 +930,28 @@ main:
   - name: "Runtime Metrics"
     url: "tracing/runtime_metrics/"
     parent: "tracing"
+    identifier: "tracing_runtime_metrics"
     weight: 5
+  - name: "Java"
+    url: "tracing/runtime_metrics/java"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_java"
+    weight: 501
+  - name: "Python"
+    url: "tracing/runtime_metrics/python"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_python"
+    weight: 502
+  - name: "Ruby"
+    url: "tracing/runtime_metrics/ruby"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_ruby"
+    weight: 503
+  - name: "NodeJS"
+    url: "tracing/runtime_metrics/nodejs"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_nodejs"
+    weight: 504
 
   - name: "Manual Instrumentation"
     url: "tracing/manual_instrumentation/"
