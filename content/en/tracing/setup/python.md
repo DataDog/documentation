@@ -157,7 +157,7 @@ The `ddtrace` library includes support for the following libraries:
 [6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: http://pypi.datadoghq.com/trace/docs/web_integrations.html?highlight=django#django
 [8]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
-[9]: /tracing/connect_logs_and_traces/?tab=python
+[9]: /tracing/connect_logs_and_traces/python
 [10]: /tracing/app_analytics/?tab=python#automatic-configuration
 [11]: https://aiohttp.readthedocs.io
 [12]: https://bottlepy.org

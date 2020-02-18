@@ -439,7 +439,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [8]: /help
 [9]: https://github.com/DataDog/documentation#outside-contributors
 [10]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[11]: /tracing/connect_logs_and_traces/?tab=java
+[11]: /tracing/connect_logs_and_traces/java
 [12]: /developers/dogstatsd/#setup
 [13]: /agent/docker/#dogstatsd-custom-metrics
 [14]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
