@@ -166,15 +166,15 @@ The following standard integrations can potentially emit custom metrics.
 
 | Type of integrations                             | Integrations                                                                                                                                                  |
 |--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Limited to 350 custom metrics by default.        | [ActiveMQ XML][9] / [Go-Expvar][10]                                                                                                                           |
-| No default limit upon custom metrics collection. | [Agent Metrics][11] /[Directory][12] /[Linux Proc Extras][13] /[Nagios][14] /[PDH Check][15] /[Prometheus][16] /[SNMP][17] /[Windows Services][18] /[WMI][19] |
-| Can be configured to collect custom metrics.     | [MySQL][20] /[Oracle][21] /[Postgres][22] /[SQL Server][23]                                                                                                   |
+| Limited to 350 custom metrics by default.        | [ActiveMQ XML][9] / [Go-Expvar][10] / [Java-JMX][11]                                                                                                                           |
+| No default limit upon custom metrics collection. | [Agent Metrics][12] /[Directory][13] /[Linux Proc Extras][14] /[Nagios][15] /[PDH Check][16] /[Prometheus][17] /[SNMP][18] /[Windows Services][19] /[WMI][20] |
+| Can be configured to collect custom metrics.     | [MySQL][21] /[Oracle][22] /[Postgres][23] /[SQL Server][24]                                                                                                   |
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][24].
+For technical questions, contact [Datadog support][25].
 
-For billing questions, contact your [Customer Success][25] Manager.
+For billing questions, contact your [Customer Success][26] Manager.
 
 [1]: /integrations
 [2]: /developers/metrics/custom_metrics
@@ -186,18 +186,19 @@ For billing questions, contact your [Customer Success][25] Manager.
 [8]: /account_management/team
 [9]: /integrations/activemq/#activemq-xml-integration
 [10]: /integrations/go_expvar
-[11]: /integrations/agent_metrics
-[12]: /integrations/directory
-[13]: /integrations/linux_proc_extras
-[14]: /integrations/nagios
-[15]: /integrations/pdh_check
-[16]: /integrations/prometheus
-[17]: /integrations/snmp
-[18]: /integrations/windows_service
-[19]: /integrations/wmi_check
-[20]: /integrations/mysql
-[21]: /integrations/oracle
-[22]: /integrations/postgres
-[23]: /integrations/sqlserver
-[24]: /help
-[25]: mailto:success@datadoghq.com
+[11]: /integrations/java/
+[12]: /integrations/agent_metrics
+[13]: /integrations/directory
+[14]: /integrations/linux_proc_extras
+[15]: /integrations/nagios
+[16]: /integrations/pdh_check
+[17]: /integrations/prometheus
+[18]: /integrations/snmp
+[19]: /integrations/windows_service
+[20]: /integrations/wmi_check
+[21]: /integrations/mysql
+[22]: /integrations/oracle
+[23]: /integrations/postgres
+[24]: /integrations/sqlserver
+[25]: /help
+[26]: mailto:success@datadoghq.com
