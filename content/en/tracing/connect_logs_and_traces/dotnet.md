@@ -30,7 +30,8 @@ The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs i
 
 ```csharp
 var log = new LoggerConfiguration()
-    .Enrich.FromLogContext() // Add Enrich.FromLogContext to emit MDC properties
+    // Add Enrich.FromLogContext to emit MDC properties
+    .Enrich.FromLogContext()
     .WriteTo.File(new JsonFormatter(), "log.json")
     .CreateLogger();
 ```
@@ -156,6 +157,7 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /tracing/setup/dotnet/#configuration
 [2]: https://github.com/damianh/LibLog
 [3]: http://serilog.net

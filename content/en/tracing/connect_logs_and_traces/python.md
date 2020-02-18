@@ -90,10 +90,10 @@ Once the logger is configured, executing a traced function that logs an event yi
 
 [See the Python logging documentation][2] to ensure that the Python Log Integration is properly configured so that your Python logs are automatically parsed.
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /tracing/visualization/#trace
 [2]: /logs/log_collection/python/#configure-the-datadog-agent
 [3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel

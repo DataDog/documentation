@@ -52,10 +52,10 @@ The above example illustrates how to use the span's context in the standard libr
 
 **Note**: If you are not using a [Datadog Log Integration][4] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][5].
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /help
 [2]: /tracing/visualization/#trace
 [3]: /tracing/visualization/#spans

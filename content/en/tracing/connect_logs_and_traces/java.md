@@ -94,10 +94,10 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 
 [See the Java logging documentation][4] for more details about specific logger implementation or to learn how to log in JSON.
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /tracing/setup/java/#configuration
 [2]: /tracing/visualization/#trace
 [3]: /tracing/visualization/#spans

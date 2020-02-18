@@ -50,8 +50,6 @@ end
 {{% /tab %}}
 {{% tab "Default" %}}
 
-
-
 Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append trace IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add trace tags.
 
 In your Rails environment configuration file (e.g. `config/environments/production.rb`), add the following:
@@ -110,9 +108,9 @@ Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.'
 
 See the [Ruby logging documentation][1] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /logs/log_collection/ruby/#configure-the-datadog-agent
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
