@@ -73,7 +73,7 @@ A notification is sent according to the set of alerting conditions. To configure
 2. Choose your [services][7] and/or team members to notify.
 3. Specify a renotification frequency. If you don't want to be renotified in case your test keeps failing, leave the option to `Never renotify if the monitor has not been resolved`.
 4. Click **Save Details and Record Test**.
-5. Start to record your test.
+5. Record your test.
 
 ## Record test
 
