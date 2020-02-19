@@ -794,12 +794,12 @@ main:
     parent: "alerting"
     identifier: "slos"
 
-  - name: "Monitor SLO"
+  - name: "Monitor-based SLOs"
     url: "monitors/service_level_objectives/monitor/"
     parent: "slos"
     weight: 7.1
 
-  - name: "Event SLO"
+  - name: "Event-based SLOs"
     url: "monitors/service_level_objectives/event/"
     parent: "slos"
     weight: 7.2
