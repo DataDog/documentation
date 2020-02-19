@@ -104,7 +104,7 @@ Ce quota peut être modifié ou supprimé à tout moment en modifiant l'index :
 <br>
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
-[1]: /fr/pipelines/indexes
+[1]: /fr/logs/indexes
 [2]: /fr/logs/explorer/?tab=facets#visualization
 [3]: /fr/logs/explorer/patterns
 [4]: /fr/logs/explorer/analytics
