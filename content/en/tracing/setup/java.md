@@ -80,6 +80,7 @@ Beta integrations are disabled by default but can be enabled individually.
 | Server                  | Versions   | Support Type    | Instrumentation Names (used for configuration) |
 |-------------------------|------------|-----------------|------------------------------------------------|
 | Akka-Http Server        | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                |
+| Finatra Web             | 2.9+       | Fully Supported | `finatra`                                      |
 | Grizzly                 | 2.0+       | [Beta][8]       | `grizzly`                                      |
 | Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
@@ -93,7 +94,7 @@ Beta integrations are disabled by default but can be enabled individually.
 
 **Web Framework tracing provides:** timing HTTP request to response, tags for the HTTP request (status code, method, etc), error and stacktrace capturing, linking work created within a web request and Distributed Tracing.
 
-*Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, etc.
+*Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, JBoss, etc.
 Also, frameworks like Spring Boot inherently work because it usually uses a supported embedded application server (Tomcat/Jetty/Netty).
 
 Beta Instrumentation is disabled by default. Add one of the following configurations to enable it:

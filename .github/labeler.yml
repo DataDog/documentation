@@ -1,0 +1,14 @@
+Github:
+- .github/**/*
+
+Images:
+- static/images/**/*
+
+Architecture:
+- local/**/*
+- layouts/**/*
+- config/**/*
+- src/**/*
+
+$1:
+- content/en/([^/]+)/.*

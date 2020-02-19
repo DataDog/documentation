@@ -16,7 +16,7 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-A page view represents a user visiting a page from your website. During that page view, errors, resources, long tasks, and user actions get attached to that page view with a unique `view.id` attribute. Note that a page view gets updated as new events are collected.
+A page view represents a user visiting a page from your website. During that page view, [errors][9], [resources][10], [long tasks][11], and [user actions][12] get attached to that page view with a unique `view.id` attribute. Note that a page view gets updated as new events are collected.
 
 For page views, loading performance metrics are collected from both the [Paint Timing API][1] and the [Navigation Timing API][2].
 
@@ -50,3 +50,7 @@ For Single Page Applications (SPAs), performance metrics will only be available 
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
+[9]: /real_user_monitoring/data_collected/error/
+[10]: /real_user_monitoring/data_collected/resource/
+[11]: /real_user_monitoring/data_collected/long_task
+[12]: /real_user_monitoring/data_collected/user_action

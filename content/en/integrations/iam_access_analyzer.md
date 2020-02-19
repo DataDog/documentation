@@ -1,9 +1,9 @@
 ---
 categories:
-- cloud
-- aws
-- log collection
-- security
+    - cloud
+    - aws
+    - log collection
+    - security
 ddtype: crawler
 description:
 short_description:
@@ -12,7 +12,8 @@ git_integration_title: amazon_iam_access_analyser
 has_logo: true
 integration_title: AWS Identity and Access Management (IAM) Access Analyzer
 is_public: true
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/iam_access_analyzer.md"]
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/iam_access_analyzer.md']
 kind: integration
 manifest_version: 1.0
 name: iam_access_analyzer
@@ -34,13 +35,11 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
 
 3. Define a custom event pattern with the following:
 
-	```
-	{
-	  "source": [
-	    "aws.access-analyzer"
-	  ]
-	}
-	```
+    ```json
+    {
+        "source": ["aws.access-analyzer"]
+    }
+    ```
 
 4. Select an event bus and define the Datadog Lambda function as the target.
 
