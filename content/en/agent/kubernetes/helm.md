@@ -62,29 +62,30 @@ tiller-deploy-f54b67464-jl5gm 1/1 Running 0 3h16m
 
 ## Installing the Datadog Helm chart
 
-** Note ** We recommend using Helm 3.0 or greater. If you're using a lower version, you may need to install the Helm Server, [Tiller][11].
+**Note** We recommend using Helm 3.0 or greater. If you're using a lower version, you may need to install the Helm Server, [Tiller][11].
 
 To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datadog API key from your [Agent installation instructions][4] and run:
 
 {{< tabs >}}
-{{% tab "Helm v1/v2" %}}
-
+{{% tab "Helm v3+" %}}
 ```bash
-helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+helm install <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY>,datadog.admissionController=true,datadog.apm.enabled=true,datadog.statsd.enabled=true stable/datadog 
 ```
-
 {{% /tab %}}
 
-{{% tab "Helm v3+" %}}
-
+{{% tab "Helm v1/v2" %}}
 ```bash
-helm install <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY>,datadog.admissionController=true,datadog.apm.enabled=true,datadog.statsd.enabled=true stable/datadog
 ```
-
 {{% /tab %}}
 {{< /tabs >}}
 
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][5] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
+
+The default install command will enable [APM][12] and [DogStatsD Custom Metrics][13]. To disable one of the services, set the service values to false. The values can always be changed in the future by configuring the Helm chart (see next section).
+
+Additionally, the default configuration takes advantage of Kuberentes admission controller. If this flag is disabled, downward API must be set to each instrumented app.
+
 
 **Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][6].
 
@@ -245,3 +246,5 @@ This command removes all Kubernetes components associated with the chart and del
 [9]: /tracing/setup
 [10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh
 [11]: #installing-the-helm-server-tiller
+[12]: /tracing/
+[13]: /agent/kubernetes/dogstatsd/
