@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-The PrivateLink setup is only available to <b>forward logs and metrics to Datadog in AWS us-east-1 region</b>. Reach out to <a href="/help">Datadog Support</a> to enable this feature for your organization.
+The Datadog PrivateLink setup is only available to in AWS us-east-1 region. Reach out to <a href="/help">Datadog Support</a> to enable this feature for your organization.
 </div>
 
 This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog. AWS PrivateLink simplifies the security of data shared with Datadog by eliminating the exposure of data to the public internet.
@@ -35,7 +35,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
    **Note**: The VPC must be in `us-east-1` and it's recommend to set subnets with all of the following availability zone IDs: `use1-az6`, `use1-az2`, and `use1-az4`:
    {{< img src="agent/guide/private_link/saved_az.png" alt="Saved AZ" style="width:60%;" >}}
 6. Make sure that for **Enable DNS name** the _Enable for this Endpoint_ is checked:
-   {{< img src="agent/guide/private_link/enabled_dns.png" alt="Enable DNS" style="width:60%;" >}}
+   {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Enable DNS private" style="width:60%;" >}}
 7. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
 
     **Note**: **If you want to forward logs to Datadog through this VPC endpoint, the security group must accept inbound and outbound traffic on port `443`**.
@@ -55,12 +55,12 @@ Select the tab below to see how to send your metrics and logs to Datadog using t
 {{< tabs >}}
 {{% tab "Metric" %}}
 
-To forward your metrics to Datadog using this new VPC endpoint your need to setup `pvtlink.metrics.datadoghq.com` as your new metric destination:
+To forward your metrics to Datadog using this new VPC endpoint your need to setup `pvtlink.agent.datadoghq.com` as your new metric destination:
 
 1. Update the `dd_url` parameter in the [Agent `datadog.yaml` configuration file][1]:
 
     ```yaml
-    dd_url: pvtlink.metrics.datadoghq.com
+    dd_url: pvtlink.agent.datadoghq.com
     ```
 
 2. [Restart your Agent][2] to send metrics to Datadog through AWS PrivateLink.
