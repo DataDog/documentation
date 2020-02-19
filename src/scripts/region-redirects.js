@@ -82,11 +82,11 @@ function redirectToRegion(region = '') {
         showRegionSnippet(newSiteRegion);
 
         Cookies.set('site', newSiteRegion, { path: '/' });
-    } else if (window.document.referrer.includes('app.datadoghq.eu')) {
+    } else if (window.document.referrer.includes('datadoghq.eu')) {
         newSiteRegion = 'eu';
         Cookies.set('site', newSiteRegion, { path: '/' });
         showRegionSnippet(newSiteRegion);
-    } else if (window.document.referrer.includes('app.datadoghq.com')) {
+    } else if (window.document.referrer.includes('datadoghq.com')) {
         newSiteRegion = 'us';
         Cookies.set('site', newSiteRegion, { path: '/' });
         showRegionSnippet(newSiteRegion);
