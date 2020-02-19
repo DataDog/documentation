@@ -17,11 +17,11 @@ further_reading:
 
 ## How it Works
 
-The [Cluster Check][1] feature provides the ability to Autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services). 
+The [cluster check][1] feature provides the ability to Autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services). 
 
 Endpoint checks extend this mechanism to monitor any endpoint behind cluster services.
 
-The [Cluster Agent][2] holds the configurations and exposes them to node-based Agents so they can consume and convert them into Endpoints Checks.
+The [Cluster Agent][2] holds the configurations and exposes them to node-based Agents so they can consume and convert them into endpoints checks.
 
 Endpoints checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the monitored service.
 
@@ -29,7 +29,7 @@ The Agents connect to the Cluster Agent every 10 seconds and retrieve the check 
 
 This feature is supported on Kubernetes for versions 6.12.0+ of the Agent, and versions 1.3.0+ of the Cluster Agent.
 
-Starting with version 1.4.0, the Cluster Agent converts every endpoints check of a non-pod-backed endpoint into a regular cluster check. Enable the [cluster check][1] feature alongside Endpoints Checks to take advantage of this functionality.
+Starting with version 1.4.0, the Cluster Agent converts every endpoints check of a non-pod-backed endpoint into a regular cluster check. Enable the [cluster check][1] feature alongside endpoints checks to take advantage of this functionality.
 
 #### Example: three NGINX pods exposed by the `nginx` service
 
@@ -86,7 +86,7 @@ DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints"
 DD_EXTRA_LISTENERS="kube_endpoints"
 ```
 
-**Note**: If the monitored endpoints are not backed by pods, you must [enable Cluster Checks][4]. This can be done by adding the `kube_services` configuration provider and listener:
+**Note**: If the monitored endpoints are not backed by pods, you must [enable cluster checks][4]. This can be done by adding the `kube_services` configuration provider and listener:
 
 ```shell
 DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints kube_services"
@@ -113,7 +113,7 @@ config_providers:
     polling: true
 ```
 
-**Note**: If the monitored endpoints are not backed by pods, you must [enable Cluster Checks][1]. This can be done by adding the `clusterchecks` configuration provider:
+**Note**: If the monitored endpoints are not backed by pods, you must [enable cluster checks][1]. This can be done by adding the `clusterchecks` configuration provider:
 
 ```shell
 DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
@@ -123,7 +123,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 
 ## Setting up Check Configurations via Kubernetes Service Annotations
 
-Similar to [annotating Kubernetes Pods][6], Services can be annotated with the following syntax:
+Similar to [annotating Kubernetes Pods][6], services can be annotated with the following syntax:
 
 ```yaml
   ad.datadoghq.com/endpoints.check_names: '[<INTEGRATION_NAME>]'
@@ -174,9 +174,9 @@ spec:
 
 ## Troubleshooting
 
-Troubleshooting Endpoints Checks is similar to [troubleshooting Cluster Checks][10]—the only difference is on the node-based Agents, where scheduled Endpoints Checks appear alongside the Cluster Check.
+Troubleshooting endpoints checks is similar to [troubleshooting cluster checks][10]—the only difference is on the node-based Agents, where scheduled endpoints checks appear alongside the cluster check.
 
-**Note**: Endpoints Checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the service. If an endpoint is not backed by a pod, the Cluster Agent converts the check into a Cluster Check. This Cluster Check can be run by any node Agent.
+**Note**: Endpoints checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the service. If an endpoint is not backed by a pod, the Cluster Agent converts the check into a cluster check. This cluster check can be run by any node Agent.
 
 ### Autodiscovery in the node-based Agent
 
