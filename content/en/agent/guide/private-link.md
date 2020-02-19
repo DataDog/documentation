@@ -29,32 +29,31 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 2. Select **Find service by name**.
 3. Fill the _service name_ text box with the following value depending of which private link you want to setup:
 
+    {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
     {{< tabs >}}
 
 {{% tab "Metric" %}}
 
-| Service name                                               | Description                                      |
-| ---------------------------------------------------------- | ------------------------------------------------ |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-056576c12b36056ca`  |  Allows you to forward your metrics to Datadog.  |
+| Datadog Metric Service name                                |
+| ---------------------------------------------------------- |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-056576c12b36056ca`  |
 
 {{% /tab %}}
 {{% tab "Logs" %}}
 
-| Service name                                              | Description                                 |
-| --------------------------------------------------------- | ------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-0a2aef8496ee043bf` | Allows you to forward your logs to Datadog. |
+| Datadog Log Service name                                  |
+| --------------------------------------------------------- |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-0a2aef8496ee043bf` |
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-| Service name                                               | Description                                    |
-| ---------------------------------------------------------- | ---------------------------------------------- |
-|  `com.amazonaws.vpce.us-east-1.vpce-svc-056576c12b36056ca` |  Allows you to send and consume Datadog APIs.  |
+| Datadog API Service name                                   |
+| ---------------------------------------------------------- |
+|  `com.amazonaws.vpce.us-east-1.vpce-svc-056576c12b36056ca` |  
 
 {{% /tab %}}
 {{< /tabs >}}
-
-    {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:60%;" >}}
 
 4. Hit the _verify_ button. If it does not return _Service name Found_, reach out to [Datadog support team][2].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
