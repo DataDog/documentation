@@ -50,7 +50,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
 | Datadog API Service name                                   |
 | ---------------------------------------------------------- |
-|  `com.amazonaws.vpce.us-east-1.vpce-svc-056576c12b36056ca` |  
+|  `com.amazonaws.vpce.us-east-1.vpce-svc-02a4a57bc703929a0` |  
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -125,7 +125,7 @@ Add `DD_URL: pvtlink.logs.datadoghq.com` in your [Datadog Lambda function][4] en
 {{% /tab %}}
 {{% tab "API" %}}
 
-To send data to Datadog API or consume data from it through this new private link, replace your API call host signature `api.datadoghq.com/api/` with `pvtlink.api.datadoghq.com`.
+To send data to Datadog API or consume data from it through this new private link, replace your API call host signature `api.datadoghq.com/api/` with `pvtlink.api.datadoghq.com/api/`.
 
 {{% /tab %}}
 {{< /tabs >}}
