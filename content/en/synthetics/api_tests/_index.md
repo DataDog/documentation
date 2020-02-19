@@ -180,7 +180,7 @@ A notification is sent according to the set of alerting conditions. To configure
     | `{{^is_recovery}}`         | Show unless monitor recovers from either ALERT |
 
     Notification messages include the **message** defined in this section and information about which assertion failed and why.
-3. Specify a renotification frequency. If you don't want to be renotified in case your test keeps failing, leave the option to `Never renotify if the monitor has not been resolved`.
+3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 4. Click **Save**.
 
 Notifications example:
