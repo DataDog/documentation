@@ -236,3 +236,4 @@ Lorsque les logs sont envoyés via HTTPS et doivent transiter par un proxy, util
 [8]: /fr/developers/metrics/custom_metrics
 [9]: /fr/tagging
 [10]: /fr/agent/proxy
+[11]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/?tab=agentv6v7#agent-overhead
