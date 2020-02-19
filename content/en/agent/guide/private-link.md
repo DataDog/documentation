@@ -25,7 +25,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 ## Create your VPC endpoint
 
 1. Connect to the AWS console and create a new VPC endpoint:
-    {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:60%;" >}}
+   {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:60%;" >}}
 2. Select **Find service by name**.
 3. Fill the _service name_ text box with the following value depending of which private link you want to setup:
 
@@ -50,7 +50,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
 | Datadog API Service name                                   |
 | ---------------------------------------------------------- |
-|  `com.amazonaws.vpce.us-east-1.vpce-svc-02a4a57bc703929a0` |  
+|  `com.amazonaws.vpce.us-east-1.vpce-svc-02a4a57bc703929a0` |   |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -80,6 +80,8 @@ Select the tab below to see how to send your metrics and logs to Datadog using t
 {{< tabs >}}
 {{% tab "Metric" %}}
 
+_Available for Agent versions superior to 6.0_
+
 To forward your metrics to Datadog using this new VPC endpoint your need to setup `pvtlink.agent.datadoghq.com` as your new metric destination:
 
 1. Update the `dd_url` parameter in the [Agent `datadog.yaml` configuration file][1]:
@@ -90,11 +92,15 @@ To forward your metrics to Datadog using this new VPC endpoint your need to setu
 
 2. [Restart your Agent][2] to send metrics to Datadog through AWS PrivateLink.
 
+**Note**: if you are using the container Agent, set the environment variable instead: `DD_DD_URL="pvtlink.agent.datadoghq.com"`
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/agent-commands/#restart-the-agent
+
 {{% /tab %}}
 {{% tab "Logs" %}}
+
+_Available for Agent versions superior to 6.14_
 
 To forward your logs to Datadog using this new VPC endpoint, you need to set up `pvtlink.logs.datadoghq.com` as your new log destination:
 
@@ -113,15 +119,17 @@ To forward your logs to Datadog using this new VPC endpoint, you need to set up 
 
 2. [Restart your Agent][3] to send Logs to Datadog through AWS PrivateLink.
 
+**Note**: if you are using the container Agent, set the environment variables `DD_LOGS_CONFIG_USE_HTTP=true` and `DD_LOGS_CONFIG_LOGS_DD_URL="pvtlink.logs.datadoghq.com:443"` instead.
+
 **Using the Lambda forwarder**:
 
 Add `DD_URL: pvtlink.logs.datadoghq.com` in your [Datadog Lambda function][4] environment variable to use the private link when forwarding AWS Service Logs to Datadog.
-
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /integrations/amazon_web_services/#set-up-the-datadog-lambda-function
+
 {{% /tab %}}
 {{% tab "API" %}}
 
