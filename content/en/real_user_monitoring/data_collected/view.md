@@ -53,4 +53,4 @@ For Single Page Applications (SPAs), performance metrics will only be available 
 [9]: /real_user_monitoring/data_collected/error/
 [10]: /real_user_monitoring/data_collected/resource/
 [11]: /real_user_monitoring/data_collected/long_task
-[12]: https://docs.datadoghq.com/real_user_monitoring/data_collected/user_action
+[12]: /real_user_monitoring/data_collected/user_action
