@@ -178,7 +178,7 @@ datadog:
           port: "%%port_0%%"
 ```
 
-### [Installing the Helm server (Tiller)](#tiller)
+### Installing the Helm server (Tiller)
 
 **Note**: This is not required for versions of Helm greater than 3.0.0. Skip to [Installing the Datadog Helm chart](#installing-the-datadog-helm-chart) if this applies to you.
 
@@ -244,4 +244,4 @@ This command removes all Kubernetes components associated with the chart and del
 [8]: /developers/metrics/dogstatsd_metrics_submission
 [9]: /tracing/setup
 [10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh
-[11]: /#tiller
+[11]: #installing-the-helm-server-tiller
