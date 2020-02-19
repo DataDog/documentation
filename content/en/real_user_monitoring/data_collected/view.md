@@ -51,6 +51,6 @@ For Single Page Applications (SPAs), performance metrics will only be available 
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [9]: /real_user_monitoring/data_collected/error/
-[10]: https://docs.datadoghq.com/real_user_monitoring/data_collected/resource/
+[10]: /real_user_monitoring/data_collected/resource/
 [11]: https://docs.datadoghq.com/real_user_monitoring/data_collected/long_task
 [12]: https://docs.datadoghq.com/real_user_monitoring/data_collected/user_action
