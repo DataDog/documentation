@@ -1,5 +1,5 @@
 ---
-title: Event-based SLO
+title: Event-based SLOs
 kind: documentation
 description: "Use metrics to define a Service Level Objective"
 further_reading:
@@ -10,8 +10,8 @@ further_reading:
 
 ## Overview
 
-Event based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. 
-There is one type of event based SLO - a metric query SLO. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI).
+Event-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. 
+There is one type of event-based SLO - a metric query SLO. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI).
 
 ## Setup
 
