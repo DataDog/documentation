@@ -32,7 +32,7 @@ A Datadog custom metric has the properties below. Refer to the [Metrics Introduc
 
 | Property         | Description                                                                                                                                                  |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<METRIC_NAME>`  | The [name of your metric](#naming-metrics).                                                                                                                  |
+| `<METRIC_NAME>`  | The [name of your metric](#naming-custom-metrics).                                                                                                                  |
 | `<METRIC_VALUE>` | The value of your metric.                                                                                                                                    |
 | `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than ten minutes in the future or more than one hour in the past. |
 | `<TAGS>`         | The set of tags associated with your metric.                                                                                                                 |
