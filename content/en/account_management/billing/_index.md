@@ -23,7 +23,7 @@ It is recommended that containers are monitored with a single containerized Agen
 
 Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. 
 
-Pro and Enterprise plans include 40 custom metrics per billed function. Distributed traces incur charges based on the analyzed spans consumed. 
+Pro and Enterprise plans include 40 custom metrics per billed function. Billing for serverless APM depends on the total number of Analyzed Spans submitted to the Datadog APM service at the end of the month. There are no billable APM Hosts when using serverless. 
 
 For more information, see the [Serverless billing page][4] and the [Datadog Pricing page][5].
 
