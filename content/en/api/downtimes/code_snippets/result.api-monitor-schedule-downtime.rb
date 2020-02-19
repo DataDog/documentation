@@ -22,3 +22,11 @@
     'updater_id' => nil
   }
 ]
+
+# with RRULE recurrence
+{
+...
+'recurrence': {
+        'type' => 'rrule',
+        'rrule' => FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
+}

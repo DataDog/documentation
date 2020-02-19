@@ -22,7 +22,7 @@ curl -X POST \
 }' \
     "https://api.datadoghq.com/api/v1/downtime"
 
-# # OR use RRULE reccurence
+# OR use RRULE reccurence
 
 -d '{
       "scope": "env:prod",
