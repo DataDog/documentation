@@ -224,6 +224,7 @@ init_config:
   profiles:
     my-profile:
       definition:
+        metrics:
         - MIB: IP-MIB
           table: ipSystemStatsTable
           symbols:
@@ -231,7 +232,7 @@ init_config:
           metric_tags:
             - tag: ipversion
           index: 1
-      sysobjectid: '1.3.6.1.4.1.8072.3.2.10'
+        sysobjectid: '1.3.6.1.4.1.8072.3.2.10'
 ```
 
 Then either reference it explicitly by name, or use sysObjectID detection:

@@ -16,4 +16,6 @@ external_redirect: /api/#send-logs-over-http
 | Query parameters | Query parameters available are the reserved log attribute. `?ddtags=<TAGS>&ddsource=<SOURCE>&service=<SERVICE>&hostname=<HOSTNAME>` |
 | Method           | `POST`                                                                                                                |
 | Content Type     | Available content type are: `text/plain`, `application/json`, `application/logplex-1`                                 |
+| Content Encoding | *[optional]* For compressed content the available content encoding are: `gzip` and `deflate`. |
+
 **Note**: If an API key is passed in both the headers and the path only the one in the headers is taken into account.

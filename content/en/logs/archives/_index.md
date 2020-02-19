@@ -86,6 +86,26 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 [6]: https://app.datadoghq.com/logs/pipelines/archives
 {{% /tab %}}
 
+{{% tab "Azure Storage" %}}
+
+1. Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** access tier.
+2. Set up the [Azure integration][3] within the subscription that holds your new storage account, if you haven't already. This involves [creating an App Registration that Datadog can use][4] to integrate with.
+3. Next, grant your Datadog App sufficient permission to write to and rehydrate from your storage account. Select your storage account from the [Storage Accounts page][1], go to **Access Control (IAM)**, and select **Add -> Add Role Assignment**. Input the Role called **Storage Blob Data Contributor**, select the Datadog App that you created for integrating with Azure, and save.
+  {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Add the Storage Blob Data Contributor role to your Datadog App." style="width:75%;">}}
+4. Go to your [Archives page][5] in Datadog, and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
+5. Select the **Azure Storage** archive type, and the Azure Tenant and Client for the Datadog App that has the Storage Blob Data Contributor role on your storage account. Input your storage account name and a container name for your archive. 
+6. **Optional**: input a prefix directory for all the content of your log archives.
+7. Save your archive. 
+
+  {{< img src="logs/archives/logs_azure_archive_configs.png" alt="Set your Azure storage account info in Datadog"  style="width:75%;">}}
+
+[1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
+[2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
+[3]: https://app.datadoghq.com/account/settings#integrations/azure
+[4]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
+[5]: https://app.datadoghq.com/logs/pipelines/archives
+{{% /tab %}}
+
 {{% tab "Google Cloud Storage" %}}
 
 1. Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives to. Under "Choose how to control access to objects", select "Set object-level and bucket-level permissions."
@@ -95,7 +115,7 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 4. Go to your [Archives page][7] in Datadog, and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
 5. Select the GCS archive type, and the GCS Service Account that has permissions to write on your storage bucket. Input your bucket name. Optional: input a prefix directory for all the content of your log archives. Then save your archive.
 
-  {{< img src="logs/archives/archive_select_gcs.png" alt="Add the Storage Object Creator role to your Datadogh GCP Service Account."  style="width:75%;">}}
+  {{< img src="logs/archives/archive_select_gcs.png" alt="Set your GCP bucket info in Datadog"  style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console

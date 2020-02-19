@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-widget/"
   tag: "Blog"
   text: "Track the status of your SLOs with the new monitor uptime widget"
+- link: "https://learn.datadoghq.com/enrol/index.php?id=30"
+  tag: "Learning Center"
+  text: "Introduction to Service Level Objectives (SLOs)"
 ---
 
 ## Overview

@@ -43,7 +43,7 @@ Create the `uwsgi.d/conf.yaml` file in the root of your Agent's configuration di
 
 #### Log Collection
 
-**Available for Agent version >6.0**
+_Available for Agent versions >6.0_
 
 Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file with:
 
@@ -55,10 +55,10 @@ Then add this configuration block to your `uwsgi.d/conf.yaml` file to start coll
 
 ```yaml
 logs:
-  - type: file
-    path: /var/log/uwsgi/uwsgi.log
-    service: "<MY_APPLICATION>"
-    source: uwsgi
+    - type: file
+      path: /var/log/uwsgi/uwsgi.log
+      service: '<MY_APPLICATION>'
+      source: uwsgi
 ```
 
 Finally, [restart the agent][3].
