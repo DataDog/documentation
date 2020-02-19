@@ -15,6 +15,11 @@ describe(`On main page load (not home or api pages)`, () => {
             value: ''
         });
 
+        Object.defineProperty(document, 'referrer', {
+            writable: true,
+            value: ''
+        });
+
         delete window.location;
         window.location = {
             href: 'http://localhost:1313/getting_started/logs/'
@@ -90,6 +95,20 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionEUSnippet.classList).toContain('d-none')
             });
         });
+
+        describe('referrer coming from app.datadoghq.eu', () => {
+            it('should set cookie value "site" to region "eu" from document referrer', () => {
+                window.document.referrer = "https://app.datadoghq.eu/";
+
+                redirectToRegion();
+
+                expect(window.document.cookie).toContain('site=eu');
+                expect(regionSelector.value).toEqual('eu');
+                expect(regionUSSnippet.classList).toContain('d-none')
+                expect(regionEUSnippet.classList).not.toContain('d-none')
+            });
+        });
+
     });
 
     describe(`Cookie is Set to "eu"`, () => {
@@ -133,6 +152,19 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionSelector.value).toEqual('eu');
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionEUSnippet.classList).not.toContain('d-none')
+            });
+        });
+
+        describe('referrer coming from app.datadoghq.com', () => {
+            it('should set cookie value "site" to region "us" from document referrer', () => {
+                window.document.referrer = "https://app.datadoghq.com/";
+
+                redirectToRegion();
+
+                expect(window.document.cookie).toContain('site=us');
+                expect(regionSelector.value).toEqual('us');
+                expect(regionUSSnippet.classList).not.toContain('d-none')
+                expect(regionEUSnippet.classList).toContain('d-none')
             });
         });
     });
