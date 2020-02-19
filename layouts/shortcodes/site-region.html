@@ -1,0 +1,10 @@
+{{ if  not (.Get "region") }}
+    {{ errorf "Site region error: Missing region for param 'region': %s" .Position }}
+{{ end }}
+
+{{ $region := .Get "region" }}
+
+<div class="d-none" data-region="{{ $region }}">
+
+    {{ .Inner | markdownify }}
+</div>

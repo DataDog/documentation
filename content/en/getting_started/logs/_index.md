@@ -34,8 +34,7 @@ To send logs manually, use the `telnet` command with your [Datadog API key][5] w
 
 Logs can be a full-text message:
 
-{{< tabs >}}
-{{% tab "US Site" %}}
+{{< site-region region="us" >}}
 
 The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for nonsecure connections).
 
@@ -45,8 +44,8 @@ telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> Plain text log sent through TCP
 ```
 
-{{% /tab %}}
-{{% tab "EU Site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` for nonsecure connections).
 
@@ -56,8 +55,8 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 <DATADOG_API_KEY> Plain text log sent through TCP
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
+
 
 This produces the following result in the [Log Explorer Page][2]:
 
@@ -65,8 +64,7 @@ This produces the following result in the [Log Explorer Page][2]:
 
 or a JSON object that is automatically parsed by Datadog:
 
-{{< tabs >}}
-{{% tab "US Site" %}}
+{{< site-region region="us" >}}
 
 ```text
 telnet intake.logs.datadoghq.com 10514
@@ -74,8 +72,8 @@ telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> {"message":"JSON formatted log sent through TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
 ```
 
-{{% /tab %}}
-{{% tab "EU Site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```text
 telnet tcp-intake.logs.datadoghq.eu 1883
@@ -83,8 +81,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 <DATADOG_API_KEY> {"message":"JSON formatted log sent through TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 This produces the following result in the [Log Explorer Page][2]:
 
@@ -96,22 +93,20 @@ This produces the following result in the [Log Explorer Page][2]:
 
 To install the Datadog Agent within your Vagrant host, use the [one line install command][6] updated with your [Datadog API key][5]:
 
-{{< tabs >}}
-{{% tab "US Site" %}}
+{{< site-region region="us" >}}
 
 ```text
 DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-{{% /tab %}}
-{{% tab "EU Site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```text
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 #### Validation
 

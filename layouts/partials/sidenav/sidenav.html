@@ -18,7 +18,17 @@
 <aside class="sidenav">
     <div class="row sticky">
         <div class="col">
-            <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_docs" }}</h4></a>
+            <h4>
+                <a class="text-primary" href="{{ "" | absLangURL }}">{{ i18n "datadog_docs" }}</a>
+                <span>
+                    <label for="region-select" class="sr-only">Region</label>
+                    <select id=region-select class="js-region-selector">
+                        <option disabled selected value>--</option>
+                        <option value="us">US</option>
+                        <option value="eu">EU</option>
+                    </select>
+                </span>
+            </h4>
             <form class="docssearch" method="GET" action="{{ "search/" | absLangURL }}">
                 <div>
                     <input class="docssearch-input" name="s" type="docssearch" placeholder="Search documentation...">

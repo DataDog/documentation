@@ -11,17 +11,17 @@ describe(`Ensure EN site loads and redirects as expected `, () => {
         // reset cookie value
         Object.defineProperty(window.document, 'cookie', {
             writable: true,
-            value: '',
+            value: ''
         });
 
         delete window.location;
-        window.location = { href: '', replace: jest.fn(), };
+        window.location = { href: '', replace: jest.fn() };
     });
 
     it('should redirect to EN site based on URL param when cookie value is JA and update the cookie', () => {
         Object.defineProperty(window.document, 'cookie', {
             writable: true,
-            value: 'lang_pref=ja',
+            value: 'lang_pref=ja'
         });
 
         window.location.href = 'http://localhost:3000/ja/product/?lang_pref=en';
@@ -44,7 +44,7 @@ describe(`Ensure EN site loads and redirects as expected `, () => {
     it('should not redirect when lang_pref cookie value contains EN', () => {
         Object.defineProperty(window.document, 'cookie', {
             writable: true,
-            value: 'lang_pref=en',
+            value: 'lang_pref=en'
         });
 
         window.location.href = 'http://localhost:3000/ja/product/';
@@ -77,7 +77,7 @@ describe(`Ensure JA site redirects are working based on navigator.language setti
     beforeAll(() => {
         Object.defineProperty(window.document, 'cookie', {
             writable: true,
-            value: '',
+            value: ''
         });
     });
 
@@ -89,7 +89,7 @@ describe(`Ensure JA site redirects are working based on navigator.language setti
 
         // solution for jsdom errors - https://github.com/jsdom/jsdom/issues/2112#issuecomment-491683153
         delete window.location;
-        window.location = { href: '', replace: jest.fn(), };
+        window.location = { href: '', replace: jest.fn() };
     });
 
     it('should redirect a preview site as expected', () => {
@@ -133,7 +133,7 @@ describe(`Ensure JA site redirects are working based on navigator.language setti
     it('should redirect when lang_pref cookie value contains JA', () => {
         Object.defineProperty(window.document, 'cookie', {
             writable: true,
-            value: 'lang_pref=ja',
+            value: 'lang_pref=ja'
         });
 
         window.location.href = 'http://localhost:3000/product/';

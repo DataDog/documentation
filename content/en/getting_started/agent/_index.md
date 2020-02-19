@@ -28,8 +28,7 @@ The Agent can be installed on many different platforms either directly on the ho
 
 ### Configuration
 
-{{< tabs >}}
-{{% tab "Datadog US Site" %}}
+{{< site-region region="us" >}}
 
 The Agent's [main configuration file][1] is `datadog.yaml`. The only required parameter is your [Datadog API key][2] which is used to associate your Agent's data with your organization. See the [sample config_template.yaml][3] for all available configuration options.
 
@@ -40,8 +39,8 @@ For the [container Agent][4], `datadog.yaml` configuration options are passed in
 [3]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [4]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [5]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent#environment-variables
-{{% /tab %}}
-{{% tab "Datadog EU Site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 The Agent's [main configuration file][1] is `datadog.yaml`. The required parameters are your [Datadog API key][2] which is used to associate your Agent's data with your organization and the Datadog Site (`datadoghq.eu`). See the [sample config_template.yaml][3] for all available configuration options.
 
@@ -55,8 +54,7 @@ For the [container Agent][4], `datadog.yaml` configuration options are passed in
 [3]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [4]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [5]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent#environment-variables
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 ### Validation
 
