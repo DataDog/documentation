@@ -31,7 +31,7 @@ SSL エラーは、API テストの実行時に発生する可能性のあるエ
 | `CERT_SIGNATURE_FAILURE`             | 証明書のシグニチャが有効ではありません。                                                                                                                           |
 | `CRL_HAS_EXPIRED`                    | 証明書失効リスト (CRL) の期限が切れています。                                                                                                                       |
 | `CRL_NOT_YET_VALID`                  | 証明書失効リスト (CRL) が、未来の日付まで有効ではありません。                                                                                                  |
-| `CRL_SIGNATURE_FAILURE`              | 証明書の CRL シグニチャが有効ではありません。                                                                                                                       |
+| `CRL_SIGNATURE_FAILURE`              | 証明書の CRL 署名が有効ではありません。                                                                                                                       |
 | `DEPTH_ZERO_SELF_SIGNED_CERT`        | パスした証明書は自己署名されており、信頼できる証明書のリストに同じ証明書が見つかりません。                                                      |
 | `ERROR_IN_CERT_NOT_AFTER_FIELD`      | 証明書の notAfter フィールドにフォーマットエラーがあります。                                                                                                        |
 | `ERROR_IN_CERT_NOT_BEFORE_FIELD`     | 証明書の notBefore フィールドにフォーマットエラーがあります。                                                                                                       |
@@ -43,9 +43,9 @@ SSL エラーは、API テストの実行時に発生する可能性のあるエ
 | `PATH_LENGTH_EXCEEDED`               | basicConstraints の pathlength パラメータを超過しています。                                                                                                                  |
 | `SELF_SIGNED_CERT_IN_CHAIN`          | 自己署名証明書が証明書チェーンに存在します。証明書チェーンを、信頼されない証明書を使用して作成することはできますが、ルート CA がローカルに見つかりません。 |
 | `UNABLE_TO_DECODE_ISSUER_PUBLIC_KEY` | 証明書の公開鍵を読み取ることができません。                                                                                                                        |
-| `UNABLE_TO_DECRYPT_CERT_SIGNATURE`   | 証明書のシグニチャを復号化できません。                                                                                                                      |
-| `UNABLE_TO_DECRYPT_CRL_SIGNATURE`    | CRL シグニチャを復号化できません。(実際のシグニチャ値を判断できません。)                                                                                |
+| `UNABLE_TO_DECRYPT_CERT_SIGNATURE`   | 証明書の署名を復号化できません。                                                                                                                      |
+| `UNABLE_TO_DECRYPT_CRL_SIGNATURE`    | CRL 署名を復号化できません。(実際の署名の値を判断できません。)                                                                                |
 | `UNABLE_TO_GET_CRL`                  | 証明書の失効リスト (CRL) が見つかりません。                                                                                                                      |
 | `UNABLE_TO_GET_ISSUER_CERT`          | 署名の階層に含まれる認証局 (CA) のいずれかで必要な証明書が見つかりません。また、その CA はローカルアプリケーションによって信頼されていません。               |
 | `UNABLE_TO_GET_ISSUER_CERT_LOCALLY`  | ローカルで見つかった証明書の発行者証明書が見つかりません。多くの場合これは、信頼された証明書のリストが完全ではないことを意味します。                            |
-| `UNABLE_TO_VERIFY_LEAF_SIGNATURE`    | 証明書チェーンに 1 つの (自己署名ではない) 証明書しか含まれておらず、発行者を信頼できないため、シグニチャは一切検証されません。                         |
+| `UNABLE_TO_VERIFY_LEAF_SIGNATURE`    | 証明書チェーンに 1 つの (自己署名ではない) 証明書しか含まれておらず、発行者を信頼できないため、署名を確認できません。                         |

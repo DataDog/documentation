@@ -2,20 +2,21 @@
 title: Fluent Bit
 name: fluentbit
 kind: integration
-description: "Configure Fluent Bit to collect, parse, and forward log data from several different sources to Datadog for monitoring."
-short_description: "Collect, parse, and forward log data from several different sources to Datadog for monitoring."
+description: 'Configure Fluent Bit to collect, parse, and forward log data from several different sources to Datadog for monitoring.'
+short_description: 'Collect, parse, and forward log data from several different sources to Datadog for monitoring.'
 categories:
-- log collection
+    - log collection
 doc_link: /integrations/fluentbit/
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md"]
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md']
 has_logo: true
 integration_title: Fluent Bit
 is_public: true
 public_title: Datadog-Fluent Bit Integration
 further_reading:
-- link: "https://www.datadoghq.com/blog/fluentbit-integration-announcement/"
-  tag: "Blog"
-  text: "Centralize your logs with Datadog and Fluent Bit"
+    - link: 'https://www.datadoghq.com/blog/fluentbit-integration-announcement/'
+      tag: 'Blog'
+      text: 'Centralize your logs with Datadog and Fluent Bit'
 ---
 
 ## Overview
@@ -37,13 +38,13 @@ Before you begin, you need to have a [Datadog account][3], a [Datadog API key][4
 #### Configuration parameters
 
 | Key            | Description                                                                                                              | Default                                                                     |
-|----------------|--------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| -------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
 | Host           | _Required_ - The Datadog server where you are sending your logs.                                                         | US - `http-intake.logs.datadoghq.com`, EU - `http-intake.logs.datadoghq.eu` |
 | TLS            | _Required_ - End-to-end security communications security protocol. Datadog recommends setting this to `on`.              | `off`                                                                       |
 | apikey         | _Required_ - Your [Datadog API key][4].                                                                                  |                                                                             |
 | dd_service     | _Recommended_ - The human readable name for your service generating the logs - the name of your application or database. |                                                                             |
 | dd_source      | _Recommended_ - A human readable name for the underlying technology of your service. For example, `postgres` or `nginx`. |                                                                             |
-| dd_message_key | _Recommended_ - Set the attribute to use to store your log message.                                                         |                                                                             |
+| dd_message_key | _Recommended_ - Set the attribute to use to store your log message.                                                      |                                                                             |
 | dd_tags        | _Optional_ - The [tags][10] you want to assign to your logs in Datadog.                                                  |                                                                             |
 | provider       | _Optional_ - The provider to use. Set this to `ecs` if you want to send logs from your Fargate Tasks to Datadog.         |                                                                             |
 
