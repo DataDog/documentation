@@ -169,7 +169,7 @@ You can use the [global variables defined in the `Settings`][3] in the URL, Adva
 
 A notification is sent according to the set of alerting conditions. To configure notifications:
 
-1. Select users and/or [services][4] to send the notifications to. Note that you can use [`@-notification`][5] in the **message** field, similarly to monitors.
+1. Select users and/or [services][4] to receive notifications. **Note**: [`@-notifications`][5] are available in the **message** field, similar to monitors.
 2. Enter a **message** for the API test. This field allows standard [Markdown formatting][6] and supports the below [conditional variables][7]:
 
     | Conditional Variable       | Description                                                         |
