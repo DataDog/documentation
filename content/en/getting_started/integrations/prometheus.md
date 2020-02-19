@@ -30,9 +30,16 @@ Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus
 
 This page explains the basic usage of these checks, which enable you to scrape custom metrics from Prometheus endpoints.
 
-## Prometheus and Datadog
+## Use Cases
 
-Prometheus checks allow you to continue to monitor your applications already set up to report metrics to Prometheus without any infrastructural changes. This gives you the ability to quickly onboard to Datadog and start monitoring, visualizing, and receiving alerts about Prometheus data.
+Prometheus and OpenMetrics checks permit continuous monitoring of applications already set up to report metrics to Prometheus in Datadog without any additional development work. You can instantly monitor your infrastructure, visualize complex data sets, receive alerts, and any other Prometheus configurations within the Datadog app when using the Datadog Agent.
+
+For example, you may use Prometheus to monitor:
+- infrastructure for capacity and performance
+- complex, multi-service architecture in a production environment
+- a content delivery network (CDN) spanning across multiple locations
+- SLAs for performance and security compliance
+- the health of several containerized services
 
 ## Setup
 
