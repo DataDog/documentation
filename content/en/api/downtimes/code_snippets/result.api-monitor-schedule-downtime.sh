@@ -32,7 +32,7 @@
 # with RRULE recurrence
 {
 ...
-'recurrence': {
+"recurrence": {
     "type": "rrule",
     "rrule": "FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1"
 }

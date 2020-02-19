@@ -18,7 +18,7 @@ recurrence = {
 }
 
 # Schedule downtime
-api.Downtime.create(
+dog.Downtime.create(
     'env:staging',
     start: start_ts,
     end: end_ts,
@@ -32,7 +32,7 @@ rrule_recurrence = {
 }
 
 # Schedule downtime
-api.Downtime.create(
+dog.Downtime.create(
     'env:staging',
     start: start_ts,
     end: end_ts,
