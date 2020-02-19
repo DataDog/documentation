@@ -180,7 +180,7 @@ logs_config:
 
 Vous pouvez également définir les variables d'environnement `DD_LOGS_CONFIG_USE_HTTP` et `DD_LOGS_CONFIG_USE_COMPRESSION` sur `true`.
 Le paramètre `compression_level` (ou la variable d'environnement `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accepte les valeurs comprises entre 0 (aucune compression) et 9 (compression maximale, impliquant une plus forte utilisation des ressources). La valeur par défaut est 6.
-Consultez la [section sur le traitement de l'Agent Datadog][11] pour obtenir plus d'informations sur l'utilisation des ressources de l'Agent lorsque la compression est activée.
+Consultez la [section sur le traitement de l'Agent Datadog][1] pour obtenir plus d'informations sur l'utilisation des ressources de l'Agent lorsque la compression est activée.
 
 Redémarrez ensuite l'Agent pour activer l'envoi des logs via HTTPS vers `agent-http-intake.logs.datadoghq.com` (site américain) ou `agent-http-intake.logs.datadoghq.eu` (site européen) sur le port `443`.
 
