@@ -34,21 +34,23 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
    **Note**: The VPC must be in `us-east-1` and it's recommend to set subnets with all of the following availability zone IDs: `use1-az6`, `use1-az2`, and `use1-az4`:
    {{< img src="agent/guide/private_link/saved_az.png" alt="Saved AZ" style="width:60%;" >}}
-6. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
+6. Make sure that for **Enable DNS name** the _Enable for this Endpoint_ is checked.:
+   {{< img src="agent/guide/private_link/enabled_dns.png" alt="Enable DNS" style="width:60%;" >}}
+7. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
 
     **Note**: **If you want to forward logs to Datadog through this VPC endpoint, the security group must accept inbound and outbound traffic on port `443`**.
 
-7. Hit **Create endpoint** at the bottom of the screen. If successful, you will see this:
+8. Hit **Create endpoint** at the bottom of the screen. If successful, you will see this:
    {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:60%;" >}}
-8. Click on the VPC endpoint ID to check its status.
-9. Wait for the status to move from _Pending_ to _Available_ (this can take up to 10 minutes):
-   {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
+9. Click on the VPC endpoint ID to check its status.
+10. Wait for the status to move from _Pending_ to _Available_ (this can take up to 10 minutes):
+    {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
 
 Once it shows _Available_, the AWS PrivateLink is ready to be used. The next step is to update your agent configurations those new target endpoint for your Datadog Agents, Lambda forwarder, and/or other clients shipping data to Datadog.
 
-## Send your Metrics & Logs to Datadog
+## Agent configuration
 
-Select the tab below to see how to send your metrics and logs to Datadog or how to use Datadog APIs using this new VPC endpoint:
+Select the tab below to see how to send your metrics and logs to Datadog using this new VPC endpoint:
 
 {{< tabs >}}
 {{% tab "Metric" %}}
@@ -63,9 +65,9 @@ To forward your metrics to Datadog using this new VPC endpoint your need to setu
 
 2. [Restart your Agent][2] to send metrics to Datadog through AWS PrivateLink.
 
+
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/agent-commands/#restart-the-agent
-
 {{% /tab %}}
 {{% tab "Logs" %}}
 
@@ -90,18 +92,17 @@ To forward your logs to Datadog using this new VPC endpoint, you need to set up 
 
 Add `DD_URL: logs.vpce.datadoghq.com` in your [Datadog Lambda function][4] environment variable to use the private link when forwarding AWS Service Logs to Datadog.
 
+
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /integrations/amazon_web_services/#set-up-the-datadog-lambda-function
-
-{{% /tab %}}
-{{% tab "API" %}}
-
-To send data to Datadog API or consume data from it through this new VPC endpoint, replace your API call host signature `api.datadoghq.com/api/` with `api.vpce.datadoghq.com/api/`
-
 {{% /tab %}}
 {{< /tabs >}}
+
+## API endpoint
+
+To send data to Datadog API or consume data from it through this new private link, replace your API call host signature `api.datadoghq.com/api/` with `pvtlink.api.datadoghq.com`.
 
 ## Further Reading
 
