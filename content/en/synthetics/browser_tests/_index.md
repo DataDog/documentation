@@ -55,7 +55,7 @@ You can use the [global variables defined in the `Settings`][5] in the URL, as w
 
 An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from any `<INSERT_NUMBER>` of `<NUMBER_OF_CHOSEN>` locations.
 
-### Notifications
+### Notify your team
 
 A notification is sent according to the set of alerting conditions. To configure your notifications:
 
