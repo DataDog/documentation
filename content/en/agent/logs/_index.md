@@ -32,7 +32,7 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 
 [See below to send logs over HTTPS](#send-logs-over-https).
 
-**Note**: If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][3]. If you're using Docker, [enable log collection for the containerized Agent][4].
+**Note**: If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][3]. If you're using Docker, [enable log collection for the containerized Agent][4]. For more information about log collection fron containerized environments, refer to the [Countainer Log Collection][5] documentation.
 
 ## Enabling log collection from integrations
 
@@ -51,8 +51,8 @@ Datadog Agent v6 can collect logs and forward them to Datadog from files, the ne
 1. Create a new `<CUSTOM_LOG_SOURCE>.d/` folder in the `conf.d/` directory at the root of your [Agent's configuration directory][2].
 2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration group with the parameters below.
-4. [Restart your Agent][5] to take into account this new configuration.
-5. Run the [Agent's status subcommand][6] and look for `<CUSTOM_LOG_SOURCE>` under the Checks section.
+4. [Restart your Agent][6] to take into account this new configuration.
+5. Run the [Agent's status subcommand][7] and look for `<CUSTOM_LOG_SOURCE>` under the Checks section.
 
 Below are examples of custom log collection setup:
 
@@ -158,12 +158,12 @@ List of all available parameters for log collection:
 | `port`           | Yes      | If `type` is **tcp** or **udp**, set the port for listening to logs.                                                                                                                                                                                                                                                                                    |
 | `path`           | Yes      | If `type` is **file** or **journald**, set the file path for gathering logs.                                                                                                                                                                                                                                                                            |
 | `channel_path`   | Yes      | If `type` is **windows_event**, list the Windows event channels for collecting logs.                                                                                                                                                                                                                                                                    |
-| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][7], this must be the same service name.                                                                                                                                                                                                                     |
-| `source`         | Yes      | The attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][8] you are collecting, for example: `myapp` from `myapp.request.count`. |
+| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][8], this must be the same service name.                                                                                                                                                                                                                     |
+| `source`         | Yes      | The attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][9] you are collecting, for example: `myapp` from `myapp.request.count`. |
 | `include_units`  | No       | If `type` is **journald**, list of the specific journald units to include.                                                                                                                                                                                                                                                                              |
 | `exclude_units`  | No       | If `type` is **journald**, list of the specific journald units to exclude.                                                                                                                                                                                                                                                                              |
 | `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                             |
-| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][9]).                                                                                                                                                                                                                                                                             |
+| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][10]).                                                                                                                                                                                                                                                                             |
 
 ## Send logs over HTTPS
 
@@ -221,7 +221,7 @@ The value is in seconds and must be an integer between 1 and 10.
 
 **HTTPS Proxy configuration**
 
-When logs are sent through HTTPS, use the same [set of proxy settings][10] as the other data types to send logs through a web proxy.
+When logs are sent through HTTPS, use the same [set of proxy settings][11] as the other data types to send logs through a web proxy.
 
 ## Further Reading
 
@@ -231,9 +231,10 @@ When logs are sent through HTTPS, use the same [set of proxy settings][10] as th
 [2]: /agent/guide/agent-configuration-files
 [3]: /agent/kubernetes/daemonset_setup/#log-collection
 [4]: /agent/docker/log
-[5]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: /agent/guide/agent-commands/#agent-status-and-information
-[7]: /tracing
-[8]: /developers/metrics/custom_metrics
-[9]: /tagging
-[10]: /agent/proxy
+[5]: /logs/log_collection/#container-log-collection
+[6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: /agent/guide/agent-commands/#agent-status-and-information
+[8]: /tracing
+[9]: /developers/metrics/custom_metrics
+[10]: /tagging
+[11]: /agent/proxy
