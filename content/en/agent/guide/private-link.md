@@ -34,7 +34,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
    **Note**: The VPC must be in `us-east-1` and it's recommend to set subnets with all of the following availability zone IDs: `use1-az6`, `use1-az2`, and `use1-az4`:
    {{< img src="agent/guide/private_link/saved_az.png" alt="Saved AZ" style="width:60%;" >}}
-6. Make sure that for **Enable DNS name** the _Enable for this Endpoint_ is checked.:
+6. Make sure that for **Enable DNS name** the _Enable for this Endpoint_ is checked:
    {{< img src="agent/guide/private_link/enabled_dns.png" alt="Enable DNS" style="width:60%;" >}}
 7. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
 
@@ -55,12 +55,12 @@ Select the tab below to see how to send your metrics and logs to Datadog using t
 {{< tabs >}}
 {{% tab "Metric" %}}
 
-To forward your metrics to Datadog using this new VPC endpoint your need to setup `metrics.vpce.datadoghq.com` as your new metric destination:
+To forward your metrics to Datadog using this new VPC endpoint your need to setup `pvtlink.metrics.datadoghq.com` as your new metric destination:
 
 1. Update the `dd_url` parameter in the [Agent `datadog.yaml` configuration file][1]:
 
     ```yaml
-    dd_url: metrics.vpce.datadoghq.com
+    dd_url: pvtlink.metrics.datadoghq.com
     ```
 
 2. [Restart your Agent][2] to send metrics to Datadog through AWS PrivateLink.
@@ -71,7 +71,7 @@ To forward your metrics to Datadog using this new VPC endpoint your need to setu
 {{% /tab %}}
 {{% tab "Logs" %}}
 
-To forward your logs to Datadog using this new VPC endpoint, you need to set up `logs.vpce.datadoghq.com` as your new log destination:
+To forward your logs to Datadog using this new VPC endpoint, you need to set up `pvtlink.logs.datadoghq.com` as your new log destination:
 
 **Using the Datadog Agent**:
 
@@ -80,7 +80,7 @@ To forward your logs to Datadog using this new VPC endpoint, you need to set up 
     ```yaml
     logs_config:
         use_http: true
-        logs_dd_url: logs.vpce.datadoghq.com:443
+        logs_dd_url: pvtlink.logs.datadoghq.com:443
     ```
 
     - The `use_http` variable is used to force the Datadog Agent to send logs over HTTPS, which is the protocol supported by the VPC endpoint. More information about this is available in the [Agent log collection documentation][2].
@@ -90,7 +90,7 @@ To forward your logs to Datadog using this new VPC endpoint, you need to set up 
 
 **Using the Lambda forwarder**:
 
-Add `DD_URL: logs.vpce.datadoghq.com` in your [Datadog Lambda function][4] environment variable to use the private link when forwarding AWS Service Logs to Datadog.
+Add `DD_URL: pvtlink.logs.datadoghq.com` in your [Datadog Lambda function][4] environment variable to use the private link when forwarding AWS Service Logs to Datadog.
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
