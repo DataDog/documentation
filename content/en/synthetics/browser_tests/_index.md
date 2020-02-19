@@ -59,7 +59,7 @@ An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from 
 
 A notification is sent according to the set of alerting conditions. To configure your notifications:
 
-1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][6] and supports the below [conditional variables][7]:
+1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
