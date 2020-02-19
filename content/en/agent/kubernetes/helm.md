@@ -45,51 +45,6 @@ choco install kubernetes-helm
 
 For other platforms and methods of installing Helm, refer to the [Helm documentation][1].
 
-### Installing the Helm server (Tiller)
-
-**Note**: This is not required for versions of Helm greater than 3.0.0. Skip to [Installing the Datadog Helm chart](#installing-the-datadog-helm-chart) if this applies to you.
-
-If your Kubernetes environment does not use RBAC, the following command installs Tiller in your cluster:
-
-```bash
-helm init
-```
-
-Refer to [Helm's Tiller documentation][2] for further details.
-
-If your Kubernetes cluster is RBAC-enabled, use the following RBAC to deploy Tiller.
-
-```yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
- name: tiller
- namespace: kube-system
----
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
- name: tiller
-roleRef:
- apiGroup: rbac.authorization.k8s.io
- kind: ClusterRole
- name: cluster-admin
-subjects:
- - kind: ServiceAccount
-   name: tiller
-   namespace: kube-system
-```
-
-With this as your `tiller-rbac-config.yaml`, then run:
-
-```bash
-kubectl create -f tiller-rbac-config.yaml
-
-helm init --service-account tiller
-```
-
-Refer to [Helm's Tiller/RBAC documentation][3] for further details.
-
 ### Verify installation
 
 To verify your installation, run:
@@ -106,6 +61,8 @@ tiller-deploy-f54b67464-jl5gm 1/1 Running 0 3h16m
 ```
 
 ## Installing the Datadog Helm chart
+
+** Note ** We recommend using Helm 3.0 or greater. If you're using a lower version, you may need to install the Helm Server, [Tiller][11].
 
 To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datadog API key from your [Agent installation instructions][4] and run:
 
@@ -221,6 +178,52 @@ datadog:
           port: "%%port_0%%"
 ```
 
+### [Installing the Helm server (Tiller)](#tiller)
+
+**Note**: This is not required for versions of Helm greater than 3.0.0. Skip to [Installing the Datadog Helm chart](#installing-the-datadog-helm-chart) if this applies to you.
+
+If your Kubernetes environment does not use RBAC, the following command installs Tiller in your cluster:
+
+```bash
+helm init
+```
+
+Refer to [Helm's Tiller documentation][2] for further details.
+
+If your Kubernetes cluster is RBAC-enabled, use the following RBAC to deploy Tiller.
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+ name: tiller
+ namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+ name: tiller
+roleRef:
+ apiGroup: rbac.authorization.k8s.io
+ kind: ClusterRole
+ name: cluster-admin
+subjects:
+ - kind: ServiceAccount
+   name: tiller
+   namespace: kube-system
+```
+
+With this as your `tiller-rbac-config.yaml`, then run:
+
+```bash
+kubectl create -f tiller-rbac-config.yaml
+
+helm init --service-account tiller
+```
+
+Refer to [Helm's Tiller/RBAC documentation][3] for further details.
+
+
 ## Uninstalling the Datadog Helm Chart
 
 To uninstall or delete a deployment called `<RELEASE_NAME>`:
@@ -241,3 +244,4 @@ This command removes all Kubernetes components associated with the chart and del
 [8]: /developers/metrics/dogstatsd_metrics_submission
 [9]: /tracing/setup
 [10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh
+[11]: /#tiller
