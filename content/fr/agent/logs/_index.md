@@ -180,9 +180,11 @@ logs_config:
 
 Vous pouvez également définir les variables d'environnement `DD_LOGS_CONFIG_USE_HTTP` et `DD_LOGS_CONFIG_USE_COMPRESSION` sur `true`.
 Le paramètre `compression_level` (ou la variable d'environnement `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accepte les valeurs comprises entre 0 (aucune compression) et 9 (compression maximale, impliquant une plus forte utilisation des ressources). La valeur par défaut est 6.
-Consultez la [section sur le traitement de l'Agent Datadog][11] pour obtenir plus d'informations sur l'utilisation des ressources de l'Agent lorsque la compression est activée.
+Consultez la [section sur le traitement de l'Agent Datadog][1] pour obtenir plus d'informations sur l'utilisation des ressources de l'Agent lorsque la compression est activée.
 
 Redémarrez ensuite l'Agent pour activer l'envoi des logs via HTTPS vers `agent-http-intake.logs.datadoghq.com` (site américain) ou `agent-http-intake.logs.datadoghq.eu` (site européen) sur le port `443`.
+
+[1]: /fr/agent/basic_agent_usage/#agent-overhead
 
 {{% /tab %}}
 {{% tab "Compression désactivée" %}}
@@ -215,7 +217,7 @@ logs_config:
   batch_wait: 2
 ```
 
-Vous pouvez également utiliser la variable d'environnement `DD_LOGS_CONFIG_BATCH_WAIT`. 
+Vous pouvez également utiliser la variable d'environnement `DD_LOGS_CONFIG_BATCH_WAIT`.
 La valeur doit être un nombre entier compris entre 1 et 10 et représente le nombre de secondes.
 
 **Configuration de proxy HTTPS**
@@ -236,4 +238,3 @@ Lorsque les logs sont envoyés via HTTPS et doivent transiter par un proxy, util
 [8]: /fr/developers/metrics/custom_metrics
 [9]: /fr/tagging
 [10]: /fr/agent/proxy
-[11]: /fr/agent/basic_agent_usage/#agent-overhead
