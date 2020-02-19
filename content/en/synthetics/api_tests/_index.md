@@ -172,15 +172,14 @@ A notification is sent according to the set of alerting conditions. To configure
 1. Select users and/or [services][4] to send the notifications to. Note that you can use [`@-notification`][5] in the **message** field, similarly to monitors.
 2. Enter a **message** for the API test. This field allows standard [Markdown formatting][6] and supports the below [conditional variables][7]:
 
-   | Conditional Variable       | Description                                                         |
-   |----------------------------|---------------------------------------------------------------------|
-   | `{{#is_alert}}`            | Show when monitor alerts                                            |
-   | `{{^is_alert}}`            | Show unless monitor alerts                                          |
-   | `{{#is_recovery}}`         | Show when monitor recovers from either WARNING, ALERT, or NO DATA   |
-   | `{{^is_recovery}}`         | Show unless monitor recovers from either WARNING, ALERT, or NO DATA |
+    | Conditional Variable       | Description                                                         |
+    |----------------------------|---------------------------------------------------------------------|
+    | `{{#is_alert}}`            | Show when monitor alerts                                            |
+    | `{{^is_alert}}`            | Show unless monitor alerts                                          |
+    | `{{#is_recovery}}`         | Show when monitor recovers from either ALERT   |
+    | `{{^is_recovery}}`         | Show unless monitor recovers from either ALERT |
 
-   Notification messages include the **message** defined in this section and information about which assertion failed and why.
-
+    Notification messages include the **message** defined in this section and information about which assertion failed and why.
 3. Specify a renotification frequency. If you don't want to be renotified in case your test keeps failing, leave the option to `Never renotify if the monitor has not been resolved`.
 4. Click **Save** to save your API test.
 
