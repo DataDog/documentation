@@ -209,7 +209,7 @@ It is also possible to match multiple strings in a single expression.
 
 ```text 
 {{#is_match "env.name" "prod" "dev" "staging"}}
-  This will match if `prod`, `dev`, or `staging` appear in the env: tag variable.
+  This will match if `prod`, `dev`, or `staging` appear in the "env" tag variable.
 {{/is_match}}
 ```
 
