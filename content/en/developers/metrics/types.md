@@ -40,9 +40,9 @@ These different metric submission types are mapped to 4 in-app metric types foun
 - GAUGE
 - DISTRIBUTION
 
-**Note**: If you submit a metric to Datadog without a type, the metric type appears as `Other` within Datadog. The `Other` metric type cannot be further changed to another in-app type until an initial metric type is submitted.
+**Note**: If you submit a metric to Datadog without a type, the metric type appears as `Not Assigned` within Datadog. The `Not Assigned` metric type cannot be further changed to another in-app type until an initial metric type is submitted.
 
-## Submission vs. in-app type
+## Submission vs. In-App type
 
 Metrics are submitted to Datadog in three main ways:
 
@@ -65,14 +65,14 @@ Refer to the [Submission and In-App Types](#submission-types-and-datadog-in-app-
 
 The COUNT metric submission type represents the total number of event occurrences in one time interval. A COUNT can be used to track the total number of connections made to a database or the total number of requests to an endpoint. This number of events can accumulate or decrease over time—it is not monotonically increasing.
 
-**Note**: A COUNT is different from the RATE metric type, which represents this count of events normalized per second given the defined time interval.
+**Note**: A COUNT is different from the RATE metric type, which represents the number of event occurrences normalized per second given the defined time interval.
 
 {{% /tab %}}
 {{% tab "RATE" %}}
 
 The RATE metric submission type represents the total number of events occurrences per second in one time interval. A RATE can be used to track how often something is happening—like the frequency of connections made to a database or the flow of requests made to an endpoint.
 
-**Note**: A RATE is different from the COUNT metric submission type, which represents the total number of events in the given time interval.
+**Note**: A RATE is different from the COUNT metric submission type, which represents the total number of event occurrences in the given time interval.
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
@@ -86,7 +86,7 @@ The HISTOGRAM metric submission type represents the statistical distribution of 
 
 If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time interval, the following metrics are produced by the Agent by default:
 
-| Aggregation                  | Description                                                                                                                                                  | Datadog In-app Type |
+| New Metric Name                  | Description                                                                                                                                                  | Datadog In-App Type |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- |
 | `<METRIC_NAME>.avg`          | Represents the average of those `X` values in the time interval.                                                                                             | GAUGE               |
 | `<METRIC_NAME>.count`        | Represents the number of values sampled during the interval, `X`. The Agent submits this number as a RATE so it would show in app the value of `X/interval`. | RATE                |
@@ -96,9 +96,9 @@ If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time in
 
 **Note**:
 
-- Configure which aggregation you want to send to Datadog with the `histogram_aggregates` parameter in your [`datadog.yaml` configuration file][1]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent out to Datadog. `sum` and `min` are also available.
+- Configure which aggregations you want to send to Datadog with the `histogram_aggregates` parameter in your [`datadog.yaml` configuration file][1]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent to Datadog. `sum` and `min` are also available.
 
-- Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [`datadog.yaml` configuration file][2]. By default, only the `95percentile` is sent out to Datadog.
+- Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [`datadog.yaml` configuration file][2]. By default, only the `95percentile` is sent to Datadog.
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L106-L114
@@ -115,7 +115,7 @@ Unlike the HISTOGRAM metric type, which aggregates on the Agent during a given t
 
 If you send `X` values for a DISTRIBUTION metric `<METRIC_NAME>` in a given time interval, the following aggregations are available for query by default:
 
-| Aggregation           | Description                                                                                                                                          | Datadog In-app Type |
+| Aggregation           | Description                                                                                                                                          | Datadog In-App Type |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
 | `avg:<METRIC_NAME>`   | Represents the average of those `X` values in the time interval.                                                                                     | GAUGE               |
 | `count:<METRIC_NAME>` | Represents the number of points sampled in the time interval, `X`. The Agent then sends it as a RATE so it would show in app the value `X/interval`. | RATE                |
@@ -140,7 +140,7 @@ The Agent adds all the values received in one time interval and submits the tota
 
 Suppose you are submitting a RATE metric, `queue_messages.rate`, from a single host running the Datadog Agent. This metric emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
-The Agent adds all the values received in one time interval and submits the total number divided by the total number of seconds in this time interval. In this case, if the flush interval is 10 seconds, the value submitted would be `1.5`, as the RATE metric’s value.
+The Agent adds all the values received in one time interval and submits the total number divided by the total number of seconds in this time interval.In this case, if the flush interval is 10 seconds, the value submitted would be `1.5` as the RATE metric’s value.
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
@@ -154,7 +154,7 @@ The Agent submits the last reported number, in this case `71.5`, as the GAUGE me
 
 For example, suppose you are submitting a HISTOGRAM metric, `request.response_time.histogram`, from one web server which reports the values `[1,1,1,2,2,2,3,3]` in a flush time interval. By default, the Agent submits the following metrics to Datadog which represent the statistical distribution of these values in this time interval:
 
-| Metric Name                                    | Value  | Datadog In-app Type |
+| Metric Name                                    | Value  | Datadog In-App Type |
 | ---------------------------------------------- | ------ | ------------------- |
 | `request.response_time.histogram.avg`          | `1.88` | GAUGE               |
 | `request.response_time.histogram.count`        | `8`    | RATE                |
@@ -167,7 +167,7 @@ For example, suppose you are submitting a HISTOGRAM metric, `request.response_ti
 
 Suppose you are submitting a DISTRIBUTION metric, `request.response_time.distribution`, from two webservers: `webserver:web_1` and `webserver:web_2`. Suppose in a given flush time interval, `webserver:web_1` reports the metric with the values `[1,1,1,2,2,2,3,3]`, and `webserver:web_2` reports the same metric with the values `[1,1,2]`. Over this time interval, the following five aggregations will represent the global statistical distribution of all values collected from both webservers:
 
-| Metric Name                                | Value  | Datadog In-app Type |
+| Metric Name                                | Value  | Datadog In-App Type |
 | ------------------------------------------ | ------ | ------------------- |
 | `avg:request.response_time.distribution`   | `1.73` | GAUGE               |
 | `count:request.response_time.distribution` | `11`   | RATE                |
