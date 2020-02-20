@@ -43,7 +43,7 @@ Datadog Integrations and Log Collection are tied together. Use an integration de
 
 Find at the bottom of this page the [list of available Datadog Log collection endpoints](#datadog-logs-endpoints) if you want to send your logs directly to Datadog.
 
-**Note**: When sending logs in a JSON format to Datadog, there is a set of reserved attributes that have a specific within Datadog. See the [Reserved Attributes section](#reserved-attributes) to learn more.
+**Note**: When sending logs in a JSON format to Datadog, there is a set of reserved attributes that have a specific meaning within Datadog. See the [Reserved Attributes section](#reserved-attributes) to learn more.
 
 ## Application Log collection
 
