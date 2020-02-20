@@ -881,11 +881,11 @@ main:
     parent: "tracing_setup"
     identifier: "tracing_setup_cpp"
     weight: 209
-  - name: "Android"
-    url: "tracing/setup/android/"
-    parent: "tracing_setup"
-    identifier: "tracing_setup_android"
-    weight: 210
+# - name: "Android"
+#   url: "tracing/setup/android/"
+#   parent: "tracing_setup"
+#   identifier: "tracing_setup_android"
+#   weight: 210
   - name: "Envoy"
     url: "tracing/setup/envoy/"
     parent: "tracing_setup"
