@@ -29,7 +29,7 @@ Collecting logs is **disabled** by default in the Datadog Agent.
 {{< tabs >}}
 {{% tab "(Recommended) HTTP compressed" %}}
 
-To send compressed logs over HTTPS with the Datadog Agent 6.14+, enable log collection in the Agent's [main configuration file][2] (`datadog.yaml`):
+To send compressed logs over HTTPS with the Datadog Agent v6.14+, enable log collection in the Agent's [main configuration file][2] (`datadog.yaml`):
 
 ```yaml
 logs_enabled: true
@@ -38,7 +38,7 @@ logs_config:
   use_compression: true
 ```
 
-Use the following parameters to configure this with environment variable:
+To send logs with environment variables, configure the following:
 
 * `DD_LOGS_ENABLED`
 * `DD_LOGS_CONFIG_USE_HTTP`
@@ -51,7 +51,7 @@ For more details about the compression perfomances and batching size, refer to t
 {{% /tab %}}
 {{% tab "HTTP uncompressed" %}}
 
-To send logs over HTTPS with the Datadog Agent 6.14+, enable log collection in the Agent's [main configuration file][2] (`datadog.yaml`):
+To send logs over HTTPS with the Datadog Agent v6.14+, enable log collection in the Agent's [main configuration file][2] (`datadog.yaml`):
 
 ```yaml
 logs_enabled: true
@@ -80,7 +80,7 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 {{% /tab %}}
 {{< /tabs >}}
 
-The Agent is ready to forward logs to Datadog. To start collecting logs, you should now tell the Agent where to collect those from.
+After activating log collection, the Agent is ready to forward logs to Datadog. Next, configure the Agent on where to collect logs from.
 
 ## Enabling log collection from integrations
 
@@ -90,7 +90,7 @@ To collect logs for a given integration, uncomment the logs section in that inte
 Consult the <a href="/integrations/#cat-log-collection">list of supported integrations</a>  that include out of the box log configurations.
 </div>
 
-Check the specific setup instructions for [Kubernetes][3] or [Docker][4] environment if you are using a containerised infrastructure.
+See the setup instructions for [Kubernetes][3] or [Docker][4] if you are using a containerized infrastructure.
 
 If an integration does not support logs by default, use the custom log collection.
 
@@ -232,7 +232,7 @@ The Agent sends HTTPS batches with the following limits:
 * Maximum size for a single log: 256kB
 * Maximum array size if sending multiple logs in an array: 200 entries logs.
 
-### Log Compression
+### Log compression
 
 The `compression_level` parameter (or `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accepts values from `0` (no compression) to `9` (maximum compression but higher resource usage). The default value is `6`.
 
@@ -250,7 +250,7 @@ logs_config:
 ```
 
 Or use the `DD_LOGS_CONFIG_BATCH_WAIT` environment variable.
-The value is in seconds and must be an integer between `1` and `10`.
+The unit is seconds and must be an integer between `1` and `10`.
 
 ### HTTPS Proxy configuration
 
