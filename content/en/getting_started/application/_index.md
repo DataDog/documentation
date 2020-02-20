@@ -15,7 +15,7 @@ This page gives a high level overview of the capabilities for the Datadog [US si
 
 {{< img src="getting_started/integrations.png" alt="integrations"  >}}
 
-* Datadog has over 350 integrations [officially listed][3].
+* Datadog has 400+ integrations [officially listed][3].
 * Custom integrations are available [via the Datadog API][4].
 * The Agent is [open source][5].
 * Once integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a datacenter or in an online service.

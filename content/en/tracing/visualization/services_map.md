@@ -32,7 +32,7 @@ The Service Map was built to provide an overview of your services and their heal
 
 The Service Map can be filtered based on the type of service (webserver, database, cache, etc.) or based on a fuzzy string match. This is particularly useful in a microservices environment with hundreds or thousands of nodes.
 
-Services are also scoped by `env`, and, optionally, a [first-class dimension][2].  Using the dropdowns to select a different scope draws an entirely different map consisting of the services within that scope. These services cannot call or be called by services in other environments.
+Services are also scoped by `env`, and, optionally, a [Second Primary Tag][2].  Using the dropdowns to select a different scope draws an entirely different map consisting of the services within that scope. These services cannot call or be called by services in other environments.
 
 ## Inspection
 
@@ -87,6 +87,6 @@ Monitors are not constrained to APM monitors. The service tag, described above, 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/#services
-[2]: /tracing/setup/first_class_dimensions
+[2]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [3]: https://app.datadoghq.com/apm/services
 [4]: /tracing/visualization/#trace

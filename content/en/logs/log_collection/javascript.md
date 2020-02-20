@@ -119,7 +119,7 @@ The following parameters can be used to configure the Datadog browser log librar
 
 | Parameter             | Type    | Required | Default | Description                                                                                              |
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
-| `clientToken`         | String  | Yes      | `-`     | A [Datadog Client Token][4].                                                                             |
+| `clientToken`         | String  | Yes      | `-`     | A [Datadog Client Token][2].                                                                             |
 | `datacenter`          | String  | Yes      | `us`    | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.               |
 | `forwardErrorsToLogs` | Boolean | no       | `true`  | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog. |
 | `sampleRate`          | Number  | no       | `100`   | Percentage of sessions to track. Only tracked sessions send logs. `100` for all, `0` for none of them.   |
@@ -408,7 +408,6 @@ The `datadog-logs` library supports all modern desktop and mobile browsers. IE10
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
+[1]: /account_management/api-app-keys/#api-keys
+[2]: /account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
-[4]: /account_management/api-app-keys/#client-tokens

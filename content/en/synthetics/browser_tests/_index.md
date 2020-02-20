@@ -55,14 +55,25 @@ You can use the [global variables defined in the `Settings`][5] in the URL, as w
 
 An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from any `<INSERT_NUMBER>` of `<NUMBER_OF_CHOSEN>` locations.
 
-### Notifications
+### Notify your team
 
-To configure your notifications:
+A notification is sent according to the set of alerting conditions. To configure your notifications:
 
-1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][6]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
+1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
+
+    | Conditional Variable       | Description                                                         |
+    |----------------------------|---------------------------------------------------------------------|
+    | `{{#is_alert}}`            | Show when monitor alerts                                            |
+    | `{{^is_alert}}`            | Show unless monitor alerts                                          |
+    | `{{#is_recovery}}`         | Show when monitor recovers from either ALERT   |
+    | `{{^is_recovery}}`         | Show unless monitor recovers from either ALERT |
+
+    Notification messages include the **message** defined in this section and information about the failing locations.
+
 2. Choose your [services][7] and/or team members to notify.
-3. Click **Save Details and Record Test** to save your browser test.
-4. Start to record your test.
+3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
+4. Click **Save Details and Record Test**.
+5. Record your test.
 
 ## Record test
 

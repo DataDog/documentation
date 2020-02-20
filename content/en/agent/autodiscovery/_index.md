@@ -37,9 +37,6 @@ To solve this issue, you can use Datadog’s Autodiscovery feature to automatica
     {{< nextlink href="/agent/autodiscovery/template_variables" >}}<u>Template Variables</u>: Template variables enable you to dynamically assign your container's values.{{< /nextlink >}}
     {{< nextlink href="/agent/autodiscovery/tag" >}}<u>Tag Extraction</u>: Datadog can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.{{< /nextlink >}}
     {{< nextlink href="/agent/autodiscovery/management" >}}<u>Discovery Management</u>: Datadog Autodiscovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.{{< /nextlink >}}
-    {{< nextlink href="/agent/autodiscovery/clusterchecks" >}}<u>Cluster Checks</u>: The Cluster Check feature provides the ability to Autodiscover and perform checks on load-balanced cluster services like Kubernetes.{{< /nextlink >}}
-    {{< nextlink href="/agent/autodiscovery/endpointschecks" >}}<u>Endpoints Checks</u>: Endpoints Checks extend Cluster Checks to monitor any endpoint behind cluster services.{{< /nextlink >}}
-    {{< nextlink href="/agent/autodiscovery/troubleshooting" >}}<u>Troubleshooting</u>: Solve common Autodiscovery issues.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

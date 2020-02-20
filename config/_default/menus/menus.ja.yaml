@@ -547,65 +547,83 @@ main:
   - name: ホスト
     url: monitors/monitor_types/host/
     parent: monitor_types
+    identifier: monitor_types_host
     weight: 101
   - name: メトリクス
     url: monitors/monitor_types/metric/
     parent: monitor_types
+    identifier: monitor_types_metrics
     weight: 102
   - name: 異常検知
     url: monitors/monitor_types/anomaly/
     parent: monitor_types
+    identifier: monitor_types_anomaly
     weight: 103
   - name: 外れ値
     url: monitors/monitor_types/outlier/
     parent: monitor_types
+    identifier: monitor_types_outlier
     weight: 104
   - name: 予測値
     url: monitors/monitor_types/forecasts/
     parent: monitor_types
+    identifier: monitor_types_forecasts
     weight: 105
   - name: インテグレーション
     url: monitors/monitor_types/integration/
     parent: monitor_types
+    identifier: monitor_types_integration
     weight: 106
   - name: ライブプロセス
     url: monitors/monitor_types/process/
     parent: monitor_types
+    identifier: monitor_types_process
     weight: 107
   - name: プロセスチェック
     url: monitors/monitor_types/process_check/
     parent: monitor_types
+    identifier: monitor_types_process_check
     weight: 108
   - name: ネットワーク
     url: monitors/monitor_types/network/
     parent: monitor_types
+    identifier: monitor_types_network
     weight: 109
   - name: カスタムチェック
     url: monitors/monitor_types/custom_check/
     parent: monitor_types
+    identifier: monitor_types_custom_check
     weight: 110
   - name: イベント
     url: monitors/monitor_types/event/
     parent: monitor_types
+    identifier: monitor_types_event
     weight: 111
   - name: ログ
     url: monitors/monitor_types/log/
     parent: monitor_types
+    identifier: monitor_types_log
     weight: 112
   - name: APM
     url: monitors/monitor_types/apm/
     parent: monitor_types
+    identifier: monitor_types_apm
     weight: 113
-    identifier: monitor_apm
+  - name: リアルユーザーモニタリング
+    url: monitors/monitor_types/real_user_monitoring/
+    parent: monitor_types
+    identifier: monitor_types_rum
+    weight: 114
   - name: Watchdog
     url: monitors/monitor_types/watchdog/
     parent: monitor_types
-    weight: 114
-    identifier: monitor_watchdog
+    identifier: monitor_types_watchdog
+    weight: 115
   - name: 複合条件
     url: monitors/monitor_types/composite/
     parent: monitor_types
-    weight: 115
+    identifier: monitor_types_composite
+    weight: 116
   - name: モニターの管理
     url: monitors/manage_monitor/
     weight: 2
@@ -630,14 +648,14 @@ main:
     url: monitors/service_level_objectives/
     weight: 7
     parent: アラート設定
-    identifier: slos
+    identifier: SLO
   - name: SLO モニタリング
     url: monitors/service_level_objectives/monitor/
     parent: slos
     weight: 7.1
   - name: イベントの SLO
     url: monitors/service_level_objectives/event/
-    parent: slos
+    parent: SLO
     weight: 7.2
   - name: ガイド
     url: monitors/guide/
@@ -661,48 +679,68 @@ main:
   - name: Java
     url: tracing/setup/java/
     parent: tracing_setup
+    identifier: tracing_setup_java
     weight: 201
   - name: Python
     url: tracing/setup/python/
     parent: tracing_setup
-    identifier: python
+    identifier: tracing_setup_python
     weight: 202
   - name: Ruby
     url: tracing/setup/ruby/
     parent: tracing_setup
+    identifier: tracing_setup_ruby
     weight: 203
   - name: Go
     url: tracing/setup/go/
     parent: tracing_setup
+    identifier: tracing_setup_go
     weight: 204
   - name: Node.js
     url: tracing/setup/nodejs/
     parent: tracing_setup
+    identifier: tracing_setup_nodejs
     weight: 205
-  - name: .NET
-    url: tracing/setup/dotnet/
+  - name: .NET フレームワーク
+    url: tracing/setup/dotnet-framework/
     parent: tracing_setup
+    identifier: tracing_setup_dotnet_framework
     weight: 206
+  - name: .NET コア
+    url: tracing/setup/dotnet-core/
+    parent: tracing_setup
+    identifier: tracing_setup_dotnet_core
+    weight: 207
   - name: PHP
     url: tracing/setup/php/
     parent: tracing_setup
-    weight: 207
+    identifier: tracing_setup_php
+    weight: 208
   - name: C++
     url: tracing/setup/cpp/
     parent: tracing_setup
-    weight: 208
+    identifier: tracing_setup_cpp
+    weight: 209
+  - name: Android
+    url: tracing/setup/android/
+    parent: tracing_setup
+    identifier: tracing_setup_android
+    weight: 210
   - name: Envoy
     url: tracing/setup/envoy/
     parent: tracing_setup
-    weight: 209
+    identifier: tracing_setup_envoy
+    weight: 211
   - name: NGINX
     url: tracing/setup/nginx/
     parent: tracing_setup
-    weight: 210
+    identifier: tracing_setup_nginx
+    weight: 212
   - name: Istio
     url: tracing/setup/istio/
+    identifier: tracing_setup_istio
     parent: tracing_setup
-    weight: 211
+    weight: 213
   - name: App Analytics
     url: tracing/app_analytics/
     parent: tracing
@@ -990,7 +1028,7 @@ main:
     parent: synthetics
     identifier: synthetics_troubleshooting
     weight: 7
-  - name: リアルユーザーモニタリング（RUM）
+  - name: リアルユーザーモニタリング
     url: real_user_monitoring/
     pre: nav_rum
     identifier: rum
@@ -1066,7 +1104,7 @@ main:
     identifier: npm_installation
     weight: 1
   - name: ネットワークページ
-    url: network_performance_monitoring/network_table
+    url: network_performance_monitoring/network_page
     parent: npm
     identifier: npm_page
     weight: 2
@@ -1101,6 +1139,10 @@ main:
     url: developers/dogstatsd/data_aggregation/
     parent: dev_tools_dogstatsd
     weight: 104
+  - name: DogStatsD Mapper
+    url: developers/dogstatsd/dogstatsd_mapper/
+    parent: dev_tools_dogstatsd
+    weight: 105
   - name: カスタムメトリクス
     url: developers/metrics/
     parent: dev_tools
@@ -1166,7 +1208,7 @@ main:
     parent: dev_tools_events
     identifier: dev_tools_events_api
     weight: 304
-  - name: サービスのチェック
+  - name: Service Checks
     url: developers/service_checks/
     parent: dev_tools
     identifier: dev_tools_service_check

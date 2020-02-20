@@ -280,26 +280,34 @@ main:
     parent: "agent_cluster"
     identifier: "cluster_agent_external_metrics"
     weight: 403
+  - name: "Cluster Checks"
+    url: "agent/cluster_agent/clusterchecks/"
+    parent: "agent_cluster"
+    weight: 404
+  - name: "Endpoints Checks"
+    url: "agent/cluster_agent/endpointschecks/"
+    parent: "agent_cluster"
+    weight: 405
   - name: "Commands & Options"
     url: "agent/cluster_agent/commands/"
     identifier: "cluster_agent_commands"
     parent: "agent_cluster"
-    weight: 404
+    weight: 406
   - name: "Cluster metadata provider"
     url: "agent/cluster_agent/metadata_provider/"
     identifier: "cluster_agent_metadata_provider"
     parent: "agent_cluster"
-    weight: 405
+    weight: 407
   - name: "Build"
     url: "agent/cluster_agent/build/"
     identifier: "cluster_agent_build"
     parent: "agent_cluster"
-    weight: 406
+    weight: 408
   - name: "Troubleshooting"
     url: "agent/cluster_agent/troubleshooting/"
     identifier: "cluster_agent_troubleshooting"
     parent: "agent_cluster"
-    weight: 407
+    weight: 409
 
   ## AGENT - Autodiscovery
 
@@ -336,14 +344,6 @@ main:
     url: "agent/autodiscovery/management/"
     parent: "agent_autodiscovery"
     weight: 506
-  - name: "Cluster Checks"
-    url: "agent/autodiscovery/clusterchecks/"
-    parent: "agent_autodiscovery"
-    weight: 507
-  - name: "Endpoints Checks"
-    url: "agent/autodiscovery/endpointschecks/"
-    parent: "agent_autodiscovery"
-    weight: 508
   - name: "Troubleshooting"
     url: "agent/autodiscovery/troubleshooting/"
     parent: "agent_autodiscovery"
@@ -794,12 +794,12 @@ main:
     parent: "alerting"
     identifier: "slos"
 
-  - name: "Monitor SLO"
+  - name: "Monitor-based SLOs"
     url: "monitors/service_level_objectives/monitor/"
     parent: "slos"
     weight: 7.1
 
-  - name: "Event SLO"
+  - name: "Event-based SLOs"
     url: "monitors/service_level_objectives/event/"
     parent: "slos"
     weight: 7.2
@@ -881,11 +881,11 @@ main:
     parent: "tracing_setup"
     identifier: "tracing_setup_cpp"
     weight: 209
-  - name: "Android"
-    url: "tracing/setup/android/"
-    parent: "tracing_setup"
-    identifier: "tracing_setup_android"
-    weight: 210
+# - name: "Android"
+#   url: "tracing/setup/android/"
+#   parent: "tracing_setup"
+#   identifier: "tracing_setup_android"
+#   weight: 210
   - name: "Envoy"
     url: "tracing/setup/envoy/"
     parent: "tracing_setup"
