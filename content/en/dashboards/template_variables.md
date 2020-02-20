@@ -28,7 +28,7 @@ A template variable is defined by:
 * **Name**: A unique name for the template variable. This name is used to filter content on your dashboard.
 * **Tag or Attribute**:
     * Tag: If you follow the recommended [tagging format][1] (`<KEY>:<VALUE>`), the *Tag* is the `<KEY>`.
-    * Attribute: Use a [facet or measure as the template variable](#logs-and-apm-queries).
+    * Attribute: Use a [facet or measure as the template variable](#logs-apm-and-rum-queries).
 * **Default Value**:
     The default value for your template variable tag or attribute.
 
