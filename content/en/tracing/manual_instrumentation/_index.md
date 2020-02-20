@@ -1,6 +1,7 @@
 ---
 title: Manual Instrumentation
 kind: documentation
+decription: "Manually instrument your application to send custom traces to Datadog."
 aliases:
   - /tracing/setup/php/manual-installation
   - /agent/apm/php/manual-installation

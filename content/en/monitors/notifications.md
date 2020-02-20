@@ -205,6 +205,14 @@ For example, if you want to notify your DB team if a triggering host has the `ro
 {{/is_match}}
 ```
 
+It is also possible to match multiple strings in a single expression. 
+
+```text 
+{{#is_match "env.name" "prod" "dev" "staging"}}
+  This will match if `prod`, `dev`, or `staging` appear in the "env" tag variable.
+{{/is_match}}
+```
+
 ##### {{is_exact_match}}
 
 The `{{is_exact_match}}` conditional looks for the exact string in the tag variable, rather than using substring matching. The variable uses the following format:

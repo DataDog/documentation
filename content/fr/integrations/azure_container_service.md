@@ -27,22 +27,27 @@ Azure Container Service vous permet de déployer rapidement un cluster Kubernete
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Container Service.
 
 ## Implémentation
+
 ### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "azure_container_service" >}}
 
 
 ### Événements
+
 L'intégration Azure Container Service n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Azure Container Service n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://docs.datadoghq.com/fr/integrations/azure/

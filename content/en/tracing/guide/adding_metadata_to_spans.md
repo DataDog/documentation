@@ -252,7 +252,7 @@ Add [tags][1] to all [spans][2] by configuring the tracer with the system proper
 
 ```bash
 java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
-     -Ddd.trace.global.tags='env:dev,<TAG_KEY>:<TAG_VALUE>' \
+     -Ddd.trace.global.tags=env:dev,<TAG_KEY>:<TAG_VALUE> \
      -jar <YOUR_APPLICATION_PATH>.jar
 ```
 

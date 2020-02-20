@@ -136,7 +136,7 @@ L'exemple d'intégration Datadog/Kafka ci-dessous fait appel à JMX pour recueil
 [8]: /fr/integrations/hive
 [9]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/metrics.yaml
 [10]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
-[11]: /fr/integrtions/jboss_wildfly
+[11]: /fr/integrations/jboss_wildfly
 [12]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
 [13]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
 [14]: /fr/integrations/kafka

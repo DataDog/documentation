@@ -26,22 +26,27 @@ Azure Customer Insights を使用すると、どのような規模のオーガ�
 Datadog Azure インテグレーションを使用して、Customer Insights からメトリクスを収集できます。
 
 ## セットアップ
+
 ### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
 
 ## 収集データ
+
 ### メトリクス
 {{< get-metrics-from-git "azure_customer_insights" >}}
 
 
 ### イベント
+
 Azure Customer Insights インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
+
 Azure Customer Insights インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
+
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/

@@ -3,7 +3,7 @@
         "agent_version": "6.3.0",
         "check": "vespa.metrics-health",
         "description": "Renvoie `CRITICAL` en cas d'absence de réponse de l'API des métriques de nœud Vespa. Renvoie `WARNING` si une réponse est renvoyée par l'API, mais qu'une erreur de traitement est survenue. Si ce n'est pas le cas, renvoie `OK`.",
-        "integration": "vespa",
+        "integration": "Vespa",
         "name": "Santé des métriques Vespa",
         "statuses": [
             "ok",
@@ -15,7 +15,7 @@
         "agent_version": "6.3.0",
         "check": "vespa.process-health",
         "description": "Pour chaque processus Vespa, renvoie `CRITICAL` si le processus semble être inactif ou `WARNING` si le statut du processus est inconnu. Si ce n'est pas le cas, renvoie `OK`.",
-        "integration": "vespa",
+        "integration": "Vespa",
         "name": "Santé des processus Vespa",
         "statuses": [
             "ok",

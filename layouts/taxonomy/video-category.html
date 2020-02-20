@@ -10,7 +10,7 @@
 <div>
   {{ $data := .Data}}
   {{ range (sort .Data.Pages ".File.BaseFileName") }}
-      <h2><a href="{{ .URL }}">{{ .Title }}</a></h2>
+      <h2 class="title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
       <p>{{ .Params.summary }}</p>
       {{ if isset .Params "wistiaid"}}{{ partial "video" .Params.wistiaid }}{{ end }}
       <br>

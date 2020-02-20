@@ -741,6 +741,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /logs/processing/pipelines
 [2]: /logs/processing/parsing/#advanced-settings
 [3]: /logs/processing/parsing

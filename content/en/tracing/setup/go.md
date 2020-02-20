@@ -117,7 +117,7 @@ import (
 )
 
 func sayHello(w http.ResponseWriter, r * http.Request) {
-    msg: = "Hello " + strings.TrimPrefix(r.URL.Path, "/")
+    msg := "Hello " + strings.TrimPrefix(r.URL.Path, "/")
     w.Write([] byte(msg))
 }
 
@@ -126,10 +126,10 @@ func main() {
     tracer.Start(tracer.WithServiceName("test-go"))
     defer tracer.Stop()
 
-    mux: = httptrace.NewServeMux() // init the http tracer
+    mux := httptrace.NewServeMux() // init the http tracer
     mux.HandleFunc("/", sayHello) // use the tracer to handle the urls
 
-    err: = http.ListenAndServe(":9090", mux) // set listen port
+    err := http.ListenAndServe(":9090", mux) // set listen port
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
     }
@@ -186,6 +186,28 @@ func main() {
 }
 
 ```
+
+## Configure APM Environment Name
+
+The [APM environment name][58] may be configured [in the agent][59] or using the [WithEnv][60] start option of the tracer.
+
+```go
+package main
+
+import (
+    "os"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    tracer.Start(tracer.WithEnv("<ENVIRONMENT>"))
+    defer tracer.Stop()
+
+    // ...
+}
+```
+
 
 ## Further Reading
 
@@ -248,3 +270,6 @@ func main() {
 [55]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [56]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [57]: https://github.com/openzipkin/b3-propagation
+[58]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[59]: /getting_started/tracing/#environment-name
+[60]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithEnv

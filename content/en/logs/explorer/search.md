@@ -50,7 +50,7 @@ Use the search bar's autocomplete feature to complete your query using existing 
 
 ### Escaping of special characters
 
-The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping with the `\` character.
+The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character.
 
 ### Attributes search
 

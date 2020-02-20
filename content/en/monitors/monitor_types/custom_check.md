@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Custom check monitors include any service check not reported by one of the [350+ integrations][1] included with the Agent. Custom service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4].
+Custom check monitors include any service check not reported by one of the [400+ integrations][1] included with the Agent. Custom service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4].
 
 ## Monitor creation
 

@@ -169,9 +169,19 @@ You can use the [global variables defined in the `Settings`][3] in the URL, Adva
 
 A notification is sent according to the set of alerting conditions. To configure notifications:
 
-1. Select users and/or [services][4] to send the notifications to. Note that you can use the [`@-notification` feature][5] in the **message** field.
-2. Enter a **message** for the API test. This field allows standard [Markdown formatting][6]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
-3. Click **Save** to save your API test.
+1. Select users and/or [services][4] to receive notifications. **Note**: [`@-notifications`][5] are available in the **message** field, similar to monitors.
+2. Enter a **message** for the API test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
+
+    | Conditional Variable       | Description                                                         |
+    |----------------------------|---------------------------------------------------------------------|
+    | `{{#is_alert}}`            | Show when monitor alerts                                            |
+    | `{{^is_alert}}`            | Show unless monitor alerts                                          |
+    | `{{#is_recovery}}`         | Show when monitor recovers from either ALERT   |
+    | `{{^is_recovery}}`         | Show unless monitor recovers from either ALERT |
+
+    Notification messages include the **message** defined in this section and information about which assertion failed and why.
+3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
+4. Click **Save**.
 
 Notifications example:
 
@@ -201,3 +211,4 @@ Response time is the sum of these network timings.
 [4]: /integrations/#cat-notification
 [5]: /monitors/notifications/#notification
 [6]: http://daringfireball.net/projects/markdown/syntax
+[7]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables

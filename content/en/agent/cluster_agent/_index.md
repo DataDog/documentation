@@ -43,6 +43,9 @@ Using the Datadog Cluster Agent allows you to:
     {{< nextlink href="/agent/cluster_agent/commands" >}}<u>Commands</u>:List of all commands and options available for the Cluster Agent.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/event_collection" >}}<u>Event Collection</u>: Use the Cluster Agent to collect all events from your Kubernetes Cluster.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/external_metrics" >}}<u>External Metrics</u>: Leverage the Cluster Agent Custom metrics server to auto-scale your applications thanks to all your Datadog Metrics.{{< /nextlink >}}
+    {{< nextlink href="/agent/autodiscovery/clusterchecks" >}}<u>Cluster Checks</u>: The Cluster Check feature provides the ability to Autodiscover and perform checks on load-balanced cluster services like Kubernetes.{{< /nextlink >}}
+    {{< nextlink href="/agent/autodiscovery/endpointschecks" >}}<u>Endpoints Checks</u>: Endpoints Checks extend Cluster Checks to monitor any endpoint behind cluster services.{{< /nextlink >}}
+    {{< nextlink href="/agent/autodiscovery/troubleshooting" >}}<u>Troubleshooting</u>: Solve common Autodiscovery issues.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Troubleshooting</u>: Find troubleshooting information for the Datadog Cluster Agent.{{< /nextlink >}}
 {{< /whatsnext >}}
 

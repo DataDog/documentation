@@ -1,3 +1,2 @@
-["200", {
-    "message" => "User test@datadoghq.com disabled"
-}]
+# This is not yet supported by the Datadog API Ruby Client
+# Consult the curl example

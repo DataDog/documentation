@@ -21,7 +21,7 @@ Les différents types de processeurs sont expliqués ci-dessous.
 
 ## Parser grok
 
-Créez des règles grok personnalisées pour parser l'intégralité du message ou un attribut spécifique de votre événement brut. Pour en savoir plus, consultez la [section sur le parsing][2].
+Créez des règles grok personnalisées pour parser l'intégralité du message ou [un attribut spécifique de votre événement brut][2]. Pour en savoir plus, consultez la [section sur le parsing][3].
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -132,7 +132,7 @@ En ce log :
 
 Chaque valeur de statut entrant est mappée comme suit :
 
-* Les entiers de 0 à 7 mappent vers les [normes de sévérité Syslog][3].
+* Les entiers de 0 à 7 mappent vers les [normes de sévérité Syslog][4].
 * Les chaînes de caractères commençant par **emerg** ou **f** (insensible à la casse) mappent vers **emerg (0)**.
 * Les chaînes de caractères commençant par **a** (insensible à la casse) mappent vers **alert (1)**.
 * Les chaînes de caractères commençant par **c** (insensible à la casse) mappent vers **critical (2)**.
@@ -267,7 +267,7 @@ En ce log :
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribut après remappage"  style="width:40%;">}}
 
-Les contraintes de nom du tag ou de l'attribut sont expliquées dans les [recommandations relatives aux tags][4]. Certaines contraintes supplémentaires sont appliquées, car les caractères `:` ou `,` ne sont pas autorisés dans le nom du tag ou de l'attribut cible.
+Les contraintes de nom du tag ou de l'attribut sont expliquées dans les [recommandations relatives aux tags][5]. Certaines contraintes supplémentaires sont appliquées, car les caractères `:` ou `,` ne sont pas autorisés dans le nom du tag ou de l'attribut cible.
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -402,10 +402,10 @@ Utilisez les catégories pour créer des groupes à des fins d'analyse (tels que
 
 **Remarques** :
 
-* La syntaxe de la requête est identique à celle de la barre de recherche du [Logs Explorer][5]. La requête peut être effectuée sur n'importe quel tag ou attribut de log, qu'il s'agisse d'une facette ou non. Votre requête peut également contenir des wildcards.
+* La syntaxe de la requête est identique à celle de la barre de recherche du [Log Explorer][6]. La requête peut être effectuée sur n'importe quel tag ou attribut de log, qu'il s'agisse d'une facette ou non. Votre requête peut également contenir des wildcards.
 * Une fois que l'une des requêtes du processeur a renvoyé un log, celle-ci s'arrête. Assurez-vous de spécifier les requêtes dans l'ordre adéquat si un log correspond à plusieurs requêtes.
 * Les catégories doivent avoir un nom unique.
-* Une fois le processeur de catégories défini, vous pouvez mapper les catégories au statut de log à l'aide du [remappeur de statuts de log][6].
+* Une fois le processeur de catégories défini, vous pouvez mapper les catégories au statut de log à l'aide du [remappeur de statuts de log][7].
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -464,7 +464,7 @@ Un attribut est considéré comme manquant s'il est introuvable dans les attribu
 * L'opérateur `-` doit être séparé par une espace dans la formule, car il peut également être présent dans les noms d'attributs.
 * Si l'attribut cible existe déjà, il est remplacé par le résultat de la formule.
 * Les résultats sont arrondis à la 9e décimale. Par exemple, si le résultat de la formule est `0.1234567891`, la valeur stockée pour l'attribut est alors `0.123456789`.
-* Si vous devez mettre à l'échelle une unité de mesure, consultez la section [Filtre].
+* Si vous devez mettre à l'échelle une unité de mesure, consultez la section [Filtre][8].
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -562,7 +562,7 @@ Des blocs peuvent être utilisés dans des tableaux de valeurs ou un attribut sp
 ```
 
 À l'inverse, `%{array_users}` ne renvoie aucun résultat, car il s'agit d'une liste d'objets.
-Toutefois, `%{arrays_user.first_name}` renvoie la liste des `first_name` contenus dans le tableau :
+Toutefois, `%{array_users.first_name}` renvoie la liste des `first_name` contenus dans le tableau :
 
 ```text
 Marie,Arnaud
@@ -631,13 +631,13 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 }
 ```
 
-| Paramètre    | Type             | Obligatoire | Description                                                                                                              |
-|--------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| `type`       | Chaîne           | oui      | Le type du processeur.                                                                                                   |
-| `name`       | Chaîne           | non       | Le nom du processeur.                                                                                                   |
-| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`                                                                    |
+| Paramètre    | Type             | Obligatoire | Description                                                                                                               |
+|--------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------|
+| `type`       | Chaîne           | oui      | Le type du processeur.                                                                                                    |
+| `name`       | Chaîne           | non       | Le nom du processeur.                                                                                                    |
+| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.                                                                     |
 | `sources`    | Tableau de chaînes | non       | Un tableau des attributs sources. Valeur par défaut : `network.client.ip`.                                                                  |
-| `target`     | Chaîne           | oui      | Le nom de l'attribut parent qui contient tous les détails extraits des `sources`. Valeur par défaut : `network.client.geoip`. |
+| `target`     | Chaîne           | oui      | Le nom de l'attribut parent qui contient tous les détails extraits des `sources`. Valeur par défaut : `network.client.geoip`.  |
 
 [1]: /fr/api/?lang=bash#logs-pipelines
 {{% /tab %}}
@@ -700,7 +700,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 Il existe deux façons d'améliorer la corrélation entre les traces et les logs d'application :
 
-1. Suivez la documentation sur l'[ajout d'un ID de trace dans les logs d'application][8] et sur l'utilisation des intégrations de log par défaut pour prendre en charge le reste de la configuration.
+1. Suivez la documentation sur l'[ajout d'un ID de trace dans les logs d'application][9] et sur l'utilisation des intégrations de log par défaut pour prendre en charge le reste de la configuration.
 
 2. Utilisez le processeur de remappage de traces pour définir un attribut de log comme son ID de trace associé.
 
@@ -731,7 +731,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `type`       | Chaîne           | oui      | Le type du processeur.                                 |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                 |
 | `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`. |
-| `sources`    | Tableau de chaînes | non       | Un tableau des attributs sources. Valeur par défaut : `http.useragent`. |
+| `sources`    | Tableau de chaînes | non       | Tableau des attributs sources. Valeur par défaut : `dd.trace_id`.    |
 
 [1]: /fr/api/?lang=bash#logs-pipelines
 {{% /tab %}}
@@ -740,11 +740,13 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /fr/logs/processing/pipelines
-[2]: /fr/logs/processing/parsing
-[3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[4]: /fr/logs/guide/log-parsing-best-practice
-[5]: /fr/logs/explorer/search/#search-syntax
-[6]: /fr/logs/processing/processors/?tab=ui#log-status-remapper
-[7]: /fr/logs/processing/parsing/?tab=filter#matcher-and-filter
-[8]: /fr/tracing/connect_logs_and_traces
+[2]: /fr/logs/processing/parsing/#advanced-settings
+[3]: /fr/logs/processing/parsing
+[4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[5]: /fr/logs/guide/log-parsing-best-practice
+[6]: /fr/logs/explorer/search/#search-syntax
+[7]: /fr/logs/processing/processors/?tab=ui#log-status-remapper
+[8]: /fr/logs/processing/parsing/?tab=filter#matcher-and-filter
+[9]: /fr/tracing/connect_logs_and_traces

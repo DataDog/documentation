@@ -5,7 +5,7 @@ aliases:
   - /integrations/faq/what-standard-integrations-emit-custom-metrics/
 ---
 
-If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
+If a metric is not submitted from one of the [400+ Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
 
 **A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**.
 

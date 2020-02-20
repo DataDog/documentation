@@ -1,8 +1,7 @@
 ---
 title: ヘルプ
 kind: documentation
-disable_toc: true
-customclass: お問合せ
+customclass: help
 ---
 
 {{< partial name="support/support.html" >}}

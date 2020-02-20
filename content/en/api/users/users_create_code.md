@@ -7,7 +7,7 @@ external_redirect: /api/#create-user
 
 **SIGNATURE**:
 
-`POST /v1/user`
+`POST /v2/users`
 
 **EXAMPLE REQUEST**:
 

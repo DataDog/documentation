@@ -3,6 +3,7 @@ title: Runtime Metrics
 kind: documentation
 aliases:
   - /tracing/advanced/runtime_metrics/
+description: "Gain additional insights into an application's performance with the runtime metrics associated to your traces."
 further_reading:
 - link: "tracing/connect_logs_and_traces"
   tags: "Enrich Tracing"

@@ -26,22 +26,27 @@ Azure Data Lake Analytics は、ビッグデータを簡略化するオンデマ
 Datadog Azure インテグレーションを使用して、Data Lake Analytics からメトリクスを収集できます。
 
 ## セットアップ
+
 ### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
 
 ## 収集データ
+
 ### メトリクス
 {{< get-metrics-from-git "azure_data_lake_analytics" >}}
 
 
 ### イベント
+
 Azure Data Lake Analytics インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
+
 Azure Data Lake Analytics インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
+
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/

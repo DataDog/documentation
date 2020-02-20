@@ -463,4 +463,4 @@ HTTP/2 204
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/rbac/role_api/?tab=datadogussite#get-all-roles
+[1]: /api/#get-all-roles
