@@ -107,7 +107,7 @@ Datadog Agent v6 can collect logs and forward them to Datadog from files, the ne
 Below are examples of custom log collection setup:
 
 {{< tabs >}}
-{{% tab "Tail existing files" %}}
+{{% tab "Tail files" %}}
 
 To gather logs from your `<APP_NAME>` application stored in `<PATH_LOG_FILE>/<LOG_FILE_NAME>.log` create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
 
@@ -124,7 +124,7 @@ logs:
 [1]: /agent/guide/agent-configuration-files
 {{% /tab %}}
 
-{{% tab "Stream logs from TCP/UDP" %}}
+{{% tab "TCP/UDP" %}}
 
 To gather logs from your `<APP_NAME>` application that forwards its logs with TCP over port **10518**, create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
 
@@ -142,7 +142,7 @@ If you are using Serilog, `Serilog.Sinks.Network` is an option for connecting wi
 
 [1]: /agent/guide/agent-configuration-files
 {{% /tab %}}
-{{% tab "Stream logs from journald" %}}
+{{% tab "journald" %}}
 
 To gather logs from journald, create a `journald.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
 
