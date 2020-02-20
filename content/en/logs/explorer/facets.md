@@ -25,25 +25,28 @@ further_reading:
 Facets are the special fields (tags and attributes) of indexed logs you use for [search][1], [patterns][3] and [analytics][2] in the Log Explorer, in [log monitors][4], or log widgets in [dashboards][5] and [notebooks][6].
 
 
-*Note: Facets support fast search and analytics capabilities around all **indexed** logs. You don't need facets to support [log processing][7], or [livetail search][8], [archive][9] forwarding and rehydration, or [metric generation][10] from logs. Neither you need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these context, autocomplete capabilities rely on existing facets but any input matching incoming logs would work.*
+{{< img src="logs/explorer/facet/facets_in_explorer.gif" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
-Facets are meant for either qualitative and quantitative data. For quantitative data, Datadog specifically uses the word "Measure" instead of "Facet". For qualitative data, facets can be seen as "Dimensions". 
+*Note: You don't need facets to support [log processing][7], or [livetail search][8], [archive][9] forwarding and rehydration, or [metric generation][10] from logs. Neither you need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these context, autocomplete capabilities rely on existing facets but any input matching incoming logs would work.*
+
+Facets are meant for either qualitative or quantitative data.
 
 
-### Dimensions (qualitative facets)
+### Qualitative facets (Dimensions)
 
-Use dimensions when you need:
+Use qualitative facets when you need:
 
 * to **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][14] to scope troubleshooting down to development, staging or production environments.
 * to **get relative insights** per values. For instance, create a facet on a `http.network.client.geoip.country.iso_code` to see what are the top countries most impacted per number of 5XX errors on your [NGINX][15] web acess logs enriched with our Datadog [GeoIP Processor][21].
 * to **count unique values**. For instance create a facet on a `user.email` from your [Kong][16] logs, to know how many users connect every day to your website.
 
+
 **Types**
 
-Dimensions can be of string or numerical (integer) type. While assigning string type to a dimension work in any case, using integer type on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search syntax][17] for reference.
+Qualitative facets can be of string or numerical (integer) type. While assigning string type to a dimension work in any case, using integer type on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search syntax][17] for reference.
 
 
-### Measures (quantitative facets)
+### Quantitative facets (Measures)
 
 Use measures when you need:
 
@@ -75,7 +78,7 @@ The search bar provides the most comprehensive set of interactions to slice and 
 
 Open a facet to see a summary of its content for the scope of the current query. 
 
-**Dimensions** come with a top list of unique values, and a count of logs matching each of them. Scope the search query clicking on either value. Clicking on a value toggles the search on this unique value and all values. Clicking on checkboxes adds or removes this specific value from the list of all values.
+**Facets (qualitative)** come with a top list of unique values, and a count of logs matching each of them. Scope the search query clicking on either value. Clicking on a value toggles the search on this unique value and all values. Clicking on checkboxes adds or removes this specific value from the list of all values.
 
 {{< img src="logs/explorer/facet/dimension_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
