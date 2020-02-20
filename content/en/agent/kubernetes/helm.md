@@ -68,14 +68,18 @@ To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datad
 
 {{< tabs >}}
 {{% tab "Helm v3+" %}}
+
 ```bash
 helm install <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY>,datadog.clusterAgent.admissionController.enabled=true,datadog.apm.enabled=true,datadog.statsd.enabled=true stable/datadog```
+
 {{% /tab %}}
 
 {{% tab "Helm v1/v2" %}}
+
 ```bash
 helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY>,datadog.clusterAgent.admissionController.enabled=true,datadog.apm.enabled=true,datadog.statsd.enabled=true stable/datadog
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
