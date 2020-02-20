@@ -1,18 +1,21 @@
 ---
 title: PHP Manual Instrumentation
 kind: documentation
-decription: "Manually instrument your PHP application to send custom traces to Datadog."
+decription: 'Manually instrument your PHP application to send custom traces to Datadog.'
 further_reading:
-- link: "tracing/guide/instrument_custom_method"
-  text: "Instrument a custom method to get deep visibility into your business logic"
-- link: "tracing/connect_logs_and_traces"
-  text: "Connect your Logs and Traces together"
-- link: "tracing/opentracing"
-  text: "Implement Opentracing across your applications"
-- link: "tracing/visualization/"
-  text: "Explore your services, resources, and traces"
+    - link: 'tracing/guide/instrument_custom_method'
+      tag: 'Guide'
+      text: 'Instrument a custom method to get deep visibility into your business logic'
+    - link: 'tracing/connect_logs_and_traces'
+      tag: 'Documentation'
+      text: 'Connect your Logs and Traces together'
+    - link: 'tracing/opentracing'
+      tag: 'Documentation'
+      text: 'Implement Opentracing across your applications'
+    - link: 'tracing/visualization/'
+      tag: 'Documentation'
+      text: 'Explore your services, resources, and traces'
 ---
-
 
 Even if Datadog does not officially support your web framework, you may not need to perform any manual instrumentation. See [automatic instrumentation][1] for more details.
 
@@ -26,10 +29,10 @@ composer require datadog/dd-trace
 
 The `dd_trace()` function hooks into existing functions and methods to:
 
-* Open a [span][3] before the code executes
-* Set additional [tags][4] or errors on the span
-* Close the span when it is done
-* Modify the arguments or the return value
+- Open a [span][3] before the code executes
+- Set additional [tags][4] or errors on the span
+- Close the span when it is done
+- Modify the arguments or the return value
 
 For example, the following snippet traces the `CustomDriver::doWork()` method, adds custom tags, reports any exceptions as errors on the span, and then re-throws the exceptions.
 

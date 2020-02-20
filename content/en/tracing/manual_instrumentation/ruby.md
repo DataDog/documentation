@@ -1,16 +1,20 @@
 ---
 title: Ruby Manual Instrumentation
 kind: documentation
-decription: "Manually instrument your Ruby application to send custom traces to Datadog."
+decription: 'Manually instrument your Ruby application to send custom traces to Datadog.'
 further_reading:
-- link: "tracing/guide/instrument_custom_method"
-  text: "Instrument a custom method to get deep visibility into your business logic"
-- link: "tracing/connect_logs_and_traces"
-  text: "Connect your Logs and Traces together"
-- link: "tracing/opentracing"
-  text: "Implement Opentracing across your applications"
-- link: "tracing/visualization/"
-  text: "Explore your services, resources, and traces"
+    - link: 'tracing/guide/instrument_custom_method'
+      tag: 'Guide'
+      text: 'Instrument a custom method to get deep visibility into your business logic'
+    - link: 'tracing/connect_logs_and_traces'
+      tag: 'Documentation'
+      text: 'Connect your Logs and Traces together'
+    - link: 'tracing/opentracing'
+      tag: 'Documentation'
+      text: 'Implement Opentracing across your applications'
+    - link: 'tracing/visualization/'
+      tag: 'Documentation'
+      text: 'Explore your services, resources, and traces'
 ---
 
 If you aren't using supported library instrumentation (see [library compatibility][1]), you may want to to manually instrument your code. Adding tracing to your code is easy using the `Datadog.tracer.trace` method, which you can wrap around any Ruby code:

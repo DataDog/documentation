@@ -1,16 +1,20 @@
 ---
 title: C++ Manual Instrumentation
 kind: documentation
-decription: "Manually instrument your C++ application to send custom traces to Datadog."
+decription: 'Manually instrument your C++ application to send custom traces to Datadog.'
 further_reading:
-- link: "tracing/guide/instrument_custom_method"
-  text: "Instrument a custom method to get deep visibility into your business logic"
-- link: "tracing/connect_logs_and_traces"
-  text: "Connect your Logs and Traces together"
-- link: "tracing/opentracing"
-  text: "Implement Opentracing across your applications"
-- link: "tracing/visualization/"
-  text: "Explore your services, resources, and traces"
+    - link: 'tracing/guide/instrument_custom_method'
+      tag: 'Guide'
+      text: 'Instrument a custom method to get deep visibility into your business logic'
+    - link: 'tracing/connect_logs_and_traces'
+      tag: 'Documentation'
+      text: 'Connect your Logs and Traces together'
+    - link: 'tracing/opentracing'
+      tag: 'Documentation'
+      text: 'Implement Opentracing across your applications'
+    - link: 'tracing/visualization/'
+      tag: 'Documentation'
+      text: 'Explore your services, resources, and traces'
 ---
 
 To manually instrument your code, install the tracer as in the setup examples, and then use the tracer object to create [spans][1].
