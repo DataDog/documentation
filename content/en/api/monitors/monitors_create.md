@@ -114,7 +114,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
 
-    *   **`no_data_timeframe`** The number of minutes before a monitor will notify when data stops reporting.  We recommend at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, we fall back to the evaluation timeframe for metric alerts, and 24 hours for service checks.**
+    *   **`no_data_timeframe`** The number of minutes before a monitor notifies after data stops reporting. Datadog recommends at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, the evaluation timeframe is used for metric alerts, and 24 hours is used for service checks.**
 
     *   **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **None**.
 
