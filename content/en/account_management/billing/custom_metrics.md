@@ -167,7 +167,7 @@ The following standard integrations can potentially emit custom metrics.
 | Type of integrations                             | Integrations                                                                                                                                                  |
 |--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Limited to 350 custom metrics by default.        | [ActiveMQ XML][9] / [Go-Expvar][10]                                                                                                                           |
-| No default limit upon custom metrics collection. | [Agent Metrics][11] /[Directory][12] /[Linux Proc Extras][13] /[Nagios][14] /[PDH Check][15] /[Prometheus][16] /[SNMP][17] /[Windows Services][18] /[WMI][19] |
+| No default limit upon custom metrics collection. | [Directory][12] /[Linux Proc Extras][13] /[Nagios][14] /[PDH Check][15] /[Prometheus][16] /[SNMP][17] /[Windows Services][18] /[WMI][19] |
 | Can be configured to collect custom metrics.     | [MySQL][20] /[Oracle][21] /[Postgres][22] /[SQL Server][23]                                                                                                   |
 
 ## Troubleshooting
@@ -186,7 +186,6 @@ For billing questions, contact your [Customer Success][25] Manager.
 [8]: /account_management/team
 [9]: /integrations/activemq/#activemq-xml-integration
 [10]: /integrations/go_expvar
-[11]: /integrations/agent_metrics
 [12]: /integrations/directory
 [13]: /integrations/linux_proc_extras
 [14]: /integrations/nagios
