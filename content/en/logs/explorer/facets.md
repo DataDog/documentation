@@ -25,7 +25,7 @@ further_reading:
 Facets are the special fields (tags and attributes) of indexed logs you use for [search][1], [patterns][3] and [analytics][2] in the Log Explorer, in [log monitors][4], or log widgets in [dashboards][5] and [notebooks][6].
 
 
-{{< img src="logs/explorer/facet/facets_in_explorer.gif" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/facets_in_explorer.gif" style="width:100%;" alt="Create Facet" style="width:30%;">}}
 
 *Note: You don't need facets to support [log processing][7], or [livetail search][8], [archive][9] forwarding and rehydration, or [metric generation][10] from logs. Neither you need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these context, autocomplete capabilities rely on existing facets but any input matching incoming logs would work.*
 
@@ -107,6 +107,10 @@ Hidden facets are still visible in the facet search (see [Filter Facet](#filter-
 {{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
 
+Hidden facets are still visible in explorer autocomplete (search bar, analytics). However, they are given a lesser priority among the suggestions.
+
+
+
 **Hidden facets and teammates**
 
 Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][23] (hidden facets is part of the context saved in a saved view).
@@ -145,7 +149,7 @@ In case multiple facets match your filter, Datadog helps you figure out which fa
 
 Some facets may have been aliased (see #alias-facets hereafter). Such aliased facets are still valid for slice and dicing, but are considered deprecated by your organisation. 
 
-{{< img src="logs/explorer/facet/aliased_facets.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/aliased_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
 
 
 Indeed, when troubleshooting, it is more likely for you to find content from other teams (alongside content from your team) in the "standard" facet rather than the aliased facet. Which makes correlation on content from diverse origin more straightforward. 
@@ -201,8 +205,6 @@ Autocomplete based on the content in logs of the current views helps you definin
 
 
 ### Alias Facets
-
-*Note: aliasing facet action is restricted to admin users*
 
 Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting - see [Naming Convention][26] for reference.
 
