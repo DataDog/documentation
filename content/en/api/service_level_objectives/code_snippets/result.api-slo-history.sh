@@ -10,6 +10,8 @@
         "timeframe": "90d"
       }
     },
+    "type": "monitor",
+    "type_id": 0,
     "overall": {
       "sli_value": 99.04629516601562,
       "span_precision": 2.0,
@@ -133,6 +135,7 @@
     "groups": [
       {
         "sli_value": 99.68518829345703,
+        "span_precision": 2.0,
         "preview": false,
         "group": "foo:pig",
         "history": [
@@ -160,6 +163,7 @@
       },
       {
         "sli_value": 99.69444274902344,
+        "span_precision": 2.0,
         "preview": false,
         "group": "foo:sheep",
         "history": [
@@ -187,6 +191,7 @@
       },
       {
         "sli_value": 99.7615737915039,
+        "span_precision": 2.0,
         "preview": true,
         "group": "foo:cow",
         "history": [
@@ -238,6 +243,7 @@
       },
       {
         "sli_value": 99.84027862548828,
+        "span_precision": 2.0,
         "preview": true,
         "group": "foo:donkey",
         "history": [
@@ -281,6 +287,7 @@
       },
       {
         "sli_value": 99.84490966796875,
+        "span_precision": 2.0,
         "preview": false,
         "group": "foo:cat",
         "history": [
@@ -300,6 +307,7 @@
       },
       {
         "sli_value": 99.84954071044922,
+        "span_precision": 2.0,
         "preview": true,
         "group": "foo:dog",
         "history": [
@@ -327,6 +335,7 @@
       },
       {
         "sli_value": 99.90509033203125,
+        "span_precision": 2.0,
         "preview": true,
         "group": "foo:horse",
         "history": [
@@ -362,6 +371,7 @@
       },
       {
         "sli_value": 100.0,
+        "span_precision": 2.0,
         "preview": false,
         "group": "foo:duck",
         "history": [
@@ -373,6 +383,7 @@
       },
       {
         "sli_value": 100.0,
+        "span_precision": 2.0,
         "preview": false,
         "group": "foo:chicken",
         "history": [
@@ -392,6 +403,8 @@
   "data": {
     "errors": null,
     "to_ts": 1571766900,
+    "type": "metric",
+    "type_id": 1,
     "series": {
       "res_type": "time_series",
       "interval": 3600,
@@ -410,10 +423,6 @@
         "values": [
           1738124,
           1960864
-        ],
-        "times": [
-          1571256000000,
-          1571259600000
         ]
       },
       "numerator": {
@@ -431,11 +440,11 @@
           1738124,
           1960864
         ],
-        "times": [
-          1571256000000,
-          1571259600000
-        ]
       },
+      "times": [
+        1571256000000,
+        1571259600000
+      ],
       "from_date": 1571162100000,
       "group_by": [],
       "to_date": 1571766900000,
