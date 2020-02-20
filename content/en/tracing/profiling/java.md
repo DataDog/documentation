@@ -2,9 +2,9 @@
 title: Profiling Java Applications
 kind: documentation
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-datadog-profiling/"
-  tags: "Blog"
-  text: "Introducing always-on production profiling in Datadog."
+    - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
+      tags: 'Blog'
+      text: 'Introducing always-on production profiling in Datadog.'
 ---
 
 The Datadog Profiling library supports the Java JRE 11 and higher of both Oracle JDK and OpenJDK, but early-access versions of Java aren't supported.
@@ -48,16 +48,16 @@ To begin profiling applications written in any JVM based runtime:
 
 Once enabled, the following profile types are collected:
 
-|  Profile type             |  Definition                                                                                                                                                                                                                                                                                         |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CPU in Java Code          | Shows the time each method spent running on the CPU. It includes JVM bytecode, but not native code called from within the JVM.                                                                                                                                                                      |
-| Allocation                | Shows the amount of heap memory allocated by each method, including allocations which were subsequently freed.                                                                                                                                                                                      |
-|  Wall Time in Native Code |  Shows the elapsed time spent in native code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. This profile does not include time spend running JVM bytecode which is typically most of your application code.  |
-|  Class load               | Shows the number of classes loaded by each method.                                                                                                                                                                                                                                                  |
-|  Error                    | Shows the number of Errors thrown by each method.                                                                                                                                                                                                                                                   |
-|  File I/O                 | Shows the time each method spent reading from, and writing to, files.                                                                                                                                                                                                                               |   |
-| Lock                      | Shows the time each method spent waiting for a lock.                                                                                                                                                                                                                                                |
-|  Socket I/O               |  Shows the time each method spent handling socket I/O.                                                                                                                                                                                                                                              |
+|  Profile type            |  Definition                                                                                                                                                                                                                                                                                        |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU in Java Code         | Shows the time each method spent running on the CPU. It includes JVM bytecode, but not native code called from within the JVM.                                                                                                                                                                     |
+| Allocation               | Shows the amount of heap memory allocated by each method, including allocations which were subsequently freed.                                                                                                                                                                                     |
+| Wall Time in Native Code | Shows the elapsed time spent in native code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. This profile does not include time spend running JVM bytecode which is typically most of your application code.  |
+| Class load               | Shows the number of classes loaded by each method.                                                                                                                                                                                                                                                 |
+| Error                    | Shows the number of Errors thrown by each method.                                                                                                                                                                                                                                                  |
+| File I/O                 | Shows the time each method spent reading from, and writing to, files.                                                                                                                                                                                                                              |
+| Lock                     | Shows the time each method spent waiting for a lock.                                                                                                                                                                                                                                               |
+| Socket I/O               | Shows the time each method spent handling socket I/O.                                                                                                                                                                                                                                              |
 
 ## Further Reading
 
