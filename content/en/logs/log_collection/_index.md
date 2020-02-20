@@ -166,7 +166,7 @@ Endpoints that can be used to send logs to Datadog:
 | Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
 |-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `agent-intake.logs.datadoghq.com`       | `10516` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
-| `agent-http-intake.logs.datadoghq.com`  | `443`   | Used by the Agent to send logs in protobuf format over HTTPS. See the [How to send logs over HTTP documentation][1].                                                        |
+| `agent-http-intake.logs.datadoghq.com`  | `443`   | Used by the Agent to send logs in JSON format over HTTPS. See the [How to send logs over HTTP documentation][1].                                                        |
 | `http-intake.logs.datadoghq.com`        | `443`   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][1].                                       |
 | `intake.logs.datadoghq.com`             | `10516` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
 | `lambda-intake.logs.datadoghq.com`      | `10516` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
@@ -184,7 +184,7 @@ Endpoints that can be used to send logs to Datadog:
 | Endpoints for SSL encrypted connections | Port  | Description                                                                                                                                                                 |
 |-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `agent-intake.logs.datadoghq.eu`        | `443` | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
-| `agent-http-intake.logs.datadoghq.eu`   | `443` | Used by the Agent to send logs in protobuf format over HTTPS. See the [How to send logs over HTTP documentation][1].                                                        |
+| `agent-http-intake.logs.datadoghq.eu`   | `443` | Used by the Agent to send logs in JSON format over HTTPS. See the [How to send logs over HTTP documentation][1].                                                        |
 | `http-intake.logs.datadoghq.eu`         | `443` | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [How to send logs over HTTP documentation][1].                                       |
 | `tcp-intake.logs.datadoghq.eu`          | `443` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
 | `lambda-intake.logs.datadoghq.eu`       | `443` | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
@@ -198,8 +198,6 @@ Endpoints that can be used to send logs to Datadog:
 [1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 {{% /tab %}}
 {{< /tabs >}}
-
-To send logs over HTTPs, refer to the [Datadog Log HTTP API documentation][23].
 
 ## Reserved attributes
 
