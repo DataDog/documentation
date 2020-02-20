@@ -23,19 +23,19 @@ It is recommended that containers are monitored with a single containerized Agen
 
 Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. 
 
-Pro and Enterprise plans include 40 custom metrics per billed function. Billing for serverless APM depends on the total number of Analyzed Spans submitted to the Datadog APM service at the end of the month. There are no billable APM Hosts when using serverless. 
+Pro and Enterprise plans include 40 custom metrics per billed function. Billing for serverless APM depends on the total number of [Analyzed Spans][4] submitted to the Datadog APM service at the end of the month. There are no billable [APM Hosts][4] when using serverless. 
 
-For more information, see the [Serverless billing page][4] and the [Datadog Pricing page][5].
+For more information, see the [Serverless billing page][5] and the [Datadog Pricing page][6].
 
 ## Invoicing
 
-If you pay by credit card, receipts are available to [Administrators][6] for previous months under [Billing History][7].
+If you pay by credit card, receipts are available to [Administrators][7] for previous months under [Billing History][8].
 
-If you pay by check or wire, invoices are emailed to the billing email addresses when due. If you need an additional copy, email [Datadog billing][8].
+If you pay by check or wire, invoices are emailed to the billing email addresses when due. If you need an additional copy, email [Datadog billing][9].
 
 ### Billing emails
 
-You can set specific email addresses to receive invoices on the [Plan][9] page under **Manage Billing Emails**:
+You can set specific email addresses to receive invoices on the [Plan][10] page under **Manage Billing Emails**:
 
 {{< img src="account_management/billing/billing01.png" alt="Manage Billing Emails" >}}
 
@@ -64,9 +64,10 @@ You can set specific email addresses to receive invoices on the [Plan][9] page u
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /infrastructure
 [3]: /agent
-[4]: https://docs.datadoghq.com/account_management/billing/serverless
-[5]: https://www.datadoghq.com/pricing/#included_serverless_functions-d
-[6]: /account_management/users/default_roles
-[7]: https://app.datadoghq.com/account/billing_history
-[8]: mailto:billing@datadoghq.com
-[9]: https://app.datadoghq.com/account/billing
+[4]: https://docs.datadoghq.com/account_management/billing/pricing/#apm
+[5]: https://docs.datadoghq.com/account_management/billing/serverless
+[6]: https://www.datadoghq.com/pricing/#included_serverless_functions-d
+[7]: /account_management/users/default_roles
+[8]: https://app.datadoghq.com/account/billing_history
+[9]: mailto:billing@datadoghq.com
+[10]: https://app.datadoghq.com/account/billing
