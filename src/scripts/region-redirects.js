@@ -82,11 +82,22 @@ function redirectToRegion(region = '') {
         showRegionSnippet(newSiteRegion);
 
         Cookies.set('site', newSiteRegion, { path: '/' });
-    } else if (window.document.referrer.includes('datadoghq.eu')) {
+    } else if ( 
+        window.document.referrer.includes('datadoghq.eu') &&
+        window.document.referrer.indexOf(
+            `${window.location.protocol}//${window.location.host}` // check referrer is not from own domain
+        ) === -1
+    ) {
         newSiteRegion = 'eu';
         Cookies.set('site', newSiteRegion, { path: '/' });
         showRegionSnippet(newSiteRegion);
-    } else if (window.document.referrer.includes('datadoghq.com')) {
+    } else if (
+        window.document.referrer.includes('datadoghq.com') &&
+        window.document.referrer.indexOf(
+            `${window.location.protocol}//${window.location.host}` // check referrer is not from own domain
+        ) === -1
+    ) {
+        // not current domain
         newSiteRegion = 'us';
         Cookies.set('site', newSiteRegion, { path: '/' });
         showRegionSnippet(newSiteRegion);
