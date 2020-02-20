@@ -1,11 +1,11 @@
 ---
 title: Estimated Usage Metrics
-kind: faq
+kind: documentation
 ---
 
 ## Overview
 
-Usage metrics are estimates of your current Datadog usage in near real-time. They enable you to:
+Datadog calculates your current estimated usage in near real-time. Estimate usage metrics enable you to:
 
 * Graph your estimated usage
 * Create monitors around your estimated usage based on thresholds of your choosing
@@ -14,7 +14,7 @@ Usage metrics are estimates of your current Datadog usage in near real-time. The
 
 **Note**: These usage metrics are estimates that won't always match up to billable usage given their real-time nature. There is a 10-20% difference between estimated usage and billable usage on average.
 
-{{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" responsive="true">}}
+{{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" >}}
 
 ### Types of usage
 
@@ -30,20 +30,19 @@ Estimated usage metrics are generally available for the following usage types:
 
 Usage metrics for Log Management must be manually enabled on the [Generate Metrics][1] page.
 
-{{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" responsive="true">}}
-
+{{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
 ### Multi-Org usage
 
 For accounts with multiple organizations, you can roll up estimated usage from child organizations using the `from` field to monitor usage across your entire account.
 
-{{< img src="account_management/billing/usage-metrics-03.png" alt="Multi-Org Usage" responsive="true">}}
+{{< img src="account_management/billing/usage-metrics-03.png" alt="Multi-Org Usage" >}}
 
 ## Troubleshooting
-For technical questions, contact [Datadog support][2].
 
-For billing questions, contact your [Customer Success][3] Manager.
+For technical questions, contact [Datadog support][1].
 
-[1]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[2]: /help
-[3]: mailto:success@datadoghq.com
+For billing questions, contact your [Customer Success][2] Manager.
+
+[1]: /help
+[2]: mailto:success@datadoghq.com
