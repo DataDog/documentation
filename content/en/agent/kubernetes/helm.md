@@ -101,7 +101,7 @@ To check the environment variable is set properly, run:
 ```bash
 kubectl exec <YOUR_APP_POD_NAME> env
 ```
-`DD_AGENT_HOST` should be present and point to 
+`DD_AGENT_HOST` should be present and point to its parent node ip address.
 
 **Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][6].
 
