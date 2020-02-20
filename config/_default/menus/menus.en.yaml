@@ -935,7 +935,48 @@ main:
   - name: "Manual Instrumentation"
     url: "tracing/manual_instrumentation/"
     parent: "tracing"
+    identifier: "tracing_manual_instrumentation"
     weight: 6
+  - name: "Java"
+    url: "tracing/manual_instrumentation/java"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_java"
+    weight: 601
+  - name: "Python"
+    url: "tracing/manual_instrumentation/python"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_python"
+    weight: 602
+  - name: "Ruby"
+    url: "tracing/manual_instrumentation/ruby"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_ruby"
+    weight: 603
+  - name: "Go"
+    url: "tracing/manual_instrumentation/go"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_go"
+    weight: 604
+  - name: "NodeJS"
+    url: "tracing/manual_instrumentation/nodejs"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_nodejs"
+    weight: 605
+  - name: "PHP"
+    url: "tracing/manual_instrumentation/php"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_php"
+    weight: 606
+  - name: "C++"
+    url: "tracing/manual_instrumentation/cpp"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_cpp"
+    weight: 607
+  - name: ".NET"
+    url: "tracing/manual_instrumentation/dotnet"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_dotnet"
+    weight: 608
 
   - name: "OpenTracing"
     url: "tracing/opentracing/"
