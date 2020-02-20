@@ -25,7 +25,7 @@ further_reading:
 Facets are the special fields (tags and attributes) of indexed logs you use for [search][1], [patterns][3] and [analytics][2] in the Log Explorer, in [log monitors][4], or log widgets in [dashboards][5] and [notebooks][6].
 
 
-{{< img src="logs/explorer/facet/facets_in_explorer.gif" style="width:100%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/facets_in_explorer.gif" style="width:100%;" alt="Facets in Explorer Facet" style="width:100%;">}}
 
 *Note: You don't need facets to support [log processing][7], or [livetail search][8], [archive][9] forwarding and rehydration, or [metric generation][10] from logs. Neither you need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these context, autocomplete capabilities rely on existing facets but any input matching incoming logs would work.*
 
@@ -80,16 +80,16 @@ Open a facet to see a summary of its content for the scope of the current query.
 
 **Facets (qualitative)** come with a top list of unique values, and a count of logs matching each of them. Scope the search query clicking on either value. Clicking on a value toggles the search on this unique value and all values. Clicking on checkboxes adds or removes this specific value from the list of all values.
 
-{{< img src="logs/explorer/facet/dimension_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/dimension_facet.png" style="width:50%;" alt="Facet Search" style="width:30%;">}}
 
 
-{{< img src="logs/explorer/facet/dimension_facet_wildcard.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/dimension_facet_wildcard.png" style="width:50%;" alt="Facet Autocomplete" style="width:30%;">}}
 
 
 
 **Measures** come with a slider indicating minimum and maximum values. Use the slider, or input numerical values, to scope the search query to different bounds.
 
-{{< img src="logs/explorer/facet/measure_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/measure_facet.png" style="width:50%;" alt="Measures Search" style="width:30%;">}}
 
 
 ### Hide facets
@@ -99,12 +99,12 @@ Your organisation has a whole collection of facets to address its comprehensive 
 
 Hide facets you don't need on a routine basis, so that you can stay make facet-picking straightforward for most of your troubleshooting sessions.  
 
-{{< img src="logs/explorer/facet/hide_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/hide_facet.png" style="width:50%;" alt="Hide Facet" style="width:30%;">}}
 
 
 Hidden facets are still visible in the facet search (see [Filter Facet](#filter-facets) section hereafter) in case you punctually need it. Unhide hidden facet from there.
 
-{{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="Unhide Facet" style="width:30%;">}}
 
 
 Hidden facets are still visible in explorer autocomplete (search bar, analytics). However, they are given a lesser priority among the suggestions.
@@ -130,19 +130,14 @@ Facets are grouped into meaningful thematics, to ease navigation in the facet li
 
 Assigning or reassigning a group for a facet (see #curate-facets hereafter) is only a matter of display in the facet list, and has no impact on search and analytics capabilities. 
 
-{{< img src="logs/explorer/facet/group_facets.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/group_facets.png" style="width:50%;" alt="Group Facet" style="width:30%;">}}
 
 
 ### Filter facets
 
 Use the search box on facets to scope down the whole facet list and jump more quickly to the very one you need to interact with. Facet search use both facet display name and facet field name to scope down results.
 
-In case multiple facets match your filter, Datadog helps you figure out which facet is most likely of interest for you with a facet relevance indicator:
-
-* Facets relying on [standard attributes][24] are considered more relevant
-* Facets relying on aliased attributes are considered less relevant
-
-{{< img src="logs/explorer/facet/relevant_facets.png" style="width:50%;" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/search_facet.png" style="width:50%;" alt="Group Facet" style="width:30%;">}}
 
 
 ### Aliased facets
