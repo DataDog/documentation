@@ -62,10 +62,6 @@ Log Management usage metrics come with three dimensions that can be used for mor
 - `datadog_is_excluded` indicates whether or not a log matches an exclusion query
 - `service` the service attribute of the log event
 
-## Feedback
-
-Datadog would love to receive your feedback on this feature. You can submit your feedback directly from [this form][9].
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -80,4 +76,3 @@ Datadog would love to receive your feedback on this feature. You can submit your
 [6]: /tagging
 [7]: /developers/metrics/custom_metrics
 [8]: /developers/metrics/#naming-metrics
-[9]: https://docs.google.com/forms/d/e/1FAIpQLSepcuHsNfJN7mpQp-8iBf9l6AslubKVSUHW21kmGg7VOJlxoA/viewform
