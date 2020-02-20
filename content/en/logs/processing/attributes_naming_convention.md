@@ -29,20 +29,21 @@ In this context, the number of created or provided attributes can lead to confus
 And even if technologies and teams natively define their respective logs attributes differently, a URL, client IP, or duration have universally consistent meanings. A **naming convention** defines standard names to use when referring to structuring technical or business concepts, resulting in a common language that everyone agrees to use by convention.
 
 
-## Standard Attributes as a backbone for naming convention  
+## Standard Attributes and Aliasing
 
 
-### Standard Attributes, Standard Facets
+**Standard Attributes** are the backbone of the naming convention for your organisation. 
+
+With **Aliasing**, search and aggregate in one single pane of glass logs flowing from heterogenous sources. And onboard users across multiple teams on your naming convention, without asking them for tedious changes in their technical stack (which would never be a priority, and likely to be a breaking change).
 
 
-**Standard Attributes** have been designed to help your organization to define its own naming convention.
-
-Standard Attributes are most particularly useful when it comes to filtering or aggregating logs altogether - that is to say when [turned into facets][23]. Gathering content from multiple and heterogenous sources into a unique **Standard Facet** makes it much more straightforward to build insights or pivot information across your organisation.
-
-As a matter of example, follow the clients most impacted by latencies on a hybrid [Apache][24] and [Amazon Cloud Front][25] infrastructure, using the Standard `Network Client IP` facet alonside the Standard `duration` measure.
+Aliasing is most particularly useful when it comes to filtering or aggregating logs flowing from different sources altogether - that is to say when [turned into facets][23]. Gathering content from multiple and heterogenous sources into a unique **Standard Facet** makes it much more straightforward to build insights or pivot information across your organisation.
 
 
-### Curating Standard Attributes
+As a matter of example, follow the clients most impacted by latencies on a hybrid [Apache][24] and [Amazon Cloud Front][25] infrastructure, using the Standard `Network Client IP` facet alonside the Standard `duration`.
+
+
+### Curate Standard Attributes
 
 Log Integrations natively rely on a [default set](#default-standard-attribute-list) of standard attributes. 
 
@@ -52,9 +53,8 @@ But Admin users in your organisation are entitled to curate the list:
 * or from the Standard Attribute [Configuration Page](#standard-attributes-in-explorer) **creating** new Standard Attributes from scratch.
 
 
-## Aliasing
+### Aliasing
 
-With aliasing, onboard users across multiple teams on your naming convention, without asking them for tedious changes in their technical stack (which would never be a priority, and likely to be a breaking change).
 
 **Alias** a (source) attribute towards a (destination) attribute so that logs carrying the source attribute, will end up carrying source and destination attribute, both with same value. 
 
@@ -82,7 +82,7 @@ The standard attribute table is available in Log Configuration pages, along with
 {{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes"  style="width:60%;">}}
 
 
-### Standard attribute list
+### Standard Attribute List
 
 The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list). You can append that list with your own attributes, and edit or delete existing standard attributes:
 
@@ -103,7 +103,7 @@ The standard attribute panel pops when you add a new standard attribute or edit 
 
 ## Standard Attributes in The Log Explorer
 
-Promote or alias attributes right directly from the log explorer, to make such decisions in context. See [documentation][27] for reference. 
+Alias attributes directly from the log explorer, to make such decisions right in context. See [documentation][27] for reference. 
 
 
 ## Default standard attribute list
