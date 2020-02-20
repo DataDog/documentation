@@ -162,6 +162,13 @@ If you see an aliased facet in your facet list, consider using the "standard" fa
 Reason to use keep using the non-standard "aliased" version of the facet is when you're troubleshooting against old content (before the aliasing for this facet has been setup by your organisation).
 
 
+### The Index Facet
+
+Index is a specific facet that appears only if your organisation has [multiple indexes][28], and/or if you have active [historical views][29].
+
+Use this facet if you want to scope down your query to a subset of your indexes.
+
+
 ## Curate Facets
 
 ### Out-of-the-box facets
@@ -274,3 +281,5 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [26]: /logs/processing/attributes_naming_convention/
 [27]: /logs/processing/attributes_naming_convention/#standard-attribute-list
 
+[28]: /logs/indexes/#indexes
+[29]: /logs/archives/rehydrating
