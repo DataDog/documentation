@@ -360,7 +360,7 @@ While this [has been deprecated][6] if you are using PHP 7.x, you still may use 
 [4]: /tracing/visualization/#span-tags
 [5]: https://github.com/DataDog/dd-trace-php/releases/latest
 [6]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[7]: /tracing/opentracing/?tab=php
+[7]: /tracing/opentracing/php
 {{% /tab %}}
 {{% tab "C++" %}}
 
