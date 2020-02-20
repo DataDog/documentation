@@ -2,17 +2,17 @@
 title: Running Endpoints Checks with Autodiscovery
 kind: documentation
 aliases:
-  - "/agent/autodiscovery/endpointchecks"
+    - /agent/autodiscovery/endpointchecks
 further_reading:
-- link: "/agent/autodiscovery"
-  tag: "Documentation"
-  text: "Main Autodiscovery documentation"
-- link: "/agent/cluster_agent/clusterchecks/"
-  tag: "Documentation"
-  text: "Cluster Checks documentation"
-- link: "/agent/kubernetes/cluster/"
-  tag: "Documentation"
-  text: "Cluster Agent documentation"
+    - link: '/agent/autodiscovery'
+      tag: 'Documentation'
+      text: 'Main Autodiscovery documentation'
+    - link: '/agent/cluster_agent/clusterchecks/'
+      tag: 'Documentation'
+      text: 'Cluster Checks documentation'
+    - link: '/agent/kubernetes/cluster/'
+      tag: 'Documentation'
+      text: 'Cluster Agent documentation'
 ---
 
 ## How it Works
@@ -101,17 +101,17 @@ Enable the `endpointschecks` configuration providers on the Datadog **Node** Age
 
 - By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable. This takes a space separated string if you have multiple values:
 
-```shell
-DD_EXTRA_CONFIG_PROVIDERS="endpointschecks"
-```
+    ```shell
+    DD_EXTRA_CONFIG_PROVIDERS="endpointschecks"
+    ```
 
 - Or adding it to the `datadog.yaml` configuration file:
 
-```yaml
-config_providers:
-  - name: endpointschecks
-    polling: true
-```
+    ```yaml
+    config_providers:
+        - name: endpointschecks
+          polling: true
+    ```
 
 **Note**: If the monitored endpoints are not backed by pods, you must [enable cluster checks][2]. This can be done by adding the `clusterchecks` configuration provider:
 
@@ -126,13 +126,13 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 Similar to [annotating Kubernetes Pods][6], services can be annotated with the following syntax:
 
 ```yaml
-  ad.datadoghq.com/endpoints.check_names: '[<INTEGRATION_NAME>]'
-  ad.datadoghq.com/endpoints.init_configs: '[<INIT_CONFIG>]'
-  ad.datadoghq.com/endpoints.instances: '[<INSTANCE_CONFIG>]'
-  ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
+ad.datadoghq.com/endpoints.check_names: '[<INTEGRATION_NAME>]'
+ad.datadoghq.com/endpoints.init_configs: '[<INIT_CONFIG>]'
+ad.datadoghq.com/endpoints.instances: '[<INSTANCE_CONFIG>]'
+ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
 ```
 
-The `%%host%%` [template variable][7] is supported and is replaced by the endpoints' IPs. The `kube_namespace`, `kube_service`, and `kube_endpoint_ip`  tags are automatically added to the instances.
+The `%%host%%` [template variable][7] is supported and is replaced by the endpoints' IPs. The `kube_namespace`, `kube_service`, and `kube_endpoint_ip` tags are automatically added to the instances.
 
 #### Example: HTTP check on an NGINX-backed service with NGINX check on the service's endpoints
 
@@ -142,36 +142,36 @@ The following service definition exposes the pods from the `my-nginx` deployment
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-nginx
-  labels:
-    run: my-nginx
-  annotations:
-    ad.datadoghq.com/service.check_names: '["http_check"]'
-    ad.datadoghq.com/service.init_configs: '[{}]'
-    ad.datadoghq.com/service.instances: |
-      [
-        {
-          "name": "My Nginx Service",
-          "url": "http://%%host%%",
-          "timeout": 1
-        }
-      ]
-    ad.datadoghq.com/endpoints.check_names: '["nginx"]'
-    ad.datadoghq.com/endpoints.init_configs: '[{}]'
-    ad.datadoghq.com/endpoints.instances: |
-      [
-        {
-          "name": "My Nginx Service Endpoints",
-          "nginx_status_url": "http://%%host%%:%%port%%/nginx_status"
-        }
-      ]
-    ad.datadoghq.com/endpoints.logs: '[{"source":"nginx","service":"webapp"}]'
+    name: my-nginx
+    labels:
+        run: my-nginx
+    annotations:
+        ad.datadoghq.com/service.check_names: '["http_check"]'
+        ad.datadoghq.com/service.init_configs: '[{}]'
+        ad.datadoghq.com/service.instances: |
+            [
+              {
+                "name": "My Nginx Service",
+                "url": "http://%%host%%",
+                "timeout": 1
+              }
+            ]
+        ad.datadoghq.com/endpoints.check_names: '["nginx"]'
+        ad.datadoghq.com/endpoints.init_configs: '[{}]'
+        ad.datadoghq.com/endpoints.instances: |
+            [
+              {
+                "name": "My Nginx Service Endpoints",
+                "nginx_status_url": "http://%%host%%:%%port%%/nginx_status"
+              }
+            ]
+        ad.datadoghq.com/endpoints.logs: '[{"source":"nginx","service":"webapp"}]'
 spec:
-  ports:
-  - port: 80
-    protocol: TCP
-  selector:
-    run: my-nginx
+    ports:
+        - port: 80
+          protocol: TCP
+    selector:
+        run: my-nginx
 ```
 
 ## Troubleshooting
