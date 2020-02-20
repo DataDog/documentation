@@ -44,8 +44,9 @@ Use the following parameters to configure this with environment variable:
 * `DD_LOGS_CONFIG_USE_HTTP`
 * `DD_LOGS_CONFIG_USE_COMPRESSION`
 
-For more details about the compression perfomances and batching size, refer to the [HTTPS section][#send-logs-over-https].
+For more details about the compression perfomances and batching size, refer to the [HTTPS section][1].
 
+[1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [2]: /agent/guide/agent-configuration-files
 {{% /tab %}}
 {{% tab "HTTP uncompressed" %}}
@@ -60,8 +61,9 @@ logs_config:
 
 Use `DD_LOGS_CONFIG_USE_HTTP` to configure this through environment variable.
 
-For more details about the compression perfomances and batching size, refer to the [HTTPS section][#send-logs-over-https].
+For more details about the compression perfomances and batching size, refer to the [HTTPS section][1].
 
+[1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [2]: /agent/guide/agent-configuration-files
 {{% /tab %}}
 {{% tab "(Default) TCP" %}}
@@ -78,7 +80,7 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 {{% /tab %}}
 {{< /tabs >}}
 
-As it has been enabled, the agent is now ready to forward logs to Datadog. To start collecting logs, you should now tell the Agent where to collect those from.
+The Agent is ready to forward logs to Datadog. To start collecting logs, you should now tell the Agent where to collect those from.
 
 ## Enabling log collection from integrations
 
@@ -88,7 +90,7 @@ To collect logs for a given integration, uncomment the logs section in that inte
 Consult the <a href="/integrations/#cat-log-collection">list of supported integrations</a>  that include out of the box log configurations.
 </div>
 
-Check the specific setup instructions for [Kubernetes][3] or [Docker][4] environment if you are unsing a containerised infrastructure.
+Check the specific setup instructions for [Kubernetes][3] or [Docker][4] environment if you are using a containerised infrastructure.
 
 If an integration does not support logs by default, use the custom log collection.
 
@@ -214,7 +216,7 @@ List of all available parameters for log collection:
 | `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][9]).                                                                                                                                                                                                                                                                             |
 ## Send logs over HTTPS
 
-**Compressed HTTPS forwarding is the recommended configuration** 
+**Compressed HTTPS log forwarding is the recommended configuration** 
 
 ```yaml
 logs_enabled: true
@@ -248,7 +250,7 @@ logs_config:
 ```
 
 Or use the `DD_LOGS_CONFIG_BATCH_WAIT` environment variable.
-The value is in seconds and must be an integer between 1 and 10.
+The value is in seconds and must be an integer between `1` and `10`.
 
 ### HTTPS Proxy configuration
 
