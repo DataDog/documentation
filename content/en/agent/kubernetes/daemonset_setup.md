@@ -118,6 +118,9 @@ spec:
               fieldRef:
                 fieldPath: status.hostIP
 
+          - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
+          - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
+
         ## Note these are the minimum suggested values for requests and limits.
         ## The amount of resources required by the Agent varies depending on:
         ## * The number of checks
@@ -131,7 +134,7 @@ spec:
             memory: "256Mi"
             cpu: "200m"
         volumeMounts:
-          - {name: dockersocket, mountPath: /var/run/docker.sock}
+          - {name: dockersocketdir, mountPath: /host/var/run}
           - {name: procdir, mountPath: /host/proc, readOnly: true}
           - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
           - {name: s6-run, mountPath: /var/run/s6}
@@ -150,7 +153,7 @@ spec:
           successThreshold: 1
           failureThreshold: 3
       volumes:
-        - {name: dockersocket, hostPath: {path: /var/run/docker.sock}}
+        - {name: dockersocketdir, hostPath: {path: /var/run}}
         - {name: procdir, hostPath: {path: /proc}}
         - {name: cgroups, hostPath: {path: /sys/fs/cgroup}}
         - {name: s6-run, emptyDir: {}}
@@ -277,18 +280,24 @@ Mount the docker socket into the Datadog Agent:
 
 ```
   (...)
+    env:
+      - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
+      - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
+  (...)
     volumeMounts:
       (...)
-      - name: dockersocket
-        mountPath: /var/run/docker.sock
+      - name: dockersocketdir
+        mountPath: /host/var/run
   (...)
   volumes:
     (...)
     - hostPath:
-        path: /var/run/docker.sock
-      name: dockersocket
+        path: /var/run
+      name: dockersocketdir
   (...)
 ```
+
+**Note**: Mounting only the `docker.sock` socket instead of the whole directory containing it prevents the agent from recovering after a docker daemon restart.
 
 {{% /tab %}}
 {{< /tabs >}}

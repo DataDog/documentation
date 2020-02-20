@@ -140,6 +140,10 @@ spec:
                         valueFrom:
                             fieldRef:
                                 fieldPath: status.hostIP
+                      - name: DD_CRI_SOCKET_PATH
+                        value: /host/var/run/docker.sock
+                      - name: DOCKER_HOST,
+                        value: unix:///host/var/run/docker.sock
                   resources:
                       requests:
                           memory: 256Mi
@@ -148,8 +152,8 @@ spec:
                           memory: 256Mi
                           cpu: 200m
                   volumeMounts:
-                      - name: dockersocket
-                        mountPath: /var/run/docker.sock
+                      - name: dockersocketdir
+                        mountPath: /host/var/run
                       - name: procdir
                         mountPath: /host/proc
                         readOnly: true
@@ -205,9 +209,9 @@ spec:
                       - name: s6-run
                         mountPath: /var/run/s6
             volumes:
-                - name: dockersocket
+                - name: dockersocketdir
                   hostPath:
-                      path: /var/run/docker.sock
+                      path: /var/run
                 - name: procdir
                   hostPath:
                       path: /proc
