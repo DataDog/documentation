@@ -37,7 +37,6 @@ To solve this issue, you can use Datadog’s Autodiscovery feature to automatica
     {{< nextlink href="/agent/autodiscovery/template_variables" >}}<u>Template Variables</u>: Template variables enable you to dynamically assign your container's values.{{< /nextlink >}}
     {{< nextlink href="/agent/autodiscovery/tag" >}}<u>Tag Extraction</u>: Datadog can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.{{< /nextlink >}}
     {{< nextlink href="/agent/autodiscovery/management" >}}<u>Discovery Management</u>: Datadog Autodiscovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.{{< /nextlink >}}
-    
 {{< /whatsnext >}}
 
 ## Further Reading

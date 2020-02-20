@@ -7,7 +7,7 @@ further_reading:
 - link: "/agent/autodiscovery"
   tag: "Documentation"
   text: "Main Autodiscovery documentation"
-- link: "/agent/autodiscovery/clusterchecks/"
+- link: "/agent/cluster_agent/clusterchecks/"
   tag: "Documentation"
   text: "Cluster Checks documentation"
 - link: "/agent/kubernetes/cluster/"
@@ -17,11 +17,11 @@ further_reading:
 
 ## How it Works
 
-The [cluster check][1] feature provides the ability to Autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services). 
+The cluster check feature provides the ability to Autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services).
 
 Endpoint checks extend this mechanism to monitor any endpoint behind cluster services.
 
-The [Cluster Agent][2] holds the configurations and exposes them to node-based Agents so they can consume and convert them into endpoints checks.
+The [Cluster Agent][1] holds the configurations and exposes them to node-based Agents so they can consume and convert them into endpoints checks.
 
 Endpoints checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the monitored service.
 
@@ -29,7 +29,7 @@ The Agents connect to the Cluster Agent every 10 seconds and retrieve the check 
 
 This feature is supported on Kubernetes for versions 6.12.0+ of the Agent, and versions 1.3.0+ of the Cluster Agent.
 
-Starting with version 1.4.0, the Cluster Agent converts every endpoints check of a non-pod-backed endpoint into a regular cluster check. Enable the [cluster check][1] feature alongside endpoints checks to take advantage of this functionality.
+Starting with version 1.4.0, the Cluster Agent converts every endpoints check of a non-pod-backed endpoint into a regular cluster check. Enable the [cluster check][2] feature alongside endpoints checks to take advantage of this functionality.
 
 #### Example: three NGINX pods exposed by the `nginx` service
 
@@ -113,7 +113,7 @@ config_providers:
     polling: true
 ```
 
-**Note**: If the monitored endpoints are not backed by pods, you must [enable cluster checks][1]. This can be done by adding the `clusterchecks` configuration provider:
+**Note**: If the monitored endpoints are not backed by pods, you must [enable cluster checks][2]. This can be done by adding the `clusterchecks` configuration provider:
 
 ```shell
 DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
@@ -263,8 +263,8 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery/clusterchecks
-[2]: /agent/kubernetes/cluster
+[1]: /agent/kubernetes/cluster
+[2]: /agent/autodiscovery/clusterchecks
 [3]: /agent/autodiscovery
 [4]: /agent/kubernetes/cluster/#cluster-checks-autodiscovery
 [5]: /agent/guide/agent-commands
@@ -272,4 +272,4 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 [7]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
 [8]: /integrations/http_check
 [9]: /integrations/nginx
-[10]: /agent/autodiscovery/clusterchecks/#troubleshooting
+[10]: /agent/cluster_agent/troubleshooting
