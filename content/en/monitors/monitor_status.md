@@ -94,7 +94,7 @@ For further investigation into your metrics evolution, use a [dashboard][6] or [
 
 ## Events
 
-Events generated from your monitor are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [event stream][8].
+Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [event stream][8].
 
 ## Further Reading
 
