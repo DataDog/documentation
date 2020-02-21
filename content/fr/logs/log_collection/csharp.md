@@ -23,14 +23,14 @@ further_reading:
     tag: FAQ
     text: Dépannage pour la collecte de logs
 ---
-Pour envoyer vos logs C# à Datadog, nous vous recommandons d'activer la journalisation au sein d'un fichier et de le suivre avec l'Agent Datadog. Voici des exemples de configuration pour les bibliothèques de journalisation `log4Net`, `serilog` et `Nlog`.
+Pour envoyer vos logs C# à Datadog, nous vous recommandons d'activer la journalisation au sein d'un fichier et de le suivre avec l'Agent Datadog. Voici des exemples de configuration pour les bibliothèques de journalisation `Serilog`, `NLog` et `log4net`.
 
 Nous vous encourageons fortement à configurer votre bibliothèque de journalisation afin de générer vos logs au format JSON et d'éviter de créer des [règles de parsing personnalisées][1].
 
 ## Configurer votre logger
 
 {{< tabs >}}
-{{% tab "SeriLog" %}}
+{{% tab "Serilog" %}}
 
 Comme bien d'autres bibliothèques pour .NET, Serilog vous permet d'effectuer une journalisation de diagnostic dans des fichiers, une console ou d'autres éléments. Ce processus de journalisation est facilement configurable, dispose d'une API épurée et peut être utilisé sur les plateformes .NET récentes.
 
@@ -247,22 +247,15 @@ init_config:
 
 instances:
 
-##Section Log
+##Section des logs
 logs:
 
-    ## - type (obligatoire) : type de fichier de la source d'entrée de log (tcp/udp/file).
-    ##   port / path (obligatoire) : définit le type tcp ou udp du port. Choisit le chemin si le type est défini sur file.
-    ##   service (obligatoire) : nom du service propriétaire du log.
-    ##   source (obligatoire) : attribut qui définit l'intégration qui envoie les logs.
-    ##   sourcecategory (facultatif) : un attribut à valeur multiple. Il peut être utilisé pour préciser l'attribut source.
-    ##   tags (facultatif) : ajoute des tags à chaque log recueilli.
-
   - type: file
-    path: /chemin/vers/votre/log/csharp.log
+    path: "/chemin/vers/votre/log/csharp.log"
     service: csharp
     source: csharp
     sourcecategory: sourcecode
-    # Pour les logs multiligne, s'ils commencent par la date au format aaaa-mm-jj, supprimez la mise en commentaire de la règle de traitement suivante.
+    # Si des logs multiligne commencent par la date au format aaaa-mm-jj, supprimer la mise en commentaire de la règle de traitement suivante
     #log_processing_rules:
     #  - type: multi_line
     #    name: new_log_start_with_date
@@ -275,7 +268,7 @@ Et voilà ! Désormais, tous vos logs seront automatiquement au format JSON com
 
 Il est possible de transmettre des logs depuis votre application vers Datadog ou directement vers l'Agent Datadog. Il ne s'agit pas de la configuration recommandée, car la gestion des problèmes de connexion ne doit pas se faire directement dans votre application, mais il peut arriver qu'il soit impossible d'enregistrer un log dans un fichier lorsque votre application est utilisée sur une machine hors d'accès.
 {{< tabs >}}
-{{% tab "SeriLog" %}}
+{{% tab "Serilog" %}}
 
 Installez le [récepteur Serilog][1] de Datadog, qui envoie les événements et les logs à Datadog. Par défaut, le récepteur transfère les logs via HTTPS sur le port 443.
 Exécutez la commande suivante dans la console de gestion de paquet :

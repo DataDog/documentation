@@ -1,3 +1,7 @@
+#!/bin/sh
+# Replace the API and APP keys below
+# with the ones for your account
+
 ### To create an API test
 
 api_key="<DATADOG_API_KEY>"

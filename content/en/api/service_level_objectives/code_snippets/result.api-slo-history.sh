@@ -10,8 +10,10 @@
         "timeframe": "90d"
       }
     },
+    "type": "monitor",
+    "type_id": 0,
     "overall": {
-      "uptime": 99.04629516601562,
+      "sli_value": 99.04629516601562,
       "span_precision": 2.0,
       "name": "We're not meeting our 1m SLAs for foo",
       "precision": {
@@ -132,7 +134,8 @@
     "from_ts": 1568737541,
     "groups": [
       {
-        "uptime": 99.68518829345703,
+        "sli_value": 99.68518829345703,
+        "span_precision": 2.0,
         "preview": false,
         "group": "foo:pig",
         "history": [
@@ -159,7 +162,8 @@
         ]
       },
       {
-        "uptime": 99.69444274902344,
+        "sli_value": 99.69444274902344,
+        "span_precision": 2.0,
         "preview": false,
         "group": "foo:sheep",
         "history": [
@@ -186,7 +190,8 @@
         ]
       },
       {
-        "uptime": 99.7615737915039,
+        "sli_value": 99.7615737915039,
+        "span_precision": 2.0,
         "preview": true,
         "group": "foo:cow",
         "history": [
@@ -237,7 +242,8 @@
         ]
       },
       {
-        "uptime": 99.84027862548828,
+        "sli_value": 99.84027862548828,
+        "span_precision": 2.0,
         "preview": true,
         "group": "foo:donkey",
         "history": [
@@ -280,7 +286,8 @@
         ]
       },
       {
-        "uptime": 99.84490966796875,
+        "sli_value": 99.84490966796875,
+        "span_precision": 2.0,
         "preview": false,
         "group": "foo:cat",
         "history": [
@@ -299,7 +306,8 @@
         ]
       },
       {
-        "uptime": 99.84954071044922,
+        "sli_value": 99.84954071044922,
+        "span_precision": 2.0,
         "preview": true,
         "group": "foo:dog",
         "history": [
@@ -326,7 +334,8 @@
         ]
       },
       {
-        "uptime": 99.90509033203125,
+        "sli_value": 99.90509033203125,
+        "span_precision": 2.0,
         "preview": true,
         "group": "foo:horse",
         "history": [
@@ -361,7 +370,8 @@
         ]
       },
       {
-        "uptime": 100.0,
+        "sli_value": 100.0,
+        "span_precision": 2.0,
         "preview": false,
         "group": "foo:duck",
         "history": [
@@ -372,7 +382,8 @@
         ]
       },
       {
-        "uptime": 100.0,
+        "sli_value": 100.0,
+        "span_precision": 2.0,
         "preview": false,
         "group": "foo:chicken",
         "history": [
@@ -392,6 +403,8 @@
   "data": {
     "errors": null,
     "to_ts": 1571766900,
+    "type": "metric",
+    "type_id": 1,
     "series": {
       "res_type": "time_series",
       "interval": 3600,
@@ -410,10 +423,6 @@
         "values": [
           1738124,
           1960864
-        ],
-        "times": [
-          1571256000000,
-          1571259600000
         ]
       },
       "numerator": {
@@ -431,11 +440,11 @@
           1738124,
           1960864
         ],
-        "times": [
-          1571256000000,
-          1571259600000
-        ]
       },
+      "times": [
+        1571256000000,
+        1571259600000
+      ],
       "from_date": 1571162100000,
       "group_by": [],
       "to_date": 1571766900000,
@@ -467,7 +476,7 @@
       }
     },
     "overall": {
-      "uptime": 100,
+      "sli_value": 100,
       "span_precision": 0,
       "precision": {
         "7d": 0,

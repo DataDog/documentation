@@ -42,7 +42,7 @@ DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY=<YOUR_DATADOG_API_KEY> \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
               datadog/agent:latest
 ```
 
@@ -54,7 +54,7 @@ DOCKER_CONTENT_TRUST=1 \
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
                               -v /proc/:/host/proc/:ro \
                               -v /cgroup/:/host/sys/fs/cgroup:ro \
-                              -e DD_API_KEY=<YOUR_DATADOG_API_KEY> \
+                              -e DD_API_KEY="<DATADOG_API_KEY>" \
                               datadog/agent:latest
 ```
 
@@ -265,7 +265,7 @@ The same can be done for the `/checks.d` folder. Any Python files in the `/check
 [10]: /logs
 [11]: /infrastructure/process
 [12]: /infrastructure/livecontainers
-[13]: https://docs.datadoghq.com/developers/dogstatsd
+[13]: /developers/dogstatsd
 [14]: /developers/dogstatsd/unix_socket
 [15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [16]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go

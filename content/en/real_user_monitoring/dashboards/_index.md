@@ -24,6 +24,7 @@ Customize this dashboard as you would [any other one][4], or directly explore th
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /real_user_monitoring/installation
 [2]: /real_user_monitoring/data_collected
 [3]: https://app.datadoghq.com/rum/list

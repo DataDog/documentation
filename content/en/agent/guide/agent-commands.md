@@ -29,6 +29,7 @@ List of commands to start the Datadog Agent:
 | AIX      | `startsrc -s datadog-agent`                                    |
 | Linux    | `sudo service datadog-agent start`                             |
 | Docker   | [See the dedicated Docker documentation][1]                    |
+| Kubernetes | `kubectl create -f datadog-agent.yaml`                        |
 | macOS    | `launchctl start com.datadoghq.agent` *or* via the systray app |
 | Source   | `sudo service datadog-agent start`                             |
 | Windows  | [See the dedicated Windows documentation][2]                   |
@@ -63,6 +64,7 @@ List of commands to stop the Datadog Agent:
 | AIX      | `stopsrc -s datadog-agent`                                    |
 | Linux    | `sudo service datadog-agent stop`                             |
 | Docker   | [See the dedicated Docker documentation][1]                   |
+| Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |
 | macOS    | `launchctl stop com.datadoghq.agent` *or* via the systray app |
 | Source   | `sudo service datadog-agent stop`                             |
 | Windows  | [See the dedicated Windows documentation][2]                  |
@@ -96,6 +98,7 @@ List of commands to restart the Datadog Agent:
 |----------|---------------------------------------------------|
 | Linux    | `sudo service datadog-agent restart`              |
 | Docker   | [See the dedicated Docker documentation][1]       |
+| Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |
 | macOS    | run `stop` then `start`, *or* via the systray app |
 | Source   | *unsupported Platform*                            |
 | Windows  | [See the dedicated Windows documentation][2]      |

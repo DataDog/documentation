@@ -26,22 +26,27 @@ Azure Cognitive Services proposent des API, des kits de développement et des se
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques d'Azure Cognitive Services.
 
 ## Implémentation
+
 ### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "azure_cognitive_services" >}}
 
 
 ### Événements
+
 L'intégration Azure Cognitive Services n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Azure Cognitive Services n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://docs.datadoghq.com/fr/integrations/azure/

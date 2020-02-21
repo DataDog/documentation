@@ -46,39 +46,41 @@ clean-integrations:  ## Remove built integrations files.
 	@if [ -d data/integrations ]; then \
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
+	    -a -not -name '*.ja.yaml' \
 	    -exec rm -rf {} \; ;fi
 	@if [ -d data/service_checks ]; then \
 		find ./data/service_checks -type f -maxdepth 1 \
 	    -a -not -name '*.fr.json' \
+	    -a -not -name '*.ja.json' \
 	    -exec rm -rf {} \; ;fi
 	@find ./content/en/integrations -type f -maxdepth 1 \
-	    -a -not -name '_index.md' \
+		-a -not -name '_index.md' \
 		-a -not -name 'adobe_experience_manager.md' \
+		-a -not -name 'kubernetes_audit_logs.md' \
 		-a -not -name 'alcide.md' \
-	    -a -not -name 'amazon_guardduty.md' \
-	    -a -not -name 'amazon_cloudhsm.md' \
-	    -a -not -name 'pivotal_platform.md' \
-			-a -not -name 'carbon_black.md' \
-		  -a -not -name 'cloudability.md' \
-	    -a -not -name 'cloudcheckr.md' \
-		  -a -not -name 'fluentbit.md' \
-			-a -not -name 'iam_access_analyzer.md' \
-	    -a -not -name 'integration_sdk.md' \
-	    -a -not -name 'journald.md' \
-	    -a -not -name 'kubernetes.md' \
-	    -a -not -name 'marklogic.md' \
-	    -a -not -name 'nxlog.md' \
-	    -a -not -name 'rss.md' \
-	    -a -not -name 'rsyslog.md' \
-	    -a -not -name 'sidekiq.md' \
-	    -a -not -name 'sinatra.md' \
-	    -a -not -name 'stunnel.md' \
-	    -a -not -name 'syslog_ng.md' \
-	    -a -not -name 'system.md' \
-	    -a -not -name 'tcprtt.md' \
-	    -a -not -name 'uwsgi.md' \
-	    -a -not -name '*.fr.md' \
-	    -exec rm -rf {} \;
+		-a -not -name 'amazon_guardduty.md' \
+		-a -not -name 'amazon_cloudhsm.md' \
+		-a -not -name 'pivotal_platform.md' \
+		-a -not -name 'carbon_black.md' \
+		-a -not -name 'cloudability.md' \
+		-a -not -name 'cloudcheckr.md' \
+		-a -not -name 'fluentbit.md' \
+		-a -not -name 'iam_access_analyzer.md' \
+		-a -not -name 'integration_sdk.md' \
+		-a -not -name 'journald.md' \
+		-a -not -name 'kubernetes.md' \
+		-a -not -name 'marklogic.md' \
+		-a -not -name 'nxlog.md' \
+		-a -not -name 'rss.md' \
+		-a -not -name 'rsyslog.md' \
+		-a -not -name 'sidekiq.md' \
+		-a -not -name 'sinatra.md' \
+		-a -not -name 'stunnel.md' \
+		-a -not -name 'syslog_ng.md' \
+		-a -not -name 'system.md' \
+		-a -not -name 'tcprtt.md' \
+		-a -not -name 'uwsgi.md' \
+		-exec rm -rf {} \;
 
 clean-auto-doc: ##Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
@@ -91,6 +93,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/developers/amazon_cloudformation.md ;fi
 	@if [ content/en/logs/log_collection/android.md ]; then \
 	rm -f content/en/logs/log_collection/android.md ;fi
+	@if [ content/en/tracing/setup/android.md ]; then \
+	rm -f content/en/tracing/setup/android.md ;fi
 
 clean-node:  ## Remove node_modules.
 	@if [ -d node_modules ]; then rm -r node_modules; fi

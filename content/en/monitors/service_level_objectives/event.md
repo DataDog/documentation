@@ -1,5 +1,5 @@
 ---
-title: Event based SLO
+title: Event-based SLOs
 kind: documentation
 description: "Use metrics to define a Service Level Objective"
 further_reading:
@@ -10,12 +10,12 @@ further_reading:
 
 ## Overview
 
-Event based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. 
-There is one type of event based SLO - a metric query SLO. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI).
+Event-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. 
+There is one type of event-based SLO - a metric query SLO. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI).
 
 ## Setup
 
-On the [SLO page][1], select **New SLO +**. Then select **Event**.
+On the [SLO status page][1], select **New SLO +**. Then select [**Event**][2].
 
 ### Configuration
 
@@ -52,4 +52,5 @@ in the description and tags you would like to associate with the SLO.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/slo/new/event
+[1]: https://app.datadoghq.com/slo
+[2]: https://app.datadoghq.com/slo/new/event

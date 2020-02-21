@@ -7,15 +7,13 @@ external_redirect: /api/#create-user
 
 ## Create user
 
+Create a user for your organization.
+
 **ARGUMENTS**:
 
-* **`handle`** [*required*]:
-    The user handle, must be a valid email.
-* **`name`** [*optional*, *default*=**None**]:
-    The name of the user.
-* **`access_role`** [*optional*, *default*=**st**]:
-    The access role of the user. Choose from:
-    *  **st** (standard user),
-    *  **adm** (admin user),
-    *  **ro** (read-only user).
-    *Note: users can be created with admin access role only with application keys belonging to administrators.*
+A user is a JSON object with `"type":"users"` that takes the following elements:
+
+* **`roles`** [*optional*]: An array of roles to assign to the user. Each role is an object with `"type": "roles"` and an `id` that is the role ID to assign to the user.
+* **`attributes.email`** [*required*]: The email of the new user.
+* **`attributes.name`** [*optional*]: The name of the new user.
+* **`attributes.title`** [*optional*]: The title of the new user.

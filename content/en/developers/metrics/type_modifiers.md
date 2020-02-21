@@ -15,7 +15,7 @@ further_reading:
 
 A metric type is an indication of what you are trying to represent with your metric and its emission source. If you refer to the [metric types][1] documentation, you can see that the `COUNT` and `RATE` metric types are quite similar to each other, as they represent the same concept: the variation of a metric value over time. However, they use different logic:
 
-* `RATE`: Normalized value variation over time (usually _per seconds_).
+* `RATE`: Normalized value variation over time (_per second_).
 * `COUNT`: Absolute value variation over a given time interval.
 
 Depending on your use case and submission method, one metric type may be more suited than the other for submission. For instance:

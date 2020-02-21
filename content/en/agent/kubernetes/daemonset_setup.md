@@ -22,7 +22,7 @@ Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or o
 
 ## Configure RBAC permissions
 
-If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account.
+If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account. From Kubernetes 1.6 onwards, RBAC is enabled by default.
 
 Create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding:
 
@@ -41,7 +41,7 @@ Create the following `datadog-agent.yaml` manifest. (This manifest assumes you a
 Remember to encode your API key using `base64` if you are using secrets:
 
 ```shell
-echo -n <YOUR_API_KEY> | base64
+echo -n <DATADOG_API_KEY> | base64
 ```
 
 **Note**: You may need a higher memory limit if you are using `kube-state-metrics` or have high DogStatsD usage.
@@ -100,7 +100,7 @@ spec:
           ## Set the Datadog API Key related to your Organization
           ## If you use the Kubernetes Secret use the following env variable:
           ## - {name: DD_API_KEY, valueFrom: { secretKeyRef: { name: datadog-secret, key: api-key }}}
-          - {name: DD_API_KEY, value: "<YOUR_API_KEY>"}
+          - {name: DD_API_KEY, value: "<DATADOG_API_KEY>"}
 
           ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
           - {name: DD_SITE, value: "datadoghq.com"}
@@ -161,7 +161,7 @@ spec:
         - {name: logcontainerpath, hostPath: {path: /var/lib/docker/containers}}
 ```
 
-Replace `<YOUR_API_KEY>` with [your Datadog API key][4] or use [Kubernetes secrets][5] to set your API key as an [environment variable][6]. If you opt to use Kubernetes secrets, refer to Datadog's [instructions for setting an API key with Kubernetes secrets][7]. Consult the [Docker integration][8] to discover all of the configuration options.
+Replace `<DATADOG_API_KEY>` with [your Datadog API key][4] or use [Kubernetes secrets][5] to set your API key as an [environment variable][6]. If you opt to use Kubernetes secrets, refer to Datadog's [instructions for setting an API key with Kubernetes secrets][7]. Consult the [Docker integration][8] to discover all of the configuration options.
 
 Deploy the DaemonSet with the command:
 
@@ -376,6 +376,8 @@ tracer.configure(
 ```
 
 Refer to the [language-specific APM instrumentation docs][14] for more examples.
+
+**Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
 ### Process Collection
 

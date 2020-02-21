@@ -9,6 +9,8 @@ further_reading:
   text: "Review the main categories of data submitted to Datadog"
 ---
 
+<div class="alert alert-info">This page is about the security of Datadog; if you're looking for the Security Monitoring product, see the <a href="/security_monitoring" target="_blank">Security Monitoring section</a>.</div>
+
 This article is part of a [series on data security][1].
 
 The Log Management product supports multiple [environments and formats][2], allowing customers the flexibility to submit to Datadog nearly any data they choose. This article describes the main security guarantees and filtering controls available to users when submitting logs to Datadog.
@@ -67,5 +69,5 @@ If you have any questions about how the Log Management Service satisfies the app
 [3]: /agent/logs/advanced_log_collection/?tab=exclude_at_match#filter-logs
 [4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /integrations/amazon_lambda/#log-collection
-[6]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=datadogussite#log-collection
+[6]: /integrations/google_cloud_platform/?tab=datadogussite#log-collection
 [7]: /logs/explorer/#share-views

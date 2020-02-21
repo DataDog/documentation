@@ -12,7 +12,7 @@ further_reading:
   - link: tracing/visualization/
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
-  - link: tracing/advanced/
+  - link: tracing/
     tag: Utilisation avancée
     text: Utilisation avancée
 ---
@@ -148,16 +148,16 @@ Votre framework réseau préféré n'est pas disponible ? Datadog élargit cont
 
 `dd-java-agent` est également compatible avec les pilotes JDBC courants, notamment :
 
-*  Apache Derby
-*  Firebird SQL
-*  Moteur de base de données H2
-*  HSQLDB
-*  IBM DB2
-*  MariaDB
-*  MSSQL (Microsoft SQL Server)
-*  MySQL
-*  Oracle
-*  Postgres SQL
+* Apache Derby
+* Firebird SQL
+* Moteur de base de données H2
+* HSQLDB
+* IBM DB2
+* MariaDB
+* MSSQL (Microsoft SQL Server)
+* MySQL
+* Oracle
+* Postgres SQL
 
 **Le tracing de datastores permet :** le calcul du délai entre la requête et la réponse, la récupération des informations sur la requête (par exemple, la chaîne de requête expurgée) ainsi que la capture des erreurs et des traces de pile.
 
@@ -190,8 +190,6 @@ Pour profiter d'une meilleure visibilité sur vos applications utilisant des fra
 Le traceur est configuré à l'aide des propriétés système et des variables d'environnement comme suit :
 (Voir la configuration spécifique de l'intégration dans la section [Intégrations](#integrations) ci-dessus.)
 
-{{% table  %}}
-
 | Propriété système                        | Variable d'environnement                   | Valeur par défaut                           | Description                                                                                                                                                                                                                                                            |
 |----------------------------------------|----------------------------------------|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `dd.trace.enabled`                     | `DD_TRACE_ENABLED`                     | `true`                            | Lorsque cette option est définie sur `false`, l'Agent est désactivé.                                                                                                                                                                                                                                |
@@ -206,7 +204,7 @@ Le traceur est configuré à l'aide des propriétés système et des variables d
 | `dd.trace.span.tags`                   | `DD_TRACE_SPAN_TAGS`                   | `null`                            | (Exemple : `key1:value1,key2:value2`.) Une liste de tags par défaut à ajouter à chaque span. Les tags portant le même nom qui sont ajoutés directement à une span remplacent ceux par défaut fournis ici.                                                                                            |
 | `dd.trace.jmx.tags`                    | `DD_TRACE_JMX_TAGS`                    | `null`                            | (Exemple : `key1:value1,key2:value2`) La liste des tags par défaut à ajouter à chaque métrique JMX. Les tags portant le même nom qui sont ajoutés à la configuration de métriques JMX remplacent ceux par défaut fournis ici.                                                                            |
 | `dd.trace.header.tags`                 | `DD_TRACE_HEADER_TAGS`                 | `null`                            | (Exemple : `en-tête-insensible-CASSE:nom-du-tag,User-ID:userId`.) Une liste des correspondances entre les clés d'en-tête et les noms de tag. Applique automatiquement des valeurs d'en-tête en tant que tags sur les traces.                                                                                                               |
-| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([liste disponible ici][2])                | (Exemple : `com.some.Trace;io.other.Trace`.) Une liste des annotations de méthode à traiter en tant que `@Trace`.                                                                                                                                                                          |
+| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([valeurs répertoriées ici][10])                | (Exemple : `com.some.Trace;io.other.Trace`.) Une liste des annotations de méthode à traiter en tant que `@Trace`.                                                                                                                                                                          |
 | `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (Exemple : `package.ClassName[method1,method2…];AnonymousClass$1[call]`.) Liste des classes/interfaces et méthodes à tracer. Semblable à l'ajout de `@Trace`, mais sans changer le code.                                                                                       |
 | `dd.trace.partial.flush.min.spans`     | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`     | `1000`                            | Définit le nombre de spans partielles à partir duquel celles-ci doivent être vidées. Permet de réduire la charge de la mémoire en cas de traitement d'un trafic important ou de traces à exécution longue.                                                                                                                                    |
 | `dd.trace.report-hostname`             | `DD_TRACE_REPORT_HOSTNAME`             | `false`                           | Lorsque cette option est activée, le hostname détecté est ajouté aux métadonnées de trace.                                                                                                                                                                                                          |
@@ -225,66 +223,63 @@ Le traceur est configuré à l'aide des propriétés système et des variables d
 | `dd.jmxfetch.refresh-beans-period`     | `DD_JMXFETCH_REFRESH_BEANS_PERIOD`     | `600`                             | Fréquence d'actualisation de la liste des beans JMX disponibles (en secondes).                                                                                                                                                                                                          |
 | `dd.jmxfetch.statsd.host`              | `DD_JMXFETCH_STATSD_HOST`              | identique à `agent.host`              | Host Statsd vers lequel envoyer les métriques JMX.                                                                                                                                                                                                                                    |
 | `dd.jmxfetch.statsd.port`              | `DD_JMXFETCH_STATSD_PORT`              | 8125                              | Port Statsd vers lequel envoyer les métriques JMX.                                                                                                                                                                                                                                    |
-| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Active l'injection automatique des clés MDC pour les ID de span et de trace Datadog. Consultez la section [Utilisation avancée][3] pour en savoir plus                                                                                                                                                                |
-
-[1]: /fr/agent/docker/apm
-[2]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[3]: /fr/tracing/advanced/connect_logs_and_traces/?tab=java
-{{% /table %}}
+| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Active l'injection automatique des clés MDC pour les ID de span et de trace Datadog. Consultez la section [Utilisation avancée][10] pour en savoir plus.                                                                                                                                                                |
 
 **Remarques** :
 
 * Si le même type de clé est défini pour les deux, la configuration de la propriété système est prioritaire.
 * Les propriétés système peuvent être utilisées comme paramètres JVM.
-* Par défaut, les métriques JMX de votre application sont envoyées à l'Agent Datadog via DogStatsD sur le port `8125`. Vérifiez que [DogStatsD est activé pour l'Agent][10].
-Si vous exécutez l'Agent en tant que conteneur, vérifiez que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est définie sur `true`][11] et que le port `8125` est ouvert sur le conteneur de l'Agent.
-Dans Kubernetes, [liez le port DogStatsD à un port de host][12] ; dans ECS, [définissez les flags adéquats dans la définition de votre tâche][13].
+* Par défaut, les métriques JMX de votre application sont envoyées à l'Agent Datadog grâce à DogStatsD sur le port `8125`. Vérifiez que [DogStatsD est activé pour l'Agent][12].
+Si vous exécutez l'Agent en tant que conteneur, vérifiez que `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [est définie sur `true`][13] et que le port `8125` est ouvert sur le conteneur de l'Agent.
+Dans Kubernetes, [liez le port DogStatsD à un port de host][14] ; dans ECS, [définissez les flags appropriés dans la définition de votre tâche][15].
 
 ### Exemples de configuration
 
 #### `dd.trace.enabled`
 
-**Exemple avec une propriété système et le mode app de debugging**
+**Exemple avec une propriété système et le mode debugging d'app**
 
-```
-java -javaagent:/chemin/vers/agent-dd-java.jar -Ddd.trace.enabled=false -Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug -jar chemin/vers/application.jar
+```shell
+java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.trace.enabled=false -Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug -jar chemin/vers/application.jar
 ```
 
-Les logs de l'app de debugging indiquent, avec le message `Tracing is disabled, not installing instrumentations`, que le tracing est désactivé et qu'aucune instrumentation n'est en cours d'installation. 
+Les logs de debugging d'app indiquent, avec le message `Tracing is disabled, not installing instrumentations`, que le tracing est désactivé et qu'aucune instrumentation n'est en cours d'installation.
 
 #### `dd.service.name`
 
-**Exemple avec une propriété système**
-```
-java -javaagent:/chemin/vers/agent-dd-java.jar -Ddd.service.name=web-app -jar chemin/vers/application.jar
+**Exemple avec une propriété système** :
+
+```shell
+java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.service.name=web-app -jar chemin/vers/application.jar
 ```
 
-{{< img src="tracing/setup/java/dd_service_name.png" alt="nom de servide" responsive="true" >}}
+{{< img src="tracing/setup/java/dd_service_name.png" alt="nom de service" responsive="true" >}}
 
 #### `dd.service.mapping`
 
-**Exemple avec une propriété système**
-```
-java -javaagent:/chemin/vers/agent-dd-java.jar -Ddd.service.name=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar chemin/vers/application.jar
+**Exemple avec une propriété système** :
+
+```shell
+java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.service.name=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar chemin/vers/application.jar
 ```
 
 {{< img src="tracing/setup/java/service_mapping.png" alt="mapping de service" responsive="true" >}}
 
 #### `dd.trace.global.tags`
 
-**Configuration d'un environnement global pour les spans et les métriques JMX**
+**Configuration d'un environnement global pour les spans et les métriques JMX** :
 
-```
-java -javaagent:/chemin/vers/agent-dd-java.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -jar chemin/vers/application.jar
+```shell
+java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -jar chemin/vers/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_global_tags.png" alt="tags globaux de trace" responsive="true" >}}
 
 #### `dd.trace.span.tags`
 
-**Exemple d'ajout de project:test à chaque span**
+**Exemple d'ajout de project:test à chaque span** :
 
-```
+```shell
 java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -jar chemin/vers/application.jar
 ```
 
@@ -292,20 +287,20 @@ java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.service.name=web-app -Ddd.tr
 
 #### `dd.trace.jmx.tags`
 
-**Définition de custom.type:2 sur une métrique JMX**
+**Définition de custom.type:2 sur une métrique JMX** :
 
-```
-java -javaagent:/chemin/vers/agent-dd-java.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar chemin/vers/application.jar
+```shell
+java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar chemin/vers/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_jmx_tags.png" alt="Tags JMX de trace" responsive="true" >}}
 
 #### `dd.trace.methods`
 
-**Exemple avec une propriété système**
+**Exemple avec une propriété système** :
 
-```
-java -javaagent:/chemin/vers/agent-dd-java.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.methods=notes.app.NotesHelper[customMethod3] -jar chemin/vers/application.jar
+```shell
+java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.methods=notes.app.NotesHelper[customMethod3] -jar chemin/vers/application.jar
 ```
 
 {{< img src="tracing/setup/java/trace_methods.png" alt="méthodes de trace" responsive="true" >}}
@@ -313,8 +308,9 @@ java -javaagent:/chemin/vers/agent-dd-java.jar -Ddd.trace.global.tags=env:dev -D
 #### `dd.trace.db.client.split-by-instance`
 
 Exemple avec une propriété système :
-```
-java -javaagent:/chemin/vers/agent-dd-java.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.db.client.split-by-instance=TRUE -jar chemin/vers/application.jar
+
+```shell
+java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.db.client.split-by-instance=TRUE -jar chemin/vers/application.jar
 ```
 
 L'instance de base de données 1, `webappdb`, possède désormais son propre nom de service, le même que celui indiqué dans les métadonnées de span `db.instance` :
@@ -330,15 +326,16 @@ De même, sur la service map, une app Web appelle désormais deux bases de donn�
 #### `dd.http.server.tag.query-string`
 
 Exemple avec une propriété système :
-```
-java -javaagent:/chemin/vers/agent-dd-java.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.http.server.tag.query-string=TRUE -jar chemin/vers/application.jar
+
+```shell
+java -javaagent:/chemin/vers/agent-java-dd.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.http.server.tag.query-string=TRUE -jar chemin/vers/application.jar
 ```
 
 {{< img src="tracing/setup/java/query_string.png" alt="chaîne de la requête" responsive="true" >}}
 
 ### Extraction et injection d'en-têtes B3
 
-Le traceur de l'APM Datadog prend en charge [l'extraction et l'injection d'en-têtes B3][14] pour le tracing distribué.
+Le traceur de l'APM Datadog prend en charge l'injection et [l'extraction d'en-têtes B3][16] pour le tracing distribué.
 
 L'injection et l'extraction distribuées d'en-têtes sont contrôlées en configurant des styles d'injection/extraction. Deux styles sont actuellement pris en charge :
 
@@ -350,18 +347,16 @@ Les styles d'injection peuvent être configurés via :
 * Propriété système : `-Ddd.propagation.style.inject=Datadog,B3`
 * Variable d'environnement : `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
 
-La valeur de la propriété ou de la variable d'environnement est une liste de styles d'en-tête séparés par des virgules (ou des espaces) qui sont activés pour l'injection. Par défaut, seul le style d'injection Datadog est activé.
+La propriété ou la variable d'environnement prend pour valeur une liste de styles d'en-tête séparés par des virgules (ou des espaces) qui sont activés pour l'injection. Par défaut, seul le style d'injection Datadog est activé.
 
 Les styles d'extraction peuvent être configurés via :
 
 * Propriété système : `-Ddd.propagation.style.extract=Datadog,B3`
 * Variable d'environnement : `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
 
-La valeur de la propriété ou de la variable d'environnement est une liste de styles d'en-tête séparés par des virgules (ou des espaces) qui sont activés pour l'extraction. Par défaut, seul le style d'extraction Datadog est activé.
+La propriété ou la variable d'environnement prend pour valeur une liste de styles d'en-tête séparés par des virgules (ou des espaces) qui sont activés pour l'extraction. Par défaut, seul le style d'extraction Datadog est activé.
 
-Si plusieurs styles d'extraction sont activés, une tentative d'extraction est effectuée
-dans l'ordre selon lequel ces styles ont été configurés, et la première valeur
-extraite avec succès est utilisée.
+Si plusieurs styles d'extraction sont activés, une tentative d'extraction est effectuée dans l'ordre selon lequel ces styles ont été configurés, et la première valeur extraite avec succès est utilisée.
 
 ## Transmission de traces
 
@@ -375,9 +370,7 @@ Voici à quoi ressemble le processus de transmission de trace à Datadog :
 * Dans un thread de transmission distinct, la file d'attente de traces est vidée et les traces sont codées via msgpack, puis envoyées à l'Agent Datadog via http.
 * La file d'attente est vidée toutes les secondes.
 
-Pour voir le code utilisé, la documentation ou des exemples d'utilisation des
-bibliothèques et frameworks pris en charge par Datadog, consultez la liste complète des composants
-à instrumentation automatique pour les applications Java dans la section [Intégrations](#integrations).
+Pour voir le code utilisé, la documentation ou des exemples d'utilisation des bibliothèques et frameworks pris en charge par Datadog, consultez la liste complète des composants à instrumentation automatique pour les applications Java dans la section [Intégrations](#integrations).
 
 ### Annotation de trace
 
@@ -443,8 +436,10 @@ java -javaagent:<CHEMIN-AGENT-JAVA-DD>.jar \
 [7]: http://bytebuddy.net
 [8]: /fr/help
 [9]: https://github.com/DataDog/documentation#outside-contributors
-[10]: /fr/developers/dogstatsd/#setup
-[11]: /fr/agent/docker/#dogstatsd-custom-metrics
-[12]: /fr/agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
-[13]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
-[14]: https://github.com/openzipkin/b3-propagation
+[10]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[11]: /fr/tracing/connect_logs_and_traces/?tab=java
+[12]: /fr/developers/dogstatsd/#setup
+[13]: /fr/agent/docker/#dogstatsd-custom-metrics
+[14]: /fr/agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[15]: /fr/integrations/amazon_ecs/?tab=python#create-an-ecs-task
+[16]: https://github.com/openzipkin/b3-propagation

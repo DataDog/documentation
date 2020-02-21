@@ -44,7 +44,7 @@ Enable Custom Payload and fill in a json object that looks like:
 {
   "name": "$USER : $EVENT_TITLE",
   "desc": "$EVENT_MSG",
-  "key": "{APP_KEY}",
+  "key": "{DATADOG_APPLICATION_KEY}",
   "token": "{TOKEN_KEY}",
   "pos": "bottom",
   "idList": "{ID_LIST_VALUE}"

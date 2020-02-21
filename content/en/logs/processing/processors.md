@@ -563,7 +563,7 @@ Blocks can be used on arrays of values or on a specific attribute within an arra
 ```
 
 Whereas `%{array_users}` does not return anything because it is a list of objects.
-However, `%{arrays_user.first_name}` returns a list of `first_name` contained in the array:
+However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
 
 ```text
 John,Jack
@@ -741,6 +741,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /logs/processing/pipelines
 [2]: /logs/processing/parsing/#advanced-settings
 [3]: /logs/processing/parsing
