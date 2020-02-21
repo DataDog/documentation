@@ -41,7 +41,7 @@ After creating a template variable, Datadog displays the number of sources using
 ### Logs, APM, and RUM queries
 
 Template variables work with log, APM and RUM widgets because metrics, logs, APM and RUM share the same tags.
-Additionally, you can define log, APM and RUM template variables based on [log][2], APM or [RUM][3] facets. These variables start with `@`, for example: `@http.status_code`.
+Additionally, you can define log, APM, and RUM template variables based on [log][2], APM, or [RUM][3] facets. These variables start with `@`, for example: `@http.status_code`.
 
 **Note**: Using **Add to all** for this type of template variable adds the variable to all log, APM and RUM widgets.
 
