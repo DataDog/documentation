@@ -207,11 +207,11 @@ Here are some key attributes you should pay attention to when setting up your pr
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `host`    | The name of the originating host as defined in metrics. We automatically retrieve corresponding host tags from the matching host in Datadog and apply them to your logs. The Agent sets this value automatically.                          |
 | `source`  | This corresponds to the integration name: the technology from which the log originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example: `nginx`, `postgresql`, etc. |
-| `status`  | This corresponds to the level/severity of a log. It is used to define [patterns][24] and has a dedicated layout in the Datadog Log UI.                                                                                                     |
+| `status`  | This corresponds to the level/severity of a log. It is used to define [patterns][23] and has a dedicated layout in the Datadog Log UI.                                                                                                     |
 | `service` | The name of the application or service generating the log events. It is used to switch from Logs to APM, so make sure you define the same value when you use both products.                                                                |
 | `message` | By default, Datadog ingests the value of the `message` attribute as the body of the log entry. That value is then highlighted and displayed in the Logstream, where it is indexed for full text search.                                    |
 
-Your logs are collected and centralized into the [Log Explorer][25] view. You can also search, enrich, and alert on your logs.
+Your logs are collected and centralized into the [Log Explorer][24] view. You can also search, enrich, and alert on your logs.
 
 {{< img src="logs/log_explorer_view.png" alt="Log Explorer view"  >}}
 
@@ -267,6 +267,5 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [20]: /integrations/amazon_lambda/#log-collection
 [21]: /logs/log_collection/#how-to-get-the-most-of-your-application-logs
 [22]: /security/logs/#information-security
-[23]: /api/?lang=bash#send-logs-over-http
-[24]: /logs/explorer/patterns
-[25]: /logs/explore
+[23]: /logs/explorer/patterns
+[24]: /logs/explore

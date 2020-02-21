@@ -29,7 +29,7 @@ Collecting logs is **disabled** by default in the Datadog Agent.
 {{< tabs >}}
 {{% tab "(Recommended) HTTP compressed" %}}
 
-To send compressed logs over HTTPS with the Datadog Agent v6.14+, enable log collection in the Agent's [main configuration file][2] (`datadog.yaml`):
+To send compressed logs over HTTPS with the Datadog Agent v6.14+, enable log collection in the Agent's [main configuration file][1] (`datadog.yaml`):
 
 ```yaml
 logs_enabled: true
@@ -44,14 +44,14 @@ To send logs with environment variables, configure the following:
 * `DD_LOGS_CONFIG_USE_HTTP`
 * `DD_LOGS_CONFIG_USE_COMPRESSION`
 
-For more details about the compression perfomances and batching size, refer to the [HTTPS section][1].
+For more details about the compression perfomances and batching size, refer to the [HTTPS section][2].
 
-[1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
-[2]: /agent/guide/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files
+[2]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 {{% /tab %}}
 {{% tab "HTTP uncompressed" %}}
 
-To send logs over HTTPS with the Datadog Agent v6.14+, enable log collection in the Agent's [main configuration file][2] (`datadog.yaml`):
+To send logs over HTTPS with the Datadog Agent v6.14+, enable log collection in the Agent's [main configuration file][1] (`datadog.yaml`):
 
 ```yaml
 logs_enabled: true
@@ -61,14 +61,14 @@ logs_config:
 
 Use `DD_LOGS_CONFIG_USE_HTTP` to configure this through environment variable.
 
-For more details about the compression perfomances and batching size, refer to the [HTTPS section][1].
+For more details about the compression perfomances and batching size, refer to the [HTTPS section][2].
 
-[1]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
-[2]: /agent/guide/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files
+[2]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 {{% /tab %}}
 {{% tab "(Default) TCP" %}}
 
-Enable log collection in the Agent's [main configuration file][2] (`datadog.yaml`):
+Enable log collection in the Agent's [main configuration file][1] (`datadog.yaml`):
 
 ```yaml
 logs_enabled: true
@@ -76,7 +76,7 @@ logs_enabled: true
 
 By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
-[2]: /agent/guide/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -90,7 +90,7 @@ To collect logs for a given integration, uncomment the logs section in that inte
 Consult the <a href="/integrations/#cat-log-collection">list of supported integrations</a>  that include out of the box log configurations.
 </div>
 
-See the setup instructions for [Kubernetes][3] or [Docker][4] if you are using a containerized infrastructure.
+See the setup instructions for [Kubernetes][2] or [Docker][3] if you are using a containerized infrastructure.
 
 If an integration does not support logs by default, use the custom log collection.
 
@@ -98,7 +98,7 @@ If an integration does not support logs by default, use the custom log collectio
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
 
-1. Create a new `<CUSTOM_LOG_SOURCE>.d/` folder in the `conf.d/` directory at the root of your [Agent's configuration directory][2].
+1. Create a new `<CUSTOM_LOG_SOURCE>.d/` folder in the `conf.d/` directory at the root of your [Agent's configuration directory][4].
 2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration group with the parameters below.
 4. [Restart your Agent][5] to take into account this new configuration.
@@ -236,13 +236,13 @@ The Agent sends HTTPS batches with the following limits:
 
 The `compression_level` parameter (or `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accepts values from `0` (no compression) to `9` (maximum compression but higher resource usage). The default value is `6`.
 
-See the [Datadog Agent overhead section][11] for more information about Agent resource usage when compression is enabled.
+See the [Datadog Agent overhead section][10] for more information about Agent resource usage when compression is enabled.
 
 ### Configure the batch wait time
 
 The Agent waits up to 5 seconds to fill each batch (either in content size or number of logs). Therefore, in the worst case scenario (when very few logs are generated) switching to HTTPS might add a 5-second latency compared to TCP, which sends all logs in real time.
 
-To change the maximum time the Datadog Agent waits to fill each batch, add the following in the Agent's [main configuration file][4] (`datadog.yaml`):
+To change the maximum time the Datadog Agent waits to fill each batch, add the following in the Agent's [main configuration file][3] (`datadog.yaml`):
 
 ```yaml
 logs_config:
@@ -254,7 +254,7 @@ The unit is seconds and must be an integer between `1` and `10`.
 
 ### HTTPS Proxy configuration
 
-When logs are sent through HTTPS, use the same [set of proxy settings][10] as the other data types to send logs through a web proxy.
+When logs are sent through HTTPS, use the same [set of proxy settings][11] as the other data types to send logs through a web proxy.
 
 
 ## Further Reading
@@ -262,13 +262,13 @@ When logs are sent through HTTPS, use the same [set of proxy settings][10] as th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/guide/agent-configuration-files
-[3]: /agent/kubernetes/daemonset_setup/#log-collection
-[4]: /agent/docker/log
+[2]: /agent/kubernetes/daemonset_setup/#log-collection
+[3]: /agent/docker/log
+[4]: /agent/guide/agent-configuration-files
 [5]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: /agent/guide/agent-commands/#agent-status-and-information
 [7]: /tracing
 [8]: /developers/metrics/custom_metrics
 [9]: /tagging
-[10]: /agent/proxy
-[11]: /agent/basic_agent_usage/#agent-overhead
+[10]: /agent/basic_agent_usage/#agent-overhead
+[11]: /agent/proxy
