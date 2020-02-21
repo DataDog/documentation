@@ -20,7 +20,7 @@ Take advantage of [DaemonSets][17] to deploy the Datadog Agent on all your nodes
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][2] as a deployment on each Kubernetes node.*
 
-Setting up the agent as a DaemonSet requires three simple steps. If you run into issues throughout the process, make sure to check out the [troubleshooting section.][21]
+Setting up the agent as a DaemonSet requires two simple steps. If you run into issues throughout the process, make sure to check out the [troubleshooting section.][21]
 
 ## 1. Configure RBAC Permissions
 
@@ -35,38 +35,20 @@ kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/maste
 ```
 
 ### Verification
-To verify the RBAC permissions are set properly, run the following command:
+To verify the RBAC permissions are set properly, paste the following script in your console:
 
-```
-PLACEHOLDER
-```
-
-You should see:
-
-```
-PLACEHOLDER
-```
-
-## 2. Install Admission Controller Web Hook
-
-For a seamless experience that doesn't require modifying the deployment of any instrumented app, the agent uses an [Admission Controller Web Hook][19]; the hook will inject the ip of the Datadog agent to each instrumented app as an environment variable (`DD_AGENT_HOST`), allowing services like APM and Statsd to automatically discover the agent.
-
-To install the hook, launch the following command: 
-```
-<PLACEHOLDER>
-```
-The hook will inject said env variable to every pod running on the cluster. To limit the scope to just the instrumented apps, [selectors][20] can be used.
-
-### Verification
-To verify the Admission Controller Web Hook is set properly, run the following command:
-
-```shell
-kubectl get mutatingwebhookconfigurations
+```bash
+if 
+kubectl get clusterroles | grep -q datadog-agent &&
+kubectl get clusterrolebinding | grep -q datadog-a2gent &&
+kubectl get serviceaccounts | grep -q datadog-agent; then
+    echo RBAC permissions are installed succesfully!
+else
+    echo Some of the RBAC permissions were not installed succesfully. Please re-apply the configuration files.
+fi
 ```
 
-The Datadog webhook should show up.
-
-## 3. Create The Datadog Agent Manifest
+## 2. Create The Datadog Agent Manifest
 
 Create the following `datadog-agent.yaml` manifest. (This manifest assumes you are using Docker; if you are using Containerd, see [this example][3].)
 
