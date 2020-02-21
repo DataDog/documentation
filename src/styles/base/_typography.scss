@@ -1,5 +1,43 @@
 // Typography
 
+body {
+  &:lang(ja) {
+    font-family: 'Noto Sans JP', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 200;
+    word-wrap: normal;
+    line-break: strict;
+  }
+}
+
+h1,
+.h1 {
+  &:lang(ja) {
+    font-size:32px;
+    line-height: 44px;
+    font-style: normal;
+    font-weight: bold;
+  }
+}
+
+h2 {
+  &:lang(ja) {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 36px;
+  }
+}
+
+p {
+  &:lang(ja) {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px !important;
+    line-height: 24px !important;
+  }
+}
+
 small,
 .small {
   font-weight: 200;

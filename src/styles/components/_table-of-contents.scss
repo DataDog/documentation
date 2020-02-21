@@ -148,6 +148,12 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                 padding: 2px 0px 2px 10px;
                                 border-left: 2px solid $ddgray;
                                 font-size: 18px;
+                                &:lang(ja) {
+                                  font-style: normal;
+                                  font-weight: 300;
+                                  font-size: 14px;
+                                  line-height: 24px;
+                                }
                             }
                             // First level a tag
                             & > a:first-child:not(.toc_open) {

@@ -354,6 +354,10 @@ h5{
   }
 
   ul, ol, p {
+    &:lang(ja) {
+      font-size: 14px;
+      line-height: 24px;
+    }
     font-size: 18px;
     color: #4a4a4a;
     line-height: 27px;
@@ -372,6 +376,14 @@ h5{
     padding:0;
     li {
       padding-bottom:6px;
+
+      &:lang(ja) {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 24px;
+      }
+
       &:before {
         content: "" !important;
         margin:0 !important;
