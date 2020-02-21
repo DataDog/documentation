@@ -26,11 +26,11 @@ Create a new [Synthetics API test][3] upon `http://example.com/`:
 
     {{< img src="synthetics/guide/uptime_slo/synthetics_test_config.png" alt="Synthetics test configuration" >}}
 
-4. Tweek those assertions to match your SLI and define your test retry policy, in this example if at least half of the locations fails, even after one retry, then we consider that the site is down;
+4. Tweak those assertions to match your SLI and define your test retry policy, in this example if at least half of the locations fails, even after one retry, then we consider that the site is down;
 
     {{< img src="synthetics/guide/uptime_slo/synthetics_test_assertions.png" alt="Synthetics test assertions" >}}
 
-5. Optionally - Define a verbouse notification message:
+5. Optionally - Define a verbose notification message:
 
     {{< img src="synthetics/guide/uptime_slo/synthetics_message.png" alt="Synthetics test message" >}}
 
