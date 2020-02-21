@@ -92,7 +92,6 @@ spec:
         imagePullPolicy: Always
         name: datadog-agent
         ports:
-          # Remove if not using Statsd
           - containerPort: 8125
             ## Custom metrics via DogStatsD - uncomment this section to enable
             ## custom metrics collection.
@@ -118,7 +117,8 @@ spec:
           
           ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to allow StatsD collection.
           - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }
-                   
+           
+          - {name: DD_APM_ENABLED, value: "true" }
           - {name: KUBERNETES, value: "true"}
           - {name: DD_HEALTH_PORT, value: "5555"}
           - {name: DD_COLLECT_KUBERNETES_EVENTS, value: "true" }
@@ -206,16 +206,8 @@ For Agent v6.11+, the Datadog Agent can auto-detect the Kubernetes cluster name 
 
 ### APM and Distributed Tracing
 
-The APM trace agent is listening on port 8126 by default. To enable APM, initalize the tracer in your instrumented app(s); there's no need to specify a host or port as the tracers will default to the agent location, `DD_AGENT_HOST`.
+To enable APM by allowing incoming data from port 8126, uncomment the following portion in your YAML file
 
-Refer to the [language-specific APM instrumentation docs][22] for more information
-
-To disable the APM trace agent from listening to events, add the following flag to your Datadog agent YAML file:
-```yaml
-- {name: DD_APM_ENABLED, value: "false" }
-```
-
-Then, remove the `containerPort: 8126` mapping: 
 ```yaml
 - containerPort: 8126
   hostPort: 8126
@@ -223,11 +215,37 @@ Then, remove the `containerPort: 8126` mapping:
   protocol: TCP
 ```
 
-Lastly, apply the configuration for the changes to take effect: 
+Make sure that `DD_APM_ENABLED` is set to 
+```yaml
+- {name: DD_APM_ENABLED, value: "true" }
+```
+
+**Important:** in order for the tracing libraries to find the agent, you need to add the following enviornement variable to every deployment file that belongs to an app you'd like to instrument:
+
+<pre>
+apiVersion: apps/v1
+kind: Deployment
+...
+    spec:
+      containers:
+      - name: <CONTAINER_NAME>
+        image: <CONTAINER_IMAGE>/<TAG>
+      <b>env:
+          - name: DD_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP</b>
+</pre>
+
+
+Lastly, for the changes to take effect, apply the configuration for the changes to take effect: 
 
 ```shell
 kubectl apply -f datadog-agent.yaml
 ```
+
+Refer to the [language-specific APM instrumentation docs][22] for more information
+
 
 ### DogStatsD
 
