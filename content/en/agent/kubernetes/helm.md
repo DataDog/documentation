@@ -69,39 +69,33 @@ To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datad
 {{< tabs >}}
 {{% tab "Helm v3+" %}}
 ```bash 
-helm install <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY>,datadog.clusterAgent.admissionController.enabled=true,datadog.apm.enabled=true,datadog.statsd.enabled=true stable/datadog
+helm install <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
 ```
 {{% /tab %}}
 {{% tab "Helm v1/v2" %}}
-```bash
-helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY>,datadog.clusterAgent.admissionController.enabled=true,datadog.apm.enabled=true,datadog.statsd.enabled=true stable/datadog
+```shell
+helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][5] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
 
-The aforementioned command will allow the agent to receive inbound traffic for [APM][12] and [DogStatsD Custom Metrics][13]. If not using any of these services, set the `service.enabled` value to false. The values can always be changed in the future by configuring the Helm chart (see next section).
-
-Additionally, the default configuration takes advantage of [Dynamic Admission Controllers][14]. In Datadog's case, the agent runs a [mutating web-hook][15] that automatically injects the host ip of the agent as an environment variable to every pod running on the cluster; this allows APM tracing and DogStatsD libraries to automatically discover the agent, without having to modify application deployment files. 
-
-If not using admission controllers, the `DD_AGENT_HOST` environment variable must be for every instrumented app. For every deployment. Under the env section in your app, add the following code
-
-```yaml
-...
-env:
-  - name: DD_AGENT_HOST
-    valueFrom:
-      fieldRef:
-        fieldPath: status.hostIP
-...
+For a quick setup that will automatically enable APM and\or Custom DogStatsD metrics, you can use the following command:
+{{< tabs >}}
+{{% tab "Helm v3+" %}}
+```bash 
+helm install <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY>,datadog.apm.enabled=true,datadog.statsd.enabled=true,datadog.clusterAgent.admissionController.enabled=true stable/datadog
 ```
-
-To check the environment variable is set properly, run:
-```bash
-kubectl exec <YOUR_APP_POD_NAME> env
+{{% /tab %}}
+{{% tab "Helm v1/v2" %}}
+```shell
+helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY>,datadog.apm.enabled=true,datadog.statsd.enabled=true,datadog.clusterAgent.admissionController.enabled=true stable/datadog
 ```
-`DD_AGENT_HOST` should be present and point to its parent node ip address.
+{{% /tab %}}
+{{< /tabs >}}
+
+This command takes advantage of Admission Controller. To learn more about the advantages of using Admission Controllers, visit the following [page][15].  
 
 **Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][6].
 
@@ -142,7 +136,7 @@ datadog:
 
 **Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
 
-Update your datadog-values.yaml file with the following APM configuration:
+Update your `datadog-values.yaml` file with the following APM configuration:
 ```yaml
 datadog
  ...
@@ -157,7 +151,52 @@ datadog
 
 Then upgrade your Datadog Helm chart.
 
-**Note** In order to use APM, you have to enable admission controller or use downward API, please refer to the [language-specific APM instrumentation docs][9] for more information.
+From here there are 2 options:
+
+#### Admission Controller
+
+Takes advantage of [Dynamic Admission Controllers][15]. In Datadog's case, the agent runs a mutating web-hook that automatically injects the host ip of the agent as an environment variable to every pod running on the cluster; this allows APM tracing and DogStatsD libraries to automatically discover the agent, without having to modify application deployment files.
+
+To enable the use of DD's Admission Controller, change the following setting in your `datadog-values.yaml` file
+
+```yaml
+datadog
+ ...
+  admissionController:
+    enabled: true
+ ...
+```
+
+Upgrade the helm chart for the changes to take place.
+
+#### Downward API
+
+As an alternative to the admission controller, you can use Downward API. To enable Downward API, you need to add the following enviornement variable to every deployment file that belongs to an app you'd like to instrument:
+
+<pre>
+apiVersion: apps/v1
+kind: Deployment
+...
+    spec:
+      containers:
+      - name: <CONTAINER_NAME>
+        image: <CONTAINER_IMAGE>/<TAG>
+      <b>env:
+          - name: DD_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP</b>
+</pre>
+
+
+To make sure the flag is set properly in the app you'd like to deploy, test it with one of your applications pods:
+```shell
+kubectl exec <YOUR_APP_POD_NAME> env | grep DD_AGENT_HOST
+```
+
+DD_AGENT_HOST should be present and point to its parent node ip address.
+
+Refer to the [language-specific APM instrumentation docs][9] for more information.
 
 ### Enabling Process Collection
 
@@ -263,4 +302,4 @@ This command removes all Kubernetes components associated with the chart and del
 [12]: /tracing/
 [13]: /agent/kubernetes/dogstatsd/
 [14]: https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/
-[15]: https://github.com/DataDog/todo-add-the-mutating-web-hook-source-code
+[15]: /agent/kubernetes/admission-controller/
