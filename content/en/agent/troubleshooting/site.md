@@ -5,33 +5,31 @@ kind: documentation
 
 By default the Agent sends its data to Datadog US site: `app.datadoghq.com`. If your organization is on another site, you must update the `site` parameter in your [Agent main configuration file][1] accordingly or set the `DD_SITE` environment variable:
 
-{{< tabs >}}
-{{% tab "US Site" %}}
+{{< site-region region="us" >}}
 
 Set the `DD_SITE` variable to `datadoghq.com`or update the parameter `site` parameter in your `datadog.yaml`
 
-```yaml
+{{< code-block lang="yaml" >}}
 ## @param site - string - optional - default: datadoghq.com
 ## The site of the Datadog intake to send Agent data to.
 ## Set to 'datadoghq.eu' to send data to the EU site.
 #
 site: datadoghq.com
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "EU Site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 Set the `DD_SITE` variable to `datadoghq.eu`or update the parameter `site` parameter in your `datadog.yaml`:
 
-```yaml
+{{< code-block lang="yaml" >}}
 ## @param site - string - optional - default: datadoghq.com
 ## The site of the Datadog intake to send Agent data to.
 ## Set to 'datadoghq.eu' to send data to the EU site.
 #
 site: datadoghq.eu
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

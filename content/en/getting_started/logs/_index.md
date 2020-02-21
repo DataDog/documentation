@@ -38,22 +38,22 @@ Logs can be a full-text message:
 
 The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for nonsecure connections).
 
-```text
+{{< code-block lang="text" filename="response.txt" >}}
 telnet intake.logs.datadoghq.com 10514
 
 <DATADOG_API_KEY> Plain text log sent through TCP
-```
+{{< /code-block >}}
 
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
 The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` for nonsecure connections).
 
-```text
+{{< code-block lang="text" filename="response.txt" >}}
 telnet tcp-intake.logs.datadoghq.eu 1883
 
 <DATADOG_API_KEY> Plain text log sent through TCP
-```
+{{< /code-block >}}
 
 {{< /site-region >}}
 
