@@ -120,6 +120,6 @@ Ce quota peut être modifié ou supprimé à tout moment en modifiant l'index :
 [14]: /fr/logs/processing/processors/?tab=ui#geoip-parser
 [15]: /fr/tracing/connect_logs_and_traces/
 [16]: /fr/logs/processing/processors/?tab=ui#trace-remapper
-[17]: https://docs.datadoghq.com/fr/logs/live_tail/#overview
-[18]: https://docs.datadoghq.com/fr/logs/archives/
-[19]: https://docs.datadoghq.com/fr/logs/logs_to_metrics/
+[17]: /fr/logs/live_tail/#overview
+[18]: /fr/logs/archives/
+[19]: /fr/logs/logs_to_metrics/

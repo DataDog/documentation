@@ -264,7 +264,7 @@ Docker インテグレーションは Docker Agent を使用してメトリク�
 [10]: /ja/logs
 [11]: /ja/infrastructure/process
 [12]: /ja/infrastructure/livecontainers
-[13]: https://docs.datadoghq.com/ja/developers/dogstatsd
+[13]: /ja/developers/dogstatsd
 [14]: /ja/developers/dogstatsd/unix_socket
 [15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [16]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go

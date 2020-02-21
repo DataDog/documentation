@@ -120,6 +120,6 @@ further_reading:
 [14]: /ja/logs/processing/processors/?tab=ui#geoip-parser
 [15]: /ja/tracing/connect_logs_and_traces/
 [16]: /ja/logs/processing/processors/?tab=ui#trace-remapper
-[17]: https://docs.datadoghq.com/ja/logs/live_tail/#overview
-[18]: https://docs.datadoghq.com/ja/logs/archives/
-[19]: https://docs.datadoghq.com/ja/logs/logs_to_metrics/
+[17]: /ja/logs/live_tail/#overview
+[18]: /ja/logs/archives/
+[19]: /ja/logs/logs_to_metrics/
