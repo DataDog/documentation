@@ -64,6 +64,7 @@ tiller-deploy-f54b67464-jl5gm 1/1 Running 0 3h16m
 
 **Note** We recommend using Helm 3.0 or greater. If you're using a lower version, you may need to install the Helm Server, [Tiller][11].
 
+### Standard Install
 To install the chart with the release name `<RELEASE_NAME>`, retrieve your Datadog API key from your [Agent installation instructions][4] and run:
 
 {{< tabs >}}
@@ -81,6 +82,7 @@ helm install --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable
 
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][5] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
 
+### Standard Install with APM and DogStatsD Enabled
 For a quick setup that will automatically enable APM and\or Custom DogStatsD metrics, you can use the following command:
 {{< tabs >}}
 {{% tab "Helm v3+" %}}
@@ -111,26 +113,6 @@ As a best practice, a YAML file that specifies the values for the chart paramete
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog --recreate-pods
 ```
 
-### Enable Log Collection
-
-Update your [datadog-values.yaml][7] file with the following log collection configuration, then upgrade your Datadog Helm chart:
-
-```text
-datadog:
-  (...)
- logsEnabled: true
- logsConfigContainerCollectAll: true
-```
-
-### Enable Custom Metrics Collection
-
-To gather custom metrics with [DogStatsD][8], update your [datadog-values.yaml][7] file to enable non-local traffic.
-
-```text
-datadog:
-  (...)
-  nonLocalTraffic: true
-```
 
 ### Enable APM and Distributed Tracing
 
@@ -197,6 +179,27 @@ kubectl exec <YOUR_APP_POD_NAME> env | grep DD_AGENT_HOST
 DD_AGENT_HOST should be present and point to its parent node ip address.
 
 Refer to the [language-specific APM instrumentation docs][9] for more information.
+
+### Enable Log Collection
+
+Update your [datadog-values.yaml][7] file with the following log collection configuration, then upgrade your Datadog Helm chart:
+
+```text
+datadog:
+  (...)
+ logsEnabled: true
+ logsConfigContainerCollectAll: true
+```
+
+### Enable Custom Metrics Collection
+
+To gather custom metrics with [DogStatsD][8], update your [datadog-values.yaml][7] file to enable non-local traffic.
+
+```text
+datadog:
+  (...)
+  nonLocalTraffic: true
+```
 
 ### Enabling Process Collection
 
