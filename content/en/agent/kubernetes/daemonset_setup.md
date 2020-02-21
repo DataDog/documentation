@@ -206,7 +206,7 @@ For Agent v6.11+, the Datadog Agent can auto-detect the Kubernetes cluster name 
 
 ### APM and Distributed Tracing
 
-To enable APM by allowing incoming data from port 8126, uncomment the following portion in your YAML file
+To enable APM by allowing incoming data from port 8126, uncomment the following portion in your YAML file:
 
 ```yaml
 - containerPort: 8126
@@ -215,7 +215,7 @@ To enable APM by allowing incoming data from port 8126, uncomment the following 
   protocol: TCP
 ```
 
-Make sure that `DD_APM_ENABLED` is set to 
+Make sure that `DD_APM_ENABLED` is set to true:
 ```yaml
 - {name: DD_APM_ENABLED, value: "true" }
 ```
@@ -237,6 +237,12 @@ kind: Deployment
                 fieldPath: status.hostIP</b>
 </pre>
 
+To make sure the flag is set properly in the app you'd like to deploy, test it with one of your applications pods:
+```shell
+kubectl exec <YOUR_APP_POD_NAME> env | grep DD_AGENT_HOST
+```
+
+DD_AGENT_HOST should be present and point to its parent node ip address.
 
 Lastly, for the changes to take effect, apply the configuration for the changes to take effect: 
 
