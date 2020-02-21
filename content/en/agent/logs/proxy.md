@@ -1,5 +1,5 @@
 ---
-title: Agent proxy for logs
+title: TCP proxy for logs
 kind: documentation
 further_reading:
 - link: "logs/"
