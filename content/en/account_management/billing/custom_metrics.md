@@ -167,11 +167,11 @@ The billable number of custom metrics is based on the average number of custom m
 
 The following standard integrations can potentially emit custom metrics.
 
-| Type of integrations                             | Integrations                                                                                                                                                  |
-|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Limited to 350 custom metrics by default.        | [ActiveMQ XML][9] / [Go-Expvar][10] / [Java-JMX][11]                                                                                                                           |
+| Type of integrations                             | Integrations                                                                                                                             |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Limited to 350 custom metrics by default.        | [ActiveMQ XML][9] / [Go-Expvar][10] / [Java-JMX][11]                                                                                     |
 | No default limit upon custom metrics collection. | [Directory][12] /[Linux Proc Extras][13] /[Nagios][14] /[PDH Check][15] /[Prometheus][16] /[SNMP][17] /[Windows Services][18] /[WMI][19] |
-| Can be configured to collect custom metrics.     | [MySQL][20] /[Oracle][21] /[Postgres][22] /[SQL Server][23]                                                                                                   |
+| Can be configured to collect custom metrics.     | [MySQL][20] /[Oracle][21] /[Postgres][22] /[SQL Server][23]                                                                              |
 
 ## Troubleshooting
 
