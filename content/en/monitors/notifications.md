@@ -140,7 +140,7 @@ Use template variables to customize your monitor notifications. The built-in var
 
 #### Arithmetic
 
-Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax, for example:
+Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use `eval` syntax, for example:
 
 ```text
 {{eval "<TEMPLATE_VARIABLE_NAME>+1-2*3/4"}}
@@ -167,8 +167,8 @@ For example, if your monitor triggers an alert for each `host`, then the tag var
 
 #### Tag key with period
 
-If your tag's key has a period in it, include brackets around the full key when using the tag variable.
-For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.ket.test`, use:
+If your tag's key has a period in it, include brackets around the full key when using a tag variable.
+For example, if your tag is `dot.key.test:five` and your monitor is grouped by `dot.key.test`, use:
 
 ```text
 {{[dot.key.test].name}}
@@ -176,152 +176,138 @@ For example, if your tag is `dot.key.test:five` and your monitor is grouped by `
 
 ### Conditional variables
 
-Conditional variables allow for different text to be sent to different contacts based on the state of the monitor and the details of how it was triggered. These condition variables can be used within either the subject or body of the notification set in section 3 of the monitor definition.
+Conditional variables use `if-else` logic to display a different message depending on the state of the monitor and the details of how it was triggered. These variables can be used within the subject or body of the notification message.
 
-Keep in mind when using conditional tags that they must have an open (example: `{{#is_alert}}`) and closing (example: `{{/is_alert}}`) pair with the desired text and **@-mentions** in between.
+The following conditional variables are available:
 
-The conditional variables available are:
+| Conditional Variable       | The text is displayed if                                           |
+|----------------------------|--------------------------------------------------------------------|
+| `{{#is_alert}}`            | The monitor alerts                                                 |
+| `{{^is_alert}}`            | The monitor does not alert                                         |
+| `{{#is_match}}`            | The context matches the provided substring                         |
+| `{{^is_match}}`            | The context does not match the provided substring                  |
+| `{{#is_exact_match}}`      | The context exactly matches the provided string                    |
+| `{{^is_exact_match}}`      | The context does not exactly match the provided string             |
+| `{{#is_no_data}}`          | The monitor is triggered for missing data                          |
+| `{{^is_no_data}}`          | The monitor is notifies on missing data                            |
+| `{{#is_warning}}`          | The monitor warns                                                  |
+| `{{^is_warning}}`          | The monitor does not warn                                          |
+| `{{#is_recovery}}`         | The monitor recovers from `ALERT`, `WARNING`, or `NO DATA`         |
+| `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, or `NO DATA` |
+| `{{#is_warning_recovery}}` | The monitor recovers from `WARNING` to `OK`                        |
+| `{{^is_warning_recovery}}` | The monitor does not recover from `WARNING` to `OK`                |
+| `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `OK`                          |
+| `{{^is_alert_recovery}}`   | The monitor does not recover from an ALERT to OK                   |
+| `{{#is_alert_to_warning}}` | The monitor transitions from `ALERT` to `WARNING`                  |
+| `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERT` to `WARNING`          |
+| `{{#is_no_data_recovery}}` | The monitor recovers from `NO DATA`                                |
+| `{{^is_no_data_recovery}}` | The monitor does not recover from `NO DATA`                        |
 
-| Conditional Variable       | Description                                                         |
-|----------------------------|---------------------------------------------------------------------|
-| `{{#is_alert}}`            | Show when monitor alerts                                            |
-| `{{^is_alert}}`            | Show unless monitor alerts                                          |
-| `{{#is_match}}`            | Show when the context matches a string                              |
-| `{{^is_match}}`            | Show unless the context matches a string                            |
-| `{{#is_exact_match}}`      | Show when the context matches a string exactly                      |
-| `{{^is_exact_match}}`      | Show unless the context matches a string exactly                    |
-| `{{#is_no_data}}`          | Show when monitor notifies on missing data                          |
-| `{{^is_no_data}}`          | Show unless monitor notifies on missing data                        |
-| `{{#is_warning}}`          | Show when monitor warns                                             |
-| `{{^is_warning}}`          | Show unless monitor warns                                           |
-| `{{#is_recovery}}`         | Show when monitor recovers from either WARNING, ALERT, or NO DATA   |
-| `{{^is_recovery}}`         | Show unless monitor recovers from either WARNING, ALERT, or NO DATA |
-| `{{#is_warning_recovery}}` | Show when monitor recovers from a WARNING to OK                     |
-| `{{^is_warning_recovery}}` | Show unless monitor recovers from a WARNING to OK                   |
-| `{{#is_alert_recovery}}`   | Show when monitor recovers from an ALERT to OK                      |
-| `{{^is_alert_recovery}}`   | Show unless monitor recovers from an ALERT to OK                    |
-| `{{#is_alert_to_warning}}` | Show when monitor transitions from ALERT to WARNING                 |
-| `{{^is_alert_to_warning}}` | Show unless monitor transitions from ALERT to WARNING               |
-| `{{#is_no_data_recovery}}` | Show when monitor recovers from NO DATA                             |
-| `{{^is_no_data_recovery}}` | Show unless monitor recovers from NO DATA                           |
+#### Examples
 
-These can also be seen in the "Use message template variables" help box in
-Step 3 of the monitor editor.
-
-Here are some examples of their usage:
+Conditional variable must have an opening and closing pair with the text and **@-notifications** in-between.
 
 {{< tabs >}}
-{{% tab "is_alert / is_warning" %}}
+{{% tab "is_alert" %}}
 
-These variables use simple `if-else` logic to display a different message depending on the event type (*warning*, *recovery*, *no data*...)
+To send a notification message when a monitor alerts, use the format:
 
-{{< img src="monitors/notifications/conditionalvars.png" alt="conditional vars"  style="width:80%;">}}
-
-This is an example in the editor:
-
-{{< img src="monitors/notifications/templateconditionaleditor.png" alt="template conditional editor"  style="width:80%;">}}
-
-The corresponding trigger event notification looks like this:
-
-{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="template conditional trigger"  style="width:80%;">}}
-
-and the recovery notification:
-
-{{< img src="monitors/notifications/templateconditionalrecover.png" alt="template conditional recover"  style="width:80%;">}}
+```
+{{#is_alert}}
+  <ALERT_MESSAGE_TEXT> <@-NOTIFICATION>
+{{/is_alert}}
+```
 
 {{% /tab %}}
-{{% tab "is_recovery / is_alert_recovery " %}}
+{{% tab "is_warning" %}}
 
-* `{{#is_recovery}}` triggers when a monitor recovers indifferently either from a **WARNING** state or an **ALERT** state.
-* `{{#is_alert_recovery}}` triggers when a monitor recovers directly from an **ALERT** state to an **OK** state.
-* `{{#is_warning_recovery}}` triggers when a monitor recovers from a **WARNING** state to an **OK** state
+To send a notification message when a monitor warns, use the format:
 
-This means that if the monitor switches from an **ALERT** to a **WARNING** to an **OK** state:
-
-* the `{{#is_recovery}}` would trigger
-* the `{{#is_alert_recovery}}` wouldn't trigger
-* the `{{#is_warning_recovery}}` would trigger.
+```
+{{#is_warning}}
+  <WARNING_MESSAGE_TEXT> <@-NOTIFICATION>
+{{/is_warning}}
+```
 
 {{% /tab %}}
-{{% tab "is_match / is_exact_match" %}}
+{{% tab "is_recovery" %}}
 
-The `{{is_match}}` conditional allows you to match the triggering context to any given string in order to display a different message in your notifications.
-Use any of the available tag variables in your conditional statement. **A match is made if the comparison string is anywhere in the resolved variable**.
+To send a notification message when a monitor recovers, use the format:
 
-Tag variables use the following format:
+```
+{{#is_recovery}}
+  <RECOVERY_MESSAGE_TEXT> <@-NOTIFICATION>
+{{/is_recovery}}
+```
+
+{{% /tab %}}
+{{% tab "is_match" %}}
+
+Search for a substring in a tag variable with the format:
 
 ```text
 {{#is_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
-  This shows if <COMPARISON_STRING> is included in <TAG_VARIABLE>
+  This displays if <COMPARISON_STRING> is included in <TAG_VARIABLE>.
 {{/is_match}}
 ```
 
-For example, if you want to notify your DB team if a triggering host has the `role:db_cassandra` tag or the `role:db_postgres` tag, use the following:
+To notify your DB team if a triggering host has the tag `role:db_cassandra` or `role:db_postgres`, use the following:
 
 ```text
 {{#is_match "role.name" "db"}}
-  This shows only if the host that triggered the alert has `role` tag variable with `db` in it.
-  It would trigger for role:db_cassandra and role:db_postgres
+  This displays if the host triggering the alert contains `db`
+  in the role name. @db-team@company.com
 {{/is_match}}
 ```
 
-**Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use the `{{is_match}}` conditional with an empty string.
+**Note**: To check if a `<TAG_VARIABLE>` is **NOT** empty, use an empty string for the `<COMPARISON_STRING>`.
 
-```text
-{{#is_match "<TAG_VARIABLE>.name" ""}}
-  This shows if <TAG_VARIABLE> is not empty.
-{{/is_match}}
-```
+{{% /tab %}}
+{{% tab "is_exact_match" %}}
 
-##### {{is_exact_match}}
-
-The `{{is_exact_match}}` conditional looks for the exact string in the tag variable, rather than using substring matching. The variable uses the following format:
+Search for an exact string in a tag variable with the format:
 
 ```text
 {{#is_exact_match "<TAG_VARIABLE>.name" "<COMPARISON_STRING>"}}
-  This shows if <COMPARISON_STRING> is exactly <TAG_VARIABLE>.
+  This displays if <COMPARISON_STRING> is exactly <TAG_VARIABLE>.
 {{/is_exact_match}}
 ```
 
-For instance, if an alert that can be triggered by two hosts tagged with `role:production` and `role:production-1`:
+To notify your dev team if a triggering host has the name `production`, use the following:
 
-  ```text
-  {{#is_match "role.name" "production"}}
-    This shows only if the host that triggered the alert has the tags role:production or the role:production-1 attached.
-  {{/is_match}}
-
-  {{#is_exact_match "host.name" "production"}}
-    This shows only if the host that triggered has the tag role:production attached.
-  {{/is_exact_match}}
-  ```
+```text
+{{#is_exact_match "host.name" "production"}}
+  This displays if the host that triggered the alert is exactly
+  named production. @dev-team@company.com
+{{/is_exact_match}}
+```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Advanced
 
-### Dashboard links
+### Dynamic links
 
-Many organizations like to include additional context to their Alerts. Quick links to relevant dashboards as a part of the Alert have proven to reduce the overall time it takes during the break fix process to reduce time to resolution.
+Use [tag variables](#tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can of provide links to pages within Datadog such as dashboards, the host map, and managed monitors.
 
-Datadog makes message template variables available to each defined monitor. These variables enable dynamic URL building that links Datadog users to an appropriate dashboard using the scope of the monitor.
+{{< tabs >}}
+{{% tab "Dashboards" %}}
 
-Here are a few examples of providing links to items like System Dashboards, Integration Dashboards, Host Maps, and Managed Monitors pages.
-
-Example: provide a link to a System Dashboard when a monitor for a specific system metric has exceeded a defined threshold. The message template variable that can be leveraged in this instance is `{{host.name}}`. Include the following URL as a part of your Monitor "Say What's Happening" section:
+Leverage the `{{host.name}}` [tag variable](#tag-variables) to provide a link to a system dashboard:
 
 ```text
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
 ```
 
-`{{host.name}}` is replaced with the offending host of the monitor in question.
+Leverage the `{{host.name}}` [tag variable](#tag-variables) and an `<INTEGRATION_NAME>` to provide a link to an integration dashboard:
 
-{{< img src="monitors/notifications/system_dashboard_url.png" alt="system_dashboard_url"  style="width:70%;" >}}
+```text
+https://app.datadoghq.com/dash/integration/<INTEGRATION_NAME>?tpl_var_scope=host:{{host.name}}
+```
 
-Find below additional examples of links that could be added to Monitors to provide Datadog users quick access to common pages leveraged during the break, fix, and triage process:
-
-{{< tabs >}}
-{{% tab "hostmap" %}}
+{{% /tab %}}
+{{% tab "Host Map" %}}
 
 To include a link to the HostMap to compare metrics with other similar hosts, use a link like below to be included in your Monitor:
 
@@ -365,26 +351,19 @@ https://app.datadoghq.com/monitors/manage?q=cassandra
 {{< img src="monitors/notifications/monitor_url.png" alt="monitor_url"  style="width:70%;">}}
 
 {{% /tab %}}
-{{% tab "Integration Dashboards" %}}
+{{< /tabs >}}
 
-If you are building application- or integration-specific monitors, link to that specific Integration Dashboard as well as adding a scope for the host that triggered the monitor.
+### Comments
 
-In the example below, all that is necessary to populate is the `<INTEGRATION_NAME>` section for something like Cassandra, Apache, SNMP, etc., as well as providing the scope for the offending host:
+To include a comment in the monitor message that only displays in the monitor edit screen, use the syntax:
 
 ```text
-https://app.datadoghq.com/dash/integration/<INTEGRATION_NAME>?tpl_var_scope=host:{{host.name}}
+{{!-- this is a comment --}}
 ```
-
-{{< img src="monitors/notifications/integration_url.png" alt="integration_url"  style="width:70%;">}}
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Raw format
 
-If your alert message needs to send double curly braces, such as `{{ <TEXT> }}`, use the `{{{{raw}}}}` formatting:
-
-The following template:
+If your alert message needs to send double curly braces, such as `{{ <TEXT> }}`, use `{{{{raw}}}}` formatting. For example, the following:
 
 ```text
 {{{{raw}}}}
@@ -392,13 +371,13 @@ The following template:
 {{{{/raw}}}}
 ```
 
-outputs:
+Outputs:
 
 ```text
 {{ <TEXT_1> }} {{ <TEXT_2> }}
 ```
 
-The `^|#` helpers shown in the [Conditional variables](#conditional-variables) section cannot be used with `{{{{raw}}}}` formatting and must be removed. For instance, to output raw text with the `{{is_match}}` conditional variable use the following template:
+The `^|#` helpers used in [conditional variables](#conditional-variables) cannot be used with `{{{{raw}}}}` formatting and must be removed. For instance, to output raw text with the `{{is_match}}` conditional variable use the following template:
 
 ```text
 {{{{is_match "host.name" "<HOST_NAME>"}}}}
@@ -410,14 +389,6 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 ```text
 {{ .matched }} the host name
-```
-
-### Comments
-
-To include a comment in the monitor message that only shows in the monitor edit screen, use the syntax:
-
-```text
-{{!-- this is a comment --}}
 ```
 
 ## Further Reading
