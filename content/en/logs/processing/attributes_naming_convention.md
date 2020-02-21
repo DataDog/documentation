@@ -274,7 +274,7 @@ All attributes and measures are prefixed by `dns`.
 [16]: /integrations/amazon_rds
 [17]: /integrations/elastic
 [18]: /logs/processing/processors/#remapper
-[19]: /logs/explorer/?tab=measures#setup
+[19]: /logs/explorer/facets
 [20]: /tracing/app_analytics/search
 [21]: /integrations/rsyslog
 [22]: /integrations/nxlog

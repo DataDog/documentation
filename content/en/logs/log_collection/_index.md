@@ -259,7 +259,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [12]: /agent/logs/#custom-log-collection
 [13]: /logs/processing
 [14]: /logs/processing/parsing
-[15]: /logs/explorer/?tab=facets#setup
+[15]: /logs/explorer/facets
 [16]: /agent/docker/log
 [17]: /agent/autodiscovery/management
 [18]: /agent/autodiscovery/integrations

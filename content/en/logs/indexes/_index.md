@@ -106,7 +106,7 @@ Update or remove this quota at any time when editing the Index:
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/indexes
-[2]: /logs/explorer/?tab=facets#visualization
+[2]: /logs/explorer/#visualization
 [3]: /logs/explorer/patterns
 [4]: /logs/explorer/analytics
 [5]: /logs/explorer/analytics/#dashboard
