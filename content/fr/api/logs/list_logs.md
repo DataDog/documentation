@@ -40,5 +40,5 @@ Le endpoint List renvoie les logs qui correspondent à une requête de recherche
     pour les organisations avec plusieurs index, l'index de log sur lequel la requête porte.
 
 [1]: /fr/logs/guide/collect-multiple-logs-with-pagination
-[2]: https://docs.datadoghq.com/fr/logs/archives
-[3]: https://docs.datadoghq.com/fr/logs/explorer/search/#search-syntax
+[2]: /fr/logs/archives
+[3]: /fr/logs/explorer/search/#search-syntax

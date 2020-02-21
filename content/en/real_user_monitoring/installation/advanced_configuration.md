@@ -169,4 +169,4 @@ window.DD_RUM && DD_RUM.addUserAction("Cart Payed", {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/browser-sdk
-[2]: https://docs.datadoghq.com/logs/processing/attributes_naming_convention/#user-related-attributes]
+[2]: /logs/processing/attributes_naming_convention/#user-related-attributes]

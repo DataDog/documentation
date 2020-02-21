@@ -63,5 +63,5 @@ Once a role is deleted all users who have the role will have their permissions u
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rbac
+[1]: https://app.datadoghq.com/access/roles
 [2]: /account_management/users/#edit-a-user-roles

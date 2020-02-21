@@ -1,31 +1,36 @@
 ---
 title: Running Endpoints Checks with Autodiscovery
 kind: documentation
+aliases:
+    - /agent/autodiscovery/endpointchecks
+    - /agent/autodiscovery/endpointschecks
 further_reading:
-- link: "/agent/autodiscovery"
-  tag: "Documentation"
-  text: "Main Autodiscovery documentation"
-- link: "/agent/autodiscovery/clusterchecks/"
-  tag: "Documentation"
-  text: "Cluster Checks documentation"
-- link: "/agent/kubernetes/cluster/"
-  tag: "Documentation"
-  text: "Cluster Agent documentation"
+    - link: '/agent/autodiscovery'
+      tag: 'Documentation'
+      text: 'Main Autodiscovery documentation'
+    - link: '/agent/cluster_agent/clusterchecks/'
+      tag: 'Documentation'
+      text: 'Cluster Checks documentation'
+    - link: '/agent/kubernetes/cluster/'
+      tag: 'Documentation'
+      text: 'Cluster Agent documentation'
 ---
 
 ## How it Works
 
-The [Cluster Check][1] feature provides the ability to autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services). The Endpoints Checks feature extends this mechanism to monitor any endpoint behind cluster services.
+The cluster check feature provides the ability to Autodiscover and perform checks on load-balanced cluster services (eg. Kubernetes services).
 
-The [Cluster Agent][2] holds the configurations and exposes them to node-based Agents so they can consume and convert them into Endpoints Checks.
+Endpoint checks extend this mechanism to monitor any endpoint behind cluster services.
 
-Endpoints Checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the monitored service.
+The [Cluster Agent][1] holds the configurations and exposes them to node-based Agents so they can consume and convert them into endpoints checks.
 
-The Agents connect to the Cluster Agent every 10 seconds and retrieve the check configurations to run. Metrics coming from Endpoints Checks will be submitted with service, pod, and host tags.
+Endpoints checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the monitored service.
 
-This feature is currently supported on Kubernetes for versions 6.12.0+ of the Agent, and versions 1.3.0+ of the Cluster Agent.
+The Agents connect to the Cluster Agent every 10 seconds and retrieve the check configurations to run. Metrics coming from endpoints checks are submitted with service, pod, and host tags.
 
-Starting with version 1.4.0, the Cluster Agent converts every Endpoints Check of a non-pod-backed endpoint into a regular Cluster Check. Enable the [Cluster Check][1] feature alongside Endpoints Checks to take advantage of this functionality.
+This feature is supported on Kubernetes for versions 6.12.0+ of the Agent, and versions 1.3.0+ of the Cluster Agent.
+
+Starting with version 1.4.0, the Cluster Agent converts every endpoints check of a non-pod-backed endpoint into a regular cluster check. Enable the [cluster check][2] feature alongside endpoints checks to take advantage of this functionality.
 
 #### Example: three NGINX pods exposed by the `nginx` service
 
@@ -67,9 +72,9 @@ nginx-758655469f-lk9p6   1/1     Running   0          20h
       ...
 ```
 
-By design, Endpoints Checks are scheduled by Agents that run on the same node as the pods that back the endpoints of the `nginx` service, so only Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` will schedule the checks on the `nginx` pods.
+By design, endpoints checks are scheduled by Agents that run on the same node as the pods that back the endpoints of the `nginx` service, so only Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` will schedule the checks on the `nginx` pods.
 
-This works like that to leverage [autodiscovery][3], and attach pod and container tags to the metrics coming from these pods.
+This works like that to leverage [Autodiscovery][3], and attach pod and container tags to the metrics coming from these pods.
 
 ## How to set it up
 
@@ -82,7 +87,7 @@ DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints"
 DD_EXTRA_LISTENERS="kube_endpoints"
 ```
 
-**Note**: If the monitored endpoints are not backed by pods, you must [enable Cluster Checks][4]. This can be done by adding the `kube_services` configuration provider and listener:
+**Note**: If the monitored endpoints are not backed by pods, you must [enable cluster checks][4]. This can be done by adding the `kube_services` configuration provider and listener:
 
 ```shell
 DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints kube_services"
@@ -97,19 +102,19 @@ Enable the `endpointschecks` configuration providers on the Datadog **Node** Age
 
 - By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable. This takes a space separated string if you have multiple values:
 
-```shell
-DD_EXTRA_CONFIG_PROVIDERS="endpointschecks"
-```
+    ```shell
+    DD_EXTRA_CONFIG_PROVIDERS="endpointschecks"
+    ```
 
 - Or adding it to the `datadog.yaml` configuration file:
 
-```yaml
-config_providers:
-  - name: endpointschecks
-    polling: true
-```
+    ```yaml
+    config_providers:
+        - name: endpointschecks
+          polling: true
+    ```
 
-**Note**: If the monitored endpoints are not backed by pods, you must [enable Cluster Checks][1]. This can be done by adding the `clusterchecks` configuration provider:
+**Note**: If the monitored endpoints are not backed by pods, you must [enable cluster checks][2]. This can be done by adding the `clusterchecks` configuration provider:
 
 ```shell
 DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
@@ -119,15 +124,16 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 
 ## Setting up Check Configurations via Kubernetes Service Annotations
 
-Similar to [annotating Kubernetes Pods][6], Services can be annotated with the following syntax:
+Similar to [annotating Kubernetes Pods][6], services can be annotated with the following syntax:
 
 ```yaml
-  ad.datadoghq.com/endpoints.check_names: '[<INTEGRATION_NAME>]'
-  ad.datadoghq.com/endpoints.init_configs: '[<INIT_CONFIG>]'
-  ad.datadoghq.com/endpoints.instances: '[<INSTANCE_CONFIG>]'
+ad.datadoghq.com/endpoints.check_names: '[<INTEGRATION_NAME>]'
+ad.datadoghq.com/endpoints.init_configs: '[<INIT_CONFIG>]'
+ad.datadoghq.com/endpoints.instances: '[<INSTANCE_CONFIG>]'
+ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
 ```
 
-The `%%host%%` [template variable][7] is supported and is replaced by the endpoints' IPs. The `kube_namespace`, `kube_service`, and `kube_endpoint_ip`  tags are automatically added to the instances.
+The `%%host%%` [template variable][7] is supported and is replaced by the endpoints' IPs. The `kube_namespace`, `kube_service`, and `kube_endpoint_ip` tags are automatically added to the instances.
 
 #### Example: HTTP check on an NGINX-backed service with NGINX check on the service's endpoints
 
@@ -137,42 +143,43 @@ The following service definition exposes the pods from the `my-nginx` deployment
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-nginx
-  labels:
-    run: my-nginx
-  annotations:
-    ad.datadoghq.com/service.check_names: '["http_check"]'
-    ad.datadoghq.com/service.init_configs: '[{}]'
-    ad.datadoghq.com/service.instances: |
-      [
-        {
-          "name": "My Nginx Service",
-          "url": "http://%%host%%",
-          "timeout": 1
-        }
-      ]
-    ad.datadoghq.com/endpoints.check_names: '["nginx"]'
-    ad.datadoghq.com/endpoints.init_configs: '[{}]'
-    ad.datadoghq.com/endpoints.instances: |
-      [
-        {
-          "name": "My Nginx Service Endpoints",
-          "nginx_status_url": "http://%%host%%:%%port%%/nginx_status"
-        }
-      ]
+    name: my-nginx
+    labels:
+        run: my-nginx
+    annotations:
+        ad.datadoghq.com/service.check_names: '["http_check"]'
+        ad.datadoghq.com/service.init_configs: '[{}]'
+        ad.datadoghq.com/service.instances: |
+            [
+              {
+                "name": "My Nginx Service",
+                "url": "http://%%host%%",
+                "timeout": 1
+              }
+            ]
+        ad.datadoghq.com/endpoints.check_names: '["nginx"]'
+        ad.datadoghq.com/endpoints.init_configs: '[{}]'
+        ad.datadoghq.com/endpoints.instances: |
+            [
+              {
+                "name": "My Nginx Service Endpoints",
+                "nginx_status_url": "http://%%host%%:%%port%%/nginx_status"
+              }
+            ]
+        ad.datadoghq.com/endpoints.logs: '[{"source":"nginx","service":"webapp"}]'
 spec:
-  ports:
-  - port: 80
-    protocol: TCP
-  selector:
-    run: my-nginx
+    ports:
+        - port: 80
+          protocol: TCP
+    selector:
+        run: my-nginx
 ```
 
 ## Troubleshooting
 
-Troubleshooting Endpoints Checks is similar to [troubleshooting Cluster Checks][10]—the only difference is on the node-based Agents, where scheduled Endpoints Checks appear alongside the Cluster Check.
+Troubleshooting endpoints checks is similar to [troubleshooting cluster checks][10]—the only difference is on the node-based Agents, where scheduled endpoints checks appear alongside the cluster check.
 
-**Note**: Endpoints Checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the service. If an endpoint is not backed by a pod, the Cluster Agent converts the check into a Cluster Check. This Cluster Check can be run by any node Agent.
+**Note**: Endpoints checks are scheduled by Agents that run on the same node as the pod(s) that back the endpoint(s) of the service. If an endpoint is not backed by a pod, the Cluster Agent converts the check into a cluster check. This cluster check can be run by any node Agent.
 
 ### Autodiscovery in the node-based Agent
 
@@ -257,8 +264,8 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery/clusterchecks
-[2]: /agent/kubernetes/cluster
+[1]: /agent/kubernetes/cluster
+[2]: /agent/autodiscovery/clusterchecks
 [3]: /agent/autodiscovery
 [4]: /agent/kubernetes/cluster/#cluster-checks-autodiscovery
 [5]: /agent/guide/agent-commands
@@ -266,4 +273,4 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 [7]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
 [8]: /integrations/http_check
 [9]: /integrations/nginx
-[10]: /agent/autodiscovery/clusterchecks/#troubleshooting
+[10]: /agent/cluster_agent/troubleshooting

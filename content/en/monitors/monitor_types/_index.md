@@ -24,18 +24,19 @@ Select a monitor type:
 * [Event][14]
 * [Logs][15]
 * [APM][16]
-* [Watchdog][17]
-* [Composite][18]
+* [Real User Monitoring][17]
+* [Watchdog][18]
+* [Composite][19]
 
 ## Import
 
-[Import a monitor][19] to Datadog with JSON using the main navigation: *Monitors --> New Monitor --> Import*.
+[Import a monitor][20] to Datadog with JSON using the main navigation: *Monitors --> New Monitor --> Import*.
 
 You can obtain a JSON export of any monitor from the monitor's status page. Click the settings cog (top right) and choose **Export** from the menu.
 
 ## Audit
 
-For all monitor types, monitor changes create an event in the [event stream][20]. This event explains the change and displays the user that made the change.
+For all monitor types, monitor changes create an event in the [event stream][21]. This event explains the change and displays the user that made the change.
 
 If you made changes to a monitor, you can see examples with the following event search:
 
@@ -63,7 +64,8 @@ The notify setting sends an email with the monitor audit event to all people who
 [14]: /monitors/monitor_types/event
 [15]: /monitors/monitor_types/log
 [16]: /monitors/monitor_types/apm
-[17]: /monitors/monitor_types/watchdog
-[18]: /monitors/monitor_types/composite
-[19]: https://app.datadoghq.com/monitors#create/import
-[20]: /events
+[17]: /monitors/monitor_types/real_user_monitoring
+[18]: /monitors/monitor_types/watchdog
+[19]: /monitors/monitor_types/composite
+[20]: https://app.datadoghq.com/monitors#create/import
+[21]: /events

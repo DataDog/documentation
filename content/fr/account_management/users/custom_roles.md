@@ -62,5 +62,5 @@ Une fois votre rôle supprimé, les autorisations sont mises à jour pour tous l
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rbac
+[1]: https://app.datadoghq.com/access/roles
 [2]: /fr/account_management/users/#edit-a-user-roles

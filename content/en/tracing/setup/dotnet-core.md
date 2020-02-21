@@ -52,7 +52,7 @@ The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.
 
 {{% tab "Windows" %}}
 
-To use automatic instrumentation on Windows, install the .NET Tracer on the host using the [MSI installer for Windows][4]. Choose the installer for the architecture that matches the operating system (x64 or x86).
+To use automatic instrumentation on Windows, install the .NET Tracer on the host using the [MSI installer for Windows][1]. Choose the installer for the architecture that matches the operating system (x64 or x86).
 
 After installing the .NET Tracer, restart applications so they can read the new environment variables. To restart IIS, run the following commands as administrator:
 
@@ -63,19 +63,21 @@ net start w3svc
 
 **Update:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core. Remove it from your application when you update the .NET Tracer.
 
-[4]: https://github.com/DataDog/dd-trace-dotnet/releases
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
 
 {{% /tab %}}
 
 {{% tab "Linux" %}}
 
-To use automatic instrumentation on Linux, install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][4].
+To use automatic instrumentation on Linux, install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][1].
 
-In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables][10] below for details.
+In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables][2] below for details.
 
 To generate Tracer log files for troubleshooting, you must create the logs directory. The default path is `/var/log/datadog/`.
 
-**Update:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. Remove it from your application when you update the .NET Tracer and add the new environment variable, `DD_DOTNET_TRACER_HOME`. See [Required Environment Variables][10] below for details.
+**Update:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. Remove it from your application when you update the .NET Tracer and add the new environment variable, `DD_DOTNET_TRACER_HOME`. See [Required Environment Variables][2] below for details.
+
+**Update:** .NET Tracer version `1.13.0` adds support for Alpine and other [Musl-based distributions][3].
 
 For Debian or Ubuntu, download and install the Debian package:
 
@@ -91,7 +93,15 @@ curl -LO https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_V
 sudo rpm -Uvh datadog-dotnet-apm-<TRACER_VERSION>-1.x86_64.rpm
 ```
 
-A tar archive is available for other distributions:
+For Alpine or other [Musl-based distributions][3], download the tar archive with the musl-linked binary:
+
+```bash
+sudo mkdir -p /opt/datadog
+curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VERSION>/datadog-dotnet-apm-<TRACER_VERSION>-musl.tar.gz \
+| sudo tar xzf - -C /opt/datadog
+```
+
+For other distributions, download the tar archive with the glibc-linked binary:
 
 ```bash
 sudo mkdir -p /opt/datadog
@@ -99,8 +109,9 @@ curl -L https://github.com/DataDog/dd-trace-dotnet/releases/download/v<TRACER_VE
 | sudo tar xzf - -C /opt/datadog
 ```
 
-[4]: https://github.com/DataDog/dd-trace-dotnet/releases
-[10]: #required-environment-variables
+[1]: https://github.com/DataDog/dd-trace-dotnet/releases
+[2]: #required-environment-variables
+[3]: https://en.wikipedia.org/wiki/Musl
 
 {{% /tab %}}
 
