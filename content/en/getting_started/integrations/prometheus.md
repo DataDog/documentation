@@ -55,7 +55,7 @@ instances:
       - "<PROMETHEUS_METRIC_TO_FETCH>": "<DATADOG_NEW_METRIC_NAME>"
 ```
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
@@ -172,7 +172,7 @@ Official integrations have their own dedicated directories. There's a default in
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
 [5]: /developers/prometheus
 [6]: https://app.datadoghq.com/account/settings#agent
-[7]: https://docs.datadoghq.com/tagging
+[7]: /tagging
 [8]: /metrics/distributions
 [9]: https://github.com/DataDog/integrations-core/issues/1303
 [10]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
