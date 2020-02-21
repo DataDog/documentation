@@ -46,12 +46,12 @@ clean-integrations:  ## Remove built integrations files.
 	@if [ -d data/integrations ]; then \
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
-		-a -not -name '*.ja.yaml' \
+	    -a -not -name '*.ja.yaml' \
 	    -exec rm -rf {} \; ;fi
 	@if [ -d data/service_checks ]; then \
 		find ./data/service_checks -type f -maxdepth 1 \
 	    -a -not -name '*.fr.json' \
-		-a -not -name '*.ja.json' \
+	    -a -not -name '*.ja.json' \
 	    -exec rm -rf {} \; ;fi
 	@find ./content/en/integrations -type f -maxdepth 1 \
 		-a -not -name '_index.md' \
