@@ -102,9 +102,10 @@ spec:
             # hostPort: 8125
             name: dogstatsdport
             protocol: UDP
-          # Remove if not using APM
+            
           - containerPort: 8126
-            hostPort: 8126
+            ## Trace Collection (APM) - uncomment this section to enable APM
+            # hostPort: 8126
             name: traceport
             protocol: TCP
         env:
