@@ -94,7 +94,7 @@ Beta integrations are disabled by default but can be enabled individually.
 
 **Web Framework tracing provides:** timing HTTP request to response, tags for the HTTP request (status code, method, etc), error and stacktrace capturing, linking work created within a web request and Distributed Tracing.
 
-*Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, etc.
+*Note:* Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, JBoss, etc.
 Also, frameworks like Spring Boot inherently work because it usually uses a supported embedded application server (Tomcat/Jetty/Netty).
 
 Beta Instrumentation is disabled by default. Add one of the following configurations to enable it:
@@ -431,7 +431,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 
 [1]: /agent/docker/apm
 [2]: /tracing/setup/docker
-[3]: /agent/kubernetes/daemonset_setup/#trace-collection
+[3]: /agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
 [4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [5]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [6]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
