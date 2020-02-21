@@ -16,7 +16,7 @@ Each webhook must be set up with a name (to be referenced in monitors) and a URL
 * The **name field**: whatever you like, as long as it is unique among all the other webhook name fields.
 
 * The **url field**: the URL used when pinging the API. It looks like this:
-`https://api.datadoghq.com/api/v1/<API_ENDPOINT>?api_key=<YOUR_API_KEY>`
+`https://api.datadoghq.com/api/v1/<API_ENDPOINT>?api_key=<DATADOG_API_KEY>`
 
 * The **custom payload field**: contains the JSON with all the options you want to include in the API call. The type of API call determines the appropriate options. You can sometimes use the monitor's `$symbol` content to fill in parts of the option values.
 
@@ -36,10 +36,10 @@ The custom payload is where the name and tags of the check_run are applied. For 
 
 ```json
 {
-"check": "mymonitorgroup.status",
-"status": 2,
-"host_name": "$HOSTNAME",
-"tags": "[monitor:$ALERT_TITLE]"
+  "check": "mymonitorgroup.status",
+  "status": 2,
+  "host_name": "$HOSTNAME",
+  "tags": "[monitor:$ALERT_TITLE]"
 }
 ```
 
@@ -49,7 +49,7 @@ You can then apply the same custom payload values for the "mymonitorgroup-ok-che
 
 With both of those webhooks set, you can go to your monitors (the ones your teammate wants a quick status view of) and add the webhook notification references, nested in their appropriate conditional logic tag, like so:
 
-```
+```text
 {{#is_alert}} @webhook-mymonitorgroup-alert-check {{/is_alert}}
 {{#is_recovery}} @webhook-mymonitorgroup-ok-check {{/is_recovery}}
 ```
@@ -58,9 +58,9 @@ Once your monitors are set and alerting (they'll all need to alert at least once
 
 Here's an example of one such widget (although in this example, the check's name was "composite.status" and only one monitor in our group has yet triggered as "alert" and then "ok" again):
 
-{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor" responsive="true" >}}
+{{< img src="developers/faq/check_status_editor.png" alt="check_status_editor"  >}}
 
 [1]: /integrations/webhooks
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 [3]: /api
-[4]: /graphing/dashboards/screenboard
+[4]: /dashboards/screenboard

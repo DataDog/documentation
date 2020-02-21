@@ -52,6 +52,3 @@ Segment インテグレーションには、サービスのチェック機能は
 [1]: https://app.datadoghq.com/account/settings#integrations/segment
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/segment/segment_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

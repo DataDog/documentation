@@ -6,6 +6,7 @@ assets:
 categories:
   - web
   - log collection
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -34,28 +35,26 @@ supported_os:
 
 Ce check surveille les applications [JBoss][1] et [WildFly][2].
 
-## Implémentation
-
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][3] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+## Configuration
 
 ### Installation
 
-Le check JBoss/WildFly est inclus avec le paquet de l'[Agent Datadog][4]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check JBoss/WildFly est inclus avec le paquet de l'[Agent Datadog][3]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
+#### Host
 
-1. Modifiez le fichier `jboss_wildfly.d/conf.yaml` dans le dossier `conf.d/` à la racine du
-   répertoire de configuration de votre Agent pour commencer à recueillir les données de performance
-   de votre serveur d'application JBoss ou WildFly. Consultez le [fichier d'exemple jboss_wildfly.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
-   Ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué dans la page d'information.
-   Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous.
-   Pour découvrir comment modifier la liste des métriques à recueillir, consultez la [documentation relative aux checks JMX][6] afin d'obtenir des instructions détaillées. 
-   Si vous devez surveiller davantage de métriques, contactez [l'assistance Datadog][7].
+##### Collecte de métriques
 
-2. [Redémarrez l'Agent][8].
+1. Modifiez le fichier `jboss_wildfly.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir les données de performance de votre serveur d'applications JBoss ou WildFly. Consultez le [fichier d'exemple jboss_wildfly.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-#### Collecte de logs
+  **Remarque** : ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué dans la page d'information. Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous. Pour découvrir comment modifier la liste des métriques recueillies, consultez la [documentation relative aux checks JMX][5] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller plus de 350 métriques, contactez [l'assistance Datadog][6].
+
+2. [Redémarrez l'Agent][7].
+
+##### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
@@ -67,7 +66,7 @@ Le check JBoss/WildFly est inclus avec le paquet de l'[Agent Datadog][4]. Vous n
 
 2. Modifiez ensuite `jboss_wildfly.d/conf.yaml` en supprimant la mise en commentaire des lignes `logs` en bas du fichier. Mettez à jour la ligne `path` en indiquant le bon chemin vers vos fichiers de log JBoss.
 
-    ```
+    ```yaml
       logs:
         - type: file
           path: /opt/jboss/wildfly/standalone/log/*.log
@@ -75,11 +74,26 @@ Le check JBoss/WildFly est inclus avec le paquet de l'[Agent Datadog][4]. Vous n
           service: <APPLICATION_NAME>
     ```
 
-3. [Redémarrez l'Agent][8].
+3. [Redémarrez l'Agent][7].
+
+#### Environnement conteneurisé
+##### Collecte de métriques
+
+Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][8].
+
+##### Collecte de logs
+
+**Disponible à partir des versions > 6.5 de l'Agent**
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][9].
+
+| Paramètre      | Valeur                                                      |
+|----------------|------------------------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "jboss_wildfly", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][9] et cherchez `jboss_wildfly` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][10] et cherchez `jboss_wildfly` dans la section Checks.
 
 ## Données collectées
 
@@ -97,17 +111,16 @@ L'intégration JBoss/WildFly n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 [1]: https://developers.redhat.com/products/eap/overview
 [2]: http://wildfly.org
-[3]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/integrations/java
-[7]: https://docs.datadoghq.com/fr/help
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-
-
-{{< get-dependencies >}}
+[3]: https://app.datadoghq.com/account/settings#agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/integrations/java
+[6]: https://docs.datadoghq.com/fr/help
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
+[8]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[9]: https://docs.datadoghq.com/fr/agent/docker/log/
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/metadata.csv

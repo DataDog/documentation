@@ -9,7 +9,8 @@ external_redirect: '/api/#query-the-event-stream'
 [イベントストリーム][1]をクエリして、時間、優先度、ソース、タグなどで絞り込むことができます。
 注: クエリ対象のイベントに何らかのマークダウン形式が含まれている場合は、出力に %、\、n などの文字が表示される場合があります。
 
-##### 引数
+**引数**:
+
 * **`start`** [必須]:
     POSIX タイムスタンプ。
 * **`end`** [必須]:
@@ -24,5 +25,5 @@ external_redirect: '/api/#query-the-event-stream'
 * **`unaggregated`** [オプション、デフォルト = false]:
     unaggregated を `true` に設定すると、指定された [`start`,`end`] タイムフレーム内のすべてのイベントが返されます。そうでない場合、タイムフレーム外のタイムスタンプを持つ親イベントに集約されたイベントは、出力に含まれません。
 
-[1]: /ja/graphing/event_stream
-[2]: /ja/graphing/event_stream/#event-query-language
+[1]: /ja/events
+[2]: /ja/events/#event-query-language

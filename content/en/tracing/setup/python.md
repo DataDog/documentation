@@ -15,7 +15,7 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "tracing/advanced/"
+- link: "tracing/"
   tag: "Advanced Usage"
   text: "Advanced Usage"
 ---
@@ -53,14 +53,13 @@ When using **ddtrace-run**, the following [environment variable options][5] can 
 | Environment Variable               | Default     | Description                                                                                                                                                                                                                                                                 |
 |------------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DATADOG_TRACE_ENABLED`            | `true`      | Enable web framework and library instrumentation. When `false`, your application code doesn't generate any traces.                                                                                                                                                          |
-| `DATADOG_ENV`                      | `null`      | Set an application’s environment e.g. `prod`, `pre-prod`, staging`. Learn more about [how to setup your environment][6].                                                                                                                                                    |
+| `DATADOG_ENV`                      | `null`      | Set an application’s environment e.g. `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][6].                                                                                                                                                   |
 | `DATADOG_TRACE_DEBUG`              | `false`     | Enable debug logging in the tracer. Note that this is [not available with Django][7].                                                                                                                                                                                       |
 | `DATADOG_SERVICE_NAME`             | `null`      | Override the service name to be used for this program. The value is passed through when setting up middleware for web framework integrations (e.g. pylons, flask, django). For tracing without a web integration, [prefer setting the service name in code](#integrations). |
 | `DATADOG_PATCH_MODULES`            | `none`      | Override the modules patched for this program execution. It should follow this format: `DATADOG_PATCH_MODULES=module:patch,module:patch...`.                                                                                                                                |
 | `DD_AGENT_HOST`                    | `localhost` | Override the address of the trace Agent host that the default tracer attempts to submit traces to.                                                                                                                                                                          |
 | `DATADOG_TRACE_AGENT_PORT`         | `8126`      | Override the port that the default tracer submit traces to.                                                                                                                                                                                                                 |
-| `DATADOG_PRIORITY_SAMPLING`        | `true`      | Enable [Priority Sampling][8].                                                                                                                                                                                                                                             
- |
+| `DATADOG_PRIORITY_SAMPLING`        | `true`      | Enable [Priority Sampling][8].                                                                                                                                                                                                                                              |
 | `DD_LOGS_INJECTION`                | `false`     | Enable [connecting logs and traces Injection][9].                                                                                                                                                                                                                           |
 | `DD_TRACE_ANALYTICS_ENABLED`       | `false`     | Enable App Analytics globally for [web integrations][10].                                                                                                                                                                                                                   |
 | `DD_INTEGRATION_ANALYTICS_ENABLED` | `false`     | Enable App Analytics for a specific integration. Example: `DD_BOTO_ANALYTICS_ENABLED=true` .                                                                                                                                                                                |
@@ -155,10 +154,10 @@ The `ddtrace` library includes support for the following libraries:
 [3]: /agent/kubernetes/daemonset_setup/#trace-collection
 [4]: http://pypi.datadoghq.com/trace/docs
 [5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtracerun
-[6]: /tracing/advanced/setting_primary_tags_to_scope/
+[6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: http://pypi.datadoghq.com/trace/docs/web_integrations.html?highlight=django#django
 [8]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
-[9]: /tracing/advanced/connect_logs_and_traces/?tab=python
+[9]: /tracing/connect_logs_and_traces/?tab=python
 [10]: /tracing/app_analytics/?tab=python#automatic-configuration
 [11]: https://aiohttp.readthedocs.io
 [12]: https://bottlepy.org

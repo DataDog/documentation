@@ -1,7 +1,6 @@
 ---
 title: Collecter plusieurs logs avec Pagination
 kind: guide
-disable_toc: true
 further_reading:
   - link: logs/processing
     tag: Documentation
@@ -27,15 +26,16 @@ Commencez par créer une requête afin de récupérer les logs correspondant à 
 
 ```bash
 curl -X POST \
-  'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<CLÉ_API_DATADOG>&application_key=<CLÉ_APPLICATION_DATADOG>' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "limit":50,
-    "query": "*",
-    "sort": "desc",
-    "time": {
-        "from": "2019-08-07T00:00:00Z",
-        "to": "2019-08-06T00:00:00Z"
+'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<CLÉ_API_DATADOG>&application_key=<CLÉ_APPLICATION_DATADOG>' \
+-H 'content-type: application/json' \
+-d '{
+        "limit": 50,
+        "query": "*",
+        "sort": "desc",
+        "time": {
+            "from": "2019-08-07T00:00:00Z",
+            "to": "2019-08-06T00:00:00Z"
+        }
     }'
 ```
 
@@ -43,12 +43,10 @@ Exemple de résultat :
 
 ```json
 {
-    "logs": [
-        "(...)"
-    ],
-    "nextLogId": "AAAAAAAAAAAAAAAABBBBBBBBBBBBBBCCCCCCCCCCDDDDDDDDDD",
-    "status": "done",
-    "requestId": "cDdWYB0tAm1TYHFsQVZ2R05QWm9nQXx5cFM4aExkLVFPNlhZS21RTGxTUGZ3"
+  "logs": ["(...)"],
+  "nextLogId": "AAAAAAAAAAAAAAAABBBBBBBBBBBBBBCCCCCCCCCCDDDDDDDDDD",
+  "status": "done",
+  "requestId": "cDdWYB0tAm1TYHFsQVZ2R05QWm9nQXx5cFM4aExkLVFPNlhZS21RTGxTUGZ3"
 }
 ```
 
@@ -60,16 +58,17 @@ Pour récupérer la page de logs suivante, renvoyez votre requête, mais cette f
 
 ```bash
 curl -X POST \
-  'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<CLÉ_API_DATADOG>&application_key=<CLÉ_APPLICATION_DATADOG>' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "limit": 1000,
-    "query": "*",
-    "startAt": "AAAAAAAAAAAAAAAABBBBBBBBBBBBBBCCCCCCCCCCDDDDDDDDDD",
-    "sort": "desc",
-    "time": {
-        "from": "2019-08-07T00:00:00Z",
-        "to": "2019-08-06T00:00:00Z"
+'https://api.datadoghq.com/api/v1/logs-queries/list?api_key=<CLÉ_API_DATADOG>&application_key=<CLÉ_APPLICATION_DATADOG>' \
+-H 'Content-Type: application/json' \
+-d '{
+        "limit": 1000,
+        "query": "*",
+        "startAt": "AAAAAAAAAAAAAAAABBBBBBBBBBBBBBCCCCCCCCCCDDDDDDDDDD",
+        "sort": "desc",
+        "time": {
+            "from": "2019-08-07T00:00:00Z",
+            "to": "2019-08-06T00:00:00Z"
+        }
     }'
 ```
 
@@ -77,12 +76,10 @@ On obtient alors ces résultats :
 
 ```json
 {
-    "logs": [
-        "(...)"
-    ],
-    "nextLogId": "EEEEEEEEEEEEEEEEFFFFFFFFFFFFFFGGGGGGGGGGHHHHHHHHHH",
-    "status": "done",
-    "requestId": "YVhETk5jQy1TQkDFSFjqU3fhQMh5QXx6M2pSUlA1ODhXNk5PT2NOSUVndThR"
+  "logs": ["(...)"],
+  "nextLogId": "EEEEEEEEEEEEEEEEFFFFFFFFFFFFFFGGGGGGGGGGHHHHHHHHHH",
+  "status": "done",
+  "requestId": "YVhETk5jQy1TQkDFSFjqU3fhQMh5QXx6M2pSUlA1ODhXNk5PT2NOSUVndThR"
 }
 ```
 

@@ -49,7 +49,7 @@ func main() {
 }
 ```
 
-It's very easy to add metas to any log if you provide a JSON object that you want to see in the log event. 
+It's very easy to add metas to any log if you provide a JSON object that you want to see in the log event.
 
 These metas can be `hostname`, `username`, `customers`, `metric` or any information that help you troubleshoot and understand what happens in your Go application.
 
@@ -75,7 +75,6 @@ func main() {
   })
 
   contextualizedLog.Info("Simple event with global metadata")
-  
 }
 ```
 
@@ -83,19 +82,12 @@ func main() {
 
 Create a `go.d/conf.yaml` file in your `conf.d/` folder with the following content:
 
-```yaml    
+```yaml
 ##Log section
 logs:
 
-    # - type : (mandatory) type of log input source (tcp / udp / file)
-    #   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
-    #   service : (mandatory) name of the service owning the log
-    #   source : (mandatory) attribute that defines which integration is sending the logs
-    #   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribute
-    #   tags: (optional) add tags to each logs collected
-
   - type: file
-    path: /path/to/your/go/log.log
+    path: "/path/to/your/go/log.log"
     service: go
     source: go
     sourcecategory: sourcecode

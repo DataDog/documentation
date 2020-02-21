@@ -1,7 +1,7 @@
 ---
 title: Get all Indexes
 type: apicontent
-order: 23.1
+order: 24.1
 external_redirect: /api/#get-all-indexes
 ---
 

@@ -7,7 +7,7 @@ aliases:
 
 More advanced Datadog users may sometimes want to use [the API][1] to query general data about their infrastructure—the kind of data that you can find in your [infrastructure list][2] or the [host map][3]. You can do this via an API GET request on the `reports/v2/overview` endpoint.
 
-## Overview 
+## Overview
 
 This endpoint takes the following required parameters:
 
@@ -34,30 +34,38 @@ If, for example, you want to query general data from all your hosts that include
 import requests
 s = requests.session()
 s.params = {
-    'api_key': 'YOUR_API_KEY',
-    'application_key': 'YOUR_APPLICATION_KEY',
-    'tags': 'env:prod,role:elasticsearch'
+  'api_key': 'DATADOG_API_KEY',
+  'application_key': 'YOUR_APPLICATION_KEY',
+  'tags': 'env:prod,role:elasticsearch'
 }
-infra_link = 'https://app.datadoghq.com/reports/v2/overview'
+infra_link = 'https://app.datadoghq.com/api/v1/hosts'
 infra_content = s.request(
-    method='GET', url=infra_link, params=s.params
-).text
+  method='GET', url=infra_link, params=s.params
+).json()
 ```
 
-Alternatively, if you want to query the same data for only hosts with hostnames "A", "B", and "C", you can make the following API call:
+To iterate over all the hosts in your infrastructure, use the following:
 
 ```python
 import requests
-s = requests.session()
-s.params = {
-    'api_key': '<YOUR_API_KEY>',
+def iterate_all_hosts():
+  s = requests.session()
+  s.params = {
+    'api_key': '<DATADOG_API_KEY>',
     'application_key': '<YOUR_APPLICATION_KEY>',
-    'hostnames[]': ['A', 'B', 'C']
-}
-infra_link = 'https://app.datadoghq.com/reports/v2/overview'
-infra_content = s.request(
-    method='GET', url=infra_link, params=s.params
-).text
+    'start': 0
+  }
+  infra_link = 'https://app.datadoghq.com/api/v1/hosts?count=1000'
+  while True:
+    response = s.request(method='GET', url=infra_link, params=s.params).json()
+    for host in response['host_list']:
+        yield host
+    if response['total_returned'] == 0:
+        return
+    s.params['start'] += response['total_returned']
+
+for host in iterate_all_hosts():
+    print(host['host_name'])
 ```
 
 [1]: /api

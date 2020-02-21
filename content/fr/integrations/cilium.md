@@ -17,7 +17,7 @@ git_integration_title: cilium
 guid: 1d9db288-4678-4ede-9ba0-8b04a8ae31c2
 integration_id: cilium
 integration_title: Cilium
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
@@ -107,6 +107,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [7]: https://github.com/DataDog/integrations-core/blob/master/cilium/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
 [9]: https://docs.datadoghq.com/fr/agent/cluster_agent
-
-
-{{< get-dependencies >}}

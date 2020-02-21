@@ -10,87 +10,83 @@ further_reading:
     text: モニターをミュートするダウンタイムのスケジュール
   - link: monitors/monitor_status
     tag: Documentation
-    text: モニターステータスの参照
+    text: モニターステータスを確認
 ---
-{{< img src="monitors/monitor_types/log/log_monitor_overview.png" alt="Log monitor overview" responsive="true" >}}
-
 ## 概要
 
-ログモニターは、指定された種類のログが、ユーザー定義のしきい値を一定時間超えた場合にアラートを生成します。
+組織で[ログ管理を有効に][1]すると、指定された種類のログが、ユーザー定義のしきい値を一定時間超えた場合にアラートするように、ログモニターを作成することができます。
 
-## セットアップ
+## モニターの作成
 
-監視対象を制御するためのクエリを作成します。
+Datadog で[ログモニター][2]を作成するには、メインナビゲーションを使用して、*モニター --> 新しいモニター --> ログ*の順に進みます。
 
-1. 検索クエリを定義します。
-    {{< img src="monitors/monitor_types/log/define_the_search_query.png" alt="Define the search query" responsive="true" style="width:50%;" >}}
-    検索クエリは、[ログエクスプローラーの検索機能][1]と同様に動作します。
+### 検索クエリを定義する
 
-2. 監視する[メジャー][1]または[ファセット][2]を選択します。[メジャー][1]を選択した場合は、集計関数を選択します。[ファセット][2]を選択した場合は、カウントが表示されます。
+検索クエリを定義すると、検索フィールドの上にあるグラフが更新されます。
 
-    {{< img src="monitors/monitor_types/log/choose_measure_facet.png" alt="choose measure facet" responsive="true" style="width:50%;">}}
+1. [ログインデックスが複数[3]ある場合は、検索するインデックスを選択してください。
+2. [ログエクスプローラーでの検索][1]と同じロジックを使用して検索クエリを作成します。
+3. ログカウント、[ファセット][5]、または[メジャー][6]に対するモニターを選択します。
+    * **ログカウントのモニター**: 検索バーを使用し（任意）、ファセットまたはメジャーを選択**しないで**ください。選択されたタイムフレームで Datadog がログ数を評価し、それをしきい値の条件と比較します。
+    * **ファセットのモニター**: [ファセット][5]が選択されていると、モニターはファセットの `Unique value count` に対してアラートを出します。
+    * **メジャーのモニター**: [メジャー][6]が選択されていると、モニターは (メトリクスモニターと同様に) ログファセットの数値に対してアラートを出します。また、集計を選択する必要があります（`min`、`avg`、 `sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または` max`）。
+4. アラートグループを定義します（任意）。アラートグループが定義されているかどうかにかかわらず、集計値が設定された条件を満たしたときに、アラートを **1 つ**受け取ります。クエリをホストで分割した場合でも、複数のホストが設定された条件を満たすと、通知が 1 つだけ送信されます。これは、通知ノイズを減らすためです。
 
-3. 監視する[メジャー][1]の集計関数を選択します。
+{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="バックエンドサービスの下限モニター"  style="width:60%;" >}}
 
-    {{< img src="monitors/monitor_types/log/agg_function.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
+### アラートの条件を設定する
 
-4. (オプション) アラートグループを定義します。
-  {{< img src="monitors/monitor_types/log/log_monitor_group_by.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
-    アラートグループが定義されているかどうかにかかわらず、集計値が以下で設定する条件を満たしたときに、アラートを **1 つ**受け取ります。クエリをホストで分割した場合でも、複数のホストが以下で設定する条件を満たすと、通知が 1 つだけ送信されます。これは、通知ノイズを減らすためです。
+* メトリクスが `above`、`above or equal to`、`below`、`below or equal to` の場合に発報される
+* 最後の `5 minutes`、`15 minutes`、 `1 hour`などの間のしきい値
+* アラートのしきい値 `<NUMBER>`
+* 警告のしきい値`<NUMBER>`
 
-5. アラート条件を設定します。以下のオプションを使用できます。
+#### データなしと下限のアラート
 
-  {{< img src="monitors/monitor_types/log/above_below.png" alt="aggregation function for Log Analytics" responsive="true" style="width:50%;">}}
+サービス内のすべてのグループがログの送信を停止した場合に通知を受け取るには、条件を `below 1` に設定します。これにより、すべての集計グループについて、指定のタイムフレームでモニタークエリと一致するログがない場合に通知が行われます。
 
-6. **通知オプション**を構成します。
+モニターを何らかのディメンション (タグまたはファセット) で分割している場合に `below` 条件を使用すると、特定のグループのログが存在してカウントがしきい値未満である場合、または**すべての**グループについてログが存在しない場合に、アラートがトリガーされます。
 
-  {{< img src="monitors/monitor_types/log/set_alert_conditions.png" alt="Set alert conditions" responsive="true" style="width:50%;" >}}
+**例**:
 
-  詳細オプションについては、[通知][2]ドキュメントを参照してください。
+* このモニターは、すべてのサービスについてログが存在しない場合にのみトリガーします。
+  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="サービスで分割された下限モニター"  style="width:60%;" >}}
+* このモニターは、サービス `backend` のログが存在しない場合にトリガーします。
+  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="バックエンドサービスの下限モニター"  style="width:60%;" >}}
 
+### 通知
 
-## 通知とログサンプル
+**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][7] のページを参照してください。
 
-モニターをトリガーしたログのサンプルを最大 10 個まで通知メッセージに追加できます。
-これは、Slack、Jira、Webhook、Microsoft Teams、および電子メール通知で利用できます。
+#### ログのサンプル
 
-* リカバリ通知にサンプルは表示されません。
+デフォルトでは、ログモニターをトリガーすると、サンプルまたは値が通知メッセージに追加されます。
 
- **通知でログサンプルを有効にする**
+| モニターの対象     | 通知メッセージに追加されるもの                                                                            |
+|------------------|----------------------------------------------------------------------------------------------------------|
+| ログ数        | グループ: 上位 10 個の違反値とそれぞれの数。<br>非グループ: 上位 10 個のログサンプル。 |
+| ファセットまたはメジャー | 上位 10 個のファセットまたはメジャーの値。                                                                      |
 
-  {{< img src="monitors/monitor_types/log/activate-log-monitor-sample.png" alt="Activate log samples in message" responsive="true" style="width:50%;" >}}
+これらの通知の送信に、Slack、Jira、webhooks、Microsoft Teams、Pagerduty、電子メールを使用することができます。**注**: サンプルはリカバリ通知には表示されません。
 
-  **Slack 通知の例** 
+ログサンプルを無効にするには、**Say what's happening** セクションの一番下にあるチェックボックスをオフにします。チェックボックスの隣に表示されるテキストは、モニターのグループ化によって変わります（上記を参照）。
 
-  {{< img src="monitors/monitor_types/log/slack-log-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
+#### 例
 
-### グループの通知
+上位 10 の違反値の表を含める:
+{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="上位 10 の違反値"  style="width:60%;" >}}
 
-グループで分割されたモニターから送信される通知には、10 個のログサンプルではなく、上位 10 個の違反値のリストを含めることができます。
+10 のログのサンプルをアラート通知に含める:
+{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="上位 10 の違反値"  style="width:60%;" >}}
 
- **通知で上位 10 個の違反値を有効にする**
+## その他の参考資料
 
-{{< img src="monitors/monitor_types/log/activate-log-multi-monitor-sample.png" alt="Activate log samples in message" responsive="true" style="width:50%;" >}}
-
-**Slack 通知の例** 
-
- {{< img src="monitors/monitor_types/log/slack-log-multi-sample.png" alt="Slack notification example" responsive="true" style="width:50%;" >}}
-
-## データなしアラートと下限条件  
-
-特定のログセットが受信されなくなった場合に通知を受け取るには、アラート条件を `below 1` に設定します。これにより、指定のタイムフレームでモニタークエリと一致するログがない場合に通知が行われます。
-
-ただし、モニターを何らかのディメンション (タグまたはファセット) で分割している場合に `below` 条件を使用すると、特定のグループのログが存在してカウントがしきい値未満である場合、または**すべての**グループについてログが存在しない場合に、アラートがトリガーされます。
-
-例:  
-
-1. 次のモニターは、すべてのサービスについてログが存在しない場合にのみトリガーします。
-  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service" responsive="true" style="width:50%;" >}}
-2. 次のモニターは、サービス `backend` のログが存在しない場合にトリガーします。
-  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service" responsive="true" style="width:50%;" >}}
-
-## その他の参考資料 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/explorer/search
-[2]: /ja/monitors/notifications
+[1]: /ja/logs
+[2]: https://app.datadoghq.com/monitors#create/log
+[3]: /ja/logs/indexes
+[4]: /ja/logs/explorer/search
+[5]: /ja/logs/explorer/?tab=facets#setup
+[6]: /ja/logs/explorer/?tab=measures#setup
+[7]: /ja/monitors/notifications

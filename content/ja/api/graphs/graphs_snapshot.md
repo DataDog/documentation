@@ -8,7 +8,7 @@ external_redirect: '/api/#graph-snapshot'
 
 **注**: スナップショットは、作成されてから利用できるようになるまで、[若干の遅延があります][1]。
 
-##### 引数
+**引数**:
 
 * **`metric_query`** [必須]:
     メトリクスクエリ。
@@ -24,4 +24,4 @@ external_redirect: '/api/#graph-snapshot'
     グラフのタイトル。タイトルを指定しない場合、グラフにタイトルは付きません。
 
 [1]: http://andreafalzetti.github.io/blog/2017/04/17/datadog-png-snapshot-not-showing.html
-[2]: /ja/graphing/graphing_json/#grammar
+[2]: /ja/dashboards/graphing_json/#grammar

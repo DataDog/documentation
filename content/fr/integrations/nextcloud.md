@@ -69,7 +69,7 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 
 ### Configuration
 
-1. Modifiez le fichier `nextcloud.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#metrics) Nextcloud.
+1. Modifiez le fichier `nextcloud.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#metriques) Nextcloud.
   Consultez le [fichier d'exemple nextcloud.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][10].
@@ -115,6 +115,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-extras/blob/master/nextcloud/metadata.csv
 [13]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

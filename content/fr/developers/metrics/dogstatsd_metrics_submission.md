@@ -10,7 +10,7 @@ further_reading:
   - link: developers/dogstatsd
     tag: Documentation
     text: Présentation de DogStatsD
-  - link: developers/metrics/metrics_type
+  - link: developers/metrics/types
     tag: Documentation
     text: Types de métrique Datadog
 ---
@@ -25,19 +25,19 @@ Les utilisateurs de StatsD connaissent déjà les métriques [COUNT](#count), [G
 Une fois [DogStatsD installé][1], les fonctions ci-dessous peuvent être utilisées pour envoyer vos métriques à Datadog en fonction du type de métrique. Ces fonctions ont les paramètres suivants en commun :
 
 | Paramètre        | Type            | Obligatoire | Description                                                                                                                                                                                    |
-| ---------------- | --------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `<NOM_MÉTRIQUE>`  | Chaîne          | Oui      | Le nom de la métrique à envoyer.                                                                                                                                                                  |
 | `<VALEUR_MÉTRIQUE>` | Double          | Oui      | La valeur associée à votre métrique.                                                                                                                                                             |
 | `<TAUX_ÉCHANTILLONNAGE>`  | Double          | Non       | Le taux d'échantillonnage à appliquer à votre métrique. Toutes les valeurs comprises entre `0` (tout est échantillonné et rien n'est envoyé) à `1` (pas d'échantillonnage) sont acceptées. Pour en savoir plus, consultez la [section sur les taux d'échantillonnage](#taux-d-echantillonnage). |
-| `<TAGS>`         | Liste de chaînes | Non       | La liste des tags à appliquer à la métrique. Pour en savoir plus, consultez la section sur le [tagging de métriques](#tagging-metriques).                                                                                       |
+| `<TAGS>`         | Liste de chaînes | Non       | La liste des tags à appliquer à la métrique. Pour en savoir plus, consultez la section sur le [tagging de métriques](#tagging-de-metriques).                                                                                       |
 
 ### COUNT
 
-| Méthode                                                        | Description                                               | Type de stockage                                                                                                                                            |
-| ------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `increment(<NOM_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)`             | Utilisé pour incrémenter une métrique COUNT.                         | Stocké en tant que `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur du counter durant la période de transmission de StatsD. |
-| `decrement(<NOM_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)`             | Utilisé pour décrémenter une métrique COUNT.                         | Stocké en tant que `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur du counter durant la période de transmission de StatsD. |
-| `count(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Utilisé pour incrémenter une métrique COUNT à partir d'une `valeur` quelconque | Stocké en tant que `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur du counter durant la période de transmission de StatsD. |
+| Méthode                                                        | Description                                               | Type de métrique stocké                                                                                                                                           |
+|---------------------------------------------------------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `increment(<NOM_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)`             | Utilisée pour incrémenter une métrique COUNT.                         | Stockée en tant que métrique `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur de la métrique durant la période de transmission de StatsD. |
+| `decrement(<NOM_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)`             | Utilisée pour décrémenter une métrique COUNT.                         | Stockée en tant que métrique `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur de la métrique durant la période de transmission de StatsD. |
+| `count(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Utilisée pour incrémenter une métrique COUNT à partir d'une `valeur` quelconque | Stockée en tant que métrique `RATE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au delta normalisé de la valeur de la métrique durant la période de transmission de StatsD. |
 
 **Remarque** : Datadog peut afficher les métriques de type `COUNT` avec une valeur décimale, car elles sont normalisées sur l'intervalle de transmission et indiquées en unités par seconde.
 
@@ -62,8 +62,8 @@ options = {
 initialize(**options)
 
 while(1):
-  statsd.increment('exemple_métrique.increment', tags=["environment:dev"])
-  statsd.decrement('exemple_métrique.decrement', tags=["environment:dev"])
+  statsd.increment('exemple_metrique.increment', tags=["environment:dev"])
+  statsd.decrement('exemple_metrique.decrement', tags=["environment:dev"])
   time.sleep(10)
 {{< /code-block >}}
 
@@ -78,9 +78,9 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.increment('exemple_métrique.increment', tags: ['environment:dev'])
-    statsd.decrement('exemple_métrique.decrement', tags: ['environment:dev'])
-    statsd.count('exemple_métrique.count', 2, tags: ['environment:dev'])
+    statsd.increment('exemple_metrique.increment', tags: ['environment:dev'])
+    statsd.decrement('exemple_metrique.decrement', tags: ['environment:dev'])
+    statsd.count('exemple_metrique.count', 2, tags: ['environment:dev'])
     sleep 10
 end
 {{< /code-block >}}
@@ -107,9 +107,9 @@ func main() {
     }
     for {
 
-        statsd.Incr("exemple_métrique.increment", []string{"environment:dev"}, 1)
-        statsd.Decr("exemple_métrique.decrement", []string{"environment:dev"}, 1)
-        statsd.Count("exemple_métrique.count", 2, []string{"environment:dev"}, 1)
+        statsd.Incr("exemple_metrique.increment", []string{"environment:dev"}, 1)
+        statsd.Decr("exemple_metrique.decrement", []string{"environment:dev"}, 1)
+        statsd.Count("exemple_metrique.count", 2, []string{"environment:dev"}, 1)
         time.Sleep(10 * time.Second)
     }
 }
@@ -131,9 +131,9 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.incrementCounter("exemple_métrique.increment", ["environment:dev"]);
-            Statsd.decrementCounter("exemple_métrique.decrement", ["environment:dev"]);
-            Statsd.count("exemple_métrique.count", 2, ["environment:dev"]);
+            Statsd.incrementCounter("exemple_metrique.increment", new String[]{"environment:dev"});
+            Statsd.decrementCounter("exemple_metrique.decrement", new String[]{"environment:dev"});
+            Statsd.count("exemple_metrique.count", 2, new String[]{"environment:dev"});
             Thread.sleep(100000);
         }
     }
@@ -165,9 +165,9 @@ public class DogStatsdClient
 
         for (int i = 0; i < 10; i++)
         {
-            DogStatsd.Increment("exemple_métrique.increment", tags: new[] {"environment:dev"});
-            DogStatsd.Decrement("exemple_métrique.decrement", tags: new[] {"environment:dev"});
-            DogStatsd.Counter("exemple_métrique.count", 2, tags: new[] {"environment:dev"});
+            DogStatsd.Increment("exemple_metrique.increment", tags: new[] {"environment:dev"});
+            DogStatsd.Decrement("exemple_metrique.decrement", tags: new[] {"environment:dev"});
+            DogStatsd.Counter("exemple_metrique.count", 2, tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(random.Next(100000));
         }
     }
@@ -193,8 +193,8 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->increment('exemple_métrique.increment', array('environment'=>'dev'));
-    $statsd->decrement('exemple_métrique.decrement', array('environment'=>'dev'));
+    $statsd->increment('exemple_metrique.increment', array('environment'=>'dev'));
+    $statsd->decrement('exemple_metrique.decrement', array('environment'=>'dev'));
     sleep(10);
 }
 {{< /code-block >}}
@@ -204,16 +204,16 @@ while (TRUE) {
 
 Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Incrémenter décrémenter" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Incrémenter décrémenter" >}}
 
 La valeur étant envoyée en tant que `COUNT`, elle est stockée en tant que `RATE` dans Datadog. Pour récupérer des counts bruts dans Datadog, appliquez une fonction à votre série, telle que la fonction [Somme cumulée][3] ou [Intégrale][4] :
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Incrémenter décrémenter avec somme cumulée" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Incrémenter/décrémenter avec somme cumulée" >}}
 
 ### GAUGE
 
-| Méthode                                                        | Type de stockage dans Datadog                                                                                                                                      |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Méthode                                                        | Type de métrique stocké dans Datadog                                                                                                                                      |
+|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `gauge(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Stockée en tant que métrique `GAUGE` dans Datadog. Chaque valeur de la série temporelle stockée correspond à la dernière valeur gauge envoyée pour cette métrique durant l'intervalle de transmission de StatsD. |
 
 #### Exemples de code
@@ -240,7 +240,7 @@ i = 0
 
 while(1):
   i += 1
-  statsd.gauge('exemple_métrique.gauge', i, tags=["environment:dev"])
+  statsd.gauge('exemple_metrique.gauge', i, tags=["environment:dev"])
   time.sleep(10)
 {{< /code-block >}}
 
@@ -258,7 +258,7 @@ i = 0
 
 while true do
     i += 1
-    statsd.gauge('exemple_métrique.gauge', i, tags: ['environment:dev'])
+    statsd.gauge('exemple_metrique.gauge', i, tags: ['environment:dev'])
     sleep 10
 end
 {{< /code-block >}}
@@ -286,7 +286,7 @@ func main() {
     var i float64
     for {
         i += 1
-        statsd.Gauge("exemple_métrique.gauge", i, []string{"environment:dev"}, 1)
+        statsd.Gauge("exemple_metrique.gauge", i, []string{"environment:dev"}, 1)
         time.Sleep(10 * time.Second)
     }
 }
@@ -308,7 +308,7 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.recordGaugeValue("exemple_métrique.gauge", i, ["environment:dev"]);
+            Statsd.recordGaugeValue("exemple_metrique.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
         }
     }
@@ -340,7 +340,7 @@ public class DogStatsdClient
 
         for (int i = 0; i < 10; i++)
         {
-            DogStatsd.Gauge("exemple_métrique.gauge", i, tags: new[] {"environment:dev"});
+            DogStatsd.Gauge("exemple_metrique.gauge", i, tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(100000);
         }
     }
@@ -368,7 +368,7 @@ $statsd = new DogStatsd(
 $i = 0;
 while (TRUE) {
     $i++;
-    $statsd->gauge('exemple_métrique.gauge', $i, array('environment'=>'dev'));
+    $statsd->gauge('exemple_metrique.gauge', $i, array('environment'=>'dev'));
     sleep(10);
 }
 {{< /code-block >}}
@@ -378,12 +378,12 @@ while (TRUE) {
 
 Une fois le code ci-dessus exécuté, les données de votre métrique peuvent être représentées graphiquement dans Datadog :
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
 
 ### SET
 
-| Méthode                                                      | Type de stockage dans Datadog                                                                                                                                           |
-| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Méthode                                                      | Type de métrique stocké dans Datadog                                                                                                                                           |
+|-------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `set(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Stockée en tant que type `GAUGE` dans Datadog. Chaque valeur de la série temporelle stockée correspond au nombre de valeurs uniques envoyées à StatsD pour une métrique durant l'intervalle de transmission. |
 
 #### Exemples de code
@@ -409,7 +409,7 @@ initialize(**options)
 i = 0
 while(1):
   i += 1
-  statsd.set('exemple_métrique.set', i, tags=["environment:dev"])
+  statsd.set('exemple_metrique.set', i, tags=["environment:dev"])
   time.sleep(random.randint(0, 10))
 {{< /code-block >}}
 
@@ -426,7 +426,7 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 i = 0
 while true do
     i += 1
-    statsd.set('exemple_métrique.gauge', i, tags: ['environment:dev'])
+    statsd.set('exemple_metrique.gauge', i, tags: ['environment:dev'])
     sleep rand 10
 end
 {{< /code-block >}}
@@ -456,7 +456,7 @@ func main() {
     var i float64
     for {
         i += 1
-        statsd.Set("exemple_métrique.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
+        statsd.Set("exemple_metrique.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
         time.Sleep(rand.Intn(10) * time.Second)
     }
 }
@@ -487,7 +487,7 @@ public class DogStatsdClient
 
         for (int i = 0; i < 10; i++)
         {
-            DogStatsd.Set("exemple_métrique.set", i, tags: new[] {"environment:dev"});
+            DogStatsd.Set("exemple_metrique.set", i, tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(random.Next(100000));
         }
     }
@@ -516,7 +516,7 @@ $i = 0;
 
 while (TRUE) {
     $i++;
-    $statsd->set('exemple_métrique.set', i, array('environment'=>'dev'));
+    $statsd->set('exemple_metrique.set', i, array('environment'=>'dev'));
     sleep(rand(0, 10));
 }
 {{< /code-block >}}
@@ -526,12 +526,12 @@ while (TRUE) {
 
 Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/set.png" alt="Set" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
 
 ### HISTOGRAM
 
-| Méthode                                                            | Type de stockage dans Datadog                                                                                                                                              |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Méthode                                                            | Type de métrique stocké dans Datadog                                                                                                                                              |
+|-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `histogram(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Comme plusieurs métriques sont envoyées, le type de métrique stocké (`GAUGE`, `RATE`) dépend de la métrique. Pour en savoir plus, consultez la documentation sur le [type de métrique HISTOGRAM][7]. |
 
 #### Configuration
@@ -561,7 +561,7 @@ options = {
 initialize(**options)
 
 while(1):
-  statsd.histogram('exemple_métrique.histogram', random.randint(0, 20), tags=["environment:dev"])
+  statsd.histogram('exemple_metrique.histogram', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
 {{< /code-block >}}
 
@@ -576,7 +576,7 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.set('exemple_métrique.histogram', rand 20, tags: ['environment:dev'])
+    statsd.set('exemple_metrique.histogram', rand 20, tags: ['environment:dev'])
     sleep 2
 end
 {{< /code-block >}}
@@ -604,7 +604,7 @@ func main() {
     }
 
     for {
-        statsd.Histogram("exemple_métrique.histogram", rand.Intn(20), []string{"environment:dev"}, 1)
+        statsd.Histogram("exemple_metrique.histogram", rand.Intn(20), []string{"environment:dev"}, 1)
         time.Sleep(2 * time.Second)
     }
 }
@@ -626,7 +626,7 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.recordHistogramValue("exemple_métrique.histogram", new Random().nextInt(20), ["environment:dev"]);
+            Statsd.recordHistogramValue("exemple_metrique.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
     }
@@ -658,7 +658,7 @@ public class DogStatsdClient
 
         for (int i = 0; i < 10; i++)
         {
-            DogStatsd.Histogram("exemple_métrique.histogram", random.Next(20), tags: new[] {"environment:dev"});
+            DogStatsd.Histogram("exemple_metrique.histogram", random.Next(20), tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(2000);
         }
     }
@@ -684,7 +684,7 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->histogram('exemple_métrique.histogram', rand(0, 20), array('environment'=>'dev'));
+    $statsd->histogram('exemple_metrique.histogram', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
 {{< /code-block >}}
@@ -695,23 +695,23 @@ while (TRUE) {
 L'instrumentation ci-dessus génère les métriques suivantes :
 
 | Métrique                                  | Description                             |
-| --------------------------------------- | --------------------------------------- |
-| `exemple_métrique.histogram.count`        | Le nombre d'échantillonnages de cette métrique |
-| `exemple_métrique.histogram.avg`          | La durée moyenne des valeurs échantillonnées      |
-| `exemple_métrique.histogram.median`       | La valeur échantillonnée médiane                    |
-| `exemple_métrique.histogram.max`          | La valeur échantillonnée maximale                   |
-| `exemple_métrique.histogram.95percentile` | Le 95e centile des valeurs échantillonnées           |
+|-----------------------------------------|-----------------------------------------|
+| `exemple_metrique.histogram.count`        | Le nombre d'échantillonnages de cette métrique |
+| `exemple_metrique.histogram.avg`          | La durée moyenne des valeurs échantillonnées      |
+| `exemple_metrique.histogram.median`       | La valeur échantillonnée médiane                    |
+| `exemple_metrique.histogram.max`          | La valeur échantillonnée maximale                   |
+| `exemple_metrique.histogram.95percentile` | Le 95e centile des valeurs échantillonnées           |
 
 Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
 
 #### TIMER
 
 Dans DogStatsD, le type de métrique `TIMER` est une implémentation du type de métrique `HISTOGRAM` (à ne pas confondre avec les timers de StatsD standard). Il mesure uniquement les données temporelles, telles que la durée d'exécution d'une section de code.
 
-| Méthode                                                        | Type de stockage dans Datadog                                                                                                                                              |
-| ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Méthode                                                        | Type de métrique stocké dans Datadog                                                                                                                                              |
+|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `timed(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Comme plusieurs métriques sont envoyées, le type de métrique stocké (`GAUGE`, `RATE`) dépend de la métrique. Pour en savoir plus, consultez la documentation sur le [type de métrique HISTOGRAM][7]. |
 
 ##### Configuration
@@ -739,7 +739,7 @@ options = {
 
 initialize(**options)
 
-@statsd.timed('exemple_métrique.timer', tags=["environment:dev,function:my_function"])
+@statsd.timed('exemple_metrique.timer', tags=["environment:dev,function:my_function"])
 def my_function():
   time.sleep(random.randint(0, 10))
 
@@ -760,7 +760,7 @@ def my_function():
   sleep(1)
 
   # Démarrer le timer
-  with statsd.timed('exemple_métrique.timer', tags=["environment:dev"]):
+  with statsd.timed('exemple_metrique.timer', tags=["environment:dev"]):
     # Ce que vous souhaitez mesurer
     sleep(random.randint(0, 10))
 
@@ -769,33 +769,58 @@ while(1):
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "PHP" %}}
+
+{{< code-block lang="php" filename="timer.php" >}}
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+     )
+  );
+
+function runfunction() {
+    sleep(rand(0, 20));
+}
+
+while (TRUE) {
+  $start_time = microtime(TRUE);
+  runfunction();
+  $statsd->microtiming('exemple_metrique.timer', microtime(TRUE) - $start_time);
+}
+{{< /code-block >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 Lorsque DogStatsD reçoit les données de la métrique timer, il calcule la distribution statistique des temps de rendu, puis envoie les métriques suivantes à Datadog :
 
 | Métrique                              | Description                             |
-| ----------------------------------- | --------------------------------------- |
-| `exemple_métrique.timer.count`        | Le nombre d'échantillonnages de cette métrique |
-| `exemple_métrique.timer.avg`          | La durée moyenne des valeurs échantillonnées      |
-| `exemple_métrique.timer.median`       | La valeur échantillonnée médiane                    |
-| `exemple_métrique.timer.max`          | La valeur échantillonnée maximale                   |
-| `exemple_métrique.timer.95percentile` | Le 95e centile des valeurs échantillonnées           |
+|-------------------------------------|-----------------------------------------|
+| `exemple_metrique.timer.count`        | Le nombre d'échantillonnages de cette métrique |
+| `exemple_metrique.timer.avg`          | La durée moyenne des valeurs échantillonnées      |
+| `exemple_metrique.timer.median`       | La valeur échantillonnée médiane                    |
+| `exemple_metrique.timer.max`          | La valeur échantillonnée maximale                   |
+| `exemple_metrique.timer.95percentile` | Le 95e centile des valeurs échantillonnées           |
 
 DogStatsD traite les métriques `TIMER` en tant que métriques `HISTOGRAM`. Que vous utilisiez le type de métrique `TIMER` ou `HISTOGRAM`, vous envoyez les mêmes données à Datadog. Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
 
-{{< img src="developers/metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" responsive="true">}}
+{{< img src="developers/metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
 
 ### DISTRIBUTION
 
-Les métriques de distribution sont en version bêta. [Contactez l'assistance Datadog][9] pour activer cette fonctionnalité pour votre compte.
-
-| Méthode                                                | Type de stockage dans Datadog                                                                                          |
-| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `distribution(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAGS>)` | Stockée en tant que métrique `DISTRIBUTION` dans Datadog. Pour en savoir plus, consultez la [documentation sur les métriques de distribution][10]. |
+| Méthode                                                | Type de métrique stocké dans Datadog                                                                                         |
+|-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| `distribution(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAGS>)` | Stockée en tant que métrique `DISTRIBUTION` dans Datadog. Pour en savoir plus, consultez la [documentation sur les métriques de distribution][9]. |
 
 #### Exemples de code
 
-Le type de métrique `DISTRIBUTION` est spécifique à DogStatsD. Dans cet exemple, une métrique `DISTRIBUTION` stockée en tant que métrique `DISTRIBUTION` est envoyée à Datadog. Pour en savoir plus sur le type `DISTRIBUTION`, consultez la documentation sur les [types de métrique][11].
+Le type de métrique `DISTRIBUTION` est spécifique à DogStatsD. Dans cet exemple, une métrique `DISTRIBUTION` stockée en tant que métrique `DISTRIBUTION` est envoyée à Datadog. Pour en savoir plus sur le type `DISTRIBUTION`, consultez la documentation sur les [types de métrique][10].
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -815,7 +840,7 @@ options = {
 initialize(**options)
 
 while(1):
-  statsd.distribution('exemple_métrique.distribution', random.randint(0, 20), tags=["environment:dev"])
+  statsd.distribution('exemple_metrique.distribution', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
 {{< /code-block >}}
 
@@ -830,7 +855,7 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.distribution('exemple_métrique.gauge', rand 20, tags: ['environment:dev'])
+    statsd.distribution('exemple_metrique.gauge', rand 20, tags: ['environment:dev'])
     sleep 2
 end
 {{< /code-block >}}
@@ -858,7 +883,7 @@ func main() {
     }
 
     for {
-        statsd.Distribution("exemple_métrique.distribution", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
+        statsd.Distribution("exemple_metrique.distribution", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
         time.Sleep(2 * time.Second)
     }
 }
@@ -880,7 +905,7 @@ public class DogStatsdClient {
 
         StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
         for (int i = 0; i < 10; i++) {
-            Statsd.recordDistributionValue("exemple_métrique.distribution", new Random().nextInt(20), ["environment:dev"]);
+            Statsd.recordDistributionValue("exemple_metrique.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
     }
@@ -912,7 +937,7 @@ public class DogStatsdClient
 
         for (int i = 0; i < 10; i++)
         {
-            DogStatsd.Distribution("exemple_métrique.distribution", random.Next(20), tags: new[] {"environment:dev"});
+            DogStatsd.Distribution("exemple_metrique.distribution", random.Next(20), tags: new[] {"environment:dev"});
             System.Threading.Thread.Sleep(2000);
         }
     }
@@ -938,7 +963,7 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->distribution('exemple_métrique.distribution', rand(0, 20), array('environment'=>'dev'));
+    $statsd->distribution('exemple_metrique.distribution', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
 {{< /code-block >}}
@@ -959,11 +984,11 @@ Un taux d'échantillonnage de `1` signifie que les métriques sont envoyées 100
 Avant d'envoyer une métrique à Datadog, DogStatsD utilise le `<TAUX_ÉCHANTILLONNAGE>` pour corriger la valeur de la métrique en fonction du type de métrique, c'est-à-dire pour estimer ce qu'elle aurait été sans échantillonnage :
 
 | Type de métrique | Correction du taux d'échantillonnage                                                                                                                                                         |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `COUNT`     | Les valeurs reçues sont multipliées par (`1/<TAUX_ÉCHANTILLONNAGE>`). On peut raisonnablement supposer que pour un point de données reçu, `1/<TAUX_ÉCHANTILLONNAGE>` ont été échantillonnés avec la même valeur. |
 | `GAUGE`     | Aucune correction. La valeur reçue est conservée.                                                                                                                               |
 | `SET`       | Aucune correction. La valeur reçue est conservée.                                                                                                                               |
-| `HISTOGRAM` | La statistique `histogram.count` est une métrique counter. Elle est corrigée comme indiqué plus haut. Les autres statistiques sont les métriques gauge, qui ne sont pas corrigées.                    |
+| `HISTOGRAM` | La statistique `histogram.count` est une métrique COUNT. Elle est corrigée comme indiqué plus haut. Les autres statistiques sont des métriques gauge, qui ne sont pas corrigées.                      |
 
 #### Exemples de code
 
@@ -987,21 +1012,21 @@ statsd.increment('loop.count', :sample_rate => 0.5)
 {{% tab "Go" %}}
 
 ```go
-statsd.Incr("exemple_métrique.increment", []string{}, 0.5)
+statsd.Incr("exemple_metrique.increment", []string{}, 0.5)
 ```
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 ```java
-Statsd.incrementCounter("exemple_métrique.increment", sampleRate=0.5);
+Statsd.incrementCounter("exemple_metrique.increment", sampleRate=0.5);
 ```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("exemple_métrique.increment", sampleRate: 0.5);
+DogStatsd.Increment("exemple_metrique.increment", sampleRate: 0.5);
 ```
 
 {{% /tab %}}
@@ -1009,8 +1034,9 @@ DogStatsd.Increment("exemple_métrique.increment", sampleRate: 0.5);
 
 ```php
 <? php
-$statsd->increment('exemple_métrique.increment', $sampleRate->0.5);
+$statsd->increment('exemple_metrique.increment', $sampleRate->0.5);
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1020,41 +1046,41 @@ Ajoutez des tags à n'importe quelle métrique envoyée à DogStatsD avec le par
 
 #### Exemples de code
 
-Le code suivant ajoute uniquement les tags `environment:dev` et `account:local` à la métrique `exemple_métrique.increment` :
+Le code suivant ajoute uniquement les tags `environment:dev` et `account:local` à la métrique `exemple_metrique.increment` :
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 ```python
-statsd.increment('exemple_métrique.increment', tags=["environment:dev","account:local"])
+statsd.increment('exemple_metrique.increment', tags=["environment:dev","account:local"])
 ```
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 ```ruby
-statsd.increment('exemple_métrique.increment', tags: ['environment:dev','account:local'])
+statsd.increment('exemple_metrique.increment', tags: ['environment:dev','account:local'])
 ```
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 ```go
-statsd.Incr("exemple_métrique.increment", []string{"environment:dev","account:local"}, 1)
+statsd.Incr("exemple_metrique.increment", []string{"environment:dev","account:local"}, 1)
 ```
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 ```java
-Statsd.incrementCounter("exemple_métrique.increment", ["environment:dev","account:local"]);
+Statsd.incrementCounter("exemple_metrique.increment", new String[]{"environment:dev","account:local"});
 ```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("exemple_métrique.increment", tags: new[] {"environment:dev","account:local"})
+DogStatsd.Increment("exemple_metrique.increment", tags: new[] {"environment:dev","account:local"})
 ```
 
 {{% /tab %}}
@@ -1063,35 +1089,35 @@ DogStatsd.Increment("exemple_métrique.increment", tags: new[] {"environment:dev
 L'argument `tags` peut être une chaîne de caractères :
 
 ```php
-$statsd->increment('exemple_métrique.increment', "environment:dev,account:local");
+$statsd->increment('exemple_metrique.increment', "environment:dev,account:local");
 ```
 
 ou un tableau :
 
 ```php
 <?php
-$statsd->increment('exemple_métrique.increment', array('environment' => 'dev', 'account' => 'local'));
+$statsd->increment('exemple_metrique.increment', array('environment' => 'dev', 'account' => 'local'));
 
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Tag de host
+#### Tag host
 
-Le tag de host est attribué automatiquement par l'Agent Datadog chargé de l'agrégation des métriques. Les métriques envoyées avec un tag de host qui ne correspond pas au hostname de l'Agent perdent la référence au host d'origine. Le tag de host envoyé remplace n'importe quel hostname recueilli par l'Agent ou configuré par celui-ci.
+Le tag host est attribué automatiquement par l'Agent Datadog chargé de l'agrégation des métriques. Les métriques envoyées avec un tag host qui ne correspond pas au hostname de l'Agent perdent la référence au host d'origine. Le tag host envoyé remplace n'importe quel hostname recueilli par l'Agent ou configuré par celui-ci.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /fr/developers/dogstatsd
-[2]: /fr/developers/metrics/metrics_type/?tab=count#metric-type-definition
-[3]: /fr/graphing/functions/arithmetic/#cumulative-sum
-[4]: /fr/graphing/functions/arithmetic/#integral
-[5]: /fr/developers/metrics/metrics_type/?tab=gauge#metric-type-definition
-[6]: /fr/developers/metrics/metrics_type/?tab=set#metric-type-definition
-[7]: /fr/developers/metrics/metrics_type/?tab=histogram#metric-type-definition
+[2]: /fr/developers/metrics/types/?tab=count#metric-type-definition
+[3]: /fr/dashboards/functions/arithmetic/#cumulative-sum
+[4]: /fr/dashboards/functions/arithmetic/#integral
+[5]: /fr/developers/metrics/types/?tab=gauge#metric-type-definition
+[6]: /fr/developers/metrics/types/?tab=set#metric-type-definition
+[7]: /fr/developers/metrics/types/?tab=histogram#metric-type-definition
 [8]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[9]: /fr/help
-[10]: /fr/graphing/metrics/distributions
-[11]: /fr/developers/metrics/metrics_type/?tab=distribution#metric-type-definition
+[9]: /fr/metrics/distributions
+[10]: /fr/developers/metrics/types/?tab=distribution#metric-type-definition

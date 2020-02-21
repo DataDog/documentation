@@ -10,7 +10,7 @@ further_reading:
   text: "Configure your monitor notifications"
 ---
 
-A simple way to trigger an alert when a metric value does not change over a set period of time is to start by using the `diff()` [function][1] on your query. This will produce the delta values from consecutive data points.
+A simple way to trigger an alert when a metric value does not change over a set period of time is to start by using the `diff()` function on your query. This will produce the delta values from consecutive data points.
 
 * `diff(avg:system.mem.free{*})`
 
@@ -20,9 +20,9 @@ Next, apply the abs() function to take the absolute value of these deltas.
 
 These functions can be applied to your query in the UI, via the "+" button.
 
-{{< img src="monitors/faq/new_query_ui_monitors.png" alt="new_query_ui_monitors" responsive="true" >}}
+{{< img src="monitors/faq/new_query_ui_monitors.png" alt="new_query_ui_monitors"  >}}
 
-Alternatively, your complex query can be manually entered in the 'edit monitor' UI, via the Source tab (or applied programmatically via the [API][2]). See image below.
+Alternatively, your complex query can be manually entered in the 'edit monitor' UI, via the Source tab (or applied programmatically via the [API][1]). See image below.
 
 For [alert conditions][3] in the metric monitor itself, configure as follows:
 
@@ -32,12 +32,11 @@ For [alert conditions][3] in the metric monitor itself, configure as follows:
 
 This configuration will trigger an alert event when no change in value has been registered over the selected timeframe.
 
-Other [alert conditions/options][3] can be set to preference. Your monitor's UI configuration should end up looking something like this:
+Other [alert conditions/options][2] can be set to preference. Your monitor's UI configuration should end up looking something like this:
 
-{{< img src="monitors/faq/zero_alert.png" alt="zero_alert" responsive="true" >}}
+{{< img src="monitors/faq/zero_alert.png" alt="zero_alert"  >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /graphing/miscellaneous/functions
-[2]: /api
-[3]: /monitors/monitor_types/#define-the-conditions
+[1]: /api
+[2]: /monitors/monitor_types/#define-the-conditions

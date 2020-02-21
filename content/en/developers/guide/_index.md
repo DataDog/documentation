@@ -2,7 +2,6 @@
 title: Developer Guides
 kind: guide
 private: true
-disable_toc: true
 ---
 
 {{< whatsnext desc="Useful Guides to interact with Datadog APIs:" >}}

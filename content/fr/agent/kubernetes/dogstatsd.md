@@ -19,7 +19,7 @@ Vous pouvez utiliser [DogStatsD sur un socket de domaine Unix][3].
 
 Modifiez votre fichier `datadog.yaml` afin de définir l'option `dogstatsd_socket` sur le chemin où DogStatsD doit créer son socket d'écoute :
 
-```
+```yaml
 dogstatsd_socket: /var/run/datadog/dsd.socket
 ```
 
@@ -98,13 +98,13 @@ Votre application doit pouvoir déterminer de façon fiable l'adresse IP de son 
 
 ```yaml
 env:
-  - name: DOGSTATSD_HOST_IP
+  - name: DD_AGENT_HOST
     valueFrom:
       fieldRef:
         fieldPath: status.hostIP
 ```
 
-Grâce à ce manifeste, un pod exécutant votre application peut transmettre des métriques DogStatsD via le port `8125` sur `$DOGSTATSD_HOST_IP`.
+Grâce à ce manifeste, un pod exécutant votre application peut transmettre des métriques DogStatsD via le port `8125` sur `$DD_AGENT_HOST`.
 
 ## Détection de l'origine via UDP
 
@@ -125,9 +125,9 @@ env:
 La détection de l'origine est prise en charge dans l'Agent 6.10.0+ et dans les bibliothèques client suivantes :
 
 | Bibliothèque      | Version |
-| ------------ | ------- |
+|--------------|---------|
 | [Go][9]      | 2.2     |
-| [PHP][10]     | 1.4.0   |
+| [PHP][10]    | 1.4.0   |
 | [Python][11] | 0.28.0  |
 | [Ruby][12]   | 4.2.0   |
 | [C#][13]     | 3.3.0   |
@@ -143,16 +143,16 @@ Dès lors que votre application peut envoyer des métriques via DogStatsD sur ch
 
 **[Consulter la liste complète des bibliothèques client DogStatsD de Datadog][16]**
 
-Par exemple, si votre application est écrite en Go, importez la [bibliothèque Go][17] de Datadog afin de bénéficier d'une bibliothèque client DogStatsD :
+Par exemple, si votre application est rédigée en Go, importez la [bibliothèque Go][9] de Datadog afin de bénéficier d'une bibliothèque client DogStatsD :
 
-```
+```go
 import "github.com/DataDog/datadog-go/statsd"
 ```
 
-Avant de pouvoir ajouter des counters, gauges et autres métriques custom, [initialisez le client StatsD][18] avec l'emplacement du service DogStatsD, en fonction de la méthode choisie :
+Avant de pouvoir ajouter des counters, gauges et autres métriques custom, [initialisez le client StatsD][17] avec l'emplacement du service DogStatsD, en fonction de la méthode choisie :
 
 - Socket de domaine Unix : `$DD_DOGSTATSD_SOCKET`
-- hostPort : `$DOGSTATSD_HOST_IP`
+- hostPort: `$DD_AGENT_HOST`
 
 ```go
 func main(){
@@ -192,7 +192,6 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /fr/developers/metrics/dogstatsd_metrics_submission
 [2]: https://github.com/etsy/statsd
 [3]: /fr/developers/dogstatsd/unix_socket
@@ -209,5 +208,4 @@ func InfoHandler(rw http.ResponseWriter, req *http.Request) {
 [14]: https://github.com/DataDog/java-dogstatsd-client
 [15]: /fr/tagging/assigning_tags/#environment-variables
 [16]: /fr/developers/libraries/#api-and-dogstatsd-client-libraries
-[17]: https://github.com/DataDog/datadog-go
-[18]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91
+[17]: https://gist.github.com/johnaxel/fe50c6c73442219c48bf2bebb1154f91

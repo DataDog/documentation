@@ -8,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/autodiscovery/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
 - link: "agent/kubernetes/daemonset_setup"
@@ -34,6 +34,7 @@ As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements 
 2. Having the aggregation layer enabled. Refer to the [Kubernetes aggregation layer configuration documentation][3].
 
 ## Set up the Cluster Agent external metric server
+
 ### Custom metrics server
 
 To enable the Custom Metrics Server, follow the instructions to [set up the Datadog Cluster Agent][4], but when editing the deployment manifest of the Datadog Cluster Agent in [Step 3 - Create the Cluster Agent and its service][5], follow those extra steps:
@@ -74,15 +75,15 @@ Once the Datadog Cluster Agent is up and running:
 
 Once you have the Datadog Cluster Agent running and the service registered, create an [HPA][8] manifest and specify `type: External` for your metrics in order to notify the Datadog Cluster Agent to pull the metrics from Datadog:
 
-```
+```yaml
 spec:
   metric:
     - type: External
       external:
-      metricName: <METRIC_NAME>
+      metricName: "<METRIC_NAME>"
       metricSelector:
         matchLabels:
-          <TAG_KEY>:<TAG_VALUE>
+          "<TAG_KEY>:<TAG_VALUE>"
 ```
 
 **Example**: An HPA manifest to autoscale off an NGINX deployment based off of the `nginx.net.request_per_s` Datadog metric:

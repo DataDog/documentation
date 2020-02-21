@@ -1,12 +1,14 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    Envoy - Overview: assets/dashboards/envoy_overview.json
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
   - cloud
   - web
   - log collection
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -24,7 +26,7 @@ metric_prefix: envoy.
 metric_to_check: envoy.server.uptime
 name: envoy
 public_title: Intégration Datadog/Envoy
-short_description: Envoy est un proxy de périmètre et de service open source conçu pour les applications natives dans le cloud.
+short_description: Envoy est un proxy de périmètre et de service open source.
 support: core
 supported_os:
   - linux
@@ -37,15 +39,13 @@ Ce check recueille les métriques d'observation système distribuées d'[Envoy][
 
 ## Implémentation
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][15] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
 Le check Envoy est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 #### Via Istio
 
-Si vous utilisez Envoy avec [Istio][3], vous devez définir le [proxyAdminPort][5] d'Istio pour accéder à l'[endpoint administrateur][4] d'Envoy.
+Si vous utilisez Envoy avec [Istio][3], vous devez définir le [proxyAdminPort][5] d'Istio pour accéder à l'[endpoint admin][4] d'Envoy.
 
 #### Standard
 
@@ -53,7 +53,7 @@ Il existe deux façons de configurer l'endpoint `/stats` :
 
 ##### Endpoint stats non sécurisé
 
-Voici un exemple de configuration d'administrateur Envoy :
+Voici un exemple de configuration de l'interface d'administration Envoy :
 
 ```yaml
 admin:
@@ -118,27 +118,33 @@ static_resources:
 
 ### Configuration
 
-1. Modifiez le fichier `envoy.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos données de performance Envoy.
-  Consultez le [fichier d'exemple envoy.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
+#### Host
 
-2. Vérifiez si l'Agent Datadog peut accéder à l'[endpoint administrateur][4] d'Envoy.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+
+##### Collecte de métriques
+
+1. Modifiez le fichier `envoy.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos données de performance Envoy. Consultez le [fichier d'exemple envoy.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
+
+  ```yaml
+    init_config:
+
+    instances:
+
+        ## @param stats_url - string - required
+        ## The admin endpoint to connect to. It must be accessible:
+        ## https://www.envoyproxy.io/docs/envoy/latest/operations/admin
+        ## Add a `?usedonly` on the end if you wish to ignore
+        ## unused metrics instead of reporting them as `0`.
+        #
+      - stats_url: http://localhost:80/stats
+  ```
+
+2. Vérifiez si l'Agent Datadog peut accéder à l'[endpoint admin][4] d'Envoy.
 
 3. [Redémarrez l'Agent][9].
 
-| Paramètre            | Description                                                                                                                                                                |
-| ---                | ---                                                                                                                                                                        |
-| `stats_url`        | (OBLIGATOIRE) L'endpoint stats d'administration, par exemple `http://localhost:80/stats`. Ajoutez un `?usedonly` à la fin si vous souhaitez ignorer les métriques non utilisées plutôt que transmettre `0` pour celles-ci. |
-| `tags`             | La liste de tags personnalisés à appliquer à cette instance.                                                                                                                           |
-| `metric_whitelist` | Une liste d'expressions régulières.                                                                                                                                             |
-| `metric_blacklist` | Une liste d'expressions régulières.                                                                                                                                             |
-| `cache_metrics`    | Résultats de cache des listes d'inclusion et d'exclusion pour réduire l'utilisation du processeur, en favorisant l'utilisation de la mémoire (valeur par défaut : `true`).                                                       |
-| `username`         | Le nom d'utilisateur à utiliser en cas d'authentification basique.                                                                                                                    |
-| `password`         | Le mot de passe à utiliser en cas d'authentification basique.                                                                                                                    |
-| `tls_verify`       | Ce paramètre oblige le check à valider les certificats TLS lors de la connexion à Envoy. Valeur par défaut : `true`. Définissez-le sur `false` pour désactiver la validation des certificats TLS.    |
-| `skip_proxy`       | S'il ce paramètre est défini sur `true`, le check ignore tous les paramètres de proxy activés et essaie d'interagir directement avec Envoy.                                                                              |
-| `timeout`          | Un délai d'expiration personnalisé pour les requêtes de réseau en secondes (valeur par défaut : 20).                                                                                                          |
-
-#### Filtrer les métriques
+###### Filtrer les métriques
 
 Les métriques peuvent être filtrées grâce à l'expression régulière `metric_whitelist` ou `metric_blacklist`. Si les deux paramètres sont utilisés, la liste d'inclusion (whitelist) est alors d'abord appliquée, puis la liste d'exclusion (blacklist) est appliquée sur les résultats.
 
@@ -165,7 +171,7 @@ Si seuls le nom de cluster et le service gRPC vous intéressent, ajoutez le code
 
 `^cluster\.<NOM_CLUSTER>\.grpc\.<SERVICE_GRPC>\.`
 
-#### Collecte de logs
+##### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
@@ -187,16 +193,38 @@ Si seuls le nom de cluster et le service gRPC vous intéressent, ajoutez le code
 
 3. [Redémarrez l'Agent][9].
 
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][11] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+##### Collecte de métriques
+
+| Paramètre            | Valeur                                      |
+|----------------------|--------------------------------------------|
+| `<NOM_INTÉGRATION>` | `envoy`                                    |
+| `<CONFIG_INIT>`      | vide ou `{}`                              |
+| `<CONFIG_INSTANCE>`  | `{"stats_url": "http://%%host%%:80/stats}` |
+
+##### Collecte de logs
+
+**Disponible à partir des versions > 6.5 de l'Agent**
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][12].
+
+| Paramètre      | Valeur                                              |
+|----------------|----------------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "envoy", "service": "<NOM_SERVICE>"}` |
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][11] et recherchez `envoy` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][13] et recherchez `envoy` dans la section Checks.
 
 ## Données collectées
 ### Métriques
 {{< get-metrics-from-git "envoy" >}}
 
 
-Consultez [metrics.py][13] pour y découvrir la liste des tags envoyés par chaque métrique.
+Consultez [metrics.py][10] pour y découvrir la liste des tags envoyés par chaque métrique.
 
 ### Événements
 
@@ -209,7 +237,7 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Envoy pour re
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][14].
+Besoin d'aide ? Contactez [l'assistance Datadog][15].
 
 
 [1]: https://www.envoyproxy.io
@@ -218,15 +246,12 @@ Besoin d'aide ? Contactez [l'assistance Datadog][14].
 [4]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
 [5]: https://istio.io/docs/reference/config
 [6]: https://gist.github.com/ofek/6051508cd0dfa98fc6c13153b647c6f8
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/envoy/metadata.csv
-[13]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
-[14]: https://docs.datadoghq.com/fr/help
-[15]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-
-
-{{< get-dependencies >}}
+[11]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[12]: https://docs.datadoghq.com/fr/agent/docker/log/
+[13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[14]: https://github.com/DataDog/integrations-core/blob/master/envoy/metadata.csv
+[15]: https://docs.datadoghq.com/fr/help

@@ -36,8 +36,8 @@ function postMetric($metric,$tags) {
 }
 
 # Datadog account, API information and optional parameters
-$app_key = "<YOUR_APP_KEY_HERE>" #provide your valid app key
-$api_key = "<YOUR_API_KEY_HERE>" #provide your valid api key
+$app_key = "<DATADOG_APPLICATION_KEY>" #provide your valid app key
+$api_key = "<DATADOG_API_KEY>" #provide your valid api key
 $url_base = "https://app.datadoghq.com/"
 $url_signature = "api/v1/series"
 $url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
@@ -96,8 +96,8 @@ $http_request.responseText
 1. Replace the API/app key with yours:
 
     ```powershell
-    $api_key = "<YOUR_API_KEY>"
-    $app_key = "<YOUR_APP_KEY>"
+    $api_key = "<DATADOG_API_KEY>"
+    $app_key = "<DATADOG_APPLICATION_KEY>"
     ```
 
 2. Set up your parameters according to [the description in the host API][3]:
@@ -121,8 +121,8 @@ $http_request.responseText
 1. Replace the API/app key with yours:
 
     ```powershell
-    $api_key = "<YOUR_API_KEY>"
-    $app_key = "<YOUR_APP_KEY>"
+    $api_key = "<DATADOG_API_KEY>"
+    $app_key = "<DATADOG_APPLICATION_KEY>"
     ```
 
 2. Set up parameters according to [description in the metrics API][4]:

@@ -3,7 +3,7 @@ title: "APM - Setup for a Rails app"
 kind: video
 language: en
 wistiaid: ps2vn2rask
-videos:
+"video-categories":
     - APM
     - Rails
 

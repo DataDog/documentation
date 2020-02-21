@@ -1,13 +1,13 @@
 ---
 title: Get all users
 type: apicode
-order: 35.3
+order: 36.3
 external_redirect: /api/#get-all-users
 ---
 
 **SIGNATURE**:
 
-`GET /v1/user`
+`GET /v2/users`
 
 **EXAMPLE REQUEST**:
 

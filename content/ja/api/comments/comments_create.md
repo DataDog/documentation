@@ -5,9 +5,11 @@ order: 7.1
 external_redirect: '/api/#create-a-comment'
 ---
 ## コメントの作成
+
 コメントは、基本的に、[イベントストリーム][1]に表示される特別な形式のイベントです。新しいディスカッションスレッドを開始したり、別のスレッドに返信することもできます。
 
-##### 引数
+**引数**:
+
 * **`message`** [必須]:
     コメントのテキスト。
 
@@ -17,4 +19,4 @@ external_redirect: '/api/#create-a-comment'
 * **`related_event_id`** [オプション、デフォルト = **None**]:
     返信対象の別のコメントまたはイベントの ID。
 
-[1]: /ja/graphing/event_stream
+[1]: /ja/events

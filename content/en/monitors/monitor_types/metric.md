@@ -51,7 +51,6 @@ On each alert evaluation, Datadog calculates the percentage of the series that f
 
 For more detailed information, see the [Anomaly Monitor][1] page.
 
-
 [1]: /monitors/monitor_types/anomaly
 {{% /tab %}}
 {{% tab "Outliers" %}}
@@ -61,7 +60,6 @@ Outlier monitors detect when a member of a group (hosts, availability zones, par
 On each alert evaluation, Datadog checks whether or not all groups are clustered together and exhibiting the same behavior. An alert is triggered when one or more groups diverges from the rest of the groups.
 
 For more detailed information, see the [Outlier Monitor][1] page.
-
 
 [1]: /monitors/monitor_types/outlier
 {{% /tab %}}
@@ -73,7 +71,6 @@ On each alert evaluation, a forecast alert predicts the future values of the met
 
 For more detailed information, see the [Forecast Monitor][1] page.
 
-
 [1]: /monitors/monitor_types/forecasts
 {{% /tab %}}
 {{< /tabs >}}
@@ -81,7 +78,7 @@ For more detailed information, see the [Forecast Monitor][1] page.
 ### Define the metric
 
 Any metric currently reporting to Datadog is available for monitors. Use the editor and these steps to define the metric:
-{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope" responsive="true" >}}
+{{< img src="monitors/monitor_types/metric/metric_scope.png" alt="metric scope"  >}}
 
 | Step                | Required | Default    | Example           |
 |---------------------|----------|------------|-------------------|
@@ -172,7 +169,9 @@ This setting allows you to change when the alerting engine considers a monitor a
 
 `Do not notify` if data is missing or `Notify` if data is missing for more than `N` minutes.
 
-Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. **Note**: The missing data window must be at least two times the evaluation period to work.
+Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. 
+
+**Note**: It is recommended that you set the missing data window to at least two times the evaluation period.
 
 Alternatively, if you are monitoring a metric over an auto-scaling group of hosts that stop and start automatically, notifying for no data would produce a lot of notifications. For this case, you should not enable notifications for missing data.
 
@@ -202,6 +201,6 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /tagging/using_tags/?tab=assignment
-[3]: /graphing/using_graphs/#advanced-graphing
+[3]: /dashboards/querying/#advanced-graphing
 [4]: /monitors/faq/what-are-recovery-thresholds
 [5]: /monitors/notifications

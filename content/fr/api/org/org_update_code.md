@@ -1,7 +1,7 @@
 ---
 title: Mettre à jour une organisation
 type: apicode
-order: 27.3
+order: 28.3
 external_redirect: /api/#mettre-a-jour-une-organisation
 ---
 

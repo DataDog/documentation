@@ -7,6 +7,7 @@ assets:
 categories:
   - containers
   - network
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -30,9 +31,10 @@ supported_os:
   - linux
 ---
 ## Présentation
+
 Recueillez des métriques de CoreDNS en temps réel pour visualiser et surveiller les échecs de DNS et les hits et miss de cache.
 
-## Implémentation
+## Configuration
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][7] pour découvrir comment appliquer ces instructions aux environnements conteneurisés.
 
@@ -42,25 +44,26 @@ Le check CoreDNS est inclus avec le paquet de l'[Agent Datadog][1] : vous n'ave
 
 ### Configuration
 
+#### Host
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+
 Modifiez le fichier `coredns.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2], afin de spécifier votre serveur et votre port et de définir les masters à surveiller. Consultez le [fichier d'exemple coredns.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
-#### Utilisation de la découverte de services
+#### Environnement conteneurisé
 
-Si vous utilisez un pod dd-agent (daemon set) pour chaque nœud worker Kubernetes, utilisez les annotations suivantes sur votre pod core-dns pour récupérer automatiquement les données.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][7] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
-```yaml
-metadata:
-  annotations:
-    ad.datadoghq.com/coredns.check_names: '["coredns"]'
-    ad.datadoghq.com/coredns.init_configs: '[{}]'
-    ad.datadoghq.com/coredns.instances: '[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]'
-```
+| Paramètre            | Valeur                                                                            |
+| -------------------- | -------------------------------------------------------------------------------- |
+| `<NOM_INTÉGRATION>` | `coredns`                                                                        |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                    |
+| `<CONFIG_INSTANCE>`  | `{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}` |
 
 **Remarques :**
 
- * Le tag `dns-pod` surveille l'IP du pod dns cible. Les autres tags sont associés au dd-agent qui interroge les informations à l'aide de la découverte de services.
- * Les annotations de découverte de services doivent être effectuées sur le pod. En cas de déploiement, ajoutez les annotations aux métadonnées des spécifications du modèle. Ne les ajoutez pas au niveau des spécifications extérieures.
-
+- Le tag `dns-pod` surveille l'IP du pod DNS cible. Les autres tags sont associés au dd-agent qui interroge les informations à l'aide de la découverte de services.
+- Les annotations de découverte de services doivent être effectuées sur le pod. En cas de déploiement, ajoutez les annotations aux métadonnées des spécifications du modèle. Ne les ajoutez pas au niveau des spécifications extérieures.
 
 ### Validation
 
@@ -98,6 +101,3 @@ pour découvrir comment tester et développer des intégrations reposant sur l'A
 [5]: https://github.com/DataDog/integrations-core/blob/master/coredns/metadata.csv
 [6]: http://docs.datadoghq.com/help
 [7]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-
-
-{{< get-dependencies >}}

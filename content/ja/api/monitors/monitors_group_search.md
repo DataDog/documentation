@@ -1,14 +1,14 @@
 ---
 title: モニターグループの検索
 type: apicontent
-order: 26.13
+order: 27.14
 external_redirect: '/api/#monitors-group-search'
 ---
 ## モニターグループの検索
 
 モニターグループの詳細を検索および絞り込みをします。
 
-##### 引数
+**引数**:
 
 * **`query`** [オプション]:
 

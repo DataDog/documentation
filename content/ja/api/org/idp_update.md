@@ -1,7 +1,7 @@
 ---
 title: IdP メタデータのアップロード
 type: apicontent
-order: 27.4
+order: 28.4
 external_redirect: /api/#upload-idp-metadata
 ---
 
@@ -15,16 +15,20 @@ external_redirect: /api/#upload-idp-metadata
 ### マルチパートフォームデータ
 
 ##### ヘッダー
+
 * **`Content-Type: multipart/form-data`**
 
-##### 引数
+**引数**:
+
 * **`idp_file`** [必須]:
      アップロードする XML メタデータファイルのパス。
 
 ### XML 本文
 
 ##### ヘッダー
+
 * **`Content-Type: application/xml`**
 
-##### 引数
+**引数**:
+
 本文には IdP メタデータ XML ファイルの内容が含まれている必要があります。

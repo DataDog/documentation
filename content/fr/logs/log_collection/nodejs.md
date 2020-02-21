@@ -26,11 +26,11 @@ Utilisez [Winston][1] pour la création de logs depuis votre application NodeJS 
 
 Winston est disponible via [NPM][2]. Pour démarrer, vous devez ajouter la dépendance à votre code :
 
-```
+```text
 npm install --save winston
 ```
 
-`package.js` est mis à jour avec les dépendances correspondantes :
+`package.json` est mis à jour avec les dépendances correspondantes :
 
 ```js
 {
@@ -47,9 +47,7 @@ npm install --save winston
 
 ## Implémentation
 
-**Ajouter des identifiants de trace à vos logs**
-
-Si l'APM est activé pour cette application et que vous souhaitez améliorer la corrélation entre les traces et les logs d'application, [suivez les instructions de journalisation NodeJS pour l'APM][3] afin d'ajouter automatiquement des identifiants de trace et de span à vos logs.
+**Ajouter des identifiants de trace à vos logs** : si l'APM est activé pour cette application et que vous souhaitez améliorer la corrélation entre les traces et les logs d'application, [suivez les instructions de journalisation NodeJS pour l'APM][3] afin d'ajouter automatiquement des identifiants de trace et de span à vos logs.
 
 ### Journalisation dans un fichier
 
@@ -119,23 +117,15 @@ init_config:
 
 instances:
 
-##Section Log
+## Section Logs
 logs:
 
-    ## - type (obligatoire) : type de fichier de la source d'entrée de log (tcp/udp/file).
-    ##   port / path (obligatoire) : définit le type tcp ou udp du port. Choisit le chemin si le type est défini sur file.
-    ##   service (obligatoire) : nom du service propriétaire du log.
-    ##   source (obligatoire) : attribut qui définit l'intégration qui envoie les logs.
-    ##   sourcecategory (facultatif) : attribut à valeur multiple. Il peut être utilisé pour préciser l'attribut source.
-    ##   tags (facultatif) : ajoute des tags à chaque log recueilli.
-
   - type: file
-    path: <NOM_CHEMIN_FICHIER>.log
+    path: "<CHEMIN_NOM_FICHIER>.log"
     service: nodejs
     source: nodejs
     sourcecategory: sourcecode
 ```
-
 
 ## Dépannage
 
@@ -157,4 +147,4 @@ Assurez-vous de ne pas définir le paramètre `max_connect_retries` sur `1` (val
 
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
-[3]: /fr/tracing/advanced/connect_logs_and_traces/?tab=nodejs
+[3]: /fr/tracing/connect_logs_and_traces/?tab=nodejs

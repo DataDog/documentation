@@ -34,7 +34,8 @@ supported_os:
 ## Présentation
 
 Ce check permet de surveiller les services de connectivité cloud [Neutrona][1] pour
- - Azure (ExpressRoute).
+
+- Azure (ExpressRoute).
 
 ## Implémentation
 
@@ -45,35 +46,35 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 1. Installez le [kit de développement][5].
 2. Clonez le référentiel integrations-extras :
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. Pour générer le paquet `neutrona`, exécutez :
 
-    ```
-    ddev -e release build neutrona
-    ```
+   ```shell
+   ddev -e release build neutrona
+   ```
 
 5. [Téléchargez et lancez l'Agent Datadog][6].
 6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
-    ```
-    datadog-agent integration install -w <PATH_OF_NEUTRONA_ARTIFACT_>/<NEUTRONA_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_NEUTRONA_ARTIFACT_>/<NEUTRONA_ARTIFACT_NAME>.whl
+   ```
 
 7. Configurez votre intégration comme [n'importe quelle autre intégration fournie avec l'Agent][7].
 
 ### Configuration
 
 1. Modifiez le fichier `neutrona.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#collecte-de-metriques) Neutrona.
-  Consultez le [fichier d'exemple neutrona.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
+   Consultez le [fichier d'exemple neutrona.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][10].
 
@@ -112,6 +113,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][13].
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-core/blob/master/neutrona/metadata.csv
 [13]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

@@ -1,13 +1,13 @@
 ---
 title: Create a test
 type: apicode
-order: 30.1
+order: 31.1
 external_redirect: /api/#create-a-test
 ---
 
 **SIGNATURE**:
 
-`POST /v1/synthetics/tests/`
+`POST /v1/synthetics/tests`
 
 **EXAMPLE REQUEST**:
 

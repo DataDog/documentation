@@ -3,7 +3,7 @@ title: Matt's Quick Tips - Weekly Monitor Report
 kind: video
 language: en
 wistiaid: kzcivp7n6k
-videos:
+"video-categories":
     - Introduction
     - Datadog Emails
     - Monitors

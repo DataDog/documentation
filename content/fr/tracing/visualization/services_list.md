@@ -15,7 +15,7 @@ further_reading:
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
 ---
-{{< img src="tracing/visualization/services_page.png" alt="Page Services" responsive="true" >}}
+{{< img src="tracing/visualization/services_page.png" alt="Page Services" >}}
 
 ## Présentation
 
@@ -31,7 +31,7 @@ Filtrez la liste des services en fonction des éléments suivants :
 * [Type de service](#services-types)
 * Une requête (filtrage textuel de base)
 
-{{< img src="tracing/visualization/services_filtering.mp4" alt="Filtrage de services" video="true" responsive="true" width="75%" >}}
+{{< img src="tracing/visualization/services_filtering.mp4" alt="Filtrage de services" video="true" width="75%" >}}
 
 ### Types de services
 
@@ -52,7 +52,7 @@ Nous utilisons également des alias pour des intégrations comme Postgres, MySQL
 
 La couleur du service est utilisée dans les [visualisations de traces][8]. Sélectionnez la couleur de votre service pour la modifier :
 
-{{< img src="tracing/visualization/service_color.png" alt="Couleurs des services" responsive="true" style="width:30%;">}}
+{{< img src="tracing/visualization/service_color.png" alt="Couleurs des services" style="width:30%;">}}
 
 ## Sélectionner des colonnes
 
@@ -64,7 +64,7 @@ Choisissez ce que vous souhaitez afficher dans votre liste des services :
 * **Apdex** : score Apdex du service. [En savoir plus sur le score Apdex][9]
 * **Monitor status** : [statut des monitors][10] associés à un service
 
-{{< img src="tracing/visualization/services_columns.png" alt="Colonnes des services" responsive="true" style="width:40%;">}}
+{{< img src="tracing/visualization/services_columns.png" alt="Colonnes des services" style="width:40%;">}}
 
 ## Pour aller plus loin
 
@@ -74,8 +74,8 @@ Choisissez ce que vous souhaitez afficher dans votre liste des services :
 [2]: /fr/tracing/visualization/#services
 [3]: https://app.datadoghq.com/apm/services
 [4]: /fr/tracing/visualization/service
-[5]: /fr/tracing/advanced/setting_primary_tags_to_scope/#environment
-[6]: /fr/tracing/advanced/setting_primary_tags_to_scope
+[5]: /fr/tracing/guide/setting_primary_tags_to_scope/#environment
+[6]: /fr/tracing/guide/setting_primary_tags_to_scope
 [7]: /fr/tracing/visualization/trace/#spans
 [8]: /fr/tracing/visualization/trace
 [9]: /fr/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm

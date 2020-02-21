@@ -3,7 +3,6 @@ title: Références relatives aux pipelines d'intégration
 kind: guide
 aliases:
   - /fr/logs/faq/integration-pipeline-reference
-disable_toc: true
 further_reading:
   - link: logs/processing/pipelines
     tag: Documentation
@@ -40,7 +39,7 @@ Les pipelines de processing d'intégration de Datadog sont disponibles pour la v
 | [CouchDB][24]                    | [Fichier YAML d'intégration Datadog][25]              | `couchdb`                  |
 | Cron                             | [Fichier YAML Datadog personnalisé][26]                   | `CRON`                     |
 | [Docker][27]                     | Installation de l'Agent sur le [conteneur][28] ou le [host][29] | `docker`                   |
-| [ElasticSearch][30]              | [Fichier YAML d'intégration Datadog][31]              | `elasticsearch`            |
+| [Elasticsearch][30]              | [Fichier YAML d'intégration Datadog][31]              | `elasticsearch`            |
 | Fail2ban                         | [Fichier YAML Datadog personnalisé][26]                   | `fail2ban`                 |
 | [Go][32]                         | [Fichier YAML Datadog personnalisé][33]                   | `go`                       |
 | [Gunicorn][34]                   | [Fichier YAML d'intégration Datadog][35]              | `gunicorn`                 |
@@ -64,7 +63,6 @@ Les pipelines de processing d'intégration de Datadog sont disponibles pour la v
 | [uwsgi][64]                      | [Fichier YAML Datadog personnalisé][65]                   | `uwsgi`                    |
 | [Varnish][66]                    | [Fichier YAML Datadog personnalisé][67]                   | `varnish`                  |
 | [ZooKeeper][68]                  | [Fichier YAML d'intégration Datadog][69]              | `zookeeper`                |
-
 
 ## Pour aller plus loin
 

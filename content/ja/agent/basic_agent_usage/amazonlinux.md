@@ -8,7 +8,7 @@ further_reading:
   - link: logs/
     tag: Documentation
     text: ログの収集
-  - link: graphing/infrastructure/process
+  - link: /infrastructure/process
     tag: Documentation
     text: プロセスの収集
   - link: tracing
@@ -19,15 +19,17 @@ further_reading:
 
 このページでは、Amazon Linux 用 Datadog Agent の基本的な機能について説明します。Agent をまだインストールしていない場合は、[Datadog Agent インテグレーションに関するドキュメント][1]で手順を参照してください。
 
+64-bit x86 および Arm v8 アーキテクチャ用のパッケージをご用意しています。その他のアーキテクチャについては、ソースインストールをご利用ください。
+
 ## コマンド
 
-Agent v6 では、オペレーティングシステムから提供されるサービスマネージャーが Agent のライフサイクルを担う一方で、他のコマンドは Agent バイナリから直接実行する必要があります。Agent v5 では、ほぼすべてがサービスマネージャーによって実行されます。
+Agent v6 & v7 では、オペレーティングシステムから提供されるサービスマネージャーが Agent のライフサイクルを担う一方で、他のコマンドは Agent バイナリから直接実行する必要があります。Agent v5 では、ほぼすべてがサービスマネージャーによって実行されます。
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | 説明                        | コマンド                                                |
-| --------------------               | --------------------                                   |
+|------------------------------------|--------------------------------------------------------|
 | Agent をサービスとして起動           | `sudo service datadog-agent start`                     |
 | サービスとして実行中の Agent の停止    | `sudo service datadog-agent stop`                      |
 | サービスとして実行中の Agent の再起動 | `sudo service datadog-agent restart`                   |
@@ -35,13 +37,13 @@ Agent v6 では、オペレーティングシステムから提供されるサ�
 | 実行中の Agent のステータスページ       | `sudo datadog-agent status`                            |
 | フレアの送信                         | `sudo datadog-agent flare`                             |
 | コマンドの使用方法の表示              | `sudo datadog-agent --help`                            |
-| チェックの実行                        | `sudo -u dd-agent -- datadog-agent check <check_name>` |
+| チェックの実行                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 | 説明                        | コマンド                                           |
-| --------------------               | --------------------                              |
+|------------------------------------|---------------------------------------------------|
 | Agent をサービスとして起動           | `sudo service datadog-agent start`                |
 | サービスとして実行中の Agent の停止    | `sudo service datadog-agent stop`                 |
 | サービスとして実行中の Agent の再起動 | `sudo service datadog-agent restart`              |
@@ -49,7 +51,7 @@ Agent v6 では、オペレーティングシステムから提供されるサ�
 | 実行中の Agent のステータスページ       | `sudo service datadog-agent info`                 |
 | フレアの送信                         | `sudo service datadog-agent flare`                |
 | コマンドの使用方法の表示              | `sudo service datadog-agent`                      |
-| チェックの実行                        | `sudo -u dd-agent -- dd-agent check <check_name>` |
+| チェックの実行                        | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -61,18 +63,17 @@ Agent v6 では、オペレーティングシステムから提供されるサ�
 
 [サービスライフサイクルコマンドについては、こちらを参照してください][2]。
 
-## コンフィグレーション
+## コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
-Agent の構成ファイルおよびフォルダーの場所
+{{% tab "Agent v6 & v7" %}}
+Agent の構成ファイルおよびフォルダーの場所:
 
 * `/etc/datadog-agent/datadog.yaml`
 
 [インテグレーション][1]用構成ファイルの場所
 
 * `/etc/datadog-agent/conf.d/`
-
 
 [1]: /ja/integrations
 {{% /tab %}}
@@ -86,7 +87,6 @@ Agent の構成ファイルおよびフォルダーの場所
 
 * `/etc/dd-agent/conf.d/`
 
-
 [1]: /ja/integrations
 {{% /tab %}}
 {{< /tabs >}}
@@ -99,7 +99,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に含まれています。`python`、`pip` などの共通バイナリは `/opt/datadog-agent/embedded/bin/` に含まれています。
 
-詳細は、[埋め込み Agent へのパッケージの追加方法][4]の手順を参照してください。
+詳細については、[埋め込み Agent へのパッケージの追加方法][4]の手順を参照してください。
 
 ## その他の参考資料
 

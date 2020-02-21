@@ -1,5 +1,5 @@
 ---
-title: Instrument your application
+title: Instrument Your Application
 kind: documentation
 aliases:
     - /tracing/languages
@@ -14,7 +14,6 @@ After you have [enabled trace collection][1], configure your application to send
 {{< partial name="apm/apm-languages.html" >}}
 
 To instrument an application written in a language that does not yet have official library support, visit the list of [community tracing libraries][3].
-
 
 [1]: /tracing/send_traces
 [2]: /tracing/visualization/#trace

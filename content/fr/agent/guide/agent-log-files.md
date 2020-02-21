@@ -1,7 +1,6 @@
 ---
 title: Fichiers de log de l'Agent
 kind: guide
-disable_toc: true
 aliases:
   - /fr/agent/faq/agent-log-files
 further_reading:
@@ -20,7 +19,7 @@ L'Agent Datadog effectue une substitution des logs tous les 10 Mo. Lors d'une s
 ## Répertoire de logs de l'Agent
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agents v6 et v7" %}}
 
 | Plateforme                             | Commandes                       |
 |--------------------------------------|-------------------------------|
@@ -28,7 +27,6 @@ L'Agent Datadog effectue une substitution des logs tous les 10 Mo. Lors d'une s
 | macOS                                | `/var/log/datadog/`           |
 | Windows Server 2008, Vista et versions ultérieures | `C:\ProgramData\Datadog\logs` |
 | Windows Server 2003, XP ou versions antérieures     | *Plateforme non prise en charge*        |
-
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -53,7 +51,7 @@ L'Agent Datadog effectue une substitution des logs tous les 10 Mo. Lors d'une s
 ## Fichiers de log de l'Agent
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agents v6 et v7" %}}
 
 * `agent.log`
 * `process-agent.log`

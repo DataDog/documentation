@@ -1,7 +1,7 @@
 ---
 title: インデックスの取得
 type: apicontent
-order: 23.2
+order: 24.2
 external_redirect: "/api/#get-an-index"
 ---
 
@@ -13,6 +13,6 @@ external_redirect: "/api/#get-an-index"
 
 このエンドポイントは、名前で識別された `Index` を返します。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

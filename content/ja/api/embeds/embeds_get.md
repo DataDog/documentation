@@ -6,6 +6,7 @@ external_redirect: /api/#get-specific-embed
 ---
 
 ## 特定の Embed の取得
+
 embed_id を指定して、以前に作成した Embed の HTML フラグメントを取得します。
 
 戻り値: 以下の 8 つの要素を持つ JSON オブジェクト。
@@ -20,6 +21,6 @@ embed_id を指定して、以前に作成した Embed の HTML フラグメン�
 
 失敗すると、戻り値はエラーメッセージ {errors: [messages]} を含む JSON になります。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

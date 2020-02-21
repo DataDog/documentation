@@ -1,7 +1,6 @@
 ---
 title: Cluster Agent Troubleshooting
 kind: documentation
-disable_toc: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"
@@ -9,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/autodiscovery/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
 - link: "agent/kubernetes/daemonset_setup"
@@ -25,7 +24,7 @@ further_reading:
 
 To execute the troubleshooting commands for the Cluster Agent, you first need to be inside the pod of the Cluster Agent or the node-based Agent. For this, use:
 
-```
+```text
 kubectl exec -it <DATADOG_CLUSTER_AGENT_POD_NAME> bash
 ```
 
@@ -33,13 +32,13 @@ kubectl exec -it <DATADOG_CLUSTER_AGENT_POD_NAME> bash
 
 To see what cluster level metadata is served by the Datadog Cluster Agent, `exec` into the pod and run:
 
-```
+```text
 datadog-cluster-agent metamap
 ```
 
 You should see the following result:
 
-```
+```text
 root@datadog-cluster-agent-8568545574-x9tc9:/# datadog-cluster-agent metamap
 
 ===============
@@ -75,7 +74,7 @@ Node detected: gke-test-default-pool-068cb9c0-wntj
 
 To verify that the Datadog Cluster Agent is being queried, look for:
 
-```
+```text
 root@datadog-cluster-agent-8568545574-x9tc9:/# tail -f /var/log/datadog/cluster-agent.log
 2018-06-11 09:37:20 UTC | DEBUG | (metadata.go:40 in GetPodMetadataNames) | CacheKey: agent/KubernetesMetadataMapping/ip-192-168-226-77.ec2.internal, with 1 services
 2018-06-11 09:37:20 UTC | DEBUG | (metadata.go:40 in GetPodMetadataNames) | CacheKey: agent/KubernetesMetadataMapping/ip-192-168-226-77.ec2.internal, with 1 services
@@ -90,13 +89,13 @@ As well as the proper verbs listed in the RBAC (notably, `watch events`).
 
 If you have enabled those, check the leader election status and the `kube_apiserver` check with the following command:
 
-```
+```text
 datadog-cluster-agent status
 ```
 
 This should produce the following result:
 
-```
+```text
 root@datadog-cluster-agent-8568545574-x9tc9:/# datadog-cluster-agent status
 [...]
   Leader Election
@@ -125,7 +124,7 @@ You can check the status of the Datadog Cluster Agent while running the status c
 
 If the Datadog Cluster Agent is enabled and correctly configured, you should see:
 
-```
+```text
 [...]
  =====================
  Datadog Cluster Agent
@@ -137,7 +136,7 @@ If the Datadog Cluster Agent is enabled and correctly configured, you should see
 
 Make sure the Cluster Agent service was created before the Agents' pods, so that the DNS is available in the environment variables:
 
-```
+```text
 root@datadog-agent-9d5bl:/# env | grep DATADOG_CLUSTER_AGENT | sort
 DATADOG_CLUSTER_AGENT_SERVICE_PORT=5005
 DATADOG_CLUSTER_AGENT_SERVICE_HOST=10.100.202.234
@@ -153,31 +152,33 @@ DD_CLUSTER_AGENT_AUTH_TOKEN=1234****9
 
 Verify that the node-based Agent is using the Datadog Cluster Agent as a tag provider:
 
-```
+```text
 root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-collector"
 2018-06-11 06:59:02 UTC | INFO | (tagger.go:151 in tryCollectors) | kube-metadata-collector tag collector successfully started
 ```
 
 Or look for error logs, such as:
 
-```
+```shell
 2018-06-10 08:03:02 UTC | ERROR | Could not initialise the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
 ```
 
 ## Custom Metric Server
+
 ### Cluster Agent status and flare
 
 If you are having issues with the Custom Metrics Server:
 
 * Make sure you have the aggregation layer and the certificates set up.
 * Make sure the metrics you want to autoscale on are available. As you create the HPA, the Datadog Cluster Agent parses the manifest and queries Datadog to try to fetch the metric. If there is a typographic issue with your metric name, or if the metric does not exist within your Datadog application, the following error is raised:
-    ```
+
+    ```shell
     2018-07-03 13:47:56 UTC | ERROR | (datadogexternal.go:45 in queryDatadogExternal) | Returned series slice empty
     ```
 
 Run the `datadog-cluster-agent status` command to see the status of the External Metrics Provider process:
 
-```
+```shell
   Custom Metrics Provider
   =======================
   External Metrics
@@ -225,7 +226,7 @@ If the metric's flag `Valid` is set to `false`, the metric is not considered in 
 
 If you see the following mesage when describing the HPA manifest:
 
-```
+```text
 Conditions:
   Type           Status  Reason                   Message
   ----           ------  ------                   -------
@@ -236,7 +237,7 @@ Conditions:
 
 Then it's likely that you don't have the proper RBAC set for the HPA. Make sure that `kubectl api-versions` shows:
 
-```
+```text
 autoscaling/v2beta1
 [...]
 external.metrics.k8s.io/v1beta1
@@ -246,8 +247,8 @@ The latter shows up if the Datadog Cluster Agent properly registers as an Extern
 
 If you see the following error when describing the HPA manifest:
 
-```
-  Warning  FailedComputeMetricsReplicas  3s (x2 over 33s)  horizontal-pod-autoscaler  failed to get nginx.net.request_per_s external metric: unable to get external metric default/nginx.net.request_per_s/&LabelSelector{MatchLabels:map[string]string{kube_container_name: nginx,},MatchExpressions:[],}: unable to fetch metrics from external metrics API: the server is currently unable to handle the request (get nginx.net.request_per_s.external.metrics.k8s.io)
+```text
+Warning  FailedComputeMetricsReplicas  3s (x2 over 33s)  horizontal-pod-autoscaler  failed to get nginx.net.request_per_s external metric: unable to get external metric default/nginx.net.request_per_s/&LabelSelector{MatchLabels:map[string]string{kube_container_name: nginx,},MatchExpressions:[],}: unable to fetch metrics from external metrics API: the server is currently unable to handle the request (get nginx.net.request_per_s.external.metrics.k8s.io)
 ```
 
 Make sure the Datadog Cluster Agent is running, and the service exposing the port `443`, whose name is registered in the APIService, is up.
@@ -259,7 +260,7 @@ The value returned by the Datadog Cluster Agent is fetched from Datadog and shou
 
 Example:
 
-```
+```text
     hpa:
     - name: nginxext
     - namespace: default
@@ -274,7 +275,7 @@ Example:
 
 The Cluster Agent fetched `2472`, but the HPA indicates:
 
-```
+```text
 NAMESPACE   NAME       REFERENCE          TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
 default     nginxext   Deployment/nginx   824/9 (avg)   1         3         3          41m
 ```

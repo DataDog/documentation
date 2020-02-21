@@ -25,7 +25,7 @@ Investigating large volumes of log data can be time consuming: you can spend hou
 
 In the Log Explorer, patterns can be surfaced automatically to bring structure to the problem and help you quickly see what matters—exclude what's irrelevant.
 
-{{< img src="logs/explorer/patterns/log_patterns_nav.png" alt="Navigate to Log Patterns" responsive="true" style="width:50%;">}}
+{{< img src="logs/explorer/patterns/log_patterns_nav.png" alt="Navigate to Log Patterns"  style="width:50%;">}}
 
 The patterns view is helpful for detecting and filtering noisy error patterns that might cause you to miss other issues. It shows the number of logs matching a pattern, split by service and status.
 
@@ -38,13 +38,13 @@ Switch to the patterns view to automatically see your log patterns for the selec
 
 Click on a pattern to see a sample of underlying logs, and eventually display one single log.
 
-{{< img src="logs/explorer/patterns/patterns_overview.mp4" alt="Log Patterns" video="true" responsive="true" width="90%" >}}
+{{< img src="logs/explorer/patterns/patterns_overview.mp4" alt="Log Patterns" video="true"  width="90%" >}}
 
 **Note**: The pattern detection is based on 10,000 log samples. Refine the search to see patterns limited to a specific subset of logs.
 
 ## Pattern Actions
 
-{{< img src="logs/explorer/patterns/patterns_action.png" alt="Log Patterns Actions" responsive="true" style="width:80%;">}}
+{{< img src="logs/explorer/patterns/patterns_action.png" alt="Log Patterns Actions"  style="width:80%;">}}
 
 Selecting a pattern opens a contextual panel that displays a sample of underlying logs. Three buttons are available in the top-right corner:
 
@@ -52,7 +52,7 @@ Selecting a pattern opens a contextual panel that displays a sample of underlyin
 * **View All**: View all logs matching the pattern query.
 * **Graph**: Graph the evolution of this pattern over time.
 
-{{< img src="logs/explorer/patterns/patterns_parsing.png" alt="Log Patterns Parsing Rules" responsive="true" style="width:80%;">}}
+{{< img src="logs/explorer/patterns/patterns_parsing.png" alt="Log Patterns Parsing Rules"  style="width:80%;">}}
 
 ## Further Reading
 

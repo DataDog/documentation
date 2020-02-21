@@ -6,6 +6,7 @@ assets:
 categories:
   - security
   - log collection
+  - autodiscovery
 creates_events: true
 ddtype: check
 dependencies:
@@ -34,17 +35,34 @@ supported_os:
 
 [Twistlock][1] est un scanner de sécurité. Il peut scanner des conteneurs, des hosts et des paquets afin de détecter des vulnérabilités et des problèmes de conformité.
 
-## Implémentation
-
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
+## Configuration
 ### Installation
 
 Le check Twistlock est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
+#### Host
 
-Modifiez le fichier `twistlock.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Twistlock. Consultez le [fichier d'exemple twistlock.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+
+##### Collecte de métriques
+
+1. Modifiez le fichier `twistlock.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Twistlock. Consultez le [fichier d'exemple twistlock.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+
+2. [Redémarrez l'Agent][4].
+
+#### Environnement conteneurisé
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+##### Collecte de métriques
+
+| Paramètre            | Valeur                                                                               |
+|----------------------|-------------------------------------------------------------------------------------|
+| `<NOM_INTÉGRATION>` | `twistlock`                                                                         |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                       |
+| `<CONFIG_INSTANCE>`  | `{"url":"http://%%host%%:8083", "username":"<NOMUTILISATEUR>", "password": "<MOTDEPASSE>"}` |
+
+###### Kubernetes
 
 Si vous utilisez Kubernetes, ajoutez la configuration à la section replication controller de twistlock_console.yaml avant le déploiement :
 
@@ -64,7 +82,7 @@ spec:
       annotations:
         ad.datadoghq.com/twistlock-console.check_names: '["twistlock"]'
         ad.datadoghq.com/twistlock-console.init_configs: '[{}]'
-        ad.datadoghq.com/twistlock-console.instances: '[{"url":"http://%%host%%:8083", "username":"NOM_UTILISATEUR", "password": "MOT_DE_PASSE"}]'
+        ad.datadoghq.com/twistlock-console.instances: '[{"url":"http://%%host%%:8083", "username":"<NOMUTILISATEUR>", "password": "<MOTDEPASSE>"}]'
         ad.datadoghq.com/twistlock-console.logs: '[{"source": "twistlock", "service": "twistlock"}]'
       name: twistlock-console
       namespace: twistlock
@@ -73,18 +91,17 @@ spec:
 ...
 ```
 
+##### Collecte de logs
 
-[Redémarrez l'Agent][4].
+**Disponible à partir des versions > 6.5 de l'Agent**
 
-### Validation
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][8].
 
-[Lancez la sous-commande status de l'Agent][5] et cherchez `twistlock` dans la section Checks.
+| Paramètre      | Valeur                                             |
+|----------------|---------------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "twistlock", "service": "twistlock"}` |
 
-#### Collecte de logs
-
-**Disponible à partir des versions > 6.0 de l'Agent**
-
-##### Kubernetes
+###### Kubernetes
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration DaemonSet][6] :
 
@@ -109,7 +126,7 @@ spec:
 
 4. [Redémarrez l'Agent][4].
 
-##### Docker
+###### Docker
 
 1. La collecte des logs est désactivée par défaut dans l'Agent Datadog. Activez-la avec la variable d'environnement suivante :
 
@@ -123,9 +140,13 @@ spec:
       ad.datadoghq.com/<container-name>.logs: '[{"source": "twistlock", "service": "twistlock"}]'
     ```
 
-3. Assurez-vous que le socket Docker est monté sur l'Agent Datadog. Vous trouverez davantage d'informations concernant la configuration requise pour recueillir des logs à l'aide de l'Agent Datadog dans la [documentation relative à Docker][8]
+3. Assurez-vous que le socket Docker est monté sur l'Agent Datadog. Vous trouverez davantage d'informations concernant la configuration requise pour recueillir des logs via l'Agent Datadog dans la [documentation relative à Docker][8]
 
 4. [Redémarrez l'Agent][4].
+
+### Validation
+
+[Lancez la sous-commande status de l'Agent][5] et cherchez `twistlock` dans la section Checks.
 
 ## Données collectées
 
@@ -152,9 +173,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#log-collection
 [7]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#create-manifest
-[8]: https://docs.datadoghq.com/fr/logs/log_collection/docker/?tab=containerinstallation
+[8]: https://docs.datadoghq.com/fr/agent/docker/log/?tab=containerinstallation#setup
 [9]: https://github.com/DataDog/integrations-core/blob/master/twistlock/metadata.csv
 [10]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

@@ -8,7 +8,7 @@ external_redirect: '/api/#delete-an-aws-integration'
 
 特定の Datadog-AWS インテグレーションを削除します。
 
-##### 引数
+**引数**:
 
 * **`account_id`** [必須]:
 

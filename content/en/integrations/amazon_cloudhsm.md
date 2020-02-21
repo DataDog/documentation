@@ -1,11 +1,13 @@
 ---
 categories:
-- cloud
-- aws
-- log collection
+    - cloud
+    - aws
+    - log collection
 ddtype: crawler
 description: Gather your HSM audit logs in your Datadog organization.
 has_logo: true
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md']
 integration_title: AWS Cloudhsm
 is_public: true
 kind: integration
@@ -21,7 +23,9 @@ When an HSM in your account receives a command from the AWS CloudHSM command lin
 Datadog integrates with AWS CloudHSM via a Lambda function that ships CloudHSM logs to Datadog’s Log Management solution.
 
 ## Setup
+
 ### Log Collection
+
 #### Enable CloudHSM logs
 
 Audit logs are enabled by default for CloudHSM.
@@ -30,13 +34,14 @@ Audit logs are enabled by default for CloudHSM.
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
 2. Once the lambda function is installed, manually add a trigger on the Cloudwatch Log group that contains your CloudHSM logs in the AWS console:
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" responsive="true" popup="true" style="width:70%;">}}
+   {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="cloudwatch log group" responsive="true" popup="true" style="width:70%;">}}
    Select the corresponding CloudWatch Log group, add a filter name (but feel free to leave the filter empty) and add the trigger.
-{{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" responsive="true" popup="true" style="width:70%;">}}
+   {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_2.png" alt="cloudwatch trigger" responsive="true" popup="true" style="width:70%;">}}
 
 Once done, go in your [Datadog Log section][2] to start exploring your logs!
 
 ## Troubleshooting
+
 Need help? Contact [Datadog Support][3].
 
 [1]: /integrations/amazon_web_services/#create-a-new-lambda-function

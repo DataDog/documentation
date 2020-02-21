@@ -33,8 +33,8 @@ supported_os:
 
 Recueillez des métriques d'Event Store en temps réel pour :
 
-* Visualiser et surveiller les files d'attente Event Store
-* Enregistrer toutes les métriques disponibles au sein de l'API de statistiques
+- Visualiser et surveiller les files d'attente Event Store
+- Enregistrer toutes les métriques disponibles au sein de l'API de statistiques
 
 ## Implémentation
 
@@ -45,35 +45,35 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 1. Installez le [kit de développement][4].
 2. Clonez le dépôt integrations-extras :
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. Pour générer le paquet `eventstore`, exécutez :
 
-    ```
-    ddev -e release build eventstore
-    ```
+   ```shell
+   ddev -e release build eventstore
+   ```
 
 5. [Téléchargez et lancez l'Agent Datadog][5].
 6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
-    ```
-    datadog-agent integration install -w <PATH_OF_EVENTSTORE_ARTIFACT_>/<EVENTSTORE_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_EVENTSTORE_ARTIFACT_>/<EVENTSTORE_ARTIFACT_NAME>.whl
+   ```
 
 7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][6].
 
 ### Configuration
 
 1. Modifiez le fichier `eventstore.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos [métriques](#metriques) EventStore.
-  Consultez le [fichier d'exemple eventstore.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
+   Consultez le [fichier d'exemple eventstore.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][9].
 
@@ -115,6 +115,3 @@ Besoin d'aide ? Contactez le [responsable de la maintenance][12] de cette inté
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [11]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/metadata.csv
 [12]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/manifest.json
-
-
-{{< get-dependencies >}}

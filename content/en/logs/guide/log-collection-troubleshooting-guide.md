@@ -35,13 +35,13 @@ Test manually your connection by running a telnet or openssl command like so (po
 
 And then by sending a log like the following:
 
-```
+```text
 <API_KEY> this is a test message
 ```
 
 - If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in `datadog.yaml`:
 
-```
+```yaml
 logs_config:
   use_http: true
 ```
@@ -62,7 +62,7 @@ The `datadog-agent` does not run as root (and we do not recommend that you make 
 
 In that case, you should see an error message when checking the [Agent status][5]:
 
-```
+```text
 ==========
 Logs Agent
 ==========
@@ -76,7 +76,7 @@ Logs Agent
 
 Run the `namei` command to obtain more information about the file permissions:
 
-```
+```text
 > namei -m /var/log/application/error.log
 > f: /var/log/application/error.log
  drwxr-xr-x /
@@ -89,7 +89,7 @@ Run the `namei` command to obtain more information about the file permissions:
 In this example, the `application` directory is not executable, therefore the Agent cannot list its files. Furthermore, the Agent does not have read permissions on the `error.log` file.
 Add the missing permissions via the [chmod command][6].
 
-{{< img src="logs/agent-log-permission-ok.png" alt="Permission OK" responsive="true" style="width:70%;">}}
+{{< img src="logs/agent-log-permission-ok.png" alt="Permission OK"  style="width:70%;">}}
 
 **Note**: When adding the appropriate read permissions, make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent may lose its read permissions.
 Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.
@@ -116,7 +116,7 @@ These are a few of the common configuration issues that are worth triple-checkin
 
 There might be an error in the logs that would explain the issue. Run the following command to check for errors:
 
-```
+```shell
 sudo cat /var/log/datadog/agent.log | grep ERROR
 ```
 
@@ -136,7 +136,6 @@ Check Datadog lambda configuration parameter:
 
 * `<API_KEY>` : Should be set with your [Datadog API key][11] either directly in the Python code, or alternatively as an environment variable. In case you manage several platforms, double-check that you are actually using the right `<API_KEY>` for the right platform.
 
-
 #### The lambda function is triggered
 
 Check that Datadog lambda function is actually triggered by leveraging `aws.lambda.invocations` and `aws.lambda.errors` metrics with the `functionname` tag of your Datadog lambda function within Datadog, or check for errors in Datadog lambda logs in Cloudwatch.
@@ -149,14 +148,13 @@ Check if logs appear in the [Datadog Live Tail][12]. If they appear in the Live 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /logs
 [2]: /help
 [3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[4]: /agent/logs/#send-logs-over-https
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://en.wikipedia.org/wiki/Chmod
-[7]: https://docs.datadoghq.com/integrations/journald/
+[7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /logs/guide/docker-logs-collection-troubleshooting-guide
 [10]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function

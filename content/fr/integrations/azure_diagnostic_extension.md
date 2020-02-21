@@ -18,26 +18,33 @@ short_description: Surveillez des métriques clés de l'extension Diagnostics Az
 version: 1
 ---
 ## Présentation
+
 L'extension Diagnostics Azure permet à un utilisateur de surveiller la santé d'une machine virtuelle en cours d'exécution sur Microsoft Azure.
 
 L'intégration Datadog/Azure peut recueillir des métriques depuis l'extension Diagnostics Azure, mais nous vous [conseillons][5] d’[installer l'Agent Datadog sur vos machines virtuelles][4].
 
 ## Implémentation
+
 ### Installation
+
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "azure_diagnostic_extension" >}}
 
 
 ### Événements
+
 L'intégration de l'extension Diagnostics Azure n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration de l'extension Diagnostics Azure n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://docs.datadoghq.com/fr/integrations/azure/
@@ -45,6 +52,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 [3]: https://docs.datadoghq.com/fr/help/
 [4]: https://docs.datadoghq.com/fr/integrations/azure/#agent-installation
 [5]: https://www.datadoghq.com/blog/dont-fear-the-agent/
-
-
-{{< get-dependencies >}}

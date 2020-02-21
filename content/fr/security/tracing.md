@@ -8,6 +8,8 @@ further_reading:
     tag: Documentation
     text: Consulter les principales catégories de données envoyées à Datadog
 ---
+<div class="alert alert-info">Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Security Monitoring, consultez la section <a href="/security_monitoring" target="_blank">Security Monitoring</a>.</div>
+
 Cet article fait partie d'une [série d'articles sur la sécurité des données][1].
 
 Le produit APM prend en charge de nombreuses bibliothèques et intègre des outils extensibles : nos clients sont ainsi libres d'envoyer presque tous les points de données qu'ils souhaitent. Cet article décrit les principales commandes de filtrage proposées à nos utilisateurs afin de contrôler les données d'APM envoyées à Datadog.
@@ -16,26 +18,18 @@ Le produit APM prend en charge de nombreuses bibliothèques et intègre des outi
 
 Plusieurs règles de filtrage sont déjà appliquées afin d'assurer un comportement efficace par défaut. Citons particulièrement les suivantes :
 
-**Les variables d'environnement ne sont pas recueillies par l'Agent**
+* **Les variables d'environnement ne sont pas recueillies par l'Agent**
+* **Les variables SQL sont filtrées par défaut, même en l'absence de requêtes préparées**. Par exemple, dans l'attribut `sql.query` suivant : `SELECT data FROM table WHERE key=123 LIMIT 10`, les variables sont filtrées afin d'obtenir le nom de ressource suivant :`SELECT data FROM table WHERE key = ? LIMIT ?`
+* **Les chiffres dans les noms de ressources (par exemple, dans les URL de requête) sont filtrés par défaut**. Par exemple, dans l'attribut `elasticsearch` suivant :
 
-**Les variables SQL sont filtrées par défaut, même en l'absence de requêtes préparées**
+    ```text
+    Elasticsearch : {
+        method : GET,
+        url : /user.0123456789/friends/_count
+    }
+    ```
 
-Par exemple, dans l'attribut `sql.query` suivant :
-`SELECT data FROM table WHERE key=123 LIMIT 10`
-Les variables sont filtrées afin d'obtenir le nom de ressource suivant :
-`SELECT data FROM table WHERE key = ? LIMIT ?`
-
-**Les chiffres dans les noms de ressources (par exemple, dans les URL de requête) sont filtrés par défaut**
-
-Par exemple, dans l'attribut `elasticsearch` suivant :
-```
-Elasticsearch : {
-    method : GET,
-    url : /user.0123456789/friends/_count
-}
-```
-Les chiffres dans l'URL sont filtrés afin d'obtenir le nom de ressource suivant :
-`GET /user.?/friends/_count`
+  les chiffres dans l'URL sont filtrés afin d'obtenir le nom de ressource suivant :`GET /user.?/friends/_count`
 
 En plus de ces règles par défaut, vous devez vérifier et configurer le déploiement de votre APM (y compris l'ensemble des intégrations et frameworks fournis par les [traceurs pris en charge][2]) afin de contrôler pleinement les données que vous envoyez à Datadog.
 
@@ -47,13 +41,13 @@ Si vous utilisez la version 6, vous pouvez configurer l'Agent de façon à filt
 
 Si vous utilisez la version 6, vous pouvez configurer l'Agent de façon à exclure une ressource spécifique des traces envoyées par l'Agent à l'application Datadog. Pour empêcher l'envoi de ressources spécifiques, utilisez le [paramètre][3] `ignore_resources`. Ce paramètre permet la création d'une liste contenant une ou plusieurs expressions régulières, qui indique à l'Agent de filtrer les traces en fonction du nom de leur ressource.
 
-## Extension de traceurs
+## Extensions de traceurs
 
 Les bibliothèques de tracing sont conçues pour être extensibles. Vous avez la possibilité d'écrire un post-processeur personnalisé pour intercepter des spans et ensuite les ajuster ou les ignorer en conséquence (par exemple, en fonction d'une expression régulière). Les constructions suivantes peuvent par exemple être utilisées à cette fin :
 
-* Java | [Interface TraceInterceptor][4]
-* Ruby | [Pipeline de processing][5]
-* Python | [Filtrage de traces][6]
+* Java : [Interface TraceInterceptor][4]
+* Ruby : [Pipeline de processing][5]
+* Python : [Filtrage de traces][6]
 
 ## Instrumentation personnalisée
 

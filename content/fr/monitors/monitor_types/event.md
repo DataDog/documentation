@@ -72,6 +72,7 @@ Concernant les tags `env:test`, `env:staging` et `env:prod` :
 La template variable est `{{event.tags.env}}`. Le résultat de l'utilisation de la template variable est `test`, `staging` ou `prod`.
 
 ## Pour aller plus loin
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/event

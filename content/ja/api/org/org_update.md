@@ -1,12 +1,13 @@
 ---
 title: オーガニゼーションの更新
 type: apicontent
-order: 27.3
+order: 28.3
 external_redirect: '/api/#update-organization'
 ---
 ## オーガニゼーションの更新
 
-##### 引数
+**引数**:
+
 * **`name`** [オプション]:
     オーガニゼーション名。
 * **`settings`** [オプション]:

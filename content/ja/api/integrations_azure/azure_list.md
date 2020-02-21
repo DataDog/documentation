@@ -1,7 +1,7 @@
 ---
 title: すべての Azure インテグレーションのリスト
 type: apicontent
-order: 16.1
+order: 17.1
 external_redirect: "/api/#list-all-azure-integrations"
 ---
 
@@ -9,6 +9,6 @@ external_redirect: "/api/#list-all-azure-integrations"
 
 現在のオーガニゼーションに構成されているすべての Datadog-Azure インテグレーションをリストします。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

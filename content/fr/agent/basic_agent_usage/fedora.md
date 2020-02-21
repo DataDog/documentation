@@ -8,7 +8,7 @@ further_reading:
   - link: logs/
     tag: Documentation
     text: Recueillir vos logs
-  - link: graphing/infrastructure/process
+  - link: /infrastructure/process
     tag: Documentation
     text: Recueillir vos processus
   - link: tracing
@@ -23,13 +23,13 @@ Cette page présente les fonctionnalités de base de l'Agent Datadog pour Fedora
 
 ## Commandes
 
-Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement par le biais du binaire de l'Agent. Dans l'Agent v5, presque tout se fait par le biais du gestionnaire de service.
+Dans les Agents v6 et v7, le gestionnaire de service fourni par le système d'exploitation est responsable du cycle de vie de l'Agent, tandis que les autres commandes doivent être exécutées directement via le binaire de l'Agent. Dans l'Agent v5, presque tout se fait par l'intermédiaire du gestionnaire de service.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agents v6 et v7" %}}
 
 | Description                        | Commandes                                                |
-| --------------------               | --------------------                                   |
+|------------------------------------|--------------------------------------------------------|
 | Démarrer l'Agent en tant que service           | `sudo service datadog-agent start`                     |
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo service datadog-agent stop`                      |
 | Redémarrer l'Agent s'exécutant en tant que service | `sudo service datadog-agent restart`                   |
@@ -37,13 +37,13 @@ Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitatio
 | Page de statut de l'Agent en cours d'exécution       | `sudo datadog-agent status`                            |
 | Envoyer un flare                         | `sudo datadog-agent flare`                             |
 | Afficher l'utilisation des commandes              | `sudo datadog-agent --help`                            |
-| Exécuter un check                        | `sudo -u dd-agent -- datadog-agent check <nom_check>` |
+| Exécuter un check                        | `sudo -u dd-agent -- datadog-agent check <NOM_CHECK>` |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
 | Description                        | Commandes                                           |
-| --------------------               | --------------------                              |
+|------------------------------------|---------------------------------------------------|
 | Démarrer l'Agent en tant que service           | `sudo service datadog-agent start`                |
 | Arrêter l'Agent s'exécutant en tant que service    | `sudo service datadog-agent stop`                 |
 | Redémarrer l'Agent s'exécutant en tant que service | `sudo service datadog-agent restart`              |
@@ -51,7 +51,7 @@ Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitatio
 | Page de statut de l'Agent en cours d'exécution       | `sudo service datadog-agent info`                 |
 | Envoyer un flare                         | `sudo service datadog-agent flare`                |
 | Afficher l'utilisation des commandes              | `sudo service datadog-agent`                      |
-| Exécuter un check                        | `sudo -u dd-agent -- dd-agent check <nom_check>` |
+| Exécuter un check                        | `sudo -u dd-agent -- dd-agent check <NOM_CHECK>` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -66,7 +66,7 @@ Dans l'Agent v6, le gestionnaire de service fourni par le système d'exploitatio
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agents v6 et v7" %}}
 Les fichiers et dossiers de configuration de l'Agent sont situés dans :
 
 * `/etc/datadog-agent/datadog.yaml`
@@ -74,7 +74,6 @@ Les fichiers et dossiers de configuration de l'Agent sont situés dans :
 Fichiers de configuration pour les [intégrations][1] :
 
 * `/etc/datadog-agent/conf.d/`
-
 
 [1]: /fr/integrations
 {{% /tab %}}
@@ -87,7 +86,6 @@ Les fichiers et dossiers de configuration de l'Agent sont situés dans :
 Fichiers de configuration pour les [intégrations][1] :
 
 * `/etc/dd-agent/conf.d/`
-
 
 [1]: /fr/integrations
 {{% /tab %}}

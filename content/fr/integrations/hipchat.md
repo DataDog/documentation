@@ -16,28 +16,27 @@ public_title: Intégration Datadog/HipChat
 short_description: Envoyez des alertes et des graphiques Datadog à la room HipChat de votre équipe.
 version: '1.0'
 ---
-{{< img src="integrations/hipchat/hipchat_graph.png" alt="Graphique HipChat" responsive="true" popup="true">}}
+{{< img src="integrations/hipchat/hipchat_graph.png" alt="Graphique HipChat" popup="true">}}
 
 ## Présentation
 
 L'intégration HipChat permet à Datadog d'envoyer des notifications à votre room HipChat ou à votre handle, notamment :
 
-* des messages et des graphiques lors du déclenchement de vos monitors Datadog ;
-* des messages concernant l'activité du flux d'événements (à savoir, les commentaires de vos collègues).
+- des messages et des graphiques lors du déclenchement de vos monitors Datadog ;
+- des messages concernant l'activité du flux d'événements (à savoir, les commentaires de vos collègues).
 
 ## Implémentation
+
 ### Configuration
 
 1. [Créez un token d'accès][1] pour Datadog. Seul un accès aux notifications est requis.
-
 2. Copiez votre clé et saisissez-la dans le [carré d'intégration HipChat][2].
-
 3. Saisissez le nom des rooms sur lesquelles vous souhaitez que Datadog puisse envoyer des messages.
-Cochez la case si vous souhaitez recevoir une notification pour chaque commentaire dans toutes les rooms configurées. Si vous ne la cochez pas, les personnes publiant des commentaires doivent ajouter `@hipchat-<nom_conversation>` pour tous les messages qu'ils souhaitent envoyer sur HipChat.
+   Cochez la case si vous souhaitez recevoir une notification pour chaque commentaire dans toutes les rooms configurées. Si vous ne la cochez pas, les personnes publiant des commentaires doivent ajouter `@hipchat-<NOM_CONVERSATION>` pour tous les messages qu'ils souhaitent envoyer sur HipChat.
 
 4. Enregistrez votre configuration.
 
-Vous pouvez également partager des graphiques ou envoyer des alertes de monitor à des rooms HipChat en précisant `@hipchat-<nom_conversation>`.
+Vous pouvez également partager des graphiques ou envoyer des alertes de monitor à des rooms HipChat en précisant `@hipchat-<NOM_CONVERSATION>`.
 
 <div class="alert alert-warning">
 Si vous utilisez un token HipChat API V1 et que votre handle de conversation contient des caractères spéciaux, comme des virgules, des parenthèses ou des crochets, vous n'avez pas besoin de les échapper lorsque vous saisissez le handle ; la zone de saisie automatique s'en charge pour vous.
@@ -45,30 +44,31 @@ Si vous utilisez un token HipChat API V1 et que votre handle de conversation con
 
 #### Serveur HipChat
 
-Si vous hébergez votre propre serveur HipChat, saisissez le hostname du serveur [ici][3]. Le serveur doit être accessible à partir d'Internet.
+Si vous hébergez votre propre serveur HipChat, saisissez le hostname du serveur dans le [carré Datadog/Hipchat][3]. Le serveur doit être accessible à partir d'Internet.
 
 Cochez la case **Ignore SSL** UNIQUEMENT si le certificat de votre serveur HipChat est auto-signé.
 
-{{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hostname Hipchat" responsive="true" popup="true">}}
+{{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hostname Hipchat" popup="true">}}
 
 ## Données collectées
+
 ### Métriques
 
 L'intégration HipChat n'inclut aucune métrique.
 
 ### Événements
+
 L'intégration HipChat n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration HipChat n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 [1]: https://www.hipchat.com/admin/api
 [2]: https://app.datadoghq.com/account/settings#integrations/hipchat
 [3]: https://app.datadoghq.com/account/settings#integrations/hipchat
 [4]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

@@ -7,7 +7,7 @@ further_reading:
 - link: "logs/log_collection"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -22,17 +22,16 @@ aliases:
   - /getting_started/prometheus
 ---
 
-Collect your exposed Prometheus and OpenMetrics metrics from your application running inside containers or directly on your host  by using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
+Collect your exposed Prometheus and OpenMetrics metrics from your application running inside containers or directly on your host by using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
 
 ## Overview
 
-Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints with a few lines of configuration. This page explains the basic usage of these checks, which enable you to scrape custom metrics from Prometheus endpoints.
+Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints with a few lines of configuration. Datadog recommends using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section. Use the Prometheus check only when the metrics endpoint does not support a text format.
 
-Datadog recommends using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. Use the Prometheus check only when the metrics endpoint does not support a text format.
-
-For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section.
+This page explains the basic usage of these checks, which enable you to scrape custom metrics from Prometheus endpoints.
 
 ## Setup
+
 ### Installation
 
 [Install the Datadog Agent for your corresponding operating system][6]. OpenMetrics and Prometheus checks are included in the [Datadog Agent][7] package, so you don't need to install anything else on your containers or hosts.
@@ -53,10 +52,10 @@ instances:
   - prometheus_url: 'localhost:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
     namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
     metrics:
-      - '<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>'
+      - "<PROMETHEUS_METRIC_TO_FETCH>": "<DATADOG_NEW_METRIC_NAME>"
 ```
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
@@ -66,13 +65,15 @@ instances:
 The Agent detects if it's running on Docker and automatically searches all containers labels for Datadog-OpenMetrics labels. Autodiscovery expects labels to look like these examples, depending on the file type:
 
 **Dockerfile**
-```
+
+```text
 LABEL "com.datadoghq.ad.check_names"='["openmetrics"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
 ```
 
 **docker-compose.yaml**
+
 ```yaml
 labels:
   com.datadoghq.ad.check_names: '["openmetrics"]'
@@ -81,7 +82,8 @@ labels:
 ```
 
 **docker run command**
-```
+
+```text
 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
 ```
 
@@ -170,7 +172,7 @@ Official integrations have their own dedicated directories. There's a default in
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
 [5]: /developers/prometheus
 [6]: https://app.datadoghq.com/account/settings#agent
-[7]: https://docs.datadoghq.com/tagging
-[8]: /graphing/metrics/distributions
+[7]: /tagging
+[8]: /metrics/distributions
 [9]: https://github.com/DataDog/integrations-core/issues/1303
 [10]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

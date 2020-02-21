@@ -1,7 +1,7 @@
 ---
 title: 新しいサービスとスケジュールの追加
 type: apicontent
-order: 18.3
+order: 19.3
 external_redirect: "/api/#add-new-services-and-schedules"
 ---
 
@@ -9,7 +9,7 @@ external_redirect: "/api/#add-new-services-and-schedules"
 
 Datadog-PagerDuty インテグレーションに新しいサービスとスケジュールを追加します。
 
-##### 引数
+**引数**:
 
 * **`services`** :
     PagerDuty サービスオブジェクトの配列。Datadog サービスの構成方法については、[PagerDuty のドキュメント][1]を参照してください。PagerDuty サービスオブジェクトは、以下の要素で構成されます。

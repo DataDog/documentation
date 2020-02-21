@@ -8,8 +8,7 @@ external_redirect: '/api/#generate-external-ids'
 
 特定の AWS アカウント ID/ロール名ペアに対して新しい AWS 外部 ID を作成します。
 
-##### 引数
-
+**引数**:
 
 * **`account_id`** [必須]:
 

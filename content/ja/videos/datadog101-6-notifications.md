@@ -3,7 +3,7 @@ title: Datadog 101 - 通知
 kind: ビデオ
 language: en
 wistiaid: 4kjgeqdb5o
-videos:
+"video-categories":
     - Datadog 101
     - Notifications
 summary: 通知を使用して問題をアラートし、誤検知によるウェイクアップをなくす

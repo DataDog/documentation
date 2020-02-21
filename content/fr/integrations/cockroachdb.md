@@ -7,6 +7,7 @@ assets:
 categories:
   - cloud
   - data store
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -35,9 +36,7 @@ supported_os:
 
 Le check CockroachDB surveille les performances et la santé globales d'un cluster [CockroachDB][1].
 
-## Implémentation
-
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+## Configuration
 
 ### Installation
 
@@ -46,11 +45,23 @@ rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
-1. Modifiez le fichier `cockroachdb.d/conf.yaml` dans le dossier `conf.d/` [à la racine du
-   [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos données de performance CockroachDB.
-    Consultez le [fichier d'exemple cockroachdb.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+#### Host
+
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+
+1. Modifiez le fichier `cockroachdb.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos données de performance CockroachDB. Consultez le [fichier d'exemple cockroachdb.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][6].
+
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+| Paramètre            | Valeur                                                    |
+| -------------------- | -------------------------------------------------------- |
+| `<NOM_INTÉGRATION>` | `cockroachdb`                                            |
+| `<CONFIG_INIT>`      | vide ou `{}`                                            |
+| `<CONFIG_INSTANCE>`  | `{"prometheus_url":"http://%%host%%:8080/_status/vars"}` |
 
 ### Validation
 
@@ -75,9 +86,10 @@ Le check CockroachDB n'inclut aucun événement.
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 ## Pour aller plus loin
+
 Documentation, liens et articles supplémentaires utiles :
 
-* [Surveiller les métriques de performance CockroachDB avec Datadog][10]
+- [Surveiller les métriques de performance CockroachDB avec Datadog][10]
 
 [1]: https://www.cockroachlabs.com/product/cockroachdb
 [2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
@@ -89,6 +101,3 @@ Documentation, liens et articles supplémentaires utiles :
 [8]: https://github.com/DataDog/integrations-core/blob/master/cockroachdb/metadata.csv
 [9]: https://docs.datadoghq.com/fr/help
 [10]: https://www.datadoghq.com/blog/monitor-cockroachdb-performance-metrics-with-datadog
-
-
-{{< get-dependencies >}}

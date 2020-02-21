@@ -18,11 +18,12 @@ version: '1.0'
 ---
 ## Présentation
 
-
 Datadog s'intègre à AWS GuardDuty via une fonction Lambda qui transmet les résultats de GuardDuty à la solution Log Management de Datadog.
 
 ## Implémentation
+
 ### Collecte de logs
+
 #### Activer la journalisation GuardDuty
 
 1. Créez une nouvelle règle dans Cloudwatch avec le type d'événement **GuardDuty Finding** :

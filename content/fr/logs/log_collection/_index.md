@@ -80,7 +80,7 @@ L'endpoint TCP sécurisé est `intake.logs.datadoghq.com:10516` (utilisez le por
 
 Vous devez ajouter un préfixe correspondant à votre [clé d'API Datadog][1] à l'entrée de log. Par exemple :
 
-```
+```text
 <CLÉ_API_DATADOG> <CHARGEUTILE>
 ```
 
@@ -88,24 +88,23 @@ Vous devez ajouter un préfixe correspondant à votre [clé d'API Datadog][1] à
 
 Testez votre charge utile manuellement avec telnet. Exemple de `<CHARGEUTILE>` au format brut :
 
-```
+```text
 telnet intake.logs.datadoghq.com 10514
 <CLÉ_API_DATADOG> Log envoyé directement via TCP
 ```
 
 Vous obtenez alors le résultat suivant sur votre [page Live Tail][2] :
 
-{{< img src="logs/custom_log_telnet.png" alt="Telnet personnalisé" responsive="true" style="width:70%;">}}
+{{< img src="logs/custom_log_telnet.png" alt="Telnet personnalisé" style="width:70%;">}}
 
 Si votre `<CHARGEUTILE>` est au format JSON, Datadog se charge de parser automatiquement ses attributs :
 
-```
+```text
 telnet intake.logs.datadoghq.com 10514 
 <CLÉ_API_DATADOG> {"message":"log au format json", "ddtags":"env:mon-env,user:mon-utilisateur", "ddsource":"mon-intégration", "hostname":"mon-hostname", "service":"mon-service"}
 ```
 
-{{< img src="logs/custom_log_telnet_json_.png" alt="Telnet personnalisé" responsive="true" style="width:100%;">}}
-
+{{< img src="logs/custom_log_telnet_json_.png" alt="Telnet personnalisé" style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
@@ -116,7 +115,7 @@ L'endpoint TCP sécurisé est `tcp-intake.logs.datadoghq.eu:443` (utilisez le po
 
 Vous devez ajouter un préfixe correspondant à votre [clé d'API Datadog][1] à l'entrée de log. Par exemple :
 
-```
+```text
 <CLÉ_API_DATADOG> <CHARGEUTILE>
 ```
 
@@ -124,24 +123,23 @@ Vous devez ajouter un préfixe correspondant à votre [clé d'API Datadog][1] à
 
 Testez votre charge utile manuellement avec telnet. Exemple de `<CHARGEUTILE>` au format brut :
 
-```
+```text
 telnet tcp-intake.logs.datadoghq.eu 1883
 <CLÉ_API_DATADOG> Log envoyé directement via TCP
 ```
 
 Vous obtenez alors le résultat suivant sur votre [page Live Tail][2] :
 
-{{< img src="logs/custom_log_telnet.png" alt="Telnet personnalisé" responsive="true" style="width:70%;">}}
+{{< img src="logs/custom_log_telnet.png" alt="Telnet personnalisé" style="width:70%;">}}
 
 Si votre `<CHARGEUTILE>` est au format JSON, Datadog se charge de parser automatiquement ses attributs :
 
-```
+```text
 telnet tcp-intake.logs.datadoghq.eu 1883
 <CLÉ_API_DATADOG> {"message":"log au format json", "ddtags":"env:mon-env,user:mon-utilisateur", "ddsource":"mon-intégration", "hostname":"mon-hostname", "service":"mon-service"}
 ```
 
-{{< img src="logs/custom_log_telnet_json_.png" alt="Telnet personnalisé" responsive="true" style="width:100%;">}}
-
+{{< img src="logs/custom_log_telnet_json_.png" alt="Telnet personnalisé" style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
@@ -164,17 +162,15 @@ Les endpoints suivants peuvent être utilisés pour l'envoi de logs à Datadog 
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
 
-
 | Endpoints pour connexions avec chiffrement SSL | Port    | Description                                                                                                                                                                 |
 |-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `agent-intake.logs.datadoghq.com`       | `10516` | Utilisé par l'Agent pour envoyer des logs au format protobuf via une connexion TCP avec chiffrement SSL.                                                                                     |
 | `agent-http-intake.logs.datadoghq.com`  | `443`   | Utilisé par l'Agent pour envoyer des logs au format protobuf via HTTPS. Consultez la section [Envoyer des logs via HTTP][1].                                                        |
-| `http-intake.logs.datadoghq.com`        | `443`   | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la section [Envoyer des logs via HTTP][1].                                         |
+| `http-intake.logs.datadoghq.com`        | `443`   | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la section [Envoyer des logs via HTTP][1].                                       |
 | `intake.logs.datadoghq.com`             | `10516` | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format brut, Syslog ou JSON via une connexion TCP avec chiffrement SSL.                                                                 |
 | `lambda-intake.logs.datadoghq.com`      | `10516` | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via une connexion TCP avec chiffrement SSL.                                                                  |
 | `lambda-http-intake.logs.datadoghq.com` | `443`   | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                                                                            |
 | `functions-intake.logs.datadoghq.com`   | `10516` | Utilisé par les fonctions Azure pour envoyer des logs au format brut, Syslog ou JSON via une connexion TCP avec chiffrement SSL. **Remarque** : cet endpoint peut servir pour d'autres fournisseurs de cloud. |
-
 
 | Endpoint pour connexions non chiffrées | Port    | Description                                                                                              |
 |--------------------------------------|---------|----------------------------------------------------------------------------------------------------------|
@@ -188,24 +184,21 @@ Les endpoints suivants peuvent être utilisés pour l'envoi de logs à Datadog 
 |-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `agent-intake.logs.datadoghq.eu`        | `443` | Utilisé par l'Agent pour envoyer des logs au format protobuf via une connexion TCP avec chiffrement SSL.                                                                                     |
 | `agent-http-intake.logs.datadoghq.eu`   | `443` | Utilisé par l'Agent pour envoyer des logs au format protobuf via HTTPS. Consultez la section [Envoyer des logs via HTTP][1].                                                        |
-| `http-intake.logs.datadoghq.eu`        | `443`   | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la section [Envoyer des logs via HTTP][1].                                         |
+| `http-intake.logs.datadoghq.eu`         | `443` | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format JSON ou texte brut via HTTPS. Consultez la section [Envoyer des logs via HTTP][1].                                       |
 | `tcp-intake.logs.datadoghq.eu`          | `443` | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format brut, Syslog ou JSON via une connexion TCP avec chiffrement SSL.                                                                 |
 | `lambda-intake.logs.datadoghq.eu`       | `443` | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via une connexion TCP avec chiffrement SSL.                                                                  |
 | `lambda-http-intake.logs.datadoghq.eu`  | `443` | Utilisé par les fonctions Lambda pour envoyer des logs au format brut, Syslog ou JSON via HTTPS.                                                                                            |
 | `functions-intake.logs.datadoghq.eu`    | `443` | Utilisé par les fonctions Azure pour envoyer des logs au format brut, Syslog ou JSON via une connexion TCP avec chiffrement SSL. **Remarque** : cet endpoint peut servir pour d'autres fournisseurs de cloud. |
 
-
 | Endpoint pour connexions non chiffrées | Port   | Description                                                                                                     |
 |--------------------------------------|--------|-----------------------------------------------------------------------------------------------------------------|
 | `tcp-intake.logs.datadoghq.eu`       | `1883` | Utilisé par les redirecteurs personnalisés pour envoyer des logs au format brut, Syslog ou JSON via une connexion TCP non chiffrée. |
-
 
 [1]: /fr/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 {{% /tab %}}
 {{< /tabs >}}
 
 Pour envoyer des logs via HTTPS, consultez la [documentation relative à l'API HTTP de log Datadog][23].
-
 
 ## Attributs réservés
 
@@ -215,20 +208,19 @@ Voici quelques attributs clés auxquels vous devez prêter attention lors de la 
 |-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `host`    | Le nom du host d'origine, tel que défini dans les métriques. Les tags de host correspondants sont automatiquement récupérés à partir du host associé dans Datadog, et sont ensuite appliqués à vos logs. L'Agent définit automatiquement cette valeur.                          |
 | `source`  | Cet attribut correspond au nom de l'intégration, à savoir la technologie à l'origine du log. Lorsqu'il a pour valeur le nom d'une intégration, Datadog installe automatiquement les parsers et les facettes correspondants. Par exemple : `nginx`, `postgresql`, etc. |
-| `status` | Indique le niveau ou la sévérité d'un log. Cet attribut permet de définir des [patterns][24]. Il s'affiche de façon distincte dans l'interface utilisateur pour les logs Datadog.|
-| `service` | Le nom de l'application ou du service qui génère les événements de log. Il est utilisé pour passer des logs à l'APM. Assurez-vous donc de définir la même valeur lorsque vous utilisez les deux produits.                                                            |
-| `message` | Par défaut, Datadog ingère la valeur de l'attribut `message` comme corps de l'entrée du log. Cette valeur est alors mise en évidence et affichée dans le flux de logs, où elle est indexée pour d'éventuelles recherches plein texte.                                |
-
+| `status`  | Indique le niveau ou la sévérité d'un log. Cet attribut permet de définir des [patterns][24]. Il s'affiche de façon distincte dans l'interface utilisateur pour les logs Datadog.                                                                                                     |
+| `service` | Le nom de l'application ou du service qui génère les événements de log. Il est utilisé pour passer des logs à l'APM. Assurez-vous donc de définir la même valeur lorsque vous utilisez les deux produits.                                                                |
+| `message` | Par défaut, Datadog ingère la valeur de l'attribut `message` comme corps de l'entrée du log. Cette valeur est alors mise en évidence et affichée dans le flux de logs, où elle est indexée pour d'éventuelles recherches plein texte.                                    |
 
 Vos logs sont recueillis et rassemblés dans la vue [Log Explorer][25]. Vous pouvez également rechercher et enrichir vos logs, et recevoir des alertes les concernant.
 
-{{< img src="logs/log_explorer_view.png" alt="Vue Log Explorer" responsive="true" >}}
+{{< img src="logs/log_explorer_view.png" alt="Vue Log Explorer"  >}}
 
 ### Comment tirer le meilleur parti de vos logs d'application
 
 Lorsque vous enregistrez des traces de pile, des attributs spécifiques disposent d'un affichage de l'interface utilisateur dédié au sein de votre application Datadog, comme le nom du logger, le thread actuel, le type d'erreur et la trace de pile.
 
-{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Trace de pile" responsive="true" >}}
+{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Trace de pile" >}}
 
 Pour activer ces fonctionnalités, utilisez les noms d'attribut suivants :
 

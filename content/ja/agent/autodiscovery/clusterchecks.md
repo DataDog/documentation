@@ -25,22 +25,39 @@ further_reading:
 
 現在、この機能は、Kubernetes 上で Agent のバージョン 6.9.0+ および Cluster Agent のバージョン 1.2.0+ でサポートされています。
 
-
 ## 設定方法
 
 ### Cluster Agent のドキュメント
 
-この機能には、[クラスターチェック機能を有効にして][3] Cluster Agent が実行されている必要があります。
+この機能では、[Cluster Agent][3]を実行させておく必要があります。
+
+そして、クラスターチェック機能を有効にします。
+
+バージョン1.2.0より、Datadog Cluster Agentはコンテナ化されていないクラスターリソースに対し、オートディスカバリー機構を拡張しています。有効にするには、Cluster Agentの展開に以下の変更を加える必要があります。
+
+1. `DD_CLUSTER_CHECKS_ENABLED` を `true` に設定します。
+2. クラスター名を`DD_CLUSTER_NAME`とします。メトリクスにスコープを当てるため、Datadogは全ての構成に`cluster_name`インスタンスタグとしてクラスター名を挿入します。
+3. 推奨されるリーダー選択リース時間は15秒です。環境変数`DD_LEADER_LEASE_DURATION`で設定できます。
+4. サービス名が初期設定の`datadog-cluster-agent`と異なる場合には、サービス名が`DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` の環境変数に反映されるようにします。
+
+現在、以下の二つの構成ソースがサポートされています。[オートディスカバリーの文書に記載されています。][4]
+
+* `/conf.d`フォルダのConfigMapからYAMLファイルをマウントできます。画像のエントリーポイントで自動的にインポートされます。
+* Kubernetesサービスのアノテーションでは、`DD_EXTRA_CONFIG_PROVIDERS`と`DD_EXTRA_LISTENERS`の両方の環境変数を`kube_services`に設定する必要があります。
+
+ホスト名は、ホストタグと`DD_TAGS`の環境変数の使用を制限するクラスターチェックメトリクスにリンクしていません。クラスターチェックメトリクスにタグを追加するには、`DD_CLUSTER_CHECKS_EXTRA_TAGS` の環境変数を使用します。
+
+この機能の構成とトラブルシューティングの詳細は、[クラスターチェックオートディスカバリー専用ガイド][5]を参照して下さい。
 
 ### Cluster Agent のドキュメント
 
 <mrk mid="28" mtype="seg">Datadog **Host** Agent で `clusterchecks` 構成プロバイダーを有効にします。</mrk><mrk mid="29" mtype="seg">それには 2 つの方法があります。</mrk>
 
-- `DD_EXTRA_CONFIG_PROVIDERS` 環境変数を設定します。
+- `DD_EXTRA_CONFIG_PROVIDERS`の環境変数を設定します。複数の値がある場合には、スペースで区切られたストリングになります。
 
-≪```
+```text
 DD_EXTRA_CONFIG_PROVIDERS="clusterchecks"
-```≫
+```
 
 - または、`datadog.yaml` 構成ファイルに追加します。
 
@@ -50,24 +67,24 @@ config_providers:</mrk>
     polling: true
 ```</mrk>
 
-[Agent を再起動][4]して、構成の変更を適用します。
+[Agentを再起動][6]して構成変更を適用します。
 
 ### カスタムチェック
 
-<mrk mid="37" mtype="seg">[カスタム Agent チェック][5]をクラスターチェックとして実行できますが、すべてのノードベースの Agent がそれを実行できることが条件です。</mrk><mrk mid="38" mtype="seg">つまり、次の条件を満たしている必要があります。</mrk>
+全てのノードベースのAgentによる実行が可能であれば、クラスターチェックとしての[Agentのカスタムチェック][7]の実行がサポートされています。これにより、チェックのコードは以下のようになります。
 
-- チェックのコードが、`clusterchecks` 構成プロバイダーが有効になっているすべてのノードベースの Agent にインストールされている。
-- チェックのコードが、一部のエージェントにアクセスできないローカルリソースに依存していない。
+- `clusterchecks`の構成プロバイダが有効になっている全てのノードベースのAgentにインストールされていること。
+- 全てのAgentにアクセス可能ではない、ローカルのリソースに依存**しない**こと。
 
-## チェック構成のセットアップ
+## チェック構成設定
 
 ### ファイル内の静的構成
 
 <mrk mid="43" mtype="seg">リソースの IP が変わらない場合 (例: 外部サービスエンドポイント、パブリック URL)、静的構成を yaml ファイルとして Cluster Agent に渡すことができます。</mrk><mrk mid="44" mtype="seg">ファイル命名規則と構文はノードベースの Agent に対する静的構成と同じですが、`cluster_check: true` 行が追加されています。</mrk>
 
-#### <mrk mid="45" mtype="seg">例: </mrk> <mrk mid="46" mtype="seg">CloudSQL データベースの MySQL チェック</mrk>
+#### 例: CloudSQLデータベース上のMySQLチェック
 
-CloudSQL インスタンスと [Datadog ユーザー][6]をセットアップしたら、以下の内容の `/conf.d/mysql.yaml` ファイルを Cluster Agent コンテナにマウントします。
+CloudSQLインスタンスと[Datadogユーザー][8]を設定後、`/conf.d/mysql.yaml`ファイルを以下の内容と共にCluster Agentにマウントします。
 
 <mrk mid="48" mtype="seg">```yaml
 cluster_check: true
@@ -79,23 +96,23 @@ instances:</mrk>
     pass:</mrk> <mrk mid="52" mtype="seg">'&lt;YOUR_CHOSEN_PASSWORD&gt;'
 ```</mrk>
 
-`cluster_check` フィールドは、このチェックを 1 つのノードベースの Agent に委譲するように Cluster Agent に通知します。
+`cluster_check`のフィールドにより、Cluster Agentにこのチェックを一つのノードベースのAgentに委任するよう知らせます。
 
 ### <mrk mid="54" mtype="seg">テンプレートソース: </mrk> <mrk mid="55" mtype="seg">Kubernetes サービスアノテーション</mrk>
 
-[Kubernetes ポッドへのアノテーション][7]と同様に、次の構文でサービスにアノテーションを追加できます。
+[アノテートKubernetes ポッド][9]の構文と同様に、以下の構文でサービスをアノテートできます。
 
-<mrk mid="57" mtype="seg">```yaml
-  ad.datadoghq.com/service.check_names:</mrk> <mrk mid="58" mtype="seg">'[&lt;CHECK_NAME&gt;]'
-  ad.datadoghq.com/service.init_configs:</mrk> <mrk mid="59" mtype="seg">'[&lt;INIT_CONFIG&gt;]'
-  ad.datadoghq.com/service.instances:</mrk> <mrk mid="60" mtype="seg">'[&lt;INSTANCE_CONFIG&gt;]'
-```</mrk>
+```yaml
+  ad.datadoghq.com/service.check_names: '[<INTEGRATION_NAME>]'
+  ad.datadoghq.com/service.init_configs: '[<INIT_CONFIG>]'
+  ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
+```
 
-<mrk mid="61" mtype="seg">`%%host%%` [テンプレート変数][8]がサポートされ、これがサービスの IP に置き換えられます。</mrk><mrk mid="62" mtype="seg">`kube_namespace` タグと `kube_service` タグは、自動的にインスタンスに追加されます。</mrk>
+サービスIPにより、`%%host%%` [テンプレート変数][10]がサポートされ、変換されます。`kube_namespace`と `kube_service`のタグは自動的にインスタンスに付与されます。
 
 #### <mrk mid="63" mtype="seg">例:</mrk> <mrk mid="64" mtype="seg">nginx によってホストされるサービスの HTTP チェック</mrk>
 
-次のサービス定義は、`my-nginx` デプロイからポッドを公開し、負荷分散型サービスのレイテンシーを測定する [HTTP チェック][9]を実行します。
+以下のサービス定義では、`my-nginx` デプロイからポッドを外部に出し、[HTTPチェック][11]を実行させて負荷分散サービスの待ち時間を測定します。
 
 ```yaml
 apiVersion: v1
@@ -123,17 +140,17 @@ spec:
     run: my-nginx
 ```
 
-さらに、各ポッドを [NGINX チェック][10]で監視する必要があります。NGINX チェックは、サービス全体だけでなく各ワーカーの監視も可能です。
+さらに、集約されたサービスだけではなく各ワーカーのモニターも可能なため、各ポッドは[NGINXチェック][12]によりモニターされます。
 
 ## トラブルシューティング
 
-<mrk mid="84" mtype="seg">分散型という性質上、クラスターチェックのトラブルシューティングは多少複雑です。</mrk><mrk mid="85" mtype="seg">以下のセクションでは、ディスパッチ処理と関連するトラブルシューティングコマンドについて説明します。</mrk>
+クラスターチェックの分布性により、トラブルシューティングは少々手間取ります。以下のセクションでは、ディスパッチプロセスと関連するトラブルシューティングコマンドについて説明します。
 
 ### Kubernetes: リーダー Cluster Agent の検索
 
-<mrk mid="87" mtype="seg">リーダー選出が有効になっている場合は、リーダーだけがクラスターチェック構成をノードベースの Agent に提供します。</mrk><mrk mid="88" mtype="seg">リーダーの名前は `datadog-leader-election` ConfigMap 内にあります。</mrk>
+リーダー選択が可能な場合、リーダーだけがクラスターチェック構成をノードベースのAgentに送ります。リーダー名は`datadog-leader-election`のConfigMapで見られます。
 
-```
+```yaml
 # kubectl get cm datadog-leader-election -o yaml
 apiVersion: v1
 kind: ConfigMap
@@ -146,9 +163,9 @@ metadata:
 
 ### Cluster Agent 内のオートディスカバリー
 
-Cluster Agent によって構成 (静的または自動検出) が選択されたことを確認するには、リーダー Cluster Agent 内で `configcheck` コマンドを使用します。
+Cluster Agentに構成(静的またはオートディスカバリー)が分かるよう、Cluster Agentのリーダーの`configcheck`コマンドを使用します。
 
-```
+```text
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent configcheck
 ...
 === http_check cluster check ===
@@ -170,12 +187,12 @@ Auto-discovery IDs:
 
 ### Cluster Agent のディスパッチロジック
 
-`clusterchecks` コマンドを使用して、ディスパッチロジックの状態を調査できます。次の情報が含まれます。
+`clusterchecks`コマンドにより、以下を含む、ディスパッチロジックの状態をチェックできます。
 
-- どのノードベースの Agent が Cluster Agent にアクティブに報告しているか
-- 各ノードにどのチェックがディスパッチされているか
+* どのノードベースの Agent が Cluster Agent にアクティブに報告しているか
+* 各ノードにどのチェックがディスパッチされているか
 
-```
+```text
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
 
 === 3 node-agents reporting ===
@@ -212,7 +229,7 @@ Init Config:
 
 Agent の `configcheck` コマンドは、`cluster-checks` ソース付きのインスタンスを表示します。
 
-```
+```text
 # kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
 ...
 === http_check check ===
@@ -232,13 +249,13 @@ Init Config:
 ===
 ```
 
-Instance ID は以前のものと一致します。
+インスタンスIDは初期のものと一致します。
 
 ### Agent のステータス
 
 Agent の `status` コマンドは、正しく実行されて報告を行っているチェックインスタンスを表示します。
 
-```
+```text
 # kubectl exec <NODE_AGENT_POD_NAME> agent status
 ...
     http_check (3.1.1)
@@ -256,12 +273,14 @@ Agent の `status` コマンドは、正しく実行されて報告を行って�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/autodiscovery
-[2]: /ja/agent/kubernetes/cluster
-[3]: /ja/agent/kubernetes/cluster/#cluster-checks-autodiscovery
-[4]: /ja/agent/guide/agent-commands
-[5]: /ja/developers/write_agent_check
-[6]: /ja/integrations/mysql
-[7]: /ja/agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[8]: /ja/agent/autodiscovery/?tab=kubernetes#supported-template-variables
-[9]: /ja/integrations/http_check
-[10]: /ja/integrations/nginx
+[2]: /ja/agent/cluster_agent
+[3]: /ja/agent/cluster_agent/setup
+[4]: /ja/agent/autodiscovery/clusterchecks/#setting-up-check-configurations
+[5]: /ja/agent/autodiscovery/clusterchecks
+[6]: /ja/agent/guide/agent-commands
+[7]: /ja/developers/write_agent_check
+[8]: /ja/integrations/mysql
+[9]: /ja/agent/autodiscovery/integrations/?tab=kubernetes#configuration
+[10]: /ja/agent/autodiscovery/template_variables
+[11]: /ja/integrations/http_check
+[12]: /ja/integrations/nginx

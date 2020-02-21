@@ -1,11 +1,12 @@
 ---
 title: Récupérer des tags
 type: apicontent
-order: 31.1
+order: 32.1
 external_redirect: /api/#recuperer-des-tags
 ---
 
 ## Récupérer des tags
+
 Renvoie un mappage des tags et hosts pour l'ensemble de votre infrastructure.
 
 **ARGUMENTS**:

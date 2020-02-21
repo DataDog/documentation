@@ -1,0 +1,1 @@
+[{u'id': u's3', u'label': u'S3 Access Logs'}, {u'id': u'elb', u'label': u'Classic ELB Access Logs'}, {u'id': u'elbv2', u'label': u'Application ELB Access Logs'}, {u'id': u'cloudfront', u'label': u'CloudFront Access Logs'}, {u'id': u'redshift', u'label': u'Redshift Logs'}, {u'id': u'lambda', u'label': u'Lambda Cloudwatch Logs'}]

@@ -1,1 +1,2 @@
-{"message": "User test@datadoghq.com disabled"}
+# This is not yet supported by the Datadog API Python Client
+# Consult the curl example

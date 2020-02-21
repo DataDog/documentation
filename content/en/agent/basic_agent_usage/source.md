@@ -8,7 +8,7 @@ further_reading:
 - link: "logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "graphing/infrastructure/process"
+- link: "/infrastructure/process"
   tag: "Documentation"
   text: "Collect your processes"
 - link: "tracing"
@@ -26,7 +26,7 @@ By default, your Agent is installed in its own sandbox at `~/.datadog-agent`. Yo
 Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/`stop`/`restart`/`status` on the Agent) should be run with `sudo`.
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | Description                   | Command                                 |
 | ----------------------------- | --------------------------------------- |
@@ -53,7 +53,7 @@ Datadog Agent has some commands and only the _lifecycle commands_ (i.e. `start`/
 ## Configuration
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 The configuration files and folders for the Agent are located in:
 
 * `/etc/datadog-agent/datadog.yaml`
@@ -61,7 +61,6 @@ The configuration files and folders for the Agent are located in:
 Configuration files for [Integrations][1]:
 
 * `/etc/datadog-agent/conf.d/`
-
 
 [1]: /integrations
 {{% /tab %}}
@@ -74,7 +73,6 @@ The configuration files and folders for the Agent are located in:
 Configuration files for [Integrations][1]:
 
 * `/etc/dd-agent/conf.d/`
-
 
 [1]: /integrations
 {{% /tab %}}

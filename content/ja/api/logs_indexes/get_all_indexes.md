@@ -1,7 +1,7 @@
 ---
 title: すべてのインデックスの取得
 type: apicontent
-order: 23.1
+order: 24.1
 external_redirect: "/api/#get-all-indexes"
 ---
 
@@ -13,6 +13,6 @@ external_redirect: "/api/#get-all-indexes"
 
 このエンドポイントはオーガニゼーションの `Index` オブジェクトの配列を返します。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

@@ -8,7 +8,7 @@ further_reading:
   - link: logs/
     tag: Documentation
     text: ログの収集
-  - link: graphing/infrastructure/process
+  - link: /infrastructure/process
     tag: Documentation
     text: プロセスの収集
   - link: tracing
@@ -26,7 +26,7 @@ further_reading:
 Datadog Agent に含まれるコマンドのうち、ライフサイクルコマンド (Agent に対する `start`/`stop`/`restart`/`status` の実行) だけは `sudo` で実行する必要があります。
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
+{{% tab "Agent v6 & v7" %}}
 
 | 説明                   | コマンド                                 |
 | ----------------------------- | --------------------------------------- |
@@ -53,15 +53,14 @@ Datadog Agent に含まれるコマンドのうち、ライフサイクルコマ
 ## コンフィグレーション
 
 {{< tabs >}}
-{{% tab "Agent v6" %}}
-Agent の構成ファイルおよびフォルダーの場所
+{{% tab "Agent v6 & v7" %}}
+Agent の構成ファイルおよびフォルダーの場所:
 
 * `/etc/datadog-agent/datadog.yaml`
 
 [インテグレーション][1]用構成ファイルの場所
 
 * `/etc/datadog-agent/conf.d/`
-
 
 [1]: /ja/integrations
 {{% /tab %}}
@@ -74,7 +73,6 @@ Agent の構成ファイルおよびフォルダーの場所
 [インテグレーション][1]用構成ファイルの場所
 
 * `/etc/dd-agent/conf.d/`
-
 
 [1]: /ja/integrations
 {{% /tab %}}

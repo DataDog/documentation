@@ -7,7 +7,7 @@ Depending on how you deployed the manifest, you might be using readiness probes.
 
 On AKS, the default RBAC does not allow access to `/healthz` for unauthenticated users. The following RBAC fixes that:
 
-```
+```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:

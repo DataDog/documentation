@@ -18,7 +18,7 @@ further_reading:
 
 SSL errors can occur during an API test run. They are different from failing assertions on SSL tests and can occur on all types of API tests.
 
-{{< img src="synthetics/api_tests/ssl-self-signed-error.png" alt="SSL Self Signed Error" responsive="true" style="width:60%;" >}}
+{{< img src="synthetics/api_tests/ssl-self-signed-error.png" alt="SSL Self Signed Error"  style="width:60%;" >}}
 
 | Error                                | Description                                                                                                                                                              |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

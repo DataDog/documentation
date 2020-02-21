@@ -1,7 +1,7 @@
 ---
 title: Get a list of logs
 type: apicontent
-order: 22.2
+order: 23.2
 external_redirect: /api/#list-logs
 ---
 
@@ -41,5 +41,5 @@ List endpoint returns logs that match a log search query. [Results are paginated
     For multi-index organizations, the log index in which the request is performed.
 
 [1]: /logs/guide/collect-multiple-logs-with-pagination
-[2]: https://docs.datadoghq.com/logs/archives
-[3]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
+[2]: /logs/archives
+[3]: /logs/explorer/search/#search-syntax

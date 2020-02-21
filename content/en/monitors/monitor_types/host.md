@@ -62,7 +62,8 @@ If `datadog.agent.up` stops reporting an `OK` status for more than the minutes s
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][2] page.
 
-## Further Reading 
+## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/host

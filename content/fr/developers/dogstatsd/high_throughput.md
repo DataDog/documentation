@@ -57,6 +57,7 @@ func main() {
   statsd.Gauge("exemple_métrique.gauge", 1, []string{"env:dev"}, 1)
 }
 ```
+
 [1]: https://github.com/DataDog/datadog-go
 {{% /tab %}}
 
@@ -66,7 +67,6 @@ func main() {
 
 ```python
 from datadog import DogStatsd
-
 
 with DogStatsd(host="127.0.0.1", port=8125, max_buffer_size=25) as batch:
     batch.gauge('exemple_métrique.gauge_1', 123, tags=["environment:dev"])
@@ -176,7 +176,7 @@ Pour en savoir plus et obtenir des exemples de code, consultez le paragraphe [Sa
 
 ### Utiliser DogStatsD sur UDS (Unix Domain Socket)
 
-UDS est un protocole de communication inter-processus utilisé pour [transporter les charges utiles de DogStatsD][2]. Comparé au protocole UDP, il présente une charge très limitée et réduit l'empreinte globale de DogStatsD sur votre système.
+UDS est un protocole de communication inter-processus utilisé pour [transporter les charges utiles DogStatsD][2]. Comparé au protocole UDP, il présente une charge très limitée et réduit l'empreinte globale de DogStatsD sur votre système.
 
 ## Utiliser les mémoires tampon du noyau du système
 
@@ -200,14 +200,124 @@ $ sysctl -w net.core.rmem_max=26214400
 ```
 
 Ajoutez la configuration suivante à `/etc/sysctl.conf` pour rendre ce changement permanent :
-```
+
+```conf
 net.core.rmem_max = 26214400
 ```
 
 Définissez ensuite l'option de configuration `dogstatsd_so_rcvbuf` de l'Agent sur le même nombre dans `datadog.yaml` :
-```
+
+```yaml
 dogstatsd_so_rcvbuf: 26214400
 ```
+
+## Télémétrie côté client
+
+Par défaut, les clients DogStatsd envoient des métriques de télémétrie à l'Agent. Cela vous permet d'identifier plus facilement les goulots d'étranglement. Chaque métrique comporte un tag avec le langage du client ainsi qu'un tag avec la version du client. Ces métriques ne sont pas considérées comme des métriques custom et ne sont pas facturées.
+
+Chaque client partage un ensemble de tags communs.
+
+| Tag                | Description                                    | Exemple                |
+|--------------------|------------------------------------------------|------------------------|
+| `client`           | Le langage du client.                     | `client:py`            |
+| `client_version`   | La version du client.                      | `client_version:1.2.3` |
+| `client_transport` | Le protocole de transport du client  (`udp` ou `uds`). | `client_transport:uds` |
+
+**Remarque** : lorsque vous utilisez le protocole UDP, le client ne peut pas détecter les erreurs réseau et les métriques correspondantes ne tiennent pas compte des octets/paquets non envoyés.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+La télémétrie a été ajoutée avec la version `0.34.0` du client Python.
+
+| Nom de la métrique                               | Type de métrique | Description                                                                             |
+|--------------------------------------------|-------------|-----------------------------------------------------------------------------------------|
+| `datadog.dogstatsd.client.metrics`         | count       | Nombre de `metrics` envoyées au client DogStatsD par votre application (avant l'échantillonnage). |
+| `datadog.dogstatsd.client.events`          | count       | Nombre d'`events` envoyés au client DogStatsD par votre application.                    |
+| `datadog.dogstatsd.client.service_checks`  | count       | Nombre de `service_checks` envoyés au client DogStatsD par votre application.            |
+| `datadog.dogstatsd.client.bytes_sent`      | count       | Nombre d'octets envoyés à l'Agent.                                         |
+| `datadog.dogstatsd.client.bytes_dropped`   | count       | Nombre d'octets non envoyés par le client DogStatsD.                                        |
+| `datadog.dogstatsd.client.packets_sent`    | count       | Nombre de datagrammes envoyés à l'Agent.                                     |
+| `datadog.dogstatsd.client.packets_dropped` | count       | Nombre de datagrammes non envoyés par le client DogStatsD.                                    |
+
+Pour désactiver la télémétrie, utilisez la méthode `disable_telemetry` :
+
+```python
+statsd.disable_telemetry()
+```
+
+Consultez le référentiel [DataDog/datadogpy][1] pour en savoir plus sur la configuration du client.
+
+[1]: https://github.com/DataDog/datadogpy
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+La télémétrie a été ajoutée avec la version `4.6.0` du client Ruby.
+
+| Nom de la métrique                               | Type de métrique | Description                                                                             |
+|--------------------------------------------|-------------|-----------------------------------------------------------------------------------------|
+| `datadog.dogstatsd.client.metrics`         | count       | Nombre de `metrics` envoyées au client DogStatsD par votre application (avant l'échantillonnage). |
+| `datadog.dogstatsd.client.events`          | count       | Nombre d'`events` envoyés au client DogStatsD par votre application.                    |
+| `datadog.dogstatsd.client.service_checks`  | count       | Nombre de `service_checks` envoyés au client DogStatsD par votre application.            |
+| `datadog.dogstatsd.client.bytes_sent`      | count       | Nombre d'octets envoyés à l'Agent.                                         |
+| `datadog.dogstatsd.client.bytes_dropped`   | count       | Nombre d'octets non envoyés par le client DogStatsD.                                        |
+| `datadog.dogstatsd.client.packets_sent`    | count       | Nombre de datagrammes envoyés à l'Agent.                                     |
+| `datadog.dogstatsd.client.packets_dropped` | count       | Nombre de datagrammes non envoyés par le client DogStatsD.                                    |
+
+Pour désactiver la télémétrie, définissez le paramètre `disable_telemetry` sur `true` :
+
+```ruby
+Datadog::Statsd.new('localhost', 8125, disable_telemetry: true)
+```
+
+Consultez le référentiel [DataDog/dogstatsd-ruby](https://github.com/DataDog/dogstatsd-ruby) pour en savoir plus sur la configuration du client.
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+La télémétrie a été ajoutée avec la version `3.4.0` du client Go.
+
+| Le nom de la métrique                                       | Type de métrique  | Description                                                                             |
+|---------------------------------------------------|--------------|-----------------------------------------------------------------------------------------|
+| `datadog.dogstatsd.client.metrics`                | count        | Nombre de `metrics` envoyées au client DogStatsD par votre application (avant l'échantillonnage). |
+| `datadog.dogstatsd.client.events`                 | count        | Nombre d'`events` envoyés au client DogStatsD par votre application.                    |
+| `datadog.dogstatsd.client.service_checks`         | count        | Nombre de `service_checks` envoyés au client DogStatsD par votre application.            |
+| `datadog.dogstatsd.client.bytes_sent`             | count        | Nombre d'octets envoyés à l'Agent.                                         |
+| `datadog.dogstatsd.client.bytes_dropped`          | count        | Nombre d'octets non envoyés par le client DogStatsD.                                        |
+| `datadog.dogstatsd.client.bytes_dropped_queue`    | count        | Nombre d'octets non envoyés car la liste d'attente du client DogStatsD était pleine.                    |
+| `datadog.dogstatsd.client.bytes_dropped_writer`   | count        | Nombre d'octets non envoyés en raison d'une erreur lors de l'écriture sur Datadog.                   |
+| `datadog.dogstatsd.client.packets_sent`           | count        | Nombre de datagrammes envoyés à l'Agent.                                     |
+| `datadog.dogstatsd.client.packets_dropped`        | count        | Nombre de datagrammes non envoyés par le client DogStatsD.                                    |
+| `datadog.dogstatsd.client.packets_dropped_queue`  | count        | Nombre de datagrammes non envoyés car la liste d'attente du client DogStatsD était pleine.                |
+| `datadog.dogstatsd.client.packets_dropped_writer` | count        | Nombre de datagrammes non envoyés en raison d'une erreur lors de l'écriture sur Datadog.               |
+
+
+Pour désactiver la télémétrie, utilisez le paramètre `WithoutTelemetry` :
+
+```go
+statsd, err: = statsd.New("127.0.0.1:8125", statsd.WithoutTelemetry())
+```
+
+Consultez le référentiel [DataDog/datadog-go][1] pour en savoir plus sur la configuration du client.
+
+[1]: https://github.com/DataDog/datadog-go
+{{% /tab %}}
+{{% tab "Java" %}}
+
+Le client Java disposera prochainement de fonctionnalités de télémétrie.
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+Le client PHP disposera prochainement de fonctionnalités de télémétrie.
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+Le client .NET disposera prochainement de fonctionnalités de télémétrie.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Pour aller plus loin
 
@@ -217,4 +327,3 @@ dogstatsd_so_rcvbuf: 26214400
 [2]: /fr/developers/dogstatsd/unix_socket
 [3]: /fr/developers/dogstatsd/#code
 [4]: /fr/developers/metrics/dogstatsd_metrics_submission/#sample-rates
-[5]: /fr/developers/dogstatsd/unix_socket

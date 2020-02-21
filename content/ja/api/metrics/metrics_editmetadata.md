@@ -1,7 +1,7 @@
 ---
 title: メトリクスメタデータの編集
 type: apicontent
-order: 25.5
+order: 26.5
 external_redirect: '/api/#edit-metric-metadata'
 ---
 ## メトリクスメタデータの編集
@@ -9,7 +9,7 @@ external_redirect: '/api/#edit-metric-metadata'
 メトリクスメタデータエンドポイントを使用して、メトリクスのメタデータのフィールドを編集できます。
 [サポートされているタイプについては、こちらを参照してください][1]。
 
-##### 引数
+**引数**:
 
 * **`type`** [必須]:
     [メトリクスタイプ][1] (**gauge**、**rate** など)

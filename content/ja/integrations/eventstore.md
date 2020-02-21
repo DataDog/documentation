@@ -33,8 +33,8 @@ supported_os:
 
 EventStore からメトリクスをリアルタイムに取得して、以下のことができます。
 
-* EventStore のキューを視覚化および監視できます。
-* 統計 API で使用可能なすべてのメトリクスをキャプチャできます。
+- EventStore のキューを視覚化および監視できます。
+- 統計 API で使用可能なすべてのメトリクスをキャプチャできます。
 
 ## セットアップ
 
@@ -45,35 +45,35 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 1. [開発ツールキット][4]をインストールします。
 2. integrations-extras リポジトリを複製します。
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. `ddev` 構成を `integrations-extras/` パスで更新します。
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. `eventstore` パッケージをビルドします。
 
-    ```
-    ddev -e release build eventstore
-    ```
+   ```shell
+   ddev -e release build eventstore
+   ```
 
 5. [Datadog Agent をダウンロードして起動][5]します。
 6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
-    ```
-    datadog-agent integration install -w <PATH_OF_EVENTSTORE_ARTIFACT_>/<EVENTSTORE_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_EVENTSTORE_ARTIFACT_>/<EVENTSTORE_ARTIFACT_NAME>.whl
+   ```
 
 7. [他のパッケージ化されたインテグレーション][6]と同様にインテグレーションを構成します。
 
 ### コンフィグレーション
 
 1. EventStore の[メトリクス](#metrics)の収集を開始するには、[Agent の構成ディレクトリ][7]のルートにある `conf.d/` フォルダーの `eventstore.d/conf.yaml` ファイルを編集します。
-  使用可能なすべての構成オプションの詳細については、[サンプル eventstore.d/conf.yaml][8] を参照してください。
+   使用可能なすべての構成オプションの詳細については、[サンプル eventstore.d/conf.yaml][8] を参照してください。
 
 2. [Agent を再起動します][9]。
 
@@ -115,6 +115,3 @@ eventstore チェックには、サービスのチェック機能は含まれま
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
 [11]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/metadata.csv
 [12]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/manifest.json
-
-
-{{< get-dependencies >}}

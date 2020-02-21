@@ -1,7 +1,7 @@
 ---
 title: ログのリストの取得
 type: apicontent
-order: 22.2
+order: 23.2
 external_redirect: '/api/#list-logs'
 ---
 ## ログのリストの取得
@@ -10,7 +10,7 @@ external_redirect: '/api/#list-logs'
 
 **オーガニゼーションのためのログのアーカイブを目的とする場合は、ログリスト API の代わりに Datadog のアーカイブ機能を使用することを検討してください。[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**
 
-##### 引数
+**引数**:
 
 * **`query`** [必須]:
     検索クエリ - [ログ検索構文][3]に従います。

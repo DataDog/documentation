@@ -25,7 +25,7 @@ Pour recueillir des métriques custom avec l'intégration Datadog/Mongo, utilise
 
 Pour les exemples ci-dessous, la méthode de collecte mongo `user_collection` est utilisée :
 
-```
+```text
 { name: "foo", id: 12345, active: true, age:45, is_admin: true}
 { name: "bar", id: 67890, active: false, age:25, is_admin: true}
 { name: "foobar", id: 16273, active: true, age:35, is_admin: false}
@@ -38,13 +38,13 @@ Choisissez le type de requête pour lequel vous souhaitez voir un exemple :
 
 Pour surveiller le nombre d'utilisateurs actifs à un moment donné, voici la [commande count Mongo][1] à utiliser :
 
-```
+```text
 db.runCommand( {count: user_collection, query: {active:true}})
 ```
 
 Cela correspond à la configuration YAML `custom_queries` suivante dans votre fichier `mongo.d/conf.yaml` :
 
-```
+```yaml
 custom_queries:
   - metric_prefix: mongo.users
     query: {"count": "user_collection", "query": {"active":"true"}}
@@ -57,7 +57,6 @@ Cela génère une métrique `gauge` `mongo.users` avec le tag `user:active`.
 
 **Remarque** : le type de métrique défini est `gauge`. Consultez la [documentation relative aux types de métriques][2] pour en savoir plus.
 
-
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
 [2]: /fr/developers/metrics/types
 {{% /tab %}}
@@ -65,13 +64,13 @@ Cela génère une métrique `gauge` `mongo.users` avec le tag `user:active`.
 
 Pour surveiller l'âge des utilisateurs, utilisez la [commande find Mongo][1] suivante :
 
-```
+```text
 db.runCommand( {find: user_colleciton, filter: {active:true} )
 ```
 
 Cela correspond à la configuration YAML `custom_queries` suivante dans votre fichier `mongo.d/conf.yaml` :
 
-```
+```yaml
 custom_queries:
   - metric_prefix: mongo.example2
     query: {"find": "user_colleciton", "filter": {"active":"true"}}
@@ -95,7 +94,8 @@ Cela génère une métrique `gauge` `mongo.example2.user.age` avec deux tags : 
 {{% tab "Aggregate" %}}
 
 Pour surveiller l'âge moyen d'un administrateur et d'un utilisateur non-administrateur, utilisez la [commande aggregate Mongo][1] suivante :
-```
+
+```text
 db.runCommand(
               {
                 'aggregate': "user_collection",
@@ -110,7 +110,7 @@ db.runCommand(
 
 Cela correspond à la configuration YAML `custom_queries` suivante dans votre fichier `mongo.d/conf.yaml` :
 
-```
+```yaml
 custom_queries:
   - metric_prefix: mongo.example3
     query: {"aggregate": "user_collection","pipeline": [{"$match": {"active": "true"}},{"$group": {"_id": "$is_admin", "age_avg": {"$avg": "$age"}}}],"cursor": {}}
@@ -149,6 +149,6 @@ Pour vérifier le résultat, recherchez les métriques à l'aide du [Metrics Exp
 [2]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
 [3]: https://docs.mongodb.com/manual/reference/command
 [4]: /fr/agent/guide/agent-commands/#restart-the-agent
-[5]: /fr/graphing/metrics/explorer
+[5]: /fr/metrics/explorer
 [6]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: /fr/agent/guide/agent-log-files

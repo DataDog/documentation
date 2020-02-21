@@ -37,5 +37,15 @@ external_redirect: '/api/#mettre-a-jour-un-dashboard'
         la valeur par défaut de la template variable lors du chargement du dashboard.
     * **`prefix`** [*facultatif*, *défaut*=**None**] :
         Préfixe de tag associé à la variable. Seuls les tags avec ce préfixe apparaissent dans la liste déroulante des variables.
+* **`template_variable_presets`** [*facultatif*, *défaut*=**None**] :
+    Tableau de vues enregistrées comportant des template variables. Les définitions de vues enregistrées respectent le format suivant :
+    * **`name`** [*obligatoire*] :
+        Le nom de la vue enregistrée.
+    * **`template_variables`** [*facultatif*, *défaut*=**None**] :
+        Tableau de template variables qui ne sont pas définies sur leur valeur par défaut. Les définitions de template variables respectent le format suivant :
+      * **`name`** [*facultatif*, *défaut*=**None**] :
+        Le nom de la variable.
+      * **`value`** [*facultatif*, *défaut*=**None**] :
+        La valeur de la template variable au sein de la vue enregistrée.
 
-[1]: /fr/graphing/widgets
+[1]: /fr/dashboards/widgets

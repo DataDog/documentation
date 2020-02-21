@@ -1,13 +1,13 @@
 ---
 title: Get an application key
 type: apicode
-order: 21.07
+order: 22.07
 external_redirect: /api/#get-an-application-key
 ---
 
 **SIGNATURE**:
 
-`GET /v1/application_key/<APP_KEY>`
+`GET /v1/application_key/<DATADOG_APPLICATION_KEY>`
 
 **EXAMPLE REQUEST**:
 

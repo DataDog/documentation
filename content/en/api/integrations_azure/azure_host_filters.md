@@ -1,7 +1,7 @@
 ---
 title: Update an Azure integration host filters
 type: apicontent
-order: 16.4
+order: 17.4
 external_redirect: /api/#update-an azure-integration-host-filters
 ---
 

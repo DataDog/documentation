@@ -40,28 +40,28 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 1. Installez le [kit de développement][5].
 2. Clonez le dépôt integrations-extras :
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. Pour générer le paquet `sendmail`, exécutez :
 
-    ```
-    ddev -e release build sendmail
-    ```
+   ```shell
+   ddev -e release build sendmail
+   ```
 
 5. [Téléchargez et lancez l'Agent Datadog][6].
 6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
-    ```
-    datadog-agent integration install -w <PATH_OF_SENDMAIL_ARTIFACT_>/<SENDMAIL_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_SENDMAIL_ARTIFACT_>/<SENDMAIL_ARTIFACT_NAME>.whl
+   ```
 
 7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][7].
 
@@ -105,6 +105,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-extras/blob/master/sendmail/metadata.csv
 [12]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

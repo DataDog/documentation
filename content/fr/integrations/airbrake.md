@@ -13,20 +13,21 @@ kind: integration
 manifest_version: '1.0'
 name: airbrake
 public_title: Intégration Datadog/Airbrake
-short_description: 'Affichez, recherchez et échangez sur des exceptions Airbrake dans votre flux d''événements. stream.'
+short_description: 'Affichez, recherchez et échangez sur des exceptions Airbrake dans votre flux d''événements.'
 version: '1.0'
 ---
-{{< img src="integrations/airbrake/airbrakeevent.png" alt="événement airbrake" responsive="true" popup="true">}}
+{{< img src="integrations/airbrake/airbrakeevent.png" alt="événement airbrake" popup="true">}}
 
 ## Présentation
 
 Associez Airbrake à Datadog pour :
 
-  * Visualiser des exceptions en temps réel dans le flux d'événements
-  * Rechercher des exceptions sur vos graphiques
-  * Discuter des exceptions avec votre équipe
+- Visualiser des exceptions en temps réel dans le flux d'événements
+- Rechercher des exceptions sur vos graphiques
+- Discuter des exceptions avec votre équipe
 
 ## Implémentation
+
 ### Configuration
 
 Pour configurer l'intégration Airbrake à l'aide de Webhooks :
@@ -37,7 +38,7 @@ Pour configurer l'intégration Airbrake à l'aide de Webhooks :
 
 3. Cliquez sur WebHooks et saisissez l'URL suivante dans le champ URL :
 
-    ```
+    ```text
     https://app.datadoghq.com/intake/webhook/airbrake?api_key=<YOUR_DATADOG_API_KEY>
     ```
 
@@ -48,10 +49,8 @@ Pour configurer l'intégration Airbrake à l'aide de Webhooks :
 Lorsqu'une nouvelle erreur se produit, elle apparaît dans votre [flux d'événements][1].
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://docs.datadoghq.com/fr/graphing/event_stream
+[1]: https://docs.datadoghq.com/fr/events
 [2]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}

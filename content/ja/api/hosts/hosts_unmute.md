@@ -6,6 +6,7 @@ external_redirect: /api/#unmute-a-host
 ---
 
 ## ホストのミュート解除
-##### 引数
+
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

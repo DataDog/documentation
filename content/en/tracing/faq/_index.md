@@ -2,7 +2,6 @@
 title: Tracing FAQ
 kind: faq
 private: true
-disable_toc: true
 ---
 
 {{< whatsnext desc="List of Frequently Asked Questions:">}}

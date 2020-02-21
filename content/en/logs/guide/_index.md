@@ -2,10 +2,10 @@
 title: Logs Guides
 kind: guide
 private: true
-disable_toc: true
 ---
 
 {{< whatsnext desc="" >}}
+    {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Collect Heroku Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/integration-pipeline-reference" >}}Integration Pipeline Reference{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Log Collection Troubleshooting Guide{{< /nextlink >}}

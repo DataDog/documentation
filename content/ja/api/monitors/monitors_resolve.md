@@ -1,13 +1,14 @@
 ---
 title: モニターの解決
 type: apicontent
-order: 26.06
+order: 27.07
 external_redirect: /api/#resolve-monitor
 ---
 
 ## モニターの解決
 
-##### 引数
+**引数**:
+
 * **`resolve`** [必須]:
     特定の monitor_id に対して解決するグループの配列。例:
     `{"monitor_id": "group_to_resolve"}`

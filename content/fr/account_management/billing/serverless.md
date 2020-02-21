@@ -34,23 +34,24 @@ Ce filtre exclut tout le contenu avec le tag `env:staging` ou `env:test1`.
 
 L'API AWS fonctionne uniquement avec l'endpoint du site américain.
 
-**Affichage des règles actuelles de filtrage des tags**
-```
-curl -X GET 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<clé_api>&application_key=<clé_app>' --data '{"account_id": "<id_compte_aws>"}'
+**Affichage des règles actuelles de filtrage des tags** :
+
+```shell
+curl -X GET 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<CLÉ_API>&application_key=<CLÉ_APPLICATION>' --data '{"account_id": "<ID_COMPTE_AWS>"}'
 
 >{"filters":[{"tag_filter_str":"!copper:educated","namespace":"application_elb"}]}
 ```
 
 **Définition d'une règle de filtrage de tags pour un espace de nommage** : les espaces de nommage autorisés sont `"application_elb"`, `"elb"`, `"lambda"`, `"network_elb"`, `"rds"`, `"sqs"` et `"custom"`.
 
-```
-curl -X POST 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<clé_api>&application_key=<clé_app>' --data '{"account_id": "<id_compte_aws>", "namespace": "application_elb", "tag_filter_str": "!copper:educated"}'  -H "Content-Type: text/plain"
+```shell
+curl -X POST 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<CLÉ_API>&application_key=<CLÉ_APPLICATION>' --data '{"account_id": "<ID_COMPTE_AWS>", "namespace": "application_elb", "tag_filter_str": "!copper:educated"}'  -H "Content-Type: text/plain"
 ```
 
-**Suppression d'une règle de filtrage de tags pour un espace de nommage**
+**Suppression d'une règle de filtrage de tags pour un espace de nommage** :
 
-```
-curl -X DELETE 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<clé_api>&application_key=<clé_app>'  --data '{"account_id": "<id_compte_aws>","namespace":"<espacedenommage>"}'
+```shell
+curl -X DELETE 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_key=<CLÉ_API>&application_key=<CLÉ_APPLICATION>'  --data '{"account_id": "<ID_COMPTE_AWS>","namespace":"<ESPACE_DE_NOMMAGE>"}'
 ```
 
 ## Dépannage

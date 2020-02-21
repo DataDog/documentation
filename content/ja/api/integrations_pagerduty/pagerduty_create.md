@@ -1,7 +1,7 @@
 ---
 title: PagerDuty インテグレーションの作成
 type: apicontent
-order: 18.2
+order: 19.2
 external_redirect: "/api/#create-a-pagerduty-integration"
 ---
 
@@ -11,7 +11,7 @@ external_redirect: "/api/#create-a-pagerduty-integration"
 
 **注**: 新しい PagerDuty 構成を作成 (`PUT`) する際は、すべての引数が必要です。
 
-##### 引数
+**引数**:
 
 * **`services`** :
     PagerDuty サービスオブジェクトの配列。Datadog サービスの構成方法については、[PagerDuty のドキュメント][1]を参照してください。PagerDuty サービスオブジェクトは、以下の要素で構成されます。

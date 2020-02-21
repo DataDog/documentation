@@ -1,24 +1,24 @@
 ---
-categories:
-- monitoring
-- notification
-ddtype: crawler
-dependencies: []
-description: Consultez les métriques et événements de New Relic dans Datadog.
-doc_link: https://docs.datadoghq.com/integrations/new_relic/
-git_integration_title: new_relic
-has_logo: true
-integration_title: New Relic
-is_public: true
-kind: integration
-manifest_version: '1.0'
-name: new_relic
-public_title: Intégration Datadog/New Relic
-short_description: Consultez les métriques et événements de New Relic dans Datadog.
-version: '1.0'
+"categories":
+- "monitoring"
+- "notification"
+"ddtype": "crawler"
+"dependencies": []
+"description": "Consultez les métriques et événements de New Relic dans Datadog."
+"doc_link": "https://docs.datadoghq.com/integrations/new_relic/"
+"git_integration_title": "new_relic"
+"has_logo": !!bool "true"
+"integration_title": "New Relic"
+"is_public": !!bool "true"
+"kind": "integration"
+"manifest_version": "1.0"
+"name": "new_relic"
+"public_title": "Intégration Datadog/New Relic"
+"short_description": "Consultez les métriques et événements de New Relic dans Datadog."
+"version": "1.0"
 ---
 
-{{< img src="integrations/new_relic/newrelicdashboard.png" alt="Dashboard New Relic" responsive="true" popup="true">}}
+{{< img src="integrations/new_relic/newrelicdashboard.png" alt="Dashboard New Relic" popup="true">}}
 
 ## Présentation
 
@@ -47,6 +47,8 @@ Associez New Relic pour :
 
 <div class="alert alert-warning">
 Vous devrez peut-être attendre 5 à 10 minutes avant que les métriques New Relic custom apparaissent dans Datadog.
+<br>
+Les 5 000 premières métriques custom sont automatiquement proposées lors de la saisie.
 </div>
 
 ## Données collectées
@@ -141,5 +143,3 @@ Une fois vos modifications terminées, assurez-vous de sélectionner « Update 
 [1]: https://app.datadoghq.com/account/settings#integrations/new_relic
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/new_relic/new_relic_metadata.csv
 
-
-{{< get-dependencies >}}

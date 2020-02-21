@@ -33,19 +33,19 @@ L'intégration NFS recueille les métriques concernant les points de montage sur
 
 ## Implémentation
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host.
 
 ### Installation
 
-Le check NFSstat est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs.
+Le check NFSstat est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs.
 
 ### Configuration
 
-Modifiez le fichier `nfsstat.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4], afin de spécifier votre script binaire nfsiostat. Vous pouvez également utiliser le script fourni avec le programme d'installation du binaire. Consultez le [fichier d'exemple nfsstat.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+Modifiez le fichier `nfsstat.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3], afin de spécifier votre script binaire nfsiostat. Vous pouvez également utiliser le script fourni avec le programme d'installation du binaire. Consultez le [fichier d'exemple nfsstat.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][6] et cherchez `nfsstat` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][5] et cherchez `nfsstat` dans la section Checks.
 
 ## Données collectées
 ### Métriques
@@ -59,22 +59,17 @@ Le check Nfststat n'inclut aucun événement.
 Le check Nfststat n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][8].
+Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 ## Pour aller plus loin
 
-* [Créer un monitor réseau sur un check HTTP][9]
-
+* [Créer un monitor réseau sur un check HTTP][8]
 
 [1]: http://man7.org/linux/man-pages/man8/nfsiostat.8.html
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/?tab=agentv6#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/nfsstat/datadog_checks/nfsstat/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[7]: https://github.com/DataDog/integrations-core/blob/master/nfsstat/metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
-[9]: https://docs.datadoghq.com/fr/monitors/monitor_types/network
-
-
-{{< get-dependencies >}}
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: https://github.com/DataDog/integrations-core/blob/master/nfsstat/datadog_checks/nfsstat/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/nfsstat/metadata.csv
+[7]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/monitors/monitor_types/network

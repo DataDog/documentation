@@ -1,7 +1,7 @@
 ---
 title: API キーの削除
 type: apicontent
-order: 21.05
+order: 22.05
 external_redirect: "/api/#delete-an-api-key"
 ---
 
@@ -9,6 +9,6 @@ external_redirect: "/api/#delete-an-api-key"
 
 特定の API キーを削除します。
 
-##### 引数
+**引数**:
 
 このエンドポイントは、JSON 引数を受け取りません。

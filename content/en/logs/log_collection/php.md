@@ -29,6 +29,7 @@ further_reading:
 Write your PHP logs into a file, then [use the Agent][1] to forward them to Datadog, choose between the Monolog, Zend-Log, or Symfony logging libraries.
 
 ## Setup
+
 ### Installation
 
 {{< tabs >}}
@@ -36,7 +37,7 @@ Write your PHP logs into a file, then [use the Agent][1] to forward them to Data
 
 Use Composer to add Monolog as a dependency:
 
-```
+```text
 composer require "monolog/monolog"
 ```
 
@@ -61,7 +62,7 @@ Alternatively, install it manually:
 
 Zend-log is a part of the Zend framework. Use [Composer][1] to add Zend-Log:
 
-```
+```text
 composer require "zendframework/zend-log"
 ```
 
@@ -140,7 +141,6 @@ The following configuration enables the JSON formatting and writes the logs and 
   use Zend\Log\Writer\Stream;
   use Zend\Log\Formatter\JsonFormatter;
 
-
   // create a logger
   $logger = new Logger();
 
@@ -190,15 +190,8 @@ instances:
 ## Log section
 logs:
 
-    ## - type: file (mandatory) type of log input source (tcp / udp / file)
-    ##   port/path: (mandatory) Set port if type is tcp or udp. Set path if type is file
-    ##   service: (mandatory) name of the service owning the log
-    ##   source: (mandatory) attribute that defines which integration is sending the logs
-    ##   sourcecategory: (optional) Multiple value attribute. Can be used to refine the source attribute
-    ##   tags: (optional) add tags to each logs collected
-
   - type: file
-    path: /path/to/your/php/application-json.log
+    path: "/path/to/your/php/application-json.log"
     service: php
     source: php
     sourcecategory: sourcecode
@@ -273,8 +266,6 @@ Take a peek to this code if you want to use it:
 ```
 
 If you want to develop yours, [refer the Zend documentation][1].
-
-
 
 [1]: https://docs.zendframework.com/zend-log/processors
 {{% /tab %}}
@@ -356,6 +347,7 @@ Add a session Processor to add variable context within your logs:
     ```
 
 2. Wire the Processor with Symfony:
+
   ```yaml
    services:
       monolog.processor.session_request:
@@ -365,9 +357,7 @@ Add a session Processor to add variable context within your logs:
               - { name: monolog.processor, method: processRecord }
   ```
 
-3. [Stream generated JSON file to Datadog][1]
-
-
+3. [Stream generated JSON file to Datadog][1].
 
 [1]: /logs/log_collection
 {{% /tab %}}
@@ -383,7 +373,6 @@ Monolog is a part of the following frameworks:
 * [Silex][5]
 * [Lumen][6]
 * [CakePHP][7]
-
 
 Integrate Monolog with your framework then configure your logger:
 
@@ -423,7 +412,6 @@ monolog:
 #            arguments:  [ @session ]
 #            tags:
 #               - { name: monolog.processor, method: processRecord }
-
 
     json_formatter:
         class: Monolog\Formatter\JsonFormatter
@@ -510,11 +498,7 @@ First, add this dependency to the `composer.json` file and
 run `composer update`.
 
 ```json
-{
-    "require": {
-        "cakephp/monolog": "*"
-    }
-}
+{"require": {"cakephp/monolog": "*"}}
 ```
 
 Then, start by creating a logging configuration file (i.e., `app/Config/log.php`) that you includes your `app/Config/bootstrap.php`:
@@ -527,13 +511,13 @@ Then, start by creating a logging configuration file (i.e., `app/Config/log.php`
 
 A basic configuration, to replicate what Cake does but using Monolog would look something like this:
 
-```
+```text
 CakePlugin::load('Monolog');
 ```
 
 Finally log into a file:
 
-```
+```text
 CakeLog::config('debug', array(
   'engine' => 'Monolog.Monolog',
   'channel' => 'app',
@@ -547,7 +531,6 @@ CakeLog::config('debug', array(
   )
 ));
 ```
-
 
 ## Further Reading
 

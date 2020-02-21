@@ -11,7 +11,7 @@
       }
     },
     "overall": {
-      "uptime": 99.04629516601562,
+      "sli_value": 99.04629516601562,
       "span_precision": 2.0,
       "name": "We're not meeting our 1m SLAs for foo",
       "precision": {
@@ -132,7 +132,7 @@
     "from_ts": 1568737541,
     "groups": [
       {
-        "uptime": 99.68518829345703,
+        "sli_value": 99.68518829345703,
         "preview": false,
         "group": "foo:pig",
         "history": [
@@ -159,7 +159,7 @@
         ]
       },
       {
-        "uptime": 99.69444274902344,
+        "sli_value": 99.69444274902344,
         "preview": false,
         "group": "foo:sheep",
         "history": [
@@ -186,7 +186,7 @@
         ]
       },
       {
-        "uptime": 99.7615737915039,
+        "sli_value": 99.7615737915039,
         "preview": true,
         "group": "foo:cow",
         "history": [
@@ -237,7 +237,7 @@
         ]
       },
       {
-        "uptime": 99.84027862548828,
+        "sli_value": 99.84027862548828,
         "preview": true,
         "group": "foo:donkey",
         "history": [
@@ -280,7 +280,7 @@
         ]
       },
       {
-        "uptime": 99.84490966796875,
+        "sli_value": 99.84490966796875,
         "preview": false,
         "group": "foo:cat",
         "history": [
@@ -299,7 +299,7 @@
         ]
       },
       {
-        "uptime": 99.84954071044922,
+        "sli_value": 99.84954071044922,
         "preview": true,
         "group": "foo:dog",
         "history": [
@@ -326,7 +326,7 @@
         ]
       },
       {
-        "uptime": 99.90509033203125,
+        "sli_value": 99.90509033203125,
         "preview": true,
         "group": "foo:horse",
         "history": [
@@ -361,7 +361,7 @@
         ]
       },
       {
-        "uptime": 100.0,
+        "sli_value": 100.0,
         "preview": false,
         "group": "foo:duck",
         "history": [
@@ -372,7 +372,7 @@
         ]
       },
       {
-        "uptime": 100.0,
+        "sli_value": 100.0,
         "preview": false,
         "group": "foo:chicken",
         "history": [
@@ -467,7 +467,7 @@
       }
     },
     "overall": {
-      "uptime": 100,
+      "sli_value": 100,
       "span_precision": 0,
       "precision": {
         "7d": 0,

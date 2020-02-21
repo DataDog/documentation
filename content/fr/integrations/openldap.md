@@ -7,6 +7,7 @@ assets:
 categories:
   - data store
   - log collection
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -36,9 +37,6 @@ supported_os:
 Utilisez l'intégration OpenLDAP pour recueillir des métriques à partir du backend `cn=Monitor` de vos serveurs OpenLDAP.
 
 ## Implémentation
-
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][7] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
 ### Installation
 
 L'intégration OpenLDAP est fournie avec l'Agent. Pour commencer à recueillir vos métriques OpenLDAP, suivez ces étapes :
@@ -99,23 +97,39 @@ Si le backend `cn=Monitor` n'est pas configuré sur votre serveur, suivez ces é
 
 #### Configurer l'intégration OpenLDAP
 
-Ajoutez ce bloc de configuration à votre fichier `openldap.d/conf.yaml` pour commencer à recueillir vos [métriques](#metriques) :
+##### Host
 
-```
-  init_config:
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
-  instances:
-      - url: ldaps://localhost
-        port: 686
-        username: <NOM_DISTINCTIF_UTILISATEUR>
-        password: <MOTDEPASSE>
-```
+###### Collecte de métriques
 
-Consultez le [fichier d'exemple openldap.yaml][2] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `openldap.d/conf.yaml` dans le dossier `conf.d` à la racine du répertoire de configuration de votre Agent]. Consultez le [fichier d'exemple openldap.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
-[Redémarrez l'Agent][3] pour commencer à envoyer vos métriques OpenLDAP à Datadog.
+    ```yaml
 
-#### Collecte de logs
+      init_config:
+
+      instances:
+          ## @param url - string - required
+          ## Full URL of your ldap server. Use `ldaps` or `ldap` as the scheme to
+          ## use TLS or not, or `ldapi` to connect to a UNIX socket.
+          #
+        - url: ldaps://localhost:636
+
+          ## @param username - string - optional
+          ## The DN of the user that can read the monitor database.
+          #
+          username: "<USER_DISTINGUISHED_NAME>"
+
+          ## @param password - string - optional
+          ## Password associated with `username`
+          #
+          password: "<PASSWORD>"
+    ```
+
+2. [Redémarrez l'Agent][3].
+
+###### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
@@ -139,9 +153,31 @@ Consultez le [fichier d'exemple openldap.yaml][2] pour découvrir toutes les opt
 
 3. [Redémarrez l'Agent][3].
 
+##### Environnement conteneurisé
+###### Collecte de métriques
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][4] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+| Paramètre            | Valeur                                                                                         |
+|----------------------|-----------------------------------------------------------------------------------------------|
+| `<NOM_INTÉGRATION>` | `openldap`                                                                                    |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                                 |
+| `<CONFIG_INSTANCE>`  | `{"url":"ldaps://%%host%%:636","username":"<NOM_DISTINCT_UTILISATEUR>","password":"<MOTDEPASSE>"}` |
+
+
+###### Collecte de logs
+
+**Disponible à partir des versions > 6.5 de l'Agent**
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][5].
+
+| Paramètre      | Valeur                                                 |
+|----------------|-------------------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "openldap", "service": "<NOM_SERVICE>"}` |
+
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][4] et cherchez `openldap` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][6] et cherchez `openldap` dans la section Checks.
 
 ## Compatibilité
 
@@ -164,16 +200,14 @@ Renvoie `CRITICAL` si l'intégration ne parvient pas à se connecter au serveur 
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-core/blob/master/openldap/datadog_checks/openldap/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
-[5]: https://github.com/DataDog/integrations-core/blob/master/openldap/metadata.csv
-[6]: https://docs.datadoghq.com/fr/help
-[7]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-
-
-{{< get-dependencies >}}
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
+[5]: https://docs.datadoghq.com/fr/agent/docker/log/
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://github.com/DataDog/integrations-core/blob/master/openldap/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help

@@ -7,7 +7,7 @@ external_redirect: /api/#schedule-monitor-downtime
 
 ## モニターのダウンタイムのスケジューリング
 
-##### 引数
+**引数**:
 
 * **`scope`** [必須]:
     ダウンタイムが適用されるスコープ (例: `host:app2`)。複数のスコープは、カンマ区切りリストで指定します (例: `env:dev,env:prod`)。設定されるダウンタイムは、指定されたスコープのいずれかではなく、すべて (`env:dev` と `env:prod` の**両方**) と一致するソースに適用されます。
@@ -30,4 +30,3 @@ external_redirect: /api/#schedule-monitor-downtime
     *   **`week_days`**: (オプション) 繰り返す曜日のリスト。`Mon`、`Tue`、`Wed`、`Thu`、`Fri`、`Sat`、`Sun` から選択します。`type` が `weeks` の場合にのみ適用されます。**最初の文字は大文字にする必要があります。**
     *   **`until_occurrences`**: (オプション) ダウンタイムを再スケジューリングする回数。**`until_occurences` と `until_date`** は相互に排他的です。
     *   **`until_date`**: (オプション) 繰り返しが終了する日付を指定する POSIX タイムスタンプ。**`until_occurences` と `until_date`** は相互に排他的です。
-

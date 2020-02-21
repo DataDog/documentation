@@ -7,6 +7,7 @@ assets:
 categories:
   - containers
   - log collection
+  - autodiscovery
 creates_events: false
 ddtype: check
 dependencies:
@@ -35,23 +36,24 @@ supported_os:
 
 Ce check permet de surveiller [Harbor][1] avec l'Agent Datadog.
 
-## Implémentation
-
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer ces instructions à un environnement conteneurisé.
-
+## Configuration
 ### Installation
 
-Le check Harbor est inclus avec le paquet de l'[Agent Datadog][3]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Harbor est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
+#### Host
 
-1. Modifiez le fichier `harbor.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos données de performance Harbor. Consultez le [fichier d'exemple harbor.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
-2. [Redémarrez l'Agent][6].
+##### Collecte de métriques
 
-Vous pouvez spécifier n'importe quel type d'utilisateur dans la configuration, toutefois, un compte avec les autorisations admin est requis pour récupérer les métriques de disque. La métrique `harbor.projects.count` reflète uniquement le nombre de projets auxquels l'utilisateur indiqué a accès.
+1. Modifiez le fichier `harbor.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données de performance Harbor. Consultez le [fichier d'exemple harbor.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+  **Remarque** : vous pouvez spécifier n'importe quel type d'utilisateur dans la configuration, mais un compte avec les autorisations admin est requis pour récupérer les métriques de disque. La métrique `harbor.projects.count` reflète uniquement le nombre de projets auxquels l'utilisateur indiqué a accès.
 
-#### Collecte de logs
+2. [Redémarrez l'Agent][5].
+
+##### Collecte de logs
 
 **Disponible à partir des versions > 6.0 de l'Agent**
 
@@ -71,11 +73,33 @@ Vous pouvez spécifier n'importe quel type d'utilisateur dans la configuration, 
           service: <SERVICE_NAME>
     ```
 
-3. [Redémarrez l'Agent][6].
+3. [Redémarrez l'Agent][5].
+
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+##### Collecte de métriques
+
+| Paramètre            | Valeur                                                                                 |
+|----------------------|---------------------------------------------------------------------------------------|
+| `<NOM_INTÉGRATION>` | `harbor`                                                                              |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                                         |
+| `<CONFIG_INSTANCE>`  | `{"url": "https://%%host%%", "username": "<ID_UTILISATEUR>", "password": "<MOTDEPASSE_UTILISATEUR>"}` |
+
+##### Collecte de logs
+
+**Disponible à partir des versions > 6.5 de l'Agent**
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][7].
+
+| Paramètre      | Valeur                                               |
+|----------------|-----------------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "harbor", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `harbor` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][8] et cherchez `harbor` dans la section Checks.
 
 ## Données collectées
 
@@ -85,15 +109,14 @@ Vous pouvez spécifier n'importe quel type d'utilisateur dans la configuration, 
 
 ### Checks de service
 
-- `harbor.can_connect`
-Renvoie `OK` si l'API Harbor est accessible et l'authentification est réussie. Si ce n'est pas le cas, renvoie `CRITICAL`.
+**harbor.can_connect** :<br>
+Renvoie `OK` si l'API Harbor est accessible et que l'authentification a réussi. Si ce n'est pas le cas, renvoie `CRITICAL`.
 
-- `harbor.status`
+**harbor.status** :<br>
 Renvoie `OK` si le composant Harbor spécifié est sain, renvoie `CRITICAL` si ce n'est pas le cas ou renvoie `UNKNOWN` pour les versions antérieures à 1.5 de Harbor.
 
-- `harbor.registry.status`
+**harbor.registry.status** :<br>
 Renvoie `OK` si le service est sain. Si ce n'est pas le cas, renvoie `CRITICAL`. Surveille la santé des registres externes utilisés par Harbor pour la réplication.
-
 
 ### Événements
 
@@ -101,17 +124,15 @@ L'intégration Harbor n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 [1]: https://goharbor.io
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files
-[5]: https://github.com/DataDog/integrations-core/blob/master/harbor/datadog_checks/harbor/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/harbor/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help
-
-
-{{< get-dependencies >}}
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files
+[4]: https://github.com/DataDog/integrations-core/blob/master/harbor/datadog_checks/harbor/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[7]: https://docs.datadoghq.com/fr/agent/docker/log/
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[9]: https://github.com/DataDog/integrations-core/blob/master/harbor/metadata.csv
+[10]: https://docs.datadoghq.com/fr/help

@@ -16,7 +16,7 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-{{< img src="tracing/visualization/services_page.png" alt="Services page" responsive="true" >}}
+{{< img src="tracing/visualization/services_page.png" alt="Services page"  >}}
 
 ## Overview
 
@@ -32,7 +32,7 @@ Filter the services list depending on:
 * [Service type](#services-types)
 * A query (basic text filtering)
 
-{{< img src="tracing/visualization/services_filtering.mp4" alt="Services filtering" video="true" responsive="true" width="75%" >}}
+{{< img src="tracing/visualization/services_filtering.mp4" alt="Services filtering" video="true"  width="75%" >}}
 
 ### Services types
 
@@ -53,7 +53,7 @@ We also have some aliases for Integrations such as Postgres, MySQL, and Cassandr
 
 Service color is used in [trace visualizations][8]. Select your service color to change it:
 
-{{< img src="tracing/visualization/service_color.png" alt="Services colors" responsive="true" style="width:30%;">}}
+{{< img src="tracing/visualization/service_color.png" alt="Services colors"  style="width:30%;">}}
 
 ## Selecting Columns
 
@@ -65,7 +65,7 @@ Choose what to display in your services list:
 * **Apdex**: Apdex score of the service, [learn more on Apdex][9]
 * **Monitor status**: [Status of monitors][10] attached to a service
 
-{{< img src="tracing/visualization/services_columns.png" alt="Services columns" responsive="true" style="width:40%;">}}
+{{< img src="tracing/visualization/services_columns.png" alt="Services columns"  style="width:40%;">}}
 
 ## Further Reading
 
@@ -75,8 +75,8 @@ Choose what to display in your services list:
 [2]: /tracing/visualization/#services
 [3]: https://app.datadoghq.com/apm/services
 [4]: /tracing/visualization/service
-[5]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[6]: /tracing/advanced/setting_primary_tags_to_scope
+[5]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[6]: /tracing/guide/setting_primary_tags_to_scope
 [7]: /tracing/visualization/trace/#spans
 [8]: /tracing/visualization/trace
 [9]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm

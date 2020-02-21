@@ -104,20 +104,29 @@ logs:
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
+**Note**: With Agent version 7.17+, the `replace_placeholder` string can expand references to capture groups such as `$1`, `$2` and so forth. If you want a string to follow the capture group with no space in between, use the format `${<GROUP_NUMBER>}`. For instance, to scrub user information from the log `User email: foo.bar@example.com`, the following configuration:
+
+```
+(...)
+pattern: "(User email: )[^@]*@(.*)"
+replace_placeholder: "$1 masked_user@${2}"
+```
+
+Would send the following log to Datadog: `User email: masked_user@example.com`
+
 ## Multi-line aggregation
 
 If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type` which aggregates all lines into a single entry until the given pattern is detected again.
 
 For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format. These lines include a stack trace that can be sent as two logs:
 
-```
+```text
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Book.getTitle(Book.java:16)
         at com.example.myproject.Author.getBookTitles(Author.java:25)
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 2018-01-03T09:26:24.365Z UTC starting upload of /my/file.gz
 ```
-
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -141,7 +150,7 @@ logs:
 
 In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
 
-```
+```yaml
  labels:
     com.datadoghq.ad.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
 ```
@@ -151,7 +160,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
 
-```
+```yaml
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -223,7 +232,7 @@ For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_
 
 In the `datadog.yaml` file:
 
-```
+```yaml
 logs_config:
   processing_rules:
      - type: exclude_at_match
@@ -234,12 +243,13 @@ logs_config:
        pattern: \w+@datadoghq.com
        replace_placeholder: "MASKED_EMAIL"
 ```
+
 {{% /tab %}}
 {{% tab "Environment Variable" %}}
 
 Use the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to configure global processing rules, for example:
 
-```
+```shell
 DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
@@ -248,7 +258,7 @@ DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_
 
 Use the `env` parameter in the helm chart to set the `DD_LOGS_CONFIG_PROCESSING_RULES` environment variable to configure global processing rules, for example:
 
-```
+```yaml
 env:
   - name: DD_LOGS_CONFIG_PROCESSING_RULES
     value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
@@ -263,6 +273,7 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
