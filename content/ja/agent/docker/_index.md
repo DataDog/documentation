@@ -6,7 +6,7 @@ aliases:
   - /ja/agent/docker
   - /ja/agent/basic_agent_usage/docker/
 further_reading:
-  - link: '/integrations/java/?tab=docker#configuration'
+  - link: '/integrations/java/?tab=docker#コンフィギュレーション'
     tag: ドキュメント
     text: Docker JMX
   - link: agent/docker/log
@@ -27,7 +27,7 @@ Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバー�
 
 ## セットアップ
 
-Datadog Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][3]を参照してください。[サポートされるバージョン][4]については、Agent のドキュメントを参照してください。
+Docker Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][3]を参照してください。[サポートされるバージョン][4]については、Agent のドキュメントを参照してください。
 
 ### インストール
 
@@ -264,7 +264,7 @@ Docker インテグレーションは Docker Agent を使用してメトリク�
 [10]: /ja/logs
 [11]: /ja/infrastructure/process
 [12]: /ja/infrastructure/livecontainers
-[13]: https://docs.datadoghq.com/ja/developers/dogstatsd
+[13]: /ja/developers/dogstatsd
 [14]: /ja/developers/dogstatsd/unix_socket
 [15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [16]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go

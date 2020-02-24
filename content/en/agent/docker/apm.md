@@ -9,7 +9,7 @@ further_reading:
   - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/trace"
     tag: "Github"
     text: Source code
-  - link: "https://docs.datadoghq.com/integrations/amazon_ecs/#trace-collection"
+  - link: "/integrations/amazon_ecs/#trace-collection"
     tag: "Documentation"
     text: "Trace your ECS applications"
   - link: "tracing/visualization/"
@@ -45,7 +45,7 @@ List of all environment variables available for tracing within the Docker Agent:
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`               | [Datadog API Key][1]                                                                                                                                                                                                                                                                                                        |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                                                                                                                                                                                                                        |
-| `DD_REPLACE_TAGS`          | [Scrub sensitive data from your span’s tags][2].                                                                                                                                                                                                                                                                            |
+| `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][2].                                                                                                                                                                                                                                                                            |
 | `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                               |
 | `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                                                                                                                                                                                                                     |
 | `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                                                                                                                                                                                                                         |

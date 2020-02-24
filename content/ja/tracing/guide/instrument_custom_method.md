@@ -88,7 +88,7 @@ public class BackupLedger {
 }
 ```
 
-[1]: https://docs.datadoghq.com/ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -134,7 +134,7 @@ class BackupLedger:
         # [...]
 ```
 
-[1]: https://docs.datadoghq.com/ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Ruby" %}}
   Ruby の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
@@ -163,7 +163,7 @@ class BackupLedger
 end
 ```
 
-[1]: https://docs.datadoghq.com/ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Go" %}}
   Go の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
@@ -208,7 +208,7 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 }
 ```
 
-[1]: https://docs.datadoghq.com/ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Node.js" %}}
   Node.js の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
@@ -232,7 +232,7 @@ function write (transactions) {
 }
 ```
 
-[1]: https://docs.datadoghq.com/ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab ".NET" %}}
   .NET の場合、Datadog APM により、特定のコードブロックをインスツルメントすることにより、コードをインスツルメントしてカスタムスパンを生成できます。
@@ -262,7 +262,7 @@ public void Write(List<Transaction> transactions)
 }
 ```
 
-[1]: https://docs.datadoghq.com/ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -332,7 +332,7 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 ?>
 ```
 
-[1]: https://docs.datadoghq.com/ja/tracing/guide/add_span_md_and_graph_it
+[1]: /ja/tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -362,4 +362,4 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
 [3]: https://app.datadoghq.com/apm/search/analytics
-[4]: https://docs.datadoghq.com/ja/tracing/guide/add_span_md_and_graph_it
+[4]: /ja/tracing/guide/add_span_md_and_graph_it

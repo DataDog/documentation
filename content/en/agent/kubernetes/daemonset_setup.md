@@ -423,4 +423,4 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [13]: /agent/autodiscovery/integrations/?tab=kubernetes
 [14]: /tracing/setup
 [15]: /infrastructure/process/?tab=kubernetes#installation
-[16]: /agent/kubernetes/dogstatsd
+[16]: /developers/dogstatsd

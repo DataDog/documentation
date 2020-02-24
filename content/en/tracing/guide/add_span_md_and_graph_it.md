@@ -225,7 +225,7 @@ The Datadog UI uses tags to set span level metadata. Custom tags may be set for 
 
 ## Leverage the Datadog UI to search for your custom span tags
 
-2) **Go to the Services page** and click on the [service][5] that you added tags to. **Scroll down and click on the specific resource** where the tag was added in the [Resource][6] table. **Scroll down to the Traces table**
+2) **Go to the Services page** and click on the [service][5] that you added tags to. **Scroll down and click on the specific resource** where the tag was added in the [Resource][4] table. **Scroll down to the Traces table**
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Resource Page"  style="width:90%;">}}
 
@@ -245,9 +245,9 @@ The bottom part of the view includes additional information about the trace or a
 
 <div class="alert alert-info">This section assumes that you have <a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>enabled App Analytics</a></div>
 
-4) **Navigate to the [Trace Search page][7]**.
+4) **Navigate to the [Trace Search page][6]**.
 
-The Trace Search page allows you to identify specific [Traces][8] and Analyzed Spans you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][9]).
+The Trace Search page allows you to identify specific [Traces][1] and Analyzed Spans you are interested in. Here you can filter by time a set of default tags (such as `Env`,`Service`, `Resource` and [many more][7]).
 
 5) **Find a trace that has the new tag**. To do this use the facet explorer on the left to find the Resource name you set at the beginning of this guide and click into one of the rows you see there.
 
@@ -261,9 +261,9 @@ You can now determine the displayed name of your facet and where to place it in 
 
 You should now be able to see the facet you created in the Facet Explorer. The fastest way to find it is by using the `Search facets` box.
 
-6) **Navigate to the [App Analytics][10] page**
+6) **Navigate to the [App Analytics][8] page**
 
-The App Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [App Analytics overview][11].
+The App Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [App Analytics overview][9].
 
 7) **Choose the service** you’ve been working on from the service facet list, **choose Error** from the status facet and **select `customer_id`** (or any other tags you added to your spans) from the group by field.
 
@@ -271,7 +271,7 @@ The App Analytics page is a visual query building tool that allows you to conduc
 
 8) **Remove Error** from the query, **change the `count *` measure to `Duration`** and **change the graph type to `Top List`**.
 
-You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][12], alternatively, you can save this visualization to a dashboard and keep an eye over it over time.
+You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][10], alternatively, you can save this visualization to a dashboard and keep an eye over it over time.
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="span md 7" video="true"  style="width:90%;">}}
 
@@ -286,12 +286,10 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 [1]: /tracing/visualization/#trace
 [2]: /tracing/visualization/#spans
 [3]: /tracing/visualization/#span-tags
-[4]: https://docs.datadoghq.com/tracing/visualization/#resources
+[4]: /tracing/visualization/#resources
 [5]: /tracing/visualization/#services
-[6]: /tracing/visualization/#resources
-[7]: https://app.datadoghq.com/apm/search
-[8]: https://docs.datadoghq.com/tracing/visualization/#trace
-[9]: https://docs.datadoghq.com/tracing/app_analytics/search
-[10]: https://app.datadoghq.com/apm/search/analytics
-[11]: https://docs.datadoghq.com/tracing/app_analytics/analytics
-[12]: https://docs.datadoghq.com/tracing/guide/alert_anomalies_p99_database
+[6]: https://app.datadoghq.com/apm/search
+[7]: /tracing/app_analytics/search
+[8]: https://app.datadoghq.com/apm/search/analytics
+[9]: /tracing/app_analytics/analytics
+[10]: /tracing/guide/alert_anomalies_p99_database

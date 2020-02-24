@@ -69,5 +69,5 @@ If you have any questions about how the Log Management Service satisfies the app
 [3]: /agent/logs/advanced_log_collection/?tab=exclude_at_match#filter-logs
 [4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /integrations/amazon_lambda/#log-collection
-[6]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=datadogussite#log-collection
+[6]: /integrations/google_cloud_platform/?tab=datadogussite#log-collection
 [7]: /logs/explorer/#share-views

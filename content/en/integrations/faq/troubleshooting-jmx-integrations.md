@@ -2,7 +2,7 @@
 title: Troubleshooting JMX Integrations
 kind: faq
 further_reading:
-- link: "https://docs.datadoghq.com/integrations/java/"
+- link: "/integrations/java/"
   tag: "Documentation"
   text: "Java integration"
 ---

@@ -16,12 +16,12 @@ further_reading:
 
 With Agent v7.17+, the DogStatsD Mapper feature allows you to convert parts of a metric name submitted to DogStatsD to tags using mapping rules with wildcard and regex patterns. For example it allows you to transform the metric:
 
--   `airflow.job.duration.<JOB_TYPE>.<JOB_NAME>`
+- `airflow.job.duration.<JOB_TYPE>.<JOB_NAME>`
 
 into the metric `airflow.job.duration` with two associated tags:
 
--   `job_type:<JOB_TYPE>`
--   `job_name:<JOB_NAME>`.
+- `job_type:<JOB_TYPE>`
+- `job_name:<JOB_NAME>`.
 
 To create a mapping rule:
 

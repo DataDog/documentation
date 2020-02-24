@@ -233,5 +233,5 @@ self.histogram(name, value, tags=None, hostname=None, device_name=None)
 [2]: /ja/developers/metrics/types
 [3]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /ja/agent/guide/agent-commands/#restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-information
+[5]: /ja/agent/guide/agent-commands/#agent-information
 [6]: https://app.datadoghq.com/metric/summary
