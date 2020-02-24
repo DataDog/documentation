@@ -33,7 +33,6 @@ gtag('js', new Date());
 gtag('config', gaTag);
 
 $(document).ready(function () {
-
     window.history.replaceState({}, '', window.location.href);
 
     const sidenavHTML = $('.container .sidenav-nav').clone();
@@ -772,13 +771,13 @@ function loadPage(newUrl) {
             window.addEventListener('hashchange', function(e){
                 httpRequest.abort();
             })
-    
+
             if (httpRequest.readyState !== XMLHttpRequest.DONE){
                 return;
             }
-    
+
             const newDocument = httpRequest.responseXML;
-    
+
             if (newDocument === null){
                 return;
             }
@@ -792,9 +791,9 @@ function loadPage(newUrl) {
             if (newContent === null){
                 return;
             }
-    
+
             document.title = newDocument.title;
-    
+
             const meta = {
                 "itemprop": [
                     "name",
@@ -816,7 +815,7 @@ function loadPage(newUrl) {
                     "article\\:author"
                 ]
             };
-    
+
             const keys = Object.keys(meta);
             for(let i=0;i<keys.length;i++){
                 const key = keys[i];
@@ -832,12 +831,12 @@ function loadPage(newUrl) {
                     }
                 }
             }
-    
+
             // update data-relPermalink
             document.documentElement.dataset.relpermalink = newDocument.documentElement.dataset.relpermalink;
-    
+
             const start = window.performance.now();
-    
+
             // if there is error finding the element, reload page at requested url
             if (mainContent.parentElement) {
                 mainContent.parentElement.replaceChild(newContent, mainContent);
@@ -850,9 +849,9 @@ function loadPage(newUrl) {
             } else {
                 window.location.href = newUrl;
             }
-    
+          
             const wistiaVid = document.querySelector('.wistia [data-wistia-id]');
-    
+
             let wistiaVidId;
             if (wistiaVid) {
                 wistiaVidId = wistiaVid.dataset.wistiaId;
@@ -871,36 +870,36 @@ function loadPage(newUrl) {
                 document.querySelector('.js-toc-container #TableOfContents').remove();
                 updateTOC();
             }
-                
+
             const end = window.performance.now();
             const time = end - start;
-    
+
             const pathName = new URL(newUrl).pathname;
-    
+
             // sets query params if code tabs are present
-    
+
             codeTabs();
-    
+
             // Gtag virtual pageview
             gtag('config', gaTag, {'page_path': pathName});
-    
+
             // Marketo
             if (typeof window.Munchkin !== "undefined") {
                 Munchkin.munchkinFunction('clickLink', { href: newUrl});
             } else {
                 datadogLogs.logger.info("Munchkin called before ready..")
             }
-    
-    
+
+
         }; // end onreadystatechange
-    
+
         httpRequest.responseType = "document";
         httpRequest.open("GET", newUrl);
         httpRequest.send();
     } else {
         window.location.href = newUrl;
     }
-    
+
 };
 
 // when navigating to asynced nav with a Wistia video, the video script tags need to be removed and readded for the video to load

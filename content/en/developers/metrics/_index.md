@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-If a metric is not submitted from one of the [350+ Datadog integrations][1] it's considered a custom metric<sup>[(1)][2]</sup>. Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm.
+If a metric is not submitted from one of the [400+ Datadog integrations][1] it's considered a custom metric<sup>[(1)][2]</sup>. Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm.
 
 A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 
@@ -32,7 +32,7 @@ A Datadog custom metric has the properties below. Refer to the [Metrics Introduc
 
 | Property         | Description                                                                                                                                                  |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<METRIC_NAME>`  | The [name of your metric](#naming-metrics).                                                                                                                  |
+| `<METRIC_NAME>`  | The [name of your metric](#naming-custom-metrics).                                                                                                                  |
 | `<METRIC_VALUE>` | The value of your metric.                                                                                                                                    |
 | `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than ten minutes in the future or more than one hour in the past. |
 | `<TAGS>`         | The set of tags associated with your metric.                                                                                                                 |

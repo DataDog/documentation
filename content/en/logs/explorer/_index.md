@@ -188,7 +188,7 @@ A facet displays all the distinct members of an attribute or a tag and provides 
 
 To start using an attribute as a facet or in the search, click on it and add it as a facet:
 
-{{< img src="logs/explorer/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:30%;">}}
+{{< img src="logs/explorer/create_facet.png" alt="Create Facet"  style="width:30%;">}}
 
 Once this is done, the value of this attribute is stored **for all new logs** and can be used in [the search bar][1], the Facet Panel, and in the [Log Analytics query][2].
 

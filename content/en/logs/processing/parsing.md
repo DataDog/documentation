@@ -174,11 +174,6 @@ This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[
 * `characterWhiteList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
 * `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`.
 
-**Note**:
-
-* Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
-* If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
-
 Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
 
 Log:
@@ -265,6 +260,11 @@ Result:
     "key2": "/valueStr2"
   }
   ```
+  
+**Note**:
+
+* Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
+* If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 
 ### Parsing dates
 

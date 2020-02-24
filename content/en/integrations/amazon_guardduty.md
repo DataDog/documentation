@@ -1,14 +1,15 @@
 ---
 categories:
-- cloud
-- aws
-- log collection
-- security
+    - cloud
+    - aws
+    - log collection
+    - security
 ddtype: crawler
 description: Gather your AWS GuardDuty logs.
 doc_link: /integrations/amazon_guardduty/
 has_logo: true
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md"]
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_guardduty.md']
 integration_title: AWS GuardDuty
 is_public: true
 kind: integration

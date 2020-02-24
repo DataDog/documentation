@@ -53,5 +53,5 @@ For more information on counting custom metrics created from gauge, count, histo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/types/?tab=histogram#metric-types
+[1]: /developers/metrics/types
 [2]: /developers/metrics/custom_metrics

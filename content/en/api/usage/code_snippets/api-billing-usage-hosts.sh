@@ -7,6 +7,4 @@ end_hr=$(date +%Y-%m-%dT%H)
 curl -X GET \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
--d "start_hr=${start_hr}" \
--d "end_hr=${end_hr}" \
-"https://api.datadoghq.com/api/v1/usage/hosts"
+"https://api.datadoghq.com/api/v1/usage/hosts?&start_hr=${start_hr}&end_hr=${end_hr}"

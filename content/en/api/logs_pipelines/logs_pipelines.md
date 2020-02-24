@@ -7,7 +7,7 @@ external_redirect: /api/#logs-pipelines
 
 ## Logs Pipelines
 
-<mark>The Logs Pipelines endpoints are not supported in Datadog's client libraries. To request this functionality, contact [Datadog Support][1].</mark>
+<mark>The Logs Pipelines endpoints are not supported in Datadog's client libraries. To request this functionality, contact [Datadog Support][1]. To set your pipeline permissions see the [Granting permissions within limited scopes][4] documentation.</mark>
 
 Pipelines and processors operate on incoming logs, parsing and transforming them into structured attributes for easier querying.
 
@@ -18,4 +18,5 @@ Pipelines and processors operate on incoming logs, parsing and transforming them
 
 [1]: /help
 [2]: https://app.datadoghq.com/logs/pipelines
-[3]: https://docs.datadoghq.com/logs/processing
+[3]: /logs/processing
+[4]: /account_management/faq/managing-global-role-permissions/#granting-permissions-within-limited-scopes
