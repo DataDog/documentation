@@ -59,7 +59,7 @@ You can create variables from your existing HTTP tests by parsing its response h
 5. Optional: enter a **Description** for your variable.
 6. Decide whether to extract your variable from the response headers, or from the response body.
     * Extract the value from **response header**: use the full response header for your variable, or parse it with a [regex][1].
-    * Extract the value from **response body**: parse the response body of the request with a JSON path, with a [regex][1], or use the full response body.
+    * Extract the value from **response body**: parse the response body of the request with a [regex][1], or use the full response body.
 
 {{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential"  style="width:80%;">}}
 

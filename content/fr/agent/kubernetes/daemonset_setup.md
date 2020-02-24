@@ -15,7 +15,7 @@ aliases:
   - /agent/kubernetes/apm
   - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 ---
-Tirez profit des DaemonSets pour déployer l'Agent Datadog sur l'ensemble de vos nœuds (ou sur un nœud donné grâce [aux nodeSelectors][1]). 
+Tirez profit des DaemonSets pour déployer l'Agent Datadog sur l'ensemble de vos nœuds (ou sur un nœud donné grâce [aux nodeSelectors][1]).
 
 *Si vous ne pouvez pas utiliser de DaemonSets pour votre cluster Kubernetes, [installez l'Agent Datadog][2] en tant que déploiement sur chaque nœud Kubernetes.*
 
@@ -117,6 +117,9 @@ spec:
               fieldRef:
                 fieldPath: status.hostIP
 
+          - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
+          - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
+
         ## Les valeurs ci-dessous correspondent aux minimums suggérés pour les requêtes et les limites.
         ## La quantité de ressources sollicitées par l'Agent dépend des éléments suivants :
         ## * Le nombre de checks
@@ -130,7 +133,7 @@ spec:
             memory: "256Mi"
             cpu: "200m"
         volumeMounts:
-          - {name: dockersocket, mountPath: /var/run/docker.sock}
+          - {name: dockersocketdir, mountPath: /host/var/run}
           - {name: procdir, mountPath: /host/proc, readOnly: true}
           - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
           - {name: s6-run, mountPath: /var/run/s6}
@@ -149,7 +152,7 @@ spec:
           successThreshold: 1
           failureThreshold: 3
       volumes:
-        - {name: dockersocket, hostPath: {path: /var/run/docker.sock}}
+        - {name: dockersocketdir, hostPath: {path: /var/run}}
         - {name: procdir, hostPath: {path: /proc}}
         - {name: cgroups, hostPath: {path: /sys/fs/cgroup}}
         - {name: s6-run, emptyDir: {}}
@@ -276,18 +279,24 @@ Montez le socket Docker sur l'Agent Datadog :
 
 ```
   (...)
+    env:
+      - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
+      - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
+  (...)
     volumeMounts:
       (...)
-      - name: dockersocket
-        mountPath: /var/run/docker.sock
+      - name: dockersocketdir
+        mountPath: /host/var/run
   (...)
   volumes:
     (...)
     - hostPath:
-        path: /var/run/docker.sock
-      name: dockersocket
+        path: /var/run
+      name: dockersocketdir
   (...)
 ```
+
+**Remarque**: Monter directement le socket Docker au lieu du répertoire qui le contient empèche l’agent de se reconnecter à Docker lorsque celui-ci est redémarré.
 
 {{% /tab %}}
 {{< /tabs >}}

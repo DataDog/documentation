@@ -104,7 +104,7 @@ further_reading:
 <br>
 *Logging without Limits は Datadog, Inc. の商標です。
 
-[1]: /ja/pipelines/indexes
+[1]: /ja/logs/indexes
 [2]: /ja/logs/explorer/?tab=facets#visualization
 [3]: /ja/logs/explorer/patterns
 [4]: /ja/logs/explorer/analytics
@@ -120,6 +120,6 @@ further_reading:
 [14]: /ja/logs/processing/processors/?tab=ui#geoip-parser
 [15]: /ja/tracing/connect_logs_and_traces/
 [16]: /ja/logs/processing/processors/?tab=ui#trace-remapper
-[17]: https://docs.datadoghq.com/ja/logs/live_tail/#overview
-[18]: https://docs.datadoghq.com/ja/logs/archives/
-[19]: https://docs.datadoghq.com/ja/logs/logs_to_metrics/
+[17]: /ja/logs/live_tail/#overview
+[18]: /ja/logs/archives/
+[19]: /ja/logs/logs_to_metrics/
