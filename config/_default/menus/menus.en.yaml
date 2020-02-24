@@ -249,14 +249,10 @@ main:
     url: "agent/kubernetes/metrics/"
     parent: "agent_kubernetes"
     weight: 306
-  - name: "Custom Metrics & DogStatsD"
-    url: "agent/kubernetes/dogstatsd/"
-    parent: "agent_kubernetes"
-    weight: 307
   - name: "Legacy Versions"
     url: "agent/kubernetes/legacy/"
     parent: "agent_kubernetes"
-    weight: 308
+    weight: 307
 
   ## AGENT - Datadog Cluster Agent
 

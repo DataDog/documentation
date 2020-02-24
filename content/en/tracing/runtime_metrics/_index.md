@@ -49,7 +49,7 @@ If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL
 [1]: https://app.datadoghq.com/apm/services
 [2]: /developers/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
-[4]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[4]: /developers/dogstatsd/
 [5]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 [6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
 {{% /tab %}}
@@ -73,7 +73,7 @@ In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the app
 [2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0
 [3]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [4]: /agent/docker/#dogstatsd-custom-metrics
-[5]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[5]: /developers/dogstatsd/
 [6]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 {{% /tab %}}
 {{% tab "Ruby" %}}
@@ -113,7 +113,7 @@ In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the app
 [2]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: https://app.datadoghq.com/apm/service
 [4]: /agent/docker/#dogstatsd-custom-metrics
-[5]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[5]: /developers/dogstatsd/
 [6]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -139,7 +139,7 @@ In Kubernetes, [bind the DogstatsD port to a host port][4]; in ECS, [set the app
 [1]: https://app.datadoghq.com/apm/services
 [2]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
-[4]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[4]: /developers/dogstatsd/
 [5]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 {{% /tab %}}
 {{% tab ".NET" %}}

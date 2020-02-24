@@ -442,6 +442,6 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [11]: /tracing/connect_logs_and_traces/?tab=java
 [12]: /developers/dogstatsd/#setup
 [13]: /agent/docker/#dogstatsd-custom-metrics
-[14]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[14]: /developers/dogstatsd/
 [15]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 [16]: https://github.com/openzipkin/b3-propagation
