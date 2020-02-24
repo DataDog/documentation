@@ -71,6 +71,7 @@ Create a new [Synthetics API test][3] upon `http://example.com/`:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /synthetics
 [2]: /dashboards/widgets/slo/
 [3]: https://app.datadoghq.com/synthetics/list
