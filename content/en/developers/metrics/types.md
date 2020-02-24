@@ -40,7 +40,7 @@ These different metric submission types are mapped to 4 in-app metric types foun
 - GAUGE
 - DISTRIBUTION
 
-**Note**: If you submit a metric to Datadog without a type, the metric type appears as `Not Assigned` within Datadog. The `Not Assigned` metric type cannot be further changed to another in-app type until an initial metric type is submitted.
+**Note**: If you submit a metric to Datadog without a type, the metric type appears as `Other` within Datadog. The `Other` metric type cannot be further changed to another in-app type until an initial metric type is submitted.
 
 ## Submission vs. In-App type
 
