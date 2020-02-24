@@ -46,7 +46,7 @@ These different metric submission types are mapped to 4 in-app metric types foun
 
 Metrics are submitted to Datadog in three main ways:
 
-- [Custom Agent check][4]
+- [Agent check][4]
 - [DogStatsD][5]
 - [Datadog’s HTTP API][6]
 
@@ -70,7 +70,7 @@ The COUNT metric submission type represents the total number of event occurrence
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-The RATE metric submission type represents the total number of events occurrences per second in one time interval. A RATE can be used to track how often something is happening—like the frequency of connections made to a database or the flow of requests made to an endpoint.
+The RATE metric submission type represents the total number of event occurrences per second in one time interval. A RATE can be used to track how often something is happening—like the frequency of connections made to a database or the flow of requests made to an endpoint.
 
 **Note**: A RATE is different from the COUNT metric submission type, which represents the total number of event occurrences in the given time interval.
 
@@ -86,23 +86,22 @@ The HISTOGRAM metric submission type represents the statistical distribution of 
 
 If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time interval, the following metrics are produced by the Agent by default:
 
-| New Metric Name                  | Description                                                                                                                                                  | Datadog In-App Type |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- |
-| `<METRIC_NAME>.avg`          | Represents the average of those `X` values in the time interval.                                                                                             | GAUGE               |
-| `<METRIC_NAME>.count`        | Represents the number of values sampled during the interval, `X`. The Agent submits this number as a RATE so it would show in app the value of `X/interval`. | RATE                |
-| `<METRIC_NAME>.median`       | Represents the median of those `X` values in the time interval.                                                                                              | GAUGE               |
-| `<METRIC_NAME>.95percentile` | Represents the 95th percentile of those `X` values in the time interval.                                                                                     | GAUGE               |
-| `<METRIC_NAME>.max`          | Represents the maximum value of those `X` values sent during the time interval                                                                               | GAUGE               |
+| New Metric Name              | Description                                                                                                                                                    | Datadog In-App Type |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `<METRIC_NAME>.avg`          | Represents the average of those `X` values in the time interval.                                                                                               | GAUGE               |
+| `<METRIC_NAME>.count`        | Represents the number of values submitted during the interval, `X`. The Agent submits this number as a RATE so it would show in app the value of `X/interval`. | RATE                |
+| `<METRIC_NAME>.median`       | Represents the median of those `X` values in the time interval.                                                                                                | GAUGE               |
+| `<METRIC_NAME>.95percentile` | Represents the 95th percentile of those `X` values in the time interval.                                                                                       | GAUGE               |
+| `<METRIC_NAME>.max`          | Represents the maximum value of those `X` values sent during the time interval                                                                                 | GAUGE               |
 
 **Note**:
 
 - Configure which aggregations you want to send to Datadog with the `histogram_aggregates` parameter in your [`datadog.yaml` configuration file][1]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent to Datadog. `sum` and `min` are also available.
-
 - Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [`datadog.yaml` configuration file][2]. By default, only the `95percentile` is sent to Datadog.
-
 
 [1]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L106-L114
 [2]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L116-L121
+
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
@@ -115,13 +114,13 @@ Unlike the HISTOGRAM metric type, which aggregates on the Agent during a given t
 
 If you send `X` values for a DISTRIBUTION metric `<METRIC_NAME>` in a given time interval, the following aggregations are available for query by default:
 
-| Aggregation           | Description                                                                                                                                          | Datadog In-App Type |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| `avg:<METRIC_NAME>`   | Represents the average of those `X` values in the time interval.                                                                                     | GAUGE               |
-| `count:<METRIC_NAME>` | Represents the number of points sampled in the time interval, `X`. The Agent then sends it as a RATE so it would show in app the value `X/interval`. | RATE                |
-| `max:<METRIC_NAME>`   | Represents the maximum value of those `X` values sent in the time interval.                                                                          | GAUGE               |
-| `min:<METRIC_NAME>`   | Represents the minimum value of those `X` sent in the time interval.                                                                                 | GAUGE               |
-| `sum:<METRIC_NAME>`   | Represents the sum of all `X` values sent in the time interval                                                                                       | GAUGE               |
+| Aggregation           | Description                                                                                                                                            | Datadog In-App Type |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- |
+| `avg:<METRIC_NAME>`   | Represents the average of those `X` values in the time interval.                                                                                       | GAUGE               |
+| `count:<METRIC_NAME>` | Represents the number of points submitted in the time interval, `X`. The Agent then sends it as a RATE so it would show in app the value `X/interval`. | RATE                |
+| `max:<METRIC_NAME>`   | Represents the maximum value of those `X` values sent in the time interval.                                                                            | GAUGE               |
+| `min:<METRIC_NAME>`   | Represents the minimum value of those `X` sent in the time interval.                                                                                   | GAUGE               |
+| `sum:<METRIC_NAME>`   | Represents the sum of all `X` values sent in the time interval                                                                                         | GAUGE               |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -131,21 +130,21 @@ If you send `X` values for a DISTRIBUTION metric `<METRIC_NAME>` in a given time
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
-Suppose you are submitting a COUNT metric, `activeusers.basket_size`, from a single host running the Datadog Agent. This metric emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
+Suppose you are submitting a COUNT metric, `activeusers.basket_size`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
 The Agent adds all the values received in one time interval and submits the total number, in this case `15`, as the COUNT metric’s value.
 
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-Suppose you are submitting a RATE metric, `queue_messages.rate`, from a single host running the Datadog Agent. This metric emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
+Suppose you are submitting a RATE metric, `queue_messages.rate`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
 The Agent adds all the values received in one time interval and submits the total number divided by the total number of seconds in this time interval.In this case, if the flush interval is 10 seconds, the value submitted would be `1.5` as the RATE metric’s value.
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-Suppose you are submitting a GAUGE metric, `temperature`, from a single host running the Datadog Agent. This metric emits the following values in a flush time interval: `[71,71,71,71,71,71,71.5]`.
+Suppose you are submitting a GAUGE metric, `temperature`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[71,71,71,71,71,71,71.5]`.
 
 The Agent submits the last reported number, in this case `71.5`, as the GAUGE metric’s value.
 
@@ -197,8 +196,8 @@ This functionality allows you to control tagging for metrics where host-level gr
 
 **Note**: The exclusion of tags with `!` is not accepted with this feature.
 
-
 [1]: https://app.datadoghq.com/metric/distribution_metrics
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -220,11 +219,11 @@ Submit your COUNT type metrics from one of the following sources:
 
 **Note**: When submitting a COUNT metric type through DogStatsD, the metric appears as a RATE in-app to ensure relevant comparison across different Agents. Consequently, StatsD counts may appear with a decimal value within Datadog (since they are normalized over a time interval to report units per second).
 
-
 [1]: /developers/metrics/agent_metrics_submission/?tab=count#count
 [2]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
 [3]: /api/?lang=python#post-timeseries-points
 [4]: /developers/metrics/dogstatsd_metrics_submission/#count
+
 {{% /tab %}}
 {{% tab "RATE" %}}
 
@@ -237,9 +236,9 @@ Submit your RATE type metrics from one of the following sources:
 
 **Note**: When submitting a RATE metric type through DogStatsD, the metric appears as a GAUGE in-app to ensure relevant comparison across different Agents.
 
-
 [1]: /developers/metrics/agent_metrics_submission/?tab=rate
 [2]: /api/?lang=python#post-timeseries-points
+
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
@@ -251,10 +250,10 @@ Submit your GAUGE type metrics from one of the following sources:
 | [API][2]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
 | [DogStatsD][3]    | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
 
-
 [1]: /developers/metrics/agent_metrics_submission/?tab=gauge
 [2]: /api/?lang=python#post-timeseries-points
 [3]: /developers/metrics/dogstatsd_metrics_submission/#gauge
+
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
@@ -267,9 +266,9 @@ Submit your HISTOGRAM type metrics from one of the following sources:
 
 **Note**: If you submit a TIMER metric to the Datadog Agent, it is equivalent to submitting a HISTOGRAM metric type within DogStatsD (not to be confused with timers in the standard StatsD). Timers represent duration data only; for example, the amount of time a section of code takes to execute or how long it takes to fully render a page.
 
-
 [1]: /developers/metrics/agent_metrics_submission/?tab=histogram
 [2]: /developers/metrics/dogstatsd_metrics_submission/#histogram
+
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
@@ -279,12 +278,14 @@ Submit your DISTRIBUTION type metrics from the following source:
 | ----------------- | -------------------------- | --------------- | -------------------- |
 | [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE, RATE          |
 
-
 [1]: /developers/metrics/dogstatsd_metrics_submission/#distribution
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Submission types and Datadog in-app types
+
+Find below a summary of all available metric submission sources and methods with the mapping between the corresponding metric submission type and the in-app types:
 
 | Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Types |
 | ----------------- | ------------------------------------ | --------------- | -------------------- |
