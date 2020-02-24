@@ -289,67 +289,58 @@ To notify your dev team if a triggering host has the name `production`, use the 
 
 ### Dynamic links
 
-Use [tag variables](#tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can of provide links to pages within Datadog such as dashboards, the host map, and managed monitors.
+Use [tag variables](#tag-variables) to enable dynamic URL building that links your team to an appropriate resource. For example, you can of provide links to pages within Datadog such as dashboards, the host map, and monitors.
 
 {{< tabs >}}
 {{% tab "Dashboards" %}}
 
-Leverage the `{{host.name}}` [tag variable](#tag-variables) to provide a link to a system dashboard:
+Use the `{{host.name}}` [tag variable](#tag-variables) to provide a link to a system dashboard:
 
 ```text
 https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
 ```
 
-Leverage the `{{host.name}}` [tag variable](#tag-variables) and an `<INTEGRATION_NAME>` to provide a link to an integration dashboard:
+Use the `{{host.name}}` [tag variable](#tag-variables) and an `<INTEGRATION_NAME>` to provide a link to an integration dashboard:
 
 ```text
 https://app.datadoghq.com/dash/integration/<INTEGRATION_NAME>?tpl_var_scope=host:{{host.name}}
 ```
 
 {{% /tab %}}
-{{% tab "Host Map" %}}
+{{% tab "Host map" %}}
 
-To include a link to the HostMap to compare metrics with other similar hosts, use a link like below to be included in your Monitor:
+Use a [tag variable](#tag-variables) such as `{{service.name}}` to provide a link to the host map:
 
 ```text
-https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=avg%3Anometric&filter=cassandra
+https://app.datadoghq.com/infrastructure/map?filter=service:{{service.name}}
 ```
 
-The above link has more customizable options than your standard System Dashboard. Here you have additional variables to define. Most common variables passed into this URL are the following **fillby, sizeby, filter**:
+The host map link is customizable with additional parameters. The most common are:
 
-* `fillby` is defined by adding `fillby:avg:<MetricName>`.
-* `sizeby` is defined by adding `sizeby:avg:<SecondMetricName>`.
-* `filter` is used to specify a specific integration (i.e. Cassandra, mysql, apache, snmp, etc) by adding `filter=<INTEGRATION_NAME>`.
-
-In the example below, colors fill the Hostmap hexagons by `system.cpu.system`. The hexagons are sized by `system.cpu.stolen`, and they are filtered to only include Cassandra hosts.
-
-{{< img src="monitors/notifications/hostmap_url.png" alt="hostmap_url"  style="width:70%;">}}
+| Parameter | Defined with               | Determines                           |
+|-----------|----------------------------|--------------------------------------|
+| `fillby`  | `fillby=avg:<METRIC_NAME>` | The fill color of the host hexagons. |
+| `groupby` | `groupby=<TAG_KEY>`        | The groups for host hexagons.        |
+| `sizeby`  | `sizeby=avg:<METRIC_NAME>` | The size of the host hexagons.       |
 
 {{% /tab %}}
-{{% tab "Manage Monitors" %}}
+{{% tab "Monitors" %}}
 
-To link to a "Manage Monitors" page that displays all of the monitors for the host in question, define a link like below:
+Use the `{{host.name}}` [tag variable](#tag-variables) to provide a link to all monitors related to a specific host:
 
 ```text
 https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
 ```
 
-The above URL links to all monitors for this host. You have other options available to further refine the link.
+The monitors link is customizable with additional parameters. The most common are:
 
-For example, to see all monitors in an Alert State, add `status:Alert` (other statuses are `WARN`, `NO%20DATA`, `OK` and `MUTED`). Below is an example link:
+| Parameter | Example        | Displays                                                                        |
+|-----------|----------------|---------------------------------------------------------------------------------|
+| `status`  | `status:Alert` | Monitors in an alert state (additional statuses: `WARN`, `NO%20DATA`, and `OK`) |
+| `muted`   | `muted: true`  | Muted monitors (use `false` for non-muted monitors)                             |
+| `type`    | `type:log`     | Log monitors (see other [monitor types][1])                                     |
 
-```text
-https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
-```
-
-If you would like all monitors for a specific application or integration, add the following query to the URL `q=<INTEGRATION_NAME>`:
-
-```text
-https://app.datadoghq.com/monitors/manage?q=cassandra
-```
-
-{{< img src="monitors/notifications/monitor_url.png" alt="monitor_url"  style="width:70%;">}}
-
+[1]: /monitors/monitor_types
 {{% /tab %}}
 {{< /tabs >}}
 
