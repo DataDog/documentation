@@ -64,6 +64,8 @@ Here is an example of such a Dashboard:
 
 {{< img src="logs/guide/log_usage_dashboard.png" alt="Log estimated usage dashboard"  style="width:70%;">}}
 
+**Reminder**: The metrics used in this dashboard are estimates and might differ from official billing numbers.
+
 And the JSON definition of this dashboard:
 
 ```
