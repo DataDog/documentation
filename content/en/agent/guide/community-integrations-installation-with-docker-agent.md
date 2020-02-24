@@ -49,7 +49,7 @@ To install the `<INTEGRATION_NAME>` check on your host:
 7. Configure your integration like [any other packaged integration][3].
 8. [Restart the Agent][4].
 
-[1]: https://docs.datadoghq.com/developers/integrations/new_check_howto/#developer-toolkit
+[1]: /developers/integrations/new_check_howto/#developer-toolkit
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: /getting_started/integrations
 [4]: /agent/guide/agent-commands/#restart-the-agent
@@ -91,7 +91,7 @@ To install the `<INTEGRATION_NAME>` check on your host:
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-extras
-[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /getting_started/integrations
 [5]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}

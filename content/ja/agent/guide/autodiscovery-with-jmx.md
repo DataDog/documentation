@@ -63,7 +63,7 @@ Datadog Agent で使用する JMX ベースのインテグレーションコン�
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /ja/agent/autodiscovery/template_variables
-[3]: https://docs.datadoghq.com/ja/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
+[3]: /ja/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
 [4]: /ja/agent/autodiscovery/?tab=agent#docker-autodiscovery
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
@@ -152,7 +152,7 @@ Datadog Agent で使用する JMX ベースのインテグレーションコン�
 [24]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
 [25]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [26]: /ja/agent/autodiscovery/template_variables
-[27]: https://docs.datadoghq.com/ja/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
+[27]: /ja/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
 [28]: /ja/agent/autodiscovery/?tab=containerizedagent#docker-autodiscovery
 {{% /tab %}}
 {{< /tabs >}}

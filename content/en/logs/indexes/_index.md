@@ -121,6 +121,6 @@ Update or remove this quota at any time when editing the Index:
 [14]: /logs/processing/processors/?tab=ui#geoip-parser
 [15]: /tracing/connect_logs_and_traces/
 [16]: /logs/processing/processors/?tab=ui#trace-remapper
-[17]: https://docs.datadoghq.com/logs/live_tail/#overview
-[18]: https://docs.datadoghq.com/logs/archives/
-[19]: https://docs.datadoghq.com/logs/logs_to_metrics/
+[17]: /logs/live_tail/#overview
+[18]: /logs/archives/
+[19]: /logs/logs_to_metrics/

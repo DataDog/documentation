@@ -77,12 +77,12 @@ Datadog では、ユーザー自身で継続的にサービスの健全性を監
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/monitors/monitor_types/anomaly/
+[1]: /ja/monitors/monitor_types/anomaly/
 [2]: https://app.datadoghq.com/monitors#/create
 [3]: https://app.datadoghq.com/monitors#create/apm
 [4]: /ja/tracing/visualization/#resources
 [5]: /ja/tracing/visualization/#services
-[6]: https://docs.datadoghq.com/ja/monitors/monitor_types/anomaly/#faq
-[7]: https://docs.datadoghq.com/ja/monitors/notifications/?tab=is_alertis_warning
+[6]: /ja/monitors/monitor_types/anomaly/#faq
+[7]: /ja/monitors/notifications/?tab=is_alertis_warning
 [8]: https://app.datadoghq.com/apm/services
 [9]: https://app.datadoghq.com/service/map
