@@ -52,12 +52,13 @@ To change the metric type or name, a new metric must be created.
 
 Usage metrics are estimates of your current Datadog usage in near real-time. They enable you to:
 
-* Graph your estimated usage
-* Create monitors around your estimated usage
-* Get instant alerts of spikes or drops in your usage
-* Assess the potential impact of code changes on your usage in near real-time
+* Graph your estimated usage.
+* Create monitors around your estimated usage.
+* Get instant alerts of spikes or drops in your usage.
+* Assess the potential impact of code changes on your usage in near real-time.
 
-Log Management usage metrics come with three dimensions that can be used for more granular monitoring:
+Log Management usage metrics come with three tags that can be used for more granular monitoring:
+
 - `datadog_index` indicates the routing query that matches a log to an intended index
 - `datadog_is_excluded` indicates whether or not a log matches an exclusion query
 - `service` the service attribute of the log event
