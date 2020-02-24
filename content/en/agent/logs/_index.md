@@ -48,6 +48,7 @@ For more details about the compression perfomances and batching size, refer to t
 
 [1]: /agent/guide/agent-configuration-files
 [2]: /agent/logs/#send-logs-over-https
+
 {{% /tab %}}
 {{% tab "HTTP uncompressed" %}}
 

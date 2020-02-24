@@ -228,26 +228,34 @@ main:
     parent: agent_cluster
     identifier: cluster_agent_external_metrics
     weight: 403
+  - name: クラスターチェック
+    url: agent/cluster_agent/clusterchecks/
+    parent: agent_cluster
+    weight: 404
+  - name: Endpoints Checks
+    url: agent/cluster_agent/endpointschecks/
+    parent: agent_cluster
+    weight: 405
   - name: コマンド & Options
     url: agent/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: agent_cluster
-    weight: 404
+    weight: 406
   - name: クラスターメタデータプロバイダー
     url: agent/cluster_agent/metadata_provider/
     identifier: cluster_agent_metadata_provider
     parent: agent_cluster
-    weight: 405
+    weight: 407
   - name: ビルド
     url: agent/cluster_agent/build/
     identifier: cluster_agent_build
     parent: agent_cluster
-    weight: 406
+    weight: 408
   - name: トラブルシューティング
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 407
+    weight: 409
   - name: オートディスカバリー
     url: agent/autodiscovery/
     identifier: agent_autodiscovery
@@ -281,14 +289,6 @@ main:
     url: agent/autodiscovery/management/
     parent: agent_autodiscovery
     weight: 506
-  - name: クラスターチェック
-    url: agent/autodiscovery/clusterchecks/
-    parent: agent_autodiscovery
-    weight: 507
-  - name: Endpoints Checks
-    url: agent/autodiscovery/endpointschecks/
-    parent: agent_autodiscovery
-    weight: 508
   - name: トラブルシューティング
     url: agent/autodiscovery/troubleshooting/
     parent: agent_autodiscovery
@@ -649,7 +649,7 @@ main:
     weight: 7
     parent: アラート設定
     identifier: SLO
-  - name: SLO モニタリング
+  - name: SLOモニタリング
     url: monitors/service_level_objectives/monitor/
     parent: slos
     weight: 7.1
@@ -721,11 +721,6 @@ main:
     parent: tracing_setup
     identifier: tracing_setup_cpp
     weight: 209
-  - name: Android
-    url: tracing/setup/android/
-    parent: tracing_setup
-    identifier: tracing_setup_android
-    weight: 210
   - name: Envoy
     url: tracing/setup/envoy/
     parent: tracing_setup
@@ -1208,7 +1203,7 @@ main:
     parent: dev_tools_events
     identifier: dev_tools_events_api
     weight: 304
-  - name: Service Checks
+  - name: サービスチェック
     url: developers/service_checks/
     parent: dev_tools
     identifier: dev_tools_service_check

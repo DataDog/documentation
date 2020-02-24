@@ -63,7 +63,7 @@ L'exemple d'intégration Datadog/Kafka ci-dessous fait appel à JMX pour recueil
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /fr/agent/autodiscovery/template_variables
-[3]: https://docs.datadoghq.com/fr/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
+[3]: /fr/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
 [4]: /fr/agent/autodiscovery/?tab=agent#docker-autodiscovery
 {{% /tab %}}
 {{% tab "Agent conteneurisé" %}}
@@ -152,7 +152,7 @@ L'exemple d'intégration Datadog/Kafka ci-dessous fait appel à JMX pour recueil
 [24]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
 [25]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
 [26]: /fr/agent/autodiscovery/template_variables
-[27]: https://docs.datadoghq.com/fr/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
+[27]: /fr/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
 [28]: /fr/agent/autodiscovery/?tab=containerizedagent#docker-autodiscovery
 {{% /tab %}}
 {{< /tabs >}}
