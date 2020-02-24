@@ -19,7 +19,7 @@ private: true
     {{< nextlink href="agent/guide/python-3" >}}Python 2 to 3 Custom Check Migration{{< /nextlink >}}
     {{< nextlink href="agent/guide/cluster-agent-custom-metrics-server" >}}Cluster Agent and Horizontal Pod Autoscaling: Custom Metrics Server{{< /nextlink >}}
     {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}Autodiscovery with JMX{{< /nextlink >}}
-    {{< nextlink href="agent/guide/private-link" >}}Forward your logs, metrics, and API calls from the AWS us-east-1 region to Datadog with a AWS PrivateLink{{< /nextlink >}}
+    {{< nextlink href="agent/guide/private-link" >}}Forward your logs, metrics, and API calls from the AWS us-east-1 region to Datadog with AWS PrivateLink{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent 5 Guides:" >}}
