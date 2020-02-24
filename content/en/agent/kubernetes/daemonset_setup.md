@@ -297,7 +297,7 @@ Mount the docker socket into the Datadog Agent:
   (...)
 ```
 
-**Note**: Mounting only the `docker.sock` socket instead of the whole directory containing it prevents the agent from recovering after a docker daemon restart.
+**Note**: Mounting only the `docker.sock` socket instead of the whole directory containing it prevents the Agent from recovering after a Docker daemon restart.
 
 {{% /tab %}}
 {{< /tabs >}}
