@@ -20,9 +20,9 @@ Maintaining service level agreements with external or internal customers often r
 
 Create a new [Synthetics API test][3] upon `http://example.com/`:
 
-1. [Go to the new Synthetics API page][4].
+1. [Go to the new Synthetics API test page][4].
 2. Enter `http://example.com/` in the **URL** field.
-3. Click **Test URL** to automatically populate the assertions to monitor:
+3. "Click ** Test URL** to automatically populate assertions about the health of your website:
 
     {{< img src="synthetics/guide/uptime_slo/synthetics_test_config.png" alt="Synthetics test configuration" >}}
 
@@ -38,7 +38,7 @@ Create a new [Synthetics API test][3] upon `http://example.com/`:
 
 ### Create your SLO
 
-1. [Create a new SLO][5] to track your Synthetics test results.
+1. [Create a new SLO][5] to track your website's uptime based on your Synthetics test results.
 2. Select **Monitor based** and enter your Synthetics test name:
 
     {{< img src="synthetics/guide/uptime_slo/slo_config.png" alt="SLO configuration" >}}
