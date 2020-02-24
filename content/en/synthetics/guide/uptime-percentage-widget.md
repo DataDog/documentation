@@ -1,7 +1,6 @@
 ---
 title: Website Uptime monitoring with SLO
 kind: guide
-author: 'Boyan Syarov'
 aliases:
     - /graphing/guide/uptime-percentage-widget
     - /dashboards/guide/uptime-percentage-widget
@@ -22,7 +21,7 @@ Create a new [Synthetics API test][3] upon `http://example.com/`:
 
 1. [Go to the new Synthetics API test page][4].
 2. Enter `http://example.com/` in the **URL** field.
-3. "Click ** Test URL** to automatically populate assertions about the health of your website:
+3. Click **Test URL** to automatically populate assertions about the health of your website:
 
     {{< img src="synthetics/guide/uptime_slo/synthetics_test_config.png" alt="Synthetics test configuration" >}}
 
@@ -30,7 +29,7 @@ Create a new [Synthetics API test][3] upon `http://example.com/`:
 
     {{< img src="synthetics/guide/uptime_slo/synthetics_test_assertions.png" alt="Synthetics test assertions" >}}
 
-5. Optionally - Define a verbose notification message:
+5. Optionally - [Define a verbose notification message][5]:
 
     {{< img src="synthetics/guide/uptime_slo/synthetics_message.png" alt="Synthetics test message" >}}
 
@@ -38,7 +37,7 @@ Create a new [Synthetics API test][3] upon `http://example.com/`:
 
 ### Create your SLO
 
-1. [Create a new SLO][5] to track your website's uptime based on your Synthetics test results.
+1. [Create a new SLO][6] to track your website's uptime based on your Synthetics test results.
 2. Select **Monitor based** and enter your Synthetics test name:
 
     {{< img src="synthetics/guide/uptime_slo/slo_config.png" alt="SLO configuration" >}}
@@ -55,7 +54,7 @@ Create a new [Synthetics API test][3] upon `http://example.com/`:
 
 ### Import your SLO in your Dashboard
 
-1. [Create a new Dashboard][6] to host your SLO widget:
+1. [Create a new Dashboard][7] to host your SLO widget:
 2. Drag and drop the SLO summary widget on your board.
 3. Select the SLO that you defined just above:
 
@@ -76,5 +75,6 @@ Create a new [Synthetics API test][3] upon `http://example.com/`:
 [2]: /dashboards/widgets/slo/
 [3]: https://app.datadoghq.com/synthetics/list
 [4]: https://dd-corpsite.datadoghq.com/synthetics/create
-[5]: https://app.datadoghq.com/slo/new
-[6]: https://app.datadoghq.com/dashboard/lists
+[5]: /monitors/notifications/
+[6]: https://app.datadoghq.com/slo/new
+[7]: https://app.datadoghq.com/dashboard/lists
