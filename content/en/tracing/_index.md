@@ -40,7 +40,7 @@ Datadog Application Performance Monitoring (APM or tracing) provides you with de
     {{< nextlink href="/tracing/app_analytics/" >}}<u>App Analytics</u>: Filter application performance metrics and Analyzed Spans by user-defined tags.{{< /nextlink >}}
     {{< nextlink href="/tracing/connect_logs_and_traces/" >}}<u>Connect Log and Traces</u>: Connect your logs and traces to correlate them in Datadog.{{< /nextlink >}}
     {{< nextlink href="/tracing/runtime_metrics/" >}}<u>Runtime Metrics</u>: Gain additional insights into an application's performance with the runtime metrics associated to your traces.{{< /nextlink >}}
-    {{< nextlink href="/tracing/manual_intrumentation/" >}}<u>Manual Instrumentation</u>: Manually instrument your application to send custom traces to Datadog.{{< /nextlink >}}
+    {{< nextlink href="/tracing/manual_instrumentation/" >}}<u>Manual Instrumentation</u>: Manually instrument your application to send custom traces to Datadog.{{< /nextlink >}}
     {{< nextlink href="/tracing/opentracing/" >}}<u>OpenTracing</u>: Implement the Opentracing standard with Datadog APM tracers.{{< /nextlink >}}
     {{< nextlink href="/tracing/visualization/" >}}<u>Use the APM UI</u>: Visualize your APM Data with out of the box dashboards and monitor on key metrics. {{< /nextlink >}}
     {{< nextlink href="/tracing/guide/" >}}<u>Guides</u>: Additional helpful articles about APM & Distributed Tracing.{{< /nextlink >}}

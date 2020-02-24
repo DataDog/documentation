@@ -9,3 +9,6 @@ initialize(**options)
 
 # Delete a monitor
 api.Monitor.delete(2081)
+
+# Force delete a monitor to override warnings
+api.Monitor.delete(2081, force=True)

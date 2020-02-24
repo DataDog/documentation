@@ -27,6 +27,7 @@ version: 1
 Datadog を Akamai DataStream と接続すると、CDN の健全性、レイテンシー、オフロード、エラーなどのメトリクスを表示できます。
 
 ## セットアップ
+
 ### インストール
 
 Datadog の [Akamai インテグレーションタイル][1]を使用して、インテグレーションをインストールします。
@@ -49,6 +50,7 @@ Datadog の [Akamai インテグレーションタイル][1]を使用して、�
 </div>
 
 ## 収集データ
+
 ### メトリクス
 {{< get-metrics-from-git "akamai_datastream" >}}
 
@@ -62,6 +64,7 @@ Akamai インテグレーションには、イベントは含まれません。
 Akamai インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
+
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/akamai-datastream

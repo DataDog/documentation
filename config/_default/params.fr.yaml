@@ -8,3 +8,4 @@ announcement_banner:
   mobile_message: "Nouvelles annonces dévoilées à la conférence Dash\_!"
   link: 'https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/'
   exclude: []
+translate_status_banner: "This translation isn't up to date, for the latest english version click here"

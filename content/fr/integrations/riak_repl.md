@@ -42,28 +42,28 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 1. Installez le [kit de développement][5].
 2. Clonez le dépôt integrations-extras :
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. Pour générer le paquet `riak_repl`, exécutez :
 
-    ```
-    ddev -e release build riak_repl
-    ```
+   ```shell
+   ddev -e release build riak_repl
+   ```
 
 5. [Téléchargez et lancez l'Agent Datadog][6].
 6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
-    ```
-    datadog-agent integration install -w <PATH_OF_RIAK_REPL_ARTIFACT_>/<RIAK_REPL_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_RIAK_REPL_ARTIFACT_>/<RIAK_REPL_ARTIFACT_NAME>.whl
+   ```
 
 7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][7].
 

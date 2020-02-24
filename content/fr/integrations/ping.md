@@ -54,7 +54,7 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 2. Clonez le dépôt integrations-extras :
 
     ```
-    git clone https://github.com/DataDog/integrations-extras.git.
+    git clone https://github.com/DataDog/integrations-extras.git
     ```
 
 3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :

@@ -280,26 +280,34 @@ main:
     parent: "agent_cluster"
     identifier: "cluster_agent_external_metrics"
     weight: 403
+  - name: "Cluster Checks"
+    url: "agent/cluster_agent/clusterchecks/"
+    parent: "agent_cluster"
+    weight: 404
+  - name: "Endpoints Checks"
+    url: "agent/cluster_agent/endpointschecks/"
+    parent: "agent_cluster"
+    weight: 405
   - name: "Commands & Options"
     url: "agent/cluster_agent/commands/"
     identifier: "cluster_agent_commands"
     parent: "agent_cluster"
-    weight: 404
+    weight: 406
   - name: "Cluster metadata provider"
     url: "agent/cluster_agent/metadata_provider/"
     identifier: "cluster_agent_metadata_provider"
     parent: "agent_cluster"
-    weight: 405
+    weight: 407
   - name: "Build"
     url: "agent/cluster_agent/build/"
     identifier: "cluster_agent_build"
     parent: "agent_cluster"
-    weight: 406
+    weight: 408
   - name: "Troubleshooting"
     url: "agent/cluster_agent/troubleshooting/"
     identifier: "cluster_agent_troubleshooting"
     parent: "agent_cluster"
-    weight: 407
+    weight: 409
 
   ## AGENT - Autodiscovery
 
@@ -336,14 +344,6 @@ main:
     url: "agent/autodiscovery/management/"
     parent: "agent_autodiscovery"
     weight: 506
-  - name: "Cluster Checks"
-    url: "agent/autodiscovery/clusterchecks/"
-    parent: "agent_autodiscovery"
-    weight: 507
-  - name: "Endpoints Checks"
-    url: "agent/autodiscovery/endpointschecks/"
-    parent: "agent_autodiscovery"
-    weight: 508
   - name: "Troubleshooting"
     url: "agent/autodiscovery/troubleshooting/"
     parent: "agent_autodiscovery"
@@ -680,65 +680,83 @@ main:
   - name: "Host"
     url: "monitors/monitor_types/host/"
     parent: "monitor_types"
+    identifier: "monitor_types_host"
     weight: 101
   - name: "Metric"
     url: "monitors/monitor_types/metric/"
     parent: "monitor_types"
+    identifier: "monitor_types_metrics"
     weight: 102
   - name: "Anomaly"
     url: "monitors/monitor_types/anomaly/"
     parent: "monitor_types"
+    identifier: "monitor_types_anomaly"
     weight: 103
   - name: "Outlier"
     url: "monitors/monitor_types/outlier/"
     parent: "monitor_types"
+    identifier: "monitor_types_outlier"
     weight: 104
   - name: "Forecast"
     url: "monitors/monitor_types/forecasts/"
     parent: "monitor_types"
+    identifier: "monitor_types_forecasts"
     weight: 105
   - name: "Integration"
     url: "monitors/monitor_types/integration/"
     parent: "monitor_types"
+    identifier: "monitor_types_integration"
     weight: 106
   - name: "Live Process"
     url: "monitors/monitor_types/process/"
     parent: "monitor_types"
+    identifier: "monitor_types_process"
     weight: 107
   - name: "Process Check"
     url: "monitors/monitor_types/process_check/"
     parent: "monitor_types"
+    identifier: "monitor_types_process_check"
     weight: 108
   - name: "Network"
     url: "monitors/monitor_types/network/"
     parent: "monitor_types"
+    identifier: "monitor_types_network"
     weight: 109
   - name: "Custom Check"
     url: "monitors/monitor_types/custom_check/"
     parent: "monitor_types"
+    identifier: "monitor_types_custom_check"
     weight: 110
   - name: "Event"
     url: "monitors/monitor_types/event/"
     parent: "monitor_types"
+    identifier: "monitor_types_event"
     weight: 111
   - name: "Logs"
     url: "monitors/monitor_types/log/"
     parent: "monitor_types"
+    identifier: "monitor_types_log"
     weight: 112
   - name: "APM"
     url: "monitors/monitor_types/apm/"
     parent: "monitor_types"
+    identifier: "monitor_types_apm"
     weight: 113
-    identifier: "monitor_apm"
+  - name: "Real User Monitoring"
+    url: "monitors/monitor_types/real_user_monitoring/"
+    parent: "monitor_types"
+    identifier: "monitor_types_rum"
+    weight: 114
   - name: "Watchdog"
     url: "monitors/monitor_types/watchdog/"
     parent: "monitor_types"
-    weight: 114
-    identifier: "monitor_watchdog"
+    identifier: "monitor_types_watchdog"
+    weight: 115
   - name: "Composite"
     url: "monitors/monitor_types/composite/"
     parent: "monitor_types"
-    weight: 115
+    identifier: "monitor_types_composite"
+    weight: 116
 
 
   ## MONITORS -  Manage monitor
@@ -776,12 +794,12 @@ main:
     parent: "alerting"
     identifier: "slos"
 
-  - name: "Monitor SLO"
+  - name: "Monitor-based SLOs"
     url: "monitors/service_level_objectives/monitor/"
     parent: "slos"
     weight: 7.1
 
-  - name: "Event SLO"
+  - name: "Event-based SLOs"
     url: "monitors/service_level_objectives/event/"
     parent: "slos"
     weight: 7.2
@@ -821,48 +839,68 @@ main:
   - name: "Java"
     url: "tracing/setup/java/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_java"
     weight: 201
   - name: "Python"
     url: "tracing/setup/python/"
     parent: "tracing_setup"
-    identifier: "python"
+    identifier: "tracing_setup_python"
     weight: 202
   - name: "Ruby"
     url: "tracing/setup/ruby/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_ruby"
     weight: 203
   - name: "Go"
     url: "tracing/setup/go/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_go"
     weight: 204
   - name: "Node.js"
     url: "tracing/setup/nodejs/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_nodejs"
     weight: 205
-  - name: ".NET"
-    url: "tracing/setup/dotnet/"
+  - name: ".NET Framework"
+    url: "tracing/setup/dotnet-framework/"
     parent: "tracing_setup"
+    identifier: "tracing_setup_dotnet_framework"
     weight: 206
+  - name: ".NET Core"
+    url: "tracing/setup/dotnet-core/"
+    parent: "tracing_setup"
+    identifier: "tracing_setup_dotnet_core"
+    weight: 207
   - name: "PHP"
     url: "tracing/setup/php/"
     parent: "tracing_setup"
-    weight: 207
+    identifier: "tracing_setup_php"
+    weight: 208
   - name: "C++"
     url: "tracing/setup/cpp/"
     parent: "tracing_setup"
-    weight: 208
+    identifier: "tracing_setup_cpp"
+    weight: 209
+# - name: "Android"
+#   url: "tracing/setup/android/"
+#   parent: "tracing_setup"
+#   identifier: "tracing_setup_android"
+#   weight: 210
   - name: "Envoy"
     url: "tracing/setup/envoy/"
     parent: "tracing_setup"
-    weight: 209
+    identifier: "tracing_setup_envoy"
+    weight: 211
   - name: "NGINX"
     url: "tracing/setup/nginx/"
     parent: "tracing_setup"
-    weight: 210
+    identifier: "tracing_setup_nginx"
+    weight: 212
   - name: "Istio"
     url: "tracing/setup/istio/"
+    identifier: "tracing_setup_istio"
     parent: "tracing_setup"
-    weight: 211
+    weight: 213
 
   ## TRACING - App analytics
 
@@ -910,12 +948,89 @@ main:
   - name: "Manual Instrumentation"
     url: "tracing/manual_instrumentation/"
     parent: "tracing"
+    identifier: "tracing_manual_instrumentation"
     weight: 7
+  - name: "Java"
+    url: "tracing/manual_instrumentation/java"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_java"
+    weight: 701
+  - name: "Python"
+    url: "tracing/manual_instrumentation/python"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_python"
+    weight: 702
+  - name: "Ruby"
+    url: "tracing/manual_instrumentation/ruby"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_ruby"
+    weight: 703
+  - name: "Go"
+    url: "tracing/manual_instrumentation/go"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_go"
+    weight: 704
+  - name: "NodeJS"
+    url: "tracing/manual_instrumentation/nodejs"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_nodejs"
+    weight: 705
+  - name: "PHP"
+    url: "tracing/manual_instrumentation/php"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_php"
+    weight: 706
+  - name: "C++"
+    url: "tracing/manual_instrumentation/cpp"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_cpp"
+    weight: 707
+  - name: ".NET"
+    url: "tracing/manual_instrumentation/dotnet"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_dotnet"
+    weight: 708
 
   - name: "OpenTracing"
     url: "tracing/opentracing/"
     parent: "tracing"
+    identifier: "tracing_opentracing"
     weight: 8
+  - name: "Java"
+    url: "tracing/opentracing/java"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_java"
+    weight: 801
+  - name: "Python"
+    url: "tracing/opentracing/python"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_python"
+    weight: 802
+  - name: "Go"
+    url: "tracing/opentracing/go"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_go"
+    weight: 803
+  - name: "PHP"
+    url: "tracing/opentracing/php"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_php"
+    weight: 804
+  - name: "Ruby"
+    url: "tracing/opentracing/ruby"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_ruby"
+    weight: 805
+  - name: ".NET"
+    url: "tracing/opentracing/dotnet"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_dotnet"
+    weight: 806
+  - name: "NodeJS"
+    url: "tracing/opentracing/nodejs"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_nodejs"
+    weight: 807
 
   ## TRACING - Using the APM UI
 
@@ -1184,10 +1299,14 @@ main:
     url: "synthetics/browser_tests/actions"
     parent: "synthetics_browser_tests"
     weight: 201
+  - name: "Test Results"
+    url: "synthetics/browser_tests/test_results"
+    parent: "synthetics_browser_tests"
+    weight: 202
   - name: "Advanced Options"
     url: "synthetics/browser_tests/advanced_options"
     parent: "synthetics_browser_tests"
-    weight: 202
+    weight: 203
 
   - name: "Private Locations"
     url: "synthetics/private_locations"
@@ -1202,10 +1321,6 @@ main:
     parent: "synthetics"
     identifier: "synthetics_apm"
     weight: 4
-  - name: "Browser Tests"
-    url: "synthetics/apm/browser_tests"
-    parent: "synthetics_apm"
-    weight: 401
 
   - name: "Identify Synthetics Bots"
     url: "synthetics/identify_synthetics_bots/"
@@ -1322,7 +1437,7 @@ main:
     identifier: "npm_installation"
     weight: 1
   - name: "Network Page"
-    url: "network_performance_monitoring/network_table"
+    url: "network_performance_monitoring/network_page"
     parent: "npm"
     identifier: "npm_page"
     weight: 2
@@ -1367,6 +1482,10 @@ main:
     url: "developers/dogstatsd/data_aggregation/"
     parent: "dev_tools_dogstatsd"
     weight: 104
+  - name: "DogStatsD Mapper"
+    url: "developers/dogstatsd/dogstatsd_mapper/"
+    parent: "dev_tools_dogstatsd"
+    weight: 105
 
   ## DEVELOPERS - Metrics
 

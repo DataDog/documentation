@@ -187,6 +187,28 @@ func main() {
 
 ```
 
+## Configure APM Environment Name
+
+The [APM environment name][58] may be configured [in the agent][59] or using the [WithEnv][60] start option of the tracer.
+
+```go
+package main
+
+import (
+    "os"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    tracer.Start(tracer.WithEnv("<ENVIRONMENT>"))
+    defer tracer.Stop()
+
+    // ...
+}
+```
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -248,3 +270,6 @@ func main() {
 [55]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [56]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [57]: https://github.com/openzipkin/b3-propagation
+[58]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[59]: /getting_started/tracing/#environment-name
+[60]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithEnv

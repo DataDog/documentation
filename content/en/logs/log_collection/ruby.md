@@ -194,7 +194,7 @@ end
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/roidrage/lograge
-[2]: https://docs.datadoghq.com/logs/?tab=ussite#reserved-attributes
+[2]: /logs/?tab=ussite#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation
 [5]: /agent/logs

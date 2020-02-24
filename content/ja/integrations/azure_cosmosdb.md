@@ -24,22 +24,27 @@ Azure Cosmos DB は、ドキュメント、キー/値、ワイドカラム、グ
 Datadog Azure インテグレーションを使用して、Cosmos DB からメトリクスを収集できます。
 
 ## セットアップ
+
 ### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
 
 ## 収集データ
+
 ### メトリクス
 {{< get-metrics-from-git "azure_cosmosdb" >}}
 
 
 ### イベント
+
 Azure Cosmos DB インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
+
 Azure Cosmos DB インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
+
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/

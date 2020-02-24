@@ -36,8 +36,8 @@ supported_os:
 
 Recueillez des métriques du service MapReduce en temps réel pour :
 
-* Visualiser et surveiller les statuts de MapReduce
-* Être informé des failovers et des événements de MapReduce
+- Visualiser et surveiller les statuts de MapReduce
+- Être informé des failovers et des événements de MapReduce
 
 ## Implémentation
 
@@ -60,7 +60,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                                                                         |
-|----------------------|-----------------------------------------------------------------------------------------------|
+| -------------------- | --------------------------------------------------------------------------------------------- |
 | `<NOM_INTÉGRATION>` | `mapreduce`                                                                                   |
 | `<CONFIG_INIT>`      | vide ou `{}`                                                                                 |
 | `<CONFIG_INSTANCE>`  | `{"resourcemanager_uri": "https://%%host%%:8088", "cluster_name":"<NOM_CLUSTER_MAPREDUCE>"}` |
@@ -70,14 +70,17 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 [Lancez la sous-commande status de l'Agent][7] et cherchez `mapreduce` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "mapreduce" >}}
 
 
 ### Événements
+
 Le check Mapreduce n'inclut aucun événement.
 
 ### Checks de service
+
 **mapreduce.resource_manager.can_connect**
 
 Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Resource Manager.
@@ -89,15 +92,15 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Application 
 Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 ## Pour aller plus loin
 
-* [Vue d'ensemble de l'architecture Hadoop][10]
-* [Comment surveiller des métriques Hadoop][11]
-* [Comment recueillir des métriques Hadoop][12]
-* [Comment surveiller Hadoop avec Datadog][13]
-
+- [Vue d'ensemble de l'architecture Hadoop][10]
+- [Comment surveiller des métriques Hadoop][11]
+- [Comment recueillir des métriques Hadoop][12]
+- [Comment surveiller Hadoop avec Datadog][13]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mapreduce/images/mapreduce_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent

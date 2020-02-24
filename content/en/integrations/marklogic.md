@@ -8,7 +8,8 @@ is_public: true
 kind: integration
 name: marklogic
 public_title: Datadog-Marklogic Integration
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/marklogic.md"]
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/marklogic.md']
 short_description: Gather your logs from Marklogic and send them to Datadog.
 ---
 
@@ -26,7 +27,7 @@ The Marklogic integration is included in the [Datadog Agent][1] package, so you 
 
 #### Log Collection
 
-**Available for Agent >6.0**
+_Available for Agent versions >6.0_
 
 1. Collecting logs is disabled by default in the Datadog Agent. Enable it in `datadog.yaml`:
 
@@ -36,16 +37,16 @@ The Marklogic integration is included in the [Datadog Agent][1] package, so you 
 
 2. Add this configuration block to your `marklogic.d/conf.yaml` file to start collecting your MarkLogic Logs:
 
-    ```
-      logs:
-          - type: file
-            path: <MARKLOGIC_LOG_FILE_PATH>
-            source: marklogic
-            sourcecategory: database
-            service: <SERVICE>
+    ```yaml
+    logs:
+        - type: file
+          path: '<MARKLOGIC_LOG_FILE_PATH>'
+          source: marklogic
+          sourcecategory: database
+          service: '<SERVICE>'
     ```
 
-    Change the `path` and `service` parameter values and configure them for your environment.
+     Change the `path` and `service` parameter values and configure them for your environment.
 
 3. [Restart the Agent][2].
 

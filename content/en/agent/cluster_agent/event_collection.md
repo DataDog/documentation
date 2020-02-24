@@ -8,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/autodiscovery/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
 - link: "agent/kubernetes/daemonset_setup"
@@ -37,4 +37,5 @@ Enabling the leader election in this way ensures that only one Cluster Agent col
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent/cluster_agent/setup
