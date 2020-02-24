@@ -12,6 +12,19 @@ Actions are a series of steps that you can record for a browser test, which you 
 
 **Note**: The default timeout for each step is approximately 60 seconds. You can override the timeout with [advanced options][2].
 
+## Click
+
+Datadog’s extension automatically records clicks on your page. 
+
+You can specify the type of click you want your browser test to perform at execution by selecting the click type of interest on your step:
+
+{{< img src="synthetics/browser_tests/browser_test_click_step.mp4" alt="Browser Test Click Step" video="true" width="60%">}}
+
+You can choose between:
+
+* Primary click (left) which corresponds to a left click
+* Double click
+* Contextual click (right click)
 
 ## Assertion
 
@@ -39,11 +52,46 @@ The navigation action allows you to:
 * Go to an email and click on a link. This step allows you to access your Synthetics mail inbox after creating an [email variable][3].
 * Choose the email you are interested in and click the link you want your browser test to click on.
 
-## Hover
+## Special Actions
+
+Most of the actions are recorded using our extension. Some actions are however not recorded automatically and you therefore need to explicitly add a step about it using the **Special Actions** menu located at the top left hand corner of the recorder.
+
+### Hover
 
 This browser test step isn’t added through an actual hovering mechanism (otherwise each element you are hovering would be added as a step) but using a dedicated action with a click.
 
 After selecting the Hover action, click on the element you want to choose to create a new step.
+
+### Press Key
+
+You can simulate users entering keystrokes using **Press Key** steps. The below keys can be recorded using our extension:
+
+* Enter
+* Arrows
+* Tab (outside a form)
+* Escape 
+* Backspace
+
+If you need your browser test to press keys that are not being automatically recorded, you can leverage the **Press Key** special action and specify which values need to be pressed in the value box.
+
+{{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Browser Test Press Key"  style="width:60%;">}}
+
+The below modifiers can also be applied to the inputted value:
+
+* Alt
+* Control
+* Meta
+* Shift
+
+### Scroll
+
+Your browser test automatically scrolls to the element it needs to interact with. In most cases you consequently do not need to add a manual scroll. The scroll step should only be added when needed to trigger an additional network request such as an infinite scroll.
+
+{{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="Browser Test Scroll Step"  style="width:60%;">}}
+
+You need to specify the number of pixels your browser test should scroll vertically or horizontally.
+
+By default, our scroll step will scroll on the whole page. If you however need to scroll a specific element (for instance a specific div), you can leverage the **Target Element** option in order to select the element you want your browser test to scroll at test execution.
 
 ## Upload
 
