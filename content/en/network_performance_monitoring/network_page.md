@@ -45,11 +45,9 @@ Facet panels mirror the tags in your search bar query. Switch between the facet 
 
 #### Custom Facets
 
-Aggregate and filter your traffic data by any tags in Datadog network page. A whitelist of tags is provided by default, which you can find in the search bar dropdown menu.
+Aggregate and filter your traffic data by any tags in Datadog network page. A whitelist of tags is provided by default, which you can find in the search bar dropdown menu:
 
 {{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Drop down menu"  style="width:90%;">}}
-
-A whitelist of tags is provided by default, which you can find in the search bar dropdown menu.
 
 Whitelisted tags include `service`, `availability zone`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
