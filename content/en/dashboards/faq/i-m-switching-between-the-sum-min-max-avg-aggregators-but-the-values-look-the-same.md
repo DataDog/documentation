@@ -22,12 +22,12 @@ For example, let's say you break down web requests by `host` and `path`, where y
 
 You'll get different results per aggregation method when grouping by `host`, since there are two series per `host` that must be combined.
 
-| Query                          | host: a  | host: b  | 
-|--------------------------------|----------|----------|
-| sum:web.requests(*) by {host}  | 8        | 10       |
-| min:web.requests(*) by {host}  | 3        | 2        |
-| max:web.requests(*) by {host}  | 5        | 8        |
-| avg:web.requests(*) by {host}  | 4        | 5        |
+| Query                            | host: a  | host: b  | 
+|----------------------------------|----------|----------|
+| `sum:web.requests(*) by {host}`  | 8        | 10       |
+| `min:web.requests(*) by {host}`  | 3        | 2        |
+| `max:web.requests(*) by {host}`  | 5        | 8        |
+| `avg:web.requests(*) by {host}`  | 4        | 5        |
 
 In this same example if you grouped by `host` **and** `path` this will result in 4 series where the `sum`/`min`/`max`/`avg` will be the same per series. As that is the most granular level for this data.
 
