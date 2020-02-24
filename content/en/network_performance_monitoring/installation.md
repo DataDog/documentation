@@ -179,6 +179,7 @@ spec:
                               - SYS_RESOURCE
                               - SYS_PTRACE
                               - NET_ADMIN
+                              - IPC_LOCK
                   command:
                       - /opt/datadog-agent/embedded/bin/system-probe
                   env:
