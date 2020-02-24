@@ -41,7 +41,7 @@ In this example, a browser test is configured to map a user's journey from addin
         An alert is triggered if your test fails for 0 minutes from any 3 of 13 locations
         ```
 
-        - If you want to be sure that a test execution is only considered a failure after two failed test runs, specify how many times you want your test to be re-run before being actually considered a failure:
+        - To ensure that a test execution is only considered a failure after two failed test runs, specify how many times you want your test to be re-run before being considered a failure:
 
         ```text
         Retry 1 time before location is marked as failed
@@ -63,7 +63,7 @@ For example, to record test steps that map a user's journey from adding an item 
 1. Navigate to one of the furniture sections, for instance **Chairs**, and select **Add to cart**.
 2. Click on **Cart**, click **Checkout**.
 3. Add the **assertion** “Test text is present on the active page” to confirm the words “Thank you” are on the page.
-   **Note**: Your last browser test step must be an **assertion**. This will ensure your test ended up on the expected page and found the expected element.
+   **Note**: Your final browser test step must be an **assertion**. This will ensure your test ended up on an expected page and found the expected element.
 4. Save the test.
 
 {{< img src="getting_started/synthetics/record-test.gif" alt="Record test steps"  style="width:90%;">}}

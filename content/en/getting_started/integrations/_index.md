@@ -22,7 +22,7 @@ Datadog provides three main types of integrations:
 
 - **Agent-based integrations** are installed with the Datadog Agent and use a Python class method called `check` to define the metrics to collect.
 - **Authentication (crawler) based integrations** are set up in the [Datadog App][2] where you provide credentials for obtaining metrics with the API. These include popular integrations like [Slack][3],[AWS][4],[Azure][5], and [PagerDuty][6].
-- **Library integrations** use the [Datadog API][7] to allow you to monitor applications based on the language they are written in, like [Node.js][8], or [Python][9].
+- **Library integrations** use the [Datadog API][7] to allow you to monitor applications based on the language they are written in, like [Node.js][8] or [Python][9].
 
 You can also build a [custom check][10] to define and send metrics to Datadog from your unique in-house system.
 

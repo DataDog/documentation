@@ -43,7 +43,7 @@ If you are running the Agent as a binary on a host, configure your OpenMetrics o
 {{< tabs >}}
 {{% tab "Host" %}}
 
-First, edit the `openmetrics.d/conf.yaml` or `prometheus.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to configure your Datadog-OpenMetrics or Datadog-Prometheus integrations. Then [restart the Agent][2] to start collecting your metrics. See the [sample openmetrics.d/conf.yaml][3] or [sample prometheus.d/conf.yaml][4] for all available configuration options. This is the minimum required configuration needed to enable the integration:
+First, edit the `openmetrics.d/conf.yaml` or `prometheus.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to configure your OpenMetrics or Prometheus integrations. Then [restart the Agent][2] to start collecting your metrics. See the [sample openmetrics.d/conf.yaml][3] or [sample prometheus.d/conf.yaml][4] for all available configuration options. This is the minimum required configuration needed to enable the integration:
 
 ```yaml
 init_config:
