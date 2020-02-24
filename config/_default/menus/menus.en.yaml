@@ -981,7 +981,43 @@ main:
   - name: "OpenTracing"
     url: "tracing/opentracing/"
     parent: "tracing"
+    identifier: "tracing_opentracing"
     weight: 7
+  - name: "Java"
+    url: "tracing/opentracing/java"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_java"
+    weight: 701
+  - name: "Python"
+    url: "tracing/opentracing/python"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_python"
+    weight: 702
+  - name: "Go"
+    url: "tracing/opentracing/go"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_go"
+    weight: 703
+  - name: "PHP"
+    url: "tracing/opentracing/php"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_php"
+    weight: 704
+  - name: "Ruby"
+    url: "tracing/opentracing/ruby"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_ruby"
+    weight: 705
+  - name: ".NET"
+    url: "tracing/opentracing/dotnet"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_dotnet"
+    weight: 706
+  - name: "NodeJS"
+    url: "tracing/opentracing/nodejs"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_nodejs"
+    weight: 707
 
   ## TRACING - Using the APM UI
 
