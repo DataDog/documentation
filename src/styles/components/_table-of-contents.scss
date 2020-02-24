@@ -196,6 +196,13 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     @media (min-width: 991px) {
         display: block;
     }
+
+    a {
+      font-size:18px;
+      &:lang(ja) {
+        font-size: 14px;
+      }
+    }
 }
 
 // Mobile TOC
