@@ -1,22 +1,21 @@
 ---
 title: Generate Metrics from Ingested Logs
 kind: documentation
-beta: false
 aliases:
- - /logs/processing/logs_to_metrics/
-description: "Generate Metrics from Ingested Logs."
+    - /logs/processing/logs_to_metrics/
+description: 'Generate Metrics from Ingested Logs.'
 further_reading:
-- link: "logs/processing/processors"
-  tag: "Documentation"
-  text: "Learn how to process your logs"
-- link: "logs/logging_without_limits"
-  tag: "Documentation"
-  text: "Control the volume of logs indexed by Datadog"
+    - link: 'logs/processing/processors'
+      tag: 'Documentation'
+      text: 'Learn how to process your logs'
+    - link: 'logs/logging_without_limits'
+      tag: 'Documentation'
+      text: 'Control the volume of logs indexed by Datadog'
 ---
 
 ## Overview
 
-Datadog’s [Logging without Limits][1]* lets you dynamically decide what to include or exclude from your indexes. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit indexes to operationally critical logs, you can still visualize trends and anomalies over all of your log data at full granularity for 15 months.
+Datadog’s [Logging without Limits][1]\* lets you dynamically decide what to include or exclude from your indexes. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit indexes to operationally critical logs, you can still visualize trends and anomalies over all of your log data at full granularity for 15 months.
 
 With log-based metrics, you can record a count of logs that match a query or summarize a numeric value contained in a log, such as request duration.
 
@@ -24,7 +23,7 @@ With log-based metrics, you can record a count of logs that match a query or sum
 
 {{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric"  style="width:80%;">}}
 
-To generate a new log-based metric, go to the [Configuration page][3] of your Datadog account and select the *[Generate Metrics][4]* tab, then the **New Metric+** button.
+To generate a new log-based metric, go to the [Configuration page][3] of your Datadog account and select the _[Generate Metrics][4]_ tab, then the **New Metric+** button.
 
 ### Add a new log-based metric
 
@@ -41,8 +40,8 @@ To generate a new log-based metric, go to the [Configuration page][3] of your Da
 
 After a metric is created, only these fields can be updated:
 
-* Stream filter query
-* Aggregation groups
+- Stream filter query
+- Aggregation groups
 
 To change the metric type or name, a new metric must be created.
 
@@ -52,22 +51,24 @@ To change the metric type or name, a new metric must be created.
 
 Usage metrics are estimates of your current Datadog usage in near real-time. They enable you to:
 
-* Graph your estimated usage.
-* Create monitors around your estimated usage.
-* Get instant alerts of spikes or drops in your usage.
-* Assess the potential impact of code changes on your usage in near real-time.
+- Graph your estimated usage.
+- Create monitors around your estimated usage.
+- Get instant alerts of spikes or drops in your usage.
+- Assess the potential impact of code changes on your usage in near real-time.
 
 Log Management usage metrics come with three tags that can be used for more granular monitoring:
 
-- `datadog_index` indicates the routing query that matches a log to an intended index
-- `datadog_is_excluded` indicates whether or not a log matches an exclusion query
-- `service` the service attribute of the log event
+| Tag                     | Description                                                           |
+| ----------------------- | --------------------------------------------------------------------- |
+|  `datadog_index`        | Indicates the routing query that matches a log to an intended index.  |
+|  `datadog_is_excluded`  | Indicates whether or not a log matches an exclusion query.            |
+|  `service`              | The service attribute of the log event.                               |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-*Logging without Limits is a trademark of Datadog, Inc.
+\*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs
 [2]: /logs/indexes/#exclusion-filters
