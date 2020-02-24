@@ -1,5 +1,4 @@
 ---
-beta: false
 categories:
   - azure
   - ソースコントロール

@@ -203,7 +203,7 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis 接続|2|#env:dev|m:Redis 接続が 10 秒�
 [1]: /ja/developers/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
 [3]: /ja/developers/dogstatsd
-[4]: /ja/agent/kubernetes/dogstatsd
+[4]: /ja/developers/dogstatsd/
 [5]: /ja/agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
 [6]: /ja/agent/kubernetes/helm/#enable-apm-and-distributed-tracing
 [7]: /ja/agent/docker/apm
