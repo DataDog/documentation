@@ -54,7 +54,7 @@ The navigation action allows you to:
 
 ## Special Actions
 
-Most of the actions are recorded using our extension. Some actions are however not recorded automatically and you therefore need to explicitly add a step about it using the **Special Actions** menu located at the top left hand corner of the recorder.
+Most of the actions are recorded using [the provided Datadog extension][4]. Some actions are however not recorded automatically and you need to explicitly add a step for them using the **Special Actions** menu located at the top left-hand corner of the recorder.
 
 ### Hover
 
