@@ -725,6 +725,12 @@ table, .table {
   }
 }*/
 
+.alert {
+  &:lang(ja) {
+    font-size: 15px;
+  }
+}
+
 // Breakpoint styles go here...
 
 @media (min-width: 1200px) {
