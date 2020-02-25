@@ -32,8 +32,8 @@ To begin profiling applications written in any JVM based runtime:
 
 4. Because profiles are sent directly to Datadog without using the Datadog Agent, you must pass a valid [Datadog API key][3] by either:
 
-    - Adding `-Ddd.profiling.apikey.file=<PATH>`. This file should only contain the api key as a string
-    - Via the `DD_PROFILING_APIKEY=<DATADOG_API_KEYW>` environment variable
+    - Adding `-Ddd.profiling.api_key.file=<PATH>`. This file should only contain the api key as a string
+    - Via the `DD_PROFILING_API_KEY=<DATADOG_API_KEY>` environment variable
 
 5. Visualize your profiles in the [Datadog APM > Profiling page][4].
 
