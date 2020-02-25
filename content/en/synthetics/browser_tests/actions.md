@@ -64,7 +64,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 
 ### Press Key
 
-You can simulate users entering keystrokes using **Press Key** steps. The below keys can be recorded using our extension:
+You can simulate users entering keystrokes using **Press Key** steps. The keys below can be recorded using [Datadog extension][4]:
 
 * Enter
 * Arrows (up, down, right, and left)
