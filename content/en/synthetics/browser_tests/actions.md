@@ -34,12 +34,13 @@ Assertions allow you to check whether an element, some content, or some text is 
 
 | Assertion                                                 | Description                                                                                                                                                                             |
 |-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Test that an element is present on the active page`      | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                                                                              |
 | `Test an element's content`                               | Selects an element and checks if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".                                   |
 | `Test that some text is present on the active page`       | Asserts that some specific text is present on the current page.                                                                                                                         |
-| `Assert that some text is not present on the active page` | Asserts that some specific text is **NOT** present on the current page.                                                                                                                 |
+| `Test that some text is not present on the active page` | Asserts that some specific text is **NOT** present on the current page.                                                                                                                 |
 | `Test the content of the URL of the active page`          | Takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it.                                      |
+| `Test that an element is present on the active page`      | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                                                                              |
 | `Test that an email was received`                         | Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages [email variables][3]. |
+| `Test a JavaScript assertion`                         | Test a custom assertion using your own JavaScript scripts. By default the assertion is done on the active page. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. |
 
 [Advanced options][1] are also available for assertions.
 
@@ -113,6 +114,7 @@ This is limited to 10 files, with a limit of 5MB each.
 To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
+* **JavaScript**: Generate custom variables using your own JavaScript scripts. By default the step is being performed at the page level. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function.
 * **A Global Variable**: Store and use global variables through [Synthetics Settings][6].
 * **An Email**: Generate a random Synthetics email address that can be used in your test steps to assert if an email was correctly sent or to perform actions over the sent email content (e.g. click a confirmation link).
 * **A Pattern**:
@@ -149,7 +151,7 @@ By default, Datadog waits for a page to be fully loaded before performing an act
 
 ## Subtests
 
-You can run browser tests within other browser tests. [Advanced options][7] also allow you to choose where you want your subtest to be played.
+You can run browser tests within other browser tests, up to two levels of nesting. [Advanced options][7] also allow you to choose where you want your subtest to be played.
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
 
