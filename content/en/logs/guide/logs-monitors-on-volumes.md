@@ -12,10 +12,10 @@ further_reading:
 
 ## Monitor indexed logs with fixed threshold
 
-Get notified if the indexed log volumes in any scope (`service`, `availibility-zone`, etc...) of your infrastructure are growing unexpectedly:
+Get notified if the indexed log volumes in any scope (`service`, `availability-zone`, etc...) of your infrastructure are growing unexpectedly:
 
 1. Go to the [Datadog Log Explorer][1] view
-2. Build a [search query][2] that represents the volume to monitor.
+2. Build a [search query][2] that represents the volume to monitor (keep the query empty to monitor all the logs from that index)
 3. Click on **Export to monitor**.
 4. Define the rate you would like to set as *warning* or *error*.
 5. Define an explicit notification: `The volume on this service just got too high. Define an additional exclusion filter or increase the sampling rate to get it back under control.`
