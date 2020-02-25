@@ -62,7 +62,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
         enabled: true
     ```
 
-4. If you are running an Agent older than v6.18/7.18, manually start the system-probe and enable it to start on boot (since v6.18/v7.18, system-probe will start automatically when the Agent is started by systemd):
+4. If you are running an Agent older than v6.18/7.18, manually start the system-probe and enable it to start on boot (since v6.18/v7.18, system-probe will start automatically when the Agent is started):
 
     ```shell
     sudo systemctl start datadog-agent-sysprobe 
