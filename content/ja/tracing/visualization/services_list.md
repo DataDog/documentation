@@ -7,7 +7,7 @@ further_reading:
     text: アプリケーションで APM トレースをセットアップする方法
   - link: tracing/visualization/service
     tag: Documentation
-    text: 「Datadogのサービス詳細」
+    text: Datadog のサービスについて
   - link: tracing/visualization/resource
     tag: Documentation
     text: リソースのパフォーマンスとトレースの詳細
@@ -19,7 +19,7 @@ further_reading:
 
 ## 概要
 
-[アプリケーションをインスツルメント][1]すると、レポーティング[サービス][2]が [APM サービスページ][3]に表示されます。このサービス一覧画面では、インフラストラクチャーのレポーティングを行うすべての[サービス][4]を俯瞰で確認することができます。
+[アプリケーションをインスツルメント][1]すると、レポーと作成[サービス][2]が [APM サービスページ][3]に表示されます。このサービス一覧画面では、インフラストラクチャーのレポート作成を行うすべての[サービス][4]を俯瞰で確認することができます。
 個々のサービスを選択すると、詳細なパフォーマンスインサイトが表示されます。[詳しくは、サービスのドキュメントを参照してください][4]。
 
 ## サービスリストのフィルタリング
@@ -61,7 +61,7 @@ further_reading:
 * **Requests**: トレースされたリクエストの合計量（1 秒あたり）
 * **Avg/p75/p90/p95/p99/Max Latency**: トレースされたリクエストの平均/p75/p90/p95/p99/最大レイテンシー
 * **Error Rate**: トレースされたリクエストのうち、エラーで終了した量（1 秒あたり）
-* **Apdex**: サービスの **Apdex スコア**。[Apdex の詳細][4]
+* **Apdex**: サービスの Apdex スコア。[Apdex の詳細][9]
 * **Monitor status**: サービスにアタッチされた[モニターのステータス][10]
 
 {{< img src="tracing/visualization/services_columns.png" alt="サービス列"  style="width:40%;">}}
