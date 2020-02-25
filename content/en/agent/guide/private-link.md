@@ -1,5 +1,5 @@
 ---
-title: Set up a AWS PrivateLink from AWS us-east-1 region to Datadog
+title: Connect to Datadog over AWS PrivateLink
 kind: guide
 further_reading:
     - link: 'agent/logs'
@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-The Datadog PrivateLink setup is only available to in AWS us-east-1 region.
+Datadog exposes AWS PrivateLink endpoints in us-east-1.
 </div>
 
 This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog. AWS PrivateLink simplifies the security of data shared with Datadog by eliminating the exposure of data to the public internet.
@@ -94,9 +94,9 @@ To forward your metrics to Datadog using this new VPC endpoint your need to setu
 
 **Note**: if you are using the container Agent, set the environment variable instead: `DD_DD_URL="pvtlink.agent.datadoghq.com"`
 
+
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/agent-commands/#restart-the-agent
-
 {{% /tab %}}
 {{% tab "Logs" %}}
 
@@ -128,11 +128,11 @@ To forward your logs to Datadog using this new VPC endpoint, you need to set up 
 
 Add `DD_URL: pvtlink.logs.datadoghq.com` in your [Datadog Lambda function][4] environment variable to use the private link when forwarding AWS Service Logs to Datadog.
 
+
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /integrations/amazon_web_services/#set-up-the-datadog-lambda-function
-
 {{% /tab %}}
 {{% tab "API" %}}
 
