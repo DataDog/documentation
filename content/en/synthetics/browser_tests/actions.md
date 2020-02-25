@@ -67,7 +67,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 You can simulate users entering keystrokes using **Press Key** steps. The below keys can be recorded using our extension:
 
 * Enter
-* Arrows
+* Arrows (up, down, right, and left)
 * Tab (outside a form)
 * Escape 
 * Backspace
