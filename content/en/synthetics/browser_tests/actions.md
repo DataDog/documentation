@@ -41,7 +41,7 @@ Assertions allow you to check whether an element, some content, or some text is 
 | `Test the content of the URL of the active page`          | Takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it.                                      |
 | `Test that an email was received`                         | Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages [email variables][3]. |
 
-[Advanced options][4] are also available for assertions.
+[Advanced options][1] are also available for assertions.
 
 ## Navigation
 
@@ -113,7 +113,7 @@ This is limited to 10 files, with a limit of 5MB each.
 To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **A Global Variable**: Store and use global variables through [Synthetics Settings][5]).
+* **A Global Variable**: Store and use global variables through [Synthetics Settings][6]).
 * **An Email**: Generate a random Synthetics email address that can be used in your test steps to assert if an email was correctly sent or to perform actions over the sent email content (e.g. click a confirmation link).
 * **A Pattern**:
 
@@ -149,7 +149,7 @@ By default, Datadog waits for a page to be fully loaded before performing an act
 
 ## Subtests
 
-You can run browser tests within other browser tests. [Advanced options][6] also allow you to choose where you want your subtest to be played.
+You can run browser tests within other browser tests. [Advanced options][7] also allow you to choose where you want your subtest to be played.
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
 
@@ -160,6 +160,7 @@ You can run browser tests within other browser tests. [Advanced options][6] also
 [1]: /synthetics/browser_tests/advanced_options
 [2]: /synthetics/browser_tests/advanced_options/#timeout
 [3]: /synthetics/browser_tests/#create-a-variable
-[4]: /synthetics/browser_tests/advanced_options/#custom-selector
-[5]: /synthetics/settings/#secure-credential
-[6]: /synthetics/browser_tests/advanced_options/#subtests
+[4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[5]: /synthetics/browser_tests/advanced_options/#custom-selector
+[6]: /synthetics/settings
+[7]: /synthetics/browser_tests/advanced_options/#subtests
