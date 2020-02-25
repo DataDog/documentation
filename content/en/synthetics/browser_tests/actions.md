@@ -14,7 +14,7 @@ Actions are a series of steps that you can record for a browser test, which you 
 
 ## Click
 
-Datadog’s extension automatically records clicks on your page. 
+[Datadog’s extension][4] automatically records clicks on your page. 
 
 You can specify the type of click you want your browser test to perform at execution by selecting the click type of interest on your step:
 
