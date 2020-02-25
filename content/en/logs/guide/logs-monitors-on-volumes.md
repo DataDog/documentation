@@ -12,7 +12,7 @@ further_reading:
 
 ## Monitor indexed logs with fixed threshold
 
-Get notified at any moment if the indexed log volumes in any scope (`service`, `availibility-zone`, etc...) of your infrastructure are growing unexpectedly:
+Get notified if the indexed log volumes in any scope (`service`, `availibility-zone`, etc...) of your infrastructure are growing unexpectedly:
 
 1. Go to the [Datadog Log Explorer][1] view
 2. Build a [search query][2] that represents the volume to monitor.
@@ -26,7 +26,7 @@ Get notified at any moment if the indexed log volumes in any scope (`service`, `
 
 ### Activate recommended log usage metrics
 
-Turn on [recommended log usage metrics][3] to start tracking the number of ingested logs, ingested bytes and indexed logs. Go to the [Generate Metrics][5] page and enable those metrics:
+Turn on [recommended log usage metrics][3] to start tracking the number of ingested logs, ingested bytes and indexed logs. Navigate to the [Generate Metrics][5] page to enable log usage metrics:
 
 {{< img src="logs/processing/logs_to_metrics/recommended_usage_metrics.png" alt="Recommended Usage Metrics" responsive="true" style="width:80%;">}}
 
