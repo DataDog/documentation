@@ -119,10 +119,10 @@ Manual instrumentation is supported on .NET Framework 4.5 and above on Windows a
 
 There are multiple ways to configure the .NET Tracer:
 
--   in .NET code
--   setting environment variables
--   editing the application's `app.config`/`web.config` file (.NET Framework only)
--   creating a `datadog.json` file
+- in .NET code
+- setting environment variables
+- editing the application's `app.config`/`web.config` file (.NET Framework only)
+- creating a `datadog.json` file
 
 {{< tabs >}}
 {{% tab "Code" %}}
