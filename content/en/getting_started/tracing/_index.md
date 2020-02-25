@@ -2,22 +2,22 @@
 title: Quickstart Guide - APM
 kind: documentation
 further_reading:
-- link: "/tracing/visualization/"
-  tag: "Documentation"
-  text: "Use the APM UI"
-- link: "https://learn.datadoghq.com/enrol/index.php?id=4"
-  tag: "Learning Center"
-  text: "Learn Application Performance Monitoring with Docker"
+    - link: '/tracing/visualization/'
+      tag: 'Documentation'
+      text: 'Use the APM UI'
+    - link: 'https://learn.datadoghq.com/enrol/index.php?id=4'
+      tag: 'Learning Center'
+      text: 'Learn Application Performance Monitoring with Docker'
 ---
 
 ## Overview
 
 Datadog Application Performance Monitoring (APM) is used to collect [traces][1] from your back-end application code. This quickstart guide shows you how get your first trace into Datadog. Follow the sections below:
 
-* [Create a Datadog account](#create-a-datadog-account)
-* [Install the Agent](#install-the-agent)
-* [APM Agent setup](#apm-agent-setup)
-* [APM application setup](#apm-application-setup)
+- [Create a Datadog account](#create-a-datadog-account)
+- [Install the Agent](#install-the-agent)
+- [APM Agent setup](#apm-agent-setup)
+- [APM application setup](#apm-application-setup)
 
 ## Create a Datadog account
 
@@ -53,10 +53,9 @@ After a few minutes, verify the Agent is connected to your account by checking t
 
 ### Enable APM
 
-On the latest version of Agent v6, APM is enabled by default. You can see this in the Agent [configuration file][9]:
+On the latest version of Agent v6, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][9]:
 
-```text
-# /etc/datadog-agent/datadog.yaml:
+```yaml
 # apm_config:
 #   Whether or not the APM Agent should run
 #   enabled: true
@@ -78,8 +77,8 @@ And in `trace-agent.log`:
 
 ```yaml
 apm_config:
-  enabled: true
-  env: hello_world
+    enabled: true
+    env: hello_world
 ```
 
 Then, [restart][10] the Datadog Agent:
