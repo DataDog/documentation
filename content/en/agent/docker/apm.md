@@ -2,28 +2,28 @@
 title: Tracing Docker Applications
 kind: Documentation
 aliases:
-  - /tracing/docker/
-  - /tracing/setup/docker/
-  - /agent/apm/docker
+    - /tracing/docker/
+    - /tracing/setup/docker/
+    - /agent/apm/docker
 further_reading:
-  - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/trace"
-    tag: "Github"
-    text: Source code
-  - link: "/integrations/amazon_ecs/#trace-collection"
-    tag: "Documentation"
-    text: "Trace your ECS applications"
-  - link: "tracing/visualization/"
-    tag: "Documentation"
-    text: "Explore your services, resources and traces"
+    - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/trace'
+      tag: 'Github'
+      text: Source code
+    - link: '/integrations/amazon_ecs/#trace-collection'
+      tag: 'Documentation'
+      text: 'Trace your ECS applications'
+    - link: 'tracing/visualization/'
+      tag: 'Documentation'
+      text: 'Explore your services, resources and traces'
 ---
 
 Enable the Trace Agent in the `datadog/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
 ## Tracing from the host
 
-Tracing is available on port `8126/tcp` from *your host only* by adding the option `-p 127.0.0.1:8126:8126/tcp` to the `docker run` command.
+Tracing is available on port `8126/tcp` from _your host only_ by adding the option `-p 127.0.0.1:8126:8126/tcp` to the `docker run` command.
 
-To make it available from *any host*, use `-p 8126:8126/tcp` instead.
+To make it available from _any host_, use `-p 8126:8126/tcp` instead.
 
 For example, the following command allows the Agent to receive traces from your host only:
 
@@ -42,12 +42,13 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 List of all environment variables available for tracing within the Docker Agent:
 
 | Environment variable       | Description                                                                                                                                                                                                                                                                                                                 |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DD_API_KEY`               | [Datadog API Key][1]                                                                                                                                                                                                                                                                                                        |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                                                                                                                                                                                                                        |
 | `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][2].                                                                                                                                                                                                                                                                            |
 | `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                               |
 | `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                                                                                                                                                                                                                     |
+| `DD_APM_RECEIVER_SOCKET`   |  Collect your traces through a Unix Domain Sockets and takes priority over hostname and port configuration if set. Off by default, when set it must point to a valid sock file.                                                                                                                                             |
 | `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                                                                                                                                                                                                                         |
 | `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                                                                                                                                                                                                                             |
 | `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics.                                                                                                                                                                                                                                                                |

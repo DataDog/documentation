@@ -2,27 +2,27 @@
 title: Tracing .NET Framework Applications
 kind: documentation
 aliases:
-  - /tracing/dotnet
-  - /tracing/languages/dotnet
-  - /tracing/setup/dotnet
-  - /agent/apm/dotnet/
-  - /tracing/dotnet-framework
-  - /tracing/languages/dotnet-framework
-  - /tracing/setup/dotnet-framework
-  - /agent/apm/dotnet-framework/
+    - /tracing/dotnet
+    - /tracing/languages/dotnet
+    - /tracing/setup/dotnet
+    - /agent/apm/dotnet/
+    - /tracing/dotnet-framework
+    - /tracing/languages/dotnet-framework
+    - /tracing/setup/dotnet-framework
+    - /agent/apm/dotnet-framework/
 further_reading:
-  - link: "https://github.com/DataDog/dd-trace-dotnet"
-    tag: "GitHub"
-    text: "Source code"
-  - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
-    tag: "Blog"
-    text: ".NET monitoring with Datadog APM and distributed tracing"
-  - link: "tracing/visualization/"
-    tag: "Documentation"
-    text: "Explore your services, resources and traces"
-  - link: "tracing/"
-    tag: "Advanced Usage"
-    text: "Advanced Usage"
+    - link: 'https://github.com/DataDog/dd-trace-dotnet'
+      tag: 'GitHub'
+      text: 'Source code'
+    - link: 'https://www.datadoghq.com/blog/net-monitoring-apm/'
+      tag: 'Blog'
+      text: '.NET monitoring with Datadog APM and distributed tracing'
+    - link: 'tracing/visualization/'
+      tag: 'Documentation'
+      text: 'Explore your services, resources and traces'
+    - link: 'tracing/'
+      tag: 'Advanced Usage'
+      text: 'Advanced Usage'
 ---
 
 ## Getting Started
@@ -63,10 +63,10 @@ If your application runs in IIS, skip the rest of this section.
 
 For Windows applications **not** running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
-Name                   | Value
------------------------|------
-`COR_ENABLE_PROFILING` | `1`
-`COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}`
+| Name                   | Value                                    |
+| ---------------------- | ---------------------------------------- |
+| `COR_ENABLE_PROFILING` | `1`                                      |
+| `COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 
 For example, to set the environment variables from a batch file before starting your application:
 
@@ -88,8 +88,8 @@ To set environment variables for a Windows Service, use the multi-string key `HK
 The .NET Tracer can instrument the following libraries automatically:
 
 | Framework or library           | NuGet package                  | Integration Name     |
-|--------------------------------|--------------------------------|----------------------|
-| ASP.NET (including  Web Forms) | built-in                       | `AspNet`             |
+| ------------------------------ | ------------------------------ | -------------------- |
+| ASP.NET (including Web Forms)  | built-in                       | `AspNet`             |
 | ASP.NET MVC                    | `Microsoft.AspNet.Mvc` 4.0+    | `AspNetMvc`          |
 | ASP.NET Web API 2              | `Microsoft.AspNet.WebApi` 5.1+ | `AspNetWebApi2`      |
 | WCF (server)                   | built-in                       | `Wcf`                |
@@ -98,7 +98,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | WebClient / WebRequest         | built-in                       | `WebRequest`         |
 | Redis (StackExchange client)   | `StackExchange.Redis` 1.0.187+ | `StackExchangeRedis` |
 | Redis (ServiceStack client)    | `ServiceStack.Redis` 4.0.48+   | `ServiceStackRedis`  |
-| Elasticsearch                  | `Elasticsearch.Net`  5.3.0+    | `ElasticsearchNet`   |
+| Elasticsearch                  | `Elasticsearch.Net` 5.3.0+     | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver.Core` 2.1.0+   | `MongoDb`            |
 
 **Update:** Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required. Remove them from your application when you update the .NET Tracer.
@@ -119,10 +119,10 @@ Manual instrumentation is supported on .NET Framework 4.5 and above on Windows a
 
 There are multiple ways to configure the .NET Tracer:
 
-* in .NET code
-* setting environment variables
-* editing the application's `app.config`/`web.config` file (.NET Framework only)
-* creating a `datadog.json` file
+-   in .NET code
+-   setting environment variables
+-   editing the application's `app.config`/`web.config` file (.NET Framework only)
+-   creating a `datadog.json` file
 
 {{< tabs >}}
 {{% tab "Code" %}}
@@ -195,9 +195,9 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 
 ```json
 {
-  "DD_TRACE_AGENT_URL": "http://localhost:8126",
-  "DD_SERVICE_NAME": "MyService",
-  "DD_ADONET_ENABLED": "false"
+    "DD_TRACE_AGENT_URL": "http://localhost:8126",
+    "DD_SERVICE_NAME": "MyService",
+    "DD_ADONET_ENABLED": "false"
 }
 ```
 
@@ -212,7 +212,7 @@ The following tables list the supported configuration variables. Use the first n
 The first table below lists configuration variables that are available for both automatic and manual instrumentation.
 
 | Setting Name                                        | Description                                                                                                                                                                                                       |
-|-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DD_TRACE_AGENT_URL`<br/><br/>`AgentUri`            | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
 | `DD_AGENT_HOST`                                     | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`                               | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
@@ -224,7 +224,7 @@ The first table below lists configuration variables that are available for both 
 The following table lists configuration variables that are available only when using automatic instrumentation.
 
 | Setting Name                                                   | Description                                                                                                                                                                                                                                                                              |
-|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DD_TRACE_ENABLED`<br/><br/>`TraceEnabled`                     | Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` (default) or `false`. |
 | `DD_TRACE_DEBUG`                                               | Enables or disables debug logs in the Tracer. Valid values are: `true` or `false` (default). Setting this as an environment variable also enabled debug logs in the CLR Profiler.                                                                                                        |
 | `DD_TRACE_LOG_PATH`                                            | Sets the path for the CLR profiler's log file.<br/><br/>Default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`                                                                                                                                                            |
@@ -234,7 +234,7 @@ The following table lists configuration variables that are available only when u
 The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` propery to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations](#integrations) section above.
 
 | Setting Name                                                            | Description                                                                                                           |
-|-------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | `DD_<INTEGRATION>_ENABLED`<br/><br/>`Enabled`                           | Enables or disables a specific integration. Valid values are: `true` (default) or `false`.                            |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`        | Enables or disable App Analytics for a specific integration. Valid values are: `true` or `false` (default).           |
 | `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`<br/><br/>`AnalyticsSampleRate` | Sets the App Analytics sampling rate for a specific integration. A floating number between `0.0` and `1.0` (default). |
