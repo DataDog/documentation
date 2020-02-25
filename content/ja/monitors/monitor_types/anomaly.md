@@ -114,7 +114,7 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 エンタープライズレベルのお客様は、[モニターの作成 API エンドポイント][9]を使用して異常検知モニターを作成できます。Datadog では、[モニターの JSON をエクスポート][10]して API のクエリを作成することを推奨しています。
 
-下記の例は、異常検知モニターのクエリを示したものです。 Cassandra ノードの平均 CPU が直近 5 分間で通常値の標準偏差 3 を上回る場合にアラートを発します。
+下記の例は、異常検知モニターのクエリを示したものです。Cassandra ノードの平均 CPU が直近 5 分間で通常値を上回る 3 つの標準偏差である場合にアラートを発します。
 
 ```text
 avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
