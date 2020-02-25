@@ -90,6 +90,21 @@
           aliases:
           - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 
+  - repo_name: puppet-datadog-agent
+    contents:
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - README.md
+      options:
+        dest_path: '/agent/basic_agent_usage/'
+        file_name: 'puppet.md'
+        front_matters:
+          title: Puppet
+          kind: documentation
+          dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/master/README.md"]
+
   - repo_name: dd-trace-rb
     contents:
     - action: pull-and-push-file

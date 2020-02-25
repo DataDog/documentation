@@ -87,6 +87,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
 	@if [ content/en/agent/basic_agent_usage/heroku.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
+	@if [ content/en/agent/basic_agent_usage/puppet.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/puppet.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/developers/amazon_cloudformation.md ]; then \
