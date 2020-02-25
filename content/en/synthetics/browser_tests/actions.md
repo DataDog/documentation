@@ -91,7 +91,7 @@ Your browser test automatically scrolls to the element it needs to interact with
 
 You need to specify the number of pixels your browser test should scroll vertically or horizontally.
 
-By default, our scroll step will scroll on the whole page. If you however need to scroll a specific element (for instance a specific div), you can leverage the **Target Element** option in order to select the element you want your browser test to scroll at test execution.
+By default, the scroll step scrolls on the whole page. If you need to scroll on a specific element (for instance a specific `<div>`), use the **Target Element** option to select the element you want your browser test to scroll on.
 
 ## Upload
 
