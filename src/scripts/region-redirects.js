@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import config from '../../regions.config';
 // import datadogLogs from './components/dd-browser-logs-rum';
 
 const allowedRegions = ['us', 'eu'];
@@ -34,7 +35,12 @@ function regionOnChangeHandler(event) {
 }
 
 function showRegionSnippet(newSiteRegion) {
-    const regionSnippets = document.querySelectorAll(`[data-region]`);
+    // console.log('showRegionSnippet')
+    const regionSnippets = document.querySelectorAll('[data-region]');
+    // console.log('regionSnippets: ', regionSnippets)
+    const regionParams = document.querySelectorAll('[data-region-param]');
+    // console.log('regionParams: ', regionParams)
+
     regionSnippets.forEach(regionSnippet => {
         const { region } = regionSnippet.dataset;
 
@@ -45,6 +51,26 @@ function showRegionSnippet(newSiteRegion) {
             regionSnippet.classList.remove('d-none');
         }
     });
+
+    regionParams.forEach(param => {
+        const { regionParam } = param.dataset;
+
+        // check if the region config object has the key specified in the hugo shortcode
+        if (
+            !Object.prototype.hasOwnProperty.call(
+                config[newSiteRegion],
+                regionParam
+            )
+        ) {
+            throw new Error(
+                `The value for the key in the hugo shortcode, ${regionParam}, was not found in the regions.config.js file.`
+            );
+        } else {
+            param.innerHTML = config[newSiteRegion][regionParam];
+        }
+    });
+
+    // config[siteRegion]
 }
 
 // have option to pass new site region to function.
@@ -82,7 +108,7 @@ function redirectToRegion(region = '') {
         showRegionSnippet(newSiteRegion);
 
         Cookies.set('site', newSiteRegion, { path: '/' });
-    } else if ( 
+    } else if (
         window.document.referrer.includes('datadoghq.eu') &&
         window.document.referrer.indexOf(
             `${window.location.protocol}//${window.location.host}` // check referrer is not from own domain
@@ -110,9 +136,8 @@ function redirectToRegion(region = '') {
             showRegionSnippet(newSiteRegion);
         } else {
             newSiteRegion = Cookies.get('site');
+            showRegionSnippet(newSiteRegion);
         }
-
-        showRegionSnippet(newSiteRegion);
     } else {
         newSiteRegion = 'us';
 

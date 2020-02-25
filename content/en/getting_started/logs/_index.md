@@ -36,7 +36,7 @@ Logs can be a full-text message:
 
 {{< site-region region="us" >}}
 
-The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for nonsecure connections).
+The secure TCP endpoint is {{< region-param key="tcp_endpoint" code="true" >}} (or port {{< region-param key="tcp_endpoint_port" code="true" >}} for nonsecure connections).
 
 {{< code-block lang="text" filename="response.txt" >}}
 telnet intake.logs.datadoghq.com 10514
@@ -47,7 +47,7 @@ telnet intake.logs.datadoghq.com 10514
 {{< /site-region >}}
 {{< site-region region="eu" >}}
 
-The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` for nonsecure connections).
+The secure TCP endpoint is {{< region-param key="tcp_endpoint" code="true" >}} (or port {{< region-param key="tcp_endpoint_port" code="true" >}} for nonsecure connections).
 
 {{< code-block lang="text" filename="response.txt" >}}
 telnet tcp-intake.logs.datadoghq.eu 1883

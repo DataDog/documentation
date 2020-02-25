@@ -3,6 +3,7 @@ import { redirectToRegion } from '../region-redirects';
 let regionSelector;
 let regionUSSnippet;
 let regionEUSnippet;
+let regionParam;
 
 describe(`On main page load (not home or api pages)`, () => {
     // const { location } = window;
@@ -37,6 +38,7 @@ describe(`On main page load (not home or api pages)`, () => {
         <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">telnet intake.logs.datadoghq.com 10514
         &lt;DATADOG_API_KEY&gt; Plain text log sent through TCP</code></pre></div>
         </div>
+        <code class="js-region-param" data-region-param="dd_site"></code>
         `;
 
         const testEURegionShortcodeHtml = `
@@ -45,15 +47,20 @@ describe(`On main page load (not home or api pages)`, () => {
         <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">telnet tcp-intake.logs.datadoghq.eu 1883
         &lt;DATADOG_API_KEY&gt; Plain text log sent through TCP</code></pre></div>
         </div>
+        <code class="js-region-param" data-region-param="dd_site"></code>
         `;
+
+        const testParamHtml = `<code class="js-region-param" data-region-param="dd_site"></code>`;
 
         document.body.innerHTML = selectOption;
         document.body.innerHTML += testUSRegionShortcodeHtml;
         document.body.innerHTML += testEURegionShortcodeHtml;
+        document.body.innerHTML += testParamHtml;
 
         regionSelector = document.querySelector('.js-region-selector');
-        regionUSSnippet = document.querySelector(`[data-region=us]`);
-        regionEUSnippet = document.querySelector(`[data-region=eu]`);
+        regionUSSnippet = document.querySelector('[data-region=us]');
+        regionEUSnippet = document.querySelector('[data-region=eu]');
+        regionParam = document.querySelector('[data-region-param]');
     });
 
     describe(`No Cookie Set`, () => {
@@ -61,12 +68,11 @@ describe(`On main page load (not home or api pages)`, () => {
             it('should set cookie value "site" to default region "us"', () => {
                 redirectToRegion();
 
-                // console.log('regionEUSnippet: ', regionEUSnippet.classList)
-
                 expect(window.document.cookie).toContain('site=us');
                 expect(regionSelector.value).toEqual('us');
                 expect(regionEUSnippet.classList).toContain('d-none')
                 expect(regionUSSnippet.classList).not.toContain('d-none')
+                expect(regionParam.innerHTML).toEqual('datadoghq.com')
             });
         });
 
@@ -80,6 +86,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionSelector.value).toEqual('eu');
                 expect(regionEUSnippet.classList).not.toContain('d-none')
                 expect(regionUSSnippet.classList).toContain('d-none')
+                expect(regionParam.innerHTML).toEqual('datadoghq.eu')
             });
         });
 
@@ -93,6 +100,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionSelector.value).toEqual('us');
                 expect(regionUSSnippet.classList).not.toContain('d-none')
                 expect(regionEUSnippet.classList).toContain('d-none')
+                expect(regionParam.innerHTML).toEqual('datadoghq.com')
             });
         });
 
@@ -106,6 +114,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionSelector.value).toEqual('eu');
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionEUSnippet.classList).not.toContain('d-none')
+                expect(regionParam.innerHTML).toEqual('datadoghq.eu')
             });
         });
 
@@ -126,6 +135,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionSelector.value).toEqual('eu');
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionEUSnippet.classList).not.toContain('d-none')
+                expect(regionParam.innerHTML).toEqual('datadoghq.eu')
             });
         });
 
@@ -139,6 +149,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionSelector.value).toEqual('eu');
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionEUSnippet.classList).not.toContain('d-none')
+                expect(regionParam.innerHTML).toEqual('datadoghq.eu')
             });
         });
 
@@ -152,6 +163,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionSelector.value).toEqual('eu');
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionEUSnippet.classList).not.toContain('d-none')
+                expect(regionParam.innerHTML).toEqual('datadoghq.eu')
             });
         });
 
@@ -165,50 +177,10 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionSelector.value).toEqual('us');
                 expect(regionUSSnippet.classList).not.toContain('d-none')
                 expect(regionEUSnippet.classList).toContain('d-none')
+                expect(regionParam.innerHTML).toEqual('datadoghq.com')
             });
         });
     });
 
-    // describe(`Dropdown change`, () => {
-
-    //     describe('change from "us" to "eu" region', () => {
-    //         it('should change from "us" to "eu" region', () => {
-    //             const eventTargetValue = {target: {value: "eu"}}
-
-    //             regionOnChangeHandler(eventTargetValue)
-    //             // redirectToRegion();
-
-    //             // console.log('regionEUSnippet: ', regionEUSnippet.classList)
-
-    //             // expect(window.document.cookie).toContain('site=eu');
-    //             expect(regionSelector.value).toEqual('eu');
-    //             expect(regionEUSnippet.classList).not.toContain('d-none')
-    //             expect(regionUSSnippet.classList).toContain('d-none')
-    //         });
-    //     });
-
-        
-    // })
 
 });
-
-/* On async page navigation tests
-
-
-
-*/
-
-/* Dropdown tests
-
-// if cookie set
-// should display the region based on the cookie
-// if cookie not set, default to users location (if allowed, else default to US Site)
-
-// onchange
-// when option changed, should set the cookie and redirect with query param set to selected option.
-// if page contains no tabs, just set query param: site=${region}
-// keep the hash in url
-
-// other pages (homepage, api 404, work as expected)
-
-*/
