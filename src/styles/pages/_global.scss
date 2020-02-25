@@ -357,6 +357,12 @@ h5{
     padding-top: 14px;
   }
 
+  ul, ol {
+    &:lang(ja) {
+      padding-left: 22px;
+    }
+  }
+
   ul, ol, p {
     &:lang(ja) {
       font-size: 14px;
@@ -420,6 +426,7 @@ h5{
   }
   .nav-tabs {
     border-bottom:none;
+    padding-left:0 !important;
   }
   .tab-content {
     padding-top:26px;
