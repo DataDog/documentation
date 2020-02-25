@@ -533,7 +533,7 @@ After running the code above, your metrics data is available to graph in Datadog
 
 | Method                                                            | Datadog Storage type                                                                                                                                              |
 |-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][6] documentation to learn more. |
+| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more. |
 
 #### Configuration
 
@@ -542,7 +542,7 @@ After running the code above, your metrics data is available to graph in Datadog
 
 #### Code examples
 
-The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
+The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -713,7 +713,7 @@ After running the code above, your metrics data is available to graph in Datadog
 
 | Method                                                        | Datadog Storage type                                                                                                                                              |
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][6] documentation to learn more. |
+| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more. |
 
 ##### Configuration
 
@@ -721,7 +721,7 @@ For a `TIMER`, the `HISTOGRAM` [configuration](#configuration) rules apply.
 
 ##### Code examples
 
-Emit a `TIMER` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
+Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}

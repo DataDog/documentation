@@ -33,7 +33,7 @@ The following metric submission types are accepted:
 - [HISTOGRAM](?tab=hisogram#metric-types)
 - [DISTRIBUTION](?tab=distribution#metric-types)
 
-These different metric submission types are mapped to 4 in-app metric types found within the Datadog web application:
+These different metric submission types are mapped to four in-app metric types found within the Datadog web application:
 
 - COUNT
 - RATE
@@ -151,7 +151,7 @@ The Agent submits the last reported number, in this case `71.5`, as the GAUGE me
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-For example, suppose you are submitting a HISTOGRAM metric, `request.response_time.histogram`, from one web server which reports the values `[1,1,1,2,2,2,3,3]` in a flush time interval. By default, the Agent submits the following metrics to Datadog which represent the statistical distribution of these values in this time interval:
+For example, suppose you are submitting a HISTOGRAM metric, `request.response_time.histogram`, from a web server that reports the values `[1,1,1,2,2,2,3,3]` in a flush time interval. By default, the Agent submits the following metrics to Datadog which represent the statistical distribution of these values in this time interval:
 
 | Metric Name                                    | Value  | Datadog In-App Type |
 | ---------------------------------------------- | ------ | ------------------- |
@@ -244,7 +244,7 @@ Submit your RATE type metrics from one of the following sources:
 
 Submit your GAUGE type metrics from one of the following sources:
 
-| Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Type |
+| Submission Source | Submission Method (Python)           | Submission Type | Datadog In-App Type |
 | ----------------- | ------------------------------------ | --------------- | ------------------- |
 | [Agent check][1]  | `self.gauge(...)`                    | GAUGE           | GAUGE               |
 | [API][2]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
@@ -259,7 +259,7 @@ Submit your GAUGE type metrics from one of the following sources:
 
 Submit your HISTOGRAM type metrics from one of the following sources:
 
-| Submission Source | Submission Method (python) | Submission Type | Datadog In-App Types |
+| Submission Source | Submission Method (Python) | Submission Type | Datadog In-App Types |
 | ----------------- | -------------------------- | --------------- | -------------------- |
 | [Agent check][1]  | `self.histogram(...)`      | HISTOGRAM       | GAUGE, RATE          |
 | [DogStatsD][2]    | `dog.histogram(...)`       | HISTOGRAM       | GAUGE, RATE          |
@@ -274,7 +274,7 @@ Submit your HISTOGRAM type metrics from one of the following sources:
 
 Submit your DISTRIBUTION type metrics from the following source:
 
-| Submission Source | Submission Method (python) | Submission Type | Datadog In-App Types |
+| Submission Source | Submission Method (Python) | Submission Type | Datadog In-App Types |
 | ----------------- | -------------------------- | --------------- | -------------------- |
 | [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE, RATE          |
 
@@ -287,7 +287,7 @@ Submit your DISTRIBUTION type metrics from the following source:
 
 Find below a summary of all available metric submission sources and methods with the mapping between the corresponding metric submission type and the in-app types:
 
-| Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Types |
+| Submission Source | Submission Method (Python)           | Submission Type | Datadog In-App Types |
 | ----------------- | ------------------------------------ | --------------- | -------------------- |
 | [Agent check][8]  | `self.count(...)`                    | COUNT           | COUNT                |
 | [Agent check][9]  | `self.monotonic_count(...)`          | COUNT           | COUNT                |
