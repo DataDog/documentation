@@ -32,7 +32,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
     {{< tabs >}}
 
-{{% tab "Metric" %}}
+{{% tab "Metrics" %}}
 
 | Datadog Metric Service name                                |
 | ---------------------------------------------------------- |
