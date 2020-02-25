@@ -20,7 +20,7 @@ You can specify the type of click you want your browser test to perform at execu
 
 {{< img src="synthetics/browser_tests/browser_test_click_step.mp4" alt="Browser Test Click Step" video="true" width="60%">}}
 
-You can choose between:
+Choose between:
 
 * Primary click (left) which corresponds to a left click
 * Double click
