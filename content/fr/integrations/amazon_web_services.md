@@ -256,7 +256,7 @@ L'intégration AWS/Datadog de base récupère des données à partir d'AWS Clou
 L'API Resource Group Tagging vise notamment à réduire le nombre d'appels API requis pour recueillir des tags personnalisés. Pour en savoir plus, consultez la documentation relative aux [stratégies sur les tags][2] sur le site Web d'AWS.
 
 
-[1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/list_trustedadvisor.html
+[1]: https://docs.aws.amazon.com/awssupport/latest/user/Welcome.html#trustedadvisorsection
 [2]: http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html
 {{% /tab %}}
 {{< /tabs >}}

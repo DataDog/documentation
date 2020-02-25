@@ -45,9 +45,24 @@ After a metric is created, only these fields can be updated:
 
 To change the metric type or name, a new metric must be created.
 
-## Feedback
+## Recommended usage metrics
 
-Datadog would love to receive your feedback on this feature. You can submit your feedback directly from [this form][9].
+{{< img src="logs/processing/logs_to_metrics/recommended_usage_metrics.png" alt="Recommended Usage Metrics" responsive="true" style="width:80%;">}}
+
+Usage metrics are estimates of your current Datadog usage in near real-time. They enable you to:
+
+- Graph your estimated usage.
+- Create monitors around your estimated usage.
+- Get instant alerts of spikes or drops in your usage.
+- Assess the potential impact of code changes on your usage in near real-time.
+
+Log Management usage metrics come with three tags that can be used for more granular monitoring:
+
+| Tag                     | Description                                                           |
+| ----------------------- | --------------------------------------------------------------------- |
+|  `datadog_index`        | Indicates the routing query that matches a log to an intended index.  |
+|  `datadog_is_excluded`  | Indicates whether or not a log matches an exclusion query.            |
+|  `service`              | The service attribute of the log event.                               |
 
 ## Further Reading
 
@@ -63,4 +78,3 @@ Datadog would love to receive your feedback on this feature. You can submit your
 [6]: /tagging
 [7]: /developers/metrics/custom_metrics
 [8]: /developers/metrics/#naming-metrics
-[9]: https://docs.google.com/forms/d/e/1FAIpQLSepcuHsNfJN7mpQp-8iBf9l6AslubKVSUHW21kmGg7VOJlxoA/viewform

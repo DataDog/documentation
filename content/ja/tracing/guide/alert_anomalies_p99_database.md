@@ -66,7 +66,7 @@ Datadog では、ユーザー自身で継続的にサービスの健全性を監
 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_5.png" alt="モニターの継続的なアラート設定"  style="width:90%;">}}
 
-    モニターを作成するにつれ、追加するサービス、メトリクス、イベントと、これらに設定する複雑な条件がさらに出てきます。モニターはそれぞれ、サービスに接続されているため、サービス詳細画面および [サービスマップ][9] からアクセスできます。
+    モニターを作成するにつれ、追加するサービス、メトリクス、イベントと、これらに設定する複雑な条件がさらに出てきます。モニターはそれぞれ、サービスに接続されているため、サービス詳細画面および [Service Map][9] からアクセスできます。
 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_6.png" alt="サービスマップ"  style="width:90%;">}}
 
