@@ -43,7 +43,7 @@ Let's now define anomaly detection monitors to be alerted of any unexpected inde
 
 1. [Create a new Anomaly monitor][7]
 2. Select the `logs.estimated.ingested_events.count` metric
-3. Add `datadog_is_exclude:false` in the `from` section (to monitor indexed logs and not ingested ones)
+3. Add `datadog_is_excluded:false` in the `from` section (to monitor indexed logs and not ingested ones)
 4. Add the tag `service` and `datadog_index` in the group by (to be notified if a specific service spikes or stops sending logs in any indexes)
 5. Set the alert condition to match your use case (evaluation window, number of times outside the expected range, ...)
 6. Set the notification message with actionnable instructions:
