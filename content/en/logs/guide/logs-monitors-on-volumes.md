@@ -1,5 +1,5 @@
 ---
-title: Setting up monitors on log usage
+title: Monitor your log usage
 kind: guide
 further_reading:
 - link: "logs/processing"
@@ -22,24 +22,25 @@ Get notified if the indexed log volumes in any scope (`service`, `availability-z
 
 {{< img src="logs/guide/example_notification.png" alt=" example notification"  style="width:70%;">}}
 
-It is also possible to [setup a daily quota on indexes][3] to prevent indexing more than a given amount of logs per day. When doing this, we recommend to setup the above monitor to alert when 80% of this quota is reached within the past 24h.
+It is also possible to [setup a daily quota on indexes][3] to prevent indexing more than a given amount of logs per day. When doing this, Datadog recommends to setup the above monitor to alert when 80% of this quota is reached within the past 24h.
 
 ## Alert on unexpected spikes
 
 ### Activate recommended log usage metrics
 
-Turn on [recommended log usage metrics][4] to start tracking the number of ingested logs, ingested bytes and indexed logs. Navigate to the [Generate Metrics][5] page to enable log usage metrics:
+Turn on the [recommended log usage metrics][4] to start tracking the number of ingested logs, ingested bytes, and indexed logs. Navigate to the [Generate Metrics][5] page to enable your log usage metrics (those metrics are free and kept for 15 months):
 
 {{< img src="logs/processing/logs_to_metrics/recommended_usage_metrics.png" alt="Recommended Usage Metrics" responsive="true" style="width:80%;">}}
 
-Those metrics are free and kept for 15 months. Let's now see how to leverage them in [anomaly detection monitors][6].
-It is **recommended** to set the unit to `Byte` for the `logs.estimated.ingested_bytes` in the [metric summary page][7]:
+See below how to leverage them in [anomaly detection monitors][6].
+
+**Note**: It is recommended to set the unit to `Byte` for the `logs.estimated.ingested_bytes` in the [metric summary page][7]:
 
 {{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="Metric unit definition"  style="width:70%;">}}
 
 ### Anomaly detection monitors
 
-Let's now define anomaly detection monitors to be alerted of any unexpected indexing log spikes:
+To define anomaly detection monitors to be alerted of any unexpected indexing log spikes:
 
 1. [Create a new Anomaly monitor][8]
 2. Select the `logs.estimated.ingested_events.count` metric
@@ -61,14 +62,13 @@ An unexpected amount of logs has been indexed in index {{datadog_index.name}}
 
 ## Estimated usage dashboard
 
-From those metrics, an estimated usage Dashboard might also be built to monitor your Log Management usage across Datadog.
-Here is an example of such a Dashboard:
+From log usage metrics, an estimated usage Dashboard can also be built to monitor your Log Management usage across Datadog. Here is an example of such a Dashboard:
 
 {{< img src="logs/guide/log_usage_dashboard.png" alt="Log estimated usage dashboard"  style="width:70%;">}}
 
 **Reminder**: The metrics used in this dashboard are estimates and might differ from official billing numbers.
 
-To import this dashboard, copy paste the [Estimated usage dashboard JSON definition][9] and import it in a new Screenboard:
+To import this dashboard, copy the [estimated usage dashboard JSON definition][9] and import it in a new Screenboard:
 
 {{< img src="logs/guide/dashboard_import.png" alt="Log estimated usage dashboard"  style="width:30%;">}}
 
@@ -78,10 +78,10 @@ To import this dashboard, copy paste the [Estimated usage dashboard JSON definit
 
 [1]: https://app.datadoghq.com/logs
 [2]: /logs/explorer/search
-[3]: https://docs.datadoghq.com/logs/indexes/#set-daily-quota
-[4]: https://docs.datadoghq.com/logs/logs_to_metrics/#recommended-usage-metrics
+[3]: /logs/indexes/#set-daily-quota
+[4]: /logs/logs_to_metrics/#recommended-usage-metrics
 [5]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[6]: https://docs.datadoghq.com/monitors/monitor_types/anomaly/
+[6]: /monitors/monitor_types/anomaly/
 [7]: https://app.datadoghq.com/metric/summary?filter=logs.estimated.ingested_bytes&metric=logs.estimated.ingested_bytes
 [8]: https://app.datadoghq.com/monitors#create/anomaly
 [9]: /resources/json/estimated_log_usage_dashboard_configuration.json
