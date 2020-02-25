@@ -1,0 +1,666 @@
+{
+    "title": "Log Management - estimated usage dashboard",
+    "description": null,
+    "widgets": [
+        {
+            "id": 0,
+            "definition": {
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_bytes{$service,$index}.rollup(sum, 86400)",
+                        "display_type": "bars",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        }
+                    }
+                ],
+                "yaxis": {
+                    "label": "",
+                    "scale": "linear",
+                    "min": "auto",
+                    "max": "auto",
+                    "include_zero": true
+                },
+                "title": "Ingested bytes",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "show_legend": false
+            },
+            "layout": {
+                "x": 23,
+                "y": 0,
+                "width": 45,
+                "height": 14
+            }
+        },
+        {
+            "id": 1,
+            "definition": {
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(sum:logs.estimated.ingested_bytes{$service,$index} by {service}, 50, 'sum', 'desc')"
+                    }
+                ],
+                "title": "Ingested bytes per service",
+                "title_size": "16",
+                "title_align": "left"
+            },
+            "layout": {
+                "x": 142,
+                "y": -2,
+                "width": 28,
+                "height": 28
+            }
+        },
+        {
+            "id": 3,
+            "definition": {
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count(), 50, 'sum', 'desc')"
+                    }
+                ],
+                "title": "Ingested logs per service",
+                "title_size": "16",
+                "title_align": "left"
+            },
+            "layout": {
+                "x": 69,
+                "y": 0,
+                "width": 28,
+                "height": 28
+            }
+        },
+        {
+            "id": 4,
+            "definition": {
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()",
+                        "display_type": "line",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        }
+                    }
+                ],
+                "yaxis": {
+                    "label": "",
+                    "scale": "linear",
+                    "min": "auto",
+                    "max": "auto",
+                    "include_zero": true
+                },
+                "title": "Ingested logs per service",
+                "title_size": "16",
+                "title_align": "left",
+                "show_legend": false,
+                "legend_size": "0"
+            },
+            "layout": {
+                "x": 97,
+                "y": 14,
+                "width": 45,
+                "height": 14
+            }
+        },
+        {
+            "id": 6,
+            "definition": {
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:true,$service,$index}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index}.as_count()*100",
+                        "display_type": "line",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        }
+                    }
+                ],
+                "yaxis": {
+                    "label": "",
+                    "scale": "linear",
+                    "min": "auto",
+                    "max": "auto",
+                    "include_zero": true
+                },
+                "title": "% of excluded logs",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "show_legend": false
+            },
+            "layout": {
+                "x": 23,
+                "y": 60,
+                "width": 45,
+                "height": 14
+            }
+        },
+        {
+            "id": 7,
+            "definition": {
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(sum:logs.estimated.ingested_events.count{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()*100,50,'sum','desc')"
+                    }
+                ],
+                "title": "Service excluding the most logs",
+                "title_size": "16",
+                "title_align": "left"
+            },
+            "layout": {
+                "x": 69,
+                "y": 60,
+                "width": 28,
+                "height": 28
+            }
+        },
+        {
+            "id": 8,
+            "definition": {
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()*100",
+                        "aggregator": "sum"
+                    }
+                ],
+                "title": "Overall exclusion ratio",
+                "title_size": "16",
+                "title_align": "left",
+                "custom_unit": "%",
+                "precision": 2
+            },
+            "layout": {
+                "x": 3,
+                "y": 68,
+                "width": 15,
+                "height": 10
+            }
+        },
+        {
+            "id": 9,
+            "definition": {
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{$service,$index}.as_count()",
+                        "aggregator": "sum"
+                    }
+                ],
+                "title": "Ingested logs",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "autoscale": true,
+                "custom_unit": "",
+                "precision": 2
+            },
+            "layout": {
+                "x": 3,
+                "y": 18,
+                "width": 15,
+                "height": 10
+            }
+        },
+        {
+            "id": 10,
+            "definition": {
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(sum:logs.estimated.ingested_events.count{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()*100,50,'sum','asc')"
+                    }
+                ],
+                "title": "Service excluding the less logs",
+                "title_size": "16",
+                "title_align": "left"
+            },
+            "layout": {
+                "x": 97,
+                "y": 60,
+                "width": 28,
+                "height": 28
+            }
+        },
+        {
+            "id": 12,
+            "definition": {
+                "type": "toplist",
+                "requests": [
+                    {
+                        "q": "top(sum:logs.estimated.ingested_events.count{datadog_is_excluded:false,$service,$index} by {datadog_index}.as_count(), 50, 'sum', 'desc')"
+                    }
+                ],
+                "title": "Indexed logs by index",
+                "title_size": "16",
+                "title_align": "left"
+            },
+            "layout": {
+                "x": 69,
+                "y": 30,
+                "width": 28,
+                "height": 28
+            }
+        },
+        {
+            "id": 13,
+            "definition": {
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:false,$service,$index} by {datadog_index}.as_count().rollup(sum, 86400)",
+                        "display_type": "bars",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        }
+                    }
+                ],
+                "yaxis": {
+                    "label": "",
+                    "scale": "linear",
+                    "min": "auto",
+                    "max": "auto",
+                    "include_zero": true
+                },
+                "title": "Indexed logs per index",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "show_legend": false,
+                "legend_size": "0"
+            },
+            "layout": {
+                "x": 97,
+                "y": 44,
+                "width": 45,
+                "height": 14
+            }
+        },
+        {
+            "id": 14,
+            "definition": {
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:false,$service,$index} by {service}.as_count()",
+                        "display_type": "line",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        }
+                    }
+                ],
+                "yaxis": {
+                    "label": "",
+                    "scale": "linear",
+                    "min": "auto",
+                    "max": "auto",
+                    "include_zero": true
+                },
+                "title": "Indexed logs per service",
+                "title_size": "16",
+                "title_align": "left",
+                "show_legend": false,
+                "legend_size": "0"
+            },
+            "layout": {
+                "x": 97,
+                "y": 30,
+                "width": 45,
+                "height": 14
+            }
+        },
+        {
+            "id": 23,
+            "definition": {
+                "type": "note",
+                "content": "Ingestion",
+                "background_color": "yellow",
+                "font_size": "24",
+                "text_align": "center",
+                "show_tick": true,
+                "tick_pos": "50%",
+                "tick_edge": "right"
+            },
+            "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 22,
+                "height": 8
+            }
+        },
+        {
+            "id": 25,
+            "definition": {
+                "type": "note",
+                "content": "Indexing",
+                "background_color": "yellow",
+                "font_size": "24",
+                "text_align": "center",
+                "show_tick": true,
+                "tick_pos": "50%",
+                "tick_edge": "right"
+            },
+            "layout": {
+                "x": 0,
+                "y": 30,
+                "width": 22,
+                "height": 8
+            }
+        },
+        {
+            "id": 26,
+            "definition": {
+                "type": "note",
+                "content": "Sampling",
+                "background_color": "yellow",
+                "font_size": "24",
+                "text_align": "center",
+                "show_tick": true,
+                "tick_pos": "50%",
+                "tick_edge": "right"
+            },
+            "layout": {
+                "x": -1,
+                "y": 60,
+                "width": 22,
+                "height": 8
+            }
+        },
+        {
+            "id": 27,
+            "definition": {
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()*100",
+                        "display_type": "line",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        }
+                    }
+                ],
+                "yaxis": {
+                    "label": "",
+                    "scale": "linear",
+                    "min": "auto",
+                    "max": "auto",
+                    "include_zero": true
+                },
+                "title": "% of excluded logs by service",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "show_legend": false,
+                "legend_size": "0"
+            },
+            "layout": {
+                "x": 23,
+                "y": 74,
+                "width": 45,
+                "height": 14
+            }
+        },
+        {
+            "id": 29,
+            "definition": {
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{$service,$index}.as_count().rollup(sum, 86400)",
+                        "display_type": "bars",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        }
+                    }
+                ],
+                "yaxis": {
+                    "label": "",
+                    "scale": "linear",
+                    "min": "auto",
+                    "max": "auto",
+                    "include_zero": true
+                },
+                "title": "Ingested logs",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "show_legend": false,
+                "legend_size": "0"
+            },
+            "layout": {
+                "x": 23,
+                "y": 14,
+                "width": 45,
+                "height": 14
+            }
+        },
+        {
+            "id": 30,
+            "definition": {
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_bytes{$service,$index} by {service}",
+                        "display_type": "line",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        }
+                    }
+                ],
+                "yaxis": {
+                    "label": "",
+                    "scale": "linear",
+                    "min": "auto",
+                    "max": "auto",
+                    "include_zero": true
+                },
+                "title": "Ingested bytes per service",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "show_legend": false,
+                "legend_size": "0"
+            },
+            "layout": {
+                "x": 97,
+                "y": 0,
+                "width": 45,
+                "height": 14
+            }
+        },
+        {
+            "id": 31,
+            "definition": {
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:false,$service,$index}.as_count().rollup(sum, 86400)",
+                        "display_type": "bars",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        }
+                    }
+                ],
+                "yaxis": {
+                    "label": "",
+                    "scale": "linear",
+                    "min": "auto",
+                    "max": "auto",
+                    "include_zero": true
+                },
+                "title": "Indexed logs",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "show_legend": false,
+                "legend_size": "0"
+            },
+            "layout": {
+                "x": 23,
+                "y": 30,
+                "width": 45,
+                "height": 14
+            }
+        },
+        {
+            "id": 34,
+            "definition": {
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{$service,$index,datadog_is_excluded:false}.as_count()",
+                        "aggregator": "sum"
+                    }
+                ],
+                "title": "Indexed logs",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "autoscale": true,
+                "custom_unit": "",
+                "precision": 2
+            },
+            "layout": {
+                "x": 3,
+                "y": 38,
+                "width": 15,
+                "height": 10
+            }
+        },
+        {
+            "id": 36,
+            "definition": {
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{$service,$index,datadog_is_excluded:true}.as_count()",
+                        "aggregator": "sum"
+                    }
+                ],
+                "title": "Excluded logs",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "autoscale": true,
+                "custom_unit": "",
+                "precision": 2
+            },
+            "layout": {
+                "x": 3,
+                "y": 78,
+                "width": 15,
+                "height": 10
+            }
+        },
+        {
+            "id": 37,
+            "definition": {
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:false,$service,$index}.as_count().rollup(sum, 86400)",
+                        "display_type": "bars",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        }
+                    },
+                    {
+                        "q": "sum:logs.estimated.ingested_events.count{$service,$index}.as_count().rollup(sum, 86400)",
+                        "display_type": "line",
+                        "style": {
+                            "palette": "dog_classic",
+                            "line_type": "solid",
+                            "line_width": "normal"
+                        }
+                    }
+                ],
+                "yaxis": {
+                    "label": "",
+                    "scale": "linear",
+                    "min": "auto",
+                    "max": "auto",
+                    "include_zero": true
+                },
+                "title": "Indexed vs ingested logs",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "show_legend": false,
+                "legend_size": "0"
+            },
+            "layout": {
+                "x": 23,
+                "y": 44,
+                "width": 45,
+                "height": 14
+            }
+        },
+        {
+            "id": 38,
+            "definition": {
+                "type": "query_value",
+                "requests": [
+                    {
+                        "q": "sum:logs.estimated.ingested_bytes{$service,$index}.rollup(sum, 86400)",
+                        "aggregator": "sum"
+                    }
+                ],
+                "title": "Ingested bytes",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {},
+                "autoscale": true,
+                "precision": 2
+            },
+            "layout": {
+                "x": 3,
+                "y": 8,
+                "width": 15,
+                "height": 10
+            }
+        }
+    ],
+    "template_variables": [
+        {
+            "name": "service",
+            "default": "*",
+            "prefix": "service"
+        },
+        {
+            "name": "index",
+            "default": "*",
+            "prefix": "datadog_index"
+        }
+    ],
+    "layout_type": "free",
+    "is_read_only": false,
+    "notify_list": [],
+    "id": "95k-i35-z2a"
+}

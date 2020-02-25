@@ -2,28 +2,28 @@
 title: Generate Metrics from Ingested Logs
 kind: documentation
 aliases:
- - /logs/processing/logs_to_metrics/
-description: "Generate Metrics from Ingested Logs."
+    - /logs/processing/logs_to_metrics/
+description: 'Generate Metrics from Ingested Logs.'
 further_reading:
-- link: "logs/processing/processors"
-  tag: "Documentation"
-  text: "Learn how to process your logs"
-- link: "logs/logging_without_limits"
-  tag: "Documentation"
-  text: "Control the volume of logs indexed by Datadog"
+    - link: 'logs/processing/processors'
+      tag: 'Documentation'
+      text: 'Learn how to process your logs'
+    - link: 'logs/logging_without_limits'
+      tag: 'Documentation'
+      text: 'Control the volume of logs indexed by Datadog'
 ---
 
 ## Overview
 
-Datadog’s [Logging without Limits][1]* lets you dynamically decide what to include or exclude from your indexes. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit indexes to operationally critical logs, you can still visualize trends and anomalies over all of your log data at full granularity for 15 months.
+Datadog’s [Logging without Limits][1]\* lets you dynamically decide what to include or exclude from your indexes. Log-based metrics are a cost-efficient way to summarize log data from the entire ingest stream. This means that even if you use [exclusion filters][2] to limit indexes to operationally critical logs, you can still visualize trends and anomalies over all of your log data at full granularity for 15 months.
 
 With log-based metrics, you can record a count of logs that match a query or summarize a numeric value contained in a log, such as request duration.
 
 ## Generate a log-based metric
 
-{{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric"  style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/recommended_usage_metrics.png" alt="Generate Logs to metric"  style="width:80%;">}}
 
-To generate a new log-based metric, go to the [Configuration page][3] of your Datadog account and select the *[Generate Metrics][4]* tab, then the **New Metric+** button.
+To generate a new log-based metric, go to the [Configuration page][3] of your Datadog account and select the _[Generate Metrics][4]_ tab, then the **New Metric+** button.
 
 ### Add a new log-based metric
 
@@ -40,8 +40,8 @@ To generate a new log-based metric, go to the [Configuration page][3] of your Da
 
 After a metric is created, only these fields can be updated:
 
-* Stream filter query
-* Aggregation groups
+- Stream filter query
+- Aggregation groups
 
 To change the metric type or name, a new metric must be created.
 
@@ -53,7 +53,7 @@ Datadog would love to receive your feedback on this feature. You can submit your
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-*Logging without Limits is a trademark of Datadog, Inc.
+\*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs
 [2]: /logs/indexes/#exclusion-filters
