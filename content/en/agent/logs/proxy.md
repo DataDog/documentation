@@ -75,11 +75,11 @@ The parameter above can also be set with the following environment variable:
 
 ### Using HAProxy as a TCP Proxy for Logs
 
-This example explains how to configure the Datadog Agent to send logs in TCP to a server with Haproxy installed and listening on port `10514` to then forward the logs to Datadog.
+This example explains how to configure the Datadog Agent to send logs in TCP to a server with HAProxy installed and listening on port `10514` to then forward the logs to Datadog.
 
 `agent ---> haproxy ---> Datadog`
 
-The encryption is disabled between the Agent and Haproxy which is then configured to encrypt the data before sending it to Datadog.
+The encryption is disabled between the Agent and HAProxy which is then configured to encrypt the data before sending it to Datadog.
 
 #### HAProxy configuration
 
@@ -200,9 +200,9 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 
 #### Agent configuration
 
-Then edit the `datadog.yaml` Agent configuration file and set `logs_no_ssl` to `true`. This is needed as Haproxy does not simply forward the traffic and is not the Datadog backend so cannot use the same certificate.
+Then edit the `datadog.yaml` Agent configuration file and set `logs_no_ssl` to `true`. This is needed as HAProxy does not simply forward the traffic and is not the Datadog backend so cannot use the same certificate.
 
-**Note**: `logs_no_ssl` might set to true because Haproxy is configured to encrypt the data. Do not set this parameter to `true` otherwise.
+**Note**: `logs_no_ssl` might set to true because HAProxy is configured to encrypt the data. Do not set this parameter to `true` otherwise.
 
 ```
 logs_config:
@@ -218,7 +218,7 @@ This example explains how to configure the Datadog Agent to send logs in TCP to 
 
 #### NGINX configuration
 
-This example `nginx.conf` can be used to proxy Agent traffic to Datadog. The last server block in this configuration does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
+In this example, `nginx.conf` can be used to proxy Agent traffic to Datadog. The last server block in this configuration does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
 
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
@@ -269,14 +269,14 @@ stream {
 
 #### Agent configuration
 
-Then edit the `datadog.yaml` Agent configuration file and set `logs_config.logs_dd_url` to use the newly created proxy instead of establishing a connection directly with Datadog:
+Edit the `datadog.yaml` Agent configuration file and set `logs_config.logs_dd_url` to use the newly created proxy instead of establishing a connection directly with Datadog:
 
 ```yaml
 logs_config:
   logs_dd_url: myProxyServer.myDomain:10514
 ```
 
-Do not change the `logs_no_ssl` parameter as NGINX is simply forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
+**Note**: Do not change the `logs_no_ssl` parameter as NGINX is simply forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
 
 
 ## Further Reading
