@@ -68,6 +68,10 @@ Here is an example of such a Dashboard:
 
 **Reminder**: The metrics used in this dashboard are estimates and might differ from official billing numbers.
 
+To import this dashboard, copy paste the below JSON definition and import it in a new Screenboard:
+
+{{< img src="logs/guide/import_dashboard.png" alt="Log estimated usage dashboard"  style="width:70%;">}}
+
 And the JSON definition of this dashboard:
 
 ```
