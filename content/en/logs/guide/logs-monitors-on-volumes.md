@@ -22,6 +22,8 @@ Get notified if the indexed log volumes in any scope (`service`, `availibility-z
 
 {{< img src="logs/guide/example_notification.png" alt=" example notification"  style="width:70%;">}}
 
+It is also possible to [setup a daily quota on indexes][8] to prevent indexing more than a given amount of logs per day. When doing this, we recommend to setup the above monitor to alert when 80% of this quota is reached within the past 24h.
+
 ## Alert on unexpected spikes
 
 ### Activate recommended log usage metrics
@@ -83,3 +85,4 @@ And the JSON definition of this dashboard:
 [5]: https://app.datadoghq.com/logs/pipelines/generate-metrics
 [6]: https://app.datadoghq.com/metric/summary?filter=logs.estimated.ingested_bytes&metric=logs.estimated.ingested_bytes
 [7]: https://app.datadoghq.com/monitors#create/anomaly
+[8]: https://docs.datadoghq.com/logs/indexes/#set-daily-quota
