@@ -72,7 +72,7 @@ You can simulate users entering keystrokes using **Press Key** steps. The below 
 * Escape 
 * Backspace
 
-If you need your browser test to press keys that are not being automatically recorded, you can leverage the **Press Key** special action and specify which values need to be pressed in the value box.
+To press keys that are not being automatically recorded, specify which values need to be pressed in the value box of the  **Press Key** special action:
 
 {{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Browser Test Press Key"  style="width:60%;">}}
 
