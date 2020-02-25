@@ -21,7 +21,7 @@ With log-based metrics, you can record a count of logs that match a query or sum
 
 ## Generate a log-based metric
 
-{{< img src="logs/processing/logs_to_metrics/recommended_usage_metrics.png" alt="Generate Logs to metric"  style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric"  style="width:80%;">}}
 
 To generate a new log-based metric, go to the [Configuration page][3] of your Datadog account and select the _[Generate Metrics][4]_ tab, then the **New Metric+** button.
 
