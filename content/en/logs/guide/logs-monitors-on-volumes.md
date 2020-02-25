@@ -30,7 +30,7 @@ It is also possible to [setup a daily quota on indexes][3] to prevent indexing m
 
 Turn on [recommended log usage metrics][4] to start tracking the number of ingested logs, ingested bytes and indexed logs. Navigate to the [Generate Metrics][5] page to enable log usage metrics:
 
-{{< img src="logs/logs_to_metrics/recommended_usage_metrics.png" alt="Recommended Usage Metrics" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/recommended_usage_metrics.png" alt="Recommended Usage Metrics" responsive="true" style="width:80%;">}}
 
 Those metrics are free and kept for 15 months. Let's now see how to leverage them in [anomaly detection monitors][6].
 It is **recommended** to set the unit to `Byte` for the `logs.estimated.ingested_bytes` in the [metric summary page][7]:
@@ -52,7 +52,7 @@ Let's now define anomaly detection monitors to be alerted of any unexpected inde
 
 Example of notification with contextual links:
 
-```
+```text
 An unexpected amount of logs has been indexed in index {{datadog_index.name}}
 
 1. [Check Log patterns for this service](https://app.datadoghq.com/logs/patterns?from_ts=1582549794112&live=true&to_ts=1582550694112&query=service%3A{{service.name}})
@@ -71,8 +71,6 @@ Here is an example of such a Dashboard:
 To import this dashboard, copy paste the [Estimated usage dashboard JSON definition][9] and import it in a new Screenboard:
 
 {{< img src="logs/guide/dashboard_import.png" alt="Log estimated usage dashboard"  style="width:30%;">}}
-
-And the JSON definition of this dashboard:
 
 ## Further Reading
 
