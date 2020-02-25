@@ -67,10 +67,9 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-
-[1]: /developers/metrics/types/?tab=count#metric-submission-types
-[2]: /developers/metrics/types/?tab=rate#metric-submission-types
-[3]: /developers/metrics/types/?tab=gauge#metric-submission-types
+[1]: /developers/metrics/types/?tab=count#metric-types
+[2]: /developers/metrics/types/?tab=rate#metric-types
+[3]: /developers/metrics/types/?tab=gauge#metric-types
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
@@ -91,8 +90,8 @@ By default, the Agent generates five custom metrics for each of the original fou
 - Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][3]. By default, only the `95percentile`, 95th percentile, is sent out to Datadog.
 
 
-[1]: /developers/metrics/types/?tab=histogram
-[2]: /developers/metrics/types/?tab=histogram#metric-submission-types
+[1]: /developers/metrics/types/?tab=histogram#metric-types
+[2]: /developers/metrics/types/?tab=histogram#definition
 [3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
@@ -136,7 +135,7 @@ After enabling percentile aggregations for `request.Latency`, this metric name a
 **Note**: Only tag value combinations that actually appear in your data are counted as queryable. Since the combination { `endpoint:Y`, `status:400` } was never submitted in your data, this combination won’t be queryable and won’t count towards your custom metric count.
 
 
-[1]: /developers/metrics/types/?tab=distribution
+[1]: /developers/metrics/types/?tab=distribution#definition
 [2]: /metrics/distributions/#customize-tagging
 [3]: /metrics/distributions/#aggregations
 {{% /tab %}}
@@ -181,7 +180,7 @@ For billing questions, contact your [Customer Success][26] Manager.
 
 [1]: /integrations
 [2]: /developers/metrics/custom_metrics
-[3]: /developers/metrics/types/#metric-submission-types
+[3]: /developers/metrics/types/#metric-types
 [4]: https://app.datadoghq.com/account/usage/hourly
 [5]: /account_management/billing/usage_details
 [6]: https://app.datadoghq.com/metric/summary
