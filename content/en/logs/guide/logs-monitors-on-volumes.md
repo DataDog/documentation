@@ -34,7 +34,7 @@ Turn on the [recommended log usage metrics][4] to start tracking the number of i
 
 See below how to leverage them in [anomaly detection monitors][6].
 
-**Note**: It is recommended to set the unit to `Byte` for the `logs.estimated.ingested_bytes` in the [metric summary page][7]:
+**Note**: It is recommended to set the unit to `Byte` for the `datadog.estimated_usage.logs.ingested_bytes` in the [metric summary page][7]:
 
 {{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="Metric unit definition"  style="width:70%;">}}
 
@@ -43,7 +43,7 @@ See below how to leverage them in [anomaly detection monitors][6].
 To define anomaly detection monitors to be alerted of any unexpected indexing log spikes:
 
 1. [Create a new Anomaly monitor][8]
-2. Select the `logs.estimated.ingested_events.count` metric
+2. Select the `datadog.estimated_usage.logs.ingested_events` metric
 3. Add `datadog_is_excluded:false` in the `from` section (to monitor indexed logs and not ingested ones)
 4. Add the tag `service` and `datadog_index` in **group by** (to be notified if a specific service spikes or stops sending logs in any indexes)
 5. Set the alert condition to match your use case (e.g., evaluation window, number of times outside the expected range, etc.)
@@ -82,6 +82,6 @@ To import this dashboard, copy the [estimated usage dashboard JSON definition][9
 [4]: /logs/logs_to_metrics/#recommended-usage-metrics
 [5]: https://app.datadoghq.com/logs/pipelines/generate-metrics
 [6]: /monitors/monitor_types/anomaly/
-[7]: https://app.datadoghq.com/metric/summary?filter=logs.estimated.ingested_bytes&metric=logs.estimated.ingested_bytes
+[7]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [8]: https://app.datadoghq.com/monitors#create/anomaly
 [9]: /resources/json/estimated_log_usage_dashboard_configuration.json
