@@ -47,7 +47,7 @@ To change the metric type or name, a new metric must be created.
 
 ## Recommended usage metrics
 
-{{< img src="logs/processing/logs_to_metrics/recommended_usage_metrics.png" alt="Recommended Usage Metrics" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/estimated_usage_metrics.png" alt="Recommended Usage Metrics" responsive="true" style="width:80%;">}}
 
 Usage metrics are estimates of your current Datadog usage in near real-time. They enable you to:
 

@@ -30,7 +30,7 @@ It is also possible to [setup a daily quota on indexes][3] to prevent indexing m
 
 Turn on the [recommended log usage metrics][4] to start tracking the number of ingested logs, ingested bytes, and indexed logs. Navigate to the [Generate Metrics][5] page to enable your log usage metrics (those metrics are free and kept for 15 months):
 
-{{< img src="logs/processing/logs_to_metrics/recommended_usage_metrics.png" alt="Recommended Usage Metrics" responsive="true" style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/estimated_usage_metrics.png" alt="Recommended Usage Metrics" responsive="true" style="width:80%;">}}
 
 See below how to leverage them in [anomaly detection monitors][6].
 
