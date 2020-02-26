@@ -32,7 +32,7 @@ The `{{last_triggered_at_epoch}}` template variable returns the UTC time when a 
 {{eval "last_triggered_at_epoch-15*60*1000"}}
 ```
 
-This is useful for creating time-scoped links in your monitor notification message to other pages in Datadog or other workflow tools. For instance, use the evaluation operators on `{{last_triggered_at_epoch}}` to create a time-scoped link to the Datadog Log Explorer:
+This is useful for creating time-scoped links in your monitor notification message to other pages in Datadog or other workflow tools. For instance, use the evaluation operators on `{{last_triggered_at_epoch}}` to create a time-scoped link to the [Datadog Log Explorer][1]:
 
 ```
 https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*1000"}}&to_ts={{last_triggered_at_epoch}}&live=false
@@ -93,3 +93,6 @@ If `{{value}}` is evaluating to a large number of bytes or bits, use the `humani
 
 {{eval “humanize_bits(value)”}}
 ```
+
+
+[1]: /logs/explorer
