@@ -86,16 +86,16 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
     **Note**: If the `service` command is not available on your system, run the following command instead: `sudo systemctl enable datadog-agent-sysprobe`
 
-
 [1]: /infrastructure/process/?tab=linuxwindows#installation
 [2]: /agent/guide/agent-commands/#restart-the-agent
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 To enable network performance monitoring with Kubernetes, use the following configuration:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
     name: datadog-agent
@@ -228,8 +228,8 @@ spec:
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
-
 [1]: https://app.datadoghq.com/account/settings#api
+
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -253,8 +253,8 @@ datadog/agent:latest
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
-
 [1]: https://app.datadoghq.com/account/settings#api
+
 {{% /tab %}}
 {{< /tabs >}}
 
