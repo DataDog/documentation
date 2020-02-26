@@ -14,11 +14,11 @@ further_reading:
 Datadog exposes AWS PrivateLink endpoints in us-east-1.
 </div>
 
-This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog. AWS PrivateLink simplifies the security of data shared with Datadog by eliminating the exposure of data to the public internet.
+This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog.
 
 ## Overview
 
-The overall process consists of configuring an internal endpoint in your VPC that local Datadog Agents can send data to. Your VPC endpoint is then peered with the endpoint within Datadog VPC.
+The overall process consists of configuring an internal endpoint in your VPC that local Datadog Agents can send data to. Your VPC endpoint is then peered with the endpoint within Datadog's VPC.
 
 {{< img src="agent/guide/private_link/vpc_diagram_schema.png" alt="VPC diagram Schema" >}}
 
@@ -36,7 +36,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 
 | Datadog Metric Service name                                |
 | ---------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-056576c12b36056ca`  |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-056576c12b36056ca`  |
 
 {{% /tab %}}
 {{% tab "Logs" %}}
@@ -48,17 +48,15 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 {{% /tab %}}
 {{% tab "API" %}}
 
-| Datadog API Service name                                   |
-| ---------------------------------------------------------- |
-|  `com.amazonaws.vpce.us-east-1.vpce-svc-02a4a57bc703929a0` |   |
+| Datadog API Service name                                  |
+| --------------------------------------------------------- |
+| `com.amazonaws.vpce.us-east-1.vpce-svc-02a4a57bc703929a0` |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Hit the _verify_ button. If it does not return _Service name Found_, reach out to [Datadog support team][2].
+4. Hit the _verify_ button. If it does not return _Service name found_, reach out to [Datadog support team][2].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
-   **Note**: The VPC must be in `us-east-1` and it's recommend to set subnets with all of the following availability zone IDs: `use1-az6`, `use1-az2`, and `use1-az4`:
-   {{< img src="agent/guide/private_link/saved_az.png" alt="Saved AZ" style="width:60%;" >}}
 6. Make sure that for **Enable DNS name** the _Enable for this Endpoint_ is checked:
    {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Enable DNS private" style="width:60%;" >}}
 7. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
@@ -78,7 +76,7 @@ Once it shows _Available_, the AWS PrivateLink is ready to be used. The next ste
 Select the tab below to see how to send your metrics and logs to Datadog using this new VPC endpoint, or which new host url you would need to use for Datadog API:
 
 {{< tabs >}}
-{{% tab "Metric" %}}
+{{% tab "Metrics" %}}
 
 _Available for Agent versions superior to 6.0_
 
