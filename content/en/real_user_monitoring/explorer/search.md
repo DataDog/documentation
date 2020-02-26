@@ -29,7 +29,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="real_user_monitoring/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete " responsive="true" style="width:60%;">}}
+{{< img src="real_user_monitoring/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete "  style="width:60%;">}}
 
 ## Facets search
 
