@@ -13,7 +13,7 @@ Other Alibaba resources (CDNs, Express Connect Instances, Aspara DBs, etc.) are 
 
 Use the [Datadog-Alibaba integration][1] tile to filter your VMs monitored by Datadog using [host tags][2]. Go to the **Configuration** tab and edit an existing account or add a new one. Filtering for each account is controlled by clicking it and filling in the field for **Optionally limit metrics collection to hosts with tag**:
 
-{{< img src="account_management/billing/alibaba_filter.png" alt="Alibaba VM Filter" responsive="true">}}
+{{< img src="account_management/billing/alibaba_filter.png" alt="Alibaba VM Filter" >}}
 
 When adding limits to existing Alibaba accounts within the integration tile, the previously discovered VMs could stay in the [Infrastructure List][3] up to 2 hours. During the transition period, VMs display a status of `???`. This does not count towards your billing.
 
