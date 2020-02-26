@@ -92,6 +92,10 @@ body > header {
         font-size:18px;
         letter-spacing: .4px;
         line-height:31px;
+
+        &:lang(ja) {
+          font-size: 16px;
+        }
         &:hover {
           border:1px solid $ddpurple;
           background: #c024b6;
