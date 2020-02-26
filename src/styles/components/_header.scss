@@ -68,6 +68,9 @@ body > header {
           background-color: #fff;
           border-color: #c8c8c8;
         }
+        &:lang(ja) {
+          font-size: 16px;
+        }
       }
       &:hover {
         a {
@@ -126,12 +129,19 @@ body > header {
         background-color: #fff;
         border-top-left-radius: 0;
         top: 45px;
+
+        &:lang(ja) {
+          top: 43px;
+        }
         a {
           color: #000;
           padding: 8px 11px;
           font-size: 18px;
           letter-spacing: .4px;
           border-radius: 0;
+          &:lang(ja) {
+            font-size: 16px;
+          }
           &:last-child {
             border-bottom-right-radius: 5px;
             border-bottom-left-radius: 5px;
