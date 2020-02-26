@@ -16,15 +16,15 @@ Actions are a series of steps that you can record for a browser test, which you 
 
 [Datadog’s extension][4] automatically records clicks on your page. 
 
-You can specify the type of click you want your browser test to perform at execution by selecting the click type of interest on your step:
+Specify the type of click you want your browser test to perform at execution time:
 
 {{< img src="synthetics/browser_tests/browser_test_click_step.mp4" alt="Browser Test Click Step" video="true" width="60%">}}
 
-Choose between:
+Choose from:
 
-* Primary click (left) which corresponds to a left click
+* Primary click (corresponds to a left click)
 * Double click
-* Contextual click (right click)
+* Contextual click (corresponds to a right click)
 
 ## Assertion
 
@@ -55,7 +55,7 @@ The navigation action allows you to:
 
 ## Special Actions
 
-Most of the actions are recorded using [the provided Datadog extension][4]. Some actions are however not recorded automatically and you need to explicitly add a step for them using the **Special Actions** menu located at the top left-hand corner of the recorder.
+[The provided Datadog extension][4] records most actions. However, some actions—such as hover, press key, and scroll—are not recorded automatically. Explicitly add a step for them using the **Special Actions** menu located at the top left-hand corner of the recorder.
 
 ### Hover
 
@@ -63,9 +63,9 @@ This browser test step isn’t added through an actual hovering mechanism (other
 
 After selecting the Hover action, click on the element you want to choose to create a new step.
 
-### Press Key
+### Press key
 
-You can simulate users entering keystrokes using **Press Key** steps. The keys below can be recorded using [Datadog extension][4]:
+You can simulate users entering keystrokes using **Press Key** steps. The keys below can be recorded using the [Datadog extension][4]:
 
 * Enter
 * Arrows (up, down, right, and left)
@@ -73,7 +73,7 @@ You can simulate users entering keystrokes using **Press Key** steps. The keys b
 * Escape 
 * Backspace
 
-To press keys that are not being automatically recorded, specify which values need to be pressed in the value box of the  **Press Key** special action:
+To press keys that are not being automatically recorded, specify which values need to be pressed in the value box of the **Press Key** special action:
 
 {{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Browser Test Press Key"  style="width:60%;">}}
 
@@ -86,7 +86,7 @@ The below modifiers can also be applied to the inputted value:
 
 ### Scroll
 
-Your browser test automatically scrolls to the element it needs to interact with. In most cases you consequently do not need to add a manual scroll. The scroll step should only be added when needed to trigger an additional network request such as an infinite scroll.
+Your browser test automatically scrolls to the element it needs to interact with. Consequently, in most cases, you do not need to manually add a scroll step. The scroll step should only be added when needed to trigger an additional network request, such as in an infinite scroll.
 
 {{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="Browser Test Scroll Step"  style="width:60%;">}}
 
