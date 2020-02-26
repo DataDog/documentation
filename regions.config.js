@@ -1,12 +1,14 @@
 export default {
-    "us": {
-        "dd_site": "datadoghq.com",
-        "tcp_endpoint": "intake.logs.datadoghq.com",
-        "tcp_endpoint_port": "10514"
+    dd_site: {
+        us: 'datadoghq.com',
+        eu: 'datadoghq.eu'
     },
-    "eu": {
-        "dd_site": "datadoghq.eu",
-        "tcp_endpoint": "tcp-intake.logs.datadoghq.eu",
-        "tcp_endpoint_port": "1883"
+    tcp_endpoint: {
+        us: 'intake.logs.datadoghq.com',
+        eu: 'tcp-intake.logs.datadoghq.eu'
+    },
+    tcp_endpoint_port: {
+        us: '10514',
+        eu: '1883'
     }
-}
+};
