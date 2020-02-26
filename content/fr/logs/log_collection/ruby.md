@@ -193,9 +193,9 @@ end
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/roidrage/lograge
-[2]: https://docs.datadoghq.com/fr/logs/?tab=ussite#reserved-attributes
+[2]: /fr/logs/?tab=ussite#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation
 [5]: /fr/agent/logs
 [6]: /fr/agent/guide/agent-commands/#restart-the-agent
-[7]: /fr/tracing/connect_logs_and_traces/?tab=ruby
+[7]: /fr/tracing/connect_logs_and_traces/ruby

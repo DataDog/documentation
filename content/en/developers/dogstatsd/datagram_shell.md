@@ -203,7 +203,7 @@ To send metrics, events, or service checks on containerized environments, refer 
 [1]: /developers/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
 [3]: /developers/dogstatsd
-[4]: /agent/kubernetes/dogstatsd
+[4]: /developers/dogstatsd/
 [5]: /agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
 [6]: /agent/kubernetes/helm/#enable-apm-and-distributed-tracing
 [7]: /agent/docker/apm

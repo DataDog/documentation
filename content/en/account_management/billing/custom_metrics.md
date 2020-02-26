@@ -41,14 +41,14 @@ This results in `request.Latency` reporting **four distinct custom metrics**.
 Adding tags **may not** result in more custom metrics. Your count of custom metrics usually scales with the most granular or detailed tag. Suppose you are measuring temperature in the US, and you have tagged your `temperature` metric by country and region. You submit the following to Datadog:
 
 | Metric Name   | Tag Values                         |
-| ------------- | ---------------------------------- |
+|---------------|------------------------------------|
 | `temperature` | `country:USA`, `region: Northeast` |
 | `temperature` | `country:USA`, `region: Southeast` |
 
 Suppose you wanted to add the tag `city` which has three values: `NYC`, `Miami`, and `Orlando`. Adding this tag increases the number of custom metrics as it provides more detail and granularity to your dataset as shown below:
 
 | Metric Name   | Tag Values                                          |
-| ------------- | --------------------------------------------------- |
+|---------------|-----------------------------------------------------|
 | `temperature` | `country:USA`, `region: Northeast`, `city: NYC`     |
 | `temperature` | `country:USA`, `region: Southeast`, `city: Orlando` |
 | `temperature` | `country:USA`, `region: Southeast`, `city: Miami`   |
@@ -67,10 +67,9 @@ To obtain the temperature in Florida, you can simply recombine the custom metric
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
-
-[1]: /developers/metrics/types/?tab=count#metric-submission-types
-[2]: /developers/metrics/types/?tab=rate#metric-submission-types
-[3]: /developers/metrics/types/?tab=gauge#metric-submission-types
+[1]: /developers/metrics/types/?tab=count#metric-types
+[2]: /developers/metrics/types/?tab=rate#metric-types
+[3]: /developers/metrics/types/?tab=gauge#metric-types
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
@@ -91,8 +90,8 @@ By default, the Agent generates five custom metrics for each of the original fou
 - Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][3]. By default, only the `95percentile`, 95th percentile, is sent out to Datadog.
 
 
-[1]: /developers/metrics/types/?tab=histogram
-[2]: /developers/metrics/types/?tab=histogram#metric-submission-types
+[1]: /developers/metrics/types/?tab=histogram#metric-types
+[2]: /developers/metrics/types/?tab=histogram#definition
 [3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
@@ -136,7 +135,7 @@ After enabling percentile aggregations for `request.Latency`, this metric name a
 **Note**: Only tag value combinations that actually appear in your data are counted as queryable. Since the combination { `endpoint:Y`, `status:400` } was never submitted in your data, this combination won’t be queryable and won’t count towards your custom metric count.
 
 
-[1]: /developers/metrics/types/?tab=distribution
+[1]: /developers/metrics/types/?tab=distribution#definition
 [2]: /metrics/distributions/#customize-tagging
 [3]: /metrics/distributions/#aggregations
 {{% /tab %}}
@@ -167,21 +166,22 @@ The billable number of custom metrics is based on the average number of custom m
 
 The following standard integrations can potentially emit custom metrics.
 
-| Type of integrations                             | Integrations                                                                                                                             |
-| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| Limited to 350 custom metrics by default.        | [ActiveMQ XML][9] / [Go-Expvar][10] / [Java-JMX][11]                                                                                     |
-| No default limit upon custom metrics collection. | [Directory][12] /[Linux Proc Extras][13] /[Nagios][14] /[PDH Check][15] /[Prometheus][16] /[SNMP][17] /[Windows Services][18] /[WMI][19] |
-| Can be configured to collect custom metrics.     | [MySQL][20] /[Oracle][21] /[Postgres][22] /[SQL Server][23]                                                                              |
+| Type of integrations                           | Integrations                                                                                                                             |
+|------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| Limited to 350 custom metrics by default.      | [ActiveMQ XML][9] / [Go-Expvar][10] / [Java-JMX][11]                                                                                     |
+| No default limit on custom metrics collection. | [Directory][12] /[Linux Proc Extras][13] /[Nagios][14] /[PDH Check][15] /[Prometheus][16] /[SNMP][17] /[Windows Services][18] /[WMI][19] |
+| Can be configured to collect custom metrics.   | [MySQL][20] /[Oracle][21] /[Postgres][22] /[SQL Server][23]                                                                              |
+| Custom metrics sent from cloud integrations    | [AWS][24]                                                                                                                                |
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][24].
+For technical questions, contact [Datadog support][25].
 
 For billing questions, contact your [Customer Success][26] Manager.
 
 [1]: /integrations
 [2]: /developers/metrics/custom_metrics
-[3]: /developers/metrics/types/#metric-submission-types
+[3]: /developers/metrics/types/#metric-types
 [4]: https://app.datadoghq.com/account/usage/hourly
 [5]: /account_management/billing/usage_details
 [6]: https://app.datadoghq.com/metric/summary
@@ -202,4 +202,6 @@ For billing questions, contact your [Customer Success][26] Manager.
 [21]: /integrations/oracle
 [22]: /integrations/postgres
 [23]: /integrations/sqlserver
-[24]: mailto:success@datadoghq.com
+[24]: /integrations/amazon_web_services
+[25]: /help
+[26]: mailto:success@datadoghq.com

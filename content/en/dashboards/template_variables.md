@@ -28,7 +28,7 @@ A template variable is defined by:
 * **Name**: A unique name for the template variable. This name is used to filter content on your dashboard.
 * **Tag or Attribute**:
     * Tag: If you follow the recommended [tagging format][1] (`<KEY>:<VALUE>`), the *Tag* is the `<KEY>`.
-    * Attribute: Use a [facet or measure as the template variable](#logs-and-apm-queries).
+    * Attribute: Use a [facet or measure as the template variable](#logs-apm-and-rum-queries).
 * **Default Value**:
     The default value for your template variable tag or attribute.
 
@@ -38,12 +38,12 @@ After creating a template variable, Datadog displays the number of sources using
 
 [Use the template variables](#use) in individual widgets or click the **Add to All** option. To remove a template variable from all widgets, click the **Remove From All** option.
 
-### Logs and APM queries
+### Logs, APM, and RUM queries
 
-Template variables work with log and APM widgets because metrics, logs, and APM share the same tags.
-Additionally, you can define log or APM template variables based on [log][2] or APM facets. These variables start with `@`, for example: `@http.status_code`.
+Template variables work with log, APM, and RUM widgets because metrics, logs, APM, and RUM share the same tags.
+Additionally, you can define log, APM, and RUM template variables based on [log][2], APM, or [RUM][3] facets. These variables start with `@`, for example: `@http.status_code`.
 
-**Note**: Using **Add to all** for this type of template variable adds the variable to all log and APM widgets.
+**Note**: Using **Add to all** for this type of template variable adds the variable to all log, APM, and RUM widgets.
 
 ### Saved views
 
@@ -85,7 +85,7 @@ For text based widgets, you can display a template variable name and value with 
 
 ### Events overlay
 
-Use the [events overlay][3] search with template variables to find events that share certain tags with the metrics in your dashboard. The event overlay search is applied through an individual graph.
+Use the [events overlay][4] search with template variables to find events that share certain tags with the metrics in your dashboard. The event overlay search is applied through an individual graph.
 
 Values from dashboard template variables can be directly captured by using the `$<TEMPLATE_VARIABLE_KEY>.value` syntax in the event search field.
 
@@ -125,4 +125,5 @@ For example, enter `tags:$region` in the event overlays search box. This searche
 
 [1]: /tagging/#defining-tags
 [2]: /logs/explorer/facets
-[3]: /dashboards/timeboards/#events
+[3]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
+[4]: /dashboards/timeboards/#events
