@@ -27,7 +27,7 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 1. Connect to the AWS console and create a new VPC endpoint:
    {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:60%;" >}}
 2. Select **Find service by name**.
-3. Fill the _service name_ text box with the following value, depending on which private link you want to set up:
+3. Fill the _Service Name_ text box according to which service you want to establish AWS PrivateLink for:
 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
     {{< tabs >}}
@@ -80,7 +80,7 @@ Select the tab below to see how to send your metrics and logs to Datadog using t
 
 _Available for Agent 6.0+_
 
-To forward your metrics to Datadog using this new VPC endpoint, set up `pvtlink.agent.datadoghq.com` as your new metric destination:
+To forward your metrics to Datadog using this new VPC endpoint, configure `pvtlink.agent.datadoghq.com` as your new metric destination:
 
 1. Update the `dd_url` parameter in the [Agent `datadog.yaml` configuration file][1]:
 
@@ -134,7 +134,7 @@ Add `DD_URL: pvtlink.logs.datadoghq.com` in your [Datadog Lambda function][4] en
 {{% /tab %}}
 {{% tab "API" %}}
 
-To send data to the Datadog API or consume data from it through this new private link, replace your API call host signature `api.datadoghq.com/api/` with `pvtlink.api.datadoghq.com/api/`.
+To send data to the Datadog API or consume data from it through this new endpoint, replace your API call host signature `api.datadoghq.com/api/` with `pvtlink.api.datadoghq.com/api/`.
 
 {{% /tab %}}
 {{< /tabs >}}
