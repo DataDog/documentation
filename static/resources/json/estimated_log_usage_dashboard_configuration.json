@@ -8,7 +8,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_bytes{$service,$index}.rollup(sum, 86400)",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$index}.rollup(sum, 86400)",
                         "display_type": "bars",
                         "style": {
                             "palette": "dog_classic",
@@ -42,7 +42,7 @@
                 "type": "toplist",
                 "requests": [
                     {
-                        "q": "top(sum:logs.estimated.ingested_bytes{$service,$index} by {service}, 50, 'sum', 'desc')"
+                        "q": "top(sum:datadog.estimated_usage.logs.ingested_bytes{$service,$index} by {service}, 50, 'sum', 'desc')"
                     }
                 ],
                 "title": "Ingested bytes per service",
@@ -62,7 +62,7 @@
                 "type": "toplist",
                 "requests": [
                     {
-                        "q": "top(sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count(), 50, 'sum', 'desc')"
+                        "q": "top(sum:datadog.estimated_usage.logs.ingested_events{$service,$index} by {service}.as_count(), 50, 'sum', 'desc')"
                     }
                 ],
                 "title": "Ingested logs per service",
@@ -82,7 +82,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$index} by {service}.as_count()",
                         "display_type": "line",
                         "style": {
                             "palette": "dog_classic",
@@ -117,7 +117,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:true,$service,$index}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index}.as_count()*100",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index}.as_count()*100",
                         "display_type": "line",
                         "style": {
                             "palette": "dog_classic",
@@ -151,7 +151,7 @@
                 "type": "toplist",
                 "requests": [
                     {
-                        "q": "top(sum:logs.estimated.ingested_events.count{datadog_is_excluded:true,$service,$index} by {service}.as_count(), 50, 'sum', 'desc')"
+                        "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index} by {service}.as_count(), 50, 'sum', 'desc')"
                     }
                 ],
                 "title": "Service excluding the most logs",
@@ -171,7 +171,7 @@
                 "type": "query_value",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()*100",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()*100",
                         "aggregator": "sum"
                     }
                 ],
@@ -194,7 +194,7 @@
                 "type": "query_value",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{$service,$index}.as_count()",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$index}.as_count()",
                         "aggregator": "sum"
                     }
                 ],
@@ -218,7 +218,7 @@
                 "type": "toplist",
                 "requests": [
                     {
-                        "q": "top(sum:logs.estimated.ingested_events.count{datadog_is_excluded:true,$service,$index} by {service}.as_count(), 50, 'sum', 'asc')"
+                        "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index} by {service}.as_count(), 50, 'sum', 'asc')"
                     }
                 ],
                 "title": "Service excluding the less logs",
@@ -238,7 +238,7 @@
                 "type": "toplist",
                 "requests": [
                     {
-                        "q": "top(sum:logs.estimated.ingested_events.count{datadog_is_excluded:false,$service,$index} by {datadog_index}.as_count(), 50, 'sum', 'desc')"
+                        "q": "top(sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$index} by {datadog_index}.as_count(), 50, 'sum', 'desc')"
                     }
                 ],
                 "title": "Indexed logs by index",
@@ -258,7 +258,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:false,$service,$index} by {datadog_index}.as_count().rollup(sum, 86400)",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$index} by {datadog_index}.as_count().rollup(sum, 86400)",
                         "display_type": "bars",
                         "style": {
                             "palette": "dog_classic",
@@ -293,7 +293,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:false,$service,$index} by {service}.as_count()",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$index} by {service}.as_count()",
                         "display_type": "line",
                         "style": {
                             "palette": "dog_classic",
@@ -385,7 +385,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()*100",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()*100",
                         "display_type": "line",
                         "style": {
                             "palette": "dog_classic",
@@ -421,7 +421,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{$service,$index}.as_count().rollup(sum, 86400)",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$index}.as_count().rollup(sum, 86400)",
                         "display_type": "bars",
                         "style": {
                             "palette": "dog_classic",
@@ -456,7 +456,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_bytes{$service,$index} by {service}",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$index} by {service}",
                         "display_type": "line",
                         "style": {
                             "palette": "dog_classic",
@@ -491,7 +491,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:false,$service,$index}.as_count().rollup(sum, 86400)",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$index}.as_count().rollup(sum, 86400)",
                         "display_type": "bars",
                         "style": {
                             "palette": "dog_classic",
@@ -526,7 +526,7 @@
                 "type": "query_value",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{$service,$index,datadog_is_excluded:false}.as_count()",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$index,datadog_is_excluded:false}.as_count()",
                         "aggregator": "sum"
                     }
                 ],
@@ -550,7 +550,7 @@
                 "type": "query_value",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{$service,$index,datadog_is_excluded:true}.as_count()",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$index,datadog_is_excluded:true}.as_count()",
                         "aggregator": "sum"
                     }
                 ],
@@ -574,7 +574,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{datadog_is_excluded:false,$service,$index}.as_count().rollup(sum, 86400)",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:false,$service,$index}.as_count().rollup(sum, 86400)",
                         "display_type": "bars",
                         "style": {
                             "palette": "dog_classic",
@@ -583,7 +583,7 @@
                         }
                     },
                     {
-                        "q": "sum:logs.estimated.ingested_events.count{$service,$index}.as_count().rollup(sum, 86400)",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{$service,$index}.as_count().rollup(sum, 86400)",
                         "display_type": "line",
                         "style": {
                             "palette": "dog_classic",
@@ -618,7 +618,7 @@
                 "type": "query_value",
                 "requests": [
                     {
-                        "q": "sum:logs.estimated.ingested_bytes{$service,$index}.rollup(sum, 86400)",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_bytes{$service,$index}.rollup(sum, 86400)",
                         "aggregator": "sum"
                     }
                 ],
