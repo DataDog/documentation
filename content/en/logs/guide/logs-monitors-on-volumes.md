@@ -51,7 +51,7 @@ To define anomaly detection monitors to be alerted of any unexpected indexing lo
 
 {{< img src="logs/guide/anomaly_usage_notification.png" alt=" example anomaly notification"  style="width:70%;">}}
 
-Example of notification with contextual links:
+Example of a notification with contextual links:
 
 ```text
 An unexpected amount of logs has been indexed in index {{datadog_index.name}}
