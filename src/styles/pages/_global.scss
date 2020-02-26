@@ -555,6 +555,10 @@ table, .table {
   margin-bottom: 20px;
   border: 1px solid $ddgray;
   font-size: 16px;
+  &:lang(ja) {
+    font-size:15px;
+    line-height:24px;
+  }
   a {
     border-bottom: 1px solid $gray-600;
     &:hover {
@@ -591,6 +595,10 @@ table, .table {
     font-size: 14px;
     text-transform: uppercase;
     color: #000000;
+    &:lang(ja) {
+      font-size:12px;
+      line-height:20px;
+    }
   }
   & > thead > tr > th, & > tbody > tr > td {
     padding:.65rem;
