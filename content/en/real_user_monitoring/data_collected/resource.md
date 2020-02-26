@@ -20,7 +20,7 @@ All of your website’s resources are collected by default: images, XHRs, [XMLHt
 
 Detailed network timing data regarding the loading of an application’s resources are being collected with the [Performance Resource Timing API][2]
 
-{{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Resource Metrics" responsive="true" >}}
+{{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Resource Metrics"  >}}
 
 ## Measure Collected
 

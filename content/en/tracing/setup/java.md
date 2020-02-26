@@ -256,7 +256,7 @@ Debug app logs show that `Tracing is disabled, not installing instrumentations.`
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/dd_service_name.png" alt="service name" responsive="true" >}}
+{{< img src="tracing/setup/java/dd_service_name.png" alt="service name"  >}}
 
 #### `dd.service.mapping`
 
@@ -266,7 +266,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -jar path/t
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/service_mapping.png" alt="service mapping" responsive="true" >}}
+{{< img src="tracing/setup/java/service_mapping.png" alt="service mapping"  >}}
 
 #### `dd.trace.global.tags`
 
@@ -276,7 +276,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.servic
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_global_tags.png" alt="trace global tags" responsive="true" >}}
+{{< img src="tracing/setup/java/trace_global_tags.png" alt="trace global tags"  >}}
 
 #### `dd.trace.span.tags`
 
@@ -286,7 +286,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_span_tags.png" alt="trace span tags" responsive="true" >}}
+{{< img src="tracing/setup/java/trace_span_tags.png" alt="trace span tags"  >}}
 
 #### `dd.trace.jmx.tags`
 
@@ -296,7 +296,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="trace JMX tags" responsive="true" >}}
+{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="trace JMX tags"  >}}
 
 #### `dd.trace.methods`
 
@@ -306,7 +306,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.global.tags=env:dev -Ddd.service.name=web-app -Ddd.trace.methods=notes.app.NotesHelper[customMethod3] -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_methods.png" alt="trace methods" responsive="true" >}}
+{{< img src="tracing/setup/java/trace_methods.png" alt="trace methods"  >}}
 
 #### `dd.trace.db.client.split-by-instance`
 
@@ -318,11 +318,11 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.global.tags=env:dev -Ddd.s
 
 DB Instance 1, `webappdb`, now gets its own service name that is the same as the `db.instance` span metadata:
 
-{{< img src="tracing/setup/java/split_by_instance_1.png" alt="instance 1" responsive="true" >}}
+{{< img src="tracing/setup/java/split_by_instance_1.png" alt="instance 1"  >}}
 
 DB Instance 2, `secondwebappdb`, now gets its own service name that is the same as the `db.instance` span metadata:
 
-{{< img src="tracing/setup/java/split_by_instance_2.png" alt="instance 2" responsive="true" >}}
+{{< img src="tracing/setup/java/split_by_instance_2.png" alt="instance 2"  >}}
 
 Similarly on the service map, you would now see one web app making calls to two different Postgres databases.
 
@@ -334,7 +334,7 @@ Example with system property:
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service.name=web-app -Ddd.trace.global.tags=env:dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/query_string.png" alt="query string" responsive="true" >}}
+{{< img src="tracing/setup/java/query_string.png" alt="query string"  >}}
 
 #### `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`
 
@@ -362,7 +362,7 @@ instances:
 
 Would produce the following result:
 
-{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example" responsive="true" >}}
+{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example"  >}}
 
 See the [Java integration documentation][16] to learn more about Java metrics collection with JMX fetch.
 
