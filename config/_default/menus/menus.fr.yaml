@@ -752,11 +752,68 @@ main:
   - name: Associer vos logs à vos traces
     url: tracing/connect_logs_and_traces/
     parent: tracing
+    identifier: tracing_connect_logs_and_traces
     weight: 4
+  - name: Java
+    url: tracing/connect_logs_and_traces/java
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_java
+    weight: 401
+  - name: Python
+    url: tracing/connect_logs_and_traces/python
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_python
+    weight: 402
+  - name: Go
+    url: tracing/connect_logs_and_traces/go
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_go
+    weight: 403
+  - name: Ruby
+    url: tracing/connect_logs_and_traces/ruby
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_ruby
+    weight: 404
+  - name: PHP
+    url: tracing/connect_logs_and_traces/php
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_php
+    weight: 405
+  - name: NodeJS
+    url: tracing/connect_logs_and_traces/nodejs
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_nodejs
+    weight: 406
+  - name: .NET
+    url: tracing/connect_logs_and_traces/dotnet
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_dotnet
+    weight: 407
   - name: Métriques runtime
     url: tracing/runtime_metrics/
     parent: tracing
+    identifier: tracing_runtime_metrics
     weight: 5
+  - name: Java
+    url: tracing/runtime_metrics/java
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_java
+    weight: 501
+  - name: Python
+    url: tracing/runtime_metrics/python
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_python
+    weight: 502
+  - name: Ruby
+    url: tracing/runtime_metrics/ruby
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_ruby
+    weight: 503
+  - name: NodeJS
+    url: tracing/runtime_metrics/nodejs
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_nodejs
+    weight: 504
   - name: Instrumentation manuelle
     url: tracing/manual_instrumentation/
     parent: tracing
@@ -855,7 +912,7 @@ main:
     url: tracing/visualization/service/
     parent: tracing_vis
     weight: 802
-  - name: Page Ressource
+  - name: Page Resource
     url: tracing/visualization/resource/
     parent: tracing_vis
     weight: 803
@@ -1065,7 +1122,7 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 201
-  - name: Résultats du test
+  - name: Résultats de test
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 202
@@ -1171,7 +1228,7 @@ main:
     parent: npm
     identifier: npm_installation
     weight: 1
-  - name: Page Réseau
+  - name: Page Network
     url: network_performance_monitoring/network_page
     parent: npm
     identifier: npm_page
@@ -1207,7 +1264,7 @@ main:
     url: developers/dogstatsd/data_aggregation/
     parent: dev_tools_dogstatsd
     weight: 104
-  - name: DogStatsD Mapper
+  - name: Mapper DogStatsD
     url: developers/dogstatsd/dogstatsd_mapper/
     parent: dev_tools_dogstatsd
     weight: 105
