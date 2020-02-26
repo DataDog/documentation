@@ -1409,6 +1409,21 @@ main:
     parent: "rum"
     identifier: "rum_dashboards"
     weight: 2
+  - name: "Performance Overview"
+    url: "real_user_monitoring/dashboards/performance_overview_dashboard"
+    parent: "rum_dashboards"
+    identifier: "rum_dashboards_performance"
+    weight: 201
+  - name: "Resources"
+    url: "real_user_monitoring/dashboards/resources_dashboard"
+    parent: "rum_dashboards"
+    identifier: "rum_dashboards_resources"
+    weight: 202
+  - name: "Errors"
+    url: "real_user_monitoring/dashboards/errors_dashboard"
+    parent: "rum_dashboards"
+    identifier: "rum_dashboards_errors"
+    weight: 203
 
   ## RUM - Explorer
 
