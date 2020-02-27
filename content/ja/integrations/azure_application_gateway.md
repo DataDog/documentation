@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Application Gateway
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_application_gateway
 public_title: Datadog-Microsoft Azure Application Gateway インテグレーション
 short_description: Azure Application Gateway のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

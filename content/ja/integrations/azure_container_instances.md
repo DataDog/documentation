@@ -14,11 +14,11 @@ has_logo: true
 integration_title: Microsoft Azure Container Instances
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_container_instances
 public_title: Datadog-Microsoft Azure Container Instances インテグレーション
 short_description: Azure Container Instances のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

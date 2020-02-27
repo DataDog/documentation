@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure ExpressRoute
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_express_route
 public_title: Datadog-Microsoft Azure ExpressRoute インテグレーション
 short_description: Azure ExpressRoute のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 
