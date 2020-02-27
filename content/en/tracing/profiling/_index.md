@@ -21,7 +21,7 @@ Once your profile collection is set up, profiles are available in the [APM > Pro
 
 {{< img src="tracing/profiling/profiling_main_page.png" alt="Profiling main page">}}
 
-Each line represents a profile for a process on which Datadog profiling was running for a short amount of time. Depending on the language, these processes are profiled between 15s and 60s.
+Each row is a profile of a process for a short amount of time. Depending on the language, these processes are profiled between 15s and 60s.
 
 ### Search
 
