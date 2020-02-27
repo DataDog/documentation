@@ -1372,11 +1372,16 @@ main:
     parent: "synthetics"
     weight: 6
 
+  - name: "Guide"
+    url: "synthetics/guide/"
+    parent: "synthetics"
+    weight: 7
+
   - name: "Troubleshooting"
     url: "synthetics/troubleshooting/"
     parent: "synthetics"
     identifier: "synthetics_troubleshooting"
-    weight: 7
+    weight: 8
 
 ##########################
 ## Real User Monitoring ##

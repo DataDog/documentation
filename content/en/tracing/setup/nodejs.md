@@ -2,24 +2,24 @@
 title: Tracing Node.js Applications
 kind: documentation
 aliases:
-- /tracing/nodejs/
-- /tracing/languages/nodejs/
-- /tracing/languages/javascript/
-- /tracing/setup/javascript/
-- /agent/apm/nodejs/
+    - /tracing/nodejs/
+    - /tracing/languages/nodejs/
+    - /tracing/languages/javascript/
+    - /tracing/setup/javascript/
+    - /agent/apm/nodejs/
 further_reading:
-- link: "https://github.com/DataDog/dd-trace-js"
-  tag: "GitHub"
-  text: "Source code"
-- link: "https://datadog.github.io/dd-trace-js"
-  tag: "Documentation"
-  text: "API documentation"
-- link: "tracing/visualization/"
-  tag: "Use the APM UI"
-  text: "Explore your services, resources and traces"
-- link: "tracing/"
-  tag: "Advanced Usage"
-  text: "Advanced Usage"
+    - link: 'https://github.com/DataDog/dd-trace-js'
+      tag: 'GitHub'
+      text: 'Source code'
+    - link: 'https://datadog.github.io/dd-trace-js'
+      tag: 'Documentation'
+      text: 'API documentation'
+    - link: 'tracing/visualization/'
+      tag: 'Use the APM UI'
+      text: 'Explore your services, resources and traces'
+    - link: 'tracing/'
+      tag: 'Advanced Usage'
+      text: 'Advanced Usage'
 ---
 
 ## Installation And Getting Started
@@ -52,17 +52,17 @@ Finally, import and initialize the tracer:
 
 ```js
 // This line must come before importing any instrumented module.
-const tracer = require('dd-trace').init()
+const tracer = require('dd-trace').init();
 ```
 
 ##### TypeScript
 
-```js
-// server.js
-import "./tracer"; // must come before importing any instrumented module.
+```typescript
+// server.ts
+import './tracer'; // must come before importing any instrumented module.
 
-// tracer.js
-import tracer from "dd-trace";
+// tracer.ts
+import tracer from 'dd-trace';
 tracer.init(); // initialized in a different file to avoid hoisting.
 export default tracer;
 ```
@@ -73,26 +73,26 @@ See the [tracer settings][7] for the list of initialization options.
 
 Tracer settings can be configured as a parameter to the `init()` method or as environment variables.
 
-| Config         | Environment Variable         | Default     | Description                                                                                                                                                                              |
-|----------------|------------------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| enabled        | `DD_TRACE_ENABLED`           | `true`      | Whether to enable the tracer.                                                                                                                                                            |
-| debug          | `DD_TRACE_DEBUG`             | `false`     | Enable debug logging in the tracer.                                                                                                                                                      |
-| service        | `DD_SERVICE_NAME`            | `null`      | The service name to be used for this program.                                                                                                                                            |
-| url            | `DD_TRACE_AGENT_URL`         | `null`      | The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set.                                                                                    |
-| hostname       | `DD_TRACE_AGENT_HOSTNAME`    | `localhost` | The address of the Agent that the tracer submits to.                                                                                                                                     |
-| port           | `DD_TRACE_AGENT_PORT`        | `8126`      | The port of the Trace Agent that the tracer submits to.                                                                                                                                  |
-| dogstatsd.port | `DD_DOGSTATSD_PORT`          | `8125`      | The port of the DogStatsD Agent that metrics are submitted to.                                                                                                                           |
-| env            | `DD_ENV`                     | `null`      | Set an application's environment e.g. `prod`, `pre-prod`, `stage`, etc.                                                                                                                  |
-| logInjection   | `DD_LOGS_INJECTION`          | `false`     | Enable automatic injection of trace IDs in logs for supported logging libraries.                                                                                                         |
-| tags           | `DD_TAGS`                    | `{}`        | Set global tags that should be applied to all spans and metrics. When passed as an environment variable, the format is `key:value, key:value`.                                           |
-| sampleRate     | -                            | `1`         | Percentage of spans to sample as a float between `0` and `1`.                                                                                                                            |
-| flushInterval  | -                            | `2000`      | Interval (in milliseconds) at which the tracer submits traces to the Agent.                                                                                                              |
-| runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | Whether to enable capturing runtime metrics. Port `8125` (or configured with `dogstatsd.port`) must be opened on the Agent for UDP.                                                      |
-| reportHostname | `DD_TRACE_REPORT_HOSTNAME`   | `false`     | Whether to report the system's hostname for each trace. When disabled, the hostname of the Agent is used instead.                                                                        |
-| experimental   | -                            | `{}`        | Experimental features can be enabled all at once using Boolean true or individually using key/value pairs. [Contact support][8] to learn more about the available experimental features. |
-| plugins        | -                            | `true`      | Whether or not to enable automatic instrumentation of external libraries using the built-in plugins.                                                                                     |
-| clientToken    | `DD_CLIENT_TOKEN`            | `null`      | Client token for browser tracing. Can be generated in Datadog in **Integrations** -> **APIs**.                                                                                           |
-| logLevel       | `DD_TRACE_LOG_LEVEL`         | `debug`     | A string for the minimum log level for the tracer to use when debug logging is enabled, e.g. `error`, `debug`.                                                                           |
+| Config         | Environment Variable         | Default     | Description                                                                                                                                                                                                                                                                |
+| -------------- | ---------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| enabled        | `DD_TRACE_ENABLED`           | `true`      | Whether to enable the tracer.                                                                                                                                                                                                                                              |
+| debug          | `DD_TRACE_DEBUG`             | `false`     | Enable debug logging in the tracer.                                                                                                                                                                                                                                        |
+| service        | `DD_SERVICE_NAME`            | `null`      | The service name to be used for this program.                                                                                                                                                                                                                              |
+| url            | `DD_TRACE_AGENT_URL`         | `null`      | The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable. |
+| hostname       | `DD_TRACE_AGENT_HOSTNAME`    | `localhost` | The address of the Agent that the tracer submits to.                                                                                                                                                                                                                       |
+| port           | `DD_TRACE_AGENT_PORT`        | `8126`      | The port of the Trace Agent that the tracer submits to.                                                                                                                                                                                                                    |
+| dogstatsd.port | `DD_DOGSTATSD_PORT`          | `8125`      | The port of the DogStatsD Agent that metrics are submitted to.                                                                                                                                                                                                             |
+| env            | `DD_ENV`                     | `null`      | Set an application's environment e.g. `prod`, `pre-prod`, `stage`, etc.                                                                                                                                                                                                    |
+| logInjection   | `DD_LOGS_INJECTION`          | `false`     | Enable automatic injection of trace IDs in logs for supported logging libraries.                                                                                                                                                                                           |
+| tags           | `DD_TAGS`                    | `{}`        | Set global tags that should be applied to all spans and metrics. When passed as an environment variable, the format is `key:value, key:value`.                                                                                                                             |
+| sampleRate     | -                            | `1`         | Percentage of spans to sample as a float between `0` and `1`.                                                                                                                                                                                                              |
+| flushInterval  | -                            | `2000`      | Interval (in milliseconds) at which the tracer submits traces to the Agent.                                                                                                                                                                                                |
+| runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | Whether to enable capturing runtime metrics. Port `8125` (or configured with `dogstatsd.port`) must be opened on the Agent for UDP.                                                                                                                                        |
+| reportHostname | `DD_TRACE_REPORT_HOSTNAME`   | `false`     | Whether to report the system's hostname for each trace. When disabled, the hostname of the Agent is used instead.                                                                                                                                                          |
+| experimental   | -                            | `{}`        | Experimental features can be enabled all at once using Boolean true or individually using key/value pairs. [Contact support][8] to learn more about the available experimental features.                                                                                   |
+| plugins        | -                            | `true`      | Whether or not to enable automatic instrumentation of external libraries using the built-in plugins.                                                                                                                                                                       |
+| clientToken    | `DD_CLIENT_TOKEN`            | `null`      | Client token for browser tracing. Can be generated in Datadog in **Integrations** -> **APIs**.                                                                                                                                                                             |
+| logLevel       | `DD_TRACE_LOG_LEVEL`         | `debug`     | A string for the minimum log level for the tracer to use when debug logging is enabled, e.g. `error`, `debug`.                                                                                                                                                             |
 
 ## Change Agent Hostname
 
@@ -127,7 +127,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 #### Web Framework Compatibility
 
 | Module           | Versions | Support Type    | Notes                                      |
-|------------------|----------|-----------------|--------------------------------------------|
+| ---------------- | -------- | --------------- | ------------------------------------------ |
 | [connect][10]    | `>=2`    | Fully supported |                                            |
 | [express][11]    | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][12]   |
 | [fastify][13]    | `>=1`    | Fully supported |                                            |
@@ -141,7 +141,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 #### Native Module Compatibility
 
 | Module      | Support Type    |
-|-------------|-----------------|
+| ----------- | --------------- |
 | [dns][21]   | Fully supported |
 | [fs][22]    | Fully supported |
 | [http][23]  | Fully supported |
@@ -151,7 +151,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 #### Data Store Compatibility
 
 | Module                 | Versions | Support Type    | Notes                                            |
-|------------------------|----------|-----------------|--------------------------------------------------|
+| ---------------------- | -------- | --------------- | ------------------------------------------------ |
 | [cassandra-driver][26] | `>=3`    | Fully supported |                                                  |
 | [couchbase][27]        | `^2.4.2` | Fully supported |                                                  |
 | [elasticsearch][28]    | `>=10`   | Fully supported | Supports `@elastic/elasticsearch` versions `>=5` |
@@ -168,7 +168,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 #### Worker Compatibility
 
 | Module             | Versions | Support Type    | Notes                                                  |
-|--------------------|----------|-----------------|--------------------------------------------------------|
+| ------------------ | -------- | --------------- | ------------------------------------------------------ |
 | [amqp10][38]       | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
 | [amqplib][39]      | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
 | [generic-pool][40] | `>=2`    | Fully supported |                                                        |
@@ -178,7 +178,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 #### Promise Library Compatibility
 
 | Module           | Versions  | Support Type    |
-|------------------|-----------|-----------------|
+| ---------------- | --------- | --------------- |
 | [bluebird][43]   | `>=2`     | Fully supported |
 | [promise][44]    | `>=7`     | Fully supported |
 | [promise-js][45] | `>=0.0.3` | Fully supported |
@@ -188,7 +188,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 #### Logger Compatibility
 
 | Module           | Versions  | Support Type    |
-|------------------|-----------|-----------------|
+| ---------------- | --------- | --------------- |
 | [bunyan][48]     | `>=1`     | Fully supported |
 | [paperplane][49] | `>=2.3.2` | Fully supported |
 | [pino][50]       | `>=2`     | Fully supported |

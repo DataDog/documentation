@@ -1,12 +1,12 @@
 ---
 title: Graphing Guides
 kind: guide
+private: true
 aliases:
     - /graphing/guide/
 ---
 
 {{< whatsnext desc="General Guides:" >}}
-    {{< nextlink href="dashboards/guide/uptime-percentage-widget" >}}Custom Uptime Percentage Widget{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Graphing percentiles in Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
