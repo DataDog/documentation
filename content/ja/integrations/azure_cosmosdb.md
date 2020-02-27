@@ -2,7 +2,7 @@
 categories:
   - クラウド
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Cosmos DB のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_cosmosdb/'

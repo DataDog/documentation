@@ -1,8 +1,8 @@
 ---
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Automation のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_automation/'

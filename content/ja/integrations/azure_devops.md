@@ -4,7 +4,7 @@ categories:
   - ソースコントロール
   - コラボレーション
   - 問題追跡
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: 主要な Azure DevOps メトリクスを追跡します。
 doc_link: 'https://docs.datadoghq.com/integrations/azure_devops'

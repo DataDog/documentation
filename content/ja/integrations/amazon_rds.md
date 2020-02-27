@@ -8,7 +8,7 @@ categories:
   - data store
   - aws
   - log collection
-ddtype: 「クロール」
+ddtype: crawler
 dependencies: []
 description: Amazon RDS 関連の大量のメトリクスを追跡する。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_rds/'

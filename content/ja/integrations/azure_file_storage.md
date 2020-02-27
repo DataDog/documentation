@@ -4,7 +4,7 @@ aliases:
 categories:
   - クラウド
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure File Storage のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_file_storage/'

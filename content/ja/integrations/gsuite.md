@@ -2,7 +2,7 @@
 "categories":
 - ログの収集
 - security
-"ddtype": "クローラー"
+"ddtype": "crawler"
 "dependencies": []
 "description": "G Suite の監査およびセキュリティログを Datadog へインポートします。"
 "doc_link": "https://docs.datadoghq.com/integrations/gsuite/"
