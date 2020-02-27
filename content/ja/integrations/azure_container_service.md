@@ -5,7 +5,7 @@ categories:
   - クラウド
   - コンテナ
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Container Services のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_container_service/'

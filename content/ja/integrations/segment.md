@@ -3,7 +3,7 @@ categories:
   - モニター
   - 通知
   - クラウド
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Segment インテグレーションは、配信先ワークスペースのイベント配信メトリクスを収集
 doc_link: 'https://docs.datadoghq.com/integrations/segment/'
