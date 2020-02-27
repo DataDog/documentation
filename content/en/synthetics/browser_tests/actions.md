@@ -143,6 +143,12 @@ To use your variables in one of your assertions, hit *Use Variable* and select t
 
 {{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion"  style="width:40%;">}}
 
+Alternatively, you can record a step inputting `{{ <YOUR_VARIABLE> }}` in the desired field. 
+
+### Use variables in JavaScript steps
+
+If you need to use variables in JavaScript steps (assertion or variable), use `vars.<YOUR_VARIABLE>`.
+
 ## Wait
 
 By default, Datadog waits for a page to be fully loaded before performing an action or a next step—with a timeout after 60 seconds. In some cases, however, you may wish to set a custom waiting time. For instance, if you know that a page or a page element is taking more than 60 seconds to load, you can leverage the wait step in order to extend that default timeout. If you choose to use this functionality, the value for your wait step must not exceed 300 seconds.
