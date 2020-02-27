@@ -28,7 +28,7 @@ In this view you can:
 - [Build a context to explore your logs](#context).
 - [Visualize your logs as a filtered Logstream or Log Analytics](#visualization).
 - [Setup your log explorer view by creating facets and measure from your logs](#setup).
-- [Share the content of your explorer view to another page within or outside of Datadog.](#share-views)
+- [Share the content of your explorer view to another page within or outside of Datadog](#share-views).
 
 ## Context
 
@@ -61,7 +61,7 @@ Export your current log visualization with the _share_ functionality:
 
 {{< img src="logs/explorer/send_view_to.png" alt="Send view to"  style="width:60%;">}}
 
-Use the _share_ button to send your current log explorer view to a CSV file, team member, or create a monitor:
+Use the _share_ button to send your current log explorer view to a CSV file or team member, or create a monitor:
 
 {{< tabs >}}
 {{% tab "Log Search" %}}
@@ -70,7 +70,7 @@ Use the _share_ button to send your current log explorer view to a CSV file, tea
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | Export to Monitor | Export the query applied to your logstream to create the query for a new [log monitor][1].                                                     |
 | Export to CSV     | Export your current logstream view with its selected columns to a CSV file. You can export up to 5,000 logs at once.                           |
-| Share View        | Share a link to the current view with your teammates through Email, Slack, and more. See all [Datadog notification integrations][2] available. |
+| Share View        | Share a link to the current view with your teammates through email, Slack, and more. See all [Datadog notification integrations][2] available. |
 
 [1]: /monitors/monitor_types/log
 [2]: /integrations/#cat-notification
@@ -135,7 +135,7 @@ The **View in context** button updates the search request in order to show you t
 Use the **Share** button to share the log opened in side panel to other contexts.
 
 - **Copy to clipboard** or `Ctrl+C` / `Cmd+C` copies the log JSON to your clipboard.
-- **Share Event** shares the log (along with the underlying view) with teammates through Email, Slack, and more. See all [Datadog notification integrations][4] available.
+- **Share Event** shares the log (along with the underlying view) with teammates through email, Slack, and more. See all [Datadog notification integrations][4] available.
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="configure display table"  style="width:50%;">}}
 
@@ -158,7 +158,7 @@ Follow the [log graphing guide][2] to learn more about all the graphing options.
 {{% /tab %}}
 {{% tab "Log Patterns" %}}
 
-Investigating large volumes of log data can be time consuming: you can spend hours on them and still understand only a fraction of them. However, applicative logs often look the same with some fraction of them varying. These what we call _patterns_.
+Investigating large volumes of log data can be time consuming: you can spend hours on them and still understand only a fraction of them. However, applicative logs often look the same with some fraction of them varying. Datadog calls these _patterns_.
 
 In the Log Explorer, patterns can be surfaced automatically to bring structure to the problem and help you quickly see what matters—exclude what's irrelevant.
 

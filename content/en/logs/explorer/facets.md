@@ -23,48 +23,48 @@ further_reading:
 
 ## Overview
 
-Facets are user-defined tags and attributes from your indexed logs. They are meant for either qualitative or quantitative data analysis. As such you can use them in your Log Explorer to:
+Facets are user-defined tags and attributes from your indexed logs. They are meant for either qualitative or quantitative data analysis. As such, you can use them in your Log Explorer to:
 
 - [Search upon your logs][1]
 - [Define log patterns][2]
 - [Perform Log analytics][3]
 
-In addition, it allows your to manipulate your logs in you [log monitors][4], or log widgets in [dashboards][5] and [notebooks][6].
+Facets also allow you to manipulate your logs in your [log monitors][4], log widgets in [dashboards][5], and [notebooks][6].
 
-**Note**: You don't need facets to support [log processing][7], [livetail search][8], [archive][9] forwarding, rehydration, or [metric generation][10] from logs. Neither you need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these context, autocomplete capabilities rely on existing facets but any input matching incoming logs would work.
+**Note**: You do not need facets to support [log processing][7], [livetail search][8], [archive][9] forwarding, rehydration, or [metric generation][10] from logs. You also do not need facets for routing logs through to [Pipelines][11] and [Indexes][12] with filters, or excluding or sampling logs from indexes with [exclusion filters][13]. In all these contexts, autocomplete capabilities rely on existing facets, but any input matching incoming logs would work.
 
 ### Qualitative facets: Dimensions
 
 Use qualitative facets when you need:
 
-- To **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][14] to scope troubleshooting down to development, staging or production environments.
-- To **get relative insights** per values. For instance, create a facet on a `http.network.client.geoip.country.iso_code` to see what are the top countries most impacted per number of 5XX errors on your [NGINX][15] web acess logs enriched with our Datadog [GeoIP Processor][16].
-- To **count unique values**. For instance create a facet on a `user.email` from your [Kong][17] logs, to know how many users connect every day to your website.
+- To **filter** your logs against specific value(s). For instance, create a facet on an `environment` [tag][14] to scope troubleshooting down to development, staging, or production environments.
+- To **get relative insights** for values. For instance, create a facet on `http.network.client.geoip.country.iso_code` to see the top countries most impacted per number of 5XX errors on your [NGINX][15] web access logs, enriched with the Datadog [GeoIP Processor][16].
+- To **count unique values**. For instance, create a facet on `user.email` from your [Kong][17] logs to know how many users connect every day to your website.
 
 #### Types {#types-qualitative-facets}
 
-Qualitative facets can have a string or numerical (integer) type. While assigning string type to a dimension work in any case, using integer type on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search syntax][18] for reference.
+Qualitative facets can have a string or numerical (integer) type. While assigning string type to a dimension works in all case, using integer types on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search syntax][18] for reference.
 
 ### Quantitative facets: Measures
 
 Use measures when you need:
 
 - To **aggregate values** from multiple logs. For instance, create a measure on the size of tiles served by the [Varnish cache][19] of a map server and keep track of the **average** daily throughput, or top-most referrers per **sum** of tile size requested.
-- To **range filter** your logs. For instance, create a measure on the execution time of [Ansible][20] taks, and see the list of servers having most runs taking more than 10s.
-- To **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][21] microservice. And search all the logs, starting with the one with highest amount.
+- To **range filter** your logs. For instance, create a measure on the execution time of [Ansible][20] tasks, and see the list of servers having the most runs taking more than 10s.
+- To **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][21] microservice. You can then search all the logs, starting with the one with the highest amount.
 
 #### Types {#types-qualitative-facets}
 
-Measures come with either (long) integer or double value, for equivalent capabilities.
+Measures come with either a (long) integer or double value, for equivalent capabilities.
 
 #### Units
 
-Measures support units (time in `seconds` or size in `bytes`) for easier handling of orders of magnitude at query time and display time. Unit is a property of the measure itself, not of the field. Meaning in the example of the a `duration` measure in nanoseconds: if you have logs from `service:A` where `duration:1000` stands for 1000 milliseconds, and other logs from `service:B` where `duration:500` stands for 500 microseconds:
+Measures support units (time in `seconds` or size in `bytes`) for easier handling of orders of magnitude at query time and display time. Unit is a property of the measure itself, not of the field. For example, consider a `duration` measure in nanoseconds: you have logs from `service:A` where `duration:1000` stands for 1000 milliseconds, and other logs from `service:B` where `duration:500` stands for 500 microseconds:
 
 1. Scale duration into nanoseconds for all logs flowing in with the [arithmetic processor][22]. Use a `*1000000` multiplier on logs from `service:A`, and a `*1000` multiplier on logs from `service:B`.
 2. Use `duration:>20ms` (see [search syntax][18] for reference) to consistently query logs from both services at once, and see an aggregated result of max `1 min`.
 
-## The Facet Panel
+## The facet panel
 
 The search bar provides the most comprehensive set of interactions to slice and dice your data. However, for most cases, the facet panel is likely to be a more straightforward way to navigate into your data. Open a facet to see a summary of its content for the scope of the current query.
 
@@ -82,41 +82,41 @@ Scope the search query clicking on either value. Clicking on a value toggles the
 
 ### Hide facets
 
-Your organisation has a whole collection of facets to address its comprehensive set of use cases across all different teams using logs. But most likely, only a subset of these facets is valuable to you in a specific troubleshooting context. Hide facets you don't need on a routine basis, to only keep the most relevant facet for your troubleshooting sessions.
+Your organization has a whole collection of facets to address its comprehensive set of use cases across all different teams using logs. Most likely, however, only a subset of these facets is valuable to you in a specific troubleshooting context. Hide facets you don't need on a routine basis, to keep only the most relevant facets for your troubleshooting sessions.
 
 {{< img src="logs/explorer/facet/hide_facet.png" alt="Hide Facet" style="width:30%;">}}
 
-Hidden facets are still visible in the facet search (see [Filter Facet](#filter-facets) section hereafter) in case you punctually need it. Unhide hidden facet from there.
+Hidden facets are still visible in the facet search (see the [Filter Facet](#filter-facets) section) in case you need it. Unhide hidden facets from there.
 
 {{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="Unhide Facet" style="width:30%;">}}
 
 Hidden facets are also hidden from auto-complete in the search bar, and drop down (such as measure, group-by) in analytics for the Log Explorer. However, hidden facets are still valid for search queries (in case you copy-paste a log-explorer link for instance).
 
-Hidden facets have no impact aside from the log explorer (livetail, monitors or widget definition in dashboards for instance).
+Hidden facets have no impact aside from the log explorer (for instance: live tail, monitors, or widget definitions in dashboards).
 
 #### Hidden facets and teammates
 
-Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][23] (hidden facets is part of the context saved in a saved view).
+Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][23]. Hidden facets is part of the context saved in a saved view.
 
 ### Group facets
 
-Facets are grouped into meaningful thematics, to ease navigation in the facet list. Assigning or reassigning a group for a facet (see how to [manage facets](#manage-facets) hereafter) is only a matter of display in the facet list, and has no impact on search and analytics capabilities.
+Facets are grouped into meaningful themes, to ease navigation in the facet list. Assigning or reassigning a group for a facet (see how to [manage facets](#manage-facets)) is only a matter of display in the facet list, and has no impact on search and analytics capabilities.
 
 {{< img src="logs/explorer/facet/group_facets.png" alt="Group Facet" style="width:30%;">}}
 
 ### Filter facets
 
-Use the search box on facets to scope down the whole facet list and jump more quickly to the very one you need to interact with. Facet search use both facet display name and facet field name to scope down results.
+Use the search box on facets to scope down the whole facet list and jump more quickly to the very one you need to interact with. Facet search uses both facet display name and facet field name to scope down results.
 
 {{< img src="logs/explorer/facet/search_facet.png" alt="Group Facet" style="width:30%;">}}
 
 ### Aliased facets
 
-Some facets may have been aliased (see the [Alias facet section](#alias-facets) hereafter). Such aliased facets are still valid for slice and dicing, but are considered deprecated by your organisation:
+Some facets may have been aliased (see the [alias facet](#alias-facets) section). Aliased facets are still valid for slicing and dicing, but are considered deprecated by your organization:
 
 {{< img src="logs/explorer/facet/aliased_facet.png" alt="Create Facet" style="width:30%;">}}
 
-Indeed, when troubleshooting, it is more likely for you to find content from other teams (alongside content from your team) in the _standard_ facet rather than the _aliased_ facet. Which makes correlation on content from diverse origin more straightforward.
+When troubleshooting, it is more likely for you to find content from other teams (alongside content from your team) in the _standard_ facet rather than the _aliased_ facet. This makes correlation on content from diverse origins more straightforward.
 
 If you see an aliased facet in your facet list, consider using the _standard_ facet instead by clicking the **swith to alias** menu item. This action hides the aliased facet and unhide the standard facet. If doing so makes you update a saved view, consider saving the saved view so that the aliasing applies to everyone using this saved view.
 
