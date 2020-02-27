@@ -126,19 +126,7 @@ See the [Docker Log Collection Troubleshooting Guide][9]
 
 ## Serverless environment
 
-### Logs from lambda functions are not visible in Log Explorer page
-
-See the [Datadog-AWS Log integration][10] to configure your environment. If you still do not see your logs, double-check the following points:
-
-#### Lambda function configuration
-
-Check Datadog lambda configuration parameter:
-
-* `<API_KEY>` : Should be set with your [Datadog API key][11] either directly in the Python code, or alternatively as an environment variable. In case you manage several platforms, double-check that you are actually using the right `<API_KEY>` for the right platform.
-
-#### The lambda function is triggered
-
-Check that Datadog lambda function is actually triggered by leveraging `aws.lambda.invocations` and `aws.lambda.errors` metrics with the `functionname` tag of your Datadog lambda function within Datadog, or check for errors in Datadog lambda logs in Cloudwatch.
+See the [Lambda Log Collection Troubleshooting Guide][14]
 
 ## Expectedly dropping logs
 
@@ -161,3 +149,4 @@ Check if logs appear in the [Datadog Live Tail][12]. If they appear in the Live 
 [11]: https://app.datadoghq.com/account/settings#api
 [12]: https://app.datadoghq.com/logs/livetail
 [13]: /logs/indexes/#exclusion-filters
+[14]: /logs/guide/lambda-logs-collection-troubleshooting-guide
