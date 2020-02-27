@@ -2,7 +2,7 @@
 aliases:
   - /ja/integrations/azure_applicationgateway
 categories:
-  - クラウド
+  - cloud
   - azure
 ddtype: crawler
 dependencies: []

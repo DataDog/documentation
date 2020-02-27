@@ -5,7 +5,7 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - azure
-  - クラウド
+  - cloud
   - モニター
   - OS & システム
 creates_events: false

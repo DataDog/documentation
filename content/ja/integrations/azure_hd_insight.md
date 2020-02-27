@@ -2,7 +2,7 @@
 aliases:
   - /ja/integrations/azure_hdinsight
 categories:
-  - クラウド
+  - cloud
   - azure
 ddtype: crawler
 dependencies: []

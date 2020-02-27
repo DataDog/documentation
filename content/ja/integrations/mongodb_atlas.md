@@ -1,7 +1,7 @@
 ---
 categories:
   - データストア
-  - クラウド
+  - cloud
 ddtype: crawler
 dependencies: []
 description: MongoDB Atlas は、算出メトリクスを Datadog にプッシュして、アラートパフォーマンスを視覚化できます
