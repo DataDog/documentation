@@ -150,8 +150,9 @@ Update your [datadog-values.yaml][7] file with the following log collection conf
 ```text
 datadog:
   (...)
- logsEnabled: true
- logsConfigContainerCollectAll: true
+ logs:
+  enabled: true
+  containerCollectAll: true
 ```
 
 ### Enable Custom Metrics Collection
