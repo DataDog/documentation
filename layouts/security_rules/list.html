@@ -1,0 +1,37 @@
+{{ define "main" }}
+    <h1 id="pagetitle">{{ .Title }}</h1>
+
+    {{ .Content }}
+    <form>
+        <div class="form-group clearfix">
+            <input type="input" class="form-control" id="keywords" placeholder="Keywords..." onkeyup="search()">
+        </div>
+
+        <div class="list-group">
+            {{ range .Pages.ByParam "parent" }}
+                <a class="list-group-item" href="{{.Permalink}}">
+                    <img src="{{ .Params.meta_image }}?fit=auto&width=80" width="80" />
+                    {{ .Title }}
+                </a>
+            {{ end }}
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+        function search() {
+            let input = document.getElementById('keywords').value
+            input=input.toLowerCase();
+            let x = document.getElementsByClassName('list-group-item');
+
+            for (i = 0; i < x.length; i++) {
+                if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                    x[i].style.display="none";
+                }
+                else {
+                    x[i].style.display="list-group-item";
+                }
+            }
+        }
+    </script>
+{{ end }}

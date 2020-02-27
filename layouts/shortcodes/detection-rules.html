@@ -1,0 +1,11 @@
+{{ $dot := . }}
+
+{{ printf "%s" .Site.GetPage "/security_monitoring/rules" }}
+
+{{/* Comment */}}
+{{ $rules := .Site.GetPage "/security_monitoring/rules/cloudtrail-aws-cloudtrail-configuration-modified.json" }}
+
+{{/*  {{ range $rules }}
+    <h2>{{ .name }}</h2>
+    <p>{{ .message | markdownify }}</p>
+{{ end }}  */}}
