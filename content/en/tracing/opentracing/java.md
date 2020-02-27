@@ -115,7 +115,7 @@ class InstrumentedClass {
 
 In this case, you don't need to call `scope.close()`.
 
-If you’re not using `dd-java-agent.jar`, you must register a configured tracer with `GlobalTracer`. For this, call `GlobalTracer.register(DDTracer.builder().build())` early on in your application startup (e.g., main method).
+If you’re not using `dd-java-agent.jar`, you must register a configured tracer with `GlobalTracer`. For this, call `GlobalTracer.register(DDTracer.builder().build())` early on in your application startup (for example, main method).
 
 ```java
 import datadog.opentracing.DDTracer;
