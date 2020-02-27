@@ -379,7 +379,7 @@ Monolog をフレームワークに統合し、次にロガーを構成します
  <?php
   // Monolog ライブラリのロードが正常か確認
   //Monolog\Logger; を使用
-  //Monolog\Handler\StreamHandler;を使用
+  //Monolog\Handler\StreamHandler; を使用
   //Monolog\Formatter\JsonFormatter; を使用
 
   // monolog インスタンスを含む

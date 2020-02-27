@@ -24,7 +24,7 @@ For Single Page Applications (SPAs), performance metrics will only be available 
 
 ## Measures collected
 
-{{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="Timing overview" responsive="true" >}}
+{{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="Timing overview"  >}}
 
 | Attribute                              | Type        | Decription                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

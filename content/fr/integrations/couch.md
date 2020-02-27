@@ -42,8 +42,8 @@ supported_os:
 
 Enregistrez des données CouchDB dans Datadog pour :
 
-* Visualiser les métriques clés de CouchDB
-* Corréler les performances de CouchDB avec le reste de vos applications
+- Visualiser les métriques clés de CouchDB
+- Corréler les performances de CouchDB avec le reste de vos applications
 
 Pour des raisons de performances, la version CouchDB que vous utilisez est mise en cache. Vous ne pouvez donc pas surveiller plusieurs versions d'instances CouchDB avec la même instance d'Agent.
 
@@ -63,16 +63,15 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 1. Modifiez le fichier `couch.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données de performance CouchDB. Consultez le [fichier d'exemple couch.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-      ```yaml
-        init_config:
+   ```yaml
+   init_config:
 
-        instances:
-
-            ## @param server - string - required
-            ## The Couch server's url.
-            #
-          - server: http://localhost:5984
-      ```
+   instances:
+     ## @param server - string - required
+     ## The Couch server's url.
+     #
+     - server: http://localhost:5984
+   ```
 
     **Remarque** : indiquez des paramètres `db_whitelist` et `db_blacklist` pour spécifier les bases de données pour lesquelles l'Agent doit recueillir ou non des métriques.
 
@@ -80,24 +79,24 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Ajoutez ce bloc de configuration à votre fichier `couch.d/conf.yaml` pour commencer à recueillir vos logs CouchDB :
 
-    ```yaml
-      logs:
-          - type: file
-            path: /var/log/couchdb/couch.log
-            source: couchdb
-            sourcecategory: database
-            service: couch
-    ```
+   ```yaml
+   logs:
+     - type: file
+       path: /var/log/couchdb/couch.log
+       source: couchdb
+       sourcecategory: database
+       service: couch
+   ```
 
     Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple couch.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
@@ -110,19 +109,19 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 ##### Collecte de métriques
 
 | Paramètre            | Valeur                                |
-|----------------------|--------------------------------------|
+| -------------------- | ------------------------------------ |
 | `<NOM_INTÉGRATION>` | `couch`                              |
 | `<CONFIG_INIT>`      | vide ou `{}`                        |
 | `<CONFIG_INSTANCE>`  | `{"server": "http://%%host%%:5984"}` |
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][7].
 
 | Paramètre      | Valeur                                                |
-|----------------|------------------------------------------------------|
+| -------------- | ---------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "couchdb", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
@@ -130,6 +129,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [Lancez la sous-commande status de l'Agent][8] et cherchez `couch` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "couch" >}}
 
@@ -144,11 +144,12 @@ Le check CouchDB n'inclut aucun événement.
 Renvoie `Critical` si l'Agent n'est pas capable de se connecter à CouchDB pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 ## Pour aller plus loin
 
-* [Surveiller les performances de CouchDB avec Datadog][11]
+- [Surveiller les performances de CouchDB avec Datadog][11]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/couch/images/couchdb_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent

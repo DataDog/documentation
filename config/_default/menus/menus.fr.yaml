@@ -200,14 +200,10 @@ main:
     url: agent/kubernetes/metrics/
     parent: agent_kubernetes
     weight: 306
-  - name: Métriques custom et DogStatsD
-    url: agent/kubernetes/dogstatsd/
-    parent: agent_kubernetes
-    weight: 307
   - name: Version antérieures
     url: agent/kubernetes/legacy/
     parent: agent_kubernetes
-    weight: 308
+    weight: 307
   - name: Agent de cluster
     url: agent/cluster_agent/
     parent: agent
@@ -228,26 +224,34 @@ main:
     parent: agent_cluster
     identifier: cluster_agent_external_metrics
     weight: 403
+  - name: Checks de cluster
+    url: agent/cluster_agent/clusterchecks/
+    parent: agent_cluster
+    weight: 404
+  - name: Checks d'endpoints
+    url: agent/cluster_agent/endpointschecks/
+    parent: agent_cluster
+    weight: 405
   - name: Commandes et options
     url: agent/cluster_agent/commands/
     identifier: cluster_agent_commands
     parent: agent_cluster
-    weight: 404
-  - name: Fournisseur de métadonnées de cluster
+    weight: 406
+  - name: Fournisseur de métadonnées sur le cluster
     url: agent/cluster_agent/metadata_provider/
     identifier: cluster_agent_metadata_provider
     parent: agent_cluster
-    weight: 405
+    weight: 407
   - name: Générer le buildpack
     url: agent/cluster_agent/build/
     identifier: cluster_agent_build
     parent: agent_cluster
-    weight: 406
+    weight: 408
   - name: Dépannage
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 407
+    weight: 409
   - name: Autodiscovery
     url: agent/autodiscovery/
     identifier: agent_autodiscovery
@@ -281,14 +285,6 @@ main:
     url: agent/autodiscovery/management/
     parent: agent_autodiscovery
     weight: 506
-  - name: Checks de cluster
-    url: agent/autodiscovery/clusterchecks/
-    parent: agent_autodiscovery
-    weight: 507
-  - name: Checks d'endpoints
-    url: agent/autodiscovery/endpointschecks/
-    parent: agent_autodiscovery
-    weight: 508
   - name: Dépannage
     url: agent/autodiscovery/troubleshooting/
     parent: agent_autodiscovery
@@ -721,11 +717,6 @@ main:
     parent: tracing_setup
     identifier: tracing_setup_cpp
     weight: 209
-  - name: Android
-    url: tracing/setup/android/
-    parent: tracing_setup
-    identifier: tracing_setup_android
-    weight: 210
   - name: Envoy
     url: tracing/setup/envoy/
     parent: tracing_setup
@@ -761,19 +752,153 @@ main:
   - name: Associer vos logs à vos traces
     url: tracing/connect_logs_and_traces/
     parent: tracing
+    identifier: tracing_connect_logs_and_traces
     weight: 4
+  - name: Java
+    url: tracing/connect_logs_and_traces/java
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_java
+    weight: 401
+  - name: Python
+    url: tracing/connect_logs_and_traces/python
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_python
+    weight: 402
+  - name: Go
+    url: tracing/connect_logs_and_traces/go
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_go
+    weight: 403
+  - name: Ruby
+    url: tracing/connect_logs_and_traces/ruby
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_ruby
+    weight: 404
+  - name: PHP
+    url: tracing/connect_logs_and_traces/php
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_php
+    weight: 405
+  - name: NodeJS
+    url: tracing/connect_logs_and_traces/nodejs
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_nodejs
+    weight: 406
+  - name: .NET
+    url: tracing/connect_logs_and_traces/dotnet
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_dotnet
+    weight: 407
   - name: Métriques runtime
     url: tracing/runtime_metrics/
     parent: tracing
+    identifier: tracing_runtime_metrics
     weight: 5
+  - name: Java
+    url: tracing/runtime_metrics/java
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_java
+    weight: 501
+  - name: Python
+    url: tracing/runtime_metrics/python
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_python
+    weight: 502
+  - name: Ruby
+    url: tracing/runtime_metrics/ruby
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_ruby
+    weight: 503
+  - name: NodeJS
+    url: tracing/runtime_metrics/nodejs
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_nodejs
+    weight: 504
   - name: Instrumentation manuelle
     url: tracing/manual_instrumentation/
     parent: tracing
+    identifier: tracing_manual_instrumentation
     weight: 6
+  - name: Java
+    url: tracing/manual_instrumentation/java
+    parent: tracing_manual_instrumentation
+    identifier: tracing_manual_instrumentation_java
+    weight: 601
+  - name: Python
+    url: tracing/manual_instrumentation/python
+    parent: tracing_manual_instrumentation
+    identifier: tracing_manual_instrumentation_python
+    weight: 602
+  - name: Ruby
+    url: tracing/manual_instrumentation/ruby
+    parent: tracing_manual_instrumentation
+    identifier: tracing_manual_instrumentation_ruby
+    weight: 603
+  - name: Go
+    url: tracing/manual_instrumentation/go
+    parent: tracing_manual_instrumentation
+    identifier: tracing_manual_instrumentation_go
+    weight: 604
+  - name: NodeJS
+    url: tracing/manual_instrumentation/nodejs
+    parent: tracing_manual_instrumentation
+    identifier: tracing_manual_instrumentation_nodejs
+    weight: 605
+  - name: PHP
+    url: tracing/manual_instrumentation/php
+    parent: tracing_manual_instrumentation
+    identifier: tracing_manual_instrumentation_php
+    weight: 606
+  - name: C++
+    url: tracing/manual_instrumentation/cpp
+    parent: tracing_manual_instrumentation
+    identifier: tracing_manual_instrumentation_cpp
+    weight: 607
+  - name: .NET
+    url: tracing/manual_instrumentation/dotnet
+    parent: tracing_manual_instrumentation
+    identifier: tracing_manual_instrumentation_dotnet
+    weight: 608
   - name: OpenTracing
     url: tracing/opentracing/
     parent: tracing
+    identifier: tracing_opentracing
     weight: 7
+  - name: Java
+    url: tracing/opentracing/java
+    parent: tracing_opentracing
+    identifier: tracing_opentracing_java
+    weight: 701
+  - name: Python
+    url: tracing/opentracing/python
+    parent: tracing_opentracing
+    identifier: tracing_opentracing_python
+    weight: 702
+  - name: Go
+    url: tracing/opentracing/go
+    parent: tracing_opentracing
+    identifier: tracing_opentracing_go
+    weight: 703
+  - name: PHP
+    url: tracing/opentracing/php
+    parent: tracing_opentracing
+    identifier: tracing_opentracing_php
+    weight: 704
+  - name: Ruby
+    url: tracing/opentracing/ruby
+    parent: tracing_opentracing
+    identifier: tracing_opentracing_ruby
+    weight: 705
+  - name: .NET
+    url: tracing/opentracing/dotnet
+    parent: tracing_opentracing
+    identifier: tracing_opentracing_dotnet
+    weight: 706
+  - name: NodeJS
+    url: tracing/opentracing/nodejs
+    parent: tracing_opentracing
+    identifier: tracing_opentracing_nodejs
+    weight: 707
   - name: Glossaire de l'APM
     url: tracing/visualization/
     parent: tracing
@@ -787,7 +912,7 @@ main:
     url: tracing/visualization/service/
     parent: tracing_vis
     weight: 802
-  - name: Page Ressource
+  - name: Page Resource
     url: tracing/visualization/resource/
     parent: tracing_vis
     weight: 803
@@ -963,7 +1088,7 @@ main:
     pre: nav_security_monitoring
     identifier: security_monitoring
     weight: 135000
-  - name: Débuter
+  - name: Prise en main
     url: security_monitoring/getting_started
     parent: security_monitoring
     identifier: security_monitoring_getting_started
@@ -997,7 +1122,7 @@ main:
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 201
-  - name: Résultats du test
+  - name: Résultats de test
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 202
@@ -1103,7 +1228,7 @@ main:
     parent: npm
     identifier: npm_installation
     weight: 1
-  - name: Page Réseau
+  - name: Page Network
     url: network_performance_monitoring/network_page
     parent: npm
     identifier: npm_page
@@ -1139,7 +1264,7 @@ main:
     url: developers/dogstatsd/data_aggregation/
     parent: dev_tools_dogstatsd
     weight: 104
-  - name: DogStatsD Mapper
+  - name: Mapper DogStatsD
     url: developers/dogstatsd/dogstatsd_mapper/
     parent: dev_tools_dogstatsd
     weight: 105

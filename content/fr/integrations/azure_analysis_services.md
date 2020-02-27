@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Analysis Services
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_analysis_services
 public_title: Intégration Datadog/Microsoft Azure Analysis Services
 short_description: Surveillez des métriques clés d'Azure Analysis Services.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

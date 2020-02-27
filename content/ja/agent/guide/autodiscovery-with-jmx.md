@@ -27,8 +27,8 @@ Datadog Agent で使用する JMX ベースのインテグレーションコン�
 1. [Kafka インテグレーションディレクトリ][1]: `/etc/datadog-agent/conf.d/kafka.d` で 名前を `conf.yaml.example` から `conf.yaml` へと変更して Kafka インテグレーションを有効にします。
 
 2. パラメーター値を `conf.yaml` から Agent オートディスカバリーロジックに一致するように置換します。
-   デフォルトでは、コンフィギュレーションファイルにホストパラメーター値が含まれています。 Agent をオートディスカバリーと併用している場合は、代わりに[オートディスカバリーテンプレート変数][2]を使用します。
-   下記の例では、`host` パラメーター値を `localhost` から `%%host%%` に変更しています。
+    デフォルトでは、コンフィギュレーションファイルにホストパラメーター値が含まれています。Agent をオートディスカバリーと併用している場合は、代わりに[オートディスカバリーテンプレート変数][2]を使用します。
+    下記の例では、`host` パラメーター値を `localhost` から `%%host%%` に変更しています。
 
     ```yaml
       instances:
@@ -57,7 +57,7 @@ Datadog Agent で使用する JMX ベースのインテグレーションコン�
       # (...)
     ```
 
-   **注意**: 上記の例ではカスタム `ad_identifers` 値を使用していますが、必要に応じて、[コンテナショートイメージ][3]を `ad_identifiers` として指定できます。
+    **注**: 上記の例ではカスタム `ad_identifers` 値を使用していますが、必要に応じて、[コンテナショートイメージ][3]を `ad_identifiers` として指定できます。
 
 4. [Agent のオートディスカバリーを有効化します][4]。
 
@@ -83,8 +83,8 @@ Datadog Agent で使用する JMX ベースのインテグレーションコン�
 
 2. ファイル名を `conf.yaml.example` から `conf.yaml` に変更します。
 3. パラメーター値を `conf.yaml` から Agent オートディスカバリーロジックに一致するように置換します。
-   デフォルトでは、コンフィギュレーションファイルにホストパラメーター値が含まれています。 Agent とオートディスカバリーを併用している場合は、代わりに[オートディスカバリーテンプレート変数][26]を使用します。
-   下記の例では、`host` パラメーター値を `localhost` から `%%host%%` に変更しています。
+     デフォルトでは、コンフィギュレーションファイルにホストパラメーター値が含まれています。Agent とオートディスカバリーを併用している場合は、代わりに[オートディスカバリーテンプレート変数][26]を使用します。
+    下記の例では、`host` パラメーター値を `localhost` から `%%host%%` に変更しています。
 
     ```yaml
       instances:
@@ -113,7 +113,7 @@ Datadog Agent で使用する JMX ベースのインテグレーションコン�
       # (...)
     ```
 
-   **注意**: 上記の例ではカスタム `ad_identifers` 値を使用していますが、必要に応じて、[コンテナショートイメージ][27]を `ad_identifiers` として指定できます。
+    **注**: 上記の例ではカスタム `ad_identifers` 値を使用していますが、必要に応じて、[コンテナショートイメージ][27]を `ad_identifiers` として指定できます。
 
 5. [Agent のオートディスカバリーを有効化したら][28]、`conf.d/kafka.d/` フォルダーの Agent にコンフィギュレーションファイル (`conf.yaml` と `metrics.yaml`) をマウントします。
 6. (任意) - Agent コンテナ (AWS ECS など) で上記のファイルをマウントできない場合は、これら 2 つのコンフィギュレーションファイルを使用して Agent Docker イメージを再構築する必要があります。
@@ -124,7 +124,7 @@ Datadog Agent で使用する JMX ベースのインテグレーションコン�
     COPY <PATH_JMX_METRICS_FILE> conf.d/kafka.d/
     ```
 
-   その後、この新しいカスタムイメージを正規のコンテナ化された Agent として使用します。
+    その後、この新しいカスタムイメージを正規のコンテナ化された Agent として使用します。
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: /ja/integrations/activemq
@@ -169,19 +169,19 @@ apiVersion: v1
 kind: Pod
 # (...)
 metadata:
-  name: '<POD_NAME>'
+  name: '<ポッド名>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: 'CUSTOM_AD_IDENTIFIER'
+    ad.datadoghq.com/<コンテナ識別子>.check.id: 'カスタム_AD_識別子'
     # (...)
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<コンテナ識別子>'
 # (...)
 ```
 
 **注**:
 
-* 特定のコンフィギュレーションをコンテナに適用するには、オートディスカバリーはイメージではなく、**名前**でコンテナを認識します。`<CONTAINER_IDENTIFIER>` を `.spec.containers[0].image` ではなく `.spec.containers[0].name` にマッチさせるよう試みます。
+* 特定のコンフィギュレーションをコンテナに適用するには、オートディスカバリーはイメージではなく、**名前**でコンテナを認識します。`<コンテナ識別子>` を `.spec.containers[0].image` ではなく `.spec.containers[0].name` にマッチさせるよう試みます。
 * `kind: Pod` を使用して Kubernetes ポッドを直接定義する場合は、各ポッドのアノテーションを `metadata` セクションの真下に追加します。レプリケーションコントローラー、ReplicaSets、またはデプロイメントを使用してポッドを間接的に定義する場合は、ポッドアノテーションを `.spec.template.metadata` の下に追加します。
 
 {{% /tab %}}
@@ -190,20 +190,20 @@ spec:
 **Dockerfile**:
 
 ```yaml
-LABEL "com.datadoghq.ad.check.id"= 'CUSTOM_AD_IDENTIFIER'
+LABEL "com.datadoghq.ad.check.id"= 'カスタム_AD_識別子'
 ```
 
 **docker-compose.yaml**:
 
 ```yaml
 labels:
-  com.datadoghq.ad.check.id: CUSTOM_AD_IDENTIFIER
+  com.datadoghq.ad.check.id: カスタム_AD_識別子
 ```
 
 **docker 実行コマンド**:
 
 ```shell
--l com.datadoghq.ad.check.id= 'CUSTOM_AD_IDENTIFIER'
+-l com.datadoghq.ad.check.id= 'カスタム_AD_識別子'
 ```
 
 **Docker Swarm**:
@@ -215,9 +215,9 @@ version: "1.0"
 services:
 ...
   project:
-    image: '<IMAGE_NAME>'
+    image: '<イメージ名>'
     labels:
-      com.datadoghq.ad.check.id: CUSTOM_AD_IDENTIFIER
+      com.datadoghq.ad.check.id: カスタム_AD_識別子
 ```
 
 {{% /tab %}}

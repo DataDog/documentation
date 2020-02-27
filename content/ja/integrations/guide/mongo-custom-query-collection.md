@@ -6,24 +6,24 @@ further_reading:
     tag: ドキュメント
     text: Datadog-Mongo インテグレーション
 ---
-Datadog-Mongo インテグレーションでカスタムメトリクスを収集するには、[エージェントの構成ディレクトリ][1]のルートにある `conf.d/mongo.d/conf.yaml` ファイルの `custom_queries` オプションを使用します。詳細については、サンプル [mongo.d/conf.yaml][2]を参照してください。
+Datadog-Mongo インテグレーションでカスタムメトリクスを収集するには、[Agent の構成ディレクトリ][1]のルートにある `conf.d/mongo.d/conf.yaml` ファイルの `custom_queries` オプションを使用します。詳細については、サンプル [mongo.d/conf.yaml][2]を参照してください。
 
 ## コンフィグレーション
 
 `custom_queries` には以下のオプションがあります:
 
 * **`metric_prefix`**: 各メトリクスは選択したプレフィックスで始まります。
-* **`query`**: これは、JSON オブジェクトとして実行する [Mongo runCommand][3] クエリです。エージェントは `count`、`find`、`aggregates` クエリのみをサポートすることに注意してください。
-* **`fields`**: `count` クエリでは無視されます。これは、各フィールドを表すリストです。フィールドは特定の順序で表示されていません。未指定および欠落フィールドは無視します。各 `fields` には 3 つの必須データがあります:
-  * `field_name`: これは、データを取得するフィールドの名前です。
-  * `name`: これは、完全なメトリクス名を形成するために metric_prefix に付けるサフィックスです。`type` が `tag` である場合、この列はタグとして扱われ、この特定のクエリによって収集されたすべてのメトリクスに適用されます。
-  * `type`: これは提出メソッドです（`gauge`、`count`、`rate` など）。これを `tag` に設定して、行の各メトリクスにこの列の項目の名前と値でタグ付けすることもできます。`count` タイプを使用して、同じタグを持つか、またはタグのない複数の行を返すクエリの集約を実行できます。
+* **`query`**: JSON オブジェクトとして実行する [Mongo runCommand][3] クエリです。Agent では `count`、`find`、`aggregates` クエリのみサポートされます。
+* **`fields`**: `count` クエリでは無視されます。各フィールドを表す順不同のリストです。未指定および欠落フィールドは無視します。各 `fields` には 3 つの必須データがあります:
+  * `field_name`: データを取得するフィールドの名前。
+  * `name`: 完全なメトリクス名を形成するために metric_prefix に付けるサフィックス。`type` が `tag` である場合、この列はタグとして扱われ、この特定のクエリによって収集されたすべてのメトリクスに適用されます。
+  * `type`: 送信メソッド（`gauge`、`count`、`rate` など）。これを `tag` に設定して、行の各メトリクスにこの列の項目の名前と値でタグ付けすることもできます。`count` タイプを使用して、同じタグを持つか、タグのない複数の行を返すクエリの収集を実行できます。
 * **`tags`**: 各メトリクスに適用するタグのリスト（上記で指定）。
-* **`count_type`**: これは、`count` クエリに対してのみ、カウント結果を提出するメソッド（`gauge`、`count`、`rate` など）として機能します。非カウントクエリでは無視されます。
+* **`count_type`**: `count` クエリに対してのみ、カウント結果を送信するメソッド（`gauge`、`count`、`rate` など）として機能します。非カウントクエリでは無視されます。
 
 ## 例
 
-以下の例では、次の mongo コレクション `user_collection` が使用されます:
+以下の例では、次の mongo コレクション `user_collection` が使用されます。
 
 ```text
 { name: "foo", id: 12345, active: true, age:45, is_admin: true}
@@ -31,18 +31,18 @@ Datadog-Mongo インテグレーションでカスタムメトリクスを収集
 { name: "foobar", id: 16273, active: true, age:35, is_admin: false}
 ```
 
-例を表示したいクエリのタイプを選択します:
+クエリタイプを選択すると例が表示されます。
 
 {{< tabs >}}
 {{% tab "Count" %}}
 
-所定の時間にアクティブユーザーの数を監視するには、次のような [Mongo count コマンド][1]を実行します:
+所定時間のアクティブユーザー数を監視するには、次のような [Mongo count コマンド][1]を実行します。
 
 ```text
 db.runCommand( {count: user_collection, query: {active:true}})
 ```
 
-`mongo.d/conf.yaml` ファイル内の次の `custom_queries` YAML 構成に対応するクエリ:
+`mongo.d/conf.yaml` ファイル内の次の `custom_queries` YAML コンフィギュレーションに対応するクエリ:
 
 ```yaml
 custom_queries:
@@ -62,13 +62,13 @@ custom_queries:
 {{% /tab %}}
 {{% tab "Find" %}}
 
-ユーザーの平均年齢を監視するには、次のような [Mongo find コマンド][1]を実行します:
+ユーザーの平均年齢を監視するには、次のような [Mongo find コマンド][1]を実行します。
 
 ```text
 db.runCommand( {find: user_colleciton, filter: {active:true} )
 ```
 
-`mongo.d/conf.yaml` ファイル内の次の `custom_queries` YAML 構成に対応するクエリ:
+`mongo.d/conf.yaml` ファイル内の次の `custom_queries` YAML コンフィギュレーションに対応するクエリ:
 
 ```yaml
 custom_queries:
@@ -108,7 +108,7 @@ db.runCommand(
             )
 ```
 
-`mongo.d/conf.yaml` ファイル内の次の `custom_queries` YAML 構成に対応するクエリ:
+`mongo.d/conf.yaml` ファイル内の次の `custom_queries` YAML コンフィギュレーションに対応するクエリ:
 
 ```yaml
 custom_queries:
@@ -135,11 +135,11 @@ custom_queries:
 
 ### 検証
 
-結果を確認するには、[Metrics Explorer][5] を使用してメトリクスを検索します。
+結果を確認するには、[メトリクスエクスプローラー][5] を使用してメトリクスを検索します。
 
 ### デバッグ作業
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `mongo` を探します。追加で、[Agent's logs][7]が有用な情報を提供する場合があります。
+[Agent のステータスサブコマンドを実行][7]し、Checks セクションで `mongo` を探します。さらに、[Agent のログ][7]から有用な情報が得られることもあります。
 
 ## その他の参考資料
 

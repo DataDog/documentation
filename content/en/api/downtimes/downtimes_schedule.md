@@ -26,7 +26,12 @@ external_redirect: /api/#schedule-monitor-downtime
 * **`recurrence`** [*optional*, *default*=**None**]:
     An object defining the recurrence of the downtime with a variety of parameters:
     *   **`type`** the type of recurrence. Choose from: `days`, `weeks`, `months`, `years`.
+    *   **`rrule`** standard for defining recurring events. For example to have a recurring event on the first day of each month, select a type of `rrule` and set the `FREQ` to `MONTHLY` and `BYMONTHDAY` to `1`. Most common RRULE options from the [iCalendar Spec][1] are supported.
+
+        **Note**: Attributes specifying the duration in RRULE are not supported, e.g. `DTSTART`, `DTEND`, `DURATION`.
     *   **`period`** how often to repeat as an integer. For example to repeat every 3 days, select a type of `days` and a period of `3`.
     *   **`week_days`** (optional) a list of week days to repeat on. Choose from: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat` or `Sun`. Only applicable when `type` is `weeks`. **First letter must be capitalized.**
     *   **`until_occurrences`** (optional) how many times the downtime is rescheduled. **`until_occurences` and `until_date`** are mutually exclusive
     *   **`until_date`** (optional) the date at which the recurrence should end as a POSIX timestmap. **`until_occurences` and `until_date`** are mutually exclusive
+
+[1]: https://tools.ietf.org/html/rfc2445#section-4.8.5.4
