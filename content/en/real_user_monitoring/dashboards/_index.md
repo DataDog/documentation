@@ -32,19 +32,19 @@ You can customize your dashboards as you would with [any other one][4], or direc
 
 RUM dashboards are generated for all your applications with a set of default template variables automatically created. Use the template variables to start filtering RUM dashboards. For instance, use the `applicationId` template variable to filter down to a specific application.
 
-{{< img src="real_user_monitoring/dashboards/template_variables.gif" alt="Template variable" >}}
+{{< img src="real_user_monitoring/dashboards/template_variables.gif" alt="Template variable" style="width:50%;" >}}
 
 ### View related views
 
 To explore all the individual events, click on any graph and select _View related views_ to be redirected to the RUM Explorer with the currently selected filters.
 
-{{< img src="real_user_monitoring/dashboards/view_related_views.gif" alt="View related views" >}}
+{{< img src="real_user_monitoring/dashboards/view_related_views.gif" alt="View related views" style="width:50%;" >}}
 
 ### Customize dashboards
 
 Clone your RUM dashboards and customize them to fit your needs. You can add widgets and modify the template variables:
 
-{{< img src="real_user_monitoring/dashboards/clone_dashboard.png" alt="Clone Dashboard" >}}
+{{< img src="real_user_monitoring/dashboards/clone_dashboard.png" alt="Clone Dashboard" style="width:50%;">}}
 
 ## Further Reading
 
