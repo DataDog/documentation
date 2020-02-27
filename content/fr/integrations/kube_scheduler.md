@@ -52,20 +52,20 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 #### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration daemonSet][4] :
 
-    ```
-    (...)
-      env:
-        (...)
-        - name: DD_LOGS_ENABLED
-            value: "true"
-        - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-            value: "true"
-    (...)
-    ```
+   ```yaml
+     # (...)
+     env:
+       # (...)
+       - name: DD_LOGS_ENABLED
+           value: "true"
+       - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+           value: "true"
+     # (...)
+   ```
 
 2. Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste][5].
 
@@ -93,7 +93,6 @@ Kube Scheduler n'inclut aucun événement.
 ## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
-
 
 [1]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler
 [2]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/datadog_checks/kube_scheduler/data/conf.yaml.example

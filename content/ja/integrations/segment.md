@@ -12,11 +12,11 @@ has_logo: true
 integration_title: Segment
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: segment
 public_title: Datadog-Segment インテグレーション
 short_description: Segment のイベント配信メトリクスを収集
-version: 1
+version: '1.0'
 ---
 ## 概要
 

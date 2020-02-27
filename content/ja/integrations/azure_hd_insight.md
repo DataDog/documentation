@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure HDInsight
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_hd_insight
 public_title: Datadog-Microsoft Azure HDInsight インテグレーション
 short_description: Azure HDInsight のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

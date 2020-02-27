@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Data Lake Analytics
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_data_lake_analytics
 public_title: Datadog-Microsoft Azure Data Lake Analytics インテグレーション
 short_description: Azure Data Lake Analytics のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

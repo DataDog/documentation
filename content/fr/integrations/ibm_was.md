@@ -65,6 +65,7 @@ Depuis la console d'administration de WebSphere, vous pouvez accéder à ce rég
 Une fois ce changement effectué, cliquez sur « Apply » pour enregistrer la configuration et redémarrer votre serveur d'application. Les métriques JDBC, JVM et servlet supplémentaires apparaissent quelques instants plus tard dans Datadog.
 
 ### Configuration
+
 #### Host
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
@@ -77,23 +78,23 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Modifiez ensuite `ibm_was.d/conf.yaml` en supprimant la mise en commentaire des lignes `logs` en bas du fichier. Mettez à jour la ligne `path` en indiquant le bon chemin vers vos fichiers de log WAS.
 
-    ```yaml
-      logs:
-        - type: file
-          path: /opt/IBM/WebSphere/AppServer/profiles/InfoSphere/logs/server1/*.log
-          source: ibm_was
-          service: websphere
-    ```
+   ```yaml
+   logs:
+     - type: file
+       path: /opt/IBM/WebSphere/AppServer/profiles/InfoSphere/logs/server1/*.log
+       source: ibm_was
+       service: websphere
+   ```
 
 3. [Redémarrez l'Agent][5].
 
@@ -104,19 +105,19 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 ##### Collecte de métriques
 
 | Paramètre            | Valeur                                                                         |
-|----------------------|-------------------------------------------------------------------------------|
+| -------------------- | ----------------------------------------------------------------------------- |
 | `<NOM_INTÉGRATION>` | `ibm_was`                                                                     |
 | `<CONFIG_INIT>`      | vide ou `{}`                                                                 |
 | `<CONFIG_INSTANCE>`  | `{"servlet_url": "http://%%host%%:%%port%%/wasPerfTool/servlet/perfservlet"}` |
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][6].
 
 | Paramètre      | Valeur                                                |
-|----------------|------------------------------------------------------|
+| -------------- | ---------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "ibm_was", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
