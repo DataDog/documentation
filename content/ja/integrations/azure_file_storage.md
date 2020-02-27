@@ -2,7 +2,7 @@
 aliases:
   - /ja/integrations/azure_filestorage
 categories:
-  - クラウド
+  - cloud
   - azure
 ddtype: crawler
 dependencies: []

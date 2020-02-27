@@ -2,7 +2,7 @@
 aliases:
   - /ja/integrations/azure_appserviceenvironment
 categories:
-  - クラウド
+  - cloud
   - azure
 ddtype: crawler
 dependencies: []

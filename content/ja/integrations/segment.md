@@ -2,7 +2,7 @@
 categories:
   - モニター
   - 通知
-  - クラウド
+  - cloud
 ddtype: crawler
 dependencies: []
 description: Segment インテグレーションは、配信先ワークスペースのイベント配信メトリクスを収集

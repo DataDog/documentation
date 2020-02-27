@@ -1,6 +1,6 @@
 ---
 categories:
-  - クラウド
+  - cloud
   - aws
   - ログの収集
   - web

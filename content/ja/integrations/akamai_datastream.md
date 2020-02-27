@@ -2,7 +2,7 @@
 aliases:
   - /ja/integrations/akamai/
 categories:
-  - クラウド
+  - cloud
 ddtype: crawler
 dependencies: []
 description: Akamai DataStream を Datadog と統合

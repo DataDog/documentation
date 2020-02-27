@@ -1,6 +1,6 @@
 ---
 categories:
-  - クラウド
+  - cloud
   - azure
 ddtype: crawler
 dependencies: []

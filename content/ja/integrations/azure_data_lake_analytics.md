@@ -2,7 +2,7 @@
 aliases:
   - /ja/integrations/azure_datalakeanalytics
 categories:
-  - クラウド
+  - cloud
   - azure
 ddtype: crawler
 dependencies: []

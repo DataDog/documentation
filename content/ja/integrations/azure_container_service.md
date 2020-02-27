@@ -2,7 +2,7 @@
 aliases:
   - /ja/integrations/azure_containerservice
 categories:
-  - クラウド
+  - cloud
   - コンテナ
   - azure
 ddtype: crawler
