@@ -11,22 +11,22 @@ To [create a monitor][1] in Datadog, hover over **Monitors** in the main menu an
 
 Select a monitor type:
 
-* [Host][4]
-* [Metric][5]
-* [Anomaly][6]
-* [Outlier][7]
-* [Forecast][8]
-* [Integration][9]
-* [Live Process][10]
-* [Process Check][11]
-* [Network][12]
-* [Custom Check][13]
-* [Event][14]
-* [Logs][15]
-* [APM][16]
-* [Real User Monitoring][17]
-* [Watchdog][18]
-* [Composite][19]
+* [Host][4] - Check if one or more hosts are reporting to Datadog.
+* [Metric][5] - Compare values of a metric with a user-defined threshold.
+* [Anomaly][6] - Detect anomalous behavior for a metric based on historical data.
+* [Outlier][7] - Alert on members of a group behaving differently than the others.
+* [Forecast][8] - Alert when a metric is projected to cross a threshold.
+* [Integration][9] - Monitor metric values or health status from a specific integration.
+* [Live Process][10] - Check if one or more processes are running on a host.
+* [Process Check][11] - Watch the status produced by the `process.up` service check.
+* [Network][12] - Check the status of TCP/HTTP endpoints.
+* [Custom Check][13] - Monitor the status of arbitrary custom checks.
+* [Event][14] - Monitor events gathered by Datadog.
+* [Logs][15] - Monitor logs gathered by Datadog.
+* [APM][16] - Compare an APM metric to a user-defined threshold.
+* [Real User Monitoring][17] - Monitor real user data gathered by Datadog.
+* [Watchdog][18] - Get notified when Watchdog detects anomalous behavior.
+* [Composite][19] - Alert on an expression combining multiple monitors.
 
 ## Import
 
