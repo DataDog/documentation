@@ -241,9 +241,10 @@ datadog:
 
 ## Upgrading from chart v1.x
 
-The datadog chart has been refactored to regroup the values.yaml parameters in a more logical way. Please follow the migration guide to update your values.yaml file.
+The Datadog chart has been refactored in v2.0 to regroup the `values.yaml` parameters in a more logical way. 
 
-If the current chart version deployed is earlier than `v2.0.0`, migrating from 1.x to 2.x requires updating the values.yaml file to map your previous settings with the new fields. The mapping can be found in the [migration guide][11]
+If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][11] to map your previous settings with the new fields. 
+
 
 ## Uninstalling the Datadog Helm Chart
 
