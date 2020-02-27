@@ -8,16 +8,16 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Datadog Profiling is in beta, reach out to <a href="/help/">Datadog Support</a> if you encounter any issues or have a feedback to share.
+Datadog Profiling is in beta. Reach out to <a href="/help/">Datadog Support</a> if you encounter any issues or have feedback to share.
 </div>
 
-Profiling libraries are shipped within the following tracing language library, refer to the dedicated language page to learn how to enable profile connection for your application:
+Profiling libraries are shipped within the following tracing language library. Refer to the dedicated language page to learn how to enable profile connections for your application:
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
 ## Profile explorer
 
-Once your profile collection is setup, profils are available in the [APM > Profiling][1] page within Datadog:
+Once your profile collection is set up, profiles are available in the [APM > Profiling][1] page within Datadog:
 
 {{< img src="tracing/profiling/profiling_main_page.png" alt="Profiling main page">}}
 
@@ -33,15 +33,15 @@ You can filter according to infrastructure tags or application tags set up from 
 | Service  | The name of the [service][3] your code is running.                      |
 | Version  | The version of your code.                                               |
 | Host     | The host name your profiled process is running on.                      |
-| Runtime  | The type of Runtime the profiled process is running (`JVM`, `CPython`). |
+| Runtime  | The type of runtime the profiled process is running (`JVM`, `CPython`). |
 | Language | The language of your code (`Java`, `Python`).                           |
 
-And the following measures are available:
+The following measures are available:
 
 |  Measure          | Definition                                                                                                                                                                          |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CPU               | CPU load summed on all cores of the process. This means this can go above `100%` and the theoretical limit is `nCores` \* `100%`                                                    |
-| Memory Allocation | Memory allocation rate in `Bytes/s` over the course of the profile. This value can be above the maximum amount of RAM memory because it can be garbage collected during the profile |
+| CPU               | CPU load summed on all cores of the process. This means this can go above `100%` and the theoretical limit is `nCores` \* `100%`.                                                    |
+| Memory Allocation | Memory allocation rate in `Bytes/s` over the course of the profile. This value can be above the maximum amount of RAM memory because it can be garbage collected during the profile. |
 
 ## Profile
 
@@ -49,12 +49,12 @@ Click on one line to view a specific profile:
 
 {{< img src="tracing/profiling/profile.png" alt="A specic profile">}}
 
-The profile header contains information associated to your profile like: the service that generated it, the environment and code version associated to it. Find also in the upper right corner of each profile options to:
+The profile header contains information associated with your profile, like: the service that generated it, or the environment and code version associated to it. In the upper right corner of each profile, there are options to:
 
 - Download the profile
 - Switch the profile to full screen
 
-Below the profile header you can find 4 tabs:
+Four tabs are below the profile header:
 
 | Tab          |  Definition                                                                                                                                 |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -65,18 +65,18 @@ Below the profile header you can find 4 tabs:
 
 ### Profile types
 
-In the **Profiles** tab you can see all profile types available for a given language. Depending of the language, the information collected about your profile differs. Refer to the dedicated profile types section for your language to see which one are collected:
+In the **Profiles** tab you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs. Refer to the dedicated profile types section for your language to see what is collected:
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
 ## Troubleshooting
 
-Datadog profiling is in beta. It doesn't work with some configurations or environments:
+Datadog profiling is in beta. Note the following limitations:
 
 - Datadog profiling does not work with serverless.
 - Datadog profiling does not work with complex proxy configuration. Profiles are sent directly from your application to Datadog.
 
-In case you have done all the necessary configuration steps and do not see profiles in the [profile search page](#search-profiles), please turn on [debug mode][4] and open a support ticket with debug files and following information:
+In case you have done all the necessary configuration steps and do not see profiles in the [profile search page](#search-profiles), turn on [debug mode][4] and open a support ticket with debug files and the following information:
 
 - OS type and version (e.g Linux Ubuntu 14.04.3)
 - Runtime type, version and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
