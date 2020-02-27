@@ -427,7 +427,7 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [8]: /agent/docker/#environment-variables
 [9]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
 [10]: /integrations/amazon_ec2/#configuration
-[11]: https://github.com/helm/charts/blob/2d905afa38f59b73e1043252022dfc934aff588d/stable/datadog/values.yaml#L72
+[11]: https://github.com/helm/charts/blob/a744ff8c90730d6d36698412150875fa96882b9d/stable/datadog/values.yaml#L58
 [12]: /logs
 [13]: /agent/autodiscovery/integrations/?tab=kubernetes
 [14]: /tracing/setup
