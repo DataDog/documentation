@@ -83,10 +83,7 @@ if __name__ == "__main__":
     options = vars(options)
 
     print("\x1b[32mINFO\x1b[0m: Detecting the list of URL flagged noindex, nofollow:\n")
-    if options["excluded_language"] != []:
-        private_urls = find_private_url('public', options["excluded_directory"])
-    else:
-        private_urls = find_private_url('public', options["excluded_directory"] + options["excluded_language"])
+    private_urls = find_private_url('public', options["excluded_directory"] + options["excluded_language"])
 
     print("\x1b[32mINFO\x1b[0m: Transforming links to make them match the algolia logic:\n")
     private_urls=transform_url(private_urls)
