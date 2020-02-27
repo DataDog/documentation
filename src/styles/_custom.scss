@@ -173,6 +173,9 @@ h2{
 // this is for tags on the integrations page and elsewhere as needed
 .btn-sm-tag {
   @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 16px, $line-height-sm, $btn-border-radius-sm);
+  &:lang(ja) {
+    @include button-size($input-btn-padding-y-sm, $input-btn-padding-x-sm, 15px, $line-height-sm, $btn-border-radius-sm);
+  }
 }
 
 //white badge should have black border
