@@ -126,7 +126,9 @@ Reason to keep using the non-standard _aliased_ version of the facet is when you
 
 ### The Index Facet
 
-The Index facet is a specific facet that appears only if your organisation has [multiple indexes][24], and/or if you have active [historical views][25]. Use this facet if you want to scope down your query to a subset of your indexes.
+The Index facet is a specific facet that appears only if your organisation has [multiple indexes][24], and/or if you have active [historical views][25]. Use this facet if you want to scope down your query to a subset of your indexes
+
+{{< img src="logs/explorer/facet/index_facet.png" alt="Create Facet" style="width:30%;">}}
 
 ## Manage Facets
 
