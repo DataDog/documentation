@@ -2,7 +2,7 @@
   {{ $allowed := (slice "fr") }}
   {{ range where (where .Data.Pages "Params.beta" "!=" true) ".Params.is_public" "!=" false }}
     {{ $page := . }}
-    {{ if (and (not .Params.private) (not .Params.placeholder) (ne (.Language.Lang | default "en") "ja") ) }}
+    {{ if (and (not .Params.private) (not .Params.placeholder)) }}
 	  <url>
 	    <loc>{{ .Permalink }}</loc>
       {{ if not .Lastmod.IsZero }}
