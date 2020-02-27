@@ -118,15 +118,15 @@ Some facets may have been aliased (see the [alias facet](#alias-facets) section)
 
 When troubleshooting, it is more likely for you to find content from other teams (alongside content from your team) in the _standard_ facet rather than the _aliased_ facet. This makes correlation on content from diverse origins more straightforward.
 
-If you see an aliased facet in your facet list, consider using the _standard_ facet instead by clicking the **swith to alias** menu item. This action hides the aliased facet and unhide the standard facet. If doing so makes you update a saved view, consider saving the saved view so that the aliasing applies to everyone using this saved view.
+If you see an aliased facet in your facet list, consider using the _standard_ facet instead by clicking the **switch to alias** menu item. This action hides the aliased facet and unhides the standard facet. If doing so makes you update a saved view, consider saving the saved view so that the aliasing applies to everyone using this saved view.
 
 {{< img src="logs/explorer/facet/switch_facet.png" alt="Create Facet" style="width:30%;">}}
 
-Reason to keep using the non-standard _aliased_ version of the facet is when you are troubleshooting against old content (before the aliasing for this facet has been setup by your organisation).
+You may wish to keep the non-standard _aliased_ version of the facet if you are troubleshooting against old content (before the aliasing for this facet has been setup by your organization).
 
 ### The Index Facet
 
-The Index facet is a specific facet that appears only if your organisation has [multiple indexes][24], and/or if you have active [historical views][25]. Use this facet if you want to scope down your query to a subset of your indexes
+The index facet is a specific facet that appears only if your organization has [multiple indexes][24], and/or if you have active [historical views][25]. Use this facet if you want to scope down your query to a subset of your indexes.
 
 {{< img src="logs/explorer/facet/index_facet.png" alt="Create Facet" style="width:30%;">}}
 
@@ -134,19 +134,19 @@ The Index facet is a specific facet that appears only if your organisation has [
 
 ### Out-of-the-box facets
 
-Most common facets such as `Host`, `Service` or `URL Path` or `Duration` come out-of-the-box to start troubleshooting right away once your logs are flowing into log indexes.
+Most common facets such as `Host`, `Service`, `URL Path`, or `Duration` come out-of-the-box to start troubleshooting right away once your logs are flowing into log indexes.
 
 Facets on [Reserved Attributes][26] and most [Standard Attributes][27] are available by default.
 
 ### Create Facets
 
-As a matter of good practice, always consider using an existing facet rather than creating a new one (see [Alias Facets](#alias-facets) section hereafter). Using a unique facet for information of similar nature fosters cross-team collaboration.
+As a matter of good practice, always consider using an existing facet rather than creating a new one (see the [alias facets](#alias-facets) section). Using a unique facet for information of a similar nature fosters cross-team collaboration.
 
 **Note**: Once a facet is created, its content is populated **for all new logs** flowing in **either** index.
 
 #### From log side panel
 
-The easiest way to create a facet is to add it from the log side panel. Doing so, most of the facet details such as the field name or the underlying type of data are pre-filled and it's only a matter of double-checking. Navigate in the [Log Explorer][1] to whichever log of interest bearing the field to create a facet on. Open the side-panel for this log, click on the corresponding field (either in tags or in attributes) and create a facet from there:
+The easiest way to create a facet is to add it from the log side panel, where most of the facet details—such as the field name or the underlying type of data—are pre-filled and it's only a matter of double-checking. Navigate in the [Log Explorer][1] to whichever log of interest bearing the field to create a facet on. Open the side-panel for this log, click on the corresponding field (either in tags or in attributes) and create a facet from there:
 
 - If the field has a string value, only facet creation is available.
 - If the field has a numerical value, both facet and measure creation are available.
@@ -162,32 +162,32 @@ Define the underlying field (key) name for this facet:
 - Use tag group name for tags.
 - Use the attribute path for attributes, with `@` prefix.
 
-Autocomplete based on the content in logs of the current views helps you defining the proper field name. But you can use virtually any value here, specifically in case you don't have mathcing logs (yet) flowing in your indexes.
+Autocomplete based on the content in logs of the current views helps you to define the proper field name. But you can use virtually any value here, specifically in the case that you don't yet have matching logs flowing in your indexes.
 
 {{< img src="logs/explorer/facet/create_facet_from_scratch.png" alt="Create Facet" style="width:30%;">}}
 
 ### Alias Facets
 
-Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting - see [Naming Convention][27] for reference.
+Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting—see [Naming Convention][27] for reference.
 
-Aliasing is the option you have to smoothly realign teams who rely on inconsitent naming conventions. And subsequently, have them all using the standard facet emerging for your organisation.
+Use aliasing as an option to smoothly realign teams that rely on inconsistent naming conventions. With aliasing, you can have them all using the standard facet emerging for your organization.
 
 #### Aliasing facet to facet
 
-This is the best option if multiple teams in your organisation already created multiple facets for similar content.
+This is the best option if multiple teams in your organization already created multiple facets for similar content.
 
-When aliasing a _aliased_ facet towards a _standard_ facet:
+When aliasing an _aliased_ facet towards a _standard_ facet:
 
-- Users can use whichever facet between aliased and standard for troubleshooting. But preferrably the standard one, which eases correlation of content flowing from diverse and possibly heterogeneous sources.
+- Users can use either aliased and standard facets for troubleshooting. You may prefer the standard one, which eases correlation of content flowing from diverse and possibly heterogeneous sources.
 - Users are nudged to use the standard facet in place of the aliased one.
 
-To alias a facet towards a standard one, select the `Alias to...` action item in the facet menu. And pick the destination facets among all the [standard][28] ones existing for your organisation.
+To alias a facet towards a standard one, select the `Alias to...` action item in the facet menu. Pick the destination facets from all the [standard][28] ones existing for your organization.
 
 {{< img src="logs/explorer/facet/alias_modal.png" alt="Create Facet" style="width:30%;">}}
 
 #### Aliasing attribute to facet
 
-This is the best option if you onboard logs flowing from new sources. Rather than creating a facet for some field on those logs, and right after deprecating this facet by aliasing it to a standard facet, alias direcltly the field to an existing facet:
+This is the best option if you onboard logs flowing from new sources. Rather than creating a facet for some field on those logs, and right after deprecating this facet by aliasing it to a standard facet, alias the field directly to an existing facet:
 
 {{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="Create Facet" style="width:30%;">}}
 
