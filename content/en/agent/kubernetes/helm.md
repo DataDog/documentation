@@ -161,7 +161,8 @@ To gather custom metrics with [DogStatsD][8], update your [datadog-values.yaml][
 ```text
 datadog:
   (...)
-  nonLocalTraffic: true
+  dogstatsd:
+    nonLocalTraffic: true
 ```
 
 ### Enable APM and Distributed Tracing
@@ -173,14 +174,8 @@ Update your [datadog-values.yaml][7] file with the following APM configuration:
 ```text
 datadog:
   (...)
-  apmEnabled: true
-  nonLocalTraffic: true
-
-(...)
-
-daemonset:
-  (...)
-  useHostPort: true
+  apm:
+   enabled: true
 ```
 
 Update the `env` section of your application's manifest with the following:
@@ -216,7 +211,8 @@ Update your [datadog-values.yaml][7] file with the following process collection 
 ```text
 datadog:
   (...)
-  processAgentEnabled: true
+  processAgent:
+   enabled: true
 ```
 
 ### Enabling integrations with Helm
@@ -243,6 +239,12 @@ datadog:
           port: "%%port_0%%"
 ```
 
+## Upgrading from chart v1.x
+
+The datadog chart has been refactored to regroup the values.yaml parameters in a more logical way. Please follow the migration guide to update your values.yaml file.
+
+If the current chart version deployed is earlier than `v2.0.0`, migrating from 1.x to 2.x requires updating the values.yaml file to map your previous settings with the new fields. The mapping can be found in the [migration guide][11]
+
 ## Uninstalling the Datadog Helm Chart
 
 To uninstall or delete a deployment called `<RELEASE_NAME>`:
@@ -263,3 +265,4 @@ This command removes all Kubernetes components associated with the chart and del
 [8]: /developers/metrics/dogstatsd_metrics_submission
 [9]: /tracing/setup
 [10]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh
+[11]: https://github.com/helm/charts/blob/master/stable/datadog/docs/Migration_1.x_to_2.x.md
