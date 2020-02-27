@@ -32,7 +32,7 @@ By default, Log Explorer have one unique Log Index, but datadog also offers mult
 * Multiple retention periods and/or multiple [daily quotas](#set-daily-quota), for finer budget control.
 * Multiple permissions, for finer user [role based access controls (RBAC)][7].
 
-The Log Explorer supports queries across multiple indexes.
+The Log Explorer supports [queries across multiple indexes][20].
 
 
 <div class="alert alert-info">
