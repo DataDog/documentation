@@ -100,7 +100,7 @@ Hiding facets is specific to your own troubleshooting context and won't impact y
 
 ### Group facets
 
-Facets are grouped into meaningful thematics, to ease navigation in the facet list. Assigning or reassigning a group for a facet (see how to [curate facets](#curate-facets) hereafter) is only a matter of display in the facet list, and has no impact on search and analytics capabilities.
+Facets are grouped into meaningful thematics, to ease navigation in the facet list. Assigning or reassigning a group for a facet (see how to [manage facets](#manage-facets) hereafter) is only a matter of display in the facet list, and has no impact on search and analytics capabilities.
 
 {{< img src="logs/explorer/facet/group_facets.png" alt="Group Facet" style="width:30%;">}}
 
@@ -128,7 +128,7 @@ Reason to keep using the non-standard _aliased_ version of the facet is when you
 
 The Index facet is a specific facet that appears only if your organisation has [multiple indexes][24], and/or if you have active [historical views][25]. Use this facet if you want to scope down your query to a subset of your indexes.
 
-## Curate Facets
+## Manage Facets
 
 ### Out-of-the-box facets
 
