@@ -100,7 +100,7 @@ To forward your metrics to Datadog using this new VPC endpoint, configure `pvtli
 
 _Available for Agent 6.14+_
 
-To forward your logs to Datadog using this new VPC endpoint, you need to set up `pvtlink.logs.datadoghq.com` as your new log destination:
+To forward your logs to Datadog using this new VPC endpoint, configure `pvtlink.logs.datadoghq.com` as your new log destination:
 
 **Using the Datadog Agent**:
 
@@ -112,7 +112,7 @@ To forward your logs to Datadog using this new VPC endpoint, you need to set up 
         logs_dd_url: pvtlink.logs.datadoghq.com:443
     ```
 
-    - The `use_http` variable is used to force the Datadog Agent to send logs over HTTPS, which is the protocol supported by the VPC endpoint. More information about this is available in the [Agent log collection documentation][2].
+    - The `use_http` variable forces the Datadog Agent to send logs over HTTPS. This configuration is required when sending logs to Datadog via AWS PrivateLink. More information about this is available in the [Agent log collection documentation][2].
     - The `logs_dd_url` variable is used to send logs to the VPC endpoint.
 
 2. [Restart your Agent][3] to send logs to Datadog through AWS PrivateLink.
