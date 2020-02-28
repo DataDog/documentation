@@ -632,7 +632,7 @@ main:
     url: monitors/check_summary/
     weight: 4
     parent: アラート設定
-  - name: 通知
+  - name: Notifications
     url: monitors/notifications/
     weight: 5
     parent: アラート設定
@@ -1148,11 +1148,15 @@ main:
     url: synthetics/settings/
     parent: synthetics
     weight: 6
+  - name: ガイド
+    url: synthetics/guide/
+    parent: synthetics
+    weight: 7
   - name: トラブルシューティング
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 7
+    weight: 8
   - name: リアルユーザーモニタリング
     url: real_user_monitoring/
     pre: nav_rum

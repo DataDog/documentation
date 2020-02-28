@@ -1,6 +1,6 @@
 ---
 categories:
-  - データストア
+  - data store
   - cloud
 ddtype: crawler
 dependencies: []
