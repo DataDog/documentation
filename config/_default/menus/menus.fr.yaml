@@ -1148,11 +1148,15 @@ main:
     url: synthetics/settings/
     parent: synthetics
     weight: 6
+  - name: Guide
+    url: synthetics/guide/
+    parent: synthetics
+    weight: 7
   - name: Dépannage
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 7
+    weight: 8
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: nav_rum

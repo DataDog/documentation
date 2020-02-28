@@ -54,7 +54,7 @@ Datadog で[ログモニター][2]を作成するには、メインナビゲー�
 * このモニターは、サービス `backend` のログが存在しない場合にトリガーします。
   {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="バックエンドサービスの下限モニター"  style="width:60%;" >}}
 
-### 通知
+### Notifications
 
 **Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][7] のページを参照してください。
 

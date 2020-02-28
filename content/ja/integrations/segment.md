@@ -1,7 +1,7 @@
 ---
 categories:
   - モニター
-  - 通知
+  - notification
   - cloud
 ddtype: crawler
 dependencies: []

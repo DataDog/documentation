@@ -106,7 +106,7 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 {{< img src="monitors/monitor_types/anomaly/alg_comparison_new_metric.png" alt="アルゴリズムの比較 (新しいメトリクス)"  style="width:90%;">}}
 
-### 通知
+### Notifications
 
 **Say what's happening** セクションと **Notify your team** セクションの詳細については、[通知][8]ページをご確認ください。
 
