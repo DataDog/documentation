@@ -30,7 +30,7 @@ Use the query to control what's displayed in your RUM Analytics:
 
 1. Choose a [measure][1] or [facet][2] to graph. [measure][1] lets you choose the aggregation function whereas [facet][2] displays the unique count.
 
-    {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="measure selection" responsive="true" style="width:50%;">}}
+    {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="measure selection"  style="width:50%;">}}
 2. Select the aggregation function for the [measure][1] you want to graph:
 
     {{< img src="real_user_monitoring/explorer/analytics/aggregation.png" alt="aggregation function for RUM Analytics" style="width:50%;">}}

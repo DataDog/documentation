@@ -151,10 +151,10 @@ Check if logs appear in the [Datadog Live Tail][12]. If they appear in the Live 
 [1]: /logs
 [2]: /help
 [3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[4]: /agent/logs/#send-logs-over-https
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://en.wikipedia.org/wiki/Chmod
-[7]: https://docs.datadoghq.com/integrations/journald/
+[7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /logs/guide/docker-logs-collection-troubleshooting-guide
 [10]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function

@@ -2,9 +2,9 @@
 aliases:
   - /ja/integrations/azure_streamanalytics
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Stream Analytics のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_stream_analytics/'
@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Stream Analytics
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_stream_analytics
 public_title: Datadog-Microsoft Azure Stream Analytics インテグレーション
 short_description: Azure Stream Analytics のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

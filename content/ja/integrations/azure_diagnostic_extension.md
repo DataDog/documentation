@@ -1,8 +1,8 @@
 ---
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Diagnostic Extension のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_diagnostic_extension/'
@@ -11,11 +11,11 @@ has_logo: true
 integration_title: Azure Diagnostic Extension
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_diagnostic_extension
 public_title: Datadog-Azure Diagnostic Extension インテグレーション
 short_description: Azure Diagnostic Extension のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

@@ -1,5 +1,5 @@
 ---
-title: Monitor SLO
+title: Monitor-based SLOs
 kind: documentation
 description: "Use Monitors to define the Service Level Objective"
 further_reading:
@@ -10,18 +10,18 @@ further_reading:
 
 ## Overview
 
-Select a monitor based source if you want to build your SLO based on existing or new Datadog monitors. For more information about monitors, see the [Monitor documentation][1]. Monitor based SLOs are useful for a time-based stream of data where you are differentiating time of good behavior vs bad behavior. 
+Select a monitor-based source if you want to build your SLO based on existing or new Datadog monitors. For more information about monitors, see the [Monitor documentation][1]. Monitor-based SLOs are useful for a time-based stream of data where you are differentiating time of good behavior vs bad behavior. 
 Using the sum of the good time divided by the sum of total time provides a Service Level Indicator (or SLI).
 
 ## Setup
 
-On the [SLO page][2], select **New SLO +**. Then select **Monitor**.
+On the [SLO status page][2], select **New SLO +**. Then select [**Monitor**][3].
 
 ### Configuration
 
 #### Define queries
 
-To start, you need to be using Datadog monitors. To set up a new SLO monitor, go to the [monitor page][3]. Search for monitors by name and click on it to add it to the source list. An example SLO on a monitor is if the latency of all user requests should be less than 250ms 99% of the time in any 30 day window. To set this up, you would:
+To start, you need to be using Datadog monitors. To set up a new monitor, go to the [monitor creation page][4] and select one of the monitor types that are supported by SLOs (listed below). Search for monitors by name and click on it to add it to the source list. An example SLO on a monitor is if the latency of all user requests should be less than 250ms 99% of the time in any 30 day window. To set this up, you would:
 
 1. Select a single monitor or,
 2. Select multiple monitors (up to 20) or,
@@ -56,5 +56,6 @@ in the description and tags you would like to associate with the SLO.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors
-[2]: https://app.datadoghq.com/slo/new/monitor
-[3]: https://app.datadoghq.com/monitors#create/metric
+[2]: https://app.datadoghq.com/slo
+[3]: https://app.datadoghq.com/slo/new/monitor
+[4]: https://app.datadoghq.com/monitors#create

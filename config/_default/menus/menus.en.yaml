@@ -249,14 +249,10 @@ main:
     url: "agent/kubernetes/metrics/"
     parent: "agent_kubernetes"
     weight: 306
-  - name: "Custom Metrics & DogStatsD"
-    url: "agent/kubernetes/dogstatsd/"
-    parent: "agent_kubernetes"
-    weight: 307
   - name: "Legacy Versions"
     url: "agent/kubernetes/legacy/"
     parent: "agent_kubernetes"
-    weight: 308
+    weight: 307
 
   ## AGENT - Datadog Cluster Agent
 
@@ -794,12 +790,12 @@ main:
     parent: "alerting"
     identifier: "slos"
 
-  - name: "Monitor SLO"
+  - name: "Monitor-based SLOs"
     url: "monitors/service_level_objectives/monitor/"
     parent: "slos"
     weight: 7.1
 
-  - name: "Event SLO"
+  - name: "Event-based SLOs"
     url: "monitors/service_level_objectives/event/"
     parent: "slos"
     weight: 7.2
@@ -881,11 +877,11 @@ main:
     parent: "tracing_setup"
     identifier: "tracing_setup_cpp"
     weight: 209
-  - name: "Android"
-    url: "tracing/setup/android/"
-    parent: "tracing_setup"
-    identifier: "tracing_setup_android"
-    weight: 210
+# - name: "Android"
+#   url: "tracing/setup/android/"
+#   parent: "tracing_setup"
+#   identifier: "tracing_setup_android"
+#   weight: 210
   - name: "Envoy"
     url: "tracing/setup/envoy/"
     parent: "tracing_setup"
@@ -925,22 +921,156 @@ main:
   - name: "Connect Logs and Traces"
     url: "tracing/connect_logs_and_traces/"
     parent: "tracing"
+    identifier: "tracing_connect_logs_and_traces"
     weight: 4
+  - name: "Java"
+    url: "tracing/connect_logs_and_traces/java"
+    parent: "tracing_connect_logs_and_traces"
+    identifier: "tracing_connect_logs_and_traces_java"
+    weight: 401
+  - name: "Python"
+    url: "tracing/connect_logs_and_traces/python"
+    parent: "tracing_connect_logs_and_traces"
+    identifier: "tracing_connect_logs_and_traces_python"
+    weight: 402
+  - name: "Go"
+    url: "tracing/connect_logs_and_traces/go"
+    parent: "tracing_connect_logs_and_traces"
+    identifier: "tracing_connect_logs_and_traces_go"
+    weight: 403
+  - name: "Ruby"
+    url: "tracing/connect_logs_and_traces/ruby"
+    parent: "tracing_connect_logs_and_traces"
+    identifier: "tracing_connect_logs_and_traces_ruby"
+    weight: 404
+  - name: "PHP"
+    url: "tracing/connect_logs_and_traces/php"
+    parent: "tracing_connect_logs_and_traces"
+    identifier: "tracing_connect_logs_and_traces_php"
+    weight: 405
+  - name: "NodeJS"
+    url: "tracing/connect_logs_and_traces/nodejs"
+    parent: "tracing_connect_logs_and_traces"
+    identifier: "tracing_connect_logs_and_traces_nodejs"
+    weight: 406
+  - name: ".NET"
+    url: "tracing/connect_logs_and_traces/dotnet"
+    parent: "tracing_connect_logs_and_traces"
+    identifier: "tracing_connect_logs_and_traces_dotnet"
+    weight: 407
 
   - name: "Runtime Metrics"
     url: "tracing/runtime_metrics/"
     parent: "tracing"
+    identifier: "tracing_runtime_metrics"
     weight: 5
+  - name: "Java"
+    url: "tracing/runtime_metrics/java"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_java"
+    weight: 501
+  - name: "Python"
+    url: "tracing/runtime_metrics/python"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_python"
+    weight: 502
+  - name: "Ruby"
+    url: "tracing/runtime_metrics/ruby"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_ruby"
+    weight: 503
+  - name: "NodeJS"
+    url: "tracing/runtime_metrics/nodejs"
+    parent: "tracing_runtime_metrics"
+    identifier: "tracing_runtime_metrics_nodejs"
+    weight: 504
 
   - name: "Manual Instrumentation"
     url: "tracing/manual_instrumentation/"
     parent: "tracing"
+    identifier: "tracing_manual_instrumentation"
     weight: 6
+  - name: "Java"
+    url: "tracing/manual_instrumentation/java"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_java"
+    weight: 601
+  - name: "Python"
+    url: "tracing/manual_instrumentation/python"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_python"
+    weight: 602
+  - name: "Ruby"
+    url: "tracing/manual_instrumentation/ruby"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_ruby"
+    weight: 603
+  - name: "Go"
+    url: "tracing/manual_instrumentation/go"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_go"
+    weight: 604
+  - name: "NodeJS"
+    url: "tracing/manual_instrumentation/nodejs"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_nodejs"
+    weight: 605
+  - name: "PHP"
+    url: "tracing/manual_instrumentation/php"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_php"
+    weight: 606
+  - name: "C++"
+    url: "tracing/manual_instrumentation/cpp"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_cpp"
+    weight: 607
+  - name: ".NET"
+    url: "tracing/manual_instrumentation/dotnet"
+    parent: "tracing_manual_instrumentation"
+    identifier: "tracing_manual_instrumentation_dotnet"
+    weight: 608
 
   - name: "OpenTracing"
     url: "tracing/opentracing/"
     parent: "tracing"
+    identifier: "tracing_opentracing"
     weight: 7
+  - name: "Java"
+    url: "tracing/opentracing/java"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_java"
+    weight: 701
+  - name: "Python"
+    url: "tracing/opentracing/python"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_python"
+    weight: 702
+  - name: "Go"
+    url: "tracing/opentracing/go"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_go"
+    weight: 703
+  - name: "PHP"
+    url: "tracing/opentracing/php"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_php"
+    weight: 704
+  - name: "Ruby"
+    url: "tracing/opentracing/ruby"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_ruby"
+    weight: 705
+  - name: ".NET"
+    url: "tracing/opentracing/dotnet"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_dotnet"
+    weight: 706
+  - name: "NodeJS"
+    url: "tracing/opentracing/nodejs"
+    parent: "tracing_opentracing"
+    identifier: "tracing_opentracing_nodejs"
+    weight: 707
 
   ## TRACING - Using the APM UI
 
@@ -1124,14 +1254,18 @@ main:
     url: "logs/explorer/analytics/"
     parent: "log_explorer"
     weight: 702
-  - name: "Saved Views"
-    url: "logs/explorer/saved_views/"
-    parent: "log_explorer"
-    weight: 703
   - name: "Log Patterns"
     url: "logs/explorer/patterns/"
     parent: "log_explorer"
+    weight: 703
+  - name: "Saved Views"
+    url: "logs/explorer/saved_views/"
+    parent: "log_explorer"
     weight: 704
+  - name: "Facets"
+    url: "logs/explorer/facets/"
+    parent: "log_explorer"
+    weight: 705
 
   - name: "Connect Logs and Traces"
     url: "tracing/connect_logs_and_traces/?tab=java"
@@ -1242,11 +1376,16 @@ main:
     parent: "synthetics"
     weight: 6
 
+  - name: "Guide"
+    url: "synthetics/guide/"
+    parent: "synthetics"
+    weight: 7
+
   - name: "Troubleshooting"
     url: "synthetics/troubleshooting/"
     parent: "synthetics"
     identifier: "synthetics_troubleshooting"
-    weight: 7
+    weight: 8
 
 ##########################
 ## Real User Monitoring ##

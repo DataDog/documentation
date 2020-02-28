@@ -135,7 +135,7 @@ Une fois qu'un tag a été ajouté à une span, recherchez et interrogez ce tag 
 [5]: /fr/tracing/visualization/services_map
 [6]: /fr/tracing/visualization/service
 [7]: /fr/tracing/visualization/resource
-[8]: /fr/tracing/opentracing/?tab=java#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
+[8]: /fr/tracing/opentracing/java#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
 [9]: /fr/tracing/manual_instrumentation
 [10]: /fr/tracing/opentracing
 [11]: /fr/tracing/connect_logs_and_traces

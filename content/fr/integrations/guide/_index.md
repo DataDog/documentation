@@ -1,6 +1,7 @@
 ---
 title: Guides d'intégration
 kind: guide
+private: true
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}

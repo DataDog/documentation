@@ -16,6 +16,8 @@ With historical views, teams rehydrate archived log events precisely by timefram
 
 {{< img src="logs/archives/log_archives_rehydrate_historical.png" alt="Historical Views"  style="width:75%;">}}
 
+Index exclusion filters do not apply to historical views, so there is no need to modify exclusion filters when you rehydrate from archives. 
+
 ### Add new historical views
 
 1. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.

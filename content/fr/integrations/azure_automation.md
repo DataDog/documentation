@@ -11,11 +11,11 @@ has_logo: true
 integration_title: "Microsoft\_Azure\_Automation"
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_automation
 public_title: "Intégration Datadog/Microsoft\_Azure\_Automation"
 short_description: "Surveillez des métriques clés d'Azure\_Automation."
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

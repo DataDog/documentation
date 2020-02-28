@@ -2,8 +2,8 @@
 aliases:
   - /ja/integrations/akamai/
 categories:
-  - クラウド
-ddtype: クローラー
+  - cloud
+ddtype: crawler
 dependencies: []
 description: Akamai DataStream を Datadog と統合
 doc_link: 'https://docs.datadoghq.com/integrations/akamai_datastream/'
@@ -16,11 +16,11 @@ has_logo: true
 integration_title: Akamai DataStream
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: akamai_datastream
 public_title: Datadog-Akamai DataStream
 short_description: Akamai DataStream を Datadog と統合
-version: 1
+version: '1.0'
 ---
 ## 概要
 

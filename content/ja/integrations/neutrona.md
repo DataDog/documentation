@@ -5,7 +5,7 @@ assets:
   service_checks: /assets/service_checks.json
 categories:
   - AZURE
-  - クラウド
+  - CLOUD
   - ネットワーク
 creates_events: false
 ddtype: check

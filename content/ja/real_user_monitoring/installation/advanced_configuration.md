@@ -48,7 +48,7 @@ window.DD_RUM && window.DD_RUM.init({
 {{% /tab %}}
 {{< /tabs >}}
 
-**注意**: サンプルとして抽出したセッションでは、すべてのページビューとそのセッションに紐付くテレメトリーは収集されません。
+**注**: サンプルとして抽出したセッションでは、すべてのページビューとそのセッションに紐付くテレメトリーは収集されません。
 
 ## 利用可能な API
 
@@ -69,14 +69,14 @@ datadogRum.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 {{% tab "Bundle" %}}
 
 ```javascript
-// add global metadata attribute--one attribute can be added at a time
+// グローバルメタデータ属性を追加--一度に1つずつ属性を追加
 window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**注意**: 製品全体でデータの相関を高めるには [Datadog の命名規則][2]に従ってください。
+**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][2]に従ってください。
 
 ### デフォルトコンテキストを置換する
 
@@ -102,7 +102,7 @@ window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"})
 {{% /tab %}}
 {{< /tabs >}}
 
-**注意**: 製品全体でデータの相関を高めるには [Datadog の命名規則][2]に従ってください。
+**注**: 製品全体でデータの相関を高めるには [Datadog の命名規則][2]に従ってください。
 
 ### カスタムユーザーアクション
 
@@ -168,4 +168,4 @@ window.DD_RUM && DD_RUM.addUserAction("Cart Payed", {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/browser-sdk
-[2]: https://docs.datadoghq.com/ja/logs/processing/attributes_naming_convention/#user-related-attributes]
+[2]: /ja/logs/processing/attributes_naming_convention/#user-related-attributes

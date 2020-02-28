@@ -63,6 +63,9 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 }
 // Desktop TOC
 .toc-container {
+    &:lang(ja) {
+      padding-left: 30px;
+    }
     padding-top: 50px;
     &.mobile-open {
         top: 60px;
@@ -148,6 +151,12 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                 padding: 2px 0px 2px 10px;
                                 border-left: 2px solid $ddgray;
                                 font-size: 18px;
+                                &:lang(ja) {
+                                  font-style: normal;
+                                  font-weight: 300;
+                                  font-size: 14px;
+                                  line-height: 24px;
+                                }
                             }
                             // First level a tag
                             & > a:first-child:not(.toc_open) {
@@ -189,6 +198,13 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     display: none;
     @media (min-width: 991px) {
         display: block;
+    }
+
+    a {
+      font-size:18px;
+      &:lang(ja) {
+        font-size: 14px;
+      }
     }
 }
 

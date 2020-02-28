@@ -1,7 +1,6 @@
 ---
 title: テーブルウィジェット
 kind: documentation
-beta: true
 aliases:
   - /ja/graphing/widgets/table/
 further_reading:
