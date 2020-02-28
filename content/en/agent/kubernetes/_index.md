@@ -77,4 +77,4 @@ For details on the usage of ConfigMaps in Kubernetes, consult [Datadog's Kuberne
 [10]: /integrations/faq/can-i-install-the-agent-on-my-kubernetes-master-node-s
 [11]: /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250
 [12]: /integrations/faq/client-authentication-against-the-apiserver-and-kubelet
-[13]: /agent/kubernetes/daemonset_setup/#configure-rbac-permissions
+[13]: /agent/kubernetes/daemonset_setup/#configure-agent-permissions
