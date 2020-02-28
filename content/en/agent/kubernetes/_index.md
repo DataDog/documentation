@@ -37,7 +37,7 @@ To gather metrics, traces, and logs from your Kubernetes clusters, there are fou
 
 **Note**: Only one Datadog Agent should run on each node; a sidecar per pod is not generally recommended and may not function as expected.
 
-## RBAC
+## Agent permissions
 
 In the context of using the Kubernetes integration, and when deploying Agents in a Kubernetes cluster, a set of rights are required for the Agent to integrate seamlessly.
 
