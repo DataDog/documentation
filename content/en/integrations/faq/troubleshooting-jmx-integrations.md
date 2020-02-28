@@ -144,7 +144,7 @@ A best practice is to limit your metrics to less than 350 by creating filters to
 
 The default Agent installation does not come with a bundled JVM and uses the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the Agent.
 
-**Note**: The `datadog/agent:latest-jmx` Docker image does includes a JVM, which the Agent needs to run jmxfetch.
+**Note**: The `datadog/agent:latest-jmx` Docker image does include a JVM, which the Agent needs to run jmxfetch.
 
 Alternatively, you can specify the JVM path in the integration's configuration file with the `java_bin_path` parameter.
 
