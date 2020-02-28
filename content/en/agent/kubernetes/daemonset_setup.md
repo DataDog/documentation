@@ -20,7 +20,7 @@ Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or o
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][2] as a deployment on each Kubernetes node.*
 
-## Configure RBAC permissions
+## Configure Agent permissions
 
 If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account. From Kubernetes 1.6 onwards, RBAC is enabled by default.
 
