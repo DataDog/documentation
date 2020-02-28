@@ -84,7 +84,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 {{% /tab %}}
 {{< /tabs >}}
 
-### Notifications
+### 通知
 
 **Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][3]のページを参照してください。
 
