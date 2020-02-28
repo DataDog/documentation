@@ -158,16 +158,17 @@ listen stats
     stats uri /
     
 # This section is to reload DNS Records
-# Replace <DNS_SERVER_IP> with your DNS Server IP.
+# Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
 # For HAProxy 1.8 and newer
 resolvers my-dns
     nameserver dns1 <DNS_SERVER_IP>:53
-    nameserver dns2 <DNS_SERVER_IP>:53
+    nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
     resolve_retries 3
     timeout resolve 2s
     timeout retry 1s
     accepted_payload_size 8192
     hold valid 10s
+    hold obsolete 60s
 
 # This declares the endpoint where your Agents connects for
 # sending metrics (e.g. the value of "dd_url").
@@ -277,16 +278,17 @@ listen stats
     stats uri /
 
 # This section is to reload DNS Records
-# Replace <DNS_SERVER_IP> with your DNS Server IP.
+# Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
 # For HAProxy 1.8 and newer
 resolvers my-dns
     nameserver dns1 <DNS_SERVER_IP>:53
-    nameserver dns2 <DNS_SERVER_IP>:53
+    nameserver dns2 <DNS_SECONDARY_SERVER_IP>:53
     resolve_retries 3
     timeout resolve 2s
     timeout retry 1s
     accepted_payload_size 8192
     hold valid 10s
+    hold obsolete 60s
 
 # This declares the endpoint where your Agents connects for
 # sending metrics (e.g. the value of "dd_url").
