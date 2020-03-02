@@ -1,0 +1,127 @@
+# datadog-agent.yaml
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: datadog-agent
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: datadog-agent
+  template:
+    metadata:
+      labels:
+        app: datadog-agent
+      name: datadog-agent
+    spec:
+      serviceAccountName: datadog-agent
+      containers:
+        - image: 'datadog/agent:latest'
+          imagePullPolicy: Always
+          name: datadog-agent
+          ports:
+            - containerPort: 8125
+              ## Custom metrics via DogStatsD - uncomment this section to enable
+              ## custom metrics collection.
+              #
+              # hostPort: 8125
+              name: dogstatsdport
+              protocol: UDP
+            - containerPort: 8126
+              ## Trace Collection (APM) - uncomment this section to enable APM
+              # hostPort: 8126
+              name: traceport
+              protocol: TCP
+          env:
+            ## The Datadog API Key related to your Organization set by secret
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: datadog-secret
+                  key: api-key
+            ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
+            - name: DD_SITE
+              value: datadoghq.com
+            ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to "true" to collect StatsD metrics
+            ## from other containers.
+            - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
+              value: 'false'
+            - name: KUBERNETES
+              value: 'true'
+            - name: DD_HEALTH_PORT
+              value: '5555'
+            - name: DD_COLLECT_KUBERNETES_EVENTS
+              value: 'true'
+            - name: DD_LEADER_ELECTION
+              value: 'true'
+            - name: DD_APM_ENABLED
+              value: 'true'
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_CRI_SOCKET_PATH
+              value: /host/var/run/docker.sock
+            - name: DOCKER_HOST
+              value: 'unix:///host/var/run/docker.sock'
+          ## Note these are the minimum suggested values for requests and limits.
+          ## The amount of resources required by the Agent varies depending on:
+          ## * The number of checks
+          ## * The number of integrations enabled
+          ## * The number of features enabled
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 200m
+            limits:
+              memory: 256Mi
+              cpu: 200m
+          volumeMounts:
+            - name: dockersocketdir
+              mountPath: /host/var/run
+            - name: procdir
+              mountPath: /host/proc
+              readOnly: true
+            - name: cgroups
+              mountPath: /host/sys/fs/cgroup
+              readOnly: true
+            - name: s6-run
+              mountPath: /var/run/s6
+            - name: logpodpath
+              mountPath: /var/log/pods
+            ## Docker runtime directory, replace this path with your container runtime
+            ## logs directory, or remove this configuration if `/var/log/pods`
+            ## is not a symlink to any other directory.
+            - name: logcontainerpath
+              mountPath: /var/lib/docker/containers
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5555
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+      volumes:
+        - name: dockersocketdir
+          hostPath:
+            path: /var/run
+        - name: procdir
+          hostPath:
+            path: /proc
+        - name: cgroups
+          hostPath:
+            path: /sys/fs/cgroup
+        - name: s6-run
+          emptyDir: {}
+        - name: logpodpath
+          hostPath:
+            path: /var/log/pods
+        ## Docker runtime directory, replace this path with your container runtime
+        ## logs directory, or remove this configuration if `/var/log/pods`
+        ## is not a symlink to any other directory.
+        - name: logcontainerpath
+          hostPath:
+            path: /var/lib/docker/containers

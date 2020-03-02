@@ -20,232 +20,62 @@ Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or o
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][2] as a deployment on each Kubernetes node.*
 
-## Configure Agent permissions
+## Installation
 
-If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account. From Kubernetes 1.6 onwards, RBAC is enabled by default.
+1. **Configure Agent permissions**: If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account. From Kubernetes 1.6 onwards, RBAC is enabled by default. Create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding with the following command:
 
-Create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding:
+    ```shell
+    kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
 
-```shell
-kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
+    kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/serviceaccount.yaml"
 
-kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/serviceaccount.yaml"
-
-kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrolebinding.yaml"
-```
-
-## Create manifest
-
-Create the following `datadog-agent.yaml` manifest. (This manifest assumes you are using Docker; if you are using Containerd, see [this example][3].)
-
-Remember to encode your API key using `base64` if you are using secrets:
-
-```shell
-echo -n <DATADOG_API_KEY> | base64
-```
-
-**Note**: You may need a higher memory limit if you are using `kube-state-metrics` or have high DogStatsD usage.
-
-```yaml
-# datadog-agent.yaml
-
-# Uncomment this section to use Kubernetes secrets to configure your Datadog API key
-
-# apiVersion: v1
-# kind: Secret
-# metadata:
-#   name: datadog-secret
-#   labels:
-#     app: "datadog"
-# type: Opaque
-# data:
-#   api-key: "<YOUR_BASE64_ENCODED_API_KEY>"
----
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  name: datadog-agent
-  namespace: default
-spec:
-  selector:
-    matchLabels:
-      app: datadog-agent
-  template:
-    metadata:
-      labels:
-        app: datadog-agent
-      name: datadog-agent
-    spec:
-      serviceAccountName: datadog-agent
-      containers:
-      - image: datadog/agent:latest
-        imagePullPolicy: Always
-        name: datadog-agent
-        ports:
-          - containerPort: 8125
-            ## Custom metrics via DogStatsD - uncomment this section to enable
-            ## custom metrics collection.
-            ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to "true" to collect StatsD metrics
-            ## from other containers.
-            #
-            # hostPort: 8125
-            name: dogstatsdport
-            protocol: UDP
-          - containerPort: 8126
-            ## Trace Collection (APM) - uncomment this section to enable APM
-            # hostPort: 8126
-            name: traceport
-            protocol: TCP
-        env:
-          ## Set the Datadog API Key related to your Organization
-          ## If you use the Kubernetes Secret use the following env variable:
-          ## - {name: DD_API_KEY, valueFrom: { secretKeyRef: { name: datadog-secret, key: api-key }}}
-          - {name: DD_API_KEY, value: "<DATADOG_API_KEY>"}
-
-          ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
-          - {name: DD_SITE, value: "datadoghq.com"}
-
-          ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to allow StatsD collection.
-          - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }
-          - {name: KUBERNETES, value: "true"}
-          - {name: DD_HEALTH_PORT, value: "5555"}
-          - {name: DD_COLLECT_KUBERNETES_EVENTS, value: "true" }
-          - {name: DD_LEADER_ELECTION, value: "true" }
-          - {name: DD_APM_ENABLED, value: "true" }
-
-          - name: DD_KUBERNETES_KUBELET_HOST
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP
-
-          - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
-          - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
-
-        ## Note these are the minimum suggested values for requests and limits.
-        ## The amount of resources required by the Agent varies depending on:
-        ## * The number of checks
-        ## * The number of integrations enabled
-        ## * The number of features enabled
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "200m"
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
-        volumeMounts:
-          - {name: dockersocketdir, mountPath: /host/var/run}
-          - {name: procdir, mountPath: /host/proc, readOnly: true}
-          - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
-          - {name: s6-run, mountPath: /var/run/s6}
-          - {name: logpodpath, mountPath: /var/log/pods}
-          ## Docker runtime directory, replace this path with your container runtime
-          ## logs directory, or remove this configuration if `/var/log/pods`
-          ## is not a symlink to any other directory.
-          - {name: logcontainerpath, mountPath: /var/lib/docker/containers}
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 5555
-          initialDelaySeconds: 15
-          periodSeconds: 15
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
-      volumes:
-        - {name: dockersocketdir, hostPath: {path: /var/run}}
-        - {name: procdir, hostPath: {path: /proc}}
-        - {name: cgroups, hostPath: {path: /sys/fs/cgroup}}
-        - {name: s6-run, emptyDir: {}}
-        - {name: logpodpath, hostPath: {path: /var/log/pods}}
-        ## Docker runtime directory, replace this path with your container runtime
-        ## logs directory, or remove this configuration if `/var/log/pods`
-        ## is not a symlink to any other directory.
-        - {name: logcontainerpath, hostPath: {path: /var/lib/docker/containers}}
-```
-
-Replace `<DATADOG_API_KEY>` with [your Datadog API key][4] or use [Kubernetes secrets][5] to set your API key as an [environment variable][6]. If you opt to use Kubernetes secrets, refer to Datadog's [instructions for setting an API key with Kubernetes secrets][7]. Consult the [Docker integration][8] to discover all of the configuration options.
-
-Deploy the DaemonSet with the command:
-
-```shell
-kubectl create -f datadog-agent.yaml
-```
-
-**Note**:  This manifest enables Autodiscovery's auto configuration feature. To learn how to configure Autodiscovery, see the [dedicated Autodiscovery documentation][9].
-
-### Verification
-
-To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
-
-```shell
-kubectl get daemonset
-```
-
-If the Agent is deployed, you will see output similar to the text below, where `DESIRED` and `CURRENT` are equal to the number of nodes running in your cluster.
-
-```shell
-NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-datadog-agent   2         2         2         2            2           <none>          16h
-```
-
-### Kubernetes cluster name auto detection
-
-For Agent v6.11+, the Datadog Agent can auto-detect the Kubernetes cluster name on Google GKE, Azure AKS, and AWS EKS. If detected, an alias which contains the cluster name as a suffix on the node name is added to all data collected to facilitate the identification of nodes across Kubernetes clusters. On Google GKE and Azure AKS, the cluster name is retrieved from the cloud provider API. For AWS EKS, the cluster name is retrieved from EC2 instance tags. On AWS, it is required to add the `ec2:DescribeInstances` [permission][10] to your Datadog IAM policy so that the Agent can query the EC2 instance tags.
-
-**Note**: You can manually set this cluster name value with Agent v6.5+ thanks to the Agent configuration parameter [`clusterName`][11] or the `DD_CLUSTER_NAME` environment variable.
-
-## Enable capabilities
-
-### Log Collection
-
-To enable [Log collection][12] with your DaemonSet:
-
-1. Set the `DD_LOGS_ENABLED` and `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` variable to true in your *env* section:
-
-    ```
-    (...)
-      env:
-        (...)
-        - name: DD_LOGS_ENABLED
-          value: "true"
-        - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-          value: "true"
-        - name: DD_AC_EXCLUDE
-          value: "name:datadog-agent"
-    (...)
+    kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrolebinding.yaml"
     ```
 
-    **Note**: Setting `DD_AC_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
+2. **Create a secret that contains your Datadog API Key**. Replace the `<DATADOG_API_KEY>` below with [the API key for your organization](https://app.datadoghq.com/account/settings#api). This secret is used in the manifest to deploy the Datadog Agent.
 
-2. Mount the `pointdir` volume in *volumeMounts*:
-
-    ```
-      (...)
-        volumeMounts:
-          (...)
-          - name: pointdir
-            mountPath: /opt/datadog-agent/run
-      (...)
-      volumes:
-        (...)
-        - hostPath:
-            path: /opt/datadog-agent/run
-          name: pointdir
-      (...)
+    ```shell
+    kubectl create secret generic datadog-secret --from-literal api-key="<DATADOG_API_KEY>"
     ```
 
-    The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
+3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of the following templates:
 
-The Agent has then two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes). Use log file collection when:
+    - [Template with all Datadog features enabled](/resources/yaml/datadog-agent-all-features.yaml).
+    - [Template with the minimum required configuration](/resources/yaml/datadog-agent-vanilla.yaml) with just [Metric collection](/agent/kubernetes/metrics) and [Autodiscovery](/agent/autodiscovery) enabled. See the [Enable capabilities section](#enable-capabilities) below to discover how to collect your logs, traces, processes information individually.
 
-* Docker is not the runtime
-* More than 10 containers are used within each pod
+4. Optional - **Set your Datadog site**. If you are on Datadog EU site set the `DD_SITE` environment variable to `datadoghq.eu`
+
+5. **Deploy the DaemonSet** with the command:
+
+    ```shell
+    kubectl create -f datadog-agent.yaml
+    ```
+
+6. **Verification**: To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
+
+    ```shell
+    kubectl get daemonset
+    ```
+
+     If the Agent is deployed, you will see output similar to the text below, where `DESIRED` and `CURRENT` are equal to the number of nodes running in your cluster.
+
+    ```shell
+    NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+    datadog-agent   2         2         2         2            2           <none>          16h
+    ```
+
+## Log Collection
+
+The Agent has two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes). Use log file collection when:
+
+- Docker is not the runtime
+- More than 10 containers are used within each pod
 
 The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files:
 
 {{< tabs >}}
 {{% tab "K8s File" %}}
+
 
 Mount `/var/lib/docker/containers` as well, since `/var/log/pods` is symlink to this directory:
 
@@ -301,6 +131,49 @@ Mount the docker socket into the Datadog Agent:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+
+To enable [Log collection][12] with your DaemonSet:
+
+1.
+
+Set the `DD_LOGS_ENABLED` and `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` variable to true in your *env* section:
+
+    ```yaml
+    (...)
+      env:
+        (...)
+        - name: DD_LOGS_ENABLED
+          value: "true"
+        - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+          value: "true"
+        - name: DD_AC_EXCLUDE
+          value: "name:datadog-agent"
+    (...)
+    ```
+
+    **Note**: Setting `DD_AC_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
+
+2. Mount the `pointdir` volume in *volumeMounts*:
+
+    ```
+      (...)
+        volumeMounts:
+          (...)
+          - name: pointdir
+            mountPath: /opt/datadog-agent/run
+      (...)
+      volumes:
+        (...)
+        - hostPath:
+            path: /opt/datadog-agent/run
+          name: pointdir
+      (...)
+    ```
+
+    The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
+
+
 
 The Datadog Agent follows the below logic to know where logs should be picked up from:
 
