@@ -51,11 +51,11 @@ sudo datadog-agent status
 
 After a few minutes, verify the Agent is connected to your account by checking the [Infrastructure List][9] in Datadog.
 
-## APM Agent
+## Datadog APM
 
 ### Enable APM
 
-On the latest version of Agent v6, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][10]:
+For the latest versions of Agent v6 and v7, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][10]:
 
 ```yaml
 # apm_config:
