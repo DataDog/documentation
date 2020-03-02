@@ -4,21 +4,31 @@
     {{ .Content }}
     <form>
         <div class="form-group clearfix">
-            <input type="input" class="form-control" id="keywords" placeholder="Keywords..." onkeyup="search()">
+            <input type="input" class="form-control rule-search mb-3" id="keywords" placeholder="Search here" onkeyup="search()">
         </div>
 
         <div class="list-group">
-            {{ range .Pages.ByParam "parent" }}
-                <a class="list-group-item" href="{{.Permalink}}">
-                    <img src="{{ .Params.meta_image }}?fit=auto&width=80" width="80" />
-                    {{ .Title }}
-                </a>
+            {{ range .Pages.GroupByParam "parent" }}
+                    <div class="rule-list mb-1">
+                        <div class="rule-list__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">{{ substr .Key 0 1 }}</div>
+                        <div class="d-inline font-semibold ml-1">{{ title .Key }}</div>
+                        <div class="rule-list__arrow">></div>
+                    </div>
+                    <div class="group-{{ .Key }} mb-2 ml-2 d-none">
+                        {{ range .Pages }}
+                            <a class="mb-1 font-semibold" href="{{.Permalink}}">
+                                <img src="{{ .Params.meta_image }}?fit=auto&width=40" width="40" />
+                                {{ .Title }}<br/>
+                            </a>
+                        {{ end }}
+                    </div>
             {{ end }}
         </div>
 
     </form>
 
     <script type="text/javascript">
+        // Search
         function search() {
             let input = document.getElementById('keywords').value
             input=input.toLowerCase();
@@ -26,12 +36,21 @@
 
             for (i = 0; i < x.length; i++) {
                 if (!x[i].innerHTML.toLowerCase().includes(input)) {
-                    x[i].style.display="none";
+                    x[i].style.display='none';
                 }
                 else {
-                    x[i].style.display="list-group-item";
+                    x[i].style.display='list-group-item';
                 }
             }
         }
+
+        // Accordion js
+        const ruleList = Array.prototype.slice.call(document.getElementsByClassName('rule-list'));
+
+        ruleList.forEach(elm => {
+            elm.addEventListener("click", e => {
+                e.currentTarget.classList.toggle('active');
+            });
+        });
     </script>
 {{ end }}
