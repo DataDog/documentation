@@ -1,7 +1,7 @@
 ---
-title: Standard Attributes and Aliasing
+title: Aliasing
 kind: documentation
-description: 'How to support a Naming Convention'
+description: 'How to support Naming Convention for logs'
 further_reading:
     - link: 'logs/processing/pipelines'
       tag: 'Documentation'
