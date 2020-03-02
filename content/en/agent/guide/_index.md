@@ -20,6 +20,7 @@ private: true
     {{< nextlink href="agent/guide/cluster-agent-custom-metrics-server" >}}Cluster Agent and Horizontal Pod Autoscaling: Custom Metrics Server{{< /nextlink >}}
     {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}Autodiscovery with JMX{{< /nextlink >}}
     {{< nextlink href="agent/guide/private-link" >}}Forward your telemetry securely to Datadog over AWS PrivateLink{{< /nextlink >}}
+    {{< nextlink href="agent/guide/build-container-agent" >}}Build Datadog Agent image{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent 5 Guides:" >}}
