@@ -1,10 +1,6 @@
 ---
 title: Build Datadog Agent image
 kind: guide
-further_reading:
-    - link: 'agent/versions/upgrade_to_agent_v7'
-      tag: 'Documentation'
-      text: 'Upgrade to Agent v7'
 ---
 
 Follow the instructions below to build the Datadog docker Agent image for a given `<AGENT_VERSION>` Agent version (above v6.0).
@@ -60,12 +56,12 @@ curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_V
     docker build --build-arg PYTHON_VERSION=3 --pull --tag documentation-example .
     ```
 
-Available `<BUILD_ARGS>` are:
+     Available `<BUILD_ARGS>` are:
 
-| Argument          | Definition                                                                  | Default |
-| ----------------- | --------------------------------------------------------------------------- | ------- |
-| PYTHON_VERSION    | The python runtime version for your Agent check.                            | `-`     |
-| WITH_JMX          | If set to `true`, the Agent container contains the JMX fetch logic.         | `false` |
-| DD_AGENT_ARTIFACT | Path to the Agent debian artifact package to use if not in the same folder. | `-`     |
+    | Argument          | Definition                                                                  | Default |
+    | ----------------- | --------------------------------------------------------------------------- | ------- |
+    | PYTHON_VERSION    | The python runtime version for your Agent check.                            | `-`     |
+    | WITH_JMX          | If set to `true`, the Agent container contains the JMX fetch logic.         | `false` |
+    | DD_AGENT_ARTIFACT | Path to the Agent debian artifact package to use if not in the same folder. | `-`     |
 
 [1]: http://apt.datadoghq.com/pool/d/da/
