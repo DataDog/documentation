@@ -1,14 +1,3 @@
-## Standard attributes in log configuration
-
-The standard attribute table is available in Log Configuration pages, along with pipelines and other logs intake capabilities such as metrics generation, archives, exclusion filters, etc.
-
-{{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes"  style="width:60%;">}}
-
-### Standard attribute list
-
-The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list). You can append that list with your own attributes, and edit or delete existing standard attributes:
-
-{{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes"  style="width:80%;">}}
 
 ## Default standard attribute list
 
