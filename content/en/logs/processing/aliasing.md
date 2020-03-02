@@ -37,7 +37,7 @@ Aliasing is particularly useful when it comes to filtering or aggregating logs f
 
 For example, follow the clients most impacted by latencies on a hybrid [Apache][2] and [Amazon Cloud Front][3] infrastructure, using the standard `Network Client IP` facet alongside the standard `duration`.
 
-### Curate standard attributes
+### Manage standard attributes
 
 Log integrations natively rely on a [default set](#default-standard-attribute-list) of standard attributes.
 
