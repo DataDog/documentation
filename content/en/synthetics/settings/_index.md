@@ -46,10 +46,6 @@ Choose the type of variable you want to create:
 
 {{% tab "Create From HTTP Test" %}}
 
-<div class="alert alert-warning">
-This feature is in private beta, <a href="/help">contact Datadog support</a> to turn on this feature for your account.
-</div>
-
 You can create variables from your existing HTTP tests by parsing its response headers or body. Variables are updated with the same frequency as the test it's coming from:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
