@@ -15,7 +15,7 @@ further_reading:
     tag: Documentation
     text: トレースの収集
 ---
-{{< img src="watchdog/watchdog_page.png" alt="Watchdog ページ" responsive="true" >}}
+{{< img src="watchdog/watchdog_page.png" alt="Watchdog ページ"  >}}
 
 ## 概要
 
@@ -59,7 +59,7 @@ Watchdog は、適合率の急激な上昇などといったメトリクスの�
 
 ストーリーに間連付けされたモニターが下側に表示されます。表示されるモニターにはそれぞれ、現在のストーリーのメトリクスとそのスコープに含まれる関連タグがあります。
 
-{{< img src="watchdog/watchdog_monitors.png" alt="Watchdog モニター" responsive="true" style="width:75%;">}}
+{{< img src="watchdog/watchdog_monitors.png" alt="Watchdog モニター"  style="width:75%;">}}
 
 さらに、Watchdog は1つ以上のモニターをストーリーが再度発生した際トリガーするように構成することを推奨します。**Enable Monitor**ボタンをクリックして、オーガニゼーションのために有効にします。Watchdog モニターの作成の詳細は、[Watchdog モニターに関するドキュメント][11]を参照してください。
 
