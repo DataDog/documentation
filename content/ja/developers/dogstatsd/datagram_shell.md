@@ -134,21 +134,13 @@ PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 
 任意のプラットフォームで Python を使用する場合 (Windows では、Agent の埋め込み Python インタープリターを使用できます。これは、Agent バージョン <= 6.11 の場合は `%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe`、Agent バージョン >= 6.12 の場合は `%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` にあります。)
 
-Python 2
-
 ```python
 import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
-Python 3
-
-```python
-import socket
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
-```
+**注**: Agent の埋め込み Python インタープリターを使用できます。Windows では、これは、Agent バージョン <= 6.11 の場合は `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe`、Agent バージョン >= 6.12 の場合は `C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe` にあります。
 
 {{% /tab %}}
 {{% tab "Events" %}}
