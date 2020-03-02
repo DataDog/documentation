@@ -134,13 +134,21 @@ PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 
 Depuis n'importe quelle plateforme avec Python (sur Windows, vous pouvez utiliser l'interpréteur Python intégré à l'Agent ; il se trouve à l'emplacement `%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe` pour les versions 6.11 ou antérieures de l'Agent et à l'emplacement `%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` pour les versions ultérieures) :
 
+Python 2
+
 ```python
 import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
-**Remarque** : vous pouvez utiliser l'interpréteur Python intégré à l'Agent. Sur Windows, il se trouve à l'emplacement `C:\Program Files\Datadog\Datadog Agent\embedded\python.exe` pour les versions 6.11 ou antérieures de l'Agent et à l'emplacement `C:\Program Files\Datadog\Datadog Agent\embedded2\python.exe` pour les versions ultérieures.
+Python 3
+
+```python
+import socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
+sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
+```
 
 {{% /tab %}}
 {{% tab "Événements" %}}
