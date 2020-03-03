@@ -40,19 +40,21 @@ To collect your exposed metrics:
     init_config:
 
     instances:
-        - prometheus_url: 'localhost:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
-          namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
+        - prometheus_url: 'localhost:<PORT>/<ENDPOINT>'
+          namespace: '<NAMESPACE>'
           metrics:
-              - '<PROMETHEUS_METRIC_TO_FETCH>': '<DATADOG_NEW_METRIC_NAME>'
+              - '<METRIC_TO_FETCH>': '<DATADOG_METRIC_NAME>'
     ```
 
      With the following configuration placeholder values:
 
-    - `<PROMETHEUS_PORT>`: Port to connect to in order to access the Prometheus endpoint.
-    - `<PROMETHEUS_ENDPOINT>`: URL for the metrics served by the container, in Prometheus format.
-    - `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>`: Set namespace to be prefixed to every metric when viewed in Datadog.
-    - `<METRIC_TO_FETCH>`: Prometheus metrics key to be fetched from the Prometheus endpoint.
-    - `<NEW_METRIC_NAME>`: Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs.
+    | Placeholder | Description |
+    | ---- | ---- |
+    | `<PORT>` |  Port to connect to in order to access the Prometheus endpoint. |
+    | `<ENDPOINT>` |  URL for the metrics served by the container, in Prometheus format. |
+    | `<NAMESPACE>` |  Set namespace to be prefixed to every metric when viewed in Datadog. |
+    | `<METRIC_TO_FETCH>` |  Prometheus metrics key to be fetched from the Prometheus endpoint. |
+    | `<DATADOG_METRIC_NAME>` |  Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<DATADOG_METRIC_NAME>` in Datadog. <br>If you choose not to use this option, pass a list of strings rather than `key:value` pairs. |
 
 2. [Restart the Agent][10] to start collecting your metrics.
 
