@@ -121,6 +121,21 @@ spec:
           - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
           - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
 
+          ## For secure communication with the cluster agent (required to use the cluster agent)
+          # - name: DD_CLUSTER_AGENT_AUTH_TOKEN
+          #
+          ## If using a simple env var uncomment this section
+          #
+          #   value: <THIRTY_2_CHARACTERS_LONG_TOKEN>
+          #
+          ## If using a secret uncomment this section
+          #
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: datadog-auth-token
+          #       key: token
+
+
         ## Note these are the minimum suggested values for requests and limits.
         ## The amount of resources required by the Agent varies depending on:
         ## * The number of checks
