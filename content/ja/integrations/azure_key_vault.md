@@ -2,9 +2,9 @@
 aliases:
   - /ja/integrations/azure_keyvault
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Key Vault のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_key_vault/'
@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Key Vault
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_key_vault
 public_title: Datadog-Microsoft Azure Key Vault インテグレーション
 short_description: Azure Key Vault のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

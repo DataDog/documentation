@@ -115,35 +115,31 @@ class InstrumentedClass {
 
 In this case, you don't need to call `scope.close()`.
 
-If you’re not using `dd-java-agent.jar`, you must register a configured tracer with `GlobalTracer`. For this, call `GlobalTracer.register(new DDTracer())` early on in your application startup (e.g., main method).
+If you’re not using `dd-java-agent.jar`, you must register a configured tracer with `GlobalTracer`. For this, call `GlobalTracer.register(DDTracer.builder().build())` early on in your application startup (for example, main method).
 
 ```java
 import datadog.opentracing.DDTracer;
 import io.opentracing.Tracer;
 import io.opentracing.util.GlobalTracer;
-import datadog.trace.common.sampling.AllSampler;
 import datadog.trace.common.writer.DDAgentWriter;
-
-//For the API Example
-import datadog.trace.common.writer.Writer;
-import datadog.trace.common.sampling.Sampler;
 
 public class Application {
 
     public static void main(String[] args) {
 
         // Initialize the tracer from environment variables or system properties
-        DDTracer tracer = new DDTracer();
+        DDTracer tracer = DDTracer.builder().build();
         GlobalTracer.register(tracer);
         // register the same tracer with the Datadog API
         datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
 
-        // OR from the API
-        Writer writer = new DDAgentWriter();
-        Sampler sampler = new AllSampler();
-        String service = "Service Name";
-        Tracer tracer = new DDTracer(service,writer, sampler);
+        // OR manually initialize using builder API
+        DDTracer tracer = DDTracer.builder()
+          .writer(DDAgentWriter.builder().build())
+          .serviceName("Service Name")
+          .build()
         GlobalTracer.register(tracer);
+        datadog.trace.api.GlobalTracer.registerIfAbsent(tracer);
 
         // ...
     }

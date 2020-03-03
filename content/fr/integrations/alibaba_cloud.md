@@ -14,11 +14,11 @@ has_logo: true
 integration_title: "Alibaba\_Cloud"
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: alibaba_cloud
 public_title: "Intégration Datadog/Alibaba\_Cloud"
 short_description: "Intégrez vos services Alibaba\_Cloud à Datadog."
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

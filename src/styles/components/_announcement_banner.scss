@@ -36,6 +36,7 @@ $announcement_banner_text_color: #ffffff;
       // JA site specific font-size for announcement banner
       &:lang(ja) {
         font-size: 16px;
+        line-height: 35px;
       }
     }
     strong {

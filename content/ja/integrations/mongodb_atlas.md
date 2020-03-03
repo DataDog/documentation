@@ -1,8 +1,8 @@
 ---
 categories:
-  - データストア
-  - クラウド
-ddtype: クローラー
+  - data store
+  - cloud
+ddtype: crawler
 dependencies: []
 description: MongoDB Atlas は、算出メトリクスを Datadog にプッシュして、アラートパフォーマンスを視覚化できます
 doc_link: 'https://docs.datadoghq.com/integrations/mongodb_atlas/'
@@ -11,11 +11,11 @@ has_logo: true
 integration_title: MongoDB Atlas
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: mongodb_atlas
 public_title: Datadog-MongoDB Atlas インテグレーション
 short_description: MongoDB Atlas は、算出メトリクスを Datadog にプッシュできます
-version: 1
+version: '1.0'
 ---
 ## 概要
 

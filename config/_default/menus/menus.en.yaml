@@ -59,11 +59,6 @@ main:
     url: "getting_started/tracing/"
     parent: "getting_started"
     weight: 5
-  - name: "Distributed Tracing"
-    identifier: "getting_started_distributed_tracing"
-    url: "getting_started/tracing/distributed-tracing/"
-    parent: "getting_started_collect_traces"
-    weight: 501
 
   ## GETTING STARTED - API
 
@@ -1254,14 +1249,18 @@ main:
     url: "logs/explorer/analytics/"
     parent: "log_explorer"
     weight: 702
-  - name: "Saved Views"
-    url: "logs/explorer/saved_views/"
-    parent: "log_explorer"
-    weight: 703
   - name: "Log Patterns"
     url: "logs/explorer/patterns/"
     parent: "log_explorer"
+    weight: 703
+  - name: "Saved Views"
+    url: "logs/explorer/saved_views/"
+    parent: "log_explorer"
     weight: 704
+  - name: "Facets"
+    url: "logs/explorer/facets/"
+    parent: "log_explorer"
+    weight: 705
 
   - name: "Connect Logs and Traces"
     url: "tracing/connect_logs_and_traces/?tab=java"
@@ -1372,11 +1371,16 @@ main:
     parent: "synthetics"
     weight: 6
 
+  - name: "Guide"
+    url: "synthetics/guide/"
+    parent: "synthetics"
+    weight: 7
+
   - name: "Troubleshooting"
     url: "synthetics/troubleshooting/"
     parent: "synthetics"
     identifier: "synthetics_troubleshooting"
-    weight: 7
+    weight: 8
 
 ##########################
 ## Real User Monitoring ##

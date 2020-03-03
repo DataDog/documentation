@@ -154,11 +154,11 @@ LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 
 すると、Datadog の APM サービスページにサービスが次のように表示されます。
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM サービスページ" responsive="true" >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services ページ"  >}}
 
 サービスをクリックすると、トレースが表示されます。
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM トレース UI" responsive="true" >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM トレース UI"  >}}
 
 ## その他の参考資料
 
