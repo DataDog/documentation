@@ -2,20 +2,20 @@
 "categories":
 - ログの収集
 - security
-"ddtype": クローラー
+"ddtype": "crawler"
 "dependencies": []
-"description": G Suite の監査およびセキュリティログを Datadog へインポートします。
+"description": "G Suite の監査およびセキュリティログを Datadog へインポートします。"
 "doc_link": "https://docs.datadoghq.com/integrations/gsuite/"
-"git_integration_title": gsuite
+"git_integration_title": "gsuite"
 "has_logo": !!bool "true"
-"integration_title": G Suite
+"integration_title": "G Suite"
 "is_public": !!bool "true"
-"kind": インテグレーション
-"manifest_version": 1.0
-"name": gsuite
-"public_title": Datadog-G Suite インテグレーション
-"short_description": G Suite の監査およびセキュリティログを Datadog へインポート
-"version": 1.0
+"kind": "インテグレーション"
+"manifest_version": "1.0"
+"name": "gsuite"
+"public_title": "Datadog-G Suite インテグレーション"
+"short_description": "G Suite の監査およびセキュリティログを Datadog へインポート"
+"version": "1.0"
 ---
 
 ## 概要

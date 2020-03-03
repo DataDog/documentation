@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Plan Microsoft Azure App Service
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_app_service_plan
 public_title: Intégration Datadog/Plan Microsoft Azure App Service
 short_description: Surveillez des métriques clés des plans Azure App Service.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

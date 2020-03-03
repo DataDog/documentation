@@ -1,7 +1,7 @@
 ---
 categories:
   - issue tracking
-ddtype: 「クロール」
+ddtype: crawler
 dependencies: []
 description: Datadog アラートからチケットを自動的に生成および更新
 doc_link: 'https://docs.datadoghq.com/integrations/servicenow/'

@@ -12,7 +12,7 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-{{< img src="real_user_monitoring/rum_full_dashboard.png" alt="RUM Dashboard" responsive="true" >}}
+{{< img src="real_user_monitoring/rum_full_dashboard.png" alt="RUM Dashboard"  >}}
 
 ## What is Real User Monitoring?
 

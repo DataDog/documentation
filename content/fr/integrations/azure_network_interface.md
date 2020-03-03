@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Network Interface
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_network_interface
 public_title: Intégration Datadog/Microsoft Azure Network Interface
 short_description: Surveillez des métriques clés d'Azure Network Interface.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

@@ -54,6 +54,11 @@ $ddpurple:    #632CA6;
         color:#000;
         font-size:12px;
         line-height:16px;
+
+        &:lang(ja) {
+            font-size: 11px !important;
+            line-height: 14px !important;
+        }
       }
       .card-img {
         display:flex;

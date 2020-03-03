@@ -1056,14 +1056,18 @@ main:
     url: logs/explorer/analytics/
     parent: log_explorer
     weight: 702
-  - name: Vues enregistrées
-    url: logs/explorer/saved_views/
-    parent: log_explorer
-    weight: 703
   - name: Log Patterns
     url: logs/explorer/patterns/
     parent: log_explorer
+    weight: 703
+  - name: Vues enregistrées
+    url: logs/explorer/saved_views/
+    parent: log_explorer
     weight: 704
+  - name: Facettes
+    url: logs/explorer/facets/
+    parent: log_explorer
+    weight: 705
   - name: Associer vos logs à vos traces
     url: tracing/connect_logs_and_traces/?tab=java
     parent: log_management
@@ -1148,11 +1152,15 @@ main:
     url: synthetics/settings/
     parent: synthetics
     weight: 6
+  - name: Guide
+    url: synthetics/guide/
+    parent: synthetics
+    weight: 7
   - name: Dépannage
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 7
+    weight: 8
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: nav_rum

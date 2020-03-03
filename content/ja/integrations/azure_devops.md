@@ -4,7 +4,7 @@ categories:
   - ソースコントロール
   - コラボレーション
   - 問題追跡
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: 主要な Azure DevOps メトリクスを追跡します。
 doc_link: 'https://docs.datadoghq.com/integrations/azure_devops'
@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure DevOps
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_devops
 public_title: Datadog-Microsoft Azure DevOps インテグレーション
 short_description: 主要な Azure DevOps メトリクスを追跡します。
-version: 1
+version: '1.0'
 ---
 ## 概要
 

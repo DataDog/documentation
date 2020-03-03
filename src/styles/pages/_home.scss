@@ -131,6 +131,10 @@
                     top: 0;
                     position: absolute;
                     left: -16px;
+
+                    &:lang(ja) {
+                        font-size: 14px;
+                    }
                 }
             }
 
@@ -173,6 +177,10 @@
             font-size: 32px;
             line-height: 36px;
             font-weight: 200;
+
+            &:lang(ja) {
+                font-size: 28px;
+            }
         }
         .nav-tile {
             a {

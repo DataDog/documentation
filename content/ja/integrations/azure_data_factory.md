@@ -2,9 +2,9 @@
 aliases:
   - /ja/integrations/azure_datafactory
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Data Factory のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_data_factory/'
@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Data Factory
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_data_factory
 public_title: Datadog-Microsoft Azure Data Factory インテグレーション
 short_description: Azure Data Factory のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

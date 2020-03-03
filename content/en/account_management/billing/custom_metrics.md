@@ -20,7 +20,7 @@ Suppose you’re submitting a metric, `request.Latency`, from two hosts (`host:A
 
 Assume that in your data, `endpoint:X` is supported by both hosts, but fails only on `host:B`. Also assume that requests to `endpoint:Y` are always successful and only appear on `host:B` as shown below:
 
-{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency" responsive="true" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency"  style="width:80%;">}}
 
 {{< tabs >}}
 {{% tab "Count, Rate, Gauge" %}}
@@ -147,7 +147,7 @@ Administrative users (those with [Datadog Admin roles][4]) can see the monthly a
 
 For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][7]. It’s listed as “Currently reporting # distinct metrics...” as shown below:
 
-{{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="Tracking metric" video="true" responsive="true">}}
+{{< img src="account_management/billing/custom_metrics/tracking_metric.mp4" alt="Tracking metric" video="true" >}}
 
 ## Allocation
 
@@ -158,7 +158,7 @@ You are allocated a certain number of custom metrics based on your Datadog prici
 
 These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 custom metrics are allocated. The 300 custom metrics can be divided equally across each host, or all 300 metrics can be used by a single host. Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
 
-{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="host_custom_metrics" responsive="true" >}}
+{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="host_custom_metrics"  >}}
 
 The billable number of custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. Contact [Sales][3] or your [Customer Success][8] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
