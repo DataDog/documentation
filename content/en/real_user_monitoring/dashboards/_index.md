@@ -10,11 +10,11 @@ further_reading:
       text: 'Explore your views within Datadog'
 ---
 
-When you [create a RUM application][1] a dashboard is created within Datadog to analyze all the [data collected][2]. RUM dashboards can be found in the dashboards list and have the Datadog logo:
+When you [create a RUM application][1] dashboards are created within Datadog to analyze all the [data collected][2]. RUM dashboards can be found in the dashboards list and have the Datadog logo:
 
 {{< img src="real_user_monitoring/dashboards/rum_dashboard_in_dashlist.png" alt="RUM Dashboard in dash list" >}}
 
-Another way to access them is to go in your [RUM application page][3] and click on the **Dashboard** link associated with your application:
+Another way to access them is to go in your [RUM application page][3] and click on the **Dashboard** links associated with your application:
 
 {{< img src="real_user_monitoring/dashboards/application_page.png" alt="Application page" >}}
 
