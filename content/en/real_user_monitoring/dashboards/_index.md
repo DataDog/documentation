@@ -16,7 +16,7 @@ When you [create a RUM application][1] dashboards are created within Datadog to 
 
 Another way to access them is to go in your [RUM application page][3] and click on the **Dashboard** links associated with your application:
 
-{{< img src="real_user_monitoring/dashboards/application_page.png" alt="Application page" >}}
+{{< img src="real_user_monitoring/dashboards/application_page.gif" alt="Application page" >}}
 
 {{< whatsnext desc="The following dashboards are available:" >}}
   {{< nextlink href="/real_user_monitoring/dashboards/performance_overview_dashboard" >}}<u>Performance Overview</u>: get a global idea about your website’s performance and demographics. {{< /nextlink >}}
@@ -30,7 +30,7 @@ You can customize your dashboards as you would with [any other one][4], or direc
 
 ### Template variables
 
-RUM dashboards are generated for all your applications with a set of default template variables automatically created. Use the template variables to start filtering RUM dashboards. For instance, use the `applicationId` template variable to filter down to a specific application.
+RUM dashboards are generated for all your applications with a set of default template variables automatically created. Use the template variables on top of it to start filtering RUM dashboards. For instance, use the `applicationId` template variable to filter down to a specific application.
 
 {{< img src="real_user_monitoring/dashboards/template_variables.gif" alt="Template variable" style="width:50%;" >}}
 
