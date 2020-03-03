@@ -67,7 +67,7 @@ With the following configuration placeholder values:
 - `<PROMETHEUS_ENDPOINT>`: URL for the metrics served by the container, in Prometheus format.
 - `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>`: Set namespace to be prefixed to every metric when viewed in Datadog.
 - `<METRIC_TO_FETCH>`: Prometheus metrics key to be fetched from the Prometheus endpoint.
-- `<NEW_METRIC_NAME>`: Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>`     in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs.
+- `<NEW_METRIC_NAME>`: Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs.
 
 **Note**: See the [sample openmetrics.d/conf.yaml][8] for all available configuration options.
 

@@ -56,13 +56,52 @@ To collect your exposed metrics:
 
 2. [Restart the Agent][10] to start collecting your metrics.
 
-## Example
+## Getting started
+
+Here is a simple getting started to collect metrics exposed by your Prometheus:
+
+1. Follow the [Prometheus Getting Started][11] documentation to start a local version of prometheus that monitors itself.
+
+2. [Install the Datadog Agent for your platform][6].
+
+3. Edit the `openmetrics.d/conf.yaml`  file in the `conf.d/` folder at the root of your [Agent's configuration directory][8] with the following content:
+
+    ```yaml
+    init_config:
+
+    instances:
+
+        ## @param prometheus_url - string - required
+        ## The URL where your application metrics are
+        ## exposed by Prometheus.
+        #
+      - prometheus_url: http://localhost:9090/metrics
+
+        ## @param namespace - string - required
+        ## The namespace to be prepended to all metrics.
+        #
+        namespace: "datadog_prometheus"
+
+        ## @param metrics - list of strings - required
+        ## List of metrics to be fetched from the prometheus endpoint,
+        ## if there's a value it'll be renamed.
+        ## This list should contain at least one metric
+        #
+        metrics:
+          - prometheus_target_interval_length_seconds
+    ```
+
+4. [Restart the Agent][12]
+
+5. Go into your Metric summary page to see the collected metrics: `prometheus_target_interval_length_seconds*`
+
+    {{< img src="integrations/guide/prometheus_host/prometheus_collected_metric_host.png" alt="Prometheus metric collected">}}
 
 ## From custom to official integration
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][11] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][13] integration.
 
 ## Further Reading
 
@@ -78,4 +117,6 @@ Official integrations have their own dedicated directories. There's a default in
 [8]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [10]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[11]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[11]: https://prometheus.io/docs/prometheus/latest/getting_started/
+[12]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[13]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
