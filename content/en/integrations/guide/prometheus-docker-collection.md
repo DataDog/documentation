@@ -16,11 +16,11 @@ further_reading:
       text: 'Write your own custom Prometheus Check'
 ---
 
-Collect your exposed Prometheus and OpenMetrics metrics from your application running inside containers or directly on your host by using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
+Collect your exposed Prometheus and OpenMetrics metrics from your application running inside your containers by using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
 
 ## Overview
 
-Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints with a few lines of configuration. Datadog recommends using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section. Use the Prometheus check only when the metrics endpoint does not support a text format.
+Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints. Datadog recommends using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section. Use the Prometheus check only when the metrics endpoint does not support a text format.
 
 This page explains the basic usage of these checks, enabling you to import all your prometheus exposed metrics within Datadog.
 
@@ -108,6 +108,8 @@ With the following configuration placeholder values:
 | `<METRIC_TO_FETCH>`                      | Prometheus metrics key to be fetched from the Prometheus endpoint.                                                                                                                                             |
 | `<NEW_METRIC_NAME>`                      | Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs. |
 
+**Note**: See the [sample openmetrics.d/conf.yaml][6] for all available configuration options.
+
 ## Example
 
 
@@ -115,7 +117,7 @@ With the following configuration placeholder values:
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][6] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][7] integration.
 
 ## Further Reading
 
@@ -126,4 +128,5 @@ Official integrations have their own dedicated directories. There's a default in
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
 [5]: /developers/prometheus
-[6]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[6]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[7]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

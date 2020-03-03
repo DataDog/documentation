@@ -16,7 +16,7 @@ further_reading:
   text: "Write your own custom Prometheus Check"
 ---
 
-Collect your exposed Prometheus and OpenMetrics metrics from your application running inside containersby using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
+Collect your exposed Prometheus and OpenMetrics metrics from your application running on your hosts using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
 
 ## Overview
 
@@ -32,33 +32,37 @@ This page explains the basic usage of these checks, enabling you to import all y
 
 ### Configuration
 
-If you are running the Agent as a binary on a host, configure your OpenMetrics or Prometheus check as you would any [other Agent integration](?tab=host). If you are running the Agent as a DaemonSet in Kubernetes, configure your OpenMetrics or Prometheus check using [Autodiscovery](?tab=kubernetes).
+To collect your exposed metrics:
 
-First, edit the `openmetrics.d/conf.yaml` or `prometheus.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][8] to configure your OpenMetrics or Prometheus integrations. Then [restart the Agent][9] to start collecting your metrics. See the [sample openmetrics.d/conf.yaml][10] or [sample prometheus.d/conf.yaml][11] for all available configuration options. This is the minimum required configuration needed to enable the integration:
+1. Edit the `openmetrics.d/conf.yaml`  file in the `conf.d/` folder at the root of your [Agent's configuration directory][8]. See the [sample openmetrics.d/conf.yaml][9] for all available configuration options. This is the minimum required configuration needed to enable the integration::
 
-```yaml
-init_config:
+    ```yaml
+    init_config:
 
-instances:
-    - prometheus_url: 'localhost:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
-      namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
-      metrics:
-          - '<PROMETHEUS_METRIC_TO_FETCH>': '<DATADOG_NEW_METRIC_NAME>'
-```
+    instances:
+        - prometheus_url: 'localhost:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
+          namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
+          metrics:
+              - '<PROMETHEUS_METRIC_TO_FETCH>': '<DATADOG_NEW_METRIC_NAME>'
+    ```
 
-With the following configuration placeholder values:
+     With the following configuration placeholder values:
 
-- `<PROMETHEUS_PORT>`: Port to connect to in order to access the Prometheus endpoint.
-- `<PROMETHEUS_ENDPOINT>`: URL for the metrics served by the container, in Prometheus format.
-- `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>`: Set namespace to be prefixed to every metric when viewed in Datadog.
-- `<METRIC_TO_FETCH>`: Prometheus metrics key to be fetched from the Prometheus endpoint.
-- `<NEW_METRIC_NAME>`: Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs.
+    - `<PROMETHEUS_PORT>`: Port to connect to in order to access the Prometheus endpoint.
+    - `<PROMETHEUS_ENDPOINT>`: URL for the metrics served by the container, in Prometheus format.
+    - `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>`: Set namespace to be prefixed to every metric when viewed in Datadog.
+    - `<METRIC_TO_FETCH>`: Prometheus metrics key to be fetched from the Prometheus endpoint.
+    - `<NEW_METRIC_NAME>`: Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs.
+
+2. [Restart the Agent][10] to start collecting your metrics.
+
+## Example
 
 ## From custom to official integration
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][12] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][11] integration.
 
 ## Further Reading
 
@@ -72,7 +76,6 @@ Official integrations have their own dedicated directories. There's a default in
 [6]: https://app.datadoghq.com/account/settings#agent
 [7]: /tagging
 [8]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[11]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
-[12]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[10]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
