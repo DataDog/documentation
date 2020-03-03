@@ -3,7 +3,7 @@ title: Template Variable Evaluation
 kind: guide
 ---
 
-In monitor notification messages, you can modify the output of template variables using `eval` syntax, which enables several different mathematical operations and functions on template variables with a numerical value.
+In monitor notification messages, you can modify the output of template variables using the `eval` syntax, which enables several different mathematical operations and functions on template variables with a numerical value.
 
 ## Operators
 
@@ -72,7 +72,7 @@ The following functions are supported:
 | round(var)          | Returns var rounded to the nearest integer                                                                                                 |
 | ceil(var)           | Returns the ceiling of var (the smallest integer that is greater than or equal to var)                                                     |
 | floor(var)          | Returns the floor of var (the largest integer that is less than or equal to var)                                                           |
-| dec(var)            | Returns the numbers to the right of the decimal point, for example 12.345 returns 0.345.                                                   |
+| dec(var)            | Returns the numbers to the right of the decimal point, for example if var = 12.345 then dec(var) returns 0.345.                                                  |
 | sgn(var)            | Returns the value of the sign function evaluated at var:<br>sgn(var) = 1 if var > 0<br>sgn(var) = 0 if var = 0<br>sgn(var) = -1 if var < 0 |
 | humanize_bytes(var) | Returns a human readable formatting of var bytes                                                                                           |
 | humanize_bits(var)  | Returns a human readable formatting of var bits                                                                                            |
@@ -80,7 +80,7 @@ The following functions are supported:
 
 ### Examples
 
-Use the int function to evaluate the `{{value}}` of a monitor to improve readability and remove the decimals with the following:
+If the decimal places of the `{{value}}` template variable are unnecessary for your particular use case, use the int function to evaluate `{{value}}` as an integer to improve readability and remove the decimals:
 
 ```
 {{eval “int(value)”}}
