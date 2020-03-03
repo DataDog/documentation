@@ -73,7 +73,7 @@ To use automatic instrumentation on Linux, follow these three steps:
 
 1. Install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][1].
 
-2. create the required environment variables. See [Required Environment Variables](#required-environment-variables) below for details.
+2. Create the required environment variables. See [Required Environment Variables](#required-environment-variables) below for details.
 
 3. run the `/opt/datadog/createLogPath.sh` script, which creates a directory for the log files and set appropriate directory permissions. The log file default path is `/var/log/datadog/dotnet`.
 
