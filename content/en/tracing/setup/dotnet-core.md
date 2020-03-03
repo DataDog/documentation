@@ -75,7 +75,7 @@ To use automatic instrumentation on Linux, follow these three steps:
 
 2. Create the required environment variables. See [Required Environment Variables](#required-environment-variables) below for details.
 
-3. run the `/opt/datadog/createLogPath.sh` script, which creates a directory for the log files and set appropriate directory permissions. The log file default path is `/var/log/datadog/dotnet`.
+3. Run the `/opt/datadog/createLogPath.sh` script, which creates a directory for the log files and sets appropriate directory permissions. The default directory for log files is `/var/log/datadog/dotnet`.
 
 **Update:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. Remove it from your application when you update the .NET Tracer and add the new environment variable, `DD_DOTNET_TRACER_HOME`. See [Required Environment Variables](#required-environment-variables) below for details.
 
