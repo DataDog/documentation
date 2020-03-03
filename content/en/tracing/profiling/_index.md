@@ -11,13 +11,61 @@ further_reading:
 Datadog Profiling is in beta. Reach out to <a href="/help/">Datadog Support</a> if you encounter any issues or have feedback to share.
 </div>
 
-Profiling libraries are shipped within the following tracing language library. Refer to the dedicated language page to learn how to enable profile connections for your application:
+## Setup
 
-{{< partial name="profiling/profiling-languages.html" >}}
+Profiling libraries are shipped within the following tracing language library. Select your language below to learn how to enable profiling for your application:
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported OpenJDK 11, Oracle Java 8 with a commercial license, Oracle Java 11, and Zulu Java 8. All JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
+
+1. Download `dd-java-agent.jar`, which contains the Java Agent class files and add the `dd-trace-java` version your `pom.xml` or equivalent:
+
+    ```shell
+    wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
+    ```
+
+2. Update your service invocation to look like:
+
+    ```text
+    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.api-key.file=<API_KEY_FILE> -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    ```
+
+3. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][2].
+
+**Note**:
+
+- The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][3]:
+
+    ```shell
+    # Good:
+    java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags
+    # Bad:
+    java -jar my-service.jar -javaagent:dd-java-agent.jar ...
+    ```
+
+- Because profiles are sent directly to Datadog without using the Datadog Agent, you must pass a valid [Datadog API key][4].
+
+- Alternativelly to passing arguments, can use environment variable to set those paramters:
+
+| Arguments                     | Environment variable      | Description                                       |
+| ----------------------------- | ------------------------- | ------------------------------------------------- |
+| `-Ddd.profiling.enabled`      | DD_PROFILING_ENABLED      | Set to `true` to enable profiling.                |
+| `-Ddd.profiling.api-key.file` | DD_PROFILING_API_KEY_FILE | File that should contain the API key as a string. |
+| `-Ddd.profiling.api-key`      | DD_PROFILING_API_KEY      | Datadog API key.                                  |
+
+
+[1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
+[2]: https://app.datadoghq.com/profiling
+[3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[4]: /account_management/api-app-keys/#api-keys
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Profiles
 
-Once your profile collection is set up, profiles are available in the [APM > Profiling][1] page within Datadog:
+Once profiling is set up, profiles are available in the [APM > Profiling][1] page within Datadog:
 
 {{< img src="tracing/profiling/profiling_main_page.png" alt="Profiling main page">}}
 
@@ -40,7 +88,7 @@ The following measures are available:
 
 | Measure           | Definition                                                                                                                                                                           |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| CPU               | CPU load summed on all cores of the process. This means this can go above `100%` and the theoretical limit is `nCores` \* `100%`.                                                    |
+| CPU cores              | CPU load summed on all cores of the process. This means this can go above `100%` and the theoretical limit is `nCores` \* `100%`.                                                    |
 | Memory Allocation | Memory allocation rate in `Bytes/s` over the course of the profile. This value can be above the maximum amount of RAM memory because it can be garbage collected during the profile. |
 
 ## Profile
@@ -62,21 +110,41 @@ Four tabs are below the profile header:
 
 **Note**: In the upper right corner of each profile, there are options to:
 
--   Download the profile
--   Switch the profile to full screen
+- Download the profile
+- Switch the profile to full screen
 
 ### Profile types
 
-In the **Profiles** tab you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs. Refer to the dedicated profile types section for your language to see what is collected:
+In the **Profiles** tab you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs.
 
-{{< partial name="profiling/profiling-languages.html" >}}
+{{< tabs >}}
+{{% tab "Java" %}}
+
+{{< img src="tracing/profiling/profile.png" alt="A specific profile">}}
+
+Once enabled, the following profile types are collected:
+
+| Profile type             | Definition                                                                                                                                                                                                                                                                                         |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU in Java Code         | Shows the time each method spent running on the CPU. It includes JVM bytecode, but not native code called from within the JVM.                                                                                                                                                                     |
+| Allocation               | Shows the amount of heap memory allocated by each method, including allocations which were subsequently freed.                                                                                                                                                                                     |
+| Wall Time in Native Code | Shows the elapsed time spent in native code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. This profile does not include time spent running JVM bytecode, which is typically most of your application code. |
+| Class load               | Shows the number of classes loaded by each method.                                                                                                                                                                                                                                                 |
+| Error                    | Shows the number of errors thrown by each method.                                                                                                                                                                                                                                                  |
+| File I/O                 | Shows the time each method spent reading and writing files.                                                                                                                                                                                                                                        |
+| Lock                     | Shows the time each method spent waiting for a lock.                                                                                                                                                                                                                                               |
+| Socket I/O               | Shows the time each method spent handling socket I/O.                                                                                                                                                                                                                                              |
+
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
 
 In case you have done all the necessary configuration steps and do not see profiles in the [profile search page](#search-profiles), turn on [debug mode][4] and [open a support ticket][5] with debug files and the following information:
 
--   OS type and version (e.g Linux Ubuntu 14.04.3)
--   Runtime type, version and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
+- OS type and version (e.g Linux Ubuntu 14.04.3)
+- Runtime type, version and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
 
 ## Further Reading
 

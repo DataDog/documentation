@@ -992,11 +992,6 @@ main:
     parent: "tracing"
     identifier: "profiling"
     weight: 6
-  - name: "Java"
-    url: "tracing/profiling/java"
-    identifier: "profiling_java"
-    parent: "profiling"
-    weight: 601
 
   - name: "Manual Instrumentation"
     url: "tracing/manual_instrumentation/"

@@ -14,7 +14,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-Use the [OpenTracing API][1] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you [trace][2] your application more precisely than you can with the Agent alone.
+Use the [OpenTracing API][1] and the Datadog Tracer (dd-trace-ot) library to measure execution times for specific pieces of code. This lets you [trace][2] your application more precisely than you can with the Java Agent alone.
 
 ## Setup
 
