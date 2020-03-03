@@ -73,24 +73,10 @@ Here is a simple getting started to collect metrics exposed by your Prometheus:
 
     instances:
 
-        ## @param prometheus_url - string - required
-        ## The URL where your application metrics are
-        ## exposed by Prometheus.
-        #
       - prometheus_url: http://localhost:9090/metrics
-
-        ## @param namespace - string - required
-        ## The namespace to be prepended to all metrics.
-        #
-        namespace: "datadog_prometheus"
-
-        ## @param metrics - list of strings - required
-        ## List of metrics to be fetched from the prometheus endpoint,
-        ## if there's a value it'll be renamed.
-        ## This list should contain at least one metric
-        #
+        namespace: "documentation_example"
         metrics:
-          - prometheus_target_interval_length_seconds
+          - promhttp_metric_handler_requests_total : prometheus.handler.requests.total
     ```
 
 4. [Restart the Agent][12]
