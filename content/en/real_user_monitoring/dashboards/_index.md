@@ -16,7 +16,7 @@ When you [create a RUM application][1] a dashboard is created within Datadog to 
 
 Another way to access them is to go in your [RUM application page][3] and click on the **Dashboard** link associated with your application:
 
-{{< img src="real_user_monitoring/dashboards/application_page.gif" alt="Application page" >}}
+{{< img src="real_user_monitoring/dashboards/application_page.png" alt="Application page" >}}
 
 {{< whatsnext desc="The following dashboards are available:" >}}
   {{< nextlink href="/real_user_monitoring/dashboards/performance_overview_dashboard" >}}<u>Performance Overview</u>: get a global idea about your website’s performance and demographics. {{< /nextlink >}}
