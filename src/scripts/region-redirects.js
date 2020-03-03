@@ -37,6 +37,9 @@ function regionOnChangeHandler(event) {
 function showRegionSnippet(newSiteRegion) {
     const regionSnippets = document.querySelectorAll('[data-region]');
     const regionParams = document.querySelectorAll('[data-region-param]');
+    const externalLinks = document.querySelectorAll(
+        '#mainContent a[href*="app.datadoghq."]'
+    );
 
     regionSnippets.forEach(regionSnippet => {
         const { region } = regionSnippet.dataset;
@@ -53,12 +56,7 @@ function showRegionSnippet(newSiteRegion) {
         const { regionParam } = param.dataset;
 
         // check if the region config object has the key specified in the hugo shortcode
-        if (
-            !Object.prototype.hasOwnProperty.call(
-                config,
-                regionParam
-            )
-        ) {
+        if (!Object.prototype.hasOwnProperty.call(config, regionParam)) {
             throw new Error(
                 `The key used in the hugo shortcode, ${regionParam}, was not found in the regions.config.js file.`
             );
@@ -66,6 +64,16 @@ function showRegionSnippet(newSiteRegion) {
             param.innerHTML = config[regionParam][newSiteRegion];
         }
     });
+
+    if (externalLinks) {
+        externalLinks.forEach(link => {
+            if (!link.href.includes(config.dd_site[newSiteRegion])) {
+                link.href = `https://app.${config.dd_site[newSiteRegion]}${link.pathname}`;
+            } else {
+                link.href = `https://app.${config.dd_site[newSiteRegion]}${link.pathname}`;
+            }
+        });
+    }
 }
 
 // have option to pass new site region to function.

@@ -4,11 +4,10 @@ let regionSelector;
 let regionUSSnippet;
 let regionEUSnippet;
 let regionParam;
+let regionAppLink;
 
-describe(`On main page load (not home or api pages)`, () => {
-    // const { location } = window;
+describe(`On main page load (not home or api pages, nor loaded via async)`, () => {
 
-    // console.log('location: ', location);
 
     beforeEach(() => {
         Object.defineProperty(window.document, 'cookie', {
@@ -52,15 +51,20 @@ describe(`On main page load (not home or api pages)`, () => {
 
         const testParamHtml = `<code class="js-region-param" data-region-param="dd_site"></code>`;
 
+        const testAppLink = `<div id="mainContent"><a class="test-link" href="https://app.datadoghq.com/logs">Logs</a></div>`;
+
         document.body.innerHTML = selectOption;
         document.body.innerHTML += testUSRegionShortcodeHtml;
         document.body.innerHTML += testEURegionShortcodeHtml;
         document.body.innerHTML += testParamHtml;
+        document.body.innerHTML += testAppLink;
 
         regionSelector = document.querySelector('.js-region-selector');
         regionUSSnippet = document.querySelector('[data-region=us]');
         regionEUSnippet = document.querySelector('[data-region=eu]');
         regionParam = document.querySelector('[data-region-param]');
+        regionAppLink = document.querySelector('.test-link');
+       
     });
 
     describe(`No Cookie Set`, () => {
@@ -73,6 +77,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionEUSnippet.classList).toContain('d-none')
                 expect(regionUSSnippet.classList).not.toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.com')
+                expect(regionAppLink.href).toEqual('https://app.datadoghq.com/logs');
             });
         });
 
@@ -82,11 +87,14 @@ describe(`On main page load (not home or api pages)`, () => {
 
                 redirectToRegion();
 
+                // console.log('regionAppLink.href: ', regionAppLink.href);
+
                 expect(window.document.cookie).toContain('site=eu');
                 expect(regionSelector.value).toEqual('eu');
                 expect(regionEUSnippet.classList).not.toContain('d-none')
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.eu')
+                expect(regionAppLink.href).toEqual('https://app.datadoghq.eu/logs');
             });
         });
 
@@ -101,6 +109,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionUSSnippet.classList).not.toContain('d-none')
                 expect(regionEUSnippet.classList).toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.com')
+                expect(regionAppLink.href).toEqual('https://app.datadoghq.com/logs');
             });
         });
 
@@ -115,6 +124,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionEUSnippet.classList).not.toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.eu')
+                expect(regionAppLink.href).toEqual('https://app.datadoghq.eu/logs');
             });
         });
 
@@ -136,6 +146,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionEUSnippet.classList).not.toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.eu')
+                expect(regionAppLink.href).toEqual('https://app.datadoghq.eu/logs');
             });
         });
 
@@ -150,6 +161,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionEUSnippet.classList).not.toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.eu')
+                expect(regionAppLink.href).toEqual('https://app.datadoghq.eu/logs');
             });
         });
 
@@ -164,6 +176,7 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionUSSnippet.classList).toContain('d-none')
                 expect(regionEUSnippet.classList).not.toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.eu')
+                expect(regionAppLink.href).toEqual('https://app.datadoghq.eu/logs');
             });
         });
 
@@ -178,9 +191,9 @@ describe(`On main page load (not home or api pages)`, () => {
                 expect(regionUSSnippet.classList).not.toContain('d-none')
                 expect(regionEUSnippet.classList).toContain('d-none')
                 expect(regionParam.innerHTML).toEqual('datadoghq.com')
+                expect(regionAppLink.href).toEqual('https://app.datadoghq.com/logs');
             });
         });
     });
-
 
 });
