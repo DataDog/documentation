@@ -121,7 +121,7 @@ spec:
           - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
           - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
 
-          ## For secure communication with the cluster agent (required to use the cluster agent)
+          ## For secure communication with the Cluster Agent (required to use the Cluster Agent)
           # - name: DD_CLUSTER_AGENT_AUTH_TOKEN
           #
           ## If using a simple env var uncomment this section
