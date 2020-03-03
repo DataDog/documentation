@@ -160,7 +160,7 @@ These allocations are counted across your entire infrastructure. For example, if
 
 {{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="host_custom_metrics"  >}}
 
-The billable number of custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. Contact [Sales][3] or your [Customer Success][8] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
+The billable number of custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. Contact [Sales][8] or your [Customer Success][26] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
 ## Standard integrations
 
@@ -182,11 +182,11 @@ For billing questions, contact your [Customer Success][26] Manager.
 [1]: /integrations
 [2]: /developers/metrics/custom_metrics
 [3]: /developers/metrics/types/#metric-types
-[4]: https://app.datadoghq.com/account/usage/hourly
-[5]: /account_management/billing/usage_details
-[6]: https://app.datadoghq.com/metric/summary
-[7]: mailto:sales@datadoghq.com
-[8]: /account_management/team
+[4]: /account_management/users/default_roles
+[5]: https://app.datadoghq.com/account/usage/hourly
+[6]: /account_management/billing/usage_details
+[7]: https://app.datadoghq.com/metric/summary
+[8]: mailto:sales@datadoghq.com
 [9]: /integrations/activemq/#activemq-xml-integration
 [10]: /integrations/go_expvar
 [11]: /integrations/java/
