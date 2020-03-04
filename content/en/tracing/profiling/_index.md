@@ -18,7 +18,7 @@ Profiling libraries are shipped within the following tracing language library. S
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported OpenJDK 11, Oracle Java 8 with a commercial license, Oracle Java 11, and Zulu Java 8. All JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
+The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported OpenJDK 11, Oracle Java 11, and Zulu Java 8. All JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
 1. Download `dd-java-agent.jar`, which contains the Java Agent class files and add the `dd-trace-java` version your `pom.xml` or equivalent:
 
@@ -29,7 +29,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 2. Update your service invocation to look like:
 
     ```text
-    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.api-key.file=<API_KEY_FILE> -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.api-key-file=<API_KEY_FILE> -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
 3. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][2].
@@ -52,7 +52,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 | Arguments                     | Environment variable      | Description                                       |
 | ----------------------------- | ------------------------- | ------------------------------------------------- |
 | `-Ddd.profiling.enabled`      | DD_PROFILING_ENABLED      | Set to `true` to enable profiling.                |
-| `-Ddd.profiling.api-key.file` | DD_PROFILING_API_KEY_FILE | File that should contain the API key as a string. |
+| `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | File that should contain the API key as a string. |
 | `-Ddd.profiling.api-key`      | DD_PROFILING_API_KEY      | Datadog API key.                                  |
 
 
