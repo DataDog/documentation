@@ -37,7 +37,7 @@ Starting with **Agent v6.11.0**, the core and APM/trace components of the Window
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
-[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Command line" %}}
