@@ -2,16 +2,7 @@
 title: Kubernetes trace collection
 kind: documentation
 aliases:
-    - /guides/basic_agent_usage/kubernetes
-    - /agent/basic_agent_usage/kubernetes
-    - /tracing/kubernetes/
-    - /tracing/setup/kubernetes
     - /agent/kubernetes/apm
-    - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
-    - /integrations/faq/gathering-kubernetes-events
-    - /agent/kubernetes/event_collection
-    - /agent/kubernetes/daemonset_setup
-    - /agent/kubernetes/helm
 further_reading:
 - link: "agent/kubernetes/metrics"
   tag: "documentation"
@@ -116,5 +107,8 @@ tracer.configure(
 
 Refer to the [language-specific APM instrumentation docs][1] for more examples.
 
-[1]: /tracing/setup
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}[1]: /tracing/setup
 [2]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector

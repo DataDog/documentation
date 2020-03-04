@@ -6,7 +6,6 @@ aliases:
     - /agent/basic_agent_usage/kubernetes
     - /tracing/kubernetes/
     - /tracing/setup/kubernetes
-    - /agent/kubernetes/apm
     - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
     - /integrations/faq/gathering-kubernetes-events
     - /agent/kubernetes/event_collection
