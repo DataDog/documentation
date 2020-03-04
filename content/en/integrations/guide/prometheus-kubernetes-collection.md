@@ -3,7 +3,7 @@ title: Prometheus and OpenMetrics metrics collection with Kubernetes
 kind: documentation
 aliases:
     - /getting_started/prometheus
-    - /getting_started/integartions/prometheus
+    - /getting_started/integrations/prometheus
     - /agent/openmetrics
     - /agent/prometheus
 further_reading:

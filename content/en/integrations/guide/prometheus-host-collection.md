@@ -60,6 +60,8 @@ To collect your exposed metrics:
 
 ## Getting started
 
+### Simple metric collection
+
 Here is a simple getting started to collect metrics exposed by your Prometheus:
 
 1. Follow the [Prometheus Getting Started][11] documentation to start a local version of prometheus that monitors itself.

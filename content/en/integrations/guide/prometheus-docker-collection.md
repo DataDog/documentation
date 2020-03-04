@@ -69,7 +69,7 @@ The Agent detects if it's running on Docker and automatically searches all conta
 ```conf
 LABEL "com.datadoghq.ad.check_names"='["openmetrics"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[{\"<PROMETHEUS_METRIC_TO_FETCH>\": \"<DATADOG_NEW_METRIC_NAME>\"}]}"]'
+LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
 ```
 
 {{% /tab %}}
@@ -82,8 +82,8 @@ labels:
     com.datadoghq.ad.instances:  >
     [
       "{\
-        "prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",
-        \"metrics\":[{\"<PROMETHEUS_METRIC_TO_FETCH>\": \"<DATADOG_NEW_METRIC_NAME>\"}]
+        "prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",
+        \"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]
       }"
     ]
 ```
@@ -92,7 +92,7 @@ labels:
 {{% tab "Docker run command" %}}
 
 ```shell
--l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[{\"<PROMETHEUS_METRIC_TO_FETCH>\": \"<DATADOG_NEW_METRIC_NAME>\"}]}"]'
+-l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
 ```
 
 {{% /tab %}}
@@ -104,20 +104,46 @@ With the following configuration placeholder values:
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<PROMETHEUS_PORT>`                      | Port to connect to in order to access the Prometheus endpoint.                                                                                                                                                 |
 | `<PROMETHEUS_ENDPOINT>`                  | URL for the metrics served by the container, in Prometheus format.                                                                                                                                             |
-| `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>` | Set namespace to be prefixed to every metric when viewed in Datadog.                                                                                                                                           |
+| `<NAMESPACE>` | Set namespace to be prefixed to every metric when viewed in Datadog.                                                                                                                                           |
 | `<METRIC_TO_FETCH>`                      | Prometheus metrics key to be fetched from the Prometheus endpoint.                                                                                                                                             |
 | `<NEW_METRIC_NAME>`                      | Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs. |
 
 **Note**: See the [sample openmetrics.d/conf.yaml][6] for all available configuration options.
 
-## Example
+## Getting started
 
+### Simple metric collection
+
+Here is a simple getting started to collect metrics exposed by your Prometheus running within a contrainer:
+
+1. Launch the Datadog Agent:
+
+    ```shell
+    DOCKER_CONTENT_TRUST=1 \
+    docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+                  -v /proc/:/host/proc/:ro \
+                  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+                  -e DD_API_KEY="<DATADOG_API_KEY>" \
+                  datadog/agent:latest
+    ```
+
+2. To launch Prometheus in a container, the command [from the prometheus documentation][7] is: `docker run -p 9090:9090 prom/prometheus`. In order to notify the Agent to query this container with the openmetrics check we need to add the following configuration:
+
+  ```shell
+  -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"prometheus_url\":\"http://%%host%%:9090/metrics \",\"namespace\":\"documentation_example_docker\",\"metrics\":[{\"promhttp_metric_handler_requests_total\": \"prometheus.handler.requests.total\"}]}"]'
+  ```
+
+  To launch the prometheus container with the right annotations for autodiscovery to work run:
+
+  ```shell
+  docker run -p 9090:9090 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{"prometheus_url":"http://%%host%%:9090/metrics","namespace":"documentation_example_docker","metrics":[{"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]}"]' prom/prometheus
+  ```
 
 ## From custom to official integration
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][7] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][8] integration.
 
 ## Further Reading
 
@@ -129,4 +155,5 @@ Official integrations have their own dedicated directories. There's a default in
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
 [5]: /developers/prometheus
 [6]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[7]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[7]: https://prometheus.io/docs/prometheus/latest/installation/#using-docker
+[8]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
