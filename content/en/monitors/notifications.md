@@ -94,17 +94,9 @@ For example, if you submit a metric tagged with `dot.key.test:five` and then set
 
 {{< img src="monitors/faq/template_with_dot.png" alt="template_with_dot"  style="width:80%;">}}
 
-### Template variable arithmetic
+### Template variable evaluation
 
-Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use the `eval` syntax like so:
-
-`{{eval "<TEMPLATE_VARIABLE_NAME>+1-2*3/4"}}`
-
-Note: Don’t forget to wrap the name of the template variable and the arithmetic expression in quotation marks (`"`)
-
-For instance, to subtract 15 minutes (15*60*1000 milliseconds) to the `{{last_triggered_at_epoch}}` template variable, inline in your notification message:
-
-`{{eval "last_triggered_at_epoch-15*60*1000"}}`
+All numerical template variables support evaluation operators and functions, which allow you to perform mathematical operations or formatting changes to template variables. Full details about which evaluation operators and functions are available and how to use them can be found [here][5].
 
 ## Conditional variables
 
@@ -470,3 +462,4 @@ To include a comment in the monitor message that only shows in the monitor edit 
 [2]: http://daringfireball.net/projects/markdown/syntax
 [3]: /monitors/monitor_types/integration
 [4]: /monitors/faq/what-are-recovery-thresholds
+[5]: /monitors/guide/template-variable-evaluation/
