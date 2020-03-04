@@ -154,10 +154,15 @@ main:
     url: "agent/basic_agent_usage/centos/"
     weight: 103
     parent: "basic_agent_usage"
+  - name: "Chef"
+    identifier: "basic_agent_usage_chef"
+    url: "agent/basic_agent_usage/chef/"
+    weight: 104
+    parent: "basic_agent_usage"
   - name: "Debian"
     identifier: "basic_agent_usage_deb"
     url: "agent/basic_agent_usage/deb/"
-    weight: 104
+    weight: 105
     parent: "basic_agent_usage"
   - name: "Fedora"
     identifier: "basic_agent_usage_fedora"

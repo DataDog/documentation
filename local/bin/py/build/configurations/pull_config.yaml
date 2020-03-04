@@ -73,6 +73,21 @@
       - "*/assets/service_checks.json"
       - "*/README.md"
 
+  - repo_name: chef-datadog
+    contents:
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - README.md
+      options:
+        dest_path: '/agent/basic_agent_usage/'
+        file_name: 'chef.md'
+        front_matters:
+          title: Chef
+          kind: documentation
+          dependencies: ["https://github.com/DataDog/chef-datadog/blob/master/README.md"]
+
   - repo_name: heroku-buildpack-datadog
     contents:
 

@@ -8,6 +8,9 @@ platforms:
   - name: centos
     link: "agent/basic_agent_usage/centos/"
     image: "platform_centos.png"
+  - name: chef
+    link: "agent/basic_agent_usage/chef/"
+    image: "platform_chef.png"
   - name: deb
     link: "agent/basic_agent_usage/deb/"
     image: "platform_debian.png"
