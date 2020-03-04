@@ -96,32 +96,6 @@ If changes are restricted, only the monitor's creator or an administrator can ch
 
 **Note**: The limitations are applied both in the UI and API.
 
-## Test notifications
-
-Test notifications are supported for the [monitor types][1]: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, event, and composite.
-
-### Run the test
-
-1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
-
-2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][11] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
-
-    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:70%;" >}}
-
-3. Click **Run Test** to send notifications to the people and services listed in the monitor.
-
-### Events
-Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
-
-### Variables
-
-Message variables auto-populate with a randomly selected group based on the scope of your monitor's definition, for example:
-```text
-{{#is_alert}}
-{{host.name}} <-- will populate
-{{/is_alert}}
-```
-
 ## Variables
 
 ### Template variables
@@ -140,7 +114,7 @@ Use template variables to customize your monitor notifications. The built-in var
 
 #### Evaluation
 
-Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][12].
+Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][11].
 
 ### Tag variables
 
@@ -273,6 +247,32 @@ To notify your dev team if a triggering host has the name `production`, use the 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Test notifications
+
+Test notifications are supported for the [monitor types][1]: host, metric, anomaly, outlier, forecast, integration (check only), process (check only), network (check only), custom check, event, and composite.
+
+### Run the test
+
+1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
+
+2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][12] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+
+    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:70%;" >}}
+
+3. Click **Run Test** to send notifications to the people and services listed in the monitor.
+
+### Events
+Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
+
+### Variables
+
+Message variables auto-populate with a randomly selected group based on the scope of your monitor's definition, for example:
+```text
+{{#is_alert}}
+{{host.name}} <-- will populate
+{{/is_alert}}
+```
+
 ## Advanced
 
 ### Dynamic links
@@ -384,5 +384,5 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [8]: /integrations/webhooks
 [9]: /integrations/webhooks/#usage
 [10]: /events
-[11]: /monitors/faq/what-are-recovery-thresholds
-[12]: /monitors/guide/template-variable-evaluation
+[11]: /monitors/guide/template-variable-evaluation
+[12]: /monitors/faq/what-are-recovery-thresholds
