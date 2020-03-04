@@ -90,6 +90,20 @@ Refer to the standard [Daemonset installation][2] and the [Docker Agent][3] info
 [2]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
 [3]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
+{{% tab "Helm" %}}
+Update your [datadog-values.yaml][1] file with the following process collection configuration, then upgrade your Datadog Helm chart:
+
+```yaml
+datadog:
+  # (...)
+  processAgent:
+   enabled: true
+```
+
+
+[1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Process Arguments Scrubbing

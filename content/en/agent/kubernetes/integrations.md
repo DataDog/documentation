@@ -116,6 +116,31 @@ data:
 It is also possible to enable integrations via the annotations in the manifest of your application.
 This can be done with Autodiscovery. For more details, see the [Autodiscovery][3] section.
 
+
+### Enabling integrations with Helm
+
+The Datadog [entrypoint][4] copies files with a `.yaml` extension found in `/conf.d` and files with `.py` extension in `/check.d` to `/etc/datadog-agent/conf.d` and `/etc/datadog-agent/checks.d` respectively. The keys for `datadog.confd` and `datadog.checksd` should mirror the content found in their respective ConfigMaps, i.e.:
+
+```yaml
+datadog:
+  confd:
+    redisdb.yaml: |-
+      ad_identifiers:
+        - redis
+        - bitnami/redis
+      init_config:
+      instances:
+        - host: "%%host%%"
+          port: "%%port%%"
+    jmx.yaml: |-
+      ad_identifiers:
+        - openjdk
+      instance_config:
+      instances:
+        - host: "%%host%%"
+          port: "%%port_0%%"
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -123,3 +148,4 @@ This can be done with Autodiscovery. For more details, see the [Autodiscovery][3
 [1]: /integrations/http_check
 [2]: /agent/autodiscovery/ad_identifiers
 [3]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
+[4]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh

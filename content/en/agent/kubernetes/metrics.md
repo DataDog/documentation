@@ -3,6 +3,8 @@ title: Kubernetes Metrics
 kind: documentation
 ---
 
+Metrics collected by the Agent when deployed on your Kubernetes cluster:
+
 ## Kubernetes
 
 {{< get-metrics-from-git "kubernetes" >}}

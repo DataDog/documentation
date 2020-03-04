@@ -163,12 +163,25 @@ To set [tag cardinality][5] for the metrics collected using origin detection, us
 
 There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`—as DogStatsD is priced differently, its tag cardinality setting is separated in order to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`.
 
-
 [1]: /developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /tagging/assigning_tags/#environment-variables
+{{% /tab %}}
+{{% tab "Helm" %}}
+To gather custom metrics with [DogStatsD][1], update your [datadog-values.yaml][2] file to enable non-local traffic.
+
+```yaml
+datadog:
+  # (...)
+  dogstatsd:
+    nonLocalTraffic: true
+```
+
+
+[1]: /developers/metrics/dogstatsd_metrics_submission
+[2]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
