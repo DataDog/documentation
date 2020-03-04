@@ -36,7 +36,7 @@ The Log Explorer supports [queries across multiple indexes][20].
 
 
 <div class="alert alert-info">
-The multi-index feature is in private beta, <a href="/help">contact Datadog support</a> to turn it on for your account.
+The multi-index feature is in limited availability, <a href="/help">contact Datadog support</a> to turn it on for your account.
 </div>
 
 ## Indexes Filters
