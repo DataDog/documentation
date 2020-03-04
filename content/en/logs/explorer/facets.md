@@ -120,7 +120,7 @@ When troubleshooting, it is more likely for you to find content from other teams
 
 If you see an aliased facet in your facet list, consider using the _standard_ facet instead by clicking the **switch to alias** menu item. This action hides the aliased facet and unhides the standard facet. If doing so makes you update a saved view, consider saving the saved view so that the aliasing applies to everyone using this saved view.
 
-{{< img src="logs/explorer/facet/switch_facet.png" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/switch_facet.png" alt="Switch Facet" style="width:30%;">}}
 
 You may wish to keep the non-standard _aliased_ version of the facet if you are troubleshooting against old content (before the aliasing for this facet has been setup by your organization).
 
