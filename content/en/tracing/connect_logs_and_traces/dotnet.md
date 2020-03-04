@@ -152,7 +152,7 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you are not using a [Datadog Log Integration][8] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are parsed as strings. More information can be found in the [FAQ on this topic][9].
+**Note**: If you are not using a [Datadog Log Integration][8] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][9].
 
 ## Further Reading
 
@@ -166,4 +166,4 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 [6]: /tracing/visualization/#trace
 [7]: /tracing/visualization/#spans
 [8]: /logs/log_collection/csharp/#configure-your-logger
-[9]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[9]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
