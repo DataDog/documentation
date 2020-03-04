@@ -83,7 +83,7 @@ Here is a simple getting started to collect metrics exposed by your Prometheus:
 
 4. [Restart the Agent][12]
 
-5. Go into your Metric summary page to see the collected metrics: `prometheus_target_interval_length_seconds*`
+5. Go into your [Metric summary page][13] to see the collected metrics: `prometheus_target_interval_length_seconds*`
 
     {{< img src="integrations/guide/prometheus_host/prometheus_collected_metric_host.png" alt="Prometheus metric collected">}}
 
@@ -91,7 +91,7 @@ Here is a simple getting started to collect metrics exposed by your Prometheus:
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][13] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][14] integration.
 
 ## Further Reading
 
@@ -109,4 +109,5 @@ Official integrations have their own dedicated directories. There's a default in
 [10]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://prometheus.io/docs/prometheus/latest/getting_started/
 [12]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[13]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[13]: https://app.datadoghq.com/metric/summary
+[14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
