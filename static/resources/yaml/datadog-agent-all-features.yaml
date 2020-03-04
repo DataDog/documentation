@@ -21,6 +21,8 @@ spec:
           imagePullPolicy: Always
           name: datadog-agent
           ports:
+
+            ## DogStatsD ##
             - containerPort: 8125
               ## Custom metrics via DogStatsD - uncomment this section to enable
               ## custom metrics collection.
@@ -28,6 +30,8 @@ spec:
               # hostPort: 8125
               name: dogstatsdport
               protocol: UDP
+
+            ## APM ##
             - containerPort: 8126
               ## Trace Collection (APM) - uncomment this section to enable APM
               # hostPort: 8126
@@ -43,10 +47,8 @@ spec:
             ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
             - name: DD_SITE
               value: datadoghq.com
-            ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to "true" to collect StatsD metrics
-            ## from other containers.
             - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
-              value: 'false'
+              value: 'true'
             - name: KUBERNETES
               value: 'true'
             - name: DD_HEALTH_PORT
@@ -55,16 +57,30 @@ spec:
               value: 'true'
             - name: DD_LEADER_ELECTION
               value: 'true'
+
+            ## APM ##
             - name: DD_APM_ENABLED
+              value: 'true'
+            - name: DD_APM_NON_LOCAL_TRAFFIC
               value: 'true'
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
+
+            ## Log collection ##
+            - name: DD_LOGS_ENABLED
+              value: "true"
+            - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+              value: "true"
+            - name: DD_AC_EXCLUDE
+              value: "name:datadog-agent"
             - name: DD_CRI_SOCKET_PATH
               value: /host/var/run/docker.sock
             - name: DOCKER_HOST
-              value: 'unix:///host/var/run/docker.sock'
+              value: unix:///host/var/run/docker.sock
+
+
           ## Note these are the minimum suggested values for requests and limits.
           ## The amount of resources required by the Agent varies depending on:
           ## * The number of checks
@@ -78,50 +94,60 @@ spec:
               memory: 256Mi
               cpu: 200m
           volumeMounts:
-            - name: dockersocketdir
-              mountPath: /host/var/run
-            - name: procdir
-              mountPath: /host/proc
-              readOnly: true
-            - name: cgroups
-              mountPath: /host/sys/fs/cgroup
-              readOnly: true
-            - name: s6-run
-              mountPath: /var/run/s6
-            - name: logpodpath
-              mountPath: /var/log/pods
-            ## Docker runtime directory, replace this path with your container runtime
-            ## logs directory, or remove this configuration if `/var/log/pods`
-            ## is not a symlink to any other directory.
-            - name: logcontainerpath
-              mountPath: /var/lib/docker/containers
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 5555
-            initialDelaySeconds: 15
-            periodSeconds: 15
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
+          - name: dockersocket
+            mountPath: /var/run/docker.sock
+          - name: procdir
+            mountPath: /host/proc
+            readOnly: true
+          - name: cgroups
+            mountPath: /host/sys/fs/cgroup
+            readOnly: true
+
+          ## Log collection ##
+          - name: pointdir
+            mountPath: /opt/datadog-agent/run
+          - name: dockersocketdir
+            mountPath: /host/var/run
+          - name: logpodpath
+            mountPath: /var/log/pods
+            # Docker runtime directory, replace this path with your container runtime logs directory,
+            # or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+          - name: logcontainerpath
+            mountPath: /var/lib/docker/containers
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5555
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+
       volumes:
-        - name: dockersocketdir
-          hostPath:
-            path: /var/run
-        - name: procdir
-          hostPath:
+        - hostPath:
+            path: /var/run/docker.sock
+          name: dockersocket
+        - hostPath:
             path: /proc
-        - name: cgroups
-          hostPath:
+          name: procdir
+        - hostPath:
             path: /sys/fs/cgroup
-        - name: s6-run
-          emptyDir: {}
-        - name: logpodpath
-          hostPath:
+          name: cgroups
+
+        # Log collection  #
+        - hostPath:
+            path: /opt/datadog-agent/run
+          name: pointdir
+        - hostPath:
+            path: /var/run
+          name: dockersocketdir
+        - hostPath:
             path: /var/log/pods
-        ## Docker runtime directory, replace this path with your container runtime
-        ## logs directory, or remove this configuration if `/var/log/pods`
-        ## is not a symlink to any other directory.
-        - name: logcontainerpath
-          hostPath:
+          name: logpodpath
+        # Docker runtime directory, replace this path with your container runtime logs directory,
+        # or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+        - hostPath:
             path: /var/lib/docker/containers
+          name: logcontainerpath

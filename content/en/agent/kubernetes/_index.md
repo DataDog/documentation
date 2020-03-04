@@ -51,7 +51,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of the following templates:
 
     - [Template with all Datadog features enabled][4].
-    - [Template with the minimum required configuration][5] with just [Metric collection][6] and [Autodiscovery][7] enabled. See the [Enable capabilities section](#enable-capabilities) below to discover how to collect your logs, traces, processes information individually.
+    - [Template with the minimum required configuration][5] with just [Metric collection][6] and [Autodiscovery][7] enabled. Refere to the logs, traces, processes, integrations documentation page to learn how to enable each one individually.
 
 4. Optional - **Set your Datadog site**. If you are on Datadog EU site set the `DD_SITE` environment variable to `datadoghq.eu`
 
