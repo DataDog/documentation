@@ -130,13 +130,13 @@ Here is a simple getting started to collect metrics exposed by your Prometheus r
 2. To launch Prometheus in a container, the command [from the prometheus documentation][7] is: `docker run -p 9090:9090 prom/prometheus`. In order to notify the Agent to query this container with the openmetrics check we need to add the following configuration:
 
     ```shell
-    -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='[  {"prometheus_url":"http://%%host%%:9090/metrics","namespace":"documentation_example_docker","metrics":[ {"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]}]'
+    -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='[  {"prometheus_url":"http://%%host%%:%%port%%/metrics","namespace":"documentation_example_docker","metrics":[ {"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]}]'
     ```
 
      To launch the prometheus container with the right annotations for autodiscovery to work run:
 
     ```shell
-    docker run -p 9090:9090 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com. datadoghq.ad.instances='[{"prometheus_url":"http://%%host%%:9090/metrics","namespace":"documentation_example_docker",  "metrics":[{"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]}]' prom/prometheus
+    docker run -p 9090:9090 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com. datadoghq.ad.instances='[{"prometheus_url":"http://%%host%%:%%port%%/metrics","namespace":"documentation_example_docker",  "metrics":[{"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]}]' prom/prometheus
     ```
 
 3. Go into your [Metric summary][8] page to see the collected metrics: `prometheus_target_interval_length_seconds*`
