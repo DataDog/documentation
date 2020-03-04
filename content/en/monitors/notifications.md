@@ -138,21 +138,9 @@ Use template variables to customize your monitor notifications. The built-in var
 | `{{last_triggered_at}}`       | The UTC date and time when the monitor last triggered.                       |
 | `{{last_triggered_at_epoch}}` | The UTC date and time when the monitor last triggered in epoch milliseconds. |
 
-#### Arithmetic
+#### Evaluation
 
-Template variables that return numerical values support arithmetic operations. To perform arithmetic on a template variable use `eval` syntax, for example:
-
-```text
-{{eval "<TEMPLATE_VARIABLE_NAME>+1-2*3/4"}}
-```
-
-Below is an example of subtracting 15 minutes from the `{{last_triggered_at_epoch}}`:
-
-```text
-{{eval "last_triggered_at_epoch-15*60*1000"}}
-```
-
-**Note**: The template variable and arithmetic expression must be wrapped in quotation marks (`"`).
+Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][12].
 
 ### Tag variables
 
@@ -397,3 +385,4 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [9]: /integrations/webhooks/#usage
 [10]: /events
 [11]: /monitors/faq/what-are-recovery-thresholds
+[12]: /monitors/guide/template-variable-evaluation
