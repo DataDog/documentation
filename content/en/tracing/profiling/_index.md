@@ -26,6 +26,8 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
     wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
     ```
 
+     **Note**: Profiling is available in the `dd-java-agent.jar` library in versions above 0.44.
+
 2. Update your service invocation to look like:
 
     ```text
