@@ -13,14 +13,14 @@ Datadog Profiling is in beta. Reach out to <a href="/help/">Datadog Support</a> 
 
 ## Setup
 
-Profiling libraries are shipped within the following tracing language library. Select your language below to learn how to enable profiling for your application:
+Profiling libraries are shipped within the following tracing language libraries. Select your language below to learn how to enable profiling for your application:
 
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported OpenJDK 11, Oracle Java 11, and Zulu Java 8. All JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
+The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11, Oracle Java 11, and Zulu Java 8. All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
-1. Download `dd-java-agent.jar`, which contains the Java Agent class files and add the `dd-trace-java` version your `pom.xml` or equivalent:
+1. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
 
     ```shell
     wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
@@ -47,7 +47,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 
 - Because profiles are sent directly to Datadog without using the Datadog Agent, you must pass a valid [Datadog API key][4].
 
-- Alternativelly to passing arguments, can use environment variable to set those paramters:
+- As an alternative to passing arguments, you can use environment variable to set those parameters:
 
 | Arguments                     | Environment variable      | Description                                       |
 | ----------------------------- | ------------------------- | ------------------------------------------------- |
@@ -88,16 +88,16 @@ The following measures are available:
 
 | Measure           | Definition                                                                                                                                                                           |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| CPU cores              | CPU load summed on all cores of the process. This means this can go above `100%` and the theoretical limit is `nCores` \* `100%`.                                                    |
+| CPU cores              | CPU load summed on all cores of the process. This metric can go above `100%`, and the theoretical limit is `nCores` \* `100%`.                                                    |
 | Memory Allocation | Memory allocation rate in `Bytes/s` over the course of the profile. This value can be above the maximum amount of RAM memory because it can be garbage collected during the profile. |
 
 ## Profile
 
-Click on one line to view a specific profile:
+Click on a line to view a specific profile:
 
 {{< img src="tracing/profiling/profile.png" alt="A specic profile">}}
 
-The profile header contains information associated with your profile, like: the service that generated it, or the environment and code version associated to it.
+The profile header contains information associated with your profile, like the service that generated it, or the environment and code version associated to it.
 
 Four tabs are below the profile header:
 
@@ -106,7 +106,7 @@ Four tabs are below the profile header:
 | Profiles     | Flame graph and summary table of the profile you are looking at. You can switch between multiple profile types (`CPU`, `Memory allocation`) |
 | Analysis     | A set of heuristics that suggest potential issues or areas of improvement in your code                                                      |
 | Metrics      | Profiling metrics coming from all profiles of the same service                                                                              |
-| Runtime Info | Text dump of all the Runtime properties                                                                                                     |
+| Runtime Info | Text dump of all the runtime properties                                                                                                     |
 
 **Note**: In the upper right corner of each profile, there are options to:
 
