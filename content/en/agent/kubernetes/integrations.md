@@ -10,14 +10,13 @@ further_reading:
   text: "Kubernetes Host Setup"
 ---
 
+To enable integrations, Datadog recommends to use annotations in the manifest of your application. This is called _Autodiscovery_. For more details, see the [Autodiscovery][1] section. If you can use Autodiscovery, follow the alternatives below:
+
 ## ConfigMap
 
-It is possible to leverage a ConfigMap to configure or enable integrations.
-To do so, you only need to create a ConfigMap with the integration(s)'s configuration.
-Then, reference this ConfigMap among the volumes of your Agent's manifest.
+It is possible to leverage a ConfigMap to configure or enable integrations. To do so, you only need to create a ConfigMap with the integration(s)'s configuration. Then, reference this ConfigMap among the volumes of your Agent's manifest.
 
-For example, in the following case we customize the name, url, and tags fields of the [HTTP check][1].
-To enable other integrations, just specify the correct YAML name and make sure it is properly formated.
+For example, in the following case we customize the name, url, and tags fields of the [HTTP check][2]. To enable other integrations, just specify the correct YAML name and make sure it is properly formated.
 
 ```yaml
 kind: ConfigMap
@@ -58,7 +57,7 @@ And in the manifest of your Agent (DaemonSet/deployment) add the following:
 [...]
 ```
 
-**Note**: See the [Autodiscovery Container Identifier][2] documentation for more information on using `ad_identifiers` to apply Autodiscovery configuration file templates to containers.
+**Note**: See the [Autodiscovery Container Identifier][3] documentation for more information on using `ad_identifiers` to apply Autodiscovery configuration file templates to containers.
 
 ### Mounting a custom configuration file in a container with a ConfigMap
 
@@ -111,13 +110,7 @@ data:
         polling: true
 ```
 
-## Annotations
-
-It is also possible to enable integrations via the annotations in the manifest of your application.
-This can be done with Autodiscovery. For more details, see the [Autodiscovery][3] section.
-
-
-### Enabling integrations with Helm
+### Integrations enablement with Helm
 
 The Datadog [entrypoint][4] copies files with a `.yaml` extension found in `/conf.d` and files with `.py` extension in `/check.d` to `/etc/datadog-agent/conf.d` and `/etc/datadog-agent/checks.d` respectively. The keys for `datadog.confd` and `datadog.checksd` should mirror the content found in their respective ConfigMaps, i.e.:
 
@@ -145,7 +138,7 @@ datadog:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/http_check
-[2]: /agent/autodiscovery/ad_identifiers
-[3]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
+[1]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
+[2]: /integrations/http_check
+[3]: /agent/autodiscovery/ad_identifiers
 [4]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/entrypoint/89-copy-customfiles.sh

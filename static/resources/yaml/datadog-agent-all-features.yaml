@@ -22,7 +22,9 @@ spec:
           name: datadog-agent
           ports:
 
+            ###############
             ## DogStatsD ##
+            ###############
             - containerPort: 8125
               ## Custom metrics via DogStatsD - uncomment this section to enable
               ## custom metrics collection.
@@ -31,7 +33,9 @@ spec:
               name: dogstatsdport
               protocol: UDP
 
+            #########
             ## APM ##
+            #########
             - containerPort: 8126
               ## Trace Collection (APM) - uncomment this section to enable APM
               # hostPort: 8126
@@ -58,7 +62,9 @@ spec:
             - name: DD_LEADER_ELECTION
               value: 'true'
 
+            #########
             ## APM ##
+            #########
             - name: DD_APM_ENABLED
               value: 'true'
             - name: DD_APM_NON_LOCAL_TRAFFIC
@@ -68,18 +74,33 @@ spec:
                 fieldRef:
                   fieldPath: status.hostIP
 
+            ####################
             ## Log collection ##
+            ####################
             - name: DD_LOGS_ENABLED
               value: "true"
             - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
               value: "true"
             - name: DD_AC_EXCLUDE
               value: "name:datadog-agent"
-            - name: DD_CRI_SOCKET_PATH
-              value: /host/var/run/docker.sock
-            - name: DOCKER_HOST
-              value: unix:///host/var/run/docker.sock
 
+            ########################
+            ## Process collection ##
+            ########################
+            - name: DD_PROCESS_AGENT_ENABLED
+              value: "true"
+
+
+            ##################################
+            # Network Performance Monitoring #
+            ##################################
+
+            - name: DD_SYSTEM_PROBE_ENABLED
+              value: 'true'
+            - name: DD_SYSTEM_PROBE_EXTERNAL
+              value: 'true'
+            - name: DD_SYSPROBE_SOCKET
+              value: /var/run/s6/sysprobe.sock
 
           ## Note these are the minimum suggested values for requests and limits.
           ## The amount of resources required by the Agent varies depending on:
@@ -93,6 +114,8 @@ spec:
             limits:
               memory: 256Mi
               cpu: 200m
+
+
           volumeMounts:
           - name: dockersocket
             mountPath: /var/run/docker.sock
@@ -103,17 +126,30 @@ spec:
             mountPath: /host/sys/fs/cgroup
             readOnly: true
 
+          ####################
           ## Log collection ##
+          ####################
           - name: pointdir
             mountPath: /opt/datadog-agent/run
-          - name: dockersocketdir
-            mountPath: /host/var/run
           - name: logpodpath
             mountPath: /var/log/pods
             # Docker runtime directory, replace this path with your container runtime logs directory,
             # or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
           - name: logcontainerpath
             mountPath: /var/lib/docker/containers
+
+          ########################
+          ## Process collection ##
+          ########################
+          - name: passwd
+            mountPath: /etc/passwd
+            readOnly: true
+
+          ##################################
+          # Network Performance Monitoring #
+          ##################################
+          - name: debugfs
+            mountPath: /sys/kernel/debug
 
         livenessProbe:
           httpGet:
@@ -136,13 +172,12 @@ spec:
             path: /sys/fs/cgroup
           name: cgroups
 
-        # Log collection  #
+        #####################
+        ## Log collection  ##
+        #####################
         - hostPath:
             path: /opt/datadog-agent/run
           name: pointdir
-        - hostPath:
-            path: /var/run
-          name: dockersocketdir
         - hostPath:
             path: /var/log/pods
           name: logpodpath
@@ -151,3 +186,10 @@ spec:
         - hostPath:
             path: /var/lib/docker/containers
           name: logcontainerpath
+
+        ########################
+        ## Process collection ##
+        ########################
+        - hostPath:
+            path: /etc/passwd
+          name: passwd

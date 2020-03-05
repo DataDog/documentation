@@ -14,7 +14,10 @@ aliases:
 further_reading:
 - link: "agent/kubernetes/metrics"
   tag: "documentation"
-  text: "Kubernetes Metrics"
+  text: "Metrics collected by the Agent"
+- link: "agent/autodiscovery"
+  tag: "documentation"
+  text: "Autodiscovery with the Agent"
 ---
 
 ## Installation
@@ -50,10 +53,10 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of the following templates:
 
-    - [Template with all Datadog features enabled][4].
-    - [Template with the minimum required configuration][5] with just [Metric collection][6] and [Autodiscovery][7] enabled. Refere to the logs, traces, processes, integrations documentation page to learn how to enable each one individually.
+    - [Template with **ALL** Datadog features enabled][4].
+    - [Template with the minimum required configuration][5] with just [Metric collection][6] and [Autodiscovery][7] enabled. Refere to the [logs][8], [traces][9], [processes][10], integrations documentation page to learn how to enable each one individually.
 
-4. Optional - **Set your Datadog site**. If you are on Datadog EU site set the `DD_SITE` environment variable to `datadoghq.eu`
+4. Optional - **Set your Datadog site**. If you are on Datadog EU site set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
 
 5. **Deploy the DaemonSet** with the command:
 
@@ -82,6 +85,9 @@ To install the Datadog Agent on your Kubernetes cluster:
 [5]: /resources/yaml/datadog-agent-vanilla.yaml
 [6]: /agent/kubernetes/metrics
 [7]: /agent/autodiscovery
+[8]: /agent/kubernetes/logs
+[9]: /agent/kubernetes/apm
+[10]: /infrastructure/process/?tab=kubernetes#installation
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -121,7 +127,6 @@ As a best practice, a YAML file that specifies the values for the chart paramete
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog --recreate-pods
 ```
 
-
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [3]: https://github.com/helm/charts/tree/master/stable/datadog#configuration
@@ -130,13 +135,13 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog --recreate-pod
 {{% /tab %}}
 {{< /tabs >}}
 
-## Custom Integrations
+## Integrations
 
-For details on the usage of ConfigMaps in Kubernetes, consult [Datadog's Kubernetes Custom Integrations documentation][2].
+Once the Agent is up and running in your cluster use [Datadog Autodiscovery feature][2] to collect, metrics and logs automatically from your pods.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/kubernetes-legacy
-[2]: /agent/kubernetes/integrations
+[2]: /agent/autodiscovery

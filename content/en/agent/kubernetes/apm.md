@@ -9,106 +9,93 @@ further_reading:
   text: "Kubernetes Metrics"
 ---
 
-To enable APM by allowing incoming data from port 8126, set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
+## Configure the Agent
 
-```text
-(...)
-      env:
-        (...)
-        - name: DD_APM_NON_LOCAL_TRAFFIC
-          value: "true"
-(...)
-```
+{{< tabs >}}
+{{% tab "Daemonset" %}}
 
-Then, forward the port of the Agent to the host.
+To enable APM trace collection in kubernetes:
 
-```text
-(...)
-      ports:
-        (...)
-        - containerPort: 8126
-          hostPort: 8126
-          name: traceport
-          protocol: TCP
-(...)
-```
+1. Allow incoming data from port `8126` and set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
 
-Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. The Datadog container Agent expects this to be named `DD_AGENT_HOST`:
+    ```yaml
+     # (...)
+          env:
+            # (...)
+            - name: DD_APM_NON_LOCAL_TRAFFIC
+              value: "true"
+     # (...)
+    ```
 
-```text
-apiVersion: apps/v1
-kind: Deployment
-...
-    spec:
-      containers:
-      - name: <CONTAINER_NAME>
-        image: <CONTAINER_IMAGE>/<TAG>
-        env:
-          - name: DD_AGENT_HOST
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP
-```
+2. Forward the port of the Agent to the host.
 
-Finally, point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. For example, in Python:
+    ```yaml
+     # (...)
+          ports:
+            # (...)
+            - containerPort: 8126
+              hostPort: 8126
+              name: traceport
+              protocol: TCP
+     # (...)
+    ```
 
-```python
-import os
-from ddtrace import tracer
+     Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. The Datadog container Agent expects this to be named `DD_AGENT_HOST`:
 
-tracer.configure(
-    hostname=os.environ['DD_AGENT_HOST'],
-    port=os.environ['DD_TRACE_AGENT_PORT'],
-)
-```
-
-Refer to the [language-specific APM instrumentation docs][1] for more examples.
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    ...
+        spec:
+          containers:
+          - name: "<CONTAINER_NAME>"
+            image: "<CONTAINER_IMAGE>"/"<TAG>"
+            env:
+              - name: DD_AGENT_HOST
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.hostIP
+    ```
 
 **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
-
-
-### Enable APM and Distributed Tracing
+{{% /tab %}}
+{{% tab "Helm" %}}
 
 **Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
 
-Update your [datadog-values.yaml][2] file with the following APM configuration:
+1. Update your [datadog-values.yaml][2] file with the following APM configuration:
 
-```text
-datadog:
-  (...)
-  apm:
-   enabled: true
-```
+    ```yaml
+    datadog:
+      # (...)
+      apm:
+       enabled: true
+    ```
 
-Update the `env` section of your application's manifest with the following:
+2. Update the `env` section of your application's manifest with the following:
 
-```yaml
-env:
-  - name: DD_AGENT_HOST
-    valueFrom:
-      fieldRef:
-        fieldPath: status.hostIP
-```
+    ```yaml
+    env:
+      - name: DD_AGENT_HOST
+        valueFrom:
+          fieldRef:
+            fieldPath: status.hostIP
+    ```
 
-Then upgrade your Datadog Helm chart.
+3. Then upgrade your Datadog Helm chart.
 
-Finally, point your application-level tracers to the host IP using the environment variable `DD_AGENT_HOST`. For example, in Python:
+{{% /tab %}}
+{{< /tabs >}}
 
-```python
-import os
-from ddtrace import tracer
+## Configure Datadog tracers
 
-tracer.configure(
-    hostname=os.environ['DD_AGENT_HOST'],
-    port=os.environ['DD_TRACE_AGENT_PORT'],
-)
-```
+Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`.
 
 Refer to the [language-specific APM instrumentation docs][1] for more examples.
 
-
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}[1]: /tracing/setup
-[2]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tracing/setup
