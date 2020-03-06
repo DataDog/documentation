@@ -6,7 +6,7 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - 処理
-  - データストア
+  - data store
 creates_events: false
 ddtype: check
 dependencies:

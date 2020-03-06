@@ -256,7 +256,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [9]: /integrations/logstash/#log-collection
 [10]: /logs/processing
 [11]: /logs/processing/parsing
-[12]: /logs/explorer/?tab=facets#setup
+[12]: /logs/explorer/facets
 [13]: /agent/docker/log
 [14]: /agent/autodiscovery/management
 [15]: /agent/autodiscovery/integrations

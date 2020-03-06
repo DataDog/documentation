@@ -7,7 +7,7 @@ aliases:
 ---
 ## はじめに
 
-APM は、Linux および Docker の Agent 用のワンラインインストーラーの一環として Datadog Agent バージョン 5.11 以降でご利用可能です。[Mac][1] ユーザーおよび [Windows][2] ユーザーは、別のインストールプロセスにより APM Agent (aka トレース Agent) を手動でインストールする必要があります。
+APM は、Linux および Docker の Agent 用のワンラインインストーラーの一環として Datadog Agent バージョン 5.11 以降でご利用可能です。[Mac][1] ユーザーおよび [Windows][2] ユーザーは、別のインストールプロセスにより APM Agent (トレース Agent) を手動でインストールする必要があります。
 
 Agent は、[Datadog Agent コンフィギュレーションファイル][3]に次のパラメーターを記述することで有効化できます。
 
@@ -27,7 +27,7 @@ APM は、Datadog Agent 5.13 以降 (Linux および Docker の場合) ではデ
 
 ### Docker で Agent を実行する
 
-Docker コンテナでアプリケーションをトレースするには、[docker-dd-agent][6] イメージ (バージョン 11.0.5110 以降でタグ付け) を使用し、 `DD_APM_ENABLED=true` を環境変数として渡すことでトレーシングを有効化します。
+Docker コンテナでアプリケーションをトレースするには、[docker-dd-agent][6] イメージ (バージョン 11.0.5110 以降でタグ付け) を使用し、`DD_APM_ENABLED=true` を環境変数として渡してトレーシングを有効化します。
 
 詳細情報については、[Docker ページ][7]を参照してください。
 

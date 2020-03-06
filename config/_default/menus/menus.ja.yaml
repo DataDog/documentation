@@ -752,11 +752,68 @@ main:
   - name: ログとトレースの接続
     url: tracing/connect_logs_and_traces/
     parent: tracing
+    identifier: tracing_connect_logs_and_traces
     weight: 4
+  - name: Java
+    url: tracing/connect_logs_and_traces/java
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_java
+    weight: 401
+  - name: Python
+    url: tracing/connect_logs_and_traces/python
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_python
+    weight: 402
+  - name: Go
+    url: tracing/connect_logs_and_traces/go
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_go
+    weight: 403
+  - name: Ruby
+    url: tracing/connect_logs_and_traces/ruby
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_ruby
+    weight: 404
+  - name: PHP
+    url: tracing/connect_logs_and_traces/php
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_php
+    weight: 405
+  - name: NodeJS
+    url: tracing/connect_logs_and_traces/nodejs
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_nodejs
+    weight: 406
+  - name: .NET
+    url: tracing/connect_logs_and_traces/dotnet
+    parent: tracing_connect_logs_and_traces
+    identifier: tracing_connect_logs_and_traces_dotnet
+    weight: 407
   - name: ランタイムメトリクス
     url: tracing/runtime_metrics/
     parent: tracing
+    identifier: tracing_runtime_metrics
     weight: 5
+  - name: Java
+    url: tracing/runtime_metrics/java
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_java
+    weight: 501
+  - name: Python
+    url: tracing/runtime_metrics/python
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_python
+    weight: 502
+  - name: Ruby
+    url: tracing/runtime_metrics/ruby
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_ruby
+    weight: 503
+  - name: NodeJS
+    url: tracing/runtime_metrics/nodejs
+    parent: tracing_runtime_metrics
+    identifier: tracing_runtime_metrics_nodejs
+    weight: 504
   - name: 手動インスツルメンテーション
     url: tracing/manual_instrumentation/
     parent: tracing
@@ -999,14 +1056,18 @@ main:
     url: logs/explorer/analytics/
     parent: log_explorer
     weight: 702
-  - name: 保存ビュー
-    url: logs/explorer/saved_views/
-    parent: log_explorer
-    weight: 703
   - name: ログパターン
     url: logs/explorer/patterns/
     parent: log_explorer
+    weight: 703
+  - name: 保存ビュー
+    url: logs/explorer/saved_views/
+    parent: log_explorer
     weight: 704
+  - name: ファセット
+    url: logs/explorer/facets/
+    parent: log_explorer
+    weight: 705
   - name: ログとトレースの接続
     url: tracing/connect_logs_and_traces/?tab=java
     parent: log_management
@@ -1091,11 +1152,15 @@ main:
     url: synthetics/settings/
     parent: synthetics
     weight: 6
+  - name: ガイド
+    url: synthetics/guide/
+    parent: synthetics
+    weight: 7
   - name: トラブルシューティング
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 7
+    weight: 8
   - name: リアルユーザーモニタリング
     url: real_user_monitoring/
     pre: nav_rum

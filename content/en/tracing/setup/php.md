@@ -235,6 +235,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_DEBUG`                          | `false`     | Enable [debug mode](#custom-url-to-resource-mapping) for the tracer                                                                            |
 | `DD_TRACE_ENABLED`                        | `true`      | Enable the tracer globally                                                                                                                     |
 | `DD_TRACE_GLOBAL_TAGS`                    | `none`      | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                                                                                   |
+| `DD_TRACE_MEASURE_COMPILE_TIME`           | `true`      | Record the compile time of the request (in milliseconds) onto the top-level span                                                               |
 | `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable auto instrumentation for applications that do not use an autoloader                                                    |
 | `DD_TRACE_REPORT_HOSTNAME`                | `false`     | Enable hostname reporting on the root span                                                                                                     |
 | `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"](#custom-url-to-resource-mapping) |

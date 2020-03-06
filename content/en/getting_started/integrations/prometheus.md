@@ -69,7 +69,7 @@ The Agent detects if it's running on Docker and automatically searches all conta
 ```text
 LABEL "com.datadoghq.ad.check_names"='["openmetrics"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
+LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[{\"<PROMETHEUS_METRIC_TO_FETCH>\": \"<DATADOG_NEW_METRIC_NAME>\"}]}"]'
 ```
 
 **docker-compose.yaml**:
@@ -78,13 +78,13 @@ LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PRO
 labels:
     com.datadoghq.ad.check_names: '["openmetrics"]'
     com.datadoghq.ad.init_configs: '[{}]'
-    com.datadoghq.ad.instances: '["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
+    com.datadoghq.ad.instances: '["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[{\"<PROMETHEUS_METRIC_TO_FETCH>\": \"<DATADOG_NEW_METRIC_NAME>\"}]}"]'
 ```
 
 **docker run command**:
 
 ```text
--l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[\"<PROMETHEUS_METRIC_TO_FETCH>: <DATADOG_NEW_METRIC_NAME>\"]}"]'
+-l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[{\"<PROMETHEUS_METRIC_TO_FETCH>\": \"<DATADOG_NEW_METRIC_NAME>\"}]}"]'
 ```
 
 {{% /tab %}}
@@ -144,7 +144,7 @@ Find below the full list of parameters that can be used for your `instances`:
 | `tags`                                  | list of key:value element               | optional  | none          | List of tags to attach to every metric, event, and service check emitted by this integration.<br> [Learn more about tagging][5].                                                                                                                                     |
 | `send_distribution_buckets`             | boolean                                 | optional  | false         | Set `send_distribution_buckets` to `true` to send and convert OpenMetrics histograms to [Distribution metrics][8]. <br>`send_histograms_buckets` must be set to `true` (default value).                                                                              |
 | `send_distribution_counts_as_monotonic` | boolean                                 | optional  | false         | Set `send_distribution_counts_as_monotonic` to `true` to send OpenMetrics histogram/summary counts as monotonic counters.                                                                                                                                            |
-| `send_histogram_buckets`                | boolean                                 | optional  | true          | Set `send_histograms_buckets` to `true` to send the histograms bucket.                                                                                                                                                                                               |
+| `send_histograms_buckets`                | boolean                                 | optional  | true          | Set `send_histograms_buckets` to `true` to send the histograms bucket.                                                                                                                                                                                               |
 | `send_monotonic_counter`                | boolean                                 | optional  | true          | To send counters as monotonic counter see [the relevant issue][9] in GitHub.                                                                                                                                                                                         |
 | `exclude_labels`                        | list of string                          | optional  | none          | List of labels to be excluded.                                                                                                                                                                                                                                       |
 | `ssl_cert`                              | string                                  | optional  | none          | If your Prometheus endpoint is secured, here are the settings to configure it:<br> Can either be: only the path to the certificate and thus you should specify the private key, or it can be the path to a file containing both the certificate and the private key. |

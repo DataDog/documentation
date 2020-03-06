@@ -16,7 +16,7 @@ further_reading:
   text: "Collect your traces"
 ---
 
-{{< img src="watchdog/watchdog_page.png" alt="Watchdog page" responsive="true" >}}
+{{< img src="watchdog/watchdog_page.png" alt="Watchdog page"  >}}
 
 ## Overview
 
@@ -60,7 +60,7 @@ To see archived stories, select the checkbox option to "Show N archived stories"
 
 Monitors associated with your stories are displayed at the bottom. Each monitor displayed has the metric of the current story and its associated tags included in its scope.
 
-{{< img src="watchdog/watchdog_monitors.png" alt="Watchdog monitors" responsive="true" style="width:75%;">}}
+{{< img src="watchdog/watchdog_monitors.png" alt="Watchdog monitors"  style="width:75%;">}}
 
 Additionally, Watchdog suggests one or more monitors that are configured to trigger if the story happens again. Click the **Enable Monitor** button to enable them for your organization. See the [Watchdog monitor documentation][11] to learn how to create a Watchdog monitor.
 

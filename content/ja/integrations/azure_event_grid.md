@@ -2,9 +2,9 @@
 aliases:
   - /ja/integrations/azure_eventgrid
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Event Grid のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_event_grid/'
@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Event Grid
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_event_grid
 public_title: Datadog-Microsoft Azure Event Grid インテグレーション
 short_description: Azure Event Grid のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

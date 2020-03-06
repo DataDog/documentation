@@ -74,6 +74,12 @@ aside.sidenav {
     font-size:24px;
     font-weight:200;
     text-transform: capitalize !important;
+
+    &:lang(ja) {
+      font-size: 20px;
+      font-weight: 200;
+      line-height: 37px;
+    }
   }
 
   .sidenav-search {
@@ -190,6 +196,16 @@ aside.sidenav {
           }
           img {
             margin-top:4px;
+            &:lang(ja) {
+              margin-top:0px;
+            }
+          }
+
+          &:lang(ja) {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 24px;
           }
         }
 
@@ -199,6 +215,12 @@ aside.sidenav {
             margin-left:5px;
             font-weight:200;
             line-height:24px;
+            &:lang(ja) {
+              font-style: normal;
+              font-weight: 300;
+              font-size: 14px;
+              line-height: 22px;
+            }
           }
 
           // 3rd level
@@ -206,6 +228,10 @@ aside.sidenav {
             margin-left:5px;
             font-size:15px;
             line-height:22px;
+            &:lang(ja) {
+              font-size: 11px;
+              line-height: 22px;
+            }
           }
         }
       }

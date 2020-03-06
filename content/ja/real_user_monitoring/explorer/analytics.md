@@ -29,7 +29,7 @@ further_reading:
 
 1. グラフ化する[メジャー][1]または[ファセット][2]を選択します。[メジャー][1]を選ぶと、集計関数を選択できます。[ファセット][2]を選ぶと、ユニーク数が表示されます。
 
-    {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="メジャーを選択" responsive="true" style="width:50%;">}}
+    {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="メジャーを選択"  style="width:50%;">}}
 2. グラフ化する[メジャー][1]の集計関数を選択します。
 
     {{< img src="real_user_monitoring/explorer/analytics/aggregation.png" alt="RUM 分析の集計関数" style="width:50%;">}}

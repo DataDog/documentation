@@ -2,9 +2,9 @@
 aliases:
   - /ja/integrations/azure_apimanagement
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure API Management のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_api_management/'
@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure API Management
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_api_management
 public_title: Datadog-Microsoft Azure API Management インテグレーション
 short_description: Azure API Management のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

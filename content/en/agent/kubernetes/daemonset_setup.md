@@ -20,7 +20,7 @@ Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or o
 
 *If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][2] as a deployment on each Kubernetes node.*
 
-## Configure RBAC permissions
+## Configure Agent permissions
 
 If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account. From Kubernetes 1.6 onwards, RBAC is enabled by default.
 
@@ -427,7 +427,7 @@ The workaround in this case is to add `hostNetwork: true` in your Agent pod spec
 [8]: /agent/docker/#environment-variables
 [9]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
 [10]: /integrations/amazon_ec2/#configuration
-[11]: https://github.com/helm/charts/blob/2d905afa38f59b73e1043252022dfc934aff588d/stable/datadog/values.yaml#L72
+[11]: https://github.com/helm/charts/blob/a744ff8c90730d6d36698412150875fa96882b9d/stable/datadog/values.yaml#L58
 [12]: /logs
 [13]: /agent/autodiscovery/integrations/?tab=kubernetes
 [14]: /tracing/setup
