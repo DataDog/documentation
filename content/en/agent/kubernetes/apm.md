@@ -20,12 +20,14 @@ To setup APM trace collection in a kubernetes cluster you need to:
 
 To enable APM trace collection in kubernetes:
 
-- Allow incoming data from port `8126` and set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
+- Allow incoming data from port `8126` and set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section:
 
     ```yaml
      # (...)
           env:
             # (...)
+            - name: DD_APM_ENABLED
+              value: 'true'
             - name: DD_APM_NON_LOCAL_TRAFFIC
               value: "true"
      # (...)

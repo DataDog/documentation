@@ -64,6 +64,10 @@ spec:
               value: 'true'
             - name: DD_LEADER_ELECTION
               value: 'true'
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
 
             ###############
             ## DogStatsD ##
@@ -78,10 +82,6 @@ spec:
               value: 'true'
             - name: DD_APM_NON_LOCAL_TRAFFIC
               value: 'true'
-            - name: DD_KUBERNETES_KUBELET_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
 
             ####################
             ## Log collection ##

@@ -53,6 +53,10 @@ spec:
               value: 'true'
             - name: DD_LEADER_ELECTION
               value: 'true'
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
 
             #########
             ## APM ##
@@ -61,10 +65,6 @@ spec:
               value: 'true'
             - name: DD_APM_NON_LOCAL_TRAFFIC
               value: 'true'
-            - name: DD_KUBERNETES_KUBELET_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
 
           ## Note these are the minimum suggested values for requests and limits.
           ## The amount of resources required by the Agent varies depending on:
