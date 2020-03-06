@@ -1,13 +1,13 @@
 ---
 title: AWS S3 Buckets Enumerated
 kind: documentation
+type: security_rules
 parent: cloudtrail
-tags:
-- security:attack
-- tactic:TA0007-discovery
-- technique:T1083-file-and-directory-discovery
-- service:s3.amazonaws.com
-- source:cloudtrail
+security: attack
+tactic: TA0007-discovery
+technique: T1083-file-and-directory-discovery
+service: s3.amazonaws.com
+source: cloudtrail
 meta_image: /images/integrations_logos/amazon_cloudtrail.png
 ---
 ## **Goal:**

@@ -1,12 +1,12 @@
 ---
 title: AWS EC2 Instance Involved in Brute Force Attack
 kind: documentation
+type: security_rules
 parent: guardduty
-tags:
-- security:attack
-- tactic:TA0006-credential-access
-- technique:T1110-brute-force
-- source:guardduty
+security: attack
+tactic: TA0006-credential-access
+technique: T1110-brute-force
+source: guardduty
 meta_image: /images/integrations_logos/amazon_guardduty.png
 ---
 ## **Goal:**

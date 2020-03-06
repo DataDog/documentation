@@ -1,11 +1,11 @@
 ---
 title: AWS EBS Default Encryption Disabled
 kind: documentation
+type: security_rules
 parent: cloudtrail
-tags:
-- security:compliance
-- service:ec2.amazonaws.com
-- source:cloudtrail
+security: compliance
+service: ec2.amazonaws.com
+source: cloudtrail
 meta_image: /images/integrations_logos/amazon_cloudtrail.png
 ---
 ## **Goal:**

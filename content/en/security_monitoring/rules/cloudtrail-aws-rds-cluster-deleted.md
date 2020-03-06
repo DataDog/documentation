@@ -1,13 +1,13 @@
 ---
 title: AWS RDS Cluster Deleted
 kind: documentation
+type: security_rules
 parent: cloudtrail
-tags:
-- security:attack
-- tactic:TA0040-impact
-- technique:T1485-data-destruction
-- service:rds.amazonaws.com
-- source:cloudtrail
+security: attack
+tactic: TA0040-impact
+technique: T1485-data-destruction
+service: rds.amazonaws.com
+source: cloudtrail
 meta_image: /images/integrations_logos/amazon_cloudtrail.png
 ---
 ## **Goal:**

@@ -1,11 +1,11 @@
 ---
 title: AWS S3 Public Access Block Removed
 kind: documentation
+type: security_rules
 parent: cloudtrail
-tags:
-- security:compliance
-- service:s3.amazonaws.com
-- source:cloudtrail
+security: compliance
+service: s3.amazonaws.com
+source: cloudtrail
 meta_image: /images/integrations_logos/amazon_cloudtrail.png
 ---
 ## **Goal:**

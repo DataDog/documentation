@@ -1,13 +1,13 @@
 ---
 title: AWS FlowLogs Removed
 kind: documentation
+type: security_rules
 parent: cloudtrail
-tags:
-- security:attack
-- tactic:TA0005-defense-evasion
-- technique:T1066-indicator-removal-from-tools
-- service:ec2.amazonaws.com
-- source:cloudtrail
+security: attack
+tactic: TA0005-defense-evasion
+technique: T1066-indicator-removal-from-tools
+service: ec2.amazonaws.com
+source: cloudtrail
 meta_image: /images/integrations_logos/amazon_cloudtrail.png
 ---
 ## **Goal:**
