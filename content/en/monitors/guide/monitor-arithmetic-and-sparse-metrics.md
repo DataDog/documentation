@@ -132,7 +132,7 @@ It is possible to have timing issues in monitors with division over short evalua
 
 In the case of a query like `min(last_1m):sum:my_num{*}/sum:my_denom{*}`, the minimum value could be skewed and could trigger your monitor unintentionally.
 
-Therefore, adding a short evaluation delay of 30-60 seconds to adjust for timing issues should be considered for queries with divison over short evaluation windows. Alternatively, changing to a 5 minute evaluation window can help.
+Therefore, adding a short evaluation delay of 30-60 seconds to adjust for timing issues should be considered for queries with divison over short evaluation windows. Alternatively, changing to a five minute evaluation window can help.
 
 [Reach out to the Datadog support team][1] if you have any questions regarding this logic.
 
