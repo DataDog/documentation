@@ -24,6 +24,7 @@ Monitor CloudTrail and detect when CloudTrail is being disabled via one of the f
 2. Contact the user and see if this was an API call which was made by the user.
 3. If the API call was not made by the user:
  * Rotate the user credentials and investigate what other API calls.
- * Determine what other API calls the user made which were not made by the user.[1]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_DeleteTrail.html
+ * Determine what other API calls the user made which were not made by the user.
+[1]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_DeleteTrail.html
 [2]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_UpdateTrail.html
 [3]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_StopLogging.html
