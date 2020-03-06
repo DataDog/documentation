@@ -218,7 +218,10 @@ List of all available parameters for log collection:
 
 ## Send logs over HTTPS
 
-**Compressed HTTPS log forwarding is the recommended configuration**
+**Compressed HTTPS log forwarding is the recommended configuration** because a 200 response is returned if only if the logs have been written in the Datadog storage:
+
+{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema"  style="width:80%;">}}
+
 
 ```yaml
 logs_enabled: true
