@@ -110,7 +110,7 @@ spec:
             ## Log collection ##
             ####################
             - name: pointdir
-              mountPath: /opt/datadog-agent/run
+              mountPath: /var/lib/datadog-agent/logs
             - name: logpodpath
               mountPath: /var/log/pods
 
@@ -143,7 +143,7 @@ spec:
         ## Log collection  ##
         #####################
         - hostPath:
-            path: /opt/datadog-agent/run
+            path: /opt/datadog-agent/run:rw
           name: pointdir
         - hostPath:
             path: /var/log/pods
