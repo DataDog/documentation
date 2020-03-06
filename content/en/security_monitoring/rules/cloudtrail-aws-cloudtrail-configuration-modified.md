@@ -7,7 +7,7 @@ tags:
   - security: attack
     tactic: TA0005-defense-evasion
     technique: T1089-disabling-security-tools
-    ervice: cloudtrail.amazonaws.com
+    service: cloudtrail.amazonaws.com
     source: cloudtrail
 meta_image: /images/integrations_logos/amazon_cloudtrail.png
 ---

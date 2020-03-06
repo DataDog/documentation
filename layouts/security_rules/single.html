@@ -5,21 +5,7 @@
 	<h1 id="pagetitle">{{ .Title }}</h1>
 	{{ partial "translate_status_banner/translate_status_banner.html" . }}
 
-	<div class="rule-specification row align-items-center mb-3">
-		<div class="col-3 col-lg-2 d-flex justify-content-center">
-			<img src="{{ .Params.meta_image }}?fit=auto&width=120" width="120" />
-		</div>
-		<div class="col-9 col-lg-10">
-			<div class="row">
-				<div class="col-4 col-md-4 col-lg-3"><p class="font-weight-bold small">Classification: </p></div>
-				<div class="col-8 col-md-8 col-lg-7"><p class="small">{{ (index .Params.tags 0).security }}</p></div>
-				<div class="col-4 col-md-4 col-lg-3"><p class="font-weight-bold small">Tactic: </p></div>
-				<div class="col-8 col-md-8 col-lg-7"><p class="small">{{ (index .Params.tags 0).tactic }}</p></div>
-				<div class="col-4 col-md-4 col-lg-3"><p class="font-weight-bold small">Technique: </p></div>
-				<div class="col-8 col-md-8 col-lg-7"><p class="small">{{ (index .Params.tags 0).technique }}</p></div>
-			</div>
-		</div>
-	</div>
+
 
   {{ .Content }}
 
