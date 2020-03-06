@@ -1,13 +1,13 @@
 ---
-title: Get hourly usage for Trace Search
+title: Get hourly usage for Network Hosts
 type: apicontent
-order: 35.6
-external_redirect: /api/#get-hourly-usage-for-trace-search
+order: 35.92
+external_redirect: /api/#get-hourly-usage-for-network-hosts
 ---
 
-## Get hourly usage for Trace Search
+## Get hourly usage for Network Hosts
 
-Get hourly usage For Trace Search.
+Get Hourly Usage For Network Hosts.
 
 **ARGUMENTS**:
 
@@ -18,7 +18,7 @@ Get hourly usage For Trace Search.
 
 **RESPONSE**:
 
-* **`indexed_events_count`**:
-    Contains the number of Analyzed Spans indexed.
+* **`host_count`**:
+	Contains the number of NPM hosts active.
 * **`hour`**:
     The hour for the usage.

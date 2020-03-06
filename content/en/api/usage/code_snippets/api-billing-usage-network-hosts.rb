@@ -9,4 +9,4 @@ dog = Dogapi::Client.new(api_key, app_key)
 start_date= '2019-10-07T00'
 end_date='2019-10-07T02'
 
-dog.get_synthetics_api_usage(start_date, end_date)
+dog.get_network_hosts_usage(start_date, end_date)

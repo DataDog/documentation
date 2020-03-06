@@ -1,13 +1,13 @@
 ---
-title: Get hourly usage for Trace Search
+title: Get hourly usage for Lambda
 type: apicontent
-order: 35.6
-external_redirect: /api/#get-hourly-usage-for-trace-search
+order: 35.91
+external_redirect: /api/#get-hourly-usage-for-lambda
 ---
 
-## Get hourly usage for Trace Search
+## Get hourly usage for Lambda
 
-Get hourly usage For Trace Search.
+Get Hourly Usage For Lambda.
 
 **ARGUMENTS**:
 
@@ -18,7 +18,9 @@ Get hourly usage For Trace Search.
 
 **RESPONSE**:
 
-* **`indexed_events_count`**:
-    Contains the number of Analyzed Spans indexed.
+* **`func_count`**:
+	Contains the number of different functions for each region and AWS account.
+* **`invocations_sum`**:
+	Contains the sum of invocations of all functions.
 * **`hour`**:
     The hour for the usage.

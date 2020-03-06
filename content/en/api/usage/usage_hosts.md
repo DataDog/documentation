@@ -12,9 +12,9 @@ Get Hourly Usage For Hosts and Containers.
 **ARGUMENTS**:
 
 * **`start_hr`** [*required*]:
-    Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour
+    Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
 * **`end_hr`** [*optional*, *default*=**1d+start_hr**]:
-    Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour
+    Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour.
 
 **RESPONSE**:
 
@@ -34,3 +34,9 @@ Get Hourly Usage For Hosts and Containers.
 * **`aws_host_count`**:
     Contains the total number of hosts that reported via the AWS integration (and were NOT running the Datadog Agent).
     When AWS or GCP hosts are also running the Datadog Agent, they are counted as Agent hosts, NOT as AWS or GCP.
+* **`alibaba_host_count`**:
+    Contains the total number of hosts that reported via Alibaba integration (and were NOT running the Datadog Agent).
+* **`azure_host_count`**:
+    Contains the total number of hosts that reported via Azure integration (and were NOT running the Datadog Agent).
+
+
