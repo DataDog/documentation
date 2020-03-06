@@ -9,14 +9,16 @@ further_reading:
   text: "Kubernetes Metrics"
 ---
 
-## Configure the Agent
+To setup APM trace collection in a kubernetes cluster you need to:
 
-{{< tabs >}}
+1. **Configure the Datadog Agent to accept traces**:
+
+    {{< tabs >}}
 {{% tab "Daemonset" %}}
 
 To enable APM trace collection in kubernetes:
 
-1. Allow incoming data from port `8126` and set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
+- Allow incoming data from port `8126` and set the `DD_APM_NON_LOCAL_TRAFFIC` variable to true in your *env* section:
 
     ```yaml
      # (...)
@@ -27,7 +29,7 @@ To enable APM trace collection in kubernetes:
      # (...)
     ```
 
-2. Forward the port of the Agent to the host.
+- Forward the port of the Agent to the host.
 
     ```yaml
      # (...)
@@ -40,31 +42,12 @@ To enable APM trace collection in kubernetes:
      # (...)
     ```
 
-     Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. The Datadog container Agent expects this to be named `DD_AGENT_HOST`:
-
-    ```yaml
-    apiVersion: apps/v1
-    kind: Deployment
-    ...
-        spec:
-          containers:
-          - name: "<CONTAINER_NAME>"
-            image: "<CONTAINER_IMAGE>"/"<TAG>"
-            env:
-              - name: DD_AGENT_HOST
-                valueFrom:
-                  fieldRef:
-                    fieldPath: status.hostIP
-    ```
-
-**Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
-
 {{% /tab %}}
 {{% tab "Helm" %}}
 
 **Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
 
-1. Update your [datadog-values.yaml][2] file with the following APM configuration:
+- Update your [datadog-values.yaml][2] file with the following APM configuration:
 
     ```yaml
     datadog:
@@ -85,26 +68,31 @@ To enable APM trace collection in kubernetes:
         port: 8126
     ```
 
-2. Update the `env` section of your application's manifest with the following:
-
-    ```yaml
-    env:
-      - name: DD_AGENT_HOST
-        valueFrom:
-          fieldRef:
-            fieldPath: status.hostIP
-    ```
-
-3. Then upgrade your Datadog Helm chart.
+- Then upgrade your Datadog Helm chart.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configure Datadog tracers
+    **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
-Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`.
+2. **Configure your application pods to pull the Host IP in order to communicate with the Datadog Agent**: Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. The Datadog container Agent expects this to be named `DD_AGENT_HOST`:
 
-Refer to the [language-specific APM instrumentation docs][1] for more examples.
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+     # ...
+        spec:
+          containers:
+          - name: "<CONTAINER_NAME>"
+            image: "<CONTAINER_IMAGE>"/"<TAG>"
+            env:
+              - name: DD_AGENT_HOST
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.hostIP
+    ```
+
+3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. Refer to the [language-specific APM instrumentation docs][1] for more examples.
 
 ## Further Reading
 
