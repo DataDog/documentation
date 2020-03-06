@@ -136,7 +136,7 @@ For example, a log containing a `command.line` attribute that would be keyvalue 
 
 {{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line"  style="width:80%;">}}
 
-### Using helper rules to factorize multiline rules
+### Using helper rules to factorize multiple parsing rules
 
 Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
