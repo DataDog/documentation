@@ -91,7 +91,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 [6]: /resources/yaml/datadog-agent-logs.yaml
 [7]: /resources/yaml/datadog-agent-apm.yaml
 [8]: /resources/yaml/datadog-agent-vanilla.yaml
-[9]: /agent/kubernetes/logs
+[9]: /agent/kubernetes/log
 [10]: /agent/kubernetes/apm
 [11]: /infrastructure/process/?tab=kubernetes#installation
 {{% /tab %}}
