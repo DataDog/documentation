@@ -12,8 +12,8 @@ further_reading:
     tag: documentation
     text: Intégrations personnalisées
 aliases:
-  - /agent/kubernetes/apm
-  - /integrations/faq/using-rbac-permission-with-your-kubernetes-integration
+  - /fr/agent/kubernetes/apm
+  - /fr/integrations/faq/using-rbac-permission-with-your-kubernetes-integration
 ---
 Tirez profit des DaemonSets pour déployer l'Agent Datadog sur l'ensemble de vos nœuds (ou sur un nœud donné grâce [aux nodeSelectors][1]).
 
