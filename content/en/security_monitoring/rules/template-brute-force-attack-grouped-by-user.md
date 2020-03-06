@@ -1,11 +1,11 @@
 ---
 title: TEMPLATE - Brute Force Attack Grouped By User
 kind: documentation
+type: security_rules
 parent: cloudtrail
-tags:
-- security:attack
-- tactic:TA0006-credential-access
-- technique:T1110-brute-force
+security: attack
+tactic: TA0006-credential-access
+technique: T1110-brute-force
 meta_image: /images/integrations_logos/amazon_cloudtrail.png
 ---
 ## **Goal:**

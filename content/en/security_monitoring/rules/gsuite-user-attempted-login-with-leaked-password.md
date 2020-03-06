@@ -1,10 +1,10 @@
 ---
 title: User Attempted Login with Leaked Password
 kind: documentation
+type: security_rules
 parent: gsuite
-tags:
-- security:threat-intel
-- source:gsuite
+security: threat-intel
+source: gsuite
 meta_image: /images/integrations_logos/gsuite.png
 ---
 ## **Goal:**

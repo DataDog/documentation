@@ -1,11 +1,11 @@
 ---
 title: AWS Root Account Activity
 kind: documentation
+type: security_rules
 parent: cloudtrail
-tags:
-- security:compliance
-- service:amazonaws.com
-- source:cloudtrail
+security: compliance
+service: amazonaws.com
+source: cloudtrail
 meta_image: /images/integrations_logos/amazon_cloudtrail.png
 ---
 ## **Goal:**
