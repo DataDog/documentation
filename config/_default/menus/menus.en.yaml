@@ -230,12 +230,12 @@ main:
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_apm"
     weight: 302
-  - name: "Custom Integrations"
+  - name: "Integrations"
     url: "agent/kubernetes/integrations/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_integrations"
     weight: 303
-  - name: "Metrics"
+  - name: "Metrics collected"
     url: "agent/kubernetes/metrics/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_metrics"
