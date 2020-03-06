@@ -53,7 +53,7 @@ in the description and tags you would like to associate with the SLO.
 
 #### Underlying monitor and SLO histories
 
-Making changes to the monitor used by an SLO recalculates the SLO history.  Therefore, the monitor history and SLO history may not match after a monitor update.
+Making changes to the monitor used by an SLO recalculates the SLO history. Therefore, the monitor history and SLO history may not match after a monitor update.
 
 We recommend against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` as they can also affect your SLO calculations and do not allow you to cleanly differentiate between a SLI's good behavior and bad behavior.
 
