@@ -73,10 +73,21 @@ To enable log collection with helm, update your [datadog-values.yaml][1] file wi
 
 ```yaml
 datadog:
- # (...)
- logs:
-  enabled: true
-  containerCollectAll: true
+  ## @param logs - object - required
+  ## Enable logs agent and provide custom configs
+  #
+  logs:
+    ## @param enabled - boolean - optional - default: false
+    ## Enables this to activate Datadog Agent log collection.
+    ## ref: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#log-collection-setup
+    #
+    enabled: true
+
+    ## @param containerCollectAll - boolean - optional - default: false
+    ## Enable this to allow log collection for all containers.
+    ## ref: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#log-collection-setup
+    #
+    containerCollectAll: true
 ```
 
 [1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
@@ -99,5 +110,5 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/Kubernetes-docker-socket-log-collection
+[1]: /agent/faq/kubernetes-docker-socket-log-collection
 [2]: /agent/autodiscovery/?tab=agent#how-to-set-it-up

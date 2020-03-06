@@ -51,10 +51,15 @@ To install the Datadog Agent on your Kubernetes cluster:
     kubectl create secret generic datadog-secret --from-literal api-key="<DATADOG_API_KEY>"
     ```
 
-3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of the following templates:
+3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
-    - [Template with **ALL** Datadog features enabled][4].
-    - [Template with the minimum required configuration][5] with just [Metric collection][6] and [Autodiscovery][7] enabled. Refere to the [logs][8], [traces][9], [processes][10], integrations documentation page to learn how to enable each one individually.
+    - [Manifest with Logs, APM, process, metrics collection enabled][4].
+    - [Manifest with Logs, APM, and metrics collection enabled][5].
+    - [Manifest with Logs and metrics collection enabled][6].
+    - [Manifest with APM and metrics collection enabled][7].
+    - [Vanilla Manifest with just metrics collection enabled][8].
+
+     Refer to the [logs][9], [traces][10], and [processes][11] documentation page to learn how to enable each one individually.
 
 4. Optional - **Set your Datadog site**. If you are on Datadog EU site set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
 
@@ -82,12 +87,13 @@ To install the Datadog Agent on your Kubernetes cluster:
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: /resources/yaml/datadog-agent-all-features.yaml
-[5]: /resources/yaml/datadog-agent-vanilla.yaml
-[6]: /agent/kubernetes/metrics
-[7]: /agent/autodiscovery
-[8]: /agent/kubernetes/logs
-[9]: /agent/kubernetes/apm
-[10]: /infrastructure/process/?tab=kubernetes#installation
+[5]: /resources/yaml/datadog-agent-logs-apm.yaml
+[6]: /resources/yaml/datadog-agent-logs.yaml
+[7]: /resources/yaml/datadog-agent-apm.yaml
+[8]: /resources/yaml/datadog-agent-vanilla.yaml
+[9]: /agent/kubernetes/logs
+[10]: /agent/kubernetes/apm
+[11]: /infrastructure/process/?tab=kubernetes#installation
 {{% /tab %}}
 {{% tab "Helm" %}}
 
