@@ -55,7 +55,7 @@ in the description and tags you would like to associate with the SLO.
 
 Making changes to the monitor used by an SLO recalculates the SLO history. Therefore, the monitor history and SLO history may not match after a monitor update.
 
-We recommend against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` as they can also affect your SLO calculations and do not allow you to cleanly differentiate between a SLI's good behavior and bad behavior.
+Datadog recommends against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` as they can also affect your SLO calculations and do not allow you to cleanly differentiate between a SLI's good behavior and bad behavior.
 
 SLO calculations do not take into account when a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting.  If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification`s, and using the clone for your SLO.
 
