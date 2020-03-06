@@ -118,7 +118,7 @@ With `.fill(last,900)`, the new result is:
 
 ### Short evaluation windows
 
-It is possible to have timing issues in monitors with division over short evaluation windows. If your monitor query requires division over an evaluation window of 1 minute, the numerator and denominator represent time buckets on the order of a few seconds. If metrics for the numerator and denominator aren't both available at query time, you could get unwanted evaluation values.
+It is possible to have timing issues in monitors with division over short evaluation windows. If your monitor query requires division over an evaluation window of one minute, the numerator and denominator represent time buckets on the order of a few seconds. If metrics for the numerator and denominator aren't both available at query time, you could get unwanted evaluation values.
 
 ```
 | Timestamp             | sum:my_num{*}       | sum:my_denom{*}     |
