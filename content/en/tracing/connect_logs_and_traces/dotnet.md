@@ -152,7 +152,7 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you are not using a [Datadog Log Integration][8] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][9].
+**Note**: If you are not using a [Datadog Log Integration][8] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][9].
 
 ## Further Reading
 

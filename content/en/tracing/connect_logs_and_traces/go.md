@@ -50,7 +50,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to 3rd party packages too.
 
-**Note**: If you are not using a [Datadog Log Integration][4] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][5].
+**Note**: If you are not using a [Datadog Log Integration][4] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][5].
 
 ## Further Reading
 

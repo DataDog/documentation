@@ -104,7 +104,7 @@ Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.'
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][2].
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][2].
 
 See the [Ruby logging documentation][1] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
 

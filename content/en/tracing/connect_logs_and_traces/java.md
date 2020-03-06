@@ -90,7 +90,7 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you are not using a [Datadog Log Integration][4] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][5].
+**Note**: If you are not using a [Datadog Log Integration][4] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][5].
 
 [See the Java logging documentation][4] for more details about specific logger implementation or to learn how to log in JSON.
 
