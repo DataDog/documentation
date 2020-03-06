@@ -175,6 +175,12 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [kafka-node][41]   |          | Coming Soon     |                                                        |
 | [rhea][42]         | `>=1`    | Fully supported |                                                        |
 
+#### SDK Compatibility
+
+| Module             | Versions   | Support Type    | Notes                                                  |
+| ------------------ | ---------- | --------------- | ------------------------------------------------------ |
+| [aws-sdk][52]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+
 #### Promise Library Compatibility
 
 | Module           | Versions  | Support Type    |
@@ -249,3 +255,4 @@ For details about how to how to toggle and configure plugins, check out the [API
 [49]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
 [50]: http://getpino.io
 [51]: https://github.com/winstonjs/winston
+[52]: https://github.com/aws/aws-sdk-js
