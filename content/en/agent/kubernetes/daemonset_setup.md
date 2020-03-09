@@ -121,6 +121,21 @@ spec:
           - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
           - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
 
+          ## For secure communication with the Cluster Agent (required to use the Cluster Agent)
+          # - name: DD_CLUSTER_AGENT_AUTH_TOKEN
+          #
+          ## If using a simple env var uncomment this section
+          #
+          #   value: <THIRTY_2_CHARACTERS_LONG_TOKEN>
+          #
+          ## If using a secret uncomment this section
+          #
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: datadog-auth-token
+          #       key: token
+
+
         ## Note these are the minimum suggested values for requests and limits.
         ## The amount of resources required by the Agent varies depending on:
         ## * The number of checks
@@ -242,7 +257,7 @@ The Agent has then two ways to collect logs: from the Docker socket, and from th
 * Docker is not the runtime
 * More than 10 containers are used within each pod
 
-The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files:
+The Docker API is optimized to get logs from one container at a time. When there are many containers in the same host, collecting logs through the Docker socket might be consuming much more resources and impact your running applications. Therefore, Datadog recommends the K8s file method.
 
 {{< tabs >}}
 {{% tab "K8s File" %}}

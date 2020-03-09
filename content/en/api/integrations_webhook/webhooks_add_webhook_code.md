@@ -7,7 +7,7 @@ external_redirect: /api/#update-a-webhooks-integration
 
 **SIGNATURE**:
 
-`POST /v1/integration/webhooks`
+`PUT /v1/integration/webhooks`
 
 **EXAMPLE REQUEST**:
 

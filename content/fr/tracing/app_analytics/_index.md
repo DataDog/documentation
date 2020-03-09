@@ -461,12 +461,9 @@ Une [span analysée][2] représente la [span][3] supérieure d'un [service][4], 
 
 {{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Filtrage des spans analysées" style="width:100%;">}}
 
-**Remarque** : si vous avez [configuré manuellement la priorité d'échantillonnage][7] sur `MANUAL_KEEP` pour un certain service, le filtrage des spans analysées est ignoré pour ce service. Cela signifie que toutes ses spans sont facturables.
-
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /fr/tracing/visualization/#apm-event
 [3]: /fr/tracing/visualization/#spans
 [4]: /fr/tracing/visualization/#services
 [5]: https://app.datadoghq.com/apm/settings
 [6]: /fr/tracing/visualization/#trace
-[7]: /fr/tracing/guide/trace_sampling_and_storage/#sampling-rules
