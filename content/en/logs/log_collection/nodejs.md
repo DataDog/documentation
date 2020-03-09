@@ -133,7 +133,7 @@ logs:
 It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
 
 {{< tabs >}}
-{{% tab "Winston 3.0 http" %}}
+{{% tab "Winston 3.0" %}}
 
 You can use [winston HTTP transport][4] to send your logs directly through the datadog API.
 In your bootstrap file or somewhere in your code, declare the logger as follow:
@@ -166,7 +166,7 @@ logger.info('Hello log with metas',{color: 'blue' });
 
 __Note:__ To send logs to Datadog EU site, set the host property to `http-intake.logs.datadoghq.eu`
 
-If you are using US platform, you can also check the community supported [Datadog Transport][5].
+If you are using US site, you can also check the community supported [Datadog Transport][5].
 
 {{% /tab %}}
 {{< /tabs >}}
