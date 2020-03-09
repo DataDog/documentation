@@ -179,26 +179,26 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 | Module             | Versions   | Support Type    | Notes                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
-| [aws-sdk][52]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+| [aws-sdk][43]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
 
 #### Promise Library Compatibility
 
 | Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bluebird][43]   | `>=2`     | Fully supported |
-| [promise][44]    | `>=7`     | Fully supported |
-| [promise-js][45] | `>=0.0.3` | Fully supported |
-| [q][46]          | `>=1`     | Fully supported |
-| [when][47]       | `>=3`     | Fully supported |
+| [bluebird][44]   | `>=2`     | Fully supported |
+| [promise][45]    | `>=7`     | Fully supported |
+| [promise-js][46] | `>=0.0.3` | Fully supported |
+| [q][47]          | `>=1`     | Fully supported |
+| [when][48]       | `>=3`     | Fully supported |
 
 #### Logger Compatibility
 
 | Module           | Versions  | Support Type    |
 | ---------------- | --------- | --------------- |
-| [bunyan][48]     | `>=1`     | Fully supported |
-| [paperplane][49] | `>=2.3.2` | Fully supported |
-| [pino][50]       | `>=2`     | Fully supported |
-| [winston][51]    | `>=1`     | Fully supported |
+| [bunyan][49]     | `>=1`     | Fully supported |
+| [paperplane][50] | `>=2.3.2` | Fully supported |
+| [pino][51]       | `>=2`     | Fully supported |
+| [winston][52]    | `>=1`     | Fully supported |
 
 ## Further Reading
 
@@ -246,13 +246,13 @@ For details about how to how to toggle and configure plugins, check out the [API
 [40]: https://github.com/coopernurse/node-pool
 [41]: https://github.com/SOHU-Co/kafka-node
 [42]: https://github.com/amqp/rhea
-[43]: https://github.com/petkaantonov/bluebird
-[44]: https://github.com/then/promise
-[45]: https://github.com/kevincennis/promise
-[46]: https://github.com/kriskowal/q
-[47]: https://github.com/cujojs/when
-[48]: https://github.com/trentm/node-bunyan
-[49]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
-[50]: http://getpino.io
-[51]: https://github.com/winstonjs/winston
-[52]: https://github.com/aws/aws-sdk-js
+[43]: https://github.com/aws/aws-sdk-js
+[44]: https://github.com/petkaantonov/bluebird
+[45]: https://github.com/then/promise
+[46]: https://github.com/kevincennis/promise
+[47]: https://github.com/kriskowal/q
+[48]: https://github.com/cujojs/when
+[49]: https://github.com/trentm/node-bunyan
+[50]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
+[51]: http://getpino.io
+[52]: https://github.com/winstonjs/winston

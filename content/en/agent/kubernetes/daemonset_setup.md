@@ -242,7 +242,7 @@ The Agent has then two ways to collect logs: from the Docker socket, and from th
 * Docker is not the runtime
 * More than 10 containers are used within each pod
 
-The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files:
+The Docker API is optimized to get logs from one container at a time. When there are many containers in the same host, collecting logs through the Docker socket might be consuming much more resources and impact your running applications. Therefore, Datadog recommends the K8s file method.
 
 {{< tabs >}}
 {{% tab "K8s File" %}}

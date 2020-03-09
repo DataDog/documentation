@@ -160,7 +160,7 @@ These allocations are counted across your entire infrastructure. For example, if
 
 {{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="host_custom_metrics"  >}}
 
-The billable number of custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. Contact [Sales][8] or your [Customer Success][26] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
+The billable number of custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. Contact [Sales][8] or your [Customer Success][9] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
 ## Standard integrations
 
@@ -168,16 +168,16 @@ The following standard integrations can potentially emit custom metrics.
 
 | Type of integrations                           | Integrations                                                                                                                             |
 |------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| Limited to 350 custom metrics by default.      | [ActiveMQ XML][9] / [Go-Expvar][10] / [Java-JMX][11]                                                                                     |
-| No default limit on custom metrics collection. | [Directory][12] /[Linux Proc Extras][13] /[Nagios][14] /[PDH Check][15] /[Prometheus][16] /[SNMP][17] /[Windows Services][18] /[WMI][19] |
-| Can be configured to collect custom metrics.   | [MySQL][20] /[Oracle][21] /[Postgres][22] /[SQL Server][23]                                                                              |
-| Custom metrics sent from cloud integrations    | [AWS][24]                                                                                                                                |
+| Limited to 350 custom metrics by default.      | [ActiveMQ XML][10] / [Go-Expvar][11] / [Java-JMX][12]                                                                                     |
+| No default limit on custom metrics collection. | [Directory][13] /[Linux Proc Extras][14] /[Nagios][15] /[PDH Check][16] /[Prometheus][17] /[SNMP][18] /[Windows Services][19] /[WMI][20] |
+| Can be configured to collect custom metrics.   | [MySQL][21] /[Oracle][22] /[Postgres][23] /[SQL Server][24]                                                                              |
+| Custom metrics sent from cloud integrations    | [AWS][25]                                                                                                                                |
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][25].
+For technical questions, contact [Datadog support][26].
 
-For billing questions, contact your [Customer Success][26] Manager.
+For billing questions, contact your [Customer Success][9] Manager.
 
 [1]: /integrations
 [2]: /developers/metrics/custom_metrics
@@ -187,21 +187,21 @@ For billing questions, contact your [Customer Success][26] Manager.
 [6]: /account_management/billing/usage_details
 [7]: https://app.datadoghq.com/metric/summary
 [8]: mailto:sales@datadoghq.com
-[9]: /integrations/activemq/#activemq-xml-integration
-[10]: /integrations/go_expvar
-[11]: /integrations/java/
-[12]: /integrations/directory
-[13]: /integrations/linux_proc_extras
-[14]: /integrations/nagios
-[15]: /integrations/pdh_check
-[16]: /integrations/prometheus
-[17]: /integrations/snmp
-[18]: /integrations/windows_service
-[19]: /integrations/wmi_check
-[20]: /integrations/mysql
-[21]: /integrations/oracle
-[22]: /integrations/postgres
-[23]: /integrations/sqlserver
-[24]: /integrations/amazon_web_services
-[25]: /help
-[26]: mailto:success@datadoghq.com
+[9]: mailto:success@datadoghq.com
+[10]: /integrations/activemq/#activemq-xml-integration
+[11]: /integrations/go_expvar
+[12]: /integrations/java/
+[13]: /integrations/directory
+[14]: /integrations/linux_proc_extras
+[15]: /integrations/nagios
+[16]: /integrations/pdh_check
+[17]: /integrations/prometheus
+[18]: /integrations/snmp
+[19]: /integrations/windows_service
+[20]: /integrations/wmi_check
+[21]: /integrations/mysql
+[22]: /integrations/oracle
+[23]: /integrations/postgres
+[24]: /integrations/sqlserver
+[25]: /integrations/amazon_web_services
+[26]: /help

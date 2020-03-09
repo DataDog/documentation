@@ -116,8 +116,8 @@ Datadog uses an Azure AD group with the Storage Blob Data Contributor role scope
 
 {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Rehydration from Azure Storage requires the Storage Blob Data Contributor role"  style="width:75%;">}}
 
-[1]: /logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
 
+[1]: /logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
