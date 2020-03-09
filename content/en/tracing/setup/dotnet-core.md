@@ -211,6 +211,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | Redis (ServiceStack client)    | `ServiceStack.Redis` 4.0.48+                                            | `ServiceStackRedis`  |
 | Elasticsearch                  | `Elasticsearch.Net` 5.3.0+                                              | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
+| PostgreSQL                     | `Npgsql` 4.0+                                                           | `Postgres`           |
 
 **Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
