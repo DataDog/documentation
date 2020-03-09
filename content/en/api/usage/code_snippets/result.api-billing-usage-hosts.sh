@@ -1,5 +1,5 @@
 {
-  usage: [
+  "usage": [
     {
       "container_count": 14,
       "host_count": 618,

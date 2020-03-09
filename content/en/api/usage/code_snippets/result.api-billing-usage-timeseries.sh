@@ -1,5 +1,5 @@
 {
-  usage: [
+  "usage": [
     {
       "num_custom_timeseries": 11,
       "num_custom_input_timeseries": 3600,

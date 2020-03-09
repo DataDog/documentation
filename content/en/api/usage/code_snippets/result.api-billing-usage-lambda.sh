@@ -1,5 +1,5 @@
 {
-  usage: [
+  "usage": [
     {
       "func_count": 13,
       "invocations_sum": 12394,

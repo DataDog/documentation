@@ -1,5 +1,5 @@
 {
-  usage: [
+  "usage": [
     {
       "billable_ingested_bytes": 3529387523,
       "ingested_events_bytes": 3529387523,

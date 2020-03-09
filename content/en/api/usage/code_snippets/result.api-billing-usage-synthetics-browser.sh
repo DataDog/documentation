@@ -1,5 +1,5 @@
 {
-  usage: [
+  "usage": [
     {
       "browser_check_calls_count": 29,
       "hour": "2019-04-01T14"

@@ -22,7 +22,7 @@ Get Hourly Usage For Hosts and Containers.
     Shows the total number of containers reporting via the Docker integration during the hour.
 * **`host_count`**:
     Contains the total number of billable infrastructure hosts reporting during a given hour.
-    This is the sum of `agent_host_count`, `aws_host_count`, and `gcp_host_count`.
+    This is the sum of `agent_host_count`, `aws_host_count`, `gcp_host_count`, `alibaba_host_count`, and `azure_host_count`.
 * **`hour`**:
     The hour for the usage.
 * **`apm_host_count`**:
@@ -33,7 +33,6 @@ Get Hourly Usage For Hosts and Containers.
     Contains the total number of hosts that reported via the Google Cloud integration (and were NOT running the Datadog Agent).
 * **`aws_host_count`**:
     Contains the total number of hosts that reported via the AWS integration (and were NOT running the Datadog Agent).
-    When AWS or GCP hosts are also running the Datadog Agent, they are counted as Agent hosts, NOT as AWS or GCP.
 * **`alibaba_host_count`**:
     Contains the total number of hosts that reported via Alibaba integration (and were NOT running the Datadog Agent).
 * **`azure_host_count`**:
