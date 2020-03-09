@@ -462,7 +462,7 @@ An [Analyzed Span][2] represents the top [span][3] for a [service][4], including
 
 Changes to the filtering rates are queued, by service & environment, allowing to estimate the impact on your overall span volume. Changes can then be reviewed, edited, approved, or rejected. Once applied, changes are immediate and [affect your billing][7].
 
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Analyzed Span Filtering" style="width:100%;">}}
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Analyzed Span Filtering" >}}
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /tracing/visualization/#apm-event
