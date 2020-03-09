@@ -2,14 +2,14 @@
 title: Getting Started with the Agent
 kind: documentation
 aliases:
-- /getting_started/agent
+    - /getting_started/agent
 further_reading:
-- link: "/agent/basic_agent_usage/"
-  tag: "Documentation"
-  text: "Basic Agent Usage"
-- link: "/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
-  tag: "FAQ"
-  text: "Why should I install the Datadog Agent on my cloud instances?"
+    - link: '/agent/basic_agent_usage/'
+      tag: 'Documentation'
+      text: 'Basic Agent Usage'
+    - link: '/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/'
+      tag: 'FAQ'
+      text: 'Why should I install the Datadog Agent on my cloud instances?'
 ---
 
 ## Overview
@@ -35,6 +35,7 @@ The Agent's [main configuration file][1] is `datadog.yaml`. The only required pa
 
 For the [container Agent][4], `datadog.yaml` configuration options are passed in with [environment variables][5]. For example, the Datadog API key environment variable is `DD_API_KEY`.
 
+
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
@@ -47,8 +48,9 @@ The Agent's [main configuration file][1] is `datadog.yaml`. The required paramet
 
 For the [container Agent][4], `datadog.yaml` configuration options are passed in with [environment variables][5], for example:
 
-* `DD_API_KEY` for the Datadog API key
-* `DD_SITE` for the Datadog site
+- `DD_API_KEY` for the Datadog API key
+- `DD_SITE` for the Datadog site
+
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: https://app.datadoghq.eu/account/settings#api
@@ -75,7 +77,7 @@ Refer to the [Agent Commands][10] page to [Start][11], [Stop][12] or [Restart][1
 The metrics below are available with Agent v6. For Agent v5, see the [Agent Metrics][14] integration.
 
 | Metric                           | Description                                                                                                          |
-|----------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
 | **datadog.agent.python.version** | Shows a value of `1` if the Agent is currently reporting to Datadog. The metric is tagged with the `python_version`. |
 | **datadog.agent.running**        | Shows a value of `1` if the Agent is currently reporting to Datadog.                                                 |
 | **datadog.agent.started**        | A count sent with a value of `1` when the Agent starts (available in v6.12+).                                        |
@@ -85,7 +87,7 @@ The metrics below are available with Agent v6. For Agent v5, see the [Agent Metr
 Depending on your platform, the Agent has several core checks enabled by default that collect metrics.
 
 | Check       | Metrics       | Platforms          |
-|-------------|---------------|--------------------|
+| ----------- | ------------- | ------------------ |
 | CPU         | [System][15]  | All                |
 | Disk        | [Disk][16]    | All                |
 | Docker      | [Docker][17]  | Docker             |
@@ -116,20 +118,21 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 
 For help troubleshooting the Agent:
 
-* Visit the [Agent Troubleshooting][21] page.
-* View the [Agent Log Files][22]
-* Contact [Datadog support][23]
+- Visit the [Agent Troubleshooting][21] page.
+- View the [Agent Log Files][22]
+- Contact [Datadog support][23]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 <p>
 
 ## Next Steps
 
 {{< whatsnext desc="After the Agent is installed:">}}
-    {{< nextlink href="/getting_started/integrations" tag="Documentation" >}}Learn about Integrations{{< /nextlink >}}
-    {{< nextlink href="/getting_started/application" tag="Documentation" >}}Learn about the Datadog UI{{< /nextlink >}}
+{{< nextlink href="/getting_started/integrations" tag="Documentation" >}}Learn about Integrations{{< /nextlink >}}
+{{< nextlink href="/getting_started/application" tag="Documentation" >}}Learn about the Datadog UI{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /integrations

@@ -95,7 +95,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 To enable network performance monitoring with Kubernetes, use the following configuration:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
     name: datadog-agent
@@ -140,6 +140,10 @@ spec:
                         valueFrom:
                             fieldRef:
                                 fieldPath: status.hostIP
+                      - name: DD_CRI_SOCKET_PATH
+                        value: /host/var/run/docker.sock
+                      - name: DOCKER_HOST,
+                        value: unix:///host/var/run/docker.sock
                   resources:
                       requests:
                           memory: 256Mi
@@ -148,8 +152,8 @@ spec:
                           memory: 256Mi
                           cpu: 200m
                   volumeMounts:
-                      - name: dockersocket
-                        mountPath: /var/run/docker.sock
+                      - name: dockersocketdir
+                        mountPath: /host/var/run
                       - name: procdir
                         mountPath: /host/proc
                         readOnly: true
@@ -179,6 +183,7 @@ spec:
                               - SYS_RESOURCE
                               - SYS_PTRACE
                               - NET_ADMIN
+                              - IPC_LOCK
                   command:
                       - /opt/datadog-agent/embedded/bin/system-probe
                   env:
@@ -205,9 +210,9 @@ spec:
                       - name: s6-run
                         mountPath: /var/run/s6
             volumes:
-                - name: dockersocket
+                - name: dockersocketdir
                   hostPath:
-                      path: /var/run/docker.sock
+                      path: /var/run
                 - name: procdir
                   hostPath:
                       path: /proc

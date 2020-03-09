@@ -17,11 +17,11 @@ has_logo: true
 integration_title: "Google\_Cloud\_Run"
 is_public: true
 kind: intégration
-manifest_version: 1
+manifest_version: '1.0'
 name: google_cloud_run
 public_title: "Intégration Datadog/Google\_Cloud\_Run"
 short_description: 'Recueillez des métriques, des traces et des logs en provenance de l''ensemble de vos clusters et analysez-les dans Datadog.'
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

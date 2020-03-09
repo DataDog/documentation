@@ -12,11 +12,11 @@ has_logo: true
 integration_title: "Amazon\_EC2\_Spot"
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: amazon_ec2_spot
 public_title: "Intégration Datadog/Amazon\_EC2\_Spot"
 short_description: "Surveillez des métriques clés d'Amazon\_EC2\_Spot."
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

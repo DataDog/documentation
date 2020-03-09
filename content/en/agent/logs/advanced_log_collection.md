@@ -237,7 +237,7 @@ logs_config:
   processing_rules:
      - type: exclude_at_match
        name: exclude_healthcheck
-       pattern: healtcheck
+       pattern: healthcheck
      - type: mask_sequences
        name: mask_user_email
        pattern: \w+@datadoghq.com

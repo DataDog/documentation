@@ -2,13 +2,14 @@
 title: Kubernetes Audit Logs
 name: kubernetes_audit_logs
 kind: integration
-description: "Track everything that happens inside your Kubernetes clusters"
-short_description: "Track inside Kubernetes clusters"
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md"]
+description: 'Track everything that happens inside your Kubernetes clusters'
+short_description: 'Track inside Kubernetes clusters'
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md']
 categories:
-- log collection
-- containers
-- orchestration
+    - log collection
+    - containers
+    - orchestration
 doc_link: /integrations/kubernetes_audit_logs/
 aliases:
     - logs/log_collection/kubernetes_audit_logs
@@ -17,13 +18,13 @@ integration_title: Kubernetes Audit Logs
 is_public: true
 public_title: Datadog-Kubernetes Audit Logs
 supported_os:
-- linux
-- mac_os
-- windows
+    - linux
+    - mac_os
+    - windows
 further_reading:
-- link: "logs/"
-  tag: "Documentation"
-  text: "Log Management"
+    - link: 'logs/'
+      tag: 'Documentation'
+      text: 'Log Management'
 ---
 
 ## Overview
@@ -44,12 +45,12 @@ To enable audit logs in Kubernetes:
 
 1. Audit logs are disabled by default in Kubernetes. To enable them in your API server configuration, specify an audit policy file path:
 
-  ```conf
-  kube-apiserver
-    [...]
-    --audit-log-path=/var/log/kubernetes/apiserver/audit.log
-    --audit-policy-file=/etc/kubernetes/audit-policies/policy.yaml
-  ```
+    ```conf
+    kube-apiserver
+      [...]
+      --audit-log-path=/var/log/kubernetes/apiserver/audit.log
+      --audit-policy-file=/etc/kubernetes/audit-policies/policy.yaml
+    ```
 
 2. Create the policy file at `/etc/kubernetes/audit-policies/policy.yaml` to specify the types of API requests you want to capture in your audit logs. Audit policy rules are evaluated in order. The API server follows the first matching rule it finds for each type of operation or resource. Example of an audit policy:
 
@@ -59,46 +60,47 @@ To enable audit logs in Kubernetes:
 apiVersion: audit.k8s.io/v1
 kind: Policy
 rules:
-# do not log requests to the following
-- level: None
-  nonResourceURLs:
-  - "/healthz*"
-  - "/logs"
-  - "/metrics"
-  - "/swagger*"
-  - "/version"
+    # do not log requests to the following
+    - level: None
+      nonResourceURLs:
+          - '/healthz*'
+          - '/logs'
+          - '/metrics'
+          - '/swagger*'
+          - '/version'
 
-# limit level to Metadata so token is not included in the spec/status
-- level: Metadata
-  omitStages:
-  - RequestReceived
-  resources:
-  - group: authentication.k8s.io
-    resources:
-    - tokenreviews
+    # limit level to Metadata so token is not included in the spec/status
+    - level: Metadata
+      omitStages:
+          - RequestReceived
+      resources:
+          - group: authentication.k8s.io
+            resources:
+                - tokenreviews
 
-# extended audit of auth delegation
-- level: RequestResponse
-  omitStages:
-  - RequestReceived
-  resources:
-  - group: authorization.k8s.io
-    resources:
-    - subjectaccessreviews
+    # extended audit of auth delegation
+    - level: RequestResponse
+      omitStages:
+          - RequestReceived
+      resources:
+          - group: authorization.k8s.io
+            resources:
+                - subjectaccessreviews
 
-# log changes to pods at RequestResponse level
-- level: RequestResponse
-  omitStages:
-  - RequestReceived
-  resources:
-  - group: "" # core API group; add third-party API services and your API services if needed
-    resources: ["pods"]
-    verbs: ["create", "patch", "update", "delete"]
+    # log changes to pods at RequestResponse level
+    - level: RequestResponse
+      omitStages:
+          - RequestReceived
+      resources:
+          # core API group; add third-party API services and your API services if needed
+          - group: ''
+            resources: ['pods']
+            verbs: ['create', 'patch', 'update', 'delete']
 
-# log everything else at Metadata level
-- level: Metadata
-  omitStages:
-  - RequestReceived
+    # log everything else at Metadata level
+    - level: Metadata
+      omitStages:
+          - RequestReceived
 ```
 
 This example policy file configures the API server to log at the highest level of detail for certain types of cluster-changing operations (update, patch, create, delete). It also tracks requests to the `subjectaccessreviews` resource at the highest level to help troubleshoot authentication delegation issues.
@@ -112,61 +114,61 @@ In the last section, for everything that was not explicitly configured by the pr
 1. [Install the Agent][1] on your Kubernetes environment.
 2. Log collection is disabled by default. Enable it in the `env` section of your [DaemonSet][4]:
 
-  ```yaml
-   env:
-      # (...)
-      - name: DD_LOGS_ENABLED
-        value: "true"
-  ```
+    ```yaml
+    env:
+        # (...)
+        - name: DD_LOGS_ENABLED
+          value: 'true'
+    ```
 
 3. Mount the audit log directory as well as a directory that the Agent uses to store a pointer to know which log was last sent from that file. To do this, add the following in the `volumeMounts` section of the daemonset:
 
-  ```yaml
-   # (...)
-      volumeMounts:
-        # (...)
-        - name: pointdir
-          mountPath: /opt/datadog-agent/run
-        - name: auditdir
-          mountPath: /var/log/kubernetes/apiserver
-        - name: dd-agent-config
-          mountPath: /conf.d/kubernetes_audit.d
-    # (...)
-    volumes:
+    ```yaml
+     # (...)
+        volumeMounts:
+          # (...)
+          - name: pointdir
+            mountPath: /opt/datadog-agent/run
+          - name: auditdir
+            mountPath: /var/log/kubernetes/apiserver
+          - name: dd-agent-config
+            mountPath: /conf.d/kubernetes_audit.d
       # (...)
-      - hostPath:
-          path: /opt/datadog-agent/run
-        name: pointdir
-      - hostPath:
-          path: /var/log/kubernetes/apiserver
-        name: auditdir
-       - name: dd-agent-config
-          configMap:
-            name: dd-agent-config
-            items:
-            - key: kubernetes-audit-log
-              path: conf.yaml
-    # (...)
-  ```
+      volumes:
+        # (...)
+        - hostPath:
+            path: /opt/datadog-agent/run
+          name: pointdir
+        - hostPath:
+            path: /var/log/kubernetes/apiserver
+          name: auditdir
+         - name: dd-agent-config
+            configMap:
+              name: dd-agent-config
+              items:
+              - key: kubernetes-audit-log
+                path: conf.yaml
+      # (...)
+    ```
 
-    This also mounts the `conf.d` folder which is used to configure the Agent to collect logs from the audit log file.
+      This also mounts the `conf.d` folder which is used to configure the Agent to collect logs from the audit log file.
 
 4. Configure the Agent to collect logs from that file with a ConfigMap:
 
-  ```text
-  kind: ConfigMap
-  apiVersion: v1
-  metadata:
-    name: dd-agent-config
-    namespace: default
-  data:
-    kubernetes-audit-log: |-
-      logs:
-        - type: file
-          path: /var/log/kubernetes/apiserver/audit.log
-          source: kubernetes.audit
-          service: audit
-  ```
+    ```yaml
+    kind: ConfigMap
+    apiVersion: v1
+    metadata:
+        name: dd-agent-config
+        namespace: default
+    data:
+        kubernetes-audit-log: |-
+            logs:
+              - type: file
+                path: /var/log/kubernetes/apiserver/audit.log
+                source: kubernetes.audit
+                service: audit
+    ```
 
 ### Validation
 

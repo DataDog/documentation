@@ -17,7 +17,7 @@ further_reading:
 ---
 ## Présentation
 
-La fonctionnalité [Logging without Limits][1]™ de Datadog exploite la dissociation de [l'indexation et de l'ingestion des logs][2] pour vous offrir davantage de possibilités. Les applications cloud peuvent générer des millions de logs par minute. Un tel volume d'indexation de logs contribue à la surveillance minutieuse d'un service, mais peut s'avérer contraignant lorsque vous souhaitez corriger des problèmes importants ou effectuer un suivi de certains bugs.
+Les applications cloud peuvent générer des millions de logs par minute. Toutefois, selon votre situation, vos logs ne sont pas tous utiles. Pour cette raison, la fonctionnalité [Logging without Limits][1]™ vous offre une flexibilité accrue en séparant [le processus d'ingestion des logs du processus indexation][2]. 
 
 Ce guide identifie les principaux composants de la fonctionnalité Logging without Limits™ tels que les [patterns](#2-identifier-les-patterns-de-journalisation-volumineuse), les [filtres d'exclusion](#3-creer-un-filtre-d-exclusion-de-pattern-de-log), les [métriques custom basées sur des logs](#4-generer-des-metriques-pour-effectuer-un-suivi-des-logs-exclus) et les [monitors](#creer-un-monitor-de-detection-d-anomalies), qui peuvent améliorer l'organisation de votre vue Log Explorer et optimiser la surveillance de vos KPI au fil du temps.
 
@@ -59,6 +59,9 @@ Le volet Pattern context répertorie toutes les instances (tous les événements
 1. Cliquez sur un pattern depuis la liste des patterns.
 2. Cliquez sur le bouton **View All** dans le coin supérieur droit pour générer automatiquement la requête de recherche associée au pattern.
 3. Sélectionnez l'option `</>` à droite de la requête de recherche pour copier cette dernière.
+
+{{< img src="logs/guide/getting-started-lwl/pattern_view.gif" alt="Vue Pattern" style="width:100%;">}}
+
 4. Accédez à la page **Configuration**, sous Logs, dans le menu principal. Sélectionnez **Indexes** et cliquez sur l'index correspondant. Les informations relatives à l'ajout d'un filtre d'exclusion sont automatiquement remplies.
 5. Sélectionnez **Add an Exclusion Filter**.
 6. Indiquez le nom du filtre, collez la requête de recherche afin de définir la requête d'exclusion, puis définissez un pourcentage d'exclusion.
@@ -107,7 +110,6 @@ Lorsqu'une anomalie est détectée, toutes les personnes concernées reçoivent 
 ## Résumé
 
 Vous savez désormais comment utiliser la fonctionnalité Logging without Limits™ pour :
-
 * [1. Identifier le statut de service générant le plus de logs](#1-identify-your-most-logging-service-status)
 * [2. Identifier les patterns de journalisation volumineuse](#2-identify-high-volume-logging-patterns)
 * [3. Créer un filtre d'exclusion de pattern de log](#3-create-a-log-pattern-exclusion-filter)

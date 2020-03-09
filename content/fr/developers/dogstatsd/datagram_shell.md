@@ -202,7 +202,7 @@ Pour envoyer des métriques, des événements ou des checks de service sur des e
 [1]: /fr/developers/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
 [3]: /fr/developers/dogstatsd
-[4]: /fr/agent/kubernetes/dogstatsd
+[4]: /fr/developers/dogstatsd/
 [5]: /fr/agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
 [6]: /fr/agent/kubernetes/helm/#enable-apm-and-distributed-tracing
 [7]: /fr/agent/docker/apm

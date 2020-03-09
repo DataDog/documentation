@@ -5,7 +5,7 @@ assets:
   service_checks: /assets/service_checks.json
 categories:
   - AZURE
-  - クラウド
+  - CLOUD
   - ネットワーク
 creates_events: false
 ddtype: check
@@ -34,7 +34,8 @@ supported_os:
 ## 概要
 
 このチェックは、Azure (ExpressRoute) への [Neutrona][1] クラウド接続サービスを監視します。
- - Azure (ExpressRoute)
+
+- Azure (ExpressRoute)
 
 ## セットアップ
 
@@ -45,35 +46,35 @@ Agent v6.8 以降を使用している場合は、以下の手順に従って、
 1. [開発ツールキット][5]をインストールします。
 2. integrations-extras リポジトリを複製します。
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. `ddev` 構成を `integrations-extras/` パスで更新します。
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. `neutrona` パッケージをビルドします。
 
-    ```
-    ddev -e release build neutrona
-    ```
+   ```shell
+   ddev -e release build neutrona
+   ```
 
 5. [Datadog Agent をダウンロードして起動][6]します。
 6. 次のコマンドを実行して、Agent でインテグレーション Wheel をインストールします。
 
-    ```
-    datadog-agent integration install -w <PATH_OF_NEUTRONA_ARTIFACT_>/<NEUTRONA_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_NEUTRONA_ARTIFACT_>/<NEUTRONA_ARTIFACT_NAME>.whl
+   ```
 
 7. [他のパッケージ化されたインテグレーション][7]と同様にインテグレーションを構成します。
 
 ### コンフィグレーション
 
 1. Neutrona の[メトリクス](#metric-collection)の収集を開始するには、[Agent の構成ディレクトリ][8]のルートにある `conf.d/` フォルダーの `neutrona.d/conf.yaml` ファイルを編集します。
-  使用可能なすべての構成オプションの詳細については、[サンプル neutrona.d/conf.yaml][9] を参照してください。
+   使用可能なすべての構成オプションの詳細については、[サンプル neutrona.d/conf.yaml][9] を参照してください。
 
 2. [Agent を再起動します][10]。
 

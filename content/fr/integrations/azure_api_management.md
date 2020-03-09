@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Gestion des API de Microsoft Azure
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_api_management
 public_title: Intégration Datadog/Gestion des API de Microsoft Azure
 short_description: Surveillez des métriques clés du service Gestion des API Azure.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

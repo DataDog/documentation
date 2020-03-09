@@ -3,16 +3,17 @@ integration_title: Journald
 kind: integration
 public_title: Datadog-Journald Integration
 categories:
-- log collection
-description: "Forward your logs from the journal to Datadog"
-short_description: "Forward your logs from the journal to Datadog"
+    - log collection
+description: 'Forward your logs from the journal to Datadog'
+short_description: 'Forward your logs from the journal to Datadog'
 has_logo: true
 is_public: true
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/journald.md"]
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/journald.md']
 name: journald
 ddtype: check
 supported_os:
-- linux
+    - linux
 ---
 
 ## Overview
@@ -38,7 +39,7 @@ Create the `journald.d/conf.yaml` file in the in the Agent's `conf.d/` folder at
 
 #### Log collection
 
-**Available for Agent version >6.0**
+_Available for Agent versions >6.0_
 
 Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml` with:
 
@@ -50,8 +51,8 @@ Then add this configuration block to your `journald.d/conf.yaml` file to start c
 
 ```yaml
 logs:
-  - type: journald
-    container_mode: true
+    - type: journald
+      container_mode: true
 ```
 
 **Note**: With Agent 7.17+ if `container_mode` is set to `true`, the `source` attribute of your logs is automatically set to the corresponding short image name of the container instead of simply `docker`.
@@ -64,8 +65,8 @@ Finally, [restart the agent][2].
 
 By default the Agent looks for the journal at the following locations:
 
-* `/var/log/journal`
-* `/var/run/journal`
+- `/var/log/journal`
+- `/var/run/journal`
 
 If your journal is located elsewhere, add a `path` parameter with the corresponding journal path.
 
@@ -73,18 +74,18 @@ If your journal is located elsewhere, add a `path` parameter with the correspond
 
 It is possible to filter in/out specific units thanks to the following parameters:
 
-* `include_units`: Includes all units specified.
-* `exclude_units`: Excludes all units specified.
+- `include_units`: Includes all units specified.
+- `exclude_units`: Excludes all units specified.
 
 Example:
 
 ```yaml
 logs:
-  - type: journald
-    path: /var/log/journal/
-    include_units:
-      - docker.service
-      - sshd.service
+    - type: journald
+      path: /var/log/journal/
+      include_units:
+          - docker.service
+          - sshd.service
 ```
 
 ##### Collect Container tags
@@ -93,7 +94,7 @@ Tags are critical for finding information in highly dynamic containerized enviro
 
 This works automatically when the Agent is running from the host. If you are using the containerized version of the Datadog Agent, mount your journal path and the following file:
 
-* `/etc/machine-id`: this ensures that the Agent can query the journal that is stored on the host.
+- `/etc/machine-id`: this ensures that the Agent can query the journal that is stored on the host.
 
 ## Troubleshooting
 

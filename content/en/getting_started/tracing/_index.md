@@ -1,31 +1,33 @@
 ---
-title: Quickstart Guide - APM
+title: Getting Started with Tracing
 kind: documentation
+aliases:
+    - /getting_started/tracing/distributed-tracing
 further_reading:
-- link: "/tracing/visualization/"
-  tag: "Documentation"
-  text: "Use the APM UI"
-- link: "https://learn.datadoghq.com/enrol/index.php?id=4"
-  tag: "Learning Center"
-  text: "Learn Application Performance Monitoring with Docker"
+    - link: '/tracing/setup/'
+      tag: 'Documentation'
+      text: 'Select your application language'
+    - link: '/tracing/visualization/'
+      tag: 'Documentation'
+      text: 'Use the APM UI'
+    - link: 'https://learn.datadoghq.com/enrol/index.php?id=4'
+      tag: 'Learning Center'
+      text: 'Learn Application Performance Monitoring with Docker'
 ---
 
 ## Overview
 
-Datadog Application Performance Monitoring (APM) is used to collect [traces][1] from your back-end application code. This quickstart guide shows you how get your first trace into Datadog. Follow the sections below:
+Datadog Application Performance Monitoring (APM or tracing) is used to collect [traces][1] from your backend application code. This beginners' guide shows you how get your first trace into Datadog.
 
-* [Create a Datadog account](#create-a-datadog-account)
-* [Install the Agent](#install-the-agent)
-* [APM Agent setup](#apm-agent-setup)
-* [APM application setup](#apm-application-setup)
+**Note**: Datadog APM is available for many languages and frameworks. See the documentation on [Instrumenting Your Application][2]
 
-## Create a Datadog account
+## Datadog account
 
-If you haven't already, create a [Datadog account][2].
+If you haven't already, create a [Datadog account][3].
 
-## Install the Agent
+## Datadog Agent
 
-Before installing the Agent, set up a [Vagrant Ubuntu 16.04 virtual machine][3] using the following commands. For more information about Vagrant, see their [Getting Started][4] page.
+Before installing the Datadog Agent, set up a [Vagrant Ubuntu 16.04 virtual machine][4] using the following commands. For more information about Vagrant, see their [Getting Started][5] page.
 
 ```text
 vagrant init ubuntu/xenial64
@@ -33,7 +35,7 @@ vagrant up
 vagrant ssh
 ```
 
-To install the Datadog Agent on a host, use the [one line install command][5] updated with your [Datadog API key][6]:
+To install the Datadog Agent on a host, use the [one line install command][6] updated with your [Datadog API key][7]:
 
 ```shell
 DD_API_KEY=<DATADOG_API_KEY> bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
@@ -41,22 +43,21 @@ DD_API_KEY=<DATADOG_API_KEY> bash -c "$(curl -L https://raw.githubusercontent.co
 
 ### Validation
 
-Verify the Agent is running with the [status command][7]:
+Verify the Agent is running with the [status command][8]:
 
 ```shell
 sudo datadog-agent status
 ```
 
-After a few minutes, verify the Agent is connected to your account by checking the [Infrastructure List][8] in Datadog.
+After a few minutes, verify the Agent is connected to your account by checking the [Infrastructure List][9] in Datadog.
 
-## APM Agent setup
+## Datadog APM
 
 ### Enable APM
 
-On the latest version of Agent v6, APM is enabled by default. You can see this in the Agent [configuration file][9]:
+For the latest versions of Agent v6 and v7, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][10]:
 
-```text
-# /etc/datadog-agent/datadog.yaml:
+```yaml
 # apm_config:
 #   Whether or not the APM Agent should run
 #   enabled: true
@@ -78,17 +79,17 @@ And in `trace-agent.log`:
 
 ```yaml
 apm_config:
-  enabled: true
-  env: hello_world
+    enabled: true
+    env: hello_world
 ```
 
-Then, [restart][10] the Datadog Agent:
+Then, [restart][11] the Datadog Agent:
 
 ```shell
 sudo service datadog-agent restart
 ```
 
-## APM application setup
+## APM application
 
 ### Installation
 
@@ -147,7 +148,7 @@ This outputs:
 hello world
 ```
 
-After a few minutes, your trace displays in Datadog under the `flask` service. Check the [services page][11] or [trace list][12].
+After a few minutes, your trace displays in Datadog under the `flask` service. Check the [services page][12] or [trace list][13].
 
 {{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" >}}
 
@@ -156,14 +157,15 @@ After a few minutes, your trace displays in Datadog under the `flask` service. C
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/#terminology
-[2]: https://www.datadoghq.com
-[3]: https://app.vagrantup.com/ubuntu/boxes/xenial64
-[4]: https://www.vagrantup.com/intro/getting-started/index.html
-[5]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[6]: https://app.datadoghq.com/account/settings#api
-[7]: /agent/guide/agent-commands/#agent-information
-[8]: https://app.datadoghq.com/infrastructure
-[9]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[10]: /agent/guide/agent-commands/#restart-the-agent
-[11]: https://app.datadoghq.com/apm/services
-[12]: https://app.datadoghq.com/apm/traces
+[2]: https://docs.datadoghq.com/tracing/setup/
+[3]: https://www.datadoghq.com
+[4]: https://app.vagrantup.com/ubuntu/boxes/xenial64
+[5]: https://www.vagrantup.com/intro/getting-started/index.html
+[6]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[7]: https://app.datadoghq.com/account/settings#api
+[8]: /agent/guide/agent-commands/#agent-information
+[9]: https://app.datadoghq.com/infrastructure
+[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/guide/agent-commands/#restart-the-agent
+[12]: https://app.datadoghq.com/apm/services
+[13]: https://app.datadoghq.com/apm/traces

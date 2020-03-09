@@ -155,6 +155,8 @@ Datadog has two types of notifications (alert and warning). Monitors recover aut
 
 As you change a threshold, the preview graph in the editor displays a marker showing the cutoff point.
 
+**Note**: When entering decimal values for thresholds, if your value is `<1`, add a leading `0` to the number. For example, use `0.5`, not `.5`.
+
 #### Data window
 
 `Require` or `Do not require` a full window of data for evaluation.
@@ -169,7 +171,9 @@ This setting allows you to change when the alerting engine considers a monitor a
 
 `Do not notify` if data is missing or `Notify` if data is missing for more than `N` minutes.
 
-Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. **Note**: The missing data window must be at least two times the evaluation period to work.
+Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. 
+
+**Note**: It is recommended that you set the missing data window to at least two times the evaluation period.
 
 Alternatively, if you are monitoring a metric over an auto-scaling group of hosts that stop and start automatically, notifying for no data would produce a lot of notifications. For this case, you should not enable notifications for missing data.
 

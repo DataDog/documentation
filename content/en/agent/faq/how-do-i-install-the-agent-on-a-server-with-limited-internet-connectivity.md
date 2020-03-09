@@ -35,7 +35,7 @@ sudo apt install ./datadog-agent_<AGENT_VERSION>-1_amd64.deb
 Once installed, add a `datadog.yaml` file by copying `datadog.yaml.example`. Then update `datadog.yaml` with the [API key][5] for your organization. This can be done with a single command:
 
 ```bash
-sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_DATADOG_API_KEY>/' /etc/datadog-aent/datadog.yaml.example > /etc/datadog-aent/datadog.yaml.example"
+sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_DATADOG_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml.example"
 ```
 
 Then, [start the Agent][6] using the appropriate command for your system.

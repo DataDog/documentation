@@ -2,9 +2,9 @@
 title: Using Postman with Datadog APIs
 kind: documentation
 aliases:
-  - /developers/faq/using-postman-with-datadog-apis
-  - /getting_started/using-postman-with-datadog-apis
-  - /developers/guide/using-postman-with-datadog-apis
+    - /developers/faq/using-postman-with-datadog-apis
+    - /getting_started/using-postman-with-datadog-apis
+    - /developers/guide/using-postman-with-datadog-apis
 ---
 
 ## Overview
@@ -17,10 +17,10 @@ This article explains how to use [Postman][1] to perform API calls to Datadog by
 
 You have:
 
-* An active Datadog implementation.
-* Access to your Datadog [API and application keys][2].
-* The [Postman API client installed][1].
-* Basic knowledge of API structure and JSON formatting.
+- An active Datadog implementation.
+- Access to your Datadog [API and application keys][2].
+- The [Postman API client installed][1].
+- Basic knowledge of API structure and JSON formatting.
 
 ## Setup
 
@@ -29,12 +29,12 @@ You have:
 After the prerequisites are met:
 
 1. Download the [Datadog Postman collection][3] (pre-configured API call templates).
-    In Postman, a collection is a folder of organized API calls for easy editing, saving, and re-use.
+   In Postman, a collection is a folder of organized API calls for easy editing, saving, and re-use.
 
 2. Import the Datadog Postman Collection:
-    * Open Postman
-    * Click on **Import**
-    * Select the [datadog_collection.json][3] file downloaded in step 1.
+    - Open Postman
+    - Click on **Import**
+    - Select the [datadog_collection.json][3] file downloaded in step 1.
 
 You now have a Datadog collection with many different API examples.
 
@@ -93,8 +93,8 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 
 **Notes**:
 
-* The ampersand (&) and colon (:) are not needed in the params table. Postman inserts these for you.
-* All placeholders follow the format: `<PLACEHOLDER>` . They should be replaced before running a query.
+- The ampersand (&) and colon (:) are not needed in the params table. Postman inserts these for you.
+- All placeholders follow the format: `<PLACEHOLDER>` . They should be replaced before running a query.
 
 [1]: https://www.getpostman.com
 [2]: https://app.datadoghq.com/account/settings#api

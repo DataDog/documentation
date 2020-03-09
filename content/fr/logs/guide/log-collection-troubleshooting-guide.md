@@ -150,10 +150,10 @@ Vérifiez que les logs apparaissent bien sur la page [Live Tail de Datadog][12].
 [1]: /fr/logs
 [2]: /fr/help
 [3]: /fr/agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/fr/agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[4]: /fr/agent/logs/#send-logs-over-https
 [5]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://en.wikipedia.org/wiki/Chmod
-[7]: https://docs.datadoghq.com/fr/integrations/journald/
+[7]: /fr/integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /fr/logs/guide/docker-logs-collection-troubleshooting-guide
 [10]: /fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function

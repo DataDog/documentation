@@ -19,6 +19,8 @@ private: true
     {{< nextlink href="agent/guide/python-3" >}}Python 2 to 3 Custom Check Migration{{< /nextlink >}}
     {{< nextlink href="agent/guide/cluster-agent-custom-metrics-server" >}}Cluster Agent and Horizontal Pod Autoscaling: Custom Metrics Server{{< /nextlink >}}
     {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}Autodiscovery with JMX{{< /nextlink >}}
+    {{< nextlink href="agent/guide/private-link" >}}Forward your telemetry securely to Datadog over AWS PrivateLink{{< /nextlink >}}
+    {{< nextlink href="agent/guide/build-container-agent" >}}Build a Datadog Agent image{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent 5 Guides:" >}}

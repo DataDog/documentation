@@ -294,9 +294,9 @@ metadata:
 spec:
   containers:
     - name: redis
-      image: httpd
+      image: redis:latest
       ports:
-        - containerPort: 80
+        - containerPort: 6379
 ```
 
 **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
