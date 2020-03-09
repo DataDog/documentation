@@ -312,6 +312,23 @@ New logs are now directly sent to Datadog.
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /logs/#reserved-attributes
 {{% /tab %}}
+{{% tab "Log4Net" %}}
+
+You can manually configure a [RemotingAppender][1] to send logs to the Datadog API by adding to the web.config this:
+
+```
+<appender name="RemotingAppender" type="log4net.Appender.RemotingAppender" >
+    <sink value="https://http-intake.logs.datadoghq.com:433/v1/input/<DATADOG_API_KEY>" />
+    <lossy value="false" />
+    <bufferSize value="95" />
+    <onlyFixPartialEventData value="true" />
+</appender>
+```
+**Note:** To send logs to Datadog EU site, set the sink value to `https://http-intake.logs.datadoghq.eu:433/v1/input/<DATADOG_API_KEY>`
+
+[1]: https://logging.apache.org/log4net/release/sdk/html/T_log4net_Appender_RemotingAppender.htm
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
