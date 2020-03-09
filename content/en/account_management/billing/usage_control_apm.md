@@ -31,8 +31,9 @@ To estimate the total number of analyzed spans expected to be sent per service p
 2. In the [**Analyzed Span Estimator** view][7], Sort the column "App Analytics Status" column by "Not Enabled"
 3. **Total Estimated APM Volume** denotes the estimated total volume of Analyzed Spans for all services, per day and per month. Each row corresponding to the service represents the estimated volume of analyzed spans for that service, per day.
 
-  {{< img src=https://a.cl.ly/DOu8q2Jj alt="Analyzed Span Estimator">}}
-4. To estimate total cost, multiply the total volume * [analyzed span retention pricing][8].
+    {{< img src="account_management/billing/usage_control_apm/apm_span_estimator.png" alt="Analyzed Span Estimator" >}}
+
+4. To estimate total cost, multiply the total volume by the [analyzed span retention pricing][8].
 
 For example, if you have 1,750,000,000 Analyzed Spans per month for 15 days (default retention), you can calculate:
 
