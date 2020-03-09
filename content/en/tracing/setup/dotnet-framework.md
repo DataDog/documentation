@@ -100,7 +100,7 @@ The .NET Tracer can instrument the following libraries automatically:
 | Redis (ServiceStack client)    | `ServiceStack.Redis` 4.0.48+   | `ServiceStackRedis`  |
 | Elasticsearch                  | `Elasticsearch.Net` 5.3.0+     | `ElasticsearchNet`   |
 | MongoDB                        | `MongoDB.Driver.Core` 2.1.0+   | `MongoDb`            |
-| PostgreSQL                     | `Npgsql` 4.0+                  | `Postgres`           |
+| PostgreSQL                     | `Npgsql` 4.0+                  | `AdoNet`             |
 
 **Update:** Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required. Remove them from your application when you update the .NET Tracer.
 
