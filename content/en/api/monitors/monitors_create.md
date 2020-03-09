@@ -63,7 +63,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`check`** name of the check, e.g. datadog.agent.up
     *   **`tags`** one or more quoted tags (comma-separated), or "*". e.g.: `.over("env:prod", "role:db")`
-    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 10.
+    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 100.
 
     ##### Event Alert Query
 
