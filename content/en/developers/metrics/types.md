@@ -30,7 +30,7 @@ The following metric submission types are accepted:
 - [COUNT](?tab=count#metric-types)
 - [RATE](?tab=rate#metric-types)
 - [GAUGE](?tab=gauge#metric-types)
-- SET
+- [SET][4]
 - [HISTOGRAM](?tab=hisogram#metric-types)
 - [DISTRIBUTION](?tab=distribution#metric-types)
 
@@ -47,11 +47,11 @@ These different metric submission types are mapped to four in-app metric types f
 
 Metrics are submitted to Datadog in three main ways:
 
-- [Agent check][4]
-- [DogStatsD][5]
-- [Datadog’s HTTP API][6]
+- [Agent check][5]
+- [DogStatsD][6]
+- [Datadog’s HTTP API][7]
 
-The majority of data that Datadog receives is submitted by the Agent, either through an Agent check or DogStatsD. For these submission methods, a metric’s type determines how multiple values collected on an Agent in [a flush time interval][7] are aggregated. The Agent combines these values into a single representative metric value for that interval. This combined value is stored with a single timestamp in Datadog.
+The majority of data that Datadog receives is submitted by the Agent, either through an Agent check or DogStatsD. For these submission methods, a metric’s type determines how multiple values collected on an Agent in [a flush time interval][8] are aggregated. The Agent combines these values into a single representative metric value for that interval. This combined value is stored with a single timestamp in Datadog.
 
 Data submitted directly to the Datadog API is not aggregated by Datadog, with the exception of distribution metrics. The raw values sent to Datadog are stored as-is.
 
@@ -290,12 +290,11 @@ Find below a summary of all available metric submission sources and methods with
 
 | Submission Source | Submission Method (Python)           | Submission Type | Datadog In-App Types |
 | ----------------- | ------------------------------------ | --------------- | -------------------- |
-| [Agent check][8]  | `self.count(...)`                    | COUNT           | COUNT                |
-| [Agent check][9]  | `self.monotonic_count(...)`          | COUNT           | COUNT                |
-| [Agent check][10] | `self.gauge(...)`                    | GAUGE           | GAUGE                |
-| [Agent check][11] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE          |
-| [Agent check][12] | `self.rate(...)`                     | RATE            | GAUGE                |
-| [Agent check][13] | `self.set(...)`                      | SET             | GAUGE                |
+| [Agent check][9]  | `self.count(...)`                    | COUNT           | COUNT                |
+| [Agent check][10]  | `self.monotonic_count(...)`          | COUNT           | COUNT                |
+| [Agent check][11] | `self.gauge(...)`                    | GAUGE           | GAUGE                |
+| [Agent check][12] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE          |
+| [Agent check][13] | `self.rate(...)`                     | RATE            | GAUGE                |
 | [API][14]         | `api.Metric.send(type="count", ...)` | COUNT           | COUNT                |
 | [API][14]         | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE                |
 | [API][14]         | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                 |
@@ -314,16 +313,16 @@ Find below a summary of all available metric submission sources and methods with
 [1]: /developers/metrics/type_modifiers/
 [2]: /dashboards/functions/
 [3]: /metrics/summary/
-[4]: /developers/metrics/agent_metrics_submission/
-[5]: /developers/metrics/dogstatsd_metrics_submission/
-[6]: /api/#post-timeseries-points
-[7]: /developers/dogstatsd/#how-it-works
-[8]: /developers/metrics/agent_metrics_submission/?tab=count#count
-[9]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
-[10]: /developers/metrics/agent_metrics_submission/?tab=gauge
-[11]: /developers/metrics/agent_metrics_submission/?tab=histogram
-[12]: /developers/metrics/agent_metrics_submission/?tab=rate
-[13]: /developers/integrations
+[4]: https://statsd.readthedocs.io/en/v3.2.1/types.html#sets
+[5]: /developers/metrics/agent_metrics_submission/
+[6]: /developers/metrics/dogstatsd_metrics_submission/
+[7]: /api/#post-timeseries-points
+[8]: /developers/dogstatsd/#how-it-works
+[9]: /developers/metrics/agent_metrics_submission/?tab=count#count
+[10]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
+[11]: /developers/metrics/agent_metrics_submission/?tab=gauge
+[12]: /developers/metrics/agent_metrics_submission/?tab=histogram
+[13]: /developers/metrics/agent_metrics_submission/?tab=rate
 [14]: /api/?lang=python#post-timeseries-points
 [15]: /developers/metrics/dogstatsd_metrics_submission/#gauge
 [16]: /developers/metrics/dogstatsd_metrics_submission/#distribution
