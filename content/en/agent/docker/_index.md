@@ -5,6 +5,7 @@ aliases:
   - /guides/basic_agent_usage/docker/
   - /agent/docker
   - /agent/basic_agent_usage/docker/
+  - /integrations/docker_daemon/
 further_reading:
 - link: "/integrations/java/?tab=docker#configuration"
   tag: "Documentation"
