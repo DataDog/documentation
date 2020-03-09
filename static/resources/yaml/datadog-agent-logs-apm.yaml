@@ -78,6 +78,20 @@ spec:
             - name: DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE
               value: 'true'
 
+          ## For secure communication with the Cluster Agent (required to use the Cluster Agent)
+          # - name: DD_CLUSTER_AGENT_AUTH_TOKEN
+          #
+          ## If using a simple env var uncomment this section
+          #
+          #   value: <THIRTY_2_CHARACTERS_LONG_TOKEN>
+          #
+          ## If using a secret uncomment this section
+          #
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: datadog-auth-token
+          #       key: token
+
           ## Note these are the minimum suggested values for requests and limits.
           ## The amount of resources required by the Agent varies depending on:
           ## * The number of checks
