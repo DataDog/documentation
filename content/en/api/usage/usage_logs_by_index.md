@@ -21,14 +21,13 @@ Get Hourly Usage For Logs By Index
 **RESPONSE**:
 
 * **`index_id`**:
-	The index id for this usage.
+	The index ID for this usage.
 * **`index_name`**:
-	The user specified name for this index id.
+	The user specified name for this index ID.
 * **`retention`**:
-	The retention period (in days) for this index id.
+	The retention period (in days) for this index ID.
 * **`event_count`**:
-	The total number of indexed logs for on this index hour.
+	The total number of indexed logs for the queried hour.
 * **`hour`**:
 	The hour for the usage.
-
 

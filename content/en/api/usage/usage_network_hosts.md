@@ -12,13 +12,13 @@ Get Hourly Usage For Network Hosts.
 **ARGUMENTS**:
 
 * **`start_hr`** [*required*]:
-    datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
+    Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
 * **`end_hr`** [*optional*, *default*=**1d+start_hr**]:
-    datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour.
+    Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour.
 
 **RESPONSE**:
 
 * **`host_count`**:
-	Contains the number of NPM hosts active.
+	Contains the number of active NPM hosts.
 * **`hour`**:
     The hour for the usage.

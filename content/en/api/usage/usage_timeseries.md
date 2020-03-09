@@ -19,7 +19,7 @@ Get Hourly Usage For [Custom Metrics][1].
 **RESPONSE**:
 
 * **`num_custom_timeseries`**:
-	Contains the number of custom metrics containing non-aggregation custom metrics.
+	Contains the number of non-aggregation custom metrics.
 * **`num_custom_input_timeseries`**:
 	Contains the number of custom metrics that are inputs for aggregations (metric configured is custom).
 * **`num_custom_output_timeseries`**:

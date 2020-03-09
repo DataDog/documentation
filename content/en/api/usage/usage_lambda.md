@@ -12,9 +12,9 @@ Get Hourly Usage For Lambda.
 **ARGUMENTS**:
 
 * **`start_hr`** [*required*]:
-    datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
+    Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
 * **`end_hr`** [*optional*, *default*=**1d+start_hr**]:
-    datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour.
+    Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour.
 
 **RESPONSE**:
 
