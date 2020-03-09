@@ -51,7 +51,7 @@ Note that hostnames are not linked to cluster checks metrics, which limits the u
 
 ### Agent
 
-Enable the `clusterchecks` configuration provider on the Datadog **Host** Agent. This can be done in two ways:
+Enable the `clusterchecks` configuration provider on the Datadog **Node** Agent. This can be done in two ways:
 
 - By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable. This takes a space separated string if you have multiple values:
 
@@ -69,12 +69,36 @@ Enable the `clusterchecks` configuration provider on the Datadog **Host** Agent.
 
 [Restart the Agent][5] to apply the configuration change.
 
+**Note**: The [Datadog Helm Chart][12] offers the possibility to deploy, via the `clusterChecksRunner` field, a set of Datadog Agents configured to run cluster checks only.
+
 ### Custom checks
 
 Running [custom Agent checks][6] as cluster checks is supported, as long as all node-based Agents are able to run it. This means your checks' code:
 
 - Must be installed on all node-based Agents where the `clusterchecks` config provider is enabled.
 - Must **not** depend on local resources that are not accessible to all Agents.
+
+### Advanced dispatching
+
+The Cluster Agent can be configured to use an advanced dispatching logic for cluster checks, which takes into account the execution time and metric samples from check instances. This logic enables the Cluster Agent to optimize dispatching and distribution between cluster check runners.
+
+#### Advanced Dispatching - Cluster Agent setup
+
+In addition to the steps mentioned in the [Cluster Agent Setup][3] section, you must set `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` to `true`.
+
+#### Advanced Dispatching - Cluster Check Runner setup
+
+The following environment variables are required to configure the cluster check runners (or node Agents) to expose their check stats. The stats are consumed by the Cluster Agent and are used to optimize the cluster checks' dispatching logic.
+
+```
+  env:
+    - name: DD_CLC_RUNNER_ENABLED
+      value: "true"
+    - name: DD_CLC_RUNNER_HOST
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+```
 
 ## Setting up check configurations
 
@@ -283,3 +307,4 @@ The Agent `status` command should show the check instance running and reporting 
 [9]: /agent/autodiscovery/template_variables
 [10]: /integrations/http_check
 [11]: /integrations/nginx
+[12]: https://github.com/helm/charts/tree/master/stable/datadog
