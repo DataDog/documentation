@@ -458,11 +458,9 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ## Span filtering
 
-An [Analyzed Span][2] represents the top [span][3] for a [service][4], including its metadata. Once enabled, Analyzed Spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span. [Filtering Analyzed Spans][5] has the benefit of reducing the number of billable Analyzed Spans and has no effect on [trace][6] sampling. Once a service has been filtered lower than 100%, the Analyzed Span generated metrics Total Errors and Total Requests are upscaled to display an estimate by default, and you have the option to display the filtered value.
+An [Analyzed Span][2] represents the top [span][3] for a [service][4], including its metadata. Once enabled, Analyzed Spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span. [Filtering Analyzed Spans][5] has the benefit of reducing the number of billable Analyzed Spans and has no effect on [trace][6] sampling. Once a service has been filtered lower than 100%, Analyzed Span analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
-Changes to the filtering rates are queued, by service & environment, allowing to estimate the impact on your overall span volume. Changes can then be reviewed, edited, approved, or rejected. Once applied, changes are immediate and [affect your billing][7].
-
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Analyzed Span Filtering" >}}
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Analyzed Span Filtering"  style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /tracing/visualization/#apm-event
@@ -470,4 +468,3 @@ Changes to the filtering rates are queued, by service & environment, allowing to
 [4]: /tracing/visualization/#services
 [5]: https://app.datadoghq.com/apm/settings
 [6]: /tracing/visualization/#trace
-[7]: /account_management/billing/apm_distributed_tracing/
