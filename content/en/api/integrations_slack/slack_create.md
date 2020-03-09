@@ -12,7 +12,7 @@ Create a Datadog-Slack integration. Once created, add a channel to it with the [
 **Note**:
 
 * Using the `POST` method updates your integration configuration by **adding** your new configuration to the existing one in your Datadog organization.
-* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization.
+* Using the `PUT` method updates your integration configuration by **replacing** your current configuration with the new one sent to your Datadog organization. All arguments are required when creating (`PUT`) a new Slack configuration.
 
 **ARGUMENTS**:
 

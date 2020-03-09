@@ -49,7 +49,7 @@ Amazon EBS から S3 バケットまたは CloudWatch のいずれかにログ�
 #### Datadog へのログの送信
 
 1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
-2. Lambda 関数のインストールが完了したら、AWS コンソールから、Amazon EBS ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. lambda 関数がインストールされたら、AWS コンソールから、Amazon EBS ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [Cloudwatch ロググループに手動トリガーを追加][6]

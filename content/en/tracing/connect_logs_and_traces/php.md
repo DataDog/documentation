@@ -50,7 +50,7 @@ If the logger implements the [**monolog/monolog** library][1], use `Logger::push
 ?>
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `trace_id` and `span_id` are being parsed as a string. More information can be found in the [FAQ on this topic][3].
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][3].
 
 ## Manual Trace ID injection
 
@@ -62,5 +62,5 @@ Coming Soon. Reach out to [the Datadog support team][4] to learn more.
 
 [1]: https://github.com/Seldaek/monolog
 [2]: /logs/log_collection/php
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
 [4]: /help
