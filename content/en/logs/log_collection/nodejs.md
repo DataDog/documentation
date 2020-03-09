@@ -135,9 +135,8 @@ It is possible to stream logs from your application to Datadog or to the Datadog
 {{< tabs >}}
 {{% tab "Winston 3.0 http" %}}
 
-You can use winston HTTP transport to send your logs directly through the datadog API.
+You can use [winston HTTP transport][4] to send your logs directly through the datadog API.
 In your bootstrap file or somewhere in your code, declare the logger as follow:
-
 
 ```js
 
@@ -167,6 +166,7 @@ logger.info('Hello log with metas',{color: 'blue' });
 
 __Note:__ To send logs to Datadog EU site, set the host property to `http-intake.logs.datadoghq.eu`
 
+If you are using US platform, you can also check the community supported [Datadog Transport][5].
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -193,3 +193,5 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
 [3]: /tracing/connect_logs_and_traces/nodejs
+[4]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
+[5]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
