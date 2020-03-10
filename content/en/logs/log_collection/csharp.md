@@ -324,7 +324,7 @@ You can manually configure a [RemotingAppender][1] to send logs to the Datadog A
     <onlyFixPartialEventData value="true" />
 </appender>
 ```
-**Note:** To send logs to Datadog EU site, set the sink value to `https://http-intake.logs.datadoghq.eu:433/v1/input/<DATADOG_API_KEY>`
+**Note:** To send logs to Datadog EU site, set the sink value to `https://http-intake.logs.datadoghq.com:433/v1/input/<DATADOG_API_KEY>?ddsource=csharp&service=<APPLICATION_NAME>`
 
 [1]: https://logging.apache.org/log4net/release/sdk/html/T_log4net_Appender_RemotingAppender.htm
 
