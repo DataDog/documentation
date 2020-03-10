@@ -61,7 +61,7 @@ To enable APM trace collection in kubernetes:
       apm:
         ## @param enabled - boolean - optional - default: false
         ## Enable this to enable APM and tracing, on port 8126
-        ## ref: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host
+        #
         #
         enabled: true
 

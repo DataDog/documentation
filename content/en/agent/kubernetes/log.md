@@ -43,8 +43,10 @@ To enable Log collection with your DaemonSet:
             mountPath: /opt/datadog-agent/run
          - name: logpodpath
            mountPath: /var/log/pods
-         # Docker runtime directory, replace this path with your container runtime logs directory,
-         # or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+         # Docker runtime directory, replace this path
+         # with your container runtime logs directory,
+         # or remove this configuration if `/var/log/pods`
+         # is not a symlink to any other directory.
          - name: logcontainerpath
            mountPath: /var/lib/docker/containers
       # (...)
@@ -56,8 +58,10 @@ To enable Log collection with your DaemonSet:
         - hostPath:
             path: /var/log/pods
           name: logpodpath
-        # Docker runtime directory, replace this path with your container runtime logs directory,
-        # or remove this configuration if `/var/log/pods` is not a symlink to any other directory.
+        # Docker runtime directory, replace this path
+        # with your container runtime logs directory,
+        # or remove this configuration if `/var/log/pods`
+        # is not a symlink to any other directory.
         - hostPath:
             path: /var/lib/docker/containers
           name: logcontainerpath
@@ -79,13 +83,11 @@ datadog:
   logs:
     ## @param enabled - boolean - optional - default: false
     ## Enables this to activate Datadog Agent log collection.
-    ## ref: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#log-collection-setup
     #
     enabled: true
 
     ## @param containerCollectAll - boolean - optional - default: false
     ## Enable this to allow log collection for all containers.
-    ## ref: https://docs.datadoghq.com/agent/basic_agent_usage/kubernetes/#log-collection-setup
     #
     containerCollectAll: true
 ```
