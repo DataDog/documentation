@@ -16,9 +16,9 @@ further_reading:
 The Agent has then two ways to collect logs: from the Docker socket, and from the Kubernetes log files (automatically handled by Kubernetes). Use log file collection when:
 
 * Docker is not the runtime
-* More than 10 containers are used within each pod
+* More than 10 containers are used on each node
 
-The Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files:
+The Docker API is optimized to get logs from one container at a time. When there are many containers on the same node, collecting logs through the Docker socket might be consuming much more resources than going through the files:
 
 {{< tabs >}}
 {{% tab "Daemonset" %}}

@@ -26,10 +26,7 @@ spec:
             ## DogStatsD ##
             ###############
             - containerPort: 8125
-              ## Custom metrics via DogStatsD - uncomment this section to enable
-              ## custom metrics collection.
-              #
-              # hostPort: 8125
+              hostPort: 8125
               name: dogstatsdport
               protocol: UDP
 
@@ -37,8 +34,7 @@ spec:
             ## APM ##
             #########
             - containerPort: 8126
-              ## Trace Collection (APM) - uncomment this section to enable APM
-              # hostPort: 8126
+              hostPort: 8126
               name: traceport
               protocol: TCP
           env:

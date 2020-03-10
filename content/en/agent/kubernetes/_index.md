@@ -22,7 +22,7 @@ further_reading:
 
 ## Installation
 
-There are a number of different ways to monitor your Kubernetes system using Datadog. Choosing one depends on how your system is structured and the type of monitoring you desire. There are four options for installing the Datadog Agent for Kubernetes: DaemonSets, Helm charts, installing the Agent directly on the host, and the Datadog Cluster Agent.
+There are a number of different ways to monitor your Kubernetes system using Datadog. Choosing one depends on how your system is structured and the type of monitoring you desire. There are three options for installing the Datadog Agent for Kubernetes: DaemonSets, Helm charts, installing the Agent directly on the host.
 
 **Note**: Agent version 6.0 and above only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, consult the [Legacy Kubernetes versions section][1].
 

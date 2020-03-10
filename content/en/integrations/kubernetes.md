@@ -77,7 +77,7 @@ There are two ways to collect logs from containers running in Kubernetes:
 - Through the Docker socket.
 - Through the Kubernetes log files.
 
-Datadog recommends using the Kubernetes log files approach when you are either not using Docker, or are using more than 10 containers per pod.
+Datadog recommends using the Kubernetes log files approach when you are either not using Docker, or are using more than 10 containers per node.
 
 Datadog also recommends that you take advantage of DaemonSets to [automatically deploy the Datadog Agent on all your nodes][6].
 Otherwise, to manually enable log collection from one specific node, add the following parameters in the `datadog.yaml`:

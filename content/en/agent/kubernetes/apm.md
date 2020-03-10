@@ -79,7 +79,7 @@ To enable APM trace collection in kubernetes:
 
     **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
-2. **Configure your application pods to pull the Host IP in order to communicate with the Datadog Agent**: Use the downward API to pull the host IP; the application container needs an environment variable that points to `status.hostIP`. The Datadog container Agent expects this to be named `DD_AGENT_HOST`:
+2. **Configure your application pods to pull the Host IP in order to communicate with the Datadog Agent**: Use the downward API to pull the host IP; the application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`.
 
     ```yaml
     apiVersion: apps/v1
