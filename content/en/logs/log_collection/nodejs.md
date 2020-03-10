@@ -135,7 +135,7 @@ It is possible to stream logs from your application to Datadog or to the Datadog
 {{< tabs >}}
 {{% tab "Winston 3.0" %}}
 
-You can use [winston HTTP transport][1] to send your logs directly through the datadog API.
+You can use [winston HTTP transport][1] to send your logs directly through the [datadog API][3].
 In your bootstrap file or somewhere in your code, declare the logger as follow:
 
 ```js
@@ -144,7 +144,7 @@ const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
   host: 'http-intake.logs.datadoghq.com',
-  path: '/v1/input/{put your API key here}',
+  path: '/v1/input/<APIKEY>?ddsource=nodejs&service=<APPLICATION_NAME>',
   ssl: true
 };
 
@@ -170,6 +170,7 @@ If you are using US site, you can also check the community supported [Datadog Tr
 
 [1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
 [2]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
+[3]: https://docs.datadoghq.com/api/?lang=bash#send-logs-over-http
 
 {{% /tab %}}
 {{< /tabs >}}
