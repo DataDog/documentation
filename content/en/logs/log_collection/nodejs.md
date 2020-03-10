@@ -128,7 +128,7 @@ logs:
     sourcecategory: sourcecode
 ```
 
-## Aggentless Logging
+## Agentless Logging
 
 It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
 
