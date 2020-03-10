@@ -18,7 +18,7 @@ kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_ebs
 public_title: Datadog-Amazon Elastic Block Store インテグレーション
-short_description: スナップショットの経過時間、IOPS、読み取り/書き込み回数などを追跡します。
+short_description: スナップショットの経過時間、IOPS、読み取り/書き込み回数などを追跡。
 version: '1.0'
 ---
 ## 概要

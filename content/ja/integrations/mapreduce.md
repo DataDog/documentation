@@ -23,7 +23,7 @@ metric_prefix: mapreduce.
 metric_to_check: mapreduce.job.elapsed_time.max
 name: mapreduce
 public_title: Datadog-Map Reduce インテグレーション
-short_description: マップのステータスと期間を監視し、タスクを削減します。
+short_description: マップのステータスと期間を監視し、タスクを削減。
 support: コア
 supported_os:
   - linux

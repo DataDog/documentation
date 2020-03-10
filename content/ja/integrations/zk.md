@@ -30,7 +30,7 @@ process_signatures:
   - zkServer.sh start
   - java zoo.cfg
 public_title: Datadog-ZooKeeper インテグレーション
-short_description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握します。
+short_description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
 support: コア
 supported_os:
   - linux
