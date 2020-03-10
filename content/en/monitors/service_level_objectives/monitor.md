@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Select a monitor-based source if you want to build your SLO based on existing or new Datadog monitors. For more information about monitors, see the [Monitor documentation][1]. Monitor-based SLOs are useful for a time-based stream of data where you are differentiating time of good behavior vs bad behavior. 
+Select a monitor-based source if you want to build your SLO based on existing or new Datadog monitors. For more information about monitors, see the [Monitor documentation][1]. Monitor-based SLOs are useful for a time-based stream of data where you are differentiating time of good behavior vs bad behavior.
 Using the sum of the good time divided by the sum of total time provides a Service Level Indicator (or SLI).
 
 ## Setup
@@ -30,12 +30,12 @@ To start, you need to be using Datadog monitors. To set up a new monitor, go to 
 **Supported monitor types**:
 
 - metric monitor types - including metric, anomaly, APM, forecast, outlier, and integration metrics
-- service checks
 - synthetics
+- service checks (beta)
 
 **Example:** You might be tracking the uptime of a physical device. You have already configured a metric monitor on `host:foo` using
 a custom metric. This monitor might also ping your on-call team if it's no longer reachable. To avoid burnout you want to
-track how often this host is down. 
+track how often this host is down.
 
 #### Set your targets
 
@@ -51,6 +51,16 @@ an SLO breach.
 Here we add contextual information about the purpose of the SLO, including any related information
 in the description and tags you would like to associate with the SLO.
 
+#### Underlying monitor and SLO histories
+
+Making changes to the monitor used by an SLO recalculates the SLO history. Therefore, the monitor history and SLO history may not match after a monitor update.
+
+Datadog recommends against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` as they can also affect your SLO calculations and do not allow you to cleanly differentiate between a SLI's good behavior and bad behavior.
+
+SLO calculations do not take into account when a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting. If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification`s, and using the clone for your SLO.
+
+Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and metric-based SLIs as [described in the SLO event documentation][5].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -59,3 +69,4 @@ in the description and tags you would like to associate with the SLO.
 [2]: https://app.datadoghq.com/slo
 [3]: https://app.datadoghq.com/slo/new/monitor
 [4]: https://app.datadoghq.com/monitors#create
+[5]: /monitors/service_level_objectives/event/
