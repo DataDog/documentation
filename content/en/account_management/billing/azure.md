@@ -9,7 +9,7 @@ Datadog bills for all Azure Virtual Machines being monitored in Datadog. These m
 
 Other Azure resources (Azure SQL, Azure App Services, Azure Redis Cache, etc.) are not part of monthly billing.
 
-### VM exclusion
+## Azure VM exclusion
 
 Use the [Datadog-Azure integration tile][1] to filter your VMs monitored by Datadog. Go to the **Configuration** tab and edit an existing tenant or add a new one. Each tenant is controlled under **Optionally filter to VMs with tag**. Limit VMs by [host tag][2]:
 

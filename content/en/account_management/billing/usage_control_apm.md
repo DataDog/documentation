@@ -8,7 +8,7 @@ Read APM documentation on [APM Billing][2] to understand how billing works for A
 
 App Analytics is billed on the basis of [Analyzed Span][3] count. You can choose to configure [App Analytics][4] per service to manually control the number of Analyzed Spans being generated using the following tools. Note that this, however, limits App Analytics functionality on those services or integration.
 
-### Choose Analyzed Span Retention
+## Choose Analyzed Span Retention
 
 App Analytics Pricing depends on the retention policy of Analyzed Spans. You can control your bill by choosing the duration Analyzed Spans are retained for.
 
@@ -21,7 +21,7 @@ App Analytics Pricing depends on the retention policy of Analyzed Spans. You can
 
 Prices reflect annual billing. Contact [Sales][5] or your [Customer Success][6] Manager to discuss volume discounts for your account.
 
-### Analyzed Span Estimator
+## Analyzed Span Estimator
 
 [Analyzed Span Estimator][7] is designed to help you decide which services to configure with App Analytics while keeping usage and cost in your control.
 
@@ -39,7 +39,7 @@ For example, if you have 1,750,000,000 Analyzed Spans per month for 15 days (def
 
 1,750,000,000 Analyzed Spans per month * $1.70 / 1 million Analyzed Spans = **$2,975 per month** for App Analytics
 
-### Analyzed Span Filtering
+## Analyzed Span Filtering
 
 [Span filtering][9] is configured to send Analyzed Spans at 100% throughput by default. For example, a Java service with 100 requests generates 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span.
 
