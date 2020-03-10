@@ -93,7 +93,7 @@ func main() {
 
 {{% /tab %}}
 
-{{% tab "Node.js" %}}
+{{% tab "Node" %}}
 
 To enable debug mode for the Datadog Node.js Tracer, enable it during its `init`:
 
@@ -166,8 +166,8 @@ Logs files are saved in the following directories by default. The `DD_TRACE_LOG_
 
 For more details on how to configure the .NET Tracer, see the [Configuration][1] section.
 
-[1]: /tracing/setup/dotnet#configuration
 
+[1]: /tracing/setup/dotnet#configuration
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -195,6 +195,221 @@ make install
 {{% /tab %}}
 {{< /tabs >}}
 
+## Tracer debug logs
+
+If you have successfully enabled debug mode for your tracer, you should see useful tracer specific log messages telling you how the tracer was initialized and whether traces were sent to the Agent
+
+**Note**: these logs do not get sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration.
+
+{{< tabs >}}
+{{% tab "Java" %}}
+
+<details><summary>Debug log 1</summary>
+<p>
+
+```java
+[main] DEBUG datadog.trace.agent.ot.DDTracer - Using config: Config(runtimeId=<runtime ID>, serviceName=<service name>, traceEnabled=true, writerType=DDAgentWriter, agentHost=<IP HERE>, agentPort=8126, agentUnixDomainSocket=null, prioritySamplingEnabled=true, traceResolverEnabled=true, serviceMapping={}, globalTags={env=none}, spanTags={}, jmxTags={}, excludedClasses=[], headerTags={}, httpServerErrorStatuses=[512, 513, 514, 515, 516, 517, 518, 519, 520, 521, 522, 523, 524, 525, 526, 527, 528, 529, 530, 531, 532, 533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548, 549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562, 563, 564, 565, 566, 567, 568, 569, 570, 571, 572, 573, 574, 575, 576, 577, 578, 579, 580, 581, 582, 583, 584, 585, 586, 587, 588, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511], httpClientErrorStatuses=[400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 437, 438, 439, 440, 441, 442, 443, 444, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482, 483, 484, 485, 486, 487, 488, 489, 490, 491, 492, 493, 494, 495, 496, 497, 498, 499], httpClientSplitByDomain=false, partialFlushMinSpans=1000, runtimeContextFieldInjection=true, propagationStylesToExtract=[DATADOG], propagationStylesToInject=[DATADOG], jmxFetchEnabled=true, jmxFetchMetricsConfigs=[], jmxFetchCheckPeriod=null, jmxFetchRefreshBeansPeriod=null, jmxFetchStatsdHost=null, jmxFetchStatsdPort=8125, logsInjectionEnabled=false, reportHostName=false)
+```
+
+</p>
+</details>
+
+
+<details><summary>Debug log 2</summary>
+<p>
+
+```java
+[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.DDSpan - Finished: DDSpan [ t_id=<trace id>, s_id=<span id>, p_id=<parent id>] trace=SpringBoot_Service/OperationHandler.handle/OperationHandler.handle metrics={} tags={component=spring-web-controller, env=none, span.kind=server, thread.id=33, thread.name=http-nio-8080-exec-1}, duration_ns=92808848
+[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - traceId: <trace id> -- Expired reference. count = 1
+[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.DDSpan - Finished: DDSpan [ t_id=<trace id>, s_id=<span id>, p_id=0] trace=SpringBoot_Service/servlet.request/GET /actuator/prometheus metrics={_sampling_priority_v1=1} tags={component=java-web-servlet, env=none, http.method=GET, http.status_code=200, http.url=http://<IP>:8080/actuator/prometheus, language=jvm, peer.hostname=<IP>, peer.ipv4=<IP>, peer.port=50778, runtime-id=<runtime id>, span.kind=server, span.origin.type=org.apache.catalina.core.ApplicationFilterChain, thread.id=33, thread.name=http-nio-8080-exec-1}, duration_ns=157972901
+[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - Writing 2 spans to DDAgentWriter { api=DDApi { tracesUrl=http://<IP address>/v0.4/traces } }.
+```
+
+</p>
+</details>
+
+<details><summary>Debug log 3</summary>
+<p>
+
+```java
+[http-nio-8080-exec-1] DEBUG datadog.trace.agent.ot.PendingTrace - traceId: <trace id> -- Expired reference. count = 0
+[dd-trace-writer] DEBUG datadog.trace.agent.common.writer.DDApi - Successfully sent 1 of 2 traces to the DD agent.
+```
+
+</p>
+</details>
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+For more visibility, include `DD_LOGGING_RATE_LIMIT=0`.
+
+<details><summary>Debug log 1</summary>
+<p>
+
+```shell
+<YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:470] - writing 8 spans (enabled:True)
+```
+
+</p>
+</details>
+
+<details><summary>Debug log 2</summary>
+<p>
+
+```text
+<YYYY-MM-DD> 16:01:11,280 DEBUG [ddtrace.tracer] [tracer.py:472] -
+      name flask.request
+        id <span id>
+  trace_id <trace id>
+ parent_id <parent id>
+   service flask
+  resource GET /
+      type http
+     start <start time>
+       end <end time>
+  duration 0.004759s
+     error 0
+      tags
+           flask.endpoint:index
+           flask.url_rule:/
+           flask.version:1.1.1
+           http.method:GET
+           http.status_code:200
+           http.url:http://0.0.0.0:5050/
+           system.pid:25985
+
+```
+
+</p>
+</details>
+
+<details><summary>Debug log 3</summary>
+<p>
+
+```shell
+<YYYY-MM-DD> 16:01:11,637 DEBUG [ddtrace.api] [api.py:236] - reported 1 traces in 0.00207s
+```
+
+</p>
+</details>
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+<details><summary>Debug log 1</summary>
+<p>
+
+```shell
+D, [<YYYY-MM-DD>T16:42:51.147563 #476] DEBUG -- ddtrace: [ddtrace] (/usr/local/bundle/gems/ddtrace-<version>/lib/ddtrace/tracer.rb:371:in `write') Writing 4 spans (enabled: true)
+
+ Name: rack.request
+Span ID: <span id>
+Parent ID: 0
+Trace ID: <trace id>
+Type: web
+Service: todo
+Resource: NotesController#index
+Error: 0
+Start: <start time>
+End: <end time>
+Duration: 11985000
+Allocations: 1202
+Tags: [
+   system.pid => 476,
+   env => dev,
+   language => ruby,
+   http.method => GET,
+   http.url => /notes,
+   http.base_url => http://0.0.0.0:3000,
+   http.status_code => 304,
+   http.response.headers.x_request_id => <header value>]
+Metrics: [
+   ..],
+
+```
+
+</p>
+</details>
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+<details><summary>Debug log 1</summary>
+<p>
+
+```shell
+YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size of traces> traces: <number of traces>.
+2019/08/07 16:12:27 Datadog Tracer <version> ERROR: lost <number of traces> traces: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused, 4 additional messages skipped (first occurrence: DD MM YY 16:11 UTC)
+```
+
+</p>
+</details>
+
+{{% /tab %}}
+{{% tab "Node" %}}
+
+<details><summary>Debug log 1</summary>
+<p>
+
+```json
+{
+	"name": "dd-trace",
+	"hostname": "<hostname>",
+	"pid": 28817,
+	"level": 50,
+	"err": {
+		"message": "Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126",
+		"name": "Error",
+		"stack": "Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126\n    at ClientRequest.req.on.e (/path/to/dd-trace/src/platform/node/request.js:44:33)\n    at scope.activate (/path/to/dd-trace/packages/dd-trace/src/scope/base.js:68:19)\n    at Scope._activate (/path/to/dd-trace/packages/dd-trace/src/scope/base.js:44:14)\n    at Scope.activate (/path/to/dd-trace/packages/dd-trace/src/scope/base.js:13:17)\n    at ClientRequest.<anonymous> (/path/to/dd-trace/packages/dd-trace/src/scope/base.js:67:20)\n    at ClientRequest.emit (events.js:193:13)\n    at ClientRequest.req.emit (/path/to/dd-trace/packages/datadog-plugin-http/src/client.js:93:21)\n    at Socket.socketErrorListener (_http_client.js:397:9)\n    at Socket.emit (events.js:198:15)\n    at emitErrorNT (internal/streams/destroy.js:91:8)"
+	},
+	"msg": "Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126",
+	"time": "2019-08-06T20:48:27.769Z",
+	"v": 0
+}
+```
+
+</p>
+</details>
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+<details><summary>Debug log 1</summary>
+<p>
+
+```shell
+[dotnet] 19861: [debug] JITCompilationStarted: function_id=<function id> token=<token id> name=System.Net.Http.Headers.HttpHeaders.RemoveParsedValue()
+```
+
+</p>
+</details>
+
+<details><summary>Debug log 2</summary>
+<p>
+
+```shell
+[dotnet] 19861: [info] *** JITCompilationStarted() replaced calls from System.Net.Http.HttpMessageInvoker.SendAsync() to System.Net.Http.HttpMessageHandler.SendAsync() <number> with calls to Datadog.Trace.ClrProfiler.Integrations.HttpMessageHandlerIntegration.HttpMessageHandler_SendAsync() <number>
+```
+
+</p>
+</details>
+
+
+
+
+
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+
+{{% /tab %}}
+{{% tab "C++" %}}
+
+
+{{% /tab %}}
+{{< /tabs >}}
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
