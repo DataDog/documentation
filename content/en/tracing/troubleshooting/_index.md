@@ -160,7 +160,7 @@ Logs files are saved in the following directories by default. The `DD_TRACE_LOG_
 | Platform | Path                                      |
 |----------|-------------------------------------------|
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
-| Linux    | `/var/log/datadog/`                       |
+| Linux    | `/var/log/datadog/dotnet/                 |
 
 **Note:**: On Linux, you must create the logs directory before you enabled debug mode.
 
