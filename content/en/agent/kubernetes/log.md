@@ -73,7 +73,7 @@ To enable Log collection with your DaemonSet:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-To enable log collection with helm, update your [datadog-values.yaml][1] file with the following log collection configuration, then upgrade your Datadog Helm chart:
+To enable log collection with Helm, update your [datadog-values.yaml][1] file with the following log collection configuration, then upgrade your Datadog Helm chart:
 
 ```yaml
 datadog:

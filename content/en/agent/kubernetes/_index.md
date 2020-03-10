@@ -61,9 +61,9 @@ To install the Datadog Agent on your Kubernetes cluster:
     - [Manifest with APM and metrics collection enabled][7].
     - [Vanilla Manifest with just metrics collection enabled][8].
 
-     Refer to the [logs][9], [traces][10], and [processes][11] documentation page to learn how to enable each one individually.
+     Refer to the [logs][9], [traces][10], and [processes][11] documentation pages to learn how to enable each feature individually.
 
-4. Optional - **Set your Datadog site**. If you are on Datadog EU site set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
+4. Optional - **Set your Datadog site**. If you are using the Datadog EU site, set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
 
 5. **Deploy the DaemonSet** with the command:
 
@@ -101,10 +101,10 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 To install the chart with the release name `<RELEASE_NAME>`:
 
-1. [Install helm][1].
+1. [Install Helm][1].
 2. Download the [Datadog `value.yaml` configuration file][2].
 3. Optional - Edit the `value.yaml` file and enable the Agent features you want to use.
-3. Retrieve your Datadog API key from your [Agent installation instructions][3] and run
+3. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
 
 - **Helm v1/v2**
 
@@ -141,7 +141,7 @@ If your current chart version deployed is earlier than `v2.0.0`, follow the [mig
 
 ## Integrations
 
-Once the Agent is up and running in your cluster use [Datadog Autodiscovery feature][2] to collect, metrics and logs automatically from your pods.
+Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery feature][2] to collect metrics and logs automatically from your pods.
 
 ## Further Reading
 
