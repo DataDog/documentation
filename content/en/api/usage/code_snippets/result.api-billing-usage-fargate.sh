@@ -1,5 +1,5 @@
 {
-  usage: [
+  "usage": [
     {
       "tasks_count": 103,
       "hour": "2019-04-01T14"
