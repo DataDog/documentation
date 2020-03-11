@@ -135,7 +135,7 @@ You can stream your logs from your application to Datadog without installing an 
 {{< tabs >}}
 {{% tab "Winston 3.0" %}}
 
-You can use [winston HTTP transport][1] to send your logs directly through the [datadog API][3].
+Use [Winston HTTP transport][1] to send your logs directly through the [Datadog Log API][3].
 In your bootstrap file or somewhere in your code, declare the logger as follow:
 
 ```js
