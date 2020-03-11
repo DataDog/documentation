@@ -130,7 +130,7 @@ logs:
 
 ## Agentless Logging
 
-The recommended integration is to configure the Agent on your server in order to have a more robust integration (ex: handling connection issues). If you cannot instal the Datadog Agent, you can directly stream your log to Datadog.
+You can stream your logs from your application to Datadog without installing an Agent on your Host. Note that using an Agent to forward your logs is recommended as it provides a native connection management.
 
 {{< tabs >}}
 {{% tab "Winston 3.0" %}}
