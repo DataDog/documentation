@@ -220,34 +220,26 @@ main:
     parent: "agent"
     identifier: "agent_kubernetes"
     weight: 3
-  - name: "DaemonSet Setup"
-    url: "agent/kubernetes/daemonset_setup/"
+  - name: "Log"
+    url: "agent/kubernetes/log/"
     parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_log"
     weight: 301
-  - name: "Host Setup"
-    url: "agent/kubernetes/host_setup/"
+  - name: "APM"
+    url: "agent/kubernetes/apm/"
     parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_apm"
     weight: 302
-  - name: "Using Helm"
-    url: "agent/kubernetes/helm/"
-    parent: "agent_kubernetes"
-    weight: 303
-  - name: "Event Collection"
-    url: "agent/kubernetes/event_collection/"
-    parent: "agent_kubernetes"
-    weight: 304
-  - name: "Custom Integrations"
+  - name: "Integrations"
     url: "agent/kubernetes/integrations/"
     parent: "agent_kubernetes"
-    weight: 305
-  - name: "Metrics"
-    url: "agent/kubernetes/metrics/"
+    identifier: "agent_kubernetes_integrations"
+    weight: 303
+  - name: "Data collected"
+    url: "agent/kubernetes/data_collected/"
     parent: "agent_kubernetes"
-    weight: 306
-  - name: "Legacy Versions"
-    url: "agent/kubernetes/legacy/"
-    parent: "agent_kubernetes"
-    weight: 307
+    identifier: "agent_kubernetes_data_collected"
+    weight: 304
 
   ## AGENT - Datadog Cluster Agent
 

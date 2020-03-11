@@ -152,7 +152,7 @@ The `ddtrace` library includes support for the following libraries:
 
 [1]: /tracing/send_traces
 [2]: /tracing/setup/docker
-[3]: /agent/kubernetes/daemonset_setup/#trace-collection
+[3]: /agent/kubernetes/apm/
 [4]: http://pypi.datadoghq.com/trace/docs
 [5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtracerun
 [6]: /tracing/guide/setting_primary_tags_to_scope/

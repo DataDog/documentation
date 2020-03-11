@@ -1,6 +1,8 @@
 ---
 title: Legacy Kubernetes versions
-kind: documentation
+kind: faq
+aliases:
+    - /agent/kubernetes/legacy
 further_reading:
 - link: "agent/kubernetes/daemonset_setup"
   tag: "documentation"
@@ -48,7 +50,6 @@ The default configuration targets Kubernetes 1.7.6 and later, as the Agent relie
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://kubernetes.io/docs/admin/authorization/rbac
 [2]: https://github.com/DataDog/integrations-core/tree/73b475d0762829a32c70b63da2564eaa15b1d942/kubelet#compatibility

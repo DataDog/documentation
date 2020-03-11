@@ -461,7 +461,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 
 [1]: /agent/docker/apm
 [2]: /tracing/setup/docker
-[3]: /agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[3]: /agent/kubernetes/apm/
 [4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [5]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [6]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
