@@ -294,4 +294,4 @@ Kubernetes 環境には、[Kubernetes 存続期間が短いコンテナのドキ
 [2]: /ja/agent/autodiscovery
 [3]: /ja/agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 [4]: /ja/agent/logs/#custom-log-collection
-[5]: /ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#short-lived-containers
+[5]: /ja/agent/kubernetes/log#short-lived-containers
