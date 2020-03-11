@@ -170,7 +170,7 @@ If you are using US site, you can also check the community supported [Datadog Tr
 
 [1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
 [2]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
-[3]: https://docs.datadoghq.com/api/?lang=bash#send-logs-over-http
+[3]: /api/?lang=bash#send-logs-over-http
 
 {{% /tab %}}
 {{< /tabs >}}
