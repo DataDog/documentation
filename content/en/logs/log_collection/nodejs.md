@@ -130,7 +130,7 @@ logs:
 
 ## Agentless Logging
 
-It is possible to stream logs from your application to Datadog or to the Datadog Agent directly. This is not the recommended setup as handling connection issues should not be done directly in your application, but it might not be possible to log to a file when your application is running on a machine that cannot be accessed.
+The recommended integration is to configure the Agent on your server in order to have a more robust integration (ex: handling connection issues). If you cannot instal the Datadog Agent, you can directly stream your log to Datadog.
 
 {{< tabs >}}
 {{% tab "Winston 3.0" %}}
