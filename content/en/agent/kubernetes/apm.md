@@ -9,9 +9,11 @@ further_reading:
   text: "Kubernetes Metrics"
 ---
 
+In order to start collecting your application traces you must be [runing the Datadog Agent in your Kubernetes cluster][1].
+
 ## Setup
 
-To setup APM trace collection in a Kubernetes cluster, you need to:
+To enable trace collection with your Agent, follow the instructions below:
 
 1. **Configure the Datadog Agent to accept traces**:
 
@@ -20,7 +22,7 @@ To setup APM trace collection in a Kubernetes cluster, you need to:
 
 To enable APM trace collection in Kubernetes:
 
-- Allow incoming data from port `8126` and set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section:
+- Allow incoming data from port `8126` and set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section of the `datadog.yaml` Agent manifest:
 
     ```yaml
      # (...)
@@ -96,7 +98,7 @@ To enable APM trace collection in Kubernetes:
                     fieldPath: status.hostIP
     ```
 
-3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. Refer to the [language-specific APM instrumentation docs][1] for more examples.
+3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. Refer to the [language-specific APM instrumentation docs][2] for more examples.
 
 ## Agent Environment Variables
 
@@ -104,9 +106,9 @@ List of all environment variables available for tracing within the Agent running
 
 | Environment variable       | Description                                                                                                                                                                                                                                                                                                                 |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DD_API_KEY`               | [Datadog API Key][1]                                                                                                                                                                                                                                                                                                        |
+| `DD_API_KEY`               | [Datadog API Key][2]                                                                                                                                                                                                                                                                                                        |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                                                                                                                                                                                                                        |
-| `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][2].                                                                                                                                                                                                                                                                            |
+| `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][3].                                                                                                                                                                                                                                                                            |
 | `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                               |
 | `DD_DOGSTATSD_PORT`        | Set the DogStatsD port.                                                                                                                                                                                                                                                                                                     |
 | `DD_APM_RECEIVER_SOCKET`  | Collect your traces through a Unix Domain Sockets and takes priority over hostname and port configuration if set. Off by default, when set it must point to a valid sock file.                                                                                                                                            |
@@ -118,8 +120,8 @@ List of all environment variables available for tracing within the Agent running
 | `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                                                                                                                                                                                                                           |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when tracing from other containers.                                                                                                                                                                                                                               |
 | `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. i.e. <code>GET /ignore-me,(GET\|POST) /and-also-me</code>.                                                                                                                                                                          |
-| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of <code>\<SERVICE_NAME>\|;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code>. You can also [enable it automatically][3] with the configuration parameter in the Tracing Client. |
-| `DD_APM_ENV`               | Sets the default [environment][4] for your traces.                                                                                                                                                                                                                                                                          |
+| `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of <code>\<SERVICE_NAME>\|;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code>. You can also [enable it automatically][4] with the configuration parameter in the Tracing Client. |
+| `DD_APM_ENV`               | Sets the default [environment][5] for your traces.                                                                                                                                                                                                                                                                          |
 | `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second.                                                                                                                                                                                                                                                                                 |
 | `DD_APM_MAX_TPS`           | Sets the maximum traces per second.                                                                                                                                                                                                                                                                                         |
 
@@ -127,7 +129,8 @@ List of all environment variables available for tracing within the Agent running
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup
-[2]: /tracing/guide/security/#replace-rules
-[3]: /tracing/app_analytics/#automatic-configuration
-[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[1]: /agent/kuberenetes
+[2]: /tracing/setup
+[3]: /tracing/guide/security/#replace-rules
+[4]: /tracing/app_analytics/#automatic-configuration
+[5]: /tracing/guide/setting_primary_tags_to_scope/#environment

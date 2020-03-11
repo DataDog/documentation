@@ -11,12 +11,14 @@ The Agent has two ways to collect logs: from the [Docker socket][1], and from th
 
 ## Log collection
 
+In order to start collecting your application logs you must be [runing the Datadog Agent in your Kubernetes cluster][2]. To enable log collection with your Agent, follow the instructions below:
+
 {{< tabs >}}
 {{% tab "Daemonset " %}}
 
 To enable Log collection with your DaemonSet:
 
-1. Set the `DD_LOGS_ENABLED` and `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` variable to true in your *env* section:
+1. Set the `DD_LOGS_ENABLED` and `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` variable to true in the *env* section of the `datadog.yaml` Agent manifest:
 
     ```yaml
      # (...)
@@ -100,7 +102,7 @@ datadog:
 
 ## Autodiscovery
 
-Use [Autodiscovery with Pod Annotations][2] to enhance log collection for your containers.
+Use [Autodiscovery with Pod Annotations][3] to enhance log collection for your containers.
 
 ## Short lived containers
 
@@ -113,4 +115,5 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/kubernetes-docker-socket-log-collection
-[2]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
+[2]: /agent/kuberenetes
+[3]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
