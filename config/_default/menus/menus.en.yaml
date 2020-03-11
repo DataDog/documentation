@@ -169,30 +169,35 @@ main:
     url: "agent/basic_agent_usage/osx/"
     weight: 108
     parent: "basic_agent_usage"
+  - name: "Puppet"
+    identifier: "basic_agent_usage_puppet"
+    url: "agent/basic_agent_usage/puppet/"
+    weight: 109
+    parent: "basic_agent_usage"
   - name: "Red Hat"
     identifier: "basic_agent_usage_redhat"
     url: "agent/basic_agent_usage/redhat/"
-    weight: 109
+    weight: 110
     parent: "basic_agent_usage"
   - name: "SUSE"
     identifier: "basic_agent_usage_suse"
     url: "agent/basic_agent_usage/suse/"
-    weight: 110
+    weight: 111
     parent: "basic_agent_usage"
   - name: "Ubuntu"
     identifier: "basic_agent_usage_ubuntu"
     url: "agent/basic_agent_usage/ubuntu/"
-    weight: 111
+    weight: 112
     parent: "basic_agent_usage"
   - name: "Windows"
     identifier: "basic_agent_usage_windows"
     url: "agent/basic_agent_usage/windows/"
-    weight: 112
+    weight: 113
     parent: "basic_agent_usage"
   - name: "From Source"
     identifier: "basic_agent_usage_source"
     url: "agent/basic_agent_usage/source/"
-    weight: 113
+    weight: 114
     parent: "basic_agent_usage"
 
   ## AGENT - Docker
