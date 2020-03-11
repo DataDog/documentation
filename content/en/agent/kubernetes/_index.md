@@ -20,11 +20,11 @@ further_reading:
   text: "Autodiscovery with the Agent"
 ---
 
-## Installation
-
-There are a number of different ways to monitor your Kubernetes system using Datadog. Choosing one depends on how your system is structured and the type of monitoring you desire. There are three options for installing the Datadog Agent for Kubernetes: DaemonSets, Helm charts, installing the Agent directly on the host.
+Run the Datadog Agent in your Kubernetes cluster directly in order to start collecting your cluster and applications metrics, traces, and logs. You can deploy it with a [DaemonSet](?tab=daemonset) or a [Helm chart](?tab=helm)
 
 **Note**: Agent version 6.0 and above only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, consult the [Legacy Kubernetes versions section][1].
+
+## Installation
 
 {{< tabs >}}
 {{% tab "DaemonSet" %}}
@@ -84,6 +84,11 @@ To install the Datadog Agent on your Kubernetes cluster:
     datadog-agent   2         2         2         2            2           <none>          10s
     ```
 
+7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][12] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][13]:
+
+    ```shell
+    kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
+    ```
 
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 [2]: https://hub.docker.com/r/datadog/agent
@@ -96,6 +101,8 @@ To install the Datadog Agent on your Kubernetes cluster:
 [9]: /agent/kubernetes/log
 [10]: /agent/kubernetes/apm
 [11]: /infrastructure/process/?tab=kubernetes#installation
+[12]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
+[13]: /agent/kubernetes/metrics/#kube-state-metrics
 {{% /tab %}}
 {{% tab "Helm" %}}
 

@@ -235,10 +235,10 @@ main:
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_integrations"
     weight: 303
-  - name: "Metrics collected"
-    url: "agent/kubernetes/metrics/"
+  - name: "Data collected"
+    url: "agent/kubernetes/data_collected/"
     parent: "agent_kubernetes"
-    identifier: "agent_kubernetes_metrics"
+    identifier: "agent_kubernetes_data_collected"
     weight: 304
 
   ## AGENT - Datadog Cluster Agent
