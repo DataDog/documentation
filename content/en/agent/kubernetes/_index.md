@@ -63,7 +63,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 
      To enable trace collection completly, [extra steps are required on your application pod configuration][8]. Refer also to the [logs][9], [APM][10], and [processes][11] documentation pages to learn how to enable each feature individually.
 
-     **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `namespace` parameter before applying them.
+     **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
 4. Optional - **Set your Datadog site**. If you are using the Datadog EU site, set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
 
