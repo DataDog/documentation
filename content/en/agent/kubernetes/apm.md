@@ -129,8 +129,8 @@ List of all environment variables available for tracing within the Agent running
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kuberenetes
-[2]: /tracing/setup
+[1]: /agent/kubernetes/
+[2]: /tracing/setup/
 [3]: /tracing/guide/security/#replace-rules
 [4]: /tracing/app_analytics/#automatic-configuration
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
