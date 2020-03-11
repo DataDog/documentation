@@ -184,6 +184,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [1]: /fr/agent/kubernetes/#installation
 [2]: https://www.youtube.com/watch?v=raJRLmGb9Is&t=1s
 [3]: https://kubernetes.io/docs/tasks/debug-application-cluster/audit/
-[4]: /fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#log-collection
+[4]: /fr/agent/kubernetes/log/
 [5]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: /fr/help
