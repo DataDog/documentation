@@ -48,8 +48,10 @@ To install the Datadog Agent on your Kubernetes cluster:
 2. **Create a secret that contains your Datadog API Key**. Replace the `<DATADOG_API_KEY>` below with [the API key for your organization][2]. This secret is used in the manifest to deploy the Datadog Agent.
 
     ```shell
-    kubectl create secret generic datadog-secret --from-literal api-key="<DATADOG_API_KEY>"
+    kubectl create secret generic datadog-secret --from-literal api-key="<DATADOG_API_KEY>" --namespace="default"
     ```
+
+    **Note**: This create a secret in the `default` namespace. If you are in a custom namespace, update the `namespace` parameter of the command before running it.
 
 3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
