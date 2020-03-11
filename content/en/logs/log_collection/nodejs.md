@@ -164,7 +164,7 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-__Note:__ To send logs to Datadog EU site, set the host property to `http-intake.logs.datadoghq.eu`
+**Note**: To send logs to Datadog EU site, set the host property to `http-intake.logs.datadoghq.eu`
 
 If you are using US site, you can also check the community supported [Datadog Transport][2].
 
