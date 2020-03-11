@@ -1,5 +1,5 @@
 {
-  usage: [
+  "usage": [
     {
       "metric_category": "custom",
       "max_metric_hour": 7549,

@@ -109,7 +109,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: ruth/docs-631
+      branch: master
       globs:
       - README.md
       options:

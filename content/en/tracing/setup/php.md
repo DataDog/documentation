@@ -297,7 +297,7 @@ To upgrade the PHP tracer, [download the latest release][6] and follow the same 
 [2]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [3]: /tracing/send_traces
 [4]: /tracing/setup/docker
-[5]: /agent/kubernetes/daemonset_setup/#trace-collection
+[5]: /agent/kubernetes/apm/
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://app.datadoghq.com/apm/services
 [8]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php

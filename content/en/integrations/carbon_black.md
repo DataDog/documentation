@@ -76,7 +76,7 @@ siem_api_key=<CB_DEFENSE_API_SECRET_KEY>
 
 Replace the `<DATADOG_API_KEY>`, `<CB_DEFENSE_API_SECRET_KEY>`, `<CB_DEFENSE_API_ID>`, and `<CB_DEFENSE_SERVER_URL>` placeholders to complete your configuration.
 
-First, replace `<DATADOG_API_KEY>` with your Datadog API key, found on the [Datadog API key][4] page.
+First, replace `<DATADOG_API_KEY>` with your Datadog API key, found on the [Datadog API key][2] page.
 
 Next, to obtain your Carbon Black Defense API key and API ID, generate them from within Carbon Black:
 
@@ -89,8 +89,8 @@ You can find your Carbon Black Defense server URL within your Carbon Black dashb
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][5].
+Need help? Contact [Datadog support][3].
 
 [1]: https://github.com/carbonblack/cb-defense-syslog-tls
-[4]: https://app.datadoghq.com/account/settings#api
-[5]: /help
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: /help

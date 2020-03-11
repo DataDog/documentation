@@ -11,10 +11,10 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 
 ## Infrastructure monitoring
 
-* A **host** is a physical or virtual operating system instance. Each hour, Datadog records the number of unique hosts you are monitoring in the infrastructure service.
+* A **host** is a physical or virtual operating system instance. Each hour, Datadog records the number of unique hosts you are monitoring in the Infrastructure service.
   * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-* A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Datadog records the number of containers you are concurrently monitoring in the Datadog Infrastructure service at five-minute intervals. Datadog charges monthly based on the fractional hours of monitored containers.
+* A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Infrastructure service. Datadog charges monthly based on the fractional hours of monitored containers.
 * A [**custom metric**][2] is a single, unique combination of a metric name, host ID and any tags. Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour.
 * A **device** is a physical sensor comprising one or more single-board computers in a frame. Datadog records and charges for the number of devices and hosts you are concurrently monitoring in the Datadog Infrastructure service.
 * A **cloud function** is application code setup to execute on a cloud platform’s serverless compute service in response to defined events or actions (for example, AWS Lambda, Google Cloud Function, and Azure Function). The Datadog Infrastructure service records the number of functions executed or invoked one or more times each hour. Datadog charges based on the average number of functions across all hours in a month.

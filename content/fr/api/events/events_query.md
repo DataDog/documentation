@@ -15,11 +15,11 @@ Remarque : si l'événement que vous interrogez comprend de la mise en forme Ma
     Timestamp POSIX.
 * **`end`** [*obligatoire*] :
     Timestamp POSIX.
-* **`priority`** [*facultatif*, *défaut*=**None**] :
+* **`priority`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     Priorité de vos événements : **normal** ou **low**.
-* **`sources`** [*facultatif*, *défaut*=**None**] :
+* **`sources`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     Une chaîne de sources séparées par des virgules.
-* **`tags`** [*facultatif*, *défaut*=**None**] :
+* **`tags`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     Une chaîne de tags séparés par des virgules. Pour utiliser un filtre de tags négatif, ajoutez le préfixe `-` à votre tag.
     Consultez la [documentation relative au flux d'événements][2] pour en savoir plus.
 * **`unaggregated`** [*facultatif*, *défaut*=*false*] :

@@ -18,6 +18,7 @@ When using any Datadog cloud integration (AWS, Azure, GCP, etc.), metrics are pu
 
 | Provider   | Default crawler  |
 |------------|------------------|
+| Alibaba    | Every 10 minutes |
 | AWS        | Every 10 minutes |
 | Azure      | Every 5 minutes  |
 | Cloudflare | Every 15 minutes |
@@ -26,6 +27,10 @@ When using any Datadog cloud integration (AWS, Azure, GCP, etc.), metrics are pu
 ## Cloud providers
 
 These are specifics related to particular cloud providers.
+
+## Alibaba
+
+Alibaba emits metrics with one-minute granularity. Therefore, expect metric delays of ~7-8 minutes.
 
 ### AWS
 

@@ -42,8 +42,8 @@ from ddtrace import tracer
 
 API details for the decorator can be found at [`ddtrace.Tracer.wrap()`][1]
 
-[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 
+[1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 {{% /tab %}}
 {{% tab "Context Manager" %}}
 
@@ -59,9 +59,9 @@ To trace an arbitrary block of code, you can use the [`ddtrace.Span`][1] context
 
 Further API details can be found at [`ddtrace.Tracer()`][2]
 
+
 [1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
-
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -82,10 +82,10 @@ API details of the decorator can be found here:
 - [`ddtrace.Tracer.trace`][2]
 - [`ddtrace.Span.finish`][3]
 
+
 [1]: /tracing/visualization/#spans
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.trace
 [3]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span.finish
-
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -16,7 +16,7 @@ Les commentaires sont fondamentalement des événements spéciaux qui apparaisse
 * **`handle`** [*facultatif*, *défaut*=**application key owner**] :
     Le handle de l'utilisateur qui publie le commentaire.
 
-* **`related_event_id`** [*facultatif*, *défaut*=**None**] :
+* **`related_event_id`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     L'ID d'un autre commentaire ou événement auquel répondre.
 
 [1]: /fr/events

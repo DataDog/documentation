@@ -21,7 +21,54 @@ further_reading:
 ---
 La collecte de logs nécessite la version 6.0+ de l'Agent. Les anciennes versions de l'Agent n'incluent pas l'interface `log collection`. Si vous n'utilisez pas encore l'Agent, suivez les [instructions d'installation de l'Agent][1].
 
-La collecte de logs est **désactivée** par défaut dans l'Agent Datadog. Vous devez l'activer dans le [fichier de configuration principal][2] de l'Agent (`datadog.yaml`) :
+## Activer la collecte de logs
+
+La collecte de logs est **désactivée** par défaut dans l'Agent Datadog.
+
+{{< tabs >}}
+{{% tab "HTTP avec compression" %}}
+
+Datadog vous conseille d'envoyer les logs compressés via HTTPS avec l'Agent Datadog v6.14+. Activez la collecte de logs dans le [fichier de configuration principal][1] de l'Agent (`datadog.yaml`) :
+
+```yaml
+logs_enabled: true
+logs_config:
+  use_http: true
+  use_compression: true
+```
+
+Pour envoyer des logs avec des variables d'environnement, configurez les éléments suivants :
+
+* `DD_LOGS_ENABLED`
+* `DD_LOGS_CONFIG_USE_HTTP`
+* `DD_LOGS_CONFIG_USE_COMPRESSION`
+
+Pour en savoir plus sur les performances de compression et les tailles de lot, consultez la [section HTTPS][2].
+
+
+[1]: /fr/agent/guide/agent-configuration-files
+[2]: /fr/agent/logs/#send-logs-over-https
+{{% /tab %}}
+{{% tab "HTTP sans compression" %}}
+
+Pour envoyer des logs via HTTPS avec l'Agent Datadog v6.14+, activez la collecte de logs dans le [fichier de configuration principal][1] de l'Agent (`datadog.yaml`) :
+
+```yaml
+logs_enabled: true
+logs_config:
+  use_http: true
+```
+
+Utilisez `DD_LOGS_CONFIG_USE_HTTP` pour configurer cela via une variable d'environnement.
+
+Pour en savoir plus sur les performances de compression et les tailles de lot, consultez la [section HTTPS][2].
+
+[1]: /fr/agent/guide/agent-configuration-files
+[2]: /fr/agent/logs/#send-logs-over-https
+{{% /tab %}}
+{{% tab "TCP" %}}
+
+L'envoi de logs via TCP est le comportement par défaut de l'Agent Datadog. Activez la collecte de logs dans le [fichier de configuration principal][1] de l'Agent (`datadog.yaml`) :
 
 ```yaml
 logs_enabled: true
@@ -29,34 +76,36 @@ logs_enabled: true
 
 Par défaut, l'Agent Datadog envoie ses logs à Datadog via le protocole TCP chiffré par TLS. Cela nécessite une communication sortante sur le port `10516`.
 
-[Voir ci-dessous pour envoyer les logs via HTTPS](#envoyer-les-logs-via-https).
+[1]: /fr/agent/guide/agent-configuration-files
+{{% /tab %}}
+{{< /tabs >}}
 
-**Remarque** : si vous utilisez Kubernetes, assurez-vous d'[activer la collecte de logs dans votre configuration DaemonSet][3]. Si vous utilisez Docker, [activez la collecte de logs pour l'Agent conteneurisé][4].
+Une fois la collecte de logs activée, l'Agent est prêt à envoyer ses logs à Datadog. Configurez ensuite l'Agent afin de définir les sources de collecte des logs.
 
 ## Activer la collecte de logs à partir d'intégrations
 
-Pour recueillir des logs pour une intégration donnée, supprimez la mise en commentaire de la section logs du fichier `conf.yaml` de cette intégration et configurez-la pour votre environnement.
+Pour recueillir les logs d'une intégration donnée, supprimez la mise en commentaire de la section logs du fichier `conf.yaml` de cette intégration et configurez-la pour votre environnement.
 
 <div class="alert alert-warning">
 Consultez la <a href="/integrations/#collecte-de-log-cat">liste des intégrations prises en charge</a> qui intègrent une configuration de log par défaut.
 </div>
 
-Si une intégration ne prend pas en charge les logs par défaut, utilisez la collecte de logs personnalisée.
+Si vous utilisez Kubernetes, assurez-vous d'[activer la collecte de logs dans votre configuration DaemonSet][2]. Si vous utilisez Docker, [activez la collecte de logs pour l'Agent conteneurisé][3]. Pour en savoir plus sur la collecte de logs à partir d'environnements conteneurisés, consultez la section [Collecte de logs depuis un conteneur][4]. Si une intégration ne prend pas en charge les logs par défaut, utilisez la collecte de logs personnalisée.
 
 ## Collecte de logs personnalisée
 
 L'Agent Datadog v6 peut recueillir des logs et les transférer à Datadog à partir de fichiers, du réseau (TCP ou UDP), de journald et des canaux Windows :
 
-1. Créez un dossier `<SOURCE_LOGS_PERSONNALISÉE>.d/` dans le répertoire `conf.d/` à la racine du [répertoire de configuration de votre Agent][2].
+1. Créez un dossier `<SOURCE_LOGS_PERSONNALISÉE>.d/` dans le répertoire `conf.d/` à la racine du [répertoire de configuration de votre Agent][5].
 2. Créez un fichier `conf.yaml` dans ce nouveau dossier.
 3. Ajoutez un groupe de configuration de collecte de logs personnalisée avec les paramètres ci-dessous.
-4. [Redémarrez votre Agent][5] pour prendre en compte cette nouvelle configuration.
-5. Lancez la [sous-commande status de l'Agent][6] et cherchez `<SOURCE_LOGS_PERSONNALISÉE>` dans la section Checks.
+4. [Redémarrez votre Agent][6] pour appliquer cette nouvelle configuration.
+5. Lancez la [sous-commande status de l'Agent][7] et cherchez `<SOURCE_LOGS_PERSONNALISÉE>` dans la section Checks.
 
 Voici des exemples de configurations de collecte de logs personnalisée ci-dessous :
 
 {{< tabs >}}
-{{% tab "Tail de fichiers existants" %}}
+{{% tab "Suivre des fichiers" %}}
 
 Pour recueillir les logs de votre application `<NOM_APP>` stockés dans `<CHEMIN_FICHIER_LOG>/<NOM_FICHIER_LOG>.log`, créez un fichier `<NOM_APP>.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][1] avec le contenu suivant :
 
@@ -73,7 +122,7 @@ logs:
 [1]: /fr/agent/guide/agent-configuration-files
 {{% /tab %}}
 
-{{% tab "Collecte de logs via TCP/UDP" %}}
+{{% tab "TCP/UDP" %}}
 
 Pour recueillir les logs de votre application `<NOM_APP>` qui transfert ses logs via TCP sur le port **10518**, créez un fichier `<NOM_APP>.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][1] avec le contenu suivant :
 
@@ -91,7 +140,7 @@ Si vous utilisez Serilog, vous disposez de l'option `Serilog.Sinks.Network` pour
 
 [1]: /fr/agent/guide/agent-configuration-files
 {{% /tab %}}
-{{% tab "Collecte de logs depuis journald" %}}
+{{% tab "journald" %}}
 
 Pour recueillir les logs depuis journald, créez un fichier `journald.d/conf.yaml` à la racine du [répertoire de configuration de votre Agent][1] avec le contenu suivant :
 
@@ -110,7 +159,7 @@ Consultez la documentation relative à l'[intégration journald][2] pour en savo
 
 Pour envoyer des événements Windows à Datadog en tant que logs, ajoutez des canaux au fichier `conf.d/win32_event_log.d/conf.yaml` manuellement ou via Datadog Agent Manager.
 
-Pour consulter votre liste de canaux, exécutez la commande suivante dans PowerShell :
+Pour consulter la liste de vos canaux, exécutez la commande suivante dans PowerShell :
 
 ```text
 Get-WinEvent -ListLog *
@@ -157,83 +206,70 @@ Liste complète des paramètres disponibles pour la collecte de logs :
 | `port`           | Oui      | Si `type` est défini sur **tcp** ou **udp**, configurez le port sur lequel l'écoute des logs est effectuée.                                                                                                                                                                                                                                                                                    |
 | `path`           | Oui      | Si `type` est défini sur **file** ou **journald**, configurez le chemin du fichier à partir duquel les logs sont recueillis.                                                                                                                                                                                                                                                                            |
 | `channel_path`   | Oui      | Si `type` est défini sur **windows_event**, énumérez les canaux d'événements Windows à partir desquels les logs doivent être recueillis.                                                                                                                                                                                                                                                                    |
-| `service`        | Oui      | Le nom du service propriétaire du log. Si vous avez instrumenté votre service avec l'[APM Datadog][7], ce paramètre doit correspondre au même nom de service.                                                                                                                                                                                                                     |
-| `source`         | Oui      | Un attribut qui définit l'intégration qui envoie les logs. Si les logs ne viennent pas d'une intégration existante, vous pouvez spécifier le nom d'une source personnalisée. Toutefois, nous vous conseillons d'utiliser la valeur de l'espace de nommage des [métriques custom][8] recueillies, par exemple : `myapp` pour `myapp.request.count`. |
+| `service`        | Oui      | Le nom du service propriétaire du log. Si vous avez instrumenté votre service avec l'[APM Datadog][8], ce paramètre doit correspondre au même nom de service.                                                                                                                                                                                                                     |
+| `source`         | Oui      | Un attribut qui définit l'intégration qui envoie les logs. Si les logs ne proviennent pas d'une intégration existante, vous pouvez spécifier le nom d'une source personnalisée. Toutefois, nous vous conseillons d'utiliser la valeur de l'espace de nommage des [métriques custom][9] recueillies, par exemple : `myapp` pour `myapp.request.count`. |
 | `include_units`  | Non       | Si `type` est défini sur **journald**, il s'agit de la liste des unités journald spécifiques à inclure.                                                                                                                                                                                                                                                                              |
 | `exclude_units`  | Non       | Si `type` est défini sur **journald**, il s'agit de la liste des unités journald spécifiques à exclure.                                                                                                                                                                                                                                                                              |
 | `sourcecategory` | Non       | Un attribut à valeur multiple utilisé pour préciser l'attribut source, par exemple : `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                             |
-| `tags`           | Non       | La liste des tags à ajouter à chaque log recueilli ([en savoir plus sur le tagging][9]).                                                                                                                                                                                                                                                                             |
+| `tags`           | Non       | La liste des tags à ajouter à chaque log recueilli ([en savoir plus sur le tagging][10]).                                                                                                                                                                                                                                                                             |
 
 ## Envoyer des logs via HTTPS
 
-Pour envoyer des logs via HTTPS avec l'Agent Datadog > 6.14, ajoutez la ligne suivante dans le [fichier de configuration principal][4] de l'Agent (`datadog.yaml`) :
+**Nous vous conseillons de compresser les logs transférés via HTTPS**, car une réponse 200 est uniquement renvoyée si les logs ont été écrits dans le stockage de Datadog :
 
-{{< tabs >}}
-{{% tab "Compression activée" %}}
+{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="Schéma du processus d'admission HTTPS"  style="width:80%;">}}
+
 
 ```yaml
+logs_enabled: true
 logs_config:
   use_http: true
   use_compression: true
   compression_level: 6
 ```
 
-Vous pouvez également définir les variables d'environnement `DD_LOGS_CONFIG_USE_HTTP` et `DD_LOGS_CONFIG_USE_COMPRESSION` sur `true`.
-Le paramètre `compression_level` (ou la variable d'environnement `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accepte les valeurs comprises entre 0 (aucune compression) et 9 (compression maximale, impliquant une plus forte utilisation des ressources). La valeur par défaut est 6.
-Consultez la [section sur le traitement de l'Agent Datadog][11] pour obtenir plus d'informations sur l'utilisation des ressources de l'Agent lorsque la compression est activée.
-
-Redémarrez ensuite l'Agent pour activer l'envoi des logs via HTTPS vers `agent-http-intake.logs.datadoghq.com` (site américain) ou `agent-http-intake.logs.datadoghq.eu` (site européen) sur le port `443`.
-
-{{% /tab %}}
-{{% tab "Compression désactivée" %}}
-
-```yaml
-logs_config:
-  use_http: true
-```
-
-Vous pouvez également définir la variable d'environnement `DD_LOGS_CONFIG_USE_HTTP` sur `true`.
-Redémarrez ensuite l'Agent pour activer l'envoi des logs via HTTPS vers `agent-http-intake.logs.datadoghq.com` (site américain) ou `agent-http-intake.logs.datadoghq.eu` (site européen) sur le port 443.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-L'Agent envoie les logs par lots en appliquant les limites suivantes :
+L'Agent envoie les lots HTTPS en appliquant les limites suivantes :
 
 * Taille maximale du contenu par charge utile : 1 Mo
 * Taille maximale d'un log : 256 Ko
 * Taille maximale d'un tableau en cas d'envoi de plusieurs logs dans un tableau : 200 entrées de log
 
+### Compression des logs
+
+Le paramètre `compression_level` (ou `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accepte les valeurs comprises entre `0` (aucune compression) et `9` (compression maximale, impliquant une plus forte utilisation des ressources). La valeur par défaut est `6`.
+
+Consultez la [section sur la charge système de l'Agent Datadog][10] pour en savoir plus sur les ressources utilisées par l'Agent lorsque la compression est activée.
+
+### Configurer le temps d'attente d'un lot
+
 L'Agent patiente jusqu'à 5 secondes afin de satisfaire l'une de ces limites (la taille du contenu ou le nombre de logs). Par conséquent, dans le pire des cas (lorsque le nombre de logs générés est très faible), le passage au HTTPS entraîne une latence accrue de 5 secondes par rapport au TCP, qui envoie l'ensemble des logs en temps réel.
 
-**Configurer le temps d'attente du lot**
-
-Pour modifier le délai maximal que l'Agent Datadog applique avant le remplissage de chaque lot, ajoutez la ligne suivante dans le [fichier de configuration principal][4] de l'Agent (`datadog.yaml`) :
+Pour modifier le délai maximal que l'Agent Datadog applique avant le remplissage de chaque lot, ajoutez la ligne suivante dans le [fichier de configuration principal][3] de l'Agent (`datadog.yaml`) :
 
 ```yaml
 logs_config:
   batch_wait: 2
 ```
 
-Vous pouvez également utiliser la variable d'environnement `DD_LOGS_CONFIG_BATCH_WAIT`. 
-La valeur doit être un nombre entier compris entre 1 et 10 et représente le nombre de secondes.
+Vous pouvez également utiliser la variable d'environnement `DD_LOGS_CONFIG_BATCH_WAIT`.
+La valeur doit être un nombre entier compris entre `1` et `10` correspondant au nombre de secondes.
 
-**Configuration de proxy HTTPS**
+### Configuration d'un proxy HTTPS
 
-Lorsque les logs sont envoyés via HTTPS et doivent transiter par un proxy, utilisez les mêmes [paramètres de proxy][10] que ceux utilisés pour l'envoi d'autres types de données.
+Lorsque les logs sont envoyés via HTTPS et doivent transiter par un proxy web, utilisez les mêmes [paramètres de proxy][11] que ceux utilisés pour l'envoi d'autres types de données.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /fr/agent/guide/agent-configuration-files
-[3]: /fr/agent/kubernetes/daemonset_setup/#log-collection
-[4]: /fr/agent/docker/log
-[5]: /fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: /fr/agent/kubernetes/daemonset_setup/#log-collection
+[3]: /fr/agent/docker/log
+[4]: /fr/logs/log_collection/#container-log-collection
+[5]: /fr/agent/guide/agent-configuration-files
 [6]: /fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: /fr/tracing
 [8]: /fr/developers/metrics/custom_metrics
 [9]: /fr/tagging
-[10]: /fr/agent/proxy
-[11]: /fr/agent/basic_agent_usage/#agent-overhead
+[10]: /fr/agent/basic_agent_usage/#agent-overhead
+[11]: /fr/agent/proxy

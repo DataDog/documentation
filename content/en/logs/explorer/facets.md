@@ -70,7 +70,7 @@ The search bar provides the most comprehensive set of interactions to slice and 
 
 **Facets (qualitative)** come with a top list of unique values, and a count of logs matching each of them:
 
-{{< img src="logs/explorer/facet/dimension_facet.png" alt="Facet Search" style="width:30%;">}}
+{{< img src="logs/explorer/facet/dimension_facet.png" alt="Dimension Facet" style="width:30%;">}}
 
 Scope the search query clicking on either value. Clicking on a value toggles the search on this unique value and all values. Clicking on checkboxes adds or removes this specific value from the list of all values, you can also search upon its content:
 
@@ -78,7 +78,7 @@ Scope the search query clicking on either value. Clicking on a value toggles the
 
 **Measures** come with a slider indicating minimum and maximum values. Use the slider, or input numerical values, to scope the search query to different bounds.
 
-{{< img src="logs/explorer/facet/measure_facet.png" alt="Measures Search" style="width:30%;">}}
+{{< img src="logs/explorer/facet/measure_facet.png" alt="Measures facet" style="width:30%;">}}
 
 ### Hide facets
 
@@ -108,19 +108,19 @@ Facets are grouped into meaningful themes, to ease navigation in the facet list.
 
 Use the search box on facets to scope down the whole facet list and jump more quickly to the very one you need to interact with. Facet search uses both facet display name and facet field name to scope down results.
 
-{{< img src="logs/explorer/facet/search_facet.png" alt="Group Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/search_facet.png" alt="Search Facet" style="width:30%;">}}
 
 ### Aliased facets
 
 Some facets may have been aliased (see the [alias facet](#alias-facets) section). Aliased facets are still valid for slicing and dicing, but are considered deprecated by your organization:
 
-{{< img src="logs/explorer/facet/aliased_facet.png" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/aliased_facet.png" alt="Aliased Facet" style="width:30%;">}}
 
 When troubleshooting, it is more likely for you to find content from other teams (alongside content from your team) in the _standard_ facet rather than the _aliased_ facet. This makes correlation on content from diverse origins more straightforward.
 
 If you see an aliased facet in your facet list, consider using the _standard_ facet instead by clicking the **switch to alias** menu item. This action hides the aliased facet and unhides the standard facet. If doing so makes you update a saved view, consider saving the saved view so that the aliasing applies to everyone using this saved view.
 
-{{< img src="logs/explorer/facet/switch_facet.png" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/switch_facet.png" alt="Switch Facet" style="width:30%;">}}
 
 You may wish to keep the non-standard _aliased_ version of the facet if you are troubleshooting against old content (before the aliasing for this facet has been setup by your organization).
 
@@ -151,7 +151,7 @@ The easiest way to create a facet is to add it from the log side panel, where mo
 - If the field has a string value, only facet creation is available.
 - If the field has a numerical value, both facet and measure creation are available.
 
-{{< img src="logs/explorer/facet/create_facet_from_attribute.png" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/create_facet_from_attribute.png" alt="Create Facet from attribute" style="width:30%;">}}
 
 #### From the facet list
 
@@ -164,7 +164,7 @@ Define the underlying field (key) name for this facet:
 
 Autocomplete based on the content in logs of the current views helps you to define the proper field name. But you can use virtually any value here, specifically in the case that you don't yet have matching logs flowing in your indexes.
 
-{{< img src="logs/explorer/facet/create_facet_from_scratch.png" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/create_facet_from_scratch.png" alt="Create Facet from scratch" style="width:30%;">}}
 
 ### Alias Facets
 
@@ -183,13 +183,13 @@ When aliasing an _aliased_ facet towards a _standard_ facet:
 
 To alias a facet towards a standard one, select the `Alias to...` action item in the facet menu. Pick the destination facets from all the [standard][28] ones existing for your organization.
 
-{{< img src="logs/explorer/facet/alias_modal.png" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/alias_modal.png" alt="alias modal" style="width:30%;">}}
 
 #### Aliasing attribute to facet
 
 This is the best option if you onboard logs flowing from new sources. Rather than creating a facet for some field on those logs, and right after deprecating this facet by aliasing it to a standard facet, alias the field directly to an existing facet:
 
-{{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="Create Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/alias_facet_from_attribute.png" alt="Alias facet from attribute" style="width:30%;">}}
 
 ## Further Reading
 
