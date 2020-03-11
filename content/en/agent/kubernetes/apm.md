@@ -11,14 +11,14 @@ further_reading:
 
 ## Setup
 
-To setup APM trace collection in a kubernetes cluster you need to:
+To setup APM trace collection in a Kubernetes cluster, you need to:
 
 1. **Configure the Datadog Agent to accept traces**:
 
     {{< tabs >}}
 {{% tab "Daemonset" %}}
 
-To enable APM trace collection in kubernetes:
+To enable APM trace collection in Kubernetes:
 
 - Allow incoming data from port `8126` and set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section:
 
@@ -79,7 +79,7 @@ To enable APM trace collection in kubernetes:
 
     **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
-2. **Configure your application pods to pull the Host IP in order to communicate with the Datadog Agent**: Use the downward API to pull the host IP; the application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`.
+2. **Configure your application pods to pull the host IP in order to communicate with the Datadog Agent**: Use the downward API to pull the host IP; the application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`.
 
     ```yaml
     apiVersion: apps/v1
@@ -100,7 +100,7 @@ To enable APM trace collection in kubernetes:
 
 ## Agent Environment Variables
 
-List of all environment variables available for tracing within the Agent running in kubernetes:
+List of all environment variables available for tracing within the Agent running in Kubernetes:
 
 | Environment variable       | Description                                                                                                                                                                                                                                                                                                                 |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

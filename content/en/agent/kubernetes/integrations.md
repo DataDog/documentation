@@ -10,7 +10,7 @@ further_reading:
   text: "Kubernetes Host Setup"
 ---
 
-To enable integrations, Datadog recommends to use annotations in the manifest of your application. This is called _Autodiscovery_. For more details, see the [Autodiscovery][1] section. If you can use Autodiscovery, follow the alternatives below:
+To enable integrations, Datadog recommends that you use annotations in the manifest of your application. This is called _Autodiscovery_. For more details, see the [Autodiscovery][1] section. If you cannot use Autodiscovery, follow the alternatives below:
 
 ## ConfigMap
 
