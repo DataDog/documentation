@@ -91,7 +91,7 @@ To collect logs for a given integration, uncomment the logs section in that inte
 Consult the <a href="/integrations/#cat-log-collection">list of supported integrations</a>  that include out of the box log configurations.
 </div>
 
-If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][2]. If you're using Docker, [enable log collection for the containerized Agent][3]. For more information about log collection fron containerized environments, refer to the [Countainer Log Collection][4] documentation. If an integration does not support logs by default, use the custom log collection.
+If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][2]. If you're using Docker, [enable log collection for the containerized Agent][3]. For more information about log collection from containerized environments, refer to the [Container Log Collection][4] documentation. If an integration does not support logs by default, use the custom log collection.
 
 ## Custom log collection
 
