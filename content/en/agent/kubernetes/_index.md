@@ -102,7 +102,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 [10]: /agent/kubernetes/apm
 [11]: /infrastructure/process/?tab=kubernetes#installation
 [12]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[13]: /agent/kubernetes/metrics/#kube-state-metrics
+[13]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
 {{% tab "Helm" %}}
 

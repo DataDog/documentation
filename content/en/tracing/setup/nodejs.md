@@ -209,7 +209,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 [3]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
 [4]: /tracing/send_traces
 [5]: /tracing/setup/docker
-[6]: /agent/kubernetes/daemonset_setup/#trace-collection
+[6]: /agent/kubernetes/apm/
 [7]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [8]: /help
 [9]: https://datadog.github.io/dd-trace-js/#integrations

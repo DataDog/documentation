@@ -264,7 +264,7 @@ When logs are sent through HTTPS, use the same [set of proxy settings][11] as th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/kubernetes/daemonset_setup/#log-collection
+[2]: /agent/kubernetes/log
 [3]: /agent/docker/log
 [4]: /logs/log_collection/#container-log-collection
 [5]: /agent/guide/agent-configuration-files
