@@ -188,7 +188,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
 2. Upgrade your Agent configuration:
 
     ``` shell
-    helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog --recreate-pods
+    helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog
     ```
 
 3. Update your application pods: Your application needs now a reliable way to determine the IP address of its host. This is made simple in Kubernetes 1.7, which expands the set of attributes you can pass to your pods as environment variables. In versions 1.7 and above, you can pass the host IP to any pod by adding an environment variable to the PodSpec. For instance, your application manifest might look like this:
