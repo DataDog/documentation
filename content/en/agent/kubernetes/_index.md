@@ -61,7 +61,9 @@ To install the Datadog Agent on your Kubernetes cluster:
     - [Manifest with APM and metrics collection enabled][6].
     - [Vanilla Manifest with just metrics collection enabled][7].
 
-     Refer to the [logs][8], [traces][9], and [processes][10] documentation pages to learn how to enable each feature individually.
+     To enable trace collection completly, [extra steps are required on your application pod configuration][8]. Refer also to the [logs][9], [APM][10], and [processes][11] documentation pages to learn how to enable each feature individually.
+
+     **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `namespace` parameter before applying them.
 
 4. Optional - **Set your Datadog site**. If you are using the Datadog EU site, set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
 
@@ -84,7 +86,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     datadog-agent   2         2         2         2            2           <none>          10s
     ```
 
-7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][11] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][12]:
+7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][12] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][13]:
 
     ```shell
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
@@ -97,11 +99,12 @@ To install the Datadog Agent on your Kubernetes cluster:
 [5]: /resources/yaml/datadog-agent-logs.yaml
 [6]: /resources/yaml/datadog-agent-apm.yaml
 [7]: /resources/yaml/datadog-agent-vanilla.yaml
-[8]: /agent/kubernetes/log
-[9]: /agent/kubernetes/apm
-[10]: /infrastructure/process/?tab=kubernetes#installation
-[11]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[12]: /agent/kubernetes/data_collected/#kube-state-metrics
+[8]: /agent/kubernetes/apm/#setup
+[9]: /agent/kubernetes/log
+[10]: /agent/kubernetes/apm
+[11]: /infrastructure/process/?tab=kubernetes#installation
+[12]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
+[13]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
 {{% tab "Helm" %}}
 
