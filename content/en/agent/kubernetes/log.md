@@ -115,5 +115,5 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/kubernetes-docker-socket-log-collection
-[2]: /agent/kuberenetes
+[2]: /agent/kubernetes/
 [3]: /agent/autodiscovery/?tab=agent#how-to-set-it-up

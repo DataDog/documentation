@@ -46,6 +46,6 @@ For Kubernetes, it's recommended to run the Agent as a container in your cluster
 
 To get a better idea of how (or why) to integrate your Kubernetes service, check out Datadog's [series of blog posts][3] about it.
 
-[1]: /agent/kubernetes
-[2]: /integrations/faq/kubernetes-host-installation
+[1]: /agent/kubernetes/
+[2]: /integrations/faq/kubernetes-host-installation/
 [3]: https://www.datadoghq.com/blog/monitoring-kubernetes-era
