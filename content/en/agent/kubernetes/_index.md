@@ -31,37 +31,39 @@ Run the Datadog Agent in your Kubernetes cluster directly in order to start coll
 
 Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
 
-*If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][2] as a deployment on each Kubernetes node.*
-
 To install the Datadog Agent on your Kubernetes cluster:
 
 1. **Configure Agent permissions**: If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account. From Kubernetes 1.6 onwards, RBAC is enabled by default. Create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding with the following command:
 
     ```shell
-    kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
 
-    kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/serviceaccount.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/serviceaccount.yaml"
 
-    kubectl create -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrolebinding.yaml"
+    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrolebinding.yaml"
     ```
 
     **Note**: Those RBAC configurations are set for the `default` namespace by default. If you are in a custom namespace, update the `namespace` parameter before applying them.
 
-2. **Create a secret that contains your Datadog API Key**. Replace the `<DATADOG_API_KEY>` below with [the API key for your organization][3]. This secret is used in the manifest to deploy the Datadog Agent.
+2. **Create a secret that contains your Datadog API Key**. Replace the `<DATADOG_API_KEY>` below with [the API key for your organization][2]. This secret is used in the manifest to deploy the Datadog Agent.
 
     ```shell
-    kubectl create secret generic datadog-secret --from-literal api-key="<DATADOG_API_KEY>"
+    kubectl create secret generic datadog-secret --from-literal api-key="<DATADOG_API_KEY>" --namespace="default"
     ```
+
+    **Note**: This create a secret in the `default` namespace. If you are in a custom namespace, update the `namespace` parameter of the command before running it.
 
 3. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
-    - [Manifest with Logs, APM, process, metrics collection enabled][4].
-    - [Manifest with Logs, APM, and metrics collection enabled][5].
-    - [Manifest with Logs and metrics collection enabled][6].
-    - [Manifest with APM and metrics collection enabled][7].
-    - [Vanilla Manifest with just metrics collection enabled][8].
+    - [Manifest with Logs, APM, process, metrics collection enabled][3].
+    - [Manifest with Logs, APM, and metrics collection enabled][4].
+    - [Manifest with Logs and metrics collection enabled][5].
+    - [Manifest with APM and metrics collection enabled][6].
+    - [Vanilla Manifest with just metrics collection enabled][7].
 
-     Refer to the [logs][9], [traces][10], and [processes][11] documentation pages to learn how to enable each feature individually.
+     To enable trace collection completly, [extra steps are required on your application pod configuration][8]. Refer also to the [logs][9], [APM][10], and [processes][11] documentation pages to learn how to enable each feature individually.
+
+     **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
 4. Optional - **Set your Datadog site**. If you are using the Datadog EU site, set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
 
@@ -91,13 +93,13 @@ To install the Datadog Agent on your Kubernetes cluster:
     ```
 
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
-[2]: https://hub.docker.com/r/datadog/agent
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: /resources/yaml/datadog-agent-all-features.yaml
-[5]: /resources/yaml/datadog-agent-logs-apm.yaml
-[6]: /resources/yaml/datadog-agent-logs.yaml
-[7]: /resources/yaml/datadog-agent-apm.yaml
-[8]: /resources/yaml/datadog-agent-vanilla.yaml
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: /resources/yaml/datadog-agent-all-features.yaml
+[4]: /resources/yaml/datadog-agent-logs-apm.yaml
+[5]: /resources/yaml/datadog-agent-logs.yaml
+[6]: /resources/yaml/datadog-agent-apm.yaml
+[7]: /resources/yaml/datadog-agent-vanilla.yaml
+[8]: /agent/kubernetes/apm/#setup
 [9]: /agent/kubernetes/log
 [10]: /agent/kubernetes/apm
 [11]: /infrastructure/process/?tab=kubernetes#installation
