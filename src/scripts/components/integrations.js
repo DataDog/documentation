@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+
 import Mousetrap from 'mousetrap';
 import mixitup from 'mixitup';
 import datadogLogs from './dd-browser-logs-rum';
@@ -5,60 +7,45 @@ import datadogLogs from './dd-browser-logs-rum';
 // console.log('window.hj: ', window.hj);
 
 export function initializeIntegrations() {
-    window.hj('trigger', 'dd_integrations_poll');
-
-    let finder_state = 0; // closed
+    let finderState = 0; // closed
+    let popupClosed = true;
     const container = document.querySelector('[data-ref="container"]');
 
     $(window).on('focus', function() {
-        if (finder_state && container) {
+        if (finderState && container) {
             container.classList.remove('find');
-            finder_state = 0;
+            finderState = 0;
         }
     });
 
-    Mousetrap.bind(['command+f', 'control+f'], function(e) {
-        if (!finder_state && container) {
+    Mousetrap.bind(['command+f', 'control+f'], function() {
+        if (!finderState && container) {
             container.classList.add('find');
-            finder_state = 1;
+            finderState = 1;
         }
     });
 
-    const is_safari = navigator.userAgent.indexOf('Safari') !== -1;
+    const isSafari = navigator.userAgent.indexOf('Safari') !== -1;
     const ref = document.querySelector('.integration-popper-button');
     const pop = document.getElementById('integration-popper');
     if (ref && pop) {
-        ref.addEventListener('click', function(e) {
+        ref.addEventListener('click', function() {
             pop.style.display = pop.style.display === 'none' ? 'block' : 'none';
-            const p = new Popper(ref, pop, {
-                placement: 'start-bottom',
-                modifiers: {
-                    preventOverflow: { enabled: false },
-                    hide: {
-                        enabled: false
-                    }
-                }
-            });
             return false;
         });
     }
 
-    const mobileBtn = document.querySelector('#dropdownMenuLink');
+    const mobileDropDown = document.querySelector('#dropdownMenuLink');
     const controls = document.querySelector('[data-ref="controls"]');
     let filters = null;
     const mobilecontrols = document.querySelector(
         '[data-ref="mobilecontrols"]'
     );
     let mobilefilters = null;
-    const sorts = document.querySelectorAll('[data-ref="sort"]');
     const search = document.querySelector('[data-ref="search"]');
     const items = window.integrations;
 
     if (!container) return;
-
-    const collection = Array.prototype.slice.call(
-        container.querySelectorAll('.mix')
-    );
 
     if (controls) {
         filters = controls.querySelectorAll('[data-ref="filter"]');
@@ -124,6 +111,7 @@ export function initializeIntegrations() {
         searchTimer = setTimeout(function() {
             activateButton(allBtn, filters);
             updateData(e.target.value.toLowerCase(), true);
+
             if (
                 e.target.value.length > 0 &&
                 window._DATADOG_SYNTHETICS_BROWSER === undefined
@@ -154,11 +142,11 @@ export function initializeIntegrations() {
                     'active'
                 );
             }
-            mobileBtn.textContent = activeButton.textContent;
+            mobileDropDown.textContent = activeButton.textContent;
         }
     }
 
-    function handleButtonClick(button, filters) {
+    function handleButtonClick(button, catFilters) {
         // clear the search input
         search.value = '';
         // If button is already active, or an operation is in progress, ignore the click
@@ -170,18 +158,19 @@ export function initializeIntegrations() {
 
         const filter = button.getAttribute('data-filter');
         if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
+            // eslint-disable-line no-underscore-dangle
             datadogLogs.logger.log(
                 'Integrations category selected',
                 { browser: { integrations: { category: button.innerText } } },
                 'info'
             );
         }
-        activateButton(button, filters);
+        activateButton(button, catFilters);
         updateData(filter, false);
 
-        if (history.pushState) {
+        if (window.history.pushState) {
             const href = button.getAttribute('href');
-            history.pushState(null, document.title, href);
+            window.history.pushState(null, document.title, href);
         }
     }
 
@@ -196,13 +185,13 @@ export function initializeIntegrations() {
                 filter === '#all' ||
                 (isSearch && !filter)
             ) {
-                if (!is_safari) {
+                if (!isSafari) {
                     domitem.classList.remove('grayscale');
                 }
                 show.push(item);
             } else {
                 const name = item.name ? item.name.toLowerCase() : '';
-                const public_title = item.public_title
+                const publicTitle = item.public_title
                     ? item.public_title.toLowerCase()
                     : '';
 
@@ -210,24 +199,25 @@ export function initializeIntegrations() {
                     (filter &&
                         isSearch &&
                         (name.includes(filter) ||
-                            public_title.includes(filter))) ||
+                            publicTitle.includes(filter))) ||
                     (!isSearch && item.tags.indexOf(filter.substr(1)) !== -1)
                 ) {
-                    if (!is_safari) {
+                    if (!isSafari) {
                         domitem.classList.remove('grayscale');
                     }
                     show.push(item);
                 } else {
-                    if (!is_safari) {
+                    if (!isSafari) {
                         domitem.classList.add('grayscale');
                     }
                     hide.push(item);
                 }
             }
         }
-        const items = [].concat(show, hide);
-        mixer.dataset(items).then(function(state) {
-            if (is_safari) {
+
+        const mixerItems = [].concat(show, hide);
+        mixer.dataset(mixerItems).then(function() {
+            if (isSafari) {
                 for (let i = 0; i < window.integrations.length; i++) {
                     const item = window.integrations[i];
                     const domitem = document.getElementById(`mixid_${item.id}`);
@@ -240,7 +230,7 @@ export function initializeIntegrations() {
                         // show.push(item);
                     } else {
                         const name = item.name ? item.name.toLowerCase() : '';
-                        const public_title = item.public_title
+                        const publicTitle = item.public_title
                             ? item.public_title.toLowerCase()
                             : '';
 
@@ -248,7 +238,7 @@ export function initializeIntegrations() {
                             (filter &&
                                 isSearch &&
                                 (name.includes(filter) ||
-                                    public_title.includes(filter))) ||
+                                    publicTitle.includes(filter))) ||
                             (!isSearch &&
                                 item.tags.indexOf(filter.substr(1)) !== -1)
                         ) {
@@ -262,6 +252,12 @@ export function initializeIntegrations() {
                 }
             }
         });
+
+        // if no integrations are found, trigger hotjar popup
+        if (!show.length && popupClosed) {
+            window.hj('trigger', 'dd_integrations_poll');
+            popupClosed = false;
+        }
     }
 
     // Set controls the active controls on startup
@@ -272,21 +268,21 @@ export function initializeIntegrations() {
     );
 
     $(window).on('hashchange', function() {
-        let current_cat = '';
+        let currentCat = '';
         if (window.location.href.indexOf('#') > -1) {
-            current_cat = window.location.href.substring(
+            currentCat = window.location.href.substring(
                 window.location.href.indexOf('#')
             );
         }
-        const current_selected = $('.controls .active').attr('href');
-        if (current_cat && current_selected) {
-            if (current_cat !== current_selected) {
-                $(`a[href="${current_cat}"]`)
+        const currentSelected = $('.controls .active').attr('href');
+        if (currentCat && currentSelected) {
+            if (currentCat !== currentSelected) {
+                $(`a[href="${currentCat}"]`)
                     .get(0)
                     .click();
             }
         }
-        if (current_cat === '') {
+        if (currentCat === '') {
             activateButton(
                 controls.querySelector('[data-filter="all"]'),
                 filters
