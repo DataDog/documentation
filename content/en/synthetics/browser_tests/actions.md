@@ -32,7 +32,7 @@ Choose from:
 
 Assertions allow you to validate that your browser test is in the state you expect it to be in, at any given point of a simulated user journey. This is why you must end your browser tests by an assertion to confirm it ended up in an expected state.
 
-Some assertions are performed on the active page. **Active page** refers to the page that was last interacted with, using a click or an assertion on a page element for instance.
+Some assertions are performed on the **active page**. Active page refers to the page that has experienced the last interaction like using a click or an assertion on a given page element for instance.
 
 | Assertion                                                 | Description                                                                                                                                                                             |
 |-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
