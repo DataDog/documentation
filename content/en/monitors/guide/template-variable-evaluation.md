@@ -58,7 +58,7 @@ The following functions change how the value of a numerical template variable is
 | trunc(var)          | Returns var as an integer, an alias of the int function|
 | dec(var)            | Returns the numbers to the right of the decimal point, for example if var = 12.345 then dec(var) returns 0.345.|
 
-The following functions will use the value of a numerical template variable as the input to a mathematical function:
+The following functions use the value of a numerical template variable as the input to a mathematical function:
 
 | Function            | Description|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
