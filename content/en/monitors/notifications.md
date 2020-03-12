@@ -78,11 +78,11 @@ Disk space is low @ops-team@company.com
 
 Notify your team through connected integrations by using the format `@<INTEGRATION_NAME>-<VALUES>`. Below is a list of prefixes and example links:
 
-| Integration    | Prefix       | Examples      |
-|----------------|--------------|---------------|
-| [Jira][3]      | `@jira`      | [Examples][4] |
-| [PagerDuty][5] | `@pagerduty` | [Examples][6] |
-| [Slack][7]     | `@slack`     | [Examples][8] |
+| Integration    | Prefix       | Examples       |
+|----------------|--------------|----------------|
+| [Jira][3]      | `@jira`      | [Examples][4]  |
+| [PagerDuty][5] | `@pagerduty` | [Examples][6]  |
+| [Slack][7]     | `@slack`     | [Examples][8]  |
 | [Webhooks][9]  | `@webhook`   | [Examples][10] |
 
 ### Modifications
