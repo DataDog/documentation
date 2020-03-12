@@ -28,8 +28,8 @@ Mount the Docker socket into the Datadog Agent:
 ```yaml
   # (...)
     env:
-      - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
-      - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
+      - {name: "DD_CRI_SOCKET_PATH", value: "/host/var/run/docker.sock"}
+      - {name: "DOCKER_HOST", value: "unix:///host/var/run/docker.sock"}
   # (...)
     volumeMounts:
     #  (...)
