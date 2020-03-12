@@ -217,6 +217,11 @@ main:
     url: agent/docker/log/
     parent: "agent_docker"
     weight: 203
+  - name: "Prometheus"
+    url: "agent/docker/prometheus/"
+    parent: "agent_docker"
+    identifier: "agent_docker_prometheus"
+    weight: 204
 
   ## AGENT - Kubernetes
 
@@ -240,11 +245,16 @@ main:
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_integrations"
     weight: 303
+  - name: "Prometheus"
+    url: "agent/kubernetes/prometheus/"
+    parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_prometheus"
+    weight: 304
   - name: "Data collected"
     url: "agent/kubernetes/data_collected/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_data_collected"
-    weight: 304
+    weight: 305
 
   ## AGENT - Datadog Cluster Agent
 
