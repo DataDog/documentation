@@ -217,6 +217,11 @@ main:
     url: agent/docker/log/
     parent: "agent_docker"
     weight: 203
+  - name: Tag extraction
+    identifier: "agent_docker_tag"
+    url: agent/docker/tag/
+    parent: "agent_docker"
+    weight: 204
 
   ## AGENT - Kubernetes
 
@@ -240,11 +245,16 @@ main:
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_integrations"
     weight: 303
+  - name: "Tag extraction"
+    url: "agent/kubernetes/tag/"
+    parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_tag"
+    weight: 304
   - name: "Data collected"
     url: "agent/kubernetes/data_collected/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_data_collected"
-    weight: 304
+    weight: 305
 
   ## AGENT - Datadog Cluster Agent
 
@@ -324,18 +334,14 @@ main:
     url: "agent/autodiscovery/template_variables/"
     parent: "agent_autodiscovery"
     weight: 504
-  - name: "Tag Extraction"
-    url: "agent/autodiscovery/tag/"
-    parent: "agent_autodiscovery"
-    weight: 505
   - name: "Discovery Management"
     url: "agent/autodiscovery/management/"
     parent: "agent_autodiscovery"
-    weight: 506
+    weight: 505
   - name: "Troubleshooting"
     url: "agent/autodiscovery/troubleshooting/"
     parent: "agent_autodiscovery"
-    weight: 509
+    weight: 506
 
   ## AGENT - LOGS
 
