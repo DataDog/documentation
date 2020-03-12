@@ -46,14 +46,27 @@ curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_V
 
 5. Build the Agent image by running:
 
-    ```shell
-    docker build --build-arg <BUILD_ARGS> --pull --tag <IMAGE_TAG> .
-    ```
+    {{< tabs >}}
+{{% tab "AMD" %}}
 
-    For instance to build the Agent version 7.17.0 with the Python 3 runtime you would run:
+```shell
+docker build --build-arg <BUILD_ARGS> --file amd64/Dockerfile --pull --tag <IMAGE_TAG> .
+```
+
+{{% /tab %}}
+{{% tab "ARM" %}}
+
+```shell
+docker build --build-arg <BUILD_ARGS> --file arm64/Dockerfile --pull --tag <IMAGE_TAG> .
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+    For instance to build the Agent version 7.17.0 on the AMD architecture you would run:
 
     ```shell
-    docker build --build-arg PYTHON_VERSION=3 --pull --tag documentation-example .
+    docker build --build-arg DD_AGENT_ARTIFACT=./datadog-agent_7.17.0-1_amd64.deb --file amd64/Dockerfile --pull --tag documentation-example .
     ```
 
      Available `<BUILD_ARGS>` are:

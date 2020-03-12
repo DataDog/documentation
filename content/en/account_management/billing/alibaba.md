@@ -9,7 +9,7 @@ Datadog bills for all Alibaba Virtual Machines being monitored in Datadog. These
 
 Other Alibaba resources (CDNs, Express Connect Instances, Aspara DBs, etc.) are not part of monthly billing.
 
-### VM exclusion
+## Alibaba VM exclusion
 
 Use the [Datadog-Alibaba integration][1] tile to filter your VMs monitored by Datadog using [host tags][2]. Go to the **Configuration** tab and edit an existing account or add a new one. Filtering for each account is controlled by clicking it and filling in the field for **Optionally limit metrics collection to hosts with tag**:
 
@@ -20,6 +20,7 @@ When adding limits to existing Alibaba accounts within the integration tile, the
 VMs with a running Agent still display and are included in billing, so using the limit option is only useful for VMs without a running Agent.
 
 ## Troubleshooting
+
 For technical questions, contact [Datadog support][4].
 
 For billing questions, contact your [Customer Success][5] Manager.

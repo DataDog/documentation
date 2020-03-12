@@ -219,7 +219,7 @@ func main() {
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
 [5]: /tracing/send_traces
 [6]: /tracing/setup/docker
-[7]: /agent/kubernetes/daemonset_setup/#trace-collection
+[7]: /agent/kubernetes/apm/
 [8]: https://gin-gonic.com
 [9]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
 [10]: http://www.gorillatoolkit.org/pkg/mux

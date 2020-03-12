@@ -61,6 +61,7 @@ You can set specific email addresses to receive invoices on the [Plan][10] page 
     {{< nextlink href="account_management/billing/vsphere/" >}}vSphere integration{{< /nextlink >}}
 {{< /whatsnext >}}
 
+
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: /infrastructure
 [3]: /agent
@@ -71,4 +72,3 @@ You can set specific email addresses to receive invoices on the [Plan][10] page 
 [8]: https://app.datadoghq.com/account/billing_history
 [9]: mailto:billing@datadoghq.com
 [10]: https://app.datadoghq.com/account/billing
-

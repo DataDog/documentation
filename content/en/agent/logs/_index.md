@@ -46,9 +46,9 @@ To send logs with environment variables, configure the following:
 
 For more details about the compression perfomances and batching size, refer to the [HTTPS section][2].
 
+
 [1]: /agent/guide/agent-configuration-files
 [2]: /agent/logs/#send-logs-over-https
-
 {{% /tab %}}
 {{% tab "HTTP uncompressed" %}}
 
@@ -91,19 +91,17 @@ To collect logs for a given integration, uncomment the logs section in that inte
 Consult the <a href="/integrations/#cat-log-collection">list of supported integrations</a>  that include out of the box log configurations.
 </div>
 
-See the setup instructions for [Kubernetes][2] or [Docker][3] if you are using a containerized infrastructure.
-
-If an integration does not support logs by default, use the custom log collection.
+If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][2]. If you're using Docker, [enable log collection for the containerized Agent][3]. For more information about log collection from containerized environments, refer to the [Container Log Collection][4] documentation. If an integration does not support logs by default, use the custom log collection.
 
 ## Custom log collection
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
 
-1. Create a new `<CUSTOM_LOG_SOURCE>.d/` folder in the `conf.d/` directory at the root of your [Agent's configuration directory][4].
+1. Create a new `<CUSTOM_LOG_SOURCE>.d/` folder in the `conf.d/` directory at the root of your [Agent's configuration directory][5].
 2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration group with the parameters below.
-4. [Restart your Agent][5] to take into account this new configuration.
-5. Run the [Agent's status subcommand][6] and look for `<CUSTOM_LOG_SOURCE>` under the Checks section.
+4. [Restart your Agent][6] to take into account this new configuration.
+5. Run the [Agent's status subcommand][7] and look for `<CUSTOM_LOG_SOURCE>` under the Checks section.
 
 Below are examples of custom log collection setup:
 
@@ -209,16 +207,19 @@ List of all available parameters for log collection:
 | `port`           | Yes      | If `type` is **tcp** or **udp**, set the port for listening to logs.                                                                                                                                                                                                                                                                                    |
 | `path`           | Yes      | If `type` is **file** or **journald**, set the file path for gathering logs.                                                                                                                                                                                                                                                                            |
 | `channel_path`   | Yes      | If `type` is **windows_event**, list the Windows event channels for collecting logs.                                                                                                                                                                                                                                                                    |
-| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][7], this must be the same service name.                                                                                                                                                                                                                     |
-| `source`         | Yes      | The attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][8] you are collecting, for example: `myapp` from `myapp.request.count`. |
+| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][8], this must be the same service name.                                                                                                                                                                                                                     |
+| `source`         | Yes      | The attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][9] you are collecting, for example: `myapp` from `myapp.request.count`. |
 | `include_units`  | No       | If `type` is **journald**, list of the specific journald units to include.                                                                                                                                                                                                                                                                              |
 | `exclude_units`  | No       | If `type` is **journald**, list of the specific journald units to exclude.                                                                                                                                                                                                                                                                              |
 | `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                             |
-| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][9]).                                                                                                                                                                                                                                                                             |
+| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][10]).                                                                                                                                                                                                                                                                             |
 
 ## Send logs over HTTPS
 
-**Compressed HTTPS log forwarding is the recommended configuration**
+**Compressed HTTPS log forwarding is the recommended configuration** because a 200 response is returned only if the logs have been written in the Datadog storage:
+
+{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema"  style="width:80%;">}}
+
 
 ```yaml
 logs_enabled: true
@@ -263,10 +264,10 @@ When logs are sent through HTTPS, use the same [set of proxy settings][11] as th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/kubernetes/daemonset_setup/#log-collection
+[2]: /agent/kubernetes/log
 [3]: /agent/docker/log
-[4]: /agent/guide/agent-configuration-files
-[5]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: /logs/log_collection/#container-log-collection
+[5]: /agent/guide/agent-configuration-files
 [6]: /agent/guide/agent-commands/#agent-status-and-information
 [7]: /tracing
 [8]: /developers/metrics/custom_metrics

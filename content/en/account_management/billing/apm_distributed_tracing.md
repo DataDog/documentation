@@ -85,7 +85,7 @@ Continuously invoking a Lambda function every hour for an entire month while sen
 | Total             |            |                                                                             | $5 + $34 | **$39 per month** |
 
 
-### FAQs
+## FAQs
 
 **1. What is classified as an APM host for billing?**
 

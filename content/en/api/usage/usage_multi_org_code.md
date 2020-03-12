@@ -1,7 +1,7 @@
 ---
 title: Get usage across your multi-org account
 type: apicode
-order: 35.8
+order: 35.94
 external_redirect: /api/#get-usage-across-your-multi-org-account
 ---
 
