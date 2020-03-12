@@ -30,7 +30,7 @@ Choose from:
 
 {{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Browser Test Assertion"  style="width:40%;">}}
 
-Assertions allow you to validate that your browser test is in the state you expect it to be in, at a given point of the simulated user journey. It is therefore particularly important to end your browser tests by an assertion to confirm your browser test ended in an expected state.
+Assertions allow you to validate that your browser test is in the state you expect it to be in, at any given point of a simulated user journey. This is why you must end your browser tests by an assertion to confirm it ended up in an expected state.
 
 Some assertions are performed on the active page. **Active page** refers to the page that was last interacted with, using a click or an assertion on a page element for instance.
 
