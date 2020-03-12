@@ -40,7 +40,7 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*100
 
 ## Functions
 
-Evaluation functions allow you to use the value of a numerical template variable as the input to a function that will either change the formatting of the template variable or perform a mathematical operation using its value. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
+The value of a numerical template variable can be used as the input for evaluation functions to change the formatting of the template variable or perform a mathematical operation on the value. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
 
 ```text
 {{eval “function(TEMPLATE_VARIABLE_NAME)”}}
