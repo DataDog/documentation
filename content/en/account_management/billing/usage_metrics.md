@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-Datadog calculates your current estimated usage in near real-time. Estimate usage metrics enable you to:
+Datadog calculates your current estimated usage in near real-time. Estimated usage metrics enable you to:
 
 * Graph your estimated usage
 * Create monitors around your estimated usage based on thresholds of your choosing
