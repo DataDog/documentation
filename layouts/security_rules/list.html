@@ -37,7 +37,6 @@
         function search() {
             const input = document.getElementById('keywords').value.toLowerCase();
             for(i = 0 ; i < group.length; i++){
-
                 // Filtering individual rules
                 const rules = Array.prototype.slice.call(document.querySelectorAll(`.js-group-${i} .js-page`));
                 let count = 0;
@@ -45,17 +44,18 @@
                     elm.classList.remove('d-none');
                     if(!elm.dataset.name.includes(input)){
                         elm.classList.add('d-none');
-                    }else{
+                    } else {
                         elm.classList.remove('d-none');
                         count += 1;
                     }
                 });
 
                 // Hiding group when there is no matching entry
-                if(count ===0) {
+                if(count === 0 ) {
                     document.querySelector(`.js-group-${i}`).classList.add('d-none');
                 }else{
                     document.querySelector(`.js-group-${i}`).classList.remove('d-none');
+                    document.querySelector(`.js-group-${i} > .rule-list`).classList.add('active');
                 }
             }
         }
