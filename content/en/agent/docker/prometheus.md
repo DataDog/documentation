@@ -1,5 +1,5 @@
 ---
-title: Prometheus and OpenMetrics metrics collection with Docker
+title: Docker Prometheus and OpenMetrics metrics collection
 kind: documentation
 further_reading:
     - link: 'logs/log_collection'

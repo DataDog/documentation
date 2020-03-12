@@ -1,5 +1,5 @@
 ---
-title: Prometheus and OpenMetrics metrics collection with Kubernetes
+title: Kubernetes Prometheus and OpenMetrics metrics collection
 kind: documentation
 aliases:
     - /getting_started/prometheus
