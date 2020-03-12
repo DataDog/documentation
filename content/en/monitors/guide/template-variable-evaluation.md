@@ -46,7 +46,7 @@ Evaluation functions allow you to use the value of a numerical template variable
 {{eval “function(TEMPLATE_VARIABLE_NAME)”}}
 ```
 
-The following functions will change how the value of a numerical template variable is formatted:
+The following functions change how the value of a numerical template variable is formatted:
 
 | Function            | Description|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
