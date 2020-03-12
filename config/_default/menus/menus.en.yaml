@@ -59,11 +59,6 @@ main:
     url: "getting_started/tracing/"
     parent: "getting_started"
     weight: 5
-  - name: "Distributed Tracing"
-    identifier: "getting_started_distributed_tracing"
-    url: "getting_started/tracing/distributed-tracing/"
-    parent: "getting_started_collect_traces"
-    weight: 501
 
   ## GETTING STARTED - API
 
@@ -174,30 +169,35 @@ main:
     url: "agent/basic_agent_usage/osx/"
     weight: 108
     parent: "basic_agent_usage"
+  - name: "Puppet"
+    identifier: "basic_agent_usage_puppet"
+    url: "agent/basic_agent_usage/puppet/"
+    weight: 109
+    parent: "basic_agent_usage"
   - name: "Red Hat"
     identifier: "basic_agent_usage_redhat"
     url: "agent/basic_agent_usage/redhat/"
-    weight: 109
+    weight: 110
     parent: "basic_agent_usage"
   - name: "SUSE"
     identifier: "basic_agent_usage_suse"
     url: "agent/basic_agent_usage/suse/"
-    weight: 110
+    weight: 111
     parent: "basic_agent_usage"
   - name: "Ubuntu"
     identifier: "basic_agent_usage_ubuntu"
     url: "agent/basic_agent_usage/ubuntu/"
-    weight: 111
+    weight: 112
     parent: "basic_agent_usage"
   - name: "Windows"
     identifier: "basic_agent_usage_windows"
     url: "agent/basic_agent_usage/windows/"
-    weight: 112
+    weight: 113
     parent: "basic_agent_usage"
   - name: "From Source"
     identifier: "basic_agent_usage_source"
     url: "agent/basic_agent_usage/source/"
-    weight: 113
+    weight: 114
     parent: "basic_agent_usage"
 
   ## AGENT - Docker
@@ -225,34 +225,26 @@ main:
     parent: "agent"
     identifier: "agent_kubernetes"
     weight: 3
-  - name: "DaemonSet Setup"
-    url: "agent/kubernetes/daemonset_setup/"
+  - name: "Log"
+    url: "agent/kubernetes/log/"
     parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_log"
     weight: 301
-  - name: "Host Setup"
-    url: "agent/kubernetes/host_setup/"
+  - name: "APM"
+    url: "agent/kubernetes/apm/"
     parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_apm"
     weight: 302
-  - name: "Using Helm"
-    url: "agent/kubernetes/helm/"
-    parent: "agent_kubernetes"
-    weight: 303
-  - name: "Event Collection"
-    url: "agent/kubernetes/event_collection/"
-    parent: "agent_kubernetes"
-    weight: 304
-  - name: "Custom Integrations"
+  - name: "Integrations"
     url: "agent/kubernetes/integrations/"
     parent: "agent_kubernetes"
-    weight: 305
-  - name: "Metrics"
-    url: "agent/kubernetes/metrics/"
+    identifier: "agent_kubernetes_integrations"
+    weight: 303
+  - name: "Data collected"
+    url: "agent/kubernetes/data_collected/"
     parent: "agent_kubernetes"
-    weight: 306
-  - name: "Legacy Versions"
-    url: "agent/kubernetes/legacy/"
-    parent: "agent_kubernetes"
-    weight: 307
+    identifier: "agent_kubernetes_data_collected"
+    weight: 304
 
   ## AGENT - Datadog Cluster Agent
 
@@ -985,92 +977,100 @@ main:
     identifier: "tracing_runtime_metrics_nodejs"
     weight: 504
 
+  ## TRACING - Profiling
+
+  - name: "Profiling"
+    url: "tracing/profiling/"
+    parent: "tracing"
+    identifier: "profiling"
+    weight: 6
+
   - name: "Manual Instrumentation"
     url: "tracing/manual_instrumentation/"
     parent: "tracing"
     identifier: "tracing_manual_instrumentation"
-    weight: 6
+    weight: 7
   - name: "Java"
     url: "tracing/manual_instrumentation/java"
     parent: "tracing_manual_instrumentation"
     identifier: "tracing_manual_instrumentation_java"
-    weight: 601
+    weight: 701
   - name: "Python"
     url: "tracing/manual_instrumentation/python"
     parent: "tracing_manual_instrumentation"
     identifier: "tracing_manual_instrumentation_python"
-    weight: 602
+    weight: 702
   - name: "Ruby"
     url: "tracing/manual_instrumentation/ruby"
     parent: "tracing_manual_instrumentation"
     identifier: "tracing_manual_instrumentation_ruby"
-    weight: 603
+    weight: 703
   - name: "Go"
     url: "tracing/manual_instrumentation/go"
     parent: "tracing_manual_instrumentation"
     identifier: "tracing_manual_instrumentation_go"
-    weight: 604
+    weight: 704
   - name: "NodeJS"
     url: "tracing/manual_instrumentation/nodejs"
     parent: "tracing_manual_instrumentation"
     identifier: "tracing_manual_instrumentation_nodejs"
-    weight: 605
+    weight: 705
   - name: "PHP"
     url: "tracing/manual_instrumentation/php"
     parent: "tracing_manual_instrumentation"
     identifier: "tracing_manual_instrumentation_php"
-    weight: 606
+    weight: 706
   - name: "C++"
     url: "tracing/manual_instrumentation/cpp"
     parent: "tracing_manual_instrumentation"
     identifier: "tracing_manual_instrumentation_cpp"
-    weight: 607
+    weight: 707
   - name: ".NET"
     url: "tracing/manual_instrumentation/dotnet"
     parent: "tracing_manual_instrumentation"
     identifier: "tracing_manual_instrumentation_dotnet"
-    weight: 608
+    weight: 708
 
   - name: "OpenTracing"
     url: "tracing/opentracing/"
     parent: "tracing"
     identifier: "tracing_opentracing"
-    weight: 7
+    weight: 8
   - name: "Java"
     url: "tracing/opentracing/java"
     parent: "tracing_opentracing"
     identifier: "tracing_opentracing_java"
-    weight: 701
+    weight: 801
   - name: "Python"
     url: "tracing/opentracing/python"
     parent: "tracing_opentracing"
     identifier: "tracing_opentracing_python"
-    weight: 702
+    weight: 802
   - name: "Go"
     url: "tracing/opentracing/go"
     parent: "tracing_opentracing"
     identifier: "tracing_opentracing_go"
-    weight: 703
+    weight: 803
   - name: "PHP"
     url: "tracing/opentracing/php"
     parent: "tracing_opentracing"
     identifier: "tracing_opentracing_php"
-    weight: 704
+    weight: 804
   - name: "Ruby"
     url: "tracing/opentracing/ruby"
     parent: "tracing_opentracing"
     identifier: "tracing_opentracing_ruby"
-    weight: 705
+    weight: 805
   - name: ".NET"
     url: "tracing/opentracing/dotnet"
     parent: "tracing_opentracing"
     identifier: "tracing_opentracing_dotnet"
-    weight: 706
+    weight: 806
   - name: "NodeJS"
     url: "tracing/opentracing/nodejs"
     parent: "tracing_opentracing"
     identifier: "tracing_opentracing_nodejs"
-    weight: 707
+    weight: 807
 
   ## TRACING - Using the APM UI
 
@@ -1078,44 +1078,44 @@ main:
     url: "tracing/visualization/"
     parent: "tracing"
     identifier: "tracing_vis"
-    weight: 8
+    weight: 9
   - name: "Services List"
     url: "tracing/visualization/services_list/"
     parent: "tracing_vis"
-    weight: 801
+    weight: 901
   - name: "Service Page"
     url: "tracing/visualization/service/"
     parent: "tracing_vis"
-    weight: 802
+    weight: 902
   - name: "Resource Page"
     url: "tracing/visualization/resource/"
     parent: "tracing_vis"
-    weight: 803
+    weight: 903
   - name: "Trace View"
     url: "tracing/visualization/trace/"
     parent: "tracing_vis"
-    weight: 804
+    weight: 904
   - name: "Service Map"
     url: "tracing/visualization/services_map/"
     parent: "tracing_vis"
-    weight: 805
+    weight: 905
 
   - name: "Guides"
     url: "tracing/guide/"
     identifier: "tracing_guides"
     parent: "tracing"
-    weight: 9
+    weight: 10
 
   - name: Troubleshooting
     url: "tracing/troubleshooting/"
     identifier: "tracing_troubleshooting"
     parent: "tracing"
-    weight: 10
+    weight: 11
   - name: Agent APM metrics
     url: "tracing/troubleshooting/agent_apm_metrics"
     identifier: "tracing_troubleshooting_apm_metrics"
     parent: "tracing_troubleshooting"
-    weight: 10
+    weight: 12
 
 
 ##########

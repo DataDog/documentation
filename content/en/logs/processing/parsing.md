@@ -128,9 +128,17 @@ At the bottom of your Grok processor tiles, there is an Advanced Settings sectio
 
 {{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings"  style="width:80%;">}}
 
-* Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
+### Parsing a specific text attribute
 
-* Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
+Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
+
+For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. You could could parse this log as follows:
+
+{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line"  style="width:80%;">}}
+
+### Using helper rules to factorize multiple parsing rules
+
+Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
 Example for a classic unstructured log:
 
@@ -151,7 +159,6 @@ user %{word:user.name} id:%{integer:user.id}
 connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
-
 
 {{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules"  style="width:80%;">}}
 

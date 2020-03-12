@@ -17,5 +17,5 @@ external_redirect: /api/#modifier-un-monitor
     Un message à inclure avec les notifications pour ce monitor. Les notifications par e-mail peuvent être envoyées à des utilisateurs spécifiques en utilisant la même notation « @nomutilisateur » que les événements.
 * **`options`** [*facultatif*, *défaut*=**{}**] :
     Reportez-vous à la documentation relative à la création des monitors pour obtenir plus d'informations sur les options disponibles.
-* **`tags`** [*facultatif*, *défaut*=**None**] :
+* **`tags`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     La liste des tags à associer à votre monitor. Cela peut vous aider à catégoriser et à filtrer les monitors.

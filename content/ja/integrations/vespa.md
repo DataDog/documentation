@@ -4,7 +4,7 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - データストア
+  - data store
 creates_events: false
 ddtype: check
 dependencies:
@@ -53,7 +53,7 @@ Vespa チェックは [Datadog Agent][2] パッケージに含まれていませ
 
 ### コンフィギュレーション
 
-Vespa チェックを構築するには
+Vespa チェックを構成するには
 
 1. [Agent のコンフィギュレーションディレクトリ][8]のルートにある `conf.d/` フォルダーに `vespa.d/` フォルダーを作成します。
 2. 上記のステップで作成した `vespa.d/` フォルダーに `conf.yaml` ファイルを作成します。
