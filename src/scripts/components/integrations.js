@@ -4,8 +4,6 @@ import Mousetrap from 'mousetrap';
 import mixitup from 'mixitup';
 import datadogLogs from './dd-browser-logs-rum';
 
-// console.log('window.hj: ', window.hj);
-
 export function initializeIntegrations() {
     let finderState = 0; // closed
     let popupClosed = true;
