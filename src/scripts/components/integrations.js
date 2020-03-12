@@ -2,7 +2,11 @@ import Mousetrap from 'mousetrap';
 import mixitup from 'mixitup';
 import datadogLogs from './dd-browser-logs-rum';
 
+// console.log('window.hj: ', window.hj);
+
 export function initializeIntegrations() {
+    window.hj('trigger', 'dd_integrations_poll');
+
     let finder_state = 0; // closed
     const container = document.querySelector('[data-ref="container"]');
 
