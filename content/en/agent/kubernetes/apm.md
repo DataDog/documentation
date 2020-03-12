@@ -98,7 +98,58 @@ To enable APM trace collection in Kubernetes:
                     fieldPath: status.hostIP
     ```
 
-3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. Refer to the [language-specific APM instrumentation docs][2] for more examples.
+     To make sure the flag is set properly in the application you intend to deploy, test it with one of your applications pods by running:
+
+    ```shell
+    kubectl exec <YOUR_APP_POD_NAME> env | grep DD_AGENT_HOST
+    ```
+
+     `DD_AGENT_HOST` should be present and point to its parent node ip address.
+
+3. **Configure your application tracers to emit traces**: If not done already, instrument your application to start emitting traces. Refer to the [language-specific APM instrumentation docs][2] for per language instructions.
+
+## Admission controller
+
+Takes advantage of [Dynamic Admission Controllers][15]. In Datadog's case, the agent runs a mutating web-hook that automatically injects the host ip of the agent as an environment variable to every pod running on the cluster; this allows APM tracing and DogStatsD libraries to automatically discover the agent, without having to modify application deployment files.
+
+To enable the use of DD's Admission Controller, change the following setting in your `datadog-values.yaml` file:
+
+```yaml
+datadog:
+ #...
+  admissionController:
+    enabled: true
+ #...
+```
+
+Upgrade the helm chart for the changes to take place.
+
+### Downward API
+
+As an alternative to the admission controller, you can use Downward API. To enable Downward API, you need to add the following enviornement variable to every deployment file that belongs to an app you'd like to instrument:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+...
+    spec:
+      containers:
+      - name: "<CONTAINER_NAME>"
+        image: "<CONTAINER_IMAGE>/<TAG>"
+        env:
+          - name: DD_AGENT_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+```
+
+To make sure the flag is set properly in the app you'd like to deploy, test it with one of your applications pods:
+
+```shell
+kubectl exec <YOUR_APP_POD_NAME> env | grep DD_AGENT_HOST
+```
+
+`DD_AGENT_HOST` should be present and point to its parent node ip address.
 
 ## Agent Environment Variables
 
