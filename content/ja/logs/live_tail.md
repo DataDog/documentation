@@ -43,7 +43,7 @@ Live Tail には、ほぼリアルタイムでインフラストラクチャー�
 Live Tail のビューをカスタマイズして、ログの関連情報をよりわかりやすく強調します。
 ページ右上の歯車アイコンをクリックして、以下のオプションから 1 つを起動します。
 
-{{< img src="logs/live_tail/live_tail_column.png" alt="Live Tail の列="width:30%;">}}
+{{< img src="logs/live_tail/live_tail_column.png" alt="Live Tail" style="width:30%;">}}
 
 1. ログストリームにログ属性を表示する際の行数 (1 行、3 行、10 行) を選択します。
 2. Date 列および Message 列を有効/無効にします。

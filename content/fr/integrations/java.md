@@ -42,7 +42,7 @@ L'intégration Java vous permet de recueillir des métriques, des traces et des 
 
 ### Collecte de métriques
 
-Si votre application expose des métriques [JMX][1], l'Agent Datadog appelle un petit plug-in Java appelé JMXFetch (compatible uniquement avec Java >= 1.7.) afin de se connecter à MBean Server et de recueillir les métriques de votre application. Il envoie également des checks de service afin de déterminer le statut des instances que vous surveillez. Ce plug-in envoie les métriques à l'Agent Datadog via le serveur DogStatsD, qui s'exécute au sein de l'Agent. Les intégrations suivantes utilisent également les métriques JMX :
+If your application exposes [JMX][1] metrics, a lightweight Java plugin named JMXFetch (only compatible with Java >= 1.7.) is called by the Datadog Agent to connect to the MBean Server and collect your application metrics. It also sends service checks that report on the status of your monitored instances. This plugin sends metrics to the Datadog Agent using the DogStatsD server running within the Agent. These integrations also use the JMX metrics:
 
 - ActiveMQ
 - Cassandra
