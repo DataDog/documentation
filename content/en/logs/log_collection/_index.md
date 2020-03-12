@@ -90,8 +90,6 @@ For more example with JSON formats, multiple logs per requests and the use of qu
 
 [1]: https://docs.datadoghq.com/api/?lang=bash#send-logs-over-http
 {{% /tab %}}
-
-{{< tabs >}}
 {{% tab "HTTP EU Site" %}}
 
 The public endpoint is `http-intake.logs.datadoghq.eu`, the API Key must be added either in the path or as a header, for instance:
