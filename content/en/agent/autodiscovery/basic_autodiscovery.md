@@ -12,7 +12,7 @@ further_reading:
 - link: "/agent/autodiscovery/management"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
-- link: "/agent/autodiscovery/tag"
+- link: "/agent/kuberenetes/tag"
   tag: "Documentation"
   text: "Dynamically assign and collect tags from your application"
 - link: "/integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui"
@@ -26,7 +26,7 @@ When you are monitoring a containerized infrastructure, one challenge that arise
 
 To solve this issue, you can use Datadog’s Autodiscovery feature to automatically identify the services running on a specific container and gather data from those services. Whenever a container starts, the Datadog Agent identifies which services are running on this new container, looks for the corresponding monitoring configuration, and starts to collect metrics.
 
-Autodiscovery lets you define configuration templates for Agent checks and specify which containers each checks should apply to. 
+Autodiscovery lets you define configuration templates for Agent checks and specify which containers each checks should apply to.
 
 The Agent watches for events like container creation, destruction, starts, and stops. The Agent then enables, disables, and regenerates static check configurations on such events. As the Agent inspects each running container, it checks if the container matches any of the [Autodiscovery container identifiers][1] from any loaded templates. For each match, the Agent generates a static check configuration by substituting the [Template Variables][2] with the matching container's specific values. Then it enables the check using the static configuration.
 
@@ -64,14 +64,14 @@ Setting up Autodiscovery for your infrastructure requires the following two step
 1. [Enable Autodiscovery](#enable-autodiscovery) for your Datadog Agent.
 2. Create [integration-specific configuration templates](#integration-templates) for each service you wish to monitor. Note that Datadog provides auto-configuration templates for [some common containerized services][3], including Apache and Redis.
 
-### Enable Autodiscovery 
+### Enable Autodiscovery
 
 #### With the Agent on a host
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Add the following configuration block in the `datadog.yaml` [configuration file][1]. 
+Add the following configuration block in the `datadog.yaml` [configuration file][1].
 
 ```
 listeners:
@@ -86,7 +86,7 @@ config_providers:
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Add the following configuration block in the `datadog.yaml` [configuration file][1]. 
+Add the following configuration block in the `datadog.yaml` [configuration file][1].
 
 ```
 listeners:
@@ -104,7 +104,7 @@ config_providers:
 {{% /tab %}}
 {{% tab "ECS Fargate" %}}
 
-ECS Fargate cannot be monitored with the Datadog Agent running as a binary on a host. 
+ECS Fargate cannot be monitored with the Datadog Agent running as a binary on a host.
 
 {{% /tab %}}
 {{< /tabs >}}

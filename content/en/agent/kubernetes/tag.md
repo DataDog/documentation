@@ -186,4 +186,4 @@ kubernetes_pod_annotations_as_tags:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery/tag/?tab=agent#extract-labels-as-tags
+[1]: /agent/kubernetes/tag/?tab=agent#extract-labels-as-tags

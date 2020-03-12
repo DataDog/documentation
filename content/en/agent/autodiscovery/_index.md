@@ -14,7 +14,7 @@ further_reading:
 - link: "/agent/autodiscovery/management"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
-- link: "/agent/autodiscovery/tag"
+- link: "/agent/kubernetes/tag"
   tag: "Documentation"
   text: "Dynamically assign and collect tags from your application"
 - link: "/integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui"
@@ -35,7 +35,6 @@ To solve this issue, you can use Datadog’s Autodiscovery feature to automatica
     {{< nextlink href="/agent/autodiscovery/integrations" >}}<u>Integrations Templates</u>: The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container.{{< /nextlink >}}
     {{< nextlink href="/agent/autodiscovery/ad_identifiers" >}}<u>Container Identifier</u>: Autodiscovery container identifiers allow you to apply an Autodiscovery configuration file template to a given container, either by using the container short image or with a custom Autodiscovery container identifier.{{< /nextlink >}}
     {{< nextlink href="/agent/autodiscovery/template_variables" >}}<u>Template Variables</u>: Template variables enable you to dynamically assign your container's values.{{< /nextlink >}}
-    {{< nextlink href="/agent/autodiscovery/tag" >}}<u>Tag Extraction</u>: Datadog can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.{{< /nextlink >}}
     {{< nextlink href="/agent/autodiscovery/management" >}}<u>Discovery Management</u>: Datadog Autodiscovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.{{< /nextlink >}}
 {{< /whatsnext >}}
 
