@@ -7,7 +7,7 @@ In monitor notification messages, you can modify the output of template variable
 
 ## Operators
 
-Evaluation operators enable mathematical operations on numerical template variables. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
+Evaluation operators allow you to perform basic arithmetic operations on a numerical template variable. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
 
 ```text
 {{eval "TEMPLATE_VARIABLE_NAME+1-2*3/4"}}
@@ -40,43 +40,48 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*100
 
 ## Functions
 
-Evaluation functions enable mathematical and formatting functions on numerical template variables. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
+Evaluation functions allow you to use the value of a numerical template variable as the input to a function that will either change the formatting of the template variable or perform a mathematical operation using its value. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
 
 ```text
 {{eval “function(TEMPLATE_VARIABLE_NAME)”}}
 ```
 
-The following functions are supported:
+The following functions will change how the value of a numerical template variable is formatted:
 
-| Function            | Description                                                                                                                                |
+| Function            | Description|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| sin(var)            | Returns the sine of var radians                                                                                                            |
-| sinh(var)           | Returns the hyperbolic sine of var                                                                                                         |
-| asin(var)           | Returns the arc sine of var, in radians                                                                                                    |
-| asinh(var)          | Returns the inverse hyperbolic sine of var                                                                                                 |
-| cos(var)            | Returns the cosine of var radians                                                                                                          |
-| cosh(var)           | Returns the hyperbolic cosine of var                                                                                                       |
-| acos(var)           | Returns the arc cosine of var, in radians                                                                                                  |
-| acosh(var)          | Returns the inverse hyperbolic cosine of var                                                                                               |
-| tan(var)            | Returns the tangent of var radians                                                                                                         |
-| tanh(var)           | Returns the hyperbolic tangent of var                                                                                                      |
-| atan(var)           | Returns the arc tangent of var, in radians                                                                                                 |
-| atan2(var1, var2)   | Returns atan(var1 / var2), in radians                                                                                                      |
-| atanh(var)          | Returns the inverse hyperbolic tangent of var                                                                                              |
-| exp(var)            | Returns e (the base of the natural logarithm) raised to the power of var                                                                   |
-| log10(var)          | Returns the base-10 logarithm of var                                                                                                       |
-| abs(var)            | Returns the absolute value of var                                                                                                          |
-| int(var)            | Returns var as an integer                                                                                                                  |
-| float(var)          | Returns var as a float                                                                                                                     |
-| trunc(var)          | Returns var as an integer                                                                                                                  |
-| round(var)          | Returns var rounded to the nearest integer                                                                                                 |
-| ceil(var)           | Returns the ceiling of var (the smallest integer that is greater than or equal to var)                                                     |
-| floor(var)          | Returns the floor of var (the largest integer that is less than or equal to var)                                                           |
-| dec(var)            | Returns the numbers to the right of the decimal point, for example if var = 12.345 then dec(var) returns 0.345.                                                  |
-| sgn(var)            | Returns the value of the sign function evaluated at var:<br>sgn(var) = 1 if var > 0<br>sgn(var) = 0 if var = 0<br>sgn(var) = -1 if var < 0 |
-| humanize_bytes(var) | Returns a human readable formatting of var bytes                                                                                           |
-| humanize_bits(var)  | Returns a human readable formatting of var bits                                                                                            |
-| to_bool(var)        | Returns true if var = 1<br>Returns false if var = 0                                                                                        |
+| humanize_bytes(var) | Returns a human readable formatting of var bytes|
+| humanize_bits(var)  | Returns a human readable formatting of var bits|
+| abs(var)            | Returns the absolute value of var|
+| int(var)            | Returns var as an integer|
+| float(var)          | Returns var as a float|
+| trunc(var)          | Returns var as an integer, an alias of the int function|
+| dec(var)            | Returns the numbers to the right of the decimal point, for example if var = 12.345 then dec(var) returns 0.345.|
+
+The following functions will use the value of a numerical template variable as the input to a mathematical function:
+
+| Function            | Description|
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| round(var)          | Returns var rounded to the nearest integer|
+| ceil(var)           | Returns the ceiling of var (the smallest integer that is greater than or equal to var)|
+| floor(var)          | Returns the floor of var (the largest integer that is less than or equal to var)|
+| sgn(var)            | Returns the value of the sign function evaluated at var:<br>sgn(var) = 1 if var > 0<br>sgn(var) = 0 if var = 0<br>sgn(var) = -1 if var < 0|
+| to_bool(var)        | Returns true if var = 1<br>Returns false if var = 0|
+| exp(var)            | Returns e (the base of the natural logarithm) raised to the power of var|
+| log10(var)          | Returns the base-10 logarithm of var|
+| sin(var)            | Returns the sine of var radians|
+| sinh(var)           | Returns the hyperbolic sine of var|
+| asin(var)           | Returns the arc sine of var, in radians|
+| asinh(var)          | Returns the inverse hyperbolic sine of var|
+| cos(var)            | Returns the cosine of var radians|
+| cosh(var)           | Returns the hyperbolic cosine of var|
+| acos(var)           | Returns the arc cosine of var, in radians|
+| acosh(var)          | Returns the inverse hyperbolic cosine of var|
+| tan(var)            | Returns the tangent of var radians|
+| tanh(var)           | Returns the hyperbolic tangent of var|
+| atan(var)           | Returns the arc tangent of var, in radians|
+| atan2(var1, var2)   | Returns atan(var1 / var2), in radians|
+| atanh(var)          | Returns the inverse hyperbolic tangent of var|
 
 ### Examples
 
