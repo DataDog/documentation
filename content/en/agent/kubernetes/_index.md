@@ -20,13 +20,51 @@ further_reading:
   text: "Autodiscovery with the Agent"
 ---
 
-Run the Datadog Agent in your Kubernetes cluster directly in order to start collecting your cluster and applications metrics, traces, and logs. You can deploy it with a [DaemonSet](?tab=daemonset) or a [Helm chart](?tab=helm)
+Run the Datadog Agent in your Kubernetes cluster directly in order to start collecting your cluster and applications metrics, traces, and logs. You can deploy it with a [Helm chart](?tab=helm) or a [DaemonSet](?tab=daemonset).
 
 **Note**: Agent version 6.0 and above only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, consult the [Legacy Kubernetes versions section][1].
 
 ## Installation
 
 {{< tabs >}}
+{{% tab "Helm" %}}
+
+To install the chart with the release name `<RELEASE_NAME>`:
+
+1. [Install Helm][1].
+2. Download the [Datadog `value.yaml` configuration file][2].
+3. Optional - Edit the `value.yaml` file and enable the Agent features you want to use.
+3. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
+
+- **Helm v3+**
+
+    ```bash
+    helm install <RELEASE_NAME> -f datadog-values-config.yaml  --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+    ```
+
+- **Helm v1/v2**
+
+    ```bash
+    helm install -f datadog-values-config.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+    ```
+
+This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][4] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
+
+**Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][5].
+
+### Upgrading from chart v1.x
+
+The Datadog chart has been refactored in v2.0 to regroup the `values.yaml` parameters in a more logical way.
+
+If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][6] to map your previous settings with the new fields.
+
+[1]: https://v3.helm.sh/docs/intro/install/
+[2]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+[3]: https://app.datadoghq.com/account/settings#api
+[4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
+[5]: https://github.com/helm/charts/tree/master/stable/datadog
+[6]: https://github.com/helm/charts/blob/master/stable/datadog/docs/Migration_1.x_to_2.x.md
+{{% /tab %}}
 {{% tab "DaemonSet" %}}
 
 Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
@@ -105,46 +143,6 @@ To install the Datadog Agent on your Kubernetes cluster:
 [11]: /infrastructure/process/?tab=kubernetes#installation
 [12]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [13]: /agent/kubernetes/data_collected/#kube-state-metrics
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-To install the chart with the release name `<RELEASE_NAME>`:
-
-1. [Install Helm][1].
-2. Download the [Datadog `value.yaml` configuration file][2].
-3. Optional - Edit the `value.yaml` file and enable the Agent features you want to use.
-3. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
-
-- **Helm v1/v2**
-
-    ```bash
-    helm install -f datadog-values-config.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
-    ```
-
-- **Helm v3+**
-
-    ```bash
-    helm install <RELEASE_NAME> -f datadog-values-config.yaml  --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
-    ```
-
-This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][4] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
-
-**Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][5].
-
-### Upgrading from chart v1.x
-
-The Datadog chart has been refactored in v2.0 to regroup the `values.yaml` parameters in a more logical way.
-
-If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][6] to map your previous settings with the new fields.
-
-
-
-[1]: https://v3.helm.sh/docs/intro/install/
-[2]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
-[3]: https://app.datadoghq.com/account/settings#api
-[4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
-[5]: https://github.com/helm/charts/tree/master/stable/datadog
-[6]: https://github.com/helm/charts/blob/master/stable/datadog/docs/Migration_1.x_to_2.x.md
 {{% /tab %}}
 {{< /tabs >}}
 
