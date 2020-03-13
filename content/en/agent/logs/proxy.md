@@ -17,7 +17,7 @@ Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do 
 
 ## HTTPS log Forwarding
 
-**We recommend to [configure the Agent to send logs in HTTPS][2]** and to use the same [set of proxy settings][2] as other data types.
+**It is recommended to [configure the Agent to send logs in HTTPS][2]** and to use the same [set of proxy settings][2] as other data types.
 
 
 ## TCP log forwarding
@@ -135,7 +135,7 @@ backend datadog-logs
 **Note**: Download the certificate with the following command:
         * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
         * `yum install ca-certificates` (CentOS, Redhat)
-The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
+If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
@@ -191,7 +191,7 @@ backend datadog-logs
 * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
 * `yum install ca-certificates` (CentOS, Redhat)
 
-The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
+If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
 Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
