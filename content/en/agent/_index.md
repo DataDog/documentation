@@ -48,7 +48,7 @@ Packages are also available for 64-bit x86 and Arm v8 architectures. For other a
   {{< nextlink href="/agent/autodiscovery">}}<u>Autodiscovery</u>: Autodiscovery enables you to automatically track which services are running where.{{< /nextlink >}}
   {{< nextlink href="/agent/logs">}}<u>Log Collection</u>: Enable and configure log collection in the Datadog Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/proxy">}}<u>Proxy</u>: If your network configuration restricts outbound traffic, use a proxy for Agent traffic.{{< /nextlink >}}
-  {{< nextlink href="/agent/faq/upgrade-to-agent-v6">}}<u>Upgrade to Agent v6</u>: Agent 6 is the latest major version of the Datadog Agent. Find out how to upgrade.{{< /nextlink >}}
+  {{< nextlink href="/agent/versions/upgrade-to-agent-v7">}}<u>Upgrade to Agent v7</u>: Agent 7 is the latest major version of the Datadog Agent. Find out how to upgrade.{{< /nextlink >}}
   {{< nextlink href="/agent/troubleshooting">}}<u>Troubleshooting</u>: Find troubleshooting information for the Datadog Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>Guides</u>: These are in-depth, step-by-step tutorials for using the Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/security">}}<u>Security</u>: Information on the main security capabilities and features available to customers to ensure their environment is secure.{{< /nextlink >}}
