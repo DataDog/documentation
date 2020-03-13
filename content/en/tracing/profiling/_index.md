@@ -63,6 +63,62 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: /account_management/api-app-keys/#api-keys
 {{% /tab %}}
+
+{{% tab "Python" %}}
+
+The Datadog Profiler requires Python 2.7 or above running on a linux OS. Memory profiling will only work on Python 3.5 and above. To begin profiling applications:
+
+1. install `ddtrace`, which contains the both tracing and profiling class files:
+
+    ```shell
+    pip install ddtrace
+    ```
+
+     **Note**: Profiling is available in the `ddtrace` library in versions above 0.35.
+
+2. Add a valid [Datadog API key][2] in your environment variable: `DD_PROFILING_API_KEY`
+
+3. To automatically profile your code, you can import the `ddtrace.profile.auto module`. As soon as it is imported, it will start catching CPU profiling information on your behalf:
+
+    ```python
+    import ddtrace.profile.auto
+    ```
+
+4. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][1].
+
+**Note**:
+
+- If you want to control which part of your code should be profiled, you can use the `ddtrace.profiler.profiler` object:
+
+    ```python
+    import ddtrace.profile.profiler
+
+    prof = profiler.Profiler()
+    prof.start()
+
+    # At shutdown
+    prof.stop()
+    ```
+
+- You can run your program with profiling enabled by using the wrapper pyddprofile. This will automatically enable the profiling of your application:
+
+    ```shell
+    $ pyddprofile myscript.py
+    ```
+
+- For advanced setup of the profiler or to add tags like `service` or `version`, you can use environment variable to set those parameters:
+
+| Environment variable                             | Type          | Description                                                                                      |
+| ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
+| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][2] to use when uploading events.                                           |
+| `DD_PROFILING_TAGS`                              | String        | The tags to apply to uploaded profile. Must be a list of in the `key1:value,key2:value2` format. |
+| `DD_SERVICE_NAME` or `DATADOG_SERVICE_NAME`      | String        | Datadog API key.                                                                                 |
+
+
+[1]: https://app.datadoghq.com/profiling
+[2]: /account_management/api-app-keys/#api-keys
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Profiles
