@@ -43,7 +43,7 @@ After defining the metric, the anomaly detection monitor provides two preview gr
 * the bounds for the last `15 minutes`, `1 hour`, `2 hours`, etc.
 * Recover if the values are within the bounds for at least `15 minutes`, `1 hour`, `2 hours`, etc.
 
-**Anomaly direction** - With the default option (`above or below`) a metric is considered to be anomalous if it is outside of the gray anomaly band. Optionally, you can specify whether being only `above` or `below` the bands is considered anomalous.
+**Anomaly detection** - With the default option (`above or below`) a metric is considered to be anomalous if it is outside of the gray anomaly band. Optionally, you can specify whether being only `above` or `below` the bands is considered anomalous.
 
 **Trigger window** - How much time is required for the metric to be anomalous before the alert triggers. **Note**: If the alert window is too short, you might get false alarms due to spurious noise.
 
