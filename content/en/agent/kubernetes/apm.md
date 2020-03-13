@@ -17,7 +17,35 @@ To enable trace collection with your Agent, follow the instructions below:
 
 1. **Configure the Datadog Agent to accept traces**:
 
-    {{< tabs >}}
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+**Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
+
+- Update your [datadog-values.yaml][2] file with the following APM configuration:
+
+    ```yaml
+    datadog:
+      ## @param apm - object - required
+      ## Enable apm agent and provide custom configs
+      #
+      apm:
+        ## @param enabled - boolean - optional - default: false
+        ## Enable this to enable APM and tracing, on port 8126
+        #
+        #
+        enabled: true
+
+        ## @param port - integer - optional - default: 8126
+        ## Override the trace Agent DogStatsD port.
+        ## Note: Make sure your client is sending to the same UDP port.
+        #
+        port: 8126
+    ```
+
+- Then upgrade your Datadog Helm chart.
+
+{{% /tab %}}
 {{% tab "Daemonset" %}}
 
 To enable APM trace collection in Kubernetes:
@@ -47,34 +75,6 @@ To enable APM trace collection in Kubernetes:
               protocol: TCP
      # (...)
     ```
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-**Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
-
-- Update your [datadog-values.yaml][2] file with the following APM configuration:
-
-    ```yaml
-    datadog:
-      ## @param apm - object - required
-      ## Enable apm agent and provide custom configs
-      #
-      apm:
-        ## @param enabled - boolean - optional - default: false
-        ## Enable this to enable APM and tracing, on port 8126
-        #
-        #
-        enabled: true
-
-        ## @param port - integer - optional - default: 8126
-        ## Override the trace Agent DogStatsD port.
-        ## Note: Make sure your client is sending to the same UDP port.
-        #
-        port: 8126
-    ```
-
-- Then upgrade your Datadog Helm chart.
 
 {{% /tab %}}
 {{< /tabs >}}
