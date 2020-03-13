@@ -53,7 +53,7 @@ To enable APM trace collection in Kubernetes:
 
 **Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
 
-- Update your [datadog-values.yaml][2] file with the following APM configuration:
+- Update your [datadog-values.yaml][1] file with the following APM configuration:
 
     ```yaml
     datadog:
@@ -76,6 +76,8 @@ To enable APM trace collection in Kubernetes:
 
 - Then upgrade your Datadog Helm chart.
 
+
+[1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
