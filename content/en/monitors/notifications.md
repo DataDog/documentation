@@ -39,7 +39,7 @@ The message field allows standard [Markdown formatting][2] and [variables](#vari
 
 A common use-case for the monitor message is to include a step-by-step way to resolve the problem, for example:
 
-```
+```text
 Steps to free up disk space:
 1. Remove unused packages
 2. Clear APT cache
@@ -61,7 +61,7 @@ Use this section to send notifications to your team through email, Slack, PagerD
 
 **Note**: An `@notification` must have a space between it and the last line character, for example:
 
-```
+```text
 Disk space is low @ops-team@company.com
 ```
 
@@ -78,17 +78,16 @@ Disk space is low @ops-team@company.com
 
 Notify your team through connected integrations by using the format `@<INTEGRATION_NAME>-<VALUES>`. Below is a list of prefixes and example links:
 
-| Integration    | Prefix       | Examples      |
-|----------------|--------------|---------------|
-| [Jira][3]      | `@jira`      | [Examples][4] |
-| [PagerDuty][5] | `@pagerduty` | [Examples][6] |
-| [Slack][7]     | `@slack`     | [Examples][7] |
-| [Webhooks][8]  | `@webhook`   | [Examples][9] |
-
+| Integration    | Prefix       | Examples       |
+|----------------|--------------|----------------|
+| [Jira][3]      | `@jira`      | [Examples][4]  |
+| [PagerDuty][5] | `@pagerduty` | [Examples][6]  |
+| [Slack][7]     | `@slack`     | [Examples][8]  |
+| [Webhooks][9]  | `@webhook`   | [Examples][10] |
 
 ### Modifications
 
-An [event][10] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
+An [event][11] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
 
 ### Edit restrictions
 
@@ -114,7 +113,7 @@ Use template variables to customize your monitor notifications. The built-in var
 
 #### Evaluation
 
-Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][11].
+Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][12].
 
 ### Tag variables
 
@@ -174,7 +173,7 @@ Conditional variable must have an opening and closing pair with the text and **@
 
 To send a notification message when a monitor alerts, use the format:
 
-```
+```text
 {{#is_alert}}
   <ALERT_MESSAGE_TEXT> <@-NOTIFICATION>
 {{/is_alert}}
@@ -185,7 +184,7 @@ To send a notification message when a monitor alerts, use the format:
 
 To send a notification message when a monitor warns, use the format:
 
-```
+```text
 {{#is_warning}}
   <WARNING_MESSAGE_TEXT> <@-NOTIFICATION>
 {{/is_warning}}
@@ -196,7 +195,7 @@ To send a notification message when a monitor warns, use the format:
 
 To send a notification message when a monitor recovers, use the format:
 
-```
+```text
 {{#is_recovery}}
   <RECOVERY_MESSAGE_TEXT> <@-NOTIFICATION>
 {{/is_recovery}}
@@ -255,18 +254,20 @@ Test notifications are supported for the [monitor types][1]: host, metric, anoma
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][12] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test in. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][13] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor"  style="width:70%;" >}}
 
 3. Click **Run Test** to send notifications to the people and services listed in the monitor.
 
 ### Events
+
 Test notifications produce events that can be searched within the event stream. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
 
-### Variables
+### Variables {#variables-test-notification}
 
 Message variables auto-populate with a randomly selected group based on the scope of your monitor's definition, for example:
+
 ```text
 {{#is_alert}}
 {{host.name}} <-- will populate
@@ -381,8 +382,9 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [5]: /integrations/pagerduty
 [6]: /integrations/pagerduty/#troubleshooting
 [7]: /integrations/slack
-[8]: /integrations/webhooks
-[9]: /integrations/webhooks/#usage
-[10]: /events
-[11]: /monitors/guide/template-variable-evaluation
-[12]: /monitors/faq/what-are-recovery-thresholds
+[8]: /integrations/slack/#mentions-in-slack-from-monitor-alert
+[9]: /integrations/webhooks
+[10]: /integrations/webhooks/#usage
+[11]: /events
+[12]: /monitors/guide/template-variable-evaluation
+[13]: /monitors/faq/what-are-recovery-thresholds
