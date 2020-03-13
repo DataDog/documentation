@@ -144,65 +144,70 @@ main:
     url: "agent/basic_agent_usage/amazonlinux/"
     weight: 102
     parent: "basic_agent_usage"
+  - name: "Ansible"
+    identifier: "basic_agent_usage_ansible"
+    url: "agent/basic_agent_usage/ansible/"
+    weight: 103
   - name: "CentOS"
     identifier: "basic_agent_usage_centos"
     url: "agent/basic_agent_usage/centos/"
-    weight: 103
+    weight: 104
     parent: "basic_agent_usage"
   - name: "Chef"
     identifier: "basic_agent_usage_chef"
     url: "agent/basic_agent_usage/chef/"
-    weight: 104
+    weight: 105
     parent: "basic_agent_usage"
   - name: "Debian"
     identifier: "basic_agent_usage_deb"
     url: "agent/basic_agent_usage/deb/"
-    weight: 105
+    weight: 106
     parent: "basic_agent_usage"
   - name: "Fedora"
     identifier: "basic_agent_usage_fedora"
     url: "agent/basic_agent_usage/fedora/"
-    weight: 106
+    weight: 107
     parent: "basic_agent_usage"
   - name: "Heroku"
     identifier: "basic_agent_usage_heroku"
     url: "agent/basic_agent_usage/heroku/"
-    weight: 107
+    weight: 108
     parent: "basic_agent_usage"
   - name: "Mac OS X"
     identifier: "basic_agent_usage_osx"
     url: "agent/basic_agent_usage/osx/"
-    weight: 108
+    weight: 109
     parent: "basic_agent_usage"
   - name: "Puppet"
     identifier: "basic_agent_usage_puppet"
     url: "agent/basic_agent_usage/puppet/"
-    weight: 109
+    weight: 110
     parent: "basic_agent_usage"
   - name: "Red Hat"
     identifier: "basic_agent_usage_redhat"
     url: "agent/basic_agent_usage/redhat/"
-    weight: 110
+    weight: 111
     parent: "basic_agent_usage"
+  # SALT WILL GO HERE
   - name: "SUSE"
     identifier: "basic_agent_usage_suse"
     url: "agent/basic_agent_usage/suse/"
-    weight: 111
+    weight: 113
     parent: "basic_agent_usage"
   - name: "Ubuntu"
     identifier: "basic_agent_usage_ubuntu"
     url: "agent/basic_agent_usage/ubuntu/"
-    weight: 112
+    weight: 114
     parent: "basic_agent_usage"
   - name: "Windows"
     identifier: "basic_agent_usage_windows"
     url: "agent/basic_agent_usage/windows/"
-    weight: 113
+    weight: 115
     parent: "basic_agent_usage"
   - name: "From Source"
     identifier: "basic_agent_usage_source"
     url: "agent/basic_agent_usage/source/"
-    weight: 114
+    weight: 116
     parent: "basic_agent_usage"
 
   ## AGENT - Docker

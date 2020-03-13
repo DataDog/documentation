@@ -5,6 +5,9 @@ platforms:
   - name: amazonlinux
     link: "agent/basic_agent_usage/amazonlinux/"
     image: "platform_amazonlinux.png"
+  - name: ansible
+    link: "agent/basic_agent_usage/ansible/"
+    image: "platform_ansible.png"
   - name: centos
     link: "agent/basic_agent_usage/centos/"
     image: "platform_centos.png"

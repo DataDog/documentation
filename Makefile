@@ -85,6 +85,8 @@ clean-integrations:  ## Remove built integrations files.
 clean-auto-doc: ##Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
 	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
+	@if [ content/en/agent/basic_agent_usage/ansible.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/ansible.md ;fi
 	@if [ content/en/agent/basic_agent_usage/chef.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/chef.md ;fi
 	@if [ content/en/agent/basic_agent_usage/heroku.md ]; then \

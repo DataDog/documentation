@@ -10,6 +10,7 @@ content/en/developers/integrations/*.md
 content/en/developers/amazon_cloudformation.md
 
 # Agent section
+content/en/agent/basic_agent_usage/ansible.md
 content/en/agent/basic_agent_usage/chef.md
 content/en/agent/basic_agent_usage/heroku.md
 content/en/agent/basic_agent_usage/puppet.md

@@ -73,11 +73,26 @@
       - "*/assets/service_checks.json"
       - "*/README.md"
 
+  - repo_name: ansible-datadog
+    contents:
+
+    - action: pull-and-push-file
+      branch: ruth/docs-630
+      globs:
+      - README.md
+      options:
+        dest_path: '/agent/basic_agent_usage/'
+        file_name: 'ansible.md'
+        front_matters:
+          title: Ansible
+          kind: documentation
+          dependencies: ["https://github.com/DataDog/ansible-datadog/blob/master/README.md"]
+
   - repo_name: chef-datadog
     contents:
 
     - action: pull-and-push-file
-      branch: ruth/docs-629
+      branch: master
       globs:
       - README.md
       options:
