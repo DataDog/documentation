@@ -34,7 +34,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.api-key-file=<API_KEY_FILE> -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-3. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][2].
+3. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
 **Note**:
 
@@ -66,25 +66,31 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 
 {{% tab "Python" %}}
 
-The Datadog Profiler requires Python 2.7 or above running on a linux OS. Memory profiling will only work on Python 3.5 and above. To begin profiling applications:
+The Datadog Profiler requires Python 2.7 or above running on Linux. Memory profiling will only work on Python 3.5 and above. To begin profiling applications:
 
-1. install `ddtrace`, which contains the both tracing and profiling class files:
+1. install `ddtrace` with the `profile` flavor, which contains both tracing and profiling:
 
     ```shell
-    pip install ddtrace
+    pip install ddtrace[profile]
     ```
 
      **Note**: Profiling is available in the `ddtrace` library in versions above 0.35.
 
 2. Add a valid [Datadog API key][2] in your environment variable: `DD_PROFILING_API_KEY`
 
-3. To automatically profile your code, you can import the `ddtrace.profile.auto module`. As soon as it is imported, it will start catching CPU profiling information on your behalf:
+3. Set `env`, `service` and `version` as Datadog tags in your environment variables.
+
+    ```shell
+    export DD_PROFILING_TAGS=env:<YOUR_ENVIRONMENT>,service:<YOUR_SERVICE>,version:<YOUR_VERSION>
+    ```
+
+4. To automatically profile your code, you can import `ddtrace.profile.auto`. As soon as it is imported, the profiler will start:
 
     ```python
     import ddtrace.profile.auto
     ```
 
-4. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][1].
+5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][1].
 
 **Note**:
 
@@ -103,20 +109,21 @@ The Datadog Profiler requires Python 2.7 or above running on a linux OS. Memory 
 - You can run your program with profiling enabled by using the wrapper pyddprofile. This will automatically enable the profiling of your application:
 
     ```shell
-    $ pyddprofile myscript.py
+    $ pyddprofile server.py
     ```
 
 - For advanced setup of the profiler or to add tags like `service` or `version`, you can use environment variable to set those parameters:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][2] to use when uploading events.                                           |
-| `DD_PROFILING_TAGS`                              | String        | The tags to apply to uploaded profile. Must be a list of in the `key1:value,key2:value2` format. |
-| `DD_SERVICE_NAME` or `DATADOG_SERVICE_NAME`      | String        | Datadog API key.                                                                                 |
+| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][2] to use when uploading profiles.                                         |
+| `DD_PROFILING_TAGS`                              | String        | The tags to apply to uploaded profile. Must be a list of in the `key1:value1,key2:value2`.       |
+| `DD_SERVICE_NAME`                                | String        | The Datadog [service][3] name. It can be set here, or in `DD_PROFILING_TAGS`.                    |
 
 
 [1]: https://app.datadoghq.com/profiling
 [2]: /account_management/api-app-keys/#api-keys
+[3]: /tracing/visualization/#services
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -193,6 +200,20 @@ Once enabled, the following profile types are collected:
 | Lock                     | Shows the time each method spent waiting for a lock.                                                                                                                                                                                                                                               |
 | Socket I/O               | Shows the time each method spent handling socket I/O.                                                                                                                                                                                                                                              |
 
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+Once enabled, the following profile types are collected:
+
+| Profile type             | Definition                                                                                                                                                                                                                                                                                         |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU         | Shows the time each method spent running on the CPU. It includes CPython bytecode, but not native code called from within Python.                                                                                                                                                                     |
+| Allocation               | Shows the amount of heap memory allocated by each method, including allocations which were subsequently freed.                                                                                                                                                                                     |
+| Wall | Shows the elapsed time each method spent. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. |
+| Exceptions               | Shows the number of exceptions caught or uncaught for each method.                                                                                                                                                                                                                                                 |
+| Lock                     | Shows the time each method spent waiting for a lock.                                                                                                                                                                                                                                               |
 
 {{% /tab %}}
 {{< /tabs >}}
