@@ -43,7 +43,7 @@ Some assertions are performed on the **active page**. Active page refers to the 
 | `Test that an element is present on the active page`      | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                                                                              |
 | `Test that an email was received`                         | Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages [email variables][4]. |
 | `Test your UI with custom JavaScript`                         | Test a custom assertion using your own JavaScript scripts. By default the assertion is done on the active page. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. |
-| `Test a downloaded file`                         | Perform verifications on files downloaded in previous steps. You can assert: the file name, size, and MD5 value. |
+| `Test a downloaded file`                         | Perform verifications on files downloaded in previous steps. You can check that a file was correctly downloaded and assert on: the file name, size, and MD5 value. |
 
 [Advanced options][1] are also available for assertions.
 
