@@ -149,7 +149,7 @@ To add more Trace details to the list, click the **Options** button and select a
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns"  style="width:80%;">}}
 
-Origin Resource is a default column that allows to the resource that is at the root of the given trace. To add Orgin Service or Origin Operation Name, click the **Options** button and select Trace.Origin.Operation.Name or Trace.Origin.Service
+Origin resource is a default column that shows the resource at the root of the given trace. To add origin service or origin operation name, click the **Options** button and select `@trace.origin.operation_name` or `@trace.origin.service`.
 
 {{< img src=https://a.cl.ly/OAur8NQP alt="Trace list with origin columns"  style="width:80%;">}}
 
