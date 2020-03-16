@@ -2,7 +2,7 @@ import Stickyfill from 'stickyfilljs';
 import algoliasearch from 'algoliasearch';
 
 import { initializeIntegrations } from './components/integrations';
-import { updateTOC, buildTOCMap, buildAPIMap, onScroll, closeMobileTOC } from './components/table-of-contents';
+import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import codeTabs from './components/codetabs';
 import datadogLogs from './components/dd-browser-logs-rum';
 import { moveToAnchor } from './helpers/moveToAnchor';
@@ -36,7 +36,7 @@ $(document).ready(function () {
     window.history.replaceState({}, '', window.location.href);
 
     const sidenavHTML = $('.container .sidenav-nav').clone();
-    $('header .sidenav-nav').html(sidenavHTML);
+    $('header .sidenav-nav-main').html(sidenavHTML);
 
     // ie
     document.createElement('picture');
@@ -432,20 +432,20 @@ $(document).ready(function () {
         $('.sidenav-search input[name="s"]').val(searchParam);
     }
 
-    if($('.sidenav-api').length) {
-        $(window).on('resize scroll', function(e) {
-            onScroll();
-        }).trigger('scroll');
+    // if($('.sidenav-api').length) {
+    //     $(window).on('resize scroll', function(e) {
+    //         onScroll();
+    //     }).trigger('scroll');
 
-        $(".sidenav-api ul").each(function() {
-            if($(this).children().length === 0) {
-                $(this).remove();
-            }
-        });
+    //     $(".sidenav-api ul").each(function() {
+    //         if($(this).children().length === 0) {
+    //             $(this).remove();
+    //         }
+    //     });
 
-        buildAPIMap();
-        onScroll();
-    }
+    //     buildAPIMap();
+    //     onScroll();
+    // }
 
     // $('.side').addClass('side-condensed');
     $(window).on('resize scroll', function(e) {
@@ -500,54 +500,54 @@ $(document).ready(function () {
     if($('.api').length) {
         // When language buttons are clicked, show all the code snippets
         // from that language.
-        const code_blocks = $('.code-block');
-        const lang_blocks = $('.lang-specific');
-        const hs = $('h2[id]');
-        $('.lang-btn').on('click', function (e) {
-            const el = $(this);
+        // const code_blocks = $('.code-block');
+        // const lang_blocks = $('.lang-specific');
+        // const hs = $('h2[id]');
+        // $('.lang-btn').on('click', function (e) {
+        //     const el = $(this);
 
-            // Find the element currently in the view port
-            let scrollElement;
-            hs.each(function () {
-                if ($(this).offset().top >= window.scrollY) {
-                    scrollElement = $(this);
-                    return false;
-                }
-            });
+        //     // Find the element currently in the view port
+        //     let scrollElement;
+        //     hs.each(function () {
+        //         if ($(this).offset().top >= window.scrollY) {
+        //             scrollElement = $(this);
+        //             return false;
+        //         }
+        //     });
 
-            // Show this language's code blocks and language-specific elements
-            const lang = el.data('lang');
-            code_blocks.hide();
-            $(`.code-block-${  lang}`).show();
-            lang_blocks.hide();
-            $(`.lang-specific-${  lang}`).show();
+        //     // Show this language's code blocks and language-specific elements
+        //     // const lang = el.data('lang');
+        //     // code_blocks.hide();
+        //     // $(`.code-block-${  lang}`).show();
+        //     // lang_blocks.hide();
+        //     // $(`.lang-specific-${  lang}`).show();
 
-            // Highlight the active button.
-            $('.lang-btn').removeClass('active');
-            el.addClass('active');
+        //     // // Highlight the active button.
+        //     // $('.lang-btn').removeClass('active');
+        //     // el.addClass('active');
 
-            // Scroll to the element that was in the viewport (ie retain location).
-            if(scrollElement) {
-                const id = scrollElement.attr('id');
-                moveToAnchor(id, false);
-            }
+        //     // Scroll to the element that was in the viewport (ie retain location).
+        //     if(scrollElement) {
+        //         const id = scrollElement.attr('id');
+        //         moveToAnchor(id, false);
+        //     }
 
-            // Add the language selection to the current URL.
-            if (history.pushState) {
-                const url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
-                history.pushState(null, null, `${url  }?lang=${  lang  }${window.location.hash}`)
-            }
+        //     // Add the language selection to the current URL.
+        //     if (history.pushState) {
+        //         const url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
+        //         history.pushState(null, null, `${url  }?lang=${  lang  }${window.location.hash}`)
+        //     }
 
-            return false;
-        });
+        //     return false;
+        // });
     } else if(window.location.hash) {
         moveToAnchor(window.location.hash.substr(1), true);
     }
 
     // For sidenav links with anchor tag refs
-    $(".sidenav-nav a[href^='#']").click(function(){
-        moveToAnchor($(this).attr('href').substr(1), true);
-    });
+    // $(".sidenav-nav a[href^='#']").click(function(){
+    //     moveToAnchor($(this).attr('href').substr(1), true);
+    // });
 
 
     // ------------- TODO: move TOC js back to own file when webpack migration complete and can import js modules
@@ -599,7 +599,7 @@ function hasParentLi(el){
     while (el) {
         if(el.classList){
 
-            if(el.classList.contains('sidenav-nav')){
+            if(el.classList.contains('sidenav-nav-main')){
             break;
             }
 
@@ -621,7 +621,7 @@ function hasParentLi(el){
 function getPathElement(){
     const domain = window.location.origin;
     let path = window.location.pathname;
-    const activeMenus = document.querySelectorAll('.side .sidenav-nav .active, header .sidenav-nav .active');
+    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
 
     for(let i = 0; i < activeMenus.length; i++){
         activeMenus[i].classList.remove('active');
@@ -716,8 +716,8 @@ function getPathElement(){
 
 // remove open class from li elements and active class from a elements
 function closeNav(){
-    const activeMenus = document.querySelectorAll('.side .sidenav-nav .active, header .sidenav-nav .active');
-    const openMenus = document.querySelectorAll('.side .sidenav-nav .open, header .sidenav-nav .open');
+    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
+    const openMenus = document.querySelectorAll('.side .sidenav-nav-main .open, header .sidenav-nav-main .open');
 
     for(let i = 0; i < activeMenus.length; i++){
         activeMenus[i].classList.remove('active');
@@ -928,8 +928,8 @@ function reloadWistiaVidScripts(vidId){
     }
 }
 
-const sideNav = document.querySelector('.side .sidenav-nav');
-const mobileNav = document.querySelector('header .sidenav-nav');
+const sideNav = document.querySelector('.side .sidenav-nav-main');
+const mobileNav = document.querySelector('header .sidenav-nav-main');
 
 if (sideNav) {
     sideNav.addEventListener('click', navClickEventHandler);

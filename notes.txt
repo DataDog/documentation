@@ -1,0 +1,4 @@
+1. full_spec.yaml, can `paths` be an array of objects? currently is just an object.
+2. add some sort of slug param for each action (delete-an-aws-account.md)
+3. some actions don't have `summary` field.
+4. make sure summary field for each action doesn't have a period (creates md file with two periods ..md)

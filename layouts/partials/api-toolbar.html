@@ -1,0 +1,59 @@
+{{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
+{{ $.Scratch.Add "path" .Site.BaseURL }}
+
+
+<div class="bg-gray-lighter row align-items-center mb-2" style="height: 51px; position: sticky;
+z-index: 1;
+top: 95px;">
+    <div class="col-12">
+
+        <div class="row align-items-center">
+            <div class="col-8">
+                <div id="breadcrumbs">
+                    <a href="/">Docs</a>
+                    >
+                    {{ if .Page.Parent.Parent }}
+                        <a href="{{ .Page.Parent.Parent.RelPermalink }}">{{ .Page.Parent.Parent.Title }}</a>
+                        >
+                    {{ end }}
+                    {{ if .Page.Parent }}
+                        <a href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>
+                        >
+                    {{ end }}
+                    
+                    <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+
+                    {{/* range $index, $element := split $url "/" }}
+                    {{ $.Scratch.Add "path" $element }}
+                        {{ if ne $element "" }}
+                        > <a href='{{ $.Scratch.Get "path" }}'>{{ . }}</a>
+                        {{ $.Scratch.Add "path" "/" }}
+                        {{ end }}
+                    {{ end */}}
+                </div>
+            </div>
+            <div class="col-4">
+                <form class="form-inline">
+                    
+                    <div class="form-group">
+                        <label for="codeLangSelect" class="sr-only">Code language</label>
+                        <select class="form-control js-code-lang-select" id="codeLangSelect">
+                          <option value="bash">Bash</option>
+                          <option value="java">Java</option>
+                          <option value="go">Go</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="versionSelect" class="sr-only">Version</label>
+                        <select class="form-control js-api-version-select" id="versionSelect">
+                          <option value="v1" {{ if in .Permalink "api/v1" }}selected{{ end }}>Version 1</option>
+                          <option value="v2" {{ if in .Permalink "api/v2" }}selected{{ end }}>Version 2</option>
+                        </select>
+                      </div>
+                  </form>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>

@@ -244,6 +244,30 @@ aside.sidenav-api {
     overflow-x: hidden;
     overflow-y: auto;
     margin:0;
+    ul li.active{
+      > a {
+        background: transparent;
+              color: $ddpurple;
+              border-bottom: 1px solid transparent;
+      }
+      ul {
+        display: block;
+        li {
+          padding-left: 0;
+          &.active {
+            a {
+              background: transparent;
+              color: $ddpurple;
+              border-bottom: 1px solid transparent;
+              span {
+                border-bottom: 1px solid $ddpurple;
+              }
+            }
+          }
+          
+        }
+      }
+    } 
     ul li > ul {
       //display: block;
       list-style-type:none;

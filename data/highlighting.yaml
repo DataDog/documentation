@@ -11,3 +11,9 @@ languages:
   'json':
     extension: json
     pygments_name: json
+  'go':
+    extension: go
+    pygments_name: go
+  'java':
+    extension: java
+    pygments_name: java

@@ -1,0 +1,68 @@
+{{ define "api-main" }}
+
+    {{ $dot := . }}
+
+    {{ .Scratch.Set "apiVersion" "v1"}}
+
+    {{ if in .Permalink "api/v2" }}
+        {{ .Scratch.Set "apiVersion" "v2"}}
+    {{ end }}
+
+    {{ $apiVersion := .Scratch.Get "apiVersion"}}
+
+    {{ $d := index $dot.Site.Data.api $apiVersion "full_spec" }}
+
+    {{ $snipdir := print "content/en/api/" $apiVersion "/examples/" }}
+
+    {{- $files := readDir $snipdir -}}
+
+    {{ range $k, $v := (index $d "tags") }}
+        {{ if eq $.Params.name $v.name }}
+            {{ range $path_key, $path_object := $d.paths }}
+                {{ range $action_type, $action := $path_object }}
+                    {{ if in $action.tags $v.name }}
+                        <div class="row">
+                            <div class="col-7">
+                                <h2 class="mb-2" id="{{ $action.summary | urlize }}">
+                                    <a href="#{{ $action.summary | urlize }}">{{ $action.summary }}</a>
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-7">
+                                {{$action.description | markdownify }}
+                            </div>
+                            <div class="col-5">
+                        
+                                    {{/* find code examples with same operationID */}}
+                                    {{/* $filess := where $files ".Name" "==" ( printf "%s%s" $action.operationId ".sh") */}}
+
+                                    {{ range $files }}
+
+                                        {{ $file := (print $snipdir (.Name))}}
+                                        {{ $file_content := readFile $file }}
+                                        {{ $file_basename := (index (split .Name ".") 0) }}
+                                        {{ $file_extension := index (split (path.Ext $file) ".") 1 }}
+
+                                        {{ if eq $action.operationId $file_basename }}
+                                            {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+
+                                            <div class="{{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} js-code-block code-block-{{ $lang.pygments_name }}">{{ highlight $file_content $lang.pygments_name "" }}</div>
+                                    
+                                        {{ end }}
+                                    {{ end }}
+                                    
+                            
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <hr/>
+                            </div>
+                        </div>
+                    {{ end }}                
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}

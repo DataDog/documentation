@@ -1,32 +1,47 @@
+{{ .Scratch.Set "apiVersion" "v1"}}
+
+{{ if in .Permalink "api/v2" }}
+    {{ .Scratch.Set "apiVersion" "v2"}}
+{{ end }}
+
+{{ $apiVersion := .Scratch.Get "apiVersion"}}
+
+{{ $apiMenu := print "api_" $apiVersion}}
+
 <aside class="sidenav sidenav-api">
     <div class="row sticky">
         <div class="col">
             <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_docs" }}</h4></a>
             <div class="sidenav-nav">
+                {{ $currentPage := . }}
                 <ul class="list-unstyled">
-                    {{ range $index, $element := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}
-
-                    {{ if (or (in (string $element.Params.order) ".") (eq $index 0)) }}
-                        <!-- display nested items in nav, ones with . in order -->
-                        <li>
-                            <a href="#{{ lower (replace (replace $element.Title "'" " ") " " "-") }}">
-                                <span>{{ $element.Title }}</span>
-                            </a>
-                        </li>
-                    {{ else }}
-                        <!-- display top level items in nav, ones without . in order -->
-                        {{ if (ne $index 1) }}
-                            </ul>
-                            </li>
-                        {{ end }}
-                        <li>
-                            <a href="#{{ lower (replace (replace $element.Title "'" " ") " " "-") }}">
-                                <span>{{ $element.Title }}</span>
+                {{ range (index .Site.Menus  $apiMenu) }}
+                    {{ if .HasChildren }}
+                        <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) }}active{{ end }}">
+                            <a href="{{ .URL }}">
+                                {{ .Pre }}
+                                <span>{{ .Name }}</span>
                             </a>
                             <ul>
+                                {{ range .Children }}
+                                    <li class="{{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
+                                        <a href="{{ .URL }}">
+                                            <span class="d-inline-block">{{ .Name }}</span>
+                                        </a>
+                                    </li>
+                                {{ end }}
+                            </ul>
+                        </li>
+                    {{ else }}
+                        <li>
+                            <a href="{{ .URL }}">
+                                {{ .Pre }}
+                                <span>{{ .Name }}</span>
+                            </a>
+                        </li>
                     {{ end }}
-                    {{ end }}
-                </ul>
+                {{ end }}
+            </ul>
             </div>
         </div>
     </div>

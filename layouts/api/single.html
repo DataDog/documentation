@@ -1,0 +1,78 @@
+{{ define "api-main" }}
+
+    {{ $dot := . }}
+
+    {{ .Scratch.Set "apiVersion" ""}}
+
+    {{ if in .Permalink "api/v2" }}
+
+        {{ .Scratch.Set "apiVersion" "v2"}}
+
+    {{ else }}
+        {{ .Scratch.Set "apiVersion" "v1"}}
+    {{ end }}
+
+    {{ $apiVersion := .Scratch.Get "apiVersion"}}
+
+    {{ $d := index $dot.Site.Data.api $apiVersion "full_spec" }}
+
+    
+
+    {{ $contentList := sort (where .Site.Pages "Type" "=" "apicontent") "Params.order" }}
+    {{ $contentListCount := (len $contentList)}}
+    {{ $codeList := sort (where .Site.Pages "Type" "=" "apicode") "Params.order" }}
+    {{ $codeListCount := (len $codeList)}}
+
+    {{ $operationId := .Params.operationId }}
+
+    {{ range $path_key, $path_object := $d.paths }}
+        {{ range $action_type, $action := $path_object }}
+
+            {{ if eq $operationId $action.operationId }}
+                <div class="action mb-5">
+                <h3 id="{{ $action.summary | urlize }}"><a href="#{{ $action.summary | urlize }}">{{ $action.summary }}</a></h3>
+                <h5>{{ $action_type }} {{ $path_key }}</h5>
+                {{ $action.description | markdownify }}
+
+                <!-- request -->
+                <h4>Request</h4>
+                {{ $action.requestBody.description }}
+                
+                <!-- response -->
+                <h4>Response</h4>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    {{ range $response_code, $response := $action.responses }}
+                        <li class="nav-item">
+                            <a class="nav-link mb-1 mr-1 btn btn-sm-tag btn-outline-secondary {{ if eq $response_code "200"}}active{{end}}"  href="#{{ $action.operationId }}-{{ $response_code }}" role="tab" data-toggle="tab">{{ $response_code }}</a>
+                        </li>
+                    
+                    {{ end }}
+                  </ul>
+                
+
+                <!-- response pane -->
+                <!-- response pane -->
+                <div class="tab-content">
+                    {{ range $response_code, $response := $action.responses }}
+                    <div role="tabpanel" class="tab-pane {{ if eq $response_code "200"}} active {{end}}" id="{{ $action.operationId }}-{{ $response_code }}">
+                        {{ range $content := $response.content }}
+                        {{ range $schema := $content }}
+                            {{ $ref := (index $schema "$ref") }}
+                            {{ $refkey := replace $ref "#/components/schemas/" "" }}
+                            {{ with $refkey }}
+                            {{ highlight ((index $d.components.schemas $refkey) | jsonify) "json" "" }}
+                            {{ end }}
+                        {{ end }}
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+                </div>
+
+
+            {{ end }}
+
+        {{ end }}
+    {{ end }}
+
+{{ end }}

@@ -1,5 +1,0 @@
-{ 'errors': [
-    'Something bad happened to the server.',
-    'Your query made the server very sad.'
-  ]
-}

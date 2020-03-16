@@ -1,1 +1,0 @@
-# Consult the ruby example

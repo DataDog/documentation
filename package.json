@@ -16,6 +16,7 @@
     "build:hugo:preview": "npm run build:hugo -- -D -F --environment preview",
     "build:webpack": "NODE_ENV=production webpack --config webpack.prod.js",
     "build:webpack:preview": "NODE_ENV=preview webpack --config webpack.prod.js",
+    "build:apiPages": "node ./src/scripts/build-api-pages.js",
     "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true"
   },
   "repository": {
@@ -44,6 +45,7 @@
     "hugo-bin": "0.52.0",
     "jquery": "^3.4.1",
     "js-cookie": "^2.2.1",
+    "js-yaml": "^3.13.1",
     "jshint": "2.10.2",
     "jshint-stylish": "2.2.1",
     "json2csv": "^4.5.2",
@@ -57,6 +59,7 @@
     "pa11y": "^5.2.0",
     "picturefill": "3.0.2",
     "popper.js": "1.15.0",
+    "slugify": "^1.4.0",
     "stickyfilljs": "2.1.0",
     "tiny-async-pool": "^1.0.4",
     "traverse": "0.6.6",
