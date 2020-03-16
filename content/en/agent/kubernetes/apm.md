@@ -22,48 +22,14 @@ To enable trace collection with your Agent, follow the instructions below:
 
 **Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
 
-- Update your [datadog-values.yaml][2] file with the following APM configuration:
-
-    ```yaml
-    datadog:
-      ## @param apm - object - required
-      ## Enable apm agent and provide custom configs
-      #
-      apm:
-        ## @param enabled - boolean - optional - default: false
-        ## Enable this to enable APM and tracing, on port 8126
-        #
-        #
-        enabled: true
-
-        ## @param port - integer - optional - default: 8126
-        ## Override the trace Agent DogStatsD port.
-        ## Note: Make sure your client is sending to the same UDP port.
-        #
-        port: 8126
-    ```
-
-- Then upgrade your Datadog Helm chart.
+- To enable APM, run the following command: ```helm upgrade --set datadog.apm.enabled=true <RELEASE NAME>``` (`RELEASE NAME` is the name you've given the release when you installed the chart).
 
 {{% /tab %}}
 {{% tab "Daemonset" %}}
 
-To enable APM trace collection in Kubernetes:
+To enable APM trace collection, open the Daemonset configuration file and edit the following:
 
-- Allow incoming data from port `8126` and set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section of the `datadog.yaml` Agent manifest:
-
-    ```yaml
-     # (...)
-          env:
-            # (...)
-            - name: DD_APM_ENABLED
-              value: 'true'
-            - name: DD_APM_NON_LOCAL_TRAFFIC
-              value: "true"
-     # (...)
-    ```
-
-- Forward the port of the Agent to the host.
+- Allow incoming data from port `8126` by forwarding the port of the Agent to the host:
 
     ```yaml
      # (...)
@@ -73,6 +39,19 @@ To enable APM trace collection in Kubernetes:
               hostPort: 8126
               name: traceport
               protocol: TCP
+     # (...)
+    ```
+
+- **If Using an Old Agent Version (Versions lower than 7.18)**, set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section of the `datadog.yaml` Agent manifest:
+
+    ```yaml
+     # (...)
+          env:
+            # (...)
+            - name: DD_APM_ENABLED
+              value: 'true'
+            - name: DD_APM_NON_LOCAL_TRAFFIC
+              value: "true"
      # (...)
     ```
 
