@@ -11,10 +11,17 @@ if (versionSelect) {
 }
 
 function versionSelectHandler(event) {
+
+    let previewPath = '';
+
+    if ( window.location.href.includes('docs-staging') ) {
+        previewPath = window.location.pathname.split('/').slice(0,3).join('/');
+	}
+
     if (event.target.value === 'v2') {
-        window.location = `${window.location.origin  }/api/v2`;
+        window.location = `${window.location.origin + previewPath  }/api/v2`;
     } else if (event.target.value === 'v1') {
-        window.location = `${window.location.origin  }/api/v1`;
+        window.location = `${window.location.origin + previewPath }/api/v1`;
     }
 }
 
