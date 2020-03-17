@@ -80,20 +80,20 @@ To enable APM trace collection, open the Daemonset configuration file and edit t
 
 2. **Configure your application pods to pull the host IP in order to communicate with the Datadog Agent**: Use the downward API to pull the host IP; the application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`.
 
-```yaml
-    apiVersion: apps/v1
-    kind: Deployment
-     # ...
-        spec:
-          containers:
-          - name: "<CONTAINER_NAME>"
-            image: "<CONTAINER_IMAGE>"/"<TAG>"
-            env:
-              - name: DD_AGENT_HOST
-                valueFrom:
-                  fieldRef:
-                    fieldPath: status.hostIP
-```
+  ```yaml
+      apiVersion: apps/v1
+      kind: Deployment
+       # ...
+          spec:
+            containers:
+            - name: "<CONTAINER_NAME>"
+              image: "<CONTAINER_IMAGE>"/"<TAG>"
+              env:
+                - name: DD_AGENT_HOST
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: status.hostIP
+  ```
 
 3. **Configure your application tracers to emit traces**: Point your application-level tracers to where the Datadog Agent host is using the environment variable `DD_AGENT_HOST`. Refer to the [language-specific APM instrumentation docs][2] for more examples.
 
