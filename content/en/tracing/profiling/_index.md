@@ -63,6 +63,9 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: /account_management/api-app-keys/#api-keys
 {{% /tab %}}
+{{% tab "Python" %}}
+tk
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Profiles
@@ -138,6 +141,9 @@ Once enabled, the following profile types are collected:
 | Socket I/O               | Shows the time each method spent handling socket I/O.                                                                                                                                                                                                                                              |
 
 
+{{% /tab %}}
+{{% tab "Python" %}}
+tk
 {{% /tab %}}
 {{< /tabs >}}
 
