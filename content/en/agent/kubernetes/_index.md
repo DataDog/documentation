@@ -33,7 +33,6 @@ To install the chart with the release name `<RELEASE_NAME>`:
 
 1. [Install Helm][1].
 2. Download the [Datadog `value.yaml` configuration file][2].
-3. Optional - Edit the `value.yaml` file and enable the Agent features you want to use.
 3. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
 
 - **Helm v3+**
@@ -50,6 +49,8 @@ To install the chart with the release name `<RELEASE_NAME>`:
 
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][4] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
 
+Next, enable the Datadog features that you'd like to use: [APM][7], [Logs][8]
+
 **Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][5].
 
 ### Upgrading from chart v1.x
@@ -64,6 +65,8 @@ If your current chart version deployed is earlier than `v2.0.0`, follow the [mig
 [4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
 [5]: https://github.com/helm/charts/tree/master/stable/datadog
 [6]: https://github.com/helm/charts/blob/master/stable/datadog/docs/Migration_1.x_to_2.x.md
+[7]: /agent/kubernetes/apm?tab=helm
+[8]: /agent/kubernetes/log?tab=helm
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
