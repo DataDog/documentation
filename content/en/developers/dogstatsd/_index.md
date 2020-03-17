@@ -159,7 +159,7 @@ env:
               fieldPath: metadata.uid
 ```
 
-To set [tag cardinality][5] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to either `low` or `orchestrator`. The default is `low`.
+To set [tag cardinality][5] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to either `low` (default) or `orchestrator`.
 
 **Note:** `pod_name` tags are not added to avoid creating too many [custom metrics][6]. 
 
