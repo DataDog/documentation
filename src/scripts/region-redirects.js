@@ -2,7 +2,7 @@ import Cookies from 'js-cookie';
 import config from '../../regions.config';
 // import datadogLogs from './components/dd-browser-logs-rum';
 
-const allowedRegions = ['us', 'eu'];
+// const config.allowedRegions = ['us', 'eu'];
 
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,12 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function regionOnChangeHandler(event) {
+    console.log('regionOnChangeHandler event: ', event)
     const queryParams = new URLSearchParams(window.location.search);
     let siteRegion = '';
 
     siteRegion = event.target.value;
     // on change, if query param exists, update the param
-    if (allowedRegions.includes(queryParams.get('site'))) {
+    if (config.allowedRegions.includes(queryParams.get('site'))) {
         queryParams.set('site', siteRegion);
 
         window.history.replaceState(
@@ -35,6 +36,8 @@ function regionOnChangeHandler(event) {
 }
 
 function showRegionSnippet(newSiteRegion) {
+    console.log('showRegionSnippet')
+    console.log('newSiteRegion: ', newSiteRegion);
     const regionSnippets = document.querySelectorAll('[data-region]');
     const regionParams = document.querySelectorAll('[data-region-param]');
     const externalLinks = document.querySelectorAll(
@@ -67,11 +70,7 @@ function showRegionSnippet(newSiteRegion) {
 
     if (externalLinks) {
         externalLinks.forEach(link => {
-            if (!link.href.includes(config.dd_site[newSiteRegion])) {
-                link.href = `https://app.${config.dd_site[newSiteRegion]}${link.pathname}`;
-            } else {
-                link.href = `https://app.${config.dd_site[newSiteRegion]}${link.pathname}`;
-            }
+            link.href = `https://app.${config.dd_site[newSiteRegion]}${link.pathname}`;
         });
     }
 }
@@ -106,7 +105,10 @@ function redirectToRegion(region = '') {
 
     // Cookies.set('site', siteRegion, { path: '/' });
 
-    if (allowedRegions.includes(queryParams.get('site'))) {
+    console.log('window.document.referrer: ', window.document.referrer);
+    console.log(`${window.location.protocol}//${window.location.host}`)
+
+    if (config.allowedRegions.includes(queryParams.get('site'))) {
         newSiteRegion = queryParams.get('site');
         showRegionSnippet(newSiteRegion);
 
@@ -132,7 +134,7 @@ function redirectToRegion(region = '') {
         showRegionSnippet(newSiteRegion);
     } else if (
         Cookies.get('site') &&
-        allowedRegions.includes(Cookies.get('site'))
+        config.allowedRegions.includes(Cookies.get('site'))
     ) {
         if (newSiteRegion !== '') {
             Cookies.set('site', newSiteRegion, { path: '/' });
@@ -148,6 +150,8 @@ function redirectToRegion(region = '') {
 
         showRegionSnippet(newSiteRegion);
     }
+
+    console.log('newSiteRegion: ', newSiteRegion)
 
     if (regionSelector) {
         regionSelector.value = newSiteRegion;

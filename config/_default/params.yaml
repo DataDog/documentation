@@ -24,3 +24,10 @@ header_scripts:
 footer_scripts:
   - snowplow: false
   - adroll: false
+
+# Docs allowed regions for redirecting
+allowedRegions: 
+  - name: US
+    value: us
+  - name: EU
+    value: eu

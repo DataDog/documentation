@@ -45,14 +45,14 @@ const commonConfig = env => {
         context: path.join(__dirname, 'src'),
         module: {
             rules: [
-                {
-                    test: /\.js$/,
-                    exclude: /node_modules/,
-                    loader: 'eslint-loader',
-                    options: {
-                        // eslint options (if necessary)
-                    }
-                },
+                // {
+                //     test: /\.js$/,
+                //     exclude: /node_modules/,
+                //     loader: 'eslint-loader',
+                //     options: {
+                //         // eslint options (if necessary)
+                //     }
+                // },
                 {
                     test: /\.(ttf|eot|svg|gif|png|jpg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                     loader: 'file-loader?name=[path][name].[hash].[ext]'

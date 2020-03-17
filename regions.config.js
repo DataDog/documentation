@@ -1,4 +1,5 @@
 export default {
+    allowedRegions: ['us', 'eu'],
     dd_site: {
         us: 'datadoghq.com',
         eu: 'datadoghq.eu'

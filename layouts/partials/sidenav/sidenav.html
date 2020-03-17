@@ -24,8 +24,9 @@
                     <label for="region-select" class="sr-only">Region</label>
                     <select id=region-select class="js-region-selector">
                         <option disabled selected value>--</option>
-                        <option value="us">US</option>
-                        <option value="eu">EU</option>
+                        {{ range .Site.Params.allowedRegions }}
+                            <option value="{{ .value }}">{{ .name }}</option>
+                        {{ end }}
                     </select>
                 </span>
             </h4>
