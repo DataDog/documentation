@@ -85,7 +85,7 @@ Notify your team through connected integrations by using the format `@<INTEGRATI
 | [Slack][7]     | `@slack`     | [Examples][8]  |
 | [Webhooks][9]  | `@webhook`   | [Examples][10] |
 
-[List of integrations that can be used to notify your team][14]. 
+See the [list of integrations][14] that can be used to notify your team. 
 
 ### Modifications
 
