@@ -175,7 +175,7 @@ Facets allow you to pivot or filter your datasets based on a given attribute. Ex
 ### Quantitative facets: measures
 
 **Use measures when you need to:** 
-* To aggregate values from multiple Traces. For instance, create a measure on the number of rows in Cassandra and view the P95 or top-most referrers per sum of file size requested.
+* Aggregate values from multiple traces. For example, create a measure on the number of rows in Cassandra and view the P95 or top-most referrers per sum of file size requested.
 * Numerically compute the highest latency services for shopping cart values over $1000.
 * Filter continuous values. For example, the size in bytes of each payload chunk of a video stream.	
 
