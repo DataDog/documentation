@@ -7,7 +7,7 @@ kind: documentation
 
 Datadog bills for each Agent installed on a vCenter server and each VM monitored.
 
-### VM exclusion
+## vSphere VM exclusion
 
 Use the `vsphere.yaml` file to filter your VMs monitored by Datadog by using regex. See the [sample vsphere.d/conf.yaml][1] for an example.
 

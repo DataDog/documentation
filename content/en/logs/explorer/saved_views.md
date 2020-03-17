@@ -64,7 +64,7 @@ Saved Views can be removed directly from the Saved View list in the Logs Explore
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/search
-[2]: /logs/explorer/?tab=facets#setup
+[2]: /logs/explorer/facets
 [3]: /logs/explorer/?tab=logstream#visualization
 [4]: /logs/explorer/patterns
 [5]: /logs/explorer/analytics

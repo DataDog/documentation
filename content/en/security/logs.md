@@ -17,7 +17,7 @@ The Log Management product supports multiple [environments and formats][2], allo
 
 ## Information Security
 
-The Datadog Agent submits logs to Datadog over a TLS-encrypted TCP connection, requiring an outbound communication over port `10516`. Datadog uses symmetric encryption at rest (AES-256) for indexed logs. Indexed logs are deleted from the Datadog platform once their retention period, as defined by the customer, expires.
+The Datadog Agent submits logs to Datadog over a TLS-encrypted TCP connection, requiring an outbound communication over port `10516`. The Datadog Agent can also be configured to send logs over secured HTTPS requests, requiring an outbound communication over port `443`. Datadog uses symmetric encryption at rest (AES-256) for indexed logs. Indexed logs are deleted from the Datadog platform once their retention period, as defined by the customer, expires.
 
 ## Logs Filtering
 
@@ -66,8 +66,8 @@ If you have any questions about how the Log Management Service satisfies the app
 
 [1]: /security
 [2]: /logs/log_collection
-[3]: /agent/logs/advanced_log_collection/?tab=exclude_at_match#filter-logs
+[3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /integrations/amazon_lambda/#log-collection
-[6]: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=datadogussite#log-collection
+[6]: /integrations/google_cloud_platform/?tab=datadogussite#log-collection
 [7]: /logs/explorer/#share-views

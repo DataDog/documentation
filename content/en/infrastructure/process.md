@@ -21,7 +21,7 @@ Datadog's Process Monitoring allows for real-time visibility of the most granula
 
 ## Installation
 
-The following installation processes are for [Agent 6 only][1]. If you are using Agent 5, [follow this specific installation process][2].
+The following installation processes are for [Agent 6 and 7][1]. If you are using Agent 5, [follow this specific installation process][2].
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
@@ -87,9 +87,23 @@ Refer to the standard [Daemonset installation][2] and the [Docker Agent][3] info
 **Note**: Running the Agent as a container still allows you to collect host processes.
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[2]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
+[2]: /agent/kubernetes/
 [3]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
+{{% tab "Helm" %}}
+Update your [datadog-values.yaml][1] file with the following process collection configuration, then upgrade your Datadog Helm chart:
+
+```yaml
+datadog:
+  # (...)
+  processAgent:
+   enabled: true
+```
+
+
+[1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Process Arguments Scrubbing

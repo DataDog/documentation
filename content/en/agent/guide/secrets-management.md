@@ -218,6 +218,47 @@ instances:
     user: decrypted_db_prod_user
     password: decrypted_db_prod_password
 ```
+### Helper script for Autodiscovery
+
+Many Datadog integrations require credentials to retrieve metrics. To avoid hardcoding these credentials in an [Autodiscovery template][1], you can use secrets management to separate them from the template itself.
+
+[The script][2] is available in the Docker image as `/readsecret.py`.
+
+#### Script usage
+
+The script requires a folder passed as an argument. Secret handles are interpreted as file names, relative to this folder. The script refuses to access any file out of the root folder (including symbolic link targets) to avoid leaking sensitive information.
+
+This script is incompatible with [OpenShift restricted SCC operations][3] and requires that the Agent runs as the `root` user.
+
+Starting with version 6.10.0, `ENC[]` tokens in config values passed as environment variables are supported. Previous versions only support `ENC[]` tokens found in `datadog.yaml` and in Autodiscovery templates.
+
+#### Setup examples
+
+##### Docker Swarm secrets
+
+[Docker secrets][4] are mounted in the `/run/secrets` folder. Pass the following environment variables to your Agent container:
+
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret.py
+DD_SECRET_BACKEND_ARGUMENTS=/run/secrets
+```
+
+To use the `db_prod_password` secret value, exposed in the `/run/secrets/db_prod_password` file, just insert `ENC[db_prod_password]` in your template.
+
+##### Kubernetes secrets
+
+Kubernetes supports [exposing secrets as files][5] inside a pod.
+
+If your secrets are mounted in `/etc/secret-volume`, use the following environment variables:
+
+```
+DD_SECRET_BACKEND_COMMAND=/readsecret.py
+DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
+```
+
+Following the linked example, the password field is stored in the `/etc/secret-volume/password` file, and accessible through the `ENC[password]` token.
+
+**Note**: Datadog recommends using a dedicated folder instead of `/var/run/secrets`, as the script will be able to access all subfolders, including the sensitive `/var/run/secrets/kubernetes.io/serviceaccount/token` file.
 
 ## Troubleshooting
 
@@ -304,7 +345,7 @@ password: <decrypted_password2>
 ===
 ```
 
-**Note**: The Agent needs to be [restarted][2] to pick up changes on configuration files.
+**Note**: The Agent needs to be [restarted][6] to pick up changes on configuration files.
 
 ### Debugging your secret_backend_command
 
@@ -361,7 +402,7 @@ To do so, follow those steps:
   sc.exe config DatadogAgent password= "a_new_password"
   ```
 
-You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][3] to help you test your
+You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][7] to help you test your
 executable as another user. It switches user contexts and mimics how the Agent runs your executable.
 
 Example on how to use it:
@@ -393,5 +434,9 @@ If you have secrets in `datadog.yaml` and the Agent refuses to start:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/autodiscovery
-[2]: /agent/guide/agent-commands/#restart-the-agent
-[3]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1
+[2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/secrets-helper/readsecret.py
+[3]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
+[4]: https://docs.docker.com/engine/swarm/secrets/
+[5]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
+[6]: /agent/guide/agent-commands/#restart-the-agent
+[7]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets_scripts/secrets_tester.ps1

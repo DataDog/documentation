@@ -382,7 +382,7 @@ The following options and tags are deprecated:
 [1]: /integrations/kubelet
 [2]: /integrations/kube_apiserver_metrics
 [3]: /help
-[4]: /integrations/kubernetes
+[4]: /agent/kubernetes/
 [5]: /agent/autodiscovery/tag/#extract-node-labels-as-tags
 {{% /tab %}}
 {{% tab "JMX" %}}
@@ -566,6 +566,6 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 [4]: /integrations/go-metro
 [5]: /agent/guide/agent-log-files/
 [6]: /agent/guide/agent-commands/
-[7]: https://docs.datadoghq.com/agent/autodiscovery
+[7]: /agent/autodiscovery
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
 [9]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks

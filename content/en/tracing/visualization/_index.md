@@ -134,7 +134,7 @@ After a tag has been added to a span, search and query on the tag in App Analyti
 [5]: /tracing/visualization/services_map
 [6]: /tracing/visualization/service
 [7]: /tracing/visualization/resource
-[8]: /tracing/opentracing/?tab=java#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
+[8]: /tracing/opentracing/java#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
 [9]: /tracing/manual_instrumentation
 [10]: /tracing/opentracing
 [11]: /tracing/connect_logs_and_traces

@@ -16,9 +16,9 @@ Cet endpoint vous permet d'interroger des métriques sur la période de votre ch
   secondes depuis l'epoch unix.
 * **`to`** [*obligatoire, sauf en Python*] :
   secondes depuis l'epoch unix.
-* **`start`** [*obligatoire en Python*, *défaut*=**None**] :
+* **`start`** [*obligatoire en Python*, *valeur par défaut*=**Aucune**] :
   secondes depuis l'epoch unix.
-* **`end`** [*obligatoire en Python*, *défaut*=**None**] :
+* **`end`** [*obligatoire en Python*, *valeur par défaut*=**Aucune**] :
   secondes depuis l'epoch unix.
 * **`query`** [*obligatoire*] :
   la chaîne de requête.

@@ -1,4 +1,4 @@
 ---
-title: Pipelines de logs
-external_redirect: /api/
+title: "Pipelines de logs"
+external_redirect: "/api/"
 ---

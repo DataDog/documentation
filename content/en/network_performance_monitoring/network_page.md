@@ -45,11 +45,9 @@ Facet panels mirror the tags in your search bar query. Switch between the facet 
 
 #### Custom Facets
 
-Aggregate and filter your traffic data by any tags in Datadog network page. A whitelist of tags is provided by default, which you can find in the search bar dropdown menu.
+Aggregate and filter your traffic data by any tags in Datadog network page. A whitelist of tags is provided by default, which you can find in the search bar dropdown menu:
 
 {{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Drop down menu"  style="width:90%;">}}
-
-A whitelist of tags is provided by default, which you can find in the search bar dropdown menu.
 
 Whitelisted tags include `service`, `availability zone`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
@@ -96,7 +94,7 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 
 ### DNS Resolution
 
-Starting with Agent 7.17+, using deep packet inspection, the Agent resolves IP’s to human-readable domain names for external and internal traffic. DNS allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **DNS is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
+Starting with Agent 7.17+, the Agent resolves IP’s to human-readable domain names for external and internal traffic. DNS allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and API’s. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. **DNS is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
 
 {{< img src="network_performance_monitoring/network_page/dns_aggregation.png" alt="DNS aggregation" >}}
 

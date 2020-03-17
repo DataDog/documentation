@@ -11,11 +11,11 @@ has_logo: true
 integration_title: "MongoDB\_Atlas"
 is_public: true
 kind: intégration
-manifest_version: 1
+manifest_version: '1.0'
 name: mongodb_atlas
 public_title: "Intégration Datadog/MongoDB\_Atlas"
 short_description: "MongoDB\_Atlas peut transmettre des métriques calculées à Datadog"
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

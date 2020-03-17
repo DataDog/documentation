@@ -9,7 +9,9 @@ further_reading:
     tag: Documentation
     text: Consulter les principales catégories de données envoyées à Datadog
 ---
-Cet article fait partie d'une [série de billets sur la sécurité des données][1].
+<div class="alert alert-info">Cette page est consacrée à la sécurité de Datadog ; si vous recherchez le produit Security Monitoring product, consultez la section <a href="/security_monitoring" target="_blank"></a>.</div>
+
+Cet article fait partie d'une [série d'articles sur la sécurité des données][1].
 
 Les clients peuvent envoyer des données au service de Datadog à l'aide d'un [Agent][2] installé localement ou via notre [API HTTP][3]. Bien qu'il ne soit pas obligatoire d'utiliser l'Agent Datadog, la grande majorité des utilisateurs ont décidé d'en tirer profit sur Datadog. Cet article décrit les principales fonctionnalités en matière de sécurité proposées aux utilisateurs afin de garantir la sécurité de leur environnement.
 

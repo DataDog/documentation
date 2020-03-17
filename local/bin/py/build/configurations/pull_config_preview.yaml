@@ -90,6 +90,21 @@
           aliases:
           - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
 
+  - repo_name: puppet-datadog-agent
+    contents:
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - README.md
+      options:
+        dest_path: '/agent/basic_agent_usage/'
+        file_name: 'puppet.md'
+        front_matters:
+          title: Puppet
+          kind: documentation
+          dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/master/README.md"]
+
   - repo_name: dd-trace-rb
     contents:
     - action: pull-and-push-file
@@ -146,7 +161,7 @@
               text: "Learn how to explore your logs"
 
     - action: pull-and-push-file
-      branch: dd-tracing
+      branch: master
       globs:
       - 'docs/trace_collection.md'
       options:
@@ -155,8 +170,9 @@
         front_matters:
           title: Android Trace Collection
           kind: documentation
+          beta: true
           description: "Collect traces from your Android applications."
-          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md"]
+          dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/dd-tracing/docs/trace_collection.md"]
           further_reading:
             - link: "https://github.com/DataDog/dd-sdk-android"
               tag: "Github"

@@ -46,10 +46,6 @@ Choose the type of variable you want to create:
 
 {{% tab "Create From HTTP Test" %}}
 
-<div class="alert alert-warning">
-This feature is in private beta, <a href="/help">contact Datadog support</a> to turn on this feature for your account.
-</div>
-
 You can create variables from your existing HTTP tests by parsing its response headers or body. Variables are updated with the same frequency as the test it's coming from:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
@@ -59,9 +55,9 @@ You can create variables from your existing HTTP tests by parsing its response h
 5. Optional: enter a **Description** for your variable.
 6. Decide whether to extract your variable from the response headers, or from the response body.
     * Extract the value from **response header**: use the full response header for your variable, or parse it with a [regex][1].
-    * Extract the value from **response body**: parse the response body of the request with a JSON path, with a [regex][1], or use the full response body.
+    * Extract the value from **response body**: parse the response body of the request with a [regex][1], or use the full response body.
 
-{{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential"  style="width:80%;">}}
+{{< img src="synthetics/settings/variable_from_http.png" alt="Variable from http"  style="width:80%;">}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}

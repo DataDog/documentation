@@ -29,7 +29,7 @@ To create a custom role:
 3. Give a name to your role.
 4. Select the permissions associated with this role.
 
-{{< img src="account_management/users/create_role.png" alt="Create a custom Role" responsive="true" style="width:90%;">}}
+{{< img src="account_management/users/create_role.png" alt="Create a custom Role"  style="width:90%;">}}
 
 Once a role is created you can [add this role to existing users][2].
 
@@ -42,7 +42,7 @@ To edit a custom role:
 3. Modify the permissions associated with this role.
 4. Save your changes
 
-{{< img src="account_management/users/edit_role.png" alt="Edit a Role" responsive="true" style="width:90%;">}}
+{{< img src="account_management/users/edit_role.png" alt="Edit a Role"  style="width:90%;">}}
 
 Once a role is modified, all users who have the role will have their permissions updated.
 
@@ -54,8 +54,8 @@ To delete a custom role:
 2. Select the delete button on the Role you would like to delete.
 3. Confirm your decision.
 
-{{< img src="account_management/users/delete_role.png" alt="Deleting a Role" responsive="true" style="width:90%;">}}
-{{< img src="account_management/users/delete_role_confirmation.png" alt="Deleting a Role" responsive="true" style="width:90%;">}}
+{{< img src="account_management/users/delete_role.png" alt="Deleting a Role"  style="width:90%;">}}
+{{< img src="account_management/users/delete_role_confirmation.png" alt="Deleting a Role"  style="width:90%;">}}
 
 Once a role is deleted all users who have the role will have their permissions updated. Users without any roles will not be able to use Datadog effectively, but will still maintain limited access. You should always make sure users either have a Role or are disabled if they do not need access to your organization.
 
@@ -63,5 +63,5 @@ Once a role is deleted all users who have the role will have their permissions u
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rbac
+[1]: https://app.datadoghq.com/access/roles
 [2]: /account_management/users/#edit-a-user-roles

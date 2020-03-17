@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure App Service Environment
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_app_service_environment
 public_title: Intégration Datadog/Microsoft Azure App Service Environment
 short_description: Surveillez des métriques clés d'Azure App Service Environment.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

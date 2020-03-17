@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /ja/getting_started/tagging/using_tags/
 further_reading:
-  - link: タグ付け
+  - link: tagging/
     tag: Documentation
     text: タグの概要
   - link: tagging/assigning_tags
