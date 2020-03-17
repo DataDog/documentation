@@ -22,7 +22,29 @@ To enable trace collection with your Agent, follow the instructions below:
 
 **Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
 
-- To enable APM, run the following command: ```helm upgrade --set datadog.apm.enabled=true <RELEASE NAME>``` (`RELEASE NAME` is the name you've given the release when you installed the chart).
+- To enable APM, run the following command: 
+
+- Update your [datadog-values.yaml][2] file with the following APM configuration:	- To enable APM, run the following command: ```helm upgrade --set datadog.apm.enabled=true <RELEASE NAME>``` (`RELEASE NAME` is the name you've given the release when you installed the chart).
+
+    ```yaml	
+    datadog:	
+      ## @param apm - object - required	
+      ## Enable apm agent and provide custom configs	
+      #	
+      apm:	
+        ## @param enabled - boolean - optional - default: false	
+        ## Enable this to enable APM and tracing, on port 8126	
+        #	
+        #	
+        enabled: true	
+        ## @param port - integer - optional - default: 8126	
+        ## Override the trace Agent DogStatsD port.	
+        ## Note: Make sure your client is sending to the same UDP port.	
+        #	
+        port: 8126	
+    ```	
+
+- Then, upgrade your Datadog Helm chart using the following command : `helm upgrade -f values.yml <RELEASE NAME> stable/datadog`
 
 {{% /tab %}}
 {{% tab "Daemonset" %}}
@@ -58,7 +80,7 @@ To enable APM trace collection, open the Daemonset configuration file and edit t
 {{% /tab %}}
 {{< /tabs >}}
 
-    **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
+**Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
 2. **Configure your application pods to pull the host IP in order to communicate with the Datadog Agent**: Use the downward API to pull the host IP; the application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`.
 
