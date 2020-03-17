@@ -135,7 +135,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 
 To configure [tag cardinality][13] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to `low` (default), `orchestrator`, or `high`.
 
-**Note:** `container_id`, `container_name`, and `pod_name` tags are not added automatically to avoid creating too many [custom metrics][11].
+**Note:** `container_id`, `container_name`, and `pod_name` tags are not added by default to avoid creating too many [custom metrics][11].
 
 To use origin detection:
 
