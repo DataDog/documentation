@@ -159,15 +159,16 @@ env:
               fieldPath: metadata.uid
 ```
 
-To set [tag cardinality][5] for the metrics collected using origin detection, use the environment variable `DD_DOGSTATSD_TAG_CARDINALITY`.
+To set [tag cardinality][5] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to either `low` or `orchestrator`. The default is `low`.
 
-There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`—as DogStatsD is priced differently, its tag cardinality setting is separated in order to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`.
+**Note:** `pod_name` tags are not added to avoid creating too many [custom metrics][6]. 
 
 [1]: /developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /tagging/assigning_tags/#environment-variables
+[6]: /developers/metrics/custom_metrics
 {{% /tab %}}
 {{% tab "Helm" %}}
 
