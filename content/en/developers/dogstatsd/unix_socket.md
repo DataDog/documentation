@@ -133,7 +133,9 @@ volumes:
 
 Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDS are tagged by the same container tags as Autodiscovery metrics.
 
-**Note:** `container_id`, `container_name`, and `pod_name` tags are not added automatically to avoid creating too many [custom metrics][11]. The [tag cardinality][13] for the metrics collected using origin detection can be modified with `DD_DOGSTATSD_TAG_CARDINALITY`.
+To configure [tag cardinality][13] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to either `low`, `orchestrator`, or `high`. The default is `low`.
+
+**Note:** `container_id`, `container_name`, and `pod_name` tags are not added automatically to avoid creating too many [custom metrics][11].
 
 To use origin detection:
 
