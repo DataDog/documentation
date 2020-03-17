@@ -172,6 +172,23 @@ Facets allow you to pivot or filter your datasets based on a given attribute. Ex
 
 {{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
 
+### Quantitative facets: measures
+
+**Use measures when you need to:** 
+* Aggregate values from multiple traces. For example, create a measure on the number of rows in Cassandra and view the P95 or top-most referrers per sum of file size requested.
+* Numerically compute the highest latency services for shopping cart values over $1000.
+* Filter continuous values. For example, the size in bytes of each payload chunk of a video stream.	
+
+**Types**
+
+Measures come with either a (long) integer or double value, for equivalent capabilities.
+
+**Units**
+
+Measures support units (time in seconds or size in bytes) for handling of orders of magnitude at query time and display time. Unit is a property of the measure itself, not of the field. For example, consider a duration measure in nanoseconds: you have a span tag from `service:A` where `duration:1000` stands for `1000 milliseconds`, and another span tags from `service:B` where `duration:500` stands for `500 microseconds`:
+Scale duration into nanoseconds for all span tags flowing in with the arithmetic processor. Use a `*1000000` multiplier on span tags from `service:A`, and a `*1000` multiplier on span tags from `service:B`.
+Use `duration:>20ms` (see search syntax for reference) to consistently query span tags from both services at once, and see an aggregated result of max one minute.
+
 ### Create a Facet
 
 To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
