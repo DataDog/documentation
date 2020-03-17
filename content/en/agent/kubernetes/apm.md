@@ -47,7 +47,7 @@ To enable trace collection with your Agent, follow the instructions below:
 
 To enable APM trace collection, open the Daemonset configuration file and edit the following:
 
-- Allow incoming data from port `8126` by forwarding the port of the Agent to the host:
+- Allow incoming data from port `8126` (forwarding traffic from the host to the agent):
 
     ```yaml
      # (...)
@@ -60,7 +60,7 @@ To enable APM trace collection, open the Daemonset configuration file and edit t
      # (...)
     ```
 
-- **If Using an Old Agent Version (Versions lower than 7.18)**, set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section of the `datadog.yaml` Agent manifest:
+- **If using an old agent version (7.17 or lower)**, set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section of the `datadog.yaml` Agent manifest:
 
     ```yaml
      # (...)
