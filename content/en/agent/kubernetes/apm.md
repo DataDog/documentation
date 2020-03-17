@@ -22,6 +22,7 @@ To enable trace collection with your Agent, follow the instructions below:
 
 **Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
 
+- If you haven't already, [install][6] the Helm chart
 - Update your datadog-values.yaml file with the following APM configuration:
     ```yaml	
     datadog:	
@@ -60,7 +61,7 @@ To enable APM trace collection, open the Daemonset configuration file and edit t
      # (...)
     ```
 
-- **If using an old agent version (7.17 or lower)**, set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section of the `datadog.yaml` Agent manifest:
+- **If using an old agent version (7.17 or lower)**, in addition to the steps above, set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your *env* section of the `datadog.yaml` Agent manifest:
 
     ```yaml
      # (...)
@@ -73,6 +74,7 @@ To enable APM trace collection, open the Daemonset configuration file and edit t
      # (...)
     ```
 
+  Both flags are enabled by default on agent version 7.18+.  
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -131,3 +133,4 @@ List of all environment variables available for tracing within the Agent running
 [3]: /tracing/guide/security/#replace-rules
 [4]: /tracing/app_analytics/#automatic-configuration
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[6]: /agent/kubernetes/?tab=helm
