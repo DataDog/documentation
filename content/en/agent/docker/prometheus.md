@@ -28,7 +28,7 @@ This page explains the basic usage of these checks, enabling you to import all y
 
 ### Installation
 
-Launch the Docker Agent next to you other containers by replacing `<DATADOG_API_KEY>` with the API key for your organisation in the command below:
+Launch the Docker Agent next to your other containers by replacing `<DATADOG_API_KEY>` with the API key for your organization in the command below:
 
 {{< tabs >}}
 {{% tab "Standard" %}}
@@ -61,7 +61,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 ### Configuration
 
-The Agent detects if it's running on Docker and automatically searches all containers labels for Datadog-OpenMetrics labels. Autodiscovery expects labels to look like these examples, depending on the file type:
+The Agent detects if it's running on Docker and automatically searches all container labels for Datadog-OpenMetrics labels. Autodiscovery expects labels to look like these examples, depending on the file type:
 
 {{< tabs >}}
 {{% tab "Dockerfile" %}}
