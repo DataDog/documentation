@@ -85,6 +85,8 @@ Notify your team through connected integrations by using the format `@<INTEGRATI
 | [Slack][7]     | `@slack`     | [Examples][8]  |
 | [Webhooks][9]  | `@webhook`   | [Examples][10] |
 
+See the [list of integrations][14] that can be used to notify your team. 
+
 ### Modifications
 
 An [event][11] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members and chat services of these events.
@@ -388,3 +390,4 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [11]: /events
 [12]: /monitors/guide/template-variable-evaluation
 [13]: /monitors/faq/what-are-recovery-thresholds
+[14]: https://docs.datadoghq.com/integrations/#cat-collaboration
