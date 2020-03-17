@@ -30,6 +30,9 @@ function regionOnChangeHandler(event) {
         );
         showRegionSnippet(siteRegion);
         Cookies.set('site', siteRegion, { path: '/' });
+    } else if (config.allowedRegions.includes(siteRegion)){
+        showRegionSnippet(siteRegion);
+        Cookies.set('site', siteRegion, { path: '/' });
     } else {
         redirectToRegion(siteRegion);
     }
