@@ -161,7 +161,7 @@ env:
 
 To set [tag cardinality][5] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to either `low` (default) or `orchestrator`.
 
-**Note:** `pod_name` tags are not added to avoid creating too many [custom metrics][6]. 
+**Note:** For UDP, `pod_name` tags are not added by default to avoid creating too many [custom metrics][6]. 
 
 [1]: /developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni
