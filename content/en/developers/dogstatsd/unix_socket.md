@@ -173,4 +173,4 @@ When running inside a container, DogStatsd needs to run in the host's PID namesp
 [10]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
 [11]: /developers/metrics/custom_metrics
 [12]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
-[13]: /tagging/assigning_tags/?tab=agentv6v7#environment-variables
+[13]: /tagging/assigning_tags/#environment-variables
