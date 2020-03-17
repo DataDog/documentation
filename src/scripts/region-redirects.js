@@ -2,8 +2,6 @@ import Cookies from 'js-cookie';
 import config from '../../regions.config';
 // import datadogLogs from './components/dd-browser-logs-rum';
 
-// const config.allowedRegions = ['us', 'eu'];
-
 // need to wait for DOM since this script is loaded in the <head>
 document.addEventListener('DOMContentLoaded', () => {
     const regionSelector = document.querySelector('.js-region-selector');
@@ -14,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function regionOnChangeHandler(event) {
-    console.log('regionOnChangeHandler event: ', event)
     const queryParams = new URLSearchParams(window.location.search);
     let siteRegion = '';
 
@@ -39,8 +36,6 @@ function regionOnChangeHandler(event) {
 }
 
 function showRegionSnippet(newSiteRegion) {
-    console.log('showRegionSnippet')
-    console.log('newSiteRegion: ', newSiteRegion);
     const regionSnippets = document.querySelectorAll('[data-region]');
     const regionParams = document.querySelectorAll('[data-region-param]');
     const externalLinks = document.querySelectorAll(
@@ -85,31 +80,6 @@ function redirectToRegion(region = '') {
     const queryParams = new URLSearchParams(window.location.search);
 
     let newSiteRegion = region;
-
-    // const thisUrl = new URL(window.location.href);
-    // const baseURL = thisUrl.hostname;
-    // const subdomain = baseURL.split('.')[0];
-    // const uri = thisUrl.pathname;
-    // const previewPath = '';
-    // console.log('region: ', region)
-    // console.log('thisUrl: ', thisUrl);
-    // console.log('baseURL: ', baseURL);
-    // console.log('subdomain: ', subdomain);
-    // console.log('uri: ', uri);
-
-    // if (subdomain.includes('preview') || subdomain.includes('docs-staging')) {
-    //     previewPath = uri
-    //         .split('/')
-    //         .slice(0, 3)
-    //         .join('/');
-    //     uri = uri.replace(previewPath, '');
-    //     // logMsg += `Preview path is ${ previewPath }, URI set to: ${ uri } `;
-    // }
-
-    // Cookies.set('site', siteRegion, { path: '/' });
-
-    console.log('window.document.referrer: ', window.document.referrer);
-    console.log(`${window.location.protocol}//${window.location.host}`)
 
     if (config.allowedRegions.includes(queryParams.get('site'))) {
         newSiteRegion = queryParams.get('site');
@@ -156,8 +126,6 @@ function redirectToRegion(region = '') {
 
         showRegionSnippet(newSiteRegion);
     }
-
-    console.log('newSiteRegion: ', newSiteRegion)
 
     if (regionSelector) {
         regionSelector.value = newSiteRegion;

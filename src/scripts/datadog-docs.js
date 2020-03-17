@@ -883,11 +883,9 @@ function loadPage(newUrl) {
 
             const regionSelector = document.querySelector('.js-region-selector');
             if (regionSelector) {
-                // console.log('regionSelector.value', regionSelector.value)
                 redirectToRegion(regionSelector.value);
             }
-            // redirectToRegion();
-
+            
             // Gtag virtual pageview
             gtag('config', gaTag, {'page_path': pathName});
 
