@@ -133,7 +133,7 @@ volumes:
 
 Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDS are tagged by the same container tags as Autodiscovery metrics.
 
-**Note:** `container_id`, `container_name`, and `pod_name` tags are not added to avoid creating too many [custom metrics][11].
+**Note:** `container_id`, `container_name`, and `pod_name` tags are not added automatically to avoid creating too many [custom metrics][11]. The [tag cardinality][13] for the metrics collected using origin detection can be modified with `DD_DOGSTATSD_TAG_CARDINALITY`.
 
 To use origin detection:
 
@@ -171,3 +171,4 @@ When running inside a container, DogStatsd needs to run in the host's PID namesp
 [10]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
 [11]: /developers/metrics/custom_metrics
 [12]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
+[13]: /tagging/assigning_tags/?tab=agentv6v7#environment-variables
