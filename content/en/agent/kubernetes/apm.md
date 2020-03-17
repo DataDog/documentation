@@ -33,14 +33,7 @@ To enable trace collection with your Agent, follow the instructions below:
         ## @param enabled - boolean - optional - default: false
         ## Enable this to enable APM and tracing, on port 8126
         #
-        #
         enabled: true
-
-        ## @param port - integer - optional - default: 8126
-        ## Override the trace Agent DogStatsD port.
-        ## Note: Make sure your client is sending to the same UDP port.
-        #
-        port: 8126
     ```
 
 - Then upgrade your Datadog Helm chart.
