@@ -880,7 +880,13 @@ function loadPage(newUrl) {
             // sets query params if code tabs are present
 
             codeTabs();
-            redirectToRegion();
+
+            const regionSelector = document.querySelector('.js-region-selector');
+            if (regionSelector) {
+                // console.log('regionSelector.value', regionSelector.value)
+                redirectToRegion(regionSelector.value);
+            }
+            // redirectToRegion();
 
             // Gtag virtual pageview
             gtag('config', gaTag, {'page_path': pathName});

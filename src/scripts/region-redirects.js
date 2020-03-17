@@ -116,6 +116,9 @@ function redirectToRegion(region = '') {
         showRegionSnippet(newSiteRegion);
 
         Cookies.set('site', newSiteRegion, { path: '/' });
+    } else if (newSiteRegion !== '') {
+        Cookies.set('site', newSiteRegion, { path: '/' });
+        showRegionSnippet(newSiteRegion);
     } else if (
         window.document.referrer.includes('datadoghq.eu') &&
         window.document.referrer.indexOf(
