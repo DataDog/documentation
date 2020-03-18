@@ -26,8 +26,9 @@ def get_csv_metrics(tempdir):
           if row[0] != 'metric_name':
             csv_metrics[row[0]] = 1
             metric = row[0].split('.')
-            if metric[0] != 'trace' and metric[0] != 'datadog':
-              t = t + (metric[0],)
+            if metric[0] not in t:
+              if metric[0] != 'trace' and metric[0] != 'datadog':
+                t = t + (metric[0],)
   return [csv_metrics, t]
 
 
