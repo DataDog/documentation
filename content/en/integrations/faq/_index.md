@@ -31,7 +31,7 @@ aliases:
 
 * [My Azure VM is powered down. Why is it still listed in my infrastructure list?][11]
 * [Azure VMs are showing up in the App but not reporting metrics][12]
-* [Azure Status Metric][13]
+* [Azure Status and Count Metrics][13]
 * [Azure Troubleshooting][14]
 
 ## Docker
