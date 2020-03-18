@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.KeysApi;
+import com.datadog.api.v1.client.api.KeysApi;
 
 public class KeysApiExample {
 

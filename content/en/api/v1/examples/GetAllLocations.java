@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.SyntheticsApi;
+import com.datadog.api.v1.client.api.SyntheticsApi;
 
 public class SyntheticsApiExample {
 

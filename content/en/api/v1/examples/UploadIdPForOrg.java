@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.OrgsApi;
+import com.datadog.api.v1.client.api.OrgsApi;
 
 public class OrgsApiExample {
 

@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.MonitorsApi;
+import com.datadog.api.v1.client.api.MonitorsApi;
 
 public class MonitorsApiExample {
 

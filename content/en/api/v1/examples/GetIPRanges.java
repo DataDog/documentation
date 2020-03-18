@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.IPRangesApi;
+import com.datadog.api.v1.client.api.IPRangesApi;
 
 public class IPRangesApiExample {
 

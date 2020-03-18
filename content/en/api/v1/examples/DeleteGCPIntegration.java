@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.GCPIntegrationApi;
+import com.datadog.api.v1.client.api.GCPIntegrationApi;
 
 public class GCPIntegrationApiExample {
 

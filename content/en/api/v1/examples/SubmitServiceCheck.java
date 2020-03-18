@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.ServiceChecksApi;
+import com.datadog.api.v1.client.api.ServiceChecksApi;
 
 public class ServiceChecksApiExample {
 

@@ -1,1 +1,0 @@
-curl -X  "https://api.datadoghq.com/"

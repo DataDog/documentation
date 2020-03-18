@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.TagsApi;
+import com.datadog.api.v1.client.api.TagsApi;
 
 public class TagsApiExample {
 

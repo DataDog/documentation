@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.SLOApi;
+import com.datadog.api.v1.client.api.SLOApi;
 
 public class SLOApiExample {
 

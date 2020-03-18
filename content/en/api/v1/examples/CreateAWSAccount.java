@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.AWSIntegrationApi;
+import com.datadog.api.v1.client.api.AWSIntegrationApi;
 
 public class AWSIntegrationApiExample {
 
