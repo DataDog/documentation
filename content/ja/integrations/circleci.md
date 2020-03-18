@@ -8,12 +8,12 @@ description: ビルドの完了数、平均ビルド時間などを視覚化
 doc_link: 'https://docs.datadoghq.com/integrations/circleci/'
 git_integration_title: circleci
 has_logo: true
-integration_title: Circle CI
+integration_title: CircleCI
 is_public: true
 kind: インテグレーション
 manifest_version: 1
 name: circleci
-public_title: Datadog-Circle CI インテグレーション
+public_title: Datadog-CircleCI インテグレーション
 short_description: ビルドの完了数、平均ビルド時間などを視覚化
 version: 1
 ---
