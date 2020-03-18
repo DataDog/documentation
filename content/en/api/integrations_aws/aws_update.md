@@ -114,6 +114,10 @@ Update a Datadog-Amazon Web Services integration.
 
     An object (in the form `{"namespace1":true/false, "namespace2":true/false}`) that enables or disables metric collection for specific AWS namespaces for this AWS account only. A list of namespaces can be found at the `/v1/integration/aws/available_namespace_rules` endpoint.
 
+* **`excluded_regions`** [*optional*, *default*=**None**]:
+
+    Array of AWS regions that will be excluded from metrics collection. 
+
 [1]: /integrations/amazon_web_services/#configuration
 [2]: /integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
