@@ -22,7 +22,7 @@ To enable trace collection with your Agent, follow the instructions below:
 
 **Note**: If you want to deploy the Datadog Agent as a deployment instead of a DaemonSet, configuration of APM via Helm is not supported.
 
-- If you haven't already, [install][6] the Helm chart
+- If you haven't already, [install][6] the Helm chart.
 - Update your datadog-values.yaml file with the following APM configuration:
     ```yaml	
     datadog:	
