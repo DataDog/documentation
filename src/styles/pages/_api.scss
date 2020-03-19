@@ -5,6 +5,19 @@ $ddpurple:    #632CA6;
   top:94px;
 }
 
+.main-api {
+  h2 {
+    &:before {
+      display: block;
+      content: " ";
+      margin-top: -160px;
+      height: 160px;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+}
+
 .api {
   .announcement_banner.open ~ .container-fluid {
     padding-top: 30px;

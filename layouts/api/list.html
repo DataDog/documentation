@@ -18,64 +18,116 @@
 
     {{ range $k, $v := (index $d "tags") }}
         {{ if eq $.Params.title $v.name }}
+
+            {{ $.Scratch.Set "tagObject" (slice)}}
+
+            {{/* build an array of objects for each path, group by tag name */}}
             {{ range $path_key, $path_object := $d.paths }}
-
-                {{ $.Scratch.Set "pathObject" (slice)}}
                 {{ range $action_type, $action := $path_object }}
+                    {{ if in $action.tags $v.name }}
 
-                    {{ $.Scratch.Add "pathObject" (dict "actionType" $action_type "action" $action ) }}
+                        {{ $.Scratch.Add "tagObject" (dict "pathObject" $path_object "pathKey" $path_key "actionType" $action_type "action" $action ) }}
 
+                    {{ end }}
                 {{ end }}
+            {{ end }}
 
-                {{ $pathObject := $.Scratch.Get "pathObject" }}
+            {{ $tagObject := $.Scratch.Get "tagObject"  }}
+            
+            {{/* sort by action summary */}}
+            {{ range sort $tagObject ".action.summary" "asc"  }}
+                {{ $context := .}}
+                <div class="row">
+                    <div class="col-7">
+                        <h2 class="mb-2" id="{{ .action.summary | urlize }}">
+                            <a href="#{{ .action.summary | urlize }}"></a>
+                            {{ .action.summary }}
+                        </h2>
+                        <p><span class="text-uppercase font-semibold">{{ .actionType }}</span>&nbsp; &nbsp;<span>{{.pathKey}}</span></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7">
+                        <h3>Overview</h3>
+                        <p>{{.action.description | markdownify }}</p>
+                        {{ if .action.parameters }}
+                            <h3>Arguments</h3>
+                            <ul>
+                                {{ range .action.parameters }}
+                                    <li><code>{{ .name }}</code>[<em>{{ cond (eq .required false) "optional" "required" }}</em>]&nbsp;{{ .description | markdownify }}</li>
+                                {{ end }}
+                            </ul>
+                        {{ end }}
+                        {{ if .action.requestBody }}
+                            <h3>Request</h3>
 
-                {{ range sort $pathObject "action.summary" "asc"  }}
+                            <h4>Body Data <span class='text-lowercase'>{{ cond (eq .action.requestBody.required true) "(required)" "" }}</span></h4>
 
+                            {{ .action.requestBody.description | markdownify }}
 
-                    {{ $act := .action }}
+                            {{ $ref := index (index (index .action.requestBody.content "application/json") "schema") "$ref"   }}
 
-                    {{ if in .action.tags $v.name }}
-                        <div class="row">
-                            <div class="col-7">
-                                <h2 class="mb-2" id="{{ .action.summary | urlize }}">
-                                    <a href="#{{ .action.summary | urlize }}">{{ .action.summary }}</a>
-                                </h2>
-                                <p><span class="text-uppercase font-semibold">{{ .actionType }}</span>&nbsp; &nbsp;<span>{{$path_key}}</span></p>
+                            {{  $refkey := replace $ref "#/components/schemas/" "" }}
+                            {{ with $refkey }}
+                                {{ highlight ((index $d.components.schemas .) | jsonify) "json" "" }}
+                            {{ end }}
                                 
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-7">
-                                {{.action.description | markdownify }}
-                            </div>
-                            <div class="col-5">
-                        
-                                 
-                                    {{ range $files }}
+                        {{ end }}
 
-                                        {{ $file := (print $snipdir (.Name))}}
-                                        {{ $file_content := readFile $file }}
-                                        {{ $file_basename := (index (split .Name ".") 0) }}
-                                        {{ $file_extension := index (split (path.Ext $file) ".") 1 }}
-
-                                        {{ if eq $act.operationId $file_basename }}
-                                            {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
-
-                                            <div class="{{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} js-code-block code-block-{{ $lang.pygments_name }}">{{ highlight $file_content $lang.pygments_name "" }}</div>
-                                    
-                                        {{ end }}
-                                    {{ end }}
-                                    
+                        <h3>Response</h3>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            {{ range $response_code, $response := .action.responses }}
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1 mr-1 btn btn-sm-tag btn-outline-secondary {{ if eq $response_code "200"}}active{{end}}"  href="#{{ $context.action.operationId }}-{{ $response_code }}" role="tab" data-toggle="tab">{{ $response_code }}</a>
+                                </li>
                             
-                            </div>
+                            {{ end }}
+                        </ul>
+                
+
+                    <!-- response pane -->
+                    <!-- response pane -->
+                    <div class="tab-content">
+                        {{ range $response_code, $response := .action.responses }}
+                        <div role="tabpanel" class="tab-pane {{ if eq $response_code "200"}} active {{end}}" id="{{ $context.action.operationId }}-{{ $response_code }}">
+                            {{ range $content := $response.content }}
+                                {{ range $schema := $content }}
+                                    {{ $ref := (index $schema "$ref") }}
+                                    {{ $refkey := replace $ref "#/components/schemas/" "" }}
+                                    {{ with $refkey }}
+                                    {{ highlight ((index $d.components.schemas .) | jsonify) "json" "" }}
+                                    {{ end }}
+                                {{ end }}
+                            {{ end }}
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <hr/>
-                            </div>
-                        </div>
-                    {{ end }}                
-                {{ end }}
+                        {{ end }}
+                    </div>
+
+                    </div>
+                    <div class="col-5">
+                        {{ range $files }}
+
+                            {{ $file := (print $snipdir (.Name))}}
+                            {{ if and (fileExists $file) (not (in $file "openapi-generator" ))  }}
+                                {{ $file_content := readFile $file }}
+                                {{ $file_basename := (index (split .Name ".") 0) }}
+                                {{ $file_extension := index (split (path.Ext $file) ".") 1 }}
+
+                                {{ if eq $context.action.operationId $file_basename }}
+                                    {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+
+                                    <div class="{{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} js-code-block code-block-{{ $lang.pygments_name }}">{{ highlight $file_content $lang.pygments_name "" }}</div>
+                            
+                                {{ end }}
+                            {{ end }}
+                        {{ end }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <hr/>
+                    </div>
+                </div>
             {{ end }}
         {{ end }}
     {{ end }}

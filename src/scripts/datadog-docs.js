@@ -401,27 +401,27 @@ $(document).ready(function () {
     }
 
     // docs on mobile dropdown trigger move to anchor
-    $('.api-nav .dropdown-menu .dropdown-item').on('click', function(e) {
-        const href = $(this).attr('href');
-        if(href.substr(0, 1) === '#') {
-            moveToAnchor(href.substr(1), false);
-            return false;
-        }
-    });
+    // $('.api-nav .dropdown-menu .dropdown-item').on('click', function(e) {
+    //     const href = $(this).attr('href');
+    //     if(href.substr(0, 1) === '#') {
+    //         moveToAnchor(href.substr(1), false);
+    //         return false;
+    //     }
+    // });
 
-    $('.sidenav-api a').on('click', function(e) {
-        const href = $(this).attr('href');
-        if(href.substr(0, 1) === '#') {
-            moveToAnchor(href.substr(1), false);
-            return false;
-        }
-    });
+    // $('.sidenav-api a').on('click', function(e) {
+    //     const href = $(this).attr('href');
+    //     if(href.substr(0, 1) === '#') {
+    //         moveToAnchor(href.substr(1), false);
+    //         return false;
+    //     }
+    // });
 
     // api dropdown select
     $('.api-select').on('change', function(e) {
         const href = $(this).val();
         if(href.substr(0, 1) === '#') {
-            moveToAnchor(href.substr(1), false);
+            // moveToAnchor(href.substr(1), false);
             return false;
         }
     });
@@ -457,13 +457,13 @@ $(document).ready(function () {
 
     updateMainContentAnchors();
 
-    $('.api-content h2[id]').each(function() {
-        const id = $(this).attr('id');
-        $(this).wrapInner(`<a href="#${id}"></a>`).on('click', function(e) {
-            moveToAnchor(id, false);
-            return false;
-        });
-    });
+    // $('.api-content h2[id]').each(function() {
+    //     const id = $(this).attr('id');
+    //     $(this).wrapInner(`<a href="#${id}"></a>`).on('click', function(e) {
+    //         moveToAnchor(id, false);
+    //         return false;
+    //     });
+    // });
 
     // sticky polyfill trigger
     const elements = document.querySelectorAll('.sticky');
@@ -541,7 +541,7 @@ $(document).ready(function () {
         //     return false;
         // });
     } else if(window.location.hash) {
-        moveToAnchor(window.location.hash.substr(1), true);
+        // moveToAnchor(window.location.hash.substr(1), true);
     }
 
     // For sidenav links with anchor tag refs
@@ -567,7 +567,7 @@ function updateMainContentAnchors(){
         const id = $(this).attr('id');
         $(this).wrapInner(`<a href="#${id}"></a>`).on('click', function(e) {
             e.preventDefault();
-            moveToAnchor(id);
+            // moveToAnchor(id);
             return false;
         });
     });
@@ -577,7 +577,7 @@ function updateMainContentAnchors(){
             e.preventDefault();
             const id = e.target.hash.split('#').join('');
             if (id) {
-                moveToAnchor(id);
+                // moveToAnchor(id);
             }
         }
     });
