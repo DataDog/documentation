@@ -1,0 +1,32 @@
+name: Openapi
+on:
+  pull_request:
+    branches:
+      # on live we should change this to master
+      - zach/open-api
+    paths:
+      - 'data/api/**/full_spec.yaml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Install dependencies
+      run: npm install js-yaml@^3.13.1 slugify@^1.4.0
+    - name: Create local changes
+      run: |
+        npm run build:apiPages
+        git add content data
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "full spec processed"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        # push changes to the branch that did the PR
+        branch: refs/heads/${{ github.head_ref }}
+        force: true
