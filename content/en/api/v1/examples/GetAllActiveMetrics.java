@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.MetricsApi;
+import com.datadog.api.v1.client.api.MetricsApi;
 
 public class MetricsApiExample {
 

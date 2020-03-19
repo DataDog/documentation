@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.PagerDutyIntegrationApi;
+import com.datadog.api.v1.client.api.PagerDutyIntegrationApi;
 
 public class PagerDutyIntegrationApiExample {
 

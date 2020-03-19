@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.AzureIntegrationApi;
+import com.datadog.api.v1.client.api.AzureIntegrationApi;
 
 public class AzureIntegrationApiExample {
 

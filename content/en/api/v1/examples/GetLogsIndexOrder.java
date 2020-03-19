@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.LogsIndexesApi;
+import com.datadog.api.v1.client.api.LogsIndexesApi;
 
 public class LogsIndexesApiExample {
 

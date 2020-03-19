@@ -1,0 +1,4 @@
+---
+title: Dashboards
+type: api
+---

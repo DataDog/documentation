@@ -1,1 +1,1 @@
-curl -X GET -H "DD-API-KEY: [[apiKey]]" -H "DD-APPLICATION-KEY: [[apiKey]]" "https://api.datadoghq.com/api/v1/hosts?filter=&sort_field=&sort_dir=&start=&count=&from="
+curl -X  -H "DD-API-KEY: [[apiKey]]" -H "DD-APPLICATION-KEY: [[apiKey]]" "https://api.datadoghq.com/api/v1/hosts?filter=&sort_field=&sort_dir=&start=&count=&from="

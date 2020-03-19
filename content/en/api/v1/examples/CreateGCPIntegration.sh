@@ -1,1 +1,1 @@
-curl -X POST -H "DD-API-KEY: [[apiKey]]" -H "DD-APPLICATION-KEY: [[apiKey]]" "https://api.datadoghq.com/api/v1/integration/gcp"
+curl -X  -H "DD-API-KEY: [[apiKey]]" -H "DD-APPLICATION-KEY: [[apiKey]]" "https://api.datadoghq.com/api/v1/integration/gcp"

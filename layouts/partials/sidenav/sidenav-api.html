@@ -14,18 +14,21 @@
             <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_docs" }}</h4></a>
             <div class="sidenav-nav">
                 {{ $currentPage := . }}
+
+                
                 <ul class="list-unstyled">
+                    <!-- (index .Site.Menus  $apiMenu) -->
                 {{ range (index .Site.Menus  $apiMenu) }}
+
                     {{ if .HasChildren }}
                         <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) }}active{{ end }}">
                             <a href="{{ .URL }}">
-                                {{ .Pre }}
                                 <span>{{ .Name }}</span>
                             </a>
-                            <ul>
+                            <ul> 
                                 {{ range .Children }}
                                     <li class="{{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
-                                        <a href="{{ .URL }}">
+                                        <a href="#{{ .URL }}">
                                             <span class="d-inline-block">{{ .Name }}</span>
                                         </a>
                                     </li>
@@ -35,7 +38,6 @@
                     {{ else }}
                         <li>
                             <a href="{{ .URL }}">
-                                {{ .Pre }}
                                 <span>{{ .Name }}</span>
                             </a>
                         </li>

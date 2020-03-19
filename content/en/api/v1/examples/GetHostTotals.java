@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.HostsApi;
+import com.datadog.api.v1.client.api.HostsApi;
 
 public class HostsApiExample {
 

@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.DowntimesApi;
+import com.datadog.api.v1.client.api.DowntimesApi;
 
 public class DowntimesApiExample {
 

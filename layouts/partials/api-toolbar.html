@@ -12,10 +12,7 @@ top: 95px;">
                 <div id="breadcrumbs">
                     <a href="/">Docs</a>
                     >
-                    {{ if .Page.Parent.Parent }}
-                        <a href="{{ .Page.Parent.Parent.RelPermalink }}">{{ .Page.Parent.Parent.Title }}</a>
-                        >
-                    {{ end }}
+                    
                     {{ if .Page.Parent }}
                         <a href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>
                         >

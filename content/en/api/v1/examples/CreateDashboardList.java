@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.DashboardListsApi;
+import com.datadog.api.v1.client.api.DashboardListsApi;
 
 public class DashboardListsApiExample {
 

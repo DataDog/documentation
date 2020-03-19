@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.UsageApi;
+import com.datadog.api.v1.client.api.UsageApi;
 
 public class UsageApiExample {
 

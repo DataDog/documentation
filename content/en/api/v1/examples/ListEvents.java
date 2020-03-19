@@ -1,4 +1,4 @@
-import com.datadog.api.v2.client.api.EventsApi;
+import com.datadog.api.v1.client.api.EventsApi;
 
 public class EventsApiExample {
 
