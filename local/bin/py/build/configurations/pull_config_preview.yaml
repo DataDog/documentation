@@ -47,7 +47,7 @@
     contents:
 
     - action: integrations
-      branch: master
+      branch: ruth/docs-721
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"

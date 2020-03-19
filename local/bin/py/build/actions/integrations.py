@@ -59,6 +59,12 @@ class Integrations:
         self.regex_h1_replace = re.compile(
             r"^(#{1})(?!#)(.*)", re.MULTILINE
         )
+        self.regex_tab_open = re.compile(
+            r"<!--- {", re.MULTILINE
+        )
+        self.regex_tab_close = re.compile(
+            r"} -->", re.MULTILINE
+        )
         self.regex_metrics = re.compile(
             r"(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)",
             re.DOTALL,
@@ -309,6 +315,7 @@ class Integrations:
         """
         Take a single README.md file and
         1. extract the first h1, if this isn't a merge item
+        2. add tabs if they exist
         2. inject metrics after ### Metrics header if metrics exists for file
         3. inject service checks after ### Service Checks if file exists
         4. inject hugo front matter params at top of file
@@ -375,6 +382,12 @@ class Integrations:
             ]:
                 result = re.sub(
                     self.regex_h1, "", result, 1
+                )
+                result = re.sub(
+                    self.regex_tab_open, "{", result, 0
+                )
+                result = re.sub(
+                    self.regex_tab_close, "}", result, 0
                 )
             if metrics_exist:
                 result = re.sub(
