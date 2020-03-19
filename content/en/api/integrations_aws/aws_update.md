@@ -116,7 +116,7 @@ Update a Datadog-Amazon Web Services integration.
 
 * **`excluded_regions`** [*optional*, *default*=**None**]:
 
-    Array of AWS regions that will be excluded from metrics collection. 
+    An array of AWS regions to exclude from metrics collection. 
 
 [1]: /integrations/amazon_web_services/#configuration
 [2]: /integrations/amazon_web_services/#installation
