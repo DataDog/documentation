@@ -11,7 +11,8 @@ config = {
   "filter_tags": ["<KEY>:<VALUE>"],
   "host_tags": ["<KEY>:<VALUE>"],
   "role_name": "DatadogAWSIntegrationRole",
-  "account_specific_namespace_rules": {"auto_scaling": false, "opsworks": false}
+  "account_specific_namespace_rules": {"auto_scaling": false, "opsworks": false},
+  "excluded_regions": ["us-east-1", "us-west-1"]
 }
 
 dog.aws_integration_create(config)
