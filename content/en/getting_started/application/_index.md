@@ -96,17 +96,17 @@ Many views in Datadog can be scoped to a specific time frame. Time controls incl
 
 To increment by month, day, year, hour, or minute, highlight a portion of the time frame and use the `[↑]` and `[↓]` keys :
 
-{{< img src="getting_started/increment_time_with_arrow_keys.gif" alt="Increment time with arrow keys" >}}
+{{< img src="getting_started/increment_time_with_arrow_keys.mp4" alt="Increment time with arrow keys" video="true" width="500" >}}
 
 You can also type or paste custom ranges and timestamps—including ones copied from elsewhere in Datadog:
 
-{{< img src="getting_started/copy_and_paste_time_frame.gif" alt="Copy and paste time frame" >}}
+{{< img src="getting_started/copy_and_paste_time_frame.mp4" alt="Copy and paste time frame" video="true" >}}
 
 Both fixed and relative ranges are supported:
 
-{{< img src="getting_started/type_custom_fixed_time_frame.gif" alt="Type custom fixed time frame" >}}
+{{< img src="getting_started/type_custom_fixed_time_frame.mp4" alt="Type custom fixed time frame" video="true" >}}
 
-{{< img src="getting_started/type_custom_relative_time_frame.gif" alt="Type custom relative time frame" >}}
+{{< img src="getting_started/type_custom_relative_time_frame.mp4" alt="Type custom relative time frame" video="true" >}}
 
 ### Supported time syntaxes
 
