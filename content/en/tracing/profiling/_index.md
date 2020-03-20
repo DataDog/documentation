@@ -66,7 +66,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 
 {{% tab "Python" %}}
 
-The Datadog Profiler requires Python 2.7+ running on Linux. Memory profiling only works on Python 3.5+. To begin profiling applications:
+The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python 3.5+. To begin profiling applications:
 
 1. Install `ddtrace` with the `profile` flavor, which contains both tracing and profiling:
 
@@ -94,7 +94,7 @@ The Datadog Profiler requires Python 2.7+ running on Linux. Memory profiling onl
 
 **Note**:
 
-- If you want to control which part of your code should be profiled, use the `ddtrace.profiler.profiler.Profiler` object:
+- If you want to control which part of your code should be profiled, use the `ddtrace.profile.profiler.Profiler` object:
 
     ```python
     from ddtrace.profile.profiler import Profiler
