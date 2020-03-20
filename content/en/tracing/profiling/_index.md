@@ -94,7 +94,7 @@ The Datadog Profiler requires Python 2.7+ running on Linux. Memory profiling onl
 
 **Note**:
 
-- If you want to control which part of your code should be profiled, use the `ddtrace.profiler.profiler` object:
+- If you want to control which part of your code should be profiled, use the `ddtrace.profiler.profiler.Profiler` object:
 
     ```python
     from ddtrace.profile.profiler import Profiler
@@ -209,7 +209,7 @@ Once enabled, the following profile types are collected:
 
 | Profile type             | Definition                                                                                                                                                                                                                                                                                         |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CPU         | Shows the time each method spent running on the CPU. It includes CPython bytecode, including native code called from within Python.                                                                                                                                                                     |
+| CPU         | Shows the time each function spent running on the CPU. It includes CPython bytecode, including native code called from within Python.                                                                                                                                                                     |
 | Allocation               | Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed. Only supported on Python 3.                                                                                                                                                                                    |
 | Wall | Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running. |
 | Exceptions               | Shows the number of caught or uncaught exceptions raised by each function.                                                                                                                                                                                                                                                 |
