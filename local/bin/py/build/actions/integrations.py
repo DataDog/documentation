@@ -59,11 +59,20 @@ class Integrations:
         self.regex_h1_replace = re.compile(
             r"^(#{1})(?!#)(.*)", re.MULTILINE
         )
+        self.regex_tabs_open = re.compile(
+            r"<!--- {{< tabs >}} -->", re.MULTILINE
+        )
+        self.regex_tabs_close = re.compile(
+            r"<!--- {{< /tabs >}} -->", re.MULTILINE
+        )
         self.regex_tab_open = re.compile(
-            r"<!--- {", re.MULTILINE
+            r"<!--- {{% tab", re.MULTILINE
         )
         self.regex_tab_close = re.compile(
-            r"} -->", re.MULTILINE
+            r"<!--- {{% /tab %}} -->", re.MULTILINE
+        )
+        self.regex_tab_end = re.compile(
+            r" %}} -->", re.MULTILINE
         )
         self.regex_metrics = re.compile(
             r"(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)",
@@ -384,10 +393,19 @@ class Integrations:
                     self.regex_h1, "", result, 1
                 )
                 result = re.sub(
-                    self.regex_tab_open, "{", result, 0
+                    self.regex_tabs_open, "{{< tabs >}}", result, 0
                 )
                 result = re.sub(
-                    self.regex_tab_close, "}", result, 0
+                    self.regex_tabs_close, "{{< /tabs >}}", result, 0
+                )
+                result = re.sub(
+                    self.regex_tab_open, "{{% tab", result, 0
+                )
+                result = re.sub(
+                    self.regex_tab_close, "{{% /tab %}}", result, 0
+                )
+                result = re.sub(
+                    self.regex_tab_end, " %}}", result, 0
                 )
             if metrics_exist:
                 result = re.sub(
