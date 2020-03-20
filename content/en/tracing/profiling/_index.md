@@ -84,7 +84,7 @@ The Datadog Profiler requires Python 2.7+ running on Linux. Memory profiling onl
     export DD_PROFILING_TAGS=env:<YOUR_ENVIRONMENT>,service:<YOUR_SERVICE>,version:<YOUR_VERSION>
     ```
 
-4. To automatically profile your code, you can import `ddtrace.profile.auto`. As soon as it is imported, the profiler will start:
+4. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
 
     ```python
     import ddtrace.profile.auto
