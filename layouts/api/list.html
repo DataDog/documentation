@@ -65,17 +65,25 @@
 
                             {{ .action.requestBody.description | markdownify }}
 
-                            {{ $ref := index (index (index .action.requestBody.content "application/json") "schema") "$ref"   }}
+                            {{/* if .action.requestBody }}
 
-                            {{  $refkey := replace $ref "#/components/schemas/" "" }}
+                            {{ $ref := index .action.requestBody.content "application/json"   }}
+
+                        
+                         
+                           
+
+                            {{/* $refkey := replace $ref "#/components/schemas/" "" }}
                             {{ with $refkey }}
-                                {{ highlight ((index $d.components.schemas .) | jsonify) "json" "" }}
+                                {{ highlight ((index $d.components.schemas $refkey) | jsonify) "json" "" }}
                             {{ end }}
+
+                            {{ end */}}
                                 
                         {{ end }}
 
                         <h3>Response</h3>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist" style="z-index: 10;">
                             {{ range $response_code, $response := .action.responses }}
                                 <li class="nav-item">
                                     <a class="nav-link mb-1 mr-1 btn btn-sm-tag btn-outline-secondary {{ if eq $response_code "200"}}active{{end}}"  href="#{{ $context.action.operationId }}-{{ $response_code }}" role="tab" data-toggle="tab">{{ $response_code }}</a>
