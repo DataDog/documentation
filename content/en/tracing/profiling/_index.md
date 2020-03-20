@@ -112,7 +112,7 @@ The Datadog Profiler requires Python 2.7+ running on Linux. Memory profiling onl
     $ pyddprofile server.py
     ```
 
-- For advanced setup of the profiler or to add tags like `service` or `version`, you can use environment variable to set those parameters:
+- For advanced setup of the profiler or to add tags like `service` or `version`, use environment variables to set the parameters:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
