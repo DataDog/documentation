@@ -94,7 +94,7 @@ The Datadog Profiler requires Python 2.7+ running on Linux. Memory profiling onl
 
 **Note**:
 
-- If you want to control which part of your code should be profiled, you can use the `ddtrace.profiler.profiler` object:
+- If you want to control which part of your code should be profiled, use the `ddtrace.profiler.profiler` object:
 
     ```python
     import ddtrace.profile.profiler
