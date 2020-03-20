@@ -76,7 +76,7 @@ The Datadog Profiler requires Python 2.7+ running on Linux. Memory profiling onl
 
      **Note**: Profiling is available in the `ddtrace` library for versions 0.35+.
 
-2. Add a valid [Datadog API key][2] in your environment variable: `DD_PROFILING_API_KEY`
+2. Add a valid [Datadog API key][2] in your environment variable: `DD_PROFILING_API_KEY`.
 
 3. Set `env`, `service` and `version` as Datadog tags in your environment variables.
 
