@@ -118,7 +118,7 @@ The Datadog Profiler requires Python 2.7+ running on Linux. Memory profiling onl
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][2] to use when uploading profiles.                                         |
 | `DD_PROFILING_TAGS`                              | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`.       |
-| `DD_SERVICE_NAME`                                | String        | The Datadog [service][3] name. It can be set here, or in `DD_PROFILING_TAGS`.                    |
+| `DD_SERVICE_NAME`                                | String        | The Datadog [service][3] name, which can be set here, or in `DD_PROFILING_TAGS`.                    |
 
 
 [1]: https://app.datadoghq.com/profiling
