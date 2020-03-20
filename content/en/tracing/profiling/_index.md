@@ -106,7 +106,7 @@ The Datadog Profiler requires Python 2.7+ running on Linux. Memory profiling onl
     prof.stop()
     ```
 
-- Alternatively, you can profile your service by running it with  the wrapper `pyddprofile`:
+- Alternatively, profile your service by running it with the wrapper `pyddprofile`:
 
     ```shell
     $ pyddprofile server.py
