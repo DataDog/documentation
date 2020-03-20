@@ -7,14 +7,27 @@ $ddpurple:    #632CA6;
 
 .main-api {
   h2 {
-    &:before {
-      display: block;
-      content: " ";
-      margin-top: -160px;
-      height: 160px;
-      visibility: hidden;
-      pointer-events: none;
+    margin-top: -160px;
+    padding-top: 160px;
+    pointer-events: none;
+    background-clip: content-box;
+    a {
+      pointer-events: initial;
     }
+    // span {
+    //   pointer-events: none;
+    // }
+    // &:before {
+    //   display: block;
+    //   content: "";
+    //   margin-top: -160px;
+    //   height: 160px;
+    //   visibility: hidden;
+    //   pointer-events: none;
+    // }
+  }
+  h3 {
+    margin-bottom: 20px;
   }
 }
 

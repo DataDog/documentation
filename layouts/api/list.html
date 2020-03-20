@@ -39,15 +39,16 @@
                 {{ $context := .}}
                 <div class="row">
                     <div class="col-7">
+                     
                         <h2 class="mb-2" id="{{ .action.summary | urlize }}">
-                            <a href="#{{ .action.summary | urlize }}"></a>
-                            {{ .action.summary }}
-                        </h2>
+                                {{- .action.summary -}}
+                                <a href="#{{ .action.summary | urlize }}">#</a>
+                            </h2>
                         <p><span class="text-uppercase font-semibold">{{ .actionType }}</span>&nbsp; &nbsp;<span>{{.pathKey}}</span></p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-7">
+                    <div class="col-9">
                         <h3>Overview</h3>
                         <p>{{.action.description | markdownify }}</p>
                         {{ if .action.parameters }}
@@ -58,32 +59,84 @@
                                 {{ end }}
                             </ul>
                         {{ end }}
-                        {{ if .action.requestBody }}
-                            <h3>Request</h3>
 
+                        <h3>Request</h3>
+
+                        {{ if .action.requestBody }}
+                            
                             <h4>Body Data <span class='text-lowercase'>{{ cond (eq .action.requestBody.required true) "(required)" "" }}</span></h4>
 
-                            {{ .action.requestBody.description | markdownify }}
+                            <p>{{ .action.requestBody.description | markdownify }}</p>
 
-                            {{/* if .action.requestBody }}
+                            {{ if .action.requestBody }}
+                                {{ range $content := .action.requestBody.content }}
+                                    {{ range $schema := $content }}
+                                        {{ $ref := (index $schema "$ref") }}
+                                        {{ $refkey := replace $ref "#/components/schemas/" "" }}
+                                        {{ with $refkey }}
 
-                            {{ $ref := index .action.requestBody.content "application/json"   }}
+                                        {{ $schema := index $d.components.schemas . }}
+                                        <p>{{ $schema.description }}</p>
 
-                        
-                         
-                           
+                                        <div class="table-responsive">
+                                            <table class="table">                                
+                                                <thead>
+                                                    <tr>
+                                                      <th scope="col">Field</th>
+                                                      <th scope="col">Type</th>
+                                                      <th scope="col">Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {{ range $key, $value := $schema.properties }}
+                                                        {{ $requredElem := cond (eq .required true) "<sup class='text-danger'>*</sup>" ""}}
+                                                        <tr>
+                                                            <!-- <th scope="row">1</th> -->
+                                                            <td>{{ $requredElem | safeHTML }}{{ $key }}</td>
+                                                            <td>{{ $value.type }}</td>
+                                                            <td>{{ $value.description | markdownify }}</td>
+                                                        </tr>
+                                                    {{ end }}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
+                                        {{ end }}
+                                    {{ end }}
+                                {{ end }}
+                            {{ end }}    
+                        {{ end }}
 
-                            {{/* $refkey := replace $ref "#/components/schemas/" "" }}
-                            {{ with $refkey }}
-                                {{ highlight ((index $d.components.schemas $refkey) | jsonify) "json" "" }}
-                            {{ end }}
+                        {{ if .action.parameters }}
 
-                            {{ end */}}
-                                
+                            <div class="table-responsive">
+                                <table class="table">                                
+                                    <thead>
+                                        <tr>
+                                          <th scope="col">Field</th>
+                                          <th scope="col">Type</th>
+                                          <th scope="col">Description</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {{ range .action.parameters }}
+                                            {{ $requredElem := cond (eq .required true) "<sup class='text-danger'>*</sup>" ""}}
+                                            <tr>
+                                                <!-- <th scope="row">1</th> -->
+                                                <td>{{ $requredElem | safeHTML }}{{ .name }}</td>
+                                                <td>{{ .schema.type }}</td>
+                                                <td>{{ .description | markdownify }}</td>
+                                            </tr>
+                                        {{ end }}
+                                    </tbody>
+                                </table>
+                            </div>
+
                         {{ end }}
 
                         <h3>Response</h3>
-                        <ul class="nav nav-tabs" id="myTab" role="tablist" style="z-index: 10;">
+
+                        <ul class="nav nav-tabs border-none" role="tablist" style="z-index: 10;">
                             {{ range $response_code, $response := .action.responses }}
                                 <li class="nav-item">
                                     <a class="nav-link mb-1 mr-1 btn btn-sm-tag btn-outline-secondary {{ if eq $response_code "200"}}active{{end}}"  href="#{{ $context.action.operationId }}-{{ $response_code }}" role="tab" data-toggle="tab">{{ $response_code }}</a>
@@ -91,28 +144,68 @@
                             
                             {{ end }}
                         </ul>
-                
 
-                    <!-- response pane -->
-                    <!-- response pane -->
-                    <div class="tab-content">
-                        {{ range $response_code, $response := .action.responses }}
-                        <div role="tabpanel" class="tab-pane {{ if eq $response_code "200"}} active {{end}}" id="{{ $context.action.operationId }}-{{ $response_code }}">
-                            {{ range $content := $response.content }}
-                                {{ range $schema := $content }}
-                                    {{ $ref := (index $schema "$ref") }}
-                                    {{ $refkey := replace $ref "#/components/schemas/" "" }}
-                                    {{ with $refkey }}
-                                    {{ highlight ((index $d.components.schemas .) | jsonify) "json" "" }}
+                        <div class="tab-content">
+                            {{ range $response_code, $response := .action.responses }}
+                            <div role="tabpanel" class="tab-pane {{ if eq $response_code "200"}} active {{end}}" id="{{ $context.action.operationId }}-{{ $response_code }}">
+                                {{ range $content := $response.content }}
+                                    {{ range $schema := $content }}
+                                        {{ $ref := (index $schema "$ref") }}
+                                        {{ $refkey := replace $ref "#/components/schemas/" "" }}
+                                        
+                                        <ul class="nav nav-tabs border-none" role="tablist" style="z-index: 10;">
+                                            <li class="nav-item">
+                                                <a class="nav-link mb-1 mr-1 btn btn-sm-tag btn-outline-secondary active js-model-link" href="#{{ $context.action.operationId }}-{{ $response_code }}-model" role="tab" data-toggle="tab">Model</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link mb-1 mr-1 btn btn-sm-tag btn-outline-secondary js-example-link" href="#{{ $context.action.operationId }}-{{ $response_code }}-example" role="tab" data-toggle="tab">Example</a>
+                                            </li>
+                
+                                        </ul>
+                                        <div class="tab-content mb-3">
+                                            <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-{{ $response_code }}-model">
+                                                {{ with $refkey }}
+                                                {{ $schema := index $d.components.schemas . }}
+                                                <p>{{ $schema.description }}</p>
+
+                                                <div class="table-responsive">
+                                                    <table class="table">                                
+                                                        <thead>
+                                                            <tr>
+                                                            <th scope="col">Field</th>
+                                                            <th scope="col">Type</th>
+                                                            <th scope="col">Description</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {{ range $key, $value := $schema.properties }}
+                                                                {{ $requredElem := cond (eq .required true) "<sup class='text-danger'>*</sup>" ""}}
+                                                                <tr>
+                                                                    <!-- <th scope="row">1</th> -->
+                                                                    <td>{{ $requredElem | safeHTML }}{{ $key }}</td>
+                                                                    <td>{{ $value.type }}</td>
+                                                                    <td>{{ $response.description | markdownify }}</td>
+                                                                </tr>
+                                                            {{ end }}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                {{ end }}
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-{{ $response_code }}-example">
+                                                {{ with $refkey }}
+                                                                                                    
+                                                {{ highlight ((index $d.components.schemas $refkey) | jsonify) "json" "" }}
+                                                {{ end }}
+                                            </div>
+                                        </div>
                                     {{ end }}
                                 {{ end }}
+                            </div>
                             {{ end }}
                         </div>
-                        {{ end }}
-                    </div>
-
-                    </div>
-                    <div class="col-5">
+                    
+                        <h3>Code Example</h3>
                         {{ range $files }}
 
                             {{ $file := (print $snipdir (.Name))}}
