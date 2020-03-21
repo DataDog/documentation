@@ -21,7 +21,7 @@ To enable trace collection with your Agent, follow the instructions below:
 {{% tab "Helm" %}}
 
 
-- If you haven't already, [install][6] the Helm chart.
+- If you haven't already, [install][7] the Helm chart.
 - Update your datadog-values.yaml file with the following APM configuration:
     ```yaml	
     datadog:	
@@ -124,4 +124,4 @@ List of all environment variables available for tracing within the Agent running
 [3]: /tracing/guide/security/#replace-rules
 [4]: /tracing/app_analytics/#automatic-configuration
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[6]: /agent/kubernetes/?tab=helm
+[7]: /agent/kubernetes/?tab=helm
