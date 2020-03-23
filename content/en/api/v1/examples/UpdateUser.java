@@ -4,7 +4,7 @@ public class UsersApiExample {
 
     public static void main(String[] args) {
         UsersApi apiInstance = new UsersApi();
-        String userHandle = test@datadoghq.com; // String | The id of the user
+        String userHandle = test@datadoghq.com; // String | The ID of the user.
         User body = ; // User | 
         try {
             UserResponse result = apiInstance.updateUser(userHandle, body);

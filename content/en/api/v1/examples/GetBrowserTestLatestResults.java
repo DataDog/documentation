@@ -4,7 +4,7 @@ public class SyntheticsApiExample {
 
     public static void main(String[] args) {
         SyntheticsApi apiInstance = new SyntheticsApi();
-        String publicId = publicId_example; // String | The public id of the browser test for which to search results for
+        String publicId = publicId_example; // String | The public id of the browser test for which to search results for.
         SyntheticsGetTestLatestResultsPayload body = ; // SyntheticsGetTestLatestResultsPayload | 
         try {
             SyntheticsGetBrowserTestLatestResultsResponse result = apiInstance.getBrowserTestLatestResults(publicId, body);

@@ -4,7 +4,7 @@ public class EventsApiExample {
 
     public static void main(String[] args) {
         EventsApi apiInstance = new EventsApi();
-        Long eventId = 789; // Long | The id of the event
+        Long eventId = 789; // Long | The id of the event.
         try {
             EventResponse result = apiInstance.getEvent(eventId);
             System.out.println(result);
