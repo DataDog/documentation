@@ -18,6 +18,9 @@ further_reading:
 - link: "/integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui"
   tag: "faq"
   text: "Integration Setup for ECS Fargate"
+- link: "/agent/guide/secrets-management"
+  tag: "Documentation"
+  text: "Secrets Management"
 ---
 
 ## Overview
@@ -32,7 +35,7 @@ The Agent watches for events like container creation, destruction, starts, and s
 
 ## How It Works
 
-{{< img src="agent/autodiscovery/ad_1.png" alt="Autodiscovery Overview" responsive="true" style="width:80%;">}}
+{{< img src="agent/autodiscovery/ad_1.png" alt="Autodiscovery Overview"  style="width:80%;">}}
 
 In the figure above, there is a host node with three pods, including a Redis pod and an Agent pod. The Kubelet, which schedules containers, runs as a binary on this node, and exposes the endpoints `/metrics` and `/pods`. Every 10 seconds, the Agent queries `/pods` and finds the Redis spec. It can also see information about the Redis pod itself.
 

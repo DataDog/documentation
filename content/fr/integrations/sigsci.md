@@ -33,13 +33,14 @@ supported_os:
 
 Envoyez des événements et métriques Signal Sciences à Datadog pour surveiller en temps réel les attaques et les abus ciblant vos applications, API et microservices, et pour vous assurer que Signal Sciences fonctionne et inspecte le trafic comme prévu.
 
-![image-datadog-sigsci-dashboard][11]
+![image-datadog-sigsci-dashboard][1]
 
-![image-datadog-sigsci-securite][1]
+![image-datadog-sigsci-sécurité][2]
 
 Recueillez des événements et métriques Signal Sciences en temps réel pour :
 
-* Visualiser les métriques WAF associées aux :
+- Visualiser les métriques WAF associées aux :
+
   - Requêtes totales
   - Principaux types d'attaques potentielles
   - Exécutions de commande
@@ -50,7 +51,8 @@ Recueillez des événements et métriques Signal Sciences en temps réel pour 
   - Sources inconnues
   - Erreurs serveur 400/500
 
-* Voir les adresses IP bloquées et/ou marquées comme malveillantes par Signal Sciences à la suite de l'une des activités suivantes :
+- Voir les adresses IP bloquées et/ou marquées comme malveillantes par Signal Sciences à la suite de l'une des activités suivantes :
+
   - Attaques par injection OWASP
   - DDoS d'application
   - Attaques par force brute
@@ -60,7 +62,7 @@ Recueillez des événements et métriques Signal Sciences en temps réel pour 
   - Bots malveillants
   - Patching virtuel
 
-* Visualiser des alertes concernant l'état de l'agent Signal Sciences
+- Visualiser des alertes concernant l'état de l'agent Signal Sciences
 
 ## Implémentation
 
@@ -70,27 +72,29 @@ Pour utiliser l'intégration Datadog/Signal Sciences, vous devez être un clien
 
 #### Collecte de métriques
 
-1. Installez l'[agent Signal Sciences][8].
+1. Installez l'[agent Signal Sciences][3].
 
 2. Configurez l'agent Signal Sciences afin de le faire utiliser DogStatsD :
 
    Ajoutez la ligne suivante au fichier agent.config de chaque Agent :
-    ```
-    statsd-type = "dogstatsd"
-    ```
+
+   ```shell
+   statsd-type = "dogstatsd"
+   ```
 
      Une fois le fichier mis à jour, le client statsd de l'agent prend alors en charge les tags. Des métriques telles que `sigsci.agent.signal.<type_signal>` sont envoyées en tant que `sigsci.agent.signal` et reçoivent le tag `signal_type:<type_signal>`.
 
-    *Exemple :* `sigsci.agent.signal.http404` => `sigsci.agent.signal` avec le tag `signal_type:http404`
+   _Exemple : _`sigsci.agent.signal.http404` => `sigsci.agent.signal` avec le tag `signal_type:http404`
 
-    Si vous utilisez Kubernetes pour exécuter l'Agent Datadog, assurez-vous d'activer le trafic DogStatsD non local comme indiqué dans la [documentation relative à DogStatsD pour Kubernetes] (https://docs.datadoghq.com/agent/kubernetes/dogstatsd/).
+    Si vous utilisez Kubernetes pour exécuter l'Agent Datadog, assurez-vous d'activer le trafic DogStatsD non local comme indiqué dans la [documentation relative à DogStatsD pour Kubernetes][4].
 
 3. Configurez l'agent SigSci de façon à envoyer des métriques à l'Agent Datadog :
 
     Ajoutez la ligne suivante au fichier agent.config de chaque Agent :
-    ```
-    statsd-address="<DATADOG_AGENT_HOSTNAME>:<DATADOG_AGENT_PORT>"
-    ```
+
+   ```shell
+   statsd-address="<DATADOG_AGENT_HOSTNAME>:<DATADOG_AGENT_PORT>"
+   ```
 
 4. Cliquez sur le bouton pour installer l'intégration.
 
@@ -98,24 +102,24 @@ Pour utiliser l'intégration Datadog/Signal Sciences, vous devez être un clien
 
 #### Collecte d'événements
 
-1. Dans Datadog, [créez une clé d'API][2].
+1. Dans Datadog, [créez une clé d'API][5].
 
-2. Dans votre [dashboard Signal Sciences][3] sur la barre de navigation du site, cliquez sur Manage > Integrations puis sur l'option Add à proximité de l'intégration Datadog Event.
+2. Dans votre [dashboard Signal Sciences][6] sur la barre de navigation du site, cliquez sur Manage > Integrations, puis sur l'option Add à proximité de l'intégration Datadog Event.
 
 3. Saisissez la clé d'API dans le champ _API Key_ correspondant.
 
 4. Cliquez sur _Add_.
 
-
 **Besoin d'informations supplémentaires ?**
 
-- [Visionnez cette vidéo][9] (en anglais) pour en savoir plus sur la configuration de l'agent et de Datadog.
-- Consultez la [documentation complète de Signal Sciences][10] (en anglais)
+- [Visionnez cette vidéo][7] (en anglais) pour en savoir plus sur la configuration de l'agent et de Datadog.
+- Consultez la [documentation complète de Signal Sciences][8] (en anglais).
 
 ## Données collectées
+
 ### Métriques
 
-```
+```text
 sigsci.agent.waf.total
 sigsci.agent.waf.error
 sigsci.agent.waf.allow
@@ -131,32 +135,31 @@ sigsci.agent.signal
 
 ### Événements
 
-Tous les événements Signal Sciences sont transmis à votre [flux d'événements Datadog][4].
+Tous les événements Signal Sciences sont transmis à votre [flux d'événements Datadog][9].
 
 ### Checks de service
 
 L'intégration Signal Sciences n'inclut aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][5].
+
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 ## Pour aller plus loin
 
-Pour en savoir plus sur la sécurité des applications, le DevOps, le SecOps et les autres types d'ops, consultez le [blog de Signal Sciences][6] (en anglais).
+Pour en savoir plus sur la sécurité des applications, le DevOps, le SecOps et les autres types d'ops, consultez le [blog de Signal Sciences][11] (en anglais).
 
-Pour vous inscrire au service de surveillance Datadog/Signal Sciences, un outil gratuit permettant de voir en temps réel les attaques ciblant vos applications, API et microservices sans abonnement à Signal Sciences, consultez notre [page d'inscription][7].
+Pour vous inscrire au service de surveillance Datadog/Signal Sciences, un outil gratuit permettant de visualiser en temps réel les attaques ciblant vos applications, API et microservices sans abonnement à Signal Sciences, consultez notre [page d'inscription][12].
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-security.png
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: https://dashboard.signalsciences.net
-[4]: https://docs.datadoghq.com/fr/events
-[5]: https://docs.datadoghq.com/fr/help
-[6]: https://labs.signalsciences.com
-[7]: https://info.signalsciences.com/datadog-security
-[8]: https://docs.signalsciences.net/install-guides/
-[9]: https://player.vimeo.com/video/347360711
-[10]: https://docs.signalsciences.net/integrations/datadog/
-[11]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-dashboard.png
-
-
-{{< get-dependencies >}}
+[1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-dashboard.png
+[2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/sigsci/images/datadog-sigsci-security.png
+[3]: https://docs.signalsciences.net/install-guides/
+[4]: https://docs.datadoghq.com/fr/agent/kubernetes/dogstatsd/
+[5]: https://app.datadoghq.com/account/settings#api
+[6]: https://dashboard.signalsciences.net
+[7]: https://player.vimeo.com/video/347360711
+[8]: https://docs.signalsciences.net/integrations/datadog/
+[9]: https://docs.datadoghq.com/fr/events
+[10]: https://docs.datadoghq.com/fr/help
+[11]: https://labs.signalsciences.com
+[12]: https://info.signalsciences.com/datadog-security

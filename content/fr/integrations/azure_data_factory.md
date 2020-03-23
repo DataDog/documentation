@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Data Factory
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_data_factory
 public_title: Intégration Datadog/Microsoft Azure Data Factory
 short_description: Surveillez des métriques Azure Data Factory.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 
@@ -26,27 +26,29 @@ Azure Data Factory est un service d'intégration des données cloud, pour compos
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques de Data Factory.
 
 ## Implémentation
+
 ### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "azure_data_factory" >}}
 
 
 ### Événements
+
 L'intégration Azure Data Factory n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Azure Data Factory n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://docs.datadoghq.com/fr/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_factory/azure_data_factory_metadata.csv
 [3]: https://docs.datadoghq.com/fr/help/
-
-
-{{< get-dependencies >}}

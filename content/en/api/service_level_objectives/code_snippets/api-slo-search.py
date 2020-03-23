@@ -7,11 +7,12 @@ options = {
 
 initialize(**options)
 
-# search with a list of IDs
+# Search with a list of IDs
 slo_ids = ["<YOUR_SLO_ID>", "<YOUR_SLO_ID>"]
 
 api.ServiceLevelObjective.get_all(ids=slo_ids, offset=0)
 
-# search with a query
-query = "tags:app:frontend"
+# Search with a query on your SLO Name.
+query = "my team"
+
 api.ServiceLevelObjective.get_all(query=query, offset=0)

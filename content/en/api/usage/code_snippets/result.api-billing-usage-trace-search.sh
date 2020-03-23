@@ -1,5 +1,5 @@
 {
-  usage: [
+  "usage": [
     {
       "indexed_events_count": 3325234,
       "hour": "2018-10-05T00"

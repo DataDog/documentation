@@ -2,10 +2,10 @@
 title: Syslog-ng
 name: syslog_ng
 kind: integration
-description: "Configure Syslog-ng to gather logs from your host, containers, & services."
-short_description: "Configure Syslog-ng to gather logs from your host, containers, & services."
+description: 'Configure Syslog-ng to gather logs from your host, containers, & services.'
+short_description: 'Configure Syslog-ng to gather logs from your host, containers, & services.'
 categories:
-- log collection
+    - log collection
 doc_link: /integrations/syslog_ng/
 aliases:
     - logs/log_collection/syslog_ng
@@ -13,9 +13,11 @@ has_logo: true
 integration_title: syslog_ng
 is_public: true
 public_title: Datadog-Syslog-ng Integration
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md']
 supported_os:
-- linux
-- windows
+    - linux
+    - windows
 ---
 
 ## Overview
@@ -83,21 +85,22 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 
 4. (Optional) TLS Encryption:
 
-    * Download the CA certificate:
+    - Download the CA certificate:
 
-      ```
-      sudo apt-get install ca-certificates
-      ```
+        ```shell
+        sudo apt-get install ca-certificates
+        ```
 
-    * Change the definition of the destination to the following:
+    - Change the definition of the destination to the following:
 
-      ```conf
-      destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted)) template(DatadogFormat)); };
-      ```
+        ```conf
+        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-untrusted)) template(DatadogFormat)); };
+        ```
 
     More information about the TLS parameters and possibilities for syslog-ng available in the [official documentation][1].
 
 5. Restart syslog-ng.
+
 
 [1]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
 {{% /tab %}}
@@ -157,21 +160,22 @@ Configure Syslog-ng to gather logs from your host, containers, & services.
 
 4. (Optional) TLS Encryption:
 
-    * Download the CA certificate:
+    - Download the CA certificate:
 
-      ```
-      sudo apt-get install ca-certificates
-      ```
+        ```shell
+        sudo apt-get install ca-certificates
+        ```
 
-    * Change the definition of the destination to the following:
+    - Change the definition of the destination to the following:
 
-      ```conf
-      destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-untrusted)) template(DatadogFormat)); };
-      ```
+        ```conf
+        destination d_datadog { tcp("tcp-intake.logs.datadoghq.eu" port(443)     tls(peer-verify(required-untrusted)) template(DatadogFormat)); };
+        ```
 
     More information about the TLS parameters and possibilities for syslog-ng available in their [official documentation][1].
 
 5. Restart syslog-ng.
+
 
 [1]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
 {{% /tab %}}

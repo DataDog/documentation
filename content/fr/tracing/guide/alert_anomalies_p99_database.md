@@ -1,7 +1,6 @@
 ---
 title: Être alerté en cas de latence au 99e centile anormale pour un service de base de données
 kind: guide
-disable_toc: true
 further_reading:
   - link: tracing/guide/week_over_week_p50_comparison/
     tag: "2\_minutes"
@@ -20,7 +19,6 @@ further_reading:
     text: Tous les guides
 ---
 _Temps de lecture : 3 minutes_
-
 
 {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="Vue de monitor avec alerte en cours" style="width:90%;">}}
 
@@ -78,12 +76,12 @@ Datadog vous permet de configurer des monitors pour surveiller la santé de vos 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/fr/monitors/monitor_types/anomaly/
+[1]: /fr/monitors/monitor_types/anomaly/
 [2]: https://app.datadoghq.com/monitors#/create
 [3]: https://app.datadoghq.com/monitors#create/apm
 [4]: /fr/tracing/visualization/#resources
 [5]: /fr/tracing/visualization/#services
-[6]: https://docs.datadoghq.com/fr/monitors/monitor_types/anomaly/#faq
-[7]: https://docs.datadoghq.com/fr/monitors/notifications/?tab=is_alertis_warning
+[6]: /fr/monitors/monitor_types/anomaly/#faq
+[7]: /fr/monitors/notifications/?tab=is_alertis_warning
 [8]: https://app.datadoghq.com/apm/services
 [9]: https://app.datadoghq.com/service/map

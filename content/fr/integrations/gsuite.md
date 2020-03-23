@@ -2,20 +2,20 @@
 "categories":
 - log collection
 - security
-"ddtype": crawler
+"ddtype": "crawler"
 "dependencies": []
-"description": Importez vos logs de sécurité et d'audit G Suite dans Datadog.
+"description": "Importez vos logs de sécurité et d'audit G Suite dans Datadog."
 "doc_link": "https://docs.datadoghq.com/integrations/gsuite/"
-"git_integration_title": gsuite
+"git_integration_title": "gsuite"
 "has_logo": !!bool "true"
-"integration_title": G Suite
+"integration_title": "G Suite"
 "is_public": !!bool "true"
-"kind": integration
-"manifest_version": 1.0
-"name": gsuite
-"public_title": Intégration Datadog/G Suite
-"short_description": Importez vos logs de sécurité et d'audit G Suite dans Datadog.
-"version": 1.0
+"kind": "integration"
+"manifest_version": "1.0"
+"name": "gsuite"
+"public_title": "Intégration Datadog/G Suite"
+"short_description": "Importez vos logs de sécurité et d'audit G Suite dans Datadog."
+"version": "1.0"
 ---
 
 ## Présentation
@@ -63,5 +63,3 @@ L'intégration G Suite n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez l'[assistance Datadog](https://docs.datadoghq.com/help/).
 
-
-{{< get-dependencies >}}

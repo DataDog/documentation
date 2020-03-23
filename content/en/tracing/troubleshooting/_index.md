@@ -2,15 +2,9 @@
 title: APM Troubleshooting
 kind: documentation
 further_reading:
-- link: "/agent/docker/apm"
+- link: "/tracing/troubleshooting/agent_apm_metrics"
   tag: "Documentation"
-  text: "Docker APM setup"
-- link: "/integrations/amazon_ecs/#trace-collection"
-  tag: "Documentation"
-  text: "ECS EC2 APM setup"
-- link: "/integrations/ecs_fargate/#trace-collection"
-  tag: "Documentation"
-  text: "ECS Fargate APM setup"
+  text: "APM metrics sent by the Datadog Agent"
 ---
 
 When experiencing unexpected behavior with Datadog APM, there are a few common issues you can look for before reaching out to [Datadog support][1]:
@@ -151,25 +145,28 @@ For more tracer settings, check out the [API documentation][5].
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-To enable debug mode for the Datadog .NET Tracer, set the `isDebugEnabled` argument to `true` when creating a new tracer instance:
+To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), or in a `datadog.json` file. Debug mode can also be enabled in code by calling `GlobalSettings.SetDebugEnabled(true)`:
 
 ```csharp
 using Datadog.Trace;
 
-var tracer = Tracer.Create(isDebugEnabled: true);
+// enable debug mode
+GlobalSettings.SetDebugEnabled(true);
 
-// optional: set the new tracer as the new default/global tracer
-Tracer.Instance = tracer;
 ```
 
-The environment variable `DD_TRACE_DEBUG` can also be set to `true`.
+Logs files are saved in the following directories by default. The `DD_TRACE_LOG_PATH` setting can be used to change these paths.
 
-Logs files are saved in the following directories:
-
-| Platform | Path                                                          |
-|----------|---------------------------------------------------------------|
-| Linux    | `/var/log/datadog/`                        |
+| Platform | Path                                      |
+|----------|-------------------------------------------|
 | Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
+| Linux    | `/var/log/datadog/`                       |
+
+**Note:**: On Linux, you must create the logs directory before you enabled debug mode.
+
+For more details on how to configure the .NET Tracer, see the [Configuration][1] section.
+
+[1]: /tracing/setup/dotnet#configuration
 
 {{% /tab %}}
 {{% tab "PHP" %}}

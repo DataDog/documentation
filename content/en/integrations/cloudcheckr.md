@@ -5,11 +5,13 @@ kind: integration
 newhlevel: true
 is_public: true
 public_title: Datadog-CloudCheckr Integration
-short_description: "Help cloudcheckr help you: give it per-instance memory metrics from Datadog"
+short_description: 'Help cloudcheckr help you: give it per-instance memory metrics from Datadog'
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md']
 categories:
-- cloud
-- configuration & deployment
-- aws
+    - cloud
+    - configuration & deployment
+    - aws
 ddtype: crawler
 ---
 
@@ -23,8 +25,8 @@ Quickly make data-driven decisions based on current and past resource consumptio
 
 To bind your Datadog application to your CloudCheckr account:
 
-* Click into your CloudCheckr Extensions
-* Add your [Datadog API and application keys][1].
+- Click into your CloudCheckr Extensions
+- Add your [Datadog API and application keys][1].
 
 ## Further Reading
 

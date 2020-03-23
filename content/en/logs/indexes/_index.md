@@ -2,7 +2,6 @@
 title: Indexes
 kind: documentation
 description: Control the volume of logs indexed by Datadog
-disable_toc: true
 aliases:
   - /logs/dynamic_volume_control
 further_reading:
@@ -24,53 +23,78 @@ Indexes are located on the [Configuration page][1] in the Indexes section. Doubl
 
 {{< img src="logs/indexes/index_details.png" alt="index details"  style="width:70%;">}}
 
-You can use indexed logs for [faceted searching][2], [Log Analytics][3], [dashboarding][4], and [monitoring][5].
+You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][4], [dashboarding][5], and [monitoring][6].
+
+## Indexes
+
+By default, Log Explorer have one unique Log Index, but datadog also offers multiple indexes if you require:
+
+* Multiple retention periods and/or multiple [daily quotas](#set-daily-quota), for finer budget control.
+* Multiple permissions, for finer user [role based access controls (RBAC)][7].
+
+The Log Explorer supports [queries across multiple indexes][8].
+
+
+<div class="alert alert-info">
+The multi-index feature is in private beta, <a href="/help">contact Datadog support</a> to turn it on for your account.
+</div>
+
+## Indexes Filters
+
+Index filters allow dynamic control over which logs flow into which indexes.  For example, if you create a first index filtered on the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your `status:notice` logs would go to the first index, all your `status:error` logs to the second index, and the rest would go to the final one.
+
+{{< img src="logs/indexes/multi_index.png" alt="Multi indexes"  style="width:70%;">}}
+
+**Note**: **Logs enter the first index whose filter they match on**, use drag and drop on the list of indexes to reorder them according to your use-case.
 
 ## Exclusion Filters
 
-Index filters give dynamic control over what goes into your indexes. When set up, logs sampling is uniformly random, meaning the sampling has no impact on relative importance of each log. For example, if some logs were captured only for troubleshooting purposes, you may only want to index a given percentage of those logs with errors and warnings.
+By default, logs indexes have no exclusion filter: that is to say all logs matching the Index Filter are indexed.
 
-**Note**: If a log matches several exclusion filters, only the first exclusion filter rule is applied. A log is not sampled or excluded multiple times by different exclusion filters.
+But because your logs are not all and equally valuable, exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][9] and can be used to [generate metrics][10] and [archived][11].
 
-To define a new index filter, click on the "add" button:
+Exclusion filters are defined by a query, a sampling rule, and a active/inactive toggle:
 
-{{< img src="logs/indexes/index_filters.png" alt="index filters"  style="width:70%;">}}
+* Default **query** is `*`, meaning all logs flowing in the index would be excluded. Scope down exclusion filter to only a subset of logs [with a log query][12].
+* Default **sampling rule** is `Exclude 100% of logs` matching the query. Adapt sampling rate from 0% to 100%, and decide if the sampling rate applies on individual logs, or group of logs defined by the unique values of any attribute.
+* Default **toggle** is active, meaning logs flowing in the index are actually discarded according to the exclusion filter configuration. Toggle this to inactive to ignore this exclusion filter for new logs flowing in the index.
 
-To configure an exclusion filter:
+**Note**: Index filters for logs are only processed with the first **active** exclusion filter matched. If a log matches an exclusion filter (even if the log is not sampled out), it ignores all following exclusion filters in the sequence.
 
-1. Define the name of your filter.
-2. Define the query for logs to exclude from your index.
-    **Note**: It is possible to use any attribute or tag in the index filter query, even those that are not facets. If you are filtering by non-faceted attributes or tags, be sure to hit "enter/return" from the query bar.
-3. Define the sampling rate.
-4. Save the filter.
-
-    {{< img src="logs/indexes/index_filter_details.png" alt="index filter details"  style="width:80%;">}}
-
-### Reorder filters
-
-Order matters for exclusion filters. Contrary to how several pipelines can process a log, if a log matches several exclusion filters, only the first exclusion filter rule is applied.
-
-Reorder your pipeline to make sure the proper exclusion filters apply to your log. For instance, you probably want to set up the filters ordered by least inclusive to most inclusive queries..
-
-To reorder your exclusion filter, drag and drop them into your preferred order.
+Use drag and drop on the list of exclusion filters to reorder them according to your use case.
 
 {{< img src="logs/indexes/reorder_index_filters.png" alt="reorder index filters"  style="width:80%;">}}
 
-### Enable/Disable filters
+### Examples of Exclusion Filters
 
-If not all logs are worth indexing on a daily basis, they might still be important in certain situations.
-Debug logs, for instance, are not always useful, but during complex troubleshooting or a production release, they can become very helpful.
+#### Switch off, switch on
 
-Instead of changing your application logging level or using a complex internal filtering tool, you can change what is indexed directly with Datadog index filters.
-
-Enable or disable them in one click on the Pipeline page:
+You might not need your DEBUG logs until you actually need them when your platform undergoes an incident, or want to carefully observe the deployment of a critical version of your application. Setup a 100% exclusion filter on the `status:DEBUG`, and toggle it on and off from Datadog UI or through the [API][13] when required.
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters"  style="width:80%;">}}
 
-### Set daily quota
+#### Keep an eye on trends
 
-You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e after exclusion filters are applied).
-Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][6], [sent to your archives][7], and used to [generate metrics from logs][8].
+Let's say now you don't want to keep all logs from your web access server requests. You could choose to index all 3xx, 4xx, and 5xx logs, but exclude 95% of the 2xx logs: `source:nginx AND http.status_code:[200 TO 299]` to keep track of the trends.
+**Tip**: Transform web access logs into meaningful KPIs with a [metric generated from your logs][11], counting number of requests and tagged by status code, [browser][14] and [country][15].
+
+{{< img src="logs/indexes/sample_200.png" alt="enable index filters"  style="width:80%;">}}
+
+#### Sampling consistently with higher-level entities
+
+You have millions of users connecting to your website everyday. And although you don't need observability on every single user, you still want to keep the full picture for some. Set up an exclusion filter applying to all production logs (`env:production`) and exclude logs for 90% of the `@user.email`:
+
+{{< img src="logs/indexes/sample_user_id.png" alt="enable index filters"  style="width:80%;">}}
+
+You can use APM in conjunction with Logs, thanks to [trace ID injection in logs][16]. As for users, you don't need to keep all your logs but making sure logs always give the full picture to a trace is critical for troubleshooting.
+Set up an exclusion filter applied to logs from your instrumented service (`service:my_python_app`) and exclude logs for 50% of the `Trace ID` - make sure to use the [trace ID remapper][17] upstream in your pipelines.
+
+{{< img src="logs/indexes/sample_trace_id.png" alt="enable index filters"  style="width:80%;">}}
+
+## Set daily quota
+
+You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e. after exclusion filters are applied).
+Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][19], and used to [generate metrics from logs][20].
 
 Update or remove this quota at any time when editing the Index:
 
@@ -78,29 +102,29 @@ Update or remove this quota at any time when editing the Index:
 
 **Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
 
-## Multi indexes
-
-It is also possible to have multiple indexes with different retention periods (**currently in private beta**).
-Logs enter the first index whose filter they match on, so it is important to order your indexes carefully.
-
-For example, if you create a first index filtered to the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your notice logs would go to the first index, all your error logs to the second index, and the rest would go to the final one.
-
-{{< img src="logs/indexes/multi_index.png" alt="Multi indexes"  style="width:70%;">}}
-
-Multiple indexes also provide the ability to define access rules on the data contained in each index. [More information available in the role base access control documentation][9].
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: https://app.datadoghq.com/logs/pipelines/indexes
-[2]: /logs/explorer/?tab=facets#setup
-[3]: /logs/explorer/analytics
-[4]: /logs/explorer/analytics/#dashboard
-[5]: /monitors/monitor_types/log
-[6]: https://docs.datadoghq.com/logs/live_tail/#overview
-[7]: https://docs.datadoghq.com/logs/archives/
-[8]: https://docs.datadoghq.com/logs/logs_to_metrics/
-[9]: /account_management/rbac
+[1]: /logs/indexes
+[2]: /logs/explorer/#visualization
+[3]: /logs/explorer/patterns
+[4]: /logs/explorer/analytics
+[5]: /logs/explorer/analytics/#dashboard
+[6]: /monitors/monitor_types/log
+[7]: /account_management/rbac
+[8]: /logs/explorer/facets/#the-index-facet
+[9]: /logs/live_tail
+[10]: /logs/archives
+[11]: /logs/logs_to_metrics
+[12]: /logs/explorer/search/
+[13]: /api/?lang=bash#update-an-index
+[14]: /logs/processing/processors/?tab=ui#user-agent-parser
+[15]: /logs/processing/processors/?tab=ui#geoip-parser
+[16]: /tracing/connect_logs_and_traces/
+[17]: /logs/processing/processors/?tab=ui#trace-remapper
+[18]: /logs/live_tail/#overview
+[19]: /logs/archives/
+[20]: /logs/logs_to_metrics/

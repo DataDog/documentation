@@ -1,9 +1,36 @@
+<!--
+{{/*
+------------------
+Description:
+------------------
+
+Output the hreflang tag on each language version we build..
+However do not output this in the english or localized page in the scenario where a localized file is a placeholder.
+The reason being for example we don't want to promote an english page on a japanese site for seo.
+
+*/}}
+-->
+{{ $dot := . }}
+{{ $allowed := (slice "fr" "ja") }}
+
+<!-- self reference the current page -->
+<link rel="alternate" hreflang="{{ $dot.Lang }}" href="{{ $dot.Permalink }}"/>
+
 {{ if .IsTranslated }}
-  {{ range .Translations }}
-    {{ if in (slice "fr") .Lang }}
-      {{ if ne .Params.placeholder true }}
-        <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
-      {{ end }}
-    {{ end }}
-  {{ end}}
+    {{ range .Translations }}
+        {{ if in $allowed .Lang }}
+            {{ with .Params.placeholder }}
+                <!-- don't output alternate as this is a untranslated placeholder -->
+            {{ else }}
+                <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
+            {{ end }}
+        {{ else if eq .Lang "en" }}
+              <!-- if the current page is ja but the translation page is en we need to check if ja is a placeholder -->
+            {{ with $dot.Params.placeholder }}
+                <!-- don't output alternate as this is a untranslated placeholder -->
+            {{ else }}
+                <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}"/>
+            {{ end }}
+        {{ end }}
+    {{ end}}
 {{ end }}

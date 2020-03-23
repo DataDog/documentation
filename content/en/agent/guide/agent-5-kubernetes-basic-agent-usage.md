@@ -60,7 +60,7 @@ spec:
             protocol: UDP
         env:
           - name: API_KEY
-            value: "YOUR_API_KEY"
+            value: "DATADOG_API_KEY"
           - name: KUBERNETES
             value: "yes"
         volumeMounts:
@@ -84,7 +84,7 @@ spec:
           name: cgroups
 ```
 
-Replace `YOUR_API_KEY` with [your api key][6] or use [Kubernetes secrets][7] to set your API key [as an environment variable][8].
+Replace `DATADOG_API_KEY` with [your api key][6] or use [Kubernetes secrets][7] to set your API key [as an environment variable][8].
 
 * Deploy the DaemonSet with the command:
   ```shell
@@ -288,7 +288,7 @@ Checks
 [2]: https://hub.docker.com/r/datadog/docker-dd-agent
 [3]: /#host-setup
 [4]: /integrations/docker_daemon
-[5]: /agent/kubernetes/daemonset_setup/#configure-rbac-permissions
+[5]: /agent/kubernetes/
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: https://kubernetes.io/docs/concepts/configuration/secret
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables

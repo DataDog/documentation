@@ -1,7 +1,6 @@
 ---
 title: Collecte d'événements
 kind: documentation
-disable_toc: true
 further_reading:
   - link: 'https://www.datadoghq.com/blog/datadog-cluster-agent/'
     tag: Blog
@@ -25,7 +24,7 @@ Si vous ne l'avez pas déjà fait, passez en revue les [instructions d'installat
 
 2. Dans le fichier de déploiement de l'Agent de cluster, définissez les variables d'environnement `DD_COLLECT_KUBERNETES_EVENTS` et `DD_LEADER_ELECTION` sur `true` :
 
-      ```
+      ```yaml
         - name: DD_COLLECT_KUBERNETES_EVENTS
           value: "true"
         - name: DD_LEADER_ELECTION
@@ -37,4 +36,5 @@ L'activation de l'élection de leader de cette façon garantit la collecte des �
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /fr/agent/cluster_agent/setup

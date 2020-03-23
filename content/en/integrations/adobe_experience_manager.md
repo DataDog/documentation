@@ -2,10 +2,12 @@
 title: Adobe Experience Manager
 name: adobe_experience_manager
 kind: integration
-description: "Collect Adobe Experience Manager logs to track errors, request response time, and track badly performing web pages."
-short_description: "Collect logs to track errors, request response time, etc."
+description: 'Collect Adobe Experience Manager logs to track errors, request response time, and track badly performing web pages.'
+short_description: 'Collect logs to track errors, request response time, etc.'
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/adobe_experience_manager.md']
 categories:
-- log collection
+    - log collection
 doc_link: /integrations/adobe_experience_manager/
 aliases:
     - logs/log_collection/adobe_experience_manager
@@ -14,13 +16,13 @@ integration_title: Adobe Experience Manager
 is_public: true
 public_title: Datadog-Adobe Experience Manager
 supported_os:
-- linux
-- mac_os
-- windows
+    - linux
+    - mac_os
+    - windows
 further_reading:
-- link: "logs/"
-  tag: "Documentation"
-  text: "Log Management"
+    - link: 'logs/'
+      tag: 'Documentation'
+      text: 'Log Management'
 ---
 
 ## Overview
@@ -35,27 +37,27 @@ Collect Adobe Experience Manager logs to track errors, request response time, an
 
 #### Log Collection
 
-**Available for Agent version >6.0**
+_Available for Agent version >6.0_
 
-* Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file with:
+1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file with:
 
-```yaml
-logs_enabled: true
-```
+    ```yaml
+    logs_enabled: true
+    ```
 
-* Create `adobe.experience.manager.d/conf.yaml` in your [conf.d directory][2] and add the configuration below to start collecting your logs:
+2. Create `adobe.experience.manager.d/conf.yaml` in your [conf.d directory][2] and add the configuration below to start collecting your logs:
 
-```yaml
-logs:
-  - type: file
-    path: cq-installation-dir/crx-quickstart/logs/*.log
-    service: "<MY_APPLICATION>"
-    source: adobe.experience.manager
-```
+    ```yaml
+    logs:
+        - type: file
+          path: cq-installation-dir/crx-quickstart/logs/*.log
+          service: '<MY_APPLICATION>'
+          source: adobe.experience.manager
+    ```
 
-* Change the `path` and `service` parameter values and configure them for your environment.
+      Change the `path` and `service` parameter values and configure them for your environment.
 
-* Finally, [restart the Agent][3].
+3. [Restart the Agent][3].
 
 ## Troubleshooting
 

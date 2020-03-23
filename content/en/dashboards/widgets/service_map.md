@@ -39,7 +39,7 @@ The dedicated [widget JSON schema definition][4] for the service map widget is:
 SERVICEMAP_SCHEMA = {
         "type": "object",
         "properties": {
-            "type": {"enum": [WIDGET_TYPE]},
+            "type": {"enum": ["servicemap"]},
             "filters": {"type": "array", "items": {"type": "string"}, "minItems": 1},
             "service": {"type": "string"},
             "title": WidgetSchema.TITLE
@@ -61,6 +61,6 @@ SERVICEMAP_SCHEMA = {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/send_traces
-[2]: /tracing/advanced/setting_primary_tags_to_scope
+[2]: /tracing/guide/setting_primary_tags_to_scope
 [3]: /tracing/visualization/service
 [4]: /dashboards/graphing_json/widget_json

@@ -43,10 +43,6 @@ Classic:
       dogstatsd: true
       authors: Rodrigo Farias Rezino
   - Elixir:
-    - name: dogstatsd-elixir
-      link: https://github.com/adamkittelson/dogstatsd-elixir
-      dogstatsd: true
-      authors: Adam Kittelson
     - name: ex-datadog-plug
       link: https://github.com/Tubitv/ex-datadog-plug
       api: true
@@ -60,6 +56,11 @@ Classic:
       link: https://github.com/lexmag/statix
       dogstatsd: true
       authors: Aleksei Magusev
+  - Erlang / Elixir:
+    - name: dogstatsde
+      link: https://github.com/waisbrot/dogstatsde
+      dogstatsd: true
+      authors: waisbrot    
   - Go:
     - name: datadog-go
       link: https://github.com/DataDog/datadog-go

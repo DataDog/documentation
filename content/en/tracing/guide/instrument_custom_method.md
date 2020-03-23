@@ -1,7 +1,6 @@
 ---
 title: Instrument a custom method to get deep visibility into your business logic
 kind: guide
-disable_toc: true
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
@@ -16,6 +15,7 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+
 _8 minutes to complete_
 
 {{< img src="tracing/guide/custom_span/custom_span_1.png" alt="Analytics View"  style="width:90%;">}}
@@ -89,7 +89,7 @@ public class BackupLedger {
 }
 ```
 
-[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
+[1]: /tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -135,7 +135,7 @@ class BackupLedger:
         # [...]
 ```
 
-[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
+[1]: /tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Ruby" %}}
   In Ruby, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
@@ -164,7 +164,7 @@ class BackupLedger
 end
 ```
 
-[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
+[1]: /tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Go" %}}
   In Go, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
@@ -209,7 +209,7 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 }
 ```
 
-[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
+[1]: /tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "Node.js" %}}
   In Node.js, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
@@ -233,7 +233,7 @@ function write (transactions) {
 }
 ```
 
-[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
+[1]: /tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab ".NET" %}}
   In .NET, Datadog APM allows you to instrument your code to generate custom spans by instrumenting specific code blocks.
@@ -263,7 +263,7 @@ public void Write(List<Transaction> transactions)
 }
 ```
 
-[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
+[1]: /tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -333,7 +333,7 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
 ?>
 ```
 
-[1]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
+[1]: /tracing/guide/add_span_md_and_graph_it
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -362,4 +362,4 @@ You've now successfully added custom spans to your codebase, making them availab
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
 [3]: https://app.datadoghq.com/apm/search/analytics
-[4]: https://docs.datadoghq.com/tracing/guide/add_span_md_and_graph_it
+[4]: /tracing/guide/add_span_md_and_graph_it

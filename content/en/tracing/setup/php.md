@@ -14,7 +14,7 @@ further_reading:
 - link: "tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "tracing/advanced/"
+- link: "tracing/"
   tag: "Documentation"
   text: "Advanced Usage"
 ---
@@ -95,6 +95,7 @@ PHP APM supports the following PHP versions:
 
 | Version | Support type    |
 |:--------|:----------------|
+| 7.4.x   | Fully Supported |
 | 7.3.x   | Fully Supported |
 | 7.2.x   | Fully Supported |
 | 7.1.x   | Fully Supported |
@@ -234,6 +235,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_DEBUG`                          | `false`     | Enable [debug mode](#custom-url-to-resource-mapping) for the tracer                                                                            |
 | `DD_TRACE_ENABLED`                        | `true`      | Enable the tracer globally                                                                                                                     |
 | `DD_TRACE_GLOBAL_TAGS`                    | `none`      | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                                                                                   |
+| `DD_TRACE_MEASURE_COMPILE_TIME`           | `true`      | Record the compile time of the request (in milliseconds) onto the top-level span                                                               |
 | `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable auto instrumentation for applications that do not use an autoloader                                                    |
 | `DD_TRACE_REPORT_HOSTNAME`                | `false`     | Enable hostname reporting on the root span                                                                                                     |
 | `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"](#custom-url-to-resource-mapping) |
@@ -295,7 +297,7 @@ To upgrade the PHP tracer, [download the latest release][6] and follow the same 
 [2]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [3]: /tracing/send_traces
 [4]: /tracing/setup/docker
-[5]: /agent/kubernetes/daemonset_setup/#trace-collection
+[5]: /agent/kubernetes/apm/
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://app.datadoghq.com/apm/services
 [8]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php

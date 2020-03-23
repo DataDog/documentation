@@ -1,9 +1,9 @@
 ---
 categories:
   - モニター
-  - 通知
-  - クラウド
-ddtype: クローラー
+  - notification
+  - cloud
+ddtype: crawler
 dependencies: []
 description: Segment インテグレーションは、配信先ワークスペースのイベント配信メトリクスを収集
 doc_link: 'https://docs.datadoghq.com/integrations/segment/'
@@ -12,11 +12,11 @@ has_logo: true
 integration_title: Segment
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: segment
 public_title: Datadog-Segment インテグレーション
 short_description: Segment のイベント配信メトリクスを収集
-version: 1
+version: '1.0'
 ---
 ## 概要
 
@@ -52,6 +52,3 @@ Segment インテグレーションには、サービスのチェック機能は
 [1]: https://app.datadoghq.com/account/settings#integrations/segment
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/segment/segment_metadata.csv
 [3]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

@@ -48,7 +48,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 
 After processing, the following structured log is generated:
 
-{{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/_parser.png" alt="Parsing example 1"  style="width:80%;">}}
 
 **Note**:
 
@@ -128,9 +128,17 @@ At the bottom of your Grok processor tiles, there is an Advanced Settings sectio
 
 {{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings"  style="width:80%;">}}
 
-* Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
+### Parsing a specific text attribute
 
-* Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
+Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
+
+For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. You could could parse this log as follows:
+
+{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line"  style="width:80%;">}}
+
+### Using helper rules to factorize multiple parsing rules
+
+Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
 Example for a classic unstructured log:
 
@@ -152,21 +160,20 @@ connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
-
 {{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules"  style="width:80%;">}}
 
 ## Examples
 
 Some examples demonstrating how to use parsers:
 
-* [Key value](#key-value)
+* [Key value or logfmt](#key-value-or-logfmt)
 * [Parsing dates](#parsing-dates)
 * [Conditional patterns](#conditional-pattern)
 * [Optional attribute](#optional-attribute)
 * [Nested JSON](#nested-json)
 * [Regex](#regex)
 
-### Key value
+### Key value or logfmt
 
 This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])` where:
 
@@ -174,12 +181,7 @@ This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[
 * `characterWhiteList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
 * `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`.
 
-**Note**:
-
-* Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
-* If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
-
-Use filters such as **keyvalue** to more-easily map strings to attributes:
+Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
 
 Log:
 
@@ -265,6 +267,11 @@ Result:
     "key2": "/valueStr2"
   }
   ```
+  
+**Note**:
+
+* Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
+* If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 
 ### Parsing dates
 

@@ -1,7 +1,6 @@
 ---
 title: How to set up only Logs
 kind: faq
-disable_toc: true
 beta: true
 ---
 
@@ -28,7 +27,6 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 3. [Configure the Agent to collect Logs][2].
 4. [Restart the Agent][3].
 
-
 [1]: /agent/guide/agent-configuration-files/
 [2]: /logs/log_collection
 [3]: /agent/guide/agent-commands/#restart-the-agent
@@ -39,7 +37,7 @@ If you are using the container Agent, set the environment variable `DD_ENABLE_PA
 
 ```shell
 docker run -d --name datadog-agent \
-           -e DD_API_KEY="<YOUR_API_KEY>" \
+           -e DD_API_KEY="<DATADOG_API_KEY>" \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_AC_EXCLUDE="name:datadog-agent" \
@@ -113,10 +111,14 @@ spec:
           ## Set the Datadog API Key related to your Organization
           ## If you use the Kubernetes Secret use the following env variable:
           ## {name: DD_API_KEY, valueFrom:{ secretKeyRef:{ name: datadog-secret, key: api-key }}
-          - {name: DD_API_KEY, value: "<YOUR_API_KEY>"}
+          - {name: DD_API_KEY, value: "<DATADOG_API_KEY>"}
 
           ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
           - {name: DD_SITE, value: "datadoghq.com"}
+
+          ## Path to docker socket
+          - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
+          - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
 
           ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to allow StatsD collection.
           - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }
@@ -155,7 +157,7 @@ spec:
             memory: "256Mi"
             cpu: "200m"
         volumeMounts:
-          - {name: dockersocket, mountPath: /var/run/docker.sock}
+          - {name: dockersocketdir, mountPath: /host/var/run}
           - {name: procdir, mountPath: /host/proc, readOnly: true}
           - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
           - {name: s6-run, mountPath: /var/run/s6}
@@ -175,7 +177,7 @@ spec:
           successThreshold: 1
           failureThreshold: 3
       volumes:
-        - {name: dockersocket, hostPath: {path: /var/run/docker.sock}}
+        - {name: dockersocketdir, hostPath: {path: /var/run}}
         - {name: procdir, hostPath: {path: /proc}}
         - {name: cgroups, hostPath: {path: /sys/fs/cgroup}}
         - {name: s6-run, emptyDir: {}}

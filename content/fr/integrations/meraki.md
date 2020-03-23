@@ -12,11 +12,11 @@ has_logo: true
 integration_title: Meraki
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: meraki
 public_title: Intégration Datadog/Meraki
 short_description: Recueillez des logs d'événement de Meraki.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 
@@ -51,5 +51,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][2].
 [1]: https://github.com/DataDog/dogweb/blob/prod/integration/meraki/meraki_metadata.csv
 [2]: https://docs.datadoghq.com/fr/help
 [3]: https://documentation.meraki.com/zGeneral_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API
-
-{{< get-dependencies >}}

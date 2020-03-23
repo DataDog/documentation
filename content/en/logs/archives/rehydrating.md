@@ -16,6 +16,8 @@ With historical views, teams rehydrate archived log events precisely by timefram
 
 {{< img src="logs/archives/log_archives_rehydrate_historical.png" alt="Historical Views"  style="width:75%;">}}
 
+Index exclusion filters do not apply to historical views, so there is no need to modify exclusion filters when you rehydrate from archives. 
+
 ### Add new historical views
 
 1. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
@@ -44,9 +46,10 @@ Once the content is rehydrated, the historical view is marked as active, and the
 
 #### From the log explorer
 
-Alternatively, teams can find the historical view from the Log Explorer directly from the index selector. When selecting a historical view, a pop-up offers to set the timeframe to one that is relevant to the selected historical view.
+Alternatively, teams can find the historical view from the Log Explorer directly from the index selector.   
+{{ if .Inner }}When selecting a historical view, a pop-up offers to set the timeframe to one that is relevant to the selected historical view.{{ end }}
 
-{{< img src="logs/archives/log_archives_rehydrate_explorer.mp4" alt="Log Explorer" video="true"  width="75%">}}
+{{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="75%">}}
 
 ### Deleting historical views
 
@@ -106,6 +109,16 @@ Datadog only supports rehydrating from archives that have been configured to use
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /integrations/amazon_web_services/?tab=allpermissions#installation
 [3]: https://app.datadoghq.com/logs/pipelines/archives
+{{% /tab %}}
+
+{{% tab "Azure Storage" %}}
+
+Datadog uses an Azure AD group with the Storage Blob Data Contributor role scoped to your archives' storage account to rehydrate log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1]. 
+
+{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Rehydration from Azure Storage requires the Storage Blob Data Contributor role"  style="width:75%;">}}
+
+
+[1]: /logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}

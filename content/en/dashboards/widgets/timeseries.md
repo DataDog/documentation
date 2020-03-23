@@ -32,7 +32,7 @@ The timeseries visualization allows you to display the evolution of one or more 
 1. Choose the data to graph:
     * Metric: See the documentation [querying][3] to configure a metric query.
     * Analyzed Spans: See [the trace search documentation][4] to configure an Analyzed Span query.
-    * Log Events: See [the log search documentation][5] to configure an Analyzed Span query.
+    * Log Events: See [the log search documentation][5] to configure a log event query.
 
 2. Customize your graph with the available [options](#options).
 
@@ -77,6 +77,10 @@ Add events from related systems to add more context to your graph. For example, 
 | `sources:jenkins`           | Shows all events from the Jenkins source.                  |
 | `tag:role:web`              | Shows all events with the tag `role:web`.                  |
 | `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [Template Variable][7]. |
+
+Once enabled, events are overlayed on your graphs with red bars:
+
+{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Event overlay"  style="width:75%;" >}}
 
 ##### Y-axis controls
 
@@ -184,7 +188,7 @@ Additional properties allowed in each `request` object:
 [2]: /dashboards/screenboard
 [3]: /dashboards/querying
 [4]: /tracing/app_analytics/search/#search-bar
-[5]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
+[5]: /logs/explorer/search/#search-syntax
 [6]: /events
 [7]: /dashboards/template_variables
 [8]: /dashboards/widgets/#full-screen

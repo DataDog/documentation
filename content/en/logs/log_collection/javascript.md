@@ -44,7 +44,7 @@ import { datadogLogs } from '@datadog/browser-logs';
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   datacenter: 'us',
-  isCollectingError: true,
+  forwardErrorsToLogs: true,
   sampleRate: 100
 });
 ```
@@ -58,7 +58,7 @@ import { datadogLogs } from '@datadog/browser-logs';
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   datacenter: 'eu',
-  isCollectingError: true,
+  forwardErrorsToLogs: true,
   sampleRate: 100
 });
 ```
@@ -81,7 +81,7 @@ In order to not miss any logs or errors, you should load and configure the libra
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
-        isCollectingError: true,
+        forwardErrorsToLogs: true,
         sampleRate: 100
       });
     </script>
@@ -100,7 +100,7 @@ In order to not miss any logs or errors, you should load and configure the libra
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<CLIENT_TOKEN>',
-        isCollectingError: true,
+        forwardErrorsToLogs: true,
         sampleRate: 100
       });
     </script>
@@ -119,7 +119,7 @@ The following parameters can be used to configure the Datadog browser log librar
 
 | Parameter             | Type    | Required | Default | Description                                                                                              |
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
-| `clientToken`         | String  | Yes      | `-`     | A [Datadog Client Token][4].                                                                             |
+| `clientToken`         | String  | Yes      | `-`     | A [Datadog Client Token][2].                                                                             |
 | `datacenter`          | String  | Yes      | `us`    | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.               |
 | `forwardErrorsToLogs` | Boolean | no       | `true`  | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog. |
 | `sampleRate`          | Number  | no       | `100`   | Percentage of sessions to track. Only tracked sessions send logs. `100` for all, `0` for none of them.   |
@@ -345,7 +345,7 @@ window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer);
 
 ### Filter by status
 
-Once Datadog Browser log library is initialized, you can set the minimul log level for your logger with the API:
+Once Datadog Browser log library is initialized, you can set the minimal log level for your logger with the API:
 
 `setLevel (level?: 'debug' | 'info' | 'warn' | 'error')`
 
@@ -357,7 +357,7 @@ Only logs with a status equal to or higher than the specified level are sent.
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setLevel('<LEVEL>');
+datadogLogs.logger.setLevel('<LEVEL>');
 ```
 
 {{% /tab %}}
@@ -385,14 +385,14 @@ Once Datadog Browser log library is initialized, it is possible to configure the
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setHandler('<HANDLER>');
+datadogLogs.logger.setHandler('<HANDLER>');
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setHandler('<HANDLER>');
+window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>');
 ```
 
 **Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
@@ -408,7 +408,6 @@ The `datadog-logs` library supports all modern desktop and mobile browsers. IE10
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
+[1]: /account_management/api-app-keys/#api-keys
+[2]: /account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
-[4]: /account_management/api-app-keys/#client-tokens

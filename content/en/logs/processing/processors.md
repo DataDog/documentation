@@ -22,14 +22,19 @@ The different kinds of Processors are explained below.
 
 ## Grok Parser
 
-Create custom grok rules to parse the full message or a specific attribute of your raw event. For more information, see the [parsing section][2].
+Create custom grok rules to parse the full message or [a specific attribute of your raw event][2]. For more information, see the [parsing section][3].
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 Define the Grok processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/parser.png" alt="Parser"  style="width:80%;" >}}
+
+{{< img src="logs/processing/processors/parser.png" alt="Parser" style="width:80%;" >}}
+
+Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample. Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
+
+Click **Parse my logs** to kickstart a set of 3 parsing rules for the logs flowing through the underlying pipeline. Fine tune attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in - you can momentaneously deactivate or sample down exclusion filters to make this work for you.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -54,17 +59,14 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 | `name`               | String           | no       | Name of the processor.                                  |
 | `is_enabled`         | Boolean          | no       | If the processors is enabled or not, default: `false`.  |
 | `source`             | String           | yes      | Name of the log attribute to parse, default: `message`. |
-| `samples`            | Array of Strings | no       | List of sample logs for this grok parser.               |
+| `samples`            | Array of Strings | no       | List of (up to 5) sample logs for this grok parser.     | 
 | `grok.support_rules` | String           | yes      | List of Support rules for your grok parser.             |
 | `grok.match_rules`   | String           | yes      | List of Match rules for your grok parser.               |
+
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
 {{< /tabs >}}
-
-Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length.
-All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
-Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
 ## Log Date Remapper
 
@@ -133,7 +135,7 @@ Into this log:
 
 Each incoming status value is mapped as follows:
 
-* Integers from 0 to 7 map to the [Syslog severity standards][3]
+* Integers from 0 to 7 map to the [Syslog severity standards][4]
 * Strings beginning with **emerg** or **f** (case-insensitive) map to **emerg (0)**
 * Strings beginning with **a** (case-insensitive) map to **alert (1)**
 * Strings beginning with **c** (case-insensitive) map to **critical (2)**
@@ -268,7 +270,7 @@ Into this log:
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="attribute post remapping "  style="width:40%;">}}
 
-Constraints on the tag/attribute name are explained in the [Tag Best Practice documentation][4]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
+Constraints on the tag/attribute name are explained in the [Tag Best Practice documentation][5]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -403,10 +405,10 @@ Use categories to create groups for an analytical view (for example, URL groups,
 
 **Note**:
 
-* The syntax of the query is the one of [Logs Explorer][5] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
+* The syntax of the query is the one of [Logs Explorer][6] search bar. The query can be done on any log attribute or tag, whether it is a facet or not. Wildcards can also be used inside your query.
 * Once the log has matched one of the Processor queries, it stops. Make sure they are properly ordered in case a log could match several queries.
 * The names of the categories must be unique.
-* Once defined in the Category Processor, you can map categories to log status using the [Log Status Remapper][6].
+* Once defined in the Category Processor, you can map categories to log status using the [Log Status Remapper][7].
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -465,7 +467,7 @@ An attribute is missing if it is not found in the log attributes, or if it canno
 * The operator `-` needs to be space split in the formula as it can also be contained in attribute names.
 * If the target attribute already exists, it is overwritten by the result of the formula.
 * Results are rounded up to the 9th decimal. For example, if the result of the formula is `0.1234567891`, the actual value stored for the attribute is `0.123456789`.
-* If you need to scale a unit of measure, see [Scale Filter][7].
+* If you need to scale a unit of measure, see [Scale Filter][8].
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -563,7 +565,7 @@ Blocks can be used on arrays of values or on a specific attribute within an arra
 ```
 
 Whereas `%{array_users}` does not return anything because it is a list of objects.
-However, `%{arrays_user.first_name}` returns a list of `first_name` contained in the array:
+However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
 
 ```text
 John,Jack
@@ -632,13 +634,13 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 }
 ```
 
-| Parameter    | Type             | Required | Description                                                                                                              |
-|--------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------|
-| `type`       | String           | yes      | Type of the processor.                                                                                                   |
-| `name`       | String           | no       | Name of the processor.                                                                                                   |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`                                                                    |
-| `sources`    | Array of Strings | no       | Array of source attributes, default: `network.cient.ip`                                                                  |
-| `target`     | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `network.client.geoip` |
+| Parameter    | Type             | Required | Description                                                                                                               |
+|--------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------|
+| `type`       | String           | yes      | Type of the processor.                                                                                                    |
+| `name`       | String           | no       | Name of the processor.                                                                                                    |
+| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`                                                                     |
+| `sources`    | Array of Strings | no       | Array of source attributes, default: `network.client.ip`                                                                  |
+| `target`     | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `network.client.geoip`  |
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
@@ -701,7 +703,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Process
 
 There are two ways to improve correlation between application traces and logs:
 
-1. Follow the documentation on [how to inject a trace id in the application logs][8] and by default log integrations take care of all the rest of the setup.
+1. Follow the documentation on [how to inject a trace id in the application logs][9] and by default log integrations take care of all the rest of the setup.
 
 2. Use the Trace remapper processor to define a log attribute as its associated trace ID.
 
@@ -732,7 +734,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 | `type`       | String           | yes      | Type of the processor.                                 |
 | `name`       | String           | no       | Name of the processor.                                 |
 | `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`. |
-| `sources`    | Array of Strings | no       | Array of source attributes, default: `http.useragent`. |
+| `sources`    | Array of Strings | no       | Array of source attributes, default: `dd.trace_id`.    |
 
 [1]: /api/?lang=bash#logs-pipelines
 {{% /tab %}}
@@ -741,11 +743,13 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /logs/processing/pipelines
-[2]: /logs/processing/parsing
-[3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[4]: /logs/guide/log-parsing-best-practice
-[5]: /logs/explorer/search/#search-syntax
-[6]: /logs/processing/processors/?tab=ui#log-status-remapper
-[7]: /logs/processing/parsing/?tab=filter#matcher-and-filter
-[8]: /tracing/advanced/connect_logs_and_traces
+[2]: /logs/processing/parsing/#advanced-settings
+[3]: /logs/processing/parsing
+[4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[5]: /logs/guide/log-parsing-best-practice
+[6]: /logs/explorer/search/#search-syntax
+[7]: /logs/processing/processors/?tab=ui#log-status-remapper
+[8]: /logs/processing/parsing/?tab=filter#matcher-and-filter
+[9]: /tracing/connect_logs_and_traces

@@ -1,7 +1,6 @@
 ---
 title: Embeddable Graphs with Template Variables
 kind: faq
-disable_toc: true
 aliases:
     - /graphing/faq/embeddable-graphs-with-template-variables
 further_reading:
@@ -18,8 +17,8 @@ import json
 
 # Initialize request parameters with Datadog API/APP key
 options = {
-    'api_key': '<DD_API_KEY>',
-    'app_key': '<DD_APP_KEY>'
+    'api_key': '<DATADOG_API_KEY>',
+    'app_key': '<DATADOG_APPLICATION_KEY>'
 }
 
 initialize(**options)

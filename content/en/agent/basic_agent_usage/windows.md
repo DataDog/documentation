@@ -33,11 +33,11 @@ Starting with **Agent v6.11.0**, the core and APM/trace components of the Window
 {{% tab "GUI" %}}
 
 1. Download the [Datadog Agent installer][1].
-2. Run the installer (as **Administrator**) by opening `datadog-agent-6-latest.amd64.msi`.
+2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
-[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Command line" %}}
@@ -51,13 +51,13 @@ Optionally, install the Agent with the command line to add custom settings.
 Command prompt:
 
 ```cmd
-start /wait msiexec /qn /i datadog-agent-6-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"
+start /wait msiexec /qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"
 ```
 
 Powershell:
 
 ```powershell
-Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
+Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
 ```
 
 Each configuration item is added as a property to the command line. The following configuration command line options are available when installing the Agent on Windows:
@@ -76,16 +76,15 @@ Each configuration item is added as a property to the command line. The followin
 | `PROXY_PORT`               | Number | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                                |
 | `PROXY_USER`               | String | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                                |
 | `PROXY_PASSWORD`           | String | If using a proxy, sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][7].                                                                                                                            |
-| `DDAGENTUSER_NAME`         | String | Override the default `ddagentuser` username used during Agent installation _(v6.11.0+)_. [Learn more about the Datadog Windows Agent User][3].                                                                                     |
-| `DDAGENTUSER_PASSWORD`     | String | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3]. |
+| `DDAGENTUSER_NAME`         | String | Override the default `ddagentuser` username used during Agent installation _(v6.11.0+)_. [Learn more about the Datadog Windows Agent User][2].                                                                                     |
+| `DDAGENTUSER_PASSWORD`     | String | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][2]. |
 | `APPLICATIONDATADIRECTORY` | Path   | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                          |
 | `PROJECTLOCATION`          | Path   | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%PROGRAMFILES%\Datadog\Datadog Agent`. _(v6.11.0+)_                                 |
 
 **Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
 
-[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-6-latest.amd64.msi
-[2]: /agent/proxy
-[3]: /agent/faq/windows-agent-ddagent-user
+[1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
+[2]: /agent/faq/windows-agent-ddagent-user
 {{% /tab %}}
 {{% tab "Upgrading" %}}
 

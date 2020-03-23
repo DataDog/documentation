@@ -15,6 +15,4 @@ This endpoint allows you to update/replace all tags in an integration source wit
     A list of tags
 * **`source`** [*optional*, *default*=**users**]:
     The source of the tags (e.g. chef, puppet).
-    [Complete list of source attribute values][1]
 
-[1]: /integrations/faq/list-of-api-source-attribute-value

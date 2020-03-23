@@ -41,7 +41,7 @@ PKS を監視するには、[Kubernetes][2] の Datadog インテグレーショ
 
 ### ログの収集
 
-**Agent 6.0 以上で使用可能**
+_Agent バージョン 6.0 以降で利用可能_
 
 セットアップは Kubernetes の場合とまったく同じです。
 すべてのコンテナからのログ収集を開始するには、Datadog Agent の[環境変数][3]を使用します。
@@ -54,13 +54,9 @@ DaemonSets を利用して、すべてのノードで [Datadog Agent を自動�
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-
 [1]: https://pivotal.io/platform/pivotal-container-service
 [2]: https://docs.datadoghq.com/ja/integrations/kubernetes
 [3]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/kubernetes/#log-collection-setup
 [4]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/kubernetes/#container-installation
 [5]: https://docs.datadoghq.com/ja/logs/log_collection/docker/#option-2-container-installation
 [6]: https://docs.datadoghq.com/ja/help
-
-
-{{< get-dependencies >}}

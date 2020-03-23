@@ -63,13 +63,13 @@ Tags for the [integrations][5] installed with the Agent are configured with YAML
 
 In YAML files, use a list of strings under the `tags` key to assign a list of tags. In YAML, lists are defined with two different yet functionally equivalent forms:
 
-```text
+```yaml
 tags: ["<KEY_1>:<VALUE_1>", "<KEY_2>:<VALUE_2>", "<KEY_3>:<VALUE_3>"]
 ```
 
 or
 
-```text
+```yaml
 tags:
     - "<KEY_1>:<VALUE_1>"
     - "<KEY_2>:<VALUE_2>"
@@ -129,7 +129,7 @@ services:
       - '/proc:/host/proc:ro'
       - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
     environment:
-      - DD_API_KEY=abcdefghijklmnop
+      - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_DOCKER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
     image: 'datadog/agent:latest'
@@ -206,8 +206,8 @@ tracer.set_tags({'env': '<ENVIRONMENT>'})
 {{% tab ".NET" %}}
 
 ```csharp
-using Datadog.Tracing;
-Tracer.Instance.ActiveScope.Span.SetTag("env", "<ENVIRONMENT>");
+using Datadog.Trace;
+Tracer.Instance.ActiveScope?.Span.SetTag("env", "<ENVIRONMENT>");
 ```
 
 {{% /tab %}}
@@ -443,7 +443,7 @@ Web integrations are authentication based. Metrics are collected with API calls.
 [9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[12]: /tracing/advanced/setting_primary_tags_to_scope
+[12]: /tracing/guide/setting_primary_tags_to_scope
 [13]: /libraries
 [14]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
 [15]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances

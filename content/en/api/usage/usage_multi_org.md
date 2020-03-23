@@ -1,13 +1,13 @@
 ---
 title: Get usage across your multi-org account
 type: apicontent
-order: 35.8
+order: 35.94
 external_redirect: /api/#get-usage-across-your-multi-org-account
 ---
 
 ## Get usage across your multi-org account
 
-Get usage across your multi-org account
+Get usage across your multi-org account. This action may **only** be processed on the parent organization. Using this call on a child organization results in `{"errors": ["Access was denied to this resource."]}`.
 
 **ARGUMENTS**:
 

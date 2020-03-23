@@ -130,4 +130,5 @@ To disable this behavior and include pause containers in the Autodiscovery perim
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

@@ -1,7 +1,6 @@
 ---
 title: Identify Synthetics Bots
 kind: documentation
-disable_toc: true
 description: Identify incoming Synthetics requests
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"

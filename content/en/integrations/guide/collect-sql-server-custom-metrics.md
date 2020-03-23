@@ -52,7 +52,7 @@ custom_metrics:
   object_name: SQLServer:Plan Cache
 ```
 
-To collect all instances of a counter with multiple instances use the special value `ALL` for the `instance_name` parameter which **requires** a value for the `tag_by` parameter. This example gets metrics tagged as `db:mydb1`, `db:mydb2`:
+To collect all instances of a counter with multiple instances use the special, case-sensitive value `ALL` for the `instance_name` parameter which **requires** a value for the `tag_by` parameter. This example gets metrics tagged as `db:mydb1`, `db:mydb2`:
 
 ```yaml
 - name: sqlserver.db.commit_table_entries

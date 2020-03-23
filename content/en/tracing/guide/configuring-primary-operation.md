@@ -1,6 +1,22 @@
 ---
 title: Primary Operations in Services
 kind: guide
+further_reading:
+- link: "tracing/setup/"
+  tag: "Documentation"
+  text: "Learn how to setup APM tracing with your application"
+- link: "tracing/visualization/services_list/"
+  tag: "Documentation"
+  text: "Discover the list of services reporting to Datadog"
+- link: "tracing/visualization/service"
+  tag: "Documentation"
+  text: "Learn more about services in Datadog"
+- link: "tracing/visualization/resource"
+  tag: "Documentation"
+  text: "Dive into your resource performance and traces"
+- link: "tracing/visualization/trace"
+  tag: "Documentation"
+  text: "Understand how to read a Datadog Trace"
 ---
 
 ## Services in APM

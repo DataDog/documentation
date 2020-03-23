@@ -1,5 +1,9 @@
 $ddpurple: #632CA6;
 $ddgray: #D6D6D6;
+$studioViolet: #7847A6;
+$lightGreyGrey: #D6D6D6;
+$darkGreyGrey: #A1A1A1;
+$dimGreyGrey: #707070;
 
 html {
   font-size: 18px;
@@ -265,13 +269,11 @@ h5{
   padding-top: 14px;
 }
 
-.col-lg-7 {
-  #pagetitle {
-    margin-right: -30%;
-  }
-}
-
 .main {
+  &:lang(ja) {
+    padding-left: 15px;
+    padding-right:0;
+  }
   z-index: 1;
   padding-left: 29px;
   padding-top: 29px;
@@ -301,7 +303,7 @@ h5{
 
   ul{
     list-style-type: none;
-    -webkit-padding-start: 12px;
+    -webkit-padding-start: 22px;
     ul {
       -webkit-padding-start: 20px;
     }
@@ -355,7 +357,17 @@ h5{
     padding-top: 14px;
   }
 
+  ul, ol {
+    &:lang(ja) {
+      padding-left: 22px;
+    }
+  }
+
   ul, ol, p {
+    &:lang(ja) {
+      font-size: 14px;
+      line-height: 24px;
+    }
     font-size: 18px;
     color: #4a4a4a;
     line-height: 27px;
@@ -374,6 +386,14 @@ h5{
     padding:0;
     li {
       padding-bottom:6px;
+
+      &:lang(ja) {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 24px;
+      }
+
       &:before {
         content: "" !important;
         margin:0 !important;
@@ -406,6 +426,7 @@ h5{
   }
   .nav-tabs {
     border-bottom:none;
+    padding-left:0 !important;
   }
   .tab-content {
     padding-top:26px;
@@ -534,6 +555,10 @@ table, .table {
   margin-bottom: 20px;
   border: 1px solid $ddgray;
   font-size: 16px;
+  &:lang(ja) {
+    font-size:15px;
+    line-height:24px;
+  }
   a {
     border-bottom: 1px solid $gray-600;
     &:hover {
@@ -570,6 +595,10 @@ table, .table {
     font-size: 14px;
     text-transform: uppercase;
     color: #000000;
+    &:lang(ja) {
+      font-size:12px;
+      line-height:20px;
+    }
   }
   & > thead > tr > th, & > tbody > tr > td {
     padding:.65rem;
@@ -704,6 +733,12 @@ table, .table {
   }
 }*/
 
+.alert {
+  &:lang(ja) {
+    font-size: 15px;
+  }
+}
+
 // Breakpoint styles go here...
 
 @media (min-width: 1200px) {
@@ -747,11 +782,7 @@ table, .table {
   .main {
     padding-left: 15px;
   }
-  .col-lg-7 {
-    #pagetitle {
-      margin-right: 0 !important;
-    }
-  }
+    
   .wide-parent {
     width: 100%;
   }

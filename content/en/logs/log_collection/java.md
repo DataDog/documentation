@@ -75,7 +75,7 @@ Once this is done, the `ConversionPattern` to use becomes:
 <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /tracing/connect_logs_and_traces/java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -103,7 +103,7 @@ Once this is done, the `PatternLayout` to use becomes:
 <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /tracing/connect_logs_and_traces/java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Slf4j" %}}
@@ -138,7 +138,7 @@ Once this is done, the `Pattern` to use becomes:
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
-[1]: /tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /tracing/connect_logs_and_traces/java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -182,7 +182,7 @@ Once that done, edit your `logback.xml` file as described in the below `Slf4j` s
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][2] that are then automatically added in the JSON logs.
 
-[1]: /tracing/advanced/connect_logs_and_traces/?tab=java
+[1]: /tracing/connect_logs_and_traces/java
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -286,7 +286,7 @@ Then edit your `logback.xml` file and update the encoder:
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][2] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][3] that are then automatically added in the JSON logs.
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-[2]: /tracing/advanced/connect_logs_and_traces/?tab=java
+[2]: /tracing/connect_logs_and_traces/java
 [3]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -300,15 +300,8 @@ Create a file `java.yaml` in the Agent's `conf.d/` directory with the following 
 #Log section
 logs:
 
-    ## - type : file (mandatory) type of log input source (tcp / udp / file)
-    ##   port / path : (mandatory) Set port if type is tcp or udp. Set path if type is file
-    ##   service : (mandatory) name of the service owning the log
-    ##   source : (mandatory) attribute that defines which integration is sending the logs
-    ##   sourcecategory : (optional) Multiple value attribute. Can be used to refine the source attribute
-    ##   tags: (optional) add tags to each logs collected
-
   - type: file
-    path: /path/to/your/java/log.log
+    path: "/path/to/your/java/log.log"
     service: java
     source: java
     sourcecategory: sourcecode

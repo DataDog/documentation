@@ -1,7 +1,6 @@
 ---
 title: Debug the slowest trace on the slowest endpoint of a web service
 kind: guide
-disable_toc: true
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
@@ -19,6 +18,7 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
+
 _3 minutes to complete_
 
 {{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="Identifying the slowest trace and finding the Host metrics for it"  style="width:90%;">}}
@@ -68,6 +68,6 @@ Datadog APM seamlessly integrates with the other Datadog metrics and information
 [3]: /tracing/visualization/#services
 [4]: /tracing/visualization/#resources
 [5]: /tracing/visualization/#spans
-[6]: https://docs.datadoghq.com/tracing/visualization/trace/?tab=spanmetadata
-[7]: https://docs.datadoghq.com/tracing/advanced/adding_metadata_to_spans
-[8]: https://docs.datadoghq.com/tracing/advanced/connect_logs_and_traces
+[6]: /tracing/visualization/trace/?tab=spanmetadata
+[7]: /tracing/guide/adding_metadata_to_spans
+[8]: /tracing/connect_logs_and_traces

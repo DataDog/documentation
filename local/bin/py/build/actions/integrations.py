@@ -392,9 +392,6 @@ class Integrations:
                     result,
                     0,
                 )
-            result = "{0}\n\n{1}".format(
-                result, "{{< get-dependencies >}}"
-            )
             result = self.add_integration_frontmatter(
                 new_file_name, result, dependencies
             )
@@ -445,6 +442,7 @@ class Integrations:
         )
 
     def add_dependencies(self, file_name):
+        """ Adds dependencies to the integration file in order to be able to find the source file in Github """
         dependencies = []
         if file_name.startswith(
             "{0}{1}{2}".format(

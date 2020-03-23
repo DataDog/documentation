@@ -29,7 +29,7 @@ Enter a [log query][1] to filter the log stream.
 
 #### Columns
 
-Display values of your [facets][2] and [measures][3] with columns.
+Display values of your [facets][2] and [measures][2] with columns.
 
 #### Global time
 
@@ -45,7 +45,7 @@ Optionally define its size and alignment.
 
 ## API
 
-The dedicated [widget JSON schema definition][4] for the log stream widget is:
+The dedicated [widget JSON schema definition][3] for the log stream widget is:
 
 ```text
 LOG_STREAM_SCHEMA = {
@@ -76,14 +76,13 @@ LOG_STREAM_SCHEMA = {
 | `title`       | string | no       | Title of the widget                                                                                                        |
 | `title_size`  | string | no       | Size of the title                                                                                                          |
 | `title_align` | string | no       | How to align the title. Available values are: `center`, `left`, or `right`                                                 |
-| `time`        | object | no       | Time setting for the widget. See the dedicated [Time JSON schema documentation][5] to learn how to build the `TIME_SCHEMA` |
+| `time`        | object | no       | Time setting for the widget. See the dedicated [Time JSON schema documentation][4] to learn how to build the `TIME_SCHEMA` |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/search
-[2]: /logs/explorer/?tab=facets#setup
-[3]: /logs/explorer/?tab=measures#setup
-[4]: /dashboards/graphing_json/widget_json
-[5]: /dashboards/graphing_json/widget_json/#time-schema
+[2]: /logs/explorer/facets
+[3]: /dashboards/graphing_json/widget_json
+[4]: /dashboards/graphing_json/widget_json/#time-schema

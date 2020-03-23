@@ -81,6 +81,7 @@ Si l'endpoint est tracé et inclus dans la liste, les résultats du test Browser
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /fr/synthetics/private_locations
 [3]: /fr/synthetics/api_tests#use-global-variables

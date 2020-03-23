@@ -1,7 +1,6 @@
 ---
 title: Configuration automatique
 kind: documentation
-disable_toc: true
 further_reading:
   - link: /agent/autodiscovery/integrations
     tag: Documentation
@@ -61,7 +60,7 @@ Les fichiers de configuration `auto_conf.yaml` couvrent tous les paramètres req
 [14]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml
 [15]: /fr/integrations/harbor
 [16]: https://github.com/DataDog/integrations-core/blob/master/harbor/datadog_checks/harbor/data/auto_conf.yaml
-[17]: /fr/integrations/kubernetes
+[17]: /fr/agent/kubernetes/
 [18]: https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/datadog_checks/kube_apiserver_metrics/data/auto_conf.yaml
 [19]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
 [20]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml

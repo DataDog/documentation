@@ -1,7 +1,6 @@
 ---
 title: Alert on anomalous p99 latency of a database service
 kind: guide
-disable_toc: true
 further_reading:
 - link: "tracing/guide/week_over_week_p50_comparison/"
   tag: "2 mins"
@@ -19,8 +18,8 @@ further_reading:
   tag: ""
   text: "All guides"
 ---
-_3 minutes to complete_
 
+_3 minutes to complete_
 
 {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_full.mp4" video="true" alt="Monitor view with ongoing alert"  style="width:90%;">}}
 
@@ -78,12 +77,12 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/monitors/monitor_types/anomaly/
+[1]: /monitors/monitor_types/anomaly/
 [2]: https://app.datadoghq.com/monitors#/create
 [3]: https://app.datadoghq.com/monitors#create/apm
 [4]: /tracing/visualization/#resources
 [5]: /tracing/visualization/#services
-[6]: https://docs.datadoghq.com/monitors/monitor_types/anomaly/#faq
-[7]: https://docs.datadoghq.com/monitors/notifications/?tab=is_alertis_warning
+[6]: /monitors/monitor_types/anomaly/#faq
+[7]: /monitors/notifications/?tab=is_alertis_warning
 [8]: https://app.datadoghq.com/apm/services
 [9]: https://app.datadoghq.com/service/map

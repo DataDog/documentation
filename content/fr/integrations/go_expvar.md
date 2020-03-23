@@ -72,7 +72,7 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 Consultez la [documentation relative aux modèles d'intégration Autodiscovery][12] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                    |
-|----------------------|------------------------------------------|
+| -------------------- | ---------------------------------------- |
 | `<NOM_INTÉGRATION>` | `go_expvar`                              |
 | `<CONFIG_INIT>`      | vide ou `{}`                            |
 | `<CONFIG_INSTANCE>`  | `{"expvar_url": "http://%%host%%:8080"}` |
@@ -101,7 +101,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 ## Pour aller plus loin
 
-* [Instrumenter vos applications Go avec Expvar et Datadog][15]
+- [Instrumenter vos applications Go avec Expvar et Datadog][15]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/go_expvar/images/go_graph.png
 [2]: https://github.com/DataDog/datadog-go
@@ -118,6 +118,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [14]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/metadata.csv
 [15]: https://www.datadoghq.com/blog/instrument-go-apps-expvar-datadog
-
-
-{{< get-dependencies >}}

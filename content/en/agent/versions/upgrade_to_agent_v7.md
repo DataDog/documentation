@@ -13,10 +13,10 @@ Agent v7 only supports Python 3 custom checks. <a href="/agent/guide/python-3">C
 
 ## From Agent v6 to Agent v7
 
-Run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=7` in order to upgrade your Agent from version 6 to version 7:
-
 {{< tabs >}}
 {{% tab "Linux" %}}
+
+Run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=7` in order to upgrade your Agent from version 6 to version 7:
 
 | Platform     | Command                                                                                                                                                                   |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -44,6 +44,8 @@ Run the Agent installation command with the environment variable `DD_AGENT_MAJOR
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
+Run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=7` in order to upgrade your Agent from version 6 to version 7:
+
 ```shell
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
 ```
@@ -53,10 +55,10 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 
 ## From Agent v5 to Agent v7
 
-Run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=7` and `DD_UPGRADE="true"` in order to upgrade your Agent from version 5 to version 7. The Agent v7 installer can automatically convert v5 configurations during the upgrade:
-
 {{< tabs >}}
 {{% tab "Linux" %}}
+
+Run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=7` and `DD_UPGRADE="true"` in order to upgrade your Agent from version 5 to version 7. The Agent v7 installer can automatically convert v5 configurations during the upgrade:
 
 | Platform     | Command                                                                                                                                                      |
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -77,6 +79,8 @@ Run the Agent installation command with the environment variable `DD_AGENT_MAJOR
 [1]: /agent/versions/upgrade_to_agent_v6/?tab=windows#manual-upgrade
 {{% /tab %}}
 {{% tab "MacOS" %}}
+
+Run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=7` and `DD_UPGRADE="true"` in order to upgrade your Agent from version 5 to version 7. The Agent v7 installer can automatically convert v5 configurations during the upgrade:
 
 ```shell
 DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"

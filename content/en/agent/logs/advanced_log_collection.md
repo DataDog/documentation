@@ -104,6 +104,16 @@ logs:
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
+**Note**: With Agent version 7.17+, the `replace_placeholder` string can expand references to capture groups such as `$1`, `$2` and so forth. If you want a string to follow the capture group with no space in between, use the format `${<GROUP_NUMBER>}`. For instance, to scrub user information from the log `User email: foo.bar@example.com`, the following configuration:
+
+```
+(...)
+pattern: "(User email: )[^@]*@(.*)"
+replace_placeholder: "$1 masked_user@${2}"
+```
+
+Would send the following log to Datadog: `User email: masked_user@example.com`
+
 ## Multi-line aggregation
 
 If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type` which aggregates all lines into a single entry until the given pattern is detected again.
@@ -190,7 +200,7 @@ More examples:
 
 ## Tail directories by using wildcards
 
-If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
+If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute. If you want to exclude some files matching the chosen `path`, list them in the `exclude_paths` attribute.
 
 * Using `path: /var/log/myapp/*.log`:
   * Matches all `.log` file contained in the `/var/log/myapp/` directory.
@@ -207,9 +217,14 @@ Configuration example:
 logs:
  - type: file
    path: /var/log/myapp/*.log
+   exclude_paths:
+     - /var/log/myapp/debug.log
+     - /var/log/myapp/trace.log
    service: mywebapp
    source: go
 ```
+
+The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log` will never be tailed.
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
 
@@ -227,7 +242,7 @@ logs_config:
   processing_rules:
      - type: exclude_at_match
        name: exclude_healthcheck
-       pattern: healtcheck
+       pattern: healthcheck
      - type: mask_sequences
        name: mask_user_email
        pattern: \w+@datadoghq.com

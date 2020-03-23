@@ -21,24 +21,23 @@ Cet endpoint vous permet d'envoyer des événements dans le flux. Taguez-les, d�
     Le timestamp POSIX de l'événement. Doit être envoyé sous la forme d'un entier (sans guillemets). *Limité aux événements de moins d'un an et 24 jours (389 jours)*.
 * **`priority`** [*facultatif*, *défaut*=**normal**] :
     La priorité de l'événement : **normal** ou **low**.
-* **`host`** [*facultatif*, *défaut*=**None**] :
+* **`host`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     Hostname à associer à l'événement. Tous les tags associés au host sont également appliqués à cet événement.
-* **`tags`** [*facultatif*, *défaut*=**None**] :
+* **`tags`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     La liste des tags à appliquer à l'événement.
 * **`alert_type`** [*facultatif*, *défaut*=**info**] :
     S'il s'agit d'un événement d'alerte, définissez son type parmi les valeurs suivantes : **error**, **warning**, **info** ou **success**.
-* **`aggregation_key`** [*facultatif*, *défaut*=**None**] :
+* **`aggregation_key`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     Chaîne arbitraire à utiliser pour l'agrégation. *Limitée à 100 caractères*.
     Si vous spécifiez une clé, tous les événements utilisant cette clé sont regroupés dans le flux d'événements.
-* **`source_type_name`** [*facultatif*, *défaut*=**None**] :
+* **`source_type_name`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     Le type d'événement envoyé.
     Valeurs autorisées : **nagios**, **hudson**, **jenkins**, **my_apps**, **chef**, **puppet**, **git**, **bitbucket**, etc. 
-    [Liste complète des valeurs d'attributs source][3]
-* **`related_event_id`** [*facultatif*, *défaut*=**None**] :
+* **`related_event_id`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     ID de l'événement parent. Doit être envoyé sous la forme d'un entier (c'est-à-dire sans apostrophes).
-* **`device_name`** [*facultatif*, *défaut*=**None**] :
+* **`device_name`** [*facultatif*, *valeur par défaut*=**Aucune**] :
   La liste des noms d'appareils avec lesquels publier l'événement.
+
 
 [1]: https://github.com/DataDog/dogapi-rb
 [2]: /fr/developers/events/email#markdown
-[3]: /fr/integrations/faq/list-of-api-source-attribute-value

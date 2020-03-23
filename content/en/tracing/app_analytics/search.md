@@ -8,7 +8,7 @@ aliases:
   - /tracing/search
   - /tracing/getting_further/apm_events/
   - /tracing/trace_search_and_analytics/search/
-  - /tracing/advanced/search
+  - /tracing/search
 further_reading:
 - link: "tracing/setup/"
   tag: "Documentation"
@@ -129,7 +129,7 @@ The Trace Stream is the list of traces that match the selected context. A contex
 
 ### Traces vs Analyzed Spans
 
-Chose to display a sampled trace associated with your Analyzed Spans in the trace steam with the toggle in the upper right corner of the trace stream:
+In the Trace Stream, select **View in App Analytics** to view Traces and Analyzed Spans. Choose to display a sampled trace associated with your Analyzed Spans by clicking the **Traces** button in the upper right corner:
 
 {{< img src="tracing/app_analytics/search/trace_analysed_span.png" style="width:40%;" alt="trace_analysed_span"  >}}
 
@@ -145,9 +145,13 @@ Click on any trace to see more details about it:
 
 ### Columns
 
-To add more Trace details to the list, click the **Columns** button and select any Facets you want to see:
+To add more Trace details to the list, click the **Options** button and select any Facets you want to see:
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns"  style="width:80%;">}}
+
+Origin resource is a default column that shows the resource at the root of the given trace. To add origin service or origin operation name, click the **Options** button and select `@trace.origin.operation_name` or `@trace.origin.service`.
+
+{{< img src="tracing/app_analytics/search/trace_origin_column.png" alt="Trace list with origin columns"  style="width:80%;">}}
 
 ### Multi-line display
 
@@ -166,11 +170,28 @@ Choose to display one, three, or ten lines from your traces. 3 and 10 lines disp
 
 ## Facets
 
-A Facet displays all the distinct values of an attribute or a tag as well as provides some basic analytics such as the amount of traces represented. This is also a switch to easily filter your data.
+A Facet displays all the distinct values of an attribute or a tag as well as provides some basic analytics such as the amount of traces represented. This is also a switch to filter your data.
 
 Facets allow you to pivot or filter your datasets based on a given attribute. Examples Facets may include users, services, etc...
 
 {{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
+
+### Quantitative facets: measures
+
+**Use measures when you need to:** 
+* Aggregate values from multiple traces. For example, create a measure on the number of rows in Cassandra and view the P95 or top-most referrers per sum of file size requested.
+* Numerically compute the highest latency services for shopping cart values over $1000.
+* Filter continuous values. For example, the size in bytes of each payload chunk of a video stream.	
+
+**Types**
+
+Measures come with either a (long) integer or double value, for equivalent capabilities.
+
+**Units**
+
+Measures support units (time in seconds or size in bytes) for handling of orders of magnitude at query time and display time. Unit is a property of the measure itself, not of the field. For example, consider a duration measure in nanoseconds: you have a span tag from `service:A` where `duration:1000` stands for `1000 milliseconds`, and another span tags from `service:B` where `duration:500` stands for `500 microseconds`:
+Scale duration into nanoseconds for all span tags flowing in with the arithmetic processor. Use a `*1000000` multiplier on span tags from `service:A`, and a `*1000` multiplier on span tags from `service:B`.
+Use `duration:>20ms` (see search syntax for reference) to consistently query span tags from both services at once, and see an aggregated result of max one minute.
 
 ### Create a Facet
 
@@ -182,7 +203,7 @@ Once this is done, the value of this attribute is stored **for all new traces** 
 
 ### Facet Panel
 
-Use Facets to easily filters on your Traces. The search bar and url automatically reflect your selections.
+Use Facets to filter on your Traces. The search bar and url automatically reflect your selections.
 
 {{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel"  style="width:30%;">}}
 
@@ -193,5 +214,5 @@ Use Facets to easily filters on your Traces. The search bar and url automaticall
 [1]: /integrations
 [2]: /tagging/#tags-best-practices
 [3]: /tracing/visualization/#services
-[4]: /tracing/advanced/adding_metadata_to_spans/
+[4]: /tracing/guide/adding_metadata_to_spans/
 [5]: /tracing/app_analytics/#configure-additional-services-optional
