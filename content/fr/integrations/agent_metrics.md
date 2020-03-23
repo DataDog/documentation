@@ -14,7 +14,7 @@ git_integration_title: agent_metrics
 guid: 032333e3-5272-4044-90d5-a05997667513
 integration_id: datadog-agent
 integration_title: Agent Metrics
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
