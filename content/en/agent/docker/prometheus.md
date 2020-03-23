@@ -22,7 +22,7 @@ Collect your exposed Prometheus and OpenMetrics metrics from your application ru
 
 Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints. Datadog recommends using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section. Use the Prometheus check only when the metrics endpoint does not support a text format.
 
-This page explains the basic usage of these checks, enabling you to import all your prometheus exposed metrics within Datadog.
+This page explains the basic usage of these checks, enabling you to import all your Prometheus exposed metrics within Datadog.
 
 ## Setup
 
@@ -114,7 +114,7 @@ With the following configuration placeholder values:
 
 ### Simple metric collection
 
-Here is a simple getting started to collect metrics exposed by your Prometheus running within a contrainer:
+To get started with collecting metrics exposed by Prometheus running within a container, follow these steps:
 
 1. Launch the Datadog Agent:
 
@@ -127,13 +127,13 @@ Here is a simple getting started to collect metrics exposed by your Prometheus r
                   datadog/agent:latest
     ```
 
-2. To launch Prometheus in a container, the command [from the prometheus documentation][7] is: `docker run -p 9090:9090 prom/prometheus`. In order to notify the Agent to query this container with the openmetrics check we need to add the following configuration:
+2. To launch Prometheus in a container, run: `docker run -p 9090:9090 prom/prometheus`. In order to notify the Agent to query this container with the OpenMetrics check, add the following configuration:
 
     ```shell
     -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='[  {"prometheus_url":"http://%%host%%:%%port%%/metrics","namespace":"documentation_example_docker","metrics":[ {"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]}]'
     ```
 
-     To launch the prometheus container with the right annotations for autodiscovery to work run:
+     To launch the Prometheus container with the right annotations for Autodiscovery to work, run:
 
     ```shell
     docker run -p 9090:9090 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com. datadoghq.ad.instances='[{"prometheus_url":"http://%%host%%:%%port%%/metrics","namespace":"documentation_example_docker",  "metrics":[{"promhttp_metric_handler_requests_total": "prometheus.handler.requests.total"}]}]' prom/prometheus

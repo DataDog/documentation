@@ -79,7 +79,7 @@ With the following configuration placeholder values:
 
 1. [Launch the Datadog Agent][9].
 
-2. Use [this Prometheus Daemonset `prometheus.yaml`][10] to launch a Prometheus pod with already the autodiscovery configuration in it:
+2. Use [this Prometheus DaemonSet `prometheus.yaml`][10] to launch a Prometheus pod with already the Autodiscovery configuration in it:
 
     Autodiscovery configuration:
 
@@ -112,7 +112,7 @@ With the following configuration placeholder values:
       # (...)
     ```
 
-     Command to create the prometheus pod:
+     Command to create the Prometheus pod:
 
     ```shell
     kubectl create -f prometheus.yaml

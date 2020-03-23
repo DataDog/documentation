@@ -22,7 +22,7 @@ Collect your exposed Prometheus and OpenMetrics metrics from your application ru
 
 Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints. Datadog recommends using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section. Use the Prometheus check only when the metrics endpoint does not support a text format.
 
-This page explains the basic usage of these checks, enabling you to import all your prometheus exposed metrics within Datadog.
+This page explains the basic usage of these checks, enabling you to import all your Prometheus exposed metrics within Datadog.
 
 ## Setup
 
@@ -93,9 +93,9 @@ Find below the full list of parameters that can be used for your `instances`:
 
 ### Simple metric collection
 
-Here is a simple getting started to collect metrics exposed by your Prometheus:
+To get started with collecting metrics exposed by Prometheus, follow these steps:
 
-1. Follow the [Prometheus Getting Started][11] documentation to start a local version of prometheus that monitors itself.
+1. Follow the [Prometheus Getting Started][11] documentation to start a local version of Prometheus that monitors itself.
 
 2. [Install the Datadog Agent for your platform][6].
 
@@ -111,7 +111,7 @@ Here is a simple getting started to collect metrics exposed by your Prometheus:
               - promhttp_metric_handler_requests_total: prometheus.handler.requests.total
     ```
 
-4. [Restart the Agent][12]
+4. [Restart the Agent][12].
 
 5. Go into your [Metric summary page][13] to see the collected metrics: `prometheus_target_interval_length_seconds*`
 
