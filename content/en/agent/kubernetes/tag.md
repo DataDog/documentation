@@ -23,7 +23,7 @@ If running the Agent as a binary on a host, configure your tag extractions with 
 
 Starting with Agent v6.10+, the Agent can autodiscover tags from Pod annotations. It allows the Agent to associate tags to all data emitted by the entire pods or an individual container within this pod.
 
-To apply a `<TAG_KEY>":<TAG_VALUE>` tag to all data emitted by a given pod and collected by the Agent use the following annotation on your pod:
+To apply a `<TAG_KEY>:<TAG_VALUE>` tag to all data emitted by a given pod and collected by the Agent use the following annotation on your pod:
 
 ```yaml
 annotations:

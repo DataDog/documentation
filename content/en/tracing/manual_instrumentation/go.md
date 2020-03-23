@@ -57,10 +57,12 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
     span, ctx := tracer.StartSpanFromContext(r.Context(), "post.process")
+    defer span.Finish()
+    
     req, err := http.NewRequest("GET", "http://example.com", nil)
     req = req.WithContext(ctx)
     // Inject the span Context in the Request headers
-    err = tracer.Inject(span.Context(), tracer.HTTPHeadersCarrier(r.Header))
+    err = tracer.Inject(span.Context(), tracer.HTTPHeadersCarrier(req.Header))
     if err != nil {
         // Handle or log injection error
     }
