@@ -17,7 +17,7 @@ jobs:
     - name: Create local changes
       run: |
         npm run build:apiPages
-        git add content data
+        git add ./content ./data ./config
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
@@ -29,4 +29,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         # push changes to the branch that did the PR
         branch: refs/heads/${{ github.head_ref }}
-        force: true
+        force: false
