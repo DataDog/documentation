@@ -9954,6 +9954,116 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+  /api/v1/monitor/{monitor_id}/mute:
+    post:
+      description: Mute the specified monitor.
+      operationId: MuteMonitor
+      parameters:
+      - description: The id of the monitor
+        in: path
+        name: monitor_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: 'The scope to apply the mute to.
+
+          For example, if your alert is grouped by `{host}`, you might mute `host:app1`.'
+        example: role:db
+        in: query
+        name: scope
+        schema:
+          type: string
+      - description: A POSIX timestamp for when the mute should end.
+        in: query
+        name: end
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Monitor'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Monitor Not Found error
+      summary: Mute a monitor
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+  /api/v1/monitor/{monitor_id}/unmute:
+    post:
+      description: Mute the specified monitor.
+      operationId: UnmuteMonitor
+      parameters:
+      - description: The id of the monitor
+        in: path
+        name: monitor_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: 'The scope to apply the mute to.
+
+          For example, if your alert is grouped by `{host}`, you might mute `host:app1`.'
+        example: role:db
+        in: query
+        name: scope
+        schema:
+          type: string
+      - description: Clear muting across all scopes. Default is `false`.
+        example: false
+        in: query
+        name: all_scopes
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Monitor'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Monitor Not Found error
+      summary: Unmute a monitor
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
   /api/v1/org:
     get:
       description: Get information about your organization.
@@ -11822,6 +11932,45 @@ paths:
       tags:
       - Users
       x-codegen-request-body-name: body
+  /monitor/bulk_resolve:
+    post:
+      deprecated: true
+      description: Resolve monitor.
+      operationId: ResolveMonitor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: object
+              type: array
+        description: 'Array of group(s) to resolve for a given monitor_id, e.g.:
+
+          `{"monitor_id": "group_to_resolve"}`.
+
+
+          It supports multiple groups per monitor, e.g.:
+
+          `resolve: [{"monitor_id": "group_1"}, {"monitor_id": "group_2"}]`.
+
+
+          It can also resolve all triggered groups with the pseudo-group `ALL_GROUPS`:
+
+          `resolve: [{"monitor_id": "ALL_GROUPS"}]`.'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                type: array
+          description: OK
+      summary: Resolve Monitor
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
   /v1/input:
     post:
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
@@ -11893,6 +12042,61 @@ paths:
       summary: Send logs
       tags:
       - Logs
+      x-codegen-request-body-name: body
+  /v1/monitor/mute_all:
+    post:
+      deprecated: true
+      description: 'Muting prevents all monitors from notifying through email and
+        posts to the
+
+        [event stream](https://docs.datadoghq.com/events).
+
+        State changes are only visible by checking the alert page.'
+      operationId: MuteAllMonitors
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Monitor'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Mute all monitors
+      tags:
+      - Monitors
+      x-codegen-request-body-name: body
+  /v1/monitor/unmute_all:
+    post:
+      deprecated: true
+      description: 'Disables muting all monitors. Throws an error if mute all
+
+        was not enabled previously.'
+      operationId: UnmuteAllMonitors
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Unmute all monitors
+      tags:
+      - Monitors
       x-codegen-request-body-name: body
 security:
 - apiKeyAuth: []
