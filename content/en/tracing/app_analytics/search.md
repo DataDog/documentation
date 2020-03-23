@@ -149,6 +149,10 @@ To add more Trace details to the list, click the **Options** button and select a
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns"  style="width:80%;">}}
 
+Origin resource is a default column that shows the resource at the root of the given trace. To add origin service or origin operation name, click the **Options** button and select `@trace.origin.operation_name` or `@trace.origin.service`.
+
+{{< img src="tracing/app_analytics/search/trace_origin_column.png" alt="Trace list with origin columns"  style="width:80%;">}}
+
 ### Multi-line display
 
 {{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display"  style="width:30%;">}}
@@ -171,6 +175,23 @@ A Facet displays all the distinct values of an attribute or a tag as well as pro
 Facets allow you to pivot or filter your datasets based on a given attribute. Examples Facets may include users, services, etc...
 
 {{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
+
+### Quantitative facets: measures
+
+**Use measures when you need to:** 
+* Aggregate values from multiple traces. For example, create a measure on the number of rows in Cassandra and view the P95 or top-most referrers per sum of file size requested.
+* Numerically compute the highest latency services for shopping cart values over $1000.
+* Filter continuous values. For example, the size in bytes of each payload chunk of a video stream.	
+
+**Types**
+
+Measures come with either a (long) integer or double value, for equivalent capabilities.
+
+**Units**
+
+Measures support units (time in seconds or size in bytes) for handling of orders of magnitude at query time and display time. Unit is a property of the measure itself, not of the field. For example, consider a duration measure in nanoseconds: you have a span tag from `service:A` where `duration:1000` stands for `1000 milliseconds`, and another span tags from `service:B` where `duration:500` stands for `500 microseconds`:
+Scale duration into nanoseconds for all span tags flowing in with the arithmetic processor. Use a `*1000000` multiplier on span tags from `service:A`, and a `*1000` multiplier on span tags from `service:B`.
+Use `duration:>20ms` (see search syntax for reference) to consistently query span tags from both services at once, and see an aggregated result of max one minute.
 
 ### Create a Facet
 

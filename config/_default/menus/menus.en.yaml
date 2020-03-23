@@ -169,30 +169,35 @@ main:
     url: "agent/basic_agent_usage/osx/"
     weight: 108
     parent: "basic_agent_usage"
+  - name: "Puppet"
+    identifier: "basic_agent_usage_puppet"
+    url: "agent/basic_agent_usage/puppet/"
+    weight: 109
+    parent: "basic_agent_usage"
   - name: "Red Hat"
     identifier: "basic_agent_usage_redhat"
     url: "agent/basic_agent_usage/redhat/"
-    weight: 109
+    weight: 110
     parent: "basic_agent_usage"
   - name: "SUSE"
     identifier: "basic_agent_usage_suse"
     url: "agent/basic_agent_usage/suse/"
-    weight: 110
+    weight: 111
     parent: "basic_agent_usage"
   - name: "Ubuntu"
     identifier: "basic_agent_usage_ubuntu"
     url: "agent/basic_agent_usage/ubuntu/"
-    weight: 111
+    weight: 112
     parent: "basic_agent_usage"
   - name: "Windows"
     identifier: "basic_agent_usage_windows"
     url: "agent/basic_agent_usage/windows/"
-    weight: 112
+    weight: 113
     parent: "basic_agent_usage"
   - name: "From Source"
     identifier: "basic_agent_usage_source"
     url: "agent/basic_agent_usage/source/"
-    weight: 113
+    weight: 114
     parent: "basic_agent_usage"
 
   ## AGENT - Docker
@@ -220,34 +225,26 @@ main:
     parent: "agent"
     identifier: "agent_kubernetes"
     weight: 3
-  - name: "DaemonSet Setup"
-    url: "agent/kubernetes/daemonset_setup/"
+  - name: "Log"
+    url: "agent/kubernetes/log/"
     parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_log"
     weight: 301
-  - name: "Host Setup"
-    url: "agent/kubernetes/host_setup/"
+  - name: "APM"
+    url: "agent/kubernetes/apm/"
     parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_apm"
     weight: 302
-  - name: "Using Helm"
-    url: "agent/kubernetes/helm/"
-    parent: "agent_kubernetes"
-    weight: 303
-  - name: "Event Collection"
-    url: "agent/kubernetes/event_collection/"
-    parent: "agent_kubernetes"
-    weight: 304
-  - name: "Custom Integrations"
+  - name: "Integrations"
     url: "agent/kubernetes/integrations/"
     parent: "agent_kubernetes"
-    weight: 305
-  - name: "Metrics"
-    url: "agent/kubernetes/metrics/"
+    identifier: "agent_kubernetes_integrations"
+    weight: 303
+  - name: "Data collected"
+    url: "agent/kubernetes/data_collected/"
     parent: "agent_kubernetes"
-    weight: 306
-  - name: "Legacy Versions"
-    url: "agent/kubernetes/legacy/"
-    parent: "agent_kubernetes"
-    weight: 307
+    identifier: "agent_kubernetes_data_collected"
+    weight: 304
 
   ## AGENT - Datadog Cluster Agent
 

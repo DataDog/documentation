@@ -44,7 +44,7 @@ Log integrations natively rely on a [default set](#default-standard-attribute-li
 Admin users in your organization can curate the list:
 
 - From the [Log Explorer][1], **promoting** existing attributes as standard attributes.
-- From the standard attribute [configuration page](#standard-attributes-in-explorer), **creating** new standard attributes from scratch.
+- From the standard attribute [configuration page](#standard-attributes-in-the-log-explorer), **creating** new standard attributes from scratch.
 
 ### Aliasing
 

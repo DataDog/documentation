@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-Datadog calculates your current estimated usage in near real-time. Estimate usage metrics enable you to:
+Datadog calculates your current estimated usage in near real-time. Estimated usage metrics enable you to:
 
 * Graph your estimated usage
 * Create monitors around your estimated usage based on thresholds of your choosing
@@ -16,7 +16,7 @@ Datadog calculates your current estimated usage in near real-time. Estimate usag
 
 {{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" >}}
 
-### Types of usage
+## Types of usage
 
 Estimated usage metrics are generally available for the following usage types:
 
@@ -32,7 +32,7 @@ Log-based usage metrics must be manually enabled from the [Generate Metrics][1] 
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
-### Multi-Org usage
+## Multi-Org usage
 
 For accounts with multiple organizations, you can roll up estimated usage from child organizations using the `from` field to monitor usage across your entire account.
 

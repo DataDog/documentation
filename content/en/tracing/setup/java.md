@@ -113,6 +113,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`                                   |
 | Apache HTTP Async Client | 4.0+        | Fully Supported | `httpasyncclient`, `apache-httpasyncclient`    |
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
+| Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
 | Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
@@ -198,7 +199,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.trace.enabled`                     | `DD_TRACE_ENABLED`                     | `true`                            | When `false` tracing agent is disabled.                                                                                                                                                                                                                               |
 | `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service.name=<SERVICE_NAME>` |
 | `dd.service.name`                      | `DD_SERVICE_NAME`                      | `unnamed-java-app`                | The name of a set of processes that do the same job. Used for grouping stats for your application.                                                                                                                                                                    |
-| `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`                            | (Example: `mysql:my-service-name-db`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                                                                                                       |
+| `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`                            | (Example: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                                                                                                       |
 | `dd.tags`                              | `DD_TAGS`                              | `null`                            | (Example: `key1:value1,key2:value2`) A list of default tags to be added to every span, profile, and JMX metric.                                                                                                                                                       |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`                   | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                                                                                                                                                   |
 | `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][1] for more details.                                                                                                  |
@@ -461,7 +462,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 
 [1]: /agent/docker/apm
 [2]: /tracing/setup/docker
-[3]: /agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[3]: /agent/kubernetes/apm/
 [4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [5]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [6]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html

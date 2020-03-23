@@ -15,5 +15,6 @@ api.AwsIntegration.update(
     new_role_name="<NEW_AWS_ROLE_NAME>",
     host_tags=["hosttag:example"],
     filter_tags=["filter:example"],
-    account_specific_namespace_rules = {"namespace1":True/False, "namespace2":True/False}
+    account_specific_namespace_rules = {"namespace1":True/False, "namespace2":True/False},
+    excluded_regions=["us-east-1", "us-west-1"]
 )

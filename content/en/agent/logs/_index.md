@@ -91,7 +91,7 @@ To collect logs for a given integration, uncomment the logs section in that inte
 Consult the <a href="/integrations/#cat-log-collection">list of supported integrations</a>  that include out of the box log configurations.
 </div>
 
-If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][2]. If you're using Docker, [enable log collection for the containerized Agent][3]. For more information about log collection fron containerized environments, refer to the [Countainer Log Collection][4] documentation. If an integration does not support logs by default, use the custom log collection.
+If you're using Kubernetes, make sure to [enable log collection in your DaemonSet setup][2]. If you're using Docker, [enable log collection for the containerized Agent][3]. For more information about log collection from containerized environments, refer to the [Container Log Collection][4] documentation. If an integration does not support logs by default, use the custom log collection.
 
 ## Custom log collection
 
@@ -210,6 +210,7 @@ List of all available parameters for log collection:
 | `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][8], this must be the same service name.                                                                                                                                                                                                                     |
 | `source`         | Yes      | The attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][9] you are collecting, for example: `myapp` from `myapp.request.count`. |
 | `include_units`  | No       | If `type` is **journald**, list of the specific journald units to include.                                                                                                                                                                                                                                                                              |
+| `exclude_path`   | No       | If `type` is **file**, and `path` contains a wildcard character, list the matching file that should be excluded from log collection. It is available for Agent version >= 6.18.                                                                                                                                                                                                                                                                                                                                                                                |
 | `exclude_units`  | No       | If `type` is **journald**, list of the specific journald units to exclude.                                                                                                                                                                                                                                                                              |
 | `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                             |
 | `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][10]).                                                                                                                                                                                                                                                                             |
@@ -264,7 +265,7 @@ When logs are sent through HTTPS, use the same [set of proxy settings][11] as th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/kubernetes/daemonset_setup/#log-collection
+[2]: /agent/kubernetes/log
 [3]: /agent/docker/log
 [4]: /logs/log_collection/#container-log-collection
 [5]: /agent/guide/agent-configuration-files

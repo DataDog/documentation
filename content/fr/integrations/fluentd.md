@@ -28,8 +28,8 @@ process_signatures:
   - td-agent
   - fluentd
   - ruby td-agent
-public_title: Intégration Datadog/FluentD
-short_description: Gérez les files d'attente de mise en mémoire tampon et le nombre de nouvelles tentatives pour chaque plug-in FluentD que vous avez activé.
+public_title: Intégration Datadog/Fluentd
+short_description: Gérez les files d'attente de mise en mémoire tampon et le nombre de nouvelles tentatives pour chaque plug-in Fluentd que vous avez activé.
 support: core
 supported_os:
   - linux
@@ -42,20 +42,20 @@ supported_os:
 
 Obtenez des métriques de Fluentd pour :
 
-* Visualiser les performances FluentD
-* Corréler les performances de FluentD avec le reste de vos applications
+- Visualiser les performances Fluentd
+- Corréler les performances de Fluentd avec le reste de vos applications
 
 ## Implémentation
 
 ### Installation
 
-Le check FluentD est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs FluentD.
+Le check Fluentd est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur vos serveurs FluentD.
 
 #### Préparer Fluentd
 
-Dans votre fichier de configuration FluentD, ajoutez une source `monitor_agent` :
+Dans votre fichier de configuration Fluentd, ajoutez une source `monitor_agent` :
 
-```
+```text
 <source>
   @type monitor_agent
   bind 0.0.0.0
@@ -73,22 +73,21 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 1. Modifiez le fichier `fluentd.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos métriques [Fluentd](#metriques). Consultez le [fichier d'exemple fluentd.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-    ```yaml
-      init_config:
+   ```yaml
+   init_config:
 
-      instances:
-
-          ## @param monitor_agent_url - string - required
-          ## Monitor Agent URL to connect to.
-          #
-        - monitor_agent_url: http://example.com:24220/api/plugins.json
-    ```
+   instances:
+     ## @param monitor_agent_url - string - required
+     ## Monitor Agent URL to connect to.
+     #
+     - monitor_agent_url: http://example.com:24220/api/plugins.json
+   ```
 
 2. [Redémarrez l'Agent][6].
 
 ##### Collecte de logs
 
-Vous pouvez utiliser le [plug-in FluentD de Datadog][7] pour transférer directement les logs depuis FluentD vers votre compte Datadog.
+Vous pouvez utiliser le [plug-in Fluentd de Datadog][7] pour transférer directement les logs depuis Fluentd vers votre compte Datadog.
 
 ###### Ajouter des métadonnées à vos logs
 
@@ -101,43 +100,57 @@ Les [tags host][11] sont automatiquement définis dans vos logs si un hostname c
 
 Exemple de configuration :
 
-```
-  # Associer les événements avec le tag « datadog.** » et
+```conf
+  # Associer les événements avec le tag "datadog.**" et
   # les envoyer à Datadog
 
 <match datadog.**>
-
   @type datadog
   @id awesome_agent
-  api_key <votre_cle_api>
+  api_key <votre_clé_api>
 
   # Facultatif
   include_tag_key true
   tag_key 'tag'
 
   # Tags facultatifs
-  dd_source '<NOM_INTEGRATION>'
+  dd_source '<NOM_INTÉGRATION>'
   dd_tags '<KEY1:VALUE1>,<KEY2:VALUE2>'
   dd_sourcecategory '<CATÉGORIE_SOURCE>'
 
+  <buffer>
+          @type memory
+          flush_thread_count 4
+          flush_interval 3s
+          chunk_limit_size 5m
+          chunk_limit_records 500
+  </buffer>
 </match>
 ```
 
+Par défaut, le plug-in est configuré de façon à envoyer des logs via HTTPS (port 443) à l'aide de la compression gzip.
+Vous pouvez modifier ce comportement avec les paramètres suivants :
+
+- `use_http` : définissez ce paramètre sur `false` pour utiliser la connexion TCP. Vous devez modifier les paramètres `host` et `port` en conséquence. Valeur par défaut : `true`.
+- `use_compression` : la compression est uniquement disponible pour les transmissions HTTP. Définissez ce paramètre sur `false` pour la désactiver. Valeur par défaut : `true`.
+- `compression_level` : définissez le niveau de compression via HTTP. Choisissez une valeur entre 1 (ratio le plus faible) et 9 (ratio le plus élevé). Valeur par défaut : `6`.
+
 Il est possible d'utiliser des paramètres supplémentaires pour changer l'endpoint utilisé afin de passer par un proxy :
 
-* `host` : endpoint proxy lorsque des logs ne sont pas directement transmis à Datadog (valeur par défaut : `intake.logs.datadoghq.com`).
-* `port` : port proxy lorsque les logs ne sont pas directement transmis à Datadog (valeur par défaut : `10514`).
-* `ssl_port` : port utilisé lorsque les logs sont transmis via une connexion TCP/SSL sécurisée à Datadog (valeur par défaut : `10516`).
-* `use_ssl` : si ce paramètre est défini sur `true`, l'Agent initialise une connexion TCP/SSL sécurisée vers Datadog (valeur par défaut : `true`).
+- `host` : l'endpoint proxy pour les logs qui ne sont pas directement transmis à Datadog. Valeur par défaut :  `http-intake.logs.datadoghq.com`.
+- `port` : le port proxy pour les logs qui ne sont pas directement transmis à Datadog. Valeur par défaut : `80`.
+- `ssl_port` : le port utilisé pour les logs transmis via une connexion TCP/SSL sécurisée à Datadog. Valeur par défaut : `443`.
+- `use_ssl` : indique à l'Agent d'initialiser une connexion TCP/SSL sécurisée vers Datadog. Valeur par défaut : `true`.
+- `no_ssl_validation` : désactive la validation du hostname SSL. Valeur par défaut : `false`.
 
-Il peut également être utilisé pour l'envoi de logs au **site européen de Datadog** en définissant :
 
-```
+Ce paramètre peut également être utilisé pour l'envoi de logs au **site européen de Datadog** en définissant :
+
+```conf
 <match datadog.**>
 
-  ...
-  host 'tcp-intake.logs.datadoghq.eu'
-  ssl_port '443'
+  #...
+  host 'http-intake.logs.datadoghq.eu'
 
 </match>
 ```
@@ -148,18 +161,18 @@ Les tags Datadog s'avèrent indispensables pour passer d'une partie du produit �
 
 Si vos logs contiennent un ou plusieurs des attributs suivants, ces attributs sont automatiquement ajoutés en tant que tags Datadog à vos logs :
 
-* `kubernetes.container_image`
-* `kubernetes.container_name`
-* `kubernetes.namespace_name`
-* `kubernetes.pod_name`
-* `docker.container_id`
+- `kubernetes.container_image`
+- `kubernetes.container_name`
+- `kubernetes.namespace_name`
+- `kubernetes.pod_name`
+- `docker.container_id`
 
-Bien que l'Agent Datadog recueille automatiquement les métadonnées Docker et Kubernetes, FluentD doit utiliser un plug-in pour y parvenir. Nous vous conseillons d'utiliser [fluent-plugin-kubernetes_metadata_filter][13] pour recueillir ces métadonnées.
+Bien que l'Agent Datadog recueille automatiquement les métadonnées Docker et Kubernetes, Fluentd doit utiliser un plug-in pour y parvenir. Nous vous conseillons d'utiliser [fluent-plugin-kubernetes_metadata_filter][13] pour recueillir ces métadonnées.
 
 Exemple de configuration :
 
-```
-# Recueillir les métadonnées des logs avec le tag « kubernetes.** »
+```conf
+# Recueillir les métadonnées des logs avec le tag "kubernetes.**"
  <filter kubernetes.*>
    type kubernetes_metadata
  </filter>
@@ -172,19 +185,19 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 ##### Collecte de métriques
 
 | Paramètre            | Valeur                                                             |
-|----------------------|-------------------------------------------------------------------|
+| -------------------- | ----------------------------------------------------------------- |
 | `<NOM_INTÉGRATION>` | `fluentd`                                                         |
 | `<CONFIG_INIT>`      | vide ou `{}`                                                     |
 | `<CONFIG_INSTANCE>`  | `{"monitor_agent_url": "http://%%host%%:24220/api/plugins.json"}` |
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][18].
 
 | Paramètre      | Valeur                                                |
-|----------------|------------------------------------------------------|
+| -------------- | ---------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "fluentd", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
@@ -192,12 +205,14 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [Lancez la sous-commande status de l'Agent][14] et cherchez `fluentd` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "fluentd" >}}
 
 
 ### Événements
-Le check FluentD n'inclut aucun événement.
+
+Le check Fluentd n'inclut aucun événement.
 
 ### Checks de service
 
@@ -210,7 +225,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][16].
 
 ## Pour aller plus loin
 
-* [Comment surveiller FluentD avec Datadog][17]
+- [Comment surveiller Fluentd avec Datadog][17]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/fluentd/images/snapshot-fluentd.png
 [2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations

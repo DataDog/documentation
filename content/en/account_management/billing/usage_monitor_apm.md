@@ -6,7 +6,7 @@ kind: documentation
 Datadog has many pricing plans to fit your needs. For more information, see the [Pricing page][1].
 Read APM documentation on [APM Billing][2] to understand how billing works for APM and Distributed Tracing.
 
-### Usage Page
+## Usage Page
 
 If you are an admin of your account, you can view your account usage using the [Usage Page][3] which gets updated every 72 hours.
 
@@ -16,7 +16,7 @@ If you are an admin of your account, you can view your account usage using the [
 | Analyzed Spans | Shows the sum of all Analyzed Spans indexed over all hours in the current month.         |
 | Fargate Tasks  | Shows the average of all Fargate tasks over all hours in the current month.              |
 
-### Set Alert on APM Hosts
+## Set Alert on APM Hosts
 
 To get alerts in case a code deployment scales the number of hosts sending traces, set up monitor on APM host count. Get notified if the host volumes in any scope (`prod`, `availablity-zone`, etc…) of your infrastructure is growing unexpectedly:
 
@@ -27,7 +27,7 @@ To get alerts in case a code deployment scales the number of hosts sending trace
 3. Define the rate you would like to set as a warning or error.
 4. Define an explicit notification: The volume of hosts on this env just got too high has exceeded the allocated threshold value. Scale down the number of APM enabled hosts.
 
-### Set Alert on Analyzed Spans
+## Set Alert on Analyzed Spans
 
 To get alerts in case a code deployment causes a spike in Analyzed Spans generated, set up [App Analytics monitors][5] on Analyzed Spans. Get notified at any moment if the Analyzed Span volumes in any scope (`service`, `availability-zone`, etc…) of your infrastructure is growing unexpectedly:
 

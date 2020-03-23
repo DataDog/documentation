@@ -23,25 +23,25 @@ L'endpoint Timeboard vous permet de programmer la création, la mise à jour, la
     le nom du dashboard.
 * **`description`** [*obligatoire*] :
     la description du contenu du dashboard.
-* **`graphs`** [*facultatif*, *défaut*=**None**] :
+* **`graphs`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     la liste des définitions de graphique. Les définitions de graphique respectent le format suivant :
     * **`title`** [*obligatoire*] :
        le nom du graphique.
-    * **`definition`** [*facultatif*, *défaut*=**None**] :
-        * `events` [*facultatif*, *défaut*=**None**] :
+    * **`definition`** [*facultatif*, *valeur par défaut*=**Aucune**] :
+        * `events` [*facultatif*, *valeur par défaut*=**Aucune**] :
           la requête pour superposer des événements.
-        * `requests` [*facultatif*, *défaut*=**None**] :
+        * `requests` [*facultatif*, *valeur par défaut*=**Aucune**] :
           la requête de la métrique, le type de ligne, le style, les mises en forme conditionnelles et l'agrégateur.
         * `viz` [*facultatif*, *défaut*=**timeseries**] :
           Le type de visualisation.
 
-* **`template_variables`** [*facultatif*, *défaut*=**None**] :
+* **`template_variables`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     la liste des template variables utilisables pour la création de modèles de dashboard. Les définitions de template variables respectent le format suivant :
     * **`name`** [*obligatoire*] :
       Nom de la variable.
-    * **`prefix`** [*facultatif*, *défaut*=**None**] :
+    * **`prefix`** [*facultatif*, *valeur par défaut*=**Aucune**] :
         Préfixe de tag associé à la variable. Seuls les tags avec ce préfixe apparaissent dans la liste déroulante des variables.
-    * **`default`** [*facultatif*, *défaut*=**None**] :
+    * **`default`** [*facultatif*, *valeur par défaut*=**Aucune**] :
         la valeur par défaut de la template variable lors du chargement du dashboard.
 
 ### Exemples
@@ -175,15 +175,15 @@ curl  -X POST -H "Content-type: application/json" \
     la définition du graphique. Lisez le [guide sur les graphiques][1] pour en savoir plus sur les graphiques. Exemple :
     `{"requests": [{"q": "system.cpu.idle{*} by {host}"}`
 
-* **`template_variables`** [*facultatif*, *défaut*=**None**] :
+* **`template_variables`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     la liste des template variables utilisables pour la création de modèles de dashboard. Les définitions de template variables respectent le format suivant :
     * **`name`** [*obligatoire*] :
      Le nom de la variable.
 
-    * **`prefix`** [*facultatif*, *défaut*=**None**] :
+    * **`prefix`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     le préfixe de tag associé à la variable. Seuls les tags avec ce préfixe apparaissent dans la liste déroulante des variables.
 
-    * **`default`** [*facultatif*, *défaut*=**None**] :
+    * **`default`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     la valeur par défaut de la template variable lors du chargement du dashboard.
 
 ### Exemples
