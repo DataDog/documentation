@@ -27,7 +27,7 @@ The `azure.*.count` metric is created in the same namespace as the other metrics
 Use the `azure.*.count` metric to:
 
 - Create a view of the number of Virtual Machines broken out by their status over time by graphing `azure.vm.count` over everything and summing by `status`.
-- Create query widgets in dashboards to show the number of running or stopped VMs.
+- Create query widgets in dashboards to display the number of a given resource type. Use any available tags to scope the count to a relevant aggregation such as region, resource group, kind, or status.
 - Create monitors to alert you about the status of different Azure resources.
 
 ## .status metric
