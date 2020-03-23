@@ -11,17 +11,23 @@
         <div class="list-group">
             {{ range $i, $v := .Pages.GroupByParam "parent" }}
                 <div class="js-group js-group-{{ $i }}">
-                    <div class="rule-list mb-1">
-                        <div class="rule-list__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">{{ substr $v.Key 0 1 }}</div>
+                    <div class="rule-list mb-1 active">
+                        <div class="rule-list__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">
+                            {{ range first 1 $v.Pages }}
+                              <img src="{{ .Params.meta_image }}?fit=auto&w=40" width="40" />
+                            {{ end }}
+                        </div>
                         <div class="d-inline font-semibold ml-1">{{ title $v.Key }}</div>
                         <div class="rule-list__arrow">></div>
                     </div>
                     <div class="group-{{ .Key }} mb-2 ml-2 d-none">
                         {{ range $v.Pages }}
+                            {{ if isset .Params "source" }}
                             <a class="mb-1 font-semibold js-page" href="{{.Permalink}}" data-name="{{ lower .Title }}">
-                                <img src="{{ .Params.meta_image }}?fit=auto&width=40" width="40" />
+                                <img src="{{ .Params.meta_image }}?fit=auto&w=40" width="40" />
                                 {{ .Title }}<br/>
                             </a>
+                            {{ end }}
                         {{ end }}
                     </div>
                 </div>

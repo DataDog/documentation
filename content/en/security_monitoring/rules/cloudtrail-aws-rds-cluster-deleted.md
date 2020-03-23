@@ -18,6 +18,7 @@ Detect when an attacker is destroying a RDS Cluster.
 
 ### **Strategy:**
 Monitor CloudTrail and detect when a RDS cluster is deleted via the following API call:
+
 * [DeleteDBCluster][1]
 
 ### **Triage & Response:**
