@@ -2,9 +2,9 @@
 title: Signal Sciences Flagged an IP
 kind: documentation
 type: security_rules
-parent: signal_sciences
-source: signal_sciences
-meta_image: /images/integrations_logos/signal_sciences.png
+parent: sigsci
+source: sigsci
+meta_image: /images/integrations_logos/sigsci.png
 ---
 
 ## Overview
