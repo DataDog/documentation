@@ -4,7 +4,8 @@ public class SLOApiExample {
 
     public static void main(String[] args) {
         SLOApi apiInstance = new SLOApi();
-        String ids = ids_example; // String | A comma separated list of the IDs of the service level objectives objects (e.g. "id1,id2,id3").
+        String ids = ids_example; // String | A comma separated list of the IDs of the service level objectives objects
+(e.g. "id1,id2,id3").
         try {
             CheckCanDeleteServiceLevelObjectiveResponse result = apiInstance.checkCanDeleteSLO(ids);
             System.out.println(result);

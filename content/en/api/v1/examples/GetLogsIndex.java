@@ -4,7 +4,7 @@ public class LogsIndexesApiExample {
 
     public static void main(String[] args) {
         LogsIndexesApi apiInstance = new LogsIndexesApi();
-        String name = name_example; // String | Name of the log index
+        String name = name_example; // String | Name of the log index.
         try {
             LogsIndex result = apiInstance.getLogsIndex(name);
             System.out.println(result);

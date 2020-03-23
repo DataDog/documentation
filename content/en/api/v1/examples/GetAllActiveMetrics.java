@@ -5,7 +5,8 @@ public class MetricsApiExample {
     public static void main(String[] args) {
         MetricsApi apiInstance = new MetricsApi();
         Long from = 789; // Long | Seconds since the Unix epoch
-        String host = host_example; // String | Hostname for filtering the list of metrics returned. If set, metrics retrieved are those with the corresponding hostname tag.
+        String host = host_example; // String | Hostname for filtering the list of metrics returned.
+If set, metrics retrieved are those with the corresponding hostname tag.
         try {
             MetricsListResponse result = apiInstance.getAllActiveMetrics(from, host);
             System.out.println(result);

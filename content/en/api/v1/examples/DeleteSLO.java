@@ -4,7 +4,7 @@ public class SLOApiExample {
 
     public static void main(String[] args) {
         SLOApi apiInstance = new SLOApi();
-        String sloId = sloId_example; // String | The id of the service level objective
+        String sloId = sloId_example; // String | The id of the service level objective.
         try {
             ServiceLevelObjectiveDeleted result = apiInstance.deleteSLO(sloId);
             System.out.println(result);
