@@ -205,7 +205,7 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection ti
 {{% /tab %}}
 {{< /tabs >}}
 
-To send metrics, events, or service checks on containerized environments, refer to the [DogStatsD on Kubernetes][4] documentation, in conjunction with the instructions for configuring APM on Kubernetes using [DaemonSets][5] or [Helm][6], depending on your installation. The [Docker APM][7] documentation may also be helpful.
+To send metrics, events, or service checks on containerized environments, refer to the [DogStatsD on Kubernetes][4] documentation, in conjunction with the instructions for [configuring APM on Kubernetes][5], depending on your installation. The [Docker APM][6] documentation may also be helpful.
 
 ## Further Reading
 
@@ -216,5 +216,4 @@ To send metrics, events, or service checks on containerized environments, refer 
 [3]: /developers/dogstatsd
 [4]: /developers/dogstatsd/
 [5]: /agent/kubernetes/apm
-[6]: /agent/kubernetes/
-[7]: /agent/docker/apm
+[6]: /agent/docker/apm

@@ -17,7 +17,7 @@ The Log Management product supports multiple [environments and formats][2], allo
 
 ## Information Security
 
-The Datadog Agent submits logs to Datadog over a TLS-encrypted TCP connection, requiring an outbound communication over port `10516`. Datadog uses symmetric encryption at rest (AES-256) for indexed logs. Indexed logs are deleted from the Datadog platform once their retention period, as defined by the customer, expires.
+The Datadog Agent submits logs to Datadog over a TLS-encrypted TCP connection, requiring an outbound communication over port `10516`. The Datadog Agent can also be configured to send logs over secured HTTPS requests, requiring an outbound communication over port `443`. Datadog uses symmetric encryption at rest (AES-256) for indexed logs. Indexed logs are deleted from the Datadog platform once their retention period, as defined by the customer, expires.
 
 ## Logs Filtering
 

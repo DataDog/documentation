@@ -1,5 +1,5 @@
-footer_blurb_heading: Can't find something?
-footer_blurb_desc: Our friendly, knowledgeable solutions engineers are here to help!
+footer_blurb_heading: お困りですか？
+footer_blurb_desc: 知識豊富なエンジニアがサポートします。
 col1:
   - name: product
     link: 'https://www.datadoghq.com/ja/product/'
@@ -27,7 +27,7 @@ col2:
     link: 'https://www.datadoghq.com/ja/pricing/'
     title: 料金
   - name: documentation
-    link: 'https://docs.datadoghq.com/'
+    link: 'https://docs.datadoghq.com/ja/'
     title: Documentation
   - name: support
     link: 'https://www.datadoghq.com/ja/support/'
@@ -60,12 +60,15 @@ col3:
   - name: legal
     link: 'https://www.datadoghq.com/ja/legal/'
     title: 各種規約
+  - name: investors
+    link: 'https://investors.datadoghq.com/'
+    title: Investor Relations
   - name: analyst
     link: 'https://www.datadoghq.com/ja/about/analyst/'
     title: アナリストレポート
 col4:
   - name: blog
-    link: 'https://www.datadoghq.com/blog/'
+    link: 'https://www.datadoghq.com/ja/blog/'
     title: 英語ブログ
   - name: bloges
     link: 'https://www.datadoghq.com/es/blog/'

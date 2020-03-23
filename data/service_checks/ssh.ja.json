@@ -1,0 +1,18 @@
+[
+    {
+        "agent_version": "5.1.0",
+        "check": "ssh.can_connect",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト", "インスタンス"],
+        "name": "SSH Can Connect",
+        "description": "Agent チェックが SSH ホストに接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    },
+	{
+        "agent_version": "5.1.0",
+        "check": "sftp.can_connect",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト", "インスタンス"],
+        "name": "SFTP Can Connect",
+        "description": "Agent チェックが SFTP ホストに接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    }
+]

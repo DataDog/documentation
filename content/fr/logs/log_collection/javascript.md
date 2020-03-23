@@ -356,7 +356,7 @@ Seuls les logs avec un statut égal ou supérieur au niveau indiqué sont envoy�
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setLevel('<NIVEAU>');
+datadogLogs.logger.setLevel('<NIVEAU>');
 ```
 
 {{% /tab %}}
@@ -384,14 +384,14 @@ Une fois la bibliothèque lancée, il est possible de configurer le logger de fa
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setHandler('<GESTIONNAIRE>');
+datadogLogs.logger.setHandler('<GESTIONNAIRE>');
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setHandler('<GESTIONNAIRE>');
+window.DD_LOGS && DD_LOGS.logger.setHandler('<GESTIONNAIRE>');
 ```
 
 **Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
