@@ -197,7 +197,7 @@ make install
 
 ## Tracer debug logs
 
-If you have successfully enabled debug mode for your tracer, you should see useful tracer specific log messages telling you how the tracer was initialized and whether traces were sent to the Agent. **These logs do not get sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. Find below log examples that you may found in your log file.
+If you have successfully enabled debug mode for your tracer, you should see tracer specific log messages telling you how the tracer was initialized and whether traces were sent to the Agent. **These logs do not get sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. Find below log examples that you may found in your log file.
 
 {{< tabs >}}
 {{% tab "Java" %}}
