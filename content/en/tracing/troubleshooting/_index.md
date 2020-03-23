@@ -197,9 +197,7 @@ make install
 
 ## Tracer debug logs
 
-If you have successfully enabled debug mode for your tracer, you should see useful tracer specific log messages telling you how the tracer was initialized and whether traces were sent to the Agent
-
-**Note**: these logs do not get sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration.
+If you have successfully enabled debug mode for your tracer, you should see useful tracer specific log messages telling you how the tracer was initialized and whether traces were sent to the Agent. **These logs do not get sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. Find below log examples that you may found in your log file.
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -213,7 +211,6 @@ If you have successfully enabled debug mode for your tracer, you should see usef
 
 </p>
 </details>
-
 
 <details><summary>Example of traces being generated</summary>
 <p>
@@ -284,7 +281,7 @@ For more visibility, include `DD_LOGGING_RATE_LIMIT=0`.
 </p>
 </details>
 
-<details><summary>Able to send traces to the Datadog Agent</summary>
+<details><summary>Traces are sent to the Datadog Agent</summary>
 <p>
 
 ```shell
@@ -297,7 +294,7 @@ For more visibility, include `DD_LOGGING_RATE_LIMIT=0`.
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-<details><summary>Span generated </summary>
+<details><summary>Span is generated</summary>
 <p>
 
 ```shell
@@ -335,7 +332,7 @@ Metrics: [
 {{% /tab %}}
 {{% tab "Go" %}}
 
-<details><summary> Logging trace attempt to be sent</summary>
+<details><summary> Trace submission attempt to the Agent</summary>
 <p>
 
 ```shell
@@ -345,7 +342,7 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 </p>
 </details>
 
-<details><summary> Failed trace to sent</summary>
+<details><summary> Trace failed to sent to the Agent</summary>
 <p>
 
 ```shell
@@ -358,7 +355,7 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 {{% /tab %}}
 {{% tab "Node" %}}
 
-<details><summary>Issue sending traces to the Agent</summary>
+<details><summary>Issue sending trace to the Agent</summary>
 <p>
 
 ```json
@@ -394,18 +391,9 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 </p>
 </details>
 
-<details><summary>Debug log 2</summary>
-<p>
-
-```shell
-[dotnet] 19861: [info] *** JITCompilationStarted() replaced calls from System.Net.Http.HttpMessageInvoker.SendAsync() to System.Net.Http.HttpMessageHandler.SendAsync() <number> with calls to Datadog.Trace.ClrProfiler.Integrations.HttpMessageHandlerIntegration.HttpMessageHandler_SendAsync() <number>
-```
-
-</p>
-</details>
-
 {{% /tab %}}
 {{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
