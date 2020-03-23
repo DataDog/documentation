@@ -30,7 +30,7 @@ components:
     DashboardListAddItemsResponse:
       properties:
         added_dashboards_to_list:
-          description: List of dashboards added to the dashboard list
+          description: List of dashboards added to the dashboard list.
           items:
             $ref: '#/components/schemas/DashboardListItem'
           type: array
@@ -38,7 +38,7 @@ components:
     DashboardListDeleteItemsResponse:
       properties:
         deleted_dashboards_from_list:
-          description: List of dashboards deleted from the dashboard list
+          description: List of dashboards deleted from the dashboard list.
           items:
             $ref: '#/components/schemas/DashboardListItem'
           type: array
@@ -48,48 +48,48 @@ components:
         author:
           $ref: '#/components/schemas/Creator'
         created:
-          description: Date of creation of the dashboard
+          description: Date of creation of the dashboard.
           format: date-time
           readOnly: true
           type: string
         icon:
-          description: URL to the icon of the dashboard
+          description: URL to the icon of the dashboard.
           readOnly: true
           type: string
         id:
-          description: ID of the dashboard
+          description: ID of the dashboard.
           type: string
         is_favorite:
-          description: Whether or not the dashboard is in the favorites
+          description: Whether or not the dashboard is in the favorites.
           readOnly: true
           type: boolean
         is_read_only:
-          description: Whether or not the dashboard is read only
+          description: Whether or not the dashboard is read only.
           readOnly: true
           type: boolean
         is_shared:
-          description: Whether the dashboard is publicly shared or not
+          description: Whether the dashboard is publicly shared or not.
           readOnly: true
           type: boolean
         modified:
-          description: Date of last edition of the dashboard
+          description: Date of last edition of the dashboard.
           format: date-time
           readOnly: true
           type: string
         popularity:
-          description: Popularity of the dashboard
+          description: Popularity of the dashboard.
           format: int32
           maximum: 5
           readOnly: true
           type: integer
         title:
-          description: Title of the dashboard
+          description: Title of the dashboard.
           readOnly: true
           type: string
         type:
           $ref: '#/components/schemas/DashboardType'
         url:
-          description: URL path to the dashboard
+          description: URL path to the dashboard.
           readOnly: true
           type: string
       required:
@@ -152,7 +152,7 @@ paths:
       description: Delete dashboards from an existing dashboard list.
       operationId: DeleteDashboardListItems
       parameters:
-      - description: ID of the dashboard list to delete items from
+      - description: ID of the dashboard list to delete items from.
         in: path
         name: dashboard_list_id
         required: true
@@ -164,7 +164,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DashboardListItems'
-        description: Dashboards to delete from the dashboard list
+        description: Dashboards to delete from the dashboard list.
         required: true
       responses:
         '200':
@@ -191,7 +191,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Delete Items from a Dashboard List
+      summary: Delete items from a dashboard list
       tags:
       - DashboardLists
       x-codegen-request-body-name: body
@@ -199,7 +199,7 @@ paths:
       description: "Fetch the dashboard list\u2019s dashboard definitions."
       operationId: GetDashboardListItems
       parameters:
-      - description: ID of the dashboard list to get items from
+      - description: ID of the dashboard list to get items from.
         in: path
         name: dashboard_list_id
         required: true
@@ -232,7 +232,7 @@ paths:
       description: Add dashboards to an existing dashboard list.
       operationId: AddDashboardListItems
       parameters:
-      - description: ID of the dashboard list to add items to
+      - description: ID of the dashboard list to add items to.
         in: path
         name: dashboard_list_id
         required: true
@@ -244,7 +244,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DashboardListItems'
-        description: Dashboards to add to the dashboard list
+        description: Dashboards to add to the dashboard list.
         required: true
       responses:
         '200':
@@ -318,7 +318,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Update Items of a Dashboard List
+      summary: Update items of a dashboard list
       tags:
       - DashboardLists
       x-codegen-request-body-name: body
@@ -347,7 +347,9 @@ servers:
       description: The protocol for accessing the API.
 tags:
 - description: '[Interact with your dashboard lists](https://docs.datadoghq.com/monitors/downtimes)
+
     through the API to make it easier to organize, find, and share all of your dashboards
+
     with your team and organization.'
   name: DashboardLists
 x-group-parameters: true

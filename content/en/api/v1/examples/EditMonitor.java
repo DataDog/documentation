@@ -4,7 +4,7 @@ public class MonitorsApiExample {
 
     public static void main(String[] args) {
         MonitorsApi apiInstance = new MonitorsApi();
-        Long monitorId = 789; // Long | The id of the monitor
+        Long monitorId = 789; // Long | The id of the monitor.
         Monitor body = ; // Monitor | 
         try {
             Monitor result = apiInstance.editMonitor(monitorId, body);

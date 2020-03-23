@@ -4,7 +4,7 @@ public class OrgsApiExample {
 
     public static void main(String[] args) {
         OrgsApi apiInstance = new OrgsApi();
-        String publicId = abc123; // String | The public_id of the org you are operating with
+        String publicId = abc123; // String | The public_id of the org you are operating within.
         Org body = ; // Org | 
         try {
             OrgResponse result = apiInstance.updateOrg(publicId, body);

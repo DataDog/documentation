@@ -4,7 +4,7 @@ public class DowntimesApiExample {
 
     public static void main(String[] args) {
         DowntimesApi apiInstance = new DowntimesApi();
-        Long downtimeId = 123456; // Long | ID of the downtime to fetch
+        Long downtimeId = 123456; // Long | ID of the downtime to fetch.
         try {
             Downtime result = apiInstance.getDowntime(downtimeId);
             System.out.println(result);

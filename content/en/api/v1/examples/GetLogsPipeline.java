@@ -4,7 +4,7 @@ public class LogsPipelinesApiExample {
 
     public static void main(String[] args) {
         LogsPipelinesApi apiInstance = new LogsPipelinesApi();
-        String pipelineId = pipelineId_example; // String | ID of the pipeline to get
+        String pipelineId = pipelineId_example; // String | ID of the pipeline to get.
         try {
             LogsPipeline result = apiInstance.getLogsPipeline(pipelineId);
             System.out.println(result);
