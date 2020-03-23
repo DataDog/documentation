@@ -4,7 +4,7 @@ public class SyntheticsApiExample {
 
     public static void main(String[] args) {
         SyntheticsApi apiInstance = new SyntheticsApi();
-        String checkType = checkType_example; // String | api or browser to filter the list by type, undefined to get the unfiltered list
+        String checkType = checkType_example; // String | API or browser to filter the list by type, undefined to get the unfiltered list.
         try {
             SyntheticsGetAllTestsResponse result = apiInstance.getAllTests(checkType);
             System.out.println(result);

@@ -4,8 +4,8 @@ public class SyntheticsApiExample {
 
     public static void main(String[] args) {
         SyntheticsApi apiInstance = new SyntheticsApi();
-        String publicId = publicId_example; // String | The public id of the API test to which the target result belongs
-        String resultId = resultId_example; // String | The id of the result to get
+        String publicId = publicId_example; // String | The public id of the API test to which the target result belongs.
+        String resultId = resultId_example; // String | The id of the result to get.
         try {
             SyntheticsAPITestResultFull result = apiInstance.getAPITestResult(publicId, resultId);
             System.out.println(result);

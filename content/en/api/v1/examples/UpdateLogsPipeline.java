@@ -4,7 +4,7 @@ public class LogsPipelinesApiExample {
 
     public static void main(String[] args) {
         LogsPipelinesApi apiInstance = new LogsPipelinesApi();
-        String pipelineId = pipelineId_example; // String | ID of the pipeline to delete
+        String pipelineId = pipelineId_example; // String | ID of the pipeline to delete.
         LogsPipeline body = ; // LogsPipeline | 
         try {
             LogsPipeline result = apiInstance.updateLogsPipeline(pipelineId, body);

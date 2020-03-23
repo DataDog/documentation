@@ -4,7 +4,7 @@ public class KeysApiExample {
 
     public static void main(String[] args) {
         KeysApi apiInstance = new KeysApi();
-        String key = key_example; // String | The specific API key you are working with
+        String key = key_example; // String | The specific API key you are working with.
         ApiKey body = ; // ApiKey | 
         try {
             ApiKeyResponse result = apiInstance.editAPIKey(key, body);

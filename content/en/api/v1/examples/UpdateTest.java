@@ -4,7 +4,7 @@ public class SyntheticsApiExample {
 
     public static void main(String[] args) {
         SyntheticsApi apiInstance = new SyntheticsApi();
-        String publicId = publicId_example; // String | The public id of the test to get details from
+        String publicId = publicId_example; // String | The public id of the test to get details from.
         SyntheticsTestDetails body = ; // SyntheticsTestDetails | 
         try {
             SyntheticsTestDetails result = apiInstance.updateTest(publicId, body);
