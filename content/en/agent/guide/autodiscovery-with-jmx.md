@@ -71,17 +71,17 @@ The Datadog-Kafka integration example below leverages JMX to collect metrics and
 
 1. Get the configuration files `conf.yaml` and `metrics.yaml` associated to the Datadog-Kafka integration. They can be found in your [integrations configuration directory][1]. Find below the list of JMX based integration with their associated files:
 
-    | Integration             | Metrics file       | Configuration file      |
-    |-------------------------|--------------------|-------------------------|
-    | [ActiveMq][2]           | [metrics.yaml][3]  | [conf.yaml.example][4]  |
-    | [Cassandra][5]          | [metrics.yaml][6]  | [conf.yaml.example][7]  |
-    | [Confluent Platform][5] | [metrics.yaml][29] | [conf.yaml.example][30]  |
-    | [Hive][8]               | [metrics.yaml][9]  | [conf.yaml.example][10] |
-    | [Jboss Wildfly][11]     | [metrics.yaml][12] | [conf.yaml.example][13] |
-    | [Kafka][14]             | [metrics.yaml][15] | [conf.yaml.example][16] |
-    | [Solr][17]              | [metrics.yaml][18] | [conf.yaml.example][19] |
-    | [Presto][20]            | [metrics.yaml][21] | [conf.yaml.example][22] |
-    | [Tomcat][23]            | [metrics.yaml][24] | [conf.yaml.example][25] |
+    | Integration              | Metrics file       | Configuration file      |
+    |--------------------------|--------------------|-------------------------|
+    | [ActiveMq][2]            | [metrics.yaml][3]  | [conf.yaml.example][4]  |
+    | [Cassandra][5]           | [metrics.yaml][6]  | [conf.yaml.example][7]  |
+    | [Confluent Platform][29] | [metrics.yaml][30] | [conf.yaml.example][31] |
+    | [Hive][8]                | [metrics.yaml][9]  | [conf.yaml.example][10] |
+    | [Jboss Wildfly][11]      | [metrics.yaml][12] | [conf.yaml.example][13] |
+    | [Kafka][14]              | [metrics.yaml][15] | [conf.yaml.example][16] |
+    | [Solr][17]               | [metrics.yaml][18] | [conf.yaml.example][19] |
+    | [Presto][20]             | [metrics.yaml][21] | [conf.yaml.example][22] |
+    | [Tomcat][23]             | [metrics.yaml][24] | [conf.yaml.example][25] |
 
 2. Rename `conf.yaml.example` into `conf.yaml`.
 3. Replace the parameter values from `conf.yaml` to fit the Agent Autodiscovery logic:
@@ -156,8 +156,9 @@ The Datadog-Kafka integration example below leverages JMX to collect metrics and
 [26]: /agent/autodiscovery/template_variables
 [27]: https://docs.datadoghq.com/agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
 [28]: /agent/autodiscovery/?tab=containerizedagent#docker-autodiscovery
-[29]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/metrics.yaml
-[30]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/conf.yaml.example
+[29]: /integrations/confluent_platform
+[30]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/metrics.yaml
+[31]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/conf.yaml.example
 {{% /tab %}}
 {{< /tabs >}}
 
