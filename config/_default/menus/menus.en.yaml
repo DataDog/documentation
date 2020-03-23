@@ -1656,12 +1656,12 @@ api_v1:
   - name: Unmute a host
     parent: Hosts
     url: unmute-a-host
-  - name: Search for hosts
+  - name: Get all hosts for your organization
     parent: Hosts
-    url: search-for-hosts
-  - name: Host totals
+    url: get-all-hosts-for-your-organization
+  - name: Get the total number of active hosts
     parent: Hosts
-    url: host-totals
+    url: get-the-total-number-of-active-hosts
   - name: IP Ranges
     url: /api/v1/ip-ranges/
     identifier: IP Ranges
@@ -1680,9 +1680,9 @@ api_v1:
   - name: Delete an API key
     parent: Keys
     url: delete-an-api-key
-  - name: Get an API key
+  - name: Get API key
     parent: Keys
-    url: get-an-api-key
+    url: get-api-key
   - name: Edit an API key
     parent: Keys
     url: edit-an-api-key
@@ -1713,19 +1713,19 @@ api_v1:
   - name: Logs Indexes
     url: /api/v1/logs-indexes/
     identifier: Logs Indexes
-  - name: Get Indexes Order
+  - name: Get indexes order
     parent: Logs Indexes
     url: get-indexes-order
-  - name: Update Indexes Order
+  - name: Update indexes order
     parent: Logs Indexes
     url: update-indexes-order
-  - name: Get all Indexes
+  - name: Get all indexes
     parent: Logs Indexes
     url: get-all-indexes
   - name: Get an index
     parent: Logs Indexes
     url: get-an-index
-  - name: Update an Index
+  - name: Update an index
     parent: Logs Indexes
     url: update-an-index
   - name: Logs Pipelines
@@ -1740,16 +1740,16 @@ api_v1:
   - name: Get all Pipeline
     parent: Logs Pipelines
     url: get-all-pipeline
-  - name: Create a Pipeline
+  - name: Create a pipeline
     parent: Logs Pipelines
     url: create-a-pipeline
-  - name: Delete a Pipeline
+  - name: Delete a pipeline
     parent: Logs Pipelines
     url: delete-a-pipeline
-  - name: Get a Pipeline
+  - name: Get a pipeline
     parent: Logs Pipelines
     url: get-a-pipeline
-  - name: Update a Pipeline
+  - name: Update a pipeline
     parent: Logs Pipelines
     url: update-a-pipeline
   - name: Metrics
@@ -1794,18 +1794,33 @@ api_v1:
   - name: Edit a monitor
     parent: Monitors
     url: edit-a-monitor
+  - name: Mute a monitor
+    parent: Monitors
+    url: mute-a-monitor
+  - name: Unmute a monitor
+    parent: Monitors
+    url: unmute-a-monitor
+  - name: Resolve Monitor
+    parent: Monitors
+    url: resolve-monitor
+  - name: Mute all monitors
+    parent: Monitors
+    url: mute-all-monitors
+  - name: Unmute all monitors
+    parent: Monitors
+    url: unmute-all-monitors
   - name: Orgs
     url: /api/v1/orgs/
     identifier: Orgs
-  - name: Get organization
+  - name: Get organization information
     parent: Orgs
-    url: get-organization
-  - name: Create child-organization
+    url: get-organization-information
+  - name: Create a child organization
     parent: Orgs
-    url: create-child-organization
-  - name: Update organization
+    url: create-a-child-organization
+  - name: Update your organization
     parent: Orgs
-    url: update-organization
+    url: update-your-organization
   - name: Upload IdP metadata
     parent: Orgs
     url: upload-idp-metadata
@@ -1969,7 +1984,7 @@ api_v2:
   - name: DashboardLists
     url: /api/v2/dashboardlists/
     identifier: DashboardLists
-  - name: Delete Items from a Dashboard List
+  - name: Delete items from a dashboard list
     parent: DashboardLists
     url: delete-items-from-a-dashboard-list
   - name: Get a Dashboard List
@@ -1978,6 +1993,6 @@ api_v2:
   - name: Add Items to a Dashboard List
     parent: DashboardLists
     url: add-items-to-a-dashboard-list
-  - name: Update Items of a Dashboard List
+  - name: Update items of a dashboard list
     parent: DashboardLists
     url: update-items-of-a-dashboard-list
