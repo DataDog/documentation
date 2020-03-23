@@ -4,7 +4,7 @@ public class SLOApiExample {
 
     public static void main(String[] args) {
         SLOApi apiInstance = new SLOApi();
-        String sloId = sloId_example; // String | The ID of the service level objective object
+        String sloId = sloId_example; // String | The ID of the service level objective object.
         try {
             ServiceLevelObjectiveResponse result = apiInstance.getSLO(sloId);
             System.out.println(result);

@@ -4,7 +4,7 @@ public class MetricsApiExample {
 
     public static void main(String[] args) {
         MetricsApi apiInstance = new MetricsApi();
-        String metricName = metricName_example; // String | Name of the metric for which to edit metadata
+        String metricName = metricName_example; // String | Name of the metric for which to edit metadata.
         MetricMetadata body = ; // MetricMetadata | 
         try {
             MetricMetadata result = apiInstance.editMetricMetadata(metricName, body);

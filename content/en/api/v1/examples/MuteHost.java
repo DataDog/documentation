@@ -4,7 +4,7 @@ public class HostsApiExample {
 
     public static void main(String[] args) {
         HostsApi apiInstance = new HostsApi();
-        String hostName = hostName_example; // String | Name of the host to mute
+        String hostName = hostName_example; // String | Name of the host to mute.
         HostMuteSettings body = ; // HostMuteSettings | 
         try {
             HostMuteResponse result = apiInstance.muteHost(hostName, body);

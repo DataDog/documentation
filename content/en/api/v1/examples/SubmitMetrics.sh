@@ -1,1 +1,1 @@
-curl -X  "https://api.datadoghq.com/api/v1/series"
+curl -X POST "https://api.datadoghq.com/api/v1/series"

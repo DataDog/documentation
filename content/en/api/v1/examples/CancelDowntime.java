@@ -4,7 +4,7 @@ public class DowntimesApiExample {
 
     public static void main(String[] args) {
         DowntimesApi apiInstance = new DowntimesApi();
-        Long downtimeId = 123456; // Long | ID of the downtime to cancel
+        Long downtimeId = 123456; // Long | ID of the downtime to cancel.
         try {
             apiInstance.cancelDowntime(downtimeId);
         } catch (ApiException e) {
