@@ -1,13 +1,13 @@
 ---
-title: Get a Webhooks Integration
+title: Get a Webhook for Webhook Integration
 type: apicontent
 order: 21.1
-external_redirect: /api/#get-a-webhooks-integration
+external_redirect: /api/#get-a-webhook-for-webhooks-integration
 ---
 
-## Get a Webhooks Integration
+## Get a Webhook for Webhook Integration
 
-Get all Datadog-Webhooks integration information.
+Gets the content of the webhook with the name `<WEBHOOK_NAME>`.
 
 **ARGUMENTS**:
 

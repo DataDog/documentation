@@ -1,13 +1,13 @@
 ---
-title: Create a Webhooks Integration
+title: Create a Webhook for Webhooks Integration
 type: apicode
 order: 21.2
-external_redirect: /api/#create-a-webhooks-integration
+external_redirect: /api/#create-a-webhook-for-webhooks-integration
 ---
 
 **SIGNATURE**:
 
-`POST /v1/integration/webhooks`
+`POST api/v1/integration/webhooks/configuration/webhooks/`
 
 **EXAMPLE REQUEST**:
 
