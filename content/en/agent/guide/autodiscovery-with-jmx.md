@@ -75,8 +75,8 @@ The Datadog-Kafka integration example below leverages JMX to collect metrics and
     |--------------------------|--------------------|-------------------------|
     | [ActiveMq][2]            | [metrics.yaml][3]  | [conf.yaml.example][4]  |
     | [Cassandra][5]           | [metrics.yaml][6]  | [conf.yaml.example][7]  |
-    | [Confluent Platform][8] | [metrics.yaml][9] | [conf.yaml.example][10] |
-    | [Hive][11]                | [metrics.yaml][12]  | [conf.yaml.example][13] |
+    | [Confluent Platform][8]  | [metrics.yaml][9]  | [conf.yaml.example][10] |
+    | [Hive][11]               | [metrics.yaml][12] | [conf.yaml.example][13] |
     | [Jboss Wildfly][14]      | [metrics.yaml][15] | [conf.yaml.example][16] |
     | [Kafka][17]              | [metrics.yaml][18] | [conf.yaml.example][19] |
     | [Solr][20]               | [metrics.yaml][21] | [conf.yaml.example][22] |
