@@ -17,6 +17,7 @@
     "build:webpack": "NODE_ENV=production webpack --config webpack.prod.js",
     "build:webpack:preview": "NODE_ENV=preview webpack --config webpack.prod.js",
     "build:apiPages": "node ./src/scripts/build-api-pages.js",
+    "dereference": "node ./src/scripts/dereference.js",
     "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true"
   },
   "repository": {
@@ -33,6 +34,7 @@
     "node": ">= 10.0.0"
   },
   "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^8.0.0",
     "@babel/polyfill": "^7.4.4",
     "@datadog/browser-logs": "^1.2.6",
     "@datadog/browser-rum": "^1.2.6",
