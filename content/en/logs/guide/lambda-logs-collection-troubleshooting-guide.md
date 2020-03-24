@@ -74,7 +74,7 @@ You can see if there are [automatic triggers][1] set up for your Lambda function
 1. Navigate to the [Cloudwatch console][2].
 2. Click **Log Groups** in the left sidebar here you will see a list of Log Groups. There is a **subscriptions** column on the right that shows what resources (if any) are currently subscribed to the log source.
 
-{{< img src="logs/guide/log-group-subcriptions-example.png" alt="Log Group subcriptions example"  style="width:80%;" >}}
+{{< img src="logs/guide/log-group-subscriptions-example.png" alt="Log Group subcriptions example"  style="width:80%;" >}}
 
 3. If your Lambda function isn't listed as the subscriber for the Log Group you want to monitor, redo the steps from the [automatic trigger setup documentation][1].
 4. If the Log Group you want to monitor already has a different resource subscribed to it, see [Check for conflicting subscriptions](#check-for-conflicting-subscriptions) below.
