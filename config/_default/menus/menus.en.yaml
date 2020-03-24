@@ -222,6 +222,11 @@ main:
     parent: "agent_docker"
     identifier: "agent_docker_prometheus"
     weight: 204
+  - name: "Data Collected"
+    url: "agent/docker/data_collected/"
+    parent: "agent_docker"
+    identifier: "agent_docker_data_collected"
+    weight: 205
 
   ## AGENT - Kubernetes
 

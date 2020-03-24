@@ -1,6 +1,5 @@
 # Hugo
 public/
-data/integrations/
 data/service_checks/
 integrations_data
 
@@ -23,6 +22,8 @@ package-lock.json
 
 # Ignoring all integrations file
 content/en/integrations/*.md
+data/integrations/
+!data/integrations/docker_daemon.yaml
 !content/en/integrations/_index.md
 !content/en/integrations/cloudability.md
 !content/en/integrations/cloudcheckr.md
