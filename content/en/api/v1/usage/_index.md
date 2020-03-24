@@ -1,4 +1,3 @@
 ---
 title: Usage
-type: api
 ---

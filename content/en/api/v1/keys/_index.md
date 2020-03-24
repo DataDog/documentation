@@ -1,4 +1,3 @@
 ---
 title: Keys
-type: api
 ---

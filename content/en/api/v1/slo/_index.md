@@ -1,4 +1,3 @@
 ---
 title: SLO
-type: api
 ---
