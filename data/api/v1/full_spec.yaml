@@ -4182,9 +4182,8 @@ components:
           description: 'A unique identifier for the service level objective object.
 
 
-            Always included in service level objective responses. Required for update
-
-            requests.'
+            Always included in service level objective responses.'
+          readOnly: true
           type: string
         modified_at:
           description: 'Modification timestamp (unix time in seconds)
