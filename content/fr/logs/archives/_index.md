@@ -85,6 +85,26 @@ Pour ajouter le chiffrement côté serveur (SSE) à vos archives de logs S3, acc
 [6]: https://app.datadoghq.com/logs/pipelines/archives
 {{% /tab %}}
 
+{{% tab "Stockage Azure" %}}
+
+1. Accédez à votre [portail Azure][1] et [créez un compte de stockage][2] vers lequel vous souhaitez envoyer vos archives. Attribuez un nom à votre compte, choisissez n'importe quel type de compte, puis sélectionnez le niveau d'accès **hot**.
+2. Si vous ne l'avez pas encore fait, configurez l'[intégration Azure][3] pour l'abonnement de votre compte de stockage. Vous devrez [créer une inscription d'application utilisable par Datadog][4] afin de procéder à l'intégration.
+3. Accordez ensuite à votre application Datadog les autorisations suffisantes pour écrire dans votre compte de stockage et le réintégrer. Sélectionnez votre compte de stockage depuis la [page Storage Accounts][1], accédez à **Access Control (IAM)** et sélectionnez **Add -> Add Role Assignment**. Saisissez le rôle **Storage Blob Data Contributor**, sélectionnez l'app Datadog que vous avez créée pour l'intégration Azure, puis enregistrez.
+  {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Ajoutez le rôle Storage Blob Data Contributor à votre application Datadog." style="width:75%;">}}
+4. Accédez à la [page Archives dans Datadog][5], puis sélectionnez l'option **Add a new archive** en bas de la page. Seuls les utilisateurs de Datadog bénéficiant des droits administrateur peuvent effectuer cette étape ainsi que la suivante.
+5. Sélectionnez le type d'archive **Azure Storage**, ainsi que le locataire et le client pour l'app Datadog disposant du rôle Storage Blob Data Contributor sur votre compte de stockage. Indiquez le nom de votre compte de stockage et un nom de conteneur pour votre archive.
+6. **Facultatif** : indiquez un répertoire comme préfixe vers lequel l'ensemble de vos archives de log seront envoyées.
+7. Enregistrez votre archive.
+
+  {{< img src="logs/archives/logs_azure_archive_configs.png" alt="Définir les données de votre compte de stockage Azure dans Datadog"  style="width:75%;">}}
+
+[1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
+[2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
+[3]: https://app.datadoghq.com/account/settings#integrations/azure
+[4]: /fr/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
+[5]: https://app.datadoghq.com/logs/pipelines/archives
+{{% /tab %}}
+
 {{% tab "Google Cloud Storage" %}}
 
 1. Accédez à votre [compte GCP][1] et [créez un compartiment GCS][2] vers lequel vos archives seront envoyées. Sous « Choose how to control access to objects », sélectionnez « Set object-level and bucket-level permissions ».
@@ -94,7 +114,7 @@ Pour ajouter le chiffrement côté serveur (SSE) à vos archives de logs S3, acc
 4. Accédez à la [page Archives][7] dans Datadog et sélectionnez l'option **Add a new archive** en bas de la page. Seuls les utilisateurs de Datadog bénéficiant des droits d'administrateur peuvent effectuer cette étape ainsi que la suivante.
 5. Sélectionnez le type d'archive GCS, puis le compte de service GCS doté des autorisations d'écriture dans votre compartiment de stockage. Saisissez le nom de votre compartiment. Vous avez la possibilité d'ajouter un répertoire comme préfixe vers lequel l'ensemble de vos archives de logs seront envoyées. Enregistrez ensuite votre archive.
 
-  {{< img src="logs/archives/archive_select_gcs.png" alt="Ajouter le rôle Storage Object Creator à votre compte de service GCP Datadog" style="width:75%;">}}
+  {{< img src="logs/archives/archive_select_gcs.png" alt="Définir les données de votre compartiment GCP dans Datadog"  style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
@@ -108,7 +128,7 @@ Pour ajouter le chiffrement côté serveur (SSE) à vos archives de logs S3, acc
 
 Dès que vos paramètres d'archivage ont été correctement configurés sur votre compte Datadog, vos pipelines de traitement commencent à enrichir tous les logs ingérés par Datadog. Ceux-ci sont ensuite transmis à votre archive.
 
-Une fois vos paramètres d'archivage créés ou modifiés, il est parfois nécessaire d'attendre quelques minutes avant la prochaine tentative d'importation des archives. Par conséquent, **attendez 15 minutes** avant de vérifier que les archives sont bien importées vers votre compartiment de stockage depuis votre compte Datadog.
+Une fois vos paramètres d'archivage créés ou modifiés, il est parfois nécessaire d'attendre quelques minutes avant la prochaine tentative d'importation des archives. Les logs sont importés vers l'archive toutes les 15 minutes. Par conséquent, **attendez jusqu'à 15 minutes** avant de vérifier que les archives sont bien importées vers votre compartiment de stockage depuis votre compte Datadog.
 
 ## Format des archives
 
