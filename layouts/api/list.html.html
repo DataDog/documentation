@@ -1,0 +1,210 @@
+{{ define "api-main" }}
+
+    layouts/api/list.html.html
+
+    {{ $dot := . }}
+
+    {{ .Scratch.Set "apiVersion" "v1"}}
+
+    {{ if in .Permalink "api/v2" }}
+        {{ .Scratch.Set "apiVersion" "v2"}}
+    {{ end }}
+
+    {{ $apiVersion := .Scratch.Get "apiVersion"}}
+
+    {{ $d := index $dot.Site.Data.api $apiVersion "full_spec_deref" }}
+
+    {{ $schemaJson := getJSON "./data/api/v1/full_spec_deref.json" }}
+
+    {{ $snipdir := print "content/en/api/" $apiVersion "/examples/" }}
+
+    {{- $files := readDir $snipdir -}}
+
+    {{ range $k, $v := (index $d "tags") }}
+        {{ if eq $.Params.title $v.name }}
+
+            {{ $.Scratch.Set "tagObject" (slice)}}
+
+            {{/* build an array of objects for each path, group by tag name */}}
+            {{ range $path_key, $path_object := $d.paths }}
+                {{ range $action_type, $action := $path_object }}
+                    {{ if in $action.tags $v.name }}
+
+                        {{ $.Scratch.Add "tagObject" (dict "pathObject" $path_object "pathKey" $path_key "actionType" $action_type "action" $action ) }}
+
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+
+            {{ $tagObject := $.Scratch.Get "tagObject"  }}
+            
+            {{/* sort by action summary */}}
+            {{ range sort $tagObject ".action.summary" "asc"  }}
+                {{ $context := .}}
+                <div class="row">
+                    <div class="col-7">
+                     
+                        <h2 class="mb-2" id="{{ .action.summary | urlize }}">
+                                {{- .action.summary -}}
+                                <a href="#{{ .action.summary | urlize }}">#</a>
+                            </h2>
+                        <p><span class="text-uppercase font-semibold">{{ .actionType }}</span>&nbsp; &nbsp;<span>{{.pathKey}}</span></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-9">
+                        <h3>Overview</h3>
+                        <p>{{.action.description | markdownify }}</p>
+                        {{ if .action.parameters }}
+                            <h3>Arguments</h3>
+                            <ul>
+                                {{ range .action.parameters }}
+                                    <li><code>{{ .name }}</code>[<em>{{ cond (eq .required false) "optional" "required" }}</em>]&nbsp;{{ .description | markdownify }}</li>
+                                {{ end }}
+                            </ul>
+                        {{ end }}
+
+                        <h3>Request</h3>
+
+                        {{ if .action.requestBody }}
+                            
+                            <h4>Body Data <span class='text-lowercase'>{{ cond (eq .action.requestBody.required true) "(required)" "" }}</span></h4>
+
+                            <p>{{ .action.requestBody.description | markdownify }}</p>
+
+                            {{ if .action.requestBody }}
+                                {{ range $content := .action.requestBody.content }}
+                                    {{ range $schema := $content }}
+
+                                        {{/* $mapData := partial "api/openapi-map.html" (dict "context" $dot "ref" $schema) */}}
+                                        {{ if $schema }}
+
+
+                                            {{/* $ref := (index $schema "$ref") }}
+                                            {{ $refkey := replace $ref "#/components/schemas/" "" }}
+                                            {{ if $refkey }}
+                                                {{ $schema := index $d.components.schemas $refkey }}
+                                                {{ partial "api/schema-table.html" (dict "context" $dot "schema" $schema)}}
+                                            {{ else */}}
+                                            {{ partial "api/schema-table.html" (dict "context" $dot "schema" $schema)}}
+
+                                            
+
+                                                        {{/* range $key, $value := $schema.properties }}
+                                                            {{ $requredElem := cond (eq .required true) "<sup class='text-danger'>*</sup>" ""}}
+
+                                                            <tr class="top-level-row">
+                                                                <!-- <th scope="row">1</th> -->
+                                                                <td>{{ $requredElem | safeHTML }}{{ $key }}</td>
+                                                                <td>{{ $value.type }}</td>
+                                                                <td>{{ $value.description | markdownify }}</td>
+                                                            </tr>
+
+                                                            {{ with $value.properties }}
+                                                            
+                                                                {{ range $key, $value := . }}
+                                                                    {{ $requredElem := cond (eq .required true) "<sup class='text-danger'>*</sup>" ""}}
+                                            
+                                                                    <tr class="sub-level-row">
+                                                                        <!-- <th scope="row">1</th> -->
+                                                                        <td>{{ $requredElem | safeHTML }}{{ $key }}</td>
+                                                                        <td>{{ .type }}</td>
+                                                                        <td>{{ .description | markdownify }}</td>
+                                                                    </tr>
+                                                                    
+                                                                {{ end }}
+                                                            
+
+                                                            {{ end }}
+
+                                                            
+                                                        {{ end */}}
+                                              
+                                        
+                                        {{ end }}
+                                    {{ end }}
+                                {{ end }}
+                            {{ end }}    
+                        {{ end }}
+
+                        {{/* if .action.parameters }}
+                            {{ partial "api/schema-table.html" (dict "context" $dot "schema" .action)}}
+                            
+
+                        {{ end */}}
+
+                        <h3>Response</h3>
+
+                        <ul class="nav nav-tabs border-none" role="tablist" style="z-index: 10;">
+                            {{ range $response_code, $response := .action.responses }}
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1 mr-1 btn btn-sm-tag btn-outline-secondary {{ if eq $response_code "200"}}active{{end}}"  href="#{{ $context.action.operationId }}-{{ $response_code }}" role="tab" data-toggle="tab">{{ $response_code }}</a>
+                                </li>
+                            
+                            {{ end }}
+                        </ul>
+
+                        <div class="tab-content">
+                            {{ range $response_code, $response := .action.responses }}
+                            <div role="tabpanel" class="tab-pane {{ if eq $response_code "200"}} active {{end}}" id="{{ $context.action.operationId }}-{{ $response_code }}">
+                                {{ range $content := $response.content }}
+                                    {{ range $schema := $content }}
+                                        
+                                        <ul class="nav nav-tabs border-none" role="tablist" style="z-index: 10;">
+                                            <li class="nav-item">
+                                                <a class="nav-link mb-1 mr-1 btn btn-sm-tag btn-outline-secondary active js-model-link" href="#{{ $context.action.operationId }}-{{ $response_code }}-model" role="tab" data-toggle="tab">Model</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link mb-1 mr-1 btn btn-sm-tag btn-outline-secondary js-example-link" href="#{{ $context.action.operationId }}-{{ $response_code }}-example" role="tab" data-toggle="tab">Example</a>
+                                            </li>
+                
+                                        </ul>
+                                        <div class="tab-content mb-3">
+                                            <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-{{ $response_code }}-model">
+                                               
+                                                <p>{{ $schema.description }}</p>
+                                                {{ if $schema }}
+                                                {{ partial "api/schema-table.html" (dict "context" $dot "schema" $schema)}}
+                                                {{ end}}
+                                          
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-{{ $response_code }}-example">
+                                                                         
+                                                {{ highlight ($schema | jsonify) "json" "" }}
+                                            
+                                            </div>
+                                        </div>
+                                    {{ end }}
+                                {{ end }}
+                            </div>
+                            {{ end }}
+                        </div>
+                    
+                        <h3>Code Example</h3>
+                        {{ range $files }}
+
+                            {{ $file := (print $snipdir (.Name))}}
+                            {{ if and (fileExists $file) (not (in $file "openapi-generator" ))  }}
+                                {{ $file_content := readFile $file }}
+                                {{ $file_basename := (index (split .Name ".") 0) }}
+                                {{ $file_extension := index (split (path.Ext $file) ".") 1 }}
+
+                                {{ if eq $context.action.operationId $file_basename }}
+                                    {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+
+                                    <div class="{{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} js-code-block code-block-{{ $lang.pygments_name }}">{{ highlight $file_content $lang.pygments_name "" }}</div>
+                            
+                                {{ end }}
+                            {{ end }}
+                        {{ end }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <hr/>
+                    </div>
+                </div>
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}

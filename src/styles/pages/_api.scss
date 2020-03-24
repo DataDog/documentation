@@ -42,6 +42,19 @@ $ddpurple: #632ca6;
             border-bottom: 1px solid $ddpurple;
         }
     }
+
+    .nested >td {
+        padding-left: 20px;
+    }
+    .has-nested ~ .nested > td {
+        padding-left: 20px;
+    }
+    .has-nested.nested > td {
+        padding-left: 40px;
+    }
+    // .has-nested.nested ~ .nested > td {
+    //     padding-left: 60px;
+    // }
 }
 
 .api {

@@ -61,6 +61,7 @@
     "pa11y": "^5.2.0",
     "picturefill": "3.0.2",
     "popper.js": "1.15.0",
+    "safe-json-stringify": "^1.2.0",
     "slugify": "^1.4.0",
     "stickyfilljs": "2.1.0",
     "tiny-async-pool": "^1.0.4",

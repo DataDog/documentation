@@ -1,0 +1,18 @@
+{{ $schema := .schema }}
+
+
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Field</th>
+        <th scope="col">Type</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        {{ partial "api/table-row-recursive.html" (dict "context" .context "schema" $schema "isNested" false) }}
+    </tbody>
+  </table>
+</div>

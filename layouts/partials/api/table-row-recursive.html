@@ -1,0 +1,61 @@
+{{ $dot := .}}
+
+{{ $d := .context.Site.Data.api.v1.full_spec_deref }}
+
+
+
+    {{ range $key, $value := .schema.properties }}
+
+        
+
+        {{ $hasNested := false}}
+            
+        {{ if or ($value.properties) ($value.items)}}
+            {{ $hasNested = true}}
+        {{ end }}
+        
+
+        <tr class="{{ if eq $hasNested true }}has-nested{{ end }} {{if eq $dot.isNested true}}nested d-none{{end}}">
+            
+            <td>{{ if eq $hasNested true }}<span style="cursor: pointer; font-size: 18px">> &nbsp;</span>{{ end }}{{ $key }}</td>
+            <td>{{ $value.type }}</td>
+            <td>{{ $value.description | markdownify }}</td>
+        </tr>
+
+        {{ if $value.properties}}
+            {{ partial "api/table-row-recursive"  (dict "schema" $value "isNested" true) }}
+        {{ end }}
+
+        {{ if $value.items }}
+            {{ partial "api/table-row-recursive"  (dict "schema" $value "isNested" true) }}
+        {{ end }}
+
+
+    {{ end }}
+
+
+
+{{/* range $key, $value := .schema.properties }}
+
+    {{ $hasNested := false}}
+        
+    {{ if or ($value.properties) ($value.items)}}
+        {{ $hasNested = true}}
+    {{ end }}
+
+    <tr class="{{ if eq $hasNested true }}has-nested{{ end }} {{if eq $dot.isNested true}}nested d-none{{end}}">
+        
+        <td>{{ if eq $hasNested true }}<span style="cursor: pointer; font-size: 18px">> &nbsp;</span>{{ end }}{{ $key }}</td>
+        <td>{{ $value.type }}</td>
+        <td>{{ $value.description }}</td>
+    </tr>
+
+    {{ if $value.properties}}
+        {{ partial "api/table-row-recursive"  (dict "schema" $value "isNested" true) }}
+    {{ end }}
+
+    {{ if $value.items }}
+        {{ partial "api/table-row-recursive"  (dict "schema" $value.items "isNested" true) }}
+    {{ end }}
+
+{{ end */}}

@@ -28,8 +28,7 @@ function updateApiSideNav(apiYaml, apiVersion) {
         });
 
         const indexFrontMatter = {
-            title: tags.name,
-            type: 'api'
+            title: tags.name
         };
 
         fs.mkdirSync(`./content/en/api/${apiVersion}/${newDirName}`, {

@@ -58,3 +58,9 @@ $('.js-example-link').click(function (){
     $(this).closest('.tab-content').find('.js-tab-model').removeClass('active');
     $(this).closest('.tab-content').find('.js-tab-example').addClass('active');
 })
+
+$('.has-nested span').click(function(){
+    $(this).closest('tr').nextUntil('tr.has-nested').toggleClass('d-none');
+    $(this).closest('tr').nextUntil('tr.has-nested').next('tr.has-nested.nested').toggleClass('d-none');
+    // $(this).closest('tr').nextUntil('tr.has-nested.nested').toggleClass('d-none')
+})
