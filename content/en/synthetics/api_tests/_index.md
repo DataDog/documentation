@@ -41,7 +41,7 @@ Define the request you want to be executed by Datadog:
 2. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
     * Advanced Options (optional): Use custom request headers, authentication credentials, body content, or cookies.
         * Follow redirects: Toggle to have the monitored endpoint follow up to ten redirects.
-        * Allow insecure certificates: Toggle to have your HTTP test go on with connection even if there is an error when validating the certificate. 
+        * Allow insecure certificates: Toggle to have your HTTP test go on with connection even if there is an error when validating the certificate.
         * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
         * Authentication: HTTP basic authentication with username and password
         * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`)
@@ -115,6 +115,9 @@ When running an API test, you must define at least one assertion that should be 
 | Response time | `lessThan`                                                                      | _Integer (ms)_             |
 | Headers       | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
 | Body          | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` | _String_ <br> _[Regex][1]_ |
+
+
+**Note**: The body content retrieved is limited to a maximum size of 50 kilobyte, bigger body gets truncated at 50 kilobyte.
 
 If you click on **Test URL**, then the basic assertions are automatically filled:
 
