@@ -84,7 +84,7 @@ Les intégrations bêta sont désactivées par défaut, mais peuvent être activ
 | Servlet Java compatible | 2.3+, 3.0+ | Prise en charge complète | `servlet`, `servlet-2`, `servlet-3`            |
 | Annotations Jax-RS      | JSR311-API | Prise en charge complète | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
 | Jetty (hors servlet)     | 8+         | [Bêta][8]       | `jetty`, `jetty-8`                             |
-| Netty HTTP Server       | 4.0+       | Prise en charge complète | `netty`, `netty-4.0`, `netty-4.1`              |
+| Netty HTTP Server       | 3.8+       | Prise en charge complète | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
 | Play                    | 2.4-2.7    | Prise en charge complète | `play`                                         |
 | Ratpack                 | 1.4+       | Prise en charge complète | `ratpack`                                      |
 | Spark Java              | 2.3+       | [Bêta][8]       | `sparkjava` (nécessite `jetty`)                 |
