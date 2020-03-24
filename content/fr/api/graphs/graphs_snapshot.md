@@ -16,11 +16,11 @@ external_redirect: '/api/#snapshot-de-graphique'
     le timestamp POSIX de début de la requête.
 * **`end`** [*obligatoire*] :
     le timestamp POSIX de fin de la requête.
-* **`event_query`** [*facultatif*, *défaut*=**None**] :
+* **`event_query`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     une requête qui ajoute des lignes d'événements au graphique.
-* **`graph_def`** [*facultatif*, *défaut*=**None**] :
+* **`graph_def`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     un document JSON définissant le graphique. `graph_def` peut être utilisé à la place de `metric_query`. Le document JSON utilise la [grammaire définie ici][2] et doit être formaté sur une seule ligne. L'encodage URL convertit ensuite le contenu du document de façon à pouvoir le transmettre en ligne.
-* **`title`** [*facultatif*, *défaut*=**None**] :
+* **`title`** [*facultatif*, *valeur par défaut*=**Aucune**] :
     le titre du graphique. Si aucun titre n'est spécifié, le graphique n'a pas de titre.
 
 [1]: http://andreafalzetti.github.io/blog/2017/04/17/datadog-png-snapshot-not-showing.html

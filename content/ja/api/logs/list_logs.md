@@ -40,5 +40,5 @@ external_redirect: '/api/#list-logs'
     マルチインデックスのオーガニゼーションの場合に、リクエストが実行されるログインデックス。
 
 [1]: /ja/logs/guide/collect-multiple-logs-with-pagination
-[2]: https://docs.datadoghq.com/ja/logs/archives
-[3]: https://docs.datadoghq.com/ja/logs/explorer/search/#search-syntax
+[2]: /ja/logs/archives
+[3]: /ja/logs/explorer/search/#search-syntax

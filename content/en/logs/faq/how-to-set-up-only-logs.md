@@ -116,6 +116,10 @@ spec:
           ## Set DD_SITE to "datadoghq.eu" to send your Agent data to the Datadog EU site
           - {name: DD_SITE, value: "datadoghq.com"}
 
+          ## Path to docker socket
+          - {name: DD_CRI_SOCKET_PATH, value: /host/var/run/docker.sock}
+          - {name: DOCKER_HOST, value: unix:///host/var/run/docker.sock}
+
           ## Set DD_DOGSTATSD_NON_LOCAL_TRAFFIC to true to allow StatsD collection.
           - {name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC, value: "false" }
           - {name: KUBERNETES, value: "true"}
@@ -153,7 +157,7 @@ spec:
             memory: "256Mi"
             cpu: "200m"
         volumeMounts:
-          - {name: dockersocket, mountPath: /var/run/docker.sock}
+          - {name: dockersocketdir, mountPath: /host/var/run}
           - {name: procdir, mountPath: /host/proc, readOnly: true}
           - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
           - {name: s6-run, mountPath: /var/run/s6}
@@ -173,7 +177,7 @@ spec:
           successThreshold: 1
           failureThreshold: 3
       volumes:
-        - {name: dockersocket, hostPath: {path: /var/run/docker.sock}}
+        - {name: dockersocketdir, hostPath: {path: /var/run}}
         - {name: procdir, hostPath: {path: /proc}}
         - {name: cgroups, hostPath: {path: /sys/fs/cgroup}}
         - {name: s6-run, emptyDir: {}}

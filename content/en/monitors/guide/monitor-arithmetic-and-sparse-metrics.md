@@ -116,6 +116,24 @@ With `.fill(last,900)`, the new result is:
 |:--------------------|:----------------------------------------------|:-------|
 | `classic_eval_path` | **(1)/1 + 1/1 + 0/1 + 0/1 + 1/1 + 1/1 + 1/1** | 5      |
 
+### Short evaluation windows
+
+It is possible to have timing issues in monitors with division over short evaluation windows. If your monitor query requires division over an evaluation window of one minute, the numerator and denominator represent time buckets on the order of a few seconds. If metrics for the numerator and denominator aren't both available at query time, you could get unwanted evaluation values.
+
+```
+| Timestamp             | sum:my_num{*}       | sum:my_denom{*}     |
+| :-------------------- | :------------------ | :------------------ |
+| ...                   | ...                 | ...                 |
+| 2019-03-29 13:30:50   | 900                 | 1000                |
+| 2019-03-29 13:30:52   | 900                 | 1000                |
+| 2019-03-29 13:30:54   | 900                 | 1000                |
+| 2019-03-29 13:30:56   | 120 (inc)           | 850 (inc)           |
+```
+
+In the case of a query like `min(last_1m):sum:my_num{*}/sum:my_denom{*}`, the minimum value could be skewed and could trigger your monitor unintentionally.
+
+Therefore, adding a short evaluation delay of 30-60 seconds to adjust for timing issues should be considered for queries with divison over short evaluation windows. Alternatively, changing to a five minute evaluation window can help.
+
 [Reach out to the Datadog support team][1] if you have any questions regarding this logic.
 
 [1]: /help

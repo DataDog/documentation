@@ -6,7 +6,7 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - 処理
-  - データストア
+  - data store
 creates_events: false
 ddtype: check
 dependencies:
@@ -24,7 +24,7 @@ metric_prefix: druid.
 metric_to_check: druid.service.health
 name: druid
 public_title: Datadog-Druid インテグレーション
-short_description: クエリー、取り込み、コーディネーションに関するメトリクスを追跡。
+short_description: クエリ、取り込み、コーディネーションに関するメトリクスを追跡。
 support: コア
 supported_os:
   - linux
@@ -35,7 +35,7 @@ supported_os:
 
 ## 概要
 
-Datadog Agent は [DogStatsD][2] を使用して Druid からメトリクスを収集します。DogStatsD は Druid のクエリー、取り込み、コーディネーションデータに関するメトリクスを収集します。詳細については、[Druid メトリクスドキュメント][3]をご参照ください。
+Datadog Agent は [DogStatsD][2] を使用して Druid からメトリクスを収集します。DogStatsD は Druid のクエリ、取り込み、コーディネーションデータに関するメトリクスを収集します。詳細については、[Druid メトリクスドキュメント][3]をご参照ください。
 
 メトリクスの収集に加え、Agent はDruid の健全性に関連するサービスチェックも送信します。
 
@@ -43,11 +43,11 @@ Datadog Agent は [DogStatsD][2] を使用して Druid からメトリクスを�
 
 ### 前提条件
 
-このインテグレーションを正常に動作させるためには Druid 0.16 以上が必要です。
+このインテグレーションが正常に動作するには Druid 0.16 以上が必要です。
 
 ### インストール
 
-Druid インテグレーションを正常に動作させるには、下記の 2 ステップを実施する必要があります。ステップを開始する前に [Datadog Agent][4] をインストールしてください。
+Druid インテグレーショが正常に動作するためには、下記の 2 ステップを実施する必要があります。ステップを開始する前に [Datadog Agent][4] をインストールしてください。
 
 #### ステップ 1: 健全性メトリクスとサービスチェックを収集するように Druid を構成する
 
@@ -72,7 +72,7 @@ Druid インテグレーションを正常に動作させるには、下記の 2
      -c "org.apache.druid.extensions.contrib:statsd-emitter:0.15.0-incubating"
    ```
 
-   本ステップの詳細情報については、[Druid 拡張子のロードに関する公式ガイド][9]をご確認ください。
+    本ステップの詳細情報については、[Druid 拡張子のロードに関する公式ガイド][9]をご確認ください。
 
 2. 下記のコンフィギュレーションを追加して、Druid Java プロパティを更新します。
 
@@ -126,7 +126,7 @@ _Agent バージョン 6.0 以降で利用可能_
            pattern: \d{4}\-\d{2}\-\d{2}
    ```
 
-   `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
 
 3. [Agent を再起動します][7]。
 

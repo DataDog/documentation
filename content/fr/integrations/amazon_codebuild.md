@@ -14,11 +14,11 @@ has_logo: true
 integration_title: "AWS\_CodeBuild"
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: amazon_codebuild
 public_title: "Intégration Datadog/AWS\_CodeBuild"
 short_description: Surveillez vos déploiements en temps réel et mesurez leur durée.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

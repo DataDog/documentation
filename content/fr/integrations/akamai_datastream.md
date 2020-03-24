@@ -16,11 +16,11 @@ has_logo: true
 integration_title: "Akamai\_DataStream"
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: akamai_datastream
 public_title: "Datadog/Akamai\_DataStream"
 short_description: "Intégrez votre Akamai\_DataStream à Datadog."
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

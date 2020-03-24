@@ -54,5 +54,5 @@ Vous pouvez également choisir d'activer App Analytics pour des services ou des 
 [7]: https://app.datadoghq.com/apm/docs/trace-search
 [8]: /fr/account_management/billing/usage_control_apm/#choose-analyzed-span-retention
 [9]: https://app.datadoghq.com/apm/settings?env=datadoghq.com&activeTab=0
-[10]: https://docs.datadoghq.com/fr/tracing/guide/trace_sampling_and_storage
+[10]: /fr/tracing/guide/trace_sampling_and_storage
 [11]: /fr/tracing/app_analytics/?tab=java#configure-additional-services-optional

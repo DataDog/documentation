@@ -78,7 +78,7 @@ You can also use one of the [Datadog official and community contributed API and 
 [6]: /account_management/billing/custom_metrics/#counting-custom-metrics
 [7]: /graphing/metrics/introduction
 [8]: /developers/metrics/types
-[9]: /developers/metrics/types/?tab=rate#metric-submission-types
-[10]: /developers/metrics/types/?tab=count#metric-submission-types
+[9]: /developers/metrics/types/?tab=rate#metric-types
+[10]: /developers/metrics/types/?tab=count#metric-types
 [11]: /developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
 [12]: /developers/libraries

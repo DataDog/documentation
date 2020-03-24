@@ -231,6 +231,10 @@
         border-bottom: 1px solid #632CA6;
         outline: none;
       }
+      &:lang(ja) {
+        font-size: 15px;
+        line-height: 28px;
+      }
     }
   }
 }

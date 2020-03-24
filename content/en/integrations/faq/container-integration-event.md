@@ -32,5 +32,5 @@ To access and use these events in Datadog, use the following three methods:
 [3]: /help
 [4]: /integrations/docker_daemon
 [5]: /integrations/amazon_ecs
-[6]: /integrations/kubernetes
+[6]: /agent/kubernetes
 [7]: /dashboards/#event-correlation-at-view-time

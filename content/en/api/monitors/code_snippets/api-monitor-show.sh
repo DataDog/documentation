@@ -10,5 +10,4 @@ monitor_id=<YOUR_MONITOR_ID>
 curl -X GET \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
--d "group_states=all" \
-"https://api.datadoghq.com/api/v1/monitor/${monitor_id}"
+"https://api.datadoghq.com/api/v1/monitor/${monitor_id}?group_states=all"

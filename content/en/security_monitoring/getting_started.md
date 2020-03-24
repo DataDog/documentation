@@ -18,7 +18,7 @@ To get started with Datadog Security Monitoring, follow these three steps:
 
 Datadog’s [Log Collection documentation][1] provides detailed information on collecting logs from many different sources into Datadog. All ingested logs are first parsed and enriched. In real time, Detection Rules apply to all processed logs to maximize detection coverage without any of the traditionally associated performance or cost concerns of indexing all of your log data. [Read more about Datadog’s Logging without Limits™][2]. 
 
-{{< img src="security_monitoring/getting_started/ingest_logs_overview.png" alt="Ingest Logs" responsive="true">}}
+{{< img src="security_monitoring/getting_started/ingest_logs_overview.png" alt="Ingest Logs" >}}
 
 ## Review Detection Rules
 

@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Event Grid
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_event_grid
 public_title: Intégration Datadog/Microsoft Azure Event Grid
 short_description: Surveillez les métriques clés d'Azure Event Grid.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

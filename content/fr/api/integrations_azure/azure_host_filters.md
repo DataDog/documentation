@@ -24,7 +24,7 @@ Consultez les [instructions d'installation de l'intégration Datadog/Azure][1] p
 
     La clé de secret de votre application Web Azure.
 
-* **`host_filters`** [*facultatif*, *défaut*=**None**] :
+* **`host_filters`** [*facultatif*, *valeur par défaut*=**Aucune**] :
 
     Limitez les instances Azure qui sont transmises à Datadog à l'aide de tags. Seuls les hosts qui correspondent à l'un des tags définis sont importés dans Datadog.
 

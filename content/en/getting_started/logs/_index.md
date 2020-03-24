@@ -2,12 +2,12 @@
 title: Send logs to Datadog
 kind: documentation
 further_reading:
-- link: "https://learn.datadoghq.com/enrol/index.php?id=15"
-  tag: "Learning Center"
-  text: "Introduction to Logs in Datadog"
-- link: "/logs/log_collection/"
-  tag: "Documentation"
-  text: "Collect logs from your Applications, Containers, and Cloud providers"
+    - link: 'https://learn.datadoghq.com/enrol/index.php?id=15'
+      tag: 'Learning Center'
+      text: 'Introduction to Logs in Datadog'
+    - link: '/logs/log_collection/'
+      tag: 'Documentation'
+      text: 'Collect logs from your Applications, Containers, and Cloud providers'
 ---
 
 ## Overview
@@ -25,8 +25,8 @@ Datadog Log Management is used to collect logs from your application. This page 
 
 Once this is done, follow the sections below to discover how to:
 
-* [Send Logs manually](#sending-logs-manually)
-* [Use the Agent to send logs from a file](#send-logs-from-a-file)
+- [Send Logs manually](#sending-logs-manually)
+- [Use the Agent to send logs from a file](#send-logs-from-a-file)
 
 ## Sending logs manually
 
@@ -139,6 +139,7 @@ logs_enabled: true
 ```
 
 ### Monitor a custom file
+
 #### Create the log file
 
 In order to collect logs from a custom file, first create the file and add one line of logs to it:
@@ -167,13 +168,13 @@ To specify to the Agent to monitor this log file:
 
 3. Copy and paste the following content within this `conf.yaml` file:
 
-      ```yaml
-      logs:
+    ```yaml
+    logs:
         - type: file
           path: /home/ubuntu/log_file_to_monitor.log
           source: custom
           service: user
-      ```
+    ```
 
 4. Restart the Agent: `sudo service datadog-agent restart`
 

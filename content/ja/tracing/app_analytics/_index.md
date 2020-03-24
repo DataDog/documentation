@@ -460,12 +460,9 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 {{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="分析スパンのフィルタリング" style="width:100%;">}}
 
-**注**: 特定のサービスに対して[サンプリングの優先順位を][7] `MANUAL_KEEP` に手動で設定した場合。そのサービスに対して分析スパンのフィルタリングがオーバーライドされます。これは、そのスパンが請求可能なスパンであることを意味します。
-
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /ja/tracing/visualization/#apm-event
 [3]: /ja/tracing/visualization/#spans
 [4]: /ja/tracing/visualization/#services
 [5]: https://app.datadoghq.com/apm/settings
 [6]: /ja/tracing/visualization/#trace
-[7]: /ja/tracing/guide/trace_sampling_and_storage/#sampling-rules

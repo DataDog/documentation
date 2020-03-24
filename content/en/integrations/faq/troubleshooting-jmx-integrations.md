@@ -2,7 +2,7 @@
 title: Troubleshooting JMX Integrations
 kind: faq
 further_reading:
-- link: "https://docs.datadoghq.com/integrations/java/"
+- link: "/integrations/java/"
   tag: "Documentation"
   text: "Java integration"
 ---
@@ -142,7 +142,9 @@ A best practice is to limit your metrics to less than 350 by creating filters to
 
 ### Java Path
 
-The Agent does not come with a bundled JVM, but uses the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the Agent.
+The default Agent installation does not come with a bundled JVM and uses the one installed on your system. Therefore you must make sure that the Java home directory is present in the path of the user running the Agent.
+
+**Note**: The `datadog/agent:latest-jmx` Docker image does include a JVM, which the Agent needs to run jmxfetch.
 
 Alternatively, you can specify the JVM path in the integration's configuration file with the `java_bin_path` parameter.
 
@@ -248,7 +250,7 @@ instances:
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
 [2]: /help
-[3]: /tracing/runtime_metrics/?tab=java
+[3]: /tracing/runtime_metrics/java
 [4]: /agent/guide/agent-commands/#restart-the-agent
 [5]: https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener
 [6]: https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#SSL_and_Tomcat

@@ -38,9 +38,17 @@ $ddpurple:    #632CA6;
       letter-spacing: 0.04em;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      &:lang(ja) {
+        font-size: 12px;
+        line-height: 17px;
+      }
     }
     .text {
       margin-right: 9px;
+      &:lang(ja) {
+        font-size: 15px;
+        line-height: 25px;
+      }
     }
   }
   a.list-group-item-white:focus,

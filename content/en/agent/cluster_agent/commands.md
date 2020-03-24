@@ -8,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/autodiscovery/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
 - link: "agent/kubernetes/daemonset_setup"
@@ -40,14 +40,14 @@ The following environment variables are supported:
 | `DD_CLUSTER_AGENT_CMD_PORT`                   | Port for the Datadog Cluster Agent to serve. Defaults to `5005`.                                                                                                       |
 | `DD_USE_METADATA_MAPPER`                      | Enables cluster level metadata mapping. Defaults to `true`.                                                                                                            |
 | `DD_COLLECT_KUBERNETES_EVENTS`                | Configures the Agent to collect Kubernetes events. Defaults to `false`. See the [Event collection documentation][2] for more details.                                  |
-| `DD_LEADER_ELECTION`                          | Activates [leader election][3]. Set `DD_COLLECT_KUBERNETES_EVENTS` to `true` to activate this feature. Defaults to `false`.                                            |
+| `DD_LEADER_ELECTION`                          | Activates leader election. Set `DD_COLLECT_KUBERNETES_EVENTS` to `true` to activate this feature. Defaults to `false`.                                            |
 | `DD_LEADER_LEASE_DURATION`                    | Used only if leader election is activated. See the details [in the leader election section][3]. Value in seconds, 60 by default.                                       |
 | `DD_CLUSTER_AGENT_AUTH_TOKEN`                 | 32 characters long token that needs to be shared between the node Agent and the Datadog Cluster Agent.                                                                 |
 | `DD_KUBE_RESOURCES_NAMESPACE`                 | Configures the namespace where the Cluster Agent creates the configmaps required for the leader election, event collection (optional), and horizontal pod autoscaling. |
 | `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`    | Name of the Kubernetes service through which Cluster Agents are exposed. Defaults to `datadog-cluster-agent`.                                                          |
 | `DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`       | Frequency (in seconds) for querying the API server to resync the local cache. The default is 5 minutes, or `300` seconds.                                              |
 | `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  | Timeout (in seconds) of the client communicating with the API server. Defaults to `60` seconds.                                                                        |
-| `DD_EXPVAR_PORT`                              | Port for fetching [expvar][4] public variables from the Datadog Cluster Agent. Defaults to port `5000`.                                                                |
+| `DD_EXPVAR_PORT`                              | Port for fetching [expvar][3] public variables from the Datadog Cluster Agent. Defaults to port `5000`.                                                                |
 | `DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`   | Time waited (in seconds) to process a batch of metrics from multiple autoscalers. Defaults to `10` seconds.                                                            |
 | `DD_EXTERNAL_METRICS_PROVIDER_MAX_AGE`        | Maximum age (in seconds) of a datapoint before considering it invalid to be served. Default to `120` seconds.                                                          |
 | `DD_EXTERNAL_METRICS_AGGREGATOR`     | Aggregator for Datadog metrics. Applies to all autoscalers processed. Choose from `sum`/`avg`/`max`/`min`.                                                             |
@@ -68,5 +68,4 @@ The following environment variables are supported:
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: /agent/cluster_agent/event_collection
-[3]: /agent/kubernetes/event_collection/#leader-election
-[4]: https://golang.org/pkg/expvar
+[3]: https://golang.org/pkg/expvar

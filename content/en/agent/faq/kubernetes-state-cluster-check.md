@@ -8,7 +8,7 @@ further_reading:
 - link: "agent/autodiscovery"
   tag: "Documentation"
   text: "Using Autodiscovery with Kubernetes and Docker"
-- link: "agent/autodiscovery/clusterchecks"
+- link: "agent/cluster_agent/clusterchecks"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
 ---
@@ -114,5 +114,5 @@ If you use Autodiscovery from the DaemonSet, one of your Agents (the one running
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/autodiscovery
-[2]: /agent/autodiscovery/clusterchecks
+[2]: /agent/cluster_agent/clusterchecks
 [3]: https://github.com/helm/charts/blob/master/stable/datadog/README.md

@@ -27,3 +27,17 @@ api.Downtime.create(
     end=end_ts,
     recurrence=recurrence
 )
+
+# OR use RRULE reccurence
+rrule_recurrence = {
+    'type': 'rrule',
+    'rrule': 'FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1',
+}
+
+# Schedule downtime
+api.Downtime.create(
+    scope='env:staging',
+    start=start_ts,
+    end=end_ts,
+    recurrence=rrule_recurrence
+)

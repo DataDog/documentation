@@ -294,4 +294,4 @@ For Kubernetes environements, refer to the [Kubernetes short lived container doc
 [2]: /agent/autodiscovery
 [3]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
 [4]: /agent/logs/#custom-log-collection
-[5]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#short-lived-containers
+[5]: /agent/kubernetes/log#short-lived-containers

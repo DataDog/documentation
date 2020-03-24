@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-Datadog calculates your current estimated usage in near real-time. Estimate usage metrics enable you to:
+Datadog calculates your current estimated usage in near real-time. Estimated usage metrics enable you to:
 
 * Graph your estimated usage
 * Create monitors around your estimated usage based on thresholds of your choosing
@@ -16,7 +16,7 @@ Datadog calculates your current estimated usage in near real-time. Estimate usag
 
 {{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" >}}
 
-### Types of usage
+## Types of usage
 
 Estimated usage metrics are generally available for the following usage types:
 
@@ -25,10 +25,14 @@ Estimated usage metrics are generally available for the following usage types:
 | Infrastructure Hosts | `datadog.estimated_usage.hosts`          |
 | Containers           | `datadog.estimated_usage.containers`     |
 | Custom Metrics       | `datadog.estimated_usage.metrics.custom` |
+| Logs Ingested Bytes  | `datadog.estimated_usage.logs.ingested_bytes`          |
+| Logs Ingested Events | `datadog.estimated_usage.logs.ingested_events`   |
+
+Log-based usage metrics must be manually enabled from the [Generate Metrics][1] page.
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
-### Multi-Org usage
+## Multi-Org usage
 
 For accounts with multiple organizations, you can roll up estimated usage from child organizations using the `from` field to monitor usage across your entire account.
 
@@ -36,9 +40,10 @@ For accounts with multiple organizations, you can roll up estimated usage from c
 
 ## Troubleshooting
 
-For technical questions, contact [Datadog support][1].
+For technical questions, contact [Datadog support][2].
 
-For billing questions, contact your [Customer Success][2] Manager.
+For billing questions, contact your [Customer Success][3] Manager.
 
-[1]: /help
-[2]: mailto:success@datadoghq.com
+[1]: /logs/logs_to_metrics/#recommended-usage-metrics
+[2]: /help
+[3]: mailto:success@datadoghq.com

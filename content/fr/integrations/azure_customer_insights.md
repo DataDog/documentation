@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Customer Insights
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_customer_insights
 public_title: Intégration Datadog/Microsoft Azure Customer Insights
 short_description: Surveillez des métriques clés d'Azure Customer Insights.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

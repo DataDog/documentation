@@ -8,7 +8,4 @@ include_org_details=true
 curl -X GET \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
--d "start_month=${start_month}" \
--d "end_month=${end_month}" \
--d "include_org_details=${include_org_details}" \
-"https://api.datadoghq.com/api/v1/usage/summary"
+"https://api.datadoghq.com/api/v1/usage/summary?start_month=${start_month}&end_month=${end_month}&include_org_details=${include_org_details}"

@@ -23,14 +23,16 @@ short_description: "Surveillez la taille des logs ingérés dans Google\_Stackdr
 version: '1.0'
 ---
 ## Présentation
+
 Le produit Stackdriver Logging de Google vous permet de stocker, rechercher, analyser et surveiller les données et les événements des logs depuis Google Cloud Platform. Vous pouvez même configurer des alertes.
 
 Datadog récupère les **métriques** provenant de Google Stackdriver Logging pour :
 
-* Visualiser les performances de vos logs Stackdriver
-* Corréler les performances de vos logs Stackdriver avec vos applications
+- Visualiser les performances de vos logs Stackdriver.
+- Corréler les performances de vos logs Stackdriver avec vos applications.
 
 ## Implémentation
+
 ### Installation
 
 Les métriques provenant des logs Stackdriver sont incluses avec l'[intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
@@ -40,6 +42,7 @@ Les métriques provenant des logs Stackdriver sont incluses avec l'[intégration
 Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub grâce à un redirecteur Push HTTP][2] afin de transmettre vos logs GCP à Datadog.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "google_stackdriver_logging" >}}
 
@@ -47,12 +50,15 @@ Si vous ne l'avez pas déjà fait, configurez le [Cloud Pub/Sub grâce à un red
 **Remarque** : Datadog recueille des [métriques Google Stackdriver définies par l'utilisateur][4] avec le préfixe `gcp.logging.user`.
 
 ### Événements
+
 L'intégration Google Stackdriver Logging n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Google Stackdriver Logging n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 ## Pour aller plus loin

@@ -14,11 +14,11 @@ has_logo: true
 integration_title: Microsoft Azure Container Service
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_container_service
 public_title: Intégration Datadog/Microsoft Azure Container Service
 short_description: Surveillez des métriques clés d'Azure Container Service.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

@@ -82,5 +82,5 @@ Ces traces sont conservées [de la même manière que vos traces APM standard][1
 [7]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
 [8]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
 [9]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[10]: https://docs.datadoghq.com/fr/tracing/guide/trace_sampling_and_storage/#how-it-works
-[11]: https://docs.datadoghq.com/fr/tracing/guide/trace_sampling_and_storage/#trace-storage
+[10]: /fr/tracing/guide/trace_sampling_and_storage/#how-it-works
+[11]: /fr/tracing/guide/trace_sampling_and_storage/#trace-storage

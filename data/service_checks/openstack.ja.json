@@ -1,0 +1,42 @@
+[
+    {
+        "agent_version": "5.6.0",
+        "check": "openstack.neutron.api.up",
+        "statuses": ["ok", "クリティカル", "不明"],
+        "name": "OpenStack Neutron API Up",
+        "groups": ["ホスト", "keystone_server"],
+        "description": "Agent が Neutron API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。"
+    },
+    {
+        "agent_version": "5.6.0",
+        "check": "openstack.nova.api.up",
+        "statuses": ["ok", "クリティカル", "不明"],
+        "name": "OpenStack Nova API Up",
+        "groups": ["ホスト", "keystone_server"],
+        "description": "Agent が Nova API をクエリできない場合は `CRITICAL` を、Keystone API に問題がある場合は `UNKNOWN` を返します。それ以外の場合は、`OK` を返します。"
+    },
+    {
+        "agent_version": "5.6.0",
+        "check": "openstack.keystone.api.up",
+        "statuses": ["ok", "クリティカル"],
+        "name": "OpenStack Keystone API Up",
+        "groups": ["ホスト", "keystone_server"],
+        "description": "Agent が Keystone API をクエリできない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    },
+    {
+        "agent_version": "5.6.0",
+        "check": "openstack.nova.hypervisor.up",
+        "statuses": ["ok", "クリティカル", "不明"],
+        "name": "OpenStack Nova Hypervisor Up",
+        "groups": ["ホスト", "hypervisor", "hypervisor_id", "virt_type"],
+        "description": "Agent がハイパーバイザーの状態を取得できない場合は `UNKNOWN`、ハイパーバイザーがダウンしている場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    },
+    {
+        "agent_version": "5.6.0",
+        "check": "openstack.neutron.network.up",
+        "statuses": ["ok", "クリティカル", "不明"],
+        "name": "OpenStack Neutron Network Up",
+        "groups": ["ホスト", "ネットワーク", "network_name", "tenant_id"],
+        "description": "Agent がネットワークの状態を取得できない場合は `UNKNOWN`、ネットワークがダウンしている場合は `CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    }
+]

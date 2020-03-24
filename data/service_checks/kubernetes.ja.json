@@ -1,0 +1,88 @@
+[
+    {
+        "agent_version": "5.6.0",
+        "check": "kubernetes.kubelet.check.ping",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Kubelet Ping",
+        "description": "Kubelet が Ping に応答しない場合は、`CRITICAL` を返します。それ以外の場合は OK を返します。"
+    },
+    {
+        "agent_version": "5.6.0",
+        "check": "kubernetes.kubelet.check.docker",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Kubelet Docker Service",
+        "description": "Docker サービスが Kubelet で実行されない場合は、`CRITICAL` を返します。それ以外の場合は OK を返します。"
+    },
+    {
+        "agent_version": "5.6.0",
+        "check": "kubernetes.kubelet.check.syncloop",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Kubelet Syncloop",
+        "description": "syncloop ヘルスチェックがダウンしている場合は、`CRITICAL` を返します。それ以外の場合は OK を返します"
+    },
+    {
+        "agent_version": "5.6.0",
+        "check": "kubernetes.kubelet.check",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Kubelet Health",
+        "description": "Kubelet 全体のヘルスチェックがダウンしている場合は、`CRITICAL` を返します。それ以外の場合は OK を返します"
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.node.ready",
+        "statuses": ["ok", "不明", "クリティカル"],
+        "groups": ["ホスト", "ノード"],
+        "name": "Node Ready",
+        "description": "クラスターノードの準備ができていない場合は、`CRITICAL` を返します。ステータスが不明な場合は `UNKNOWN` を返します。それ以外の場合、`OK` を返します。"
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.node.out_of_disk",
+        "statuses": ["ok", "不明", "クリティカル"],
+        "groups": ["ホスト", "ノード"],
+        "name": "Node Out Of Disk",
+        "description": "クラスターノードにディスク容量がない場合は `CRITICAL` を返します。ステータスが不明な場合は `UNKNOWN` を返します。それ以外の場合、`OK` を返します。"
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.node.disk_pressure",
+        "statuses": ["ok", "不明", "クリティカル"],
+        "groups": ["ホスト", "ノード"],
+        "name": "Node Disk Pressure",
+        "description": "クラスターノードがディスク圧縮状態の場合は、`CRITICAL` を返します。ステータスが不明な場合は `UNKNOWN` を返します。それ以外の場合、`OK` を返します。"
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.node.memory_pressure",
+        "statuses": ["ok", "不明", "クリティカル"],
+        "groups": ["ホスト", "ノード"],
+        "name": "Node Memory Pressure",
+        "description": "クラスターノードがメモリ圧縮状態の場合は、`CRITICAL` を返します。ステータスが不明な場合は `UNKNOWN` を返します。それ以外の場合、`OK` を返します。"
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.node.network_unavailable",
+        "statuses": ["ok", "不明", "クリティカル"],
+        "groups": ["ホスト", "ノード"],
+        "name": "Node Network Unavailable",
+        "description": "クラスターノードがネットワーク使用不可能状態の場合は、`CRITICAL` を返します。ステータスが不明な場合は `UNKNOWN` を返します。それ以外の場合、`OK` を返します。"
+    },
+    {
+        "agent_version": "5.6.0",
+        "integration":"kubernetes",
+        "check": "kubernetes_state.pod.phase",
+        "statuses": ["ok", "クリティカル", "警告", "不明"],
+        "groups": ["ホスト", "ポッド"],
+        "name": "Pod Phase",
+        "description": "ポッドのフェーズが `Failed` の場合は `CRITICAL`、`Pending` の場合は `WARNING`、`Unknown` の場合は `UNKNOWN`、それ以外の場合は `OK` を返します。"
+    }
+]

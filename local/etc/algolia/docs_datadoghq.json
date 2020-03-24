@@ -50,6 +50,7 @@
           "monitors",
           "tracing",
           "logs",
+          "synthetics",
           "developers"
         ],
         "localisation": [

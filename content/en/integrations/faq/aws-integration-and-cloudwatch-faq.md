@@ -38,11 +38,11 @@ There are two important distinctions to be aware of:
 1. In AWS for counters, a graph set to `sum` `1 minute` shows the total number of occurrences in one minute leading up to that point (the rate per one minute). Datadog is displaying the raw data from AWS normalized to per second values, regardless of the timeframe selected in AWS. Therefore, you might see a lower value in Datadog.
 2. Overall, `min`, `max`, and `avg` have different meanings within AWS. AWS distinctly collects average latency, minimum latency, and maximum latency. When pulling metrics from AWS CloudWatch, Datadog only receives the average latency as a single timeseries per ELB. Within Datadog, when you select `min`, `max`, or `avg`, you are controlling how multiple timeseries are combined. For example, requesting `system.cpu.idle` without any filter returns one series for each host reporting that metric. Datadog combines these time series using [space aggregation][5]. Otherwise, if you requested `system.cpu.idle` from a single host, no aggregation is necessary and switching between `avg` and `max` yields the same result.
 
-### How do I conform my data on Datadog to the data displayed in CloudWatch?
+### How do I adjust my data on Datadog to match the data displayed in CloudWatch?
 
-AWS CloudWatch reports metrics at one-minute granularity normalized to per minute data. Datadog reports metrics at one-minute granularity normalized to per second data. To conform the data in Datadog, multiply by 60.
+AWS CloudWatch reports metrics at one-minute granularity normalized to per minute data. Datadog reports metrics at one-minute granularity normalized to per second data. To adjust the data in Datadog, multiply by 60.
 
-#### Will a rollup() conform my data?
+#### Will a rollup() adjust my data?
 
 Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, the server groups all data points in minute bins and returns the sum of each bin as a datapoint. However, the granularity of AWS metrics is one minute, so there is only one datapoint per bin leading to no change.
 

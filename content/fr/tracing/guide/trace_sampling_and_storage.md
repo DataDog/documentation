@@ -382,4 +382,4 @@ Les traces individuelles sont stockées pendant 15 jours. Ainsi, toutes les tra
 [1]: /fr/tracing/visualization/#trace
 [2]: /fr/tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 [3]: /fr/tracing/app_analytics/#span-filtering
-[4]: https://docs.datadoghq.com/fr/security/tracing/#resource-filtering
+[4]: /fr/security/tracing/#resource-filtering

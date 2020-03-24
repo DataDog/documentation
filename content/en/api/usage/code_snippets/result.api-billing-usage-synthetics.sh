@@ -1,5 +1,5 @@
 {
-  usage: [
+  "usage": [
     {
       "check_calls_count": 42,
       "hour": "2019-04-01T14"

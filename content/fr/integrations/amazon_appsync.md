@@ -12,11 +12,11 @@ has_logo: true
 integration_title: "AWS\_AppSync"
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: amazon_appsync
 public_title: "Intégration Datadog/AWS\_AppSync"
 short_description: "Surveillez des métriques clés d'AWS\_AppSync."
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

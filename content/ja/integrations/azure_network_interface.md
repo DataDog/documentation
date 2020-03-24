@@ -2,9 +2,9 @@
 aliases:
   - /ja/integrations/azure_networkinterface
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Network Interface のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_network_interface/'
@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Network Interface
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_network_interface
 public_title: Datadog-Microsoft Azure Network Interface インテグレーション
 short_description: Azure Network Interface のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

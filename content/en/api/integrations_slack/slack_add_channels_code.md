@@ -7,7 +7,7 @@ external_redirect: /api/#add-channels-to-slack-integration
 
 **SIGNATURE**:
 
-`POST /v1/integration/slack`
+`PUT /v1/integration/slack`
 
 **EXAMPLE REQUEST**:
 

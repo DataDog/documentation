@@ -155,11 +155,11 @@ On the Trace Agent tab, you will see something similar to:
 
 The service then shows up in your APM services page in Datadog.
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services Page" responsive="true" >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services Page"  >}}
 
 Click on the service to view your traces.
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM Traces UI" responsive="true" >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM Traces UI"  >}}
 
 ## Further Reading
 

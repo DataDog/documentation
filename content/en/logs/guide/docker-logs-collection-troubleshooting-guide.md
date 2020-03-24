@@ -88,7 +88,7 @@ This status means that the Logs Agent is running but it hasn't started collectin
 
 ### Docker Daemon started after the Host Agent
 
-For Agent version prior to 7.17, if the Docker Daemon starts while the host Agent is already running, restart the Agent to retrigger container collection. 
+For Agent version prior to 7.17, if the Docker Daemon starts while the host Agent is already running, restart the Agent to retrigger container collection.
 
 ### You didn't mount the docker socket when you started the Container Agent
 
@@ -164,7 +164,7 @@ Docker's default is the json-file logging driver so the Container Agent tries to
 
 4. Mount the YAML file into your container following the instructions in the [Docker Agent documentation][3]. For more information on setting log drivers for Docker containers, [see this documentation][4].
 
-[1]: https://docs.datadoghq.com/help
+[1]: /help
 [2]: /integrations/journald/#setup
 [3]: /agent/docker/?tab=standard#mounting-conf-d
 [4]: https://docs.docker.com/config/containers/logging/journald/

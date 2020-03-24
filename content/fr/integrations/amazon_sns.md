@@ -57,7 +57,11 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 2. Sélectionnez https et saisissez l'URL Webhook suivante :
 
     ```text
+    ## Datadog US site
     https://app.datadoghq.com/intake/webhook/sns?api_key=<API KEY>
+
+    ## Datadog EU site
+    https://app.datadoghq.eu/intake/webhook/sns?api_key=<API KEY>
     ```
 
 3. N'activez pas « raw message delivery ».

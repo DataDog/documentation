@@ -2,18 +2,18 @@
 title: Getting Started with Synthetics
 kind: documentation
 further_reading:
-- link: "/synthetics/browser_tests"
-  tag: "Documentation"
-  text: "Learn more about browser tests"
-- link: "/synthetics/api_tests"
-  tag: "Documentation"
-  text: "Learn more about API tests"
-- link: "/synthetics/browser_tests/#subtests"
-  tag: "Documentation"
-  text: "Create a browser subtest"
-- link: "/synthetics/settings/"
-  tag: "Documentation"
-  text: "Configure advance Synthetics settings"
+    - link: '/synthetics/browser_tests'
+      tag: 'Documentation'
+      text: 'Learn more about browser tests'
+    - link: '/synthetics/api_tests'
+      tag: 'Documentation'
+      text: 'Learn more about API tests'
+    - link: '/synthetics/browser_tests/#subtests'
+      tag: 'Documentation'
+      text: 'Create a browser subtest'
+    - link: '/synthetics/settings/'
+      tag: 'Documentation'
+      text: 'Configure advance Synthetics settings'
 ---
 
 ## Overview
@@ -39,11 +39,10 @@ If you haven't already, create a [Datadog account][2].
 ## Next Steps
 
 {{< whatsnext desc="After you set up your first Synthetics test:">}}
-    {{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}Learn more about browser tests{{< /nextlink >}}
-    {{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}Learn more about API tests{{< /nextlink >}}
-    {{< nextlink href="/synthetics/browser_tests/#subtests" tag="Documentation" >}}Create a browser subtest{{< /nextlink >}}
-    {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configure advance Synthetics settings{{< /nextlink >}}
-
+{{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}Learn more about browser tests{{< /nextlink >}}
+{{< nextlink href="/synthetics/api_tests" tag="Documentation" >}}Learn more about API tests{{< /nextlink >}}
+{{< nextlink href="/synthetics/browser_tests/#subtests" tag="Documentation" >}}Create a browser subtest{{< /nextlink >}}
+{{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configure advance Synthetics settings{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/synthetics/list

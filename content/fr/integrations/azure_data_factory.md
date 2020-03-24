@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Data Factory
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_data_factory
 public_title: Intégration Datadog/Microsoft Azure Data Factory
 short_description: Surveillez des métriques Azure Data Factory.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

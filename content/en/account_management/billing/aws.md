@@ -11,7 +11,7 @@ Datadog bills for AWS hosts running the Datadog Agent and all EC2 instances pick
 
 Other AWS resources (ELB, EBS, RDS, Dynamo, etc.) are not part of monthly billing and configuration exclusions do not apply.
 
-### Metric exclusion
+## AWS Metric exclusion
 
 Use the [Datadog-AWS integration tile][1] to control your metric collection. Go to the **Configuration** tab and select an account or add a new one. Each account is controlled under **Optionally limit metrics collection**. Limit metrics by [host tag][2] or per namespace:
 

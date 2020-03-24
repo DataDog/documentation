@@ -2,14 +2,14 @@
 title: Introduction to Integrations
 kind: documentation
 aliases:
-- "/getting_started/integrations"
+    - '/getting_started/integrations'
 further_reading:
-- link: "https://learn.datadoghq.com/"
-  tag: "Learning Center"
-  text: "Introduction to Datadog"
-- link: "/integrations/"
-  tag: "Integrations"
-  text: "Datadog's full list of integrations"
+    - link: 'https://learn.datadoghq.com/'
+      tag: 'Learning Center'
+      text: 'Introduction to Datadog'
+    - link: '/integrations/'
+      tag: 'Integrations'
+      text: "Datadog's full list of integrations"
 ---
 
 This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.
@@ -20,9 +20,9 @@ An integration, at the highest level, is when you assemble a unified system from
 
 Datadog provides three main types of integrations:
 
-* **Agent-based integrations** are installed with the Datadog Agent and use a Python class method called `check` to define the metrics to collect.
-* **Authentication (crawler) based integrations** are set up in the [Datadog App][2] where you provide credentials for obtaining metrics with the API. These include popular integrations like [Slack][3],[AWS][4],[Azure][5], and [PagerDuty][6].
-* **Library integrations** use the [Datadog API][7] to allow you to monitor applications based on the language they are written in, like [Node.js][8], or [Python][9].
+- **Agent-based integrations** are installed with the Datadog Agent and use a Python class method called `check` to define the metrics to collect.
+- **Authentication (crawler) based integrations** are set up in the [Datadog App][2] where you provide credentials for obtaining metrics with the API. These include popular integrations like [Slack][3],[AWS][4],[Azure][5], and [PagerDuty][6].
+- **Library integrations** use the [Datadog API][7] to allow you to monitor applications based on the language they are written in, like [Node.js][8] or [Python][9].
 
 You can also build a [custom check][10] to define and send metrics to Datadog from your unique in-house system.
 
@@ -56,19 +56,18 @@ For example, this is the minimum `conf.yaml` configuration file needed to collec
 init_config:
 
 instances:
-
-  - apache_status_url: http://localhost/server-status?auto
+    - apache_status_url: http://localhost/server-status?auto
 
 logs:
-  - type: file
-    path: /var/log/apache2/access.log
-    source: apache
-    sourcecategory: http_web_access
-    service: apache
-  - type: file
-    path: /var/log/apache2/error.log
-    source: apache
-    sourcecategory: http_web_access
+    - type: file
+      path: /var/log/apache2/access.log
+      source: apache
+      sourcecategory: http_web_access
+      service: apache
+    - type: file
+      path: /var/log/apache2/error.log
+      source: apache
+      sourcecategory: http_web_access
 ```
 
 To create multiple instances in the same Agent check to monitor two Apache services, create a new instance with a `-` in the `instances:` section:
@@ -77,10 +76,9 @@ To create multiple instances in the same Agent check to monitor two Apache servi
 init_config:
 
 instances:
+    - apache_status_url: "http://localhost/server-status?auto"
 
-  - apache_status_url: http://localhost/server-status?auto
-
-  - apache_status_url: http://<REMOTE_APACHE_ENDPOINT>/server-status?auto
+    - apache_status_url: "http://<REMOTE_APACHE_ENDPOINT>/server-status?auto"
 ```
 
 ### Tagging
@@ -114,7 +112,7 @@ If you continue to have problems, reach out to [our awesome Support team][35].
 ## Key terms
 
 | Term                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **conf.yaml**          | You create the `conf.yaml` in the `conf.d/<INTEGRATION_NAME>.d` folder at the root of your [Agent's configuration directory][36]. Use this file to connect integrations to your system, as well as configure their settings.                                                                                                                                                                                                                                       |
 | **custom check**       | If you have a unique system that you want to monitor, or if you're going to expand the metrics already sent by an integration, you can build a [custom check][10] to define and send metrics to Datadog. However, if you want to monitor a generally available application, public service, or an open source project, and we don't have an integration that already exists for it, you should consider [building a new integration][1] instead of a custom check. |
 | **datadog.yaml**       | This is the main configuration file where you're defining how the Agent as a whole interacts with its own integrations and with your system. Use this file to update API keys, Proxys, host tags, and other global settings.                                                                                                                                                                                                                                       |

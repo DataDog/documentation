@@ -1,7 +1,7 @@
 ---
 title: Get hourly usage for Trace Search
 type: apicontent
-order: 35.5
+order: 35.6
 external_redirect: /api/#get-hourly-usage-for-trace-search
 ---
 
@@ -12,9 +12,9 @@ Get hourly usage For Trace Search.
 **ARGUMENTS**:
 
 * **`start_hr`** [*required*]:
-    datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour
+    Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour.
 * **`end_hr`** [*optional*, *default*=**1d+start_hr**]:
-    datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour
+    Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour.
 
 **RESPONSE**:
 

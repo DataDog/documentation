@@ -2,9 +2,9 @@
 aliases:
   - /ja/integrations/azure_notificationhubs
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Notification Hubs のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_notification_hubs/'
@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Notification Hubs
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_notification_hubs
 public_title: Datadog-Microsoft Azure Notification Hubs インテグレーション
 short_description: Azure Notification Hubs のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

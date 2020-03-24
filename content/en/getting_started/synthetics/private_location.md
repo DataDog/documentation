@@ -2,12 +2,12 @@
 title: Getting Started with Private Locations
 kind: documentation
 further_reading:
-- link: "/getting_started/synthetics/api_test"
-  tag: "Documentation"
-  text: "Create your first API test"
-- link: "/synthetics/private_locations"
-  tag: "Documentation"
-  text: "Learn more about Private Locations"
+    - link: '/getting_started/synthetics/api_test'
+      tag: 'Documentation'
+      text: 'Create your first API test'
+    - link: '/synthetics/private_locations'
+      tag: 'Documentation'
+      text: 'Learn more about Private Locations'
 ---
 
 <div class="alert alert-warning">
@@ -40,7 +40,7 @@ Once you create a private location, the process of configuring a [Synthetics API
 
 6. Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
 
-    ```
+    ```shell
     docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
 
@@ -55,19 +55,20 @@ Once you create a private location, the process of configuring a [Synthetics API
     {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="Private locations in list"  style="width:75%;">}}
 
     You will also see private location logs populating similar to this example:
-    ```
-    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available
-    2019-12-17 13:05:03 [info]: 	Fetching 10 messages from queue - 10 slots available
-    2019-12-17 13:05:04 [info]: 	Fetching 10 messages from queue - 10 slots available
+
+    ```text
+    2019-12-17 13:05:03 [info]: Fetching 10 messages from queue - 10 slots available
+    2019-12-17 13:05:03 [info]: Fetching 10 messages from queue - 10 slots available
+    2019-12-17 13:05:04 [info]: Fetching 10 messages from queue - 10 slots available
     ```
 
 You are now able to use your new private location as any other Datadog managed locations for your Synthetics API tests. This is specifically useful to monitor any internal endpoints you might have.
 
 ## Run tests with your Private Location
 
-8. Create an API test on any endpoint (including internal) you're interested in monitoring. If you don't know where to start you can use `https://www.shopist.io/`, which is a test web application.
-9. Select the new private location under **Private Locations**.
-10. Click the **Save Test** button.
+1. Create an API test on any endpoint (including internal) you're interested in monitoring. If you don't know where to start you can use `https://www.shopist.io/`, which is a test web application.
+2. Select the new private location under **Private Locations**.
+3. Click the **Save Test** button.
 
 For a more advanced setup, use the command and see `Learn more about Private Locations` below:
 
@@ -76,8 +77,8 @@ docker run --rm datadog/synthetics-private-location-worker --help and check
 ```
 
 {{< whatsnext desc="After you set up your private location:">}}
-    {{< nextlink href="/getting_started/synthetics/api_test" tag="Documentation" >}}Create your first API test{{< /nextlink >}}
-    {{< nextlink href="/synthetics/private_locations" tag="Documentation" >}}Learn more about Private Locations{{< /nextlink >}}
+{{< nextlink href="/getting_started/synthetics/api_test" tag="Documentation" >}}Create your first API test{{< /nextlink >}}
+{{< nextlink href="/synthetics/private_locations" tag="Documentation" >}}Learn more about Private Locations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /getting_started/synthetics/api_test

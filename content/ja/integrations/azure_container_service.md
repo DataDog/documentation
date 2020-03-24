@@ -2,10 +2,10 @@
 aliases:
   - /ja/integrations/azure_containerservice
 categories:
-  - クラウド
+  - cloud
   - コンテナ
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Container Services のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_container_service/'
@@ -14,11 +14,11 @@ has_logo: true
 integration_title: Microsoft Azure Container Service
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_container_service
 public_title: Datadog-Microsoft Azure Container Service インテグレーション
 short_description: Azure Container Services のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

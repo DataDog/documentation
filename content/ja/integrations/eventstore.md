@@ -5,7 +5,7 @@ assets:
   monitors: {}
   service_checks: /assets/service_checks.json
 categories:
-  - データストア
+  - data store
 creates_events: false
 ddtype: check
 dependencies:

@@ -27,3 +27,6 @@ markup:
   defaultMarkdownHandler: blackfriday
   highlight:
     guessSyntax: true
+
+# so we can access images as resources
+assetDir: "static"

@@ -45,14 +45,14 @@ Save a log analytics view with the "Save As" button. You can load your teammates
 
 Use the query to control what's displayed in your Log Analytics:
 
-1. Choose a [Measure][1] or [Facet][2] to graph. [Measure][1] lets you choose the aggregation function whereas [Facet][2] displays the unique count.
+1. Choose a [Measure][1] or [Facet][1] to graph. [Measure][1] lets you choose the aggregation function whereas [Facet][1] displays the unique count.
 
     {{< img src="logs/explorer/analytics/choose_measure_facet.png" alt="choose measure facet"  style="width:50%;">}}
 2. Select the aggregation function for the [Measure][1] you want to graph:
 
     {{< img src="logs/explorer/analytics/agg_function_log_graph.png" alt="aggregation function for Log Analytics"  style="width:50%;">}}
 
-3. Use [Tag][1] or [Facet][2] to split your graph.
+3. Use [Tag][1] or [Facet][1] to split your graph.
 
     {{< img src="logs/explorer/analytics/split_by_log_graph.png" alt="split by Log Analytics"  style="width:50%;">}}
 
@@ -76,7 +76,7 @@ Available visualizations:
 {{< tabs >}}
 {{% tab "Timeseries" %}}
 
-Visualize the evolution of a single [measure][1] (or a [facet][2] unique count of values) over a selected time frame, and (optionally) split by an available [facet][2].
+Visualize the evolution of a single [measure][1] (or a [facet][1] unique count of values) over a selected time frame, and (optionally) split by an available [facet][1].
 
 You have additional display options for timeseries:
 
@@ -97,26 +97,24 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 {{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example"  style="width:90%;">}}
 
-[1]: /logs/explorer/?tab=measures#setup
-[2]: /logs/explorer/?tab=facets#setup
+[1]: /logs/explorer/facets
 {{% /tab %}}
 
 {{% tab "Top List" %}}
 
-Visualize the top values from a [facet][1] according to the chosen [measure][2]:
+Visualize the top values from a [facet][1] according to the chosen [measure][1]:
 
 The following Top List Log Analytics shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
 {{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example"  style="width:90%;">}}
 
-[1]: /logs/explorer/?tab=facets#setup
-[2]: /logs/explorer/?tab=measures#setup
+[1]: /logs/explorer/facets
 {{% /tab %}}
 
 {{% tab "Table" %}}
 
-Visualize the top values from a [facet][1] according to a chosen [measure][2] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
+Visualize the top values from a [facet][1] according to a chosen [measure][1] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
 
 * When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
@@ -128,8 +126,7 @@ Visualize the top values from a [facet][1] according to a chosen [measure][2] (t
 
 {{< img src="logs/explorer/analytics/logs_table_example.png" alt="table example"  style="width:90%;">}}
 
-[1]: /logs/explorer/?tab=facets#setup
-[2]: /logs/explorer/?tab=measures#setup
+[1]: /logs/explorer/facets
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -154,5 +151,4 @@ In the following example, each dot represents one log event. The X-axis is the t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/?tab=measures#setup
-[2]: /logs/explorer/?tab=facets#setup
+[1]: /logs/explorer/facets

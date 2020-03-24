@@ -62,29 +62,22 @@ To enable network performance monitoring with the Datadog Agent, use the followi
         enabled: true
     ```
 
-4. Start the system-probe:
+4. If you are running an Agent older than v6.18 or 7.18, manually start the system-probe and enable it to start on boot (since v6.18 and v7.18 the system-probe starts automatically when the Agent is started):
 
     ```shell
-    sudo service datadog-agent-sysprobe start
+    sudo systemctl start datadog-agent-sysprobe 
+    sudo systemctl enable datadog-agent-sysprobe
     ```
 
-    **Note**: If the `service` command is not available on your system, run the following command instead: `sudo systemctl start datadog-agent-sysprobe`
+    **Note**: If the `systemctl` command is not available on your system, start it with following command instead: `sudo service datadog-agent-sysprobe start` and then set it up to start on boot before `datadog-agent` starts.
 
 5. [Restart the Agent][2]
 
     ```shell
-    sudo service datadog-agent restart
+    sudo systemctl restart datadog-agent
     ```
 
-    **Note**: If the `service` command is not available on your system, run the following command instead: `sudo systemctl restart datadog-agent`
-
-6. Enable the system-probe to start on boot:
-
-    ```shell
-    sudo service enable datadog-agent-sysprobe
-    ```
-
-    **Note**: If the `service` command is not available on your system, run the following command instead: `sudo systemctl enable datadog-agent-sysprobe`
+    **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
@@ -95,7 +88,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 To enable network performance monitoring with Kubernetes, use the following configuration:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
     name: datadog-agent
@@ -140,6 +133,10 @@ spec:
                         valueFrom:
                             fieldRef:
                                 fieldPath: status.hostIP
+                      - name: DD_CRI_SOCKET_PATH
+                        value: /host/var/run/docker.sock
+                      - name: DOCKER_HOST,
+                        value: unix:///host/var/run/docker.sock
                   resources:
                       requests:
                           memory: 256Mi
@@ -148,8 +145,8 @@ spec:
                           memory: 256Mi
                           cpu: 200m
                   volumeMounts:
-                      - name: dockersocket
-                        mountPath: /var/run/docker.sock
+                      - name: dockersocketdir
+                        mountPath: /host/var/run
                       - name: procdir
                         mountPath: /host/proc
                         readOnly: true
@@ -179,6 +176,7 @@ spec:
                               - SYS_RESOURCE
                               - SYS_PTRACE
                               - NET_ADMIN
+                              - IPC_LOCK
                   command:
                       - /opt/datadog-agent/embedded/bin/system-probe
                   env:
@@ -205,9 +203,9 @@ spec:
                       - name: s6-run
                         mountPath: /var/run/s6
             volumes:
-                - name: dockersocket
+                - name: dockersocketdir
                   hostPath:
-                      path: /var/run/docker.sock
+                      path: /var/run
                 - name: procdir
                   hostPath:
                       path: /proc

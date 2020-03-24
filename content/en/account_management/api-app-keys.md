@@ -56,6 +56,6 @@ Alternatively, organizations have asked whether they can create a “service acc
 Need help? Contact [Datadog support][4].
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: https://docs.datadoghq.com/logs/log_collection/javascript
+[2]: /logs/log_collection/javascript
 [3]: /real_user_monitoring
 [4]: /help

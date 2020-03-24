@@ -75,9 +75,9 @@ def update_algolia_private_url(docs_index_config,private_urls):
 
 if __name__ == "__main__":
     parser = OptionParser(usage="usage: %prog [options] create placeholder pages for multi-language")
-    parser.add_option("-c", "--config_location", help="location of the doc search config")
-    parser.add_option("-d", "--excluded_directory", help="directories to skip from detecting private")
-    parser.add_option("-l", "--excluded_language", help="languages to skip from detecting private")
+    parser.add_option("-c", "--config_location", help="location of the doc search config", default='')
+    parser.add_option("-d", "--excluded_directory", help="directories to skip from detecting private", default='[]')
+    parser.add_option("-l", "--excluded_language", help="languages to skip from detecting private", default='[]')
 
     (options, args) = parser.parse_args()
     options = vars(options)

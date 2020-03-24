@@ -27,3 +27,11 @@
     'start': 1445968017,
     'updater_id': None
 }
+
+# with RRULE recurrence
+{
+...
+'recurrence': {
+    'type': 'rrule',
+    'rrule': 'FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1'
+}
