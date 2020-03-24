@@ -147,7 +147,7 @@ Both fixed and relative ranges are supported:
   * Hours: `h`, `hr`, `hrs`, `hour`, `hours`
   * Days: `d`, `day`, `days`
   * Months: `mo`, `mos`, `mon`, `mons`, `month`, `months`
-* Entering `today`, `yesterday`, `this month`, `this year`, or `last year` will pause the time frame. It’s not possible for these to update automatically as time passes.
+* `today`, `yesterday`, `this month`, `this year`, or `last year` are determined in relation to when they’re initially entered. The time frames they represent won’t continue to update as time passes.
 
 ## Further Reading
 
