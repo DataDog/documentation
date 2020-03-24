@@ -44,7 +44,7 @@ The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.
 
 **Note:** The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][9] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1.
 
-**Note:** Older versions of .NET Core on Linux/x64 have JIT compiler bugs that can cause applications to throw exceptions when using automatic instrumentation. If your application is running on .NET Core 2.0, 2.1.0-2.1.11, or 2.2.0-2.2.5, we strongly recommend you update your .NET Core runtime. If you cannot update, you may need to set the environment variable `DD_CLR_DISABLE_OPTIMIZATIONS =true` to work around the issue. See [dotnet/runtime/issues/10506][3] and [DataDog/dd-trace-dotnet/issues/302][4] for more details.
+**Note:** Older versions of .NET Core on Linux/x64 have JIT compiler bugs that can cause applications to throw exceptions when using automatic instrumentation. If your application is running on .NET Core 2.0, 2.1.0-2.1.11, or 2.2.0-2.2.5, we strongly recommend you update your .NET Core runtime. If you cannot update, you may need to set the environment variable `DD_CLR_DISABLE_OPTIMIZATIONS=true` to work around the issue. See [dotnet/runtime/issues/10506][3] and [DataDog/dd-trace-dotnet/issues/302][4] for more details.
 
 ### Installation
 
