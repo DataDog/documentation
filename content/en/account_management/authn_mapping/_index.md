@@ -235,8 +235,6 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     "page": {
       "total_count": 1, 
       "total_filtered_count": 1, 
-      "page_number": 0, 
-      "page_size": 0
     }
   }
 }
