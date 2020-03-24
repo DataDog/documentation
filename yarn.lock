@@ -907,7 +907,7 @@
     lodash.merge "4.6.2"
     tslib "1.10.0"
 
-"@datadog/browser-logs@^1.2.6":
+"@datadog/browser-logs@^1.7.5":
   version "1.7.5"
   resolved "https://registry.yarnpkg.com/@datadog/browser-logs/-/browser-logs-1.7.5.tgz#805aeb353ac56692069004fc14c5fffc91e4985e"
   integrity sha512-XW9p+ImOyy11P28lQI/pLC4hmZn1SyNfOxPJcNHQr/AYS02NKqHv8PwYOR7L679KIzagiG3rjnn5mWMSqa7Jhg==
@@ -917,7 +917,7 @@
     lodash.merge "4.6.2"
     tslib "1.10.0"
 
-"@datadog/browser-rum@^1.2.6":
+"@datadog/browser-rum@^1.7.5":
   version "1.7.5"
   resolved "https://registry.yarnpkg.com/@datadog/browser-rum/-/browser-rum-1.7.5.tgz#fb0fdcde2faa3e2d21c6428caa485d3fb18425b2"
   integrity sha512-LVe6PmQcwIjcoQbJVoijtAaLN8SLeAK+b0pu32OHDgbJkVQZbsiNzO3ZQSYIg768IbV0+fj7fbMxixudeXNLFw==
