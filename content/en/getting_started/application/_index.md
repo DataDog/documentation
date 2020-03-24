@@ -125,7 +125,6 @@ Both fixed and relative ranges are supported:
   * `1577883600 - 1578009540`
   * `Jan 1 - Jan 2`
   * `6:00 am - 1:00 pm`
-* Whitespace around the range separator is optional.
 
 #### Relative dates
 
@@ -139,12 +138,12 @@ Both fixed and relative ranges are supported:
 | `this year`   |                                                                  | Displays the current calendar year until now       |
 | `last year`   |                                                                  | Displays the full previous calendar year            |
 
-* Entering `today`, `yesterday`, `this month`, or `this year` will pause the time frame. (You can’t have a fixed start date with a relative end date.)
-* The following strings are accepted for any `{unit}`:
+* The following strings are accepted for any `{unit}` in a relative date:
   * Minutes: `m`, `min`, `mins`, `minute`, `minutes`
   * Hours: `h`, `hr`, `hrs`, `hour`, `hours`
   * Days: `d`, `day`, `days`
   * Months: `mo`, `mos`, `mon`, `mons`, `month`, `months`
+* Entering `today`, `yesterday`, `this month`, `this year`, or `last year` will pause the time frame. It’s not possible for these to update automatically as time passes.
 
 ## Further Reading
 
