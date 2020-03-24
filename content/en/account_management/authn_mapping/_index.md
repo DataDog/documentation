@@ -152,7 +152,7 @@ Returns a list of AuthN Mappings
 ##### ARGUMENTS
 
 * **`sort`** [*optional*, *default*=**created\_at**]:
-  Sort attribute and direction—defaults to ascending order, `-` sorts in descending order.
+  Sort attribute and direction—defaults to ascending order, `-<attribute>` sorts in descending order. Can also sort on relationship attributes `roles.name`, `saml_assertion_attributes.attribute_key`, `saml_assertion_attributes.attribute_value`.
 * **`page[number]`** [*optional*, *default*=**0**, *minimum*=**0**]:
   The page of results to return.
 * **`page[size]`** [*optional*, *default*=**10**]:
@@ -231,7 +231,14 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
       }
     }
   ],
-  "meta": {"page": {"total_count": 1, "total_filtered_count": 1, "page_number": 0, "page_size": 0}}
+  "meta": {
+    "page": {
+      "total_count": 1, 
+      "total_filtered_count": 1, 
+      "page_number": 0, 
+      "page_size": 0
+    }
+  }
 }
 ```
 
