@@ -1,4 +1,3 @@
 ---
 title: Metrics
-type: api
 ---

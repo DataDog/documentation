@@ -1,4 +1,3 @@
 ---
 title: Snapshots
-type: api
 ---
