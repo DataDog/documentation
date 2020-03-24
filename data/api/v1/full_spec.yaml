@@ -189,6 +189,9 @@ components:
       - services
       type: object
     AccessRole:
+      default: st
+      description: The access role of the user. Options are **st** (standard user),
+        **adm** (admin user), or **ro** (read-only user).
       enum:
       - st
       - adm
@@ -943,6 +946,7 @@ components:
           example: 123456
           format: int32
           maximum: 2147483647
+          nullable: true
           readOnly: true
           type: integer
       type: object
@@ -3132,6 +3136,7 @@ components:
         deleted:
           description: TODO.
           format: date-time
+          nullable: true
           readOnly: true
           type: string
         id:
@@ -3618,7 +3623,6 @@ components:
               type: object
             saml_autocreate_access_role:
               $ref: '#/components/schemas/AccessRole'
-              description: TODO.
             saml_autocreate_users_domains:
               description: Has two properties, `enabled` (boolean) and `domains`,
                 which is a list of domains without the @ symbol.
@@ -4182,9 +4186,8 @@ components:
           description: 'A unique identifier for the service level objective object.
 
 
-            Always included in service level objective responses. Required for update
-
-            requests.'
+            Always included in service level objective responses.'
+          readOnly: true
           type: string
         modified_at:
           description: 'Modification timestamp (unix time in seconds)
@@ -6099,6 +6102,7 @@ components:
           type: array
       type: object
     UsageTopAvgMetricsHour:
+      description: TODO.
       properties:
         avg_metric_hour:
           description: Average number of timeseries per hour in which the metric occurs.
@@ -6115,8 +6119,10 @@ components:
           type: string
       type: object
     UsageTopAvgMetricsResponse:
+      description: TODO.
       properties:
         usage:
+          description: TODO.
           items:
             $ref: '#/components/schemas/UsageTopAvgMetricsHour'
           type: array
@@ -6145,9 +6151,6 @@ components:
       properties:
         access_role:
           $ref: '#/components/schemas/AccessRole'
-          default: st
-          description: The access role of the user. Options are **st** (standard user),
-            **adm** (admin user), or **ro** (read-only user).
         disabled:
           description: The new disabled status of the user.
           example: false
