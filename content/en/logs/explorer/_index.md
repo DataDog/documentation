@@ -41,7 +41,7 @@ It appears directly under the search bar as a timeline. The timeline can be disp
 
 Quickly change the time range by selecting a preset range from the dropdown or [entering a custom time frame][1]):
 
-{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Select time range" >}}
+{{< img src="logs/explorer/time_frame.png" style="width:50%;" alt="Select time frame" >}}
 
 ### Search
 

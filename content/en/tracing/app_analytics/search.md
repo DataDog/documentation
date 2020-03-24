@@ -121,7 +121,7 @@ To delete a saved search, click on the bin icon under the Trace search drop-down
 
 The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][3]):
 
-{{< img src="tracing/app_analytics/search/timerange.png" style="width:50%;" alt="Select time range" >}}
+{{< img src="tracing/app_analytics/search/time_frame.png" style="width:50%;" alt="Select time frame" >}}
 
 ## Trace Stream
 
