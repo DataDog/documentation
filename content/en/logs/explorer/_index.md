@@ -39,21 +39,21 @@ Build up a context to explore your logs in your log explorer view first by selec
 The time range feature allows you to display logs in the Logstream or Log Analytics within a given time period.
 It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box in the Logstream option panel.
 
-Quickly change the time range by selecting a preset range from the dropdown:
+Quickly change the time range by selecting a preset range from the dropdown or [entering a custom time frame][1]):
 
-{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange"  >}}
+{{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Select time range" >}}
 
 ### Search
 
-Use facets, measures, tags, or even [free text search][1] to filter your Logstream and Log Analytics with dedicated context. The search bar and url automatically reflect your selections.
+Use facets, measures, tags, or even [free text search][2] to filter your Logstream and Log Analytics with dedicated context. The search bar and url automatically reflect your selections.
 
-Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
+Follow the [guide to search your logs][2] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
 
 {{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true"  >}}
 
 ### Saved views
 
-Use saved views to automatically configure your log explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][2] to learn more.
+Use saved views to automatically configure your log explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][3] to learn more.
 
 ### Share views
 
@@ -175,5 +175,6 @@ Find out more in the [Log Patterns section][1]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search
-[2]: /logs/explorer/saved_views
+[1]: /getting_started/application#time-frames
+[2]: /logs/explorer/search
+[3]: /logs/explorer/saved_views
