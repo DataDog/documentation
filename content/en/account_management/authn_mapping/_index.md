@@ -35,11 +35,12 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
 
 ##### ARGUMENTS
 
-* **`role_uuid`** [*required*, *default*=none]:
-  The `UUID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. When you create a Role, it is assigned a UUID. For more information about finding the `role_uuid` for the role you want to map to, see the [Role API documentation][1].
-* **`attribute_key`** [*required*, *default*=none]:
+* **`roles.uuid`** [*required*, no default]:
+The `UUID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. Note that this attribute should be presented as part of a `roles` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
+
+* **`attribute_key`** [*required*, no default]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
-* **`attribute_value`** [*required*, *default*=none]:
+* **`attribute_value`** [*required*, no default]:
  The `attribute_value` is the value portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 
 {{< tabs >}}
@@ -55,9 +56,16 @@ curl -X POST \
              "data": {
                  "type": "authn_mappings",
                  "attributes": {
-                      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
-                      "attribute_key": "member-of",
-                      "attribute_value": "Development"
+                    "attribute_key": "member-of",
+                    "attribute_value": "Development"
+                }
+                "relationships": {
+                    "roles": {
+                        "data": {
+                            "id": "123e4567-e89b-12d3-a456-426655445555",
+                            "type": "roles"
+                        }
+                    }
                 }
              }
          }'
@@ -74,6 +82,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
   "data": {
     "attributes": {
       "created_at": "2019-11-04 17:41:29.015504",
+      "modified_at": "2019-11-04 17:41:29.015504",
       "role_uuid": "00000000-0000-0000-0000-000000000000",
       "saml_assertion_attribute_id": 0
     },
@@ -142,13 +151,13 @@ Returns a list of AuthN Mappings
 
 ##### ARGUMENTS
 
-* **`sort`** [*optional*, *default*=**+**]:
+* **`sort`** [*optional*, *default*=**created\_at**]:
   Sort attribute and direction—defaults to ascending order, `-` sorts in descending order.
 * **`page[number]`** [*optional*, *default*=**0**, *minimum*=**0**]:
   The page of results to return.
 * **`page[size]`** [*optional*, *default*=**10**]:
   The number of results to return on each page.
-* **`filter`** [*optional*, no default]:
+* **`filter`** [*optional*, default=none]:
   Filter by tags as strings. For example, `Billing Users`.
 
 {{< tabs >}}
@@ -185,7 +194,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
       },
       "attributes": {
         "created_at": "2019-11-04 17:41:29.015504",
-        "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
+        "modified_at": "2019-11-04 17:41:29.015504",
         "saml_assertion_attribute_id": 0
       }
     }
@@ -222,7 +231,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
       }
     }
   ],
-  "meta": {"page": {"total": 0, "page_number": 0, "page_size": 0}}
+  "meta": {"page": {"total_count": 1, "total_filtered_count": 1, "page_number": 0, "page_size": 0}}
 }
 ```
 
@@ -262,8 +271,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
   "data": {
     "attributes": {
       "created_at": "2019-11-04 17:41:29.015504",
+      "modified_at": "2019-11-04 17:41:29.015504",
       "uuid": "123e4567-e89b-12d3-a456-426655440000",
-      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
       "saml_assertion_attribute_id": 0
     },
     "type": "authn_mappings",
@@ -328,13 +337,13 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
 
 * **`{UUID}`** [*required*, no default]:
   Replace `{UUID}` with the UUID of the AuthN Mapping you want to update.
-* **`id`** [*required*, *default*=none]:
+* **`id`** [*required*, no default]:
   The UUID of the AuthN Mapping being updated. This property must match the `{UUID}` path parameter in the request.
-* **`role_uuid`** [*required*, *default*=none]:
-  The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. When you create a Role, it is assigned a UUID. For more information about finding the `role_uuid` for the role you are updating, see the [Role API documentation][1].
-* **`attribute_key`** [*required*, *default*=none]:
+* **`roles.uuid`** [*optional*, *default*=none]:
+  The `UUID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. Note that this attribute should be presented as part of a `roles` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
+* **`attribute_key`** [*optional*, *default*=none]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
-* **`attribute_value`** [*required*, *default*=none]:
+* **`attribute_value`** [*optional*, *default*=none]:
  The `attribute_value` is the value portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 
 {{< tabs >}}
@@ -351,12 +360,16 @@ curl -X PATCH \
                  "type": "authn_mappings",
                  "id": "{UUID}",
                  "attributes": {
-                      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
                       "attribute_key": "member-of",
                       "attribute_value": "Developer"
+                 }
+                 "relationships": {
+                    "roles": {
+                    "data": {"id": "123e4567-e89b-12d3-a456-426655440000", "type": "roles"}
+                    }
                 }
-             }
-         }'
+            }
+        }'
 ```
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
@@ -370,7 +383,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
   "data": {
     "attributes": {
       "created_at": "2019-11-04 17:41:29.015504",
-      "role_uuid": "123e4567-e89b-12d3-a456-426655445555",
+      "modified_at": "2019-11-04 17:41:29.015504",
       "saml_assertion_attribute_id": 0
     },
     "type": "authn_mappings",
