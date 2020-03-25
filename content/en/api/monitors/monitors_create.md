@@ -63,7 +63,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`check`** name of the check, e.g. datadog.agent.up
     *   **`tags`** one or more quoted tags (comma-separated), or "*". e.g.: `.over("env:prod", "role:db")`
-    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 100.
+    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 100. 
 
     ##### Event Alert Query
 
@@ -86,7 +86,18 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`search`** free text search string for querying processes. Matching processes match results on the [Live Processes][4] page
     *   **`tags`** one or more tags (comma-separated)
-    *   **`timeframe`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d
+    *   **`timeframe`** the timeframe to roll up the counts. Examples: 5m, 4h. Supported timeframes: s, m, h and d
+    *   **`operator`** <, <=, >, >=, ==, or !=
+    *   **`#`** an integer or decimal number used to set the threshold
+    
+    ##### Logs Alert Query
+
+    `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #"`
+    *   **`query`** The search query - following the [Log search syntax][6] .
+    *   **`index_name`** For multi-index organizations, the log index in which the request is performed.
+    *   **`rollup_method`** the stats rollup method. count, avg and cardinality are the only supported method now
+    *   **`measure`** For avg and cardinality rollup_method, specify the measure or the facet name you want to use.
+    *   **`time_window`** #m (5, 10, 15, or 30), #h (1, 2, or 4, 24)
     *   **`operator`** <, <=, >, >=, ==, or !=
     *   **`#`** an integer or decimal number used to set the threshold
 
@@ -160,6 +171,22 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
    - **`thresholds`** a dictionary of thresholds by status. Because service checks can have multiple thresholds, we don't define them directly in the query.
 
     Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
+    
+    ##### Logs Alert Options
+    
+    _These options only apply to logs alerts._
+    - **`thresholds`** a dictionary of thresholds by status.
+
+    Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
+    
+    - **`aggregation`** a dictionary of `type`, `metric` and `groupeBy`:
+    -- `type`  3 types are supported: `count`, `cardinality` and `avg`
+    -- `metric`:  for `cardinality` name of the facet. For `avg` name of the metric. for `count`just put `count` as metric  
+    -- `groupeBy` name of the facet on which you want to group by.
+    
+    Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
+    
+    - **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: False
 
     ##### Errors and Validation
 
@@ -172,3 +199,4 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 [3]: /monitors/monitor_types/#define-the-conditions
 [4]: /infrastructure/process
 [5]: /monitors/faq/what-are-recovery-thresholds
+[6]: /logs/explorer/search/#search-syntax
