@@ -1,4 +1,3 @@
 ---
 title: Dashboards
-type: api
 ---

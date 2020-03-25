@@ -1,4 +1,3 @@
 ---
 title: Downtimes
-type: api
 ---

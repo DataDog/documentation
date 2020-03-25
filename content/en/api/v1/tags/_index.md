@@ -1,4 +1,3 @@
 ---
 title: Tags
-type: api
 ---

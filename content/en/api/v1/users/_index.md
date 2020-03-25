@@ -1,4 +1,3 @@
 ---
 title: Users
-type: api
 ---

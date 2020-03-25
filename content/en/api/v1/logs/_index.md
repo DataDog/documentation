@@ -1,4 +1,3 @@
 ---
 title: Logs
-type: api
 ---
