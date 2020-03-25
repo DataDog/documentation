@@ -99,7 +99,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     *   **`rollup_method`** the stats rollup method. count, avg and cardinality are the only supported method now
     *   **`measure`** For avg and cardinality rollup_method, specify the measure or the facet name you want to use.
     *   **`time_window`** #m (5, 10, 15, or 30), #h (1, 2, or 4, 24)
-    *   **`operator`** <, <=, >, >=, ==, or !=
+    *   **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
     *   **`#`** an integer or decimal number used to set the threshold
 
     ##### Composite Query
