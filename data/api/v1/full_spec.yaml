@@ -1440,58 +1440,6 @@ components:
         style:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
-    HistoryServiceLevelObjectiveGroups:
-      description: 'A `monitor` based SLO history for either `groups` or `monitors`
-        depending on the type of `monitor` SLO.
-
-
-        For example, `single-monitor` these represent `groups` vs `multi-monitor`
-
-        which represents individual monitor''s overall history.'
-      properties:
-        history:
-          description: For `monitor` based SLOs, this includes the aggregated history
-            uptime time series.
-          items:
-            description: Represents an array of 2-tuple of (timestamp, value) time
-              series data.
-            items:
-              format: double
-              type: number
-            maxItems: 2
-            minItems: 2
-            type: array
-          type: array
-        name:
-          description: 'For single-monitor `monitor` based SLOs this is the `monitor
-            group` name.
-
-            For multi-monitor `monitor` based SLOs this is the `monitor` name.'
-          type: string
-        precision:
-          additionalProperties:
-            format: double
-            type: number
-          description: 'A mapping of threshold `timeframe` to number of accurate decimals,
-
-            regardless of the from && to timestamp.'
-          type: object
-        preview:
-          description: 'For `monitor` based SLOs when `true` this indicates that a
-            replay is in progress to give an accurate uptime
-
-            calculation.'
-          type: boolean
-        span_precision:
-          description: The amount of decimal places the uptime value is accurate to
-            for the given from and to timestamp.
-          format: double
-          type: number
-        uptime:
-          description: The uptime value of the SLO history window.
-          format: double
-          type: number
-      type: object
     HistoryServiceLevelObjectiveMetrics:
       description: A `metric` based SLO history response.
       properties:
@@ -1583,47 +1531,6 @@ components:
       - values
       - metadata
       type: object
-    HistoryServiceLevelObjectiveOverall:
-      properties:
-        history:
-          description: For `monitor` based SLOs, this includes the aggregated history
-            uptime time series.
-          items:
-            description: Represents an array of 2-tuple of (timestamp, value) time
-              series data.
-            items:
-              format: double
-              type: number
-            maxItems: 2
-            minItems: 2
-            type: array
-          type: array
-        name:
-          description: For `monitor` based SLOs this represents the overall group.
-          type: string
-        precision:
-          additionalProperties:
-            format: double
-            type: number
-          description: A mapping of threshold `timeframe` to number of accurate decimals,
-            regardless of the from && to timestamp.
-          type: object
-        preview:
-          description: 'For `monitor` based SLOs when `true` this indicates that a
-            replay is in progress to give an accurate uptime
-
-            calculation.'
-          type: boolean
-        span_precision:
-          description: The amount of decimal places the uptime value is accurate to
-            for the given from and to timestamp.
-          format: double
-          type: number
-        uptime:
-          description: The uptime value of the SLO history window.
-          format: double
-          type: number
-      type: object
     HistoryServiceLevelObjectiveResponse:
       description: TODO.
       properties:
@@ -1635,9 +1542,9 @@ components:
               format: int64
               type: integer
             groups:
-              $ref: '#/components/schemas/HistoryServiceLevelObjectiveGroups'
+              $ref: '#/components/schemas/HistoryServiceLevelObjectiveSLIData'
             overall:
-              $ref: '#/components/schemas/HistoryServiceLevelObjectiveOverall'
+              $ref: '#/components/schemas/HistoryServiceLevelObjectiveSLIData'
             series:
               $ref: '#/components/schemas/HistoryServiceLevelObjectiveMetrics'
             thresholds:
@@ -1669,6 +1576,58 @@ components:
         error:
           description: human readable error
           type: string
+      type: object
+    HistoryServiceLevelObjectiveSLIData:
+      description: An object that holds an SLI value and its associated data. It can
+        represent an SLO's overall SLI value or the SLI value for a specific monitor
+        (in multi-monitor SLOs) or group (in grouped SLOs). The uptime history is
+        included for monitor SLOs.
+      properties:
+        history:
+          description: For `monitor` based SLOs, this includes the aggregated history
+            uptime time series.
+          items:
+            description: Represents an array of 2-tuple of (timestamp, value) time
+              series data.
+            items:
+              format: double
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        name:
+          description: For groups in a grouped SLO this is the group name. For monitors
+            in a multi-monitor SLO this is the monitor name.
+          type: string
+        precision:
+          additionalProperties:
+            format: double
+            type: number
+          description: A mapping of threshold `timeframe` to number of accurate decimals,
+            regardless of the from && to timestamp.
+          type: object
+        preview:
+          description: 'For `monitor` based SLOs when `true` this indicates that a
+            replay is in progress to give an accurate uptime
+
+            calculation.'
+          type: boolean
+        sli_value:
+          description: The current SLI value of the SLO over the history window.
+          example: 99.99
+          format: double
+          type: number
+        span_precision:
+          description: The amount of decimal places the SLI value is accurate to for
+            the given from and to timestamp.
+          format: double
+          type: number
+        uptime:
+          deprecated: true
+          description: Deprecated. Use `sli_value` instead.
+          format: double
+          type: number
       type: object
     Host:
       properties:
