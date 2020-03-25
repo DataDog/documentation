@@ -13,10 +13,12 @@
         {{ $s.Set "data" . }}
       {{ end }}
       {{ with $value.items }}
-          {{ with .properties }}
-            {{ $s.Set "data" . }}
-          {{ else }}
-            {{ $s.Set "data" . }}
+          {{ if reflect.IsMap . }}
+            {{ with .properties }}
+              {{ $s.Set "data" . }}
+            {{ else }}
+              {{ $s.Set "data" . }}
+            {{ end }}
           {{ end }}
       {{ end }}
     {{ end }}
