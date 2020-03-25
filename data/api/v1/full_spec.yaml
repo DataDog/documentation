@@ -42,6 +42,14 @@ components:
             endpoint.'
           example: false
           type: object
+        excluded_regions:
+          description: An array of AWS regions to exclude from metrics collection.
+          example:
+          - us-east-1
+          - us-west-2
+          items:
+            type: string
+          type: array
         filter_tags:
           description: 'The array of EC2 tags (in the form key:value) defines a filter
             that Datadog uses when collecting metrics from EC2.
