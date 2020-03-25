@@ -10,10 +10,10 @@ further_reading:
       text: 'Explore your views within Datadog'
 ---
 
-The errors dashboard provides insights about your applications’ errors. It is separated in 2 sections:
+The errors dashboard provides insights about your applications’ errors. It is separated in two sections:
 
 - **General errors**:
-    Visualize which pages, browser, and countries are the most affected by front-end errors.
+    Visualize which pages, browser, and countries are the most affected by frontend errors.
 - **Resource errors**:
     Monitor your XHR and Fetch resources with a status code superior or equal to `400`.
 

@@ -14,7 +14,7 @@ When you [create a RUM application][1] dashboards are created within Datadog to 
 
 {{< img src="real_user_monitoring/dashboards/rum_dashboard_in_dashlist.png" alt="RUM Dashboard in dash list" >}}
 
-Another way to access them is to go in your [RUM application page][3] and click on the **Dashboard** links associated with your application:
+You can also access these dashboards through your [RUM application page][3]. Click on the **Dashboard** links associated with your application:
 
 {{< img src="real_user_monitoring/dashboards/rum_applications.gif" alt="RUM applications" >}}
 

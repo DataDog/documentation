@@ -10,7 +10,7 @@ further_reading:
       text: 'Explore your views within Datadog'
 ---
 
-The resources dashboard provides insights about your applications’ resources. It is separated in 4 sections:
+The resources dashboard provides insights about your applications’ resources. It is separated in four sections:
 
 - **Resources overview**:
     Visualize which resources are being loaded the most, their associated status code, and their size split by resource type.

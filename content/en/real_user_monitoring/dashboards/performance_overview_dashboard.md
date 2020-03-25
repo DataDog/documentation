@@ -10,12 +10,12 @@ further_reading:
       text: 'Explore your views within Datadog'
 ---
 
-The performance overview dashboard offers a bird’s-eye view of RUM applications. It is separated in 3 sections:
+The performance overview dashboard offers a bird’s-eye view of RUM applications. It is separated in three sections:
 
 - **Performance metrics**:
-    For all views, 3 browser metrics are highlighted: First Contentful Paint, DOM Content Loaded, and Load Event. For each one of these metrics, widgets show the median, the 75th percentile, and the 90th percentile.
+    For all views, three browser metrics are highlighted: First Contentful Paint, DOM Content Loaded, and Load Event. For each one of these metrics, widgets show the median, the 75th percentile, and the 90th percentile.
 - **Trends**:
-    Visualize the evolution of page views, front-end errors related to back-end calls failing, JS errors, and long tasks.
+    Visualize the evolution of page views, frontend errors related to backend calls failing, JS errors, and long tasks.
 - **Page views breakdown**:
     Analyze the nature of your traffic and the associated load time for each segment.
 
