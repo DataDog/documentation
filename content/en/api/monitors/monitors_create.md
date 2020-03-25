@@ -63,7 +63,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`check`** name of the check, e.g. datadog.agent.up
     *   **`tags`** one or more quoted tags (comma-separated), or "*". e.g.: `.over("env:prod", "role:db")`
-    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 100. 
+    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 100.
 
     ##### Event Alert Query
 
@@ -86,7 +86,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`search`** free text search string for querying processes. Matching processes match results on the [Live Processes][4] page
     *   **`tags`** one or more tags (comma-separated)
-    *   **`timeframe`** the timeframe to roll up the counts. Examples: 5m, 4h. Supported timeframes: s, m, h and d
+    *   **`timeframe`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d
     *   **`operator`** <, <=, >, >=, ==, or !=
     *   **`#`** an integer or decimal number used to set the threshold
     
