@@ -97,7 +97,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     *   **`query`** The search query - following the [Log search syntax][6] .
     *   **`index_name`** For multi-index organizations, the log index in which the request is performed.
     *   **`rollup_method`** The stats rollup method - supports `count`, `avg` and `cardinality`.
-    *   **`measure`** For avg and cardinality rollup_method, specify the measure or the facet name you want to use.
+    *   **`measure`** For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
     *   **`time_window`** #m (5, 10, 15, or 30), #h (1, 2, or 4, 24)
     *   **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
     *   **`#`** an integer or decimal number used to set the threshold
