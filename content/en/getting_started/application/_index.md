@@ -102,13 +102,13 @@ You can also type or paste custom ranges and timestamps—including ones copied 
 
 {{< img src="getting_started/copy_and_paste_time_frame.mp4" alt="Copy and paste time frame" video="true" >}}
 
-Both fixed and relative ranges are supported:
+Both fixed and relative custom ranges are supported:
 
 {{< img src="getting_started/type_custom_fixed_time_frame.mp4" alt="Type custom fixed time frame" video="true" >}}
 
 {{< img src="getting_started/type_custom_relative_time_frame.mp4" alt="Type custom relative time frame" video="true" >}}
 
-### Supported time syntaxes
+### Supported syntax for custom time ranges
 
 #### Fixed dates
 
