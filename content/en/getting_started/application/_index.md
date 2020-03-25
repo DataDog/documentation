@@ -117,8 +117,8 @@ Both fixed and relative custom ranges are supported:
 | `{MMM/MMMM} D`               | Jan 1<br>January 1                               |
 | `M/D`                        | 1&#8203;/&#8203;1                                |
 | `M-D`                        | 1-1                                              |
-| `M/D/{YY/YYYY}`              | 1/1/19<br> 1/1/2019                              |
-| `M-D-{YY/YYYY}`              | 1-1-19<br> 1-1-2019                              |
+| `M/D/{YY/YYYY}`              | 1/1/19<br>1/1/2019                               |
+| `M-D-{YY/YYYY}`              | 1-1-19<br>1-1-2019                               |
 | `{MMM/MMMM} D, h:mm a`       | Jan 1, 1:00 pm<br>January 1, 1:00 pm             |
 | `{MMM/MMMM} D, YYYY, h:mm a` | Jan 1, 2019, 1:00 pm<br>January 1, 2019, 1:00 pm |
 | `h:mm a`                     | 1:00 pm                                          |
@@ -132,15 +132,15 @@ Both fixed and relative custom ranges are supported:
 
 #### Relative dates
 
-| Format          | Examples                                                       | Notes                                                                              |
-|-----------------|---------------------------|-------------------------------------------------------------------------------|
-| `N{unit}`       | 3m<br>3 min<br>3h<br>3 hours<br>3d<br>3 days<br>3mo<br>3 months | Displays the past N units (e.g., the past 3 months) |
-| `today`       |                                                                  | Displays the current calendar day until now |
-| `yesterday`   |                                                                  | Displays the full previous calendar day             |
-| `this month`  |                                                                  | Displays the current calendar month until now       |
-| `last month`  |                                                                  | Displays the full previous calendar month           |
-| `this year`   |                                                                  | Displays the current calendar year until now       |
-| `last year`   |                                                                  | Displays the full previous calendar year            |
+| Format       | Examples                                                        | Notes                                               |
+|--------------|-----------------------------------------------------------------|-----------------------------------------------------|
+| `N{unit}`    | 3m<br>3 min<br>3h<br>3 hours<br>3d<br>3 days<br>3mo<br>3 months | Displays the past N units (e.g., the past 3 months) |
+| `today`      |                                                                 | Displays the current calendar day until now         |
+| `yesterday`  |                                                                 | Displays the full previous calendar day             |
+| `this month` |                                                                 | Displays the current calendar month until now       |
+| `last month` |                                                                 | Displays the full previous calendar month           |
+| `this year`  |                                                                 | Displays the current calendar year until now        |
+| `last year`  |                                                                 | Displays the full previous calendar year            |
 
 * The following strings are accepted for any `{unit}` in a relative date:
   * Minutes: `m`, `min`, `mins`, `minute`, `minutes`
