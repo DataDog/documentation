@@ -14,20 +14,20 @@ The Usage page provides the following information:
 * Overall Usage (current and historical)
 * Top 500 Custom Metrics
 
-### Month-to-Date Summary
+## Month-to-Date Summary
 
 This section summarizes your month-to-date usage of hosts, containers, custom metrics, APM hosts, Analyzed Spans, logs, synthetics and any other part of the platform you've used during the month.
 
 {{< img src="account_management/billing/usage-details-01.png" alt="Usage Summary" >}}
 
-### Overall Usage
+## Overall Usage
 
 This section contains hourly, daily, monthly, and annual usage displayed in two tabs:
 
 * All Products
 * Infrastructure Host Types
 
-#### Host, Containers and Custom Metrics
+### Host, Containers and Custom Metrics
 
 This tab shows hourly, daily, monthly, and annual usage for:
 
@@ -47,7 +47,7 @@ This tab shows hourly, daily, monthly, and annual usage for:
 
 {{< img src="account_management/billing/usage-details-02.png" alt="Hourly Usage" >}}
 
-#### Infrastructure Host Types
+### Infrastructure Host Types
 
 This table shows the break-down of the **Infra Hosts** graph above by host type:
 
@@ -58,7 +58,7 @@ This table shows the break-down of the **Infra Hosts** graph above by host type:
 
 {{< img src="account_management/billing/usage-details-03.png" alt="Infra Host Types" >}}
 
-### Top 500 Custom Metrics
+## Top 500 Custom Metrics
 
 This table lists the following information about your Top 500 custom metrics month-to-date usage:
 

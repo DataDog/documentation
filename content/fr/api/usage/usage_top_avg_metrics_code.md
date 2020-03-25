@@ -1,7 +1,7 @@
 ---
 title: Obtenir les 500 principales métriques custom selon la moyenne horaire
 type: apicode
-order: 35.4
+order: 35.5
 external_redirect: /api/#obtenir-les-500-principales-metriques-custom-selon-la-moyenne-horaire
 ---
 

@@ -12,5 +12,6 @@ api.AwsIntegration.create(
     host_tags=["tag:example"],
     filter_tags=["filter:example"],
     role_name="<AWS_ROLE_NAME>",
-    account_specific_namespace_rules={'namespace1': True/False, 'namespace2': True/False}
+    account_specific_namespace_rules={'namespace1': True/False, 'namespace2': True/False},
+    excluded_regions=["us-east-1", "us-west-1"]
 )

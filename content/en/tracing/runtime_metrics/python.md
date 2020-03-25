@@ -49,6 +49,6 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 [2]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0
 [3]: /developers/metrics/dogstatsd_metrics_submission/#setup
 [4]: /agent/docker/#dogstatsd-custom-metrics
-[5]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[5]: /developers/dogstatsd/?tab=kubernetes#agent
 [6]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30267/python-runtime-metrics

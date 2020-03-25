@@ -11,6 +11,7 @@ content/en/developers/amazon_cloudformation.md
 
 # Agent section
 content/en/agent/basic_agent_usage/heroku.md
+content/en/agent/basic_agent_usage/puppet.md
 
 # Tracing
 content/en/tracing/setup/ruby.md

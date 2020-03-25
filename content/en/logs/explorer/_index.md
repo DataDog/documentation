@@ -72,9 +72,9 @@ Use the _share_ button to send your current log explorer view to a CSV file or t
 | Export to CSV     | Export your current logstream view with its selected columns to a CSV file. You can export up to 5,000 logs at once.                           |
 | Share View        | Share a link to the current view with your teammates through email, Slack, and more. See all [Datadog notification integrations][2] available. |
 
+
 [1]: /monitors/monitor_types/log
 [2]: /integrations/#cat-notification
-
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 
@@ -84,10 +84,10 @@ Use the _share_ button to send your current log explorer view to a CSV file or t
 | Export to Dashboard | Export the current analytic as a widget to an existing or new [dashboard][2].                  |
 | Generate new Metric | [Generate a new metric][3] out of the current analytic query.                                  |
 
+
 [1]: /monitors/monitor_types/log
 [2]: /dashboards/
 [3]: /logs/logs_to_metrics/
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -139,10 +139,10 @@ Use the **Share** button to share the log opened in side panel to other contexts
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="configure display table"  style="width:50%;">}}
 
+
 [1]: /logs/explorer/search
 [2]: /logs/processing/attributes_naming_convention
 [3]: /tracing/connect_logs_and_traces
-
 {{% /tab %}}
 {{% tab "Log Analytics" %}}
 
@@ -152,9 +152,9 @@ Follow the [log graphing guide][2] to learn more about all the graphing options.
 
 {{< img src="logs/explorer/log_analytics.png" alt="Log Analytics"  style="width:70%;">}}
 
+
 [1]: /logs/processing
 [2]: /logs/explorer/analytics
-
 {{% /tab %}}
 {{% tab "Log Patterns" %}}
 
@@ -166,8 +166,8 @@ Find out more in the [Log Patterns section][1]
 
 {{< img src="logs/explorer/log_patterns.png" alt="Log Patterns"  style="width:70%;">}}
 
-[1]: /logs/explorer/patterns
 
+[1]: /logs/explorer/patterns
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -177,6 +177,3 @@ Find out more in the [Log Patterns section][1]
 
 [1]: /logs/explorer/search
 [2]: /logs/explorer/saved_views
-[3]: /logs/explorer/analytics
-[4]: /logs/processing/attributes_naming_convention
-[5]: /logs/processing/#reserved-attributes

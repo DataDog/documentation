@@ -43,6 +43,6 @@ helm template install/kubernetes/helm/istio --name istio --namespace istio-syste
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kubernetes/daemonset_setup
-[2]: /agent/kubernetes/daemonset_setup/#apm-and-distributed-tracing
+[1]: /agent/kubernetes/
+[2]: /agent/kubernetes/apm/
 [3]: https://istio.io/docs/setup/kubernetes/install/helm

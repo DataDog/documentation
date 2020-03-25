@@ -42,6 +42,7 @@ Before you begin, you need to have a [Datadog account][3], a [Datadog API key][4
 | Host           | _Required_ - The Datadog server where you are sending your logs.                                                         | US - `http-intake.logs.datadoghq.com`, EU - `http-intake.logs.datadoghq.eu` |
 | TLS            | _Required_ - End-to-end security communications security protocol. Datadog recommends setting this to `on`.              | `off`                                                                       |
 | apikey         | _Required_ - Your [Datadog API key][4].                                                                                  |                                                                             |
+| compress       | _Recommended_ - compresses the payload in GZIP format, Datadog supports and recommends setting this to `gzip`.           |                                                                             |
 | dd_service     | _Recommended_ - The human readable name for your service generating the logs - the name of your application or database. |                                                                             |
 | dd_source      | _Recommended_ - A human readable name for the underlying technology of your service. For example, `postgres` or `nginx`. |                                                                             |
 | dd_message_key | _Recommended_ - Set the attribute to use to store your log message.                                                      |                                                                             |
@@ -56,6 +57,7 @@ Before you begin, you need to have a [Datadog account][3], a [Datadog API key][4
     Match             *
     Host              http-intake.logs.datadoghq.com
     TLS               on
+    compress          gzip
     apikey            <DATADOG_API_KEY>
     dd_service        <APPLICATION_SERVICE>
     dd_source         <SOURCE>

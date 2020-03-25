@@ -356,7 +356,7 @@ Datadog ブラウザのログライブラリが初期化されると、API を�
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setLevel('<LEVEL>');
+datadogLogs.logger.setLevel('<LEVEL>');
 ```
 
 {{% /tab %}}
@@ -384,14 +384,14 @@ Datadog ブラウザのログライブラリが初期化されると、ログを
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setHandler('<HANDLER>');
+datadogLogs.logger.setHandler('<HANDLER>');
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setHandler('<HANDLER>');
+window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>');
 ```
 
 **注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。

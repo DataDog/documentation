@@ -84,7 +84,7 @@ Datadog は、Oracle JDK と OpenJDK の両方の Java JRE 1.7 以上を公式�
 | Java Servlet 互換 | 2.3+、3.0+ | 完全対応 | `servlet`、`servlet-2`、`servlet-3`            |
 | Jax-RS アノテーション      | JSR311-API | 完全対応 | `jax-rs`、`jaxrs`、`jax-rs-annotations`        |
 | Jetty (非 Servlet)     | 8+         | [ベータ][8]       | `jetty`、`jetty-8`                             |
-| Netty HTTP サーバー       | 4.0+       | 完全対応 | `netty`、`netty-4.0`、`netty-4.1`              |
+| Netty HTTP サーバー       | 3.8+       | 完全対応 | `netty`、`netty-3.8`、`netty-4.0`、`netty-4.1` |
 | Play                    | 2.4-2.7    | 完全対応 | `play`                                         |
 | Ratpack                 | 1.4+       | 完全対応 | `ratpack`                                      |
 | Spark Java              | 2.3+       | [ベータ][8]       | `sparkjava` (要 `jetty`)                 |

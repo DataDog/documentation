@@ -75,6 +75,36 @@ Select your Cloud provider below to see how to automatically collect your logs a
 Any custom process or [logging library][18] able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs. Choose below which Datadog site you want to forward logs to:
 
 {{< tabs >}}
+{{% tab "HTTP US Site" %}}
+
+The public endpoint is `http-intake.logs.datadoghq.com`. The API key must be added either in the path or as a header, for instance:
+
+```
+curl -X POST https://http-intake.logs.datadoghq.com/v1/input \
+     -H "Content-Type: text/plain" \
+     -H "DD-API-KEY: <API_KEY>" \
+     -d 'hello world'
+```
+
+For more examples with JSON formats, multiple logs per request, or the use of query parameters, refer to the [Datadog Log HTTP API documentation][1].
+
+[1]: https://docs.datadoghq.com/api/?lang=bash#send-logs-over-http
+{{% /tab %}}
+{{% tab "HTTP EU Site" %}}
+
+The public endpoint is `http-intake.logs.datadoghq.eu`. The API key must be added either in the path or as a header, for instance:
+
+```
+curl -X POST https://http-intake.logs.datadoghq.eu/v1/input \
+     -H "Content-Type: text/plain" \
+     -H "DD-API-KEY: <API_KEY>" \
+     -d 'hello world'
+```
+
+For more examples with JSON formats, multiple logs per request, or the use of query parameters, refer to the [Datadog Log HTTP API documentation][1].
+
+[1]: https://docs.datadoghq.com/api/?lang=bash#send-logs-over-http
+{{% /tab %}}
 {{% tab "TCP US Site" %}}
 
 The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections).
@@ -144,12 +174,6 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
-{{% /tab %}}
-{{% tab "HTTP" %}}
-
-To send logs over HTTPs for the **EU** or **US** site, refer to the [Datadog Log HTTP API documentation][1].
-
-[1]: https://docs.datadoghq.com/api/?lang=python#send-logs-over-http
 {{% /tab %}}
 {{< /tabs >}}
 

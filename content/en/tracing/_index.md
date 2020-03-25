@@ -22,6 +22,7 @@ aliases:
   - /tracing/guide/terminology
   - /tracing/guide/distributed_tracing/
   - /tracing/advanced/
+  - /tracing/api
 ---
 
 {{< wistia 2kgmb9wbsr >}}

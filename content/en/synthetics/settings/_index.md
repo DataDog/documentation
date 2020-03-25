@@ -57,7 +57,7 @@ You can create variables from your existing HTTP tests by parsing its response h
     * Extract the value from **response header**: use the full response header for your variable, or parse it with a [regex][1].
     * Extract the value from **response body**: parse the response body of the request with a [regex][1], or use the full response body.
 
-{{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential"  style="width:80%;">}}
+{{< img src="synthetics/settings/variable_from_http.png" alt="Variable from http"  style="width:80%;">}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}

@@ -200,7 +200,7 @@ More examples:
 
 ## Tail directories by using wildcards
 
-If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute.
+If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute. If you want to exclude some files matching the chosen `path`, list them in the `exclude_paths` attribute.
 
 * Using `path: /var/log/myapp/*.log`:
   * Matches all `.log` file contained in the `/var/log/myapp/` directory.
@@ -217,9 +217,14 @@ Configuration example:
 logs:
  - type: file
    path: /var/log/myapp/*.log
+   exclude_paths:
+     - /var/log/myapp/debug.log
+     - /var/log/myapp/trace.log
    service: mywebapp
    source: go
 ```
+
+The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log` will never be tailed.
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
 

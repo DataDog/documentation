@@ -382,7 +382,7 @@ The following options and tags are deprecated:
 [1]: /integrations/kubelet
 [2]: /integrations/kube_apiserver_metrics
 [3]: /help
-[4]: /integrations/kubernetes
+[4]: /agent/kubernetes/
 [5]: /agent/autodiscovery/tag/#extract-node-labels-as-tags
 {{% /tab %}}
 {{% tab "JMX" %}}

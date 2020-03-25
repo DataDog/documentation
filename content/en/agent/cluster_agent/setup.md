@@ -203,7 +203,7 @@ Kubernetes events are beginning to flow into your Datadog account, and relevant 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent/rbac
-[2]: /agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions
+[2]: /agent/kubernetes/
 [3]: /agent/faq/rbac-for-dca-running-on-aks-with-helm/
 [4]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml
 [5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/cluster-agent.yaml

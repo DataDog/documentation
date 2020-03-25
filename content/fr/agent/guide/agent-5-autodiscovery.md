@@ -389,7 +389,7 @@ checks:
 [1]: https://www.datadoghq.com/docker-adoption
 [2]: https://github.com/DataDog/integrations-core/blob/master/go_expvar/datadog_checks/go_expvar/data/conf.yaml.example
 [3]: https://hub.docker.com/r/datadog/docker-dd-agent
-[4]: /fr/integrations/kubernetes
+[4]: /fr/agent/kubernetes
 [5]: /fr/integrations/amazon_ecs/#installation
 [6]: https://github.com/DataDog/docker-dd-agent#environment-variables
 [7]: https://github.com/DataDog/jmxfetch

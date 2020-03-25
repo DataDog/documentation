@@ -14,25 +14,31 @@ further_reading:
   text: "Manage your monitors"
 - link: "monitors/downtimes"
   tag: "Documentation"
-  text: "Schedule a downtime to mute a monitor"
+  text: "Schedule a downtime for a monitor"
 ---
 
 ## Overview
 
-Datadog checks emit a status on each check run. Potential statuses are `OK`, `WARNING`, or `CRITICAL`.
+Datadog checks report a status on each run. The [check summary page][1] displays your checks reported in the past day. Potential statuses are:
 
-The check summary page lists all your checks reporting to Datadog:
+- `OK`
+- `WARNING`
+- `CRITICAL`
+- `UNKNOWN`
 
- {{< img src="monitors/check_summary/check_summary.png" alt="Check Summary"  style="width:70%;">}}
+## Search
 
-Click on a check name to see the tags associated with the check:
+To find a specific check, use the `filter checks` search box on the check summary page. Click on a check name to see the statuses and tags associated with the check. Filter the list further by using the `filter checks` search box inside the check panel:
 
-{{< img src="monitors/check_summary/check_details.png" alt="Check details"  style="width:80%;">}}
+{{< img src="monitors/check_summary/check_search.png" alt="Check details"  style="width:100%;">}}
 
-**Note**: For more insights on check statuses, utilize the [Check Status Widget][1].
+## Dashboards
+
+To view your check status on a dashboard, utilize the [Check Status Widget][2].
 
 ## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/check_status
+[1]: https://app.datadoghq.com/check/summary
+[2]: /dashboards/widgets/check_status

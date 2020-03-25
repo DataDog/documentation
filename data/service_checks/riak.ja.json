@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "check": "riak.can_connect",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト", "url"],
+        "name": "Can Connect",
+        "description": "Agent が監視対象の Riak インスタンスに接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    }
+]

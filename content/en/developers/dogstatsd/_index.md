@@ -159,16 +159,55 @@ env:
               fieldPath: metadata.uid
 ```
 
-To set [tag cardinality][5] for the metrics collected using origin detection, use the environment variable `DD_DOGSTATSD_TAG_CARDINALITY`.
+To set [tag cardinality][5] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to either `low` (default) or `orchestrator`.
 
-There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`—as DogStatsD is priced differently, its tag cardinality setting is separated in order to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`.
-
+**Note:** For UDP, `pod_name` tags are not added by default to avoid creating too many [custom metrics][6]. 
 
 [1]: /developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /tagging/assigning_tags/#environment-variables
+[6]: /developers/metrics/custom_metrics
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+To gather custom metrics with [DogStatsD][1] with helm:
+
+1. Update your [datadog-values.yaml][2] file to enable DogStatsD:
+
+    ```yaml
+      dogstatsd:
+        port: 8125
+        useHostPort: true
+        nonLocalTraffic: true
+    ```
+
+     **Note**: `hostPort` functionality requires a networking provider that adheres to the [CNI specification][3], such as Calico, Canal, or Flannel. For more information, including a workaround for non-CNI network providers, consult the [Kubernetes documentation][4]. The `hostPort` parameter opens a port on your host. Make sure your firewall only allows access from your applications or trusted sources. Another word of caution: some network plugins don't support `hostPorts` yet, so this won't work.
+     The workaround in this case is to add `hostNetwork: true` in your Agent pod specifications. This shares the network namespace of your host with the Datadog Agent. It also means that all ports opened on the container are also opened on the host. If a port is used both on the host and in your container, they conflict (since they share the same network namespace) and the pod will not start. Not all Kubernetes installations allow this.
+
+2. Upgrade your Agent configuration:
+
+    ``` shell
+    helm upgrade -f datadog-values.yaml <RELEASE_NAME> stable/datadog
+    ```
+
+3. Update your application pods: Your application needs now a reliable way to determine the IP address of its host. This is made simple in Kubernetes 1.7, which expands the set of attributes you can pass to your pods as environment variables. In versions 1.7 and above, you can pass the host IP to any pod by adding an environment variable to the PodSpec. For instance, your application manifest might look like this:
+
+    ```yaml
+    env:
+        - name: DD_AGENT_HOST
+          valueFrom:
+              fieldRef:
+                  fieldPath: status.hostIP
+    ```
+
+     With this, any pod running your application is able to send DogStatsD metrics via port `8125` on `$DD_AGENT_HOST`.
+
+[1]: /developers/metrics/dogstatsd_metrics_submission
+[2]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+[3]: https://github.com/containernetworking/cni
+[4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -78,6 +78,10 @@ Add events from related systems to add more context to your graph. For example, 
 | `tag:role:web`              | Shows all events with the tag `role:web`.                  |
 | `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [Template Variable][7]. |
 
+Once enabled, events are overlayed on your graphs with red bars:
+
+{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Event overlay"  style="width:75%;" >}}
+
 ##### Y-axis controls
 
 Y-axis controls are available via the UI and the JSON editor. They allow you to:
