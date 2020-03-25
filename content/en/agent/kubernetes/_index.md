@@ -29,7 +29,7 @@ Run the Datadog Agent in your Kubernetes cluster directly in order to start coll
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-To install the chart with the release name `<RELEASE_NAME>`:
+To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog-agent`):
 
 1. [Install Helm][1].
 2. Download the [Datadog `value.yaml` configuration file][2].
@@ -38,13 +38,13 @@ To install the chart with the release name `<RELEASE_NAME>`:
 - **Helm v3+**
 
     ```bash
-    helm install <RELEASE_NAME> -f datadog-values-config.yaml  --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+    helm install <RELEASE_NAME> -f datadog-values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
     ```
 
 - **Helm v1/v2**
 
     ```bash
-    helm install -f datadog-values-config.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+    helm install -f datadog-values.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
     ```
 
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][4] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
