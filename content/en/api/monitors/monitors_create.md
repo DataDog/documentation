@@ -92,7 +92,8 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     
     ##### Logs Alert Query
 
-    `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #"`
+    `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`
+    
     *   **`query`** The search query - following the [Log search syntax][6] .
     *   **`index_name`** For multi-index organizations, the log index in which the request is performed.
     *   **`rollup_method`** the stats rollup method. count, avg and cardinality are the only supported method now
@@ -180,9 +181,9 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
     
     - **`aggregation`** a dictionary of `type`, `metric` and `groupeBy`:
-    -- `type`  3 types are supported: `count`, `cardinality` and `avg`
-    -- `metric`:  for `cardinality` name of the facet. For `avg` name of the metric. for `count`just put `count` as metric  
-    -- `groupeBy` name of the facet on which you want to group by.
+        - `type`  3 types are supported: `count`, `cardinality` and `avg`
+        - `metric`:  for `cardinality` name of the facet. For `avg` name of the metric. for `count`just put `count` as metric  
+        - `groupeBy` name of the facet on which you want to group by.
     
     Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
     
