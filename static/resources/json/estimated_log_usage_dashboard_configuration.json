@@ -117,7 +117,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index}.as_count()*100",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events.count{$service,$index}.as_count()*100",
                         "display_type": "line",
                         "style": {
                             "palette": "dog_classic",
@@ -171,7 +171,7 @@
                 "type": "query_value",
                 "requests": [
                     {
-                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()*100",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$index} by {service}.as_count()*100",
                         "aggregator": "sum"
                     }
                 ],
@@ -385,7 +385,7 @@
                 "type": "timeseries",
                 "requests": [
                     {
-                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:logs.estimated.ingested_events.count{$service,$index} by {service}.as_count()*100",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$index} by {service}.as_count()*100",
                         "display_type": "line",
                         "style": {
                             "palette": "dog_classic",
