@@ -9,7 +9,7 @@ further_reading:
   text: "Kubernetes Metrics"
 ---
 
-In order to start collecting your application traces you must be [runing the Datadog Agent in your Kubernetes cluster][1].
+In order to start collecting your application traces you must be [running the Datadog Agent in your Kubernetes cluster][1].
 
 ## Setup
 
