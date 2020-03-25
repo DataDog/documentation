@@ -60,19 +60,19 @@ class Integrations:
             r"^(#{1})(?!#)(.*)", re.MULTILINE
         )
         self.regex_tabs_open = re.compile(
-            r"<!--- {{< tabs >}} -->", re.MULTILINE
+            r"<!--- xxx tabs xxx -->", re.MULTILINE
         )
         self.regex_tabs_close = re.compile(
-            r"<!--- {{< /tabs >}} -->", re.MULTILINE
+            r"<!--- xxz tabs xxx -->", re.MULTILINE
         )
         self.regex_tab_open = re.compile(
-            r"<!--- {{% tab", re.MULTILINE
+            r"<!--- xxx tab", re.MULTILINE
         )
         self.regex_tab_close = re.compile(
-            r"<!--- {{% /tab %}} -->", re.MULTILINE
+            r"<!--- xxz tab xxx -->", re.MULTILINE
         )
         self.regex_tab_end = re.compile(
-            r" %}} -->", re.MULTILINE
+            r" xxx -->", re.MULTILINE
         )
         self.regex_metrics = re.compile(
             r"(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)",
