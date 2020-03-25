@@ -187,7 +187,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     
     Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
     
-    - **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: True
+    - **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: `True`
 
     ##### Errors and Validation
 
