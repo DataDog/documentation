@@ -147,7 +147,7 @@ Both fixed and relative custom ranges are supported:
   * Hours: `h`, `hr`, `hrs`, `hour`, `hours`
   * Days: `d`, `day`, `days`
   * Months: `mo`, `mos`, `mon`, `mons`, `month`, `months`
-* `today`, `yesterday`, `this month`, `this year`, or `last year` are calculated when entered. They won’t continue to update as time passes.
+* `today`, `yesterday`, `this month`, `this year`, and `last year` are calculated when entered. They won’t continue to update as time passes.
 
 ## Further Reading
 
