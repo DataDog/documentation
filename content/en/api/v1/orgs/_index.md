@@ -1,4 +1,3 @@
 ---
 title: Orgs
-type: api
 ---

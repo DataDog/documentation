@@ -1,4 +1,3 @@
 ---
 title: Hosts
-type: api
 ---

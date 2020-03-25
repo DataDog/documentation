@@ -1,4 +1,3 @@
 ---
 title: Events
-type: api
 ---

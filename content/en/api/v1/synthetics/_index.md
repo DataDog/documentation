@@ -1,4 +1,3 @@
 ---
 title: Synthetics
-type: api
 ---

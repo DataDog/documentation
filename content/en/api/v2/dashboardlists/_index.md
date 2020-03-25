@@ -1,4 +1,3 @@
 ---
 title: DashboardLists
-type: api
 ---
