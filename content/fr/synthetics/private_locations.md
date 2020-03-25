@@ -50,7 +50,7 @@ Une fois votre emplacement privé créé, pour configurer un test API Synthetics
 Lancez votre worker en tant que conteneur autonome à l'aide de la commande d'exécution Docker fournie et du fichier de configuration précédemment créé :
 
 ```shell
-docker run --rm -v $PWD/worker-config-<ID_EMPLACEMENT>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
+docker run --init --rm -v $PWD/worker-config-<ID_EMPLACEMENT>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
 ```
 
     {{% /tab %}}
