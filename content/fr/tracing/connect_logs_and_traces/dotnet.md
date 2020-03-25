@@ -151,7 +151,7 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][8] pour analyser vos logs, des règles de parsing de log personnalisées doivent s'assurer que `dd.trace_id` and `dd.span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][9].
+**Remarque** : si vous n'utilisez pas une [intégration de log de Datadog][8] pour analyser vos logs, des règles de parsing de log personnalisées doivent s'assurer que `dd.trace_id` et `dd.span_id` sont analysés en tant que chaînes de caractères. Pour en savoir plus, consultez la [FAQ à ce sujet][9].
 
 ## Pour aller plus loin
 
