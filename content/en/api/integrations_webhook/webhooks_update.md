@@ -16,7 +16,7 @@ All arguments associated with this request are optional
 -   **`name`**: The name of the webhook. Corresponds with `<WEBHOOK_NAME>`. For more information on using it, see [monitor notifications][1] docs.
 -   **`url`**: URL of the webhook.
 -   **`payload`**: If `null`, uses default payload. If given a JSON payload, the webhook will return the payload specified by the given payload. [Using those variables][2].
--   **`custom_headers`**: If `null`, uses no header. If given a JSON payload, these will be headers attached to your webhook.
+-   **`custom_headers`**: If `null`, uses no header. If given a JSON payload, attaches specified headers to your webhook.
 -   **`encode_as`**: Encoding type. Can be given either `json` or `form`.
 
 [1]: /monitors/notifications
