@@ -1,6 +1,8 @@
 ---
-title: Basic Autodiscovery
+title: Basic Agent Autodiscovery
 kind: documentation
+aliases:
+ - /agent/autodiscovery/basic_autodiscovery
 further_reading:
 - link: "/agent/autodiscovery/integrations"
   tag: "Documentation"
@@ -40,7 +42,7 @@ In the figure above, there is a host node with three pods, including a Redis pod
 
 The Redis spec in this example includes the following annotations:
 
-```
+```yaml
 annotations:
   ad.datadoghq.com/redis.check_names: '["redisdb"]'
   ad.datadoghq.com/redis.init_configs: '[{}]'
@@ -75,7 +77,7 @@ Setting up Autodiscovery for your infrastructure requires the following two step
 
 Add the following configuration block in the `datadog.yaml` [configuration file][1].
 
-```
+```yaml
 listeners:
   - name: docker
 config_providers:
@@ -83,14 +85,13 @@ config_providers:
     polling: true
 ```
 
-
 [1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 Add the following configuration block in the `datadog.yaml` [configuration file][1].
 
-```
+```yaml
 listeners:
   - name: kubelet
 config_providers:
@@ -100,7 +101,6 @@ config_providers:
   - name: docker
     polling: true
 ```
-
 
 [1]: /agent/guide/agent-configuration-files/?tab=agentv6#agent-main-configuration-file
 {{% /tab %}}
@@ -125,7 +125,7 @@ Autodiscovery is enabled by default on Kubernetes.
 
 To verify this, ensure the following environment variable is set:
 
-```
+```shell
 KUBERNETES=true
 ```
 
@@ -134,7 +134,7 @@ KUBERNETES=true
 
 To enable Autodiscovery over containers within Kubernetes, add the following environment variable when starting the containerized Agent:
 
-```
+```shell
 ECS_FARGATE=true
 ```
 
@@ -149,7 +149,7 @@ You can define an integration template in multiple forms: as Kubernetes pod anno
 
 The following is an example of a Redis integration template defined in Kubernetes pod annotations. It contains a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -183,12 +183,9 @@ spec:
 
 To use Autodiscovery with other services, define templates for the services you wish to monitor. See the [Autodiscovery Integration Templates][4] documentation for further details.
 
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /agent/autodiscovery/ad_identifiers
 [2]: /agent/faq/template_variables

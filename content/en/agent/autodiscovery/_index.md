@@ -22,22 +22,6 @@ further_reading:
   text: "Integration Setup for ECS Fargate"
 ---
 
-
-When you are monitoring a containerized infrastructure, one challenge that arises is that containers can shift from host to host. The dynamic nature of containerized systems makes them difficult to manually monitor.
-
-To solve this issue, you can use Datadog’s Autodiscovery feature to automatically identify the services running on a specific container and gather data from those services. Whenever a container starts, the Datadog Agent identifies which services are running on this new container, looks for the corresponding monitoring configuration, and starts to collect metrics.
-
-## Overview
-
-{{< whatsnext desc="This section includes the following topics:" >}}
-    {{< nextlink href="/agent/autodiscovery/basic_autodiscovery" >}}<u>Basic Autodiscovery</u>: Start here to understand how Autodiscovery works, and how to use it.{{< /nextlink >}}
-    {{< nextlink href="/agent/autodiscovery/auto_conf" >}}<u>Auto-Configuration</u>: When the Agent runs as a container, it tries by default to Autodiscover other containers around it based on default Autodiscovery configuration files. A number of default configuration files are available.{{< /nextlink >}}
-    {{< nextlink href="/agent/autodiscovery/integrations" >}}<u>Integrations Templates</u>: The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container.{{< /nextlink >}}
-    {{< nextlink href="/agent/autodiscovery/ad_identifiers" >}}<u>Container Identifier</u>: Autodiscovery container identifiers allow you to apply an Autodiscovery configuration file template to a given container, either by using the container short image or with a custom Autodiscovery container identifier.{{< /nextlink >}}
-    {{< nextlink href="/agent/autodiscovery/template_variables" >}}<u>Template Variables</u>: Template variables enable you to dynamically assign your container's values.{{< /nextlink >}}
-    {{< nextlink href="/agent/autodiscovery/management" >}}<u>Discovery Management</u>: Datadog Autodiscovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
