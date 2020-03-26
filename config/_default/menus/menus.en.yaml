@@ -1279,7 +1279,7 @@ main:
 
   - name: "Search Syntax"
     url: "logs/search-syntax/"
-    parent: "log_explorer"
+    parent: "log_management"
     weight: 8
 
   - name: "Connect Logs and Traces"
