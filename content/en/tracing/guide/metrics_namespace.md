@@ -25,13 +25,13 @@ aliases:
 
 The [trace metrics][1] namespace is `trace.<SPAN_NAME>.<METRICS_suffix>{<TAGS>}`. Tracing application metrics are collected after [enabling trace collection][2] and [instrumenting your application][3]. These metrics are available for dashboards and monitors.
 
-Trace metric names are formatted as `trace.<SPAN_NAME>.<METRIC_SUFFIX>{<TAGS>}` or `trace.<SPAN_NAME>.<METRIC_2ND_PRIM_TAG>{<TAGS>}`.
+Trace metric names are formatted as `trace.<SPAN_NAME>.<METRIC_SUFFIX>{<TAGS>}` or `trace.<SPAN_NAME>.<2ND_PRIM_TAG>{<TAGS>}`.
 
 | Parameter               | Description                                                                                                                                                                                                        |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `<SPAN_NAME>`                | The name of the operation or `span.name` (examples: `redis.command`, `pylons.request`, `rails.request`, `mysql.query`).                                                                                            |
 | `<METRIC_SUFFIX>`       | The name of the metric (examples: `duration`, `hits`, `span_count`).                                                                                                                                               |
-| `<METRIC_2ND_PRIM_TAG>` | If the metric name accounts for the second primary tag, this tag is part of the metric name.                                                                                                                       |
+| `<2ND_PRIM_TAG>` | If the metric name accounts for the second primary tag, this tag is part of the metric name.                                                                                                                       |
 | `<TAGS>`                | Trace metrics tags, possible tags are: `env`, `service`, `resource`, `sublayer_type`, `sublayer_service`, `http.status_code`, `http.status_class`, Datadog Agent tags (including the host and second primary tag). |
 
 ## Metric Suffix
@@ -78,23 +78,23 @@ The following metrics have all the second primary tag and Datadog Agent tags att
 
 #### Duration.by
 
-- `trace.<SPAN_NAME>.duration.by.<resource_2ND_PRIM_TAG_service>.<PERCENTILE_AGGREGATION>`:
+- `trace.<SPAN_NAME>.duration.by.resource_<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`:
   - *Pre-requisit:* This metric exists for any APM service.
-  - *Description:*
+  - *Description:* Measure the total time spent processing by ressource, service, and [2nd primary tag][7].
   - *Metric type:* [GAUGE][4]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
   - *Tags:* `env`, `service` and `resource`.
 
 - `trace.<SPAN_NAME>.duration.by.resource_service.<PERCENTILE_AGGREGATION>`:
   - *Pre-requisit:* This metric exists for any APM service.
-  - *Description:*
+  - *Description:* Measure the total time spent processing for each ressource and service combination.
   - *Metric type:* [GAUGE][4]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
   - *Tags:* `env`, `service`, and `resource`.
 
-- `trace.<SPAN_NAME>.duration.by.<2ND_PRIM_TAG_service>.<PERCENTILE_AGGREGATION>`
+- `trace.<SPAN_NAME>.duration.by.<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`
   - *Pre-requisit:* This metric exists for any APM service.
-  - *Description:*
+  - *Description:* Measure the total time spent processing for each [2nd primary tag][7] and service combination.
   - *Metric type:* [GAUGE][4]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
   - *Tags:* `env` and `service`.
@@ -110,53 +110,53 @@ The following metrics have all the second primary tag and Datadog Agent tags att
 
 - `trace.<SPAN_NAME>.hits`:
   - *Pre-requisit:* This metric exists for any APM service.
-  - *Description:*
-  - *Metric type:* [COUNT][7]
-  - *Tags:* `env`, `service`, `resource`, and `http.status_code`.
+  - *Description:* Represent the count of hits for a given span.
+  - *Metric type:* [COUNT][8]
+  - *Tags:* `env`, `service`, `resource`
 
 - `trace.<SPAN_NAME>.hits.by_http_status`
   - *Pre-requisit:* This metric exists for HTTP/WEB APM services if http metadata exists.
-  - *Description:*
-  - *Metric type:* [COUNT][7]
+  - *Description:* Represent the count of hits for a given span break down by HTTP status code.
+  - *Metric type:* [COUNT][8]
   - *Tags:* `env`, `service`, `resource`, `http.status_class`, and `http.status_code`.
 
 ### Span_count
 
 - `trace.<SPAN_NAME>.span_count`:
   - *Pre-requisit:* This metric exists for any APM service.
-  - *Description:*
-  - *Metric type:* [COUNT][7]
-  - *Tags:* `env`, `service`, `resource`, and `http.status_code`.
+  - *Description:* Represent the amount of spans collected on a given interval.
+  - *Metric type:* [COUNT][8]
+  - *Tags:* `env`, `service`, `resource`.
 
 - `trace.<SPAN_NAME>.span_count.by_http_status`:
   - *Pre-requisit:* This metric exists for HTTP/WEB APM services if http metadata exists.
-  - *Description:*
-  - *Metric type:* [COUNT][7]
+  - *Description:* Represent the amount of spans collected on a given interval break down by HTTP status.
+  - *Metric type:* [COUNT][8]
   - *Tags:* `env`, `service`, `resource`, `http.status_class`, and `http.status_code`.
 
 ### Apdex
 
-- `trace.<SPAN_NAME>.apdex.by.<resource_2ND_PRIM_TAG_service>`:
+- `trace.<SPAN_NAME>.apdex.by.resource_<2ND_PRIM_TAG>_service`:
   - *Pre-requisit:* This metric exists for any HTTP/WEB APM service.
-  - *Description:*
+  - *Description:* Represent the [Apdex][9] score for all combination of resources, [2nd primary tag][7]s and services.
   - *Metric type:* [GAUGE][4]
   - *Tags:* `env`, `service`, `resource`
 
 - `trace.<SPAN_NAME>.apdex.by.resource_service`:
   - *Pre-requisit:* This metric exists for any HTTP/WEB APM service.
-  - *Description:*
+  - *Description:* Mesure the [Apdex][9] score for each combination of resources and web services.
   - *Metric type:* [GAUGE][4]
   - *Tags:* `env`, `service`, and `resource`.
 
-- `trace.<SPAN_NAME>.apdex.by.<2ND_PRIM_TAG_service>`:
+- `trace.<SPAN_NAME>.apdex.by.<2ND_PRIM_TAG>_service`:
   - *Pre-requisit:* This metric exists for any HTTP/WEB APM service.
-  - *Description:*
+  - *Description:* Mesure the [Apdex][9] score for each combination of [2nd primary tag][7] and web services.
   - *Metric type:* [GAUGE][4]
   - *Tags:* `env` and `service`.
 
 - `trace.<SPAN_NAME>.apdex.by.service`:
   - *Pre-requisit:* This metric exists for any HTTP/WEB APM service.
-  - *Description:*
+  - *Description:* Mesure the [Apdex][9] score for each web services.
   - *Metric type:* [GAUGE][4]
   - *Tags:* `env` and `service`.
 
@@ -170,4 +170,6 @@ The following metrics have all the second primary tag and Datadog Agent tags att
 [4]: /developers/metrics/types/?tab=gauge#metric-types
 [5]: /tracing/visualization/services_list/#services-types
 [6]: /tracing/visualization/#services
-[7]: /developers/metrics/types/?tab=count#metric-types
+[7]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[8]: /developers/metrics/types/?tab=count#metric-types
+[9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
