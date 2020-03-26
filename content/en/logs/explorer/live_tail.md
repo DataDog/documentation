@@ -2,6 +2,8 @@
 title: Live Tail
 kind: documentation
 description: "See all your logs in real time."
+aliases:
+    - /logs/live_tail
 further_reading:
 - link: "logs/explorer/analytics"
   tag: "Documentation"
