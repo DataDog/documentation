@@ -1,5 +1,17 @@
 {{ $dot := .}}
+
 {{ $d := .context.Site.Data.api.v1.full_spec_deref }}
+
+{{ if in .context.Permalink "api/v2" }}
+        {{ $d = .context.Site.Data.api.v2.full_spec_deref }}
+    {{ end }}
+
+{{ $parentScratch := newScratch }}
+{{ $childScratch := newScratch }}
+
+{{ $parentScratch.Set "parent" .parent}}
+{{ $parent := $parentScratch.Get "parent"}}
+
 {{ range $key, $value := .data }}
 
     {{/*
@@ -24,10 +36,17 @@
     {{ end }}
     {{ $childData := ($s.Get "data") }}
 
-    <tr class="{{ if $childData }}has-nested{{ end }} {{if eq $dot.isNested true}}nested{{end}}">
+    
+    <tr {{ if $childData }} data-toggle="collapse" data-target=".parent-{{$parent}}" {{ end}}  class="{{ if $childData }}  has-nested {{ else }}  {{ end }} {{if eq $dot.isNested true}} parent-{{ $parent }}  collapse {{end}}">
         <td>{{ if $childData }}<span style="cursor: pointer; font-size: 18px">> &nbsp;</span>{{ end }}{{ $key }}</td>
         {{ if reflect.IsMap $value }}
-          <td>{{ with $value.type }}{{ . }}{{ end }}</td>
+
+          {{ $readOnly := cond (eq $value.readOnly true ) "R" ""}}
+          
+          {{ with $value.type }}
+
+            <td>{{ . }}&nbsp;<span class="font-semibold">{{$readOnly}}</span></td>
+          {{ end }}
           <td>
             {{ with $value.description }}
               {{ if reflect.IsMap . }}
@@ -42,6 +61,14 @@
         {{ end }}
     </tr>
 
-    {{ partial "api/table-row-recursive.html" (dict "context" $dot.context "data" $childData "isNested" true) }}
+    {{ if $childData }}
+    
+    {{ else }}
+    {{ $parentScratch.Add "parent" 1}}
+    {{ end }}
+
+    {{ $parent = $parentScratch.Get "parent" }}
+    
+    {{ partial "api/table-row-recursive.html" (dict "context" $dot.context "data" $childData "isNested" true "parent" $parent ) }}
 
 {{ end }}

@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-        {{ partial "api/table-row-recursive.html" (dict "context" .context "data" $schema.properties "isNested" false) }}
+        {{ partial "api/table-row-recursive.html" (dict "context" .context "data" $schema.properties "isNested" false "parent" 0) }}
     </tbody>
   </table>
 </div>

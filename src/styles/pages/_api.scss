@@ -19,17 +19,6 @@ $ddpurple: #632ca6;
                 border-bottom: 1px solid #000;
             }
         }
-        // span {
-        //   pointer-events: none;
-        // }
-        // &:before {
-        //   display: block;
-        //   content: "";
-        //   margin-top: -160px;
-        //   height: 160px;
-        //   visibility: hidden;
-        //   pointer-events: none;
-        // }
     }
     h3 {
         margin-bottom: 20px;
@@ -43,18 +32,63 @@ $ddpurple: #632ca6;
         }
     }
 
-    .nested >td {
-        padding-left: 20px;
+    .schema-table {
+        margin: 0 0 20px 0;
+        p {
+            margin: 0;
+        }
+
+        .first-row {
+            border-bottom: 1px solid $gray-light;
+        }
+
+        // .column .row:last-child {
+        //     border-bottom: none;
+        // }
+
+        // .column .row:last-child .first-row {
+        //     border-bottom: none;
+        // }
+
+        .hasChildData {
+            .isNested {
+                .key {
+                    padding-left: 15px;
+                }
+
+                &.hasChildData {
+                    .isNested {
+                        .key {
+                            padding-left: 20px;
+                        }
+                        &.hasChildData {
+                            .isNested {
+                                .key {
+                                    padding-left: 30px;
+                                }
+                                &.hasChildData {
+                                    .isNested {
+                                        .key {
+                                            padding-left: 40px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+
     }
-    .has-nested ~ .nested > td {
-        padding-left: 20px;
+
+    .chroma {
+        max-height: 300px;
+        overflow-wrap: break-word;
+        white-space: inherit;
     }
-    .has-nested.nested > td {
-        padding-left: 40px;
-    }
-    // .has-nested.nested ~ .nested > td {
-    //     padding-left: 60px;
-    // }
 }
 
 .api {

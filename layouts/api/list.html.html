@@ -1,7 +1,5 @@
 {{ define "api-main" }}
 
-    layouts/api/list.html.html
-
     {{ $dot := . }}
 
     {{ .Scratch.Set "apiVersion" "v1"}}
@@ -42,7 +40,7 @@
             {{ range sort $tagObject ".action.summary" "asc"  }}
                 {{ $context := .}}
                 <div class="row">
-                    <div class="col-7">
+                    <div class="col-12 col-lg-7">
                      
                         <h2 class="mb-2" id="{{ .action.summary | urlize }}">
                                 {{- .action.summary -}}
@@ -52,7 +50,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-12 col-lg-9">
                         <h3>Overview</h3>
                         <p>{{.action.description | markdownify }}</p>
                         {{ if .action.parameters }}
@@ -86,7 +84,7 @@
                                                 {{ $schema := index $d.components.schemas $refkey }}
                                                 {{ partial "api/schema-table.html" (dict "context" $dot "schema" $schema)}}
                                             {{ else */}}
-                                            {{ partial "api/schema-table.html" (dict "context" $dot "schema" $schema)}}
+                                            {{ partial "api/schema-table2.html" (dict "context" $dot "schema" $schema)}}
 
                                             
 
@@ -164,7 +162,7 @@
                                                
                                                 <p>{{ $schema.description }}</p>
                                                 {{ if $schema }}
-                                                {{ partial "api/schema-table.html" (dict "context" $dot "schema" $schema)}}
+                                                {{ partial "api/schema-table2.html" (dict "context" $dot "schema" $schema)}}
                                                 {{ end}}
                                           
                                             </div>
