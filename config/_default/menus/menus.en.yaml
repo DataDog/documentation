@@ -1219,12 +1219,6 @@ main:
     parent: "log_processing"
     weight: 204
 
-  - name: "Live Tail"
-    url: "logs/live_tail/"
-    parent: "log_management"
-    identifier: "log_live_tail"
-    weight: 3
-
   - name: "Generate Metrics"
     url: "logs/logs_to_metrics/"
     parent: "log_management"
@@ -1256,26 +1250,30 @@ main:
     identifier: "log_explorer"
     weight: 7
 
+  - name: "Live Tail"
+    url: "logs/explorer/live_tail/"
+    parent: "log_explorer"
+    weight: 701
   - name: "Log List"
     url: "logs/explorer/list/"
     parent: "log_explorer"
-    weight: 701
+    weight: 702
   - name: "Log Patterns"
     url: "logs/explorer/patterns/"
     parent: "log_explorer"
-    weight: 702
+    weight: 703
   - name: "Log Analytics"
     url: "logs/explorer/analytics/"
     parent: "log_explorer"
-    weight: 703
+    weight: 704
   - name: "Saved Views"
     url: "logs/explorer/saved_views/"
     parent: "log_explorer"
-    weight: 704
+    weight: 705
   - name: "Facets"
     url: "logs/explorer/facets/"
     parent: "log_explorer"
-    weight: 705
+    weight: 706
 
   - name: "Search Syntax"
     url: "logs/search-syntax/"
