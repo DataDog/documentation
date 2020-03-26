@@ -1256,16 +1256,16 @@ main:
     identifier: "log_explorer"
     weight: 7
 
-  - name: "Log Analytics"
+  - name: "Log List"
     url: "logs/explorer/list/"
     parent: "log_explorer"
     weight: 701
-  - name: "Log Analytics"
-    url: "logs/explorer/analytics/"
-    parent: "log_explorer"
-    weight: 702
   - name: "Log Patterns"
     url: "logs/explorer/patterns/"
+    parent: "log_explorer"
+    weight: 702
+  - name: "Log Analytics"
+    url: "logs/explorer/analytics/"
     parent: "log_explorer"
     weight: 703
   - name: "Saved Views"
