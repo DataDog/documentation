@@ -21,7 +21,7 @@ further_reading:
 
 The Logs Explorer is your home base for troubleshooting and exploration:
 
-{{< img src="logs/explorer/log_explorer.png" alt="Explore view with comments"  >}}
+{{< img src="logs/explorer/log_explorer_walkthrough.gif" alt="Explore view with comments"  >}}
 
 In this view you can:
 
@@ -70,7 +70,7 @@ Switch between the Log Search and the Log Analytics modes by clicking on the _Lo
 
 Build up a context to explore your logs in your log explorer view first by selecting the proper time range then by using the search bar to filter your Logstream and Log Analytics.
 
-### Time Range
+**Time Range**
 
 The time range feature allows you to display logs in the Logstream or Log Analytics within a given time period.
 It appears directly under the search bar as a timeline. The timeline can be displayed or wrapped up with the **Show timeline** check box in the Logstream option panel.
@@ -79,21 +79,23 @@ Quickly change the time range by selecting a preset range from the dropdown:
 
 {{< img src="logs/explorer/timerange.png" style="width:50%;" alt="Timerange"  >}}
 
-### Search
+**Search**
 
 Use facets, measures, tags, or even [free text search][1] to filter your Logstream and Log Analytics with dedicated context. The search bar and url automatically reflect your selections.
 
 Follow the [guide to search your logs][1] for a detailed explanation of all the Log Explorer search features, including use of wildcards and queries of numerical values.
 
-{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true"  >}}
+
 
 ### Log Live Tail
 * The Log Search is the list of logs that match the selected context. A context is defined by a [search bar][1] filter and a [time range](#time-range).
 
+{{< img src="logs/explorer/log_explorer_walkthrough_livetail.gif" alt="Log Livetail"  >}}
 
 ### Log Lists
 * The Log Search is the list of logs that match the selected context. A context is defined by a [search bar][1] filter and a [time range](#time-range).
 
+{{< img src="logs/explorer/log_explorer_walkthrough_list.png" alt="Log List"  >}}
 
 ### Log Patterns
 
@@ -103,14 +105,14 @@ In the Log Explorer, patterns can be surfaced automatically to bring structure t
 
 Find out more in the [Log Patterns section][3]
 
-{{< img src="logs/explorer/log_patterns.png" alt="Log Patterns"  style="width:70%;">}}
+{{< img src="logs/explorer/log_explorer_walkthrough_pattern.png" alt="Log Patterns"  >}}
 
 
 ### Log Analytics
 
 * After having gone through [Datadog processing][4], log parsing, and having [facets](#setup) and [measures](#setup) over the important attributes, you can graph log queries and see maximums, averages, percentiles, unique counts, and more. Follow the [log graphing guide][5] to learn more about all the graphing options.
 
-{{< img src="logs/explorer/log_analytics.png" alt="Log Analytics"  style="width:70%;">}}
+{{< img src="logs/explorer/log_explorer_walkthrough_analytics.png" alt="Log Analytics"  >}}
 
 
 
