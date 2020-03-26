@@ -93,7 +93,7 @@ Set up an exclusion filter applied to logs from your instrumented service (`serv
 
 ## Update log retention
 
-The index retention setting determines how long logs will be stored and searchable in the index. You can set the retention to allowable value in your account configuration.
+The index retention setting determines how long logs will be stored and searchable in the index. You can set the retention to any value allowed in your account configuration.
 To add retentions that are not in your current contract contact [Datadog support][18].
 
 {{< img src="logs/indexes/log_retention.png" alt="index details"  style="width:70%;">}}
