@@ -1280,30 +1280,30 @@ main:
   - name: "Search Syntax"
     url: "logs/search-syntax/"
     parent: "log_explorer"
-    weight: 7.5
+    weight: 8
 
   - name: "Connect Logs and Traces"
     url: "tracing/connect_logs_and_traces/?tab=java"
     parent: "log_management"
     identifier: "logs_traces_connection"
-    weight: 8
+    weight: 9
 
   - name: "Correlate Logs with Metrics"
     url: "dashboards/timeboards/#graph-menu"
     parent: "log_management"
     identifier: "logs_metrics_correlation"
-    weight: 9
+    weight: 10
 
   - name: "Guides"
     url: "logs/guide/"
     parent: "log_management"
     identifier: "log_guides"
-    weight: 10
+    weight: 11
 
   - name: "Security"
     url: "security/logs/"
     parent: "log_management"
-    weight: 11
+    weight: 12
 
 #########################
 ## Security Monitoring ##
