@@ -12223,6 +12223,13 @@ tags:
 
     [info](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration).'
   name: SLO
+- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
+    instead.
+  externalDocs:
+    description: Documentation for old endpoints is available in the
+    url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
+  name: Screenboards
+  x-deprecated: true
 - description: 'Submit Service Check.
 
     [Read more about Service Check monitors.][1]
@@ -12257,6 +12264,13 @@ tags:
     \ users, feed,\nchef, puppet, git, bitbucket, fabric, capistrano\u2026\n\nRead\
     \ more about tags on the dedicated\n[documentation page](https://docs.datadoghq.com/tagging)."
   name: Tags
+- description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
+    instead.
+  externalDocs:
+    description: Documentation for old endpoints is available in the
+    url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
+  name: Timeboards
+  x-deprecated: true
 - description: View organization usage data.
   externalDocs:
     description: Find out more at
