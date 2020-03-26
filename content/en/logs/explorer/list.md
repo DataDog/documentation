@@ -17,8 +17,7 @@ further_reading:
   text: "Automatically configure your Log Explorer"
 ---
 
-
-The Log Search is the list of logs that match the selected context. A context is defined by a [search bar][1] filter and a [time range](#time-range).
+The Log Search is the list of logs that match the selected context.
 
 {{< img src="logs/explorer/list/search.gif" alt="configure display table"  style="width:50%;">}}
 
