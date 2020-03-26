@@ -48,7 +48,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 
 After processing, the following structured log is generated:
 
-{{< img src="logs/processing/parsing/_parser.png" alt="Parsing example 1"  style="width:80%;">}}
+{{< img src="logs/processing/processors/_parser.png" alt="Parsing example 1"  style="width:80%;">}}
 
 **Note**:
 
