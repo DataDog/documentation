@@ -20,6 +20,8 @@ further_reading:
 
 The Log Search is the list of logs that match the selected context. A context is defined by a [search bar][1] filter and a [time range](#time-range).
 
+{{< img src="logs/explorer/list/search.gif" alt="configure display table"  style="width:50%;">}}
+
 ### Logs Table
 
 The Log Search is displayed in the logs table.
@@ -28,7 +30,7 @@ Configure the logs table content according to your needs and preferences with th
 
 Log results are sorted by date—the most recent on top by default. You can also inverse-sort by date, with the least recent (within the limits of the time range) on top.
 
-{{< img src="logs/explorer/logtable_config.png" alt="configure display table"  style="width:50%;">}}
+{{< img src="logs/explorer/list/sort_by_measure.png" alt="configure display table"  style="width:50%;">}}
 
 ### Log Panel
 
