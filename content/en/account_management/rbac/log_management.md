@@ -41,10 +41,10 @@ The following permissions can be granted to manage write access on various log-r
 
 * **logs_modify_indexes**: Grants a role the ability to create and modify log indexes. This includes:
 
-  - setting inclusion queries for which logs should be routed into an index
-  - setting log retention for an index
-  - limiting which roles have read access on an index (logs_read_index_data)
-  - which roles can modify exclusion filters for an index (logs_write_exclusion_filters).
+  - Setting inclusion queries for which logs should be routed into an index.
+  - Setting log retention for an index.
+  - Limiting which roles have read access on an index (`logs_read_index_data`).
+  - Which roles can modify exclusion filters for an index (`logs_write_exclusion_filters`).
 
   This permission can be granted or revoked from a role via [the Roles API][3]. **Note:** This permission also grants read access on all log indexes and write permissions on all index exclusion filters, since any role that can modify indexes also can grant itself these additional permissions.
 

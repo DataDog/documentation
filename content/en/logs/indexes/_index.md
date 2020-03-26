@@ -19,8 +19,7 @@ further_reading:
   text: "Logging without Limits*"
 ---
 
-Log Indexes provide fine-grained control over your Log Management budget by allowing you to segment data into value groups for
-differing retention, quotas, usage monitoring & billing. Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
+Log Indexes provide fine-grained control over your Log Management budget by allowing you to segment data into value groups for differing retention, quotas, usage monitoring, and billing. Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
 
 {{< img src="logs/indexes/index_details.png" alt="index details"  style="width:70%;">}}
 
@@ -93,7 +92,7 @@ Set up an exclusion filter applied to logs from your instrumented service (`serv
 
 ## Update log retention
 
-The index retention setting determines how long logs will be stored and searchable in the index. You can set the retention to any value allowed in your account configuration.
+The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
 To add retentions that are not in your current contract contact [Datadog support][18].
 
 {{< img src="logs/indexes/log_retention.png" alt="index details"  style="width:70%;">}}
