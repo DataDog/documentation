@@ -1,9 +1,10 @@
 ---
-title: Search
+title: Search Syntax
 kind: documentation
 description: "Search through all of your logs."
 aliases:
     - /logs/search
+    - /logs/search-syntax
 further_reading:
 - link: "logs/explorer/analytics"
   tag: "Documentation"
@@ -19,13 +20,8 @@ further_reading:
   text: "Automatically configure your Log Explorer"
 ---
 
-All of the search parameters are contained within the URL. You can share your view by sharing the URL.
 
-{{< img src="logs/explorer/search_your_logs.mp4" alt="Search your logs" video="true"  >}}
-
-## Search syntax
-
-A query is composed of terms and operators.
+A query filter is composed of terms and operators.
 
 There are two types of terms:
 
@@ -42,25 +38,25 @@ To combine multiple terms into a complex query, you can use any of the following
 | `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event                                                  | authentication AND -password |
 
-### Autocomplete
+## Autocomplete
 
 Use the search bar's autocomplete feature to complete your query using existing values:
 
 {{< img src="logs/explorer/search/search_bar_autocomplete.png" alt="search bar autocomplete "  style="width:80%;">}}
 
-### Escaping of special characters
+## Escaping of special characters
 
 The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character.
 
-### Attributes search
+## Attributes search
 
-#### Message attribute search
+### Message attribute search
 
 To search for logs that contain `user=JaneDoe` in the message attribute use the following search:
 
 `user\=JaneDoe`
 
-#### Facets search
+### Facets search
 
 To search on a specific attribute, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
 
@@ -78,7 +74,7 @@ Examples:
 | `@http.url:\/api\/v1\/*`                                             | Searches all logs containing a value in `http.url` attribute that start with `/api/v1/`                                                                             |
 | `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | Searches all logs containing a `http.status_code` value between 200 and 299, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
 
-### Wildcards
+## Wildcards
 
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
@@ -96,7 +92,7 @@ Wildcard searches can also be used to search in the plain text of a log that is 
 
 However, this search term does not return logs that contain the string `NETWORK` if it is in a facet and not part of the log message.
 
-### Numerical values
+## Numerical values
 
 Use `<`,`>`, `<=`, or `>=` to perform a search on numerical attributes. For instance, retrieve all logs that have a response time over 100ms with:
 
@@ -106,7 +102,7 @@ You can search for numerical attribute within a specific range. For instance, re
 
 `@http.status_code:[400 TO 499]`
 
-### Tags
+## Tags
 
 Your logs inherit tags from [hosts][2] and [integrations][3] that generate them. They can be used in the search and as facets as well:
 
@@ -119,7 +115,7 @@ If your tags don't follow [tags best practices][4] and don't use the `key:value`
 
 * `tags:<MY_TAG>`
 
-### Arrays
+## Arrays
 
 You can add facets on arrays of strings or numbers. All values included in the array become listed in the facet and can be used to search the logs.
 
