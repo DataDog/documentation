@@ -1866,6 +1866,9 @@ api_v1:
   - name: Get an SLO's history
     parent: SLO
     url: get-an-slo's-history
+  - name: Screenboards
+    url: /api/v1/screenboards/
+    identifier: Screenboards
   - name: Service Checks
     url: /api/v1/service-checks/
     identifier: Service Checks
@@ -1935,6 +1938,9 @@ api_v1:
   - name: Update host tags
     parent: Tags
     url: update-host-tags
+  - name: Timeboards
+    url: /api/v1/timeboards/
+    identifier: Timeboards
   - name: Usage
     url: /api/v1/usage/
     identifier: Usage
