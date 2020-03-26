@@ -30,7 +30,7 @@ You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][
 
 By default, each account has a single index representing a monolithic set of all your logs. Datadog also offers multiple indexes if you require:
 
-* Multiple retention periods and/or multiple [daily quotas](#set-daily-quota), for finer budget control.
+* Multiple [retention periods](#update-retention) and/or multiple [daily quotas](#set-daily-quota), for finer budget control.
 * Multiple permissions, for finer user [role based access controls (RBAC)][7].
 
 The Log Explorer supports [queries across multiple indexes][8].
@@ -91,10 +91,17 @@ Set up an exclusion filter applied to logs from your instrumented service (`serv
 
 {{< img src="logs/indexes/sample_trace_id.png" alt="enable index filters"  style="width:80%;">}}
 
+## Update log retention
+
+The index retention setting determines how long logs will be stored and searchable in the index. You can set the retention to allowable value in your account configuration.
+To add retentions that are not in your current contract contact [Datadog support][18].
+
+{{< img src="logs/indexes/log_retention.png" alt="index details"  style="width:70%;">}}
+
 ## Set daily quota
 
 You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e. after exclusion filters are applied).
-Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][19], and used to [generate metrics from logs][20].
+Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][19], [sent to your archives][20], and used to [generate metrics from logs][21].
 
 Update or remove this quota at any time when editing the Index:
 
@@ -125,6 +132,7 @@ Update or remove this quota at any time when editing the Index:
 [15]: /logs/processing/processors/?tab=ui#geoip-parser
 [16]: /tracing/connect_logs_and_traces/
 [17]: /logs/processing/processors/?tab=ui#trace-remapper
-[18]: /logs/live_tail/#overview
-[19]: /logs/archives/
-[20]: /logs/logs_to_metrics/
+[18]: /help
+[19]: /logs/live_tail/#overview
+[20]: /logs/archives/
+[21]: /logs/logs_to_metrics/
