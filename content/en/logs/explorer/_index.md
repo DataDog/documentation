@@ -21,7 +21,7 @@ further_reading:
 
 The Logs Explorer is your home base for troubleshooting and exploration:
 
-{{< img src="logs/explorer/explore_view_with_comments.png" alt="Explore view with comments"  >}}
+{{< img src="logs/explorer/log_explorer.png" alt="Explore view with comments"  >}}
 
 
 In this view you can:
