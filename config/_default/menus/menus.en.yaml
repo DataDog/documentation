@@ -1250,14 +1250,14 @@ main:
     weight: 6
 
   ## LOGS - Explorer
-
   - name: "Log Explorer"
     url: "logs/explorer/"
     parent: "log_management"
     identifier: "log_explorer"
     weight: 7
-  - name: "Search"
-    url: "logs/explorer/search/"
+
+  - name: "Log Analytics"
+    url: "logs/explorer/list/"
     parent: "log_explorer"
     weight: 701
   - name: "Log Analytics"
@@ -1276,6 +1276,11 @@ main:
     url: "logs/explorer/facets/"
     parent: "log_explorer"
     weight: 705
+
+  - name: "Search Syntax"
+    url: "logs/search-syntax/"
+    parent: "log_explorer"
+    weight: 7.5
 
   - name: "Connect Logs and Traces"
     url: "tracing/connect_logs_and_traces/?tab=java"
