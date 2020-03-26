@@ -19,7 +19,8 @@ further_reading:
   text: "Logging without Limits*"
 ---
 
-Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
+Log Indexes provide fine-grained control over your Log Management budget by allowing you to segment data into value groups for
+differing retention, quotas, usage monitoring & billing. Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
 
 {{< img src="logs/indexes/index_details.png" alt="index details"  style="width:70%;">}}
 
@@ -27,16 +28,15 @@ You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][
 
 ## Indexes
 
-By default, Log Explorer have one unique Log Index, but datadog also offers multiple indexes if you require:
+By default, each account has a single index representing a monolithic set of all your logs. Datadog also offers multiple indexes if you require:
 
 * Multiple retention periods and/or multiple [daily quotas](#set-daily-quota), for finer budget control.
 * Multiple permissions, for finer user [role based access controls (RBAC)][7].
 
 The Log Explorer supports [queries across multiple indexes][8].
 
-
 <div class="alert alert-info">
-The multi-index feature is in private beta, <a href="/help">contact Datadog support</a> to turn it on for your account.
+<a href="/help">contact Datadog support</a> to enable multiple-indexes for your account.
 </div>
 
 ## Indexes Filters
