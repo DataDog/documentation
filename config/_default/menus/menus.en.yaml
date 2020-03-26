@@ -260,11 +260,16 @@ main:
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_tag"
     weight: 305
+  - name: "Discovery Management"
+    url: "agent/kubernetes/management/"
+    parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_management"
+    weight: 306
   - name: "Data collected"
     url: "agent/kubernetes/data_collected/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_data_collected"
-    weight: 306
+    weight: 307
 
   ## AGENT - Datadog Cluster Agent
 
@@ -340,18 +345,6 @@ main:
     url: "agent/autodiscovery/ad_identifiers/"
     parent: "agent_autodiscovery"
     weight: 503
-  - name: "Template Variables"
-    url: "agent/autodiscovery/template_variables/"
-    parent: "agent_autodiscovery"
-    weight: 504
-  - name: "Discovery Management"
-    url: "agent/autodiscovery/management/"
-    parent: "agent_autodiscovery"
-    weight: 505
-  - name: "Troubleshooting"
-    url: "agent/autodiscovery/troubleshooting/"
-    parent: "agent_autodiscovery"
-    weight: 506
 
   ## AGENT - LOGS
 

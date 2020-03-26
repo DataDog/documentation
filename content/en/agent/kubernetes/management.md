@@ -12,11 +12,9 @@ further_reading:
   text: "Match a container with the corresponding Integration Template"
 ---
 
-Datadog Agent auto-discovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.
+Datadog Agent auto-discovers all containers available by default to collect metrics and logs. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers. This does not affect your per-container billing.
-
-If running the Agent as a binary on a host, configure your Autodiscovery perimeter with the [Agent](?tab=agent) tab instructions. If running the Agent as a container, configure your Autodiscovery perimeter with the [Containerized Agent](?tab=containerizedagent) tab instructions.
 
 ## Exclude containers
 
@@ -89,4 +87,3 @@ To disable this behavior and include pause containers in the Autodiscovery perim
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
