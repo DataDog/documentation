@@ -11,7 +11,7 @@ async function dereference(apiYaml, apiVersion) {
 
         fs.writeFileSync(
             `./data/api/${apiVersion}/full_spec_deref.json`,
-            safeJsonStringify(dereferencedObject),
+            safeJsonStringify(dereferencedObject, null, 2),
             'utf8'
         );
 
