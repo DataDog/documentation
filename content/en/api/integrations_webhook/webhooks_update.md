@@ -17,7 +17,7 @@ All arguments associated with this request are optional
 -   **`url`**: URL of the webhook.
 -   **`payload`**: If `null`, uses default payload. If given a JSON payload, the webhook will return the payload specified by the given payload. [Using those variables][2].
 -   **`custom_headers`**: If `null`, uses no header. If given a JSON payload, attaches specified headers to your webhook.
--   **`encode_as`**: Encoding type. Can be given either `json` or `form`.
+-   **`encode_as`**: Encoding type. Valid values are `json` and `form`.
 
 [1]: /monitors/notifications
 [2]: /integrations/webhooks/#usage
