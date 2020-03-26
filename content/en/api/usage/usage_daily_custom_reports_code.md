@@ -1,6 +1,6 @@
 ---
 title: Get daily custom reporting available files
-type: apicontent
+type: apicode
 order: 35.95
 external_redirect: /api/#get-daily-custom-reporting-available-files
 ---
