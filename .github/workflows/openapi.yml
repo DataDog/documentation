@@ -17,10 +17,11 @@ jobs:
         persist-credentials: false
         fetch-depth: 0
     - name: Install dependencies
-      run: npm install js-yaml@^3.13.1 slugify@^1.4.0
+      run: npm install js-yaml@^3.13.1 slugify@^1.4.0 @apidevtools/json-schema-ref-parser safe-json-stringify
     - name: Create local changes
       run: |
         npm run build:apiPages
+        npm run dereference
         git add ./content ./data ./config
     - name: Commit files
       run: |
