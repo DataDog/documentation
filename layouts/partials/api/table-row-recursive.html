@@ -1,17 +1,5 @@
 {{ $dot := .}}
-
 {{ $d := .context.Site.Data.api.v1.full_spec_deref }}
-
-{{ if in .context.Permalink "api/v2" }}
-        {{ $d = .context.Site.Data.api.v2.full_spec_deref }}
-    {{ end }}
-
-{{ $parentScratch := newScratch }}
-{{ $childScratch := newScratch }}
-
-{{ $parentScratch.Set "parent" .parent}}
-{{ $parent := $parentScratch.Get "parent"}}
-
 {{ range $key, $value := .data }}
 
     {{/*
@@ -36,39 +24,45 @@
     {{ end }}
     {{ $childData := ($s.Get "data") }}
 
-    
-    <tr {{ if $childData }} data-toggle="collapse" data-target=".parent-{{$parent}}" {{ end}}  class="{{ if $childData }}  has-nested {{ else }}  {{ end }} {{if eq $dot.isNested true}} parent-{{ $parent }}  collapse {{end}}">
-        <td>{{ if $childData }}<span style="cursor: pointer; font-size: 18px">> &nbsp;</span>{{ end }}{{ $key }}</td>
-        {{ if reflect.IsMap $value }}
+    <div class="row {{ if eq $dot.isNested true}} isNested d-none {{end}} {{ if $childData }} hasChildData {{ else }} {{ end }}">
+      <div class="col-12">
 
-          {{ $readOnly := cond (eq $value.readOnly true ) "R" ""}}
-          
-          {{ with $value.type }}
+          {{ if ne $key "example"}}
+            <div class="row first-row">
+              <div class="col-4 pl-0">
+                <p class="key">{{ if $childData }}<span class="js-collapse-trigger" style="cursor: pointer; font-size: 18px">></span>{{ end }}
+                {{ $key }}
+              </p>
+              </div>
+              {{ if reflect.IsMap $value }}
 
-            <td>{{ . }}&nbsp;<span class="font-semibold">{{$readOnly}}</span></td>
-          {{ end }}
-          <td>
-            {{ with $value.description }}
-              {{ if reflect.IsMap . }}
+                  {{ $readOnly := cond (eq $value.readOnly true ) "<span class='read-only'>&nbsp;🆁</span>" ""}}
+              
+                  {{ with $value.type }}
+                          <div class="col-2"><p>{{ . }}{{$readOnly | safeHTML }}</p></div>
+                  {{ end }}
+              <div class="col-6">
+
+                  {{ with $value.description }}{{ if reflect.IsMap . }}{{ else }}
+                  
+                
+                  
+                  <p>{{- ((replace . "\n" " ") | safeHTML) | markdownify -}}</p>{{ end }}{{ end }}
+              </div>
               {{ else }}
-                {{ . | markdownify }}
+                  
+                  <div class="col-4"><p>{{ $value }}</p></div>
+                  <div class="col-4"><p>&nbsp;</p></div>
               {{ end }}
+
+            </div>
             {{ end }}
-          </td>
-        {{ else }}
-          <td>&nbsp;</td>
-          <td>&nbsp;{{ $value }}</td>
-        {{ end }}
-    </tr>
+      
+          {{ partial "api/table-row-recursive.html" (dict "context" $dot.context "data" $childData "isNested" true) }}
 
-    {{ if $childData }}
-    
-    {{ else }}
-    {{ $parentScratch.Add "parent" 1}}
-    {{ end }}
+      </div>
+    </div>
 
-    {{ $parent = $parentScratch.Get "parent" }}
-    
-    {{ partial "api/table-row-recursive.html" (dict "context" $dot.context "data" $childData "isNested" true "parent" $parent ) }}
+        
 
 {{ end }}

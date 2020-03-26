@@ -31,6 +31,7 @@
 {{- $bodyClass := $.Scratch.Get "bodyClass" -}}
 
 <body
+data-spy="scroll" data-target="#navbar-example2" data-offset="0"
   class="{{ .Site.Language.Lang }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
 
   {{ partial "header/header.html" . }}
@@ -38,7 +39,7 @@
   <div class="container-fluid h-100">
     <div class="row h-100">
       <div class="d-none d-lg-flex col-sm-3 side">
-        {{ partial "sidenav/sidenav-api.html" . }}
+        {{ partial "api/sidenav-api.html" . }}
       </div>
       <div class="col-12 col-lg-9 main-api">
         {{ partial "api-toolbar.html" . }}

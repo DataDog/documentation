@@ -1,18 +1,20 @@
 {{ $schema := .schema }}
 
+  <div class=" schema-table row">
+    <div class="col-12 column">
+      <div class="row">
+        <div class="col-4 pl-0">
+          <p class="font-semibold">Field</p>
+        </div>
+        <div class="col-2">
+          <p class="font-semibold">Type</p>
+        </div>
+        <div class="col-6">
+          <p class="font-semibold">Description</p>
+        </div>
+      </div>
+      {{ partial "api/table-row-recursive.html" (dict "context" .context "data" $schema.properties "isNested" false) }}
+    </div>
+    
+  </div>
 
-
-<div class="table-responsive">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Field</th>
-        <th scope="col">Type</th>
-        <th scope="col">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        {{ partial "api/table-row-recursive.html" (dict "context" .context "data" $schema.properties "isNested" false "parent" 0) }}
-    </tbody>
-  </table>
-</div>

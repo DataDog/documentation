@@ -11,6 +11,10 @@ $ddpurple: #632ca6;
         padding-top: 160px;
         pointer-events: none;
         background-clip: content-box;
+        margin-right: 0;
+        @media (min-width: 992px) {
+            margin-right: -70%;
+        }
         a {
             pointer-events: initial;
             border-bottom: 1px solid transparent;
@@ -23,6 +27,46 @@ $ddpurple: #632ca6;
     h3 {
         margin-bottom: 20px;
     }
+
+    .model-example-buttons {
+        input[type='radio'] {
+            appearance: none;
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-clip: content-box;
+            border: initial;
+            background-color: #e7e6e7;
+            border-radius: 50%;
+            &:focus {
+                outline: none;
+            }
+        }
+        /* appearance for checked radiobutton */
+        input[type='radio']:checked {
+            background-color: $ddpurple;
+        }
+    }
+
+    .read-only {
+        position: relative;
+        top: 2px;
+        font-size: 16px;
+    }
+
+    .response-toggle {
+        a {
+            &:hover {
+                color: white;
+                border-color: $ddpurple;
+            }
+            &:focus {
+                // outline: none;
+                box-shadow: none !important;
+            }
+        }
+    }
+
     a {
         color: #4a4a4a;
         border-bottom: 1px solid #6c757d;
@@ -34,42 +78,43 @@ $ddpurple: #632ca6;
 
     .schema-table {
         margin: 0 0 20px 0;
+        @media (min-width: 992px) {
+            margin-right: -30%;
+        }
         p {
-            margin: 0;
+            margin: 4px 0;
+            font-size: 16px;
+            line-height: 22px;
+        }
+
+        code {
+            font-size: 14px;
         }
 
         .first-row {
             border-bottom: 1px solid $gray-light;
         }
 
-        // .column .row:last-child {
-        //     border-bottom: none;
-        // }
-
-        // .column .row:last-child .first-row {
-        //     border-bottom: none;
-        // }
-
         .hasChildData {
             .isNested {
                 .key {
-                    padding-left: 15px;
+                    padding-left: 20px;
                 }
 
                 &.hasChildData {
                     .isNested {
                         .key {
-                            padding-left: 20px;
+                            padding-left: 40px;
                         }
                         &.hasChildData {
                             .isNested {
                                 .key {
-                                    padding-left: 30px;
+                                    padding-left: 60px;
                                 }
                                 &.hasChildData {
                                     .isNested {
                                         .key {
-                                            padding-left: 40px;
+                                            padding-left: 80px;
                                         }
                                     }
                                 }
@@ -78,10 +123,7 @@ $ddpurple: #632ca6;
                     }
                 }
             }
-
         }
-
-
     }
 
     .chroma {
@@ -101,6 +143,7 @@ $ddpurple: #632ca6;
         position: sticky;
         z-index: 1;
         top: 95px;
+        font-weight: 600;
         a {
             border-bottom: none;
         }

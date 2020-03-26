@@ -8,7 +8,7 @@
 
 {{ $apiMenu := print "api_" $apiVersion}}
 
-<aside class="sidenav sidenav-api">
+<aside class="sidenav sidenav-api" id="navbar-example2">
     <div class="row sticky">
         <div class="col">
             <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_docs" }}</h4></a>
@@ -25,10 +25,10 @@
                             <a href="{{ .URL }}">
                                 <span>{{ .Name }}</span>
                             </a>
-                            <ul> 
+                            <ul class="nav"> 
                                 {{ range .Children }}
-                                    <li class="{{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
-                                        <a href="#{{ .URL }}">
+                                    <li class="nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
+                                        <a class="nav-link" href="#{{ .URL }}">
                                             <span class="d-inline-block">{{ .Name }}</span>
                                         </a>
                                     </li>
