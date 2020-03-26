@@ -1,6 +1,8 @@
 ---
-title: Auto-Configuration
-kind: documentation
+title: Autodiscovery Auto-Configuration
+kind: faq
+aliases:
+ - /agent/autodiscovery/auto_conf
 further_reading:
 - link: "/agent/autodiscovery/integrations"
   tag: "Documentation"
@@ -77,7 +79,7 @@ The `auto_conf.yaml` configuration files cover all required parameters to set up
 [30]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [31]: /integrations/tomcat
 [32]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/auto_conf.yaml
-[33]: /agent/autodiscovery/template_variables
+[33]: /agent/faq/template_variables
 [34]: /agent/autodiscovery/integrations/?tab=file#configuration
 [35]: /agent/autodiscovery/integrations/?tab=keyvaluestore#configuration
 [36]: /agent/autodiscovery/integrations/?tab=kubernetes#configuration

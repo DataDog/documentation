@@ -1,6 +1,8 @@
 ---
 title: Autodiscovery Template Variables
-kind: documentation
+kind: faq
+aliases:
+ - /agent/autodiscovery/template_variables
 further_reading:
 - link: "/agent/autodiscovery/integrations"
   tag: "Documentation"

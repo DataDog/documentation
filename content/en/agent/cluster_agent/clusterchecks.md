@@ -304,7 +304,7 @@ The Agent `status` command should show the check instance running and reporting 
 [6]: /developers/write_agent_check
 [7]: /integrations/mysql
 [8]: /agent/autodiscovery/integrations/?tab=kubernetes#configuration
-[9]: /agent/autodiscovery/template_variables
+[9]: /agent/faq/template_variables
 [10]: /integrations/http_check
 [11]: /integrations/nginx
 [12]: https://github.com/helm/charts/tree/master/stable/datadog

@@ -1,6 +1,8 @@
 ---
 title: Autodiscovery Troubleshooting
 kind: documentation
+aliases:
+  - /agent/autodiscovery/troubleshooting
 further_reading:
 - link: "agent/troubleshooting"
   tag: "Documentation"
