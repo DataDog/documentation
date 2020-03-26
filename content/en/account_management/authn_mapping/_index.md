@@ -36,8 +36,8 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
 ##### ARGUMENTS
 
 * **`roles.uuid`** [*required*, no default]:
-The `UUID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. Note that this attribute should be presented as part of a `roles` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
-
+ The `UUID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. 
+ **Note**: This attribute should be presented as part of a `roles` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
 * **`attribute_key`** [*required*, no default]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 * **`attribute_value`** [*required*, no default]:
@@ -345,7 +345,8 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
 * **`id`** [*required*, no default]:
   The UUID of the AuthN Mapping being updated. This property must match the `{UUID}` path parameter in the request.
 * **`roles.uuid`** [*optional*, *default*=none]:
-  The `UUID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. Note that this attribute should be presented as part of a `roles` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
+ The `UUID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. 
+ **Note**: This attribute should be presented as part of a `roles` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
 * **`attribute_key`** [*optional*, *default*=none]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 * **`attribute_value`** [*optional*, *default*=none]:
