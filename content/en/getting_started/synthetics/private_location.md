@@ -41,7 +41,7 @@ Once you create a private location, the process of configuring a [Synthetics API
 6. Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
 
     ```shell
-    docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
+    docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
 
 7. If your private location reports correctly to Datadog, you will see the corresponding health status displayed if the private location polled your endpoint less than five seconds before loading the settings or create test pages:

@@ -46,34 +46,81 @@ Le check Cilium est inclus avec le paquet de l'[Agent Datadog][3], mais des opé
 
 1. Pour activer les métriques Prometheus dans `cilium-agent` et `cilium-operator`, déployez Cilium en définissant la valeur Helm `global.prometheus.enabled=true`.
 
-2. Vous pouvez également activer les métriques Prometheus séparément dans le `cilium-agent` :
-    * Ajoutez `--prometheus-serve-addr=:9090` à la section `args` de la configuration DaemonSet pour Cilium.
-        ```
-        [...]
-            spec:
-                containers:
-                - args:
-                    - --prometheus-serve-addr=:9090
-        ```
-    ou dans le `cilium-operator` :
-    * Ajoutez `--enable-metrics` à la section `args` de la configuration de déploiement de Cilium.
-        ```
-        [...]
-            spec:
-                containers:
-                - args:
-                    - --enable-metrics
-        ```
+2. Vous pouvez également activer les métriques Prometheus séparément :
 
-Pour recueillir les métriques `cilium-operator` du cluster entier, consultez la section [Agent de cluster][9].
+   - Dans le `cilium-agent`, ajoutez `--prometheus-serve-addr=:9090` à la section `args` de la configuration DaemonSet pour Cilium :
+
+     ```yaml
+     # [...]
+     spec:
+       containers:
+         - args:
+             - --prometheus-serve-addr=:9090
+     ```
+
+
+
+   - Sinon, dans le `cilium-operator`, ajoutez `--enable-metrics` à la section `args` de la configuration de déploiement de Cilium :
+
+     ```yaml
+     # [...]
+     spec:
+       containers:
+         - args:
+             - --enable-metrics
+     ```
 
 ### Configuration
 
+#### Host
 1. Modifiez le fichier `cilium.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Cilium. Consultez le [fichier d'exemple cilium.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
-    * Pour recueillir les métriques `cilium-agent` activez l'option `agent_endpoint`.
-    * Pour recueillir les métriques `cilium-operator`, activez l'option `operator_endpoint`.
+
+   - Pour recueillir les métriques `cilium-agent` activez l'option `agent_endpoint`.
+   - Pour recueillir les métriques `cilium-operator`, activez l'option `operator_endpoint`.
 
 2. [Redémarrez l'Agent][5].
+
+##### Collecte de logs
+
+Cilium génère deux types de logs : `cilium-agent` et `cilium-operator`.
+
+1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration DaemonSet][4] :
+
+   ```yaml
+     # (...)
+       env:
+       #  (...)
+         - name: DD_LOGS_ENABLED
+             value: "true"
+         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+             value: "true"
+     # (...)
+   ```
+
+2. Montez le socket Docker sur l'Agent Datadog comme dans [ce manifeste][9]. Si vous n'utilisez pas Docker, montez le répertoire `/var/log/pods`.
+
+3. [Redémarrez l'Agent][5].
+
+#### Environnement conteneurisé
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][11] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+##### Collecte de métriques
+
+| Paramètre            | Valeur                                                      |
+|----------------------|------------------------------------------------------------|
+| `<NOM_INTÉGRATION>` | `cilium`                                                   |
+| `<CONFIG_INIT>`      | vide ou `{}`                                              |
+| `<CONFIG_INSTANCE>`  | `{"agent_endpoint": "http://%%host%%:9090/metrics"}`       |
+
+##### Collecte de logs
+
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][10].
+
+| Paramètre      | Valeur                                     |
+|----------------|-------------------------------------------|
+| `<CONFIG_LOG>` | `{"source": "cilium-agent", "service": "cilium-agent"}` |
+
 
 ### Validation
 
@@ -106,4 +153,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/cilium/metadata.csv
 [8]: https://docs.datadoghq.com/fr/help
-[9]: https://docs.datadoghq.com/fr/agent/cluster_agent
+[9]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#create-manifest
+[10]: https://docs.datadoghq.com/fr/agent/docker/log
+[11]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations

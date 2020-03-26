@@ -16,6 +16,10 @@ further_reading:
   text: "Creating Custom Datadog Roles"
 ---
 
+<div class="alert alert-warning">
+The new user management interface is in private beta. <a href="/help">Contact Datadog support</a> to have it enabled for your account.
+</div>
+
 Datadog's **User Management** section allows you to manage your users and their associated roles:
 
 {{< img src="account_management/users/user_page.png" alt="User Management Page" >}}

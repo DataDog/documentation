@@ -55,7 +55,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 | ----------------------------- | ------------------------- | ------------------------------------------------- |
 | `-Ddd.profiling.enabled`      | DD_PROFILING_ENABLED      | Set to `true` to enable profiling.                |
 | `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | File that should contain the API key as a string. |
-| `-Ddd.profiling.api-key`      | DD_PROFILING_API_KEY      | Datadog API key.                                  |
+|                               | DD_PROFILING_API_KEY      | Datadog API key.                                  |
 
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm

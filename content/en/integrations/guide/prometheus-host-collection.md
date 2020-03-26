@@ -1,34 +1,28 @@
 ---
-title: Prometheus and OpenMetrics metrics collection
+title: Prometheus and OpenMetrics metrics collection from a host
 kind: documentation
-aliases:
-    - /getting_started/prometheus
 further_reading:
-- link: "logs/log_collection"
-  tag: "Documentation"
-  text: "Collect your logs"
-- link: "/infrastructure/process"
-  tag: "Documentation"
-  text: "Collect your processes"
-- link: "tracing"
-  tag: "Documentation"
-  text: "Collect your traces"
-- link: developers/prometheus
-  tag: "Documentation"
-  text: "Write your own custom Prometheus Check"
-aliases:
-  - /agent/openmetrics
-  - /agent/prometheus
-  - /getting_started/prometheus
+    - link: 'logs/log_collection'
+      tag: 'Documentation'
+      text: 'Collect your logs'
+    - link: '/infrastructure/process'
+      tag: 'Documentation'
+      text: 'Collect your processes'
+    - link: 'tracing'
+      tag: 'Documentation'
+      text: 'Collect your traces'
+    - link: developers/prometheus
+      tag: 'Documentation'
+      text: 'Write your own custom Prometheus Check'
 ---
 
-Collect your exposed Prometheus and OpenMetrics metrics from your application running inside containers or directly on your host by using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
+Collect your exposed Prometheus and OpenMetrics metrics from your application running on your hosts using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
 
 ## Overview
 
-Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints with a few lines of configuration. Datadog recommends using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section. Use the Prometheus check only when the metrics endpoint does not support a text format.
+Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints. Datadog recommends using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section. Use the Prometheus check only when the metrics endpoint does not support a text format.
 
-This page explains the basic usage of these checks, which enable you to scrape custom metrics from Prometheus endpoints.
+This page explains the basic usage of these checks, enabling you to import all your Prometheus exposed metrics within Datadog.
 
 ## Setup
 
@@ -38,95 +32,33 @@ This page explains the basic usage of these checks, which enable you to scrape c
 
 ### Configuration
 
-If you are running the Agent as a binary on a host, configure your OpenMetrics or Prometheus check as you would any [other Agent integration](?tab=host). If you are running the Agent as a DaemonSet in Kubernetes, configure your OpenMetrics or Prometheus check using [Autodiscovery](?tab=kubernetes).
+To collect your exposed metrics:
 
-{{< tabs >}}
-{{% tab "Host" %}}
+1. Edit the `openmetrics.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][8]. See the [sample openmetrics.d/conf.yaml][9] for all available configuration options. This is the minimum required configuration needed to enable the integration::
 
-First, edit the `openmetrics.d/conf.yaml` or `prometheus.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to configure your OpenMetrics or Prometheus integrations. Then [restart the Agent][2] to start collecting your metrics. See the [sample openmetrics.d/conf.yaml][3] or [sample prometheus.d/conf.yaml][4] for all available configuration options. This is the minimum required configuration needed to enable the integration:
+    ```yaml
+    init_config:
 
-```yaml
-init_config:
+    instances:
+        - prometheus_url: 'localhost:<PORT>/<ENDPOINT>'
+          namespace: '<NAMESPACE>'
+          metrics:
+              - '<METRIC_TO_FETCH>': '<DATADOG_METRIC_NAME>'
+    ```
 
-instances:
-    - prometheus_url: 'localhost:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>'
-      namespace: '<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>'
-      metrics:
-          - '<PROMETHEUS_METRIC_TO_FETCH>': '<DATADOG_NEW_METRIC_NAME>'
-```
+     With the following configuration placeholder values:
 
-[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[4]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
-{{% /tab %}}
-{{% tab "Docker" %}}
+    | Placeholder             | Description                                                                                                                                                                                                            |
+    | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `<PORT>`                | Port to connect to in order to access the Prometheus endpoint.                                                                                                                                                         |
+    | `<ENDPOINT>`            | URL for the metrics served by the container, in Prometheus format.                                                                                                                                                     |
+    | `<NAMESPACE>`           | Set namespace to be prefixed to every metric when viewed in Datadog.                                                                                                                                                   |
+    | `<METRIC_TO_FETCH>`     | Prometheus metrics key to be fetched from the Prometheus endpoint.                                                                                                                                                     |
+    | `<DATADOG_METRIC_NAME>` | Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<DATADOG_METRIC_NAME>` in Datadog. <br>If you choose not to use this option, pass a list of strings rather than `key:value` pairs. |
 
-The Agent detects if it's running on Docker and automatically searches all containers labels for Datadog-OpenMetrics labels. Autodiscovery expects labels to look like these examples, depending on the file type:
+2. [Restart the Agent][10] to start collecting your metrics.
 
-**Dockerfile**:
-
-```text
-LABEL "com.datadoghq.ad.check_names"='["openmetrics"]'
-LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[{\"<PROMETHEUS_METRIC_TO_FETCH>\": \"<DATADOG_NEW_METRIC_NAME>\"}]}"]'
-```
-
-**docker-compose.yaml**:
-
-```yaml
-labels:
-    com.datadoghq.ad.check_names: '["openmetrics"]'
-    com.datadoghq.ad.init_configs: '[{}]'
-    com.datadoghq.ad.instances: '["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[{\"<PROMETHEUS_METRIC_TO_FETCH>\": \"<DATADOG_NEW_METRIC_NAME>\"}]}"]'
-```
-
-**docker run command**:
-
-```text
--l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"prometheus_url\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>\",\"metrics\":[{\"<PROMETHEUS_METRIC_TO_FETCH>\": \"<DATADOG_NEW_METRIC_NAME>\"}]}"]'
-```
-
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-Like all [Datadog Agent integrations][1], the Datadog-OpenMetrics integration can be configured using [Autodiscovery][2]. This allows you to send a given container/pod exposed OpenMetrics or Prometheus metrics to Datadog by applying the following `annotations` to it:
-
-```yaml
-# (...)
-metadata:
-    #(...)
-    annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: |
-            ["openmetrics"]
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: |
-            [{}]
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: |
-            [
-              {
-                "prometheus_url": "http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> ",
-                "namespace": "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>",
-                "metrics": [{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}]
-              }
-            ]
-spec:
-    containers:
-        - name: '<CONTAINER_IDENTIFIER>'
-```
-
-
-[1]: /getting_started/integrations
-[2]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
-{{% /tab %}}
-{{< /tabs >}}
-
-With the following configuration placeholder values:
-
-- `<PROMETHEUS_PORT>`: Port to connect to in order to access the Prometheus endpoint.
-- `<PROMETHEUS_ENDPOINT>`: URL for the metrics served by the container, in Prometheus format.
-- `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>`: Set namespace to be prefixed to every metric when viewed in Datadog.
-- `<METRIC_TO_FETCH>`: Prometheus metrics key to be fetched from the Prometheus endpoint.
-- `<NEW_METRIC_NAME>`: Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs.
+### Parameters available
 
 Find below the full list of parameters that can be used for your `instances`:
 
@@ -140,12 +72,12 @@ Find below the full list of parameters that can be used for your `instances`:
 | `label_to_hostname`                     | string                                  | optional  | none          | Override the hostname with the value of one label.                                                                                                                                                                                                                   |
 | `label_joins`                           | object                                  | optional  | none          | The label join allows you to target a metric and retrieve its label via a 1:1 mapping.                                                                                                                                                                               |
 | `labels_mapper`                         | list of key:value element               | optional  | none          | The label mapper allows you to rename some labels. Format: `<LABEL_TO_RENAME>: <NEW_LABEL_NAME>`.                                                                                                                                                                    |
-| `type_overrides`                        | list of key:value element               | optional  | none          | Type override allows you to override a type in the Prometheus payload or type an untyped metric (they're ignored by default).<br> Supported `<METRIC_TYPE>`s are `gauge`, `counter`, `histogram`, and `summary`.                                                     |
+| `type_overrides`                        | list of key:value element               | optional  | none          | Type override allows you to override a type in the Prometheus payload or type an untyped metric (they're ignored by default).<br> Supported `<METRIC_TYPE>`s are `gauge`, `monotonic_count`, `histogram`, and `summary`.                                             |
 | `tags`                                  | list of key:value element               | optional  | none          | List of tags to attach to every metric, event, and service check emitted by this integration.<br> [Learn more about tagging][5].                                                                                                                                     |
 | `send_distribution_buckets`             | boolean                                 | optional  | false         | Set `send_distribution_buckets` to `true` to send and convert OpenMetrics histograms to [Distribution metrics][8]. <br>`send_histograms_buckets` must be set to `true` (default value).                                                                              |
-| `send_distribution_counts_as_monotonic` | boolean                                 | optional  | false         | Set `send_distribution_counts_as_monotonic` to `true` to send OpenMetrics histogram/summary counts as monotonic counters.                                                                                                                                            |
-| `send_histograms_buckets`                | boolean                                 | optional  | true          | Set `send_histograms_buckets` to `true` to send the histograms bucket.                                                                                                                                                                                               |
-| `send_monotonic_counter`                | boolean                                 | optional  | true          | To send counters as monotonic counter see [the relevant issue][9] in GitHub.                                                                                                                                                                                         |
+| `send_distribution_counts_as_monotonic` | boolean                                 | optional  | false         | Set `send_distribution_counts_as_monotonic` to `true` to send OpenMetrics histogram/summary counts as monotonic counts.                                                                                                                                              |
+| `send_histograms_buckets`               | boolean                                 | optional  | true          | Set `send_histograms_buckets` to `true` to send the histograms bucket.                                                                                                                                                                                               |
+| `send_monotonic_counter`                | boolean                                 | optional  | true          | o send counts as monotonic counts see the [relevant issue in GitHub][9].                                                                                                                                                                                             |
 | `exclude_labels`                        | list of string                          | optional  | none          | List of labels to be excluded.                                                                                                                                                                                                                                       |
 | `ssl_cert`                              | string                                  | optional  | none          | If your Prometheus endpoint is secured, here are the settings to configure it:<br> Can either be: only the path to the certificate and thus you should specify the private key, or it can be the path to a file containing both the certificate and the private key. |
 | `ssl_private_key`                       | string                                  | optional  | none          | Needed if the certificate does not include the private key.<br> **WARNING**: The private key to your local certificate must be unencrypted.                                                                                                                          |
@@ -157,11 +89,39 @@ Find below the full list of parameters that can be used for your `instances`:
 
 **Note**: All parameters but `send_distribution_buckets` and `send_distribution_counts_as_monotonic` are supported by both OpenMetrics check and Prometheus check.
 
+## Getting started
+
+### Simple metric collection
+
+To get started with collecting metrics exposed by Prometheus, follow these steps:
+
+1. Follow the [Prometheus Getting Started][11] documentation to start a local version of Prometheus that monitors itself.
+
+2. [Install the Datadog Agent for your platform][6].
+
+3. Edit the `openmetrics.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][8] with the following content:
+
+    ```yaml
+    init_config:
+
+    instances:
+        - prometheus_url: http://localhost:9090/metrics
+          namespace: 'documentation_example'
+          metrics:
+              - promhttp_metric_handler_requests_total: prometheus.handler.requests.total
+    ```
+
+4. [Restart the Agent][12].
+
+5. Go into your [Metric summary page][13] to see the collected metrics: `prometheus_target_interval_length_seconds*`
+
+    {{< img src="integrations/guide/prometheus_host/prometheus_collected_metric_host.png" alt="Prometheus metric collected">}}
+
 ## From custom to official integration
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][10] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][14] integration.
 
 ## Further Reading
 
@@ -174,6 +134,10 @@ Official integrations have their own dedicated directories. There's a default in
 [5]: /developers/prometheus
 [6]: https://app.datadoghq.com/account/settings#agent
 [7]: /tagging
-[8]: /metrics/distributions
-[9]: https://github.com/DataDog/integrations-core/issues/1303
-[10]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[8]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
+[10]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://prometheus.io/docs/prometheus/latest/getting_started/
+[12]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[13]: https://app.datadoghq.com/metric/summary
+[14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

@@ -222,6 +222,11 @@ main:
     url: agent/docker/tag/
     parent: "agent_docker"
     weight: 204
+  - name: "Prometheus"
+    url: "agent/docker/prometheus/"
+    parent: "agent_docker"
+    identifier: "agent_docker_prometheus"
+    weight: 205
 
   ## AGENT - Kubernetes
 
@@ -250,11 +255,16 @@ main:
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_tag"
     weight: 304
+  - name: "Prometheus"
+    url: "agent/kubernetes/prometheus/"
+    parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_prometheus"
+    weight: 305
   - name: "Data collected"
     url: "agent/kubernetes/data_collected/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_data_collected"
-    weight: 305
+    weight: 306
 
   ## AGENT - Datadog Cluster Agent
 
@@ -1424,6 +1434,21 @@ main:
     parent: "rum"
     identifier: "rum_dashboards"
     weight: 2
+  - name: "Performance Overview"
+    url: "real_user_monitoring/dashboards/performance_overview_dashboard"
+    parent: "rum_dashboards"
+    identifier: "rum_dashboards_performance"
+    weight: 201
+  - name: "Resources"
+    url: "real_user_monitoring/dashboards/resources_dashboard"
+    parent: "rum_dashboards"
+    identifier: "rum_dashboards_resources"
+    weight: 202
+  - name: "Errors"
+    url: "real_user_monitoring/dashboards/errors_dashboard"
+    parent: "rum_dashboards"
+    identifier: "rum_dashboards_errors"
+    weight: 203
 
   ## RUM - Explorer
 
