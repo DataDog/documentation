@@ -4,7 +4,6 @@ kind: documentation
 description: "See all your trace spans in real time."
 ---
 
-# Live Tail
 
 {{< img src="tracing/live_tail/livetail_view.gif" alt="Live tail" >}}
 
