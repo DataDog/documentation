@@ -4,18 +4,16 @@ kind: documentation
 description: "See all your trace spans in real time."
 ---
 
-# Live Tail
 
 {{< img src="tracing/live_tail/livetail_view.gif" alt="Live tail" >}}
 
 ## Overview
-The [Live Tail][1] feature gives users the ability to see all trace spans in near real-time from anywhere in the Application. It displays spans as soon as they get out of the Datadog agent section and before they are indexed by Datadog, hence:
-All trace spans ingested by Datadog are displayed. (It’s a part of tracing without Limits*)
-Displayed spans have been processed.
-
-1. The span stream can be paused
-2. Write search parameters to refine the streaming view
-3. View the distributed trace in real-time
+The APM [Live Tail][1] gives users the ability to see all trace spans in near real-time from anywhere in the Datadog UI. It displays spans as soon as they get out of the Datadog agent section and before they are indexed by Datadog and it has these features:
+- All trace spans ingested by Datadog are displayed because It’s a part of tracing without Limits*
+- It displays spans that have been processed.
+- The span stream can be paused.
+- You can write search parameters to refine the streaming view.
+- View the distributed trace in real-time.
 4. Add or remove columns from span tags for a customized view 
 
 This feature allows you, for instance, to check if a process has correctly started, or if a new deployment went smoothly. Or view outage related information in real-time
@@ -38,6 +36,7 @@ Customize the Live Tail column view to better highlight the relevant information
 3. Remove or replace column column
 
 ## Filtering the trace Stream
+
 A valid query in the search bar displays traces that match your search criteria. The search syntax is the same in the Live Tail views as in the other trace views, but here, your query is matched against all of the ingested traces and not just the indexed ones.
 
 ## Search Query
@@ -45,9 +44,8 @@ A valid query in the search bar displays traces that match your search criteria.
 {{< img src="tracing/live_tail/search_livetail.png" alt="Live tail" >}}
 
 Any query that works in other views works in the Live Tail view, but you can only filter on attributes that are defined as facets.
-For example, to filter on the following customer_id attribute there are two options:
-Click on the attribute and add it to the search:
-Use the following query `@customer_id:1123`
-To filter on all spans with a duration above 150ms use the following query: `@duration:>150ms`
+For example, to filter on the a customer_id attribute, there are two options:
+ - Click on the attribute and add it to the search using the query `@customer_id:1123`.
+- Filter on all spans with a duration above 150ms using the query: `@duration:>150ms`.
 
 [1]: /apm/livetail
