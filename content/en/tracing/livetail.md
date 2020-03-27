@@ -11,7 +11,7 @@ description: "See all your trace spans in real time."
 ## Overview
 The APM [Live Tail][1] gives users the ability to see all trace spans in near real-time from anywhere in the Datadog UI. It displays spans as soon as they get out of the Datadog agent section and before they are indexed by Datadog and it has these features:
 All trace spans ingested by Datadog are displayed. (It’s a part of tracing without Limits*)
-Displayed spans have been processed.
+- It displays spans that have been processed.
 
 1. The span stream can be paused
 2. Write search parameters to refine the streaming view
