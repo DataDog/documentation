@@ -94,7 +94,7 @@ Many views in Datadog can be scoped to a specific time frame. Time controls incl
   Incrementing time frames via keyboard and entering custom time frames is in beta. If you have feedback, contact <a href="https://docs.datadoghq.com/help">Datadog support</a>.
 </div>
 
-To increment by month, day, year, hour, or minute, highlight a portion of the time frame and use the `[↑]` and `[↓]` keys :
+To increment by month, day, year, hour, or minute, highlight a portion of the time frame and use the `[↑]` and `[↓]` keys:
 
 {{< img src="getting_started/increment_time_with_arrow_keys.mp4" alt="Increment time with arrow keys" video="true" width="500" >}}
 
