@@ -4,9 +4,9 @@ kind: documentation
 description: "See all your trace spans in real time."
 ---
 
-{{< img src="logs/live_tail/live_tail_demo.mp4" alt="Live tail" video="true"  >}}
-
 # Live Tail
+
+{{< img src="tracing/live_tail/livetail_view.gif" alt="Live tail" >}}
 
 ## Overview
 The [Live Tail][1] feature gives users the ability to see all trace spans in near real-time from anywhere in the Application. It displays spans as soon as they get out of the Datadog agent section and before they are indexed by Datadog, hence:
@@ -21,7 +21,6 @@ Displayed spans have been processed.
 This feature allows you, for instance, to check if a process has correctly started, or if a new deployment went smoothly. Or view outage related information in real-time
 
 ## Live Tail view
-{{< img src="logs/live_tail/live_tail_demo.mp4" alt="Live tail" video="true"  >}}
 
 Choose the `Live Tail` option in the time range selector to switch to the Live Tail view.
 The number of received spans per second is displayed at the top left, as well as the sampling rate. Since a stream of thousands of spans per second is not human readable, high throughput span streams are sampled for visual clarity.
@@ -32,7 +31,7 @@ Use the Live Tail search bar filtering features to filter the spans stream and t
 ## Column Options
 
 Customize the Live Tail column view to better highlight the relevant information in your traces. Click on the column dropdown at the top right of the column header to activate one of the options below:
-{{< img src="logs/live_tail/live_tail_demo.mp4" alt="Live tail" video="true"  >}}
+{{< img src="tracing/live_tail/column_livetail.png" alt="Live tail" >}}
 
 1. Move column to the right or left
 2. Insert column to the right or left from span tags
@@ -43,7 +42,7 @@ A valid query in the search bar displays traces that match your search criteria.
 
 ## Search Query
 
-{{< img src="logs/live_tail/live_tail_demo.mp4" alt="Live tail" video="true"  >}}
+{{< img src="tracing/live_tail/search_livetail.png" alt="Live tail" >}}
 
 Any query that works in other views works in the Live Tail view, but you can only filter on attributes that are defined as facets.
 For example, to filter on the following customer_id attribute there are two options:
