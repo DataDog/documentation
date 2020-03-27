@@ -1,5 +1,9 @@
 {{ define "api-main" }}
 
+    {{ with .Content}}
+        {{ . }}
+    {{ end }}
+
     {{ $dot := . }}
 
     {{ .Scratch.Set "apiVersion" "v1"}}
@@ -69,13 +73,47 @@
                             <p>{{ .action.requestBody.description | markdownify }}</p>
 
                             {{ if .action.requestBody }}
+                            <div class="tab-content">
                                 {{ range $content := .action.requestBody.content }}
                                     {{ range $schema := $content }}
                                         {{ if $schema }}
-                                            {{ partial "api/schema-table.html" (dict "context" $dot "schema" $schema)}}
+                                        <p>{{ $schema.description }}</p>
+                                        <div class="my-2 model-example-buttons">
+                                            <div class="form-check form-check-inline">
+                                           
+                                                <input class="form-check-input js-model-link" id="{{ $context.action.operationId }}-model" type="radio" checked>
+                                                <label class="form-check-label" for="{{ $context.action.operationId }}-model">Model</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                
+                                                <input class="form-check-input js-example-link" id="{{ $context.action.operationId }}-example" type="radio">
+                                                <label class="form-check-label" for="{{ $context.action.operationId }}-example">Example</label>
+                                            </div>
+                                        </div>                                        
+                                      
+                                        <div class="tab-content mb-3">
+                                            <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-request-model">
+                                                {{ if $schema }}
+                                                    {{ partial "api/schema-table.html" (dict "context" $dot "schema" $schema)}}
+                                                {{ end}}
+                                          
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-request-example">
+                                              {{ with $dot.Resources.Match "examples.json" }}
+                                                  {{ range . }}
+                                                   
+                                                  {{ $data := . | unmarshal}}
+                                                  {{ $data2 := (index (index $data $context.action.operationId) "request") |jsonify }}
+                                                  {{ $data3 := (replace (replace (replace $data2 "," ",\n") "{" "{\n") "}" "\n}") }}
+                                                  {{ highlight $data3 "json" "" }}
+                                                  {{ end }}
+                                              {{ end }}
+                                            </div>
+                                        </div>
                                         {{ end }}
                                     {{ end }}
                                 {{ end }}
+                            </div>
                             {{ end }}    
                         {{ end }}
 

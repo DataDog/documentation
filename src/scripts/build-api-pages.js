@@ -130,9 +130,7 @@ const filterExampleJson = (data) => {
         const property = data.properties[propKey];
         return {[propKey]: (property.hasOwnProperty("items")) ? filterExampleJson(property.items) : (property["example"] || property["type"])};
       })
-      .reduce((obj, item) => {
-        return {...obj, ...item}
-      }, {});
+      .reduce((obj, item) => ({...obj, ...item}), {});
   } else if ("items" in data) {
     return filterExampleJson(data.items);
   } else {

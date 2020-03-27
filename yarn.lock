@@ -4544,14 +4544,14 @@ https-proxy-agent@^2.2.1:
     agent-base "^4.3.0"
     debug "^3.1.0"
 
-hugo-bin@0.52.0:
-  version "0.52.0"
-  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.52.0.tgz#0bb910d2ab539f9b7878fb890dd9fde57796a7b2"
-  integrity sha512-HM3j7wQwYs9S05wdUDoB74YIeXhTiJMieyEwe2biGO531sMgHn930aIE1lQarHuXMLysKxQY7dEbqOk9ehMTiw==
+hugo-bin@0.56.3:
+  version "0.56.3"
+  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.56.3.tgz#69909e9b2d2858a09cb88ddb1bd9bcb7c3f4c403"
+  integrity sha512-uQRrjpmU2+MpdweBo/EiSQ5scG3T+RPN8ZfkBdEr+4lWU6j58Np/PxUduN04IqqdF3QtAG10wmWugO+pELfn9Q==
   dependencies:
     bin-wrapper "^4.1.0"
     pkg-conf "^3.1.0"
-    rimraf "^3.0.1"
+    rimraf "^3.0.2"
     signale "^1.4.0"
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
@@ -8037,10 +8037,10 @@ rimraf@2.6.3:
   dependencies:
     glob "^7.1.3"
 
-rimraf@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-3.0.1.tgz#48d3d4cb46c80d388ab26cd61b1b466ae9ae225a"
-  integrity sha512-IQ4ikL8SjBiEDZfk+DFVwqRK8md24RWMEJkdSlgNLkyyAImcjf8SWvU1qFMDOb4igBClbTQ/ugPqXcRwdFTxZw==
+rimraf@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-3.0.2.tgz#f1a5402ba6220ad52cc1282bac1ae3aa49fd061a"
+  integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
   dependencies:
     glob "^7.1.3"
 
