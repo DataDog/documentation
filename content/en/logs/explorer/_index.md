@@ -23,7 +23,7 @@ further_reading:
 
 The Logs Explorer is your home base for troubleshooting and exploration:
 
-{{< img src="logs/explorer/log_explorer_walkthrough.gif" alt="Explore view with comments"  >}}
+{{< img src="logs/explorer/log_explorer_walkthrough.gif" alt="Explore view with comments" style="width:80%;" >}}
 
 Different views offer different type of insights from your log data matching a [search query][1].
 
@@ -31,27 +31,27 @@ Different views offer different type of insights from your log data matching a [
 
 The Live Tail displays logs as they flow into Datadog. Livetail has no persistance but provides visibility on **all** logs, whether they are indexed or not. Find out more in the [Log Live Tail section][17].
 
-{{< img src="logs/explorer/log_explorer_walkthrough_livetail.gif" alt="Log Livetail"  >}}
+{{< img src="logs/explorer/log_explorer_walkthrough_livetail.gif" alt="Log Livetail" style="width:60%;" >}}
 
 
 ### Log Lists
 
 The Log List displays indexed logs and offer priviledged tools to navigate in **individual results**. Find out more in the [Log List section][16].
 
-{{< img src="logs/explorer/log_explorer_walkthrough_list.png" alt="Log List"  >}}
+{{< img src="logs/explorer/log_explorer_walkthrough_list.png" alt="Log List" style="width:60%;" >}}
 
 ### Log Patterns
 
 The Log Patterns automatically aggregates indexed logs into a **handful of groups** with similar structure. Find out more in the [Log Patterns section][3].
 
-{{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns"  >}}
+{{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns" style="width:60%;" >}}
 
 
 ### Log Analytics
 
 The Log Analytics **graph** log queries and see maximums, averages, percentiles, unique counts, and more. Follow the [log graphing guide][5] to learn more about all the graphing options.
 
-{{< img src="logs/explorer/log_explorer_walkthrough_analytics.png" alt="Log Analytics"  >}}
+{{< img src="logs/explorer/log_explorer_walkthrough_analytics.png" alt="Log Analytics" style="width:60%;" >}}
 
 
 ## The Log Side Panel
