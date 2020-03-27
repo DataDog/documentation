@@ -230,53 +230,7 @@ Refer to the [Autodiscovery guide][1] for setup, examples, and more information 
 
 ### Filter containers
 
-It is possible to filter logs, metrics, and Autodiscovery using the following methods. This can be useful to prevent the collection of the Datadog Agent logs.
-
-{{< tabs >}}
-{{% tab "Environment variable" %}}
-
-Two environment variables are available to include or exclude a list of containers filtered by image or container name:
-
-* `DD_AC_INCLUDE`: whitelist of containers to always include
-* `DD_AC_EXCLUDE`: blacklist of containers to exclude
-
-The format for these options is space-separated strings. For example, if you only want to monitor two images, and exclude the rest, specify:
-
-```text
-DD_AC_EXCLUDE = "image:.*"
-DD_AC_INCLUDE = "image:cp-kafka image:k8szk"
-```
-
-Or to exclude a specific container name:
-
-```text
-DD_AC_EXCLUDE = "name:datadog-agent"
-```
-
-{{% /tab %}}
-
-{{% tab "Configuration File" %}}
-
-Two parameters are available in `datadog.yaml` to include or exclude a list of containers filtered by image or container name:
-
-* `ac_exclude`: whitelist of containers to always include
-* `ac_include`: blacklist of containers to exclude
-
-For example, if you only want to monitor two images, and exclude the rest, specify:
-
-```text
-ac_exclude: ["image:.*"]
-ac_include: ["image:cp-kafka", "image:k8szk"]
-```
-
-Or to exclude the Datadog Agent:
-
-```text
-ac_exclude = ["name:datadog-agent"]
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+It is possible to filter logs, metrics, and Autodiscovery using the following methods. This can be useful to prevent the collection of the Datadog Agent logs. See the [Container Discovery Management][5] to learn more.
 
 ## Short Lived containers
 
@@ -284,7 +238,7 @@ For a Docker environment, the Agent receives container updates in real time thro
 
  Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 
-For Kubernetes environements, refer to the [Kubernetes short lived container documentation][5]
+For Kubernetes environements, refer to the [Kubernetes short lived container documentation][6]
 
 ## Further Reading
 
@@ -294,4 +248,5 @@ For Kubernetes environements, refer to the [Kubernetes short lived container doc
 [2]: /agent/autodiscovery
 [3]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
 [4]: /agent/logs/#custom-log-collection
-[5]: /agent/kubernetes/log#short-lived-containers
+[5]: /agent/guide/autodiscovery-management
+[6]: /agent/kubernetes/log#short-lived-containers

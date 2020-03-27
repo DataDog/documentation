@@ -270,16 +270,11 @@ main:
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_tag"
     weight: 305
-  - name: "Discovery Management"
-    url: "agent/kubernetes/management/"
-    parent: "agent_kubernetes"
-    identifier: "agent_kubernetes_management"
-    weight: 306
   - name: "Data collected"
     url: "agent/kubernetes/data_collected/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_data_collected"
-    weight: 307
+    weight: 306
 
 
   ## AGENT - Datadog Cluster Agent
