@@ -325,10 +325,10 @@ class Integrations:
         Take a single README.md file and
         1. extract the first h1, if this isn't a merge item
         2. add tabs if they exist
-        2. inject metrics after ### Metrics header if metrics exists for file
-        3. inject service checks after ### Service Checks if file exists
-        4. inject hugo front matter params at top of file
-        5. write out file to content/integrations with filename changed to integrationname.md
+        3. inject metrics after ### Metrics header if metrics exists for file
+        4. inject service checks after ### Service Checks if file exists
+        5. inject hugo front matter params at top of file
+        6. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
         no_integration_issue = True
