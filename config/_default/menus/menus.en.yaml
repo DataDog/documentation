@@ -920,13 +920,13 @@ main:
     parent: "app_analytics"
     weight: 305
   
-    - name: "App Analytics"
+  - name: "App Analytics"
     url: "tracing/livetail/"
     parent: "tracing"
     identifier: "livetail"
     weight: 4
  
-    - name: "Connect Logs and Traces"
+  - name: "Connect Logs and Traces"
     url: "tracing/connect_logs_and_traces/"
     parent: "tracing"
     identifier: "tracing_connect_logs_and_traces"
