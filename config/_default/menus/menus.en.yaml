@@ -920,7 +920,7 @@ main:
     parent: "app_analytics"
     weight: 305
   
-  - name: "App Analytics"
+  - name: "Live Tail"
     url: "tracing/livetail/"
     parent: "tracing"
     identifier: "livetail"
