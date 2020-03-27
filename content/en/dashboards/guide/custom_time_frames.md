@@ -9,7 +9,7 @@ kind: guide
 
 Many views in Datadog can be scoped to a specific time frame. Time controls include a list of common time frames and a calendar picker for quick selection.
 
-To increment by month, day, year, hour, or minute, highlight a portion of the time frame and use the `[↑]` and `[↓]` keys :
+To increment by month, day, year, hour, or minute, highlight a portion of the time frame and use the `[↑]` and `[↓]` keys:
 
 {{< img src="dashboards/guide/custom_time_frames/increment_time_with_arrow_keys.mp4" alt="Increment time with arrow keys" video="true" width="500" >}}
 
