@@ -327,7 +327,7 @@ The monitors link is customizable with additional parameters. The most common ar
 
 | Parameter | Example        | Displays                                                                        |
 |-----------|----------------|---------------------------------------------------------------------------------|
-| `status`  | `status:Alert` | Monitors in an alert state (additional statuses: `WARN`, `NO%20DATA`, and `OK`) |
+| `status`  | `status:Alert` | Monitors in an alert state (additional statuses: `WARN`, `NO DATA`, and `OK`)   |
 | `muted`   | `muted: true`  | Muted monitors (use `false` for non-muted monitors)                             |
 | `type`    | `type:log`     | Log monitors (see other [monitor types][1])                                     |
 
