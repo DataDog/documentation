@@ -44,7 +44,7 @@ Define the request you want to be executed by Datadog:
         * Allow insecure certificates: Toggle to have your HTTP test go on with connection even if there is an error when validating the certificate.
         * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
         * Authentication: HTTP basic authentication with username and password
-        * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`). **Note**: The request body is limited to a maximum size of 50 kilobyte.
+        * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`). **Note**: The request body is limited to a maximum size of 50 kilobytes.
         * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
 3. **Name**: The name of your API test.
