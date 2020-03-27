@@ -1,0 +1,38 @@
+{
+  "GetUsageFargate": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageHosts": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageLogs": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageRumSessions": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageSummary": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageSynthetics": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageTimeseries": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageTopAvgMetrics": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageTrace": {
+    "responses": {},
+    "request": {}
+  }
+}
