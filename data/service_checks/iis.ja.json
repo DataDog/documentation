@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.1.0",
+        "check": "iis.site_up",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト", "site"],
+        "name": "サイトアップ",
+        "description": "サイトのアップタイムが 0 の場合は `CRITICAL` を、それ以外の場合は `OK` を返します。サイトのアップタイムは WMI 経由で [Win32_PerfFormattedData_W3SVC_WebService クラス](http://msdn.microsoft.com/en-us/library/aa394298%28v=vs.85%29.aspx) を用いて収集されます。"
+    }
+]

@@ -42,9 +42,9 @@ supported_os:
 
 Enregistrez l'activité HAProxy dans Datadog pour :
 
-* Visualiser les performances de répartition de charge de HAProxy
-* Être informé lorsqu'un serveur tombe en panne
-* Corréler les performances de HAProxy avec le reste de vos applications
+- Visualiser les performances de répartition de charge de HAProxy
+- Être informé lorsqu'un serveur tombe en panne
+- Corréler les performances de HAProxy avec le reste de vos applications
 
 ## Implémentation
 
@@ -58,20 +58,21 @@ L'Agent recueille des métriques via un endpoint stats :
 
 1. Configurez un endpoint dans votre fichier `haproxy.conf` :
 
-    ```conf
-      listen stats # Define a listen section called "stats"
-      bind :9000 # Listen on localhost:9000
-      mode http
-      stats enable  # Enable stats page
-      stats hide-version  # Hide HAProxy version
-      stats realm Haproxy\ Statistics  # Title text for popup window
-      stats uri /haproxy_stats  # Stats URI
-      stats auth Username:Password  # Authentication credentials
-    ```
+   ```conf
+     listen stats # Define a listen section called "stats"
+     bind :9000 # Listen on localhost:9000
+     mode http
+     stats enable  # Enable stats page
+     stats hide-version  # Hide HAProxy version
+     stats realm Haproxy\ Statistics  # Title text for popup window
+     stats uri /haproxy_stats  # Stats URI
+     stats auth Username:Password  # Authentication credentials
+   ```
 
 2. [Redémarrez HAProxy pour activer l'endpoint stats][3].
 
 ### Configuration
+
 #### Host
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
@@ -82,55 +83,64 @@ Modifiez le fichier `haproxy.d/conf.yaml` dans le dossier `conf.d/` à la racine
 
 1. Ajoutez ce bloc de configuration à votre fichier `haproxy.d/conf.yaml` pour commencer à recueillir vos [métriques HAProxy](#metriques) :
 
-    ```yaml
-      init_config:
+   ```yaml
+   init_config:
 
-      instances:
-
-          ## @param url - string - required
-          ## Haproxy URL to connect to gather metrics.
-          ## Set the according <USERNAME> and <PASSWORD> or use directly a unix stats
-          ## or admin socket: unix:///var/run/haproxy.sock
-          #
-        - url: http://localhost/admin?stats
-
-          ## @param username - string - optional
-          ## The username to use if services are behind basic auth.
-          #
-          username: "<USERNAME>"
-
-          ## @param password - string - optional
-          ## The password to use if services are behind basic or NTLM auth.
-          #
-          password: "<PASSWORD>"
-    ```
+   instances:
+     ## @param url - string - required
+     ## Haproxy URL to connect to gather metrics.
+     ## Set the according <USERNAME> and <PASSWORD> or use directly a unix stats
+     ## or admin socket: unix:///var/run/haproxy.sock
+     #
+     - url: http://localhost/admin?stats
+   ```
 
 2. [Redémarrez l'Agent][6].
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
+
+Par défaut, Haproxy envoie des logs via UDP sur le port 514. L'Agent peut effectuer une écoute afin d'obtenir ces logs sur ce port. Toutefois, il est nécessaire de procéder à une élévation des privilèges pour toute association vers un numéro de port inférieur à 1024. Pour ce faire, suivez les instructions ci-dessous. Vous pouvez également choisir d'utiliser un autre port. Dans ce cas, ignorez l'étape 3.
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Ajoutez ce blog de configuration à votre fichier `haproxy.d/conf.yaml` pour commencer à recueillir vos logs HAProxy ;
 
-    ```yaml
-      logs:
-          - type: udp
-            port: 514
-            service: haproxy
-            source: haproxy
-            sourcecategory: http_web_access
-    ```
+   ```yaml
+   logs:
+     - type: udp
+       port: 514
+       service: haproxy
+       source: haproxy
+   ```
 
     Modifiez la valeur du paramètre `service` et configurez-le pour votre environnement. Consultez le [fichier d'exemple haproxy.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-3. [Redémarrez l'Agent][6].
+3. Autorisez l'accès au port 514 à l'aide de la commande `setcap` :
+
+    ```bash
+    sudo setcap CAP_NET_BIND_SERVICE=+ep /opt/datadog-agent/bin/agent/agent
+    ```
+
+    Pour vérifier que tout fonctionne, exécutez la commande `getcap` :
+
+    ```bash
+    sudo getcap /opt/datadog-agent/bin/agent/agent
+    ```
+
+    Voici le résultat attendu :
+    ```bash
+    /opt/datadog-agent/bin/agent/agent = cap_net_bind_service+ep
+    ```
+
+    **Remarque** : exécutez cette commande `setcap` à chaque mise à niveau de l'Agent.
+
+4. [Redémarrez l'Agent][6].
 
 #### Environnement conteneurisé
 
@@ -138,20 +148,20 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de métriques
 
-| Paramètre            | Valeur                                                                                     |
-|----------------------|-------------------------------------------------------------------------------------------|
-| `<NOM_INTÉGRATION>` | `haproxy`                                                                                 |
-| `<CONFIG_INIT>`      | vide ou `{}`                                                                             |
-| `<CONFIG_INSTANCE>`  | `{"url": "https://%%host%%/admin?stats","username":"<NOMUTILISATEUR>","password":"<MOTDEPASSE>"}` |
+| Paramètre            | Valeur                                     |
+| -------------------- | ----------------------------------------- |
+| `<NOM_INTÉGRATION>` | `haproxy`                                 |
+| `<CONFIG_INIT>`      | vide ou `{}`                             |
+| `<CONFIG_INSTANCE>`  | `{"url": "https://%%host%%/admin?stats"}` |
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte de logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][8].
 
 | Paramètre      | Valeur                                                |
-|----------------|------------------------------------------------------|
+| -------------- | ---------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "haproxy", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
@@ -181,11 +191,11 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 ## Pour aller plus loin
 
-* [Surveillance des métriques de performance HAProxy][12]
-* [Comment recueillir des métriques HAProxy][13]
-* [Surveiller HAProxy avec Datadog][14]
-* [Configuration multi-processus de HAProxy][15]
-* [Comment recueillir des métriques HAProxy][13]
+- [Surveillance des métriques de performance HAProxy][12]
+- [Comment recueillir des métriques HAProxy][13]
+- [Surveiller HAProxy avec Datadog][14]
+- [Configuration multi-processus de HAProxy][15]
+- [Comment recueillir des métriques HAProxy][13]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/39f2cb0977c0e0446a0e905d15d2e9a4349b3b5d/haproxy/images/haproxy-dash.png
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -202,5 +212,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [13]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
 [14]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
 [15]: https://docs.datadoghq.com/fr/integrations/faq/haproxy-multi-process
-
-
