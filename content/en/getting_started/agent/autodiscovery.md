@@ -4,13 +4,13 @@ kind: documentation
 aliases:
  - /agent/autodiscovery/basic_autodiscovery
 further_reading:
-- link: "/agent/autodiscovery/integrations"
+- link: "/agent/kubernetes/integrations"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/autodiscovery/ad_identifiers"
+- link: "/agent/guide/ad_identifiers"
   tag: "Documentation"
   text: "Match a container with the corresponding Integration Template"
-- link: "/agent/autodiscovery/management"
+- link: "/agent/kubernetes/management"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
 - link: "/agent/kuberenetes/tag"
@@ -187,7 +187,7 @@ To use Autodiscovery with other services, define templates for the services you 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery/ad_identifiers
+[1]: /agent/guide/ad_identifiers
 [2]: /agent/faq/template_variables
 [3]: /agent/faq/auto_conf
-[4]: /agent/autodiscovery/integrations/?tab=kubernetes
+[4]: /agent/kubernetes/integrations/

@@ -2,6 +2,8 @@
 title: Integration Autodiscovery
 aliases:
   - /agent/autodiscovery/integrations
+  - /guides/servicediscovery/
+  - /guides/autodiscovery/
 kind: documentation
 further_reading:
 - link: "agent/kubernetes/daemonset_setup"
@@ -119,7 +121,7 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 
 **Note**: You don't need to set up the `<INTEGRATIONS_NAME>` since the Agent infers it from the file name directly.
 
-[1]: /agent/autodiscovery/ad_identifiers
+[1]: /agent/guide/ad_identifiers
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -147,7 +149,7 @@ See the [Autodiscovery Container Identifiers][3] documentation for information o
 
 [1]: /agent/kubernetes/integrations/#configmap
 [2]: /agent/kubernetes/integrations
-[3]: /agent/autodiscovery/ad_identifiers
+[3]: /agent/guide/ad_identifiers
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
@@ -409,7 +411,7 @@ instances:
 * Finally, mount the host `conf.d/` folder to the containerized Agent `conf.d/` folder.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[2]: /agent/autodiscovery/ad_identifiers
+[2]: /agent/guide/ad_identifiers
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 

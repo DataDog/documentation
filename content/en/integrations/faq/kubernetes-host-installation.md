@@ -66,5 +66,5 @@ To get a better idea of how (or why) to integrate your Kubernetes service, see t
 [4]: /agent/autodiscovery
 [5]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: /agent/autodiscovery/integrations/?tab=kubernetes
+[7]: /agent/kubernetes/integrations/
 [8]: https://www.datadoghq.com/blog/monitoring-kubernetes-era

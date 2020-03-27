@@ -273,10 +273,10 @@ The same can be done for the `/checks.d` folder. Any Python files in the `/check
 [17]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
 [18]: /agent/docker/tag/?tab=containerizedagent
 [19]: /agent/guide/secrets-management/?tab=linux
-[20]: /agent/autodiscovery/management/?tab=containerizedagent
+[20]: /agent/docker/management/?tab=containerizedagent
 [21]: /integrations/system/#metrics
 [22]: /integrations/disk/#metrics
 [23]: /integrations/docker_daemon/#metrics
 [24]: /integrations/network/#metrics
 [25]: /integrations/ntp/#metrics
-[26]: /agent/autodiscovery/integrations
+[26]: /agent/docker/integrations

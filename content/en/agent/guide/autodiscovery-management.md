@@ -2,10 +2,10 @@
 title: Container Discovery Management with host Agent
 kind: documentation
 further_reading:
-- link: "/agent/autodiscovery/integrations"
+- link: "/agent/kubernetes/integrations"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/autodiscovery/ad_identifiers"
+- link: "/agent/guide/ad_identifiers"
   tag: "Documentation"
   text: "Match a container with the corresponding Integration Template"
 ---
@@ -34,7 +34,6 @@ To remove a given Docker container with the name `<NAME>` from Autodiscovery, ad
 ac_exclude: [name:<NAME>]
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 
 **Note**: If you are using Kubernetes, the container `<NAME>` is the one in your manifest `.spec.containers[0].name`.
 
@@ -56,7 +55,6 @@ To include a given Docker container with the name `<NAME>` from Autodiscovery, a
 ac_include: [name:<NAME>]
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 
 **Note**: If you are using Kubernetes, the container `<NAME>` is the one in your manifest `.spec.containers[0].name`.
 

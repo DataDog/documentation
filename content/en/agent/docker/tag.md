@@ -8,7 +8,7 @@ further_reading:
 - link: "tagging/using_tags"
   tag: "Documentation"
   text: "Using tags with Datadog"
-- link: "/agent/autodiscovery/management"
+- link: "/agent/docker/management"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---

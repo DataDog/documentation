@@ -116,7 +116,7 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 
 **Note**: You don't need to set up the `<INTEGRATIONS_NAME>` since the Agent infers it from the file name directly.
 
-[1]: /agent/autodiscovery/ad_identifiers
+[1]: /agent/guide/ad_identifiers
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
@@ -241,7 +241,7 @@ logs:
 **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][3].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
-[2]: /agent/autodiscovery/ad_identifiers
+[2]: /agent/guide/ad_identifiers
 [3]: /agent/faq/template_variables
 {{% /tab %}}
 {{% tab "Key-value store" %}}
@@ -327,7 +327,7 @@ instances:
 * Finally, mount the host `conf.d/` folder to the containerized Agent `conf.d/` folder.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[2]: /agent/autodiscovery/ad_identifiers
+[2]: /agent/guide/ad_identifiers
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 

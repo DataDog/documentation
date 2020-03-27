@@ -4,9 +4,6 @@ kind: documentation
 aliases:
     - /agent/autodiscovery/clusterchecks
 further_reading:
-    - link: '/agent/autodiscovery'
-      tag: 'Documentation'
-      text: 'Main Autodiscovery documentation'
     - link: '/agent/kubernetes/cluster/'
       tag: 'Documentation'
       text: 'Cluster Agent documentation'
@@ -42,7 +39,7 @@ Starting with version 1.2.0, the Datadog Cluster Agent extends the Autodiscovery
 3. The recommended leader election lease duration is 15 seconds. Set it with the `DD_LEADER_LEASE_DURATION` environment variable.
 4. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects the service name.
 
-The following two configuration sources are supported. [They are described in the Autodiscovery documentation][4]:
+The following two configuration sources are supported. [They are described in the Autodiscovery documentation][1]:
 
 - You can mount YAML files from a ConfigMap in the `/conf.d` folder. They are automatically imported by the image's entrypoint.
 - Kubernetes Service Annotations require setting both the `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
@@ -67,9 +64,9 @@ Enable the `clusterchecks` configuration provider on the Datadog **Node** Agent.
           polling: true
     ```
 
-[Restart the Agent][5] to apply the configuration change.
+[Restart the Agent][4] to apply the configuration change.
 
-**Note**: The [Datadog Helm Chart][12] offers the possibility to deploy, via the `clusterChecksRunner` field, a set of Datadog Agents configured to run cluster checks only.
+**Note**: The [Datadog Helm Chart][5] offers the possibility to deploy, via the `clusterChecksRunner` field, a set of Datadog Agents configured to run cluster checks only.
 
 ### Custom checks
 
@@ -296,15 +293,14 @@ The Agent `status` command should show the check instance running and reporting 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery
+[1]: /agent/kubernetes/integrations
 [2]: /agent/cluster_agent
 [3]: /agent/cluster_agent/setup
-[4]: /agent/autodiscovery/integrations
-[5]: /agent/guide/agent-commands
+[4]: /agent/guide/agent-commands
+[5]: https://github.com/helm/charts/tree/master/stable/datadog
 [6]: /developers/write_agent_check
 [7]: /integrations/mysql
-[8]: /agent/autodiscovery/integrations/?tab=kubernetes#configuration
+[8]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
 [9]: /agent/faq/template_variables
 [10]: /integrations/http_check
 [11]: /integrations/nginx
-[12]: https://github.com/helm/charts/tree/master/stable/datadog

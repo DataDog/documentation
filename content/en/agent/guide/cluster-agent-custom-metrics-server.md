@@ -190,4 +190,4 @@ default     nginxext   Deployment/nginx   30/9 (avg)     1         3         3  
 [6]: /agent/kubernetes/cluster
 [7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/hpa-manifest.yaml
 [8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
-[9]: /agent/autodiscovery/#template-source-kubernetes-pod-annotations
+[9]: /agent/kubernetes/#template-source-kubernetes-pod-annotations

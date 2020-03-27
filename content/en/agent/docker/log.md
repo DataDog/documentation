@@ -218,7 +218,7 @@ spec:
 
 Refer to the [Autodiscovery guide][1] for setup, examples, and more information about Autodiscovery.
 
-[1]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
+[1]: /agent/kubernetes/integrations/#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -292,6 +292,6 @@ For Kubernetes environements, refer to the [Kubernetes short lived container doc
 
 [1]: /integrations/journald
 [2]: /agent/autodiscovery
-[3]: /agent/autodiscovery/integrations/?tab=kubernetespodannotations#configuration
+[3]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
 [4]: /agent/logs/#custom-log-collection
 [5]: /agent/kubernetes/log#short-lived-containers

@@ -4,10 +4,10 @@ kind: documentation
 aliases:
 - /agent/autodiscovery/management/
 further_reading:
-- link: "/agent/autodiscovery/integrations"
+- link: "/agent/kubernetes/integrations"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/autodiscovery/ad_identifiers"
+- link: "/agent/guide/ad_identifiers"
   tag: "Documentation"
   text: "Match a container with the corresponding Integration Template"
 ---

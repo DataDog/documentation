@@ -348,7 +348,7 @@ Some options have moved from `docker_daemon.yaml` to the main `datadog.yaml`:
 
 [1]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
 [2]: /agent/docker/tag/
-[3]: /agent/autodiscovery/management
+[3]: /agent/kubernetes/management
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -434,7 +434,7 @@ When using Kubernetes, Autodiscovery sources information from the kubelet, inste
 
 When specifying [Autodiscovery templates][1] in pod annotations, the annotation name prefix is `ad.datadoghq.com/`. The previous annotation prefix (`service-discovery.datadoghq.com/`) is still supported for Agent v6 but support will be removed in future versions.
 
-[1]: /agent/autodiscovery/integrations/?tab=kubernetes
+[1]: /agent/kubernetes/integrations/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -442,7 +442,7 @@ When specifying [Autodiscovery templates][1] in pod annotations, the annotation 
 
 The identifier override label has been renamed from `com.datadoghq.sd.check.id` to `com.datadoghq.ad.check.id` for consistency. The previous name is still supported for Agent v6 but support will be removed in future versions.
 
-[1]: /agent/autodiscovery/integrations/?tab=docker
+[1]: /agent/docker/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 

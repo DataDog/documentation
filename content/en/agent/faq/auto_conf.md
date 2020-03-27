@@ -4,10 +4,10 @@ kind: faq
 aliases:
  - /agent/autodiscovery/auto_conf
 further_reading:
-- link: "/agent/autodiscovery/integrations"
+- link: "/agent/kubernetes/integrations"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/autodiscovery/management"
+- link: "/agent/kubernetes/management"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---
@@ -80,7 +80,7 @@ The `auto_conf.yaml` configuration files cover all required parameters to set up
 [31]: /integrations/tomcat
 [32]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/auto_conf.yaml
 [33]: /agent/faq/template_variables
-[34]: /agent/autodiscovery/integrations/?tab=file#configuration
-[35]: /agent/autodiscovery/integrations/?tab=keyvaluestore#configuration
-[36]: /agent/autodiscovery/integrations/?tab=kubernetes#configuration
-[37]: /agent/autodiscovery/integrations/?tab=docker#configuration
+[34]: /agent/kubernetes/integrations/?tab=file#configuration
+[35]: /agent/kubernetes/integrations/?tab=keyvaluestore#configuration
+[36]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
+[37]: /agent/docker/integrations/#configuration

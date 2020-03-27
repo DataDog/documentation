@@ -7,7 +7,7 @@ further_reading:
   text: "Kubernetes Metrics"
 ---
 
-The Agent has two ways to collect logs: from the [Docker socket][1], and from the [Kubernetes log files](#log-collection) (automatically handled by Kubernetes). Datadog recommends using the Kuberentes log file logic as the Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files.
+The Agent has two ways to collect logs: from the [Docker socket][1], and from the [Kubernetes log files](#log-collection) (automatically handled by Kubernetes). Datadog recommends using the Kubernetes log file logic as the Docker API is optimized to get logs from one container at a time. When there are many containers in the same pod, collecting logs through the Docker socket might be consuming much more resources than going through the files.
 
 ## Log collection
 
@@ -116,4 +116,4 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 
 [1]: /agent/faq/kubernetes-docker-socket-log-collection
 [2]: /agent/kubernetes/
-[3]: /agent/autodiscovery/?tab=agent#how-to-set-it-up
+[3]: /agent/kubernetes/integrations/
