@@ -16,6 +16,6 @@ Returns the list of availalbe daily custom reports.
 * **`page [number]`** [*optional*, *default*=**0**]:
     The page to start.
 * **`sort_dir`** [*optional*, *default*=**desc**]:
-    The direction to sort by. One of *[desc, asc]*
+    The direction to sort by. One of [`desc`, `asc`]
 * **`sort`** [*optional*, *default*=**start_date**]:
-    The field to sort by. One of *[computed_on, size, start_date, end_date]*
+    The field to sort by. One of [`computed_on`, `size`, `start_date`, `end_date`]
