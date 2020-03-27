@@ -21,7 +21,6 @@ jobs:
     - name: Create local changes
       run: |
         npm run build:apiPages
-        npm run dereference
         git add ./content ./data ./config
     - name: Commit files
       run: |

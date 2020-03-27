@@ -120,9 +120,23 @@
                                           
                                             </div>
                                             <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-{{ $response_code }}-example">
-                                                                         
-                                                {{ highlight ($schema | jsonify) "json" "" }}
-                                            
+                                              {{ with $dot.Resources.Match "examples.json" }}
+                                                  {{ range . }}
+                                                    {{ $data := . | unmarshal}}
+                                                    {{ $data2 := (index (index (index $data $context.action.operationId) "responses") $response_code) | jsonify }}
+                                                    {{ $data3 := (replace (replace (replace $data2 "," ",\n") "{" "{\n") "}" "\n}") }}
+                                                    {{ highlight $data3 "json" "" }}
+                                                  {{ end }}
+                                              {{ end }}
+
+                                              {{/*
+                                                {{ $jsonfile := (print $context.action.operationId "_" $context.actionType "_response_" $response_code "_example.json") }}
+                                                {{ with $dot.Resources.Match $jsonfile }}
+                                                    {{ range . }}
+                                                      {{ highlight .Content "json" "" }}
+                                                    {{ end }}
+                                                {{ end }}
+                                              */}}
                                             </div>
                                         </div>
                                     {{ end }}
