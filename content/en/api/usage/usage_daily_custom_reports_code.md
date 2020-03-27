@@ -7,12 +7,12 @@ external_redirect: /api/#get-daily-custom-reporting-available-files
 
 **SIGNATURE**:
 
-`GET /v1/usage/daily_custom_reports`
+`GET /v1/daily_custom_reports`
 
 **EXAMPLE REQUEST**:
 
-{{< code-snippets basename="api-billing-usage-daily-custom-reports" >}}
+{{< code-snippets basename="api-billing-usage-daily-custom-reports-available" >}}
 
 **EXAMPLE RESPONSE**:
 
-{{< code-snippets basename="result.api-billing-usage-daily-custom-reports" >}}
+{{< code-snippets basename="result.api-billing-usage-daily-custom-reports-available" >}}

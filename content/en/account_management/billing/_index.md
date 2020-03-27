@@ -59,6 +59,7 @@ You can set specific email addresses to receive invoices on the [Plan][10] page 
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/google_cloud/" >}}Google Cloud integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/vsphere/" >}}vSphere integration{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/advanced_usage_reporting/" >}}Advanced usage reporting{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
