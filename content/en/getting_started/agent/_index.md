@@ -151,7 +151,7 @@ For help troubleshooting the Agent:
 [14]: /integrations/agent_metrics
 [15]: /integrations/system/#metrics
 [16]: /integrations/disk/#metrics
-[17]: /integrations/docker_daemon/#metrics
+[17]: /agent/docker/data_collected/#metrics
 [18]: /integrations/network/#metrics
 [19]: /integrations/ntp/#metrics
 [20]: /getting_started/integrations
