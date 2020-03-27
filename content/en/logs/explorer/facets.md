@@ -195,7 +195,7 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/
+[1]: /logs/search_syntax/
 [2]: /logs/explorer/analytics/
 [3]: /logs/explorer/patterns/
 [4]: /monitors/monitor_types/log/
@@ -212,7 +212,7 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [15]: /integrations/nginx/
 [16]: /logs/processing/processors/?tab=ui#geoip-parser
 [17]: /integrations/kong/
-[18]: /logs/explorer/search/#search-syntax
+[18]: /logs/search_syntax
 [19]: /integrations/varnish/
 [20]: /integrations/ansible/
 [21]: /integrations/python/

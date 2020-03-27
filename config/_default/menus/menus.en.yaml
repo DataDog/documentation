@@ -1276,7 +1276,7 @@ main:
     weight: 606
 
   - name: "Search Syntax"
-    url: "logs/search-syntax/"
+    url: "logs/search_syntax/"
     parent: "log_management"
     weight: 7
 

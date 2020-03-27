@@ -5,6 +5,7 @@ description: "Search through all of your logs."
 aliases:
     - /logs/search
     - /logs/search-syntax
+    - /logs/explorer/search/
 further_reading:
 - link: "logs/explorer/analytics"
   tag: "Documentation"
@@ -19,7 +20,6 @@ further_reading:
   tag: "Documentation"
   text: "Automatically configure your Log Explorer"
 ---
-
 
 A query filter is composed of terms and operators.
 
