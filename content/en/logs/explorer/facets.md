@@ -53,7 +53,7 @@ Use measures when you need:
 - To **range filter** your logs. For instance, create a measure on the execution time of [Ansible][20] tasks, and see the list of servers having the most runs taking more than 10s.
 - To **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][21] microservice. You can then search all the logs, starting with the one with the highest amount.
 
-#### Types {#types-qualitative-facets}
+#### Types{#types-qualitative-facets}
 
 Measures come with either a (long) integer or double value, for equivalent capabilities.
 

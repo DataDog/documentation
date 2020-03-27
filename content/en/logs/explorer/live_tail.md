@@ -1,19 +1,19 @@
 ---
 title: Live Tail
 kind: documentation
-description: "See all your logs in real time."
+description: 'See all your logs in real time.'
 aliases:
     - /logs/live_tail
 further_reading:
-- link: "logs/explorer/analytics"
-  tag: "Documentation"
-  text: "Perform Log Analytics"
-- link: "logs/processing"
-  tag: "Documentation"
-  text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
-  tag: "Documentation"
-  text: "Learn more about parsing"
+    - link: 'logs/explorer/analytics'
+      tag: 'Documentation'
+      text: 'Perform Log Analytics'
+    - link: 'logs/processing'
+      tag: 'Documentation'
+      text: 'Learn how to process your logs'
+    - link: 'logs/processing/parsing'
+      tag: 'Documentation'
+      text: 'Learn more about parsing'
 ---
 
 {{< img src="logs/explorer/livetail/live_tail_demo.mp4" alt="Live tail" video="true"  >}}
@@ -22,7 +22,7 @@ further_reading:
 
 The Live Tail feature gives you the ability to see all your log events in near real time from anywhere in your infrastructure. It displays logs as soon as they get out of the [Pipeline section][1] and before they are [indexed][2] by Datadog, hence:
 
-1. All logs ingested by Datadog are displayed. ([It's Logging without Limits][2]*)
+1. All logs ingested by Datadog are displayed. ([It's Logging without Limits][2]\*)
 2. Displayed logs have been processed.
 3. The stream can be paused.
 4. You can't go back in time.
@@ -71,7 +71,7 @@ For example, to filter on the following `filename` attribute there are two optio
 
     {{< img src="logs/explorer/livetail/live_tail_click_attribute.png" alt="Live tail click attribute"  style="width:50%;">}}
 
-2. Use the following query  `@filename:runner.go`:
+2. Use the following query `@filename:runner.go`:
 
     {{< img src="logs/explorer/livetail/live_tail_filtered.png" alt="Live tail filtered"  style="width:50%;">}}
 
@@ -81,7 +81,7 @@ To filter on all logs with a line number above 150 use the following query: `@li
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-*Logging without Limits is a trademark of Datadog, Inc.
+\*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/processing/pipelines
 [2]: /logs
