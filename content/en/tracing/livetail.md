@@ -9,7 +9,7 @@ description: "See all your trace spans in real time."
 {{< img src="tracing/live_tail/livetail_view.gif" alt="Live tail" >}}
 
 ## Overview
-The [Live Tail][1] feature gives users the ability to see all trace spans in near real-time from anywhere in the Application. It displays spans as soon as they get out of the Datadog agent section and before they are indexed by Datadog, hence:
+The APM [Live Tail][1] gives users the ability to see all trace spans in near real-time from anywhere in the Datadog UI. It displays spans as soon as they get out of the Datadog agent section and before they are indexed by Datadog and it has these features:
 All trace spans ingested by Datadog are displayed. (It’s a part of tracing without Limits*)
 Displayed spans have been processed.
 
