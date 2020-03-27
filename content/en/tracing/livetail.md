@@ -46,7 +46,7 @@ A valid query in the search bar displays traces that match your search criteria.
 {{< img src="tracing/live_tail/search_livetail.png" alt="Live tail" >}}
 
 Any query that works in other views works in the Live Tail view, but you can only filter on attributes that are defined as facets.
-For example, to filter on the following customer_id attribute there are two options:
+For example, to filter on the a customer_id attribute, there are two options:
  - Click on the attribute and add it to the search using the query `@customer_id:1123`.
 To filter on all spans with a duration above 150ms use the following query: `@duration:>150ms`
 
