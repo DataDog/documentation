@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-The Log List displays indexed logs and offer priviledged tools to navigate in **individual results**.
+The Log List displays indexed logs and offers privileged tools to navigate in **individual results**.
 
 Filter logs with a search query (see [faceted search][1], or [search query syntax][2] for advanced use cases) and time navigation. Explore log results in the table, and focus on any log with the [Log Side Panel][3].
 
@@ -31,10 +31,10 @@ The Log Search is displayed in the logs table.
 
 Manage the columns of the table using either:
 
-- The _table itself_, with interactions available in the first row. Which is the preferred option to **sort**, **rearrange** or **remove** columns.
-- The _facet panel_ the the left, or the _log side panel_ on the right. Which is the preferred option to **add** a column for a field.
+- The _table itself_, with interactions available in the first row. This is the preferred option to **sort**, **rearrange**, or **remove** columns.
+- The _facet panel_ the the left, or the _log side panel_ on the right. This is the preferred option to **add** a column for a field.
 
-With the Options button, control the **number of lines** displayed in the Table per log-event.
+With the _Options_ button, control the **number of lines** displayed in the table per log event.
 
 {{< img src="logs/explorer/list/table_controls.gif" alt="configure display table"  style="width:80%;">}}
 
@@ -44,8 +44,8 @@ The configuration of the log table is stored alongside other elements of your tr
 
 {{< img src="logs/explorer/list/list_share.png" alt="configure display table"  style="width:80%;">}}
 
-- Export to **Monitor** : Export the query applied to your logstream to create the query for a new [log monitor][5].
-- Export to **CSV**: Export your current logstream view with its selected columns to a CSV file. You can export up to 5,000 logs at once.
+- Export to **Monitor**: Export the query applied to your Logstream to create a query for a new [log monitor][5].
+- Export to **CSV**: Export your current Logstream view with its selected columns to a CSV file. You can export up to 5,000 logs at once.
 - **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all [Datadog notification integrations][6] available.
 
 [1]: /logs/explorer/facets/

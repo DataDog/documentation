@@ -144,9 +144,9 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 Export your current log visualization with the _share_ functionality:
 
-- Export to **Monitor** : Export the query applied to your log analytics to create the query for a new [log monitor][2].
-- Export to **Dashboard** : Export the current analytic as a widget to an existing or new [dashboard][3].
-- Generate new **Metric** : [Generate a new metric][4] out of the current analytic query.
+- Export to **Monitor**: Export the query applied to your log analytics to create the query for a new [log monitor][2].
+- Export to **Dashboard**: Export the current analytics as a widget to an existing or new [dashboard][3].
+- Generate a new **Metric**: [Generate a new metric][4] out of the current analytic query.
 
 {{< img src="logs/explorer/analytics/analytics_share.png" alt="table example"  style="width:90%;">}}
 
