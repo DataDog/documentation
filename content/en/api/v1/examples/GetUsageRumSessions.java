@@ -7,10 +7,10 @@ public class UsageMeteringApiExample {
         Date startHr = 2013-10-20T19:20:30+01:00; // Date | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this hour
         Date endHr = 2013-10-20T19:20:30+01:00; // Date | Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending BEFORE this hour
         try {
-            UsageTimeseriesResponse result = apiInstance.getUsageTimeseries(startHr, endHr);
+            UsageRumSessionsResponse result = apiInstance.getUsageRumSessions(startHr, endHr);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling UsageMeteringApi#getUsageTimeseries");
+            System.err.println("Exception when calling UsageMeteringApi#getUsageRumSessions");
             e.printStackTrace();
         }
     }
