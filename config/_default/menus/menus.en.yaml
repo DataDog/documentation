@@ -1668,38 +1668,38 @@ api_v1:
   - name: List IP Ranges
     parent: IP Ranges
     url: list-ip-ranges
-  - name: Keys
-    url: /api/v1/keys/
-    identifier: Keys
+  - name: Key Management
+    url: /api/v1/key-management/
+    identifier: Key Management
   - name: Get all API keys
-    parent: Keys
+    parent: Key Management
     url: get-all-api-keys
   - name: Create an API key
-    parent: Keys
+    parent: Key Management
     url: create-an-api-key
   - name: Delete an API key
-    parent: Keys
+    parent: Key Management
     url: delete-an-api-key
   - name: Get API key
-    parent: Keys
+    parent: Key Management
     url: get-api-key
   - name: Edit an API key
-    parent: Keys
+    parent: Key Management
     url: edit-an-api-key
   - name: Get all application keys
-    parent: Keys
+    parent: Key Management
     url: get-all-application-keys
   - name: Create an application key
-    parent: Keys
+    parent: Key Management
     url: create-an-application-key
   - name: Delete an application key
-    parent: Keys
+    parent: Key Management
     url: delete-an-application-key
   - name: Get an application key
-    parent: Keys
+    parent: Key Management
     url: get-an-application-key
   - name: Edit an application key
-    parent: Keys
+    parent: Key Management
     url: edit-an-application-key
   - name: Logs
     url: /api/v1/logs/
@@ -1809,21 +1809,6 @@ api_v1:
   - name: Unmute all monitors
     parent: Monitors
     url: unmute-all-monitors
-  - name: Orgs
-    url: /api/v1/orgs/
-    identifier: Orgs
-  - name: Get organization information
-    parent: Orgs
-    url: get-organization-information
-  - name: Create a child organization
-    parent: Orgs
-    url: create-a-child-organization
-  - name: Update your organization
-    parent: Orgs
-    url: update-your-organization
-  - name: Upload IdP metadata
-    parent: Orgs
-    url: upload-idp-metadata
   - name: PagerDuty Integration
     url: /api/v1/pagerduty-integration/
     identifier: PagerDuty Integration
@@ -1941,32 +1926,32 @@ api_v1:
   - name: Timeboards
     url: /api/v1/timeboards/
     identifier: Timeboards
-  - name: Usage
-    url: /api/v1/usage/
-    identifier: Usage
+  - name: Usage Metering
+    url: /api/v1/usage-metering/
+    identifier: Usage Metering
   - name: Get hourly usage for Fargate
-    parent: Usage
+    parent: Usage Metering
     url: get-hourly-usage-for-fargate
   - name: Get hourly usage for hosts and containers
-    parent: Usage
+    parent: Usage Metering
     url: get-hourly-usage-for-hosts-and-containers
   - name: Get hourly usage for Logs
-    parent: Usage
+    parent: Usage Metering
     url: get-hourly-usage-for-logs
   - name: Get usage across your multi-org account
-    parent: Usage
+    parent: Usage Metering
     url: get-usage-across-your-multi-org-account
   - name: Get hourly usage for Synthetics
-    parent: Usage
+    parent: Usage Metering
     url: get-hourly-usage-for-synthetics
   - name: Get hourly usage for custom metrics
-    parent: Usage
+    parent: Usage Metering
     url: get-hourly-usage-for-custom-metrics
   - name: Get top 500 custom metrics by hourly average
-    parent: Usage
+    parent: Usage Metering
     url: get-top-500-custom-metrics-by-hourly-average
   - name: Get hourly usage for Trace Search
-    parent: Usage
+    parent: Usage Metering
     url: get-hourly-usage-for-trace-search
   - name: Users
     url: /api/v1/users/
