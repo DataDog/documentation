@@ -137,6 +137,15 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 {{< img src="logs/explorer/analytics/view_logs.mp4" alt="view logs" video="true"  width="80%" >}}
 
+## Share View
+
+Export your current log visualization with the _share_ functionality:
+
+* Export to **Monitor** : Export the query applied to your log analytics to create the query for a new [log monitor][2].
+* Export to **Dashboard** : Export the current analytic as a widget to an existing or new [dashboard][3].
+* Generate new **Metric** : [Generate a new metric][4] out of the current analytic query.
+
+
 ## How aggregations work behind the scenes
 
 Datadog computes an aggregation (whether it is a mean, a sum, a percentile, etc.) by using the set of logs included in the targeted time frame.
@@ -152,3 +161,7 @@ In the following example, each dot represents one log event. The X-axis is the t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/facets
+[2]: /monitors/monitor_types/log
+[3]: /dashboards/
+[4]: /logs/logs_to_metrics/
+
