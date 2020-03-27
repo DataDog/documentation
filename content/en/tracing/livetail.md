@@ -38,6 +38,7 @@ Customize the Live Tail column view to better highlight the relevant information
 3. Remove or replace column column
 
 ## Filtering the trace Stream
+
 A valid query in the search bar displays traces that match your search criteria. The search syntax is the same in the Live Tail views as in the other trace views, but here, your query is matched against all of the ingested traces and not just the indexed ones.
 
 ## Search Query
