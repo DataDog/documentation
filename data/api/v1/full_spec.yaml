@@ -1968,24 +1968,6 @@ components:
         webhooks:
           $ref: '#/components/schemas/IPPrefixes'
       type: object
-    IdpFormData:
-      properties:
-        idp_file:
-          description: The path to the XML metadata file you wish to upload.
-          format: binary
-          type: string
-      required:
-      - idp_file
-      type: object
-    IdpResponse:
-      properties:
-        message:
-          description: Identity provider response.
-          example: IdP metadata successfully uploaded for example org
-          type: string
-      required:
-      - message
-      type: object
     ImageWidgetDefinition:
       description: The image widget allows you to embed an image on your dashboard.
         An image can be a PNG, JPG, or animated GIF. Only available on FREE layout
@@ -3539,168 +3521,6 @@ components:
       - type
       - content
       type: object
-    Org:
-      description: Create, edit, and manage organizations.
-      properties:
-        billing:
-          description: A JSON array of billing type. Note that only `parent_billing`
-            is supported.
-          example:
-            type: parent_billing
-          properties:
-            type:
-              type: string
-          type: object
-        created:
-          description: Date of the organization creation.
-          example: '2019-09-26 17:28:28'
-          readOnly: true
-          type: string
-        description:
-          description: Description of the organization.
-          example: some description
-          type: string
-        name:
-          description: The name of the new child-organization, limited to 32 characters.
-          example: New child org
-          type: string
-        public_id:
-          description: The public_id of the org you are operating within.
-          example: abcdef12345
-          type: string
-        settings:
-          description: A JSON array of settings.
-          properties:
-            private_widget_share:
-              description: Whether or not the organization users can share widgets
-                outside of Datadog.
-              example: false
-              type: boolean
-            saml:
-              description: 'Set the boolean property enabled to enable or disable
-                single sign on with SAML.
-
-                See the SAML documentation for more information about all SAML settings.'
-              properties:
-                enabled:
-                  example: false
-                  type: boolean
-              type: object
-            saml_autocreate_access_role:
-              $ref: '#/components/schemas/AccessRole'
-            saml_autocreate_users_domains:
-              description: Has two properties, `enabled` (boolean) and `domains`,
-                which is a list of domains without the @ symbol.
-              properties:
-                domains:
-                  description: List of domains where the SAML automated user creation
-                    is enabled.
-                  items:
-                    example: example.com
-                    type: string
-                  type: array
-                enabled:
-                  description: Whether or not the automated user creation based on
-                    SAML domain is enabled.
-                  example: false
-                  type: boolean
-              type: object
-            saml_can_be_enabled:
-              description: Whether or not SAML can be enabled for this organization.
-              example: false
-              type: boolean
-            saml_idp_endpoint:
-              description: Identity provider endpoint for SAML authentication.
-              example: https://my.saml.endpoint
-              type: string
-            saml_idp_initiated_login:
-              description: Has one property enabled (boolean).
-              properties:
-                enabled:
-                  example: false
-                  type: boolean
-              type: object
-            saml_idp_metadata_uploaded:
-              description: Whether or not a SAML identity provider metadata file was
-                provided to the Datadog organization.
-              example: false
-              type: boolean
-            saml_login_url:
-              description: URL for SAML loging.
-              example: https://my.saml.login.url
-              type: string
-            saml_strict_mode:
-              description: Has one property enabled (boolean).
-              properties:
-                enabled:
-                  example: false
-                  type: boolean
-              type: object
-          type: object
-        subscription:
-          description: A JSON array of subscription type. Types available are `trial`,
-            `free`, and `pro`.
-          example:
-            type: pro
-          properties:
-            type:
-              type: string
-          type: object
-      type: object
-    OrgCreateBody:
-      properties:
-        billing:
-          description: A JSON array of billing type. Note that only `parent_billing`
-            is supported.
-          example:
-            type: parent_billing
-          properties:
-            type:
-              type: string
-          type: object
-        name:
-          description: The name of the new child-organization, limited to 32 characters.
-          example: New child org
-          type: string
-        subscription:
-          description: A JSON array of subscription type. Types available are `trial`,
-            `free`, and `pro`.
-          example:
-            type: pro
-          properties:
-            type:
-              type: string
-          type: object
-      required:
-      - name
-      - subscription
-      - billing
-      type: object
-    OrgCreateResponse:
-      properties:
-        api_key:
-          $ref: '#/components/schemas/ApiKey'
-        application_key:
-          $ref: '#/components/schemas/ApplicationKey'
-        org:
-          $ref: '#/components/schemas/Org'
-        user:
-          $ref: '#/components/schemas/User'
-      type: object
-    OrgListResponse:
-      description: Response with the list of organizations.
-      properties:
-        orgs:
-          items:
-            $ref: '#/components/schemas/Org'
-          type: array
-      type: object
-    OrgResponse:
-      description: Response with an organization.
-      properties:
-        org:
-          $ref: '#/components/schemas/Org'
-      type: object
     PagerDutyIntegration:
       description: New Datadog-PagerDuty integration.
       properties:
@@ -4481,6 +4301,98 @@ components:
       - service
       - span_name
       type: object
+    Span:
+      properties:
+        duration:
+          description: The duration of the request in nanoseconds.
+          format: int64
+          type: integer
+        error:
+          description: 'Set this value to 1 to indicate if an error occured.
+
+
+            If an error occurs, you should pass additional information,
+
+            such as the error message, type and stack information in the meta property.'
+          format: int32
+          maximum: 1
+          minimum: 0
+          type: integer
+        meta:
+          additionalProperties:
+            type: string
+          description: A set of key-value metadata. Keys and values must be strings.
+          type: object
+        metrics:
+          additionalProperties:
+            format: double
+            type: number
+          description: A set of key-value metadata. Keys must be strings and values
+            must be 64-bit floating point numbers.
+          type: object
+        name:
+          description: The span name. The span name must not be longer than 100 characters.
+          example: span_name
+          maxLength: 100
+          type: string
+        parent_id:
+          description: The span integer ID of the parent span.
+          format: int64
+          type: integer
+        resource:
+          description: The resource you are tracing. The resource name must not be
+            longer than 5000 characters.
+          example: /home
+          maxLength: 5000
+          type: string
+        service:
+          description: The service you are tracing. The service name must not be longer
+            than 100 characters.
+          example: service_name
+          maxLength: 100
+          type: string
+        span_id:
+          description: The span integer (64-bit unsigned) ID.
+          example: 987654321
+          format: int64
+          type: integer
+        start:
+          description: The start time of the request in nanoseconds from the unix
+            epoch.
+          format: int64
+          type: integer
+        trace_id:
+          description: The unique integer (64-bit unsigned) ID of the trace containing
+            this span.
+          example: 123456789
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/SpanType'
+      required:
+      - trace_id
+      - span_id
+      - name
+      - resource
+      - service
+      - start
+      - duration
+      type: object
+    SpanType:
+      default: custom
+      description: The type of request.
+      enum:
+      - web
+      - db
+      - cache
+      - custom
+      example: web
+      type: string
+      x-enum-varnames:
+      - WEB
+      - DB
+      - CACHE
+      - CUSTOM
     SyntheticsAPITestResultData:
       properties:
         cert:
@@ -6844,7 +6756,7 @@ paths:
           description: Forbidden
       summary: Get all API keys
       tags:
-      - Keys
+      - Key Management
     post:
       description: Creates an API key with a given name.
       operationId: CreateAPIKey
@@ -6880,7 +6792,7 @@ paths:
           description: Conflict
       summary: Create an API key
       tags:
-      - Keys
+      - Key Management
       x-codegen-request-body-name: body
   /api/v1/api_key/{key}:
     delete:
@@ -6920,7 +6832,7 @@ paths:
           description: Not Found
       summary: Delete an API key
       tags:
-      - Keys
+      - Key Management
     get:
       description: Get a given API key.
       operationId: GetAPIKey
@@ -6958,7 +6870,7 @@ paths:
           description: Not Found
       summary: Get API key
       tags:
-      - Keys
+      - Key Management
     put:
       description: Edit an API key name.
       operationId: EditAPIKey
@@ -7001,7 +6913,7 @@ paths:
           description: Not Found
       summary: Edit an API key
       tags:
-      - Keys
+      - Key Management
       x-codegen-request-body-name: body
   /api/v1/application_key:
     get:
@@ -7028,7 +6940,7 @@ paths:
           description: Forbidden
       summary: Get all application keys
       tags:
-      - Keys
+      - Key Management
     post:
       description: Create an application key with a given name.
       operationId: CreateApplicationKey
@@ -7064,7 +6976,7 @@ paths:
           description: Conflict
       summary: Create an application key
       tags:
-      - Keys
+      - Key Management
       x-codegen-request-body-name: body
   /api/v1/application_key/{key}:
     delete:
@@ -7104,7 +7016,7 @@ paths:
           description: Not Found
       summary: Delete an application key
       tags:
-      - Keys
+      - Key Management
     get:
       description: Get a given application key.
       operationId: GetApplicationKey
@@ -7142,7 +7054,7 @@ paths:
           description: Not Found
       summary: Get an application key
       tags:
-      - Keys
+      - Key Management
     put:
       description: Edit an application key name.
       operationId: EditApplicationKey
@@ -7185,7 +7097,7 @@ paths:
           description: Not Found
       summary: Edit an application key
       tags:
-      - Keys
+      - Key Management
       x-codegen-request-body-name: body
   /api/v1/check_run:
     post:
@@ -10044,176 +9956,6 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
-  /api/v1/org:
-    get:
-      description: Get information about your organization.
-      operationId: GetOrg
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrgListResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-      summary: Get organization information
-      tags:
-      - Orgs
-    post:
-      description: 'You can create, edit, and manage organizations.
-
-
-        This endpoint requires the
-
-        [multi-org account](https://docs.datadoghq.com/account_management/multi_organization/)
-
-        feature and must be enabled by
-
-        [contacting support](https://docs.datadoghq.com/help/).
-
-
-        Once a new child organization is created, you can interact with it
-
-        by using the `org.public_id`, `pi_key.key`, and
-
-        **application_key.hash** provided in the response.'
-      operationId: CreateChildOrg
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OrgCreateBody'
-        description: Org object that needs to be created
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrgCreateResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-      summary: Create a child organization
-      tags:
-      - Orgs
-      x-codegen-request-body-name: body
-  /api/v1/org/{public_id}:
-    put:
-      description: Update your organization.
-      operationId: UpdateOrg
-      parameters:
-      - description: The public_id of the org you are operating within.
-        in: path
-        name: public_id
-        required: true
-        schema:
-          example: abc123
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Org'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrgResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-      summary: Update your organization
-      tags:
-      - Orgs
-      x-codegen-request-body-name: body
-  /api/v1/org/{public_id}/idp_metadata:
-    post:
-      description: 'There are a couple of options for updating the Identity Provider
-        (IdP)
-
-        metadata from your SAML IdP.
-
-
-        * **Multipart Form-Data**: Post the IdP metadata file using a form post.
-
-
-        * **XML Body:** Post the IdP metadata file as the body of the request.'
-      operationId: UploadIdPForOrg
-      parameters:
-      - description: The public_id of the org you are operating with
-        in: path
-        name: public_id
-        required: true
-        schema:
-          example: abc123
-          type: string
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/IdpFormData'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/IdpResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '415':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unsupported Media Type
-      summary: Upload IdP metadata
-      tags:
-      - Orgs
-      x-codegen-request-body-name: body
   /api/v1/query:
     get:
       description: Query timeseries points.
@@ -11378,7 +11120,7 @@ paths:
           description: Forbidden
       summary: Get hourly usage for Fargate
       tags:
-      - Usage
+      - Usage Metering
   /api/v1/usage/hosts:
     get:
       description: Get hourly usage for hosts and containers.
@@ -11427,7 +11169,7 @@ paths:
           description: Forbidden
       summary: Get hourly usage for hosts and containers
       tags:
-      - Usage
+      - Usage Metering
   /api/v1/usage/logs:
     get:
       description: Get hourly usage for logs.
@@ -11476,7 +11218,7 @@ paths:
           description: Forbidden
       summary: Get hourly usage for Logs
       tags:
-      - Usage
+      - Usage Metering
   /api/v1/usage/summary:
     get:
       description: Get usage across your multi-org account.
@@ -11531,7 +11273,7 @@ paths:
           description: Forbidden
       summary: Get usage across your multi-org account
       tags:
-      - Usage
+      - Usage Metering
   /api/v1/usage/synthetics:
     get:
       description: Get hourly usage for [synthetics](https://docs.datadoghq.com/synthetics/).
@@ -11580,7 +11322,7 @@ paths:
           description: Forbidden
       summary: Get hourly usage for Synthetics
       tags:
-      - Usage
+      - Usage Metering
   /api/v1/usage/timeseries:
     get:
       description: Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).
@@ -11629,7 +11371,7 @@ paths:
           description: Forbidden
       summary: Get hourly usage for custom metrics
       tags:
-      - Usage
+      - Usage Metering
   /api/v1/usage/top_avg_metrics:
     get:
       description: Get top [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/)
@@ -11679,7 +11421,7 @@ paths:
           description: Forbidden
       summary: Get top 500 custom metrics by hourly average
       tags:
-      - Usage
+      - Usage Metering
   /api/v1/usage/traces:
     get:
       description: Get hourly usage for trace search.
@@ -11728,7 +11470,7 @@ paths:
           description: Forbidden
       summary: Get hourly usage for Trace Search
       tags:
-      - Usage
+      - Usage Metering
   /api/v1/user:
     get:
       description: Get all users for your organization.
@@ -11951,6 +11693,57 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+  /v0.3/traces:
+    put:
+      description: "Datadog\u2019s APM allows you to collect performance metrics by\
+        \ tracing your code\nto determine which parts of your application are slow\
+        \ or inefficient.\n\nTracing data is sent to the Datadog Agent via an HTTP\
+        \ API.\nWe provide some [official libraries](https://docs.datadoghq.com/tracing/#instrument-your-application)\n\
+        that simplify sending metrics to the Datadog Agent, however you may want to\n\
+        interact directly with the API to instrument applications that cannot use\n\
+        the libraries or are written in languages that don\u2019t yet have an official\n\
+        Datadog Tracing library."
+      operationId: SendTraces
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: An array of traces.
+              items:
+                description: An array of spans.
+                items:
+                  $ref: '#/components/schemas/Span'
+                type: array
+              type: array
+        description: "Traces can be sent as an array of traces:\n\n    [ trace1, trace2,\
+          \ trace3 ]\n\nand each trace is an array of spans:\n\n    trace1 = [ span,\
+          \ span2, span3 ]\n\nand each span is a dictionary with a `trace_id`, `span_id`,\
+          \ `resource`...\n\n[Learn more about the APM & Distributed Tracing terminology](https://docs.datadoghq.com/tracing/visualization/services_list)\n\
+          \n**Note:** Each span within a trace should use the same `trace_id`.\nHowever,\
+          \ `trace_id` and `span_id` must have different values."
+        required: true
+      responses:
+        '200':
+          description: OK
+      security: []
+      servers:
+      - url: http://{site}
+        variables:
+          site:
+            default: localhost:8126
+            description: Local Agent endpoint.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: localhost:8126
+            description: Full site DNS name.
+          protocol:
+            default: http
+            description: The protocol for accessing the API.
+      summary: Send traces
+      tags:
+      - Tracing
+      x-codegen-request-body-name: body
   /v1/input:
     post:
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
@@ -12169,7 +11962,7 @@ tags:
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
-  name: Keys
+  name: Key Management
 - description: Manage your logs in Datadog platform over HTTP.
   name: Logs
 - description: Manage configuration of log indexes.
@@ -12204,11 +11997,6 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/monitor_types/
   name: Monitors
-- description: Create, edit, and manage your organizations.
-  externalDocs:
-    description: Find out more at
-    url: https://docs.datadoghq.com/account_management/multi_organization
-  name: Orgs
 - description: Configure your Datadog-PagerDuty integration directly through the Datadog
     API.
   externalDocs:
@@ -12281,11 +12069,22 @@ tags:
     url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
   name: Timeboards
   x-deprecated: true
+- description: 'Learn more about [tracing with Datadog](https://docs.datadoghq.com/tracing)
+
+    and [the APM terminology](https://docs.datadoghq.com/tracing/visualization/services_list).
+
+
+    The tracing API is an Agent API rather than a service side API.
+
+    Submit your traces to the `http://localhost:8126/v0.3/traces` local endpoint
+
+    so your Agent can forward them to Datadog.'
+  name: Tracing
 - description: View organization usage data.
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/billing/usage_details/
-  name: Usage
+  name: Usage Metering
 - description: 'Create, edit, and disable users. [Read more about your team management][1]
 
 
