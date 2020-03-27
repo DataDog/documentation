@@ -14,7 +14,7 @@ All trace spans ingested by Datadog are displayed. (It’s a part of tracing wit
 - It displays spans that have been processed.
 
 - The span stream can be paused.
-2. Write search parameters to refine the streaming view
+- You can write search parameters to refine the streaming view.
 3. View the distributed trace in real-time
 4. Add or remove columns from span tags for a customized view 
 
