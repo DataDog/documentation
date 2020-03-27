@@ -13,7 +13,7 @@ The APM [Live Tail][1] gives users the ability to see all trace spans in near re
 - It displays spans that have been processed.
 - The span stream can be paused.
 - You can write search parameters to refine the streaming view.
-3. View the distributed trace in real-time
+- View the distributed trace in real-time.
 4. Add or remove columns from span tags for a customized view 
 
 This feature allows you, for instance, to check if a process has correctly started, or if a new deployment went smoothly. Or view outage related information in real-time
