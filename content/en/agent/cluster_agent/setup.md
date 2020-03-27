@@ -172,7 +172,7 @@ After having set up the Datadog Cluster Agent, configure your Datadog Agent to c
 
 4. In the `agent.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2-secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
 
-5. In the `agent.yaml` manifest, and the environment variable `DD_CLUSTER_AGENT_ENABLED` and set it to `true`.
+5. In the `agent.yaml` manifest, add the environment variable `DD_CLUSTER_AGENT_ENABLED` and set it to `true`.
 
 6. Create the DaemonSet with this command: `kubectl apply -f agent.yaml`
 
