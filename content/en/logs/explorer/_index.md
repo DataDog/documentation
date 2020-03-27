@@ -44,7 +44,7 @@ The Log List displays indexed logs and offer priviledged tools to navigate in **
 
 The Log Patterns automatically aggregates indexed logs into a **handful of groups** with similar structure. Find out more in the [Log Patterns section][3].
 
-{{< img src="logs/explorer/log_explorer_walkthrough_pattern.png" alt="Log Patterns"  >}}
+{{< img src="logs/explorer/log_explorer_walkthrough_patterns.png" alt="Log Patterns"  >}}
 
 
 ### Log Analytics
@@ -84,7 +84,7 @@ Interact with the upper reserved attributes section:
 
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
-{{< img src="logs/explorer/side_panel_hub.png" alt="Side Panel Hub"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel_hub.gif" alt="Side Panel Hub"  style="width:60%;">}}
 
 ### Configure your troubleshooting context
 
@@ -97,7 +97,7 @@ Interact with the attributes names and values in the lower JSON section to:
 
 - Build or edit a facet or measure from an attribute - see [Log Facets][15].
 
-{{< img src="logs/explorer/side_panel_facets.png" alt="Side Panel Facets"  style="width:60%;">}}
+{{< img src="logs/explorer/side_panel_facets.gif" alt="Side Panel Facets"  style="width:60%;">}}
 
 
 ### Share a log
@@ -107,7 +107,7 @@ Use the **Share** button to share the log opened in side panel to other contexts
 - **Copy to clipboard** or `Ctrl+C` / `Cmd+C` copies the log JSON to your clipboard.
 - **Share Event** shares the log (along with the underlying view) with teammates through email, Slack, and more. See all [Datadog notification integrations][4] available.
 
-{{< img src="logs/explorer/upper_log_panel.png" alt="Upper Log Panel"  style="width:50%;">}}
+{{< img src="logs/explorer/upper_log_panel.gif" alt="Upper Log Panel"  style="width:50%;">}}
 
 
 ## Troubleshooting Context
