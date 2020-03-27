@@ -22,7 +22,7 @@ ctx := context.WithValue(
 config := NewConfiguration()
 api := NewAPIClient(config)
 
-model, httpresp, err := api.KeysApi.getAPIKey(ctx).Execute()
+model, httpresp, err := api.KeyManagementApi.getAPIKey(ctx).Execute()
 if err != nil {
 	log.Fatalf("API Error %s: %v", err.(GenericOpenAPIError).Body(), err)
 }
