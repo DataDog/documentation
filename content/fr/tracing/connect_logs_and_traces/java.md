@@ -1,7 +1,7 @@
 ---
-title: Associer vos traces à vos logs Java
+title: Associer vos logs Java à vos traces
 kind: documentation
-description: Associez vos traces à vos logs Java pour les mettre en corrélation dans Datadog.
+description: Associez vos logs Java à vos traces pour les mettre en corrélation dans Datadog.
 further_reading:
   - link: tracing/manual_instrumentation
     tag: Documentation
