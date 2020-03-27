@@ -1,13 +1,13 @@
 ---
-title: Get daily custom reporting available files
+title: Get monthly custom reporting available files
 type: apicontent
-order: 35.95
-external_redirect: /api/#get-daily-custom-reporting-available-files
+order: 35.97
+external_redirect: /api/#get-monthly-custom-reporting-available-files
 ---
 
-## Get daily custom reporting available files
+## Get monthly custom reporting available files
 
-Returns the list of availalbe daily custom reports.
+Returns the list of availalbe monthly custom reports.
 
 **ARGUMENTS**:
 
