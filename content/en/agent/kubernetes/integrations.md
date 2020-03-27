@@ -6,12 +6,9 @@ aliases:
   - /guides/autodiscovery/
 kind: documentation
 further_reading:
-- link: "agent/kubernetes/daemonset_setup"
+- link: "agent/kubernetes/"
   tag: "documentation"
-  text: "Kubernetes DaemonSet Setup"
-- link: "agent/kubernetes/host_setup"
-  tag: "documentation"
-  text: "Kubernetes Host Setup"
+  text: "Kubernetes Setup"
 ---
 
 The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][1] when running the Agent on a host for more context on this logic.
@@ -30,10 +27,6 @@ Each tab in sections below shows a different way to apply integration templates 
 * [Kubernetes pod annotations](?tab=kubernetes#configuration)
 * [ConfigMap](?tab=configmap#configuration)
 * [Key-value stores](?tab=keyvaluestore#configuration)
-
-If you provide a template for the same integration with multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
-
-* Kubernetes annotations
 
 **Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][2], [Varnish][3], [Postfix][4], [Cassandra Nodetools][5], and [Gunicorn][6]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint. For example, the standard pattern in Kubernetes is: side car adapter with a node-level or cluster-level collector. This setup allows the exporter to access the data, which exposes it using an HTTP endpoint, and Datadog Autodiscovery can then access the data.
 

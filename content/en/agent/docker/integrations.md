@@ -2,7 +2,7 @@
 title: Autodiscovery Integration Templates
 kind: documentation
 further_reading:
-- link: "logs/"
+- link: "agent/docker/log"
   tag: "Documentation"
   text: "Collect your logs"
 - link: "/infrastructure/process"
@@ -22,18 +22,12 @@ To configure an integration with Autodiscovery, use the following parameters:
 | `<INTEGRATION_NAME>` | Yes      | Name of the Datadog integration                                                                   |
 | `<INIT_CONFIG>`      | Yes      | Configuration for the `init_config:` section for the given Datadog-`<INTEGRATION_NAME>`           |
 | `<INSTANCE_CONFIG>`  | Yes      | Configuration for the `instances:` section for the given Datadog-`<INTEGRATION_NAME>`             |
-| `<LOG_CONFIG>`       | No       | For Agent v6.5+, configuration for the `logs:` section for the given Datadog-`<INTEGRATION_NAME>` |
 
 Each tab in sections below shows a different way to apply integration templates to a given container. The available methods are:
 
 * [Docker labels](?tab=docker#configuration)
 * [A configuration file mounted within the Agent](?tab=file#configuration)
 * [Key-value stores](?tab=keyvaluestore#configuration)
-
-If you provide a template for the same integration with multiple template sources, the Agent looks for templates in the following order (using the first one it finds):
-
-* Docker Labels
-* Files
 
 **Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][2], [Varnish][3], [Postfix][4], [Cassandra Nodetools][5], and [Gunicorn][6]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint. For example, the standard pattern in Kubernetes is: side car adapter with a node-level or cluster-level collector. This setup allows the exporter to access the data, which exposes it using an HTTP endpoint, and Datadog Autodiscovery can then access the data.
 
@@ -50,7 +44,6 @@ Integrations templates can be stored as Docker labels. With Autodiscovery, the A
 LABEL "com.datadoghq.ad.check_names"='[<INTEGRATION_NAME>]'
 LABEL "com.datadoghq.ad.init_configs"='[<INIT_CONFIG>]'
 LABEL "com.datadoghq.ad.instances"='[<INSTANCE_CONFIG>]'
-LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
 ```
 
 **docker-compose.yaml**:
@@ -60,13 +53,12 @@ labels:
   com.datadoghq.ad.check_names: '[<INTEGRATION_NAME>]'
   com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
   com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
-  com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
 ```
 
 **docker run command**:
 
 ```shell
--l com.datadoghq.ad.check_names='[<INTEGRATION_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]' -l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'
+-l com.datadoghq.ad.check_names='[<INTEGRATION_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]'
 ```
 
 **Docker Swarm**:
@@ -83,7 +75,6 @@ services:
       com.datadoghq.ad.check_names: '[<INTEGRATION_NAME>]'
       com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
       com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
-      com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
 
 ```
 
@@ -168,7 +159,6 @@ With the key-value store enabled as a template source, the Agent looks for templ
       - check_names: ["<INTEGRATION_NAME>"]
       - init_configs: ["<INIT_CONFIG>"]
       - instances: ["<INSTANCE_CONFIG>"]
-      - logs: ["<LOGS_CONFIG>"]
     ...
 ```
 
@@ -193,7 +183,6 @@ labels:
   com.datadoghq.ad.check_names: '["redisdb"]'
   com.datadoghq.ad.init_configs: '[{}]'
   com.datadoghq.ad.instances: '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
-  com.datadoghq.ad.logs: '[{"source": "redis", "service": "redis"}]'
 ```
 
 {{% /tab %}}
@@ -232,10 +221,6 @@ instances:
   - host: "%%host%%"
     port: "6379"
     password: "%%env_REDIS_PASSWORD%%"
-
-logs:
-  source: redis
-  service: redis
 ```
 
 **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][3].
@@ -253,7 +238,6 @@ etcdctl mkdir /datadog/check_configs/redis
 etcdctl set /datadog/check_configs/redis/check_names '["redisdb"]'
 etcdctl set /datadog/check_configs/redis/init_configs '[{}]'
 etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
-etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis"}]'
 ```
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
@@ -280,7 +264,6 @@ labels:
   com.datadoghq.ad.check_names: '["apache", "http_check"]'
   com.datadoghq.ad.init_configs: '[{},{}]'
   com.datadoghq.ad.instances: '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name":"<WEBSITE_1>","url":"http://%%host%%/website_1","timeout":1},{"name":"<WEBSITE_2>","url":"http://%%host%%/website_2","timeout":1}]]'
-  com.datadoghq.ad.logs: '[{"source": "apache", "service": "webapp"}]'
 ```
 
 {{% /tab %}}
@@ -297,10 +280,6 @@ init_config:
 
 instances:
   - apache_status_url: http://%%host%%/server-status?auto
-
-logs:
-  source: apache
-  service: webapp
 ```
 
 **Note**: It looks like a minimal [Apache check configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image. See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
@@ -335,7 +314,6 @@ instances:
 etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'
 etcdctl set /datadog/check_configs/httpd/init_configs '[{}, {}]'
 etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name": "<WEBSITE_1>", "url": "http://%%host%%/website_1", timeout: 1},{"name": "<WEBSITE_2>", "url": "http://%%host%%/website_2", timeout: 1}]]'
-etcdctl set /datadog/check_configs/httpd/logs '[{"source": "apache", "service": "webapp"}]'
 ```
 
 **Note**: The order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of its configuration have the same index across the three lists.
