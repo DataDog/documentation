@@ -23,7 +23,11 @@ The usage metering end-point allows you to:
 * Get Hourly Usage For Lambda Functions
 * Get Hourly Usage For Network Hosts
 * Get Hourly Usage For Network Flows
-* Get Multi-Org Usage Summary
+* Get Multi-Org Usage 
+* Get Daily Custom Reporting Available Files
+* Get Daily Custom Reporting File URL
+* Get Monthly Custom Reporting Available Files
+* Get Monthly Custom Reporting File URL
 
 Usage data is delayed by up to 72 hours from when it was incurred. It is retained for the past 15 months.
 
