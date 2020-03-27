@@ -13,7 +13,7 @@ The APM [Live Tail][1] gives users the ability to see all trace spans in near re
 All trace spans ingested by Datadog are displayed. (It’s a part of tracing without Limits*)
 - It displays spans that have been processed.
 
-1. The span stream can be paused
+- The span stream can be paused.
 2. Write search parameters to refine the streaming view
 3. View the distributed trace in real-time
 4. Add or remove columns from span tags for a customized view 
