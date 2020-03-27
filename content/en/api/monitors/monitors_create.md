@@ -94,7 +94,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`
     
-    *   **`query`** The search query - following the [Log search syntax][6] .
+    *   **`query`** The search query - following the [Log search syntax][5] .
     *   **`index_name`** For multi-index organizations, the log index in which the request is performed.
     *   **`rollup_method`** The stats rollup method - supports `count`, `avg` and `cardinality`.
     *   **`measure`** For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
@@ -159,7 +159,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     _These options only apply to metric alerts._
 
-   - **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][5] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
+   - **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][6] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
 
     Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`
 
@@ -199,5 +199,5 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 [2]: /monitors/monitor_types
 [3]: /monitors/monitor_types/#define-the-conditions
 [4]: /infrastructure/process
-[5]: /monitors/faq/what-are-recovery-thresholds
-[6]: /logs/explorer/search/#search-syntax
+[5]: /logs/explorer/search/#search-syntax
+[6]: /monitors/faq/what-are-recovery-thresholds

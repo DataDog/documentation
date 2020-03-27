@@ -36,8 +36,8 @@ To enable trace collection with your Agent, follow the instructions below:
     ```	
  - Then, upgrade your Datadog Helm chart using the following command : `helm upgrade -f datadog-values.yaml <RELEASE NAME> stable/datadog` (don't forget to set the API key in the yaml file)
 
-[1]: /agent/kubernetes/?tab=helm
 
+[1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
 {{% tab "Daemonset" %}}
 
