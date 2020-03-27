@@ -136,42 +136,6 @@ Follow the [guide to search your logs][1] for a detailed explanation of all the 
 Use saved views to automatically configure your log explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][2] to learn more.
 
 
-### Share views
-
-Export your current log visualization with the _share_ functionality:
-
-{{< img src="logs/explorer/send_view_to.png" alt="Send view to"  style="width:60%;">}}
-
-Use the _share_ button to send your current log explorer view to a CSV file or team member, or create a monitor:
-
-{{< tabs >}}
-{{% tab "Log Search" %}}
-
-| Button            | Description                                                                                                                                    |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| Export to Monitor | Export the query applied to your logstream to create the query for a new [log monitor][1].                                                     |
-| Export to CSV     | Export your current logstream view with its selected columns to a CSV file. You can export up to 5,000 logs at once.                           |
-| Share View        | Share a link to the current view with your teammates through email, Slack, and more. See all [Datadog notification integrations][2] available. |
-
-
-[1]: /monitors/monitor_types/log
-[2]: /integrations/#cat-notification
-{{% /tab %}}
-{{% tab "Log Analytics" %}}
-
-| Button              | Description                                                                                    |
-| ------------------- | ---------------------------------------------------------------------------------------------- |
-| Export to Monitor   | Export the query applied to your log analytics to create the query for a new [log monitor][1]. |
-| Export to Dashboard | Export the current analytic as a widget to an existing or new [dashboard][2].                  |
-| Generate new Metric | [Generate a new metric][3] out of the current analytic query.                                  |
-
-
-[1]: /monitors/monitor_types/log
-[2]: /dashboards/
-[3]: /logs/logs_to_metrics/
-{{% /tab %}}
-{{< /tabs >}}
-
 
 ## Further Reading
 
