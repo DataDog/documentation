@@ -1,0 +1,136 @@
+{
+  "GetAllActiveMetrics": {
+    "responses": {
+      "200": {
+        "from": "string",
+        "metrics": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetMetricMetadata": {
+    "responses": {
+      "200": {
+        "description": "string",
+        "integration": "string",
+        "per_unit": "second",
+        "short_name": "string",
+        "statsd_interval": "integer",
+        "type": "count",
+        "unit": "byte"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "EditMetricMetadata": {
+    "responses": {
+      "200": {
+        "description": "string",
+        "integration": "string",
+        "per_unit": "second",
+        "short_name": "string",
+        "statsd_interval": "integer",
+        "type": "count",
+        "unit": "byte"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "description": "string",
+      "integration": "string",
+      "per_unit": "second",
+      "short_name": "string",
+      "statsd_interval": "integer",
+      "type": "count",
+      "unit": "byte"
+    }
+  },
+  "QueryMetrics": {
+    "responses": {
+      "200": {
+        "error": "string",
+        "from_date": "integer",
+        "group_by": "string",
+        "message": "string",
+        "query": "string",
+        "res_type": "time_series",
+        "series": {
+          "aggr": "avg",
+          "display_name": "system.cpu.idle",
+          "end": "integer",
+          "expression": "system.cpu.idle{host:foo,env:test}",
+          "interval": "integer",
+          "length": "integer",
+          "metric": "system.cpu.idle",
+          "pointlist": "number",
+          "scope": "host:foo,env:test",
+          "start": "integer",
+          "unit": {
+            "family": "time",
+            "name": "minute",
+            "plural": "minutes",
+            "scale_factor": 60,
+            "short_name": "min"
+          }
+        },
+        "status": "ok",
+        "to_date": "integer"
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "SearchMetrics": {
+    "responses": {
+      "200": {
+        "results": "object"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "500": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "SubmitMetrics": {
+    "responses": {
+      "202": {
+        "status": "ok"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "408": {
+        "errors": "Bad Request"
+      },
+      "413": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "series": {
+        "host": "string",
+        "interval": "integer",
+        "metric": "system.load.1",
+        "points": "number",
+        "tags": "string",
+        "type": "string"
+      }
+    }
+  }
+}

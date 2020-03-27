@@ -1,0 +1,222 @@
+{
+  "GetAllDashboards": {
+    "responses": {
+      "200": {
+        "dashboards": {
+          "author_handle": "string",
+          "created_at": "string",
+          "description": "string",
+          "id": "string",
+          "is_read_only": "boolean",
+          "layout_type": "string",
+          "modified_at": "string",
+          "title": "string",
+          "url": "string"
+        }
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "CreateDashboard": {
+    "responses": {
+      "200": {
+        "author_handle": "test@datadoghq.com",
+        "created_at": "string",
+        "description": "string",
+        "id": "123-abc-456",
+        "is_read_only": "boolean",
+        "layout_type": "string",
+        "modified_at": "string",
+        "notify_list": "string",
+        "template_variable_presets": {
+          "name": "string",
+          "template_variables": {
+            "name": "string",
+            "value": "string"
+          }
+        },
+        "template_variables": {
+          "default": "my-host",
+          "name": "host1",
+          "prefix": "host"
+        },
+        "title": "string",
+        "url": "/dashboard/123-abc-456/example-dashboard-title",
+        "widgets": {
+          "definition": "object",
+          "id": "integer",
+          "layout": "object"
+        }
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "author_handle": "test@datadoghq.com",
+      "created_at": "string",
+      "description": "string",
+      "id": "123-abc-456",
+      "is_read_only": "boolean",
+      "layout_type": "string",
+      "modified_at": "string",
+      "notify_list": "string",
+      "template_variable_presets": {
+        "name": "string",
+        "template_variables": {
+          "name": "string",
+          "value": "string"
+        }
+      },
+      "template_variables": {
+        "default": "my-host",
+        "name": "host1",
+        "prefix": "host"
+      },
+      "title": "string",
+      "url": "/dashboard/123-abc-456/example-dashboard-title",
+      "widgets": {
+        "definition": "object",
+        "id": "integer",
+        "layout": "object"
+      }
+    }
+  },
+  "DeleteDashboard": {
+    "responses": {
+      "200": {
+        "deleted_dashboard_id": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetDashboard": {
+    "responses": {
+      "200": {
+        "author_handle": "test@datadoghq.com",
+        "created_at": "string",
+        "description": "string",
+        "id": "123-abc-456",
+        "is_read_only": "boolean",
+        "layout_type": "string",
+        "modified_at": "string",
+        "notify_list": "string",
+        "template_variable_presets": {
+          "name": "string",
+          "template_variables": {
+            "name": "string",
+            "value": "string"
+          }
+        },
+        "template_variables": {
+          "default": "my-host",
+          "name": "host1",
+          "prefix": "host"
+        },
+        "title": "string",
+        "url": "/dashboard/123-abc-456/example-dashboard-title",
+        "widgets": {
+          "definition": "object",
+          "id": "integer",
+          "layout": "object"
+        }
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UpdateDashboard": {
+    "responses": {
+      "200": {
+        "author_handle": "test@datadoghq.com",
+        "created_at": "string",
+        "description": "string",
+        "id": "123-abc-456",
+        "is_read_only": "boolean",
+        "layout_type": "string",
+        "modified_at": "string",
+        "notify_list": "string",
+        "template_variable_presets": {
+          "name": "string",
+          "template_variables": {
+            "name": "string",
+            "value": "string"
+          }
+        },
+        "template_variables": {
+          "default": "my-host",
+          "name": "host1",
+          "prefix": "host"
+        },
+        "title": "string",
+        "url": "/dashboard/123-abc-456/example-dashboard-title",
+        "widgets": {
+          "definition": "object",
+          "id": "integer",
+          "layout": "object"
+        }
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "author_handle": "test@datadoghq.com",
+      "created_at": "string",
+      "description": "string",
+      "id": "123-abc-456",
+      "is_read_only": "boolean",
+      "layout_type": "string",
+      "modified_at": "string",
+      "notify_list": "string",
+      "template_variable_presets": {
+        "name": "string",
+        "template_variables": {
+          "name": "string",
+          "value": "string"
+        }
+      },
+      "template_variables": {
+        "default": "my-host",
+        "name": "host1",
+        "prefix": "host"
+      },
+      "title": "string",
+      "url": "/dashboard/123-abc-456/example-dashboard-title",
+      "widgets": {
+        "definition": "object",
+        "id": "integer",
+        "layout": "object"
+      }
+    }
+  }
+}

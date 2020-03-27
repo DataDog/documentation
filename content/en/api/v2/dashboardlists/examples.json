@@ -1,0 +1,169 @@
+{
+  "DeleteDashboardListItems": {
+    "responses": {
+      "200": {
+        "deleted_dashboards_from_list": {
+          "author": "object",
+          "created": "string",
+          "icon": "string",
+          "id": "string",
+          "is_favorite": "boolean",
+          "is_read_only": "boolean",
+          "is_shared": "boolean",
+          "modified": "string",
+          "popularity": "integer",
+          "title": "string",
+          "type": "string",
+          "url": "string"
+        }
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "dashboards": {
+        "author": "object",
+        "created": "string",
+        "icon": "string",
+        "id": "string",
+        "is_favorite": "boolean",
+        "is_read_only": "boolean",
+        "is_shared": "boolean",
+        "modified": "string",
+        "popularity": "integer",
+        "title": "string",
+        "type": "string",
+        "url": "string"
+      },
+      "total": "integer"
+    }
+  },
+  "GetDashboardListItems": {
+    "responses": {
+      "200": {
+        "dashboards": {
+          "author": "object",
+          "created": "string",
+          "icon": "string",
+          "id": "string",
+          "is_favorite": "boolean",
+          "is_read_only": "boolean",
+          "is_shared": "boolean",
+          "modified": "string",
+          "popularity": "integer",
+          "title": "string",
+          "type": "string",
+          "url": "string"
+        },
+        "total": "integer"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "AddDashboardListItems": {
+    "responses": {
+      "200": {
+        "added_dashboards_to_list": {
+          "author": "object",
+          "created": "string",
+          "icon": "string",
+          "id": "string",
+          "is_favorite": "boolean",
+          "is_read_only": "boolean",
+          "is_shared": "boolean",
+          "modified": "string",
+          "popularity": "integer",
+          "title": "string",
+          "type": "string",
+          "url": "string"
+        }
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "dashboards": {
+        "author": "object",
+        "created": "string",
+        "icon": "string",
+        "id": "string",
+        "is_favorite": "boolean",
+        "is_read_only": "boolean",
+        "is_shared": "boolean",
+        "modified": "string",
+        "popularity": "integer",
+        "title": "string",
+        "type": "string",
+        "url": "string"
+      },
+      "total": "integer"
+    }
+  },
+  "UpdateDashboardListItems": {
+    "responses": {
+      "200": {
+        "dashboards": {
+          "author": "object",
+          "created": "string",
+          "icon": "string",
+          "id": "string",
+          "is_favorite": "boolean",
+          "is_read_only": "boolean",
+          "is_shared": "boolean",
+          "modified": "string",
+          "popularity": "integer",
+          "title": "string",
+          "type": "string",
+          "url": "string"
+        },
+        "total": "integer"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "dashboards": {
+        "author": "object",
+        "created": "string",
+        "icon": "string",
+        "id": "string",
+        "is_favorite": "boolean",
+        "is_read_only": "boolean",
+        "is_shared": "boolean",
+        "modified": "string",
+        "popularity": "integer",
+        "title": "string",
+        "type": "string",
+        "url": "string"
+      },
+      "total": "integer"
+    }
+  }
+}

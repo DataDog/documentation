@@ -1,0 +1,273 @@
+{
+  "GetSLOs": {
+    "responses": {
+      "200": {
+        "data": {
+          "created_at": "integer",
+          "creator": "object",
+          "description": "string",
+          "groups": "string",
+          "id": "string",
+          "modified_at": "integer",
+          "monitor_ids": "integer",
+          "monitor_tags": "string",
+          "name": "string",
+          "query": "object",
+          "tags": "string",
+          "thresholds": {
+            "target": "number",
+            "target_display": "string",
+            "timeframe": "string",
+            "warning": "number",
+            "warning_display": "string"
+          },
+          "type": "string",
+          "type_id": "integer"
+        },
+        "errors": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "CreateSLO": {
+    "responses": {
+      "200": {
+        "data": {
+          "created_at": "integer",
+          "creator": "object",
+          "description": "string",
+          "groups": "string",
+          "id": "string",
+          "modified_at": "integer",
+          "monitor_ids": "integer",
+          "monitor_tags": "string",
+          "name": "string",
+          "query": "object",
+          "tags": "string",
+          "thresholds": {
+            "target": "number",
+            "target_display": "string",
+            "timeframe": "string",
+            "warning": "number",
+            "warning_display": "string"
+          },
+          "type": "string",
+          "type_id": "integer"
+        },
+        "errors": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "created_at": "integer",
+      "creator": "object",
+      "description": "string",
+      "groups": "string",
+      "id": "string",
+      "modified_at": "integer",
+      "monitor_ids": "integer",
+      "monitor_tags": "string",
+      "name": "string",
+      "query": "object",
+      "tags": "string",
+      "thresholds": {
+        "target": "number",
+        "target_display": "string",
+        "timeframe": "string",
+        "warning": "number",
+        "warning_display": "string"
+      },
+      "type": "string",
+      "type_id": "integer"
+    }
+  },
+  "BulkPartialDeleteSLO": {
+    "responses": {
+      "200": {
+        "data": "object",
+        "errors": {
+          "id": "string",
+          "message": "string",
+          "timeframe": "string"
+        }
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "id1": [
+        "7d",
+        "30d"
+      ],
+      "id2": [
+        "7d",
+        "30d"
+      ]
+    }
+  },
+  "CheckCanDeleteSLO": {
+    "responses": {
+      "200": {
+        "data": "object",
+        "errors": "object"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "DeleteSLO": {
+    "responses": {
+      "200": {
+        "data": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetSLO": {
+    "responses": {
+      "200": {
+        "errors": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "EditSLO": {
+    "responses": {
+      "200": {
+        "data": {
+          "created_at": "integer",
+          "creator": "object",
+          "description": "string",
+          "groups": "string",
+          "id": "string",
+          "modified_at": "integer",
+          "monitor_ids": "integer",
+          "monitor_tags": "string",
+          "name": "string",
+          "query": "object",
+          "tags": "string",
+          "thresholds": {
+            "target": "number",
+            "target_display": "string",
+            "timeframe": "string",
+            "warning": "number",
+            "warning_display": "string"
+          },
+          "type": "string",
+          "type_id": "integer"
+        },
+        "errors": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "created_at": "integer",
+      "creator": "object",
+      "description": "string",
+      "groups": "string",
+      "id": "string",
+      "modified_at": "integer",
+      "monitor_ids": "integer",
+      "monitor_tags": "string",
+      "name": "string",
+      "query": "object",
+      "tags": "string",
+      "thresholds": {
+        "target": "number",
+        "target_display": "string",
+        "timeframe": "string",
+        "warning": "number",
+        "warning_display": "string"
+      },
+      "type": "string",
+      "type_id": "integer"
+    }
+  },
+  "HistoryForSLO": {
+    "responses": {
+      "200": {
+        "data": "object",
+        "errors": {
+          "error": "string"
+        }
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "DeletePagerDutyIntegration": {
+    "responses": {
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetPagerDutyIntegration": {
+    "responses": {
+      "200": {
+        "api_token": "<PAGERDUTY_TOKEN>",
+        "schedules": "string",
+        "services": {
+          "service_key": "string",
+          "service_name": "string"
+        },
+        "subdomain": "<PAGERDUTY_SUB_DOMAIN>"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UpdatePagerDutyIntegration": {
+    "responses": {
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "schedules": "string",
+      "services": {
+        "service_key": "string",
+        "service_name": "string"
+      }
+    }
+  },
+  "CreatePagerDutyIntegration": {
+    "responses": {
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "api_token": "<PAGERDUTY_TOKEN>",
+      "schedules": "string",
+      "services": {
+        "service_key": "string",
+        "service_name": "string"
+      },
+      "subdomain": "<PAGERDUTY_SUB_DOMAIN>"
+    }
+  }
+}

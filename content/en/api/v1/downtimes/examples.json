@@ -1,0 +1,167 @@
+{
+  "GetAllDowntimes": {
+    "responses": {
+      "200": {
+        "active": true,
+        "canceled": 1412799983,
+        "creator_id": 123456,
+        "disabled": "boolean",
+        "downtime_type": 2,
+        "end": 1412793983,
+        "id": 1625,
+        "message": "Message on the downtime",
+        "monitor_id": 123456,
+        "monitor_tags": "string",
+        "parent_id": 123,
+        "recurrence": "object",
+        "scope": "string",
+        "start": 1412792983,
+        "timezone": "America/New_York",
+        "updater_id": 123456
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "CreateDowntime": {
+    "responses": {
+      "200": {
+        "active": true,
+        "canceled": 1412799983,
+        "creator_id": 123456,
+        "disabled": "boolean",
+        "downtime_type": 2,
+        "end": 1412793983,
+        "id": 1625,
+        "message": "Message on the downtime",
+        "monitor_id": 123456,
+        "monitor_tags": "string",
+        "parent_id": 123,
+        "recurrence": "object",
+        "scope": "string",
+        "start": 1412792983,
+        "timezone": "America/New_York",
+        "updater_id": 123456
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "active": true,
+      "canceled": 1412799983,
+      "creator_id": 123456,
+      "disabled": "boolean",
+      "downtime_type": 2,
+      "end": 1412793983,
+      "id": 1625,
+      "message": "Message on the downtime",
+      "monitor_id": 123456,
+      "monitor_tags": "string",
+      "parent_id": 123,
+      "recurrence": "object",
+      "scope": "string",
+      "start": 1412792983,
+      "timezone": "America/New_York",
+      "updater_id": 123456
+    }
+  },
+  "CancelDowntimesByScope": {
+    "responses": {
+      "200": {
+        "cancelled_ids": "integer"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "scope": "host:myserver"
+    }
+  },
+  "CancelDowntime": {
+    "responses": {
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetDowntime": {
+    "responses": {
+      "200": {
+        "active": true,
+        "canceled": 1412799983,
+        "creator_id": 123456,
+        "disabled": "boolean",
+        "downtime_type": 2,
+        "end": 1412793983,
+        "id": 1625,
+        "message": "Message on the downtime",
+        "monitor_id": 123456,
+        "monitor_tags": "string",
+        "parent_id": 123,
+        "recurrence": "object",
+        "scope": "string",
+        "start": 1412792983,
+        "timezone": "America/New_York",
+        "updater_id": 123456
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UpdateDowntime": {
+    "responses": {
+      "200": {
+        "active": true,
+        "canceled": 1412799983,
+        "creator_id": 123456,
+        "disabled": "boolean",
+        "downtime_type": 2,
+        "end": 1412793983,
+        "id": 1625,
+        "message": "Message on the downtime",
+        "monitor_id": 123456,
+        "monitor_tags": "string",
+        "parent_id": 123,
+        "recurrence": "object",
+        "scope": "string",
+        "start": 1412792983,
+        "timezone": "America/New_York",
+        "updater_id": 123456
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "active": true,
+      "canceled": 1412799983,
+      "creator_id": 123456,
+      "disabled": "boolean",
+      "downtime_type": 2,
+      "end": 1412793983,
+      "id": 1625,
+      "message": "Message on the downtime",
+      "monitor_id": 123456,
+      "monitor_tags": "string",
+      "parent_id": 123,
+      "recurrence": "object",
+      "scope": "string",
+      "start": 1412792983,
+      "timezone": "America/New_York",
+      "updater_id": 123456
+    }
+  }
+}

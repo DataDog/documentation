@@ -1,0 +1,102 @@
+{
+  "DeleteAzureIntegration": {
+    "responses": {
+      "200": {},
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
+      "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
+      "errors": "string",
+      "host_filters": "key:value,filter:example",
+      "new_client_id": "new1c7f6-1234-5678-9101-3fcbf464test",
+      "new_tenant_name": "new1c44-1234-5678-9101-cc00736ftest",
+      "tenant_name": "testc44-1234-5678-9101-cc00736ftest"
+    }
+  },
+  "ListAzureIntegration": {
+    "responses": {
+      "200": {
+        "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
+        "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
+        "errors": "string",
+        "host_filters": "key:value,filter:example",
+        "new_client_id": "new1c7f6-1234-5678-9101-3fcbf464test",
+        "new_tenant_name": "new1c44-1234-5678-9101-cc00736ftest",
+        "tenant_name": "testc44-1234-5678-9101-cc00736ftest"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "CreateAzureIntegration": {
+    "responses": {
+      "200": {},
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
+      "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
+      "errors": "string",
+      "host_filters": "key:value,filter:example",
+      "new_client_id": "new1c7f6-1234-5678-9101-3fcbf464test",
+      "new_tenant_name": "new1c44-1234-5678-9101-cc00736ftest",
+      "tenant_name": "testc44-1234-5678-9101-cc00736ftest"
+    }
+  },
+  "UpdateAzureIntegration": {
+    "responses": {
+      "200": {},
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
+      "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
+      "errors": "string",
+      "host_filters": "key:value,filter:example",
+      "new_client_id": "new1c7f6-1234-5678-9101-3fcbf464test",
+      "new_tenant_name": "new1c44-1234-5678-9101-cc00736ftest",
+      "tenant_name": "testc44-1234-5678-9101-cc00736ftest"
+    }
+  },
+  "AzureUpdateHostFilters": {
+    "responses": {
+      "200": {},
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
+      "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
+      "errors": "string",
+      "host_filters": "key:value,filter:example",
+      "new_client_id": "new1c7f6-1234-5678-9101-3fcbf464test",
+      "new_tenant_name": "new1c44-1234-5678-9101-cc00736ftest",
+      "tenant_name": "testc44-1234-5678-9101-cc00736ftest"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "GetAllHostTags": {
+    "responses": {
+      "200": {
+        "tags": "object"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "RemoveHostTags": {
+    "responses": {
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetHostTags": {
+    "responses": {
+      "200": {
+        "host": "test.host",
+        "tags": "environment:production"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "AddToHostTags": {
+    "responses": {
+      "201": {
+        "host": "test.host",
+        "tags": "environment:production"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "host": "test.host",
+      "tags": "environment:production"
+    }
+  },
+  "UpdateHostTags": {
+    "responses": {
+      "201": {
+        "host": "test.host",
+        "tags": "environment:production"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "host": "test.host",
+      "tags": "environment:production"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "ListLogs": {
+    "responses": {
+      "200": {
+        "logs": {
+          "content": "object",
+          "id": "AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA"
+        },
+        "nextLogId": "string",
+        "status": "string"
+      },
+      "400": {
+        "error": "object"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "index": "string",
+      "limit": "integer",
+      "query": "string",
+      "sort": "string",
+      "startAt": "string",
+      "time": "object"
+    }
+  },
+  "SendLog": {
+    "responses": {
+      "200": "object",
+      "default": {
+        "code": "integer",
+        "message": "string"
+      }
+    },
+    "request": {
+      "ddsource": "nginx",
+      "ddtags": "env:staging,service:payment",
+      "hostname": "i-012345678",
+      "message": "2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World"
+    }
+  }
+}

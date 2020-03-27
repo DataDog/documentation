@@ -1,0 +1,294 @@
+{
+  "GetAllMonitors": {
+    "responses": {
+      "200": {
+        "created": "string",
+        "creator": "object",
+        "deleted": "string",
+        "id": "integer",
+        "message": "string",
+        "modified": "string",
+        "multi": "boolean",
+        "name": "string",
+        "options": "object",
+        "overall_state": "string",
+        "query": "string",
+        "state": "object",
+        "tags": "string",
+        "type": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "CreateMonitor": {
+    "responses": {
+      "200": {
+        "created": "string",
+        "creator": "object",
+        "deleted": "string",
+        "id": "integer",
+        "message": "string",
+        "modified": "string",
+        "multi": "boolean",
+        "name": "string",
+        "options": "object",
+        "overall_state": "string",
+        "query": "string",
+        "state": "object",
+        "tags": "string",
+        "type": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "created": "string",
+      "creator": "object",
+      "deleted": "string",
+      "id": "integer",
+      "message": "string",
+      "modified": "string",
+      "multi": "boolean",
+      "name": "string",
+      "options": "object",
+      "overall_state": "string",
+      "query": "string",
+      "state": "object",
+      "tags": "string",
+      "type": "string"
+    }
+  },
+  "ValidateMonitor": {
+    "responses": {
+      "200": {
+        "created": "string",
+        "creator": "object",
+        "deleted": "string",
+        "id": "integer",
+        "message": "string",
+        "modified": "string",
+        "multi": "boolean",
+        "name": "string",
+        "options": "object",
+        "overall_state": "string",
+        "query": "string",
+        "state": "object",
+        "tags": "string",
+        "type": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "created": "string",
+      "creator": "object",
+      "deleted": "string",
+      "id": "integer",
+      "message": "string",
+      "modified": "string",
+      "multi": "boolean",
+      "name": "string",
+      "options": "object",
+      "overall_state": "string",
+      "query": "string",
+      "state": "object",
+      "tags": "string",
+      "type": "string"
+    }
+  },
+  "DeleteMonitor": {
+    "responses": {
+      "200": {
+        "deleted_monitor_id": "integer"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetMonitor": {
+    "responses": {
+      "200": {
+        "created": "string",
+        "creator": "object",
+        "deleted": "string",
+        "id": "integer",
+        "message": "string",
+        "modified": "string",
+        "multi": "boolean",
+        "name": "string",
+        "options": "object",
+        "overall_state": "string",
+        "query": "string",
+        "state": "object",
+        "tags": "string",
+        "type": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "EditMonitor": {
+    "responses": {
+      "200": {
+        "created": "string",
+        "creator": "object",
+        "deleted": "string",
+        "id": "integer",
+        "message": "string",
+        "modified": "string",
+        "multi": "boolean",
+        "name": "string",
+        "options": "object",
+        "overall_state": "string",
+        "query": "string",
+        "state": "object",
+        "tags": "string",
+        "type": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "created": "string",
+      "creator": "object",
+      "deleted": "string",
+      "id": "integer",
+      "message": "string",
+      "modified": "string",
+      "multi": "boolean",
+      "name": "string",
+      "options": "object",
+      "overall_state": "string",
+      "query": "string",
+      "state": "object",
+      "tags": "string",
+      "type": "string"
+    }
+  },
+  "MuteMonitor": {
+    "responses": {
+      "200": {
+        "created": "string",
+        "creator": "object",
+        "deleted": "string",
+        "id": "integer",
+        "message": "string",
+        "modified": "string",
+        "multi": "boolean",
+        "name": "string",
+        "options": "object",
+        "overall_state": "string",
+        "query": "string",
+        "state": "object",
+        "tags": "string",
+        "type": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UnmuteMonitor": {
+    "responses": {
+      "200": {
+        "created": "string",
+        "creator": "object",
+        "deleted": "string",
+        "id": "integer",
+        "message": "string",
+        "modified": "string",
+        "multi": "boolean",
+        "name": "string",
+        "options": "object",
+        "overall_state": "string",
+        "query": "string",
+        "state": "object",
+        "tags": "string",
+        "type": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "ResolveMonitor": {
+    "responses": {
+      "200": "object"
+    },
+    "request": "object"
+  },
+  "MuteAllMonitors": {
+    "responses": {
+      "200": {
+        "created": "string",
+        "creator": "object",
+        "deleted": "string",
+        "id": "integer",
+        "message": "string",
+        "modified": "string",
+        "multi": "boolean",
+        "name": "string",
+        "options": "object",
+        "overall_state": "string",
+        "query": "string",
+        "state": "object",
+        "tags": "string",
+        "type": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "401": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UnmuteAllMonitors": {
+    "responses": {
+      "401": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  }
+}

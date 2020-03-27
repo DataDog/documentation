@@ -1,0 +1,86 @@
+{
+  "GetAllUsers": {
+    "responses": {
+      "200": {
+        "users": {
+          "access_role": "st",
+          "disabled": "boolean",
+          "email": "test@datadoghq.com",
+          "handle": "test@datadoghq.com",
+          "icon": "/path/to/matching/gravatar/icon",
+          "name": "test user",
+          "verified": true
+        }
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "CreateUser": {
+    "responses": {
+      "200": {
+        "user": "object"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "access_role": "st",
+      "disabled": "boolean",
+      "email": "test@datadoghq.com",
+      "handle": "test@datadoghq.com",
+      "icon": "/path/to/matching/gravatar/icon",
+      "name": "test user",
+      "verified": true
+    }
+  },
+  "DisableUser": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUser": {
+    "responses": {
+      "200": {
+        "user": "object"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UpdateUser": {
+    "responses": {
+      "200": {
+        "user": "object"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "access_role": "st",
+      "disabled": "boolean",
+      "email": "test@datadoghq.com",
+      "handle": "test@datadoghq.com",
+      "icon": "/path/to/matching/gravatar/icon",
+      "name": "test user",
+      "verified": true
+    }
+  }
+}

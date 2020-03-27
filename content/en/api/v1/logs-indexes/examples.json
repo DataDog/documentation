@@ -1,0 +1,111 @@
+{
+  "GetLogsIndexOrder": {
+    "responses": {
+      "200": {
+        "index_names": "string"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UpdateLogsIndexOrder": {
+    "responses": {
+      "200": {
+        "index_names": "string"
+      },
+      "400": {
+        "error": "object"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "index_names": "string"
+    }
+  },
+  "GetAllLogIndexes": {
+    "responses": {
+      "200": {
+        "indexes": {
+          "daily_limit": "integer",
+          "exclusion_filters": {
+            "filter": "object",
+            "is_enabled": "boolean",
+            "name": "string"
+          },
+          "filter": "object",
+          "is_rate_limited": "boolean",
+          "name": "string",
+          "num_retention_days": "integer"
+        }
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetLogsIndex": {
+    "responses": {
+      "200": {
+        "daily_limit": "integer",
+        "exclusion_filters": {
+          "filter": "object",
+          "is_enabled": "boolean",
+          "name": "string"
+        },
+        "filter": "object",
+        "is_rate_limited": "boolean",
+        "name": "string",
+        "num_retention_days": "integer"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "error": "object"
+      }
+    },
+    "request": {}
+  },
+  "UpdateLogsIndex": {
+    "responses": {
+      "200": {
+        "daily_limit": "integer",
+        "exclusion_filters": {
+          "filter": "object",
+          "is_enabled": "boolean",
+          "name": "string"
+        },
+        "filter": "object",
+        "is_rate_limited": "boolean",
+        "name": "string",
+        "num_retention_days": "integer"
+      },
+      "400": {
+        "error": "object"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "error": "object"
+      }
+    },
+    "request": {
+      "daily_limit": "integer",
+      "exclusion_filters": {
+        "filter": "object",
+        "is_enabled": "boolean",
+        "name": "string"
+      },
+      "filter": "object",
+      "is_rate_limited": "boolean",
+      "name": "string",
+      "num_retention_days": "integer"
+    }
+  }
+}

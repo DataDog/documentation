@@ -1,0 +1,123 @@
+{
+  "GetAllDashboardLists": {
+    "responses": {
+      "200": {
+        "dashboard_lists": {
+          "author": "object",
+          "created": "string",
+          "dashboard_count": "integer",
+          "id": "integer",
+          "is_favorite": "boolean",
+          "modified": "string",
+          "name": "string",
+          "type": "manual_dashboard_list"
+        }
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "CreateDashboardList": {
+    "responses": {
+      "200": {
+        "author": "object",
+        "created": "string",
+        "dashboard_count": "integer",
+        "id": "integer",
+        "is_favorite": "boolean",
+        "modified": "string",
+        "name": "string",
+        "type": "manual_dashboard_list"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "author": "object",
+      "created": "string",
+      "dashboard_count": "integer",
+      "id": "integer",
+      "is_favorite": "boolean",
+      "modified": "string",
+      "name": "string",
+      "type": "manual_dashboard_list"
+    }
+  },
+  "DeleteDashboardList": {
+    "responses": {
+      "200": {
+        "deleted_dashboard_list_id": "integer"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetDashboardList": {
+    "responses": {
+      "200": {
+        "author": "object",
+        "created": "string",
+        "dashboard_count": "integer",
+        "id": "integer",
+        "is_favorite": "boolean",
+        "modified": "string",
+        "name": "string",
+        "type": "manual_dashboard_list"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UpdateDashboardList": {
+    "responses": {
+      "200": {
+        "author": "object",
+        "created": "string",
+        "dashboard_count": "integer",
+        "id": "integer",
+        "is_favorite": "boolean",
+        "modified": "string",
+        "name": "string",
+        "type": "manual_dashboard_list"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "author": "object",
+      "created": "string",
+      "dashboard_count": "integer",
+      "id": "integer",
+      "is_favorite": "boolean",
+      "modified": "string",
+      "name": "string",
+      "type": "manual_dashboard_list"
+    }
+  }
+}

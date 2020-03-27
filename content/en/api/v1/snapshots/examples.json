@@ -1,0 +1,15 @@
+{
+  "GetGraphSnapshot": {
+    "responses": {
+      "200": {
+        "graph_def": "string",
+        "metric_query": "string",
+        "snapshot_url": "https://app.datadoghq.com/s/f12345678/aaa-bbb-ccc"
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  }
+}

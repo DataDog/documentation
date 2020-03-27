@@ -1,0 +1,18 @@
+{
+  "GetIPRanges": {
+    "responses": {
+      "200": {
+        "agents": "object",
+        "api": "object",
+        "apm": "object",
+        "logs": "object",
+        "modified": "2019-10-31-20-00-00",
+        "process": "object",
+        "synthetics": "object",
+        "version": 11,
+        "webhooks": "object"
+      }
+    },
+    "request": {}
+  }
+}

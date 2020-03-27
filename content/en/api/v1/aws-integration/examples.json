@@ -1,0 +1,128 @@
+{
+  "DeleteAWSAccount": {
+    "responses": {
+      "200": "object",
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "access_key_id": "string",
+      "account_id": "1234567",
+      "account_specific_namespace_rules": "object",
+      "excluded_regions": "string",
+      "filter_tags": "string",
+      "host_tags": "string",
+      "role_name": "DatadogAWSIntegrationRole",
+      "secret_access_key": "string"
+    }
+  },
+  "GetAllAWSAccounts": {
+    "responses": {
+      "200": {
+        "accounts": {
+          "access_key_id": "string",
+          "account_id": "1234567",
+          "account_specific_namespace_rules": "object",
+          "excluded_regions": "string",
+          "filter_tags": "string",
+          "host_tags": "string",
+          "role_name": "DatadogAWSIntegrationRole",
+          "secret_access_key": "string"
+        }
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "CreateAWSAccount": {
+    "responses": {
+      "200": {
+        "external_id": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "access_key_id": "string",
+      "account_id": "1234567",
+      "account_specific_namespace_rules": "object",
+      "excluded_regions": "string",
+      "filter_tags": "string",
+      "host_tags": "string",
+      "role_name": "DatadogAWSIntegrationRole",
+      "secret_access_key": "string"
+    }
+  },
+  "UpdateAWSAccount": {
+    "responses": {
+      "200": "object",
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "access_key_id": "string",
+      "account_id": "1234567",
+      "account_specific_namespace_rules": "object",
+      "excluded_regions": "string",
+      "filter_tags": "string",
+      "host_tags": "string",
+      "role_name": "DatadogAWSIntegrationRole",
+      "secret_access_key": "string"
+    }
+  },
+  "ListAvailableAWSNamespaces": {
+    "responses": {
+      "200": "string",
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GenerateNewAWSExternalID": {
+    "responses": {
+      "200": {
+        "external_id": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "access_key_id": "string",
+      "account_id": "1234567",
+      "account_specific_namespace_rules": "object",
+      "excluded_regions": "string",
+      "filter_tags": "string",
+      "host_tags": "string",
+      "role_name": "DatadogAWSIntegrationRole",
+      "secret_access_key": "string"
+    }
+  }
+}

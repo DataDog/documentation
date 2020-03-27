@@ -1,0 +1,290 @@
+{
+  "GetAllDevices": {
+    "responses": {
+      "200": {
+        "devices": {
+          "height": "integer",
+          "id": "string",
+          "isMobile": "boolean",
+          "name": "string",
+          "width": "integer"
+        }
+      }
+    },
+    "request": {}
+  },
+  "GetAllLocations": {
+    "responses": {
+      "200": {
+        "locations": {
+          "display_name": "string",
+          "id": "integer",
+          "is_active": "boolean",
+          "name": "string",
+          "region": "string"
+        }
+      }
+    },
+    "request": {}
+  },
+  "GetAllTests": {
+    "responses": {
+      "200": {
+        "tests": {
+          "config": "object",
+          "created_at": "string",
+          "created_by": "object",
+          "locations": "string",
+          "message": "string",
+          "modified_at": "string",
+          "modified_by": "object",
+          "name": "string",
+          "options": "object",
+          "overall_state": "integer",
+          "public_id": "string",
+          "status": "string",
+          "stepCount": "integer",
+          "subtype": "string",
+          "tags": "string",
+          "type": "string"
+        }
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "CreateTest": {
+    "responses": {
+      "200": {
+        "config": "object",
+        "created_at": "string",
+        "created_by": "object",
+        "locations": "string",
+        "message": "string",
+        "modified_at": "string",
+        "modified_by": "object",
+        "name": "string",
+        "options": "object",
+        "overall_state": "integer",
+        "public_id": "string",
+        "status": "string",
+        "stepCount": "integer",
+        "subtype": "string",
+        "tags": "string",
+        "type": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "402": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "config": "object",
+      "created_at": "string",
+      "created_by": "object",
+      "locations": "string",
+      "message": "string",
+      "modified_at": "string",
+      "modified_by": "object",
+      "name": "string",
+      "options": "object",
+      "overall_state": "integer",
+      "public_id": "string",
+      "status": "string",
+      "stepCount": "integer",
+      "subtype": "string",
+      "tags": "string",
+      "type": "string"
+    }
+  },
+  "GetBrowserTestLatestResults": {
+    "responses": {
+      "200": {
+        "last_timestamp_fetched": "integer",
+        "results": {
+          "check_time": "number",
+          "probe_dc": "string",
+          "result": "object",
+          "result_id": "string",
+          "status": "integer"
+        }
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "from_ts": "number",
+      "probe_dc": "string",
+      "to_ts": "number"
+    }
+  },
+  "GetBrowserTestResult": {
+    "responses": {
+      "200": {
+        "check": "object",
+        "check_time": "number",
+        "check_version": "integer",
+        "probe_dc": "string",
+        "result": "object",
+        "result_id": "string",
+        "status": "integer"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "DeleteTests": {
+    "responses": {
+      "200": {
+        "deleted_tests": {
+          "deleted_at": "string",
+          "public_id": "string"
+        }
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "public_ids": "string"
+    }
+  },
+  "GetTest": {
+    "responses": {
+      "200": {
+        "config": "object",
+        "created_at": "string",
+        "created_by": "object",
+        "locations": "string",
+        "message": "string",
+        "modified_at": "string",
+        "modified_by": "object",
+        "name": "string",
+        "options": "object",
+        "overall_state": "integer",
+        "public_id": "string",
+        "status": "string",
+        "stepCount": "integer",
+        "subtype": "string",
+        "tags": "string",
+        "type": "string"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UpdateTest": {
+    "responses": {
+      "200": {
+        "config": "object",
+        "created_at": "string",
+        "created_by": "object",
+        "locations": "string",
+        "message": "string",
+        "modified_at": "string",
+        "modified_by": "object",
+        "name": "string",
+        "options": "object",
+        "overall_state": "integer",
+        "public_id": "string",
+        "status": "string",
+        "stepCount": "integer",
+        "subtype": "string",
+        "tags": "string",
+        "type": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "config": "object",
+      "created_at": "string",
+      "created_by": "object",
+      "locations": "string",
+      "message": "string",
+      "modified_at": "string",
+      "modified_by": "object",
+      "name": "string",
+      "options": "object",
+      "overall_state": "integer",
+      "public_id": "string",
+      "status": "string",
+      "stepCount": "integer",
+      "subtype": "string",
+      "tags": "string",
+      "type": "string"
+    }
+  },
+  "GetAPITestLatestResults": {
+    "responses": {
+      "200": {
+        "last_timestamp_fetched": "integer",
+        "results": {
+          "check_time": "number",
+          "probe_dc": "string",
+          "result": "object",
+          "result_id": "string",
+          "status": "integer"
+        }
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "from_ts": "number",
+      "probe_dc": "string",
+      "to_ts": "number"
+    }
+  },
+  "GetAPITestResult": {
+    "responses": {
+      "200": {
+        "check": "object",
+        "check_time": "number",
+        "check_version": "integer",
+        "probe_dc": "string",
+        "result": "object",
+        "result_id": "string",
+        "status": "integer"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "SetTestPauseStatus": {
+    "responses": {
+      "200": "boolean",
+      "400": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "new_status": "string"
+    }
+  }
+}

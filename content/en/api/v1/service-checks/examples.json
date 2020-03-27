@@ -1,0 +1,29 @@
+{
+  "SubmitServiceCheck": {
+    "responses": {
+      "202": {
+        "status": "ok"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "408": {
+        "errors": "Bad Request"
+      },
+      "413": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "check": "app.ok",
+      "host_name": "app.host1",
+      "message": "app is running",
+      "status": "integer",
+      "tags": "string",
+      "timestamp": "integer"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "MuteHost": {
+    "responses": {
+      "200": {
+        "action": "Muted",
+        "end": 1579098130,
+        "hostname": "test.host",
+        "message": "Muting this host for a test!"
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "end": 1579098130,
+      "message": "Muting this host for a test!",
+      "override": "boolean"
+    }
+  },
+  "UnmuteHost": {
+    "responses": {
+      "200": {
+        "action": "Muted",
+        "end": 1579098130,
+        "hostname": "test.host",
+        "message": "Muting this host for a test!"
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetAllHosts": {
+    "responses": {
+      "200": {
+        "host_list": {
+          "aliases": "mycoolhost-1",
+          "apps": "agent",
+          "aws_name": "mycoolhost-1",
+          "host_name": "i-deadbeef",
+          "id": 123456,
+          "is_muted": "boolean",
+          "last_reported_time": 1565000000,
+          "meta": "object",
+          "metrics": "object",
+          "mute_timeout": "integer",
+          "name": "i-hostname",
+          "sources": "aws",
+          "tags_by_source": "object",
+          "up": true
+        },
+        "total_matching": 1,
+        "total_returned": 1
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetHostTotals": {
+    "responses": {
+      "200": {
+        "total_active": "integer",
+        "total_up": "integer"
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  }
+}

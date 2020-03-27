@@ -1,0 +1,71 @@
+{
+  "ListEvents": {
+    "responses": {
+      "200": {
+        "events": {
+          "aggregation_key": "string",
+          "alert_type": "info",
+          "date_happened": "integer",
+          "device_name": "string",
+          "host": "string",
+          "id": "integer",
+          "payload": "{}",
+          "priority": "normal",
+          "related_event_id": "integer",
+          "source_type_name": "string",
+          "tags": "string",
+          "text": "Oh boy!",
+          "title": "Did you hear the news today?",
+          "url": "string"
+        },
+        "status": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "CreateEvent": {
+    "responses": {
+      "202": {
+        "event": "object",
+        "status": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "aggregation_key": "string",
+      "alert_type": "info",
+      "date_happened": "integer",
+      "device_name": "string",
+      "host": "string",
+      "id": "integer",
+      "payload": "{}",
+      "priority": "normal",
+      "related_event_id": "integer",
+      "source_type_name": "string",
+      "tags": "string",
+      "text": "Oh boy!",
+      "title": "Did you hear the news today?",
+      "url": "string"
+    }
+  },
+  "GetEvent": {
+    "responses": {
+      "200": {
+        "event": "object",
+        "status": "string"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  }
+}

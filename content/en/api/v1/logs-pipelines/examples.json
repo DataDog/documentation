@@ -1,0 +1,160 @@
+{
+  "GetLogsPipelineOrder": {
+    "responses": {
+      "200": {
+        "pipeline_ids": "string"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UpdateLogsPipelineOrder": {
+    "responses": {
+      "200": {
+        "pipeline_ids": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "422": {
+        "error": "object"
+      }
+    },
+    "request": {
+      "pipeline_ids": "string"
+    }
+  },
+  "GetAllLogsPipelines": {
+    "responses": {
+      "200": {
+        "filter": "object",
+        "id": "string",
+        "is_enabled": "boolean",
+        "is_read_only": "boolean",
+        "name": "string",
+        "processors": {
+          "is_enabled": "boolean",
+          "name": "string"
+        },
+        "type": "pipeline"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "CreateLogsPipeline": {
+    "responses": {
+      "200": {
+        "filter": "object",
+        "id": "string",
+        "is_enabled": "boolean",
+        "is_read_only": "boolean",
+        "name": "string",
+        "processors": {
+          "is_enabled": "boolean",
+          "name": "string"
+        },
+        "type": "pipeline"
+      },
+      "400": {
+        "error": "object"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "422": {
+        "error": "object"
+      }
+    },
+    "request": {
+      "filter": "object",
+      "id": "string",
+      "is_enabled": "boolean",
+      "is_read_only": "boolean",
+      "name": "string",
+      "processors": {
+        "is_enabled": "boolean",
+        "name": "string"
+      },
+      "type": "pipeline"
+    }
+  },
+  "DeleteLogsPipeline": {
+    "responses": {
+      "400": {
+        "error": "object"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetLogsPipeline": {
+    "responses": {
+      "200": {
+        "filter": "object",
+        "id": "string",
+        "is_enabled": "boolean",
+        "is_read_only": "boolean",
+        "name": "string",
+        "processors": {
+          "is_enabled": "boolean",
+          "name": "string"
+        },
+        "type": "pipeline"
+      },
+      "400": {
+        "error": "object"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UpdateLogsPipeline": {
+    "responses": {
+      "200": {
+        "filter": "object",
+        "id": "string",
+        "is_enabled": "boolean",
+        "is_read_only": "boolean",
+        "name": "string",
+        "processors": {
+          "is_enabled": "boolean",
+          "name": "string"
+        },
+        "type": "pipeline"
+      },
+      "400": {
+        "error": "object"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "422": {
+        "error": "object"
+      }
+    },
+    "request": {
+      "filter": "object",
+      "id": "string",
+      "is_enabled": "boolean",
+      "is_read_only": "boolean",
+      "name": "string",
+      "processors": {
+        "is_enabled": "boolean",
+        "name": "string"
+      },
+      "type": "pipeline"
+    }
+  }
+}
