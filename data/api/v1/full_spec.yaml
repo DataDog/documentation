@@ -3370,21 +3370,11 @@ components:
 
             the list of groups your monitor is broken down on.'
           type: object
-        monitor_id:
-          description: A single monitor identification.
-          format: int64
-          type: integer
-        overall_state:
-          $ref: '#/components/schemas/MonitorOverallStates'
       readOnly: true
       type: object
     MonitorStateGroup:
       description: Monitor state for a single group.
       properties:
-        last_data_ts:
-          description: Lastest data timestamp for this monitor group.
-          format: int64
-          type: integer
         last_nodata_ts:
           description: TODO.
           format: int64
@@ -3401,42 +3391,11 @@ components:
           description: Last timestamp the monitor group triggered.
           format: int64
           type: integer
-        message:
-          description: "A message to include with notifications for this monitor.\
-            \ Email notifications can be sent\nto specific users by using the same\
-            \ \u2018@username\u2019 notation as events."
-          type: string
         name:
           description: The name of the monitor.
           type: string
         status:
           $ref: '#/components/schemas/MonitorOverallStates'
-        triggering_value:
-          $ref: '#/components/schemas/MonitorStateGroupValue'
-      type: object
-    MonitorStateGroupValue:
-      description: TODO.
-      properties:
-        from_ts:
-          description: TODO.
-          format: int64
-          type: integer
-        left:
-          description: TODO.
-          format: double
-          type: number
-        right:
-          description: TODO.
-          format: double
-          type: number
-        to_ts:
-          description: TODO.
-          format: int64
-          type: integer
-        value:
-          description: TODO.
-          format: double
-          type: number
       type: object
     MonitorSummaryWidgetDefinition:
       description: The monitor summary widget displays a summary view of all your
