@@ -77,7 +77,7 @@ Use this option to permanently delete your screenboard. You are prompted to conf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/application#time-frames
+[1]: /dashboards/guide/custom_time_frames
 [2]: /dashboards/sharing/#screenboards
 [3]: /events
 [4]: /account_management/users/default_roles

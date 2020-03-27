@@ -175,6 +175,6 @@ Find out more in the [Log Patterns section][1]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/application#time-frames
+[1]: /dashboards/guide/custom_time_frames
 [2]: /logs/explorer/search
 [3]: /logs/explorer/saved_views
