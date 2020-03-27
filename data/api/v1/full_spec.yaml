@@ -285,29 +285,29 @@ components:
         [Datadog API page](https://app.datadoghq.com/account/login?next=%2Faccount%2Fsettings#api).'
       properties:
         created:
-          description: TODO.
+          description: Date of creation of the API key.
           example: '2019-08-02 15:31:07'
           readOnly: true
           type: string
         created_by:
-          description: TODO.
-          example: example.com
+          description: Datadog user handle that created the API key.
+          example: john@example.com
           readOnly: true
           type: string
         key:
-          description: TODO.
+          description: API key.
           example: 1234512345123456abcabc912349abcd
           maxLength: 32
           minLength: 32
           readOnly: true
           type: string
         name:
-          description: Name of your application key.
+          description: Name of your API key.
           example: example user
           type: string
       type: object
     ApiKeyListResponse:
-      description: TODO.
+      description: List of API and application keys available for a given organization.
       example:
         api_keys:
         - created_by: test_user
@@ -320,7 +320,7 @@ components:
           type: array
       type: object
     ApiKeyResponse:
-      description: TODO.
+      description: An API key with its associated metadata.
       example:
         api_key:
           created_by: test_user
@@ -331,7 +331,7 @@ components:
           $ref: '#/components/schemas/ApiKey'
       type: object
     ApplicationKey:
-      description: TODO.
+      description: An application key with its associated metadata.
       properties:
         hash:
           example: 1234512345123459cda4eb9ced49a3d84fd0138c
@@ -428,7 +428,7 @@ components:
     CanceledDowntimesIds:
       properties:
         cancelled_ids:
-          description: TODO.
+          description: ID of downtimes that were canceled.
           example:
           - 123456789
           - 123456790
@@ -857,7 +857,7 @@ components:
           readOnly: true
           type: integer
         creator_id:
-          description: TODO.
+          description: User ID of the downtime creator.
           example: 123456
           format: int32
           maximum: 2147483647
@@ -868,7 +868,9 @@ components:
           example: false
           type: boolean
         downtime_type:
-          description: TODO.
+          description: 0 for a downtime applied on `*` or all; 1 when the downtime
+            is only scoped to hosts; 2 when the downtime is scoped to anything but
+            hosts.
           example: 2
           format: int32
           maximum: 2147483647
@@ -883,7 +885,7 @@ components:
           nullable: true
           type: integer
         id:
-          description: TODO.
+          description: The downtime ID.
           example: 1625
           format: int64
           readOnly: true
@@ -919,7 +921,7 @@ components:
             type: string
           type: array
         parent_id:
-          description: TODO.
+          description: ID of the parent Downtime.
           example: 123
           format: int64
           nullable: true
@@ -950,7 +952,7 @@ components:
           example: America/New_York
           type: string
         updater_id:
-          description: TODO.
+          description: ID of the last user that updated the downtime.
           example: 123456
           format: int32
           maximum: 2147483647
@@ -1225,7 +1227,7 @@ components:
       - text
       type: object
     GCPAccount:
-      description: TODO.
+      description: Your Google Cloud Platform Account.
       properties:
         auth_provider_x509_cert_url:
           description: Should be https://www.googleapis.com/oauth2/v1/certs.
@@ -1307,7 +1309,8 @@ components:
           description: The metric query. One of `metric_query` or `graph_def` is required.
           type: string
         snapshot_url:
-          description: TODO.
+          description: URL of your [graph snapshot](https://docs.datadoghq.com/metrics/explorer/#snapshot).
+          example: https://app.datadoghq.com/s/f12345678/aaa-bbb-ccc
           type: string
       type: object
     GroupWidgetDefinition:
@@ -1337,34 +1340,46 @@ components:
     HTTPLog:
       properties:
         ddsource:
-          description: TODO.
-          example: python
+          description: 'The integration name associated with your log: the technology
+            from which the log originated.
+
+            When it matches an integration name, Datadog automatically installs the
+            corresponding parsers and facets.
+
+            See [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes).'
+          example: nginx
           type: string
         ddtags:
-          description: TODO.
+          description: Tags associated with your logs.
           example: env:staging,service:payment
           type: string
         hostname:
-          description: TODO.
+          description: The name of the originating host of the log.
           example: i-012345678
           type: string
         message:
-          description: TODO.
+          description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
+
+            of your log. By default, Datadog ingests the value of the message attribute
+            as the body of the log entry.
+
+            That value is then highlighted and displayed in the Logstream, where it
+            is indexed for full text search.'
           example: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
           type: string
       required:
       - name
       type: object
     HTTPLogError:
-      description: TODO.
+      description: Invalid query performed.
       properties:
         code:
-          description: TODO.
+          description: Error code.
           format: int32
           maximum: 2147483647
           type: integer
         message:
-          description: TODO.
+          description: Error message.
           type: string
       required:
       - code
@@ -1540,7 +1555,7 @@ components:
       - metadata
       type: object
     HistoryServiceLevelObjectiveResponse:
-      description: TODO.
+      description: A service level objective history response.
       properties:
         data:
           description: An array of service level objective objects.
@@ -1640,19 +1655,19 @@ components:
     Host:
       properties:
         aliases:
-          description: TODO.
+          description: Host aliases collected by Datadog.
           items:
             example: mycoolhost-1
             type: string
           type: array
         apps:
-          description: TODO.
+          description: The Datadog integrations reporting metrics for the host.
           items:
             example: agent
             type: string
           type: array
         aws_name:
-          description: TODO.
+          description: AWS name of your host.
           example: mycoolhost-1
           type: string
         host_name:
@@ -1660,7 +1675,7 @@ components:
           example: i-deadbeef
           type: string
         id:
-          description: TODO.
+          description: The host ID.
           example: 123456
           format: int64
           type: integer
@@ -1669,12 +1684,12 @@ components:
           example: false
           type: boolean
         last_reported_time:
-          description: TODO.
+          description: Last time the host reported a metric data point.
           example: 1565000000
           format: int64
           type: integer
         meta:
-          description: TODO.
+          description: Metadata associated with your host.
           properties:
             nixV:
               items:
@@ -1683,26 +1698,27 @@ components:
               type: array
           type: object
         metrics:
-          description: TODO.
+          description: Host Metrics collected.
           properties:
             cpu:
-              description: TODO.
+              description: The percent of CPU used (everything but idle).
               example: 99.0
               format: double
               type: number
             iowait:
-              description: TODO.
+              description: The percent of CPU spent waiting on the IO (not reported
+                for all platforms).
               example: 3.2
               format: double
               type: number
             load:
-              description: TODO.
+              description: The system load over the last 15 minutes.
               example: 0.5
               format: double
               type: number
           type: object
         mute_timeout:
-          description: TODO.
+          description: Timeout of the mute applied to your host.
           format: int64
           type: integer
         name:
@@ -1710,7 +1726,7 @@ components:
           example: i-hostname
           type: string
         sources:
-          description: TODO.
+          description: Source or cloud provider associated with your host.
           items:
             example: aws
             type: string
@@ -1721,28 +1737,29 @@ components:
               example: test.example.com.host
               type: string
             type: array
-          description: TODO.
+          description: List of tags for each source (AWS, Datadog Agent, Chef..).
           type: object
         up:
-          description: TODO.
+          description: Displays UP when the expected metrics are received and displays
+            `???` if no metrics are received.
           example: true
           type: boolean
       type: object
     HostListResponse:
-      description: TODO.
+      description: Response with Host information from Datadog.
       properties:
         host_list:
-          description: TODO.
+          description: Array of hosts.
           items:
             $ref: '#/components/schemas/Host'
           type: array
         total_matching:
-          description: TODO.
+          description: Number of host matching the query.
           example: 1
           format: int64
           type: integer
         total_returned:
-          description: TODO.
+          description: Number of host returned.
           example: 1
           format: int64
           type: integer
@@ -1829,10 +1846,10 @@ components:
       - requests
       type: object
     HostMuteResponse:
-      description: TODO.
+      description: Response with the list of muted host for your organization.
       properties:
         action:
-          description: TODO.
+          description: Action applied to the hosts.
           example: Muted
           type: string
         end:
@@ -1845,12 +1862,12 @@ components:
           example: test.host
           type: string
         message:
-          description: TODO.
+          description: Message associated with the Mute.
           example: Muting this host for a test!
           type: string
       type: object
     HostMuteSettings:
-      description: TODO.
+      description: Combination of settings to mute a host.
       properties:
         end:
           description: POSIX timestamp in seconds when the host is unmuted. If omitted,
@@ -1869,10 +1886,10 @@ components:
           type: boolean
       type: object
     HostTags:
-      description: TODO.
+      description: Set of tags to associate with your host.
       properties:
         host:
-          description: TODO.
+          description: Your host name.
           example: test.host
           type: string
         tags:
@@ -1883,12 +1900,14 @@ components:
           type: array
       type: object
     HostTotals:
-      description: TODO.
+      description: Total number of host currently monitored by Datadog.
       properties:
         total_active:
+          description: Total number of active host (UP and ???) reporting to Datadog.
           format: int64
           type: integer
         total_up:
+          description: Number of host that are UP and reporting to Datadog.
           format: int64
           type: integer
       type: object
@@ -1961,7 +1980,7 @@ components:
     IdpResponse:
       properties:
         message:
-          description: TODO.
+          description: Identity provider response.
           example: IdP metadata successfully uploaded for example org
           type: string
       required:
@@ -2000,7 +2019,7 @@ components:
           properties:
             attributes:
               additionalProperties: {}
-              description: TODO.
+              description: JSON object of attributes from your log.
               example:
                 customAttribute: 123
                 duration: 2345
@@ -2010,23 +2029,35 @@ components:
               example: i-0123
               type: string
             message:
-              description: TODO.
+              description: 'The message [reserved attribute](https://docs.datadoghq.com/logs/log_collection/#reserved-attributes)
+
+                of your log. By default, Datadog ingests the value of the message
+                attribute as the body of the log entry.
+
+                That value is then highlighted and displayed in the Logstream, where
+                it is indexed for full text search.'
               example: host connected to remote
               type: string
             service:
-              description: TODO.
+              description: 'The name of the application or service generating the
+                log events.
+
+                It is used to switch from Logs to APM, so make sure you define the
+                same
+
+                value when you use both products.'
               example: agent
               type: string
             tags:
-              description: TODO.
+              description: Array of tags associated with your log.
               example:
               - team:A
               format: array
               items:
-                description: TODO.
+                description: Tag associated with your log.
                 format: string
             timestamp:
-              description: TODO.
+              description: Timestamp of your log.
               example: '2019-01-02T09:42:36.320Z'
               format: date-time
               type: string
@@ -3094,14 +3125,14 @@ components:
     Monitor:
       properties:
         created:
-          description: TODO.
+          description: Timestamp of the monitor creation.
           format: date-time
           readOnly: true
           type: string
         creator:
           $ref: '#/components/schemas/Creator'
         deleted:
-          description: TODO.
+          description: Whether or not the monitor is deleted. (Always `null`)
           format: date-time
           nullable: true
           readOnly: true
@@ -3115,16 +3146,16 @@ components:
           description: A message to include with notifications for this monitor.
           type: string
         modified:
-          description: TODO.
+          description: Last timestamp when the monitor was edited.
           format: date-time
           readOnly: true
           type: string
         multi:
-          description: TODO.
+          description: Whether or not the monitor is broken down on different groups.
           readOnly: true
           type: boolean
         name:
-          description: TODO.
+          description: The monitor name.
           type: string
         options:
           $ref: '#/components/schemas/MonitorOptions'
@@ -3135,7 +3166,7 @@ components:
         state:
           $ref: '#/components/schemas/MonitorState'
         tags:
-          description: TODO.
+          description: Tags associated to your monitor.
           items:
             type: string
           type: array
@@ -3143,7 +3174,8 @@ components:
           $ref: '#/components/schemas/MonitorType'
       type: object
     MonitorDeviceID:
-      description: TODO.
+      description: ID of the device the Synthetics monitor is running on. Same as
+        SyntheticsDeviceID.
       enum:
       - laptop_large
       - tablet
@@ -3154,30 +3186,32 @@ components:
       - TABLET
       - MOBILE_SMALL
     MonitorOptions:
-      description: TODO.
+      description: List of options associated with your monitor.
       properties:
         aggregation:
-          description: TODO.
+          description: Type of aggregation performed in the monitor query.
           properties:
             group_by:
+              description: Group to break down the monitor on.
               example: host
               type: string
             metric:
-              description: TODO.
-              example: count
+              description: Metric name used in the monitor.
+              example: metrics.name
               type: string
             type:
+              description: Metric type used in the monitor.
               example: count
               type: string
           readOnly: true
           type: object
         device_ids:
-          description: TODO.
+          description: IDs of the device the Synthetics monitor is running on.
           items:
             $ref: '#/components/schemas/MonitorDeviceID'
           type: array
         enable_logs_sample:
-          description: TODO.
+          description: Whether or not to send a log sample when the log monitor triggers.
           type: boolean
         escalation_message:
           default: none
@@ -3285,10 +3319,11 @@ components:
             format: int64
             nullable: true
             type: integer
-          description: TODO.
+          deprecated: true
+          description: Information about the downtime applied to the monitor.
           type: object
         synthetics_check_id:
-          description: TODO.
+          description: ID of the corresponding Synthetic check.
           format: int64
           nullable: true
           type: integer
@@ -3305,7 +3340,7 @@ components:
           type: integer
       type: object
     MonitorOverallStates:
-      description: TODO.
+      description: The different states your monitor can be in.
       enum:
       - Alert
       - Ignored
@@ -3325,80 +3360,42 @@ components:
       - UNKNOWN
       - WARN
     MonitorState:
-      description: TODO.
+      description: Wrapper object with the different monitor states.
       properties:
         groups:
           additionalProperties:
             $ref: '#/components/schemas/MonitorStateGroup'
-          description: TODO.
+          description: 'Dictionary where the keys are groups (comma separated lists
+            of tags) and the values are
+
+            the list of groups your monitor is broken down on.'
           type: object
-        monitor_id:
-          description: A single monitor identification.
-          format: int64
-          type: integer
-        overall_state:
-          $ref: '#/components/schemas/MonitorOverallStates'
       readOnly: true
       type: object
     MonitorStateGroup:
-      description: TODO.
+      description: Monitor state for a single group.
       properties:
-        last_data_ts:
-          description: TODO.
-          format: int64
-          type: integer
         last_nodata_ts:
           description: TODO.
           format: int64
           type: integer
         last_notified_ts:
-          description: TODO.
+          description: Timestamp of the last notification sent for this monitor group.
           format: int64
           type: integer
         last_resolved_ts:
-          description: TODO.
+          description: Lastest timestamp the monitor group was resolved.
           format: int64
           type: integer
         last_triggered_ts:
-          description: TODO.
+          description: Last timestamp the monitor group triggered.
           format: int64
           type: integer
-        message:
-          description: "A message to include with notifications for this monitor.\
-            \ Email notifications can be sent\nto specific users by using the same\
-            \ \u2018@username\u2019 notation as events."
-          type: string
         name:
           description: The name of the monitor.
           type: string
         status:
           $ref: '#/components/schemas/MonitorOverallStates'
-        triggering_value:
-          $ref: '#/components/schemas/MonitorStateGroupValue'
-      type: object
-    MonitorStateGroupValue:
-      description: TODO.
-      properties:
-        from_ts:
-          description: TODO.
-          format: int64
-          type: integer
-        left:
-          description: TODO.
-          format: double
-          type: number
-        right:
-          description: TODO.
-          format: double
-          type: number
-        to_ts:
-          description: TODO.
-          format: int64
-          type: integer
-        value:
-          description: TODO.
-          format: double
-          type: number
       type: object
     MonitorSummaryWidgetDefinition:
       description: The monitor summary widget displays a summary view of all your
@@ -3441,7 +3438,7 @@ components:
       - query
       type: object
     MonitorThresholdWindowOptions:
-      description: TODO.
+      description: Alerting time window options.
       properties:
         recovery_window:
           description: Describes how long an anomalous metric must be normal before
@@ -3455,19 +3452,19 @@ components:
           type: string
       type: object
     MonitorThresholds:
-      description: TODO.
+      description: List of the different monitor threshold available.
       properties:
         critical:
-          description: TODO.
+          description: The monitor CRITICAL threshold.
           format: double
           type: number
         critical_recovery:
-          description: TODO.
+          description: The monitor CRITICAL recovery threshold.
           format: double
           nullable: true
           type: number
         ok:
-          description: TODO.
+          description: The monitor OK threshold.
           format: double
           nullable: true
           type: number
@@ -3477,12 +3474,12 @@ components:
           nullable: true
           type: number
         warning:
-          description: TODO.
+          description: The monitor WARNING threshold.
           format: double
           nullable: true
           type: number
         warning_recovery:
-          description: TODO.
+          description: The monitor WARNING recovery threshold.
           format: double
           nullable: true
           type: number
@@ -3555,7 +3552,7 @@ components:
               type: string
           type: object
         created:
-          description: TODO.
+          description: Date of the organization creation.
           example: '2019-09-26 17:28:28'
           readOnly: true
           type: string
@@ -3575,7 +3572,8 @@ components:
           description: A JSON array of settings.
           properties:
             private_widget_share:
-              description: TODO.
+              description: Whether or not the organization users can share widgets
+                outside of Datadog.
               example: false
               type: boolean
             saml:
@@ -3595,22 +3593,24 @@ components:
                 which is a list of domains without the @ symbol.
               properties:
                 domains:
-                  description: TODO.
+                  description: List of domains where the SAML automated user creation
+                    is enabled.
                   items:
                     example: example.com
                     type: string
                   type: array
                 enabled:
-                  description: TODO.
+                  description: Whether or not the automated user creation based on
+                    SAML domain is enabled.
                   example: false
                   type: boolean
               type: object
             saml_can_be_enabled:
-              description: TODO.
+              description: Whether or not SAML can be enabled for this organization.
               example: false
               type: boolean
             saml_idp_endpoint:
-              description: TODO.
+              description: Identity provider endpoint for SAML authentication.
               example: https://my.saml.endpoint
               type: string
             saml_idp_initiated_login:
@@ -3621,11 +3621,12 @@ components:
                   type: boolean
               type: object
             saml_idp_metadata_uploaded:
-              description: TODO.
+              description: Whether or not a SAML identity provider metadata file was
+                provided to the Datadog organization.
               example: false
               type: boolean
             saml_login_url:
-              description: TODO.
+              description: URL for SAML loging.
               example: https://my.saml.login.url
               type: string
             saml_strict_mode:
@@ -3687,7 +3688,7 @@ components:
           $ref: '#/components/schemas/User'
       type: object
     OrgListResponse:
-      description: TODO.
+      description: Response with the list of organizations.
       properties:
         orgs:
           items:
@@ -3695,7 +3696,7 @@ components:
           type: array
       type: object
     OrgResponse:
-      description: TODO.
+      description: Response with an organization.
       properties:
         org:
           $ref: '#/components/schemas/Org'
@@ -3886,7 +3887,8 @@ components:
       - NINETY_DAYS
       - ALL
     SLOThreshold:
-      description: TODO.
+      description: SLO thresholds (target and optionally warning) for a single time
+        window.
       properties:
         target:
           description: 'The target value for the service level indicator within the
@@ -3928,7 +3930,7 @@ components:
       - target
       type: object
     SLOTimeframe:
-      description: TODO.
+      description: The SLO time window options.
       enum:
       - 7d
       - 30d
@@ -4034,7 +4036,9 @@ components:
       - requests
       type: object
     Series:
-      description: TODO.
+      description: 'A metric to submit to Datadog.
+
+        See [Datadog metrics](https://docs.datadoghq.com/developers/metrics/#custom-metrics-properties).'
       properties:
         host:
           description: The name of the host that produced the metric.
@@ -4243,7 +4247,7 @@ components:
       - thresholds
       - type
     ServiceLevelObjectiveDeleted:
-      description: TODO.
+      description: A response list of all service level objective deleted.
       properties:
         data:
           description: 'An array containing the ID of the deleted service level objective
@@ -4256,7 +4260,7 @@ components:
       - data
       type: object
     ServiceLevelObjectiveListResponse:
-      description: TODO.
+      description: A response with one or more service level objective.
       properties:
         data:
           description: An array of service level objective objects.
@@ -4275,7 +4279,8 @@ components:
       - data
       type: object
     ServiceLevelObjectiveResponse:
-      description: TODO.
+      description: A service level objective response containing a single service
+        level objective.
       properties:
         data:
           $ref: '#/components/schemas/ServiceLevelObjective'
@@ -5590,13 +5595,14 @@ components:
     UsageFargateResponse:
       properties:
         usage:
-          description: TODO.
+          description: Array with the number of hourly Fargate tasks recorded for
+            a given organization.
           items:
             $ref: '#/components/schemas/UsageFargateHour'
           type: array
       type: object
     UsageHostHour:
-      description: TODO.
+      description: Number of hosts/containers recorded for each hour for a given organization.
       properties:
         agent_host_count:
           description: 'Contains the total number of infrastructure hosts reporting
@@ -5794,7 +5800,8 @@ components:
           type: integer
       type: object
     UsageSummaryDateOrg:
-      description: TODO.
+      description: Global hourly report of all data billed by Datadog for a given
+        organization.
       properties:
         agent_host_top99p:
           description: Shows the 99th percentile of all agent hosts over all hours
@@ -6045,7 +6052,8 @@ components:
     UsageSyntheticsResponse:
       properties:
         usage:
-          description: TODO.
+          description: Array with the number of hourly Synthetics test run for a given
+            organization.
           items:
             $ref: '#/components/schemas/UsageSyntheticsHour'
           type: array
@@ -6069,7 +6077,7 @@ components:
           type: array
       type: object
     UsageTopAvgMetricsHour:
-      description: TODO.
+      description: Number of hourly recorded custom metrics for a given organization.
       properties:
         avg_metric_hour:
           description: Average number of timeseries per hour in which the metric occurs.
@@ -6086,10 +6094,11 @@ components:
           type: string
       type: object
     UsageTopAvgMetricsResponse:
-      description: TODO.
+      description: Response containing the number of hourly recorded custom metrics
+        for a given organization.
       properties:
         usage:
-          description: TODO.
+          description: Number of hourly recorded custom metrics for a given organization.
           items:
             $ref: '#/components/schemas/UsageTopAvgMetricsHour'
           type: array
@@ -6108,7 +6117,8 @@ components:
     UsageTraceResponse:
       properties:
         usage:
-          description: TODO.
+          description: Array with the number of hourly traces indexed for a given
+            organization.
           items:
             $ref: '#/components/schemas/UsageTraceHour'
           type: array
@@ -6133,7 +6143,7 @@ components:
           format: email
           type: string
         icon:
-          description: TODO.
+          description: Gravatar icon associated to the user.
           example: /path/to/matching/gravatar/icon
           readOnly: true
           type: string
@@ -6142,28 +6152,28 @@ components:
           example: test user
           type: string
         verified:
-          description: TODO.
+          description: Whether or not the user logged in Datadog at least once.
           example: true
           readOnly: true
           type: boolean
       type: object
     UserDisableResponse:
-      description: TODO.
+      description: Array of user disabled for a given organization.
       properties:
         message:
           type: string
       type: object
     UserListResponse:
-      description: TODO.
+      description: Array of Datadog users for a given organization.
       properties:
         users:
-          description: TODO.
+          description: Array of users.
           items:
             $ref: '#/components/schemas/User'
           type: array
       type: object
     UserResponse:
-      description: TODO.
+      description: A Datadog User.
       properties:
         user:
           $ref: '#/components/schemas/User'
