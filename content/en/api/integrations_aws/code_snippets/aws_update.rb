@@ -15,7 +15,8 @@ new_config = {
   "account_id": '<NEW_AWS_ACCOUNT_ID>',
   "host_tags": ["<KEY>:<VALUE>"],
   "filter_tags": ["<KEY>:<VALUE>"],
-  "role_name": '<NEW_AWS_ROLE_NAME>'
+  "role_name": '<NEW_AWS_ROLE_NAME>',
+  "excluded_regions": ["us-east-1", "us-west-1"]
 }
 
 dog = Dogapi::Client.new(api_key, app_key)

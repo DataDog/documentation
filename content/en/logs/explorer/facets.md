@@ -53,7 +53,7 @@ Use measures when you need:
 - To **range filter** your logs. For instance, create a measure on the execution time of [Ansible][20] tasks, and see the list of servers having the most runs taking more than 10s.
 - To **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][21] microservice. You can then search all the logs, starting with the one with the highest amount.
 
-#### Types {#types-qualitative-facets}
+#### Types{#types-qualitative-facets}
 
 Measures come with either a (long) integer or double value, for equivalent capabilities.
 
@@ -195,7 +195,7 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/
+[1]: /logs/search_syntax/
 [2]: /logs/explorer/analytics/
 [3]: /logs/explorer/patterns/
 [4]: /monitors/monitor_types/log/
@@ -212,7 +212,7 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [15]: /integrations/nginx/
 [16]: /logs/processing/processors/?tab=ui#geoip-parser
 [17]: /integrations/kong/
-[18]: /logs/explorer/search/#search-syntax
+[18]: /logs/search_syntax
 [19]: /integrations/varnish/
 [20]: /integrations/ansible/
 [21]: /integrations/python/

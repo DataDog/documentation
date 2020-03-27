@@ -224,7 +224,7 @@ L'interface utilisateur de Datadog utilise les tags pour définir des métadonn�
 
 ## Rechercher des tags de span personnalisés depuis l'interface utilisateur de Datadog
 
-2) **Accédez à la page Services** et cliquez sur le [service][5] auquel vous avez ajouté des tags. **Faites défiler la page et cliquez sur la ressource spécifique** à laquelle le tag a été ajouté dans le tableau des [ressources][6]. **Faites défiler la page jusqu'au tableau des traces.**
+2) **Accédez à la page Services** et cliquez sur le [service][5] auquel vous avez ajouté des tags. **Faites défiler la page et cliquez sur la ressource spécifique** à laquelle le tag a été ajouté dans le tableau des [ressources][4]. **Faites défiler la page jusqu'au tableau des traces.**
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Page Ressource" style="width:90%;">}}
 
@@ -238,15 +238,15 @@ L'écran qui apparaît affiche un **flamegraph** en haut et des fenêtres d’in
 
 La partie inférieure de cette vue comprend des informations supplémentaires sur la trace ou toute span sélectionnée. De là, vous pouvez voir l'ensemble des tags par défaut ainsi que ceux qui ont été inclus manuellement. Vous avez également la possibilité de basculer entre les vues pour afficher les informations sur le host et les logs associés.
 
-<div class="alert alert-info">Pour activer les logs dans cette vue, vous devez activer la collecte de logs puis <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/?tab=java" target=_blank>associer vos logs à vos traces</a></div>
+<div class="alert alert-info">Pour activer les logs dans cette vue, vous devez activer la collecte de logs puis <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/" target=_blank>associer vos logs à vos traces</a>.</div>
 
 ## Exploiter vos tags de span personnalisés avec App Analytics
 
 <div class="alert alert-info">Cette section part du principe que vous avez <a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>activé la fonctionnalité App Analytics.</a></div>
 
-4) **Accédez à la [page Recherche de traces][7]**.
+4) **Accédez à la [page Trace Search][6]**.
 
-La page Recherche de traces vous permet d'identifier les [traces]8] et les spans analysées spécifiques qui vous intéressent. De là, vous pouvez appliquer un filtre d'intervalle à un ensemble de tags par défaut (tels que `Env`,` Service`, `Resource` et [bien d'autres][9]).
+La page Trace Search vous permet d'identifier les [traces][1] et les spans analysées spécifiques qui vous intéressent. Depuis cette vue, vous pouvez filtrer un ensemble de tags par défaut (tels que `Env`,` Service`, `Resource` et [bien d'autres][7]) en appliquant un intervalle.
 
 5) **Trouvez une trace qui possède le nouveau tag**. Pour ce faire, utilisez l'explorateur de facettes sur la gauche. Recherchez le nom de la ressource que vous avez définie au début de ce guide, puis cliquez sur l'une des lignes que vous voyez à cet endroit.
 
@@ -260,9 +260,9 @@ Vous pouvez désormais spécifier le nom d'affichage de votre facette ainsi que 
 
 La facette que vous avez créée devrait maintenant apparaître dans l'explorateur de facettes. Utilisez la case `Search facets` pour la retrouver facilement.
 
-6) **Accédez à la page [App Analytics][10].**
+6) **Accédez à la page [App Analytics][8].**
 
-La page App Analytics est un outil de création de requêtes visuel qui vous permet d'inspecter vos traces sans aucune limite de cardinalité. Il s'appuie sur les facettes pour filtrer et définir le contexte de la requête. Pour plus d'informations, consultez la section [App Analytics][11].
+La page App Analytics est un outil de création de requêtes visuel qui vous permet d'inspecter vos traces sans aucune limite de cardinalité. Il s'appuie sur les facettes pour filtrer et définir le contexte de la requête. Pour plus d'informations, consultez la section [App Analytics][9].
 
 7) **Choisissez le service** sur lequel vous avez travaillé dans la liste des facettes de service, **sélectionnez Error** dans la liste des statuts et **sélectionnez `customer_id** (ou tout autre tag que vous avez ajouté à vos spans) dans le champ group by.
 
@@ -270,7 +270,7 @@ La page App Analytics est un outil de création de requêtes visuel qui vous per
 
 8) **Désélectionnez l'option Error** de la requête, **faites passer la mesure de `count *` à `Duration`**, puis **définissez le type de graphique sur `Top List`**.
 
-La liste des clients associés aux requêtes moyennes les plus lentes s'affiche alors. **Remarque** : si vous souhaitez vous assurer que vos clients ne dépassent jamais un certain seuil de performance, vous pouvez [exporter cette requête vers un monitor][12]. Vous pouvez également enregistrer cette visualisation dans un dashboard afin de la surveiller.
+La liste des clients associés aux requêtes moyennes les plus lentes s'affiche alors. **Remarque** : si vous souhaitez vous assurer que vos clients ne dépassent jamais un certain seuil de performance, vous pouvez [exporter cette requête vers un monitor][10]. Vous pouvez également enregistrer cette visualisation dans un dashboard afin de la surveiller.
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="span md 7" video="true"  style="width:90%;">}}
 
@@ -285,12 +285,10 @@ Enfin, vous pouvez également afficher l'ensemble des traces associées à votre
 [1]: /fr/tracing/visualization/#trace
 [2]: /fr/tracing/visualization/#spans
 [3]: /fr/tracing/visualization/#span-tags
-[4]: https://docs.datadoghq.com/fr/tracing/visualization/#resources
+[4]: /fr/tracing/visualization/#resources
 [5]: /fr/tracing/visualization/#services
-[6]: /fr/tracing/visualization/#resources
-[7]: https://app.datadoghq.com/apm/search
-[8]: https://docs.datadoghq.com/fr/tracing/visualization/#trace
-[9]: https://docs.datadoghq.com/fr/tracing/app_analytics/search
-[10]: https://app.datadoghq.com/apm/search/analytics
-[11]: https://docs.datadoghq.com/fr/tracing/app_analytics/analytics
-[12]: https://docs.datadoghq.com/fr/tracing/guide/alert_anomalies_p99_database
+[6]: https://app.datadoghq.com/apm/search
+[7]: /fr/tracing/app_analytics/search
+[8]: https://app.datadoghq.com/apm/search/analytics
+[9]: /fr/tracing/app_analytics/analytics
+[10]: /fr/tracing/guide/alert_anomalies_p99_database

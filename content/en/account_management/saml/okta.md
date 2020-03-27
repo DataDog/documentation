@@ -14,12 +14,10 @@ further_reading:
 
 It's recommended that you set up Datadog as an Okta application manually, as opposed to using a 'pre-configured' configuration.
 
-[Consult the dedicated Okta documentation, to know how to Configure SAML 2.0 for Datadog][1]
-
 ## General Details
 
 * **Single Sign On URL**: https://app.datadoghq.com/account/saml/assertion
-    (NOTE: If using IdP initiated login, use a public ID-specific URL which is generated after enabling IdP initiated login in Datadog. Find this URL at the '[Configure SAML][2]' page, in the 'Assertion Consumer Service URL' field. Example URL: `https://app.datadoghq.com/account/saml/assertion/id/` This also applies to the **Recipient URL** and the **Destination URL** fields respectively.)
+    (NOTE: If using IdP initiated login, use a public ID-specific URL which is generated after enabling IdP initiated login in Datadog. Find this URL at the '[Configure SAML][1]' page, in the 'Assertion Consumer Service URL' field. Example URL: `https://app.datadoghq.com/account/saml/assertion/id/` This also applies to the **Recipient URL** and the **Destination URL** fields respectively.)
 
 * **Recipient URL**: https://app.datadoghq.com/account/saml/assertion (or check the box labeled "Use this for Recipient URL and Destination URL" in Okta)
 
@@ -50,15 +48,14 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 * **sn**: user.lastName
 * **givenName**: user.firstName
 
-Additional Information on configuring SAML for your Datadog account can be found [on the dedicated SAML documentation page][3]:
+Additional Information on configuring SAML for your Datadog account can be found [on the dedicated SAML documentation page][2]:
 
-In the event that you need to upload an `IDP.XML` file to Datadog before being able to fully configure the application in Okta, see [acquiring the idp.xml metadata file for a SAML template App article][4] for field placeholder instructions.
+In the event that you need to upload an `IDP.XML` file to Datadog before being able to fully configure the application in Okta, see [acquiring the idp.xml metadata file for a SAML template App article][3] for field placeholder instructions.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: http://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-for-DataDog.html
-[2]: https://app.datadoghq.com/saml/saml_setup
-[3]: /account_management/saml
-[4]: https://support.okta.com/help/s/article/How-do-we-download-the-IDP-XML-metadata-file-from-a-SAML-Template-App
+[1]: https://app.datadoghq.com/saml/saml_setup
+[2]: /account_management/saml
+[3]: https://support.okta.com/help/s/article/How-do-we-download-the-IDP-XML-metadata-file-from-a-SAML-Template-App

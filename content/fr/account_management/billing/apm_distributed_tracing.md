@@ -73,15 +73,26 @@ Agent exécuté sur 20 nœuds worker dans Kubernetes et envoi de 20 millions d
 
 Dans le cas de Kubernetes, l'APM est facturé par nœud et non par pod.
 
-### FAQ
+### Cas nº 6 : fonctions Lambda et spans analysées
+
+Appel continu d'une fonction Lambda toutes les heures pendant un mois et envoi de 20 millions de spans analysées.
+
+| Unité de facturation     | Quantité   | Prix                                                                       | Formule   | Sous-total           |
+|-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
+| Fonction Lambda   | 1          | [5 $ par mois][7]                                               | 1 * 5 $  | 5 $               |
+| Spans analysées    | 20 millions | 1,70 $ par million de spans analysées | 20 * 1,70 $ | 34 $               |
+| Total             |            |                                                                             | 5 $ + 34 $ | **39 $ par mois** |
+
+
+## FAQ
 
 **1. Comment un « host d'APM » est-il défini pour la facturation ?**
 
-Un [host][3] est une instance de système d'exploitation physique ou virtuel. Le nombre de hosts que vous surveillez actuellement dans le service Infrastructure de Datadog est mesuré toutes les heures. Pour la facturation de l'APM, le nombre de hosts sur lesquels l'[APM est installé][7] et qui envoient des traces est calculé toutes les heures. À la fin du mois, le prix qui vous est facturé est calculé en fonction du 99e centile d'utilisation des [hosts d'APM][4].
+Un [host][3] est une instance de système d'exploitation physique ou virtuel. Le nombre de hosts que vous surveillez actuellement dans le service Infrastructure de Datadog est mesuré toutes les heures. Pour la facturation de l'APM, le nombre de hosts sur lesquels l'[APM est installé][8] et qui envoient des traces est calculé toutes les heures. À la fin du mois, le prix qui vous est facturé est calculé en fonction du 99e centile d'utilisation des [hosts d'APM][4].
 
 **2. Comment le tarif facturé est-il calculé en cas de déploiement d'un Agent par conteneur ?**
 
-Nous vous conseillons d'[exécuter][8] un Agent par host sous-jacent en cas de déploiement sur des conteneurs. Si vous souhaitez malgré tout exécuter un Agent par conteneur, chaque conteneur est considéré comme un host distinct. Ainsi, le prix s'élève à (prix par host d'APM) * (nombre de conteneurs)
+Nous vous conseillons d'[exécuter][9] un Agent par host sous-jacent en cas de déploiement sur des conteneurs. Si vous souhaitez malgré tout exécuter un Agent par conteneur, chaque conteneur est considéré comme un host distinct. Ainsi, le prix s'élève à (prix par host d'APM) * (nombre de conteneurs).
 
 **3. Comment la facture est-elle calculée en cas redimensionnement soudain de mon environnement ?**
 
@@ -93,11 +104,11 @@ Kubernetes crée des conteneurs pause pour obtenir l'adresse IP du pod respectif
 
 **5. Le nombre de hosts facturés tient-il compte de mes services ?**
 
-L'APM est facturé en fonction du nombre de [hosts][3] déployés avec des Agents qui envoient des traces et non en fonction du nombre de services. La fonctionnalité App Analytics est facturée en fonction du nombre de [spans analysées][9]. Pour estimer le nombre de spans analysées que chaque service peut envoyer, utilisez l'[Estimateur d'événements][8].
+L'APM est facturé en fonction du nombre de [hosts][3] déployés avec des Agents qui envoient des traces et non en fonction du nombre de services. La fonctionnalité App Analytics est facturée en fonction du nombre de [spans analysées][10]. Pour estimer le nombre de spans analysées que chaque service peut envoyer, utilisez l'[Estimateur d'événements][9].
 
 **6. Est-il possible d'utiliser App Analytics sans recourir à l'APM ?**
 
-Non. La fonctionnalité App Analytics est uniquement disponible avec l'APM, qui est facturé en fonction du nombre de spans analysées.
+Non. La fonctionnalité App Analytics est uniquement disponible avec l'APM, qui est facturé en fonction du nombre de spans analysées.
 
 ## Pour aller plus loin
 
@@ -106,12 +117,15 @@ Non. La fonctionnalité App Analytics est uniquement disponible avec l'APM, qui 
     {{< nextlink href="account_management/billing/usage_control_apm/" >}}Estimer et contrôler l'utilisation de l'APM{{< /nextlink >}}
 {{< /whatsnext >}}
 
+
+
 [1]: /fr/tracing
 [2]: /fr/tracing/app_analytics/?tab=java
 [3]: /fr/account_management/billing/pricing/#infrastructure-monitoring
 [4]: /fr/account_management/billing/pricing/#apm
 [5]: mailto:sales@datadoghq.com
 [6]: mailto:success@datadoghq.com
-[7]: /fr/tracing/send_traces/#datadog-agent
-[8]: /fr/account_management/billing
-[9]: /fr/tracing/visualization
+[7]: https://docs.datadoghq.com/fr/account_management/billing/serverless/#serverless-functions
+[8]: /fr/tracing/send_traces/#datadog-agent
+[9]: /fr/account_management/billing
+[10]: /fr/tracing/visualization

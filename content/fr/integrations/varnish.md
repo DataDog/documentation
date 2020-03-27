@@ -119,7 +119,6 @@ _Disponible à partir des versions > 6.0 de l'Agent_
      - type: file
        path: /var/log/varnish/varnishncsa.log
        source: varnish
-       sourcecategory: http_web_access
        service: varnish
    ```
 

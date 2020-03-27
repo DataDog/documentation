@@ -34,4 +34,4 @@ external_redirect: '/api/#logs-indexes'
 
 **注**: このエンドポイントを使用するには、API キーおよびアプリケーションキーと共に管理者権限が必要です。
 
-[1]: https://docs.datadoghq.com/ja/logs/explorer/search/#search-syntax
+[1]: /ja/logs/explorer/search/#search-syntax

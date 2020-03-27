@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.3.0",
+        "check": "php_fpm.can_ping",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト", "ping_url"],
+        "name": "Can Ping",
+        "description": " Agent が PHP-FPM ping URL から ping を取得できない場合は `CRITICAL` を返します。"
+    }
+]

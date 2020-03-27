@@ -16,6 +16,7 @@ curl -X POST \
         "account_specific_namespace_rules": {
         	"auto_scaling": false,
         	"opsworks": false
-        }
+        },
+        "excluded_regions": ["us-east-1", "us-west-1"]
     }'\
 "https://api.datadoghq.com/api/v1/integration/aws"

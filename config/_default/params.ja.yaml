@@ -2,10 +2,10 @@ site_name: Datadogでインフラストラクチャーとアプリケーショ�
 meta_image: datadog_logo_share_tt.png
 meta_title: Datadogを始めてみましょう
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
-disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
+disclaimer: このページは英語では対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 announcement_banner:
-  desktop_message: ネットワーク パフォーマンス モニタリングの正式提供を開始しました！
-  mobile_message: ネットワーク パフォーマンス モニタリング提供開始!
-  link: 'https://www.datadoghq.com/blog/dash-2019-new-feature-roundup/'
+  desktop_message: 'Datadog の調査レポート: サーバーレスの状態'
+  mobile_message: 'レポート: サーバーレスの状態'
+  link: 'https://www.datadoghq.com/state-of-serverless/'
   exclude: []
-translate_status_banner: "このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。"
+translate_status_banner: この翻訳は最新ではありません。最新の英語版についてはこちらをクリックしてください

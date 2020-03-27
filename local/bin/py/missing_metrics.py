@@ -15,8 +15,9 @@ tempdir = (
 
 def get_csv_metrics(tempdir):
   csv_files = glob.glob(tempdir + "/extracted/**/*/*metadata.csv", recursive=True)
-
   csv_metrics = {}
+  t = ('aws',)
+
   for csv_file in csv_files:
     with open(csv_file, 'r') as c_file:
       csv_reader = csv.reader(c_file, delimiter=',')
@@ -24,12 +25,17 @@ def get_csv_metrics(tempdir):
         if len(row) > 0:
           if row[0] != 'metric_name':
             csv_metrics[row[0]] = 1
-  return csv_metrics
+            metric = row[0].split('.')
+            if metric[0] not in t:
+              if metric[0] != 'trace' and metric[0] != 'datadog':
+                t = t + (metric[0],)
+  return [csv_metrics, t]
 
 
-def get_dd_metrics(csv_metrics, keys):
-  cloud = ('aws','azure', 'gcp') # tuple
-  ignore = ['isatap', '.p90', '.p95', '.p99', 'gcp.logging.user.', 'gcp.custom.','aws.ec2.iam_credentials_expiration_seconds']
+def get_dd_metrics(csv_metrics, keys, t):
+  print(t)
+  cloud = ('aws','azure', 'gcp')
+  ignore = ['isatap', '.p5', '.p7', '.p9', 'gcp.logging.user.', 'gcp.custom.', 'aws.ec2.iam_credentials_expiration_seconds']
 
   # Datadog Demo account
   options = {
@@ -54,7 +60,7 @@ def get_dd_metrics(csv_metrics, keys):
 
   for metric in dd_metrics:
     i = 0
-    if metric.startswith(cloud):
+    if metric.startswith(t):
       if metric not in csv_metrics:
         for word in ignore:
           if word in metric:
@@ -62,11 +68,18 @@ def get_dd_metrics(csv_metrics, keys):
         if i == 0:
           #print(metric)
           docs_tags = metric.split('.')
-          metrics_send.append({
-            'metric': 'docs.missing.metrics',
-            'points': 1,
-            'tags': ['docs_metric:' + metric, 'docs_cloud:' + docs_tags[0], 'docs_ns:' + docs_tags[1]]
-          })
+          if docs_tags[0] in cloud:
+            metrics_send.append({
+              'metric': 'docs.missing.metrics',
+              'points': 1,
+              'tags': ['docs_metric:' + metric, 'docs_cloud:' + docs_tags[0], 'docs_ns:' + docs_tags[1]]
+            })
+          else:
+            metrics_send.append({
+              'metric': 'docs.missing.metrics',
+              'points': 1,
+              'tags': ['docs_metric:' + metric, 'docs_ns:' + docs_tags[0]]
+            })
   #print(len(metrics_send))
   return metrics_send
 
@@ -94,7 +107,7 @@ if __name__ == '__main__':
   parser.add_option("-b", "--corpappkey", help="corp app key", default=None)
   options, args = parser.parse_args()
   print('\x1b[32mINFO\x1b[0m: Getting dd metrics...')
-  metrics = get_dd_metrics(csv_metrics, options)
+  metrics = get_dd_metrics(csv_metrics[0], options, csv_metrics[1])
 
   if len(metrics) != 0:
     print('\x1b[32mINFO\x1b[0m: Posting dd metrics...')

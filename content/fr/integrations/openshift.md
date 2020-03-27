@@ -38,7 +38,7 @@ Red Hat OpenShift est une plateforme d'applications de conteneur open source ba
 
 ### Installation
 
-Pour installer l'Agent, consultez les [instructions d'installation de l'Agent][1] pour Kubernetes. La configuration par défaut cible OpenShift 3.7.0+ et OpenShift 4.0+, car elle repose sur des fonctionnalités et des endpoints ajoutés dans cette version.
+Pour installer l'Agent, consultez les [instructions d'installation de l'Agent][2] pour Kubernetes. La configuration par défaut a été conçue pour OpenShift 3.7.0+ et OpenShift 4.0+, car elle repose sur des fonctionnalités et des endpoints ajoutés dans ces versions.
 
 ### Configuration
 
@@ -61,7 +61,13 @@ Depuis la version 6.1, l'Agent Datadog prend en charge la surveillance des clus
 | Surveillance des Live Containers      | ❌                                       | ❌                                           | ✅                                             |
 | Surveillance des Live Processes        | ❌                                       | ❌                                           | ✅                                             |
 
-> :warning: **OpenShift 4.0+** : si vous avez utilisé le programme d'installation OpenShift sur un fournisseur de cloud pris en charge, vous devez déployer l'Agent avec `hostNetwork: true` pour récupérer les tags/alias de host ; autrement, l'accès aux serveurs de métadonnées à partir du réseau du POD sera impossible.
+<div class="alert alert-warning">
+<bold>OpenShift 4.0+</bold> : si vous avez utilisé le programme d'installation OpenShift sur un fournisseur de cloud pris en charge, vous devez déployer l'Agent avec <code>hostNetwork: true</code> dans le fichier de configuration <code>datadog.yaml</code> pour récupérer les tags et alias. L'accès aux serveurs de métadonnées à partir du réseau des POD est autrement impossible.
+</div>
+
+#### Collecte de logs
+
+Reportez-vous à la documentation relative à la [collecte de logs Kubernetes][12] pour en savoir plus.
 
 #### Opérations avec SCC restreintes
 
@@ -93,11 +99,22 @@ Si SELinux est en mode strict, il est conseillé d'accorder le [type `spc_t`][7]
 - `allowHostPorts: true` : permet de binder les admissions Dogstatsd/APM/Logs sur l'IP du nœud.
 - `allowHostPID: true` : permet la détection de l'origine des métriques DogStatsD envoyées par le socket Unix.
 - `volumes: hostPath` : accède au socket Docker et aux dossiers `proc` et `cgroup` du host afin de recueillir les métriques.
-- `SELinux type: spc_t` : accède au socket Docker et aux dossiers `proc` et `cgroup` de tous les processus afin de recueillir les métriques. Pour en savoir plus, lisez [cet article de Red Hat][7] (en anglais).
+- `SELinux type: spc_t` : accède au socket Docker et aux dossiers `proc` et `cgroup` de tous les processus afin de recueillir les métriques. Pour en savoir plus, lisez [cet article de Red Hat][7] (en anglais).
 
-> :warning: N'oubliez pas d'ajouter le [compte de service datadog-agent][5] à la [SCC datadog-agent][8] nouvellement créée en ajoutant `system:serviceaccount:<espace de nommage datadog-agent>:<nom du compte de service datadog-agent>` à la section `users`.
+<div class="alert alert-info">
+N'oubliez pas d'ajouter le <a href="https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions">compte de service datadog-agent</a> à la <a href="https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/openshift/scc.yaml">SCC datadog-agent</a> nouvellement créée en ajoutant <code>system:serviceaccount:<espace de nommage datadog-agent>:<nom du compte de service datadog-agent ></code> à la section <code>users</code>.
+</div>
 
-> :warning: **OpenShift 4.0+** : si vous avez utilisé le programme d'installation OpenShift sur un fournisseur de cloud pris en charge, vous devez modifier la SCC fournie en indiquant `allowHostNetwork: true` pour récupérer les tags/alias de host ; autrement, l'accès aux serveurs de métadonnées à partir du réseau du POD sera impossible.
+<div class="alert alert-warning">
+<b>OpenShift 4.0+</b> : si vous avez utilisé le programme d'installation OpenShift sur un fournisseur de cloud pris en charge, vous devez déployer l'Agent avec <code>allowHostNetwork: true</code> dans le fichier de configuration <code>datadog.yaml</code> pour récupérer les tags et alias. L'accès aux serveurs de métadonnées à partir du réseau des POD est autrement impossible.
+</div>
+
+**Remarque** : le socket Docker appartient au groupe root. Vous devez donc élever les privilèges de l'Agent pour pouvoir récupérer les métriques Docker. Pour exécuter le processus de l'Agent en tant qu'utilisateur root, vous pouvez configurer votre SCC de la façon suivante :
+
+```yaml
+runAsUser:
+  type: RunAsAny
+```
 
 ### Validation
 
@@ -106,8 +123,8 @@ Consultez [kube_apiserver_metrics][1]
 ## Données collectées
 
 ### Métriques
+{{< get-metrics-from-git "openshift" >}}
 
-Consultez [metadata.csv][10] pour découvrir la liste des métriques propres à OpenShift.
 
 ### Événements
 
@@ -132,3 +149,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/openshift/metadata.csv
 [11]: https://docs.datadoghq.com/fr/help
+[12]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/#log-collection

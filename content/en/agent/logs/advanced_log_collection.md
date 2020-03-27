@@ -114,6 +114,115 @@ replace_placeholder: "$1 masked_user@${2}"
 
 Would send the following log to Datadog: `User email: masked_user@example.com`
 
+###Commonly Used Log Processing Rules
+
+**Generic String: "sensitive-info"**
+
+Lines containing the string `sensitive-info` are not sent to Datadog.
+
+```
+  - type: exclude_at_match
+    name: exclude_sensitive_info
+    pattern: (?:sensitive\-info)
+```
+
+**my_key=value**
+
+When the string "my_key=" is found, letters, numbers, spaces, and underscores following the string are redacted with `my_key=[VALUE REDACTED]`.
+
+```
+- type: mask_sequences
+  name: redact_key_match_letters_numbers_spaces_unders
+  replace_placeholder: "my_key=[VALUE REDACTED]"
+  pattern: (?:my_key=[A-Za-z0-9\s_]*[A-Za-z0-9][A-Za-z0-9\s_])
+```
+
+When the string "my_key=" is found, all characters following the string until the next period are redacted with `my_key=[VALUE REDACTED]`.
+
+```
+- type: mask_sequences
+  name: redact_key_match_to_period
+  replace_placeholder: "my_key=[VALUE REDACTED]"
+  pattern: (?:my_key=[^.])
+```
+
+**SSN**
+
+Redact Social Security Numbers.
+
+```
+  - type: mask_sequences
+    name: social_security_number_basic
+    pattern: (?:\d{3}-?\d{2}-?\d{4})
+    replace_placeholder: "[SSN REDACTED]"
+```
+
+**Email Address**
+
+Redact email addresses using the RFC 5322 regex specification.
+
+```
+  - type: mask_sequences
+    name: RFC_5322_email
+    pattern: (?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])
+    replace_placeholder: "[EMAIL REDACTED]"
+```
+
+**Credit Card (Visa, MC, AMEX, DINERS, DISCOVER, JCB)**
+
+Redact credit card numbers for Visa, Mastercard, American Express, Diner's Club, Discover Card, and JCB.
+
+```
+- type: mask_sequences
+  name: visa_mc_amex_diners_discover_jcb_credit_card
+  replace_placeholder: "[CREDIT CARD REDACTED]"
+  pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
+```
+
+**Postal Codes**
+
+Redact postal codes (US).
+
+```
+- type: mask_sequences
+  name: postal_codes
+  replace_placeholder: "[POSTAL CODE REDACTED]"
+  pattern: (?:\d{5}-\d{4}|\d{5}|[A-Z]\d[A-Z] \d[A-Z]\d)
+```
+
+**Between Parentheses**
+
+Redact characters after string `ExampleConfig(` until the closing paranthesis.
+
+```
+- type: mask_sequences
+  name: Example_config_redaction
+  replace_placeholder: "ExampleConfig([REDACTED, REDACTED]"
+  pattern: (?:ExampleConfig\([^\)]+)
+```
+
+**Between Brackets**
+
+Redact characters after string `on Example [` until the closing bracket.
+
+```
+- type: mask_sequences
+  name: on_Example_redaction
+  replace_placeholder: "on Example [Example REDACTED]"
+  pattern: (?:on Example\s?[^\s]+)
+```
+
+**Class A IP Address**
+
+Redact Class A IP Addresses, range 1.0.0.1 to 126.255.255.254. 
+
+```
+- type: mask_sequences
+  name: simple_ip_address
+  replace_placeholder: "[IP REDACTED]"
+  pattern: (?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)
+```
+
 ## Multi-line aggregation
 
 If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type` which aggregates all lines into a single entry until the given pattern is detected again.

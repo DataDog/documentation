@@ -24,10 +24,12 @@ version: '1.0'
 
 Associez votre solution Google Cloud Platform pour visualiser tous vos hosts Google Compute Engine (GCE) dans Datadog. Vos hosts apparaissent dans l'aperçu de l'infrastructure de Datadog. Vous pouvez les trier grâce aux tags de host GCE et aux étiquettes GCE qui leur sont automatiquement attribués par Datadog.
 
-Les intégrations connexes comprennent :
+<div class="alert alert-warning">
+L'intégration GCP de Datadog est conçue pour recueillir <a href="https://cloud.google.com/monitoring/api/metrics_gcp">TOUTES les métriques en provenance de StackDriver</a>. Datadog s'efforce de mettre régulièrement à jour sa documentation afin d'inclure chaque sous-intégration. Toutefois, les métriques et les services proposés par les différents services cloud étant en permanente évolution, il est possible que la liste ne soit pas actuelle.
+</div>
 
 | Intégration                       | Description                                                             |
-|-----------------------------------|-------------------------------------------------------------------------|
+| --------------------------------- | ----------------------------------------------------------------------- |
 | [App Engine][1]                   | PaaS (plateforme en tant que service) permettant de développer des applications évolutives             |
 | [Big Query][2]                    | Entrepôt de données pour entreprise                                               |
 | [Bigtable][3]                     | Service de base de données Big Data NoSQL                                         |
@@ -58,33 +60,36 @@ Les intégrations connexes comprennent :
 | [VPN][28]                         | Fonctionnalité de réseau géré                                           |
 
 ## Implémentation
+
 ### Collecte de métriques
+
 #### Installation
 
 L'intégration Google Cloud <> Datadog utilise des comptes de service pour créer une connexion API entre Google Cloud et Datadog. Vous trouverez ci-dessous les instructions à suivre pour créer un compte de service et fournir à Datadog les identifiants du compte de service afin de commencer à effectuer des appels d'API en votre nom.
 
 1. Consultez la [page des identifiants Google Cloud][29] pour le projet Google Cloud que vous souhaitez configurer dans le cadre de l'intégration Datadog.
-2. Cliquez sur *Create credentials* et sélectionnez *Service account key*.
+2. Cliquez sur _Create credentials_ et sélectionnez _Service account key_.
 
     {{< img src="integrations/google_cloud_platform/SelectServiceAccount.png" alt="paramètres" popup="true" style="width:80%;">}}
 
-3. Dans la liste déroulante *Service account*, sélectionnez *New service account*.
+3. Dans la liste déroulante _Service account_, sélectionnez _New service account_.
 4. Saisissez un nom unique pour le compte de service.
-5. Pour *Role*, sélectionnez Compute Engine —> Compute Viewer, Monitoring —> Monitoring Viewer et Cloud Asset —> Cloud Asset Viewer.
+5. Pour _Role_, sélectionnez Compute Engine —> Compute Viewer, Monitoring —> Monitoring Viewer et Cloud Asset —> Cloud Asset Viewer.
 
    **Remarque** : vous devez être un administrateur clé de compte de service pour sélectionner les rôles Compute Engin et Cloud Asset. Tous les rôles sélectionnés permettent à Datadog de recueillir des métriques, des tags, des événements et des étiquettes utilisateur à votre place.
 
-6. Sélectionnez *JSON* comme type de clé, puis cliquez sur *create*. Notez l'emplacement de sauvegarde du fichier : vous en aurez besoin par la suite.
+6. Sélectionnez _JSON_ comme type de clé, puis cliquez sur _create_. Notez l'emplacement de sauvegarde du fichier : vous en aurez besoin par la suite.
 7. Accédez au [carré d'intégration Datadog/Google Cloud][30].
-8. Dans l'onglet **Configuration**, sélectionnez *Upload Key File* pour intégrer ce projet à Datadog.
+8. Dans l'onglet **Configuration**, sélectionnez _Upload Key File_ pour intégrer ce projet à Datadog.
 9. Si vous le souhaitez, vous pouvez utiliser des tags pour exclure des hosts de cette intégration. Vous trouverez des instructions détaillées à ce sujet [ci-dessous](#configuration).
 
     {{< img src="integrations/google_cloud_platform/ServiceAccountAdded.png" alt="paramètres" popup="true" style="width:80%;">}}
 
-10. Cliquez sur *Install/Update*.
+10. Cliquez sur _Install/Update_.
 11. Si vous souhaitez surveiller plusieurs projets, utilisez l'une des méthodes suivantes :
-    * Répétez les étapes ci-dessus pour utiliser plusieurs comptes de service.
-    * Utilisez le même compte de service en modifiant la valeur de `project_id` dans le fichier JSON téléchargé à l'étape 6. Importez ensuite le fichier dans Datadog, tel que décrit aux étapes 7 à 10.
+
+    - Répétez les étapes ci-dessus pour utiliser plusieurs comptes de service.
+    - Utilisez le même compte de service en modifiant la valeur de `project_id` dans le fichier JSON téléchargé à l'étape 6. Importez ensuite le fichier dans Datadog, tel que décrit aux étapes 7 à 10.
 
 Vous devez avoir activé [Google Cloud Billing][31], l'[API Stackdriver Monitoring][32], l'[API Compute Engine][33] et l'[API Cloud Asset][43] pour le ou les projets que vous souhaitez surveiller.
 
@@ -92,7 +97,7 @@ Vous devez avoir activé [Google Cloud Billing][31], l'[API Stackdriver Monito
 
 Si vous le souhaitez, vous pouvez limiter les instances GCE récupérées par Datadog en saisissant des tags dans la zone de texte **Limiter la collecte de métriques**. Seuls les hosts qui correspondent à l'un des tags définis sont alors importés dans Datadog. Vous pouvez utiliser des wildcards (`?` pour un caractère unique, `*` pour plusieurs caractères) pour inclure un grand nombre de hosts, ou encore `!` pour exclure certains hosts. L'exemple ci-dessous englobe toutes les instances de taille `c1*`, mais exclut les hosts de type staging :
 
-```
+```text
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
@@ -113,7 +118,7 @@ Pour les applications s'exécutant sur GCE ou GKE, l'Agent Datadog peut être ut
 
     {{< img src="integrations/google_cloud_platform/create_a_topic.png" alt="Créer un sujet" style="width:80%;">}}
 
-2. Donnez un nom clair à ce sujet, comme `export-logs-to-datadog`, et cliquez sur *Save*.
+2. Donnez un nom clair à ce sujet, comme `export-logs-to-datadog`, et cliquez sur _Save_.
 
 #### Configurer le Pub/Sub pour transmettre les logs à Datadog
 
@@ -170,9 +175,10 @@ Les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][45]. Si 
 
 Pour être automatiquement notifié lorsque vous atteignez ces quotas, activez [l'intégration Métriques Pub/Sub][37] et configurez un monitor sur la métrique `gcp.pubsub.subscription.backlog_bytes`. Filtrez ce monitor sur l'abonnement qui exporte les logs vers Datadog. L'exemple ci-dessous permet de s'assurer que les logs ne dépassent jamais 1 Mo :
 
-    {{< img src="integrations/google_cloud_platform/log_pubsub_monitoring.png" alt="Surveillance Pub Sub" style="width:80%;">}}
+{{< img src="integrations/google_cloud_platform/log_pubsub_monitoring.png" alt="Surveillance Pub Sub" style="width:80%;">}}
 
 ## Données collectées
+
 ### Métriques
 
 Consultez les différentes pages des intégrations Google Cloud pour en savoir plus sur les métriques associées.
@@ -182,35 +188,37 @@ Consultez les différentes pages des intégrations Google Cloud pour en savoir 
 Tous les événements de service générés par votre Google Cloud Platform sont transférés à votre [flux d'événements Datadog][38].
 
 ### Checks de service
+
 L'intégration Google Cloud Platform n'inclut aucun check de service.
 
 ## Dépannage
 
-### Mes métadonnées sont incorrectes pour les métriques *gcp.logging* définies par l'utilisateur
+### Mes métadonnées sont incorrectes pour les métriques _gcp.logging_ définies par l'utilisateur
 
-Pour les métriques *gcp.logging* non standard (c'est-à-dire les métriques qui ne correspondent pas aux [métriques de journalisation Datadog par défaut][40]), les métadonnées appliquées peuvent différer de celles de Stackdriver.
+Pour les métriques _gcp.logging_ non standard (c'est-à-dire les métriques qui ne correspondent pas aux [métriques de journalisation Datadog par défaut][40]), les métadonnées appliquées peuvent différer de celles de Stackdriver.
 
 Dans ce cas, les métadonnées doivent être définies manuellement sur la [page de résumé de la métrique][41] : recherchez et sélectionnez la métrique en question, puis cliquez sur l'icône en forme de crayon à côté des métadonnées.
 
 Besoin d'aide ? Contactez l'[assistance Datadog][42].
 
 ## Pour aller plus loin
+
 ### Base de connaissances
+
 #### Tags attribués
 
 Les tags sont automatiquement attribués selon différentes options de configuration relatives à Google Cloud Platform et Google Compute Engine. Voici la liste des tags automatiquement attribués :
 
-* Zone
-* Instance-type
-* Instance-id
-* Automatic-restart
-* On-host-maintenance
-* Project
-* Numeric_project_id
-* Nom
+- Zone
+- Instance-type
+- Instance-id
+- Automatic-restart
+- On-host-maintenance
+- Project
+- Numeric_project_id
+- Nom
 
 En outre, tous les hosts avec des étiquettes `<key>:<value>` se voient attribuer les tags correspondants.
-
 
 [1]: https://docs.datadoghq.com/fr/integrations/google_app_engine
 [2]: https://docs.datadoghq.com/fr/integrations/google_cloud_big_query
