@@ -125,7 +125,7 @@ Update or remove this quota at any time when editing the Index:
 [9]: /logs/live_tail
 [10]: /logs/archives
 [11]: /logs/logs_to_metrics
-[12]: /logs/explorer/search/
+[12]: /logs/search_syntax/
 [13]: /api/?lang=bash#update-an-index
 [14]: /logs/processing/processors/?tab=ui#user-agent-parser
 [15]: /logs/processing/processors/?tab=ui#geoip-parser

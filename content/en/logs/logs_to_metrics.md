@@ -74,7 +74,7 @@ Log Management usage metrics come with three tags that can be used for more gran
 [2]: /logs/indexes/#exclusion-filters
 [3]: https://app.datadoghq.com/logs/pipelines
 [4]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[5]: /logs/explorer/search/#search-syntax
+[5]: /logs/search_syntax
 [6]: /tagging
 [7]: /developers/metrics/custom_metrics
 [8]: /developers/metrics/#naming-metrics

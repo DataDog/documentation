@@ -1,14 +1,14 @@
 ---
 title: Saved Views
 kind: documentation
-description: "Use Saved Views to automatically configure your Log Explorer."
+description: 'Use Saved Views to automatically configure your Log Explorer.'
 further_reading:
-- link: "logs/explorer/analytics"
-  tag: "Documentation"
-  text: "Perform Log Analytics"
-- link: "logs/processing"
-  tag: "Documentation"
-  text: "Learn how to process your logs"
+    - link: 'logs/explorer/analytics'
+      tag: 'Documentation'
+      text: 'Perform Log Analytics'
+    - link: 'logs/processing'
+      tag: 'Documentation'
+      text: 'Learn how to process your logs'
 ---
 
 ## Log Explorer Default View
@@ -17,9 +17,9 @@ The default log explorer view is loaded where you land on the Logs Search, Analy
 
 The default view includes:
 
-* an empty query
-* a list of visible facets in the facet list
-* a basic page layout (e.g. table configuration for search, visualization options for analytics, etc.)
+- an empty query
+- a list of visible facets in the facet list
+- a basic page layout (e.g. table configuration for search, visualization options for analytics, etc.)
 
 All edits on the facet list (see below) or in the page layout are automatically saved in this default view.
 
@@ -29,9 +29,9 @@ All edits on the facet list (see below) or in the page layout are automatically 
 
 Saved Views allow you to save search customizations in the Log Explorer, including:
 
-* A [search query][1]
-* A [selected subset of facets][2]
-* A customized default visualization ([log stream][3], [log patterns][4], or [log analytics][5] along with their specific visualization properties)
+- A [search query][1]
+- A [selected subset of facets][2]
+- A customized default visualization ([log stream][3], [log patterns][4], or [log analytics][5] along with their specific visualization properties)
 
 ### Load a Saved View
 
@@ -51,7 +51,7 @@ Copy-paste a Saved View short-link to share it with your teammates.
 
 ### Manage Saved Views
 
-To create a new Saved View, click the *Save as* button at the top of the screen. Give it a name, and click on *Save*.
+To create a new Saved View, click the _Save as_ button at the top of the screen. Give it a name, and click on _Save_.
 
 Slice and dice starting from a Saved View. If needed, update this saved view to keep track of query or page layout configuration—use the "Save As" button.
 

@@ -42,4 +42,4 @@ List endpoint returns logs that match a log search query. [Results are paginated
 
 [1]: /logs/guide/collect-multiple-logs-with-pagination
 [2]: /logs/archives
-[3]: /logs/explorer/search/#search-syntax
+[3]: /logs/search_syntax

@@ -1219,17 +1219,11 @@ main:
     parent: "log_processing"
     weight: 204
 
-  - name: "Live Tail"
-    url: "logs/live_tail/"
-    parent: "log_management"
-    identifier: "log_live_tail"
-    weight: 3
-
   - name: "Generate Metrics"
     url: "logs/logs_to_metrics/"
     parent: "log_management"
     identifier: "log_to_metrics"
-    weight: 4
+    weight: 3
 
   ## LOGS - Archives
 
@@ -1237,45 +1231,54 @@ main:
     url: "logs/archives/"
     parent: "log_management"
     identifier: "log_archives"
-    weight: 5
+    weight: 4
   - name: "Rehydrate from Archives"
     url: "logs/archives/rehydrating"
     parent: "log_archives"
-    weight: 501
+    weight: 401
 
   - name: "Indexes"
     url: "logs/indexes"
     parent: "log_management"
     identifier: "log_indexes"
-    weight: 6
+    weight: 5
 
   ## LOGS - Explorer
-
   - name: "Log Explorer"
     url: "logs/explorer/"
     parent: "log_management"
     identifier: "log_explorer"
-    weight: 7
-  - name: "Search"
-    url: "logs/explorer/search/"
+    weight: 6
+
+  - name: "Live Tail"
+    url: "logs/explorer/live_tail/"
     parent: "log_explorer"
-    weight: 701
-  - name: "Log Analytics"
-    url: "logs/explorer/analytics/"
+    weight: 601
+  - name: "Log List"
+    url: "logs/explorer/list/"
     parent: "log_explorer"
-    weight: 702
+    weight: 602
   - name: "Log Patterns"
     url: "logs/explorer/patterns/"
     parent: "log_explorer"
-    weight: 703
+    weight: 603
+  - name: "Log Analytics"
+    url: "logs/explorer/analytics/"
+    parent: "log_explorer"
+    weight: 604
   - name: "Saved Views"
     url: "logs/explorer/saved_views/"
     parent: "log_explorer"
-    weight: 704
+    weight: 605
   - name: "Facets"
     url: "logs/explorer/facets/"
     parent: "log_explorer"
-    weight: 705
+    weight: 606
+
+  - name: "Search Syntax"
+    url: "logs/search_syntax/"
+    parent: "log_management"
+    weight: 7
 
   - name: "Connect Logs and Traces"
     url: "tracing/connect_logs_and_traces/?tab=java"
