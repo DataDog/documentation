@@ -107,7 +107,7 @@ Use the **Share** button to share the log opened in side panel to other contexts
 - **Copy to clipboard** or `Ctrl+C` / `Cmd+C` copies the log JSON to your clipboard.
 - **Share Event** shares the log (along with the underlying view) with teammates through email, Slack, and more. See all [Datadog notification integrations][4] available.
 
-{{< img src="logs/explorer/upper_log_panel.gif" alt="Upper Log Panel"  style="width:50%;">}}
+{{< img src="logs/explorer/upper_log_panel.png" alt="Upper Log Panel"  style="width:50%;">}}
 
 
 ## Troubleshooting Context
