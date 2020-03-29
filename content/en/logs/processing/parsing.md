@@ -271,10 +271,11 @@ Result:
 **Custom delimiter example**: If all the key values pairs are concatenated with no standard delimiter to split them, a custom delimiter can specified. Defining `""` as `quotingStr` will keep the default configuration for quoting.
 
 _example_:
+
 Log:
 
   ```text
-  key1=value1|key2=value2|key3=value3"
+  key1=value1|key2=value2|key3=value3
   ```
 
 Rule:
