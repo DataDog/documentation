@@ -112,7 +112,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `decodeuricomponent`                                           | Decodes URI components. For instance, it transforms `%2Fservice%2Ftest` into `/service/test`.                                                              |
 | `lowercase`                                                    | Returns the lower-cased string.                                                                                                                            |
 | `uppercase`                                                    | Returns the upper-cased string.                                                                                                                            |
-| `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                         |
+| `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                         |
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                             |
 | `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].               |
@@ -175,11 +175,12 @@ Some examples demonstrating how to use parsers:
 
 ### Key value or logfmt
 
-This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])` where:
+This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` where:
 
-* `separatorStr`: defines the separator. Defaults to `=`.
+* `separatorStr`: defines the separator between key and values. Defaults to `=`.
 * `characterWhiteList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
-* `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`.
+* `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`. 
+* `delimiter`: defines the separator between the different key values pairs (e.g.`|`is the delimiter in `key1=value1|key2=value2`). Default to ` `,`,`,`;`,`\`,`[` and `]`.
 
 Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
 
@@ -267,7 +268,32 @@ Result:
     "key2": "/valueStr2"
   }
   ```
-  
+**Custom delimiter example**: If all the key values pairs are concatenated with no standard delimiter to split them, a custom delimiter can specified. Defining `""` as `quotingStr` will keep the default configuration for quoting.
+
+_example_:
+Log:
+
+  ```text
+  key1=value1|key2=value2|key3=value3"
+  ```
+
+Rule:
+
+  ```text
+  rule %{data::keyvalue("=","","","|")}
+  ```
+
+Result:
+
+  ```json
+  {
+    "key1": "value1",
+    "key2": "value2",
+    "key3": "value3"
+  }
+  ```
+
+
 **Note**:
 
 * Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
