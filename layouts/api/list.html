@@ -208,6 +208,16 @@
                     </div>
                 </div>
             {{ end }}
+
+            <!-- If endpoint is deprecated -->
+            {{ if eq (index $v "x-deprecated") true}}
+
+                <div class="alert alert-danger">
+                    {{$v.description | markdownify}}
+                </div>
+
+            {{ end }}
+
         {{ end }}
     {{ end }}
 {{ end }}
