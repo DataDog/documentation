@@ -565,8 +565,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 {
   "data": {
     "attributes": {
-        "preference_data": "saml_authn_mapping_roles",
-        "preference_type: true
+        "preference_type": "saml_authn_mapping_roles",
+        "preference_data: true
     },
     "type": "org_preferences",
     "id": 1,
