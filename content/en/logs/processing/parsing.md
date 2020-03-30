@@ -180,7 +180,7 @@ This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[
 * `separatorStr`: defines the separator between key and values. Defaults to `=`.
 * `characterWhiteList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
 * `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`. 
-* `delimiter`: defines the separator between the different key values pairs (e.g.`|`is the delimiter in `key1=value1|key2=value2`). Default to ` `, `,` and `;`.
+* `delimiter`: defines the separator between the different key values pairs (e.g.`|`is the delimiter in `key1=value1|key2=value2`). Default to ` ` (normal space), `,` and `;`.
 
 Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
 
