@@ -61,14 +61,15 @@ build_preview:
     - /.+?\/[a-zA-Z0-9_-]+/
 
 index_internal_doc:
-  stage: build
+  stage: post-deploy
+  environment: "preview"
   image: registry.ddbuild.io/datadoc/webapp:staging-released
-  # only:
-  # - master
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
   except: [ tags, schedules ]
   tags: [ "runner:docker", "size:large" ]
   script:
-    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation"
+    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en
 
 link_checks_preview:
   <<: *base_template
