@@ -217,7 +217,7 @@ For Kubernetes environements, refer to the [Kubernetes short lived container doc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/journald
-[2]: /agent/autodiscovery
+[2]: /agent/docker/integrations
 [3]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
 [4]: /agent/logs/#custom-log-collection
 [5]: /agent/guide/autodiscovery-management

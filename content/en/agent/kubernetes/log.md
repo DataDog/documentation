@@ -102,7 +102,7 @@ datadog:
 
 ## Autodiscovery
 
-The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][1] when running the Agent on a host for more context on this logic.
+The goal of Autodiscovery is to apply a Datadog integration log configuration when running an Agent check against a given container. See how to [configure Agent integrations][1] when running the Agent on a host for more context on this logic.
 
 To configure an integration with Autodiscovery, use the following parameters:
 
