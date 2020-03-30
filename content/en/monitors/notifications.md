@@ -152,7 +152,7 @@ The following conditional variables are available:
 | `{{#is_exact_match}}`      | The context exactly matches the provided string                    |
 | `{{^is_exact_match}}`      | The context does not exactly match the provided string             |
 | `{{#is_no_data}}`          | The monitor is triggered for missing data                          |
-| `{{^is_no_data}}`          | The monitor is notifies on missing data                            |
+| `{{^is_no_data}}`          | The monitor is not triggered for missing data                      |
 | `{{#is_warning}}`          | The monitor warns                                                  |
 | `{{^is_warning}}`          | The monitor does not warn                                          |
 | `{{#is_recovery}}`         | The monitor recovers from `ALERT`, `WARNING`, or `NO DATA`         |
