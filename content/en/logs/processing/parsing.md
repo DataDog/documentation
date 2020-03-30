@@ -268,7 +268,7 @@ Result:
     "key2": "/valueStr2"
   }
   ```
-**Custom delimiter example**: If all the key values pairs are concatenated with no standard delimiter to split them, a custom delimiter can specified. Defining `""` as `quotingStr` will keep the default configuration for quoting.
+**Custom delimiter example**: Define a custom delimiter if all the key values pairs are concatenated with no standard delimiter to split them. Note that defining `""` as `quotingStr` keeps the default configuration for quoting.
 
 _example_:
 
