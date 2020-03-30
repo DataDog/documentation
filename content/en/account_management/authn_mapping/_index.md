@@ -478,6 +478,105 @@ HTTP/2 204
 {{% /tab %}}
 {{< /tabs >}}
 
+### Get Authn Mapping Enablement
+
+Check whether Authn Mappings are enabled or disabled.
+
+| Method   | Endpoint path               | Required payload |
+|----------|-----------------------------|------------------|
+| `GET`    | `/v1/org_preferrences`      | None             |
+
+{{< tabs >}}
+{{% tab "Example" %}}
+
+```sh
+curl -X GET \
+         "https://api.datadoghq.com/api/v1/org_perferences" \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+```
+
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
+
+[1]: https://api.datadoghq.com/account/settings#api
+{{% /tab %}}
+{{% tab "Response" %}}
+
+{{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+{
+  "data": {
+    "attributes": {
+        "preference_data": "saml_authn_mapping_roles",
+        "preference_type: true
+    },
+    "type": "org_preferences",
+    "id": 1,
+  },
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Enable/Disable All Mappings
+
+Enables/disables all AuthN Mappings.
+
+| Method   | Endpoint path               | Required payload |
+|----------|-----------------------------|------------------|
+| `POST`   | `/v1/org_preferrences`      | JSON             |
+
+##### ARGUMENTS
+
+* **`{preference_type}`** [*required*, no default]:
+  Org preference to update, required to be "saml_authn_mapping_roles"
+* **`{preference_data}`** [*required*, no default]:
+  Data to update preference with, must be true or false. true to enable all mappings, false to disable
+
+{{< tabs >}}
+{{% tab "Example" %}}
+
+```sh
+curl -X POST \
+         "https://api.datadoghq.com/api/v1/org_perferences" \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+         -d '{
+             "data": {
+                 "type": "org_peferences",
+                 "attributes": {
+                    "preference_type": "saml_authn_mapping_roles",
+                    "preference_data": true
+                j}
+             }
+         }'
+`
+```
+
+Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
+
+[1]: https://api.datadoghq.com/account/settings#api
+{{% /tab %}}
+{{% tab "Response" %}}
+
+{{< code-block lang="json" filename="response.json" disable_copy="true" >}}
+{
+  "data": {
+    "attributes": {
+        "preference_data": "saml_authn_mapping_roles",
+        "preference_type: true
+    },
+    "type": "org_preferences",
+    "id": 1,
+  },
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
