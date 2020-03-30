@@ -237,13 +237,17 @@ rule %{data::keyvalue("=","/:")}
 
 Other examples:
 
-| **Raw string**  | **Parsing rule**                    | **Result**           |
-|:----------------|:------------------------------------|:---------------------|
-| key=valueStr    | `%{data::keyvalue}`                 | {"key": "valueStr}   |
-| key=\<valueStr> | `%{data::keyvalue}`                 | {"key": "valueStr"}  |
-| key:valueStr    | `%{data::keyvalue(":")}`            | {"key": "valueStr"}  |
-| key:"/valueStr" | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"} |
-| key:={valueStr} | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}  |
+| **Raw string**               | **Parsing rule**                       | **Result**                            |
+|:-----------------------------|:---------------------------------------|:--------------------------------------|
+| key=valueStr                 | `%{data::keyvalue}`                    | {"key": "valueStr}                    |
+| key=\<valueStr>              | `%{data::keyvalue}`                    | {"key": "valueStr"}                   |
+| "key"="valueStr"             | `%{data::keyvalue}`                    | {"key": "valueStr"}                   |
+| key:valueStr                 | `%{data::keyvalue(":")}`               | {"key": "valueStr"}                   |
+| key:"/valueStr"              | `%{data::keyvalue(":", "/")}`          | {"key": "/valueStr"}                  |
+| /key:/valueStr               | `%{data::keyvalue(":", "/")}`          | {"/key": "/valueStr"}                 |
+| key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`    | {"key": "valueStr"}                   |
+| key1=value1\|key2=value2     | `%{data::keyvalue("=", "", "", "\|")}` | {"key1": "value1", "key2": "value2"}  |
+| key1="value1"\|key2="value2" | `%{data::keyvalue("=", "", "", "\|")}` | {"key1": "value1", "key2": "value2"}  |
 
 **Multiple QuotingString example**: When multiple quotingstring are defined, the default behavior is replaced with a defined quoting character.
 The key-value always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterWhiteList` is ignored as everything between the quoting characters is extracted.
@@ -265,33 +269,12 @@ The key-value always matches inputs without any quoting characters, regardless o
   ```json
   {"key1": "valueStr", "key2": "/valueStr2"}
   ```
-**Custom delimiter example**: Define a custom delimiter if all the key values pairs are concatenated with no standard delimiter to split them. Note that defining `""` as `quotingStr` keeps the default configuration for quoting.
-
-_example_:
-
-**Log:**
-
-  ```text
-  key1=value1|key2=value2|key3=value3
-  ```
-
-**Rule:**
-
-  ```text
-  rule %{data::keyvalue("=","","","|")}
-  ```
-
-**Result:**
-
-  ```json
-  {"key1": "value1", "key2": "value2", "key3": "value3"}
-  ```
-
 
 **Note**:
 
 * Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
 * If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
+* Defining `""` as `quotingStr` keeps the default configuration for quoting.
 
 ### Parsing dates
 
