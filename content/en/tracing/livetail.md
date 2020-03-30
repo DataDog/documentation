@@ -44,6 +44,7 @@ Choose the `Live Tail` option in the time range selector to switch to the Live T
 ## Column Options
 
 Customize the Live Tail column view to better highlight the relevant information in your traces. Click on the column dropdown at the top right of the column header to activate one of the options below:
+
 {{< img src="tracing/live_tail/column_livetail.png" alt="Live tail" >}}
 
 1. Move column to the right or left.
@@ -58,8 +59,7 @@ A valid query in the search bar displays traces that match your search criteria.
 
 {{< img src="tracing/live_tail/search_livetail.png" alt="Live tail" >}}
 
-Any query that works in other views works in the Live Tail view, but you can only filter on attributes that are defined as facets.
-For example, to filter on the a customer_id attribute, there are two options:
+Any query that works in other views works in the Live Tail view, but you can only filter on attributes that are defined as facets. For example, to filter on the a customer_id attribute, there are two options:
 
 - Click on the attribute and add it to the search using the query `@customer_id:1123`.
 - Filter on all spans with a duration above 150ms using the query: `@duration:>150ms`.
