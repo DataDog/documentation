@@ -135,7 +135,8 @@ Agent v6 supports the following options in a check's `instance` section:
 | `empty_default_hostname`  | Submit metrics, events, and service checks with no hostname when set to `true`.                                           |
 | `tags`                    | Send custom tags in addition to the tags sent by the check.                                                               |
 
-[1]: /agent/autodiscovery
+
+[1]: /getting_started/agent/autodiscovery/
 {{% /tab %}}
 {{% tab "Environment variables" %}}
 
@@ -566,6 +567,6 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 [4]: /integrations/go-metro
 [5]: /agent/guide/agent-log-files/
 [6]: /agent/guide/agent-commands/
-[7]: /agent/autodiscovery
+[7]: /getting_started/agent/autodiscovery
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
 [9]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks
