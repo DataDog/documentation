@@ -64,6 +64,8 @@ index_internal_doc:
   stage: post-deploy
   environment: "preview"
   image: registry.ddbuild.io/datadoc/webapp:staging-released
+  dependencies:
+    - build_preview
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
   except: [ tags, schedules ]
