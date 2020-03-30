@@ -284,7 +284,7 @@ Rule:
   rule %{data::keyvalue("=","","","|")}
   ```
 
-Result:
+**Result:**
 
   ```json
   {
