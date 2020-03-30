@@ -45,7 +45,7 @@ Choose the `Live Tail` option in the time range selector to switch to the Live T
 
 Customize the Live Tail column view to better highlight the relevant information in your traces. Click on the column dropdown at the top right of the column header to activate one of the options below:
 
-{{< img src="tracing/live_tail/column_livetail.png" alt="Live tail" >}}
+{{< img src="tracing/live_tail/column_livetail.png" alt="Live tail" style="width:20%;">}}
 
 1. Move column to the right or left.
 2. Insert column to the right or left from span tags.
