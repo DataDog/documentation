@@ -184,13 +184,13 @@ This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[
 
 Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
 
-Log:
+**Log:**
 
 ```text
 user=john connect_date=11/08/2017 id=123 action=click
 ```
 
-Rule
+**Rule:**
 
 ```text
 rule %{data::keyvalue}
@@ -205,13 +205,13 @@ If you add an **extract** attribute `my_attribute` in your rule pattern you will
 
 If `=` is not the default separator between your key and values, add a parameter in your parsing rule with a separator.
 
-Log:
+**Log:**
 
 ```text
 user: john connect_date: 11/08/2017 id: 123 action: click
 ```
 
-Rule
+**Rule:**
 
 ```text
 rule %{data::keyvalue(": ")}
@@ -221,13 +221,13 @@ rule %{data::keyvalue(": ")}
 
 If logs contain special characters in an attribute value, such as `/` in a url for instance, add it to the whitelist in the parsing rule:
 
-Log:
+**Log:**
 
 ```text
 url=https://app.datadoghq.com/event/stream user=john
 ```
 
-Rule:
+**Rule:**
 
 ```text
 rule %{data::keyvalue("=","/:")}
@@ -248,19 +248,19 @@ Other examples:
 **Multiple QuotingString example**: When multiple quotingstring are defined, the default behavior is replaced with a defined quoting character.
 The key-value always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterWhiteList` is ignored as everything between the quoting characters is extracted.
 
-Log:
+**Log:**
 
   ```text
   key1:=valueStr key2:=</valueStr2> key3:="valueStr3"
   ```
 
-Rule:
+**Rule:**
 
   ```text
   rule %{data::keyvalue(":=","","<>")}
   ```
 
-Result:
+**Result:**
 
   ```json
   {
