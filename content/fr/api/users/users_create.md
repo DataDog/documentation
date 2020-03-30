@@ -7,15 +7,13 @@ external_redirect: /api/#creer-un-utilisateur
 
 ## Créer un utilisateur
 
+Créez un utilisateur pour votre organisation.
+
 **ARGUMENTS** :
 
-* **`handle`** [*obligatoire*] :
-    le handle de l'utilisateur ; doit correspondre à un e-mail valide.
-* **`name`** [*facultatif*, *défaut*=**None**] :
-    le nom de l'utilisateur.
-* **`access_role`** [*facultatif*, *défaut*=**st**] :
-    le rôle d'accès de l'utilisateur. Valeurs autorisées :
-    *  **st** (utilisateur standard),
-    *  **adm** (administrateur),
-    *  **ro** (utilisateur read-only)
-    *Remarque : les utilisateurs ne peuvent être créés qu'avec des clés d'application disponibles pour les administrateurs.*
+Un utilisateur est un objet JSON avec `"type":"users"` qui accepte les éléments suivants :
+
+* **`roles`** [*facultatif*] : un tableau de rôles à attribuer à l'utilisateur.  Chaque rôle est un objet avec `"type": "roles"` et avec un `id` correspondant à l'ID du rôle à attribuer à l'utilisateur.
+* **`attributes.email`** [*obligatoire*] : l'adresse e-mail du nouvel utilisateur.
+* **`attributes.name`** [*facultatif*] : le nom du nouvel utilisateur.
+* **`attributes.title`** [*facultatif*] : le titre du nouvel utilisateur.

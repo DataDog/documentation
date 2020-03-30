@@ -75,7 +75,7 @@ Tous les dashboards répertoriés peuvent être triés à l'aide des en-têtes d
 | Icon       | Une icône indiquant le type de dashboard (timeboard ou screenboard).                     |
 | Nom       | Le nom du dashboard personnalisé ou prédéfini.                                              |
 | Modified   | La date de dernière modification d'un dashboard personnalisé.                                            |
-| Popularity | La [popularité](#popularité) relative du tableau de bord au sein de votre organisation.           |
+| Popularity | La [popularité](#popularité) relative du dashboard au sein de votre organisation.           |
 | Creator    | L'icône de profil du créateur du dashboard. Les dashboards prédéfinis possèdent le logo de l'intégration. |
 
 #### Popularity
@@ -102,7 +102,7 @@ Datadog propose deux types de dashboards différents : les [screenboards][4] et
 
 ### Copier, importer et exporter
 
-Depuis un tableau de bord, vous pouvez copier, importer ou exporter son fichier JSON à l’aide de l’icône en forme d’engrenage (en haut à droite), qui affiche les options suivantes :
+Depuis un dashboard, vous pouvez copier, importer ou exporter son fichier JSON à l’aide de l’icône en forme d’engrenage (en haut à droite), qui affiche les options suivantes :
 
 | Option                          | Description                                                                                                                                                                |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

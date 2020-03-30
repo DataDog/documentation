@@ -5,6 +5,6 @@
         "statuses": ["ok", "クリティカル"],
         "groups": ["ホスト", "ping_url"],
         "name": "Can Ping",
-        "description": " Agent が PHP-FPM ping URL から ping を取得できない場合は `CRITICAL` を返します。"
+        "description": "Agent が PHP-FPM ping URL から ping を取得できない場合は `CRITICAL` を返します。"
     }
 ]
