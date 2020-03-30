@@ -106,7 +106,7 @@ logs:
 
 **Note**: With Agent version 7.17+, the `replace_placeholder` string can expand references to capture groups such as `$1`, `$2` and so forth. If you want a string to follow the capture group with no space in between, use the format `${<GROUP_NUMBER>}`. For instance, to scrub user information from the log `User email: foo.bar@example.com`, the following configuration:
 
-```conf
+```yaml
 # (...)
 pattern: "(User email: )[^@]*@(.*)"
 replace_placeholder: "$1 masked_user@${2}"
