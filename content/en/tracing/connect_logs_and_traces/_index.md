@@ -8,7 +8,7 @@ aliases:
 
 {{< img src="tracing/connect_logs_and_traces/trace_id_injection.png" alt="Logs in Traces"  style="width:100%;">}}
 
-The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `trace_id` and `span_id` in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed [trace][1].
+The correlation between Datadog APM and Datadog Log Management is improved by automatically adding a `dd.trace_id` and `dd.span_id` attributes in your logs with the Tracing Libraries. This can then be used in the platform to show you the exact logs correlated to the observed [trace][1].
 
 Before correlating traces with logs, ensure your logs are either sent as JSON, or [parsed by the proper language level log processor][2].
 
