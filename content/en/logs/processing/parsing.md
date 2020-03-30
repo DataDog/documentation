@@ -263,10 +263,7 @@ The key-value always matches inputs without any quoting characters, regardless o
 **Result:**
 
   ```json
-  {
-    "key1": "valueStr",
-    "key2": "/valueStr2"
-  }
+  {"key1": "valueStr", "key2": "/valueStr2"}
   ```
 **Custom delimiter example**: Define a custom delimiter if all the key values pairs are concatenated with no standard delimiter to split them. Note that defining `""` as `quotingStr` keeps the default configuration for quoting.
 
@@ -287,11 +284,7 @@ _example_:
 **Result:**
 
   ```json
-  {
-    "key1": "value1",
-    "key2": "value2",
-    "key3": "value3"
-  }
+  {"key1": "value1", "key2": "value2", "key3": "value3"}
   ```
 
 
