@@ -214,11 +214,11 @@
   transform: translateX(11px);
   margin-top: 15px;
   margin-bottom: 7px;
-
   .algolia-autocomplete{
     width: 100%;
+  }
 
-    .docssearch-input, .docssearch-input-m{
+  .docssearch-input, .docssearch-input-m{
       border-radius:0;
       transition-duration: 0.125s;
       width: 90%;
@@ -236,5 +236,5 @@
         line-height: 28px;
       }
     }
-  }
+  // }
 }

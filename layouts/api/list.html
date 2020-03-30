@@ -214,6 +214,7 @@
 
                 <div class="alert alert-danger">
                     {{$v.description | markdownify}}
+                    {{$v.externalDocs.description}} <a href="{{$v.externalDocs.url}}">{{$v.externalDocs.url}}</a>
                 </div>
 
             {{ end }}

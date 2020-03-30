@@ -1,0 +1,15 @@
+{{ $dot := . }}
+
+<aside class="sidenav">
+    <div class="row sticky">
+        <div class="col">
+            <a href="{{ "" | absLangURL }}"><h4>{{ i18n "datadog_docs" }}</h4></a>
+            
+            {{ partial "search.html" . }}
+
+            <div class="sidenav-nav sidenav-nav-main">
+                {{ partial "nav/main-menu.html" . }}
+            </div>
+        </div>
+    </div>
+</aside>

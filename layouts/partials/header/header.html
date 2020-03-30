@@ -82,7 +82,11 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-sidenav">
             <div class="container">
-                {{ partial "sidenav/sidenav-m.html" . }}
+                {{ if eq .Section "api"}}
+                {{ partial "nav/api-mobile-menu.html" . }}
+                {{ else }}
+                {{ partial "nav/main-mobile-menu.html" . }}
+                {{ end }}
             </div>
         </div>
     </nav>

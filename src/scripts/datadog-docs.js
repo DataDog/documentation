@@ -35,8 +35,6 @@ gtag('config', gaTag);
 $(document).ready(function () {
     window.history.replaceState({}, '', window.location.href);
 
-    const sidenavHTML = $('.container .sidenav-nav').clone();
-    $('header .sidenav-nav-main').html(sidenavHTML);
 
     // ie
     document.createElement('picture');
@@ -432,22 +430,6 @@ $(document).ready(function () {
         $('.sidenav-search input[name="s"]').val(searchParam);
     }
 
-    // if($('.sidenav-api').length) {
-    //     $(window).on('resize scroll', function(e) {
-    //         onScroll();
-    //     }).trigger('scroll');
-
-    //     $(".sidenav-api ul").each(function() {
-    //         if($(this).children().length === 0) {
-    //             $(this).remove();
-    //         }
-    //     });
-
-    //     buildAPIMap();
-    //     onScroll();
-    // }
-
-    // $('.side').addClass('side-condensed');
     $(window).on('resize scroll', function(e) {
         const header_h = $('body > header').height();
         const footer_h = $('body > footer').height();
@@ -457,13 +439,6 @@ $(document).ready(function () {
 
     updateMainContentAnchors();
 
-    // $('.api-content h2[id]').each(function() {
-    //     const id = $(this).attr('id');
-    //     $(this).wrapInner(`<a href="#${id}"></a>`).on('click', function(e) {
-    //         moveToAnchor(id, false);
-    //         return false;
-    //     });
-    // });
 
     // sticky polyfill trigger
     const elements = document.querySelectorAll('.sticky');

@@ -142,8 +142,11 @@ $ddpurple: #632ca6;
         height: 51px;
         position: sticky;
         z-index: 1;
-        top: 95px;
+        top: 105px;
         font-weight: 600;
+        @media (min-width: 992px) {
+            top: 95px;
+        }
         a {
             border-bottom: none;
         }

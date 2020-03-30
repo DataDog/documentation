@@ -1,17 +1,14 @@
 $ddpurple:    #632CA6;
 
-body > header.scrolled ~ .container aside.sidenav .sticky {
+body > header.scrolled ~ .container .sidenav .sticky {
   top:66px;
 }
 
-.announcement_banner.open ~ header.scrolled ~ .container aside.sidenav .sticky,
-.announcement_banner.open ~ header.scrolled ~ .container-fluid aside.sidenav-api .sticky {
+.announcement_banner.open ~ header.scrolled ~ .container .sidenav .sticky,
+.announcement_banner.open ~ header.scrolled ~ .container-fluid .sidenav-api .sticky {
   top:96px;
 }
 
-.mobilequicknav {
-  display:none;
-}
 
 .side {
   &:before,
@@ -33,11 +30,9 @@ body > header.scrolled ~ .container aside.sidenav .sticky {
   }
 }
 
-aside.sidenav {
+.sidenav {
   background:#F8F8F8;
   width:100%;
-  //height:100%;
-  //min-height:1000px;
   position:relative;
   z-index:2;
   padding-right:15px;
@@ -239,7 +234,7 @@ aside.sidenav {
   }
 }
 
-aside.sidenav-api {
+.sidenav-api {
   .sidenav-nav {
     overflow-x: hidden;
     overflow-y: auto;
@@ -313,7 +308,7 @@ aside.sidenav-api {
 //@include media-breakpoint-up(xs) { ... }
 @media (min-width: 576px) {
 
-  aside.sidenav {
+  .sidenav {
     ul {
       li {
         a {
@@ -338,7 +333,7 @@ aside.sidenav-api {
 }
 
 @media (max-width: 1199px) {
-  aside.sidenav {
+  .sidenav {
     ul {
       li {
         a {
@@ -350,7 +345,7 @@ aside.sidenav-api {
 }
 
 
-.fr aside.sidenav {
+.fr .sidenav {
   h4 {
     font-size:22px;
   }
@@ -358,7 +353,7 @@ aside.sidenav-api {
 
 @media (max-width: 1199px) {
   .fr {
-    aside.sidenav {
+    .sidenav {
       h4 {
         font-size:18px;
         padding-top: 15px;
