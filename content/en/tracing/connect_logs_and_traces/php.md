@@ -19,15 +19,15 @@ further_reading:
 
 ## Automatic Trace ID injection
 
-PHP’s logging design prevents Datadog tracing library to inject trace and span IDs into your logs automatically. See the section below to learn how to connect your PHP Logs and traces manually.
+PHP’s logging design prevents Datadog PHP tracing library to inject trace and span IDs into your logs automatically. See the section below to learn how to connect your PHP Logs and traces manually.
 
 ## Manual Trace ID injection
 
-To connect your logs and traces together, your logs must have the `dd.trace_id` and `dd.span_id` attributes that respectively contain your trace ID and your span ID.
+To connect your logs and traces together, your logs must contain the `dd.trace_id` and `dd.span_id` attributes that respectively contain your trace ID and your span ID.
 
-If you are not using a [Datadog Log Integration][1] to parse your logs, a custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped thanks to the [Trace Remapper][2]. More information can be found in the [ Why can't I see my correlated logs in the Trace ID panel?][3] FAQ.
+If you are not using a [Datadog Log Integration][1] to parse your logs, a custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings and remapped thanks to the [Trace Remapper][2]. More information can be found in the [Why can't I see my correlated logs in the Trace ID panel?][3] FAQ.
 
-For instance, you would append those two attributes with:
+For instance, you would append those two attributes to your logs with:
 
 ```php
   <?php
@@ -65,6 +65,6 @@ If the logger implements the [**monolog/monolog** library][4], use `Logger::push
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/log_collection/php
-[2]: /logs/processing/processors/?tab=ui#trace-remapper
+[2]: /logs/processing/processors/#trace-remapper
 [3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog
