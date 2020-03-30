@@ -69,7 +69,7 @@ index_internal_doc:
   except: [ tags, schedules ]
   tags: [ "runner:docker", "size:large" ]
   script:
-    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en
+    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en/
 
 link_checks_preview:
   <<: *base_template
