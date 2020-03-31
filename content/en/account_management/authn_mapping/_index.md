@@ -35,9 +35,9 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
 
 ##### ARGUMENTS
 
-* **`roles.uuid`** [*required*, no default]:
+* **`role.uuid`** [*required*, no default]:
  The `UUID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. 
- **Note**: This attribute should be presented as part of a `roles` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
+ **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
 * **`attribute_key`** [*required*, no default]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 * **`attribute_value`** [*required*, no default]:
@@ -60,7 +60,7 @@ curl -X POST \
                     "attribute_value": "Development"
                 }
                 "relationships": {
-                    "roles": {
+                    "role": {
                         "data": {
                             "id": "123e4567-e89b-12d3-a456-426655445555",
                             "type": "roles"
@@ -89,13 +89,13 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     "type": "authn_mappings",
     "id": "123e4567-e89b-12d3-a456-426655440000",
     "relationships": {
-      "saml_assertion_attributes": {
+      "saml_assertion_attribute": {
         "data": {
           "id": 0,
           "type": "saml_assertion_attributes"
         }
       },
-      "roles": {
+      "role": {
         "data": {
           "id": "123e4567-e89b-12d3-a456-426655440000",
           "type": "roles"
@@ -152,7 +152,7 @@ Returns a list of AuthN Mappings
 ##### ARGUMENTS
 
 * **`sort`** [*optional*, *default*=**created\_at**]:
-  Sort attribute and direction—defaults to ascending order, `-<attribute>` sorts in descending order. Can also sort on relationship attributes `roles.name`, `saml_assertion_attributes.attribute_key`, `saml_assertion_attributes.attribute_value`.
+  Sort attribute and direction—defaults to ascending order, `-<attribute>` sorts in descending order. Can also sort on relationship attributes `role.name`, `saml_assertion_attribute.attribute_key`, `saml_assertion_attribute.attribute_value`.
 * **`page[number]`** [*optional*, *default*=**0**, *minimum*=**0**]:
   The page of results to return.
 * **`page[size]`** [*optional*, *default*=**10**]:
@@ -182,10 +182,10 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
       "type": "authn_mapping",
       "id": "123e4567-e89b-12d3-a456-426655440000",
       "relationships": {
-        "saml_assertion_attributes": {
+        "saml_assertion_attribute": {
           "data": {"id": 0, "type": "saml_assertion_attributes"}
         },
-        "roles": {
+        "role": {
           "data": {
             "id": "123e4567-e89b-12d3-a456-426655440000",
             "type": "roles"
@@ -283,10 +283,10 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     "type": "authn_mappings",
     "id": "123e4567-e89b-12d3-a456-426655440000",
     "relationships": {
-      "saml_assertion_attributes": {
+      "saml_assertion_attribute": {
         "data": {"id": 0, "type": "saml_assertion_attributes"}
       },
-      "roles": {
+      "role": {
         "data": {"id": "123e4567-e89b-12d3-a456-426655440000", "type": "roles"}
       }
     }
@@ -344,9 +344,9 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
   Replace `{UUID}` with the UUID of the AuthN Mapping you want to update.
 * **`id`** [*required*, no default]:
   The UUID of the AuthN Mapping being updated. This property must match the `{UUID}` path parameter in the request.
-* **`roles.uuid`** [*optional*, *default*=none]:
+* **`role.uuid`** [*optional*, *default*=none]:
  The `UUID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. 
- **Note**: This attribute should be presented as part of a `roles` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
+ **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
 * **`attribute_key`** [*optional*, *default*=none]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 * **`attribute_value`** [*optional*, *default*=none]:
@@ -370,7 +370,7 @@ curl -X PATCH \
                       "attribute_value": "Developer"
                  }
                  "relationships": {
-                    "roles": {
+                    "role": {
                     "data": {"id": "123e4567-e89b-12d3-a456-426655440000", "type": "roles"}
                     }
                 }
@@ -395,10 +395,10 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     "type": "authn_mappings",
     "id": "123e4567-e89b-12d3-a456-426655440000",
     "relationships": {
-      "saml_assertion_attributes": {
+      "saml_assertion_attribute": {
         "data": {"id": 0, "type": "saml_assertion_attributes"}
       },
-      "roles": {
+      "role": {
         "data": {"id": "123e4567-e89b-12d3-a456-426655440000", "type": "roles"}
       }
     }
@@ -530,7 +530,7 @@ Enables/disables all AuthN Mappings.
 ##### ARGUMENTS
 
 * **`{preference_type}`** [*required*, no default]:
-  Org preference to update, required to be "saml_authn_mapping_roles"
+  Preference to update, required to be "saml_authn_mapping_roles"
 * **`{preference_data}`** [*required*, no default]:
   Data to update preference with, must be true or false. true to enable all mappings, false to disable
 
