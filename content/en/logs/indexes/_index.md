@@ -40,7 +40,7 @@ The Log Explorer supports [queries across multiple indexes][8].
 
 ## Add Indexes
 
-If multiple-indexes is activated, use the "add Index" button to create a new index. 
+If multiple-indexes is activated, use the "New Index" button to create a new index. 
 
 {{< img src="logs/indexes/add-index.png" alt="Add index"  style="width:70%;">}}
 
