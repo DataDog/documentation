@@ -6,9 +6,21 @@ aliases:
   - /guides/autodiscovery/
 kind: documentation
 further_reading:
-- link: "agent/kubernetes/"
-  tag: "documentation"
-  text: "Kubernetes Setup"
+- link: "agent/kubernetes/log"
+  tag: "Documentation"
+  text: "Collect your application logs"
+- link: "/agent/kubernetes/apm"
+  tag: "Documentation"
+  text: "Collect your application traces"
+- link: "/agent/kubernetes/prometheus"
+  tag: "Documentation"
+  text: "Collect your Prometheus metrics"
+- link: "/agent/guide/autodiscovery-management"
+  tag: "Documentation"
+  text: "Limit data collection to a subset of containers only"
+- link: "/agent/kubernetes/tag"
+  tag: "Documentation"
+  text: "Assign tags to all data emitted by a container"
 ---
 
 <div class="alert alert-info">

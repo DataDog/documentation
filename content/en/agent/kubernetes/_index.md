@@ -12,12 +12,24 @@ aliases:
     - /agent/kubernetes/daemonset_setup
     - /agent/kubernetes/helm
 further_reading:
-- link: "agent/kubernetes/metrics"
-  tag: "documentation"
-  text: "Metrics collected by the Agent"
-- link: "agent/autodiscovery"
-  tag: "documentation"
-  text: "Autodiscovery with the Agent"
+- link: "agent/kubernetes/log"
+  tag: "Documentation"
+  text: "Collect your application logs"
+- link: "/agent/kubernetes/apm"
+  tag: "Documentation"
+  text: "Collect your application traces"
+- link: "/agent/kubernetes/prometheus"
+  tag: "Documentation"
+  text: "Collect your Prometheus metrics"
+- link: "/agent/kubernetes/integrations"
+  tag: "Documentation"
+  text: "Collect automatically your applications metrics and logs"
+- link: "/agent/guide/autodiscovery-management"
+  tag: "Documentation"
+  text: "Limit data collection to a subset of containers only"
+- link: "/agent/kubernetes/tag"
+  tag: "Documentation"
+  text: "Assign tags to all data emitted by a container"
 ---
 
 Run the Datadog Agent in your Kubernetes cluster directly in order to start collecting your cluster and applications metrics, traces, and logs. You can deploy it with a [Helm chart](?tab=helm) or a [DaemonSet](?tab=daemonset).

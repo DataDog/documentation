@@ -5,12 +5,18 @@ further_reading:
 - link: "agent/docker/log"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "/infrastructure/process"
+- link: "/agent/docker/apm"
   tag: "Documentation"
-  text: "Collect your processes"
-- link: "tracing"
+  text: "Collect your application traces"
+- link: "/agent/docker/prometheus"
   tag: "Documentation"
-  text: "Collect your traces"
+  text: "Collect your Prometheus metrics"
+- link: "/agent/guide/autodiscovery-management"
+  tag: "Documentation"
+  text: "Limit data collection to a subset of containers only"
+- link: "/agent/docker/tag"
+  tag: "Documentation"
+  text: "Assign tags to all data emitted by a container"
 ---
 
 <div class="alert alert-info">

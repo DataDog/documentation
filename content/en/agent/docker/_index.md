@@ -7,18 +7,24 @@ aliases:
   - /agent/basic_agent_usage/docker/
   - /integrations/docker_daemon/
 further_reading:
-- link: "/integrations/java/?tab=docker#configuration"
-  tag: "Documentation"
-  text: "Docker JMX"
 - link: "agent/docker/log"
   tag: "Documentation"
-  text: Collect your Docker logs
-- link: "/infrastructure/process"
+  text: "Collect your application logs"
+- link: "/agent/docker/apm"
   tag: "Documentation"
-  text: Collect your Docker processes
-- link: "agent/docker/apm"
+  text: "Collect your application traces"
+- link: "/agent/docker/prometheus"
   tag: "Documentation"
-  text: Collect your Docker traces
+  text: "Collect your Prometheus metrics"
+- link: "/agent/docker/integrations"
+  tag: "Documentation"
+  text: "Collect automatically your applications metrics and logs"
+- link: "/agent/guide/autodiscovery-management"
+  tag: "Documentation"
+  text: "Limit data collection to a subset of containers only"
+- link: "/agent/docker/tag"
+  tag: "Documentation"
+  text: "Assign tags to all data emitted by a container"
 ---
 
 ## Overview

@@ -9,15 +9,21 @@ further_reading:
     - link: 'logs/explorer'
       tag: 'Documentation'
       text: 'Learn how to explore your logs'
-    - link: 'logs/explorer/analytics'
-      tag: 'Documentation'
-      text: 'Perform Log Analytics'
-    - link: 'logs/processing'
-      tag: 'Documentation'
-      text: 'Learn how to process your logs'
-    - link: 'logs/processing/parsing'
-      tag: 'Documentation'
-      text: 'Learn more about parsing'
+    - link: "/agent/docker/apm"
+      tag: "Documentation"
+      text: "Collect your application traces"
+    - link: "/agent/docker/prometheus"
+      tag: "Documentation"
+      text: "Collect your Prometheus metrics"
+    - link: "/agent/docker/integrations"
+      tag: "Documentation"
+      text: "Collect automatically your applications metrics and logs"
+    - link: "/agent/guide/autodiscovery-management"
+      tag: "Documentation"
+      text: "Limit data collection to a subset of containers only"
+    - link: "/agent/docker/tag"
+      tag: "Documentation"
+      text: "Assign tags to all data emitted by a container"
 ---
 
 ## Overview
@@ -27,13 +33,9 @@ Datadog Agent 6+ collects logs from containers. Two types of installation are av
 - On the host, where the Agent is external to the Docker environment
 - By deploying the containerized Agent in the Docker environment
 
-Then, collect all the logs from your environment's containers, or filter by container image, name, or container label to choose the logs collected.
+Then, collect all the logs from your environment's containers, or filter by container image, name, or container label to choose the logs collected. This documentation discusses how to collect logs from all running containers, as well as how to leverage Autodiscovery to activate log integrations.
 
-This documentation discusses how to collect logs from all running containers, as well as how to leverage Autodiscovery to activate log integrations.
-
-## Setup
-
-### One-step install to collect all the container logs
+## One-step install
 
 The first step is to install the Agent (whether the containerized version or directly on the host) and to enable log collection for all the containers.
 
@@ -105,7 +107,7 @@ logs_config:
 
 - If using the _journald_ logging driver instead of Docker's default json-file logging driver, see the [journald integration][1] documentation for details regarding the setup for containerized environments.
 
-### Activate Log Integrations
+## Log Integrations
 
 In Datadog Agent 6.8+, `source` and `service` default to the `short_image` tag value. This allows Datadog to identify the log source for each container and automatically install the corresponding integration.
 
@@ -146,7 +148,7 @@ Add the following label as a run command:
 
 Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][4]
 
-#### Examples
+### Examples
 
 {{< tabs >}}
 {{% tab "NGINX Dockerfile" %}}
@@ -200,7 +202,7 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 - Use the environment variable to collect logs from all containers and then override the default `source` and `service` values.
 - Add processing rules for the wanted subset of containers.
 
-### Filter containers
+## Filter containers
 
 It is possible to filter logs, metrics, and Autodiscovery using the following methods. This can be useful to prevent the collection of the Datadog Agent logs. See the [Container Discovery Management][5] to learn more.
 
