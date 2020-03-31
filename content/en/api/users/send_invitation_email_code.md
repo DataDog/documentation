@@ -7,7 +7,7 @@ external_redirect: /api/#send-invitation-email-to-a-user
 
 **SIGNATURE**:
 
-`POST /v2/user_invitations`
+`POST /api/v2/user_invitations`
 
 **EXAMPLE REQUEST**:
 
