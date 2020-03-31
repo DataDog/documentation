@@ -10,10 +10,6 @@ further_reading:
   text: "RBAC for Log Management"
 ---
 
-<div class="alert alert-warning">
-The Federated Authentication to Role Mapping API is currently in closed beta. Functionality and performance may not be ideal, and we reserve the right to change the functionality at any time without warning. Ask your customer success manager or <a href="/help">Datadog Support</a> to enable this feature.
-</div>
-
 If you are using Federated Authentication mechanisms, this API allows you to automatically map groups of users to roles in Datadog using attributes sent from your Identity Provider.
 
 **Note**: If you are a SAML user, and you have been using the existing beta Federated Mapping mechanism (`roles_v2_saml`), Datadog strongly recommends that you transition to using this API.
@@ -35,12 +31,12 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
 
 ##### ARGUMENTS
 
-* **`role.uuid`** [*required*, no default]:
- The `UUID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. 
- **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
-* **`attribute_key`** [*required*, no default]:
+* **`role["data"]["id"]`** [*required*, no default]:
+ The `ID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. 
+ **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned an ID. For more information about finding the `ID` for the role you want to map to, see the [Role API documentation][1].
+* **`attributes["attribute_key"]`** [*required*, no default]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
-* **`attribute_value`** [*required*, no default]:
+* **`attributes["attribute_value"]`** [*required*, no default]:
  The `attribute_value` is the value portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 
 {{< tabs >}}
@@ -48,17 +44,17 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
 
 ```sh
 curl -X POST \
-         "https://api.datadoghq.com/api/v2/authn_mappings" \
-         -H "Content-Type: application/json" \
-         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
-         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
-         -d '{
-             "data": {
-                 "type": "authn_mappings",
-                 "attributes": {
+    "https://api.datadoghq.com/api/v2/authn_mappings" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+    -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+    -d '{
+            "data": {
+                "type": "authn_mappings",
+                "attributes": {
                     "attribute_key": "member-of",
                     "attribute_value": "Development"
-                }
+                },
                 "relationships": {
                     "role": {
                         "data": {
@@ -67,8 +63,8 @@ curl -X POST \
                         }
                     }
                 }
-             }
-         }'
+            }
+        }'
 ```
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
@@ -79,62 +75,62 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
 {
-  "data": {
-    "attributes": {
-      "created_at": "2019-11-04 17:41:29.015504",
-      "modified_at": "2019-11-04 17:41:29.015504",
-      "role_uuid": "00000000-0000-0000-0000-000000000000",
-      "saml_assertion_attribute_id": 0
-    },
-    "type": "authn_mappings",
-    "id": "123e4567-e89b-12d3-a456-426655440000",
-    "relationships": {
-      "saml_assertion_attribute": {
-        "data": {
-          "id": 0,
-          "type": "saml_assertion_attributes"
-        }
-      },
-      "role": {
-        "data": {
-          "id": "123e4567-e89b-12d3-a456-426655440000",
-          "type": "roles"
-        }
-      }
-    }
-  },
-  "included": [
-    {
-      "data": {
-        "id": "123e4567-e89b-12d3-a456-426655440000",
-        "type": "roles",
+    "data": {
         "attributes": {
-          "created_at": "2019-11-04 17:41:29.015504",
-          "modified_at": "2019-11-06 17:41:29.015504",
-          "name": "Developer Role"
+            "created_at": "2019-11-04 17:41:29.015504",
+            "modified_at": "2019-11-04 17:41:29.015504",
+            "role_uuid": "00000000-0000-0000-0000-000000000000",
+            "saml_assertion_attribute_id": 0
         },
+        "type": "authn_mappings",
+        "id": "123e4567-e89b-12d3-a456-426655440000",
         "relationships": {
-          "data": [
-            {
-              "id": "123e4567-e89b-12d3-a456-426655441000",
-              "type": "permissions"
+            "saml_assertion_attribute": {
+                "data": {
+                    "id": 0,
+                    "type": "saml_assertion_attributes"
+                }
+            },
+            "role": {
+                "data": {
+                    "id": "123e4567-e89b-12d3-a456-426655440000",
+                    "type": "roles"
+                }
             }
-          ]
         }
-      }
     },
-    {
-      "data": {
-        "id": 6,
-        "type": "saml_assertion_attributes",
-        "attributes": {
-          "id": 6,
-          "attribute_key": "member-of",
-          "attribute_value": "Development"
+    "included": [
+        {
+            "data": {
+                "id": "123e4567-e89b-12d3-a456-426655440000",
+                "type": "roles",
+                "attributes": {
+                    "created_at": "2019-11-04 17:41:29.015504",
+                    "modified_at": "2019-11-06 17:41:29.015504",
+                    "name": "Developer Role"
+                },
+                "relationships": {
+                    "data": [
+                        {
+                            "id": "123e4567-e89b-12d3-a456-426655441000",
+                            "type": "permissions"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "data": {
+                "id": 6,
+                "type": "saml_assertion_attributes",
+                "attributes": {
+                    "id": 6,
+                    "attribute_key": "member-of",
+                    "attribute_value": "Development"
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }
 {{< /code-block >}}
 
@@ -177,66 +173,66 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ```json
 {
-  "data": [
-    {
-      "type": "authn_mapping",
-      "id": "123e4567-e89b-12d3-a456-426655440000",
-      "relationships": {
-        "saml_assertion_attribute": {
-          "data": {"id": 0, "type": "saml_assertion_attributes"}
+    "data": [
+      {
+        "type": "authn_mapping",
+        "id": "123e4567-e89b-12d3-a456-426655440000",
+        "relationships": {
+          "saml_assertion_attribute": {
+            "data": {"id": 0, "type": "saml_assertion_attributes"}
+          },
+          "role": {
+            "data": {
+              "id": "123e4567-e89b-12d3-a456-426655440000",
+              "type": "roles"
+            }
+          }
         },
-        "role": {
-          "data": {
-            "id": "123e4567-e89b-12d3-a456-426655440000",
-            "type": "roles"
+        "attributes": {
+          "created_at": "2019-11-04 17:41:29.015504",
+          "modified_at": "2019-11-04 17:41:29.015504",
+          "saml_assertion_attribute_id": 0
+        }
+      }
+    ],
+    "included": [
+      {
+        "data": {
+          "id": "123e4567-e89b-12d3-a456-426655440000",
+          "type": "roles",
+          "attributes": {
+            "created_at": "2019-11-04 17:41:29.015504",
+            "modified_at": "2019-11-06 17:41:29.015504",
+            "name": "Developer Role"
+          },
+          "relationships": {
+            "data": [
+              {
+                "id": "123e4567-e89b-12d3-a456-426655440000",
+                "type": "permissions"
+              }
+            ]
           }
         }
       },
-      "attributes": {
-        "created_at": "2019-11-04 17:41:29.015504",
-        "modified_at": "2019-11-04 17:41:29.015504",
-        "saml_assertion_attribute_id": 0
-      }
-    }
-  ],
-  "included": [
-    {
-      "data": {
-        "id": "123e4567-e89b-12d3-a456-426655440000",
-        "type": "roles",
-        "attributes": {
-          "created_at": "2019-11-04 17:41:29.015504",
-          "modified_at": "2019-11-06 17:41:29.015504",
-          "name": "Developer Role"
-        },
-        "relationships": {
-          "data": [
-            {
-              "id": "123e4567-e89b-12d3-a456-426655440000",
-              "type": "permissions"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "data": {
-        "id": 6,
-        "type": "saml_assertion_attributes",
-        "attributes": {
+      {
+        "data": {
           "id": 6,
-          "attribute_key": "member-of",
-          "attribute_value": "Developer"
+          "type": "saml_assertion_attributes",
+          "attributes": {
+            "id": 6,
+            "attribute_key": "member-of",
+            "attribute_value": "Developer"
+          }
         }
       }
+    ],
+    "meta": {
+      "page": {
+        "total_count": 1, 
+        "total_filtered_count": 1, 
+      }
     }
-  ],
-  "meta": {
-    "page": {
-      "total_count": 1, 
-      "total_filtered_count": 1, 
-    }
-  }
 }
 ```
 
@@ -249,18 +245,18 @@ Returns a specific AuthN Mapping by UUID.
 
 | Method | Endpoint path            | Required payload |
 |--------|--------------------------|------------------|
-| `GET`  | `/authn_mappings/{UUID}` | URL parameter    |
+| `GET`  | `/authn_mappings/{authn_mapping_id}` | URL parameter    |
 
 ##### ARGUMENTS
 
-* **`{UUID}`** [*required*, no default]:
-  Replace `{UUID}` with the UUID of the AuthN Mapping you want to view.
+* **`{authn_mapping_id}`** [*required*, no default]:
+  Replace `{authn_mapping_id}` with the ID of the AuthN Mapping you want to view.
 
 {{< tabs >}}
 {{% tab "Example" %}}
 
 ```sh
-curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings/{authn_mapping_id}" \
      -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
@@ -273,57 +269,63 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ```json
 {
-  "data": {
-    "attributes": {
-      "created_at": "2019-11-04 17:41:29.015504",
-      "modified_at": "2019-11-04 17:41:29.015504",
-      "uuid": "123e4567-e89b-12d3-a456-426655440000",
-      "saml_assertion_attribute_id": 0
-    },
-    "type": "authn_mappings",
-    "id": "123e4567-e89b-12d3-a456-426655440000",
-    "relationships": {
-      "saml_assertion_attribute": {
-        "data": {"id": 0, "type": "saml_assertion_attributes"}
-      },
-      "role": {
-        "data": {"id": "123e4567-e89b-12d3-a456-426655440000", "type": "roles"}
-      }
-    }
-  },
-  "included": [
-    {
-      "data": {
-        "id": "123e4567-e89b-12d3-a456-426655440000",
-        "type": "roles",
+    "data": {
         "attributes": {
-          "created_at": "2019-11-04 17:41:29.015504",
-          "modified_at": "2019-11-06 17:41:29.015504",
-          "uuid": "123e4567-e89b-12d3-a456-426655440000",
-          "name": "Developer Role"
+            "created_at": "2019-11-04 17:41:29.015504",
+            "modified_at": "2019-11-04 17:41:29.015504",
+            "uuid": "123e4567-e89b-12d3-a456-426655440000",
+            "saml_assertion_attribute_id": 0
         },
+        "type": "authn_mappings",
+        "id": "123e4567-e89b-12d3-a456-426655440000",
         "relationships": {
-          "data": [
-            {
-              "id": "123e4567-e89b-12d3-a456-426655440000",
-              "type": "permissions"
+            "saml_assertion_attribute": {
+                "data": {
+                    "id": 0,
+                    "type": "saml_assertion_attributes"
+                }
+            },
+            "role": {
+                "data": {
+                    "id": "123e4567-e89b-12d3-a456-426655440000",
+                    "type": "roles"
+                }
             }
-          ]
         }
-      }
     },
-    {
-      "data": {
-        "id": 6,
-        "type": "saml_assertion_attributes",
-        "attributes": {
-          "id": 6,
-          "attribute_key": "member-of",
-          "attribute_value": "Developer"
+    "included": [
+        {
+            "data": {
+                "id": "123e4567-e89b-12d3-a456-426655440000",
+                "type": "roles",
+                "attributes": {
+                    "created_at": "2019-11-04 17:41:29.015504",
+                    "modified_at": "2019-11-06 17:41:29.015504",
+                    "uuid": "123e4567-e89b-12d3-a456-426655440000",
+                    "name": "Developer Role"
+                },
+                "relationships": {
+                    "data": [
+                        {
+                            "id": "123e4567-e89b-12d3-a456-426655440000",
+                            "type": "permissions"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "data": {
+                "id": 6,
+                "type": "saml_assertion_attributes",
+                "attributes": {
+                    "id": 6,
+                    "attribute_key": "member-of",
+                    "attribute_value": "Developer"
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }
 ```
 
@@ -334,22 +336,20 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a JSON body. Returns the updated AuthN Mapping.
 
-| Method  | Endpoint path               | Required payload    |
-|---------|-----------------------------|---------------------|
-| `PATCH` | `/v2/authn_mappings/{UUID}` | URL parameter, JSON |
+| Method  | Endpoint path                           | Required payload    |
+|---------|-----------------------------------------|---------------------|
+| `PATCH` | `/v2/authn_mappings/{authn_mapping_id}` | URL parameter, JSON |
 
 ##### ARGUMENTS
 
-* **`{UUID}`** [*required*, no default]:
-  Replace `{UUID}` with the UUID of the AuthN Mapping you want to update.
-* **`id`** [*required*, no default]:
-  The UUID of the AuthN Mapping being updated. This property must match the `{UUID}` path parameter in the request.
-* **`role.uuid`** [*optional*, *default*=none]:
- The `UUID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. 
- **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a UUID. For more information about finding the `UUID` for the role you want to map to, see the [Role API documentation][1].
-* **`attribute_key`** [*optional*, *default*=none]:
+* **`{authn_mapping_id}`** [*required*, no default]:
+  Replace `{authn_mapping_id}` with the ID of the AuthN Mapping you want to update. This is required in both the path of the request and the body of the request.
+* **`role["data"]["id"]`** [*optional*, *default*=none]:
+ The `ID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. 
+ **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned a ID. For more information about finding the `ID` for the role you want to map to, see the [Role API documentation][1].
+* **`attributes["attribute_key"]`** [*optional*, *default*=none]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
-* **`attribute_value`** [*optional*, *default*=none]:
+* **`attributes["attribute_value"]`** [*optional*, *default*=none]:
  The `attribute_value` is the value portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
 
 {{< tabs >}}
@@ -357,21 +357,24 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
 
 ```sh
 curl -X PATCH \
-         "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
-         -H "Content-Type: application/json" \
-         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
-         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
-         -d '{
-             "data": {
-                 "type": "authn_mappings",
-                 "id": "{UUID}",
-                 "attributes": {
-                      "attribute_key": "member-of",
-                      "attribute_value": "Developer"
-                 }
-                 "relationships": {
-                    "role": {
-                    "data": {"id": "123e4567-e89b-12d3-a456-426655440000", "type": "roles"}
+    "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+    -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+    -d '{
+            "data": {
+                "type": "authn_mappings",
+                "id": "{authn_mapping_id}",
+                "attributes": {
+                    "attribute_key": "member-of",
+                    "attribute_value": "Developer"
+                }
+                "relationships": {
+                "role": {
+                    "data": {
+                            "id": "123e4567-e89b-12d3-a456-426655440000", 
+                            "type": "roles"
+                        }
                     }
                 }
             }
@@ -386,56 +389,62 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ```json
 {
-  "data": {
-    "attributes": {
-      "created_at": "2019-11-04 17:41:29.015504",
-      "modified_at": "2019-11-04 17:41:29.015504",
-      "saml_assertion_attribute_id": 0
-    },
-    "type": "authn_mappings",
-    "id": "123e4567-e89b-12d3-a456-426655440000",
-    "relationships": {
-      "saml_assertion_attribute": {
-        "data": {"id": 0, "type": "saml_assertion_attributes"}
-      },
-      "role": {
-        "data": {"id": "123e4567-e89b-12d3-a456-426655440000", "type": "roles"}
-      }
-    }
-  },
-  "included": [
-    {
-      "data": {
-        "id": "123e4567-e89b-12d3-a456-426655440000",
-        "type": "roles",
+    "data": {
         "attributes": {
-          "created_at": "2019-11-04 17:41:29.015504",
-          "modified_at": "2019-11-06 17:41:29.015504",
-          "uuid": "123e4567-e89b-12d3-a456-426655440000",
-          "name": "Developer Role"
+            "created_at": "2019-11-04 17:41:29.015504",
+            "modified_at": "2019-11-04 17:41:29.015504",
+            "saml_assertion_attribute_id": 0
         },
+        "type": "authn_mappings",
+        "id": "123e4567-e89b-12d3-a456-426655440000",
         "relationships": {
-          "data": [
-            {
-              "id": "123e4567-e89b-12d3-a456-426655440000",
-              "type": "permissions"
+            "saml_assertion_attribute": {
+                "data": {
+                    "id": 0,
+                    "type": "saml_assertion_attributes"
+                }
+            },
+            "role": {
+                "data": {
+                    "id": "123e4567-e89b-12d3-a456-426655440000",
+                    "type": "roles"
+                }
             }
-          ]
         }
-      }
     },
-    {
-      "data": {
-        "id": 6,
-        "type": "saml_assertion_attributes",
-        "attributes": {
-          "id": 6,
-          "attribute_key": "member-of",
-          "attribute_value": "Developer"
+    "included": [
+        {
+            "data": {
+                "id": "123e4567-e89b-12d3-a456-426655440000",
+                "type": "roles",
+                "attributes": {
+                    "created_at": "2019-11-04 17:41:29.015504",
+                    "modified_at": "2019-11-06 17:41:29.015504",
+                    "uuid": "123e4567-e89b-12d3-a456-426655440000",
+                    "name": "Developer Role"
+                },
+                "relationships": {
+                    "data": [
+                        {
+                            "id": "123e4567-e89b-12d3-a456-426655440000",
+                            "type": "permissions"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "data": {
+                "id": 6,
+                "type": "saml_assertion_attributes",
+                "attributes": {
+                    "id": 6,
+                    "attribute_key": "member-of",
+                    "attribute_value": "Developer"
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }
 ```
 
@@ -446,14 +455,14 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 Deletes a specific AuthN Mapping.
 
-| Method   | Endpoint path               | Required payload |
-|----------|-----------------------------|------------------|
-| `DELETE` | `/v2/authn_mappings/{UUID}` | URL parameter    |
+| Method   | Endpoint path                           | Required payload |
+|----------|-----------------------------------------|------------------|
+| `DELETE` | `/v2/authn_mappings/{authn_mapping_id}` | URL parameter    |
 
 ##### ARGUMENTS
 
-* **`{UUID}`** [*required*, no default]:
-  Replace `{UUID}` with the UUID of the AuthN Mapping you want to delete.
+* **`{authn_mapping_id}`** [*required*, no default]:
+  Replace `{authn_mapping_id}` with the ID of the AuthN Mapping you want to delete.
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -482,9 +491,9 @@ HTTP/2 204
 
 Check whether Authn Mappings are enabled or disabled.
 
-| Method   | Endpoint path               | Required payload |
-|----------|-----------------------------|------------------|
-| `GET`    | `/v1/org_preferrences`      | None             |
+| Method   | Endpoint path              | Required payload |
+|----------|----------------------------|------------------|
+| `GET`    | `/v1/org_preferences`      | None             |
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -521,7 +530,11 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 ### Enable/Disable All Mappings
 
-Enables/disables all AuthN Mappings.
+<div class="alert alert-warning">
+When enabled all users logging in with SAML will be stripped of any roles they have currently and reassigned roles based on the values in their SAML Assertion. It's important that you confirm you are receiving the expected SAML Assertions in your login before enabling the Mapping enforcement.
+</div>
+
+Enables/disables the enforcement of all AuthN Mappings. 
 
 | Method   | Endpoint path               | Required payload |
 |----------|-----------------------------|------------------|
@@ -539,19 +552,19 @@ Enables/disables all AuthN Mappings.
 
 ```sh
 curl -X POST \
-         "https://api.datadoghq.com/api/v1/org_perferences" \
-         -H "Content-Type: application/json" \
-         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
-         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
-         -d '{
-             "data": {
-                 "type": "org_peferences",
-                 "attributes": {
-                    "preference_type": "saml_authn_mapping_roles",
-                    "preference_data": true
-                j}
-             }
-         }'
+    "https://api.datadoghq.com/api/v1/org_perferences" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+    -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+    -d '{
+        "data": {
+            "type": "org_peferences",
+            "attributes": {
+                "preference_type": "saml_authn_mapping_roles",
+                "preference_data": true
+            }
+        }
+    }'
 `
 ```
 
