@@ -212,7 +212,7 @@ main:
     parent: "agent"
     identifier: "agent_docker"
     weight: 2
-  - name: "Integrations"
+  - name: "Autodiscovery"
     url: "agent/docker/integrations/"
     parent: "agent_docker"
     identifier: "agent_docker_integrations"
@@ -255,7 +255,7 @@ main:
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_apm"
     weight: 302
-  - name: "Integrations"
+  - name: "Autodiscovery"
     url: "agent/kubernetes/integrations/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_integrations"
@@ -402,6 +402,10 @@ main:
     url: "agent/troubleshooting/site/"
     parent: "agent_troubleshooting"
     weight: 907
+  - name: "Autodiscovery Issues"
+    url: "agent/troubleshooting/autodiscovery/"
+    parent: "agent_troubleshooting"
+    weight: 908
 
   ## AGENT - Guides
   - name: "Guides"

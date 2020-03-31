@@ -196,9 +196,9 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 
 **Note**: Autodiscovery features can be used with or without the `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` environment variable. Choose one of the following options:
 
--   Use container labels or pod annotations to choose the containers to collect logs from.
--   Use the environment variable to collect logs from all containers and then override the default `source` and `service` values.
--   Add processing rules for the wanted subset of containers.
+- Use container labels or pod annotations to choose the containers to collect logs from.
+- Use the environment variable to collect logs from all containers and then override the default `source` and `service` values.
+- Add processing rules for the wanted subset of containers.
 
 ### Filter containers
 

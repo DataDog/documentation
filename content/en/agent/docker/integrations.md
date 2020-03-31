@@ -1,5 +1,5 @@
 ---
-title: Autodiscovery Integration Templates
+title: Docker Integrations Autodiscovery
 kind: documentation
 further_reading:
 - link: "agent/docker/log"
@@ -13,7 +13,12 @@ further_reading:
   text: "Collect your traces"
 ---
 
-The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][1] when running the Agent on a host for more context on this logic.
+<div class="alert alert-info">
+<a href="/getting_started/agent/autodiscovery">Consult the Autodiscovery Getting Started documentation to discover the concepts behind this feature</a>.
+</div>
+
+This page covers how to configure integrations autodiscovery with Docker, if you are using Kubernetes, see the [Kubernetes Integrations Autodiscovery documentation][1].
+The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][2] when running the Agent on a host for more context on this logic.
 
 To configure an integration with Autodiscovery, use the following parameters:
 
@@ -23,13 +28,15 @@ To configure an integration with Autodiscovery, use the following parameters:
 | `<INIT_CONFIG>`      | Yes      | Configuration for the `init_config:` section for the given Datadog-`<INTEGRATION_NAME>`           |
 | `<INSTANCE_CONFIG>`  | Yes      | Configuration for the `instances:` section for the given Datadog-`<INTEGRATION_NAME>`             |
 
+[**Discover the full list of Agent integrations that are Autodiscovery ready with examples for those parameters**][3]
+
 Each tab in sections below shows a different way to apply integration templates to a given container. The available methods are:
 
 * [Docker labels](?tab=docker#configuration)
 * [A configuration file mounted within the Agent](?tab=file#configuration)
 * [Key-value stores](?tab=keyvaluestore#configuration)
 
-**Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][2], [Varnish][3], [Postfix][4], [Cassandra Nodetools][5], and [Gunicorn][6]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint. For example, the standard pattern in Kubernetes is: side car adapter with a node-level or cluster-level collector. This setup allows the exporter to access the data, which exposes it using an HTTP endpoint, and Datadog Autodiscovery can then access the data.
+**Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][4], [Varnish][5], [Postfix][6], [Cassandra Nodetools][7], and [Gunicorn][8]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint. For example, the standard pattern in Kubernetes is: side car adapter with a node-level or cluster-level collector. This setup allows the exporter to access the data, which exposes it using an HTTP endpoint, and Datadog Autodiscovery can then access the data.
 
 ## Configuration
 
@@ -204,7 +211,7 @@ instances:
 
 This looks like a minimal [Redis integration configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any container on the same host that run a `redis` image. See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
 
-If your Redis requires an additional `password` when accessing its stats endpoint, and you want to correctly flag logs coming out of it:
+If your Redis requires an additional `password` when accessing its stats endpoint:
 
 1. Create the folders `conf.d/` and `conf.d/redis.d` on your host.
 2. Add the custom auto-configuration below to `conf.d/redis.d/conf.yaml` on your host.
@@ -231,7 +238,7 @@ instances:
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
-The following etcd commands create a Redis integration template with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
+The following etcd commands create a Redis integration template with a custom `password` parameter:
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis
@@ -252,9 +259,9 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 ### Datadog Apache and HTTP check integrations
 
-Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Autodiscovery templates are configured to collect metrics and logs from the Apache container and set up a Datadog-HTTP check with instances for testing two endpoints.
+Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Autodiscovery templates are configured to collect metrics from the Apache container and set up a Datadog-HTTP check with instances for testing two endpoints.
 
-Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][7], [Datadog-HTTP check integration][8].
+Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, and `<INSTANCE_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][9], [Datadog-HTTP check integration][10].
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -325,11 +332,13 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/integrations/#configuring-agent-integrations
-[2]: /integrations/ceph
-[3]: /integrations/varnish/#autodiscovery
-[4]: /integrations/postfix
-[5]: /integrations/cassandra/#agent-check-cassandra-nodetool
-[6]: /integrations/gunicorn
-[7]: /integrations/apache/#setup
-[8]: /integrations/http_check/#setup
+[1]: /agent/kubernetes/integrations
+[2]: /getting_started/integrations/#configuring-agent-integrations
+[3]: /integrations/#cat-autodiscovery
+[4]: /integrations/ceph
+[5]: /integrations/varnish/#autodiscovery
+[6]: /integrations/postfix
+[7]: /integrations/cassandra/#agent-check-cassandra-nodetool
+[8]: /integrations/gunicorn
+[9]: /integrations/apache/#setup
+[10]: /integrations/http_check/#setup

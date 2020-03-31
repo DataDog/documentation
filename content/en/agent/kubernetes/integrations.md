@@ -1,5 +1,5 @@
 ---
-title: Integration Autodiscovery
+title: Kubernetes Integrations Autodiscovery
 aliases:
   - /agent/autodiscovery/integrations
   - /guides/servicediscovery/
@@ -11,7 +11,11 @@ further_reading:
   text: "Kubernetes Setup"
 ---
 
-The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][1] when running the Agent on a host for more context on this logic.
+<div class="alert alert-info">
+<a href="/getting_started/agent/autodiscovery">Consult the Autodiscovery Getting Started documentation to discover the concepts behind this feature</a>.
+</div>
+
+This page covers how to configure integrations autodiscovery with Kubernetes, if you are using Docker or Amazon ECS see the [Docker Integrations Autodiscovery documentation][1]. The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][2] when running the Agent on a host for more context on this logic.
 
 To configure an integration with Autodiscovery, use the following parameters:
 
@@ -20,7 +24,8 @@ To configure an integration with Autodiscovery, use the following parameters:
 | `<INTEGRATION_NAME>` | Yes      | Name of the Datadog integration                                                                   |
 | `<INIT_CONFIG>`      | Yes      | Configuration for the `init_config:` section for the given Datadog-`<INTEGRATION_NAME>`           |
 | `<INSTANCE_CONFIG>`  | Yes      | Configuration for the `instances:` section for the given Datadog-`<INTEGRATION_NAME>`             |
-| `<LOG_CONFIG>`       | No       | For Agent v6.5+, configuration for the `logs:` section for the given Datadog-`<INTEGRATION_NAME>` |
+
+[**Discover the full list of Agent integrations that are Autodiscovery ready with examples for those parameters**][3]
 
 Each tab in sections below shows a different way to apply integration templates to a given container. The available methods are:
 
@@ -28,7 +33,7 @@ Each tab in sections below shows a different way to apply integration templates 
 * [ConfigMap](?tab=configmap#configuration)
 * [Key-value stores](?tab=keyvaluestore#configuration)
 
-**Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][2], [Varnish][3], [Postfix][4], [Cassandra Nodetools][5], and [Gunicorn][6]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint. For example, the standard pattern in Kubernetes is: side car adapter with a node-level or cluster-level collector. This setup allows the exporter to access the data, which exposes it using an HTTP endpoint, and Datadog Autodiscovery can then access the data.
+**Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][4], [Varnish][5], [Postfix][6], [Cassandra Nodetools][7], and [Gunicorn][8]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint. For example, the standard pattern in Kubernetes is: side car adapter with a node-level or cluster-level collector. This setup allows the exporter to access the data, which exposes it using an HTTP endpoint, and Datadog Autodiscovery can then access the data.
 
 ## Configuration
 
@@ -49,7 +54,6 @@ metadata:
     ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: '[<INTEGRATION_NAME>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCE_CONFIG>]'
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[<LOG_CONFIG>]'
     # (...)
 spec:
   containers:
@@ -69,12 +73,10 @@ metadata:
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.check_names: '[<INTEGRATION_NAME_1>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.init_configs: '[<INIT_CONFIG_1>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.instances: '[<INSTANCE_CONFIG_1>]'
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.logs: '[<LOG_CONFIG_1>]'
     # (...)
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.check_names: '[<INTEGRATION_NAME_2>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.init_configs: '[<INIT_CONFIG_2>]'
     ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.instances: '[<INSTANCE_CONFIG_2>]'
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.logs: '[<LOG_CONFIG_2>]'
 spec:
   containers:
     - name: '<CONTAINER_IDENTIFIER_1>'
@@ -134,8 +136,6 @@ data:
       <INIT_CONFIG>
     instances:
       <INSTANCES_CONFIG>
-    logs:
-      <LOGS_CONFIG>
 ```
 
 See the [Autodiscovery Container Identifiers][3] documentation for information on the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
@@ -194,7 +194,6 @@ With the key-value store enabled as a template source, the Agent looks for templ
       - check_names: ["<INTEGRATION_NAME>"]
       - init_configs: ["<INIT_CONFIG>"]
       - instances: ["<INSTANCE_CONFIG>"]
-      - logs: ["<LOGS_CONFIG>"]
     ...
 ```
 
@@ -212,7 +211,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-The following pod annotation defines the integration template for `redis` containers with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
+The following pod annotation defines the integration template for `redis` containers with a custom `password` parameter:
 
 ```yaml
 apiVersion: v1
@@ -230,7 +229,6 @@ metadata:
           "password":"%%env_REDIS_PASSWORD%%"
         }
       ]
-    ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis"}]'
   labels:
     name: redis
 spec:
@@ -247,7 +245,7 @@ spec:
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-The following ConfigMap defines the integration template for `redis` containers with the `source` and `service` attributes for collecting logs:
+The following ConfigMap defines the integration template for `redis` containers:
 
 ```yaml
 kind: ConfigMap
@@ -264,9 +262,6 @@ data:
     instances:
       - host: "%%host%%"
         port: "6379"
-    logs:
-      source: redis
-      service: redis
 ```
 
 In the manifest, define the `volumeMounts` and `volumes`:
@@ -292,14 +287,13 @@ In the manifest, define the `volumeMounts` and `volumes`:
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
-The following etcd commands create a Redis integration template with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
+The following etcd commands create a Redis integration template with a custom `password` parameter:
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis
 etcdctl set /datadog/check_configs/redis/check_names '["redisdb"]'
 etcdctl set /datadog/check_configs/redis/init_configs '[{}]'
 etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
-etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis"}]'
 ```
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
@@ -314,9 +308,9 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 ### Datadog Apache and HTTP check integrations
 
-Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Autodiscovery templates are configured to collect metrics and logs from the Apache container and set up a Datadog-HTTP check with instances for testing two endpoints.
+Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Autodiscovery templates are configured to collect metrics from the Apache container and set up a Datadog-HTTP check with instances for testing two endpoints.
 
-Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, `<INSTANCE_CONFIG>`, and `<LOG_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][7], [Datadog-HTTP check integration][8].
+Check names are `apache`, `http_check`, and their `<INIT_CONFIG>`, and `<INSTANCE_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][9], [Datadog-HTTP check integration][10].
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -349,7 +343,6 @@ metadata:
           }
         ]
       ]
-    ad.datadoghq.com/apache.logs: '[{"source":"apache","service":"webapp"}]'
   labels:
     name: apache
 spec:
@@ -374,10 +367,6 @@ init_config:
 
 instances:
   - apache_status_url: http://%%host%%/server-status?auto
-
-logs:
-  source: apache
-  service: webapp
 ```
 
 **Note**: It looks like a minimal [Apache check configuration][1], but notice the `ad_identifiers` option. This required option lets you provide container identifiers. Autodiscovery applies this template to any containers on the same host that run an `httpd` image. See the dedicated [Autodiscovery Identifier][2] documentation to learn more.
@@ -408,7 +397,7 @@ instances:
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-The following ConfigMap defines the integration template for the `apache` and `http_check` containers with the `source` and `service` attributes for collecting `apache` logs:
+The following ConfigMap defines the integration template for the `apache` and `http_check` containers:
 
 ```yaml
 kind: ConfigMap
@@ -423,9 +412,6 @@ data:
     init_config:
     instances:
       - apache_status_url: http://%%host%%/server-status?auto
-    logs:
-      source: apache
-      service: webapp
   http-check-config: |-
     ad_identifiers:
       - httpd
@@ -468,7 +454,6 @@ In the manifest, define the `volumeMounts` and `volumes`:
 etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'
 etcdctl set /datadog/check_configs/httpd/init_configs '[{}, {}]'
 etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name": "<WEBSITE_1>", "url": "http://%%host%%/website_1", timeout: 1},{"name": "<WEBSITE_2>", "url": "http://%%host%%/website_2", timeout: 1}]]'
-etcdctl set /datadog/check_configs/httpd/logs '[{"source": "apache", "service": "webapp"}]'
 ```
 
 **Note**: The order of each list matters. The Agent can only generate the HTTP check configuration correctly if all parts of its configuration have the same index across the three lists.
@@ -480,11 +465,13 @@ etcdctl set /datadog/check_configs/httpd/logs '[{"source": "apache", "service": 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/integrations/#configuring-agent-integrations
-[2]: /integrations/ceph
-[3]: /integrations/varnish/#autodiscovery
-[4]: /integrations/postfix
-[5]: /integrations/cassandra/#agent-check-cassandra-nodetool
-[6]: /integrations/gunicorn
-[7]: /integrations/apache/#setup
-[8]: /integrations/http_check/#setup
+[1]: /agent/kubernetes/integrations
+[2]: /getting_started/integrations/#configuring-agent-integrations
+[3]: /integrations/#cat-autodiscovery
+[4]: /integrations/ceph
+[5]: /integrations/varnish/#autodiscovery
+[6]: /integrations/postfix
+[7]: /integrations/cassandra/#agent-check-cassandra-nodetool
+[8]: /integrations/gunicorn
+[9]: /integrations/apache/#setup
+[10]: /integrations/http_check/#setup
