@@ -17,7 +17,7 @@ further_reading:
 
 The Agent can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.
 
-If running the Agent as a binary on a host, configure your tag extractions with the [Agent](?tab=agent) tab instructions. If running the Agent as a container in your kubernetes cluster configure your tag extraction with the  [Containerized Agent](?tab=containerizedagent) tab instructions.
+If you are running the Agent as a binary on a host, configure your tag extractions with the [Agent](?tab=agent) tab instructions. If you are running the Agent as a container in your Kubernetes cluster, configure your tag extraction with the [Containerized Agent](?tab=containerizedagent) tab instructions.
 
 ## Tag Autodiscovery
 
@@ -43,7 +43,7 @@ Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. 
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 ```
 
-## Node Labels as Tags
+## Node labels as tags
 
 Starting with Agent v6.0+, the Agent can collect labels for a given node and use them as tags to attach to all metrics emitted by all pods on this node:
 
@@ -83,7 +83,7 @@ kubernetes_node_labels_as_tags:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Pod Labels as Tags
+## Pod labels as tags
 
 Starting with Agent v6.0+, the Agent can collect labels for a given pod and use them as tags to attach to all metrics emitted by this pod:
 
@@ -142,7 +142,7 @@ kubernetes_pod_labels_as_tags:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Pod Annotations as Tags
+## Pod annotations as tags
 
 Starting with Agent v6.0+, the Agent can collect annotations for a given pod and use them as tags to attach to all metrics emitted by this pod:
 
