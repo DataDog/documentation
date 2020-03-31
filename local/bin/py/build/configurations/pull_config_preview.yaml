@@ -47,7 +47,7 @@
     contents:
 
     - action: integrations
-      branch: master
+      branch: gus/ref-link
       globs:
       - "*/metadata.csv"
       - "*/manifest.json"
