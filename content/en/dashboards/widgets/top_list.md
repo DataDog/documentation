@@ -9,13 +9,16 @@ further_reading:
   text: "Timeboards"
 - link: "/dashboards/screenboards/"
   tag: "Documentation"
-  text: "Screenboard"
+  text: "Screenboards"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
+- link: "/notebooks/"
+  tag: "Documentation"
+  text: "Notebooks"
 ---
 
-The top list visualization enables you to display a list of Tag value like `hostname` or `service` with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc:
+The top list visualization enables you to display a list of Tag values like `hostname` or `service` with the most or least of any metric value, such as highest consumers of CPU, hosts with the least disk space, etc:
 
 {{< img src="dashboards/widgets/toplist/toplist.png" alt="Top List" >}}
 
@@ -36,7 +39,7 @@ The top list visualization enables you to display a list of Tag value like `host
 
 #### Global time
 
-On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
+On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
 
 #### Title
 
