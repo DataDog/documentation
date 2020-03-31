@@ -168,7 +168,7 @@ Some examples demonstrating how to use parsers:
 
 * [Key value or logfmt](#key-value-or-logfmt)
 * [Parsing dates](#parsing-dates)
-* [Conditional patterns](#conditional-pattern)
+* [Alternating patterns](#alternating-pattern)
 * [Optional attribute](#optional-attribute)
 * [Nested JSON](#nested-json)
 * [Regex](#regex)
