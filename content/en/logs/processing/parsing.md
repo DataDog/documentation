@@ -298,9 +298,9 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 
 **Note**: Parsing a date **doesn't** set its value as the log official date. For this use the [Log Date Remapper][2] in a subsequent Processor.
 
-### Conditional pattern
+### Alternating pattern
 
-If you have logs with two possible formats which differ in only one attribute, set a single rule using conditionals with `(<REGEX_1>|<REGEX_2>)`.
+If you have logs with two possible formats which differ in only one attribute, set a single rule using Alternating with `(<REGEX_1>|<REGEX_2>)`. It's equivalent to a boolean OR.
 
 **Log**:
 
