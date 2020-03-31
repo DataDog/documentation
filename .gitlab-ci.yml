@@ -57,22 +57,8 @@ build_preview:
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
-      - content/en
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
-
-index_internal_doc:
-  stage: post-deploy
-  environment: "preview"
-  image: registry.ddbuild.io/datadoc/webapp:staging-released
-  dependencies:
-    - build_preview
-  only:
-    - /.+?\/[a-zA-Z0-9_-]+/
-  except: [ tags, schedules ]
-  tags: [ "runner:docker", "size:large" ]
-  script:
-    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en
 
 link_checks_preview:
   <<: *base_template
@@ -140,9 +126,24 @@ build_live:
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
+      - content/en
     expire_in: 1 week
   only:
     - master
+
+
+index_internal_doc:
+  stage: post-deploy
+  environment: "live"
+  image: registry.ddbuild.io/datadoc/webapp:staging-released
+  dependencies:
+    - build_preview
+  only:
+    - master
+  except: [ tags, schedules ]
+  tags: [ "runner:docker", "size:large" ]
+  script:
+    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en
 
 test_live_link_checks:
   <<: *base_template
