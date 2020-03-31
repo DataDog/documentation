@@ -34,11 +34,11 @@ By default, each account has a single index representing a monolithic set of all
 
 The Log Explorer supports [queries across multiple indexes][8].
 
-## Add Indexes
-
 <div class="alert alert-info">
 <a href="/help">contact Datadog support</a> to enable multiple-indexes for your account.
 </div>
+
+## Add Indexes
 
 If multiple-indexes is activated, use the "add Index" button to create a new index. 
 
