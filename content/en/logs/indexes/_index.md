@@ -40,11 +40,11 @@ The Log Explorer supports [queries across multiple indexes][8].
 
 ### Add Indexes
 
-If multiple-indexes is activated, use the "New Index" button to create a new index. 
+If multiple indexes is activated, use the "New Index" button to create a new index. 
 
 {{< img src="logs/indexes/add-index.png" alt="Add index"  style="width:70%;">}}
 
-**Note**: Index name must start with a letter and can only contain lower-case letters, numbers, or the '-' character.
+**Note**: Index names must start with a letter and can only contain lowercase letters, numbers, or the '-' character.
 
 ## Indexes Filters
 
