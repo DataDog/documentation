@@ -42,7 +42,7 @@ Each tab in sections below shows a different way to apply integration templates 
 * [A configuration file mounted within the Agent](?tab=file#configuration)
 * [Key-value stores](?tab=keyvaluestore#configuration)
 
-**Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][4], [Varnish][5], [Postfix][6], [Cassandra Nodetools][7], and [Gunicorn][8]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint. For example, the standard pattern in Kubernetes is: side car adapter with a node-level or cluster-level collector. This setup allows the exporter to access the data, which exposes it using an HTTP endpoint, and Datadog Autodiscovery can then access the data.
+**Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][4], [Varnish][5], [Postfix][6], [Cassandra Nodetools][7], and [Gunicorn][8]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint.
 
 ## Configuration
 
@@ -96,7 +96,7 @@ services:
 
 Storing templates as local files and mounting them inside the containerized Agent doesn't require an external service or a specific orchestration platform. The downside is that you need to restart your Agent containers each time you change, add, or remove templates. The Agent looks for Autodiscovery templates in the mounted `/conf.d` directory.
 
-Since Agent v6.2.0 (and v5.24.0), the default templates use the default port for the monitored software, instead of auto-detecting it. If you need to use a different port, provide a custom Autodiscovery template either in [Docker container labels](?tab=docker-labels) or [Kubernetes pod annotations](?tab=kubernetes-annotations).
+Since Agent v6.2.0 (and v5.24.0), the default templates use the default port for the monitored software, instead of auto-detecting it. If you need to use a different port, provide a custom Autodiscovery template in the [Docker container labels](?tab=docker-labels)
 
 These integration templates are meant for basic cases. If you need a custom Datadog integration configuration to enable extra options, use different container identifiers—or use template variables indexing and write your own auto-configuration file:
 
