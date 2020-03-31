@@ -25,14 +25,12 @@ Use the SLO and uptime widget to track your SLOs (Service Level Objectives) and 
 
 *Uptime* is defined as the amount of time a monitor was in an *up* state (OK) compared to *down* state (non-OK). The status is represented in bars as green (up) and red (down). Example: ’99 % of the time latency is less than 200ms.`
 
-You can also track success rate and event-based SLIs (Service Level Indicators). Example: `99 % of requests are successful.`
-
-{{< img src="monitors/service_level_objectives/create-slo.png" alt="create a slo"  >}}
+You can also track success rate and metric-based SLIs (Service Level Indicators). Example: `99 % of requests are successful.`
 
 ### Configuration
 
 1. On the [SLO status page][1], select **New SLO +**.
-2. Define the source for your SLOs. SLO types are [Event-based][2] and [Monitor-based][3].
+2. Define the source for your SLOs. SLO types are [Metric-based][2] and [Monitor-based][3].
 3. Set your target uptime. Available windows are: 7 days, month-to-date, 30 days (rolling), Previous Month, and 90 days (rolling). For 7 days, the widget is restricted to two decimal places. For 30 days and up, it’s restricted to two to three decimal places.
 4. Finally, give the SLO a title, describe it in more detail, add tags, and save it.
 
@@ -94,6 +92,6 @@ After creating your SLO, you can use the SLO dashboard widget to visualize the s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo
-[2]: /monitors/service_level_objectives/event/
+[2]: /monitors/service_level_objectives/metric/
 [3]: /monitors/service_level_objectives/monitor/
 [4]: /dashboards/widgets/slo

@@ -59,7 +59,7 @@ Datadog recommends against using monitors with `Alert Recovery Threshold` and `W
 
 SLO calculations do not take into account when a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting. If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification`s, and using the clone for your SLO.
 
-Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and metric-based SLIs as [described in the SLO event documentation][5].
+Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and metric-based SLIs as [described in the SLO metric documentation][5].
 
 ## Further Reading
 
@@ -69,4 +69,4 @@ Confirm you are using the preferred SLI type for your use case. Datadog supports
 [2]: https://app.datadoghq.com/slo
 [3]: https://app.datadoghq.com/slo/new/monitor
 [4]: https://app.datadoghq.com/monitors#create
-[5]: /monitors/service_level_objectives/event/
+[5]: /monitors/service_level_objectives/metric/
