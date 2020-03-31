@@ -275,7 +275,7 @@ Docker インテグレーションは Docker Agent を使用してメトリク�
 [20]: /ja/agent/autodiscovery/management/?tab=containerizedagent
 [21]: /ja/integrations/system/#metrics
 [22]: /ja/integrations/disk/#metrics
-[23]: /ja/integrations/docker_daemon/#metrics
+[23]: /ja/agent/docker/data_collected/#metrics
 [24]: /ja/integrations/network/#metrics
 [25]: /ja/integrations/ntp/#metrics
 [26]: /ja/agent/autodiscovery/integrations

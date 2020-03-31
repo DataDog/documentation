@@ -77,7 +77,7 @@ Dans ce guide, vous découvrirez comment procéder pour ajouter des métriques d
 
         | Paramètre | Valeur                       | Description                                                                                                          |
         | ------    | -----                       | -----                                                                                                                |
-        | `metric`  | `runtime.ruby.thread_count` | Nombre de threads mesuré par les métriques de runtime Ruby.                                                                    |
+        | `metric`  | `runtime.ruby.thread_count` | Nombre de threads mesuré par les métriques runtime Ruby.                                                                    |
         | `from`    | `service:web-store`           | Dans cet exemple de pile, le service principal est un service Ruby à partir duquel proviennent toutes les informations présentées sur le graphique. |
 
         {{< img src="tracing/guide/apm_dashboard/dashboard_5.mp4" alt="dashboard_5" video="true"  style="width:90%;">}}

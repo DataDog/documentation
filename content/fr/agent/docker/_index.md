@@ -275,7 +275,7 @@ Il en va de même pour le dossier `/checks.d`. Tous les fichiers Python du dossi
 [20]: /fr/agent/autodiscovery/management/?tab=containerizedagent
 [21]: /fr/integrations/system/#metrics
 [22]: /fr/integrations/disk/#metrics
-[23]: /fr/integrations/docker_daemon/#metrics
+[23]: /fr/agent/docker/data_collected/#metrics
 [24]: /fr/integrations/network/#metrics
 [25]: /fr/integrations/ntp/#metrics
 [26]: /fr/agent/autodiscovery/integrations
