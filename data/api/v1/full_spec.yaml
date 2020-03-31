@@ -2105,9 +2105,19 @@ components:
           items:
             type: string
           type: array
+        message_display:
+          $ref: '#/components/schemas/WidgetMessageDisplay'
         query:
           description: Query to filter the log stream with
           type: string
+        show_date_column:
+          description: Whether to show the date column or not
+          type: boolean
+        show_message_column:
+          description: Whether to show the message column or not
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/WidgetFieldSort'
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
@@ -6349,6 +6359,18 @@ components:
       x-enum-varnames:
       - SMALL
       - LARGE
+    WidgetFieldSort:
+      description: Which column and order to sort by
+      properties:
+        column:
+          description: Facet path for the column
+          type: string
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+      required:
+      - column
+      - order
+      type: object
     WidgetGrouping:
       description: The kind of grouping to use (single check vs. cluster of checks)
       enum:
@@ -6508,6 +6530,17 @@ components:
       required:
       - value
       type: object
+    WidgetMessageDisplay:
+      description: Amount of log lines to display
+      enum:
+      - inline
+      - expanded-md
+      - expanded-lg
+      type: string
+      x-enum-varnames:
+      - INLINE
+      - EXPANDED_MEDIUM
+      - EXPANDED_LARGE
     WidgetMonitorSummaryDisplayFormat:
       description: What to display on the widget. Available values are counts, countsAndList
         or list
