@@ -697,6 +697,12 @@ function getPathElement(){
         maPath = document.querySelector('header [data-path*="developers/guide"]');
     }
 
+    if (path.includes('synthetics/guide')) {
+        aPath = document.querySelector('.side [data-path*="synthetics/guide"]');
+        maPath = document.querySelector('header [data-path*="synthetics/guide"]');
+    }
+
+
     // if url is domain + /integrations/**
     if ((`${replaceURL(domain) }/${ replacePath(path)}`).includes(`${replaceURL(domain)  }/integrations`)) {
         aPath = document.querySelector('.side .nav-top-level > [data-path*="integrations"]');
