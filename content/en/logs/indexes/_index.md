@@ -42,7 +42,7 @@ The Log Explorer supports [queries across multiple indexes][8].
 
 If multiple-indexes is activated, use the "add Index" button to create a new index. 
 
-{{< img src="logs/indexes/add-index.png" alt="enable index filters"  style="width:80%;">}}
+{{< img src="logs/indexes/add-index.png" alt="Add index"  style="width:70%;">}}
 
 Note :Index name must start with a letter and can only contain lower-case letters, numbers, or the '-' character.
 
@@ -50,7 +50,7 @@ Note :Index name must start with a letter and can only contain lower-case letter
 
 Index filters allow dynamic control over which logs flow into which indexes.  For example, if you create a first index filtered on the `status:notice` attribute, a second index filtered to the `status:error` attribute, and a final one without any filter (the equivalent of `*`), all your `status:notice` logs would go to the first index, all your `status:error` logs to the second index, and the rest would go to the final one.
 
-{{< img src="logs/indexes/multi_index.png" alt="Add index"  style="width:70%;">}}
+{{< img src="logs/indexes/multi_index.png" alt="Multi indexes"  style="width:70%;">}}
 
 **Note**: **Logs enter the first index whose filter they match on**, use drag and drop on the list of indexes to reorder them according to your use-case.
 
