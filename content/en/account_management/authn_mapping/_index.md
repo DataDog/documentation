@@ -110,12 +110,14 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
                     "name": "Developer Role"
                 },
                 "relationships": {
-                    "data": [
-                        {
-                            "id": "123e4567-e89b-12d3-a456-426655441000",
-                            "type": "permissions"
-                        }
-                    ]
+                    "permissions": {
+                        "data": [
+                            {
+                                "id": "123e4567-e89b-12d3-a456-426655441000",
+                                "type": "permissions"
+                            }
+                        ]
+                    }
                 }
             }
         },
@@ -206,12 +208,14 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
             "name": "Developer Role"
           },
           "relationships": {
-            "data": [
-              {
-                "id": "123e4567-e89b-12d3-a456-426655440000",
-                "type": "permissions"
-              }
-            ]
+            "permissions": {
+                "data": [
+                  {
+                    "id": "123e4567-e89b-12d3-a456-426655440000",
+                    "type": "permissions"
+                  }
+                ]
+            }
           }
         }
       },
@@ -305,12 +309,14 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
                     "name": "Developer Role"
                 },
                 "relationships": {
-                    "data": [
-                        {
-                            "id": "123e4567-e89b-12d3-a456-426655440000",
-                            "type": "permissions"
-                        }
-                    ]
+                    "permissions": {
+                        "data": [
+                            {
+                                "id": "123e4567-e89b-12d3-a456-426655440000",
+                                "type": "permissions"
+                            }
+                        ]
+                    }
                 }
             }
         },
@@ -500,7 +506,7 @@ Check whether Authn Mappings are enabled or disabled.
 
 ```sh
 curl -X GET \
-         "https://api.datadoghq.com/api/v1/org_perferences" \
+         "https://api.datadoghq.com/api/v1/org_preferences" \
          -H "Content-Type: application/json" \
          -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
@@ -517,7 +523,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
   "data": {
     "attributes": {
         "preference_data": "saml_authn_mapping_roles",
-        "preference_type: true
+        "preference_type": true
     },
     "type": "org_preferences",
     "id": 1,
@@ -538,7 +544,7 @@ Enables/disables the enforcement of all AuthN Mappings.
 
 | Method   | Endpoint path               | Required payload |
 |----------|-----------------------------|------------------|
-| `POST`   | `/v1/org_preferrences`      | JSON             |
+| `POST`   | `/v1/org_preferences`       | JSON             |
 
 ##### ARGUMENTS
 
@@ -552,13 +558,13 @@ Enables/disables the enforcement of all AuthN Mappings.
 
 ```sh
 curl -X POST \
-    "https://api.datadoghq.com/api/v1/org_perferences" \
+    "https://api.datadoghq.com/api/v1/org_preferences" \
     -H "Content-Type: application/json" \
     -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
     -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
     -d '{
         "data": {
-            "type": "org_peferences",
+            "type": "org_preferences",
             "attributes": {
                 "preference_type": "saml_authn_mapping_roles",
                 "preference_data": true
@@ -579,7 +585,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
   "data": {
     "attributes": {
         "preference_type": "saml_authn_mapping_roles",
-        "preference_data: true
+        "preference_data": true
     },
     "type": "org_preferences",
     "id": 1,
