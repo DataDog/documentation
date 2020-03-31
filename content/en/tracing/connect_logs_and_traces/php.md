@@ -19,7 +19,8 @@ further_reading:
 
 ## Automatic Trace ID injection
 
-PHP’s logging design prevents Datadog PHP tracing library to inject trace and span IDs into your logs automatically. See the section below to learn how to connect your PHP Logs and traces manually.
+Given the many different ways to implement logging in PHP with some completely circumventing PHP's built-in error-logging API, the Datadog PHP tracing library cannot reliably inject trace and span ID's into logs automatically.
+See the section below to learn how to connect your PHP Logs and traces manually.
 
 ## Manual Trace ID injection
 
