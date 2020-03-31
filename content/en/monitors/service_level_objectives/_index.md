@@ -83,6 +83,50 @@ This can result in the overall uptime being lower than the average of the indivi
 
 You can view, edit your SLO and its properties and see the status over time and the history of your SLO from the [SLO status page][1].
 
+### SLO Default View
+
+The default SLO view is loaded when you land on the SLO list view. 
+
+The default view includes:
+
+- An empty search query
+- A list of all defined SLOs in your organization 
+- A list of available facets in left side facet list
+
+### Saved Views
+
+Saved views allow you to save and share across your organization search customizations in the SLO list view for SLOs that are most relevant for you including:
+
+- A search query
+- A selected subset of facets
+
+After you query for a subset of SLOs on the list view, you can now add that query as a saved view. 
+
+#### Add a saved view
+
+To add a saved view:
+1. Query for your SLOs. 
+2. Click *Save View* at the top. 
+3. Name your view and save.
+
+#### Load a Saved View
+
+To load a saved view, open the *Saved Views* panel at the top of the page and select. You can also search for views in the *Filter Saved Views* search box. 
+
+#### Saved Views selection
+
+Star saved views to mark them as favorites. Starred saved views are available directly from the main navigation menu.
+
+#### Share a Saved View
+
+Copy-paste a saved view short-link to share it with your teammates.
+
+#### Manage Saved Views
+
+To create a new saved view, click the *Save as* button at the top of the screen. Give it a name and click *Save*.
+
+Saved Views can be deleted directly from the Saved View list. Hover over the name of the saved view to reveal its delete button. Click on it and confirm.
+
 ## SLO Widgets
 
 After creating your SLO, you can use the SLO dashboard widget to visualize the status of your SLOs along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][4] page.
