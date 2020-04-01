@@ -19,7 +19,7 @@ To set up Datadog Real User Monitoring solution:
 
 1. On the [Real User Monitoring page][1], click the **New Application** button.
 2. Fill out Application Details, and click **Generate Client Token**. This automatically creates a `clientToken` and an `applicationId` for your application.
-3. Setup the Datadog browser rum library [through npm](#npm-setup) or paste the [generated code snippet](#bundle-setup) into the head tag.
+3. Setup the Datadog RUM SDK [through npm](#npm-setup) or paste the [generated code snippet](#bundle-setup) into the head tag.
 4. Deploy the changes to your application. Once your deployment is live, Datadog starts collecting events from your user's browsers.
 5. Visualize the [data collected][2] in Datadog [out of the box Dashboards][3].
 
@@ -103,7 +103,7 @@ Paste the generated code snippet into the head tag (in front of any other script
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: The `window.DD_RUM` check is used to prevent issues if a loading failure occurs with the library.
+**Note**: The `window.DD_RUM` check is used to prevent issues if a loading failure occurs with the RUM SDK.
 
 ## Initialization parameters
 
