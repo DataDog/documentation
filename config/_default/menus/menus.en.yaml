@@ -1824,6 +1824,18 @@ api_v1:
   - name: Create a PagerDuty integration
     parent: PagerDuty Integration
     url: create-a-pagerduty-integration
+  - name: Create a new service object
+    parent: PagerDuty Integration
+    url: create-a-new-service-object
+  - name: Delete a single service object
+    parent: PagerDuty Integration
+    url: delete-a-single-service-object
+  - name: Get a single service object
+    parent: PagerDuty Integration
+    url: get-a-single-service-object
+  - name: Update a single service object
+    parent: PagerDuty Integration
+    url: update-a-single-service-object
   - name: SLO
     url: /api/v1/slo/
     identifier: SLO
