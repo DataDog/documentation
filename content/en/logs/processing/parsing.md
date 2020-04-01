@@ -300,7 +300,7 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 
 ### Alternating pattern
 
-If you have logs with two possible formats which differ in only one attribute, set a single rule using Alternating with `(<REGEX_1>|<REGEX_2>)`. It's equivalent to a boolean OR.
+If you have logs with two possible formats which differ in only one attribute, set a single rule using alternating with `(<REGEX_1>|<REGEX_2>)`. It's equivalent to a boolean OR.
 
 **Log**:
 
