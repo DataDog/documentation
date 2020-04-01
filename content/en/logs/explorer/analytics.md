@@ -1,23 +1,23 @@
 ---
 title: Log Analytics
 kind: documentation
-description: "Perform Log Analytics"
+description: 'Perform Log Analytics'
 aliases:
-  - /logs/graph
-  - /logs/analytics
+    - /logs/graph
+    - /logs/analytics
 further_reading:
-- link: "logs/processing"
-  tag: "Documentation"
-  text: "Discover how to process your logs"
-- link: "logs/processing/parsing"
-  tag: "Documentation"
-  text: "Learn more about parsing"
-- link: "logs/explorer"
-  tag: "Documentation"
-  text: "See how to explore your logs"
-- link: "logs/explorer/patterns"
-  tag: Documentation
-  text: "Detect patterns inside your logs"
+    - link: 'logs/processing'
+      tag: 'Documentation'
+      text: 'Discover how to process your logs'
+    - link: 'logs/processing/parsing'
+      tag: 'Documentation'
+      text: 'Learn more about parsing'
+    - link: 'logs/explorer'
+      tag: 'Documentation'
+      text: 'See how to explore your logs'
+    - link: 'logs/explorer/patterns'
+      tag: Documentation
+      text: 'Detect patterns inside your logs'
 ---
 
 ## Overview
@@ -29,15 +29,15 @@ You can access the analytics page from any log explorer view by clicking on the 
 
 You can control:
 
-* the query that filters the set of logs to analyze
-* the dimensions over which to split data
-* the visualization method for aggregates and splits
+- The query that filters the set of logs to analyze
+- The dimensions over which to split data
+- The visualization method for aggregates and splits
 
 From an analytics visualization, you can, additionally:
 
-* create a widget in a dashboard out of that visualization
-* create a monitor out of that query
-* deep dive into subsets of the log list, depending on the interactions that the visualization enables
+- Create a widget in a dashboard out of that visualization
+- Create a monitor out of that query
+- Deep dive into subsets of the log list, depending on the interactions that the visualization enables
 
 Save a log analytics view with the "Save As" button. You can load your teammates' saved views from the "Saved Views" tab.
 
@@ -48,6 +48,7 @@ Use the query to control what's displayed in your Log Analytics:
 1. Choose a [Measure][1] or [Facet][1] to graph. [Measure][1] lets you choose the aggregation function whereas [Facet][1] displays the unique count.
 
     {{< img src="logs/explorer/analytics/choose_measure_facet.png" alt="choose measure facet"  style="width:50%;">}}
+
 2. Select the aggregation function for the [Measure][1] you want to graph:
 
     {{< img src="logs/explorer/analytics/agg_function_log_graph.png" alt="aggregation function for Log Analytics"  style="width:50%;">}}
@@ -56,12 +57,12 @@ Use the query to control what's displayed in your Log Analytics:
 
     {{< img src="logs/explorer/analytics/split_by_log_graph.png" alt="split by Log Analytics"  style="width:50%;">}}
 
-4. Choose to display either the *X* **top** or **bottom** values according to the selected [measure][1].
+4. Choose to display either the _X_ **top** or **bottom** values according to the selected [measure][1].
 
     {{< img src="logs/explorer/analytics/top_bottom_button.png" alt="top bottom button"  style="width:20%;">}}
 
 5. Choose the Timesteps graph.
-  Changing the global timeframe changes the list of available Timesteps values.
+   Changing the global timeframe changes the list of available Timesteps values.
 
     {{< img src="logs/explorer/analytics/timesteps.png" alt="Timestep"  style="width:30%;">}}
 
@@ -80,22 +81,23 @@ Visualize the evolution of a single [measure][1] (or a [facet][1] unique count o
 
 You have additional display options for timeseries:
 
-* whether you display lines, bars, or areas
-* data stacking option, by value, or by percentage
-* color set
+- Whether you display lines, bars, or areas
+- Data stacking option, by value, or by percentage
+- Color set
 
 Noteworthy facts about stacking:
 
-* Stacking is available only for query requests with a split.
-* Stacking options are for bar and area displays only. Line displays are always overlapping.
-* When you use a toplist option that hides part of your data, stacking does not show the total overall; rather, it shows only the subtotal for the top/bottom series.
-* Stacking may not make sense when you have non-unique values in the split facet.
-* Stacking may not make sense for some aggregration methods for measures.
+- Stacking is available only for query requests with a split.
+- Stacking options are for bar and area displays only. Line displays are always overlapping.
+- When you use a toplist option that hides part of your data, stacking does not show the total overall; rather, it shows only the subtotal for the top/bottom series.
+- Stacking may not make sense when you have non-unique values in the split facet.
+- Stacking may not make sense for some aggregration methods for measures.
 
 The following timeseries Log Analytics shows:
 The evolution of the **top 5 URL Paths** according to the number of **unique Client IPs** over the last month.
 
 {{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example"  style="width:90%;">}}
+
 
 [1]: /logs/explorer/facets
 {{% /tab %}}
@@ -109,6 +111,7 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 {{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example"  style="width:90%;">}}
 
+
 [1]: /logs/explorer/facets
 {{% /tab %}}
 
@@ -116,19 +119,19 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 
 Visualize the top values from a [facet][1] according to a chosen [measure][1] (the first measure you choose in the list), and display the value of additional measures for elements appearing in this top. Update search query or drill through logs corresponding to either dimension.
 
-* When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
-* When there are multiple measures, the top or bottom list is determined according to the first measure.
-* The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
+- When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, then according to the third dimension within the top values of the second dimension.
+- When there are multiple measures, the top or bottom list is determined according to the first measure.
+- The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
 
- **Note**: A table visualisation used for one single measure and one single dimension is the same as a toplist, just with a different display.
+    **Note**: A table visualisation used for one single measure and one single dimension is the same as a toplist, just with a different display.
 
- The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
+The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
 {{< img src="logs/explorer/analytics/logs_table_example.png" alt="table example"  style="width:90%;">}}
 
+
 [1]: /logs/explorer/facets
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ## Related logs
@@ -136,6 +139,16 @@ Visualize the top values from a [facet][1] according to a chosen [measure][1] (t
 Select or click on a section of the graph to either zoom in the graph or see the list of logs corresponding to your selection:
 
 {{< img src="logs/explorer/analytics/view_logs.mp4" alt="view logs" video="true"  width="80%" >}}
+
+## Share View
+
+Export your current log visualization with the _share_ functionality:
+
+- Export to **Monitor**: Export the query applied to your log analytics to create the query for a new [log monitor][2].
+- Export to **Dashboard**: Export the current analytics as a widget to an existing or new [dashboard][3].
+- Generate a new **Metric**: [Generate a new metric][4] out of the current analytic query.
+
+{{< img src="logs/explorer/analytics/analytics_share.png" alt="table example"  style="width:90%;">}}
 
 ## How aggregations work behind the scenes
 
@@ -152,3 +165,6 @@ In the following example, each dot represents one log event. The X-axis is the t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/facets
+[2]: /monitors/monitor_types/log
+[3]: /dashboards/
+[4]: /logs/logs_to_metrics/

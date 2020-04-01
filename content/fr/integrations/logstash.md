@@ -24,7 +24,7 @@ metric_prefix: logstash.
 metric_to_check: logstash.process.cpu.percent
 name: logstash
 public_title: Intégration Datadog/Logstash
-short_description: Surveiller et recueillir des métriques de runtime à partir d'une instance Logstash
+short_description: Surveiller et recueillir des métriques runtime à partir d'une instance Logstash
 support: contrib
 supported_os:
   - linux
@@ -89,7 +89,7 @@ init_config:
 
 instances:
   # L'URL sur laquelle Logstash fournit son API de surveillance.
-  # Celle-ci sera utilisée pour récupérer diverses métriques de runtime concernant Logstash.
+  # Celle-ci sera utilisée pour récupérer diverses métriques runtime concernant Logstash.
   #
   - url: http://localhost:9600
 ```

@@ -5,6 +5,7 @@ aliases:
   - /ja/guides/basic_agent_usage/docker/
   - /ja/agent/docker
   - /ja/agent/basic_agent_usage/docker/
+  - /ja/integrations/docker_daemon/
 further_reading:
   - link: '/integrations/java/?tab=docker#コンフィギュレーション'
     tag: ドキュメント
@@ -108,7 +109,7 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 | 環境変数                     | 説明                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | 他のコンテナからの DogStatsD パケットをリスニングします (カスタムメトリクスの送信に必要)。                                                                       |
-| `DD_HISTOGRAM_PERCENTILES`       | 計算するヒストグラムのパーセンタイル (スペース区切り)。デフォルトは "0.95" です。                                                                         |
+| `DD_HISTOGRAM_PERCENTILES`       | 計算するヒストグラムのパーセンタイル (スペース区切り)。デフォルトは `0.95` です。                                                                         |
 | `DD_HISTOGRAM_AGGREGATES`        | 計算するヒストグラムの集計 (スペース区切り)。デフォルトは "max median avg count" です。                                                          |
 | `DD_DOGSTATSD_SOCKET`            | リスニングする UNIX ソケットのパス。`rw` でマウントされたボリューム内にある必要があります。                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | UNIX ソケットのメトリクス用にコンテナの検出とタグ付けを有効にします。                                                                                            |
@@ -173,7 +174,7 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 これらのコマンドがホスト上で実行されます。
 
-| 種類    | コマンド                                         |
+| 型    | コマンド                                         |
 |---------|-------------------------------------------------|
 | 起動   | [インストールコマンド](#インストール)を使用してください。  |
 | 停止    | `docker exec -it <コンテナ名> agent stop`   |
@@ -203,7 +204,7 @@ DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 Agent の起動または再起動の際に、Docker Agent はイベントを Datadog に送信します。
 
-### サービスのチェック
+### サービスチェック
 
 **datadog.agent.up**: <br>
 Agent が Datadog に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
@@ -274,7 +275,7 @@ Docker インテグレーションは Docker Agent を使用してメトリク�
 [20]: /ja/agent/autodiscovery/management/?tab=containerizedagent
 [21]: /ja/integrations/system/#metrics
 [22]: /ja/integrations/disk/#metrics
-[23]: /ja/integrations/docker_daemon/#metrics
+[23]: /ja/agent/docker/data_collected/#metrics
 [24]: /ja/integrations/network/#metrics
 [25]: /ja/integrations/ntp/#metrics
 [26]: /ja/agent/autodiscovery/integrations

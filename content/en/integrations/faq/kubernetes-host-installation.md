@@ -7,9 +7,9 @@ aliases:
 
 ## Setup the Kube state integration
 
-If you decided to run your Agent on your host to monitor kubernetes, in order to start collecting your Kubernetes  metrics you should:
+If you decide to run your Agent on your host to monitor kubernetes, in order to start collecting your Kubernetes metrics you should:
 
-1. [Install the Agent on you host][1]
+1. [Install the Agent on your host][1]
 2. Download the [Kube-State manifests folder][2].
 3. Apply them to your Kubernetes cluster:
 

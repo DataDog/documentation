@@ -282,7 +282,7 @@ The same can be done for the `/checks.d` folder. Any Python files in the `/check
 [20]: /agent/guide/autodiscovery-management
 [21]: /integrations/system/#metrics
 [22]: /integrations/disk/#metrics
-[23]: /integrations/docker_daemon/#metrics
+[23]: /agent/docker/data_collected/#metrics
 [24]: /integrations/network/#metrics
 [25]: /integrations/ntp/#metrics
 [26]: /agent/docker/integrations
