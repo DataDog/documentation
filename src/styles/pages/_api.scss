@@ -93,6 +93,9 @@ $ddpurple: #632ca6;
 
         .first-row {
             border-bottom: 1px solid $gray-light;
+            &.collapse-trigger {
+                cursor: pointer;
+            }
         }
 
         .hasChildData {

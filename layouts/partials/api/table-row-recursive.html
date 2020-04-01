@@ -28,9 +28,9 @@
       <div class="col-12">
 
           {{ if ne $key "example"}}
-            <div class="row first-row">
+            <div class="row first-row {{if $childData}} js-collapse-trigger collapse-trigger {{ end }}">
               <div class="col-4 pl-0">
-                <p class="key">{{ if $childData }}<span class="js-collapse-trigger" style="cursor: pointer; font-size: 18px">></span>{{ end }}
+                <p class="key">{{ if $childData }}<span style="font-size: 18px">></span>{{ end }}
                 {{ $key }}
               </p>
               </div>
