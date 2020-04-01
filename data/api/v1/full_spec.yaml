@@ -3568,14 +3568,32 @@ components:
         For more informations, see the [PagerDuty integration page](https://docs.datadoghq.com/integrations/pagerduty/).'
       properties:
         service_key:
-          description: Your Service name associated service key in Pagerduty.
+          description: Your Service key in PagerDuty.
           type: string
         service_name:
-          description: Your Service name in PagerDuty.
+          description: Your Service name associated service key in PagerDuty.
           type: string
       required:
       - service_name
       - service_key
+      type: object
+    PagerDutyServiceKey:
+      description: PagerDuty service object Key.
+      properties:
+        service_key:
+          description: Your Service key in PagerDuty.
+          type: string
+      required:
+      - service_key
+      type: object
+    PagerDutyServiceName:
+      description: PagerDuty service object Name.
+      properties:
+        service_name:
+          description: Your Service name associated service key in PagerDuty.
+          type: string
+      required:
+      - service_name
       type: object
     PagerDutyServicesAndSchedules:
       description: Define new services and schedules to your Datadog-PagerDuty integration.
@@ -9100,6 +9118,135 @@ paths:
       tags:
       - PagerDuty Integration
       x-codegen-request-body-name: body
+  /api/v1/integration/pagerduty/configuration/services:
+    post:
+      description: Create a new service object in the PagerDuty integration.
+      operationId: CreatePagerDutyIntegrationService
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PagerDutyService'
+        description: Create a new service object in the Datadog-PagerDuty integration.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagerDutyServiceName'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Create a new service object
+      tags:
+      - PagerDuty Integration
+      x-codegen-request-body-name: body
+  /api/v1/integration/pagerduty/configuration/services/{service_name}:
+    delete:
+      description: Delete a single service object in the Datadog-PagerDuty integration.
+      operationId: DeletePagerDutyIntegrationService
+      parameters:
+      - description: The service name
+        in: path
+        name: service_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: Integration does not exist
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Delete a single service object
+      tags:
+      - PagerDuty Integration
+    get:
+      description: Get service name in the Datadog-PagerDuty integration.
+      operationId: GetPagerDutyIntegrationService
+      parameters:
+      - description: The service name
+        in: path
+        name: service_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagerDutyServiceName'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Get a single service object
+      tags:
+      - PagerDuty Integration
+    put:
+      description: Update a single service object in the Datadog-PagerDuty integration
+      operationId: UpdatePagerDutyIntegrationService
+      parameters:
+      - description: The service name
+        in: path
+        name: service_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PagerDutyServiceKey'
+        description: Update an existing service object in the Datadog-PagerDuty integration.
+        required: true
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: Integration does not exist
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Update a single service object
+      tags:
+      - PagerDuty Integration
+      x-codegen-request-body-name: body
   /api/v1/logs-queries/list:
     post:
       description: 'List endpoint returns logs that match a log search query.
@@ -12117,8 +12264,9 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/monitor_types/
   name: Monitors
-- description: Configure your Datadog-PagerDuty integration directly through the Datadog
-    API.
+- description: 'Configure your Datadog-PagerDuty integration directly through the
+
+    Datadog API.'
   externalDocs:
     url: https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty
   name: PagerDuty Integration
