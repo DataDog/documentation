@@ -172,7 +172,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-With the above example, we collect the amount of items within a cart, what they are, and how much the cart is worth overall.
+With the above example, the RUM SDK would collect the amount of items within a cart, what they are, and how much the cart is worth overall.
 
 ## Further Reading
 
