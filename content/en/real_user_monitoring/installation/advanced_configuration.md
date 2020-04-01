@@ -2,15 +2,15 @@
 title: RUM Advanced Configuration
 kind: documentation
 further_reading:
-- link: "https://www.npmjs.com/package/@datadog/browser-rum"
-  tag: "NPM"
-  text: "datadog/browser-rum NPM package"
-- link: "/real_user_monitoring/rum_explorer"
-  tag: "Documentation"
-  text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/rum_analytics"
-  tag: "Documentation"
-  text: "Build analytics upon your events"
+    - link: 'https://www.npmjs.com/package/@datadog/browser-rum'
+      tag: 'NPM'
+      text: 'datadog/browser-rum NPM package'
+    - link: '/real_user_monitoring/rum_explorer'
+      tag: 'Documentation'
+      text: 'Explore your views within Datadog'
+    - link: '/real_user_monitoring/rum_analytics'
+      tag: 'Documentation'
+      text: 'Build analytics upon your events'
 ---
 
 ## Initialization
@@ -28,10 +28,10 @@ By default, no sampling is applied on the number of collected sessions. To apply
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
-  applicationId: '<DATADOG_APPLICATION_ID>',
-  clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: 'us',
-  sampleRate: 90
+    applicationId: '<DATADOG_APPLICATION_ID>',
+    clientToken: '<DATADOG_CLIENT_TOKEN>',
+    datacenter: 'us',
+    sampleRate: 90,
 });
 ```
 
@@ -39,11 +39,12 @@ datadogRum.init({
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_RUM && window.DD_RUM.init({
-  clientToken: '<CLIENT_TOKEN>',
-  applicationId: '<APPLICATION_ID>',
-  sampleRate: 90
-});
+window.DD_RUM &&
+    window.DD_RUM.init({
+        clientToken: '<CLIENT_TOKEN>',
+        applicationId: '<APPLICATION_ID>',
+        sampleRate: 90,
+    });
 ```
 
 {{% /tab %}}
@@ -53,9 +54,9 @@ window.DD_RUM && window.DD_RUM.init({
 
 ## API available
 
-### Add global metadata
+### Add global context
 
-Once Real User Monitoring (RUM) is initialized, add extra metadata to all RUM events collected from your application with the `addRumGlobalContext(key: string, value: any)` API:
+Once Real User Monitoring (RUM) is initialized, add extra context to all RUM events collected from your application with the `addRumGlobalContext(key: string, value: any)` API:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -63,15 +64,26 @@ Once Real User Monitoring (RUM) is initialized, add extra metadata to all RUM ev
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addRumGlobalContext('<META_KEY>', <META_VALUE>);
+datadogRum.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+
+// Code example
+datadogRum.addRumGlobalContext('usr', {
+    id: 123,
+    plan: 'premium'
+});
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-// add global metadata attribute--one attribute can be added at a time
-window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
+window.DD_RUM && DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+
+// Code example
+datadogRum.addRumGlobalContext('usr', {
+    id: 123,
+    plan: 'premium'
+});
 ```
 
 {{% /tab %}}
@@ -79,9 +91,9 @@ window.DD_RUM && DD_RUM.addRumGlobalContext('<META_KEY>', <META_VALUE>);
 
 **Note**: Follow the [Datadog naming convention][2] for a better correlation of your data across the product.
 
-### Replace default context
+### Replace global context
 
-Once Real User Monitoring (RUM) is initialized, you can replace the default context for all your RUM events with the `setRumGlobalContext(context: Context)` API:
+Once Real User Monitoring (RUM) is initialized, replace the default context for all your RUM events with the `setRumGlobalContext(context: Context)` API:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -89,15 +101,26 @@ Once Real User Monitoring (RUM) is initialized, you can replace the default cont
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
+datadogRum.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+
+// Code example
+datadogRum.setRumGlobalContext({
+    codeVersion: 34,
+});
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-// Entirely replace the default context for all your views
-window.DD_RUM && DD_RUM.setRumGlobalContext({"<CONTEXT_KEY>":"<CONTEXT_VALUE>"});
+window.DD_RUM &&
+    DD_RUM.setRumGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+
+// Code example
+window.DD_RUM &&
+    DD_RUM.setRumGlobalContext({
+        codeVersion: 34,
+    });
 ```
 
 {{% /tab %}}
@@ -115,35 +138,16 @@ Once Real User Monitoring (RUM) is initialized, generate user actions when you w
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addUserAction("<NAME>","<JSON_OBJECT>");
-```
+datadogRum.addUserAction('<NAME>', '<JSON_OBJECT>');
 
-{{% /tab %}}
-{{% tab "Bundle" %}}
-
-```javascript
-// Give it a name and an object containing all the data
-window.DD_RUM && DD_RUM.addUserAction("<NAME>","<JSON_OBJECT>");
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-For instance, to collect the amount of items within a cart, what they are, and how much the cart is worth overall, you would do something like this:
-
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.addUserAction("Cart Payed", {
-  "cart": {
-    "amount": 42,
-    "currency": "$",
-    "nb_items": 2,
-    "items": ["socks", "t-shirt"]
-  }
+// Code example
+datadogRum.addUserAction('checkout', {
+    cart: {
+        amount: 42,
+        currency: '$',
+        nb_items: 2,
+        items: ['socks', 't-shirt'],
+    },
 });
 ```
 
@@ -151,18 +155,24 @@ datadogRum.addUserAction("Cart Payed", {
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_RUM && DD_RUM.addUserAction("Cart Payed", {
-  "cart": {
-    "amount": 42,
-    "currency": "$",
-    "nb_items": 2,
-    "items": ["socks", "t-shirt"]
-  }
-});
+window.DD_RUM && DD_RUM.addUserAction('<NAME>', '<JSON_OBJECT>');
+
+// Code example
+window.DD_RUM &&
+    DD_RUM.addUserAction('checkout', {
+        cart: {
+            amount: 42,
+            currency: '$',
+            nb_items: 2,
+            items: ['socks', 't-shirt'],
+        },
+    });
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+With the above example, the RUM SDK would collect the amount of items within a cart, what they are, and how much the cart is worth overall.
 
 ## Further Reading
 
