@@ -11,7 +11,7 @@ further_reading:
 - link: "/agent/autodiscovery/management"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
-- link: "/agent/autodiscovery/tag"
+- link: "/agent/kubernetes/tag"
   tag: "Documentation"
   text: "Dynamically assign and collect tags from your application"
 ---
