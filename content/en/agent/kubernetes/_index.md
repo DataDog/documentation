@@ -147,6 +147,12 @@ To install the Datadog Agent on your Kubernetes cluster:
 [12]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [13]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
+{{% tab "Operator" %}}
+[The Datadog Operator][2] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and it reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options. To get started, see [Getting Started][1] in the [Datadog Agent Kubernetes Operator repo][2].
+
+[1]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
+[2]: https://github.com/DataDog/datadog-operator
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Integrations
