@@ -336,7 +336,7 @@ Integration names can be found on the [integrations table][1].
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_SAMPLE_RATE` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_SAMPLE_RATE` tag on a span:
 
 ```java
 import datadog.trace.api.DDTags;
@@ -360,7 +360,7 @@ class MyClass {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` tag on a span:
 
 ```python
 from ddtrace import tracer
@@ -375,7 +375,7 @@ def my_method():
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on a span:
 
 ```ruby
 Datadog.tracer.trace('my.task') do |span|
@@ -398,7 +398,7 @@ This marks the span as a App Analytics event.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS` tag on a span:
 
 ```javascript
 const { ANALYTICS } = require('dd-trace/ext/tags')
@@ -409,7 +409,7 @@ span.setTag(ANALYTICS, true)
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `Tags.Analytics` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `Tags.Analytics` tag on a span:
 
 ```csharp
 using Datadog.Trace;
@@ -425,7 +425,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on a span:
 
 ```php
 <?php
@@ -437,7 +437,7 @@ Applications with custom instrumentation can enable App Analytics by setting the
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `analytics_event` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `analytics_event` tag on a span:
 
 ```cpp
 ...
