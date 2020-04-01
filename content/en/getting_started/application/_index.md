@@ -85,7 +85,7 @@ For each incident, users can:
 - Use `@` in alert messages to direct notifications to the right people
 - Schedule downtimes to suppress notifications for system shutdowns, off-line maintenance, etc.
 
-{{< img src="getting_started/application/metric_monitor.png" alt="alert setup"  >}}
+{{< img src="getting_started/application/metric_monitor.png" alt="alert setup" >}}
 
 ## Further Reading
 

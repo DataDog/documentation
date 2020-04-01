@@ -6,6 +6,7 @@ aliases:
  - /monitors/monitor_uptime_widget/
  - /monitors/slo_widget/
  - /graphing/widgets/slo/
+ - /dashboards/faq/how-can-i-graph-host-uptime-percentage/
 further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-widget/"
   tag: "Blog"

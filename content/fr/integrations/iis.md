@@ -43,49 +43,48 @@ Le check IIS est fourni avec l'Agent. Pour commencer à recueillir vos logs et m
 
 1. [Installez l'Agent][2] sur vos serveurs IIS.
 
-2. La classe WMI `Win32_PerfFormattedData_W3SVC_WebService` doit être installée sur vos serveurs IIS.
-  Pour vous en assurer, utilisez la commande suivante :
-  ```
-  Get-WmiObject -List -Namespace root\cimv2 | select -Property name | where name -like "*Win32_PerfFormattedData_W3SVC*"
-  ```
+2. La classe WMI `Win32_PerfFormattedData_W3SVC_WebService` doit être installée sur vos serveurs IIS. Pour vous en assurer, utiliser la commande suivante :
 
-  Cette classe doit être installée avec la fonctionnalité Windows web-http-common :
+    ```text
+    Get-WmiObject -List -Namespace root\cimv2 | select -Property name | where name -like "*Win32_PerfFormattedData_W3SVC*"
+    ```
 
-  ```
-  PS C:\Users\vagrant> Get-WindowsFeature web-* | where installstate -eq installed | ft -AutoSize
+    Cette classe doit être installée avec la fonctionnalité Windows web-http-common :
 
-  Display Name                       Name               Install State
-  ------------                       ----               -------------
-  [X] Web Server (IIS)               Web-Server             Installed
-  [X] Web Server                     Web-WebServer          Installed
-  [X] Common HTTP Features           Web-Common-Http        Installed
-  [X] Default Document               Web-Default-Doc        Installed
-  [X] Directory Browsing             Web-Dir-Browsing       Installed
-  [X] HTTP Errors                    Web-Http-Errors        Installed
-  [X] Static Content                 Web-Static-Content     Installed
-  ```
+    ```text
+    PS C:\Users\vagrant> Get-WindowsFeature web-* | where installstate -eq installed | ft -AutoSize
 
-  Vous pouvez ajouter les fonctionnalités manquantes avec `install-windowsfeature web-common-http`. Cette opération nécessite un redémarrage du système pour garantir son bon fonctionnement.
+    Display Name                       Name               Install State
+    ------------                       ----               -------------
+    [X] Web Server (IIS)               Web-Server             Installed
+    [X] Web Server                     Web-WebServer          Installed
+    [X] Common HTTP Features           Web-Common-Http        Installed
+    [X] Default Document               Web-Default-Doc        Installed
+    [X] Directory Browsing             Web-Dir-Browsing       Installed
+    [X] HTTP Errors                    Web-Http-Errors        Installed
+    [X] Static Content                 Web-Static-Content     Installed
+    ```
 
+Vous pouvez ajouter les fonctionnalités manquantes avec `install-windowsfeature web-common-http`. Cette opération nécessite un redémarrage du système pour garantir son bon fonctionnement.
 
 ### Configuration
 
 Sur vos serveurs IIS, commencez par resynchroniser les compteurs WMI. Sur Windows <= 2003 (ou équivalent), exécutez les commandes suivantes dans cmd.exe :
 
-```
+```text
 C:/> winmgmt /clearadap
 C:/> winmgmt /resyncperf
 ```
 
 Sur Windows >= 2008 (ou équivalent), exécutez plutôt ce qui suit :
 
-```
+```text
 C:/> winmgmt /resyncperf
 ```
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 
@@ -95,27 +94,25 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Ajoutez ce bloc de configuration à votre fichier `iis.d/conf.yaml` pour commencer à recueillir vos logs IIS :
 
-    ```yaml
-      logs:
-          - type: file
-            path: C:\inetpub\logs\LogFiles\W3SVC1\u_ex*
-            service: myservice
-            source: iis
-            sourcecategory: http_web_access
-    ```
+   ```yaml
+   logs:
+     - type: file
+       path: C:\inetpub\logs\LogFiles\W3SVC1\u_ex*
+       service: myservice
+       source: iis
+   ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
-   Consultez le [fichier d'exemple iis.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple iis.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
 3. [Redémarrez l'Agent][6].
 
@@ -126,19 +123,19 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 ##### Collecte de métriques
 
 | Paramètre            | Valeur                  |
-|----------------------|------------------------|
+| -------------------- | ---------------------- |
 | `<NOM_INTÉGRATION>` | `iis`                  |
 | `<CONFIG_INIT>`      | vide ou `{}`          |
 | `<CONFIG_INSTANCE>`  | `{"host": "%%host%%"}` |
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][8].
+La collecte de logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][8].
 
 | Paramètre      | Valeur                                            |
-|----------------|--------------------------------------------------|
+| -------------- | ------------------------------------------------ |
 | `<CONFIG_LOG>` | `{"source": "iis", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
@@ -146,11 +143,13 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [Lancez la sous-commande status de l'Agent][9] et cherchez `iis` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "iis" >}}
 
 
 ### Événements
+
 Le check IIS n'inclut aucun événement.
 
 ### Checks de service
@@ -159,6 +158,7 @@ Le check IIS n'inclut aucun événement.
 L'Agent envoie ce check de service pour chaque site configuré dans `iis.yaml`. Il renvoie `Critical` si l'uptime du site est à zéro, et `OK` dans les autres cas.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][11].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/iis/images/iisgraph.png

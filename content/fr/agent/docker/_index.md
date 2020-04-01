@@ -5,6 +5,7 @@ aliases:
   - /fr/guides/basic_agent_usage/docker/
   - /fr/agent/docker
   - /fr/agent/basic_agent_usage/docker/
+  - /fr/integrations/docker_daemon/
 further_reading:
   - link: '/integrations/java/?tab=docker#configuration'
     tag: Documentation
@@ -25,7 +26,7 @@ L'Agent Docker Datadog est la version conteneurisée de l'[Agent][1] pour host. 
 
 L'image est disponible en versions pour architectures x86 64 bits et Arm v8.
 
-## Implémentation
+## Configuration
 
 Si vous n'avez pas encore installé l'Agent Docker, consultez les informations ci-dessous ou les [instructions d'installation intégrées à l'application][3]. Consultez la documentation de l'Agent pour connaître les [versions prises en charge][4].
 
@@ -41,7 +42,7 @@ DOCKER_CONTENT_TRUST=1 \
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY=<VOTRE_CLÉ_API_DATADOG> \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
               datadog/agent:latest
 ```
 
@@ -53,7 +54,7 @@ DOCKER_CONTENT_TRUST=1 \
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
                               -v /proc/:/host/proc/:ro \
                               -v /cgroup/:/host/sys/fs/cgroup:ro \
-                              -e DD_API_KEY=<VOTRE_CLÉ_API_DATADOG> \
+                              -e DD_API_KEY="<DATADOG_API_KEY>" \
                               datadog/agent:latest
 ```
 
@@ -108,7 +109,7 @@ Envoyez des métriques custom avec le [protocole StatsD][13] :
 | Variable d'environnement                     | Description                                                                                                                                                |
 |----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | Effectue une écoute des paquets DogStatsD issus d'autres conteneurs (requis pour envoyer des métriques custom).                                                                       |
-| `DD_HISTOGRAM_PERCENTILES`       | Les centiles à calculer pour l'histogramme (séparés par des espaces). Valeur par défaut : « 0.95 ».                                                                         |
+| `DD_HISTOGRAM_PERCENTILES`       | Les centiles de l'histogramme à calculer (séparés par des espaces). Valeur par défaut :  `0.95`.                                                                         |
 | `DD_HISTOGRAM_AGGREGATES`        | Les agrégations à calculer pour l'histogramme (séparées par des espaces). Valeur par défaut : « max median avg count ».                                                          |
 | `DD_DOGSTATSD_SOCKET`            | Chemin vers le socket Unix à écouter. Doit être dans le volume `rw` monté.                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Active la détection de conteneurs et l'ajout de tags pour les métriques de socket Unix.                                                                                            |
@@ -178,7 +179,7 @@ Ces commandes sont exécutées sur le host.
 | Démarrer   | Utilisez la [commande d'installation](#installation).  |
 | Arrêter    | `docker exec -it <NOM_CONTENEUR> agent stop`   |
 | Redémarrer | Utilisez la [commande d'installation](#installation).  |
-| Statut  | `docker exec -it <NOM_CONTENEUR> agent status` |
+| Status  | `docker exec -it <NOM_CONTENEUR> agent status` |
 
 ## Données collectées
 
@@ -264,7 +265,7 @@ Il en va de même pour le dossier `/checks.d`. Tous les fichiers Python du dossi
 [10]: /fr/logs
 [11]: /fr/infrastructure/process
 [12]: /fr/infrastructure/livecontainers
-[13]: https://docs.datadoghq.com/fr/developers/dogstatsd
+[13]: /fr/developers/dogstatsd
 [14]: /fr/developers/dogstatsd/unix_socket
 [15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [16]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
@@ -274,7 +275,7 @@ Il en va de même pour le dossier `/checks.d`. Tous les fichiers Python du dossi
 [20]: /fr/agent/autodiscovery/management/?tab=containerizedagent
 [21]: /fr/integrations/system/#metrics
 [22]: /fr/integrations/disk/#metrics
-[23]: /fr/integrations/docker_daemon/#metrics
+[23]: /fr/agent/docker/data_collected/#metrics
 [24]: /fr/integrations/network/#metrics
 [25]: /fr/integrations/ntp/#metrics
 [26]: /fr/agent/autodiscovery/integrations

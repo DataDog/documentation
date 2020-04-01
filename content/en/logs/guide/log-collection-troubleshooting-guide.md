@@ -126,11 +126,11 @@ See the [Docker Log Collection Troubleshooting Guide][9]
 
 ## Serverless environment
 
-See the [Lambda Log Collection Troubleshooting Guide][14]
+See the [Lambda Log Collection Troubleshooting Guide][10]
 
 ## Expectedly dropping logs
 
-Check if logs appear in the [Datadog Live Tail][12]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][13] that could match your logs.
+Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
 
 ## Further Reading
 
@@ -145,8 +145,6 @@ Check if logs appear in the [Datadog Live Tail][12]. If they appear in the Live 
 [7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /logs/guide/docker-logs-collection-troubleshooting-guide
-[10]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[11]: https://app.datadoghq.com/account/settings#api
-[12]: https://app.datadoghq.com/logs/livetail
-[13]: /logs/indexes/#exclusion-filters
-[14]: /logs/guide/lambda-logs-collection-troubleshooting-guide
+[10]: /logs/guide/lambda-logs-collection-troubleshooting-guide
+[11]: https://app.datadoghq.com/logs/livetail
+[12]: /logs/indexes/#exclusion-filters

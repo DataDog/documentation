@@ -47,6 +47,7 @@ clean-integrations:  ## Remove built integrations files.
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
 	    -a -not -name '*.ja.yaml' \
+		-a -not -name 'docker_daemon.yaml' \
 	    -exec rm -rf {} \; ;fi
 	@if [ -d data/service_checks ]; then \
 		find ./data/service_checks -type f -maxdepth 1 \

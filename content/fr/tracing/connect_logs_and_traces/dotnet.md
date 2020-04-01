@@ -1,7 +1,7 @@
 ---
-title: Associer des traces et des logs .NET
+title: Associer vos logs .NET à vos traces
 kind: documentation
-description: Associez vos traces à vos logs .NET pour les mettre en corrélation dans Datadog.
+description: Associez vos logs .NET à vos traces pour les mettre en corrélation dans Datadog.
 further_reading:
   - link: tracing/manual_instrumentation
     tag: Documentation

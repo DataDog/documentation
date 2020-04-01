@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "check": "snmp.can_check",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト", "snmp_device"],
+        "name": "Can check",
+        "description": "Agent チェックが SNMP からメトリクスを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    }
+]

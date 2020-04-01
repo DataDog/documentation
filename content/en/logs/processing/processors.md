@@ -749,7 +749,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 [3]: /logs/processing/parsing
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
 [5]: /logs/guide/log-parsing-best-practice
-[6]: /logs/explorer/search/#search-syntax
+[6]: /logs/search_syntax
 [7]: /logs/processing/processors/?tab=ui#log-status-remapper
 [8]: /logs/processing/parsing/?tab=filter#matcher-and-filter
 [9]: /tracing/connect_logs_and_traces

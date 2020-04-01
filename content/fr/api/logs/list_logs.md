@@ -41,4 +41,4 @@ Le endpoint List renvoie les logs qui correspondent à une requête de recherche
 
 [1]: /fr/logs/guide/collect-multiple-logs-with-pagination
 [2]: /fr/logs/archives
-[3]: /fr/logs/explorer/search/#search-syntax
+[3]: /fr/logs/search_syntax
