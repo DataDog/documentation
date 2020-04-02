@@ -2,13 +2,14 @@
 title: AWS Config Disabled
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: cloudtrail
 security: attack
 tactic: TA0005-defense-evasion
 technique: T1089-disabling-security-tools
 source: cloudtrail
-service: amazon-config
-meta_image: /images/integrations_logos/amazon_cloudtrail.png
+scope: amazon-config
+meta_image: /images/integrations_logos/amazon_web_services.png
 ---
 
 ## Overview
@@ -18,6 +19,7 @@ Detect when an attacker is trying to evade defenses by disabling AWS Config.
 
 ### **Strategy:**
 Monitor CloudTrail and detect when AWS config is being disabled via the following API calls:
+
 * [StopConfigurationRecorder][1] 
 * [DeleteDeliveryChannel][2] 
 

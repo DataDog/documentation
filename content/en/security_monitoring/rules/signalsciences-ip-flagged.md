@@ -2,9 +2,10 @@
 title: Signal Sciences Flagged an IP
 kind: documentation
 type: security_rules
-parent: sigsci
-source: sigsci
-meta_image: /images/integrations_logos/sigsci.png
+disable_edit: true
+parent: signal_sciences
+source: signal_sciences
+
 ---
 
 ## Overview
@@ -18,4 +19,6 @@ Monitor Signal Sciences events submitted through the Signal Sciences [integratio
 ### **Triage & Response:**
 1. Determine whether the attack is a false positive.
 2. Determine whether the attack was successful.
-3. Triage the vulnerability, if the attack exploited a vulnerability in the application.[1]: https://app.datadoghq.com/account/settings#integrations/sigsci
+3. Triage the vulnerability, if the attack exploited a vulnerability in the application.
+
+[1]: https://app.datadoghq.com/account/settings#integrations/sigsci

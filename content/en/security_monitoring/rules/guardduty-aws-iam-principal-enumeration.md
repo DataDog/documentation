@@ -2,13 +2,14 @@
 title: AWS IAM Principal Enumeration
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: guardduty
 security: attack
 tactic: TA0007-discovery
 technique: T1069-permission-groups-discovery
 source: guardduty
-service: iam
-meta_image: /images/integrations_logos/amazon_guardduty.png
+scope: iam
+
 ---
 
 ## Overview
@@ -18,6 +19,7 @@ Detect when an attacker is enumerating IAM principals.
 
 ### **Strategy:**
 Leverage GuardDuty and detect when an attacker is enumerating IAM principals. The following are GuardDuty Findings which may trigger this signal:
+
 * [Recon:IAMUser/NetworkPermissions][1]
 * [Recon:IAMUser/ResourcePermissions][2]
 * [Recon:IAMUser/UserPermissions][3] 

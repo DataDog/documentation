@@ -2,13 +2,14 @@
 title: AWS GuardDuty Detector Deleted
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: cloudtrail
 security: attack
 tactic: TA0005-defense-evasion
 technique: T1089-disabling-security-tools
 source: cloudtrail
-service: guardduty
-meta_image: /images/integrations_logos/amazon_cloudtrail.png
+scope: guardduty
+meta_image: /images/integrations_logos/amazon_guardduty.png
 ---
 
 ## Overview
@@ -18,6 +19,7 @@ Detect when an attacker is trying to evade defenses by deleting a GuardDuty dete
 
 ### **Strategy:**
 Monitor CloudTrail and detect when a GuardDuty Dector is deleted via the following API call:
+
 * [DeleteDetector][1]
 
 ### **Triage & Response:**

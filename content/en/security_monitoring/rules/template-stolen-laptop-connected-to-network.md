@@ -2,9 +2,10 @@
 title: TEMPLATE - Stolen Laptop Connected to Network
 kind: documentation
 type: security_rules
-parent: cloudtrail
+disable_edit: true
+parent: 
 security: threat-intel
-meta_image: /images/integrations_logos/amazon_cloudtrail.png
+
 ---
 
 ## Overview

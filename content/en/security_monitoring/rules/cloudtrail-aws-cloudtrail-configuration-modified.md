@@ -2,12 +2,13 @@
 title: AWS CloudTrail Configuration Modified
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: cloudtrail
 security: attack
 tactic: TA0005-defense-evasion
 technique: T1089-disabling-security-tools
 source: cloudtrail
-service: cloudtrail
+scope: cloudtrail
 meta_image: /images/integrations_logos/amazon_cloudtrail.png
 ---
 
@@ -18,6 +19,7 @@ Detect when an attacker is trying to evade defenses by disabling or modifying Cl
 
 ### Strategy:
 Monitor CloudTrail and detect when CloudTrail is being disabled via one of the following API calls:
+
 * [DeleteTrail][1]
 * [UpdateTrail][2]
 * [StopLogging][3]

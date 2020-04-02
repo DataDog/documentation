@@ -2,13 +2,14 @@
 title: AWS EC2 Instance Involved in Brute Force Attack
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: guardduty
 security: attack
 tactic: TA0006-credential-access
 technique: T1110-brute-force
 source: guardduty
-service: ec2
-meta_image: /images/integrations_logos/amazon_guardduty.png
+scope: ec2
+meta_image: /images/integrations_logos/amazon_ec2.png
 ---
 
 ## Overview
@@ -18,6 +19,7 @@ Detect Brute Force Attacks
 
 ### **Strategy:**
 Leverage GuardDuty and detect when an attacker is performing a brute force attack. The following are GuardDuty Findings which may trigger this signal:
+
 * [UnauthorizedAccess:EC2/SSHBruteForce][1]
 * [UnauthorizedAccess:EC2/RDPBruteForce][2]
 

@@ -2,13 +2,14 @@
 title: AWS FlowLogs Removed
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: cloudtrail
 security: attack
 tactic: TA0005-defense-evasion
 technique: T1066-indicator-removal-from-tools
 source: cloudtrail
-service: ec2
-meta_image: /images/integrations_logos/amazon_cloudtrail.png
+scope: ec2
+meta_image: /images/integrations_logos/amazon_ec2.png
 ---
 
 ## Overview
@@ -18,6 +19,7 @@ Detect when an attacker is removing FlowLogs to cover their tracks.
 
 ### **Strategy:**
 Monitor CloudTrail and detect when FlowLogs are deleted via the following API call:
+
 * [DeleteFlowLogs][1]
 
 ### **Triage & Response:**

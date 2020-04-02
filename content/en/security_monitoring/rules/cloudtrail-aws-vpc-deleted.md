@@ -2,13 +2,14 @@
 title: AWS VPC Deleted
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: cloudtrail
 security: attack
 tactic: TA0040-impact
 technique: T1485-data-destruction
 source: cloudtrail
-service: ec2
-meta_image: /images/integrations_logos/amazon_cloudtrail.png
+scope: ec2
+meta_image: /images/integrations_logos/amazon_ec2.png
 ---
 
 ## Overview
@@ -18,6 +19,7 @@ Detect when an attacker is destroying a VPC
 
 ### **Strategy:**
 Monitor CloudTrail and detect when a VPC is deleted via the following API call:
+
 * [DeleteVpc][1]
 
 ### **Triage & Response:**

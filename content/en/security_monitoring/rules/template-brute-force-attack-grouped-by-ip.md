@@ -2,11 +2,12 @@
 title: TEMPLATE - Brute Force Attack Grouped By IP
 kind: documentation
 type: security_rules
-parent: cloudtrail
+disable_edit: true
+parent: 
 security: attack
 tactic: TA0006-credential-access
 technique: T1110-brute-force
-meta_image: /images/integrations_logos/amazon_cloudtrail.png
+
 ---
 
 ## Overview

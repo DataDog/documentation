@@ -2,11 +2,12 @@
 title: AWS EBS Default Encryption Disabled
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: cloudtrail
 security: compliance
 source: cloudtrail
-service: ec2
-meta_image: /images/integrations_logos/amazon_cloudtrail.png
+scope: ec2
+meta_image: /images/integrations_logos/amazon_ec2.png
 ---
 
 ## Overview
@@ -16,6 +17,7 @@ Detect when EBS encryption is disabled by default
 
 ### **Strategy:**
 Monitor CloudTrail and detect when EBS encryption is disabled by default via the following API call:
+
 * [DisableEbsEncryptionByDefault][1]
 
 ### **Triage & Response:**

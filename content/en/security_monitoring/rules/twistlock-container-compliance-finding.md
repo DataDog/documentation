@@ -2,9 +2,10 @@
 title: Container Violated Compliance Standards
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: twistlock
 source: twistlock
-meta_image: /images/integrations_logos/twistlock.png
+
 ---
 
 ## Overview

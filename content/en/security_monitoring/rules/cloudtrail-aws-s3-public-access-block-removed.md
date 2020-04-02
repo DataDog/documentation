@@ -2,11 +2,12 @@
 title: AWS S3 Public Access Block Removed
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: cloudtrail
 security: compliance
 source: cloudtrail
-service: s3
-meta_image: /images/integrations_logos/amazon_cloudtrail.png
+scope: s3
+meta_image: /images/integrations_logos/amazon_s3.png
 ---
 
 ## Overview
@@ -16,6 +17,7 @@ Detect when the S3 Public Access Block configuration has been removed
 
 ### **Strategy:**
 Monitor CloudTrail and detect when S3 Public Access Block configuration has been removed via the following API call:
+
 * [DeleteAccountPublicAccessBlock][1]
 
 ### **Triage & Response:**

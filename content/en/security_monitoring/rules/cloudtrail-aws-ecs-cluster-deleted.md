@@ -2,13 +2,14 @@
 title: AWS ECS Cluster Deleted
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: cloudtrail
 security: attack
 tactic: TA0040-impact
 technique: T1485-data-destruction
 source: cloudtrail
-service: ecs
-meta_image: /images/integrations_logos/amazon_cloudtrail.png
+scope: ecs
+meta_image: /images/integrations_logos/amazon_ecs.png
 ---
 
 ## Overview
@@ -18,6 +19,7 @@ Detect when an attacker is destroying an ECS Cluster
 
 ### **Strategy:**
 Monitor CloudTrail and detect when an ECS Cluster is deleted via the following API call:
+
 * [DeleteCluster][1]
 
 ### **Triage & Response:**

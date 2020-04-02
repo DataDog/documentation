@@ -2,13 +2,14 @@
 title: AWS EventBridge Rule Disabled or Deleted
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: cloudtrail
 security: attack
 tactic: TA0005-defense-evasion
 technique: T1089-disabling-security-tools
 source: cloudtrail
-service: eventbridge
-meta_image: /images/integrations_logos/amazon_cloudtrail.png
+scope: eventbridge
+meta_image: /images/integrations_logos/amazon_event_bridge.png
 ---
 
 ## Overview
@@ -18,6 +19,7 @@ Detect when an attacker is trying to evade defenses by deleting or disabling Eve
 
 ### **Strategy:**
 Monitor CloudTrail and detect when EventBridge rules are being deleted or disabled via one of the following API calls:
+
 * [DeleteRule][1]
 * [DisableRule][2]
 

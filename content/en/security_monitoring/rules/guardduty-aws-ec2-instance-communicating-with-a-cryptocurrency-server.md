@@ -2,13 +2,14 @@
 title: AWS EC2 Instance Communicating With a Cryptocurrency Server
 kind: documentation
 type: security_rules
+disable_edit: true
 parent: guardduty
 security: attack
 tactic: TA0040-impact
 technique: T1496-resource-hijacking
 source: guardduty
-service: ec2
-meta_image: /images/integrations_logos/amazon_guardduty.png
+scope: ec2
+meta_image: /images/integrations_logos/amazon_ec2.png
 ---
 
 ## Overview
@@ -18,6 +19,7 @@ Detect when an EC2 instance is communicating with a cryptocurrency server
 
 ### **Strategy:**
 Leverage GuardDuty and detect when an EC2 instance has made a DNS request or is communicating with an IP which is associated with cryptocurrency operations. The following are GuardDuty Findings which may trigger this signal:
+
 * [CryptoCurrency:EC2/BitcoinTool.B!DNS][1]
 * [CryptoCurrency:EC2/BitcoinTool.B][2]
 
