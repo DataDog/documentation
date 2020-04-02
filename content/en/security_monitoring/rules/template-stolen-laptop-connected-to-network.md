@@ -3,7 +3,7 @@ title: TEMPLATE - Stolen Laptop Connected to Network
 kind: documentation
 type: security_rules
 disable_edit: true
-parent: 
+src_img: /images/integrations_logos/.png
 security: threat-intel
 
 ---

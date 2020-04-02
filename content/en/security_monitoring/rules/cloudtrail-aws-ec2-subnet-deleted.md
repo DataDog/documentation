@@ -3,7 +3,7 @@ title: AWS EC2 Subnet Deleted
 kind: documentation
 type: security_rules
 disable_edit: true
-parent: cloudtrail
+src_img: /images/integrations_logos/amazon_cloudtrail.png
 security: attack
 tactic: TA0040-impact
 technique: T1485-data-destruction

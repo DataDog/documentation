@@ -3,7 +3,7 @@ title: AWS EC2 Instance Communicating With a Cryptocurrency Server
 kind: documentation
 type: security_rules
 disable_edit: true
-parent: guardduty
+src_img: /images/integrations_logos/amazon_guardduty.png
 security: attack
 tactic: TA0040-impact
 technique: T1496-resource-hijacking

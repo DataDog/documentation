@@ -3,7 +3,7 @@ title: AWS Console Root Login Without MFA
 kind: documentation
 type: security_rules
 disable_edit: true
-parent: cloudtrail
+src_img: /images/integrations_logos/amazon_cloudtrail.png
 security: compliance
 source: cloudtrail
 scope: amazon

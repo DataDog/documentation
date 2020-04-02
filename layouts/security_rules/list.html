@@ -9,12 +9,12 @@
         </div>
 
         <div class="list-group">
-            {{ range $i, $v := .Pages.GroupByParam "parent" }}
+            {{ range $i, $v := .Pages.GroupByParam "source" }}
                 <div class="js-group js-group-{{ $i }}">
                     <div class="rule-list mb-1 active">
                         <div class="rule-list__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">
                             {{ range first 1 $v.Pages }}
-                                {{ substr $v.Key 0 1 }}
+                                <img src="{{.Site.Params.img_url}}{{ .Params.src_img }}?fit=auto&w=40" width="40" />
                             {{ end }}
                         </div>
                         <div class="d-inline font-semibold ml-1">{{ title $v.Key }}</div>

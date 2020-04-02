@@ -3,7 +3,7 @@ title: Signal Sciences Flagged an IP
 kind: documentation
 type: security_rules
 disable_edit: true
-parent: signal_sciences
+src_img: /images/integrations_logos/sigsci.png
 source: signal_sciences
 
 ---

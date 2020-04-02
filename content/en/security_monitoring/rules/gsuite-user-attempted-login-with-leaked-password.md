@@ -3,7 +3,7 @@ title: User Attempted Login with Leaked Password
 kind: documentation
 type: security_rules
 disable_edit: true
-parent: gsuite
+src_img: /images/integrations_logos/gsuite.png
 security: threat-intel
 source: gsuite
 

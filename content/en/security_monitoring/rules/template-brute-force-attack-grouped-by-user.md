@@ -3,7 +3,7 @@ title: TEMPLATE - Brute Force Attack Grouped By User
 kind: documentation
 type: security_rules
 disable_edit: true
-parent: 
+src_img: /images/integrations_logos/.png
 security: attack
 tactic: TA0006-credential-access
 technique: T1110-brute-force

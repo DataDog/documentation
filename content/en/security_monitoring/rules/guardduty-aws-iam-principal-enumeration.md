@@ -3,7 +3,7 @@ title: AWS IAM Principal Enumeration
 kind: documentation
 type: security_rules
 disable_edit: true
-parent: guardduty
+src_img: /images/integrations_logos/amazon_guardduty.png
 security: attack
 tactic: TA0007-discovery
 technique: T1069-permission-groups-discovery
