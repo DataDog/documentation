@@ -18,7 +18,7 @@ If running the Agent as a binary on a host, configure your Autodiscovery perimet
 
 ## Exclude containers
 
-Exclude containers from the Agent Autodiscovery perimeter with an exclude rule based on their `name` or `image` to collect **NO DATA** out of it. If a container matches an exclude rule, it won't be included unless it first matches an include rule.
+Exclude containers from the Agent Autodiscovery perimeter with an exclude rule based on their `name`, `image` or `kube_namespace` to collect **NO DATA** out of it. If a container matches an exclude rule, it won't be included unless it first matches an include rule.
 
 **Note**: Exclude rules support regexes, and are defined as a list of comma-separated strings.
 
@@ -35,6 +35,12 @@ To remove a given Docker container with the name `<NAME>` from Autodiscovery, ad
 
 ```yaml
 ac_exclude: [name:<NAME>]
+```
+
+On kubernetes, to remove all containers of pods inside namespace `<NAMESPACE>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+ac_exclude: [kube_namespace:<NAMESPACE>]
 ```
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
@@ -67,6 +73,12 @@ DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup imag
 
 You can also use a regex to ignore them all: `DD_AC_EXCLUDE = "image:dockercloud/*"`
 
+On Kubernetes, to remove all containers of pods inside namespace `<NAMESPACE>` from Autodiscovery, add the following environment variable to the Datadog Agent:
+
+```shell
+DD_AC_EXCLUDE = "kube_namespace:<NAMESPACE>"
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -93,6 +105,12 @@ To include a given Docker container with the name `<NAME>` from Autodiscovery, a
 ac_include: [name:<NAME>]
 ```
 
+On Kubernetes, to include all containers of pods inside namespace <NAMESPACE> from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+ac_include: [kube_namespace:<NAMESPACE>]
+```
+
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
@@ -114,6 +132,12 @@ For example, if you only want to monitor `ubuntu` or `debian` images, and exclud
 ```shell
 DD_AC_EXCLUDE = "image:.*"
 DD_AC_INCLUDE = "image:ubuntu image:debian"
+```
+
+On Kubernetes, to include all containers of pods inside namespace <NAMESPACE> from Autodiscovery, add the following environment variable to the Datadog Agent:
+
+```shell
+DD_AC_INCLUDE = "kube_namespace:<NAMESPACE>"
 ```
 
 {{% /tab %}}
