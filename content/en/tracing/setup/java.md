@@ -176,7 +176,6 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Hibernate        | 3.5+     | Fully Supported | `hibernate`                                    |
 | Hystrix          | 1.4+     | Fully Supported | `hystrix`                                      |
 | JSP Rendering    | 2.3+     | Fully Supported | `jsp`, `jsp-render`                            |
-| Slf4J MDC        | 1+       | Fully Supported | `mdc` (See also `dd.logs.injection` config)    |
 | Spring Data      | 1.8+     | Fully Supported | `spring-data`                                  |
 | Spring Scheduling | 3.1+    | Fully Supported | `spring-scheduling`                            |
 | Twilio SDK       | 0+       | Fully Supported | `twilio-sdk`                                   |
