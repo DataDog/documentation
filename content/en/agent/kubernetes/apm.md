@@ -28,12 +28,23 @@ In order to start collecting your application traces you must be [running the Da
 To enable trace collection with your Agent, follow the instructions below:
 
 1. **Configure the Datadog Agent to accept traces**:
-
-{{< tabs >}}
+    {{< tabs >}}
 {{% tab "Helm" %}}
 
 - If you haven't already, [install][1] the Helm chart.
 - Update your datadog-values.yaml file with the following APM configuration:
+    ```yaml
+    datadog:
+      ## @param apm - object - required
+      ## Enable apm agent and provide custom configs
+      #
+      apm:
+        ## @param enabled - boolean - optional - default: false
+        ## Enable this to enable APM and tracing, on port 8126
+        #
+        enabled: true
+    ```
+ - Then, upgrade your Datadog Helm chart using the following command : `helm upgrade -f datadog-values.yaml <RELEASE NAME> stable/datadog` (don't forget to set the API key in the yaml file)
 
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
@@ -69,7 +80,10 @@ To enable APM trace collection, open the Daemonset configuration file and edit t
 
 {{% /tab %}}
 {{< /tabs >}}
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
    **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
 2. **Configure your application pods to pull the host IP in order to communicate with the Datadog Agent**: Use the downward API to pull the host IP; the application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`.

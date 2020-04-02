@@ -23,11 +23,12 @@ Liste des commandes pour démarrer l'Agent Datadog :
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-| Plateforme | Commandes                                                        |
+| Plate-forme | Commandes                                                        |
 |----------|----------------------------------------------------------------|
 | AIX      | `startsrc -s datadog-agent`                                    |
 | Linux    | `sudo service datadog-agent start`                             |
 | Docker   | [Consultez la documentation relative à Docker][1]                    |
+| Kubernetes | `kubectl create -f datadog-agent.yaml`                        |
 | macOS    | `launchctl start com.datadoghq.agent` *ou* via la barre des menus |
 | Source   | `sudo service datadog-agent start`                             |
 | Windows  | [Consultez la documentation relative à Windows][2]                   |
@@ -35,9 +36,9 @@ Liste des commandes pour démarrer l'Agent Datadog :
 [1]: /fr/agent/docker
 [2]: /fr/agent/basic_agent_usage/windows
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
-| Plateforme | Commandes                                      |
+| Plate-forme | Commande                                      |
 |----------|----------------------------------------------|
 | Linux    | `sudo service datadog-agent start`           |
 | Docker   | [Consultez la documentation relative à Docker][1]  |
@@ -57,11 +58,12 @@ Liste des commandes pour arrêter l'Agent Datadog :
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-| Plateforme | Commandes                                                       |
+| Plate-forme | Commande                                                       |
 |----------|---------------------------------------------------------------|
 | AIX      | `stopsrc -s datadog-agent`                                    |
 | Linux    | `sudo service datadog-agent stop`                             |
 | Docker   | [Consultez la documentation relative à Docker][1]                   |
+| Kubernetes | `kubectl delete pod <NOM POD AGENT>`— remarque : le pod est automatiquement replanifié |
 | macOS    | `launchctl stop com.datadoghq.agent` *ou* via la barre des menus |
 | Source   | `sudo service datadog-agent stop`                             |
 | Windows  | [Consultez la documentation relative à Windows][2]                  |
@@ -69,9 +71,9 @@ Liste des commandes pour arrêter l'Agent Datadog :
 [1]: /fr/agent/docker
 [2]: /fr/agent/basic_agent_usage/windows
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
-| Plateforme | Commandes                                      |
+| Plate-forme | Commande                                      |
 |----------|----------------------------------------------|
 | Linux    | `sudo service datadog-agent stop`            |
 | Docker   | [Consultez la documentation relative à Docker][1]  |
@@ -84,27 +86,28 @@ Liste des commandes pour arrêter l'Agent Datadog :
 {{% /tab %}}
 {{< /tabs >}}
 
-### Redémarrer l'Agent
+### Redémarrez l'Agent
 
 Liste des commandes pour redémarrer l'Agent Datadog :
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-| Plateforme | Commandes                                           |
+| Plate-forme | Commande                                           |
 |----------|---------------------------------------------------|
 | Linux    | `sudo service datadog-agent restart`              |
 | Docker   | [Consultez la documentation relative à Docker][1]       |
+| Kubernetes | `kubectl delete pod <NOM POD AGENT>`— remarque : le pod est automatiquement replanifié |
 | macOS    | exécuter `stop` puis `start` *ou* via la barre des menus |
-| Source   | *Plateforme non prise en charge*                            |
+| Source   | *Plate-forme non prise en charge*                            |
 | Windows  | [Consultez la documentation relative à Windows][2]      |
 
 [1]: /fr/agent/docker
 [2]: /fr/agent/basic_agent_usage/windows
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
-| Plateforme | Commandes                                      |
+| Plate-forme | Commande                                      |
 |----------|----------------------------------------------|
 | Linux    | `sudo service datadog-agent restart`         |
 | Docker   | [Consultez la documentation relative à Docker][1]  |
@@ -126,7 +129,7 @@ Liste des commandes pour afficher le statut de l'Agent Datadog :
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-| Plateforme        | Commandes                                                                       |
+| Plate-forme        | Commande                                                                       |
 |-----------------|-------------------------------------------------------------------------------|
 | AIX             | `lssrc -s datadog-agent`                                                      |
 | Linux           | `sudo service datadog-agent status`                                           |
@@ -136,9 +139,9 @@ Liste des commandes pour afficher le statut de l'Agent Datadog :
 | Source          | `sudo service datadog-agent status`                                           |
 
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
-| Plateforme        | Commandes                                                                  |
+| Plate-forme        | Commande                                                                  |
 |-----------------|--------------------------------------------------------------------------|
 | Linux           | `sudo service datadog-agent status`                                      |
 | Docker (Debian) | `sudo docker exec -it <NOM_CONTENEUR> /etc/init.d/datadog-agent status` |
@@ -151,21 +154,21 @@ Liste des commandes pour afficher le statut de l'Agent Datadog :
 {{% /tab %}}
 {{% tab "Agent de cluster" %}}
 
-| Plateforme   | Commandes                        |
+| Plate-forme   | Commande                        |
 |------------|--------------------------------|
 | Kubernetes | `datadog-cluster-agent status` |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Informations de l'Agent
+### Informations sur l'Agent
 
 Liste des commandes pour afficher le statut de votre Agent Datadog et les intégrations activées.
 
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-| Plateforme   | Commandes                                              |
+| Plate-forme   | Commande                                              |
 |------------|------------------------------------------------------|
 | AIX        | `datadog-agent status`                               |
 | Linux      | `sudo datadog-agent status`                          |
@@ -192,9 +195,9 @@ Running Checks
 [1]: /fr/agent/basic_agent_usage/#gui
 [2]: /fr/agent/basic_agent_usage/windows/#status-and-information
 {{% /tab %}}
-{{% tab "Agent v5" %}}
+{{% tab "Agent v5" %}}
 
-| Plateforme   | Commandes                                                                |
+| Plate-forme   | Commande                                                                |
 |------------|------------------------------------------------------------------------|
 | Linux      | `sudo service datadog-agent info`                                      |
 | Docker     | `sudo docker exec -it <NOM_CONTENEUR> /etc/init.d/datadog-agent info` |
@@ -218,7 +221,7 @@ Checks
 {{% /tab %}}
 {{% tab "Agent de cluster" %}}
 
-| Plateforme   | Commandes                        |
+| Plate-forme   | Commande                        |
 |------------|--------------------------------|
 | Kubernetes | `datadog-cluster-agent status` |
 
@@ -230,7 +233,7 @@ Checks
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-L'interface de ligne de commande pour l'Agent v6 est basée sur un système de sous-commandes. Pour consulter la liste des sous-commandes disponibles, exécutez : 
+L'interface de ligne de commande pour l'Agent v6 est basée sur un système de sous-commandes. Pour consulter la liste des sous-commandes disponibles, exécutez ce qui suit : 
 ```shell
 <BINAIRE_AGENT> --help
 ```

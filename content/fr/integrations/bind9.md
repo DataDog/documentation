@@ -32,7 +32,8 @@ supported_os:
 
 Recueillez les métriques de votre serveur DNS Bind9.
 
-* Visualisez et surveillez les statistiques bind9
+- Visualisez et surveillez les statistiques bind9
+
 ![Snap][1]
 
 ## Implémentation
@@ -46,52 +47,47 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 1. Installez le [kit de développement][6].
 2. Clonez le dépôt integrations-extras :
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. Pour générer le paquet `bind9`, exécutez :
 
-    ```
-    ddev -e release build bind9
-    ```
+   ```shell
+   ddev -e release build bind9
+   ```
 
 5. [Téléchargez et lancez l'Agent Datadog][2].
 6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
-    ```
-    datadog-agent integration install -w <PATH_OF_BIND9_ARTIFACT>/<BIND9_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_BIND9_ARTIFACT>/<BIND9_ARTIFACT_NAME>.whl
+   ```
 
 7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][7].
 
 ### Configuration
 
-1. Modifiez le fichier `bind9.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#collecte-de-metriques) Bind9.
-  Consultez le [fichier d'exemple bind9.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `bind9.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#metriques) Bind9. Consultez le [fichier d'exemple bind9.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
+
+   ```yaml
+   init_config:
+
+   instances:
+     - URL: "<BIND_9_STATS_URL>"
+   ```
 
 2. [Redémarrez l'Agent][10].
 
-#### Collecte de métriques
-
-Ajoutez cette configuration à votre fichier `conf.yaml` pour commencer à recueillir vos [métriques][11] :
-
-```
-init_config:
-
-instances:
-  - URL : <BIND_9_STATS_URL>
-```
-
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][12] et cherchez `bind9` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][11] et cherchez `bind9` dans la section Checks.
 
 ## Compatibilité
 
@@ -114,7 +110,7 @@ Le check bind9 n'inclut actuellement aucun événement.
 
 ## Développement
 
-Consultez la [documentation principale sur les outils de développement][14] pour découvrir comment tester et développer des intégrations reposant sur l'Agent.
+Consultez la [documentation principale sur les outils de développement][13] pour découvrir comment tester et développer des intégrations reposant sur l'Agent.
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bind9/images/snapshot.png
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -126,7 +122,6 @@ Consultez la [documentation principale sur les outils de développement][14] pou
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-extras/blob/master/bind9/datadog_checks/bind9/data/conf.yaml.example
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[11]: #metrics
-[12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
-[13]: https://github.com/DataDog/cookiecutter-datadog-check/blob/master/%7B%7Bcookiecutter.check_name%7D%7D/metadata.csv
-[14]: https://docs.datadoghq.com/fr/developers
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
+[12]: https://github.com/DataDog/cookiecutter-datadog-check/blob/master/%7B%7Bcookiecutter.check_name%7D%7D/metadata.csv
+[13]: https://docs.datadoghq.com/fr/developers

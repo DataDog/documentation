@@ -20,7 +20,10 @@ platforms:
   - name: heroku
     link: agent/basic_agent_usage/heroku/
     image: platform_heroku.png
-  - name: kubernetes
+  - name: puppet
+    link: agent/basic_agent_usage/puppet/
+    image: platform_puppet.png
+  - name: Kubernetes
     link: agent/kubernetes/
     image: platform_kubernetes.png
   - name: osx

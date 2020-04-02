@@ -7,7 +7,7 @@ external_redirect: /api/#get-a-user-invitation
 
 **SIGNATURE**:
 
-`GET /v2/user_invitations/<USER_INVITATION_UUID>`
+`GET /api/v2/user_invitations/<USER_INVITATION_UUID>`
 
 **EXAMPLE REQUEST**:
 
