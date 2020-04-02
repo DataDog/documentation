@@ -1824,6 +1824,18 @@ api_v1:
   - name: Create a PagerDuty integration
     parent: PagerDuty Integration
     url: create-a-pagerduty-integration
+  - name: Create a new service object
+    parent: PagerDuty Integration
+    url: create-a-new-service-object
+  - name: Delete a single service object
+    parent: PagerDuty Integration
+    url: delete-a-single-service-object
+  - name: Get a single service object
+    parent: PagerDuty Integration
+    url: get-a-single-service-object
+  - name: Update a single service object
+    parent: PagerDuty Integration
+    url: update-a-single-service-object
   - name: SLO
     url: /api/v1/slo/
     identifier: SLO
@@ -1935,6 +1947,9 @@ api_v1:
   - name: Usage Metering
     url: /api/v1/usage-metering/
     identifier: Usage Metering
+  - name: Get hourly usage for Lambda
+    parent: Usage Metering
+    url: get-hourly-usage-for-lambda
   - name: Get hourly usage for Fargate
     parent: Usage Metering
     url: get-hourly-usage-for-fargate
@@ -1944,15 +1959,30 @@ api_v1:
   - name: Get hourly usage for Logs
     parent: Usage Metering
     url: get-hourly-usage-for-logs
+  - name: Get hourly usage for Logs by Index
+    parent: Usage Metering
+    url: get-hourly-usage-for-logs-by-index
+  - name: Get hourly usage for Network Flows
+    parent: Usage Metering
+    url: get-hourly-usage-for-network-flows
+  - name: Get hourly usage for Network Hosts
+    parent: Usage Metering
+    url: get-hourly-usage-for-network-hosts
   - name: Get hourly usage for RUM Sessions
     parent: Usage Metering
     url: get-hourly-usage-for-rum-sessions
   - name: Get usage across your multi-org account
     parent: Usage Metering
     url: get-usage-across-your-multi-org-account
-  - name: Get hourly usage for Synthetics
+  - name: Get hourly usage for Synthetics API Checks
     parent: Usage Metering
-    url: get-hourly-usage-for-synthetics
+    url: get-hourly-usage-for-synthetics-api-checks
+  - name: Get hourly usage for Synthetics API Checks
+    parent: Usage Metering
+    url: get-hourly-usage-for-synthetics-api-checks
+  - name: Get hourly usage for Synthetics Browser Checks
+    parent: Usage Metering
+    url: get-hourly-usage-for-synthetics-browser-checks
   - name: Get hourly usage for custom metrics
     parent: Usage Metering
     url: get-hourly-usage-for-custom-metrics
