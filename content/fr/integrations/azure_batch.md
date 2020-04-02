@@ -19,30 +19,34 @@ short_description: "Surveillez des métriques clés du service Azure\_Batch."
 version: '1.0'
 ---
 ## Présentation
-Le service Azure Batch est un processeur et un planificateur de tâches gérés pour vos applications Azure.
 
-Recueillez des métriques du service Azure Batch pour :
+Le service Azure Batch est un processeur et un planificateur de tâches gérés pour vos applications Azure. Recueillez des métriques du service Azure Batch pour :
 
-* Visualiser les performances de vos comptes Batch
-* Corréler les performances de vos comptes Batch avec vos applications
+- Visualiser les performances de vos comptes Batch
+- Corréler les performances de vos comptes Batch avec vos applications
 
-## Implémentation
+## Configuration
+
 ### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft Azure][1]. Aucune autre procédure d'installation n'est requise.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "azure_batch" >}}
 
 
 ### Événements
+
 L'intégration Azure Batch Service n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Azure Batch Service n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://docs.datadoghq.com/fr/integrations/azure
