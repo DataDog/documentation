@@ -214,7 +214,7 @@ Optional collection Agents are disabled by default for security or performance r
 | `DD_LOGS_ENABLED`          | Enable [log collection][6] with the Logs Agent.                                                                                                                                                                                                              |
 | `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][7] with the Process Agent. The [live container view][8] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][7] and the [live container view][8] are disabled. |
 
-## DogStatsD (custom metrics)
+### DogStatsD (custom metrics)
 
 Send custom metrics with [the StatsD protocol][9]:
 
@@ -229,7 +229,7 @@ Send custom metrics with [the StatsD protocol][9]:
 
 Learn more about [DogStatsD over Unix Domain Sockets][14].
 
-## Tagging
+### Tagging
 
 Datadog automatically collects common tags from [Kubernetes][16]. To extract even more tags, use the following options:
 
