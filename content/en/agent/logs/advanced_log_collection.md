@@ -146,7 +146,7 @@ When the string "my_key=" is found, all characters following the string until th
   pattern: (?:my_key=[^.])
 ```
 
-##### Social Ssecurity Numbers
+##### Social Security Numbers
 
 Redact Social Security Numbers.
 
