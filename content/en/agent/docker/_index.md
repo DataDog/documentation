@@ -197,43 +197,6 @@ Returns `CRITICAL` if the Agent is unable to connect to Datadog, otherwise retur
 **datadog.agent.check_status**: <br>
 Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
-## Integrations
-
-The Docker integration sends metrics automatically with the Docker Agent. To configure other integrations, use Autodiscovery or mounting.
-
-### Autodiscovery
-
-Autodiscovery is enabled for the Docker Agent when using the one-step install by mounting `/var/run/docker.sock`.
-
-To add integrations using Autodiscovery, see the [Autodiscovery Integration Templates][7] page.
-
-### Mounting conf.d
-
-Your integration configuration files can be copied to `/etc/datadog-agent/conf.d/` when starting the Docker Agent by mounting a `/conf.d` folder.
-
-1. Create a configuration folder on the host with your YAML files:
-
-    ```shell
-    mkdir /opt/datadog-agent-conf.d
-    touch /opt/datadog-agent-conf.d/http_check.yaml
-    ```
-
-2. When installing the Docker Agent, add `-v /opt/datadog-agent-conf.d:/conf.d:ro`, for example:
-
-    ```shell
-    DOCKER_CONTENT_TRUST=1 \
-    docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
-                  -v /proc/:/host/proc/:ro \
-                  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-                  -v /opt/datadog-agent-conf.d:/conf.d:ro \
-                  -e DD_API_KEY=<YOUR_DATADOG_API_KEY> \
-                  datadog/agent:latest
-    ```
-
-When the container starts, all files on the host in `/opt/datadog-agent-conf.d` with a `.yaml` extension are copied to `/etc/datadog-agent/conf.d/`. **Note**: If you add new YAML files to `/opt/datadog-agent-conf.d`, restart the Docker Agent.
-
-The same can be done for the `/checks.d` folder. Any Python files in the `/checks.d` folder are automatically copied to `/etc/datadog-agent/checks.d/` when starting the Docker Agent.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
