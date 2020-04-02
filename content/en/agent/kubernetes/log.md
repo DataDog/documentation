@@ -45,7 +45,7 @@ To enable Log collection with your DaemonSet:
      # (...)
     ```
 
-    **Note**: Setting `DD_AC_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs.
+    **Note**: Setting `DD_AC_EXCLUDE` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [Container Discovery Management][1] to learn more.
 
 2. Mount the `pointdir` volume to prevent loss of container logs during restarts or network issues and  `/var/lib/docker/containers` to collect logs through kubernetes log file as well, since `/var/log/pods` is symlink to this directory:
 
@@ -84,6 +84,7 @@ To enable Log collection with your DaemonSet:
 
     The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
 
+[1]: /agent/guide/autodiscovery-management
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -366,6 +367,10 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Filter containers
+
+It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs. See the [Container Discovery Management][3] to learn more.
+
 ## Short lived containers
 
 By default the Agent looks every 5 seconds for new containers.
@@ -378,3 +383,4 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 
 [1]: /agent/faq/kubernetes-docker-socket-log-collection
 [2]: /agent/kubernetes/
+[3]: /agent/guide/autodiscovery-management

@@ -204,7 +204,7 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 
 ## Filter containers
 
-It is possible to filter logs, metrics, and Autodiscovery using the following methods. This can be useful to prevent the collection of the Datadog Agent logs. See the [Container Discovery Management][5] to learn more.
+It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][5] to learn more.
 
 ## Short Lived containers
 
