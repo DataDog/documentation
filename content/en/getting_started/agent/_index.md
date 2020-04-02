@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-The Agent is lightweight software installed on your hosts. It reports metrics and events from your host to Datadog via [integrations][1], [DogStatsD][2], or the [API][3]. With additional setup, the Agent can report [live processes][4], [logs][5], and [traces][6].
+The Agent is lightweight software installed on your hosts. It reports metrics and events from your host to Datadoge via [integrations][1], [DogStatsD][2], or the [API][3]. With additional setup, the Agent can report [live processes][4], [logs][5], and [traces][6].
 
 ## Setup
 
