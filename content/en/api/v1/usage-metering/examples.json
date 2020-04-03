@@ -1,4 +1,8 @@
 {
+  "GetUsageLambda": {
+    "responses": {},
+    "request": {}
+  },
   "GetUsageFargate": {
     "responses": {},
     "request": {}
@@ -11,6 +15,18 @@
     "responses": {},
     "request": {}
   },
+  "GetUsageLogsByIndex": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageNetworkFlows": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageNetworkHosts": {
+    "responses": {},
+    "request": {}
+  },
   "GetUsageRumSessions": {
     "responses": {},
     "request": {}
@@ -20,6 +36,14 @@
     "request": {}
   },
   "GetUsageSynthetics": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageSyntheticsAPI": {
+    "responses": {},
+    "request": {}
+  },
+  "GetUsageSyntheticsBrowser": {
     "responses": {},
     "request": {}
   },
