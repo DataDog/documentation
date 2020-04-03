@@ -87,7 +87,7 @@ The **View in context** button updates the search request in order to show you t
 Interact with the attributes names and values in the lower JSON section to:
 
 - Add or remove a column from the logs table.
-- Append the search request with specific values (include or exclude)
+- Append the search request with specific values (include or exclude) 
 
 {{< img src="logs/explorer/side_panel_context.gif" alt="Side Panel context"  style="width:60%;">}}
 
