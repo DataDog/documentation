@@ -9,7 +9,7 @@ For Cisco devices, you can use the command:
 show snmp-server oidlist
 ```
 
-to see the available OIDs for your system: http://www.cisco.com/c/en/us/td/docs/security/asa/asa82/configuration/guide/config/monitor_snmp.html
+To see the available OIDs for your system, login to your Cisco account and search in the object navigator: http://tools.cisco.com/Support/SNMP/do/BrowseOID.do?local=en
 
 Linux OIDs (these tend to work for network devices like F5 too)
 
