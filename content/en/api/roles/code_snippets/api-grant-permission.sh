@@ -17,3 +17,4 @@ curl -X POST \
                     "id": <PERMISSION_ID>
                 }
             }'
+
