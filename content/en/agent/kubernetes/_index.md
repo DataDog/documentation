@@ -253,7 +253,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
 | `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
-Additional examples are available on the [Container Discover Management][20] page.
+Additional examples are available on the [Container Discover Management][11] page.
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
@@ -270,7 +270,7 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 
 ## Commands
 
-See the [Agent Commands guides][11] to discover all the Docker Agent commands.
+See the [Agent Commands guides][12] to discover all the Docker Agent commands.
 
 ## Further Reading
 
@@ -286,4 +286,5 @@ See the [Agent Commands guides][11] to discover all the Docker Agent commands.
 [8]: /infrastructure/livecontainers
 [9]: /developers/dogstatsd
 [10]: /agent/kubernetes/tag
-[11]: /agent/guide/agent-commands/
+[11]: /agent/guide/autodiscovery-management/
+[12]: /agent/guide/agent-commands/

@@ -7,7 +7,7 @@ further_reading:
 - link: "/agent/kubernetes/integrations"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/kubernetes/management"
+- link: "/agent/guide/autodiscovery-management"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---
@@ -38,10 +38,9 @@ The `auto_conf.yaml` configuration files cover all required parameters to set up
 
 **Note**: The auto configuration logic only supports the default configuration for any integration above. If you want to customize your Datadog integration configuration, refer to the Integrations Templates documentation to learn how to configure your Agent Autodiscovery:
 
-* [Using a configuration file mounted within the Agent][34]
-* [Using Key-Value Store][35]
-* [Using Kubernetes Annotations][36]
-* [Using Docker Labels][37]
+* [Using Key-Value Store][34]
+* [Using Kubernetes Annotations][35]
+* [Using Docker Labels][36]
 
 ## Further Reading
 
@@ -80,7 +79,6 @@ The `auto_conf.yaml` configuration files cover all required parameters to set up
 [31]: /integrations/tomcat
 [32]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/auto_conf.yaml
 [33]: /agent/faq/template_variables
-[34]: /agent/kubernetes/integrations/?tab=file#configuration
-[35]: /agent/kubernetes/integrations/?tab=keyvaluestore#configuration
-[36]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
-[37]: /agent/docker/integrations/#configuration
+[34]: /agent/kubernetes/integrations/?tab=keyvaluestore#configuration
+[35]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
+[36]: /agent/docker/integrations/#configuration

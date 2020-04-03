@@ -123,6 +123,8 @@ To configure an integration with Autodiscovery, use the following parameters:
 |----------------------|----------|---------------------------------------------------------------------------------------------------|
 | `<LOG_CONFIG>`       | No       | For Agent v6.5+, configuration for the `logs:` section for the given Datadog-`<INTEGRATION_NAME>` |
 
+[**Discover the full list of Agent integrations that are Autodiscovery ready with examples for those parameters**][3]
+
 Each tab in sections below shows a different way to apply integration templates to a given container. The available methods are:
 
 * [Kubernetes pod annotations](?tab=kubernetes#configuration)
@@ -369,7 +371,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 ## Filter containers
 
-It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs. See the [Container Discovery Management][3] to learn more.
+It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs. See the [Container Discovery Management][4] to learn more.
 
 ## Short lived containers
 
@@ -383,4 +385,5 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 
 [1]: /agent/faq/kubernetes-docker-socket-log-collection
 [2]: /agent/kubernetes/
-[3]: /agent/guide/autodiscovery-management
+[3]: /integrations/#cat-autodiscovery
+[4]: /agent/guide/autodiscovery-management
