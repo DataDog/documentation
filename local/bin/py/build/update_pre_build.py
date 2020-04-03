@@ -89,7 +89,8 @@ class Build:
         # configuration file. This needs to happen after all content is processed to avoid flacky integration merge
         try:
             Int.merge_integrations()
-        except:
+        except Exception as e:
+            print(e)
             if getenv("LOCAL") == 'True':
                 print(
                     "\x1b[33mWARNING\x1b[0m: Integration merge failed, documentation is now in degraded mode.")
