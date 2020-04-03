@@ -391,6 +391,41 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 </p>
 </details>
 
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+<details><summary>Generating a span</summary>
+<p>
+
+```shell
+[Mon MM  DD 19:41:13 YYYY] [YYYY-MM-DDT19:41:13+00:00] [ddtrace] [debug] - Encoding span <span id> op: 'laravel.request' serv: 'Sample_Laravel_App' res: 'Closure unnamed_route' type 'web'
+```
+
+</p>
+</details>
+
+
+<details><summary>Attempt to send a trace to the Agent</summary>
+<p>
+
+```shell
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - About to send trace(s) to the agent
+```
+
+</p>
+</details>
+
+<details><summary>Trace successfully sent to the Agent</summary>
+<p>
+
+```shell
+[Mon MM  DD 19:56:23 2019] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Traces successfully sent to the agent
+```
+
+</p>
+</details>
+
 {{% /tab %}}
 {{< /tabs >}}
 
