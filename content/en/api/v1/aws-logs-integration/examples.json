@@ -14,7 +14,7 @@
       "lambda_arn": "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
     }
   },
-  "AWSLogsList": {
+  "GetAllAWSLogsIntegrations": {
     "responses": {
       "200": {
         "account_id": "1234567",
@@ -47,7 +47,7 @@
       "lambda_arn": "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
     }
   },
-  "AWSLogsCheckLambdaAsync": {
+  "CheckAWSLogsLambdaAsync": {
     "responses": {
       "200": {
         "errors": {
@@ -68,7 +68,7 @@
       "lambda_arn": "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
     }
   },
-  "AWSLogsServicesList": {
+  "GetAllAWSLogsServices": {
     "responses": {
       "200": {
         "id": "s3",
@@ -98,7 +98,7 @@
       "services": "string"
     }
   },
-  "AWSLogsCheckServicesAsync": {
+  "CheckAWSLogsServicesAsync": {
     "responses": {
       "200": {
         "errors": {

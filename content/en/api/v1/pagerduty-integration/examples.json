@@ -65,5 +65,57 @@
       },
       "subdomain": "<PAGERDUTY_SUB_DOMAIN>"
     }
+  },
+  "CreatePagerDutyIntegrationService": {
+    "responses": {
+      "201": {
+        "service_name": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "service_key": "string",
+      "service_name": "string"
+    }
+  },
+  "DeletePagerDutyIntegrationService": {
+    "responses": {
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "GetPagerDutyIntegrationService": {
+    "responses": {
+      "200": {
+        "service_name": "string"
+      },
+      "400": {
+        "errors": "Bad Request"
+      },
+      "403": {
+        "errors": "Bad Request"
+      },
+      "404": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {}
+  },
+  "UpdatePagerDutyIntegrationService": {
+    "responses": {
+      "403": {
+        "errors": "Bad Request"
+      }
+    },
+    "request": {
+      "service_key": "string"
+    }
   }
 }
