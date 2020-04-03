@@ -406,7 +406,7 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 </details>
 
 
-<details><summary>Attempt to send a Trace to the Agent</summary>
+<details><summary>Attempt to send a trace to the Agent</summary>
 <p>
 
 ```shell
