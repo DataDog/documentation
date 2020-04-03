@@ -1,7 +1,7 @@
 ---
 title: OpenTracing NodeJS
 kind: documentation
-description: 'Appliquez les normes OpenTracing au traceur de l''APM NodeJS de Datadog.'
+description: 'Appliquez la norme OpenTracing au traceur de l''APM NodeJS de Datadog.'
 further_reading:
     - link: tracing/connect_logs_and_traces
       tag: Documentation
