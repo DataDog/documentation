@@ -15,7 +15,7 @@ further_reading:
 
 {{< wistia 7vun3cwysk >}}
 
-The Datadog Oncall app enables on-call engineers to set up direct alerts from Datadog on their mobile device. When alerted, you'll be able to investigate issues by opening monitor links from Pagerduty and viewing monitor graphs and dashboards.
+The Datadog Oncall app enables on-call engineers to view alerts from Datadog on their mobile device. When alerted by Pagerduty, Slack or other pager apps to a Datadog alert, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
 
 ## Installing
 
