@@ -3,7 +3,8 @@ title: TEMPLATE - Stolen Laptop Connected to Network
 kind: documentation
 type: security_rules
 disable_edit: true
-src_img: /images/integrations_logos/.png
+src_link: https://docs.datadoghq.com/integrations/amazon_/
+src_img: /images/integrations_logos/amazon_.png
 security: threat-intel
 
 ---

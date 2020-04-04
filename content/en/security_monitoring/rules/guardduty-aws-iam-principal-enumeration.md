@@ -3,6 +3,7 @@ title: AWS IAM Principal Enumeration
 kind: documentation
 type: security_rules
 disable_edit: true
+src_link: https://docs.datadoghq.com/integrations/amazon_guardduty/
 src_img: /images/integrations_logos/amazon_guardduty.png
 security: attack
 tactic: TA0007-discovery

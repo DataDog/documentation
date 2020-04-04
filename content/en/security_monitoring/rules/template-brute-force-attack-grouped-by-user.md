@@ -3,7 +3,8 @@ title: TEMPLATE - Brute Force Attack Grouped By User
 kind: documentation
 type: security_rules
 disable_edit: true
-src_img: /images/integrations_logos/.png
+src_link: https://docs.datadoghq.com/integrations/amazon_/
+src_img: /images/integrations_logos/amazon_.png
 security: attack
 tactic: TA0006-credential-access
 technique: T1110-brute-force

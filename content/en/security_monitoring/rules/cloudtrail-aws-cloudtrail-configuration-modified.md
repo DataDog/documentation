@@ -3,6 +3,7 @@ title: AWS CloudTrail Configuration Modified
 kind: documentation
 type: security_rules
 disable_edit: true
+src_link: https://docs.datadoghq.com/integrations/amazon_cloudtrail/
 src_img: /images/integrations_logos/amazon_cloudtrail.png
 security: attack
 tactic: TA0005-defense-evasion

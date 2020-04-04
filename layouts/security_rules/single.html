@@ -37,6 +37,10 @@
 		</div>
 	</div>
 
+	{{ if isset .Params "source" }}
+		<p class="small">Setup the <a href=".Params.src_link">{{ .Params.source }}</a> integration.</p>
+	{{ end }}
+
   {{ .Content }}
 
 {{ end }}
