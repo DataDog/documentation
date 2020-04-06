@@ -4789,13 +4789,6 @@ components:
             $ref: '#/components/schemas/SyntheticsAPITestResultShort'
           type: array
       type: object
-    SyntheticsGetAllTestsResponse:
-      properties:
-        tests:
-          items:
-            $ref: '#/components/schemas/SyntheticsTestDetails'
-          type: array
-      type: object
     SyntheticsGetBrowserTestLatestResultsResponse:
       properties:
         last_timestamp_fetched:
@@ -4821,6 +4814,13 @@ components:
       required:
       - from_ts
       - to_ts
+      type: object
+    SyntheticsListTestsResponse:
+      properties:
+        tests:
+          items:
+            $ref: '#/components/schemas/SyntheticsTestDetails'
+          type: array
       type: object
     SyntheticsLocation:
       properties:
@@ -4958,11 +4958,6 @@ components:
         validTo:
           format: date-time
           type: string
-      type: object
-    SyntheticsSetTestPauseStatusPayload:
-      properties:
-        new_status:
-          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
       type: object
     SyntheticsStepDetail:
       properties:
@@ -5293,6 +5288,11 @@ components:
         wait:
           format: double
           type: number
+      type: object
+    SyntheticsUpdateTestPauseStatusPayload:
+      properties:
+        new_status:
+          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
       type: object
     SyntheticsWarningType:
       enum:
@@ -7002,7 +7002,7 @@ paths:
   /api/v1/api_key:
     get:
       description: Get all API keys available for your account.
-      operationId: GetAllAPIKeys
+      operationId: ListAPIKeys
       responses:
         '200':
           content:
@@ -7141,7 +7141,7 @@ paths:
       - Key Management
     put:
       description: Edit an API key name.
-      operationId: EditAPIKey
+      operationId: UpdateAPIKey
       parameters:
       - description: The specific API key you are working with.
         in: path
@@ -7186,7 +7186,7 @@ paths:
   /api/v1/application_key:
     get:
       description: Get all application keys available for your Datadog account.
-      operationId: GetAllApplicationKeys
+      operationId: ListApplicationKeys
       responses:
         '200':
           content:
@@ -7325,7 +7325,7 @@ paths:
       - Key Management
     put:
       description: Edit an application key name.
-      operationId: EditApplicationKey
+      operationId: UpdateApplicationKey
       parameters:
       - description: The specific APP key you are working with.
         in: path
@@ -7423,7 +7423,7 @@ paths:
       description: '### Overview
 
         Get all dashboards'
-      operationId: GetAllDashboards
+      operationId: ListDashboards
       responses:
         '200':
           content:
@@ -7494,7 +7494,7 @@ paths:
   /api/v1/dashboard/lists/manual:
     get:
       description: Fetch all of your existing dashboard list definitions.
-      operationId: GetAllDashboardLists
+      operationId: ListDashboardLists
       responses:
         '200':
           content:
@@ -7797,7 +7797,7 @@ paths:
   /api/v1/downtime:
     get:
       description: Get all scheduled downtimes.
-      operationId: GetAllDowntimes
+      operationId: ListDowntimes
       parameters:
       - description: Only return downtimes that are active when the request is made.
         in: query
@@ -8249,7 +8249,7 @@ paths:
         Hosts live within the past 3 hours are included.
 
         Results are paginated with a max of 1000 results at a time.'
-      operationId: GetAllHosts
+      operationId: ListHosts
       parameters:
       - description: String to filter search results.
         in: query
@@ -8383,7 +8383,7 @@ paths:
       x-codegen-request-body-name: body
     get:
       description: List all Datadog-AWS integrations available in your Datadog organization.
-      operationId: GetAllAWSAccounts
+      operationId: ListAWSAccounts
       parameters:
       - description: Only return AWS accounts that matches this account_id.
         in: query
@@ -8561,7 +8561,7 @@ paths:
     put:
       description: Generate a new AWS external ID for a given AWS account ID and role
         name pair.
-      operationId: GenerateNewAWSExternalID
+      operationId: CreateNewAWSExternalID
       requestBody:
         content:
           application/json:
@@ -8634,7 +8634,7 @@ paths:
     get:
       description: List all Datadog-AWS Logs integrations configured in your Datadog
         account.
-      operationId: GetAllAWSLogsIntegrations
+      operationId: ListAWSLogsIntegrations
       responses:
         '200':
           content:
@@ -8672,7 +8672,7 @@ paths:
     post:
       description: Attach the Lambda ARN of the Lambda created for the Datadog-AWS
         log collection to your AWS account ID to enable log collection.
-      operationId: AddAWSLambdaARN
+      operationId: CreateAWSLambdaARN
       requestBody:
         content:
           application/json:
@@ -8754,7 +8754,7 @@ paths:
       description: Get the list of current AWS services that Datadog offers automatic
         log collection. Use returned service IDs with the services parameter for the
         Enable an AWS service log collection API endpoint.
-      operationId: GetAllAWSLogsServices
+      operationId: ListAWSLogsServices
       responses:
         '200':
           content:
@@ -8794,7 +8794,7 @@ paths:
       - AWS Logs Integration
     post:
       description: Enable automatic log collection for a list of services. This should
-        be run after running 'AddAWSLambdaARN' to save the config.
+        be run after running 'CreateAWSLambdaARN' to save the config.
       operationId: EnableAWSLogServices
       requestBody:
         content:
@@ -9019,7 +9019,7 @@ paths:
     post:
       description: Update the defined list of host filters for a given Datadog-Azure
         integration.
-      operationId: AzureUpdateHostFilters
+      operationId: UpdateAzureHostFilters
       requestBody:
         content:
           application/json:
@@ -9546,7 +9546,7 @@ paths:
       description: 'The Index object describes the configuration of a log index.
 
         This endpoint returns an array of the `LogIndex` objects of your organization.'
-      operationId: GetAllLogIndexes
+      operationId: ListLogIndexes
       responses:
         '200':
           content:
@@ -9729,7 +9729,7 @@ paths:
       description: 'Get all pipelines from your organization.
 
         This endpoint takes no JSON arguments.'
-      operationId: GetAllLogsPipelines
+      operationId: ListLogsPipelines
       responses:
         '200':
           content:
@@ -9903,7 +9903,7 @@ paths:
     get:
       description: Get the list of actively reporting metrics from a given time until
         now.
-      operationId: GetAllActiveMetrics
+      operationId: ListActiveMetrics
       parameters:
       - description: Seconds since the Unix epoch
         in: query
@@ -9965,7 +9965,7 @@ paths:
       - Metrics
     put:
       description: Edit metadata of a specific metric.
-      operationId: EditMetricMetadata
+      operationId: UpdateMetricMetadata
       parameters:
       - description: Name of the metric for which to edit metadata.
         in: path
@@ -10000,7 +10000,7 @@ paths:
   /api/v1/monitor:
     get:
       description: Get details about the specified monitor from your organization.
-      operationId: GetAllMonitors
+      operationId: ListMonitors
       parameters:
       - description: 'When specified, shows additional information about the group
           states.
@@ -10198,7 +10198,7 @@ paths:
       - Monitors
     put:
       description: Edit the specified monitor.
-      operationId: EditMonitor
+      operationId: UpdateMonitor
       parameters:
       - description: The id of the monitor.
         in: path
@@ -10397,7 +10397,7 @@ paths:
   /api/v1/search:
     get:
       description: Search for metrics from the last 24 hours in Datadog.
-      operationId: SearchMetrics
+      operationId: ListMetrics
       parameters:
       - description: Query string to search metrics upon. Must be prefixed with `metrics:`.
         in: query
@@ -10574,7 +10574,7 @@ paths:
         level
 
         objective object is deleted as well.'
-      operationId: BulkPartialDeleteSLO
+      operationId: DeleteSLOTimeframeInBulk
       requestBody:
         content:
           application/json:
@@ -10809,7 +10809,7 @@ paths:
         \ and monitor SLO types include the monitor transition history.\n\n**Note:**\
         \ There are different response formats for event based and time based SLOs.\n\
         Examples of both are shown."
-      operationId: HistoryForSLO
+      operationId: GetSLOHistory
       parameters:
       - description: The ID of the service level objective object.
         in: path
@@ -10860,7 +10860,7 @@ paths:
   /api/v1/synthetics/browser/devices:
     get:
       description: Get the list of devices available for Synthetics browser tests.
-      operationId: GetAllDevices
+      operationId: ListDevices
       responses:
         '200':
           content:
@@ -10875,7 +10875,7 @@ paths:
     get:
       description: Get the list of public and private locations available for Synthetics
         tests. No arguments required
-      operationId: GetAllLocations
+      operationId: ListLocations
       responses:
         '200':
           content:
@@ -10889,7 +10889,7 @@ paths:
   /api/v1/synthetics/tests:
     get:
       description: Get the list of all Synthetics tests (can be filtered by type).
-      operationId: GetAllTests
+      operationId: ListTests
       parameters:
       - description: API or browser to filter the list by type, undefined to get the
           unfiltered list.
@@ -10903,7 +10903,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SyntheticsGetAllTestsResponse'
+                $ref: '#/components/schemas/SyntheticsListTestsResponse'
           description: OK - Returns the list of all Synthetics test (properly filtered
             by type).
         '404':
@@ -11215,7 +11215,7 @@ paths:
   /api/v1/synthetics/tests/{public_id}/status:
     put:
       description: Change pause/live status of a given Synthetics test.
-      operationId: SetTestPauseStatus
+      operationId: UpdateTestPauseStatus
       parameters:
       - description: The public id of the Synthetics test to update
         in: path
@@ -11227,7 +11227,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SyntheticsSetTestPauseStatusPayload'
+              $ref: '#/components/schemas/SyntheticsUpdateTestPauseStatusPayload'
         description: Pause/live status to set the given Synthetics test to
         required: true
       responses:
@@ -11257,7 +11257,7 @@ paths:
   /api/v1/tags/hosts:
     get:
       description: Return a mapping of tags to hosts for your whole infrastructure.
-      operationId: GetAllHostTags
+      operationId: ListHostTags
       parameters:
       - description: When specified, filters host list to those tags with the specified
           source.
@@ -11293,7 +11293,7 @@ paths:
       description: 'This endpoint allows you to remove all user-assigned tags
 
         for a single host.'
-      operationId: RemoveHostTags
+      operationId: DeleteHostTags
       parameters:
       - description: This endpoint allows you to remove all user-assigned tags for
           a single host.
@@ -11371,7 +11371,7 @@ paths:
       description: 'This endpoint allows you to add new tags to a host,
 
         optionally specifying where these tags come from.'
-      operationId: AddToHostTags
+      operationId: CreateHostTags
       parameters:
       - description: This endpoint allows you to add new tags to a host, optionally
           specifying where the tags came from.
@@ -12224,7 +12224,7 @@ paths:
   /api/v1/user:
     get:
       description: Get all users for your organization.
-      operationId: GetAllUsers
+      operationId: ListUsers
       responses:
         '200':
           content:
@@ -12453,7 +12453,7 @@ paths:
         interact directly with the API to instrument applications that cannot use\n\
         the libraries or are written in languages that don\u2019t yet have an official\n\
         Datadog Tracing library."
-      operationId: SendTraces
+      operationId: SubmitTraces
       requestBody:
         content:
           application/json:
@@ -12519,7 +12519,7 @@ paths:
         **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`),
 
         the HTTP log endpoint is `http-intake.logs.datadoghq.eu`.'
-      operationId: SendLog
+      operationId: SubmitLog
       requestBody:
         content:
           application/json:
