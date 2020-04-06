@@ -2,7 +2,7 @@
 title: Get hourly usage for Trace Search
 type: apicode
 order: 35.6
-external_redirect: /api/#get-hourly-usage-for-trace-search
+external_redirect: /api/#get-hourly-usage-for-app-analytics
 ---
 
 **SIGNATURE**:
