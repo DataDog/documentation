@@ -11,6 +11,6 @@ Creates an endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
 
 **ARGUMENTS**:
 
--   **`name`** [*required*]: The name of the webhook. Corresponds with `<CUSTOM_VARIABLE_NAME>`
--   **`value`** [*required*]: Value of the custom variable
--   **`is_secret`** [*required*]: A boolean value for whether custom variable is secret or not. If the custom variable is secret, it returns `null` for the `<CUSTOM_VARIABLE_VALUE>` in the response payload.
+-   **`name`** [*required*]: The name of the webhook. Corresponds with `<CUSTOM_VARIABLE_NAME>`.
+-   **`value`** [*required*]: Value of the custom variable. If the custom variable is secret, this field is omitted in response payload.
+-   **`is_secret`** [*required*]: A boolean value for whether custom variable is secret or not.

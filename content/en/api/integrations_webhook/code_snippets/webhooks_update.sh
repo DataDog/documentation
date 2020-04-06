@@ -8,6 +8,6 @@ curl -v -X PUT \
 -H "DD-APPLICATION-KEY: ${app_key}" \
 "https://api.datadoghq.com/api/v1/webhooks/configuration/webhooks/<WEBHOOK_NAME>" \
 -d '{
-    "name": "<NEW_WEBHOOK_NAME>",
+    "custom_headers": "{"<WEBHOOK_HEADER_VALUE>":"<WEBHOOK_HEADER_KEY>"}",
     "encode_as": "form"
 }'

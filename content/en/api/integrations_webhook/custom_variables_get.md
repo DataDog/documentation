@@ -9,7 +9,7 @@ external_redirect: /api/#get-a-custom-variable-for-webhooks
 
 Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.
 
-If the custom variable is secret, returns `null` for the `<CUSTOM_VARIABLE_VALUE>` in the response payload.
+If the custom variable is secret, the `value` field is omitted in response payload.
 
 **ARGUMENTS**:
 

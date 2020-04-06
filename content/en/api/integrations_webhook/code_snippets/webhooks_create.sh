@@ -9,7 +9,5 @@ curl -v -X POST \
 "https://api.datadoghq.com/api/v1/webhooks/configuration/webhooks/" \
 -d '{
     "name": "<WEBHOOK_NAME>",
-    "url": "<WEBHOOK_URL>",
-    "payload": null,
-    "custom_headers": null
+    "url": "<WEBHOOK_URL>"
 }'
