@@ -35,7 +35,7 @@ Images are available for 64-bit x86 and Arm v8 architectures.
 
 ## Setup
 
-If you haven’t installed the Docker Agent, see below or the [in-app installation instructions][3]. See the Agent documentation for [supported versions][4]. Use the one-step install command. Replace `<YOUR_DATADOG_API_KEY>` with your [Datadog API key][5].
+If you haven’t installed the Docker Agent, follow the [in-app installation instructions][3] or see below. For [supported versions][4], see the Agent documentation. Use the one-step install command. Replace `<YOUR_DATADOG_API_KEY>` with your [Datadog API key][5].
 
 {{< tabs >}}
 {{% tab "Standard" %}}
