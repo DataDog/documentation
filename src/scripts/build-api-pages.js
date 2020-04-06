@@ -2,6 +2,7 @@
 
 const yaml = require('js-yaml');
 const fs = require('fs');
+const marked = require('marked');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
@@ -215,7 +216,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
  */
 const descColumn = (value) => {
   const desc = (value.description && (typeof(value.description) !== "object")) ? value.description || '' : '';
-  return `<div class="col-6"><p>${desc}</p></div>`;
+  return `<div class="col-6"><p>${marked(desc)}</p></div>`;
 };
 
 
@@ -231,7 +232,7 @@ const rowRecursive = (data, isNested, requiredFields=[], level = 0, parentKey = 
   let html = '';
 
   // i've set a hard recurse limit of depth
-  if(level > 2) return '';
+  if(level > 10) return '';
 
   if (typeof data === 'object') {
     Object.entries(data).forEach(([key, value]) => {
