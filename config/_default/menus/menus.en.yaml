@@ -1836,33 +1836,6 @@ api_v1:
   - name: Update a single service object
     parent: PagerDuty Integration
     url: update-a-single-service-object
-  - name: SLO
-    url: /api/v1/slo/
-    identifier: SLO
-  - name: Search SLOs
-    parent: SLO
-    url: search-slos
-  - name: Create a SLO object
-    parent: SLO
-    url: create-a-slo-object
-  - name: Bulk Delete SLO Timeframes
-    parent: SLO
-    url: bulk-delete-slo-timeframes
-  - name: Check if SLOs can be safely deleted
-    parent: SLO
-    url: check-if-slos-can-be-safely-deleted
-  - name: Delete a SLO
-    parent: SLO
-    url: delete-a-slo
-  - name: Get a SLO's details
-    parent: SLO
-    url: get-a-slo's-details
-  - name: Edit a SLO
-    parent: SLO
-    url: edit-a-slo
-  - name: Get an SLO's history
-    parent: SLO
-    url: get-an-slo's-history
   - name: Screenboards
     url: /api/v1/screenboards/
     identifier: Screenboards
@@ -1872,6 +1845,33 @@ api_v1:
   - name: Submit a Service Check
     parent: Service Checks
     url: submit-a-service-check
+  - name: Service Level Objectives
+    url: /api/v1/service-level-objectives/
+    identifier: Service Level Objectives
+  - name: Search SLOs
+    parent: Service Level Objectives
+    url: search-slos
+  - name: Create a SLO object
+    parent: Service Level Objectives
+    url: create-a-slo-object
+  - name: Bulk Delete SLO Timeframes
+    parent: Service Level Objectives
+    url: bulk-delete-slo-timeframes
+  - name: Check if SLOs can be safely deleted
+    parent: Service Level Objectives
+    url: check-if-slos-can-be-safely-deleted
+  - name: Delete a SLO
+    parent: Service Level Objectives
+    url: delete-a-slo
+  - name: Get a SLO's details
+    parent: Service Level Objectives
+    url: get-a-slo's-details
+  - name: Update a SLO
+    parent: Service Level Objectives
+    url: update-a-slo
+  - name: Get an SLO's history
+    parent: Service Level Objectives
+    url: get-an-slo's-history
   - name: Snapshots
     url: /api/v1/snapshots/
     identifier: Snapshots
