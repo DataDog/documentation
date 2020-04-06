@@ -77,6 +77,27 @@
                                 {{ range $content := .action.requestBody.content }}
                                     {{ range $schema := $content }}
                                         {{ if $schema }}
+
+                                        <!-- Get Json and HTML -->
+                                        {{ $dot.Scratch.Set "json" "" }}
+                                        {{ $dot.Scratch.Set "html" "" }}
+                                        {{ with $dot.Resources.Match "examples.json" }}
+                                            {{ range . }}
+                                              {{ $data := . | unmarshal}}
+                                              {{ $req := (index (index $data $context.action.operationId) "request") }}
+                                              {{ if $req }}
+                                                  {{ $data2 := (index $req "json") | jsonify }}
+                                                  {{ $data3 := (replace (replace (replace $data2 "," ",\n") "{" "{\n") "}" "\n}") }}
+                                                  {{ $dot.Scratch.Set "json" (highlight $data3 "json" "") }}
+                                                  {{ $dot.Scratch.Set "html" (index $req "html") }}
+                                              {{ else }}
+                                                  {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
+                                              {{ end }}
+                                            {{ end }}
+                                        {{ end }}
+                                        {{ $json := ($dot.Scratch.Get "json") }}
+                                        {{ $html := ($dot.Scratch.Get "html") }}
+
                                         <p>{{ $schema.description }}</p>
                                         <div class="my-2 model-example-buttons">
                                             <div class="form-check form-check-inline">
@@ -89,25 +110,14 @@
                                                 <input class="form-check-input js-example-link" id="{{ $context.action.operationId }}-request-example" type="radio">
                                                 <label class="form-check-label" for="{{ $context.action.operationId }}-request-example">Example</label>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                       
                                         <div class="tab-content mb-3">
                                             <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-request-model">
-                                                {{ if $schema }}
-                                                    {{ partial "api/schema-table.html" (dict "context" $dot "schema" $schema)}}
-                                                {{ end}}
-                                          
+                                              {{ $html | safeHTML }}
                                             </div>
                                             <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-request-example">
-                                              {{ with $dot.Resources.Match "examples.json" }}
-                                                  {{ range . }}
-                                                   
-                                                  {{ $data := . | unmarshal}}
-                                                  {{ $data2 := (index (index $data $context.action.operationId) "request") |jsonify }}
-                                                  {{ $data3 := (replace (replace (replace $data2 "," ",\n") "{" "{\n") "}" "\n}") }}
-                                                  {{ highlight $data3 "json" "" }}
-                                                  {{ end }}
-                                              {{ end }}
+                                              {{ $json }}
                                             </div>
                                         </div>
                                         {{ end }}
@@ -124,7 +134,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link mr-1 btn btn-sm-tag btn-outline-secondary {{ if eq $response_code "200"}}active{{end}}"  href="#{{ $context.action.operationId }}-{{ $response_code }}" role="tab" data-toggle="tab">{{ $response_code }}</a>
                                 </li>
-                            
+
                             {{ end }}
                         </ul>
 
@@ -133,6 +143,26 @@
                             <div role="tabpanel" class="tab-pane {{ if eq $response_code "200"}} active {{end}}" id="{{ $context.action.operationId }}-{{ $response_code }}">
                                 {{ range $content := $response.content }}
                                     {{ range $schema := $content }}
+
+                                        <!-- Get Json and HTML -->
+                                        {{ $dot.Scratch.Set "json" "" }}
+                                        {{ $dot.Scratch.Set "html" "" }}
+                                        {{ with $dot.Resources.Match "examples.json" }}
+                                            {{ range . }}
+                                              {{ $data := . | unmarshal}}
+                                              {{ $res := (index (index (index $data $context.action.operationId) "responses") $response_code) }}
+                                              {{ if $res }}
+                                                  {{ $data2 := (index $res "json") | jsonify }}
+                                                  {{ $data3 := (replace (replace (replace $data2 "," ",\n") "{" "{\n") "}" "\n}") }}
+                                                  {{ $dot.Scratch.Set "json" (highlight $data3 "json" "") }}
+                                                  {{ $dot.Scratch.Set "html" (index $res "html") }}
+                                              {{ else }}
+                                                  {{ warnf "Could not load html/json response code %q in %q" $response_code $context.action.operationId }}
+                                              {{ end }}
+                                            {{ end }}
+                                        {{ end }}
+                                        {{ $json := ($dot.Scratch.Get "json") }}
+                                        {{ $html := ($dot.Scratch.Get "html") }}
 
                                         <div class="my-2 model-example-buttons">
                                             <div class="form-check form-check-inline">
@@ -152,29 +182,13 @@
                                                
                                                 <p>{{ $schema.description }}</p>
 
-                                                {{ if $schema }}
-                                                    {{ partial "api/schema-table.html" (dict "context" $dot "schema" $schema)}}
-                                                {{ end}}
-                                          
+                                              {{ $html | safeHTML }}
+
                                             </div>
                                             <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-{{ $response_code }}-example">
-                                              {{ with $dot.Resources.Match "examples.json" }}
-                                                  {{ range . }}
-                                                    {{ $data := . | unmarshal}}
-                                                    {{ $data2 := (index (index (index $data $context.action.operationId) "responses") $response_code) | jsonify }}
-                                                    {{ $data3 := (replace (replace (replace $data2 "," ",\n") "{" "{\n") "}" "\n}") }}
-                                                    {{ highlight $data3 "json" "" }}
-                                                  {{ end }}
-                                              {{ end }}
 
-                                              {{/*
-                                                {{ $jsonfile := (print $context.action.operationId "_" $context.actionType "_response_" $response_code "_example.json") }}
-                                                {{ with $dot.Resources.Match $jsonfile }}
-                                                    {{ range . }}
-                                                      {{ highlight .Content "json" "" }}
-                                                    {{ end }}
-                                                {{ end }}
-                                              */}}
+                                              {{ $json }}
+
                                             </div>
                                         </div>
                                     {{ end }}

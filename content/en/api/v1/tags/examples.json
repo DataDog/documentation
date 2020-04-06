@@ -2,77 +2,134 @@
   "GetAllHostTags": {
     "responses": {
       "200": {
-        "tags": "object"
+        "json": {
+          "tags": "object"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> tags</p>\n    </div>\n  \n            <div class=\"col-2\"><p>object</p></div>\n            <div class=\"col-6\"><p>A list of tags to apply to the host.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">&lt;any&#45;key&gt;</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">&lt;any&#45;key&gt;</p>\n    </div>\n  \n            <div class=\"col-2\"><p>array</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "401": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "RemoveHostTags": {
     "responses": {
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "401": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetHostTags": {
     "responses": {
       "200": {
-        "host": "test.host",
-        "tags": "environment:production"
+        "json": {
+          "host": "test.host",
+          "tags": "environment:production"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">host</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your host name.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">tags</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p>A list of tags to apply to the host.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "401": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "AddToHostTags": {
     "responses": {
       "201": {
-        "host": "test.host",
-        "tags": "environment:production"
+        "json": {
+          "host": "test.host",
+          "tags": "environment:production"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">host</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your host name.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">tags</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p>A list of tags to apply to the host.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "401": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
     "request": {
-      "host": "test.host",
-      "tags": "environment:production"
+      "json": {
+        "host": "test.host",
+        "tags": "environment:production"
+      },
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">host</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your host name.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">tags</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p>A list of tags to apply to the host.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   },
   "UpdateHostTags": {
     "responses": {
       "201": {
-        "host": "test.host",
-        "tags": "environment:production"
+        "json": {
+          "host": "test.host",
+          "tags": "environment:production"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">host</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your host name.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">tags</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p>A list of tags to apply to the host.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "401": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
     "request": {
-      "host": "test.host",
-      "tags": "environment:production"
+      "json": {
+        "host": "test.host",
+        "tags": "environment:production"
+      },
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">host</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your host name.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">tags</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p>A list of tags to apply to the host.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   }
 }

@@ -2,35 +2,73 @@
   "GetAllActiveMetrics": {
     "responses": {
       "200": {
-        "from": "string",
-        "metrics": "string"
+        "json": {
+          "from": "string",
+          "metrics": "string"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">from</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Time when the metrics were active, seconds since the Unix epoch.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">metrics</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p>List of metric names.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetMetricMetadata": {
     "responses": {
       "200": {
-        "description": "string",
-        "integration": "string",
-        "per_unit": "second",
-        "short_name": "string",
-        "statsd_interval": "integer",
-        "type": "count",
-        "unit": "byte"
+        "json": {
+          "description": "string",
+          "integration": "string",
+          "per_unit": "second",
+          "short_name": "string",
+          "statsd_interval": "integer",
+          "type": "count",
+          "unit": "byte"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">description</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Metric description.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">integration</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Name of the integration that sent the metric if applicable.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">per_unit</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Per unit of the metric such as `second` in `bytes per second`.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">short_name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>A more human-readable and abbreviated version of the metric name.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">statsd_interval</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64</p></div>\n            <div class=\"col-6\"><p>Statsd flush interval of the metric in seconds if applicable.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Metric type such as `gauge` or `rate`.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">unit</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Primary unit of the metric such as `byte` or `operation`.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "404": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "EditMetricMetadata": {
     "responses": {
       "200": {
+        "json": {
+          "description": "string",
+          "integration": "string",
+          "per_unit": "second",
+          "short_name": "string",
+          "statsd_interval": "integer",
+          "type": "count",
+          "unit": "byte"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">description</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Metric description.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">integration</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Name of the integration that sent the metric if applicable.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">per_unit</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Per unit of the metric such as `second` in `bytes per second`.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">short_name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>A more human-readable and abbreviated version of the metric name.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">statsd_interval</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64</p></div>\n            <div class=\"col-6\"><p>Statsd flush interval of the metric in seconds if applicable.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Metric type such as `gauge` or `rate`.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">unit</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Primary unit of the metric such as `byte` or `operation`.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "404": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      }
+    },
+    "request": {
+      "json": {
         "description": "string",
         "integration": "string",
         "per_unit": "second",
@@ -39,98 +77,126 @@
         "type": "count",
         "unit": "byte"
       },
-      "404": {
-        "errors": "Bad Request"
-      }
-    },
-    "request": {
-      "description": "string",
-      "integration": "string",
-      "per_unit": "second",
-      "short_name": "string",
-      "statsd_interval": "integer",
-      "type": "count",
-      "unit": "byte"
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">description</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Metric description.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">integration</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Name of the integration that sent the metric if applicable.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">per_unit</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Per unit of the metric such as `second` in `bytes per second`.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">short_name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>A more human-readable and abbreviated version of the metric name.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">statsd_interval</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64</p></div>\n            <div class=\"col-6\"><p>Statsd flush interval of the metric in seconds if applicable.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Metric type such as `gauge` or `rate`.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">unit</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Primary unit of the metric such as `byte` or `operation`.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   },
   "QueryMetrics": {
     "responses": {
       "200": {
-        "error": "string",
-        "from_date": "integer",
-        "group_by": "string",
-        "message": "string",
-        "query": "string",
-        "res_type": "time_series",
-        "series": {
-          "aggr": "avg",
-          "display_name": "system.cpu.idle",
-          "end": "integer",
-          "expression": "system.cpu.idle{host:foo,env:test}",
-          "interval": "integer",
-          "length": "integer",
-          "metric": "system.cpu.idle",
-          "pointlist": "number",
-          "scope": "host:foo,env:test",
-          "start": "integer",
-          "unit": {
-            "family": "time",
-            "name": "minute",
-            "plural": "minutes",
-            "scale_factor": 60,
-            "short_name": "min"
-          }
+        "json": {
+          "error": "string",
+          "from_date": "integer",
+          "group_by": "string",
+          "message": "string",
+          "query": "string",
+          "res_type": "time_series",
+          "series": {
+            "aggr": "avg",
+            "display_name": "system.cpu.idle",
+            "end": "integer",
+            "expression": "system.cpu.idle{host:foo,env:test}",
+            "interval": "integer",
+            "length": "integer",
+            "metric": "system.cpu.idle",
+            "pointlist": "number",
+            "scope": "host:foo,env:test",
+            "start": "integer",
+            "unit": {
+              "family": "time",
+              "name": "minute",
+              "plural": "minutes",
+              "scale_factor": 60,
+              "short_name": "min"
+            }
+          },
+          "status": "ok",
+          "to_date": "integer"
         },
-        "status": "ok",
-        "to_date": "integer"
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">error</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Message indicating the errors if status is not `ok`.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">from_date</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Start of requested time window, milliseconds since Unix epoch.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">group_by</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string] <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>List of tag keys on which to group.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">message</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Message indicating `success` if status is `ok`.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">query</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Query string</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">res_type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Type of response.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> series</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[object] <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>List of timeseries queried.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">aggr</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Aggregation type.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">display_name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Display name of the metric.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">end</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>End of the time window, milliseconds since Unix epoch.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">expression</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Metric expression.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">interval</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Number of seconds between data samples.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">length</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Number of data samples.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">metric</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Metric name.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">pointlist</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[array] <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>List of points of the time series.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">scope</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Metric scope, comma separated list of tags.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">start</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Start of the time window, milliseconds since Unix epoch.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> unit</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[object] <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Detailed information about the metric unit.\nFirst element describes the \"primary unit\" (for example, `bytes` in `bytes per second`),\nsecond describes the \"per unit\" (for example, `second` in `bytes per second`).</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">family</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Unit family, allows for conversion between units of the same family, for scaling.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Unit name</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">plural</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Plural form of the unit name.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">scale_factor</p>\n    </div>\n  \n            <div class=\"col-2\"><p>double <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Factor for scaling between units of the same family.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">short_name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Abbreviation of the unit.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">status</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Status of the query.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">to_date</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>End of requested time window, milliseconds since Unix epoch.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "SearchMetrics": {
     "responses": {
       "200": {
-        "results": "object"
+        "json": {
+          "results": "object"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> results</p>\n    </div>\n  \n            <div class=\"col-2\"><p>object</p></div>\n            <div class=\"col-6\"><p>Search result.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">metrics</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p>List of metrics that match the search query.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "500": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "SubmitMetrics": {
     "responses": {
       "202": {
-        "status": "ok"
+        "json": {
+          "status": "ok"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">status</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "403": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "408": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "413": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
     "request": {
-      "series": {
-        "host": "string",
-        "interval": "integer",
-        "metric": "system.load.1",
-        "points": "number",
-        "tags": "string",
-        "type": "string"
-      }
+      "json": {
+        "series": {
+          "host": "string",
+          "interval": "integer",
+          "metric": "system.load.1",
+          "points": "number",
+          "tags": "string",
+          "type": "string"
+        }
+      },
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> series</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[object]</p></div>\n            <div class=\"col-6\"><p>A list of time series to submit to Datadog.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">host</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The name of the host that produced the metric.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">interval</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64</p></div>\n            <div class=\"col-6\"><p>If the type of the metric is rate or count, define the corresponding interval.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">metric</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The name of the timeseries.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">points</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[array]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">tags</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p>A list of tags associated with the metric.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   }
 }

@@ -1,33 +1,25 @@
 {
   "DeleteGCPIntegration": {
     "responses": {
-      "200": {},
+      "200": {
+        "json": {},
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"primitive\"></div>\n    </div>  \n  </div>"
+      },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "403": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
     "request": {
-      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "automute": "boolean",
-      "client_email": "api-dev@datadog-sandbox.iam.gserviceaccount.com",
-      "client_id": "123456712345671234567",
-      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
-      "errors": "string",
-      "host_filters": "key:value,filter:example",
-      "private_key": "private_key",
-      "private_key_id": "123456789abcdefghi123456789abcdefghijklm",
-      "project_id": "datadog-apitest",
-      "token_uri": "https://accounts.google.com/o/oauth2/token",
-      "type": "service_account"
-    }
-  },
-  "ListGCPIntegration": {
-    "responses": {
-      "200": {
+      "json": {
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
         "automute": "boolean",
@@ -42,65 +34,121 @@
         "token_uri": "https://accounts.google.com/o/oauth2/token",
         "type": "service_account"
       },
-      "400": {
-        "errors": "Bad Request"
-      },
-      "403": {
-        "errors": "Bad Request"
-      }
-    },
-    "request": {}
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">auth_provider_x509_cert_url</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://www.googleapis.com/oauth2/v1/certs.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">auth_uri</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://accounts.google.com/o/oauth2/auth.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">automute</p>\n    </div>\n  \n            <div class=\"col-2\"><p>boolean</p></div>\n            <div class=\"col-6\"><p>Silence monitors for expected GCE instance shutdowns.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_email</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your email found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_x509_cert_url</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>\nwhere <CLIENT_EMAIL> is the email found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string] <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">host_filters</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Limit the GCE instances that are pulled into Datadog by using tags.\nOnly hosts that match one of the defined tags are imported into Datadog.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">private_key</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your private key name found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">private_key_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your private key ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">project_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Google Cloud project ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">token_uri</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://accounts.google.com/o/oauth2/token.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The value for service_account found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+    }
   },
-  "CreateGCPIntegration": {
+  "ListGCPIntegration": {
     "responses": {
-      "200": {},
+      "200": {
+        "json": {
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "automute": "boolean",
+          "client_email": "api-dev@datadog-sandbox.iam.gserviceaccount.com",
+          "client_id": "123456712345671234567",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
+          "errors": "string",
+          "host_filters": "key:value,filter:example",
+          "private_key": "private_key",
+          "private_key_id": "123456789abcdefghi123456789abcdefghijklm",
+          "project_id": "datadog-apitest",
+          "token_uri": "https://accounts.google.com/o/oauth2/token",
+          "type": "service_account"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">auth_provider_x509_cert_url</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://www.googleapis.com/oauth2/v1/certs.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">auth_uri</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://accounts.google.com/o/oauth2/auth.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">automute</p>\n    </div>\n  \n            <div class=\"col-2\"><p>boolean</p></div>\n            <div class=\"col-6\"><p>Silence monitors for expected GCE instance shutdowns.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_email</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your email found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_x509_cert_url</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>\nwhere <CLIENT_EMAIL> is the email found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string] <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">host_filters</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Limit the GCE instances that are pulled into Datadog by using tags.\nOnly hosts that match one of the defined tags are imported into Datadog.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">private_key</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your private key name found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">private_key_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your private key ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">project_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Google Cloud project ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">token_uri</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://accounts.google.com/o/oauth2/token.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The value for service_account found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "403": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
     "request": {
-      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "automute": "boolean",
-      "client_email": "api-dev@datadog-sandbox.iam.gserviceaccount.com",
-      "client_id": "123456712345671234567",
-      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
-      "errors": "string",
-      "host_filters": "key:value,filter:example",
-      "private_key": "private_key",
-      "private_key_id": "123456789abcdefghi123456789abcdefghijklm",
-      "project_id": "datadog-apitest",
-      "token_uri": "https://accounts.google.com/o/oauth2/token",
-      "type": "service_account"
+      "json": {},
+      "html": ""
+    }
+  },
+  "CreateGCPIntegration": {
+    "responses": {
+      "200": {
+        "json": {},
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"primitive\"></div>\n    </div>  \n  </div>"
+      },
+      "400": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "403": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      }
+    },
+    "request": {
+      "json": {
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "automute": "boolean",
+        "client_email": "api-dev@datadog-sandbox.iam.gserviceaccount.com",
+        "client_id": "123456712345671234567",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
+        "errors": "string",
+        "host_filters": "key:value,filter:example",
+        "private_key": "private_key",
+        "private_key_id": "123456789abcdefghi123456789abcdefghijklm",
+        "project_id": "datadog-apitest",
+        "token_uri": "https://accounts.google.com/o/oauth2/token",
+        "type": "service_account"
+      },
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">auth_provider_x509_cert_url</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://www.googleapis.com/oauth2/v1/certs.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">auth_uri</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://accounts.google.com/o/oauth2/auth.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">automute</p>\n    </div>\n  \n            <div class=\"col-2\"><p>boolean</p></div>\n            <div class=\"col-6\"><p>Silence monitors for expected GCE instance shutdowns.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_email</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your email found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_x509_cert_url</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>\nwhere <CLIENT_EMAIL> is the email found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string] <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">host_filters</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Limit the GCE instances that are pulled into Datadog by using tags.\nOnly hosts that match one of the defined tags are imported into Datadog.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">private_key</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your private key name found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">private_key_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your private key ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">project_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Google Cloud project ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">token_uri</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://accounts.google.com/o/oauth2/token.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The value for service_account found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   },
   "UpdateGCPIntegration": {
     "responses": {
-      "200": {},
+      "200": {
+        "json": {},
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"primitive\"></div>\n    </div>  \n  </div>"
+      },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "403": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
     "request": {
-      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "automute": "boolean",
-      "client_email": "api-dev@datadog-sandbox.iam.gserviceaccount.com",
-      "client_id": "123456712345671234567",
-      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
-      "errors": "string",
-      "host_filters": "key:value,filter:example",
-      "private_key": "private_key",
-      "private_key_id": "123456789abcdefghi123456789abcdefghijklm",
-      "project_id": "datadog-apitest",
-      "token_uri": "https://accounts.google.com/o/oauth2/token",
-      "type": "service_account"
+      "json": {
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "automute": "boolean",
+        "client_email": "api-dev@datadog-sandbox.iam.gserviceaccount.com",
+        "client_id": "123456712345671234567",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
+        "errors": "string",
+        "host_filters": "key:value,filter:example",
+        "private_key": "private_key",
+        "private_key_id": "123456789abcdefghi123456789abcdefghijklm",
+        "project_id": "datadog-apitest",
+        "token_uri": "https://accounts.google.com/o/oauth2/token",
+        "type": "service_account"
+      },
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">auth_provider_x509_cert_url</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://www.googleapis.com/oauth2/v1/certs.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">auth_uri</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://accounts.google.com/o/oauth2/auth.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">automute</p>\n    </div>\n  \n            <div class=\"col-2\"><p>boolean</p></div>\n            <div class=\"col-6\"><p>Silence monitors for expected GCE instance shutdowns.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_email</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your email found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">client_x509_cert_url</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>\nwhere <CLIENT_EMAIL> is the email found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string] <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">host_filters</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Limit the GCE instances that are pulled into Datadog by using tags.\nOnly hosts that match one of the defined tags are imported into Datadog.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">private_key</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your private key name found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">private_key_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your private key ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">project_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Google Cloud project ID found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">token_uri</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Should be https://accounts.google.com/o/oauth2/token.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The value for service_account found in your JSON service account key.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   }
 }

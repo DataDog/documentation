@@ -2,14 +2,98 @@
   "DeletePagerDutyIntegration": {
     "responses": {
       "403": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetPagerDutyIntegration": {
     "responses": {
       "200": {
+        "json": {
+          "api_token": "<PAGERDUTY_TOKEN>",
+          "schedules": "string",
+          "services": {
+            "service_key": "string",
+            "service_name": "string"
+          },
+          "subdomain": "<PAGERDUTY_SUB_DOMAIN>"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">api_token</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your PagerDuty API token.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">schedules</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p>The array of your schedule URLs.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> services</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[object]</p></div>\n            <div class=\"col-6\"><p>The array of PagerDuty service objects.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">service_key</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Service key in PagerDuty.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">service_name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Service name associated service key in PagerDuty.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">subdomain</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your PagerDuty subdomain.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "400": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "403": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "404": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      }
+    },
+    "request": {
+      "json": {},
+      "html": ""
+    }
+  },
+  "UpdatePagerDutyIntegration": {
+    "responses": {
+      "400": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "403": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      }
+    },
+    "request": {
+      "json": {
+        "schedules": "string",
+        "services": {
+          "service_key": "string",
+          "service_name": "string"
+        }
+      },
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">schedules</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p>The array of your schedule URLs.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> services</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[object]</p></div>\n            <div class=\"col-6\"><p>The array of PagerDuty service objects.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">service_key</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Service key in PagerDuty.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">service_name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Service name associated service key in PagerDuty.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+    }
+  },
+  "CreatePagerDutyIntegration": {
+    "responses": {
+      "400": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "403": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      }
+    },
+    "request": {
+      "json": {
         "api_token": "<PAGERDUTY_TOKEN>",
         "schedules": "string",
         "services": {
@@ -18,104 +102,98 @@
         },
         "subdomain": "<PAGERDUTY_SUB_DOMAIN>"
       },
-      "400": {
-        "errors": "Bad Request"
-      },
-      "403": {
-        "errors": "Bad Request"
-      },
-      "404": {
-        "errors": "Bad Request"
-      }
-    },
-    "request": {}
-  },
-  "UpdatePagerDutyIntegration": {
-    "responses": {
-      "400": {
-        "errors": "Bad Request"
-      },
-      "403": {
-        "errors": "Bad Request"
-      }
-    },
-    "request": {
-      "schedules": "string",
-      "services": {
-        "service_key": "string",
-        "service_name": "string"
-      }
-    }
-  },
-  "CreatePagerDutyIntegration": {
-    "responses": {
-      "400": {
-        "errors": "Bad Request"
-      },
-      "403": {
-        "errors": "Bad Request"
-      }
-    },
-    "request": {
-      "api_token": "<PAGERDUTY_TOKEN>",
-      "schedules": "string",
-      "services": {
-        "service_key": "string",
-        "service_name": "string"
-      },
-      "subdomain": "<PAGERDUTY_SUB_DOMAIN>"
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">api_token</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your PagerDuty API token.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">schedules</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p>The array of your schedule URLs.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> services</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[object]</p></div>\n            <div class=\"col-6\"><p>The array of PagerDuty service objects.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">service_key</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Service key in PagerDuty.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">service_name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Service name associated service key in PagerDuty.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">subdomain</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your PagerDuty subdomain.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   },
   "CreatePagerDutyIntegrationService": {
     "responses": {
       "201": {
-        "service_name": "string"
+        "json": {
+          "service_name": "string"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">service_name<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Service name associated service key in PagerDuty.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "403": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
     "request": {
-      "service_key": "string",
-      "service_name": "string"
+      "json": {
+        "service_key": "string",
+        "service_name": "string"
+      },
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">service_key<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Service key in PagerDuty.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">service_name<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Service name associated service key in PagerDuty.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   },
   "DeletePagerDutyIntegrationService": {
     "responses": {
       "403": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetPagerDutyIntegrationService": {
     "responses": {
       "200": {
-        "service_name": "string"
+        "json": {
+          "service_name": "string"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">service_name<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Service name associated service key in PagerDuty.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "400": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "403": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "404": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "UpdatePagerDutyIntegrationService": {
     "responses": {
       "403": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
     "request": {
-      "service_key": "string"
+      "json": {
+        "service_key": "string"
+      },
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">service_key<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>Your Service key in PagerDuty.</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   }
 }

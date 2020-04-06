@@ -2,7 +2,42 @@
   "GetAllDashboardLists": {
     "responses": {
       "200": {
-        "dashboard_lists": {
+        "json": {
+          "dashboard_lists": {
+            "author": "object",
+            "created": "string",
+            "dashboard_count": "integer",
+            "id": "integer",
+            "is_favorite": "boolean",
+            "modified": "string",
+            "name": "string",
+            "type": "manual_dashboard_list"
+          }
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> dashboard_lists</p>\n    </div>\n  \n            <div class=\"col-2\"><p>[object]</p></div>\n            <div class=\"col-6\"><p>List of all your dashboard lists</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> author</p>\n    </div>\n  \n            <div class=\"col-2\"><p>object <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Creator of the object.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">email</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">handle</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">created</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of creation of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">dashboard_count</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The number of dashboards in the list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The ID of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">is_favorite</p>\n    </div>\n  \n            <div class=\"col-2\"><p>boolean <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Whether or not the list is in the favorites</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">modified</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of last edition of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The name of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The type of dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "403": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "404": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      }
+    },
+    "request": {
+      "json": {},
+      "html": ""
+    }
+  },
+  "CreateDashboardList": {
+    "responses": {
+      "200": {
+        "json": {
           "author": "object",
           "created": "string",
           "dashboard_count": "integer",
@@ -11,20 +46,24 @@
           "modified": "string",
           "name": "string",
           "type": "manual_dashboard_list"
-        }
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> author</p>\n    </div>\n  \n            <div class=\"col-2\"><p>object <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Creator of the object.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">email</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">handle</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">created</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of creation of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">dashboard_count</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The number of dashboards in the list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The ID of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">is_favorite</p>\n    </div>\n  \n            <div class=\"col-2\"><p>boolean <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Whether or not the list is in the favorites</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">modified</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of last edition of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The name of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The type of dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "400": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "403": {
-        "errors": "Bad Request"
-      },
-      "404": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
-  },
-  "CreateDashboardList": {
-    "responses": {
-      "200": {
+    "request": {
+      "json": {
         "author": "object",
         "created": "string",
         "dashboard_count": "integer",
@@ -34,62 +73,104 @@
         "name": "string",
         "type": "manual_dashboard_list"
       },
-      "400": {
-        "errors": "Bad Request"
-      },
-      "403": {
-        "errors": "Bad Request"
-      }
-    },
-    "request": {
-      "author": "object",
-      "created": "string",
-      "dashboard_count": "integer",
-      "id": "integer",
-      "is_favorite": "boolean",
-      "modified": "string",
-      "name": "string",
-      "type": "manual_dashboard_list"
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> author</p>\n    </div>\n  \n            <div class=\"col-2\"><p>object <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Creator of the object.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">email</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">handle</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">created</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of creation of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">dashboard_count</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The number of dashboards in the list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The ID of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">is_favorite</p>\n    </div>\n  \n            <div class=\"col-2\"><p>boolean <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Whether or not the list is in the favorites</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">modified</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of last edition of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The name of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The type of dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   },
   "DeleteDashboardList": {
     "responses": {
       "200": {
-        "deleted_dashboard_list_id": "integer"
+        "json": {
+          "deleted_dashboard_list_id": "integer"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">deleted_dashboard_list_id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64</p></div>\n            <div class=\"col-6\"><p>ID of the deleted dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "403": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "404": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetDashboardList": {
     "responses": {
       "200": {
-        "author": "object",
-        "created": "string",
-        "dashboard_count": "integer",
-        "id": "integer",
-        "is_favorite": "boolean",
-        "modified": "string",
-        "name": "string",
-        "type": "manual_dashboard_list"
+        "json": {
+          "author": "object",
+          "created": "string",
+          "dashboard_count": "integer",
+          "id": "integer",
+          "is_favorite": "boolean",
+          "modified": "string",
+          "name": "string",
+          "type": "manual_dashboard_list"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> author</p>\n    </div>\n  \n            <div class=\"col-2\"><p>object <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Creator of the object.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">email</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">handle</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">created</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of creation of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">dashboard_count</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The number of dashboards in the list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The ID of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">is_favorite</p>\n    </div>\n  \n            <div class=\"col-2\"><p>boolean <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Whether or not the list is in the favorites</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">modified</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of last edition of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The name of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The type of dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "403": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       },
       "404": {
-        "errors": "Bad Request"
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
       }
     },
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "UpdateDashboardList": {
     "responses": {
       "200": {
+        "json": {
+          "author": "object",
+          "created": "string",
+          "dashboard_count": "integer",
+          "id": "integer",
+          "is_favorite": "boolean",
+          "modified": "string",
+          "name": "string",
+          "type": "manual_dashboard_list"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> author</p>\n    </div>\n  \n            <div class=\"col-2\"><p>object <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Creator of the object.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">email</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">handle</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">created</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of creation of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">dashboard_count</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The number of dashboards in the list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The ID of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">is_favorite</p>\n    </div>\n  \n            <div class=\"col-2\"><p>boolean <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Whether or not the list is in the favorites</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">modified</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of last edition of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The name of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The type of dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "400": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "403": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      },
+      "404": {
+        "json": {
+          "errors": "Bad Request"
+        },
+        "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>[string]</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
+      }
+    },
+    "request": {
+      "json": {
         "author": "object",
         "created": "string",
         "dashboard_count": "integer",
@@ -99,25 +180,7 @@
         "name": "string",
         "type": "manual_dashboard_list"
       },
-      "400": {
-        "errors": "Bad Request"
-      },
-      "403": {
-        "errors": "Bad Request"
-      },
-      "404": {
-        "errors": "Bad Request"
-      }
-    },
-    "request": {
-      "author": "object",
-      "created": "string",
-      "dashboard_count": "integer",
-      "id": "integer",
-      "is_favorite": "boolean",
-      "modified": "string",
-      "name": "string",
-      "type": "manual_dashboard_list"
+      "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  hasChildData\">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\"><span class=\"js-collapse-trigger\" style=\"cursor: pointer; font-size: 18px\">></span> author</p>\n    </div>\n  \n            <div class=\"col-2\"><p>object <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Creator of the object.</p></div>\n          </div>\n          \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">email</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">handle</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row isNested d-none \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p></p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">created</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of creation of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">dashboard_count</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The number of dashboards in the list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">id</p>\n    </div>\n  \n            <div class=\"col-2\"><p>int64 <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The ID of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">is_favorite</p>\n    </div>\n  \n            <div class=\"col-2\"><p>boolean <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Whether or not the list is in the favorites</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">modified</p>\n    </div>\n  \n            <div class=\"col-2\"><p>date-time <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>Date of last edition of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name<span style=\"color:red;\">*</span></p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p>The name of the dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">type</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p>The type of dashboard list</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   }
 }

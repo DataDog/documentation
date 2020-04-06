@@ -1,62 +1,107 @@
 {
   "GetUsageLambda": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageFargate": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageHosts": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageLogs": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageLogsByIndex": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageNetworkFlows": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageNetworkHosts": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageRumSessions": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageSummary": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageSynthetics": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageSyntheticsAPI": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageSyntheticsBrowser": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageTimeseries": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageTopAvgMetrics": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   },
   "GetUsageTrace": {
     "responses": {},
-    "request": {}
+    "request": {
+      "json": {},
+      "html": ""
+    }
   }
 }

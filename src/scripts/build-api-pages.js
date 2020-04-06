@@ -7,13 +7,7 @@ const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
 
 
-async function updateApiSideNav(apiYaml, apiVersion) {
-    const dereferencedObject = await $RefParser.dereference(apiYaml);
-    fs.writeFileSync(
-        `./data/api/${apiVersion}/full_spec_deref.json`,
-        safeJsonStringify(dereferencedObject, null, 2),
-        'utf8'
-    );
+function updateApiSideNav(apiYaml, dereferencedObject, apiVersion) {
 
     const menuYaml = yaml.safeLoad(
         fs.readFileSync('./config/_default/menus/menus.en.yaml', 'utf8')
@@ -140,6 +134,180 @@ const filterExampleJson = (data) => {
 
 
 /**
+ * Takes an object from the schema and outputs markup for readonly fields
+ * @param {string} value - the current schema object
+ * returns html markup for indicating read only
+ */
+const readOnlyField = (value) => {
+  let isReadOnly = false;
+  if(typeof value === 'object') {
+    if("readOnly" in value && value.readOnly) {
+      isReadOnly = true;
+    }
+    if(value.type === 'array' && value.items.readOnly) {
+      isReadOnly = true;
+    }
+  }
+  return (isReadOnly) ? ' <span class="read-only">&#127361;</span>' : '';
+};
+
+
+/**
+ * Takes an object from the schema and outputs a field column
+ * @param {string} key - key for the current schema object
+ * @param {object} value - part of a schema object
+ * @param {object} toggleMarkup - optional markup to toggle nested rows
+ * @param {string} requiredMarkup - optional markup for when the field is required
+ * @param {string} parentKey - optional key of the parent object
+ * returns html column
+ */
+const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') => {
+  let field = '';
+  if(parentKey === "additionalProperties") {
+    field = "&lt;any&#45;key&gt;";
+  } else {
+    if(['type'].includes(key) && (typeof value !== 'object')) {
+      field = '';
+    } else {
+      field = (key || '');
+    }
+  }
+  return `
+    <div class="col-4 pl-0">
+      <p class="key">${toggleMarkup}${field}${requiredMarkup}</p>
+    </div>
+  `;
+};
+
+
+/**
+ * Takes an object from the schema and outputs a type column
+ * @param {string} key - key for the current schema object
+ * @param {object} value - part of a schema object
+ * @param {string} readOnlyMarkup - optional markup for when the field is read only
+ * returns html column
+ */
+const typeColumn = (key, value, readOnlyMarkup) => {
+  const validKeys = ['type', 'format'];
+  let typeVal = '';
+  if(validKeys.includes(key) && (typeof value !== 'object')) {
+    typeVal = value;
+  } else {
+    if(value.enum) {
+      typeVal = 'enum';
+    } else {
+      typeVal = (value.format || value.type || '');
+    }
+  }
+  if(value.type === 'array') {
+    return `<div class="col-2"><p>[${value.items.type || ''}]${readOnlyMarkup}</p></div>`;
+  } else {
+    //return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2"><p>${typeVal}${readOnlyMarkup}</p></div>`;
+  }
+};
+
+
+/**
+ * Takes an object from the schema and outputs a description column
+ * @param {object} value - part of a schema object
+ * returns html column
+ */
+const descColumn = (value) => {
+  const desc = (value.description && (typeof(value.description) !== "object")) ? value.description || '' : '';
+  return `<div class="col-6"><p>${desc}</p></div>`;
+};
+
+
+/**
+ * Takes a application/json schema for request or response and outputs a table
+ * @param {object} data - schema object
+ * @param {boolean} isNested - is this a nested row
+ * @param {array} requiredFields - the required fields array of string to check
+ * @param {number} level - how deep does the rabbit hole go?
+ * returns html row with nested rows
+ */
+const rowRecursive = (data, isNested, requiredFields=[], level = 0, parentKey = '') => {
+  let html = '';
+
+  // i've set a hard recurse limit of depth
+  if(level > 2) return '';
+
+  if (typeof data === 'object') {
+    Object.entries(data).forEach(([key, value]) => {
+
+      // calculate child data in advance
+      // we do this here so that we can add classes to html with this knowledge
+      let childData = null;
+      let newParentKey = key;
+      if(value.type === 'array') {
+        if (value.items.properties) {
+          childData = value.items.properties;
+        }
+      } else if(typeof value === 'object' && "properties" in value) {
+        childData = value.properties;
+      } else if (typeof value === 'object' && "additionalProperties" in value) {
+        childData = value.additionalProperties;
+        newParentKey = "additionalProperties";
+      }
+
+      // build up classes
+      const classes = (isNested) ? "isNested d-none" : "";
+      const moreclasses = (childData) ? "hasChildData" : "";
+
+      // build markdown
+      const toggleArrow = (childData) ? '<span class="js-collapse-trigger" style="cursor: pointer; font-size: 18px">></span> ' : "" ;
+      const required = requiredFields.includes(key) ? '<span style="color:red;">*</span>' : "";
+      const readOnly = readOnlyField(value);
+
+      // build html
+      html += `
+      <div class="row ${classes} ${moreclasses}">
+        <div class="col-12">
+          <div class="row first-row">
+            ${fieldColumn(key, value, toggleArrow, required, parentKey)}
+            ${typeColumn(key, value, readOnly)}
+            ${descColumn(value)}
+          </div>
+          ${(childData) ? rowRecursive(childData, true, data.required || [], (level + 1), newParentKey) : ''}
+        </div>
+      </div>
+      `;
+    });
+  } else {
+    html += `<div class="primitive">${data || ''}</div>`;
+  }
+  return html;
+};
+
+
+/**
+ * Takes a application/json schema for request or response and outputs a table
+ * @param {object} data - schema object
+ * returns html table string
+ */
+const schemaTable = (data) => {
+  return `
+  <div class=" schema-table row">
+    <div class="col-12 column">
+      <div class="row">
+        <div class="col-4 pl-0">
+          <p class="font-semibold">Field</p>
+        </div>
+        <div class="col-2">
+          <p class="font-semibold">Type</p>
+        </div>
+        <div class="col-6">
+          <p class="font-semibold">Description</p>
+        </div>
+      </div>
+      ${rowRecursive((data.type === 'array') ? (data.items.properties || data.items) : data.properties, false, data.required || [])}
+    </div>  
+  </div>`;
+};
+
+
+/**
  * Builds resources needed for a hugo api page
  * @param {object} dereferencedObject - deref object
  * @param {string} pageDir - page dir
@@ -158,16 +326,29 @@ const buildResources = (dereferencedObject, pageDir, tagName) => {
     Object.entries(actionObj).forEach(([actionKey, action]) => {
       // set some default for this operationid entry default
       if(!(action.operationId in pageExampleJson)) {
-        pageExampleJson[action.operationId] = {"responses":{}, "request": {}};
+        pageExampleJson[action.operationId] = {"responses":{}, "request": {"json": {}, "html": ""}};
       }
       // add request json
       if(("requestBody" in action) && ("content" in action.requestBody) && ("application/json" in action.requestBody.content)) {
-        pageExampleJson[action.operationId]["request"] = filterExampleJson(action.requestBody.content["application/json"].schema);
+        pageExampleJson[action.operationId]["request"]["json"] = filterExampleJson(action.requestBody.content["application/json"].schema);
+        const requestHTML = schemaTable(action.requestBody.content["application/json"].schema);
+        if(requestHTML) {
+          //fs.writeFileSync(`${pageDir}${action.operationId}_request.html`, requestHTML, 'utf-8');
+          pageExampleJson[action.operationId]["request"]["html"] = requestHTML;
+          console.log(`successfully wrote ${pageDir}${action.operationId}_request.html`);
+        }
       }
       // add response json
       Object.entries(action.responses).forEach(([response_code, response]) => {
         if(("content" in response) && ("application/json" in response.content)) {
-          pageExampleJson[action.operationId]["responses"][response_code] = filterExampleJson(response.content["application/json"].schema);
+          pageExampleJson[action.operationId]["responses"][response_code] = {"json": {}, "html": ""};
+          pageExampleJson[action.operationId]["responses"][response_code]["json"] = filterExampleJson(response.content["application/json"].schema);
+          const responseHTML = schemaTable(response.content["application/json"].schema);
+          if(responseHTML) {
+            //fs.writeFileSync(`${pageDir}${action.operationId}_response_${response_code}.html`, responseHTML, 'utf-8');
+            pageExampleJson[action.operationId]["responses"][response_code]["html"] = responseHTML;
+            console.log(`successfully wrote ${pageDir}${action.operationId}_response_${response_code}.html`);
+          }
         }
       });
     });
@@ -185,11 +366,18 @@ const processSpecs = (specs) => {
   specs
     .forEach((spec) => {
       const fileData = yaml.safeLoad(fs.readFileSync(spec, 'utf8'));
-      const version = spec.split('/')[3];
-      updateApiSideNav(fileData, version);
+      $RefParser.dereference(fileData)
+        .then((deref) => {
+          const version = spec.split('/')[3];
+          fs.writeFileSync(
+              `./data/api/${version}/full_spec_deref.json`,
+              safeJsonStringify(deref, null, 2),
+              'utf8'
+          );
+          updateApiSideNav(fileData, deref, version);
+        }).catch((e) => console.log(e));
     });
 };
-
 
 const specs = ['./data/api/v1/full_spec.yaml', './data/api/v2/full_spec.yaml'];
 processSpecs(specs);
