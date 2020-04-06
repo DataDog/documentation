@@ -22,7 +22,7 @@ ctx := context.WithValue(
 config := NewConfiguration()
 api := NewAPIClient(config)
 
-model, httpresp, err := api.SLOApi.getSLO(ctx).Execute()
+model, httpresp, err := api.ServiceLevelObjectivesApi.getSLO(ctx).Execute()
 if err != nil {
 	log.Fatalf("API Error %s: %v", err.(GenericOpenAPIError).Body(), err)
 }

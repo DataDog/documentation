@@ -1,15 +1,15 @@
-import com.datadog.api.v1.client.api.SLOApi;
+import com.datadog.api.v1.client.api.ServiceLevelObjectivesApi;
 
-public class SLOApiExample {
+public class ServiceLevelObjectivesApiExample {
 
     public static void main(String[] args) {
-        SLOApi apiInstance = new SLOApi();
+        ServiceLevelObjectivesApi apiInstance = new ServiceLevelObjectivesApi();
         ServiceLevelObjective body = ; // ServiceLevelObjective | 
         try {
             ServiceLevelObjectiveListResponse result = apiInstance.createSLO(body);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling SLOApi#createSLO");
+            System.err.println("Exception when calling ServiceLevelObjectivesApi#createSLO");
             e.printStackTrace();
         }
     }

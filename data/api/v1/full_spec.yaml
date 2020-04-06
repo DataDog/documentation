@@ -1463,97 +1463,6 @@ components:
         style:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
-    HistoryServiceLevelObjectiveMetrics:
-      description: A `metric` based SLO history response.
-      properties:
-        denominator:
-          $ref: '#/components/schemas/HistoryServiceLevelObjectiveMetricsSeries'
-        interval:
-          description: The aggregated query interval for the series data. It's implicit
-            based on the query time window.
-          format: int64
-          type: integer
-        message:
-          description: Optional message if there are specific query issues/warnings.
-          type: string
-        numerator:
-          $ref: '#/components/schemas/HistoryServiceLevelObjectiveMetricsSeries'
-        query:
-          description: The combined numerator && denominator query CSV.
-          type: string
-        res_type:
-          description: The series result type. This mimics `batch_query` response
-            type.
-          type: string
-        resp_version:
-          description: The series response version type. This mimics `batch_query`
-            response type.
-          format: int64
-          type: integer
-        times:
-          description: The query timestamps in epoch milliseconds
-          items:
-            format: double
-            type: number
-          type: array
-      required:
-      - res_type
-      - interval
-      - resp_version
-      - query
-      - times
-      - numerator
-      - denominator
-      type: object
-    HistoryServiceLevelObjectiveMetricsSeries:
-      description: 'A representation of `metric` based SLO time series for the provided
-        queries.
-
-        This is the same response type from `batch_query` endpoint.'
-      properties:
-        count:
-          description: Count of submitted metrics.
-          format: int64
-          type: integer
-        metadata:
-          description: Query metadata.
-          properties:
-            aggr:
-              description: Query aggregator function.
-              type: string
-            expression:
-              description: Query expression.
-              type: string
-            metric:
-              description: Query metric used.
-              type: string
-            query_index:
-              description: Query index from original combined query.
-              format: int64
-              type: integer
-            scope:
-              description: Query scope.
-              type: string
-            unit:
-              description: Query units (if available).
-              type: string
-          type: object
-        sum:
-          description: Total Sum of the query.
-          format: double
-          type: number
-        values:
-          description: The query values.
-          items:
-            format: double
-            type: number
-          type: array
-      required:
-      - count
-      - sum
-      - values
-      - metadata
-      type: object
     HistoryServiceLevelObjectiveResponse:
       description: A service level objective history response.
       properties:
@@ -1565,11 +1474,11 @@ components:
               format: int64
               type: integer
             groups:
-              $ref: '#/components/schemas/HistoryServiceLevelObjectiveSLIData'
+              $ref: '#/components/schemas/SLOHistorySLIData'
             overall:
-              $ref: '#/components/schemas/HistoryServiceLevelObjectiveSLIData'
+              $ref: '#/components/schemas/SLOHistorySLIData'
             series:
-              $ref: '#/components/schemas/HistoryServiceLevelObjectiveMetrics'
+              $ref: '#/components/schemas/SLOHistoryMetrics'
             thresholds:
               additionalProperties:
                 $ref: '#/components/schemas/SLOThreshold'
@@ -1580,77 +1489,18 @@ components:
               format: int64
               type: integer
             type:
-              $ref: '#/components/schemas/ServiceLevelObjectiveType'
+              $ref: '#/components/schemas/SLOType'
             type_id:
-              $ref: '#/components/schemas/ServiceLevelObjectiveTypeNumeric'
+              $ref: '#/components/schemas/SLOTypeNumeric'
           type: object
         errors:
           description: A list of errors while querying the history data for the service
             level obective.
           items:
-            $ref: '#/components/schemas/HistoryServiceLevelObjectiveResponseError'
+            $ref: '#/components/schemas/SLOHistoryResponseError'
           type: array
       required:
       - data
-      type: object
-    HistoryServiceLevelObjectiveResponseError:
-      description: A service level objective response containing the requested history.
-      properties:
-        error:
-          description: human readable error
-          type: string
-      type: object
-    HistoryServiceLevelObjectiveSLIData:
-      description: An object that holds an SLI value and its associated data. It can
-        represent an SLO's overall SLI value or the SLI value for a specific monitor
-        (in multi-monitor SLOs) or group (in grouped SLOs). The uptime history is
-        included for monitor SLOs.
-      properties:
-        history:
-          description: For `monitor` based SLOs, this includes the aggregated history
-            uptime time series.
-          items:
-            description: Represents an array of 2-tuple of (timestamp, value) time
-              series data.
-            items:
-              format: double
-              type: number
-            maxItems: 2
-            minItems: 2
-            type: array
-          type: array
-        name:
-          description: For groups in a grouped SLO this is the group name. For monitors
-            in a multi-monitor SLO this is the monitor name.
-          type: string
-        precision:
-          additionalProperties:
-            format: double
-            type: number
-          description: A mapping of threshold `timeframe` to number of accurate decimals,
-            regardless of the from && to timestamp.
-          type: object
-        preview:
-          description: 'For `monitor` based SLOs when `true` this indicates that a
-            replay is in progress to give an accurate uptime
-
-            calculation.'
-          type: boolean
-        sli_value:
-          description: The current SLI value of the SLO over the history window.
-          example: 99.99
-          format: double
-          type: number
-        span_precision:
-          description: The amount of decimal places the SLI value is accurate to for
-            the given from and to timestamp.
-          format: double
-          type: number
-        uptime:
-          deprecated: true
-          description: Deprecated. Use `sli_value` instead.
-          format: double
-          type: number
       type: object
     Host:
       properties:
@@ -3734,6 +3584,156 @@ components:
       - THIRTY_DAYS
       - NINETY_DAYS
       - ALL
+    SLOHistoryMetrics:
+      description: A `metric` based SLO history response.
+      properties:
+        denominator:
+          $ref: '#/components/schemas/SLOHistoryMetricsSeries'
+        interval:
+          description: The aggregated query interval for the series data. It's implicit
+            based on the query time window.
+          format: int64
+          type: integer
+        message:
+          description: Optional message if there are specific query issues/warnings.
+          type: string
+        numerator:
+          $ref: '#/components/schemas/SLOHistoryMetricsSeries'
+        query:
+          description: The combined numerator && denominator query CSV.
+          type: string
+        res_type:
+          description: The series result type. This mimics `batch_query` response
+            type.
+          type: string
+        resp_version:
+          description: The series response version type. This mimics `batch_query`
+            response type.
+          format: int64
+          type: integer
+        times:
+          description: The query timestamps in epoch milliseconds
+          items:
+            format: double
+            type: number
+          type: array
+      required:
+      - res_type
+      - interval
+      - resp_version
+      - query
+      - times
+      - numerator
+      - denominator
+      type: object
+    SLOHistoryMetricsSeries:
+      description: 'A representation of `metric` based SLO time series for the provided
+        queries.
+
+        This is the same response type from `batch_query` endpoint.'
+      properties:
+        count:
+          description: Count of submitted metrics.
+          format: int64
+          type: integer
+        metadata:
+          description: Query metadata.
+          properties:
+            aggr:
+              description: Query aggregator function.
+              type: string
+            expression:
+              description: Query expression.
+              type: string
+            metric:
+              description: Query metric used.
+              type: string
+            query_index:
+              description: Query index from original combined query.
+              format: int64
+              type: integer
+            scope:
+              description: Query scope.
+              type: string
+            unit:
+              description: Query units (if available).
+              type: string
+          type: object
+        sum:
+          description: Total Sum of the query.
+          format: double
+          type: number
+        values:
+          description: The query values.
+          items:
+            format: double
+            type: number
+          type: array
+      required:
+      - count
+      - sum
+      - values
+      - metadata
+      type: object
+    SLOHistoryResponseError:
+      description: A service level objective response containing the requested history.
+      properties:
+        error:
+          description: human readable error
+          type: string
+      type: object
+    SLOHistorySLIData:
+      description: An object that holds an SLI value and its associated data. It can
+        represent an SLO's overall SLI value or the SLI value for a specific monitor
+        (in multi-monitor SLOs) or group (in grouped SLOs). The uptime history is
+        included for monitor SLOs.
+      properties:
+        history:
+          description: For `monitor` based SLOs, this includes the aggregated history
+            uptime time series.
+          items:
+            description: Represents an array of 2-tuple of (timestamp, value) time
+              series data.
+            items:
+              format: double
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        name:
+          description: For groups in a grouped SLO this is the group name. For monitors
+            in a multi-monitor SLO this is the monitor name.
+          type: string
+        precision:
+          additionalProperties:
+            format: double
+            type: number
+          description: A mapping of threshold `timeframe` to number of accurate decimals,
+            regardless of the from && to timestamp.
+          type: object
+        preview:
+          description: 'For `monitor` based SLOs when `true` this indicates that a
+            replay is in progress to give an accurate uptime
+
+            calculation.'
+          type: boolean
+        sli_value:
+          description: The current SLI value of the SLO over the history window.
+          example: 99.99
+          format: double
+          type: number
+        span_precision:
+          description: The amount of decimal places the SLI value is accurate to for
+            the given from and to timestamp.
+          format: double
+          type: number
+        uptime:
+          deprecated: true
+          description: Deprecated. Use `sli_value` instead.
+          format: double
+          type: number
+      type: object
     SLOThreshold:
       description: SLO thresholds (target and optionally warning) for a single time
         window.
@@ -3788,6 +3788,33 @@ components:
       - SEVEN_DAYS
       - THIRTY_DAYS
       - NINETY_DAYS
+    SLOType:
+      description: The type of the service level objective.
+      enum:
+      - metric
+      - monitor
+      type: string
+      x-enum-varnames:
+      - METRIC
+      - MONITOR
+    SLOTypeNumeric:
+      description: 'A numeric representation of the type of the service level objective
+        (0 for
+
+        monitor, 1 for metric).
+
+
+        Always included in service level objective responses. Ignored in
+
+        create/update requests.'
+      enum:
+      - 0
+      - 1
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - MONITOR
+      - METRIC
     SLOWidgetDefinition:
       description: Use the SLO and uptime widget to track your SLOs (Service Level
         Objectives) and uptime on screenboards and timeboards.
@@ -4087,9 +4114,9 @@ components:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
         type:
-          $ref: '#/components/schemas/ServiceLevelObjectiveType'
+          $ref: '#/components/schemas/SLOType'
         type_id:
-          $ref: '#/components/schemas/ServiceLevelObjectiveTypeNumeric'
+          $ref: '#/components/schemas/SLOTypeNumeric'
       required:
       - name
       - thresholds
@@ -4143,33 +4170,6 @@ components:
       required:
       - data
       type: object
-    ServiceLevelObjectiveType:
-      description: The type of the service level objective.
-      enum:
-      - metric
-      - monitor
-      type: string
-      x-enum-varnames:
-      - METRIC
-      - MONITOR
-    ServiceLevelObjectiveTypeNumeric:
-      description: 'A numeric representation of the type of the service level objective
-        (0 for
-
-        monitor, 1 for metric).
-
-
-        Always included in service level objective responses. Ignored in
-
-        create/update requests.'
-      enum:
-      - 0
-      - 1
-      format: int32
-      type: integer
-      x-enum-varnames:
-      - MONITOR
-      - METRIC
     ServiceLevelObjectivesBulkDelete:
       additionalProperties:
         items:
@@ -8634,7 +8634,7 @@ paths:
     get:
       description: List all Datadog-AWS Logs integrations configured in your Datadog
         account.
-      operationId: AWSLogsList
+      operationId: GetAllAWSLogsIntegrations
       responses:
         '200':
           content:
@@ -8718,7 +8718,7 @@ paths:
         - Returns a status of ''checked and ok'' if the Lambda exists.
 
         - Returns a status of ''error'' if the Lambda does not exist.'
-      operationId: AWSLogsCheckLambdaAsync
+      operationId: CheckAWSLogsLambdaAsync
       requestBody:
         content:
           application/json:
@@ -8754,7 +8754,7 @@ paths:
       description: Get the list of current AWS services that Datadog offers automatic
         log collection. Use returned service IDs with the services parameter for the
         Enable an AWS service log collection API endpoint.
-      operationId: AWSLogsServicesList
+      operationId: GetAllAWSLogsServices
       responses:
         '200':
           content:
@@ -8836,7 +8836,7 @@ paths:
         \ status of 'waiting' while checking.\n- Returns a status of 'checked and\
         \ ok' if the Lambda exists.\n- Returns a status of 'error' if the Lambda does\
         \ not exist."
-      operationId: AWSLogsCheckServicesAsync
+      operationId: CheckAWSLogsServicesAsync
       requestBody:
         content:
           application/json:
@@ -10522,7 +10522,7 @@ paths:
           description: Forbidden
       summary: Search SLOs
       tags:
-      - SLO
+      - Service Level Objectives
     post:
       description: Create a service level objective object.
       operationId: CreateSLO
@@ -10560,7 +10560,7 @@ paths:
           description: Forbidden
       summary: Create a SLO object
       tags:
-      - SLO
+      - Service Level Objectives
       x-codegen-request-body-name: body
   /api/v1/slo/bulk_delete:
     post:
@@ -10609,7 +10609,7 @@ paths:
           description: Forbidden
       summary: Bulk Delete SLO Timeframes
       tags:
-      - SLO
+      - Service Level Objectives
       x-codegen-request-body-name: body
   /api/v1/slo/can_delete:
     get:
@@ -10654,7 +10654,7 @@ paths:
           description: Forbidden
       summary: Check if SLOs can be safely deleted
       tags:
-      - SLO
+      - Service Level Objectives
   /api/v1/slo/{slo_id}:
     delete:
       description: 'Permanently delete the specified service level objective object.
@@ -10704,7 +10704,7 @@ paths:
           description: Not found
       summary: Delete a SLO
       tags:
-      - SLO
+      - Service Level Objectives
     get:
       description: Get a service level objective object.
       operationId: GetSLO
@@ -10748,10 +10748,10 @@ paths:
           description: Not found
       summary: Get a SLO's details
       tags:
-      - SLO
+      - Service Level Objectives
     put:
-      description: Edit the specified service level objective object.
-      operationId: EditSLO
+      description: Update the specified service level objective object.
+      operationId: UpdateSLO
       parameters:
       - description: The ID of the service level objective object.
         in: path
@@ -10797,9 +10797,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Edit a SLO
+      summary: Update a SLO
       tags:
-      - SLO
+      - Service Level Objectives
       x-codegen-request-body-name: body
   /api/v1/slo/{slo_id}/history:
     get:
@@ -10856,7 +10856,7 @@ paths:
           description: Forbidden
       summary: Get an SLO's history
       tags:
-      - SLO
+      - Service Level Objectives
   /api/v1/synthetics/browser/devices:
     get:
       description: Get the list of devices available for Synthetics browser tests.
@@ -12753,25 +12753,6 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty
   name: PagerDuty Integration
-- description: 'Service Level Objectives (or SLOs) are a key part of
-
-    the site reliability engineering toolkit.
-
-    SLOs provide a framework for defining clear targets
-
-    around application performance, which ultimately help teams
-
-    provide a consistent customer experience, balance feature development
-
-    with platform stability, and improve communication with internal
-
-    and external users.
-
-
-    For more information on creating SLOs, see the  Configuring Service Level Objectives
-
-    [info](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration).'
-  name: SLO
 - description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
     instead.
   externalDocs:
@@ -12798,6 +12779,25 @@ tags:
 
     [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert'
   name: Service Checks
+- description: 'Service Level Objectives (or SLOs) are a key part of
+
+    the site reliability engineering toolkit.
+
+    SLOs provide a framework for defining clear targets
+
+    around application performance, which ultimately help teams
+
+    provide a consistent customer experience, balance feature development
+
+    with platform stability, and improve communication with internal
+
+    and external users.
+
+
+    For more information on creating SLOs, see the  Configuring Service Level Objectives
+
+    [info](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration).'
+  name: Service Level Objectives
 - description: Take graph snapshots using the API.
   name: Snapshots
 - description: 'Datadog Synthetics uses simulated user requests and browser rendering

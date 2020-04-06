@@ -1,16 +1,16 @@
-import com.datadog.api.v1.client.api.SLOApi;
+import com.datadog.api.v1.client.api.ServiceLevelObjectivesApi;
 
-public class SLOApiExample {
+public class ServiceLevelObjectivesApiExample {
 
     public static void main(String[] args) {
-        SLOApi apiInstance = new SLOApi();
+        ServiceLevelObjectivesApi apiInstance = new ServiceLevelObjectivesApi();
         String ids = ids_example; // String | A comma separated list of the IDs of the service level objectives objects.
 For example, "id1,id2,id3".
         try {
             ServiceLevelObjectiveListResponse result = apiInstance.getSLOs(ids);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling SLOApi#getSLOs");
+            System.err.println("Exception when calling ServiceLevelObjectivesApi#getSLOs");
             e.printStackTrace();
         }
     }

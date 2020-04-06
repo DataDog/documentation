@@ -22,7 +22,7 @@ ctx := context.WithValue(
 config := NewConfiguration()
 api := NewAPIClient(config)
 
-model, httpresp, err := api.SLOApi.bulkPartialDeleteSLO(ctx).Execute()
+model, httpresp, err := api.ServiceLevelObjectivesApi.bulkPartialDeleteSLO(ctx).Execute()
 if err != nil {
 	log.Fatalf("API Error %s: %v", err.(GenericOpenAPIError).Body(), err)
 }
