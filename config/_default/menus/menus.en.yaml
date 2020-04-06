@@ -1006,6 +1006,11 @@ main:
     parent: "tracing"
     identifier: "profiling"
     weight: 7
+  - name: "Proxy"
+    url: "tracing/profiling/proxy"
+    parent: "profiling"
+    identifier: "profiling_proxy"
+    weight: 701
 
   - name: "Manual Instrumentation"
     url: "tracing/manual_instrumentation/"
