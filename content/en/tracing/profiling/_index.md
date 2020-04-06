@@ -87,7 +87,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 4. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
 
     ```python
-    import ddtrace.profile.auto
+    import ddtrace.profiling.auto
     ```
 
 5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
@@ -97,7 +97,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 - If you want to control which part of your code should be profiled, use the `ddtrace.profile.profiler.Profiler` object:
 
     ```python
-    from ddtrace.profile.profiler import Profiler
+    from ddtrace.profiling import Profiler
 
     prof = Profiler()
     prof.start()
