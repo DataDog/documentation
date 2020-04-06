@@ -17,9 +17,7 @@ Using the sum of the good time divided by the sum of total time provides a Servi
 
 On the [SLO status page][2], select **New SLO +**. Then select [**Monitor**][3].
 
-### Configuration
-
-#### Define queries
+### Define queries
 
 To start, you need to be using Datadog monitors. To set up a new monitor, go to the [monitor creation page][4] and select one of the monitor types that are supported by SLOs (listed below). Search for monitors by name and click on it to add it to the source list. An example SLO on a monitor is if the latency of all user requests should be less than 250ms 99% of the time in any 30 day window. To set this up, you would:
 
@@ -37,7 +35,7 @@ To start, you need to be using Datadog monitors. To set up a new monitor, go to 
 a custom metric. This monitor might also ping your on-call team if it's no longer reachable. To avoid burnout you want to
 track how often this host is down.
 
-#### Set your targets
+### Set your SLO targets
 
 SLO targets are the stat you use to measure uptime success.
 
@@ -46,12 +44,12 @@ First select your target value, example: `95% of all HTTP requests should be "go
 You can optionally include a warning value that is greater than the target value to indicate when you are approaching
 an SLO breach.
 
-#### Identify this indicator
+### Identify this indicator
 
 Here we add contextual information about the purpose of the SLO, including any related information
 in the description and tags you would like to associate with the SLO.
 
-#### Underlying monitor and SLO histories
+### Underlying monitor and SLO histories
 
 Making changes to the monitor used by an SLO recalculates the SLO history. Therefore, the monitor history and SLO history may not match after a monitor update.
 
