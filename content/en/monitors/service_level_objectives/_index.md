@@ -95,7 +95,7 @@ The default view includes:
 
 ### Saved Views
 
-Saved views allow you to save and share across your organization search customizations in the SLO list view for SLOs that are most relevant for you including:
+Saved views allow you to save and share customized searches in the SLO list view for SLOs that are most relevant for you and your team by sharing:
 
 - A search query
 - A selected subset of facets
@@ -105,6 +105,7 @@ After you query for a subset of SLOs on the list view, you can now add that quer
 #### Add a saved view
 
 To add a saved view:
+
 1. Query for your SLOs. 
 2. Click *Save View* at the top. 
 3. Name your view and save.
@@ -123,7 +124,7 @@ Copy-paste a saved view short-link to share it with your teammates.
 
 #### Manage Saved Views
 
-To create a new saved view, click the *Save as* button at the top of the screen. Give it a name and click *Save*.
+To create a new saved view, click the *Save as* button at the top of the screen. Give it a name and click *Save*. Once you are using a saved view, you can update it by selecting that view, modifying the query, and clicking *Update*.
 
 Saved Views can be deleted directly from the Saved View list. Hover over the name of the saved view to reveal its delete button. Click on it and confirm.
 
