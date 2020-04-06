@@ -1,5 +1,5 @@
 ---
-title: Proxy
+title: Proxy configuration with Profiling
 kind: Documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
@@ -14,7 +14,7 @@ If setup, your proxy should point to the following Datadog profiles endpoints:
 - If you are on Datadog US site. `https://intake.profile.datadoghq.com`
 - If you are on Datadog EU site. `https://intake.profile.datadoghq.eu`
 
-## Librairies Proxy Setup
+## Profiling Librairies Proxy Setup
 
 Below are the configuration options to allow your application to send profiles to your proxy:
 
