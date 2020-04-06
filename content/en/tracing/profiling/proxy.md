@@ -21,21 +21,19 @@ Below are the configuration options to allow your application to send profiles t
 {{< tabs >}}
 {{% tab "Java" %}}
 
-| Arguments                       | Environment variable      | Description                                       |
-| ------------------------------- | ------------------------- | ------------------------------------------------- |
-| `-Ddd.profiling.proxy.host`     | PROFILING_PROXY_HOST      | URL for your proxy (`my-proxy.example.com`)       |
-| `-Ddd.profiling.proxy.port`     | PROFILING_PROXY_PORT      | Port used by your proxy. Default port is `8080`   |
-| `-Ddd.profiling.proxy.username` | PROFILING_PROXY_USERNAME  | Username used by your proxy                       |
-| `-Ddd.profiling.proxy.password` | PROFILING_PROXY_PASSWORD  | Password used by your proxy                       |
+| Arguments                       | Environment variable     | Description                                     |
+| ------------------------------- | ------------------------ | ----------------------------------------------- |
+| `-Ddd.profiling.proxy.host`     | PROFILING_PROXY_HOST     | URL for your proxy (`my-proxy.example.com`)     |
+| `-Ddd.profiling.proxy.port`     | PROFILING_PROXY_PORT     | Port used by your proxy. Default port is `8080` |
+| `-Ddd.profiling.proxy.username` | PROFILING_PROXY_USERNAME | Username used by your proxy                     |
+| `-Ddd.profiling.proxy.password` | PROFILING_PROXY_PASSWORD | Password used by your proxy                     |
 
 {{% /tab %}}
-
 {{% tab "Python" %}}
 
 <div class="alert alert-info">In development, will be soon avilable.</div>
 
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ## Further Reading
