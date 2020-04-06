@@ -801,12 +801,14 @@ main:
   - name: "Monitor-based SLOs"
     url: "monitors/service_level_objectives/monitor/"
     parent: "slos"
-    weight: 7.1
+    identifier: "slos_monitor"
+    weight: 701
 
-  - name: "Event-based SLOs"
-    url: "monitors/service_level_objectives/event/"
+  - name: "Metric-based SLOs"
+    url: "monitors/service_level_objectives/metric/"
     parent: "slos"
-    weight: 7.2
+    identifier: "slos_metric"
+    weight: 702
 
   ## MONITORS -  Guides
 
