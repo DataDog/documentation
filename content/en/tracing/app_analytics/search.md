@@ -119,9 +119,9 @@ To delete a saved search, click on the bin icon under the Trace search drop-down
 
 ## Time Range
 
-The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown:
+The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown (or [entering a custom time frame][3]):
 
-{{< img src="tracing/app_analytics/search/timerange.png" style="width:50%;" alt="Timerange"  >}}
+{{< img src="tracing/app_analytics/search/time_frame.png" style="width:50%;" alt="Select time frame" >}}
 
 ## Trace Stream
 
@@ -135,7 +135,7 @@ In the Trace Stream, select **View in App Analytics** to view Traces and Analyze
 
 If **Traces** is selected, Analyzed Spans listed in the trace stream have a sampled trace associated with them. If **Analyzed Spans** is selected, only the Analyzed Spans are listed in the trace stream.
 
-When a request hits a [service][3] (e.g. webserver, database), the Datadog Agent creates an Analyzed Span. It's a record of the request including its duration, response code, and any [custom metadata][4]. An Analyzed Span is represented by a single span with attached metadata for the handled request. For each service that receives a request, the Agent creates an Analyzed Span. If a request runs through a web service, listing service, and database service, the request generates 3 Analyzed Spans. To reduce the amount of Analyzed Spans generated, [explicitly turn on/off any Analyzed Span collection for a specific service][5]. To start collecting Analyzed Spans, [enable App Analytics for your services][5].
+When a request hits a [service][4] (e.g. webserver, database), the Datadog Agent creates an Analyzed Span. It's a record of the request including its duration, response code, and any [custom metadata][5]. An Analyzed Span is represented by a single span with attached metadata for the handled request. For each service that receives a request, the Agent creates an Analyzed Span. If a request runs through a web service, listing service, and database service, the request generates 3 Analyzed Spans. To reduce the amount of Analyzed Spans generated, [explicitly turn on/off any Analyzed Span collection for a specific service][6]. To start collecting Analyzed Spans, [enable App Analytics for your services][6].
 
 ### Displaying a full Trace
 
@@ -178,10 +178,10 @@ Facets allow you to pivot or filter your datasets based on a given attribute. Ex
 
 ### Quantitative facets: measures
 
-**Use measures when you need to:** 
+**Use measures when you need to:**
 * Aggregate values from multiple traces. For example, create a measure on the number of rows in Cassandra and view the P95 or top-most referrers per sum of file size requested.
 * Numerically compute the highest latency services for shopping cart values over $1000.
-* Filter continuous values. For example, the size in bytes of each payload chunk of a video stream.	
+* Filter continuous values. For example, the size in bytes of each payload chunk of a video stream.
 
 **Types**
 
@@ -213,6 +213,7 @@ Use Facets to filter on your Traces. The search bar and url automatically reflec
 
 [1]: /integrations
 [2]: /tagging/#tags-best-practices
-[3]: /tracing/visualization/#services
-[4]: /tracing/guide/adding_metadata_to_spans/
-[5]: /tracing/app_analytics/#configure-additional-services-optional
+[3]: /dashboards/guide/custom_time_frames
+[4]: /tracing/visualization/#services
+[5]: /tracing/guide/adding_metadata_to_spans/
+[6]: /tracing/app_analytics/#configure-additional-services-optional

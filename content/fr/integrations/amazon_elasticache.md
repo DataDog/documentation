@@ -35,18 +35,18 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Installation sans l'Agent Datadog
 
 1. Dans le [carré d'intégration AWS][4], assurez-vous que l'option `ElastiCache` est cochée dans la section concernant la collecte des métriques.
-
 2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][5] afin de recueillir des métriques Amazon ElastiCache. Pour en savoir plus sur les stratégies ElastiCache, consultez [la documentation du site Web d'AWS][6].
 
-| Autorisation AWS                      | Description                                                           |
-|-------------------------------------|-----------------------------------------------------------------------|
-| `elasticache:DescribeCacheClusters` | Énumère et décrit les clusters Cache pour ajouter des tags et des métriques supplémentaires. |
-| `elasticache:ListTagsForResource`   | Énumère les tags personnalisés d'un cluster pour les ajouter.                    |
-| `elasticache:DescribeEvents`        | Ajoute des événements concernant les snapshots et les maintenances.                          |
+    | Autorisation AWS                      | Description                                                           |
+    | ----------------------------------- | --------------------------------------------------------------------- |
+    | `elasticache:DescribeCacheClusters` | Énumère et décrit les clusters Cache pour ajouter des tags et des métriques supplémentaires. |
+    | `elasticache:ListTagsForResource`   | Énumère les tags personnalisés d'un cluster, pour en ajouter.                    |
+    | `elasticache:DescribeEvents`        | Ajoute des événements à propos des snapshots et des entretiens.                          |
 
 3. Installez l'[intégration Datadog/AWS ElastiCache][7].
 
 ### Installation avec l'Agent Datadog (conseillée)
+
 #### Recueillir des métriques natives avec l'Agent
 
 Le diagramme suivant explique comment Datadog recueille des métriques directement à partir de CloudWatch via l'intégration native ElastiCache, mais également comment notre solution peut recueillir des métriques natives directement depuis une technologie en backend : Redis ou Memcached. En les recueillant directement à partir du backend, vous pouvez accéder à un plus grand nombre de métriques importantes, avec une meilleure résolution.
@@ -73,7 +73,6 @@ Cliquez ensuite sur le lien du « node » pour accéder à son URL d'endpoint�
 
 Notez l'URL de l'endpoint (p. ex., **replica-001.xxxx.use1.cache.amazonaws.com**) et le `cacheclusterid` (p. ex., **replica-001**). Ces valeurs sont requises pour configurer l'Agent et créer des graphiques et dashboards.
 
-
 ##### Configurer l'Agent
 
 Les intégrations Redis/Memcached prennent en charge l'assignation de tags aux instances de cache individuelles. Prévus initialement pour permettre la surveillance de nombreuses instances sur une seule machine, ces tags peuvent être utilisés pour filtrer et regrouper les métriques. Voici un exemple de configuration pour ElastiCache avec Redis à l'aide de `redisdb.yaml`. Pour obtenir plus d'informations concernant l'emplacement de stockage de ce fichier en fonction de votre plateforme, consultez le [répertoire de configuration de l'Agent][8].
@@ -82,15 +81,15 @@ Les intégrations Redis/Memcached prennent en charge l'assignation de tags aux i
 init_config:
 
 instances:
-  - host: replica-001.xxxx.use1.cache.amazonaws.com # URL de endpoint de la console AWS
-    port: 6379
-    tags:
-      - cacheclusterid:replicaa-001 # ID du cluster Cache de la console AWS
+    # URL d'endpoint de la console AWS
+    - host: replica-001.xxxx.use1.cache.amazonaws.com
+      port: 6379
+      # Id du cluster Cache de la console AWS
+      tags:
+          - cacheclusterid:replicaa-001
 ```
 
-
 Redémarrez ensuite l'Agent : `sudo /etc/init.d/datadog-agent restart` (sous Linux).
-
 
 ##### Visualiser conjointement les métriques ElastiCache et Redis/Memcached
 
@@ -101,6 +100,7 @@ Voici un exemple de configuration d'un graphique. L'objectif de celui-ci consist
 {{< img src="integrations/awselasticache/elasticache4.png" alt="Métriques Cache et ElastiCache" >}}
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "amazon_elasticache" >}}
 
@@ -108,21 +108,23 @@ Voici un exemple de configuration d'un graphique. L'objectif de celui-ci consist
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
 ### Événements
+
 L'intégration AWS ElastiCache comprend des événements pour le cluster, des groupes de sécurité de cache et des groupes de paramètres de cache. Vous trouverez ci-dessous des exemples d'événements :
 
 {{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Événements AWS Elasticache" >}}
 
-
 ### Checks de service
+
 L'intégration AWS ElastiCache n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 ## Pour aller plus loin
 
-* [Surveiller les métriques de performance ElastiCache avec Redis ou Memcached][11]  
-* [Recueillir des métriques ElastiCache et ses métriques Redis/Memcached][12]  
+- [Surveiller les métriques de performance ElastiCache avec Redis ou Memcached][11]  
+- [Recueillir des métriques ElastiCache et ses métriques Redis/Memcached][12]  
 
 [1]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
 [2]: https://www.coursera.org

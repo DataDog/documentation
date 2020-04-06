@@ -49,24 +49,24 @@ To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog
 
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][4] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
 
-Next, enable the Datadog features that you'd like to use: [APM][7], [Logs][8]
+Next, enable the Datadog features that you'd like to use: [APM][5], [Logs][6]
 
-**Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][5].
+**Note**: For a full list of the Datadog chart's configurable parameters and their default values, refer to the [Datadog Helm repository README][7].
 
 ### Upgrading from chart v1.x
 
 The Datadog chart has been refactored in v2.0 to regroup the `values.yaml` parameters in a more logical way.
 
-If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][6] to map your previous settings with the new fields.
+If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][8] to map your previous settings with the new fields.
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://github.com/helm/charts/tree/master/stable/kube-state-metrics
-[5]: https://github.com/helm/charts/tree/master/stable/datadog
-[6]: https://github.com/helm/charts/blob/master/stable/datadog/docs/Migration_1.x_to_2.x.md
-[7]: /agent/kubernetes/apm?tab=helm
-[8]: /agent/kubernetes/log?tab=helm
+[5]: /agent/kubernetes/apm?tab=helm
+[6]: /agent/kubernetes/log?tab=helm
+[7]: https://github.com/helm/charts/tree/master/stable/datadog
+[8]: https://github.com/helm/charts/blob/master/stable/datadog/docs/Migration_1.x_to_2.x.md
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -146,6 +146,13 @@ To install the Datadog Agent on your Kubernetes cluster:
 [11]: /infrastructure/process/?tab=kubernetes#installation
 [12]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [13]: /agent/kubernetes/data_collected/#kube-state-metrics
+{{% /tab %}}
+{{% tab "Operator" %}}
+[The Datadog Operator][2] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options. To get started, check out the [Getting Started page][1] in the [Datadog Operator repo][2] or install the operator from the [OperatorHub.io Datadog Operator page][3].
+
+[1]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
+[2]: https://github.com/DataDog/datadog-operator
+[3]: https://operatorhub.io/operator/datadog-operator
 {{% /tab %}}
 {{< /tabs >}}
 

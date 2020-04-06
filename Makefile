@@ -47,6 +47,7 @@ clean-integrations:  ## Remove built integrations files.
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
 	    -a -not -name '*.ja.yaml' \
+		-a -not -name 'docker_daemon.yaml' \
 	    -exec rm -rf {} \; ;fi
 	@if [ -d data/service_checks ]; then \
 		find ./data/service_checks -type f -maxdepth 1 \
@@ -95,6 +96,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/developers/amazon_cloudformation.md ;fi
 	@if [ content/en/logs/log_collection/android.md ]; then \
 	rm -f content/en/logs/log_collection/android.md ;fi
+	@if [ content/en/logs/log_collection/ios.md ]; then \
+	rm -f content/en/logs/log_collection/ios.md ;fi
 	@if [ content/en/tracing/setup/android.md ]; then \
 	rm -f content/en/tracing/setup/android.md ;fi
 

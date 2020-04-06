@@ -32,9 +32,9 @@ supported_os:
 
 Suivez les métriques associées aux requêtes de vos clusters Bonsai pour :
 
-* Visualiser les performances de vos clusters
-* Corréler les performances de recherche avec celles des applications
-* Créer des alertes
+- Visualiser les performances de vos clusters
+- Corréler les performances de recherche avec celles des applications
+- Créer des alertes
 
 ![snapshot][1]
 
@@ -42,17 +42,15 @@ Suivez les métriques associées aux requêtes de vos clusters Bonsai pour :
 
 Pour intégrer votre cluster à Datadog, vous devez envoyer votre clé d'API à l'application Bonsai.
 
-
 ### Étape 1 : Obtenez votre clé d'API
 
 Dans Datadog, accédez à [Integrations --> API][2] et copiez votre clé d'API.
 
 ![snapshot][3]
 
-
 ### Étape 2 : Envoyez votre clé d'API
 
-Accédez à [Bonsai --> Clusters][4] et cliquez sur le cluster que vous souhaitez intégrer. Accédez à l'onglet Manage et faites défiler jusqu'à atteindre le bas de la page.
+Accédez à [Bonsai --> Clusters][4] et cliquez sur le cluster que vous souhaitez intégrer. Sélectionnez l'onglet Manage et faites défiler jusqu'à atteindre le bas de la page.
 
 Collez votre clé d'API dans la section « Datadog Integration » et cliquez sur « Activate Datadog ».
 
@@ -74,7 +72,7 @@ Après quelques minutes, les métriques liées aux requêtes sont disponibles da
 
 Les métriques sont taguées en fonction de leur cluster, vous permettant ainsi de les filtrer. Voici à quoi ressemblent les tags :
 
-```
+```text
 cluster:my-cluster-slug
 ```
 
@@ -93,7 +91,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 ## Pour aller plus loin
 
 Consultez [notre blog][9] pour en savoir plus sur la surveillance d'infrastructure et sur toutes les autres intégrations Datadog disponibles.
-
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/snapshot.png
 [2]: https://app.datadoghq.com/account/settings#api

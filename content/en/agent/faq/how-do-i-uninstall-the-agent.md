@@ -166,8 +166,6 @@ This method removes the Agent, as well as all Agent configuration files.
 
 ### Windows
 
-It's important to uninstall the Agent with the **original account** used to install the Agent, otherwise it may not be cleanly removed.
-
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
@@ -183,6 +181,8 @@ Both methods remove the Agent, but they do not remove the `C:\ProgramData\Datado
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
+
+**Note**: For versions of the agent less than 5.12.0 on Windows, It's important to uninstall the Agent with the **original account** used to install the Agent, otherwise it may not be cleanly removed.
 
 Uninstall the Agent using Add/Remove Programs.
 

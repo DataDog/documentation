@@ -20,15 +20,15 @@ Affichez un flux de logs correspondant à la requête de votre choix :
 
 ### Configuration
 
-{{< img src="dashboards/widgets/log_stream/log_stream_setup.png" alt="Configuration du flux de logs" style="width:80%;">}}
+{{< img src="dashboards/widgets/log_stream/log_stream_setup.gif" alt="Configuration du flux de logs"  style="width:80%;">}}
 
-Saisissez une [requête de logs][1] pour filtrer le flux de logs.
+Saisissez une [requête de log][1] pour filtrer le flux de logs.
 
 ### Options
 
 #### Colonnes
 
-Affichez les valeurs de vos [facettes][2] et [mesures][3] avec des colonnes.
+Affichez les valeurs de vos [facettes][2] et [mesures][2] avec des colonnes.
 
 #### Intervalle global
 
@@ -44,7 +44,7 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][4] utilisé pour le widget Flux de logs est le suivant :
+Le [schéma JSON][3] utilisé pour le widget Flux de logs est le suivant :
 
 ```text
 LOG_STREAM_SCHEMA = {
@@ -75,14 +75,13 @@ LOG_STREAM_SCHEMA = {
 | `title`       | chaîne | non       | Titre du widget.                                                                                                        |
 | `title_size`  | chaîne | non       | Taille du titre.                                                                                                          |
 | `title_align` | chaîne | non       | Définit comment aligner le titre. Valeurs disponibles : `center`, `left` ou `right`.                                                 |
-| `time`        | objet | non       | Définit l'intervalle de temps affiché sur le widget. Consultez la [documentation relative au schéma JSON du temps][5] pour apprendre à élaborer le `TIME_SCHEMA` |
+| `time`        | objet | non       | Définit l'intervalle de temps affiché sur le widget. Consultez la [documentation relative au schéma JSON d'intervalle][5] pour apprendre à élaborer le `TIME_SCHEMA` |
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/logs/explorer/search
-[2]: /fr/logs/explorer/?tab=facets#setup
-[3]: /fr/logs/explorer/?tab=measures#setup
-[4]: /fr/dashboards/graphing_json/widget_json
-[5]: /fr/dashboards/graphing_json/widget_json/#time-schema
+[2]: /fr/logs/explorer/facets
+[3]: /fr/dashboards/graphing_json/widget_json
+[4]: /fr/dashboards/graphing_json/widget_json/#time-schema

@@ -15,9 +15,11 @@ Grâce aux vues historiques, les équipes réintègrent des événements de log 
 
 {{< img src="logs/archives/log_archives_rehydrate_historical.png" alt="Vues historiques"  style="width:75%;">}}
 
+Les filtres d'exclusion d'index ne s'appliquent pas aux vues historiques. Vous n'avez donc pas besoin de modifier vos filtres d'exclusion lorsque vous réintégrez du contenu depuis les archives.
+
 ### Ajouter des vues historiques
 
-1. **Sélectionnez l'archive** depuis laquelle vous souhaitez réintégrer les événements de log. Seules les archives [configurées pour utiliser la délégation de rôle](#autorisations) peuvent être réintégrées.
+1. **Sélectionnez l'archive** depuis laquelle vous souhaitez réintégrer les événements de log. Seules les archives [configurées pour utiliser la délégation de rôles](#autorisations) peuvent être réintégrées.
 
 2. **Choisissez la période** pour laquelle vous souhaitez réintégrer des événements de log.
 
@@ -43,9 +45,9 @@ Une fois le contenu réintégré, la vue historique est considérée comme activ
 
 #### Depuis le Log Explorer
 
-Les équipes peuvent aussi accéder à la vue historique directement dans le Log Explorer, à partir du sélecteur d'index. Lorsque vous sélectionnez une vue historique, une fenêtre contextuelle s'ouvre pour définir l'intervalle pertinent pour la vue historique sélectionnée.
+Les équipes peuvent aussi accéder à la vue historique directement dans le Log Explorer, à partir du sélecteur d'index. {{ if .Inner }}Lorsque vous sélectionnez une vue historique, une fenêtre contextuelle s'ouvre pour définir l'intervalle pertinent.{{ end }}
 
-{{< img src="logs/archives/log_archives_rehydrate_explorer.mp4" alt="Log Explorer" video="true"  width="75%">}}
+{{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="75%">}}
 
 ### Supprimer des vues historiques
 
@@ -96,15 +98,25 @@ Afin de réintégrer des événements de log depuis vos archives, Datadog utilis
 }
 ```
 
-#### Ajout de la délégation de rôle aux archives S3
+#### Ajout de la délégation de rôles aux archives S3
 
 Datadog prend uniquement en charge la réintégration des archives qui ont été configurées pour utiliser la délégation de rôle afin d'autoriser l'accès. Après avoir modifié votre rôle IAM Datadog afin d'inclure la stratégie IAM ci-dessus, vérifiez que chaque archive de votre [page de configuration des archives][3] possède la bonne combinaison de compte AWS et de rôle.
 
-{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Ajout de la délégation de rôle aux archives S3"  style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Ajout de la délégation de rôles aux archives S3"  style="width:75%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /fr/integrations/amazon_web_services/?tab=allpermissions#installation
 [3]: https://app.datadoghq.com/logs/pipelines/archives
+{{% /tab %}}
+
+{{% tab "Stockage Azure" %}}
+
+Datadog utilise un groupe Azure AD avec le rôle Storage Blob Data Contributor restreint au compte de stockage de vos archives afin de réintégrer des événements de log. Vous pouvez accorder ce rôle à votre compte de service Datadog depuis la page Contrôle d'accès (IAM) de votre compte de stockage. Pour ce faire, [attribuez le rôle Storage Blob Data Contributor à votre app d'intégration Datadog][1].
+
+{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="La réintégration depuis Stockage Azure nécessite le rôle Storage Blob Data Contributor"  style="width:75%;">}}
+
+
+[1]: /fr/logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}

@@ -638,8 +638,8 @@ function getPathElement(){
         aPath = document.querySelectorAll('.side [data-path*="agent/guide"]')[0];
         maPath = document.querySelectorAll('header [data-path*="agent/guide"]')[0];
     } else if (path.includes('agent/guide')) {
-        aPath = document.querySelectorAll('.side [data-path*="agent/guide"]')[1];
-        maPath = document.querySelectorAll('header [data-path*="agent/guide"]')[1];
+        aPath = document.querySelector('.side [data-path*="agent/guide"]');
+        maPath = document.querySelector('header [data-path*="agent/guide"]');
     }
 
     if (path.includes('tracing/guide')) {
@@ -696,6 +696,12 @@ function getPathElement(){
         aPath = document.querySelector('.side [data-path*="developers/guide"]');
         maPath = document.querySelector('header [data-path*="developers/guide"]');
     }
+
+    if (path.includes('synthetics/guide')) {
+        aPath = document.querySelector('.side [data-path*="synthetics/guide"]');
+        maPath = document.querySelector('header [data-path*="synthetics/guide"]');
+    }
+
 
     // if url is domain + /integrations/**
     if ((`${replaceURL(domain) }/${ replacePath(path)}`).includes(`${replaceURL(domain)  }/integrations`)) {

@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "check": "couchdb.can_connect",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト", "インスタンス"],
+        "name": "Can Connect",
+        "description": "CouchDB インスタンスに ping した後のステータスを返します。収集した時点での応答ステータスに関する詳しい情報がチェックメッセージに記載されます。"
+    }
+]

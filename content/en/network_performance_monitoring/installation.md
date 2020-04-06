@@ -94,6 +94,9 @@ metadata:
     name: datadog-agent
     namespace: default
 spec:
+    selector:
+        matchLabels:
+            app: datadog-agent
     template:
         metadata:
             labels:
@@ -135,7 +138,7 @@ spec:
                                 fieldPath: status.hostIP
                       - name: DD_CRI_SOCKET_PATH
                         value: /host/var/run/docker.sock
-                      - name: DOCKER_HOST,
+                      - name: DOCKER_HOST
                         value: unix:///host/var/run/docker.sock
                   resources:
                       requests:

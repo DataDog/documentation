@@ -18,7 +18,7 @@ Profiling libraries are shipped within the following tracing language libraries.
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11, Oracle Java 11, and Zulu Java 8. All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
+The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
 1. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
 
@@ -76,7 +76,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 
      **Note**: Profiling is available in the `ddtrace` library for versions 0.35+.
 
-2. Add a valid [Datadog API key][2] in your environment variable: `DD_PROFILING_API_KEY`.
+2. Add a valid [Datadog API key][1] in your environment variable: `DD_PROFILING_API_KEY`.
 
 3. Set `env`, `service`, and `version` as Datadog tags in your environment variables.
 
@@ -90,7 +90,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
     import ddtrace.profile.auto
     ```
 
-5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][1].
+5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
 **Note**:
 
@@ -116,13 +116,13 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][2] to use when uploading profiles.                                         |
+| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][1] to use when uploading profiles.                                         |
 | `DD_PROFILING_TAGS`                              | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`.       |
 | `DD_SERVICE_NAME`                                | String        | The Datadog [service][3] name, which can be set here, or in `DD_PROFILING_TAGS`.                    |
 
 
-[1]: https://app.datadoghq.com/profiling
-[2]: /account_management/api-app-keys/#api-keys
+[1]: /account_management/api-app-keys/#api-keys
+[2]: https://app.datadoghq.com/profiling
 [3]: /tracing/visualization/#services
 {{% /tab %}}
 
