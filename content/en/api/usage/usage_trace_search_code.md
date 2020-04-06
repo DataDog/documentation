@@ -1,5 +1,5 @@
 ---
-title: Get hourly usage for Trace Search
+title: Get hourly usage for App Analytics
 type: apicode
 order: 35.6
 external_redirect: /api/#get-hourly-usage-for-app-analytics
