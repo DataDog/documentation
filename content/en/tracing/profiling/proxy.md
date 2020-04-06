@@ -29,11 +29,6 @@ Use the options below to configure your profiling libraries to send the collecte
 | `-Ddd.profiling.proxy.password` | PROFILING_PROXY_PASSWORD | Password used by your proxy                     |
 
 {{% /tab %}}
-{{% tab "Python" %}}
-
-<div class="alert alert-info">In development, will be soon avilable.</div>
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
