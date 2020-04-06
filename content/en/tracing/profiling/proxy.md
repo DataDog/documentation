@@ -7,18 +7,19 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog.'
 ---
 
-## Proxy Setup
+Profiles collected by the Datadog librairies are sent directly from your running application to Datadog. If your network configuration is restricted for outbound traffic use your proxy to redirect the profiles to Datadog.
 
-Profiles collected by Datadog are sent directly from your running application. If your network configuration restricted outbound traffic, proxy all Agent traffic through one or several hosts that have more permissive outbound policies.
+If setup, your proxy should point to the following Datadog profiles endpoints:
 
-The following domain need to be reachable by your proxy:
-- `https://intake.profile.datadoghq.com` if your are on our US site.
-- `https://intake.profile.datadoghq.eu` if you are on our EU site.
+- If you are on Datadog US site. `https://intake.profile.datadoghq.com`
+- If you are on Datadog EU site. `https://intake.profile.datadoghq.eu`
+
+## Librairies Proxy Setup
+
+Below are the configuration options to allow your application to send profiles to your proxy:
 
 {{< tabs >}}
 {{% tab "Java" %}}
-
-Below are the configuration options to allow your application to send profiles to your proxy:
 
 | Arguments                       | Environment variable      | Description                                       |
 | ------------------------------- | ------------------------- | ------------------------------------------------- |
@@ -26,7 +27,6 @@ Below are the configuration options to allow your application to send profiles t
 | `-Ddd.profiling.proxy.port`     | PROFILING_PROXY_PORT      | Port used by your proxy. Default port is `8080`   |
 | `-Ddd.profiling.proxy.username` | PROFILING_PROXY_USERNAME  | Username used by your proxy                       |
 | `-Ddd.profiling.proxy.password` | PROFILING_PROXY_PASSWORD  | Password used by your proxy                       |
-
 
 {{% /tab %}}
 
@@ -37,7 +37,6 @@ Below are the configuration options to allow your application to send profiles t
 {{% /tab %}}
 
 {{< /tabs >}}
-
 
 ## Further Reading
 
