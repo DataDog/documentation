@@ -1,5 +1,5 @@
 {
-  "GetAllDowntimes": {
+  "ListDowntimes": {
     "responses": {
       "200": {
         "json": {

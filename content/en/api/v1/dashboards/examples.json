@@ -1,5 +1,5 @@
 {
-  "GetAllDashboards": {
+  "ListDashboards": {
     "responses": {
       "200": {
         "json": {

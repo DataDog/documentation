@@ -1,5 +1,5 @@
 {
-  "GetAllActiveMetrics": {
+  "ListActiveMetrics": {
     "responses": {
       "200": {
         "json": {
@@ -46,7 +46,7 @@
       "html": ""
     }
   },
-  "EditMetricMetadata": {
+  "UpdateMetricMetadata": {
     "responses": {
       "200": {
         "json": {
@@ -126,7 +126,7 @@
       "html": ""
     }
   },
-  "SearchMetrics": {
+  "ListMetrics": {
     "responses": {
       "200": {
         "json": {
