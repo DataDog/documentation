@@ -1,15 +1,15 @@
-import com.datadog.api.v1.client.api.SLOApi;
+import com.datadog.api.v1.client.api.ServiceLevelObjectivesApi;
 
-public class SLOApiExample {
+public class ServiceLevelObjectivesApiExample {
 
     public static void main(String[] args) {
-        SLOApi apiInstance = new SLOApi();
+        ServiceLevelObjectivesApi apiInstance = new ServiceLevelObjectivesApi();
         String sloId = sloId_example; // String | The id of the service level objective.
         try {
             ServiceLevelObjectiveDeleted result = apiInstance.deleteSLO(sloId);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling SLOApi#deleteSLO");
+            System.err.println("Exception when calling ServiceLevelObjectivesApi#deleteSLO");
             e.printStackTrace();
         }
     }

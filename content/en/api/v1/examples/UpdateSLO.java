@@ -4,12 +4,13 @@ public class ServiceLevelObjectivesApiExample {
 
     public static void main(String[] args) {
         ServiceLevelObjectivesApi apiInstance = new ServiceLevelObjectivesApi();
-        map[String, array[SLOTimeframe]] body = ; // map[String, array[SLOTimeframe]] | 
+        String sloId = sloId_example; // String | The ID of the service level objective object.
+        ServiceLevelObjective body = ; // ServiceLevelObjective | 
         try {
-            ServiceLevelObjectivesBulkDeleted result = apiInstance.bulkPartialDeleteSLO(body);
+            ServiceLevelObjectiveListResponse result = apiInstance.updateSLO(sloId, body);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling ServiceLevelObjectivesApi#bulkPartialDeleteSLO");
+            System.err.println("Exception when calling ServiceLevelObjectivesApi#updateSLO");
             e.printStackTrace();
         }
     }
