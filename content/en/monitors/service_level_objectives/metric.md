@@ -55,4 +55,4 @@ in the description and tags you would like to associate with the SLO.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo
-[2]: https://app.datadoghq.com/slo/new/event
+[2]: https://app.datadoghq.com/slo/new/metric
