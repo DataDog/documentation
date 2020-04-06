@@ -100,6 +100,14 @@ Starting with Agent 7.17+, the Agent resolves IP’s to human-readable domain na
 
 **Note**: DNS resolution is supported for hosts where the system probe is running on the root network namespace, which is usually caused by running the system-probe in a container without using the host network.
 
+### pre-NAT IPs
+
+The Network Address Translation (NAT) is a tool used by Kubernetes and other systems to route traffic between containers. When investigating a specific dependency (for example, service to service), you can use the presence or absence of pre-NAT IPs to distinguish between Kubernetes-native services, which do their own routing, and services that rely on external clients for routing. This feature does not currently include resolution of NAT gateways.  
+
+To view pre-NAT and post-NAT IPs, use the _Show pre-NAT IPs_ toggle in the table settings. When this setting is toggled off, IPs shown in the Source IP and Dest IP columns are by default post-NAT IPs. In cases where you have multiple pre-NAT IPs for one post-NAT IP, the top 5 most common pre-NAT IPs will be displayed. `pre_nat.ip` is a tag like any other in the product, so you can use it to aggregate and filter traffic.
+
+{{< img src="network_performance_monitoring/network_page/prenat_ip.png" alt="pre-NAT IPs" >}}
+
 ## Table
 
 The network table breaks down the _Volume_, _Throughput_, _TCP Retransmits_, _Round-trip Time (RTT)_, and _RTT variance_ metrics between each _source_ and _destination_ defined by your query.

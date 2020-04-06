@@ -25,7 +25,7 @@ Log Indexes provide fine-grained control over your Log Management budget by allo
 
 You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][4], [dashboarding][5], and [monitoring][6].
 
-## Indexes
+## Multiple indexes
 
 By default, each account has a single index representing a monolithic set of all your logs. Datadog also offers multiple indexes if you require:
 
@@ -37,6 +37,14 @@ The Log Explorer supports [queries across multiple indexes][8].
 <div class="alert alert-info">
 <a href="/help">contact Datadog support</a> to enable multiple-indexes for your account.
 </div>
+
+### Add Indexes
+
+If multiple indexes is activated, use the "New Index" button to create a new index. 
+
+{{< img src="logs/indexes/add-index.png" alt="Add index"  style="width:70%;">}}
+
+**Note**: Index names must start with a letter and can only contain lowercase letters, numbers, or the '-' character.
 
 ## Indexes Filters
 

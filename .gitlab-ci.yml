@@ -137,7 +137,7 @@ index_internal_doc:
   environment: "live"
   image: registry.ddbuild.io/datadoc/webapp:staging-released
   dependencies:
-    - build_preview
+    - build_live
   only:
     - master
   except: [ tags, schedules ]

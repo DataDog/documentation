@@ -5,8 +5,8 @@ aliases:
   - /fr/real_user_monitoring/setup
 further_reading:
   - link: 'https://www.npmjs.com/package/@datadog/browser-rum'
-    tag: NPM
-    text: Paquet NPM datadog/browser-rum
+    tag: npm
+    text: package datadog/browser-rum npm
   - link: /real_user_monitoring/installation/advanced_configuration
     tag: Documentation
     text: Configuration avancée pour la collecte de données RUM
@@ -18,13 +18,13 @@ Pour configurer la solution Real User Monitoring (RUM) de Datadog :
 
 1. Sur la [page Real User Monitoring][1], cliquez sur le bouton **New Application**.
 2. Renseignez les informations sur votre application et cliquez sur **Generate Client Token**. Cette option permet de créer automatiquement un `clientToken` et un `applicationId` pour votre application.
-3. Configurez la bibliothèque RUM à partir des navigateurs de Datadog [via NPM](#configuration-via-npm) ou collez l'[extrait de code généré](#configuration-via-bundle) dans le tag head.
+3. Configurez le SDK RUM Datadog [via npm](#configuration-via-npm) ou collez l'[extrait de code généré](#configuration-via-bundle) dans le tag head.
 4. Déployez les modifications sur votre application. Une fois votre déploiement actif, Datadog commence à recueillir les événements depuis les navigateurs de vos utilisateurs.
 5. Visualisez les [données recueillies][2] sur les [dashboards prêt à l'emploi][3] de Datadog.
 
 **Remarque** : votre application affiche le statut « Pending » (en attente) sur la liste des applications tant que Datadog n'a pas encore reçu de données.
 
-## Configuration via NPM
+## Configuration via npm
 
 Après avoir ajouté [`@datadog/browser-rum`][4] à votre fichier `package.json`, lancez la bibliothèque avec :
 
@@ -35,10 +35,10 @@ Après avoir ajouté [`@datadog/browser-rum`][4] à votre fichier `package.json`
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
-  applicationId: '<ID_APPLICATION_DATADOG>',
-  clientToken: '<TOKEN_CLIENT_DATADOG>',
-  datacenter: 'us',
-  sampleRate: 100
+    applicationId: '<ID_APPLICATION_DATADOG>',
+    clientToken: '<TOKEN_CLIENT_DATADOG>',
+    datacenter: 'us',
+    sampleRate: 100,
 });
 ```
 
@@ -49,10 +49,10 @@ datadogRum.init({
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
-  applicationId: '<ID_APPLICATION_DATADOG>',
-  clientToken: '<TOKEN_CLIENT_DATADOG>',
-  datacenter: 'eu',
-  sampleRate: 100
+    applicationId: '<ID_APPLICATION_DATADOG>',
+    clientToken: '<TOKEN_CLIENT_DATADOG>',
+    datacenter: 'eu',
+    sampleRate: 100,
 });
 ```
 
@@ -68,15 +68,16 @@ Collez l'extrait de code généré dans le tag head (avant tous les autres tags 
 
 ```html
 <script
-  src="https://www.datadoghq-browser-agent.com/datadog-rum-us.js"
-  type="text/javascript">
-</script>
+    src="https://www.datadoghq-browser-agent.com/datadog-rum-us.js"
+    type="text/javascript"
+></script>
 <script>
-  window.DD_RUM && window.DD_RUM.init({
-    clientToken: '<TOKEN_CLIENT>',
-    applicationId: '<ID_APPLICATION>',
-    sampleRate: 100
-  });
+    window.DD_RUM &&
+        window.DD_RUM.init({
+            clientToken: '<TOEKN_CLIENT>',
+            applicationId: '<ID_APPLICATION>',
+            sampleRate: 100,
+        });
 </script>
 ```
 
@@ -85,32 +86,34 @@ Collez l'extrait de code généré dans le tag head (avant tous les autres tags 
 
 ```html
 <script
-  src="https://www.datadoghq-browser-agent.com/datadog-rum-eu.js"
-  type="text/javascript">
-</script>
+    src="https://www.datadoghq-browser-agent.com/datadog-rum-eu.js"
+    type="text/javascript"
+></script>
 <script>
-  window.DD_RUM && window.DD_RUM.init({
-    clientToken: '<TOKEN_CLIENT>',
-    applicationId: '<ID_APPLICATION>',
-    sampleRate: 100
-  });
+    window.DD_RUM &&
+        window.DD_RUM.init({
+            clientToken: '<TOKEN_CLIENT>',
+            applicationId: '<ID_APPLICATION>',
+            sampleRate: 100,
+        });
 </script>
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Remarque** : le check `window.DD_RUM` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
+**Remarque** : le check `window.DD_RUM` est utilisé pour éviter tout problème si le chargement du SDK RUM échoue.
 
 ## Paramètres de lancement
 
-| Paramètre            | Type   | Obligatoire | Valeur par défaut | Description                                                                                                  |
-|----------------------|--------|----------|---------|--------------------------------------------------------------------------------------------------------------|
-| `applicationId`      | Chaîne | Oui      | ``      | L'ID d'application RUM.                                                                                      |
-| `clientToken`        | Chaîne | Oui      | ``      | Un [token client Datadog][5].                                                                                 |
-| `datacenter`         | Chaîne | Oui      | `us`    | Le site Datadog associé à votre organisation. Choisissez `us` pour le site américain ou `eu` pour le site européen.                   |
-| `resourceSampleRate` | Numéro | Non       | `100`   | Le pourcentage de sessions à surveiller (avec collecte des ressources). Choisissez une valeur entre `100` (toutes les sessions) et `0` (aucune session).               |
-| `sampleRate`         | Numéro | Non       | `100`   | Le pourcentage de sessions à surveiller. Les événements RUM sont uniquement envoyés pour les sessions surveillées. Choisissez une valeur entre `100` (toutes les sessions) et `0` (aucune session). |
+| Paramètre            | Type    | Obligatoire | Valeur par défaut                           | Description                                                                                                  |
+| -------------------- | ------- | -------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `applicationId`      | Chaîne  | Oui      | `` | L'ID d'application RUM.      |
+| `clientToken`        | Chaîne  | Oui      | `` | Un [token client Datadog][5]. |
+| `datacenter`         | Chaîne  | Oui      | `us`                              | Le site Datadog associé à votre organisation. Choisissez `us` pour le site américain ou `eu` pour le site européen.                   |
+| `resourceSampleRate` | Numéro  | Non       | `100`                             | Le pourcentage de sessions à surveiller (avec collecte des ressources). Choisissez une valeur entre `100` (toutes les sessions) et `0` (aucune session).               |
+| `sampleRate`         | Numéro  | Non       | `100`                             | Le pourcentage de sessions à surveiller. Les événements RUM sont uniquement envoyés pour les sessions surveillées. Choisissez une valeur entre `100` (toutes les sessions) et `0` (aucune session). |
+| `silentMultipleInit` | Booléen | Non       | `false`                           | L'initialisation échoue sans envoyer d'alerte si la fonction RUM de Datadog est déjà initialisée sur la page.                            |
 
 ## Pour aller plus loin
 

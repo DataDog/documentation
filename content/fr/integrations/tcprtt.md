@@ -5,17 +5,19 @@ kind: integration
 newhlevel: true
 is_public: true
 public_title: Intégration Datadog/TCP RTT
-short_description: "Surveillez la connectivité TCP vers les hosts à distance."
+short_description: 'Surveillez la connectivité TCP vers les hosts à distance.'
 categories:
-- network
+    - network
 ddtype: check
-dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcprtt.md"]
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcprtt.md']
 ---
+
 ## Présentation
 
 Le check TCP RTT transmet les durées d'aller-retour entre le host sur lequel l'Agent s'exécute et tout host avec lequel il communique. Ce check est passif et ne transmet que les durées RTT pour les paquets envoyés et reçus à l'extérieur du check. Le check n'envoie aucun paquet.
 
-Ce check est uniquement fourni avec les paquets 64 bits DEB et RPM de l'Agent de Datadog.
+Ce check est uniquement fourni avec les paquets 64 bits DEB et RPM de l'Agent v5 de Datadog. Pour découvrir comment créer le binaire go-metro pour d'autres versions de l'Agent, consultez [la section relative à l'utilisation de Datadog avec go-metro][1] (en anglais).
 
 ## Configuration
 
@@ -49,22 +51,22 @@ Modifiez le fichier `go-metro.yaml` dans le dossier `conf.d` de votre Agent. Voi
 
 ```yaml
 init_config:
-  snaplen: 512
-  idle_ttl: 300
-  exp_ttl: 60
-  statsd_ip: 127.0.0.1
-  statsd_port: 8125
-  log_to_file: true
-  log_level: info
+    snaplen: 512
+    idle_ttl: 300
+    exp_ttl: 60
+    statsd_ip: 127.0.0.1
+    statsd_port: 8125
+    log_to_file: true
+    log_level: info
 
 instances:
-  - interface: eth0
-    tags:
-      - env:prod
-    ips:
-      - 45.33.125.153
-    hosts:
-      - app.datadoghq.com
+    - interface: eth0
+      tags:
+          - env:prod
+      ips:
+          - 45.33.125.153
+      hosts:
+          - app.datadoghq.com
 ```
 
 {{< insert-example-links conf="go-metro" check="none" >}}
@@ -97,3 +99,4 @@ Il s'agit d'un check passif. Ainsi, les métriques sont uniquement transmises si
 ### Métriques
 
 {{< get-metrics-from-git "system" "system.net.tcp.rtt" >}}
+[1]: https://github.com/DataDog/go-metro#usage

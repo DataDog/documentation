@@ -347,7 +347,7 @@ Some options have moved from `docker_daemon.yaml` to the main `datadog.yaml`:
 * `exclude_pause_container` was added to exclude pause containers on Kubernetes and Openshift (defaults to `true`).
 
 [1]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
-[2]: /agent/autodiscovery/tag/#docker
+[2]: /agent/docker/tag/
 [3]: /agent/autodiscovery/management
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -383,7 +383,7 @@ The following options and tags are deprecated:
 [2]: /integrations/kube_apiserver_metrics
 [3]: /help
 [4]: /agent/kubernetes/
-[5]: /agent/autodiscovery/tag/#extract-node-labels-as-tags
+[5]: /agent/kubernetes/tag/#extract-node-labels-as-tags
 {{% /tab %}}
 {{% tab "JMX" %}}
 

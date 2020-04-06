@@ -270,7 +270,7 @@ Il en va de même pour le dossier `/checks.d`. Tous les fichiers Python du dossi
 [15]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [16]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [17]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[18]: /fr/agent/autodiscovery/tag/?tab=containerizedagent
+[18]: /fr/agent/docker/tag/?tab=containerizedagent
 [19]: /fr/agent/guide/secrets-management/?tab=linux
 [20]: /fr/agent/autodiscovery/management/?tab=containerizedagent
 [21]: /fr/integrations/system/#metrics

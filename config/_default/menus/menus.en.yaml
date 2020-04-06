@@ -212,16 +212,21 @@ main:
     url: agent/docker/log/
     parent: "agent_docker"
     weight: 203
+  - name: Tag extraction
+    identifier: "agent_docker_tag"
+    url: agent/docker/tag/
+    parent: "agent_docker"
+    weight: 204
   - name: "Prometheus"
     url: "agent/docker/prometheus/"
     parent: "agent_docker"
     identifier: "agent_docker_prometheus"
-    weight: 204
+    weight: 205
   - name: "Data Collected"
     url: "agent/docker/data_collected/"
     parent: "agent_docker"
     identifier: "agent_docker_data_collected"
-    weight: 205
+    weight: 206
 
   ## AGENT - Kubernetes
 
@@ -245,16 +250,21 @@ main:
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_integrations"
     weight: 303
+  - name: "Tag extraction"
+    url: "agent/kubernetes/tag/"
+    parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_tag"
+    weight: 304
   - name: "Prometheus"
     url: "agent/kubernetes/prometheus/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_prometheus"
-    weight: 304
+    weight: 305
   - name: "Data collected"
     url: "agent/kubernetes/data_collected/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_data_collected"
-    weight: 305
+    weight: 306
 
   ## AGENT - Datadog Cluster Agent
 
@@ -334,18 +344,14 @@ main:
     url: "agent/autodiscovery/template_variables/"
     parent: "agent_autodiscovery"
     weight: 504
-  - name: "Tag Extraction"
-    url: "agent/autodiscovery/tag/"
-    parent: "agent_autodiscovery"
-    weight: 505
   - name: "Discovery Management"
     url: "agent/autodiscovery/management/"
     parent: "agent_autodiscovery"
-    weight: 506
+    weight: 505
   - name: "Troubleshooting"
     url: "agent/autodiscovery/troubleshooting/"
     parent: "agent_autodiscovery"
-    weight: 509
+    weight: 506
 
   ## AGENT - LOGS
 
@@ -1163,44 +1169,49 @@ main:
     url: "logs/log_collection/android/"
     parent: "log_collection"
     weight: 102
+  - name: "iOS"
+    identifier: "log_ios"
+    url: "logs/log_collection/ios/"
+    parent: "log_collection"
+    weight: 103
   - name: "Csharp"
     url: "logs/log_collection/csharp/"
     parent: "log_collection"
-    weight: 103
+    weight: 104
   - name: "Go"
     identifier: "log_go"
     url: "logs/log_collection/go/"
     parent: "log_collection"
-    weight: 104
+    weight: 105
   - name: "Java"
     url: "logs/log_collection/java/"
     parent: "log_collection"
     identifier: "log_collection_java"
-    weight: 105
+    weight: 106
   - name: "Nodejs"
     url: "logs/log_collection/nodejs/"
     parent: "log_collection"
-    weight: 106
+    weight: 107
   - name: "PHP"
     identifier: "log_php"
     url: "logs/log_collection/php/"
     parent: "log_collection"
-    weight: 107
+    weight: 108
   - name: "Python"
     identifier: "log_python"
     url: "logs/log_collection/python/"
     parent: "log_collection"
-    weight: 108
+    weight: 109
   - name: "Ruby"
     url: "logs/log_collection/ruby/"
     parent: "log_collection"
     identifier: "log_collection_ruby"
-    weight: 109
+    weight: 110
   - name: "Other Integrations"
     url: "integrations/#cat-log-collection"
     identifier: "other_integrations"
     parent: "log_collection"
-    weight: 110
+    weight: 111
 
   ## LOGS - Processing
 
