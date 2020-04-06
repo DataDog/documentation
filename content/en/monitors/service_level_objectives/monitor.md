@@ -10,8 +10,7 @@ further_reading:
 
 ## Overview
 
-Select a monitor-based source if you want to build your SLO based on existing or new Datadog monitors. For more information about monitors, see the [Monitor documentation][1]. Monitor-based SLOs are useful for a time-based stream of data where you are differentiating time of good behavior vs bad behavior.
-Using the sum of the good time divided by the sum of total time provides a Service Level Indicator (or SLI).
+Select a monitor-based source if you want to build your SLO based on existing or new Datadog monitors. For more information about monitors, see the [Monitor documentation][1]. Monitor-based SLOs are useful for a time-based stream of data where you are differentiating time of good behavior vs bad behavior. Using the sum of the good time divided by the sum of total time provides a Service Level Indicator (or SLI).
 
 ## Setup
 
@@ -31,9 +30,7 @@ To start, you need to be using Datadog monitors. To set up a new monitor, go to 
 - synthetics
 - service checks (beta)
 
-**Example:** You might be tracking the uptime of a physical device. You have already configured a metric monitor on `host:foo` using
-a custom metric. This monitor might also ping your on-call team if it's no longer reachable. To avoid burnout you want to
-track how often this host is down.
+**Example:** You might be tracking the uptime of a physical device. You have already configured a metric monitor on `host:foo` using a custom metric. This monitor might also ping your on-call team if it's no longer reachable. To avoid burnout you want to track how often this host is down.
 
 ### Set your SLO targets
 
@@ -41,13 +38,11 @@ SLO targets are the stat you use to measure uptime success.
 
 First select your target value, example: `95% of all HTTP requests should be "good" over the last 7 days`.
 
-You can optionally include a warning value that is greater than the target value to indicate when you are approaching
-an SLO breach.
+You can optionally include a warning value that is greater than the target value to indicate when you are approaching an SLO breach.
 
 ### Identify this indicator
 
-Here we add contextual information about the purpose of the SLO, including any related information
-in the description and tags you would like to associate with the SLO.
+Here we add contextual information about the purpose of the SLO, including any related information in the description and tags you would like to associate with the SLO.
 
 ### Underlying monitor and SLO histories
 
