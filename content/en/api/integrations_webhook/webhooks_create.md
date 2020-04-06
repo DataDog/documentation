@@ -5,7 +5,7 @@ order: 21.2
 external_redirect: /api/#create-a-webhook-for-webhooks-integration
 ---
 
-## Create a Webhooks Integration
+## Create a Webhook for Webhooks Integration
 
 Creates an endpoint with the name `<WEBHOOK_NAME>`.
 
