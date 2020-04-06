@@ -8,6 +8,5 @@ curl -v -X PUT \
 -H "DD-APPLICATION-KEY: ${app_key}" \
 "https://api.datadoghq.com/api/v1/webhooks/configuration/webhooks/<CUSTOM_VARIABLE_NAME>" \
 -d '{
-    "name": "<NEW_CUSTOM_VARIABLE_NAME>",
-    "is_secret": true,
+    "value": "<NEW_CUSTOM_VARIABLE_VALUE>",
 }'

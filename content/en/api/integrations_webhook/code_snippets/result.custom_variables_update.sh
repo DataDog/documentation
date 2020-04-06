@@ -1,5 +1,5 @@
 {
-    "name": <NEW_CUSTOM_VARIABLE_NAME>,
-    "value": null
-    "is_secret": true
+    "name": "<CUSTOM_VARIABLE_NAME>",
+    "value": "<NEW_CUSTOM_VARIABLE_VALUE>"
+    "is_secret": false
 }
