@@ -33,11 +33,12 @@ The PHP APM tracer sends trace data through the Datadog Agent.
 
 [Install and configure the Datadog Agent][3]. See the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
 
-Make sure the Agent has **[APM enabled][3]**.
+For Agent version [7.18.0][6] and above APM is enabled by default in all environment without further action.
+If you are running an older version of the agent, make sure the Agent has **[APM enabled][3]**.
 
 ### Install the extension
 
-Install the PHP extension using one of the [precompiled packages for supported distributions][6].
+Install the PHP extension using one of the [precompiled packages for supported distributions][7].
 
 Once downloaded, install the package with one of the commands below.
 
@@ -58,17 +59,17 @@ The extension will be installed for the default PHP version. To install the exte
 export DD_TRACE_PHP_BIN=$(which php-fpm7)
 ```
 
-Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][7] to see the traces.
+Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][8] to see the traces.
 
-**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [run the dd-doctor.php diagnostic script][8] from the host machine to help identify any issues.
+**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [run the dd-doctor.php diagnostic script][9] from the host machine to help identify any issues.
 
-If you can't find your distribution, you can [manually install][9] the PHP extension.
+If you can't find your distribution, you can [manually install][10] the PHP extension.
 
 ## Automatic Instrumentation
 
-Tracing is automatically instrumented by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
+Tracing is automatically enabled by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
 
-Even if Datadog does not officially support your web framework, you may not need any manual instrumentation. Datadog records generic web requests and creates generic traces for them. If you use one of the supported frameworks, however, Datadog sets more relevant metadata, which makes it easier to navigate through your services.
+We support all web framework out of the box. For specific web frameworks, listed below, we provide even more internal details automatically for you.
 
 Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods in order to trace them. The PHP tracer supports automatic instrumentation for [several libraries](#library-compatibility).
 
@@ -87,7 +88,7 @@ Configure your application level tracers to submit traces to a custom Agent host
 
 The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-See [tracer configuration][10] for more information on how to set these variables.
+See [tracer configuration][11] for more information on how to set these variables.
 
 ## Compatibility
 
@@ -115,7 +116,12 @@ PHP APM supports the following SAPI's:
 
 #### Web Framework Compatibility
 
-If the web framework that you use is not listed below, you can still see traces for your web requests in the UI. However, some metadata and spans that are very specific to that particular web framework may not display.
+By default we **support all web frameworks** out of the box. This means that you will be able to see traces which
+include spans for all the libraries we support, e.g. database and http clients.
+
+For an ever growing number of web frameworks we provide even more visibility into the framework internals.
+
+_Frameworks with enanched visibility_
 
 | Module         | Versions      | Support Type    |
 |:---------------|:--------------|:----------------|
@@ -135,7 +141,15 @@ If the web framework that you use is not listed below, you can still see traces 
 | Slim           | 2.x           | _Coming Soon_   |
 | Yii            | 1.1           | _Coming Soon_   |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+_Restrictions for specific supported web frameworks_
+
+| Module         | Versions      | Support Type    |
+|:---------------|:--------------|:----------------|
+| CodeIgniter    | 2.x           | PHP 7+          |
+| WordPress      | 4.x           | PHP 7+          |
+
+
+Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][12] for help.
 
 #### CLI Library Compatibility
 
@@ -147,7 +161,7 @@ Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI s
 | Laravel Artisan | 5.x      | Fully Supported |
 | Symfony Console |          | _Coming Soon_   |
 
-Don’t see your desired CLI library? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+Don’t see your desired CLI library? Datadog is continually adding additional support. Check with the [Datadog team][12] for help.
 
 #### Datastore Compatibility
 
@@ -169,7 +183,7 @@ Don’t see your desired CLI library? Datadog is continually adding additional s
 | PHPredis                         | 4                          | _Coming Soon_   |
 | Solarium                         | 4.2                        | _Coming Soon_   |
 
-Don’t see your desired datastores? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+Don’t see your desired datastores? Datadog is continually adding additional support. Check with the [Datadog team][12] for help.
 
 #### Library Compatibility
 
@@ -181,7 +195,7 @@ Don’t see your desired datastores? Datadog is continually adding additional su
 | Beanstalkd |                       | _Coming Soon_   |
 | ReactPHP   |                       | _Coming Soon_   |
 
-Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][11] for help.
+Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][12] for help.
 
 ## Configuration
 
@@ -191,7 +205,14 @@ The PHP tracer can be configured using environment variables.
 
 ### Apache
 
-Set using [`SetEnv`][12] from the server config, virtual host, directory, or **.htaccess** file.
+If you are using Apache with php-fpm, you can use the `env` directory into your `www.conf` configuration file to configure the php tracer. E.g.
+
+```
+env[DD_AGENT_HOST] = $FROM_HOST_ENV
+env[DD_TRACE_DEBUG] = true
+```
+
+Alternatively, you can use [`SetEnv`][13] from the server config, virtual host, directory, or **.htaccess** file.
 
 ```text
 SetEnv DD_TRACE_DEBUG true
@@ -199,7 +220,14 @@ SetEnv DD_TRACE_DEBUG true
 
 ### NGINX
 
-Set using [`fastcgi_param`][13] from the `http`, `server`, or `location` contexts.
+You can use the `env` directory in the php-fpm's `www.conf` file. E.g.
+
+```
+env[DD_AGENT_HOST] = $FROM_HOST_ENV
+env[DD_TRACE_DEBUG] = true
+```
+
+Alternatively you can use [`fastcgi_param`][14] from the `http`, `server`, or `location` contexts.
 
 ```text
 fastcgi_param DD_TRACE_DEBUG true;
@@ -244,11 +272,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 
 #### Map Resource Names To Normalized URI
 
-<div class="alert alert-warning">
-This functionality is in public beta. For assistance, contact <a href="/help">Datadog Support</a>.
-</div>
-
-When `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=true`, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
+By default, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
 
 | HTTP Request                       | Resource Name |
 |:-----------------------------------|:--------------|
@@ -263,6 +287,8 @@ Numeric IDs, UUIDs (with and without dashes), and 32-to-512-bit hexadecimal hash
 | `/widget/b7a992e0-3300-4030-8617-84553b11c993` | `GET /widget/?`    |
 | `/api/v2/b7a992e033004030861784553b11c993/123` | `GET /api/v2/?/?`  |
 | `/book/0dbf3596`                               | `GET /book/?`      |
+
+If you prefer to turn this funcitnality OFF you can use `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=false`.
 
 ##### Custom URL-To-Resource Mapping
 
@@ -287,7 +313,7 @@ The `$*` wildcard matches without replacement.
 
 ## Upgrading
 
-To upgrade the PHP tracer, [download the latest release][6] and follow the same steps as [installing the extension](#install-the-extension).
+To upgrade the PHP tracer, [download the latest release][7] and follow the same steps as [installing the extension](#install-the-extension).
 
 ## Further Reading
 
@@ -298,11 +324,12 @@ To upgrade the PHP tracer, [download the latest release][6] and follow the same 
 [3]: /tracing/send_traces
 [4]: /tracing/setup/docker
 [5]: /agent/kubernetes/apm/
-[6]: https://github.com/DataDog/dd-trace-php/releases/latest
-[7]: https://app.datadoghq.com/apm/services
-[8]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
-[9]: /tracing/faq/php-tracer-manual-installation
-[10]: /tracing/setup/php/#environment-variable-configuration
-[11]: /help
-[12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
+[6]: https://github.com/DataDog/datadog-agent/releases/tag/7.18.0
+[7]: https://github.com/DataDog/dd-trace-php/releases/latest
+[8]: https://app.datadoghq.com/apm/services
+[9]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
+[10]: /tracing/faq/php-tracer-manual-installation
+[11]: /tracing/setup/php/#environment-variable-configuration
+[12]: /help
+[13]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[14]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param
