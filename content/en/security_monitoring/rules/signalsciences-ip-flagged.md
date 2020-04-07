@@ -4,7 +4,7 @@ kind: documentation
 type: security_rules
 disable_edit: true
 src_link: https://docs.datadoghq.com/integrations/sigsci/
-src_img: /images/integrations_logos/sigsci.png
+src_img: /images/integrations_logos/sigsci_sm.png
 source: signal_sciences
 
 ---

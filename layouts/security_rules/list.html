@@ -17,7 +17,7 @@
                                 <img src="{{.Site.Params.img_url}}{{ .Params.src_img }}?fit=auto&w=40" width="40" />
                             {{ end }}
                         </div>
-                        <div class="d-inline font-semibold ml-1">{{ title $v.Key }}</div>
+                        <div class="d-inline font-semibold ml-1">{{ title $v.Key | humanize | title }}</div>
                         <div class="rule-list__arrow">></div>
                     </div>
                     <div class="group-{{ .Key }} mb-2 ml-2 d-none">
