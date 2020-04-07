@@ -16,6 +16,8 @@
         "build:hugo:preview": "npm run build:hugo -- -D -F --environment preview",
         "build:webpack": "NODE_ENV=production webpack --config webpack.prod.js",
         "build:webpack:preview": "NODE_ENV=preview webpack --config webpack.prod.js",
+        "deploy:previewAssets": "./node_modules/.bin/hugo deploy --target previewAssets -e preview --maxDeletes -1 --log --verbose --dryRun",
+        "deploy:preview": "./node_modules/.bin/hugo deploy --target preview -e preview --maxDeletes -1 --invalidateCDN --log --verbose --debug --dryRun",
         "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true"
     },
     "repository": {

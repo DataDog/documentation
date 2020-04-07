@@ -30,3 +30,5 @@ markup:
 
 # so we can access images as resources
 assetDir: "static"
+
+publishDir: "./public"
