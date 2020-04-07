@@ -1,5 +1,5 @@
 {
-  "GetAllAPIKeys": {
+  "ListAPIKeys": {
     "responses": {
       "200": {
         "json": {
@@ -131,7 +131,7 @@
       "html": ""
     }
   },
-  "EditAPIKey": {
+  "UpdateAPIKey": {
     "responses": {
       "200": {
         "json": {
@@ -168,7 +168,7 @@
       "html": "\n  <div class=\" schema-table row\">\n    <div class=\"col-12 column\">\n      <div class=\"row\">\n        <div class=\"col-4 pl-0\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">created</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p><p>Date of creation of the API key.</p>\n</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">created_by</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p><p>Datadog user handle that created the API key.</p>\n</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">key</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string <span class=\"read-only\">&#127361;</span></p></div>\n            <div class=\"col-6\"><p><p>API key.</p>\n</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n      <div class=\"row  \">\n        <div class=\"col-12\">\n          <div class=\"row first-row\">\n            \n    <div class=\"col-4 pl-0\">\n      <p class=\"key\">name</p>\n    </div>\n  \n            <div class=\"col-2\"><p>string</p></div>\n            <div class=\"col-6\"><p><p>Name of your API key.</p>\n</p></div>\n          </div>\n          \n        </div>\n      </div>\n      \n    </div>  \n  </div>"
     }
   },
-  "GetAllApplicationKeys": {
+  "ListApplicationKeys": {
     "responses": {
       "200": {
         "json": {
@@ -298,7 +298,7 @@
       "html": ""
     }
   },
-  "EditApplicationKey": {
+  "UpdateApplicationKey": {
     "responses": {
       "200": {
         "json": {

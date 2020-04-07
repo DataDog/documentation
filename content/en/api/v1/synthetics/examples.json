@@ -1,5 +1,5 @@
 {
-  "GetAllDevices": {
+  "ListDevices": {
     "responses": {
       "200": {
         "json": {
@@ -19,7 +19,7 @@
       "html": ""
     }
   },
-  "GetAllLocations": {
+  "ListLocations": {
     "responses": {
       "200": {
         "json": {
@@ -39,7 +39,7 @@
       "html": ""
     }
   },
-  "GetAllTests": {
+  "ListTests": {
     "responses": {
       "200": {
         "json": {
@@ -378,7 +378,7 @@
       "html": ""
     }
   },
-  "SetTestPauseStatus": {
+  "UpdateTestPauseStatus": {
     "responses": {
       "200": {
         "json": "boolean",

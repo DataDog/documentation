@@ -49,7 +49,7 @@
       "html": ""
     }
   },
-  "GetAllHosts": {
+  "ListHosts": {
     "responses": {
       "200": {
         "json": {

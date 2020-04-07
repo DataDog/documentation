@@ -1,5 +1,5 @@
 {
-  "GetAllHostTags": {
+  "ListHostTags": {
     "responses": {
       "200": {
         "json": {
@@ -25,7 +25,7 @@
       "html": ""
     }
   },
-  "RemoveHostTags": {
+  "DeleteHostTags": {
     "responses": {
       "400": {
         "json": {
@@ -72,7 +72,7 @@
       "html": ""
     }
   },
-  "AddToHostTags": {
+  "CreateHostTags": {
     "responses": {
       "201": {
         "json": {

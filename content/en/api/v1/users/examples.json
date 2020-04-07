@@ -1,5 +1,5 @@
 {
-  "GetAllUsers": {
+  "ListUsers": {
     "responses": {
       "200": {
         "json": {
