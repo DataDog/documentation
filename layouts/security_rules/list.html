@@ -22,7 +22,7 @@
                     </div>
                     <div class="group-{{ .Key }} mb-2 ml-2 d-none">
                         {{ range $v.Pages }}
-                            <a class="mb-1 font-semibold js-page" href="{{.Permalink}}" data-name="{{ lower .Title }}">
+                            <a class="mb-1 font-semibold js-page" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
                                 {{ if .Params.meta_image }}
                                     <img src="{{.Site.Params.img_url}}{{ .Params.meta_image }}?fit=auto&w=40" width="40" />
                                 {{ else }}
