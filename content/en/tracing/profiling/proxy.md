@@ -7,7 +7,9 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog.'
 ---
 
-Profiles collected by the Datadog profilers are sent directly from your application to Datadog. If you need to use a proxy for outbound traffic, you'll need the following configuration.
+Profiles collected by the Datadog profilers are sent directly from your application to Datadog. If you need to use a proxy for outbound traffic, use the following configuration arguments.
+
+## Profilers Configuration Arguments
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -21,6 +23,15 @@ Profiles collected by the Datadog profilers are sent directly from your applicat
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Datadog Profile Endpoints
+
+All profiles collected by the Datadog profilers are sent to:
+
+| Datadog Site | Endpoint                               |
+| ------------ | -------------------------------------- |
+| US site      | `https://intake.profile.datadoghq.com` |
+| EU site      | `https://intake.profile.datadoghq.eu`  |
 
 ## Further Reading
 
