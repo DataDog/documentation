@@ -7,16 +7,9 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog.'
 ---
 
-Profiles collected by the Datadog libraries are sent directly from your running application to Datadog. If your network configuration is restricted for outbound traffic use your proxy to redirect the profiles to Datadog.
+Profiles collected by the Datadog profilers are sent directly from your application to Datadog. If you need to use a proxy for outbound traffic, you'll need the following configuration.
 
-If setup, your proxy should point to the following Datadog profiles endpoints:
 
-- If you are on Datadog US site. `https://intake.profile.datadoghq.com`
-- If you are on Datadog EU site. `https://intake.profile.datadoghq.eu`
-
-## Profiling libraries Proxy Setup
-
-Use the options below to configure your profiling libraries to send the collected profile to your proxy:
 
 {{< tabs >}}
 {{% tab "Java" %}}
