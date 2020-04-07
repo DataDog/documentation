@@ -11,6 +11,8 @@ technique: T1069-permission-groups-discovery
 source: guardduty
 scope: iam
 
+aliases:
+- 098-1df-338
 ---
 
 ## Overview

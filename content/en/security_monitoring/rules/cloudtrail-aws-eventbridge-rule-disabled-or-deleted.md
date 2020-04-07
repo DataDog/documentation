@@ -11,6 +11,8 @@ technique: T1089-disabling-security-tools
 source: cloudtrail
 scope: eventbridge
 meta_image: /images/integrations_logos/amazon_event_bridge.png
+aliases:
+- 998-f99-7bd
 ---
 
 ## Overview

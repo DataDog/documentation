@@ -9,6 +9,8 @@ security: compliance
 source: cloudtrail
 scope: aws
 meta_image: /images/integrations_logos/amazon_web_services.png
+aliases:
+- 208-e1f-0f9
 ---
 
 ## Overview

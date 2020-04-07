@@ -3,10 +3,12 @@ title: Container Violated Compliance Standards
 kind: documentation
 type: security_rules
 disable_edit: true
-src_link: https://docs.datadoghq.com/integrations/twistlock/
-src_img: /images/integrations_logos/twistlock.png
+src_link: https://docs.datadoghq.com/integrations/twistlock_sm/
+src_img: /images/integrations_logos/twistlock_sm.png
 source: twistlock
 
+aliases:
+- c6a-b25-2e9
 ---
 
 ## Overview

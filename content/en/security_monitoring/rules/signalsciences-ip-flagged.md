@@ -3,10 +3,12 @@ title: Signal Sciences Flagged an IP
 kind: documentation
 type: security_rules
 disable_edit: true
-src_link: https://docs.datadoghq.com/integrations/sigsci/
+src_link: https://docs.datadoghq.com/integrations/sigsci_sm/
 src_img: /images/integrations_logos/sigsci_sm.png
 source: signal_sciences
 
+aliases:
+- 4ec-343-f90
 ---
 
 ## Overview

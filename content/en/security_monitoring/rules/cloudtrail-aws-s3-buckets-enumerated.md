@@ -11,6 +11,8 @@ technique: T1083-file-and-directory-discovery
 source: cloudtrail
 scope: s3
 meta_image: /images/integrations_logos/amazon_s3.png
+aliases:
+- 8b7-d38-74d
 ---
 
 ## Overview

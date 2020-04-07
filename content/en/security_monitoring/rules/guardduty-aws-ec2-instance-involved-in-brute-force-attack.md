@@ -11,6 +11,8 @@ technique: T1110-brute-force
 source: guardduty
 scope: ec2
 meta_image: /images/integrations_logos/amazon_ec2.png
+aliases:
+- bb9-ecf-230
 ---
 
 ## Overview

@@ -8,6 +8,8 @@ src_img: /images/integrations_logos/gsuite.png
 security: threat-intel
 source: gsuite
 
+aliases:
+- dc3-7b8-f07
 ---
 
 ## Overview

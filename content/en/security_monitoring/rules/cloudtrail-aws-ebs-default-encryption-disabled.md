@@ -9,6 +9,8 @@ security: compliance
 source: cloudtrail
 scope: ec2
 meta_image: /images/integrations_logos/amazon_ec2.png
+aliases:
+- ee2-dc1-3c1
 ---
 
 ## Overview

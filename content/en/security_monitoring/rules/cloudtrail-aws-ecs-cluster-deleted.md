@@ -11,6 +11,8 @@ technique: T1485-data-destruction
 source: cloudtrail
 scope: ecs
 meta_image: /images/integrations_logos/amazon_ecs.png
+aliases:
+- 9d1-0fa-76a
 ---
 
 ## Overview

@@ -11,6 +11,8 @@ technique: T1089-disabling-security-tools
 source: cloudtrail
 scope: guardduty
 meta_image: /images/integrations_logos/amazon_guardduty.png
+aliases:
+- 719-39f-9cd
 ---
 
 ## Overview

@@ -11,6 +11,8 @@ technique: T1066-indicator-removal-from-tools
 source: cloudtrail
 scope: ec2
 meta_image: /images/integrations_logos/amazon_ec2.png
+aliases:
+- 5f8-ed8-0d6
 ---
 
 ## Overview

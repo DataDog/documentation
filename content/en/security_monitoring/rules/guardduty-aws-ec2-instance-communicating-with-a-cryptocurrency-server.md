@@ -11,6 +11,8 @@ technique: T1496-resource-hijacking
 source: guardduty
 scope: ec2
 meta_image: /images/integrations_logos/amazon_ec2.png
+aliases:
+- ecb-6e7-738
 ---
 
 ## Overview

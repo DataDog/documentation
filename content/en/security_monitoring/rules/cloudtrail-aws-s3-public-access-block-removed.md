@@ -9,6 +9,8 @@ security: compliance
 source: cloudtrail
 scope: s3
 meta_image: /images/integrations_logos/amazon_s3.png
+aliases:
+- 4cd-f56-dfa
 ---
 
 ## Overview

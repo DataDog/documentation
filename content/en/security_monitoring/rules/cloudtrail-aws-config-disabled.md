@@ -11,6 +11,8 @@ technique: T1089-disabling-security-tools
 source: cloudtrail
 scope: amazon-config
 meta_image: /images/integrations_logos/amazon_web_services.png
+aliases:
+- d17-702-f4a
 ---
 
 ## Overview

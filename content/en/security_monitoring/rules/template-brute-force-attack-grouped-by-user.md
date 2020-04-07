@@ -9,6 +9,8 @@ security: attack
 tactic: TA0006-credential-access
 technique: T1110-brute-force
 
+aliases:
+- cf5-c3d-f6a
 ---
 
 ## Overview

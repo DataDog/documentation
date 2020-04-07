@@ -9,6 +9,8 @@ security: attack
 tactic: TA0006-credential-access
 technique: T1110-brute-force
 
+aliases:
+- e57-f49-cdc
 ---
 
 ## Overview

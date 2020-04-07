@@ -11,6 +11,8 @@ technique: T1485-data-destruction
 source: cloudtrail
 scope: ec2
 meta_image: /images/integrations_logos/amazon_ec2.png
+aliases:
+- 506-0ba-81f
 ---
 
 ## Overview
