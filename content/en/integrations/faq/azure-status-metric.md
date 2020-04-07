@@ -13,7 +13,7 @@ The `azure.*.count` metric is an improvement over `azure.*.status`, which will b
 
 ## .count metric
 
-The Azure .count metric is **currently in private beta**. Contact [Datadog support][2] to have it enabled for your account.
+The `azure.*.count` metric is **currently in private beta**. Contact [Datadog support][2] to have it enabled for your account.
 
 The `azure.*.count` metric provides two fundamental pieces of information:
 
@@ -32,7 +32,7 @@ Use the `azure.*.count` metric to:
 
 ## .status metric
 
-The Azure .status metric is the previous solution for this same type of information. It reports the number of available resources for each Azure resource type.
+The `azure.*.status` metric is the previous solution for this same type of information. It reports the number of available resources for each Azure resource type.
 
 ### Differences
 
