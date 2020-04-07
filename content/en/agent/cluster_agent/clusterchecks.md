@@ -69,11 +69,11 @@ Enable the `clusterchecks` configuration provider on the Datadog **Node** Agent.
 
 [Restart the Agent][5] to apply the configuration change.
 
-**Note**: The [Datadog Helm Chart][12] offers the possibility to deploy, via the `clusterChecksRunner` field, a set of Datadog Agents configured to run cluster checks only.
+**Note**: The [Datadog Helm Chart][6] offers the possibility to deploy, via the `clusterChecksRunner` field, a set of Datadog Agents configured to run cluster checks only.
 
 ### Custom checks
 
-Running [custom Agent checks][6] as cluster checks is supported, as long as all node-based Agents are able to run it. This means your checks' code:
+Running [custom Agent checks][7] as cluster checks is supported, as long as all node-based Agents are able to run it. This means your checks' code:
 
 - Must be installed on all node-based Agents where the `clusterchecks` config provider is enabled.
 - Must **not** depend on local resources that are not accessible to all Agents.
@@ -108,7 +108,7 @@ When the IP of a given resource is constant (eg. external service endpoint, publ
 
 #### Example: MySQL check on a CloudSQL database
 
-After setting up a CloudSQL instance and a [Datadog user][7], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following content:
+After setting up a CloudSQL instance and a [Datadog user][8], mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
 cluster_check: true
@@ -124,7 +124,7 @@ The `cluster_check` field informs the Cluster Agent to delegate this check to on
 
 ### Template Source: Kubernetes Service Annotations
 
-You can annotate services with the following syntax, similar to the syntax for [annotating Kubernetes Pods][8]:
+You can annotate services with the following syntax, similar to the syntax for [annotating Kubernetes Pods][9]:
 
 ```yaml
 ad.datadoghq.com/service.check_names: '[<INTEGRATION_NAME>]'
@@ -132,11 +132,11 @@ ad.datadoghq.com/service.init_configs: '[<INIT_CONFIG>]'
 ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-The `%%host%%` [template variable][9] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
+The `%%host%%` [template variable][10] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
 #### Example: HTTP check on an NGINX-backed service
 
-The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
+The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][11] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
@@ -164,7 +164,7 @@ spec:
         run: my-nginx
 ```
 
-In addition, each pod should be monitored with the [NGINX check][11], as it enables the monitoring of each worker as well as the aggregated service.
+In addition, each pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
 
 ## Troubleshooting
 
@@ -301,10 +301,10 @@ The Agent `status` command should show the check instance running and reporting 
 [3]: /agent/cluster_agent/setup
 [4]: /agent/autodiscovery/integrations
 [5]: /agent/guide/agent-commands
-[6]: /developers/write_agent_check
-[7]: /integrations/mysql
-[8]: /agent/autodiscovery/integrations/?tab=kubernetes#configuration
-[9]: /agent/autodiscovery/template_variables
-[10]: /integrations/http_check
-[11]: /integrations/nginx
-[12]: https://github.com/helm/charts/tree/master/stable/datadog
+[6]: https://github.com/helm/charts/tree/master/stable/datadog
+[7]: /developers/write_agent_check
+[8]: /integrations/mysql
+[9]: /agent/autodiscovery/integrations/?tab=kubernetes#configuration
+[10]: /agent/autodiscovery/template_variables
+[11]: /integrations/http_check
+[12]: /integrations/nginx
