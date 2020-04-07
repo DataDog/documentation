@@ -224,7 +224,7 @@ If the metric's flag `Valid` is set to `false`, the metric is not considered in 
 
 ### Describing the HPA manifest
 
-If you see the following mesage when describing the HPA manifest:
+If you see the following message when describing the HPA manifest:
 
 ```text
 Conditions:
