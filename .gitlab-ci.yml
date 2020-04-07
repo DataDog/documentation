@@ -11,6 +11,11 @@ variables:
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
 
+cache: &cache
+  key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+  paths:
+  - node_modules/
+
 # ================== copy scripts =============== #
 before_script:
   - "[ -d local/bin ] && find local/bin/ -type f -exec cp {} /usr/local/bin \\;"  # load scripts
