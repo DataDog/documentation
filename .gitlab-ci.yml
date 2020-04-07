@@ -44,8 +44,7 @@ build_preview:
     - placehold_translations
     - update_preview_yaml
     # - build_hugo_site_new
-    - yarn run build:webpack:preview
-    - yarn run build:hugo -- --environment preview
+    - yarn run build:preview
     - assume_marketing_deploy_role
     - yarn run deploy:previewAssets
     - yarn run deploy:preview
