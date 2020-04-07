@@ -2048,6 +2048,49 @@ components:
       - target
       - expression
       type: object
+    LogsAttributeRemapper:
+      description: 'The remapper processor remaps any source attribute(s) or tag to
+        another target attribute or tag.
+
+        Constraints on the tag/attribute name are explained in the [Tag Best Practice
+        documentation](https://docs.datadoghq.com/logs/guide/log-parsing-best-practice).
+
+        Some additional constraints are applied as `:` or `,` are not allowed in the
+        target tag/attribute name.'
+      properties:
+        override_on_conflict:
+          default: false
+          description: Override or not the target element if already set,
+          type: boolean
+        preserve_source:
+          default: false
+          description: Remove or preserve the remapped source element.
+          type: boolean
+        source_type:
+          default: attribute
+          description: Defines if the sources are from log `attribute` or `tag`.
+          type: string
+        sources:
+          description: Array of source attributes.
+          items:
+            type: string
+          type: array
+        target:
+          description: Final attribute or tag name to remap the sources to.
+          type: string
+        target_type:
+          default: attribute
+          description: Defines if the sources are from log `attribute` or `tag`.
+          type: string
+        type:
+          default: attribute-remapper
+          description: Type of processor.
+          readOnly: true
+          type: string
+      required:
+      - sources
+      - target
+      type: object
     LogsCategoryProcessor:
       description: "Use the Category Processor to add a new attribute (without spaces\
         \ or special characters in the new attribute name)\nto a log matching a provided\
@@ -2496,7 +2539,7 @@ components:
       discriminator:
         mapping:
           arithmetic-processor: '#/components/schemas/LogsArithmeticProcessor'
-          attribute-remapper: '#/components/schemas/LogsRemapper'
+          attribute-remapper: '#/components/schemas/LogsAttributeRemapper'
           category-processor: '#/components/schemas/LogsCategoryProcessor'
           date-remapper: '#/components/schemas/LogsDateRemapper'
           geo-ip-parser: '#/components/schemas/LogsGeoIPParser'
@@ -2516,7 +2559,7 @@ components:
       - $ref: '#/components/schemas/LogsStatusRemapper'
       - $ref: '#/components/schemas/LogsServiceRemapper'
       - $ref: '#/components/schemas/LogsMessageRemapper'
-      - $ref: '#/components/schemas/LogsRemapper'
+      - $ref: '#/components/schemas/LogsAttributeRemapper'
       - $ref: '#/components/schemas/LogsURLParser'
       - $ref: '#/components/schemas/LogsUserAgentParser'
       - $ref: '#/components/schemas/LogsCategoryProcessor'
@@ -2545,49 +2588,6 @@ components:
           type: integer
       required:
       - aggregation
-      type: object
-    LogsRemapper:
-      description: 'The remapper processor remaps any source attribute(s) or tag to
-        another target attribute or tag.
-
-        Constraints on the tag/attribute name are explained in the [Tag Best Practice
-        documentation](https://docs.datadoghq.com/logs/guide/log-parsing-best-practice).
-
-        Some additional constraints are applied as `:` or `,` are not allowed in the
-        target tag/attribute name.'
-      properties:
-        override_on_conflict:
-          default: false
-          description: Override or not the target element if already set,
-          type: boolean
-        preserve_source:
-          default: false
-          description: Remove or preserve the remapped source element.
-          type: boolean
-        source_type:
-          default: attribute
-          description: Defines if the sources are from log `attribute` or `tag`.
-          type: string
-        sources:
-          description: Array of source attributes.
-          items:
-            type: string
-          type: array
-        target:
-          description: Final attribute or tag name to remap the sources to.
-          type: string
-        target_type:
-          default: attribute
-          description: Defines if the sources are from log `attribute` or `tag`.
-          type: string
-        type:
-          default: attribute-remapper
-          description: Type of processor.
-          readOnly: true
-          type: string
-      required:
-      - sources
-      - target
       type: object
     LogsServiceRemapper:
       description: 'Use this processor if you want to assign one or more attributes
@@ -2710,6 +2710,11 @@ components:
       description: This processor extracts query parameters and other important parameters
         from a URL.
       properties:
+        normalize_ending_slashes:
+          default: false
+          description: Normalize the ending slashes or not.
+          nullable: true
+          type: boolean
         sources:
           default:
           - http.url
