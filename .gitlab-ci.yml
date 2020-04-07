@@ -1,4 +1,5 @@
 stages:
+  - bootstrap
   - build
   - post-deploy
   - cleanup
@@ -25,11 +26,26 @@ before_script:
   only:
     - branches
 
+# ================== Install Dependencies ================== #
+install_dependencies:
+  <<: *base_template
+  stage: bootstrap
+  cache: 
+    <<: *cache
+  script:
+    - yarn install --frozen-lockfile
+  # only:
+  #   changes:
+  #     - yarn.lock
+
 # ================== preview ================== #
 # If the branch has a name of <slack-user>/<feature-name> then ci builds a preview site
 build_preview:
   <<: *base_template
   stage: build
+  cache:
+    <<: *cache
+    policy: pull
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
