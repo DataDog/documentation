@@ -26,13 +26,23 @@ Profiles collected by the Datadog profilers are sent directly from your applicat
 
 ## Datadog Profile Endpoints
 
-All profiles collected by the Datadog profilers are sent to:
+All profiles collected by the Datadog profilers are sent to the following profile endpoints:
 
 | Datadog Site | Endpoint                               |
 | ------------ | -------------------------------------- |
 | US site      | `https://intake.profile.datadoghq.com` |
 | EU site      | `https://intake.profile.datadoghq.eu`  |
 
+These domains are CNAME records pointing to a set of static IP addresses. These addresses can be found at:
+
+- [https://ip-ranges.datadoghq.com][1] for Datadog US site
+- [https://ip-ranges.datadoghq.eu][2] for Datadog EU site
+
+See the [Agent Network Guide][3] to discover how the information is structured in the provided JSON.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: https://ip-ranges.datadoghq.com
+[2]: https://ip-ranges.datadoghq.eu
+[3]: /agent/guide/network/
