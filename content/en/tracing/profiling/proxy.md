@@ -43,6 +43,7 @@ See the [Agent Network Guide][3] to discover how the information is structured i
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://ip-ranges.datadoghq.com
 [2]: https://ip-ranges.datadoghq.eu
 [3]: /agent/guide/network/
