@@ -222,7 +222,7 @@ The flare command generates a zip file containing the `custom-metrics-provider.l
 
 If the metric's flag `Valid` is set to `false`, the metric is not considered in the HPA pipeline.
 
-### Describing the HPA manfest
+### Describing the HPA manifest
 
 If you see the following mesage when describing the HPA manifest:
 
