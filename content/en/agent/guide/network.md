@@ -28,6 +28,9 @@ further_reading:
     * All other Agent data:
         * **Agents < 5.2.0** `app.datadoghq.com`
         *  **Agents >= 5.2.0** `<VERSION>-app.agent.datadoghq.com`
+* Since v6.1.0, the Agent also queries Datadog's API to provide non-critical functionality (ex.: display validity of configured API key):
+  * **Agent >= 7.18.0/6.18.0** `api.datadoghq.com`
+  * **Agent < 7.18.0/6.18.0** `app.datadoghq.com` 
 
 This decision was taken after the POODLE problem. Versioned endpoints start with Agent v5.2.0, where each version of the Agent calls a different endpoint based on the version of the *Forwarder*. For example, Agent v5.2.0 calls `5-2-0-app.agent.datadoghq.com`. Therefore you must whitelist `*.agent.datadoghq.com` in your firewall(s).
 
@@ -54,7 +57,7 @@ The information is structured as JSON following this schema:
     "apm": {...},                       // <-- same structure as "agents" but IPs used for the APM Agent data
     "logs": {...},                      // <-- same for the logs Agent data
     "process": {...},                   // <-- same for the process Agent data
-    "api": {...},                       // <-- not used for Agent traffic (submitting data via API)
+    "api": {...},                       // <-- same for non-critical Agent functionality (querying informaton from API) 
     "webhooks": {...}                   // <-- not used for Agent traffic (Datadog source IPs delivering webhooks)
 }
 ```
