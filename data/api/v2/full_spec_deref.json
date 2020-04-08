@@ -9,9 +9,12 @@
     "responses": {},
     "schemas": {
       "APIErrorResponse": {
+        "description": "TODO.",
         "properties": {
           "errors": {
+            "description": "TODO.",
             "items": {
+              "description": "TODO.",
               "example": "Bad Request",
               "type": "string"
             },
@@ -27,33 +30,41 @@
         "description": "Creator of the object",
         "properties": {
           "email": {
+            "description": "TODO.",
             "type": "string"
           },
           "handle": {
+            "description": "TODO.",
             "type": "string"
           },
           "name": {
+            "description": "TODO.",
             "type": "string"
           }
         },
         "type": "object"
       },
       "DashboardListAddItemsResponse": {
+        "description": "TODO.",
         "properties": {
           "added_dashboards_to_list": {
             "description": "List of dashboards added to the dashboard list.",
             "items": {
+              "description": "TODO.",
               "properties": {
                 "author": {
                   "description": "Creator of the object",
                   "properties": {
                     "email": {
+                      "description": "TODO.",
                       "type": "string"
                     },
                     "handle": {
+                      "description": "TODO.",
                       "type": "string"
                     },
                     "name": {
+                      "description": "TODO.",
                       "type": "string"
                     }
                   },
@@ -143,21 +154,26 @@
         "type": "object"
       },
       "DashboardListDeleteItemsResponse": {
+        "description": "TODO.",
         "properties": {
           "deleted_dashboards_from_list": {
             "description": "List of dashboards deleted from the dashboard list.",
             "items": {
+              "description": "TODO.",
               "properties": {
                 "author": {
                   "description": "Creator of the object",
                   "properties": {
                     "email": {
+                      "description": "TODO.",
                       "type": "string"
                     },
                     "handle": {
+                      "description": "TODO.",
                       "type": "string"
                     },
                     "name": {
+                      "description": "TODO.",
                       "type": "string"
                     }
                   },
@@ -247,17 +263,21 @@
         "type": "object"
       },
       "DashboardListItem": {
+        "description": "TODO.",
         "properties": {
           "author": {
             "description": "Creator of the object",
             "properties": {
               "email": {
+                "description": "TODO.",
                 "type": "string"
               },
               "handle": {
+                "description": "TODO.",
                 "type": "string"
               },
               "name": {
+                "description": "TODO.",
                 "type": "string"
               }
             },
@@ -342,21 +362,26 @@
         "type": "object"
       },
       "DashboardListItems": {
+        "description": "TODO.",
         "properties": {
           "dashboards": {
             "description": "List of dashboards in the dashboard list.",
             "items": {
+              "description": "TODO.",
               "properties": {
                 "author": {
                   "description": "Creator of the object",
                   "properties": {
                     "email": {
+                      "description": "TODO.",
                       "type": "string"
                     },
                     "handle": {
+                      "description": "TODO.",
                       "type": "string"
                     },
                     "name": {
+                      "description": "TODO.",
                       "type": "string"
                     }
                   },
@@ -520,21 +545,26 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "TODO.",
                 "properties": {
                   "dashboards": {
                     "description": "List of dashboards in the dashboard list.",
                     "items": {
+                      "description": "TODO.",
                       "properties": {
                         "author": {
                           "description": "Creator of the object",
                           "properties": {
                             "email": {
+                              "description": "TODO.",
                               "type": "string"
                             },
                             "handle": {
+                              "description": "TODO.",
                               "type": "string"
                             },
                             "name": {
+                              "description": "TODO.",
                               "type": "string"
                             }
                           },
@@ -642,21 +672,26 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "deleted_dashboards_from_list": {
                       "description": "List of dashboards deleted from the dashboard list.",
                       "items": {
+                        "description": "TODO.",
                         "properties": {
                           "author": {
                             "description": "Creator of the object",
                             "properties": {
                               "email": {
+                                "description": "TODO.",
                                 "type": "string"
                               },
                               "handle": {
+                                "description": "TODO.",
                                 "type": "string"
                               },
                               "name": {
+                                "description": "TODO.",
                                 "type": "string"
                               }
                             },
@@ -753,9 +788,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "errors": {
+                      "description": "TODO.",
                       "items": {
+                        "description": "TODO.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -775,9 +813,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "errors": {
+                      "description": "TODO.",
                       "items": {
+                        "description": "TODO.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -797,9 +838,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "errors": {
+                      "description": "TODO.",
                       "items": {
+                        "description": "TODO.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -842,21 +886,26 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "dashboards": {
                       "description": "List of dashboards in the dashboard list.",
                       "items": {
+                        "description": "TODO.",
                         "properties": {
                           "author": {
                             "description": "Creator of the object",
                             "properties": {
                               "email": {
+                                "description": "TODO.",
                                 "type": "string"
                               },
                               "handle": {
+                                "description": "TODO.",
                                 "type": "string"
                               },
                               "name": {
+                                "description": "TODO.",
                                 "type": "string"
                               }
                             },
@@ -962,9 +1011,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "errors": {
+                      "description": "TODO.",
                       "items": {
+                        "description": "TODO.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -984,9 +1036,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "errors": {
+                      "description": "TODO.",
                       "items": {
+                        "description": "TODO.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -1027,21 +1082,26 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "TODO.",
                 "properties": {
                   "dashboards": {
                     "description": "List of dashboards in the dashboard list.",
                     "items": {
+                      "description": "TODO.",
                       "properties": {
                         "author": {
                           "description": "Creator of the object",
                           "properties": {
                             "email": {
+                              "description": "TODO.",
                               "type": "string"
                             },
                             "handle": {
+                              "description": "TODO.",
                               "type": "string"
                             },
                             "name": {
+                              "description": "TODO.",
                               "type": "string"
                             }
                           },
@@ -1149,21 +1209,26 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "added_dashboards_to_list": {
                       "description": "List of dashboards added to the dashboard list.",
                       "items": {
+                        "description": "TODO.",
                         "properties": {
                           "author": {
                             "description": "Creator of the object",
                             "properties": {
                               "email": {
+                                "description": "TODO.",
                                 "type": "string"
                               },
                               "handle": {
+                                "description": "TODO.",
                                 "type": "string"
                               },
                               "name": {
+                                "description": "TODO.",
                                 "type": "string"
                               }
                             },
@@ -1260,9 +1325,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "errors": {
+                      "description": "TODO.",
                       "items": {
+                        "description": "TODO.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -1282,9 +1350,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "errors": {
+                      "description": "TODO.",
                       "items": {
+                        "description": "TODO.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -1304,9 +1375,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "errors": {
+                      "description": "TODO.",
                       "items": {
+                        "description": "TODO.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -1348,21 +1422,26 @@
           "content": {
             "application/json": {
               "schema": {
+                "description": "TODO.",
                 "properties": {
                   "dashboards": {
                     "description": "List of dashboards in the dashboard list.",
                     "items": {
+                      "description": "TODO.",
                       "properties": {
                         "author": {
                           "description": "Creator of the object",
                           "properties": {
                             "email": {
+                              "description": "TODO.",
                               "type": "string"
                             },
                             "handle": {
+                              "description": "TODO.",
                               "type": "string"
                             },
                             "name": {
+                              "description": "TODO.",
                               "type": "string"
                             }
                           },
@@ -1470,21 +1549,26 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "dashboards": {
                       "description": "List of dashboards in the dashboard list.",
                       "items": {
+                        "description": "TODO.",
                         "properties": {
                           "author": {
                             "description": "Creator of the object",
                             "properties": {
                               "email": {
+                                "description": "TODO.",
                                 "type": "string"
                               },
                               "handle": {
+                                "description": "TODO.",
                                 "type": "string"
                               },
                               "name": {
+                                "description": "TODO.",
                                 "type": "string"
                               }
                             },
@@ -1590,9 +1674,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "errors": {
+                      "description": "TODO.",
                       "items": {
+                        "description": "TODO.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -1612,9 +1699,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "errors": {
+                      "description": "TODO.",
                       "items": {
+                        "description": "TODO.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -1634,9 +1724,12 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "description": "TODO.",
                   "properties": {
                     "errors": {
+                      "description": "TODO.",
                       "items": {
+                        "description": "TODO.",
                         "example": "Bad Request",
                         "type": "string"
                       },
