@@ -70,9 +70,9 @@ The table below shows a sample daily report for Custom Metrics usage two tags: `
 
 
 * An `<empty>` value means the resource was tagged with the respective tag but did not have a value.
-* No value means the resource was not tagged with that particular tag (e.i. N/A).
-* | (pipe) separated values (e.i. `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
-* A valid tag value (as described [here][1]) refers to the actual value of the respective tag.
+* No value means the resource was not tagged with that particular tag.
+* | (pipe) separated values (for example, `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
+* A valid tag value (see the [Defining Tags documentation][1]) refers to the actual value of the respective tag.
 
 
 [1]: https://docs.datadoghq.com/tagging/#defining-tags
