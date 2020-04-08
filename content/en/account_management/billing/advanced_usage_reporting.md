@@ -16,7 +16,7 @@ The Custom Reporting page provides the following information and functionality:
 * It generates daily .tsv (tab separated values) files for most usage types.
 * It summarizes usage at the end of each month and surfaces both in the UI and as a .tsv download.
 
-*Note*: The following usage types are not supported in this tool yet. They will be added subsequently:
+_Note_: The following usage types are not supported in this tool yet. They will be added subsequently:
 
 * Indexed Log Events
 * Ingested Log Events
@@ -50,7 +50,7 @@ Once the reports start being generated, they will be updated daily and aggregate
 * If Multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
 * Previous months' reports are accessible via the time selector.
 * Monthly reports won't be generated until the month is over. It should appear by the second day of the following month. 
-* Reports are downloadable using the 'Export Current View' reports. These .tsv reports will include both usage numbers and *percentages* allowing for easy allocations and chargebacks.
+* Reports are downloadable using the 'Export Current View' reports. These .tsv reports will include both usage numbers and _percentages_ allowing for easy allocations and chargebacks.
 
 ### Daily Tag-Based Reports
 
@@ -81,4 +81,4 @@ The table below shows a sample daily report for Custom Metrics usage two tags: `
 
 
 [1]: https://docs.datadoghq.com/tagging/#defining-tags
-[2]: https://docs.datadoghq.com/
+[2]: https://docs.datadoghq.com/api/#usage-metering
