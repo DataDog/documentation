@@ -1,6 +1,7 @@
 ---
 title: Microsoft Azure App Services Extension
 kind: documentation
+beta: true
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
@@ -9,6 +10,8 @@ further_reading:
   tag: "Documentation"
   text: "Azure App Service Environment"
 ---
+<div class="alert alert-warning">
+This service is in public beta. If you have any feedback, please <a href="/help">contact Datadog support</a>.
 
 ## Azure App Services Overview
 
