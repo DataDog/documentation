@@ -88,4 +88,3 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/ntp/metadata.csv
 [7]: https://docs.datadoghq.com/fr/help
-[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
