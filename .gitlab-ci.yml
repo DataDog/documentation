@@ -135,7 +135,7 @@ build_live:
 index_internal_doc:
   stage: post-deploy
   environment: "live"
-  image: registry.ddbuild.io/datadoc/webapp:staging-released
+  image: registry.ddbuild.io/datadoc/webapp:prod-released
   dependencies:
     - build_live
   only:
