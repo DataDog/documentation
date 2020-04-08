@@ -5,14 +5,9 @@ kind: documentation
 
 ## Overview
 
-Administrators can access the Custom Reporting tab from the Plan & Usage section in Datadog. Navigate to: 
-`Plan & Usage` > `Custom Reporting`.
+Administrators can access the Custom Reporting tab from the Plan & Usage section in Datadog. The Custom Reporting page provides the following information and functionality:
 
-This tool enables organizations to split their Datadog usage by up to three chosen tag keys. This tool also generates daily and monthly usage reports.
-
-The Custom Reporting page provides the following information and functionality:
-
-* It lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to 3 tag keys).
+* It lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to three tag keys).
 * It generates daily .tsv (tab separated values) files for most usage types.
 * It summarizes usage at the end of each month and surfaces both in the UI and as a .tsv download.
 
