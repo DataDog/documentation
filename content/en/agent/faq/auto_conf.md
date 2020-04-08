@@ -1,11 +1,13 @@
 ---
-title: Auto-Configuration
-kind: documentation
+title: Autodiscovery Auto-Configuration
+kind: faq
+aliases:
+ - /agent/autodiscovery/auto_conf
 further_reading:
-- link: "/agent/autodiscovery/integrations"
+- link: "/agent/kubernetes/integrations"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/autodiscovery/management"
+- link: "/agent/guide/autodiscovery-management"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---
@@ -36,10 +38,9 @@ The `auto_conf.yaml` configuration files cover all required parameters to set up
 
 **Note**: The auto configuration logic only supports the default configuration for any integration above. If you want to customize your Datadog integration configuration, refer to the Integrations Templates documentation to learn how to configure your Agent Autodiscovery:
 
-* [Using a configuration file mounted within the Agent][34]
-* [Using Key-Value Store][35]
-* [Using Kubernetes Annotations][36]
-* [Using Docker Labels][37]
+* [Using Key-Value Store][34]
+* [Using Kubernetes Annotations][35]
+* [Using Docker Labels][36]
 
 ## Further Reading
 
@@ -77,8 +78,7 @@ The `auto_conf.yaml` configuration files cover all required parameters to set up
 [30]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
 [31]: /integrations/tomcat
 [32]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/auto_conf.yaml
-[33]: /agent/autodiscovery/template_variables
-[34]: /agent/autodiscovery/integrations/?tab=file#configuration
-[35]: /agent/autodiscovery/integrations/?tab=keyvaluestore#configuration
-[36]: /agent/autodiscovery/integrations/?tab=kubernetes#configuration
-[37]: /agent/autodiscovery/integrations/?tab=docker#configuration
+[33]: /agent/faq/template_variables
+[34]: /agent/kubernetes/integrations/?tab=keyvaluestore#configuration
+[35]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
+[36]: /agent/docker/integrations/#configuration

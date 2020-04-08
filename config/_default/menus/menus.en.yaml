@@ -17,6 +17,11 @@ main:
     url: "getting_started/agent/"
     parent: "getting_started"
     weight: 1
+  - name: "Autodiscovery"
+    identifier: "getting_started_agent_autodiscovery"
+    url: "getting_started/agent/autodiscovery"
+    parent: "getting_started_agent"
+    weight: 101
 
   ## GETTING STARTED - Integrations
 
@@ -212,20 +217,25 @@ main:
     parent: "agent"
     identifier: "agent_docker"
     weight: 2
+  - name: "Autodiscovery"
+    url: "agent/docker/integrations/"
+    parent: "agent_docker"
+    identifier: "agent_docker_integrations"
+    weight: 201
   - name: APM
-    identifier: "agent_docker_apm"
     url: agent/docker/apm/
     parent: "agent_docker"
+    identifier: "agent_docker_apm"
     weight: 201
   - name: Log collection
-    identifier: "agent_docker_log"
     url: agent/docker/log/
     parent: "agent_docker"
+    identifier: "agent_docker_log"
     weight: 203
   - name: Tag extraction
-    identifier: "agent_docker_tag"
     url: agent/docker/tag/
     parent: "agent_docker"
+    identifier: "agent_docker_tag"
     weight: 204
   - name: "Prometheus"
     url: "agent/docker/prometheus/"
@@ -245,7 +255,7 @@ main:
     parent: "agent"
     identifier: "agent_kubernetes"
     weight: 3
-  - name: "Log"
+  - name: "Log collection"
     url: "agent/kubernetes/log/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_log"
@@ -255,26 +265,27 @@ main:
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_apm"
     weight: 302
-  - name: "Integrations"
+  - name: "Autodiscovery"
     url: "agent/kubernetes/integrations/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_integrations"
     weight: 303
-  - name: "Tag extraction"
-    url: "agent/kubernetes/tag/"
-    parent: "agent_kubernetes"
-    identifier: "agent_kubernetes_tag"
-    weight: 304
   - name: "Prometheus"
     url: "agent/kubernetes/prometheus/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_prometheus"
+    weight: 304
+  - name: "Tag extraction"
+    url: "agent/kubernetes/tag/"
+    parent: "agent_kubernetes"
+    identifier: "agent_kubernetes_tag"
     weight: 305
   - name: "Data collected"
     url: "agent/kubernetes/data_collected/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_data_collected"
     weight: 306
+
 
   ## AGENT - Datadog Cluster Agent
 
@@ -326,42 +337,6 @@ main:
     identifier: "cluster_agent_troubleshooting"
     parent: "agent_cluster"
     weight: 409
-
-  ## AGENT - Autodiscovery
-
-  - name: "Autodiscovery"
-    url: "agent/autodiscovery/"
-    identifier: "agent_autodiscovery"
-    parent: "agent"
-    weight: 5
-  - name: "Basic Autodiscovery"
-    url: "agent/autodiscovery/basic_autodiscovery"
-    parent: "agent_autodiscovery"
-    weight: 500
-  - name: "Auto-Configuration"
-    url: "agent/autodiscovery/auto_conf/"
-    parent: "agent_autodiscovery"
-    weight: 502
-  - name: "Integrations Templates"
-    url: "agent/autodiscovery/integrations/"
-    parent: "agent_autodiscovery"
-    weight: 502
-  - name: "Container Identifier"
-    url: "agent/autodiscovery/ad_identifiers/"
-    parent: "agent_autodiscovery"
-    weight: 503
-  - name: "Template Variables"
-    url: "agent/autodiscovery/template_variables/"
-    parent: "agent_autodiscovery"
-    weight: 504
-  - name: "Discovery Management"
-    url: "agent/autodiscovery/management/"
-    parent: "agent_autodiscovery"
-    weight: 505
-  - name: "Troubleshooting"
-    url: "agent/autodiscovery/troubleshooting/"
-    parent: "agent_autodiscovery"
-    weight: 506
 
   ## AGENT - LOGS
 
@@ -437,6 +412,10 @@ main:
     url: "agent/troubleshooting/site/"
     parent: "agent_troubleshooting"
     weight: 907
+  - name: "Autodiscovery Issues"
+    url: "agent/troubleshooting/autodiscovery/"
+    parent: "agent_troubleshooting"
+    weight: 908
 
   ## AGENT - Guides
   - name: "Guides"

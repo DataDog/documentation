@@ -1,11 +1,13 @@
 ---
 title: Autodiscovery Container Identifiers
 kind: documentation
+aliases:
+ - /agent/autodiscovery/ad_identifiers
 further_reading:
-- link: "/agent/autodiscovery/integrations"
+- link: "/agent/kubernetes/integrations"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/autodiscovery/management"
+- link: "/agent/kubernetes/management"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---

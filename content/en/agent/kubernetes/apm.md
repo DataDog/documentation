@@ -4,9 +4,21 @@ kind: documentation
 aliases:
     - /agent/kubernetes/apm
 further_reading:
-- link: "agent/kubernetes/metrics"
-  tag: "documentation"
-  text: "Kubernetes Metrics"
+- link: "agent/kubernetes/log"
+  tag: "Documentation"
+  text: "Collect your application logs"
+- link: "/agent/kubernetes/prometheus"
+  tag: "Documentation"
+  text: "Collect your Prometheus metrics"
+- link: "/agent/kubernetes/integrations"
+  tag: "Documentation"
+  text: "Collect automatically your applications metrics and logs"
+- link: "/agent/guide/autodiscovery-management"
+  tag: "Documentation"
+  text: "Limit data collection to a subset of containers only"
+- link: "/agent/kubernetes/tag"
+  tag: "Documentation"
+  text: "Assign tags to all data emitted by a container"
 ---
 
 In order to start collecting your application traces you must be [running the Datadog Agent in your Kubernetes cluster][1].
@@ -18,7 +30,6 @@ To enable trace collection with your Agent, follow the instructions below:
 1. **Configure the Datadog Agent to accept traces**:
     {{< tabs >}}
 {{% tab "Helm" %}}
-
 
 - If you haven't already, [install][1] the Helm chart.
 - Update your datadog-values.yaml file with the following APM configuration:

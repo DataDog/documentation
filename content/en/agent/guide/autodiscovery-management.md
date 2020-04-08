@@ -1,13 +1,12 @@
 ---
 title: Container Discovery Management
-kind: documentation
+kind: guide
+aliases:
+ - /agent/autodiscovery/management
 further_reading:
-- link: "/agent/autodiscovery/integrations"
+- link: "/agent/kubernetes/integrations"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/autodiscovery/ad_identifiers"
-  tag: "Documentation"
-  text: "Match a container with the corresponding Integration Template"
 ---
 
 Datadog Agent auto-discovers all containers available by default. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.
@@ -23,22 +22,6 @@ Exclude containers from the Agent Autodiscovery perimeter with an exclude rule b
 **Note**: Exclude rules support regexes, and are defined as a list of comma-separated strings.
 
 {{< tabs >}}
-{{% tab "Agent" %}}
-
-To remove a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
-
-```yaml
-ac_exclude: [image:<IMAGE_NAME>]
-```
-
-To remove a given Docker container with the name `<NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
-
-```yaml
-ac_exclude: [name:<NAME>]
-```
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
 To remove a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
@@ -68,6 +51,22 @@ DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup imag
 You can also use a regex to ignore them all: `DD_AC_EXCLUDE = "image:dockercloud/*"`
 
 {{% /tab %}}
+{{% tab "Agent" %}}
+
+To remove a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+ac_exclude: [image:<IMAGE_NAME>]
+```
+
+To remove a given Docker container with the name `<NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+ac_exclude: [name:<NAME>]
+```
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: If you are using Kubernetes, the container `<NAME>` is the one in your manifest `.spec.containers[0].name`.
@@ -79,22 +78,6 @@ Include containers from the Agent Autodiscovery perimeter with an include rule b
 **Note**: Include rules support regexes, and are defined as a list of comma-separated strings.
 
 {{< tabs >}}
-{{% tab "Agent" %}}
-
-To include a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
-
-```yaml
-ac_include: [image:<IMAGE_NAME>]
-```
-
-To include a given Docker container with the name `<NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
-
-```yaml
-ac_include: [name:<NAME>]
-```
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
 To include a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
@@ -116,6 +99,22 @@ DD_AC_EXCLUDE = "image:.*"
 DD_AC_INCLUDE = "image:ubuntu image:debian"
 ```
 
+{{% /tab %}}
+{{% tab "Agent" %}}
+
+To include a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+ac_include: [image:<IMAGE_NAME>]
+```
+
+To include a given Docker container with the name `<NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
+
+```yaml
+ac_include: [name:<NAME>]
+```
+
+[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -7,18 +7,21 @@ aliases:
     - /agent/openmetrics
     - /agent/prometheus
 further_reading:
-    - link: 'logs/log_collection'
-      tag: 'Documentation'
-      text: 'Collect your logs'
-    - link: '/infrastructure/process'
-      tag: 'Documentation'
-      text: 'Collect your processes'
-    - link: 'tracing'
-      tag: 'Documentation'
-      text: 'Collect your traces'
-    - link: developers/prometheus
-      tag: 'Documentation'
-      text: 'Write your own custom Prometheus Check'
+- link: "agent/kubernetes/log"
+  tag: "Documentation"
+  text: "Collect your application logs"
+- link: "/agent/kubernetes/apm"
+  tag: "Documentation"
+  text: "Collect your application traces"
+- link: "/agent/kubernetes/integrations"
+  tag: "Documentation"
+  text: "Collect automatically your applications metrics and logs"
+- link: "/agent/guide/autodiscovery-management"
+  tag: "Documentation"
+  text: "Limit data collection to a subset of containers only"
+- link: "/agent/kubernetes/tag"
+  tag: "Documentation"
+  text: "Assign tags to all data emitted by a container"
 ---
 
 Collect your exposed Prometheus and OpenMetrics metrics from your application running inside Kubernetes by using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
