@@ -1,5 +1,5 @@
 ---
-title: Advanced usage reporting
+title: Custom usage reporting
 kind: documentation
 ---
 
