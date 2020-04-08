@@ -81,4 +81,4 @@ The table below shows a sample daily report for Custom Metrics usage two tags: `
 
 
 [1]: https://docs.datadoghq.com/tagging/#defining-tags
-[2]: https://docs.datadoghq.com/api/#usage-metering
+[2]: https://docs.datadoghq.com/api/#get-daily-custom-reporting-available-files
