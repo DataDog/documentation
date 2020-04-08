@@ -23,7 +23,7 @@ The usage metering end-point allows you to:
 * Get Hourly Usage For Lambda Functions
 * Get Hourly Usage For Network Hosts
 * Get Hourly Usage For Network Flows
-* Get Multi-Org Usage 
+* Get Multi-Org Usage Summary
 * Get Daily Custom Reporting Available Files
 * Get Daily Custom Reporting File URL
 * Get Monthly Custom Reporting Available Files
