@@ -5,7 +5,7 @@ body > header.scrolled ~ .container .sidenav .sticky {
 }
 
 .announcement_banner.open ~ header.scrolled ~ .container .sidenav .sticky,
-.announcement_banner.open ~ header.scrolled ~ .container-fluid .sidenav-api .sticky {
+.announcement_banner.open ~ header.scrolled ~ .container .sidenav-api .sticky {
   top:96px;
 }
 
@@ -25,7 +25,7 @@ body > header.scrolled ~ .container .sidenav .sticky {
     height:100%;
   }
   &:after {
-    background:#F2F2F2;
+    // background:#F2F2F2;
     height:50px;
   }
 }
@@ -58,7 +58,7 @@ body > header.scrolled ~ .container .sidenav .sticky {
       z-index:-1;
     }
     &:after {
-      background:#F2F2F2;
+      // background:#F2F2F2;
       height:50px;
     }
   }

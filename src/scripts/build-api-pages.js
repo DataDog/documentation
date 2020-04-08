@@ -166,15 +166,13 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
   let field = '';
   if(parentKey === "additionalProperties") {
     field = "&lt;any&#45;key&gt;";
-  } else {
-    if(['type'].includes(key) && (typeof value !== 'object')) {
+  } else if(['type'].includes(key) && (typeof value !== 'object')) {
       field = '';
     } else {
       field = (key || '');
     }
-  }
   return `
-    <div class="col-4 pl-0">
+    <div class="col-4 field-column">
       <p class="key">${toggleMarkup}${field}${requiredMarkup}</p>
     </div>
   `;
@@ -193,18 +191,16 @@ const typeColumn = (key, value, readOnlyMarkup) => {
   let typeVal = '';
   if(validKeys.includes(key) && (typeof value !== 'object')) {
     typeVal = value;
-  } else {
-    if(value.enum) {
+  } else if(value.enum) {
       typeVal = 'enum';
     } else {
       typeVal = (value.format || value.type || '');
     }
-  }
   if(value.type === 'array') {
-    return `<div class="col-2"><p>[${value.items.type || ''}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 type-column"><p>[${value.items.type || ''}]${readOnlyMarkup}</p></div>`;
   } else {
-    //return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
-    return `<div class="col-2"><p>${typeVal}${readOnlyMarkup}</p></div>`;
+    // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 type-column"><p>${typeVal}${readOnlyMarkup}</p></div>`;
   }
 };
 
@@ -216,7 +212,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
  */
 const descColumn = (value) => {
   const desc = (value.description && (typeof(value.description) !== "object")) ? value.description || '' : '';
-  return `<div class="col-6"><p>${marked(desc)}</p></div>`;
+  return `<div class="col-6 description-column">${marked(desc) ? marked(desc) : ""}</div>`;
 };
 
 
@@ -234,51 +230,51 @@ const rowRecursive = (data, isNested, requiredFields=[], level = 0, parentKey = 
   // i've set a hard recurse limit of depth
   if(level > 10) return '';
 
-  if (typeof data === 'object') {
-    Object.entries(data).forEach(([key, value]) => {
+    if (typeof data === 'object') {
+      Object.entries(data).forEach(([key, value]) => {
 
-      // calculate child data in advance
-      // we do this here so that we can add classes to html with this knowledge
-      let childData = null;
-      let newParentKey = key;
-      if(value.type === 'array') {
-        if (value.items.properties) {
-          childData = value.items.properties;
+        // calculate child data in advance
+        // we do this here so that we can add classes to html with this knowledge
+        let childData = null;
+        let newParentKey = key;
+        if(value.type === 'array') {
+          if (value.items.properties) {
+            childData = value.items.properties;
+          }
+        } else if(typeof value === 'object' && "properties" in value) {
+          childData = value.properties;
+        } else if (typeof value === 'object' && "additionalProperties" in value) {
+          childData = value.additionalProperties;
+          newParentKey = "additionalProperties";
         }
-      } else if(typeof value === 'object' && "properties" in value) {
-        childData = value.properties;
-      } else if (typeof value === 'object' && "additionalProperties" in value) {
-        childData = value.additionalProperties;
-        newParentKey = "additionalProperties";
-      }
 
-      // build up classes
-      const classes = (isNested) ? "isNested d-none" : "";
-      const moreclasses = (childData) ? "hasChildData" : "";
+        // build up classes
+        const classes = (isNested) ? "isNested d-none" : "";
+        const moreclasses = (childData) ? "hasChildData" : "";
 
-      // build markdown
-      const toggleArrow = (childData) ? '<span class="js-collapse-trigger" style="cursor: pointer; font-size: 18px">></span> ' : "" ;
-      const required = requiredFields.includes(key) ? '<span style="color:red;">*</span>' : "";
-      const readOnly = readOnlyField(value);
+        // build markdown
+        const toggleArrow = (childData) ? '<span class="toggle-arrow">></span> ' : "" ;
+        const required = requiredFields.includes(key) ? '<span style="color:red;">*</span>' : "";
+        const readOnly = readOnlyField(value);
 
-      // build html
-      html += `
-      <div class="row ${classes} ${moreclasses}">
-        <div class="col-12">
-          <div class="row first-row">
-            ${fieldColumn(key, value, toggleArrow, required, parentKey)}
-            ${typeColumn(key, value, readOnly)}
-            ${descColumn(value)}
+        // build html
+        html += `
+        <div class="row ${classes} ${moreclasses}">
+          <div class="col-12 first-column">
+            <div class="row first-row ${(childData) ? "js-collapse-trigger collapse-trigger" : ""}">
+              ${fieldColumn(key, value, toggleArrow, required, parentKey)}
+              ${typeColumn(key, value, readOnly)}
+              ${descColumn(value)}
+            </div>
+            ${(childData) ? rowRecursive(childData, true, data.required || [], (level + 1), newParentKey) : ''}
           </div>
-          ${(childData) ? rowRecursive(childData, true, data.required || [], (level + 1), newParentKey) : ''}
         </div>
-      </div>
-      `;
-    });
-  } else {
-    html += `<div class="primitive">${data || ''}</div>`;
-  }
-  return html;
+        `;
+      });
+    } else {
+      html += `<div class="primitive">${data || ''}</div>`;
+    }
+    return html;
 };
 
 
@@ -287,25 +283,23 @@ const rowRecursive = (data, isNested, requiredFields=[], level = 0, parentKey = 
  * @param {object} data - schema object
  * returns html table string
  */
-const schemaTable = (data) => {
-  return `
+const schemaTable = (data) => `
   <div class=" schema-table row">
     <div class="col-12 column">
-      <div class="row">
-        <div class="col-4 pl-0">
+      <div class="row table-header">
+        <div class="col-4 field-column">
           <p class="font-semibold">Field</p>
         </div>
-        <div class="col-2">
+        <div class="col-2 type-column">
           <p class="font-semibold">Type</p>
         </div>
-        <div class="col-6">
+        <div class="col-6 description-column">
           <p class="font-semibold">Description</p>
         </div>
       </div>
       ${rowRecursive((data.type === 'array') ? (data.items.properties || data.items) : data.properties, false, data.required || [])}
     </div>  
   </div>`;
-};
 
 
 /**
@@ -334,7 +328,7 @@ const buildResources = (dereferencedObject, pageDir, tagName) => {
         pageExampleJson[action.operationId]["request"]["json"] = filterExampleJson(action.requestBody.content["application/json"].schema);
         const requestHTML = schemaTable(action.requestBody.content["application/json"].schema);
         if(requestHTML) {
-          //fs.writeFileSync(`${pageDir}${action.operationId}_request.html`, requestHTML, 'utf-8');
+          // fs.writeFileSync(`${pageDir}${action.operationId}_request.html`, requestHTML, 'utf-8');
           pageExampleJson[action.operationId]["request"]["html"] = requestHTML;
           console.log(`successfully wrote ${pageDir}${action.operationId}_request.html`);
         }
@@ -346,7 +340,7 @@ const buildResources = (dereferencedObject, pageDir, tagName) => {
           pageExampleJson[action.operationId]["responses"][response_code]["json"] = filterExampleJson(response.content["application/json"].schema);
           const responseHTML = schemaTable(response.content["application/json"].schema);
           if(responseHTML) {
-            //fs.writeFileSync(`${pageDir}${action.operationId}_response_${response_code}.html`, responseHTML, 'utf-8');
+            // fs.writeFileSync(`${pageDir}${action.operationId}_response_${response_code}.html`, responseHTML, 'utf-8');
             pageExampleJson[action.operationId]["responses"][response_code]["html"] = responseHTML;
             console.log(`successfully wrote ${pageDir}${action.operationId}_response_${response_code}.html`);
           }

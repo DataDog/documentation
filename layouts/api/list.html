@@ -39,6 +39,9 @@
             {{ end }}
 
             {{ $tagObject := $.Scratch.Get "tagObject"  }}
+
+            <h1>{{ $v.name }}</h1>
+            <p>{{ $v.description | markdownify}}</p>
             
             {{/* sort by action summary */}}
             {{ range sort $tagObject ".action.summary" "asc"  }}
@@ -48,7 +51,7 @@
                         <h2 class="mb-2" id="{{ .action.summary | urlize }}">
                             <a href="#{{ .action.summary | urlize }}">{{- .action.summary -}}</a>
                         </h2>
-                        <p><span class="text-uppercase font-semibold">{{ .actionType }}</span>&nbsp; &nbsp;<span>{{.pathKey}}</span></p>
+                        <p><span style="padding: 3px" class="text-uppercase font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType }}</span>&nbsp;<span>{{.pathKey}}</span></p>
                     </div>
                 </div>
                 <div class="row">
@@ -68,7 +71,7 @@
 
                         {{ if .action.requestBody }}
                             
-                            <h4>Body Data <span class='text-lowercase'>{{ cond (eq .action.requestBody.required true) "(required)" "" }}</span></h4>
+                            <h4 class="text-capitalize my-0 py-0">Body Data <span class='text-capitalize'>{{ cond (eq .action.requestBody.required true) "(required)" "" }}</span></h4>
 
                             <p>{{ .action.requestBody.description | markdownify }}</p>
 
@@ -99,7 +102,7 @@
                                         {{ $html := ($dot.Scratch.Get "html") }}
 
                                         <p>{{ $schema.description }}</p>
-                                        <div class="my-2 model-example-buttons">
+                                        {{/*<div class="my-2 model-example-buttons">
                                             <div class="form-check form-check-inline">
                                            
                                                 <input class="form-check-input js-model-link" id="{{ $context.action.operationId }}-request-model" type="radio" checked>
@@ -110,7 +113,15 @@
                                                 <input class="form-check-input js-example-link" id="{{ $context.action.operationId }}-request-example" type="radio">
                                                 <label class="form-check-label" for="{{ $context.action.operationId }}-request-example">Example</label>
                                             </div>
-                                        </div>
+                                        </div> */}}
+                                        <ul class="nav nav-tabs border-none response-toggle">
+                                            <li class="nav-item">
+                                                <a class="nav-link mr-1  js-model-link active" role="tab" href="#" data-toggle="tab">Model</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link mr-1  js-example-link" role="tab" href="#" data-toggle="tab">Example</a>
+                                            </li>                     
+                                        </ul>
                                       
                                         <div class="tab-content mb-3">
                                             <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-request-model">
@@ -132,7 +143,7 @@
                         <ul class="nav nav-tabs border-none response-toggle" style="z-index: 10;">
                             {{ range $response_code, $response := .action.responses }}
                                 <li class="nav-item">
-                                    <a class="nav-link mr-1 btn btn-sm-tag btn-outline-secondary {{ if eq $response_code "200"}}active{{end}}"  href="#{{ $context.action.operationId }}-{{ $response_code }}" role="tab" data-toggle="tab">{{ $response_code }}</a>
+                                    <a class="nav-link mr-1  {{ if eq $response_code "200"}}active{{end}}"  href="#{{ $context.action.operationId }}-{{ $response_code }}" role="tab" data-toggle="tab">{{ $response_code }}</a>
                                 </li>
 
                             {{ end }}
@@ -164,7 +175,7 @@
                                         {{ $json := ($dot.Scratch.Get "json") }}
                                         {{ $html := ($dot.Scratch.Get "html") }}
 
-                                        <div class="my-2 model-example-buttons">
+                                        {{/*<div class="my-2 model-example-buttons">
                                             <div class="form-check form-check-inline">
                                            
                                                 <input class="form-check-input js-model-link" id="{{ $context.action.operationId }}-model" type="radio" checked>
@@ -175,7 +186,16 @@
                                                 <input class="form-check-input js-example-link" id="{{ $context.action.operationId }}-example" type="radio">
                                                 <label class="form-check-label" for="{{ $context.action.operationId }}-example">Example</label>
                                             </div>
-                                        </div>                                        
+                                        </div>   */}}     
+                                        
+                                        <ul class="nav nav-tabs border-none response-toggle">
+                                            <li class="nav-item">
+                                                <a class="nav-link mr-1  js-model-link active" role="tab" href="#" data-toggle="tab">Model</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link mr-1  js-example-link" role="tab" href="#" data-toggle="tab">Example</a>
+                                            </li>                     
+                                        </ul>
                                       
                                         <div class="tab-content mb-3">
                                             <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-{{ $response_code }}-model">
@@ -186,8 +206,19 @@
 
                                             </div>
                                             <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-{{ $response_code }}-example">
-
-                                              {{ $json }}
+                                                <div class="code-snippet-wrapper js-code-block">
+                                                    
+                                                    <div class="code-snippet">
+                                      
+                                                        <div class="code-button-wrapper position-absolute">
+                                                        <button class="btn text-primary js-copy-button">Copy</button>
+                                                        </div>
+                                                       
+                                                       
+                                                        {{ $json }}
+                                                        </div>
+                                                </div>
+                                              
 
                                             </div>
                                         </div>
@@ -209,7 +240,23 @@
                                 {{ if eq $context.action.operationId $file_basename }}
                                     {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
 
-                                    <div class="{{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} js-code-block code-block-{{ $lang.pygments_name }}">{{ highlight $file_content $lang.pygments_name "" }}</div>
+                                    <div class="code-snippet-wrapper js-code-block {{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}">
+                                        {{/* if $filename }}
+                                        <div class="code-filename-wrapper">
+                                        <p class="code-filename my-0">{{ $filename }}</p>
+                                        </div>
+                                        {{ end */}}
+                                        <div class="code-snippet">
+                                      
+                                        <div class="code-button-wrapper position-absolute">
+                                        <button class="btn text-primary js-copy-button">Copy</button>
+                                        </div>
+                                       
+                                       
+                                        {{ highlight $file_content $lang.pygments_name "" }}
+                                        </div>
+                                        </div>
+                                  
                             
                                 {{ end }}
                             {{ end }}
