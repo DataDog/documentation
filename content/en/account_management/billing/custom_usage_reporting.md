@@ -19,7 +19,7 @@ The Custom Reporting page provides the following information and functionality:
 _Note_: The following usage types are not supported in this tool yet. They will be added subsequently:
 
 * Indexed Log Events
-* Ingested Log Events
+* Ingested Logs
 * Analyzed Spans
 
 ### Getting Started
@@ -30,7 +30,7 @@ In order to start receiving daily data, an administrator will need to create a n
 
 The 'Applied Tags' section enables the following:
 
-* Entering up to three tag keys from a dropdown. The dropdown is pre-populated with existing tags on the account.
+* Entering up to three tag keys from a dropdown. The dropdown is pre-populated with existing tags on both the root account and any child organizations under the account.
 * Deleting and editing existing tags.
 
 {{< img src="account_management/billing/advanced-usage-reporting-02.png" alt="Applied Tags" >}}
