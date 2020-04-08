@@ -1,6 +1,8 @@
 ---
 title: Custom usage reporting
 kind: documentation
+aliases:
+  - /account_management/billing/advanced_usage_reporting/
 ---
 
 ## Overview
