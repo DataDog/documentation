@@ -80,14 +80,14 @@ The following metrics have all the second primary tag and Datadog Agent tags att
 
 - `trace.<SPAN_NAME>.duration.by.resource_<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`:
   - *Pre-requisit:* This metric exists for any APM service.
-  - *Description:* Measure the total time spent processing by ressource, service, and [2nd primary tag][7].
+  - *Description:* Measure the total time spent processing by resource, service, and [2nd primary tag][7].
   - *Metric type:* [GAUGE][4]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
   - *Tags:* `env`, `service` and `resource`.
 
 - `trace.<SPAN_NAME>.duration.by.resource_service.<PERCENTILE_AGGREGATION>`:
   - *Pre-requisit:* This metric exists for any APM service.
-  - *Description:* Measure the total time spent processing for each ressource and service combination.
+  - *Description:* Measure the total time spent processing for each resource and service combination.
   - *Metric type:* [GAUGE][4]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
   - *Tags:* `env`, `service`, and `resource`.
