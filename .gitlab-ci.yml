@@ -39,7 +39,6 @@ install_dependencies:
     <<: *cache
   script:
     - yarn install --frozen-lockfile
-    # - yarn install --frozen-lockfile
   only:
     changes:
       - yarn.lock
