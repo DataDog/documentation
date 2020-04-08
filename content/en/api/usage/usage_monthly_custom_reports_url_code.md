@@ -1,7 +1,7 @@
 ---
 title: Get monthly custom reporting file URL
 type: apicode
-order: 35.98
+order: 35.953
 external_redirect: /api/#get-monthly-custom-reporting-file-url
 ---
 

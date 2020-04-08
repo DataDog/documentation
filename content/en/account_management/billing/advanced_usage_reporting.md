@@ -3,12 +3,6 @@ title: Advanced usage reporting
 kind: documentation
 ---
 
-#### Note
-
-This feature is currently still in development and is changing on a day-to-day basis. We're enabling it on a case basis for customers interested in helping us shape the feature and with an immediate need for the raw data.
-
-Documentation will change as we roll out more functionality and make the data more actionable and digestable. For inquiries around roadmap and timelines, please reach out to your Customer Success Manager.
-
 ## Overview
 
 Administrators can access the Custom Reporting tab from the Plan & Usage section in Datadog, then navigate to: 
@@ -20,7 +14,13 @@ The Custom Reporting page provides the following information and functionality:
 
 * It lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to 3 tag keys).
 * It generates daily .tsv (tab separated values) files for most usage types.
-* It concatenates daily .tsv files at the end of each month and makes it available for download.
+* It summarizes usage at the end of each month and surfaces both in the UI and as a .tsv download.
+
+*Note*: The following usage types are not supported in this tool yet. They will be added subsequently:
+
+* Indexed Log Events
+* Ingested Log Events
+* Analyzed Spans
 
 ### Getting Started
 
@@ -38,23 +38,34 @@ The 'Applied Tags' section enables the following:
 * Once the tags are configured, it will take a full 24-hour period for the first report to be generated.
 * The reports will be generated on an ongoing basis.
 * If tags are changed, the new reports will reflect the new tags. However, the previous reports will keep the old ones.
+* Monthly reports will reflect the latest set of tags. If you change tags mid-month, the usage percentages might not match up. 
 
-### Getting the Data
+### Monthly Tag-Based Usage Summary
 
 Once the reports start being generated, they will be updated daily and aggregated monthly in this table.
 
-{{< img src="account_management/billing/advanced-usage-reporting-03.png" alt="Getting Data" >}}
+{{< img src="account_management/billing/advanced-usage-reporting-03.png" alt="Usage Summary Table" >}}
+
+* Clicking on a specific tag key will update the table view accordingly.
+* If Multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
+* Previous months' reports are accessible via the time selector.
+* Monthly reports won't be generated until the month is over. It should appear by the second day of the following month. 
+* Reports are downloadable using the 'Export Current View' reports. These .tsv reports will include both usage numbers and *percentages* allowing for easy allocations and chargebacks.
+
+### Daily Tag-Based Reports
+
+This section provides daily reports at an hourly granularity to dig into timeframes. It also provides a concatenation of all reports during a given month.
 
 * Clicking on a specific time period will expand a view on the right where reports can be downloaded as CSVs
 * Data can either be downloaded daily or at the end of the month.
 
 {{< img src="account_management/billing/advanced-usage-reporting-04.png" alt="Download data" >}}
 
-Data can also be pulled using the tool's Public API (endpoint documentation below).
+Data can also be pulled using the tool's Public API (endpoint documentation [here][2]).
 
 ### Interpreting the Data
 
-This is how the data in a Custom Timeseries Report by Tags using two tags (`team` and `service`) would look like, formatted as a table for easier reading:
+The table below shows a sample daily report for Custom Metrics usage two tags: `team` and `service`.
 
 | public_id   | hour                  | team      | service               | num_custom_timeseries           |
 |-------------|-----------------------|-----------|-----------------------|---------------------------------|
@@ -62,15 +73,12 @@ This is how the data in a Custom Timeseries Report by Tags using two tags (`team
 | publicid1   | 2020-02-01 09:00:00   | team1     |                       | 28                              |
 | publicid1   | 2020-02-01 18:00:00   | team2     | service3              | 1023                            |
 
-#### How to interpret the values in the tag columns
 
-Note: In the example above, the tag columns are `team` and `service`.
-
-* `<empty>` (*`team` column in row 1 above*): means the resource was tagged with the respective tag but did not have a value.
-* no value (*`service` column in row 2 above*): means the resource (Custom metrics, Infra, APM or NPM hosts, Containers, Synthetics API or Browser checks, AWS Lambda functions, ...) was not tagged with that particular tag.
-* | (pipe) separated values (*`service` column in row 1 above*): present when that particular tag was applied multiple times on the resource.
-* valid tag value (as described [here][1]) (*`team` and `service` columns in row 3 above*): the values of the respective tag.
+* An `<empty>` value means the resource was tagged with the respective tag but did not have a value.
+* No value means the resource was not tagged with that particular tag (e.i. N/A).
+* | (pipe) separated values (e.i. `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
+* A valid tag value (as described [here][1]) refers to the actual value of the respective tag.
 
 
 [1]: https://docs.datadoghq.com/tagging/#defining-tags
-
+[2]: https://docs.datadoghq.com/

@@ -1,7 +1,7 @@
 ---
 title: Get daily custom reporting file URL
 type: apicontent
-order: 35.96
+order: 35.951
 external_redirect: /api/#get-daily-custom-reporting-file-url
 ---
 

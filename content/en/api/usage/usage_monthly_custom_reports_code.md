@@ -1,7 +1,7 @@
 ---
 title: Get monthly custom reporting available files
 type: apicode
-order: 35.97
+order: 35.952
 external_redirect: /api/#get-monthly-custom-reporting-available-files
 ---
 
