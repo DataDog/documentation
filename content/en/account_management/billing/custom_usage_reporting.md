@@ -7,58 +7,58 @@ kind: documentation
 
 Administrators can access the Custom Reporting tab from the Plan & Usage section in Datadog. The Custom Reporting page provides the following information and functionality:
 
-* It lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to three tag keys).
-* It generates daily .tsv (tab separated values) files for most usage types.
-* It summarizes usage at the end of each month and surfaces both in the UI and as a .tsv download.
+* Lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to three tag keys).
+* Generates daily .tsv (tab separated values) files for most usage types.
+* Summarizes usage at the end of each month. Surfaces both in the UI and as a .tsv download.
 
-**Note**: The following usage types are not supported in this tool yet. They will be added subsequently:
+**Note**: The following usage types are not supported in this tool:
 
 * Indexed Log Events
 * Ingested Logs
 * Analyzed Spans
 
-### Getting Started
+### Getting started
 
-In order to start receiving daily data, an administrator will need to create a new report via the user interface. 
+To start receiving daily data, an administrator needs to create a new report through the user interface. 
 
 {{< img src="account_management/billing/advanced-usage-reporting-01.png" alt="Getting Started" >}}
 
-The 'Applied Tags' section enables the following:
+The **Applied Tags** section enables the following:
 
 * Entering up to three tag keys from a dropdown. The dropdown is pre-populated with existing tags on both the root account and any child organizations under the account.
 * Deleting and editing existing tags.
 
 {{< img src="account_management/billing/advanced-usage-reporting-02.png" alt="Applied Tags" >}}
 
-* Once the tags are configured, it will take a full 24-hour period for the first report to be generated.
-* The reports will be generated on an ongoing basis.
+* Once the tags are configured, it takes a full 24-hour period for the first report to be generated.
+* The reports are generated on an ongoing basis.
 * If tags are changed, the new reports will reflect the new tags. However, the previous reports will keep the old ones.
-* Monthly reports will reflect the latest set of tags. If you change tags mid-month, the usage percentages might not match up. 
+* Monthly reports reflect the latest set of tags. If you change tags mid-month, the usage percentages might not match up. 
 
-### Monthly Tag-Based Usage Summary
+### Monthly tag-based usage summary
 
-Once the reports start being generated, they will be updated daily and aggregated monthly in this table.
+Once the reports start being generated, they are updated daily and aggregated monthly in this table.
 
 {{< img src="account_management/billing/advanced-usage-reporting-03.png" alt="Usage Summary Table" >}}
 
-* Clicking on a specific tag key will update the table view accordingly.
-* If Multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
-* Previous months' reports are accessible via the time selector.
-* Monthly reports won't be generated until the month is over. It should appear by the second day of the following month. 
-* Reports are downloadable using the 'Export Current View' reports. These .tsv reports will include both usage numbers and **percentages** allowing for easy allocations and chargebacks.
+* Clicking on a specific tag key updates the table view accordingly.
+* If multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
+* Previous months' reports are accessible through the time selector.
+* Monthly reports are not generated until the month is over. Each monthly report should appear by the second day of the following month. 
+* Reports are downloadable using the 'Export Current View' reports. These .tsv reports include both usage numbers and **percentages**, allowing for easy allocations and chargebacks.
 
-### Daily Tag-Based Reports
+### Daily tag-based reports
 
 This section provides daily reports at an hourly granularity to dig into timeframes. It also provides a concatenation of all reports during a given month.
 
-* Clicking on a specific time period will expand a view on the right where reports can be downloaded as CSVs
-* Data can either be downloaded daily or at the end of the month.
+* Clicking on a specific time period expands a view on the right where reports can be downloaded as CSVs.
+* Data can be downloaded daily or at the end of the month.
 
 {{< img src="account_management/billing/advanced-usage-reporting-04.png" alt="Download data" >}}
 
-Data can also be pulled using the tool's Public API (endpoint documentation [here][2]).
+Data can also be pulled using the tool's public API. (See the [API endpoint documentation][2].
 
-### Interpreting the Data
+### Interpreting the data
 
 The table below shows a sample daily report for Custom Metrics usage two tags: `team` and `service`.
 
