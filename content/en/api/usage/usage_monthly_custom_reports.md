@@ -7,7 +7,7 @@ external_redirect: /api/#get-monthly-custom-reporting-available-files
 
 ## Get monthly custom reporting available files
 
-Returns the list of availalbe monthly custom reports.
+Returns the list of available monthly custom reports.
 
 **ARGUMENTS**:
 
