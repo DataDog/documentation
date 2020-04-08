@@ -147,6 +147,7 @@ main:
   - name: "Ansible"
     identifier: "basic_agent_usage_ansible"
     url: "agent/basic_agent_usage/ansible/"
+    parent: "basic_agent_usage"
     weight: 103
   - name: "CentOS"
     identifier: "basic_agent_usage_centos"
