@@ -69,7 +69,7 @@ If you can't find your distribution, you can [manually install][10] the PHP exte
 
 Tracing is automatically enabled by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
 
-We support all web framework out of the box. For specific web frameworks, listed below, we provide even more internal details automatically for you.
+We support all web frameworks out of the box. For specific web frameworks, listed below, we provide even more internal details automatically for you.
 
 Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods in order to trace them. The PHP tracer supports automatic instrumentation for [several libraries](#library-compatibility).
 
@@ -315,6 +315,15 @@ The `$*` wildcard matches without replacement.
 ## Upgrading
 
 To upgrade the PHP tracer, [download the latest release][7] and follow the same steps as [installing the extension](#install-the-extension).
+
+## Removing
+
+In order to remove the PHP tracer:
+
+- if you are serving your app using php-fpm, stop the php-fpm service, otherwise stop Apache web server.
+- unlink files `98-ddtrace.ini` and `99-ddtrace-custom.ini` from your php configuration folder.
+- if you are using php-fpm, you only need to restart php-fpm service, otherwise restart Apache web server.
+- Note: if you are using second level caching in opcache (i.e. you have set the parameter `opcache.file_cache`) then you want to remove the cache folder.
 
 ## Further Reading
 
