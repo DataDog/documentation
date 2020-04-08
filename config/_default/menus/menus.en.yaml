@@ -255,7 +255,7 @@ main:
     parent: "agent"
     identifier: "agent_kubernetes"
     weight: 3
-  - name: "Log"
+  - name: "Log collection"
     url: "agent/kubernetes/log/"
     parent: "agent_kubernetes"
     identifier: "agent_kubernetes_log"
