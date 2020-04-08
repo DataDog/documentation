@@ -74,7 +74,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
     pip install ddtrace[profiling]
     ```
 
-     **Note**: Profiling is available in the `ddtrace` library for versions 0.35+.
+     **Note**: Profiling is available in the `ddtrace` library for versions 0.36+.
 
 2. Add a valid [Datadog API key][1] in your environment variable: `DD_PROFILING_API_KEY`.
 
