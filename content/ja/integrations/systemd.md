@@ -112,4 +112,3 @@ Systemd チェックには、イベントは含まれません。
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/systemd/metadata.csv
 [7]: https://docs.datadoghq.com/ja/help/
-[9]: https://github.com/coreos/go-systemd
