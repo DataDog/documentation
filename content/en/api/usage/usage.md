@@ -16,7 +16,7 @@ The usage metering end-point allows you to:
 * Get Hourly Usage For Logs By Index
 * Get Hourly Usage For Custom Metrics
 * Get Top Custom Metrics By Hourly Average
-* Get Hourly Usage For Trace Search
+* Get Hourly Usage For App Analytics
 * Get Hourly Usage For Synthetics API Checks
 * Get Hourly Usage For Synthetics Browser Checks
 * Get Hourly Usage For Fargate Tasks

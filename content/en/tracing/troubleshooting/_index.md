@@ -391,6 +391,65 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 </p>
 </details>
 
+<details><summary>Tracer logs showing spans were generated</summary>
+<p>
+
+```shell
+{ MachineName: ".", ProcessName: "dotnet", PID: <process id>, AppDomainName: "test-webapi" }
+YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span started: [s_id: <span id>, p_id: <parent span id>, t_id: <trace id>]
+{ MachineName: ".", ProcessName: "dotnet", PID: <process id>, AppDomainName: "test-webapi" }
+YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span closed: [s_id: <span id>, p_id: <parent span id>, t_id: <trace id>] for (Service: test-webapi, Resource: custom, Operation: custom.function, Tags: [<span tags>])
+```
+
+</p>
+</details>
+
+<details><summary>Tracer logs showing traces couldn't be sent to the Datadog Agent</summary>
+<p>
+
+```shell
+YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending traces to the agent at System.Net.Http.HttpRequestException: Connection refused ---> System.Net.Sockets.SocketException: Connection refused
+   at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+```
+
+</p>
+</details>
+
+{{% /tab %}}
+{{% tab "PHP" %}}
+
+<details><summary>Generating a span</summary>
+<p>
+
+```shell
+[Mon MM  DD 19:41:13 YYYY] [YYYY-MM-DDT19:41:13+00:00] [ddtrace] [debug] - Encoding span <span id> op: 'laravel.request' serv: 'Sample_Laravel_App' res: 'Closure unnamed_route' type 'web'
+```
+
+</p>
+</details>
+
+
+<details><summary>Attempt to send a trace to the Agent</summary>
+<p>
+
+```shell
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - About to send trace(s) to the agent
+```
+
+</p>
+</details>
+
+<details><summary>Trace successfully sent to the Agent</summary>
+<p>
+
+```shell
+[Mon MM  DD 19:56:23 2019] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Traces successfully sent to the agent
+```
+
+</p>
+</details>
+
 {{% /tab %}}
 {{< /tabs >}}
 

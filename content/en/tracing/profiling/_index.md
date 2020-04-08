@@ -18,7 +18,7 @@ Profiling libraries are shipped within the following tracing language libraries.
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11, Oracle Java 11, and Zulu Java 8. All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
+The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
 1. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
 
@@ -87,7 +87,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 4. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
 
     ```python
-    import ddtrace.profile.auto
+    import ddtrace.profiling.auto
     ```
 
 5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
@@ -97,7 +97,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 - If you want to control which part of your code should be profiled, use the `ddtrace.profile.profiler.Profiler` object:
 
     ```python
-    from ddtrace.profile.profiler import Profiler
+    from ddtrace.profiling import Profiler
 
     prof = Profiler()
     prof.start()

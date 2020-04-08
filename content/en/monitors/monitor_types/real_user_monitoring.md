@@ -50,9 +50,9 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 **Examples**:
 
 * This monitor triggers if and only if there are no RUM events for all applications:
-  {{< img src="monitors/monitor_types/rum/rum_monitor_below_by_application.png" alt="Below monitor split by application"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_application_id.png" alt="Below monitor split by application"  style="width:70%;" >}}
 * This monitor triggers if there are no logs for the application `Shop.ist`:
-  {{< img src="monitors/monitor_types/rum/rum_monitor_below_condition.png" alt="Below monitor for given application"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="Below monitor for given application"  style="width:70%;" >}}
 
 ### Notifications
 
