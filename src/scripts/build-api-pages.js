@@ -244,8 +244,11 @@ const rowRecursive = (data, isNested, requiredFields=[], level = 0, parentKey = 
         } else if(typeof value === 'object' && "properties" in value) {
           childData = value.properties;
         } else if (typeof value === 'object' && "additionalProperties" in value) {
-          childData = value.additionalProperties;
-          newParentKey = "additionalProperties";
+          // check if `additionalProperties` is an empty object
+          if(Object.keys(value.additionalProperties).length !== 0){
+            childData = value.additionalProperties;
+            newParentKey = "additionalProperties";
+          }
         }
 
         // build up classes
@@ -253,7 +256,7 @@ const rowRecursive = (data, isNested, requiredFields=[], level = 0, parentKey = 
         const moreclasses = (childData) ? "hasChildData" : "";
 
         // build markdown
-        const toggleArrow = (childData) ? '<span class="toggle-arrow">></span> ' : "" ;
+        const toggleArrow = (childData) ? '<span class="toggle-arrow"><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z" fill="black"/></svg></span> ' : "" ;
         const required = requiredFields.includes(key) ? '<span style="color:red;">*</span>' : "";
         const readOnly = readOnlyField(value);
 
@@ -285,6 +288,7 @@ const rowRecursive = (data, isNested, requiredFields=[], level = 0, parentKey = 
  */
 const schemaTable = (data) => `
   <div class=" schema-table row">
+    <p class="expand-all js-expand-all text-primary">Expand All</p>
     <div class="col-12 column">
       <div class="row table-header">
         <div class="col-4 field-column">

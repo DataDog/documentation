@@ -126,7 +126,7 @@ const searchMobile = docsearch({
     appId: algoliaConfig.appId,
     apiKey: algoliaConfig.apiKey,
     indexName: algoliaConfig.index,
-    inputSelector: '.docssearch-input-m',
+    inputSelector: '.docssearch-input-mobile',
     algoliaOptions: {
         facetFilters: [`language:${lang}`]
     },

@@ -8,15 +8,19 @@
         <div class="row align-items-center">
             <div class="col-8">
                 <div id="breadcrumbs">
-                    <a href="/">Docs</a>
-                    >
+                    <a class="text-uppercase text-gray-darkish" href="/">Docs</a>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.94975 1.05025L9.8995 6L4.94975 10.9497" stroke="#666666" stroke-width="2"/>
+                        </svg>     
                     
                     {{ if .Page.Parent }}
-                        <a href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>
-                        >
+                        <a class="text-uppercase text-gray-darkish" href="{{ .Page.Parent.RelPermalink }}">{{ .Page.Parent.Title }}</a>
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.94975 1.05025L9.8995 6L4.94975 10.9497" stroke="#666666" stroke-width="2"/>
+                            </svg>                            
                     {{ end }}
                     
-                    <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+                    <a class="text-primary text-uppercase" href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
 
                     {{/* range $index, $element := split $url "/" }}
                     {{ $.Scratch.Add "path" $element }}
@@ -30,7 +34,7 @@
             <div class="col-4">
                 <form class="form-inline">
                     
-                    <div class="form-group">
+                    {{/*<div class="form-group">
                         <label for="codeLangSelect" class="sr-only">Code language</label>
                         <select class="form-control js-code-lang-select" id="codeLangSelect">
                           <option value="bash">Bash</option>
@@ -38,6 +42,7 @@
                           <option value="go">Go</option>
                         </select>
                       </div>
+                      */}}
                       <div class="form-group">
                         <label for="versionSelect" class="sr-only">Version</label>
                         <select class="form-control js-api-version-select" id="versionSelect">

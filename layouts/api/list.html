@@ -51,27 +51,27 @@
                         <h2 class="mb-2" id="{{ .action.summary | urlize }}">
                             <a href="#{{ .action.summary | urlize }}">{{- .action.summary -}}</a>
                         </h2>
-                        <p><span style="padding: 3px" class="text-uppercase font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType }}</span>&nbsp;<span>{{.pathKey}}</span></p>
+                        <p class="mb-0"><span style="padding: 3px" class="text-uppercase font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType }}</span>&nbsp;<span>{{.pathKey}}</span></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-9">
-                        <h3>Overview</h3>
+                        <h3 class="mt-2">Overview</h3>
                         <p>{{.action.description | markdownify }}</p>
                         {{ if .action.parameters }}
                             <h3>Arguments</h3>
-                            <ul>
+                            <ul class="list-unstyled">
                                 {{ range .action.parameters }}
                                     <li><code>{{ .name }}</code>[<em>{{ cond (eq .required false) "optional" "required" }}</em>]&nbsp;{{ .description | markdownify }}</li>
                                 {{ end }}
                             </ul>
                         {{ end }}
 
-                        <h3>Request</h3>
-
                         {{ if .action.requestBody }}
+
+                            <h3 class="mt-2 mb-3">Request</h3>
                             
-                            <h4 class="text-capitalize my-0 py-0">Body Data <span class='text-capitalize'>{{ cond (eq .action.requestBody.required true) "(required)" "" }}</span></h4>
+                            <h4 class="text-capitalize mt-0 mb-1 py-0">Body Data <span class='text-capitalize'>{{ cond (eq .action.requestBody.required true) "(required)" "" }}</span></h4>
 
                             <p>{{ .action.requestBody.description | markdownify }}</p>
 
@@ -101,19 +101,10 @@
                                         {{ $json := ($dot.Scratch.Get "json") }}
                                         {{ $html := ($dot.Scratch.Get "html") }}
 
-                                        <p>{{ $schema.description }}</p>
-                                        {{/*<div class="my-2 model-example-buttons">
-                                            <div class="form-check form-check-inline">
-                                           
-                                                <input class="form-check-input js-model-link" id="{{ $context.action.operationId }}-request-model" type="radio" checked>
-                                                <label class="form-check-label" for="{{ $context.action.operationId }}-request-model">Model</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                
-                                                <input class="form-check-input js-example-link" id="{{ $context.action.operationId }}-request-example" type="radio">
-                                                <label class="form-check-label" for="{{ $context.action.operationId }}-request-example">Example</label>
-                                            </div>
-                                        </div> */}}
+                                        {{ with $schema.description }}
+                                            <p>{{ . }}</p>
+                                        {{ end }}
+
                                         <ul class="nav nav-tabs border-none response-toggle">
                                             <li class="nav-item">
                                                 <a class="nav-link mr-1  js-model-link active" role="tab" href="#" data-toggle="tab">Model</a>
@@ -123,7 +114,7 @@
                                             </li>                     
                                         </ul>
                                       
-                                        <div class="tab-content mb-3">
+                                        <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-request-model">
                                               {{ $html | safeHTML }}
                                             </div>
@@ -138,7 +129,7 @@
                             {{ end }}    
                         {{ end }}
 
-                        <h3>Response</h3>
+                        <h3 class="mt-3 mb-2">Response</h3>                            
 
                         <ul class="nav nav-tabs border-none response-toggle" style="z-index: 10;">
                             {{ range $response_code, $response := .action.responses }}
@@ -174,19 +165,6 @@
                                         {{ end }}
                                         {{ $json := ($dot.Scratch.Get "json") }}
                                         {{ $html := ($dot.Scratch.Get "html") }}
-
-                                        {{/*<div class="my-2 model-example-buttons">
-                                            <div class="form-check form-check-inline">
-                                           
-                                                <input class="form-check-input js-model-link" id="{{ $context.action.operationId }}-model" type="radio" checked>
-                                                <label class="form-check-label" for="{{ $context.action.operationId }}-model">Model</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                
-                                                <input class="form-check-input js-example-link" id="{{ $context.action.operationId }}-example" type="radio">
-                                                <label class="form-check-label" for="{{ $context.action.operationId }}-example">Example</label>
-                                            </div>
-                                        </div>   */}}     
                                         
                                         <ul class="nav nav-tabs border-none response-toggle">
                                             <li class="nav-item">
@@ -197,29 +175,25 @@
                                             </li>                     
                                         </ul>
                                       
-                                        <div class="tab-content mb-3">
+                                        <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-{{ $response_code }}-model">
                                                
-                                                <p>{{ $schema.description }}</p>
+                                                {{ with $schema.description }}
+                                                    <p>{{ . }}</p>
+                                                {{ end }}
 
                                               {{ $html | safeHTML }}
 
                                             </div>
                                             <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-{{ $response_code }}-example">
                                                 <div class="code-snippet-wrapper js-code-block">
-                                                    
                                                     <div class="code-snippet">
-                                      
                                                         <div class="code-button-wrapper position-absolute">
-                                                        <button class="btn text-primary js-copy-button">Copy</button>
+                                                            <button class="btn text-primary js-copy-button">Copy</button>
                                                         </div>
-                                                       
-                                                       
                                                         {{ $json }}
-                                                        </div>
+                                                    </div>
                                                 </div>
-                                              
-
                                             </div>
                                         </div>
                                     {{ end }}
@@ -228,8 +202,48 @@
                             {{ end }}
                         </div>
                     
-                        <h3>Code Example</h3>
-                        {{ range $files }}
+                        <h3 class="mb-2">Code Example</h3>
+
+                        {{/* match all Page Resource code examples by operationId */}}
+                        {{ with $dot.Resources.Match (printf "%s%s" .action.operationId ".*" ) }}
+                        <div class="code-snippet-wrapper" >
+                        <form class="form-inline">
+                    
+                            <div class="form-group">
+                                <label for="codeLangSelect" class="sr-only">Code language</label>
+                                <select class="form-control js-code-lang-select" id="codeLangSelect">
+                                  <option value="bash">Shell</option>
+                                  <option value="java">Java</option>
+                                  <option value="go">Go</option>
+                                </select>
+                              </div>
+                          </form>
+                            {{ range . }}
+
+                                {{ $file_content := .Content }}
+                                {{ $file_extension := index (split (path.Ext .) ".") 1 }}
+                                {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+
+                                
+                                    
+                                        
+                                        <div class="code-snippet js-code-block {{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
+                                            <div class="code-button-wrapper position-absolute">
+                                                <button class="btn text-primary js-copy-button">Copy</button>
+                                            </div>
+                                            {{ highlight $file_content $lang.pygments_name "" }}
+                                        </div>
+                                    
+                            {{ end }}
+                        </div>
+
+                        {{ end }}
+
+                        {{/* range $files }}
+
+                            {{ .Name }}
+
+                           
 
                             {{ $file := (print $snipdir (.Name))}}
                             {{ if and (fileExists $file) (not (in $file "openapi-generator" ))  }}
@@ -241,11 +255,6 @@
                                     {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
 
                                     <div class="code-snippet-wrapper js-code-block {{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}">
-                                        {{/* if $filename }}
-                                        <div class="code-filename-wrapper">
-                                        <p class="code-filename my-0">{{ $filename }}</p>
-                                        </div>
-                                        {{ end */}}
                                         <div class="code-snippet">
                                       
                                         <div class="code-button-wrapper position-absolute">
@@ -260,12 +269,12 @@
                             
                                 {{ end }}
                             {{ end }}
-                        {{ end }}
+                        {{ end */}}
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="margin-top: 90px;">
                     <div class="col-12">
-                        <hr/>
+                        <hr class="mt-0 mb-2" style="border-top: 2px solid#DADADA"/>
                     </div>
                 </div>
             {{ end }}

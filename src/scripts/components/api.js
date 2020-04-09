@@ -1,9 +1,11 @@
 const codeBlocks = document.querySelectorAll('.js-code-block');
-const codeLangSelect = document.querySelector('.js-code-lang-select');
+const codeLangSelects = document.querySelectorAll('.js-code-lang-select');
 const versionSelect = document.querySelector('.js-api-version-select');
 
-if (codeLangSelect) {
-    codeLangSelect.addEventListener('change', codeLangSelectHandler);
+if (codeLangSelects) {
+    codeLangSelects.forEach((codeLangSelect) => {
+        codeLangSelect.addEventListener('change', codeLangSelectHandler);
+    });
 }
 
 if (versionSelect) {
@@ -14,10 +16,7 @@ function versionSelectHandler(event) {
     let previewPath = '';
 
     if (window.location.href.includes('docs-staging')) {
-        previewPath = window.location.pathname
-            .split('/')
-            .slice(0, 3)
-            .join('/');
+        previewPath = window.location.pathname.split('/').slice(0, 3).join('/');
     }
 
     if (event.target.value === 'v2') {
@@ -29,37 +28,59 @@ function versionSelectHandler(event) {
 
 function codeLangSelectHandler(event) {
     toggleCodeBlocks(event.target.value);
+    codeLangSelects.forEach((codeLangSelect) => {
+        codeLangSelect.value = event.target.value;
+    })
 }
 
 function toggleCodeBlocks(activeLang) {
-    codeBlocks.forEach(codeBlock => {
+    codeBlocks.forEach((codeBlock) => {
         codeBlock.classList.remove('d-block');
         codeBlock.classList.add('d-none');
     });
     const activeLangBlocks = document.querySelectorAll(
         `.code-block-${activeLang}`
     );
-    activeLangBlocks.forEach(activeLangBlock => {
+    activeLangBlocks.forEach((activeLangBlock) => {
         activeLangBlock.classList.add('d-block');
     });
 }
 
-
-$('.js-model-link').click(function (){
-    $(this).closest('.tab-content').find('.js-example-link').removeClass('active');
-    $(this).closest('.tab-content').find('.js-model-link').addClass('active')
-    $(this).closest('.tab-content').find('.js-tab-example').removeClass('active');
-    $(this).closest('.tab-content').find('.js-tab-model').addClass('active');
+$('.js-expand-all').click(function (){
+    $(this).toggleClass('expanded');
+    const schemaTable = $(this).closest('.schema-table');
+    schemaTable.find('.isNested').toggleClass('d-none');
+    schemaTable.find('.toggle-arrow').toggleClass('expanded');
+    if ($(this).hasClass("expanded"))
+       $(this).text("Collapse All")
+    else
+       $(this).text("Expand All");
 })
 
-$('.js-example-link').click(function (){
-    $(this).closest('.tab-content').find('.js-model-link').removeClass('active');
-    $(this).closest('.tab-content').find('.js-example-link').addClass('active')
+$('.js-model-link').click(function () {
+    $(this)
+        .closest('.tab-content')
+        .find('.js-example-link')
+        .removeClass('active');
+    $(this).closest('.tab-content').find('.js-model-link').addClass('active');
+    $(this)
+        .closest('.tab-content')
+        .find('.js-tab-example')
+        .removeClass('active');
+    $(this).closest('.tab-content').find('.js-tab-model').addClass('active');
+});
+
+$('.js-example-link').click(function () {
+    $(this)
+        .closest('.tab-content')
+        .find('.js-model-link')
+        .removeClass('active');
+    $(this).closest('.tab-content').find('.js-example-link').addClass('active');
     $(this).closest('.tab-content').find('.js-tab-model').removeClass('active');
     $(this).closest('.tab-content').find('.js-tab-example').addClass('active');
-})
+});
 
-$('.hasChildData .js-collapse-trigger').click(function (){
+$('.hasChildData .js-collapse-trigger').click(function () {
     $(this).closest('.row').siblings('.isNested').toggleClass('d-none');
     $(this).find('.toggle-arrow').toggleClass('expanded');
 });
