@@ -1,6 +1,6 @@
 .rule-search {
   &:focus {
-    box-shadow: 0 0 18px rgba(0,0,0,0.3);
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
     border: 1px solid transparent;
   }
 }
@@ -23,8 +23,8 @@
   }
   &.active {
     .rule-list__arrow {
-      right: 7px !important;
-      transform: rotate(90deg) !important;
+      right: 12px !important;
+      transform: rotate(-90deg) !important;
     }
   }
 }
@@ -34,15 +34,19 @@
 .rule-list__arrow {
   transition: transform 0.125s;
   top: 0px;
-  right: 12px;
+  right: 7px;
   position: absolute;
   font-weight: 700;
   font-size: 18px;
-  transform: rotate(-90deg);
+  transform: rotate(90deg);
 }
 
 .rule-specification {
   p {
     margin-bottom: 4px;
   }
+}
+
+.md-1 img {
+  padding-right: 40px;
 }
