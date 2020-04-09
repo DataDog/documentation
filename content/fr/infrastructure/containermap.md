@@ -30,6 +30,6 @@ Une fois l'[Agent][4] déployé, aucune autre configuration n'est requise. Pour 
 
 [1]: /fr/infrastructure/hostmap
 [2]: https://app.datadoghq.com/infrastructure/map?node_type=container
-[3]: /fr/agent/autodiscovery
+[3]: /fr/agent/kubernetes/integrations
 [4]: /fr/agent
 [5]: /fr/agent/docker
