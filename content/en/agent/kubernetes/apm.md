@@ -32,7 +32,7 @@ To enable trace collection with your Agent, follow the instructions below:
 {{% tab "Helm" %}}
 
 - If you haven't already, [install][1] the Helm chart.
-- Update your datadog-values.yaml file with the following APM configuration:
+- Update your `values.yaml` file with the following APM configuration:
     ```yaml
     datadog:
       ## @param apm - object - required
@@ -44,13 +44,16 @@ To enable trace collection with your Agent, follow the instructions below:
         #
         enabled: true
     ```
- - Then, upgrade your Datadog Helm chart using the following command : `helm upgrade -f datadog-values.yaml <RELEASE NAME> stable/datadog` (don't forget to set the API key in the yaml file)
+
+    **Note**: In advanced use cases on Windows, you may need to add the line `targetSystem: windows` to the top of your `values.yaml`.
+
+ - Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> stable/datadog` (Don't forget to set the API key in the YAML file).
 
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
-{{% tab "Daemonset" %}}
+{{% tab "DaemonSet" %}}
 
-To enable APM trace collection, open the Daemonset configuration file and edit the following:
+To enable APM trace collection, open the DaemonSet configuration file and edit the following:
 
 - Allow incoming data from port `8126` (forwarding traffic from the host to the agent):
 

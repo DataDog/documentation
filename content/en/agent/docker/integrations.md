@@ -49,6 +49,8 @@ Each tab in sections below shows a different way to apply integration templates 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
+To automatically enable Autodiscovery over Docker containers, mount `/var/run/docker.sock` into the Containerized Agent. On Windows, mount `\\.\pipe\docker_engine`.
+
 Integrations templates can be stored as Docker labels. With Autodiscovery, the Agent detects if it's running on Docker and automatically searches all labels for integration templates. Autodiscovery expects labels to look like the following examples:
 
 **Dockerfile**:

@@ -58,6 +58,15 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 ```
 
 {{% /tab %}}
+{{% tab "Windows" %}}
+
+```shell
+DOCKER_CONTENT_TRUST=1 \
+docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
+              datadog/agent:latest
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: add `DD_SITE=datadoghq.eu` if you are using Datadog EU site.
@@ -127,6 +136,13 @@ To get started with collecting metrics exposed by Prometheus running within a co
                   -v /proc/:/host/proc/:ro \
                   -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
                   -e DD_API_KEY="<DATADOG_API_KEY>" \
+                  datadog/agent:latest
+    ```
+
+    **Note**: In Windows, use the following command:
+    ```shell
+    DOCKER_CONTENT_TRUST=1 \
+    docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
                   datadog/agent:latest
     ```
 

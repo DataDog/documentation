@@ -57,6 +57,17 @@ docker run -d --name datadog-agent \
            datadog/agent:latest
 ```
 
+**Note**: On Windows systems, run this command without volume mounts. That is:
+
+```shell
+docker run -d --name datadog-agent \
+           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_LOGS_ENABLED=true \
+           -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+           -e DD_AC_EXCLUDE="name:datadog-agent" \
+           datadog/agent:latest
+```
+
 It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on Docker Hub.
 
 The commands related to log collection are:
