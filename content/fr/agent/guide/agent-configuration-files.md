@@ -117,4 +117,4 @@ Pour préserver la compatibilité avec les versions précédentes, l'Agent récu
 Les checks de l'Agent JMX ont un fichier `metrics.yaml` supplémentaire dans leur répertoire de configuration. Il s'agit d'une liste de tous les beans recueillis par défaut par l'Agent Datadog. De cette manière, vous n'avez pas besoin d'énumérer manuellement tous les beans lorsque vous configurez un check avec les [étiquettes Docker ou les annotations Kubernetes][2].
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[2]: /fr/agent/autodiscovery/integrations/#configuration
+[2]: /fr/agent/kubernetes/integrations/#configuration
