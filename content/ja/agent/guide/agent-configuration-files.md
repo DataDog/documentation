@@ -117,4 +117,4 @@ Datadog Agent の以前のリリースでは、構成ファイルは `/dd-agent/
 JMX Agent チェックには、独自の構成フォルダーに追加の `metrics.yaml` ファイルがあります。これは、Datadog Agent がデフォルトで収集するすべての Bean のリストです。これにより、[Docker ラベルまたは k8 アノテーション][2]によってチェックを構成する際に、すべての Bean を手動でリストする必要がなくなります。
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[2]: /ja/agent/autodiscovery/integrations/#configuration
+[2]: /ja/agent/kubernetes/integrations/#configuration

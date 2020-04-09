@@ -184,9 +184,9 @@ default     nginxext   Deployment/nginx   30/9 (avg)     1         3         3  
 [1]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#before-you-begin
 [2]: /fr/agent/cluster_agent
 [3]: https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer
-[4]: /fr/agent/autodiscovery
+[4]: /fr/agent/kubernetes/integrations
 [5]: /fr/agent/cluster_agent/setup
 [6]: /fr/agent/kubernetes/cluster
 [7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/hpa-manifest.yaml
 [8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
-[9]: /fr/agent/autodiscovery/#template-source-kubernetes-pod-annotations
+[9]: /fr/agent/kubernetes/#template-source-kubernetes-pod-annotations
