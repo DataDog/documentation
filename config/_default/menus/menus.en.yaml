@@ -614,7 +614,13 @@ main:
   - name: "Serverless"
     url: "infrastructure/serverless/"
     parent: "infrastructure"
+    identifier: "serverless"
     weight: 7
+  - name: "Azure App Services Extension"
+    url: "infrastructure/serverless/azure_app_services/"
+    parent: "serverless"
+    identifier: "app_services_extension"
+    weight: 701
 
 #############
 ## METRICS ##

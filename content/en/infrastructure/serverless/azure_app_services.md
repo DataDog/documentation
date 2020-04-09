@@ -43,13 +43,17 @@ The Datadog .NET APM extension supports the following .NET runtimes in both x64 
 
 1. Open the [Azure Portal][7] and navigate to the dashboard for the Azure App Services instance you wish to instrument with Datadog.
 2. Go to the Application settings tab of the Configuration page.
-3. Add your Datadog API key as an application setting called `DD_API_KEY`. You can find or create a new API key in your [Datadog Account][8].
+    {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
+3. Add your Datadog API key as an application setting called `DD_API_KEY` and a value of your [Datadog API Key][8].
+    {{< img src="infrastructure/serverless/azure_app_services/api_key.png" alt="api key page" >}}
 4. If you use the EU Datadog site (datadoghq.eu domain), add an application setting `DD_SITE` with datadoghq.eu as the value.
     By default, the extension submits data to the US Datadog site (the datadoghq.com domain). So if you use the US Datadog site, there is no additional application setting required.
 5. Go to the extensions page and click **Add**.
 6. Select the Datadog APM extension.
+    {{< img src="infrastructure/serverless/azure_app_services/extension.png" alt="Datadog extension" >}}
 7. Accept the legal terms, click **OK**, and wait for the installation to complete.
 8. Restart the main application: click **Stop**, wait for a full stop, then click **Start**.
+    {{< img src="infrastructure/serverless/azure_app_services/restart.png" alt="Stop and restart page" >}}
 
 ## Logs and Trace ID Injection
 
