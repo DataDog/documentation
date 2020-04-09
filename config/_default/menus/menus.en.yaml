@@ -1760,10 +1760,21 @@ main:
     identifier: "account_management_custom_roles"
     weight: 102
 
+  - name: "RBAC"
+    url: "account_management/rbac/"
+    parent: "account_management"
+    identifier: "account_management_rbac"
+    weight: 2
+  - name: "Log Management"
+    url: "account_management/rbac/"
+    parent: "account_management_rbac"
+    identifier: "account_management_rbac_log_management"
+    weight: 201
+
   - name: "Organization settings"
     url: "account_management/org_settings/"
     parent: "account_management"
-    weight: 2
+    weight: 3
 
   ## ACCOUNT MANAGEMENT - SAML
 
@@ -1771,55 +1782,55 @@ main:
     url: "account_management/saml/"
     identifier: "account_management_saml"
     parent: "account_management"
-    weight: 3
+    weight: 4
   - name: "Active Directory"
     url: "account_management/saml/activedirectory/"
     parent: "account_management_saml"
-    weight: 301
+    weight: 401
   - name: "Auth0"
     url: "account_management/saml/auth0/"
     parent: "account_management_saml"
-    weight: 302
+    weight: 402
   - name: "Azure"
     url: "account_management/saml/azure/"
     parent: "account_management_saml"
-    weight: 303
+    weight: 403
   - name: "Google"
     url: "account_management/saml/google/"
     parent: "account_management_saml"
-    weight: 304
+    weight: 404
   - name: "NoPassword"
     url: "account_management/saml/nopassword/"
     parent: "account_management_saml"
-    weight: 305
+    weight: 405
   - name: "Okta"
     url: "account_management/saml/okta/"
     parent: "account_management_saml"
-    weight: 306
+    weight: 406
   - name: "SafeNet"
     url: "account_management/saml/safenet/"
     parent: "account_management_saml"
-    weight: 307
+    weight: 407
 
   - name: "Multi-org accounts"
     url: "account_management/multi_organization/"
     parent: "account_management"
-    weight: 4
+    weight: 5
 
   - name: "Switching between orgs"
     url: "account_management/org_switching/"
     parent: "account_management"
-    weight: 5
+    weight: 6
 
   - name: "Billing"
     url: "account_management/billing/"
     parent: "account_management"
-    weight: 6
+    weight: 7
 
   - name: "API and Application Keys"
     url: "account_management/api-app-keys/"
     parent: "account_management"
-    weight: 7
+    weight: 8
 
 ##############
 ## SECURITY ##
