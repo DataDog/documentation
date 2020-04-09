@@ -201,6 +201,7 @@ curl -X POST \
             }'
 ```
 
+[1]: /api/#get-permissions
 [4]: /api/#roles
 
 {{% /tab %}}
