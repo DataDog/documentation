@@ -3,11 +3,10 @@
 api_key="<DATADOG_API_KEY>"
 app_key="<DATADOG_APPLICATION_KEY>"
 
-curl -v -X POST \
+curl -v -X PUT \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
-"https://api.datadoghq.com/api/v1/webhooks/configuration/webhooks/" \
+"https://api.datadoghq.com/api/v1/webhooks/configuration/webhooks/<CUSTOM_VARIABLE_NAME>" \
 -d '{
-    "name": "<WEBHOOK_NAME>",
-    "url": "<WEBHOOK_URL>"
+    "value": "<NEW_CUSTOM_VARIABLE_VALUE>",
 }'
