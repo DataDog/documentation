@@ -53,7 +53,9 @@ Find below the detailed of those options and the impact of each available permis
 
 #### Configuration
 
-* **logs_live_tail**: Grants a role the ability to use the live tail feature.
+##### logs_live_tail
+
+Grants a role the ability to use the live tail feature.
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -73,7 +75,9 @@ This permission can be granted or revoked from a role via [the Roles API][4].
 {{% /tab %}}
 {{< /tabs >}}
 
-* **logs_generate_metrics**: Grants a role the ability to use the Generate Metrics feature. This permission is global and applies to the configuration of all the metrics generated from logs.
+##### logs_generate_metrics
+
+Grants a role the ability to use the Generate Metrics feature. This permission is global and applies to the configuration of all the metrics generated from logs.
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -93,7 +97,9 @@ This permission can be granted or revoked from a role via [the Roles API][4].
 {{% /tab %}}
 {{< /tabs >}}
 
-* **logs_modify_indexes**: Grants a role the ability to create and modify log indexes. This includes:
+##### logs_modify_indexes
+
+Grants a role the ability to create and modify log indexes. This includes:
 
   - Setting inclusion queries for which logs should be routed into an index.
   - Setting log retention for an index.
@@ -118,7 +124,9 @@ This permission can be granted or revoked from a role via [the Roles API][4].
 {{% /tab %}}
 {{< /tabs >}}
   
-* **logs_write_exclusion_filters**: Grants a role the ability to create or modify exclusion filters within an index. This can be assigned either globally or restricted to a subset of indexes.
+##### logs_write_exclusion_filters
+
+Grants a role the ability to create or modify exclusion filters within an index. This can be assigned either globally or restricted to a subset of indexes.
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -149,7 +157,9 @@ This permission can be granted or revoked from a role via [the Roles API][4].
 {{% /tab %}}
 {{< /tabs >}}
 
-* **logs_write_pipelines**: Grants a role the ability to create and modify log processing pipelines. This includes setting matching filters for what logs should enter the processing pipeline, setting the name of the pipeline, and limiting which roles have write access on the processors within that pipeline (`logs_write_processors`).
+##### logs_write_pipelines
+
+Grants a role the ability to create and modify log processing pipelines. This includes setting matching filters for what logs should enter the processing pipeline, setting the name of the pipeline, and limiting which roles have write access on the processors within that pipeline (`logs_write_processors`).
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -196,7 +206,9 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-* **logs_write_processors**: Grants a role the ability to create or modify the processors within a processing pipeline. 
+##### logs_write_processors
+
+Grants a role the ability to create or modify the processors within a processing pipeline. 
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -227,7 +239,9 @@ This permission can be granted or revoked from a role via [the Roles API][4].
 {{% /tab %}}
 {{< /tabs >}}
 
-* **logs_write_archives**: Grants the ability to create or modify log archives.
+##### logs_write_archives
+
+Grants the ability to create or modify log archives.
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -247,7 +261,9 @@ This permission can be granted or revoked from a role via [the Roles API][4].
 {{% /tab %}}
 {{< /tabs >}}
 
-* **logs_public_config_api**: Grants the ability to create or modify log configuration through the Datadog API.
+##### logs_public_config_api
+
+Grants the ability to create or modify log configuration through the Datadog API.
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -271,7 +287,9 @@ This permission can be granted or revoked from a role via [the Roles API][4].
 
 The following permissions can be granted to manage read access on subsets of log data:
 
-* **logs_read_index_data**: Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes 
+##### logs_read_index_data
+
+Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes 
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
