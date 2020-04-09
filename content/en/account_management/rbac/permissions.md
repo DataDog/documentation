@@ -162,7 +162,34 @@ Go to your [Datadog Roles Page][1] and select the checkbox `other` as below for 
 {{% /tab %}}
 {{% tab "API" %}}
 
-This permission can be granted or revoked from a role via [the Roles API][4]. 
+This permission can be granted or revoked from a role via [the Roles API][4].
+
+To grant write access to only two processing pipelines whose IDs are `abcd-1234` and `bcde-2345` respectively:
+
+1. Remove the global `logs_write_pipelines` permission on the role if already assigned.
+2. Get the UUID of the role you want to modify
+3. Use the [Get Permission][1] API to find the `logs_write_pipelines` permission UUID for your region
+4. Grant permission to that role with the following call:
+
+```sh
+curl -X POST \
+        https://app.datadoghq.com/api/v2/roles/<ROLE_UUID>/permissions \
+        -H "Content-Type: application/json" \
+        -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+        -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+        -d '{
+                "data": {
+                    "type": "permissions",
+                    "id": <PERMISSION_UUID>,
+                    "scope": {
+                        "pipelines": [
+                            "abcd-1234",
+                            "bcde-2345"
+                        ]
+                    }
+                }
+            }'
+```
 
 [4]: /api/#roles
 
@@ -255,15 +282,15 @@ Go to your [Datadog Roles Page][1] and select the checkbox `write` as below for 
 
 {{< img src="account_management/rbac/logs_read_index_data_access.png" alt="Create a custom Role"  style="width:90%;">}}
 
-**Subset of Pipelines**
+**Subset of Indexes**
 
 1. Remove the global permission on the role.
-2. This permission can be granted to a role in [the Processing Pipelines page of the Datadog app][3] by editing an index and adding a role to the "Grant access of this index's content to" field.
+2. This permission can be granted to a role in [the Index Configuration page of the Datadog app][3] by editing an index and adding a role to the "Grant access of this index's content to" field.
 
 {{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles"  style="width:75%;" >}}
 
 [1]: https://app.datadoghq.com/access/roles
-[3]: https://app.datadoghq.com/logs/pipelines
+[3]: https://app.datadoghq.com/logs/pipelines/indexes
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -271,9 +298,9 @@ Go to your [Datadog Roles Page][1] and select the checkbox `write` as below for 
 This permission can be granted or revoked from a role via [the Roles API][4]. 
 For example, to grant read access only on two indexes named `main` and `support` to a role, your API call looks like this:
 
-1. Remove the global permission on the role.
+1. Remove the global `logs_read_index_data` permission on the role if already assigned.
 2. Get the UUID of the role you want to modify
-3. Use the [Get Permission][1] API to find the permission UUID for your region
+3. Use the [Get Permission][1] API to find the `logs_read_index_data` permission UUID for your region
 4. Grant permission to that role with the following call:
 
 ```
