@@ -2,17 +2,19 @@
 title: Datadog Role permissions
 kind: documentation
 further_reading:
-- link: "account_management/rbac/log_management/"
+- link: "/account_management/rbac/"
   tag: "Documentation"
-  text: "RBAC for Log Management"
-- link: "/api/#roles"
+  text: "Learn how to create, update and delete a Role"
+- link: "/api/#get-permissions"
   tag: "Documentation"
-  text: "Manage Roles and Permissions with the Roles API"
+  text: "Manage your permissions with the Permission API"
 ---
 
-General permissions provide the base level of access for your role. [Advanced Permissions](#advanced-permissions) are explicitly defined permissions that augment the base permissions.
+Once your roles are created, assign or remove permission to this role directly by updating the role in the Datadog application, or through the [Datadog Permission API][1]. Find below a list of available permissions.
 
 ## General Permissions
+
+General permissions provide the base level of access for your role. [Advanced Permissions](#advanced-permissions) are explicitly defined permissions that augment the base permissions.
 
 | Permission Name    | Description                                                                                                                                                                                                                                                                                           |
 |--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -23,20 +25,6 @@ General permissions provide the base level of access for your role. [Advanced Pe
 ## Advanced Permissions
 
 All permissions have up to three options that can be selected: Read, Write, and Other. Note that not all options are available every time for a given permission. Find below the detailed of those options and the impact of each available permission.
-
-### Logs
-
-| Permission Name        | Read                                | Write                                      | Other                                   |
-|------------------------|-------------------------------------|--------------------------------------------|-----------------------------------------|
-| Log Indexes            | Read a subset of all log indexes    | Update the definition of log indexes       | *undefined*                             |
-| Live Tail              | Access the live tail feature        | *undefined*                                | *undefined*                             |
-| Exclusion Filters      | *undefined*                         | Update a subset of the exclusion filters   | *undefined*                             |
-| Log Pipelines          | *undefined*                         | Update a subset of the log pipelines       | *undefined*                             |
-| Log Processors         | *undefined*                         | Update the log processors in an index      | *undefined*                             |
-| Log External Archives  | *undefined*                         | Update the external archives configuration | *undefined*                             |
-| Logs Public Config API | *undefined*                         | *undefined*                                | Access the Logs Public Config API (r/w) |
-| Log Generate Metrics   | Access the Generate Metrics feature | *undefined*                                | *undefined*                             |
-
 
 ### Dashboards
 
@@ -52,20 +40,30 @@ All permissions have up to three options that can be selected: Read, Write, and 
 | Monitors          | Access monitors (required) | Update monitor          | *undefined* |
 | Monitors Downtime | *undefined*                | Manage monitor downtime | *undefined* |
 
+### Log Management
 
-\/ TO CHANGE \/
+By default, existing users are already associated with one of the three out-of-the-box Datadog Admin, Standard, or Read-Only Roles, so all users already have permissions to read all logs, and Admin or Standard users already have write permissions on log-related account assets.
 
-## Log Management Permissions
+| Permission Name        | Read                                | Write                                      | Other                                   |
+|------------------------|-------------------------------------|--------------------------------------------|-----------------------------------------|
+| Log Indexes            | Read a subset of all log indexes    | Update the definition of log indexes       | *undefined*                             |
+| Live Tail              | Access the live tail feature        | *undefined*                                | *undefined*                             |
+| Exclusion Filters      | *undefined*                         | Update a subset of the exclusion filters   | *undefined*                             |
+| Log Pipelines          | *undefined*                         | Update a subset of the log pipelines       | *undefined*                             |
+| Log Processors         | *undefined*                         | Update the log processors in an index      | *undefined*                             |
+| Log External Archives  | *undefined*                         | Update the external archives configuration | *undefined*                             |
+| Logs Public Config API | *undefined*                         | *undefined*                                | Access the Logs Public Config API (r/w) |
+| Log Generate Metrics   | Access the Generate Metrics feature | *undefined*                                | *undefined*                             |
 
 The following permissions can be granted to manage read access on subsets of log data:
 
-* **logs_read_index_data**: Grants a role read access on some number of log indexes. This permission can be granted to a role in [the Processing Pipelines page of the Datadog app][1] by editing an index and adding a role to the "Grant access of this index's content to" field (screenshot below).
+* **logs_read_index_data**: Grants a role read access on some number of log indexes. This permission can be granted to a role in [the Processing Pipelines page of the Datadog app][2] by editing an index and adding a role to the "Grant access of this index's content to" field (screenshot below).
 
 {{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles"  style="width:75%;" >}}
 
-* **logs_live_tail**: Grants a role the ability to use the live tail feature. This permission can be granted or revoked from a role via [the Roles API][2].
+* **logs_live_tail**: Grants a role the ability to use the live tail feature. This permission can be granted or revoked from a role via [the Roles API][3].
 
-* **logs_generate_metrics**: Grants a role the ability to use the Generate Metrics feature. This permission can be granted or revoked from a role via [the Roles API][2].
+* **logs_generate_metrics**: Grants a role the ability to use the Generate Metrics feature. This permission can be granted or revoked from a role via [the Roles API][3].
 
 The following permissions can be granted to manage write access on various log-related account assets:
 
@@ -76,36 +74,25 @@ The following permissions can be granted to manage write access on various log-r
   - Limiting which roles have read access on an index (`logs_read_index_data`).
   - Which roles can modify exclusion filters for an index (`logs_write_exclusion_filters`).
 
-  This permission can be granted or revoked from a role via [the Roles API][2]. **Note:** This permission also grants read access on all log indexes and write permissions on all index exclusion filters, since any role that can modify indexes also can grant itself these additional permissions.
+  This permission can be granted or revoked from a role via [the Roles API][3]. **Note:** This permission also grants read access on all log indexes and write permissions on all index exclusion filters, since any role that can modify indexes also can grant itself these additional permissions.
 
-* **logs_write_exclusion_filters**: Grants a role the ability to create or modify exclusion filters within an index. This permission can be granted to a role in [the Processing Pipelines page of the Datadog app][1] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
+* **logs_write_exclusion_filters**: Grants a role the ability to create or modify exclusion filters within an index. This permission can be granted to a role in [the Processing Pipelines page of the Datadog app][2] by editing an index and adding a role to the "Grant editing Exclusion Filters of this index to" field (screenshot below).
 
 {{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="Grant write access on index exclusion filters to specific roles"  style="width:75%;" >}}
 
-* **logs_write_pipelines**: Grants a role the ability to create and modify log processing pipelines. This includes setting matching filters for what logs should enter the processing pipeline, setting the name of the pipeline, and limiting which roles have write access on the processors within that pipeline (`logs_write_processors`). This permission can be granted or revoked from a role via [the Roles API][3].
+* **logs_write_pipelines**: Grants a role the ability to create and modify log processing pipelines. This includes setting matching filters for what logs should enter the processing pipeline, setting the name of the pipeline, and limiting which roles have write access on the processors within that pipeline (`logs_write_processors`). This permission can be granted or revoked from a role via [the Roles API][4].
 
-* **logs_write_processors**: Grants a role the ability to create or modify the processors within a processing pipeline. This permission can be granted to a role in [the Processing Pipelines page of the Datadog app][1] by editing a processing pipeline and adding a role to the "Grant editing Processors of this index to" field (screenshot below).
+* **logs_write_processors**: Grants a role the ability to create or modify the processors within a processing pipeline. This permission can be granted to a role in [the Processing Pipelines page of the Datadog app][2] by editing a processing pipeline and adding a role to the "Grant editing Processors of this index to" field (screenshot below).
 
 {{< img src="account_management/rbac/logs_write_processors.png" alt="Grant write access for processors to specific roles"  style="width:75%;" >}}
 
-* **logs_write_archives**: Grants the ability to create or modify log archives. This permission can be granted or revoked from a role via [the Roles API][3].
-
-## Getting Started with RBAC
-
-By default, existing users are already associated with one of the three out-of-the-box Datadog Admin, Standard, or Read-Only Roles, so all users already have permissions to read all logs, and Admin or Standard users already have write permissions on log-related account assets.
-
-To start limiting these permissions for existing users, create custom roles and assign existing users to those roles. Then you can take any of the following actions to limit their permissions to those of the custom roles:
-
-* Remove users from the Datadog Standard or Read-Only Roles via [the Roles API][2].
-
-* Remove permissions from the Datadog Standard or Read-Only Roles via [the Roles API][2].
-
-* Delete the Datadog Standard or Read-Only Roles via [the Roles API][2].
+* **logs_write_archives**: Grants the ability to create or modify log archives. This permission can be granted or revoked from a role via [the Roles API][4].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/logs/pipelines
-[2]: /api/#roles
-[3]: /events
+[1]: /api/#get-permissions
+[2]: https://app.datadoghq.com/logs/pipelines
+[3]: /api/#roles
+[4]: /events

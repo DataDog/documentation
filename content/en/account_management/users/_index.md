@@ -8,15 +8,15 @@ further_reading:
 - link: "account_management/saml"
   tag: "Documentation"
   text: "Configure SAML for your Datadog account"
-- link: "account_management/users/default_roles"
+- link: "/account_management/rbac/"
   tag: "Documentation"
-  text: "Default Datadog Roles and Permissions"
-- link: "account_management/users/custom_roles"
+  text: "Learn how to create, update and delete a Role"
+- link: "/account_management/rbac/permissions"
   tag: "Documentation"
-  text: "Creating Custom Datadog Roles"
-- link: "/api/#roles"
-  tag: "API"
-  text: "Manage your Roles and permission through the Datadog API."
+  text: "Discover the list of permissions available"
+- link: "/api/#users"
+  tag: "Documentation"
+  text: "Manage your users with the USER API"
 ---
 
 <div class="alert alert-warning">
@@ -51,10 +51,12 @@ Only users with Privileged Access, such as users with the Datadog Admin Role, ca
 
 1. Go to the User Management Page.
 2. Select the *Edit* button on the right of the user line.
-3. Select the new [user roles][1] for this user.
+3. Select the new [user roles][2] for this user.
 4. **Save** the new setting.
 
 {{< img src="account_management/users/user_role_update.png" alt="User role update"  style="width:80%;">}}
+
+See the [Role Based Access Control][2] documentation to discover all roles available and how to create custom ones.
 
 ## Disable existing members
 
@@ -75,3 +77,4 @@ Only user with Privileged Access, such as users with the Datadog Admin Role, can
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/users/default_roles
+[2]: /account_management/rbac/
