@@ -1752,7 +1752,13 @@ main:
   - name: "Default Datadog Roles"
     url: "account_management/users/default_roles/"
     parent: "account_management_users"
+    identifier: "account_management_users_default_roles"
     weight: 101
+  - name: "Custom Datadog Roles"
+    url: "account_management/users/custom_roles/"
+    parent: "account_management_users"
+    identifier: "account_management_custom_roles"
+    weight: 102
 
   - name: "Organization settings"
     url: "account_management/org_settings/"
