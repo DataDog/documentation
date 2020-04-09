@@ -1766,7 +1766,7 @@ main:
     identifier: "account_management_rbac"
     weight: 2
   - name: "Log Management"
-    url: "account_management/rbac/"
+    url: "account_management/rbac/log_management"
     parent: "account_management_rbac"
     identifier: "account_management_rbac_log_management"
     weight: 201
