@@ -1881,12 +1881,6 @@ api_v1:
   - name: Synthetics
     url: /api/v1/synthetics/
     identifier: Synthetics
-  - name: Get all devices
-    parent: Synthetics
-    url: get-all-devices
-  - name: Get all locations (public and private)
-    parent: Synthetics
-    url: get-all-locations-(public-and-private)
   - name: Get all test
     parent: Synthetics
     url: get-all-test
