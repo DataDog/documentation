@@ -3,9 +3,9 @@
 
     {{ .Content }}
 
-    <form>
+    <form id="rules">
         <div class="form-group clearfix">
-            <input type="input" class="form-control rule-search mb-3" id="keywords" placeholder="Search here" onkeyup="search()">
+            <input type="input" class="form-control rule-search mb-3" id="keywords" placeholder="Search here">
         </div>
 
         <div class="list-group">
@@ -41,9 +41,13 @@
     <script type="text/javascript">
         const group = Array.prototype.slice.call(document.getElementsByClassName('js-group'));
 
-        // Search
-        function search() {
+        document.getElementById("rules").addEventListener("submit", function(event){
+            event.preventDefault()
+        });
+
+        document.getElementById("keywords").addEventListener("keyup", function(event){
             const input = document.getElementById('keywords').value.toLowerCase();
+
             for(i = 0 ; i < group.length; i++){
                 // Filtering individual rules
                 const rules = Array.prototype.slice.call(document.querySelectorAll(`.js-group-${i} .js-page`));
@@ -65,8 +69,8 @@
                     document.querySelector(`.js-group-${i}`).classList.remove('d-none');
                     document.querySelector(`.js-group-${i} > .rule-list`).classList.add('active');
                 }
-            }
-        }
+            }            
+        });
 
         // Accordion js
         const ruleList = Array.prototype.slice.call(document.getElementsByClassName('rule-list'));
