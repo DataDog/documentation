@@ -1,9 +1,9 @@
 ---
 title: Creating Custom Datadog Roles
 kind: documentation
-private: true
-beta: true
 description: "Creating custom roles and modifying the permissions of an existing role."
+aliases:
+  - /account_management/faq/managing-global-role-permissions
 further_reading:
 - link: "account_management/users"
   tag: "Documentation"
@@ -14,6 +14,9 @@ further_reading:
 - link: "account_management/multi_organization"
   tag: "Documentation"
   text: "Configuring Teams & Organizations with Multiple Accounts"
+- link: "/api/#create-role"
+  tag: "API"
+  text: "Create your Roles through Datadog API"
 ---
 
 <div class="alert alert-warning">
@@ -55,6 +58,7 @@ To delete a custom role:
 3. Confirm your decision.
 
 {{< img src="account_management/users/delete_role.png" alt="Deleting a Role"  style="width:90%;">}}
+
 {{< img src="account_management/users/delete_role_confirmation.png" alt="Deleting a Role"  style="width:90%;">}}
 
 Once a role is deleted all users who have the role will have their permissions updated. Users without any roles will not be able to use Datadog effectively, but will still maintain limited access. You should always make sure users either have a Role or are disabled if they do not need access to your organization.

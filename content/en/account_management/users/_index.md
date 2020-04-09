@@ -14,6 +14,9 @@ further_reading:
 - link: "account_management/users/custom_roles"
   tag: "Documentation"
   text: "Creating Custom Datadog Roles"
+- link: "/api/#roles"
+  tag: "API"
+  text: "Manage your Roles and permission through the Datadog API."
 ---
 
 <div class="alert alert-warning">
