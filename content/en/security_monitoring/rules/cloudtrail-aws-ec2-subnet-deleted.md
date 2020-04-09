@@ -17,15 +17,15 @@ aliases:
 
 ## Overview
 
-### **Goal:**
+### Goal
 Detect when an attacker is destroying an EC2 subnet.
 
-### **Strategy:**
+### Strategy
 Monitor CloudTrail and detect when an EC2 subnet is deleted via the following API call:
 
 * [DeleteSubnet][1]
 
-### **Triage & Response:**
+### Triage & Response
 1. Determine who the user was who made this API call.
 2. Contact the user and see if this was an API call which was made by the user.
 3. If the API call was not made by the user:

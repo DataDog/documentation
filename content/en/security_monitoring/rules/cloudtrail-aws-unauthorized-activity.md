@@ -1,29 +1,25 @@
 ---
-title: AWS VPC Created or Modified
+title: AWS Unauthorized Activity
 kind: documentation
 type: security_rules
 disable_edit: true
-src_link: https://docs.datadoghq.com/integrations/amazon_cloudtrail/
-src_img: /images/integrations_logos/amazon_cloudtrail.png
+src_link: https://docs.datadoghq.com/integrations/amazon_/
+src_img: /images/integrations_logos/amazon_.png
 security: compliance
 framework: cis
-control: cis-3.14
-source: cloudtrail
-scope: ec2
-meta_image: /images/integrations_logos/amazon_ec2.png
+control: cis-3.1
+
 aliases:
-- f6b-3b4-aef
+- 1b1-37a-74c
 ---
 
 ## Overview
 
 ### Goal
-Detect when an attacker is destroying a VPC
+Detect when unauthorized activity is detected in AWS
 
 ### Strategy
-Monitor CloudTrail and detect when a VPC is deleted via the following API call:
-
-* [DeleteVpc][1]
+Monitor CloudTrail and detect when the error message of `AccessDenied` is returned.
 
 ### Triage & Response
 1. Determine who the user was who made this API call.
@@ -31,5 +27,3 @@ Monitor CloudTrail and detect when a VPC is deleted via the following API call:
 3. If the API call was not made by the user:
    * Rotate the user credentials and investigate what other API calls.
    * Determine what other API calls the user made which were not made by the user.
-
-[1]: https://docs.aws.amazon.com/cli/latest/reference/ec2/delete-vpc.html

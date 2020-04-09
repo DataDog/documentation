@@ -5,9 +5,9 @@ type: security_rules
 disable_edit: true
 src_link: https://docs.datadoghq.com/integrations/amazon_cloudtrail/
 src_img: /images/integrations_logos/amazon_cloudtrail.png
-security: attack
-tactic: TA0005-defense-evasion
-technique: T1089-disabling-security-tools
+security: compliance
+framework: cis
+control: cis-3.5
 source: cloudtrail
 scope: cloudtrail
 meta_image: /images/integrations_logos/amazon_cloudtrail.png
@@ -17,17 +17,17 @@ aliases:
 
 ## Overview
 
-### Goal:
+### Goal
 Detect when an attacker is trying to evade defenses by disabling or modifying CloudTrail.
 
-### Strategy:
+### Strategy
 Monitor CloudTrail and detect when CloudTrail is being disabled via one of the following API calls:
 
 * [DeleteTrail][1]
 * [UpdateTrail][2]
 * [StopLogging][3]
 
-### **Triage & Response:**
+### Triage & Response
 1. Determine who the user was who made this API call.
 2. Contact the user and see if this was an API call which was made by the user.
 3. If the API call was not made by the user:

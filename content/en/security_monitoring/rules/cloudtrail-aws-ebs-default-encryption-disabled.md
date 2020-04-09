@@ -15,15 +15,15 @@ aliases:
 
 ## Overview
 
-### **Goal:**
+### Goal
 Detect when EBS encryption is disabled by default 
 
-### **Strategy:**
+### Strategy
 Monitor CloudTrail and detect when EBS encryption is disabled by default via the following API call:
 
 * [DisableEbsEncryptionByDefault][1]
 
-### **Triage & Response:**
+### Triage & Response
 1. Determine who the user was who made this API call.
 2. Contact the user and inform them of best practices to enable EBS encryption by default.
 3. Re-enable EBS encryption by default.

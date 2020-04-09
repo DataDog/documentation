@@ -15,15 +15,15 @@ aliases:
 
 ## Overview
 
-### **Goal:**
+### Goal
 Detect when the S3 Public Access Block configuration has been removed 
 
-### **Strategy:**
+### Strategy
 Monitor CloudTrail and detect when S3 Public Access Block configuration has been removed via the following API call:
 
 * [DeleteAccountPublicAccessBlock][1]
 
-### **Triage & Response:**
+### Triage & Response
 1. Determine who the user was who made this API call.
 2. Contact the user and inform them of best practices of enabling Public Access Block on S3 buckets.
 3. Re-enable Public Access Block on the S3 bucket.

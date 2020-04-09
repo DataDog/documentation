@@ -17,10 +17,10 @@ aliases:
 
 ## Overview
 
-### **Goal:**
+### Goal
 Detect when an attacker is enumerating IAM principals.
 
-### **Strategy:**
+### Strategy
 Leverage GuardDuty and detect when an attacker is enumerating IAM principals. The following are GuardDuty Findings which may trigger this signal:
 
 * [Recon:IAMUser/NetworkPermissions][1]
@@ -28,7 +28,7 @@ Leverage GuardDuty and detect when an attacker is enumerating IAM principals. Th
 * [Recon:IAMUser/UserPermissions][3] 
 
 
-### **Triage & Response:**
+### Triage & Response
 1. Determine who the user was who made this API call.
 2. Contact the user and see if this was an API call which was made by the user.
 3. If the API call was not made by the user:

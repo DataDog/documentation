@@ -6,6 +6,8 @@ disable_edit: true
 src_link: https://docs.datadoghq.com/integrations/amazon_cloudtrail/
 src_img: /images/integrations_logos/amazon_cloudtrail.png
 security: compliance
+framework: cis
+control: cis-3.2
 source: cloudtrail
 scope: amazon
 meta_image: /images/integrations_logos/amazon_web_services.png
@@ -15,13 +17,13 @@ aliases:
 
 ## Overview
 
-### **Goal:**
+### Goal
 Detect when the root user logs into the AWS console without MFA
 
-### **Strategy:**
+### Strategy
 Monitor CloudTrail and detect when any `@evt.name` is equal to `Console Login`, `@userIdentity.type` is equal to `Root`, and `@additionalEventData.MFAUsed` is equal to `no`. 
 
-### **Triage & Response:**
+### Triage & Response
 1. Determine who logged into the root user account and ensure the login was legitimate
 2. Enable 2FA on the root account
 3. Review all user accounts and ensure MFA is enabled on all accounts 

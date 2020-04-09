@@ -1,13 +1,13 @@
 ---
-title: AWS Config Disabled
+title: AWS Config Modified
 kind: documentation
 type: security_rules
 disable_edit: true
 src_link: https://docs.datadoghq.com/integrations/amazon_cloudtrail/
 src_img: /images/integrations_logos/amazon_cloudtrail.png
-security: attack
-tactic: TA0005-defense-evasion
-technique: T1089-disabling-security-tools
+security: compliance
+framework: cis
+control: cis-3.9
 source: cloudtrail
 scope: amazon-config
 meta_image: /images/integrations_logos/amazon_web_services.png
@@ -17,16 +17,16 @@ aliases:
 
 ## Overview
 
-### **Goal:**
+### Goal
 Detect when an attacker is trying to evade defenses by disabling AWS Config.
 
-### **Strategy:**
+### Strategy
 Monitor CloudTrail and detect when AWS config is being disabled via the following API calls:
 
 * [StopConfigurationRecorder][1] 
 * [DeleteDeliveryChannel][2] 
 
-### **Triage & Response:**
+### Triage & Response
 1. Determine who the user was who made this API call.
 2. Contact the user and see if this was an API call which was made by the user.
 3. If the API call was not made by the user:
