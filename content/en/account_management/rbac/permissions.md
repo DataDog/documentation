@@ -35,6 +35,7 @@ Find below the detailed of those options and the impact of each available permis
 
 ### Dashboards
 
+
 | Name                         | Description                                           | Scopable                     |
 |------------------------------|-------------------------------------------------------|------------------------------|
 | dashboards_read              | Ability to view dashboards                            |false                         |
@@ -43,6 +44,7 @@ Find below the detailed of those options and the impact of each available permis
 
 ### Monitors
 
+
 | Name                         | Description                                           | Scopable                     |
 |------------------------------|-------------------------------------------------------|------------------------------|
 | monitors_read                | Ability to view monitors                              |false                         |
@@ -50,6 +52,22 @@ Find below the detailed of those options and the impact of each available permis
 | monitors_downtime            | Ability to set downtimes for your monitors            |false                         |
 
 ### Log Management
+
+
+| Name                         | Description                                           | Scopable                     |
+|------------------------------|-------------------------------------------------------|------------------------------|
+| logs_read_index_data         | Read a subset of all log indexes                      |true                          |
+| logs_modify_indexes          | Update the definition of log indexes                  |false                         |
+| logs_live_tail               | Access the live tail feature                          |false                         |
+| logs_write_exclusion_filters | Update a subset of the exclusion filters              |true                          |
+| logs_write_pipelines         | Update a subset of the log pipelines                  |true                          |
+| logs_write_processors        | Update the log processors in an index                 |true                          |
+| logs_write_archives          | Update the external archives configuration            |false                         |
+| logs_public_config_api       | Access the Logs Public Config API (r/w)               |false                         |
+| logs_generate_metrics        | Access the Generate Metrics feature                   |false                         |
+
+
+More details about those permissions below.
 
 #### Configuration
 
