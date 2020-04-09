@@ -5172,15 +5172,6 @@ components:
       - LAPTOP_LARGE
       - TABLET
       - MOBILE_SMALL
-    SyntheticsDevices:
-      description: TODO.
-      properties:
-        devices:
-          description: TODO.
-          items:
-            $ref: '#/components/schemas/SyntheticsDevice'
-          type: array
-      type: object
     SyntheticsErrorCode:
       description: TODO.
       enum:
@@ -5254,35 +5245,6 @@ components:
           description: TODO.
           items:
             $ref: '#/components/schemas/SyntheticsTestDetails'
-          type: array
-      type: object
-    SyntheticsLocation:
-      description: TODO.
-      properties:
-        display_name:
-          description: TODO.
-          type: string
-        id:
-          description: TODO.
-          format: int64
-          type: integer
-        is_active:
-          description: TODO.
-          type: boolean
-        name:
-          description: TODO.
-          type: string
-        region:
-          description: TODO.
-          type: string
-      type: object
-    SyntheticsLocations:
-      description: TODO.
-      properties:
-        locations:
-          description: TODO.
-          items:
-            $ref: '#/components/schemas/SyntheticsLocation'
           type: array
       type: object
     SyntheticsPlayingTab:
@@ -5620,8 +5582,6 @@ components:
           type: string
         options:
           $ref: '#/components/schemas/SyntheticsTestOptions'
-        overall_state:
-          $ref: '#/components/schemas/SyntheticsTestMonitorStatus'
         public_id:
           description: TODO.
           type: string
@@ -11459,35 +11419,6 @@ paths:
       summary: Get an SLO's history
       tags:
       - Service Level Objectives
-  /api/v1/synthetics/browser/devices:
-    get:
-      description: Get the list of devices available for Synthetics browser tests.
-      operationId: ListDevices
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SyntheticsDevices'
-          description: OK
-      summary: Get all devices
-      tags:
-      - Synthetics
-  /api/v1/synthetics/locations:
-    get:
-      description: Get the list of public and private locations available for Synthetics
-        tests. No arguments required
-      operationId: ListLocations
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SyntheticsLocations'
-          description: OK
-      summary: Get all locations (public and private)
-      tags:
-      - Synthetics
   /api/v1/synthetics/tests:
     get:
       description: Get the list of all Synthetics tests (can be filtered by type).
