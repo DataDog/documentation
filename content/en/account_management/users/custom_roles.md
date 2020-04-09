@@ -2,8 +2,6 @@
 title: Creating Custom Datadog Roles
 kind: documentation
 description: "Creating custom roles and modifying the permissions of an existing role."
-aliases:
-  - /account_management/faq/managing-global-role-permissions
 further_reading:
 - link: "account_management/users"
   tag: "Documentation"
