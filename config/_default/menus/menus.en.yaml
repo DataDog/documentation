@@ -1749,26 +1749,16 @@ main:
     parent: "account_management"
     identifier: "account_management_users"
     weight: 1
-  - name: "Default Datadog Roles"
-    url: "account_management/users/default_roles/"
-    parent: "account_management_users"
-    identifier: "account_management_users_default_roles"
-    weight: 101
-  - name: "Custom Datadog Roles"
-    url: "account_management/users/custom_roles/"
-    parent: "account_management_users"
-    identifier: "account_management_custom_roles"
-    weight: 102
 
   - name: "RBAC"
     url: "account_management/rbac/"
     parent: "account_management"
     identifier: "account_management_rbac"
     weight: 2
-  - name: "Log Management"
-    url: "account_management/rbac/log_management"
+  - name: "Permissions"
+    url: "account_management/rbac/permissions"
     parent: "account_management_rbac"
-    identifier: "account_management_rbac_log_management"
+    identifier: "account_management_rbac_permissions"
     weight: 201
 
   - name: "Organization settings"
