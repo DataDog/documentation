@@ -11,7 +11,7 @@ further_reading:
 ---
 <div class="alert alert-warning"> This service is in public beta. If you have any feedback, please <a href="/help">contact Datadog support</a>.</div>
 
-## Azure App Services Overview
+## Overview
 
 Microsoft Azure App Services is a group of serverless resources that enable you to build and host web apps, mobile back ends, event-driven functions, and RESTful APIs without managing infrastructure. It can host workloads of all sizes and offers auto-scaling and high availability options.
 
@@ -57,17 +57,17 @@ The Datadog .NET APM extension supports the following .NET runtimes in both x64 
 
 ## Logs and Trace ID Injection
 
-Logs for Azure Web Apps can be submitted to Datadog with Eventhub using the process described in our [Azure Integration documentation][9].
+Logs for Azure Web Apps can be submitted to Datadog with Eventhub using the process described in the [Azure Integration documentation][9].
 
 Once you establish the logging pipeline for your application, Trace ID injection allows you to [connect logs and traces][10] in Datadog. To enable this with the extension, add an application setting `DD_LOGS_INJECTION:true`.
 
-**Note**: Trace ID injection occurs in the application, so application logs include the trace ID. Other categories of [diagnostic Logs available from Azure][11], like HTTP logs and audit logs, do not include the trace ID.
+**Note**: Trace ID injection occurs in the application, so application logs include the trace ID. Other categories of [diagnostic logs available from Azure][11], like HTTP logs and audit logs, do not include the trace ID.
 
 ## Troubleshooting
 
 ### 5XX errors
 
-If your app begins throwing 5XX errors immediately after installation, we recommend first trying to reinstall with the application in a full stop. To do this:
+If your app begins throwing 5XX errors immediately after installation, first try to reinstall with the application in a full stop. To do this:
 
 1. Stop the application.
 2. Remove the Datadog extension.
