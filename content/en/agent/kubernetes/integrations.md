@@ -478,7 +478,7 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kubernetes/integrations
+[1]: /agent/docker/integrations
 [2]: /getting_started/integrations/#configuring-agent-integrations
 [3]: /integrations/#cat-autodiscovery
 [4]: /integrations/ceph
