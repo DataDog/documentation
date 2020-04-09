@@ -8,9 +8,12 @@ components:
   responses: {}
   schemas:
     APIErrorResponse:
+      description: TODO.
       properties:
         errors:
+          description: TODO.
           items:
+            description: TODO.
             example: Bad Request
             type: string
           type: array
@@ -21,13 +24,17 @@ components:
       description: Creator of the object
       properties:
         email:
+          description: TODO.
           type: string
         handle:
+          description: TODO.
           type: string
         name:
+          description: TODO.
           type: string
       type: object
     DashboardListAddItemsResponse:
+      description: TODO.
       properties:
         added_dashboards_to_list:
           description: List of dashboards added to the dashboard list.
@@ -36,6 +43,7 @@ components:
           type: array
       type: object
     DashboardListDeleteItemsResponse:
+      description: TODO.
       properties:
         deleted_dashboards_from_list:
           description: List of dashboards deleted from the dashboard list.
@@ -44,6 +52,7 @@ components:
           type: array
       type: object
     DashboardListItem:
+      description: TODO.
       properties:
         author:
           $ref: '#/components/schemas/Creator'
@@ -97,6 +106,7 @@ components:
       - id
       type: object
     DashboardListItems:
+      description: TODO.
       properties:
         dashboards:
           description: List of dashboards in the dashboard list.
