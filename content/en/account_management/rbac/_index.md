@@ -68,11 +68,6 @@ Find example to create a Role in the [Datadog Create Role API documentation][1].
 
 [1]: /api/#create-role
 {{% /tab %}}
-{{% tab "SAML" %}}
-
-Custom roles are imported via SAML integrations from identity providers. Datadog receives the user groups from your IdP and automatically generates roles to match those user groups. In this case, users who sign in via the IdP are automatically associated with those roles and have the permissions that are granted to those roles.
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ### Update a Role
