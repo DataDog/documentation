@@ -1872,6 +1872,21 @@ api_v1:
   - name: Get an SLO's history
     parent: Service Level Objectives
     url: get-an-slo's-history
+  - name: Slack Integration
+    url: /api/v1/slack-integration/
+    identifier: Slack Integration
+  - name: Delete a Slack integration
+    parent: Slack Integration
+    url: delete-a-slack-integration
+  - name: Get Slack integration
+    parent: Slack Integration
+    url: get-slack-integration
+  - name: Create a Slack integration
+    parent: Slack Integration
+    url: create-a-slack-integration
+  - name: Add channels to Slack integration
+    parent: Slack Integration
+    url: add-channels-to-slack-integration
   - name: Snapshots
     url: /api/v1/snapshots/
     identifier: Snapshots
