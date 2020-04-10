@@ -27,11 +27,11 @@ General permissions provide the base level of access for your role. [Advanced Pe
 
 By default, existing users are already associated with one of the three out-of-the-box Datadog Admin, Standard, or Read-Only Roles, so all users already have permissions to read all data types, and Admin or Standard users already have write permissions on assets.
 
-**Note**: When adding a new custom role to a user, make sure to remove the out-of-the-box Datadog role associated to it in order to force the use of the new role permissions.
+**Note**: When adding a new custom role to a user, make sure to remove the out-of-the-box Datadog role associated with that user order to enforce the new role permissions.
 
 In addition of the general permissions, it is possible to define more granular permissions for specific assets or data types.
 Permissions can be either global or scoped to a subset of elements.
-Find below the detailed of those options and the impact of each available permission.
+Find below the details of these options and the impact they have on each available permission.
 
 ### Dashboards
 
@@ -67,7 +67,7 @@ Find below the detailed of those options and the impact of each available permis
 | logs_generate_metrics        | Access the Generate Metrics feature                   |false                         |
 
 
-More details about those permissions below.
+More details about these permissions below.
 
 #### Configuration
 
@@ -78,7 +78,7 @@ Grants a role the ability to use the live tail feature.
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles Page][1] and select the checkbox `read` as below for the wanted role:
+Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
 {{< img src="account_management/rbac/logs_livetail_access.png" alt="Create a custom Role"  style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/access/roles
@@ -100,7 +100,7 @@ Grants a role the ability to use the Generate Metrics feature. This permission i
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles Page][1] and select the checkbox `other` as below for the wanted role:
+Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
 {{< img src="account_management/rbac/logs_generate_metrics_access.png" alt="Create a custom Role"  style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/access/roles
@@ -127,7 +127,7 @@ Grants a role the ability to create and modify log indexes. This includes:
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles Page][1] and select the checkbox `other` as below for the wanted role:
+Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
 {{< img src="account_management/rbac/logs_modify_indexes_access.png" alt="Create a custom Role"  style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/access/roles
@@ -182,7 +182,7 @@ Grants a role the ability to create and modify log processing pipelines. This in
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles Page][1] and select the checkbox `other` as below for the wanted role:
+Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
 {{< img src="account_management/rbac/logs_write_pipeline_access.png" alt="Create a custom Role"  style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/access/roles
@@ -195,8 +195,8 @@ This permission can be granted or revoked from a role via [the Roles API][4].
 To grant write access to only two processing pipelines whose IDs are `abcd-1234` and `bcde-2345` respectively:
 
 1. Remove the global `logs_write_pipelines` permission on the role if already assigned.
-2. Get the UUID of the role you want to modify
-3. Use the [Get Permission][1] API to find the `logs_write_pipelines` permission UUID for your region
+2. Get the UUID of the role you want to modify.
+3. Use the [Get Permission][1] API to find the `logs_write_pipelines` permission UUID for your region.
 4. Grant permission to that role with the following call:
 
 ```sh
@@ -234,7 +234,7 @@ Grants a role the ability to create or modify the processors within a processing
 
 **Global access**
 
-Go to your [Datadog Roles Page][1] and select the checkbox `write` as below for the wanted role:
+Go to your [Datadog Roles page][1] and select the checkbox `write` as below for the wanted role:
 
 {{< img src="account_management/rbac/logs_write_processors_access.png" alt="Create a custom Role"  style="width:90%;">}}
 
@@ -265,7 +265,7 @@ Grants the ability to create or modify log archives.
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles Page][1] and select the checkbox `other` as below for the wanted role:
+Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
 {{< img src="account_management/rbac/logs_write_archives_access.png" alt="Create a custom Role"  style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/access/roles
@@ -287,7 +287,7 @@ Grants the ability to create or modify log configuration through the Datadog API
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-Go to your [Datadog Roles Page][1] and select the checkbox `other` as below for the wanted role:
+Go to your [Datadog Roles page][1] and select the checkbox `other` as below for the wanted role:
 {{< img src="account_management/rbac/logs_public_config_api_access.png" alt="Create a custom Role"  style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/access/roles
@@ -308,14 +308,14 @@ The following permissions can be granted to manage read access on subsets of log
 
 ##### logs_read_index_data
 
-Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes 
+Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
 **Global access**
 
-Go to your [Datadog Roles Page][1] and select the checkbox `write` as below for the wanted role:
+Go to your [Datadog Roles page][1] and select the checkbox `write` as below for the wanted role:
 
 {{< img src="account_management/rbac/logs_read_index_data_access.png" alt="Create a custom Role"  style="width:90%;">}}
 
@@ -336,8 +336,8 @@ This permission can be granted or revoked from a role via [the Roles API][4].
 For example, to grant read access only on two indexes named `main` and `support` to a role, your API call looks like this:
 
 1. Remove the global `logs_read_index_data` permission on the role if already assigned.
-2. Get the UUID of the role you want to modify
-3. Use the [Get Permission][1] API to find the `logs_read_index_data` permission UUID for your region
+2. Get the UUID of the role you want to modify.
+3. Use the [Get Permission][1] API to find the `logs_read_index_data` permission UUID for your region.
 4. Grant permission to that role with the following call:
 
 ```
