@@ -41,7 +41,20 @@
             {{ $tagObject := $.Scratch.Get "tagObject"  }}
 
             <h1>{{ $v.name }}</h1>
-            <p>{{ $v.description | markdownify}}</p>
+            
+                <!-- If endpoint is deprecated -->
+            {{ if eq (index $v "x-deprecated") true}}
+
+                <div class="alert alert-danger">
+                    {{$v.description | markdownify}}
+                    {{$v.externalDocs.description}} <a href="{{$v.externalDocs.url}}">{{$v.externalDocs.url}}</a>
+                </div>
+
+            {{ else }}
+
+                <p>{{ $v.description | markdownify}}</p>
+
+            {{ end }}
             
             {{/* sort by action summary */}}
             {{ range sort $tagObject ".action.summary" "asc"  }}
@@ -87,11 +100,12 @@
                                         {{ with $dot.Resources.Match "examples.json" }}
                                             {{ range . }}
                                               {{ $data := . | unmarshal}}
+
+                                             
                                               {{ $req := (index (index $data $context.action.operationId) "request") }}
                                               {{ if $req }}
-                                                  {{ $data2 := (index $req "json") | jsonify }}
-                                                  {{ $data3 := (replace (replace (replace $data2 "," ",\n") "{" "{\n") "}" "\n}") }}
-                                                  {{ $dot.Scratch.Set "json" (highlight $data3 "json" "") }}
+                                                 
+                                                  {{ $dot.Scratch.Set "json" (highlight ((index $req "json") | jsonify (dict "indent" "  ")) "json" "") }}
                                                   {{ $dot.Scratch.Set "html" (index $req "html") }}
                                               {{ else }}
                                                   {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
@@ -119,7 +133,14 @@
                                               {{ $html | safeHTML }}
                                             </div>
                                             <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-request-example">
-                                              {{ $json }}
+                                                <div class="code-snippet-wrapper js-code-block">
+                                                    <div class="code-snippet">
+                                                        <div class="code-button-wrapper position-absolute">
+                                                            <button class="btn text-primary js-copy-button">Copy</button>
+                                                        </div>
+                                                        {{ $json }}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         {{ end }}
@@ -154,9 +175,7 @@
                                               {{ $data := . | unmarshal}}
                                               {{ $res := (index (index (index $data $context.action.operationId) "responses") $response_code) }}
                                               {{ if $res }}
-                                                  {{ $data2 := (index $res "json") | jsonify }}
-                                                  {{ $data3 := (replace (replace (replace $data2 "," ",\n") "{" "{\n") "}" "\n}") }}
-                                                  {{ $dot.Scratch.Set "json" (highlight $data3 "json" "") }}
+                                                  {{ $dot.Scratch.Set "json" (highlight ((index $res "json") | jsonify (dict "indent" "  ")) "json" "") }}
                                                   {{ $dot.Scratch.Set "html" (index $res "html") }}
                                               {{ else }}
                                                   {{ warnf "Could not load html/json response code %q in %q" $response_code $context.action.operationId }}
@@ -277,16 +296,6 @@
                         <hr class="mt-0 mb-2" style="border-top: 2px solid#DADADA"/>
                     </div>
                 </div>
-            {{ end }}
-
-            <!-- If endpoint is deprecated -->
-            {{ if eq (index $v "x-deprecated") true}}
-
-                <div class="alert alert-danger">
-                    {{$v.description | markdownify}}
-                    {{$v.externalDocs.description}} <a href="{{$v.externalDocs.url}}">{{$v.externalDocs.url}}</a>
-                </div>
-
             {{ end }}
 
         {{ end }}

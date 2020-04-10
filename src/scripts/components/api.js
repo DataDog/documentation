@@ -27,10 +27,21 @@ function versionSelectHandler(event) {
 }
 
 function codeLangSelectHandler(event) {
+    // get current position of element in order to keep the scroll position after the size of a code block changes
+    const $this = $(this);
+    const $document = $(document);
+    const currentOffset = $this.offset().top - $document.scrollTop();
+
+    // toggle the different code block
     toggleCodeBlocks(event.target.value);
+
+    // set value of select dropdown to selected value
     codeLangSelects.forEach((codeLangSelect) => {
         codeLangSelect.value = event.target.value;
-    })
+    });
+
+    // set scroll position so the page doesn't jump when a code lang is changed.
+    $document.scrollTop($this.offset().top - currentOffset);
 }
 
 function toggleCodeBlocks(activeLang) {
@@ -46,16 +57,14 @@ function toggleCodeBlocks(activeLang) {
     });
 }
 
-$('.js-expand-all').click(function (){
+$('.js-expand-all').click(function () {
     $(this).toggleClass('expanded');
     const schemaTable = $(this).closest('.schema-table');
     schemaTable.find('.isNested').toggleClass('d-none');
     schemaTable.find('.toggle-arrow').toggleClass('expanded');
-    if ($(this).hasClass("expanded"))
-       $(this).text("Collapse All")
-    else
-       $(this).text("Expand All");
-})
+    if ($(this).hasClass('expanded')) $(this).text('Collapse All');
+    else $(this).text('Expand All');
+});
 
 $('.js-model-link').click(function () {
     $(this)
