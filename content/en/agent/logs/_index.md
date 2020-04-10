@@ -35,7 +35,11 @@ logs_enabled: true
 Starting with Agent v6.19+/v7.19+, HTTPS transport is the default transport used.
 For more details on how enforce HTTPS/TCP transport, refer to the [Agent transport documentation][11].
 
-To enable logs log collection with environment variables, configure the following:
+To send logs with environment variables, configure the following:
+
+* `DD_LOGS_ENABLED`
+* `DD_LOGS_CONFIG_USE_HTTP`
+* `DD_LOGS_CONFIG_USE_COMPRESSION`
 
 * `DD_LOGS_ENABLED`
 
