@@ -113,9 +113,10 @@ To install the Datadog Agent on your Kubernetes cluster:
     - [Manifest with Logs, APM, and metrics collection enabled][4].
     - [Manifest with Logs and metrics collection enabled][5].
     - [Manifest with APM and metrics collection enabled][6].
-    - [Vanilla Manifest with just metrics collection enabled][7].
+    - [Manifest with Network Performance Monitoring enabled][7]
+    - [Vanilla Manifest with just metrics collection enabled][8].
 
-     To enable trace collection completely, [extra steps are required on your application pod configuration][8]. Refer also to the [logs][9], [APM][10], and [processes][11] documentation pages to learn how to enable each feature individually.
+     To enable trace collection completely, [extra steps are required on your application pod configuration][9]. Refer also to the [logs][10], [APM][11], [processes][12], and [Network Performance Monitoring][13] documentation pages to learn how to enable each feature individually.
 
      **Note**: Those manifests are set for the `default` namespace by default. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
@@ -140,7 +141,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     datadog-agent   2         2         2         2            2           <none>          10s
     ```
 
-7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][12] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][13]:
+7. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][14] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][15]:
 
     ```shell
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
@@ -153,20 +154,22 @@ To install the Datadog Agent on your Kubernetes cluster:
 [4]: /resources/yaml/datadog-agent-logs-apm.yaml
 [5]: /resources/yaml/datadog-agent-logs.yaml
 [6]: /resources/yaml/datadog-agent-apm.yaml
-[7]: /resources/yaml/datadog-agent-vanilla.yaml
-[8]: /agent/kubernetes/apm/#setup
-[9]: /agent/kubernetes/log
-[10]: /agent/kubernetes/apm
-[11]: /infrastructure/process/?tab=kubernetes#installation
-[12]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[13]: /agent/kubernetes/data_collected/#kube-state-metrics
+[7]: /resources/yaml/datadog-agent-npm.yaml
+[8]: /resources/yaml/datadog-agent-vanilla.yaml
+[9]: /agent/kubernetes/apm/#setup
+[10]: /agent/kubernetes/log
+[11]: /agent/kubernetes/apm
+[12]: /infrastructure/process/?tab=kubernetes#installation
+[13]: /network_performance_monitoring/installation
+[14]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
+[15]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-[The Datadog Operator][2] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options. To get started, check out the [Getting Started page][1] in the [Datadog Operator repo][2] or install the operator from the [OperatorHub.io Datadog Operator page][3].
+[The Datadog Operator][1] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options. To get started, check out the [Getting Started page][2] in the [Datadog Operator repo][1] or install the operator from the [OperatorHub.io Datadog Operator page][3].
 
-[1]: https://github.com/DataDog/datadog-operator
-[2]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
+[1]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
+[2]: https://github.com/DataDog/datadog-operator
 [3]: https://operatorhub.io/operator/datadog-operator
 {{% /tab %}}
 {{< /tabs >}}

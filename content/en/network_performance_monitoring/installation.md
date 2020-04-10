@@ -65,7 +65,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 4. If you are running an Agent older than v6.18 or 7.18, manually start the system-probe and enable it to start on boot (since v6.18 and v7.18 the system-probe starts automatically when the Agent is started):
 
     ```shell
-    sudo systemctl start datadog-agent-sysprobe 
+    sudo systemctl start datadog-agent-sysprobe
     sudo systemctl enable datadog-agent-sysprobe
     ```
 
@@ -85,147 +85,19 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To enable network performance monitoring with Kubernetes, use the following configuration:
+To enable network performance monitoring with Kubernetes:
 
-```yaml
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-    name: datadog-agent
-    namespace: default
-spec:
-    selector:
-        matchLabels:
-            app: datadog-agent
-    template:
-        metadata:
-            labels:
-                app: datadog-agent
-            name: datadog-agent
-            annotations:
-                container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
-        spec:
-            serviceAccountName: datadog-agent
-            containers:
-                - image: 'datadog/agent:latest'
-                  imagePullPolicy: Always
-                  name: datadog-agent
-                  ports:
-                      - containerPort: 8125
-                        name: dogstatsdport
-                        protocol: UDP
-                      - containerPort: 8126
-                        name: traceport
-                        protocol: TCP
-                  env:
-                      - name: DD_API_KEY
-                        value: '<DATADOG_API_KEY>'
-                      - name: KUBERNETES
-                        value: 'true'
-                      - name: DD_HEALTH_PORT
-                        value: '5555'
-                      - name: DD_PROCESS_AGENT_ENABLED
-                        value: 'true'
-                      - name: DD_SYSTEM_PROBE_ENABLED
-                        value: 'true'
-                      - name: DD_SYSTEM_PROBE_EXTERNAL
-                        value: 'true'
-                      - name: DD_SYSPROBE_SOCKET
-                        value: /var/run/s6/sysprobe.sock
-                      - name: DD_KUBERNETES_KUBELET_HOST
-                        valueFrom:
-                            fieldRef:
-                                fieldPath: status.hostIP
-                      - name: DD_CRI_SOCKET_PATH
-                        value: /host/var/run/docker.sock
-                      - name: DOCKER_HOST
-                        value: unix:///host/var/run/docker.sock
-                  resources:
-                      requests:
-                          memory: 256Mi
-                          cpu: 200m
-                      limits:
-                          memory: 256Mi
-                          cpu: 200m
-                  volumeMounts:
-                      - name: dockersocketdir
-                        mountPath: /host/var/run
-                      - name: procdir
-                        mountPath: /host/proc
-                        readOnly: true
-                      - name: cgroups
-                        mountPath: /host/sys/fs/cgroup
-                        readOnly: true
-                      - name: debugfs
-                        mountPath: /sys/kernel/debug
-                      - name: s6-run
-                        mountPath: /var/run/s6
-                  livenessProbe:
-                      httpGet:
-                          path: /health
-                          port: 5555
-                      initialDelaySeconds: 15
-                      periodSeconds: 15
-                      timeoutSeconds: 5
-                      successThreshold: 1
-                      failureThreshold: 3
-                - name: system-probe
-                  image: 'datadog/agent:latest'
-                  imagePullPolicy: Always
-                  securityContext:
-                      capabilities:
-                          add:
-                              - SYS_ADMIN
-                              - SYS_RESOURCE
-                              - SYS_PTRACE
-                              - NET_ADMIN
-                              - IPC_LOCK
-                  command:
-                      - /opt/datadog-agent/embedded/bin/system-probe
-                  env:
-                      - name: DD_SYSTEM_PROBE_ENABLED
-                        value: 'true'
-                      - name: DD_SYSPROBE_SOCKET
-                        value: /var/run/s6/sysprobe.sock
-                  resources:
-                      requests:
-                          memory: 150Mi
-                          cpu: 200m
-                      limits:
-                          memory: 150Mi
-                          cpu: 200m
-                  volumeMounts:
-                      - name: procdir
-                        mountPath: /host/proc
-                        readOnly: true
-                      - name: cgroups
-                        mountPath: /host/sys/fs/cgroup
-                        readOnly: true
-                      - name: debugfs
-                        mountPath: /sys/kernel/debug
-                      - name: s6-run
-                        mountPath: /var/run/s6
-            volumes:
-                - name: dockersocketdir
-                  hostPath:
-                      path: /var/run
-                - name: procdir
-                  hostPath:
-                      path: /proc
-                - name: cgroups
-                  hostPath:
-                      path: /sys/fs/cgroup
-                - name: s6-run
-                  emptyDir: {}
-                - name: debugfs
-                  hostPath:
-                      path: /sys/kernel/debug
-```
+1. Download the [datadog-agent.yaml manifest][1] template.
+2. Replace `<DATADOG_API_KEY>` with your [Datadog API key][2].
+3. Optional - **Set your Datadog site**. If you are using the Datadog EU site, set the `DD_SITE` environment variable to `datadoghq.eu` in the `datadog-agent.yaml` manifest.
+4. **Deploy the DaemonSet** with the command:
 
-Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
+    ```shell
+    kubectl apply -f datadog-agent.yaml
+    ```
 
-
-[1]: https://app.datadoghq.com/account/settings#api
+[1]: /resources/yaml/datadog-agent-npm.yaml
+[2]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "Docker" %}}
 
