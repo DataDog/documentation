@@ -91,7 +91,7 @@ Note: Setting up a [SOCKS5 proxy][4] server will also enforce TCP transport beca
 
 With/Using HTTP, the Agent sends log batches with the following limits:
 
-* Maximum content size per payload: 1MB
+* Maximum batch size: 1MB
 * Maximum size for a single log: 256kB
 * Maximum array size if sending multiple logs in an array: 200 entries logs.
 
