@@ -37,7 +37,7 @@ For older version of the agent, TCP is used by default. We strongly recommend yo
 
 ## Enforce a specific transport
 
-The default agent behavior can overwritten by enforcing a specific transport.
+The default agent behavior can be overwritten through configuration.
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
