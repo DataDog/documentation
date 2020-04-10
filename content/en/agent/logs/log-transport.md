@@ -33,6 +33,8 @@ This connectivity test mechanism is only running at agent startup. If the connec
 
 To check which transport is used by the agent, run the [agent stauts command][1].
 
+For older version of the agent, TCP is used by default but we strongly recommand you to enforce HTTP transport with compression is you are running v6.14+/v7.14+.
+
 ## Enforce a specific transport
 
 The default agent behavior can overwritten by enforcing a specific transport.
@@ -53,6 +55,8 @@ To send logs with environment variables, configure the following:
 * `DD_LOGS_ENABLED`
 * `DD_LOGS_CONFIG_USE_HTTP`
 
+Note: HTTPS transport is supported with data agent version 6.14+/7.14+
+
 [1]: /agent/guide/agent-configuration-files
 {{% /tab %}}
 {{% tab "TCP" %}}
@@ -67,7 +71,7 @@ logs_config:
 To send logs with environment variables, configure the following:
 
 * `DD_LOGS_ENABLED`
-* `DD_LOGS_CONFIG_USE_HTCP`
+* `DD_LOGS_CONFIG_USE_TCP`
 
 By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`.
 
@@ -96,6 +100,16 @@ The Agent sends HTTPS batches with the following limits:
 The `compression_level` parameter (or `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accepts values from `0` (no compression) to `9` (maximum compression but higher resource usage). The default value is `6`.
 
 See the [Datadog Agent overhead section][2] for more information about Agent resource usage when compression is enabled.
+
+For agent version before 6.19/7.19, you need to enforce compression updating the Agent's [main configuration file][1] (`datadog.yaml`) with:
+
+```yaml
+logs_enabled: true
+logs_config:
+  use_http: true
+  use_compression: true
+  compression_level: 6
+```
 
 ### Configure the batch wait time
 
