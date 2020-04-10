@@ -40,7 +40,7 @@ Find below the details of these options and the impact they have on each availab
 | Name                    | Description                             | Scopable |
 | ----------------------- | --------------------------------------- | -------- |
 | dashboards_read         | Ability to view dashboards              | false    |
-| dashboards_write        | Ability to create and change dashboards | true     |
+| dashboards_write        | Ability to create and change dashboards | false    |
 | dashboards_public_share | Ability to share dashboards externally  | false    |
 
 ### Monitors
@@ -48,7 +48,7 @@ Find below the details of these options and the impact they have on each availab
 | Name              | Description                                  | Scopable |
 | ----------------- | -------------------------------------------- | -------- |
 | monitors_read     | Ability to view monitors                     | false    |
-| monitors_write    | Ability to change, mute, and delete monitors | true     |
+| monitors_write    | Ability to change, mute, and delete monitors | false    |
 | monitors_downtime | Ability to set downtimes for your monitors   | false    |
 
 ### Log Management
