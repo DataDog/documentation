@@ -37,7 +37,6 @@ To check which transport is used by the agent, run the [agent statuts command][1
 
 For older version of the agent, TCP is used by default. We strongly recommend you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS transport and compression if you are running v6.16+/v7.16+. 
 
-Note: Setting up a [SOCKS5 proxy][4] server will also enforce TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
 
 ## Enforce a specific transport
 
@@ -84,6 +83,8 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 
 {{% /tab %}}
 {{< /tabs >}}
+
+Note: Setting up a [SOCKS5 proxy][4] server will also enforce TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
 
 ## HTTPS Transport
 
