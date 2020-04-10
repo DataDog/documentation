@@ -1,6 +1,8 @@
 ---
 title: Datadog Role permissions
 kind: documentation
+aliases:
+  - /account_management/faq/managing-global-role-permissions
 further_reading:
     - link: '/account_management/rbac/'
       tag: 'Documentation'
