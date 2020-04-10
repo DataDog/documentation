@@ -39,7 +39,7 @@ Note: Setting up a [SOCKS5 proxy][4] server will also enforce TCP transport beca
 
 ## Enforce a specific transport
 
-The default agent behavior can be overwritten through configuration.
+Enforce the use of TCP or HTTPS transport by using the following configurations.
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
