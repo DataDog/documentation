@@ -2,21 +2,21 @@
 title: Role Based Access Control
 kind: documentation
 aliases:
-  - /guides/rbac
-  - /account_management/rbac/role_api
-  - /account_management/users/default_roles
-  - /account_management/users/custom_roles
-  - /account_management/rbac/log_management
+    - /guides/rbac
+    - /account_management/rbac/role_api
+    - /account_management/users/default_roles
+    - /account_management/users/custom_roles
+    - /account_management/rbac/log_management
 further_reading:
-- link: "/api/#roles"
-  tag: "Documentation"
-  text: "Manage Roles and Permissions with the Roles API"
-- link: "/api/#get-permissions"
-  tag: "Documentation"
-  text: "Manage your permissions with the Permission API"
-- link: "/account_management/rbac/permissions"
-  tag: "Documentation"
-  text: "Discover the list of permissions available."
+    - link: '/api/#roles'
+      tag: 'Documentation'
+      text: 'Manage Roles and Permissions with the Roles API'
+    - link: '/api/#get-permissions'
+      tag: 'Documentation'
+      text: 'Manage your permissions with the Permission API'
+    - link: '/account_management/rbac/permissions'
+      tag: 'Documentation'
+      text: 'Discover the list of permissions available.'
 ---
 
 Roles categorize users and define what account permissions those users have, such as what data they can read or what account assets they can modify. By default, Datadog offers three roles, and you can create [custom roles](#custom-roles) so you can define a better mapping between your users and their permissions.
@@ -26,7 +26,7 @@ By granting permissions to roles, any user who is associated with that role rece
 ## Datadog Default Roles
 
 | Role                       | Description                                                                                                                                                                                                                                  |
-|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Datadog Admin Role**     | Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][1]. They can also promote standard users to administrators.                                          |
 | **Datadog Standard Role**  | Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][1], [monitors][2], [events][3], and [notebooks][4]. Standard users can also invite other users to organizations.                      |
 | **Datadog Read Only Role** | Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][1] with someone outside their unit. |
@@ -66,6 +66,7 @@ Once a role is created you can [add this role to existing users][3].
 
 Find example to create a Role in the [Datadog Create Role API documentation][1].
 
+
 [1]: /api/#create-role
 {{% /tab %}}
 {{% tab "SAML" %}}
@@ -99,6 +100,7 @@ Once a role is modified, all users who have the role will have their permissions
 
 Find example to create a Role in the [Datadog Update Role API documentation][1].
 
+
 [1]: /api/#update-role
 {{% /tab %}}
 {{< /tabs >}}
@@ -127,6 +129,7 @@ Once a role is deleted all users who have the role will have their permissions u
 
 Find example to create a Role in the [Datadog Delete Role API documentation][1].
 
+
 [1]: /api/#delete-role
 {{% /tab %}}
 {{< /tabs >}}
@@ -134,7 +137,6 @@ Find example to create a Role in the [Datadog Delete Role API documentation][1].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /dashboards
 [2]: /monitors
