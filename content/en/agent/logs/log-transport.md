@@ -33,7 +33,9 @@ This connectivity test mechanism is only running at agent startup. If the connec
 
 To check which transport is used by the agent, run the [agent statuts command][1].
 
-For older version of the agent, TCP is used by default. We strongly recommend you to enforce HTTP transport with compression if you are running v6.14+/v7.14+.
+For older version of the agent, TCP is used by default. We strongly recommend you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS transport and compression if you are running v6.16+/v7.16+. 
+
+Note: Setting up a [SOCKS5 proxy][4] server will also enforce TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
 
 ## Enforce a specific transport
 
@@ -81,15 +83,13 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 {{% /tab %}}
 {{< /tabs >}}
 
-Note: Setting up a [SOCKS5 proxy][4] server will also enforce TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
-
 ## HTTPS Transport
 
 **HTTPS log forwarding is the recommended configuration**. With HTTPS, you have a guarantee that Datadog has received your log.
 
 {{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema"  style="width:80%;">}}
 
-With/Using HTTP, the Agent sends log batches with the following limits:
+Using HTTP, the Agent sends log batches with the following limits:
 
 * Maximum batch size: 1MB
 * Maximum size for a single log: 256kB
