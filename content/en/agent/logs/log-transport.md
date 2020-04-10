@@ -89,7 +89,7 @@ Note: Setting up a [SOCKS5 proxy][4] server will also enforce TCP transport beca
 
 {{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema"  style="width:80%;">}}
 
-The Agent sends HTTPS batches with the following limits:
+With/Using HTTP, the Agent sends log batches with the following limits:
 
 * Maximum content size per payload: 1MB
 * Maximum size for a single log: 256kB
