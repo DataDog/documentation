@@ -93,7 +93,7 @@ With/Using HTTP, the Agent sends log batches with the following limits:
 
 * Maximum batch size: 1MB
 * Maximum size for a single log: 256kB
-* Maximum array size if sending multiple logs in an array: 200 entries logs.
+* Maximum number of logs in a batch: 200
 
 ### Log compression
 
