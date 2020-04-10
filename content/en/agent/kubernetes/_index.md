@@ -173,15 +173,28 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 ## Event Collection
 
-If you want to collect events from your kubernetes cluster set the environment variables `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` to `true` in your Agent manifest. Alternatively, use the [Datadoc Cluster Agent Event collection][2]
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Set the `datadog.leaderElection`, `datadog.collectEvents` and `rbac.create` options to `true` in your `value.yaml` file order to enable Kubernetes event collection.
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+If you want to collect events from your kubernetes cluster set the environment variables `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` to `true` in your Agent manifest. Alternatively, use the [Datadoc Cluster Agent Event collection][1]
+
+[1]: /agent/cluster_agent/event_collection/
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Integrations
 
-Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery feature][3] to collect metrics and logs automatically from your pods.
+Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery feature][2] to collect metrics and logs automatically from your pods.
 
 ## Environment variables
 
-Find below the list of environment variables available for the Datadog Agent. If you want to setup those with Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][4].
+Find below the list of environment variables available for the Datadog Agent. If you want to setup those with Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][3].
 
 ### Global options
 
@@ -205,7 +218,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_PROXY_HTTPS`    | An HTTPS URL to use as a proxy for `https` requests.              |
 | `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
 
-For more information about proxy settings, see the [Agent v6 Proxy documentation][5].
+For more information about proxy settings, see the [Agent v6 Proxy documentation][4].
 
 ### Optional collection Agents
 
@@ -213,14 +226,14 @@ Optional collection Agents are disabled by default for security or performance r
 
 | Env Variable               | Description                                                                                                                                                                                                                                                  |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_APM_ENABLED`           | Enable [trace collection][6] with the Trace Agent.                                                                                                                                                                                                           |
-| `DD_LOGS_ENABLED`          | Enable [log collection][7] with the Logs Agent.                                                                                                                                                                                                              |
-| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][8] with the Process Agent. The [live container view][9] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][8] and the [live container view][9] are disabled. |
+| `DD_APM_ENABLED`           | Enable [trace collection][5] with the Trace Agent.                                                                                                                                                                                                           |
+| `DD_LOGS_ENABLED`          | Enable [log collection][6] with the Logs Agent.                                                                                                                                                                                                              |
+| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][7] with the Process Agent. The [live container view][8] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][7] and the [live container view][8] are disabled. |
 | `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well |
 
 ### DogStatsD (custom metrics)
 
-Send custom metrics with [the StatsD protocol][10]:
+Send custom metrics with [the StatsD protocol][9]:
 
 | Env Variable                     | Description                                                                                                                                                |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -242,7 +255,7 @@ Datadog automatically collects common tags from [Kubernetes][16]. To extract eve
 | `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extract pod labels      |
 | `DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS` | Extract pod annotations |
 
-See the [Kubernetes Tag Extraction][11] documentation to learn more.
+See the [Kubernetes Tag Extraction][10] documentation to learn more.
 
 ### Using secret files
 
@@ -257,7 +270,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
 | `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
-Additional examples are available on the [Container Discover Management][12] page.
+Additional examples are available on the [Container Discover Management][11] page.
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
@@ -274,22 +287,21 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 
 ## Commands
 
-See the [Agent Commands guides][13] to discover all the Docker Agent commands.
+See the [Agent Commands guides][12] to discover all the Docker Agent commands.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/kubernetes-legacy
-[2]: /agent/cluster_agent/event_collection/
-[3]: /agent/kubernetes/integrations
-[4]: https://github.com/helm/charts/tree/master/stable/datadog#all-configuration-options
-[5]: /agent/proxy/#agent-v6
-[6]: /agent/kubernetes/apm
-[7]: /agent/kubernetes/log
-[8]: /infrastructure/process
-[9]: /infrastructure/livecontainers
-[10]: /developers/dogstatsd
-[11]: /agent/kubernetes/tag
-[12]: /agent/guide/autodiscovery-management/
-[13]: /agent/guide/agent-commands/
+[2]: /agent/kubernetes/integrations
+[3]: https://github.com/helm/charts/tree/master/stable/datadog#all-configuration-options
+[4]: /agent/proxy/#agent-v6
+[5]: /agent/kubernetes/apm
+[6]: /agent/kubernetes/log
+[7]: /infrastructure/process
+[8]: /infrastructure/livecontainers
+[9]: /developers/dogstatsd
+[10]: /agent/kubernetes/tag
+[11]: /agent/guide/autodiscovery-management/
+[12]: /agent/guide/agent-commands/
