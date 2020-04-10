@@ -44,7 +44,7 @@ Run the Datadog Agent in your Kubernetes cluster directly in order to start coll
 To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog-agent`):
 
 1. [Install Helm][1].
-2. Download the [Datadog `values.yaml` configuration file][2]. **Note**: In advanced use cases on Windows, you may need to add the line `targetSystem: windows` to the top of your `values.yaml`.
+2. Download the [Datadog `values.yaml` configuration file][2].
 3. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
 
 - **Helm v3+**

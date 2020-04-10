@@ -129,22 +129,28 @@ With the following configuration placeholder values:
 To get started with collecting metrics exposed by Prometheus running within a container, follow these steps:
 
 1. Launch the Datadog Agent:
+    {{< tabs >}}
+    {{% tab "Standard" %}}
 
-    ```shell
-    DOCKER_CONTENT_TRUST=1 \
-    docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
-                  -v /proc/:/host/proc/:ro \
-                  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-                  -e DD_API_KEY="<DATADOG_API_KEY>" \
-                  datadog/agent:latest
-    ```
+```shell
+DOCKER_CONTENT_TRUST=1 \
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              -v /proc/:/host/proc/:ro \
+              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
+              datadog/agent:latest
+```
+    {{% /tab %}}
+    {{% tab "Windows" %}}
 
-    **Note**: In Windows, use the following command:
-    ```shell
-    DOCKER_CONTENT_TRUST=1 \
-    docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
-                  datadog/agent:latest
-    ```
+```shell
+DOCKER_CONTENT_TRUST=1 \
+docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
+              datadog/agent:latest \
+              -v \\.\pipe\docker_engine:\\.\pipe\docker_engine
+```
+    {{% /tab %}}
+    {{< /tabs >}}
 
 2. To launch Prometheus in a container, run: `docker run -p 9090:9090 prom/prometheus`. In order to notify the Agent to query this container with the OpenMetrics check, add the following configuration:
 
