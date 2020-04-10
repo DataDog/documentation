@@ -31,7 +31,7 @@ At agent start, if log collection is enabled, the agent will run a HTTPS connect
 
 This connectivity test mechanism is only running at agent startup. If the connectivity is failing for both HTTPS and TCP at agent startup time, then the agent will use TCP transport until restart it (and then rerun a new Connectivity test)
 
-To check which transport is used by the agent, run the [agent stauts command][1].
+To check which transport is used by the agent, run the [agent statuts command][1].
 
 For older version of the agent, TCP is used by default but we strongly recommand you to enforce HTTP transport with compression is you are running v6.14+/v7.14+.
 
@@ -101,7 +101,7 @@ The `compression_level` parameter (or `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accept
 
 See the [Datadog Agent overhead section][2] for more information about Agent resource usage when compression is enabled.
 
-For agent version before 6.19/7.19, you need to enforce compression updating the Agent's [main configuration file][1] (`datadog.yaml`) with:
+For agent version before 6.19 / 7.19, you need to enforce compression updating the Agent's [main configuration file][1] (`datadog.yaml`) with:
 
 ```yaml
 logs_enabled: true
