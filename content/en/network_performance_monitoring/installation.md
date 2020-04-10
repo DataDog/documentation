@@ -85,7 +85,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To enable network performance monitoring with Kubernetes:
+To enable network performance monitoring with Kubernetes from scratch:
 
 1. Download the [datadog-agent.yaml manifest][1] template.
 2. Replace `<DATADOG_API_KEY>` with your [Datadog API key][2].
@@ -96,8 +96,126 @@ To enable network performance monitoring with Kubernetes:
     kubectl apply -f datadog-agent.yaml
     ```
 
+If you already have the [Agent running with a Manifest][3]:
+
+1. Add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
+
+    ```yaml
+    spec:
+        selector:
+            matchLabels:
+                app: datadog-agent
+        template:
+            metadata:
+                labels:
+                    app: datadog-agent
+                name: datadog-agent
+                annotations:
+                    container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
+    ```
+
+2. Enable process collection and the system prob for the Agent container with the following environment variables:
+
+    ```yaml
+      # (...)
+                      env:
+                      # (...)
+                          - name: DD_PROCESS_AGENT_ENABLED
+                            value: 'true'
+                          - name: DD_SYSTEM_PROBE_ENABLED
+                            value: 'true'
+                          - name: DD_SYSTEM_PROBE_EXTERNAL
+                            value: 'true'
+                          - name: DD_SYSPROBE_SOCKET
+                            value: /var/run/s6/sysprobe.sock
+    ```
+
+3. Mount the following extra volumes into the `datadog-agent` container:
+
+    ```yaml
+     # (...)
+            spec:
+                serviceAccountName: datadog-agent
+                containers:
+                    - name: datadog-agent
+                      image: 'datadog/agent:latest'
+                      # (...)
+                  volumeMounts:
+                      - name: procdir
+                        mountPath: /host/proc
+                        readOnly: true
+                      - name: cgroups
+                        mountPath: /host/sys/fs/cgroup
+                        readOnly: true
+                      - name: debugfs
+                        mountPath: /sys/kernel/debug
+                      - name: s6-run
+                        mountPath: /var/run/s6
+    ```
+
+4. Add a new system-prob as a side car to the Agent:
+
+    ```yaml
+     # (...)
+            spec:
+                serviceAccountName: datadog-agent
+                containers:
+                    - name: datadog-agent
+                      image: 'datadog/agent:latest'
+                    # (...)
+                    - name: system-probe
+                      image: 'datadog/agent:latest'
+                      imagePullPolicy: Always
+                      securityContext:
+                          capabilities:
+                              add:
+                                  - SYS_ADMIN
+                                  - SYS_RESOURCE
+                                  - SYS_PTRACE
+                                  - NET_ADMIN
+                                  - IPC_LOCK
+                      command:
+                          - /opt/datadog-agent/embedded/bin/system-probe
+                      env:
+                          - name: DD_SYSTEM_PROBE_ENABLED
+                            value: 'true'
+                          - name: DD_SYSPROBE_SOCKET
+                            value: /var/run/s6/sysprobe.sock
+                      resources:
+                          requests:
+                              memory: 150Mi
+                              cpu: 200m
+                          limits:
+                              memory: 150Mi
+                              cpu: 200m
+                      volumeMounts:
+                          - name: procdir
+                            mountPath: /host/proc
+                            readOnly: true
+                          - name: cgroups
+                            mountPath: /host/sys/fs/cgroup
+                            readOnly: true
+                          - name: debugfs
+                            mountPath: /sys/kernel/debug
+                          - name: s6-run
+                            mountPath: /var/run/s6
+    ```
+
+5. Finally, add the following volumes to your manifest:
+
+    ```yaml
+                volumes:
+                    - name: s6-run
+                      emptyDir: {}
+                    - name: debugfs
+                      hostPath:
+                          path: /sys/kernel/debug
+    ```
+
+
 [1]: /resources/yaml/datadog-agent-npm.yaml
 [2]: https://app.datadoghq.com/account/settings#api
+[3]: /agent/kubernetes
 {{% /tab %}}
 {{% tab "Docker" %}}
 
