@@ -139,9 +139,20 @@ To send data to the Datadog API or consume data from it through this new endpoin
 {{% /tab %}}
 {{< /tabs >}}
 
+## Advanced Usage
+
+### Inter-region peering
+
+To route traffic to Datadog’s PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][3]. 
+
+Inter-region VPC peering enables you to establish peering regions between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses.
+
+For more information, see the [Amazon VPC peering documentation][3].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/privatelink/
 [2]: /help
+[3]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
