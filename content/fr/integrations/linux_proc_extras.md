@@ -68,7 +68,7 @@ Le check Linux Proc Extras n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -76,5 +76,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [4]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
 [5]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/fr/help
-[8]: https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/metadata.csv
+[7]: https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/metadata.csv
+[8]: https://docs.datadoghq.com/fr/help

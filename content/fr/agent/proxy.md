@@ -33,7 +33,7 @@ Définissez différents serveurs de proxy pour les requêtes `https` et `http` d
 L'Agent utilise `https` pour envoyer des données à Datadog, mais les intégrations peuvent utiliser le protocole `http` pour recueillir des métriques. Quelles que soient les requêtes à faire passer par un proxy, vous pouvez activer le SSL sur votre serveur proxy. Vous trouverez ci-dessous des exemples de configuration pour votre fichier `datadog.yaml`.
 
 <div class="alert alert-warning">
-Sauf si l'Agent Datadog est configuré pour <a href="/agent/logs/?tab=tailexistingfiles#send-logs-over-https">transmettre les logs en HTTPS</a>, le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour le proxy des métriques ne doit **pas** être utilisé pour le proxy des logs. Consultez la page <a href="/agent/logs/proxy">Utilisation d'un proxy pour les logs</a>.
+Sauf si l'Agent Datadog est configuré pour <a href="/agent/logs/#send-logs-over-https">transmettre les logs en HTTPS</a>, le <code>&ltHOST&gt;:&ltPORT&gt;</code> utilisé pour le proxy des métriques ne doit **pas** être utilisé pour le proxy des logs. Consultez la page <a href="/agent/logs/proxy">Utilisation d'un proxy pour les logs avec l'Agent</a>.
 </div>
 
 Définir un proxy HTTP pour toutes les requêtes `https` :
@@ -58,7 +58,7 @@ Définir un `<NOMUTILISATEUR>` et un `<MOTDEPASSE>` pour contacter le serveur pr
 ```yaml
 proxy:
     https: "http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>"
-    http: "http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>"
+    http: "http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTP>:<PORT>"
 ```
 
 Utiliser la liste `no_proxy` pour spécifier les hosts qui doivent ignorer le proxy :
@@ -66,7 +66,7 @@ Utiliser la liste `no_proxy` pour spécifier les hosts qui doivent ignorer le pr
 ```yaml
 proxy:
     https: "http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>"
-    http: "http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTPS>:<PORT>"
+    http: "http://<NOMUTILISATEUR>:<MOTDEPASSE>@<SERVEUR_PROXY_POUR_HTTP>:<PORT>"
     no_proxy:
       - host1
       - host2
@@ -156,8 +156,21 @@ listen stats
     stats enable
     stats uri /
 
+# Cette section sert à recharger les enregistrements DNS
+# Remplacez <IP_SERVEUR_DNS> et <IP_SERVEUR_DNS_SECONDAIRE> par les adresses IP de votre serveur DNS.
+# Pour HAProxy 1.8 et versions ultérieures
+resolvers my-dns
+    nameserver dns1 <IP_SERVEUR_DNS>:53
+    nameserver dns2 <IP_SERVEUR_DNS_SECONDAIRE>:53
+    resolve_retries 3
+    timeout resolve 2s
+    timeout retry 1s
+    accepted_payload_size 8192
+    hold valid 10s
+    hold obsolete 60s
+
 # Ceci déclare l'endpoint auquel vos Agents se connectent pour
-# envoyer les métriques (par exemple, la valeur de « dd_url »).
+# envoyer les métriques (par exemple, la valeur pour « dd_url »).
 frontend metrics-forwarder
     bind *:3834
     mode tcp
@@ -172,8 +185,8 @@ frontend traces-forwarder
     default_backend datadog-traces
 
 # Ceci déclare l'endpoint auquel vos Agents se connectent pour
-# envoyer les processus (par exemple, la valeur pour « url » dans
-# la section de configuration des processus).
+# envoyer les processus (par exemple, la valeur pour « url » dans la
+# section de configuration des processus).
 frontend processes-forwarder
     bind *:3836
     mode tcp
@@ -193,25 +206,37 @@ backend datadog-metrics
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership haproxy-app.agent.datadoghq.com:443 check port 443
+    # La configuration suivante est pour HAProxy 1.8 et versions ultérieures
+    server-template mothership 5 haproxy-app.agent.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Supprimez la mise en commentaire de la configuration suivante pour les versions antérieures de HAProxy
+    # server mothership haproxy-app.agent.datadoghq.com:443 check port 443
 
 backend datadog-traces
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership trace.agent.datadoghq.com:443 check port 443
+    # La configuration suivante est pour HAProxy 1.8 et versions ultérieures
+    server-template mothership 5 trace.agent.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Supprimez la mise en commentaire de la configuration suivante pour les versions antérieures de HAProxy
+    # server mothership trace.agent.datadoghq.com:443 check port 443
 
 backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership process.datadoghq.com:443 check port 443
+    # La configuration suivante est pour HAProxy 1.8 et versions ultérieures
+    server-template mothership 5 process.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Supprimez la mise en commentaire de la configuration suivante pour les versions antérieures de HAProxy
+    # server mothership process.datadoghq.com:443 check port 443
 
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
+    # La configuration suivante est pour HAProxy 1.8 et versions ultérieures
+    server-template mothership 5 agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Supprimez la mise en commentaire de la configuration suivante pour les versions antérieures de HAProxy
+    # server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
 
 **Remarque** : téléchargez le certificat avec la commande suivante :
@@ -219,7 +244,8 @@ backend datadog-logs
         * `yum install ca-certificates` (CentOS, Redhat)
 Il est possible que le fichier se situe à l'emplacement `/etc/ssl/certs/ca-bundle.crt` sous CentOS et Redhat.
 
-Une fois la configuration de HAProxy effectuée, vous pouvez recharger ou redémarrer le service. **Nous vous conseillons de configurer une tâche `cron` qui recharge HAProxy toutes les 10 minutes** (par exemple avec la commande `service haproxy reload`) pour forcer l'actualisation du cache DNS de HAProxy si `app.datadoghq.com` bascule vers une autre IP.
+HAProxy 1.8 et versions ultérieures permettent au système de découverte des services DNS de détecter les modifications de serveur et de les appliquer automatiquement à votre configuration.
+Si vous utilisez une version antérieure de HAProxy, vous devrez recharger ou redémarrer HAProxy. **Nous vous conseillons de configurer une tâche `cron` qui recharge HAProxy toutes les 10 minutes** (par exemple avec la commande `service haproxy reload`) pour forcer l'actualisation du cache DNS de HAProxy si `app.datadoghq.com` bascule vers une autre IP.
 
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
@@ -250,8 +276,21 @@ listen stats
     stats enable
     stats uri /
 
+# Cette section sert à recharger les enregistrements DNS
+# Remplacez <IP_SERVEUR_DNS> et <IP_SERVEUR_DNS_SECONDAIRE> par les adresses IP de votre serveur DNS.
+# Pour HAProxy 1.8 et versions ultérieures
+resolvers my-dns
+    nameserver dns1 <IP_SERVEUR_DNS>:53
+    nameserver dns2 <IP_SERVEUR_DNS_SECONDAIRE>:53
+    resolve_retries 3
+    timeout resolve 2s
+    timeout retry 1s
+    accepted_payload_size 8192
+    hold valid 10s
+    hold obsolete 60s
+
 # Ceci déclare l'endpoint auquel vos Agents se connectent pour
-# envoyer les métriques (par exemple, la valeur de « dd_url »).
+# envoyer les métriques (par exemple, la valeur pour « dd_url »).
 frontend metrics-forwarder
     bind *:3834
     mode tcp
@@ -266,8 +305,8 @@ frontend traces-forwarder
     default_backend datadog-traces
 
 # Ceci déclare l'endpoint auquel vos Agents se connectent pour
-# envoyer les processus (par exemple, la valeur pour « url » dans
-# la section de configuration des processus).
+# envoyer les processus (par exemple, la valeur pour « url » dans la
+# section de configuration des processus).
 frontend processes-forwarder
     bind *:3836
     mode tcp
@@ -287,35 +326,48 @@ backend datadog-metrics
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership haproxy-app.agent.datadoghq.eu:443 check port 443
+    # La configuration suivante est pour HAProxy 1.8 et versions ultérieures
+    server-template mothership 5 haproxy-app.agent.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Supprimez la mise en commentaire de la configuration suivante pour les versions antérieures de HAProxy
+    # server mothership haproxy-app.agent.datadoghq.eu:443 check port 443
 
 backend datadog-traces
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership trace.agent.datadoghq.eu:443 check port 443
+    # La configuration suivante est pour HAProxy 1.8 et versions ultérieures
+    server-template mothership 5 trace.agent.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Supprimez la mise en commentaire de la configuration suivante pour les versions antérieures de HAProxy
+    # server mothership trace.agent.datadoghq.eu:443 check port 443
 
 backend datadog-processes
     balance roundrobin
     mode tcp
     option tcplog
-    server mothership process.datadoghq.eu:443 check port 443
+    # La configuration suivante est pour HAProxy 1.8 et versions ultérieures
+    server-template mothership 5 process.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Supprimez la mise en commentaire de la configuration suivante pour les versions antérieures de HAProxy
+    # server mothership process.datadoghq.eu:443 check port 443
 
 backend datadog-logs
     balance roundrobin
     mode tcp
     option tcplog
-    server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
+    # La configuration suivante est pour HAProxy 1.8 et versions ultérieures
+    server-template mothership 5 agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Supprimez la mise en commentaire de la configuration suivante pour les versions antérieures de HAProxy
+    # server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
 **Remarque** : téléchargez le certificat avec la commande suivante :
 
-        * `sudo apt-get install ca-certificates` (Debian, Ubuntu)
-        * `yum install ca-certificates` (CentOS, Redhat)
+* `sudo apt-get install ca-certificates` (Debian, Ubuntu)
+* `yum install ca-certificates` (CentOS, Redhat)
 
 Il est possible que le fichier se situe à l'emplacement `/etc/ssl/certs/ca-bundle.crt` sous CentOS et Redhat.
 
-Une fois la configuration de HAProxy effectuée, vous pouvez recharger ou redémarrer le service. **Nous vous conseillons de configurer une tâche `cron` qui recharge HAProxy toutes les 10 minutes** (par exemple avec la commande `service haproxy reload`) pour forcer l'actualisation du cache DNS de HAProxy si `app.datadoghq.eu` bascule vers une autre IP.
+HAProxy 1.8 et versions ultérieures permettent au système de découverte des services DNS de détecter les modifications de serveur et de les appliquer automatiquement à votre configuration.
+Si vous utilisez une version antérieure de HAProxy, vous devez recharger ou redémarrer HAProxy. **Nous vous conseillons de configurer une tâche `cron` qui recharge HAProxy toutes les 10 minutes** (par exemple avec la commande `service haproxy reload`) pour forcer l'actualisation du cache DNS de HAProxy si `app.datadoghq.com` bascule vers une autre IP.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -401,7 +453,7 @@ Pour vérifier que tout fonctionne correctement, consultez les statistiques HAPr
 
 ## Utiliser NGINX en tant que proxy
 
-[NGINX][3] est un serveur web qui peut également être utilisé comme reverse proxy, répartiteur de charge, proxy de messagerie ou cache HTTP. Vous pouvez utiliser NGINX comme proxy pour envoyer les logs à Datadog :
+[NGINX][3] est un serveur Web qui peut également être utilisé comme reverse proxy, répartiteur de charge, proxy de messagerie ou cache HTTP. Vous pouvez également utiliser NGINX comme proxy pour vos Agents Datadog :
 
 `agent ---> nginx ---> Datadog`
 
@@ -409,7 +461,7 @@ Pour vérifier que tout fonctionne correctement, consultez les statistiques HAPr
 
 #### Configuration de NGINX
 
-Cet exemple de fichier `nginx.conf` peut être utilisé pour transmettre des logs à Datadog en passant par un proxy. Le protocole TLS est appliqué pour garantir le chiffrement de vos logs internes en texte brut entre votre proxy et l'endpoint de l'API Datadog vers lequel les logs sont envoyés :
+Cet exemple de fichier `nginx.conf` peut être utilisé pour appliquer un proxy au trafic de l'Agent vers Datadog. Le dernier bloc de serveur dans cette configuration applique le protocole TLS pour garantir le chiffrement des logs internes en texte brut entre votre proxy et l'endpoint de l'API Datadog vers lequel les logs sont envoyés :
 
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
@@ -420,14 +472,29 @@ worker_processes auto;
 error_log /var/log/nginx/error.log;
 pid /run/nginx.pid;
 
-include /usr/share/nginx/modules/*.conf;
 events {
     worker_connections 1024;
 }
-# proxy TCP pour les logs Datadog
+# Proxy TCP pour l'Agent Datadog
 stream {
     server {
-        listen 10514; # port d'écoute du proxy
+        listen 3834; #écouter les métriques
+        proxy_pass haproxy-app.agent.datadoghq.com:443;
+    }
+    server {
+        listen 3835; #écouter les traces
+        proxy_pass trace.agent.datadoghq.com:443;
+    }
+    server {
+        listen 3836; #écouter les processus
+        proxy_pass process.datadoghq.com:443;
+    }
+    server {
+        listen 3837; #écouter les logs avec use_http: true
+        proxy_pass agent-http-intake.logs.datadoghq.com:443;
+    }
+    server {
+        listen 10514; #écouter les logs
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.com:10516;
     }
@@ -443,14 +510,29 @@ worker_processes auto;
 error_log /var/log/nginx/error.log;
 pid /run/nginx.pid;
 
-include /usr/share/nginx/modules/*.conf;
 events {
     worker_connections 1024;
 }
-# proxy TCP pour les logs Datadog
+# Proxy TCP pour l'Agent Datadog
 stream {
     server {
-        listen 10514; # port d'écoute du proxy
+        listen 3834; #écouter les métriques
+        proxy_pass haproxy-app.agent.datadoghq.eu:443;
+    }
+    server {
+        listen 3835; #écouter les traces
+        proxy_pass trace.agent.datadoghq.eu:44;
+    }
+    server {
+        listen 3836; #écouter les processus
+        proxy_pass process.datadoghq.eu:443;
+    }
+    server {
+        listen 3837; #écouter les logs avec use_http: true
+        proxy_pass agent-http-intake.logs.datadoghq.eu:443;
+    }
+    server {
+        listen 10514; #écouter les logs
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.eu:443;
     }
@@ -471,6 +553,16 @@ logs_config:
 
 Ne modifiez pas le paramètre `logs_no_ssl` : NGINX transmet le trafic à Datadog sans le chiffrer ni le déchiffrer.
 
+Lorsque vous choisissez d'envoyer vos logs via HTTPS, utilisez le bloc de code suivant dans `datadog.yaml` pour configurer le comportement de l'Agent :
+
+```yaml
+logs_config:
+  logs_dd_url: "<DOMAINE_SERVEUR_PROXY>:3837"
+  use_http: true
+  use_compression: true
+  compression_level: 6
+```
+
 ## Utiliser l'Agent comme proxy
 
 **Cette fonction est uniquement disponible avec l'Agent v5**
@@ -480,8 +572,9 @@ Nous vous conseillons d'utiliser un vrai proxy (un proxy web ou HAProxy) pour tr
 1. Désignez un nœud **sur lequel est exécuté datadog-agent** comme proxy.
    Dans cet exemple, on part du principe que le nom du proxy est `proxy-node`. Ce nœud **doit** pouvoir atteindre `https://app.datadoghq.com`.
 
-2. Vérifiez la connectivité SSL sur `proxy-node`
-    ```
+2. Vérifiez la connectivité SSL sur `proxy-node` :
+
+    ```shell
     curl -v https://app.datadoghq.com/account/login 2>&1 | grep "200 OK"
     ```
 
@@ -495,7 +588,7 @@ Nous vous conseillons d'utiliser un vrai proxy (un proxy web ou HAProxy) pour tr
 5. Mettez à jour les nœuds non-proxy afin de rediriger vers `proxy-node`. Modifiez la ligne suivante dans `datadog.conf` en remplaçant :
 
     `dd_url: https://app.datadoghq.com`
-par
+    par
     `dd_url: http://proxy-node:17123`
 
 6. Accédez à la [page relative à l'infrastructure][4] pour vérifier que tous les nœuds envoient des données à Datadog.

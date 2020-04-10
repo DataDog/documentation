@@ -388,7 +388,7 @@ Une fois le code ci-dessus exécuté, les données de votre métrique peuvent ê
 
 #### Exemples de code
 
-Envoyez une métrique `SET`, stockée comme métrique `GAUGE`, à Datadog. Pour en savoir plus sur le type `SET`, consultez la documentation sur les [types de métrique][6].
+Envoyer une métrique `SET` stockée en tant que métrique `GAUGE` à Datadog.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -532,16 +532,16 @@ Une fois le code ci-dessus exécuté, les données de vos métriques peuvent êt
 
 | Méthode                                                            | Type de métrique stocké dans Datadog                                                                                                                                              |
 |-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `histogram(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Comme plusieurs métriques sont envoyées, le type de métrique stocké (`GAUGE`, `RATE`) dépend de la métrique. Pour en savoir plus, consultez la documentation sur le [type de métrique HISTOGRAM][7]. |
+| `histogram(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Comme plusieurs métriques sont envoyées, les types de métrique stockés (`GAUGE`, `RATE`) dépendent de la métrique. Pour en savoir plus, consultez la documentation sur le [type de métrique HISTOGRAM][6]. |
 
 #### Configuration
 
-* Configurez les agrégations que vous souhaitez envoyer à Datadog à l'aide du paramètre `histogram_aggregates` dans votre [fichier de configuration datadog.yaml][8]. Par défaut, seules les agrégations `max`, `median`, `avg` et `count` sont envoyées.
-* Configurez les agrégations en centile à envoyer à Datadog à l'aide du paramètre `histogram_percentiles` dans votre [fichier de configuration datadog.yaml][8]. Par défaut, seul le centile `95pc` est envoyé.
+* Configurez les agrégations que vous souhaitez envoyer à Datadog à l'aide du paramètre `histogram_aggregates` dans votre [fichier de configuration datadog.yaml][7]. Par défaut, seules les agrégations `max`, `median`, `avg` et `count` sont envoyées.
+* Configurez les agrégations en centile à envoyer à Datadog à l'aide du paramètre `histogram_percentiles` dans votre [fichier de configuration datadog.yaml][7]. Par défaut, seul le centile `95pc` est envoyé.
 
 #### Exemples de code
 
-Le type de métrique `HISTOGRAM` est spécifique à DogStatsD. Dans cet exemple, une métrique `HISTOGRAM` stockée en tant que métrique `GAUGE` et `RATE` est envoyée à Datadog. Pour en savoir plus sur le type `HISTOGRAM`, consultez la documentation sur les [types de métrique][7].
+Le type de métrique `HISTOGRAM` est spécifique à DogStatsD. Dans cet exemple, une métrique `HISTOGRAM` stockée en tant que métrique `GAUGE` et `RATE` est envoyée à Datadog. Pour en savoir plus sur le type `HISTOGRAM`, consultez la documentation sur les [types de métrique][6].
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -712,7 +712,7 @@ Dans DogStatsD, le type de métrique `TIMER` est une implémentation du type de 
 
 | Méthode                                                        | Type de métrique stocké dans Datadog                                                                                                                                              |
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `timed(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Comme plusieurs métriques sont envoyées, le type de métrique stocké (`GAUGE`, `RATE`) dépend de la métrique. Pour en savoir plus, consultez la documentation sur le [type de métrique HISTOGRAM][7]. |
+| `timed(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAUX_ÉCHANTILLONNAGE>, <TAGS>)` | Comme plusieurs métriques sont envoyées, les types de métrique stockés (`GAUGE`, `RATE`) dépendent de la métrique. Pour en savoir plus, consultez la documentation sur le [type de métrique HISTOGRAM][6]. |
 
 ##### Configuration
 
@@ -720,7 +720,7 @@ Pour une métrique `TIMER`, les règles de [configuration](#configuration) des m
 
 ##### Exemples de code
 
-Dans cet exemple, une métrique `TIMER` stockée en tant que métrique `GAUGE` et `RATE` est envoyée à Datadog. Pour en savoir plus sur le type `HISTOGRAM`, consultez la documentation sur les [types de métrique][7].
+Dans cet exemple, une métrique `TIMER` stockée en tant que métrique `GAUGE` et `RATE` est envoyée à Datadog. Pour en savoir plus sur le type `HISTOGRAM`, consultez la documentation sur les [types de métrique][6].
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -816,11 +816,11 @@ DogStatsD traite les métriques `TIMER` en tant que métriques `HISTOGRAM`. Que 
 
 | Méthode                                                | Type de métrique stocké dans Datadog                                                                                         |
 |-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| `distribution(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAGS>)` | Stockée en tant que métrique `DISTRIBUTION` dans Datadog. Pour en savoir plus, consultez la [documentation sur les métriques de distribution][9]. |
+| `distribution(<NOM_MÉTRIQUE>, <VALEUR_MÉTRIQUE>, <TAGS>)` | Stockée en tant que métrique `DISTRIBUTION` dans Datadog. Pour en savoir plus, consultez la [documentation sur les métriques de distribution][8]. |
 
 #### Exemples de code
 
-Le type de métrique `DISTRIBUTION` est spécifique à DogStatsD. Dans cet exemple, une métrique `DISTRIBUTION` stockée en tant que métrique `DISTRIBUTION` est envoyée à Datadog. Pour en savoir plus sur le type `DISTRIBUTION`, consultez la documentation sur les [types de métrique][10].
+Le type de métrique `DISTRIBUTION` est spécifique à DogStatsD. Dans cet exemple, une métrique `DISTRIBUTION` stockée en tant que métrique `DISTRIBUTION` est envoyée à Datadog. Pour en savoir plus sur le type `DISTRIBUTION`, consultez la documentation sur les [types de métrique][9].
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1112,12 +1112,11 @@ Le tag host est attribué automatiquement par l'Agent Datadog chargé de l'agré
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/developers/dogstatsd
-[2]: /fr/developers/metrics/types/?tab=count#metric-type-definition
+[2]: /fr/developers/metrics/types/?tab=count#definition
 [3]: /fr/dashboards/functions/arithmetic/#cumulative-sum
 [4]: /fr/dashboards/functions/arithmetic/#integral
-[5]: /fr/developers/metrics/types/?tab=gauge#metric-type-definition
-[6]: /fr/developers/metrics/types/?tab=set#metric-type-definition
-[7]: /fr/developers/metrics/types/?tab=histogram#metric-type-definition
-[8]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[9]: /fr/metrics/distributions
-[10]: /fr/developers/metrics/types/?tab=distribution#metric-type-definition
+[5]: /fr/developers/metrics/types/?tab=gauge#definition
+[6]: /fr/developers/metrics/types/?tab=histogram#definition
+[7]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[8]: /fr/metrics/distributions
+[9]: /fr/developers/metrics/types/?tab=distribution#definition
