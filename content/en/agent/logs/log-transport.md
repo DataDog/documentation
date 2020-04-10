@@ -33,7 +33,7 @@ This connectivity test mechanism is only running at agent startup. If the connec
 
 To check which transport is used by the agent, run the [agent statuts command][1].
 
-For older version of the agent, TCP is used by default but we strongly recommand you to enforce HTTP transport with compression is you are running v6.14+/v7.14+.
+For older version of the agent, TCP is used by default. We strongly recommend you to enforce HTTP transport with compression if you are running v6.14+/v7.14+.
 
 ## Enforce a specific transport
 
