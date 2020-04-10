@@ -60,23 +60,17 @@ build_preview:
     LOCAL: "False"
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
-    # - version_static_assets
     - sync_integration_descriptions
     - placehold_translations
     - update_preview_yaml
-    # - build_hugo_site_new
     - yarn run build:preview
     - assume_marketing_deploy_role
     - yarn run deploy:previewAssets
     - yarn run deploy:preview
-    # - collect_static_assets
-    # remove service_checks json as we don't need to s3 push that..
-    # - rm -rf data/service_checks
-    # - push_site_to_s3
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
-    #- remove_static_from_repo
-    #- create_artifact
-    #- create_artifact_untracked
+    - remove_static_from_repo
+    - create_artifact
+    - create_artifact_untracked
   artifacts:
     paths:
       - ${ARTIFACT_RESOURCE}
@@ -136,13 +130,13 @@ build_live:
   script:
     - post_dd_event "documentation deploy ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" "info"
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_SHA:0:8}> sent to gitlab for production deployment. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}|details>" "#FFD700"
-    - version_static_assets
     - sync_integration_descriptions
     - sync_integration_metrics
     - placehold_translations
-    - build_hugo_site_new
-    - collect_static_assets
-    - push_site_to_s3
+    - yarn run build:live
+    - assume_marketing_deploy_role
+    - yarn run deploy:liveAssets
+    - yarn run deploy:live
     - create_artifact
     - create_artifact_untracked
   artifacts:
