@@ -26,12 +26,14 @@ further_reading:
 Since Agent v6.19+/v7.19+, the default transport is HTTPS with compression instead of TCP.
 At agent start, if log collection is enabled, the agent runs a HTTPS connectivity test:
 
-* if successful, then the agent uses HTTPS transport
+* if successful, then the agent uses compressed HTTPS transport
 * otherwise the agent fallbacks to TCP transport
 
 This connectivity test mechanism is only running at Agent startup. If the connectivity is failing for both HTTPS and TCP at Agent startup time, then the Agent uses TCP transport until its next restart (and then rerun a new connectivity test)
 
 To check which transport is used by the agent, run the [agent statuts command][1].
+
+{{< img src="agent/logs/agent-status.png" alt="Agent status"  style="width:70%;">}}
 
 For older version of the agent, TCP is used by default. We strongly recommend you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS transport and compression if you are running v6.16+/v7.16+. 
 
