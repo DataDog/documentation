@@ -45,9 +45,9 @@ To enable trace collection with your Agent, follow the instructions below:
         enabled: true
     ```
 
-    **Note**: In advanced use cases on Windows, you may need to add the line `targetSystem: windows` to the top of your `values.yaml`.
+ - Set your operating system. Add `targetSystem: linux` or `targetSystem: windows` to the top of your `values.yaml`. 
 
- - Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> stable/datadog` (Don't forget to set the API key in the YAML file).
+ - Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> stable/datadog`. Don't forget to set the API key in the YAML file. If you did not set your operating system in `values.yaml`, add `--set targetSystem=linux` or `--set targetSystem=windows` to this command.
 
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
