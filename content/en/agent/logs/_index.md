@@ -26,15 +26,14 @@ Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do 
 
 Collecting logs is **disabled** by default in the Datadog Agent.
 
-To enable log collection, update the Agent's [main configuration file][12] (`datadog.yaml`) with:
+To enable log collection, update the Agent's [main configuration file][10] (`datadog.yaml`) with:
 
 ```yaml
 logs_enabled: true
 ```
 
-By default, since Agent v6.19+/v7.19+ this will send your logs in compressed HTTPS transport.
-Older version of the datadog agent will send its logs to Datadog over TLS-encrypted TCP. This requires outbound communication over port `10516`. 
-For more details on how enforce HTTPS/TCP transport, refer to the 
+Starting with Agent v6.19+/v7.19+, HTTPS transport is the default transport used.
+For more details on how enforce HTTPS/TCP transport, refer to the [Agent transport documentation][11].
 
 To enable logs log collection with environment variables, configure the following:
 
@@ -187,6 +186,5 @@ List of all available parameters for log collection:
 [7]: /tracing
 [8]: /developers/metrics/custom_metrics
 [9]: /tagging
-[10]: /agent/basic_agent_usage/#agent-overhead
-[11]: /agent/proxy
-[12]: /agent/guide/agent-configuration-files
+[10]: /agent/guide/agent-configuration-files
+[11]: /agent/logs/log-transport
