@@ -36,7 +36,7 @@ The Datadog .NET APM extension supports the following .NET runtimes in both x64 
 - .NET Framework 4.7 (AAS does not support more recent versions)
 - .NET Core 2.1
 - .NET Core 2.2 (Microsoft support ended 2019-12-23)
-- .NET Core 3.0 (Microsoft supports will end 2020-03-03)
+- .NET Core 3.0 (Microsoft support ended 2020-03-03)
 - .NET Core 3.1
 
 ## Installation
