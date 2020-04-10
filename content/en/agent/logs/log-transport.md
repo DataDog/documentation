@@ -85,7 +85,7 @@ Note: Setting up a [SOCKS5 proxy][4] server will also enforce TCP transport beca
 
 ## HTTPS Transport
 
-**HTTPS log forwarding is the recommended configuration** because a 200 response is returned only if the logs have been written in the Datadog storage:
+**HTTPS log forwarding is the recommended configuration**. With HTTPS, you have a guarantee that Datadog has received your log.
 
 {{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema"  style="width:80%;">}}
 
