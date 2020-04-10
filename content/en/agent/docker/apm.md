@@ -128,7 +128,7 @@ docker run -d --name app \
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
-              --network <NETWORK_NAME> \
+              --network "<NETWORK_NAME>" \
               -e DD_API_KEY="<DATADOG_API_KEY>" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
@@ -136,7 +136,7 @@ docker run -d --name datadog-agent \
 
 # Application
 docker run -d --name app \
-              --network <NETWORK_NAME> \
+              --network "<NETWORK_NAME>" \
               company/app:latest
 ```
 
