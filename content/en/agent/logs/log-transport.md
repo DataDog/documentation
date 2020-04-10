@@ -57,7 +57,7 @@ To send logs with environment variables, configure the following:
 * `DD_LOGS_ENABLED`
 * `DD_LOGS_CONFIG_USE_HTTP`
 
-Note: HTTPS transport is supported with data agent version 6.14+/7.14+
+Note: HTTPS transport is supported on Datadog Agent version 6.14+/7.14+
 
 [1]: /agent/guide/agent-configuration-files
 {{% /tab %}}
