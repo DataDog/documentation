@@ -68,9 +68,9 @@ build_preview:
     - yarn run deploy:previewAssets
     - yarn run deploy:preview
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
-    - remove_static_from_repo
-    - create_artifact
-    - create_artifact_untracked
+    # - remove_static_from_repo
+    # - create_artifact
+    # - create_artifact_untracked
   artifacts:
     paths:
       - ${ARTIFACT_RESOURCE}
@@ -205,7 +205,7 @@ manage_translations:on-schedule:
     URL: ${PREVIEW_DOMAIN}
     CONFIG: ${PREVIEW_CONFIG}
   script:
-    - if [[ $(date +%u) -lt 6 ]]; then manage_translations "${APIKEY}"; fi
+    - if [[ $(date +%u) -lt 6 ]]; then yarn run build:webpack && manage_translations "${APIKEY}"; fi
     - chmod +x ./local/bin/py/translate_metrics.py && ./local/bin/py/translate_metrics.py -k "${APIKEY}" -a $(get_secret 'dd_api_key')
   only:
     - schedules
