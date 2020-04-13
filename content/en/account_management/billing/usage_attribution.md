@@ -11,9 +11,9 @@ aliases:
 Administrators can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 
 * Lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to three tag keys).
-* Generates daily .tsv (tab separated values) files for most usage types.
+* Generates daily `.tsv` (tab separated values) files for most usage types.
 * Summarizes usage at the end of each month. 
-* Surfaces the data both in the UI and as a .tsv download.
+* Surfaces the data both in the UI and as a `.tsv` download.
 
 **Note**: The following usage types are not supported in this tool:
 
@@ -49,7 +49,7 @@ Once the reports start being generated, they are updated daily and aggregated mo
 * If multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
 * Previous months' reports are accessible through the time selector.
 * Monthly reports are not generated until the month is over. Each monthly report should appear by the second day of the following month. 
-* Reports are downloadable using the 'Export Current View' reports. These .tsv reports include both usage numbers and percentages, allowing for easy allocations and chargebacks.
+* Reports are downloadable using the 'Export Current View' reports. These `.tsv` reports include both usage numbers and percentages, allowing for easy allocations and chargebacks.
 
 ### Daily Usage Attribution
 
