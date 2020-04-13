@@ -88,7 +88,7 @@ The search query for **View related logs** is defined using the following parame
 [8]: /dashboards/#new-dashboard
 [9]: /dashboards/widgets
 [10]: /events/#event-query-language
-[11]: /logs/explorer/search/#search-syntax
+[11]: /logs/search_syntax
 [12]: /dashboards/widgets/#full-screen
 [13]: https://app.datadoghq.com/process
 [14]: https://app.datadoghq.com/infrastructure/map

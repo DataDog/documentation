@@ -18,7 +18,7 @@ Profiling libraries are shipped within the following tracing language libraries.
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11, Oracle Java 11, and Zulu Java 8. All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
+The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
 1. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
 
@@ -34,7 +34,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.api-key-file=<API_KEY_FILE> -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-3. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][2].
+3. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
 **Note**:
 
@@ -55,7 +55,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 | ----------------------------- | ------------------------- | ------------------------------------------------- |
 | `-Ddd.profiling.enabled`      | DD_PROFILING_ENABLED      | Set to `true` to enable profiling.                |
 | `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | File that should contain the API key as a string. |
-| `-Ddd.profiling.api-key`      | DD_PROFILING_API_KEY      | Datadog API key.                                  |
+|                               | DD_PROFILING_API_KEY      | Datadog API key.                                  |
 
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
@@ -63,6 +63,69 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: /account_management/api-app-keys/#api-keys
 {{% /tab %}}
+
+{{% tab "Python" %}}
+
+The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python 3.5+. To begin profiling applications:
+
+1. Install `ddtrace` with the `profile` flavor, which contains both tracing and profiling:
+
+    ```shell
+    pip install ddtrace[profiling]
+    ```
+
+     **Note**: Profiling is available in the `ddtrace` library for versions 0.36+.
+
+2. Add a valid [Datadog API key][1] in your environment variable: `DD_PROFILING_API_KEY`.
+
+3. Set `env`, `service`, and `version` as Datadog tags in your environment variables.
+
+    ```shell
+    export DD_PROFILING_TAGS=env:<YOUR_ENVIRONMENT>,service:<YOUR_SERVICE>,version:<YOUR_VERSION>
+    ```
+
+4. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
+
+    ```python
+    import ddtrace.profiling.auto
+    ```
+
+5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
+
+**Note**:
+
+- If you want to control which part of your code should be profiled, use the `ddtrace.profile.profiler.Profiler` object:
+
+    ```python
+    from ddtrace.profiling import Profiler
+
+    prof = Profiler()
+    prof.start()
+
+    # At shutdown
+    prof.stop()
+    ```
+
+- Alternatively, profile your service by running it with the wrapper `pyddprofile`:
+
+    ```shell
+    $ pyddprofile server.py
+    ```
+
+- For advanced setup of the profiler or to add tags like `service` or `version`, use environment variables to set the parameters:
+
+| Environment variable                             | Type          | Description                                                                                      |
+| ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
+| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][1] to use when uploading profiles.                                         |
+| `DD_PROFILING_TAGS`                              | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`.       |
+| `DD_SERVICE_NAME`                                | String        | The Datadog [service][3] name, which can be set here, or in `DD_PROFILING_TAGS`.                    |
+
+
+[1]: /account_management/api-app-keys/#api-keys
+[2]: https://app.datadoghq.com/profiling
+[3]: /tracing/visualization/#services
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Profiles
@@ -137,6 +200,20 @@ Once enabled, the following profile types are collected:
 | Lock                     | Shows the time each method spent waiting for a lock.                                                                                                                                                                                                                                               |
 | Socket I/O               | Shows the time each method spent handling socket I/O.                                                                                                                                                                                                                                              |
 
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+Once enabled, the following profile types are collected:
+
+| Profile type             | Definition                                                                                                                                                                                                                                                                                         |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU         | Shows the time each function spent running on the CPU. It includes CPython bytecode, including native code called from within Python.                                                                                                                                                                     |
+| Allocation               | Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed. Only supported on Python 3.                                                                                                                                                                                    |
+| Wall | Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running. |
+| Exceptions               | Shows the number of caught or uncaught exceptions raised by each function.                                                                                                                                                                                                                                                 |
+| Lock                     | Shows the time each function spent waiting for a lock.                                                                                                                                                                                                                                               |
 
 {{% /tab %}}
 {{< /tabs >}}

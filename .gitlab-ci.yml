@@ -106,7 +106,7 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/en/integrations,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/developers/amazon_cloudformation.md"
+    UNTRACKED_EXTRAS: "data,content/en/integrations,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/developers/integrations,content/en/developers/amazon_cloudformation.md"
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
@@ -126,9 +126,24 @@ build_live:
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
+      - content/en
     expire_in: 1 week
   only:
     - master
+
+
+index_internal_doc:
+  stage: post-deploy
+  environment: "live"
+  image: registry.ddbuild.io/datadoc/webapp:prod-released
+  dependencies:
+    - build_live
+  only:
+    - master
+  except: [ tags, schedules ]
+  tags: [ "runner:docker", "size:large" ]
+  script:
+    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en
 
 test_live_link_checks:
   <<: *base_template

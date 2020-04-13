@@ -94,7 +94,6 @@ _Disponible à partir des versions > 6.0 de l'Agent_
      - type: file
        path: /var/log/couchdb/couch.log
        source: couchdb
-       sourcecategory: database
        service: couch
    ```
 

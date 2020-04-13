@@ -85,7 +85,7 @@ Beta integrations are disabled by default but can be enabled individually.
 | Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
 | Jetty (non-Servlet)     | 8+         | [Beta][8]       | `jetty`, `jetty-8`                             |
-| Netty HTTP Server       | 4.0+       | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
+| Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
 | Play                    | 2.4-2.7    | Fully Supported | `play`                                         |
 | Ratpack                 | 1.4+       | Fully Supported | `ratpack`                                      |
 | Spark Java              | 2.3+       | [Beta][8]       | `sparkjava` (requires `jetty`)                 |
@@ -176,7 +176,6 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Hibernate        | 3.5+     | Fully Supported | `hibernate`                                    |
 | Hystrix          | 1.4+     | Fully Supported | `hystrix`                                      |
 | JSP Rendering    | 2.3+     | Fully Supported | `jsp`, `jsp-render`                            |
-| Slf4J MDC        | 1+       | Fully Supported | `mdc` (See also `dd.logs.injection` config)    |
 | Spring Data      | 1.8+     | Fully Supported | `spring-data`                                  |
 | Spring Scheduling | 3.1+    | Fully Supported | `spring-scheduling`                            |
 | Twilio SDK       | 0+       | Fully Supported | `twilio-sdk`                                   |
@@ -216,7 +215,8 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.trace.health.metrics.statsd.host`  | `DD_TRACE_HEALTH_METRICS_STATSD_HOST`  | same as `dd.jmxfetch.statsd.host` | Statsd host to send health metrics to                                                                                                                                                                                                                                 |
 | `dd.trace.health.metrics.statsd.port`  | `DD_TRACE_HEALTH_METRICS_STATSD_PORT`  | same as `dd.jmxfetch.statsd.port` | Statsd port to send health metrics to                                                                                                                                                                                                                                 |
 | `dd.http.client.tag.query-string`      | `DD_HTTP_CLIENT_TAG_QUERY_STRING`      | `false`                           | When set to `true` query string parameters and fragment get added to web client spans                                                                                                                                                                                 |
-| `dd.http.client.error.statuses`        | `DD_HTTP_CLIENT_ERROR_STATUSES`        | `false`                           | A range of errors can be accepted, by default 4xx errors aren't reported as errors. This configuration overrides that. Ex. `dd.http.client.error.statuses=400-499`                                                                                                    |
+| `dd.http.client.error.statuses`        | `DD_HTTP_CLIENT_ERROR_STATUSES`        | `400-499`                           | A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.http.client.error.statuses=400-499`                                                                                                    |
+| `dd.http.server.error.statuses`        | `DD_HTTP_SERVER_ERROR_STATUSES`        | `500-599`                           | A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500-599`                                                                                                    |
 | `dd.http.server.tag.query-string`      | `DD_HTTP_SERVER_TAG_QUERY_STRING`      | `false`                           | When set to `true` query string parameters and fragment get added to web server spans                                                                                                                                                                                 |
 | `dd.jmxfetch.enabled`                  | `DD_JMXFETCH_ENABLED`                  | `true`                            | Enable collection of JMX metrics by Java Tracing Agent.                                                                                                                                                                                                               |
 | `dd.jmxfetch.config.dir`               | `DD_JMXFETCH_CONFIG_DIR`               | `null`                            | (Example: `/opt/datadog-agent/etc/conf.d`) Additional configuration directory for JMX metrics collection. The Java Agent looks for `jvm_direct:true` in the `instance` section in the `yaml` file to change configuration.                                            |

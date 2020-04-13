@@ -1,13 +1,13 @@
 ---
-title: Get a Webhooks Integration
+title: Get a Webhook for Webhooks Integration
 type: apicode
 order: 21.1
-external_redirect: /api/#get-a-webhooks-integration
+external_redirect: /api/#get-a-webhook-for-webhooks-integration
 ---
 
 **SIGNATURE**:
 
-`GET /v1/integration/webhooks`
+`GET api/v1/integration/webhooks/configuration/webhooks/<WEBHOOK_NAME>`
 
 **EXAMPLE REQUEST**:
 

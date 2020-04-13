@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "check": "gunicorn.is_running",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト", "app"],
+        "name": "マスタープロセス実行中",
+        "description": "Agent が Gunicorn マスタープロセスを見つけられない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    }
+]

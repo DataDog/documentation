@@ -7,9 +7,9 @@ aliases:
 
 ## Setup the Kube state integration
 
-If you decided to run your Agent on your host to monitor kubernetes, in order to start collecting your Kubernetes  metrics you should:
+If you decide to run your Agent on your host to monitor kubernetes, in order to start collecting your Kubernetes metrics you should:
 
-1. [Install the Agent on you host][1]
+1. [Install the Agent on your host][1]
 2. Download the [Kube-State manifests folder][2].
 3. Apply them to your Kubernetes cluster:
 
@@ -63,8 +63,8 @@ To get a better idea of how (or why) to integrate your Kubernetes service, see t
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [3]: /agent
-[4]: /agent/autodiscovery
+[4]: /agent/kubernetes/integrations
 [5]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: /agent/autodiscovery/integrations/?tab=kubernetes
+[7]: /agent/kubernetes/integrations/
 [8]: https://www.datadoghq.com/blog/monitoring-kubernetes-era

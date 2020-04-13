@@ -21,6 +21,8 @@ from os.path import (
     normpath
 )
 
+from format_link import format_link_file
+
 
 class Integrations:
     def __init__(self, source_file, temp_directory, integration_mutations):
@@ -58,6 +60,21 @@ class Integrations:
         )
         self.regex_h1_replace = re.compile(
             r"^(#{1})(?!#)(.*)", re.MULTILINE
+        )
+        self.regex_tabs_open = re.compile(
+            r"<!-- xxx tabs xxx -->", re.MULTILINE
+        )
+        self.regex_tabs_close = re.compile(
+            r"<!-- xxz tabs xxx -->", re.MULTILINE
+        )
+        self.regex_tab_open = re.compile(
+            r"<!-- xxx tab", re.MULTILINE
+        )
+        self.regex_tab_close = re.compile(
+            r"<!-- xxz tab xxx -->", re.MULTILINE
+        )
+        self.regex_tab_end = re.compile(
+            r" xxx -->", re.MULTILINE
         )
         self.regex_metrics = re.compile(
             r"(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)",
@@ -119,6 +136,73 @@ class Integrations:
                         yaml_data, default_flow_style=False
                     )
                 )
+
+    def inline_references(self, integration_readme, regex_skip_sections_start, regex_skip_sections_end):
+        """
+        Goes through a section and remove all reference links it can found.
+
+        :param section: An array of lines representing a section.
+        """
+
+        skip = False
+        all_references = []
+        section_without_references = []
+        section_with_all_links = []
+        regex_bottom_reference_link = r"^\s*\[(\d*?)\]: (\S*)"
+
+        # Collecting all references and removing them from section
+        # looking at each line, if a line is a reference then we remove it and store the reference.
+
+        #section = integration_file.readlines()
+        for line in integration_readme.splitlines(True):
+            if skip:
+                section_without_references.append(line)
+                if re.search(regex_skip_sections_end, line):
+                    skip = False
+            elif not skip:
+
+                if re.search(regex_skip_sections_start, line):
+                    section_without_references.append(line)
+                    skip = True
+
+                elif re.search(regex_bottom_reference_link, line):
+
+                    reference = re.search(regex_bottom_reference_link, line)
+                    all_references.append([reference.group(1),
+                                           reference.group(2)])
+                else:
+                    section_without_references.append(line)
+
+        # By the end of the for loop skip should always be false otherwise it means that a codeblock is not closed.
+        if skip:
+            raise ValueError
+
+        for line in section_without_references:
+            if skip:
+                if re.search(regex_skip_sections_end, line):
+                    skip = False
+            elif not skip:
+                if re.search(regex_skip_sections_start, line):
+                    skip = True
+                else:
+                    for reference in all_references:
+                        reference_index, reference_val = reference
+
+                        curent_link = '][' + reference_index + ']'
+
+                        line = line.replace(
+                            curent_link, '](' + reference_val + ')')
+
+            section_with_all_links.append(line)
+
+        # By the end of the for loop skip should always be false otherwise it means that a codeblock is not closed.
+        if skip:
+            raise ValueError
+
+        integration_content_with_link_inlined = ''.join(section_with_all_links)
+
+        return integration_content_with_link_inlined
+
 
     def process_integrations(self, content):
         """
@@ -309,10 +393,11 @@ class Integrations:
         """
         Take a single README.md file and
         1. extract the first h1, if this isn't a merge item
-        2. inject metrics after ### Metrics header if metrics exists for file
-        3. inject service checks after ### Service Checks if file exists
-        4. inject hugo front matter params at top of file
-        5. write out file to content/integrations with filename changed to integrationname.md
+        2. add tabs if they exist
+        3. inject metrics after ### Metrics header if metrics exists for file
+        4. inject service checks after ### Service Checks if file exists
+        5. inject hugo front matter params at top of file
+        6. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
         no_integration_issue = True
@@ -365,39 +450,79 @@ class Integrations:
         exist_already = exists(
             self.content_integrations_dir + new_file_name
         )
-        with open(file_name, "r") as f:
-            result = f.read()
-            title = manifest_json.get("name", "").lower()
-            if title not in [
-                k
-                for k, v in self.integration_mutations.items()
-                if v.get("action") == "merge"
-            ]:
-                result = re.sub(
-                    self.regex_h1, "", result, 1
-                )
-            if metrics_exist:
-                result = re.sub(
-                    self.regex_metrics,
-                    r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
-                    % format(title),
-                    result,
-                    0,
-                )
-            if service_check_exist:
-                result = re.sub(
-                    self.regex_service_check,
-                    r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
-                    % format(title),
-                    result,
-                    0,
-                )
-            result = self.add_integration_frontmatter(
-                new_file_name, result, dependencies
+
+        regex_skip_sections_end = r"(```|\{\{< \/code-block >\}\})"
+        regex_skip_sections_start = r"(```|\{\{< code-block)"
+
+        ## Formating all link as reference to avoid any corner cases
+        try:
+            result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
+        except Exception as e:
+            print(e)
+
+        ## Check if there is a integration tab logic in the integration file:
+        if "<!-- xxx tabs xxx -->" in result:
+            tab_logic = True
+            ## Inlining all links
+            result = self.inline_references(result,regex_skip_sections_start,regex_skip_sections_end)
+        else:
+            tab_logic= False
+
+        title = manifest_json.get("name", "").lower()
+        if title not in [
+            k
+            for k, v in self.integration_mutations.items()
+            if v.get("action") == "merge"
+        ]:
+            result = re.sub(
+                self.regex_h1, "", result, 1
             )
-            if not exist_already and no_integration_issue:
-                with open(self.content_integrations_dir + new_file_name, "w", ) as out:
-                    out.write(result)
+            result = re.sub(
+                self.regex_tabs_open, "{{< tabs >}}", result, 0
+            )
+            result = re.sub(
+                self.regex_tabs_close, "{{< /tabs >}}", result, 0
+            )
+            result = re.sub(
+                self.regex_tab_open, "{{% tab", result, 0
+            )
+            result = re.sub(
+                self.regex_tab_close, "{{% /tab %}}", result, 0
+            )
+            result = re.sub(
+                self.regex_tab_end, " %}}", result, 0
+            )
+
+        if metrics_exist:
+            result = re.sub(
+                self.regex_metrics,
+                r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
+                % format(title),
+                result,
+                0,
+            )
+        if service_check_exist:
+            result = re.sub(
+                self.regex_service_check,
+                r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
+                % format(title),
+                result,
+                0,
+            )
+
+        result = self.add_integration_frontmatter(
+            new_file_name, result, dependencies
+        )
+
+        if not exist_already and no_integration_issue:
+            with open(self.content_integrations_dir + new_file_name, "w", ) as out:
+                out.write(result)
+
+            ## Reformating all links now that all processing is done
+            if tab_logic:
+                final_text = format_link_file(self.content_integrations_dir + new_file_name,regex_skip_sections_start,regex_skip_sections_end)
+                with open(self.content_integrations_dir + new_file_name, 'w') as final_file:
+                    final_file.write(final_text)
 
     def add_integration_frontmatter(
         self, file_name, content, dependencies=[]

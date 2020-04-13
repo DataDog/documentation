@@ -96,9 +96,9 @@ The easiest path here is to give everyone read access to the file in the logrota
 
         daily
         rotate 7
-        missing ok
+        missingok
         create 644 mysql adm
-        Compress
+        compress
 }
 ```
 

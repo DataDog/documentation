@@ -41,4 +41,4 @@ external_redirect: '/api/#list-logs'
 
 [1]: /ja/logs/guide/collect-multiple-logs-with-pagination
 [2]: /ja/logs/archives
-[3]: /ja/logs/explorer/search/#search-syntax
+[3]: /ja/logs/search_syntax

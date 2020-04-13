@@ -85,7 +85,6 @@ _Agent バージョン 6.0 以降で利用可能_
      - type: file
        path: /var/log/redis_6379.log
        source: redis
-       sourcecategory: database
        service: myapplication
    ```
 

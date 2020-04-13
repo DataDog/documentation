@@ -44,38 +44,38 @@ To revoke the keys used to share individual (embedded) graphs:
 2. Click on the **Revoke** button next to the graph you want to stop sharing.
 3. The graph is moved to the **Revoked** list.
 
-## Screenboards
+## Dashboards 
 
 ### Share
 
-Share an entire screenboard by generating a public URL:
+Share an entire dashboard by generating a public URL:
 
-1. On the screenboard's page, click the settings cog in the upper right.
+1. On the dashboard's page, click the settings cog in the upper right.
 2. Choose the **Generate public URL** option.
-3. If the [global time selector][4] is active, choose the global time setting for the public screenboard.
+3. Choose configuration options for "Allow changing timeframe" and/or template variables visible tags.
 4. Copy the URL and click **Done**.
 
-The created URL has live, read-only access to the contents of that specific screenboard.
+The created URL has live, read-only access to the contents of that specific dashboard.
 
-**Note**: Screenboard [template variable][5] selectors are not present on the public screenboard. The template variables' values are the default values set in Datadog. Additionally, widgets based on APM and log queries do not display data on public screenboards.
+**Note**: Dashboard [template variable][5] selectors are only present on dashboards when you configure visible tags. The template variables' default values are the default values set in Datadog. Additionally, widgets based on APM traces queries do not display data on public dashboards. All log based queries will show data, except the Log Stream widget.
 
 ### Revoke
 
-To revoke a shared screenboard:
+To revoke a shared dashboard:
 
 1. Navigate to the [Dashboard List][6].
-2. Select the screenboard you want to revoke access to.
+2. Select the dashboard you want to revoke access to.
 3. Click on the settings cog in the upper right.
 4. Click **Configure sharing**.
 5. Click **Revoke public URL**.
 
 ### Applying restrictions
 
-You can restrict access on a per IP address basis to your screenboard. Email [Datadog support][7] to enable the IP address white listing feature that allows administrators to provide a list of IP addresses that have access to shared screenboards. Once enabled, manage your restrictions on your organization's [security page][8].
+You can restrict access on a per IP address basis to your dashboard. Email [Datadog support][7] to enable the IP address white listing feature that allows administrators to provide a list of IP addresses that have access to shared dashboards. Once enabled, manage your restrictions on your organization's [security page][8].
 
 ### Dark mode
 
-Dark mode is available on public screenboards for individual users. Click the sun or moon icon in the upper right to toggle between modes. Additionally, the URL parameter `theme` is available. The possible values are `dark` and `light`.
+Dark mode is available on public dashboards for individual users. Click the sun or moon icon in the upper right to toggle between modes. Additionally, the URL parameter `theme` is available. The possible values are `dark` and `light`.
 
 ### TV mode
 

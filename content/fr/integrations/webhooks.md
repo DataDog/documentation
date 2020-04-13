@@ -21,8 +21,8 @@
 
 Les webhooks vous permettent de :
 
-* Vous connecter à vos services.
-* Être informé lorsqu'une alerte de métrique se déclenche pour un service.
+-   Vous connecter à vos services.
+-   Être informé lorsqu'une alerte de métrique se déclenche pour un service.
 
 ## Implémentation
 
@@ -50,7 +50,7 @@ Vous pouvez également spécifier votre propre charge utile afin d'ajouter vos p
 | \$EMAIL            | E-mail de l'utilisateur publiant l'événement qui a déclenché le webhook.                                                                               |
 | \$EVENT_MSG        | Texte de l'événement _(p. ex., @webhook-url Envoi au webhook)_.                                                                              |
 | \$EVENT_TITLE      | Titre de l'événement _(p. ex., \[Triggered] \[Memory Alert])_.                                                                                    |
-| \$EVENT_TYPE       | Type de l'événement \*(valeurs : `metric_alert_monitor`, `event_alert` ou `service_check`).                                                        |
+| \$EVENT_TYPE       | Type de l'événement (valeurs : `metric_alert_monitor`, `event_alert` ou `service_check`).                                                         |
 | \$HOSTNAME         | Le hostname du serveur associé à l'événement (le cas échéant).                                                                        |
 | \$ID               | ID de l'événement _(p. ex., 1234567)_.                                                                                                            |
 | \$LAST_UPDATED     | Date de la dernière mise à jour de l'événement.                                                                                                         |
@@ -59,7 +59,7 @@ Vous pouvez également spécifier votre propre charge utile afin d'ajouter vos p
 | \$METRIC_NAMESPACE | Espace de nommage de la métrique s'il s'agit d'une alerte.                                                                                                     |
 | \$ORG_ID           | ID de votre organisation _(p. ex., 11023)_.                                                                                                      |
 | \$ORG_NAME         | Nom de votre organisation _(p. ex., Datadog)_.                                                                                                  |
-| \$PRIORITY         | Priorité de l'événement _(valeurs : `normal` ou `low`)_.                                                                                          |
+| \$PRIORITY         | Priorité de l'événement _(valeurs : `normal` ou `low`)_.                                                                                           |
 | \$SNAPSHOT         | URL de l'image si l'événement contient un snapshot _(p. ex., `https://url.vers.snapshot.com/`)_.                                                   |
 | \$TAGS             | Liste des tags associés à l'événement séparés par des virgules _(p. ex., `monitor, name:myService, role:computing-node`)_.                                              |
 | \$TEXT_ONLY_MSG    | Texte de l'événement sans mise en forme markdown.                                                                                                |
@@ -68,7 +68,7 @@ Vous pouvez également spécifier votre propre charge utile afin d'ajouter vos p
 
 ### Authentification
 
-Si vous souhaitez envoyer vos Webhooks vers un service nécessitant une authentification, vous pouvez utiliser l'authentification HTTP standard en modifiant votre URL de `https://mon.service.com` à `https://utilisateur:motdepasse@mon.service.com`.
+Si vous souhaitez envoyer vos Webhooks vers un service nécessitant une authentification, vous pouvez utiliser l'authentification HTTP standard en remplaçant votre URL `https://mon.service.example.com` par `https://<NOMUTILISATEUR>:<MOTDEPASSE>@mon.service.example.com`.
 
 ### Multiples webhooks
 
@@ -80,8 +80,8 @@ Néanmoins, dans le contexte Pagerduty, certains événements passent toujours a
 
 ### Envoi de SMS par Twilio
 
-Utilisez comme URL :
-`https://{Votre-ID-compte}:{Votre-token-auth}@api.twilio.com/2010-04-01/Accounts/{Votre-ID-compte}/Messages.json`
+Utilisez l'URL :
+`https://<ID_COMPTE>:<TOKEN_AUTH>@api.twilio.com/2010-04-01/Accounts/<ID_COMPTE>/Messages.json`
 
 et comme charge utile :
 
@@ -97,8 +97,8 @@ Assurez-vous de remplacer `To` par votre numéro de téléphone et `From` par le
 
 ### Créer un ticket dans Jira
 
-Utilisez comme URL :
-`https://{Votre-utilisateur-Jira}:{Votre-motdepasse-Jira}@{Votre-domaine}.atlassian.net/rest/api/2/issue`
+Utilisez l'URL :
+`https://<NOM_UTILISATEUR_JIRA>:<MOTDEPASSE_JIRA>@<VOTRE_DOMAINE>.atlassian.net/rest/api/2/issue`
 
 et comme charge utile :
 

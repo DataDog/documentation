@@ -11,23 +11,11 @@ Récupère la liste de tous les utilisateurs de l'organisation. Cette liste comp
 
 **ARGUMENTS**:
 
-Cet endpoint ne prend aucun argument JSON.
-
-**RÉPONSE** :
-
-- `users` : un tableau d'objets utilisateur.
-
-Propriétés de chaque objet utilisateur :
-
-- `handle` : la chaîne que l'utilisateur utilise pour se connecter.
-- `name` : le nom de l'utilisateur.
-- `access_role` : le rôle d'accès de l'utilisateur :
-  - **st** (utilisateur standard)
-  - **adm** (admin)
-  - **ro** (utilisateur read-only)
-- `verified` : un booléen défini sur `true` si l'utilisateur a accepté une invitation pour rejoindre l'organisation.
-- `disabled` : un booléen défini sur `true` si l'utilisateur a été désactivé pour cette organisation.
-- `role` : une description du rôle de l'utilisateur dans l'organisation.
-- `is_admin` : un booléen défini sur `true` si l'utilisateur est un admin.
-- `email` : l'adresse e-mail de l'utilisateur.
-- `icon` : l'URL de l'icône du profil de l'utilisateur.
+* **`page[size]`** [*facultatif*, *défaut*=**10**] : nombre de rôles à renvoyer pour une page donnée.
+* **`page[number]`** [*facultatif*, *défaut*=**0**] : numéro de la page à renvoyer.
+* **`sort`** [*facultatif*, *défaut*=**name**] : attribut utilisateur servant à trier les résultats. L'ordre de tri est **croissant** par défaut. Il devient **décroissant** si le champ est précédé par un tiret (exemple : *sort=-name*).
+  * Options : **name**, **modified_at** et **user_count**.
+* **`sort_dir`** [*facultatif*, *défaut*=**desc**] : sens du tri.
+    * Valeurs autorisées : `asc` et `desc`.
+* **`filter` **[*facultatif*, *défaut*=**None**] : filtre tous les rôles selon la chaîne indiquée.
+* **`filter[status]`**[*facultatif*, *défaut*=**None**] : filtre les données selon l'attribut `status`. Liste de valeurs séparées par des virgules : `Active`, `Pending` et `Disabled`.

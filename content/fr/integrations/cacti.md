@@ -29,10 +29,10 @@ supported_os:
 ---
 ## Présentation
 
-Recueillez des métriques du service Cacti en temps réel pour :
+Recueillez des métriques de Cacti en temps réel pour :
 
-* Visualiser et surveiller les états de Cacti
-* Être informé des failovers et des événements de Cacti
+- Visualiser et surveiller les états de Cacti
+- Être informé des failovers et des événements de Cacti
 
 ## Implémentation
 
@@ -71,73 +71,72 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 
 1. Créez un utilisateur Datadog avec un accès en lecture seule à la base de données Cacti.
 
-    ```shell
-    sudo mysql -e "create user 'datadog'@'localhost' identified by '<MYSQL_PASSWORD>';"
-    sudo mysql -e "grant select on cacti.* to 'datadog'@'localhost';"
-    ```
+   ```shell
+   sudo mysql -e "create user 'datadog'@'localhost' identified by '<MYSQL_PASSWORD>';"
+   sudo mysql -e "grant select on cacti.* to 'datadog'@'localhost';"
+   ```
 
 2. Vérifiez l'utilisateur et ses droits :
 
-    ```shell
-    mysql -u datadog --password=<MYSQL_PASSWORD> -e "show status" | \
-    grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
-    echo -e "\033[0;31mCannot connect to MySQL\033[0m"
+   ```shell
+   mysql -u datadog --password=<MYSQL_PASSWORD> -e "show status" | \
+   grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
+   echo -e "\033[0;31mCannot connect to MySQL\033[0m"
 
-    mysql -u datadog --password=<MYSQL_PASSWORD> -D cacti -e "select * from data_template_data limit 1" && \
-    echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
-    echo -e "\033[0;31mMissing SELECT grant\033[0m"
-    ```
+   mysql -u datadog --password=<MYSQL_PASSWORD> -D cacti -e "select * from data_template_data limit 1" && \
+   echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
+   echo -e "\033[0;31mMissing SELECT grant\033[0m"
+   ```
 
 3. Accordez à l'utilisateur `datadog-agent` un accès aux fichiers RRD :
 
-    ```shell
-    sudo gpasswd -a dd-agent www-data
-    sudo chmod -R g+rx /var/lib/cacti/rra/
-    sudo su - datadog-agent -c 'if [ -r /var/lib/cacti/rra/ ];
-    then echo -e "\033[0;31mdatadog-agent can read the RRD files\033[0m";
-    else echo -e "\033[0;31mdatadog-agent can not read the RRD files\033[0m";
-    fi'
-    ```
+   ```shell
+   sudo gpasswd -a dd-agent www-data
+   sudo chmod -R g+rx /var/lib/cacti/rra/
+   sudo su - datadog-agent -c 'if [ -r /var/lib/cacti/rra/ ];
+   then echo -e "\033[0;31mdatadog-agent can read the RRD files\033[0m";
+   else echo -e "\033[0;31mdatadog-agent can not read the RRD files\033[0m";
+   fi'
+   ```
 
 #### Configurer l'Agent
 
 1. Configurez l'Agent de façon à ce qu'il se connecte à MySQL et modifiez le fichier `cacti.d/conf.yaml`. Consultez le [fichier d'exemple cacti.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles :
 
-    ```yaml
-        init_config:
+   ```yaml
+   init_config:
 
-        instances:
+   instances:
+     ## @param mysql_host - string - required
+     ## url of your MySQL database
+     #
+     - mysql_host: "localhost"
 
-            ## @param mysql_host - string - required
-            ## url of your MySQL database
-            #
-          - mysql_host: "localhost"
+       ## @param mysql_port - integer - optional - default: 3306
+       ## port of your MySQL database
+       #
+       # mysql_port: 3306
 
-            ## @param mysql_port - integer - optional - default: 3306
-            ## port of your MySQL database
-            #
-            # mysql_port: 3306
+       ## @param mysql_user - string - required
+       ## User to use to connect to MySQL in order to gather metrics
+       #
+       mysql_user: "datadog"
 
-            ## @param mysql_user - string - required
-            ## User to use to connect to MySQL in order to gather metrics
-            #
-            mysql_user: "datadog"
+       ## @param mysql_password - string - required
+       ## Password to use to connect to MySQL in order to gather metrics
+       #
+       mysql_password: "<MYSQL_PASSWORD>"
 
-            ## @param mysql_password - string - required
-            ## Password to use to connect to MySQL in order to gather metrics
-            #
-            mysql_password: "<MYSQL_PASSWORD>"
-
-            ## @param rrd_path - string - required
-            ## The Cacti checks requires access to the Cacti DB in MySQL and to the RRD
-            ## files that contain the metrics tracked in Cacti.
-            ## In almost all cases, you'll only need one instance pointing to the Cacti
-            ## database.
-            ## The `rrd_path` will probably be `/var/lib/cacti/rra` on Ubuntu
-            ## or `/var/www/html/cacti/rra` on any other machines.
-            #
-            rrd_path: "<CACTI_RRA_PATH>"
-    ```
+       ## @param rrd_path - string - required
+       ## The Cacti checks requires access to the Cacti DB in MySQL and to the RRD
+       ## files that contain the metrics tracked in Cacti.
+       ## In almost all cases, you'll only need one instance pointing to the Cacti
+       ## database.
+       ## The `rrd_path` will probably be `/var/lib/cacti/rra` on Ubuntu
+       ## or `/var/www/html/cacti/rra` on any other machines.
+       #
+       rrd_path: "<CACTI_RRA_PATH>"
+   ```
 
 2. [Redémarrez l'Agent][3].
 

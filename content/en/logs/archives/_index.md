@@ -72,6 +72,10 @@ Next, grant Datadog permissions to write log archives to your S3 bucket with rol
 
     {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Set your S3 bucket info in Datadog"  style="width:75%;">}}
 
+### Storage Class
+
+You can [set a lifecycle configuration on your S3 bucket][7] to automatically transition your log archives to optimal storage classes. [Rehydration][5] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+
 ### Server side encryption (SSE)
 
 To add server side encryption to your S3 log archives, go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Select the `AES-256` option and **Save**.
@@ -84,6 +88,7 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 [4]: /integrations/amazon_web_services/?tab=allpermissions#installation
 [5]: /logs/archives/rehydrating
 [6]: https://app.datadoghq.com/logs/pipelines/archives
+[7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
