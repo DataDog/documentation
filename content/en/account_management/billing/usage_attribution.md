@@ -41,7 +41,7 @@ The **Applied Tags** section enables the following:
 
 ### Monthly Usage Attribution
 
-Once the reports start being generated, they will be updated daily and aggregated monthly in this table.
+Once the reports start being generated, they are updated daily and aggregated monthly in this table.
 
 {{< img src="account_management/billing/advanced-usage-reporting-03.png" alt="Usage Summary Table" >}}
 
