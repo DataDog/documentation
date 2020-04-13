@@ -34,8 +34,9 @@ To configure an integration with Autodiscovery, use the following parameters:
 | Parameter            | Required | Description                                                                                       |
 |----------------------|----------|---------------------------------------------------------------------------------------------------|
 | `<INTEGRATION_NAME>` | Yes      | Name of the Datadog integration                                                                   |
-| `<INIT_CONFIG>`      | Yes      | Configuration for the `init_config:` section for the given Datadog-`<INTEGRATION_NAME>`           |
-| `<INSTANCE_CONFIG>`  | Yes      | Configuration for the `instances:` section for the given Datadog-`<INTEGRATION_NAME>`             |
+| `<INIT_CONFIG>`      | Yes      | The configuration parameters listed under `init_config:` in your `conf.yaml` and required for any integrations you're enabling.         |
+| `<INSTANCE_CONFIG>`  | Yes      | A part of the `<INIT_CONFIG>`, these are the configuration parameters listed under `instances:` in your `conf.yaml` and required for any integrations you're enabling.         |
+| `<LOG_CONFIG>`  | Yes      | A part of the `<INIT_CONFIG>`, these are the configuration parameters listed under `logs:` in your `conf.yaml` and define the logs you're sending to Datadog.        |
 
 [**Discover the full list of Agent integrations that are Autodiscovery ready with examples for those parameters**][3]
 
