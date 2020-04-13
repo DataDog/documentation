@@ -34,7 +34,11 @@ The Datadog Oncall App is currently in beta, so it's not available generally in 
 1. To install the android app, open this invite link from your android: [https://play.google.com/apps/testing/com.datadog.app][3]. This takes you to a page where you can download the Datadog app.
 2. Once the app downloads, open the app, select whether you are logging into the US or EU site, and log in with your Datadog credentials.
 
-**Note**: [SAML login][4] is not currently supported.
+### Logging in
+
+You can login using standard and Google authentication. [SAML login][4] is not currently supported. If you have SAML enabled but not strictly, you can access the mobile app by creating a new standard email account. An org admin needs to approve the newly created account.
+
+Switch organizations and log out from the **Account page**.
 
 ## Monitors
 
@@ -58,7 +62,7 @@ Switch organizations and log out from the Account page.
 
 ## Troubleshooting and Known Issues
 
-- SAML login is not currently supported. You can login using standard and Google authentication. If you have SAML enabled but not strictly, you can access the mobile app by creating a new standard email account. An org admin needs to approve the newly created account.
+- [SAML login][4] is not currently supported. You can login using standard and Google authentication. If you have SAML enabled but not strictly, you can access the mobile app by creating a new standard email account. An org admin needs to approve the newly created account.
 - Switching orgs does not always work correctly, especially if the new org requires Google OAuth.
 
 ## Feedback
