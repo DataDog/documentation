@@ -34,7 +34,7 @@ The **Applied Tags** section enables the following:
 
 {{< img src="account_management/billing/advanced-usage-reporting-02.png" alt="Applied Tags" >}}
 
-* Once the tags are configured, it will take a full 24-hour period for the first report to be generated.
+* Once the tags are configured, it takes a full 24-hour period for the first report to be generated.
 * The reports are generated on an ongoing basis.
 * If tags are changed, the new reports will reflect the new tags. However, the previous reports will keep the old ones.
 * Monthly reports reflect the latest set of tags. If you change tags mid-month, the usage percentages might not match up. 
