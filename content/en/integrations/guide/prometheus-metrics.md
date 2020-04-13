@@ -29,7 +29,7 @@ For more information about Datadog metric types, see the [Datadog Metric Types d
 
 By default, [Prometheus/OpenMetrics `counter`][2] is mapped to Datadog's `gauge`.
 
-However, if the parameter `send_monotonic_counter` is `true`, then this metric is sent as `monotonic_counter`.
+However, if the parameter `send_monotonic_counter` is `true`, then this metric is sent as `monotonic_counter`. [Read more about monotonic counters][8].
 
 ### Gauge
 
@@ -43,7 +43,7 @@ If the parameter `send_histograms_buckets` is `true`, each `_bucket` value is al
 
 If the parameter `send_distribution_buckets` is `true`, each `_bucket` is mapped to Datadog's `distribution`. Prometheus/OpenMetrics histogram data is converted to Datadog distribution metrics to allow for easily monitoring Kubernetes metrics as percentiles in Datadog. Datadog distribution metrics are based on the [DDSketch algorithm][5]. For more information, see the relevant Datadog [blog post on OpenMetrics and distribution metrics][6].
 
-If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `monotonic_count`.
+If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `monotonic_count`. [Read more about monotonic counters][8].
 
 ### Summary
 
@@ -51,7 +51,7 @@ For [Prometheus/OpenMetrics `summary`][7], the `_count` and `_sum` values of the
 
 If the parameter `send_distribution_buckets` is `true`, the histogram is converted to a distribution, and each `_bucket` can be fetched using `distribution` tags.
 
-If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `monotonic_count`.
+If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `monotonic_count`. [Read more about monotonic counters][8].
 
 [1]: /developers/metrics/types/
 [2]: https://prometheus.io/docs/concepts/metric_types/#counter
@@ -60,3 +60,4 @@ If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric 
 [5]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
 [6]: https://www.datadoghq.com/blog/whats-next-monitoring-kubernetes/#distribution-metrics
 [7]: https://prometheus.io/docs/concepts/metric_types/#summary
+[8]: /developers/metrics/agent_metrics_submission/?tab=count#monotonic-count
