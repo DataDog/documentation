@@ -23,7 +23,7 @@ Administrators can access the Usage Attribution tab from the Plan & Usage sectio
 
 ### Getting started
 
-In order to start receiving daily data, an administrator will need to create a new report via the user interface. 
+To start receiving daily data, an administrator needs to create a new report with the user interface. 
 
 {{< img src="account_management/billing/advanced-usage-reporting-01.png" alt="Getting Started" >}}
 
