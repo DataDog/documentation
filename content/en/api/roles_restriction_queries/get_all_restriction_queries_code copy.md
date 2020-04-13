@@ -7,7 +7,7 @@ external_redirect: /api/#get-all-restriction-queries
 
 **SIGNATURE**:
 
-GET /v1/logs/config/restriction_queries
+GET /v1/logs/config/restriction_queries/
 
 **EXAMPLE REQUEST**:
 
