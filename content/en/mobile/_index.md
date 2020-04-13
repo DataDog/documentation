@@ -1,5 +1,5 @@
 ---
-title: Mobile App - Datadog Oncall
+title: Datadog Oncall Mobile App
 kind: documentation
 beta: true
 further_reading:
@@ -11,17 +11,17 @@ further_reading:
   text: "Dashboards"
 ---
 
-<div class="alert alert-info">The Datadog mobile app is currently in open beta, which means that you may encounter some performance and stability issues - expect some bugs, and we may need to make breaking changes. To join the beta, follow the installation instructions. The beta is not currently available to customers using SAML authentication. If you have feedback on the beta, please let us know by filling out the <a href="https://docs.google.com/forms/d/e/1FAIpQLScRmJ-JOE0tU7fkDdAL_AxKE6xT3TG45qq8lo2r-F-GBvg1jg/viewform">mobile app feedback form</a>.</div>
+<div class="alert alert-warning"> This service is in public beta. To join the beta, follow the installation instructions. The beta is not currently available to customers using SAML authentication. If you have any feedback, please <a href="/help">contact Datadog support</a>.</div>
 
 {{< wistia 7vun3cwysk >}}
 
-The Datadog Oncall app enables on-call engineers to view alerts from Datadog on their mobile device. When alerted by Pagerduty, Slack or other pager apps to a Datadog alert, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
+The Datadog Oncall app enables on-call engineers to view alerts from Datadog on their mobile device. When notified to a Datadog alert by Pagerduty, Slack or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
 
 ## Installing
 
 {{< img src="mobile/icon.jpg" alt="mobile icon"  >}}
 
-The Datadog Oncall App is currently in beta, so it's not available in general app stores. To download the app, use the specific invite links in these instructions.
+The Datadog Oncall App is currently in beta, so it's not available generally in app stores. To download the app, use the specific invite links in these instructions.
 
 ### iOS
 
@@ -34,13 +34,15 @@ The Datadog Oncall App is currently in beta, so it's not available in general ap
 1. To install the android app, open this invite link from your android: [https://play.google.com/apps/testing/com.datadog.app][3]. This takes you to a page where you can download the Datadog app.
 2. Once the app downloads, open the app, select whether you are logging into the US or EU site, and log in with your Datadog credentials.
 
+**Note**: [SAML login][4] is not currently supported.
+
 ## Monitors
 
 {{< img src="mobile/monitors.png" alt="monitor page"  >}}
 
-On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert.
+On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build specific search queries based on your tagging strategy. For more information about searching, see the [Manage Monitors Search section][5]. For example, to filter only metric monitor related to SRE team that are alerting, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you can faster access previous queries.
 
-**Note:** To set up or edit a monitor and alerts, you need to [login to the Datadog browser app][4] and set them up there. All alerts set up in the app are enabled for the mobile app. For more information, see [Creating monitors][5].
+**Note:** To set up or edit a monitor and alerts, you need set them up in the [Datadog web app][6]. All alerts set up in the app are enabled for the mobile app. For more information, see [Creating monitors][7].
 
 ## Dashboards
 
@@ -48,7 +50,7 @@ On the Monitors page, you can view and search all of the monitors that you have 
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org. Click into an individual dashboard to view it.
 
-**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][6]. For more information, see [Dashboards][7].
+**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][8]. For more information, see [Dashboards][9].
 
 ## Account
 
@@ -56,13 +58,12 @@ Switch organizations and log out from the Account page.
 
 ## Troubleshooting and Known Issues
 
-- SAML login is not currently supported. 
+- SAML login is not currently supported. You can login using standard and Google authentication. If you have SAML enabled but not strictly, you can access the mobile app by creating a new standard email account. An org admin needs to approve the newly created account.
 - Switching orgs does not always work correctly, especially if the new org requires Google OAuth.
-- We're working on improving the layout rendering of Dashboards.
 
 ## Feedback
 
-If you have feedback on the beta, please let us know using the built-in mobile **Share Beta Feedback..** functionality or by filling out the [mobile app feedback form][8].
+If you have feedback on the beta, please [contact Datadog support][10]. You can also find us on the [Datadog public Slack][11], in the [#mobile-app][12] channel. 
 
 ### Further Reading
 
@@ -71,8 +72,12 @@ If you have feedback on the beta, please let us know using the built-in mobile *
 [1]: https://apps.apple.com/us/app/testflight/id899247664
 [2]: https://apple.co/2xEC5ke
 [3]: https://play.google.com/apps/testing/com.datadog.app
-[4]: https://app.datadoghq.com/monitors
-[5]: /monitors/monitor_types/
-[6]: https://app.datadoghq.com/dashboard/lists
-[7]: /dashboards/
-[8]: https://docs.google.com/forms/d/e/1FAIpQLScRmJ-JOE0tU7fkDdAL_AxKE6xT3TG45qq8lo2r-F-GBvg1jg/viewform
+[4]: /account_management/saml/#pagetitle
+[5]: /monitors/manage_monitor/#search
+[6]: https://app.datadoghq.com/monitors
+[7]: /monitors/monitor_types/
+[8]: https://app.datadoghq.com/dashboard/lists
+[9]: /dashboards/
+[10]: /help/
+[11]: https://chat.datadoghq.com/
+[12]: https://datadoghq.slack.com/archives/C0114D5EHNG
