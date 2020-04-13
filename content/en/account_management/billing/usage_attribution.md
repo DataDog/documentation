@@ -15,7 +15,7 @@ Administrators can access the Usage Attribution tab from the Plan & Usage sectio
 * Summarizes usage at the end of each month. 
 * Surfaces the data both in the UI and as a .tsv download.
 
-**Note**: The following usage types are not supported in this tool yet. They will be added subsequently:
+**Note**: The following usage types are not supported in this tool:
 
 * Indexed Log Events
 * Ingested Logs
