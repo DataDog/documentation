@@ -16,12 +16,6 @@
 
     {{ $d := index $dot.Site.Data.api $apiVersion "full_spec_deref" }}
 
-    {{ $schemaJson := getJSON "./data/api/v1/full_spec_deref.json" }}
-
-    {{ $snipdir := print "content/en/api/" $apiVersion "/examples/" }}
-
-    {{- $files := readDir $snipdir -}}
-
     {{ range $k, $v := (index $d "tags") }}
         {{ if eq $.Params.title $v.name }}
 
@@ -223,70 +217,33 @@
 
                         {{/* match all Page Resource code examples by operationId */}}
                         {{ with $dot.Resources.Match (printf "%s%s" .action.operationId ".*" ) }}
-                        <div class="code-snippet-wrapper" >
-                        <form class="form-inline">
-                    
-                            <div class="form-group">
-                                <label for="codeLangSelect" class="sr-only">Code language</label>
-                                <select class="form-control js-code-lang-select" id="codeLangSelect">
-                                  <option value="bash">Shell</option>
-                                  <option value="java">Java</option>
-                                  <option value="go">Go</option>
-                                </select>
-                              </div>
-                          </form>
-                            {{ range . }}
+                            <div class="code-snippet-wrapper" >
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="codeLangSelect" class="sr-only">Code language</label>
+                                        <select class="form-control js-code-lang-select" id="codeLangSelect">
+                                        <option value="bash">Shell</option>
+                                        <option value="java">Java</option>
+                                        <option value="go">Go</option>
+                                        </select>
+                                    </div>
+                                </form>
+                                {{ range . }}
 
-                                {{ $file_content := .Content }}
-                                {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-                                {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
-
-                                
-                                    
-                                        
-                                        <div class="code-snippet js-code-block {{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
-                                            <div class="code-button-wrapper position-absolute">
-                                                <button class="btn text-primary js-copy-button">Copy</button>
-                                            </div>
-                                            {{ highlight $file_content $lang.pygments_name "" }}
-                                        </div>
-                                    
-                            {{ end }}
-                        </div>
-
-                        {{ end }}
-
-                        {{/* range $files }}
-
-                            {{ .Name }}
-
-                           
-
-                            {{ $file := (print $snipdir (.Name))}}
-                            {{ if and (fileExists $file) (not (in $file "openapi-generator" ))  }}
-                                {{ $file_content := readFile $file }}
-                                {{ $file_basename := (index (split .Name ".") 0) }}
-                                {{ $file_extension := index (split (path.Ext $file) ".") 1 }}
-
-                                {{ if eq $context.action.operationId $file_basename }}
+                                    {{ $file_content := .Content }}
+                                    {{ $file_extension := index (split (path.Ext .) ".") 1 }}
                                     {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
 
-                                    <div class="code-snippet-wrapper js-code-block {{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}">
-                                        <div class="code-snippet">
-                                      
+                                    <div class="code-snippet js-code-block {{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
                                         <div class="code-button-wrapper position-absolute">
-                                        <button class="btn text-primary js-copy-button">Copy</button>
+                                            <button class="btn text-primary js-copy-button">Copy</button>
                                         </div>
-                                       
-                                       
                                         {{ highlight $file_content $lang.pygments_name "" }}
-                                        </div>
-                                        </div>
-                                  
-                            
+                                    </div>
+                                        
                                 {{ end }}
-                            {{ end }}
-                        {{ end */}}
+                            </div>
+                        {{ end }}
                     </div>
                 </div>
                 <!-- endpoint section end -->
@@ -296,7 +253,6 @@
                     </div>
                 </div>
             {{ end }}
-
         {{ end }}
     {{ end }}
 {{ end }}
