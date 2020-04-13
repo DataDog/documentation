@@ -17,7 +17,7 @@ If you are using Datadog's Prometheus or OpenMetrics checks, you may be interest
 ## Prometheus and OpenMetrics metric types
 
 * `counter`: a cumulative metric that represents a single monotonically increasing counter, whose value can only increase—or be reset to zero.
-* `gauge`: a metric that represents a single numerican value, which can arbitrarily go up and down.
+* `gauge`: a metric that represents a single numeric value, which can arbitrarily go up and down.
 * `histogram`: samples observations and counts them in configurable buckets; also provides a sum of all observed values.
 * `summary`: similar to histogram; samples observations, provides a sum of all observed values, and calculates configurable quantiles over a sliding time window.
 
