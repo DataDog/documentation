@@ -55,7 +55,7 @@ Once the reports start being generated, they are updated daily and aggregated mo
 
 This section provides daily reports at an hourly granularity to dig into timeframes. It also provides a concatenation of all reports during a given month.
 
-* Clicking on a specific time period expands a view on the right where reports can be downloaded as a `.csv`.
+* Clicking on a specific time period expands a view on the right where reports can be downloaded as a `.tsv`.
 * Data can be downloaded daily or at the end of the month.
 
 {{< img src="account_management/billing/advanced-usage-reporting-04.png" alt="Download data" >}}
