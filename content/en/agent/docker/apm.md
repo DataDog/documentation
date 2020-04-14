@@ -176,6 +176,28 @@ const tracer = require('dd-trace').init({
 ```
 
 {{% /tab %}}
+
+{{% tab ".NET" %}}
+
+Set the environment variables before running your instrumented app:
+
+```bash
+# Environment variables
+export CORECLR_ENABLE_PROFILING=1
+export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+export DD_INTEGRATIONS=/opt/datadog/integrations.json
+export DD_DOTNET_TRACER_HOME=/opt/datadog
+
+# For containers
+export DD_AGENT_HOST=datadog-agent
+export DD_TRACE_AGENT_PORT=8126
+
+# Start your application
+dotnet example.dll
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Docker host IP
