@@ -6,7 +6,7 @@ public class ServiceLevelObjectivesApiExample {
         ServiceLevelObjectivesApi apiInstance = new ServiceLevelObjectivesApi();
         String sloId = sloId_example; // String | The ID of the service level objective object.
         try {
-            ServiceLevelObjectiveResponse result = apiInstance.getSLO(sloId);
+            SLOResponse result = apiInstance.getSLO(sloId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ServiceLevelObjectivesApi#getSLO");

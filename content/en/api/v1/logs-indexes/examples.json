@@ -142,7 +142,7 @@
         },
         "html": "\n  <div class=\" schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12 column\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 field-column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 type-column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 description-column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row \">\n              \n    <div class=\"col-4 field-column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 type-column\"><p>[string]</p></div>\n              <div class=\"col-6 description-column\"><p>TODO.</p>\n</div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
-      "404": {
+      "429": {
         "json": {
           "error": "object"
         },

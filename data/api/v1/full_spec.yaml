@@ -229,12 +229,14 @@ components:
       - st
       - adm
       - ro
+      - ERROR
       example: st
       type: string
       x-enum-varnames:
       - STANDARD
       - ADMIN
       - READ_ONLY
+      - ERROR
     AlertGraphWidgetDefinition:
       description: Alert graphs are timeseries graphs showing the current status of
         any monitor defined on your system
@@ -540,7 +542,33 @@ components:
           description: Whether to show the present value.
           type: boolean
       type: object
-    CheckCanDeleteServiceLevelObjectiveResponse:
+    CheckCanDeleteMonitorResponse:
+      description: Response of monitor IDs that can or can't be safely deleted.
+      properties:
+        data:
+          description: Wrapper object with the list of monitor IDs.
+          properties:
+            ok:
+              description: An array of of Monitor IDs that can be safely deleted.
+              items:
+                description: TODO.
+                format: int64
+                type: integer
+              type: array
+          type: object
+        errors:
+          additionalProperties:
+            description: Strings denoting where a monitor is used
+            items:
+              description: TODO.
+              type: string
+            type: array
+          description: A mapping of Monitor ID to strings denoting where it's used.
+          type: object
+      required:
+      - data
+      type: object
+    CheckCanDeleteSLOResponse:
       description: A service level objective response containing the requested object.
       properties:
         data:
@@ -559,8 +587,6 @@ components:
             type: string
           description: A mapping of SLO id to it's current usages.
           type: object
-      required:
-      - data
       type: object
     CheckStatusWidgetDefinition:
       description: Check status shows the current status or number of results for
@@ -1568,45 +1594,6 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetStyle'
-      type: object
-    HistoryServiceLevelObjectiveResponse:
-      description: A service level objective history response.
-      properties:
-        data:
-          description: An array of service level objective objects.
-          properties:
-            from_ts:
-              description: The `from` timestamp in epoch seconds.
-              format: int64
-              type: integer
-            groups:
-              $ref: '#/components/schemas/SLOHistorySLIData'
-            overall:
-              $ref: '#/components/schemas/SLOHistorySLIData'
-            series:
-              $ref: '#/components/schemas/SLOHistoryMetrics'
-            thresholds:
-              additionalProperties:
-                $ref: '#/components/schemas/SLOThreshold'
-              description: mapping of string timeframe to the SLO threshold.
-              type: object
-            to_ts:
-              description: The `to` timestamp in epoch seconds.
-              format: int64
-              type: integer
-            type:
-              $ref: '#/components/schemas/SLOType'
-            type_id:
-              $ref: '#/components/schemas/SLOTypeNumeric'
-          type: object
-        errors:
-          description: A list of errors while querying the history data for the service
-            level obective.
-          items:
-            $ref: '#/components/schemas/SLOHistoryResponseError'
-          type: array
-      required:
-      - data
       type: object
     Host:
       description: TODO.
@@ -3700,10 +3687,8 @@ components:
           type: string
       type: object
     PagerDutyService:
-      description: 'Configure your Datadog-PagerDuty integration directly through
-        the Datadog API.
-
-        For more informations, see the [PagerDuty integration page](https://docs.datadoghq.com/integrations/pagerduty/).'
+      description: Configure your Datadog-PagerDuty integration directly through the
+        Datadog API. For more informations, see the [PagerDuty integration page](https://docs.datadoghq.com/integrations/pagerduty/).
       properties:
         service_key:
           description: Your Service key in PagerDuty.
@@ -3869,6 +3854,98 @@ components:
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
       type: object
+    SLOBulkDelete:
+      additionalProperties:
+        description: TODO.
+        items:
+          $ref: '#/components/schemas/SLOTimeframe'
+        type: array
+      description: 'A map of service level objective object IDs to arrays of timeframes,
+
+        which indicate the thresholds to delete for each ID.'
+      example:
+        id1:
+        - 7d
+        - 30d
+        id2:
+        - 7d
+        - 30d
+      type: object
+    SLOBulkDeleteResponse:
+      description: 'The bulk partial delete service level objective object endpoint
+
+        response.
+
+
+        This endpoint operates on multiple service level objective objects, so
+
+        it may be partially successful. In such cases, the "data" and "error"
+
+        fields in this response indicate which deletions succeeded and failed.'
+      properties:
+        data:
+          description: An array of service level objective objects.
+          properties:
+            deleted:
+              description: 'An array of service level objective object IDs that indicates
+
+                which objects that were completely deleted.'
+              items:
+                description: TODO.
+                type: string
+              type: array
+            updated:
+              description: 'An array of service level objective object IDs that indicates
+
+                which objects that were modified (objects for which at least one
+
+                threshold was deleted, but that were not completely deleted).'
+              items:
+                description: TODO.
+                type: string
+              type: array
+          type: object
+        errors:
+          description: TODO.
+          items:
+            description: TODO.
+            properties:
+              id:
+                description: 'The ID of the service level objective object associated
+                  with
+
+                  this error.'
+                type: string
+              message:
+                description: The error message
+                type: string
+              timeframe:
+                $ref: '#/components/schemas/SLOErrorTimeframe'
+            required:
+            - id
+            - timeframe
+            - message
+            type: object
+          type: array
+      type: object
+    SLODeleteResponse:
+      description: A response list of all service level objective deleted.
+      properties:
+        data:
+          description: An array containing the ID of the deleted service level objective
+            object.
+          items:
+            description: TODO.
+            type: string
+          type: array
+        errors:
+          additionalProperties:
+            description: Error preventing the SLO deletion.
+            type: string
+          description: An dictionary containing the ID of the SLO as key and a deletion
+            error as value.
+          type: object
+      type: object
     SLOErrorTimeframe:
       description: 'The timeframe of the threshold associated with this error
 
@@ -3977,6 +4054,43 @@ components:
       - values
       - metadata
       type: object
+    SLOHistoryResponse:
+      description: A service level objective history response.
+      properties:
+        data:
+          description: An array of service level objective objects.
+          properties:
+            from_ts:
+              description: The `from` timestamp in epoch seconds.
+              format: int64
+              type: integer
+            groups:
+              $ref: '#/components/schemas/SLOHistorySLIData'
+            overall:
+              $ref: '#/components/schemas/SLOHistorySLIData'
+            series:
+              $ref: '#/components/schemas/SLOHistoryMetrics'
+            thresholds:
+              additionalProperties:
+                $ref: '#/components/schemas/SLOThreshold'
+              description: mapping of string timeframe to the SLO threshold.
+              type: object
+            to_ts:
+              description: The `to` timestamp in epoch seconds.
+              format: int64
+              type: integer
+            type:
+              $ref: '#/components/schemas/SLOType'
+            type_id:
+              $ref: '#/components/schemas/SLOTypeNumeric'
+          type: object
+        errors:
+          description: A list of errors while querying the history data for the service
+            level obective.
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseError'
+          type: array
+      type: object
     SLOHistoryResponseError:
       description: A service level objective response containing the requested history.
       properties:
@@ -4037,6 +4151,40 @@ components:
           description: Deprecated. Use `sli_value` instead.
           format: double
           type: number
+      type: object
+    SLOListResponse:
+      description: A response with one or more service level objective.
+      properties:
+        data:
+          description: An array of service level objective objects.
+          items:
+            $ref: '#/components/schemas/ServiceLevelObjective'
+          type: array
+        errors:
+          description: 'An array of error messages. Each endpoint documents how/whether
+            this field is
+
+            used.'
+          items:
+            description: TODO.
+            type: string
+          type: array
+      type: object
+    SLOResponse:
+      description: A service level objective response containing a single service
+        level objective.
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceLevelObjective'
+        errors:
+          description: 'An array of error messages. Each endpoint documents how/whether
+            this field is
+
+            used.'
+          items:
+            description: TODO.
+            type: string
+          type: array
       type: object
     SLOThreshold:
       description: SLO thresholds (target and optionally warning) for a single time
@@ -4450,135 +4598,6 @@ components:
       - name
       - thresholds
       - type
-    ServiceLevelObjectiveDeleted:
-      description: A response list of all service level objective deleted.
-      properties:
-        data:
-          description: 'An array containing the ID of the deleted service level objective
-
-            object.'
-          items:
-            description: TODO.
-            type: string
-          type: array
-      required:
-      - data
-      type: object
-    ServiceLevelObjectiveListResponse:
-      description: A response with one or more service level objective.
-      properties:
-        data:
-          description: An array of service level objective objects.
-          items:
-            $ref: '#/components/schemas/ServiceLevelObjective'
-          type: array
-        errors:
-          description: 'An array of error messages. Each endpoint documents how/whether
-            this field is
-
-            used.'
-          items:
-            description: TODO.
-            type: string
-          type: array
-      required:
-      - data
-      type: object
-    ServiceLevelObjectiveResponse:
-      description: A service level objective response containing a single service
-        level objective.
-      properties:
-        data:
-          $ref: '#/components/schemas/ServiceLevelObjective'
-        errors:
-          description: 'An array of error messages. Each endpoint documents how/whether
-            this field is
-
-            used.'
-          items:
-            description: TODO.
-            type: string
-          type: array
-      required:
-      - data
-      type: object
-    ServiceLevelObjectivesBulkDelete:
-      additionalProperties:
-        description: TODO.
-        items:
-          $ref: '#/components/schemas/SLOTimeframe'
-        type: array
-      description: 'A map of service level objective object IDs to arrays of timeframes,
-
-        which indicate the thresholds to delete for each ID.'
-      example:
-        id1:
-        - 7d
-        - 30d
-        id2:
-        - 7d
-        - 30d
-      type: object
-    ServiceLevelObjectivesBulkDeleted:
-      description: 'The bulk partial delete service level objective object endpoint
-
-        response.
-
-
-        This endpoint operates on multiple service level objective objects, so
-
-        it may be partially successful. In such cases, the "data" and "error"
-
-        fields in this response indicate which deletions succeeded and failed.'
-      properties:
-        data:
-          description: An array of service level objective objects.
-          properties:
-            deleted:
-              description: 'An array of service level objective object IDs that indicates
-
-                which objects that were completely deleted.'
-              items:
-                description: TODO.
-                type: string
-              type: array
-            updated:
-              description: 'An array of service level objective object IDs that indicates
-
-                which objects that were modified (objects for which at least one
-
-                threshold was deleted, but that were not completely deleted).'
-              items:
-                description: TODO.
-                type: string
-              type: array
-          type: object
-        errors:
-          description: TODO.
-          items:
-            description: TODO.
-            properties:
-              id:
-                description: 'The ID of the service level objective object associated
-                  with
-
-                  this error.'
-                type: string
-              message:
-                description: The error message
-                type: string
-              timeframe:
-                $ref: '#/components/schemas/SLOErrorTimeframe'
-            required:
-            - id
-            - timeframe
-            - message
-            type: object
-          type: array
-      required:
-      - data
-      - errors
-      type: object
     ServiceMapWidgetDefinition:
       description: This widget displays a map of a service to all of the services
         that call it, and all of the services that it calls.
@@ -5114,6 +5133,9 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestMonitorStatus'
+      required:
+      - from_ts
+      - to_ts
       type: object
     SyntheticsBrowserVariable:
       description: TODO.
@@ -5284,27 +5306,6 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsBrowserTestResultShort'
           type: array
-      type: object
-    SyntheticsGetTestLatestResultsPayload:
-      description: TODO.
-      properties:
-        from_ts:
-          description: TODO.
-          format: double
-          type: number
-        probe_dc:
-          description: TODO.
-          items:
-            description: TODO.
-            type: string
-          type: array
-        to_ts:
-          description: TODO.
-          format: double
-          type: number
-      required:
-      - from_ts
-      - to_ts
       type: object
     SyntheticsListTestsResponse:
       description: TODO.
@@ -7640,12 +7641,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiKeyListResponse'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
@@ -7663,6 +7658,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ApiKey'
+        required: true
       responses:
         '200':
           content:
@@ -7682,12 +7678,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-        '409':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Conflict
       summary: Create an API key
       tags:
       - Key Management
@@ -7748,12 +7738,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiKeyResponse'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
@@ -7784,6 +7768,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ApiKey'
+        required: true
       responses:
         '200':
           content:
@@ -7824,12 +7809,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApplicationKeyListResponse'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
@@ -7847,6 +7826,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ApplicationKey'
+        required: true
       responses:
         '200':
           content:
@@ -7894,12 +7874,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApplicationKeyResponse'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
@@ -7932,12 +7906,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApplicationKeyResponse'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
@@ -7968,6 +7936,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ApplicationKey'
+        required: true
       responses:
         '200':
           content:
@@ -7993,6 +7962,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
       summary: Edit an application key
       tags:
       - Key Management
@@ -8061,24 +8036,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/DashboardSummary'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Item Not Found
       summary: Get all Dashboards
       tags:
       - Dashboards
@@ -8138,12 +8101,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Not Found
       summary: Get all dashboard lists
       tags:
       - Dashboard Lists
@@ -8318,12 +8275,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/DashboardDeleteResponse'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
@@ -8408,6 +8359,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Dashboard'
           description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
         '403':
           content:
             application/json:
@@ -8444,12 +8401,12 @@ paths:
                   $ref: '#/components/schemas/Downtime'
                 type: array
           description: OK
-        '400':
+        '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
+          description: Forbidden
       summary: Get all downtimes
       tags:
       - Downtimes
@@ -8476,6 +8433,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
       summary: Schedule a downtime
       tags:
       - Downtimes
@@ -8504,6 +8467,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
         '404':
           content:
             application/json:
@@ -8530,6 +8499,12 @@ paths:
       responses:
         '204':
           description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
         '404':
           content:
             application/json:
@@ -8558,6 +8533,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Downtime'
           description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
         '404':
           content:
             application/json:
@@ -8600,6 +8581,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
         '404':
           content:
             application/json:
@@ -8676,6 +8663,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
       summary: Query the event stream
       tags:
       - Events
@@ -8807,6 +8800,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
       summary: Take graph snapshots
       tags:
       - Snapshots
@@ -8840,6 +8839,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Invalid Parameter Error
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
       summary: Mute a host
       tags:
       - Hosts
@@ -8868,6 +8873,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Invalid Parameter Error
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
       summary: Unmute a host
       tags:
       - Hosts
@@ -8934,12 +8945,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Invalid Parameter Error
-        '404':
+        '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Host Not Found Error
+          description: Forbidden
       summary: Get all hosts for your organization
       tags:
       - Hosts
@@ -8973,6 +8984,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Invalid Parameter Error
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
       summary: Get the total number of active hosts
       tags:
       - Hosts
@@ -8995,18 +9012,18 @@ paths:
               schema:
                 type: object
           description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Item Not Found
       summary: Delete an AWS Integration
       tags:
       - AWS Integration
@@ -9052,12 +9069,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Item Not Found
       summary: List all AWS Integrations
       tags:
       - AWS Integration
@@ -9172,12 +9183,6 @@ paths:
                   type: string
                 type: array
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
@@ -9407,12 +9412,6 @@ paths:
                   $ref: '#/components/schemas/AWSLogsListServicesResponse'
                 type: array
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
@@ -9845,12 +9844,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/PagerDutyIntegration'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
@@ -9897,7 +9890,6 @@ paths:
       x-codegen-request-body-name: body
     put:
       description: 'Create a new Datadog-PagerDuty integration.
-
 
         **Note:** All arguments are required when creating (`PUT`) a new PagerDuty
         configuration.'
@@ -9958,6 +9950,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
       summary: Create a new service object
       tags:
       - PagerDuty Integration
@@ -9976,14 +9974,18 @@ paths:
       responses:
         '200':
           description: OK
-        '204':
-          description: Integration does not exist
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
       summary: Delete a single service object
       tags:
       - PagerDuty Integration
@@ -10004,12 +10006,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/PagerDutyServiceName'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
@@ -10045,14 +10041,24 @@ paths:
       responses:
         '200':
           description: OK
-        '204':
-          description: Integration does not exist
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
       summary: Update a single service object
       tags:
       - PagerDuty Integration
@@ -10389,12 +10395,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-        '404':
+        '429':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/LogsAPIErrorResponse'
-          description: Not Found
+          description: Too Many Requests
       summary: Update an index
       tags:
       - Logs Indexes
@@ -10443,6 +10449,7 @@ paths:
             schema:
               $ref: '#/components/schemas/LogsPipelinesOrder'
         description: Object containing the new ordered list of pipeline IDs.
+        required: true
       responses:
         '200':
           content:
@@ -10454,7 +10461,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIErrorResponse'
+                $ref: '#/components/schemas/LogsAPIErrorResponse'
           description: Bad Request
         '403':
           content:
@@ -10523,12 +10530,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LogsAPIErrorResponse'
-          description: Unprocessable Entity
       summary: Create a pipeline
       tags:
       - Logs Pipelines
@@ -10637,12 +10638,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LogsAPIErrorResponse'
-          description: Unprocessable Entity
       summary: Update a pipeline
       tags:
       - Logs Pipelines
@@ -10681,6 +10676,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
       summary: Get active metrics list
       tags:
       - Metrics
@@ -10702,6 +10703,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/MetricMetadata'
           description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
         '404':
           content:
             application/json:
@@ -10735,6 +10742,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/MetricMetadata'
           description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
         '404':
           content:
             application/json:
@@ -10806,6 +10825,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
       summary: Get all monitor details
       tags:
       - Monitors
@@ -10832,10 +10857,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
       summary: Create a monitor
       tags:
       - Monitors
       x-codegen-request-body-name: body
+  /api/v1/monitor/can_delete:
+    get:
+      description: Check if the given monitors can be deleted.
+      operationId: CheckCanDeleteMonitor
+      parameters:
+      - description: The IDs of the monitor to check.
+        in: query
+        name: monitor_ids
+        required: true
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckCanDeleteMonitorResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckCanDeleteMonitorResponse'
+          description: Deletion conflict error
+      summary: Check if the given monitors can be deleted
+      tags:
+      - Monitors
   /api/v1/monitor/validate:
     post:
       description: Validate the monitor provided in the request.
@@ -10860,6 +10933,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Invalid JSON
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
       summary: Validate a monitor
       tags:
       - Monitors
@@ -10895,6 +10974,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
         '404':
           content:
             application/json:
@@ -10941,6 +11026,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Monitor Not Found error
       summary: Get a monitor's details
       tags:
       - Monitors
@@ -10981,6 +11072,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
         '404':
           content:
             application/json:
@@ -11139,6 +11236,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
       summary: Query timeseries points
       tags:
       - Metrics
@@ -11166,12 +11269,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '500':
+        '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Internal Server Error
+          description: Forbidden
       summary: Search metrics
       tags:
       - Metrics
@@ -11232,7 +11335,7 @@ paths:
   /api/v1/slo:
     get:
       description: Get multiple service level objective objects by their IDs.
-      operationId: GetSLOs
+      operationId: ListSLOs
       parameters:
       - description: 'A comma separated list of the IDs of the service level objectives
           objects.
@@ -11248,7 +11351,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceLevelObjectiveListResponse'
+                $ref: '#/components/schemas/SLOListResponse'
           description: OK
         '400':
           content:
@@ -11256,12 +11359,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json:
@@ -11286,7 +11383,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceLevelObjectiveListResponse'
+                $ref: '#/components/schemas/SLOListResponse'
           description: OK
         '400':
           content:
@@ -11294,12 +11391,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json:
@@ -11327,7 +11418,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ServiceLevelObjectivesBulkDelete'
+              $ref: '#/components/schemas/SLOBulkDelete'
         description: Thresholds by service level objective object ID.
         required: true
       responses:
@@ -11335,7 +11426,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceLevelObjectivesBulkDeleted'
+                $ref: '#/components/schemas/SLOBulkDeleteResponse'
           description: OK
         '400':
           content:
@@ -11343,12 +11434,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json:
@@ -11380,7 +11465,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CheckCanDeleteServiceLevelObjectiveResponse'
+                $ref: '#/components/schemas/CheckCanDeleteSLOResponse'
           description: OK
         '400':
           content:
@@ -11388,18 +11473,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckCanDeleteSLOResponse'
+          description: Conflict
       summary: Check if SLOs can be safely deleted
       tags:
       - Service Level Objectives
@@ -11424,20 +11509,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceLevelObjectiveDeleted'
+                $ref: '#/components/schemas/SLODeleteResponse'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json:
@@ -11450,6 +11523,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SLODeleteResponse'
+          description: Conflict
       summary: Delete a SLO
       tags:
       - Service Level Objectives
@@ -11468,20 +11547,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceLevelObjectiveResponse'
+                $ref: '#/components/schemas/SLOResponse'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json:
@@ -11519,7 +11586,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServiceLevelObjectiveListResponse'
+                $ref: '#/components/schemas/SLOListResponse'
           description: OK
         '400':
           content:
@@ -11527,12 +11594,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json:
@@ -11570,19 +11631,21 @@ paths:
         name: from_ts
         required: true
         schema:
-          type: string
+          format: int64
+          type: integer
       - description: The `to` timestamp for the query window in epoch seconds.
         in: query
         name: to_ts
         required: true
         schema:
-          type: string
+          format: int64
+          type: integer
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HistoryServiceLevelObjectiveResponse'
+                $ref: '#/components/schemas/SLOHistoryResponse'
           description: OK
         '400':
           content:
@@ -11590,18 +11653,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
       summary: Get an SLO's history
       tags:
       - Service Level Objectives
@@ -11625,6 +11688,12 @@ paths:
                 $ref: '#/components/schemas/SyntheticsListTestsResponse'
           description: OK - Returns the list of all Synthetics test (properly filtered
             by type).
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: forbidden
         '404':
           content:
             application/json:
@@ -11671,13 +11740,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Test quota is reached.
-        '404':
+        '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Synthetics is not activated for the user, test is not owned
-            by the user, the test to clone can't be found.
+          description: forbidden
       summary: Create or clone test
       tags:
       - Synthetics
@@ -11695,13 +11763,28 @@ paths:
         required: true
         schema:
           type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SyntheticsGetTestLatestResultsPayload'
-        description: Pause/live status to set the given Synthetics test to.
-        required: true
+      - description: Timestamp from which to start querying results.
+        in: query
+        name: from_ts
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Timestamp up to which to query results.
+        in: query
+        name: to_ts
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Locations for which to query results.
+        in: query
+        name: probe_dc
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
       responses:
         '200':
           content:
@@ -11709,6 +11792,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SyntheticsGetBrowserTestLatestResultsResponse'
           description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: forbidden
         '404':
           content:
             application/json:
@@ -11745,6 +11834,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SyntheticsBrowserTestResultFull'
           description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: forbidden
         '404':
           content:
             application/json:
@@ -11780,6 +11875,12 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: JSON format is wrong, test cannot be deleted as it's used elsewhere
             (as a subtest or in an uptime widget), some ids are not owned by the user
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: forbidden
         '404':
           content:
             application/json:
@@ -11809,6 +11910,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SyntheticsTestDetails'
           description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: forbidden
         '404':
           content:
             application/json:
@@ -11849,6 +11956,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: JSON format is wrong, updating subtype is forbidden.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: forbidden
         '404':
           content:
             application/json:
@@ -11872,13 +11985,28 @@ paths:
         required: true
         schema:
           type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SyntheticsGetTestLatestResultsPayload'
-        description: Pause/live status to set the given Synthetics test to.
-        required: true
+      - description: Timestamp from which to start querying results.
+        in: query
+        name: from_ts
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Timestamp up to which to query results.
+        in: query
+        name: to_ts
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Locations for which to query results.
+        in: query
+        name: probe_dc
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
       responses:
         '200':
           content:
@@ -11886,6 +12014,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SyntheticsGetAPITestLatestResultsResponse'
           description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: forbidden
         '404':
           content:
             application/json:
@@ -11921,6 +12055,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/SyntheticsAPITestResultFull'
           description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: forbidden
         '404':
           content:
             application/json:
@@ -11962,6 +12102,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: JSON format is wrong
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: forbidden
         '404':
           content:
             application/json:
@@ -11992,18 +12138,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/TagToHosts'
           description: OK
-        '400':
+        '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad request
-        '401':
+          description: Forbidden
+        '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication Error
+          description: Not Found
       summary: Get Tags
       tags:
       - Tags
@@ -12032,18 +12178,18 @@ paths:
       responses:
         '204':
           description: OK
-        '400':
+        '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad request
-        '401':
+          description: Forbidden
+        '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication Error
+          description: Not Found
       summary: Remove host tags
       tags:
       - Tags
@@ -12071,18 +12217,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/HostTags'
           description: OK
-        '400':
+        '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad request
-        '401':
+          description: Forbidden
+        '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication Error
+          description: Not Found
       summary: Get host tags
       tags:
       - Tags
@@ -12121,18 +12267,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/HostTags'
           description: Created
-        '400':
+        '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad request
-        '401':
+          description: Forbidden
+        '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication Error
+          description: Not Found
       summary: Add tags to a host
       tags:
       - Tags
@@ -12172,18 +12318,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/HostTags'
           description: OK
-        '400':
+        '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad request
-        '401':
+          description: Forbidden
+        '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication Error
+          description: Not Found
       summary: Update host tags
       tags:
       - Tags
@@ -12222,12 +12368,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12271,12 +12411,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12320,12 +12454,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12369,12 +12497,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12426,12 +12548,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12475,12 +12591,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12524,12 +12634,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12574,12 +12678,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12629,12 +12727,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12679,12 +12771,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12728,12 +12814,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12777,12 +12857,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12826,12 +12900,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12876,12 +12944,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12925,12 +12987,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
-        '401':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Unauthorized
         '403':
           content:
             application/json;datetime-format=rfc3339:
@@ -12951,12 +13007,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserListResponse'
           description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
@@ -13000,6 +13050,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
       summary: Create user
       tags:
       - Users
@@ -13041,6 +13097,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '404':
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
       summary: Disable user
       tags:
       - Users
@@ -13063,18 +13125,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserResponse'
           description: OK for get user
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
       summary: Get user
       tags:
       - Users
@@ -13119,6 +13181,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
       summary: Update user
       tags:
       - Users
