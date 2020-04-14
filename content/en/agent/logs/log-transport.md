@@ -42,7 +42,7 @@ To check which transport is used by the Agent, run the [Agent statuts command][1
 Enforce the use of TCP or HTTPS transport by using the following configurations.
 
 {{< tabs >}}
-{{% tab "HTTP" %}}
+{{% tab "HTTPS" %}}
 
 To enforce HTTP transport, update the Agent's [main configuration file][1] (`datadog.yaml`) with:
 
