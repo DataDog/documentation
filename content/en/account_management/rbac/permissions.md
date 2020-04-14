@@ -207,7 +207,7 @@ To grant write access to only two processing pipelines whose IDs are `abcd-1234`
 
 ```sh
 curl -X POST \
-        https://app.datadoghq.com/api/v1/roles/<ROLE_UUID>/permissions/<PERMISSION_UUID> \
+        https://app.datadoghq.com/api/v1/role/<ROLE_UUID>/permission/<PERMISSION_UUID> \
         -H "Content-Type: application/json" \
         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
@@ -344,7 +344,7 @@ For example, to grant read access only on two indexes named `main` and `support`
 
 ```bash
 curl -X POST \
-        https://app.datadoghq.com/api/v1/roles/<ROLE_UUID>/permissions/<PERMISSION_UUID> \
+        https://app.datadoghq.com/api/v1/role/<ROLE_UUID>/permission/<PERMISSION_UUID> \
         -H "Content-Type: application/json" \
         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
