@@ -6,7 +6,7 @@ public class ServiceLevelObjectivesApiExample {
         ServiceLevelObjectivesApi apiInstance = new ServiceLevelObjectivesApi();
         String sloId = sloId_example; // String | The id of the service level objective.
         try {
-            ServiceLevelObjectiveDeleted result = apiInstance.deleteSLO(sloId);
+            SLODeleteResponse result = apiInstance.deleteSLO(sloId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ServiceLevelObjectivesApi#deleteSLO");

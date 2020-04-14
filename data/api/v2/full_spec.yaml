@@ -759,7 +759,7 @@ paths:
       - Dashboard Lists
     post:
       description: Add dashboards to an existing dashboard list.
-      operationId: AddDashboardListItems
+      operationId: CreateDashboardListItems
       parameters:
       - description: ID of the dashboard list to add items to.
         in: path
