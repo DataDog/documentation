@@ -37,7 +37,7 @@ For more details on how enforce HTTPS/TCP transport, refer to the [Agent transpo
 
 To send logs with environment variables, configure the following:
 
-* `DD_LOGS_ENABLED`
+* `DD_LOGS_ENABLED=true`
 
 After activating log collection, the Agent is ready to forward logs to Datadog. Next, configure the Agent on where to collect logs from.
 
