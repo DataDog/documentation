@@ -722,7 +722,7 @@ paths:
           description: Not Found
       summary: Delete items from a dashboard list
       tags:
-      - DashboardLists
+      - Dashboard Lists
       x-codegen-request-body-name: body
     get:
       description: "Fetch the dashboard list\u2019s dashboard definitions."
@@ -756,7 +756,7 @@ paths:
           description: Not Found
       summary: Get a Dashboard List
       tags:
-      - DashboardLists
+      - Dashboard Lists
     post:
       description: Add dashboards to an existing dashboard list.
       operationId: AddDashboardListItems
@@ -802,7 +802,7 @@ paths:
           description: Not Found
       summary: Add Items to a Dashboard List
       tags:
-      - DashboardLists
+      - Dashboard Lists
       x-codegen-request-body-name: body
     put:
       description: Update dashboards of an existing dashboard list.
@@ -849,7 +849,7 @@ paths:
           description: Not Found
       summary: Update items of a dashboard list
       tags:
-      - DashboardLists
+      - Dashboard Lists
       x-codegen-request-body-name: body
   /api/v2/user_invitations:
     post:
@@ -1186,7 +1186,7 @@ tags:
     through the API to make it easier to organize, find, and share all of your dashboards
 
     with your team and organization.'
-  name: DashboardLists
+  name: Dashboard Lists
 - description: Create, edit, and disable users.
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users

@@ -2020,20 +2020,20 @@ api_v1:
     parent: Users
     url: update-user
 api_v2:
-  - name: DashboardLists
-    url: /api/v2/dashboardlists/
-    identifier: DashboardLists
+  - name: Dashboard Lists
+    url: /api/v2/dashboard-lists/
+    identifier: Dashboard Lists
   - name: Delete items from a dashboard list
-    parent: DashboardLists
+    parent: Dashboard Lists
     url: delete-items-from-a-dashboard-list
   - name: Get a Dashboard List
-    parent: DashboardLists
+    parent: Dashboard Lists
     url: get-a-dashboard-list
   - name: Add Items to a Dashboard List
-    parent: DashboardLists
+    parent: Dashboard Lists
     url: add-items-to-a-dashboard-list
   - name: Update items of a dashboard list
-    parent: DashboardLists
+    parent: Dashboard Lists
     url: update-items-of-a-dashboard-list
   - name: Users
     url: /api/v2/users/
