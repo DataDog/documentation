@@ -170,10 +170,10 @@ Docker's daemon could have performances issues while it is trying to retrieve lo
 
 The default read timeout is set to 30 seconds, increasing this value let more time to the Docker daemon to reply to the Logs Agent. This value can be set in `datadog.yaml` using the `docker_client_read_timeout` parameter. Here is an example increasing it to 60 seconds:
 
-    ```yaml
-    logs_config:
-      docker_client_read_timeout: 60
-    ```
+```text
+logs_config:
+  docker_client_read_timeout: 60
+```
 
 [1]: /help
 [2]: /integrations/journald/#setup
