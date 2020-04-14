@@ -187,4 +187,4 @@ List of all available parameters for log collection:
 [8]: /developers/metrics/custom_metrics
 [9]: /tagging
 [10]: /agent/guide/agent-configuration-files
-[11]: /agent/logs/log-transport
+[11]: /agent/logs/log_transport
