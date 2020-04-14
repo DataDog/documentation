@@ -104,7 +104,7 @@ The `compression_level` parameter (or `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accept
 
 See the [Datadog Agent overhead section][2] for more information about Agent resource usage when compression is enabled.
 
-For agent version before 6.19 / 7.19, you need to enforce compression updating the Agent's [main configuration file][1] (`datadog.yaml`) with:
+For Agent versions prior to 6.19 / 7.19, you need to enforce compression by updating the Agent's [main configuration file][1] (`datadog.yaml`) with:
 
 ```yaml
 logs_enabled: true
