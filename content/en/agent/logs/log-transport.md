@@ -55,7 +55,7 @@ logs_config:
 To send logs with environment variables, configure the following:
 
 * `DD_LOGS_ENABLED=true`
-* `DD_LOGS_CONFIG_USE_HTTP`
+* `DD_LOGS_CONFIG_USE_HTTP=true`
 
 
 [1]: /agent/guide/agent-configuration-files
