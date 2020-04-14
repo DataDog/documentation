@@ -36,7 +36,7 @@ For example, you could set up:
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
-**Note**: `<LABEL_NAME>` is not case-sensitive. For example, if you have labels named `foo` and `FOO`, and you set `DD_DOCKER_LABELS_AS_TAGS='{"foo": "bar"}'`, both `foo` and `FOO` will be mapped to `bar`.
+**Note**: `<LABEL_NAME>` is not case-sensitive. For example, if you have labels named `foo` and `FOO`, and you set `DD_DOCKER_LABELS_AS_TAGS='{"foo": "bar"}'`, both `foo` and `FOO` are mapped to `bar`.
 
 {{% /tab %}}
 {{% tab "Agent" %}}
