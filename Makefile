@@ -47,6 +47,7 @@ clean-integrations:  ## Remove built integrations files.
 		find ./data/integrations -type f -maxdepth 1 \
 	    -a -not -name '*.fr.yaml' \
 	    -a -not -name '*.ja.yaml' \
+		-a -not -name 'docker_daemon.yaml' \
 	    -exec rm -rf {} \; ;fi
 	@if [ -d data/service_checks ]; then \
 		find ./data/service_checks -type f -maxdepth 1 \
@@ -85,14 +86,22 @@ clean-integrations:  ## Remove built integrations files.
 clean-auto-doc: ##Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
 	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
+	@if [ content/en/agent/basic_agent_usage/ansible.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/ansible.md ;fi
+	@if [ content/en/agent/basic_agent_usage/chef.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/chef.md ;fi
 	@if [ content/en/agent/basic_agent_usage/heroku.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
+	@if [ content/en/agent/basic_agent_usage/puppet.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/puppet.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/developers/amazon_cloudformation.md ]; then \
 	rm -f content/en/developers/amazon_cloudformation.md ;fi
 	@if [ content/en/logs/log_collection/android.md ]; then \
 	rm -f content/en/logs/log_collection/android.md ;fi
+	@if [ content/en/logs/log_collection/ios.md ]; then \
+	rm -f content/en/logs/log_collection/ios.md ;fi
 	@if [ content/en/tracing/setup/android.md ]; then \
 	rm -f content/en/tracing/setup/android.md ;fi
 

@@ -63,7 +63,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`check`** name of the check, e.g. datadog.agent.up
     *   **`tags`** one or more quoted tags (comma-separated), or "*". e.g.: `.over("env:prod", "role:db")`
-    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 10.
+    *   **`count`** must be at >= your max threshold (defined in the `options`). e.g. if you want to notify on 1 critical, 3 ok and 2 warn statuses count should be 3. It is limited to 100.
 
     ##### Event Alert Query
 
@@ -89,6 +89,18 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     *   **`timeframe`** the timeframe to roll up the counts. Examples: 60s, 4h. Supported timeframes: s, m, h and d
     *   **`operator`** <, <=, >, >=, ==, or !=
     *   **`#`** an integer or decimal number used to set the threshold
+    
+    ##### Logs Alert Query
+
+    `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window) operator #`
+    
+    *   **`query`** The search query - following the [Log search syntax][5] .
+    *   **`index_name`** For multi-index organizations, the log index in which the request is performed.
+    *   **`rollup_method`** The stats rollup method - supports `count`, `avg` and `cardinality`.
+    *   **`measure`** For `avg` and cardinality `rollup_method` - specify the measure or the facet name you want to use.
+    *   **`time_window`** #m (5, 10, 15, or 30), #h (1, 2, or 4, 24)
+    *   **`operator`** `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+    *   **`#`** an integer or decimal number used to set the threshold.
 
     ##### Composite Query
 
@@ -114,7 +126,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     *   **`notify_no_data`** a Boolean indicating whether this monitor notifies when data stops reporting. Default: **false**
 
-    *   **`no_data_timeframe`** The number of minutes before a monitor notifies after data stops reporting. Datadog recommends at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, the evaluation timeframe is used for metric alerts, and 24 hours is used for service checks.**
+    *   **`no_data_timeframe`** The number of minutes before a monitor notifies after data stops reporting. Datadog recommends at least 2x the monitor timeframe for metric alerts or 2 minutes for service checks.  **If omitted, 2x the evaluation timeframe is used for metric alerts, and 24 hours is used for service checks.**
 
     *   **`timeout_h`** the number of hours of the monitor not reporting data before it automatically resolves from a triggered state. Default: **None**.
 
@@ -147,7 +159,7 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 
     _These options only apply to metric alerts._
 
-   - **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][5] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
+   - **`thresholds`** a dictionary of thresholds by threshold type. There are two threshold types for metric alerts: *critical* and *warning*. *Critical* is defined in the query, but can also be specified in this option. *Warning* threshold can only be specified using the thresholds option. If you want to use [recovery thresholds][6] for your monitor, use the attributes `critical_recovery` and `warning_recovery`.
 
     Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_recovery': 50}`
 
@@ -160,6 +172,22 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
    - **`thresholds`** a dictionary of thresholds by status. Because service checks can have multiple thresholds, we don't define them directly in the query.
 
     Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
+    
+    ##### Logs Alert Options
+    
+    _These options only apply to logs alerts._
+    - **`thresholds`** a dictionary of thresholds by status.
+
+    Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
+    
+    - **`aggregation`** a dictionary of `type`, `metric` and `groupeBy`:
+        - `type`  3 types are supported: `count`, `cardinality` and `avg`
+        - `metric`:  for `cardinality` name of the facet. For `avg` name of the metric. for `count`just put `count` as metric  
+        - `groupeBy` name of the facet on which you want to group by.
+    
+    Example: `{"metric": "count","type": "count","groupBy": "core_service"}`
+    
+    - **`enable_logs_sample`** a Boolean to add samples or values to the notification message. Default: `True`
 
     ##### Errors and Validation
 
@@ -171,4 +199,5 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
 [2]: /monitors/monitor_types
 [3]: /monitors/monitor_types/#define-the-conditions
 [4]: /infrastructure/process
-[5]: /monitors/faq/what-are-recovery-thresholds
+[5]: /logs/explorer/search/#search-syntax
+[6]: /monitors/faq/what-are-recovery-thresholds

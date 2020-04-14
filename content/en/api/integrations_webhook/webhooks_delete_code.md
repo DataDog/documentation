@@ -1,13 +1,13 @@
 ---
-title: Delete a Webhooks Integration
+title: Delete a Webhook for Webhooks Integration
 type: apicode
 order: 21.4
-external_redirect: /api/#delete-a-webhooks-integration
+external_redirect: /api/#delete-a-webhook-for-webhooks-integration
 ---
 
 **SIGNATURE**:
 
-`DELETE /v1/integration/webhooks`
+`DELETE api/v1/integration/webhooks/configuration/webhooks/<WEBHOOK_NAME>`
 
 **EXAMPLE REQUEST**:
 

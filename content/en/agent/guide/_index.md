@@ -20,6 +20,9 @@ private: true
     {{< nextlink href="agent/guide/cluster-agent-custom-metrics-server" >}}Cluster Agent and Horizontal Pod Autoscaling: Custom Metrics Server{{< /nextlink >}}
     {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}Autodiscovery with JMX{{< /nextlink >}}
     {{< nextlink href="agent/guide/private-link" >}}Forward your telemetry securely to Datadog over AWS PrivateLink{{< /nextlink >}}
+    {{< nextlink href="agent/guide/build-container-agent" >}}Build a Datadog Agent image{{< /nextlink >}}
+    {{< nextlink href="agent/guide/autodiscovery-management" >}}Manage container discovery with the Agent.{{< /nextlink >}}
+    {{< nextlink href="agent/guide/ad_identifiers" >}}Apply an Autodiscovery configuration file template to a given container with the ad_identifers parameter.{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 {{< whatsnext desc="Agent 5 Guides:" >}}

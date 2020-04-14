@@ -1,13 +1,13 @@
 ---
-title: Delete a Webhooks Integration
+title: Delete a Webhook for Webhooks Integration
 type: apicontent
 order: 21.4
-external_redirect: /api/#delete-a-webhooks-integration
+external_redirect: /api/#delete-a-webhook-for-webhooks-integration
 ---
 
-## Delete a Webhooks Integration
+## Delete a Webhook for Webhooks Integration
 
-Delete a given Datadog-Webhooks integration.
+Deletes the endpoint with the name `<WEBHOOK NAME>`.
 
 **ARGUMENTS**:
 

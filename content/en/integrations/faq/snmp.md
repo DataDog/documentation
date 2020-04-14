@@ -321,7 +321,7 @@ Additional helpful documentation, links, and articles:
 [7]: https://github.com/DataDog/dd-agent/blob/master/CHANGELOG.md#dependency-changes-3
 [8]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example#L3
 [9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: /agent/autodiscovery/integrations
+[10]: /agent/kubernetes/integrations
 [11]: /developers/metrics/custom_metrics
 [12]: /account_management/billing/custom_metrics
 [13]: /agent/guide/agent-commands/#agent-status-and-information

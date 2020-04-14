@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.3.0",
+        "check": "pingdom.status",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["check", "id"],
+        "name": "Pingdom ステータス",
+        "description": "各 Pingdom チェックのステータスを返します。Pingdom サービスがサイトの可用性を確認した際に時間がレポートされます。"
+    }
+]

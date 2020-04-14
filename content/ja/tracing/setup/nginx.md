@@ -20,7 +20,7 @@ further_reading:
 aliases:
   - /ja/tracing/proxies/nginx
 ---
-プラグインとコンフィギュレーションを組み合わせて使用して、NGINX で Datadog APM に対応できます。
+プラグインとコンフィギュレーションを組み合わせて使用することで、NGINX で Datadog APM に対応できます。
 公式 [Linux レポジトリ][1]の NGINX を使用して、プラグインのバイナリを事前構築する手順を以下に記載しました。
 
 ## プラグインのインストール
@@ -97,7 +97,7 @@ NGINX をコンテナまたはオーケストレーション環境で使用し�
 * [nginx.conf][4]
 * [dd-config.json][5]
 
-このコンフィギュレーションが完成すると、Datadog トレースを開始して伝搬し、APM UI に表示するよう HTTP が NGINX にリクエストします。
+このコンフィギュレーションが完了すると、NGINX への HTTP リクエストが開始し Datadog トレースを伝達します。リクエストは APM UI に表示されます。
 
 ## Kubernetes 対応 NGINX Ingress コントローラー
 

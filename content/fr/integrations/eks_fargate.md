@@ -40,14 +40,14 @@ Amazon EKS sur AWS Fargate est un service Kubernetes géré qui permet d'autom
 
 ## Configuration
 
-Ces étapes décrivent comment configurer l'Agent Datadog dans un conteneur au sein d'Amazon EKS sur AWS Fargate. Consultez la [documentation relative à l'intégration Datadog/Amazon EKS][1] si vous n'utilisez pas AWS Fargate.
+Ces étapes décrivent comment configurer l'Agent Datadog 7.17 ou ultérieur dans un conteneur au sein d'Amazon EKS sur AWS Fargate. Consultez la [documentation relative à l'intégration Datadog/Amazon EKS][1] si vous n'utilisez pas AWS Fargate.
 
 Les pods AWS Fargate ne sont pas des pods physiques. Ils excluent donc les [checks système basés sur des hosts][2], comme les checks liés au processeur, à la mémoire, etc. Pour recueillir des données à partir de vos pods AWS Fargate, vous devez exécuter l'Agent en tant que sidecar du pod de votre application avec un RBAC personnalisé. Cette configuration vous permet de bénéficier des fonctionnalités suivantes :
 
-* Collecte de métriques Kubernetes à partir du pod exécutant les conteneurs de votre application et l'Agent
-* [Autodiscovery][3]
-* Configuration de checks custom d'Agent pour cibler les conteneurs dans le même pod
-* APM et DogStatsD pour les conteneurs dans un même pod
+- Collecte de métriques Kubernetes à partir du pod exécutant les conteneurs de votre application et l'Agent
+- [Autodiscovery][3]
+- Configuration de checks custom d'Agent pour cibler les conteneurs dans le même pod
+- APM et DogStatsD pour les conteneurs dans un même pod
 
 ### Nœud EC2
 
@@ -57,16 +57,16 @@ Si vous ne spécifiez pas, via le [profil AWS Fargate][4], que vos pods doivent
 
 Pour accroître votre visibilité lors de la surveillance de charges de travail dans AWS EKS Fargate, installez les intégrations Datadog pour :
 
-* [Kubernetes][8]
-* [AWS][9]
-* [EKS][10]
-* [EC2][11] (si vous exécutez un nœud de type EC2)
+- [Kubernetes][8]
+- [AWS][9]
+- [EKS][10]
+- [EC2][11] (si vous exécutez un nœud de type EC2)
 
 Configurez également des intégrations pour tout autre service AWS que vous exécutez avec EKS (par exemple, [ELB][12]).
 
 #### Installation manuelle
 
-Pour procéder à l'installation, téléchargez l'image de l'Agent personnalisé `datadog/agent`.
+Pour procéder à l'installation, téléchargez la version 7.17 ou une version ultérieure de l'image de l'Agent personnalisé `datadog/agent`.
 
 Si l'Agent s'exécute en tant que sidecar, il peut communiquer uniquement avec des conteneurs sur le même pod. Exécutez donc un Agent pour chaque pod que vous souhaitez surveiller.
 
@@ -74,9 +74,9 @@ Si l'Agent s'exécute en tant que sidecar, il peut communiquer uniquement avec d
 
 Pour recueillir des données à partir de vos applications qui s'exécutent dans AWS EKS Fargate sur un nœud Fargate, suivez les étapes suivantes :
 
-* [Configurez des règles RBAC AWS EKS Fargate](#rbac-aws-eks-fargate).
-* [Déployez l'Agent en tant que sidecar](#execution-de-l-agent-en-tant-que-side-car).
-* Configurez la collecte de [métriques](#collecte-de-metriques), d'[événements](#collecte-d-evenements) et de [traces](#collecte-de-traces).
+- [Configurez des règles RBAC AWS EKS Fargate](#rbac-aws-eks-fargate).
+- [Déployez l'Agent en tant que sidecar](#execution-de-l-agent-en-tant-que-side-car).
+- Configurez la collecte de [métriques](#collecte-de-metriques), d'[événements](#collecte-d-evenements) et de [traces](#collecte-de-traces).
 
 #### RBAC AWS EKS Fargate
 
@@ -89,7 +89,7 @@ metadata:
   name: datadog-agent
 rules:
   - apiGroups:
-    - ""
+      - ""
     resources:
       - nodes/metrics
       - nodes/spec
@@ -122,7 +122,7 @@ metadata:
 
 #### Exécution de l'Agent en tant que sidecar
 
-Pour commencer à recueillir les données de votre pod Fargate, déployez l'Agent Datadog en tant que sidecar de votre application. Vous trouverez ci-dessous la configuration minimale requise pour recueillir des métriques à partir de votre application s'exécutant dans le pod. Vous remarquerez que nous avons ajouté `DD_EKS_FARGATE=true` dans le manifeste pour déployer le sidecar de votre Agent Datadog.
+Pour commencer à recueillir les données de votre pod Fargate, déployez la version 7.17 ou une version ultérieure de l'Agent Datadog en tant que sidecar de votre application. Vous trouverez ci-dessous la configuration minimale requise pour recueillir des métriques à partir de votre application s'exécutant dans le pod. Vous remarquerez que nous avons ajouté `DD_EKS_FARGATE=true` dans le manifeste pour déployer le sidecar de votre Agent Datadog.
 
 ```yaml
 apiVersion: apps/v1
@@ -173,9 +173,9 @@ spec:
 ## Collecte de métriques
 
 ### Métriques des intégrations
-​
-Utilisez les [étiquettes Autodiscovery avec le conteneur de votre application][14] pour commencer à recueillir ses métriques pour les [intégrations d'Agent prises en charge][15].
-​
+
+Utilisez les [étiquettes Autodiscovery avec le conteneur de votre application][14] pour commencer à recueillir ses métriques pour les [intégrations d'Agent prises en charge][15].​
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -224,7 +224,10 @@ spec:
             cpu: "200m"
 ```
 
-**Remarque** : n'oubliez pas de remplacer `<VOTRE_CLÉ_API_DATADOG>` par la [clé d'API Datadog de votre organisation][13].
+**Remarques :**
+
+- N'oubliez pas de remplacer `<VOTRE_CLÉ_API_DATADOG>` par la [clé d'API Datadog de votre organisation][13].
+- Les métriques de conteneur ne sont pas disponibles dans Fargate. En effet, il est impossible de monter le volume `cgroups` du host sur l'Agent.
 
 ### DogStatsD
 
@@ -367,8 +370,8 @@ eks_fargate n'inclut aucun événement.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][20].
 
-[1]: http://docs.datadoghq.com//integrations/amazon_eks/
-[2]: http://docs.datadoghq.com//integrations/system
+[1]: http://docs.datadoghq.com/integrations/amazon_eks/
+[2]: http://docs.datadoghq.com/integrations/system
 [3]: http://docs.datadoghq.com//agent/autodiscovery
 [4]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
 [5]: http://docs.datadoghq.com/integrations/amazon_eks/#setup

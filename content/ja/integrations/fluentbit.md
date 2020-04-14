@@ -31,7 +31,7 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
 初めに、[Datadog アカウント][3]と [Datadog API キー][4]を確認し、[Datadog Logs Management を有効にする][5]必要があります。
 
 1. コンフィギュレーションファイルの推奨メソッドを使用して、Fluent Bit を [インストール][6]および[構成][7]します。
-2. [Fluent Bit コンフィギュレーションファイル][8]をアップデートしてアウトプットプラグインとして Datadog に追加します。コンフィギュレーションパラメーターの詳細情報については、[コンフィギュレーションパラメーター表](#コンフィギュレーションパラメーター) を参照してください。たとえば、`[OUTPUT]` コンフィギュレーションセクションについては、[コンフィギュレーションファイルの例](#コンフィギュレーションファイルの例) を確認してください。
+2. [Fluent Bit コンフィギュレーションファイル][8]をアップデートし、アウトプットプラグインとして Datadog に追加します。コンフィギュレーションパラメーターの詳細情報については、[コンフィギュレーションパラメーターの表](#コンフィギュレーションパラメーター) を参照してください。たとえば、`[OUTPUT]` コンフィギュレーションセクションについては、[コンフィギュレーションファイルの例](#コンフィギュレーションファイルの例) を確認してください。
 3. Fluent Bit からログの送信を開始したら、[Datadog Logs Explorer ページ][9]でログを検証します。
 
 #### コンフィギュレーションパラメーター
@@ -55,11 +55,11 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
     Match             *
     Host              http-intake.logs.datadoghq.com
     TLS               on
-    apikey            <DATADOG_API_KEY>
-    dd_service        <APPLICATION_SERVICE>
-    dd_source         <SOURCE>
+    apikey            <DATADOG_API_キー>
+    dd_service        <アプリケーション_サービス>
+    dd_source         <ソース>
     dd_message_key    log
-    dd_tags           env:dev,<TAG_KEY>:<TAG_VALUE>
+    dd_tags           env:dev,<タグキー>:<タグ値>
 ```
 
 ## トラブルシューティング

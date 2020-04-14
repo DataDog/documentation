@@ -19,13 +19,13 @@ Agent をバージョン 6 からバージョン 7 にアップグレードす�
 
 | プラットフォーム     | コマンド                                                                                                                                                                   |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Amazon Linux | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| CentOS       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| Debian       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| Fedora       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| Red Hat      | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| Ubuntu       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
-| SUSE         | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
+| Amazon Linux | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_キー>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
+| CentOS       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_キー>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
+| Debian       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_キー>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
+| Fedora       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_キー>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
+| Red Hat      | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_キー>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
+| Ubuntu       | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_キー>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
+| SUSE         | `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_キー>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -35,7 +35,7 @@ Agent をバージョン 6 からバージョン 7 にアップグレードす�
 3. プロンプトに従ってライセンス契約に同意し、[Datadog API キー][2]を入力します。
 4. インストールが終了したら、オプションから Datadog Agent Manager を起動できます。
 
-**注**: Windows インストーラーの利用可能な全バージョンのリンクは[JSON 形式で提供されています][3]。
+**注**: Windows インストーラーの利用可能な全バージョンのリンクは、[JSON 形式で提供されています][3]。
 
 [1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/account/settings#api
@@ -46,7 +46,7 @@ Agent をバージョン 6 からバージョン 7 にアップグレードす�
 Agent をバージョン 6 からバージョン 7 にアップグレードするには、環境変数 `DD_AGENT_MAJOR_VERSION=7` を使用して Agent インストールコマンドを実行します。
 
 ```shell
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_キー>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_mac_os.sh)"
 ```
 
 {{% /tab %}}

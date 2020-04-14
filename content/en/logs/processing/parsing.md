@@ -48,7 +48,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 
 After processing, the following structured log is generated:
 
-{{< img src="logs/processing/parsing/parsing_example_1.png" alt="Parsing example 1"  style="width:80%;">}}
+{{< img src="logs/processing/processors/_parser.png" alt="Parsing example 1"  style="width:80%;">}}
 
 **Note**:
 
@@ -112,7 +112,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `decodeuricomponent`                                           | Decodes URI components. For instance, it transforms `%2Fservice%2Ftest` into `/service/test`.                                                              |
 | `lowercase`                                                    | Returns the lower-cased string.                                                                                                                            |
 | `uppercase`                                                    | Returns the upper-cased string.                                                                                                                            |
-| `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                         |
+| `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                         |
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                             |
 | `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].               |
@@ -128,9 +128,17 @@ At the bottom of your Grok processor tiles, there is an Advanced Settings sectio
 
 {{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings"  style="width:80%;">}}
 
-* Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
+### Parsing a specific text attribute
 
-* Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
+Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
+
+For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. You could parse this log as follows:
+
+{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line"  style="width:80%;">}}
+
+### Using helper rules to factorize multiple parsing rules
+
+Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
 Example for a classic unstructured log:
 
@@ -152,7 +160,6 @@ connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
-
 {{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules"  style="width:80%;">}}
 
 ## Examples
@@ -161,28 +168,29 @@ Some examples demonstrating how to use parsers:
 
 * [Key value or logfmt](#key-value-or-logfmt)
 * [Parsing dates](#parsing-dates)
-* [Conditional patterns](#conditional-pattern)
+* [Alternating patterns](#alternating-pattern)
 * [Optional attribute](#optional-attribute)
 * [Nested JSON](#nested-json)
 * [Regex](#regex)
 
 ### Key value or logfmt
 
-This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])` where:
+This is the key-value core filter: `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` where:
 
-* `separatorStr`: defines the separator. Defaults to `=`.
+* `separatorStr`: defines the separator between key and values. Defaults to `=`.
 * `characterWhiteList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (e.g. `key=@valueStr`).
-* `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`.
+* `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`. 
+* `delimiter`: defines the separator between the different key values pairs (e.g.`|`is the delimiter in `key1=value1|key2=value2`). Default to ` ` (normal space), `,` and `;`.
 
 Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
 
-Log:
+**Log:**
 
 ```text
 user=john connect_date=11/08/2017 id=123 action=click
 ```
 
-Rule
+**Rule:**
 
 ```text
 rule %{data::keyvalue}
@@ -197,13 +205,13 @@ If you add an **extract** attribute `my_attribute` in your rule pattern you will
 
 If `=` is not the default separator between your key and values, add a parameter in your parsing rule with a separator.
 
-Log:
+**Log:**
 
 ```text
 user: john connect_date: 11/08/2017 id: 123 action: click
 ```
 
-Rule
+**Rule:**
 
 ```text
 rule %{data::keyvalue(": ")}
@@ -213,13 +221,13 @@ rule %{data::keyvalue(": ")}
 
 If logs contain special characters in an attribute value, such as `/` in a url for instance, add it to the whitelist in the parsing rule:
 
-Log:
+**Log:**
 
 ```text
 url=https://app.datadoghq.com/event/stream user=john
 ```
 
-Rule:
+**Rule:**
 
 ```text
 rule %{data::keyvalue("=","/:")}
@@ -229,42 +237,44 @@ rule %{data::keyvalue("=","/:")}
 
 Other examples:
 
-| **Raw string**  | **Parsing rule**                    | **Result**           |
-|:----------------|:------------------------------------|:---------------------|
-| key=valueStr    | `%{data::keyvalue}`                 | {"key": "valueStr}   |
-| key=\<valueStr> | `%{data::keyvalue}`                 | {"key": "valueStr"}  |
-| key:valueStr    | `%{data::keyvalue(":")}`            | {"key": "valueStr"}  |
-| key:"/valueStr" | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"} |
-| key:={valueStr} | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}  |
+| **Raw string**               | **Parsing rule**                       | **Result**                            |
+|:-----------------------------|:---------------------------------------|:--------------------------------------|
+| key=valueStr                 | `%{data::keyvalue}`                    | {"key": "valueStr}                    |
+| key=\<valueStr>              | `%{data::keyvalue}`                    | {"key": "valueStr"}                   |
+| "key"="valueStr"             | `%{data::keyvalue}`                    | {"key": "valueStr"}                   |
+| key:valueStr                 | `%{data::keyvalue(":")}`               | {"key": "valueStr"}                   |
+| key:"/valueStr"              | `%{data::keyvalue(":", "/")}`          | {"key": "/valueStr"}                  |
+| /key:/valueStr               | `%{data::keyvalue(":", "/")}`          | {"/key": "/valueStr"}                 |
+| key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`    | {"key": "valueStr"}                   |
+| key1=value1\|key2=value2     | `%{data::keyvalue("=", "", "", "\|")}` | {"key1": "value1", "key2": "value2"}  |
+| key1="value1"\|key2="value2" | `%{data::keyvalue("=", "", "", "\|")}` | {"key1": "value1", "key2": "value2"}  |
 
 **Multiple QuotingString example**: When multiple quotingstring are defined, the default behavior is replaced with a defined quoting character.
 The key-value always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterWhiteList` is ignored as everything between the quoting characters is extracted.
 
-Log:
+**Log:**
 
   ```text
   key1:=valueStr key2:=</valueStr2> key3:="valueStr3"
   ```
 
-Rule:
+**Rule:**
 
   ```text
   rule %{data::keyvalue(":=","","<>")}
   ```
 
-Result:
+**Result:**
 
   ```json
-  {
-    "key1": "valueStr",
-    "key2": "/valueStr2"
-  }
+  {"key1": "valueStr", "key2": "/valueStr2"}
   ```
-  
+
 **Note**:
 
 * Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
 * If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
+* Defining `""` as `quotingStr` keeps the default configuration for quoting.
 
 ### Parsing dates
 
@@ -288,9 +298,9 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 
 **Note**: Parsing a date **doesn't** set its value as the log official date. For this use the [Log Date Remapper][2] in a subsequent Processor.
 
-### Conditional pattern
+### Alternating pattern
 
-If you have logs with two possible formats which differ in only one attribute, set a single rule using conditionals with `(<REGEX_1>|<REGEX_2>)`.
+If you have logs with two possible formats which differ in only one attribute, set a single rule using alternating with `(<REGEX_1>|<REGEX_2>)`. This rule is equivalent to a Boolean OR.
 
 **Log**:
 

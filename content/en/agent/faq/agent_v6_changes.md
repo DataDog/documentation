@@ -135,7 +135,8 @@ Agent v6 supports the following options in a check's `instance` section:
 | `empty_default_hostname`  | Submit metrics, events, and service checks with no hostname when set to `true`.                                           |
 | `tags`                    | Send custom tags in addition to the tags sent by the check.                                                               |
 
-[1]: /agent/autodiscovery
+
+[1]: /getting_started/agent/autodiscovery/
 {{% /tab %}}
 {{% tab "Environment variables" %}}
 
@@ -347,8 +348,8 @@ Some options have moved from `docker_daemon.yaml` to the main `datadog.yaml`:
 * `exclude_pause_container` was added to exclude pause containers on Kubernetes and Openshift (defaults to `true`).
 
 [1]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
-[2]: /agent/autodiscovery/tag/#docker
-[3]: /agent/autodiscovery/management
+[2]: /agent/docker/tag/
+[3]: /agent/kubernetes/management
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -382,8 +383,8 @@ The following options and tags are deprecated:
 [1]: /integrations/kubelet
 [2]: /integrations/kube_apiserver_metrics
 [3]: /help
-[4]: /integrations/kubernetes
-[5]: /agent/autodiscovery/tag/#extract-node-labels-as-tags
+[4]: /agent/kubernetes/
+[5]: /agent/kubernetes/tag/#extract-node-labels-as-tags
 {{% /tab %}}
 {{% tab "JMX" %}}
 
@@ -434,7 +435,7 @@ When using Kubernetes, Autodiscovery sources information from the kubelet, inste
 
 When specifying [Autodiscovery templates][1] in pod annotations, the annotation name prefix is `ad.datadoghq.com/`. The previous annotation prefix (`service-discovery.datadoghq.com/`) is still supported for Agent v6 but support will be removed in future versions.
 
-[1]: /agent/autodiscovery/integrations/?tab=kubernetes
+[1]: /agent/kubernetes/integrations/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -442,7 +443,7 @@ When specifying [Autodiscovery templates][1] in pod annotations, the annotation 
 
 The identifier override label has been renamed from `com.datadoghq.sd.check.id` to `com.datadoghq.ad.check.id` for consistency. The previous name is still supported for Agent v6 but support will be removed in future versions.
 
-[1]: /agent/autodiscovery/integrations/?tab=docker
+[1]: /agent/docker/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -562,10 +563,10 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 
 [1]: /agent/proxy/#using-the-agent-as-a-proxy
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters
-[3]: /agent/guide/dogstream
+[3]: /agent/guide/dogstream/
 [4]: /integrations/go-metro
 [5]: /agent/guide/agent-log-files/
 [6]: /agent/guide/agent-commands/
-[7]: /agent/autodiscovery
+[7]: /getting_started/agent/autodiscovery/
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
 [9]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks

@@ -54,7 +54,7 @@ Additional JMX metrics can be added using configuration files that are passed on
 [1]: https://app.datadoghq.com/apm/services
 [2]: /developers/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
-[4]: /agent/kubernetes/dogstatsd/#bind-the-dogstatsd-port-to-a-host-port
+[4]: /developers/dogstatsd/?tab=kubernetes#agent
 [5]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 [6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.0
 [7]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics

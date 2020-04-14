@@ -388,7 +388,7 @@ while (TRUE) {
 
 #### コード例
 
-`GAUGE` メトリクスとして保存された `SET` メトリクスを Datadog に送信します。 `SET` タイプについては、[メトリクスのタイプ][6] に関するドキュメントを参照してください。
+`GAUGE` メトリクスとして保存された `SET` メトリクスを Datadog に送信します。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -532,16 +532,16 @@ while (TRUE) {
 
 | メソッド                                                            | Datadog 保存タイプ                                                                                                                                              |
 |-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][7]に関するドキュメントを参照してください。 |
+| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。 |
 
 #### コンフィグレーション
 
-* Datadog に送信する集計を、[datadog.yaml 構成ファイル][8]の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の各集計だけが送信されます。
-* Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][8]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、`95pc` のパーセンタイルだけが送信されます。
+* Datadog に送信する集計を、[datadog.yaml 構成ファイル][7]の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の各集計だけが送信されます。
+* Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][7]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、`95pc` のパーセンタイルだけが送信されます。
 
 #### コード例
 
-`HISTOGRAM` メトリクスタイプは DogStatsD だけのものです。`GAUGE` および `RATE` メトリクスとして保存された `HISTOGRAM` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][7]に関するドキュメントを参照してください。
+`HISTOGRAM` メトリクスタイプは DogStatsD だけのものです。`GAUGE` および `RATE` メトリクスとして保存された `HISTOGRAM` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6]に関するドキュメントを参照してください。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -712,7 +712,7 @@ DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタ
 
 | メソッド                                                        | Datadog ストレージタイプ                                                                                                                                              |
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][7]に関するドキュメントを参照してください。 |
+| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。 |
 
 ##### コンフィグレーション
 
@@ -720,7 +720,7 @@ DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタ
 
 ##### コード例
 
-`GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][7] に関するドキュメントを参照してください。
+`GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6] に関するドキュメントを参照してください。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -816,11 +816,11 @@ DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使
 
 | メソッド                                                | Datadog 保存タイプ                                                                                         |
 |-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Datadog に `DISTRIBUTION` タイプとして保存されます。詳細は、[ディストリビューションドキュメント][9]を参照してください。 |
+| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Datadog に `DISTRIBUTION` タイプとして保存されます。詳細は、[ディストリビューションドキュメント][8]を参照してください。 |
 
 #### コード例
 
-`DISTRIBUTION` メトリクスタイプは DogStatsD だけのものです。`DISTRIBUTION` メトリクスとして保存された `DISTRIBUTION` メトリクスを Datadog に送信します。 `DISTRIBUTION` タイプについては、[メトリクスのタイプ][10] に関するドキュメントを参照してください。
+`DISTRIBUTION` メトリクスタイプは DogStatsD だけのものです。`DISTRIBUTION` メトリクスとして保存された `DISTRIBUTION` メトリクスを Datadog に送信します。 `DISTRIBUTION` タイプについては、[メトリクスのタイプ][9] に関するドキュメントを参照してください。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1112,12 +1112,11 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/dogstatsd
-[2]: /ja/developers/metrics/types/?tab=count#metric-type-definition
+[2]: /ja/developers/metrics/types/?tab=count#definition
 [3]: /ja/dashboards/functions/arithmetic/#cumulative-sum
 [4]: /ja/dashboards/functions/arithmetic/#integral
-[5]: /ja/developers/metrics/types/?tab=gauge#metric-type-definition
-[6]: /ja/developers/metrics/types/?tab=set#metric-type-definition
-[7]: /ja/developers/metrics/types/?tab=histogram#metric-type-definition
-[8]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[9]: /ja/metrics/distributions
-[10]: /ja/developers/metrics/types/?tab=distribution#metric-type-definition
+[5]: /ja/developers/metrics/types/?tab=gauge#definition
+[6]: /ja/developers/metrics/types/?tab=histogram#definition
+[7]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[8]: /ja/metrics/distributions
+[9]: /ja/developers/metrics/types/?tab=distribution#definition

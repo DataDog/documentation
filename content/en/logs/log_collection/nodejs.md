@@ -128,6 +128,54 @@ logs:
     sourcecategory: sourcecode
 ```
 
+## Agentless Logging
+
+You can stream your logs from your application to Datadog without installing an Agent on your Host. Note that using an Agent to forward your logs is recommended as it provides a native connection management.
+
+{{< tabs >}}
+{{% tab "Winston 3.0" %}}
+
+Use [Winston HTTP transport][1] to send your logs directly through the [Datadog Log API][3].
+In your bootstrap file or somewhere in your code, declare the logger as follow:
+
+```js
+
+const { createLogger, format, transports } = require('winston');
+
+const httpTransportOptions = {
+  host: 'http-intake.logs.datadoghq.com',
+  path: '/v1/input/<APIKEY>?ddsource=nodejs&service=<APPLICATION_NAME>',
+  ssl: true
+};
+
+const logger = createLogger({
+  level: 'info',
+  exitOnError: false,
+  format: format.json(),
+  transports: [
+    new transports.Http(httpTransportOptions),
+  ],
+});
+
+module.exports = logger;
+
+// Example logs
+logger.log('info', 'Hello simple log!');
+logger.info('Hello log with metas',{color: 'blue' });
+```
+
+**Note**: To send logs to Datadog EU site, set the host property to `http-intake.logs.datadoghq.eu`
+
+If you are using US site, you can also check the community supported [Datadog Transport][2].
+
+[1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
+[2]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
+[3]: /api/?lang=bash#send-logs-over-http
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Troubleshooting
 
 In case you have dns lookup errors or crash in your application this could be linked to logstash exceptions not being caught.

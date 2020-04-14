@@ -1,7 +1,7 @@
-*           @DataDog/baklava
+*           @DataDog/documentation
 
 # Websites
-data/*      @DataDog/corpweb @DataDog/baklava
+data/*      @DataDog/corpweb @DataDog/documentation
 local/*     @DataDog/corpweb
 layouts/*   @DataDog/corpweb
 src/*       @DataDog/corpweb

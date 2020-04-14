@@ -90,7 +90,7 @@ volumes:
 
 * Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexes and Live Tail data uniquely.
 
-[1]: /agent/kubernetes/daemonset_setup
+[1]: /agent/kubernetes/
 [2]: /logs/indexes/#exclusion-filters
 {{% /tab %}}
 {{< /tabs >}}
@@ -227,7 +227,7 @@ ac_include: ["name:frontend.*"]
 
 [1]: https://app.datadoghq.com/containers
 [2]: /integrations/docker_daemon
-[3]: /integrations/kubernetes
+[3]: /agent/kubernetes
 [4]: /integrations/amazon_ecs
 [5]: /agent/docker/#run-the-docker-agent
 [6]: /agent/docker/log/?tab=hostinstallation#activate-log-integrations

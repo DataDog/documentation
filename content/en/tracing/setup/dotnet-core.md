@@ -42,9 +42,9 @@ Automatic instrumentation captures:
 
 The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.1. It also supports [.NET Framework][2].
 
-**Note:** The .NET Tracer works on .NET Core 2.0 and .NET Core 2.2, but these versions reached their end of life and are no longer supported by Microsoft. .NET Core 3.0 will reach end of life on 03/03/2020.
+**Note:** The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1.
 
-**Note:** Due to several issues in older versions of the .NET Core 2.1 runtime, we strongly recommend .NET Core versions 2.1.12 or higher. For .NET Core 2.2, we recommend version 2.2.6 or higher. See [dotnet/runtime/issues/10506][3] and [DataDog/dd-trace-dotnet/issues/302][4] for more details.
+**Note:** Older versions of .NET Core on Linux/x64 have JIT compiler bugs that can cause applications to throw exceptions when using automatic instrumentation. If your application is running on .NET Core 2.0, 2.1.0-2.1.11, or 2.2.0-2.2.5, we strongly recommend you update your .NET Core runtime. If you cannot update, you may need to set the environment variable `DD_CLR_DISABLE_OPTIMIZATIONS=true` to work around the issue. See [DataDog/dd-trace-dotnet/issues/302][4] for more details.
 
 ### Installation
 
@@ -69,11 +69,13 @@ net start w3svc
 
 {{% tab "Linux" %}}
 
-To use automatic instrumentation on Linux, install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][1].
+To use automatic instrumentation on Linux, follow these three steps:
 
-In addition to installing the .NET Tracer package, several environment variables are required to enabled automatic instrumentation in your application. See [Required Environment Variables](#required-environment-variables) below for details.
+1. Install the .NET Tracer in the environment where your application is running using one of the packages available from the `dd-trace-dotnet` [releases page][1].
 
-To generate Tracer log files for troubleshooting, you must create the logs directory. The default path is `/var/log/datadog/`.
+2. Create the required environment variables. See [Required Environment Variables](#required-environment-variables) below for details.
+
+3. Run the `/opt/datadog/createLogPath.sh` script, which creates a directory for the log files and sets appropriate directory permissions. The default directory for log files is `/var/log/datadog/dotnet`.
 
 **Update:** Starting with .NET Tracer version `1.8.0`, the `Datadog.Trace.ClrProfiler.Managed` NuGet package is no longer required for automatic instrumentation in .NET Core and is deprecated. Remove it from your application when you update the .NET Tracer and add the new environment variable, `DD_DOTNET_TRACER_HOME`. See [Required Environment Variables](#required-environment-variables) below for details.
 
@@ -199,16 +201,17 @@ CMD ["dotnet", "example.dll"]
 
 The .NET Tracer can instrument the following libraries automatically:
 
-| Framework or library           | NuGet package                                                           | Integration Name     |
-|--------------------------------|-------------------------------------------------------------------------|----------------------|
-| ASP.NET Core                   | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+ | `AspNetCore`         |
-| ADO.NET                        | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                   | `AdoNet`             |
-| HttpClient / HttpClientHandler | `System.Net.Http` 4.0+                                                  | `HttpMessageHandler` |
-| WebClient / WebRequest         | `System.Net.Requests` 4.0+                                              | `WebRequest`         |
-| Redis (StackExchange client)   | `StackExchange.Redis` 1.0.187+                                          | `StackExchangeRedis` |
-| Redis (ServiceStack client)    | `ServiceStack.Redis` 4.0.48+                                            | `ServiceStackRedis`  |
-| Elasticsearch                  | `Elasticsearch.Net` 5.3.0+                                              | `ElasticsearchNet`   |
-| MongoDB                        | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
+| Framework or library            | NuGet package                                                           | Integration Name     |
+|---------------------------------|-------------------------------------------------------------------------|----------------------|
+| ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+ | `AspNetCore`         |
+| ADO.NET                         | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                   | `AdoNet`             |
+| HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                  | `HttpMessageHandler` |
+| WebClient / WebRequest          | `System.Net.Requests` 4.0+                                              | `WebRequest`         |
+| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                          | `StackExchangeRedis` |
+| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                            | `ServiceStackRedis`  |
+| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                              | `ElasticsearchNet`   |
+| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
+| PostgreSQL                      | `Npgsql` 4.0+                                                           | `AdoNet`             |
 
 **Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
@@ -321,7 +324,8 @@ The first table below lists configuration variables that are available for both 
 | `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.                                                              |
 | `DD_SERVICE_NAME`<br/><br/>`ServiceName`            | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
-| `DD_TRACE_GLOBAL_FLAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
+| `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
+| `DD_TRACE_DEBUG`                                    | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
 
 The following table lists configuration variables that are available only when using automatic instrumentation.
 
@@ -329,7 +333,7 @@ The following table lists configuration variables that are available only when u
 |----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_TRACE_ENABLED`<br/><br/>`TraceEnabled`                     | Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` (default) or `false`. |
 | `DD_TRACE_DEBUG`                                               | Enables or disables debug logs in the Tracer. Valid values are: `true` or `false` (default). Setting this as an environment variable also enabled debug logs in the CLR Profiler.                                                                                                        |
-| `DD_TRACE_LOG_PATH`                                            | Sets the path for the CLR profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet-profiler.log`                                                                                                                         |
+| `DD_TRACE_LOG_PATH`                                            | Sets the path for the CLR profiler's log file.<br/><br/>Windows default: `%ProgramData%\Datadog .NET Tracer\logs\dotnet-profiler.log`<br/><br/>Linux default: `/var/log/datadog/dotnet/dotnet-profiler.log`                                                                                     |
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations](#integrations) section above.           |
 | `DD_TRACE_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`       | Shorthand that enables default App Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                                     |
 
@@ -348,8 +352,8 @@ The following table lists configuration variables that are available only when u
 
 [1]: /tracing/send_traces
 [2]: /tracing/setup/dotnet-framework
-[3]: https://github.com/dotnet/runtime/issues/10506
-[4]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-511011364
+[3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
+[4]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
 [5]: /help
 [6]: https://www.nuget.org/packages/Datadog.Trace
 [7]: /tracing/manual_instrumentation/dotnet

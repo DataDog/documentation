@@ -87,9 +87,23 @@ Refer to the standard [Daemonset installation][2] and the [Docker Agent][3] info
 **Note**: Running the Agent as a container still allows you to collect host processes.
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[2]: /integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
+[2]: /agent/kubernetes/
 [3]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
+{{% tab "Helm" %}}
+Update your [datadog-values.yaml][1] file with the following process collection configuration, then upgrade your Datadog Helm chart:
+
+```yaml
+datadog:
+  # (...)
+  processAgent:
+   enabled: true
+```
+
+
+[1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Process Arguments Scrubbing
@@ -129,7 +143,7 @@ process_config:
 
 ### Search Syntax
 
-Processes and containers are, by their nature, extremely high cardinality objects. Fuzzy string search helps you view relevant information. Below is Datadog's demo environment, filtered with the string `postgres /9.`.
+Processes and containers are, by their nature, extremely high cardinality objects. Fuzzy string search helps you view relevant information. Enter a string of two or more characters to see results. Below is Datadog's demo environment, filtered with the string `postgres /9.`.
 
 **Note**: `/9.` has matched in the command path, and `postgres` matches the command itself.
 

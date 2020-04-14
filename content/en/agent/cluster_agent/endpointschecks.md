@@ -5,9 +5,6 @@ aliases:
     - /agent/autodiscovery/endpointchecks
     - /agent/autodiscovery/endpointschecks
 further_reading:
-    - link: '/agent/autodiscovery'
-      tag: 'Documentation'
-      text: 'Main Autodiscovery documentation'
     - link: '/agent/cluster_agent/clusterchecks/'
       tag: 'Documentation'
       text: 'Cluster Checks documentation'
@@ -265,12 +262,12 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/kubernetes/cluster
-[2]: /agent/autodiscovery/clusterchecks
-[3]: /agent/autodiscovery
+[2]: /agent/cluster_agent/clusterchecks
+[3]: /agent/kubernetes/integrations
 [4]: /agent/kubernetes/cluster/#cluster-checks-autodiscovery
 [5]: /agent/guide/agent-commands
-[6]: /agent/autodiscovery/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[7]: /agent/autodiscovery/?tab=kubernetes#supported-template-variables
+[6]: /agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[7]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
 [8]: /integrations/http_check
 [9]: /integrations/nginx
 [10]: /agent/cluster_agent/troubleshooting

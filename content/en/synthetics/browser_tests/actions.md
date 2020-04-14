@@ -14,7 +14,7 @@ Actions are a series of steps that you can record for a browser test, which you 
 
 ## Click
 
-[Datadog’s extension][4] automatically records clicks on your page. 
+[Datadog’s extension][3] automatically records clicks on your page. 
 
 Specify the type of click you want your browser test to perform at execution time:
 
@@ -30,7 +30,9 @@ Choose from:
 
 {{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Browser Test Assertion"  style="width:40%;">}}
 
-Assertions allow you to check whether an element, some content, or some text is available on the current page. You can also check whether a specific email was sent.
+Assertions allow you to validate that your browser test is in the state you expect it to be in, at any given point of a simulated user journey. This is why you must end your browser tests by an assertion to confirm it ended up in an expected state.
+
+Some assertions are performed on the **active page**. Active page refers to the page that has experienced the last interaction like using a click or an assertion on a given page element for instance.
 
 | Assertion                                                 | Description                                                                                                                                                                             |
 |-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -39,8 +41,9 @@ Assertions allow you to check whether an element, some content, or some text is 
 | `Test that some text is not present on the active page` | Asserts that some specific text is **NOT** present on the current page.                                                                                                                 |
 | `Test the content of the URL of the active page`          | Takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it.                                      |
 | `Test that an element is present on the active page`      | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                                                                              |
-| `Test that an email was received`                         | Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages [email variables][3]. |
-| `Test a JavaScript assertion`                         | Test a custom assertion using your own JavaScript scripts. By default the assertion is done on the active page. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. |
+| `Test that an email was received`                         | Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages [email variables][4]. |
+| `Test your UI with custom JavaScript`                         | Test a custom assertion using your own JavaScript scripts. By default the assertion is done on the active page. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. |
+| `Test a downloaded file`                         | Perform verifications on files downloaded in previous steps. You can check that a file was correctly downloaded and assert on: the file name, size, and MD5 value. |
 
 [Advanced options][1] are also available for assertions.
 
@@ -50,12 +53,12 @@ The navigation action allows you to:
 
 * Refresh the current page of the scenario.
 * Follow a specific link. In the **Enter link URL** box, you must prepend your URLs with `http` or `https`.
-* Go to an email and click on a link. This step allows you to access your Synthetics mail inbox after creating an [email variable][3].
+* Go to an email and click on a link. This step allows you to access your Synthetics mail inbox after creating an [email variable][4].
 * Choose the email you are interested in and click the link you want your browser test to click on.
 
 ## Special Actions
 
-[The provided Datadog extension][4] records most actions. However, some actions—such as hover, press key, and scroll—are not recorded automatically. Explicitly add a step for them using the **Special Actions** menu located at the top left-hand corner of the recorder.
+[The provided Datadog extension][3] records most actions. However, some actions—such as hover, press key, and scroll—are not recorded automatically. Explicitly add a step for them using the **Special Actions** menu located at the top left-hand corner of the recorder.
 
 ### Hover
 
@@ -65,7 +68,7 @@ After selecting the Hover action, click on the element you want to choose to cre
 
 ### Press key
 
-You can simulate users entering keystrokes using **Press Key** steps. The keys below can be recorded using the [Datadog extension][4]:
+You can simulate users entering keystrokes using **Press Key** steps. The keys below can be recorded using the [Datadog extension][3]:
 
 * Enter
 * Arrows (up, down, right, and left)
@@ -115,7 +118,7 @@ To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
 * **JavaScript**: Generate custom variables using your own JavaScript scripts. By default the step is being performed at the page level. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function.
-* **A Global Variable**: Store and use global variables through [Synthetics Settings][6].
+* **A Global Variable**: Store and use global variables through [Synthetics Settings][5].
 * **An Email**: Generate a random Synthetics email address that can be used in your test steps to assert if an email was correctly sent or to perform actions over the sent email content (e.g. click a confirmation link).
 * **A Pattern**:
 
@@ -157,7 +160,7 @@ By default, Datadog waits for a page to be fully loaded before performing an act
 
 ## Subtests
 
-You can run browser tests within other browser tests, up to two levels of nesting. [Advanced options][7] also allow you to choose where you want your subtest to be played.
+You can run browser tests within other browser tests, up to two levels of nesting. [Advanced options][6] also allow you to choose where you want your subtest to be played.
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
 
@@ -167,8 +170,7 @@ You can run browser tests within other browser tests, up to two levels of nestin
 
 [1]: /synthetics/browser_tests/advanced_options
 [2]: /synthetics/browser_tests/advanced_options/#timeout
-[3]: /synthetics/browser_tests/#create-a-variable
-[4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[5]: /synthetics/browser_tests/advanced_options/#custom-selector
-[6]: /synthetics/settings
-[7]: /synthetics/browser_tests/advanced_options/#subtests
+[3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[4]: /synthetics/browser_tests/#create-a-variable
+[5]: /synthetics/settings
+[6]: /synthetics/browser_tests/advanced_options/#subtests

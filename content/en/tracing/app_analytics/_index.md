@@ -336,7 +336,7 @@ Integration names can be found on the [integrations table][1].
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_SAMPLE_RATE` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_SAMPLE_RATE` tag on a span:
 
 ```java
 import datadog.trace.api.DDTags;
@@ -360,7 +360,7 @@ class MyClass {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` tag on a span:
 
 ```python
 from ddtrace import tracer
@@ -375,7 +375,7 @@ def my_method():
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on a span:
 
 ```ruby
 Datadog.tracer.trace('my.task') do |span|
@@ -398,7 +398,7 @@ This marks the span as a App Analytics event.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS` tag on a span:
 
 ```javascript
 const { ANALYTICS } = require('dd-trace/ext/tags')
@@ -409,7 +409,7 @@ span.setTag(ANALYTICS, true)
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `Tags.Analytics` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `Tags.Analytics` tag on a span:
 
 ```csharp
 using Datadog.Trace;
@@ -425,7 +425,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on a span:
 
 ```php
 <?php
@@ -437,7 +437,7 @@ Applications with custom instrumentation can enable App Analytics by setting the
 {{% /tab %}}
 {{% tab "C++" %}}
 
-Applications with custom instrumentation can enable App Analytics by setting the `analytics_event` tag on the service root span:
+Applications with custom instrumentation can enable App Analytics by setting the `analytics_event` tag on a span:
 
 ```cpp
 ...
@@ -458,11 +458,11 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ## Span filtering
 
-An [Analyzed Span][2] represents the top [span][3] for a [service][4], including its metadata. Once enabled, Analyzed Spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span. [Filtering Analyzed Spans][5] has the benefit of reducing the number of billable Analyzed Spans and has no effect on [trace][6] sampling. Once a service has been filtered lower than 100%, Analyzed Span analytics are upscaled to display an estimate by default, and you have the option to display the filtered value.
+An [Analyzed Span][2] represents the top [span][3] for a [service][4], including its metadata. Once enabled, Analyzed Spans are sent at 100% throughput by default. For example, a Java service with 100 requests will generate 100 Analyzed Spans from its `servlet.request` spans, as each `servlet.request` span generates an Analyzed Span. [Filtering Analyzed Spans][5] has the benefit of reducing the number of billable Analyzed Spans and has no effect on [trace][6] sampling. Once a service has been filtered lower than 100%, the Analyzed Span generated metrics Total Errors and Total Requests are upscaled to display an estimate by default, and you have the option to display the filtered value.
 
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="Analyzed Span Filtering"  style="width:100%;">}}
+Changes to the filtering rates are queued, by service & environment, allowing to estimate the impact on your overall span volume. Changes can then be reviewed, edited, approved, or rejected. Once applied, changes are immediate and [affect your billing][7].
 
-**Note**: If you have [manually configured the sampling priority][7] to `MANUAL_KEEP` for a given service. Analyzed Spans filtering is then overridden for that service which means that its spans are billable spans.
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="Analyzed Span Filtering" >}}
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /tracing/visualization/#apm-event
@@ -470,4 +470,4 @@ An [Analyzed Span][2] represents the top [span][3] for a [service][4], including
 [4]: /tracing/visualization/#services
 [5]: https://app.datadoghq.com/apm/settings
 [6]: /tracing/visualization/#trace
-[7]: /tracing/guide/trace_sampling_and_storage/#sampling-rules
+[7]: /account_management/billing/apm_distributed_tracing/

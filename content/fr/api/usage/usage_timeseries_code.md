@@ -1,7 +1,7 @@
 ---
 title: Obtenir l'utilisation horaire pour des métriques custom
 type: apicode
-order: 35.3
+order: 35.4
 external_redirect: /api/#obtenir-l-utilisation-horaire-pour-des-metriques-custom
 ---
 

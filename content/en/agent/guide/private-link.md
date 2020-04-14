@@ -90,7 +90,7 @@ To forward your metrics to Datadog using this new VPC endpoint, configure `pvtli
 
 2. [Restart your Agent][2] to send metrics to Datadog through AWS PrivateLink.
 
-**Note**: if you are using the container Agent, set the environment variable instead: `DD_DD_URL="pvtlink.agent.datadoghq.com"`
+**Note**: If you are using the container Agent, set the environment variable instead: `DD_DD_URL="https://pvtlink.agent.datadoghq.com"`. Configure this environment variable on _both_ the Cluster Agent & Node Agent if using the Cluster Agent to monitor a Kubernetes environment.
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

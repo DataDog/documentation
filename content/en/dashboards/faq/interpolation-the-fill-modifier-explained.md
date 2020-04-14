@@ -44,7 +44,6 @@ Interpolation is not needed when you graph one metric submitted from one source,
 
 Interpolation is not performed for multi-part queries, for example: `avg:system.cpu.user{env:prod},avg:system.cpu.user{env:dev}`
 
-The type of interpolation described in this article is also not performed for arithmetic. When evaluating queries, Datadog's backend rolls data up into intervals (one for each point in a timeseries graph, see [this article][1] for more details). If a query involves arithmetic, and one of these intervals is missing data for part of a query, the query system substitutes 0 for that interval. This behavior cannot be controlled with the fill modifier.
 
 ## How to control interpolation?
 
