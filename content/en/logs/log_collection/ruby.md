@@ -76,7 +76,7 @@ This section describe the minimum setup required in order to forward your Rails 
 
     # This is useful if you want to log query parameters
     config.lograge.custom_options = lambda do |event|
-        { :ddsource => ["ruby"],
+        { :ddsource => 'ruby',
           :params => event.payload[:params].reject { |k| %w(controller action).include? k }
         }
     end
