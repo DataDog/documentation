@@ -20,11 +20,14 @@ further_reading:
 If you aren’t using supported library instrumentation (see [Library compatibility][1]), you may want to manually instrument your code. The following example initializes a Datadog Tracer and creates a [span][2] called `web.request`:
 
 ```javascript
+scope.activate(() => {
 const tracer = require('dd-trace').init();
 const span = tracer.startSpan('web.request');
 
 span.setTag('http.url', '/login');
 span.finish();
+
+});
 ```
 
 For more information on manual instrumentation, see the [API documentation][3].
