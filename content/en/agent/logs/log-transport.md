@@ -83,7 +83,7 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 
 ## HTTPS Transport
 
-**HTTPS log forwarding is the recommended configuration**. With HTTPS, you have a guarantee that Datadog has received your log.
+**HTTPS log forwarding is the recommended configuration** for the best log collection reliability as the`200` status code is returned by the Datadog storage system:
 
 {{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema"  style="width:80%;">}}
 
