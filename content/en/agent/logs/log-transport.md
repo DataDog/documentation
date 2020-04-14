@@ -125,8 +125,7 @@ logs_config:
   batch_wait: 2
 ```
 
-Or use the `DD_LOGS_CONFIG_BATCH_WAIT` environment variable.
-The unit is seconds and must be an integer between `1` and `10`.
+Or use the `DD_LOGS_CONFIG_BATCH_WAIT=2` environment variable. The unit is in seconds and must be an integer between `1` and `10`.
 
 ### HTTPS Proxy configuration
 
