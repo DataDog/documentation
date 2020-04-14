@@ -83,7 +83,7 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 {{% /tab %}}
 {{< /tabs >}}
 
-Note: Setting up a [SOCKS5 proxy][4] server will also enforce TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
+**Note**: Setting up a [SOCKS5 proxy][4] server enforces TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
 
 ## HTTPS Transport
 
