@@ -44,7 +44,7 @@ Enforce the use of TCP or HTTPS transport by using the following configurations.
 {{< tabs >}}
 {{% tab "HTTPS" %}}
 
-To enforce HTTP transport, update the Agent's [main configuration file][1] (`datadog.yaml`) with:
+To enforce HTTPS transport with Agent versions v6.14+/v7.14+ , update the Agent's [main configuration file][1] (`datadog.yaml`) with:
 
 ```yaml
 logs_enabled: true
