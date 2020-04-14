@@ -354,6 +354,10 @@ main:
     url: "agent/logs/proxy"
     parent: "agent_logs"
     weight: 602
+  - name: "Transport"
+    url: "agent/logs/log_transport"
+    parent: "agent_logs"
+    weight: 603
 
   ## AGENT - Proxy
 
