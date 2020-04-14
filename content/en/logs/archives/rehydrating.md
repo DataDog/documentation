@@ -30,6 +30,10 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 5. (Optional) **Add a description** to give your team context about the purpose of the historical view.
 
+6. Define the maximum number of logs that should be rehydrated in this historical view, **from 1 million to 1 billion**
+
+7. (Optional) Define the retention of those rehydrated logs. Choose the `Decide Later` option if you don't know yet how long you are going to need them.
+
 {{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Reload from Archive"  style="width:75%;">}}
 
 #### Rehydrate by Query
