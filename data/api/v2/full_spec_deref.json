@@ -3309,7 +3309,7 @@
         },
         "summary": "Delete items from a dashboard list",
         "tags": [
-          "DashboardLists"
+          "Dashboard Lists"
         ],
         "x-codegen-request-body-name": "body"
       },
@@ -3507,7 +3507,7 @@
         },
         "summary": "Get a Dashboard List",
         "tags": [
-          "DashboardLists"
+          "Dashboard Lists"
         ]
       },
       "post": {
@@ -3846,7 +3846,7 @@
         },
         "summary": "Add Items to a Dashboard List",
         "tags": [
-          "DashboardLists"
+          "Dashboard Lists"
         ],
         "x-codegen-request-body-name": "body"
       },
@@ -4195,7 +4195,7 @@
         },
         "summary": "Update items of a dashboard list",
         "tags": [
-          "DashboardLists"
+          "Dashboard Lists"
         ],
         "x-codegen-request-body-name": "body"
       }
@@ -6823,7 +6823,7 @@
   "tags": [
     {
       "description": "[Interact with your dashboard lists](https://docs.datadoghq.com/monitors/downtimes)\nthrough the API to make it easier to organize, find, and share all of your dashboards\nwith your team and organization.",
-      "name": "DashboardLists"
+      "name": "Dashboard Lists"
     },
     {
       "description": "Create, edit, and disable users.",
