@@ -37,4 +37,4 @@ If the issue is alert routing, template variables and the separation of **warnin
 
 [1]: https://www.datadoghq.com/blog/alert-rollup
 [2]: /monitors/monitor_types/anomaly/
-[3]: /monitors/monitor_types/outlier/?tab=dbscan
+[3]: /monitors/monitor_types/outlier/
