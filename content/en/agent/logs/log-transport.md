@@ -37,7 +37,6 @@ To check which transport is used by the Agent, run the [Agent statuts command][1
 
 **Note**: For older Agent versions, TCP transport is used by default. Datadog strongly recommends you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+. 
 
-
 ## Enforce a specific transport
 
 Enforce the use of TCP or HTTPS transport by using the following configurations.
