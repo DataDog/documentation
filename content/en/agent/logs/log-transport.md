@@ -54,7 +54,7 @@ logs_config:
 
 To send logs with environment variables, configure the following:
 
-* `DD_LOGS_ENABLED`
+* `DD_LOGS_ENABLED=true`
 * `DD_LOGS_CONFIG_USE_HTTP`
 
 
