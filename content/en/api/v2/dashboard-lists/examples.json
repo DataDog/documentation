@@ -100,7 +100,7 @@
       "html": ""
     }
   },
-  "AddDashboardListItems": {
+  "CreateDashboardListItems": {
     "responses": {
       "200": {
         "json": {

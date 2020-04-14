@@ -1782,6 +1782,9 @@ api_v1:
   - name: Create a monitor
     parent: Monitors
     url: create-a-monitor
+  - name: Check if the given monitors can be deleted
+    parent: Monitors
+    url: check-if-the-given-monitors-can-be-deleted
   - name: Validate a monitor
     parent: Monitors
     url: validate-a-monitor
