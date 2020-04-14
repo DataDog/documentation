@@ -21,5 +21,6 @@ external_redirect: /api/#send-logs-over-http
 See the [log collection documentation][1] to learn more about the different ways to collect logs from your application. If you are logging pure JSON objects, they are parsed automatically by Datadog Log management.
 
 **Note**: When logging pure JSON objects, Datadog has a set of [reserved attributes][2] with a specific behavior.
+
 [1]: /logs/log_collection/
 [2]: /logs/log_collection/#reserved-attributes
