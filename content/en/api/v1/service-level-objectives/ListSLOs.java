@@ -4,13 +4,13 @@ public class ServiceLevelObjectivesApiExample {
 
     public static void main(String[] args) {
         ServiceLevelObjectivesApi apiInstance = new ServiceLevelObjectivesApi();
-        String sloId = sloId_example; // String | The ID of the service level objective object.
-        ServiceLevelObjective body = ; // ServiceLevelObjective | 
+        String ids = ids_example; // String | A comma separated list of the IDs of the service level objectives objects.
+For example, "id1,id2,id3".
         try {
-            SLOListResponse result = apiInstance.updateSLO(sloId, body);
+            SLOListResponse result = apiInstance.listSLOs(ids);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling ServiceLevelObjectivesApi#updateSLO");
+            System.err.println("Exception when calling ServiceLevelObjectivesApi#listSLOs");
             e.printStackTrace();
         }
     }

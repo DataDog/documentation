@@ -4,5 +4,5 @@
     "codegen_version": "4.3.0",
     "info_version": "1",
     "image": "datadog/apigentools:git-936dfd6",
-    "spec_repo_commit": "d2a2849"
+    "spec_repo_commit": "647e7d0"
 }
