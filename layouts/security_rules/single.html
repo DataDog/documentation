@@ -19,7 +19,9 @@
 				{{ end }}
 				{{ if isset .Params "tactic" }}
 					<div class="col-4 col-md-4 col-lg-3"><p class="font-weight-bold small">Tactic: </p></div>
-					<div class="col-8 col-md-8 col-lg-7"><p class="small">{{ .Params.tactic }}</p></div>
+					<div class="col-8 col-md-8 col-lg-7"><p class="small">
+						<a href="https://attack.mitre.org/techniques/T1089/">{{ .Params.tactic }}</a>
+					</p></div>
 				{{ end }}
 				{{ if isset .Params "technique" }}
 					<div class="col-4 col-md-4 col-lg-3"><p class="font-weight-bold small">Technique: </p></div>
