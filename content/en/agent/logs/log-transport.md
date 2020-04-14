@@ -72,7 +72,7 @@ logs_config:
 To send logs with environment variables, configure the following:
 
 * `DD_LOGS_ENABLED=true`
-* `DD_LOGS_CONFIG_USE_TCP`
+* `DD_LOGS_CONFIG_USE_TCP=true`
 
 By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication (on port `10516` for Datadog US site and port `443`for Datadog EU site).
 
