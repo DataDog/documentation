@@ -3,7 +3,7 @@ title: Billing
 kind: documentation
 ---
 
-## Overview
+## Overviews
 
 The billing cycle begins the first of the month regardless of when you sign up. Your first month is prorated based on your actual sign-up date.
 
