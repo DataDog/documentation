@@ -148,7 +148,6 @@
         }
     ],
     "stop_urls": [
-        "/api/.+",
         "/faq/$",
         "/guide/$",
         "\\.json$",
