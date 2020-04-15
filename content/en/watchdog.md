@@ -28,7 +28,7 @@ Watchdog is an algorithmic feature for APM performances and infrastructure metri
   * Latency
 
 * Infrastructure metrics from integrations:
-  * [System][1], for the Host-level memory usage (memory leaks), TCP retransmit rate, etc.
+  * [System][1], for the Host-level memory usage (memory leaks) and TCP retransmit rate.
   * [Redis][2]
   * [PostgreSQL][3]
   * [NGINX][4]
