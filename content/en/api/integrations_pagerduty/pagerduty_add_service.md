@@ -11,10 +11,8 @@ Add a PagerDuty service to the Datadog integration.
 
 **ARGUMENTS**:
 
-* **`service_name`** [*required*]:
-        Your Service name in PagerDuty.
+* **`service_name`** [*required*]: Your Service name in PagerDuty.
 
-* **`service_key`** [*required*]:
-        Your Service name associated service key in Pagerduty.
+* **`service_key`** [*required*]: Your Service name associated service key in Pagerduty.
 
 [1]: https://www.pagerduty.com/docs/guides/datadog-integration-guide
