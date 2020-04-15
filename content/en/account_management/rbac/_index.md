@@ -93,7 +93,7 @@ Once a role is modified, all users who have the role will have their permissions
 {{% /tab %}}
 {{% tab "API" %}}
 
-Find an example of how to create a Role in the [Datadog Create Role API documentation][1].
+Find an example of how to update a Role in the [Datadog Create Role API documentation][1].
 
 
 [1]: /api/#update-role
@@ -122,7 +122,7 @@ Once a role is deleted all users who have the role will have their permissions u
 {{% /tab %}}
 {{% tab "API" %}}
 
-Find an example of how to create a Role in the [Datadog Create Role API documentation][1].
+Find an example of how to delete a Role in the [Datadog Create Role API documentation][1].
 
 
 [1]: /api/#delete-role
