@@ -15,7 +15,7 @@ git_integration_title: lacework
 guid: 545f8c45-038b-41e5-ae13-8550c0ee563f
 integration_id: lacework
 integration_title: Lacework
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
@@ -36,27 +36,28 @@ Utilisez l'intégration Datadog/Lacework pour transmettre vos logs et événemen
 
 ## Configuration
 
-La configuration s'effectue en intégralité sur le dashboard de Lacework. Des instructions sont disponibles dans la [documentation de Lacework][2] (en anglais). Datadog active automatiquement les bons pipelines de traitement de logs lorsqu'il détecte des logs Lacework.
+La configuration s'effectue en intégralité sur le dashboard de Lacework. Des instructions sont disponibles dans la [documentation de Lacework][1] (en anglais). Datadog active automatiquement les bons pipelines de traitement de logs lorsqu'il détecte des logs Lacework.
 
 ### Installation
 
-1. Dans Lacework, accédez à *Settings* et sélectionnez *Integrations*.
-2. Dans la section *Outgoing* (dans le volet de gauche), sélectionnez Datadog.
+1. Dans Lacework, accédez à _Settings_ et sélectionnez _Integrations_.
+2. Dans la section _Outgoing_ (dans le volet de gauche), sélectionnez Datadog.
 3. Remplissez les informations suivantes :
-    * **Name** : saisissez un nom pour l'intégration, par exemple, `Datadog-Lacework`.
-    * **Datadog Type** : sélectionnez le type de logs envoyés à Datadog :
 
-        | Datadog Type       | Description                                                |
-        | ------------------ | -------------------------------------------------------    |
-        | `Logs Details`     | Envoie des logs Lacework détaillés à la plateforme de logs Datadog. |
-        | `Logs Summary`     | Envoie une synthèse Lacework à la plateforme de logs Datadog.     |
-        | `Events Summary`   | Envoie une synthèse Lacework à la plateforme d'événements Datadog.   |
+   - **Name** : saisissez un nom pour l'intégration, par exemple, `Datadog-Lacework`.
+   - **Datadog Type** : sélectionnez le type de logs envoyés à Datadog :
 
-    * **Datadog Site** :
-        * Sélectionnez `com` si vous utilisez le site américain de Datadog.
-        * Sélectionnez `eu` si vous utilisez le site européen de Datadog.
-    * **API KEY** : saisissez votre [clé d'API Datadog][3].
-    * **Alert Security Level** : sélectionnez le niveau de sévérité minimum des logs transmis.
+    | Datadog Type     | Description                                                |
+    | ---------------- | ---------------------------------------------------------- |
+    | `Logs Details`   | Envoie des logs Lacework détaillés à la plateforme de logs Datadog. |
+    | `Logs Summary`   | Envoie une synthèse Lacework à la plateforme de logs Datadog.     |
+    | `Events Summary` | Envoie une synthèse Lacework à la plateforme d'événements Datadog.   |
+
+   - **Datadog Site** :
+     - Sélectionnez `com` si vous utilisez le site américain de Datadog.
+     - Sélectionnez `eu` si vous utilisez le site européen de Datadog.
+   - **API KEY** : saisissez votre [clé d'API Datadog][2].
+   - **Alert Security Level** : sélectionnez le niveau de sévérité minimum des logs transmis.
 
 ## Données collectées
 
@@ -78,9 +79,8 @@ Lacework peut être configuré pour envoyer des événements.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][7].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://docs.datadoghq.com/fr/integrations/lacework/
-[2]: https://www.lacework.com/datadog/
-[3]: https://app.datadoghq.com/account/settings#api
-[7]: https://docs.datadoghq.com/fr/help
+[1]: https://www.lacework.com/datadog/
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: https://docs.datadoghq.com/fr/help
