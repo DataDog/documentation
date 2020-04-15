@@ -316,6 +316,8 @@ The `$*` wildcard matches without replacement.
 
 To upgrade the PHP tracer, [download the latest release][7] and follow the same steps as [installing the extension](#install-the-extension).
 
+_Note_: if you are using second level caching in opcache (i.e. you have set the parameter `opcache.file_cache`) then you want to remove the cache folder.
+
 ## Removing
 
 In order to remove the PHP tracer:
