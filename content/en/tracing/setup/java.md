@@ -199,7 +199,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.tags`                              | `DD_TAGS`                              | `null`                            | (Example: `layer:api,team:intake`) A list of default tags to be added to every span, profile, and JMX metric. 
 If DD_ENV or DD_VERSION is used, it will override any env or version tag defined in DD_TAGS.                                                                                                                                                       |
 
-| `dd.env`                              | `DD_ENV`                              | `none`                            | Your application environment (e.g. production, staging, etc.)                                                                                                                                                |
+| `dd.env`                              | `DD_ENV`                              | `none`                            | Your application environment (e.g. production, staging, etc.). Available for versions 0.48+.                                                                                                                                                |
 
 | `dd.version`                              | `DD_VERSION`                              | `null`                            | Your application version (e.g. 2.5, 202003181415, 1.3-alpha, etc.). Available for versions 0.48+.                                                                                                                                                       |
 
