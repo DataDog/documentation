@@ -2,7 +2,7 @@
   "index_name": "docsearch_docs_preview",
   "start_urls": [
     {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/",
+      "url": "https://docs-staging.com/zach/open-api(?P<localisation>.*?)/api/",
       "selectors_key": "api",
       "variables": {
         "localisation": [
@@ -17,7 +17,7 @@
       "page_rank": 0
     },
     {
-      "url": "https://docs.datadoghq.com/(?P<section>.*?)/faq/",
+      "url": "https://docs-staging.com/zach/open-api/(?P<section>.*?)/faq/",
       "selectors_key": "faq",
       "variables": {
         "section": [
@@ -40,7 +40,7 @@
       "page_rank": -100
     },
     {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/guide/",
+      "url": "https://docs-staging.com/zach/open-api(?P<localisation>.*?)/(?P<section>.*?)/guide/",
       "selectors_key": "guide",
       "variables": {
         "section": [
@@ -65,7 +65,7 @@
       "page_rank": 10
     },
     {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/getting_started/",
+      "url": "https://docs-staging.com/zach/open-api(?P<localisation>.*?)/getting_started/",
       "selectors_key": "getting_started",
       "variables": {
         "localisation": [
@@ -80,7 +80,7 @@
       "page_rank": 200
     },
     {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/integrations/",
+      "url": "https://docs-staging.com/zach/open-api(?P<localisation>.*?)/integrations/",
       "selectors_key": "integrations",
       "variables": {
         "localisation": [
@@ -95,7 +95,7 @@
       "page_rank": 90
     },
     {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/",
+      "url": "https://docs-staging.com/zach/open-api(?P<localisation>.*?)/(?P<section>.*?)/",
       "selectors_key": "docs",
       "variables": {
         "localisation": [
@@ -136,12 +136,12 @@
     "/guide/$",
     "\\.json$",
     "\\?",
-    "docs.datadoghq.com/integrations/$",
-    "docs.datadoghq.com/fr/integrations/$",
-    "docs.datadoghq.com/ja/integrations/$",
-    "docs.datadoghq.com/search/$",
-    "docs.datadoghq.com/fr/search/$",
-    "docs.datadoghq.com/ja/search/$",
+    "docs-staging.com/zach/open-api/integrations/$",
+    "docs-staging.com/zach/open-api/fr/integrations/$",
+    "docs-staging.com/zach/open-api/ja/integrations/$",
+    "docs-staging.com/zach/open-api/search/$",
+    "docs-staging.com/zach/open-api/fr/search/$",
+    "docs-staging.com/zach/open-api/ja/search/$",
     "/videos/$",
     "/agent/faq/agent-5-process-collection/$",
     "/agent/guide/agent-5-autodiscovery/$",
@@ -151,9 +151,9 @@
     "/integrations/faq/list-of-api-source-attribute-value/$",
     "/logs/faq/how-to-set-up-only-logs/$",
     "/tracing/guide/agent-5-tracing-setup/$",
-    "docs.datadoghq.com/fr/.*/faq/",
-    "docs.datadoghq.com/ja/.*/faq/",
-    "docs.datadoghq.com/resources/"
+    "docs-staging.com/zach/open-api/fr/.*/faq/",
+    "docs-staging.com/zach/open-api/ja/.*/faq/",
+    "docs-staging.com/zach/open-api/resources/"
   ],
   "selectors": {
     "getting_started": {
@@ -224,12 +224,14 @@
     },
     "api": {
       "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul > li > a.toc_open",
+        "selector": ".main-api > h1",
         "global": true,
         "default_value": "API"
       },
-      "lvl1": ".main-api h2",
-      "text": ".main-api p, h5[id*='rate-limit'] + ul > li",
+      "lvl1": ".main-api h2 a",
+      "lvl2": ".main h2",
+      "lvl3": ".main h3",
+      "text": ".main-api p, .main-api ul > li",
       "language": {
         "selector": "/html/@lang",
         "type": "xpath",
