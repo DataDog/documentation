@@ -1,310 +1,301 @@
 {
-  "index_name": "docsearch_docs_preview",
-  "start_urls": [
-    {
-      "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/",
-      "selectors_key": "api",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ]
+    "index_name": "docsearch_docs_preview",
+    "start_urls": [
+        {
+            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v1/(?P<section>.*?)",
+            "selectors_key": "v1",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"],
+                "section": [
+                    "aws-integration",
+                    "aws-logs-integration",
+                    "azure-integration",
+                    "dashboard-lists",
+                    "dashboards",
+                    "downtimes",
+                    "events",
+                    "gcp-integration",
+                    "hosts",
+                    "ip-ranges",
+                    "key-management",
+                    "keys",
+                    "logs",
+                    "logs-indexes",
+                    "logs-pipelines",
+                    "metrics",
+                    "monitors",
+                    "orgs",
+                    "pager-duty-integration",
+                    "pagerduty-integration",
+                    "screenboards",
+                    "service-checks",
+                    "service-level-objectives",
+                    "slack-integration",
+                    "slo",
+                    "snapshots",
+                    "synthetics",
+                    "tags",
+                    "timeboards",
+                    "tracing",
+                    "usage",
+                    "usage-metering",
+                    "users",
+                    "webhooks-integration"
+                ]
+            },
+            "tags": ["api"],
+            "page_rank": 0
+        },
+        {
+          "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v2/(?P<section>.*?)",
+          "selectors_key": "v2",
+          "variables": {
+              "localisation": ["", "/fr", "/ja"],
+              "section": [
+                  "dashboard-lists",
+                  "users"
+              ]
+          },
+          "tags": ["api"],
+          "page_rank": 0
       },
-      "tags": [
-        "api"
-      ],
-      "page_rank": 0
-    },
-    {
-      "url": "https://docs-staging.datadoghq.com/zach/open-api/(?P<section>.*?)/faq/",
-      "selectors_key": "faq",
-      "variables": {
-        "section": [
-          "agent",
-          "integrations",
-          "dashboards",
-          "monitors",
-          "tracing",
-          "logs",
-          "synthetics",
-          "real_user_monitoring",
-          "developers",
-          "account_management",
-          "synthetics"
-        ]
-      },
-      "tags": [
-        "faq"
-      ],
-      "page_rank": -100
-    },
-    {
-      "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/(?P<section>.*?)/guide/",
-      "selectors_key": "guide",
-      "variables": {
-        "section": [
-          "agent",
-          "dashboards",
-          "integrations",
-          "monitors",
-          "tracing",
-          "logs",
-          "synthetics",
-          "developers"
-        ],
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ]
-      },
-      "tags": [
-        "guide"
-      ],
-      "page_rank": 10
-    },
-    {
-      "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/getting_started/",
-      "selectors_key": "getting_started",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ]
-      },
-      "tags": [
-        "getting_started"
-      ],
-      "page_rank": 200
-    },
-    {
-      "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/integrations/",
-      "selectors_key": "integrations",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ]
-      },
-      "tags": [
-        "integrations"
-      ],
-      "page_rank": 90
-    },
-    {
-      "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/(?P<section>.*?)/",
-      "selectors_key": "docs",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ],
-        "section": [
-          "account_management",
-          "agent",
-          "developers",
-          "dashboards",
-          "infrastructure",
-          "metrics",
-          "events",
-          "notebooks",
-          "logs",
-          "monitors",
-          "security",
-          "security_monitoring",
-          "synthetics",
-          "real_user_monitoring",
-          "network_performance_monitoring",
-          "tagging",
-          "tracing",
-          "watchdog"
-        ]
-      },
-      "tags": [
-        "docs"
-      ],
-      "page_rank": 100
-    }
-  ],
-  "stop_urls": [
-    "/api/.+",
-    "/faq/$",
-    "/guide/$",
-    "\\.json$",
-    "\\?",
-    "docs-staging.datadoghq.com/zach/open-api/integrations/$",
-    "docs-staging.datadoghq.com/zach/open-api/fr/integrations/$",
-    "docs-staging.datadoghq.com/zach/open-api/ja/integrations/$",
-    "docs-staging.datadoghq.com/zach/open-api/search/$",
-    "docs-staging.datadoghq.com/zach/open-api/fr/search/$",
-    "docs-staging.datadoghq.com/zach/open-api/ja/search/$",
-    "/videos/$",
-    "/agent/faq/agent-5-process-collection/$",
-    "/agent/guide/agent-5-autodiscovery/$",
-    "/agent/guide/agent-5-kubernetes-basic-agent-usage/$",
-    "/agent/guide/dogstream/$",
-    "/integrations/faq/agent-5-amazon-ecs/$",
-    "/integrations/faq/list-of-api-source-attribute-value/$",
-    "/logs/faq/how-to-set-up-only-logs/$",
-    "/tracing/guide/agent-5-tracing-setup/$",
-    "docs-staging.datadoghq.com/zach/open-api/fr/.*/faq/",
-    "docs-staging.datadoghq.com/zach/open-api/ja/.*/faq/",
-    "docs-staging.datadoghq.com/zach/open-api/resources/"
-  ],
-  "selectors": {
-    "getting_started": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-        "global": true,
-        "default_value": "Getting Started"
-      },
-      "lvl1": ".main h1",
-      "lvl2": ".main h2",
-      "lvl3": ".main h3",
-      "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "integrations": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-        "global": true,
-        "default_value": "Integrations"
-      },
-      "lvl1": ".main h1",
-      "lvl2": ".main h2",
-      "lvl3": ".main h3",
-      "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "faq": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-        "global": true,
-        "default_value": "FAQ"
-      },
-      "lvl1": ".main h1",
-      "lvl2": ".main h2",
-      "text": ".main p, table tbody tr td, code-tabs table tbody tr td, pre code",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "guide": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-        "global": true,
-        "default_value": "Guide"
-      },
-      "lvl1": ".main h1",
-      "lvl2": ".main h2",
-      "lvl3": ".main h3",
-      "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, pre code",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "api": {
-      "lvl0": {
-        "selector": ".main-api > h1",
-        "global": true,
-        "default_value": "API"
-      },
-      "lvl1": ".main-api h2 a",
-      "lvl2": ".main h2",
-      "lvl3": ".main h3",
-      "text": ".main-api p, .main-api ul > li",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "docs": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-        "global": true,
-        "default_value": "Documentation"
-      },
-      "lvl1": ".main h1",
-      "lvl2": ".main h2",
-      "lvl3": ".main h3",
-      "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    }
-  },
-  "keep_tags": [
-    "code"
-  ],
-  "selectors_exclude": [
-    ".whatsnext",
-    "#en-apprendre-plus",
-    "#further-reading",
-    ".alert-info",
-    ".announcement_banner"
-  ],
-  "conversation_id": [
-    "620036890"
-  ],
-  "custom_settings": {
-    "separatorsToIndex": "_@.",
-    "attributeForDistinct": "url_without_anchor",
-    "attributesForFaceting": [
-      "language",
-      "tags"
+        {
+            "url": "https://docs-staging.datadoghq.com/zach/open-api/(?P<section>.*?)/faq/",
+            "selectors_key": "faq",
+            "variables": {
+                "section": [
+                    "agent",
+                    "integrations",
+                    "dashboards",
+                    "monitors",
+                    "tracing",
+                    "logs",
+                    "synthetics",
+                    "real_user_monitoring",
+                    "developers",
+                    "account_management",
+                    "synthetics"
+                ]
+            },
+            "tags": ["faq"],
+            "page_rank": -100
+        },
+        {
+            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/(?P<section>.*?)/guide/",
+            "selectors_key": "guide",
+            "variables": {
+                "section": [
+                    "agent",
+                    "dashboards",
+                    "integrations",
+                    "monitors",
+                    "tracing",
+                    "logs",
+                    "synthetics",
+                    "developers"
+                ],
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["guide"],
+            "page_rank": 10
+        },
+        {
+            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/getting_started/",
+            "selectors_key": "getting_started",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["getting_started"],
+            "page_rank": 200
+        },
+        {
+            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/integrations/",
+            "selectors_key": "integrations",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["integrations"],
+            "page_rank": 90
+        },
+        {
+            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/(?P<section>.*?)/",
+            "selectors_key": "docs",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"],
+                "section": [
+                    "account_management",
+                    "agent",
+                    "developers",
+                    "dashboards",
+                    "infrastructure",
+                    "metrics",
+                    "events",
+                    "notebooks",
+                    "logs",
+                    "monitors",
+                    "security",
+                    "security_monitoring",
+                    "synthetics",
+                    "real_user_monitoring",
+                    "network_performance_monitoring",
+                    "tagging",
+                    "tracing",
+                    "watchdog"
+                ]
+            },
+            "tags": ["docs"],
+            "page_rank": 100
+        }
     ],
-    "optionalWords": [
-      "the",
-      "without"
+    "stop_urls": [
+        "/api/.+",
+        "/faq/$",
+        "/guide/$",
+        "\\.json$",
+        "\\?",
+        "docs-staging.datadoghq.com/zach/open-api/integrations/$",
+        "docs-staging.datadoghq.com/zach/open-api/fr/integrations/$",
+        "docs-staging.datadoghq.com/zach/open-api/ja/integrations/$",
+        "docs-staging.datadoghq.com/zach/open-api/search/$",
+        "docs-staging.datadoghq.com/zach/open-api/fr/search/$",
+        "docs-staging.datadoghq.com/zach/open-api/ja/search/$",
+        "/videos/$",
+        "/agent/faq/agent-5-process-collection/$",
+        "/agent/guide/agent-5-autodiscovery/$",
+        "/agent/guide/agent-5-kubernetes-basic-agent-usage/$",
+        "/agent/guide/dogstream/$",
+        "/integrations/faq/agent-5-amazon-ecs/$",
+        "/integrations/faq/list-of-api-source-attribute-value/$",
+        "/logs/faq/how-to-set-up-only-logs/$",
+        "/tracing/guide/agent-5-tracing-setup/$",
+        "docs-staging.datadoghq.com/zach/open-api/fr/.*/faq/",
+        "docs-staging.datadoghq.com/zach/open-api/ja/.*/faq/",
+        "docs-staging.datadoghq.com/zach/open-api/resources/"
     ],
-    "synonyms": [
-      [
-        "agent",
-        "datadog agent"
-      ],
-      [
-        "microsoft azure",
-        "azure"
-      ],
-      [
-        "gcp",
-        "google cloud platform"
-      ],
-      [
-        "aws",
-        "amazon web service"
-      ],
-      [
-        "RUM",
-        "rum",
-        "real user monitoring"
-      ]
-    ]
-  },
-  "only_content_level": true,
-  "user_agent": "Googlebot",
-  "nb_hits": 94978
+    "selectors": {
+        "getting_started": {
+            "lvl0": {
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+                "global": true,
+                "default_value": "Getting Started"
+            },
+            "lvl1": ".main h1",
+            "lvl2": ".main h2",
+            "lvl3": ".main h3",
+            "lvl4": ".main h4",
+            "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "integrations": {
+            "lvl0": {
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+                "global": true,
+                "default_value": "Integrations"
+            },
+            "lvl1": ".main h1",
+            "lvl2": ".main h2",
+            "lvl3": ".main h3",
+            "lvl4": ".main h4",
+            "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "faq": {
+            "lvl0": {
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+                "global": true,
+                "default_value": "FAQ"
+            },
+            "lvl1": ".main h1",
+            "lvl2": ".main h2",
+            "text": ".main p, table tbody tr td, code-tabs table tbody tr td, pre code",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "guide": {
+            "lvl0": {
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+                "global": true,
+                "default_value": "Guide"
+            },
+            "lvl1": ".main h1",
+            "lvl2": ".main h2",
+            "lvl3": ".main h3",
+            "lvl4": ".main h4",
+            "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, pre code",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "api": {
+            "lvl0": {
+                "selector": ".main-api > h1",
+                "global": true,
+                "default_value": "API"
+            },
+            "lvl1": ".main-api h2 a",
+            "lvl2": ".main h2",
+            "lvl3": ".main h3",
+            "text": ".main-api p, .main-api ul > li",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "docs": {
+            "lvl0": {
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+                "global": true,
+                "default_value": "Documentation"
+            },
+            "lvl1": ".main h1",
+            "lvl2": ".main h2",
+            "lvl3": ".main h3",
+            "lvl4": ".main h4",
+            "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        }
+    },
+    "keep_tags": ["code"],
+    "selectors_exclude": [
+        ".whatsnext",
+        "#en-apprendre-plus",
+        "#further-reading",
+        ".alert-info",
+        ".announcement_banner"
+    ],
+    "conversation_id": ["620036890"],
+    "custom_settings": {
+        "separatorsToIndex": "_@.",
+        "attributeForDistinct": "url_without_anchor",
+        "attributesForFaceting": ["language", "tags"],
+        "optionalWords": ["the", "without"],
+        "synonyms": [
+            ["agent", "datadog agent"],
+            ["microsoft azure", "azure"],
+            ["gcp", "google cloud platform"],
+            ["aws", "amazon web service"],
+            ["RUM", "rum", "real user monitoring"]
+        ]
+    },
+    "only_content_level": true,
+    "user_agent": "Googlebot",
+    "nb_hits": 94978
 }
