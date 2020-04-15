@@ -7,7 +7,7 @@ external_redirect: /api/#create-a-webhook-for-webhooks-integration
 
 **SIGNATURE**:
 
-`POST api/v1/integration/webhooks/configuration/webhooks/`
+`POST api/v1/integration/webhooks/configuration/webhooks`
 
 **EXAMPLE REQUEST**:
 
