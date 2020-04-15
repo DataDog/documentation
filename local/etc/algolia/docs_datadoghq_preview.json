@@ -2,7 +2,7 @@
     "index_name": "docsearch_docs_preview",
     "start_urls": [
         {
-            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v1/(?P<section>.*?)",
+            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v1/(?P<section>.*?)/",
             "selectors_key": "v1",
             "variables": {
                 "localisation": ["", "/fr", "/ja"],
@@ -47,7 +47,7 @@
             "page_rank": 0
         },
         {
-          "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v2/(?P<section>.*?)",
+          "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v2/(?P<section>.*?)/",
           "selectors_key": "v2",
           "variables": {
               "localisation": ["", "/fr", "/ja"],
