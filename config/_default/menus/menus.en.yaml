@@ -2022,6 +2022,33 @@ api_v1:
   - name: Update user
     parent: Users
     url: update-user
+  - name: Webhooks Integration
+    url: /api/v1/webhooks-integration/
+    identifier: Webhooks Integration
+  - name: Create a Custom Variable for Webhooks Integration
+    parent: Webhooks Integration
+    url: create-a-custom-variable-for-webhooks-integration
+  - name: Delete a Custom Variable for Webhooks Integration
+    parent: Webhooks Integration
+    url: delete-a-custom-variable-for-webhooks-integration
+  - name: Get a Custom Variable for Webhooks Integration
+    parent: Webhooks Integration
+    url: get-a-custom-variable-for-webhooks-integration
+  - name: Update a Custom Variable for Webhooks Integration
+    parent: Webhooks Integration
+    url: update-a-custom-variable-for-webhooks-integration
+  - name: Create a Webhooks Integration
+    parent: Webhooks Integration
+    url: create-a-webhooks-integration
+  - name: Delete a Webhook for Webhooks Integration
+    parent: Webhooks Integration
+    url: delete-a-webhook-for-webhooks-integration
+  - name: Get a Webhook Integration
+    parent: Webhooks Integration
+    url: get-a-webhook-integration
+  - name: Update a Webhook for Webhooks Integration
+    parent: Webhooks Integration
+    url: update-a-webhook-for-webhooks-integration
 api_v2:
   - name: Dashboard Lists
     url: /api/v2/dashboard-lists/
