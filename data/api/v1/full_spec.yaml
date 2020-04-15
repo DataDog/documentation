@@ -6953,6 +6953,142 @@ components:
         user:
           $ref: '#/components/schemas/User'
       type: object
+    WebhooksIntegration:
+      description: Datadog-Webhooks integration.
+      properties:
+        custom_headers:
+          additionalProperties:
+            description: TODO.
+            type: string
+          description: 'If `null`, uses no header.
+
+            If given a JSON payload, these will be headers attached to your webhook.'
+          nullable: true
+          type: object
+        encode_as:
+          $ref: '#/components/schemas/WebhooksIntegrationEncoding'
+        name:
+          description: 'The name of the webhook. It corresponds with `<WEBHOOK_NAME>`.
+
+            Learn more on how to use it in
+
+            [monitor notifications](https://docs.datadoghq.com/monitors/notifications).'
+          example: WEBHOOK_NAME
+          type: string
+        payload:
+          description: 'If `null`, uses default payload.
+
+            If given a JSON payload, the webhook will return the payload
+
+            specified by the given payload.
+
+            [Using those variables](https://docs.datadoghq.com/integrations/webhooks/#usage).'
+          nullable: true
+          type: object
+        url:
+          description: URL of the webhook.
+          example: https://example.com/webhook
+          type: string
+      required:
+      - name
+      - url
+      type: object
+    WebhooksIntegrationCustomVariable:
+      description: Custom variable for Webhook integration.
+      properties:
+        is_secret:
+          description: 'Make custom variable is secret or not.
+
+            If the custom variable is secret, it returns `null` for
+
+            the `<CUSTOM_VARIABLE_VALUE>` in the response payload.'
+          type: boolean
+        name:
+          description: The name of the webhook. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+          example: CUSTOM_VARIABLE_NAME
+          type: string
+        value:
+          description: Value of the custom variable.
+          example: CUSTOM_VARIABLE_VALUE
+          nullable: true
+          type: string
+      required:
+      - name
+      - value
+      - is_secret
+      type: object
+    WebhooksIntegrationCustomVariableUpdateRequest:
+      description: 'Update request of a custom variable object.
+
+
+        *All properties are optional.*'
+      properties:
+        is_secret:
+          description: 'Make custom variable is secret or not.
+
+            If the custom variable is secret, it returns `null` for
+
+            the `<CUSTOM_VARIABLE_VALUE>` in the response payload.'
+          type: boolean
+        name:
+          description: The name of the webhook. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
+          example: CUSTOM_VARIABLE_NAME
+          type: string
+        value:
+          description: Value of the custom variable.
+          example: CUSTOM_VARIABLE_VALUE
+          nullable: true
+          type: string
+      type: object
+    WebhooksIntegrationEncoding:
+      default: json
+      description: Encoding type. Can be given either `json` or `form`.
+      enum:
+      - json
+      - form
+      type: string
+      x-enum-varnames:
+      - JSON
+      - FORM
+    WebhooksIntegrationUpdateRequest:
+      description: 'Update request of a Webhooks integration object.
+
+
+        *All properties are optional.*'
+      properties:
+        custom_headers:
+          additionalProperties:
+            description: TODO.
+            type: string
+          description: 'If `null`, uses no header.
+
+            If given a JSON payload, these will be headers attached to your webhook.'
+          type: object
+        encode_as:
+          $ref: '#/components/schemas/WebhooksIntegrationEncoding'
+        name:
+          description: 'The name of the webhook. It corresponds with `<WEBHOOK_NAME>`.
+
+            Learn more on how to use it in
+
+            [monitor notifications](https://docs.datadoghq.com/monitors/notifications).'
+          example: WEBHOOK_NAME
+          type: string
+        payload:
+          description: 'If `null`, uses default payload.
+
+            If given a JSON payload, the webhook will return the payload
+
+            specified by the given payload.
+
+            [Using those variables](https://docs.datadoghq.com/integrations/webhooks/#usage).'
+          nullable: true
+          type: object
+        url:
+          description: URL of the webhook.
+          example: https://example.com/webhook
+          type: string
+      type: object
     Widget:
       description: TODO.
       properties:
@@ -10180,6 +10316,305 @@ paths:
       summary: Add channels to Slack integration
       tags:
       - Slack Integration
+      x-codegen-request-body-name: body
+  /api/v1/integration/webhooks/configuration/custom-variables:
+    post:
+      description: Creates an endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
+      operationId: CreateWebhooksIntegrationCustomVariable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+        description: Define a Custom Variable.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Create a Custom Variable for Webhooks Integration
+      tags:
+      - Webhooks Integration
+      x-codegen-request-body-name: body
+  /api/v1/integration/webhooks/configuration/custom-variables/{custom_variable_name}:
+    delete:
+      description: Deletes the endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
+      operationId: DeleteWebhooksIntegrationCustomVariable
+      parameters:
+      - description: The name of the custom variable.
+        in: path
+        name: custom_variable_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Delete a Custom Variable for Webhooks Integration
+      tags:
+      - Webhooks Integration
+    get:
+      description: 'Shows the content of the custom variable with the name `<CUSTOM_VARIABLE_NAME>`.
+
+
+        If the custom variable is secret, returns `null` for the `<CUSTOM_VARIABLE_VALUE>`
+
+        in the response payload.'
+      operationId: GetWebhooksIntegrationCustomVariable
+      parameters:
+      - description: The name of the custom variable.
+        in: path
+        name: custom_variable_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Get a Custom Variable for Webhooks Integration
+      tags:
+      - Webhooks Integration
+    put:
+      description: Updates the endpoint with the name `<CUSTOM_VARIABLE_NAME>`.
+      operationId: UpdateWebhooksIntegrationCustomVariable
+      parameters:
+      - description: The name of the custom variable.
+        in: path
+        name: custom_variable_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhooksIntegrationCustomVariableUpdateRequest'
+        description: Update an existing custom variable.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Update a Custom Variable for Webhooks Integration
+      tags:
+      - Webhooks Integration
+      x-codegen-request-body-name: body
+  /api/v1/integration/webhooks/configuration/webhooks:
+    post:
+      description: Creates an endpoint with the name `<WEBHOOK_NAME>`.
+      operationId: CreateWebhooksIntegration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhooksIntegration'
+        description: Create Datadog-Webhooks integration.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhooksIntegration'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Create a Webhooks Integration
+      tags:
+      - Webhooks Integration
+      x-codegen-request-body-name: body
+  /api/v1/integration/webhooks/configuration/webhooks/{webhook_name}:
+    delete:
+      description: Deletes the endpoint with the name `<WEBHOOK NAME>`.
+      operationId: DeleteWebhooksIntegration
+      parameters:
+      - description: The name of the webhook.
+        in: path
+        name: webhook_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Delete a Webhook for Webhooks Integration
+      tags:
+      - Webhooks Integration
+    get:
+      description: Gets the content of the webhook with the name `<WEBHOOK_NAME>`.
+      operationId: GetWebhooksIntegration
+      parameters:
+      - description: The name of the webhook.
+        in: path
+        name: webhook_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhooksIntegration'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Get a Webhook Integration
+      tags:
+      - Webhooks Integration
+    put:
+      description: Updates the endpoint with the name `<WEBHOOK_NAME>`.
+      operationId: UpdateWebhooksIntegration
+      parameters:
+      - description: The name of the webhook.
+        in: path
+        name: webhook_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhooksIntegrationUpdateRequest'
+        description: Update an existing Datadog-Webhooks integration.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhooksIntegration'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Item Not Found
+      summary: Update a Webhook for Webhooks Integration
+      tags:
+      - Webhooks Integration
       x-codegen-request-body-name: body
   /api/v1/logs-queries/list:
     post:
@@ -13634,4 +14069,12 @@ tags:
 
     [1]: https://docs.datadoghq.com/account_management/team'
   name: Users
+- description: Configure your Datadog-Webhooks integration directly through the Datadog
+    API.
+  externalDocs:
+    description: 'For more information about the Datadog-Webhooks integration,
+
+      see the integration page.'
+    url: https://docs.datadoghq.com/integrations/webhooks
+  name: Webhooks Integration
 x-group-parameters: true
