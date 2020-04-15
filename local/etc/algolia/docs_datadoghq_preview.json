@@ -2,10 +2,46 @@
     "index_name": "docsearch_docs_preview",
     "start_urls": [
         {
-            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/",
+            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v1/(?P<section>.*?)/",
             "selectors_key": "api",
             "variables": {
-                "localisation": ["", "/fr", "/ja"]
+                "localisation": ["", "/fr", "/ja"],
+                "section": [
+                    "aws-integration",
+                    "aws-logs-integration",
+                    "azure-integration",
+                    "dashboard-lists",
+                    "dashboards",
+                    "downtimes",
+                    "events",
+                    "gcp-integration",
+                    "hosts",
+                    "ip-ranges",
+                    "key-management",
+                    "keys",
+                    "logs",
+                    "logs-indexes",
+                    "logs-pipelines",
+                    "metrics",
+                    "monitors",
+                    "orgs",
+                    "pager-duty-integration",
+                    "pagerduty-integration",
+                    "screenboards",
+                    "service-checks",
+                    "service-level-objectives",
+                    "slack-integration",
+                    "slo",
+                    "snapshots",
+                    "synthetics",
+                    "tags",
+                    "timeboards",
+                    "tracing",
+                    "usage",
+                    "usage-metering",
+                    "users",
+                    "webhooks-integration"
+                ]
             },
             "tags": ["api"],
             "page_rank": 0
