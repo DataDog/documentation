@@ -3,7 +3,6 @@
     "start_urls": [
         {
             "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v1/(?P<section>.*?)/",
-            "selectors_key": "v1",
             "variables": {
                 "localisation": ["", "/fr", "/ja"],
                 "section": [
@@ -48,7 +47,6 @@
         },
         {
           "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v2/(?P<section>.*?)/",
-          "selectors_key": "v2",
           "variables": {
               "localisation": ["", "/fr", "/ja"],
               "section": [
