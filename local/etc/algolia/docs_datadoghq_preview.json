@@ -2,61 +2,14 @@
     "index_name": "docsearch_docs_preview",
     "start_urls": [
         {
-            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v1/(?P<section>.*?)/",
+            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/",
+            "selectors_key": "api",
             "variables": {
-                "localisation": ["", "/fr", "/ja"],
-                "section": [
-                    "aws-integration",
-                    "aws-logs-integration",
-                    "azure-integration",
-                    "dashboard-lists",
-                    "dashboards",
-                    "downtimes",
-                    "events",
-                    "gcp-integration",
-                    "hosts",
-                    "ip-ranges",
-                    "key-management",
-                    "keys",
-                    "logs",
-                    "logs-indexes",
-                    "logs-pipelines",
-                    "metrics",
-                    "monitors",
-                    "orgs",
-                    "pager-duty-integration",
-                    "pagerduty-integration",
-                    "screenboards",
-                    "service-checks",
-                    "service-level-objectives",
-                    "slack-integration",
-                    "slo",
-                    "snapshots",
-                    "synthetics",
-                    "tags",
-                    "timeboards",
-                    "tracing",
-                    "usage",
-                    "usage-metering",
-                    "users",
-                    "webhooks-integration"
-                ]
+                "localisation": ["", "/fr", "/ja"]
             },
             "tags": ["api"],
             "page_rank": 0
         },
-        {
-          "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v2/(?P<section>.*?)/",
-          "variables": {
-              "localisation": ["", "/fr", "/ja"],
-              "section": [
-                  "dashboard-lists",
-                  "users"
-              ]
-          },
-          "tags": ["api"],
-          "page_rank": 0
-      },
         {
             "url": "https://docs-staging.datadoghq.com/zach/open-api/(?P<section>.*?)/faq/",
             "selectors_key": "faq",
