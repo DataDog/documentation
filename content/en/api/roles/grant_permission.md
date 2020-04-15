@@ -1,18 +1,18 @@
 ---
-title: Grant permission
+title: Assign permission to a role
 type: apicontent
 order: 37.08
-external_redirect: /api/#grant-permission
+external_redirect: /api/#assign-permissions-to-a-role
 ---
 
-## Grant permission
+## Assign permission to a role
 
-Adds a permission to a role.
+Assign a permission to a role.
 
 **PAYLOAD**:
 
 * `data["type"]="permissions"`
-* `data["id"]`: The permission ID to add to the role.
+* `data["id"]`: The permission ID to add to the role. Use the [Get permission endpoint](#get-permissions) to retrieve the full list of permission IDs available for your organization.
 * `data["scope"]`: *optional* - The scope to grant permission to with the following format: `"<SCOPE_NAME>": ["<SCOPE_VALUES>"]`
     Certain permissions can be granted within a limited scope. This can be done manually from the Datadog application in [the Pipelines Page][1], or programmatically via this API if the correct "scope" is added in the payload. The following permissions can be granted within a limited scope:
 
