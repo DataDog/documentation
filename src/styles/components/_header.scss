@@ -59,14 +59,13 @@ body > header {
         font-weight: 600;
         letter-spacing: 0.3px;
         border-radius: 5px;
-        border:1px solid transparent;
         padding:8.5px 8px 9.5px;
         padding-right:12px;
+
         &:hover,
         &.active {
           color: #333;
-          background-color: #fff;
-          border-color: #c8c8c8;
+          background-color: transparent;
         }
         &:lang(ja) {
           font-size: 16px;
@@ -128,21 +127,41 @@ body > header {
         margin:0;
         min-width: 160px;
         padding: 0;
-        border: 1px solid rgba(0,0,0,.15);
-        border-radius: 5px;
         background-color: #fff;
         border-top-left-radius: 0;
         top: 45px;
+        box-shadow: 0 4px 6px hsla(0,0%,78.4%,.5);
+        border: none;
+        border-top: 3px solid #632ca6;
+        border-radius: 0;
 
         &:lang(ja) {
           top: 43px;
+        }
+        // product menu
+        &.product-menu {
+          column-count: 2;
+          height: 300px;
+          column-fill: auto;
+        }
+        // solutions menu
+        &.solutions-menu {
+          width: 480px;
+          p {
+            padding: 8px 11px 8px;
+          }
+
+          &:lang(ja) {
+            width: 630px;
+          }
         }
         a {
           color: #000;
           padding: 8px 11px;
           font-size: 18px;
           letter-spacing: .4px;
-          border-radius: 0;
+          border-radius: 4px;
+
           &:lang(ja) {
             font-size: 16px;
           }
