@@ -9,6 +9,6 @@ external_redirect: /api/#update-a-restriction-query
 
 Updates a restriction query.
 
-## Payloads:
+**Payload**:
 
 `data["attributes"]["restriction_query"]`: The restriction query to be imposed

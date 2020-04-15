@@ -9,7 +9,7 @@ external_redirect: /api/#associate-a-role-with-a-restriction-query
 
 Applies a restriction query to a role.
 
-## Payloads:
+**PAYLOAD**:
 
 * `data["type"]="roles"`
 * `data["id"]`: The role id to apply the restriction query to

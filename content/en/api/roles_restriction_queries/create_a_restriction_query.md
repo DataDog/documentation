@@ -9,7 +9,7 @@ external_redirect: /api/#create-a-restriction-query
 
 Creates a restriction query.
 
-## Payloads:
+**PAYLOAD**:
 
 * `data["type"]="logs_restriction_queries"`
 * `data["attributes"]["restriction_query"]`: The restriction query to be imposed.

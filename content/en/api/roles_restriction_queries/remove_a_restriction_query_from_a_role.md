@@ -9,7 +9,7 @@ external_redirect: /api/#remove-a-restriction-query-from-a-role
 
 Removes a restriction query from a role.
 
-## Payloads:
+**PAYLOAD**:
 
 * `data["type"]="roles"`
 * `data["id"]`: The role id to remove the restriction query from
