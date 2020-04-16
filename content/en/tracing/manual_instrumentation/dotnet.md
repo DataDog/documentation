@@ -38,7 +38,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 
 ### Setting Errors
 
-To recognize and mark errors that occur in your code, you can utilize the SetException method that is available to spans. In addition to marking the span as error, this will add [span metadata related to the error][4] to provide insight into the exception.
+To recognize and mark errors that occur in your code, you can utilize the `Span.SetException(Exception)` method that is available to spans. In addition to marking the span as error, this will add [span metadata related to the error][4] to provide insight into the exception.
 
 ```csharp
 try
