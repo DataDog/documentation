@@ -1,5 +1,5 @@
 ---
-title: Security Detection Rules
+title: Threat Detection Rules
 kind: documentation
 further_reading:
 - link: "/security_monitoring/explorer"
