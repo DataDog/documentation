@@ -55,25 +55,25 @@ With the following definitions:
 
 - `trace.<SPAN_NAME>.duration.by_service`:
   - *Prerequisite:* This metric exists for any APM service.
-  - *Description:* Measures the total time spent actually processing for each service (i.e. it excludes time spent waiting on child processes).
+  - *Description:* Measure the total time spent actually processing for each service (i.e. it excludes time spent waiting on child processes).
   - *Metric type:* [GAUGE][5]
   - *Tags:* `env`, `service`, `resource`, `sublayer_service`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.duration.by_type`:
   - *Prerequisite:* This metric exists for any APM service.
-  - *Description:* Measures the total time spent actually processing for each [Service type][6].
+  - *Description:* Measure the total time spent actually processing for each [Service type][6].
   - *Metric type:* [GAUGE][5]
   - *Tags:* `env`, `service`, `resource`, `sublayer_type`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.duration.by_type.by_http_status`:
   - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
-  - *Description:* Measures the total time spent actually processing for each [Service type][6] and HTTP status.
+  - *Description:* Measure the total time spent actually processing for each [Service type][6] and HTTP status.
   - *Metric type:* [GAUGE][5]
   - *Tags:* `env`, `service`, `resource`, `sublayer_type`, `http.status_class`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.duration.by_service.by_http_status`:
   - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
-  - *Description:* Measures the total time spent actually processing for each [Service][7] and HTTP status.
+  - *Description:* Measure the total time spent actually processing for each [Service][7] and HTTP status.
   - *Metric type:* [GAUGE][5]
   - *Tags:* `env`, `service`, `resource`, `sublayer_service`, `http.status_class`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
