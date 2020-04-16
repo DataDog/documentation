@@ -24,7 +24,7 @@ Data aggregation needs to occur whether you have 1 or 1000 sources as long as yo
 However what you can do is control how this aggregation is performed by using the [rollup function][3]:
 
 * .rollup(max)/ .rollup(min) have each point be the local MAXIMUM/MINIMUM of the X min of data it represents
-* .rollup(avg) is the default value: each point of your graph be the AVERAGE value of the X min of data it represents
+* .rollup(avg) is the default value: each point of your graph is the AVERAGE value of the X min of data it represents
 * .rollup(sum) compute the SUM of all values submitted during the X min period
 * .rollup(avg,60) defines that graph points should be 1 min averages, etc.
 

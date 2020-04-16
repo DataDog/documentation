@@ -1,13 +1,15 @@
 ---
-title: Get monthly custom reporting available files
+title: Get monthly usage attribution available files
 type: apicontent
 order: 35.952
-external_redirect: /api/#get-monthly-custom-reporting-available-files
+external_redirect: /api/#get-monthly-usage-attribution-available-files 
+aliases: 
+ - /api/#get-monthly-custom-reporting-available-files
 ---
 
-## Get monthly custom reporting available files
+## Get monthly usage attribution available files
 
-Returns the list of available monthly custom reports.
+Returns the list of available monthly usage attribution reports.
 
 **ARGUMENTS**:
 

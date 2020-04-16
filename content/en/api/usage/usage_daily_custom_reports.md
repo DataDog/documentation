@@ -1,13 +1,15 @@
 ---
-title: Get daily custom reporting available files
+title: Get daily usage attribution available files
 type: apicontent
 order: 35.95
-external_redirect: /api/#get-daily-custom-reporting-available-files
+external_redirect: /api/#get-daily-usage-attribution-available-files
+aliases:
+ - /api/#get-daily-custom-reporting-available-files
 ---
 
-## Get daily custom reporting available files
+## Get daily usage attribution available files
 
-Returns the list of availalbe daily custom reports.
+Returns the list of availalbe daily usage attribution files.
 
 **ARGUMENTS**:
 

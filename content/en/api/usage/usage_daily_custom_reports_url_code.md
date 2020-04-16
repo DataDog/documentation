@@ -1,8 +1,10 @@
 ---
-title: Get daily custom reporting file URL
+title: Get daily usage attribution file URL
 type: apicode
 order: 35.951
-external_redirect: /api/#get-daily-custom-reporting-file-url
+external_redirect: /api/#get-daily-usage-attribution-file-url
+aliases:
+ - /api/#get-daily-custom-reporting-file-url
 ---
 
 **SIGNATURE**:
