@@ -47,7 +47,11 @@
     ],
     "selectors": {
         "api_v1": {
-            "lvl0": "API V1",
+            "lvl0": {
+                "selector": "",
+                "global": true,
+                "default_value": "API V1"
+              },
             "lvl1": ".main-api > h1",
             "lvl2": ".main-api h2 a",
             "lvl3": ".main-api h3",
@@ -59,7 +63,11 @@
             }
         },
         "api_v2": {
-            "lvl0": "API V2",
+            "lvl0": {
+                "selector": "",
+                "global": true,
+                "default_value": "API V2"
+              },
             "lvl1": ".main-api > h1",
             "lvl2": ".main-api h2 a",
             "lvl3": ".main-api h3",
