@@ -126,7 +126,7 @@ Le check Go-metro n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
-[1]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[1]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations
 [2]: https://github.com/DataDog/go-metro
 [3]: https://github.com/DataDog/integrations-core/blob/master/go-metro/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information

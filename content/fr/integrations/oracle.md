@@ -261,7 +261,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [5]: https://www.oracle.com/technetwork/database/features/instant-client/index.htm
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
+[8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
 [11]: https://docs.datadoghq.com/fr/help
