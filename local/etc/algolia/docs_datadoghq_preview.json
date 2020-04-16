@@ -7,7 +7,7 @@
             "variables": {
                 "localisation": ["", "/fr", "/ja"]
             },
-            "tags": ["api"],
+            "tags": ["api_v1"],
             "page_rank": 0
         },
         {
@@ -16,95 +16,8 @@
             "variables": {
                 "localisation": ["", "/fr", "/ja"]
             },
-            "tags": ["api"],
+            "tags": ["api_v2"],
             "page_rank": 5
-        },
-        {
-            "url": "https://docs-staging.datadoghq.com/zach/open-api/(?P<section>.*?)/faq/",
-            "selectors_key": "faq",
-            "variables": {
-                "section": [
-                    "agent",
-                    "integrations",
-                    "dashboards",
-                    "monitors",
-                    "tracing",
-                    "logs",
-                    "synthetics",
-                    "real_user_monitoring",
-                    "developers",
-                    "account_management",
-                    "synthetics"
-                ]
-            },
-            "tags": ["faq"],
-            "page_rank": -100
-        },
-        {
-            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/(?P<section>.*?)/guide/",
-            "selectors_key": "guide",
-            "variables": {
-                "section": [
-                    "agent",
-                    "dashboards",
-                    "integrations",
-                    "monitors",
-                    "tracing",
-                    "logs",
-                    "synthetics",
-                    "developers"
-                ],
-                "localisation": ["", "/fr", "/ja"]
-            },
-            "tags": ["guide"],
-            "page_rank": 10
-        },
-        {
-            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/getting_started/",
-            "selectors_key": "getting_started",
-            "variables": {
-                "localisation": ["", "/fr", "/ja"]
-            },
-            "tags": ["getting_started"],
-            "page_rank": 200
-        },
-        {
-            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/integrations/",
-            "selectors_key": "integrations",
-            "variables": {
-                "localisation": ["", "/fr", "/ja"]
-            },
-            "tags": ["integrations"],
-            "page_rank": 90
-        },
-        {
-            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/(?P<section>.*?)/",
-            "selectors_key": "docs",
-            "variables": {
-                "localisation": ["", "/fr", "/ja"],
-                "section": [
-                    "account_management",
-                    "agent",
-                    "developers",
-                    "dashboards",
-                    "infrastructure",
-                    "metrics",
-                    "events",
-                    "notebooks",
-                    "logs",
-                    "monitors",
-                    "security",
-                    "security_monitoring",
-                    "synthetics",
-                    "real_user_monitoring",
-                    "network_performance_monitoring",
-                    "tagging",
-                    "tracing",
-                    "watchdog"
-                ]
-            },
-            "tags": ["docs"],
-            "page_rank": 100
         }
     ],
     "stop_urls": [
@@ -133,72 +46,6 @@
         "docs-staging.datadoghq.com/zach/open-api/resources/"
     ],
     "selectors": {
-        "getting_started": {
-            "lvl0": {
-                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-                "global": true,
-                "default_value": "Getting Started"
-            },
-            "lvl1": ".main h1",
-            "lvl2": ".main h2",
-            "lvl3": ".main h3",
-            "lvl4": ".main h4",
-            "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
-            "language": {
-                "selector": "/html/@lang",
-                "type": "xpath",
-                "global": true
-            }
-        },
-        "integrations": {
-            "lvl0": {
-                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-                "global": true,
-                "default_value": "Integrations"
-            },
-            "lvl1": ".main h1",
-            "lvl2": ".main h2",
-            "lvl3": ".main h3",
-            "lvl4": ".main h4",
-            "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
-            "language": {
-                "selector": "/html/@lang",
-                "type": "xpath",
-                "global": true
-            }
-        },
-        "faq": {
-            "lvl0": {
-                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-                "global": true,
-                "default_value": "FAQ"
-            },
-            "lvl1": ".main h1",
-            "lvl2": ".main h2",
-            "text": ".main p, table tbody tr td, code-tabs table tbody tr td, pre code",
-            "language": {
-                "selector": "/html/@lang",
-                "type": "xpath",
-                "global": true
-            }
-        },
-        "guide": {
-            "lvl0": {
-                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-                "global": true,
-                "default_value": "Guide"
-            },
-            "lvl1": ".main h1",
-            "lvl2": ".main h2",
-            "lvl3": ".main h3",
-            "lvl4": ".main h4",
-            "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, pre code",
-            "language": {
-                "selector": "/html/@lang",
-                "type": "xpath",
-                "global": true
-            }
-        },
         "api_v1": {
             "lvl0": "API V1",
             "lvl1": ".main-api > h1",
@@ -217,23 +64,6 @@
             "lvl2": ".main-api h2 a",
             "lvl3": ".main-api h3",
             "text": ".main-api p, .main-api ul > li",
-            "language": {
-                "selector": "/html/@lang",
-                "type": "xpath",
-                "global": true
-            }
-        },
-        "docs": {
-            "lvl0": {
-                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-                "global": true,
-                "default_value": "Documentation"
-            },
-            "lvl1": ".main h1",
-            "lvl2": ".main h2",
-            "lvl3": ".main h3",
-            "lvl4": ".main h4",
-            "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
             "language": {
                 "selector": "/html/@lang",
                 "type": "xpath",
