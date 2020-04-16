@@ -76,6 +76,10 @@ For a more advanced setup, use the command and see `Learn more about Private Loc
 docker run --rm datadog/synthetics-private-location-worker --help and check
 ```
 
+<div class="alert alert-warning">
+Important Note: If you are using private locations to monitor endpoints exposed on <a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml">special-purpose IP addresses</a> (e.g. 10.0.0.0/8, 192.0.0.0/24, etc.), you will need to whitelist them. <a href="https://docs.datadoghq.com/synthetics/private_locations/?tab=docker#special-purpose-ipv4-whitelisting">More information in our detailed Private Location docs here.</a>
+</div>
+
 {{< whatsnext desc="After you set up your private location:">}}
 {{< nextlink href="/getting_started/synthetics/api_test" tag="Documentation" >}}Create your first API test{{< /nextlink >}}
 {{< nextlink href="/synthetics/private_locations" tag="Documentation" >}}Learn more about Private Locations{{< /nextlink >}}
