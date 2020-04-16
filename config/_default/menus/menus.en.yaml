@@ -1147,7 +1147,7 @@ main:
     weight: 3
 
   - name: "Default Detection Rules"
-    url: "security_monitoring/rules/"
+    url: "security_monitoring/default_rules/"
     parent: "security_monitoring"
     identifier: "security_monitoring_default_detection_rules"
     weight: 4
