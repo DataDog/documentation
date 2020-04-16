@@ -39,6 +39,10 @@
   font-weight: 700;
   font-size: 18px;
   transform: rotate(90deg);
+  // Point arrow inwards when collapsed
+  .rule-list:not(.active) & {
+    transform: rotate(180deg);
+  }
 }
 
 .rule-specification {
