@@ -2,42 +2,22 @@
     "index_name": "docsearch_docs_preview",
     "start_urls": [
         {
-            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v1/(?P<section>.*?)/",
-            "selectors_key": "api",
+            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v1/",
+            "selectors_key": "api_v1",
             "variables": {
-                "localisation": ["", "/fr", "/ja"],
-                "section": [
-                    "aws-integration",
-                    "aws-logs-integration",
-                    "azure-integration",
-                    "dashboard-lists",
-                    "dashboards",
-                    "downtimes",
-                    "events",
-                    "gcp-integration",
-                    "hosts",
-                    "ip-ranges",
-                    "key-management",
-                    "logs",
-                    "logs-indexes",
-                    "logs-pipelines",
-                    "metrics",
-                    "monitors",
-                    "pagerduty-integration",
-                    "service-checks",
-                    "service-level-objectives",
-                    "slack-integration",
-                    "snapshots",
-                    "synthetics",
-                    "tags",
-                    "tracing",
-                    "usage-metering",
-                    "users",
-                    "webhooks-integration"
-                ]
+                "localisation": ["", "/fr", "/ja"]
             },
             "tags": ["api"],
             "page_rank": 0
+        },
+        {
+            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v2/",
+            "selectors_key": "api_v2",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["api"],
+            "page_rank": 5
         },
         {
             "url": "https://docs-staging.datadoghq.com/zach/open-api/(?P<section>.*?)/faq/",
@@ -129,6 +109,7 @@
     ],
     "stop_urls": [
         "/faq/$",
+        "/api/$",
         "/guide/$",
         "\\.json$",
         "\\?",
@@ -218,14 +199,22 @@
                 "global": true
             }
         },
-        "api": {
-            "lvl0": {
-                "selector": ".main-api > h1",
-                "global": true,
-                "default_value": "API"
-            },
-            "lvl1": ".main-api h2 a",
-            "lvl2": ".main-api h2",
+        "api_v1": {
+            "lvl0": "API V1",
+            "lvl1": ".main-api > h1",
+            "lvl2": ".main-api h2 a",
+            "lvl3": ".main-api h3",
+            "text": ".main-api p, .main-api ul > li",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "api_v2": {
+            "lvl0": "API V2",
+            "lvl1": ".main-api > h1",
+            "lvl2": ".main-api h2 a",
             "lvl3": ".main-api h3",
             "text": ".main-api p, .main-api ul > li",
             "language": {
