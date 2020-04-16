@@ -60,10 +60,16 @@ function toggleCodeBlocks(activeLang) {
 $('.js-expand-all').click(function () {
     $(this).toggleClass('expanded');
     const schemaTable = $(this).closest('.schema-table');
-    schemaTable.find('.isNested').toggleClass('d-none');
-    schemaTable.find('.toggle-arrow').toggleClass('expanded');
-    if ($(this).hasClass('expanded')) $(this).text('Collapse All');
-    else $(this).text('Expand All');
+    
+    if ($(this).hasClass('expanded')) {
+        $(this).text('Collapse All');
+        schemaTable.find('.isNested').removeClass('d-none');
+        schemaTable.find('.toggle-arrow').addClass('expanded');
+    } else {
+        $(this).text('Expand All');
+        schemaTable.find('.isNested').addClass('d-none');
+        schemaTable.find('.toggle-arrow').removeClass('expanded');
+    }
 });
 
 $('.js-model-link').click(function () {

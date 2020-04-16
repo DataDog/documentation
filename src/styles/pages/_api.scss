@@ -8,6 +8,11 @@ $ddpurple: #632ca6;
 .main-api {
 
     margin-bottom: 160px;
+    padding-left: 15px;
+
+    @media (min-width: 991px) {
+        padding-left: 29px;
+    }
 
     h2 {
         margin-top: -110px;
@@ -16,7 +21,10 @@ $ddpurple: #632ca6;
         background-clip: content-box;
         margin-right: 0;
         @media (min-width: 992px) {
-            margin-right: -70%;
+            margin-right: -180px;
+        }
+        @media (min-width: 1200px) {
+            margin-right: -220px;
         }
         a {
             pointer-events: initial;
@@ -109,16 +117,13 @@ $ddpurple: #632ca6;
         margin: 0 0 30px 0;
         background-color: #fdfcff;
         position: relative;
+        border-left: 0.5px solid #ebebeb;
 
         .table-header {
             background-color: #f3edff;
             text-transform: uppercase;
-            .field-column {
-                padding-left: 20px;
-            }
-            .field-column,
-            .type-column,
-            .description-column {
+
+            .column {
                 border: none;
             }
         }
@@ -130,18 +135,8 @@ $ddpurple: #632ca6;
             right: 0;
         }
 
-        .field-column,
-        .type-column,
-        .description-column {
+        .column {
             border-right: 0.5px solid #ebebeb;
-        }
-        .field-column {
-            padding-left: 20px;
-            border-left: 0.5px solid #ebebeb;
-        }
-
-        .type-column,
-        .description-column {
             padding: 0 15px 0 15px;
             @media (min-width: 992px) {
                 padding: 0 15px 0 30px;
@@ -153,10 +148,10 @@ $ddpurple: #632ca6;
             .toggle-arrow {
                 font-size: 18px;
                 position: absolute;
-                left: -12px;
+                left: -20px;
                 &.expanded {
                     transform: rotate(90deg);
-                    left: -10px;
+                    left: -18px;
                     top: 2px;
                 }
             }

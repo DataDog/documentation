@@ -172,7 +172,7 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
       field = (key || '');
     }
   return `
-    <div class="col-4 field-column">
+    <div class="col-4 column">
       <p class="key">${toggleMarkup}${field}${requiredMarkup}</p>
     </div>
   `;
@@ -197,10 +197,10 @@ const typeColumn = (key, value, readOnlyMarkup) => {
       typeVal = (value.format || value.type || '');
     }
   if(value.type === 'array') {
-    return `<div class="col-2 type-column"><p>[${value.items.type || ''}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p>[${value.items.type || ''}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
-    return `<div class="col-2 type-column"><p>${typeVal}${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p>${typeVal}${readOnlyMarkup}</p></div>`;
   }
 };
 
@@ -212,7 +212,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
  */
 const descColumn = (value) => {
   const desc = (value.description && (typeof(value.description) !== "object")) ? value.description || '' : '';
-  return `<div class="col-6 description-column">${marked(desc) ? marked(desc) : ""}</div>`;
+  return `<div class="col-6 column">${marked(desc) ? marked(desc) : ""}</div>`;
 };
 
 
@@ -289,15 +289,15 @@ const rowRecursive = (data, isNested, requiredFields=[], level = 0, parentKey = 
 const schemaTable = (data) => `
   <div class=" schema-table row">
     <p class="expand-all js-expand-all text-primary">Expand All</p>
-    <div class="col-12 column">
+    <div class="col-12">
       <div class="row table-header">
-        <div class="col-4 field-column">
+        <div class="col-4 column">
           <p class="font-semibold">Field</p>
         </div>
-        <div class="col-2 type-column">
+        <div class="col-2 column">
           <p class="font-semibold">Type</p>
         </div>
-        <div class="col-6 description-column">
+        <div class="col-6 column">
           <p class="font-semibold">Description</p>
         </div>
       </div>

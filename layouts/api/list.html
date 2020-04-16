@@ -35,20 +35,22 @@
             {{ $tagObject := $.Scratch.Get "tagObject"  }}
 
             <h1>{{ $v.name }}</h1>
-            
-                <!-- If endpoint is deprecated -->
-            {{ if eq (index $v "x-deprecated") true}}
 
-                <div class="alert alert-danger">
-                    {{$v.description | markdownify}}
-                    {{$v.externalDocs.description}} <a href="{{$v.externalDocs.url}}">{{$v.externalDocs.url}}</a>
+            <div class="row">
+                <div class="col-12 col-lg-9">
+
+                    <!-- If endpoint is deprecated -->
+                    {{ if eq (index $v "x-deprecated") true}}
+                        <div class="alert alert-danger">
+                            {{$v.description | markdownify}}
+                            {{$v.externalDocs.description}} <a href="{{$v.externalDocs.url}}">{{$v.externalDocs.url}}</a>
+                        </div>
+                    {{ else }}
+                        <p>{{ $v.description | markdownify}}</p>
+                    {{ end }}
+
                 </div>
-
-            {{ else }}
-
-                <p>{{ $v.description | markdownify}}</p>
-
-            {{ end }}
+            </div>
             
             {{/* sort by action summary */}}
             {{ range sort $tagObject ".action.summary" "asc"  }}
@@ -64,12 +66,41 @@
                         <h3 class="mt-2">Overview</h3>
                         <p>{{.action.description | markdownify }}</p>
                         {{ if .action.parameters }}
-                            <h3>Arguments</h3>
-                            <ul class="list-unstyled">
-                                {{ range .action.parameters }}
-                                    <li><code>{{ .name }}</code>[<em>{{ cond (eq .required false) "optional" "required" }}</em>]&nbsp;{{ .description | markdownify }}</li>
-                                {{ end }}
-                            </ul>
+                            <h3 class="mb-2">Arguments</h3>
+                            <div class=" schema-table row">
+                                <div class="col-12">
+                                  <div class="row table-header">
+                                    <div class="col-4 column">
+                                      <p class="font-semibold">Name</p>
+                                    </div>
+                                    <div class="col-2 column">
+                                      <p class="font-semibold">Type</p>
+                                    </div>
+                                    <div class="col-6 column">
+                                      <p class="font-semibold">Description</p>
+                                    </div>
+                                  </div>
+                                  {{ range .action.parameters }}
+                                        <div class="row ">
+                                            <div class="col-12 first-column">
+                                            <div class="row first-row ">
+                                                <div class="col-4 column">
+                                                    <p>
+                                                        <code>{{ .name }}</code>[<em>{{ cond (eq .required false) "optional" "required" }}</em>]&nbsp; ({{.in}})
+                                                    </p>
+                                                </div>
+                                                <div class="col-2 column">
+                                                    <p>{{ .schema.type }}</p>
+                                                </div>
+                                                <div class="col-6 column">
+                                                    <p>{{ .description }}</p>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                  {{ end }}
+                                </div>  
+                            </div>
                         {{ end }}
 
                         {{ if .action.requestBody }}
