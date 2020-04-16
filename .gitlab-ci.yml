@@ -115,7 +115,7 @@ build_live:
       content/en/developers/integrations,
       content/en/developers/amazon_cloudformation.md,
       content/en/integrations,
-      content/en/logs/log_collection/andoid.md,
+      content/en/logs/log_collection/android.md,
       content/en/logs/log_collection/ios.md,
       content/en/tracing/setup/android.md,
       content/en/tracing/setup/ruby.md
