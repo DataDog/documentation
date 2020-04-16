@@ -25,7 +25,10 @@ aliases:
 
 The [trace metrics][1] namespace is `trace.<SPAN_NAME>.<METRICS_suffix>{<TAGS>}`. Tracing application metrics are collected after [enabling trace collection][2] and [instrumenting your application][3]. These metrics are available for dashboards and monitors.
 
-Trace metric names are formatted as `trace.<SPAN_NAME>.<METRIC_SUFFIX>{<TAGS>}` or `trace.<SPAN_NAME>.<2ND_PRIM_TAG>{<TAGS>}`.
+Trace metric names are formatted as:
+
+- `trace.<SPAN_NAME>.<METRIC_SUFFIX>{<TAGS>}`
+- `trace.<SPAN_NAME>.<METRIC_SUFFIX>.<2ND_PRIM_TAG>_service{<TAGS>}`
 
 | Parameter               | Description                                                                                                                                                                                                        |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
