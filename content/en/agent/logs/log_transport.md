@@ -28,7 +28,7 @@ When the Agent starts, if log collection is enabled, it runs a HTTPS connectivit
 
 This connectivity test mechanism is only running at Agent startup and only test HTTPS. If the Agent has no connectivity for both TCP and HTTP when the agent start, then the Agent will uses TCP transport when the connectivity will be back and this won't change until its next restart.
 
-To check which transport is used by the Agent, run the [Agent statuts command][1].
+To check which transport is used by the Agent, run the [Agent status command][1].
 
 {{< img src="agent/logs/agent-status.png" alt="Agent status"  style="width:70%;">}}
 
