@@ -6,7 +6,7 @@ app_key="<DATADOG_APPLICATION_KEY>"
 curl -v -X PUT \
 -H "DD-API-KEY: ${api_key}" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
-"https://api.datadoghq.com/api/v1/webhooks/configuration/webhooks/<CUSTOM_VARIABLE_NAME>" \
+"https://api.datadoghq.com/api/v1/integration/webhooks/configuration/custom-variables/<CUSTOM_VARIABLE_NAME>" \
 -d '{
     "value": "<NEW_CUSTOM_VARIABLE_VALUE>",
 }'
