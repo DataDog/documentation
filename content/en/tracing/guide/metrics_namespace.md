@@ -81,28 +81,28 @@ Trace metric names are formatted as `trace.<SPAN_NAME>.<METRIC_SUFFIX>{<TAGS>}` 
   - *Description:* Measure the total time spent processing by resource, service, and [2nd primary tag][5].
   - *Metric type:* [GAUGE][4]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
-  - *Tags:* `env`, `service`, `resource`, all Datadog Agent tags, and [the second primary tag][5].
+  - *Tags:* `env`, `service`, `resource`, and [the second primary tag][5].
 
 - `trace.<SPAN_NAME>.duration.by.resource_service.<PERCENTILE_AGGREGATION>`:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Measure the total time spent processing for each resource and service combination.
   - *Metric type:* [GAUGE][4]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
-  - *Tags:* `env`, `service`, `resource`, all Datadog Agent tags, and [the second primary tag][5].
+  - *Tags:* `env`, `service`, and `resource`.
 
 - `trace.<SPAN_NAME>.duration.by.<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Measure the total time spent processing for each [2nd primary tag][5] and service combination.
   - *Metric type:* [GAUGE][4]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
-  - *Tags:* `env`, `service`, all Datadog Agent tags, and [the second primary tag][5].
+  - *Tags:* `env`, `service`, and [the second primary tag][5].
 
 - `trace.<SPAN_NAME>.duration.by.service.<PERCENTILE_AGGREGATION>`
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Represents the duration for an individual span. It's used to track latency and answer questions like, "what's the median wait time a user experienced?" or "how long do the slowest 1% of users have to wait?".
   - *Metric type:* [GAUGE][4]
   - *Percentile Aggregations:* `100p`, `50p`, `75p`, `90p`, `95p`, `99p`
-  - *Tags:* `env`, `service`, all Datadog Agent tags, and [the second primary tag][5].
+  - *Tags:* `env` and `service`.
 
 ### Errors
 
@@ -152,25 +152,25 @@ Trace metric names are formatted as `trace.<SPAN_NAME>.<METRIC_SUFFIX>{<TAGS>}` 
   - *Prerequisite:* This metric exists for any HTTP/WEB APM service.
   - *Description:* Represent the [Apdex][9] score for all combination of resources, [2nd primary tag][5]s and services.
   - *Metric type:* [GAUGE][4]
-  - *Tags:* `env`, `service`, `resource`, all Datadog Agent tags, and [the second primary tag][5].
+  - *Tags:* `env`, `service`, `resource`, and [the second primary tag][5].
 
 - `trace.<SPAN_NAME>.apdex.by.resource_service`:
   - *Prerequisite:* This metric exists for any HTTP/WEB APM service.
   - *Description:* Mesure the [Apdex][9] score for each combination of resources and web services.
   - *Metric type:* [GAUGE][4]
-  - *Tags:* `env`, `service`, `resource`, all Datadog Agent tags, and [the second primary tag][5].
+  - *Tags:* `env`, `service`, and `resource`
 
 - `trace.<SPAN_NAME>.apdex.by.<2ND_PRIM_TAG>_service`:
   - *Prerequisite:* This metric exists for any HTTP/WEB APM service.
   - *Description:* Mesure the [Apdex][9] score for each combination of [2nd primary tag][5] and web services.
   - *Metric type:* [GAUGE][4]
-  - *Tags:* `env`, `service`, all Datadog Agent tags, and [the second primary tag][5].
+  - *Tags:* `env`, `service`, and [the second primary tag][5].
 
 - `trace.<SPAN_NAME>.apdex.by.service`:
   - *Prerequisite:* This metric exists for any HTTP/WEB APM service.
   - *Description:* Mesure the [Apdex][9] score for each web services.
   - *Metric type:* [GAUGE][4]
-  - *Tags:* `env`, `service`, all Datadog Agent tags, and [the second primary tag][5].
+  - *Tags:* `env` and `service`.
 
 ## Further Reading
 
