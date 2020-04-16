@@ -114,7 +114,7 @@ Here are the filter and group by textboxes on the Live Processes page:
 {{< tabs >}}
 {{% tab "Manage Monitors" %}}
 
-To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example `tag:service:coffee-house`. You can also filter monitors that do not have a tag, for example `tag:-service:coffee-house`. **Note**: monitor tags are different and separate from metric tags.
+To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example `tag:-service:coffee-house`. **Note**: Monitor tags are different and separate from metric tags.
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Manage Monitors Tags"  style="width:80%;">}}
 
