@@ -55,6 +55,7 @@
         "json2csv": "^4.5.2",
         "lazypipe": "1.0.2",
         "lazysizes": "4.0.1",
+        "link-checker": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/link-checker-v1.0.56.tgz",
         "lodash": "4.17.15",
         "merge-stream": "2.0.0",
         "minimist": "^1.2.5",
@@ -65,6 +66,7 @@
         "popper.js": "1.16.1",
         "stickyfilljs": "2.1.0",
         "tiny-async-pool": "^1.0.4",
+        "translate": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/translate-v1.0.37.tgz",
         "traverse": "0.6.6",
         "webpack": "^4.42.1",
         "yaml-lint": "^1.2.4"
