@@ -11,6 +11,7 @@ aliases:
     - /agent/kubernetes/event_collection
     - /agent/kubernetes/daemonset_setup
     - /agent/kubernetes/helm
+    - /agent/autodiscovery/
 further_reading:
     - link: 'agent/kubernetes/log'
       tag: 'Documentation'
