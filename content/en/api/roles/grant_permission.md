@@ -9,7 +9,7 @@ external_redirect: /api/#assign-permissions-to-a-role
 
 Assigns a permission to a role.
 
-To use assign "scoped" permissions for Logs, use the Roles V1 API. For an example see here: [Roles v1 API][1].
+To assign "scoped" permissions for logs, use the [Roles v1 API][1].
 
 **PAYLOAD**:
 
