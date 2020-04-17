@@ -38,7 +38,7 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 #### Rehydrate by Query
 
-By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges. You can rehydrate up to 300 million log events per historical view you create.
+By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges. You can rehydrate up to 1 billion log events per historical view you create.
 
 ### View historical view content
 
