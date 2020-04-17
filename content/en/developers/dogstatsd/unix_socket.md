@@ -103,6 +103,14 @@ To enable the Agent DogStatsD UDS:
 {{% /tab %}}
 {{< /tabs >}}
 
+### Test with netcat
+
+To send metrics from shell scripts, or to test that DogStatsD is listening on the socket, you can use `netcat`. Most implementations of `netcat` (ex. `netcat-openbsd` on Debian or `nmap-ncat` on RHEL) support Unix Socket traffic via the `-U` flag:
+
+```shell
+echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
+```
+
 ### Using origin detection for container tagging
 
 Origin detection allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDS are tagged by the same container tags as Autodiscovery metrics.
@@ -203,14 +211,6 @@ The following official DogStatsD client libraries natively support UDS traffic. 
 | Ruby     | [DataDog/dogstatsd-ruby][6]          |
 | PHP      | [DataDog/php-datadogstatsd][7]       |
 | C#       | [DataDog/dogstatsd-csharp-client][8] |
-
-### Using netcat
-
-To send metrics from shell scripts, or to test that DogStatsD is listening on the socket, you can use `netcat`. Most implementations of `netcat` (ex. `netcat-openbsd` on Debian or `nmap-ncat` on RHEL) support Unix Socket traffic via the `-U` flag:
-
-```shell
-echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
-```
 
 ### Using socat as a proxy
 
