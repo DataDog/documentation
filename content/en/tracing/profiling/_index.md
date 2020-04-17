@@ -129,6 +129,58 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 [3]: /tracing/visualization/#services
 {{% /tab %}}
 
+{{% tab "Go" %}}
+
+The Datadog Profiler requires Go 1.12+. To begin profiling applications:
+
+1. Install `ddtrace` which contains both tracing and profiling:
+
+    ```shell
+    go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+    ```
+
+     **Note**: Profiling is available in the `ddtrace` library for versions 1.23.0+.
+
+2. Set `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` as in your environment variables.
+
+3. Import the Go profiler at the start of your application
+
+    ```Go
+    import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
+    ```
+
+4. To profile your code, add a [Datadog API key][1], then start the profiler:
+
+    ```Go
+    err := profiler.Start(
+        profiler.WithAPIKey("123key")
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer profiler.Stop()
+    ```
+
+5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
+
+**Note**:
+
+- For advanced setup of the profiler or to add tags like `service` or `version`, use environment variables or `profiler` methods to set the parameters:
+
+| Environment variable                             |`profiler` method | Type          | Description                                                                                      |
+| ------------------------------------------------ | ---------------- | ------------- | ------------------------------------------------------------------------------------------------ |
+|                                                  |  WithAPIKey      | String        | The Datadog [Datadog API key][1] |
+| `DD_SERVICE`                                     |  WithService     | String        | The Datadog [service][3] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.     |
+| `DD_ENV`                                         |  WithEnv         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_TAGS`. |
+| `DD_TAGS`                                        |  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
+
+
+[1]: /account_management/api-app-keys/#api-keys
+[2]: https://app.datadoghq.com/profiling
+[3]: /tracing/visualization/#services
+[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Profiles
