@@ -143,13 +143,9 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 
 3. [Restart your Agent][3].
 
-
-**Note:** `container_id`, `container_name`, and `pod_name` tags are not added by default to avoid creating too many [custom metrics][4].
-
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /tagging/assigning_tags/#environment-variables
 [3]: /agent/guide/agent-commands
-[4]: /developers/metrics/custom_metrics
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -157,17 +153,11 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 
 2. Optional - To configure [tag cardinality][1] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to `low` (default), `orchestrator`, or `high`.
 
+When running inside a container, DogStatsd needs to run in the host's PID namespace for origin detection to work reliably. Enable this with the Docker `--pid=host` flag. This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container. This option is not supported in Fargate. For more information, see the [AWS documentation][2].
 
-**Note:** `container_id`, `container_name`, and `pod_name` tags are not added by default to avoid creating too many [custom metrics][2].
-
-When running inside a container, DogStatsd needs to run in the host's PID namespace for origin detection to work reliably. Enable this with the Docker `--pid=host` flag. This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container. This option is not supported in Fargate. For more information, see the [AWS documentation][3].
-
-**Note:** `container_id`, `container_name`, and `pod_name` tags are not added by default to avoid creating too many [custom metrics][2].
-
-
+[2]:
 [1]: /tagging/assigning_tags/#environment-variables
-[2]: /developers/metrics/custom_metrics
-[3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -191,13 +181,11 @@ When running inside a container, DogStatsd needs to run in the host's PID namesp
           value: 'low'
     ```
 
-
-**Note:** `container_id`, `container_name`, and `pod_name` tags are not added by default to avoid creating too many [custom metrics][2].
-
 [1]: /tagging/assigning_tags/#environment-variables
-[2]: /developers/metrics/custom_metrics
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note:** `container_id`, `container_name`, and `pod_name` tags are not added by default to avoid creating too many [custom metrics][2].
 
 ## DogStatsD Client configuration
 
@@ -207,12 +195,12 @@ The following official DogStatsD client libraries natively support UDS traffic. 
 
 | Language | Library                              |
 | -------- | ------------------------------------ |
-| Golang   | [DataDog/datadog-go][2]              |
-| Java     | [DataDog/java-dogstatsd-client][3]   |
-| Python   | [DataDog/datadogpy][4]               |
-| Ruby     | [DataDog/dogstatsd-ruby][5]          |
-| PHP      | [DataDog/php-datadogstatsd][6]       |
-| C#       | [DataDog/dogstatsd-csharp-client][7] |
+| Golang   | [DataDog/datadog-go][3]              |
+| Java     | [DataDog/java-dogstatsd-client][4]   |
+| Python   | [DataDog/datadogpy][5]               |
+| Ruby     | [DataDog/dogstatsd-ruby][6]          |
+| PHP      | [DataDog/php-datadogstatsd][7]       |
+| C#       | [DataDog/dogstatsd-csharp-client][8] |
 
 ### Using netcat
 
@@ -230,17 +218,18 @@ If an application or a client library you use does not support UDS traffic, you 
 socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 ```
 
-For guidelines on creating additional implementation options, refer to the [datadog-agent github wiki][8].
+For guidelines on creating additional implementation options, refer to the [datadog-agent github wiki][9].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/metrics/dogstatsd_metrics_submission
-[2]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
-[3]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
-[4]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds
-[5]: https://github.com/DataDog/dogstatsd-ruby#configuration
-[6]: https://github.com/DataDog/php-datadogstatsd
-[7]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
-[8]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
+[2]: /developers/metrics/custom_metrics
+[3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
+[4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
+[5]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds
+[6]: https://github.com/DataDog/dogstatsd-ruby#configuration
+[7]: https://github.com/DataDog/php-datadogstatsd
+[8]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
+[9]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
