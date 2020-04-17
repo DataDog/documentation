@@ -141,9 +141,9 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
      **Note**: Profiling is available in the `ddtrace` library for versions 1.23.0+.
 
-2. Set `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` as in your environment variables.
+2. Set `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` in your environment variables.
 
-3. Import the Go profiler at the start of your application
+3. Import the [Go profiler][5] at the start of your application
 
     ```Go
     import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
@@ -179,6 +179,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 [2]: https://app.datadoghq.com/profiling
 [3]: /tracing/visualization/#services
 [4]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[5]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -271,6 +272,19 @@ Once enabled, the following profile types are collected:
 | Lock                     | Shows the time each function spent waiting for a lock.                                                                                                                                                                                                                                               |
 
 {{% /tab %}}
+
+{{% tab "Go" %}}
+
+Once enabled, the following profile types are collected:
+
+| Profile type             | Definition                                                                                                                                                                                                                                                                                         |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU                      | Shows the time each function spent running on the CPU.                                                                          |
+| Allocation               | Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed. Go calls this `alloc_space`              |
+| Heap                     | Shows the amount of heap memory allocated by each function that remained allocated. Go calls this `inuse_space`                 |
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Troubleshooting
