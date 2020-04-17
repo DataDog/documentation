@@ -21,12 +21,12 @@ Detect when an AWS Route Table has been created or modified.
 ### Strategy
 Monitor CloudTrail and detect when an AWS Route Table has been created or modified with one of the following API calls:
 * [CreateRoute][1] 
-* [CreateRouteTable][1] 
-* [ReplaceRoute][2] 
-* [ReplaceRouteTableAssociation][3] 
-* [DeleteRouteTable][4] 
-* [DeleteRoute][5] 
-* [DisassociateRouteTable][6]
+* [CreateRouteTable][2] 
+* [ReplaceRoute][3] 
+* [ReplaceRouteTableAssociation][4] 
+* [DeleteRouteTable][5] 
+* [DeleteRoute][6] 
+* [DisassociateRouteTable][7]
 
 ### Triage & Response
 1. Determine who the user was who made this API call.
@@ -34,9 +34,9 @@ Monitor CloudTrail and detect when an AWS Route Table has been created or modifi
 3. If the API call was not made by the user:
    * Rotate the user credentials and investigate what other API calls.
    * Determine what other API calls the user made which were not made by the user.[1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateRoute.html
-[1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateRouteTable
-[2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceRoute.html
-[3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceRouteTableAssociation
-[4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRouteTable.html
-[5]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRoute.html
-[6]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateRouteTable.html
+[2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateRouteTable
+[3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceRoute.html
+[4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReplaceRouteTableAssociation
+[5]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRouteTable.html
+[6]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteRoute.html
+[7]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateRouteTable.html

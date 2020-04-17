@@ -21,11 +21,11 @@ Detect when an AWS Network Gateway has been created or modified.
 ### Strategy
 Monitor CloudTrail and detect when an AWS Network Gateway has been created or modified with one of the following API calls:
 * [CreateCustomerGateway][1] 
-* [DeleteCustomerGateway][1] 
-* [AttachInternetGateway][2] 
-* [CreateInternetGateway][3] 
-* [DeleteInternetGateway][4] 
-* [DetachInternetGateway][5]
+* [DeleteCustomerGateway][2] 
+* [AttachInternetGateway][3] 
+* [CreateInternetGateway][4] 
+* [DeleteInternetGateway][5] 
+* [DetachInternetGateway][6]
 
 ### Triage & Response
 1. Determine who the user was who made this API call.
@@ -33,8 +33,8 @@ Monitor CloudTrail and detect when an AWS Network Gateway has been created or mo
 3. If the API call was not made by the user:
    * Rotate the user credentials and investigate what other API calls.
    * Determine what other API calls the user made which were not made by the user.[1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateCustomerGateway
-[1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteCustomerGateway
-[2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachInternetGateway
-[3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateInternetGateway
-[4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteInternetGateway
-[5]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachInternetGateway.html
+[2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteCustomerGateway
+[3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AttachInternetGateway
+[4]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateInternetGateway
+[5]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteInternetGateway
+[6]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DetachInternetGateway.html
