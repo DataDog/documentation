@@ -17,6 +17,10 @@ further_reading:
   text: "Configure an API Test"
 ---
 
+<div class="alert alert-warning">
+This feature is in private beta.
+</div>
+
 On top of executing your tests at predefined intervals, you can also execute Datadog Synthetics tests on-demand using the dedicated API endpoints. You can execute Datadog Synthetics tests in your continuous integration (CI) pipelines, enabling you to block the deployment of branches which would break your key features and endpoints.
 
 This function allows you to avoid spending time fixing issues on production, and to catch bugs and regressions earlier in the process.
