@@ -11,7 +11,7 @@ public class UsersApiExample {
         String filter = filter_example; // String | Filter all users by the given string. Defaults to no filtering.
         String filterLeft_Square_BracketstatusRight_Square_Bracket = filterLeft_Square_BracketstatusRight_Square_Bracket_example; // String | Filter on status attribute. Comma separated list: Active, Pending, and Disabled. Defaults to no filtering.
         try {
-            UsersResponsePayload result = apiInstance.listUsers(pageLeft_Square_BracketsizeRight_Square_Bracket, pageLeft_Square_BracketnumberRight_Square_Bracket, sort, sortDir, filter, filterLeft_Square_BracketstatusRight_Square_Bracket);
+            UsersResponse result = apiInstance.listUsers(pageLeft_Square_BracketsizeRight_Square_Bracket, pageLeft_Square_BracketnumberRight_Square_Bracket, sort, sortDir, filter, filterLeft_Square_BracketstatusRight_Square_Bracket);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#listUsers");

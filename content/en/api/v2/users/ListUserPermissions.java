@@ -6,10 +6,10 @@ public class UsersApiExample {
         UsersApi apiInstance = new UsersApi();
         String userId = userId_example; // String | The ID of the user.
         try {
-            UserResponse result = apiInstance.getUser(userId);
+            PermissionsResponse result = apiInstance.listUserPermissions(userId);
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling UsersApi#getUser");
+            System.err.println("Exception when calling UsersApi#listUserPermissions");
             e.printStackTrace();
         }
     }
