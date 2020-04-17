@@ -143,6 +143,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 
 3. [Restart your Agent][3].
 
+
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /tagging/assigning_tags/#environment-variables
 [3]: /agent/guide/agent-commands
@@ -180,6 +181,7 @@ When running inside a container, DogStatsd needs to run in the host's PID namesp
         - name: DD_DOGSTATSD_TAG_CARDINALITY
           value: 'low'
     ```
+
 
 [1]: /tagging/assigning_tags/#environment-variables
 {{% /tab %}}
