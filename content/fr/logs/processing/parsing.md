@@ -47,7 +47,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):connect_date}
 
 Une fois le traitement terminé, le log structuré suivant est généré :
 
-{{< img src="logs/processing/parsing/parsing_example_1.png" alt="Exemple de parsing 1"  style="width:80%;">}}
+{{< img src="logs/processing/processors/_parser.png" alt="Exemple de parsing 1"  style="width:80%;">}}
 
 **Remarque** :
 
@@ -73,10 +73,10 @@ Voici la liste de tous les matchers et de tous les filtres implémentés en nati
 | `data`                                          | Renvoie n'importe quelle chaîne, espaces et sauts de ligne inclus. Équivaut à `.*`.                                                              |
 | `notSpace`                                      | Renvoie n'importe quelle chaîne jusqu'à la prochaine espace.                                                                                           |
 | `boolean("patternTrue", "patternFalse")`        | Renvoie et parse une valeur booléenne qui définit de façon facultative les patterns true et false (par défaut, `true` et `false` en ignorant la casse).     |
-| `numberStr`                                     | Renvoie un nombre décimal à virgule flottante et le parse en tant que chaîne.                                                                 |
-| `number`                                        | Renvoie un nombre décimal à virgule flottante et le parse en tant que nombre à double précision.                                                |
-| `numberExtStr`                                  | Renvoie un nombre à virgule flottante (avec prise en charge de la notation scientifique) et le parse en tant que chaîne.                                      |
-| `numberExt`                                     | Renvoie un nombre à virgule flottante (avec prise en charge de la notation scientifique) et le parse en tant que nombre à double précision.                     |
+| `numberStr`                                     | Renvoie un nombre flottant et le parse en tant que chaîne.                                                                 |
+| `number`                                        | Renvoie un nombre flottant et le parse en tant que nombre à double précision.                                                |
+| `numberExtStr`                                  | Renvoie un nombre flottant (avec prise en charge de la notation scientifique) et le parse en tant que chaîne.                                      |
+| `numberExt`                                     | Renvoie un nombre flottant (avec prise en charge de la notation scientifique) et le parse en tant que nombre à double précision.                     |
 | `integerStr`                                    | Renvoie un nombre entier et le parse en tant que chaîne.                                                                               |
 | `integer`                                       | Renvoie un nombre entier et le parse en tant que nombre entier.                                                                      |
 | `integerExtStr`                                 | Renvoie un nombre entier (avec prise en charge de la notation scientifique) et le parse en tant que chaîne.                                            |
@@ -111,7 +111,7 @@ Voici la liste de tous les matchers et de tous les filtres implémentés en nati
 | `decodeuricomponent`                                           | Ce filtre décode les composants d'un URI. Par exemple, il permet de transformer `%2Fservice%2Ftest` en `/service/test`.                                                              |
 | `lowercase`                                                    | Renvoie la chaîne en minuscules.                                                                                                                            |
 | `uppercase`                                                    | Renvoie la chaîne en majuscules.                                                                                                                            |
-| `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])` | Extrait un pattern key/value et renvoie un objet JSON. [Consulter les exemples de filtres clé/valeur](#cle-valeur).                                                         |
+| `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extrait un pattern key/value et renvoie un objet JSON. [Consulter les exemples de filtres clé/valeur](#cle-valeur).                                                         |
 | `scale(facteur)`                                                | Multiplie la valeur numérique attendue par le coefficient spécifié.                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parse une séquence de tokens et la renvoie en tant que tableau.                                                                                             |
 | `url`                                                          | Parse une URL et renvoie tous les membres tokenisés (domaine, paramètres de requête, port, etc.) dans un objet JSON. [En savoir plus sur le parsing d'URL][2].               |
@@ -127,9 +127,17 @@ En bas de vos carrés de processeur Grok, vous trouverez une section Advanced Se
 
 {{< img src="logs/processing/parsing/advanced_settings.png" alt="Paramètres avancés"  style="width:80%;">}}
 
-* Utilisez le champ **Extract from** pour appliquer votre processeur Grok sur un attribut donné plutôt que sur l'attribut `message` par défaut.
+### Parsing d'un attribut texte spécifique
 
-* Utilisez le champ **Helper Rules** afin de définir les tokens pour vos règles de parsing. Les règles d'auxiliaires vous aident à factoriser les patterns Grok dans vos règles de parsing, ce qui est utile lorsque plusieurs règles d'un même parser Grok utilisent les mêmes tokens.
+Utilisez le champ **Extract from** pour appliquer votre processeur Grok sur un attribut texte donné plutôt que sur l'attribut `message` par défaut.
+
+Imaginez par exemple un log contenant un attribut `command.line` devant être parsé en tant que key/value. Le parsing de ce log peut se faire comme suit :
+
+{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing de ligne de commande"  style="width:80%;">}}
+
+### Utiliser des règles d'auxiliaires pour factoriser plusieurs règles de parsing
+
+Utilisez le champ **Helper Rules** afin de définir les tokens pour vos règles de parsing. Les règles d'auxiliaires vous aident à factoriser les patterns Grok dans vos règles de parsing, ce qui est utile lorsque plusieurs règles d'un même parser Grok utilisent les mêmes tokens.
 
 Exemple d'un log non structuré standard :
 
@@ -151,42 +159,37 @@ connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
-
 {{< img src="logs/processing/parsing/helper_rules.png" alt="règles d'auxiliaires"  style="width:80%;">}}
 
 ## Exemples
 
 Voici des exemples d'utilisation des parsers :
 
-* [Key/value](#key-value)
+* [Key/value ou logfmt](#key-value-or-logfmt)
 * [Parsing de dates](#parsing-dates)
-* [Patterns conditionnels](#conditional-pattern)
+* [Modèles avec alternative](#alternating-pattern)
 * [Attribut facultatif](#optional-attribute)
 * [JSON imbriqué](#nested-json)
 * [Regex](#regex)
 
-### Key/value
+### Key/value ou logfmt
 
-Le filtre key/value correspond à `keyvalue([separatorStr[, characterWhiteList[, quotingStr]]])`, où :
+Le filtre key/value correspond à `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])`, où :
 
-* `separatorStr` définit le séparateur. Valeur par défaut : `=`.
-* `characterWhiteList` : définit des caractères supplémentaires non échappés en plus de la valeur par défaut `\\w.\\-_@`. Uniquement utilisé pour les valeurs sans guillemets (par exemple, `key=@valueStr`).
-* `quotingStr` : définit des guillemets, ce qui remplace la détection de guillemets par défaut : `<>`, `""`, `''`.
+* `separatorStr` définit le séparateur entre la clé et les valeurs. Par défaut, `=`.
+* `characterWhiteList` définit des caractères supplémentaires non échappés en plus de la valeur par défaut `\\w.\\-_@`. Uniquement utilisé pour les valeurs sans guillemets (par exemple, `key=@valueStr`).
+* `quotingStr` définit des guillemets, ce qui remplace la détection de guillemets par défaut : `<>`, `""`, `''`.
+* `delimiter` définit le séparateur entre les différentes paires key/value (par exemple, `|` est le délimiteur dans `key1=value1|key2=value2`). Par défaut, ` ` (espace normale), `,` et `;`.
 
-**Remarques** :
+Utilisez des filtres tels que **keyvalue** pour mapper plus facilement des chaînes à des attributs au format keyvalue ou logfmt :
 
-* Les valeurs vides (`key=`) ou `null` (`key=null`) ne sont pas affichées dans la sortie JSON.
-* Si vous définissez un filtre *keyvalue* sur un objet `data` et que ce filtre n'est pas mis en correspondance, un JSON vide `{}` est renvoyé (par exemple, entrée : `key:=valueStr`, règle de parsing : `rule_test %{data::keyvalue("=")}`, sortie : `{}`).
-
-Utilisez des filtres tels que **keyvalue** pour mapper plus facilement des chaînes à des attributs :
-
-Log :
+**Log :**
 
 ```text
 user=john connect_date=11/08/2017 id=123 action=click
 ```
 
-Règle :
+**Règle :**
 
 ```text
 rule %{data::keyvalue}
@@ -201,13 +204,13 @@ Si vous ajoutez un attribut **d'extraction** `my_attribute` dans votre pattern d
 
 Si le caractère `=` n'est pas le séparateur par défaut entre votre clé et vos valeurs, ajoutez à votre règle de parsing un paramètre avec un séparateur.
 
-Log :
+**Log :**
 
 ```text
 user: john connect_date: 11/08/2017 id: 123 action: click
 ```
 
-Règle :
+**Règle :**
 
 ```text
 rule %{data::keyvalue(": ")}
@@ -217,13 +220,13 @@ rule %{data::keyvalue(": ")}
 
 Si les logs contiennent des caractères spéciaux dans une valeur d'attribut, tels que `/` dans une URL, ajoutez-les à la liste blanche de la règle de parsing :
 
-Log :
+**Log :**
 
 ```text
 url=https://app.datadoghq.com/event/stream user=john
 ```
 
-Règle :
+**Règle :**
 
 ```text
 rule %{data::keyvalue("=","/:")}
@@ -233,37 +236,44 @@ rule %{data::keyvalue("=","/:")}
 
 Autres exemples :
 
-| **Chaîne brute**  | **Règle de parsing**                    | **Résultat**           |
-|:----------------|:------------------------------------|:---------------------|
-| key=valueStr    | `%{data::keyvalue}`                 | {"key": "valueStr}   |
-| key=\<valueStr> | `%{data::keyvalue}`                 | {"key": "valueStr"}  |
-| key:valueStr    | `%{data::keyvalue(":")}`            | {"key": "valueStr"}  |
-| key:"/valueStr" | `%{data::keyvalue(":", "/")}`       | {"key": "/valueStr"} |
-| key:={valueStr} | `%{data::keyvalue(":=", "", "{}")}` | {"key": "valueStr"}  |
+| **Chaîne brute**               | **Règle de parsing**                       | **Résultat**                            |
+|:-----------------------------|:---------------------------------------|:--------------------------------------|
+| key=valueStr                 | `%{data::keyvalue}`                    | {"key": "valueStr}                    |
+| key=\<valueStr>              | `%{data::keyvalue}`                    | {"key": "valueStr"}                   |
+| "key"="valueStr"             | `%{data::keyvalue}`                    | {"key": "valueStr"}                   |
+| key:valueStr                 | `%{data::keyvalue(":")}`               | {"key": "valueStr"}                   |
+| key:"/valueStr"              | `%{data::keyvalue(":", "/")}`          | {"key": "/valueStr"}                  |
+| /key:/valueStr               | `%{data::keyvalue(":", "/")}`          | {"/key": "/valueStr"}                 |
+| key:={valueStr}              | `%{data::keyvalue(":=", "", "{}")}`    | {"key": "valueStr"}                   |
+| key1=value1\|key2=value2     | `%{data::keyvalue("=", "", "", "\|")}` | {"key1": "value1", "key2": "value2"}  |
+| key1="value1"\|key2="value2" | `%{data::keyvalue("=", "", "", "\|")}` | {"key1": "value1", "key2": "value2"}  |
 
 **Exemple avec plusieurs QuotingString** : lorsque plusieurs QuotingString sont définies, le comportement par défaut est ignoré, et seul le guillemet défini est autorisé.
 Le filtre key/value met toujours en correspondance des entrées sans guillemet, peu importe la valeur de `quotingStr`. Lorsque des guillemets sont utilisés, le paramètre `characterWhiteList` est ignoré, puisque tout le contenu entre les guillemets est extrait.
 
-Log :
+**Log :**
 
   ```text
   key1:=valueStr key2:=</valueStr2> key3:="valueStr3"
   ```
 
-Règle :
+**Règle :**
 
   ```text
   rule %{data::keyvalue(":=","","<>")}
   ```
 
-Résultat :
+**Résultat :**
 
   ```json
-  {
-    "key1": "valueStr",
-    "key2": "/valueStr2"
-  }
+  {"key1": "valueStr", "key2": "/valueStr2"}
   ```
+
+**Remarques** :
+
+* Les valeurs vides (`key=`) ou `null` (`key=null`) ne sont pas affichées dans la sortie JSON.
+* Si vous définissez un filtre *keyvalue* sur un objet `data` et que ce filtre n'est pas mis en correspondance, un JSON vide `{}` est renvoyé (par exemple, entrée : `key:=valueStr`, règle de parsing : `rule_test %{data::keyvalue("=")}`, sortie : `{}`).
+* La définition de `""` en tant que `quotingStr` conserve la configuration par défaut des guillemets.
 
 ### Parsing de dates
 
@@ -287,9 +297,9 @@ Le matcher de date convertit votre timestamp au format EPOCH (unité de mesure 
 
 **Remarque** : le parsing d'une date ne définit **pas** sa valeur comme étant la date officielle du log. Pour cela, utilisez le [remappeur de dates de log][2] dans un processeur ultérieur.
 
-### Pattern conditionnel
+### Modèle avec alternative
 
-Si vous avez des logs qui se présentent dans deux formats différents, avec un unique attribut comme seule différence, définissez une seule règle en utilisant des instructions conditionnelles avec `(<REGEX_1>|<REGEX_2>)`.
+Si vous avez des logs qui se présentent dans deux formats différents, avec un unique attribut comme seule différence, définissez une seule règle en utilisant une alternative avec `(<REGEX_1>|<REGEX_2>)`. Cette règle équivaut à un OR booléen.
 
 **Log** :
 
