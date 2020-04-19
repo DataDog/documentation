@@ -212,7 +212,7 @@ The configuration of synthetics test occurs in `**/*.synthetics.json` (configura
                 "deviceIds": ["laptop_large"],
                 "followRedirects": true,
                 "headers": { "NEW_HEADER": "NEW VALUE" },
-                "locations": ["aws:us-east-1"],
+            "locations": ["aws:us-west-1"],
                 "retry": { "count": 2, "interval": 300 },
                 "skip": true,
                 "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
