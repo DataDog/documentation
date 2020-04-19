@@ -316,7 +316,7 @@ The execution rule associated with the test is always the most restrictive one t
         "headers": { "NEW_HEADER": "NEW VALUE" },
             "locations": ["aws:us-west-1"],
         "retry": { "count": 2, "interval": 300 },
-        "skip": true,
+        "executionRule": "skipped",
         "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
         "variables": { "titleVariable": "new title" }
     },
