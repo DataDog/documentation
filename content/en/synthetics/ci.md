@@ -71,7 +71,7 @@ curl -X POST \
             "deviceIds": ["laptop_large"],
             "followRedirects": true,
             "headers": { "NEW_HEADER": "NEW VALUE" },
-            "locations": ["aws:us-east-1"],
+            "locations": ["aws:us-west-1"],
             "retry": { "count": 2, "interval": 300 },
             "startUrl": "http://new.url/",
             "variables": { "titleVariable": "new title" }
