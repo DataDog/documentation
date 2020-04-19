@@ -303,7 +303,7 @@ The configuration of Synthetics tests occurs in `**/*.synthetics.json` (the path
 
 The _execution rule_ of each test can also be defined in-app, at the test level. Use the drop-down menu next to **CI Execution**.
 
-{{< img src="synthetics/ci/execution_rule.mp4" alt="CI Execution Rule" video="true" width="60%">}}
+{{< img src="synthetics/ci/execution_rule.mp4" alt="CI Execution Rule" video="true" width="100%">}}
 
 The execution rule associated with the test is always the most restrictive one that was set in the configuration file. From the most restrictive to the least restrictive: `skipped`, `non_blocking`, `blocking`. For example, if your test is configured to be `skipped` in the UI but to `blocking` in the configuration file, it is `skipped` when running your tests. 
 
@@ -388,17 +388,17 @@ datadog-ci synthetics run-tests
 
 You can see the outcome of test executions directly in your CI as your tests are being executed.
 
-{{< img src="synthetics/ci/successful_test_result.png" alt="Successful Test Result"  style="width:40%;">}}
+{{< img src="synthetics/ci/successful_test_result.png" alt="Successful Test Result"  style="width:80%;">}}
 
 You can identify what caused a test to fail by looking at the execution logs and searching for causes of the failed assertion:
 
-{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result"  style="width:40%;">}}
+{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result"  style="width:80%;">}}
 
 ### In Datadog application
 
 You can also see the results of your tests listed on your Datadog test details page:
 
-{{< img src="synthetics/ci/test_results.png" alt="Successful Test Result"  style="width:40%;">}}
+{{< img src="synthetics/ci/test_results.png" alt="Successful Test Result"  style="width:80%;">}}
 
 [1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
 [2]: /help
