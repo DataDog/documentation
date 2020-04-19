@@ -214,7 +214,7 @@ The configuration of synthetics test occurs in `**/*.synthetics.json` (configura
                 "headers": { "NEW_HEADER": "NEW VALUE" },
             "locations": ["aws:us-west-1"],
                 "retry": { "count": 2, "interval": 300 },
-                "skip": true,
+                "executionRule": "skipped",
                 "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
                 "variables": { "titleVariable": "new title" }
             }
