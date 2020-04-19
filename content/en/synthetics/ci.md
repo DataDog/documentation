@@ -283,7 +283,7 @@ More configuration options are available in a `datadog-ci.json` file containing 
     * **retry**: (_object_) Retry policy for the test:
         * **count**: (_integer_) Number of attempts to perform in case of test failure.
         * **interval**: (_integer_) Interval between the attempts (in milliseconds).
-    * **skip**: (_string_) Execution rule of the test: defines the behavior of the CLI in case of a failing test:
+    * **executionRule**: (_string_) Execution rule of the test: defines the behavior of the CLI in case of a failing test:
         * **blocking**: The CLI returns an error if the test fails.
         * **non_blocking**: The CLI only prints a warning if the test fails.
         * **skipped**: The test is not executed at all.
