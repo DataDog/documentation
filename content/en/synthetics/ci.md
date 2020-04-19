@@ -318,7 +318,7 @@ The execution rule associated with the test is always the most restrictive one t
         "retry": { "count": 2, "interval": 300 },
         "skip": true,
         "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-        "variables": { "titleVariable": "new title" },
+        "variables": { "titleVariable": "new title" }
     },
     "timeout": 120000,
 }
