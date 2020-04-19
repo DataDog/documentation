@@ -246,7 +246,7 @@ Add the following to your `package.json`:
     "datadog-ci-synthetics": "datadog-ci synthetics run-tests"
   },
   "devDependencies": {
-    "@datadog/datadog-ci": "7.4.5",
+    "@datadog/datadog-ci": "7.4.5"
   }
 }
 ```
