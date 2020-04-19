@@ -326,9 +326,9 @@ You can configure on which url your test starts by providing a `startUrl` to you
 
 For instance, if your test's starting url is `https://www.example.org:81/path/to/something?abc=123`, it can be written as:
 
-* {{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}
-* {{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}
-* {{URL}}
+* `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}`
+* `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}`
+* `{{URL}}`
 
 ### Running tests
 
