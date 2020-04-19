@@ -48,7 +48,7 @@ The test triggering endpoint supports starting up to 50 tests in one request.
 }
 ```
 
-The `TEST_TO_TRIGGER` objects are composed of the `public_id` (required) of the test to trigger and optional configuration overrides ([see below][#adding-and-running-tests] for description of each field).
+The `TEST_TO_TRIGGER` objects are composed of the `public_id` (required) of the test to trigger and optional configuration overrides ([see below][#configure-tests] for description of each field).
 
 The public identifier of a test can be either the identifier of the test found in the URL of a test details page (for `https://app.datadoghq.com/synthetics/details/abc-def-ghi`, it would be `abc-def-ghi`) or the full URL to the details page (that is, `https://app.datadoghq.com/synthetics/details/abc-def-ghi`).
 
@@ -192,112 +192,35 @@ yarn add --dev @datadog/datadog-ci
 {{% /tab %}}
 {{< /tabs >}}
 
-### Adding and running tests
+### Setup the integration
 
-The configuration of synthetics test occurs in `**/*.synthetics.json` (configurable in the global configuration file). These files have a `tests` key, which contains an array of objects with the IDs of the tests to run and any configuration overrides for these tests.
+To setup your integration, Datadog API and application keys need to be configured. These keys can be defined in three different ways:
 
-**Example configuration file**:
+1. As environment variables:
 
-```json
-{
-    "tests": [
-        {
-            "id": "<TEST_PUBLIC_ID>",
-            "config": {
-                "allowInsecureCertificates": true,
-                "basicAuth": { "username": "test", "password": "test" },
-                "body": "{\"fakeContent\":true}",
-                "bodyType": "application/json",
-                "cookies": "name1=value1;name2=value2;",
-                "deviceIds": ["laptop_large"],
-                "followRedirects": true,
-                "headers": { "NEW_HEADER": "NEW VALUE" },
-            "locations": ["aws:us-west-1"],
-                "retry": { "count": 2, "interval": 300 },
-                "executionRule": "skipped",
-                "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-                "variables": { "titleVariable": "new title" }
-            }
-        }
-    ]
-}
+```
+export DATADOG_API_KEY="<API KEY>"
+export DATADOG_APP_KEY="<APPLICATION KEY>"
 ```
 
-#### Running tests
-
-Run tests by executing the CLI:
-
-{{< tabs >}}
-{{% tab "Yarn" %}}
+2. Passed to the CLI when running your tests: 
 
 ```bash
-yarn datadog-ci synthetics run-tests
+datadog-ci synthetics <command> --apiKey "<API KEY>" --appKey "<APPLICATION KEY>"
 ```
 
-{{% /tab %}}
-{{% tab "Script" %}}
+3. Or defined in a global configuration file:
 
-Add the following to your `package.json`:
-
-```json
-{
-  ...
-  "scripts": {
-    "datadog-ci-synthetics": "datadog-ci synthetics run-tests"
-  },
-  "devDependencies": {
-    "@datadog/datadog-ci": "7.4.5"
-  }
-}
-```
-
-Then, run:
-
-```
-npm run datadog-ci-synthetics
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Further configuration
-
-More configuration options are available in a `datadog-ci.json` file containing a JSON object with the following keys:
+You can also create a JSON configuration file to specify more advanced options. The path to this global configuration file can be set using the flag `--config` [when launching your tests][#running-tests]. If the name of your global configuration file is set to `datadog-ci.json`, it defaults to it.
 
 * **apiKey**: The API key used to query the Datadog API.
 * **appKey**: The application key used to query the Datadog API.
 * **datadogSite**: The Datadog instance to which request is sent (choices are datadoghq.com or datadoghq.eu).
 * **files**: Glob pattern to detect synthetics tests config files.
-* **global**: Overrides of synthetics tests applied to all tests.
-    * **allowInsecureCertificates**: (_Boolean_) Disable certificate checks in API tests.
-    * **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered.
-        * **username**: (_string_) Username to use in basic authentication.
-        * **password**: (_string_) Password to use in basic authentication.
-    * **body**: (_string_) Data to send in a synthetics API test.
-    * **bodyType**: (_string_) Type of the data sent in a synthetics API test.
-    * **cookies**: (_string_) Use provided string as cookie header in API or browser test.
-    * **deviceIds**: (_array_) List of devices on which to run the browser test.
-    * **followRedirects**: (_Boolean_) Indicates whether to follow HTTP redirections in API tests.
-    * **headers**: (_object_) Headers to replace in the test. This object should contain, as keys, the name of the header to replace and, as values, the new value of the header.
-    * **locations**: (_array_) List of locations from which the test should be run. 
-    * **retry**: (_object_) Retry policy for the test:
-        * **count**: (_integer_) Number of attempts to perform in case of test failure.
-        * **interval**: (_integer_) Interval between the attempts (in milliseconds).
-    * **executionRule**: (_string_) Execution rule of the test: defines the behavior of the CLI in case of a failing test:
-        * **blocking**: The CLI returns an error if the test fails.
-        * **non_blocking**: The CLI only prints a warning if the test fails.
-        * **skipped**: The test is not executed at all.
-    * **startUrl**: (_string_) New start URL to provide to the test.
-    * **variables**: (_object_) Variables to replace in the test. This object should contain, as keys, the name of the variable to replace and, as values, the new value of the variable.
-* **timeout**: Duration after which synthetics tests are considered failed (in milliseconds).
+* **global**: Overrides of synthetics tests applied to all tests ([see below for description of each field][#configure-tests]).
+* **timeout**: Duration after which synthetics tests are considered failed (in milliseconds)
 
-The path of the global configuration file can be set using the flag `--config`.
-
-**Note**: The _execution rule_ of each test can also be defined in-app, at the test level. Use the drop-down menu next to **CI Execution**.
-
-The execution rule associated with the test is always the most restrictive one that was set in the configuration file. From the most restrictive to the least restrictive: `skipped`, `non_blocking`, `blocking`. For example, if your test is configured to be `skipped` in the UI but to `blocking` in the configuration file, it is `skipped` when running your tests. 
-
-**Example configuration file**:
+**Example global configuration file**:
 
 ```json
 {
@@ -324,7 +247,158 @@ The execution rule associated with the test is always the most restrictive one t
 }
 
 ```
+### Configure tests
 
+The configuration of Synthetics tests occurs in `**/*.synthetics.json` (the path can be configured in the [global configuration file][#setup-the-integration]). These files have a `tests` key, which contains an array of objects with the IDs of the tests to run and any configuration overrides for these tests.
+
+**Example test configuration file**:
+
+```json
+{
+    "tests": [
+        {
+            "id": "<TEST_PUBLIC_ID>",
+            "config": {
+                "allowInsecureCertificates": true,
+                "basicAuth": { "username": "test", "password": "test" },
+                "body": "{\"fakeContent\":true}",
+                "bodyType": "application/json",
+                "cookies": "name1=value1;name2=value2;",
+                "deviceIds": ["laptop_large"],
+                "followRedirects": true,
+                "headers": { "NEW_HEADER": "NEW VALUE" },
+            "locations": ["aws:us-west-1"],
+                "retry": { "count": 2, "interval": 300 },
+                "executionRule": "skipped",
+                "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
+                "variables": { "titleVariable": "new title" }
+            }
+        }
+    ]
+}
+```
+
+* **allowInsecureCertificates**: (_Boolean_) Disable certificate checks in API tests.
+* **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered.
+     * **username**: (_string_) Username to use in basic authentication.
+     * **password**: (_string_) Password to use in basic authentication.
+* **body**: (_string_) Data to send in a synthetics API test.
+* **bodyType**: (_string_) Type of the data sent in a synthetics API test.
+* **cookies**: (_string_) Use provided string as cookie header in API or browser test.
+* **deviceIds**: (_array_) List of devices on which to run the browser test.
+* **followRedirects**: (_Boolean_) Indicates whether to follow HTTP redirections in API tests.
+* **headers**: (_object_) Headers to replace in the test. This object should contain, as keys, the name of the header to replace and, as values, the new value of the header.
+* **locations**: (_array_) List of locations from which the test should be run. 
+* **retry**: (_object_) Retry policy for the test:
+     * **count**: (_integer_) Number of attempts to perform in case of test failure.
+     * **interval**: (_integer_) Interval between the attempts (in milliseconds).
+* **executionRule**: (_string_) Execution rule of the test: defines the behavior of the CLI in case of a failing test:
+     * **blocking**: The CLI returns an error if the test fails.
+     * **non_blocking**: The CLI only prints a warning if the test fails.
+     * **skipped**: The test is not executed at all.
+* **startUrl**: (_string_) New start URL to provide to the test.
+* **variables**: (_object_) Variables to replace in the test. This object should contain, as keys, the name of the variable to replace and, as values, the new value of the variable.
+
+#### Execution rule
+
+The _execution rule_ of each test can also be defined in-app, at the test level. Use the drop-down menu next to **CI Execution**.
+
+{{< img src="synthetics/ci/execution_rule.mp4" alt="CI Execution Rule" video="true" width="60%">}}
+
+The execution rule associated with the test is always the most restrictive one that was set in the configuration file. From the most restrictive to the least restrictive: `skipped`, `non_blocking`, `blocking`. For example, if your test is configured to be `skipped` in the UI but to `blocking` in the configuration file, it is `skipped` when running your tests. 
+
+#### Start URL
+
+You can configure on which url your test starts by providing a `startUrl` to your test object and build your own starting url using any part of your test's original starting url and the following environment variables:
+
+| Environment variable | Description                  | Example                                                |
+|----------------------|------------------------------|--------------------------------------------------------|
+| `URL`                | Test's original starting url | `https://www.example.org:81/path/to/something?abc=123` |
+| `DOMAIN`             | Test's domain name           | `example.org`                                          |
+| `HOST`               | Test's host                  | `www.example.org:81`                                   |
+| `HOSTNAME`           | Test's hostname              | `www.example.org`                                      |
+| `ORIGIN`             | Test's origin                | `https://www.example.org:81`                           |
+| `PARAMS`             | Test's query parameters      | `?abc=123`                                             |
+| `PATHNAME`           | Test's URl path              | `/path/to/something`                                   |
+| `PORT`               | Test's host port             | `81`                                                   |
+| `PROTOCOL`           | Test's protocol              | `https:`                                               |
+| `SUBDOMAIN`          | Test's sub domain            | `www`                                                  |
+
+For instance, if your test's starting url is `https://www.example.org:81/path/to/something?abc=123`, it can be written as:
+
+* {{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}
+* {{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}
+* {{URL}}
+
+### Running tests
+
+You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetics tests (or all the tests associated to the path specified in your [global configuration file][#setup-the-integration]) or to specify the tests you want to run using the `-p,--public-id` flag.
+
+Run tests by executing the CLI:
+
+{{< tabs >}}
+{{% tab "Yarn" %}}
+
+```bash
+yarn datadog-ci synthetics run-tests
+```
+
+**Note**: If you are launching your tests with a custom global configuration file, append your command with `--config <PATH_TO_GLOBAL_CONFIG_FILE`. 
+
+{{% /tab %}}
+{{% tab "NPM" %}}
+
+Add the following to your `package.json`:
+
+```json
+{
+  ...
+  "scripts": {
+    "datadog-ci-synthetics": "datadog-ci synthetics run-tests"
+  },
+  "devDependencies": {
+    "@datadog/datadog-ci": "7.4.5"
+  }
+}
+```
+
+Then, run:
+
+```
+npm run datadog-ci-synthetics
+```
+
+**Note**: If you are launching your tests with a custom global configuration file, append the command associated to your `datadog-ci-synthetics` script with `--config <PATH_TO_GLOBAL_CONFIG_FILE`. 
+
+{{% /tab %}}
+{{% tab "System wide" %}}
+
+```
+datadog-ci synthetics run-tests
+```
+
+**Note**: If you are launching your tests with a custom global configuration file, append your command with `--config <PATH_TO_GLOBAL_CONFIG_FILE`. 
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Visualize test results
+
+### In your CI
+
+You can see the outcome of test executions directly in your CI as your tests are being executed.
+
+{{< img src="synthetics/ci/successful_test_result.png" alt="Successful Test Result"  style="width:40%;">}}
+
+You can identify what caused a test to fail by looking at the execution logs and searching for causes of the failed assertion:
+
+{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result"  style="width:40%;">}}
+
+### In Datadog application
+
+You can also see the results of your tests listed on your Datadog test details page:
+
+{{< img src="synthetics/ci/test_results.png" alt="Successful Test Result"  style="width:40%;">}}
 
 [1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
 [2]: /help
