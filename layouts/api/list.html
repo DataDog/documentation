@@ -139,10 +139,10 @@
 
                                         <ul class="nav nav-tabs border-none response-toggle">
                                             <li class="nav-item">
-                                                <a class="nav-link mr-1  js-model-link active" role="tab" href="#" data-toggle="tab">Model</a>
+                                                <a class="nav-link mr-1  js-model-link active" href="#" data-toggle="tab">Model</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mr-1  js-example-link" role="tab" href="#" data-toggle="tab">Example</a>
+                                                <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">Example</a>
                                             </li>                     
                                         </ul>
                                       
@@ -174,7 +174,7 @@
                             {{ $count := 0}}
                             {{ range $response_code, $response := .action.responses }}
                                 <li class="nav-item">
-                                    <a class="nav-link mr-1  {{ if eq $count 0}}active{{end}}"  href="#{{ $context.action.operationId }}-{{ $response_code }}" role="tab" data-toggle="tab">{{ $response_code }}</a>
+                                    <a class="nav-link mr-1  {{ if eq $count 0}}active{{end}}"  href="#{{ $context.action.operationId }}-{{ $response_code }}"  data-toggle="tab">{{ $response_code }}</a>
                                 </li>
                                 {{ $count = add $count 1 }}
                             {{ end }}
@@ -211,10 +211,10 @@
                                                 
                                                 <ul class="nav nav-tabs border-none response-toggle">
                                                     <li class="nav-item">
-                                                        <a class="nav-link mr-1  js-model-link active" role="tab" href="#" data-toggle="tab">Model</a>
+                                                        <a class="nav-link mr-1  js-model-link active"  href="#" data-toggle="tab">Model</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a class="nav-link mr-1  js-example-link" role="tab" href="#" data-toggle="tab">Example</a>
+                                                        <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">Example</a>
                                                     </li>                     
                                                 </ul>
                                             
