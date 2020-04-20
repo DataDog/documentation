@@ -31,7 +31,6 @@ On top of these API endpoints, Datadog provides and maintains a command line int
 
 The trigger endpoint provides the list of triggered checks alongside their result identifiers. A polling endpoint is available to obtain the full results of the tests if they are available.
 
-
 ### Trigger tests endpoint
 
 The test triggering endpoint supports starting up to 50 tests in one request.
@@ -48,7 +47,7 @@ The test triggering endpoint supports starting up to 50 tests in one request.
 }
 ```
 
-The `TEST_TO_TRIGGER` objects are composed of the `public_id` (required) of the test to trigger and optional configuration overrides ([see below][#configure-tests] for description of each field).
+The `TEST_TO_TRIGGER` objects are composed of the `public_id` (required) of the test to trigger and optional configuration overrides ([see below][#configure-tests] for a description of each field).
 
 The public identifier of a test can be either the identifier of the test found in the URL of a test details page (for `https://app.datadoghq.com/synthetics/details/abc-def-ghi`, it would be `abc-def-ghi`) or the full URL to the details page (that is, `https://app.datadoghq.com/synthetics/details/abc-def-ghi`).
 
@@ -218,7 +217,7 @@ You can also create a JSON configuration file to specify more advanced options. 
 * **datadogSite**: The Datadog instance to which request is sent (choices are datadoghq.com or datadoghq.eu).
 * **files**: Glob pattern to detect synthetics tests config files.
 * **global**: Overrides of synthetics tests applied to all tests ([see below for description of each field][#configure-tests]).
-* **timeout**: Duration after which synthetics tests are considered failed (in milliseconds)
+* **timeout**: Duration after which synthetics tests are considered failed (in milliseconds).
 
 **Example global configuration file**:
 
@@ -249,7 +248,7 @@ You can also create a JSON configuration file to specify more advanced options. 
 ```
 ### Configure tests
 
-By default, the client will auto discover and run all tests specified in `**/*.synthetics.json` files (the path can be configured in the [global configuration file][#setup-the-client]). These files have a `tests` key, which contains an array of objects with the IDs of the tests to run and any potential configuration overrides for these tests. 
+By default, the client automatically discovers and runs all tests specified in `**/*.synthetics.json` files (the path can be configured in the [global configuration file][#setup-the-client]). These files have a `tests` key, which contains an array of objects with the IDs of the tests to run and any potential configuration overrides for these tests. 
 
 **Example basic test configuration file**:
 
@@ -268,8 +267,9 @@ By default, the client will auto discover and run all tests specified in `**/*.s
 
 #### Further configuration
 
-The default configurations used for the tests are the original tests' ones (visible in the UI or when [getting your tests' configurations from the API][3]).
-In the context of your CI deployment, you can however optionally decide to override some (or all) of your tests parameters by using the below overrides. If you want to define overrides for all of your tests, these same parameters can be set at the [global configuration file][#setup-the-client] level.
+The default configurations used for the tests are the original tests' configurations (visible in the UI or when [getting your tests' configurations from the API][3]).
+
+However, in the context of your CI deployment, you can optionally decide to override some (or all) of your tests parameters by using the below overrides. If you want to define overrides for all of your tests, these same parameters can be set at the [global configuration file][#setup-the-client] level.
 
 * **allowInsecureCertificates**: (_Boolean_) Disable certificate checks in API tests.
 * **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered.
@@ -331,11 +331,11 @@ The execution rule associated with the test is always the most restrictive one t
 
 #### Start URL
 
-You can configure on which url your test starts by providing a `startUrl` to your test object and build your own starting url using any part of your test's original starting url and the following environment variables:
+You can configure on which url your test starts by providing a `startUrl` to your test object and build your own starting URL using any part of your test's original starting URL and the following environment variables:
 
 | Environment variable | Description                  | Example                                                |
 |----------------------|------------------------------|--------------------------------------------------------|
-| `URL`                | Test's original starting url | `https://www.example.org:81/path/to/something?abc=123` |
+| `URL`                | Test's original starting URL | `https://www.example.org:81/path/to/something?abc=123` |
 | `DOMAIN`             | Test's domain name           | `example.org`                                          |
 | `HOST`               | Test's host                  | `www.example.org:81`                                   |
 | `HOSTNAME`           | Test's hostname              | `www.example.org`                                      |
@@ -346,7 +346,7 @@ You can configure on which url your test starts by providing a `startUrl` to you
 | `PROTOCOL`           | Test's protocol              | `https:`                                               |
 | `SUBDOMAIN`          | Test's sub domain            | `www`                                                  |
 
-For instance, if your test's starting url is `https://www.example.org:81/path/to/something?abc=123`, it can be written as:
+For instance, if your test's starting URL is `https://www.example.org:81/path/to/something?abc=123`, it can be written as:
 
 * `{{PROTOCOL}}//{{SUBDOMAIN}}.{{DOMAIN}}:{{PORT}}{{PATHNAME}}{{PARAMS}}`
 * `{{PROTOCOL}}//{{HOST}}{{PATHNAME}}{{PARAMS}}`
