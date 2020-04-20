@@ -4,10 +4,6 @@ kind: documentation
 description: "Learn the main concepts of Datadog Security Monitoring, how to enable threat detection, and discover out of the box threat detection rules."
 ---
 
-<div class="alert alert-warning">
-Security Monitoring Threat Detection Rules are in private beta.
-</div>
-
 To get started with Datadog Security Monitoring, follow these three steps:
 
 * [Ingest logs](#ingest-logs)
