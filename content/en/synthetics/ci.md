@@ -354,7 +354,7 @@ For instance, if your test's starting url is `https://www.example.org:81/path/to
 
 ### Running tests
 
-You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetics tests (or all the tests associated to the path specified in your [global configuration file][#setup-the-integration]) or to specify the tests you want to run using the `-p,--public-id` flag.
+You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetics tests (or all the tests associated to the path specified in your [global configuration file][#setup-the-client]) or to specify the tests you want to run using the `-p,--public-id` flag.
 
 Run tests by executing the CLI:
 
