@@ -52,7 +52,7 @@ You can set up an alerting condition in order to only be alerted if your endpoin
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-You can also decide after how many failures you want a location to be considered as fail using the below option:
+You can also decide after how many failures you want a location to be considered as fail. Retries will be run immediately after the location fails. You can configure the test using the option below:
 
 ```text
 Retry x time before location is marked as failed
