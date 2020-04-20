@@ -145,7 +145,7 @@ const readOnlyField = (value) => {
     if("readOnly" in value && value.readOnly) {
       isReadOnly = true;
     }
-    if(value.type === 'array' && value.items.readOnly) {
+    if(value.type === 'array' && ("items" in value && value.items.readOnly)) {
       isReadOnly = true;
     }
   }
@@ -212,7 +212,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
  */
 const descColumn = (value) => {
   const desc = (value.description && (typeof(value.description) !== "object")) ? value.description || '' : '';
-  return `<div class="col-6 column">${marked(desc) ? marked(desc) : ""}</div>`;
+  return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}</div>`.trim();
 };
 
 
@@ -378,5 +378,20 @@ const processSpecs = (specs) => {
     });
 };
 
-const specs = ['./data/api/v1/full_spec.yaml', './data/api/v2/full_spec.yaml'];
-processSpecs(specs);
+
+const init = () => {
+  const specs = ['./data/api/v1/full_spec.yaml', './data/api/v2/full_spec.yaml'];
+  processSpecs(specs);
+};
+
+module.exports = {
+  init: init,
+  isTagMatch: isTagMatch,
+  readOnlyField: readOnlyField,
+  descColumn: descColumn,
+  fieldColumn: fieldColumn,
+  typeColumn: typeColumn,
+  schemaTable: schemaTable,
+  rowRecursive: rowRecursive
+};
+
