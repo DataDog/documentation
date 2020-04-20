@@ -192,9 +192,9 @@ yarn add --dev @datadog/datadog-ci
 {{% /tab %}}
 {{< /tabs >}}
 
-### Setup the integration
+### Setup the client
 
-To setup your integration, Datadog API and application keys need to be configured. These keys can be defined in three different ways:
+To setup your client, Datadog API and application keys need to be configured. These keys can be defined in three different ways:
 
 1. As environment variables:
 
@@ -249,9 +249,52 @@ You can also create a JSON configuration file to specify more advanced options. 
 ```
 ### Configure tests
 
-The configuration of Synthetics tests occurs in `**/*.synthetics.json` (the path can be configured in the [global configuration file][#setup-the-integration]). These files have a `tests` key, which contains an array of objects with the IDs of the tests to run and any configuration overrides for these tests.
+By default, the client will auto discover and run all tests specified in `**/*.synthetics.json` files (the path can be configured in the [global configuration file][#setup-the-client]). These files have a `tests` key, which contains an array of objects with the IDs of the tests to run and any potential configuration overrides for these tests. 
 
-**Example test configuration file**:
+**Example basic test configuration file**:
+
+```json
+{
+    "tests": [
+        {
+            "id": "<TEST_PUBLIC_ID>"
+        },
+        {
+            "id": "<TEST_PUBLIC_ID>"
+        }
+    ]
+}
+```
+
+#### Further configuration
+
+The default configurations used for the tests are the original tests' ones (visible in the UI or when [getting your tests' configurations from the API][3]).
+In the context of your CI deployment, you can however optionally decide to override some (or all) of your tests parameters by using the below overrides. If you want to define overrides for all of your tests, these same parameters can be set at the [global configuration file][#setup-the-client] level.
+
+* **allowInsecureCertificates**: (_Boolean_) Disable certificate checks in API tests.
+* **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered.
+     * **username**: (_string_) Username to use in basic authentication.
+     * **password**: (_string_) Password to use in basic authentication.
+* **body**: (_string_) Data to send in a synthetics API test.
+* **bodyType**: (_string_) Type of the data sent in a synthetics API test.
+* **cookies**: (_string_) Use provided string as cookie header in API or browser test.
+* **deviceIds**: (_array_) List of devices on which to run the browser test.
+* **followRedirects**: (_Boolean_) Indicates whether to follow HTTP redirections in API tests.
+* **headers**: (_object_) Headers to replace in the test. This object should contain, as keys, the name of the header to replace and, as values, the new value of the header.
+* **locations**: (_array_) List of locations from which the test should be run. 
+* **retry**: (_object_) Retry policy for the test:
+     * **count**: (_integer_) Number of attempts to perform in case of test failure.
+     * **interval**: (_integer_) Interval between the attempts (in milliseconds).
+* **executionRule**: (_string_) Execution rule of the test: defines the behavior of the CLI in case of a failing test:
+     * **blocking**: The CLI returns an error if the test fails.
+     * **non_blocking**: The CLI only prints a warning if the test fails.
+     * **skipped**: The test is not executed at all.
+* **startUrl**: (_string_) New start URL to provide to the test.
+* **variables**: (_object_) Variables to replace in the test. This object should contain, as keys, the name of the variable to replace and, as values, the new value of the variable.
+
+**Note**: Tests' overrides take precedence over global overrides. 
+
+**Example advanced test configuration file**:
 
 ```json
 {
@@ -277,27 +320,6 @@ The configuration of Synthetics tests occurs in `**/*.synthetics.json` (the path
     ]
 }
 ```
-
-* **allowInsecureCertificates**: (_Boolean_) Disable certificate checks in API tests.
-* **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered.
-     * **username**: (_string_) Username to use in basic authentication.
-     * **password**: (_string_) Password to use in basic authentication.
-* **body**: (_string_) Data to send in a synthetics API test.
-* **bodyType**: (_string_) Type of the data sent in a synthetics API test.
-* **cookies**: (_string_) Use provided string as cookie header in API or browser test.
-* **deviceIds**: (_array_) List of devices on which to run the browser test.
-* **followRedirects**: (_Boolean_) Indicates whether to follow HTTP redirections in API tests.
-* **headers**: (_object_) Headers to replace in the test. This object should contain, as keys, the name of the header to replace and, as values, the new value of the header.
-* **locations**: (_array_) List of locations from which the test should be run. 
-* **retry**: (_object_) Retry policy for the test:
-     * **count**: (_integer_) Number of attempts to perform in case of test failure.
-     * **interval**: (_integer_) Interval between the attempts (in milliseconds).
-* **executionRule**: (_string_) Execution rule of the test: defines the behavior of the CLI in case of a failing test:
-     * **blocking**: The CLI returns an error if the test fails.
-     * **non_blocking**: The CLI only prints a warning if the test fails.
-     * **skipped**: The test is not executed at all.
-* **startUrl**: (_string_) New start URL to provide to the test.
-* **variables**: (_object_) Variables to replace in the test. This object should contain, as keys, the name of the variable to replace and, as values, the new value of the variable.
 
 #### Execution rule
 
@@ -371,15 +393,6 @@ npm run datadog-ci-synthetics
 **Note**: If you are launching your tests with a custom global configuration file, append the command associated to your `datadog-ci-synthetics` script with `--config <PATH_TO_GLOBAL_CONFIG_FILE`. 
 
 {{% /tab %}}
-{{% tab "System wide" %}}
-
-```
-datadog-ci synthetics run-tests
-```
-
-**Note**: If you are launching your tests with a custom global configuration file, append your command with `--config <PATH_TO_GLOBAL_CONFIG_FILE`. 
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Visualize test results
@@ -402,3 +415,4 @@ You can also see the results of your tests listed on your Datadog test details p
 
 [1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
 [2]: /help
+[3]: https://docs.datadoghq.com/api/?lang=bash#get-a-test
