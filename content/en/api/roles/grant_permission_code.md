@@ -1,8 +1,8 @@
 ---
-title: Grant permission
+title: Assign permissions to a role
 type: apicode
 order: 37.08
-external_redirect: /api/#grant-permissions
+external_redirect: /api/#assign-permissions-to-a-role
 ---
 
 **SIGNATURE**:

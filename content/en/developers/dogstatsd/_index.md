@@ -380,7 +380,7 @@ StatsdClient.DogStatsd.Configure(dogstatsdConfig);
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you use DogStatsD with the Container Agent or in Kubernetes, you must instanciate the host to which StatsD metrics are forwarded to with the `$DD_DOGSTATSD_SOCKET` environment variable if using a Unix Domain Socket, or with the `$DD_AGENT_HOST` environment variable if you are using the host port binding method.
+**Note**: If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the `$DD_DOGSTATSD_SOCKET` environment variable if using a Unix Domain Socket, or with the `$DD_AGENT_HOST` environment variable if you are using the host port binding method.
 
 ### Client instantiation parameters
 

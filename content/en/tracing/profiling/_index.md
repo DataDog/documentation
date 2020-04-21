@@ -26,13 +26,15 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
     wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
     ```
 
-     **Note**: Profiling is available in the `dd-java-agent.jar` library in versions above 0.44.
+     **Note**: Profiling is available in the `dd-java-agent.jar` library in versions 0.44+.
 
 2. Update your service invocation to look like:
 
     ```text
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.api-key-file=<API_KEY_FILE> -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
+
+    **Note**: With `dd-java-agent.jar` library versions 0.48+, if your organization is on Datadog EU site, add `-Ddd.site=datadoghq.eu` or set `DD_SITE=datadoghq.eu` as environment variable.
 
 3. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
@@ -56,6 +58,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 | `-Ddd.profiling.enabled`      | DD_PROFILING_ENABLED      | Set to `true` to enable profiling.                |
 | `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | File that should contain the API key as a string. |
 |                               | DD_PROFILING_API_KEY      | Datadog API key.                                  |
+| `-Ddd.site`                   | DD_SITE                   | Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. |
 
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
@@ -71,10 +74,10 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 1. Install `ddtrace` with the `profile` flavor, which contains both tracing and profiling:
 
     ```shell
-    pip install ddtrace[profile]
+    pip install ddtrace[profiling]
     ```
 
-     **Note**: Profiling is available in the `ddtrace` library for versions 0.35+.
+     **Note**: Profiling is available in the `ddtrace` library for versions 0.36+.
 
 2. Add a valid [Datadog API key][1] in your environment variable: `DD_PROFILING_API_KEY`.
 
@@ -87,7 +90,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 4. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
 
     ```python
-    import ddtrace.profile.auto
+    import ddtrace.profiling.auto
     ```
 
 5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
@@ -97,7 +100,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 - If you want to control which part of your code should be profiled, use the `ddtrace.profile.profiler.Profiler` object:
 
     ```python
-    from ddtrace.profile.profiler import Profiler
+    from ddtrace.profiling import Profiler
 
     prof = Profiler()
     prof.start()

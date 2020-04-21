@@ -2,13 +2,13 @@
 title: Autodiscovery with JMX
 kind: guide
 further_reading:
-- link: "/agent/autodiscovery/integrations"
+- link: "/agent/kubernetes/integrations"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/autodiscovery/ad_identifiers"
+- link: "/agent/guide/ad_identifiers"
   tag: "Documentation"
   text: "Match a container with the corresponding Integration Template"
-- link: "/agent/autodiscovery/management"
+- link: "/agent/kubernetes/management"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
 - link: "/agent/kubernetes/tag"
@@ -63,9 +63,9 @@ The Datadog-Kafka integration example below leverages JMX to collect metrics and
 4. [Enable Autodiscovery for your Agent][4].
 
 [1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: /agent/autodiscovery/template_variables
-[3]: /agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
-[4]: /agent/autodiscovery/?tab=agent#docker-autodiscovery
+[2]: /agent/faq/template_variables
+[3]: /agent/guide/ad_identifiers/#short-image-container-identifiers
+[4]: /agent/docker/integrations/
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
 
@@ -157,9 +157,9 @@ The Datadog-Kafka integration example below leverages JMX to collect metrics and
 [26]: /integrations/tomcat
 [27]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
 [28]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
-[29]: /agent/autodiscovery/template_variables
-[30]: /agent/autodiscovery/ad_identifiers/#short-image-container-identifiers
-[31]: /agent/autodiscovery/?tab=containerizedagent#docker-autodiscovery
+[29]: /agent/faq/template_variables
+[30]: /agent/guide/ad_identifiers/#short-image-container-identifiers
+[31]: /agent/docker/integrations/#docker-autodiscovery
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -233,4 +233,4 @@ services:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery/ad_identifiers
+[1]: /agent/guide/ad_identifiers

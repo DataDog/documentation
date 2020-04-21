@@ -16,7 +16,7 @@ The usage metering end-point allows you to:
 * Get Hourly Usage For Logs By Index
 * Get Hourly Usage For Custom Metrics
 * Get Top Custom Metrics By Hourly Average
-* Get Hourly Usage For Trace Search
+* Get Hourly Usage For App Analytics
 * Get Hourly Usage For Synthetics API Checks
 * Get Hourly Usage For Synthetics Browser Checks
 * Get Hourly Usage For Fargate Tasks
@@ -25,6 +25,10 @@ The usage metering end-point allows you to:
 * Get Hourly Usage For Network Flows
 * Get Hourly Usage For RUM Sessions
 * Get Multi-Org Usage Summary
+* Get Daily Usage Attribution Available Files
+* Get Daily Usage Attribution File URL
+* Get Monthly Usage Attribution Available Files
+* Get Monthly Usage Attribution File URL
 
 Usage data is delayed by up to 72 hours from when it was incurred. It is retained for the past 15 months.
 

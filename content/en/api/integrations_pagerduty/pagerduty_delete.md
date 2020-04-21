@@ -7,7 +7,7 @@ external_redirect: /api/#delete-a-pagerduty-integration
 
 ## Delete a PagerDuty integration
 
-Delete the Datadog-PagerDuty integration.
+Delete the PagerDuty integration.
 
 **ARGUMENTS**:
 

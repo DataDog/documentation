@@ -49,7 +49,7 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 
 To begin tracing your Go applications, your environment must first meet the following requirements:
 
-* Runing the Datadog Agent `>= 5.21.1`.
+* Running the Datadog Agent `>= 5.21.1`.
 * Using Go `1.9+`
 
 ### Integrations

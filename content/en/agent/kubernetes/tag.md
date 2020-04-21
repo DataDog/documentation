@@ -10,9 +10,9 @@ further_reading:
 - link: "tagging/using_tags"
   tag: "Documentation"
   text: "Using tags with Datadog"
-- link: "/agent/autodiscovery/management"
+- link: "/agent/guide/autodiscovery-management"
   tag: "Documentation"
-  text: "Manage which Container to include in the Agent Autodiscovery"
+  text: "Limit data collection to a subset of containers only"
 ---
 
 The Agent can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.

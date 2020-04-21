@@ -244,6 +244,7 @@ $ docker run -e DD_API_KEY="<DATADOG_API_KEY>" \
 --cap-add=SYS_RESOURCE \
 --cap-add=SYS_PTRACE \
 --cap-add=NET_ADMIN \
+--cap-add=IPC_LOCK \
 datadog/agent:latest
 ```
 

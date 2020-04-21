@@ -58,10 +58,12 @@ For Java based producers and consumers, add the following to the `conf.yaml` and
 ```yaml
 - host: remotehost
   port: 9998 # Producer
-  kafka: producer0
+  tags:
+    - kafka: producer0
 - host: remotehost
   port: 9997 # Consumer
-  kafka: consumer0
+  tags:
+    - kafka: consumer0
 ```
 
 **Note**: This method does not work if you are using custom producer and consumer clients written in other languages or not exposing mBeans. To submit your metrics from your code, use [DogStatsD][10].

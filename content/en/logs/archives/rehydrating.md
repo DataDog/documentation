@@ -30,11 +30,15 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 5. (Optional) **Add a description** to give your team context about the purpose of the historical view.
 
+6. Define the maximum number of logs that should be rehydrated in this historical view, **from 1 million to 1 billion**
+
+7. (Optional) Define the retention period of the rehydrated logs. Choose `Decide Later` if you are unsure how long you will need the logs.
+
 {{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Reload from Archive"  style="width:75%;">}}
 
 #### Rehydrate by Query
 
-By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges. You can rehydrate up to 300 million log events per historical view you create.
+By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges. You can rehydrate up to 1 billion log events per historical view you create.
 
 ### View historical view content
 
