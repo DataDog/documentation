@@ -95,14 +95,16 @@ Installing more than one integration is a matter of adding the configuration inf
 
 ## Autodetected integrations
 
-If you set up [process collection][27], Datadog autodetects technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][2].
+If you set up [process collection][27], Datadog autodetects technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][2]:
+
+{{< img src="getting_started/integrations/ad_integrations.png" alt="Autodetected integrations" >}}
 
 Each integration has one of two status types:
 
 - **+ Detected**: This integration is not enabled on any host(s) running it.
 - **✓ Partial Visibility**: This integration is enabled on some, but not all relevant hosts are running it.
 
-Hosts that are running the integration, but where the integration is not enabled, can be found in the Hosts tab of the integrations tile.
+Hosts that are running the integration, but where the integration is not enabled, can be found in the **Hosts** tab of the integrations tile.
 
 ## Security practices
 
