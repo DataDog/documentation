@@ -313,7 +313,7 @@ When using Swarm mode for Docker Cloud, labels must be applied to the image:
 ```yaml
 version: '1.0'
 services:
----
+# ...
 project:
     image: '<IMAGE_NAME>'
     labels:
