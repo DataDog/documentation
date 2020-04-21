@@ -80,7 +80,7 @@ func main() {
 
 **Inject trace IDs in your logs**
 
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following these instructions][3] to automatically add trace and span id in your logs.
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Go logging instructions][3] to automatically add trace and span IDs in your logs.
 
 ## Configure your Datadog Agent
 
