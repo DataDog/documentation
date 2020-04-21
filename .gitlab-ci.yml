@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:zach_add-deploy-deps
   tags:
     - "runner:main"
     - "size:large"
@@ -50,6 +50,7 @@ build_preview:
     - rm -rf data/service_checks
     - push_site_to_s3
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
+    - in-isolation deploy_preview
     #- remove_static_from_repo
     #- create_artifact
     #- create_artifact_untracked
@@ -121,6 +122,7 @@ build_live:
     - push_site_to_s3
     - create_artifact
     - create_artifact_untracked
+    - in-isolation deploy_live
   artifacts:
     when: on_success
     paths:
