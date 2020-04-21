@@ -142,7 +142,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 #### Native Module Compatibility
 
 | Module      | Support Type        | Notes |
-| ----------- | ------------------- |       |
+| ----------- | ------------------- | ------------------------------------------ |
 | [dns][21]   | Fully supported     |       |
 | [fs][22]    | Fully supported     |       |
 | [http][23]  | Fully supported     |       |
