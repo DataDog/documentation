@@ -261,7 +261,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         // build markdown
         const toggleArrow = (childData) ? '<span class="toggle-arrow"><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z" fill="black"/></svg></span> ' : "" ;
         const required = requiredFields.includes(key) ? '<span style="color:red;">*</span>' : "";
-        const readOnlyField = (isReadOnly) ? ' <span class="read-only">&#127361;</span>' : '';
+        const readOnlyField = (isReadOnly) ? '' : '';
 
         // build html
         html += `
@@ -340,20 +340,20 @@ const buildResources = (dereferencedObject, pageDir, tagName) => {
         if(requestHTML) {
           // fs.writeFileSync(`${pageDir}${action.operationId}_request.html`, requestHTML, 'utf-8');
           pageExampleJson[action.operationId]["request"]["html"] = requestHTML;
-          console.log(`successfully wrote ${pageDir}${action.operationId}_request.html`);
+          console.log(`successfully wrote ${pageDir}${action.operationId} html`);
         }
       }
       // add response json
-      Object.entries(action.responses).forEach(([response_code, response]) => {
+      Object.entries(action.responses).forEach(([responseCode, response]) => {
         if(("content" in response)) {
           const contentTypeData = response.content[Object.keys(response.content)[0]];
-          pageExampleJson[action.operationId]["responses"][response_code] = {"json": {}, "html": ""};
-          pageExampleJson[action.operationId]["responses"][response_code]["json"] = filterExampleJson(contentTypeData.schema);
+          pageExampleJson[action.operationId]["responses"][responseCode] = {"json": {}, "html": ""};
+          pageExampleJson[action.operationId]["responses"][responseCode]["json"] = filterExampleJson(contentTypeData.schema);
           const responseHTML = schemaTable("response", contentTypeData.schema);
           if(responseHTML) {
-            // fs.writeFileSync(`${pageDir}${action.operationId}_response_${response_code}.html`, responseHTML, 'utf-8');
-            pageExampleJson[action.operationId]["responses"][response_code]["html"] = responseHTML;
-            console.log(`successfully wrote ${pageDir}${action.operationId}_response_${response_code}.html`);
+            // fs.writeFileSync(`${pageDir}${action.operationId}_response_${responseCode}.html`, responseHTML, 'utf-8');
+            pageExampleJson[action.operationId]["responses"][responseCode]["html"] = responseHTML;
+            console.log(`successfully wrote ${pageDir}${action.operationId}_response_${responseCode} html`);
           }
         }
       });
@@ -392,13 +392,13 @@ const init = () => {
 };
 
 module.exports = {
-  init: init,
-  isTagMatch: isTagMatch,
-  isReadOnlyRow: isReadOnlyRow,
-  descColumn: descColumn,
-  fieldColumn: fieldColumn,
-  typeColumn: typeColumn,
-  schemaTable: schemaTable,
-  rowRecursive: rowRecursive
+  init,
+  isTagMatch,
+  isReadOnlyRow,
+  descColumn,
+  fieldColumn,
+  typeColumn,
+  schemaTable,
+  rowRecursive
 };
 

@@ -1,5 +1,6 @@
 import Stickyfill from 'stickyfilljs';
 import algoliasearch from 'algoliasearch';
+import Choices from 'choices.js';
 
 import { initializeIntegrations } from './components/integrations';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
@@ -8,6 +9,24 @@ import datadogLogs from './components/dd-browser-logs-rum';
 import { moveToAnchor } from './helpers/moveToAnchor';
 import { redirectToRegion } from './region-redirects';
 
+
+// custom region and API version selector dropdown
+const versionSelect = document.querySelector('.js-api-version-select');
+const regionSelect = document.querySelector('.js-region-selector');
+
+// const element = document.querySelector('.js-choice');
+const choiceOptions = {
+    searchEnabled: false,
+    placeholder: false,
+    itemSelectText: '',
+    renderSelectedChoices: false
+}
+if (versionSelect) {
+    const choices = new Choices(versionSelect, choiceOptions);
+}
+if (regionSelect) {
+    const regionChoices = new Choices(regionSelect, choiceOptions);
+}
 
 // Setup for large screen ToC
 
