@@ -114,7 +114,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     - [Manifest with Logs and metrics collection enabled][5].
     - [Manifest with APM and metrics collection enabled][6].
     - [Manifest with Network Performance Monitoring enabled][7]
-    - [Vanilla Manifest with just metrics collection enabled][8].
+    - [Vanilla manifest with just metrics collection enabled][8].
 
      To enable trace collection completely, [extra steps are required on your application pod configuration][9]. Refer also to the [logs][10], [APM][11], [processes][12], and [Network Performance Monitoring][13] documentation pages to learn how to enable each feature individually.
 
