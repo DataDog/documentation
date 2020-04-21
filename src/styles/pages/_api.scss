@@ -113,6 +113,10 @@ $ddpurple: #632ca6;
         }
     }
 
+    .table-request .isReadOnly {
+        display:none;
+    }
+
     .schema-table {
         margin: 0 0 30px 0;
         background-color: #fdfcff;

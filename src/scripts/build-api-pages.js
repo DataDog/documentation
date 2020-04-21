@@ -255,8 +255,8 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         const isReadOnly = isReadOnlyRow(value);
 
         // build up row classes
-        const outerRowClasses = `${(isNested) ? "isNested d-none" : ""} ${(childData) ? "hasChildData" : ""} ${(isReadOnly && tableType === 'request') ? "isReadOnly" : ""}`;
-        const nestedRowClasses = `first-row ${(childData) ? "js-collapse-trigger collapse-trigger" : ""} ${(isReadOnly && tableType === 'request') ? "isReadOnly" : ""}`;
+        const outerRowClasses = `${(isNested) ? "isNested d-none" : ""} ${(childData) ? "hasChildData" : ""} ${(isReadOnly) ? "isReadOnly" : ""}`;
+        const nestedRowClasses = `first-row ${(childData) ? "js-collapse-trigger collapse-trigger" : ""} ${(isReadOnly) ? "isReadOnly" : ""}`;
 
         // build markdown
         const toggleArrow = (childData) ? '<span class="toggle-arrow"><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z" fill="black"/></svg></span> ' : "" ;
@@ -291,7 +291,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
  * returns html table string
  */
 const schemaTable = (tableType, data) => `
-  <div class=" schema-table row">
+  <div class="table-${tableType} schema-table row">
     <p class="expand-all js-expand-all text-primary">Expand All</p>
     <div class="col-12">
       <div class="row table-header">
