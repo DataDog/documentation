@@ -11,6 +11,7 @@ aliases:
     - /agent/kubernetes/event_collection
     - /agent/kubernetes/daemonset_setup
     - /agent/kubernetes/helm
+    - /agent/autodiscovery
 further_reading:
     - link: 'agent/kubernetes/log'
       tag: 'Documentation'
@@ -45,7 +46,11 @@ To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog
 
 1. [Install Helm][1].
 2. Download the [Datadog `value.yaml` configuration file][2].
-3. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
+3. If this is a fresh install, add the Helm stable repo:
+    ```bash
+    helm repo add stable https://kubernetes-charts.storage.googleapis.com/ && helm repo update
+    ```
+4. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
 
 - **Helm v3+**
 
@@ -163,10 +168,10 @@ To install the Datadog Agent on your Kubernetes cluster:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-[The Datadog Operator][2] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options. To get started, check out the [Getting Started page][1] in the [Datadog Operator repo][2] or install the operator from the [OperatorHub.io Datadog Operator page][3].
+[The Datadog Operator][1] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options. To get started, check out the [Getting Started page][2] in the [Datadog Operator repo][1] or install the operator from the [OperatorHub.io Datadog Operator page][3].
 
-[1]: https://github.com/DataDog/datadog-operator
-[2]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
+[1]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
+[2]: https://github.com/DataDog/datadog-operator
 [3]: https://operatorhub.io/operator/datadog-operator
 {{% /tab %}}
 {{< /tabs >}}
