@@ -23,7 +23,7 @@ Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
 ## Manually Inject Trace and Span IDs
 
-The Go tracer API allows printing span information along with log statements by using the exposed [Span.Log()][2] function:
+The Go tracer API allows printing span information along with log statements using the `%v` format specifier:
 
 ```go
 package main
@@ -40,13 +40,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
     defer span.Finish()
 
     // Append span info to log messages:
-    log.Printf("my log message %s", span.Log())
+    log.Printf("my log message %v", span)
 }
 ```
 
 The above example illustrates how to use the span's context in the standard library's `log` package. Similar logic may be applied to 3rd party packages too.
 
-**Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id`, `dd.span_id`, 'dd.service', 'dd.env' and 'dd.version' are being parsed as strings. More information can be found in the [FAQ on this topic][4].
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id`, `dd.span_id`, 'dd.service', 'dd.env' and 'dd.version' are being parsed as strings. More information can be found in the [FAQ on this topic][3].
 
 ## Further Reading
 
@@ -54,6 +54,5 @@ The above example illustrates how to use the span's context in the standard libr
 
 
 [1]: /help
-[2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace#Span
-[3]: /logs/log_collection/go/#configure-your-logger
-[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[2]: /logs/log_collection/go/#configure-your-logger
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
