@@ -37,9 +37,10 @@ List endpoint returns logs that match a log search query. [Results are paginated
     Time-ascending `asc` or time-descending `desc`results.
 * **`limit`** [*optional*, *default*=**10**]:
     Number of logs return in the response (maximum is 1000)
-* **`index`** [*optional*, *default*=**main**]:
-    For multi-index organizations, the log index in which the request is performed.
+* **`index`** [*optional*, *default*=***** (all indexex)]:
+    For [multi-index organizations][4], the log index in which the request is performed.
 
 [1]: /logs/guide/collect-multiple-logs-with-pagination
 [2]: /logs/archives
 [3]: /logs/search_syntax
+[4]: /logs/indexes#multiple-indexes
