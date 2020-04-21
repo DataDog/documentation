@@ -316,7 +316,7 @@ Alternately, since `0.2.0`, you can configure the Datadog sink by using an `apps
 
 In the "Serilog.WriteTo" array, add an entry for DatadogLogs. An example is shown below:
 
-```
+```json
 "Serilog": {
   "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Datadog.Logs" ],
   "MinimumLevel": "Debug",
