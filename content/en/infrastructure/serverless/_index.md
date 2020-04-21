@@ -20,7 +20,7 @@ Serverless is a concept where you write event-driven code and upload it to a clo
 
 ## Installation
 
-The Serverless dashboard requires no installation of its own, but it relies on data sources that require their own installation, refer to the dedicated set of instructions for your Cloud provider:
+The Serverless dashboard requires no installation of its own, but it relies on data sources that require their own installation. Refer to the dedicated set of instructions for your Cloud provider:
 
 {{< partial name="serverless/serverless-setup.html" >}}
 
