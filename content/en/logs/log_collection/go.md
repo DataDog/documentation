@@ -78,6 +78,10 @@ func main() {
 }
 ```
 
+**Inject trace IDs in your logs**
+
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following these instructions][3] to automatically add trace and span id in your logs.
+
 ## Configure your Datadog Agent
 
 Create a `go.d/conf.yaml` file in your `conf.d/` folder with the following content:
@@ -108,3 +112,4 @@ Here are some little advices:
 
 [1]: https://github.com/sirupsen/logrus
 [2]: /logs/processing/parsing
+[3]: /tracing/connect_logs_and_traces/go
