@@ -35,13 +35,13 @@ Logs results are scoped by [permissions][5] attached to the Application Key used
 * **`startAt`** [*optional*, *default*=**None**]:
    Hash identifier of the first log to return in the list, available in a log `id` attribute. This parameter is used for the [pagination feature][1].
    **Note**: this parameter is ignored if the corresponding log is out of the scope of the specified time window.
-* **`sort`** [*optional*, *default*=**desc**]:
+* **`sort`** [*optional*, *default*=`"desc"`]:
     Time-ascending `asc` or time-descending `desc`results.
-* **`limit`** [*optional*, *default*=**10**]:
+* **`limit`** [*optional*, *default*=`10`]:
     Number of logs return in the response (maximum is 1000)
-* **`index`** [*optional*, *default*=**"*"** (all indexes)]:
-    Coma separated list of index names. E.g `"retention-15,retention-30"`. For [multi-index organizations][4], the log index in which the request is performed.
-    
+* **`index`** [*optional*, *default*=`"*"`]:
+    - Coma separated list of index names. E.g `"retention-15,retention-30"`. `"*"` stands for all indexes.
+    - For [multi-index organizations][4], the log index in which the request is performed.    
 
 [1]: /logs/guide/collect-multiple-logs-with-pagination
 [2]: /logs/archives
