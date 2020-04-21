@@ -18,55 +18,15 @@ further_reading:
 
 Serverless is a concept where you write event-driven code and upload it to a cloud provider, which manages all of the underlying compute resources. [Datadog Serverless][1] brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view.
 
-Enable the [AWS Lambda][2] integration to begin collecting CloudWatch and custom metrics from your Lambda functions.
-
 ## Installation
 
-The Serverless dashboard requires no installation of its own, but it relies on three data sources that require their own installation:
+The Serverless dashboard requires no installation of its own, but it relies on data sources that require their own installation. Refer to the dedicated set of instructions for your Cloud provider:
 
-1. [Amazon Web Services integration][3] (required)
-
-    This integration populates the summary graphs and the main functions table. Install this integration and ensure that Lambda metrics are reporting in your account.
-
-    **Note**: Metrics in the Serverless page are delayed by ~10 minutes, as this is the default speed at which Datadog polls AWS APIs. To find out if your delay can be decreased, contact [Datadog support][4].
-
-2. [AWS X-Ray integration][5] (recommended)
-    This integration provides full end-to-end tracing for requests that hit your Lambda functions. The traces appear in the Serverless function detail page and in Datadog APM.
-
-    To enable this, refer to the [AWS X-Ray integration documentation][6].
-
-    **Note**: Traces are delayed by ~5 minutes, as this is the speed at which Datadog polls AWS X-Ray APIs.
-
-3. AWS CloudWatch Logs (recommended)
-
-    Install this to see logs from your Lambda functions in the function detail page. This also populates additional metrics, such as Memory Used (avg) and Last Start in your functions table.
-
-    To enable this, refer to the [documentation for sending Lambda logs to Datadog][2].
+{{< partial name="serverless/serverless-setup.html" >}}
 
 ## Searching, filtering, sorting
 
-### Tagging
-
-Datadog tags your Lambda functions and metrics with relevant AWS metadata and custom tags.
-
-AWS Metadata:
-
-- account_id
-- executedversion
-- functionname
-- memorysize
-- region
-- resource
-- runtime
-
-In your Datadog IAM policy, add the permissions:
-
-* `lambda:List*` to have the tags above collected.
-* `tag:GetResources` to have custom tags collected.
-
-### Filtering
-
-Use the faceted search functionality along the left side of the page to narrow down the functions that are in view. All AWS and custom tags are available to use as filters.
+Use the faceted search functionality along the left side of the page to narrow down the functions that are in view. All your cloud provider tags and your custom tags are available to use as filters.
 
 ### Selecting metrics on table
 
@@ -98,7 +58,7 @@ Use the summary graphs across the top of screen and the time selector to focus i
 
 ### Traces
 
-Via the AWS X-Ray integration, traces from the function currently being viewed are shown in the `Traces` section. You can sort these traces by attributes such as date, duration, and status.
+Traces from the function currently being viewed are shown in the `Traces` section. You can sort these traces by attributes such as date, duration, and status.
 
 {{< img src="infrastructure/serverless/traces.png" alt="Traces" >}}
 
@@ -110,13 +70,13 @@ The `Logs` section aggregates logs from all recent invocations of the current fu
 
 ## Trace detail view
 
-Clicking on a particular trace opens the trace detail view for that trace. The X-Ray subsegments are transformed into Datadog spans while preserving the naming paradigms, span tags, and structure of the overall trace.
+Clicking on a particular trace opens the trace detail view for that trace. For AWS, the AWS X-Ray subsegments are transformed into Datadog spans while preserving the naming paradigms, span tags, and structure of the overall trace.
 
 {{< img src="infrastructure/serverless/traces2.png" alt="Traces" >}}
 
 Datadog provides specially formatted serverless traces for readability and usability. Clicking on the span from another Lambda function creates a link to that function’s detail page, enabling you to jump to another function that is part of the trace.
 
-### Logs
+### Trace logs
 
 All logs emitted from a function, and all functions it calls, are pulled into the function detail page as well. Narrow down the timeframe of the page to a specific moment of interest to view the logs during a critical point in time. Click on the logs in the table to see the full log in more detail.
 
@@ -133,8 +93,3 @@ The errors tab bubbles up exceptions that occured during the duration of the tra
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://app.datadoghq.com/functions
-[2]: /integrations/amazon_lambda/#log-collection
-[3]: /integrations/amazon_web_services
-[4]: /help
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
-[6]: /integrations/amazon_xray
