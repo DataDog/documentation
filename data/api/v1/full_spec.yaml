@@ -239,24 +239,24 @@ components:
       - ERROR
     AlertGraphWidgetDefinition:
       description: Alert graphs are timeseries graphs showing the current status of
-        any monitor defined on your system
+        any monitor defined on your system.
       properties:
         alert_id:
-          description: ID of the alert to use in the widget
+          description: ID of the alert to use in the widget.
           type: string
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
-          description: The title of the widget
+          description: The title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: alert_graph
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
         viz_type:
@@ -268,33 +268,33 @@ components:
       type: object
     AlertValueWidgetDefinition:
       description: Alert values are query values showing the current value of the
-        metric in any monitor defined on your system
+        metric in any monitor defined on your system.
       properties:
         alert_id:
-          description: ID of the alert to use in the widget
+          description: ID of the alert to use in the widget.
           type: string
         precision:
           description: Number of decimal to show. If not defined, will use the raw
-            value
+            value.
           format: int64
           type: integer
         text_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of value in the widget
+          description: Size of value in the widget.
           type: string
         type:
           default: alert_value
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
         unit:
-          description: Unit to display with the value
+          description: Unit to display with the value.
           type: string
       required:
       - type
@@ -479,10 +479,12 @@ components:
       type: object
     ChangeWidgetDefinition:
       description: The Change graph shows you the change in a value over the time
-        period chosen
+        period chosen.
       properties:
         requests:
-          description: TODO.
+          description: "Array of one request object to display in the widget.\n\n\
+            See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n\
+            \ to learn how to build the `REQUEST_SCHEMA`."
           example:
           - q/apm_query/log_query: <METRIC_1>{<SCOPE_1>}
           items:
@@ -493,16 +495,16 @@ components:
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: change
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -590,16 +592,16 @@ components:
       type: object
     CheckStatusWidgetDefinition:
       description: Check status shows the current status or number of results for
-        any check performed
+        any check performed.
       properties:
         check:
-          description: Name of the check to use in the widget
+          description: Name of the check to use in the widget.
           type: string
         group:
-          description: Group reporting a single check
+          description: Group reporting a single check.
           type: string
         group_by:
-          description: List of tag prefixes to group by in the case of a cluster check
+          description: List of tag prefixes to group by in the case of a cluster check.
           items:
             description: TODO.
             type: string
@@ -608,24 +610,24 @@ components:
           $ref: '#/components/schemas/WidgetGrouping'
         tags:
           description: List of tags used to filter the groups reporting a cluster
-            check
+            check.
           items:
-            description: TODO.
+            description: Tag name.
             type: string
           type: array
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: check_status
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -648,24 +650,26 @@ components:
       readOnly: true
       type: object
     Dashboard:
-      description: TODO.
+      description: "A dashboard is Datadog\u2019s tool for visually tracking, analyzing,\
+        \ and displaying\nkey performance metrics, which enable you to monitor the\
+        \ health of your infrastructure."
       properties:
         author_handle:
-          description: TODO.
+          description: Identifier of the dashboard author.
           example: test@datadoghq.com
           readOnly: true
           type: string
         created_at:
-          description: TODO.
+          description: Creation date of the dashboard.
           format: date-time
           readOnly: true
           type: string
         description:
-          description: Description of the dashboard
+          description: Description of the dashboard.
           nullable: true
           type: string
         id:
-          description: ID of the dashboard
+          description: ID of the dashboard.
           example: 123-abc-456
           readOnly: true
           type: string
@@ -678,7 +682,7 @@ components:
         layout_type:
           $ref: '#/components/schemas/DashboardLayoutType'
         modified_at:
-          description: TODO.
+          description: Modification date of the dashboard.
           format: date-time
           readOnly: true
           type: string
@@ -691,27 +695,29 @@ components:
           nullable: true
           type: array
         template_variable_presets:
-          description: TODO.
+          description: Array of template variables saved views.
           items:
             $ref: '#/components/schemas/DashboardTemplateVariablePreset'
           nullable: true
           type: array
         template_variables:
-          description: TODO.
+          description: List of template variables for this dashboard.
           items:
             description: TODO.
             properties:
               default:
-                description: TODO.
+                description: The default value for the template variable on dashboard
+                  load.
                 example: my-host
                 nullable: true
                 type: string
               name:
-                description: TODO.
+                description: The name of the variable.
                 example: host1
                 type: string
               prefix:
-                description: TODO.
+                description: The tag prefix associated with the variable. Only tags
+                  with this prefix appear in the variable dropdown.
                 example: host
                 nullable: true
                 type: string
@@ -721,15 +727,15 @@ components:
           nullable: true
           type: array
         title:
-          description: Title of the dashboard
+          description: Title of the dashboard.
           type: string
         url:
-          description: TODO.
+          description: The URL of the dashboard.
           example: /dashboard/123-abc-456/example-dashboard-title
           readOnly: true
           type: string
         widgets:
-          description: List of widgets to display on the dashboard
+          description: List of widgets to display on the dashboard.
           items:
             $ref: '#/components/schemas/Widget'
           type: array
@@ -739,14 +745,14 @@ components:
       - widgets
       type: object
     DashboardDeleteResponse:
-      description: Response from the DeleteDashboard call
+      description: Response from the DeleteDashboard call.
       properties:
         deleted_dashboard_id:
-          description: ID of the deleted dashboard
+          description: ID of the deleted dashboard.
           type: string
       type: object
     DashboardLayoutType:
-      description: Layout type of the dashboard (ordered or free)
+      description: Layout type of the dashboard.
       enum:
       - ordered
       - free
@@ -812,41 +818,41 @@ components:
           type: array
       type: object
     DashboardSummary:
-      description: TODO.
+      description: Dashboard summary response.
       properties:
         dashboards:
-          description: TODO.
+          description: List of dashboard definitions.
           items:
-            description: TODO.
+            description: Dashboard definition.
             properties:
               author_handle:
-                description: TODO.
+                description: Identifier of the dashboard author.
                 type: string
               created_at:
-                description: TODO.
+                description: Creation date of the dashboard.
                 format: date-time
                 type: string
               description:
-                description: TODO.
+                description: Description of the dashboard.
                 type: string
               id:
-                description: TODO.
+                description: Dashboard identifier.
                 type: string
               is_read_only:
-                description: TODO.
+                description: Whether this dashboard is read-only. If True, only the
+                  author and admins can make changes to it.
                 type: boolean
               layout_type:
-                description: TODO.
-                type: string
+                $ref: '#/components/schemas/DashboardLayoutType'
               modified_at:
-                description: TODO.
+                description: Modification date of the dashboard.
                 format: date-time
                 type: string
               title:
-                description: TODO.
+                description: Title of the dashboard.
                 type: string
               url:
-                description: TODO.
+                description: URL of the dashboard.
                 type: string
             type: object
           type: array
@@ -855,7 +861,7 @@ components:
       description: Template variables saved views.
       properties:
         name:
-          description: The name of the variable
+          description: The name of the variable.
           type: string
         template_variables:
           description: TODO.
@@ -867,10 +873,10 @@ components:
       description: TODO.
       properties:
         name:
-          description: The name of the variable
+          description: The name of the variable.
           type: string
         value:
-          description: The value of the template variable within the saved view
+          description: The value of the template variable within the saved view.
           type: string
       type: object
     DeletedMonitor:
@@ -883,35 +889,37 @@ components:
       readOnly: true
       type: object
     DistributionWidgetDefinition:
-      description: "The Distribution visualization is another way of showing metrics\
-        \ aggregated across one or several tags, such as hosts. Unlike the heat map,\
+      description: "The Distribution visualization is another way of showing metrics\n\
+        aggregated across one or several tags, such as hosts.\nUnlike the heat map,\
         \ a distribution graph\u2019s x-axis is quantity rather than time."
       properties:
         legend_size:
           $ref: '#/components/schemas/WidgetLegendSize'
         requests:
-          description: TODO.
+          description: "Array of one request object to display in the widget.\n\n\
+            See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n\
+            \ to learn how to build the `REQUEST_SCHEMA`."
           items:
             $ref: '#/components/schemas/DistributionWidgetRequest'
           maxItems: 1
           minItems: 1
           type: array
         show_legend:
-          description: Whether or not to display the legend on this widget
+          description: Whether or not to display the legend on this widget.
           type: boolean
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: distribution
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -932,7 +940,7 @@ components:
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
         q:
-          description: TODO.
+          description: Widget query.
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
@@ -1245,7 +1253,7 @@ components:
           type: string
         tags_execution:
           description: The execution method for multi-value filters. Can be either
-            and or or
+            and or or.
           type: string
       required:
       - search
@@ -1261,31 +1269,32 @@ components:
           type: string
       type: object
     EventStreamWidgetDefinition:
-      description: The event stream is a widget version of the stream of events on
-        the Event Stream view. Only available on FREE layout dashboards
+      description: 'The event stream is a widget version of the stream of events
+
+        on the Event Stream view. Only available on FREE layout dashboards.'
       properties:
         event_size:
           $ref: '#/components/schemas/WidgetEventSize'
         query:
-          description: Query to filter the event stream with
+          description: Query to filter the event stream with.
           type: string
         tags_execution:
           description: The execution method for multi-value filters. Can be either
-            and or or
+            and or or.
           type: string
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: event_stream
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -1294,28 +1303,28 @@ components:
       type: object
     EventTimelineWidgetDefinition:
       description: The event timeline is a widget version of the timeline that appears
-        at the top of the Event Stream view. Only available on FREE layout dashboards
+        at the top of the Event Stream view. Only available on FREE layout dashboards.
       properties:
         query:
-          description: Query to filter the event timeline with
+          description: Query to filter the event timeline with.
           type: string
         tags_execution:
           description: The execution method for multi-value filters. Can be either
-            and or or
+            and or or.
           type: string
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: event_timeline
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -1325,22 +1334,22 @@ components:
     FreeTextWidgetDefinition:
       description: Free text is a widget that allows you to add headings to your screenboard.
         Commonly used to state the overall purpose of the dashboard. Only available
-        on FREE layout dashboards
+        on FREE layout dashboards.
       properties:
         color:
-          description: Color of the text
+          description: Color of the text.
           type: string
         font_size:
-          description: Size of the text
+          description: Size of the text.
           type: string
         text:
-          description: Text to display
+          description: Text to display.
           type: string
         text_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         type:
           default: free_text
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -1441,16 +1450,16 @@ components:
     GroupWidgetDefinition:
       description: The groups widget allows you to keep similar graphs together on
         your timeboard. Each group has a custom header, can hold one to many graphs,
-        and is collapsible
+        and is collapsible.
       properties:
         layout_type:
           $ref: '#/components/schemas/WidgetLayoutType'
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         type:
           default: group
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
         widgets:
@@ -1551,21 +1560,21 @@ components:
           minItems: 1
           type: array
         show_legend:
-          description: Whether or not to display the legend on this widget
+          description: Whether or not to display the legend on this widget.
           type: boolean
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: heatmap
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
         yaxis:
@@ -1588,7 +1597,7 @@ components:
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
         q:
-          description: TODO.
+          description: Widget query.
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
@@ -1736,7 +1745,7 @@ components:
       type: object
     HostMapWidgetDefinition:
       description: The host map widget graphs any metric across your hosts using the
-        same visualization available from the main Host Map page
+        same visualization available from the main Host Map page.
       properties:
         group:
           description: List of tag prefixes to group by.
@@ -1770,7 +1779,7 @@ components:
             type: string
           type: array
         style:
-          description: The style to apply to the widget
+          description: The style to apply to the widget.
           properties:
             fill_max:
               description: Max value to use to color the map.
@@ -1786,16 +1795,16 @@ components:
               type: boolean
           type: object
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: hostmap
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -1871,15 +1880,15 @@ components:
       type: object
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
-        page on your dashboard. Only available on FREE layout dashboards
+        page on your dashboard. Only available on FREE layout dashboards.
       properties:
         type:
           default: iframe
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
         url:
-          description: URL of the iframe
+          description: URL of the iframe.
           type: string
       required:
       - type
@@ -2027,7 +2036,7 @@ components:
     ImageWidgetDefinition:
       description: The image widget allows you to embed an image on your dashboard.
         An image can be a PNG, JPG, or animated GIF. Only available on FREE layout
-        dashboards
+        dashboards.
       properties:
         margin:
           $ref: '#/components/schemas/WidgetMargin'
@@ -2035,11 +2044,11 @@ components:
           $ref: '#/components/schemas/WidgetImageSizing'
         type:
           default: image
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
         url:
-          description: URL of the image
+          description: URL of the image.
           type: string
       required:
       - type
@@ -2120,20 +2129,24 @@ components:
             description: TODO.
             properties:
               facet:
-                description: TODO.
+                description: Facet name.
+                example: resource_name
                 type: string
               limit:
                 description: TODO.
+                example: 50
                 format: int64
                 type: integer
               sort:
-                description: TODO.
+                description: Define a sorting method.
                 properties:
                   aggregation:
-                    description: TODO.
+                    description: The aggregation method.
+                    example: avg
                     type: string
                   facet:
-                    description: TODO.
+                    description: Facet name.
+                    example: '@string_query.interval'
                     type: string
                   order:
                     $ref: '#/components/schemas/WidgetSort'
@@ -2149,7 +2162,7 @@ components:
           description: TODO.
           type: string
         multi_compute:
-          description: This field is mutually exclusive with `compute`
+          description: This field is mutually exclusive with `compute`.
           items:
             $ref: '#/components/schemas/LogsQueryCompute'
           type: array
@@ -2165,10 +2178,10 @@ components:
       type: object
     LogStreamWidgetDefinition:
       description: The Log Stream displays a log flow matching the defined query.
-        Only available on FREE layout dashboards
+        Only available on FREE layout dashboards.
       properties:
         columns:
-          description: Which columns to display on the widget
+          description: Which columns to display on the widget.
           items:
             description: TODO.
             type: string
@@ -2182,7 +2195,7 @@ components:
         message_display:
           $ref: '#/components/schemas/WidgetMessageDisplay'
         query:
-          description: Query to filter the log stream with
+          description: Query to filter the log stream with.
           type: string
         show_date_column:
           description: Whether to show the date column or not
@@ -2195,16 +2208,16 @@ components:
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: log_stream
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -2823,16 +2836,19 @@ components:
           type: string
       type: object
     LogsQueryCompute:
-      description: TODO.
+      description: Define computation for a log query.
       properties:
         aggregation:
-          description: TODO.
+          description: The aggregation method.
+          example: avg
           type: string
         facet:
-          description: TODO.
+          description: Facet name.
+          example: '@duration'
           type: string
         interval:
-          description: TODO.
+          description: Define a time interval in seconds.
+          example: 5000
           format: int64
           type: integer
       required:
@@ -3516,37 +3532,37 @@ components:
     MonitorSummaryWidgetDefinition:
       description: The monitor summary widget displays a summary view of all your
         Datadog monitors, or a subset based on a query. Only available on FREE layout
-        dashboards
+        dashboards.
       properties:
         color_preference:
           $ref: '#/components/schemas/WidgetColorPreference'
         display_format:
           $ref: '#/components/schemas/WidgetMonitorSummaryDisplayFormat'
         hide_zero_counts:
-          description: Whether to show counts of 0 or not
+          description: Whether to show counts of 0 or not.
           type: boolean
         query:
-          description: Query to filter the monitors with
+          description: Query to filter the monitors with.
           type: string
         show_last_triggered:
           description: Whether to show the time that has elapsed since the monitor/group
-            triggered
+            triggered.
           type: boolean
         sort:
           $ref: '#/components/schemas/WidgetSort'
         summary_type:
           $ref: '#/components/schemas/WidgetSummaryType'
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: manage_status
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -3625,30 +3641,30 @@ components:
       - TRACE_ANALYTICS_ALERT
     NoteWidgetDefinition:
       description: The notes and links widget is similar to free text widget, but
-        allows for more formatting options
+        allows for more formatting options.
       properties:
         background_color:
-          description: Background color of the note
+          description: Background color of the note.
           type: string
         content:
-          description: Content of the note
+          description: Content of the note.
           type: string
         font_size:
-          description: Size of the text
+          description: Size of the text.
           type: string
         show_tick:
-          description: Whether to show a tick or not
+          description: Whether to show a tick or not.
           type: boolean
         text_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         tick_edge:
           $ref: '#/components/schemas/WidgetTickEdge'
         tick_pos:
-          description: Where to position the tick on an edge
+          description: Where to position the tick on an edge.
           type: string
         type:
           default: note
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -3761,7 +3777,7 @@ components:
       minItems: 2
       type: array
     ProcessQueryDefinition:
-      description: TODO.
+      description: The process query to use in the widget.
       properties:
         filter_by:
           description: TODO.
@@ -3775,7 +3791,7 @@ components:
           minimum: 0
           type: integer
         metric:
-          description: TODO.
+          description: Your chosen metric.
           type: string
         search_by:
           description: TODO.
@@ -3817,11 +3833,11 @@ components:
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: query_value
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -3836,7 +3852,7 @@ components:
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         conditional_formats:
-          description: TODO.
+          description: List of conditional formats.
           items:
             $ref: '#/components/schemas/WidgetConditionalFormat'
           type: array
@@ -4284,16 +4300,16 @@ components:
             $ref: '#/components/schemas/WidgetTimeWindows'
           type: array
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: slo
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
         view_mode:
@@ -4329,7 +4345,7 @@ components:
       type: object
     ScatterPlotWidgetDefinition:
       description: The scatter plot visualization allows you to graph a chosen scope
-        over two different metrics with their respective aggregation
+        over two different metrics with their respective aggregation.
       properties:
         color_by_groups:
           description: List of groups used for colors.
@@ -4356,11 +4372,11 @@ components:
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: scatterplot
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
         xaxis:
@@ -4618,11 +4634,11 @@ components:
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: servicemap
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -4632,52 +4648,52 @@ components:
       type: object
     ServiceSummaryWidgetDefinition:
       description: The service summary displays the graphs of a chosen service in
-        your screenboard. Only available on FREE layout dashboards
+        your screenboard. Only available on FREE layout dashboards.
       properties:
         display_format:
           $ref: '#/components/schemas/WidgetServiceSummaryDisplayFormat'
         env:
-          description: APM environment
+          description: APM environment.
           type: string
         service:
-          description: APM service
+          description: APM service.
           type: string
         show_breakdown:
-          description: Whether to show the latency breakdown or not
+          description: Whether to show the latency breakdown or not.
           type: boolean
         show_distribution:
-          description: Whether to show the latency distribution or not
+          description: Whether to show the latency distribution or not.
           type: boolean
         show_errors:
-          description: Whether to show the error metrics or not
+          description: Whether to show the error metrics or not.
           type: boolean
         show_hits:
-          description: Whether to show the hits metrics or not
+          description: Whether to show the hits metrics or not.
           type: boolean
         show_latency:
-          description: Whether to show the latency metrics or not
+          description: Whether to show the latency metrics or not.
           type: boolean
         show_resource_list:
-          description: Whether to show the resource list or not
+          description: Whether to show the resource list or not.
           type: boolean
         size_format:
           $ref: '#/components/schemas/WidgetSizeFormat'
         span_name:
-          description: APM span name
+          description: APM span name.
           type: string
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
-          description: Title of the widget
+          description: Title of the widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: trace_service
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -5881,7 +5897,7 @@ components:
       - USER_LOCATOR
     TableWidgetDefinition:
       description: The table visualization is available on timeboards and screenboards.
-        It displays columns of metrics grouped by tag key
+        It displays columns of metrics grouped by tag key.
       properties:
         requests:
           description: TODO.
@@ -5893,16 +5909,16 @@ components:
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
-          description: Title of your widget
+          description: Title of your widget.
           type: string
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: query_table
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -5915,7 +5931,7 @@ components:
         aggregator:
           $ref: '#/components/schemas/WidgetAggregator'
         alias:
-          description: The column name (defaults to the metric name)
+          description: The column name (defaults to the metric name).
           type: string
         apm_query:
           $ref: '#/components/schemas/LogQueryDefinition'
@@ -5965,19 +5981,19 @@ components:
         of one or more metrics, log events, or Analyzed Spans over time.
       properties:
         events:
-          description: TODO.
+          description: List of widget events.
           items:
             $ref: '#/components/schemas/WidgetEvent'
           type: array
         legend_size:
           $ref: '#/components/schemas/WidgetLegendSize'
         markers:
-          description: TODO.
+          description: List of markers.
           items:
             $ref: '#/components/schemas/WidgetMarker'
           type: array
         requests:
-          description: TODO.
+          description: List of timeseries widget requests.
           example:
           - q/apm_query/log_query: <METRIC_1>{<SCOPE_1>}
           items:
@@ -5985,7 +6001,7 @@ components:
           minItems: 1
           type: array
         show_legend:
-          description: (screenboard only) Show the legend for this widget
+          description: (screenboard only) Show the legend for this widget.
           type: boolean
         time:
           $ref: '#/components/schemas/WidgetTime'
@@ -5995,11 +6011,11 @@ components:
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: timeseries
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
         yaxis:
@@ -6022,13 +6038,13 @@ components:
         metadata:
           description: Used to define expression aliases.
           items:
-            description: TODO.
+            description: Define an expression alias.
             properties:
               alias_name:
-                description: TODO.
+                description: Expression alias.
                 type: string
               expression:
-                description: TODO.
+                description: Expression name.
                 type: string
             required:
             - expression
@@ -6039,12 +6055,12 @@ components:
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
         q:
-          description: TODO.
+          description: Widget query.
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
-          description: TODO.
+          description: Define widget style.
           properties:
             line_type:
               $ref: '#/components/schemas/WidgetLineType'
@@ -6058,7 +6074,7 @@ components:
     ToplistWidgetDefinition:
       description: The top list visualization enables you to display a list of Tag
         value like hostname or service with the most or least of any metric value,
-        such as highest consumers of CPU, hosts with the least disk space, etc
+        such as highest consumers of CPU, hosts with the least disk space, etc.
       properties:
         requests:
           description: TODO.
@@ -6073,11 +6089,11 @@ components:
         title_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         title_size:
-          description: Size of the title
+          description: Size of the title.
           type: string
         type:
           default: toplist
-          description: Type of the widget
+          description: Type of the widget.
           readOnly: true
           type: string
       required:
@@ -6104,12 +6120,12 @@ components:
         process_query:
           $ref: '#/components/schemas/ProcessQueryDefinition'
         q:
-          description: TODO.
+          description: Widget query.
           type: string
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
-          description: TODO.
+          description: Define widget style.
           properties:
             line_type:
               $ref: '#/components/schemas/WidgetLineType'
@@ -7090,12 +7106,16 @@ components:
           type: string
       type: object
     Widget:
-      description: TODO.
+      description: 'Information about widget.
+
+
+        Note: The `layout` property is required for widgets in dashboards with `free`
+        `layout_type` only.'
       properties:
         definition:
           $ref: '#/components/schemas/WidgetDefinition'
         id:
-          description: ID of the widget
+          description: ID of the widget.
           format: int64
           type: integer
         layout:
@@ -7104,8 +7124,7 @@ components:
       - definition
       type: object
     WidgetAggregator:
-      description: Aggregator used for the request, available values are avg, last,
-        max, min, or sum.
+      description: Aggregator used for the request.
       enum:
       - avg
       - last
@@ -7120,7 +7139,7 @@ components:
       - MINIMUM
       - SUM
     WidgetAxis:
-      description: Axis controls for the widget
+      description: Axis controls for the widget.
       properties:
         include_zero:
           description: TODO.
@@ -7141,12 +7160,11 @@ components:
         scale:
           default: linear
           description: Specifies the scale type. Possible values are linear, log,
-            sqrt, pow## (eg. pow2, pow0.5..)
+            sqrt, pow## (eg. pow2, pow0.5..).
           type: string
       type: object
     WidgetChangeType:
-      description: Show the absolute or the relative change; values available are
-        absolute or relative
+      description: Show the absolute or the relative change.
       enum:
       - absolute
       - relative
@@ -7155,8 +7173,7 @@ components:
       - ABSOLUTE
       - RELATIVE
     WidgetColorPreference:
-      description: Which color to use on the widget. Available values are background
-        or text
+      description: Which color to use on the widget.
       enum:
       - background
       - text
@@ -7165,7 +7182,7 @@ components:
       - BACKGROUND
       - TEXT
     WidgetComparator:
-      description: Comparator to apply from >, >=, <, or <=
+      description: Comparator to apply.
       enum:
       - '>'
       - '>='
@@ -7178,8 +7195,7 @@ components:
       - LESS_THAN
       - LESS_THAN_OR_EQUAL_TO
     WidgetCompareTo:
-      description: Timeframe used for the change comparison; values available are
-        hour_before, day_before, week_before, or month_before.
+      description: Timeframe used for the change comparison.
       enum:
       - hour_before
       - day_before
@@ -7192,7 +7208,7 @@ components:
       - WEEK_BEFORE
       - MONTH_BEFORE
     WidgetConditionalFormat:
-      description: TODO.
+      description: Define a conditional format for the widget.
       properties:
         comparator:
           $ref: '#/components/schemas/WidgetComparator'
@@ -7212,7 +7228,7 @@ components:
           type: string
         metric:
           description: Metric from the request to correlate this conditional format
-            with
+            with.
           type: string
         palette:
           $ref: '#/components/schemas/WidgetPalette'
@@ -7229,7 +7245,7 @@ components:
       - palette
       type: object
     WidgetDefinition:
-      description: Definition of the widget
+      description: Definition of the widget.
       discriminator:
         mapping:
           alert_graph: '#/components/schemas/AlertGraphWidgetDefinition'
@@ -7284,8 +7300,7 @@ components:
       - $ref: '#/components/schemas/ToplistWidgetDefinition'
       type: object
     WidgetDisplayType:
-      description: Type of display to use for the request. Available values are area,
-        bars, or line.
+      description: Type of display to use for the request.
       enum:
       - area
       - bars
@@ -7296,21 +7311,24 @@ components:
       - BARS
       - LINE
     WidgetEvent:
-      description: TODO.
+      description: 'Event overlay control options.
+
+
+        See the dedicated [Events JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/widget_json/#events-schema)
+
+        to learn how to build the `<EVENTS_SCHEMA>`.'
       properties:
         q:
-          description: TODO.
+          description: Query definition.
           type: string
         tags_execution:
-          description: The execution method for multi-value filters. Can be either
-            and or or
+          description: The execution method for multi-value filters.
           type: string
       required:
       - q
       type: object
     WidgetEventSize:
-      description: Size to use to display an event (small or large). Available values
-        are s or l
+      description: Size to use to display an event.
       enum:
       - s
       - l
@@ -7331,7 +7349,7 @@ components:
       - order
       type: object
     WidgetGrouping:
-      description: The kind of grouping to use (single check vs. cluster of checks)
+      description: The kind of grouping to use.
       enum:
       - check
       - cluster
@@ -7340,8 +7358,7 @@ components:
       - CHECK
       - CLUSTER
     WidgetImageSizing:
-      description: How to size the image on the widget. Available values are zoom,
-        fit or center
+      description: How to size the image on the widget.
       enum:
       - zoom
       - fit
@@ -7352,23 +7369,29 @@ components:
       - FIT
       - CENTER
     WidgetLayout:
-      description: the layout for a widget on a free dashboard
+      description: The layout for a widget on a free dashboard.
       properties:
         height:
-          description: The height of the widget
+          description: The height of the widget. Should be a non-negative integer.
           format: int64
+          minimum: 0
           type: integer
         width:
-          description: The width of the widget
+          description: The width of the widget. Should be a non-negative integer.
           format: int64
+          minimum: 0
           type: integer
         x:
-          description: The position of the widget on the X axis
+          description: The position of the widget on the x (horizontal) axis. Should
+            be a non-negative integer.
           format: int64
+          minimum: 0
           type: integer
         y:
-          description: The position of the widget on the Y axis
+          description: The position of the widget on the y (vertical) axis. Should
+            be a non-negative integer.
           format: int64
+          minimum: 0
           type: integer
       required:
       - x
@@ -7377,14 +7400,14 @@ components:
       - height
       type: object
     WidgetLayoutType:
-      description: Layout type of the group
+      description: Layout type of the group.
       enum:
       - ordered
       type: string
       x-enum-varnames:
       - ORDERED
     WidgetLegendSize:
-      description: TODO.
+      description: Available legent sizes for a widget.
       enum:
       - '2'
       - '4'
@@ -7399,8 +7422,7 @@ components:
       - SIXTEEN
       - AUTO
     WidgetLineType:
-      description: Type of lines displayed. Available values are dashed, dotted, or
-        solid.
+      description: Type of lines displayed.
       enum:
       - dashed
       - dotted
@@ -7411,8 +7433,7 @@ components:
       - DOTTED
       - SOLID
     WidgetLineWidth:
-      description: Width of line displayed. Available values are normal, thick, or
-        thin.
+      description: Width of line displayed.
       enum:
       - normal
       - thick
@@ -7423,7 +7444,7 @@ components:
       - THICK
       - THIN
     WidgetLiveSpan:
-      description: The available timeframes depend on the widget you are using
+      description: The available timeframes depend on the widget you are using.
       enum:
       - 1m
       - 5m
@@ -7458,8 +7479,7 @@ components:
       - PAST_ONE_YEAR
       - ALERT
     WidgetMargin:
-      description: Size of the margins around the image. Available values are small
-        or large
+      description: Size of the margins around the image.
       enum:
       - small
       - large
@@ -7469,7 +7489,7 @@ components:
       - LARGE
     WidgetMarker:
       description: Markers allow you to add visual conditional formatting for your
-        graphs
+        graphs.
       properties:
         display_type:
           description: "Combination of:\n  - A severity error, warning, ok, or info\n\
@@ -7485,7 +7505,7 @@ components:
           type: string
         value:
           description: Value to apply. Can be a single value y = 15 or a range of
-            values 0 < y < 10
+            values 0 < y < 10.
           example: y = 15
           type: string
       required:
@@ -7503,8 +7523,7 @@ components:
       - EXPANDED_MEDIUM
       - EXPANDED_LARGE
     WidgetMonitorSummaryDisplayFormat:
-      description: What to display on the widget. Available values are counts, countsAndList
-        or list
+      description: What to display on the widget.
       enum:
       - counts
       - countsAndList
@@ -7515,7 +7534,7 @@ components:
       - COUNTS_AND_LIST
       - LIST
     WidgetNodeType:
-      description: Which type of node to use in the map
+      description: Which type of node to use in the map.
       enum:
       - host
       - container
@@ -7524,8 +7543,7 @@ components:
       - HOST
       - CONTAINER
     WidgetOrderBy:
-      description: What to order by; values available are change, name, present, or
-        past.
+      description: What to order by.
       enum:
       - change
       - name
@@ -7538,9 +7556,7 @@ components:
       - PRESENT
       - PAST
     WidgetPalette:
-      description: Color palette to apply; choose from blue, custom_bg, custom_image,
-        custom_text, gray_on_white, green, green_on_white, grey, orange, red, red_on_white,
-        white_on_gray, white_on_green, white_on_red, white_on_yellow, or yellow_on_white
+      description: Color palette to apply.
       enum:
       - blue
       - custom_bg
@@ -7577,8 +7593,7 @@ components:
       - WHITE_ON_YELLOW
       - YELLOW_ON_WHITE
     WidgetServiceSummaryDisplayFormat:
-      description: Number of columns to display. Available values are one_column,
-        two_column, or three_column
+      description: Number of columns to display.
       enum:
       - one_column
       - two_column
@@ -7587,7 +7602,7 @@ components:
       - ONE_COLUMN
       - TWO_COLUMN
     WidgetSizeFormat:
-      description: Size of the widget. Available values are small, medium, or large
+      description: Size of the widget.
       enum:
       - small
       - medium
@@ -7598,23 +7613,24 @@ components:
       - MEDIUM
       - LARGE
     WidgetSort:
-      description: TODO.
+      description: Widget sorting methods.
       enum:
       - asc
       - desc
+      example: desc
       type: string
       x-enum-varnames:
       - ASCENDING
       - DESCENDING
     WidgetStyle:
-      description: TODO.
+      description: Widget style definition.
       properties:
         palette:
           description: Color palette to apply to the widget.
           type: string
       type: object
     WidgetSummaryType:
-      description: Which summary type should be used
+      description: Which summary type should be used.
       enum:
       - monitors
       - groups
@@ -7625,7 +7641,7 @@ components:
       - GROUPS
       - COMBINED
     WidgetTextAlign:
-      description: How to align the text on the widget
+      description: How to align the text on the widget.
       enum:
       - center
       - left
@@ -7636,7 +7652,7 @@ components:
       - LEFT
       - RIGHT
     WidgetTickEdge:
-      description: How to align the text on the widget
+      description: Define how you want to align the text on the widget.
       enum:
       - bottom
       - left
@@ -7649,13 +7665,13 @@ components:
       - RIGHT
       - TOP
     WidgetTime:
-      description: Time setting for the widget
+      description: Time setting for the widget.
       properties:
         live_span:
           $ref: '#/components/schemas/WidgetLiveSpan'
       type: object
     WidgetTimeWindows:
-      description: TODO.
+      description: Define a time window.
       enum:
       - 7d
       - 30d
@@ -7674,7 +7690,7 @@ components:
       - MONTH_TO_DATE
       - PREVIOUS_MONTH
     WidgetViewMode:
-      description: TODO.
+      description: Define how you want the SLO to be displayed.
       enum:
       - overall
       - component
@@ -7686,7 +7702,6 @@ components:
       - BOTH
     WidgetVizType:
       description: Whether to display the Alert Graph as a timeseries or a top list.
-        Available values are timeseries or toplist
       enum:
       - timeseries
       - toplist
@@ -8161,9 +8176,7 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/dashboard:
     get:
-      description: '### Overview
-
-        Get all dashboards'
+      description: Get all dashboards.
       operationId: ListDashboards
       responses:
         '200':
@@ -8182,20 +8195,14 @@ paths:
       tags:
       - Dashboards
     post:
-      description: '### Overview
-
-        Create a dashboard using the specified options
-
-        ### Arguments
-
-        * **`Dashboard`** [*required*] The Dashboard Object to create'
+      description: Create a dashboard using the specified options.
       operationId: CreateDashboard
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Dashboard'
-        description: Dashboard request object
+        description: Dashboard request object.
         required: true
       responses:
         '200':
@@ -8389,16 +8396,10 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/dashboard/{dashboard_id}:
     delete:
-      description: '### Overview
-
-        Delete a dashboard using the specified ID
-
-        ### Arguments
-
-        * **`id`** [*required*] The Dashboard id to delete'
+      description: Delete a dashboard using the specified ID.
       operationId: DeleteDashboard
       parameters:
-      - description: The id of the dashboard
+      - description: The ID of the dashboard.
         in: path
         name: dashboard_id
         required: true
@@ -8427,16 +8428,10 @@ paths:
       tags:
       - Dashboards
     get:
-      description: '### Overview
-
-        Get a dashboard using the specified ID
-
-        ### Arguments
-
-        * **`id`** [*required*] The Dashboard id to Update'
+      description: Get a dashboard using the specified ID.
       operationId: GetDashboard
       parameters:
-      - description: The id of the dashboard
+      - description: The ID of the dashboard.
         in: path
         name: dashboard_id
         required: true
@@ -8465,17 +8460,10 @@ paths:
       tags:
       - Dashboards
     put:
-      description: '### Overview
-
-        Update a dashboard using the specified ID
-
-        ### Arguments
-
-        * **`id`** [*required*] The Dashboard id to Update * **`dashboard`** [*required*]
-        The dashboard payload'
+      description: Update a dashboard using the specified ID.
       operationId: UpdateDashboard
       parameters:
-      - description: The id of the dashboard
+      - description: The ID of the dashboard.
         in: path
         name: dashboard_id
         required: true

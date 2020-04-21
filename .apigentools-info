@@ -1,8 +1,16 @@
 {
     "additional_stamps": [],
-    "apigentools_version": "0.10.1.dev24",
-    "codegen_version": "4.3.0",
-    "info_version": "1",
-    "image": "datadog/apigentools:git-936dfd6",
-    "spec_repo_commit": "f79a29d"
+    "info_version": "2",
+    "spec_versions": {
+        "v1": {
+            "apigentools_version": "0.10.1.dev32",
+            "regenerated": "2020-04-21 17:37:22.378990",
+            "spec_repo_commit": "d9f498d"
+        },
+        "v2": {
+            "apigentools_version": "0.10.1.dev32",
+            "regenerated": "2020-04-21 17:37:28.869927",
+            "spec_repo_commit": "d9f498d"
+        }
+    }
 }
