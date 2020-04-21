@@ -11,6 +11,8 @@ List endpoint returns logs that match a log search query. [Results are paginated
 
 **If you are thinking about archiving logs for your organization, consider using Datadog archive capabilities instead of the log list API. See [Datadog Logs Archive documentation][2].**
 
+Logs results are scoped by [permissions][5] attached to the Application Key used.
+
 **ARGUMENTS**:
 
 * **`query`** [*required*]:
@@ -45,3 +47,4 @@ List endpoint returns logs that match a log search query. [Results are paginated
 [2]: /logs/archives
 [3]: /logs/search_syntax
 [4]: /logs/indexes#multiple-indexes
+[5]: /account_management/rbac/permissions/?tab=datadogapplication#log-management
