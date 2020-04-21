@@ -12,4 +12,4 @@ Applies a restriction query to a role.
 **PAYLOAD**:
 
 * `data["type"]="roles"`
-* `data["id"]`: The role id to apply the restriction query to
+* `data["id"]`: The role ID to apply the restriction query to
