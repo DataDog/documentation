@@ -176,6 +176,23 @@ To install the Datadog Agent on your Kubernetes cluster:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Event Collection
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Set the `datadog.leaderElection`, `datadog.collectEvents` and `rbac.create` options to `true` in your `value.yaml` file order to enable Kubernetes event collection.
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+
+If you want to collect events from your kubernetes cluster set the environment variables `DD_COLLECT_KUBERNETES_EVENTS` and `DD_LEADER_ELECTION` to `true` in your Agent manifest. Alternatively, use the [Datadoc Cluster Agent Event collection][1]
+
+[1]: /agent/cluster_agent/event_collection/
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Integrations
 
 Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery feature][2] to collect metrics and logs automatically from your pods.
@@ -194,6 +211,7 @@ Find below the list of environment variables available for the Datadog Agent. If
 | `DD_SITE`          | Destination site for your metrics, traces, and logs. Valid options are `datadoghq.com` for the Datadog US site, and `datadoghq.eu` for the Datadog EU site.                                                                                                                                                                                      |
 | `DD_DD_URL`        | Optional setting to override the URL for metric submission.                                                                                                                                                                                                                                                                                      |
 | `DD_CHECK_RUNNERS` | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks) the `collector-queue` component might fall behind and fail the healthcheck. You can increase the number of runners to run checks in parallel. |
+| `DD_LEADER_ELECTION` | If multiple Agent are running in your cluster, set this variable to `true` to avoid the duplication of event collection. |
 
 ### Proxy Settings
 
@@ -216,6 +234,7 @@ Optional collection Agents are disabled by default for security or performance r
 | `DD_APM_ENABLED`           | Enable [trace collection][5] with the Trace Agent.                                                                                                                                                                                                           |
 | `DD_LOGS_ENABLED`          | Enable [log collection][6] with the Logs Agent.                                                                                                                                                                                                              |
 | `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][7] with the Process Agent. The [live container view][8] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][7] and the [live container view][8] are disabled. |
+| `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well. |
 
 ### DogStatsD (custom metrics)
 
