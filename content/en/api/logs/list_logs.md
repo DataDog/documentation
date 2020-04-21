@@ -40,7 +40,7 @@ Logs results are scoped by [permissions][5] attached to the Application Key used
 * **`limit`** [*optional*, *default*=`10`]:
     Number of logs return in the response (maximum is 1000)
 * **`index`** [*optional*, *default*=`"*"`]:
-    - Coma separated list of index names. E.g `"retention-15,retention-30"`. `"*"` stands for all indexes.
+    - Coma separated list of index names. For isntance: `"retention-15,retention-30"`. Setting `"*"` stands for all indexes.
     - For [multi-index organizations][4], the log index in which the request is performed.    
 
 [1]: /logs/guide/collect-multiple-logs-with-pagination
