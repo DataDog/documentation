@@ -158,7 +158,7 @@ curl -X POST \
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
-* **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/poll_results`
+* **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results`
 * **Method**: `GET`
 * **Parameters**: A JSON array containing the list of result identifiers to obtain results from.
 
@@ -277,14 +277,14 @@ To setup your client, Datadog API and application keys need to be configured. Th
 1. As environment variables:
 
     ```bash
-    export DATADOG_API_KEY="<API KEY>"
-    export DATADOG_APP_KEY="<APPLICATION KEY>"
+    export DATADOG_API_KEY="<API_KEY>"
+    export DATADOG_APP_KEY="<APPLICATION_KEY>"
     ```
 
 2. Passed to the CLI when running your tests:
 
     ```bash
-    datadog-ci synthetics run-tests --apiKey "<API KEY>" --appKey "<APPLICATION KEY>"
+    datadog-ci synthetics run-tests --apiKey "<API_KEY>" --appKey "<APPLICATION_KEY>"
     ```
 
 3. Or defined in a global configuration file:
@@ -314,7 +314,7 @@ To setup your client, Datadog API and application keys need to be configured. Th
             "cookies": "name1=value1;name2=value2;",
             "deviceIds": ["laptop_large"],
             "followRedirects": true,
-            "headers": { "NEW_HEADER": "NEW VALUE" },
+            "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
                 "locations": ["aws:us-west-1"],
             "retry": { "count": 2, "interval": 300 },
             "executionRule": "skipped",
@@ -388,7 +388,7 @@ However, in the context of your CI deployment, you can optionally decide to over
                 "cookies": "name1=value1;name2=value2;",
                 "deviceIds": ["laptop_large"],
                 "followRedirects": true,
-                "headers": { "NEW_HEADER": "NEW VALUE" },
+                "headers": { "<NEW_HEADER>": "<NEW_VALUE>" },
             "locations": ["aws:us-west-1"],
                 "retry": { "count": 2, "interval": 300 },
                 "executionRule": "skipped",
