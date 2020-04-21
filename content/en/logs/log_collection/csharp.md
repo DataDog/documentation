@@ -314,7 +314,7 @@ New logs are now directly sent to Datadog.
 
 Alternately, since `0.2.0`, you can configure the Datadog sink by using an `appsettings.json` file with the `Serilog.Setting.Configuration` package.
 
-In the "Serilog.WriteTo" array, add an entry for DatadogLogs. An example is shown below:
+In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is shown below:
 
 ```json
 "Serilog": {
