@@ -64,7 +64,7 @@ body > header.scrolled ~ .container .sidenav .sticky {
   }
 
   h4 {
-    padding:10px 0 10px 15px;
+    padding: 10px 0 10px 10px;
     color:$ddpurple;
     font-size:24px;
     font-weight:200;
@@ -288,9 +288,7 @@ body > header.scrolled ~ .container .sidenav .sticky {
   ul:first-of-type {
     margin-left: 3px;
   }
-  h4 {
-    padding-left: 10px;
-  }
+
   .toc_scrolled {
     background:transparent !important;
     color: $ddpurple !important;

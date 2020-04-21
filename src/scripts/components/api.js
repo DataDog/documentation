@@ -1,12 +1,4 @@
-const codeBlocks = document.querySelectorAll('.js-code-block');
-const codeLangSelects = document.querySelectorAll('.js-code-lang-select');
 const versionSelect = document.querySelector('.js-api-version-select');
-
-if (codeLangSelects) {
-    codeLangSelects.forEach((codeLangSelect) => {
-        codeLangSelect.addEventListener('change', codeLangSelectHandler);
-    });
-}
 
 if (versionSelect) {
     versionSelect.addEventListener('change', versionSelectHandler);
@@ -26,36 +18,64 @@ function versionSelectHandler(event) {
     }
 }
 
-function codeLangSelectHandler(event) {
-    toggleCodeBlocks(event.target.value);
-    codeLangSelects.forEach((codeLangSelect) => {
-        codeLangSelect.value = event.target.value;
-    })
-}
+$('.js-code-example-link').click(function () {
+    // get current position of element in order to keep the scroll position after the size of a code block changes
+    const $this = $(this);
+
+    const selectedCodeLang = $this.data('codeLang');
+
+    const $document = $(document);
+    const currentOffset = $this.offset().top - $document.scrollTop();
+
+    $('.js-code-example-link').each(function () {
+        $(this).removeClass('active');
+
+        if ($(this).data('codeLang') === selectedCodeLang) {
+            $(this).addClass('active');
+        }
+    });
+
+    toggleCodeBlocks(selectedCodeLang);
+
+    // set scroll position so the page doesn't jump when a code lang is changed.
+    $document.scrollTop($this.offset().top - currentOffset);
+});
 
 function toggleCodeBlocks(activeLang) {
-    codeBlocks.forEach((codeBlock) => {
-        codeBlock.classList.remove('d-block');
-        codeBlock.classList.add('d-none');
-    });
-    const activeLangBlocks = document.querySelectorAll(
-        `.code-block-${activeLang}`
-    );
-    activeLangBlocks.forEach((activeLangBlock) => {
-        activeLangBlock.classList.add('d-block');
+    const codeContainers = $('.js-code-snippet-wrapper');
+
+    codeContainers.find('.js-code-block').removeClass('d-block');
+    codeContainers.find('.js-code-block').addClass('d-none');
+
+    codeContainers.each(function () {
+        if ($(this).find(`.code-block-${activeLang}`).length) {
+            $(this).find(`.code-block-${activeLang}`).removeClass('d-none');
+            $(this).find(`.code-block-${activeLang}`).addClass('d-block');
+        } else {
+            // choose default code language (bash)
+            $(this).find(`.default`).removeClass('d-none');
+            $(this).find(`.default`).addClass('d-block');
+            $(this)
+                .find('.js-code-example-link[data-code-lang="bash"]')
+                .addClass('active');
+        }
     });
 }
 
-$('.js-expand-all').click(function (){
+$('.js-expand-all').click(function () {
     $(this).toggleClass('expanded');
     const schemaTable = $(this).closest('.schema-table');
-    schemaTable.find('.isNested').toggleClass('d-none');
-    schemaTable.find('.toggle-arrow').toggleClass('expanded');
-    if ($(this).hasClass("expanded"))
-       $(this).text("Collapse All")
-    else
-       $(this).text("Expand All");
-})
+
+    if ($(this).hasClass('expanded')) {
+        $(this).text('Collapse All');
+        schemaTable.find('.isNested').removeClass('d-none');
+        schemaTable.find('.toggle-arrow').addClass('expanded');
+    } else {
+        $(this).text('Expand All');
+        schemaTable.find('.isNested').addClass('d-none');
+        schemaTable.find('.toggle-arrow').removeClass('expanded');
+    }
+});
 
 $('.js-model-link').click(function () {
     $(this)

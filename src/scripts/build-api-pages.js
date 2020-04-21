@@ -139,17 +139,17 @@ const filterExampleJson = (data) => {
  * @param {string} value - the current schema object
  * returns html markup for indicating read only
  */
-const readOnlyField = (value) => {
+const isReadOnlyRow = (value) => {
   let isReadOnly = false;
   if(typeof value === 'object') {
     if("readOnly" in value && value.readOnly) {
       isReadOnly = true;
     }
-    if(value.type === 'array' && value.items.readOnly) {
+    if(value.type === 'array' && ("items" in value && value.items.readOnly)) {
       isReadOnly = true;
     }
   }
-  return (isReadOnly) ? ' <span class="read-only">&#127361;</span>' : '';
+  return isReadOnly;
 };
 
 
@@ -172,7 +172,7 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
       field = (key || '');
     }
   return `
-    <div class="col-4 field-column">
+    <div class="col-4 column">
       <p class="key">${toggleMarkup}${field}${requiredMarkup}</p>
     </div>
   `;
@@ -197,10 +197,10 @@ const typeColumn = (key, value, readOnlyMarkup) => {
       typeVal = (value.format || value.type || '');
     }
   if(value.type === 'array') {
-    return `<div class="col-2 type-column"><p>[${value.items.type || ''}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p>[${value.items.type || ''}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
-    return `<div class="col-2 type-column"><p>${typeVal}${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p>${typeVal}${readOnlyMarkup}</p></div>`;
   }
 };
 
@@ -212,19 +212,20 @@ const typeColumn = (key, value, readOnlyMarkup) => {
  */
 const descColumn = (value) => {
   const desc = (value.description && (typeof(value.description) !== "object")) ? value.description || '' : '';
-  return `<div class="col-6 description-column">${marked(desc) ? marked(desc) : ""}</div>`;
+  return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}</div>`.trim();
 };
 
 
 /**
  * Takes a application/json schema for request or response and outputs a table
+ * @param {string} tableType - string 'request' or 'response'
  * @param {object} data - schema object
  * @param {boolean} isNested - is this a nested row
  * @param {array} requiredFields - the required fields array of string to check
  * @param {number} level - how deep does the rabbit hole go?
  * returns html row with nested rows
  */
-const rowRecursive = (data, isNested, requiredFields=[], level = 0, parentKey = '') => {
+const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '') => {
   let html = '';
 
   // i've set a hard recurse limit of depth
@@ -251,25 +252,27 @@ const rowRecursive = (data, isNested, requiredFields=[], level = 0, parentKey = 
           }
         }
 
-        // build up classes
-        const classes = (isNested) ? "isNested d-none" : "";
-        const moreclasses = (childData) ? "hasChildData" : "";
+        const isReadOnly = isReadOnlyRow(value);
+
+        // build up row classes
+        const outerRowClasses = `${(isNested) ? "isNested d-none" : ""} ${(childData) ? "hasChildData" : ""} ${(isReadOnly) ? "isReadOnly" : ""}`;
+        const nestedRowClasses = `first-row ${(childData) ? "js-collapse-trigger collapse-trigger" : ""} ${(isReadOnly) ? "isReadOnly" : ""}`;
 
         // build markdown
         const toggleArrow = (childData) ? '<span class="toggle-arrow"><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z" fill="black"/></svg></span> ' : "" ;
         const required = requiredFields.includes(key) ? '<span style="color:red;">*</span>' : "";
-        const readOnly = readOnlyField(value);
+        const readOnlyField = (isReadOnly) ? ' <span class="read-only">&#127361;</span>' : '';
 
         // build html
         html += `
-        <div class="row ${classes} ${moreclasses}">
+        <div class="row ${outerRowClasses}">
           <div class="col-12 first-column">
-            <div class="row first-row ${(childData) ? "js-collapse-trigger collapse-trigger" : ""}">
+            <div class="row ${nestedRowClasses}">
               ${fieldColumn(key, value, toggleArrow, required, parentKey)}
-              ${typeColumn(key, value, readOnly)}
+              ${typeColumn(key, value, readOnlyField)}
               ${descColumn(value)}
             </div>
-            ${(childData) ? rowRecursive(childData, true, data.required || [], (level + 1), newParentKey) : ''}
+            ${(childData) ? rowRecursive(tableType, childData, true, data.required || [], (level + 1), newParentKey) : ''}
           </div>
         </div>
         `;
@@ -283,25 +286,26 @@ const rowRecursive = (data, isNested, requiredFields=[], level = 0, parentKey = 
 
 /**
  * Takes a application/json schema for request or response and outputs a table
+ * @param {string} tableType - 'request' or 'response'
  * @param {object} data - schema object
  * returns html table string
  */
-const schemaTable = (data) => `
-  <div class=" schema-table row">
+const schemaTable = (tableType, data) => `
+  <div class="table-${tableType} schema-table row">
     <p class="expand-all js-expand-all text-primary">Expand All</p>
-    <div class="col-12 column">
+    <div class="col-12">
       <div class="row table-header">
-        <div class="col-4 field-column">
+        <div class="col-4 column">
           <p class="font-semibold">Field</p>
         </div>
-        <div class="col-2 type-column">
+        <div class="col-2 column">
           <p class="font-semibold">Type</p>
         </div>
-        <div class="col-6 description-column">
+        <div class="col-6 column">
           <p class="font-semibold">Description</p>
         </div>
       </div>
-      ${rowRecursive((data.type === 'array') ? (data.items.properties || data.items) : data.properties, false, data.required || [])}
+      ${rowRecursive(tableType, (data.type === 'array') ? (data.items.properties || data.items) : data.properties, false, data.required || [])}
     </div>  
   </div>`;
 
@@ -328,9 +332,11 @@ const buildResources = (dereferencedObject, pageDir, tagName) => {
         pageExampleJson[action.operationId] = {"responses":{}, "request": {"json": {}, "html": ""}};
       }
       // add request json
-      if(("requestBody" in action) && ("content" in action.requestBody) && ("application/json" in action.requestBody.content)) {
-        pageExampleJson[action.operationId]["request"]["json"] = filterExampleJson(action.requestBody.content["application/json"].schema);
-        const requestHTML = schemaTable(action.requestBody.content["application/json"].schema);
+      if(("requestBody" in action) && ("content" in action.requestBody)) {
+        // get the data regardless of contenttype just get first entry
+        const contentTypeData = action.requestBody.content[Object.keys(action.requestBody.content)[0]];
+        pageExampleJson[action.operationId]["request"]["json"] = filterExampleJson(contentTypeData.schema);
+        const requestHTML = schemaTable("request", contentTypeData.schema);
         if(requestHTML) {
           // fs.writeFileSync(`${pageDir}${action.operationId}_request.html`, requestHTML, 'utf-8');
           pageExampleJson[action.operationId]["request"]["html"] = requestHTML;
@@ -339,10 +345,11 @@ const buildResources = (dereferencedObject, pageDir, tagName) => {
       }
       // add response json
       Object.entries(action.responses).forEach(([response_code, response]) => {
-        if(("content" in response) && ("application/json" in response.content)) {
+        if(("content" in response)) {
+          const contentTypeData = response.content[Object.keys(response.content)[0]];
           pageExampleJson[action.operationId]["responses"][response_code] = {"json": {}, "html": ""};
-          pageExampleJson[action.operationId]["responses"][response_code]["json"] = filterExampleJson(response.content["application/json"].schema);
-          const responseHTML = schemaTable(response.content["application/json"].schema);
+          pageExampleJson[action.operationId]["responses"][response_code]["json"] = filterExampleJson(contentTypeData.schema);
+          const responseHTML = schemaTable("response", contentTypeData.schema);
           if(responseHTML) {
             // fs.writeFileSync(`${pageDir}${action.operationId}_response_${response_code}.html`, responseHTML, 'utf-8');
             pageExampleJson[action.operationId]["responses"][response_code]["html"] = responseHTML;
@@ -378,5 +385,20 @@ const processSpecs = (specs) => {
     });
 };
 
-const specs = ['./data/api/v1/full_spec.yaml', './data/api/v2/full_spec.yaml'];
-processSpecs(specs);
+
+const init = () => {
+  const specs = ['./data/api/v1/full_spec.yaml', './data/api/v2/full_spec.yaml'];
+  processSpecs(specs);
+};
+
+module.exports = {
+  init: init,
+  isTagMatch: isTagMatch,
+  isReadOnlyRow: isReadOnlyRow,
+  descColumn: descColumn,
+  fieldColumn: fieldColumn,
+  typeColumn: typeColumn,
+  schemaTable: schemaTable,
+  rowRecursive: rowRecursive
+};
+

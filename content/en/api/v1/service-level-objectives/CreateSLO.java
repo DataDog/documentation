@@ -6,7 +6,7 @@ public class ServiceLevelObjectivesApiExample {
         ServiceLevelObjectivesApi apiInstance = new ServiceLevelObjectivesApi();
         ServiceLevelObjective body = ; // ServiceLevelObjective | 
         try {
-            ServiceLevelObjectiveListResponse result = apiInstance.createSLO(body);
+            SLOListResponse result = apiInstance.createSLO(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ServiceLevelObjectivesApi#createSLO");

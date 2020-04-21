@@ -6,6 +6,8 @@ import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/t
 import codeTabs from './components/codetabs';
 import datadogLogs from './components/dd-browser-logs-rum';
 import { moveToAnchor } from './helpers/moveToAnchor';
+import { redirectToRegion } from './region-redirects';
+
 
 // Setup for large screen ToC
 
@@ -854,6 +856,11 @@ function loadPage(newUrl) {
             // sets query params if code tabs are present
 
             codeTabs();
+
+            const regionSelector = document.querySelector('.js-region-selector');
+            if (regionSelector) {
+                redirectToRegion(regionSelector.value);
+            }
 
             // Gtag virtual pageview
             gtag('config', gaTag, {'page_path': pathName});

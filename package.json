@@ -16,9 +16,10 @@
     "build:hugo:preview": "npm run build:hugo -- -D -F --environment preview",
     "build:webpack": "NODE_ENV=production webpack --config webpack.prod.js",
     "build:webpack:preview": "NODE_ENV=preview webpack --config webpack.prod.js",
-    "build:apiPages": "node ./src/scripts/build-api-pages.js",
+    "build:apiPages": "node -e 'require(\"./src/scripts/build-api-pages.js\").init()'",
     "dereference": "node ./src/scripts/dereference.js",
-    "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true"
+    "analyze": "webpack --config webpack.prod.js --env.BUNDLE_ANALYZE=true",
+    "test": "./node_modules/.bin/jest"
   },
   "repository": {
     "type": "git",
@@ -44,7 +45,7 @@
     "del": "4.1.1",
     "docsearch.js": "^2.6.3",
     "fancy-log": "^1.3.3",
-    "hugo-bin": "0.56.3",
+    "hugo-bin": "0.57.0",
     "jquery": "^3.4.1",
     "js-cookie": "^2.2.1",
     "js-yaml": "^3.13.1",
@@ -102,6 +103,7 @@
     "file-loader": "^4.1.0",
     "html-loader": "^0.5.5",
     "imports-loader": "^0.8.0",
+    "jest": "^25.3.0",
     "marked": "^0.8.2",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "4.13.0",

@@ -16,12 +16,6 @@
 
     {{ $d := index $dot.Site.Data.api $apiVersion "full_spec_deref" }}
 
-    {{ $schemaJson := getJSON "./data/api/v1/full_spec_deref.json" }}
-
-    {{ $snipdir := print "content/en/api/" $apiVersion "/examples/" }}
-
-    {{- $files := readDir $snipdir -}}
-
     {{ range $k, $v := (index $d "tags") }}
         {{ if eq $.Params.title $v.name }}
 
@@ -41,30 +35,72 @@
             {{ $tagObject := $.Scratch.Get "tagObject"  }}
 
             <h1>{{ $v.name }}</h1>
-            <p>{{ $v.description | markdownify}}</p>
+
+            <div class="row">
+                <div class="col-12 col-lg-9">
+
+                    <!-- If endpoint is deprecated -->
+                    {{ if eq (index $v "x-deprecated") true}}
+                        <div class="alert alert-danger">
+                            {{$v.description | markdownify}}
+                            {{$v.externalDocs.description}} <a href="{{$v.externalDocs.url}}">{{$v.externalDocs.url}}</a>
+                        </div>
+                    {{ else }}
+                        <p>{{ $v.description | markdownify}}</p>
+                    {{ end }}
+
+                </div>
+            </div>
             
             {{/* sort by action summary */}}
             {{ range sort $tagObject ".action.summary" "asc"  }}
                 {{ $context := .}}
+               
+                <!-- endpoint section start -->
                 <div class="row">
-                    <div class="col-12 col-lg-7">
+                    <div class="col-12 col-lg-9">
                         <h2 class="mb-2" id="{{ .action.summary | urlize }}">
                             <a href="#{{ .action.summary | urlize }}">{{- .action.summary -}}</a>
                         </h2>
                         <p class="mb-0"><span style="padding: 3px" class="text-uppercase font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType }}</span>&nbsp;<span>{{.pathKey}}</span></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-lg-9">
                         <h3 class="mt-2">Overview</h3>
                         <p>{{.action.description | markdownify }}</p>
                         {{ if .action.parameters }}
-                            <h3>Arguments</h3>
-                            <ul class="list-unstyled">
-                                {{ range .action.parameters }}
-                                    <li><code>{{ .name }}</code>[<em>{{ cond (eq .required false) "optional" "required" }}</em>]&nbsp;{{ .description | markdownify }}</li>
-                                {{ end }}
-                            </ul>
+                            <h3 class="mb-2">Arguments</h3>
+                            <div class=" schema-table row">
+                                <div class="col-12">
+                                  <div class="row table-header">
+                                    <div class="col-4 column">
+                                      <p class="font-semibold">Name</p>
+                                    </div>
+                                    <div class="col-2 column">
+                                      <p class="font-semibold">Type</p>
+                                    </div>
+                                    <div class="col-6 column">
+                                      <p class="font-semibold">Description</p>
+                                    </div>
+                                  </div>
+                                  {{ range .action.parameters }}
+                                        <div class="row ">
+                                            <div class="col-12 first-column">
+                                            <div class="row first-row ">
+                                                <div class="col-4 column">
+                                                    <p>
+                                                        <code>{{ .name }}</code>[<em>{{ cond (eq .required false) "optional" "required" }}</em>]&nbsp; ({{.in}})
+                                                    </p>
+                                                </div>
+                                                <div class="col-2 column">
+                                                    <p>{{ .schema.type }}</p>
+                                                </div>
+                                                <div class="col-6 column">
+                                                    <p>{{ .description }}</p>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                  {{ end }}
+                                </div>  
+                            </div>
                         {{ end }}
 
                         {{ if .action.requestBody }}
@@ -75,7 +111,6 @@
 
                             <p>{{ .action.requestBody.description | markdownify }}</p>
 
-                            {{ if .action.requestBody }}
                             <div class="tab-content">
                                 {{ range $content := .action.requestBody.content }}
                                     {{ range $schema := $content }}
@@ -87,11 +122,12 @@
                                         {{ with $dot.Resources.Match "examples.json" }}
                                             {{ range . }}
                                               {{ $data := . | unmarshal}}
+
+                                             
                                               {{ $req := (index (index $data $context.action.operationId) "request") }}
                                               {{ if $req }}
-                                                  {{ $data2 := (index $req "json") | jsonify }}
-                                                  {{ $data3 := (replace (replace (replace $data2 "," ",\n") "{" "{\n") "}" "\n}") }}
-                                                  {{ $dot.Scratch.Set "json" (highlight $data3 "json" "") }}
+                                                 
+                                                  {{ $dot.Scratch.Set "json" (highlight ((index $req "json") | jsonify (dict "indent" "  ")) "json" "") }}
                                                   {{ $dot.Scratch.Set "html" (index $req "html") }}
                                               {{ else }}
                                                   {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
@@ -101,16 +137,12 @@
                                         {{ $json := ($dot.Scratch.Get "json") }}
                                         {{ $html := ($dot.Scratch.Get "html") }}
 
-                                        {{ with $schema.description }}
-                                            <p>{{ . }}</p>
-                                        {{ end }}
-
                                         <ul class="nav nav-tabs border-none response-toggle">
                                             <li class="nav-item">
-                                                <a class="nav-link mr-1  js-model-link active" role="tab" href="#" data-toggle="tab">Model</a>
+                                                <a class="nav-link mr-1  js-model-link active" href="#" data-toggle="tab">Model</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link mr-1  js-example-link" role="tab" href="#" data-toggle="tab">Example</a>
+                                                <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">Example</a>
                                             </li>                     
                                         </ul>
                                       
@@ -119,73 +151,6 @@
                                               {{ $html | safeHTML }}
                                             </div>
                                             <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-request-example">
-                                              {{ $json }}
-                                            </div>
-                                        </div>
-                                        {{ end }}
-                                    {{ end }}
-                                {{ end }}
-                            </div>
-                            {{ end }}    
-                        {{ end }}
-
-                        <h3 class="mt-3 mb-2">Response</h3>                            
-
-                        <ul class="nav nav-tabs border-none response-toggle" style="z-index: 10;">
-                            {{ range $response_code, $response := .action.responses }}
-                                <li class="nav-item">
-                                    <a class="nav-link mr-1  {{ if eq $response_code "200"}}active{{end}}"  href="#{{ $context.action.operationId }}-{{ $response_code }}" role="tab" data-toggle="tab">{{ $response_code }}</a>
-                                </li>
-
-                            {{ end }}
-                        </ul>
-
-                        <div class="tab-content">
-                            {{ range $response_code, $response := .action.responses }}
-                            <div role="tabpanel" class="tab-pane {{ if eq $response_code "200"}} active {{end}}" id="{{ $context.action.operationId }}-{{ $response_code }}">
-                                {{ range $content := $response.content }}
-                                    {{ range $schema := $content }}
-
-                                        <!-- Get Json and HTML -->
-                                        {{ $dot.Scratch.Set "json" "" }}
-                                        {{ $dot.Scratch.Set "html" "" }}
-                                        {{ with $dot.Resources.Match "examples.json" }}
-                                            {{ range . }}
-                                              {{ $data := . | unmarshal}}
-                                              {{ $res := (index (index (index $data $context.action.operationId) "responses") $response_code) }}
-                                              {{ if $res }}
-                                                  {{ $data2 := (index $res "json") | jsonify }}
-                                                  {{ $data3 := (replace (replace (replace $data2 "," ",\n") "{" "{\n") "}" "\n}") }}
-                                                  {{ $dot.Scratch.Set "json" (highlight $data3 "json" "") }}
-                                                  {{ $dot.Scratch.Set "html" (index $res "html") }}
-                                              {{ else }}
-                                                  {{ warnf "Could not load html/json response code %q in %q" $response_code $context.action.operationId }}
-                                              {{ end }}
-                                            {{ end }}
-                                        {{ end }}
-                                        {{ $json := ($dot.Scratch.Get "json") }}
-                                        {{ $html := ($dot.Scratch.Get "html") }}
-                                        
-                                        <ul class="nav nav-tabs border-none response-toggle">
-                                            <li class="nav-item">
-                                                <a class="nav-link mr-1  js-model-link active" role="tab" href="#" data-toggle="tab">Model</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link mr-1  js-example-link" role="tab" href="#" data-toggle="tab">Example</a>
-                                            </li>                     
-                                        </ul>
-                                      
-                                        <div class="tab-content">
-                                            <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-{{ $response_code }}-model">
-                                               
-                                                {{ with $schema.description }}
-                                                    <p>{{ . }}</p>
-                                                {{ end }}
-
-                                              {{ $html | safeHTML }}
-
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-{{ $response_code }}-example">
                                                 <div class="code-snippet-wrapper js-code-block">
                                                     <div class="code-snippet">
                                                         <div class="code-button-wrapper position-absolute">
@@ -196,9 +161,91 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {{ end }}
                                     {{ end }}
                                 {{ end }}
                             </div>
+
+                        {{ end }}
+
+                        <h3 class="mt-3 mb-2">Response</h3>                            
+
+                        <ul class="nav nav-tabs border-none response-toggle" style="z-index: 10;">
+                            {{ $count := 0}}
+                            {{ range $response_code, $response := .action.responses }}
+                                <li class="nav-item">
+                                    <a class="nav-link mr-1  {{ if eq $count 0}}active{{end}}"  href="#{{ $context.action.operationId }}-{{ $response_code }}"  data-toggle="tab">{{ $response_code }}</a>
+                                </li>
+                                {{ $count = add $count 1 }}
+                            {{ end }}
+                        </ul>
+
+                        <div class="tab-content mb-3">
+                            {{ $count := 0}}
+                            {{ range $response_code, $response := .action.responses }}
+                                <div role="tabpanel" class="tab-pane {{ if eq $count 0}} active {{end}}" id="{{ $context.action.operationId }}-{{ $response_code }}">
+                                    {{ with $response.content }}
+                                        
+                                        <p class="mb-2">{{$response.description}}</p>
+
+                                        {{ range $content := . }}
+                                            {{ range $schema := $content }}
+
+                                                <!-- Get Json and HTML -->
+                                                {{ $dot.Scratch.Set "json" "" }}
+                                                {{ $dot.Scratch.Set "html" "" }}
+                                                {{ with $dot.Resources.Match "examples.json" }}
+                                                    {{ range . }}
+                                                    {{ $data := . | unmarshal}}
+                                                    {{ $res := (index (index (index $data $context.action.operationId) "responses") $response_code) }}
+                                                    {{ if $res }}
+                                                        {{ $dot.Scratch.Set "json" (highlight ((index $res "json") | jsonify (dict "indent" "  ")) "json" "") }}
+                                                        {{ $dot.Scratch.Set "html" (index $res "html") }}
+                                                    {{ else }}
+                                                        {{ warnf "Could not load html/json response code %q in %q" $response_code $context.action.operationId }}
+                                                    {{ end }}
+                                                    {{ end }}
+                                                {{ end }}
+                                                {{ $json := ($dot.Scratch.Get "json") }}
+                                                {{ $html := ($dot.Scratch.Get "html") }}
+                                                
+                                                <ul class="nav nav-tabs border-none response-toggle">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link mr-1  js-model-link active"  href="#" data-toggle="tab">Model</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">Example</a>
+                                                    </li>                     
+                                                </ul>
+                                            
+                                                <div class="tab-content">
+                                                    <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-{{ $response_code }}-model">
+                                                    
+                                                        {{ with $schema.description }}
+                                                            <p>{{- . | markdownify -}}</p>
+                                                        {{ end }}
+
+                                                    {{ $html | safeHTML }}
+
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane js-tab-example" id="{{ $context.action.operationId }}-{{ $response_code }}-example">
+                                                        <div class="code-snippet-wrapper js-code-block">
+                                                            <div class="code-snippet">
+                                                                <div class="code-button-wrapper position-absolute">
+                                                                    <button class="btn text-primary js-copy-button">Copy</button>
+                                                                </div>
+                                                                {{ $json }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {{ end }}
+                                        {{ end }}
+                                    {{ else }}
+                                        <p class="mb-2">{{$response.description}}</p>
+                                    {{ end}}
+                                </div>
+                                {{ $count = add $count 1 }}
                             {{ end }}
                         </div>
                     
@@ -206,89 +253,62 @@
 
                         {{/* match all Page Resource code examples by operationId */}}
                         {{ with $dot.Resources.Match (printf "%s%s" .action.operationId ".*" ) }}
-                        <div class="code-snippet-wrapper" >
-                        <form class="form-inline">
-                    
-                            <div class="form-group">
-                                <label for="codeLangSelect" class="sr-only">Code language</label>
-                                <select class="form-control js-code-lang-select" id="codeLangSelect">
-                                  <option value="bash">Shell</option>
-                                  <option value="java">Java</option>
-                                  <option value="go">Go</option>
-                                </select>
-                              </div>
-                          </form>
-                            {{ range . }}
 
-                                {{ $file_content := .Content }}
-                                {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-                                {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
-
-                                
+                            <div class="code-snippet-wrapper js-code-snippet-wrapper" >
+                                {{/*<form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="codeLangSelect" class="sr-only">Code language</label>
+                                        <select class="form-control js-code-lang-select" id="codeLangSelect">
+                                        <option value="bash">Shell</option>
+                                        <option value="java">Java</option>
+                                        <option value="go">Go</option>
+                                        </select>
+                                    </div>
+                                </form>*/}}
+                                <ul class="nav nav-tabs border-none response-toggle">
                                     
-                                        
-                                        <div class="code-snippet js-code-block {{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
-                                            <div class="code-button-wrapper position-absolute">
-                                                <button class="btn text-primary js-copy-button">Copy</button>
-                                            </div>
-                                            {{ highlight $file_content $lang.pygments_name "" }}
-                                        </div>
-                                    
-                            {{ end }}
-                        </div>
+                                    {{ $count := 0}}
+                                    {{ range . }}
 
-                        {{ end }}
-
-                        {{/* range $files }}
-
-                            {{ .Name }}
-
-                           
-
-                            {{ $file := (print $snipdir (.Name))}}
-                            {{ if and (fileExists $file) (not (in $file "openapi-generator" ))  }}
-                                {{ $file_content := readFile $file }}
-                                {{ $file_basename := (index (split .Name ".") 0) }}
-                                {{ $file_extension := index (split (path.Ext $file) ".") 1 }}
-
-                                {{ if eq $context.action.operationId $file_basename }}
+                                    {{ $file_extension := index (split (path.Ext .) ".") 1 }}
                                     {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
 
-                                    <div class="code-snippet-wrapper js-code-block {{if eq $file_extension "sh"}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}">
-                                        <div class="code-snippet">
-                                      
-                                        <div class="code-button-wrapper position-absolute">
-                                        <button class="btn text-primary js-copy-button">Copy</button>
-                                        </div>
-                                       
-                                       
-                                        {{ highlight $file_content $lang.pygments_name "" }}
-                                        </div>
-                                        </div>
-                                  
+                                    <li class="nav-item">
+                                        <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}" data-code-lang="{{ $lang.pygments_name }}"  href="#" data-toggle="tab">{{ $lang.pygments_name }}</a>
+                                    </li>
+
+                                    {{ $count = add $count 1 }}
+
+                                    {{ end }}
+
+                                </ul>
+
+                                {{ $count := 0}}
+                                {{ range . }}
+
+                                    {{ $file_content := .Content }}
+                                    {{ $file_extension := index (split (path.Ext .) ".") 1 }}
+                                    {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
                             
+                                    <div class="code-snippet js-code-block {{if eq $file_extension "sh"}} default {{end }} {{ if eq $count 0}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
+                                        <div class="code-button-wrapper position-absolute">
+                                            <button class="btn text-primary js-copy-button">Copy</button>
+                                        </div>
+                                        {{ highlight $file_content $lang.pygments_name "" }}
+                                    </div>
+                                    {{ $count = add $count 1 }}
                                 {{ end }}
-                            {{ end }}
-                        {{ end */}}
+                            </div>
+                        {{ end }}
                     </div>
                 </div>
-                <div class="row" style="margin-top: 90px;">
+                <!-- endpoint section end -->
+                <div class="row divider">
                     <div class="col-12">
                         <hr class="mt-0 mb-2" style="border-top: 2px solid#DADADA"/>
                     </div>
                 </div>
             {{ end }}
-
-            <!-- If endpoint is deprecated -->
-            {{ if eq (index $v "x-deprecated") true}}
-
-                <div class="alert alert-danger">
-                    {{$v.description | markdownify}}
-                    {{$v.externalDocs.description}} <a href="{{$v.externalDocs.url}}">{{$v.externalDocs.url}}</a>
-                </div>
-
-            {{ end }}
-
         {{ end }}
     {{ end }}
 {{ end }}

@@ -1782,6 +1782,9 @@ api_v1:
   - name: Create a monitor
     parent: Monitors
     url: create-a-monitor
+  - name: Check if the given monitors can be deleted
+    parent: Monitors
+    url: check-if-the-given-monitors-can-be-deleted
   - name: Validate a monitor
     parent: Monitors
     url: validate-a-monitor
@@ -2019,19 +2022,115 @@ api_v1:
   - name: Update user
     parent: Users
     url: update-user
+  - name: Webhooks Integration
+    url: /api/v1/webhooks-integration/
+    identifier: Webhooks Integration
+  - name: Create a Custom Variable for Webhooks Integration
+    parent: Webhooks Integration
+    url: create-a-custom-variable-for-webhooks-integration
+  - name: Delete a Custom Variable for Webhooks Integration
+    parent: Webhooks Integration
+    url: delete-a-custom-variable-for-webhooks-integration
+  - name: Get a Custom Variable for Webhooks Integration
+    parent: Webhooks Integration
+    url: get-a-custom-variable-for-webhooks-integration
+  - name: Update a Custom Variable for Webhooks Integration
+    parent: Webhooks Integration
+    url: update-a-custom-variable-for-webhooks-integration
+  - name: Create a Webhooks Integration
+    parent: Webhooks Integration
+    url: create-a-webhooks-integration
+  - name: Delete a Webhook for Webhooks Integration
+    parent: Webhooks Integration
+    url: delete-a-webhook-for-webhooks-integration
+  - name: Get a Webhook Integration
+    parent: Webhooks Integration
+    url: get-a-webhook-integration
+  - name: Update a Webhook for Webhooks Integration
+    parent: Webhooks Integration
+    url: update-a-webhook-for-webhooks-integration
 api_v2:
-  - name: DashboardLists
-    url: /api/v2/dashboardlists/
-    identifier: DashboardLists
+  - name: Dashboard Lists
+    url: /api/v2/dashboard-lists/
+    identifier: Dashboard Lists
   - name: Delete items from a dashboard list
-    parent: DashboardLists
+    parent: Dashboard Lists
     url: delete-items-from-a-dashboard-list
   - name: Get a Dashboard List
-    parent: DashboardLists
+    parent: Dashboard Lists
     url: get-a-dashboard-list
   - name: Add Items to a Dashboard List
-    parent: DashboardLists
+    parent: Dashboard Lists
     url: add-items-to-a-dashboard-list
   - name: Update items of a dashboard list
-    parent: DashboardLists
+    parent: Dashboard Lists
     url: update-items-of-a-dashboard-list
+  - name: Roles
+    url: /api/v2/roles/
+    identifier: Roles
+  - name: List permissions
+    parent: Roles
+    url: list-permissions
+  - name: List roles
+    parent: Roles
+    url: list-roles
+  - name: Create role
+    parent: Roles
+    url: create-role
+  - name: Delete role
+    parent: Roles
+    url: delete-role
+  - name: Get a role
+    parent: Roles
+    url: get-a-role
+  - name: Update a role
+    parent: Roles
+    url: update-a-role
+  - name: Revoke permission
+    parent: Roles
+    url: revoke-permission
+  - name: List permissions for a role
+    parent: Roles
+    url: list-permissions-for-a-role
+  - name: Grant permission to a role
+    parent: Roles
+    url: grant-permission-to-a-role
+  - name: Remove a user from a role
+    parent: Roles
+    url: remove-a-user-from-a-role
+  - name: Get all users of a role
+    parent: Roles
+    url: get-all-users-of-a-role
+  - name: Add a user to a role
+    parent: Roles
+    url: add-a-user-to-a-role
+  - name: Users
+    url: /api/v2/users/
+    identifier: Users
+  - name: Send invitation emails
+    parent: Users
+    url: send-invitation-emails
+  - name: Get a user invitation
+    parent: Users
+    url: get-a-user-invitation
+  - name: List all users
+    parent: Users
+    url: list-all-users
+  - name: Create user
+    parent: Users
+    url: create-user
+  - name: Disable user
+    parent: Users
+    url: disable-user
+  - name: Get a user
+    parent: Users
+    url: get-a-user
+  - name: Update a user
+    parent: Users
+    url: update-a-user
+  - name: Get a user organization
+    parent: Users
+    url: get-a-user-organization
+  - name: Get a user permissions
+    parent: Users
+    url: get-a-user-permissions

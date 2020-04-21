@@ -1,5 +1,5 @@
 <form class="docssearch" method="GET" action="{{ "search/" | absLangURL }}">
-  <div class="search-input-container" id="search-input-container">
+  <div class="search-input-container">
     <svg class="search-input-icon" width="13" height="14" viewBox="0 0 13 14" fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd"
@@ -9,6 +9,7 @@
 
     <input type="search" id="search-input" class="docssearch-input" placeholder="Search" name="search"
       autocomplete="off" />
+    <label class="sr-only" for="search-input">Search Docs</label>
 
   </div>
 </form>
