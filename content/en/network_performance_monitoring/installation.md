@@ -96,7 +96,7 @@ To enable network performance monitoring with Kubernetes from scratch:
     kubectl apply -f datadog-agent.yaml
     ```
 
-If you already have the [Agent running with a Manifest][3]:
+If you already have the [Agent running with a manifest][3]:
 
 1. Add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
 
