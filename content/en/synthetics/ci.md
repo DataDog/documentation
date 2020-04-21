@@ -483,13 +483,13 @@ You can see the outcome of test executions directly in your CI as your tests are
 
 You can identify what caused a test to fail by looking at the execution logs and searching for causes of the failed assertion:
 
-{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result"  style="width:80%;">}}
+{{< img src="synthetics/ci/failed_test_result.png" alt="Failed Test Result" style="width:80%;">}}
 
 ### In Datadog application
 
 You can also see the results of your tests listed on your Datadog test details page:
 
-{{< img src="synthetics/ci/test_results.png" alt="Successful Test Result"  style="width:80%;">}}
+{{< img src="synthetics/ci/test_results.png" alt="Successful Test Result" style="width:80%;">}}
 
 ## Further Reading
 
@@ -497,4 +497,4 @@ You can also see the results of your tests listed on your Datadog test details p
 
 [1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
 [2]: /help
-[3]: https://docs.datadoghq.com/api/?lang=bash#get-a-test
+[3]: /api/?lang=bash#get-a-test
