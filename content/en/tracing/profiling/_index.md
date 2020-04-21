@@ -133,7 +133,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 
 The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
-1. Install `ddtrace` which contains both tracing and profiling:
+1. Get `dd-trace-go` using the command:
 
     ```shell
     go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
