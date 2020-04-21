@@ -178,6 +178,10 @@ Configure the formatter in your Monolog configuration: declare the formatter fie
 {{% /tab %}}
 {{< /tabs >}}
 
+**Connect Logs and Traces**
+
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM PHP logging instructions][8] to automatically add trace and span IDs in your logs.
+
 ### Agent Configuration
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
@@ -542,3 +546,4 @@ CakeLog::config('debug', array(
 [5]: /logs/log_collection/php/#silex
 [6]: /logs/log_collection/php/#lumen
 [7]: /logs/log_collection/php/#cakephp
+[8]: /tracing/connect_logs_and_traces/php
