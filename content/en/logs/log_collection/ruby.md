@@ -109,7 +109,7 @@ This section describe the minimum setup required in order to forward your Rails 
 
 ### Connect Logs and Traces
 
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Ruby logging instructions][3] to automatically add trace and span IDs in your logs.
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Ruby logging instructions][7] to automatically add trace and span IDs in your logs.
 
 Then [configure the Datadog Agent](#configure-your-datadog-agent) to collect ruby logs from the file.
 
