@@ -1,7 +1,7 @@
 ---
 title: Synthetics CI
 kind: documentation
-description: Synthetics CI
+description: Run Synthetics test in your on-demand in your CI.
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
@@ -35,9 +35,22 @@ The trigger endpoint provides the list of triggered checks alongside their resul
 
 The test triggering endpoint supports starting up to 50 tests in one request.
 
+{{< tabs >}}
+{{% tab "Datadog US site" %}}
+
 * **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci`
 * **Method**: `POST`
 * **Argument**: A JSON object containing the list of all tests to trigger and their configuration override.
+
+{{% /tab %}}
+{{% tab "Datadog EU site" %}}
+
+* **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci`
+* **Method**: `POST`
+* **Argument**: A JSON object containing the list of all tests to trigger and their configuration override.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Request data structure
 
@@ -47,11 +60,14 @@ The test triggering endpoint supports starting up to 50 tests in one request.
 }
 ```
 
-The `TEST_TO_TRIGGER` objects are composed of the `public_id` (required) of the test to trigger and optional configuration overrides ([see below][#configure-tests] for a description of each field).
+The `TEST_TO_TRIGGER` objects are composed of the `public_id` (required) of the test to trigger and optional configuration overrides ([see below](#configure-tests) for a description of each field).
 
 The public identifier of a test can be either the identifier of the test found in the URL of a test details page (for `https://app.datadoghq.com/synthetics/details/abc-def-ghi`, it would be `abc-def-ghi`) or the full URL to the details page (that is, `https://app.datadoghq.com/synthetics/details/abc-def-ghi`).
 
 #### Example request
+
+{{< tabs >}}
+{{% tab "Datadog US site" %}}
 
 ```bash
 curl -X POST \
@@ -79,6 +95,40 @@ curl -X POST \
 }' "https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci"
 ```
 
+
+{{% /tab %}}
+{{% tab "Datadog EU site" %}}
+
+```bash
+curl -X POST \
+-H 'Content-Type: application/json' \
+-H "DD-API-KEY: ${api_key}" \
+-H "DD-APPLICATION-KEY: ${app_key}" \
+-d '{
+    "tests": [
+        {
+            "public_id": "abc-def-ghi",
+            "allowInsecureCertificates": true,
+            "basicAuth": { "username": "test", "password": "test" },
+            "body": "{\"fakeContent\":true}",
+            "bodyType": "application/json",
+            "cookies": "name1=value1;name2=value2;",
+            "deviceIds": ["laptop_large"],
+            "followRedirects": true,
+            "headers": { "NEW_HEADER": "NEW VALUE" },
+            "locations": ["aws:us-west-1"],
+            "retry": { "count": 2, "interval": 300 },
+            "startUrl": "http://new.url/",
+            "variables": { "titleVariable": "new title" }
+        }
+    ]
+}' "https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci"
+```
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
 #### Example response
 
 ```json
@@ -98,11 +148,27 @@ curl -X POST \
 
 ### Poll results endpoint
 
+{{< tabs >}}
+{{% tab "Datadog US site" %}}
+
 * **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/poll_results`
 * **Method**: `GET`
 * **Parameters**: A JSON array containing the list of result identifiers to obtain results from.
 
+{{% /tab %}}
+{{% tab "Datadog EU site" %}}
+
+* **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/poll_results`
+* **Method**: `GET`
+* **Parameters**: A JSON array containing the list of result identifiers to obtain results from.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 #### Example request
+
+{{< tabs >}}
+{{% tab "Datadog US site" %}}
 
 ```bash
 curl -G \
@@ -111,6 +177,20 @@ curl -G \
     -H "DD-APPLICATION-KEY: ${app_key}" \
     -d "result_ids=[%220123456789012345678%22]"
 ```
+
+{{% /tab %}}
+{{% tab "Datadog EU site" %}}
+
+```bash
+curl -G \
+    "https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results" \
+    -H "DD-API-KEY: ${api_key}" \
+    -H "DD-APPLICATION-KEY: ${app_key}" \
+    -d "result_ids=[%220123456789012345678%22]"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Example response
 
@@ -145,7 +225,6 @@ curl -G \
 }
 ```
 
-
 ## CLI usage
 
 ### Package installation
@@ -159,7 +238,7 @@ Until it is made public, an NPM token is needed to access it. If you do not have
 
 Set the below in your `~/.npmrc` file:
 
-```
+```conf
 registry=https://registry.npmjs.org/
 //registry.npmjs.org/:_authToken=<TOKEN>
 ```
@@ -197,58 +276,58 @@ To setup your client, Datadog API and application keys need to be configured. Th
 
 1. As environment variables:
 
-```
-export DATADOG_API_KEY="<API KEY>"
-export DATADOG_APP_KEY="<APPLICATION KEY>"
-```
+    ```bash
+    export DATADOG_API_KEY="<API KEY>"
+    export DATADOG_APP_KEY="<APPLICATION KEY>"
+    ```
 
-2. Passed to the CLI when running your tests: 
+2. Passed to the CLI when running your tests:
 
-```bash
-datadog-ci synthetics <command> --apiKey "<API KEY>" --appKey "<APPLICATION KEY>"
-```
+    ```bash
+    datadog-ci synthetics run-tests --apiKey "<API KEY>" --appKey "<APPLICATION KEY>"
+    ```
 
 3. Or defined in a global configuration file:
 
-You can also create a JSON configuration file to specify more advanced options. The path to this global configuration file can be set using the flag `--config` [when launching your tests][#running-tests]. If the name of your global configuration file is set to `datadog-ci.json`, it defaults to it.
+     You can also create a JSON configuration file to specify more advanced options. The path to this global configuration file can be set using the flag `--config` [when launching your tests](#running-tests). If the name of your global configuration file is set to `datadog-ci.json`, it defaults to it.
 
-* **apiKey**: The API key used to query the Datadog API.
-* **appKey**: The application key used to query the Datadog API.
-* **datadogSite**: The Datadog instance to which request is sent (choices are datadoghq.com or datadoghq.eu).
-* **files**: Glob pattern to detect synthetics tests config files.
-* **global**: Overrides of synthetics tests applied to all tests ([see below for description of each field][#configure-tests]).
-* **timeout**: Duration after which synthetics tests are considered failed (in milliseconds).
+    * **apiKey**: The API key used to query the Datadog API.
+    * **appKey**: The application key used to query the Datadog API.
+    * **datadogSite**: The Datadog instance to which request is sent (choices are datadoghq.com or datadoghq.eu).
+    * **files**: Glob pattern to detect synthetics tests config files.
+    * **global**: Overrides of synthetics tests applied to all tests ([see below for description of each field](#configure-tests)).
+    * **timeout**: Duration after which synthetics tests are considered failed (in milliseconds).
 
-**Example global configuration file**:
+    **Example global configuration file**:
 
-```json
-{
-    "apiKey": "<DATADOG_API_KEY>",
-    "appKey": "<DATADOG_APPLICATION_KEY>",
-    "datadogSite": "datadoghq.com",
-    "files": "{,!(node_modules)/**/}*.synthetics.json",
-    "global": {
-        "allowInsecureCertificates": true,
-        "basicAuth": { "username": "test", "password": "test" },
-        "body": "{\"fakeContent\":true}",
-        "bodyType": "application/json",
-        "cookies": "name1=value1;name2=value2;",
-        "deviceIds": ["laptop_large"],
-        "followRedirects": true,
-        "headers": { "NEW_HEADER": "NEW VALUE" },
-            "locations": ["aws:us-west-1"],
-        "retry": { "count": 2, "interval": 300 },
-        "executionRule": "skipped",
-        "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-        "variables": { "titleVariable": "new title" }
-    },
-    "timeout": 120000
-}
+    ```json
+    {
+        "apiKey": "<DATADOG_API_KEY>",
+        "appKey": "<DATADOG_APPLICATION_KEY>",
+        "datadogSite": "datadoghq.com",
+        "files": "{,!(node_modules)/**/}*.synthetics.json",
+        "global": {
+            "allowInsecureCertificates": true,
+            "basicAuth": { "username": "test", "password": "test" },
+            "body": "{\"fakeContent\":true}",
+            "bodyType": "application/json",
+            "cookies": "name1=value1;name2=value2;",
+            "deviceIds": ["laptop_large"],
+            "followRedirects": true,
+            "headers": { "NEW_HEADER": "NEW VALUE" },
+                "locations": ["aws:us-west-1"],
+            "retry": { "count": 2, "interval": 300 },
+            "executionRule": "skipped",
+            "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
+            "variables": { "titleVariable": "new title" }
+        },
+        "timeout": 120000
+    }
+    ```
 
-```
 ### Configure tests
 
-By default, the client automatically discovers and runs all tests specified in `**/*.synthetics.json` files (the path can be configured in the [global configuration file][#setup-the-client]). These files have a `tests` key, which contains an array of objects with the IDs of the tests to run and any potential configuration overrides for these tests. 
+By default, the client automatically discovers and runs all tests specified in `**/*.synthetics.json` files (the path can be configured in the [global configuration file](#setup-the-client). These files have a `tests` key, which contains an array of objects with the IDs of the tests to run and any potential configuration overrides for these tests.
 
 **Example basic test configuration file**:
 
@@ -269,7 +348,7 @@ By default, the client automatically discovers and runs all tests specified in `
 
 The default configurations used for the tests are the original tests' configurations (visible in the UI or when [getting your tests' configurations from the API][3]).
 
-However, in the context of your CI deployment, you can optionally decide to override some (or all) of your tests parameters by using the below overrides. If you want to define overrides for all of your tests, these same parameters can be set at the [global configuration file][#setup-the-client] level.
+However, in the context of your CI deployment, you can optionally decide to override some (or all) of your tests parameters by using the below overrides. If you want to define overrides for all of your tests, these same parameters can be set at the [global configuration file](#setup-the-client) level.
 
 * **allowInsecureCertificates**: (_Boolean_) Disable certificate checks in API tests.
 * **basicAuth**: (_object_) Credentials to provide in case a basic authentication is encountered.
@@ -281,7 +360,7 @@ However, in the context of your CI deployment, you can optionally decide to over
 * **deviceIds**: (_array_) List of devices on which to run the browser test.
 * **followRedirects**: (_Boolean_) Indicates whether to follow HTTP redirections in API tests.
 * **headers**: (_object_) Headers to replace in the test. This object should contain, as keys, the name of the header to replace and, as values, the new value of the header.
-* **locations**: (_array_) List of locations from which the test should be run. 
+* **locations**: (_array_) List of locations from which the test should be run.
 * **retry**: (_object_) Retry policy for the test:
      * **count**: (_integer_) Number of attempts to perform in case of test failure.
      * **interval**: (_integer_) Interval between the attempts (in milliseconds).
@@ -292,7 +371,7 @@ However, in the context of your CI deployment, you can optionally decide to over
 * **startUrl**: (_string_) New start URL to provide to the test.
 * **variables**: (_object_) Variables to replace in the test. This object should contain, as keys, the name of the variable to replace and, as values, the new value of the variable.
 
-**Note**: Tests' overrides take precedence over global overrides. 
+**Note**: Tests' overrides take precedence over global overrides.
 
 **Example advanced test configuration file**:
 
@@ -327,7 +406,7 @@ The _execution rule_ of each test can also be defined in-app, at the test level.
 
 {{< img src="synthetics/ci/execution_rule.mp4" alt="CI Execution Rule" video="true" width="100%">}}
 
-The execution rule associated with the test is always the most restrictive one that was set in the configuration file. From the most restrictive to the least restrictive: `skipped`, `non_blocking`, `blocking`. For example, if your test is configured to be `skipped` in the UI but to `blocking` in the configuration file, it is `skipped` when running your tests. 
+The execution rule associated with the test is always the most restrictive one that was set in the configuration file. From the most restrictive to the least restrictive: `skipped`, `non_blocking`, `blocking`. For example, if your test is configured to be `skipped` in the UI but to `blocking` in the configuration file, it is `skipped` when running your tests.
 
 #### Start URL
 
@@ -354,7 +433,7 @@ For instance, if your test's starting URL is `https://www.example.org:81/path/to
 
 ### Running tests
 
-You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetics tests (or all the tests associated to the path specified in your [global configuration file][#setup-the-client]) or to specify the tests you want to run using the `-p,--public-id` flag.
+You can decide to have the CLI autodiscover all your `**/*.synthetics.json` Synthetics tests (or all the tests associated to the path specified in your [global configuration file](#setup-the-client)) or to specify the tests you want to run using the `-p,--public-id` flag.
 
 Run tests by executing the CLI:
 
@@ -365,7 +444,7 @@ Run tests by executing the CLI:
 yarn datadog-ci synthetics run-tests
 ```
 
-**Note**: If you are launching your tests with a custom global configuration file, append your command with `--config <PATH_TO_GLOBAL_CONFIG_FILE`. 
+**Note**: If you are launching your tests with a custom global configuration file, append your command with `--config <PATH_TO_GLOBAL_CONFIG_FILE`.
 
 {{% /tab %}}
 {{% tab "NPM" %}}
@@ -374,7 +453,6 @@ Add the following to your `package.json`:
 
 ```json
 {
-  ...
   "scripts": {
     "datadog-ci-synthetics": "datadog-ci synthetics run-tests"
   },
@@ -386,11 +464,11 @@ Add the following to your `package.json`:
 
 Then, run:
 
-```
+```bash
 npm run datadog-ci-synthetics
 ```
 
-**Note**: If you are launching your tests with a custom global configuration file, append the command associated to your `datadog-ci-synthetics` script with `--config <PATH_TO_GLOBAL_CONFIG_FILE`. 
+**Note**: If you are launching your tests with a custom global configuration file, append the command associated to your `datadog-ci-synthetics` script with `--config <PATH_TO_GLOBAL_CONFIG_FILE`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -412,6 +490,10 @@ You can identify what caused a test to fail by looking at the execution logs and
 You can also see the results of your tests listed on your Datadog test details page:
 
 {{< img src="synthetics/ci/test_results.png" alt="Successful Test Result"  style="width:80%;">}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
 [2]: /help
