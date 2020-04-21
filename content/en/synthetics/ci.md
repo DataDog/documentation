@@ -70,6 +70,11 @@ The public identifier of a test can be either the identifier of the test found i
 {{% tab "Datadog US site" %}}
 
 ```bash
+#!/bin/sh
+
+api_key="<DATADOG_API_KEY>"
+app_key="<DATADOG_APPLICATION_KEY>"
+
 curl -X POST \
 -H 'Content-Type: application/json' \
 -H "DD-API-KEY: ${api_key}" \
@@ -95,11 +100,15 @@ curl -X POST \
 }' "https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci"
 ```
 
-
 {{% /tab %}}
 {{% tab "Datadog EU site" %}}
 
 ```bash
+#!/bin/sh
+
+api_key="<DATADOG_API_KEY>"
+app_key="<DATADOG_APPLICATION_KEY>"
+
 curl -X POST \
 -H 'Content-Type: application/json' \
 -H "DD-API-KEY: ${api_key}" \
@@ -124,7 +133,6 @@ curl -X POST \
     ]
 }' "https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci"
 ```
-
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -171,6 +179,11 @@ curl -X POST \
 {{% tab "Datadog US site" %}}
 
 ```bash
+#!/bin/sh
+
+api_key="<DATADOG_API_KEY>"
+app_key="<DATADOG_APPLICATION_KEY>"
+
 curl -G \
     "https://api.datadoghq.com/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
@@ -182,6 +195,11 @@ curl -G \
 {{% tab "Datadog EU site" %}}
 
 ```bash
+#!/bin/sh
+
+api_key="<DATADOG_API_KEY>"
+app_key="<DATADOG_APPLICATION_KEY>"
+
 curl -G \
     "https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results" \
     -H "DD-API-KEY: ${api_key}" \
