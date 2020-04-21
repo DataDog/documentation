@@ -64,10 +64,7 @@ build_preview:
     - placehold_translations
     - update_preview_yaml
     - yarn run build:preview
-    - assume_marketing_deploy_role
-    - yarn run deploy:previewAssets
-    - yarn run deploy:preview
-    - assume_previous_role
+    - in-isolation deploy_preview
     - notify_slack "<https://github.com/DataDog/documentation/commit/${CI_COMMIT_SHA}|${CI_COMMIT_REF_NAME}> is ready for preview. <${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}| checks running>." "#31b834"
   artifacts:
     paths:
@@ -135,10 +132,7 @@ build_live:
     - sync_integration_metrics
     - placehold_translations
     - yarn run build:live
-    - assume_marketing_deploy_role
-    - yarn run deploy:liveAssets
-    - yarn run deploy:live
-    - assume_previous_role
+    - in-isolation deploy_live
     - create_artifact
     - create_artifact_untracked
   artifacts:
