@@ -163,9 +163,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
-**Note**:
-
-- For advanced setup of the profiler or to add tags like `service` or `version`, use environment variables or `profiler` methods to set the parameters:
+Profiler configuration:
 
 | Environment variable                             |`profiler` method | Type          | Description                                                                                      |
 | ------------------------------------------------ | ---------------- | ------------- | ------------------------------------------------------------------------------------------------ |
