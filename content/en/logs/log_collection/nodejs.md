@@ -21,7 +21,8 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-## Overview
+
+## Configure your logger
 
 Using [Winston][1] to log from your NodeJS application gets you all the features you need to build up your logging strategy.
 
@@ -45,10 +46,6 @@ npm install --save winston
   }
 }
 ```
-
-## Setup
-
-**Inject trace IDs in your logs**:  If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow APM NodeJS logging instructions][3] to automatically add trace and span IDs in your logs.
 
 ### Log to file
 
@@ -108,6 +105,9 @@ Check the content of the `<FILE_NAME>.log` file to see that Winston already took
 {"level":"info","message":"Hello simple log!","timestamp":"2015-04-23T16:52:05.337Z"}
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
+
+**Connect Logs and Traces**
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM NodeJS logging instructions][3] to automatically add trace and span IDs in your logs.
 
 ## Configure your Datadog Agent
 
