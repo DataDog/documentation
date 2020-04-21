@@ -241,7 +241,8 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 
 **Connect Logs and Traces**
 
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following these instructions][2] to add trace and span ids in your logs.
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM .NET logging instructions][] to add trace and span IDs in your logs.
+
 
 ## Configure your Datadog Agent
 
