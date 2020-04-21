@@ -3,19 +3,7 @@
 <aside class="sidenav">
     <div class="row sticky">
         <div class="col">
-            <h4>
-                <a class="text-primary" href="{{ "" | absLangURL }}">{{ i18n "datadog_docs" }}</a>
-                <span>
-                    <label for="region-select" class="sr-only">Region</label>
-                    <select id=region-select class="js-region-selector">
-                        <option disabled selected value>--</option>
-                        {{ range .Site.Params.allowedRegions }}
-                            <option value="{{ .value }}">{{ .name }}</option>
-                        {{ end }}
-                    </select>
-                </span>
-            </h4>
-            
+                
             {{ partial "search.html" . }}
 
             <div class="sidenav-nav sidenav-nav-main">

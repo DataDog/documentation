@@ -5,6 +5,14 @@
 
     
     <div class="sticky toc">
+
+        <select id=region-select class="js-region-selector d-none">
+            <option disabled selected value>--</option>
+            {{ range .Site.Params.allowedRegions }}
+                <option value="{{ .value }}">{{ .name }}</option>
+            {{ end }}
+        </select>
+
         <div class="js-toc {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">
             {{ partial "page-edit.html" (dict "ctx" $ctx "type" "edit") }}
             <p class="text-uppercase text-gray-darkish font-semibold mb-2 toc-title js-toc-title {{ if .Params.disable_toc }} d-none {{ else }} {{ end }}">{{ i18n "table_of_contents_heading"}}</p>

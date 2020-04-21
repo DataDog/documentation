@@ -248,23 +248,13 @@
                                 {{ $count = add $count 1 }}
                             {{ end }}
                         </div>
-                    
-                        <h3 class="mb-2">Code Example</h3>
 
                         {{/* match all Page Resource code examples by operationId */}}
                         {{ with $dot.Resources.Match (printf "%s%s" .action.operationId ".*" ) }}
 
+                            <h3 class="mb-2">Code Example</h3>
+
                             <div class="code-snippet-wrapper js-code-snippet-wrapper" >
-                                {{/*<form class="form-inline">
-                                    <div class="form-group">
-                                        <label for="codeLangSelect" class="sr-only">Code language</label>
-                                        <select class="form-control js-code-lang-select" id="codeLangSelect">
-                                        <option value="bash">Shell</option>
-                                        <option value="java">Java</option>
-                                        <option value="go">Go</option>
-                                        </select>
-                                    </div>
-                                </form>*/}}
                                 <ul class="nav nav-tabs border-none response-toggle">
                                     
                                     {{ $count := 0}}
