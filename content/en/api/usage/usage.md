@@ -24,6 +24,7 @@ The usage metering end-point allows you to:
 * Get Hourly Usage For Network Hosts
 * Get Hourly Usage For Network Flows
 * Get Hourly Usage For RUM Sessions
+* Get Hourly Usage For Analyzed Logs
 * Get Multi-Org Usage Summary
 * Get Daily Usage Attribution Available Files
 * Get Daily Usage Attribution File URL
