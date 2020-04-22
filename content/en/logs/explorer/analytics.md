@@ -53,7 +53,7 @@ Use the query to control what's displayed in your Log Analytics:
 
     {{< img src="logs/explorer/analytics/agg_function_log_graph.png" alt="aggregation function for Log Analytics"  style="width:50%;">}}
 
-3. Use [Tag][1] or [Facet][1] to split your graph.
+3. Use a [Facet][1] to split your graph.
 
     {{< img src="logs/explorer/analytics/split_by_log_graph.png" alt="split by Log Analytics"  style="width:50%;">}}
 
