@@ -8,97 +8,150 @@ const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
 
 
-function updateApiSideNav(apiYaml, dereferencedObject, apiVersion) {
+/**
+ * Update the menu yaml file with api
+ * @param {object} apiYaml - object with data
+ * @param {string} apiVersion - string with version e.g v1
+ */
+const updateMenu = (apiYaml, apiVersion) => {
+  const currentMenuYaml = yaml.safeLoad(fs.readFileSync('./config/_default/menus/menus.en.yaml', 'utf8'));
+  const newMenuArray = [];
 
-    const menuYaml = yaml.safeLoad(
-        fs.readFileSync('./config/_default/menus/menus.en.yaml', 'utf8')
-    );
+  apiYaml.tags.forEach((tag) => {
 
-    const newMenuArray = [];
-
-    for (let i = 0; i < apiYaml.tags.length; i += 1) {
-        const tags = apiYaml.tags[i];
-
-        const newDirName = slugify(tags.name, {
-            lower: true,
-            replacement: '-'
-        });
-
-        const indexFrontMatter = {
-            title: tags.name
-        };
-
-        fs.mkdirSync(`./content/en/api/${apiVersion}/${newDirName}`, {
-            recursive: true
-        });
-
-        let indexYamlStr = yaml.safeDump(indexFrontMatter);
-        indexYamlStr = `---\n${indexYamlStr}---\n`;
-
-        try {
-            fs.writeFileSync(
-                `./content/en/api/${apiVersion}/${newDirName}/_index.md`,
-                indexYamlStr,
-                'utf8'
-            );
-            console.log(
-                `successfully wrote ./content/en/api/${apiVersion}/${newDirName}/_index.md`
-            );
-        } catch (err) {
-            throw err;
-        }
-
-        // build resources for a page
-        buildResources(dereferencedObject, `./content/en/api/${apiVersion}/${newDirName}/`, tags.name);
-
-        const indexMenuObject = {
-            name: tags.name,
-            url: `/api/${apiVersion}/${slugify(tags.name, {
-                lower: true,
-                replacement: '-'
-            })}/`,
-            identifier: tags.name
-        };
-
-        newMenuArray.push(indexMenuObject);
-
-        for (const [path, actions] of Object.entries(apiYaml.paths)) {
-            for (const [key, action] of Object.entries(actions)) {
-                if (tags.name === action.tags[0]) {
-                    const childMenuObject = {
-                        name: action.summary,
-                        parent: tags.name,
-                        url: slugify(action.summary, {
-                            lower: true,
-                            replacement: '-'
-                        })
-                    };
-
-                    newMenuArray.push(childMenuObject);
-                }
-            }
-        }
-    }
-
-    menuYaml[`api_${apiVersion}`] = newMenuArray;
-
-    const newMenuYaml = yaml.dump(menuYaml, {
-        lineWidth: -1
+    newMenuArray.push({
+      name: tag.name,
+      url: `/api/${apiVersion}/${getTagSlug(tag.name)}/`,
+      identifier: tag.name
     });
 
-    try {
-        fs.writeFileSync(
-            './config/_default/menus/menus.en.yaml',
-            newMenuYaml,
-            'utf8'
-        );
-        console.log(
-            'successfully updated ./config/_default/menus/menus.en.yaml'
-        );
-    } catch (err) {
-        throw err;
-    }
-}
+    // just get this sections data
+    Object.keys(apiYaml.paths)
+      .filter((path) => isTagMatch(apiYaml.paths[path], tag.name))
+      .map((path) => Object.values(apiYaml.paths[path]))
+      .reduce((obj, item) => ([...obj, ...item]), [])
+      .forEach((action) => {
+        newMenuArray.push({
+          name: action.summary,
+          parent: tag.name,
+          url: slugify(action.summary, {lower: true, replacement: '-'})
+        });
+    });
+
+  });
+
+  // generate new yaml menu
+  currentMenuYaml[`api_${apiVersion}`] = newMenuArray;
+  const newMenuYaml = yaml.dump(currentMenuYaml, {lineWidth: -1});
+
+  // save new yaml menu
+  fs.writeFileSync('./config/_default/menus/menus.en.yaml', newMenuYaml, 'utf8');
+  console.log(`successfully updated ${apiVersion} ./config/_default/menus/menus.en.yaml`);
+};
+
+
+/**
+ * Create api markdown section pages
+ * @param {object} apiYaml - object with data
+ * @param {object} deref - object with data dereferenced
+ * @param {string} apiVersion - string with version e.g v1
+ */
+const createPages = (apiYaml, deref, apiVersion) => {
+
+  apiYaml.tags.forEach((tag) => {
+    // make directory
+    const newDirName = getTagSlug(tag.name);
+    fs.mkdirSync(`./content/en/api/${apiVersion}/${newDirName}`, {recursive: true});
+
+    // make frontmatter
+    const indexFrontMatter = {title: tag.name};
+    let indexYamlStr = yaml.safeDump(indexFrontMatter);
+    indexYamlStr = `---\n${indexYamlStr}---\n`;
+
+    // build page
+    fs.writeFileSync(`./content/en/api/${apiVersion}/${newDirName}/_index.md`, indexYamlStr, 'utf8');
+    console.log(`successfully wrote ./content/en/api/${apiVersion}/${newDirName}/_index.md`);
+  });
+
+};
+
+
+/**
+ * Create resources per page, json example and html tables
+ * @param {object} apiYaml - object with data
+ * @param {object} deref - object with data dereferenced
+ * @param {string} apiVersion - string with version e.g v1
+ */
+const createResources = (apiYaml, deref, apiVersion) => {
+
+  apiYaml.tags.forEach((tag) => {
+    const jsonData = {};
+    const newDirName = getTagSlug(tag.name);
+    const pageDir = `./content/en/api/${apiVersion}/${newDirName}/`;
+
+    // just get this sections data
+    const data = Object.keys(deref.paths)
+      .filter((path) => isTagMatch(deref.paths[path], tag.name))
+      .map((path) => deref.paths[path]);
+
+    // build example json for request and each response
+    data.forEach((actionObj) => {
+      Object.entries(actionObj).forEach(([actionKey, action]) => {
+
+        // request
+        let request;
+        if(action.requestBody) {
+          const requestSchema = getSchema(action.requestBody.content);
+          const requestJson = filterExampleJson(requestSchema);
+          const requestHtml = schemaTable("request", requestSchema);
+          request = {"json": requestJson, "html": requestHtml};
+          console.log(`successfully wrote ${pageDir}${action.operationId} html`);
+        }
+
+        // responses
+        const responses = {};
+        Object.entries(action.responses).forEach(([responseCode, response]) => {
+            if(response.content) {
+              const responseSchema = getSchema(response.content);
+              const responseJson = filterExampleJson(responseSchema);
+              const responseHtml = schemaTable("response", responseSchema);
+              responses[responseCode] = {"json": responseJson, "html": responseHtml};
+              console.log(`successfully wrote ${pageDir}${action.operationId}_response_${responseCode} html`);
+            }
+        });
+
+        // assign built up data for examples.json
+        jsonData[action.operationId] = {"responses":responses, "request": request || {"json": {}, "html": ""}};
+      });
+    });
+
+    fs.writeFileSync(`${pageDir}examples.json`, safeJsonStringify(jsonData, null, 2), 'utf-8');
+  });
+
+};
+
+
+/**
+ * Get the schema regardless of the content type
+ * @param {object} content - object with content types
+ * returns object with schema
+ */
+const getSchema = (content) => {
+  const contentTypeKeys = Object.keys(content);
+  const [firstContentType] = contentTypeKeys;
+  return content[firstContentType].schema;
+};
+
+
+/**
+ * Quick helper to encapsulate the slugify options for tagname
+ * @param {object} tagName - string of tag name
+ * returns string with tag slugified
+ */
+const getTagSlug = (tagName) => {
+  return slugify(tagName, {lower: true, replacement: '-'});
+};
+
 
 /**
  * Quick helper to checks if path has a matching tag
@@ -311,60 +364,6 @@ const schemaTable = (tableType, data) => `
 
 
 /**
- * Builds resources needed for a hugo api page
- * @param {object} dereferencedObject - deref object
- * @param {string} pageDir - page dir
- * @param {string} tagName - string name of tag
- */
-const buildResources = (dereferencedObject, pageDir, tagName) => {
-  const pageExampleJson = {};
-
-  // just get this sections data
-  const data = Object.keys(dereferencedObject.paths)
-    .filter((path) => isTagMatch(dereferencedObject.paths[path], tagName))
-    .map((path) => dereferencedObject.paths[path]);
-
-  // build example json for request and each response
-  data.forEach((actionObj) => {
-    Object.entries(actionObj).forEach(([actionKey, action]) => {
-      // set some default for this operationid entry default
-      if(!(action.operationId in pageExampleJson)) {
-        pageExampleJson[action.operationId] = {"responses":{}, "request": {"json": {}, "html": ""}};
-      }
-      // add request json
-      if(("requestBody" in action) && ("content" in action.requestBody)) {
-        // get the data regardless of contenttype just get first entry
-        const contentTypeData = action.requestBody.content[Object.keys(action.requestBody.content)[0]];
-        pageExampleJson[action.operationId]["request"]["json"] = filterExampleJson(contentTypeData.schema);
-        const requestHTML = schemaTable("request", contentTypeData.schema);
-        if(requestHTML) {
-          // fs.writeFileSync(`${pageDir}${action.operationId}_request.html`, requestHTML, 'utf-8');
-          pageExampleJson[action.operationId]["request"]["html"] = requestHTML;
-          console.log(`successfully wrote ${pageDir}${action.operationId} html`);
-        }
-      }
-      // add response json
-      Object.entries(action.responses).forEach(([responseCode, response]) => {
-        if(("content" in response)) {
-          const contentTypeData = response.content[Object.keys(response.content)[0]];
-          pageExampleJson[action.operationId]["responses"][responseCode] = {"json": {}, "html": ""};
-          pageExampleJson[action.operationId]["responses"][responseCode]["json"] = filterExampleJson(contentTypeData.schema);
-          const responseHTML = schemaTable("response", contentTypeData.schema);
-          if(responseHTML) {
-            // fs.writeFileSync(`${pageDir}${action.operationId}_response_${responseCode}.html`, responseHTML, 'utf-8');
-            pageExampleJson[action.operationId]["responses"][responseCode]["html"] = responseHTML;
-            console.log(`successfully wrote ${pageDir}${action.operationId}_response_${responseCode} html`);
-          }
-        }
-      });
-    });
-  });
-
-  fs.writeFileSync(`${pageDir}examples.json`, safeJsonStringify(pageExampleJson, null, 2), 'utf-8');
-};
-
-
-/**
  * Takes an array of spec file paths and processes them
  * @param {array} specs - array of strings with path to spec e.g ['./data/api/v2/full_spec.yaml']
  */
@@ -380,7 +379,9 @@ const processSpecs = (specs) => {
               safeJsonStringify(deref, null, 2),
               'utf8'
           );
-          updateApiSideNav(fileData, deref, version);
+          updateMenu(fileData, version);
+          createPages(fileData, deref, version);
+          createResources(fileData, deref, version);
         }).catch((e) => console.log(e));
     });
 };
