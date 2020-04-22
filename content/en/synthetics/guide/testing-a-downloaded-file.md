@@ -2,21 +2,20 @@
 title: Test a downloaded file
 kind: guide
 further_reading:
-- link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
-  tag: "Blog"
-  text: "Introducing Datadog Synthetics"
-- link: "synthetics/"
-  tag: "Documentation"
-  text: "Manage your checks"
-- link: "synthetics/browser_tests"
-  tag: "Documentation"
-  text: "Configure a Browser Test"
+    - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
+      tag: 'Blog'
+      text: 'Introducing Datadog Synthetics'
+    - link: 'synthetics/'
+      tag: 'Documentation'
+      text: 'Manage your checks'
+    - link: 'synthetics/browser_tests'
+      tag: 'Documentation'
+      text: 'Configure a Browser Test'
 ---
 
 A web application journey often involves downloading files such as an order confirmation from an e-commerce website or the PDF or CSV export history of bank account transactions.
 
 Datadog’s browser tests and the `Test a downloaded file` assertion allow you to verify that downloadable files from your web application are correctly being served (for example, from your FTP server). With this assertion, downloadable files, such as a PDF receipt from an e-commerce website or a CSV history of banking transactions, can be tested to ensure they have the correct file name, size, and data.
-
 
 To setup a browser test with this assertion:
 
