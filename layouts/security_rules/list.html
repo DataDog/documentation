@@ -25,6 +25,8 @@
                         <a class="mb-1 font-semibold js-page" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
                             {{ if .Params.meta_image }}
                                 <img srcset="{{ .Site.Params.img_url }}{{ .Params.meta_image }}?w=80&auto-enhance 2x" src="{{ .Site.Params.img_url }}{{ .Params.meta_image }}?w=40&auto=enhance" width="40" />
+                            {{ else if (.Params.src_img) }}
+                                <img srcset="{{ .Site.Params.img_url }}{{ .Params.src_img }}?w=80&auto-enhance 2x" src="{{ .Site.Params.img_url }}{{ .Params.src_img }}?w=40&auto=enhance" width="40" />
                             {{ else }}
                                 <img width="40" />
                             {{ end }}
