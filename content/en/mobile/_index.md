@@ -11,7 +11,7 @@ further_reading:
   text: "Dashboards"
 ---
 
-<div class="alert alert-warning"> This service is in public beta. To join the beta, follow the installation instructions. The beta is not currently available to customers using SAML authentication. If you have any feedback, please <a href="/help">contact Datadog support</a>.</div>monitors
+<div class="alert alert-warning"> This service is in public beta. To join the beta, follow the installation instructions. The beta is not currently available to customers using SAML authentication. If you have any feedback, <a href="/help">contact Datadog support</a>.</div>monitors
 
 The Datadog Oncall app enables on-call engineers to view alerts from Datadog on their mobile device. When notified to a Datadog alert by Pagerduty, Slack or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
 
@@ -22,12 +22,12 @@ The Datadog Oncall App is currently in beta, so it's not available generally in 
 ### iOS
 
 1. Install the [Testflight app][1] from the App Store.
-2. Open this invite link from your iPhone: [https://apple.co/2xEC5ke][2]. Allow the link to open in the Testflight app. This takes you to a page where you can download the Datadog app.
+2. Open this invite link on your iPhone: [https://apple.co/2xEC5ke][2]. Allow the link to open in the Testflight app. This takes you to a page where you can download the Datadog app.
 3. Once the app downloads, open the app, select whether you are logging into the US or EU site, and log in with your Datadog credentials.
 
 ### Android
 
-1. To install the android app, open this invite link from your android: [https://play.google.com/apps/testing/com.datadog.app][3]. This takes you to a page where you can download the Datadog app.
+1. To install the Android app, open this invite link on your Android device: [https://play.google.com/apps/testing/com.datadog.app][3]. This takes you to a page where you can download the Datadog app.
 2. Once the app downloads, open the app, select whether you are logging into the US or EU site, and log in with your Datadog credentials.
 
 ### Logging in
@@ -40,7 +40,7 @@ Switch organizations and log out from the **Account page**.
 
 {{< img src="mobile/monitors.jpg" alt="monitor page" style="width:50%;">}}
 
-On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build specific search queries based on your tagging strategy. For more information about searching, see the [Manage Monitors Search section][5]. For example, to filter only metric monitor related to SRE team that are alerting, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you can faster access previous queries.
+On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][5]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries.
 
 **Note:** To set up or edit a monitor and alerts, you need set them up in the [Datadog web app][6]. All alerts set up in the app are enabled for the mobile app. For more information, see [Creating monitors][7].
 
@@ -61,7 +61,7 @@ Switch organizations and log out from the Account page.
 
 ## Feedback
 
-If you have feedback on the beta, please [contact Datadog support][10]. You can also find us on the [Datadog public Slack][11], in the [#mobile-app][12] channel. 
+If you have feedback on the beta, [contact Datadog support][10]. You can also send a message in the [Datadog public Slack][11] [#mobile-app][12] channel. 
 
 ### Further Reading
 
