@@ -34,7 +34,6 @@ The Datadog Oncall App is currently in beta, so it's not available generally in 
 
 You can login using standard and Google authentication. [SAML login][4] is not currently supported. If you have SAML enabled but not strictly, you can access the mobile app by creating a new standard email account. An org admin needs to approve the newly created account.
 
-Switch organizations and log out from the **Account page**.
 
 ## Monitors
 
