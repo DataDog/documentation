@@ -1,7 +1,7 @@
 ---
 title: Get a PagerDuty integration
 type: apicontent
-order: 19.5
+order: 19.2
 external_redirect: /api/#get-a-pagerduty-integration
 ---
 

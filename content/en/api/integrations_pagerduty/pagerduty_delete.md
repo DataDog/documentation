@@ -1,7 +1,7 @@
 ---
 title: Delete a PagerDuty integration
 type: apicontent
-order: 19.4
+order: 19.3
 external_redirect: /api/#delete-a-pagerduty-integration
 ---
 

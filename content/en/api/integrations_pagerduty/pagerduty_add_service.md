@@ -1,7 +1,7 @@
 ---
 title: Add a PagerDuty service
 type: apicontent
-order: 19.1
+order: 19.4
 external_redirect: /api/#add-a-pagerduty-service
 ---
 
