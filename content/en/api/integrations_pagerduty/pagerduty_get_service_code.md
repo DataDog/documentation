@@ -1,7 +1,7 @@
 ---
 title: Get a PagerDuty service
 type: apicode
-order: 19.1
+order: 19.6
 external_redirect: /api/#get-a-pagerduty-service
 ---
 

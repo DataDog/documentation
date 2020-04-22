@@ -1,7 +1,7 @@
 ---
 title: Delete a PagerDuty service
 type: apicontent
-order: 19.1
+order: 19.5
 external_redirect: /api/#delete-a-pagerduty-service#de
 ---
 
