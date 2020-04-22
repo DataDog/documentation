@@ -13,11 +13,12 @@ further_reading:
   text: "Configure a Browser Test"
 ---
 
-Journeys on web applications often involve files download: be it an order confirmation for an ecommerce website, exporting the history of a bank account’s transaction to a pdf or a csv, or downloading certificates from official authorities.
+A web application journey often involves downloading files such as an order confirmation from an e-commerce website or the PDF or CSV export history of bank account transactions.
 
-Confirm that all these download links are working as expected using Datadog’s browser tests and the `Test a downloaded file` assertion. This means that Datadog can verify that your downloaded files are correctly being served (potentially by your FTP server), but also that they are being downloaded with the expected name, size, and that the data is not corrupted along the way.
+Datadog’s browser tests and the `Test a downloaded file` assertion allow you to verify that downloadable files from your web application are correctly being served (for example, from your FTP server). With this assertion, downloadable files, such as a PDF receipt from an e-commerce website or a CSV history of banking transactions, can be tested to ensure they have the correct file name, size, and data.
 
-In order to setup such browser test:
+
+To setup a browser test with this assertion:
 
 1. **Record the step that generates the file download** in your browser test. The example below shows how to record a click on a button that triggers the download of a `.docx` file:
 
