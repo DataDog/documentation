@@ -40,6 +40,7 @@ function regionOnChangeHandler(event) {
         Cookies.set('site', siteRegion, { path: '/' });
     } else if (isReferrerEU()){
         // need to reload the page if referrer is from EU to reset window.document.referrer
+        Cookies.set('site', siteRegion, { path: '/' });
         window.location.reload();
     }
     else if (config.allowedRegions.includes(siteRegion)){
