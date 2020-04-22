@@ -11,6 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+function isReferrerEU(){
+    if (window.document.referrer.includes('datadoghq.eu') &&
+    window.document.referrer.indexOf(
+        `${window.location.protocol}//${window.location.host}` // check referrer is not from own domain
+    ) === -1) {
+        return true;
+    }
+
+    return false;
+}
+
 function regionOnChangeHandler(event) {
     const queryParams = new URLSearchParams(window.location.search);
     let siteRegion = '';
@@ -27,7 +38,11 @@ function regionOnChangeHandler(event) {
         );
         showRegionSnippet(siteRegion);
         Cookies.set('site', siteRegion, { path: '/' });
-    } else if (config.allowedRegions.includes(siteRegion)){
+    } else if (isReferrerEU()){
+        // need to reload the page if referrer is from EU to reset window.document.referrer
+        window.location.reload();
+    }
+    else if (config.allowedRegions.includes(siteRegion)){
         showRegionSnippet(siteRegion);
         Cookies.set('site', siteRegion, { path: '/' });
     } else {
@@ -89,12 +104,7 @@ function redirectToRegion(region = '') {
     } else if (newSiteRegion !== '') {
         Cookies.set('site', newSiteRegion, { path: '/' });
         showRegionSnippet(newSiteRegion);
-    } else if (
-        window.document.referrer.includes('datadoghq.eu') &&
-        window.document.referrer.indexOf(
-            `${window.location.protocol}//${window.location.host}` // check referrer is not from own domain
-        ) === -1
-    ) {
+    } else if (isReferrerEU()) {
         newSiteRegion = 'eu';
         Cookies.set('site', newSiteRegion, { path: '/' });
         showRegionSnippet(newSiteRegion);
@@ -132,6 +142,6 @@ function redirectToRegion(region = '') {
     }
 }
 
-redirectToRegion('');
+redirectToRegion();
 
 export { redirectToRegion, showRegionSnippet, regionOnChangeHandler };
