@@ -267,7 +267,7 @@ See the [Kubernetes Tag Extraction][10] documentation to learn more.
 
 ### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][19].
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][13].
 
 ### Ignore containers
 
@@ -313,3 +313,4 @@ See the [Agent Commands guides][12] to discover all the Docker Agent commands.
 [10]: /agent/kubernetes/tag
 [11]: /agent/guide/autodiscovery-management/
 [12]: /agent/guide/agent-commands/
+[13]: /security/agent/#secrets-management
