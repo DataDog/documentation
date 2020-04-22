@@ -44,7 +44,7 @@ To enable the Agent DogStatsD UDS:
     ```yaml
     ## @param dogstatsd_socket - string - optional - default: ""
     ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
-    ## Set to a valid filesystem path to enable.
+    ## Set to a valid and existing filesystem path to enable.
     #
     dogstatsd_socket: '/var/run/datadog/dsd.socket'
     ```
