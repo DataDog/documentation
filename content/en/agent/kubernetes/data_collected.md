@@ -97,9 +97,6 @@ The Kubernetes check includes the following service checks:
 - `kubernetes_state.node.ready`:<br>
     Returns `CRITICAL` if a cluster node is not ready. Returns `OK` otherwise.
 
-- `kubernetes_state.node.out_of_disk`:<br>
-    Returns `CRITICAL` if a cluster node is out of disk space. Returns `OK` otherwise.
-
 - `kubernetes_state.node.disk_pressure`:<br>
     Returns `CRITICAL` if a cluster node is in a disk pressure state. Returns `OK` otherwise.
 
