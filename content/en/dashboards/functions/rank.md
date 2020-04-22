@@ -52,5 +52,5 @@ For example, `bottom10_min()` retrieves the 10 lowest-valued series using the `m
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: http://en.wikipedia.org/wiki/Norm_(mathematics
+[1]: http://en.wikipedia.org/wiki/Norm_(mathematics)
 
