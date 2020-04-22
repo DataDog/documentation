@@ -16,13 +16,13 @@ further_reading:
       text: 'Dynamically assign and collect tags from your application'
 ---
 
-To collect JMX metrics from your pod in kubernetes, you can leverage [integrations autodiscovery annotations](#autodiscovery-annotations) or use [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) if your JMX check configuration is too long to fit in annotations.
+Leverage integrations autodiscovery annotations or use Autodiscovery Container Identifiers to collect your JMX-applications metrics from your pods in kubernetes. Autodisocovery annotations is the recommanded way to configure your Datadog-JMX integration, if the set of configuration parameters is too long to fit in annotations, use the [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) method.
 
 ## Autodiscovery annotations
 
-The autodiscovery annotations logic consists in applying the JMX check configuration elemetents to your pod through annotations in order to allow the Agent to "automatically discover" them and configure its JMX check accordingly:
+The autodiscovery annotations logic consists in applying the JMX check configuration elements, through annotations, to your pod in order to allow the Agent to "automatically discover" them and configure its JMX check accordingly:
 
-1. [Launch the Agent in your Kubernetes cluster][1]
+1. [Launch the Agent in your Kubernetes cluster][1].
 
 2. Apply the Autodiscovery annotations to the containers containing your JMX-application:
 
@@ -48,7 +48,9 @@ The autodiscovery annotations logic consists in applying the JMX check configura
             # (...)
     ```
 
-The list of JMX-ready integrations name are:
+    **Note**: `<JMX_PORT>` references the port that exposes JMX metrics.
+
+The list of JMX-ready integrations name `<INTEGRATION_NAME>` are:
 
 - [activemq][2]
 - [cassandra][3]
@@ -88,7 +90,7 @@ spec:
 
 ## Autodiscovery Container Identifiers
 
-If you need to pass a more complex configuration for your JMX check, leverage [Autodiscovery Container Identifiers][11] to pass custom check configuration file or custom `metrics.yaml` file.
+If you need to pass a more complex configuration for your Datadog-JMX integration, leverage [Autodiscovery Container Identifiers][11] to pass custom integration configuration file or custom `metrics.yaml` file.
 
 ### Agent preparation
 
@@ -97,25 +99,25 @@ Choose wether your Agent is running as a container in your cluster, or on your h
 {{< tabs >}}
 {{% tab "Container Agent" %}}
 
-JMX-based integration configurations used by the Datadog Agent can be too big to fit within Autodiscovery labels/annotations. Use [Autodiscovery Container Identifiers][1].
+If your Agent is running in your cluster and you want to autodiscover your container to collect JMX metrics:
 
-1. Get the configuration files `conf.yaml` and `metrics.yaml` associated to your integration. They can be found in your [integrations configuration directory][1]. Find below the list of Datadog-JMX based integration with their associated files:
+1. Get the configuration files `conf.yaml` and `metrics.yaml` associated to your integration. Find below the list of Datadog-JMX based integration with their associated files:
 
     | Integration Name             | Metrics file       | Configuration file      |
     | ----------------------- | ------------------ | ----------------------- |
-    | [activemq][2]           | [metrics.yaml][3]  | [conf.yaml.example][4]  |
-    | [cassandra][5]          | [metrics.yaml][6]  | [conf.yaml.example][7]  |
-    | [confluent_platform][8] | [metrics.yaml][9]  | [conf.yaml.example][10] |
-    | [hive][11]              | [metrics.yaml][12] | [conf.yaml.example][13] |
-    | [jboss_wildfly][14]     | [metrics.yaml][15] | [conf.yaml.example][16] |
-    | [kafka][17]             | [metrics.yaml][18] | [conf.yaml.example][19] |
-    | [solr][20]              | [metrics.yaml][21] | [conf.yaml.example][22] |
-    | [presto][23]            | [metrics.yaml][24] | [conf.yaml.example][25] |
-    | [tomcat][17]            | [metrics.yaml][26] | [conf.yaml.example][27] |
+    | [activemq][1]           | [metrics.yaml][2]  | [conf.yaml.example][3]  |
+    | [cassandra][4]          | [metrics.yaml][5]  | [conf.yaml.example][6]  |
+    | [confluent_platform][7] | [metrics.yaml][8]  | [conf.yaml.example][9] |
+    | [hive][10]              | [metrics.yaml][11] | [conf.yaml.example][12] |
+    | [jboss_wildfly][13]     | [metrics.yaml][14] | [conf.yaml.example][15] |
+    | [kafka][16]             | [metrics.yaml][17] | [conf.yaml.example][18] |
+    | [solr][19]              | [metrics.yaml][20] | [conf.yaml.example][21] |
+    | [presto][22]            | [metrics.yaml][23] | [conf.yaml.example][24] |
+    | [tomcat][16]            | [metrics.yaml][25] | [conf.yaml.example][26] |
 
 2. Rename the `conf.yaml.example` file into `conf.yaml`.
 
-3. Replace the parameter values from `conf.yaml` to fit the Agent Autodiscovery logic. The configuration files have host parameter values by default, use the [Autodiscovery Template Variables][28] logic instead. In the following Tomcat check example, the `host` parameter value is changed from `localhost` to `%%host%%`:
+3. Replace the parameter values from `conf.yaml` to fit the Agent Autodiscovery logic. The configuration files have host parameter values by default, use the [Autodiscovery Template Variables][27] logic instead. In the following Tomcat check example, the `host` parameter value is changed from `localhost` to `%%host%%`:
 
     ```yaml
     init_config:
@@ -141,7 +143,7 @@ JMX-based integration configurations used by the Datadog Agent can be too big to
           port: 9012
     ```
 
-4. To specify to the Agent that you want to apply this configuration file to your application containers, configure an `ad_identifiers` parameter at the beginning of your `conf.yaml` file:
+4. To specify to the Agent that you want to apply this configuration file to your application container, configure an `ad_identifiers` parameter at the beginning of your `conf.yaml` file:
 
     ```yaml
     ad_identifiers:
@@ -153,7 +155,7 @@ JMX-based integration configurations used by the Datadog Agent can be too big to
         # (...)
     ```
 
-     **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][29] as `ad_identifiers` if needed.
+     **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][28] as `ad_identifiers` if needed.
 
 5. Mount those configuration files (`conf.yaml` and `metrics.yaml`) in your Agent in the `conf.d/<INTEGRATION_NAME>.d/` folder.
 
@@ -167,36 +169,34 @@ JMX-based integration configurations used by the Datadog Agent can be too big to
 
      Then use this new custom image as the regular containerized Agent.
 
-
-[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: /integrations/activemq
-[3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
-[4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
-[5]: /integrations/cassandra
-[6]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/metrics.yaml
-[7]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
-[8]: /integrations/confluent_platform
-[9]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/metrics.yaml
-[10]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/conf.yaml.example
-[11]: /integrations/hive
-[12]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/metrics.yaml
-[13]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
-[14]: /integrations/jboss_wildfly
-[15]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
-[16]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
-[17]: /integrations/tomcat
-[18]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/kafka/data/metrics.yaml
-[19]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/kafka/data/conf.yaml.example
-[20]: /integrations/solr
-[21]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/metrics.yaml
-[22]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
-[23]: /integrations/presto
-[24]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/metrics.yaml
-[25]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
-[26]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
-[27]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
-[28]: /agent/faq/template_variables
-[29]: /agent/guide/ad_identifiers/#short-image-container-identifiers
+[1]: /integrations/activemq
+[2]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
+[3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
+[4]: /integrations/cassandra
+[5]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/metrics.yaml
+[6]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
+[7]: /integrations/confluent_platform
+[8]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/metrics.yaml
+[9]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/conf.yaml.example
+[10]: /integrations/hive
+[11]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/metrics.yaml
+[12]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
+[13]: /integrations/jboss_wildfly
+[14]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
+[15]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
+[16]: /integrations/tomcat
+[17]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/kafka/data/metrics.yaml
+[18]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/kafka/data/conf.yaml.example
+[19]: /integrations/solr
+[20]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/metrics.yaml
+[21]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
+[22]: /integrations/presto
+[23]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/metrics.yaml
+[24]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
+[25]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
+[26]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
+[27]: /agent/faq/template_variables
+[28]: /agent/guide/ad_identifiers/#short-image-container-identifiers
 {{% /tab %}}
 {{% tab "Host Agent" %}}
 
@@ -204,7 +204,7 @@ If your Agent is running on a host and you want to autodiscover your container t
 
 1. [Enable autodiscovery for your Agent][1]
 
-2. Enable the JMX integration you want to enable by renaming `conf.yaml.example` into `conf.yaml` in the [integration directory][2]. For instance for tomcat you would rename `/etc/datadog-agent/conf.d/tomcat.d/conf.yaml.example` into: `/etc/datadog-agent/conf.d/tomcat.d/conf.yaml`
+2. Enable the JMX integration you want to use by renaming the corresponding `conf.yaml.example` file into `conf.yaml` in the [Agent integration directory][2]. For instance for tomcat you would rename `/etc/datadog-agent/conf.d/tomcat.d/conf.yaml.example` into: `/etc/datadog-agent/conf.d/tomcat.d/conf.yaml`
 
 3. Replace the parameters values from `conf.yaml` file to fit the Agent Autodiscovery logic. The configuration files have host parameter values by default, use the [Autodiscovery Template Variables][3] instead. In the following Tomcat configuration example, the `host` parameter value is changed from `localhost` to `%%host%%`:
 
@@ -247,7 +247,6 @@ If your Agent is running on a host and you want to autodiscover your container t
      **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][4] as `ad_identifiers` if needed.
 
 5. [Restart your Agent][5]
-
 
 [1]: /getting_started/agent/autodiscovery/#with-the-agent-on-a-host
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
