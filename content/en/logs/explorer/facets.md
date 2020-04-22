@@ -124,11 +124,6 @@ If you see an aliased facet in your facet list, consider using the _standard_ fa
 
 You may wish to keep the non-standard _aliased_ version of the facet if you are troubleshooting against old content (before the aliasing for this facet has been setup by your organization).
 
-### The Index Facet
-
-The index facet is a specific facet that appears only if your organization has [multiple indexes][24], and/or if you have active [historical views][25]. Use this facet if you want to scope down your query to a subset of your indexes.
-
-{{< img src="logs/explorer/facet/index_facet_.png" alt="Create Facet" style="width:30%;">}}
 
 ## Manage Facets
 
@@ -137,6 +132,14 @@ The index facet is a specific facet that appears only if your organization has [
 Most common facets such as `Host`, `Service`, `URL Path`, or `Duration` come out-of-the-box to start troubleshooting right away once your logs are flowing into log indexes.
 
 Facets on [Reserved Attributes][26] and most [Standard Attributes][27] are available by default.
+
+
+### The Index Facet
+
+The index facet is a specific facet that appears only if your organization has [multiple indexes][24], and/or if you have active [historical views][25]. Use this facet if you want to scope down your query to a subset of your indexes.
+
+{{< img src="logs/explorer/facet/index_facet_.png" alt="Create Facet" style="width:30%;">}}
+
 
 ### Create Facets
 
