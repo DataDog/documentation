@@ -1,7 +1,7 @@
 ---
 title: Update a PagerDuty service
 type: apicode
-order: 19.1
+order: 19.7
 external_redirect: /api/#update-a-pagerduty-service
 ---
 
