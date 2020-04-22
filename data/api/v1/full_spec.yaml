@@ -2159,7 +2159,9 @@ components:
             type: object
           type: array
         index:
-          description: TODO.
+          description: A coma separated-list of index names. Use "*" query all indexes
+            at once. [Multiple Indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
+          example: days-3,days-7
           type: string
         multi_compute:
           description: This field is mutually exclusive with `compute`.
@@ -2187,9 +2189,14 @@ components:
             type: string
           type: array
         indexes:
-          description: An array of index names to query in the stream.
+          description: An array of index names to query in the stream. Use [] to query
+            all indexes at once.
+          example:
+          - days-3
+          - days-7
           items:
-            description: TODO.
+            description: One of the log indexes set up for your organisation. [Multiple
+              Indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
             type: string
           type: array
         message_display:
