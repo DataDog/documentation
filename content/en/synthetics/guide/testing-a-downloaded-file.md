@@ -23,7 +23,7 @@ To setup a browser test with this assertion:
 
     {{< img src="synthetics/guide/testing-a-downloaded-file/recording_step.mp4" alt="Recording steps" video="true">}}
 
-2. **Add a `Test a downloadeded file` assertion** to confirm that the file was correctly downloaded:
+2. **Add a `Test a downloaded file` assertion** to confirm that the file was correctly downloaded:
 
     {{< img src="synthetics/guide/testing-a-downloaded-file/adding_assertion.mp4" alt="Adding assertions" video="true">}}
 
