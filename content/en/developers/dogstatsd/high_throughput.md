@@ -288,7 +288,7 @@ dogstatsd_packet_buffer_flush_timeout: 1s
 With UDS, a way to improve the CPU usage is to send the packets with a size of 8kb. For
 instance on a Dogstatsd server receiving 500k metrics per second, we can observe an
 improvement of -30% CPU usage by switching from clients sending 1.5kb packets to clients
-sending 8kb packets with the configure above used for the server.
+sending 8kb packets with the configuration above used for the server.
 
 Note that as a side-effect, increasing the buffers size could decrease the amount of drops
 with UDP because Dogstatsd will have more place in memory to store data to process.
@@ -318,8 +318,8 @@ Most of time encountered while using UDP and because Dogstatsd is trying to not 
 resources of the host, packet drops can appear on very high throughput for different reasons,
 two of them being:
 
-	- the OS kernel dropping packets because its default configuration is not optimized
-	- Dogstatsd not processing fast enough all the metrics because it tries not to use all the CPU
+* the OS kernel dropping packets because its default configuration is not optimized
+* Dogstatsd not processing fast enough all the metrics because it tries not to use all the CPU
 
 For the former, please refer to the [Operating System kernel buffer](#operating-system-kernel-buffers)
 section in order to optimize the host configuration.
