@@ -139,7 +139,7 @@
     contents:
 
     - action: pull-and-push-file
-      branch: master
+      branch: ruth/docs-632
       globs:
       - README.md
       options:
