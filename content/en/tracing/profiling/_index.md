@@ -141,7 +141,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
      **Note**: Profiling is available in the `dd-trace-go` library for versions 1.23.0+.
 
-2. Import the [profiler][5] at the start of your application
+2. Import the [profiler][5] at the start of your application:
 
     ```Go
     import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
