@@ -147,7 +147,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
     import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
     ```
 
-3. To profile your code, add a [Datadog API key][1], set your envinronment service and version, then start the profiler:
+3. To profile your code, add a [Datadog API key][1], set your environment, service, and version, then start the profiler:
 
     ```Go
     err := profiler.Start(
