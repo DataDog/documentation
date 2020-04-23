@@ -143,6 +143,10 @@ body > header {
           column-count: 2;
           height: 300px;
           column-fill: auto;
+
+          .menu-icon {
+            width: 18px;
+          }
         }
         // solutions menu
         &.solutions-menu {
