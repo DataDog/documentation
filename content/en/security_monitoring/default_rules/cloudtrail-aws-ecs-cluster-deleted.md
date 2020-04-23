@@ -21,15 +21,15 @@ aliases:
 Detect when an attacker is destroying an ECS Cluster
 
 ### Strategy
-Monitor CloudTrail and detect when an ECS Cluster is deleted via the following API call:
+This rule lets you monitor this CloudTrail API call to detect if an ECS cluster is deleted:
 
 * [DeleteCluster][1]
 
 ### Triage & Response
-1. Determine who the user was who made this API call.
-2. Contact the user and see if this was an API call which was made by the user.
-3. If the API call was not made by the user:
-   * Rotate the user credentials and investigate what other API calls.
-   * Determine what other API calls the user made which were not made by the user.
+1. Determine which user in your organization owns the API key that made this API call.
+2. Contact the user to see if they intended to make this API call.
+3. If the user did not make the API call:
+ * Rotate the credentials.
+ * Investigate if the same credentials made other unauthorized API calls.
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteCluster.html

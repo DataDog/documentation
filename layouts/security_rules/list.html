@@ -17,7 +17,13 @@
                             <img srcset="{{ .Site.Params.img_url }}{{ .Params.src_img }}?w=80&auto-enhance 2x" src="{{ .Site.Params.img_url }}{{ .Params.src_img }}?w=40&auto-enhance" width="40" />
                         {{ end }}
                     </div>
-                    <div class="d-inline font-semibold ml-1">{{ title $v.Key | humanize | title }}</div>
+                    <div class="d-inline font-semibold ml-1">
+                        {{ if eq (len $v.Key) 3 }}
+                            {{ title $v.Key | humanize | title | upper }}
+                        {{ else }}
+                            {{ title $v.Key | humanize | title }}
+                        {{ end }}
+                    </div>
                     <div class="rule-list__arrow">></div>
                 </div>
                 <div class="group-{{ .Key }} mb-2 ml-5 d-none">

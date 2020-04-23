@@ -19,7 +19,7 @@ aliases:
 Detect when the S3 Public Access Block configuration has been removed 
 
 ### Strategy
-Monitor CloudTrail and detect when S3 Public Access Block configuration has been removed via the following API call:
+This rule lets you monitor this CloudTrail API call to detect if an attacker is deleting the S3 Public Access Block configuration:
 
 * [DeleteAccountPublicAccessBlock][1]
 

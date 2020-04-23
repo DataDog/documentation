@@ -18,15 +18,15 @@ aliases:
 ## Overview
 
 ### Goal
-Detect when any account activity is detected by an AWS root user
+Detect AWS root user activity. 
 
 ### Strategy
-Monitor CloudTrail and detect when any `@userIdentity.type` is equal to `Root`, but is not invoked by an AWS service.
+Monitor CloudTrail and detect when any `@userIdentity.type` has a value of `Root`, but is not invoked by an AWS service.
 
 ### Triage & Response
-1. Determine who used the root user credentials (username and password or access key).
-2. If the activity was not legitimate, open an investigation, rotate the credentials, enable 2FA (if not already enabled), and see what activity occurred
+1. Reach out to the user to determine if the login was legitimate. 
+2. If the login wasn't legitimate, rotate the credentials, enable 2FA, and open an investigation. 
 
-**[Root Account Best Practices][1]**
+For best practices, check out the [AWS Root Account Best Practices][1] documentation.
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html

@@ -18,20 +18,19 @@ aliases:
 ## Overview
 
 ### Goal
-Detect when the root user logs into the AWS console without MFA
+Detect when a root user logs into the AWS console without multi-factor authentication.
 
 ### Strategy
-Monitor CloudTrail and detect when any `@evt.name` is equal to `Console Login`, `@userIdentity.type` is equal to `Root`, and `@additionalEventData.MFAUsed` is equal to `no`. 
+Monitor CloudTrail and detect when any `@evt.name` has a value of `Console Login`, `@userIdentity.type` has a value of `Root`, and `@additionalEventData.MFAUsed` has a value of `no`. 
+
+**Note:** This rule ignores logins using SAML because 2FA is implemented on the IdP and not through AWS.
 
 ### Triage & Response
-1. Determine who logged into the root user account and ensure the login was legitimate
-2. Enable 2FA on the root account
-3. Review all user accounts and ensure MFA is enabled on all accounts 
+1. Reach out to the user to determine if the login was legitimate. 
+2. If the login was legitimate, request that the user enables 2FA on the root account. 
+3. If the login wasn't legitimate, rotate the credentials. 
+4. Review all root user accounts to ensure MFA is enabled. 
 
-**[Root Account Best Practices][1]**
+**Note:** There is a separate rule to detect [Login without MFA for non-root users][1]. 
 
-**Note:** There is a seperate rule to detect login without MFA for non root users.
-
-**Note:** This rule ignores logins via SAML because the 2FA is implemented on the IdP, not at AWS.
-
-[1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html
+[1]: /security_monitoring/default_rules/cloudtrail-aws-login-without-mfa/

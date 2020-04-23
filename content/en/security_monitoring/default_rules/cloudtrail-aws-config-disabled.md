@@ -18,20 +18,20 @@ aliases:
 ## Overview
 
 ### Goal
-Detect when an attacker is trying to evade defenses by disabling AWS Config.
+Detect when an attacker is trying to evade defenses by disabling an AWS configuration.
 
 ### Strategy
-Monitor CloudTrail and detect when AWS config is being disabled via the following API calls:
+This rule lets you monitor these CloudTrail API calls to detect if an attacker is trying to stop recording configurations of your AWS resources or trying to delete a delivery channel:
 
 * [StopConfigurationRecorder][1] 
 * [DeleteDeliveryChannel][2] 
 
 ### Triage & Response
-1. Determine who the user was who made this API call.
-2. Contact the user and see if this was an API call which was made by the user.
-3. If the API call was not made by the user:
- * Rotate the user credentials and investigate what other API calls.
- * Determine what other API calls the user made which were not made by the user.
+1. Determine which user in your organization owns the API key that made this API call.
+2. Contact the user to see if they intended to make this API call.
+3. If the user did not make the API call:
+ * Rotate the credentials.
+ * Investigate if the same credentials made other unauthorized API calls.
 
 [1]: https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html
 [2]: https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteDeliveryChannel.html
