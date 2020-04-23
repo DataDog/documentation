@@ -113,6 +113,34 @@ After enabling, the App Analytics UI starts showing results. Visit [App Analytic
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
+{{% tab "C++" %}}
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+This setting can also be set in code:
+
+```
+datadog::opentracing::TracerOptions tracer_options;
+  tracer_options.agent_host = "dd-agent";
+  tracer_options.service = "<service name>";
+  tracer_options.analytics_rate = 1.0;
+  auto tracer = datadog::opentracing::makeTracer(tracer_options);```
+
+After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
+
+[1]: https://app.datadoghq.com/apm/search/analytics
+{{% /tab %}}
+{{% tab "Nginx" %}}
+
+Two steps are required in order to enable App Analytics for Nginx:
+
+1. Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+
+2. Add `env DD_TRACE_ANALYTICS_ENABLED;` at the top of your nginx.conf file.
+
+After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
+
+[1]: https://app.datadoghq.com/apm/search/analytics
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Configure Additional Services (optional)
