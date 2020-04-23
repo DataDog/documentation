@@ -87,7 +87,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 
 **Note**:
-
+* **Log events can be submitted up to 6h in the past and 2h in the future**.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
 * If multiple log date remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
 
