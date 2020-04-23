@@ -22,7 +22,7 @@ Leverage integrations autodiscovery annotations or use Autodiscovery Container I
 
 The autodiscovery annotations logic consists in applying the JMX check configuration elements, through annotations, to your pod in order to allow the Agent to "automatically discover" them and configure its JMX check accordingly:
 
-1. [Launch the Agent in your Kubernetes cluster][1].
+1. [Launch the Agent in your Kubernetes cluster][1] **with the `datadog/agent:latest-jmx` name** instead of the regular `datadog/agent:latest` image.
 
 2. Apply the Autodiscovery annotations to the containers containing your JMX-application:
 
@@ -32,13 +32,13 @@ The autodiscovery annotations logic consists in applying the JMX check configura
     metadata:
         name: <POD_NAME>
         annotations:
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.names: \
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.names: >-
               '["<INTEGRATION_NAME>"]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: \
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: >-
               '[{"is_jmx": true, "collect_default_metrics": true}]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: \
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: >-
               '[{"host": "%%host%%","port":"<JMX_PORT>"}]'
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: \
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
               '[{"source":"<INTEGRATION_NAME>","service":"<INTEGRATION_NAME>"}]'
         # (...)
 
@@ -46,9 +46,29 @@ The autodiscovery annotations logic consists in applying the JMX check configura
         containers:
             - name: '<CONTAINER_IDENTIFIER>'
             # (...)
+              env:
+              - name: POD_IP
+                valueFrom:
+                  fieldRef:
+                    fieldPath: status.podIP
+
+              - name: JAVA_OPTS
+                value: >-
+                  -Xms256m -Xmx6144m
+                  -Dcom.sun.management.jmxremote
+                  -Dcom.sun.management.jmxremote.authenticate=false
+                  -Dcom.sun.management.jmxremote.ssl=false
+                  -Dcom.sun.management.jmxremote.local.only=false
+                  -Dcom.sun.management.jmxremote.port=<JMX_PORT>
+                  -Dcom.sun.management.jmxremote.rmi.port=<JMX_PORT>
+                  -Djava.rmi.server.hostname=$(POD_IP)
     ```
 
-    **Note**: `<JMX_PORT>` references the port that exposes JMX metrics.
+      The `JAVA_OPTS` environement variable needs to be created, so that your JMX server allows the agent to connect to the RMI registry.
+
+      **Note**:
+      - `<JMX_PORT>` references the port that exposes JMX metrics.
+      - In the example above, the connection to the RMI registry is not in SSL if you want to use SSL, use `"rmi_registry_ssl": true` in the `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances` annotation and remove the corresponding `Dcom.sun.management.jmxremote` from `JAVA_OPTS`.
 
 The list of JMX-ready integrations name `<INTEGRATION_NAME>` are:
 
@@ -70,13 +90,13 @@ kind: Pod
 metadata:
     name: tomcat-test
     annotations:
-        ad.datadoghq.com/tomcat.check.names: \
+        ad.datadoghq.com/tomcat.check.names: >-
           '["tomcat"]'
-        ad.datadoghq.com/tomcat.init_configs: \
+        ad.datadoghq.com/tomcat.init_configs: >-
           '[{"is_jmx": true, "collect_default_metrics": true}]'
-        ad.datadoghq.com/tomcat.instances: \
+        ad.datadoghq.com/tomcat.instances: >-
           '[{"host": "%%host%%","port":"9012"}]'
-        ad.datadoghq.com/tomcat.logs: \
+        ad.datadoghq.com/tomcat.logs: >-
           '[{"source":"Tomcat","service":"Tomcat"}]'
 
 spec:
@@ -86,6 +106,22 @@ spec:
           imagePullPolicy: Always
           ports:
               - containerPort: 9012
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+
+            - name: JAVA_OPTS
+              value: >-
+                -Xms256m -Xmx6144m
+                -Dcom.sun.management.jmxremote
+                -Dcom.sun.management.jmxremote.authenticate=false
+                -Dcom.sun.management.jmxremote.ssl=false
+                -Dcom.sun.management.jmxremote.local.only=false
+                -Dcom.sun.management.jmxremote.port=9012
+                -Dcom.sun.management.jmxremote.rmi.port=9012
+                -Djava.rmi.server.hostname=$(POD_IP)
 ```
 
 ## Autodiscovery Container Identifiers
@@ -101,7 +137,9 @@ Choose wether your Agent is running as a container in your cluster, or on your h
 
 If your Agent is running in your cluster and you want to autodiscover your container to collect JMX metrics:
 
-1. Get the configuration files `conf.yaml` and `metrics.yaml` associated to your integration. Find below the list of Datadog-JMX based integration with their associated files:
+1. Make sure to run the Agent image **the `datadog/agent:latest-jmx`** instead of the regular `datadog/agent:latest` image.
+
+2. Get the configuration files `conf.yaml` and `metrics.yaml` associated to your integration. Find below the list of Datadog-JMX based integration with their associated files:
 
     | Integration Name             | Metrics file       | Configuration file      |
     | ----------------------- | ------------------ | ----------------------- |
@@ -115,9 +153,9 @@ If your Agent is running in your cluster and you want to autodiscover your conta
     | [presto][22]            | [metrics.yaml][23] | [conf.yaml.example][24] |
     | [tomcat][16]            | [metrics.yaml][25] | [conf.yaml.example][26] |
 
-2. Rename the `conf.yaml.example` file into `conf.yaml`.
+3. Rename the `conf.yaml.example` file into `conf.yaml`.
 
-3. Replace the parameter values from `conf.yaml` to fit the Agent Autodiscovery logic. The configuration files have host parameter values by default, use the [Autodiscovery Template Variables][27] logic instead. In the following Tomcat check example, the `host` parameter value is changed from `localhost` to `%%host%%`:
+4. Replace the parameter values from `conf.yaml` to fit the Agent Autodiscovery logic. The configuration files have host parameter values by default, use the [Autodiscovery Template Variables][27] logic instead. In the following Tomcat check example, the `host` parameter value is changed from `localhost` to `%%host%%`:
 
     ```yaml
     init_config:
@@ -143,7 +181,7 @@ If your Agent is running in your cluster and you want to autodiscover your conta
           port: 9012
     ```
 
-4. To specify to the Agent that you want to apply this configuration file to your application container, configure an `ad_identifiers` parameter at the beginning of your `conf.yaml` file:
+5. To specify to the Agent that you want to apply this configuration file to your application container, configure an `ad_identifiers` parameter at the beginning of your `conf.yaml` file:
 
     ```yaml
     ad_identifiers:
@@ -157,12 +195,12 @@ If your Agent is running in your cluster and you want to autodiscover your conta
 
      **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][28] as `ad_identifiers` if needed.
 
-5. Mount those configuration files (`conf.yaml` and `metrics.yaml`) in your Agent in the `conf.d/<INTEGRATION_NAME>.d/` folder.
+6. Mount those configuration files (`conf.yaml` and `metrics.yaml`) in your Agent in the `conf.d/<INTEGRATION_NAME>.d/` folder.
 
-6. (Optional) - If you can't mount those files in the Agent container (like on AWS ECS), you should re-build the Agent docker image with those two configuration files in it:
+7. (Optional) - If you can't mount those files in the Agent container (like on AWS ECS), you should re-build the Agent docker image with those two configuration files in it:
 
     ```conf
-    FROM datadog/agent:latest
+    FROM datadog/agent:latest-jmx
     COPY <PATH_JMX_CONF_FILE> conf.d/tomcat.d/
     COPY <PATH_JMX_METRICS_FILE> conf.d/tomcat.d/
     ```
@@ -202,7 +240,7 @@ If your Agent is running in your cluster and you want to autodiscover your conta
 
 If your Agent is running on a host and you want to autodiscover your container to collect JMX metrics:
 
-1. [Enable autodiscovery for your Agent][1]
+1. [Enable autodiscovery for your Agent][1].
 
 2. Enable the JMX integration you want to use by renaming the corresponding `conf.yaml.example` file into `conf.yaml` in the [Agent integration directory][2]. For instance for tomcat you would rename `/etc/datadog-agent/conf.d/tomcat.d/conf.yaml.example` into: `/etc/datadog-agent/conf.d/tomcat.d/conf.yaml`
 
@@ -275,6 +313,23 @@ metadata:
 spec:
     containers:
         - name: '<CONTAINER_IDENTIFIER>'
+          # (...)
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+
+            - name: JAVA_OPTS
+              value: >-
+                -Xms256m -Xmx6144m
+                -Dcom.sun.management.jmxremote
+                -Dcom.sun.management.jmxremote.authenticate=false
+                -Dcom.sun.management.jmxremote.ssl=false
+                -Dcom.sun.management.jmxremote.local.only=false
+                -Dcom.sun.management.jmxremote.port=<JMX_PORT>
+                -Dcom.sun.management.jmxremote.rmi.port=<JMX_PORT>
+                -Djava.rmi.server.hostname=$(POD_IP)
 # (...)
 ```
 
@@ -282,6 +337,9 @@ spec:
 
 - To apply a specific configuration to a given container, Autodiscovery identifies containers by **name**, _not_ by image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`
 - If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, ReplicaSets, or deployments, add pod annotations under `.spec.template.metadata`.
+- The `JAVA_OPTS` environement variable needs to be created, so that your JMX server allows the agent to connect to the RMI registry.
+- `<JMX_PORT>` references the port that exposes JMX metrics.
+- In the example above, the connection to the RMI registry is not in SSL if you want to use SSL, use `"rmi_registry_ssl": true` in the `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances` annotation and remove the corresponding `Dcom.sun.management.jmxremote` from `JAVA_OPTS`.
 
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -318,6 +376,8 @@ project:
     labels:
         com.datadoghq.ad.check.id: '<CUSTOM_AD_IDENTIFIER>'
 ```
+
+**Note**: If the Agent and your JMX container are on the same network bridge, you need to instanciate your JMX server with `-Djava.rmi.server.hostname=<CONTAINER_NAME>"` where `<CONTAINER_NAME>` is your JMX-application container name.
 
 {{% /tab %}}
 {{< /tabs >}}
