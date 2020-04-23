@@ -21,7 +21,7 @@ further_reading:
   text: "See how to explore your logs"
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: "Logging without Limits*"
+  text: "Logging Without Limits*"
 ---
 
 Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces. The Agent can [tail log files][2] or [listen for logs sent over UDP / TCP][2], and you can configure it to [filter out logs][3], [scrub sensitive data][3], or  aggregate [multi line logs][4]. Finally choose your application language below in order to get dedicated logging best practices.
