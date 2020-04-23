@@ -1,5 +1,5 @@
 ---
-title: Proxy RUM data
+title: Proxy Real User Monitoring Data
 kind: faq
 further_reading:
     - link: '/real_user_monitoring/installation/'
