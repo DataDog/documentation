@@ -218,6 +218,35 @@ Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number
 dogstatsd_so_rcvbuf: 26214400
 ```
 
+### Over UDS (Unix Domain Socket)
+
+#### Linux
+
+Some Linux distributions have a kernel datagram queue size which can be low. This can be confirmed using the following command:
+
+```bash
+sysctl net.unix.max_dgram_qlen
+```
+
+If the value is < 512, you can increase it to 512 or more using this command:
+
+```bash
+sysctl -w net.unix.max_dgram_qlen=512
+```
+
+Add the following configuration to `/etc/sysctl.conf` to make this change permanent:
+
+```conf
+net.unix.max_dgram_qlen = 512
+```
+
+In the same manner, the `net.core.wmem_max` could be incremented to 25MiB to improve
+client writing performances:
+
+```conf
+net.core.wmem_max = 26214400
+```
+
 ## Configuration optimization guide
 
 Dogstatsd has several configuration fields for which the default values may not be
