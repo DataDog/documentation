@@ -85,8 +85,9 @@ If your logs put their dates in an attribute not in this list, use the log date 
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
-**Note**:
 
+**Note**:
+* **Log events can be submitted up to 6h in the past and 2h in the future**.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
 * If multiple log date remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
 
