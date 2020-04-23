@@ -7,7 +7,7 @@ further_reading:
       text: 'Real User Monitoring'
 ---
 
-The RUM SDK can be configured to send requests through a proxy. Requests made still need to be forwarded to Datadog.
+The Real User Monitoring (RUM) SDK can be configured to send requests through a proxy. Requests made still need to be forwarded to Datadog.
 
 ## SDK initialization
 
