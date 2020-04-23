@@ -112,7 +112,7 @@ components:
       - lambda_arn
       type: object
     AWSAccountCreateResponse:
-      description: TODO.
+      description: The Response returned by the AWS Create Account call.
       properties:
         external_id:
           description: TODO.
