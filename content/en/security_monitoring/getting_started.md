@@ -4,10 +4,6 @@ kind: documentation
 description: "Learn the main concepts of Datadog Security Monitoring, how to enable threat detection, and discover out of the box threat detection rules."
 ---
 
-<div class="alert alert-warning">
-Security Monitoring Threat Detection Rules are in private beta.
-</div>
-
 To get started with Datadog Security Monitoring, follow these three steps:
 
 * [Ingest logs](#ingest-logs)
@@ -32,7 +28,7 @@ When a threat is detected with a Detection Rule, a Security Signal is generated.
 
 [1]: /logs/log_collection/?tab=tcpussite
 [2]: https://www.datadoghq.com/blog/logging-without-limits/
-[3]: https://app.datadoghq.com/security/configuration/rules
+[3]: /security_monitoring/default_rules
 [4]: /security_monitoring/detection_rules
 [5]: https://app.datadoghq.com/security
 [6]: /security_monitoring/explorer
