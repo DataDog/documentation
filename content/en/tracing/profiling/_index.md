@@ -141,19 +141,20 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
      **Note**: Profiling is available in the `dd-trace-go` library for versions 1.23.0+.
 
-2. Set `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` in your environment variables.
-
-3. Import the [profiler][5] at the start of your application
+2. Import the [profiler][5] at the start of your application
 
     ```Go
     import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
     ```
 
-4. To profile your code, add a [Datadog API key][1], then start the profiler:
+3. To profile your code, add a [Datadog API key][1], set your envinronment service and version, then start the profiler:
 
     ```Go
     err := profiler.Start(
         profiler.WithAPIKey("123key")
+        profiler.WithService("MyService"),
+        profiler.WithEnv("MyEnv"),
+        profiler.WithTags("version:1.2.0"),
     )
     if err != nil {
         log.Fatal(err)
@@ -161,7 +162,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
     defer profiler.Stop()
     ```
 
-5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
+4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
 Profiler configuration:
 
@@ -279,7 +280,9 @@ Once enabled, the following profile types are collected:
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | CPU                      | Shows the time each function spent running on the CPU.                                                                          |
 | Allocation               | Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed. Go calls this `alloc_space`              |
-| Heap                     | Shows the amount of heap memory allocated by each function that remained allocated. Go calls this `inuse_space`                 |
+| Allocation Count         | Shows the number of objects allocated in heap memory by each function, including allocations which were subsequently freed.     |
+| Heap                     | Shows the amount of heap memory allocated by each function that remained allocated. Go calls this `inuse_space`.                |
+| Heap Count               | Shows the number of objects allocated in heap memory by each function and that remained allocated.                              |
 
 {{% /tab %}}
 
