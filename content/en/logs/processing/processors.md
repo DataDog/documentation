@@ -86,7 +86,6 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 </div>
 
 <div class="alert alert-info">
-Log events can be submitted up to 6h in the past and 2h in the future.
 </div>
 
 **Note**:
