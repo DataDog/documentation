@@ -1,7 +1,7 @@
 ---
 title: Update a PagerDuty service
 type: apicontent
-order: 19.7
+order: 19.2
 external_redirect: /api/#update-a-pagerduty-service
 ---
 
