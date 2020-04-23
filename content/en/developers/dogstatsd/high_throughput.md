@@ -258,7 +258,7 @@ on the protocol used (UDS or UDP).
 Here's a list of different configuration profile that could be considered in a
 very high throughput setup.
 
-### Ensure proper packet sizes
+### Ensure proper packet sizes with UDS
 
 Sending packets with an adequate size to Dogstatsd will avoid extra work to the server.
 
@@ -266,9 +266,12 @@ If the packets sent are too small, Dogstatsd will have to pack several together 
 to process them in batches later in the pipeline.
 
 If the clients properly send packets having a size close to `dogstatsd_buffer_size`, Dogstatsd
-will perform better. Be careful, the packets must not be larger than this size.
+will perform better. Be careful: the packets must not be larger than this size, otherwise, the
+Dogstatsd server won't be able to load them completely in the buffer and some of metrics will
+be malformed. Please use the corresponding configuration field in your Dogstatsd clients.
 
-Use the corresponding configuration field in your Dogstatsd clients.
+Note for UDP: as the UDP packets are most of the time going through the Ethernet and IP layer,
+they inherently have a size limited to 1472.
 
 ### Limit the CPU usage
 
