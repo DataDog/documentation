@@ -304,13 +304,13 @@ In order to avoid this, limiting the buffering in Dogstatsd will help not reachi
 this memory usage limit.
 
 The default configuration `dogstatsd_queue_size: 1024` has an approximate maximum memory usage of 768MB.
-Reducing the `dogstatsd_queue_size`, you can tune the Dogstatsd max memory usage, e.g.:
+
+Reducing the `dogstatsd_queue_size` value, you can limit the Dogstatsd max memory usage. Here's an example
+decreasing the max memory usage of Dogstatsd to approximately 384MB:
 
 ```yaml
 dogstatsd_queue_size: 512
 ```
-
-to decrease it to 384MB.
 
 ### Limit the amount of packet drops
 
