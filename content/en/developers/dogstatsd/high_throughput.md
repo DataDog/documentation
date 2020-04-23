@@ -318,7 +318,7 @@ Most of time encountered while using UDP and because Dogstatsd is trying to not 
 resources of the host, packet drops can appear on very high throughput for different reasons,
 two of them being:
 
-* the OS kernel dropping packets because its default configuration is not optimized
+* the OS kernel dropping packets because its default configuration is not optimized for this situation
 * Dogstatsd not processing fast enough all the metrics because it tries not to use all the CPU
 
 For the former, please refer to the [Operating System kernel buffer](#operating-system-kernel-buffers)
