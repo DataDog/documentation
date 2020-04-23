@@ -30,7 +30,7 @@ Search or use the drop-down to choose monitors to silence. If the field is left 
 {{% /tab %}}
 {{% tab "By Monitor Tags" %}}
 
-Schedule a downtown based on one or more [monitor tags][1]. You must select at least one tag with a limit of 32 tags. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
+Schedule a downtime based on one or more [monitor tags][1]. You must select at least one tag with a limit of 32 tags. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
 
 [1]: /monitors/manage_monitor/#monitor-tags
 {{% /tab %}}
