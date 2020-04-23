@@ -1,7 +1,7 @@
 ---
 title: PagerDuty インテグレーションの取得
 type: apicontent
-order: 19.1
+order: 19.2
 external_redirect: "/api/#get-a-pagerduty-integration"
 ---
 
