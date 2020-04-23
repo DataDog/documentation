@@ -22,7 +22,7 @@ Leverage integrations autodiscovery annotations or use Autodiscovery Container I
 
 The autodiscovery annotations logic consists in applying the JMX check configuration elements, through annotations, to your pod in order to allow the Agent to "automatically discover" them and configure its JMX check accordingly:
 
-1. [Launch the Agent in your Kubernetes cluster][1] **with the `datadog/agent:latest-jmx` name** instead of the regular `datadog/agent:latest` image.
+1. [Launch the Agent in your Kubernetes cluster][1] **with the `datadog/agent:latest-jmx` image name** instead of the regular `datadog/agent:latest`.
 
 2. Apply the Autodiscovery annotations to the containers containing your JMX-application:
 
