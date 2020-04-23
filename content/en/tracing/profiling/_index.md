@@ -162,7 +162,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
     defer profiler.Stop()
     ```
 
-4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
+4. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][2].
 
 Profiler configuration:
 
