@@ -168,7 +168,6 @@ Profiler configuration:
 
 | Environment variable                             |`profiler` method | Type          | Description                                                                                      |
 | ------------------------------------------------ | ---------------- | ------------- | ------------------------------------------------------------------------------------------------ |
-|                                                  |  WithAPIKey      | String        | The Datadog [Datadog API key][1] |
 | `DD_SERVICE`                                     |  WithService     | String        | The Datadog [service][3] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.     |
 | `DD_ENV`                                         |  WithEnv         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_TAGS`. |
 | `DD_TAGS`                                        |  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
