@@ -3,10 +3,12 @@
     "responses": {
       "200": {
         "json": {
-          "logs": {
-            "content": "object",
-            "id": "AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA"
-          },
+          "logs": [
+            {
+              "content": "object",
+              "id": "AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA"
+            }
+          ],
           "nextLogId": "string",
           "status": "string"
         },
@@ -20,7 +22,9 @@
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
