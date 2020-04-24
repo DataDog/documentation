@@ -13,9 +13,9 @@ further_reading:
       text: 'Configure a Browser Test'
 ---
 
-Web applications can embed a lot of logic. You might for instance need to upload a file to validate the final step of a functional workflow testing a profile creation. When uploading a file at the recorder level, Datadog Synthetics Browser tests automatically identify the uploaded file and create the [`Upload file` associated step][1]. It is then able to upload that file again at test execution.
+Web applications can embed a lot of logic. You might for instance need to **upload a file** to validate the final step of a functional workflow testing a profile creation. When uploading a file at the test recorder level, Datadog Synthetics Browser tests automatically identify the uploaded file and create the [`Upload file` associated step][1]. It is then able to upload that file again at test execution.
 
-Downloading files is also a fairly common action users take on web applications: download an order confirmation from an e-commerce website, the PDF or CSV export history of bank account transactions, ...
+**Downloading files** is another common action users take on web applications: download an order confirmation from an e-commerce website, the PDF or CSV export history of bank account transactions, ...
 
 Datadog’s browser tests and the `Test a downloaded file` assertion allow you to verify that downloadable files from your web application are correctly being served (for example, from your FTP server). With this assertion, downloadable files, such as a PDF receipt from an e-commerce website or a CSV history of banking transactions, can be tested to ensure they have the correct file name, size, and data. 
 
