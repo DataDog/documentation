@@ -9,7 +9,9 @@ public class UsersApiExample {
         String sort = sort_example; // String | User attribute to order results by. Sort order is ascending by default. Sort order is descending if the field is prefixed by a negative sign, for example `sort=-name`. Options: `name`, `modified_at`, `user_count`.
         QuerySortOrder sortDir = ; // QuerySortOrder | Direction of sort. Options: `asc`, `desc`.
         String filter = filter_example; // String | Filter all users by the given string. Defaults to no filtering.
-        String filterLeft_Square_BracketstatusRight_Square_Bracket = filterLeft_Square_BracketstatusRight_Square_Bracket_example; // String | Filter on status attribute. Comma separated list: Active, Pending, and Disabled. Defaults to no filtering.
+        String filterLeft_Square_BracketstatusRight_Square_Bracket = filterLeft_Square_BracketstatusRight_Square_Bracket_example; // String | Filter on status attribute.
+Comma separated list, with possible values `Active`, `Pending`, and `Disabled`.
+Defaults to no filtering.
         try {
             UsersResponse result = apiInstance.listUsers(pageLeft_Square_BracketsizeRight_Square_Bracket, pageLeft_Square_BracketnumberRight_Square_Bracket, sort, sortDir, filter, filterLeft_Square_BracketstatusRight_Square_Bracket);
             System.out.println(result);
