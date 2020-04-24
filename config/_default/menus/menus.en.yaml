@@ -1501,7 +1501,7 @@ main:
     weight: 210000
 api_v1:
   - name: AWS Integration
-    url: /api/v1/aws-integration/
+    url: api/v1/aws-integration/
     identifier: AWS Integration
   - name: Delete an AWS Integration
     parent: AWS Integration
@@ -1522,7 +1522,7 @@ api_v1:
     parent: AWS Integration
     url: generate-new-external-id
   - name: AWS Logs Integration
-    url: /api/v1/aws-logs-integration/
+    url: api/v1/aws-logs-integration/
     identifier: AWS Logs Integration
   - name: Delete an AWS Logs integration
     parent: AWS Logs Integration
@@ -1546,7 +1546,7 @@ api_v1:
     parent: AWS Logs Integration
     url: check-permissions-for-log-services
   - name: Azure Integration
-    url: /api/v1/azure-integration/
+    url: api/v1/azure-integration/
     identifier: Azure Integration
   - name: Delete an Azure integration
     parent: Azure Integration
@@ -1564,7 +1564,7 @@ api_v1:
     parent: Azure Integration
     url: update-azure-integration-host-filters
   - name: Dashboard Lists
-    url: /api/v1/dashboard-lists/
+    url: api/v1/dashboard-lists/
     identifier: Dashboard Lists
   - name: Get all dashboard lists
     parent: Dashboard Lists
@@ -1582,7 +1582,7 @@ api_v1:
     parent: Dashboard Lists
     url: update-a-dashboard-list
   - name: Dashboards
-    url: /api/v1/dashboards/
+    url: api/v1/dashboards/
     identifier: Dashboards
   - name: Get all Dashboards
     parent: Dashboards
@@ -1600,7 +1600,7 @@ api_v1:
     parent: Dashboards
     url: update-a-dashboard
   - name: Downtimes
-    url: /api/v1/downtimes/
+    url: api/v1/downtimes/
     identifier: Downtimes
   - name: Get all downtimes
     parent: Downtimes
@@ -1621,7 +1621,7 @@ api_v1:
     parent: Downtimes
     url: update-a-downtime
   - name: Events
-    url: /api/v1/events/
+    url: api/v1/events/
     identifier: Events
   - name: Query the event stream
     parent: Events
@@ -1633,7 +1633,7 @@ api_v1:
     parent: Events
     url: get-an-event
   - name: GCP Integration
-    url: /api/v1/gcp-integration/
+    url: api/v1/gcp-integration/
     identifier: GCP Integration
   - name: Delete a GCP integration
     parent: GCP Integration
@@ -1648,7 +1648,7 @@ api_v1:
     parent: GCP Integration
     url: update-a-gcp-integration
   - name: Hosts
-    url: /api/v1/hosts/
+    url: api/v1/hosts/
     identifier: Hosts
   - name: Mute a host
     parent: Hosts
@@ -1663,13 +1663,13 @@ api_v1:
     parent: Hosts
     url: get-the-total-number-of-active-hosts
   - name: IP Ranges
-    url: /api/v1/ip-ranges/
+    url: api/v1/ip-ranges/
     identifier: IP Ranges
   - name: List IP Ranges
     parent: IP Ranges
     url: list-ip-ranges
   - name: Key Management
-    url: /api/v1/key-management/
+    url: api/v1/key-management/
     identifier: Key Management
   - name: Get all API keys
     parent: Key Management
@@ -1702,7 +1702,7 @@ api_v1:
     parent: Key Management
     url: edit-an-application-key
   - name: Logs
-    url: /api/v1/logs/
+    url: api/v1/logs/
     identifier: Logs
   - name: Get a list of logs
     parent: Logs
@@ -1711,7 +1711,7 @@ api_v1:
     parent: Logs
     url: send-logs
   - name: Logs Indexes
-    url: /api/v1/logs-indexes/
+    url: api/v1/logs-indexes/
     identifier: Logs Indexes
   - name: Get indexes order
     parent: Logs Indexes
@@ -1729,7 +1729,7 @@ api_v1:
     parent: Logs Indexes
     url: update-an-index
   - name: Logs Pipelines
-    url: /api/v1/logs-pipelines/
+    url: api/v1/logs-pipelines/
     identifier: Logs Pipelines
   - name: Get Pipeline Order
     parent: Logs Pipelines
@@ -1753,7 +1753,7 @@ api_v1:
     parent: Logs Pipelines
     url: update-a-pipeline
   - name: Metrics
-    url: /api/v1/metrics/
+    url: api/v1/metrics/
     identifier: Metrics
   - name: Get active metrics list
     parent: Metrics
@@ -1774,7 +1774,7 @@ api_v1:
     parent: Metrics
     url: submit-metrics
   - name: Monitors
-    url: /api/v1/monitors/
+    url: api/v1/monitors/
     identifier: Monitors
   - name: Get all monitor details
     parent: Monitors
@@ -1813,7 +1813,7 @@ api_v1:
     parent: Monitors
     url: unmute-all-monitors
   - name: PagerDuty Integration
-    url: /api/v1/pagerduty-integration/
+    url: api/v1/pagerduty-integration/
     identifier: PagerDuty Integration
   - name: Delete a PagerDuty integration
     parent: PagerDuty Integration
@@ -1840,16 +1840,16 @@ api_v1:
     parent: PagerDuty Integration
     url: update-a-single-service-object
   - name: Screenboards
-    url: /api/v1/screenboards/
+    url: api/v1/screenboards/
     identifier: Screenboards
   - name: Service Checks
-    url: /api/v1/service-checks/
+    url: api/v1/service-checks/
     identifier: Service Checks
   - name: Submit a Service Check
     parent: Service Checks
     url: submit-a-service-check
   - name: Service Level Objectives
-    url: /api/v1/service-level-objectives/
+    url: api/v1/service-level-objectives/
     identifier: Service Level Objectives
   - name: Search SLOs
     parent: Service Level Objectives
@@ -1876,7 +1876,7 @@ api_v1:
     parent: Service Level Objectives
     url: get-an-slo's-history
   - name: Slack Integration
-    url: /api/v1/slack-integration/
+    url: api/v1/slack-integration/
     identifier: Slack Integration
   - name: Delete a Slack integration
     parent: Slack Integration
@@ -1891,13 +1891,13 @@ api_v1:
     parent: Slack Integration
     url: add-channels-to-slack-integration
   - name: Snapshots
-    url: /api/v1/snapshots/
+    url: api/v1/snapshots/
     identifier: Snapshots
   - name: Take graph snapshots
     parent: Snapshots
     url: take-graph-snapshots
   - name: Synthetics
-    url: /api/v1/synthetics/
+    url: api/v1/synthetics/
     identifier: Synthetics
   - name: Get all test
     parent: Synthetics
@@ -1930,7 +1930,7 @@ api_v1:
     parent: Synthetics
     url: change-test-pauselive-status
   - name: Tags
-    url: /api/v1/tags/
+    url: api/v1/tags/
     identifier: Tags
   - name: Get Tags
     parent: Tags
@@ -1948,16 +1948,16 @@ api_v1:
     parent: Tags
     url: update-host-tags
   - name: Timeboards
-    url: /api/v1/timeboards/
+    url: api/v1/timeboards/
     identifier: Timeboards
   - name: Tracing
-    url: /api/v1/tracing/
+    url: api/v1/tracing/
     identifier: Tracing
   - name: Send traces
     parent: Tracing
     url: send-traces
   - name: Usage Metering
-    url: /api/v1/usage-metering/
+    url: api/v1/usage-metering/
     identifier: Usage Metering
   - name: Get hourly usage for Lambda
     parent: Usage Metering
@@ -2005,7 +2005,7 @@ api_v1:
     parent: Usage Metering
     url: get-hourly-usage-for-trace-search
   - name: Users
-    url: /api/v1/users/
+    url: api/v1/users/
     identifier: Users
   - name: Get all users
     parent: Users
@@ -2023,7 +2023,7 @@ api_v1:
     parent: Users
     url: update-user
   - name: Webhooks Integration
-    url: /api/v1/webhooks-integration/
+    url: api/v1/webhooks-integration/
     identifier: Webhooks Integration
   - name: Create a Custom Variable for Webhooks Integration
     parent: Webhooks Integration
@@ -2051,7 +2051,7 @@ api_v1:
     url: update-a-webhook-for-webhooks-integration
 api_v2:
   - name: Dashboard Lists
-    url: /api/v2/dashboard-lists/
+    url: api/v2/dashboard-lists/
     identifier: Dashboard Lists
   - name: Delete items from a dashboard list
     parent: Dashboard Lists
@@ -2066,7 +2066,7 @@ api_v2:
     parent: Dashboard Lists
     url: update-items-of-a-dashboard-list
   - name: Roles
-    url: /api/v2/roles/
+    url: api/v2/roles/
     identifier: Roles
   - name: List permissions
     parent: Roles
@@ -2105,7 +2105,7 @@ api_v2:
     parent: Roles
     url: add-a-user-to-a-role
   - name: Users
-    url: /api/v2/users/
+    url: api/v2/users/
     identifier: Users
   - name: Send invitation emails
     parent: Users
