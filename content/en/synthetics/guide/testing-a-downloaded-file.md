@@ -25,11 +25,11 @@ To setup a browser test with this assertion:
 
 2. **Add a `Test a downloaded file` assertion** to confirm that the file was correctly downloaded:
 
-    {{< img src="synthetics/guide/testing-a-downloaded-file/basic_assertion.mp4" alt="Adding assertions" video="true">}}
+    {{< img src="synthetics/guide/testing-a-downloaded-file/basic_assert.mp4" alt="Adding assertions" video="true">}}
 
      If needed, you can perform some more advanced verifications, for instance on your filename, on its size, and even on its integrity using a md5 string:
 
-    {{< img src="synthetics/guide/testing-a-downloaded-file/advanced_assertion.mp4" alt="Advanced verification" video="true">}}
+    {{< img src="synthetics/guide/testing-a-downloaded-file/advanced_assert.mp4" alt="Advanced verification" video="true">}}
 
      See the full list of [Browser test assertions][2] to learn more on the `Test a downloaded file` assertion.
 
