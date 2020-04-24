@@ -39,9 +39,9 @@ supported_os:
 
 Ce check permet de surveiller [RabbitMQ][2] avec l'Agent Datadog. Il peut être utilisé pour :
 
-* Surveiller des statistiques liées aux files d'attente : la taille de file d'attente, le nombre de clients, les messages sans accusé de réception, les messages renvoyés, etc.
-* Surveiller des statistiques liées aux nœuds : processus en attente, sockets utilisés, descripteurs de fichiers utilisés, etc.
-* Surveiller la disponibilité et le nombre de connexions des vhosts.
+- Surveiller des statistiques liées aux files d'attente : la taille de file d'attente, le nombre de clients, les messages sans accusé de réception, les messages renvoyés, etc.
+- Surveiller des statistiques liées aux nœuds : processus en attente, sockets utilisés, descripteurs de fichiers utilisés, etc.
+- Surveiller la disponibilité et le nombre de connexions des vhosts.
 
 Et plus encore.
 
@@ -65,7 +65,7 @@ Activez le plug-in de gestion RabbitMQ. Consultez la [documentation relative à 
 
 Créez un utilisateur Agent pour votre vhost par défaut avec les commandes suivantes :
 
-```
+```text
 rabbitmqctl add_user datadog <SECRET>
 rabbitmqctl set_permissions  -p / datadog "^aliveness-test$" "^amq\.default$" ".*"
 rabbitmqctl set_user_tags datadog monitoring
@@ -81,17 +81,16 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 1. Modifiez le fichier `rabbitmq.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][6] pour commencer à recueillir vos métriques RabbitMQ. Consultez le [fichier d'exemple rabbitmq.d/conf.yaml][7] pour découvrir toutes les options de configuration disponibles.
 
-    ```yaml
-      init_config:
+   ```yaml
+   init_config:
 
-      instances:
-
-          ## @param rabbit_api_url - string - required
-          ## For every instance a 'rabbitmq_api_url' must be provided, pointing to the api
-          ## url of the RabbitMQ Managment Plugin (http://www.rabbitmq.com/management.html).
-          #
-        - rabbitmq_api_url: http://localhost:15672/api/
-    ```
+   instances:
+     ## @param rabbit_api_url - string - required
+     ## For every instance a 'rabbitmq_api_url' must be provided, pointing to the api
+     ## url of the RabbitMQ Managment Plugin (http://www.rabbitmq.com/management.html).
+     #
+     - rabbitmq_api_url: http://localhost:15672/api/
+   ```
 
     **Remarque** : par défaut, l'Agent effectue des checks sur toutes les files d'attente, tous les vhosts et tous les nœuds, mais vous pouvez définir des listes ou des expressions régulières pour limiter ce comportement. Consultez le fichier [rabbitmq.d/conf.yaml][7] pour découvrir des exemples.
 
@@ -99,34 +98,34 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. Pour modifier l'emplacement du fichier de log par défaut, définissez la variable d'environnement `RABBITMQ_LOGS` ou ajoutez ces lignes à votre fichier de configuration RabbitMQ (`/etc/rabbitmq/rabbitmq.conf`) :
 
-    ```conf
-      log.dir = /var/log/rabbit
-      log.file = rabbit.log
-    ```
+   ```conf
+     log.dir = /var/log/rabbit
+     log.file = rabbit.log
+   ```
 
 2. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 3. Ajoutez ce bloc de configuration à votre fichier `rabbitmq.d/conf.yaml` pour commencer la collecte de vos logs RabbitMQ :
 
-    ```yaml
-      logs:
-          - type: file
-            path: /var/log/rabbit/*.log
-            source: rabbitmq
-            service: myservice
-            log_processing_rules:
-              - type: multi_line
-                name: logs_starts_with_equal_sign
-                pattern: "="
-    ```
+   ```yaml
+   logs:
+     - type: file
+       path: /var/log/rabbit/*.log
+       source: rabbitmq
+       service: myservice
+       log_processing_rules:
+         - type: multi_line
+           name: logs_starts_with_equal_sign
+           pattern: "="
+   ```
 
 4. [Redémarrez l'Agent][8].
 
@@ -136,17 +135,17 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de métriques
 
-| Paramètre            | Valeur                            |
-| -------------------- | -------------------------------- |
-| `<NOM_INTÉGRATION>` | `rabbitmq`                       |
-| `<CONFIG_INIT>`      | vide ou `{}`                    |
+| Paramètre            | Valeur                                        |
+| -------------------- | -------------------------------------------- |
+| `<NOM_INTÉGRATION>` | `rabbitmq`                                   |
+| `<CONFIG_INIT>`      | vide ou `{}`                                |
 | `<CONFIG_INSTANCE>`  | `{"rabbitmq_api_url":"%%host%%:15672/api/"}` |
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][10].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][10].
 
 | Paramètre      | Valeur                                                                                                                                               |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -157,6 +156,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [Lancez la sous-commande status de l'Agent][11] et cherchez `rabbitmq` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "rabbitmq" >}}
 
@@ -182,16 +182,18 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à RabbitMQ pour
 Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
 ## Pour aller plus loin
+
 Documentation, liens et articles supplémentaires utiles :
 
 ### Blog Datadog
-* [Métriques clés pour la surveillance RabbitMQ][14]
-* [Recueillir des métriques avec les outils de surveillance RabbitMQ][15]
-* [Surveiller les performances de RabbitMQ avec Datadog][16]
+
+- [Métriques clés pour la surveillance RabbitMQ][14]
+- [Recueillir des métriques avec les outils de surveillance RabbitMQ][15]
+- [Surveiller les performances de RabbitMQ avec Datadog][16]
 
 ### FAQ
-* [Taguer des files d'attente RabbitMQ par famille de tags][17]
 
+- [Taguer des files d'attente RabbitMQ par famille de tags][17]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/rabbitmq/images/rabbitmq_dashboard.png
 [2]: https://www.rabbitmq.com
@@ -201,8 +203,8 @@ Documentation, liens et articles supplémentaires utiles :
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [7]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/conf.yaml.example
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
-[10]: https://docs.datadoghq.com/fr/agent/docker/log/
+[9]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[10]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/metadata.csv
 [13]: https://docs.datadoghq.com/fr/help
