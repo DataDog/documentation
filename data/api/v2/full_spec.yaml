@@ -1488,8 +1488,11 @@ paths:
         required: false
         schema:
           type: string
-      - description: 'Filter on status attribute. Comma separated list: Active, Pending,
-          and Disabled. Defaults to no filtering.'
+      - description: 'Filter on status attribute.
+
+          Comma separated list, with possible values `Active`, `Pending`, and `Disabled`.
+
+          Defaults to no filtering.'
         in: query
         name: filter[status]
         required: false

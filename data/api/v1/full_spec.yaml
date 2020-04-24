@@ -11240,6 +11240,32 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: TODO.
+        in: query
+        name: id_offset
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The page to start paginating from. If this argument is not specified,
+          the request returns all monitors without pagination.
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The number of monitors to return per page. If the page argument
+          is not specified, the default behavior returns all monitors without a `page_size`
+          limit. However, if page is specified and `page_size` is not, the argument
+          defaults to 100.
+        in: query
+        name: page_size
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          type: integer
       responses:
         '200':
           content:
