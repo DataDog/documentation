@@ -24,9 +24,6 @@ App Analytics is available starting in version 0.25.0 of the Java tracing client
 * System Property: `-Ddd.trace.analytics.enabled=true`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
- After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Python" %}}
 
@@ -35,9 +32,6 @@ App Analytics is available starting in version 0.19.0 of the Python tracing clie
 * Tracer Configuration: `ddtrace.config.analytics_enabled = True`
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
- After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
@@ -52,9 +46,6 @@ Datadog.configure { |c| c.analytics_enabled = true }
 * `true` enables analytics for all web frameworks.
 * `false` or `nil` disables analytics, except for integrations that explicitly enable it. (Default)
 
- After enabling, the [App Analytics][1] page populates.
-
-[1]: https://app.datadoghq.com/apm/search
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -64,10 +55,7 @@ App Analytics is available starting in version 1.11.0 of the Go tracing client, 
 tracer.Start(tracer.WithAnalytics(true))
 ```
 
-After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][2] to get started.
-
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
-[2]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -83,9 +71,6 @@ You can also use the following configuration parameter:
 
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
-After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -99,9 +84,6 @@ This setting can also be set in code:
 Tracer.Instance.Settings.AnalyticsEnabled = true;
 ```
 
-After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -109,40 +91,32 @@ App Analytics is available starting in version 0.17.0 of the PHP tracing client,
 
 * Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
-After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "C++" %}}
-* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
-This setting can also be set in code:
+App Analytics is available starting in version 1.0.0 of the C++ tracing client, and can be enabled globally for all **web** integrations by setting the environment variable: `DD_TRACE_ANALYTICS_ENABLED` to `true`. Note that this setting can also be set in the code directly:
 
 ```csharp
 datadog::opentracing::TracerOptions tracer_options;
   tracer_options.agent_host = "dd-agent";
-  tracer_options.service = "<service name>";
+  tracer_options.service = "<SERVICE_NAME>";
   tracer_options.analytics_rate = 1.0;
   auto tracer = datadog::opentracing::makeTracer(tracer_options);
 ```
 
-After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{% tab "Nginx" %}}
 
-Two steps are required in order to enable App Analytics for Nginx:
+To enable App Analytics for Nginx:
 
 1. Set the environment variable: `DD_TRACE_ANALYTICS_ENABLED` to `true`.
 
 2. Add `env DD_TRACE_ANALYTICS_ENABLED;` at the top of your `nginx.conf` file.
 
-After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
-
-[1]: https://app.datadoghq.com/apm/search/analytics
 {{% /tab %}}
 {{< /tabs >}}
+
+After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
 ## Configure Additional Services (optional)
 
