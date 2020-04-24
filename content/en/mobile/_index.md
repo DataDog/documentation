@@ -11,7 +11,7 @@ further_reading:
   text: "Dashboards"
 ---
 
-<div class="alert alert-warning"> This service is in public beta. To join the beta, follow the installation instructions. The beta is not currently available to customers using SAML authentication. If you have any feedback, <a href="/help">contact Datadog support</a>.</div>monitors
+<div class="alert alert-warning"> This service is in public beta. To join the beta, follow the installation instructions. The beta is not currently available to customers using SAML authentication. If you have any feedback, <a href="/help">contact Datadog support</a>.</div>
 
 The Datadog Oncall app enables on-call engineers to view alerts from Datadog on their mobile device. When notified to a Datadog alert by Pagerduty, Slack or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
 
