@@ -21,7 +21,7 @@ const updateMenu = (apiYaml, apiVersion) => {
 
     newMenuArray.push({
       name: tag.name,
-      url: `api/${apiVersion}/${getTagSlug(tag.name)}/`,
+      url: `/api/${apiVersion}/${getTagSlug(tag.name)}/`,
       identifier: tag.name
     });
 

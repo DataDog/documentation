@@ -26,7 +26,7 @@
 
     {{ if .HasChildren }}
         <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) }}active{{ end }}">
-            <a href="{{ .URL | absLangURL }}">
+            <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                 <span>{{ .Name }}</span>
             </a>
             <ul class="nav"> 
@@ -41,7 +41,7 @@
         </li>
     {{ else }}
         <li>
-            <a href="{{ .URL | absLangURL }}">
+            <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                 <span>{{ .Name }}</span>
             </a>
         </li>
