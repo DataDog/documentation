@@ -118,12 +118,13 @@ After enabling, the App Analytics UI starts showing results. Visit [App Analytic
 
 This setting can also be set in code:
 
-```
+```csharp
 datadog::opentracing::TracerOptions tracer_options;
   tracer_options.agent_host = "dd-agent";
   tracer_options.service = "<service name>";
   tracer_options.analytics_rate = 1.0;
-  auto tracer = datadog::opentracing::makeTracer(tracer_options);```
+  auto tracer = datadog::opentracing::makeTracer(tracer_options);
+```
 
 After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
