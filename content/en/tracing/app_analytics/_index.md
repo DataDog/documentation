@@ -134,9 +134,9 @@ After enabling, the App Analytics UI starts showing results. Visit [App Analytic
 
 Two steps are required in order to enable App Analytics for Nginx:
 
-1. Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
+1. Set the environment variable: `DD_TRACE_ANALYTICS_ENABLED` to `true`.
 
-2. Add `env DD_TRACE_ANALYTICS_ENABLED;` at the top of your nginx.conf file.
+2. Add `env DD_TRACE_ANALYTICS_ENABLED;` at the top of your `nginx.conf` file.
 
 After enabling, the App Analytics UI starts showing results. Visit [App Analytics page][1] to get started.
 
