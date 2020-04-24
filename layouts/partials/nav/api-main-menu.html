@@ -1,3 +1,4 @@
+{{ $dot := . }}
 {{ .Scratch.Set "apiVersion" "v1"}}
 
 {{ if in .Permalink "api/v2" }}
@@ -8,17 +9,24 @@
 
 {{ $apiMenu := print "api_" $apiVersion}}
 
+<!-- if no api menu in other languages fallback to english -->
+{{ with index .Site.Menus $apiMenu }}
+  {{ $dot.Scratch.Set "menu" . }}
+{{ else }}
+  {{ $dot.Scratch.Set "menu" (index .Sites.First.Menus $apiMenu) }}
+{{ end }}
+{{ $menu := .Scratch.Get "menu" }}
 
 {{ $currentPage := . }}
 
                 
 <ul class="list-unstyled">
     <!-- (index .Site.Menus  $apiMenu) -->
-{{ range (index .Site.Menus  $apiMenu) }}
+{{ range $menu }}
 
     {{ if .HasChildren }}
         <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) }}active{{ end }}">
-            <a href="{{ .URL }}">
+            <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                 <span>{{ .Name }}</span>
             </a>
             <ul class="nav"> 
@@ -33,7 +41,7 @@
         </li>
     {{ else }}
         <li>
-            <a href="{{ .URL }}">
+            <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                 <span>{{ .Name }}</span>
             </a>
         </li>

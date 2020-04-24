@@ -176,7 +176,7 @@ const filterExampleJson = (data) => {
     return Object.keys(data.properties)
       .map((propKey) => {
         const property = data.properties[propKey];
-        return {[propKey]: (property.hasOwnProperty("items")) ? filterExampleJson(property.items) : (property["example"] || property["type"])};
+        return {[propKey]: (property.hasOwnProperty("items")) ? [filterExampleJson(property.items)] : (property["example"] || property["type"])};
       })
       .reduce((obj, item) => ({...obj, ...item}), {});
   } else if ("items" in data) {

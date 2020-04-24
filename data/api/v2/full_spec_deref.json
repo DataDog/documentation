@@ -5624,31 +5624,6 @@
             },
             "description": "OK"
           },
-          "400": {
-            "content": {
-              "applcation/json": {
-                "schema": {
-                  "description": "TODO.",
-                  "properties": {
-                    "errors": {
-                      "description": "TODO.",
-                      "items": {
-                        "description": "TODO.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
           "403": {
             "content": {
               "applcation/json": {
@@ -6694,6 +6669,31 @@
             },
             "description": "OK"
           },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TODO.",
+                  "properties": {
+                    "errors": {
+                      "description": "TODO.",
+                      "items": {
+                        "description": "TODO.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
           "403": {
             "content": {
               "application/json": {
@@ -7598,6 +7598,31 @@
               }
             },
             "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "TODO.",
+                  "properties": {
+                    "errors": {
+                      "description": "TODO.",
+                      "items": {
+                        "description": "TODO.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
           },
           "403": {
             "content": {
@@ -9200,7 +9225,7 @@
             }
           },
           {
-            "description": "Filter on status attribute. Comma separated list: Active, Pending, and Disabled. Defaults to no filtering.",
+            "description": "Filter on status attribute.\nComma separated list, with possible values `Active`, `Pending`, and `Disabled`.\nDefaults to no filtering.",
             "in": "query",
             "name": "filter[status]",
             "required": false,

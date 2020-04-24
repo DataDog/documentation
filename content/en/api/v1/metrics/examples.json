@@ -4,19 +4,25 @@
       "200": {
         "json": {
           "from": "string",
-          "metrics": "string"
+          "metrics": [
+            "string"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">from</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Time when the metrics were active, seconds since the Unix epoch.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">metrics</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>List of metric names.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "400": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
@@ -42,13 +48,17 @@
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "404": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
@@ -74,19 +84,25 @@
       },
       "400": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "404": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
@@ -110,29 +126,37 @@
         "json": {
           "error": "string",
           "from_date": "integer",
-          "group_by": "string",
+          "group_by": [
+            "string"
+          ],
           "message": "string",
           "query": "string",
           "res_type": "time_series",
-          "series": {
-            "aggr": "avg",
-            "display_name": "system.cpu.idle",
-            "end": "integer",
-            "expression": "system.cpu.idle{host:foo,env:test}",
-            "interval": "integer",
-            "length": "integer",
-            "metric": "system.cpu.idle",
-            "pointlist": "number",
-            "scope": "host:foo,env:test",
-            "start": "integer",
-            "unit": {
-              "family": "time",
-              "name": "minute",
-              "plural": "minutes",
-              "scale_factor": 60,
-              "short_name": "min"
+          "series": [
+            {
+              "aggr": "avg",
+              "display_name": "system.cpu.idle",
+              "end": "integer",
+              "expression": "system.cpu.idle{host:foo,env:test}",
+              "interval": "integer",
+              "length": "integer",
+              "metric": "system.cpu.idle",
+              "pointlist": [
+                "number"
+              ],
+              "scope": "host:foo,env:test",
+              "start": "integer",
+              "unit": [
+                {
+                  "family": "time",
+                  "name": "minute",
+                  "plural": "minutes",
+                  "scale_factor": 60,
+                  "short_name": "min"
+                }
+              ]
             }
-          },
+          ],
           "status": "ok",
           "to_date": "integer"
         },
@@ -140,13 +164,17 @@
       },
       "400": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
@@ -166,13 +194,17 @@
       },
       "400": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
@@ -192,39 +224,53 @@
       },
       "400": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "408": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "413": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
     },
     "request": {
       "json": {
-        "series": {
-          "host": "string",
-          "interval": "integer",
-          "metric": "system.load.1",
-          "points": "number",
-          "tags": "string",
-          "type": "string"
-        }
+        "series": [
+          {
+            "host": "string",
+            "interval": "integer",
+            "metric": "system.load.1",
+            "points": [
+              "number"
+            ],
+            "tags": [
+              "string"
+            ],
+            "type": "string"
+          }
+        ]
       },
       "html": "\n  <div class=\"table-request schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> series</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>A list of time series to submit to Datadog.</p></div>\n            </div>\n            \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">host</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the host that produced the metric.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">interval</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>If the type of the metric is rate or count, define the corresponding interval.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">metric</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the timeseries.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">points</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[array]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">tags</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>A list of tags associated with the metric.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">type</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
     }

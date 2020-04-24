@@ -7,13 +7,17 @@
       },
       "400": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
@@ -23,9 +27,15 @@
         "access_key_id": "string",
         "account_id": "1234567",
         "account_specific_namespace_rules": "object",
-        "excluded_regions": "string",
-        "filter_tags": "string",
-        "host_tags": "string",
+        "excluded_regions": [
+          "string"
+        ],
+        "filter_tags": [
+          "string"
+        ],
+        "host_tags": [
+          "string"
+        ],
         "role_name": "DatadogAWSIntegrationRole",
         "secret_access_key": "string"
       },
@@ -36,28 +46,40 @@
     "responses": {
       "200": {
         "json": {
-          "accounts": {
-            "access_key_id": "string",
-            "account_id": "1234567",
-            "account_specific_namespace_rules": "object",
-            "excluded_regions": "string",
-            "filter_tags": "string",
-            "host_tags": "string",
-            "role_name": "DatadogAWSIntegrationRole",
-            "secret_access_key": "string"
-          }
+          "accounts": [
+            {
+              "access_key_id": "string",
+              "account_id": "1234567",
+              "account_specific_namespace_rules": "object",
+              "excluded_regions": [
+                "string"
+              ],
+              "filter_tags": [
+                "string"
+              ],
+              "host_tags": [
+                "string"
+              ],
+              "role_name": "DatadogAWSIntegrationRole",
+              "secret_access_key": "string"
+            }
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> accounts</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">access_key_id</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Your AWS access key ID. Only required if your AWS account is a GovCloud or China account.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">account_id</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Your AWS Account ID without dashes.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> account_specific_namespace_rules</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>An object (in the form {&quot;namespace1&quot;:true/false, &quot;namespace2&quot;:true/false})\nthat enables or disables metric collection for specific AWS namespaces for\nthis AWS account only.\nA list of namespaces can be found at the /v1/integration/aws/available_namespace_rules endpoint.</p></div>\n            </div>\n            \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">&lt;any&#45;key&gt;</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p></p></div>\n              <div class=\"col-6 column\"></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">&lt;any&#45;key&gt;</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"></div>\n            </div>\n            \n          </div>\n        </div>\n        \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">excluded_regions</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>An array of AWS regions to exclude from metrics collection.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">filter_tags</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>The array of EC2 tags (in the form key:value) defines a filter that Datadog uses when collecting metrics from EC2.\nWildcards, such as ? (for single characters) and * (for multiple characters) can also be used.\nOnly hosts that match one of the defined tags\nwill be imported into Datadog. The rest will be ignored.\nHost matching a given tag can also be excluded by adding ! before the tag.\nFor example, <code>env:production,instance-type:c1.*,!region:us-east-1</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">host_tags</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of tags (in the form key:value) to add to all hosts\nand metrics reporting through this integration.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">role_name</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Your Datadog role delegation name.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n        <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">secret_access_key</p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Your AWS secret access key. Only required if your AWS account is a GovCloud or China account.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "400": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
@@ -77,13 +99,17 @@
       },
       "400": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
@@ -93,9 +119,15 @@
         "access_key_id": "string",
         "account_id": "1234567",
         "account_specific_namespace_rules": "object",
-        "excluded_regions": "string",
-        "filter_tags": "string",
-        "host_tags": "string",
+        "excluded_regions": [
+          "string"
+        ],
+        "filter_tags": [
+          "string"
+        ],
+        "host_tags": [
+          "string"
+        ],
         "role_name": "DatadogAWSIntegrationRole",
         "secret_access_key": "string"
       },
@@ -110,13 +142,17 @@
       },
       "400": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
@@ -126,9 +162,15 @@
         "access_key_id": "string",
         "account_id": "1234567",
         "account_specific_namespace_rules": "object",
-        "excluded_regions": "string",
-        "filter_tags": "string",
-        "host_tags": "string",
+        "excluded_regions": [
+          "string"
+        ],
+        "filter_tags": [
+          "string"
+        ],
+        "host_tags": [
+          "string"
+        ],
         "role_name": "DatadogAWSIntegrationRole",
         "secret_access_key": "string"
       },
@@ -143,7 +185,9 @@
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
@@ -163,13 +207,17 @@
       },
       "400": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "403": {
         "json": {
-          "errors": "Bad Request"
+          "errors": [
+            "Bad Request"
+          ]
         },
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\">errors<span style=\"color:red;\">*</span></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>TODO.</p></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       }
@@ -179,9 +227,15 @@
         "access_key_id": "string",
         "account_id": "1234567",
         "account_specific_namespace_rules": "object",
-        "excluded_regions": "string",
-        "filter_tags": "string",
-        "host_tags": "string",
+        "excluded_regions": [
+          "string"
+        ],
+        "filter_tags": [
+          "string"
+        ],
+        "host_tags": [
+          "string"
+        ],
         "role_name": "DatadogAWSIntegrationRole",
         "secret_access_key": "string"
       },
