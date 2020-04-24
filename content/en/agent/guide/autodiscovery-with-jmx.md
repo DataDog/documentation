@@ -4,19 +4,19 @@ kind: guide
 further_reading:
     - link: '/agent/kubernetes/integrations'
       tag: 'Documentation'
-      text: 'Create and load an Autodiscovery Integration Template'
+      text: 'Create and load an Autodiscovery integration template'
     - link: '/agent/guide/ad_identifiers'
       tag: 'Documentation'
-      text: 'Match a container with the corresponding Integration Template'
+      text: 'Match a container with the corresponding integration template'
     - link: '/agent/kubernetes/management'
       tag: 'Documentation'
-      text: 'Manage which Container to include in the Agent Autodiscovery'
+      text: 'Manage which container to include in the Agent Autodiscovery'
     - link: '/agent/kubernetes/tag'
       tag: 'Documentation'
       text: 'Dynamically assign and collect tags from your application'
 ---
 
-Leverage integrations autodiscovery annotations or use Autodiscovery Container Identifiers to collect your JMX-applications metrics from your pods in kubernetes. Autodisocovery annotations is the recommanded way to configure your Datadog-JMX integration, if the set of configuration parameters is too long to fit in annotations, use the [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) method.
+Leverage integrations autodiscovery annotations or use Autodiscovery Container Identifiers to collect your JMX-applications metrics from your pods in Kubernetes. Autodisocovery annotations is the recommended way to configure your Datadog-JMX integration, if the set of configuration parameters is too long to fit in annotations, use the [Autodiscovery Container Identifiers](#autodiscovery-container-identifiers) method.
 
 ## Autodiscovery annotations
 
@@ -64,7 +64,7 @@ The autodiscovery annotations logic consists in applying the JMX check configura
                   -Djava.rmi.server.hostname=$(POD_IP)
     ```
 
-      The `JAVA_OPTS` environement variable needs to be created, so that your JMX server allows the agent to connect to the RMI registry.
+      The `JAVA_OPTS` environment variable needs to be created, so that your JMX server allows the agent to connect to the RMI registry.
 
       **Note**:
       - `<JMX_PORT>` references the port that exposes JMX metrics.
@@ -337,7 +337,7 @@ spec:
 
 - To apply a specific configuration to a given container, Autodiscovery identifies containers by **name**, _not_ by image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`
 - If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, ReplicaSets, or deployments, add pod annotations under `.spec.template.metadata`.
-- The `JAVA_OPTS` environement variable needs to be created, so that your JMX server allows the agent to connect to the RMI registry.
+- The `JAVA_OPTS` environment variable needs to be created, so that your JMX server allows the agent to connect to the RMI registry.
 - `<JMX_PORT>` references the port that exposes JMX metrics.
 - In the example above, the connection to the RMI registry is not in SSL if you want to use SSL, use `"rmi_registry_ssl": true` in the `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances` annotation and remove the corresponding `Dcom.sun.management.jmxremote` from `JAVA_OPTS`.
 
@@ -377,7 +377,7 @@ project:
         com.datadoghq.ad.check.id: '<CUSTOM_AD_IDENTIFIER>'
 ```
 
-**Note**: If the Agent and your JMX container are on the same network bridge, you need to instanciate your JMX server with `-Djava.rmi.server.hostname=<CONTAINER_NAME>"` where `<CONTAINER_NAME>` is your JMX-application container name.
+**Note**: If the Agent and your JMX container are on the same network bridge, you need to instantiate your JMX server with `-Djava.rmi.server.hostname=<CONTAINER_NAME>"` where `<CONTAINER_NAME>` is your JMX-application container name.
 
 {{% /tab %}}
 {{< /tabs >}}
