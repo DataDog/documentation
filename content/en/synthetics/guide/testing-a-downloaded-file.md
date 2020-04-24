@@ -35,7 +35,7 @@ To setup a browser test with this assertion:
 
 3. **Confirm that the file was downloaded** and matched the requirements you set up in your assertion by looking at the generated test result:
 
-    {{< img src="synthetics/guide/testing-a-downloaded-file/tests_results.png" alt="Test results" >}}
+    {{< img src="synthetics/guide/testing-a-downloaded-file/test_results.png" alt="Test results" >}}
 
 ## Further Reading
 
