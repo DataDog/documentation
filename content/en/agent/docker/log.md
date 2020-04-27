@@ -204,7 +204,7 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 
 ## Advanced log collection
 
-Use the log annotation to apply an advanced log collection processing logic like:
+Use the autodiscovery log label to apply an advanced log collection processing logic like:
 
 - [Filter logs before sending them to Datadog][5].
 - [Scrub sensitive data from your logs][6].

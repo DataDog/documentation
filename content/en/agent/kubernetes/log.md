@@ -372,7 +372,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 ## Advanced log collection
 
-Use the log annotation to apply an advanced log collection processing logic like:
+Use the autodiscovery log annotation to apply an advanced log collection processing logic like:
 
 * [Filter logs before sending them to Datadog][4].
 * [Scrub sensitive data from your logs][5].
