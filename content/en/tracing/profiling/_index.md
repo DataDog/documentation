@@ -129,6 +129,58 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 [3]: /tracing/visualization/#services
 {{% /tab %}}
 
+{{% tab "Go" %}}
+
+The Datadog Profiler requires Go 1.12+. To begin profiling applications:
+
+1. Get `dd-trace-go` using the command:
+
+    ```shell
+    go get gopkg.in/DataDog/dd-trace-go.v1/profiler
+    ```
+
+     **Note**: Profiling is available in the `dd-trace-go` library for versions 1.23.0+.
+
+2. Import the [profiler][5] at the start of your application:
+
+    ```Go
+    import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
+    ```
+
+3. To profile your code, add a [Datadog API key][1], set your environment, service, and version, then start the profiler:
+
+    ```Go
+    err := profiler.Start(
+        profiler.WithAPIKey("<DATADOG_API_KEY>")
+        profiler.WithService("<SERVICE_NAME>"),
+        profiler.WithEnv("<ENVIRONMENT>"),
+        profiler.WithTags("version:<APPLICATION_VERSION>"),
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer profiler.Stop()
+    ```
+
+4. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][2].
+
+Profiler configuration:
+
+|`profiler` method | Type          | Description                                                                                                  |
+| ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
+|  WithAPIKey      | String        | The Datadog [Datadog API key][1]                                                                             |
+|  WithService     | String        | The Datadog [service][3] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.             |
+|  WithEnv         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_TAGS`.         |
+|  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
+
+
+[1]: /account_management/api-app-keys/#api-keys
+[2]: https://app.datadoghq.com/profiling
+[3]: /tracing/visualization/#services
+[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[5]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Profiles
@@ -219,6 +271,21 @@ Once enabled, the following profile types are collected:
 | Lock                     | Shows the time each function spent waiting for a lock.                                                                                                                                                                                                                                               |
 
 {{% /tab %}}
+
+{{% tab "Go" %}}
+
+Once enabled, the following profile types are collected:
+
+| Profile type             | Definition                                                                                                                                                                                                                                                                                         |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU                      | Shows the time each function spent running on the CPU.                                                                          |
+| Allocation               | Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed. Go calls this `alloc_space`. This is useful for investigating garbage collection load.              |
+| Allocation Count         | Shows the number of objects allocated in heap memory by each function, including allocations which were subsequently freed. This is useful for investigating garbage collection load.     |
+| Heap                     | Shows the amount of heap memory allocated by each function that remained allocated. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service.               |
+| Heap Count               | Shows the number of objects allocated in heap memory by each function and that remained allocated. This is useful for investigating the overall memory usage of your service.                              |
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Troubleshooting
