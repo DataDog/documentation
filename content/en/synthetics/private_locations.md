@@ -181,7 +181,7 @@ To scale a private location:
 ## Security
 
 The private location workers only pull data from Datadog servers. Datadog does not push data to the workers.
-The secret access key, used to authenticate your private location worker to the Datadog servers, uses an in-house protocol based on [AWS Signature Version 4 protocol][4].
+The secret access key, used to authenticate your private location worker to the Datadog servers, uses an in-house protocol based on [AWS Signature Version 4 protocol][3].
 
 The test configurations are encrypted asymmetrically. The private key is used to decrypt the test configurations pulled by the workers from Datadog servers. The public key is used to encrypt the test results that are sent from the workers to Datadog's servers.
 
