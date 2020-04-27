@@ -279,10 +279,10 @@ Once enabled, the following profile types are collected:
 | Profile type             | Definition                                                                                                                                                                                                                                                                                         |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | CPU                      | Shows the time each function spent running on the CPU.                                                                          |
-| Allocation               | Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed. Go calls this `alloc_space`              |
-| Allocation Count         | Shows the number of objects allocated in heap memory by each function, including allocations which were subsequently freed.     |
-| Heap                     | Shows the amount of heap memory allocated by each function that remained allocated. Go calls this `inuse_space`.                |
-| Heap Count               | Shows the number of objects allocated in heap memory by each function and that remained allocated.                              |
+| Allocation               | Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed. Go calls this `alloc_space`. This is useful for investigating garbage collection load.              |
+| Allocation Count         | Shows the number of objects allocated in heap memory by each function, including allocations which were subsequently freed. This is useful for investigating garbage collection load.     |
+| Heap                     | Shows the amount of heap memory allocated by each function that remained allocated. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service.               |
+| Heap Count               | Shows the number of objects allocated in heap memory by each function and that remained allocated. This is useful for investigating the overall memory usage of your service.                              |
 
 {{% /tab %}}
 
