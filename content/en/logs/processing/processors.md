@@ -631,6 +631,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
   "name": "Parse the geolocation elements from network.client.ip attribute.",
   "is_enabled": true,
   "sources": ["network.client.ip"],
+  "ip_processing_behavior": "do-nothing",
   "target": "network.client.geoip"
 }
 ```
@@ -639,8 +640,9 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 |--------------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------|
 | `type`       | String           | yes      | Type of the processor.                                                                                                    |
 | `name`       | String           | no       | Name of the processor.                                                                                                    |
-| `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`                                                                     |
+| `is_enabled` | Boolean          | no       | If the processor is enabled or not, default: `false`                                                                     |
 | `sources`    | Array of Strings | no       | Array of source attributes, default: `network.client.ip`                                                                  |
+| `ip_processing_behavior`    | String | no       | If the processor should `remove` the ip address after computing the geolocalization information, or `do-nothing`. Default: `do-nothing`                                                                  |
 | `target`     | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `network.client.geoip`  |
 
 [1]: /api/?lang=bash#logs-pipelines
