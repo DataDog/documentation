@@ -272,7 +272,23 @@ class Integrations:
                                 content,
                                 count=0,
                             )
+                        regex_skip_sections_end = r"(```|\{\{< \/code-block >\}\})"
+                        regex_skip_sections_start = r"(```|\{\{< code-block)"
+
+                        ## Inlining all link from the file to merge
+                        ## to avoid link ref colision with the existing references.
+                        content = self.inline_references(content,regex_skip_sections_start,regex_skip_sections_end)
+
                         target_file.write(content)
+
+                    ## Formating all link as reference in the new merged integration file
+                    try:
+                        final_text = format_link_file(output_file,regex_skip_sections_start,regex_skip_sections_end)
+                        with open(output_file, 'w') as final_file:
+                            final_file.write(final_text)
+                    except Exception as e:
+                        print(e)
+
                     try:
                         remove(input_file)
                     except OSError:
@@ -401,7 +417,7 @@ class Integrations:
         :param file_name: path to a readme md file
         """
         no_integration_issue = True
-
+        tab_logic = False
         metrics = glob.glob(
             "{path}{sep}*metadata.csv".format(
                 path=dirname(file_name), sep=sep
