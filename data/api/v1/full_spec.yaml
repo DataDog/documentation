@@ -2033,6 +2033,26 @@ components:
         webhooks:
           $ref: '#/components/schemas/IPPrefixesWebhooks'
       type: object
+    IdpFormData:
+      description: TODO.
+      properties:
+        idp_file:
+          description: The path to the XML metadata file you wish to upload.
+          format: binary
+          type: string
+      required:
+      - idp_file
+      type: object
+    IdpResponse:
+      description: TODO.
+      properties:
+        message:
+          description: Identity provider response.
+          example: IdP metadata successfully uploaded for example org
+          type: string
+      required:
+      - message
+      type: object
     ImageWidgetDefinition:
       description: The image widget allows you to embed an image on your dashboard.
         An image can be a PNG, JPG, or animated GIF. Only available on FREE layout
@@ -3677,6 +3697,179 @@ components:
       required:
       - type
       - content
+      type: object
+    Organization:
+      description: Create, edit, and manage organizations.
+      properties:
+        billing:
+          description: A JSON array of billing type. Note that only `parent_billing`
+            is supported.
+          example:
+            type: parent_billing
+          properties:
+            type:
+              description: TODO.
+              type: string
+          type: object
+        created:
+          description: Date of the organization creation.
+          example: '2019-09-26 17:28:28'
+          readOnly: true
+          type: string
+        description:
+          description: Description of the organization.
+          example: some description
+          type: string
+        name:
+          description: The name of the new child-organization, limited to 32 characters.
+          example: New child org
+          type: string
+        public_id:
+          description: The public_id of the org you are operating within.
+          example: abcdef12345
+          type: string
+        settings:
+          description: A JSON array of settings.
+          properties:
+            private_widget_share:
+              description: Whether or not the organization users can share widgets
+                outside of Datadog.
+              example: false
+              type: boolean
+            saml:
+              description: 'Set the boolean property enabled to enable or disable
+                single sign on with SAML.
+
+                See the SAML documentation for more information about all SAML settings.'
+              properties:
+                enabled:
+                  description: TODO.
+                  example: false
+                  type: boolean
+              type: object
+            saml_autocreate_access_role:
+              $ref: '#/components/schemas/AccessRole'
+            saml_autocreate_users_domains:
+              description: Has two properties, `enabled` (boolean) and `domains`,
+                which is a list of domains without the @ symbol.
+              properties:
+                domains:
+                  description: List of domains where the SAML automated user creation
+                    is enabled.
+                  items:
+                    description: TODO.
+                    example: example.com
+                    type: string
+                  type: array
+                enabled:
+                  description: Whether or not the automated user creation based on
+                    SAML domain is enabled.
+                  example: false
+                  type: boolean
+              type: object
+            saml_can_be_enabled:
+              description: Whether or not SAML can be enabled for this organization.
+              example: false
+              type: boolean
+            saml_idp_endpoint:
+              description: Identity provider endpoint for SAML authentication.
+              example: https://my.saml.endpoint
+              type: string
+            saml_idp_initiated_login:
+              description: Has one property enabled (boolean).
+              properties:
+                enabled:
+                  description: TODO.
+                  example: false
+                  type: boolean
+              type: object
+            saml_idp_metadata_uploaded:
+              description: Whether or not a SAML identity provider metadata file was
+                provided to the Datadog organization.
+              example: false
+              type: boolean
+            saml_login_url:
+              description: URL for SAML loging.
+              example: https://my.saml.login.url
+              type: string
+            saml_strict_mode:
+              description: Has one property enabled (boolean).
+              properties:
+                enabled:
+                  description: TODO.
+                  example: false
+                  type: boolean
+              type: object
+          type: object
+        subscription:
+          description: A JSON array of subscription type. Types available are `trial`,
+            `free`, and `pro`.
+          example:
+            type: pro
+          properties:
+            type:
+              description: TODO.
+              type: string
+          type: object
+      type: object
+    OrganizationCreateBody:
+      description: TODO.
+      properties:
+        billing:
+          description: A JSON array of billing type. Note that only `parent_billing`
+            is supported.
+          example:
+            type: parent_billing
+          properties:
+            type:
+              description: TODO.
+              type: string
+          type: object
+        name:
+          description: The name of the new child-organization, limited to 32 characters.
+          example: New child org
+          type: string
+        subscription:
+          description: A JSON array of subscription type. Types available are `trial`,
+            `free`, and `pro`.
+          example:
+            type: pro
+          properties:
+            type:
+              description: TODO.
+              type: string
+          type: object
+      required:
+      - name
+      - subscription
+      - billing
+      type: object
+    OrganizationCreateResponse:
+      description: TODO.
+      properties:
+        api_key:
+          $ref: '#/components/schemas/ApiKey'
+        application_key:
+          $ref: '#/components/schemas/ApplicationKey'
+        org:
+          $ref: '#/components/schemas/Organization'
+        user:
+          $ref: '#/components/schemas/User'
+      type: object
+    OrganizationListResponse:
+      description: Response with the list of organizations.
+      properties:
+        orgs:
+          description: TODO.
+          items:
+            $ref: '#/components/schemas/Organization'
+          type: array
+      type: object
+    OrganizationResponse:
+      description: Response with an organization.
+      properties:
+        org:
+          $ref: '#/components/schemas/Organization'
       type: object
     PagerDutyIntegration:
       description: New Datadog-PagerDuty integration.
@@ -11654,6 +11847,204 @@ paths:
       tags:
       - Monitors
       x-codegen-request-body-name: body
+  /api/v1/org:
+    get:
+      description: List your managed organizations.
+      operationId: ListOrgs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationListResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: List your managed organizations
+      tags:
+      - Organizations
+    post:
+      description: 'You can create, edit, and manage organizations.
+
+
+        This endpoint requires the
+
+        [multi-org account](https://docs.datadoghq.com/account_management/multi_organization/)
+
+        feature and must be enabled by
+
+        [contacting support](https://docs.datadoghq.com/help/).
+
+
+        Once a new child organization is created, you can interact with it
+
+        by using the `org.public_id`, `pi_key.key`, and
+
+        **application_key.hash** provided in the response.'
+      operationId: CreateChildOrg
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationCreateBody'
+        description: Org object that needs to be created
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationCreateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Create a child organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: body
+  /api/v1/org/{public_id}:
+    get:
+      description: Get organization information.
+      operationId: GetOrg
+      parameters:
+      - description: The public_id of the org you are operating within.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          example: abc123
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get organization information
+      tags:
+      - Organizations
+    put:
+      description: Update your organization.
+      operationId: UpdateOrg
+      parameters:
+      - description: The public_id of the org you are operating within.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          example: abc123
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organization'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Update your organization
+      tags:
+      - Organizations
+      x-codegen-request-body-name: body
+  /api/v1/org/{public_id}/idp_metadata:
+    post:
+      description: 'There are a couple of options for updating the Identity Provider
+        (IdP)
+
+        metadata from your SAML IdP.
+
+
+        * **Multipart Form-Data**: Post the IdP metadata file using a form post.
+
+
+        * **XML Body:** Post the IdP metadata file as the body of the request.'
+      operationId: UploadIdPForOrg
+      parameters:
+      - description: The public_id of the org you are operating with
+        in: path
+        name: public_id
+        required: true
+        schema:
+          example: abc123
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/IdpFormData'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdpResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '415':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unsupported Media Type
+      summary: Upload IdP metadata
+      tags:
+      - Organizations
+      x-codegen-request-body-name: body
   /api/v1/query:
     get:
       description: Query timeseries points.
@@ -13996,6 +14387,11 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/monitor_types/
   name: Monitors
+- description: Create, edit, and manage your organizations.
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/account_management/multi_organization
+  name: Organizations
 - description: 'Configure your Datadog-PagerDuty integration directly through the
 
     Datadog API.'
