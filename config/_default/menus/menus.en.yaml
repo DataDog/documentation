@@ -1812,6 +1812,24 @@ api_v1:
   - name: Unmute all monitors
     parent: Monitors
     url: unmute-all-monitors
+  - name: Organizations
+    url: /api/v1/organizations/
+    identifier: Organizations
+  - name: List your managed organizations
+    parent: Organizations
+    url: list-your-managed-organizations
+  - name: Create a child organization
+    parent: Organizations
+    url: create-a-child-organization
+  - name: Get organization information
+    parent: Organizations
+    url: get-organization-information
+  - name: Update your organization
+    parent: Organizations
+    url: update-your-organization
+  - name: Upload IdP metadata
+    parent: Organizations
+    url: upload-idp-metadata
   - name: PagerDuty Integration
     url: /api/v1/pagerduty-integration/
     identifier: PagerDuty Integration
