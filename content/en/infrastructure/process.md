@@ -102,7 +102,7 @@ datadog:
     # (...)
     processAgent:
         enabled: true
-    processCollection: true
+        processCollection: true
 ```
 
 [1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
