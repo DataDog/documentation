@@ -213,7 +213,10 @@
   z-index:3;
   transform: translateX(11px);
   margin-top: 15px;
-  margin-bottom: 7px;
+  margin-bottom: 13px;
+  @media (min-width: 992px) {
+    margin-top: 0;
+  }
 
 
 
