@@ -131,7 +131,7 @@ kubectl apply -f private-worker-pod.yaml
 
       {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list"  style="width:70%;">}}
 
-6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][2].
+6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][1].
 
 ## Configuration
 
