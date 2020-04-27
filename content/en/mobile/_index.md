@@ -13,7 +13,7 @@ further_reading:
 
 <div class="alert alert-warning"> This service is in public beta. To join the beta, follow the installation instructions. The beta is not currently available to customers using SAML authentication. If you have any feedback, <a href="/help">contact Datadog support</a>.</div>
 
-The Datadog On-call app enables on-call engineers to view alerts from Datadog on their mobile device. When notified to a Datadog alert by Pagerduty, Slack or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
+The Datadog On-call app enables on-call engineers to view alerts from Datadog on their mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
 
 ## Installing
 
@@ -41,7 +41,7 @@ You can login using standard and Google authentication. [SAML login][4] is not c
 
 On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][5]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries.
 
-**Note:** To set up or edit a monitor and alerts, you need set them up in the [Datadog web app][6]. All alerts set up in the app are enabled for the mobile app. For more information, see [Creating monitors][7].
+**Note:** To set up or edit monitors and notifications, you need to do it in the [Datadog web app][6]. All monitor set up in the web app are visible in the mobile app. For more information, see [Creating monitors][7].
 
 ## Dashboards
 
