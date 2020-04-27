@@ -1,5 +1,5 @@
 ---
-title: Datadog Oncall Mobile App
+title: Datadog On-call Mobile App
 kind: documentation
 beta: true
 further_reading:
@@ -13,11 +13,11 @@ further_reading:
 
 <div class="alert alert-warning"> This service is in public beta. To join the beta, follow the installation instructions. The beta is not currently available to customers using SAML authentication. If you have any feedback, <a href="/help">contact Datadog support</a>.</div>
 
-The Datadog Oncall app enables on-call engineers to view alerts from Datadog on their mobile device. When notified to a Datadog alert by Pagerduty, Slack or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
+The Datadog On-call app enables on-call engineers to view alerts from Datadog on their mobile device. When notified to a Datadog alert by Pagerduty, Slack or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
 
 ## Installing
 
-The Datadog Oncall App is currently in beta, so it's not available generally in app stores. To download the app, use the specific invite links in these instructions.
+The Datadog On-call App is currently in beta, so it's not available generally in app stores. To download the app, use the specific invite links in these instructions.
 
 ### iOS
 
