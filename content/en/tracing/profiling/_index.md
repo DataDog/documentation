@@ -166,11 +166,12 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 Profiler configuration:
 
-| Environment variable                             |`profiler` method | Type          | Description                                                                                      |
-| ------------------------------------------------ | ---------------- | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_SERVICE`                                     |  WithService     | String        | The Datadog [service][3] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.     |
-| `DD_ENV`                                         |  WithEnv         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_TAGS`. |
-| `DD_TAGS`                                        |  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
+|`profiler` method | Type          | Description                                                                                                  |
+| ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
+|  WithAPIKey      | String        | The Datadog [Datadog API key][1]                                                                             |
+|  WithService     | String        | The Datadog [service][3] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.             |
+|  WithEnv         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_TAGS`.         |
+|  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
 
 [1]: /account_management/api-app-keys/#api-keys
