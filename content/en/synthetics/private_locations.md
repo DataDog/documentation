@@ -169,7 +169,7 @@ If you are testing an internal URL and need to use an internal DNS server you ca
 
 ### Special-purpose IPv4 whitelisting
 
-If you are using private locations to monitor internal endpoints, some of your servers might be using [special-purpose IPv4][3]. These IPs are blacklisted by default, so if your private location needs to run a test on one of them, you first need to whitelist it using the `whitelistedRange` parameter.
+If you are using private locations to monitor internal endpoints, some of your servers might be using [special-purpose IPv4][2]. These IPs are blacklisted by default, so if your private location needs to run a test on one of them, you first need to whitelist it using the `whitelistedRange` parameter.
 
 ## Scale your Private Location
 
