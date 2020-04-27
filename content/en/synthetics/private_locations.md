@@ -16,7 +16,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in public beta and available for API Tests only.
+This feature is in public beta for API Tests. The equivalent feature for Browser Tests is in private beta, if you would like to test it, [reach out to Datadog support][1].
 </div>
 
 ## Overview
@@ -131,7 +131,7 @@ kubectl apply -f private-worker-pod.yaml
 
       {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list"  style="width:70%;">}}
 
-6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][1].
+6. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][2].
 
 ## Configuration
 
@@ -143,8 +143,8 @@ The `synthetics-private-location-worker` comes with a number of options that can
 | `dnsUseHost`             | Boolean          | `false`                                              | Use local DNS config in addition to --dnsServer (currently `["<DEFAULT_DNS_IN_HOST_CONFIG"]`)                                                                            |
 | `whitelistedRange.4`     | Array of Strings | `none`                                               | Grant access to IPv4 IP ranges (e.g. `--whitelistedRange.4="10.0.0.0/8"` or `--whitelistedRange.4={"10.0.0.0/8","0.0.0.0/8"}`, has precedence over `--blacklistedRange`) |
 | `whitelistedRange.6`     | Array of Strings | `none`                                               | Grant access to IPv6 IP ranges (e.g. `--whitelistedRange.6="::/128"` or `--whitelistedRange.6={"::/128","64:ff9b::/96"}`, has precedence over `--blacklistedRange`)      |
-| `blacklistedRange.4`     | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][2] | Deny access to IPv4 IP ranges (e.g. `--blacklistedRange.4="127.0.0.0/8" --blacklisted.4="100.64.0.0/10"`)                                                                |
-| `blacklistedRange.6`     | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][2] | Deny access to IPv6 IP ranges (e.g. `--blacklistedRange.6="::1/128"`)                                                                                                    |
+| `blacklistedRange.4`     | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][3] | Deny access to IPv4 IP ranges (e.g. `--blacklistedRange.4="127.0.0.0/8" --blacklisted.4="100.64.0.0/10"`)                                                                |
+| `blacklistedRange.6`     | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][3] | Deny access to IPv6 IP ranges (e.g. `--blacklistedRange.6="::1/128"`)                                                                                                    |
 | `site`                   | String           | `datadoghq.com`                                      | Datadog site (`datadoghq.com` or `datadoghq.eu`)                                                                                                                         |
 | `proxy`                  | String           | `none`                                               | Proxy URL                                                                                                                                                                |
 | `proxyIgnoreSSLErrors`   | Boolean          | `none`                                               | Disregard SSL errors when using a proxy.                                                                                                                                 |
@@ -169,7 +169,7 @@ If you are testing an internal URL and need to use an internal DNS server you ca
 
 ### Special-purpose IPv4 whitelisting
 
-If you are using private locations to monitor internal endpoints, some of your servers might be using [special-purpose IPv4][2]. These IPs are blacklisted by default, so if your private location needs to run a test on one of them, you first need to whitelist it using the `whitelistedRange` parameter.
+If you are using private locations to monitor internal endpoints, some of your servers might be using [special-purpose IPv4][3]. These IPs are blacklisted by default, so if your private location needs to run a test on one of them, you first need to whitelist it using the `whitelistedRange` parameter.
 
 ## Scale your Private Location
 
@@ -181,7 +181,7 @@ To scale a private location:
 ## Security
 
 The private location workers only pull data from Datadog servers. Datadog does not push data to the workers.
-The secret access key, used to authenticate your private location worker to the Datadog servers, uses an in-house protocol based on [AWS Signature Version 4 protocol][3].
+The secret access key, used to authenticate your private location worker to the Datadog servers, uses an in-house protocol based on [AWS Signature Version 4 protocol][4].
 
 The test configurations are encrypted asymmetrically. The private key is used to decrypt the test configurations pulled by the workers from Datadog servers. The public key is used to encrypt the test results that are sent from the workers to Datadog's servers.
 
@@ -189,6 +189,7 @@ The test configurations are encrypted asymmetrically. The private key is used to
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/api_tests
-[2]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[3]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+[1]: /help
+[2]: /synthetics/api_tests
+[3]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
