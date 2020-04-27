@@ -60,8 +60,8 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 **Note**:
 
--   To collect container information in the standard install, the `dd-agent` user must have permissions to access `docker.sock`.
--   Running the Agent as a container still allows you to collect host processes.
+- To collect container information in the standard install, the `dd-agent` user must have permissions to access `docker.sock`.
+- Running the Agent as a container still allows you to collect host processes.
 
 [1]: /agent/docker/#run-the-docker-agent
 
