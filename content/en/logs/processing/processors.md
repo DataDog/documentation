@@ -665,7 +665,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 | `name`                   | String           | no       | Name of the processor.                                                                                                                  |
 | `is_enabled`             | Boolean          | no       | If the processor is enabled or not, default: `false`                                                                                    |
 | `sources`                | Array of Strings | no       | Array of source attributes, default: `network.client.ip`                                                                                |
-| `ip_processing_behavior` | String           | no       | If the processor should `remove` the ip address after computing the geolocalization information, or `do-nothing`. Default: `do-nothing` |
+| `ip_processing_behavior` | String           | no       | If the processor should `remove` the ip address after computing the geolocalization information, or `do-nothing`, default: `do-nothing` |
 | `target`                 | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `network.client.geoip`                |
 
 
