@@ -225,7 +225,7 @@ using (var dogStatsdService = new DogStatsdService())
 {
     dogStatsdService.Configure(dogstatsdConfig);
     // ...
-}
+} // TODO !!!
 ```
 
 {{% /tab %}}
