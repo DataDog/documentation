@@ -69,7 +69,7 @@ if (versionSelect) {
     const choices = new Choices(versionSelect, versionChoiceOptions);
 }
 if (regionSelect) {
-    const regionChoices = new Choices(regionSelect, regionOptions);
+    const regionChoices = new Choices(regionSelect, regionChoiceOptions);
 }
 
 // Setup for large screen ToC
