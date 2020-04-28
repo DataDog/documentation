@@ -97,18 +97,6 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 
 **Note**:
 
-- If you want to control which part of your code should be profiled, use the `ddtrace.profile.profiler.Profiler` object:
-
-    ```python
-    from ddtrace.profiling import Profiler
-
-    prof = Profiler()
-    prof.start()
-
-    # At shutdown
-    prof.stop()
-    ```
-
 - Alternatively, profile your service by running it with the wrapper `pyddprofile`:
 
     ```shell
@@ -123,6 +111,21 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 | `DD_PROFILING_TAGS`                              | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`.       |
 | `DD_SERVICE_NAME`                                | String        | The Datadog [service][3] name, which can be set here, or in `DD_PROFILING_TAGS`.                    |
 
+<div class="alert alert-info">
+Not recommended, advanced usage only.
+</div>
+
+- If you want to control which part of your code should be profiled, use the `ddtrace.profiling.profiler.Profiler` object:
+
+    ```python
+    from ddtrace.profiling import Profiler
+
+    prof = Profiler()
+    prof.start()
+
+    # At shutdown
+    prof.stop()
+    ```
 
 [1]: /account_management/api-app-keys/#api-keys
 [2]: https://app.datadoghq.com/profiling
