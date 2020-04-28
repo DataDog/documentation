@@ -5,13 +5,39 @@
 // Overrides
 
 body:not(.api) {
+    .region-selector-container {
+        position: relative;
+    }
     .choices {
         width: 100px;
-        margin-left: 16px;
+        margin: 0;
+        position: absolute;
+        right: 0;
+        z-index: 10;
+        top: 0;
+        @media (min-width: 992px) {
+            right: 28px;
+            top: 40px;
+        }
+        @media (min-width: 1200px) {
+            right: 63px;
+            top: 40px;
+        }
     }
     .choices__inner {
         font-size: 18px;
         font-weight: 600;
+    }
+
+    .choices__list {
+        .choices__item {
+            display: flex;
+            align-items: center;
+            img {
+                width: 15px;
+                margin-left: 10px;
+            }
+        }
     }
 
     .choices__list--dropdown {
@@ -34,17 +60,17 @@ body:not(.api) {
     &.is-open {
         &:after {
             transform: rotate(180deg);
-            transform-origin: 50% 115%;
+            transform-origin: 25% 90%;
             border-color: transparent transparent $ddpurple;
         }
     }
 
     &:after {
-        border-width: 3px;
+        border-width: 5px;
         border-color: $ddpurple transparent transparent;
         left: 0;
         transform: rotate(270deg);
-        transform-origin: 75% 45%;
+        transform-origin: 40% 40%;
     }
 }
 

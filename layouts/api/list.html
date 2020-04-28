@@ -65,42 +65,99 @@
                         <p class="mb-0"><span style="padding: 3px" class="text-uppercase font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType }}</span>&nbsp;<span>{{.pathKey}}</span></p>
                         <h3 class="mt-2">Overview</h3>
                         <p>{{.action.description | markdownify }}</p>
-                        {{ if .action.parameters }}
+                        {{ with .action.parameters }}
+
                             <h3 class="mb-2">Arguments</h3>
-                            <div class=" schema-table row">
-                                <div class="col-12">
-                                  <div class="row table-header">
-                                    <div class="col-4 column">
-                                      <p class="font-semibold">Name</p>
-                                    </div>
-                                    <div class="col-2 column">
-                                      <p class="font-semibold">Type</p>
-                                    </div>
-                                    <div class="col-6 column">
-                                      <p class="font-semibold">Description</p>
-                                    </div>
-                                  </div>
-                                  {{ range .action.parameters }}
-                                        <div class="row ">
-                                            <div class="col-12 first-column">
-                                            <div class="row first-row ">
-                                                <div class="col-4 column">
-                                                    <p>
-                                                        <code>{{ .name }}</code>[<em>{{ cond (eq .required false) "optional" "required" }}</em>]&nbsp; ({{.in}})
-                                                    </p>
-                                                </div>
-                                                <div class="col-2 column">
-                                                    <p>{{ .schema.type }}</p>
-                                                </div>
-                                                <div class="col-6 column">
-                                                    <p>{{ .description }}</p>
-                                                </div>
-                                            </div>
-                                            </div>
+
+                            {{ $.Scratch.Set "queryStrings" slice }}
+                            {{ $.Scratch.Set "pathParams" slice }}
+               
+                            {{ range . }}
+                                {{ if eq .in "query"}}
+                                    {{ $.Scratch.Add "queryStrings" .  }}
+                                {{ else if eq .in "path"}}
+                                    {{ $.Scratch.Add "pathParams" .  }}
+                                {{ end }}
+                            {{ end }}
+
+                            {{ $queryStrings := $.Scratch.Get "queryStrings" }}
+                            {{ $pathParams := $.Scratch.Get "pathParams" }}
+                         
+                            {{ with $queryStrings }}
+                                <h4 class="text-capitalize">Query Strings</h4>
+                                <div class=" schema-table row">
+                                    <div class="col-12">
+                                      <div class="row table-header">
+                                        <div class="col-4 column">
+                                          <p class="font-semibold">Name</p>
                                         </div>
-                                  {{ end }}
-                                </div>  
-                            </div>
+                                        <div class="col-2 column">
+                                          <p class="font-semibold">Type</p>
+                                        </div>
+                                        <div class="col-6 column">
+                                          <p class="font-semibold">Description</p>
+                                        </div>
+                                      </div>
+                                      {{ range . }}
+                                            <div class="row ">
+                                                <div class="col-12 first-column">
+                                                <div class="row first-row ">
+                                                    <div class="col-4 column">
+                                                        <p>
+                                                            <code>{{ .name }}</code>{{ cond (eq .required false) "" "[<em>required</em>]" | safeHTML }}</em>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-2 column">
+                                                        <p>{{ .schema.type }}</p>
+                                                    </div>
+                                                    <div class="col-6 column">
+                                                        <p>{{ .description | markdownify }}</p>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                      {{ end }}
+                                    </div>
+                                </div>
+                            {{ end }}
+
+                            {{ with $pathParams }}
+                                <h4 class="text-capitalize">Path Parameters</h4>
+                                <div class=" schema-table row">
+                                    <div class="col-12">
+                                      <div class="row table-header">
+                                        <div class="col-4 column">
+                                          <p class="font-semibold">Name</p>
+                                        </div>
+                                        <div class="col-2 column">
+                                          <p class="font-semibold">Type</p>
+                                        </div>
+                                        <div class="col-6 column">
+                                          <p class="font-semibold">Description</p>
+                                        </div>
+                                      </div>
+                                      {{ range . }}
+                                            <div class="row ">
+                                                <div class="col-12 first-column">
+                                                <div class="row first-row ">
+                                                    <div class="col-4 column">
+                                                        <p>
+                                                            <code>{{ .name }}</code>{{ cond (eq .required false) "" "[<em>required</em>]" | safeHTML }}</em>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-2 column">
+                                                        <p>{{ .schema.type }}</p>
+                                                    </div>
+                                                    <div class="col-6 column">
+                                                        <p>{{ .description | markdownify }}</p>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                      {{ end }}
+                                    </div>
+                                </div>
+                            {{ end }}                            
                         {{ end }}
 
                         {{ if .action.requestBody }}

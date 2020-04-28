@@ -47,7 +47,7 @@
   {{ partial "header/header.html" . }}
 
   <div class="container h-100">
-    <div class="row h-100">
+    <div class="row h-100 position-relative">
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
         {{ partial "sidenav/main-sidenav.html" . }}
       </div>
@@ -59,8 +59,12 @@
         </div>
       </div>
 
+        <select id=region-select class="js-region-selector d-none" placeholder="Region">
+          {{ range .Site.Params.allowedRegions }}
+              <option value="{{ .value }}">{{ .name }}</option>
+          {{ end }}
+        </select>
       {{ partial "table-of-contents/table-of-contents.html" . }}
-      
 
     </div>
   </div>

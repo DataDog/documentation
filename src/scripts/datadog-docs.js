@@ -8,24 +8,68 @@ import codeTabs from './components/codetabs';
 import datadogLogs from './components/dd-browser-logs-rum';
 import { moveToAnchor } from './helpers/moveToAnchor';
 import { redirectToRegion } from './region-redirects';
+import configDocs from './config/config-docs';
 
+const { env } = document.documentElement.dataset;
+console.log('env: ', env)
+const { img_url } = configDocs[env];
 
 // custom region and API version selector dropdown
 const versionSelect = document.querySelector('.js-api-version-select');
 const regionSelect = document.querySelector('.js-region-selector');
 
-// const element = document.querySelector('.js-choice');
-const choiceOptions = {
+const regionChoiceOptions = {
     searchEnabled: false,
     placeholder: false,
     itemSelectText: '',
-    renderSelectedChoices: false
+    renderSelectedChoices: false,
+    callbackOnCreateTemplates: function (template){
+        return {
+            item: (classNames, data) => {
+              return template(`
+                <div class="${classNames.item} ${
+                data.highlighted
+                  ? classNames.highlightedState
+                  : classNames.itemSelectable
+              } ${
+                data.placeholder ? classNames.placeholder : ''
+              }" data-item data-id="${data.id}" data-value="${data.value}" ${
+                data.active ? 'aria-selected="true"' : ''
+              } ${data.disabled ? 'aria-disabled="true"' : ''}>
+                   ${data.label}<img alt="${data.value} region selector icon" src="${img_url}images/icons/region-flag-${data.value}.png">
+                </div>
+              `);
+            },
+            choice: (classNames, data) => {
+              return template(`
+                <div class="${classNames.item} ${classNames.itemChoice} ${
+                data.disabled ? classNames.itemDisabled : classNames.itemSelectable
+              }" data-select-text="${this.config.itemSelectText}" data-choice ${
+                data.disabled
+                  ? 'data-choice-disabled aria-disabled="true"'
+                  : 'data-choice-selectable'
+              } data-id="${data.id}" data-value="${data.value}" ${
+                data.groupId > 0 ? 'role="treeitem"' : 'role="option"'
+              }>
+                   ${data.label}
+                </div>
+              `);
+            },
+          };
+    }
+}
+
+const versionChoiceOptions = {
+    searchEnabled: false,
+    placeholder: false,
+    itemSelectText: '',
+    renderSelectedChoices: false,
 }
 if (versionSelect) {
-    const choices = new Choices(versionSelect, choiceOptions);
+    const choices = new Choices(versionSelect, versionChoiceOptions);
 }
 if (regionSelect) {
-    const regionChoices = new Choices(regionSelect, choiceOptions);
+    const regionChoices = new Choices(regionSelect, regionChoiceOptions);
 }
 
 // Setup for large screen ToC
