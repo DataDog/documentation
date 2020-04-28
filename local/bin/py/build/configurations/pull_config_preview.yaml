@@ -55,7 +55,7 @@
       - "*/README.md"
 
     - action: pull-and-push-folder
-      branch: gus/new-check-how-to
+      branch: master
       globs:
       - docs/dev/*.md
       options:
