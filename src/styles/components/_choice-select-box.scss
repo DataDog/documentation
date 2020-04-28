@@ -6,16 +6,21 @@
 
 body:not(.api) {
     .region-selector-container {
-        position: relative;
+        padding: 10px 15px 0 15px;
+        @media (min-width: 992px) {
+            padding: 0;
+        }
     }
+
     .choices {
         width: 100px;
         margin: 0;
-        position: absolute;
+        position: relative;
         right: 0;
-        z-index: 10;
+        z-index: 2;
         top: 0;
         @media (min-width: 992px) {
+            position: absolute;
             right: 28px;
             top: 40px;
         }

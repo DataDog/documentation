@@ -130,15 +130,27 @@ $ddpurple: #632ca6;
 
         .key {
             position: relative;
+            word-break: break-all;
             .toggle-arrow {
                 font-size: 18px;
                 position: absolute;
-                left: -20px;
+                left: -11px;
                 &.expanded {
                     transform: rotate(90deg);
-                    left: -18px;
+                    left: -8px;
                     top: 2px;
+                    @media (min-width: 992px) {
+                        left: -18px;
+                    }
                 }
+
+                @media (min-width: 992px) {
+                    left: -20px;
+                }
+            }
+
+            @media (min-width: 768px) {
+                word-break: normal;
             }
         }
 
@@ -152,7 +164,10 @@ $ddpurple: #632ca6;
             margin: 4px 0;
             font-size: 16px;
             line-height: 22px;
-            overflow-wrap: normal;
+            overflow-wrap: break-word;
+            @media (min-width: 768px) {
+                overflow-wrap: normal;
+            }
         }
 
         code {

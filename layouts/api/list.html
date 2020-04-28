@@ -46,7 +46,17 @@
                             {{$v.externalDocs.description}} <a href="{{$v.externalDocs.url}}">{{$v.externalDocs.url}}</a>
                         </div>
                     {{ else }}
-                        <p>{{ $v.description | markdownify}}</p>
+                    
+                        
+                        {{ $markdown := $v.description | markdownify }}
+
+                        <!-- need this because hugo sometimes duplicates <p> when using markdownify -->
+                        {{ if not ( strings.Contains $markdown "<p>" ) }}
+                            <p>{{ $markdown }}</p>
+                        {{ else }}
+                            {{ $markdown }}
+                        {{ end }}
+
                     {{ end }}
 
                 </div>
