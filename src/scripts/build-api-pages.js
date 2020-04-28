@@ -217,13 +217,11 @@ const isReadOnlyRow = (value) => {
  */
 const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') => {
   let field = '';
-  if(parentKey === "additionalProperties") {
-    field = "&lt;any&#45;key&gt;";
-  } else if(['type'].includes(key) && (typeof value !== 'object')) {
-      field = '';
-    } else {
-      field = (key || '');
-    }
+  if(['type'].includes(key) && (typeof value !== 'object')) {
+    field = '';
+  } else {
+    field = (key || '');
+  }
   return `
     <div class="col-4 column">
       <p class="key">${toggleMarkup}${field}${requiredMarkup}</p>
@@ -260,11 +258,19 @@ const typeColumn = (key, value, readOnlyMarkup) => {
 
 /**
  * Takes an object from the schema and outputs a description column
+ * @param {string} key - key for the current schema object
  * @param {object} value - part of a schema object
  * returns html column
  */
-const descColumn = (value) => {
-  const desc = (value.description && (typeof(value.description) !== "object")) ? value.description || '' : '';
+const descColumn = (key, value) => {
+  let desc = '';
+  if(value.description) {
+    if(typeof(value.description) !== "object") {
+      desc = value.description || '';
+    }
+  } else if((typeof(value) === "string") && key === 'description') {
+    desc = value || '';
+  }
   return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}</div>`.trim();
 };
 
@@ -300,7 +306,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if(Object.keys(value.additionalProperties).length !== 0){
-            childData = value.additionalProperties;
+            childData = {["&lt;any-key&gt;"]: value.additionalProperties};
             newParentKey = "additionalProperties";
           }
         }
@@ -323,7 +329,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             <div class="row ${nestedRowClasses}">
               ${fieldColumn(key, value, toggleArrow, required, parentKey)}
               ${typeColumn(key, value, readOnlyField)}
-              ${descColumn(value)}
+              ${descColumn(key, value)}
             </div>
             ${(childData) ? rowRecursive(tableType, childData, true, data.required || [], (level + 1), newParentKey) : ''}
           </div>

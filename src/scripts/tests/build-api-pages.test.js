@@ -147,11 +147,6 @@ describe(`fieldColumn`, () => {
     </div>
   `;
 
-  it('should say <any-key> when parentkey additionProperties', () => {
-    const actual = bp.fieldColumn("", "", "", "", "additionalProperties");
-    const expected = anykeyResult;
-    expect(actual).toEqual(expected);
-  });
 
   it('should should empty field if key is type and value not object', () => {
     const actual = bp.fieldColumn("type", "array", "", "");
@@ -178,15 +173,26 @@ describe(`descColumn`, () => {
 
   it('should return empty column markup when desc empty', () => {
     const obj = {description: ""};
-    const actual = bp.descColumn(obj);
+    const key = "foo";
+    const actual = bp.descColumn(key, obj);
     const expected = emptyMarkdown;
     expect(actual).toEqual(expected);
   });
 
   it('should return format markdown', () => {
     const obj = {description: "# test"};
-    const actual = bp.descColumn(obj);
+    const key = "foo";
+    const actual = bp.descColumn(key, obj);
     const expected = '<div class="col-6 column"><h1 id="test">test</h1></div>';
+    expect(actual).toEqual(expected);
+  });
+
+  it('should value as description when key is description', () => {
+    // this is for additionalProperties
+    const obj = "TODO";
+    const key = "description";
+    const actual = bp.descColumn(key, obj);
+    const expected = '<div class="col-6 column"><p>TODO</p></div>';
     expect(actual).toEqual(expected);
   });
 
