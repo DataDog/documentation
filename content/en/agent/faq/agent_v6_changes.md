@@ -470,7 +470,7 @@ Even though Agent v6 fully supports Python checks, some of the official Agent v5
 {{% /tab %}}
 {{% tab "Check API" %}}
 
-The base class for Python checks (`AgentCheck`) is now imported from `datadog_checks.checks`. There are a number of things that have been removed or changed in the class API. In addition, each check instance is now its own instance of the class. So you cannot share state between them.
+The base class for Python checks (`AgentCheck`) is now imported from `datadog_checks.base.checks`. There are a number of things that have been removed or changed in the class API. In addition, each check instance is now its own instance of the class. So you cannot share state between them.
 
 The following methods in the `AgentCheck` class are not implemented:
 
