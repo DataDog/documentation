@@ -135,9 +135,11 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        DogStatsd.Event("An error occurred", "Error message", alertType: "error", tags: new[] { "env:dev" });
+        using (var dogStatsdService = new DogStatsdService())
+        {
+            dogStatsdService.Configure(dogstatsdConfig);
+            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", tags: new[] { "env:dev" });
+        }
     }
 }
 {{< /code-block >}}

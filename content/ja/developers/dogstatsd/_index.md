@@ -221,7 +221,11 @@ var dogstatsdConfig = new StatsdConfig
     StatsdPort = 8125,
 };
 
-StatsdClient.DogStatsd.Configure(dogstatsdConfig);
+using (var dogStatsdService = new DogStatsdService())
+{
+    dogStatsdService.Configure(dogstatsdConfig);
+    // ...
+}
 ```
 
 {{% /tab %}}
