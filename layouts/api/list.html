@@ -104,14 +104,14 @@
                                                 <div class="row first-row ">
                                                     <div class="col-4 column">
                                                         <p>
-                                                            <code>{{ .name }}</code>[<em>{{ cond (eq .required false) "optional" "required" }}</em>]
+                                                            <code>{{ .name }}</code>{{ cond (eq .required false) "" "[<em>required</em>]" | safeHTML }}</em>
                                                         </p>
                                                     </div>
                                                     <div class="col-2 column">
                                                         <p>{{ .schema.type }}</p>
                                                     </div>
                                                     <div class="col-6 column">
-                                                        <p>{{ .description }}</p>
+                                                        <p>{{ .description | markdownify }}</p>
                                                     </div>
                                                 </div>
                                                 </div>
@@ -142,14 +142,14 @@
                                                 <div class="row first-row ">
                                                     <div class="col-4 column">
                                                         <p>
-                                                            <code>{{ .name }}</code>[<em>{{ cond (eq .required false) "optional" "required" }}</em>]
+                                                            <code>{{ .name }}</code>{{ cond (eq .required false) "" "[<em>required</em>]" | safeHTML }}</em>
                                                         </p>
                                                     </div>
                                                     <div class="col-2 column">
                                                         <p>{{ .schema.type }}</p>
                                                     </div>
                                                     <div class="col-6 column">
-                                                        <p>{{ .description }}</p>
+                                                        <p>{{ .description | markdownify }}</p>
                                                     </div>
                                                 </div>
                                                 </div>

@@ -5,6 +5,11 @@ $ddpurple: #632ca6;
     top: 94px;
 }
 
+.announcement_banner.open ~ .container .main-api h2 {
+    margin-top: -110px;
+    padding-top: 110px;
+}
+
 .main-api {
     margin-bottom: 160px;
     padding-left: 15px;
@@ -14,8 +19,8 @@ $ddpurple: #632ca6;
     }
 
     h2 {
-        margin-top: -110px;
-        padding-top: 110px;
+        margin-top: -80px;
+        padding-top: 80px;
         pointer-events: none;
         background-clip: content-box;
         margin-right: 0;
@@ -32,29 +37,6 @@ $ddpurple: #632ca6;
                 color: #000;
                 border-bottom: 1px solid #000;
             }
-        }
-    }
-    // h3 {
-    //     margin-bottom: 20px;
-    // }
-
-    .model-example-buttons {
-        input[type='radio'] {
-            appearance: none;
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            background-clip: content-box;
-            border: initial;
-            background-color: #e7e6e7;
-            border-radius: 50%;
-            &:focus {
-                outline: none;
-            }
-        }
-        /* appearance for checked radiobutton */
-        input[type='radio']:checked {
-            background-color: $ddpurple;
         }
     }
 
@@ -190,16 +172,7 @@ $ddpurple: #632ca6;
             }
         }
 
-        .first-column {
-            // border-bottom: 0.5px solid #ebebeb;
-        }
-
         .hasChildData {
-            &.isNested > {
-                .first-column {
-                    // border-top: 0.5px solid #ebebeb;
-                }
-            }
             .isNested {
                 .key {
                     margin-left: 20px;
@@ -231,7 +204,6 @@ $ddpurple: #632ca6;
     }
 
     .chroma {
-        // min-height: 300px;
         max-height: 300px;
         overflow-wrap: break-word;
         white-space: inherit;
@@ -247,17 +219,28 @@ $ddpurple: #632ca6;
 
 .api {
     .announcement_banner.open ~ .container {
-        padding-top: 30px;
+        padding-top: 40px;
+        @media (min-width: 992px) {
+            padding-top: 30px;
+        }
+    }
+
+    .announcement_banner ~ .container {
+        padding-top: 20px;
+        @media (min-width: 992px) {
+            padding-top: 0px;
+        }
     }
 
     .api-toolbar {
-        height: 51px;
+        height: auto;
         // position: sticky;
         // z-index: 1;
         // top: 105px;
         font-weight: 600;
         @media (min-width: 992px) {
             top: 95px;
+            height: 51px;
         }
         a {
             border-bottom: none;
@@ -281,53 +264,10 @@ $ddpurple: #632ca6;
                 }
                 p {
                     margin-bottom: 0;
-                    // & + .highlight {
-                    //     margin-top: 10px;
-                    // }
                 }
             }
         }
     }
-
-    // .api-code {
-    //     code {
-    //         color: #8db8e9;
-    //         border: none;
-    //     }
-
-    //     pre {
-    //         display: block;
-    //         padding: 9.5px;
-    //         margin: 0 0 10px;
-    //         font-size: 13px;
-    //         line-height: 1.428571429;
-    //         word-break: break-all;
-    //         word-wrap: break-word;
-    //         color: #fff;
-    //         background-color: #0f0f0f;
-    //         border-radius: 4px;
-    //         font-family: $font-family-monospace;
-    //         code {
-    //             padding: 0;
-    //             font-size: 12px;
-    //             white-space: pre-wrap;
-    //             background-color: transparent;
-    //             border-radius: 0;
-    //             font-family: $font-family-monospace;
-    //             color: #efefef;
-    //             border: none;
-    //             word-break: break-all;
-    //             word-wrap: break-word;
-    //         }
-    //     }
-    //     code {
-    //         padding-top: 0;
-    //         padding-bottom: 0;
-    //         font-size: 90%;
-    //         word-break: break-all;
-    //         word-wrap: break-word;
-    //     }
-    // }
 
     // gross change this..
     .col-sm-9 > div:nth-child(1) > div:nth-child(1) {
@@ -370,44 +310,11 @@ $ddpurple: #632ca6;
         }
     }
 
-    // hide the code blocks by default
-    .code-block {
-        //display:none;
-    }
-    // show python by default
-    .code-block.code-block-python {
-        //display:block;
-        //visibility: visible;
-    }
-
-    .api-code code {
-        // background-color: #0f0f0f;
-        //color: rgba(50, 152, 204, 1);
-    }
-    // .api-code ul {
-    //     list-style-type: none;
-    //     padding: 0;
-    //     li {
-    //         margin: 0 0 0 0;
-    //     }
-    // }
-
-    // Breakpoint styles go here...
-
     @media (max-width: 991px) {
         .api-content {
             padding-top: 24px;
             padding-bottom: 24px;
         }
-        // .api-code {
-        //     &.empty {
-        //         background: none;
-        //         border: none;
-        //     }
-        //     & > div {
-        //         padding: 24px 15px;
-        //     }
-        // }
         .codenav {
             padding-left: 0;
         }
