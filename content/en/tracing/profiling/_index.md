@@ -112,7 +112,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 | `DD_SERVICE_NAME`                                | String        | The Datadog [service][3] name, which can be set here, or in `DD_PROFILING_TAGS`.                    |
 
 <div class="alert alert-info">
-Not recommended, advanced usage only.
+Recommended for advanced usage only.
 </div>
 
 - If you want to manually control the lifecycle of the profiler, use the `ddtrace.profiling.profiler.Profiler` object:
