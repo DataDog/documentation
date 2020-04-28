@@ -18,7 +18,7 @@ const { img_url } = configDocs[env];
 const versionSelect = document.querySelector('.js-api-version-select');
 const regionSelect = document.querySelector('.js-region-selector');
 
-const choiceOptions = {
+const regionChoiceOptions = {
     searchEnabled: false,
     placeholder: false,
     itemSelectText: '',
@@ -58,11 +58,18 @@ const choiceOptions = {
           };
     }
 }
+
+const versionChoiceOptions = {
+    searchEnabled: false,
+    placeholder: false,
+    itemSelectText: '',
+    renderSelectedChoices: false,
+}
 if (versionSelect) {
-    const choices = new Choices(versionSelect, choiceOptions);
+    const choices = new Choices(versionSelect, versionChoiceOptions);
 }
 if (regionSelect) {
-    const regionChoices = new Choices(regionSelect, choiceOptions);
+    const regionChoices = new Choices(regionSelect, regionOptions);
 }
 
 // Setup for large screen ToC
