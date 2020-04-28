@@ -299,7 +299,7 @@ Find below a summary of all available metric submission sources and methods with
 | [API][14]         | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE                |
 | [API][14]         | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                 |
 | [DogStatsD][15]   | `dog.gauge(...)`                     | GAUGE           | GAUGE                |
-| [DogStatsD][16]   | `dog.distribution(...)`              | DISTRIBUTION    | GAUGE, RATE          |
+| [DogStatsD][16]   | `dog.distribution(...)`              | DISTRIBUTION    | GAUGE, COUNT         |
 | [DogStatsD][17]   | `dog.count(...)`                     | COUNT           | RATE                 |
 | [DogStatsD][17]   | `dog.increment(...)`                 | COUNT           | RATE                 |
 | [DogStatsD][17]   | `dog.decrement(...)`                 | COUNT           | RATE                 |
