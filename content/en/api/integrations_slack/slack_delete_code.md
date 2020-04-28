@@ -1,7 +1,7 @@
 ---
 title: Delete a Slack integration
 type: apicode
-order: 20.4
+order: 20.3
 external_redirect: /api/#delete-a-slack-integration
 ---
 
