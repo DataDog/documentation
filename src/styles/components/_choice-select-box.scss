@@ -12,6 +12,14 @@ body:not(.api) {
         }
     }
 
+    .mainContent-wrapper.col-lg-9 + .region-selector-container {
+        .choices {
+            @media (min-width: 992px) {
+                top: 10px;
+            }
+        }
+    }
+
     .choices {
         width: 100px;
         margin: 0;

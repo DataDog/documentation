@@ -63,6 +63,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 }
 // Desktop TOC
 .toc-container {
+    display: none;
     &:lang(ja) {
       padding-left: 30px;
     }
@@ -184,6 +185,9 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                 }
             }
         }
+    }
+    @media (min-width: 992px) {
+        display: block;
     }
 }
 

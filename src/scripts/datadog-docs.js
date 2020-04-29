@@ -21,6 +21,7 @@ const regionSelect = document.querySelector('.js-region-selector');
 const regionChoiceOptions = {
     searchEnabled: false,
     placeholder: false,
+    shouldSort: false,
     itemSelectText: '',
     renderSelectedChoices: false,
     callbackOnCreateTemplates: function (template){
