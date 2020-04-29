@@ -11,7 +11,6 @@ import { redirectToRegion } from './region-redirects';
 import configDocs from './config/config-docs';
 
 const { env } = document.documentElement.dataset;
-console.log('env: ', env)
 const { img_url } = configDocs[env];
 
 // custom region and API version selector dropdown
