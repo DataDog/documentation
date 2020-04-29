@@ -87,7 +87,7 @@ The Datadog Agent RPM package for CentOS-based systems bundles [an SELinux polic
 
 If you need to use Network Performance Monitoring on other systems with SELinux enabled, do the following:
 
-1. Modify the base system-probe [SELinux policy][3] to match your SELinux configuration.
+1. Modify the base [SELinux policy][3] to match your SELinux configuration.
     Depending on your system, some types or attributes may not exist (or have different names).
 
 2. Compile the policy into a module; assuming your policy file is named `system_probe_policy.te`:
@@ -113,6 +113,7 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
 5. [Restart the Agent][2]
 
 **Note**: these instructions require to have some SELinux utilities installed on the system (`checkmodule`, `semodule`, `semodule_package`, `semanage` and `restorecon`) that are available on most standard distributions (Ubuntu, Debian, RHEL, CentOS, SUSE). Check your distribution for details on how to install them.
+
 If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
