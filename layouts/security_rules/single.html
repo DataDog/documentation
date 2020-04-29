@@ -9,7 +9,7 @@
 	<div class="rule-specification row align-items-center mb-3">
 		{{ $meta_image := partial "security-rule-map.html" (dict "source" .Params.source "scope" .Params.scope "ctx" .) }}
 
-		{{ if $meta_image }}
+		{{ if and $meta_image .Params.scope }}
 			<div class="col-3 col-lg-2 d-flex justify-content-center">
 				{{ $meta_img := partial "security-rule-map.html" (dict "source" .Params.source "scope" .Params.scope) }}
 				<img src="{{ $img_path }}{{ $meta_image.image }}?auto=format&width=120" width="auto" height="100px" alt="{{ htmlEscape .Title }}" />
