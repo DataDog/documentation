@@ -26,6 +26,12 @@ Most of the time the symptoms can be alleviated by tweaking some configuration o
 
 ## General tips
 
+### Use Datadog official clients
+
+Official Dogstatsd clients are provided by Datadog for every major programming language.
+Their features are optimized for usage with Dogstatsd, please use them if one exist
+for your favorite language and make sure that you are using the latest version available.
+
 ### Enable buffering on your client
 
 Some StatsD and DogStatsD clients, by default, send one metric per datagram. This adds considerable overhead on the client, the operating system, and the Agent. If your client supports buffering multiple metrics in one datagram, enabling this option brings noticeable improvements.
@@ -222,7 +228,9 @@ dogstatsd_so_rcvbuf: 26214400
 
 #### Linux
 
-Some Linux distributions have a kernel datagram queue size which can be low. This can be confirmed using the following command:
+For UDS sockets, Linux is internally buffering datagrams in a queue if the
+reader is slower than the writer. The size of this queue represents the maximum number
+of datagrams that Linux will buffer per socket. This value can be queried with the following command:
 
 ```bash
 sysctl net.unix.max_dgram_qlen
@@ -240,30 +248,28 @@ Add the following configuration to `/etc/sysctl.conf` to make this change perman
 net.unix.max_dgram_qlen = 512
 ```
 
-In the same manner, the `net.core.wmem_max` could be incremented to 25MiB to improve
+In the same manner, the `net.core.wmem_max` could be incremented to 4MiB to improve
 client writing performances:
 
 ```conf
-net.core.wmem_max = 26214400
+net.core.wmem_max = 4194304
 ```
 
-## Configuration optimization guide
+Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number in `datadog.yaml`:
 
-Dogstatsd has several configuration fields for which the default values may not be
-the more optimized values at a very high throughput.
+```yaml
+dogstatsd_so_rcvbuf: 4194304
+```
 
-Note that their most efficient configuration could also be different depending
-on the protocol used (UDS or UDP).
+Please note that setting these values will need a reboot of the host.
 
-Here's a list of different configuration profile that could be considered in a
-very high throughput setup.
-
-### Ensure proper packet sizes with UDS
+### Ensure proper packet sizes
 
 Sending packets with an adequate size to Dogstatsd will avoid extra work to the server.
 
 If the packets sent are too small, Dogstatsd will have to pack several together in order
-to process them in batches later in the pipeline.
+to process them in batches later in the pipeline. The official Dogstatsd clients are
+capable of grouping metrics to have the best ratio of the number of metrics per packet.
 
 If the clients properly send packets having a size close to `dogstatsd_buffer_size`, Dogstatsd
 will perform better. Be careful: the packets must not be larger than this size, otherwise, the
@@ -273,83 +279,26 @@ be malformed. Please use the corresponding configuration field in your Dogstatsd
 Note for UDP: as the UDP packets are most of the time going through the Ethernet and IP layer,
 they inherently have a size limited to 1472.
 
-### Limit the CPU usage
-
-Dogstatsd has to process all the metrics sent by the client but must also take care
-of not using all the resources of the host, especially the CPU.
-
-The Dogstatsd pipeline is not executed every time a metric is received, the server has
-buffering in different places in order to process metrics in batches, decreasing the
-CPU usage. By tuning these buffers and their flush frequency, you can most of the time
-observe an improvement in the CPU usage, but more memory will be needed by these buffers.
-
-Because the Dogstatsd server is using the Agent aggregator, the aggregator's buffer must
-be larger as well.
-
-For instance, here how you can increase the buffer sizes:
-
-```yaml
-dogstatsd_packet_buffer_size: 256
-dogstatsd_queue_size: 8192
-aggregator_buffer_size: 1000
-```
-
-and how to flush at a lower frequency:
-
-```yaml
-dogstatsd_packet_buffer_flush_timeout: 1s
-```
-
-With UDS, a way to improve the CPU usage is to send the packets with a size of 8kb. For
-instance on a Dogstatsd server receiving 500k metrics per second, we can observe an
-improvement of -30% CPU usage by switching from clients sending 1.5kb packets to clients
-sending 8kb packets with the configuration above used for the server.
-
-Note that as a side-effect, increasing the buffers size could decrease the amount of drops
-with UDP because Dogstatsd will have more place in memory to store data to process.
+Note for UDS: for the best performances, UDS packet should have a size of 8192 bytes.
 
 ### Limit the maximum memory usage
 
-Dogstatsd tries to absorb burst of metrics sent by a client but in order to do so,
-it needs to shortly allocate a big amount of memory. This memory is quicky released
-to the OS but a spike of memory usage happens and that could be an issue in containerized
-environments where limit on memory usage could evict pods or containers.
+Dogstatsd tries to absorb burst of metrics sent by the clients but in order to do so,
+it needs to use memory. Even if this is for a short amount of time and even if this
+memory is quickly released to the OS, a spike happens and that could be an issue in
+containerized environments where limit on memory usage could evict pods or containers.
 
-In order to avoid this, limiting the buffering in Dogstatsd will help not reaching
-this memory usage limit.
+This first thing to do to not have Dogstatsd reach its maximum memory usage is
+to avoid sending metrics in bursts in your application.
 
-The default configuration `dogstatsd_queue_size: 1024` has an approximate maximum memory usage of 768MB.
+Another thing to look at to limit the maximum memory usage is to reduce the buffering.
+The main buffer of Dogstatsd is configurable with the `dogstatsd_queue_size` field, its default value of `1024` induce an approximate maximum memory usage of 768MB. Note that reducing this
+buffer could have the caveat of increasing the number of packet drops.
 
-Reducing the `dogstatsd_queue_size` value, you can limit the Dogstatsd max memory usage. Here's an example
-decreasing the max memory usage of Dogstatsd to approximately 384MB:
+Find below an example decreasing the max memory usage of Dogstatsd to approximately 384MB:
 
 ```yaml
 dogstatsd_queue_size: 512
-```
-
-### Limit the amount of packet drops
-
-Most of time encountered while using UDP and because Dogstatsd is trying to not use all the
-resources of the host, packet drops can appear on very high throughput for different reasons,
-two of them being:
-
-* the OS kernel dropping packets because its default configuration is not optimized for this situation
-* Dogstatsd not processing fast enough all the metrics because it tries not to use all the CPU
-
-For the former, please refer to the [Operating System kernel buffer](#operating-system-kernel-buffers)
-section in order to optimize the host configuration.
-
-For the latter, it is possible to tune Dogstatsd to stress its pipeline and greatly reduce the amount
-of drops.
-
-Here is a configuration using smaller buffers, meaning that they are flushed way more often. This configuration
-is reducing the number of drops but may increase the CPU usage (by a few % during our tests):
-
-```yaml
-dogstatsd_packet_buffer_size: 8
-dogstatsd_queue_size: 512
-dogstatsd_packet_buffer_flush_timeout: 5ms
-aggregator_buffer_size: 10
 ```
 
 ## Client side telemetry
