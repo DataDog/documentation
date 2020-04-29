@@ -47,4 +47,4 @@ Datadog's log management removes these limitations by decoupling log ingestion f
 <br>
 \*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /security_monitoring
+[1]: /security_monitoring/

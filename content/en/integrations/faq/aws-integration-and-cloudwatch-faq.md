@@ -47,7 +47,7 @@ AWS CloudWatch reports metrics at one-minute granularity normalized to per minut
 Rollups don't display similar results. For a rollup call of `rollup(sum, 60)`, the server groups all data points in minute bins and returns the sum of each bin as a datapoint. However, the granularity of AWS metrics is one minute, so there is only one datapoint per bin leading to no change.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[2]: /integrations/amazon_billing
+[2]: /integrations/amazon_billing/
 [3]: /integrations/faq/cloud-metric-delay
-[4]: /help
+[4]: /help/
 [5]: /metrics/introduction/#space-aggregation

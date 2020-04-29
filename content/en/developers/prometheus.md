@@ -224,8 +224,8 @@ Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
-[2]: /agent/prometheus
+[2]: /agent/prometheus/
 [3]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
 [4]: /agent/agent_checks/#configuration
-[5]: /developers/metrics/custom_metrics
+[5]: /developers/metrics/custom_metrics/
 [6]: /agent/guide/agent-commands/#agent-status-and-information

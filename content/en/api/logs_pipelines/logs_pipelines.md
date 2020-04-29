@@ -16,7 +16,7 @@ Pipelines and processors operate on incoming logs, parsing and transforming them
 
 **Note**: These endpoints are only available for admin users. Make sure to use an application key created by an admin.
 
-[1]: /help
+[1]: /help/
 [2]: /account_management/faq/managing-global-role-permissions/#granting-permissions-within-limited-scopes
 [3]: https://app.datadoghq.com/logs/pipelines
 [4]: /logs/processing

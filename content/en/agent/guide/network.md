@@ -108,11 +108,11 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues
-[2]: /logs
-[3]: /agent/basic_agent_usage/kubernetes
-[4]: /integrations/go_expvar
+[2]: /logs/
+[3]: /agent/basic_agent_usage/kubernetes/
+[4]: /integrations/go_expvar/
 [5]: /agent/basic_agent_usage/#gui
-[6]: /tracing
+[6]: /tracing/
 {{% /tab %}}
 {{% tab "Agent v5 & v4" %}}
 
@@ -135,7 +135,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 
 [1]: /agent/faq/network-time-protocol-ntp-offset-issues
-[2]: /tracing
+[2]: /tracing/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -147,13 +147,13 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing
-[2]: /infrastructure/livecontainers
-[3]: /logs
+[1]: /tracing/
+[2]: /infrastructure/livecontainers/
+[3]: /logs/
 [4]: https://ip-ranges.datadoghq.com
 [5]: https://ip-ranges.datadoghq.eu
 [6]: https://ip-ranges.datadoghq.com/logs.json
 [7]: https://ip-ranges.datadoghq.eu/logs.json
 [8]: https://ip-ranges.datadoghq.com/apm.json
 [9]: https://ip-ranges.datadoghq.eu/apm.json
-[10]: /agent/proxy
+[10]: /agent/proxy/

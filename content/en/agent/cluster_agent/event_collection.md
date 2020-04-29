@@ -38,4 +38,4 @@ Enabling the leader election in this way ensures that only one Cluster Agent col
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/cluster_agent/setup
+[1]: /agent/cluster_agent/setup/

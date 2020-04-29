@@ -331,7 +331,7 @@ The monitors link is customizable with additional parameters. The most common ar
 | `muted`   | `muted: true`  | Muted monitors (use `false` for non-muted monitors)                             |
 | `type`    | `type:log`     | Log monitors (see other [monitor types][1])                                     |
 
-[1]: /monitors/monitor_types
+[1]: /monitors/monitor_types/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -377,17 +377,17 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types
+[1]: /monitors/monitor_types/
 [2]: http://daringfireball.net/projects/markdown/syntax
-[3]: /integrations/jira
+[3]: /integrations/jira/
 [4]: /integrations/jira/#use-cases
-[5]: /integrations/pagerduty
+[5]: /integrations/pagerduty/
 [6]: /integrations/pagerduty/#troubleshooting
-[7]: /integrations/slack
+[7]: /integrations/slack/
 [8]: /integrations/slack/#mentions-in-slack-from-monitor-alert
-[9]: /integrations/webhooks
+[9]: /integrations/webhooks/
 [10]: /integrations/webhooks/#usage
 [11]: https://docs.datadoghq.com/integrations/#cat-collaboration
-[12]: /events
+[12]: /events/
 [13]: /monitors/guide/template-variable-evaluation
 [14]: /monitors/faq/what-are-recovery-thresholds

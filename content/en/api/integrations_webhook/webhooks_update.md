@@ -19,5 +19,5 @@ All arguments associated with this request are optional.
 -   **`custom_headers`**: If `null`, uses no header. If given a JSON value, attaches the specified headers to your webhook.
 -   **`encode_as`**: Encoding type. Valid values are `json` and `form`.
 
-[1]: /monitors/notifications
+[1]: /monitors/notifications/
 [2]: /integrations/webhooks/#usage

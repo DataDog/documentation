@@ -22,4 +22,4 @@ Any log exceeding 256KB is accepted and truncated by Datadog:
 
 **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log endpoint is: `http-intake.logs.datadoghq.eu`.
 
-[1]: /help
+[1]: /help/

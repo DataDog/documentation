@@ -108,7 +108,7 @@ To add retentions that are not in your current contract contact [Datadog support
 ## Set daily quota
 
 You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e. after exclusion filters are applied).
-Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][19], [sent to your archives][20], and used to [generate metrics from logs][21].
+Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][19], [sent to your archives][10], and used to [generate metrics from logs][11].
 
 Update or remove this quota at any time when editing the Index:
 
@@ -122,24 +122,22 @@ Update or remove this quota at any time when editing the Index:
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /logs/indexes
+[1]: /logs/indexes/
 [2]: /logs/explorer/#visualization
-[3]: /logs/explorer/patterns
-[4]: /logs/explorer/analytics
+[3]: /logs/explorer/patterns/
+[4]: /logs/explorer/analytics/
 [5]: /logs/explorer/analytics/#dashboard
-[6]: /monitors/monitor_types/log
-[7]: /account_management/rbac
+[6]: /monitors/monitor_types/log/
+[7]: /account_management/rbac/
 [8]: /logs/explorer/facets/#the-index-facet
-[9]: /logs/live_tail
-[10]: /logs/archives
-[11]: /logs/logs_to_metrics
+[9]: /logs/live_tail/
+[10]: /logs/archives/
+[11]: /logs/logs_to_metrics/
 [12]: /logs/search_syntax/
 [13]: /api/?lang=bash#update-an-index
 [14]: /logs/processing/processors/?tab=ui#user-agent-parser
 [15]: /logs/processing/processors/?tab=ui#geoip-parser
 [16]: /tracing/connect_logs_and_traces/
 [17]: /logs/processing/processors/?tab=ui#trace-remapper
-[18]: /help
+[18]: /help/
 [19]: /logs/live_tail/#overview
-[20]: /logs/archives/
-[21]: /logs/logs_to_metrics/

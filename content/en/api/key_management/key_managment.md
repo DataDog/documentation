@@ -15,5 +15,5 @@ You need an API and applications key with Admin rights to interact with this end
 
 **The full list of keys can be seen on your [Datadog API page][2].**
 
-[1]: /help
+[1]: /help/
 [2]: https://app.datadoghq.com/account/settings#api

@@ -67,4 +67,4 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/host
-[2]: /monitors/notifications
+[2]: /monitors/notifications/

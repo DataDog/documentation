@@ -45,6 +45,6 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource`..
 *   **`metrics`** - _optional_ A set of key-value metadata. Keys must be strings and values must be 64-bit floating point numbers.
 
 [1]: /tracing/#instrument-your-application
-[2]: /tracing/visualization/trace
+[2]: /tracing/visualization/trace/
 [3]: /tracing/visualization/trace/#spans
-[4]: /tracing/visualization/services_list
+[4]: /tracing/visualization/services_list/

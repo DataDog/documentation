@@ -120,7 +120,7 @@ Monitor tags are independent of tags sent by the Agent or integrations. Add tags
 [2]: /monitors/monitor_status/#properties
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [4]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
-[5]: /monitors/monitor_types
+[5]: /monitors/monitor_types/
 [6]: /monitors/monitor_status/#resolve
 [7]: https://app.datadoghq.com/monitors/triggered
 [8]: https://app.datadoghq.com/monitors#downtime

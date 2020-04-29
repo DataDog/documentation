@@ -269,5 +269,5 @@ This section displays the number of packets received by the DogStatsD server for
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/guide/agent-commands/#agent-information
-[2]: /agent/troubleshooting/ntp
+[2]: /agent/troubleshooting/ntp/
 [3]: /agent/faq/how-datadog-agent-determines-the-hostname

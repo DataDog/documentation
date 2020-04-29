@@ -48,9 +48,9 @@ Use [template variables][3] to save time switching the **from** tag on graphs in
 
 {{< img src="tagging/using_tags/dashboardtemplatevariables.png" alt="Dashboard Template Variables"  style="width:80%;">}}
 
-[1]: /dashboards
-[2]: /events
-[3]: /dashboards/template_variables
+[1]: /dashboards/
+[2]: /events/
+[3]: /dashboards/template_variables/
 {{% /tab %}}
 {{% tab "Examples" %}}
 
@@ -118,7 +118,7 @@ To filter monitors by [assigned tags][1], use the search bar or facet checkboxes
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Manage Monitors Tags"  style="width:80%;">}}
 
-[1]: /tagging/assigning_tags
+[1]: /tagging/assigning_tags/
 {{% /tab %}}
 
 {{% tab "New Monitor" %}}
@@ -133,7 +133,7 @@ When creating a [monitor][1], use metric tags in the:
 
 {{< img src="tagging/using_tags/newmonitortags.png" alt="New Monitor Tags"  style="width:80%;">}}
 
-[1]: /monitors/monitor_types
+[1]: /monitors/monitor_types/
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}
 
@@ -141,7 +141,7 @@ To filter [downtimes][1] by monitor tag, type the tag name in the search bar, fo
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="Manage Monitors Tags"  style="width:80%;">}}
 
-[1]: /monitors/downtimes
+[1]: /monitors/downtimes/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -222,7 +222,7 @@ For [Trace Search][1], filter traces with tags using the search bar or facet che
 
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags"  style="width:80%;">}}
 
-[1]: /tracing/app_analytics/search
+[1]: /tracing/app_analytics/search/
 [2]: /tracing/app_analytics/search/#search-bar
 {{% /tab %}}
 {{% tab "Service Map" %}}
@@ -231,11 +231,11 @@ After [assigning tags][1], use the Service Map to jump to different areas of the
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Service Map Tags"  style="width:80%;">}}
 
-[1]: /tagging/assigning_tags
-[2]: /tracing/app_analytics/search
-[3]: /monitors/manage_monitor
-[4]: /logs/explorer/search
-[5]: /infrastructure/hostmap
+[1]: /tagging/assigning_tags/
+[2]: /tracing/app_analytics/search/
+[3]: /monitors/manage_monitor/
+[4]: /logs/explorer/search/
+[5]: /infrastructure/hostmap/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -301,21 +301,21 @@ Tags can be used in various ways with the [API][15]. See the list below for link
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging/assigning_tags
-[2]: /events
-[3]: /integrations
-[4]: /infrastructure/hostmap
-[5]: /infrastructure
-[6]: /infrastructure/livecontainers
-[7]: /infrastructure/process
-[8]: /metrics/explorer
-[9]: /notebooks
-[10]: /logs/explorer/search
-[11]: /logs/explorer/analytics
-[12]: /logs/explorer/patterns
-[13]: /logs/live_tail
-[14]: /logs/processing/pipelines
-[15]: /api
+[1]: /tagging/assigning_tags/
+[2]: /events/
+[3]: /integrations/
+[4]: /infrastructure/hostmap/
+[5]: /infrastructure/
+[6]: /infrastructure/livecontainers/
+[7]: /infrastructure/process/
+[8]: /metrics/explorer/
+[9]: /notebooks/
+[10]: /logs/explorer/search/
+[11]: /logs/explorer/analytics/
+[12]: /logs/explorer/patterns/
+[13]: /logs/live_tail/
+[14]: /logs/processing/pipelines/
+[15]: /api/
 [16]: /api/?lang=python#schedule-monitor-downtime
 [17]: /api/?lang=python#query-the-event-stream
 [18]: /api/?lang=python#search-hosts

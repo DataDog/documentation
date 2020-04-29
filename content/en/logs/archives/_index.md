@@ -86,7 +86,7 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [4]: /integrations/amazon_web_services/?tab=allpermissions#installation
-[5]: /logs/archives/rehydrating
+[5]: /logs/archives/rehydrating/
 [6]: https://app.datadoghq.com/logs/pipelines/archives
 [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
 {{% /tab %}}
@@ -182,4 +182,4 @@ Logs enter the first archive whose filter they match on.
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /logs/archives/rehydrating
+[1]: /logs/archives/rehydrating/

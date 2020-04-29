@@ -59,7 +59,7 @@ Once a role is created you can [add this role to existing users][3].
 
 
 [1]: https://app.datadoghq.com/access/roles
-[2]: /account_management/rbac/permissions
+[2]: /account_management/rbac/permissions/
 [3]: /account_management/users/#edit-a-user-roles
 {{% /tab %}}
 {{% tab "API" %}}
@@ -89,7 +89,7 @@ Once a role is modified, all users who have the role will have their permissions
 
 
 [1]: https://app.datadoghq.com/access/roles
-[2]: /account_management/rbac/permissions
+[2]: /account_management/rbac/permissions/
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -133,9 +133,9 @@ Find an example of how to delete a Role in the [Datadog Create Role API document
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards
-[2]: /monitors
-[3]: /events
-[4]: /notebooks
+[1]: /dashboards/
+[2]: /monitors/
+[3]: /events/
+[4]: /notebooks/
 [5]: /api/#roles
-[6]: /account_management/rbac/permissions
+[6]: /account_management/rbac/permissions/

@@ -75,5 +75,5 @@ If you're still unsure about the issue, reach out to the [Datadog support team][
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
-[2]: /agent/troubleshooting/send_a_flare
+[1]: /help/
+[2]: /agent/troubleshooting/send_a_flare/

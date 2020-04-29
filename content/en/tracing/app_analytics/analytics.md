@@ -133,11 +133,11 @@ Export [App Analytics][1] from the Trace search or build them directly in your [
 [2]: /tracing/visualization/#apm-event
 [3]: /tracing/visualization/#services
 [4]: /tracing/app_analytics/search/#facets
-[5]: /tagging
+[5]: /tagging/
 [6]: /tracing/app_analytics/search/#measures
 [7]: /tracing/visualization/#trace
-[8]: /monitors/monitor_types/apm
-[9]: /dashboards/timeboard
-[10]: /help
-[11]: /dashboards
-[12]: /dashboards/widgets/timeseries
+[8]: /monitors/monitor_types/apm/
+[9]: /dashboards/timeboard/
+[10]: /help/
+[11]: /dashboards/
+[12]: /dashboards/widgets/timeseries/

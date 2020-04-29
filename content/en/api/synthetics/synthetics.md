@@ -15,4 +15,4 @@ You can use Datadog's API to create Synthetics API tests programmatically. API t
 
 For more information about Synthetics, see the [Synthetics overview][1].
 
-[1]: /synthetics
+[1]: /synthetics/

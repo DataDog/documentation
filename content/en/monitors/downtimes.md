@@ -100,8 +100,8 @@ All alerted states are included on the [weekly monitor report][8] even if the mo
 [1]: https://app.datadoghq.com/monitors#/downtime
 [2]: http://daringfireball.net/projects/markdown/syntax
 [3]: /integrations/#cat-notification
-[4]: /monitors/monitor_status
+[4]: /monitors/monitor_status/
 [5]: /events/#event-stream
 [6]: /api/#cancel-monitor-downtime
-[7]: /help
+[7]: /help/
 [8]: /account_management/#preferences

@@ -47,7 +47,7 @@ Interpolation is not performed for multi-part queries, for example: `avg:system.
 
 ## How to control interpolation?
 
-The default interpolation for all metric types is linear and performed up to five minutes after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers when used on any [metric type][2].
+The default interpolation for all metric types is linear and performed up to five minutes after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers when used on any [metric type][1].
 
 The `.fill()` modifier controls interpolation parameters:
 
@@ -66,7 +66,7 @@ Since graphs are just a series of data points joined by lines, a long period wit
 In contrast, a monitor uses a rollup of a time frame to evaluate interpolated values and calculate averages.
 
 **I have disabled interpolation but I see my metrics dropping to 0 which is not expected.**
-These artificial dips are caused by front-end visualization enhancement. [See this article for more information][3].
+These artificial dips are caused by front-end visualization enhancement. [See this article for more information][2].
 
 **How to choose the interpolation method?**
 The default interpolation method (which is chosen based on a metric's type) is usually fine, but it is sometimes desirable to override these defaults.
@@ -75,6 +75,5 @@ Linear interpolation is a great fit for metrics reported on a steady basis from 
 
 Null prevents graphs from displaying interpolated values 5 min after the last real value.
 
-[1]: /dashboards/functions
-[2]: /developers/metrics/types
-[3]: /dashboards/faq/i-see-unexpected-drops-to-zero-on-my-graph-why
+[1]: /developers/metrics/types/
+[2]: /dashboards/faq/i-see-unexpected-drops-to-zero-on-my-graph-why

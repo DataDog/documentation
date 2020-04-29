@@ -23,9 +23,9 @@ Regarding API rate limit policy:
 * The rate limit for the [graph_snapshot API][6] call is `60` per hour per organization. This can be extended on demand.
 * The rate limit for the [Log Configuration API][7] is `6000` per minute per organization. This can be extended on demand.
 
-[1]: /help
+[1]: /help/
 [2]: /api/#metrics
-[3]: /developers/metrics/custom_metrics
+[3]: /developers/metrics/custom_metrics/
 [4]: /api/#query-timeseries-points
 [5]: /api/?lang=bash#get-a-list-of-logs
 [6]: /api/#graphs

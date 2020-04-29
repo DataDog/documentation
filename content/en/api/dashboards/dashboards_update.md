@@ -49,4 +49,4 @@ external_redirect: /api/#update-a-dashboard
       * **`value`** [*optional*, *default*=**None**]:
         The value of the template variable within the saved view.
 
-[1]: /dashboards/widgets
+[1]: /dashboards/widgets/

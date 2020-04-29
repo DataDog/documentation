@@ -162,10 +162,10 @@ To install the Datadog Agent on your Kubernetes cluster:
 [7]: /resources/yaml/datadog-agent-npm.yaml
 [8]: /resources/yaml/datadog-agent-vanilla.yaml
 [9]: /agent/kubernetes/apm/#setup
-[10]: /agent/kubernetes/log
-[11]: /agent/kubernetes/apm
+[10]: /agent/kubernetes/log/
+[11]: /agent/kubernetes/apm/
 [12]: /infrastructure/process/?tab=kubernetes#installation
-[13]: /network_performance_monitoring/installation
+[13]: /network_performance_monitoring/installation/
 [14]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [15]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
@@ -267,7 +267,7 @@ See the [Kubernetes Tag Extraction][10] documentation to learn more.
 
 ### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][13].
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][11].
 
 ### Ignore containers
 
@@ -278,7 +278,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
 | `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
-Additional examples are available on the [Container Discover Management][11] page.
+Additional examples are available on the [Container Discover Management][12] page.
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
@@ -295,22 +295,22 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 
 ## Commands
 
-See the [Agent Commands guides][12] to discover all the Docker Agent commands.
+See the [Agent Commands guides][13] to discover all the Docker Agent commands.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/kubernetes-legacy
-[2]: /agent/kubernetes/integrations
+[2]: /agent/kubernetes/integrations/
 [3]: https://github.com/helm/charts/tree/master/stable/datadog#all-configuration-options
 [4]: /agent/proxy/#agent-v6
-[5]: /agent/kubernetes/apm
-[6]: /agent/kubernetes/log
-[7]: /infrastructure/process
-[8]: /infrastructure/livecontainers
-[9]: /developers/dogstatsd
-[10]: /agent/kubernetes/tag
-[11]: /agent/guide/autodiscovery-management/
-[12]: /agent/guide/agent-commands/
-[13]: /security/agent/#secrets-management
+[5]: /agent/kubernetes/apm/
+[6]: /agent/kubernetes/log/
+[7]: /infrastructure/process/
+[8]: /infrastructure/livecontainers/
+[9]: /developers/dogstatsd/
+[10]: /agent/kubernetes/tag/
+[11]: /security/agent/#secrets-management
+[12]: /agent/guide/autodiscovery-management/
+[13]: /agent/guide/agent-commands/

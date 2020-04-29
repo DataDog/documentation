@@ -226,8 +226,8 @@ For guidelines on creating additional implementation options, refer to the [data
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/dogstatsd_metrics_submission
-[2]: /developers/metrics/custom_metrics
+[1]: /developers/metrics/dogstatsd_metrics_submission/
+[2]: /developers/metrics/custom_metrics/
 [3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
 [4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
 [5]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds

@@ -16,4 +16,4 @@ Get Top [Custom Metrics][1] By Hourly Average.
 * **`names`** [*optional*, *default*=**None**]:
     Comma-separated list of metric names.
 
-[1]: /developers/metrics/custom_metrics
+[1]: /developers/metrics/custom_metrics/

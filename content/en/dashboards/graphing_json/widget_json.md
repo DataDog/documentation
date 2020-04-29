@@ -231,4 +231,4 @@ For instance, to indicate that you want a 10-minute timeframe, use the following
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/querying/#graphing-editor
-[2]: /events
+[2]: /events/

@@ -100,11 +100,11 @@ Events generated from your monitor (alerts, warnings, recoveries, etc.) are show
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types
-[2]: /monitors/downtimes
+[1]: /monitors/monitor_types/
+[2]: /monitors/downtimes/
 [3]: /api/?lang=python#monitors
-[4]: /dashboards/querying
-[5]: /monitors/notifications
-[6]: /dashboards
-[7]: /notebooks
-[8]: /events
+[4]: /dashboards/querying/
+[5]: /monitors/notifications/
+[6]: /dashboards/
+[7]: /notebooks/
+[8]: /events/

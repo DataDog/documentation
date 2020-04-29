@@ -93,9 +93,9 @@ The following Agent configuration options were changed or removed in Agent v6. C
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/guide/upgrade-to-agent-v6
 [3]: /agent/proxy/
-[4]: /integrations/disk
-[5]: /logs
-[6]: /integrations/amazon_web_services
+[4]: /integrations/disk/
+[5]: /logs/
+[6]: /integrations/amazon_web_services/
 {{% /tab %}}
 {{% tab "Checks" %}}
 
@@ -304,7 +304,7 @@ apm_config:
 
 For the Docker image, the APM Agent is disabled by default. Enable it by setting `DD_APM_ENABLED` to `true`. It listens to all interfaces by default. If you want to listen to non-local traffic on any other platform, set `DD_APM_NON_LOCAL_TRAFFIC` to `true`. For more details, see [Tracing Docker Applications][1].
 
-[1]: /agent/docker/apm
+[1]: /agent/docker/apm/
 {{% /tab %}}
 {{% tab "Process Agent" %}}
 
@@ -349,7 +349,7 @@ Some options have moved from `docker_daemon.yaml` to the main `datadog.yaml`:
 
 [1]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
 [2]: /agent/docker/tag/
-[3]: /agent/kubernetes/management
+[3]: /agent/kubernetes/management/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -380,9 +380,9 @@ The following options and tags are deprecated:
 * `container_alias` tags are not collected.
 * `kube_replicate_controller` is only added if the pod is created by a replication controller. Instead, use the relevant creator tag (`kube_deployment`, `kube_daemon_set`, etc.).
 
-[1]: /integrations/kubelet
-[2]: /integrations/kube_apiserver_metrics
-[3]: /help
+[1]: /integrations/kubelet/
+[2]: /integrations/kube_apiserver_metrics/
+[3]: /help/
 [4]: /agent/kubernetes/
 [5]: /agent/kubernetes/tag/#extract-node-labels-as-tags
 {{% /tab %}}

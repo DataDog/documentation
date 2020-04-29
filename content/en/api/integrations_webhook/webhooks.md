@@ -12,5 +12,5 @@ external_redirect: /api/#integration-webhooks
 Configure your Datadog-Webhooks integration directly through the Datadog API.
 For more information about the Datadog-Webhooks integration, see the [integration page][2].
 
-[1]: /help
-[2]: /integrations/webhooks
+[1]: /help/
+[2]: /integrations/webhooks/

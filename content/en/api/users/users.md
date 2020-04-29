@@ -9,4 +9,4 @@ external_redirect: /api/#users
 
 Create, edit, and disable users. [Read more about your users management][1]
 
-[1]: /account_management/users
+[1]: /account_management/users/

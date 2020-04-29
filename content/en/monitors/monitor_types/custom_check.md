@@ -82,13 +82,13 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations
-[2]: /developers/write_agent_check
-[3]: /developers/dogstatsd
+[1]: /integrations/
+[2]: /developers/write_agent_check/
+[3]: /developers/dogstatsd/
 [4]: /api/?lang=python#service-checks
 [5]: https://app.datadoghq.com/monitors#create/custom
-[6]: /monitors/monitor_types/metric
+[6]: /monitors/monitor_types/metric/
 [7]: /monitors/monitor_types/metric/#no-data
 [8]: /monitors/monitor_types/metric/#auto-resolve
 [9]: /monitors/monitor_types/metric/#evaluation-delay
-[10]: /monitors/notifications
+[10]: /monitors/notifications/

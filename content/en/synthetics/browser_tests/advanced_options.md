@@ -61,5 +61,5 @@ Opening your subtest in the main tab means that your subtest is the continuation
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/browser_tests/
-[2]: /synthetics/browser_tests/actions
+[2]: /synthetics/browser_tests/actions/
 [3]: /synthetics/browser_tests/actions/#subtests

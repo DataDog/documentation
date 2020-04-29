@@ -147,7 +147,7 @@ See the following GitHub issues for more information and other potential methods
 [1]: /agent/guide/agent-commands
 [2]: /agent/guide/agent-log-files
 [3]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port
-[4]: /agent/faq/network
+[4]: /agent/faq/network/
 [5]: /agent/guide/agent-commands/#start-the-agent
-[6]: /help
-[7]: /integrations/process
+[6]: /help/
+[7]: /integrations/process/

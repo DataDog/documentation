@@ -82,5 +82,5 @@ The **`assertions`**  argument is required for the API and SSL tests. It allows 
 | `property`     | `contains`, `does not contain`, `is`, `is not`, `matches`, `does not match` | String for: `contains`/`does not contain`/`is`/`is not`. [RegexString][3] for: `matches`/`does not match`. |
 
 [1]: /synthetics/browser_tests/#record-test
-[2]: /tagging/using_tags
+[2]: /tagging/using_tags/
 [3]: https://en.wikipedia.org/wiki/Regular_expression

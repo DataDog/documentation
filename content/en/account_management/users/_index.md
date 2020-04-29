@@ -76,5 +76,5 @@ Only user with Privileged Access, such as users with the Datadog Admin Role, can
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/users/default_roles
+[1]: /account_management/users/default_roles/
 [2]: /account_management/rbac/

@@ -18,4 +18,4 @@ Get the list of actively reporting metrics from a given time until now. This end
 * **`host`** [*optional*]:
     Hostname for filtering the list of metrics returned. If set, metrics retrieved are those with the corresponding hostname tag.
 
-[1]: /help
+[1]: /help/

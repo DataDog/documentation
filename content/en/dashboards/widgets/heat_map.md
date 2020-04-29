@@ -120,9 +120,9 @@ Additional properties allowed in the `requests` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /events
-[2]: /dashboards/template_variables
-[3]: /dashboards/graphing_json/widget_json
-[4]: /dashboards/graphing_json/request_json
+[1]: /events/
+[2]: /dashboards/template_variables/
+[3]: /dashboards/graphing_json/widget_json/
+[4]: /dashboards/graphing_json/request_json/
 [5]: /dashboards/graphing_json/widget_json/#y-axis-schema
 [6]: /dashboards/graphing_json/widget_json/#events-schema

@@ -14,4 +14,4 @@ The component of your infrastructure responsible for a tag is identified by a so
 
 [Read more about tags on the dedicated documentation page][1].
 
-[1]: /tagging
+[1]: /tagging/

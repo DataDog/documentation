@@ -23,4 +23,4 @@ Get Hourly Usage For [Synthetics API Checks][1].
 * **`hour`**:
     The hour for the usage.
 
-[1]: /synthetics
+[1]: /synthetics/

@@ -37,4 +37,4 @@ Instance: localhost:9012
 [...]
 ```
 
-[1]: /integrations/java
+[1]: /integrations/java/

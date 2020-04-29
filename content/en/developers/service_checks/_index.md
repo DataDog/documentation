@@ -86,5 +86,5 @@ Learn how to write an integration with the [integration developer documentation]
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
 [3]: https://app.datadoghq.com/monitors#create/custom
-[4]: /monitors/notifications
-[5]: /developers/integrations
+[4]: /monitors/notifications/
+[5]: /developers/integrations/

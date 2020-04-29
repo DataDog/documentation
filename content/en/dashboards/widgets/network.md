@@ -89,5 +89,5 @@ The dedicated [widget JSON schema definition][2] for the network widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_performance_monitoring
-[2]: /dashboards/graphing_json/widget_json
+[1]: /network_performance_monitoring/
+[2]: /dashboards/graphing_json/widget_json/

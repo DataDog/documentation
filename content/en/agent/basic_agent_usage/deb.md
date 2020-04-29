@@ -80,7 +80,7 @@ Configuration files for [Integrations][1]:
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -92,7 +92,7 @@ Configuration files for [Integrations][1]:
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -112,5 +112,5 @@ See the instructions on how to [add packages to the embedded Agent][4] for more 
 
 [1]: https://app.datadoghq.com/account/settings#agent/debian
 [2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-[3]: /agent/troubleshooting
+[3]: /agent/troubleshooting/
 [4]: /developers/guide/custom-python-package

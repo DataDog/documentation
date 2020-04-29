@@ -149,20 +149,20 @@ To change the default values for each of the reserved attributes, go to the [Con
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/pipelines
-[2]: /logs/processing/processors
+[1]: /logs/processing/pipelines/
+[2]: /logs/processing/processors/
 [3]: /logs/processing/processors/#attribute-remapper
 [4]: /logs/processing/processors/#grok-parser
 [5]: https://app.datadoghq.com/logs/pipelines
-[6]: /logs/processing/attributes_naming_convention
+[6]: /logs/processing/attributes_naming_convention/
 [7]: /logs/processing/pipelines/#integration-pipelines
 [8]: /logs/processing/pipelines/#pipeline-filters
-[9]: /logs/processing/parsing
+[9]: /logs/processing/parsing/
 [10]: /logs/faq/log-parsing-best-practice
 [11]: /logs/faq/how-to-investigate-a-log-parsing-issue
 [12]: /logs/processing/processors/#log-date-remapper
 [13]: /logs/explorer/?tab=logstream#visualization
-[14]: /logs/explorer/search
+[14]: /logs/explorer/search/
 [15]: /logs/processing/processors/#log-status-remapper
 [16]: /logs/faq/integration-pipeline-reference
 [17]: /agent/docker/log/#examples

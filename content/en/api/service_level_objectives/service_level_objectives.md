@@ -13,5 +13,5 @@ external users.
 
 For more information on creating SLOs, see the [Configuring Service Level Objectives info][2].
 
-[1]: /monitors/service_level_objectives
+[1]: /monitors/service_level_objectives/
 [2]: /monitors/service_level_objectives/#configuration

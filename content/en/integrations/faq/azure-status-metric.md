@@ -55,5 +55,5 @@ azure provider register Microsoft.ResourceHealth
 
 The `azure.*.status` metric should show in Datadog within 5 - 10 minutes.
 
-[1]: /integrations/azure
-[2]: /help
+[1]: /integrations/azure/
+[2]: /help/

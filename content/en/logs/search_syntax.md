@@ -131,8 +131,8 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/facets
-[2]: /infrastructure
+[1]: /logs/explorer/facets/
+[2]: /infrastructure/
 [3]: /integrations/#cat-log-collection
 [4]: /tagging/#tags-best-practices
-[5]: /logs/explorer/saved_views
+[5]: /logs/explorer/saved_views/

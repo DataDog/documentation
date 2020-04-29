@@ -11,12 +11,12 @@ List endpoint returns logs that match a log search query. [Results are paginated
 
 **If you are thinking about archiving logs for your organization, consider using Datadog archive capabilities instead of the log list API. See [Datadog Logs Archive documentation][2].**
 
-Logs results are scoped by [permissions][5] attached to the Application Key used.
+Logs results are scoped by [permissions][3] attached to the Application Key used.
 
 **ARGUMENTS**:
 
 * **`query`** [*required*]:
-    The search query - following the [Log search syntax][3] .
+    The search query - following the [Log search syntax][4] .
 * **`time.from`** [*required*]:
     Minimum timestamp for requested logs. Format can be either
     - an ISO-8601 string
@@ -41,10 +41,10 @@ Logs results are scoped by [permissions][5] attached to the Application Key used
     Number of logs return in the response (maximum is 1000)
 * **`index`** [*optional*, *default*=`"*"`]:
     - Coma separated list of index names. For isntance: `"retention-15,retention-30"`. Setting `"*"` stands for all indexes.
-    - For [multi-index organizations][4], the log index in which the request is performed.    
+    - For [multi-index organizations][5], the log index in which the request is performed.    
 
 [1]: /logs/guide/collect-multiple-logs-with-pagination
-[2]: /logs/archives
-[3]: /logs/search_syntax
-[4]: /logs/indexes#multiple-indexes
-[5]: /account_management/rbac/permissions/?tab=datadogapplication#log-management
+[2]: /logs/archives/
+[3]: /account_management/rbac/permissions/?tab=datadogapplication#log-management
+[4]: /logs/search_syntax/
+[5]: /logs/indexes/#multiple-indexes

@@ -179,12 +179,12 @@ For technical questions, contact [Datadog support][26].
 
 For billing questions, contact your [Customer Success][9] Manager.
 
-[1]: /integrations
-[2]: /developers/metrics/custom_metrics
+[1]: /integrations/
+[2]: /developers/metrics/custom_metrics/
 [3]: /developers/metrics/types/#metric-types
-[4]: /account_management/users/default_roles
+[4]: /account_management/users/default_roles/
 [5]: https://app.datadoghq.com/account/usage/hourly
-[6]: /account_management/billing/usage_details
+[6]: /account_management/billing/usage_details/
 [7]: https://app.datadoghq.com/metric/summary
 [8]: mailto:sales@datadoghq.com
 [9]: mailto:success@datadoghq.com
@@ -204,4 +204,4 @@ For billing questions, contact your [Customer Success][9] Manager.
 [23]: /integrations/postgres
 [24]: /integrations/sqlserver
 [25]: /integrations/amazon_web_services
-[26]: /help
+[26]: /help/

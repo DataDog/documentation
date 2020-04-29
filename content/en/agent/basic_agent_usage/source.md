@@ -62,7 +62,7 @@ Configuration files for [Integrations][1]:
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -74,7 +74,7 @@ Configuration files for [Integrations][1]:
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -87,4 +87,4 @@ Configuration files for [Integrations][1]:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/source
-[2]: /agent/troubleshooting
+[2]: /agent/troubleshooting/

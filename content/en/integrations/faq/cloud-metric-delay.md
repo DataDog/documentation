@@ -61,4 +61,4 @@ On the Datadog side for the AWS, Azure, and GCP integrations, we may be able to 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
-[2]: /help
+[2]: /help/

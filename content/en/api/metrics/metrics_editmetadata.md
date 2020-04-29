@@ -24,4 +24,4 @@ The metrics metadata endpoint allows you to edit fields of a metric's metadata.
 * **`statsd_interval`** [*optional*, *default*=**None**]:
     If applicable, statds flush interval in seconds for the metric
 
-[1]: /developers/metrics
+[1]: /developers/metrics/

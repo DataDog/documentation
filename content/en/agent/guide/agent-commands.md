@@ -34,8 +34,8 @@ List of commands to start the Datadog Agent:
 | Source   | `sudo service datadog-agent start`                             |
 | Windows  | [See the dedicated Windows documentation][2]                   |
 
-[1]: /agent/docker
-[2]: /agent/basic_agent_usage/windows
+[1]: /agent/docker/
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -48,7 +48,7 @@ List of commands to start the Datadog Agent:
 | Windows  | [See the dedicated Windows documentation][2] |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -69,8 +69,8 @@ List of commands to stop the Datadog Agent:
 | Source   | `sudo service datadog-agent stop`                             |
 | Windows  | [See the dedicated Windows documentation][2]                  |
 
-[1]: /agent/docker
-[2]: /agent/basic_agent_usage/windows
+[1]: /agent/docker/
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -83,7 +83,7 @@ List of commands to stop the Datadog Agent:
 | Windows  | [See the dedicated Windows documentation][2] |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -103,8 +103,8 @@ List of commands to restart the Datadog Agent:
 | Source   | *unsupported Platform*                            |
 | Windows  | [See the dedicated Windows documentation][2]      |
 
-[1]: /agent/docker
-[2]: /agent/basic_agent_usage/windows
+[1]: /agent/docker/
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -117,7 +117,7 @@ List of commands to restart the Datadog Agent:
 | Windows  | [See the dedicated Windows documentation][2] |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 

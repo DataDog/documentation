@@ -11,4 +11,4 @@ The events service allows you to programatically post events to the [event strea
 
 Events are limited to 4000 characters. If an event is sent out with a message containing more than 4000 characters only the 4000 first characters are displayed.
 
-[1]: /events
+[1]: /events/

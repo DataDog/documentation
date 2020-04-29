@@ -17,4 +17,4 @@ external_redirect: /api/#cancel-monitor-downtime-by-scope
     *  **env:prod**
     *  **role:db,role:db-slave**
 
-[1]: /help
+[1]: /help/

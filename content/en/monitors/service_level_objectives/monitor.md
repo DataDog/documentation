@@ -58,7 +58,7 @@ Confirm you are using the preferred SLI type for your use case. Datadog supports
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors
+[1]: /monitors/
 [2]: https://app.datadoghq.com/slo
 [3]: https://app.datadoghq.com/slo/new/monitor
 [4]: https://app.datadoghq.com/monitors#create

@@ -41,5 +41,5 @@ The full payload is approximately \~ 100 bytes. However, with the DogStatsD API,
     * **`tags`** [*optional*, *default*=**None**]:
         A list of tags associated with the metric.
 
-[1]: /developers/dogstatsd
-[2]: /developers/metrics/types
+[1]: /developers/dogstatsd/
+[2]: /developers/metrics/types/

@@ -64,11 +64,11 @@ The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents netwo
 In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][6].
 
 [1]: /developers/metrics/dogstatsd_metrics_submission/#metrics
-[2]: /tracing/guide/terminology
+[2]: /tracing/guide/terminology/
 [3]: /agent/guide/network/#open-ports
 [4]: /developers/write_agent_check/
 [5]: https://github.com/etsy/statsd
-[6]: /developers/metrics/dogstatsd_metrics_submission
+[6]: /developers/metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -104,11 +104,11 @@ The recommended number of open file descriptors is 1024. You can see this value 
 minfds = 100  # Your hard limit
 ```
 
-[1]: /integrations
-[2]: /developers/metrics/custom_metrics
+[1]: /integrations/
+[2]: /developers/metrics/custom_metrics/
 [3]: /agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /agent/proxy/?tab=agentv5
-[5]: /agent/faq/network
+[5]: /agent/faq/network/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -152,16 +152,16 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
 [1]: /agent/basic_agent_usage/amazonlinux/
-[2]: /agent/basic_agent_usage/deb
-[3]: /agent/basic_agent_usage/ubuntu
-[4]: /agent/basic_agent_usage/redhat
-[5]: /agent/docker
-[6]: /agent/basic_agent_usage/kubernetes
-[7]: /agent/basic_agent_usage/suse
-[8]: /agent/basic_agent_usage/fedora
-[9]: /agent/basic_agent_usage/osx
-[10]: /agent/basic_agent_usage/windows
-[11]: /agent/basic_agent_usage/source
+[2]: /agent/basic_agent_usage/deb/
+[3]: /agent/basic_agent_usage/ubuntu/
+[4]: /agent/basic_agent_usage/redhat/
+[5]: /agent/docker/
+[6]: /agent/basic_agent_usage/kubernetes/
+[7]: /agent/basic_agent_usage/suse/
+[8]: /agent/basic_agent_usage/fedora/
+[9]: /agent/basic_agent_usage/osx/
+[10]: /agent/basic_agent_usage/windows/
+[11]: /agent/basic_agent_usage/source/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -182,16 +182,16 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
 [1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv5
-[2]: /agent/basic_agent_usage/deb
-[3]: /agent/basic_agent_usage/ubuntu
-[4]: /agent/basic_agent_usage/redhat
-[5]: /agent/docker
-[6]: /agent/basic_agent_usage/kubernetes
-[7]: /agent/basic_agent_usage/suse
-[8]: /agent/basic_agent_usage/fedora
-[9]: /agent/basic_agent_usage/osx
-[10]: /agent/basic_agent_usage/windows
-[11]: /agent/basic_agent_usage/source
+[2]: /agent/basic_agent_usage/deb/
+[3]: /agent/basic_agent_usage/ubuntu/
+[4]: /agent/basic_agent_usage/redhat/
+[5]: /agent/docker/
+[6]: /agent/basic_agent_usage/kubernetes/
+[7]: /agent/basic_agent_usage/suse/
+[8]: /agent/basic_agent_usage/fedora/
+[9]: /agent/basic_agent_usage/osx/
+[10]: /agent/basic_agent_usage/windows/
+[11]: /agent/basic_agent_usage/source/
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 
@@ -199,7 +199,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 |----------|-------------------------------------------|
 | [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 
-[1]: /agent/basic_agent_usage/aix
+[1]: /agent/basic_agent_usage/aix/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -380,7 +380,7 @@ To send your Agent data to the [Datadog EU site][10], edit your [Agent main conf
 [3]: /agent/guide/agent-commands/#start-the-agent
 [4]: /agent/guide/agent-commands/#service-status
 [5]: /agent/guide/agent-commands/#stop-the-agent
-[6]: /integrations
+[6]: /integrations/
 [7]: https://app.datadoghq.com/account/settings#agent
 [8]: /agent/guide/integration-management
 [9]: /agent/guide/agent-configuration-files

@@ -17,5 +17,5 @@ Creates an endpoint with the name `<WEBHOOK_NAME>`.
 -   **`custom_headers`** [*optional*, default=**None**]: If given a JSON value, attaches the specified headers to your webhook.
 -   **`encode_as`** [*optional*, default=**json**]: Encoding type. Valid values are `json` and `form`.
 
-[1]: /monitors/notifications
+[1]: /monitors/notifications/
 [2]: /integrations/webhooks/#usage

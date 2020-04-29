@@ -30,5 +30,5 @@ This endpoint updates an `Index` identified by its name. It returns the `Index` 
   * **`filter.sample_rate`** [*required*]:
     The fraction of logs excluded by the exclusion filter, when active. The sampling is uniform.
 
-[1]: /logs/explorer/search
+[1]: /logs/explorer/search/
 [2]: /logs/indexes/#exclusion-filters

@@ -136,8 +136,8 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs
-[2]: /help
+[1]: /logs/
+[2]: /help/
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /agent/logs/#send-logs-over-https
 [5]: /agent/guide/agent-commands/#agent-status-and-information

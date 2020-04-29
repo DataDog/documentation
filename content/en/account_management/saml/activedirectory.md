@@ -107,8 +107,8 @@ For any questions or help with this, reach out to [the Datadog support team][5]!
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/saml
+[1]: /account_management/saml/
 [2]: https://app.datadoghq.com/account/saml/metadata.xml
 [3]: https://app.datadoghq.com/account/team
 [4]: https://app.datadoghq.com/saml/saml_setup
-[5]: /help
+[5]: /help/

@@ -27,4 +27,4 @@ Get Hourly Usage For [Custom Metrics][1].
 * **`hour`**:
 	The hour for the usage.
 
-[1]: /developers/metrics/custom_metrics
+[1]: /developers/metrics/custom_metrics/

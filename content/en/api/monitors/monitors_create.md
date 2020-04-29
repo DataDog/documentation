@@ -196,8 +196,8 @@ If you manage and deploy monitors programmatically, it's easier to define the mo
     `Error: 400 - ["Invalid monitor option:<invalid option>"]`
 
 [1]: /monitors/monitor_types/#import
-[2]: /monitors/monitor_types
+[2]: /monitors/monitor_types/
 [3]: /monitors/monitor_types/#define-the-conditions
-[4]: /infrastructure/process
+[4]: /infrastructure/process/
 [5]: /logs/explorer/search/#search-syntax
 [6]: /monitors/faq/what-are-recovery-thresholds

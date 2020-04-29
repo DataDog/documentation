@@ -349,5 +349,5 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing
-[2]: /tracing/connect_logs_and_traces/dotnet
+[1]: /logs/processing/parsing/
+[2]: /tracing/connect_logs_and_traces/dotnet/

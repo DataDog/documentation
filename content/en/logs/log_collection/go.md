@@ -111,5 +111,5 @@ Here are some little advices:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/sirupsen/logrus
-[2]: /logs/processing/parsing
-[3]: /tracing/connect_logs_and_traces/go
+[2]: /logs/processing/parsing/
+[3]: /tracing/connect_logs_and_traces/go/

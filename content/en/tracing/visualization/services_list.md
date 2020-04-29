@@ -71,13 +71,13 @@ Choose what to display in your services list:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/send_traces
+[1]: /tracing/send_traces/
 [2]: /tracing/visualization/#services
 [3]: https://app.datadoghq.com/apm/services
-[4]: /tracing/visualization/service
+[4]: /tracing/visualization/service/
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[6]: /tracing/guide/setting_primary_tags_to_scope
+[6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: /tracing/visualization/trace/#spans
-[8]: /tracing/visualization/trace
+[8]: /tracing/visualization/trace/
 [9]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
 [10]: /tracing/visualization/service/#service-monitor

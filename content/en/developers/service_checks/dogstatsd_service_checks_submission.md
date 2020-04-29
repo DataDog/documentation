@@ -169,5 +169,5 @@ After a service check is reported, use it to trigger a [custom check monitor][2]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
-[2]: /monitors/monitor_types/custom_check
+[1]: /developers/dogstatsd/
+[2]: /monitors/monitor_types/custom_check/

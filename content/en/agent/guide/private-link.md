@@ -154,5 +154,5 @@ For more information, see the [Amazon VPC peering documentation][3].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/privatelink/
-[2]: /help
+[2]: /help/
 [3]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html

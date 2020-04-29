@@ -77,5 +77,5 @@ The template variable is `{{event.tags.env}}`. The result of using this template
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/event
-[2]: /help
-[3]: /monitors/notifications
+[2]: /help/
+[3]: /monitors/notifications/

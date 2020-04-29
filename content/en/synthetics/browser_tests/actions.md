@@ -168,9 +168,9 @@ You can run browser tests within other browser tests, up to two levels of nestin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/advanced_options
+[1]: /synthetics/browser_tests/advanced_options/
 [2]: /synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [4]: /synthetics/browser_tests/#create-a-variable
-[5]: /synthetics/settings
+[5]: /synthetics/settings/
 [6]: /synthetics/browser_tests/advanced_options/#subtests

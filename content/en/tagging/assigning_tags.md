@@ -233,7 +233,7 @@ Assign host tags in the UI via the [Host Map page][1]. Click on any hexagon (hos
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Host Map Tags"  style="width:80%;">}}
 
-[1]: /infrastructure/hostmap
+[1]: /infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
@@ -241,7 +241,7 @@ Assign host tags in the UI via the [Infrastructure List page][1]. Click on any h
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Infrastructure List Tags"  style="width:80%;">}}
 
-[1]: /infrastructure
+[1]: /infrastructure/
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
@@ -253,7 +253,7 @@ When creating a monitor, assign monitor tags under step 4 *Say what's happening*
 
 {{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags"  style="width:80%;">}}
 
-[1]: /monitors/manage_monitor
+[1]: /monitors/manage_monitor/
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
@@ -263,8 +263,8 @@ Create percentile aggregations within [Distribution Metrics][1] by applying a wh
 
 {{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Create Monitor Tags"  style="width:80%;">}}
 
-[1]: /metrics/distributions
-[2]: /developers/metrics/custom_metrics
+[1]: /metrics/distributions/
+[2]: /developers/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
@@ -272,7 +272,7 @@ The [AWS][1] integration tile allows you to assign additional tags to all metric
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags"  style="width:80%;">}}
 
-[1]: /integrations/amazon_web_services
+[1]: /integrations/amazon_web_services/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -291,7 +291,7 @@ Tags can be assigned in various ways with the [Datadog API][1]. See the list bel
 * [Add][8] or [Update][9] host tags
 * [Send traces][10]
 
-[1]: /api
+[1]: /api/
 [2]: /api/?lang=python#post-a-check-run
 [3]: /api/?lang=python#post-an-event
 [4]: /api/?lang=python#aws
@@ -434,52 +434,52 @@ Web integrations are authentication based. Metrics are collected with API calls.
 
 [1]: /tagging/#defining-tags
 [2]: /agent/docker/#environment-variables
-[3]: /api
-[4]: /developers/metrics/dogstatsd_metrics_submission
-[5]: /integrations
+[3]: /api/
+[4]: /developers/metrics/dogstatsd_metrics_submission/
+[5]: /integrations/
 [6]: /agent/faq/how-datadog-agent-determines-the-hostname
 [7]: /dashboards/querying/#arithmetic-between-two-metrics
 [8]: /agent/guide/agent-configuration-files
 [9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[12]: /tracing/guide/setting_primary_tags_to_scope
-[13]: /libraries
+[12]: /tracing/guide/setting_primary_tags_to_scope/
+[13]: /libraries/
 [14]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
 [15]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
-[16]: /integrations/amazon_api_gateway
-[17]: /integrations/amazon_auto_scaling
-[18]: /integrations/amazon_billing
-[19]: /integrations/amazon_cloudfront
-[20]: /integrations/amazon_codedeploy
-[21]: /integrations/amazon_directconnect
-[22]: /integrations/amazon_dynamodb
-[23]: /integrations/amazon_ebs
-[24]: /integrations/amazon_ec2
-[25]: /integrations/amazon_ecs
-[26]: /integrations/amazon_efs
-[27]: /integrations/amazon_elasticache
-[28]: /integrations/amazon_elasticbeanstalk
-[29]: /integrations/amazon_elb
-[30]: /integrations/amazon_emr
-[31]: /integrations/amazon_es
-[32]: /integrations/amazon_firehose
-[33]: /integrations/amazon_health
-[34]: /integrations/amazon_iot
-[35]: /integrations/amazon_kinesis
-[36]: /integrations/amazon_kms
-[37]: /integrations/amazon_lambda
-[38]: /integrations/amazon_machine_learning
-[39]: /integrations/amazon_mq
-[40]: /integrations/amazon_ops_works
-[41]: /integrations/amazon_polly
-[42]: /integrations/amazon_rds
-[43]: /integrations/amazon_redshift
-[44]: /integrations/amazon_route53
-[45]: /integrations/amazon_s3
-[46]: /integrations/amazon_ses
-[47]: /integrations/amazon_sns
-[48]: /integrations/amazon_sqs
-[49]: /integrations/amazon_vpc
-[50]: /integrations/amazon_workspaces
+[16]: /integrations/amazon_api_gateway/
+[17]: /integrations/amazon_auto_scaling/
+[18]: /integrations/amazon_billing/
+[19]: /integrations/amazon_cloudfront/
+[20]: /integrations/amazon_codedeploy/
+[21]: /integrations/amazon_directconnect/
+[22]: /integrations/amazon_dynamodb/
+[23]: /integrations/amazon_ebs/
+[24]: /integrations/amazon_ec2/
+[25]: /integrations/amazon_ecs/
+[26]: /integrations/amazon_efs/
+[27]: /integrations/amazon_elasticache/
+[28]: /integrations/amazon_elasticbeanstalk/
+[29]: /integrations/amazon_elb/
+[30]: /integrations/amazon_emr/
+[31]: /integrations/amazon_es/
+[32]: /integrations/amazon_firehose/
+[33]: /integrations/amazon_health/
+[34]: /integrations/amazon_iot/
+[35]: /integrations/amazon_kinesis/
+[36]: /integrations/amazon_kms/
+[37]: /integrations/amazon_lambda/
+[38]: /integrations/amazon_machine_learning/
+[39]: /integrations/amazon_mq/
+[40]: /integrations/amazon_ops_works/
+[41]: /integrations/amazon_polly/
+[42]: /integrations/amazon_rds/
+[43]: /integrations/amazon_redshift/
+[44]: /integrations/amazon_route53/
+[45]: /integrations/amazon_s3/
+[46]: /integrations/amazon_ses/
+[47]: /integrations/amazon_sns/
+[48]: /integrations/amazon_sqs/
+[49]: /integrations/amazon_vpc/
+[50]: /integrations/amazon_workspaces/
 [51]: /integrations/google_cloud_platform/#tags-assigned

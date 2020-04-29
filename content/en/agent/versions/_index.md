@@ -25,7 +25,7 @@ See the [Upgrade to Agent v7 documentation][1] to learn how to upgrade your Agen
 **Note**: You can test this migration with Agent v6, by [Using Python 3 with Datadog Agent v6][3].
 
 
-[1]: /agent/versions/upgrade_to_agent_v7
+[1]: /agent/versions/upgrade_to_agent_v7/
 [2]: /agent/guide/python-3
 [3]: /agent/guide/agent-v6-python-3
 {{% /tab %}}
@@ -64,12 +64,12 @@ To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated
 
 [1]: /agent/#agent-architecture
 [2]: /agent/guide/agent-commands
-[3]: /developers/dogstatsd/unix_socket
+[3]: /developers/dogstatsd/unix_socket/
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
 [5]: /developers/metrics/types/?tab=distribution#metric-types
-[6]: /infrastructure/process
+[6]: /infrastructure/process/
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
-[8]: /logs
+[8]: /logs/
 {{% /tab %}}
 {{< /tabs >}}
 

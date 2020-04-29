@@ -35,4 +35,4 @@ The `Index` object describes the configuration of a log index. It has the follow
 
 **Note**:  You need an API and applications key with Admin right to interact with this endpoint.
 
-[1]: /logs/search_syntax
+[1]: /logs/search_syntax/

@@ -23,4 +23,4 @@ Get Hourly Usage For [Fargate][1].
 * **`hour`**:
 	The hour for the usage.
 
-[1]: /integrations/ecs_fargate
+[1]: /integrations/ecs_fargate/

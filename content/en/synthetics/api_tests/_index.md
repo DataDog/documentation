@@ -53,10 +53,10 @@ Define the request you want to be executed by Datadog:
 6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
-[1]: /synthetics/identify_synthetics_bots
-[2]: /synthetics
+[1]: /synthetics/identify_synthetics_bots/
+[2]: /synthetics/
 [3]: /api/?lang=bash#get-available-locations
-[4]: /synthetics/private_locations
+[4]: /synthetics/private_locations/
 {{% /tab %}}
 
 {{% tab "SSL Test" %}}
@@ -71,9 +71,9 @@ Define the request you want to be executed by Datadog:
 6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
 7. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
-[1]: /synthetics
+[1]: /synthetics/
 [2]: /api/?lang=bash#get-available-locations
-[3]: /synthetics/private_locations
+[3]: /synthetics/private_locations/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -207,7 +207,7 @@ Response time is the sum of these network timings.
 
 [1]: /api/?lang=bash#get-available-locations
 [2]: /synthetics/api_tests/errors#ssl-errors
-[3]: /synthetics/settings#global-variables
+[3]: /synthetics/settings/#global-variables
 [4]: /integrations/#cat-notification
 [5]: /monitors/notifications/#notification
 [6]: http://daringfireball.net/projects/markdown/syntax

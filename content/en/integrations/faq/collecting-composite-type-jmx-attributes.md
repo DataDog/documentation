@@ -79,10 +79,10 @@ Note, for all versions of **Agent v6**, the `jmxterm` JAR is not shipped with th
 
 Then use the get command to pull up a specific metric.
 
-[1]: /integrations/activemq
-[2]: /integrations/cassandra
-[3]: /integrations/java
-[4]: /integrations/solr
-[5]: /integrations/tomcat
+[1]: /integrations/activemq/
+[2]: /integrations/cassandra/
+[3]: /integrations/java/
+[4]: /integrations/solr/
+[5]: /integrations/tomcat/
 [6]: https://github.com/DataDog/jmxfetch/blob/master/src/main/java/org/datadog/jmxfetch/Instance.java#L23-L27
 [7]: https://github.com/jiaqi/jmxterm

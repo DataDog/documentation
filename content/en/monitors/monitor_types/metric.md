@@ -51,7 +51,7 @@ On each alert evaluation, Datadog calculates the percentage of the series that f
 
 For more detailed information, see the [Anomaly Monitor][1] page.
 
-[1]: /monitors/monitor_types/anomaly
+[1]: /monitors/monitor_types/anomaly/
 {{% /tab %}}
 {{% tab "Outliers" %}}
 
@@ -61,7 +61,7 @@ On each alert evaluation, Datadog checks whether or not all groups are clustered
 
 For more detailed information, see the [Outlier Monitor][1] page.
 
-[1]: /monitors/monitor_types/outlier
+[1]: /monitors/monitor_types/outlier/
 {{% /tab %}}
 {{% tab "Forecast" %}}
 
@@ -71,7 +71,7 @@ On each alert evaluation, a forecast alert predicts the future values of the met
 
 For more detailed information, see the [Forecast Monitor][1] page.
 
-[1]: /monitors/monitor_types/forecasts
+[1]: /monitors/monitor_types/forecasts/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -205,4 +205,4 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [2]: /tagging/using_tags/?tab=assignment
 [3]: /dashboards/querying/#advanced-graphing
 [4]: /monitors/faq/what-are-recovery-thresholds
-[5]: /monitors/notifications
+[5]: /monitors/notifications/

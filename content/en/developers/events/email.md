@@ -103,7 +103,7 @@ http://catchpoint.com/session_id:123456
 http://catchpoint.com/session_id%3A123456
 ```
 
-[1]: /integrations
-[2]: /agent/agent_checks
+[1]: /integrations/
+[2]: /agent/agent_checks/
 [3]: https://app.datadoghq.com
 [4]: http://daringfireball.net/projects/markdown/syntax#lin
