@@ -52,11 +52,11 @@ function toggleCodeBlocks(activeLang) {
             $(this).find(`.code-block-${activeLang}`).removeClass('d-none');
             $(this).find(`.code-block-${activeLang}`).addClass('d-block');
         } else {
-            // choose default code language (bash)
+            // choose default code language (curl)
             $(this).find(`.default`).removeClass('d-none');
             $(this).find(`.default`).addClass('d-block');
             $(this)
-                .find('.js-code-example-link[data-code-lang="bash"]')
+                .find('.js-code-example-link[data-code-lang="curl"]')
                 .addClass('active');
         }
     });

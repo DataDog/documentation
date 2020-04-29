@@ -7,7 +7,7 @@ languages:
     pygments_name: ruby
   'sh':
     extension: sh
-    pygments_name: bash
+    pygments_name: curl
   'json':
     extension: json
     pygments_name: json
