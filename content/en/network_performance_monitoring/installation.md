@@ -82,7 +82,8 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 ### SELinux-enabled systems
 
 On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.
-The official Datadog Agent RPM package bundles [an SELinux policy][3] to grant these permissions to the system-probe binary.
+
+The Datadog Agent RPM package for CentOS-based systems bundles [an SELinux policy][3] to grant these permissions to the system-probe binary.
 
 If you need to use Network Performance Monitoring on other systems with SELinux enabled, do the following:
 
@@ -102,7 +103,7 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
     semodule -v -i system_probe_policy.pp
     ```
 
-4. Change the system-probe binary's type to use the one defined in the policy; assuming your Agent installation directory is `system_probe_policy.te`:
+4. Change the system-probe binary type to use the one defined in the policy; assuming your Agent installation directory is `system_probe_policy.te`:
 
     ```shell
     semanage fcontext -a -t system_probe_t /opt/datadog-agent/embedded/bin/system-probe
