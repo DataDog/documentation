@@ -171,18 +171,21 @@ const isTagMatch = (pathObj, tag) => {
  * @param {object} data - object schema
  * returns filtered data
  */
-const filterExampleJson = (data) => {
+const filterExampleJson = (data, adjacentExample = null) => {
   if("properties" in data) {
     return Object.keys(data.properties)
       .map((propKey) => {
         const property = data.properties[propKey];
-        return {[propKey]: (property.hasOwnProperty("items")) ? [filterExampleJson(property.items)] : (property["example"] || property["type"])};
+        const ex = (property['example'] || typeof property['example'] === "boolean") ? `${property["example"]}` : property["example"];
+        return {[propKey]: (property.hasOwnProperty("items")) ? [filterExampleJson(property.items, property["example"])] : (ex || property["type"])};
       })
       .reduce((obj, item) => ({...obj, ...item}), {});
   } else if ("items" in data) {
-    return filterExampleJson(data.items);
+    return filterExampleJson(data.items, data['example']);
   } else {
-    return data["example"] || data["type"] || {};
+    let selectedExample = adjacentExample || data["example"];
+    const ex = (selectedExample || typeof selectedExample === "boolean") ? `${selectedExample}` : selectedExample;
+    return ex || data["type"] || {};
   }
 };
 
