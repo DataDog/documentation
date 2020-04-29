@@ -96,9 +96,6 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
     semodule_package -o system_probe_policy.pp -m system_probe_policy.mod
     ```
 
-    Note: this requires the `checkmodule` and `semodule_package` utilities to be installed on your system.
-    Check your distribution for details on how to install them.
-
 3. Apply the module to your SELinux system:
 
     ```shell
@@ -113,6 +110,9 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
     ```
 
 5. [Restart the Agent][2]
+
+**Note**: these instructions require to have some SELinux utilities installed on the system (`checkmodule`, `semodule`, `semodule_package`, `semanage` and `restorecon`) that are available on most standard distributions (Ubuntu, Debian, RHEL, CentOS, SUSE). Check your distribution for details on how to install them.
+If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
 [2]: /agent/guide/agent-commands/#restart-the-agent
