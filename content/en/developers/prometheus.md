@@ -66,7 +66,7 @@ instances:
 All OpenMetrics checks inherit from the `OpenMetricsBaseCheck` class found in `checks/openmetrics_check.py`:
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBasicCheck
+from datadog_checks.base import OpenMetricsBasicCheck
 
 class KubeDNSCheck(OpenMetricsBasicCheck):
 ```
@@ -76,7 +76,7 @@ class KubeDNSCheck(OpenMetricsBasicCheck):
 `NAMESPACE` is the metrics prefix. It needs to be hardcoded in your check class:
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     def __init__(self, name, init_config, agentConfig, instances=None):
@@ -90,7 +90,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 The reason for the override is so that metrics reported by the OpenMetrics checks are not counted as [custom metric][5]:
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     def __init__(self, name, init_config, agentConfig, instances=None):
@@ -132,7 +132,7 @@ If a check cannot run because of improper configuration, a programming error, or
 Improve your `check()` method with `CheckException`:
 
 ```python
-from datadog_checks.errors import CheckException
+from datadog_checks.base.errors import CheckException
 
 def check(self, instance):
     endpoint = instance.get('prometheus_endpoint')
@@ -143,7 +143,7 @@ def check(self, instance):
 Then as soon as you have data available, flush:
 
 ```python
-from datadog_checks.errors import CheckException
+from datadog_checks.base.errors import CheckException
 
 def check(self, instance):
     endpoint = instance.get('prometheus_endpoint')
@@ -161,8 +161,8 @@ def check(self, instance):
 ### Putting It All Together
 
 ```python
-from datadog_checks.errors import CheckException
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
+from datadog_checks.base.errors import CheckException
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     """
