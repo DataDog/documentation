@@ -31,6 +31,14 @@
 - org_name: DataDog
 
   repos:
+  - repo_name: web-ui
+    contents:
+
+    - action: integrations-logos
+      branch: prod
+      globs:
+      - public/static/images/saas_logos/bot/*.png
+
   - repo_name: dogweb
 
     contents:
@@ -38,10 +46,10 @@
     - action: integrations
       branch: prod
       globs:
-      - integration/**/*_metadata.csv
-      - integration/**/manifest.json
-      - integration/**/service_checks.json
-      - integration/**/README.md
+      - integration/*/*_metadata.csv
+      - integration/*/manifest.json
+      - integration/*/service_checks.json
+      - integration/*/README.md
 
   - repo_name: integrations-core
     contents:

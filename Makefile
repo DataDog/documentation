@@ -54,6 +54,9 @@ clean-integrations:  ## Remove built integrations files.
 	    -a -not -name '*.fr.json' \
 	    -a -not -name '*.ja.json' \
 	    -exec rm -rf {} \; ;fi
+	@if [ -d static/images/integrations_logos ]; then \
+		find ./static/images/integrations_logos -type f -maxdepth 1 \
+	    -exec rm -rf {} \; ;fi
 	@find ./content/en/integrations -type f -maxdepth 1 \
 		-a -not -name '_index.md' \
 		-a -not -name 'adobe_experience_manager.md' \

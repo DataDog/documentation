@@ -4,6 +4,10 @@ data/service_checks/
 integrations_data
 
 # Ignoring all automated content
+
+# Integrations logos
+static/images/integrations_logos/*.png
+
 # Developers/integrations
 content/en/developers/integrations/*.md
 content/en/developers/amazon_cloudformation.md
