@@ -170,7 +170,7 @@ The Docker daemon can have performances issues while it is trying to retrieve lo
 
 When it occurs, the Datadog Agent outputs a log containing `Restarting reader after a read timeout` for a given container every 30 seconds and stops sending logs from that container while it is actually logging messages.
 
-The default read timeout is set to 30 seconds, increasing this value gives more time to the Docker daemon to reply to the Datadog Agent. This value can be set in `datadog.yaml` using the `logs_config.docker_client_read_timeout` parameter or by using the environment variable `DD_LOGS_CONFIG_DOCKER_CLIENT_READ_TIMEOUT`, please note that this value is a duration in seconds. Here is an example increasing it to 60 seconds:
+The default read timeout is set to 30 seconds, increasing this value gives more time to the Docker daemon to reply to the Datadog Agent. This value can be set in `datadog.yaml` using the `logs_config.docker_client_read_timeout` parameter or by using the environment variable `DD_LOGS_CONFIG_DOCKER_CLIENT_READ_TIMEOUT`. This value is a duration in seconds, find below an example increasing it to 60 seconds:
 
 ```yaml
 logs_config:
