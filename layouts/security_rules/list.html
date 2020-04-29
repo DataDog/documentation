@@ -15,7 +15,7 @@
         {{ range $i, $v := .Pages.GroupByParam "source" }}
             <div class="js-group js-group-{{ $i }}">
                 <div class="rule-list mb-1 active">
-                    <div class="rule-list__.image d-inline font-semibold h-100 text-uppercase px-2 py-1">
+                    <div class="rule-list__icon d-inline font-semibold h-100 text-uppercase px-2 py-1">
                         {{ range first 1 $v.Pages }}
                             {{ $this_img := partial "security-rule-map.html" (dict "source" .Params.source "ctx" $dot) }}
                             {{ if $this_img.image }}
