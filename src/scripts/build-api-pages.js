@@ -251,7 +251,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
       typeVal = (value.format || value.type || '');
     }
   if(value.type === 'array') {
-    return `<div class="col-2 column"><p>[${value.items.type || ''}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
     return `<div class="col-2 column"><p>${typeVal}${readOnlyMarkup}</p></div>`;
@@ -301,8 +301,14 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         let childData = null;
         let newParentKey = key;
         if(value.type === 'array') {
-          if (value.items.properties) {
-            childData = value.items.properties;
+          if(typeof value.items === 'object') {
+            if (value.items.properties) {
+              childData = value.items.properties;
+            }
+          } else if(typeof value.items === 'string') {
+            if(value.items === '[Circular]') {
+              childData = null;
+            }
           }
         } else if(typeof value === 'object' && "properties" in value) {
           childData = value.properties;
@@ -383,14 +389,15 @@ const processSpecs = (specs) => {
       $RefParser.dereference(fileData)
         .then((deref) => {
           const version = spec.split('/')[3];
+          const jsonString = safeJsonStringify(deref, null, 2);
           fs.writeFileSync(
               `./data/api/${version}/full_spec_deref.json`,
-              safeJsonStringify(deref, null, 2),
+              jsonString,
               'utf8'
           );
           updateMenu(fileData, version);
           createPages(fileData, deref, version);
-          createResources(fileData, deref, version);
+          createResources(fileData, JSON.parse(jsonString), version);
         }).catch((e) => console.log(e));
     });
 };
