@@ -21,7 +21,8 @@ further_reading:
   text: "Log Collection Troubleshooting Guide"
 ---
 
-## Overview
+
+## Configure your logger
 
 Using [Winston][1] to log from your NodeJS application gets you all the features you need to build up your logging strategy.
 
@@ -45,10 +46,6 @@ npm install --save winston
   }
 }
 ```
-
-## Setup
-
-**Inject trace IDs in your logs**:  If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow APM NodeJS logging instructions][3] to automatically add trace and span IDs in your logs.
 
 ### Log to file
 
@@ -109,6 +106,9 @@ Check the content of the `<FILE_NAME>.log` file to see that Winston already took
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
 
+**Connect Logs and Traces**
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM NodeJS logging instructions][3] to automatically add trace and span IDs in your logs.
+
 ## Configure your Datadog Agent
 
 Create a `nodejs.d/conf.yaml` file in your `conf.d/` folder with the following content:
@@ -135,7 +135,7 @@ You can stream your logs from your application to Datadog without installing an 
 {{< tabs >}}
 {{% tab "Winston 3.0" %}}
 
-Use [Winston HTTP transport][1] to send your logs directly through the [Datadog Log API][3].
+Use [Winston HTTP transport][1] to send your logs directly through the [Datadog Log API][2].
 In your bootstrap file or somewhere in your code, declare the logger as follow:
 
 ```js
@@ -166,12 +166,12 @@ logger.info('Hello log with metas',{color: 'blue' });
 
 **Note**: To send logs to Datadog EU site, set the host property to `http-intake.logs.datadoghq.eu`
 
-If you are using US site, you can also check the community supported [Datadog Transport][2].
+If you are using US site, you can also check the community supported [Datadog Transport][3].
+
 
 [1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
-[2]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
-[3]: /api/?lang=bash#send-logs-over-http
-
+[2]: /api/?lang=bash#send-logs-over-http
+[3]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
 {{% /tab %}}
 {{< /tabs >}}
 

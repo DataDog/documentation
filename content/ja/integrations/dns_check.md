@@ -49,8 +49,6 @@ DNS チェックは [Datadog Agent][1] パッケージに含まれているた�
 1. DNS データの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `dns_check.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル dns_check.d/conf.yaml][3] を参照してください。
 
-
-
    ```yaml
    init_config:
 

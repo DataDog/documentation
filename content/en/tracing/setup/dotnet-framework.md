@@ -87,20 +87,20 @@ To set environment variables for a Windows Service, use the multi-string key `HK
 
 The .NET Tracer can instrument the following libraries automatically:
 
-| Framework or library           | NuGet package                  | Integration Name     |
-| ------------------------------ | ------------------------------ | -------------------- |
-| ASP.NET (including Web Forms)  | built-in                       | `AspNet`             |
-| ASP.NET MVC                    | `Microsoft.AspNet.Mvc` 4.0+    | `AspNetMvc`          |
-| ASP.NET Web API 2              | `Microsoft.AspNet.WebApi` 5.1+ | `AspNetWebApi2`      |
-| WCF (server)                   | built-in                       | `Wcf`                |
-| ADO.NET                        | built-in                       | `AdoNet`             |
-| HttpClient / HttpClientHandler | built-in                       | `HttpMessageHandler` |
-| WebClient / WebRequest         | built-in                       | `WebRequest`         |
-| Redis (StackExchange client)   | `StackExchange.Redis` 1.0.187+ | `StackExchangeRedis` |
-| Redis (ServiceStack client)    | `ServiceStack.Redis` 4.0.48+   | `ServiceStackRedis`  |
-| Elasticsearch                  | `Elasticsearch.Net` 5.3.0+     | `ElasticsearchNet`   |
-| MongoDB                        | `MongoDB.Driver.Core` 2.1.0+   | `MongoDb`            |
-| PostgreSQL                     | `Npgsql` 4.0+                  | `AdoNet`             |
+| Framework or library            | NuGet package                  | Integration Name     |
+| ------------------------------- | ------------------------------ | -------------------- |
+| ASP.NET (including Web Forms)   | built-in                       | `AspNet`             |
+| ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+    | `AspNetMvc`          |
+| ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+ | `AspNetWebApi2`      |
+| WCF (server)                    | built-in                       | `Wcf`                |
+| ADO.NET                         | built-in                       | `AdoNet`             |
+| HttpClient / HttpMessageHandler | built-in                       | `HttpMessageHandler` |
+| WebClient / WebRequest          | built-in                       | `WebRequest`         |
+| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+ | `StackExchangeRedis` |
+| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+   | `ServiceStackRedis`  |
+| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+     | `ElasticsearchNet`   |
+| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+   | `MongoDb`            |
+| PostgreSQL                      | `Npgsql` 4.0+                  | `AdoNet`             |
 
 **Update:** Starting with .NET Tracer version `1.12.0`, the ASP.NET integration is enabled automatically. The NuGet packages `Datadog.Trace.AspNet` or `Datadog.Trace.ClrProfiler.Managed` are no longer required. Remove them from your application when you update the .NET Tracer.
 
@@ -220,7 +220,7 @@ The first table below lists configuration variables that are available for both 
 | `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][7] for more details about the `env` tag.                                                              |
 | `DD_SERVICE_NAME`<br/><br/>`ServiceName`            | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
-| `DD_TRACE_GLOBAL_FLAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
+| `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
 | `DD_TRACE_DEBUG`                                    | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                    |
 
 The following table lists configuration variables that are available only when using automatic instrumentation.

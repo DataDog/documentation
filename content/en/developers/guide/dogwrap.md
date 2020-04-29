@@ -31,7 +31,7 @@ With the following placeholders:
 * `<DATADOG_API_KEY>`: [The Datadog API key associated with your organization][2].
 * `<COMMAND>`: Command to wrap and generate events from. Enclose your called command in quotes to prevent Python from thinking the command line arguments belong to the Python command instead of the wrapped one.
 
-**Note**: Use the Dogwrap help command `dogwrap help` to discover all available options.
+**Note**: Use the Dogwrap help command `dogwrap --help` to discover all available options.
 
 For an example of `dogwrap` in action, consider `cron`. If you have a cron script to vacuum a Postgres table every day:
 

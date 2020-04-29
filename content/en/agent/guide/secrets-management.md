@@ -5,9 +5,6 @@ further_reading:
 - link: "agent/autodiscovery"
   tag: "Documentation"
   text: "Autodiscovery"
-- link: "https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md#troubleshooting"
-  tag: "github"
-  text: "Secrets Troubleshooting"
 ---
 
 If you wish to avoid storing secrets in plaintext in the Agent’s configuration files, you can use the secrets management package.
@@ -218,6 +215,7 @@ instances:
     user: decrypted_db_prod_user
     password: decrypted_db_prod_password
 ```
+
 ### Helper script for Autodiscovery
 
 Many Datadog integrations require credentials to retrieve metrics. To avoid hardcoding these credentials in an [Autodiscovery template][1], you can use secrets management to separate them from the template itself.
@@ -392,12 +390,14 @@ To do so, follow those steps:
 
 1. Remove `ddagentuser` from the `Local Policies/User Rights Assignement/Deny Log on locally` list in the `Local Security Policy`.
 2. Set a new password for `ddagentuser` (since the one generated at install time is never saved anywhere). In Powershell, run:
+
   ```powershell
   $user = [ADSI]"WinNT://./ddagentuser";
   $user.SetPassword("a_new_password")
   ```
 
 3. Update the password to be used by `DatadogAgent` service in the Service Control Manager. In Powershell, run:
+
   ```powershell
   sc.exe config DatadogAgent password= "a_new_password"
   ```
@@ -433,7 +433,7 @@ If you have secrets in `datadog.yaml` and the Agent refuses to start:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery
+[1]: /agent/kubernetes/integrations
 [2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/secrets-helper/readsecret.py
 [3]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
 [4]: https://docs.docker.com/engine/swarm/secrets/

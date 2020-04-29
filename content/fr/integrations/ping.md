@@ -30,17 +30,13 @@ supported_os:
 ---
 ## Présentation
 
-Ce check utilise la commande [Ping][1] système pour tester l'accessibilité d'un host.
-Il peut également mesurer la durée des aller-retour des messages envoyés par le check au
-host de destination.
+Ce check utilise la commande [ping][1] système pour tester l'accessibilité d'un host.
+Il peut également mesurer la durée des aller-retour des messages envoyés par le check au host de destination.
 
-Ping fonctionne en envoyant des paquets de demande d'écho du protocole Internet Control Message Protocol (ICMP)
-au host cible. Il attend ensuite une réponse d'écho ICMP.
+La commande ping envoie des paquets de demande d'écho du protocole Internet Control Message Protocol (ICMP)
+au host cible. Elle attend ensuite une réponse d'écho ICMP.
 
-Ce check utilise la commande Ping système au lieu de générer la demande d'écho du protocole ICMP.
-En effet, la création d'un paquet ICMP nécessitant un socket brut, ce qui requiert
-des privilèges racine que l'Agent ne détient pas. La commande Ping utilise le
-flag d'accès `setuid` pour s'exécuter avec des privilèges élevés afin d'éviter le problème.
+Ce check utilise la commande ping système au lieu de générer la demande d'écho du protocole ICMP. En effet, la création d'un paquet ICMP nécessitant un socket brut, ce qui requiert des privilèges root que l'Agent ne détient pas. La commande ping utilise le flag d'accès `setuid` pour s'exécuter avec des privilèges élevés afin d'éviter ce problème.
 
 ## Implémentation
 
@@ -53,36 +49,34 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 1. Installez le [kit de développement][6].
 2. Clonez le dépôt integrations-extras :
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git
+   ```
 
 3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. Pour générer le paquet `ping`, exécutez :
 
-    ```
-    ddev -e release build ping
-    ```
+   ```shell
+   ddev -e release build ping
+   ```
 
 5. [Téléchargez et lancez l'Agent Datadog][7].
 6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
-    ```
-    sudo -u dd-agent datadog-agent integration install -w <PATH_OF_PING_ARTIFACT_>/<PING_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   sudo -u dd-agent datadog-agent integration install -w <PATH_OF_PING_ARTIFACT_>/<PING_ARTIFACT_NAME>.whl
+   ```
 
 7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][8].
 
 ### Configuration
 
-1. Modifiez le fichier `ping.d/conf.yaml` dans le dossier `conf.d/` à la racine du
-   répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Ping.
-   Consultez le [fichier d'exemple ping.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `ping.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance Ping. Consultez le [fichier d'exemple ping.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][10].
 
@@ -100,7 +94,7 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 
 **`network.ping.can_connect`** :
 
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter au host cible ou renvoie `OK` si la connexion au Ping est réussie.
+Renvoie `CRITICAL` si l'Agent n'est pas capable de communiquer avec le host cible. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
 

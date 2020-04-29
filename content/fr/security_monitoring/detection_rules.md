@@ -20,7 +20,7 @@ Pour créer une règle de détection dans Datadog, utilisez la navigation princi
 
 ### Définir la requête de recherche
 
-{{< img src="security_monitoring/detection_rules/define_search_query.png" alt="Définir la requête de recherche" responsive="true">}}
+{{< img src="security_monitoring/detection_rules/define_search_query.png" alt="Définir la requête de recherche" >}}
 
 Rédigez une requête de recherche en suivant la même logique que pour les [recherches dans le Log Explorer][1]. Chaque requête possède une étiquette, qui correspond à une lettre minuscule ASCII. Vous pouvez modifier le nom d'une requête en cliquant sur l'icône en forme de crayon.
 
@@ -74,19 +74,19 @@ Vous pouvez appliquer différents tags à vos signaux, comme `security:attack` o
 
 Lorsque vous rassemblez plusieurs logs au sein d'un intervalle donné, vous pouvez renforcer la fiabilité ou la sévérité d'un signal de sécurité. Par exemple, pour détecter une attaque par force brute réussie, vous devez corréler les logs des échecs et des réussites d'authentification d'un utilisateur.
 
-{{< img src="security_monitoring/detection_rules/joining_queries_define.png" alt="Définir des requêtes de recherche" responsive="true" >}}
+{{< img src="security_monitoring/detection_rules/joining_queries_define.png" alt="Définir des requêtes de recherche"  >}}
 
 Les règles de détection se basent sur une valeur de regroupement pour rassembler des logs. Cette valeur correspond généralement à une entité (p. ex., une adresse IP, un utilisateur, etc.), mais peut également être définie sur l'attribut de votre choix.
 
-{{< img src="security_monitoring/detection_rules/group_by.png" alt="Regroupement" responsive="true" >}}
+{{< img src="security_monitoring/detection_rules/group_by.png" alt="Regroupement"  >}}
 
 Les scénarios de règle de détection rassemblent ces requêtes en se basant sur leur valeur de regroupement. L'attribut de regroupement est généralement commun, car la réalisation du scénario se base sur une valeur unique. Si la valeur de regroupement n'existe pas, le scénario ne peut pas se réaliser. Lorsqu'un scénario se réalise, un signal de sécurité est généré pour chaque valeur de regroupement unique.
 
-{{< img src="security_monitoring/detection_rules/set_rule_cases2.png" alt="Définir des scénarios de règle" responsive="true" >}}
+{{< img src="security_monitoring/detection_rules/set_rule_cases2.png" alt="Définir des scénarios de règle"  >}}
 
 Dans l'exemple ci-dessus, dès que l'utilisateur `@usr.name` enregistre cinq tentatives échouées de connexion, puis parvient à se connecter, le premier scénario se réalise et un signal de sécurité est généré.
 
-{{< img src="security_monitoring/detection_rules/gbv2.png" alt="Définir des scénarios de règle" responsive="true">}}
+{{< img src="security_monitoring/detection_rules/gbv2.png" alt="Définir des scénarios de règle" >}}
 
 ## Gérer les règles de détection
 
@@ -98,7 +98,7 @@ La recherche en texte libre filtre les règles de détection en fonction du text
 
 ### Tableau des règles de détection
 
-{{< img src="security_monitoring/detection_rules/rules_table2.png" alt="Tableau des règles de détection" responsive="true" >}}
+{{< img src="security_monitoring/detection_rules/rules_table2.png" alt="Tableau des règles de détection"  >}}
 
 Les règles de détection s'affichent dans ce tableau.
 

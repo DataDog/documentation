@@ -9,7 +9,7 @@ further_reading:
 
 Choose your platform to see dedicated instructions to uninstall the Agent:
 
-### Debian/Ubuntu
+## Debian/Ubuntu
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -54,7 +54,7 @@ sudo apt-get --purge remove datadog-agent -y
 {{% /tab %}}
 {{< /tabs >}}
 
-### CentOS/RHEL/Fedora/Amazon Linux
+## CentOS/RHEL/Fedora/Amazon Linux
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -87,7 +87,7 @@ This command removes the Agent, but does not remove:
 {{% /tab %}}
 {{< /tabs >}}
 
-### openSUSE/SLES
+## openSUSE/SLES
 
 {{< tabs >}}
 {{% tab "Agent v6" %}}
@@ -120,7 +120,7 @@ This command removes the Agent, but does not remove:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Mac OS
+## Mac OS
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -133,6 +133,7 @@ This command removes the Agent, but does not remove:
 sudo rm -rf /opt/datadog-agent
 sudo rm -rf /usr/local/bin/datadog-agent
 sudo rm -rf ~/.datadog-agent/**​ #to remove broken symlinks
+launchctl remove com.datadoghq.agent
 ```
 
 Then, reboot your machine for changes to take effect.
@@ -164,9 +165,7 @@ This method removes the Agent, as well as all Agent configuration files.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Windows
-
-It's important to uninstall the Agent with the **original account** used to install the Agent, otherwise it may not be cleanly removed.
+## Windows
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -183,6 +182,8 @@ Both methods remove the Agent, but they do not remove the `C:\ProgramData\Datado
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
+
+**Note**: For versions of the agent less than 5.12.0 on Windows, It's important to uninstall the Agent with the **original account** used to install the Agent, otherwise it may not be cleanly removed.
 
 Uninstall the Agent using Add/Remove Programs.
 

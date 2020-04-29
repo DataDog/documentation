@@ -6,33 +6,51 @@ left:
           - name: product_features
             link: "https://www.datadoghq.com/product/"
             title: "Features"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/features.svg' alt='features icon'>"
           - name: product_integrations
             link: "https://www.datadoghq.com/product/integrations/"
             title: "Integrations"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/integrations.svg' alt='integrations icon'>"
           - name: product_dashboards
             link: "https://www.datadoghq.com/dashboarding/"
             title: "Dashboards"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg' alt='dashboard icon'>"
           - name: product_logs
             link: "https://www.datadoghq.com/log-management/"
             title: "Log Management"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/log.svg' alt='log icon'>"
           - name: product_apm
             link: "https://www.datadoghq.com/apm/"
             title: "APM"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/apm.svg' alt='apm icon'>"
+          - name: product_security
+            link: "https://www.datadoghq.com/security-monitoring/"
+            title: "Security Monitoring"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
           - name: product_network
             link: "https://www.datadoghq.com/network/"
-            title: "Network"
+            title: "Network Performance"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
           - name: product_synthetics
             link: "https://www.datadoghq.com/synthetics/"
-            title: "Synthetics"
+            title: "Synthetic Monitoring"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg' alt='synthetics icon'>"
           - name: product_rum
             link: "https://www.datadoghq.com/rum/"
-            title: "RUM"
+            title: "Real User Monitoring"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/rum.svg' alt='rum icon'>"
+          - name: product_serverless
+            link: "https://www.datadoghq.com/serverless/"
+            title: "Serverless"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/serverless.svg' alt='serverless icon'>"
           - name: product_alerts
             link: "https://www.datadoghq.com/alerts/"
             title: "Alerts"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/alert.svg' alt='alert icon'>"
           - name: product_api
             link: "api"
             title: "API"
+            pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/api.svg' alt='api icon'>"
   - name: customers
     link: "https://www.datadoghq.com/customers/"
     title: "Customers"
@@ -44,41 +62,65 @@ left:
     title: "Solutions"
     children:
       - name: solutions_financial
+        category: industry
         link: "https://www.datadoghq.com/solutions/financial-services/"
         title: "Financial Services"
       - name: solutions_manufacturing
+        category: industry
         link: "https://www.datadoghq.com/solutions/manufacturing-logistics/"
         title: "Manufacturing & Logistics"
       - name: solutions_healthcare
+        category: industry
         link: "https://www.datadoghq.com/solutions/healthcare/"
         title: "Healthcare/Life Sciences"
       - name: solutions_retail
+        category: industry
         link: "https://www.datadoghq.com/solutions/retail-ecommerce/"
         title: "Retail/E-Commerce"
+      - name: solutions_publicsector
+        category: industry
+        link: "https://www.datadoghq.com/solutions/public-sector"
+        title: "Public Sector"
       - name: solutions_media
+        category: industry
         link: "https://www.datadoghq.com/solutions/media-entertainment/"
         title: "Media & Entertainment"
       - name: solutions_gaming
+        category: industry
         link: "https://www.datadoghq.com/solutions/gaming/"
         title: "Gaming"
       - name: solutions_cloudmigration
+        category: usecase
         link: "https://www.datadoghq.com/solutions/cloud-migration/"
         title: "Cloud Migration"
       - name: solutions_monitoringconsolidation
+        category: usecase
         link: "https://www.datadoghq.com/solutions/monitoring-consolidation/"
         title: "Monitoring Consolidation"
       - name: solutions_devops
+        category: usecase
         link: "https://www.datadoghq.com/solutions/devops/"
         title: "DevOps"
+      - name: solutions_securityanalytics
+        category: usecase
+        link: "https://www.datadoghq.com/solutions/security-analytics/"
+        title: "Security Analytics"
       - name: solutions_hybridcloudmonitoring
+        category: usecase
         link: "https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/"
         title: "Hybrid Cloud Monitoring"
       - name: solutions_iotmonitoring
+        category: usecase
         link: "https://www.datadoghq.com/solutions/iot-monitoring/"
         title: "IoT Monitoring"
       - name: solutions_machinelearning
+        category: usecase
         link: "https://www.datadoghq.com/solutions/machine-learning/"
         title: "Machine Learning"
+      - name: solutions_businessanalytics
+        category: usecase
+        link: "https://www.datadoghq.com/solutions/business-analytics/"
+        title: "Real-Time BI"
 
 right:
   - name: about

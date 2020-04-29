@@ -30,11 +30,15 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 5. (Optional) **Add a description** to give your team context about the purpose of the historical view.
 
+6. Define the maximum number of logs that should be rehydrated in this historical view, **from 1 million to 1 billion**
+
+7. Define the retention period of the rehydrated logs (available retentions are based on your contract, default is 15 days)
+
 {{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Reload from Archive"  style="width:75%;">}}
 
 #### Rehydrate by Query
 
-By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges. You can rehydrate up to 300 million log events per historical view you create.
+By creating historical views with specific queries (for example, over one or more services, URL endpoints, or customer IDs), you can reduce the time and cost involved in rehydrating your logs. This is especially helpful when rehydrating over wider time ranges. You can rehydrate up to 1 billion log events per historical view you create.
 
 ### View historical view content
 
@@ -46,9 +50,10 @@ Once the content is rehydrated, the historical view is marked as active, and the
 
 #### From the log explorer
 
-Alternatively, teams can find the historical view from the Log Explorer directly from the index selector. When selecting a historical view, a pop-up offers to set the timeframe to one that is relevant to the selected historical view.
+Alternatively, teams can find the historical view from the Log Explorer directly from the index selector.   
+{{ if .Inner }}When selecting a historical view, a pop-up offers to set the timeframe to one that is relevant to the selected historical view.{{ end }}
 
-{{< img src="logs/archives/log_archives_rehydrate_explorer.mp4" alt="Log Explorer" video="true"  width="75%">}}
+{{< img src="logs/archives/log_archives_historical_index_selector.png" alt="Log Explorer" width="75%">}}
 
 ### Deleting historical views
 

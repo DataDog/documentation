@@ -107,7 +107,7 @@ Agent が Application Master に接続できない場合は、`CRITICAL` を返�
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/datadog_checks/mapreduce/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/mapreduce/metadata.csv
 [9]: https://docs.datadoghq.com/ja/help

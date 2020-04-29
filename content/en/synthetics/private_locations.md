@@ -16,7 +16,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in public beta and available for API Tests only.
+This feature is in public beta for API Tests. The equivalent feature for Browser Tests is in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to Datadog support</a> if you would like to test it.
 </div>
 
 ## Overview
@@ -51,7 +51,7 @@ Once you created a private location, configuring a Synthetics API test from a pr
 Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
 
 ```shell
-docker run --init --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
+docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
 ```
 
     {{% /tab %}}

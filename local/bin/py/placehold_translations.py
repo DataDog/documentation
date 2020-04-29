@@ -25,7 +25,7 @@ logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 def get_disclaimer_from_params(config_location, key):
     try:
         with open(os.path.dirname(config_location) + f'/params.{key}.yaml') as f:
-            c_yaml = yaml.load(f.read())
+            c_yaml = yaml.load(f.read(), Loader=yaml.FullLoader)
             return c_yaml.get('disclaimer', '') or ''
     except:
         print("\x1b[31mERROR\x1b[0m: Error getting disclaimer")
@@ -34,7 +34,7 @@ def get_disclaimer_from_params(config_location, key):
 def get_languages(config_location):
     with open(config_location) as config:
         c = config.read()
-        c_yaml = yaml.load(c)
+        c_yaml = yaml.load(c, Loader=yaml.FullLoader)
         d = {}
         if 'en' in c_yaml:
             # this is languages.yaml
@@ -101,7 +101,7 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
         split = boundary.split(content, 2)
         if len(split) == 3:
             _, fm, content = split
-            new_yml = yaml.load(fm)
+            new_yml = yaml.load(fm, Loader=yaml.FullLoader)
         elif len(split) == 1:
             content = split[0]
             new_yml = {}

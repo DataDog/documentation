@@ -21,9 +21,9 @@ The Log Stream displays a log flow matching the defined query:
 
 ### Configuration
 
-{{< img src="dashboards/widgets/log_stream/log_stream_setup.png" alt="Log stream setup"  style="width:80%;">}}
+{{< img src="dashboards/widgets/log_stream/log_stream_setup.gif" alt="Log stream setup"  style="width:80%;">}}
 
-Enter a [log query][1] to filter the log stream.
+Enter a [log query][1] to filter the log stream. 
 
 ### Options
 

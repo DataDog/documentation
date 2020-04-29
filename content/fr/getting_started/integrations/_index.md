@@ -19,9 +19,9 @@ Au plus haut niveau, une intégration correspond à l'assemblage d'un système u
 
 Datadog propose trois grands types d'intégrations :
 
-* **Les intégrations basées sur l'Agent** sont installées avec l'Agent Datadog et utilisent une méthode de classe Python appelée `check` pour définir les métriques à recueillir.
-* **Les intégrations basées sur un système d'authentification (crawler)** sont configurées dans l'[application Datadog][2], où vous entrez des identifiants pour récupérer des métriques avec l'API. Il s'agit notamment d'intégrations populaires telles que [Slack][3], [AWS][4], [Azure][5], et [PagerDuty][6].
-* **Les intégrations de bibliothèque** utilisent l'[API Datadog][7] pour vous permettre de surveiller des applications en fonction du langage dans lequel elles sont écrites, comme [Node.js][8] ou [Python][9].
+- **Les intégrations basées sur l'Agent** sont installées avec l'Agent Datadog et utilisent une méthode de classe Python appelée `check` pour définir les métriques à recueillir.
+- **Les intégrations basées sur un système d'authentification (crawler)** sont configurées dans l'[application Datadog][2], où vous entrez des identifiants pour récupérer des métriques avec l'API. Il s'agit notamment d'intégrations populaires telles que [Slack][3], [AWS][4], [Azure][5], et [PagerDuty][6].
+- **Les intégrations de bibliothèque** utilisent l'[API Datadog][7] pour vous permettre de surveiller des applications en fonction du langage dans lequel elles sont écrites, comme [Node.js][8] ou [Python][9].
 
 Vous pouvez aussi créer un [check custom][10] pour définir et envoyer des métriques à Datadog depuis un système interne unique.
 
@@ -55,19 +55,18 @@ Par exemple, voici le fichier de configuration `conf.yaml` minimal nécessaire p
 init_config:
 
 instances:
-
-  - apache_status_url: http://localhost/server-status?auto
+    - apache_status_url: http://localhost/server-status?auto
 
 logs:
-  - type: file
-    path: /var/log/apache2/access.log
-    source: apache
-    sourcecategory: http_web_access
-    service: apache
-  - type: file
-    path: /var/log/apache2/error.log
-    source: apache
-    sourcecategory: http_web_access
+    - type: file
+      path: /var/log/apache2/access.log
+      source: apache
+      sourcecategory: http_web_access
+      service: apache
+    - type: file
+      path: /var/log/apache2/error.log
+      source: apache
+      sourcecategory: http_web_access
 ```
 
 Pour créer plusieurs instances dans un même check d'Agent et surveiller deux services Apache, créez une nouvelle instance avec un `-` dans la section `instances:` :
@@ -76,10 +75,9 @@ Pour créer plusieurs instances dans un même check d'Agent et surveiller deux s
 init_config:
 
 instances:
+    - apache_status_url: "http://localhost/server-status?auto"
 
-  - apache_status_url: http://localhost/server-status?auto
-
-  - apache_status_url: http://<ENDPOINT_APACHE_DISTANT>/server-status?auto
+    - apache_status_url: "http:///server-status?auto"
 ```
 
 ### Tagging
@@ -113,7 +111,7 @@ Si les problèmes persistent, contactez [notre formidable équipe d'assistance][
 ## Termes clés
 
 | Terme                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **conf.yaml**          | Le fichier `conf.yaml` doit être créé dans le dossier `conf.d/<NOM_INTÉGRATION>` à la racine du [répertoire de configuration de votre Agent][36]. Utilisez ce fichier pour connecter des intégrations à votre système et pour configurer leurs paramètres.                                                                                                                                                                                                                                       |
 | **check custom**       | Si vous utilisez un système privé que vous souhaitez surveiller, ou si vous souhaitez étendre la liste des métriques déjà envoyées par une intégration, vous pouvez créer un [check custom][10] pour définir des métriques et les envoyer à Datadog. Toutefois, si vous souhaitez surveiller une application disponible librement, un service public ou un projet open source qui ne bénéficie d'aucune intégration dédiée, nous vous conseillons de [créer une nouvelle intégration][1] plutôt qu'un check custom. |
 | **datadog.yaml**       | Il s'agit du fichier de configuration principal où vous définissez comment l'Agent dans son ensemble interagit avec ses propres intégrations et avec votre système. Utilisez ce fichier pour mettre à jour les clés d'API, les proxys, les tags de host et d'autres paramètres généraux.                                                                                                                                                                                                                                       |

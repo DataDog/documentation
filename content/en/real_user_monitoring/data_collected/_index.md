@@ -32,7 +32,7 @@ These five event categories have attributes attached by default:
 
 | Attribute name   | Type   | Description                 |
 |------------------|--------|-----------------------------|
-| `application_id` | string | The Datadog application ID. |
+| `application_id` | string | The Datadog application ID. |
 | `session_id`     | string | The session ID.             |
 
 ### View Attribute
@@ -53,7 +53,7 @@ The following contexts—following the [Datadog Standard Attributes][1] logic—
 
 | Attribute name                           | Type   | Description                                     |
 |------------------------------------------|--------|-------------------------------------------------|
-| `http.useragent_details.os.family`       | string | The OS family reported by the User-Agent.       |
+| `http.useragent_details.os.family`       | string | The OS family reported by the User-Agent.       |
 | `http.useragent_details.browser.family`  | string | The browser Family reported by the User-Agent.  |
 | `http.useragent_details.device.family`   | string | The device family reported by the User-Agent.   |
 | `http.useragent_details.device.category` | string | The device category reported by the User-Agent. |

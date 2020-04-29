@@ -45,7 +45,7 @@ Par défaut, l'Agent ouvre 3 [ports][3] sur Linux et 4 sur Windows et OSX :
 
 | Port | Description                                                                                 |
 |------|---------------------------------------------------------------------------------------------|
-| 5000 | Expose les métriques de runtime à propos de l'Agent.                                                    |
+| 5000 | Expose les métriques runtime à propos de l'Agent.                                                    |
 | 5001 | Utilisé par l'interface de ligne de commande et l'interface graphique de l'Agent pour envoyer des commandes et récupérer des informations à partir de l'Agent actif. |
 | 5002 | Dessert le serveur graphique sur Windows et OSX.                                                   |
 | 8125 | Utilisé pour le serveur DogStatsD afin de recevoir des métriques externes.                                  |

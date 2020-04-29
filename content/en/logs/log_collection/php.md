@@ -178,6 +178,10 @@ Configure the formatter in your Monolog configuration: declare the formatter fie
 {{% /tab %}}
 {{< /tabs >}}
 
+**Connect Logs and Traces**
+
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM PHP logging instructions][2] to automatically add trace and span IDs in your logs.
+
 ### Agent Configuration
 
 Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
@@ -367,12 +371,12 @@ Add a session Processor to add variable context within your logs:
 
 Monolog is a part of the following frameworks:
 
-* [Symfony2, Symfony3][2]
-* [PPI][3]
-* [Laravel 4 & 5][4]
-* [Silex][5]
-* [Lumen][6]
-* [CakePHP][7]
+* [Symfony2, Symfony3][3]
+* [PPI][4]
+* [Laravel 4 & 5][5]
+* [Silex][6]
+* [Lumen][7]
+* [CakePHP][8]
 
 Integrate Monolog with your framework then configure your logger:
 
@@ -536,9 +540,10 @@ CakeLog::config('debug', array(
 
 {{< partial name="whats-next/whats-next.html" >}}
 [1]: /agent/logs
-[2]: /logs/log_collection/php/#symfony-v2-v3
-[3]: /logs/log_collection/php/#ppi
-[4]: /logs/log_collection/php/#laravel
-[5]: /logs/log_collection/php/#silex
-[6]: /logs/log_collection/php/#lumen
-[7]: /logs/log_collection/php/#cakephp
+[2]: /tracing/connect_logs_and_traces/php
+[3]: /logs/log_collection/php/#symfony-v2-v3
+[4]: /logs/log_collection/php/#ppi
+[5]: /logs/log_collection/php/#laravel
+[6]: /logs/log_collection/php/#silex
+[7]: /logs/log_collection/php/#lumen
+[8]: /logs/log_collection/php/#cakephp

@@ -21,7 +21,7 @@ further_reading:
   text: "See how to explore your logs"
 - link: "logs/logging_without_limits"
   tag: "Documentation"
-  text: "Logging without limit"
+  text: "Logging Without Limits*"
 ---
 
 Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces. The Agent can [tail log files][2] or [listen for logs sent over UDP / TCP][2], and you can configure it to [filter out logs][3], [scrub sensitive data][3], or  aggregate [multi line logs][4]. Finally choose your application language below in order to get dedicated logging best practices.
@@ -268,6 +268,8 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+<br>
+\*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /agent/logs
 [2]: /agent/logs/#custom-log-collection
@@ -282,8 +284,8 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [11]: /logs/processing/parsing
 [12]: /logs/explorer/facets
 [13]: /agent/docker/log
-[14]: /agent/autodiscovery/management
-[15]: /agent/autodiscovery/integrations
+[14]: /agent/kubernetes/management
+[15]: /agent/kubernetes/integrations
 [16]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 [17]: /integrations/amazon_lambda/#log-collection
 [18]: /logs/log_collection/#how-to-get-the-most-of-your-application-logs

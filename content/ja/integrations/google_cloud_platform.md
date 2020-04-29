@@ -5,7 +5,7 @@ categories:
   - cloud
   - google cloud
   - log collection
-ddtype: 「クロール」
+ddtype: crawler
 dependencies: []
 description: 豊富な GCP メトリクスを収集してホストマップ内のインスタンスを視覚化。
 doc_link: 'https://docs.datadoghq.com/integrations/google_cloud_platform/'
@@ -24,7 +24,9 @@ version: '1.0'
 
 Google Cloud Platform に接続して、すべての Google Compute Engine (GCE) ホストを Datadog に表示できます。GCE ホストタグと追加した GCE ラベルがホストに自動的にタグ付けされるため、Datadog のインフラストラクチャー概要にホストを表示し、分類することができます。
 
-関連するインテグレーションは、次のとおりです。
+<div class="alert alert-warning">
+Datadog の GCP インテグレーションは、<a href="https://cloud.google.com/monitoring/api/metrics_gcp">StackDriver からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。
+</div>
 
 | インテグレーション                       | 説明                                                             |
 | --------------------------------- | ----------------------------------------------------------------------- |
@@ -89,7 +91,7 @@ Datadog <> Google Cloud インテグレーションは、サービスアカウ�
     - 複数のサービスアカウントを使用する場合は、上のプロセスを繰り返します。
     - 同じサービスアカウントを使用する場合は、手順 6 でダウンロードした JSON ファイルで `project_id` を更新します。次に、手順 7 ～ 10 の説明に従って、このファイルを Datadog にアップロードします。
 
-監視するプロジェクトで、[Google Cloud の課金][31]、[Stackdriver Monitoring API][32]、[Compute Engine API][33]、[Cloud Asset API][43] がすべて有効になっている必要があります。
+監視するプロジェクトで、[Google Cloud の課金][31]、[Stackdriver Monitoring API][32]、[Compute Engine API][33]、[Cloud Asset API][34] がすべて有効になっている必要があります。
 
 #### コンフィグレーション
 
@@ -108,11 +110,11 @@ GCE または GKE で実行されているアプリケーションの場合は�
 3. [ログを Datadog へ転送する Pub/Sub をセットアップ](#configure-the-pub-sub-to-forward-logs-to-datadog)します。
 4. [Stackdriver から Pub/Sub へのログのエクスポート](#export-logs-from-stackdriver-to-the-pub-sub)を構成します。
 
-**警告**: Pub/Sub は、[Google Cloud の割り当てと制限][34]の対象となります。Datadog は、ログ数がこの制限を上回る場合は、ログを複数の Pub/Sub に分割することをお勧めします。この制限に近づいたときに自動的に通知されるようにモニターを設定する方法については、[ログの転送を監視する](#monitor-the-log-forwarding)セクションを参照してください。
+**警告**: Pub/Sub は、[Google Cloud の割り当てと制限][35]の対象となります。Datadog は、ログ数がこの制限を上回る場合は、ログを複数の Pub/Sub に分割することをお勧めします。この制限に近づいたときに自動的に通知されるようにモニターを設定する方法については、[ログの転送を監視する](#monitor-the-log-forwarding)セクションを参照してください。
 
 #### Cloud Pub/Sub を作成する
 
-1. [Cloud Pub/Sub コンソール][35]に移動し、新しいトピックを作成します。
+1. [Cloud Pub/Sub コンソール][36]に移動し、新しいトピックを作成します。
 
     {{< img src="integrations/google_cloud_platform/create_a_topic.png" alt="トピックを作成する" style="width:80%;">}}
 
@@ -155,7 +157,7 @@ GCE または GKE で実行されているアプリケーションの場合は�
 
 #### Stackdriver から Pub/Sub へログをエクスポートする
 
-1. [Stackdriver ページ][36]に移動し、エクスポートするログを絞り込みます。
+1. [Stackdriver ページ][37]に移動し、エクスポートするログを絞り込みます。
 2. `エクスポートを作成`を押し、シンクに適宜名前を付けます。
 3. エクスポート先として `Cloud Pub/Sub` を選択し、エクスポート用に作成した Pub/Sub を選択します。この Pub/Sub は、別のプロジェクトに置くこともできます。
 
@@ -165,13 +167,13 @@ GCE または GKE で実行されているアプリケーションの場合は�
 
 **注**: 異なるシンクを使用して、Stackdriver から同じ Pub/Sub への複数のエクスポートを作成することができます。
 
-**警告**: Pub/Sub は、[Google Cloud の割り当てと制限][34]の対象となります。Datadog は、ログ数がこの制限を上回る場合は、ログを複数の Pub/Sub に分割することをお勧めします。この制限に近づいたときに自動的に通知されるようにモニターを設定する方法については、[ログの転送を監視する](#monitor-the-log-forwarding)セクションを参照してください。
+**警告**: Pub/Sub は、[Google Cloud の割り当てと制限][35]の対象となります。Datadog は、ログ数がこの制限を上回る場合は、ログを複数の Pub/Sub に分割することをお勧めします。この制限に近づいたときに自動的に通知されるようにモニターを設定する方法については、[ログの転送を監視する](#monitor-the-log-forwarding)セクションを参照してください。
 
 #### ログの転送を監視する
 
-Pub/Sub は、[Google Cloud の割り当てと制限][34]の対象となります。Datadog は、ログ数がこの制限を上回る場合は、ログを複数の Pub/Sub に分割することをお勧めします。
+Pub/Sub は、[Google Cloud の割り当てと制限][35]の対象となります。Datadog は、ログ数がこの制限を上回る場合は、ログを複数の Pub/Sub に分割することをお勧めします。
 
-この割り当てに達したときに自動的に通知されるようにするには、[Pub/Sub メトリクスインテグレーション][37]を有効にし、メトリクス `gcp.pubsub.subscription.backlog_bytes` に対してモニターをセットアップします。Datadog へログをエクスポートするサブスクリプションでこのモニター絞り込み、このメトリクスが 1 MB を超えないようにします。以下に例を示します。
+この割り当てに達したときに自動的に通知されるようにするには、[Pub/Sub メトリクスインテグレーション][38]を有効にし、メトリクス `gcp.pubsub.subscription.backlog_bytes` に対してモニターをセットアップします。Datadog へログをエクスポートするサブスクリプションでこのモニター絞り込み、このメトリクスが 1 MB を超えないようにします。以下に例を示します。
 
 {{< img src="integrations/google_cloud_platform/log_pubsub_monitoring.png" alt="Pub Sub 監視" style="width:80%;">}}
 
@@ -183,7 +185,7 @@ Pub/Sub は、[Google Cloud の割り当てと制限][34]の対象となりま�
 
 ### イベント
 
-Google Cloud Platform によって生成されたすべてのサービスイベントが [Datadog のイベントストリーム][38]に転送されます。
+Google Cloud Platform によって生成されたすべてのサービスイベントが [Datadog のイベントストリーム][39]に転送されます。
 
 ### サービスのチェック
 
@@ -251,13 +253,12 @@ Google Cloud Platform インテグレーションには、サービスのチェ�
 [31]: https://support.google.com/cloud/answer/6293499?hl=en
 [32]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
 [33]: https://console.cloud.google.com/apis/library/compute.googleapis.com
-[34]: https://cloud.google.com/pubsub/quotas#quotas
-[35]: https://console.cloud.google.com/cloudpubsub/topicList
-[36]: https://console.cloud.google.com/logs/viewer
-[37]: https://docs.datadoghq.com/ja/integrations/google_cloud_pubsub/
-[38]: https://app.datadoghq.com/event/stream
-[39]: https://docs.datadoghq.com/ja/logs
+[34]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview
+[35]: https://cloud.google.com/pubsub/quotas#quotas
+[36]: https://console.cloud.google.com/cloudpubsub/topicList
+[37]: https://console.cloud.google.com/logs/viewer
+[38]: https://docs.datadoghq.com/ja/integrations/google_cloud_pubsub/
+[39]: https://app.datadoghq.com/event/stream
 [40]: https://docs.datadoghq.com/ja/integrations/google_stackdriver_logging/#metrics
 [41]: https://app.datadoghq.com/metric/summary
 [42]: https://docs.datadoghq.com/ja/help
-[43]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview

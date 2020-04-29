@@ -75,7 +75,7 @@ Cette section décrit les étapes de configuration minimales requises pour trans
 
     # This is useful if you want to log query parameters
     config.lograge.custom_options = lambda do |event|
-        { :ddsource => ["ruby"],
+        { :ddsource => 'ruby',
           :params => event.payload[:params].reject { |k| %w(controller action).include? k }
         }
     end

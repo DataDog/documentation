@@ -53,7 +53,7 @@ Use measures when you need:
 - To **range filter** your logs. For instance, create a measure on the execution time of [Ansible][20] tasks, and see the list of servers having the most runs taking more than 10s.
 - To **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][21] microservice. You can then search all the logs, starting with the one with the highest amount.
 
-#### Types {#types-qualitative-facets}
+#### Types{#types-qualitative-facets}
 
 Measures come with either a (long) integer or double value, for equivalent capabilities.
 
@@ -124,11 +124,6 @@ If you see an aliased facet in your facet list, consider using the _standard_ fa
 
 You may wish to keep the non-standard _aliased_ version of the facet if you are troubleshooting against old content (before the aliasing for this facet has been setup by your organization).
 
-### The Index Facet
-
-The index facet is a specific facet that appears only if your organization has [multiple indexes][24], and/or if you have active [historical views][25]. Use this facet if you want to scope down your query to a subset of your indexes.
-
-{{< img src="logs/explorer/facet/index_facet_.png" alt="Create Facet" style="width:30%;">}}
 
 ## Manage Facets
 
@@ -136,7 +131,15 @@ The index facet is a specific facet that appears only if your organization has [
 
 Most common facets such as `Host`, `Service`, `URL Path`, or `Duration` come out-of-the-box to start troubleshooting right away once your logs are flowing into log indexes.
 
-Facets on [Reserved Attributes][26] and most [Standard Attributes][27] are available by default.
+Facets on [Reserved Attributes][24] and most [Standard Attributes][25] are available by default.
+
+
+### The Index Facet
+
+The index facet is a specific facet that appears only if your organization has [multiple indexes][26], and/or if you have active [historical views][27]. Use this facet if you want to scope down your query to a subset of your indexes.
+
+{{< img src="logs/explorer/facet/index_facet_.png" alt="Create Facet" style="width:30%;">}}
+
 
 ### Create Facets
 
@@ -168,7 +171,7 @@ Autocomplete based on the content in logs of the current views helps you to defi
 
 ### Alias Facets
 
-Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting—see [Naming Convention][27] for reference.
+Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting—see [Naming Convention][25] for reference.
 
 Use aliasing as an option to smoothly realign teams that rely on inconsistent naming conventions. With aliasing, you can have them all using the standard facet emerging for your organization.
 
@@ -195,7 +198,7 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search/
+[1]: /logs/search_syntax/
 [2]: /logs/explorer/analytics/
 [3]: /logs/explorer/patterns/
 [4]: /monitors/monitor_types/log/
@@ -212,14 +215,14 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [15]: /integrations/nginx/
 [16]: /logs/processing/processors/?tab=ui#geoip-parser
 [17]: /integrations/kong/
-[18]: /logs/explorer/search/#search-syntax
+[18]: /logs/search_syntax
 [19]: /integrations/varnish/
 [20]: /integrations/ansible/
 [21]: /integrations/python/
 [22]: /logs/processing/processors/?tab=ui#arithmetic-processor
 [23]: /logs/explorer/saved_views/
-[24]: /logs/indexes/#indexes
-[25]: /logs/archives/rehydrating
-[26]: /logs/processing/#reserved-attributes
-[27]: /logs/processing/attributes_naming_convention/
+[24]: /logs/processing/#reserved-attributes
+[25]: /logs/processing/attributes_naming_convention/
+[26]: /logs/indexes/#indexes
+[27]: /logs/archives/rehydrating
 [28]: /logs/processing/attributes_naming_convention/#standard-attribute-list

@@ -12,6 +12,8 @@ aliases:
 has_logo: true
 integration_title: nxlog
 is_public: true
+dependencies:
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/nxlog.md'
 public_title: Intégration Datadog/NxLog
 supported_os:
   - windows
@@ -20,15 +22,14 @@ supported_os:
 
 Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de vos services.
 
-## Implémentation
+## Configuration
 
 ### Collecte de logs
 
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
 
-1. Configurez NXLog afin d'envoyer vos logs à votre plateforme Datadog.
-    Remplacez l'ensemble du contenu fichier dans `C:\Program Files\nxlog\conf` par ce qui suit :
+1. Configurez NXLog afin d'envoyer vos logs à votre plate-forme Datadog. Remplacez l'ensemble du contenu du fichier dans `C:\Program Files\nxlog\conf` par ce qui suit :
 
     ```conf
     ## Set the ROOT to the folder your nxlog was installed into,
@@ -71,10 +72,11 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
         Path        syslogs => out
     </Route>
     ```
-    N'oubliez pas de remplacer `<DATADOG_API_KEY>` dans le format.
 
-2. Activez le module watchFile de NxLog.
-    Pour chaque fichier à surveiller, ajoutez ce qui suit avant la section de sortie :
+     N'oubliez pas de remplacer `<DATADOG_API_KEY>` dans le texte.
+
+2. Activez le module watchfile de NXLog pour chaque fichier à surveiller. Pour ce faire, ajoutez ce qui suit avant la section de sortie :
+
     ```conf
     ##Module to watch a file
     <Input FILE_WATCH_1>
@@ -89,18 +91,20 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
     ```
 
 3. Vérifiez que ces fichiers sont connectés à la section de sortie.
+
     ```conf
     <Route file1>
         Path    FILE_WATCH_1,FILE_WATCH_2,... => out
     </Route>
     ```
 
-4. Redémarrez NxLog.
-    Ouvrez l'outil d'administration du service :
-    `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk`.
+4. Redémarrez NXLog. Ouvrez l'outil d'administration du service :
 
-5. Définissez des tags ou paramètres supplémentaires (facultatif).
-    Ajoutez n'importe quel attribut spécifique à vos logs dans chaque section d'entrée de votre fichier de configuration NxLog. Par exemple, pour indiquer la source utilisée dans Datadog afin d'identifier de quelle intégration les logs proviennent, utilisez ce qui suit :
+    ```text
+    C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk
+    ```
+
+5. (Facultatif) Définissez des tags ou des paramètres supplémentaires. Ajoutez n'importe quel attribut spécifique à vos logs dans chaque section d'entrée de votre fichier de configuration NxLog. Par exemple, pour indiquer la source utilisée dans Datadog afin d'identifier de quelle intégration les logs proviennent, utilisez ce qui suit :
 
     ```conf
     Exec        $ddsource = 'mysourcevalue';
@@ -125,12 +129,12 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
     </Output>
     ```
 
+
 [1]: /resources/crt/ca-certificates.crt
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
 
-1. Configurez NXLog afin d'envoyer vos logs à votre plateforme Datadog.
-    Remplacez l'ensemble du contenu fichier dans `C:\Program Files\nxlog\conf` par ce qui suit :
+1. Configurez NXLog afin d'envoyer vos logs à votre plate-forme Datadog. Remplacez l'ensemble du contenu du fichier dans `C:\Program Files\nxlog\conf` par ce qui suit :
 
     ```conf
     ## Set the ROOT to the folder your nxlog was installed into,
@@ -173,10 +177,11 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
         Path        syslogs => out
     </Route>
     ```
-    N'oubliez pas de remplacer `<DATADOG_API_KEY>` dans le format.
 
-2. Activez le module watchFile de NxLog.
-    Pour chaque fichier à surveiller, ajoutez ce qui suit avant la section de sortie :
+     N'oubliez pas de remplacer `<DATADOG_API_KEY>` dans le texte.
+
+2. Activez le module watchfile de NXLog pour chaque fichier à surveiller. Pour ce faire, ajoutez ce qui suit avant la section de sortie :
+
     ```conf
     ##Module to watch a file
     <Input FILE_WATCH_1>
@@ -191,18 +196,20 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
     ```
 
 3. Vérifiez que ces fichiers sont ajoutés dans la section de sortie :
+
     ```conf
     <Route file1>
         Path    FILE_WATCH_1,FILE_WATCH_2,... => out
     </Route>
     ```
 
-4. Redémarrez NxLog.
-    Ouvrez l'outil d'administration du service :
-    `C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk`.
+4. Redémarrez NXLog. Ouvrez l'outil d'administration du service :
 
-5. Définissez des tags ou paramètres supplémentaires (facultatif).
-    Ajoutez n'importe quel attribut spécifique à vos logs dans chaque section d'entrée de votre fichier de configuration NxLog. Par exemple, pour indiquer la source utilisée dans Datadog afin d'identifier de quelle intégration les logs proviennent, utilisez ce qui suit :
+    ```text
+    C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Administrative Tools\Services.lnk
+    ```
+
+5. (Facultatif) Définissez des tags ou des paramètres supplémentaires. Ajoutez n'importe quel attribut spécifique à vos logs dans chaque section d'entrée de votre fichier de configuration NxLog. Par exemple, pour indiquer la source utilisée dans Datadog afin d'identifier de quelle intégration les logs proviennent, utilisez ce qui suit :
 
     ```conf
     Exec        $ddsource = 'mysourcevalue';
@@ -226,6 +233,7 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
       AllowUntrusted FALSE
     </Output>
     ```
+
 
 [1]: /resources/crt/ca-certificates.crt
 {{% /tab %}}

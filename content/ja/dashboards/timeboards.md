@@ -87,7 +87,7 @@ further_reading:
 [8]: /ja/dashboards/#new-dashboard
 [9]: /ja/dashboards/widgets
 [10]: /ja/events/#event-query-language
-[11]: /ja/logs/explorer/search/#search-syntax
+[11]: /ja/logs/search_syntax
 [12]: /ja/dashboards/widgets/#full-screen
 [13]: https://app.datadoghq.com/process
 [14]: https://app.datadoghq.com/infrastructure/map

@@ -103,7 +103,7 @@ Additional properties allowed in the `request` object:
 
 [1]: /dashboards/querying/#overview
 [2]: /tracing/app_analytics/search/#search-bar
-[3]: /logs/explorer/search/#search-syntax
+[3]: /logs/search_syntax
 [4]: /dashboards/graphing_json/widget_json
 [5]: /dashboards/graphing_json/request_json
 [6]: /dashboards/graphing_json/widget_json/#conditional-format-schema

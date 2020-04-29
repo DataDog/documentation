@@ -113,6 +113,6 @@ If you use Autodiscovery from the DaemonSet, one of your Agents (the one running
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery
-[2]: /agent/cluster_agent/clusterchecks
+[1]: /getting_started/agent/autodiscovery/
+[2]: /agent/cluster_agent/clusterchecks/
 [3]: https://github.com/helm/charts/blob/master/stable/datadog/README.md

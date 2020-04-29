@@ -47,7 +47,7 @@ Datadog Agent は、ホストで実行されるソフトウェアです。ホス
   {{< nextlink href="/agent/autodiscovery">}}<u>オートディスカバリー</u>: オートディスカバリーを使用すると、どのサービスがどこで稼働しているかを自動的に追跡できます。{{< /nextlink >}}
   {{< nextlink href="/agent/logs">}}<u>ログ収集</u>: Datadog Agent でのログ収集を有効にし、構成します。{{< /nextlink >}}
   {{< nextlink href="/agent/proxy">}}<u>プロキシ</u>: ネットワーク構成によってアウトバウンドトラフィックが制限される場合は、Agent トラフィックにプロキシを使用します。{{< /nextlink >}}
-  {{< nextlink href="/agent/faq/upgrade-to-agent-v6">}}<u>Agent v6 へのアップグレード</u>: Agent 6 は Datadog Agent の最新メジャーバージョンです。アップグレードの方法について説明します。{{< /nextlink >}}
+  {{< nextlink href="/agent/versions/upgrade_to_agent_v7">}}<u>Agent v7 へのアップグレード</u>: Agent 7 は Datadog Agent の最新メジャーバージョンです。アップグレードの方法について説明します。{{< /nextlink >}}
   {{< nextlink href="/agent/troubleshooting">}}<u>トラブルシューティング</u>: Datadog Agent のトラブルシューティング情報をご紹介します。{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>ガイド</u>: Agent の使用に関するステップバイステップの詳細なチュートリアルです。{{< /nextlink >}}
   {{< nextlink href="/agent/security">}}<u>セキュリティ</u>: 安全な環境を維持するためにお客様が利用できる主なセキュリティ機能について説明します。{{< /nextlink >}}

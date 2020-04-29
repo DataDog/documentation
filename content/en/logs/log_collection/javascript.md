@@ -345,7 +345,7 @@ window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer);
 
 ### Filter by status
 
-Once Datadog Browser log library is initialized, you can set the minimul log level for your logger with the API:
+Once Datadog Browser log library is initialized, you can set the minimal log level for your logger with the API:
 
 `setLevel (level?: 'debug' | 'info' | 'warn' | 'error')`
 
@@ -357,7 +357,7 @@ Only logs with a status equal to or higher than the specified level are sent.
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setLevel('<LEVEL>');
+datadogLogs.logger.setLevel('<LEVEL>');
 ```
 
 {{% /tab %}}
@@ -385,14 +385,14 @@ Once Datadog Browser log library is initialized, it is possible to configure the
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setHandler('<HANDLER>');
+datadogLogs.logger.setHandler('<HANDLER>');
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setHandler('<HANDLER>');
+window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>');
 ```
 
 **Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
