@@ -3995,16 +3995,18 @@
     },
     "securitySchemes": {
       "apiKeyAuth": {
-        "description": "API Key",
+        "description": "Your Datadog API Key.",
         "in": "header",
         "name": "DD-API-KEY",
-        "type": "apiKey"
+        "type": "apiKey",
+        "x-env-name": "DD_CLIENT_API_KEY"
       },
       "appKeyAuth": {
-        "description": "APP Key",
+        "description": "Your Datadog APP Key.",
         "in": "header",
         "name": "DD-APPLICATION-KEY",
-        "type": "apiKey"
+        "type": "apiKey",
+        "x-env-name": "DD_CLIENT_APP_KEY"
       }
     }
   },
