@@ -79,9 +79,45 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
     **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
+### SELinux-enabled systems
+
+On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.
+The official Datadog Agent RPM package bundles [an SELinux policy][3] to grant these permissions to the system-probe binary.
+
+If you need to use Network Performance Monitoring on other systems with SELinux enabled, do the following:
+
+1. Modify the base system-probe [SELinux policy][3] to match your SELinux configuration.
+    Depending on your system, some types or attributes may not exist (or have different names).
+
+2. Compile the policy into a module; assuming your policy file is named `system_probe_policy.te`:
+
+    ```shell
+    checkmodule -M -m -o system_probe_policy.mod system_probe_policy.te
+    semodule_package -o system_probe_policy.pp -m system_probe_policy.mod
+    ```
+
+    Note: this requires the `checkmodule` and `semodule_package` utilities to be installed on your system.
+    Check your distribution for details on how to install them.
+
+3. Apply the module to your SELinux system:
+
+    ```shell
+    semodule -v -i system_probe_policy.pp
+    ```
+
+4. Change the system-probe binary's type to use the one defined in the policy; assuming your Agent installation directory is `system_probe_policy.te`:
+
+    ```shell
+    semanage fcontext -a -t system_probe_t /opt/datadog-agent/embedded/bin/system-probe
+    restorecon -v /opt/datadog-agent/embedded/bin/system-probe
+    ```
+
+5. [Restart the Agent][2]
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
 [2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
