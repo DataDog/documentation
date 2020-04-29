@@ -11,52 +11,6 @@ from pathlib import Path
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.WARNING)
 
-img_map = [
-    {
-        "source": 'cloudtrail',
-        "scope": ['cloudtrail', 'ec2', 'ecs', 's3'],
-        "image": 'amazon_',
-        "append": True
-    },
-    {
-        "source": '',
-        "scope": ['aws', 'amazon', 'amazon-config'],
-        "image": 'amazon_web_services',
-        "append": False
-    },
-    {
-        "source": 'gsuite',
-        "scope": [],
-        "image": 'gsuite',
-        "append": False
-    },
-    {
-        "source": 'guardduty',
-        "scope": ['guardduty'],
-        "image": 'amazon_guardduty',
-        "append": False
-    },
-    {
-        "source": '',
-        "scope": ['eventbridge'],
-        "image": 'amazon_event_bridge',
-        "append": False
-    },
-    {
-        "source": 'signal_sciences',
-        "scope": ['signal_sciences', 'sigsci'],
-        "image": 'sigsci_sm',
-        "append": False
-    },
-    {
-        "source": 'twistlock',
-        "scope": [],
-        "image": 'twistlock_sm',
-        "append": False
-    }
-]
-
-
 TEMPLATE = """\
 ---
 {front_matter}
@@ -93,7 +47,6 @@ def security_rules(content, content_dir):
             # get the source tag for this file
             source_tag = get_tag(json_data.get('tags', []), "source")
             scope_tag = get_tag(json_data.get('tags', []), "scope")
-            src_img, img_file, src_link = '', '', ''
 
             # delete file or skip if staged
             if json_data.get('isStaged', False):
@@ -103,31 +56,14 @@ def security_rules(content, content_dir):
                 else:
                     logger.info(f"skipping file {p.name}")
             else:
-
-                # get mapping object with matching source
-                matching_source_item = next(filter(lambda item: item.get("source") == source_tag, img_map), None)
-                if matching_source_item:
-                    src_img = f"amazon_{matching_source_item.get('image', '')}" if matching_source_item.get('append', False) else matching_source_item.get('image', '')
-                    src_link = f"https://docs.datadoghq.com/integrations/{src_img}/"
-                else:
-                    src_img = f"{source_tag}.png"
-                    src_link = f"https://docs.datadoghq.com/integrations/{source_tag}/"
-
-                matching_scope_item = next(filter(lambda item: any(scope_tag in s for s in item.get("scope", [])), img_map), None)
-                if matching_scope_item:
-                    img_file = f"{matching_scope_item.get('image', '')}{scope_tag}" if matching_scope_item.get('append', False) else matching_scope_item.get('image', '')
-
                 page_data = {
                     "title": f"{json_data.get('name', '')}",
                     "kind": "documentation",
                     "type": "security_rules",
                     "disable_edit": True,
-                    "src_link": f"{src_link}",
-                    "src_img": f"/images/integrations_logos/{src_img}",
                     "aliases": [f"{json_data.get('defaultRuleId', '').strip()}"]
                 }
-                if img_file:
-                    page_data["meta_image"] = f"/images/integrations_logos/{img_file}.png"
+
                 for tag in json_data.get('tags', []):
                     key, value = tag.split(':')
                     page_data[key] = value

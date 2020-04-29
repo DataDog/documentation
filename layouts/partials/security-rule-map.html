@@ -1,0 +1,35 @@
+{{ $dot := . }}
+{{ $data := $dot.ctx.Site.Data.security_monitoring.data.image_map }}
+{{ $img_map := $data.image_map }}
+{{ $docs_url := $data.base_integrations_url }}
+{{ $source := .source }}
+{{ $scope := .scope }}
+{{ $src_link := "" }}
+
+{{ $src_img := printf "%s" $source }}
+{{ $src_link = printf "%s%s" $docs_url $src_img }}
+
+{{ range $key, $value := $img_map }}
+    {{ if intersect $value.source (slice $source $scope) }}
+        {{ if in .source $scope }}
+            {{ $source = $scope }}
+        {{ end }}
+        {{ with index $img_map $key }}
+            {{ if eq .append true }}
+                {{ $src_img = printf "%s%s" .image $source }}
+            {{ else }}
+                {{ $src_img = printf "%s" .image }}
+            {{ end }}
+            
+            {{ if .link }}
+                {{ $src_link = printf "%s%s" $docs_url .link }}
+            {{ else }}
+                {{ $src_link = printf "%s%s" $docs_url $src_img }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $src_img = printf "%s%s" $src_img ".png" }}
+
+{{- return (dict "image" $src_img "link" $src_link) -}}
