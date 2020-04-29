@@ -358,7 +358,18 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
  * @param {object} data - schema object
  * returns html table string
  */
-const schemaTable = (tableType, data) => `
+const schemaTable = (tableType, data) => {
+  let initialData;
+  if(data.type === 'array') {
+    if(data.items.type === 'array') {
+      initialData = data.items.items.properties;
+    } else {
+      initialData = data.items.properties || data.items;
+    }
+  } else {
+    initialData = data.properties
+  }
+  return`
   <div class="table-${tableType} schema-table row">
     <p class="expand-all js-expand-all text-primary">Expand All</p>
     <div class="col-12">
@@ -373,9 +384,10 @@ const schemaTable = (tableType, data) => `
           <p class="font-semibold">Description</p>
         </div>
       </div>
-      ${rowRecursive(tableType, (data.type === 'array') ? (data.items.properties || data.items) : data.properties, false, data.required || [])}
+      ${rowRecursive(tableType, initialData, false, data.required || [])}
     </div>  
   </div>`;
+};
 
 
 /**
