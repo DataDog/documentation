@@ -76,28 +76,6 @@ More details about these permissions below.
 
 ### Log Configuration Access
 
-#### logs_live_tail
-
-Grants a role the ability to use the live tail feature.
-
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
-{{< img src="account_management/rbac/logs_livetail_access.png" alt="Create a custom Role"  style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-This permission can be granted or revoked from a role via [the Roles API][1].
-
-
-[1]: /api/#roles
-{{% /tab %}}
-{{< /tabs >}}
-
 #### logs_generate_metrics
 
 Grants a role the ability to use the Generate Metrics feature. This permission is global and applies to the configuration of all the metrics generated from logs.
@@ -309,6 +287,63 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 The following permissions can be granted to manage read access on subsets of log data:
 
+#### logs_read_data (preferred)
+
+Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
+
+{{< tabs >}}
+{{% tab "Datadog application" %}}
+
+**Global access**:
+
+Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
+
+{{< img src="account_management/rbac/logs_read_index_data_access.png" alt="Create a custom Role"  style="width:90%;">}}
+
+**Subset of Indexes**:
+
+1. Remove the `logs_read_index_data` and `logs_modify_indexes` permissions on the role.
+2. This permission can be granted to a role in [the Index Configuration page of the Datadog app][2] by editing an index and adding a role to the "Grant access of this index's content to" field.
+
+{{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles"  style="width:75%;" >}}
+
+
+[1]: https://app.datadoghq.com/access/roles
+[2]: https://app.datadoghq.com/logs/pipelines/indexes
+{{% /tab %}}
+{{% tab "API" %}}
+
+This permission can be granted or revoked from a role via [the Roles API][1].
+For example, to grant read access only on two indexes named `main` and `support` to a role, your API call looks like this:
+
+1. Remove the global `logs_read_index_data` permission on the role if already assigned.
+2. Get the UUID of the role you want to modify.
+3. Use the [Get Permission][2] API to find the `logs_read_index_data` permission UUID for your region.
+4. Grant permission to that role with the following call:
+
+```bash
+curl -X POST \
+        https://app.datadoghq.com/api/v1/role/<ROLE_UUID>/permission/<PERMISSION_UUID> \
+        -H "Content-Type: application/json" \
+        -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+        -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+        -d '{
+                "scope": {
+                    "indexes": [
+                        "main",
+                        "support"
+                    ]
+                }
+            }'
+```
+
+
+[1]: /api/#roles
+[2]: /api/#get-permissions
+{{% /tab %}}
+{{< /tabs >}}
+
+
 #### logs_read_index_data
 
 Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
@@ -362,6 +397,29 @@ curl -X POST \
 
 [1]: /api/#roles
 [2]: /api/#get-permissions
+{{% /tab %}}
+{{< /tabs >}}
+
+
+#### logs_live_tail
+
+Grants a role the ability to use the live tail feature.
+
+{{< tabs >}}
+{{% tab "Datadog application" %}}
+
+Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
+{{< img src="account_management/rbac/logs_livetail_access.png" alt="Create a custom Role"  style="width:90%;">}}
+
+
+[1]: https://app.datadoghq.com/access/roles
+{{% /tab %}}
+{{% tab "API" %}}
+
+This permission can be granted or revoked from a role via [the Roles API][1].
+
+
+[1]: /api/#roles
 {{% /tab %}}
 {{< /tabs >}}
 
