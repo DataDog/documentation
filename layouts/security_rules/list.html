@@ -1,7 +1,6 @@
 
 {{ define "main" }}
 {{ $dot := . }}
-{{ $img_path := printf "%s%s" .Site.Params.img_url "images/integrations_logos/" }}
 {{ $scratch := .Scratch }}
 
 <h1 id="pagetitle">{{ .Title }}</h1>
@@ -19,7 +18,11 @@
                     <div class="rule-list__.image d-inline font-semibold h-100 text-uppercase px-2 py-1">
                         {{ range first 1 $v.Pages }}
                             {{ $this_img := partial "security-rule-map.html" (dict "source" .Params.source "ctx" $dot) }}
-                            <img srcset="{{ $img_path }}{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $img_path }}{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Title }}" />
+                            {{ if $this_img.image }}
+                                <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
+                            {{ else }}
+                                <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="40" alt="missing"/>
+                            {{ end }}
                         {{ end }}
                     </div>
                     <div class="d-inline font-semibold ml-1">
@@ -35,7 +38,11 @@
                     {{ range $v.Pages }}
                         <a class="mb-1 font-semibold js-page" href="{{.Permalink}}" data-name="{{ lower .Title }} {{ .File.TranslationBaseName }}">
                             {{ $this_img := partial "security-rule-map.html" (dict "source" .Params.source "scope" .Params.scope "ctx" $dot) }}
-                            <img srcset="{{ $img_path }}{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $img_path }}{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Title }}" />
+                            {{ if $this_img.image }}
+                                <img srcset="{{ $this_img.image }}?w=80&auto-enhance 2x" src="{{ $this_img.image }}?w=40&auto-enhance" width="40" alt="{{ htmlEscape .Params.Source }}" />
+                            {{ else }}
+                                <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="40" alt="missing"/>
+                            {{ end }}
                             {{ .Title }}<br />
                         </a>
                     {{ end }}

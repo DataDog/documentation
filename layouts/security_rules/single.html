@@ -1,6 +1,4 @@
 {{ define "main" }}
-{{ $img_path := printf "%s%s" .Site.Params.img_url "images/integrations_logos/" }}
-
 	<a class="text-uppercase font-weight-bold text-gray mb-1 d-block" href="/security_monitoring/default_rules/">&lt;&nbsp; Back to rules search</a>
 
 	<h1 id="pagetitle">{{ .Title }}</h1>
@@ -12,7 +10,7 @@
 		{{ if and $meta_image .Params.scope }}
 			<div class="col-3 col-lg-2 d-flex justify-content-center">
 				{{ $meta_img := partial "security-rule-map.html" (dict "source" .Params.source "scope" .Params.scope) }}
-				<img src="{{ $img_path }}{{ $meta_image.image }}?auto=format&width=120" width="auto" height="100px" alt="{{ htmlEscape .Title }}" />
+				<img src="{{ $meta_image.image }}?auto=format&width=120" width="auto" height="100px" alt="{{ htmlEscape .Params.Source }}" />
 			</div>
 		{{ end }}
 		<div class="col-9 col-lg-10">

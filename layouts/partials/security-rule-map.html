@@ -1,13 +1,14 @@
 {{ $dot := . }}
 {{ $data := $dot.ctx.Site.Data.security_monitoring.data }}
 {{ $img_map := $data.image_map }}
+{{ $img_path := "images/integrations_logos/" }}
+{{ $img_url := printf "%s%s" $dot.ctx.Site.Params.img_url $img_path }}
 {{ $docs_url := $data.base_integrations_url }}
 {{ $source := .source }}
 {{ $scope := .scope }}
-{{ $src_link := "" }}
 
 {{ $src_img := printf "%s" $source }}
-{{ $src_link = printf "%s%s" $docs_url $src_img }}
+{{ $src_link := printf "%s%s" $docs_url $src_img }}
 
 {{ range $key, $value := $img_map }}
     {{ if intersect $value.source (slice $source $scope) }}
@@ -30,6 +31,12 @@
     {{ end }}
 {{ end }}
 
-{{ $src_img = printf "%s%s" $src_img ".png" }}
+{{ $local_img := printf "/static/%s%s%s" $img_path $src_img ".png" }}
 
-{{- return (dict "image" $src_img "link" $src_link) -}}
+{{ if eq (fileExists $local_img) true }}
+    {{ $src_img = printf "%s%s%s" $img_url $src_img ".png" }}
+{{ else }}
+    {{ $src_img = "" }}
+{{ end }}
+
+{{- return (dict "image" $src_img "link" $src_link "path" $local_img) -}}
