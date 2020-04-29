@@ -18,7 +18,7 @@
               "related_event_id": "integer",
               "source_type_name": "string",
               "tags": [
-                "string"
+                "environment:test"
               ],
               "text": "Oh boy!",
               "title": "Did you hear the news today?",
@@ -84,7 +84,7 @@
         "related_event_id": "integer",
         "source_type_name": "string",
         "tags": [
-          "string"
+          "environment:test"
         ],
         "text": "Oh boy!",
         "title": "Did you hear the news today?",

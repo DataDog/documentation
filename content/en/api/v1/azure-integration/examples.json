@@ -2,7 +2,7 @@
   "DeleteAzureIntegration": {
     "responses": {
       "200": {
-        "json": {},
+        "json": "[object Object]",
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"primitive\"></div>\n    </div>  \n  </div>"
       },
       "400": {
@@ -27,7 +27,7 @@
         "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
         "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
         "errors": [
-          "string"
+          "*"
         ],
         "host_filters": "key:value,filter:example",
         "new_client_id": "new1c7f6-1234-5678-9101-3fcbf464test",
@@ -44,7 +44,7 @@
           "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
           "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
           "errors": [
-            "string"
+            "*"
           ],
           "host_filters": "key:value,filter:example",
           "new_client_id": "new1c7f6-1234-5678-9101-3fcbf464test",
@@ -78,7 +78,7 @@
   "CreateAzureIntegration": {
     "responses": {
       "200": {
-        "json": {},
+        "json": "[object Object]",
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"primitive\"></div>\n    </div>  \n  </div>"
       },
       "400": {
@@ -103,7 +103,7 @@
         "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
         "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
         "errors": [
-          "string"
+          "*"
         ],
         "host_filters": "key:value,filter:example",
         "new_client_id": "new1c7f6-1234-5678-9101-3fcbf464test",
@@ -116,7 +116,7 @@
   "UpdateAzureIntegration": {
     "responses": {
       "200": {
-        "json": {},
+        "json": "[object Object]",
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"primitive\"></div>\n    </div>  \n  </div>"
       },
       "400": {
@@ -141,7 +141,7 @@
         "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
         "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
         "errors": [
-          "string"
+          "*"
         ],
         "host_filters": "key:value,filter:example",
         "new_client_id": "new1c7f6-1234-5678-9101-3fcbf464test",
@@ -154,7 +154,7 @@
   "UpdateAzureHostFilters": {
     "responses": {
       "200": {
-        "json": {},
+        "json": "[object Object]",
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"primitive\"></div>\n    </div>  \n  </div>"
       },
       "400": {
@@ -179,7 +179,7 @@
         "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
         "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
         "errors": [
-          "string"
+          "*"
         ],
         "host_filters": "key:value,filter:example",
         "new_client_id": "new1c7f6-1234-5678-9101-3fcbf464test",

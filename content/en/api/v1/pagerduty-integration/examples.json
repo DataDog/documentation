@@ -21,7 +21,7 @@
         "json": {
           "api_token": "<PAGERDUTY_TOKEN>",
           "schedules": [
-            "string"
+            "https://my-pd.pagerduty.com/schedules#PCPYT4M,https://my-pd.pagerduty.com/schedules#PKTPB7P"
           ],
           "services": [
             {
@@ -77,7 +77,7 @@
     "request": {
       "json": {
         "schedules": [
-          "string"
+          "https://my-pd.pagerduty.com/schedules#PCPYT4M,https://my-pd.pagerduty.com/schedules#PKTPB7P"
         ],
         "services": [
           {
@@ -112,7 +112,7 @@
       "json": {
         "api_token": "<PAGERDUTY_TOKEN>",
         "schedules": [
-          "string"
+          "https://my-pd.pagerduty.com/schedules#PCPYT4M,https://my-pd.pagerduty.com/schedules#PKTPB7P"
         ],
         "services": [
           {

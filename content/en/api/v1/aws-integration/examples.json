@@ -26,15 +26,15 @@
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",
-        "account_specific_namespace_rules": "object",
+        "account_specific_namespace_rules": "false",
         "excluded_regions": [
-          "string"
+          "us-east-1,us-west-2"
         ],
         "filter_tags": [
-          "string"
+          "<KEY>:<VALUE>"
         ],
         "host_tags": [
-          "string"
+          "<KEY>:<VALUE>"
         ],
         "role_name": "DatadogAWSIntegrationRole",
         "secret_access_key": "string"
@@ -50,15 +50,15 @@
             {
               "access_key_id": "string",
               "account_id": "1234567",
-              "account_specific_namespace_rules": "object",
+              "account_specific_namespace_rules": "false",
               "excluded_regions": [
-                "string"
+                "us-east-1,us-west-2"
               ],
               "filter_tags": [
-                "string"
+                "<KEY>:<VALUE>"
               ],
               "host_tags": [
-                "string"
+                "<KEY>:<VALUE>"
               ],
               "role_name": "DatadogAWSIntegrationRole",
               "secret_access_key": "string"
@@ -118,15 +118,15 @@
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",
-        "account_specific_namespace_rules": "object",
+        "account_specific_namespace_rules": "false",
         "excluded_regions": [
-          "string"
+          "us-east-1,us-west-2"
         ],
         "filter_tags": [
-          "string"
+          "<KEY>:<VALUE>"
         ],
         "host_tags": [
-          "string"
+          "<KEY>:<VALUE>"
         ],
         "role_name": "DatadogAWSIntegrationRole",
         "secret_access_key": "string"
@@ -161,15 +161,15 @@
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",
-        "account_specific_namespace_rules": "object",
+        "account_specific_namespace_rules": "false",
         "excluded_regions": [
-          "string"
+          "us-east-1,us-west-2"
         ],
         "filter_tags": [
-          "string"
+          "<KEY>:<VALUE>"
         ],
         "host_tags": [
-          "string"
+          "<KEY>:<VALUE>"
         ],
         "role_name": "DatadogAWSIntegrationRole",
         "secret_access_key": "string"
@@ -180,7 +180,7 @@
   "ListAvailableAWSNamespaces": {
     "responses": {
       "200": {
-        "json": "string",
+        "json": "[object Object]",
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      \n        <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              \n    <div class=\"col-4 column\">\n      <p class=\"key\"></p>\n    </div>\n  \n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"></div>\n            </div>\n            \n          </div>\n        </div>\n        \n    </div>  \n  </div>"
       },
       "403": {
@@ -226,15 +226,15 @@
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",
-        "account_specific_namespace_rules": "object",
+        "account_specific_namespace_rules": "false",
         "excluded_regions": [
-          "string"
+          "us-east-1,us-west-2"
         ],
         "filter_tags": [
-          "string"
+          "<KEY>:<VALUE>"
         ],
         "host_tags": [
-          "string"
+          "<KEY>:<VALUE>"
         ],
         "role_name": "DatadogAWSIntegrationRole",
         "secret_access_key": "string"

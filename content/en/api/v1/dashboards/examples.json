@@ -41,7 +41,7 @@
           "created_at": "string",
           "description": "string",
           "id": "123-abc-456",
-          "is_read_only": "boolean",
+          "is_read_only": "false",
           "layout_type": "string",
           "modified_at": "string",
           "notify_list": [
@@ -100,7 +100,7 @@
         "created_at": "string",
         "description": "string",
         "id": "123-abc-456",
-        "is_read_only": "boolean",
+        "is_read_only": "false",
         "layout_type": "string",
         "modified_at": "string",
         "notify_list": [
@@ -175,7 +175,7 @@
           "created_at": "string",
           "description": "string",
           "id": "123-abc-456",
-          "is_read_only": "boolean",
+          "is_read_only": "false",
           "layout_type": "string",
           "modified_at": "string",
           "notify_list": [
@@ -241,7 +241,7 @@
           "created_at": "string",
           "description": "string",
           "id": "123-abc-456",
-          "is_read_only": "boolean",
+          "is_read_only": "false",
           "layout_type": "string",
           "modified_at": "string",
           "notify_list": [
@@ -308,7 +308,7 @@
         "created_at": "string",
         "description": "string",
         "id": "123-abc-456",
-        "is_read_only": "boolean",
+        "is_read_only": "false",
         "layout_type": "string",
         "modified_at": "string",
         "notify_list": [

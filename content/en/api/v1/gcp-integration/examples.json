@@ -2,7 +2,7 @@
   "DeleteGCPIntegration": {
     "responses": {
       "200": {
-        "json": {},
+        "json": "[object Object]",
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"primitive\"></div>\n    </div>  \n  </div>"
       },
       "400": {
@@ -31,7 +31,7 @@
         "client_id": "123456712345671234567",
         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
         "errors": [
-          "string"
+          "*"
         ],
         "host_filters": "key:value,filter:example",
         "private_key": "private_key",
@@ -54,7 +54,7 @@
           "client_id": "123456712345671234567",
           "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
           "errors": [
-            "string"
+            "*"
           ],
           "host_filters": "key:value,filter:example",
           "private_key": "private_key",
@@ -90,7 +90,7 @@
   "CreateGCPIntegration": {
     "responses": {
       "200": {
-        "json": {},
+        "json": "[object Object]",
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"primitive\"></div>\n    </div>  \n  </div>"
       },
       "400": {
@@ -119,7 +119,7 @@
         "client_id": "123456712345671234567",
         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
         "errors": [
-          "string"
+          "*"
         ],
         "host_filters": "key:value,filter:example",
         "private_key": "private_key",
@@ -134,7 +134,7 @@
   "UpdateGCPIntegration": {
     "responses": {
       "200": {
-        "json": {},
+        "json": "[object Object]",
         "html": "\n  <div class=\"table-response schema-table row\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"primitive\"></div>\n    </div>  \n  </div>"
       },
       "400": {
@@ -163,7 +163,7 @@
         "client_id": "123456712345671234567",
         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
         "errors": [
-          "string"
+          "*"
         ],
         "host_filters": "key:value,filter:example",
         "private_key": "private_key",
