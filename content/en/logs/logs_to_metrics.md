@@ -58,11 +58,12 @@ Usage metrics are estimates of your current Datadog usage in near real-time. The
 
 Log Management usage metrics come with three tags that can be used for more granular monitoring:
 
-| Tag                     | Description                                                           |
-| ----------------------- | --------------------------------------------------------------------- |
-|  `datadog_index`        | Indicates the routing query that matches a log to an intended index.  |
-|  `datadog_is_excluded`  | Indicates whether or not a log matches an exclusion query.            |
-|  `service`              | The service attribute of the log event.                               |
+| Tag                     | Description                                                           | Metric|
+| ----------------------- | --------------------------------------------------------------------- |-------|
+|  `datadog_index`        | Indicates the routing query that matches a log to an intended index.  | `all` |
+|  `datadog_is_excluded`  | Indicates whether or not a log matches an exclusion query.            | `all` |
+|  `service`              | The service attribute of the log event.                               | `all` |
+|  `status`               | The status attribute of the log event (info, error, ...).             | `datadog.estimated_usage.logs.ingested_events` |
 
 ## Further Reading
 
