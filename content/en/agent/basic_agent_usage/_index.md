@@ -146,7 +146,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [SUSE Enterprise Linux x86_64][7] with SysVinit | SUSE 11 SP4 in Agent 7.16.0+                      |
 | [Fedora x86_64][8]                              | Fedora 26+                                        |
 | [macOS][9]                                      | macOS 10.12+                                      |
-| [Windows server 64-bit][10]                     | Server Core (not Nano) |
+| [Windows server 64-bit][10]                     | Windows Server 2008r2+ (not Nano)                 |
 | [Windows 64-bit][10]                            | Windows 7+                                        |
 
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
