@@ -1692,6 +1692,24 @@ api_v1:
   - name: Update a downtime
     parent: Downtimes
     url: update-a-downtime
+  - name: Embeddable Graphs
+    url: /api/v1/embeddable-graphs/
+    identifier: Embeddable Graphs
+  - name: Get all embeds
+    parent: Embeddable Graphs
+    url: get-all-embeds
+  - name: Create embed
+    parent: Embeddable Graphs
+    url: create-embed
+  - name: Get specific embed
+    parent: Embeddable Graphs
+    url: get-specific-embed
+  - name: Enable embed
+    parent: Embeddable Graphs
+    url: enable-embed
+  - name: Revoke embed
+    parent: Embeddable Graphs
+    url: revoke-embed
   - name: Events
     url: /api/v1/events/
     identifier: Events
