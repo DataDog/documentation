@@ -1562,19 +1562,6 @@ main:
     identifier: help_top_level
     weight: 210000
 api_v1:
-  - name: _Overview
-    url: /api/v1/
-    identifier: API V1 overview
-  - name: Authentication
-    url: /api/v1/
-    parent: API V1 overview
-    url: authentication
-    identifier: API V1 authetication
-  - name: Rate Limiting
-    url: /api/v1/
-    parent: API V1 overview
-    url: rate-limiting
-    identifier: API V1 rate limiting
   - name: AWS Integration
     url: /api/v1/aws-integration/
     identifier: AWS Integration
@@ -2143,19 +2130,6 @@ api_v1:
     parent: Webhooks Integration
     url: update-a-webhook-for-webhooks-integration
 api_v2:
-  - name: _Overview
-    url: /api/v1/
-    identifier: API V1 overview
-  - name: Authentication
-    url: /api/v1/
-    parent: API V1 overview
-    url: authentication
-    identifier: API V1 authetication
-  - name: Rate Limiting
-    url: /api/v1/
-    parent: API V1 overview
-    url: rate-limiting
-    identifier: API V1 rate limiting
   - name: Dashboard Lists
     url: /api/v2/dashboard-lists/
     identifier: Dashboard Lists
