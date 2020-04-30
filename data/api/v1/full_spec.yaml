@@ -1123,6 +1123,104 @@ components:
             type: string
           type: array
       type: object
+    EmbeddableGraph:
+      description: Embeddable graph.
+      properties:
+        dash_name:
+          description: Name of the dashboard the graph is on (null if none).
+          type: string
+        dash_url:
+          description: URL of the dashboard the graph is on (null if none).
+          type: string
+        embed_id:
+          description: ID of the embed.
+          type: string
+        graph_title:
+          description: Title of the graph.
+          type: string
+        html:
+          description: HTML fragment for the embed (iframe).
+          type: string
+        revoked:
+          description: Boolean flag for whether or not the embed is revoked.
+          type: boolean
+        shared_by:
+          description: ID of the use who shared the embed.
+          format: int64
+          type: integer
+      type: object
+    EmbeddableGraphLegend:
+      default: 'no'
+      description: The flag determining if the graph includes a legend.
+      enum:
+      - 'yes'
+      - 'no'
+      type: string
+      x-enum-varnames:
+      - 'YES'
+      - 'NO'
+    EmbeddableGraphPayload:
+      description: Payload to create new embeddable graph.
+      properties:
+        graph_json:
+          description: 'The graph definition in JSON.
+
+
+            Same format that is available on the JSON tab of the graph editor.'
+          type: string
+        legend:
+          $ref: '#/components/schemas/EmbeddableGraphLegend'
+        size:
+          $ref: '#/components/schemas/EmbeddableGraphSize'
+        timeframe:
+          $ref: '#/components/schemas/EmbeddableGraphTimeframe'
+        title:
+          default: Embed created through API
+          description: Determines graph title. Must be at least 1 character.
+          minimum: 1
+          type: string
+      required:
+      - graph_json
+      type: object
+    EmbeddableGraphSize:
+      default: medium
+      description: The size of the graph.
+      enum:
+      - small
+      - medium
+      - large
+      - xlarge
+      type: string
+      x-enum-varnames:
+      - SMALL
+      - MEDIUM
+      - LARGE
+      - XLARGE
+    EmbeddableGraphTimeframe:
+      default: 1_hour
+      description: The timeframe for the graph.
+      enum:
+      - 1_hour
+      - 4_hours
+      - 1_day
+      - 2_days
+      - 1_week
+      type: string
+      x-enum-varnames:
+      - 1_HOUR
+      - 4_HOURS
+      - 1_DAY
+      - 2_DAYS
+      - 1_WEEK
+    EmbeddableGraphs:
+      description: Response with embeddable graphs.
+      properties:
+        embedded_graphs:
+          description: List of embeddable graphs.
+          items:
+            $ref: '#/components/schemas/EmbeddableGraph'
+          type: array
+      type: object
     Event:
       description: TODO.
       properties:
@@ -9017,6 +9115,181 @@ paths:
       summary: Get an event
       tags:
       - Events
+  /api/v1/graph/embed:
+    get:
+      description: Gets a list of previously created embeddable graphs.
+      operationId: ListEmbeddableGraphs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddableGraphs'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      summary: Get all embeds
+      tags:
+      - Embeddable Graphs
+    post:
+      description: 'Creates a new embeddable graph.
+
+
+        Note: If an embed already exists for the exact same query in a given organization,
+
+        the older embed is returned instead of creating a new embed.
+
+
+        If you are interested in using template variables, see
+
+        [Embeddable Graphs with Template Variables](https://docs.datadoghq.com/dashboards/faq/embeddable-graphs-with-template-variables).'
+      operationId: CreateEmbeddableGraph
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmbeddableGraphPayload'
+        description: Embeddable Graph body
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddableGraph'
+          description: Payload accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      summary: Create embed
+      tags:
+      - Embeddable Graphs
+      x-codegen-request-body-name: body
+  /api/v1/graph/embed/{embed_id}:
+    get:
+      description: Get the HTML fragment for a previously generated embed with `embed_id`.
+      operationId: GetEmbeddableGraph
+      parameters:
+      - description: Token of the embed.
+        in: path
+        name: embed_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddableGraph'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get specific embed
+      tags:
+      - Embeddable Graphs
+  /api/v1/graph/embed/{embed_id}/enable:
+    get:
+      description: Enable a specified embed.
+      operationId: EnableEmbeddableGraph
+      parameters:
+      - description: ID of the embed.
+        in: path
+        name: embed_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: A JSON containing the success message
+                properties:
+                  success:
+                    description: Message.
+                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
+                      successfully enabled.
+                    type: string
+                type: object
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Enable embed
+      tags:
+      - Embeddable Graphs
+  /api/v1/graph/embed/{embed_id}/revoke:
+    get:
+      description: Revoke a specified embed.
+      operationId: RevokeEmbeddableGraph
+      parameters:
+      - description: ID of the embed.
+        in: path
+        name: embed_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: A JSON containing the success message
+                properties:
+                  success:
+                    description: Message.
+                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
+                      successfully revoked.
+                    type: string
+                type: object
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Revoke embed
+      tags:
+      - Embeddable Graphs
   /api/v1/graph/snapshot:
     get:
       description: Take graph snapshots.
@@ -14160,6 +14433,8 @@ tags:
 
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
+- description: Interact with embeddable graphs through the API.
+  name: Embeddable Graphs
 - description: 'The events service allows you to programatically post events to the
     event stream
 
