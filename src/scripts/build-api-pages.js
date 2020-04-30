@@ -453,6 +453,7 @@ module.exports = {
   fieldColumn,
   typeColumn,
   schemaTable,
-  rowRecursive
+  rowRecursive,
+  filterExampleJson
 };
 
