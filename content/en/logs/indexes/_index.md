@@ -40,7 +40,7 @@ The Log Explorer supports [queries across multiple indexes][8].
 
 ### Add Indexes
 
-If multiple indexes is activated, use the "New Index" button to create a new index. 
+If multiple indexes is activated, use the "New Index" button to create a new index.
 
 {{< img src="logs/indexes/add-index.png" alt="Add index"  style="width:70%;">}}
 
@@ -134,7 +134,7 @@ Update or remove this quota at any time when editing the Index:
 [10]: /logs/archives
 [11]: /logs/logs_to_metrics
 [12]: /logs/search_syntax/
-[13]: /api/?lang=bash#update-an-index
+[13]: /api/v1/logs-indexes/#update-an-index
 [14]: /logs/processing/processors/?tab=ui#user-agent-parser
 [15]: /logs/processing/processors/?tab=ui#geoip-parser
 [16]: /tracing/connect_logs_and_traces/

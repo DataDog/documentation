@@ -29,7 +29,7 @@ Click on a metric name to display a panel with more detailed information. The me
 ### Metric name
 
 The name of your metric in the [metric explorer][2], [dashboards][3], etc.
- 
+
 ### Number of distinct metrics
 
 A metric can correspond to multiple distinct metrics depending on its associated tags. Learn more in the [custom metrics][4] documentation.
@@ -83,7 +83,7 @@ The collection interval for the metric in seconds.
 [3]: /dashboards
 [4]: /developers/metrics/custom_metrics
 [5]: /tagging
-[6]: /api/?lang=python#edit-metric-metadata
+[6]: /api/v1/metrics/#edit-metric-metadata
 [7]: /integrations
 [8]: /developers/metrics/units
 [9]: /developers/metrics/types

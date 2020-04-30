@@ -94,4 +94,4 @@ To see every page of your logs, continue to resend your query where the `startAt
 
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /api/?lang=bash#get-a-list-of-logs
+[1]: /api/v1/logs/#get-a-list-of-logs

@@ -102,7 +102,7 @@ Events generated from your monitor (alerts, warnings, recoveries, etc.) are show
 
 [1]: /monitors/monitor_types
 [2]: /monitors/downtimes
-[3]: /api/?lang=python#monitors
+[3]: /api/v1/monitors/
 [4]: /dashboards/querying
 [5]: /monitors/notifications
 [6]: /dashboards
