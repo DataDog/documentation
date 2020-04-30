@@ -559,16 +559,21 @@ const addHasExpandClass = (output) => {
  * returns html table string
  */
 const schemaTable = (tableType, data) => {
+  let extraClasses = '';
   let initialData;
   if(data.type === 'array') {
     if(data.items.type === 'array') {
       initialData = data.items.items.properties;
+    } else if(data.items.properties) {
+      initialData = data.items.properties;
     } else {
-      initialData = data.items.properties || data.items;
+      initialData = data.items;
+      extraClasses = 'd-none';
     }
   } else {
     initialData = data.properties
   }
+  extraClasses = (initialData) ? extraClasses : 'd-none';
   const emptyRow = `
     <div class="row">
       <div class="col-12 first-column">
@@ -578,7 +583,7 @@ const schemaTable = (tableType, data) => {
       </div>
     </div>`.trim();
   const output = `
-  <div class="table-${tableType} schema-table row">
+  <div class="table-${tableType} schema-table row ${extraClasses}">
     <p class="expand-all js-expand-all text-primary">Expand All</p>
     <div class="col-12">
       <div class="row table-header">
