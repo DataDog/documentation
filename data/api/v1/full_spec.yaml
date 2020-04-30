@@ -3871,37 +3871,6 @@ components:
         org:
           $ref: '#/components/schemas/Organization'
       type: object
-    PagerDutyIntegration:
-      description: New Datadog-PagerDuty integration.
-      properties:
-        api_token:
-          description: Your PagerDuty API token.
-          example: <PAGERDUTY_TOKEN>
-          type: string
-        schedules:
-          description: The array of your schedule URLs.
-          example:
-          - https://my-pd.pagerduty.com/schedules#PCPYT4M
-          - https://my-pd.pagerduty.com/schedules#PKTPB7P
-          items:
-            description: TODO.
-            type: string
-          type: array
-        services:
-          description: The array of PagerDuty service objects.
-          example:
-          - service_key: <PAGERDUTY_SERVICE_KEY>
-            service_name: test_00
-          - service_key: <PAGERDUTY_SERVICE_KEY>
-            service_name: test_01
-          items:
-            $ref: '#/components/schemas/PagerDutyService'
-          type: array
-        subdomain:
-          description: Your PagerDuty subdomain.
-          example: <PAGERDUTY_SUB_DOMAIN>
-          type: string
-      type: object
     PagerDutyService:
       description: Configure your Datadog-PagerDuty integration directly through the
         Datadog API. For more informations, see the [PagerDuty integration page](https://docs.datadoghq.com/integrations/pagerduty/).
@@ -3933,29 +3902,6 @@ components:
           type: string
       required:
       - service_name
-      type: object
-    PagerDutyServicesAndSchedules:
-      description: Define new services and schedules to your Datadog-PagerDuty integration.
-      properties:
-        schedules:
-          description: The array of your schedule URLs.
-          example:
-          - https://my-pd.pagerduty.com/schedules#PCPYT4M
-          - https://my-pd.pagerduty.com/schedules#PKTPB7P
-          items:
-            description: TODO.
-            type: string
-          type: array
-        services:
-          description: The array of PagerDuty service objects.
-          example:
-          - service_key: <PAGERDUTY_SERVICE_KEY>
-            service_name: test_00
-          - service_key: <PAGERDUTY_SERVICE_KEY>
-            service_name: test_01
-          items:
-            $ref: '#/components/schemas/PagerDutyService'
-          type: array
       type: object
     Point:
       description: 'Each point is of the form `[POSIX_timestamp, numeric_value]`.
@@ -5862,6 +5808,10 @@ components:
           type: string
         modified_by:
           $ref: '#/components/schemas/SyntheticsTestAuthor'
+        monitor_id:
+          description: TODO.
+          format: int64
+          type: integer
         name:
           description: TODO.
           type: string
@@ -5919,6 +5869,9 @@ components:
         accept_self_signed:
           description: TODO.
           type: boolean
+        allow_insecure:
+          description: TODO.
+          type: boolean
         device_ids:
           description: TODO.
           items:
@@ -5927,6 +5880,10 @@ components:
         follow_redirects:
           description: TODO.
           type: boolean
+        min_failure_duration:
+          description: TODO.
+          format: int64
+          type: integer
         min_location_failed:
           description: TODO.
           format: int64
@@ -10140,110 +10097,6 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
-  /api/v1/integration/pagerduty:
-    delete:
-      description: Delete the Datadog-PagerDuty integration.
-      operationId: DeletePagerDutyIntegration
-      responses:
-        '200':
-          description: OK
-        '204':
-          description: Integration does not exist
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication error
-      summary: Delete a PagerDuty integration
-      tags:
-      - PagerDuty Integration
-    get:
-      description: Get all information about your Datadog-PagerDuty integration.
-      operationId: GetPagerDutyIntegration
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PagerDutyIntegration'
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication error
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Item Not Found
-      summary: Get a PagerDuty integration
-      tags:
-      - PagerDuty Integration
-    post:
-      description: Add new services and schedules to your Datadog-PagerDuty integration.
-      operationId: UpdatePagerDutyIntegration
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PagerDutyServicesAndSchedules'
-        description: Update an existing Datadog-PagerDuty integration.
-        required: true
-      responses:
-        '204':
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication error
-      summary: Add new services and schedules
-      tags:
-      - PagerDuty Integration
-      x-codegen-request-body-name: body
-    put:
-      description: 'Create a new Datadog-PagerDuty integration.
-
-        **Note:** All arguments are required when creating (`PUT`) a new PagerDuty
-        configuration.'
-      operationId: CreatePagerDutyIntegration
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PagerDutyIntegration'
-        description: Create Datadog-PagerDuty integration.
-        required: true
-      responses:
-        '204':
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication error
-      summary: Create a PagerDuty integration
-      tags:
-      - PagerDuty Integration
-      x-codegen-request-body-name: body
   /api/v1/integration/pagerduty/configuration/services:
     post:
       description: Create a new service object in the PagerDuty integration.
@@ -10274,12 +10127,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Not Found
       summary: Create a new service object
       tags:
       - PagerDuty Integration

@@ -1351,7 +1351,7 @@ main:
     identifier: dev_tools_metrics_powershell
     weight: 204
   - name: 'Submission - API '
-    url: api/v1/metrics/#submit-metrics
+    url: 'api/v1/metrics/#submit-metrics'
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_api
     weight: 205
@@ -1386,7 +1386,7 @@ main:
     identifier: dev_tools_events_mail
     weight: 303
   - name: API
-    url: api/v1/events/#post-an-event
+    url: 'api/v1/events/#post-an-event'
     parent: dev_tools_events
     identifier: dev_tools_events_api
     weight: 304
@@ -1905,18 +1905,6 @@ api_v1:
   - name: PagerDuty Integration
     url: /api/v1/pagerduty-integration/
     identifier: PagerDuty Integration
-  - name: Delete a PagerDuty integration
-    parent: PagerDuty Integration
-    url: delete-a-pagerduty-integration
-  - name: Get a PagerDuty integration
-    parent: PagerDuty Integration
-    url: get-a-pagerduty-integration
-  - name: Add new services and schedules
-    parent: PagerDuty Integration
-    url: add-new-services-and-schedules
-  - name: Create a PagerDuty integration
-    parent: PagerDuty Integration
-    url: create-a-pagerduty-integration
   - name: Create a new service object
     parent: PagerDuty Integration
     url: create-a-new-service-object
