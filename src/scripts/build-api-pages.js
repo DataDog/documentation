@@ -229,7 +229,7 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
     <div class="col-4 column">
       <p class="key">${toggleMarkup}${field}${requiredMarkup}</p>
     </div>
-  `;
+  `.trim();
 };
 
 
@@ -254,7 +254,7 @@ const typeColumn = (key, value, readOnlyMarkup) => {
     return `<div class="col-2 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
-    return `<div class="col-2 column"><p>${typeVal}${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p>${typeVal}${readOnlyMarkup}</p></div>`.trim();
   }
 };
 
@@ -343,12 +343,28 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             ${(childData) ? rowRecursive(tableType, childData, true, data.required || [], (level + 1), newParentKey) : ''}
           </div>
         </div>
-        `;
+        `.trim();
       });
     } else {
       html += `<div class="primitive">${data || ''}</div>`;
     }
     return html;
+};
+
+
+/**
+ * Takes the schema table output string and checks if we had any expand collapse sections
+ * if we had none then inject the class "has-no-expands" onto the output wrapper div
+ * @param {string} schema table output string
+ * returns html table string
+ */
+const addHasExpandClass = (output) => {
+  if(!output.includes('js-collapse-trigger')) {
+    const regex = /(\s+schema-table\s+)/m;
+    const subst = ` schema-table has-no-expands `;
+    return output.replace(regex, subst);
+  }
+  return output;
 };
 
 
@@ -369,7 +385,15 @@ const schemaTable = (tableType, data) => {
   } else {
     initialData = data.properties
   }
-  return`
+  const emptyRow = `
+    <div class="row">
+      <div class="col-12 first-column">
+        <div class="row first-row">
+          <div class="col-12 column"><p>No ${tableType} body</p></div>
+        </div>
+      </div>
+    </div>`.trim();
+  const output = `
   <div class="table-${tableType} schema-table row">
     <p class="expand-all js-expand-all text-primary">Expand All</p>
     <div class="col-12">
@@ -384,9 +408,10 @@ const schemaTable = (tableType, data) => {
           <p class="font-semibold">Description</p>
         </div>
       </div>
-      ${rowRecursive(tableType, initialData, false, data.required || [])}
+      ${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}
     </div>  
-  </div>`;
+  </div>`.trim();
+  return addHasExpandClass(output);
 };
 
 
