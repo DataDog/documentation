@@ -5862,6 +5862,10 @@ components:
           type: string
         modified_by:
           $ref: '#/components/schemas/SyntheticsTestAuthor'
+        monitor_id:
+          description: TODO.
+          format: int64
+          type: integer
         name:
           description: TODO.
           type: string
@@ -5919,6 +5923,9 @@ components:
         accept_self_signed:
           description: TODO.
           type: boolean
+        allow_insecure:
+          description: TODO.
+          type: boolean
         device_ids:
           description: TODO.
           items:
@@ -5927,6 +5934,10 @@ components:
         follow_redirects:
           description: TODO.
           type: boolean
+        min_failure_duration:
+          description: TODO.
+          format: int64
+          type: integer
         min_location_failed:
           description: TODO.
           format: int64
