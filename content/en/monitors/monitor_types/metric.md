@@ -120,7 +120,7 @@ The alert conditions vary slightly based on the chosen detection method.
 
 **Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
 
-[1]: /monitors/guide/as-count-in-monitor-evaluations
+[1]: /monitors/guide/as-count-in-monitor-evaluations/
 {{% /tab %}}
 {{% tab "Change" %}}
 
@@ -204,5 +204,5 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /tagging/using_tags/?tab=assignment
 [3]: /dashboards/querying/#advanced-graphing
-[4]: /monitors/faq/what-are-recovery-thresholds
+[4]: /monitors/faq/what-are-recovery-thresholds/
 [5]: /monitors/notifications/

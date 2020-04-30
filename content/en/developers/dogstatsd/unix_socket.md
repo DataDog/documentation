@@ -53,7 +53,7 @@ To enable the Agent DogStatsD UDS:
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/guide/agent-commands
+[2]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -154,7 +154,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /tagging/assigning_tags/#environment-variables
-[3]: /agent/guide/agent-commands
+[3]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 

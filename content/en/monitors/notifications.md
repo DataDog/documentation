@@ -389,5 +389,5 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 [10]: /integrations/webhooks/#usage
 [11]: https://docs.datadoghq.com/integrations/#cat-collaboration
 [12]: /events/
-[13]: /monitors/guide/template-variable-evaluation
-[14]: /monitors/faq/what-are-recovery-thresholds
+[13]: /monitors/guide/template-variable-evaluation/
+[14]: /monitors/faq/what-are-recovery-thresholds/

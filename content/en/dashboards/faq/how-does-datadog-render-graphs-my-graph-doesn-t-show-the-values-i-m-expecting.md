@@ -29,5 +29,5 @@ Metric: the metric you want to graph
 You can also use arithmetic on queries.
 
 [1]: /dashboards/functions/
-[2]: /dashboards/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph
+[2]: /dashboards/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph/
 [3]: /dashboards/functions/rollup/

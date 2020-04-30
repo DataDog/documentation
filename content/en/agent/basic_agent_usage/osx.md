@@ -104,4 +104,4 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 [1]: https://app.datadoghq.com/account/settings#agent/mac
 [2]: /agent/troubleshooting/
-[3]: /developers/guide/custom-python-package
+[3]: /developers/guide/custom-python-package/

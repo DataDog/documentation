@@ -460,6 +460,6 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 [1]: /help/
 [2]: /tracing/setup/#agent-configuration
 [3]: /agent/troubleshooting/#get-more-logging-from-the-agent
-[4]: /agent/guide/agent-log-files
+[4]: /agent/guide/agent-log-files/
 [5]: /tracing/visualization/#trace
 [6]: /agent/troubleshooting/#send-a-flare

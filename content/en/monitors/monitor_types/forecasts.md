@@ -113,8 +113,8 @@ The following functions cannot be nested inside calls to the `forecast()` functi
 
 [1]: https://app.datadoghq.com/monitors#create/forecast
 [2]: /monitors/monitor_types/metric/#define-the-metric
-[3]: /monitors/faq/what-are-recovery-thresholds
-[4]: /monitors/faq/how-to-update-anomaly-monitor-timezone
+[3]: /monitors/faq/what-are-recovery-thresholds/
+[4]: /monitors/faq/how-to-update-anomaly-monitor-timezone/
 [5]: /dashboards/functions/rollup/
 [6]: /monitors/notifications/
 [7]: /api/v1/monitors/#create-a-monitor

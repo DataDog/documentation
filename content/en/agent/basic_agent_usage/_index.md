@@ -382,8 +382,8 @@ To send your Agent data to the [Datadog EU site][10], edit your [Agent main conf
 [5]: /agent/guide/agent-commands/#stop-the-agent
 [6]: /integrations/
 [7]: https://app.datadoghq.com/account/settings#agent
-[8]: /agent/guide/integration-management
-[9]: /agent/guide/agent-configuration-files
+[8]: /agent/guide/integration-management/
+[9]: /agent/guide/agent-configuration-files/
 [10]: https://app.datadoghq.eu
 [11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[12]: /agent/guide/agent-log-files
+[12]: /agent/guide/agent-log-files/

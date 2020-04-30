@@ -91,7 +91,7 @@ The following Agent configuration options were changed or removed in Agent v6. C
 | `collect_security_groups`    | Obsolete, feature is available with the [AWS integration][6].                                                         |
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/guide/upgrade-to-agent-v6
+[2]: /agent/guide/upgrade-to-agent-v6/
 [3]: /agent/proxy/
 [4]: /integrations/disk/
 [5]: /logs/
@@ -262,7 +262,7 @@ The major changes for Agent v6 on Windows are:
 * The Windows service is now started as "Automatic-Delayed". It is started automatically on boot, but after all other services. This results in a small delay in reporting metrics after a reboot.
 * The Windows GUI and Windows system tray icon are now implemented separately. See the [Datadog Agent Manager for Windows][1] for more details.
 
-[1]: /agent/guide/datadog-agent-manager-windows
+[1]: /agent/guide/datadog-agent-manager-windows/
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
@@ -564,7 +564,7 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 [1]: /agent/proxy/#using-the-agent-as-a-proxy
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters
 [3]: /agent/guide/dogstream/
-[4]: /integrations/go-metro
+[4]: /integrations/go-metro/
 [5]: /agent/guide/agent-log-files/
 [6]: /agent/guide/agent-commands/
 [7]: /getting_started/agent/autodiscovery/

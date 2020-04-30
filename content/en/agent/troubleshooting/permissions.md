@@ -126,7 +126,7 @@ If you are running Agent v5, try updating to the [latest version of Agent 6][1] 
 
 3. [Start the Agent][6]
 
-[1]: /agent/guide/upgrade-to-agent-v6
+[1]: /agent/guide/upgrade-to-agent-v6/
 [2]: https://github.com/DataDog/dd-agent
 [3]: /agent/guide/agent-commands/?tab=agentv5#stop-the-agent
 [4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
@@ -144,9 +144,9 @@ See the following GitHub issues for more information and other potential methods
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-commands
-[2]: /agent/guide/agent-log-files
-[3]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port
+[1]: /agent/guide/agent-commands/
+[2]: /agent/guide/agent-log-files/
+[3]: /agent/faq/error-restarting-agent-already-listening-on-a-configured-port/
 [4]: /agent/faq/network/
 [5]: /agent/guide/agent-commands/#start-the-agent
 [6]: /help/

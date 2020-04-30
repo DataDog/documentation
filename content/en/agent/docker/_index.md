@@ -206,7 +206,7 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [3]: https://app.datadoghq.com/account/settings#agent/docker
 [4]: /agent/basic_agent_usage/#supported-os-versions
 [5]: https://app.datadoghq.com/account/settings#api
-[6]: /integrations/faq/compose-and-the-datadog-agent
+[6]: /integrations/faq/compose-and-the-datadog-agent/
 [7]: /agent/docker/integrations/
 [8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [9]: /agent/proxy/#agent-v6
@@ -221,7 +221,7 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [18]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
 [19]: /agent/docker/tag/
 [20]: /agent/guide/secrets-management/?tab=linux
-[21]: /agent/guide/autodiscovery-management
+[21]: /agent/guide/autodiscovery-management/
 [22]: /agent/guide/agent-commands/
 [23]: /integrations/system/#metrics
 [24]: /integrations/disk/#metrics

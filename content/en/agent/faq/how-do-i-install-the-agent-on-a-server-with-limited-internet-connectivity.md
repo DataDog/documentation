@@ -45,7 +45,7 @@ Then, [start the Agent][6] using the appropriate command for your system.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog
+[2]: /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
 [3]: https://yum.datadoghq.com/stable/6/x86_64
 [4]: https://apt.datadoghq.com/pool/d/da
 [5]: https://app.datadoghq.com/account/settings#api

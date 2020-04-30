@@ -156,9 +156,9 @@ If you continue to have problems, reach out to [our awesome Support team][36].
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [13]: /developers/integrations/new_check_howto/#developer-toolkit
-[14]: /agent/guide/integration-management
+[14]: /agent/guide/integration-management/
 [15]: https://github.com/DataDog/dd-agent
-[16]: /account_management/api-app-keys
+[16]: /account_management/api-app-keys/
 [17]: https://app.datadoghq.com/account/settings#api
 [18]: /integrations/
 [19]: https://app.datadoghq.com/account/settings#agent
@@ -184,4 +184,4 @@ If you continue to have problems, reach out to [our awesome Support team][36].
 [39]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
 [40]: /developers/metrics/
 [41]: /developers/metrics/custom_metrics/
-[42]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui
+[42]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/

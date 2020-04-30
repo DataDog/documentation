@@ -55,7 +55,7 @@ To send logs with environment variables, configure the following:
 * `DD_LOGS_CONFIG_USE_HTTP=true`
 
 
-[1]: /agent/guide/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
 {{% tab "TCP" %}}
 
@@ -75,7 +75,7 @@ By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. 
 
 
 
-[1]: /agent/guide/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -127,7 +127,7 @@ Or use the `DD_LOGS_CONFIG_BATCH_WAIT=2` environment variable. The unit is in se
 When logs are sent through HTTPS, use the same [set of proxy settings][4] as the other data types to send logs through a web proxy.
 
 
-[1]: /agent/guide/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files/
 [2]: /agent/logs/proxy/?tab=socks5
 [3]: /agent/basic_agent_usage/#agent-overhead
 [4]: /agent/proxy/

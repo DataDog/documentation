@@ -144,7 +144,7 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 [6]: https://en.wikipedia.org/wiki/Chmod
 [7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
-[9]: /logs/guide/docker-logs-collection-troubleshooting-guide
-[10]: /logs/guide/lambda-logs-collection-troubleshooting-guide
+[9]: /logs/guide/docker-logs-collection-troubleshooting-guide/
+[10]: /logs/guide/lambda-logs-collection-troubleshooting-guide/
 [11]: https://app.datadoghq.com/logs/livetail
 [12]: /logs/indexes/#exclusion-filters

@@ -89,7 +89,7 @@ To enable Log collection with your DaemonSet:
 
     The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
 
-[1]: /agent/guide/autodiscovery-management
+[1]: /agent/guide/autodiscovery-management/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -288,7 +288,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 **Note**: To apply a specific configuration to a given container, Autodiscovery identifies containers by **image** when using the key-value stores by trying to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].image`.
 
 [1]: /integrations/consul/
-[2]: /agent/guide/agent-commands
+[2]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -388,7 +388,7 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/log-collection-with-docker-socket
+[1]: /agent/faq/log-collection-with-docker-socket/
 [2]: /agent/kubernetes/
 [3]: /integrations/#cat-autodiscovery
-[4]: /agent/guide/autodiscovery-management
+[4]: /agent/guide/autodiscovery-management/

@@ -23,4 +23,4 @@ There are three potential solutions to get around this:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
+[1]: /logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers/

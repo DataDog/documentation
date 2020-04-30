@@ -245,7 +245,7 @@ The following table lists configuration variables that are available only when u
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/send_traces/
-[2]: /tracing/setup/dotnet-core
+[2]: /tracing/setup/dotnet-core/
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: /help/
 [5]: https://www.nuget.org/packages/Datadog.Trace

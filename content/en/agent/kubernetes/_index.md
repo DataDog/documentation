@@ -301,7 +301,7 @@ See the [Agent Commands guides][13] to discover all the Docker Agent commands.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/kubernetes-legacy
+[1]: /agent/faq/kubernetes-legacy/
 [2]: /agent/kubernetes/integrations/
 [3]: https://github.com/helm/charts/tree/master/stable/datadog#all-configuration-options
 [4]: /agent/proxy/#agent-v6

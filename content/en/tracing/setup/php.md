@@ -301,7 +301,7 @@ To upgrade the PHP tracer, [download the latest release][6] and follow the same 
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://app.datadoghq.com/apm/services
 [8]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
-[9]: /tracing/faq/php-tracer-manual-installation
+[9]: /tracing/faq/php-tracer-manual-installation/
 [10]: /tracing/setup/php/#environment-variable-configuration
 [11]: /help/
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv

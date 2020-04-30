@@ -87,7 +87,7 @@ Next, [Instrument your application][13]. For the full overview of all of the ste
 [2]: /tracing/
 [3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[5]: /tracing/send_traces/agent-apm-metrics
+[5]: /tracing/send_traces/agent-apm-metrics/
 [6]: /agent/
 [7]: /integrations/amazon_xray/#overview
 [8]: /agent/basic_agent_usage/heroku/#installation

@@ -107,7 +107,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
   - `8126/tcp`: port for the [APM Receiver][6]
 
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues
+[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /logs/
 [3]: /agent/basic_agent_usage/kubernetes/
 [4]: /integrations/go_expvar/
@@ -134,7 +134,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
   - `17124/tcp`: optional graphite adapter
 
 
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues
+[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /tracing/
 {{% /tab %}}
 {{< /tabs >}}

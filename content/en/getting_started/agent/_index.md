@@ -145,7 +145,7 @@ For help troubleshooting the Agent:
 [7]: https://www.datadoghq.com
 [8]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [9]: /agent/guide/agent-commands/#agent-status-and-information
-[10]: /agent/guide/agent-commands
+[10]: /agent/guide/agent-commands/
 [11]: /agent/guide/agent-commands/#start-the-agent
 [12]: /agent/guide/agent-commands/#stop-the-agent
 [13]: /agent/guide/agent-commands/#restart-the-agent
@@ -157,5 +157,5 @@ For help troubleshooting the Agent:
 [19]: /integrations/ntp/#metrics
 [20]: /getting_started/integrations/
 [21]: /agent/troubleshooting/
-[22]: /agent/guide/agent-log-files
+[22]: /agent/guide/agent-log-files/
 [23]: /help/

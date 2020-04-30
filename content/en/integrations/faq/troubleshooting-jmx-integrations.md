@@ -42,7 +42,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 
 **Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
 
-[1]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+[1]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command/
 [2]: /agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
 {{< /tabs >}}

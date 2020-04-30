@@ -152,4 +152,4 @@ To verify the result, search for the metrics using the [Metrics Explorer][5]:
 [4]: /agent/guide/agent-commands/#restart-the-agent
 [5]: /metrics/explorer/
 [6]: /agent/guide/agent-commands/#agent-status-and-information
-[7]: /agent/guide/agent-log-files
+[7]: /agent/guide/agent-log-files/

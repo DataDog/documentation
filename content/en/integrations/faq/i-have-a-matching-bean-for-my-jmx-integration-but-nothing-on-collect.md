@@ -45,10 +45,10 @@ Jmxfetch then knows it's a string and uses this rule to transform that into a nu
 
 Reach out to [Datadog Support team][7] if you are still having issues.
 
-[1]: /integrations/faq/troubleshooting-jmx-integrations
-[2]: /integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them
-[3]: /integrations/faq/jmx-yaml-error-include-section
-[4]: /integrations/faq/collecting-composite-type-jmx-attributes
-[5]: /integrations/faq/how-to-run-jmx-commands-in-windows
-[6]: /agent/guide/agent-log-files
+[1]: /integrations/faq/troubleshooting-jmx-integrations/
+[2]: /integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/
+[3]: /integrations/faq/jmx-yaml-error-include-section/
+[4]: /integrations/faq/collecting-composite-type-jmx-attributes/
+[5]: /integrations/faq/how-to-run-jmx-commands-in-windows/
+[6]: /agent/guide/agent-log-files/
 [7]: /help/

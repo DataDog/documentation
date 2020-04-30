@@ -222,5 +222,5 @@ For Kubernetes environements, refer to the [Kubernetes short lived container doc
 [2]: /agent/docker/integrations/
 [3]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
 [4]: /agent/logs/#custom-log-collection
-[5]: /agent/guide/autodiscovery-management
+[5]: /agent/guide/autodiscovery-management/
 [6]: /agent/kubernetes/log/#short-lived-containers

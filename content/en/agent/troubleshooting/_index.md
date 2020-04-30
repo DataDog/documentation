@@ -50,7 +50,7 @@ If you're still unsure about the issue, you may reach out to the [Datadog suppor
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: /agent/troubleshooting/site/
 [6]: /agent/guide/agent-commands/#agent-status-and-information
-[7]: /agent/guide/agent-log-files
+[7]: /agent/guide/agent-log-files/
 [8]: /agent/troubleshooting/debug_mode/
 [9]: /help/
 [10]: /agent/troubleshooting/send_a_flare/

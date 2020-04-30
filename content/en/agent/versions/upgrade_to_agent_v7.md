@@ -95,4 +95,4 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://raw.github
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/python-3
+[1]: /agent/guide/python-3/

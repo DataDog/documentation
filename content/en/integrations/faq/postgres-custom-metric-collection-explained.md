@@ -95,4 +95,4 @@ Additionally, the [Agent's logs][6] may provide useful information.
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /metrics/explorer/
 [5]: /agent/guide/agent-commands/#agent-status-and-information
-[6]: /agent/guide/agent-log-files
+[6]: /agent/guide/agent-log-files/

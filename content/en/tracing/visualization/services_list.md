@@ -79,5 +79,5 @@ Choose what to display in your services list:
 [6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: /tracing/visualization/trace/#spans
 [8]: /tracing/visualization/trace/
-[9]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
+[9]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm/
 [10]: /tracing/visualization/service/#service-monitor

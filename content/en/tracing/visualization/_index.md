@@ -128,7 +128,7 @@ After a tag has been added to a span, search and query on the tag in App Analyti
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/monitor_types/apm/
-[2]: /developers/faq/data-collection-resolution-retention
+[2]: /developers/faq/data-collection-resolution-retention/
 [3]: /tracing/setup/
 [4]: /tracing/visualization/services_list/
 [5]: /tracing/visualization/services_map/

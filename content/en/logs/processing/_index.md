@@ -158,12 +158,12 @@ To change the default values for each of the reserved attributes, go to the [Con
 [7]: /logs/processing/pipelines/#integration-pipelines
 [8]: /logs/processing/pipelines/#pipeline-filters
 [9]: /logs/processing/parsing/
-[10]: /logs/faq/log-parsing-best-practice
-[11]: /logs/faq/how-to-investigate-a-log-parsing-issue
+[10]: /logs/faq/log-parsing-best-practice/
+[11]: /logs/faq/how-to-investigate-a-log-parsing-issue/
 [12]: /logs/processing/processors/#log-date-remapper
 [13]: /logs/explorer/?tab=logstream#visualization
 [14]: /logs/explorer/search/
 [15]: /logs/processing/processors/#log-status-remapper
-[16]: /logs/faq/integration-pipeline-reference
+[16]: /logs/faq/integration-pipeline-reference/
 [17]: /agent/docker/log/#examples
 [18]: /tracing/connect_logs_and_traces/

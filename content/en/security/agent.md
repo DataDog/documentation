@@ -67,4 +67,4 @@ For more information, see the [Secrets Management][14] documentation.
 [11]: mailto:security@datadoghq.com
 [12]: https://www.datadoghq.com/8869756E.asc.txt
 [13]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
-[14]: /agent/guide/secrets-management
+[14]: /agent/guide/secrets-management/

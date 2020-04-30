@@ -351,7 +351,7 @@ The following table lists configuration variables that are available only when u
 
 
 [1]: /tracing/send_traces/
-[2]: /tracing/setup/dotnet-framework
+[2]: /tracing/setup/dotnet-framework/
 [3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
 [4]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
 [5]: /help/

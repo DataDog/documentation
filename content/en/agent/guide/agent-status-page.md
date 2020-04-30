@@ -270,4 +270,4 @@ This section displays the number of packets received by the DogStatsD server for
 
 [1]: /agent/guide/agent-commands/#agent-information
 [2]: /agent/troubleshooting/ntp/
-[3]: /agent/faq/how-datadog-agent-determines-the-hostname
+[3]: /agent/faq/how-datadog-agent-determines-the-hostname/

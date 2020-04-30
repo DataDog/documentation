@@ -133,7 +133,7 @@ Use saved views to automatically configure your log explorer with a preselected 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/search-syntax
+[1]: /logs/search-syntax/
 [2]: /logs/explorer/live_tail/
 [3]: /logs/explorer/list/
 [4]: /logs/explorer/patterns/

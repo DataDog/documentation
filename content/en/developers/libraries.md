@@ -195,7 +195,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [31]: https://github.com/wimactel
 [32]: https://github.com/bithauschile/datadog-ga
 [33]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog
-[34]: /logs/guide/collect-heroku-logs
+[34]: /logs/guide/collect-heroku-logs/
 [35]: https://github.com/ozinc/heroku-datadog-drain
 [36]: https://corp.oz.com
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang

@@ -137,5 +137,5 @@ Log events which do not comply with these limits might be transformed or truncat
 [3]: /logs/processing/#reserved-attributes
 [4]: /logs/processing/processors/#log-status-remapper
 [5]: /logs/processing/processors/#log-date-remapper
-[6]: /logs/faq/integration-pipeline-reference
+[6]: /logs/faq/integration-pipeline-reference/
 [7]: /help/

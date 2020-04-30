@@ -13,4 +13,4 @@ If you still have issues, [reach out to us][2] with [a flare][3]
 
 [1]: http://httpd.apache.org/docs/2.2/mod/mod_status.html
 [2]: /help/
-[3]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+[3]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command/
