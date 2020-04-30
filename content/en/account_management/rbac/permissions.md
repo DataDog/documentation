@@ -285,7 +285,7 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 ### Log Data Access
 
-The following permissions can be granted to manage read access on subsets of log data:
+Grant the following permissions to manage read access on subsets of log data:
 
 * `logs_read_data`(Recommended) It offers finer grained access control over indexed log data thanks to restriction queries.
 * `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis.
