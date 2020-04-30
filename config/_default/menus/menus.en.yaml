@@ -1575,31 +1575,31 @@ api_v1:
   - name: AWS Integration
     url: /api/v1/aws-integration/
     identifier: AWS Integration
-  - name: Delete an AWS Integration
+  - name: Delete an AWS integration
     parent: AWS Integration
     url: delete-an-aws-integration
-  - name: List all AWS Integrations
+  - name: List all AWS integrations
     parent: AWS Integration
     url: list-all-aws-integrations
-  - name: Create an AWS Integration
+  - name: Create an AWS integration
     parent: AWS Integration
     url: create-an-aws-integration
-  - name: Update an AWS Integration
+  - name: Update an AWS integration
     parent: AWS Integration
     url: update-an-aws-integration
   - name: List namespace rules
     parent: AWS Integration
     url: list-namespace-rules
-  - name: Generate New External ID
+  - name: Generate a new external ID
     parent: AWS Integration
-    url: generate-new-external-id
+    url: generate-a-new-external-id
   - name: AWS Logs Integration
     url: /api/v1/aws-logs-integration/
     identifier: AWS Logs Integration
   - name: Delete an AWS Logs integration
     parent: AWS Logs Integration
     url: delete-an-aws-logs-integration
-  - name: List all AWS Logs Integrations
+  - name: List all AWS Logs integrations
     parent: AWS Logs Integration
     url: list-all-aws-logs-integrations
   - name: Add AWS Log Lambda ARN
@@ -1614,7 +1614,7 @@ api_v1:
   - name: Enable an AWS Logs integration
     parent: AWS Logs Integration
     url: enable-an-aws-logs-integration
-  - name: Check permissions for Log Services
+  - name: Check permissions for log services
     parent: AWS Logs Integration
     url: check-permissions-for-log-services
   - name: Azure Integration
@@ -1656,19 +1656,19 @@ api_v1:
   - name: Dashboards
     url: /api/v1/dashboards/
     identifier: Dashboards
-  - name: Get all Dashboards
+  - name: Get all dashboards
     parent: Dashboards
     url: get-all-dashboards
-  - name: Create a new Dashboard
+  - name: Create a new dashboard
     parent: Dashboards
     url: create-a-new-dashboard
-  - name: Delete a Dashboard
+  - name: Delete a dashboard
     parent: Dashboards
     url: delete-a-dashboard
-  - name: Get a Dashboard
+  - name: Get a dashboard
     parent: Dashboards
     url: get-a-dashboard
-  - name: Update a Dashboard
+  - name: Update a dashboard
     parent: Dashboards
     url: update-a-dashboard
   - name: Downtimes
@@ -1821,15 +1821,15 @@ api_v1:
   - name: Logs Pipelines
     url: /api/v1/logs-pipelines/
     identifier: Logs Pipelines
-  - name: Get Pipeline Order
+  - name: Get pipeline order
     parent: Logs Pipelines
     url: get-pipeline-order
-  - name: Update Pipeline Order
+  - name: Update pipeline order
     parent: Logs Pipelines
     url: update-pipeline-order
-  - name: Get all Pipeline
+  - name: Get all pipelines
     parent: Logs Pipelines
-    url: get-all-pipeline
+    url: get-all-pipelines
   - name: Create a pipeline
     parent: Logs Pipelines
     url: create-a-pipeline
@@ -1872,9 +1872,9 @@ api_v1:
   - name: Create a monitor
     parent: Monitors
     url: create-a-monitor
-  - name: Check if the given monitors can be deleted
+  - name: Check if a monitor can be deleted
     parent: Monitors
-    url: check-if-the-given-monitors-can-be-deleted
+    url: check-if-a-monitor-can-be-deleted
   - name: Validate a monitor
     parent: Monitors
     url: validate-a-monitor
@@ -1977,9 +1977,9 @@ api_v1:
   - name: Delete a Slack integration
     parent: Slack Integration
     url: delete-a-slack-integration
-  - name: Get Slack integration
+  - name: Get info about a Slack integration
     parent: Slack Integration
-    url: get-slack-integration
+    url: get-info-about-a-slack-integration
   - name: Create a Slack integration
     parent: Slack Integration
     url: create-a-slack-integration
@@ -1995,12 +1995,12 @@ api_v1:
   - name: Synthetics
     url: /api/v1/synthetics/
     identifier: Synthetics
-  - name: Get all test
+  - name: Get a list of all tests
     parent: Synthetics
-    url: get-all-test
-  - name: Create or clone test
+    url: get-a-list-of-all-tests
+  - name: Create or clone a test
     parent: Synthetics
-    url: create-or-clone-test
+    url: create-or-clone-a-test
   - name: Get test latest results (as summaries)
     parent: Synthetics
     url: get-test-latest-results-(as-summaries)
@@ -2010,9 +2010,9 @@ api_v1:
   - name: Delete multiple tests
     parent: Synthetics
     url: delete-multiple-tests
-  - name: Get test
+  - name: Get details of a test
     parent: Synthetics
-    url: get-test
+    url: get-details-of-a-test
   - name: Update test
     parent: Synthetics
     url: update-test
@@ -2106,45 +2106,45 @@ api_v1:
   - name: Get all users
     parent: Users
     url: get-all-users
-  - name: Create user
+  - name: Create a user
     parent: Users
-    url: create-user
-  - name: Disable user
+    url: create-a-user
+  - name: Disable a user
     parent: Users
-    url: disable-user
-  - name: Get user
+    url: disable-a-user
+  - name: Get user details
     parent: Users
-    url: get-user
-  - name: Update user
+    url: get-user-details
+  - name: Update a user
     parent: Users
-    url: update-user
+    url: update-a-user
   - name: Webhooks Integration
     url: /api/v1/webhooks-integration/
     identifier: Webhooks Integration
-  - name: Create a Custom Variable for Webhooks Integration
+  - name: Create a custom variable
     parent: Webhooks Integration
-    url: create-a-custom-variable-for-webhooks-integration
-  - name: Delete a Custom Variable for Webhooks Integration
+    url: create-a-custom-variable
+  - name: Delete a custom variable
     parent: Webhooks Integration
-    url: delete-a-custom-variable-for-webhooks-integration
-  - name: Get a Custom Variable for Webhooks Integration
+    url: delete-a-custom-variable
+  - name: Get a custom variable
     parent: Webhooks Integration
-    url: get-a-custom-variable-for-webhooks-integration
-  - name: Update a Custom Variable for Webhooks Integration
+    url: get-a-custom-variable
+  - name: Update a custom variable
     parent: Webhooks Integration
-    url: update-a-custom-variable-for-webhooks-integration
-  - name: Create a Webhooks Integration
+    url: update-a-custom-variable
+  - name: Create a webhooks integration
     parent: Webhooks Integration
     url: create-a-webhooks-integration
-  - name: Delete a Webhook for Webhooks Integration
+  - name: Delete a webhook
     parent: Webhooks Integration
-    url: delete-a-webhook-for-webhooks-integration
-  - name: Get a Webhook Integration
+    url: delete-a-webhook
+  - name: Get a webhook integration
     parent: Webhooks Integration
     url: get-a-webhook-integration
-  - name: Update a Webhook for Webhooks Integration
+  - name: Update a webhook
     parent: Webhooks Integration
-    url: update-a-webhook-for-webhooks-integration
+    url: update-a-webhook
 api_v2:
   - name: Overview
     url: /api/v2/
@@ -2222,12 +2222,12 @@ api_v2:
   - name: List all users
     parent: Users
     url: list-all-users
-  - name: Create user
+  - name: Create a user
     parent: Users
-    url: create-user
-  - name: Disable user
+    url: create-a-user
+  - name: Disable a user
     parent: Users
-    url: disable-user
+    url: disable-a-user
   - name: Get a user
     parent: Users
     url: get-a-user

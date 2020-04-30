@@ -10,7 +10,7 @@
                   "object"
                 ],
                 "host": "i-0123",
-                "message": "host connected to remote",
+                "message": "Host connected to remote",
                 "service": "agent",
                 "tags": [
                   "team:A"
