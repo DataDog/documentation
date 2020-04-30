@@ -3,7 +3,7 @@ title: API Reference V2
 type: api
 ---
 
-## API Reference V2
+{{< h2 >}} API Reference V2 {{< /h2 >}}
 
 Use the Datadog HTTP API to programmatically access the Datadog platform.
 
@@ -13,8 +13,7 @@ The Datadog API uses resource-oriented URLs, uses status codes to indicate the s
 
 **Note**: cURL code examples assume usage of BASH and GNU coreutils. On macOS you can install coreutils via the [Homebrew package manager][2]: `brew install coreutils`
 
-
-## Authentication
+{{< h2 >}} Authentication {{< /h2 >}}
 
 All requests to Datadog's API must be authenticated. Requests that write data require _reporting access_ and require an `API key`. Requests that read data require _full access_ and also require an `application key`.
 
@@ -22,7 +21,7 @@ All requests to Datadog's API must be authenticated. Requests that write data re
 
 [Manage your account's API and application keys][3].
 
-## Rate limiting
+{{< h2 >}} Rate limiting {{< /h2 >}}
 
 Some of the API endpoints are rate limited. Once you exceed a certain number of requests in a certain time period we return an error.
 
