@@ -169,7 +169,7 @@ describe(`filterExampleJson`, () => {
       "type": "object"
     };
     const actual = bp.filterExampleJson(mockSchema);
-    const expected = {"access_key_id": "string", "account_id": "1234567", "account_specific_namespace_rules": "false", "excluded_regions": ["us-east-1","us-west-2"], "filter_tags": ["<KEY>:<VALUE>"], "host_tags": ["<KEY>:<VALUE>"], "role_name": "DatadogAWSIntegrationRole", "secret_access_key": "string"};
+    const expected = {"access_key_id": "string", "account_id": "1234567", "account_specific_namespace_rules": {"&lt;any-key&gt;": "false"}, "excluded_regions": ["us-east-1","us-west-2"], "filter_tags": ["<KEY>:<VALUE>"], "host_tags": ["<KEY>:<VALUE>"], "role_name": "DatadogAWSIntegrationRole", "secret_access_key": "string"};
     expect(actual).toEqual(expected);
   });
 
@@ -307,8 +307,8 @@ describe(`filterExampleJson`, () => {
     const expected = [[{
       "duration": "integer",
       "error": "integer",
-      "meta": "object",
-      "metrics": "object",
+      "meta": {"&lt;any-key&gt;": "string"},
+      "metrics": {"&lt;any-key&gt;": "number"},
       "name": "span_name",
       "parent_id": "integer",
       "resource": "/home",
@@ -349,6 +349,101 @@ describe(`filterExampleJson`, () => {
     };
     const actual = bp.filterExampleJson(mockSchema);
     const expected = {"error": {"code": "string", "details": "array", "message": "string"}};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should work with multiple nesting', () => {
+    const mockSchema = {
+      "description": "Payload with API-returned permissions.",
+      "properties": {
+        "data": {
+          "description": "Array of permissions.",
+          "items": {
+            "description": "Permission object.",
+            "properties": {
+              "attributes": {
+                "description": "Attributes of a permission.",
+                "properties": {
+                  "created": {
+                    "description": "Creation time of the permission.",
+                    "format": "date-time",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "Description of the permission.",
+                    "type": "string"
+                  },
+                  "display_name": {
+                    "description": "Displayed name for the permission.",
+                    "type": "string"
+                  },
+                  "display_type": {
+                    "description": "Display type.",
+                    "type": "string"
+                  },
+                  "group_name": {
+                    "description": "Name of the permission group.",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Name of the permission.",
+                    "type": "string"
+                  },
+                  "restricted": {
+                    "description": "Whether or not the permission is restricted.",
+                    "type": "boolean"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "description": "ID of the permission.",
+                "type": "string"
+              },
+              "type": {
+                "default": "permissions",
+                "description": "Permissions resource type.",
+                "readOnly": true,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson(mockSchema);
+    const expected =  {"data": [{"attributes": {"created": "string","description": "string","display_name": "string","display_type": "string","group_name": "string","name": "string","restricted": "boolean"},"id": "string"}]};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should not show the type field', () => {
+    const mockSchema = {
+      "description": "Relationship to user.",
+      "properties": {
+        "data": {
+          "description": "Relationship to user object.",
+          "properties": {
+            "id": {
+              "description": "ID of the user.",
+              "type": "string"
+            },
+            "type": {
+              "default": "users",
+              "description": "Users type.",
+              "readOnly": true,
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson(mockSchema);
+    const expected = {"data": {"id": "string"}};
     expect(actual).toEqual(expected);
   });
 
