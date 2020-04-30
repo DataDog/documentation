@@ -1,7 +1,7 @@
 ---
 title: Add a Slack integration channel
 type: apicode
-order: 20.4
+order: 20.1
 external_redirect: /api/#add-a-slack-integration-channel
 ---
 

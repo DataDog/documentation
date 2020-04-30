@@ -1,7 +1,7 @@
 ---
 title: Update a Slack integration channel
 type: apicode
-order: 20.6
+order: 20.2
 external_redirect: /api/#update-a-slack-integration-channel
 ---
 
