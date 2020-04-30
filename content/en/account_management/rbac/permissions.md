@@ -287,13 +287,12 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 Grant the following permissions to manage read access on subsets of log data:
 
-* `logs_read_data`(Recommended) It offers finer grained access control over indexed log data thanks to restriction queries.
+* `logs_read_data`(Recommended) It offers finer grained access control over log data thanks to restriction queries.
 * `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis.
 
 Those two permissions are applied sequentially. Meaning that a user can be restricted to a subset of indexes and the restriction queries apply on top of it.
 
 **Example**: User A has access to index `audit` and index `errors` and is restricted to the query `service:api`
-
 When looking into the log explorer, this user only sees logs from the `service:api` into the `audit` and `errors` indexes.
 
 In addition, access to the Livetail can be restricted with the `logs_live_tail` permission regardless of the data access restriction of the user.
@@ -323,11 +322,12 @@ Go to your [Datadog Roles page][1] and select the checkbox `read` as below for t
 **Subset of Data**:
 
 This configuration is only supported through API
-
+[1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
 
-This permission can be granted or revoked from a role via [the Roles API][1]. Use [Restriction Queries][2] to scope the permission to a subset of Log Data. 
+Revoke or grant this permission from a role via [the Roles API][1]. 
+Use [Restriction Queries][2] to scope the permission to a subset of Log Data. 
 
 
 [1]: /api/#roles
