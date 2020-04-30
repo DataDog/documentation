@@ -17,6 +17,28 @@ const updateMenu = (apiYaml, apiVersion) => {
   const currentMenuYaml = yaml.safeLoad(fs.readFileSync('./config/_default/menus/menus.en.yaml', 'utf8'));
   const newMenuArray = [];
 
+  // need to add hardcoded menu items
+  const mainOverviewSections = [
+    {
+        name: 'Overview',
+        url: `/api/${apiVersion}/`,
+        identifier: `API ${apiVersion.toUpperCase()} overview`,
+        weight: -10
+    },
+    {
+        name: 'Authentication',
+        url: `authentication`,
+        parent: `API ${apiVersion.toUpperCase()} overview`
+    },
+    {
+        name: 'Rate Limiting',
+        url: `rate-limiting`,
+        parent: `API ${apiVersion.toUpperCase()} overview`
+    }
+  ];
+
+  newMenuArray.push(...mainOverviewSections);
+
   apiYaml.tags.forEach((tag) => {
 
     newMenuArray.push({
@@ -121,7 +143,7 @@ const createResources = (apiYaml, deref, apiVersion) => {
         });
 
         // assign built up data for examples.json
-        jsonData[action.operationId] = {"responses":responses, "request": request || {"json": {}, "html": ""}};
+        jsonData[action.operationId] = {responses, "request": request || {"json": {}, "html": ""}};
       });
     });
 
@@ -148,9 +170,7 @@ const getSchema = (content) => {
  * @param {object} tagName - string of tag name
  * returns string with tag slugified
  */
-const getTagSlug = (tagName) => {
-  return slugify(tagName, {lower: true, replacement: '-'});
-};
+const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-'});
 
 
 /**
@@ -183,7 +203,7 @@ const isTagMatch = (pathObj, tag) => {
   } else if ("items" in data) {
     return filterExampleJson(data.items, data['example'], (level + 1));
   } else {
-    let selectedExample = adjacentExample || data["example"];
+    const selectedExample = adjacentExample || data["example"];
     const ex = (selectedExample || typeof selectedExample === "boolean") ? `${selectedExample}` : selectedExample;
     const out = ex || data["type"] || {};
     if(level === 0 && out === 'object') {

@@ -590,7 +590,7 @@ $(document).ready(function () {
     $(window).on('resize scroll', function(e) {
         const header_h = $('body > header').height();
         const footer_h = $('body > footer').height();
-        const padding = 105;
+        const padding = 200;
         $('.sidenav-nav').css(
             'maxHeight',
             document.documentElement.clientHeight - header_h - padding
