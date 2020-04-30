@@ -318,7 +318,7 @@ If a user belongs to multiple roles, permissions combine one with another.
 
 Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
 
-{{< img src="account_management/rbac/logs_read_data_access.png" alt="Read Data Access"  style="width:90%;">}}
+{{< img src="account_management/rbac/logs_read_data_access.png" alt="Read Data Access"  style="width:70%;">}}
 
 **Subset of Data**:
 
