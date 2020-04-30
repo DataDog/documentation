@@ -1386,7 +1386,7 @@ main:
     identifier: dev_tools_events_mail
     weight: 303
   - name: API
-    url: /api/v1/events/#post-an-event
+    url: api/v1/events/#post-an-event
     parent: dev_tools_events
     identifier: dev_tools_events_api
     weight: 304
