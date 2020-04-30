@@ -231,12 +231,13 @@
                                         {{ with $dot.Resources.Match "examples.json" }}
                                             {{ range . }}
                                               {{ $data := . | unmarshal}}
-
-                                             
                                               {{ $req := (index (index $data $context.action.operationId) "request") }}
                                               {{ if $req }}
+
+                                                  {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
+                                                  {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
                                                  
-                                                  {{ $dot.Scratch.Set "json" (highlight ((index $req "json") | jsonify (dict "indent" "  ")) "json" "") }}
+                                                  {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
                                                   {{ $dot.Scratch.Set "html" (index $req "html") }}
                                               {{ else }}
                                                   {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
@@ -265,7 +266,7 @@
                                                         <div class="code-button-wrapper position-absolute">
                                                             <button class="btn text-primary js-copy-button">Copy</button>
                                                         </div>
-                                                        {{ $json }}
+                                                        {{ print $json | safeHTML }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -308,7 +309,9 @@
                                                     {{ $data := . | unmarshal}}
                                                     {{ $res := (index (index (index $data $context.action.operationId) "responses") $response_code) }}
                                                     {{ if $res }}
-                                                        {{ $dot.Scratch.Set "json" (highlight ((index $res "json") | jsonify (dict "indent" "  ")) "json" "") }}
+                                                        {{ $jsonifiedData := (index $res "json") | jsonify (dict "indent" "  ") }}
+                                                        {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
+                                                        {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
                                                         {{ $dot.Scratch.Set "html" (index $res "html") }}
                                                     {{ else }}
                                                         {{ warnf "Could not load html/json response code %q in %q" $response_code $context.action.operationId }}

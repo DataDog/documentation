@@ -191,7 +191,7 @@ const isTagMatch = (pathObj, tag) => {
  * @param {object} data - object schema
  * returns filtered data
  */
-/*const filterExampleJson = (data, adjacentExample = null, level = 0) => {
+/* const filterExampleJson = (data, adjacentExample = null, level = 0) => {
   if("properties" in data) {
     return Object.keys(data.properties)
       .map((propKey) => {
@@ -213,7 +213,7 @@ const isTagMatch = (pathObj, tag) => {
       return out;
     }
   }
-};*/
+}; */
 
 const filterJson = (data, parentExample = null) => {
   let jsondata = '';
@@ -258,7 +258,7 @@ const filterJson = (data, parentExample = null) => {
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if (Object.keys(value.additionalProperties).length !== 0) {
-            childData = {["&lt;any-key&gt;"]: value.additionalProperties};
+            childData = {"<any-key>": value.additionalProperties};
             prefixType = '{';
             suffixType = '}';
             newParentKey = "additionalProperties";
@@ -297,7 +297,7 @@ const filterJson = (data, parentExample = null) => {
     }
   }
 
-  let lastChar = jsondata.slice(-1);
+  const lastChar = jsondata.slice(-1);
   if (lastChar === ',') {
       return jsondata.slice(0, -1);
   } else {
@@ -315,7 +315,7 @@ const outputExample = (chosenExample) => {
         if(typeof item === 'object') {
 
         } else {
-          ex += '"' + item + '",';
+          ex += `"${  item  }",`;
           if (Object.is(arr.length - 1, key)) {
             ex = ex.slice(0, -1);
           }
@@ -324,7 +324,7 @@ const outputExample = (chosenExample) => {
     } else if(typeof chosenExample === 'object') {
       if(chosenExample.value instanceof Array) {
         chosenExample.value.forEach((item, key, arr) => {
-          ex += '"'+item+'",';
+          ex += `"${item}",`;
           if (Object.is(arr.length - 1, key)) {
             ex = ex.slice(0, -1);
           }
@@ -348,17 +348,15 @@ const filterExampleJson = (data) => {
       selectedExample = data.items.items.example;
       prefixType = "[[{";
       suffixType = "}]]";
-    } else {
-      if(data.items.properties) {
+    } else if(data.items.properties) {
         initialData = data.items.properties;
         selectedExample = data.items.example;
       } else {
-        //initialData = data.items;
+        // initialData = data.items;
         selectedExample = data.example;
         prefixType = "[";
         suffixType = "]";
       }
-    }
   } else {
     initialData = data.properties;
     selectedExample = data.example;
@@ -501,7 +499,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if(Object.keys(value.additionalProperties).length !== 0){
-            childData = {["&lt;any-key&gt;"]: value.additionalProperties};
+            childData = {"<any-key>": value.additionalProperties};
             newParentKey = "additionalProperties";
           }
         }
