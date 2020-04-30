@@ -40,7 +40,7 @@ def prepare_file(file):
             elif re.search(r"{{< /site-region >}}", line.strip()):
                 state = 'end_section_region'
 
-            if old_state
+            if old_state:
 
                 state = 'main'
                 sub_sections.append(temp_section)
