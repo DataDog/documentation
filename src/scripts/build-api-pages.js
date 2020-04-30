@@ -309,10 +309,16 @@ const outputExample = (chosenExample) => {
   let ex = '';
   if(typeof chosenExample !== 'undefined' && chosenExample !== null) {
     if(chosenExample instanceof Array) {
+      // if array of strings use them
+      // if array of objects try match keys
       chosenExample.forEach((item, key, arr) => {
-        ex += '"'+item+'",';
-        if (Object.is(arr.length - 1, key)) {
-          ex = ex.slice(0, -1);
+        if(typeof item === 'object') {
+
+        } else {
+          ex += '"' + item + '",';
+          if (Object.is(arr.length - 1, key)) {
+            ex = ex.slice(0, -1);
+          }
         }
       });
     } else if(typeof chosenExample === 'object') {

@@ -447,6 +447,51 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   });
 
+
+  it('should map example keys', () => {
+    const mockSchema = {
+      "description": "New Datadog-Slack integration.",
+      "properties": {
+        "service_hooks": {
+          "description": "The array of service hook objects.",
+          "example": [
+            {
+              "account": "Main_Account",
+              "url": "https://hooks.slack.com/services/1/1/1"
+            },
+            {
+              "account": "doghouse",
+              "url": "https://hooks.slack.com/services/2/2/2"
+            }
+          ],
+          "items": {
+            "description": "The service hook is generated for your Slack account in\nyour Slack account administration page.",
+            "properties": {
+              "account": {
+                "description": "Your Slack account name.",
+                "type": "string"
+              },
+              "url": {
+                "description": "Your Slack Service Hook URL.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "account",
+              "url"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson(mockSchema);
+    const expected = {"service_hooks": [{"account": "Main_Account", "url": "https://hooks.slack.com/services/1/1/1"},{"account": "doghouse", "url": "https://hooks.slack.com/services/2/2/2"}]};
+    expect(actual).toEqual(expected);
+  });
+
 });
 
 describe(`isReadOnlyRow`, () => {
