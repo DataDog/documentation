@@ -19,6 +19,6 @@ Get Hourly Usage For SNMP Devices
 **RESPONSE**:
 
 * **`devices_count`**:
-	Contains the sum of SNMP devices.
+	Contains the total number of billable SNMP Devices reporting during a given hour.
 * **`hour`**:
     The hour for the usage.
