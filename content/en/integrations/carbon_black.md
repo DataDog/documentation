@@ -31,8 +31,7 @@ First, install and setup the [Carbon Black Defense log shipper][1].
 
 The configuration file below enables your Carbon Black Defense shipper to forward your logs to Datadog:
 
-{{< tabs >}}
-{{% tab "Datadog US Site" %}}
+{{< site-region region="us" >}}
 
 ```conf
 [general]
@@ -51,8 +50,8 @@ siem_connector_id=<CB_DEFENSE_API_ID>
 siem_api_key=<CB_DEFENSE_API_SECRET_KEY>
 ```
 
-{{% /tab %}}
-{{% tab "Datadog EU Site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```conf
 [general]
@@ -71,8 +70,7 @@ siem_connector_id=<CB_DEFENSE_API_ID>
 siem_api_key=<CB_DEFENSE_API_SECRET_KEY>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 Replace the `<DATADOG_API_KEY>`, `<CB_DEFENSE_API_SECRET_KEY>`, `<CB_DEFENSE_API_ID>`, and `<CB_DEFENSE_SERVER_URL>` placeholders to complete your configuration.
 

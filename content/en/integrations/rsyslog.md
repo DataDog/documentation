@@ -29,8 +29,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
 
 #### Rsyslog version >=8
 
-{{< tabs >}}
-{{% tab "Datadog US site" %}}
+{{< site-region region="us" >}}
 
 1. (Optional) Activate Rsyslog file monitoring module. If you want to watch/monitor specific log files, then you have to activate the imfile module by adding this to your `rsyslog.conf`:
 
@@ -114,8 +113,8 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     sudo service rsyslog restart
     ```
 
-{{% /tab %}}
-{{% tab "Datadog EU site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 1. (Optional) Activate Rsyslog file monitoring module. If you want to watch or monitor specific log files, activate the `imfile` module by adding this to your `rsyslog.conf`:
 
@@ -199,13 +198,11 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     sudo service rsyslog restart
     ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 #### Rsyslog version <8
 
-{{< tabs >}}
-{{% tab "Datadog US site" %}}
+{{< site-region region="us" >}}
 
 1. (Optional) Activate Rsyslog file monitoring module. If you want to watch or monitor specific log files, activate the `imfile` module by adding this to your `rsyslog.conf`:
 
@@ -297,8 +294,8 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     sudo service rsyslog restart
     ```
 
-{{% /tab %}}
-{{% tab "Datadog EU site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 1. (Optional) Activate Rsyslog file monitoring module. If you want to watch or monitor specific log files, activate the `imfile` module by adding this to your `rsyslog.conf`:
 
@@ -390,8 +387,7 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     sudo service rsyslog restart
     ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 ## Troubleshooting
 

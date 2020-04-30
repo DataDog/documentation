@@ -128,8 +128,7 @@ This is the best option if you do not have a web proxy readily available in your
 
 HAProxy should be installed on a host that has connectivity to Datadog. Use the following configuration file if you do not already have it configured.
 
-{{< tabs >}}
-{{% tab "Datadog US site" %}}
+{{< site-region region="us" >}}
 
 ```conf
 # Basic configuration
@@ -156,7 +155,7 @@ listen stats
     mode http
     stats enable
     stats uri /
-    
+
 # This section is to reload DNS Records
 # Replace <DNS_SERVER_IP> and <DNS_SECONDARY_SERVER_IP> with your DNS Server IP addresses.
 # For HAProxy 1.8 and newer
@@ -248,8 +247,9 @@ The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 HAProxy 1.8 and newer allow DNS service discovery to detect server changes and automatically apply them to your configuration.
 If you are using older version of HAProxy, you have to reload or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
-{{% /tab %}}
-{{% tab "Datadog EU site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
 
 ```conf
 # Basic configuration
@@ -370,8 +370,7 @@ The file might be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 HAProxy 1.8 and newer allow DNS service discovery to detect server changes and automatically apply them to your configuration.
 If you are using older version of HAProxy, you have to reload or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 #### Datadog Agent configuration
 
@@ -464,8 +463,7 @@ To verify that everything is working properly, review the HAProxy statistics at 
 
 This example `nginx.conf` can be used to proxy Agent traffic to Datadog. The last server block in this configuration does TLS wrapping to ensure internal plaintext logs are encrypted between your proxy and Datadog's log intake API endpoint:
 
-{{< tabs >}}
-{{% tab "Datadog US site" %}}
+{{< site-region region="us" >}}
 
 ```conf
 user nginx;
@@ -502,8 +500,8 @@ stream {
 }
 ```
 
-{{% /tab %}}
-{{% tab "Datadog EU site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```conf
 user nginx;
@@ -540,8 +538,7 @@ stream {
 }
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 #### Datadog Agent configuration
 

@@ -32,7 +32,7 @@ To check which transport is used by the Agent, run the [Agent status command][1]
 
 {{< img src="agent/logs/agent-status.png" alt="Agent status"  style="width:70%;">}}
 
-**Note**: For older Agent versions, TCP transport is used by default. Datadog strongly recommends you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+. 
+**Note**: For older Agent versions, TCP transport is used by default. Datadog strongly recommends you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+.
 
 ## Enforce a specific transport
 
@@ -54,7 +54,6 @@ To send logs with environment variables, configure the following:
 * `DD_LOGS_ENABLED=true`
 * `DD_LOGS_CONFIG_USE_HTTP=true`
 
-
 [1]: /agent/guide/agent-configuration-files
 {{% /tab %}}
 {{% tab "TCP" %}}
@@ -66,14 +65,20 @@ logs_enabled: true
 logs_config:
   use_tcp: true
 ```
+
 To send logs with environment variables, configure the following:
 
 * `DD_LOGS_ENABLED=true`
 * `DD_LOGS_CONFIG_USE_TCP=true`
 
-By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication (on port `10516` for Datadog US site and port `443`for Datadog EU site).
+By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP.
 
-
+{{< site-region region="us" >}}
+This requires outbound communication on port `10516` for Datadog US site
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+This requires outbound communication on port `443`for Datadog EU site.
+{{< /site-region >}}
 
 [1]: /agent/guide/agent-configuration-files
 {{% /tab %}}
