@@ -297,7 +297,13 @@ Besides indexed data, `logs_live_tail` restricts access to the Log Livetail as a
 
 #### logs_read_data
 
-Grants a role read access on indexed logs. Can be set either globally, or scoped to limited to a subset of logs as defined per a [restriction query][2].
+Grants a role read access on indexed logs. Can be set either globally, or scoped to limited to a subset of logs as defined per a [restriction query][4].
+
+If a user belongs to multiple roles, permissions combine one with another. For instance :
+
+* If a user belongs to a Role with Log Read Data and also belongs to a Role without Log Read Data, then he has the permission to read data.
+* If a user has a restriction to `service:sandbox` through one Role, and has another restriction to `env:staging` through another Role, then that user can access all `env:staging` logs (even those that are not from `service:sandbox`. And conversely.
+
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -315,33 +321,12 @@ This configuration is only supported through API
 {{% /tab %}}
 {{% tab "API" %}}
 
-This permission can be granted or revoked from a role via [the Roles API][1].
-For example, to grant read access only on two indexes named `main` and `support` to a role, your API call looks like this:
-
-1. Remove the global `logs_read_index_data` permission on the role if already assigned.
-2. Get the UUID of the role you want to modify.
-3. Use the [Get Permission][2] API to find the `logs_read_index_data` permission UUID for your region.
-4. Grant permission to that role with the following call:
-
-```bash
-curl -X POST \
-        https://app.datadoghq.com/api/v1/role/<ROLE_UUID>/permission/<PERMISSION_UUID> \
-        -H "Content-Type: application/json" \
-        -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
-        -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
-        -d '{
-                "scope": {
-                    "indexes": [
-                        "main",
-                        "support"
-                    ]
-                }
-            }'
-```
+This permission can be granted or revoked from a role via [the Roles API][1]. Use [Restriction Queries][2] to scope the permission to a subset of Log Data. 
 
 
 [1]: /api/#roles
-[2]: /api/#get-permissions
+[2]: /api/?lang=bash#roles-restriction-queries-for-logs
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -431,3 +416,5 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 [1]: /account_management/users/#edit-a-user-s-roles
 [2]: /api/#get-permissions
+[3]: /logs/indexes
+[4]: /api/?lang=bash#roles-restriction-queries-for-logs
