@@ -289,7 +289,10 @@ The following permissions can be granted to manage read access on subsets of log
 
 * `logs_read_data` is the preferred approach, as it offers finer grained access control over [indexed][3] log data.
 * `logs_read_index_data` is the alternative approach to restrict data access to [indexed][3] log data on a per-index basis.
-* `logs_live_tail` restricts access to the Log Livetail as a whole. Note: Log Livetail is a on/off restriction and does not yet support scoping to a subset of logs.
+
+Even though we recommend to user either `logs_read_data` or `logs_read_index_data` to restrict access to logs, using both is a valid option. Datadog combines both restrictions and grants access only to data authorised by both permissions. 
+
+Besides indexed data, `logs_live_tail` restricts access to the Log Livetail as a whole. Note: Log Livetail is a on/off restriction and does not yet support scoping to a subset of logs.
 
 
 #### logs_read_data
@@ -303,19 +306,11 @@ Grants a role read access on indexed logs. Can be set either globally, or scoped
 
 Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
 
-{{< img src="account_management/rbac/logs_read_index_data_access.png" alt="Create a custom Role"  style="width:90%;">}}
+{{< img src="account_management/rbac/logs_read_data_access.png" alt="Read Data Access"  style="width:90%;">}}
 
-**Subset of Indexes**:
+**Subset of Data**:
 
-1. Remove the `logs_read_index_data` and `logs_modify_indexes` permissions on the role.
-2. This permission can be granted to a role in [the Index Configuration page of the Datadog app][2] by editing an index and adding a role to the "Grant access of this index's content to" field.
-
-{{< img src="account_management/rbac/logs_read_index_data.png" alt="Grant read access for indexes to specific roles"  style="width:75%;" >}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-[2]: /api/?lang=bash#roles-restriction-queries-for-logs
-[3]: /logs/indexes
+This configuration is only supported through API
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -362,7 +357,7 @@ Grants a role read access on some number of log indexes. Can be set either globa
 
 Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
 
-{{< img src="account_management/rbac/logs_read_index_data_access.png" alt="Create a custom Role"  style="width:90%;">}}
+{{< img src="account_management/rbac/logs_read_index_data_access.png" alt="Read Index Data Access"  style="width:90%;">}}
 
 **Subset of Indexes**:
 
