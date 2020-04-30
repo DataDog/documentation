@@ -21,32 +21,36 @@ def prepare_file(file):
     # 3. Consider within a tab
     #
     # We keep the {{< tabs >}} lines and co. in the main section since it will be used to inline the proper content afterwards.
-    state = 'main'
 
     main_section = []
     sub_sections = []
     temp_section = []
 
     with open(file, 'r', encoding='utf-8') as f:
+        old_state = 'main'
+        state = 'main'
         for line in f:
+
+            if re.search(r"{{% tab", line.strip()):
+                state = 'sub_section_tab'
+            elif re.search(r"{{< site", line.strip()):
+                state = 'sub_section_site'
+            elif re.search(r"{{% /tab %}}", line.strip()):
+                state = 'end_section_tab'
+            elif re.search(r"{{< /site-region >}}", line.strip()):
+                state = 'end_section_region'
+
+            if old_state
+
+                state = 'main'
+                sub_sections.append(temp_section)
+                temp_section = []
+
             if state == 'main':
                 main_section.append(line)
-                if re.search(r"{{< tabs >}}", line.strip()):
-                    state = 'tabs'
-            elif state == 'tabs':
-                main_section.append(line)
-                if re.search(r"{{% tab ", line.strip()):
-                    state = 'tab'
-                if re.search(r"{{< /tabs >}}", line.strip()):
-                    state = 'main'
-            elif state == 'tab':
-                if re.search(r"{{% /tab %}}", line.strip()):
-                    state = 'tabs'
-                    main_section.append(line)
-                    sub_sections.append(temp_section)
-                    temp_section = []
-                else:
-                    temp_section.append(line)
+            elif state =='sub_section':
+                temp_section.append(line)
+
 
     if state != 'main':
         raise ValueError
@@ -223,7 +227,7 @@ def transform_link_to_references(
     all_links,
     regex_skip_sections_start,
     regex_skip_sections_end,
-):
+    ):
     """
     Goes through a section where all link are inlined and transform them in references
 
@@ -324,7 +328,7 @@ def inline_section(file_prepared):
 
     final_text = []
 
-    end_section_pattern = r"\s*{{% /tab %}}.*"
+    end_section_pattern = r"\s*({{% /tab %}}|{{< /site-region >}}).*"
 
     i = 1
 

@@ -39,8 +39,16 @@ Since v6.1.0, the Agent also queries Datadog's API to provide non-critical funct
 
 All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:
 
-- **[https://ip-ranges.datadoghq.com][4]** for Datadog US site.
-- **[https://ip-ranges.datadoghq.eu][5]** for Datadog EU site.
+{{< site-region region="us" >}}
+
+- **[https://ip-ranges.datadoghq.com](https://ip-ranges.datadoghq.com)** for Datadog US site.
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+- **[https://ip-ranges.datadoghq.eu](https://ip-ranges.datadoghq.eu)** for Datadog EU site.
+
+{{< /site-region >}}
 
 The information is structured as JSON following this schema:
 
