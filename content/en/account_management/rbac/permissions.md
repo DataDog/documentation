@@ -61,7 +61,7 @@ Find below the list of permissions for the log configuration assets and log data
 
 | Name                         | Description                                | Scopable |
 | ---------------------------- | ------------------------------------------ | -------- |
-| logs_read_data               | Read a subset log data (query based)       | true     |
+| logs_read_data               | Read access to log data. If granted, other restrictions then apply (like `logs_read_index_data` or with restriction queries)       | true     |
 | logs_read_index_data         | Read a subset log data (index based)       | true     |
 | logs_modify_indexes          | Update the definition of log indexes       | false    |
 | logs_live_tail               | Access the live tail feature               | false    |
@@ -287,19 +287,25 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 The following permissions can be granted to manage read access on subsets of log data:
 
-* `logs_read_data` is the preferred approach, as it offers finer grained access control over [indexed][3] log data.
-* `logs_read_index_data` is the alternative approach to restrict data access to [indexed][3] log data on a per-index basis.
+* `logs_read_data`(Recommended) It offers finer grained access control over indexed log data thanks to restriction queries.
+* `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis.
 
-Even though we recommend to user either `logs_read_data` or `logs_read_index_data` to restrict access to logs, using both is a valid option. Datadog combines both restrictions and grants access only to data authorised by both permissions. 
+Those two permissions are applied sequentially. Meaning that a user can be restricted to a subset of indexes and the restriction queries apply on top of it.
 
-Besides indexed data, `logs_live_tail` restricts access to the Log Livetail as a whole. Note: Log Livetail is a on/off restriction and does not yet support scoping to a subset of logs.
+**Example**: User A has access to index `audit` and index `errors` and is restricted to the query `service:api`
+
+When looking into the log explorer, this user only sees logs from the `service:api` into the `audit` and `errors` indexes.
+
+In addition, access to the Livetail can be restricted with the `logs_live_tail` permission regardless of the data access restriction of the user.
 
 
 #### logs_read_data
 
-Grants a role read access on indexed logs. Can be set either globally, or scoped to limited to a subset of logs as defined per a [restriction query][4].
+Read access to log data. If granted, other restrictions then apply. Such as `logs_read_index_data` or with [restriction query][4].
 
-If a user belongs to multiple roles, permissions combine one with another. For instance :
+If a user belongs to multiple roles, permissions combine one with another. 
+
+**Example**:
 
 * If a user belongs to a Role with Log Read Data and also belongs to a Role without Log Read Data, then he has the permission to read data.
 * If a user has a restriction to `service:sandbox` through one Role, and has another restriction to `env:staging` through another Role, then that user can access all `env:staging` logs (even those that are not from `service:sandbox`. And conversely.
