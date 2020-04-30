@@ -196,8 +196,6 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ## Include/Exclude containers
 
-*Note that Live Containers is not metered. Including or excluding containers does not affect billing.*
-
 It is possible to include and/or exclude containers from real-time collection:
 
 * Exclude containers either via passing the environment variable `DD_AC_EXCLUDE` or adding `ac_exclude:` in your `datadog.yaml` main configuration file.

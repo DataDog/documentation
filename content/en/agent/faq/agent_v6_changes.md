@@ -456,7 +456,7 @@ For Agent v6, all check-related Python code is imported from the `datadog_checks
 
 **Note**: All official integrations were updated to remove obsolete modules, so these changes only affect custom checks.
 
-A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. Fore more details, see the [development documentation][9].
+A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. For more details, see the [development documentation][9].
 
 {{< tabs >}}
 {{% tab "Integrations" %}}
@@ -470,7 +470,7 @@ Even though Agent v6 fully supports Python checks, some of the official Agent v5
 {{% /tab %}}
 {{% tab "Check API" %}}
 
-The base class for Python checks (`AgentCheck`) is now imported from `datadog_checks.checks`. There are a number of things that have been removed or changed in the class API. In addition, each check instance is now its own instance of the class. So you cannot share state between them.
+The base class for Python checks (`AgentCheck`) is now imported from `datadog_checks.base.checks`. There are a number of things that have been removed or changed in the class API. In addition, each check instance is now its own instance of the class. So you cannot share state between them.
 
 The following methods in the `AgentCheck` class are not implemented:
 

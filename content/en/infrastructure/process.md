@@ -2,15 +2,15 @@
 title: Live Processes
 kind: documentation
 aliases:
-  - /guides/process
-  - /graphing/infrastructure/process/
+    - /guides/process
+    - /graphing/infrastructure/process/
 further_reading:
-- link: "/infrastructure/hostmap"
-  tag: "Graphing"
-  text: "See all of your hosts together on one screen with the hostmap"
-- link: "/infrastructure/livecontainers"
-  tag: "Graphing"
-  text: "Get real-time visibility of all of the containers across your environment"
+    - link: '/infrastructure/hostmap'
+      tag: 'Graphing'
+      text: 'See all of your hosts together on one screen with the hostmap'
+    - link: '/infrastructure/livecontainers'
+      tag: 'Graphing'
+      text: 'Get real-time visibility of all of the containers across your environment'
 ---
 
 ## Introduction
@@ -30,14 +30,14 @@ Once the Datadog Agent is installed, enable Live Processes collection by editing
 
 ```yaml
 process_config:
-  enabled: "true"
+    enabled: 'true'
 ```
 
 The `enabled` value is a string with the following options:
 
-* `"true"`: Enable the Process Agent to collect processes and containers.
-* `"false"` (default): Only collect containers if available.
-* `"disabled"`: Don't run the Process Agent at all.
+- `"true"`: Enable the Process Agent to collect processes and containers.
+- `"false"` (default): Only collect containers if available.
+- `"disabled"`: Don't run the Process Agent at all.
 
 Additionally, some configuration options may be set as environment variables.
 
@@ -47,6 +47,7 @@ After configuration is complete, [restart the Agent][2].
 
 [1]: /agent/guide/agent-configuration-files/
 [2]: /agent/guide/agent-commands/#restart-the-agent
+
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -59,10 +60,11 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 **Note**:
 
-* To collect container information in the standard install, the `dd-agent` user must have permissions to access `docker.sock`.
-* Running the Agent as a container still allows you to collect host processes.
+- To collect container information in the standard install, the `dd-agent` user must have permissions to access `docker.sock`.
+- Running the Agent as a container still allows you to collect host processes.
 
 [1]: /agent/docker/#run-the-docker-agent
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -89,19 +91,22 @@ Refer to the standard [Daemonset installation][2] and the [Docker Agent][3] info
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: /agent/kubernetes/
 [3]: /agent/docker/#run-the-docker-agent
+
 {{% /tab %}}
 {{% tab "Helm" %}}
+
 Update your [datadog-values.yaml][1] file with the following process collection configuration, then upgrade your Datadog Helm chart:
 
 ```yaml
 datadog:
-  # (...)
-  processAgent:
-   enabled: true
+    # (...)
+    processAgent:
+        enabled: true
+        processCollection: true
 ```
 
-
 [1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -120,8 +125,8 @@ Define your own list to be merged with the default one, using the `custom_sensit
 
 ```yaml
 process_config:
-  scrub_args: true
-  custom_sensitive_words: ['personal_key', '*token', 'sql*', '*pass*d*']
+    scrub_args: true
+    custom_sensitive_words: ['personal_key', '*token', 'sql*', '*pass*d*']
 ```
 
 **Note**: Words in `custom_sensitive_words` must contain only alphanumeric characters, underscores, or wildcards (`'*'`). A wildcard-only sensitive word is not supported.
@@ -136,7 +141,7 @@ You can also scrub **all** arguments from processes by enabling the `strip_proc_
 
 ```yaml
 process_config:
-  strip_proc_arguments: true
+    strip_proc_arguments: true
 ```
 
 ## Searching, Filtering, and Pivoting
@@ -152,7 +157,7 @@ Processes and containers are, by their nature, extremely high cardinality object
 To combine multiple string searches into a complex query, use any of the following Boolean operators:
 
 |              |                                                                                                                                  |                                                                 |
-|:-------------|:---------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- |
 | **Operator** | **Description**                                                                                                                  | **Example**                                                     |
 | `AND`        | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)                           | java AND elasticsearch                                          |
 | `OR`         | **Union**: either term is contained in the selected events                                                                       | java OR python                                                  |
@@ -166,21 +171,21 @@ Use parentheses to group operators together. For example, `(NOT (elasticsearch O
 
 Furthermore, processes in ECS containers are also tagged by:
 
-* `task_name`
-* `task_version`
-* `ecs_cluster`
+- `task_name`
+- `task_version`
+- `ecs_cluster`
 
 Processeses in Kubernetes containers are tagged by:
 
-* `pod_name`
-* `kube_pod_ip`
-* `kube_service`
-* `kube_namespace`
-* `kube_replica_set`
-* `kube_daemon_set`
-* `kube_job`
-* `kube_deployment`
-* `Kube_cluster`
+- `pod_name`
+- `kube_pod_ip`
+- `kube_service`
+- `kube_namespace`
+- `kube_replica_set`
+- `kube_daemon_set`
+- `kube_job`
+- `kube_deployment`
+- `Kube_cluster`
 
 ### Filtering and Pivoting
 
@@ -202,7 +207,7 @@ Perhaps this one is less exciting after redaction.
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-To access the scatter plot analytic [in the Processes page][4] click on the *Show Summary graph* button the select the "Scatter Plot" tab:
+To access the scatter plot analytic [in the Processes page][4] click on the _Show Summary graph_ button the select the "Scatter Plot" tab:
 
 {{< img src="infrastructure/process/scatterplot_selection.png" alt="scatterplot selection"  style="width:60%;">}}
 
@@ -210,9 +215,9 @@ By default, the graph groups by the `command` tag key. The size of each dot repr
 
 The query at the top of the scatter plot analytic allows you to control your scatter plot analytic:
 
-* Selection of metrics to display.
-* Selection of the aggregation method for both metrics.
-* Selection of the scale of both X and Y axis (*Linear*/*Log*).
+- Selection of metrics to display.
+- Selection of the aggregation method for both metrics.
+- Selection of the scale of both X and Y axis (_Linear_/_Log_).
 
 {{< img src="infrastructure/process/scatterplot.png" alt="container inspect"  style="width:80%;">}}
 
@@ -228,9 +233,9 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 ## Notes and frequently asked questions
 
-* Collection of open files and current working directory is limited based on the level of privilege of the user running `dd-process-agent`. In the event that `dd-process-agent` is able to access these fields, they are collected automatically.
-* Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
-* In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field function without access to this file. **Note**:  Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
+- Collection of open files and current working directory is limited based on the level of privilege of the user running `dd-process-agent`. In the event that `dd-process-agent` is able to access these fields, they are collected automatically.
+- Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
+- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field function without access to this file. **Note**: Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
 
 ## Further Reading
 

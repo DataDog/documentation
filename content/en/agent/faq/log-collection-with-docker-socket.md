@@ -1,6 +1,8 @@
 ---
 title: Log collection with Docker socket
 kind: faq
+aliases:
+ - /agent/faq/kubernetes-docker-socket-log-collection
 further_reading:
 - link: "agent/autodiscovery"
   tag: "documentation"
@@ -45,10 +47,6 @@ Mount the Docker socket into the Datadog Agent:
 ```
 
 **Note**: Mounting only the `docker.sock` socket instead of the whole directory containing it prevents the Agent from recovering after a Docker daemon restart.
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-
 
 {{% /tab %}}
 {{< /tabs >}}

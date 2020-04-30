@@ -38,10 +38,10 @@
     - action: integrations
       branch: prod
       globs:
-      - integration/**/*_metadata.csv
-      - integration/**/manifest.json
-      - integration/**/service_checks.json
-      - integration/**/README.md
+      - integration/*/*_metadata.csv
+      - integration/*/manifest.json
+      - integration/*/service_checks.json
+      - integration/*/README.md
 
   - repo_name: integrations-core
     contents:
@@ -242,3 +242,4 @@
         - "*.json"
       options:
         dest_path: '/security_monitoring/default_rules/'
+

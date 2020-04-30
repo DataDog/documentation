@@ -16,7 +16,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in public beta and available for API Tests only.
+This feature is in public beta for API Tests. The equivalent feature for Browser Tests is in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to Datadog support</a> if you would like to test it.
 </div>
 
 ## Overview
