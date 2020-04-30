@@ -120,6 +120,10 @@ $ddpurple: #632ca6;
             right: 0;
         }
 
+        &.has-no-expands .expand-all {
+          display:none;
+        }
+
         .column {
             border-right: 0.5px solid #ebebeb;
             padding: 0 15px 0 15px;
