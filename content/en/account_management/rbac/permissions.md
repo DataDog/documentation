@@ -62,7 +62,7 @@ Find below the list of permissions for the log configuration assets and log data
 | Name                         | Description                                | Scopable |
 | ---------------------------- | ------------------------------------------ | -------- |
 | logs_read_data               | Read a subset log data (query based)       | true     |
-| logs_read_index_data         | Read a subset log date (index based)       | true     |
+| logs_read_index_data         | Read a subset log data (index based)       | true     |
 | logs_modify_indexes          | Update the definition of log indexes       | false    |
 | logs_live_tail               | Access the live tail feature               | false    |
 | logs_write_exclusion_filters | Update a subset of the exclusion filters   | true     |
