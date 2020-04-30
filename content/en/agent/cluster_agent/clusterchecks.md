@@ -121,7 +121,7 @@ The `cluster_check` field informs the Cluster Agent to delegate this check to on
 
 ### Template Source: Kubernetes Service Annotations
 
-You can annotate services with the following syntax, similar to the syntax for [annotating Kubernetes Pods][7]:
+You can annotate services with the following syntax, similar to the syntax for [annotating Kubernetes Pods][1]:
 
 ```yaml
 ad.datadoghq.com/service.check_names: '[<INTEGRATION_NAME>]'
@@ -129,11 +129,11 @@ ad.datadoghq.com/service.init_configs: '[<INIT_CONFIG>]'
 ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-The `%%host%%` [template variable][8] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
+The `%%host%%` [template variable][7] is supported and is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
 #### Example: HTTP check on an NGINX-backed service
 
-The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][9] to measure the latency of the load balanced service:
+The following Service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][8] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
@@ -161,7 +161,7 @@ spec:
         run: my-nginx
 ```
 
-In addition, each pod should be monitored with the [NGINX check][10], as it enables the monitoring of each worker as well as the aggregated service.
+In addition, each pod should be monitored with the [NGINX check][9], as it enables the monitoring of each worker as well as the aggregated service.
 
 ## Troubleshooting
 
@@ -293,13 +293,12 @@ The Agent `status` command should show the check instance running and reporting 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kubernetes/integrations
-[2]: /agent/cluster_agent
-[3]: /agent/cluster_agent/setup
+[1]: /agent/kubernetes/integrations/
+[2]: /agent/cluster_agent/
+[3]: /agent/cluster_agent/setup/
 [4]: https://github.com/helm/charts/tree/master/stable/datadog
-[5]: /developers/write_agent_check
-[6]: /integrations/mysql
-[7]: /agent/kubernetes/integrations/
-[8]: /agent/faq/template_variables
-[9]: /integrations/http_check
-[10]: /integrations/nginx
+[5]: /developers/write_agent_check/
+[6]: /integrations/mysql/
+[7]: /agent/faq/template_variables/
+[8]: /integrations/http_check/
+[9]: /integrations/nginx/

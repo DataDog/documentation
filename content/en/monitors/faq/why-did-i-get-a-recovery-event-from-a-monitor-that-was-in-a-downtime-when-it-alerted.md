@@ -20,4 +20,4 @@ An option is to resolve the monitor prior to cancelling the downtime to suppress
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/downtimes
+[1]: /monitors/downtimes/

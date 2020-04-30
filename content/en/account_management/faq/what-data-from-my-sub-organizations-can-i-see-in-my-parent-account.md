@@ -21,6 +21,6 @@ Monitor alerts can also be forwarded to the parent account through the configura
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
-[2]: /integrations/webhooks
-[3]: /api
+[1]: /help/
+[2]: /integrations/webhooks/
+[3]: /api/

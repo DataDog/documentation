@@ -306,4 +306,4 @@ In case you have done all the necessary configuration steps and do not see profi
 [2]: /tracing/send_traces/#configure-your-environment
 [3]: /tracing/visualization/#services
 [4]: /tracing/troubleshooting/#tracer-debug-mode
-[5]: /help
+[5]: /help/

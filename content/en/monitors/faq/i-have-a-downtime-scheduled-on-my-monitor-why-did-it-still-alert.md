@@ -23,7 +23,7 @@ One easy way you can take advantage of this is to create new host-tags directly 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/downtimes
-[2]: /infrastructure
-[3]: /infrastructure/hostmap
+[1]: /monitors/downtimes/
+[2]: /infrastructure/
+[3]: /infrastructure/hostmap/
 [4]: /api/v1/tags/#add-tags-to-a-host

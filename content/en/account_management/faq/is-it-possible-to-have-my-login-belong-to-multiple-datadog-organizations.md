@@ -19,6 +19,6 @@ After creating your organizations, you can switch between any Datadog accounts y
 
 Once the new organization has been set up, you can invite people to your new organization from the Team page, just as you would your regular account.
 
-[1]: /account_management/multi_organization
-[2]: /help
+[1]: /account_management/multi_organization/
+[2]: /help/
 [3]: https://app.datadoghq.com/account/new_org

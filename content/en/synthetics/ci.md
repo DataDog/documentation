@@ -511,5 +511,5 @@ You can also see the results of your tests listed on your Datadog test details p
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
-[2]: /help
+[2]: /help/
 [3]: /api/v1/synthetics/#get-test

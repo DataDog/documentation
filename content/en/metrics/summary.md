@@ -79,11 +79,11 @@ The collection interval for the metric in seconds.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/summary
-[2]: /metrics/explorer
-[3]: /dashboards
-[4]: /developers/metrics/custom_metrics
-[5]: /tagging
+[2]: /metrics/explorer/
+[3]: /dashboards/
+[4]: /developers/metrics/custom_metrics/
+[5]: /tagging/
 [6]: /api/v1/metrics/#edit-metric-metadata
-[7]: /integrations
-[8]: /developers/metrics/units
-[9]: /developers/metrics/types
+[7]: /integrations/
+[8]: /developers/metrics/units/
+[9]: /developers/metrics/types/

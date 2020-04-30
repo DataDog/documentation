@@ -41,4 +41,4 @@ If this doesn't solve your issue, reach out to [Datadog Support][1].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /help/

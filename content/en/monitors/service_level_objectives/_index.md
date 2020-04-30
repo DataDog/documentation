@@ -139,4 +139,4 @@ After creating your SLO, you can use the SLO dashboard widget to visualize the s
 [1]: https://app.datadoghq.com/slo
 [2]: /monitors/service_level_objectives/metric/
 [3]: /monitors/service_level_objectives/monitor/
-[4]: /dashboards/widgets/slo
+[4]: /dashboards/widgets/slo/

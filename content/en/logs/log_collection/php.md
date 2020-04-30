@@ -159,7 +159,7 @@ The following configuration enables the JSON formatting and writes the logs and 
 
 Then [Stream your log files to Datadog][1]
 
-[1]: /logs/log_collection
+[1]: /logs/log_collection/
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
@@ -363,7 +363,7 @@ Add a session Processor to add variable context within your logs:
 
 3. [Stream generated JSON file to Datadog][1].
 
-[1]: /logs/log_collection
+[1]: /logs/log_collection/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -539,8 +539,8 @@ CakeLog::config('debug', array(
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /agent/logs
-[2]: /tracing/connect_logs_and_traces/php
+[1]: /agent/logs/
+[2]: /tracing/connect_logs_and_traces/php/
 [3]: /logs/log_collection/php/#symfony-v2-v3
 [4]: /logs/log_collection/php/#ppi
 [5]: /logs/log_collection/php/#laravel

@@ -52,17 +52,17 @@ Logs consist of messages collected [by the Agent or by integrations][9], and ass
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
-[2]: /api
-[3]: /integrations
+[1]: /agent/
+[2]: /api/
+[3]: /integrations/
 [4]: https://www.datadoghq.com/security
 [5]: https://www.datadoghq.com/legal/privacy
-[6]: /tagging
-[7]: /tracing/visualization
-[8]: /security/tracing
-[9]: /logs/log_collection
-[10]: /security/logs
-[11]: /infrastructure/process
-[12]: /security/other
-[13]: /monitors
-[14]: /events
+[6]: /tagging/
+[7]: /tracing/visualization/
+[8]: /security/tracing/
+[9]: /logs/log_collection/
+[10]: /security/logs/
+[11]: /infrastructure/process/
+[12]: /security/other/
+[13]: /monitors/
+[14]: /events/

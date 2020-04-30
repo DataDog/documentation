@@ -202,5 +202,5 @@ $statsd->event('An error occurred.',
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /developers/dogstatsd
-[2]: /events
+[1]: /developers/dogstatsd/
+[2]: /events/

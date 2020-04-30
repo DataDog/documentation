@@ -106,9 +106,9 @@ Choose what to display in your resources list:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization
-[2]: /tracing/visualization/resource
-[3]: /monitors/monitor_types/apm
-[4]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
-[5]: /dashboards/timeboard
+[1]: /tracing/visualization/
+[2]: /tracing/visualization/resource/
+[3]: /monitors/monitor_types/apm/
+[4]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
+[5]: /dashboards/timeboard/
 [6]: /tracing/visualization/#resources

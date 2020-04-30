@@ -70,15 +70,15 @@ You can also use one of the [Datadog official and community contributed API and 
 
 <br><sup>(1)</sup> *[Some integrations do emit custom metrics][2]*
 
-[1]: /integrations
+[1]: /integrations/
 [2]: /account_management/billing/custom_metrics/#standard-integrations
-[3]: /developers/metrics/dogstatsd_metrics_submission
-[4]: /developers/metrics/agent_metrics_submission
+[3]: /developers/metrics/dogstatsd_metrics_submission/
+[4]: /developers/metrics/agent_metrics_submission/
 [5]: https://app.datadoghq.com/account/usage/hourly
 [6]: /account_management/billing/custom_metrics/#counting-custom-metrics
-[7]: /graphing/metrics/introduction
-[8]: /developers/metrics/types
+[7]: /graphing/metrics/introduction/
+[8]: /developers/metrics/types/
 [9]: /developers/metrics/types/?tab=rate#metric-types
 [10]: /developers/metrics/types/?tab=count#metric-types
 [11]: /developers/dogstatsd/data_aggregation/#how-is-aggregation-performed-with-the-dogstatsd-server
-[12]: /developers/libraries
+[12]: /developers/libraries/

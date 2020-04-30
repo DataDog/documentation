@@ -54,12 +54,12 @@ For more information, see the [Secrets Management][14] documentation.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security
-[2]: /agent
-[3]: /api
-[4]: /agent/faq/network
-[5]: /agent/proxy
-[6]: /agent/troubleshooting
+[1]: /security/
+[2]: /agent/
+[3]: /api/
+[4]: /agent/faq/network/
+[5]: /agent/proxy/
+[6]: /agent/troubleshooting/
 [7]: https://coreos.com/clair
 [8]: https://snyk.io
 [9]: https://docs.docker.com/v17.09/datacenter/dtr/2.4/guides

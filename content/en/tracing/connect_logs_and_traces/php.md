@@ -65,7 +65,7 @@ If the logger implements the [**monolog/monolog** library][4], use `Logger::push
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/php
+[1]: /logs/log_collection/php/
 [2]: /logs/processing/processors/#trace-remapper
 [3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog

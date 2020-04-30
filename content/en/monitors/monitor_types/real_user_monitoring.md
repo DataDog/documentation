@@ -62,9 +62,9 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring
+[1]: /real_user_monitoring/
 [2]: https://app.datadoghq.com/monitors#create/rum
-[3]: /real_user_monitoring/explorer/search
+[3]: /real_user_monitoring/explorer/search/
 [4]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
 [5]: /real_user_monitoring/explorer/?tab=measures#setup-facets-measures
-[6]: /monitors/notifications
+[6]: /monitors/notifications/

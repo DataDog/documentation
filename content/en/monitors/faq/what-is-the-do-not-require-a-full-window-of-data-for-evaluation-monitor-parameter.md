@@ -41,4 +41,4 @@ For other scenarios, this **full window of data** doesn't have much influence on
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors
+[1]: /monitors/

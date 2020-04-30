@@ -63,7 +63,7 @@ The Datadog-Kafka integration example below leverages JMX to collect metrics and
 4. [Enable Autodiscovery for your Agent][4].
 
 [1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: /agent/faq/template_variables
+[2]: /agent/faq/template_variables/
 [3]: /agent/guide/ad_identifiers/#short-image-container-identifiers
 [4]: /agent/docker/integrations/
 {{% /tab %}}
@@ -130,34 +130,34 @@ The Datadog-Kafka integration example below leverages JMX to collect metrics and
     Then use this new custom image as the regular containerized Agent.
 
 [1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: /integrations/activemq
+[2]: /integrations/activemq/
 [3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [4]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
-[5]: /integrations/cassandra
+[5]: /integrations/cassandra/
 [6]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/metrics.yaml
 [7]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
-[8]: /integrations/confluent_platform
+[8]: /integrations/confluent_platform/
 [9]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/metrics.yaml
 [10]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/conf.yaml.example
-[11]: /integrations/hive
+[11]: /integrations/hive/
 [12]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/metrics.yaml
 [13]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
-[14]: /integrations/jboss_wildfly
+[14]: /integrations/jboss_wildfly/
 [15]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
 [16]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
-[17]: /integrations/kafka
+[17]: /integrations/kafka/
 [18]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/metrics.yaml
 [19]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[20]: /integrations/solr
+[20]: /integrations/solr/
 [21]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/metrics.yaml
 [22]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
-[23]: /integrations/presto
+[23]: /integrations/presto/
 [24]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/metrics.yaml
 [25]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
-[26]: /integrations/tomcat
+[26]: /integrations/tomcat/
 [27]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
 [28]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
-[29]: /agent/faq/template_variables
+[29]: /agent/faq/template_variables/
 [30]: /agent/guide/ad_identifiers/#short-image-container-identifiers
 [31]: /agent/docker/integrations/#docker-autodiscovery
 {{% /tab %}}
@@ -233,4 +233,4 @@ services:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/ad_identifiers
+[1]: /agent/guide/ad_identifiers/

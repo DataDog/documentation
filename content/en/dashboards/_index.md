@@ -124,6 +124,6 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
-[2]: /help
-[3]: /dashboards/timeboard
-[4]: /dashboards/screenboard
+[2]: /help/
+[3]: /dashboards/timeboard/
+[4]: /dashboards/screenboard/

@@ -42,5 +42,5 @@ Additionally, you might also have to whitelist [Datadog Synthetics IP ranges][2]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /help/
 [2]: https://ip-ranges.datadoghq.com/synthetics.json

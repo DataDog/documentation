@@ -60,8 +60,8 @@ An alert is triggered whenever a metric deviates from an expected pattern.
 * the prediction during the past `5 minutes`, `15 minutes`, `1 hour`, etc.
 
 [1]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[2]: /tracing/visualization/service
-[3]: /tracing/visualization/resource
+[2]: /tracing/visualization/service/
+[3]: /tracing/visualization/resource/
 {{% /tab %}}
 {{% tab "App Analytics" %}}
 
@@ -95,8 +95,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/metric
+[1]: /monitors/monitor_types/metric/
 [2]: https://app.datadoghq.com/monitors#create/apm
-[3]: /monitors/notifications
+[3]: /monitors/notifications/
 [4]: https://app.datadoghq.com/apm/services
 [5]: https://app.datadoghq.com/apm/map

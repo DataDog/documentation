@@ -83,5 +83,5 @@ The `redisdb.yaml` is patterned after the [redisdb.yaml.example file][3] and tel
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.docker.com/compose/overview
-[2]: /agent/docker
+[2]: /agent/docker/
 [3]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example

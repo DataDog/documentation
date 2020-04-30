@@ -182,4 +182,4 @@ Use your best judgment to choose multi-alert monitors that makes sense together.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/composite
-[2]: /monitors/notifications
+[2]: /monitors/notifications/

@@ -112,7 +112,7 @@ logs:
 Refer to the [journald integration][2] documentation for more details regarding the setup for containerized environments and units filtering.
 
 [1]: /agent/guide/agent-configuration-files
-[2]: /integrations/journald
+[2]: /integrations/journald/
 {{% /tab %}}
 {{% tab "Windows Events" %}}
 
@@ -153,7 +153,7 @@ Set the corresponding `source` parameter to the same channel name to benefit fro
 Finally, [restart the Agent][2].
 
 [1]: /logs/processing/pipelines/#integration-pipelines
-[2]: /agent/basic_agent_usage/windows
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -179,11 +179,11 @@ List of all available parameters for log collection:
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /agent/guide/agent-configuration-files
-[3]: /agent/logs/log_transport
-[4]: /agent/kubernetes/log
-[5]: /agent/docker/log
+[3]: /agent/logs/log_transport/
+[4]: /agent/kubernetes/log/
+[5]: /agent/docker/log/
 [6]: /logs/log_collection/#container-log-collection
 [7]: /agent/guide/agent-commands/#agent-status-and-information
-[8]: /tracing
-[9]: /developers/metrics/custom_metrics
-[10]: /tagging
+[8]: /tracing/
+[9]: /developers/metrics/custom_metrics/
+[10]: /tagging/

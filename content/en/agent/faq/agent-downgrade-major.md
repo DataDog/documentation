@@ -25,7 +25,7 @@ Then, if you followed the instructions to [upgrade from v6 to v7][2], run the Ag
 | SUSE         | `DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"` |
 
 [1]: /agent/faq/how-do-i-uninstall-the-agent
-[2]: /agent/versions/upgrade_to_agent_v6
+[2]: /agent/versions/upgrade_to_agent_v6/
 {{% /tab %}}
 {{% tab "Windows" %}}
 
@@ -53,7 +53,7 @@ DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 ```
 
 [1]: /agent/faq/how-do-i-uninstall-the-agent
-[2]: /agent/versions/upgrade_to_agent_v6
+[2]: /agent/versions/upgrade_to_agent_v6/
 {{% /tab %}}
 {{< /tabs >}}
 

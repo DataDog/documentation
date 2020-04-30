@@ -76,4 +76,4 @@ However, this default timestamp does not always reflect the actual value that mi
 [7]: https://www.iso.org/iso-8601-date-and-time-format.html
 [8]: https://en.wikipedia.org/wiki/Unix_time
 [9]: https://www.ietf.org/rfc/rfc3164.txt
-[10]: /logs/processing
+[10]: /logs/processing/

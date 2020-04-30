@@ -45,8 +45,8 @@ For Single Page Applications (SPAs), performance metrics will only be available 
 
 [1]: /real_user_monitoring/data_collected/error/
 [2]: /real_user_monitoring/data_collected/resource/
-[3]: /real_user_monitoring/data_collected/long_task
-[4]: /real_user_monitoring/data_collected/user_action
+[3]: /real_user_monitoring/data_collected/long_task/
+[4]: /real_user_monitoring/data_collected/user_action/
 [5]: https://www.w3.org/TR/paint-timing/
 [6]: https://www.w3.org/TR/navigation-timing/#sec-navigation-timing
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/History

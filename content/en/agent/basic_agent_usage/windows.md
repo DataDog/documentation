@@ -164,7 +164,7 @@ Configuration files for [integrations][1] are in:
 
 **Note**: `ProgramData` is a hidden folder.
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -177,7 +177,7 @@ Configuration files for [integrations][1] are in:
 
 **Note**: `ProgramData` is a hidden folder.
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -250,7 +250,7 @@ The Agent logs are located in `C:\ProgramData\Datadog\logs\agent.log`.
 
 Need help? Contact [Datadog support][1].
 
-[1]: /help
+[1]: /help/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -260,7 +260,7 @@ For Windows Server 2008, Vista, and newer systems, the Agent logs are located in
 
 Need help? Contact [Datadog support][1].
 
-[1]: /help
+[1]: /help/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -399,7 +399,7 @@ After configuration is complete, [restart the Agent][11].
 [4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
 [5]: /agent/guide/datadog-agent-manager-windows
 [6]: /#monitoring-windows-processes
-[7]: /integrations/wmi
+[7]: /integrations/wmi/
 [8]: https://app.datadoghq.com/monitors#create/integration
 [9]: /infrastructure/process/?tab=linuxwindows#installation
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file

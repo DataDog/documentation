@@ -65,7 +65,7 @@ The parameter above can also be set with the following environment variable:
 When the Agent is [configured to send logs through HTTPS][1], use the same [set of proxy settings][2] as the other data types in order to send logs through a web proxy.
 
 [1]: /agent/logs/#send-logs-over-https
-[2]: /agent/proxy
+[2]: /agent/proxy/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -73,4 +73,4 @@ When the Agent is [configured to send logs through HTTPS][1], use the same [set 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/proxy
+[1]: /agent/proxy/

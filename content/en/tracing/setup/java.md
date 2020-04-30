@@ -459,16 +459,16 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/docker/apm
-[2]: /tracing/setup/docker
+[1]: /agent/docker/apm/
+[2]: /tracing/setup/docker/
 [3]: /agent/kubernetes/apm/
 [4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [5]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [6]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [7]: http://bytebuddy.net
-[8]: /help
+[8]: /help/
 [9]: https://github.com/DataDog/documentation#outside-contributors
-[10]: /tracing/connect_logs_and_traces/java
+[10]: /tracing/connect_logs_and_traces/java/
 [11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [12]: /developers/dogstatsd/#setup
 [13]: /agent/docker/#dogstatsd-custom-metrics

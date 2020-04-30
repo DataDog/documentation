@@ -110,7 +110,7 @@ This is an example of using a custom Agent check to send one event periodically.
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /developers/write_agent_check
+[1]: /developers/write_agent_check/
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /agent/guide/agent-commands/#agent-information

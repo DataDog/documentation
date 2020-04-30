@@ -135,18 +135,18 @@ Use saved views to automatically configure your log explorer with a preselected 
 
 [1]: /logs/search-syntax
 [2]: /logs/explorer/live_tail/
-[3]: /logs/explorer/list
-[4]: /logs/explorer/patterns
-[5]: /logs/explorer/analytics
+[3]: /logs/explorer/list/
+[4]: /logs/explorer/patterns/
+[5]: /logs/explorer/analytics/
 [6]: /logs/processing/pipelines/
 [7]: /integrations/#cat-log-collection
 [8]: /agent/autodiscovery/integrations/?tab=kubernetes
-[9]: /logs/processing/attributes_naming_convention
+[9]: /logs/processing/attributes_naming_convention/
 [10]: /dashboards/#preset-lists
-[11]: /network_performance_monitoring/network_page
+[11]: /network_performance_monitoring/network_page/
 [12]: /tracing/app_analytics/search/#displaying-a-full-trace
-[13]: /tracing/connect_logs_and_traces
+[13]: /tracing/connect_logs_and_traces/
 [14]: /tracing/visualization/service/#overview
 [15]: /logs/explorer/facets/#overview
-[16]: /logs/processing
-[17]: /logs/explorer/saved_views
+[16]: /logs/processing/
+[17]: /logs/explorer/saved_views/

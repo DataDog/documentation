@@ -156,11 +156,11 @@ Official integrations have their own dedicated directories. There's a default in
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/openmetrics
-[2]: /integrations/prometheus
+[1]: /integrations/openmetrics/
+[2]: /integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /developers/prometheus
+[5]: /developers/prometheus/
 [6]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [7]: https://app.datadoghq.com/metric/summary
 [8]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy

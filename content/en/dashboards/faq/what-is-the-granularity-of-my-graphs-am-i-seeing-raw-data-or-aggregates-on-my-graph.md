@@ -41,4 +41,4 @@ Yes, if you zoom in enough you'll get the original values. For instance with the
 
 [1]: /dashboards/faq/how-is-data-aggregated-in-graphs
 [2]: /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
-[3]: /dashboards/functions/rollup
+[3]: /dashboards/functions/rollup/

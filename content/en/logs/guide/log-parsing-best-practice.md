@@ -64,6 +64,6 @@ This article walks through parsing a log from the Datadog Agent's collector log 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing
+[1]: /logs/processing/parsing/
 [2]: /logs/processing/parsing/?tab=matcher#matcher-and-filter
 [3]: /logs/processing/parsing/#key-value

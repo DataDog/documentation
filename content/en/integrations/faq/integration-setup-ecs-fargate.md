@@ -88,7 +88,7 @@ Use the following JSON under `containerDefinitions` to create a Redis container 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/ecs_fargate
+[1]: /integrations/ecs_fargate/
 [2]: /agent/docker/integrations/?tab=dockerlabel#configuration
 [3]: /integrations/ecs_fargate/#container-agent-setup
 [4]: https://aws.amazon.com/console

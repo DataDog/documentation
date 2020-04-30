@@ -17,13 +17,13 @@ Microsoft Azure App Services is a group of serverless resources that enable you 
 
 Datadog provides monitoring capabilities for all Azure App Services resource types:
 
-- Azure Monitor metrics for [Apps][1] and [Functions][2] using the [Azure Integration][3].
+- Azure Monitor metrics for [Apps][1] and [Functions][2] using the [Azure Integration][1].
 - Custom metrics can be submitted using the API.
-- Logs can be submitted using [Eventhub or Blob storage][4].
+- Logs can be submitted using [Eventhub or Blob storage][3].
 
 ## Azure App Services Extension
 
-The Datadog extension for Azure App Services provides additional monitoring capabilities for [Azure Web Apps][5]. This support includes:
+The Datadog extension for Azure App Services provides additional monitoring capabilities for [Azure Web Apps][4]. This support includes:
 
 - Full distributed APM tracing using automatic instrumentation.
 - Support for manual APM instrumentation to customize spans.
@@ -31,7 +31,7 @@ The Datadog extension for Azure App Services provides additional monitoring capa
 
 ### Supported runtimes
 
-The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows instances (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][6].
+The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows instances (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][5].
 
 - .NET Framework 4.7 (AAS does not support more recent versions)
 - .NET Core 2.1
@@ -41,10 +41,10 @@ The Datadog .NET APM extension supports the following .NET runtimes in both x64 
 
 ## Installation
 
-1. Open the [Azure Portal][7] and navigate to the dashboard for the Azure App Services instance you wish to instrument with Datadog.
+1. Open the [Azure Portal][6] and navigate to the dashboard for the Azure App Services instance you wish to instrument with Datadog.
 2. Go to the Application settings tab of the Configuration page.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
-3. Add your Datadog API key as an application setting called `DD_API_KEY` and a value of your [Datadog API Key][8].
+3. Add your Datadog API key as an application setting called `DD_API_KEY` and a value of your [Datadog API Key][7].
     {{< img src="infrastructure/serverless/azure_app_services/api_key.png" alt="api key page" >}}
 4. If you use the EU Datadog site (datadoghq.eu domain), add an application setting `DD_SITE` with datadoghq.eu as the value.
     By default, the extension submits data to the US Datadog site (the datadoghq.com domain). So if you use the US Datadog site, there is no additional application setting required.
@@ -57,11 +57,11 @@ The Datadog .NET APM extension supports the following .NET runtimes in both x64 
 
 ## Logs and Trace ID Injection
 
-Logs for Azure Web Apps can be submitted to Datadog with Eventhub using the process described in the [Azure Integration documentation][9].
+Logs for Azure Web Apps can be submitted to Datadog with Eventhub using the process described in the [Azure Integration documentation][8].
 
-Once you establish the logging pipeline for your application, Trace ID injection allows you to [connect logs and traces][10] in Datadog. To enable this with the extension, add an application setting `DD_LOGS_INJECTION:true`.
+Once you establish the logging pipeline for your application, Trace ID injection allows you to [connect logs and traces][9] in Datadog. To enable this with the extension, add an application setting `DD_LOGS_INJECTION:true`.
 
-**Note**: Trace ID injection occurs in the application, so application logs include the trace ID. Other categories of [diagnostic logs available from Azure][11], like HTTP logs and audit logs, do not include the trace ID.
+**Note**: Trace ID injection occurs in the application, so application logs include the trace ID. Other categories of [diagnostic logs available from Azure][10], like HTTP logs and audit logs, do not include the trace ID.
 
 ## Troubleshooting
 
@@ -83,7 +83,7 @@ A clean install to a stopped app typically solves the problem. However, if youâ€
 
 If youâ€™re missing traces or not receiving them at all, make sure you have not manually adjusted any port settings. The Tracer Agent, in the extension, communicates with your application to identify the correct port to use for external traffic. Manual port settings can interfere with this process resulting in missed traces.
 
-Still need help? [Contact Datadog support][12].
+Still need help? [Contact Datadog support][11].
 
 ### Further Reading
 
@@ -93,15 +93,14 @@ Still need help? [Contact Datadog support][12].
 
 
 
-[1]: /integrations/azure_app_services
+[1]: /integrations/azure_app_services/
 [2]: /integrations/azure_functions/
-[3]: /integrations/azure_app_services/
-[4]: /integrations/azure/?tab=azurecliv20#log-collection
-[5]: https://azure.microsoft.com/en-us/services/app-service/web/
-[6]: /tracing/setup/dotnet
-[7]: https://portal.azure.com
-[8]: https://app.datadoghq.com/account/settings#api
-[9]: /integrations/azure/?tab=eventhub
-[10]: /tracing/connect_logs_and_traces/
-[11]: https://docs.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs
-[12]: /help/
+[3]: /integrations/azure/?tab=azurecliv20#log-collection
+[4]: https://azure.microsoft.com/en-us/services/app-service/web/
+[5]: /tracing/setup/dotnet/
+[6]: https://portal.azure.com
+[7]: https://app.datadoghq.com/account/settings#api
+[8]: /integrations/azure/?tab=eventhub
+[9]: /tracing/connect_logs_and_traces/
+[10]: https://docs.microsoft.com/en-us/azure/app-service/troubleshoot-diagnostic-logs
+[11]: /help/

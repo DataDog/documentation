@@ -102,18 +102,18 @@ If Watchdog has discovered something out of the ordinary in a specific service, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/system
-[2]: /integrations/redis
-[3]: /integrations/postgres
-[4]: /integrations/nginx
-[5]: /integrations/amazon_web_services
-[6]: /integrations/amazon_s3
-[7]: /integrations/amazon_elb
-[8]: /integrations/amazon_cloudfront
-[9]: /integrations/amazon_dynamodb
+[1]: /integrations/system/
+[2]: /integrations/redis/
+[3]: /integrations/postgres/
+[4]: /integrations/nginx/
+[5]: /integrations/amazon_web_services/
+[6]: /integrations/amazon_s3/
+[7]: /integrations/amazon_elb/
+[8]: /integrations/amazon_cloudfront/
+[9]: /integrations/amazon_dynamodb/
 [10]: https://app.datadoghq.com/apm/watchdog
 [11]: /monitors/monitor_types/watchdog/
 [12]: /tracing/send_traces/#configure-your-environment
 [13]: /tracing/guide/setting_primary_tags_to_scope/
 [14]: /tracing/visualization/#services
-[15]: /tracing/visualization/services_list
+[15]: /tracing/visualization/services_list/

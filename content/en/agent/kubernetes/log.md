@@ -208,7 +208,7 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 
 **Note**: You don't need to set up the `<INTEGRATIONS_NAME>` since the Agent infers it from the file name directly.
 
-[1]: /agent/guide/ad_identifiers
+[1]: /agent/guide/ad_identifiers/
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -231,8 +231,8 @@ data:
 See the [Autodiscovery Container Identifiers][3] documentation for information on the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
 
 [1]: /agent/kubernetes/integrations/#configmap
-[2]: /agent/kubernetes/integrations
-[3]: /agent/guide/ad_identifiers
+[2]: /agent/kubernetes/integrations/
+[3]: /agent/guide/ad_identifiers/
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
@@ -287,7 +287,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 
 **Note**: To apply a specific configuration to a given container, Autodiscovery identifies containers by **image** when using the key-value stores by trying to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].image`.
 
-[1]: /integrations/consul
+[1]: /integrations/consul/
 [2]: /agent/guide/agent-commands
 {{% /tab %}}
 {{< /tabs >}}

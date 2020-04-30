@@ -187,7 +187,7 @@ To use Autodiscovery with other services, define templates for the services you 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/ad_identifiers
-[2]: /agent/faq/template_variables
-[3]: /agent/faq/auto_conf
+[1]: /agent/guide/ad_identifiers/
+[2]: /agent/faq/template_variables/
+[3]: /agent/faq/auto_conf/
 [4]: /agent/kubernetes/integrations/

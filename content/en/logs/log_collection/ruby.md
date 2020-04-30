@@ -197,6 +197,6 @@ end
 [2]: /logs/?tab=ussite#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation
-[5]: /agent/logs
+[5]: /agent/logs/
 [6]: /agent/guide/agent-commands/#restart-the-agent
-[7]: /tracing/connect_logs_and_traces/ruby
+[7]: /tracing/connect_logs_and_traces/ruby/

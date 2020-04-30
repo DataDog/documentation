@@ -46,11 +46,11 @@ If you're still unsure about the issue, you may reach out to the [Datadog suppor
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://app.datadoghq.com/metric/explorer
-[3]: /agent/proxy
+[3]: /agent/proxy/
 [4]: https://app.datadoghq.com/account/settings#api
-[5]: /agent/troubleshooting/site
+[5]: /agent/troubleshooting/site/
 [6]: /agent/guide/agent-commands/#agent-status-and-information
 [7]: /agent/guide/agent-log-files
-[8]: /agent/troubleshooting/debug_mode
-[9]: /help
-[10]: /agent/troubleshooting/send_a_flare
+[8]: /agent/troubleshooting/debug_mode/
+[9]: /help/
+[10]: /agent/troubleshooting/send_a_flare/

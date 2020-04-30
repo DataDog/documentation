@@ -57,5 +57,5 @@ In the event that you need to upload an `IDP.XML` file to Datadog before being a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/saml/saml_setup
-[2]: /account_management/saml
+[2]: /account_management/saml/
 [3]: https://support.okta.com/help/s/article/How-do-we-download-the-IDP-XML-metadata-file-from-a-SAML-Template-App

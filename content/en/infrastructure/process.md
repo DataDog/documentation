@@ -241,8 +241,8 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
+[1]: /agent/
 [2]: /agent/faq/agent-5-process-collection
-[3]: /tagging
+[3]: /tagging/
 [4]: https://app.datadoghq.com/process
-[5]: /infrastructure/livecontainers
+[5]: /infrastructure/livecontainers/

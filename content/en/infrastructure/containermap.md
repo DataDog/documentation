@@ -29,8 +29,8 @@ After deploying the [Agent][4], no other configuration is necessary. For collect
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /infrastructure/hostmap
+[1]: /infrastructure/hostmap/
 [2]: https://app.datadoghq.com/infrastructure/map?node_type=container
-[3]: /agent/kubernetes/integrations
-[4]: /agent
-[5]: /agent/docker
+[3]: /agent/kubernetes/integrations/
+[4]: /agent/
+[5]: /agent/docker/

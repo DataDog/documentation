@@ -287,12 +287,12 @@ Checks
 [1]: https://github.com/DataDog/docker-dd-agent
 [2]: https://hub.docker.com/r/datadog/docker-dd-agent
 [3]: /#host-setup
-[4]: /integrations/docker_daemon
+[4]: /integrations/docker_daemon/
 [5]: /agent/kubernetes/
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: https://kubernetes.io/docs/concepts/configuration/secret
 [8]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables
-[9]: /getting_started/agent/autodiscovery
+[9]: /getting_started/agent/autodiscovery/
 [10]: https://github.com/DataDog/integrations-core/blob/master/kubernetes/datadog_checks/kubernetes/data/conf.yaml.example
 [11]: /agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/kubernetes/kube-state-metrics

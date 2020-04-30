@@ -184,17 +184,17 @@ Additional properties allowed in each `request` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/timeboard
-[2]: /dashboards/screenboard
-[3]: /dashboards/querying
+[1]: /dashboards/timeboard/
+[2]: /dashboards/screenboard/
+[3]: /dashboards/querying/
 [4]: /tracing/app_analytics/search/#search-bar
-[5]: /logs/search_syntax
-[6]: /events
-[7]: /dashboards/template_variables
+[5]: /logs/search_syntax/
+[6]: /events/
+[7]: /dashboards/template_variables/
 [8]: /dashboards/widgets/#full-screen
 [9]: https://www.datadoghq.com/blog/full-screen-graphs
-[10]: /dashboards/graphing_json/widget_json
-[11]: /dashboards/graphing_json/request_json
+[10]: /dashboards/graphing_json/widget_json/
+[11]: /dashboards/graphing_json/request_json/
 [12]: /dashboards/graphing_json/widget_json/#y-axis-schema
 [13]: /dashboards/graphing_json/widget_json/#events-schema
 [14]: /dashboards/graphing_json/widget_json/#markers-schema

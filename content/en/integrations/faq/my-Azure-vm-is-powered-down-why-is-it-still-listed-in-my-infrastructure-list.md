@@ -20,4 +20,4 @@ If you destroy your Azure VM, it phases out of your infrastructure list within 3
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/billing
+[1]: /account_management/billing/

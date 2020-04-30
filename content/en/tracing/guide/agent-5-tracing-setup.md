@@ -78,9 +78,9 @@ Need help? Contact [Datadog support][12].
 [4]: /tracing/visualization/#trace-metrics
 [5]: https://app.datadoghq.com/account/settings#agent
 [6]: https://hub.docker.com/r/datadog/docker-dd-agent
-[7]: /tracing/docker
+[7]: /tracing/docker/
 [8]: /api/v1/tracing/
-[9]: /agent
+[9]: /agent/
 [10]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [11]: /tracing/setup/?tab=agent5250#trace-search
-[12]: /help
+[12]: /help/

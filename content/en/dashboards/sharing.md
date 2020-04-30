@@ -97,12 +97,12 @@ Datadog has a [dedicated API][8] allowing you to interact with your shared graph
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/timeboard
-[2]: /dashboards/screenboard
+[1]: /dashboards/timeboard/
+[2]: /dashboards/screenboard/
 [3]: https://app.datadoghq.com/account/settings#embeds
-[4]: /dashboards/template_variables
+[4]: /dashboards/template_variables/
 [5]: https://app.datadoghq.com/dashboard/lists
-[6]: /help
+[6]: /help/
 [7]: https://app.datadoghq.com/account/org_security
 [8]: /api/#embeddable-graphs
 [9]: /api/#get-all-embeds

@@ -130,4 +130,4 @@ When logs are sent through HTTPS, use the same [set of proxy settings][4] as the
 [1]: /agent/guide/agent-configuration-files
 [2]: /agent/logs/proxy/?tab=socks5
 [3]: /agent/basic_agent_usage/#agent-overhead
-[4]: /agent/proxy
+[4]: /agent/proxy/

@@ -26,4 +26,4 @@ If you encounter a problem and cannot log in, try the following:
 If the above troubleshooting steps fail, contact the [Datadog support team][2] and let them know the expected behavior and what you’ve tried.
 
 [1]: /account_management/saml/#saml-strict
-[2]: /help
+[2]: /help/

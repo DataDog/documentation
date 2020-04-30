@@ -29,7 +29,7 @@ Contact [us][4] should you experience any issues.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/metric
-[2]: /integrations/amazon_web_services
+[1]: /monitors/monitor_types/metric/
+[2]: /integrations/amazon_web_services/
 [3]: /monitors/faq/what-is-the-do-not-require-a-full-window-of-data-for-evaluation-monitor-parameter
-[4]: /help
+[4]: /help/

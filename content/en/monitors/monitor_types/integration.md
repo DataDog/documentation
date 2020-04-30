@@ -93,11 +93,11 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations
+[1]: /integrations/
 [2]: https://app.datadoghq.com/monitors#create/integration
-[3]: /monitors/monitor_types/metric
+[3]: /monitors/monitor_types/metric/
 [4]: https://app.datadoghq.com/monitors/manage
 [5]: /monitors/monitor_types/metric/#no-data
 [6]: /monitors/monitor_types/metric/#auto-resolve
 [7]: /monitors/monitor_types/metric/#evaluation-delay
-[8]: /monitors/notifications
+[8]: /monitors/notifications/
