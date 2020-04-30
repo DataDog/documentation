@@ -86,14 +86,26 @@
               "id": "123456",
               "is_muted": "false",
               "last_reported_time": "1565000000",
-              "meta": "object",
-              "metrics": "object",
+              "meta": {
+                "nixV": [
+                  "Ubuntu"
+                ]
+              },
+              "metrics": {
+                "cpu": "99",
+                "iowait": "3.2",
+                "load": "0.5"
+              },
               "mute_timeout": "integer",
               "name": "i-hostname",
               "sources": [
                 "aws"
               ],
-              "tags_by_source": "object",
+              "tags_by_source": {
+                "&lt;any-key&gt;": [
+                  "test.example.com.host"
+                ]
+              },
               "up": "true"
             }
           ],

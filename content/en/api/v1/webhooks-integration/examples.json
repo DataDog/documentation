@@ -147,7 +147,9 @@
     "responses": {
       "201": {
         "json": {
-          "custom_headers": "object",
+          "custom_headers": {
+            "&lt;any-key&gt;": "string"
+          },
           "encode_as": "string",
           "name": "WEBHOOK_NAME",
           "payload": "object",
@@ -174,7 +176,9 @@
     },
     "request": {
       "json": {
-        "custom_headers": "object",
+        "custom_headers": {
+          "&lt;any-key&gt;": "string"
+        },
         "encode_as": "string",
         "name": "WEBHOOK_NAME",
         "payload": "object",
@@ -211,7 +215,9 @@
     "responses": {
       "200": {
         "json": {
-          "custom_headers": "object",
+          "custom_headers": {
+            "&lt;any-key&gt;": "string"
+          },
           "encode_as": "string",
           "name": "WEBHOOK_NAME",
           "payload": "object",
@@ -253,7 +259,9 @@
     "responses": {
       "200": {
         "json": {
-          "custom_headers": "object",
+          "custom_headers": {
+            "&lt;any-key&gt;": "string"
+          },
           "encode_as": "string",
           "name": "WEBHOOK_NAME",
           "payload": "object",
@@ -288,7 +296,9 @@
     },
     "request": {
       "json": {
-        "custom_headers": "object",
+        "custom_headers": {
+          "&lt;any-key&gt;": "string"
+        },
         "encode_as": "string",
         "name": "WEBHOOK_NAME",
         "payload": "object",

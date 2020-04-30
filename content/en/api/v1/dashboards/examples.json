@@ -37,16 +37,10 @@
     "responses": {
       "200": {
         "json": {
-          "author_handle": "test@datadoghq.com",
-          "created_at": "string",
           "description": "string",
-          "id": "123-abc-456",
           "is_read_only": "false",
           "layout_type": "string",
-          "modified_at": "string",
-          "notify_list": [
-            "string"
-          ],
+          "notify_list": "array",
           "template_variable_presets": [
             {
               "name": "string",
@@ -66,12 +60,16 @@
             }
           ],
           "title": "string",
-          "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
               "definition": "object",
               "id": "integer",
-              "layout": "object"
+              "layout": {
+                "height": "integer",
+                "width": "integer",
+                "x": "integer",
+                "y": "integer"
+              }
             }
           ]
         },
@@ -96,16 +94,10 @@
     },
     "request": {
       "json": {
-        "author_handle": "test@datadoghq.com",
-        "created_at": "string",
         "description": "string",
-        "id": "123-abc-456",
         "is_read_only": "false",
         "layout_type": "string",
-        "modified_at": "string",
-        "notify_list": [
-          "string"
-        ],
+        "notify_list": "array",
         "template_variable_presets": [
           {
             "name": "string",
@@ -125,12 +117,16 @@
           }
         ],
         "title": "string",
-        "url": "/dashboard/123-abc-456/example-dashboard-title",
         "widgets": [
           {
             "definition": "object",
             "id": "integer",
-            "layout": "object"
+            "layout": {
+              "height": "integer",
+              "width": "integer",
+              "x": "integer",
+              "y": "integer"
+            }
           }
         ]
       },
@@ -171,16 +167,10 @@
     "responses": {
       "200": {
         "json": {
-          "author_handle": "test@datadoghq.com",
-          "created_at": "string",
           "description": "string",
-          "id": "123-abc-456",
           "is_read_only": "false",
           "layout_type": "string",
-          "modified_at": "string",
-          "notify_list": [
-            "string"
-          ],
+          "notify_list": "array",
           "template_variable_presets": [
             {
               "name": "string",
@@ -200,12 +190,16 @@
             }
           ],
           "title": "string",
-          "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
               "definition": "object",
               "id": "integer",
-              "layout": "object"
+              "layout": {
+                "height": "integer",
+                "width": "integer",
+                "x": "integer",
+                "y": "integer"
+              }
             }
           ]
         },
@@ -237,16 +231,10 @@
     "responses": {
       "200": {
         "json": {
-          "author_handle": "test@datadoghq.com",
-          "created_at": "string",
           "description": "string",
-          "id": "123-abc-456",
           "is_read_only": "false",
           "layout_type": "string",
-          "modified_at": "string",
-          "notify_list": [
-            "string"
-          ],
+          "notify_list": "array",
           "template_variable_presets": [
             {
               "name": "string",
@@ -266,12 +254,16 @@
             }
           ],
           "title": "string",
-          "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
               "definition": "object",
               "id": "integer",
-              "layout": "object"
+              "layout": {
+                "height": "integer",
+                "width": "integer",
+                "x": "integer",
+                "y": "integer"
+              }
             }
           ]
         },
@@ -304,16 +296,10 @@
     },
     "request": {
       "json": {
-        "author_handle": "test@datadoghq.com",
-        "created_at": "string",
         "description": "string",
-        "id": "123-abc-456",
         "is_read_only": "false",
         "layout_type": "string",
-        "modified_at": "string",
-        "notify_list": [
-          "string"
-        ],
+        "notify_list": "array",
         "template_variable_presets": [
           {
             "name": "string",
@@ -333,12 +319,16 @@
           }
         ],
         "title": "string",
-        "url": "/dashboard/123-abc-456/example-dashboard-title",
         "widgets": [
           {
             "definition": "object",
             "id": "integer",
-            "layout": "object"
+            "layout": {
+              "height": "integer",
+              "width": "integer",
+              "x": "integer",
+              "y": "integer"
+            }
           }
         ]
       },
