@@ -1,7 +1,7 @@
 ---
 title: Get all Slack integration channels
 type: apicode
-order: 20.7
+order: 20.8
 external_redirect: /api/#get-all-slack-integration-channels
 ---
 

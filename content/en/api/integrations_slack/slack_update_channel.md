@@ -1,7 +1,7 @@
 ---
 title: Update a Slack integration channel
 type: apicontent
-order: 20.8
+order: 20.6
 external_redirect: /api/#update-a-slack-integration-channel
 ---
 
@@ -29,4 +29,4 @@ Update a channel used in your Datadog-Slack integration.
     * **`notified`** [*optional*]:
         Show the list of @-handles in the alert event.
 
-**NOTE**: Prepending **`#`** to the channel name is optional
+**NOTE**: Prepending **`#`** to the channel name is optional.

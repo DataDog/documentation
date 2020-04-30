@@ -13,4 +13,4 @@ Remove a channel from your Datadog-Slack integration.
 
 This endpoint takes no JSON arguments.
 
-**NOTE**: Prepending **`#`** to the channel name is optional
+**NOTE**: Prepending **`#`** to the channel name is optional.

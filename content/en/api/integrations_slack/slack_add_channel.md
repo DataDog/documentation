@@ -5,7 +5,7 @@ order: 20.4
 external_redirect: /api/#add-a-slack-integration-channel
 ---
 
-## Add Slack integration channel
+## Add a Slack integration channel
 
 Add a channel to your Datadog-Slack integration.
 
@@ -29,4 +29,4 @@ Add a channel to your Datadog-Slack integration.
     * **`notified`** [*optional*, *default*=**True**]:
         Show the list of @-handles in the alert event.
 
-**NOTE**: Prepending **`#`** to the channel name is optional
+**NOTE**: Prepending **`#`** to the channel name is optional.
