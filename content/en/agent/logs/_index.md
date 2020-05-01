@@ -171,19 +171,20 @@ List of all available parameters for log collection:
 | `exclude_path`   | No       | If `type` is **file**, and `path` contains a wildcard character, list the matching file that should be excluded from log collection. It is available for Agent version >= 6.18.                                                                                                                                                                                                                                                                                                                                                                                |
 | `exclude_units`  | No       | If `type` is **journald**, list of the specific journald units to exclude.                                                                                                                                                                                                                                                                              |
 | `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                             |
-| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][2]).                                                                                                                                                                                                                                                                             |
+| `start_position` | No       | If `type` is **file**, set the position for the Agent to start reading the file. Valid values are `beginning` and `end` (default: `end`). If `path` contains a wildcard character, `beginning` is not supported. _Added in Agent v6.19/v7.19_                                                                                                                                                  |
+| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][10]).                                                                                                                                                                                                                                                                             |
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/guide/agent-configuration-files
-[3]: /agent/logs/log_transport
-[4]: /agent/kubernetes/log
-[5]: /agent/docker/log
+[2]: /agent/guide/agent-configuration-files/
+[3]: /agent/logs/log_transport/
+[4]: /agent/kubernetes/log/
+[5]: /agent/docker/log/
 [6]: /logs/log_collection/#container-log-collection
 [7]: /agent/guide/agent-commands/#agent-status-and-information
-[8]: /tracing
-[9]: /developers/metrics/custom_metrics
-[10]: /tagging
+[8]: /tracing/
+[9]: /developers/metrics/custom_metrics/
+[10]: /tagging/

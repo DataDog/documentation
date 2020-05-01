@@ -75,7 +75,7 @@ Another use case of the JSON export would be to get a list of AWS EC2 instances 
 [1]: /agent/faq/how-datadog-agent-determines-the-hostname
 [2]: /tagging
 [3]: /logs
-[4]: /api/?lang=bash#search-hosts
+[4]: /api/v1/hosts/#get-the-total-number-of-active-hosts
 [5]: /developers/guide/query-the-infrastructure-list-via-the-api
 [6]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [7]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38

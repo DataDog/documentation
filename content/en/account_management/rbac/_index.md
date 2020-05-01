@@ -8,10 +8,10 @@ aliases:
     - /account_management/users/custom_roles
     - /account_management/rbac/log_management
 further_reading:
-    - link: '/api/#roles'
+    - link: '/api/v2/roles/'
       tag: 'Documentation'
       text: 'Manage Roles and Permissions with the Roles API'
-    - link: '/api/#get-permissions'
+    - link: '/api/v2/roles/#list-permissions'
       tag: 'Documentation'
       text: 'Manage your permissions with the Permission API'
     - link: '/account_management/rbac/permissions'
@@ -67,7 +67,7 @@ Once a role is created you can [add this role to existing users][3].
 Find an example of how to create a Role in the [Datadog Create Role API documentation][1].
 
 
-[1]: /api/#create-role
+[1]: /api/v2/roles/#create-role
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -96,7 +96,7 @@ Once a role is modified, all users who have the role will have their permissions
 Find an example of how to update a Role in the [Datadog Create Role API documentation][1].
 
 
-[1]: /api/#update-role
+[1]: /api/v2/roles/#update-a-role
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -125,7 +125,7 @@ Once a role is deleted all users who have the role will have their permissions u
 Find an example of how to delete a Role in the [Datadog Create Role API documentation][1].
 
 
-[1]: /api/#delete-role
+[1]: /api/v2/roles/#delete-role
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -137,5 +137,5 @@ Find an example of how to delete a Role in the [Datadog Create Role API document
 [2]: /monitors
 [3]: /events
 [4]: /notebooks
-[5]: /api/#roles
+[5]: /api/v2/roles/
 [6]: /account_management/rbac/permissions

@@ -49,7 +49,7 @@ Datadog also provides a notification option for changes to monitors you create. 
 The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor. The monitor audit event also appears in the [event stream][20].
 
 [1]: https://app.datadoghq.com/monitors#/create
-[2]: /api/#monitors
+[2]: /api/v1/monitors/
 [3]: /developers/libraries/#managing-monitors
 [4]: /monitors/monitor_types/host
 [5]: /monitors/monitor_types/metric
