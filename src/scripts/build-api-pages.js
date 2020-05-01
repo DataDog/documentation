@@ -7,21 +7,24 @@ const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
 
+const supportedLangs = ['en', 'fr', 'ja'];
 
 /**
  * Update the menu yaml file with api
  * @param {object} apiYaml - object with data
  * @param {string} apiVersion - string with version e.g v1
  */
-const updateMenu = (apiYaml, apiVersion) => {
-  const currentMenuYaml = yaml.safeLoad(fs.readFileSync('./config/_default/menus/menus.en.yaml', 'utf8'));
+const updateMenu = (apiYaml, apiVersion, languages) => {
+
+  languages.forEach((language) => {
+    const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/menus.${language}.yaml`, 'utf8'));
   const newMenuArray = [];
 
   // need to add hardcoded menu items
   const mainOverviewSections = [
     {
         name: 'Overview',
-        url: `/api/${apiVersion}/`,
+        url: (language === 'en' ? `/api/${apiVersion}/` : `/${language}/api/${apiVersion}/`),
         identifier: `API ${apiVersion.toUpperCase()} overview`,
         weight: -10
     },
@@ -43,7 +46,7 @@ const updateMenu = (apiYaml, apiVersion) => {
 
     newMenuArray.push({
       name: tag.name,
-      url: `/api/${apiVersion}/${getTagSlug(tag.name)}/`,
+      url: (language === 'en' ? `/api/${apiVersion}/${getTagSlug(tag.name)}/` : `/${language}/api/${apiVersion}/${getTagSlug(tag.name)}/` ),
       identifier: tag.name
     });
 
@@ -67,8 +70,11 @@ const updateMenu = (apiYaml, apiVersion) => {
   const newMenuYaml = yaml.dump(currentMenuYaml, {lineWidth: -1});
 
   // save new yaml menu
-  fs.writeFileSync('./config/_default/menus/menus.en.yaml', newMenuYaml, 'utf8');
-  console.log(`successfully updated ${apiVersion} ./config/_default/menus/menus.en.yaml`);
+  fs.writeFileSync(`./config/_default/menus/menus.${language}.yaml`, newMenuYaml, 'utf8');
+  console.log(`successfully updated ${apiVersion} ./config/_default/menus/menus.${language}.yaml`);
+  })
+
+  
 };
 
 
@@ -621,7 +627,7 @@ const processSpecs = (specs) => {
               jsonString,
               'utf8'
           );
-          updateMenu(fileData, version);
+          updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
           createResources(fileData, JSON.parse(jsonString), version);
         }).catch((e) => console.log(e));
