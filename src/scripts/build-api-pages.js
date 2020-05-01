@@ -458,7 +458,9 @@ const typeColumn = (key, value, readOnlyMarkup) => {
 const descColumn = (key, value) => {
   let desc = '';
   if(value.description) {
-    if(typeof(value.description) !== "object") {
+    if (value.enum){
+      desc = `${value.description  } \nAllowed enum values: <code>${value.enum}</code>`;
+    } else if(typeof(value.description) !== "object") {
       desc = value.description || '';
     }
   } else if((typeof(value) === "string") && key === 'description') {
