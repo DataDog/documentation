@@ -44,7 +44,7 @@ To revoke the keys used to share individual (embedded) graphs:
 2. Click on the **Revoke** button next to the graph you want to stop sharing.
 3. The graph is moved to the **Revoked** list.
 
-## Dashboards 
+## Dashboards
 
 ### Share
 
@@ -104,9 +104,9 @@ Datadog has a [dedicated API][8] allowing you to interact with your shared graph
 [5]: https://app.datadoghq.com/dashboard/lists
 [6]: /help
 [7]: https://app.datadoghq.com/account/org_security
-[8]: /api/?lang=python#embeddable-graphs
-[9]: /api/?lang=python#get-all-embeds
-[10]: /api/?lang=python#create-embed
-[11]: /api/?lang=python#get-specific-embed
-[12]: /api/?lang=python#enable-embed
-[13]: /api/?lang=python#revoke-embed
+[8]: i/api/v1/embeddable-graphs/
+[9]: /api/v1/embeddable-graphs/#get-all-embeds
+[10]: /api/v1/embeddable-graphs/#create-embed
+[11]: /api/v1/embeddable-graphs/#get-specific-embed
+[12]: /api/v1/embeddable-graphs/#enable-embed
+[13]: /api/v1/embeddable-graphs/#revoke-embed

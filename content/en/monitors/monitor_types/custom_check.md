@@ -85,7 +85,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [1]: /integrations
 [2]: /developers/write_agent_check
 [3]: /developers/dogstatsd
-[4]: /api/?lang=python#service-checks
+[4]: /api/v1/service-checks/
 [5]: https://app.datadoghq.com/monitors#create/custom
 [6]: /monitors/monitor_types/metric
 [7]: /monitors/monitor_types/metric/#no-data

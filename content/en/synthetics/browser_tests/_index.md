@@ -100,7 +100,7 @@ After saving a browser test, you can record [Actions][10] as a series of steps, 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/identify_synthetics_bots
-[2]: /api/?lang=bash#get-available-locations
+[2]: /api/#get-available-locations
 [3]: /synthetics/private_locations
 [4]: /help
 [5]: /synthetics/settings#global-variables

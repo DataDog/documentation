@@ -32,7 +32,7 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
 ##### ARGUMENTS
 
 * **`role["data"]["id"]`** [*required*, no default]:
- The `ID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. 
+ The `ID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them.
  **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned an ID. For more information about finding the `ID` for the role you want to map to, see the [Role API documentation][1].
 * **`attributes["attribute_key"]`** [*required*, no default]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
@@ -233,8 +233,8 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
     ],
     "meta": {
       "page": {
-        "total_count": 1, 
-        "total_filtered_count": 1, 
+        "total_count": 1,
+        "total_filtered_count": 1,
       }
     }
 }
@@ -351,7 +351,7 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
 * **`{authn_mapping_id}`** [*required*, no default]:
   Replace `{authn_mapping_id}` with the ID of the AuthN Mapping you want to update. This is required in both the path of the request and the body of the request.
 * **`role["data"]["id"]`** [*optional*, *default*=none]:
- The `ID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them. 
+ The `ID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them.
  **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned an ID. For more information about finding the `ID` for the role you want to map to, see the [Role API documentation][1].
 * **`attributes["attribute_key"]`** [*optional*, *default*=none]:
  The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
@@ -378,7 +378,7 @@ curl -X PATCH \
                 "relationships": {
                 "role": {
                     "data": {
-                            "id": "123e4567-e89b-12d3-a456-426655440000", 
+                            "id": "123e4567-e89b-12d3-a456-426655440000",
                             "type": "roles"
                         }
                     }
@@ -540,7 +540,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 When enabled all users logging in with SAML will be stripped of any roles they have currently and reassigned roles based on the values in their SAML Assertion. It's important that you confirm you are receiving the expected SAML Assertions in your login before enabling the Mapping enforcement.
 </div>
 
-Enables/disables the enforcement of all AuthN Mappings. 
+Enables/disables the enforcement of all AuthN Mappings.
 
 | Method   | Endpoint path               | Required payload |
 |----------|-----------------------------|------------------|
@@ -600,4 +600,4 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/#get-all-roles
+[1]: /api/v2/roles/#list-roles

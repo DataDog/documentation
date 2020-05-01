@@ -55,7 +55,7 @@ Define the request you want to be executed by Datadog:
 
 [1]: /synthetics/identify_synthetics_bots
 [2]: /synthetics
-[3]: /api/?lang=bash#get-available-locations
+[3]: /api/#get-available-locations
 [4]: /synthetics/private_locations
 {{% /tab %}}
 
@@ -72,7 +72,7 @@ Define the request you want to be executed by Datadog:
 7. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
 [1]: /synthetics
-[2]: /api/?lang=bash#get-available-locations
+[2]: /api/#get-available-locations
 [3]: /synthetics/private_locations
 {{% /tab %}}
 
@@ -205,7 +205,7 @@ Response time is the sum of these network timings.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/?lang=bash#get-available-locations
+[1]: /api/#get-available-locations
 [2]: /synthetics/api_tests/errors#ssl-errors
 [3]: /synthetics/settings#global-variables
 [4]: /integrations/#cat-notification
