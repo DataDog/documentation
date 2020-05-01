@@ -34,7 +34,7 @@ Define the Grok processor in the [Datadog Log configuration page][1]:
 
 Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample. Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
-Click **Parse my logs** to kickstart a set of 3 parsing rules for the logs flowing through the underlying pipeline. Fine tune attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in - you can momentaneously deactivate or sample down exclusion filters to make this work for you.
+Click **Parse my logs** to kickstart a set of three parsing rules for the logs flowing through the underlying pipeline. Fine tune attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -86,7 +86,8 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 </div>
 
 
-**Note**:
+**Note**: 
+
 * **Log events can be submitted up to 6h in the past and 2h in the future**.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
 * If multiple log date remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.

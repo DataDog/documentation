@@ -117,6 +117,8 @@ Note in this manifest that:
 
 Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary. For advanced use cases, it is possible to have several metrics in the same HPA. As you can see [in the Kubernetes horizontal pod autoscaling documentation][9], the largest of the proposed values is the one chosen.
 
+**Note**: Running multiple Cluster Agents will raise API usage. The Datadog Cluster Agent completes 120 calls per hour for approximately 45 HPA objects in Kubernetes. Running more than 45 HPAs will increase the number of calls when fetching metrics from within the same org.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

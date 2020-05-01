@@ -1717,14 +1717,18 @@ main:
     url: "developers/integrations/new_check_howto/"
     parent: "dev_tools_integrations"
     weight: 901
+  - name: "Integration assets reference"
+    url: "developers/integrations/check_references/"
+    parent: "dev_tools_integrations"
+    weight: 902
   - name: "Python"
     url: "developers/integrations/python/"
     parent: "dev_tools_integrations"
-    weight: 902
+    weight: 903
   - name: "Legacy"
     url: "developers/integrations/legacy/"
     parent: "dev_tools_integrations"
-    weight: 903
+    weight: 904
 
   - name: "Amazon CloudFormation"
     url: "developers/amazon_cloudformation/"
