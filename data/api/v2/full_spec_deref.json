@@ -50,12 +50,12 @@
     "responses": {},
     "schemas": {
       "APIErrorResponse": {
-        "description": "TODO.",
+        "description": "API error response.",
         "properties": {
           "errors": {
-            "description": "TODO.",
+            "description": "A list of errors.",
             "items": {
-              "description": "TODO.",
+              "description": "A list of items.",
               "example": "Bad Request",
               "type": "string"
             },
@@ -71,41 +71,41 @@
         "description": "Creator of the object.",
         "properties": {
           "email": {
-            "description": "TODO.",
+            "description": "Email of the creator.",
             "type": "string"
           },
           "handle": {
-            "description": "TODO.",
+            "description": "Handle of the creator.",
             "type": "string"
           },
           "name": {
-            "description": "TODO.",
+            "description": "Name of the creator.",
             "type": "string"
           }
         },
         "type": "object"
       },
       "DashboardListAddItemsResponse": {
-        "description": "TODO.",
+        "description": "Response containing a list of added dashboards.",
         "properties": {
           "added_dashboards_to_list": {
             "description": "List of dashboards added to the dashboard list.",
             "items": {
-              "description": "TODO.",
+              "description": "A dashboard within a list.",
               "properties": {
                 "author": {
                   "description": "Creator of the object.",
                   "properties": {
                     "email": {
-                      "description": "TODO.",
+                      "description": "Email of the creator.",
                       "type": "string"
                     },
                     "handle": {
-                      "description": "TODO.",
+                      "description": "Handle of the creator.",
                       "type": "string"
                     },
                     "name": {
-                      "description": "TODO.",
+                      "description": "Name of the creator.",
                       "type": "string"
                     }
                   },
@@ -195,26 +195,26 @@
         "type": "object"
       },
       "DashboardListDeleteItemsResponse": {
-        "description": "TODO.",
+        "description": "Response containing a list of deleted dashboards.",
         "properties": {
           "deleted_dashboards_from_list": {
             "description": "List of dashboards deleted from the dashboard list.",
             "items": {
-              "description": "TODO.",
+              "description": "A dashboard within a list.",
               "properties": {
                 "author": {
                   "description": "Creator of the object.",
                   "properties": {
                     "email": {
-                      "description": "TODO.",
+                      "description": "Email of the creator.",
                       "type": "string"
                     },
                     "handle": {
-                      "description": "TODO.",
+                      "description": "Handle of the creator.",
                       "type": "string"
                     },
                     "name": {
-                      "description": "TODO.",
+                      "description": "Name of the creator.",
                       "type": "string"
                     }
                   },
@@ -304,21 +304,21 @@
         "type": "object"
       },
       "DashboardListItem": {
-        "description": "TODO.",
+        "description": "A dashboard within a list.",
         "properties": {
           "author": {
             "description": "Creator of the object.",
             "properties": {
               "email": {
-                "description": "TODO.",
+                "description": "Email of the creator.",
                 "type": "string"
               },
               "handle": {
-                "description": "TODO.",
+                "description": "Handle of the creator.",
                 "type": "string"
               },
               "name": {
-                "description": "TODO.",
+                "description": "Name of the creator.",
                 "type": "string"
               }
             },
@@ -403,26 +403,26 @@
         "type": "object"
       },
       "DashboardListItems": {
-        "description": "TODO.",
+        "description": "Dashboards within a list.",
         "properties": {
           "dashboards": {
             "description": "List of dashboards in the dashboard list.",
             "items": {
-              "description": "TODO.",
+              "description": "A dashboard within a list.",
               "properties": {
                 "author": {
                   "description": "Creator of the object.",
                   "properties": {
                     "email": {
-                      "description": "TODO.",
+                      "description": "Email of the creator.",
                       "type": "string"
                     },
                     "handle": {
-                      "description": "TODO.",
+                      "description": "Handle of the creator.",
                       "type": "string"
                     },
                     "name": {
-                      "description": "TODO.",
+                      "description": "Name of the creator.",
                       "type": "string"
                     }
                   },
@@ -947,7 +947,7 @@
           },
           "type": {
             "default": "roles",
-            "description": "TODO",
+            "description": "Type of role.",
             "type": "string"
           }
         },
@@ -957,7 +957,7 @@
         "description": "Relationship to roles.",
         "properties": {
           "data": {
-            "description": "TODO.",
+            "description": "An array containing type and ID of a role.",
             "items": {
               "description": "Relationship to role object.",
               "properties": {
@@ -967,7 +967,7 @@
                 },
                 "type": {
                   "default": "roles",
-                  "description": "TODO",
+                  "description": "Type of role.",
                   "type": "string"
                 }
               },
@@ -1148,7 +1148,7 @@
                 "description": "Relationship to roles.",
                 "properties": {
                   "data": {
-                    "description": "TODO.",
+                    "description": "An array containing type and ID of a role.",
                     "items": {
                       "description": "Relationship to role object.",
                       "properties": {
@@ -1158,7 +1158,7 @@
                         },
                         "type": {
                           "default": "roles",
-                          "description": "TODO",
+                          "description": "Type of role.",
                           "type": "string"
                         }
                       },
@@ -1173,7 +1173,7 @@
                 "description": "Relationship to roles.",
                 "properties": {
                   "data": {
-                    "description": "TODO.",
+                    "description": "An array containing type and ID of a role.",
                     "items": {
                       "description": "Relationship to role object.",
                       "properties": {
@@ -1183,7 +1183,7 @@
                         },
                         "type": {
                           "default": "roles",
-                          "description": "TODO",
+                          "description": "Type of role.",
                           "type": "string"
                         }
                       },
@@ -1239,7 +1239,7 @@
         "type": "object"
       },
       "RoleCreateData": {
-        "description": "TODO",
+        "description": "Data related to the creation of a role.",
         "properties": {
           "attributes": {
             "description": "Attributes of the created role.",
@@ -1322,7 +1322,7 @@
         "description": "Create a role.",
         "properties": {
           "data": {
-            "description": "TODO",
+            "description": "Data related to the creation of a role.",
             "properties": {
               "attributes": {
                 "description": "Attributes of the created role.",
@@ -1549,7 +1549,7 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "TODO.",
+                        "description": "An array containing type and ID of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
@@ -1559,7 +1559,7 @@
                             },
                             "type": {
                               "default": "roles",
-                              "description": "TODO",
+                              "description": "Type of role.",
                               "type": "string"
                             }
                           },
@@ -1574,7 +1574,7 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "TODO.",
+                        "description": "An array containing type and ID of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
@@ -1584,7 +1584,7 @@
                             },
                             "type": {
                               "default": "roles",
-                              "description": "TODO",
+                              "description": "Type of role.",
                               "type": "string"
                             }
                           },
@@ -1665,7 +1665,7 @@
             "description": "Relationship to roles.",
             "properties": {
               "data": {
-                "description": "TODO.",
+                "description": "An array containing type and ID of a role.",
                 "items": {
                   "description": "Relationship to role object.",
                   "properties": {
@@ -1675,7 +1675,7 @@
                     },
                     "type": {
                       "default": "roles",
-                      "description": "TODO",
+                      "description": "Type of role.",
                       "type": "string"
                     }
                   },
@@ -1690,7 +1690,7 @@
             "description": "Relationship to roles.",
             "properties": {
               "data": {
-                "description": "TODO.",
+                "description": "An array containing type and ID of a role.",
                 "items": {
                   "description": "Relationship to role object.",
                   "properties": {
@@ -1700,7 +1700,7 @@
                     },
                     "type": {
                       "default": "roles",
-                      "description": "TODO",
+                      "description": "Type of role.",
                       "type": "string"
                     }
                   },
@@ -1725,7 +1725,7 @@
         "type": "object"
       },
       "RoleUpdateData": {
-        "description": "TODO",
+        "description": "Data related to the update of a role.",
         "properties": {
           "attributes": {
             "description": "Attributes of the edited role.",
@@ -1743,7 +1743,7 @@
           },
           "type": {
             "default": "roles",
-            "description": "TODO",
+            "description": "Type of role.",
             "type": "string"
           }
         },
@@ -1753,7 +1753,7 @@
         "description": "Update a role.",
         "properties": {
           "data": {
-            "description": "TODO",
+            "description": "Data related to the update of a role.",
             "properties": {
               "attributes": {
                 "description": "Attributes of the edited role.",
@@ -1771,7 +1771,7 @@
               },
               "type": {
                 "default": "roles",
-                "description": "TODO",
+                "description": "Type of role.",
                 "type": "string"
               }
             },
@@ -1869,7 +1869,7 @@
                       "description": "Relationship to roles.",
                       "properties": {
                         "data": {
-                          "description": "TODO.",
+                          "description": "An array containing type and ID of a role.",
                           "items": {
                             "description": "Relationship to role object.",
                             "properties": {
@@ -1879,7 +1879,7 @@
                               },
                               "type": {
                                 "default": "roles",
-                                "description": "TODO",
+                                "description": "Type of role.",
                                 "type": "string"
                               }
                             },
@@ -1894,7 +1894,7 @@
                       "description": "Relationship to roles.",
                       "properties": {
                         "data": {
-                          "description": "TODO.",
+                          "description": "An array containing type and ID of a role.",
                           "items": {
                             "description": "Relationship to role object.",
                             "properties": {
@@ -1904,7 +1904,7 @@
                               },
                               "type": {
                                 "default": "roles",
-                                "description": "TODO",
+                                "description": "Type of role.",
                                 "type": "string"
                               }
                             },
@@ -2106,7 +2106,7 @@
                 "description": "Relationship to roles.",
                 "properties": {
                   "data": {
-                    "description": "TODO.",
+                    "description": "An array containing type and ID of a role.",
                     "items": {
                       "description": "Relationship to role object.",
                       "properties": {
@@ -2116,7 +2116,7 @@
                         },
                         "type": {
                           "default": "roles",
-                          "description": "TODO",
+                          "description": "Type of role.",
                           "type": "string"
                         }
                       },
@@ -2228,7 +2228,7 @@
                 "description": "Relationship to roles.",
                 "properties": {
                   "data": {
-                    "description": "TODO.",
+                    "description": "An array containing type and ID of a role.",
                     "items": {
                       "description": "Relationship to role object.",
                       "properties": {
@@ -2238,7 +2238,7 @@
                         },
                         "type": {
                           "default": "roles",
-                          "description": "TODO",
+                          "description": "Type of role.",
                           "type": "string"
                         }
                       },
@@ -2292,7 +2292,7 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "TODO.",
+                        "description": "An array containing type and ID of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
@@ -2302,7 +2302,7 @@
                             },
                             "type": {
                               "default": "roles",
-                              "description": "TODO",
+                              "description": "Type of role.",
                               "type": "string"
                             }
                           },
@@ -2608,7 +2608,7 @@
             "description": "Relationship to roles.",
             "properties": {
               "data": {
-                "description": "TODO.",
+                "description": "An array containing type and ID of a role.",
                 "items": {
                   "description": "Relationship to role object.",
                   "properties": {
@@ -2618,7 +2618,7 @@
                     },
                     "type": {
                       "default": "roles",
-                      "description": "TODO",
+                      "description": "Type of role.",
                       "type": "string"
                     }
                   },
@@ -2766,7 +2766,7 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "TODO.",
+                        "description": "An array containing type and ID of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
@@ -2776,7 +2776,7 @@
                             },
                             "type": {
                               "default": "roles",
-                              "description": "TODO",
+                              "description": "Type of role.",
                               "type": "string"
                             }
                           },
@@ -3003,7 +3003,7 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "TODO.",
+                              "description": "An array containing type and ID of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
@@ -3013,7 +3013,7 @@
                                   },
                                   "type": {
                                     "default": "roles",
-                                    "description": "TODO",
+                                    "description": "Type of role.",
                                     "type": "string"
                                   }
                                 },
@@ -3028,7 +3028,7 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "TODO.",
+                              "description": "An array containing type and ID of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
@@ -3038,7 +3038,7 @@
                                   },
                                   "type": {
                                     "default": "roles",
-                                    "description": "TODO",
+                                    "description": "Type of role.",
                                     "type": "string"
                                   }
                                 },
@@ -3271,7 +3271,7 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "TODO.",
+                        "description": "An array containing type and ID of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
@@ -3281,7 +3281,7 @@
                             },
                             "type": {
                               "default": "roles",
-                              "description": "TODO",
+                              "description": "Type of role.",
                               "type": "string"
                             }
                           },
@@ -3296,7 +3296,7 @@
                     "description": "Relationship to roles.",
                     "properties": {
                       "data": {
-                        "description": "TODO.",
+                        "description": "An array containing type and ID of a role.",
                         "items": {
                           "description": "Relationship to role object.",
                           "properties": {
@@ -3306,7 +3306,7 @@
                             },
                             "type": {
                               "default": "roles",
-                              "description": "TODO",
+                              "description": "Type of role.",
                               "type": "string"
                             }
                           },
@@ -3413,7 +3413,7 @@
             "description": "Relationship to roles.",
             "properties": {
               "data": {
-                "description": "TODO.",
+                "description": "An array containing type and ID of a role.",
                 "items": {
                   "description": "Relationship to role object.",
                   "properties": {
@@ -3423,7 +3423,7 @@
                     },
                     "type": {
                       "default": "roles",
-                      "description": "TODO",
+                      "description": "Type of role.",
                       "type": "string"
                     }
                   },
@@ -3665,7 +3665,7 @@
                       "description": "Relationship to roles.",
                       "properties": {
                         "data": {
-                          "description": "TODO.",
+                          "description": "An array containing type and ID of a role.",
                           "items": {
                             "description": "Relationship to role object.",
                             "properties": {
@@ -3675,7 +3675,7 @@
                               },
                               "type": {
                                 "default": "roles",
-                                "description": "TODO",
+                                "description": "Type of role.",
                                 "type": "string"
                               }
                             },
@@ -3904,7 +3904,7 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "TODO.",
+                              "description": "An array containing type and ID of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
@@ -3914,7 +3914,7 @@
                                   },
                                   "type": {
                                     "default": "roles",
-                                    "description": "TODO",
+                                    "description": "Type of role.",
                                     "type": "string"
                                   }
                                 },
@@ -3929,7 +3929,7 @@
                           "description": "Relationship to roles.",
                           "properties": {
                             "data": {
-                              "description": "TODO.",
+                              "description": "An array containing type and ID of a role.",
                               "items": {
                                 "description": "Relationship to role object.",
                                 "properties": {
@@ -3939,7 +3939,7 @@
                                   },
                                   "type": {
                                     "default": "roles",
-                                    "description": "TODO",
+                                    "description": "Type of role.",
                                     "type": "string"
                                   }
                                 },
@@ -4042,26 +4042,26 @@
           "content": {
             "application/json": {
               "schema": {
-                "description": "TODO.",
+                "description": "Dashboards within a list.",
                 "properties": {
                   "dashboards": {
                     "description": "List of dashboards in the dashboard list.",
                     "items": {
-                      "description": "TODO.",
+                      "description": "A dashboard within a list.",
                       "properties": {
                         "author": {
                           "description": "Creator of the object.",
                           "properties": {
                             "email": {
-                              "description": "TODO.",
+                              "description": "Email of the creator.",
                               "type": "string"
                             },
                             "handle": {
-                              "description": "TODO.",
+                              "description": "Handle of the creator.",
                               "type": "string"
                             },
                             "name": {
-                              "description": "TODO.",
+                              "description": "Name of the creator.",
                               "type": "string"
                             }
                           },
@@ -4169,26 +4169,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "Response containing a list of deleted dashboards.",
                   "properties": {
                     "deleted_dashboards_from_list": {
                       "description": "List of dashboards deleted from the dashboard list.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A dashboard within a list.",
                         "properties": {
                           "author": {
                             "description": "Creator of the object.",
                             "properties": {
                               "email": {
-                                "description": "TODO.",
+                                "description": "Email of the creator.",
                                 "type": "string"
                               },
                               "handle": {
-                                "description": "TODO.",
+                                "description": "Handle of the creator.",
                                 "type": "string"
                               },
                               "name": {
-                                "description": "TODO.",
+                                "description": "Name of the creator.",
                                 "type": "string"
                               }
                             },
@@ -4285,12 +4285,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -4310,12 +4310,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -4335,12 +4335,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -4383,26 +4383,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "Dashboards within a list.",
                   "properties": {
                     "dashboards": {
                       "description": "List of dashboards in the dashboard list.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A dashboard within a list.",
                         "properties": {
                           "author": {
                             "description": "Creator of the object.",
                             "properties": {
                               "email": {
-                                "description": "TODO.",
+                                "description": "Email of the creator.",
                                 "type": "string"
                               },
                               "handle": {
-                                "description": "TODO.",
+                                "description": "Handle of the creator.",
                                 "type": "string"
                               },
                               "name": {
-                                "description": "TODO.",
+                                "description": "Name of the creator.",
                                 "type": "string"
                               }
                             },
@@ -4508,12 +4508,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -4533,12 +4533,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -4579,26 +4579,26 @@
           "content": {
             "application/json": {
               "schema": {
-                "description": "TODO.",
+                "description": "Dashboards within a list.",
                 "properties": {
                   "dashboards": {
                     "description": "List of dashboards in the dashboard list.",
                     "items": {
-                      "description": "TODO.",
+                      "description": "A dashboard within a list.",
                       "properties": {
                         "author": {
                           "description": "Creator of the object.",
                           "properties": {
                             "email": {
-                              "description": "TODO.",
+                              "description": "Email of the creator.",
                               "type": "string"
                             },
                             "handle": {
-                              "description": "TODO.",
+                              "description": "Handle of the creator.",
                               "type": "string"
                             },
                             "name": {
-                              "description": "TODO.",
+                              "description": "Name of the creator.",
                               "type": "string"
                             }
                           },
@@ -4706,26 +4706,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "Response containing a list of added dashboards.",
                   "properties": {
                     "added_dashboards_to_list": {
                       "description": "List of dashboards added to the dashboard list.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A dashboard within a list.",
                         "properties": {
                           "author": {
                             "description": "Creator of the object.",
                             "properties": {
                               "email": {
-                                "description": "TODO.",
+                                "description": "Email of the creator.",
                                 "type": "string"
                               },
                               "handle": {
-                                "description": "TODO.",
+                                "description": "Handle of the creator.",
                                 "type": "string"
                               },
                               "name": {
-                                "description": "TODO.",
+                                "description": "Name of the creator.",
                                 "type": "string"
                               }
                             },
@@ -4822,12 +4822,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -4847,12 +4847,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -4872,12 +4872,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -4919,26 +4919,26 @@
           "content": {
             "application/json": {
               "schema": {
-                "description": "TODO.",
+                "description": "Dashboards within a list.",
                 "properties": {
                   "dashboards": {
                     "description": "List of dashboards in the dashboard list.",
                     "items": {
-                      "description": "TODO.",
+                      "description": "A dashboard within a list.",
                       "properties": {
                         "author": {
                           "description": "Creator of the object.",
                           "properties": {
                             "email": {
-                              "description": "TODO.",
+                              "description": "Email of the creator.",
                               "type": "string"
                             },
                             "handle": {
-                              "description": "TODO.",
+                              "description": "Handle of the creator.",
                               "type": "string"
                             },
                             "name": {
-                              "description": "TODO.",
+                              "description": "Name of the creator.",
                               "type": "string"
                             }
                           },
@@ -5046,26 +5046,26 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "Dashboards within a list.",
                   "properties": {
                     "dashboards": {
                       "description": "List of dashboards in the dashboard list.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A dashboard within a list.",
                         "properties": {
                           "author": {
                             "description": "Creator of the object.",
                             "properties": {
                               "email": {
-                                "description": "TODO.",
+                                "description": "Email of the creator.",
                                 "type": "string"
                               },
                               "handle": {
-                                "description": "TODO.",
+                                "description": "Handle of the creator.",
                                 "type": "string"
                               },
                               "name": {
-                                "description": "TODO.",
+                                "description": "Name of the creator.",
                                 "type": "string"
                               }
                             },
@@ -5171,12 +5171,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -5196,12 +5196,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -5221,12 +5221,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -5327,12 +5327,12 @@
             "content": {
               "applcation/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -5352,12 +5352,12 @@
             "content": {
               "applcation/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -5537,7 +5537,7 @@
                                 "description": "Relationship to roles.",
                                 "properties": {
                                   "data": {
-                                    "description": "TODO.",
+                                    "description": "An array containing type and ID of a role.",
                                     "items": {
                                       "description": "Relationship to role object.",
                                       "properties": {
@@ -5547,7 +5547,7 @@
                                         },
                                         "type": {
                                           "default": "roles",
-                                          "description": "TODO",
+                                          "description": "Type of role.",
                                           "type": "string"
                                         }
                                       },
@@ -5562,7 +5562,7 @@
                                 "description": "Relationship to roles.",
                                 "properties": {
                                   "data": {
-                                    "description": "TODO.",
+                                    "description": "An array containing type and ID of a role.",
                                     "items": {
                                       "description": "Relationship to role object.",
                                       "properties": {
@@ -5572,7 +5572,7 @@
                                         },
                                         "type": {
                                           "default": "roles",
-                                          "description": "TODO",
+                                          "description": "Type of role.",
                                           "type": "string"
                                         }
                                       },
@@ -5630,12 +5630,12 @@
             "content": {
               "applcation/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -5667,7 +5667,7 @@
                 "description": "Create a role.",
                 "properties": {
                   "data": {
-                    "description": "TODO",
+                    "description": "Data related to the creation of a role.",
                     "properties": {
                       "attributes": {
                         "description": "Attributes of the created role.",
@@ -5843,7 +5843,7 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "TODO.",
+                                  "description": "An array containing type and ID of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
@@ -5853,7 +5853,7 @@
                                       },
                                       "type": {
                                         "default": "roles",
-                                        "description": "TODO",
+                                        "description": "Type of role.",
                                         "type": "string"
                                       }
                                     },
@@ -5868,7 +5868,7 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "TODO.",
+                                  "description": "An array containing type and ID of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
@@ -5878,7 +5878,7 @@
                                       },
                                       "type": {
                                         "default": "roles",
-                                        "description": "TODO",
+                                        "description": "Type of role.",
                                         "type": "string"
                                       }
                                     },
@@ -5912,12 +5912,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -5937,12 +5937,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -5989,12 +5989,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -6014,12 +6014,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -6147,7 +6147,7 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "TODO.",
+                                  "description": "An array containing type and ID of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
@@ -6157,7 +6157,7 @@
                                       },
                                       "type": {
                                         "default": "roles",
-                                        "description": "TODO",
+                                        "description": "Type of role.",
                                         "type": "string"
                                       }
                                     },
@@ -6172,7 +6172,7 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "TODO.",
+                                  "description": "An array containing type and ID of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
@@ -6182,7 +6182,7 @@
                                       },
                                       "type": {
                                         "default": "roles",
-                                        "description": "TODO",
+                                        "description": "Type of role.",
                                         "type": "string"
                                       }
                                     },
@@ -6216,12 +6216,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -6241,12 +6241,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -6290,7 +6290,7 @@
                 "description": "Update a role.",
                 "properties": {
                   "data": {
-                    "description": "TODO",
+                    "description": "Data related to the update of a role.",
                     "properties": {
                       "attributes": {
                         "description": "Attributes of the edited role.",
@@ -6308,7 +6308,7 @@
                       },
                       "type": {
                         "default": "roles",
-                        "description": "TODO",
+                        "description": "Type of role.",
                         "type": "string"
                       }
                     },
@@ -6411,7 +6411,7 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "TODO.",
+                                  "description": "An array containing type and ID of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
@@ -6421,7 +6421,7 @@
                                       },
                                       "type": {
                                         "default": "roles",
-                                        "description": "TODO",
+                                        "description": "Type of role.",
                                         "type": "string"
                                       }
                                     },
@@ -6436,7 +6436,7 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "TODO.",
+                                  "description": "An array containing type and ID of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
@@ -6446,7 +6446,7 @@
                                       },
                                       "type": {
                                         "default": "roles",
-                                        "description": "TODO",
+                                        "description": "Type of role.",
                                         "type": "string"
                                       }
                                     },
@@ -6480,12 +6480,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -6505,12 +6505,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -6530,12 +6530,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -6675,12 +6675,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -6700,12 +6700,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -6725,12 +6725,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -6840,12 +6840,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -6865,12 +6865,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -7008,12 +7008,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -7033,12 +7033,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -7058,12 +7058,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -7270,7 +7270,7 @@
                                 "description": "Relationship to roles.",
                                 "properties": {
                                   "data": {
-                                    "description": "TODO.",
+                                    "description": "An array containing type and ID of a role.",
                                     "items": {
                                       "description": "Relationship to role object.",
                                       "properties": {
@@ -7280,7 +7280,7 @@
                                         },
                                         "type": {
                                           "default": "roles",
-                                          "description": "TODO",
+                                          "description": "Type of role.",
                                           "type": "string"
                                         }
                                       },
@@ -7509,7 +7509,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -7519,7 +7519,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -7534,7 +7534,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -7544,7 +7544,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -7605,12 +7605,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -7630,12 +7630,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -7655,12 +7655,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -7878,7 +7878,7 @@
                                 "description": "Relationship to roles.",
                                 "properties": {
                                   "data": {
-                                    "description": "TODO.",
+                                    "description": "An array containing type and ID of a role.",
                                     "items": {
                                       "description": "Relationship to role object.",
                                       "properties": {
@@ -7888,7 +7888,7 @@
                                         },
                                         "type": {
                                           "default": "roles",
-                                          "description": "TODO",
+                                          "description": "Type of role.",
                                           "type": "string"
                                         }
                                       },
@@ -8117,7 +8117,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -8127,7 +8127,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -8142,7 +8142,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -8152,7 +8152,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -8213,12 +8213,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -8238,12 +8238,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -8447,7 +8447,7 @@
                                 "description": "Relationship to roles.",
                                 "properties": {
                                   "data": {
-                                    "description": "TODO.",
+                                    "description": "An array containing type and ID of a role.",
                                     "items": {
                                       "description": "Relationship to role object.",
                                       "properties": {
@@ -8457,7 +8457,7 @@
                                         },
                                         "type": {
                                           "default": "roles",
-                                          "description": "TODO",
+                                          "description": "Type of role.",
                                           "type": "string"
                                         }
                                       },
@@ -8686,7 +8686,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -8696,7 +8696,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -8711,7 +8711,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -8721,7 +8721,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -8782,12 +8782,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -8807,12 +8807,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -8832,12 +8832,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -8981,12 +8981,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -9006,12 +9006,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -9107,12 +9107,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -9132,12 +9132,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -9376,7 +9376,7 @@
                                 "description": "Relationship to roles.",
                                 "properties": {
                                   "data": {
-                                    "description": "TODO.",
+                                    "description": "An array containing type and ID of a role.",
                                     "items": {
                                       "description": "Relationship to role object.",
                                       "properties": {
@@ -9386,7 +9386,7 @@
                                         },
                                         "type": {
                                           "default": "roles",
-                                          "description": "TODO",
+                                          "description": "Type of role.",
                                           "type": "string"
                                         }
                                       },
@@ -9615,7 +9615,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -9625,7 +9625,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -9640,7 +9640,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -9650,7 +9650,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -9711,12 +9711,12 @@
             "content": {
               "applcation/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -9736,12 +9736,12 @@
             "content": {
               "applcation/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -9801,7 +9801,7 @@
                             "description": "Relationship to roles.",
                             "properties": {
                               "data": {
-                                "description": "TODO.",
+                                "description": "An array containing type and ID of a role.",
                                 "items": {
                                   "description": "Relationship to role object.",
                                   "properties": {
@@ -9811,7 +9811,7 @@
                                     },
                                     "type": {
                                       "default": "roles",
-                                      "description": "TODO",
+                                      "description": "Type of role.",
                                       "type": "string"
                                     }
                                   },
@@ -9978,7 +9978,7 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "TODO.",
+                                  "description": "An array containing type and ID of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
@@ -9988,7 +9988,7 @@
                                       },
                                       "type": {
                                         "default": "roles",
-                                        "description": "TODO",
+                                        "description": "Type of role.",
                                         "type": "string"
                                       }
                                     },
@@ -10215,7 +10215,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -10225,7 +10225,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -10240,7 +10240,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -10250,7 +10250,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -10289,12 +10289,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -10314,12 +10314,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -10366,12 +10366,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -10391,12 +10391,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -10571,7 +10571,7 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "TODO.",
+                                  "description": "An array containing type and ID of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
@@ -10581,7 +10581,7 @@
                                       },
                                       "type": {
                                         "default": "roles",
-                                        "description": "TODO",
+                                        "description": "Type of role.",
                                         "type": "string"
                                       }
                                     },
@@ -10808,7 +10808,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -10818,7 +10818,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -10833,7 +10833,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -10843,7 +10843,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -10882,12 +10882,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -10907,12 +10907,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -11003,12 +11003,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -11028,12 +11028,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -11053,12 +11053,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -11235,7 +11235,7 @@
                               "description": "Relationship to roles.",
                               "properties": {
                                 "data": {
-                                  "description": "TODO.",
+                                  "description": "An array containing type and ID of a role.",
                                   "items": {
                                     "description": "Relationship to role object.",
                                     "properties": {
@@ -11245,7 +11245,7 @@
                                       },
                                       "type": {
                                         "default": "roles",
-                                        "description": "TODO",
+                                        "description": "Type of role.",
                                         "type": "string"
                                       }
                                     },
@@ -11472,7 +11472,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -11482,7 +11482,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -11497,7 +11497,7 @@
                                     "description": "Relationship to roles.",
                                     "properties": {
                                       "data": {
-                                        "description": "TODO.",
+                                        "description": "An array containing type and ID of a role.",
                                         "items": {
                                           "description": "Relationship to role object.",
                                           "properties": {
@@ -11507,7 +11507,7 @@
                                             },
                                             "type": {
                                               "default": "roles",
-                                              "description": "TODO",
+                                              "description": "Type of role.",
                                               "type": "string"
                                             }
                                           },
@@ -11546,12 +11546,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -11571,12 +11571,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -11688,12 +11688,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },
@@ -11713,12 +11713,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "TODO.",
+                  "description": "API error response.",
                   "properties": {
                     "errors": {
-                      "description": "TODO.",
+                      "description": "A list of errors.",
                       "items": {
-                        "description": "TODO.",
+                        "description": "A list of items.",
                         "example": "Bad Request",
                         "type": "string"
                       },

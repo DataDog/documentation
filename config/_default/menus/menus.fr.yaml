@@ -1943,9 +1943,9 @@ api_v1:
   - name: Delete multiple tests
     parent: Synthetics
     url: delete-multiple-tests
-  - name: Get details of a test
+  - name: Get test
     parent: Synthetics
-    url: get-details-of-a-test
+    url: get-test
   - name: Update test
     parent: Synthetics
     url: update-test
