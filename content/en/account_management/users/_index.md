@@ -14,7 +14,7 @@ further_reading:
 - link: "/account_management/rbac/permissions"
   tag: "Documentation"
   text: "Discover the list of permissions available"
-- link: "/api/#users"
+- link: "/api/v1/users/"
   tag: "Documentation"
   text: "Manage your users with the USER API"
 ---

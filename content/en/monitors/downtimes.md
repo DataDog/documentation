@@ -102,6 +102,6 @@ All alerted states are included on the [weekly monitor report][8] even if the mo
 [3]: /integrations/#cat-notification
 [4]: /monitors/monitor_status
 [5]: /events/#event-stream
-[6]: /api/#cancel-monitor-downtime
+[6]: /api/v1/downtimes/#cancel-a-downtime
 [7]: /help
 [8]: /account_management/#preferences

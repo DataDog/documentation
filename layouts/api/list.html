@@ -16,6 +16,24 @@
 
     {{ $d := index $dot.Site.Data.api $apiVersion "full_spec_deref" }}
 
+    <!-- Get the general API server url -->
+    {{ $servers := index (index $d "servers") 0 }}
+    {{ $.Scratch.Set "serverURLS" slice }}
+    {{ $serverURL := ""}}
+
+    {{ range $servers.variables.site.enum }}
+
+        {{ $serverURL = replace $servers.url "{subdomain}" $servers.variables.subdomain.default  }}
+        {{ $serverURL = replace $serverURL "{site}" .  }}
+        {{ $region := index (split . ".") 1 }}
+        {{ if eq $region "com"}}
+            {{ $region = "us"}}
+        {{ end }}
+        
+        {{ $.Scratch.Add "serverURLS" (dict "url" $serverURL "region" $region ) }}
+        
+    {{ end }}
+    
     {{ range $k, $v := (index $d "tags") }}
         {{ if eq $.Params.title $v.name }}
 
@@ -65,6 +83,29 @@
             {{/* sort by action summary */}}
             {{ range sort $tagObject ".action.summary" "asc"  }}
                 {{ $context := .}}
+
+                <!-- check if endpoint has own `server` object and set those as the server urls -->
+                {{ with .action.servers }}
+
+                    {{ $servers := index . 0 }}
+
+                    {{ $.Scratch.Set "serverURLS" slice }}
+                    
+                    {{ $serverURL := ""}}
+                
+                    {{ range $servers.variables.site.enum }}
+                
+                        {{ $serverURL = replace $servers.url "{subdomain}" $servers.variables.subdomain.default  }}
+                        {{ $serverURL = replace $serverURL "{site}" .  }}
+                        {{ $region := index (split . ".") 1 }}
+                        {{ if eq $region "com"}}
+                            {{ $region = "us"}}
+                        {{ end }}
+                        
+                        {{ $.Scratch.Add "serverURLS" (dict "url" $serverURL "region" $region ) }}
+                        
+                    {{ end }}
+                {{ end }}
                
                 <!-- endpoint section start -->
                 <div class="row">
@@ -72,7 +113,8 @@
                         <h2 class="mb-2" id="{{ .action.summary | urlize }}">
                             <a href="#{{ .action.summary | urlize }}">{{- .action.summary -}}</a>
                         </h2>
-                        <p class="mb-0"><span style="padding: 3px" class="text-uppercase font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType }}</span>&nbsp;<span>{{.pathKey}}</span></p>
+                        <p class="mb-0"><span style="padding: 3px" class="text-uppercase font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType }}</span>&nbsp;{{ range $.Scratch.Get "serverURLS" }}<span class="d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span>{{.pathKey}}</span>
+                        </p>
                         <h3 class="mt-2">Overview</h3>
                         <p>{{.action.description | markdownify }}</p>
                         {{ with .action.parameters }}
@@ -114,7 +156,7 @@
                                                 <div class="row first-row ">
                                                     <div class="col-4 column">
                                                         <p>
-                                                            <code>{{ .name }}</code>{{ cond (eq .required false) "" "[<em>required</em>]" | safeHTML }}</em>
+                                                            {{ .name }}{{ cond (eq .required false) "" "[<em>required</em>]" | safeHTML }}</em>
                                                         </p>
                                                     </div>
                                                     <div class="col-2 column">
@@ -152,7 +194,7 @@
                                                 <div class="row first-row ">
                                                     <div class="col-4 column">
                                                         <p>
-                                                            <code>{{ .name }}</code>{{ cond (eq .required false) "" "[<em>required</em>]" | safeHTML }}</em>
+                                                            {{ .name }}{{ cond (eq .required false) "" "[<em>required</em>]" | safeHTML }}</em>
                                                         </p>
                                                     </div>
                                                     <div class="col-2 column">
@@ -189,12 +231,13 @@
                                         {{ with $dot.Resources.Match "examples.json" }}
                                             {{ range . }}
                                               {{ $data := . | unmarshal}}
-
-                                             
                                               {{ $req := (index (index $data $context.action.operationId) "request") }}
                                               {{ if $req }}
+
+                                                  {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
+                                                  {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
                                                  
-                                                  {{ $dot.Scratch.Set "json" (highlight ((index $req "json") | jsonify (dict "indent" "  ")) "json" "") }}
+                                                  {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
                                                   {{ $dot.Scratch.Set "html" (index $req "html") }}
                                               {{ else }}
                                                   {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
@@ -223,7 +266,7 @@
                                                         <div class="code-button-wrapper position-absolute">
                                                             <button class="btn text-primary js-copy-button">Copy</button>
                                                         </div>
-                                                        {{ $json }}
+                                                        {{ print $json | safeHTML }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -266,7 +309,9 @@
                                                     {{ $data := . | unmarshal}}
                                                     {{ $res := (index (index (index $data $context.action.operationId) "responses") $response_code) }}
                                                     {{ if $res }}
-                                                        {{ $dot.Scratch.Set "json" (highlight ((index $res "json") | jsonify (dict "indent" "  ")) "json" "") }}
+                                                        {{ $jsonifiedData := (index $res "json") | jsonify (dict "indent" "  ") }}
+                                                        {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
+                                                        {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
                                                         {{ $dot.Scratch.Set "html" (index $res "html") }}
                                                     {{ else }}
                                                         {{ warnf "Could not load html/json response code %q in %q" $response_code $context.action.operationId }}

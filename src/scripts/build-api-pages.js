@@ -7,21 +7,46 @@ const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
 
+const supportedLangs = ['en', 'fr', 'ja'];
 
 /**
  * Update the menu yaml file with api
  * @param {object} apiYaml - object with data
  * @param {string} apiVersion - string with version e.g v1
  */
-const updateMenu = (apiYaml, apiVersion) => {
-  const currentMenuYaml = yaml.safeLoad(fs.readFileSync('./config/_default/menus/menus.en.yaml', 'utf8'));
+const updateMenu = (apiYaml, apiVersion, languages) => {
+
+  languages.forEach((language) => {
+    const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/menus.${language}.yaml`, 'utf8'));
   const newMenuArray = [];
+
+  // need to add hardcoded menu items
+  const mainOverviewSections = [
+    {
+        name: 'Overview',
+        url: (language === 'en' ? `/api/${apiVersion}/` : `/${language}/api/${apiVersion}/`),
+        identifier: `API ${apiVersion.toUpperCase()} overview`,
+        weight: -10
+    },
+    {
+        name: 'Authentication',
+        url: `authentication`,
+        parent: `API ${apiVersion.toUpperCase()} overview`
+    },
+    {
+        name: 'Rate Limiting',
+        url: `rate-limiting`,
+        parent: `API ${apiVersion.toUpperCase()} overview`
+    }
+  ];
+
+  newMenuArray.push(...mainOverviewSections);
 
   apiYaml.tags.forEach((tag) => {
 
     newMenuArray.push({
       name: tag.name,
-      url: `/api/${apiVersion}/${getTagSlug(tag.name)}/`,
+      url: (language === 'en' ? `/api/${apiVersion}/${getTagSlug(tag.name)}/` : `/${language}/api/${apiVersion}/${getTagSlug(tag.name)}/` ),
       identifier: tag.name
     });
 
@@ -45,8 +70,11 @@ const updateMenu = (apiYaml, apiVersion) => {
   const newMenuYaml = yaml.dump(currentMenuYaml, {lineWidth: -1});
 
   // save new yaml menu
-  fs.writeFileSync('./config/_default/menus/menus.en.yaml', newMenuYaml, 'utf8');
-  console.log(`successfully updated ${apiVersion} ./config/_default/menus/menus.en.yaml`);
+  fs.writeFileSync(`./config/_default/menus/menus.${language}.yaml`, newMenuYaml, 'utf8');
+  console.log(`successfully updated ${apiVersion} ./config/_default/menus/menus.${language}.yaml`);
+  })
+
+  
 };
 
 
@@ -121,7 +149,7 @@ const createResources = (apiYaml, deref, apiVersion) => {
         });
 
         // assign built up data for examples.json
-        jsonData[action.operationId] = {"responses":responses, "request": request || {"json": {}, "html": ""}};
+        jsonData[action.operationId] = {responses, "request": request || {"json": {}, "html": ""}};
       });
     });
 
@@ -148,9 +176,7 @@ const getSchema = (content) => {
  * @param {object} tagName - string of tag name
  * returns string with tag slugified
  */
-const getTagSlug = (tagName) => {
-  return slugify(tagName, {lower: true, replacement: '-'});
-};
+const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-'});
 
 
 /**
@@ -171,21 +197,188 @@ const isTagMatch = (pathObj, tag) => {
  * @param {object} data - object schema
  * returns filtered data
  */
-const filterExampleJson = (data) => {
+/* const filterExampleJson = (data, adjacentExample = null, level = 0) => {
   if("properties" in data) {
     return Object.keys(data.properties)
       .map((propKey) => {
         const property = data.properties[propKey];
-        return {[propKey]: (property.hasOwnProperty("items")) ? [filterExampleJson(property.items)] : (property["example"] || property["type"])};
+        const ex = (property['example'] || typeof property['example'] === "boolean") ? `${property["example"]}` : property["example"];
+        return {[propKey]: (property.hasOwnProperty("items")) ? [filterExampleJson(property.items, property["example"], (level + 1))] : (ex || property["type"])};
       })
       .reduce((obj, item) => ({...obj, ...item}), {});
   } else if ("items" in data) {
-    return filterExampleJson(data.items);
+    return filterExampleJson(data.items, data['example'], (level + 1));
   } else {
-    return data["example"] || data["type"] || {};
+    const selectedExample = adjacentExample || data["example"];
+    const ex = (selectedExample || typeof selectedExample === "boolean") ? `${selectedExample}` : selectedExample;
+    const out = ex || data["type"] || {};
+    if(level === 0 && out === 'object') {
+      // return an actual object when we only have {type:"object"}
+      return {}
+    } else {
+      return out;
+    }
+  }
+}; */
+
+const filterJson = (data, parentExample = null) => {
+  let jsondata = '';
+
+  if (typeof data === 'object') {
+    Object.entries(data).forEach(([key, value]) => {
+
+      if(value.readOnly) {
+        // skip
+      } else {
+
+        let prefixType = '';
+        let suffixType = '';
+
+        if (value.example) {
+          if (typeof value.example === 'object') {
+            prefixType = '[';
+            suffixType = ']';
+          }
+        }
+
+        // calculate child data in advance
+        // we do this here so that we can add classes to html with this knowledge
+        let childData = null;
+        let newParentKey = key;
+        if (value.type === 'array') {
+          if (typeof value.items === 'object') {
+            if (value.items.properties) {
+              childData = value.items.properties;
+              prefixType = '[{';
+              suffixType = '}]';
+            }
+          } else if (typeof value.items === 'string') {
+            if (value.items === '[Circular]') {
+              childData = null;
+            }
+          }
+        } else if (typeof value === 'object' && "properties" in value) {
+          childData = value.properties;
+          prefixType = '{';
+          suffixType = '}';
+        } else if (typeof value === 'object' && "additionalProperties" in value) {
+          // check if `additionalProperties` is an empty object
+          if (Object.keys(value.additionalProperties).length !== 0) {
+            childData = {"<any-key>": value.additionalProperties};
+            prefixType = '{';
+            suffixType = '}';
+            newParentKey = "additionalProperties";
+          }
+        }
+
+
+        // choose the example to use
+        // parent -> current level -> one deep
+        let chosenExample = parentExample;
+        if (typeof value.example !== 'undefined') {
+          chosenExample = value.example;
+        } else if (value.items && typeof value.items.example !== 'undefined') {
+          chosenExample = value.items.example;
+          prefixType = '[';
+          suffixType = ']';
+        }
+
+        if (childData) {
+          jsondata += `"${key}": ${prefixType}${filterJson(childData, value.example)}${suffixType},`;
+        } else {
+          let ex = '';
+          // bool causes us to not go in here so check for it
+          ex = outputExample(chosenExample);
+          ex = ex || `"${value.type}"`;
+          jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
+        }
+      }
+
+    });
+  } else {
+    // no data just parent example
+    const ex = outputExample(parentExample);
+    if(ex) {
+      jsondata += `${ex}`;
+    }
+  }
+
+  const lastChar = jsondata.slice(-1);
+  if (lastChar === ',') {
+      return jsondata.slice(0, -1);
+  } else {
+      return jsondata;
   }
 };
 
+const outputExample = (chosenExample) => {
+  let ex = '';
+  if(typeof chosenExample !== 'undefined' && chosenExample !== null) {
+    if(chosenExample instanceof Array) {
+      // if array of strings use them
+      // if array of objects try match keys
+      chosenExample.forEach((item, key, arr) => {
+        if(typeof item === 'object') {
+
+        } else {
+          ex += `"${  item  }",`;
+          if (Object.is(arr.length - 1, key)) {
+            ex = ex.slice(0, -1);
+          }
+        }
+      });
+    } else if(typeof chosenExample === 'object') {
+      if(chosenExample.value instanceof Array) {
+        chosenExample.value.forEach((item, key, arr) => {
+          ex += `"${item}",`;
+          if (Object.is(arr.length - 1, key)) {
+            ex = ex.slice(0, -1);
+          }
+        });
+      }
+    } else {
+      ex = `"${chosenExample}"`;
+    }
+  }
+  return ex;
+};
+
+const filterExampleJson = (data) => {
+  let initialData;
+  let prefixType = "{";
+  let suffixType = "}";
+  let selectedExample;
+  if(data.type === 'array') {
+    if(data.items.type === 'array') {
+      initialData = data.items.items.properties;
+      selectedExample = data.items.items.example;
+      prefixType = "[[{";
+      suffixType = "}]]";
+    } else if(data.items.properties) {
+        initialData = data.items.properties;
+        selectedExample = data.items.example;
+      } else {
+        // initialData = data.items;
+        selectedExample = data.example;
+        prefixType = "[";
+        suffixType = "]";
+      }
+  } else {
+    initialData = data.properties;
+    selectedExample = data.example;
+  }
+  const output = `${prefixType}
+    ${filterJson(initialData, selectedExample)}
+  ${suffixType}`.trim();
+  let parsed = '';
+  try {
+      parsed = JSON.parse(output);
+  } catch(e) {
+      console.log(e);
+      console.log(output);
+  }
+  return parsed;
+};
 
 /**
  * Takes an object from the schema and outputs markup for readonly fields
@@ -226,7 +419,7 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
     <div class="col-4 column">
       <p class="key">${toggleMarkup}${field}${requiredMarkup}</p>
     </div>
-  `;
+  `.trim();
 };
 
 
@@ -248,10 +441,10 @@ const typeColumn = (key, value, readOnlyMarkup) => {
       typeVal = (value.format || value.type || '');
     }
   if(value.type === 'array') {
-    return `<div class="col-2 column"><p>[${value.items.type || ''}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
-    return `<div class="col-2 column"><p>${typeVal}${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p>${typeVal}${readOnlyMarkup}</p></div>`.trim();
   }
 };
 
@@ -298,15 +491,21 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         let childData = null;
         let newParentKey = key;
         if(value.type === 'array') {
-          if (value.items.properties) {
-            childData = value.items.properties;
+          if(typeof value.items === 'object') {
+            if (value.items.properties) {
+              childData = value.items.properties;
+            }
+          } else if(typeof value.items === 'string') {
+            if(value.items === '[Circular]') {
+              childData = null;
+            }
           }
         } else if(typeof value === 'object' && "properties" in value) {
           childData = value.properties;
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if(Object.keys(value.additionalProperties).length !== 0){
-            childData = {["&lt;any-key&gt;"]: value.additionalProperties};
+            childData = {"<any-key>": value.additionalProperties};
             newParentKey = "additionalProperties";
           }
         }
@@ -334,7 +533,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             ${(childData) ? rowRecursive(tableType, childData, true, data.required || [], (level + 1), newParentKey) : ''}
           </div>
         </div>
-        `;
+        `.trim();
       });
     } else {
       html += `<div class="primitive">${data || ''}</div>`;
@@ -344,13 +543,53 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
 
 
 /**
+ * Takes the schema table output string and checks if we had any expand collapse sections
+ * if we had none then inject the class "has-no-expands" onto the output wrapper div
+ * @param {string} schema table output string
+ * returns html table string
+ */
+const addHasExpandClass = (output) => {
+  if(!output.includes('js-collapse-trigger')) {
+    const regex = /(\s+schema-table\s+)/m;
+    const subst = ` schema-table has-no-expands `;
+    return output.replace(regex, subst);
+  }
+  return output;
+};
+
+
+/**
  * Takes a application/json schema for request or response and outputs a table
  * @param {string} tableType - 'request' or 'response'
  * @param {object} data - schema object
  * returns html table string
  */
-const schemaTable = (tableType, data) => `
-  <div class="table-${tableType} schema-table row">
+const schemaTable = (tableType, data) => {
+  let extraClasses = '';
+  let initialData;
+  if(data.type === 'array') {
+    if(data.items.type === 'array') {
+      initialData = data.items.items.properties;
+    } else if(data.items.properties) {
+      initialData = data.items.properties;
+    } else {
+      initialData = data.items;
+      extraClasses = 'd-none';
+    }
+  } else {
+    initialData = data.properties
+  }
+  extraClasses = (initialData) ? extraClasses : 'd-none';
+  const emptyRow = `
+    <div class="row">
+      <div class="col-12 first-column">
+        <div class="row first-row">
+          <div class="col-12 column"><p>No ${tableType} body</p></div>
+        </div>
+      </div>
+    </div>`.trim();
+  const output = `
+  <div class="table-${tableType} schema-table row ${extraClasses}">
     <p class="expand-all js-expand-all text-primary">Expand All</p>
     <div class="col-12">
       <div class="row table-header">
@@ -364,9 +603,11 @@ const schemaTable = (tableType, data) => `
           <p class="font-semibold">Description</p>
         </div>
       </div>
-      ${rowRecursive(tableType, (data.type === 'array') ? (data.items.properties || data.items) : data.properties, false, data.required || [])}
+      ${(initialData) ? rowRecursive(tableType, initialData, false, data.required || []) : emptyRow}
     </div>  
-  </div>`;
+  </div>`.trim();
+  return addHasExpandClass(output);
+};
 
 
 /**
@@ -380,14 +621,15 @@ const processSpecs = (specs) => {
       $RefParser.dereference(fileData)
         .then((deref) => {
           const version = spec.split('/')[3];
+          const jsonString = safeJsonStringify(deref, null, 2);
           fs.writeFileSync(
               `./data/api/${version}/full_spec_deref.json`,
-              safeJsonStringify(deref, null, 2),
+              jsonString,
               'utf8'
           );
-          updateMenu(fileData, version);
+          updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
-          createResources(fileData, deref, version);
+          createResources(fileData, JSON.parse(jsonString), version);
         }).catch((e) => console.log(e));
     });
 };
@@ -406,6 +648,7 @@ module.exports = {
   fieldColumn,
   typeColumn,
   schemaTable,
-  rowRecursive
+  rowRecursive,
+  filterExampleJson
 };
 

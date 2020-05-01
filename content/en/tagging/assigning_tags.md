@@ -291,16 +291,16 @@ Tags can be assigned in various ways with the [Datadog API][1]. See the list bel
 * [Add][8] or [Update][9] host tags
 * [Send traces][10]
 
-[1]: /api
-[2]: /api/?lang=python#post-a-check-run
-[3]: /api/?lang=python#post-an-event
-[4]: /api/?lang=python#aws
-[5]: /api/?lang=python#post-timeseries-points
-[6]: /api/?lang=python#create-a-monitor
-[7]: /api/?lang=python#edit-a-monitor
-[8]: /api/?lang=python#add-tags-to-a-host
-[9]: /api/?lang=python#update-host-tags
-[10]: /api/?lang=python#send-traces
+[1]: /api/
+[2]: /api/v1/service-checks/#submit-a-service-check
+[3]: /api/v1/events/#post-an-event
+[4]: /api/v1/aws-integration/
+[5]: /api/v1/metrics/#submit-metrics
+[6]: /api/v1/monitors/#create-a-monitor
+[7]: /api/v1/monitors/#edit-a-monitor
+[8]: /api/v1/tags/#add-tags-to-a-host
+[9]: /api/v1/tags/#update-host-tags
+[10]: /api/v1/tracing/
 {{% /tab %}}
 {{% tab "Example" %}}
 

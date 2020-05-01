@@ -12,9 +12,60 @@ function versionSelectHandler(event) {
     }
 
     if (event.target.value === 'v2') {
-        window.location = `${window.location.origin + previewPath}/api/v2`;
+        // check if on main /api page
+        if (
+            window.location.href ===
+            `${window.location.origin + previewPath}/api/`
+        ) {
+            window.location = `${window.location.origin + previewPath}/api/v2`;
+        } else {
+            // check if page exists on v2
+            fetch(`${window.location.href.replace('api/v1', 'api/v2')}`)
+                .then((response) => {
+                    // redirect to v2 page
+                    if (response.status === 404) {
+                        window.location = `${
+                            window.location.origin + previewPath
+                        }/api/v2`;
+                    } else {
+                        window.location = `${window.location.href.replace(
+                            'api/v1',
+                            'api/v2'
+                        )}`;
+                    }
+                })
+                .catch((err) => {
+                    console.log(err); // eslint-disable-line
+                    // redirect to main v2 overview page
+                    window.location = `${
+                        window.location.origin + previewPath
+                    }/api/v2`;
+                });
+        }
     } else if (event.target.value === 'v1') {
-        window.location = `${window.location.origin + previewPath}/api/v1`;
+        // check if page exists on v1
+        
+        fetch(`${window.location.href.replace('api/v2', 'api/v1')}`)
+            .then((response) => {
+                // redirect to v2 page
+                if (response.status === 404) {
+                    window.location = `${
+                        window.location.origin + previewPath
+                    }/api/v1`;
+                } else {
+                    window.location = `${window.location.href.replace(
+                        'api/v2',
+                        'api/v1'
+                    )}`;
+                }
+            })
+            .catch((err) => {
+                // redirect to main v2 overview page
+                console.log(err); // eslint-disable-line
+                window.location = `${
+                    window.location.origin + previewPath
+                }/api/v1`;
+            });
     }
 }
 
@@ -52,11 +103,11 @@ function toggleCodeBlocks(activeLang) {
             $(this).find(`.code-block-${activeLang}`).removeClass('d-none');
             $(this).find(`.code-block-${activeLang}`).addClass('d-block');
         } else {
-            // choose default code language (bash)
+            // choose default code language (curl)
             $(this).find(`.default`).removeClass('d-none');
             $(this).find(`.default`).addClass('d-block');
             $(this)
-                .find('.js-code-example-link[data-code-lang="bash"]')
+                .find('.js-code-example-link[data-code-lang="curl"]')
                 .addClass('active');
         }
     });

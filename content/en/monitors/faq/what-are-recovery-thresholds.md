@@ -55,4 +55,4 @@ When you [create/edit a monitor via the API][1], use the attributes `critical_re
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/#monitors
+[1]: /api/v1/monitors/

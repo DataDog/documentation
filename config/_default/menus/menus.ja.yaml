@@ -1532,3 +1532,682 @@ main:
     pre: nav_help
     identifier: help_top_level
     weight: 210000
+api_v1:
+  - name: Overview
+    url: /ja/api/v1/
+    identifier: API V1 overview
+    weight: -10
+  - name: Authentication
+    url: authentication
+    parent: API V1 overview
+  - name: Rate Limiting
+    url: rate-limiting
+    parent: API V1 overview
+  - name: AWS Integration
+    url: /ja/api/v1/aws-integration/
+    identifier: AWS Integration
+  - name: Delete an AWS integration
+    parent: AWS Integration
+    url: delete-an-aws-integration
+  - name: List all AWS integrations
+    parent: AWS Integration
+    url: list-all-aws-integrations
+  - name: Create an AWS integration
+    parent: AWS Integration
+    url: create-an-aws-integration
+  - name: Update an AWS integration
+    parent: AWS Integration
+    url: update-an-aws-integration
+  - name: List namespace rules
+    parent: AWS Integration
+    url: list-namespace-rules
+  - name: Generate a new external ID
+    parent: AWS Integration
+    url: generate-a-new-external-id
+  - name: AWS Logs Integration
+    url: /ja/api/v1/aws-logs-integration/
+    identifier: AWS Logs Integration
+  - name: Delete an AWS Logs integration
+    parent: AWS Logs Integration
+    url: delete-an-aws-logs-integration
+  - name: List all AWS Logs integrations
+    parent: AWS Logs Integration
+    url: list-all-aws-logs-integrations
+  - name: Add AWS Log Lambda ARN
+    parent: AWS Logs Integration
+    url: add-aws-log-lambda-arn
+  - name: Check that an AWS Lambda Function exists
+    parent: AWS Logs Integration
+    url: check-that-an-aws-lambda-function-exists
+  - name: Get list of AWS log ready services
+    parent: AWS Logs Integration
+    url: get-list-of-aws-log-ready-services
+  - name: Enable an AWS Logs integration
+    parent: AWS Logs Integration
+    url: enable-an-aws-logs-integration
+  - name: Check permissions for log services
+    parent: AWS Logs Integration
+    url: check-permissions-for-log-services
+  - name: Azure Integration
+    url: /ja/api/v1/azure-integration/
+    identifier: Azure Integration
+  - name: Delete an Azure integration
+    parent: Azure Integration
+    url: delete-an-azure-integration
+  - name: List all Azure integrations
+    parent: Azure Integration
+    url: list-all-azure-integrations
+  - name: Create an Azure integration
+    parent: Azure Integration
+    url: create-an-azure-integration
+  - name: Update an Azure integration
+    parent: Azure Integration
+    url: update-an-azure-integration
+  - name: Update Azure integration host filters
+    parent: Azure Integration
+    url: update-azure-integration-host-filters
+  - name: Dashboard Lists
+    url: /ja/api/v1/dashboard-lists/
+    identifier: Dashboard Lists
+  - name: Get all dashboard lists
+    parent: Dashboard Lists
+    url: get-all-dashboard-lists
+  - name: Create a dashboard list
+    parent: Dashboard Lists
+    url: create-a-dashboard-list
+  - name: Delete a dashboard list
+    parent: Dashboard Lists
+    url: delete-a-dashboard-list
+  - name: Get a dashboard list
+    parent: Dashboard Lists
+    url: get-a-dashboard-list
+  - name: Update a dashboard list
+    parent: Dashboard Lists
+    url: update-a-dashboard-list
+  - name: Dashboards
+    url: /ja/api/v1/dashboards/
+    identifier: Dashboards
+  - name: Get all dashboards
+    parent: Dashboards
+    url: get-all-dashboards
+  - name: Create a new dashboard
+    parent: Dashboards
+    url: create-a-new-dashboard
+  - name: Delete a dashboard
+    parent: Dashboards
+    url: delete-a-dashboard
+  - name: Get a dashboard
+    parent: Dashboards
+    url: get-a-dashboard
+  - name: Update a dashboard
+    parent: Dashboards
+    url: update-a-dashboard
+  - name: Downtimes
+    url: /ja/api/v1/downtimes/
+    identifier: Downtimes
+  - name: Get all downtimes
+    parent: Downtimes
+    url: get-all-downtimes
+  - name: Schedule a downtime
+    parent: Downtimes
+    url: schedule-a-downtime
+  - name: Cancel downtimes by scope
+    parent: Downtimes
+    url: cancel-downtimes-by-scope
+  - name: Cancel a downtime
+    parent: Downtimes
+    url: cancel-a-downtime
+  - name: Get a downtime
+    parent: Downtimes
+    url: get-a-downtime
+  - name: Update a downtime
+    parent: Downtimes
+    url: update-a-downtime
+  - name: Embeddable Graphs
+    url: /ja/api/v1/embeddable-graphs/
+    identifier: Embeddable Graphs
+  - name: Get all embeds
+    parent: Embeddable Graphs
+    url: get-all-embeds
+  - name: Create embed
+    parent: Embeddable Graphs
+    url: create-embed
+  - name: Get specific embed
+    parent: Embeddable Graphs
+    url: get-specific-embed
+  - name: Enable embed
+    parent: Embeddable Graphs
+    url: enable-embed
+  - name: Revoke embed
+    parent: Embeddable Graphs
+    url: revoke-embed
+  - name: Events
+    url: /ja/api/v1/events/
+    identifier: Events
+  - name: Query the event stream
+    parent: Events
+    url: query-the-event-stream
+  - name: Post an event
+    parent: Events
+    url: post-an-event
+  - name: Get an event
+    parent: Events
+    url: get-an-event
+  - name: GCP Integration
+    url: /ja/api/v1/gcp-integration/
+    identifier: GCP Integration
+  - name: Delete a GCP integration
+    parent: GCP Integration
+    url: delete-a-gcp-integration
+  - name: List all GCP integrations
+    parent: GCP Integration
+    url: list-all-gcp-integrations
+  - name: Create a GCP integration
+    parent: GCP Integration
+    url: create-a-gcp-integration
+  - name: Update a GCP integration
+    parent: GCP Integration
+    url: update-a-gcp-integration
+  - name: Hosts
+    url: /ja/api/v1/hosts/
+    identifier: Hosts
+  - name: Mute a host
+    parent: Hosts
+    url: mute-a-host
+  - name: Unmute a host
+    parent: Hosts
+    url: unmute-a-host
+  - name: Get all hosts for your organization
+    parent: Hosts
+    url: get-all-hosts-for-your-organization
+  - name: Get the total number of active hosts
+    parent: Hosts
+    url: get-the-total-number-of-active-hosts
+  - name: IP Ranges
+    url: /ja/api/v1/ip-ranges/
+    identifier: IP Ranges
+  - name: List IP Ranges
+    parent: IP Ranges
+    url: list-ip-ranges
+  - name: Key Management
+    url: /ja/api/v1/key-management/
+    identifier: Key Management
+  - name: Get all API keys
+    parent: Key Management
+    url: get-all-api-keys
+  - name: Create an API key
+    parent: Key Management
+    url: create-an-api-key
+  - name: Delete an API key
+    parent: Key Management
+    url: delete-an-api-key
+  - name: Get API key
+    parent: Key Management
+    url: get-api-key
+  - name: Edit an API key
+    parent: Key Management
+    url: edit-an-api-key
+  - name: Get all application keys
+    parent: Key Management
+    url: get-all-application-keys
+  - name: Create an application key
+    parent: Key Management
+    url: create-an-application-key
+  - name: Delete an application key
+    parent: Key Management
+    url: delete-an-application-key
+  - name: Get an application key
+    parent: Key Management
+    url: get-an-application-key
+  - name: Edit an application key
+    parent: Key Management
+    url: edit-an-application-key
+  - name: Logs
+    url: /ja/api/v1/logs/
+    identifier: Logs
+  - name: Get a list of logs
+    parent: Logs
+    url: get-a-list-of-logs
+  - name: Send logs
+    parent: Logs
+    url: send-logs
+  - name: Logs Indexes
+    url: /ja/api/v1/logs-indexes/
+    identifier: Logs Indexes
+  - name: Get indexes order
+    parent: Logs Indexes
+    url: get-indexes-order
+  - name: Update indexes order
+    parent: Logs Indexes
+    url: update-indexes-order
+  - name: Get all indexes
+    parent: Logs Indexes
+    url: get-all-indexes
+  - name: Get an index
+    parent: Logs Indexes
+    url: get-an-index
+  - name: Update an index
+    parent: Logs Indexes
+    url: update-an-index
+  - name: Logs Pipelines
+    url: /ja/api/v1/logs-pipelines/
+    identifier: Logs Pipelines
+  - name: Get pipeline order
+    parent: Logs Pipelines
+    url: get-pipeline-order
+  - name: Update pipeline order
+    parent: Logs Pipelines
+    url: update-pipeline-order
+  - name: Get all pipelines
+    parent: Logs Pipelines
+    url: get-all-pipelines
+  - name: Create a pipeline
+    parent: Logs Pipelines
+    url: create-a-pipeline
+  - name: Delete a pipeline
+    parent: Logs Pipelines
+    url: delete-a-pipeline
+  - name: Get a pipeline
+    parent: Logs Pipelines
+    url: get-a-pipeline
+  - name: Update a pipeline
+    parent: Logs Pipelines
+    url: update-a-pipeline
+  - name: Metrics
+    url: /ja/api/v1/metrics/
+    identifier: Metrics
+  - name: Get active metrics list
+    parent: Metrics
+    url: get-active-metrics-list
+  - name: Get metric metadata
+    parent: Metrics
+    url: get-metric-metadata
+  - name: Edit metric metadata
+    parent: Metrics
+    url: edit-metric-metadata
+  - name: Query timeseries points
+    parent: Metrics
+    url: query-timeseries-points
+  - name: Search metrics
+    parent: Metrics
+    url: search-metrics
+  - name: Submit metrics
+    parent: Metrics
+    url: submit-metrics
+  - name: Monitors
+    url: /ja/api/v1/monitors/
+    identifier: Monitors
+  - name: Get all monitor details
+    parent: Monitors
+    url: get-all-monitor-details
+  - name: Create a monitor
+    parent: Monitors
+    url: create-a-monitor
+  - name: Check if a monitor can be deleted
+    parent: Monitors
+    url: check-if-a-monitor-can-be-deleted
+  - name: Validate a monitor
+    parent: Monitors
+    url: validate-a-monitor
+  - name: Delete a monitor
+    parent: Monitors
+    url: delete-a-monitor
+  - name: Get a monitor's details
+    parent: Monitors
+    url: get-a-monitor's-details
+  - name: Edit a monitor
+    parent: Monitors
+    url: edit-a-monitor
+  - name: Mute a monitor
+    parent: Monitors
+    url: mute-a-monitor
+  - name: Unmute a monitor
+    parent: Monitors
+    url: unmute-a-monitor
+  - name: Resolve Monitor
+    parent: Monitors
+    url: resolve-monitor
+  - name: Mute all monitors
+    parent: Monitors
+    url: mute-all-monitors
+  - name: Unmute all monitors
+    parent: Monitors
+    url: unmute-all-monitors
+  - name: Organizations
+    url: /ja/api/v1/organizations/
+    identifier: Organizations
+  - name: List your managed organizations
+    parent: Organizations
+    url: list-your-managed-organizations
+  - name: Create a child organization
+    parent: Organizations
+    url: create-a-child-organization
+  - name: Get organization information
+    parent: Organizations
+    url: get-organization-information
+  - name: Update your organization
+    parent: Organizations
+    url: update-your-organization
+  - name: Upload IdP metadata
+    parent: Organizations
+    url: upload-idp-metadata
+  - name: PagerDuty Integration
+    url: /ja/api/v1/pagerduty-integration/
+    identifier: PagerDuty Integration
+  - name: Create a new service object
+    parent: PagerDuty Integration
+    url: create-a-new-service-object
+  - name: Delete a single service object
+    parent: PagerDuty Integration
+    url: delete-a-single-service-object
+  - name: Get a single service object
+    parent: PagerDuty Integration
+    url: get-a-single-service-object
+  - name: Update a single service object
+    parent: PagerDuty Integration
+    url: update-a-single-service-object
+  - name: Screenboards
+    url: /ja/api/v1/screenboards/
+    identifier: Screenboards
+  - name: Service Checks
+    url: /ja/api/v1/service-checks/
+    identifier: Service Checks
+  - name: Submit a Service Check
+    parent: Service Checks
+    url: submit-a-service-check
+  - name: Service Level Objectives
+    url: /ja/api/v1/service-level-objectives/
+    identifier: Service Level Objectives
+  - name: Search SLOs
+    parent: Service Level Objectives
+    url: search-slos
+  - name: Create a SLO object
+    parent: Service Level Objectives
+    url: create-a-slo-object
+  - name: Bulk Delete SLO Timeframes
+    parent: Service Level Objectives
+    url: bulk-delete-slo-timeframes
+  - name: Check if SLOs can be safely deleted
+    parent: Service Level Objectives
+    url: check-if-slos-can-be-safely-deleted
+  - name: Delete a SLO
+    parent: Service Level Objectives
+    url: delete-a-slo
+  - name: Get a SLO's details
+    parent: Service Level Objectives
+    url: get-a-slo's-details
+  - name: Update a SLO
+    parent: Service Level Objectives
+    url: update-a-slo
+  - name: Get an SLO's history
+    parent: Service Level Objectives
+    url: get-an-slo's-history
+  - name: Slack Integration
+    url: /ja/api/v1/slack-integration/
+    identifier: Slack Integration
+  - name: Delete a Slack integration
+    parent: Slack Integration
+    url: delete-a-slack-integration
+  - name: Get info about a Slack integration
+    parent: Slack Integration
+    url: get-info-about-a-slack-integration
+  - name: Create a Slack integration
+    parent: Slack Integration
+    url: create-a-slack-integration
+  - name: Add channels to Slack integration
+    parent: Slack Integration
+    url: add-channels-to-slack-integration
+  - name: Snapshots
+    url: /ja/api/v1/snapshots/
+    identifier: Snapshots
+  - name: Take graph snapshots
+    parent: Snapshots
+    url: take-graph-snapshots
+  - name: Synthetics
+    url: /ja/api/v1/synthetics/
+    identifier: Synthetics
+  - name: Get a list of all tests
+    parent: Synthetics
+    url: get-a-list-of-all-tests
+  - name: Create or clone a test
+    parent: Synthetics
+    url: create-or-clone-a-test
+  - name: Get test latest results (as summaries)
+    parent: Synthetics
+    url: get-test-latest-results-(as-summaries)
+  - name: Get test result (browser)
+    parent: Synthetics
+    url: get-test-result-(browser)
+  - name: Delete multiple tests
+    parent: Synthetics
+    url: delete-multiple-tests
+  - name: Get details of a test
+    parent: Synthetics
+    url: get-details-of-a-test
+  - name: Update test
+    parent: Synthetics
+    url: update-test
+  - name: Get test latest results (as summaries)
+    parent: Synthetics
+    url: get-test-latest-results-(as-summaries)
+  - name: Get test result (API)
+    parent: Synthetics
+    url: get-test-result-(api)
+  - name: Change test pause/live status
+    parent: Synthetics
+    url: change-test-pauselive-status
+  - name: Tags
+    url: /ja/api/v1/tags/
+    identifier: Tags
+  - name: Get Tags
+    parent: Tags
+    url: get-tags
+  - name: Remove host tags
+    parent: Tags
+    url: remove-host-tags
+  - name: Get host tags
+    parent: Tags
+    url: get-host-tags
+  - name: Add tags to a host
+    parent: Tags
+    url: add-tags-to-a-host
+  - name: Update host tags
+    parent: Tags
+    url: update-host-tags
+  - name: Timeboards
+    url: /ja/api/v1/timeboards/
+    identifier: Timeboards
+  - name: Tracing
+    url: /ja/api/v1/tracing/
+    identifier: Tracing
+  - name: Send traces
+    parent: Tracing
+    url: send-traces
+  - name: Usage Metering
+    url: /ja/api/v1/usage-metering/
+    identifier: Usage Metering
+  - name: Get hourly usage for Lambda
+    parent: Usage Metering
+    url: get-hourly-usage-for-lambda
+  - name: Get hourly usage for Fargate
+    parent: Usage Metering
+    url: get-hourly-usage-for-fargate
+  - name: Get hourly usage for hosts and containers
+    parent: Usage Metering
+    url: get-hourly-usage-for-hosts-and-containers
+  - name: Get hourly usage for Logs
+    parent: Usage Metering
+    url: get-hourly-usage-for-logs
+  - name: Get hourly usage for Logs by Index
+    parent: Usage Metering
+    url: get-hourly-usage-for-logs-by-index
+  - name: Get hourly usage for Network Flows
+    parent: Usage Metering
+    url: get-hourly-usage-for-network-flows
+  - name: Get hourly usage for Network Hosts
+    parent: Usage Metering
+    url: get-hourly-usage-for-network-hosts
+  - name: Get hourly usage for RUM Sessions
+    parent: Usage Metering
+    url: get-hourly-usage-for-rum-sessions
+  - name: Get usage across your multi-org account
+    parent: Usage Metering
+    url: get-usage-across-your-multi-org-account
+  - name: Get hourly usage for Synthetics API Checks
+    parent: Usage Metering
+    url: get-hourly-usage-for-synthetics-api-checks
+  - name: Get hourly usage for Synthetics API Checks
+    parent: Usage Metering
+    url: get-hourly-usage-for-synthetics-api-checks
+  - name: Get hourly usage for Synthetics Browser Checks
+    parent: Usage Metering
+    url: get-hourly-usage-for-synthetics-browser-checks
+  - name: Get hourly usage for custom metrics
+    parent: Usage Metering
+    url: get-hourly-usage-for-custom-metrics
+  - name: Get top 500 custom metrics by hourly average
+    parent: Usage Metering
+    url: get-top-500-custom-metrics-by-hourly-average
+  - name: Get hourly usage for Trace Search
+    parent: Usage Metering
+    url: get-hourly-usage-for-trace-search
+  - name: Users
+    url: /ja/api/v1/users/
+    identifier: Users
+  - name: Get all users
+    parent: Users
+    url: get-all-users
+  - name: Create a user
+    parent: Users
+    url: create-a-user
+  - name: Disable a user
+    parent: Users
+    url: disable-a-user
+  - name: Get user details
+    parent: Users
+    url: get-user-details
+  - name: Update a user
+    parent: Users
+    url: update-a-user
+  - name: Webhooks Integration
+    url: /ja/api/v1/webhooks-integration/
+    identifier: Webhooks Integration
+  - name: Create a custom variable
+    parent: Webhooks Integration
+    url: create-a-custom-variable
+  - name: Delete a custom variable
+    parent: Webhooks Integration
+    url: delete-a-custom-variable
+  - name: Get a custom variable
+    parent: Webhooks Integration
+    url: get-a-custom-variable
+  - name: Update a custom variable
+    parent: Webhooks Integration
+    url: update-a-custom-variable
+  - name: Create a webhooks integration
+    parent: Webhooks Integration
+    url: create-a-webhooks-integration
+  - name: Delete a webhook
+    parent: Webhooks Integration
+    url: delete-a-webhook
+  - name: Get a webhook integration
+    parent: Webhooks Integration
+    url: get-a-webhook-integration
+  - name: Update a webhook
+    parent: Webhooks Integration
+    url: update-a-webhook
+api_v2:
+  - name: Overview
+    url: /ja/api/v2/
+    identifier: API V2 overview
+    weight: -10
+  - name: Authentication
+    url: authentication
+    parent: API V2 overview
+  - name: Rate Limiting
+    url: rate-limiting
+    parent: API V2 overview
+  - name: Dashboard Lists
+    url: /ja/api/v2/dashboard-lists/
+    identifier: Dashboard Lists
+  - name: Delete items from a dashboard list
+    parent: Dashboard Lists
+    url: delete-items-from-a-dashboard-list
+  - name: Get a Dashboard List
+    parent: Dashboard Lists
+    url: get-a-dashboard-list
+  - name: Add Items to a Dashboard List
+    parent: Dashboard Lists
+    url: add-items-to-a-dashboard-list
+  - name: Update items of a dashboard list
+    parent: Dashboard Lists
+    url: update-items-of-a-dashboard-list
+  - name: Roles
+    url: /ja/api/v2/roles/
+    identifier: Roles
+  - name: List permissions
+    parent: Roles
+    url: list-permissions
+  - name: List roles
+    parent: Roles
+    url: list-roles
+  - name: Create role
+    parent: Roles
+    url: create-role
+  - name: Delete role
+    parent: Roles
+    url: delete-role
+  - name: Get a role
+    parent: Roles
+    url: get-a-role
+  - name: Update a role
+    parent: Roles
+    url: update-a-role
+  - name: Revoke permission
+    parent: Roles
+    url: revoke-permission
+  - name: List permissions for a role
+    parent: Roles
+    url: list-permissions-for-a-role
+  - name: Grant permission to a role
+    parent: Roles
+    url: grant-permission-to-a-role
+  - name: Remove a user from a role
+    parent: Roles
+    url: remove-a-user-from-a-role
+  - name: Get all users of a role
+    parent: Roles
+    url: get-all-users-of-a-role
+  - name: Add a user to a role
+    parent: Roles
+    url: add-a-user-to-a-role
+  - name: Users
+    url: /ja/api/v2/users/
+    identifier: Users
+  - name: Send invitation emails
+    parent: Users
+    url: send-invitation-emails
+  - name: Get a user invitation
+    parent: Users
+    url: get-a-user-invitation
+  - name: List all users
+    parent: Users
+    url: list-all-users
+  - name: Create a user
+    parent: Users
+    url: create-a-user
+  - name: Disable a user
+    parent: Users
+    url: disable-a-user
+  - name: Get a user
+    parent: Users
+    url: get-a-user
+  - name: Update a user
+    parent: Users
+    url: update-a-user
+  - name: Get a user organization
+    parent: Users
+    url: get-a-user-organization
+  - name: Get a user permissions
+    parent: Users
+    url: get-a-user-permissions

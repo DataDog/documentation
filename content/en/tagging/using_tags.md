@@ -288,14 +288,14 @@ Tags can be used in various ways with the [API][15]. See the list below for link
 * [Schedule monitor downtime][16]
 * [Query the event stream][17]
 * [Search hosts][18]
-* [Integrations][19] for [AWS][20] and [Google Cloud][21]
-* [Querying timeseries points][22]
-* [Get all monitor details][23]
-* [Mute a monitor][24]
-* [Monitors search][25]
-* [Monitors group search][26]
-* [Create a Screenboard][27]
-* [Create a Timeboard][28]
+* Integrations for [AWS][19] and [Google Cloud][20]
+* [Querying timeseries points][21]
+* [Get all monitor details][22]
+* [Mute a monitor][23]
+* [Monitors search][22]
+* [Monitors group search][22]
+* [Create a Screenboard][24]
+* [Create a Timeboard][24]
 
 ## Further Reading
 
@@ -314,18 +314,14 @@ Tags can be used in various ways with the [API][15]. See the list below for link
 [11]: /logs/explorer/analytics
 [12]: /logs/explorer/patterns
 [13]: /logs/live_tail
-[14]: /logs/processing/pipelines
-[15]: /api
-[16]: /api/?lang=python#schedule-monitor-downtime
-[17]: /api/?lang=python#query-the-event-stream
-[18]: /api/?lang=python#search-hosts
-[19]: /api/?lang=python#integrations
-[20]: /api/?lang=python#aws
-[21]: /api/?lang=python#google-cloud-platform
-[22]: /api/?lang=python#query-timeseries-points
-[23]: /api/?lang=python#get-all-monitor-details
-[24]: /api/?lang=python#mute-a-monitor
-[25]: /api/?lang=python#monitors-search
-[26]: /api/?lang=python#monitors-group-search
-[27]: /api/?lang=python#create-a-screenboard
-[28]: /api/?lang=python#create-a-dashboard
+[14]: /logs/processing/pipelines/
+[15]: /api/
+[16]: /api/v1/downtimes/#schedule-a-downtime
+[17]: /api/v1/events/#query-the-event-stream
+[18]: /api/v1/hosts/
+[19]: /api/v1/aws-integration/
+[20]: /api/v1/gcp-integration/
+[21]: /api/v1/metrics/#query-timeseries-points
+[22]: /api/v1/monitors/#get-all-monitor-details
+[23]: /api/v1/monitors/#mute-a-monitor
+[24]: /api/v1/dashboards/#create-a-new-dashboard

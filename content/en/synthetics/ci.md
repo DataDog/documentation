@@ -512,4 +512,4 @@ You can also see the results of your tests listed on your Datadog test details p
 
 [1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
 [2]: /help
-[3]: /api/?lang=bash#get-a-test
+[3]: /api/v1/synthetics/#get-test

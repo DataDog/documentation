@@ -24,12 +24,6 @@ $ddpurple: #632ca6;
         pointer-events: none;
         background-clip: content-box;
         margin-right: 0;
-        @media (min-width: 992px) {
-            margin-right: -180px;
-        }
-        @media (min-width: 1200px) {
-            margin-right: -220px;
-        }
         a {
             pointer-events: initial;
             border-bottom: 1px solid transparent;
@@ -118,6 +112,10 @@ $ddpurple: #632ca6;
             cursor: pointer;
             top: -30px;
             right: 0;
+        }
+
+        &.has-no-expands .expand-all {
+          display:none;
         }
 
         .column {
