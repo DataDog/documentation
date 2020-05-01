@@ -5968,10 +5968,6 @@ components:
           format: int64
           type: integer
         name:
-          description: TODO.
-          format: int64
-          type: integer
-        name:
           description: Name of the test.
           type: string
         options:
@@ -6038,9 +6034,6 @@ components:
         allow_insecure:
           description: TODO.
           type: boolean
-        allow_insecure:
-          description: TODO.
-          type: boolean
         device_ids:
           description: Array with the different device IDs used to run the test.
           items:
@@ -6050,10 +6043,6 @@ components:
           description: For API SSL test, whether or not the test should follow redirects.
           type: boolean
         min_failure_duration:
-          description: TODO.
-          format: int64
-          type: integer
-        min_location_failed:
           description: TODO.
           format: int64
           type: integer
