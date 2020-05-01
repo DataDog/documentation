@@ -46,4 +46,4 @@ IFRAME_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/graphing_json/widget_json
+[1]: /dashboards/graphing_json/widget_json/

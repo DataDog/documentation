@@ -2,10 +2,10 @@
 title: Clone your Synthetics tests
 kind: faq
 further_reading:
-- link: "synthetics/"
+- link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
-- link: "synthetics/"
+- link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
 ---

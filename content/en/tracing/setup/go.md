@@ -12,10 +12,10 @@ further_reading:
 - link: "https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "GoDoc"
   text: "Package page"
-- link: "tracing/visualization/"
+- link: "/tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "tracing/"
+- link: "/tracing/"
   tag: "Advanced Usage"
   text: "Advanced Usage"
 ---
@@ -222,11 +222,11 @@ func main() {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[2]: /tracing/visualization
+[2]: /tracing/visualization/
 [3]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[5]: /tracing/send_traces
-[6]: /tracing/setup/docker
+[5]: /tracing/send_traces/
+[6]: /tracing/setup/docker/
 [7]: /agent/kubernetes/apm/
 [8]: https://gin-gonic.com
 [9]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin

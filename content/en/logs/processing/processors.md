@@ -3,13 +3,13 @@ title: Processors
 kind: documentation
 description: "Parse your logs using the Grok Processor"
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "/logs/processing/pipelines/"
   tag: "Documentation"
   text: "Discover Datadog Pipelines"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without limit"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 ---
@@ -745,12 +745,12 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/pipelines
+[1]: /logs/processing/pipelines/
 [2]: /logs/processing/parsing/#advanced-settings
-[3]: /logs/processing/parsing
+[3]: /logs/processing/parsing/
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[5]: /logs/guide/log-parsing-best-practice
-[6]: /logs/search_syntax
+[5]: /logs/guide/log-parsing-best-practice/
+[6]: /logs/search_syntax/
 [7]: /logs/processing/processors/?tab=ui#log-status-remapper
 [8]: /logs/processing/parsing/?tab=filter#matcher-and-filter
-[9]: /tracing/connect_logs_and_traces
+[9]: /tracing/connect_logs_and_traces/

@@ -21,4 +21,4 @@ If you have confirmed your email address is correct and you still have not recei
 
 Once you have confirmed that you have not received your email, contact [Datadog support][1].
 
-[1]: /help
+[1]: /help/

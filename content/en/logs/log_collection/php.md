@@ -7,16 +7,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/php-logging-guide"
   tag: "Blog"
   text: "How to collect, customize, and analyze PHP logs"
-- link: "/logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "/logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "logs/explorer/analytics"
+- link: "/logs/explorer/analytics/"
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: /logs/faq/log-collection-troubleshooting-guide
@@ -159,7 +159,7 @@ The following configuration enables the JSON formatting and writes the logs and 
 
 Then [Stream your log files to Datadog][1]
 
-[1]: /logs/log_collection
+[1]: /logs/log_collection/
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
@@ -363,7 +363,7 @@ Add a session Processor to add variable context within your logs:
 
 3. [Stream generated JSON file to Datadog][1].
 
-[1]: /logs/log_collection
+[1]: /logs/log_collection/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -539,8 +539,8 @@ CakeLog::config('debug', array(
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /agent/logs
-[2]: /tracing/connect_logs_and_traces/php
+[1]: /agent/logs/
+[2]: /tracing/connect_logs_and_traces/php/
 [3]: /logs/log_collection/php/#symfony-v2-v3
 [4]: /logs/log_collection/php/#ppi
 [5]: /logs/log_collection/php/#laravel

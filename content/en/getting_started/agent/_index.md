@@ -136,26 +136,26 @@ For help troubleshooting the Agent:
 {{< nextlink href="/getting_started/application" tag="Documentation" >}}Learn about the Datadog UI{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /integrations
-[2]: /developers/metrics/dogstatsd_metrics_submission
-[3]: /api
-[4]: /infrastructure/process
-[5]: /logs
-[6]: /tracing
+[1]: /integrations/
+[2]: /developers/metrics/dogstatsd_metrics_submission/
+[3]: /api/
+[4]: /infrastructure/process/
+[5]: /logs/
+[6]: /tracing/
 [7]: https://www.datadoghq.com
 [8]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [9]: /agent/guide/agent-commands/#agent-status-and-information
-[10]: /agent/guide/agent-commands
+[10]: /agent/guide/agent-commands/
 [11]: /agent/guide/agent-commands/#start-the-agent
 [12]: /agent/guide/agent-commands/#stop-the-agent
 [13]: /agent/guide/agent-commands/#restart-the-agent
-[14]: /integrations/agent_metrics
+[14]: /integrations/agent_metrics/
 [15]: /integrations/system/#metrics
 [16]: /integrations/disk/#metrics
 [17]: /agent/docker/data_collected/#metrics
 [18]: /integrations/network/#metrics
 [19]: /integrations/ntp/#metrics
-[20]: /getting_started/integrations
-[21]: /agent/troubleshooting
-[22]: /agent/guide/agent-log-files
-[23]: /help
+[20]: /getting_started/integrations/
+[21]: /agent/troubleshooting/
+[22]: /agent/guide/agent-log-files/
+[23]: /help/

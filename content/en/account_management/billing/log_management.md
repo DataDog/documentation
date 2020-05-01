@@ -41,5 +41,5 @@ For billing questions, contact your [Customer Success][5] Manager.
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs
-[4]: /help
+[4]: /help/
 [5]: mailto:success@datadoghq.com

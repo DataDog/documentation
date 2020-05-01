@@ -4,19 +4,19 @@ kind: documentation
 aliases:
   - /logs/languages/nodejs
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "logs/explorer/analytics"
+- link: "/logs/explorer/analytics/"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---
@@ -196,4 +196,4 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
-[3]: /tracing/connect_logs_and_traces/nodejs
+[3]: /tracing/connect_logs_and_traces/nodejs/

@@ -78,7 +78,7 @@ logs:
 
 **Note**: When tailing files for logs, the Datadog Agent v6 for **Windows** requires the log files have UTF8 encoding.
 
-[1]: /agent/guide/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "TCP/UDP" %}}
@@ -97,7 +97,7 @@ If you are using Serilog, `Serilog.Sinks.Network` is an option for connecting wi
 
 **Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
 
-[1]: /agent/guide/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
 {{% tab "journald" %}}
 
@@ -111,8 +111,8 @@ logs:
 
 Refer to the [journald integration][2] documentation for more details regarding the setup for containerized environments and units filtering.
 
-[1]: /agent/guide/agent-configuration-files
-[2]: /integrations/journald
+[1]: /agent/guide/agent-configuration-files/
+[2]: /integrations/journald/
 {{% /tab %}}
 {{% tab "Windows Events" %}}
 
@@ -153,7 +153,7 @@ Set the corresponding `source` parameter to the same channel name to benefit fro
 Finally, [restart the Agent][2].
 
 [1]: /logs/processing/pipelines/#integration-pipelines
-[2]: /agent/basic_agent_usage/windows
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 

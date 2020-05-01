@@ -3,8 +3,9 @@ title: Container Discovery Management
 kind: guide
 aliases:
  - /agent/autodiscovery/management
+ - /agent/kubernetes/management
 further_reading:
-- link: "/agent/kubernetes/integrations"
+- link: "/agent/kubernetes/integrations/"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
 ---

@@ -162,10 +162,10 @@ To install the Datadog Agent on your Kubernetes cluster:
 [7]: /resources/yaml/datadog-agent-npm.yaml
 [8]: /resources/yaml/datadog-agent-vanilla.yaml
 [9]: /agent/kubernetes/apm/#setup
-[10]: /agent/kubernetes/log
-[11]: /agent/kubernetes/apm
+[10]: /agent/kubernetes/log/
+[11]: /agent/kubernetes/apm/
 [12]: /infrastructure/process/?tab=kubernetes#installation
-[13]: /network_performance_monitoring/installation
+[13]: /network_performance_monitoring/installation/
 [14]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [15]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}

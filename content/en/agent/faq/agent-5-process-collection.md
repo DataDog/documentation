@@ -58,7 +58,7 @@ In the [dd-agent.yaml][5] manifest used to create the DaemonSet, add the followi
 Refer to the standard [DaemonSet installation][6] and the [docker-dd-agent][4] information pages for further documentation.
 
 [1]: https://app.datadoghq.com/account/settings#agent
-[2]: /agent/faq/where-is-the-configuration-file-for-the-agent
+[2]: /agent/faq/where-is-the-configuration-file-for-the-agent/
 [3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [4]: https://github.com/DataDog/docker-dd-agent
 [5]: https://github.com/DataDog/docker-dd-agent#configuration-files

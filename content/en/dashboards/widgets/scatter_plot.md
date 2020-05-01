@@ -93,6 +93,6 @@ Additional properties allowed in the `request` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/graphing_json/widget_json
-[2]: /dashboards/graphing_json/request_json
+[1]: /dashboards/graphing_json/widget_json/
+[2]: /dashboards/graphing_json/request_json/
 [3]: /dashboards/graphing_json/widget_json/#y-axis-schema

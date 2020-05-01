@@ -3,13 +3,13 @@ title: Downtimes
 kind: documentation
 description: "Schedule downtimes for your Datadog monitors to prevent alerts during specific time periods."
 further_reading:
-- link: "monitors/monitor_types"
+- link: "/monitors/monitor_types/"
   tag: "Documentation"
   text: "Create a monitor"
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure monitor notifications"
-- link: "monitors/manage_monitor"
+- link: "/monitors/manage_monitor/"
   tag: "Documentation"
   text: "Manage monitors"
 ---
@@ -100,8 +100,8 @@ All alerted states are included on the [weekly monitor report][8] even if the mo
 [1]: https://app.datadoghq.com/monitors#/downtime
 [2]: http://daringfireball.net/projects/markdown/syntax
 [3]: /integrations/#cat-notification
-[4]: /monitors/monitor_status
+[4]: /monitors/monitor_status/
 [5]: /events/#event-stream
 [6]: /api/v1/downtimes/#cancel-a-downtime
-[7]: /help
+[7]: /help/
 [8]: /account_management/#preferences

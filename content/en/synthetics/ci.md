@@ -6,13 +6,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetics"
-- link: "synthetics/"
+- link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
-- link: "synthetics/browser_tests"
+- link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "synthetics/api_tests"
+- link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
 ---
@@ -511,5 +511,5 @@ You can also see the results of your tests listed on your Datadog test details p
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
-[2]: /help
+[2]: /help/
 [3]: /api/v1/synthetics/#get-test

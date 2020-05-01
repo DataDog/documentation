@@ -2,10 +2,10 @@
 title: How can I configure a metric monitor to alert on NO change in value?
 kind: faq
 further_reading:
-- link: "monitors/monitor_types"
+- link: "/monitors/monitor_types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
 ---
@@ -38,5 +38,5 @@ Other [alert conditions/options][2] can be set to preference. Your monitor's UI 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api
+[1]: /api/
 [2]: /monitors/monitor_types/#define-the-conditions
