@@ -21,9 +21,7 @@
 
                 
 <ul class="list-unstyled">
-    <!-- (index .Site.Menus  $apiMenu) -->
 {{ range $menu }}
-
     {{ if .HasChildren }}
         <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) }}active{{ end }}">
             <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
