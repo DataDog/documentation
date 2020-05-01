@@ -35,16 +35,15 @@ components:
           additionalProperties:
             description: TODO.
             type: boolean
-          description: 'An object (in the form {"namespace1":true/false, "namespace2":true/false})
+          description: 'An object, (in the form `{"namespace1":true/false, "namespace2":true/false}`),
 
             that enables or disables metric collection for specific AWS namespaces
-            for
+            for this
 
-            this AWS account only.
-
-            A list of namespaces can be found at the /v1/integration/aws/available_namespace_rules
-            endpoint.'
-          example: false
+            AWS account only.'
+          example:
+            auto_scaling: false
+            opswork: false
           type: object
         excluded_regions:
           description: An array of AWS regions to exclude from metrics collection.
@@ -56,17 +55,17 @@ components:
             type: string
           type: array
         filter_tags:
-          description: 'The array of EC2 tags (in the form key:value) defines a filter
-            that Datadog uses when collecting metrics from EC2.
+          description: 'The array of EC2 tags (in the form `key:value`) defines a
+            filter that Datadog uses when collecting metrics from EC2.
 
-            Wildcards, such as ? (for single characters) and * (for multiple characters)
+            Wildcards, such as `?` (for single characters) and `*` (for multiple characters)
             can also be used.
 
             Only hosts that match one of the defined tags
 
             will be imported into Datadog. The rest will be ignored.
 
-            Host matching a given tag can also be excluded by adding ! before the
+            Host matching a given tag can also be excluded by adding `!` before the
             tag.
 
             For example, `env:production,instance-type:c1.*,!region:us-east-1`'
@@ -77,7 +76,7 @@ components:
             type: string
           type: array
         host_tags:
-          description: 'Array of tags (in the form key:value) to add to all hosts
+          description: 'Array of tags (in the form `key:value`) to add to all hosts
 
             and metrics reporting through this integration.'
           example:
@@ -204,8 +203,8 @@ components:
           type: string
         services:
           description: Array of services IDs set to enable automatic log collection.
-            Discover the list of available services with the Get list of AWS log ready
-            services API endpoint
+            Discover the list of available services with the get list of AWS log ready
+            services API endpoint.
           example:
           - s3
           - elb
@@ -301,15 +300,7 @@ components:
       - alert_id
       type: object
     ApiKey:
-      description: 'Manage your Datadog API and application keys.
-
-
-        You need an API and applications key with Admin rights to interact with this
-        endpoint.
-
-        The full list of keys can be seen on your
-
-        [Datadog API page](https://app.datadoghq.com/account/login?next=%2Faccount%2Fsettings#api).'
+      description: Datadog API key.
       properties:
         created:
           description: Date of creation of the API key.
@@ -560,7 +551,7 @@ components:
           type: object
         errors:
           additionalProperties:
-            description: Strings denoting where a monitor is used
+            description: Strings denoting where a monitor is used.
             items:
               description: TODO.
               type: string
@@ -766,34 +757,34 @@ components:
         author:
           $ref: '#/components/schemas/Creator'
         created:
-          description: Date of creation of the dashboard list
+          description: Date of creation of the dashboard list.
           format: date-time
           readOnly: true
           type: string
         dashboard_count:
-          description: The number of dashboards in the list
+          description: The number of dashboards in the list.
           format: int64
           readOnly: true
           type: integer
         id:
-          description: The ID of the dashboard list
+          description: The ID of the dashboard list.
           format: int64
           readOnly: true
           type: integer
         is_favorite:
-          description: Whether or not the list is in the favorites
+          description: Whether or not the list is in the favorites.
           readOnly: true
           type: boolean
         modified:
-          description: Date of last edition of the dashboard list
+          description: Date of last edition of the dashboard list.
           format: date-time
           readOnly: true
           type: string
         name:
-          description: The name of the dashboard list
+          description: The name of the dashboard list.
           type: string
         type:
-          description: The type of dashboard list
+          description: The type of dashboard list.
           example: manual_dashboard_list
           readOnly: true
           type: string
@@ -804,7 +795,7 @@ components:
       description: TODO.
       properties:
         deleted_dashboard_list_id:
-          description: ID of the deleted dashboard list
+          description: ID of the deleted dashboard list.
           format: int64
           type: integer
       type: object
@@ -812,7 +803,7 @@ components:
       description: TODO.
       properties:
         dashboard_lists:
-          description: List of all your dashboard lists
+          description: List of all your dashboard lists.
           items:
             $ref: '#/components/schemas/DashboardList'
           type: array
@@ -880,7 +871,7 @@ components:
           type: string
       type: object
     DeletedMonitor:
-      description: Response from the `DeleteMonitor` call.
+      description: Response from the delete monitor call.
       properties:
         deleted_monitor_id:
           description: ID of the deleted monitor.
@@ -981,9 +972,11 @@ components:
           example: false
           type: boolean
         downtime_type:
-          description: 0 for a downtime applied on `*` or all; 1 when the downtime
-            is only scoped to hosts; 2 when the downtime is scoped to anything but
-            hosts.
+          description: '`0` for a downtime applied on `*` or all,
+
+            `1` when the downtime is only scoped to hosts,
+
+            or `2` when the downtime is scoped to anything but hosts.'
           example: 2
           format: int32
           maximum: 2147483647
@@ -1004,9 +997,10 @@ components:
           readOnly: true
           type: integer
         message:
-          description: "A message to include with notifications for this downtime.\n\
-            Email notifications can be sent to specific users by using the same \u2018\
-            @username\u2019 notation as events."
+          description: 'A message to include with notifications for this downtime.
+
+            Email notifications can be sent to specific users by using the same `@username`
+            notation as events.'
           example: Message on the downtime
           type: string
         monitor_id:
@@ -1121,6 +1115,104 @@ components:
           items:
             description: TODO.
             type: string
+          type: array
+      type: object
+    EmbeddableGraph:
+      description: Embeddable graph.
+      properties:
+        dash_name:
+          description: Name of the dashboard the graph is on (null if none).
+          type: string
+        dash_url:
+          description: URL of the dashboard the graph is on (null if none).
+          type: string
+        embed_id:
+          description: ID of the embed.
+          type: string
+        graph_title:
+          description: Title of the graph.
+          type: string
+        html:
+          description: HTML fragment for the embed (iframe).
+          type: string
+        revoked:
+          description: Boolean flag for whether or not the embed is revoked.
+          type: boolean
+        shared_by:
+          description: ID of the use who shared the embed.
+          format: int64
+          type: integer
+      type: object
+    EmbeddableGraphLegend:
+      default: 'no'
+      description: The flag determining if the graph includes a legend.
+      enum:
+      - 'yes'
+      - 'no'
+      type: string
+      x-enum-varnames:
+      - 'YES'
+      - 'NO'
+    EmbeddableGraphPayload:
+      description: Payload to create new embeddable graph.
+      properties:
+        graph_json:
+          description: 'The graph definition in JSON.
+
+
+            Same format that is available on the JSON tab of the graph editor.'
+          type: string
+        legend:
+          $ref: '#/components/schemas/EmbeddableGraphLegend'
+        size:
+          $ref: '#/components/schemas/EmbeddableGraphSize'
+        timeframe:
+          $ref: '#/components/schemas/EmbeddableGraphTimeframe'
+        title:
+          default: Embed created through API
+          description: Determines graph title. Must be at least 1 character.
+          minimum: 1
+          type: string
+      required:
+      - graph_json
+      type: object
+    EmbeddableGraphSize:
+      default: medium
+      description: The size of the graph.
+      enum:
+      - small
+      - medium
+      - large
+      - xlarge
+      type: string
+      x-enum-varnames:
+      - SMALL
+      - MEDIUM
+      - LARGE
+      - XLARGE
+    EmbeddableGraphTimeframe:
+      default: 1_hour
+      description: The timeframe for the graph.
+      enum:
+      - 1_hour
+      - 4_hours
+      - 1_day
+      - 2_days
+      - 1_week
+      type: string
+      x-enum-varnames:
+      - 1_HOUR
+      - 4_HOURS
+      - 1_DAY
+      - 2_DAYS
+      - 1_WEEK
+    EmbeddableGraphs:
+      description: Response with embeddable graphs.
+      properties:
+        embedded_graphs:
+          description: List of embeddable graphs.
+          items:
+            $ref: '#/components/schemas/EmbeddableGraph'
           type: array
       type: object
     Event:
@@ -1828,7 +1920,7 @@ components:
           example: test.host
           type: string
         message:
-          description: Message associated with the Mute.
+          description: Message associated with the mute.
           example: Muting this host for a test!
           type: string
       type: object
@@ -2107,7 +2199,7 @@ components:
 
                 That value is then highlighted and displayed in the Logstream, where
                 it is indexed for full text search.'
-              example: host connected to remote
+              example: Host connected to remote
               type: string
             service:
               description: 'The name of the application or service generating the
@@ -2442,7 +2534,7 @@ components:
         active/inactive toggle.
       properties:
         query:
-          description: 'Default query is ''*'', meaning all logs flowing in the index
+          description: 'Default query is `*`, meaning all logs flowing in the index
             would be excluded.
 
             Scope down exclusion filter to only a subset of logs with a log query.'
@@ -2804,6 +2896,32 @@ components:
       items:
         $ref: '#/components/schemas/LogsPipeline'
       type: array
+    LogsPipelineProcessor:
+      description: 'Nested Pipelines are pipelines within a pipeline. Use Nested Pipelines
+        to split the processing into two steps.
+
+        For example, first use a high-level filtering such as team and then a second
+        level of filtering based on the
+
+        integration, service, or any other tag or attribute.
+
+
+        A pipeline can contain Nested Pipelines and Processors whereas a Nested Pipeline
+        can only contain Processors.'
+      properties:
+        filter:
+          $ref: '#/components/schemas/LogsFilter'
+        processors:
+          description: Ordered list of processors in this pipeline.
+          items:
+            $ref: '#/components/schemas/LogsProcessor'
+          type: array
+        type:
+          default: pipeline
+          description: Type of processor.
+          readOnly: true
+          type: string
+      type: object
     LogsPipelinesOrder:
       description: Object containing the ordered list of pipeline IDs.
       properties:
@@ -2831,6 +2949,7 @@ components:
           grok-parser: '#/components/schemas/LogsGrokParser'
           lookup-processor: '#/components/schemas/LogsLookupProcessor'
           message-remapper: '#/components/schemas/LogsMessageRemapper'
+          pipeline: '#/components/schemas/LogsPipelineProcessor'
           service-remapper: '#/components/schemas/LogsServiceRemapper'
           status-remapper: '#/components/schemas/LogsStatusRemapper'
           string-builder-processor: '#/components/schemas/LogsStringBuilderProcessor'
@@ -2850,6 +2969,7 @@ components:
       - $ref: '#/components/schemas/LogsCategoryProcessor'
       - $ref: '#/components/schemas/LogsArithmeticProcessor'
       - $ref: '#/components/schemas/LogsStringBuilderProcessor'
+      - $ref: '#/components/schemas/LogsPipelineProcessor'
       - $ref: '#/components/schemas/LogsGeoIPParser'
       - $ref: '#/components/schemas/LogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
@@ -3083,7 +3203,7 @@ components:
             name.
           type: string
         statsd_interval:
-          description: Statsd flush interval of the metric in seconds if applicable.
+          description: StatsD flush interval of the metric in seconds if applicable.
           format: int64
           type: integer
         type:
@@ -3372,15 +3492,16 @@ components:
           type: boolean
         escalation_message:
           default: none
-          description: "A message to include with a re-notification. Supports the\
-            \ \u2018@username\u2019 notification we allow elsewhere.\nNot applicable\
-            \ if `renotify_interval` is None."
+          description: 'A message to include with a re-notification. Supports the
+            `@username` notification we allow elsewhere.
+
+            Not applicable if `renotify_interval` is `None`.'
           type: string
         evaluation_delay:
           description: 'Time (in seconds) to delay evaluation, as a non-negative integer.
-            For example, if the value is set to 300 (5min),
+            For example, if the value is set to `300` (5min),
 
-            the timeframe is set to last_5m and the time is 7:00, the monitor evaluates
+            the timeframe is set to `last_5m` and the time is 7:00, the monitor evaluates
             data from 6:50 to 6:55.
 
             This is useful for AWS CloudWatch and other backfilled metrics to ensure
@@ -3614,16 +3735,16 @@ components:
       description: List of the different monitor threshold available.
       properties:
         critical:
-          description: The monitor CRITICAL threshold.
+          description: The monitor `CRITICAL` threshold.
           format: double
           type: number
         critical_recovery:
-          description: The monitor CRITICAL recovery threshold.
+          description: The monitor `CRITICAL` recovery threshold.
           format: double
           nullable: true
           type: number
         ok:
-          description: The monitor OK threshold.
+          description: The monitor `OK` threshold.
           format: double
           nullable: true
           type: number
@@ -3633,12 +3754,12 @@ components:
           nullable: true
           type: number
         warning:
-          description: The monitor WARNING threshold.
+          description: The monitor `WARNING` threshold.
           format: double
           nullable: true
           type: number
         warning_recovery:
-          description: The monitor WARNING recovery threshold.
+          description: The monitor `WARNING` recovery threshold.
           format: double
           nullable: true
           type: number
@@ -3725,7 +3846,7 @@ components:
           example: New child org
           type: string
         public_id:
-          description: The public_id of the org you are operating within.
+          description: The `public_id` of the org you are operating within.
           example: abcdef12345
           type: string
         settings:
@@ -3871,91 +3992,36 @@ components:
         org:
           $ref: '#/components/schemas/Organization'
       type: object
-    PagerDutyIntegration:
-      description: New Datadog-PagerDuty integration.
-      properties:
-        api_token:
-          description: Your PagerDuty API token.
-          example: <PAGERDUTY_TOKEN>
-          type: string
-        schedules:
-          description: The array of your schedule URLs.
-          example:
-          - https://my-pd.pagerduty.com/schedules#PCPYT4M
-          - https://my-pd.pagerduty.com/schedules#PKTPB7P
-          items:
-            description: TODO.
-            type: string
-          type: array
-        services:
-          description: The array of PagerDuty service objects.
-          example:
-          - service_key: <PAGERDUTY_SERVICE_KEY>
-            service_name: test_00
-          - service_key: <PAGERDUTY_SERVICE_KEY>
-            service_name: test_01
-          items:
-            $ref: '#/components/schemas/PagerDutyService'
-          type: array
-        subdomain:
-          description: Your PagerDuty subdomain.
-          example: <PAGERDUTY_SUB_DOMAIN>
-          type: string
-      type: object
     PagerDutyService:
-      description: Configure your Datadog-PagerDuty integration directly through the
-        Datadog API. For more informations, see the [PagerDuty integration page](https://docs.datadoghq.com/integrations/pagerduty/).
+      description: The PagerDuty service that is available for integration with Datadog.
       properties:
         service_key:
-          description: Your Service key in PagerDuty.
+          description: Your service key in PagerDuty.
           type: string
         service_name:
-          description: Your Service name associated service key in PagerDuty.
+          description: Your service name associated with a service key in PagerDuty.
           type: string
       required:
       - service_name
       - service_key
       type: object
     PagerDutyServiceKey:
-      description: PagerDuty service object Key.
+      description: PagerDuty service object key.
       properties:
         service_key:
-          description: Your Service key in PagerDuty.
+          description: Your service key in PagerDuty.
           type: string
       required:
       - service_key
       type: object
     PagerDutyServiceName:
-      description: PagerDuty service object Name.
+      description: PagerDuty service object name.
       properties:
         service_name:
-          description: Your Service name associated service key in PagerDuty.
+          description: Your service name associated service key in PagerDuty.
           type: string
       required:
       - service_name
-      type: object
-    PagerDutyServicesAndSchedules:
-      description: Define new services and schedules to your Datadog-PagerDuty integration.
-      properties:
-        schedules:
-          description: The array of your schedule URLs.
-          example:
-          - https://my-pd.pagerduty.com/schedules#PCPYT4M
-          - https://my-pd.pagerduty.com/schedules#PKTPB7P
-          items:
-            description: TODO.
-            type: string
-          type: array
-        services:
-          description: The array of PagerDuty service objects.
-          example:
-          - service_key: <PAGERDUTY_SERVICE_KEY>
-            service_name: test_00
-          - service_key: <PAGERDUTY_SERVICE_KEY>
-            service_name: test_01
-          items:
-            $ref: '#/components/schemas/PagerDutyService'
-          type: array
       type: object
     Point:
       description: 'Each point is of the form `[POSIX_timestamp, numeric_value]`.
@@ -4133,7 +4199,7 @@ components:
                   this error.'
                 type: string
               message:
-                description: The error message
+                description: The error message.
                 type: string
               timeframe:
                 $ref: '#/components/schemas/SLOErrorTimeframe'
@@ -4193,7 +4259,7 @@ components:
         numerator:
           $ref: '#/components/schemas/SLOHistoryMetricsSeries'
         query:
-          description: The combined numerator && denominator query CSV.
+          description: The combined numerator and denominator query CSV.
           type: string
         res_type:
           description: The series result type. This mimics `batch_query` response
@@ -4205,7 +4271,7 @@ components:
           format: int64
           type: integer
         times:
-          description: The query timestamps in epoch milliseconds
+          description: The query timestamps in epoch milliseconds.
           items:
             description: TODO.
             format: double
@@ -4254,7 +4320,7 @@ components:
               type: string
           type: object
         sum:
-          description: Total Sum of the query.
+          description: Total sum of the query.
           format: double
           type: number
         values:
@@ -4311,14 +4377,17 @@ components:
       description: A service level objective response containing the requested history.
       properties:
         error:
-          description: human readable error
+          description: Human readable error.
           type: string
       type: object
     SLOHistorySLIData:
-      description: An object that holds an SLI value and its associated data. It can
-        represent an SLO's overall SLI value or the SLI value for a specific monitor
-        (in multi-monitor SLOs) or group (in grouped SLOs). The uptime history is
-        included for monitor SLOs.
+      description: 'An object that holds an SLI value and its associated data. It
+        can represent
+
+        an SLO''s overall SLI value or the SLI value for a specific monitor (in multi-monitor
+        SLOs)
+
+        or group (in grouped SLOs). The uptime history is included for monitor SLOs.'
       properties:
         history:
           description: For `monitor` based SLOs, this includes the aggregated history
@@ -4359,7 +4428,7 @@ components:
           type: number
         span_precision:
           description: The amount of decimal places the SLI value is accurate to for
-            the given from and to timestamp.
+            the given from `&&` to timestamp.
           format: double
           type: number
         uptime:
@@ -4414,16 +4483,15 @@ components:
           format: double
           type: number
         target_display:
-          description: 'A string representation of the target that indicates its precision
+          description: 'A string representation of the target that indicates its precision.
 
-            (e.g. "99.9"). It uses trailing zeros to show significant decimal places
-
-            (e.g. "98.00").
+            It uses trailing zeros to show significant decimal places (e.g. `98.00`).
 
 
             Always included in service level objective responses. Ignored in
 
             create/update requests.'
+          example: '99.9'
           type: string
         timeframe:
           $ref: '#/components/schemas/SLOTimeframe'
@@ -4435,7 +4503,7 @@ components:
           description: 'A string representation of the warning target (see the description
             of
 
-            the "target_display" field for details).
+            the `target_display` field for details).
 
 
             Included in service level objective responses if a warning target exists.
@@ -4468,17 +4536,15 @@ components:
       - MONITOR
     SLOTypeNumeric:
       description: 'A numeric representation of the type of the service level objective
-        (0 for
+        (`0` for
 
-        monitor, 1 for metric).
+        monitor, `1` for metric). Always included in service level objective responses.
 
-
-        Always included in service level objective responses. Ignored in
-
-        create/update requests.'
+        Ignored in create/update requests.'
       enum:
       - 0
       - 1
+      example: 0
       format: int32
       type: integer
       x-enum-varnames:
@@ -4679,7 +4745,7 @@ components:
       description: 'A service level objective object includes a service level indicator,
         thresholds
 
-        for one or more timeframes, and metadata (name, description, tags, etc.).'
+        for one or more timeframes, and metadata (`name`, `description`, `tags`, etc.).'
       properties:
         created_at:
           description: 'Creation timestamp (unix time in seconds)
@@ -4695,25 +4761,26 @@ components:
           description: 'A user-defined description of the service level objective.
 
 
-            Always included in service level objective responses (but may be null).
+            Always included in service level objective responses (but may be `null`).
 
             Optional in create/update requests.'
           nullable: true
           type: string
         groups:
-          description: 'A list of (up to 20) monitor groups (e.g. ["env:prod,role:mysql"])
-            that
-
-            narrows the scope of a monitor service level objective.
+          description: 'A list of (up to 20) monitor groups that narrow the scope
+            of a monitor service level objective.
 
 
-            Included in service level objective responses if it is nonempty. Optional
+            Included in service level objective responses if it is not empty. Optional
             in
 
             create/update requests for monitor service level objectives, but may only
             be
 
-            used when then length of the "monitor_ids" field is one.'
+            used when then length of the `monitor_ids` field is one.'
+          example:
+          - env:prod
+          - role:mysql
           items:
             description: TODO.
             type: string
@@ -4737,10 +4804,7 @@ components:
           description: 'A list of monitor ids that defines the scope of a monitor
             service level
 
-            objective.
-
-
-            Required if type is "monitor".'
+            objective. **Required if type is `monitor`**.'
           items:
             description: TODO.
             format: int64
@@ -4748,7 +4812,7 @@ components:
           type: array
         monitor_tags:
           description: 'The union of monitor tags for all monitors referenced by the
-            "monitor_ids"
+            `monitor_ids`
 
             field.
 
@@ -4762,7 +4826,7 @@ components:
             affect which monitors are included in the service level objective (that
             is
 
-            determined entirely by the monitor_ids field).'
+            determined entirely by the `monitor_ids` field).'
           items:
             description: TODO.
             type: string
@@ -4771,10 +4835,7 @@ components:
           description: The name of the service level objective object.
           type: string
         query:
-          description: 'A metric SLI query.
-
-
-            Required if type is "metric".'
+          description: A metric SLI query. **Required if type is `metric`**.
           properties:
             denominator:
               description: A Datadog metric query for total (valid) events.
@@ -4787,13 +4848,14 @@ components:
           - denominator
           type: object
         tags:
-          description: 'A list of tags (e.g. "env:prod") associated with this service
-            level objective.
-
+          description: 'A list of tags associated with this service level objective.
 
             Always included in service level objective responses (but may be empty).
 
             Optional in create/update requests.'
+          example:
+          - env:prod
+          - app:core
           items:
             description: TODO.
             type: string
@@ -4909,14 +4971,14 @@ components:
           description: Account to which the channel belongs to.
           type: string
         channel_name:
-          description: 'Your channel name e.g: `#general`, `#private`.'
+          description: Your channel name.
           example: '#general'
           type: string
         transfer_all_user_comments:
           default: false
           description: 'To be notified for every comment on a graph, set it to `true`.
 
-            If set to False use the `@slack-channel_name` syntax for comments
+            If set to `False` use the `@slack-channel_name` syntax for comments
 
             to be posted to slack.'
           type: boolean
@@ -4942,7 +5004,7 @@ components:
           type: array
       type: object
     SlackIntegration:
-      description: New Datadog-Slack integration.
+      description: A new Datadog-Slack integration.
       properties:
         service_hooks:
           description: The array of service hook objects.
@@ -4964,7 +5026,7 @@ components:
           description: Your Slack account name.
           type: string
         url:
-          description: Your Slack Service Hook URL.
+          description: Your Slack service hook URL.
           type: string
       required:
       - account
@@ -5862,6 +5924,10 @@ components:
           type: string
         modified_by:
           $ref: '#/components/schemas/SyntheticsTestAuthor'
+        monitor_id:
+          description: TODO.
+          format: int64
+          type: integer
         name:
           description: TODO.
           type: string
@@ -5919,6 +5985,9 @@ components:
         accept_self_signed:
           description: TODO.
           type: boolean
+        allow_insecure:
+          description: TODO.
+          type: boolean
         device_ids:
           description: TODO.
           items:
@@ -5927,6 +5996,10 @@ components:
         follow_redirects:
           description: TODO.
           type: boolean
+        min_failure_duration:
+          description: TODO.
+          format: int64
+          type: integer
         min_location_failed:
           description: TODO.
           format: int64
@@ -6014,9 +6087,6 @@ components:
         url:
           description: TODO.
           type: string
-      required:
-      - method
-      - url
       type: object
     SyntheticsTickInterval:
       description: TODO.
@@ -6371,7 +6441,7 @@ components:
           description: 'Contains the total number of hosts that reported via Alibaba
             integration
 
-            (and were NOT running the Datadog).'
+            (and were NOT running the Datadog Agent).'
           format: int64
           type: integer
         apm_host_count:
@@ -6448,7 +6518,7 @@ components:
           type: integer
       type: object
     UsageLambdaResponse:
-      description: 'Reponse containing the umber of lambda functions and sum of the
+      description: 'Reponse containing the number of lambda functions and sum of the
         invocations of all lambda functions
 
         for each hour for a given organization.'
@@ -8328,14 +8398,14 @@ paths:
       description: 'Submit a list of Service Checks.
 
 
-        **Note**: valid API key is required.'
+        **Note**: A valid API key is required.'
       operationId: SubmitServiceCheck
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ServiceChecks'
-        description: Service Check body
+        description: Service Check request body.
         required: true
       responses:
         '202':
@@ -8391,7 +8461,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      summary: Get all Dashboards
+      summary: Get all dashboards
       tags:
       - Dashboards
     post:
@@ -8402,7 +8472,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Dashboard'
-        description: Dashboard request object.
+        description: Create a dashboard request body.
         required: true
       responses:
         '200':
@@ -8423,7 +8493,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      summary: Create a new Dashboard
+      summary: Create a new dashboard
       tags:
       - Dashboards
       x-codegen-request-body-name: body
@@ -8455,7 +8525,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DashboardList'
-        description: DashboardList request object
+        description: Create a dashboard list request body.
         required: true
       responses:
         '200':
@@ -8485,7 +8555,7 @@ paths:
       description: Delete a dashboard list.
       operationId: DeleteDashboardList
       parameters:
-      - description: ID of the dashboard list to delete
+      - description: ID of the dashboard list to delete.
         in: path
         name: list_id
         required: true
@@ -8518,7 +8588,7 @@ paths:
       description: Fetch an existing dashboard list's definition.
       operationId: GetDashboardList
       parameters:
-      - description: ID of the dashboard list to fetch
+      - description: ID of the dashboard list to fetch.
         in: path
         name: list_id
         required: true
@@ -8551,7 +8621,7 @@ paths:
       description: Update the name of a dashboard list.
       operationId: UpdateDashboardList
       parameters:
-      - description: ID of the dashboard list to update
+      - description: ID of the dashboard list to update.
         in: path
         name: list_id
         required: true
@@ -8563,7 +8633,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DashboardList'
-        description: DashboardList request object
+        description: Update a dashboard list request body.
         required: true
       responses:
         '200':
@@ -8623,8 +8693,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: No dasbhoards found error
-      summary: Delete a Dashboard
+          description: Dashboards Not Found
+      summary: Delete a dashboard
       tags:
       - Dashboards
     get:
@@ -8656,7 +8726,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
-      summary: Get a Dashboard
+      summary: Get a dashboard
       tags:
       - Dashboards
     put:
@@ -8701,7 +8771,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
-      summary: Update a Dashboard
+      summary: Update a dashboard
       tags:
       - Dashboards
       x-codegen-request-body-name: body
@@ -8742,7 +8812,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Downtime'
-        description: Downtime request object
+        description: Schedule a downtime request body.
         required: true
       responses:
         '200':
@@ -8890,7 +8960,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Downtime'
-        description: Downtime request object.
+        description: Update a downtime request body.
         required: true
       responses:
         '200':
@@ -9029,12 +9099,12 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/events/{event_id}:
     get:
-      description: "This endpoint allows you to query for event details.\n\nNote:\
-        \ if the event you\u2019re querying contains markdown formatting of any kind,\n\
-        you may see characters such as %,\\,n in your output."
+      description: "This endpoint allows you to query for event details.\n\n**Note**:\
+        \ If the event you\u2019re querying contains markdown formatting of any kind,\n\
+        you may see characters such as `%`,`\\`,`n` in your output."
       operationId: GetEvent
       parameters:
-      - description: The id of the event.
+      - description: The ID of the event.
         in: path
         name: event_id
         required: true
@@ -9063,9 +9133,186 @@ paths:
       summary: Get an event
       tags:
       - Events
+  /api/v1/graph/embed:
+    get:
+      description: Gets a list of previously created embeddable graphs.
+      operationId: ListEmbeddableGraphs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddableGraphs'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      summary: Get all embeds
+      tags:
+      - Embeddable Graphs
+    post:
+      description: 'Creates a new embeddable graph.
+
+
+        Note: If an embed already exists for the exact same query in a given organization,
+
+        the older embed is returned instead of creating a new embed.
+
+
+        If you are interested in using template variables, see
+
+        [Embeddable Graphs with Template Variables](https://docs.datadoghq.com/dashboards/faq/embeddable-graphs-with-template-variables).'
+      operationId: CreateEmbeddableGraph
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmbeddableGraphPayload'
+        description: Embeddable Graph body
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddableGraph'
+          description: Payload accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      summary: Create embed
+      tags:
+      - Embeddable Graphs
+      x-codegen-request-body-name: body
+  /api/v1/graph/embed/{embed_id}:
+    get:
+      description: Get the HTML fragment for a previously generated embed with `embed_id`.
+      operationId: GetEmbeddableGraph
+      parameters:
+      - description: Token of the embed.
+        in: path
+        name: embed_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddableGraph'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get specific embed
+      tags:
+      - Embeddable Graphs
+  /api/v1/graph/embed/{embed_id}/enable:
+    get:
+      description: Enable a specified embed.
+      operationId: EnableEmbeddableGraph
+      parameters:
+      - description: ID of the embed.
+        in: path
+        name: embed_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: A JSON containing the success message
+                properties:
+                  success:
+                    description: Message.
+                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
+                      successfully enabled.
+                    type: string
+                type: object
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Enable embed
+      tags:
+      - Embeddable Graphs
+  /api/v1/graph/embed/{embed_id}/revoke:
+    get:
+      description: Revoke a specified embed.
+      operationId: RevokeEmbeddableGraph
+      parameters:
+      - description: ID of the embed.
+        in: path
+        name: embed_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: A JSON containing the success message
+                properties:
+                  success:
+                    description: Message.
+                    example: Embed 5f585b01c81b12ecdf5f40df0382738d0919170639985d3df5e2fc4232865b0c
+                      successfully revoked.
+                    type: string
+                type: object
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Revoke embed
+      tags:
+      - Embeddable Graphs
   /api/v1/graph/snapshot:
     get:
-      description: Take graph snapshots.
+      description: 'Take graph snapshots.
+
+        **Note**: When a snapshot is created, there is some delay before it is available.'
       operationId: GetGraphSnapshot
       parameters:
       - description: The metric query.
@@ -9149,7 +9396,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/HostMuteSettings'
-        description: Mute a host.
+        description: Mute a host request body.
       responses:
         '200':
           content:
@@ -9319,8 +9566,8 @@ paths:
       - Hosts
   /api/v1/integration/aws:
     delete:
-      description: Delete a Datadog-AWS integration matching the specified account_id
-        and role_name parameters.
+      description: Delete a Datadog-AWS integration matching the specified `account_id`
+        and `role_name parameters`.
       operationId: DeleteAWSAccount
       requestBody:
         content:
@@ -9348,7 +9595,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      summary: Delete an AWS Integration
+      summary: Delete an AWS integration
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
@@ -9356,7 +9603,7 @@ paths:
       description: List all Datadog-AWS integrations available in your Datadog organization.
       operationId: ListAWSAccounts
       parameters:
-      - description: Only return AWS accounts that matches this account_id.
+      - description: Only return AWS accounts that matches this `account_id`.
         in: query
         name: account_id
         required: false
@@ -9368,7 +9615,7 @@ paths:
         required: false
         schema:
           type: string
-      - description: Only return AWS accounts that matches this access_key_id.
+      - description: Only return AWS accounts that matches this `access_key_id`.
         in: query
         name: access_key_id
         required: false
@@ -9393,7 +9640,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      summary: List all AWS Integrations
+      summary: List all AWS integrations
       tags:
       - AWS Integration
     post:
@@ -9429,7 +9676,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      summary: Create an AWS Integration
+      summary: Create an AWS integration
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
@@ -9437,22 +9684,23 @@ paths:
       description: Update a Datadog-Amazon Web Services integration.
       operationId: UpdateAWSAccount
       parameters:
-      - description: Only return AWS accounts that matches this account_id.
+      - description: Only return AWS accounts that matches this `account_id`.
         in: query
         name: account_id
         required: false
         schema:
           type: string
-      - description: Only return AWS accounts that matches this role_name. *It is
-          required if account_id is specified.*
+      - description: 'Only return AWS accounts that match this `role_name`.
+
+          Required if `account_id` is specified.'
         in: query
         name: role_name
         required: false
         schema:
           type: string
-      - description: 'Only return AWS accounts that matches this access_key_id.
+      - description: 'Only return AWS accounts that matches this `access_key_id`.
 
-          *It is required if none of the other two options are specified.*'
+          Required if none of the other two options are specified.'
         in: query
         name: access_key_id
         required: false
@@ -9484,7 +9732,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      summary: Update an AWS Integration
+      summary: Update an AWS integration
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
@@ -9551,7 +9799,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      summary: Generate New External ID
+      summary: Generate a new external ID
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
@@ -9565,7 +9813,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AWSAccountAndLambdaRequest'
-        description: Check AWS Log Lambda Async request body.
+        description: Delete AWS Lambda ARN request body.
         required: true
       responses:
         '200':
@@ -9625,7 +9873,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      summary: List all AWS Logs Integrations
+      summary: List all AWS Logs integrations
       tags:
       - AWS Logs Integration
     post:
@@ -9637,7 +9885,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AWSAccountAndLambdaRequest'
-        description: Check AWS Log Lambda Async request body.
+        description: AWS Log Lambda Async request body.
         required: true
       responses:
         '200':
@@ -9747,14 +9995,14 @@ paths:
       - AWS Logs Integration
     post:
       description: Enable automatic log collection for a list of services. This should
-        be run after running 'CreateAWSLambdaARN' to save the config.
+        be run after running `CreateAWSLambdaARN` to save the config.
       operationId: EnableAWSLogServices
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AWSLogsServicesRequest'
-        description: Enable AWS Log Services request object
+        description: Enable AWS Log Services request body.
         required: true
       responses:
         '200':
@@ -9782,20 +10030,20 @@ paths:
   /api/v1/integration/aws/logs/services_async:
     post:
       description: "Test if permissions are present to add log-forwarding triggers\
-        \ for the given services + AWS account. Input is the same as for EnableAWSLogServices.\
-        \ Done async, so can be repeatedly polled in a non-blocking fashion until\
-        \ the async request completes.\n- Returns a status of 'created' when it's\
-        \ checking if the permissions exists\n  in the AWS account.\n\n- Returns a\
-        \ status of 'waiting' while checking.\n- Returns a status of 'checked and\
-        \ ok' if the Lambda exists.\n- Returns a status of 'error' if the Lambda does\
-        \ not exist."
+        \ for the\ngiven services and AWS account. Input is the same as for `EnableAWSLogServices`.\n\
+        Done async, so can be repeatedly polled in a non-blocking fashion until\n\
+        the async request completes.\n\n- Returns a status of `created` when it's\
+        \ checking if the permissions exists\n  in the AWS account.\n- Returns a status\
+        \ of `waiting` while checking.\n- Returns a status of `checked and ok` if\
+        \ the Lambda exists.\n- Returns a status of `error` if the Lambda does not\
+        \ exist."
       operationId: CheckAWSLogsServicesAsync
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AWSLogsServicesRequest'
-        description: AWS Logs Async Services check request body.
+        description: Check AWS Logs Async Services request body.
         required: true
       responses:
         '200':
@@ -9816,7 +10064,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication Error
-      summary: Check permissions for Log Services
+      summary: Check permissions for log services
       tags:
       - AWS Logs Integration
       x-codegen-request-body-name: body
@@ -9829,7 +10077,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AzureAccount'
-        description: Delete a given Datadog-Azure integration.
+        description: Delete a given Datadog-Azure integration request body.
         required: true
       responses:
         '200':
@@ -9901,7 +10149,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AzureAccount'
-        description: Create a Datadog-Azure integration for your Datadog account.
+        description: Create a Datadog-Azure integration for your Datadog account request
+          body.
         required: true
       responses:
         '200':
@@ -9942,7 +10191,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AzureAccount'
-        description: Update a Datadog-Azure integration.
+        description: Update a Datadog-Azure integration request body.
         required: true
       responses:
         '200':
@@ -9978,7 +10227,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AzureAccount'
-        description: Update a Datadog-Azure integration's host filters.
+        description: Update a Datadog-Azure integration's host filters request body.
         required: true
       responses:
         '200':
@@ -10104,8 +10353,7 @@ paths:
         Requires a `project_id` and `client_email`, however these fields cannot be
         updated.
 
-        If you need to update these fields please delete and use the create (POST)
-        endpoint.
+        If you need to update these fields, delete and use the create (`POST`) endpoint.
 
         The unspecified fields will keep their original values.'
       operationId: UpdateGCPIntegration
@@ -10140,110 +10388,6 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
-  /api/v1/integration/pagerduty:
-    delete:
-      description: Delete the Datadog-PagerDuty integration.
-      operationId: DeletePagerDutyIntegration
-      responses:
-        '200':
-          description: OK
-        '204':
-          description: Integration does not exist
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication error
-      summary: Delete a PagerDuty integration
-      tags:
-      - PagerDuty Integration
-    get:
-      description: Get all information about your Datadog-PagerDuty integration.
-      operationId: GetPagerDutyIntegration
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PagerDutyIntegration'
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication error
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Item Not Found
-      summary: Get a PagerDuty integration
-      tags:
-      - PagerDuty Integration
-    post:
-      description: Add new services and schedules to your Datadog-PagerDuty integration.
-      operationId: UpdatePagerDutyIntegration
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PagerDutyServicesAndSchedules'
-        description: Update an existing Datadog-PagerDuty integration.
-        required: true
-      responses:
-        '204':
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication error
-      summary: Add new services and schedules
-      tags:
-      - PagerDuty Integration
-      x-codegen-request-body-name: body
-    put:
-      description: 'Create a new Datadog-PagerDuty integration.
-
-        **Note:** All arguments are required when creating (`PUT`) a new PagerDuty
-        configuration.'
-      operationId: CreatePagerDutyIntegration
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PagerDutyIntegration'
-        description: Create Datadog-PagerDuty integration.
-        required: true
-      responses:
-        '204':
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Authentication error
-      summary: Create a PagerDuty integration
-      tags:
-      - PagerDuty Integration
-      x-codegen-request-body-name: body
   /api/v1/integration/pagerduty/configuration/services:
     post:
       description: Create a new service object in the PagerDuty integration.
@@ -10253,7 +10397,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PagerDutyService'
-        description: Create a new service object in the Datadog-PagerDuty integration.
+        description: Create a new service object request body.
         required: true
       responses:
         '201':
@@ -10274,12 +10418,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Not Found
       summary: Create a new service object
       tags:
       - PagerDuty Integration
@@ -10317,7 +10455,7 @@ paths:
       description: Get service name in the Datadog-PagerDuty integration.
       operationId: GetPagerDutyIntegrationService
       parameters:
-      - description: The service name
+      - description: The service name.
         in: path
         name: service_name
         required: true
@@ -10346,7 +10484,7 @@ paths:
       tags:
       - PagerDuty Integration
     put:
-      description: Update a single service object in the Datadog-PagerDuty integration
+      description: Update a single service object in the Datadog-PagerDuty integration.
       operationId: UpdatePagerDutyIntegrationService
       parameters:
       - description: The service name
@@ -10360,7 +10498,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PagerDutyServiceKey'
-        description: Update an existing service object in the Datadog-PagerDuty integration.
+        description: Update an existing service object request body.
         required: true
       responses:
         '200':
@@ -10389,7 +10527,7 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/integration/slack:
     delete:
-      description: Delete the Datadog-Slack integration.
+      description: Delete a Datadog-Slack integration.
       operationId: DeleteSlackIntegration
       responses:
         '200':
@@ -10431,7 +10569,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
-      summary: Get Slack integration
+      summary: Get info about a Slack integration
       tags:
       - Slack Integration
     post:
@@ -10450,7 +10588,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SlackIntegration'
-        description: Create Datadog-Slack integration.
+        description: Create Datadog-Slack integration request body.
         required: true
       responses:
         '204':
@@ -10472,7 +10610,7 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
     put:
-      description: 'Add channels to your Datadog-Slack integration.
+      description: 'Add channels to your existing Datadog-Slack integration.
 
 
         This method updates your integration configuration by **replacing**
@@ -10484,7 +10622,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SlackChannels'
-        description: Update an existing Datadog-Slack integration.
+        description: Update an existing Datadog-Slack integration request body.
         required: true
       responses:
         '204':
@@ -10514,7 +10652,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/WebhooksIntegrationCustomVariable'
-        description: Define a Custom Variable.
+        description: Define a custom variable request body.
         required: true
       responses:
         '201':
@@ -10535,7 +10673,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
-      summary: Create a Custom Variable for Webhooks Integration
+      summary: Create a custom variable
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
@@ -10565,7 +10703,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
-      summary: Delete a Custom Variable for Webhooks Integration
+      summary: Delete a custom variable
       tags:
       - Webhooks Integration
     get:
@@ -10608,7 +10746,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
-      summary: Get a Custom Variable for Webhooks Integration
+      summary: Get a custom variable
       tags:
       - Webhooks Integration
     put:
@@ -10626,7 +10764,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/WebhooksIntegrationCustomVariableUpdateRequest'
-        description: Update an existing custom variable.
+        description: Update an existing custom variable request body.
         required: true
       responses:
         '200':
@@ -10653,7 +10791,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
-      summary: Update a Custom Variable for Webhooks Integration
+      summary: Update a custom variable
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
@@ -10666,7 +10804,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/WebhooksIntegration'
-        description: Create Datadog-Webhooks integration.
+        description: Create a webhooks integration request body.
         required: true
       responses:
         '201':
@@ -10687,7 +10825,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Authentication error
-      summary: Create a Webhooks Integration
+      summary: Create a webhooks integration
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
@@ -10717,7 +10855,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
-      summary: Delete a Webhook for Webhooks Integration
+      summary: Delete a webhook
       tags:
       - Webhooks Integration
     get:
@@ -10755,7 +10893,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
-      summary: Get a Webhook Integration
+      summary: Get a webhook integration
       tags:
       - Webhooks Integration
     put:
@@ -10800,7 +10938,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Item Not Found
-      summary: Update a Webhook for Webhooks Integration
+      summary: Update a webhook
       tags:
       - Webhooks Integration
       x-codegen-request-body-name: body
@@ -10811,9 +10949,9 @@ paths:
         [Results are paginated][1].
 
 
-        **If you are thinking about archiving logs for your organization,
+        **If you are considering archiving logs for your organization,
 
-        consider using Datadog archive capabilities instead of the log list API.
+        consider use of the Datadog archive capabilities instead of the log list API.
 
         See [Datadog Logs Archive documentation][2].**
 
@@ -10858,7 +10996,7 @@ paths:
         no JSON arguments.
 
 
-        **Note**: This endpoint is in public beta.
+        **Note: This endpoint is in public beta.**
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
       operationId: GetLogsIndexOrder
@@ -10885,7 +11023,7 @@ paths:
         is successful.
 
 
-        **Note**: This endpoint is in public beta.
+        **Note: This endpoint is in public beta.**
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
       operationId: UpdateLogsIndexOrder
@@ -10981,10 +11119,10 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     put:
-      description: "It returns the Index object passed in the request body when the\
-        \ request is successful.\n\nUsing the `PUT` method updates your index\u2019\
-        s configuration by **replacing**\nyour current configuration with the new\
-        \ one sent to your Datadog organization."
+      description: "Update an index as identified by its name.\nReturns the Index\
+        \ object passed in the request body when the request is successful.\n\nUsing\
+        \ the `PUT` method updates your index\u2019s configuration by **replacing**\n\
+        your current configuration with the new one sent to your Datadog organization."
       operationId: UpdateLogsIndex
       parameters:
       - description: Name of the log index.
@@ -11028,7 +11166,7 @@ paths:
       tags:
       - Logs Indexes
       x-codegen-request-body-name: body
-      x-unstable: '**Note**: This endpoint is in public beta.
+      x-unstable: '**Note: This endpoint is in public beta.**
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/logs/config/pipeline-order:
@@ -11050,7 +11188,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-      summary: Get Pipeline Order
+      summary: Get pipeline order
       tags:
       - Logs Pipelines
     put:
@@ -11098,7 +11236,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/LogsAPIErrorResponse'
           description: Unprocessable Entity
-      summary: Update Pipeline Order
+      summary: Update pipeline order
       tags:
       - Logs Pipelines
       x-codegen-request-body-name: body
@@ -11121,11 +11259,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-      summary: Get all Pipeline
+      summary: Get all pipelines
       tags:
       - Logs Pipelines
     post:
-      description: Create a Pipeline in your organization.
+      description: Create a pipeline in your organization.
       operationId: CreateLogsPipeline
       requestBody:
         content:
@@ -11271,7 +11409,7 @@ paths:
         now.
       operationId: ListActiveMetrics
       parameters:
-      - description: Seconds since the Unix epoch
+      - description: Seconds since the Unix epoch.
         in: query
         name: from
         required: true
@@ -11342,7 +11480,8 @@ paths:
       tags:
       - Metrics
     put:
-      description: Edit metadata of a specific metric.
+      description: Edit metadata of a specific metric. Find out more about [supported
+        types](https://docs.datadoghq.com/developers/metrics).
       operationId: UpdateMetricMetadata
       parameters:
       - description: Name of the metric for which to edit metadata.
@@ -11491,7 +11630,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Monitor'
-        description: Monitor request object.
+        description: Create a monitor request body.
         required: true
       responses:
         '200':
@@ -11555,7 +11694,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CheckCanDeleteMonitorResponse'
           description: Deletion conflict error
-      summary: Check if the given monitors can be deleted
+      summary: Check if a monitor can be deleted
       tags:
       - Monitors
   /api/v1/monitor/validate:
@@ -11642,7 +11781,7 @@ paths:
       description: Get details about the specified monitor from your organization.
       operationId: GetMonitor
       parameters:
-      - description: The id of the monitor
+      - description: The ID of the monitor
         in: path
         name: monitor_id
         required: true
@@ -11688,7 +11827,7 @@ paths:
       description: Edit the specified monitor.
       operationId: UpdateMonitor
       parameters:
-      - description: The id of the monitor.
+      - description: The ID of the monitor.
         in: path
         name: monitor_id
         required: true
@@ -11700,7 +11839,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Monitor'
-        description: Monitor request object.
+        description: Edit a monitor request body.
         required: true
       responses:
         '200':
@@ -11868,7 +12007,7 @@ paths:
       tags:
       - Organizations
     post:
-      description: 'You can create, edit, and manage organizations.
+      description: 'Create a child organization.
 
 
         This endpoint requires the
@@ -11884,14 +12023,14 @@ paths:
 
         by using the `org.public_id`, `pi_key.key`, and
 
-        **application_key.hash** provided in the response.'
+        `application_key.hash` provided in the response.'
       operationId: CreateChildOrg
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/OrganizationCreateBody'
-        description: Org object that needs to be created
+        description: Create child organization body request.
         required: true
       responses:
         '200':
@@ -11921,7 +12060,7 @@ paths:
       description: Get organization information.
       operationId: GetOrg
       parameters:
-      - description: The public_id of the org you are operating within.
+      - description: The `public_id` of the org you are operating within.
         in: path
         name: public_id
         required: true
@@ -11954,7 +12093,7 @@ paths:
       description: Update your organization.
       operationId: UpdateOrg
       parameters:
-      - description: The public_id of the org you are operating within.
+      - description: The `public_id` of the org you are operating within.
         in: path
         name: public_id
         required: true
@@ -12004,7 +12143,7 @@ paths:
         * **XML Body:** Post the IdP metadata file as the body of the request.'
       operationId: UploadIdPForOrg
       parameters:
-      - description: The public_id of the org you are operating with
+      - description: The `public_id` of the org you are operating within.
         in: path
         name: public_id
         required: true
@@ -12064,7 +12203,7 @@ paths:
         schema:
           format: int64
           type: integer
-      - description: Query string
+      - description: Query string.
         in: query
         name: query
         required: true
@@ -12184,10 +12323,9 @@ paths:
       description: Get multiple service level objective objects by their IDs.
       operationId: ListSLOs
       parameters:
-      - description: 'A comma separated list of the IDs of the service level objectives
+      - description: A comma separated list of the IDs of the service level objectives
           objects.
-
-          For example, "id1,id2,id3".'
+        example: id1, id2, id3
         in: query
         name: ids
         required: true
@@ -12272,7 +12410,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SLOBulkDelete'
-        description: Thresholds by service level objective object ID.
+        description: Delete multiple service level objective objects request body.
         required: true
       responses:
         '200':
@@ -12299,15 +12437,14 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/slo/can_delete:
     get:
-      description: 'Check if an SLO can be safely deleted without disrupting
+      description: 'Check if a SLO can be safely deleted. For example,
 
-        dashboardsfor example.'
+        assure an SLO can be deleted without disrupting a dashboard.'
       operationId: CheckCanDeleteSLO
       parameters:
-      - description: 'A comma separated list of the IDs of the service level objectives
-          objects
-
-          (e.g. "id1,id2,id3").'
+      - description: A comma separated list of the IDs of the service level objectives
+          objects.
+        example: id1, id2, id3
         in: query
         name: ids
         required: true
@@ -12351,7 +12488,7 @@ paths:
         a 409 conflict error because the SLO is referenced in a dashboard.'
       operationId: DeleteSLO
       parameters:
-      - description: The id of the service level objective.
+      - description: The ID of the service level objective.
         in: path
         name: slo_id
         required: true
@@ -12546,22 +12683,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: forbidden
+          description: Forbidden
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Synthetics is not activated for the user.
-      summary: Get all test
+          description: Synthetics is not activated for the user
+      summary: Get a list of all tests
       tags:
       - Synthetics
     post:
       description: Create (or clone) a Synthetics test.
       operationId: CreateTest
       parameters:
-      - description: Public id of the test to clone, undefined if the test is created
-          ex nihilo.
+      - description: Public ID of the test to clone, undefined if the test is newly
+          created.
         in: query
         name: from_test_id
         required: false
@@ -12586,20 +12723,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: JSON format is wrong, creation/cloning failed.
+          description: '- JSON format is wrong
+
+            - Creation/cloning failed'
         '402':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Test quota is reached.
+          description: Test quota is reached
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: forbidden
-      summary: Create or clone test
+          description: Forbidden
+      summary: Create or clone a test
       tags:
       - Synthetics
       x-codegen-request-body-name: body
@@ -12609,7 +12748,7 @@ paths:
         test.
       operationId: GetBrowserTestLatestResults
       parameters:
-      - description: The public id of the browser test for which to search results
+      - description: The public ID of the browser test for which to search results
           for.
         in: path
         name: public_id
@@ -12656,8 +12795,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Synthetics is not activated for the user, test is not owned
-            by the user.
+          description: '- Synthetics is not activated for the user
+
+            - Test is not owned by the user'
       summary: Get test latest results (as summaries)
       tags:
       - Synthetics
@@ -12667,14 +12807,14 @@ paths:
       description: Get a specific full result from a given (browser) Synthetics test.
       operationId: GetBrowserTestResult
       parameters:
-      - description: The public id of the browser test to which the target result
+      - description: The public ID of the browser test to which the target result
           belongs.
         in: path
         name: public_id
         required: true
         schema:
           type: string
-      - description: The id of the result to get.
+      - description: The ID of the result to get.
         in: path
         name: result_id
         required: true
@@ -12692,27 +12832,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: forbidden
+          description: Forbidden
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Synthetics is not activated for the user, test or result is
-            not owned by the user.
+          description: '- Synthetics is not activated for the user
+
+            - Test or result is not owned by the user'
       summary: Get test result (browser)
       tags:
       - Synthetics
   /api/v1/synthetics/tests/delete:
     post:
-      description: Delete multiple Synthetics tests by id
+      description: Delete multiple Synthetics tests by ID.
       operationId: DeleteTests
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SyntheticsDeleteTestsPayload'
-        description: Public id list of the Synthetics tests to be deleted
+        description: Public ID list of the Synthetics tests to be deleted.
         required: true
       responses:
         '200':
@@ -12726,21 +12867,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: JSON format is wrong, test cannot be deleted as it's used elsewhere
-            (as a subtest or in an uptime widget), some ids are not owned by the user
+          description: '- JSON format is wrong
+
+            - Test cannot be deleted as it''s used elsewhere (as a subtest or in an
+            uptime widget)
+
+            - Some IDs are not owned by the user'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: forbidden
+          description: Forbidden
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: tests to be deleted can't be found or Synthetics is not activated
-            for the user
+          description: '- Tests to be deleted can''t be found
+
+            - Synthetics is not activated for the user'
       summary: Delete multiple tests
       tags:
       - Synthetics
@@ -12750,7 +12896,7 @@ paths:
       description: Get the details of a specific Synthetics test.
       operationId: GetTest
       parameters:
-      - description: The public id of the test to get details from.
+      - description: The public ID of the test to get details from.
         in: path
         name: public_id
         required: true
@@ -12768,22 +12914,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: forbidden
+          description: Forbidden
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Synthetics is not activated for the user, test is not owned
-            by the user.
-      summary: Get test
+          description: '- Synthetics is not activated for the user
+
+            - Test is not owned by the user'
+      summary: Get details of a test
       tags:
       - Synthetics
     put:
       description: Update the details of a specific Synthetics test.
       operationId: UpdateTest
       parameters:
-      - description: The public id of the test to get details from.
+      - description: The public ID of the test to get details from.
         in: path
         name: public_id
         required: true
@@ -12808,20 +12955,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: JSON format is wrong, updating subtype is forbidden.
+          description: '- JSON format is wrong
+
+            - Updating subtype is forbidden'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: forbidden
+          description: Forbidden
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Synthetics is not activated for the user, test is not owned
-            by the user, test can't be found.
+          description: '- Synthetics is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
       summary: Update test
       tags:
       - Synthetics
@@ -12832,7 +12984,7 @@ paths:
         test.
       operationId: GetAPITestLatestResults
       parameters:
-      - description: The public id of the test for which to search results for.
+      - description: The public ID of the test for which to search results for.
         in: path
         name: public_id
         required: true
@@ -12872,14 +13024,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: forbidden
+          description: Forbidden
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Synthetics is not activated for the user, test is not owned
-            by the user.
+          description: '- Synthetics is not activated for the user
+
+            - Test is not owned by the user'
       summary: Get test latest results (as summaries)
       tags:
       - Synthetics
@@ -12889,13 +13042,13 @@ paths:
       description: Get a specific full result from a given (API) Synthetics test.
       operationId: GetAPITestResult
       parameters:
-      - description: The public id of the API test to which the target result belongs.
+      - description: The public ID of the API test to which the target result belongs.
         in: path
         name: public_id
         required: true
         schema:
           type: string
-      - description: The id of the result to get.
+      - description: The ID of the result to get.
         in: path
         name: result_id
         required: true
@@ -12913,14 +13066,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: forbidden
+          description: Forbidden
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Synthetics is not activated for the user, test or result is
-            not owned by the user.
+          description: '- Synthetics is not activated for the user
+
+            - Test or result is not owned by the user'
       summary: Get test result (API)
       tags:
       - Synthetics
@@ -12929,7 +13083,7 @@ paths:
       description: Change pause/live status of a given Synthetics test.
       operationId: UpdateTestPauseStatus
       parameters:
-      - description: The public id of the Synthetics test to update
+      - description: The public ID of the Synthetics test to update.
         in: path
         name: public_id
         required: true
@@ -12940,7 +13094,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SyntheticsUpdateTestPauseStatusPayload'
-        description: Pause/live status to set the given Synthetics test to
+        description: Pause/live status to set the given Synthetics test to.
         required: true
       responses:
         '200':
@@ -12960,14 +13114,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: forbidden
+          description: Forbidden
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Synthetics is not activated for the user, test is not owned
-            by the user
+          description: '- Synthetics is not activated for the user
+
+            - Test is not owned by the user'
       summary: Change test pause/live status
       tags:
       - Synthetics
@@ -13057,7 +13212,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: Source to filter
+      - description: Source to filter.
         in: query
         name: source
         required: false
@@ -13098,9 +13253,10 @@ paths:
         required: true
         schema:
           type: string
-      - description: 'The source of the tags (e.g. chef, puppet).
+      - description: 'The source of the tags.
 
-          [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value)'
+          [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+        example: chef
         in: query
         name: source
         required: false
@@ -13111,7 +13267,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/HostTags'
-        description: Add tags to host
+        description: Update host tags request body.
         required: true
       responses:
         '201':
@@ -13193,7 +13349,7 @@ paths:
       operationId: GetUsageLambda
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13201,7 +13357,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13232,11 +13388,11 @@ paths:
       - Usage Metering
   /api/v1/usage/fargate:
     get:
-      description: Get hourly usage for [fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
+      description: Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
       operationId: GetUsageFargate
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13244,7 +13400,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13279,7 +13435,7 @@ paths:
       operationId: GetUsageHosts
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13287,7 +13443,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13322,7 +13478,7 @@ paths:
       operationId: GetUsageLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13330,7 +13486,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13365,7 +13521,7 @@ paths:
       operationId: GetUsageLogsByIndex
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13373,7 +13529,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13415,16 +13571,18 @@ paths:
       description: Get hourly usage for network flows.
       operationId: GetUsageNetworkFlows
       parameters:
-      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
         schema:
           format: date-time
           type: string
-      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+      - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
+          for usage ending
+
+          BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13459,7 +13617,7 @@ paths:
       operationId: GetUsageNetworkHosts
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13467,7 +13625,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13503,7 +13661,7 @@ paths:
       operationId: GetUsageRumSessions
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13511,7 +13669,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13545,15 +13703,17 @@ paths:
       description: Get usage across your multi-org account.
       operationId: GetUsageSummary
       parameters:
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM]
-          for usage beginning in this month. Maximum of 15 months ago.'
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage beginning in this month.
+
+          Maximum of 15 months ago.'
         in: query
         name: start_month
         required: true
         schema:
           format: date-time
           type: string
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM]
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for usage ending this month.'
         in: query
         name: end_month
@@ -13592,11 +13752,11 @@ paths:
   /api/v1/usage/synthetics:
     get:
       deprecated: true
-      description: Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).
+      description: Get hourly usage for [Synthetics API checks](https://docs.datadoghq.com/synthetics/).
       operationId: GetUsageSynthetics
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13604,7 +13764,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13639,7 +13799,7 @@ paths:
       operationId: GetUsageSyntheticsAPI
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13647,7 +13807,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13682,7 +13842,7 @@ paths:
       operationId: GetUsageSyntheticsBrowser
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13690,7 +13850,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13725,7 +13885,7 @@ paths:
       operationId: GetUsageTimeseries
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13733,7 +13893,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13812,7 +13972,7 @@ paths:
       operationId: GetUsageTrace
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage beginning at this hour'
+          for usage beginning at this hour.'
         in: query
         name: start_hr
         required: true
@@ -13820,7 +13980,7 @@ paths:
           format: date-time
           type: string
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
-          for usage ending BEFORE this hour'
+          for usage ending BEFORE this hour.'
         in: query
         name: end_hr
         required: false
@@ -13873,16 +14033,16 @@ paths:
       description: 'Create a user for your organization.
 
 
-        **Note**: users can be created with admin access role
+        **Note**: Users can only be created with the admin access role
 
-        only with application keys belonging to administrators.'
+        if application keys belong to administrators.'
       operationId: CreateUser
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
-        description: User object that needs to be created
+        description: User object that needs to be created.
         required: true
       responses:
         '200':
@@ -13909,7 +14069,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Conflict
-      summary: Create user
+      summary: Create a user
       tags:
       - Users
       x-codegen-request-body-name: body
@@ -13923,7 +14083,7 @@ paths:
         administrators.'
       operationId: DisableUser
       parameters:
-      - description: The handle of the user
+      - description: The handle of the user.
         in: path
         name: user_handle
         required: true
@@ -13956,11 +14116,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Disable user
+      summary: Disable a user
       tags:
       - Users
     get:
-      description: Get a user details.
+      description: Get a user's details.
       operationId: GetUser
       parameters:
       - description: The ID of the user.
@@ -13990,7 +14150,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Get user
+      summary: Get user details
       tags:
       - Users
     put:
@@ -14040,7 +14200,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not Found
-      summary: Update user
+      summary: Update a user
       tags:
       - Users
       x-codegen-request-body-name: body
@@ -14285,28 +14445,32 @@ servers:
       default: https
       description: The protocol for accessing the API.
 tags:
-- description: Configure your Datadog-AWS integration directly through Datadog API.
-  externalDocs:
-    description: For more information, see the AWS integration page.
-    url: https://docs.datadoghq.com/integrations/amazon_web_services
+- description: 'Configure your Datadog-AWS integration directly through the Datadog
+    API.
+
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services).'
   name: AWS Integration
-- description: AWS Logs Integration API
+- description: 'Configure your Datadog-AWS-Logs integration directly through Datadog
+    API.
+
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs).'
   externalDocs:
     url: https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs
   name: AWS Logs Integration
-- description: Configure your Datadog-Azure integration directly through the Datadog
+- description: 'Configure your Datadog-Azure integration directly through the Datadog
     API.
+
+    For more information, see the [Datadog-Azure integration page](https://docs.datadoghq.com/integrations/azure).'
   externalDocs:
-    description: For more information, see the Datadog-Azure integration page.
     url: https://docs.datadoghq.com/integrations/azure
   name: Azure Integration
-- description: '[Interact with your dashboard lists](https://docs.datadoghq.com/monitors/downtimes)
-    through the API to make it easier to organize, find, and share all of your dashboards
-    with your team and organization.'
+- description: Interact with your dashboard lists through the API to make it easier
+    to organize, find, and share all of your dashboards with your team and organization.
   name: Dashboard Lists
-- description: Dashboards API
-  externalDocs:
-    url: https://docs.datadoghq.com/api/?lang=bash#dashboards
+- description: 'Interact with your dashboard lists through the API to make it easier
+    to organize,
+
+    find, and share all of your dashboards with your team and organization.'
   name: Dashboards
 - description: '[Downtiming](https://docs.datadoghq.com/monitors/downtimes) gives
 
@@ -14316,21 +14480,19 @@ tags:
 
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
+- description: Interact with embeddable graphs through the API.
+  name: Embeddable Graphs
 - description: 'The events service allows you to programatically post events to the
     event stream
 
-    and fetch events from the event stream.
-
-
-    Events are limited to 4000 characters. If an event is sent out with a message
+    and fetch events from the event stream. Events are limited to 4000 characters.
+    If an event is sent out with a message
 
     containing more than 4000 characters only the 4000 first characters are displayed.'
-  externalDocs:
-    url: https://docs.datadoghq.com/api/?lang=bash#events
   name: Events
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
-    through the Datadog API.'
+    through the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform).'
   externalDocs:
     url: https://docs.datadoghq.com/integrations/google_cloud_platform
   name: GCP Integration
@@ -14343,43 +14505,64 @@ tags:
 
     You need an API and applications key with Admin rights
 
-    to interact with this endpoint.
-
-
-    The full list of keys can be seen on your
+    to interact with this endpoint. The full list of keys can be seen on your
 
     [Datadog API page](https://app.datadoghq.com/account/settings#api).'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
-- description: Manage your logs in Datadog platform over HTTP.
+- description: 'Send your logs to your Datadog platform over HTTP. Limits per HTTP
+    request are:
+
+
+    - Maximum content size per payload: 5MB
+
+    - Maximum size for a single log: 256kB
+
+    - Maximum array size if sending multiple logs in an array: 500 entries
+
+
+    Any log exceeding 256KB is accepted and truncated by Datadog:
+
+    - For a single log request, the API truncates the log at 256KB and returns a 2xx.
+
+    - For a multi-logs request, the API processes all logs, truncates only logs larger
+    than 256KB, and returns a 2xx.
+
+
+    **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log
+    endpoint is `http-intake.logs.datadoghq.eu`.'
   name: Logs
-- description: Manage configuration of log indexes.
+- description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
+
+    You need an API and application key with Admin rights to interact with this endpoint.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/indexes/
   name: Logs Indexes
 - description: "Pipelines and processors operate on incoming logs, parsing\nand transforming\
-    \ them into structured attributes for easier querying.\n\n- See the [Pipelines\
-    \ Configuration Page](https://app.datadoghq.com/logs/pipelines)\n  for a list\
+    \ them into structured attributes for easier querying.\n\n- See the [pipelines\
+    \ configuration page](https://app.datadoghq.com/logs/pipelines)\n  for a list\
     \ of the pipelines and processors currently configured in our UI.\n\n- For more\
-    \ information about Pipelines, see the\n  [Pipeline documentation](https://docs.datadoghq.com/logs/processing).\n\
+    \ information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/processing).\n\
     \n**Note:** These endpoints are only available for admin users.\nMake sure to\
     \ use an application key created by an admin."
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/processing/
   name: Logs Pipelines
-- description: "The metrics endpoint allows you to\n- Post metrics data so it can\
-    \ be graphed on Datadog\u2019s dashboards.\n- Query metrics from any time period.\n\
-    \nNote that a graph can only contain a set number of points\nand as the timeframe\
+- description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can\
+    \ be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n\
+    \n**Note**: A graph can only contain a set number of points\nand as the timeframe\
     \ over which a metric is viewed increases,\naggregation between points occurs\
     \ to stay below that set number.\n\nDatadog has a soft limit of 100 timeseries\
     \ per host\nwhere a timeseries is defined as a unique combination of metric name\
     \ and tag."
   name: Metrics
-- description: 'Monitors allow you to watch a metric or check that you care about,
+- description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
+    a metric or check that you care about,
+
     notifying your team when some defined threshold is exceeded.
 
     Refer to the Creating Monitors page for more information on creating monitors.'
@@ -14387,14 +14570,15 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/monitor_types/
   name: Monitors
-- description: Create, edit, and manage your organizations.
+- description: Create, edit, and manage your organizations. Read more about [multi-org
+    accounts](https://docs.datadoghq.com/account_management/multi_organization).
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/multi_organization
   name: Organizations
-- description: 'Configure your Datadog-PagerDuty integration directly through the
+- description: 'Configure your [Datadog-PagerDuty integration](https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty)
 
-    Datadog API.'
+    directly through the Datadog API.'
   externalDocs:
     url: https://docs.datadoghq.com/api/?lang=bash#integration-pagerduty
   name: PagerDuty Integration
@@ -14405,15 +14589,22 @@ tags:
     url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
   name: Screenboards
   x-deprecated: true
-- description: 'Submit Service Check.
+- description: 'The service check endpoint allows you to post check statuses for use
+    with monitors.
 
-    [Read more about Service Check monitors.][1]
+    Service check messages are limited to 500 characters. If a check is posted with
+    a message
 
-    [Read more about Process Check monitors.][2]
+    containing more than 500 characers, only the first 500 characters are displayed.
 
-    [Read more about Network Check monitors.][3]
 
-    [Read more about Custom Check monitors.][4]
+    - [Read more about Service Check monitors.][1]
+
+    - [Read more about Process Check monitors.][2]
+
+    - [Read more about Network Check monitors.][3]
+
+    - [Read more about Custom Check monitors.][4]
 
 
     [1]: https://docs.datadoghq.com/monitors/monitor_types/host/?tab=checkalert
@@ -14424,26 +14615,21 @@ tags:
 
     [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert'
   name: Service Checks
-- description: 'Service Level Objectives (or SLOs) are a key part of
+- description: '[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)
 
-    the site reliability engineering toolkit.
+    (or SLOs) are a key part of the site reliability engineering toolkit.
 
-    SLOs provide a framework for defining clear targets
+    SLOs provide a framework for defining clear targets around application performance,
 
-    around application performance, which ultimately help teams
+    which ultimately help teams provide a consistent customer experience,
 
-    provide a consistent customer experience, balance feature development
+    balance feature development with platform stability,
 
-    with platform stability, and improve communication with internal
-
-    and external users.
-
-
-    For more information on creating SLOs, see the  Configuring Service Level Objectives
-
-    [info](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration).'
+    and improve communication with internal and external users.'
   name: Service Level Objectives
-- description: Configure your Datadog-Slack integration directly through Datadog API.
+- description: 'Configure your [Datadog-Slack integration](https://docs.datadoghq.com/integrations/slack)
+
+    directly through Datadog API.'
   externalDocs:
     description: For more information about the Datadog-Slack integration, see the
       integration page.
@@ -14451,18 +14637,35 @@ tags:
   name: Slack Integration
 - description: Take graph snapshots using the API.
   name: Snapshots
-- description: 'Datadog Synthetics uses simulated user requests and browser rendering
-    to help you ensure uptime,
-
-    identify regional issues, and track your application performance.'
+- description: "Datadog Synthetics uses simulated user requests and browser rendering\
+    \ to help you ensure uptime,\nidentify regional issues, and track your application\
+    \ performance. You can use Datadog\u2019s API to\ncreate Synthetics API and browser\
+    \ tests programmatically. Synthetics tests are HTTP requests executed by Datadog\
+    \ to\nyour web properties or application endpoints at configurable periodic intervals\
+    \ from multiple\nlocations around the world. These tests verify that your applications\
+    \ are responding to requests,\nas well as that they meet any conditions you define\u2014\
+    such as response time, HTTP status code, and\nheader or body contents.\n\nFor\
+    \ more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
-- description: "The tag endpoint allows you to tag hosts with keywords\nmeaningful\
-    \ to you - like `role:database`. All metrics sent\nfrom a host have its tags applied.\
-    \ When fetching and applying\ntags to a particular host, refer to hosts by name\
-    \ (yourhost.example.com).\n\nThe component of your infrastructure responsible\
-    \ for a tag is identified\nby a source. Valid sources are: nagios, hudson, jenkins,\
-    \ users, feed,\nchef, puppet, git, bitbucket, fabric, capistrano\u2026\n\nRead\
-    \ more about tags on the dedicated\n[documentation page](https://docs.datadoghq.com/tagging)."
+- description: 'The tag endpoint allows you to tag hosts with keywords
+
+    meaningful to you, like `role:database`. All metrics sent
+
+    from a host have its tags applied. When fetching and applying
+
+    tags to a particular host, refer to hosts by name (yourhost.example.com).
+
+
+    The component of your infrastructure responsible for a tag is identified
+
+    by a source. For example, some valid sources include nagios, hudson, jenkins,
+
+    users, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.
+
+
+    Read more about tags on the dedicated
+
+    [documentation page](https://docs.datadoghq.com/tagging).'
   name: Tags
 - description: This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/#dashboards)
     instead.
@@ -14482,22 +14685,34 @@ tags:
 
     so your Agent can forward them to Datadog.'
   name: Tracing
-- description: View organization usage data.
+- description: 'The useage metering API allows you to get hourly, daily, and
+
+    monthly useage across multiple facets of Datadog.
+
+    This API is available to all Pro and Enterprise customers.
+
+    Usage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
+
+
+    **Note**: Usage data is delayed by up to 72 hours from when it was incurred.
+
+    It is retained for the past 15 months.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/billing/usage_details/
   name: Usage Metering
-- description: 'Create, edit, and disable users. [Read more about your team management][1]
+- description: 'Create, edit, and disable users. [Read more about team management][1].
 
 
     [1]: https://docs.datadoghq.com/account_management/team'
   name: Users
-- description: Configure your Datadog-Webhooks integration directly through the Datadog
+- description: 'Configure your Datadog-Webhooks integration directly through the Datadog
     API.
-  externalDocs:
-    description: 'For more information about the Datadog-Webhooks integration,
 
-      see the integration page.'
+    For more information about the Datadog-Webhooks integration,
+
+    see the [integration page](https://docs.datadoghq.com/integrations/webhooks).'
+  externalDocs:
     url: https://docs.datadoghq.com/integrations/webhooks
   name: Webhooks Integration
 x-group-parameters: true

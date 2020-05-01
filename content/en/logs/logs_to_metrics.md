@@ -64,6 +64,8 @@ Log Management usage metrics come with three tags that can be used for more gran
 |  `datadog_is_excluded`  | Indicates whether or not a log matches an exclusion query.            |
 |  `service`              | The service attribute of the log event.                               |
 
+An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested_events` metric to reflect the log status (`info`, `warning`, etc.).
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

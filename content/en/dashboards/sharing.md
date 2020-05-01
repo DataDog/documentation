@@ -104,9 +104,9 @@ Datadog has a [dedicated API][8] allowing you to interact with your shared graph
 [5]: https://app.datadoghq.com/dashboard/lists
 [6]: /help/
 [7]: https://app.datadoghq.com/account/org_security
-[8]: /api/#embeddable-graphs
-[9]: /api/#get-all-embeds
-[10]: /api/#create-embed
-[11]: /api/#get-specific-embed
-[12]: /api/#enable-embed
-[13]: /api/#revoke-embed
+[8]: i/api/v1/embeddable-graphs/
+[9]: /api/v1/embeddable-graphs/#get-all-embeds
+[10]: /api/v1/embeddable-graphs/#create-embed
+[11]: /api/v1/embeddable-graphs/#get-specific-embed
+[12]: /api/v1/embeddable-graphs/#enable-embed
+[13]: /api/v1/embeddable-graphs/#revoke-embed
