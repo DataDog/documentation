@@ -40,12 +40,12 @@ components:
   responses: {}
   schemas:
     APIErrorResponse:
-      description: TODO.
+      description: API error response.
       properties:
         errors:
-          description: TODO.
+          description: A list of errors.
           items:
-            description: TODO.
+            description: A list of items.
             example: Bad Request
             type: string
           type: array
@@ -56,17 +56,17 @@ components:
       description: Creator of the object.
       properties:
         email:
-          description: TODO.
+          description: Email of the creator.
           type: string
         handle:
-          description: TODO.
+          description: Handle of the creator.
           type: string
         name:
-          description: TODO.
+          description: Name of the creator.
           type: string
       type: object
     DashboardListAddItemsResponse:
-      description: TODO.
+      description: Response containing a list of added dashboards.
       properties:
         added_dashboards_to_list:
           description: List of dashboards added to the dashboard list.
@@ -75,7 +75,7 @@ components:
           type: array
       type: object
     DashboardListDeleteItemsResponse:
-      description: TODO.
+      description: Response containing a list of deleted dashboards.
       properties:
         deleted_dashboards_from_list:
           description: List of dashboards deleted from the dashboard list.
@@ -84,7 +84,7 @@ components:
           type: array
       type: object
     DashboardListItem:
-      description: TODO.
+      description: A dashboard within a list.
       properties:
         author:
           $ref: '#/components/schemas/Creator'
@@ -138,7 +138,7 @@ components:
       - id
       type: object
     DashboardListItems:
-      description: TODO.
+      description: Dashboards within a list.
       properties:
         dashboards:
           description: List of dashboards in the dashboard list.
@@ -345,14 +345,14 @@ components:
           type: string
         type:
           default: roles
-          description: TODO
+          description: Type of role.
           type: string
       type: object
     RelationshipToRoles:
       description: Relationship to roles.
       properties:
         data:
-          description: TODO.
+          description: An array containing type and ID of a role.
           items:
             $ref: '#/components/schemas/RelationshipToRoleData'
           type: array
@@ -431,7 +431,7 @@ components:
           type: string
       type: object
     RoleCreateData:
-      description: TODO
+      description: Data related to the creation of a role.
       properties:
         attributes:
           $ref: '#/components/schemas/RoleCreateAttributes'
@@ -483,7 +483,7 @@ components:
           type: string
       type: object
     RoleUpdateData:
-      description: TODO
+      description: Data related to the update of a role.
       properties:
         attributes:
           $ref: '#/components/schemas/RoleUpdateAttributes'
@@ -492,7 +492,7 @@ components:
           type: string
         type:
           default: roles
-          description: TODO
+          description: Type of role.
           type: string
       type: object
     RoleUpdatePayload:
