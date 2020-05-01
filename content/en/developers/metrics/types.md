@@ -305,7 +305,6 @@ Find below a summary of all available metric submission sources and methods with
 | [DogStatsD][16]   | `dog.decrement(...)`                 | COUNT           | RATE                 |
 | [DogStatsD][17]   | `dog.set(...)`                       | SET             | GAUGE                |
 | [DogStatsD][18]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE          |
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
