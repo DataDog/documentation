@@ -24,7 +24,7 @@ Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do 
 
 ## Activate log collection
 
-Collecting logs is **disabled** by default in the Datadog Agent. To lean how to enable it with the host Agent see the instructions below, if you are running the Agent in a kuberentes or docker environment, see the dedicated. [Kubernetes Log Collection][2] and [Docker Log Collection][3] documentations.
+Collecting logs is **disabled** by default in the Datadog Agent. To lean how to enable it with the host Agent, see the instructions below. If you are running the Agent in a Kuberentes or Docker environment, see the dedicated [Kubernetes Log Collection][2] or [Docker Log Collection][3] documentation.
 
 To enable log collection with an Agent running on your host, update the Agent's [main configuration file][4] (`datadog.yaml`) with:
 
@@ -32,7 +32,7 @@ To enable log collection with an Agent running on your host, update the Agent's 
 logs_enabled: true
 ```
 
-Starting with Agent v6.19+/v7.19+, HTTPS transport is the default transport used. For more details on how enforce HTTPS/TCP transport, refer to the [Agent transport documentation][5].
+Starting with Agent v6.19+/v7.19+, HTTPS transport is the default transport used. For more details on how to enforce HTTPS/TCP transport, refer to the [Agent transport documentation][5].
 
 To send logs with environment variables, configure the following:
 
@@ -42,7 +42,7 @@ After activating log collection, the Agent is ready to forward logs to Datadog. 
 
 ## Enabling log collection from integrations
 
-To collect logs for a given integration, uncomment the logs section in that integration's `conf.yaml` file and configure it for your environment. If you are running the Agent in a kubernetes or docker environment, see the dedicated. [Kubernetes Log Collection][6] and [Docker Log Collection][7] documentations.
+To collect logs for a given integration, uncomment the logs section in that integration's `conf.yaml` file and configure it for your environment. If you are running the Agent in a Kubernetes or Docker environment, see the dedicated [Kubernetes Log Collection][6] or [Docker Log Collection][7] documentation.
 
 <div class="alert alert-warning">
 Consult the <a href="/integrations/#cat-log-collection">list of supported integrations</a>  that include out of the box log configurations.

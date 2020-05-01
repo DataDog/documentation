@@ -41,7 +41,7 @@ To send only a specific subset of logs to Datadog use the `log_processing_rules`
 |--------------------|----------------------------------------------------------------------------------------------------|
 | `exclude_at_match` | If the specified pattern is contained in the message, the log is excluded and not sent to Datadog. |
 
-For example, **filtering OUT** logs that contain a Datadog email address, use the following `log_processing_rules`:
+For example, to **filter OUT** logs that contain a Datadog email address, use the following `log_processing_rules`:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -128,7 +128,7 @@ spec:
 | `include_at_match` | Only logs with a message that includes the specified pattern are sent to Datadog. |
 
 
-For example, **filtering IN** logs that contain a Datadog email address, use the following `log_processing_rules`:
+For example, to **filter IN** logs that contain a Datadog email address, use the following `log_processing_rules`:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -297,12 +297,12 @@ spec:
 
 With Agent version 7.17+, the `replace_placeholder` string can expand references to capture groups such as `$1`, `$2` and so forth. If you want a string to follow the capture group with no space in between, use the format `${<GROUP_NUMBER>}`.
 
-For instance, to scrub user information from the log `User email: foo.bar@example.com`, using:
+For instance, to scrub user information from the log `User email: foo.bar@example.com`, use:
 
 * `pattern: "(User email: )[^@]*@(.*)"`
 * `replace_placeholder: "$1 masked_user@${2}"`
 
-Would send the following log to Datadog: `User email: masked_user@example.com`
+This sends the following log to Datadog: `User email: masked_user@example.com`
 
 ## Multi-line aggregation
 
