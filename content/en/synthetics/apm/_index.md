@@ -8,7 +8,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
     tag: "Blog"
     text: "Introducing Datadog Synthetics"
-  - link: "tracing/"
+  - link: "/tracing/"
     tag: "Documentation"
     text: "APM and Distributed Tracing"
 

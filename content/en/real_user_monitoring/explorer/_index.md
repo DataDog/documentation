@@ -4,10 +4,10 @@ kind: documentation
 aliases:
 - /real_user_monitoring/rum_explorer
 further_reading:
-- link: "/real_user_monitoring/explorer/search"
+- link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/rum_explorer"
+- link: "/real_user_monitoring/rum_explorer/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
 ---

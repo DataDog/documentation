@@ -5,10 +5,10 @@ aliases:
  - /developers/metrics/metric_type_modifiers
  - /graphing/faq/as_count_validation
 further_reading:
-- link: "developers/dogstatsd"
+- link: "/developers/dogstatsd/"
   tag: "Documentation"
   text: "Learn more about DogStatsD"
-- link: "developers/libraries"
+- link: "/developers/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
 ---

@@ -7,19 +7,19 @@ aliases:
   - /logs/languages
   - /integrations/windows_event_log/
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Discover how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/live_tail"
+- link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Datadog live tail functionality"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "See how to explore your logs"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging Without Limits*"
 ---
@@ -284,7 +284,7 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [11]: /logs/processing/parsing/
 [12]: /logs/explorer/facets/
 [13]: /agent/docker/log/
-[14]: /agent/kubernetes/management/
+[14]: /agent/guide/autodiscovery-management/
 [15]: /agent/kubernetes/integrations/
 [16]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 [17]: /integrations/amazon_lambda/#log-collection

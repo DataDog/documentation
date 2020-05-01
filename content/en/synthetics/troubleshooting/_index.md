@@ -3,13 +3,13 @@ title: Synthetics Troubleshooting
 kind: documentation
 description: Troubleshoot common Synthetics issues.
 further_reading:
-- link: "synthetics/"
+- link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your Synthetics tests"
-- link: "synthetics/browser_tests"
+- link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "synthetics/api_tests"
+- link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
 ---

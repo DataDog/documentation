@@ -7,16 +7,16 @@ aliases:
   - /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
   - /developers/faq/what-do-notifications-do-in-datadog
 further_reading:
-- link: "monitors/monitor_types"
+- link: "/monitors/monitor_types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "monitors/manage_monitor"
+- link: "/monitors/manage_monitor/"
   tag: "Documentation"
   text: "Manage your monitors"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime for your monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---

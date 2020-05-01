@@ -5,7 +5,7 @@ beta: true
 aliases:
   - /account_management/authen_mapping/
 further_reading:
-- link: "account_management/rbac/log_management/"
+- link: "/account_management/rbac/log_management/"
   tag: "Documentation"
   text: "RBAC for Log Management"
 ---

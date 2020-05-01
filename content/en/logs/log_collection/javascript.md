@@ -7,10 +7,10 @@ further_reading:
 - link: "https://www.npmjs.com/package/@datadog/browser-logs"
   tag: "NPM"
   text: "@datadog/browser-logs NPM package"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 ---

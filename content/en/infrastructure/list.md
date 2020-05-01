@@ -5,13 +5,13 @@ aliases:
   - /hostnames
   - /graphing/infrastructure/list/
 further_reading:
-- link: "/infrastructure/hostmap"
+- link: "/infrastructure/hostmap/"
   tag: "Documentation"
   text: "Host Map"
-- link: "/infrastructure/livecontainers"
+- link: "/infrastructure/livecontainers/"
   tag: "Documentation"
   text: "Container Map"
-- link: "/infrastructure/process"
+- link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Live Process Monitoring"
 ---

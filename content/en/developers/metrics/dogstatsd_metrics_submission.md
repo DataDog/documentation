@@ -7,10 +7,10 @@ aliases:
   - /developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /developers/faq/dog-statsd-sample-rate-parameter-explained
 further_reading:
-- link: "developers/dogstatsd"
+- link: "/developers/dogstatsd/"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "developers/metrics/types"
+- link: "/developers/metrics/types/"
   tag: "Documentation"
   text: "Datadog Metric Types"
 ---

@@ -4,19 +4,19 @@ kind: documentation
 aliases:
     - /agent/kubernetes/apm
 further_reading:
-- link: "agent/kubernetes/log"
+- link: "/agent/kubernetes/log/"
   tag: "Documentation"
   text: "Collect your application logs"
-- link: "/agent/kubernetes/prometheus"
+- link: "/agent/kubernetes/prometheus/"
   tag: "Documentation"
   text: "Collect your Prometheus metrics"
-- link: "/agent/kubernetes/integrations"
+- link: "/agent/kubernetes/integrations/"
   tag: "Documentation"
   text: "Collect automatically your applications metrics and logs"
-- link: "/agent/guide/autodiscovery-management"
+- link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Limit data collection to a subset of containers only"
-- link: "/agent/kubernetes/tag"
+- link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
 ---

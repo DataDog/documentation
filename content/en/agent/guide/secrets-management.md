@@ -2,7 +2,7 @@
 title: Secrets Management
 kind: documentation
 further_reading:
-- link: "agent/autodiscovery"
+- link: "/agent/autodiscovery/"
   tag: "Documentation"
   text: "Autodiscovery"
 ---

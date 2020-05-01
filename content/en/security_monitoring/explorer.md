@@ -6,7 +6,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/announcing-security-monitoring/"
     tag: "Blog"
     text: "Security Monitoring"
-  - link: "/security_monitoring/detection_rules"
+  - link: "/security_monitoring/detection_rules/"
     tag: "Documentation"
     text: "Detection Rules"
 ---

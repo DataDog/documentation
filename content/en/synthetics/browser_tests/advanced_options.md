@@ -3,7 +3,7 @@ title: Advanced Options for Browser Test Actions
 kind: documentation
 description: Configure advanced options for Browser Test Actions
 further_reading:
-- link: "synthetics/browser_tests/actions"
+- link: "/synthetics/browser_tests/actions/"
   tag: "Documentation"
   text: "Learn more about Browser Test Actions"
 ---

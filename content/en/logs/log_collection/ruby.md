@@ -7,10 +7,10 @@ further_reading:
 - link: "https://github.com/roidrage/lograge"
   tag: "Github"
   text: "Lograge Documentation"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---

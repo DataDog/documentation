@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /graphing/notebooks/
 further_reading:
-- link: "/dashboards/screenboard"
+- link: "/dashboards/screenboard/"
   tag: "Documentation"
   text: "Create a Screenboard"
-- link: "/dashboards/timeboard"
+- link: "/dashboards/timeboard/"
   tag: "Documentation"
   text: "Create a Timeboard"
 ---

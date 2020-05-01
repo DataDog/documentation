@@ -4,10 +4,10 @@ kind: guide
 aliases:
   - /logs/faq/log-collection-troubleshooting-guide
 further_reading:
-- link: "/logs/log_collection"
+- link: "/logs/log_collection/"
   tag: "Documentation"
   text: "Learn how to collect your logs"
-- link: "/logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 - link: "/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/"

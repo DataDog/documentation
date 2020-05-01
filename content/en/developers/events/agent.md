@@ -2,7 +2,7 @@
 title: Events with a Custom Agent Check
 kind: documentation
 further_reading:
-- link: "developers/write_agent_check/"
+- link: "/developers/write_agent_check/"
   tag: "Documentation"
   text: "Writing a Custom Agent Check"
 ---

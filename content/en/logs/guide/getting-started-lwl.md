@@ -2,16 +2,16 @@
 title: Logging Without Limits™ Guide
 kind: guide
 further_reading:
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn more about Log Explorer"
-- link: "logs/explorer/patterns/"
+- link: "/logs/explorer/patterns/"
   tag: "Documentation"
   text: "Get familiar with the Logs pattern view"
-- link: "logs/live_tail"
+- link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Explore Live Tail"
-- link: "logs/logs_to_metrics"
+- link: "/logs/logs_to_metrics/"
   tag: "Documentation"
   text: "Learn how to generate metrics from ingested logs"
 ---

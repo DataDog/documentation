@@ -2,16 +2,16 @@
 title: Categories of Data
 kind: documentation
 further_reading:
-- link: "security/tracing"
+- link: "/security/tracing/"
   tag: "Documentation"
   text: "APM Security"
-- link: "security/logs"
+- link: "/security/logs/"
   tag: "Documentation"
   text: "Logs Security"
-- link: "security/agent"
+- link: "/security/agent/"
   tag: "Documentation"
   text: "Agent Security"
-- link: "security/other"
+- link: "/security/other/"
   tag: "Documentation"
   text: "Additional Security Considerations"
 ---

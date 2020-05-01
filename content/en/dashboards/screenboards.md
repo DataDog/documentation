@@ -6,13 +6,13 @@ aliases:
     - /graphing/dashboards/screenboard/
     - /dashboards/screenboard/
 further_reading:
-- link: "/dashboards/template_variables"
+- link: "/dashboards/template_variables/"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
-- link: "/dashboards/sharing"
+- link: "/dashboards/sharing/"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
-- link: "/dashboards/widgets"
+- link: "/dashboards/widgets/"
   tag: "Documentation"
   text: "Discover all available Widgets for your Dashboard"
 ---

@@ -3,10 +3,10 @@ title: Watchdog Monitor
 kind: documentation
 description: "Algorithmically detects application and infrastructure issues."
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "watchdog"
+- link: "/watchdog/"
   tag: "Documentation"
   text: "Watchdog, algorithmically detect application and infrastructure issues"
 ---

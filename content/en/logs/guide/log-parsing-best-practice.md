@@ -4,13 +4,13 @@ kind: guide
 aliases:
   - /logs/faq/log-parsing-best-practice
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/faq/how-to-investigate-a-log-parsing-issue"
+- link: "/logs/faq/how-to-investigate-a-log-parsing-issue/"
   tag: "FAQ"
   text: "How to investigate a log parsing issue?"
 ---

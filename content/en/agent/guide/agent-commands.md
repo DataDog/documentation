@@ -6,7 +6,7 @@ aliases:
     - /agent/faq/start-stop-restart-the-datadog-agent
     - /agent/faq/agent-commands
 further_reading:
-- link: "/agent/troubleshooting"
+- link: "/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
 ---

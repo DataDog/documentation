@@ -5,22 +5,22 @@ aliases:
     - /agent/faq/agent-s-are-no-longer-reporting-data
     - /agent/faq/common-windows-agent-installation-error-1721
 further_reading:
-- link: "/agent/troubleshooting/debug_mode"
+- link: "/agent/troubleshooting/debug_mode/"
   tag: "Documentation"
   text: "Agent Debug Mode"
-- link: "/agent/troubleshooting/send_a_flare"
+- link: "/agent/troubleshooting/send_a_flare/"
   tag: "Documentation"
   text: "Send an Agent Flare"
-- link: "/agent/troubleshooting/permissions"
+- link: "/agent/troubleshooting/permissions/"
   tag: "Documentation"
   text: "Agent Permission Issues"
-- link: "/agent/troubleshooting/site"
+- link: "/agent/troubleshooting/site/"
   tag: "Documentation"
   text: "Check Agent Site"
-- link: "/agent/troubleshooting/ntp"
+- link: "/agent/troubleshooting/ntp/"
   tag: "Documentation"
   text: "Agent NTP issues"
-- link: "/agent/troubleshooting/agent_check_status"
+- link: "/agent/troubleshooting/agent_check_status/"
   tag: "Documentation"
   text: "Get the Status of an Agent Check"
 ---

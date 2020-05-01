@@ -2,7 +2,7 @@
 title: Custom Metrics Server for the Cluster Agent
 kind: guide
 further_reading:
-- link: "agent/kubernetes/cluster/"
+- link: "/agent/kubernetes/cluster/"
   tag: "Documentation"
   text: "Datadog Cluster Agent"
 ---

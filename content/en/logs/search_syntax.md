@@ -7,16 +7,16 @@ aliases:
     - /logs/search-syntax
     - /logs/explorer/search/
 further_reading:
-- link: "logs/explorer/analytics"
+- link: "/logs/explorer/analytics/"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "logs/explorer/patterns"
+- link: "/logs/explorer/patterns/"
   tag: "Documentation"
   text: "Detect patterns inside your logs"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/explorer/saved_views"
+- link: "/logs/explorer/saved_views/"
   tag: "Documentation"
   text: "Automatically configure your Log Explorer"
 ---

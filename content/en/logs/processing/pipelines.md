@@ -3,13 +3,13 @@ title: Pipelines
 kind: documentation
 description: "Parse your logs using the Grok Processor"
 further_reading:
-- link: "logs/processing/processors"
+- link: "/logs/processing/processors/"
   tag: "Documentation"
   text: "Consult the full list of available Processors"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without limit"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 - link: "https://learn.datadoghq.com/course/view.php?id=10"

@@ -7,7 +7,7 @@ aliases:
     - /guides/logs/
     - /logs/logging_without_limits
 further_reading:
-- link: "/logs/guide"
+- link: "/logs/guide/"
   tag: "Guide"
   text: Additional helpful articles about log collection and processing.
 - link: "https://learn.datadoghq.com"

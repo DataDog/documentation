@@ -9,10 +9,10 @@ aliases:
   - /logs/archives/gcs/
   - /logs/archives/gcp/
 further_reading:
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Log Explorer"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without Limits*"
 ---

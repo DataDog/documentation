@@ -2,7 +2,7 @@
 title: Postgres Custom Metric Collection
 kind: faq
 further_reading:
-- link: "integrations/postgres/"
+- link: "/integrations/postgres/"
   tag: "Documentation"
   text: "Postgres Integration"
 ---

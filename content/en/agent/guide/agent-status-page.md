@@ -2,13 +2,13 @@
 title: Agent v6 Status Page
 kind: guide
 further_reading:
-- link: "agent/troubleshooting/"
+- link: "/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
-- link: "agent/guide/agent-configuration-files/"
+- link: "/agent/guide/agent-configuration-files/"
   tag: "Guide"
   text: "Agent Configuration Files"
-- link: "agent/guide/agent-commands/"
+- link: "/agent/guide/agent-commands/"
   tag: "Guide"
   text: "Agent Commands"
 ---

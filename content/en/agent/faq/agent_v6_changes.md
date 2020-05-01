@@ -4,10 +4,10 @@ kind: faq
 aliases:
  - /agent/faq/agent-v6-changes
 further_reading:
-- link: "agent/versions/upgrade_to_agent_v6/"
+- link: "/agent/versions/upgrade_to_agent_v6/"
   tag: "Documentation"
   text: "Upgrade to Datadog Agent v6"
-- link: "agent/faq/how-datadog-agent-determines-the-hostname/"
+- link: "/agent/faq/how-datadog-agent-determines-the-hostname/"
   tag: "Documentation"
   text: "How does Datadog determine the Agent hostname?"
 ---
@@ -349,7 +349,7 @@ Some options have moved from `docker_daemon.yaml` to the main `datadog.yaml`:
 
 [1]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
 [2]: /agent/docker/tag/
-[3]: /agent/kubernetes/management/
+[3]: /agent/guide/autodiscovery-management/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 

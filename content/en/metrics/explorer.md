@@ -5,10 +5,10 @@ description: "Explore all of your metrics and perform analytics."
 aliases:
   - /graphing/metrics/explorer/
 further_reading:
-  - link: "/metrics/summary"
+  - link: "/metrics/summary/"
     tag: "Documentation"
     text: "Metrics Summary"
-  - link: "/metrics/distributions"
+  - link: "/metrics/distributions/"
     tag: "Documentation"
     text: "Metrics Distributions"
 ---

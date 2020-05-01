@@ -5,7 +5,7 @@ description: "Displays a timeseries of network data."
 aliases:
     - /graphing/widgets/network/
 further_reading:
-- link: "network_performance_monitoring/"
+- link: "/network_performance_monitoring/"
   tag: "Documentation"
   text: "Network Performance Monitoring"
 - link: "/dashboards/screenboards/"

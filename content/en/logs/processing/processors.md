@@ -3,13 +3,13 @@ title: Processors
 kind: documentation
 description: "Parse your logs using the Grok Processor"
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "/logs/processing/pipelines/"
   tag: "Documentation"
   text: "Discover Datadog Pipelines"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without limit"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 ---

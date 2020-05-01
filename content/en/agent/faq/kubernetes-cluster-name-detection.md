@@ -2,13 +2,13 @@
 title: Kubernetes cluster name auto detection
 kind: faq
 further_reading:
-- link: "agent/autodiscovery"
+- link: "/agent/autodiscovery/"
   tag: "documentation"
   text: Docker Agent Autodiscovery
-- link: "agent/kubernetes/host_setup"
+- link: "/agent/kubernetes/host_setup/"
   tag: "documentation"
   text: "Kubernetes Host Setup"
-- link: "agent/kubernetes/integrations"
+- link: "/agent/kubernetes/integrations/"
   tag: "documentation"
   text: "Custom Integrations"
 ---

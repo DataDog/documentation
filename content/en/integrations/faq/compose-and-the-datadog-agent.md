@@ -5,7 +5,7 @@ further_reading:
 - link: "https://github.com/DataDog/docker-compose-example"
   tag: "Github"
   text: "Using Docker Compose with Datadog Example"
-- link: "/agent/docker"
+- link: "/agent/docker/"
   tag: "Documentation"
   text: "Datadog Docker Agent documentation"
 ---

@@ -6,10 +6,10 @@ aliases:
   - /graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
   - /graphing/metrics/summary/
 further_reading:
-  - link: "/metrics/explorer"
+  - link: "/metrics/explorer/"
     tag: "Documentation"
     text: "Metrics Explorer"
-  - link: "/metrics/distributions"
+  - link: "/metrics/distributions/"
     tag: "Documentation"
     text: "Metrics Distributions"
 ---

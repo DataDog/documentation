@@ -2,13 +2,13 @@
 title: I have a custom log file with heightened read-permissions; how do I send it to Datadog?
 kind: faq
 further_reading:
-- link: "logs/log_collection"
+- link: "/logs/log_collection/"
   tag: "Documentation"
   text: "Learn how to collect your logs"
-- link: "/logs/log_collection"
+- link: "/logs/log_collection/"
   tag: "Documentation"
   text: "How to Send Logs to Datadog via External Log Shippers?"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 ---

@@ -7,7 +7,7 @@ further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
-- link: "/dashboards/graphing_json/request_json"
+- link: "/dashboards/graphing_json/request_json/"
   tag: "Documentation"
   text: "Request JSON schema"
 ---

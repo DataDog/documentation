@@ -8,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-aws-fargate/"
   tag: "Blog"
   text: "Monitor AWS Fargate applications with Datadog"
-- link: "/agent/docker/integrations"
+- link: "/agent/docker/integrations/"
   tag: "Documentation"
   text: "Autodiscovery"
 ---

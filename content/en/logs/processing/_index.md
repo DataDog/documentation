@@ -3,16 +3,16 @@ title: Processing
 kind: documentation
 description: "Parse & Enrich your logs to create valuable facets & metrics in the Logs Explorer."
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "/logs/processing/pipelines/"
   tag: "Documentation"
   text: "Discover Datadog Pipelines"
-- link: "logs/processing/processors"
+- link: "/logs/processing/processors/"
   tag: "Documentation"
   text: "Consult the full list of available Processors."
-- link: "logs/processing/attributes_naming_convention"
+- link: "/logs/processing/attributes_naming_convention/"
   tag: "Documentation"
   text: "Datadog log attributes naming convention"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 ---

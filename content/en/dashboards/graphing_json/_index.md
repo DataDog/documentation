@@ -6,10 +6,10 @@ aliases:
   - /graphing/miscellaneous/graphingjson
   - /graphing/graphing_json/
 further_reading:
-- link: "/dashboards/widgets"
+- link: "/dashboards/widgets/"
   tag: "Documentation"
   text: "Widgets"
-- link: "/dashboards/graphing_json/request_json"
+- link: "/dashboards/graphing_json/request_json/"
   tag: "Documentation"
   text: "Request JSON schema"
 ---

@@ -2,7 +2,7 @@
 title: Threat Detection Rules
 kind: documentation
 further_reading:
-- link: "/security_monitoring/explorer"
+- link: "/security_monitoring/explorer/"
   tag: "Documentation"
   text: "Search through all of your security signals and perform Security Analytics"
 ---

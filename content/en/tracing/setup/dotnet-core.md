@@ -13,10 +13,10 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
     tag: "Blog"
     text: ".NET monitoring with Datadog APM and distributed tracing"
-  - link: "tracing/visualization/"
+  - link: "/tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources and traces"
-  - link: "tracing/"
+  - link: "/tracing/"
     tag: "Advanced Usage"
     text: "Advanced Usage"
 ---

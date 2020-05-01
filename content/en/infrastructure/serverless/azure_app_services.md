@@ -5,7 +5,7 @@ further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
   text: "Azure App Service"
-- link: "integrations/azure_app_service_environment"
+- link: "/integrations/azure_app_service_environment/"
   tag: "Documentation"
   text: "Azure App Service Environment"
 ---

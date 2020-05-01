@@ -2,7 +2,7 @@
 title: APM Troubleshooting
 kind: documentation
 further_reading:
-- link: "/tracing/troubleshooting/agent_apm_metrics"
+- link: "/tracing/troubleshooting/agent_apm_metrics/"
   tag: "Documentation"
   text: "APM metrics sent by the Datadog Agent"
 ---

@@ -4,22 +4,22 @@ kind: documentation
 aliases:
  - /agent/autodiscovery/basic_autodiscovery
 further_reading:
-- link: "/agent/kubernetes/integrations"
+- link: "/agent/kubernetes/integrations/"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/guide/ad_identifiers"
+- link: "/agent/guide/ad_identifiers/"
   tag: "Documentation"
   text: "Match a container with the corresponding Integration Template"
-- link: "/agent/kubernetes/management"
+- link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
-- link: "/agent/kuberenetes/tag"
+- link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Dynamically assign and collect tags from your application"
 - link: "/integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui"
   tag: "faq"
   text: "Integration Setup for ECS Fargate"
-- link: "/agent/guide/secrets-management"
+- link: "/agent/guide/secrets-management/"
   tag: "Documentation"
   text: "Secrets Management"
 ---

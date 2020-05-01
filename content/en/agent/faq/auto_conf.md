@@ -4,10 +4,10 @@ kind: faq
 aliases:
  - /agent/autodiscovery/auto_conf
 further_reading:
-- link: "/agent/kubernetes/integrations"
+- link: "/agent/kubernetes/integrations/"
   tag: "Documentation"
   text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/guide/autodiscovery-management"
+- link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
 ---

@@ -2,7 +2,7 @@
 title: "Service Check Submission: Agent Check"
 kind: documentation
 further_reading:
-- link: "developers/write_agent_check/"
+- link: "/developers/write_agent_check/"
   tag: "Documentation"
   text: "Write an Agent Custom Check"
 ---
