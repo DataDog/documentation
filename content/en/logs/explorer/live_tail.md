@@ -83,5 +83,5 @@ To filter on all logs with a line number above 150 use the following query: `@li
 <br>
 \*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /logs/processing/pipelines
-[2]: /logs
+[1]: /logs/processing/pipelines/
+[2]: /logs/

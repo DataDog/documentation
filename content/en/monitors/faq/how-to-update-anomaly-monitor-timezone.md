@@ -5,7 +5,7 @@ further_reading:
 - link: "/monitors/monitor_types/anomaly/"
   tag: "Documentation"
   text: "Create an anomaly monitor"
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure monitor notifications"
 ---

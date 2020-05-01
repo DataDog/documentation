@@ -2,10 +2,10 @@
 title: Monitor your log usage
 kind: guide
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
 ---
@@ -77,7 +77,7 @@ To import this dashboard, copy the [estimated usage dashboard JSON definition][9
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs
-[2]: /logs/explorer/search
+[2]: /logs/explorer/search/
 [3]: /logs/indexes/#set-daily-quota
 [4]: /logs/logs_to_metrics/#recommended-usage-metrics
 [5]: https://app.datadoghq.com/logs/pipelines/generate-metrics

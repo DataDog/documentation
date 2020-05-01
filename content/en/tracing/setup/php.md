@@ -11,10 +11,10 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
   text: "Source code"
-- link: "tracing/visualization/"
+- link: "/tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "tracing/"
+- link: "/tracing/"
   tag: "Documentation"
   text: "Advanced Usage"
 ---
@@ -293,16 +293,16 @@ To upgrade the PHP tracer, [download the latest release][6] and follow the same 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization
+[1]: /tracing/visualization/
 [2]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
-[3]: /tracing/send_traces
-[4]: /tracing/setup/docker
+[3]: /tracing/send_traces/
+[4]: /tracing/setup/docker/
 [5]: /agent/kubernetes/apm/
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://app.datadoghq.com/apm/services
 [8]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
-[9]: /tracing/faq/php-tracer-manual-installation
+[9]: /tracing/faq/php-tracer-manual-installation/
 [10]: /tracing/setup/php/#environment-variable-configuration
-[11]: /help
+[11]: /help/
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param

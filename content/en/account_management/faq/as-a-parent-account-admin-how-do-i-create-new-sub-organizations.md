@@ -8,4 +8,4 @@ This feature allows all administrator users in the parent account to create new 
 
 {{< img src="account_management/faq/mceclip0.png" alt="mceclip0"  >}}
 
-[1]: /account_management/multi_organization
+[1]: /account_management/multi_organization/

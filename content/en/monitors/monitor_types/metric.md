@@ -3,13 +3,13 @@ title: Metric Monitor
 kind: documentation
 description: "Compare values of a metric with a user defined threshold"
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -51,7 +51,7 @@ On each alert evaluation, Datadog calculates the percentage of the series that f
 
 For more detailed information, see the [Anomaly Monitor][1] page.
 
-[1]: /monitors/monitor_types/anomaly
+[1]: /monitors/monitor_types/anomaly/
 {{% /tab %}}
 {{% tab "Outliers" %}}
 
@@ -61,7 +61,7 @@ On each alert evaluation, Datadog checks whether or not all groups are clustered
 
 For more detailed information, see the [Outlier Monitor][1] page.
 
-[1]: /monitors/monitor_types/outlier
+[1]: /monitors/monitor_types/outlier/
 {{% /tab %}}
 {{% tab "Forecast" %}}
 
@@ -71,7 +71,7 @@ On each alert evaluation, a forecast alert predicts the future values of the met
 
 For more detailed information, see the [Forecast Monitor][1] page.
 
-[1]: /monitors/monitor_types/forecasts
+[1]: /monitors/monitor_types/forecasts/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -120,7 +120,7 @@ The alert conditions vary slightly based on the chosen detection method.
 
 **Note**: There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][1] for details.
 
-[1]: /monitors/guide/as-count-in-monitor-evaluations
+[1]: /monitors/guide/as-count-in-monitor-evaluations/
 {{% /tab %}}
 {{% tab "Change" %}}
 
@@ -204,5 +204,5 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /tagging/using_tags/?tab=assignment
 [3]: /dashboards/querying/#advanced-graphing
-[4]: /monitors/faq/what-are-recovery-thresholds
-[5]: /monitors/notifications
+[4]: /monitors/faq/what-are-recovery-thresholds/
+[5]: /monitors/notifications/

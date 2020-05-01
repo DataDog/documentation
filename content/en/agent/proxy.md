@@ -2,13 +2,13 @@
 title: Agent proxy configuration
 kind: documentation
 further_reading:
-- link: "logs/"
+- link: "/logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "/infrastructure/process"
+- link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Collect your processes"
-- link: "tracing"
+- link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
 ---
@@ -110,7 +110,7 @@ proxy_password: my_password
 
 Do not forget to [restart the Agent][1] for the new settings to take effect.
 
-[1]: /agent/guide/agent-commands
+[1]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 

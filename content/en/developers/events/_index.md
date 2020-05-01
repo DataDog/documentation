@@ -2,10 +2,10 @@
 title: Events
 kind: documentation
 further_reading:
-- link: "/events"
+- link: "/events/"
   tag: "Documentation"
   text: "Datadog events stream"
-- link: "/monitors/monitor_types/event"
+- link: "/monitors/monitor_types/event/"
   tag: "Documentation"
   text: "Event monitors"
 ---

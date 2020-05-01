@@ -31,5 +31,5 @@ Discover the full list of [Datadog open-source projects at GitHub][5].
 [1]: https://datadoghq.slack.com
 [2]: http://chat.datadoghq.com
 [3]: https://datadog.zoom.us/j/312430886
-[4]: /help
+[4]: /help/
 [5]: https://github.com/DataDog

@@ -120,7 +120,7 @@ No. App Analytics is an additional functionality available along with APM which 
 
 
 
-[1]: /tracing
+[1]: /tracing/
 [2]: /tracing/app_analytics/?tab=java
 [3]: /account_management/billing/pricing/#infrastructure-monitoring
 [4]: /account_management/billing/pricing/#apm
@@ -128,5 +128,5 @@ No. App Analytics is an additional functionality available along with APM which 
 [6]: mailto:success@datadoghq.com
 [7]: https://docs.datadoghq.com/account_management/billing/serverless/#serverless-functions
 [8]: /tracing/send_traces/#datadog-agent
-[9]: /account_management/billing
-[10]: /tracing/visualization
+[9]: /account_management/billing/
+[10]: /tracing/visualization/

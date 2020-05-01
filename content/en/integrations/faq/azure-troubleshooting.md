@@ -47,4 +47,4 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 
 [1]: https://portal.azure.com
 [2]: https://manage.windowsazure.com
-[3]: /help
+[3]: /help/

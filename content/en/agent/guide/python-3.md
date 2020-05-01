@@ -2,10 +2,10 @@
 title: Python 3 Custom Check Migration
 kind: guide
 further_reading:
-- link: "agent/versions/upgrade_to_agent_v7"
+- link: "/agent/versions/upgrade_to_agent_v7/"
   tag: "Documentation"
   text: "Upgrade to Agent v7"
-- link: "agent/guide/agent-v6-python-3"
+- link: "/agent/guide/agent-v6-python-3/"
   tag: "Documentation"
   text: "Use Python 3 with Datadog Agent v6"
 ---

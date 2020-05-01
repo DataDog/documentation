@@ -3,19 +3,19 @@ title: Advanced Log Collection
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Discover how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/live_tail"
+- link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Datadog live tail functionality"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "See how to explore your logs"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without Limits*"
 ---

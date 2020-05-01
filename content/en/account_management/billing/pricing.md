@@ -60,7 +60,7 @@ For technical questions, contact [Datadog support][3].
 Contact [Sales][4] or your [Customer Success][5] Manager to discuss hourly pricing or billing for your account.
 
 [1]: https://www.datadoghq.com/pricing
-[2]: /developers/metrics/custom_metrics
-[3]: /help
+[2]: /developers/metrics/custom_metrics/
+[3]: /help/
 [4]: mailto:sales@datadoghq.com
 [5]: mailto:success@datadoghq.com

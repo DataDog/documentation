@@ -100,4 +100,4 @@ If `{{value}}` is evaluating to a large number of bytes or bits, use the `humani
 ```
 
 
-[1]: /logs/explorer
+[1]: /logs/explorer/

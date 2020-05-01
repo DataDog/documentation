@@ -4,13 +4,13 @@ kind: faq
 aliases:
  - /agent/autodiscovery/template_variables
 further_reading:
-- link: "/agent/kubernetes/integrations"
+- link: "/agent/kubernetes/integrations/"
   tag: "Documentation"
   text: "Create and load an Autodiscovery integration template"
-- link: "/agent/guide/ad_identifiers"
+- link: "/agent/guide/ad_identifiers/"
   tag: "Documentation"
   text: "Match a container with the corresponding integration template"
-- link: "/agent/kubernetes/management"
+- link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Manage which container to include in the Agent Autodiscovery"
 ---

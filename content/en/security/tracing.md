@@ -58,8 +58,8 @@ If a customer requires tailored instrumentation for a specific application, they
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security
-[2]: /tracing/setup
+[1]: /security/
+[2]: /tracing/setup/
 [3]: https://github.com/DataDog/datadog-agent/blob/780caa2855a237fa731b78a1bb3ead5492f0e5c6/pkg/config/config_template.yaml#L472-L490
 [4]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/TraceInterceptor.java
 [5]: http://gems.datadoghq.com/trace/docs/#Processing_Pipeline

@@ -101,4 +101,4 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 [3]: /resources/json/datadog_collection.json
 [4]: https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments
 [5]: /api/v1/organizations/
-[6]: /api
+[6]: /api/

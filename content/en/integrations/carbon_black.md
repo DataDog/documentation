@@ -93,4 +93,4 @@ Need help? Contact [Datadog support][3].
 
 [1]: https://github.com/carbonblack/cb-defense-syslog-tls
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /help
+[3]: /help/

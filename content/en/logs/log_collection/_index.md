@@ -7,19 +7,19 @@ aliases:
   - /logs/languages
   - /integrations/windows_event_log/
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Discover how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/live_tail"
+- link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Datadog live tail functionality"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "See how to explore your logs"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging Without Limits*"
 ---
@@ -271,24 +271,24 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 <br>
 \*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /agent/logs
+[1]: /agent/logs/
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#multi-line-aggregation
-[5]: /integrations/rsyslog
-[6]: /integrations/syslog_ng
-[7]: /integrations/nxlog
+[5]: /integrations/rsyslog/
+[6]: /integrations/syslog_ng/
+[7]: /integrations/nxlog/
 [8]: /integrations/fluentd/#log-collection
 [9]: /integrations/logstash/#log-collection
-[10]: /logs/processing
-[11]: /logs/processing/parsing
-[12]: /logs/explorer/facets
-[13]: /agent/docker/log
-[14]: /agent/kubernetes/management
-[15]: /agent/kubernetes/integrations
+[10]: /logs/processing/
+[11]: /logs/processing/parsing/
+[12]: /logs/explorer/facets/
+[13]: /agent/docker/log/
+[14]: /agent/guide/autodiscovery-management/
+[15]: /agent/kubernetes/integrations/
 [16]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 [17]: /integrations/amazon_lambda/#log-collection
 [18]: /logs/log_collection/#how-to-get-the-most-of-your-application-logs
 [19]: /security/logs/#information-security
-[20]: /logs/explorer/patterns
-[21]: /logs/explore
+[20]: /logs/explorer/patterns/
+[21]: /logs/explore/

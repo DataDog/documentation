@@ -2,7 +2,7 @@
 title: Setting Up APM with C++
 kind: guide
 further_reading:
-- link: "/tracing/setup/cpp"
+- link: "/tracing/setup/cpp/"
   tag: "Documentation"
   text: "Learn more about tracing applications with C++"
 ---

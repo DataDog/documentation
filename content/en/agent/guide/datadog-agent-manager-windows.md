@@ -2,7 +2,7 @@
 title: Datadog Agent Manager for Windows
 kind: guide
 further_reading:
-- link: "/agent/basic_agent_usage/windows"
+- link: "/agent/basic_agent_usage/windows/"
   tag: "Documentation"
   text: "Basic Agent Usage for the Windows Agent"
 ---
@@ -132,6 +132,6 @@ Clicking **Restart Agent** from the left navigation bar restarts the Agent immed
 
 [1]: /agent/basic_agent_usage/windows/#installation
 [2]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[3]: /integrations
-[4]: /help
-[5]: /agent/troubleshooting/send_a_flare
+[3]: /integrations/
+[4]: /help/
+[5]: /agent/troubleshooting/send_a_flare/

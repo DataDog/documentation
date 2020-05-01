@@ -5,13 +5,13 @@ description: "Add or remove users to your organization. Modify user roles."
 aliases:
  - /account_management/team/
 further_reading:
-- link: "account_management/saml"
+- link: "/account_management/saml/"
   tag: "Documentation"
   text: "Configure SAML for your Datadog account"
 - link: "/account_management/rbac/"
   tag: "Documentation"
   text: "Learn how to create, update and delete a Role"
-- link: "/account_management/rbac/permissions"
+- link: "/account_management/rbac/permissions/"
   tag: "Documentation"
   text: "Discover the list of permissions available"
 - link: "/api/v1/users/"
@@ -76,5 +76,5 @@ Only user with Privileged Access, such as users with the Datadog Admin Role, can
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/users/default_roles
+[1]: /account_management/users/default_roles/
 [2]: /account_management/rbac/

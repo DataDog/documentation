@@ -9,10 +9,10 @@ further_reading:
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Create Dashboards in Datadog"
-- link: "/dashboards/template_variables"
+- link: "/dashboards/template_variables/"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
-- link: "/dashboards/widgets"
+- link: "/dashboards/widgets/"
   tag: "Documentation"
   text: "Discover Widgets for your Dashboard"
 ---
@@ -97,12 +97,12 @@ Datadog has a [dedicated API][8] allowing you to interact with your shared graph
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/timeboard
-[2]: /dashboards/screenboard
+[1]: /dashboards/timeboard/
+[2]: /dashboards/screenboard/
 [3]: https://app.datadoghq.com/account/settings#embeds
-[4]: /dashboards/template_variables
+[4]: /dashboards/template_variables/
 [5]: https://app.datadoghq.com/dashboard/lists
-[6]: /help
+[6]: /help/
 [7]: https://app.datadoghq.com/account/org_security
 [8]: i/api/v1/embeddable-graphs/
 [9]: /api/v1/embeddable-graphs/#get-all-embeds
