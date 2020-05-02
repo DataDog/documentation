@@ -135,21 +135,6 @@
           kind: documentation
           dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/master/README.md"]
 
-  - repo_name: datadog-formula
-    contents:
-
-    - action: pull-and-push-file
-      branch: ruth/docs-632
-      globs:
-      - README.md
-      options:
-        dest_path: '/agent/basic_agent_usage/'
-        file_name: 'saltstack.md'
-        front_matters:
-          title: SaltStack
-          kind: documentation
-          dependencies: ["https://github.com/DataDog/datadog-formula/blob/master/README.md"]
-
   - repo_name: dd-trace-rb
     contents:
     - action: pull-and-push-file
