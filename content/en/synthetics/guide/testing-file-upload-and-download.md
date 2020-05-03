@@ -1,5 +1,5 @@
 ---
-title: Test a downloaded file
+title: Test file upload and download
 kind: guide
 further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-synthetic-monitoring/'
@@ -13,7 +13,15 @@ further_reading:
       text: 'Configure a Browser Test'
 ---
 
-Web applications can embed a lot of logic. You may, for instance, need to **upload a file** to validate the final step of a functional workflow to test a profile creation. When uploading a file at the test recorder level, Datadog Synthetics Browser tests automatically identify the uploaded file and create the [`Upload file` associated step][1]. It is then able to upload that file again at test execution.
+Web applications can embed a lot of logic, and although end-to-end tests are often mostly made of basic interactions (eg. clicks, input forms, ...) with your website, you sometimes need to go one step further and verify complex functionalities in order to ensure key business transactions can be performed on your application.
+
+## Testing a file upload
+
+You may, for instance, need to **upload a file** to validate the final step of a functional workflow to test a profile creation. When uploading a file at the test recorder level, Datadog Synthetics Browser tests automatically identify the uploaded file and create the [`Upload file` associated step][1]. It is then able to upload that file again at test execution.
+
+{{< img src="synthetics/guide/testing-a-downloaded-file/upload_file.mp4" alt="Upload File" video="true"  width="60%">}}
+
+## Testing a file download
 
 **Downloading files** is another common action users take on web applications: downloading an order confirmation from an e-commerce website or the PDF or CSV export history of bank account transactions.
 
