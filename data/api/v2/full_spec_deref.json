@@ -2499,7 +2499,7 @@
                 "type": "object"
               },
               "id": {
-                "description": "ID of the user invitiation.",
+                "description": "ID of the user invitation.",
                 "type": "string"
               },
               "type": {
@@ -2541,7 +2541,7 @@
             "type": "object"
           },
           "id": {
-            "description": "ID of the user invitiation.",
+            "description": "ID of the user invitation.",
             "type": "string"
           },
           "type": {
@@ -2585,7 +2585,7 @@
                   "type": "object"
                 },
                 "id": {
-                  "description": "ID of the user invitiation.",
+                  "description": "ID of the user invitation.",
                   "type": "string"
                 },
                 "type": {
@@ -8957,7 +8957,7 @@
                             "type": "object"
                           },
                           "id": {
-                            "description": "ID of the user invitiation.",
+                            "description": "ID of the user invitation.",
                             "type": "string"
                           },
                           "type": {
@@ -9085,7 +9085,7 @@
                           "type": "object"
                         },
                         "id": {
-                          "description": "ID of the user invitiation.",
+                          "description": "ID of the user invitation.",
                           "type": "string"
                         },
                         "type": {
