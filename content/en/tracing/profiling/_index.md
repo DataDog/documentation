@@ -114,7 +114,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="env:production"`. |
 | `DD_VERSION`                                     | String        | The version of your application, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="version:<APPLICATION_VERSION>"`                              |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. New in version 0.38.   |
-| `DD_PROFILING_TAGS`                              | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. Changed in 0.38: deprecated in favor of `DD_TAGS`|
+| `DD_PROFILING_TAGS`                              | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. Changed in 0.38: deprecated in favor of `DD_TAGS`.|
 
 <div class="alert alert-info">
 Recommended for advanced usage only.
