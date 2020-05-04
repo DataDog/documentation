@@ -2,7 +2,7 @@
     "index_name": "docsearch_docs_preview",
     "start_urls": [
         {
-            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v1/",
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/v1/",
             "selectors_key": "api_v1",
             "variables": {
                 "localisation": ["", "/fr", "/ja"]
@@ -11,7 +11,7 @@
             "page_rank": 0
         },
         {
-            "url": "https://docs-staging.datadoghq.com/zach/open-api(?P<localisation>.*?)/api/v2/",
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/v2/",
             "selectors_key": "api_v2",
             "variables": {
                 "localisation": ["", "/fr", "/ja"]
@@ -113,12 +113,12 @@
         "/guide/$",
         "\\.json$",
         "\\?",
-        "docs-staging.datadoghq.com/zach/open-api/integrations/$",
-        "docs-staging.datadoghq.com/zach/open-api/fr/integrations/$",
-        "docs-staging.datadoghq.com/zach/open-api/ja/integrations/$",
-        "docs-staging.datadoghq.com/zach/open-api/search/$",
-        "docs-staging.datadoghq.com/zach/open-api/fr/search/$",
-        "docs-staging.datadoghq.com/zach/open-api/ja/search/$",
+        "docs.datadoghq.com/integrations/$",
+        "docs.datadoghq.com/fr/integrations/$",
+        "docs.datadoghq.com/ja/integrations/$",
+        "docs.datadoghq.com/search/$",
+        "docs.datadoghq.com/fr/search/$",
+        "docs.datadoghq.com/ja/search/$",
         "/videos/$",
         "/agent/faq/agent-5-process-collection/$",
         "/agent/guide/agent-5-autodiscovery/$",
@@ -128,9 +128,9 @@
         "/integrations/faq/list-of-api-source-attribute-value/$",
         "/logs/faq/how-to-set-up-only-logs/$",
         "/tracing/guide/agent-5-tracing-setup/$",
-        "docs-staging.datadoghq.com/zach/open-api/fr/.*/faq/",
-        "docs-staging.datadoghq.com/zach/open-api/ja/.*/faq/",
-        "docs-staging.datadoghq.com/zach/open-api/resources/"
+        "docs.datadoghq.com/fr/.*/faq/",
+        "docs.datadoghq.com/ja/.*/faq/",
+        "docs.datadoghq.com/resources/"
     ],
     "selectors": {
         "api_v1": {
