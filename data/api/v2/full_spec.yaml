@@ -665,7 +665,7 @@ components:
         attributes:
           $ref: '#/components/schemas/UserInvitationDataAttributes'
         id:
-          description: ID of the user invitiation.
+          description: ID of the user invitation.
           type: string
         type:
           default: user_invitations

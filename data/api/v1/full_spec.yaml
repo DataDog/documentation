@@ -712,7 +712,7 @@ components:
                 type: string
               prefix:
                 description: The tag prefix associated with the variable. Only tags
-                  with this prefix appear in the variable dropdown.
+                  with this prefix appear in the variable drop-down.
                 example: host
                 nullable: true
                 type: string
@@ -740,7 +740,7 @@ components:
       - widgets
       type: object
     DashboardDeleteResponse:
-      description: Response from the DeleteDashboard call.
+      description: Response from the delete dashboard call.
       properties:
         deleted_dashboard_id:
           description: ID of the deleted dashboard.
@@ -958,7 +958,7 @@ components:
           readOnly: true
           type: boolean
         canceled:
-          description: If a scheduled downtime is cancelled.
+          description: If a scheduled downtime is canceled.
           example: 1412799983
           format: int64
           nullable: true
@@ -1092,7 +1092,7 @@ components:
           example: weeks
           type: string
         until_date:
-          description: 'The date at which the recurrence should end as a POSIX timestmap.
+          description: 'The date at which the recurrence should end as a POSIX timestamp.
 
             `until_occurences` and `until_date` are mutually exclusive.'
           example: 1447786293
@@ -1457,11 +1457,11 @@ components:
       description: Your Google Cloud Platform Account.
       properties:
         auth_provider_x509_cert_url:
-          description: Should be https://www.googleapis.com/oauth2/v1/certs.
+          description: Should be `https://www.googleapis.com/oauth2/v1/certs`.
           example: https://www.googleapis.com/oauth2/v1/certs
           type: string
         auth_uri:
-          description: Should be https://accounts.google.com/o/oauth2/auth.
+          description: Should be `https://accounts.google.com/o/oauth2/auth`.
           example: https://accounts.google.com/o/oauth2/auth
           type: string
         automute:
@@ -1476,9 +1476,10 @@ components:
           example: '123456712345671234567'
           type: string
         client_x509_cert_url:
-          description: 'Should be https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>
+          description: 'Should be `https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>`
 
-            where <CLIENT_EMAIL> is the email found in your JSON service account key.'
+            where `<CLIENT_EMAIL>` is the email found in your JSON service account
+            key.'
           example: https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>
           type: string
         errors:
@@ -1511,7 +1512,7 @@ components:
           example: datadog-apitest
           type: string
         token_uri:
-          description: Should be https://accounts.google.com/o/oauth2/token.
+          description: Should be `https://accounts.google.com/o/oauth2/token`.
           example: https://accounts.google.com/o/oauth2/token
           type: string
         type:
@@ -1534,7 +1535,7 @@ components:
 
             The JSON document uses the [grammar defined here](https://docs.datadoghq.com/graphing/graphing_json/#grammar)
 
-            and should be formatted to a single line then URLEncoded.'
+            and should be formatted to a single line then URL encoded.'
           type: string
         metric_query:
           description: The metric query. One of `metric_query` or `graph_def` is required.
@@ -2313,7 +2314,7 @@ components:
           - days-3
           - days-7
           items:
-            description: One of the log indexes set up for your organisation. [Multiple
+            description: One of the log indexes set up for your organization. [Multiple
               Indexes](https://docs.datadoghq.com/logs/indexes/#multiple-indexes)
             type: string
           type: array
@@ -2523,7 +2524,8 @@ components:
       - sources
       type: object
     LogsExclusion:
-      description: Represents the index exclusion filter object from config API.
+      description: Represents the index exclusion filter object from configuration
+        API.
       properties:
         filter:
           $ref: '#/components/schemas/LogsExclusionFilter'
@@ -2578,7 +2580,7 @@ components:
           - network.client.ip
           description: Array of source attributes.
           items:
-            description: Attribute to geo-localise the IP from.
+            description: Attribute to geo-localize the IP from.
             type: string
           type: array
         target:
@@ -3051,17 +3053,18 @@ components:
       description: "Use this Processor if you want to assign some attributes as the\
         \ official status.\n\nEach incoming status value is mapped as follows.\n\n\
         \  - Integers from 0 to 7 map to the Syslog severity standards\n  - Strings\
-        \ beginning with emerg or f (case-insensitive) map to emerg (0)\n  - Strings\
-        \ beginning with a (case-insensitive) map to alert (1)\n  - Strings beginning\
-        \ with c (case-insensitive) map to critical (2)\n  - Strings beginning with\
-        \ err (case-insensitive) map to error (3)\n  - Strings beginning with w (case-insensitive)\
-        \ map to warning (4)\n  - Strings beginning with n (case-insensitive) map\
-        \ to notice (5)\n  - Strings beginning with i (case-insensitive) map to info\
-        \ (6)\n  - Strings beginning with d, trace or verbose (case-insensitive) map\
-        \ to debug (7)\n  - Strings beginning with o or matching OK or Success (case-insensitive)\
-        \ map to OK\n  - All others map to info (6)\n\n  **Note:** If multiple log\
-        \ status remapper processors can be applied to a given log,\n  only the first\
-        \ one (according to the pipelines order) is taken into account."
+        \ beginning with `emerg` or f (case-insensitive) map to `emerg` (0)\n  - Strings\
+        \ beginning with `a` (case-insensitive) map to `alert` (1)\n  - Strings beginning\
+        \ with `c` (case-insensitive) map to `critical` (2)\n  - Strings beginning\
+        \ with `err` (case-insensitive) map to `error` (3)\n  - Strings beginning\
+        \ with `w` (case-insensitive) map to `warning` (4)\n  - Strings beginning\
+        \ with `n` (case-insensitive) map to `notice` (5)\n  - Strings beginning with\
+        \ `i` (case-insensitive) map to `info` (6)\n  - Strings beginning with `d`,\
+        \ `trace` or `verbose` (case-insensitive) map to `debug` (7)\n  - Strings\
+        \ beginning with `o` or matching `OK` or `Success` (case-insensitive) map\
+        \ to OK\n  - All others map to `info` (6)\n\n  **Note:** If multiple log status\
+        \ remapper processors can be applied to a given log,\n  only the first one\
+        \ (according to the pipelines order) is taken into account."
       properties:
         sources:
           description: Array of source attributes.
@@ -3173,7 +3176,7 @@ components:
       properties:
         is_encoded:
           default: false
-          description: Define if the source attribute is url encoded or not.
+          description: Define if the source attribute is URL encoded or not.
           type: boolean
         sources:
           default:
@@ -3469,7 +3472,7 @@ components:
       type: object
     MonitorDeviceID:
       description: ID of the device the Synthetics monitor is running on. Same as
-        SyntheticsDeviceID.
+        `SyntheticsDeviceID`.
       enum:
       - laptop_large
       - tablet
@@ -3539,7 +3542,7 @@ components:
             - If `False`, `[Triggered] Monitor Title`'
           type: boolean
         locked:
-          description: Wether or not the monitor is locked (only editable by creator
+          description: Whether or not the monitor is locked (only editable by creator
             and admins).
           type: boolean
         min_failure_duration:
@@ -3683,7 +3686,7 @@ components:
           format: int64
           type: integer
         last_resolved_ts:
-          description: Lastest timestamp the monitor group was resolved.
+          description: Latest timestamp the monitor group was resolved.
           format: int64
           type: integer
         last_triggered_ts:
@@ -3885,7 +3888,7 @@ components:
                 See the SAML documentation for more information about all SAML settings.'
               properties:
                 enabled:
-                  description: Wether or not SAML is enabled for this organization.
+                  description: Whether or not SAML is enabled for this organization.
                   example: false
                   type: boolean
               type: object
@@ -3921,7 +3924,7 @@ components:
               description: Has one property enabled (boolean).
               properties:
                 enabled:
-                  description: 'Wether SAML IdP initiated login is enabled, learn
+                  description: 'Whether SAML IdP initiated login is enabled, learn
                     more
 
                     in the [SAML documentation](https://docs.datadoghq.com/account_management/saml/#idp-initiated-login).'
@@ -3934,14 +3937,14 @@ components:
               example: false
               type: boolean
             saml_login_url:
-              description: URL for SAML loging.
+              description: URL for SAML logging.
               example: https://my.saml.login.url
               type: string
             saml_strict_mode:
               description: Has one property enabled (boolean).
               properties:
                 enabled:
-                  description: 'Wether or not the SAML strict mode is enabled. If
+                  description: 'Whether or not the SAML strict mode is enabled. If
                     true, all users must log in with SAML.
 
                     Learn more on the [SAML Strict documentation](https://docs.datadoghq.com/account_management/saml/#saml-strict).'
@@ -4097,7 +4100,7 @@ components:
         or log query.
       properties:
         autoscale:
-          description: Whether to use autoscaling or not.
+          description: Whether to use auto-scaling or not.
           type: boolean
         custom_unit:
           description: Display a unit of your choice on the widget.
@@ -4395,7 +4398,7 @@ components:
           type: object
         errors:
           description: A list of errors while querying the history data for the service
-            level obective.
+            level objective.
           items:
             $ref: '#/components/schemas/SLOHistoryResponseError'
           type: array
@@ -4775,7 +4778,7 @@ components:
         for one or more timeframes, and metadata (`name`, `description`, `tags`, etc.).'
       properties:
         created_at:
-          description: 'Creation timestamp (unix time in seconds)
+          description: 'Creation timestamp (UNIX time in seconds)
 
 
             Always included in service level objective responses.'
@@ -4809,7 +4812,7 @@ components:
           - env:prod
           - role:mysql
           items:
-            description: A group name, for instance "env:prod".
+            description: A group name, for instance `env:prod`.
             type: string
           type: array
         id:
@@ -4820,7 +4823,7 @@ components:
           readOnly: true
           type: string
         modified_at:
-          description: 'Modification timestamp (unix time in seconds)
+          description: 'Modification timestamp (UNIX time in seconds)
 
 
             Always included in service level objective responses.'
@@ -4908,7 +4911,8 @@ components:
         that call it, and all of the services that it calls.
       properties:
         filters:
-          description: Your env and primary tag (or * if enabled for your account).
+          description: Your environment and primary tag (or * if enabled for your
+            account).
           items:
             description: Filter name.
             type: string
@@ -5069,7 +5073,7 @@ components:
           format: int64
           type: integer
         error:
-          description: 'Set this value to 1 to indicate if an error occured.
+          description: 'Set this value to 1 to indicate if an error occurred.
 
 
             If an error occurs, you should pass additional information,
@@ -5120,7 +5124,7 @@ components:
           format: int64
           type: integer
         start:
-          description: The start time of the request in nanoseconds from the unix
+          description: The start time of the request in nanoseconds from the UNIX
             epoch.
           format: int64
           type: integer
@@ -5552,7 +5556,7 @@ components:
         id:
           $ref: '#/components/schemas/SyntheticsDeviceID'
         isMobile:
-          description: Wether or not the device is a mobile.
+          description: Whether or not the device is a mobile.
           type: boolean
         name:
           description: The device name.
@@ -5611,7 +5615,7 @@ components:
           type: array
       type: object
     SyntheticsGetBrowserTestLatestResultsResponse:
-      description: Object with the latest Synthetic broser test run.
+      description: Object with the latest Synthetic browser test run.
       properties:
         last_timestamp_fetched:
           description: Timestamp of the latest browser test run.
@@ -5650,14 +5654,14 @@ components:
       - TAB_3
     SyntheticsResource:
       description: Object describing a resource which is the combination of requests
-        (fetch, xhr) and Assets (HTML, CSS, JS, images).
+        (fetch, XHR) and Assets (HTML, CSS, JS, images).
       properties:
         duration:
           description: Number of time the resource was collected.
           format: double
           type: number
         method:
-          description: HTTP methode associated to the resource.
+          description: HTTP method associated to the resource.
           type: string
         size:
           description: Size of the resource in bytes.
@@ -5716,10 +5720,10 @@ components:
             type: string
           type: array
         fingerprint:
-          description: MD5 digest of the der-encoded Certificate informations.
+          description: MD5 digest of the DER-encoded Certificate information.
           type: string
         fingerprint256:
-          description: SHA-1 digest of the der-encoded Certificate informations.
+          description: SHA-1 digest of the DER-encoded Certificate information.
           type: string
         issuer:
           description: Object describing the issuer of a SSL certificate.
@@ -5820,7 +5824,7 @@ components:
           description: Whether or not to skip this step.
           type: boolean
         snapshotBucketKey:
-          description: Whether or not snapshots where colelcted by the test.
+          description: Whether or not snapshots where collected by the test.
           type: boolean
         stepId:
           description: The step ID.
@@ -6011,7 +6015,7 @@ components:
     SyntheticsTestMonitorStatus:
       description: 'The status of your Synthetic monitor.
 
-        * `O` for un-triggered
+        * `O` for not triggered
 
         * `1` for triggered
 
@@ -6122,7 +6126,7 @@ components:
           description: Headers to include when performing the test.
           type: object
         host:
-          description: Host name to perfrom the test with.
+          description: Host name to perform the test with.
           type: string
         method:
           $ref: '#/components/schemas/HTTPMethod'
@@ -6403,7 +6407,7 @@ components:
         such as highest consumers of CPU, hosts with the least disk space, etc.
       properties:
         requests:
-          description: List of toplist widget requests.
+          description: List of top list widget requests.
           items:
             $ref: '#/components/schemas/ToplistWidgetRequest'
           type: array
@@ -6463,7 +6467,7 @@ components:
           type: object
       type: object
     UsageFargateHour:
-      description: Number of Fargate tasks run and hourly useage.
+      description: Number of Fargate tasks run and hourly usage.
       properties:
         hour:
           description: The hour for the usage.
@@ -6476,7 +6480,7 @@ components:
       type: object
     UsageFargateResponse:
       description: Response containing the number of Fargate tasks run and hourly
-        useage.
+        usage.
       properties:
         usage:
           description: Array with the number of hourly Fargate tasks recorded for
@@ -6546,7 +6550,7 @@ components:
           type: string
       type: object
     UsageHostsResponse:
-      description: Host useage response.
+      description: Host usage response.
       properties:
         usage:
           description: An array of objects related to host usage.
@@ -6575,8 +6579,8 @@ components:
           type: integer
       type: object
     UsageLambdaResponse:
-      description: 'Reponse containing the number of lambda functions and sum of the
-        invocations of all lambda functions
+      description: 'Response containing the number of lambda functions and sum of
+        the invocations of all lambda functions
 
         for each hour for a given organization.'
       properties:
@@ -6613,14 +6617,14 @@ components:
         index for a given organization.
       properties:
         usage:
-          description: An array of objects regarding hourly useage of logs by index
+          description: An array of objects regarding hourly usage of logs by index
             response.
           items:
             $ref: '#/components/schemas/UsageLogsByIndexHour'
           type: array
       type: object
     UsageLogsHour:
-      description: Hour useage for logs.
+      description: Hour usage for logs.
       properties:
         billable_ingested_bytes:
           description: Contains the number of billable log bytes ingested.
@@ -6643,7 +6647,7 @@ components:
       description: Response containing the number of logs for each hour.
       properties:
         usage:
-          description: An array of objects regarding hourly useage of logs.
+          description: An array of objects regarding hourly usage of logs.
           items:
             $ref: '#/components/schemas/UsageLogsHour'
           type: array
@@ -6692,7 +6696,7 @@ components:
           type: string
       type: object
     UsageNetworkHostsResponse:
-      description: Response containting the number of active NPM hosts for each hour
+      description: Response containing the number of active NPM hosts for each hour
         for a given organization.
       properties:
         usage:
@@ -6728,47 +6732,47 @@ components:
       properties:
         agent_host_top99p:
           description: Shows the 99th percentile of all agent hosts over all hours
-            in the current date for all orgs.
+            in the current date for all organizations.
           format: int64
           type: integer
         apm_host_top99p:
           description: Shows the 99th percentile of all distinct APM hosts over all
-            hours in the current date for all orgs.
+            hours in the current date for all organizations.
           format: int64
           type: integer
         aws_host_top99p:
           description: Shows the 99th percentile of all AWS hosts over all hours in
-            the current date for all orgs.
+            the current date for all organizations.
           format: int64
           type: integer
         aws_lambda_func_count:
           description: Shows the average of the number of functions that executed
-            1 or more times each hour in the current date for all orgs.
+            1 or more times each hour in the current date for all organizations.
           format: int64
           type: integer
         aws_lambda_invocations_sum:
-          description: Shows the sum of all AWS Labmda invocations over all hours
-            in the current date for all orgs.
+          description: Shows the sum of all AWS Lambda invocations over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         billable_ingested_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current date for all orgs.
+            current date for all organizations.
           format: int64
           type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
-            in the current date for all orgs.
+            in the current date for all organizations.
           format: int64
           type: integer
         container_hwm:
           description: Shows the high watermark of all distinct containers over all
-            hours in the current date for all orgs.
+            hours in the current date for all organizations.
           format: int64
           type: integer
         custom_ts_avg:
           description: Shows the average number of distinct custom metrics over all
-            hours in the current date for all orgs.
+            hours in the current date for all organizations.
           format: int64
           type: integer
         date:
@@ -6777,42 +6781,42 @@ components:
           type: string
         fargate_tasks_count_avg:
           description: Shows the high watermark of all Fargate tasks over all hours
-            in the current date for all orgs.
+            in the current date for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_hwm:
           description: Shows the average of all Fargate tasks over all hours in the
-            current date for all orgs.
+            current date for all organizations.
           format: int64
           type: integer
         gcp_host_top99p:
           description: Shows the 99th percentile of all GCP hosts over all hours in
-            the current date for all orgs.
+            the current date for all organizations.
           format: int64
           type: integer
         indexed_events_count_sum:
           description: Shows the sum of all log events indexed over all hours in the
-            current date for all orgs.
+            current date for all organizations.
           format: int64
           type: integer
         infra_host_top99p:
           description: Shows the 99th percentile of all distinct infrastructure hosts
-            over all hours in the current date for all orgs.
+            over all hours in the current date for all organizations.
           format: int64
           type: integer
         ingested_events_bytes_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current date for all orgs.
+            current date for all organizations.
           format: int64
           type: integer
         netflow_indexed_events_count_sum:
           description: Shows the sum of all Network flows indexed over all hours in
-            the current date for all orgs.
+            the current date for all organizations.
           format: int64
           type: integer
         npm_host_top99p:
           description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current date for all orgs.
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         orgs:
@@ -6822,22 +6826,22 @@ components:
           type: array
         rum_session_count_sum:
           description: Shows the sum of all RUM Sessions over all hours in the current
-            date for all orgs
+            date for all organizations
           format: int64
           type: integer
         synthetics_browser_check_calls_count_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
-            in the current date for all orgs.
+            in the current date for all organizations.
           format: int64
           type: integer
         synthetics_check_calls_count_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
-            the current date for all orgs.
+            the current date for all organizations.
           format: int64
           type: integer
         trace_search_indexed_events_count_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
-            in the current date for all orgs.
+            in the current date for all organizations.
           format: int64
           type: integer
       type: object
@@ -6861,12 +6865,12 @@ components:
           format: int64
           type: integer
         aws_lambda_func_count:
-          description: Shows the sum of all AWS Labmda invocations over all hours
+          description: Shows the sum of all AWS Lambda invocations over all hours
             in the current date for the given org.
           format: int64
           type: integer
         aws_lambda_invocations_sum:
-          description: Shows the sum of all AWS Labmda invocations over all hours
+          description: Shows the sum of all AWS Lambda invocations over all hours
             in the current date for the given org.
           format: int64
           type: integer
@@ -6964,131 +6968,131 @@ components:
       properties:
         agent_host_top99p_sum:
           description: Shows the 99th percentile of all agent hosts over all hours
-            in the current month(s) for all orgs.
+            in the current month(s) for all organizations.
           format: int64
           type: integer
         apm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct APM hosts over all
-            hours in the current month(s) for all orgs.
+            hours in the current month(s) for all organizations.
           format: int64
           type: integer
         aws_host_top99p_sum:
           description: Shows the 99th percentile of all AWS hosts over all hours in
-            the current month(s) for all orgs.
+            the current month(s) for all organizations.
           format: int64
           type: integer
         aws_lambda_func_count:
           description: Shows the average of the number of functions that executed
-            1 or more times each hour in the current month(s) for all orgs.
+            1 or more times each hour in the current month(s) for all organizations.
           format: int64
           type: integer
         aws_lambda_invocations_sum:
-          description: Shows the sum of all AWS Labmda invocations over all hours
-            in the current month(s) for all orgs.
+          description: Shows the sum of all AWS Lambda invocations over all hours
+            in the current month(s) for all organizations.
           format: int64
           type: integer
         azure_host_top99p_sum:
           description: Shows the 99th percentile of all Azure hosts over all hours
-            in the current month(s) for all orgs.
+            in the current month(s) for all organizations.
           format: int64
           type: integer
         billable_ingested_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current month(s) for all orgs.
+            current month(s) for all organizations.
           format: int64
           type: integer
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
-            in the current month(s) for all orgs.
+            in the current month(s) for all organizations.
           format: int64
           type: integer
         container_hwm_sum:
           description: Shows the high watermark of all distinct containers over all
-            hours in the current month(s) for all orgs.
+            hours in the current month(s) for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
           description: Shows the average number of distinct custom metrics over all
-            hours in the current month(s) for all orgs.
+            hours in the current month(s) for all organizations.
           format: int64
           type: integer
         end_date:
           description: Shows the last date of usage in the current month(s) for all
-            orgs.
+            organizations.
           format: date-time
           type: string
         fargate_tasks_count_avg_sum:
           description: Shows the average of all Fargate tasks over all hours in the
-            current month(s) for all orgs.
+            current month(s) for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_hwm_sum:
           description: Shows the high watermark of all Fargate tasks over all hours
-            in the current month(s) for all orgs.
+            in the current month(s) for all organizations.
           format: int64
           type: integer
         gcp_host_top99p_sum:
           description: Shows the 99th percentile of all GCP hosts over all hours in
-            the current month(s) for all orgs.
+            the current month(s) for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
           description: Shows the sum of all log events indexed over all hours in the
-            current month(s) for all orgs.
+            current month(s) for all organizations.
           format: int64
           type: integer
         infra_host_top99p_sum:
           description: Shows the 99th percentile of all distinct infrastructure hosts
-            over all hours in the current month(s) for all orgs.
+            over all hours in the current month(s) for all organizations.
           format: int64
           type: integer
         ingested_events_bytes_agg_sum:
           description: Shows the sum of all log bytes ingested over all hours in the
-            current month(s) for all orgs.
+            current month(s) for all organizations.
           format: int64
           type: integer
         last_updated:
           description: Shows the the most recent hour in the current month(s) for
-            all orgs for which all usages were calculated.
+            all organizations for which all usages were calculated.
           format: date-time
           type: string
         netflow_indexed_events_count_agg_sum:
           description: Shows the sum of all Network flows indexed over all hours in
-            the current month(s) for all orgs.
+            the current month(s) for all organizations.
           format: int64
           type: integer
         npm_host_top99p_sum:
           description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current month(s) for all orgs.
+            all hours in the current month(s) for all organizations.
           format: int64
           type: integer
         rum_session_count_agg_sum:
           description: Shows the sum of all RUM Sessions over all hours in the current
-            month(s) for all orgs.
+            month(s) for all organizations.
           format: int64
           type: integer
         start_date:
           description: Shows the first date of usage in the current month(s) for all
-            orgs.
+            organizations.
           format: date-time
           type: string
         synthetics_browser_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic browser tests over all hours
-            in the current month(s) for all orgs.
+            in the current month(s) for all organizations.
           format: int64
           type: integer
         synthetics_check_calls_count_agg_sum:
           description: Shows the sum of all Synthetic API tests over all hours in
-            the current month(s) for all orgs.
+            the current month(s) for all organizations.
           format: int64
           type: integer
         trace_search_indexed_events_count_agg_sum:
           description: Shows the sum of all analyzed spans indexed over all hours
-            in the current month(s) for all orgs.
+            in the current month(s) for all organizations.
           format: int64
           type: integer
         usage:
-          description: An array of objects regarding hourly useage.
+          description: An array of objects regarding hourly usage.
           items:
             $ref: '#/components/schemas/UsageSummaryDate'
           type: array
@@ -7487,8 +7491,8 @@ components:
           type: string
         scale:
           default: linear
-          description: Specifies the scale type. Possible values are linear, log,
-            sqrt, pow## (eg. pow2, pow0.5..).
+          description: Specifies the scale type. Possible values are `linear`, `log`,
+            `sqrt`, `pow##` (e.g. `pow2`, `pow0.5` etc.).
           type: string
       type: object
     WidgetChangeType:
@@ -7735,7 +7739,7 @@ components:
       x-enum-varnames:
       - ORDERED
     WidgetLegendSize:
-      description: Available legent sizes for a widget.
+      description: Available legend sizes for a widget.
       enum:
       - '2'
       - '4'
@@ -9403,14 +9407,14 @@ paths:
 
           The JSON document uses the [grammar defined here](https://docs.datadoghq.com/graphing/graphing_json/#grammar)
 
-          and should be formatted to a single line then URLEncoded.'
+          and should be formatted to a single line then URL encoded.'
         in: query
         name: graph_def
         required: false
         schema:
           type: string
-      - description: "A title for the graph. If no title is specified, the graph doesn\u2019\
-          t have a title."
+      - description: A title for the graph. If no title is specified, the graph does
+          not have a title.
         in: query
         name: title
         required: false
@@ -10053,7 +10057,7 @@ paths:
       - AWS Logs Integration
     post:
       description: Enable automatic log collection for a list of services. This should
-        be run after running `CreateAWSLambdaARN` to save the config.
+        be run after running `CreateAWSLambdaARN` to save the configuration.
       operationId: EnableAWSLogServices
       requestBody:
         content:
@@ -10406,7 +10410,7 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
     put:
-      description: 'Update a Datadog-GCP integrations host_filters and/or automute.
+      description: 'Update a Datadog-GCP integrations host_filters and/or auto-mute.
 
         Requires a `project_id` and `client_email`, however these fields cannot be
         updated.
@@ -11194,7 +11198,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/LogsIndex'
-        description: Object containing the new LogsIndex.
+        description: Object containing the new `LogsIndex`.
       responses:
         '200':
           content:
@@ -11605,7 +11609,7 @@ paths:
         schema:
           type: string
       - description: 'A comma separated list indicating what tags, if any, should
-          be used to filter the list of monitorsby scope.
+          be used to filter the list of monitors by scope.
 
           For example, `host:host0`.'
         in: query
@@ -12298,7 +12302,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OrganizationCreateBody'
-        description: Organisation object that needs to be created
+        description: Organization object that needs to be created
         required: true
       responses:
         '200':
@@ -13137,8 +13141,8 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: '- JSON format is wrong
 
-            - Test cannot be deleted as it''s used elsewhere (as a subtest or in an
-            uptime widget)
+            - Test cannot be deleted as it''s used elsewhere (as a sub-test or in
+            an uptime widget)
 
             - Some IDs are not owned by the user'
         '403':
@@ -13225,7 +13229,7 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: '- JSON format is wrong
 
-            - Updating subtype is forbidden'
+            - Updating sub-type is forbidden'
         '403':
           content:
             application/json:
@@ -14422,7 +14426,7 @@ paths:
       tags:
       - Users
     put:
-      description: 'Update a user informations.
+      description: 'Update a user information.
 
 
         **Note**: It can only be used with application keys belonging to administrators.'
@@ -14921,7 +14925,7 @@ tags:
 
     from a host have its tags applied. When fetching and applying
 
-    tags to a particular host, refer to hosts by name (yourhost.example.com).
+    tags to a particular host, refer to hosts by name (`yourhost.example.com`).
 
 
     The component of your infrastructure responsible for a tag is identified
@@ -14953,9 +14957,9 @@ tags:
 
     so your Agent can forward them to Datadog.'
   name: Tracing
-- description: 'The useage metering API allows you to get hourly, daily, and
+- description: 'The usage metering API allows you to get hourly, daily, and
 
-    monthly useage across multiple facets of Datadog.
+    monthly usage across multiple facets of Datadog.
 
     This API is available to all Pro and Enterprise customers.
 
