@@ -55,8 +55,10 @@ To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog
 - **Helm v3+**
 
     ```bash
-    helm install <RELEASE_NAME> -f values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+    helm install <RELEASE_NAME> -f values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog --set targetSystem=<TARGET_SYSTEM>
     ```
+
+    Replace `<TARGET_SYSTEM>` with the name of your OS: `linux` or `windows`.
 
 - **Helm v1/v2**
 

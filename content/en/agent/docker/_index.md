@@ -62,6 +62,15 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 ```
 
 {{% /tab %}}
+{{% tab "Windows" %}}
+
+The Datadog Agent is supported in Windows Server 2019 (LTSC) and version 1909 (SAC).
+
+```shell
+docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine datadog/agent:latest
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: For Docker Compose, see [Compose and the Datadog Agent][6].
