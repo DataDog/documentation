@@ -18,7 +18,13 @@ The Datadog API uses resource-oriented URLs, uses status codes to indicate the s
 
 All requests to Datadog's API must be authenticated. Requests that write data require _reporting access_ and require an `API key`. Requests that read data require _full access_ and also require an `application key`.
 
-**Note**: All Datadog API Clients are configured by default to consume Datadog US site APIs. If you are on the Datadog EU site, Set the environment variable `DATADOG_HOST` to `https://api.datadoghq.eu` or overide this value directly when creating your Client.
+```bash
+curl "https://api.datadoghq.com/api/v1/validate" \
+    -H "DD-API-KEY: <DATADOG_API_KEY>" \
+    -H "DD-APPLICATION-KEY: <DATADOG_APPLICATION_KEY>"
+```
+
+**Note**: All Datadog API clients are configured by default to consume Datadog US site APIs. If you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to `https://api.datadoghq.eu` or override this value directly when creating your client.
 
 [Manage your account's API and application keys][3].
 
