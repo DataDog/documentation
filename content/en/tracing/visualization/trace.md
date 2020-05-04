@@ -2,19 +2,19 @@
 title: Trace View
 kind: documentation
 further_reading:
-- link: "tracing/setup/"
+- link: "/tracing/setup/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "tracing/visualization/services_list/"
+- link: "/tracing/visualization/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "tracing/visualization/service"
+- link: "/tracing/visualization/service/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "tracing/visualization/resource"
+- link: "/tracing/visualization/resource/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "tracing/visualization/trace"
+- link: "/tracing/visualization/trace/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 ---
@@ -72,7 +72,7 @@ See logs related to your service at the time of the trace. When you hover over a
 
 {{< img src="tracing/visualization/trace/trace_logs.png" alt="Trace Logs"  style="width:90%;">}}
 
-[1]: /logs/explorer/search
+[1]: /logs/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
 

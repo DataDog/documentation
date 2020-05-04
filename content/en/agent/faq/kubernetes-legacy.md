@@ -4,13 +4,13 @@ kind: faq
 aliases:
     - /agent/kubernetes/legacy
 further_reading:
-- link: "agent/kubernetes/daemonset_setup"
+- link: "/agent/kubernetes/daemonset_setup/"
   tag: "documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "agent/kubernetes/host_setup"
+- link: "/agent/kubernetes/host_setup/"
   tag: "documentation"
   text: "Kubernetes Host Setup"
-- link: "agent/kubernetes/metrics"
+- link: "/agent/kubernetes/metrics/"
   tag: "documentation"
   text: "Kubernetes Metrics"
 ---

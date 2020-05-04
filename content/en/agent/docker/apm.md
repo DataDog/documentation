@@ -12,16 +12,16 @@ further_reading:
     - link: '/integrations/amazon_ecs/#trace-collection'
       tag: 'Documentation'
       text: 'Trace your ECS applications'
-    - link: "agent/docker/log"
+    - link: "/agent/docker/log/"
       tag: "Documentation"
       text: "Collect your application logs"
-    - link: "/agent/docker/integrations"
+    - link: "/agent/docker/integrations/"
       tag: "Documentation"
       text: "Collect automatically your applications metrics and logs"
-    - link: "/agent/guide/autodiscovery-management"
+    - link: "/agent/guide/autodiscovery-management/"
       tag: "Documentation"
       text: "Limit data collection to a subset of containers only"
-    - link: "/agent/docker/tag"
+    - link: "/agent/docker/tag/"
       tag: "Documentation"
       text: "Assign tags to all data emitted by a container"
 ---
@@ -84,8 +84,8 @@ List of all environment variables available for tracing within the Docker Agent:
 | `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. Example: <code>GET /ignore-me,(GET\|POST) /and-also-me</code>.                                                                                                                                                                                       |
 | `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of <code>\<SERVICE_NAME>\|;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code>. You can also [enable it automatically][3] with the configuration parameter in the Tracing Client. |
 | `DD_APM_ENV`               | Sets the default [environment][4] for your traces.                                                                                                                                                                                                                                                                                                   |
-| `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second.                                                                                                                                                                                                                                                                                                          |
-| `DD_APM_MAX_TPS`           | Sets the maximum traces per second.                                                                                                                                                                                                                                                                                                                  |
+| `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second. Default is 200 events per second.                                                                                                                                                                                                                                                                        |
+| `DD_APM_MAX_TPS`           | Sets the maximum traces per second. Default is 10 traces per second.                                                                                                                                                                                                                                                                                 |
 
 ## Tracing from other containers
 
@@ -213,6 +213,28 @@ const tracer = require('dd-trace').init({
     hostname: 'datadog-agent',
     port: 8126
 });
+```
+
+{{% /tab %}}
+
+{{% tab ".NET" %}}
+
+Set the environment variables before running your instrumented app:
+
+```bash
+# Environment variables
+export CORECLR_ENABLE_PROFILING=1
+export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
+export DD_INTEGRATIONS=/opt/datadog/integrations.json
+export DD_DOTNET_TRACER_HOME=/opt/datadog
+
+# For containers
+export DD_AGENT_HOST=datadog-agent
+export DD_TRACE_AGENT_PORT=8126
+
+# Start your application
+dotnet example.dll
 ```
 
 {{% /tab %}}

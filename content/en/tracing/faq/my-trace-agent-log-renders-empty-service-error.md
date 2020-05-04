@@ -40,6 +40,6 @@ It's time to contact [the Datadog support team][4]!
 Send your flare, and details about the language/library you're using, and a snippet of your code instrumentation.
 
 [1]: /tracing/visualization/#trace
-[2]: /tracing/setup
+[2]: /tracing/setup/
 [3]: /tracing/visualization/#spans
-[4]: /help
+[4]: /help/

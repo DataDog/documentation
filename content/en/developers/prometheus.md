@@ -2,13 +2,13 @@
 title: Writing a custom OpenMetrics Check
 kind: documentation
 further_reading:
-- link: "agent/prometheus"
+- link: "/agent/prometheus/"
   tag: "Documentation"
   text: "Configuring an OpenMetrics Check"
-- link: "developers/agent_checks"
+- link: "/developers/agent_checks/"
   tag: "Documentation"
   text: "Write a Custom Check"
-- link: "developers/integrations/"
+- link: "/developers/integrations/"
   tag: "Documentation"
   text: "Create a new Integration"
 aliases:
@@ -66,7 +66,7 @@ instances:
 All OpenMetrics checks inherit from the `OpenMetricsBaseCheck` class found in `checks/openmetrics_check.py`:
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBasicCheck
+from datadog_checks.base import OpenMetricsBasicCheck
 
 class KubeDNSCheck(OpenMetricsBasicCheck):
 ```
@@ -76,7 +76,7 @@ class KubeDNSCheck(OpenMetricsBasicCheck):
 `NAMESPACE` is the metrics prefix. It needs to be hardcoded in your check class:
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     def __init__(self, name, init_config, agentConfig, instances=None):
@@ -90,7 +90,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 The reason for the override is so that metrics reported by the OpenMetrics checks are not counted as [custom metric][5]:
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     def __init__(self, name, init_config, agentConfig, instances=None):
@@ -132,7 +132,7 @@ If a check cannot run because of improper configuration, a programming error, or
 Improve your `check()` method with `CheckException`:
 
 ```python
-from datadog_checks.errors import CheckException
+from datadog_checks.base.errors import CheckException
 
 def check(self, instance):
     endpoint = instance.get('prometheus_endpoint')
@@ -143,7 +143,7 @@ def check(self, instance):
 Then as soon as you have data available, flush:
 
 ```python
-from datadog_checks.errors import CheckException
+from datadog_checks.base.errors import CheckException
 
 def check(self, instance):
     endpoint = instance.get('prometheus_endpoint')
@@ -161,8 +161,8 @@ def check(self, instance):
 ### Putting It All Together
 
 ```python
-from datadog_checks.errors import CheckException
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
+from datadog_checks.base.errors import CheckException
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     """
@@ -224,8 +224,8 @@ Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
-[2]: /agent/prometheus
+[2]: /agent/prometheus/
 [3]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
 [4]: /agent/agent_checks/#configuration
-[5]: /developers/metrics/custom_metrics
+[5]: /developers/metrics/custom_metrics/
 [6]: /agent/guide/agent-commands/#agent-status-and-information

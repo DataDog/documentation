@@ -88,9 +88,9 @@ The **Traces** tab is accessible with Datadog [APM integration with Synthetics][
 {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configure advance Synthetics settings{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /synthetics/browser_tests
+[1]: /synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/list
-[3]: /integrations
+[3]: /integrations/
 [4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [5]: https://www.google.com/chrome/
 [6]: /synthetics/browser_tests/#actions

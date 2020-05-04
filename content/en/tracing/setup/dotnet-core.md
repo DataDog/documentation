@@ -13,10 +13,10 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
     tag: "Blog"
     text: ".NET monitoring with Datadog APM and distributed tracing"
-  - link: "tracing/visualization/"
+  - link: "/tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources and traces"
-  - link: "tracing/"
+  - link: "/tracing/"
     tag: "Advanced Usage"
     text: "Advanced Usage"
 ---
@@ -201,17 +201,17 @@ CMD ["dotnet", "example.dll"]
 
 The .NET Tracer can instrument the following libraries automatically:
 
-| Framework or library           | NuGet package                                                           | Integration Name     |
-|--------------------------------|-------------------------------------------------------------------------|----------------------|
-| ASP.NET Core                   | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+ | `AspNetCore`         |
-| ADO.NET                        | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                   | `AdoNet`             |
-| HttpClient / HttpClientHandler | `System.Net.Http` 4.0+                                                  | `HttpMessageHandler` |
-| WebClient / WebRequest         | `System.Net.Requests` 4.0+                                              | `WebRequest`         |
-| Redis (StackExchange client)   | `StackExchange.Redis` 1.0.187+                                          | `StackExchangeRedis` |
-| Redis (ServiceStack client)    | `ServiceStack.Redis` 4.0.48+                                            | `ServiceStackRedis`  |
-| Elasticsearch                  | `Elasticsearch.Net` 5.3.0+                                              | `ElasticsearchNet`   |
-| MongoDB                        | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
-| PostgreSQL                     | `Npgsql` 4.0+                                                           | `AdoNet`             |
+| Framework or library            | NuGet package                                                           | Integration Name     |
+|---------------------------------|-------------------------------------------------------------------------|----------------------|
+| ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+ | `AspNetCore`         |
+| ADO.NET                         | `System.Data.Common`</br>`System.Data.SqlClient` 4.0+                   | `AdoNet`             |
+| HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                  | `HttpMessageHandler` |
+| WebClient / WebRequest          | `System.Net.Requests` 4.0+                                              | `WebRequest`         |
+| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                          | `StackExchangeRedis` |
+| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                            | `ServiceStackRedis`  |
+| Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                              | `ElasticsearchNet`   |
+| MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                            | `MongoDb`            |
+| PostgreSQL                      | `Npgsql` 4.0+                                                           | `AdoNet`             |
 
 **Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
@@ -350,11 +350,11 @@ The following table lists configuration variables that are available only when u
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/send_traces
-[2]: /tracing/setup/dotnet-framework
+[1]: /tracing/send_traces/
+[2]: /tracing/setup/dotnet-framework/
 [3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
 [4]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
-[5]: /help
+[5]: /help/
 [6]: https://www.nuget.org/packages/Datadog.Trace
-[7]: /tracing/manual_instrumentation/dotnet
+[7]: /tracing/manual_instrumentation/dotnet/
 [8]: /tracing/guide/setting_primary_tags_to_scope/#environment

@@ -7,7 +7,13 @@ languages:
     pygments_name: ruby
   'sh':
     extension: sh
-    pygments_name: bash
+    pygments_name: curl
   'json':
     extension: json
     pygments_name: json
+  'go':
+    extension: go
+    pygments_name: go
+  'java':
+    extension: java
+    pygments_name: java

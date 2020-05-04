@@ -7,7 +7,7 @@ aliases:
     - /guides/logs/
     - /logs/logging_without_limits
 further_reading:
-- link: "/logs/guide"
+- link: "/logs/guide/"
   tag: "Guide"
   text: Additional helpful articles about log collection and processing.
 - link: "https://learn.datadoghq.com"
@@ -47,4 +47,4 @@ Datadog's log management removes these limitations by decoupling log ingestion f
 <br>
 \*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /security_monitoring
+[1]: /security_monitoring/

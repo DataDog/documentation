@@ -2,7 +2,7 @@
 title: APM Troubleshooting
 kind: documentation
 further_reading:
-- link: "/tracing/troubleshooting/agent_apm_metrics"
+- link: "/tracing/troubleshooting/agent_apm_metrics/"
   tag: "Documentation"
   text: "APM metrics sent by the Datadog Agent"
 ---
@@ -138,8 +138,8 @@ If neither of these log entries is present, then no request was sent to the Agen
 For more tracer settings, check out the [API documentation][5].
 
 [1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
-[2]: /agent/troubleshooting
-[3]: /help
+[2]: /agent/troubleshooting/
+[3]: /help/
 [4]: /agent/troubleshooting/#send-a-flare
 [5]: https://datadog.github.io/dd-trace-js/#tracer-settings
 {{% /tab %}}
@@ -167,7 +167,7 @@ Logs files are saved in the following directories by default. The `DD_TRACE_LOG_
 For more details on how to configure the .NET Tracer, see the [Configuration][1] section.
 
 
-[1]: /tracing/setup/dotnet#configuration
+[1]: /tracing/setup/dotnet/#configuration
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -457,9 +457,9 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /help/
 [2]: /tracing/setup/#agent-configuration
 [3]: /agent/troubleshooting/#get-more-logging-from-the-agent
-[4]: /agent/guide/agent-log-files
+[4]: /agent/guide/agent-log-files/
 [5]: /tracing/visualization/#trace
 [6]: /agent/troubleshooting/#send-a-flare

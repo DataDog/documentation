@@ -5,16 +5,16 @@ description: "Parse your logs using the Grok Processor"
 aliases:
     - /logs/parsing/
 further_reading:
-- link: "logs/processing/processors"
+- link: "/logs/processing/processors/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/faq/how-to-investigate-a-log-parsing-issue"
+- link: "/logs/faq/how-to-investigate-a-log-parsing-issue/"
   tag: "FAQ"
   text: "How to investigate a log parsing issue?"
 - link: "/logs/guide/log-parsing-best-practice/"
   tag: "FAQ"
   text: "Log Parsing - Best Practice"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Control the volume of logs indexed by Datadog"
 ---
@@ -132,7 +132,7 @@ At the bottom of your Grok processor tiles, there is an Advanced Settings sectio
 
 Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
 
-For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. You could could parse this log as follows:
+For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. You could parse this log as follows:
 
 {{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line"  style="width:80%;">}}
 

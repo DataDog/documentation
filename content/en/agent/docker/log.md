@@ -9,19 +9,19 @@ further_reading:
     - link: 'logs/explorer'
       tag: 'Documentation'
       text: 'Learn how to explore your logs'
-    - link: "/agent/docker/apm"
+    - link: "/agent/docker/apm/"
       tag: "Documentation"
       text: "Collect your application traces"
-    - link: "/agent/docker/prometheus"
+    - link: "/agent/docker/prometheus/"
       tag: "Documentation"
       text: "Collect your Prometheus metrics"
-    - link: "/agent/docker/integrations"
+    - link: "/agent/docker/integrations/"
       tag: "Documentation"
       text: "Collect automatically your applications metrics and logs"
-    - link: "/agent/guide/autodiscovery-management"
+    - link: "/agent/guide/autodiscovery-management/"
       tag: "Documentation"
       text: "Limit data collection to a subset of containers only"
-    - link: "/agent/docker/tag"
+    - link: "/agent/docker/tag/"
       tag: "Documentation"
       text: "Assign tags to all data emitted by a container"
 ---
@@ -105,7 +105,7 @@ logs_config:
 [Restart the Agent][3] to see all your container logs in Datadog.
 
 
-[1]: /agent/basic_agent_usage
+[1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
@@ -214,9 +214,17 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 - Use the environment variable to collect logs from all containers and then override the default `source` and `service` values.
 - Add processing rules for the wanted subset of containers.
 
+## Advanced log collection
+
+Use Autodiscovery log labels to apply advanced log collection processing logic, for example:
+
+- [Filter logs before sending them to Datadog][5].
+- [Scrub sensitive data from your logs][6].
+- [Proceed to multi-line aggregation][7].
+
 ## Filter containers
 
-It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][5] to learn more.
+It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][8] to learn more.
 
 ## Short Lived containers
 
@@ -224,15 +232,18 @@ For a Docker environment, the Agent receives container updates in real time thro
 
 Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 
-For Kubernetes environements, refer to the [Kubernetes short lived container documentation][6]
+For Kubernetes environements, refer to the [Kubernetes short lived container documentation][9]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/journald
-[2]: /agent/docker/integrations
+[1]: /integrations/journald/
+[2]: /agent/docker/integrations/
 [3]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
 [4]: /agent/logs/#custom-log-collection
-[5]: /agent/guide/autodiscovery-management
-[6]: /agent/kubernetes/log#short-lived-containers
+[5]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
+[6]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
+[7]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[8]: /agent/guide/autodiscovery-management/
+[9]: /agent/kubernetes/log/#short-lived-containers

@@ -5,7 +5,7 @@ description: "The Service Map visualizes data that is being collected by Datadog
 aliases:
   - /tracing/servicemap
 further_reading:
-- link: "tracing/setup/"
+- link: "/tracing/setup/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
 - link: "https://www.datadoghq.com/blog/service-map/"

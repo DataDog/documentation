@@ -245,13 +245,13 @@ Note that whenever you make a change to your custom log-parser, [restart the Age
 If you suspect there is some error occurring beyond the scope of your custom log-parser function, feel free to [reach out to support][10], but do first set the Agent's log-level at "DEBUG", run the Agent for a few minutes while ensuring that new logs are being added to your files, and then [run the flare command][11] from your Agent. That gives to the support team the information needed to effectively troubleshoot the issue.
 
 [1]: https://app.datadoghq.com/infrastructure#tags
-[2]: /api/#tags
+[2]: /api/v1/tags/
 [3]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
-[4]: /events
+[4]: /events/
 [5]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
-[6]: /agent/guide/agent-log-files
+[6]: /agent/guide/agent-log-files/
 [7]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211
-[8]: /agent/guide/agent-commands
+[8]: /agent/guide/agent-commands/
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
-[10]: /help
-[11]: /agent/troubleshooting/send_a_flare
+[10]: /help/
+[11]: /agent/troubleshooting/send_a_flare/
