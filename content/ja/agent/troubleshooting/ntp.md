@@ -33,5 +33,5 @@ aliases:
 {{< /whatsnext >}}
 
 [1]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[2]: /ja/integrations/ntp
+[2]: /ja/integrations/ntp/
 [3]: https://app.datadoghq.com/check/summary

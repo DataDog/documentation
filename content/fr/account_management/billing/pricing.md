@@ -59,7 +59,7 @@ Pour toute question technique, contactez [l'assistance Datadog][3].
 Contactez le [service commercial][4] ou votre [chargé de compte][5] pour toute question concernant la tarification horaire ou la facturation pour votre compte.
 
 [1]: https://www.datadoghq.com/pricing
-[2]: /fr/developers/metrics/custom_metrics
-[3]: /fr/help
+[2]: /fr/developers/metrics/custom_metrics/
+[3]: /fr/help/
 [4]: mailto:sales@datadoghq.com
 [5]: mailto:success@datadoghq.com

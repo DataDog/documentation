@@ -87,9 +87,9 @@ L'onglet **Traces** est accessible une fois l'[intégration de l'APM avec Synthe
 {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configurer les paramètres Synthetics avancés{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /fr/synthetics/browser_tests
+[1]: /fr/synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/list
-[3]: /fr/integrations
+[3]: /fr/integrations/
 [4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [5]: https://www.google.com/chrome/
 [6]: /fr/synthetics/browser_tests/#actions
