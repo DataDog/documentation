@@ -24,7 +24,7 @@ curl "https://api.datadoghq.com/api/v1/validate" \
     -H "DD-APPLICATION-KEY: <DATADOG_APPLICATION_KEY>"
 ```
 
-**Note**: All Datadog API clients are configured by default to consume Datadog US site APIs. If you are on the Datadog EU site, Set the environment variable `DATADOG_HOST` to `https://api.datadoghq.eu` or override this value directly when creating your client.
+**Note**: All Datadog API clients are configured by default to consume Datadog US site APIs. If you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to `https://api.datadoghq.eu` or override this value directly when creating your client.
 
 [Manage your account's API and application keys][3].
 
