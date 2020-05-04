@@ -1,1 +1,1 @@
-curl -X GET "https://api.datadoghq.com/"
+curl -X GET "https://ip-ranges.datadoghq.com"
