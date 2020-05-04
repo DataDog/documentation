@@ -36,12 +36,12 @@ aliases:
 
 他の例については、Datadog の [API ドキュメント][1]を参照してください。
 
-[1]: /ja/api
+[1]: /ja/api/
 [2]: http://docs.python-guide.org/en/latest/starting/install/win
 [3]: /resources/python/api_query_data.py
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://app.datadoghq.com/infrastructure
-[7]: https://docs.datadoghq.com/ja/api/?lang=python#rate-limiting
+[7]: /ja/api/#rate-limiting
 [8]: https://virtualenv.pypa.io/en/stable
 [9]: https://pypi.org/project/datadog

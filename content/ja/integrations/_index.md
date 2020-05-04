@@ -10,4 +10,4 @@ description: すべてのシステム、アプリケーション、およびサ�
 
 {{< integrations >}}
 
-[1]: /ja/getting_started/integrations
+[1]: /ja/getting_started/integrations/

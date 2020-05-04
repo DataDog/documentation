@@ -65,4 +65,4 @@ curl -X DELETE 'https://app.datadoghq.com/api/v1/integration/aws/filtering?api_k
 [3]: mailto:success@datadoghq.com
 [4]: https://app.datadoghq.com/account/usage
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[6]: /ja/help
+[6]: /ja/help/
