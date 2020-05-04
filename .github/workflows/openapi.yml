@@ -2,8 +2,7 @@ name: Openapi
 on:
   pull_request:
     branches:
-      # on live we should change this to master
-      - zach/open-api
+      - master
     paths:
       - 'data/api/**/full_spec.yaml'
 
