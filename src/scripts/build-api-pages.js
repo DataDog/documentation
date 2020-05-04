@@ -59,7 +59,7 @@ const updateMenu = (apiYaml, apiVersion, languages) => {
         newMenuArray.push({
           name: action.summary,
           parent: tag.name,
-          url: slugify(action.summary, {lower: true, replacement: '-'})
+          url: getTagSlug(action.summary)
         });
     });
 
@@ -176,7 +176,7 @@ const getSchema = (content) => {
  * @param {object} tagName - string of tag name
  * returns string with tag slugified
  */
-const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-'});
+const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-', remove: /[*+~.()'"!:@]/g});
 
 
 /**
