@@ -116,7 +116,7 @@ ECS Fargate cannot be monitored with the Datadog Agent running as a binary on a 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-To automatically enable Autodiscovery over Docker containers, mount `/var/run/docker.sock` into the Containerized Agent.
+To automatically enable Autodiscovery over Docker containers, mount `/var/run/docker.sock` into the Containerized Agent. On Windows, mount `\\.\pipe\docker_engine`.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}

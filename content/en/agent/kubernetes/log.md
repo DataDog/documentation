@@ -31,9 +31,11 @@ The Docker API is optimized to get logs from one container at a time, when there
 In order to start collecting your application logs you must be [runing the Datadog Agent in your Kubernetes cluster][2]. To enable log collection with your Agent, follow the instructions below:
 
 {{< tabs >}}
-{{% tab "Daemonset " %}}
+{{% tab "DaemonSet " %}}
 
-To enable Log collection with your DaemonSet:
+**Note**: This option is not supported on Windows. Use the Helm option instead.
+
+To enable log collection with your DaemonSet:
 
 1. Set the `DD_LOGS_ENABLED` and `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` variable to true in the *env* section of the `datadog.yaml` Agent manifest:
 
