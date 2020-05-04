@@ -8,13 +8,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/cluster_agent/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks/"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
-- link: "agent/kubernetes/daemonset_setup"
+- link: "/agent/kubernetes/daemonset_setup/"
   tag: "Documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "/agent/cluster_agent/troubleshooting"
+- link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
@@ -33,5 +33,5 @@ To enable the cluster metadata provider feature:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/cluster_agent/troubleshooting
+[1]: /agent/cluster_agent/troubleshooting/
 [2]: /agent/cluster_agent/setup/#step-3-create-the-cluster-agent-and-its-service

@@ -7,19 +7,19 @@ aliases:
   - /logs/languages
   - /integrations/windows_event_log/
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Discover how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/live_tail"
+- link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Datadog live tail functionality"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "See how to explore your logs"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging Without Limits*"
 ---
@@ -79,7 +79,7 @@ Any custom process or [logging library][18] able to forward logs through **TCP**
 
 The public endpoint is `http-intake.logs.datadoghq.com`. The API key must be added either in the path or as a header, for instance:
 
-```
+```bash
 curl -X POST https://http-intake.logs.datadoghq.com/v1/input \
      -H "Content-Type: text/plain" \
      -H "DD-API-KEY: <API_KEY>" \
@@ -88,13 +88,13 @@ curl -X POST https://http-intake.logs.datadoghq.com/v1/input \
 
 For more examples with JSON formats, multiple logs per request, or the use of query parameters, refer to the [Datadog Log HTTP API documentation][1].
 
-[1]: https://docs.datadoghq.com/api/?lang=bash#send-logs-over-http
+[1]: /api/v1/logs/#send-logs
 {{% /tab %}}
 {{% tab "HTTP EU Site" %}}
 
 The public endpoint is `http-intake.logs.datadoghq.eu`. The API key must be added either in the path or as a header, for instance:
 
-```
+```bash
 curl -X POST https://http-intake.logs.datadoghq.eu/v1/input \
      -H "Content-Type: text/plain" \
      -H "DD-API-KEY: <API_KEY>" \
@@ -103,7 +103,7 @@ curl -X POST https://http-intake.logs.datadoghq.eu/v1/input \
 
 For more examples with JSON formats, multiple logs per request, or the use of query parameters, refer to the [Datadog Log HTTP API documentation][1].
 
-[1]: https://docs.datadoghq.com/api/?lang=bash#send-logs-over-http
+[1]: /api/v1/logs/#send-logs
 {{% /tab %}}
 {{% tab "TCP US Site" %}}
 
@@ -271,24 +271,24 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 <br>
 \*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /agent/logs
+[1]: /agent/logs/
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#multi-line-aggregation
-[5]: /integrations/rsyslog
-[6]: /integrations/syslog_ng
-[7]: /integrations/nxlog
+[5]: /integrations/rsyslog/
+[6]: /integrations/syslog_ng/
+[7]: /integrations/nxlog/
 [8]: /integrations/fluentd/#log-collection
 [9]: /integrations/logstash/#log-collection
-[10]: /logs/processing
-[11]: /logs/processing/parsing
-[12]: /logs/explorer/facets
-[13]: /agent/docker/log
-[14]: /agent/kubernetes/management
-[15]: /agent/kubernetes/integrations
+[10]: /logs/processing/
+[11]: /logs/processing/parsing/
+[12]: /logs/explorer/facets/
+[13]: /agent/docker/log/
+[14]: /agent/guide/autodiscovery-management/
+[15]: /agent/kubernetes/integrations/
 [16]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 [17]: /integrations/amazon_lambda/#log-collection
 [18]: /logs/log_collection/#how-to-get-the-most-of-your-application-logs
 [19]: /security/logs/#information-security
-[20]: /logs/explorer/patterns
-[21]: /logs/explore
+[20]: /logs/explorer/patterns/
+[21]: /logs/explore/

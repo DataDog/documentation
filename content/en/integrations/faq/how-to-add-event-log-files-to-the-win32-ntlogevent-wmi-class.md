@@ -41,4 +41,4 @@ The changes should be immediate. To confirm that the event log is accesible thro
 Note: if there still aren't events when running the query, check the event viewer to confirm that there are any events in the log file. Also, make sure that the event log isn't disabled and that there are recent events available.
 {{< img src="integrations/faq/image8.png" alt="image8"  >}}
 
-[1]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs
+[1]: /integrations/faq/how-to-monitor-events-from-the-windows-event-logs/

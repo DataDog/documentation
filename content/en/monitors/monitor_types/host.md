@@ -3,13 +3,13 @@ title: Host Monitor
 kind: documentation
 description: "Check if one or more hosts are reporting to Datadog"
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -67,4 +67,4 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/host
-[2]: /monitors/notifications
+[2]: /monitors/notifications/

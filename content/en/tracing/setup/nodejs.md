@@ -204,14 +204,14 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization
+[1]: /tracing/visualization/
 [2]: https://datadog.github.io/dd-trace-js
 [3]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
-[4]: /tracing/send_traces
-[5]: /tracing/setup/docker
+[4]: /tracing/send_traces/
+[5]: /tracing/setup/docker/
 [6]: /agent/kubernetes/apm/
 [7]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[8]: /help
+[8]: /help/
 [9]: https://datadog.github.io/dd-trace-js/#integrations
 [10]: https://github.com/senchalabs/connect
 [11]: https://expressjs.com

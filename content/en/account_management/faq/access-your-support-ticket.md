@@ -19,4 +19,4 @@ If you don't see this after logging in, click on your name in the upper right ha
 
 If you would like to view your entire organization's tickets, reach out to [Datadog support][1].
 
-[1]: /help
+[1]: /help/

@@ -31,4 +31,4 @@ Such an Agent check would create the following event in your event stream:
 
 In this example, the host tag would have been applied even without referencing `get_hostname()`, but that reference added the hostname to the event title and content.
 
-[1]: /agent/agent_checks
+[1]: /agent/agent_checks/

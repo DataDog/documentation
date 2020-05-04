@@ -12,16 +12,16 @@ further_reading:
     - link: '/integrations/amazon_ecs/#trace-collection'
       tag: 'Documentation'
       text: 'Trace your ECS applications'
-    - link: "agent/docker/log"
+    - link: "/agent/docker/log/"
       tag: "Documentation"
       text: "Collect your application logs"
-    - link: "/agent/docker/integrations"
+    - link: "/agent/docker/integrations/"
       tag: "Documentation"
       text: "Collect automatically your applications metrics and logs"
-    - link: "/agent/guide/autodiscovery-management"
+    - link: "/agent/guide/autodiscovery-management/"
       tag: "Documentation"
       text: "Limit data collection to a subset of containers only"
-    - link: "/agent/docker/tag"
+    - link: "/agent/docker/tag/"
       tag: "Documentation"
       text: "Assign tags to all data emitted by a container"
 ---

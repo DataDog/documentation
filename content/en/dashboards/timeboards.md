@@ -5,13 +5,13 @@ aliases:
     - /graphing/dashboards/timeboard/
     - /dashboards/timeboard/
 further_reading:
-- link: "/dashboards/template_variables"
+- link: "/dashboards/template_variables/"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
-- link: "/dashboards/sharing"
+- link: "/dashboards/sharing/"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
-- link: "/dashboards/widgets"
+- link: "/dashboards/widgets/"
   tag: "Documentation"
   text: "Discover all available Widgets for your Dashboard"
 ---
@@ -78,7 +78,7 @@ The search query for **View related logs** is defined using the following parame
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/screenboard
+[1]: /dashboards/screenboard/
 [2]: /dashboards/screenboards/#display-utc-time
 [3]: /dashboards/screenboards/#notifications
 [4]: /dashboards/screenboards/#permissions
@@ -86,9 +86,9 @@ The search query for **View related logs** is defined using the following parame
 [6]: /dashboards/screenboards/#copy-import-or-export-dashboard-json
 [7]: /dashboards/screenboards/#delete-dashboard
 [8]: /dashboards/#new-dashboard
-[9]: /dashboards/widgets
+[9]: /dashboards/widgets/
 [10]: /events/#event-query-language
-[11]: /logs/search_syntax
+[11]: /logs/search_syntax/
 [12]: /dashboards/widgets/#full-screen
 [13]: https://app.datadoghq.com/process
 [14]: https://app.datadoghq.com/infrastructure/map

@@ -4,13 +4,13 @@ kind: faq
 aliases:
  - /agent/faq/kubernetes-docker-socket-log-collection
 further_reading:
-- link: "agent/autodiscovery"
+- link: "/agent/autodiscovery/"
   tag: "documentation"
   text: Docker Agent Autodiscovery
-- link: "agent/kubernetes/host_setup"
+- link: "/agent/kubernetes/host_setup/"
   tag: "documentation"
   text: "Kubernetes Host Setup"
-- link: "agent/kubernetes/integrations"
+- link: "/agent/kubernetes/integrations/"
   tag: "documentation"
   text: "Custom Integrations"
 ---

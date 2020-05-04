@@ -7,10 +7,10 @@ aliases:
   - /developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /developers/faq/dog-statsd-sample-rate-parameter-explained
 further_reading:
-- link: "developers/dogstatsd"
+- link: "/developers/dogstatsd/"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "developers/metrics/types"
+- link: "/developers/metrics/types/"
   tag: "Documentation"
   text: "Datadog Metric Types"
 ---
@@ -1112,12 +1112,12 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
+[1]: /developers/dogstatsd/
 [2]: /developers/metrics/types/?tab=count#definition
 [3]: /dashboards/functions/arithmetic/#cumulative-sum
 [4]: /dashboards/functions/arithmetic/#integral
 [5]: /developers/metrics/types/?tab=gauge#definition
 [6]: /developers/metrics/types/?tab=histogram#definition
 [7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[8]: /metrics/distributions
+[8]: /metrics/distributions/
 [9]: /developers/metrics/types/?tab=distribution#definition

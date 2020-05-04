@@ -2,19 +2,19 @@
 title: Kubernetes Log collection
 kind: documentation
 further_reading:
-- link: "/agent/kubernetes/apm"
+- link: "/agent/kubernetes/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
-- link: "/agent/kubernetes/prometheus"
+- link: "/agent/kubernetes/prometheus/"
   tag: "Documentation"
   text: "Collect your Prometheus metrics"
-- link: "/agent/kubernetes/integrations"
+- link: "/agent/kubernetes/integrations/"
   tag: "Documentation"
   text: "Collect automatically your applications metrics and logs"
-- link: "/agent/guide/autodiscovery-management"
+- link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Limit data collection to a subset of containers only"
-- link: "/agent/kubernetes/tag"
+- link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
 ---
@@ -89,7 +89,7 @@ To enable Log collection with your DaemonSet:
 
     The `pointdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
 
-[1]: /agent/guide/autodiscovery-management
+[1]: /agent/guide/autodiscovery-management/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -208,7 +208,7 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 
 **Note**: You don't need to set up the `<INTEGRATIONS_NAME>` since the Agent infers it from the file name directly.
 
-[1]: /agent/guide/ad_identifiers
+[1]: /agent/guide/ad_identifiers/
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -231,8 +231,8 @@ data:
 See the [Autodiscovery Container Identifiers][3] documentation for information on the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
 
 [1]: /agent/kubernetes/integrations/#configmap
-[2]: /agent/kubernetes/integrations
-[3]: /agent/guide/ad_identifiers
+[2]: /agent/kubernetes/integrations/
+[3]: /agent/guide/ad_identifiers/
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
@@ -287,8 +287,8 @@ With the key-value store enabled as a template source, the Agent looks for templ
 
 **Note**: To apply a specific configuration to a given container, Autodiscovery identifies containers by **image** when using the key-value stores by trying to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].image`.
 
-[1]: /integrations/consul
-[2]: /agent/guide/agent-commands
+[1]: /integrations/consul/
+[2]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -397,10 +397,10 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/log-collection-with-docker-socket
+[1]: /agent/faq/log-collection-with-docker-socket/
 [2]: /agent/kubernetes/
 [3]: /integrations/#cat-autodiscovery
 [4]: /agent/logs/advanced_log_collection/?tab=kubernetes#filter-logs
 [5]: /agent/logs/advanced_log_collection/?tab=kubernetes#scrub-sensitive-data-from-your-logs
 [6]: /agent/logs/advanced_log_collection/?tab=kubernetes#multi-line-aggregation
-[7]: /agent/guide/autodiscovery-management
+[7]: /agent/guide/autodiscovery-management/

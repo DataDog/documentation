@@ -162,10 +162,10 @@ To install the Datadog Agent on your Kubernetes cluster:
 [7]: /resources/yaml/datadog-agent-npm.yaml
 [8]: /resources/yaml/datadog-agent-vanilla.yaml
 [9]: /agent/kubernetes/apm/#setup
-[10]: /agent/kubernetes/log
-[11]: /agent/kubernetes/apm
+[10]: /agent/kubernetes/log/
+[11]: /agent/kubernetes/apm/
 [12]: /infrastructure/process/?tab=kubernetes#installation
-[13]: /network_performance_monitoring/installation
+[13]: /network_performance_monitoring/installation/
 [14]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [15]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
@@ -301,17 +301,17 @@ See the [Agent Commands guides][14] to discover all the Docker Agent commands.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/kubernetes-legacy
-[2]: /agent/kubernetes/integrations
+[1]: /agent/faq/kubernetes-legacy/
+[2]: /agent/kubernetes/integrations/
 [3]: https://github.com/helm/charts/tree/master/stable/datadog#all-configuration-options
 [4]: /agent/proxy/#agent-v6
-[5]: /agent/kubernetes/apm
-[6]: /agent/kubernetes/log
-[7]: /infrastructure/process
-[8]: /infrastructure/livecontainers
-[9]: /developers/dogstatsd
+[5]: /agent/kubernetes/apm/
+[6]: /agent/kubernetes/log/
+[7]: /infrastructure/process/
+[8]: /infrastructure/livecontainers/
+[9]: /developers/dogstatsd/
 [10]: /developers/dogstatsd/unix_socket/
-[11]: /agent/kubernetes/tag
+[11]: /agent/kubernetes/tag/
 [12]: /security/agent/#secrets-management
 [13]: /agent/guide/autodiscovery-management/
 [14]: /agent/guide/agent-commands/

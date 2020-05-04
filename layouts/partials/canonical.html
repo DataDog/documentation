@@ -6,9 +6,5 @@
       {{ end }}
     {{ end }}
 {{ else }}
-    {{ if eq $dot.Section "api" }}
-      <link rel="canonical" href="{{ "api/" | absLangURL }}">
-    {{ else }}
-      <link rel="canonical" href="{{ $dot.Permalink }}">
-    {{ end }}
+    <link rel="canonical" href="{{ $dot.Permalink }}">
 {{ end }}

@@ -9,19 +9,19 @@ further_reading:
     - link: 'logs/explorer'
       tag: 'Documentation'
       text: 'Learn how to explore your logs'
-    - link: "/agent/docker/apm"
+    - link: "/agent/docker/apm/"
       tag: "Documentation"
       text: "Collect your application traces"
-    - link: "/agent/docker/prometheus"
+    - link: "/agent/docker/prometheus/"
       tag: "Documentation"
       text: "Collect your Prometheus metrics"
-    - link: "/agent/docker/integrations"
+    - link: "/agent/docker/integrations/"
       tag: "Documentation"
       text: "Collect automatically your applications metrics and logs"
-    - link: "/agent/guide/autodiscovery-management"
+    - link: "/agent/guide/autodiscovery-management/"
       tag: "Documentation"
       text: "Limit data collection to a subset of containers only"
-    - link: "/agent/docker/tag"
+    - link: "/agent/docker/tag/"
       tag: "Documentation"
       text: "Assign tags to all data emitted by a container"
 ---
@@ -93,7 +93,7 @@ logs_config:
 [Restart the Agent][3] to see all your container logs in Datadog.
 
 
-[1]: /agent/basic_agent_usage
+[1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
@@ -226,12 +226,12 @@ For Kubernetes environements, refer to the [Kubernetes short lived container doc
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/journald
-[2]: /agent/docker/integrations
+[1]: /integrations/journald/
+[2]: /agent/docker/integrations/
 [3]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
 [4]: /agent/logs/#custom-log-collection
 [5]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
 [6]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
 [7]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
-[8]: /agent/guide/autodiscovery-management
-[9]: /agent/kubernetes/log#short-lived-containers
+[8]: /agent/guide/autodiscovery-management/
+[9]: /agent/kubernetes/log/#short-lived-containers

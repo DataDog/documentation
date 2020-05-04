@@ -8,7 +8,7 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
     tag: "Blog"
     text: "Introducing Datadog Synthetics"
-  - link: "tracing/"
+  - link: "/tracing/"
     tag: "Documentation"
     text: "APM and Distributed Tracing"
 
@@ -75,9 +75,9 @@ These traces are retained [just like your classical APM traces][11].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/api_tests
-[2]: /synthetics/browser_tests
-[3]: /tracing
+[1]: /synthetics/api_tests/
+[2]: /synthetics/browser_tests/
+[3]: /tracing/
 [4]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
 [5]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
 [6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
