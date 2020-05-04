@@ -80,11 +80,11 @@ Beta integrations are disabled by default but can be enabled individually.
 | Finatra Web             | 2.9+       | Fully Supported | `finatra`                                      |
 | Grizzly                 | 2.0+       | [Beta][8]       | `grizzly`                                      |
 | Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
-| Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
+| Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
 | Jetty (non-Servlet)     | 8+         | [Beta][8]       | `jetty`, `jetty-8`                             |
 | Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
-| Play                    | 2.3-2.7    | Fully Supported | `play`                                         |
-| Ratpack                 | 1.4+       | Fully Supported | `ratpack`                                      |
+| Play                    | 2.3-2.7    | Fully Supported | `play`, `play-action`                          |
+| Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
 | Spark Java              | 2.3+       | [Beta][8]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
@@ -107,7 +107,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 | Framework                | Versions    | Support Type    | Instrumentation Names (used for configuration) |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
-| Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`                                   |
+| Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`, `apache-httpclient`, `apache-http-client` |
 | Apache HTTP Async Client | 4.0+        | Fully Supported | `httpasyncclient`, `apache-httpasyncclient`    |
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
 | Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
@@ -119,9 +119,9 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Java RMI                 | all         | Fully Supported | `rmi`, `rmi-client`, `rmi-server`              |
 | Jax RS Clients           | 2.0+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | Jersey Client            | 1.9+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
-| JMS                      | 1 and 2     | Fully Supported | `jms`                                          |
+| JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
-| OkHTTP                   | 3.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
+| OkHTTP                   | 2.2+        | Fully Supported | `okhttp`, `okhttp-2`,`okhttp-3`                |
 | Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
 | Spring WebClient         | 5.0+        | Fully Supported | `spring-webflux`, `spring-webflux-client`      |
@@ -140,10 +140,11 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Cassandra               | 3.X      | Fully Supported | `cassandra`                                                                              |
 | Elasticsearch Transport | 2.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
 | Elasticsearch Rest      | 5.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
-| JDBC                    | N/A      | Fully Supported | `jdbc`                                                                                   |
-| Jedis                   | 1.4+     | Fully Supported | `redis`                                                                                  |
-| Lettuce                 | 5.0+     | Fully Supported | `lettuce`                                                                                |
+| JDBC                    | N/A      | Fully Supported | `jdbc`, `jdbc-datasource`                                                                |
+| Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                         |
+| Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                             |
 | MongoDB                 | 3.0+     | Fully Supported | `mongo`                                                                                  |
+| RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                           |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
@@ -167,15 +168,17 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 `dd-java-agent` includes support for automatically tracing the following other frameworks.
 
-| Framework        | Versions | Support Type    | Instrumentation Names (used for configuration) |
-| ---------------- | -------- | --------------- | ---------------------------------------------- |
-| Dropwizard Views | 0.7+     | Fully Supported | `dropwizard`, `dropwizard-view`                |
-| Hibernate        | 3.5+     | Fully Supported | `hibernate`                                    |
-| Hystrix          | 1.4+     | Fully Supported | `hystrix`                                      |
-| JSP Rendering    | 2.3+     | Fully Supported | `jsp`, `jsp-render`                            |
-| Spring Data      | 1.8+     | Fully Supported | `spring-data`                                  |
-| Spring Scheduling | 3.1+    | Fully Supported | `spring-scheduling`                            |
-| Twilio SDK       | 0+       | Fully Supported | `twilio-sdk`                                   |
+| Framework         | Versions | Support Type    | Instrumentation Names (used for configuration) |
+| ----------------- | -------- | --------------- | ---------------------------------------------- |
+| Dropwizard Views  | 0.7+     | Fully Supported | `dropwizard`, `dropwizard-view`                |
+| Hibernate         | 3.5+     | Fully Supported | `hibernate`, `hibernate-core`                  |
+| Hystrix           | 1.4+     | Fully Supported | `hystrix`                                      |
+| JSP Rendering     | 2.3+     | Fully Supported | `jsp`, `jsp-render`, `jsp-compile`             |
+| Slf4J MDC         | 1+       | Fully Supported | `mdc` (see also configuration for `dd.logs.injection`) |
+| Project Reactor   | 3.1+     | Fully Supported | `reactor-core`                                 |
+| Spring Data       | 1.8+     | Fully Supported | `spring-data`                                  |
+| Spring Scheduling | 3.1+     | Fully Supported | `spring-scheduling`                            |
+| Twilio SDK        | 0+       | Fully Supported | `twilio-sdk`                                   |
 
 Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
 
