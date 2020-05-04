@@ -624,11 +624,13 @@ const processSpecs = (specs) => {
         .then((deref) => {
           const version = spec.split('/')[3];
           const jsonString = safeJsonStringify(deref, null, 2);
-          fs.writeFileSync(
-              `./data/api/${version}/full_spec_deref.json`,
-              jsonString,
-              'utf8'
-          );
+          const pathToJson = `./data/api/${version}/full_spec_deref.json`;
+          fs.writeFileSync(pathToJson, jsonString, 'utf8');
+          // make a copy in static for postman
+          fs.copyFile(pathToJson, `./static/resources/json/full_spec_${version}.json`, (err) => {
+            if (err) throw err;
+            console.log('full spec json copied to /static/resources/json/');
+          });
           updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
           createResources(fileData, JSON.parse(jsonString), version);

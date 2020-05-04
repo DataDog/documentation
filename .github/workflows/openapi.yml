@@ -20,7 +20,7 @@ jobs:
     - name: Create local changes
       run: |
         npm run build:apiPages
-        git add ./content ./data ./config
+        git add ./content ./data ./config ./static
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
