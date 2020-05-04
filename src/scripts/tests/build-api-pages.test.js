@@ -72,7 +72,7 @@ describe(`getSchema`, () => {
       "application/json": {"schema": expected},
       "foo/bar/baz": {},
       "another_test": {},
-      "this-could-be-anything": {},
+      "this-could-be-anything": {}
     });
     expect(actual).toEqual(expected);
   });
@@ -98,6 +98,12 @@ describe(`getTagSlug`, () => {
       const actual = bp.getTagSlug("AWS Integration");
       expect(actual).toEqual(expected);
   });
+
+  it('should return lowercase and hyphenated together', () => {
+    const expected = "get-a-monitors-details";
+    const actual = bp.getTagSlug("Get a monitor's details");
+    expect(actual).toEqual(expected);
+});
 
 });
 
@@ -664,14 +670,14 @@ describe(`isReadOnlyRow`, () => {
 
 describe(`fieldColumn`, () => {
 
-  let anykeyMarkup = "&lt;any&#45;key&gt;";
-  let anykeyResult = `
+  const anykeyMarkup = "&lt;any&#45;key&gt;";
+  const anykeyResult = `
     <div class="col-4 column">
       <p class="key">${anykeyMarkup}</p>
     </div>
   `;
 
-  let emptyResult = `
+  const emptyResult = `
     <div class="col-4 column">
       <p class="key"></p>
     </div>
@@ -699,7 +705,7 @@ describe(`typeColumn`, () => {
 
 describe(`descColumn`, () => {
 
-  let emptyMarkdown = '<div class="col-6 column"></div>';
+  const emptyMarkdown = '<div class="col-6 column"></div>';
 
   it('should return empty column markup when desc empty', () => {
     const obj = {description: ""};
@@ -823,9 +829,9 @@ describe(`schemaTable`, () => {
 
   xit('should return html table wrapping rows recursively generated', () => {
 
-    //spyOn(build, 'rowRecursive').and.returnValue('FooBar');
-    //const spy = jest.spyOn(build, 'rowRecursive').mockImplementation(() => 'FooBar');
-    //const spy = jest.spyOn(bp, 'rowRecursive').mockImplementation(jest.fn());
+    // spyOn(build, 'rowRecursive').and.returnValue('FooBar');
+    // const spy = jest.spyOn(build, 'rowRecursive').mockImplementation(() => 'FooBar');
+    // const spy = jest.spyOn(bp, 'rowRecursive').mockImplementation(jest.fn());
 
     const actual = bp.schemaTable({});
     const expected = `
