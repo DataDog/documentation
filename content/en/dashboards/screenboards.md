@@ -6,13 +6,13 @@ aliases:
     - /graphing/dashboards/screenboard/
     - /dashboards/screenboard/
 further_reading:
-- link: "/dashboards/template_variables"
+- link: "/dashboards/template_variables/"
   tag: "Documentation"
   text: "Enhance your Dashboards with Template Variables"
-- link: "/dashboards/sharing"
+- link: "/dashboards/sharing/"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
-- link: "/dashboards/widgets"
+- link: "/dashboards/widgets/"
   tag: "Documentation"
   text: "Discover all available Widgets for your Dashboard"
 ---
@@ -77,8 +77,8 @@ Use this option to permanently delete your screenboard. You are prompted to conf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/guide/custom_time_frames
+[1]: /dashboards/guide/custom_time_frames/
 [2]: /dashboards/sharing/#dashboards
-[3]: /events
-[4]: /account_management/users/default_roles
+[3]: /events/
+[4]: /account_management/users/default_roles/
 [5]: /dashboards/#copy-import-export

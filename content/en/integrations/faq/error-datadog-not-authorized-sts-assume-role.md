@@ -34,4 +34,4 @@ Still need help? Contact [Datadog support][3].
 
 [1]: /integrations/amazon_web_services/#installation
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: /help
+[3]: /help/

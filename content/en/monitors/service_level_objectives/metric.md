@@ -5,7 +5,7 @@ description: "Use metrics to define a Service Level Objective"
 aliases:
   - /monitors/service_level_objectives/event/
 further_reading:
-- link: "metrics"
+- link: "/metrics/"
   tag: "Documentation"
   text: "More information about metrics"
 ---

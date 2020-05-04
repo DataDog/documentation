@@ -28,7 +28,7 @@ When a threat is detected with a Detection Rule, a Security Signal is generated.
 
 [1]: /logs/log_collection/?tab=tcpussite
 [2]: https://www.datadoghq.com/blog/logging-without-limits/
-[3]: /security_monitoring/default_rules
-[4]: /security_monitoring/detection_rules
+[3]: /security_monitoring/default_rules/
+[4]: /security_monitoring/detection_rules/
 [5]: https://app.datadoghq.com/security
-[6]: /security_monitoring/explorer
+[6]: /security_monitoring/explorer/

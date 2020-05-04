@@ -122,8 +122,8 @@ Paste the generated code snippet into the head tag (in front of any other script
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum
-[2]: /real_user_monitoring/data_collected
-[3]: /real_user_monitoring/dashboards
+[2]: /real_user_monitoring/data_collected/
+[3]: /real_user_monitoring/dashboards/
 [4]: https://www.npmjs.com/package/@datadog/browser-rum
 [5]: /account_management/api-app-keys/#client-tokens
-[6]: /real_user_monitoring/faq/proxy_rum_data
+[6]: /real_user_monitoring/faq/proxy_rum_data/

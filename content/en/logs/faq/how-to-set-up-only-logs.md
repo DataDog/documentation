@@ -28,7 +28,7 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 4. [Restart the Agent][3].
 
 [1]: /agent/guide/agent-configuration-files/
-[2]: /logs/log_collection
+[2]: /logs/log_collection/
 [3]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}

@@ -187,4 +187,4 @@ Need help? Contact [Datadog support][6].
 [3]: https://kubernetes.io/docs/tasks/debug-application-cluster/audit/
 [4]: /agent/kubernetes/log/
 [5]: /agent/guide/agent-commands/#agent-status-and-information
-[6]: /help
+[6]: /help/

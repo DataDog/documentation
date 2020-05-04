@@ -7,7 +7,7 @@ aliases:
   - /account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
   - /account_management/multi_organisations
 further_reading:
-- link: "account_management/saml"
+- link: "/account_management/saml/"
   tag: "Documentation"
   text: "Configure SAML for your Datadog account"
 ---
@@ -57,11 +57,11 @@ To configure SAML for multi-organizations, use the following procedure:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/#managing-your-organizations
-[2]: /help
+[2]: /help/
 [3]: https://app.datadoghq.com/account/new_org
 [4]: https://app.datadoghq.com/account/billing
 [5]: mailto:success@datadoghq.com
-[6]: /api
+[6]: /api/
 [7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [8]: /dashboards/screenboards/#backup-my-screenboard
-[9]: /monitors/manage_monitor
+[9]: /monitors/manage_monitor/

@@ -24,4 +24,4 @@ Select your language below to discover how to manually instrument your applicati
 
 {{< partial name="apm/apm-manual-instrumentation.html" >}}
 
-[1]: /tracing/visualization
+[1]: /tracing/visualization/

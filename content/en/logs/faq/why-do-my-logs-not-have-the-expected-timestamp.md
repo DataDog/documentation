@@ -2,13 +2,13 @@
 title: Why do my logs not have the expected timestamp?
 kind: faq
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/faq/how-to-investigate-a-log-parsing-issue"
+- link: "/logs/faq/how-to-investigate-a-log-parsing-issue/"
   tag: "FAQ"
   text: "How to investigate a log parsing issue?"
 ---
@@ -76,4 +76,4 @@ However, this default timestamp does not always reflect the actual value that mi
 [7]: https://www.iso.org/iso-8601-date-and-time-format.html
 [8]: https://en.wikipedia.org/wiki/Unix_time
 [9]: https://www.ietf.org/rfc/rfc3164.txt
-[10]: /logs/processing
+[10]: /logs/processing/

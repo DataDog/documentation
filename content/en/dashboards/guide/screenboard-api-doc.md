@@ -7,7 +7,7 @@ aliases:
 ---
 
 <div class="alert alert-danger">
-This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/?lang=python#dashboards">new Dashboard endpoint</a> instead.
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/v1/dashboards/">new Dashboard endpoint</a> instead.
 </div>
 
 The Screenboard endpoint allows you to programmatically create, update, delete, and query Screenboards. [Read more about Screenboards][1].
@@ -476,4 +476,4 @@ curl -X GET "https://api.datadoghq.com/api/v1/screen?api_key=${api_key}&applicat
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /dashboards/screenboard
+[1]: /dashboards/screenboard/

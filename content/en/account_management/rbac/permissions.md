@@ -7,7 +7,7 @@ further_reading:
     - link: '/account_management/rbac/'
       tag: 'Documentation'
       text: 'Learn how to create, update and delete a Role'
-    - link: '/api/#get-permissions'
+    - link: '/api/v2/roles/#list-permissions'
       tag: 'Documentation'
       text: 'Manage your permissions with the Permission API'
 ---
@@ -93,7 +93,7 @@ Go to your [Datadog Roles page][1] and select the checkbox `read` as below for t
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -115,7 +115,7 @@ Go to your [Datadog Roles page][1] and select the checkbox `other` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -144,7 +144,7 @@ Go to your [Datadog Roles page][1] and select the checkbox `other` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -177,7 +177,7 @@ Go to your [Datadog Roles Page][1] and select the checkbox `write` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -222,8 +222,8 @@ curl -X POST \
 ```
 
 
-[1]: /api/#roles
-[2]: /api/#get-permissions
+[1]: /api/v2/roles/
+[2]: /api/v2/roles/#list-permissions
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -256,7 +256,7 @@ Go to your [Datadog Roles page][1] and select the checkbox `write` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -278,7 +278,7 @@ Go to your [Datadog Roles page][1] and select the checkbox `other` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -300,7 +300,7 @@ Go to your [Datadog Roles page][1] and select the checkbox `other` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -359,8 +359,8 @@ curl -X POST \
 ```
 
 
-[1]: /api/#roles
-[2]: /api/#get-permissions
+[1]: /api/v2/roles/
+[2]: /api/v2/roles/#list-permissions
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -369,4 +369,4 @@ curl -X POST \
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/users/#edit-a-user-s-roles
-[2]: /api/#get-permissions
+[2]: /api/v2/roles/#list-permissions

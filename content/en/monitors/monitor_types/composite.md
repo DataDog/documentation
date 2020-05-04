@@ -5,13 +5,13 @@ aliases:
     - /guides/composite_monitors
 description: "Alert on an expression combining multiple monitors"
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -182,4 +182,4 @@ Use your best judgment to choose multi-alert monitors that makes sense together.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/composite
-[2]: /monitors/notifications
+[2]: /monitors/notifications/

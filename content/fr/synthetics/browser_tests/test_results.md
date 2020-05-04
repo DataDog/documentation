@@ -63,5 +63,5 @@ Les erreurs les plus courantes comprennent :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tracing/visualization/trace
-[2]: /fr/help
+[1]: /fr/tracing/visualization/trace/
+[2]: /fr/help/

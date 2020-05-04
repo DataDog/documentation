@@ -59,7 +59,7 @@ Webhook をセットアップするには、名前 (モニターで参照され�
 
 {{< img src="developers/faq/check_status_editor.png" alt="check_status_editor"  >}}
 
-[1]: /ja/integrations/webhooks
+[1]: /ja/integrations/webhooks/
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
-[3]: /ja/api
-[4]: /ja/dashboards/screenboard
+[3]: /ja/api/
+[4]: /ja/dashboards/screenboard/

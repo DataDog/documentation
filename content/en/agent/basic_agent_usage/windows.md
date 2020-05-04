@@ -6,13 +6,13 @@ platform: Windows
 aliases:
     - /guides/basic_agent_usage/windows/
 further_reading:
-- link: "logs/"
+- link: "/logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "/infrastructure/process"
+- link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Collect your processes"
-- link: "tracing"
+- link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
 ---
@@ -84,7 +84,7 @@ Each configuration item is added as a property to the command line. The followin
 **Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: /agent/faq/windows-agent-ddagent-user
+[2]: /agent/faq/windows-agent-ddagent-user/
 {{% /tab %}}
 {{% tab "Upgrading" %}}
 
@@ -92,7 +92,7 @@ Agent 7 only supports Python 3. Before upgrading, confirm that your custom check
 
 If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a more recent version of Agent 5 (>= 5.12.0 but < 6.0.0) using the [EXE installer][2] and then upgrade to Datadog Agent version >= 6.
 
-[1]: /agent/guide/python-3
+[1]: /agent/guide/python-3/
 [2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.exe
 {{% /tab %}}
 {{< /tabs >}}
@@ -164,7 +164,7 @@ Configuration files for [integrations][1] are in:
 
 **Note**: `ProgramData` is a hidden folder.
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -177,7 +177,7 @@ Configuration files for [integrations][1] are in:
 
 **Note**: `ProgramData` is a hidden folder.
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -250,7 +250,7 @@ The Agent logs are located in `C:\ProgramData\Datadog\logs\agent.log`.
 
 Need help? Contact [Datadog support][1].
 
-[1]: /help
+[1]: /help/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -260,7 +260,7 @@ For Windows Server 2008, Vista, and newer systems, the Agent logs are located in
 
 Need help? Contact [Datadog support][1].
 
-[1]: /help
+[1]: /help/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -395,11 +395,11 @@ After configuration is complete, [restart the Agent][11].
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
 [2]: /agent/basic_agent_usage/#supported-os-versions
-[3]: /agent/faq/windows-agent-ddagent-user
+[3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
-[5]: /agent/guide/datadog-agent-manager-windows
+[5]: /agent/guide/datadog-agent-manager-windows/
 [6]: /#monitoring-windows-processes
-[7]: /integrations/wmi
+[7]: /integrations/wmi/
 [8]: https://app.datadoghq.com/monitors#create/integration
 [9]: /infrastructure/process/?tab=linuxwindows#installation
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
