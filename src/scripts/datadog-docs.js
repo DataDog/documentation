@@ -573,15 +573,6 @@ $(document).ready(function () {
     //     }
     // });
 
-    // api dropdown select
-    $('.api-select').on('change', function (e) {
-        const href = $(this).val();
-        if(href.substr(0, 1) === '#') {
-            // moveToAnchor(href.substr(1), false);
-            return false;
-        }
-    });
-
     const searchParam = getParameterByName('s');
     if (searchParam) {
         $('.sidenav-search input[name="s"]').val(searchParam);
@@ -703,7 +694,7 @@ function updateMainContentAnchors() {
         const id = $(this).attr('id');
         $(this).wrapInner(`<a href="#${id}"></a>`).on('click', function(e) {
             e.preventDefault();
-            // moveToAnchor(id);
+            moveToAnchor(id);
             return false;
         });
     });
@@ -713,7 +704,7 @@ function updateMainContentAnchors() {
             e.preventDefault();
             const id = e.target.hash.split('#').join('');
             if (id) {
-                // moveToAnchor(id);
+                moveToAnchor(id);
             }
         }
     });
