@@ -1,5 +1,106 @@
 import * as bp from '../build-api-pages';
 
+describe(`updateMenu`, () => {
+
+
+
+});
+
+describe(`createPages`, () => {
+
+
+
+});
+
+describe(`createResources`, () => {
+
+
+
+});
+
+describe(`getSchema`, () => {
+
+  it('should return the schema object with non application/json formatted first key', () => {
+    const expected = {
+        "description": "This is a test",
+        "properties": {
+          "fake_foo": {
+            "description": "This is a test",
+            "example": "wwwtest",
+            "type": "string"
+          }
+        },
+        "type": "object"
+    };
+    const actual = bp.getSchema({
+      "foo/bar/baz": {"schema": expected}
+    });
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return the schema object with application/json as key', () => {
+    const expected = {
+      "description": "This is a test",
+      "properties": {
+        "fake_foo": {
+          "description": "This is a test",
+          "example": "wwwtest",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.getSchema({
+      "application/json": {"schema": expected}
+    });
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return the the first object', () => {
+    const expected = {
+      "description": "This is a test",
+      "properties": {
+        "fake_foo": {
+          "description": "This is a test",
+          "example": "wwwtest",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.getSchema({
+      "application/json": {"schema": expected},
+      "foo/bar/baz": {},
+      "another_test": {},
+      "this-could-be-anything": {},
+    });
+    expect(actual).toEqual(expected);
+  });
+
+});
+
+describe(`getTagSlug`, () => {
+
+  it('should return lowercase', () => {
+      const expected = "integration";
+      const actual = bp.getTagSlug("Integration");
+      expect(actual).toEqual(expected);
+  });
+
+  it('should return hyphenated', () => {
+      const expected = "this-is-some-space";
+      const actual = bp.getTagSlug("this is some space");
+      expect(actual).toEqual(expected);
+  });
+
+  it('should return lowercase and hyphenated together', () => {
+      const expected = "aws-integration";
+      const actual = bp.getTagSlug("AWS Integration");
+      expect(actual).toEqual(expected);
+  });
+
+});
+
 describe(`isTagMatch `, () => {
 
   let pathObj;
@@ -63,6 +164,13 @@ describe(`isTagMatch `, () => {
     const tag = "Monitors";
     const actual = bp.isTagMatch(pathObj, tag);
     const expected = true;
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return false when no keys', () => {
+    const tag = "Monitors";
+    const actual = bp.isTagMatch({}, tag);
+    const expected = false;
     expect(actual).toEqual(expected);
   });
 });
@@ -625,6 +733,91 @@ describe(`rowRecursive`, () => {
 
 });
 
+describe(`addHasExpandClass`, () => {
+
+  it('should do nothing when substring js-collapse-trigger found', () => {
+    const mockInput = `
+    <div class="table-response schema-table row">
+      <p class="expand-all js-expand-all text-primary">Expand All</p>
+      <div class="col-12">
+        <div class="row table-header">
+          <div class="col-4 column">
+            <p class="font-semibold">Field</p>
+          </div>
+          <div class="col-2 column">
+            <p class="font-semibold">Type</p>
+          </div>
+          <div class="col-6 column">
+            <p class="font-semibold">Description</p>
+          </div>
+        </div>
+        <div class="row first-row js-collapse-trigger collapse-trigger">Testing Div</div>
+      </div>  
+    </div>`.trim();
+    const expected = `
+    <div class="table-response schema-table row">
+      <p class="expand-all js-expand-all text-primary">Expand All</p>
+      <div class="col-12">
+        <div class="row table-header">
+          <div class="col-4 column">
+            <p class="font-semibold">Field</p>
+          </div>
+          <div class="col-2 column">
+            <p class="font-semibold">Type</p>
+          </div>
+          <div class="col-6 column">
+            <p class="font-semibold">Description</p>
+          </div>
+        </div>
+        <div class="row first-row js-collapse-trigger collapse-trigger">Testing Div</div>
+      </div>  
+    </div>`.trim();
+    const actual = bp.addHasExpandClass(mockInput);
+    expect(actual).toEqual(expected);
+  });
+
+  it('should add has-no-expands class when substring js-collapse-trigger not found', () => {
+    const mockInput = `
+    <div class="table-response schema-table row">
+      <p class="expand-all js-expand-all text-primary">Expand All</p>
+      <div class="col-12">
+        <div class="row table-header">
+          <div class="col-4 column">
+            <p class="font-semibold">Field</p>
+          </div>
+          <div class="col-2 column">
+            <p class="font-semibold">Type</p>
+          </div>
+          <div class="col-6 column">
+            <p class="font-semibold">Description</p>
+          </div>
+        </div>
+        <div class="row first-row collapse-trigger">Testing Div</div>
+      </div>  
+    </div>`.trim();
+    const expected = `
+    <div class="table-response schema-table has-no-expands row">
+      <p class="expand-all js-expand-all text-primary">Expand All</p>
+      <div class="col-12">
+        <div class="row table-header">
+          <div class="col-4 column">
+            <p class="font-semibold">Field</p>
+          </div>
+          <div class="col-2 column">
+            <p class="font-semibold">Type</p>
+          </div>
+          <div class="col-6 column">
+            <p class="font-semibold">Description</p>
+          </div>
+        </div>
+        <div class="row first-row collapse-trigger">Testing Div</div>
+      </div>  
+    </div>`.trim();
+    const actual = bp.addHasExpandClass(mockInput);
+    expect(actual).toEqual(expected);
+  });
+
+});
 
 describe(`schemaTable`, () => {
 
@@ -747,10 +940,5 @@ describe(`schemaTable`, () => {
       </div>`.trim();
     expect(actual).toEqual(expected);
   });
-
-});
-
-describe(`buildResources`, () => {
-
 
 });

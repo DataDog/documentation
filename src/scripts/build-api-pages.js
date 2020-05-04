@@ -187,7 +187,7 @@ const getTagSlug = (tagName) => slugify(tagName, {lower: true, replacement: '-'}
  */
 const isTagMatch = (pathObj, tag) => {
   const [firstActionName] = Object.keys(pathObj);
-  return (pathObj[firstActionName].tags) ? pathObj[firstActionName].tags[0] === tag : false;
+  return (firstActionName && pathObj[firstActionName].tags) ? pathObj[firstActionName].tags[0] === tag : false;
 };
 
 
@@ -651,6 +651,9 @@ module.exports = {
   typeColumn,
   schemaTable,
   rowRecursive,
-  filterExampleJson
+  filterExampleJson,
+  getSchema,
+  getTagSlug,
+  addHasExpandClass
 };
 
