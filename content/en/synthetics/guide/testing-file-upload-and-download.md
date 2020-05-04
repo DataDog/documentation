@@ -13,7 +13,7 @@ further_reading:
       text: 'Configure a Browser Test'
 ---
 
-Web applications can embed a lot of logic, and although end-to-end tests are often mostly made of basic interactions (eg. clicks, input forms, ...) with your website, you sometimes need to go one step further and verify complex functionalities in order to ensure key business transactions can be performed on your application.
+Web applications can embed a lot of logic, and although end-to-end tests are often mostly made of basic interactions (for example, clicks and input forms) for testing your website, you sometimes need to go one step further and verify complex interactions to ensure key business transactions can be performed on your application.
 
 ## Testing a file upload
 
