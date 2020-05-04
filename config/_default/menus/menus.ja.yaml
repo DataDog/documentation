@@ -1854,7 +1854,7 @@ api_v1:
     url: delete-a-monitor
   - name: Get a monitor's details
     parent: Monitors
-    url: get-a-monitor's-details
+    url: get-a-monitors-details
   - name: Edit a monitor
     parent: Monitors
     url: edit-a-monitor
@@ -1935,13 +1935,13 @@ api_v1:
     url: delete-a-slo
   - name: Get a SLO's details
     parent: Service Level Objectives
-    url: get-a-slo's-details
+    url: get-a-slos-details
   - name: Update a SLO
     parent: Service Level Objectives
     url: update-a-slo
   - name: Get an SLO's history
     parent: Service Level Objectives
-    url: get-an-slo's-history
+    url: get-an-slos-history
   - name: Slack Integration
     url: /ja/api/v1/slack-integration/
     identifier: Slack Integration
@@ -1974,10 +1974,10 @@ api_v1:
     url: create-or-clone-a-test
   - name: Get test latest results (as summaries)
     parent: Synthetics
-    url: get-test-latest-results-(as-summaries)
+    url: get-test-latest-results-as-summaries
   - name: Get test result (browser)
     parent: Synthetics
-    url: get-test-result-(browser)
+    url: get-test-result-browser
   - name: Delete multiple tests
     parent: Synthetics
     url: delete-multiple-tests
@@ -1989,13 +1989,13 @@ api_v1:
     url: update-test
   - name: Get test latest results (as summaries)
     parent: Synthetics
-    url: get-test-latest-results-(as-summaries)
+    url: get-test-latest-results-as-summaries
   - name: Get test result (API)
     parent: Synthetics
-    url: get-test-result-(api)
+    url: get-test-result-api
   - name: Change test pause/live status
     parent: Synthetics
-    url: change-test-pauselive-status
+    url: change-test-pause/live-status
   - name: Tags
     url: /ja/api/v1/tags/
     identifier: Tags
