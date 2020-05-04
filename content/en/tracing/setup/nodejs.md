@@ -126,27 +126,29 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Web Framework Compatibility
 
-| Module           | Versions | Support Type    | Notes                                      |
-| ---------------- | -------- | --------------- | ------------------------------------------ |
-| [connect][10]    | `>=2`    | Fully supported |                                            |
-| [express][11]    | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][12]   |
-| [fastify][13]    | `>=1`    | Fully supported |                                            |
-| [graphql][14]    | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
-| [gRPC][15]       | `>=1.13` | Fully supported |                                            |
-| [hapi][16]       | `>=2`    | Fully supported |                                            |
-| [koa][17]        | `>=2`    | Fully supported |                                            |
-| [paperplane][18] | `>=2.3`  | Fully supported | Not supported in [serverless-mode][19]     |
-| [restify][20]    | `>=3`    | Fully supported |                                            |
+| Module                  | Versions | Support Type    | Notes                                      |
+| ----------------------- | -------- | --------------- | ------------------------------------------ |
+| [connect][10]           | `>=2`    | Fully supported |                                            |
+| [express][11]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][12]   |
+| [fastify][13]           | `>=1`    | Fully supported |                                            |
+| [graphql][14]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
+| [gRPC][15]              | `>=1.13` | Fully supported |                                            |
+| [hapi][16]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
+| [koa][17]               | `>=2`    | Fully supported |                                            |
+| [microgateway-core][53] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][54] CLI requires static patching using [@datadog/cli][55]. |
+| [paperplane][18]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][19]     |
+| [restify][20]           | `>=3`    | Fully supported |                                            |
 
 #### Native Module Compatibility
 
-| Module      | Support Type    |
-| ----------- | --------------- |
-| [dns][21]   | Fully supported |
-| [fs][22]    | Fully supported |
-| [http][23]  | Fully supported |
-| [https][24] | Fully supported |
-| [net][25]   | Fully supported |
+| Module      | Support Type        | Notes |
+| ----------- | ------------------- | ------------------------------------------ |
+| [dns][21]   | Fully supported     |       |
+| [fs][22]    | Fully supported     |       |
+| [http][23]  | Fully supported     |       |
+| [https][24] | Fully supported     |       |
+| [http2][56] | Partially supported | Only HTTP2 clients are currently supported and not servers. |
+| [net][25]   | Fully supported     |       |
 
 #### Data Store Compatibility
 
@@ -167,13 +169,14 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 #### Worker Compatibility
 
-| Module             | Versions | Support Type    | Notes                                                  |
-| ------------------ | -------- | --------------- | ------------------------------------------------------ |
-| [amqp10][38]       | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
-| [amqplib][39]      | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
-| [generic-pool][40] | `>=2`    | Fully supported |                                                        |
-| [kafka-node][41]   |          | Coming Soon     |                                                        |
-| [rhea][42]         | `>=1`    | Fully supported |                                                        |
+| Module                     | Versions | Support Type    | Notes                                                  |
+| -------------------------- | -------- | --------------- | ------------------------------------------------------ |
+| [@google-cloud/pubsub][57] | `>=1.2`  | Fully supported |                                                        |
+| [amqp10][38]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
+| [amqplib][39]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
+| [generic-pool][40]         | `>=2`    | Fully supported |                                                        |
+| [kafka-node][41]           |          | Coming Soon     |                                                        |
+| [rhea][42]                 | `>=1`    | Fully supported |                                                        |
 
 #### SDK Compatibility
 
@@ -256,3 +259,8 @@ For details about how to how to toggle and configure plugins, check out the [API
 [50]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
 [51]: http://getpino.io
 [52]: https://github.com/winstonjs/winston
+[53]: https://github.com/apigee/microgateway-core
+[54]: https://github.com/apigee-internal/microgateway
+[55]: https://www.npmjs.com/package/@datadog/cli
+[56]: https://nodejs.org/api/http2.html
+[57]: https://github.com/googleapis/nodejs-pubsub
