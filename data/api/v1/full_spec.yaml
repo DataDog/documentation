@@ -1571,7 +1571,7 @@ components:
       - widgets
       type: object
     HTTPLog:
-      description: TODO.
+      description: Logs that are sent over HTTP.
       properties:
         ddsource:
           description: 'The integration name associated with your log: the technology
@@ -2173,10 +2173,10 @@ components:
       - url
       type: object
     IntakePayloadAccepted:
-      description: TODO.
+      description: The payload accepted for intake.
       properties:
         status:
-          description: TODO.
+          description: The status of the intake payload.
           example: ok
           type: string
       type: object
@@ -3260,7 +3260,7 @@ components:
           type: array
       type: object
     MetricsPayload:
-      description: TODO.
+      description: The metrics' payload.
       properties:
         series:
           description: A list of time series to submit to Datadog.
@@ -4703,49 +4703,49 @@ components:
           example: system.load.1
           type: string
         points:
-          description: TODO.
+          description: Points relating to a metric.
           items:
             $ref: '#/components/schemas/Point'
           type: array
         tags:
           description: A list of tags associated with the metric.
           items:
-            description: TODO.
+            description: Individual tags.
             type: string
           type: array
         type:
           default: gauge
-          description: TODO.
+          description: The type of the metric.
           type: string
       required:
       - metric
       - points
       type: object
     ServiceCheck:
-      description: TODO.
+      description: An object containing service check and status.
       properties:
         check:
-          description: TODO.
+          description: The check.
           example: app.ok
           type: string
         host_name:
-          description: TODO.
+          description: The host name correlated with the check.
           example: app.host1
           type: string
         message:
-          description: TODO.
+          description: Message containing check status.
           example: app is running
           type: string
         status:
           $ref: '#/components/schemas/ServiceCheckStatus'
         tags:
-          description: TODO.
+          description: Tags related to a check.
           items:
-            description: TODO.
+            description: Items related to a check.
             type: string
           type: array
         timestamp:
-          description: TODO.
+          description: Time of check.
           format: int64
           type: integer
       required:
@@ -4753,7 +4753,7 @@ components:
       - status
       type: object
     ServiceCheckStatus:
-      description: TODO.
+      description: The status of a service check.
       enum:
       - 0
       - 1
@@ -4767,7 +4767,7 @@ components:
       - CRITICAL
       - UNKNOWN
     ServiceChecks:
-      description: TODO.
+      description: The service checks.
       items:
         $ref: '#/components/schemas/ServiceCheck'
       type: array
@@ -5970,7 +5970,7 @@ components:
         modified_by:
           $ref: '#/components/schemas/SyntheticsTestAuthor'
         monitor_id:
-          description: TODO.
+          description: The associated monitor ID.
           format: int64
           type: integer
         name:
@@ -6038,7 +6038,7 @@ components:
             signed certificate.
           type: boolean
         allow_insecure:
-          description: TODO.
+          description: Allows loading insecure content for an HTTP request.
           type: boolean
         device_ids:
           description: Array with the different device IDs used to run the test.
@@ -6049,7 +6049,7 @@ components:
           description: For API SSL test, whether or not the test should follow redirects.
           type: boolean
         min_failure_duration:
-          description: TODO.
+          description: Minimum amount of time before declaring the test has failed.
           format: int64
           type: integer
         min_location_failed:
@@ -7224,7 +7224,7 @@ components:
           type: array
       type: object
     UsageTraceHour:
-      description: TODO.
+      description: The hours of trace usage.
       properties:
         hour:
           description: The hour for the usage.
@@ -7236,7 +7236,7 @@ components:
           type: integer
       type: object
     UsageTraceResponse:
-      description: TODO.
+      description: A response containing trace usage.
       properties:
         usage:
           description: Array with the number of hourly traces indexed for a given
@@ -7577,7 +7577,7 @@ components:
       - palette
       type: object
     WidgetDefinition:
-      description: Definition of the widget.
+      description: '[Definition of the widget](https://docs.datadoghq.com/dashboards/widgets/).'
       discriminator:
         mapping:
           alert_graph: '#/components/schemas/AlertGraphWidgetDefinition'
@@ -9980,13 +9980,9 @@ paths:
         above, so this endpoint can be polled intermittently instead of blocking.
 
         - Returns a status of ''created'' when it''s checking if the Lambda exists
-        in the account.
-
-        - Returns a status of ''waiting'' while checking.
-
-        - Returns a status of ''checked and ok'' if the Lambda exists.
-
-        - Returns a status of ''error'' if the Lambda does not exist.'
+        in the account. - Returns a status of ''waiting'' while checking. - Returns
+        a status of ''checked and ok'' if the Lambda exists. - Returns a status of
+        ''error'' if the Lambda does not exist.'
       operationId: CheckAWSLogsLambdaAsync
       requestBody:
         content:
