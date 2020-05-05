@@ -47,9 +47,7 @@ Datadog provides out of the box graphs for any given resource:
 
 ### Export to Timeboard
 
-On the upper-right corner of each graph click on the arrow in order to export your graph into a pre-existing [Timeboard][4]:
-
-{{< img src="tracing/visualization/resource/save_to_timeboard.png" alt="Save to timeboard"  style="width:40%;">}}
+On the upper-right corner of each graph, click on the up arrow in order to export your graph into a pre-existing [Timeboard][4].
 
 ### Latency distribution
 
