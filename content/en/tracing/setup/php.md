@@ -241,6 +241,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"](#custom-url-to-resource-mapping) |
 | `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `false`     | Enable URL's as resource names; [see "Map Resource Names To Normalized URI"](#map-resource-names-to-normalized-uri)                            |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | Flag to enable app analytics for relevant spans in a specific integration                                                                      |
+| `DD_SERVICE_MAPPING`      | `null`     | Allows the default name of an APM integration to be renamed. Can be used to rename several integrations at a time. Example:`DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db`                                                                      |
 
 #### Map Resource Names To Normalized URI
 
