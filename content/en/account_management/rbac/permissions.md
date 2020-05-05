@@ -287,27 +287,26 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 Grant the following permissions to manage read access on subsets of log data:
 
-* `logs_read_data`(Recommended) It offers finer grained access control over log data thanks to restriction queries.
+* `logs_read_data`(Recommended) offers finer grained access control over log data thanks to restriction queries.
 * `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis.
 
-Those two permissions are applied sequentially. Meaning that a user can be restricted to a subset of indexes and the restriction queries apply on top of it.
+Those two permissions are applied sequentially meaning that a user can be restricted to a subset of indexes and the restriction queries apply on top of it.
 
-**Example**: User A has access to index `audit` and index `errors` and is restricted to the query `service:api`
-When looking into the log explorer, this user only sees logs from the `service:api` into the `audit` and `errors` indexes.
+**Example**: User A has access to index `audit` and index `errors` and is restricted to the query `service:api`.
+When looking in Log Explorer, this user only sees logs from the `service:api` into the `audit` and `errors` indexes.
 
-In addition, access to the Livetail can be restricted with the `logs_live_tail` permission regardless of the data access restriction of the user.
-
+In addition, access to the Live Tail can be restricted with the `logs_live_tail` permission regardless of the data access restriction of the user.
 
 #### logs_read_data
 
-Read access to log data. If granted, other restrictions then apply. Such as `logs_read_index_data` or with [restriction query][4].
+Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][4].
 
 If a user belongs to multiple roles, permissions combine one with another. 
 
 **Example**:
 
-* If a user belongs to a Role with Log Read Data and also belongs to a Role without Log Read Data, then he has the permission to read data.
-* If a user has a restriction to `service:sandbox` through one Role, and has another restriction to `env:staging` through another Role, then that user can access all `env:staging` logs (even those that are not from `service:sandbox`. And conversely.
+* If a user belongs to a role with log read data and also belongs to a role without log read data, then they have the permission to read data.
+* If a user has a restriction to `service:sandbox` through one role, and has another restriction to `env:staging` through another role, then that user can access all `env:staging` logs (even those that are not from `service:sandbox`, and conversely.
 
 
 {{< tabs >}}
@@ -321,7 +320,7 @@ Go to your [Datadog Roles page][1] and select the checkbox `read` as below for t
 
 **Subset of Data**:
 
-This configuration is only supported through API
+This configuration is only supported through the API.
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
@@ -396,7 +395,7 @@ curl -X POST \
 
 #### logs_live_tail
 
-Grants a role the ability to use the live tail feature.
+Grants a role the ability to use the Live Tail feature.
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
