@@ -37,7 +37,7 @@
           "account_id": "1234567",
           "lambdas": [
             {
-              "arn": "string"
+              "arn": "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
             }
           ],
           "services": [

@@ -10,6 +10,8 @@
               "date_happened": "integer",
               "device_name": "array",
               "host": "string",
+              "id": "integer",
+              "payload": "{}",
               "priority": "normal",
               "related_event_id": "integer",
               "source_type_name": "string",
@@ -17,7 +19,8 @@
                 "environment:test"
               ],
               "text": "Oh boy!",
-              "title": "Did you hear the news today?"
+              "title": "Did you hear the news today?",
+              "url": "string"
             }
           ],
           "status": "string"
@@ -56,6 +59,8 @@
             "date_happened": "integer",
             "device_name": "array",
             "host": "string",
+            "id": "integer",
+            "payload": "{}",
             "priority": "normal",
             "related_event_id": "integer",
             "source_type_name": "string",
@@ -63,7 +68,8 @@
               "environment:test"
             ],
             "text": "Oh boy!",
-            "title": "Did you hear the news today?"
+            "title": "Did you hear the news today?",
+            "url": "string"
           },
           "status": "string"
         },
@@ -107,6 +113,8 @@
             "date_happened": "integer",
             "device_name": "array",
             "host": "string",
+            "id": "integer",
+            "payload": "{}",
             "priority": "normal",
             "related_event_id": "integer",
             "source_type_name": "string",
@@ -114,7 +122,8 @@
               "environment:test"
             ],
             "text": "Oh boy!",
-            "title": "Did you hear the news today?"
+            "title": "Did you hear the news today?",
+            "url": "string"
           },
           "status": "string"
         },
