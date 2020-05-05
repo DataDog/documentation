@@ -243,4 +243,4 @@ Configurez NxLog pour rassembler les logs de votre host, de vos conteneurs et de
 
 Besoin d'aide ? Contactez [l'assistance Datadog][1].
 
-[1]: /fr/help
+[1]: /fr/help/

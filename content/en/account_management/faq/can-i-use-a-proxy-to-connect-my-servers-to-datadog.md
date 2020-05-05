@@ -19,7 +19,7 @@ In the above diagram, the six EC2 instances in the VPC aren't internet facing; h
 
 In the above diagram, the six physical servers in the data center aren't internet facing; however, they communicate to a single instance acting as a proxy that is open and may be used to route local traffic (one way) from the hosts out to Datadog via 443 TCP/HTTPS for external communication.
 
-[1]: /agent/proxy
+[1]: /agent/proxy/
 [2]: /agent/proxy/#using-the-agent-as-a-proxy
 [3]: /agent/proxy/#using-a-web-proxy-as-proxy
 [4]: /agent/proxy/#using-haproxy-as-a-proxy

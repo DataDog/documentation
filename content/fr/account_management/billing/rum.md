@@ -5,7 +5,11 @@ kind: faq
 
 ## Comment est définie une session ?
 
-Une session correspond à une visite de votre application Web par un utilisateur. Elle expire au bout de 15 minutes d'inactivité.
+Une session correspond à une visite de votre application Web par un utilisateur. Elle inclut généralement plusieurs consultations de pages et les données de télémétrie associées.
+
+## Quel est le délai d'expiration d'une session ?
+
+Une session expire au bout de 15 minutes d'inactivité, et est limitée à 4 heures au total. Au bout de 4 heures, une nouvelle session est automatiquement créée.
 
 ## Quelles sont les données recueillies par le service Real User Monitoring (RUM) de Datadog ?
 
@@ -21,7 +25,7 @@ Oui. Par défaut, l'intégration APM permet de lier n'importe quelle requête XH
 
 ## Est-il possible de consulter les logs du collecteur de logs de navigateur dans l'interface RUM ?
 
-Oui. Les logs de navigateur sont automatiquement liés à la session RUM correspondante, ce qui vous permet de les surveiller lorsqu'ils se présentent à la fin du parcours utilisateur.
+Oui. Les logs de navigateur sont automatiquement liés à la session RUM correspondante, ce qui vous permet d'identifier à quelle étape du parcours utilisateur ils ont été recueillis.
 
 ## Utilisez-vous des cookies ?
 

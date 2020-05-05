@@ -3,16 +3,16 @@ title: Check Summary
 kind: documentation
 description: "See the list of all your checks reporting to Datadog."
 further_reading:
-- link: "monitors/monitor_types"
+- link: "/monitors/monitor_types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/manage_monitor"
+- link: "/monitors/manage_monitor/"
   tag: "Documentation"
   text: "Manage your monitors"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime for a monitor"
 ---
@@ -41,4 +41,4 @@ To view your check status on a dashboard, utilize the [Check Status Widget][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/check/summary
-[2]: /dashboards/widgets/check_status
+[2]: /dashboards/widgets/check_status/

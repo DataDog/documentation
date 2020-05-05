@@ -23,7 +23,7 @@ Here is a quick guide for troubleshooting getting integrations installed:
       1. Check the Metrics Explorer to see if system metrics are showing up from the host. For example, look for `system.cpu.user` from the host that is running the Agent and has that integration setup.
       2. If there are still no metrics, check the logs for errors and send them along with the info command output to [Datadog support][4].
 
-[1]: /integrations
+[1]: /integrations/
 [2]: /agent/guide/agent-commands/#agent-status-and-information
 [3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
-[4]: /help
+[4]: /help/

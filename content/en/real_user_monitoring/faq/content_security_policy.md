@@ -3,10 +3,10 @@ title: Content Security Policy (CSP)
 kind: faq
 further_reading:
     - link: '/real_user_monitoring/installation/'
-      tag: 'FAQ'
-      text: 'How to Send Logs to Datadog via External Log Shippers?'
+      tag: 'Get Started'
+      text: 'Real User Monitoring'
     - link: '/logs/log_collection/javascript/'
-      tag: 'FAQ'
+      tag: 'Get Started'
       text: 'Browser Log Collection'
 ---
 

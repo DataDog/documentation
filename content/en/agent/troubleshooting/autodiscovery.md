@@ -4,13 +4,13 @@ kind: documentation
 aliases:
   - /agent/autodiscovery/troubleshooting
 further_reading:
-- link: "agent/troubleshooting"
+- link: "/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
-- link: "agent/troubleshooting/debug_mode"
+- link: "/agent/troubleshooting/debug_mode/"
   tag: "Documentation"
   text: "Agent Debug Mode"
-- link: "agent/troubleshooting/send_a_flare"
+- link: "/agent/troubleshooting/send_a_flare/"
   tag: "Documentation"
   text: "Send an Agent Flare"
 ---
@@ -75,5 +75,5 @@ If you're still unsure about the issue, reach out to the [Datadog support team][
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
-[2]: /agent/troubleshooting/send_a_flare
+[1]: /help/
+[2]: /agent/troubleshooting/send_a_flare/

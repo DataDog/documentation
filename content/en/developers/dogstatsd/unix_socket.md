@@ -44,7 +44,7 @@ To enable the Agent DogStatsD UDS:
     ```yaml
     ## @param dogstatsd_socket - string - optional - default: ""
     ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
-    ## Set to a valid filesystem path to enable.
+    ## Set to a valid and existing filesystem path to enable.
     #
     dogstatsd_socket: '/var/run/datadog/dsd.socket'
     ```
@@ -53,7 +53,7 @@ To enable the Agent DogStatsD UDS:
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/guide/agent-commands
+[2]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -154,7 +154,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /tagging/assigning_tags/#environment-variables
-[3]: /agent/guide/agent-commands
+[3]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -226,8 +226,8 @@ For guidelines on creating additional implementation options, refer to the [data
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/dogstatsd_metrics_submission
-[2]: /developers/metrics/custom_metrics
+[1]: /developers/metrics/dogstatsd_metrics_submission/
+[2]: /developers/metrics/custom_metrics/
 [3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
 [4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
 [5]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds

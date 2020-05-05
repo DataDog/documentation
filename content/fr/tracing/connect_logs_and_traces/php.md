@@ -64,7 +64,7 @@ Si le logger implémente la [bibliothèque **monolog/monolog**][4], utilisez `Lo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/log_collection/php
+[1]: /fr/logs/log_collection/php/
 [2]: /fr/logs/processing/processors/#trace-remapper
 [3]: /fr/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog

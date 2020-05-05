@@ -2,7 +2,7 @@
 title: Upgrade to Datadog Agent v7
 kind: documentation
 further_reading:
-- link: "/agent/guide/python-3"
+- link: "/agent/guide/python-3/"
   tag: "Documentation"
   text: "Migrate your Custom Checks from python 2 to python 3"
 ---
@@ -95,4 +95,4 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://raw.github
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/python-3
+[1]: /agent/guide/python-3/

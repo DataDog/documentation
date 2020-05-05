@@ -2,7 +2,7 @@
 title: RUM Search
 kind: documentation
 further_reading:
-- link: "/real_user_monitoring/explorer/analytics"
+- link: "/real_user_monitoring/explorer/analytics/"
   tag: "Documentation"
   text: "Build analytics upon your events."
 ---

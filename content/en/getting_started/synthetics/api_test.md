@@ -76,9 +76,9 @@ Datadog also has an [APM integration with Synthetics][6] which allows you to go 
 {{< nextlink href="/synthetics/settings/" tag="Documentation" >}}Configure advance Synthetics settings{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /synthetics/api_tests
-[2]: /api/?lang=bash#create-a-test
+[1]: /synthetics/api_tests/
+[2]: /api/v1/synthetics/#create-or-clone-test
 [3]: https://app.datadoghq.com/synthetics/list
 [4]: /synthetics/api_tests/?tab=httptest#assertions
-[5]: /integrations
+[5]: /integrations/
 [6]: /synthetics/apm/

@@ -2,7 +2,7 @@
 title: How do I reduce alert flapping / noise?
 kind: faq
 further_reading:
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 ---

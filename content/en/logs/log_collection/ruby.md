@@ -7,10 +7,10 @@ further_reading:
 - link: "https://github.com/roidrage/lograge"
   tag: "Github"
   text: "Lograge Documentation"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---
@@ -107,9 +107,9 @@ This section describe the minimum setup required in order to forward your Rails 
 
 ## Getting further
 
-### Inject trace IDs in your logs
+### Connect Logs and Traces
 
-If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][7] to automatically add trace and span ids in your logs.
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Ruby logging instructions][7] to automatically add trace and span IDs in your logs.
 
 Then [configure the Datadog Agent](#configure-your-datadog-agent) to collect ruby logs from the file.
 
@@ -197,6 +197,6 @@ end
 [2]: /logs/?tab=ussite#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation
-[5]: /agent/logs
+[5]: /agent/logs/
 [6]: /agent/guide/agent-commands/#restart-the-agent
-[7]: /tracing/connect_logs_and_traces/ruby
+[7]: /tracing/connect_logs_and_traces/ruby/

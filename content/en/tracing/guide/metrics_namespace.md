@@ -179,8 +179,8 @@ With the following definitions:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/send_traces
-[2]: /tracing/setup
+[1]: /tracing/send_traces/
+[2]: /tracing/setup/
 [3]: /tracing/visualization/#trace-metrics
 [4]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [5]: /developers/metrics/types/?tab=gauge#metric-types

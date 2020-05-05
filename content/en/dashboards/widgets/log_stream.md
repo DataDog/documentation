@@ -82,7 +82,7 @@ LOG_STREAM_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/search
-[2]: /logs/explorer/facets
-[3]: /dashboards/graphing_json/widget_json
+[1]: /logs/explorer/search/
+[2]: /logs/explorer/facets/
+[3]: /dashboards/graphing_json/widget_json/
 [4]: /dashboards/graphing_json/widget_json/#time-schema

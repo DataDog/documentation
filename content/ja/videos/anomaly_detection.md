@@ -11,4 +11,4 @@ private: true
 ---
 メトリクスは常に変化しています。変化が異常かどうか、どうすれば判断できるでしょうか。Datadog は、インフラストラクチャーのさまざまなメトリクスやトレンドに対して、4 つの[異常検知アルゴリズム][1]を提供しています。
 
-[1]: /ja/monitors/monitor_types/anomaly
+[1]: /ja/monitors/monitor_types/anomaly/

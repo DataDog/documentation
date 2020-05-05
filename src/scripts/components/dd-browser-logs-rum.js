@@ -7,11 +7,11 @@ const { env } = document.documentElement.dataset;
 
 function getConfig() {
     if (env === 'live') {
-        return configDocs['production'];
+        return configDocs['live'];
     } else if (env === 'preview') {
         return configDocs['preview'];
     } else {
-        return configDocs['local'];
+        return configDocs['development'];
     }
 }
 

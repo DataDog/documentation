@@ -49,7 +49,7 @@ Dupliquez vos dashboards RUM et personnalisez-les afin de répondre à vos besoi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring/installation
-[2]: /fr/real_user_monitoring/data_collected
+[1]: /fr/real_user_monitoring/installation/
+[2]: /fr/real_user_monitoring/data_collected/
 [3]: https://app.datadoghq.com/rum/list
-[4]: /fr/dashboards
+[4]: /fr/dashboards/
