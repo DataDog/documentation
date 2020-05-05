@@ -29,7 +29,7 @@ left:
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/security.svg' alt='security icon'>"
           - name: product_network
             link: "https://www.datadoghq.com/network/"
-            title: "Network Performance"
+            title: "Network Monitoring"
             pre: "<img class='menu-icon mr-1' src='https://imgix.datadoghq.com/img/navbar/menu/network.svg' alt='network icon'>"
           - name: product_synthetics
             link: "https://www.datadoghq.com/synthetics/"
