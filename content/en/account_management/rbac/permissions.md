@@ -61,7 +61,7 @@ Find below the list of permissions for the log configuration assets and log data
 
 | Name                         | Description                                | Scopable |
 | ---------------------------- | ------------------------------------------ | -------- |
-| logs_read_data               | Read access to log data. If granted, other restrictions then apply (like `logs_read_index_data` or with restriction queries)       | true     |
+| logs_read_data               | Read access to log data. If granted, other restrictions then apply (like `logs_read_index_data` or with restriction queries).       | true     |
 | logs_read_index_data         | Read a subset log data (index based)       | true     |
 | logs_modify_indexes          | Update the definition of log indexes       | false    |
 | logs_live_tail               | Access the live tail feature               | false    |
