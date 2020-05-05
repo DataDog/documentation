@@ -1935,6 +1935,9 @@ api_v1:
   - name: Update a single service object
     parent: PagerDuty Integration
     url: update-a-single-service-object
+  - name: Roles
+    url: /api/v1/roles/
+    identifier: Roles
   - name: Screenboards
     url: /api/v1/screenboards/
     identifier: Screenboards
@@ -2156,6 +2159,15 @@ api_v2:
   - name: Rate Limiting
     url: rate-limiting
     parent: API V2 overview
+  - name: AWS Integration
+    url: /api/v2/aws-integration/
+    identifier: AWS Integration
+  - name: AWS Logs Integration
+    url: /api/v2/aws-logs-integration/
+    identifier: AWS Logs Integration
+  - name: Azure Integration
+    url: /api/v2/azure-integration/
+    identifier: Azure Integration
   - name: Dashboard Lists
     url: /api/v2/dashboard-lists/
     identifier: Dashboard Lists
@@ -2171,6 +2183,51 @@ api_v2:
   - name: Update items of a dashboard list
     parent: Dashboard Lists
     url: update-items-of-a-dashboard-list
+  - name: Dashboards
+    url: /api/v2/dashboards/
+    identifier: Dashboards
+  - name: Downtimes
+    url: /api/v2/downtimes/
+    identifier: Downtimes
+  - name: Embeddable Graphs
+    url: /api/v2/embeddable-graphs/
+    identifier: Embeddable Graphs
+  - name: Events
+    url: /api/v2/events/
+    identifier: Events
+  - name: GCP Integration
+    url: /api/v2/gcp-integration/
+    identifier: GCP Integration
+  - name: Hosts
+    url: /api/v2/hosts/
+    identifier: Hosts
+  - name: IP Ranges
+    url: /api/v2/ip-ranges/
+    identifier: IP Ranges
+  - name: Key Management
+    url: /api/v2/key-management/
+    identifier: Key Management
+  - name: Logs
+    url: /api/v2/logs/
+    identifier: Logs
+  - name: Logs Indexes
+    url: /api/v2/logs-indexes/
+    identifier: Logs Indexes
+  - name: Logs Pipelines
+    url: /api/v2/logs-pipelines/
+    identifier: Logs Pipelines
+  - name: Metrics
+    url: /api/v2/metrics/
+    identifier: Metrics
+  - name: Monitors
+    url: /api/v2/monitors/
+    identifier: Monitors
+  - name: Organizations
+    url: /api/v2/organizations/
+    identifier: Organizations
+  - name: PagerDuty Integration
+    url: /api/v2/pagerduty-integration/
+    identifier: PagerDuty Integration
   - name: Roles
     url: /api/v2/roles/
     identifier: Roles
@@ -2210,6 +2267,36 @@ api_v2:
   - name: Add a user to a role
     parent: Roles
     url: add-a-user-to-a-role
+  - name: Screenboards
+    url: /api/v2/screenboards/
+    identifier: Screenboards
+  - name: Service Checks
+    url: /api/v2/service-checks/
+    identifier: Service Checks
+  - name: Service Level Objectives
+    url: /api/v2/service-level-objectives/
+    identifier: Service Level Objectives
+  - name: Slack Integration
+    url: /api/v2/slack-integration/
+    identifier: Slack Integration
+  - name: Snapshots
+    url: /api/v2/snapshots/
+    identifier: Snapshots
+  - name: Synthetics
+    url: /api/v2/synthetics/
+    identifier: Synthetics
+  - name: Tags
+    url: /api/v2/tags/
+    identifier: Tags
+  - name: Timeboards
+    url: /api/v2/timeboards/
+    identifier: Timeboards
+  - name: Tracing
+    url: /api/v2/tracing/
+    identifier: Tracing
+  - name: Usage Metering
+    url: /api/v2/usage-metering/
+    identifier: Usage Metering
   - name: Users
     url: /api/v2/users/
     identifier: Users
@@ -2240,3 +2327,6 @@ api_v2:
   - name: Get a user permissions
     parent: Users
     url: get-a-user-permissions
+  - name: Webhooks Integration
+    url: /api/v2/webhooks-integration/
+    identifier: Webhooks Integration
