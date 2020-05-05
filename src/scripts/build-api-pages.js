@@ -130,7 +130,7 @@ const createResources = (apiYaml, deref, apiVersion) => {
         let request;
         if(action.requestBody) {
           const requestSchema = getSchema(action.requestBody.content);
-          const requestJson = filterExampleJson(requestSchema);
+          const requestJson = filterExampleJson("request", requestSchema);
           const requestHtml = schemaTable("request", requestSchema);
           request = {"json": requestJson, "html": requestHtml};
           console.log(`successfully wrote ${pageDir}${action.operationId} html`);
@@ -141,7 +141,7 @@ const createResources = (apiYaml, deref, apiVersion) => {
         Object.entries(action.responses).forEach(([responseCode, response]) => {
             if(response.content) {
               const responseSchema = getSchema(response.content);
-              const responseJson = filterExampleJson(responseSchema);
+              const responseJson = filterExampleJson("response", responseSchema);
               const responseHtml = schemaTable("response", responseSchema);
               responses[responseCode] = {"json": responseJson, "html": responseHtml};
               console.log(`successfully wrote ${pageDir}${action.operationId}_response_${responseCode} html`);
@@ -192,42 +192,19 @@ const isTagMatch = (pathObj, tag) => {
 
 
 /**
- * Takes a schema requestBody or response and filters the data to be example worthy
- * It does this by order of preference of attributes "items" -> "example" -> "type"
- * @param {object} data - object schema
- * returns filtered data
+ * The recursively called filtering json function, will build up a json string
+ * @param {string} actionType - string of 'request' or 'response'
+ * @param {object} data - the schema object
+ * @param {object} parentExample - the example object adjacent to data passed in
+ * returns string
  */
-/* const filterExampleJson = (data, adjacentExample = null, level = 0) => {
-  if("properties" in data) {
-    return Object.keys(data.properties)
-      .map((propKey) => {
-        const property = data.properties[propKey];
-        const ex = (property['example'] || typeof property['example'] === "boolean") ? `${property["example"]}` : property["example"];
-        return {[propKey]: (property.hasOwnProperty("items")) ? [filterExampleJson(property.items, property["example"], (level + 1))] : (ex || property["type"])};
-      })
-      .reduce((obj, item) => ({...obj, ...item}), {});
-  } else if ("items" in data) {
-    return filterExampleJson(data.items, data['example'], (level + 1));
-  } else {
-    const selectedExample = adjacentExample || data["example"];
-    const ex = (selectedExample || typeof selectedExample === "boolean") ? `${selectedExample}` : selectedExample;
-    const out = ex || data["type"] || {};
-    if(level === 0 && out === 'object') {
-      // return an actual object when we only have {type:"object"}
-      return {}
-    } else {
-      return out;
-    }
-  }
-}; */
-
-const filterJson = (data, parentExample = null) => {
+const filterJson = (actionType, data, parentExample = null) => {
   let jsondata = '';
 
   if (typeof data === 'object') {
     Object.entries(data).forEach(([key, value]) => {
 
-      if(value.readOnly) {
+      if(actionType === "request" && value.readOnly) {
         // skip
       } else {
 
@@ -284,11 +261,11 @@ const filterJson = (data, parentExample = null) => {
         }
 
         if (childData) {
-          jsondata += `"${key}": ${prefixType}${filterJson(childData, value.example)}${suffixType},`;
+          jsondata += `"${key}": ${prefixType}${filterJson(actionType, childData, value.example)}${suffixType},`;
         } else {
           let ex = '';
           // bool causes us to not go in here so check for it
-          ex = outputExample(chosenExample);
+          ex = outputExample(chosenExample, key);
           ex = ex || `"${value.type}"`;
           jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
         }
@@ -311,7 +288,13 @@ const filterJson = (data, parentExample = null) => {
   }
 };
 
-const outputExample = (chosenExample) => {
+/**
+ * Takes a chosen example object and formats it appropriately
+ * @param {object} chosenExample - object schema
+ * @param {string} inputkey - string key
+ * returns formatted string
+ */
+const outputExample = (chosenExample, inputkey) => {
   let ex = '';
   if(typeof chosenExample !== 'undefined' && chosenExample !== null) {
     if(chosenExample instanceof Array) {
@@ -319,7 +302,10 @@ const outputExample = (chosenExample) => {
       // if array of objects try match keys
       chosenExample.forEach((item, key, arr) => {
         if(typeof item === 'object') {
-
+          // this needs to change, currently only output 1 level of example array
+          if(inputkey && inputkey in item) {
+            ex = `"${item[inputkey]}"`;
+          }
         } else {
           ex += `"${  item  }",`;
           if (Object.is(arr.length - 1, key)) {
@@ -337,39 +323,97 @@ const outputExample = (chosenExample) => {
         });
       }
     } else {
+      // string or bool
       ex = `"${chosenExample}"`;
     }
   }
   return ex;
 };
 
-const filterExampleJson = (data) => {
-  let initialData;
+/**
+ * Takes a data object and returns if we should wrap with [ ] or {} for jsons tring output
+ * @param {object} data - object schema
+ * returns array of 2 characters one for before one for after e.g ['{', '}'] or ['[', ']']
+ */
+const getJsonWrapChars = (data) => {
   let prefixType = "{";
   let suffixType = "}";
-  let selectedExample;
-  if(data.type === 'array') {
-    if(data.items.type === 'array') {
-      initialData = data.items.items.properties;
-      selectedExample = data.items.items.example;
-      prefixType = "[[{";
-      suffixType = "}]]";
-    } else if(data.items.properties) {
-        initialData = data.items.properties;
-        selectedExample = data.items.example;
+
+  if(data) {
+    if (data.type === 'array') {
+      if (data.items.type === 'array') {
+        prefixType = "[[{";
+        suffixType = "}]]";
+      } else if (data.items.properties) {
+        //
       } else {
-        // initialData = data.items;
-        selectedExample = data.example;
         prefixType = "[";
         suffixType = "]";
       }
-  } else {
-    initialData = data.properties;
-    selectedExample = data.example;
+    }
   }
-  const output = `${prefixType}
-    ${filterJson(initialData, selectedExample)}
-  ${suffixType}`.trim();
+  return [prefixType, suffixType];
+};
+
+
+/**
+ * Takes a data object and returns the initial child data to be passed for recursion to filterjson
+ * @param {object} data - object schema
+ * returns initial data
+ */
+const getInitialJsonData = (data) => {
+  let initialData;
+  if(data) {
+    if (data.type === 'array') {
+      if (data.items.type === 'array') {
+        initialData = data.items.items.properties;
+      } else if (data.items.properties) {
+        initialData = data.items.properties;
+      }
+    } else {
+      initialData = data.properties;
+    }
+  }
+  return initialData;
+};
+
+/**
+ * Takes a data object and returns the initial child data to be passed for recursion to filterjson
+ * @param {object} data - object schema
+ * returns initial data
+ */
+const getInitialExampleJsonData = (data) => {
+  let selectedExample;
+  if(data) {
+    if (data.type === 'array') {
+      if (data.items.type === 'array') {
+        selectedExample = data.items.items.example;
+      } else if (data.items.properties) {
+        selectedExample = data.items.example;
+      } else {
+        selectedExample = data.example;
+      }
+    } else {
+      selectedExample = data.example;
+    }
+  }
+  return selectedExample;
+};
+
+/**
+ * Takes a data object and returns the initial child data to be passed for recursion to filterjson
+ * @param {string} actionType - string of 'request' or 'response'
+ * @param {object} data - the schema object
+ * returns parsed json object from built string
+ */
+const filterExampleJson = (actionType, data) => {
+  const [prefix, suffix] = getJsonWrapChars(data);
+  const initialData = getInitialJsonData(data);
+  const selectedExample = getInitialExampleJsonData(data);
+
+  const output = `${prefix}
+    ${filterJson(actionType, initialData, selectedExample)}
+  ${suffix}`.trim();
   let parsed = '';
   try {
       parsed = JSON.parse(output);
@@ -654,6 +698,8 @@ module.exports = {
   filterExampleJson,
   getSchema,
   getTagSlug,
-  addHasExpandClass
+  addHasExpandClass,
+  outputExample,
+  getJsonWrapChars
 };
 
