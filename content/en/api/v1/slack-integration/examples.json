@@ -74,8 +74,8 @@
       "json": {
         "service_hooks": [
           {
-            "account": "string",
-            "url": "string"
+            "account": "doghouse",
+            "url": "https://hooks.slack.com/services/2/2/2"
           }
         ]
       },

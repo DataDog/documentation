@@ -14,6 +14,8 @@ code_languages:
   - display_name: Ruby
     key: ruby
 
+branch: ""
+
 header_scripts:
   - hotjar: false
   - google-tag-manager: false
