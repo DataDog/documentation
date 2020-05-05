@@ -9,6 +9,7 @@ variables:
   ARTIFACT_RESOURCE: "public"
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
+  FORCE_COLOR: '1'
 
 # ================== copy scripts =============== #
 before_script:
