@@ -5,11 +5,19 @@
         "json": {
           "data": [
             {
+              "created_at": "integer",
+              "creator": {
+                "email": "string",
+                "handle": "string",
+                "name": "string"
+              },
               "description": "string",
               "groups": [
                 "env:prod",
                 "role:mysql"
               ],
+              "id": "string",
+              "modified_at": "integer",
               "monitor_ids": "array",
               "monitor_tags": "array",
               "name": "string",
@@ -74,11 +82,19 @@
         "json": {
           "data": [
             {
+              "created_at": "integer",
+              "creator": {
+                "email": "string",
+                "handle": "string",
+                "name": "string"
+              },
               "description": "string",
               "groups": [
                 "env:prod",
                 "role:mysql"
               ],
+              "id": "string",
+              "modified_at": "integer",
               "monitor_ids": "array",
               "monitor_tags": "array",
               "name": "string",
@@ -290,11 +306,19 @@
       "200": {
         "json": {
           "data": {
+            "created_at": "integer",
+            "creator": {
+              "email": "string",
+              "handle": "string",
+              "name": "string"
+            },
             "description": "string",
             "groups": [
               "env:prod",
               "role:mysql"
             ],
+            "id": "string",
+            "modified_at": "integer",
             "monitor_ids": "array",
             "monitor_tags": "array",
             "name": "string",
@@ -350,11 +374,19 @@
         "json": {
           "data": [
             {
+              "created_at": "integer",
+              "creator": {
+                "email": "string",
+                "handle": "string",
+                "name": "string"
+              },
               "description": "string",
               "groups": [
                 "env:prod",
                 "role:mysql"
               ],
+              "id": "string",
+              "modified_at": "integer",
               "monitor_ids": "array",
               "monitor_tags": "array",
               "name": "string",

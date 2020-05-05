@@ -113,20 +113,23 @@
               "relationships": {
                 "org": {
                   "data": {
-                    "id": "string"
+                    "id": "string",
+                    "type": "string"
                   }
                 },
                 "other_orgs": {
                   "data": [
                     {
-                      "id": "string"
+                      "id": "string",
+                      "type": "string"
                     }
                   ]
                 },
                 "other_users": {
                   "data": [
                     {
-                      "id": "string"
+                      "id": "string",
+                      "type": "string"
                     }
                   ]
                 },
@@ -138,7 +141,8 @@
                     }
                   ]
                 }
-              }
+              },
+              "type": "string"
             }
           ],
           "included": "array",
@@ -193,20 +197,23 @@
             "relationships": {
               "org": {
                 "data": {
-                  "id": "string"
+                  "id": "string",
+                  "type": "string"
                 }
               },
               "other_orgs": {
                 "data": [
                   {
-                    "id": "string"
+                    "id": "string",
+                    "type": "string"
                   }
                 ]
               },
               "other_users": {
                 "data": [
                   {
-                    "id": "string"
+                    "id": "string",
+                    "type": "string"
                   }
                 ]
               },
@@ -218,7 +225,8 @@
                   }
                 ]
               }
-            }
+            },
+            "type": "string"
           },
           "included": "array"
         },
@@ -308,20 +316,23 @@
             "relationships": {
               "org": {
                 "data": {
-                  "id": "string"
+                  "id": "string",
+                  "type": "string"
                 }
               },
               "other_orgs": {
                 "data": [
                   {
-                    "id": "string"
+                    "id": "string",
+                    "type": "string"
                   }
                 ]
               },
               "other_users": {
                 "data": [
                   {
-                    "id": "string"
+                    "id": "string",
+                    "type": "string"
                   }
                 ]
               },
@@ -333,7 +344,8 @@
                   }
                 ]
               }
-            }
+            },
+            "type": "string"
           },
           "included": "array"
         },
@@ -422,20 +434,23 @@
             "relationships": {
               "org": {
                 "data": {
-                  "id": "string"
+                  "id": "string",
+                  "type": "string"
                 }
               },
               "other_orgs": {
                 "data": [
                   {
-                    "id": "string"
+                    "id": "string",
+                    "type": "string"
                   }
                 ]
               },
               "other_users": {
                 "data": [
                   {
-                    "id": "string"
+                    "id": "string",
+                    "type": "string"
                   }
                 ]
               },
@@ -447,7 +462,8 @@
                   }
                 ]
               }
-            }
+            },
+            "type": "string"
           },
           "included": "array"
         },
@@ -490,7 +506,8 @@
                 "name": "string",
                 "restricted": "boolean"
               },
-              "id": "string"
+              "id": "string",
+              "type": "string"
             }
           ]
         },

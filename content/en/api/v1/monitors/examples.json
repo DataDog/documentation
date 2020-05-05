@@ -3,9 +3,24 @@
     "responses": {
       "200": {
         "json": {
+          "created": "string",
+          "creator": {
+            "email": "string",
+            "handle": "string",
+            "name": "string"
+          },
+          "deleted": "string",
+          "id": "integer",
           "message": "string",
+          "modified": "string",
+          "multi": "boolean",
           "name": "string",
           "options": {
+            "aggregation": {
+              "group_by": "host",
+              "metric": "metrics.name",
+              "type": "count"
+            },
             "device_ids": "array",
             "enable_logs_sample": "boolean",
             "escalation_message": "string",
@@ -38,7 +53,20 @@
             },
             "timeout_h": "integer"
           },
+          "overall_state": "string",
           "query": "string",
+          "state": {
+            "groups": {
+              "<any-key>": {
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
+                "name": "string",
+                "status": "string"
+              }
+            }
+          },
           "tags": "array",
           "type": "string"
         },
@@ -70,9 +98,24 @@
     "responses": {
       "200": {
         "json": {
+          "created": "string",
+          "creator": {
+            "email": "string",
+            "handle": "string",
+            "name": "string"
+          },
+          "deleted": "string",
+          "id": "integer",
           "message": "string",
+          "modified": "string",
+          "multi": "boolean",
           "name": "string",
           "options": {
+            "aggregation": {
+              "group_by": "host",
+              "metric": "metrics.name",
+              "type": "count"
+            },
             "device_ids": "array",
             "enable_logs_sample": "boolean",
             "escalation_message": "string",
@@ -105,7 +148,20 @@
             },
             "timeout_h": "integer"
           },
+          "overall_state": "string",
           "query": "string",
+          "state": {
+            "groups": {
+              "<any-key>": {
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
+                "name": "string",
+                "status": "string"
+              }
+            }
+          },
           "tags": "array",
           "type": "string"
         },
@@ -222,9 +278,24 @@
     "responses": {
       "200": {
         "json": {
+          "created": "string",
+          "creator": {
+            "email": "string",
+            "handle": "string",
+            "name": "string"
+          },
+          "deleted": "string",
+          "id": "integer",
           "message": "string",
+          "modified": "string",
+          "multi": "boolean",
           "name": "string",
           "options": {
+            "aggregation": {
+              "group_by": "host",
+              "metric": "metrics.name",
+              "type": "count"
+            },
             "device_ids": "array",
             "enable_logs_sample": "boolean",
             "escalation_message": "string",
@@ -257,7 +328,20 @@
             },
             "timeout_h": "integer"
           },
+          "overall_state": "string",
           "query": "string",
+          "state": {
+            "groups": {
+              "<any-key>": {
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
+                "name": "string",
+                "status": "string"
+              }
+            }
+          },
           "tags": "array",
           "type": "string"
         },
@@ -374,9 +458,24 @@
     "responses": {
       "200": {
         "json": {
+          "created": "string",
+          "creator": {
+            "email": "string",
+            "handle": "string",
+            "name": "string"
+          },
+          "deleted": "string",
+          "id": "integer",
           "message": "string",
+          "modified": "string",
+          "multi": "boolean",
           "name": "string",
           "options": {
+            "aggregation": {
+              "group_by": "host",
+              "metric": "metrics.name",
+              "type": "count"
+            },
             "device_ids": "array",
             "enable_logs_sample": "boolean",
             "escalation_message": "string",
@@ -409,7 +508,20 @@
             },
             "timeout_h": "integer"
           },
+          "overall_state": "string",
           "query": "string",
+          "state": {
+            "groups": {
+              "<any-key>": {
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
+                "name": "string",
+                "status": "string"
+              }
+            }
+          },
           "tags": "array",
           "type": "string"
         },
@@ -449,9 +561,24 @@
     "responses": {
       "200": {
         "json": {
+          "created": "string",
+          "creator": {
+            "email": "string",
+            "handle": "string",
+            "name": "string"
+          },
+          "deleted": "string",
+          "id": "integer",
           "message": "string",
+          "modified": "string",
+          "multi": "boolean",
           "name": "string",
           "options": {
+            "aggregation": {
+              "group_by": "host",
+              "metric": "metrics.name",
+              "type": "count"
+            },
             "device_ids": "array",
             "enable_logs_sample": "boolean",
             "escalation_message": "string",
@@ -484,7 +611,20 @@
             },
             "timeout_h": "integer"
           },
+          "overall_state": "string",
           "query": "string",
+          "state": {
+            "groups": {
+              "<any-key>": {
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
+                "name": "string",
+                "status": "string"
+              }
+            }
+          },
           "tags": "array",
           "type": "string"
         },
@@ -571,9 +711,24 @@
     "responses": {
       "200": {
         "json": {
+          "created": "string",
+          "creator": {
+            "email": "string",
+            "handle": "string",
+            "name": "string"
+          },
+          "deleted": "string",
+          "id": "integer",
           "message": "string",
+          "modified": "string",
+          "multi": "boolean",
           "name": "string",
           "options": {
+            "aggregation": {
+              "group_by": "host",
+              "metric": "metrics.name",
+              "type": "count"
+            },
             "device_ids": "array",
             "enable_logs_sample": "boolean",
             "escalation_message": "string",
@@ -606,7 +761,20 @@
             },
             "timeout_h": "integer"
           },
+          "overall_state": "string",
           "query": "string",
+          "state": {
+            "groups": {
+              "<any-key>": {
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
+                "name": "string",
+                "status": "string"
+              }
+            }
+          },
           "tags": "array",
           "type": "string"
         },
@@ -646,9 +814,24 @@
     "responses": {
       "200": {
         "json": {
+          "created": "string",
+          "creator": {
+            "email": "string",
+            "handle": "string",
+            "name": "string"
+          },
+          "deleted": "string",
+          "id": "integer",
           "message": "string",
+          "modified": "string",
+          "multi": "boolean",
           "name": "string",
           "options": {
+            "aggregation": {
+              "group_by": "host",
+              "metric": "metrics.name",
+              "type": "count"
+            },
             "device_ids": "array",
             "enable_logs_sample": "boolean",
             "escalation_message": "string",
@@ -681,7 +864,20 @@
             },
             "timeout_h": "integer"
           },
+          "overall_state": "string",
           "query": "string",
+          "state": {
+            "groups": {
+              "<any-key>": {
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
+                "name": "string",
+                "status": "string"
+              }
+            }
+          },
           "tags": "array",
           "type": "string"
         },
@@ -733,9 +929,24 @@
     "responses": {
       "200": {
         "json": {
+          "created": "string",
+          "creator": {
+            "email": "string",
+            "handle": "string",
+            "name": "string"
+          },
+          "deleted": "string",
+          "id": "integer",
           "message": "string",
+          "modified": "string",
+          "multi": "boolean",
           "name": "string",
           "options": {
+            "aggregation": {
+              "group_by": "host",
+              "metric": "metrics.name",
+              "type": "count"
+            },
             "device_ids": "array",
             "enable_logs_sample": "boolean",
             "escalation_message": "string",
@@ -768,7 +979,20 @@
             },
             "timeout_h": "integer"
           },
+          "overall_state": "string",
           "query": "string",
+          "state": {
+            "groups": {
+              "<any-key>": {
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
+                "name": "string",
+                "status": "string"
+              }
+            }
+          },
           "tags": "array",
           "type": "string"
         },
