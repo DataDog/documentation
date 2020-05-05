@@ -11783,12 +11783,124 @@
   ],
   "tags": [
     {
+      "description": "[See API version 1](/api/v1/aws-integration/).",
+      "name": "AWS Integration"
+    },
+    {
+      "description": "[See API version 1](/api/v1/aws-logs-integration/).",
+      "name": "AWS Logs Integration"
+    },
+    {
+      "description": "[See API version 1](/api/v1/azure-integration/).",
+      "name": "Azure Integration"
+    },
+    {
       "description": "[Interact with your dashboard lists](https://docs.datadoghq.com/monitors/downtimes)\nthrough the API to make it easier to organize, find, and share all of your dashboards\nwith your team and organization.",
       "name": "Dashboard Lists"
     },
     {
+      "description": "[See API version 1](/api/v1/dashboards/).",
+      "name": "Dashboards"
+    },
+    {
+      "description": "[See API version 1](/api/v1/downtimes/).",
+      "name": "Downtimes"
+    },
+    {
+      "description": "[See API version 1](/api/v1/embeddable-graphs/).",
+      "name": "Embeddable Graphs"
+    },
+    {
+      "description": "[See API version 1](/api/v1/events/).",
+      "name": "Events"
+    },
+    {
+      "description": "[See API version 1](/api/v1/gcp-integration/).",
+      "name": "GCP Integration"
+    },
+    {
+      "description": "[See API version 1](/api/v1/hosts/).",
+      "name": "Hosts"
+    },
+    {
+      "description": "[See API version 1](/api/v1/ip-ranges/).",
+      "name": "IP Ranges"
+    },
+    {
+      "description": "[See API version 1](/api/v1/key-management/).",
+      "name": "Key Management"
+    },
+    {
+      "description": "[See API version 1](/api/v1/logs/).",
+      "name": "Logs"
+    },
+    {
+      "description": "[See API version 1](/api/v1/logs-indexes/).",
+      "name": "Logs Indexes"
+    },
+    {
+      "description": "[See API version 1](/api/v1/logs-pipelines/).",
+      "name": "Logs Pipelines"
+    },
+    {
+      "description": "[See API version 1](/api/v1/metrics/).",
+      "name": "Metrics"
+    },
+    {
+      "description": "[See API version 1](/api/v1/monitors/).",
+      "name": "Monitors"
+    },
+    {
+      "description": "[See API version 1](/api/v1/organizations/).",
+      "name": "Organizations"
+    },
+    {
+      "description": "[See API version 1](/api/v1/pagerduty-integration/).",
+      "name": "PagerDuty Integration"
+    },
+    {
       "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines).",
       "name": "Roles"
+    },
+    {
+      "description": "[See API version 1](/api/v1/screenboards/).",
+      "name": "Screenboards"
+    },
+    {
+      "description": "[See API version 1](/api/v1/service-checks/).",
+      "name": "Service Checks"
+    },
+    {
+      "description": "[See API version 1](/api/v1/service-level-objectives/).",
+      "name": "Service Level Objectives"
+    },
+    {
+      "description": "[See API version 1](/api/v1/slack-integration/).",
+      "name": "Slack Integration"
+    },
+    {
+      "description": "[See API version 1](/api/v1/snapshots/).",
+      "name": "Snapshots"
+    },
+    {
+      "description": "[See API version 1](/api/v1/synthetics/).",
+      "name": "Synthetics"
+    },
+    {
+      "description": "[See API version 1](/api/v1/tags/).",
+      "name": "Tags"
+    },
+    {
+      "description": "[See API version 1](/api/v1/timeboards/).",
+      "name": "Timeboards"
+    },
+    {
+      "description": "[See API version 1](/api/v1/tracing/).",
+      "name": "Tracing"
+    },
+    {
+      "description": "[See API version 1](/api/v1/usage-metering/).",
+      "name": "Usage Metering"
     },
     {
       "description": "Create, edit, and disable users.",
@@ -11796,6 +11908,10 @@
         "url": "https://docs.datadoghq.com/account_management/users"
       },
       "name": "Users"
+    },
+    {
+      "description": "[See API version 1](/api/v1/webhooks-integration/).",
+      "name": "Webhooks Integration"
     }
   ],
   "x-group-parameters": true
