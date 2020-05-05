@@ -211,7 +211,7 @@ Use Facets to filter on your Traces. The search bar and url automatically reflec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/
+[1]: /tracing/setup/java/#integrations
 [2]: /tagging/#tags-best-practices
 [3]: /dashboards/guide/custom_time_frames/
 [4]: /tracing/visualization/#services
