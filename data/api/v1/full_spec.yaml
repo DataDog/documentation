@@ -3503,9 +3503,11 @@ components:
           readOnly: true
           type: object
         device_ids:
+          deprecated: true
           description: IDs of the device the Synthetics monitor is running on.
           items:
             $ref: '#/components/schemas/MonitorDeviceID'
+          readOnly: true
           type: array
         enable_logs_sample:
           description: Whether or not to send a log sample when the log monitor triggers.
@@ -3624,6 +3626,7 @@ components:
           description: Information about the downtime applied to the monitor.
           type: object
         synthetics_check_id:
+          deprecated: true
           description: ID of the corresponding Synthetic check.
           format: int64
           nullable: true
@@ -3787,7 +3790,9 @@ components:
           type: number
       type: object
     MonitorType:
-      description: The type of the monitor.
+      description: The type of the monitor. For more information about `type`, see
+        the [monitor options](https://docs.datadoghq.com/monitors/guide/monitor_api_options/)
+        docs.
       enum:
       - composite
       - event alert
@@ -3811,6 +3816,60 @@ components:
       - SERVICE_CHECK
       - SYNTHETICS_ALERT
       - TRACE_ANALYTICS_ALERT
+    MonitorUpdateRequest:
+      description: Object describing a monitor.
+      properties:
+        created:
+          description: Timestamp of the monitor creation.
+          format: date-time
+          readOnly: true
+          type: string
+        creator:
+          $ref: '#/components/schemas/Creator'
+        deleted:
+          description: Whether or not the monitor is deleted. (Always `null`)
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        id:
+          description: ID of this monitor.
+          format: int64
+          readOnly: true
+          type: integer
+        message:
+          description: A message to include with notifications for this monitor.
+          type: string
+        modified:
+          description: Last timestamp when the monitor was edited.
+          format: date-time
+          readOnly: true
+          type: string
+        multi:
+          description: Whether or not the monitor is broken down on different groups.
+          readOnly: true
+          type: boolean
+        name:
+          description: The monitor name.
+          type: string
+        options:
+          $ref: '#/components/schemas/MonitorOptions'
+        overall_state:
+          $ref: '#/components/schemas/MonitorOverallStates'
+        query:
+          description: The monitor query.
+          type: string
+        state:
+          $ref: '#/components/schemas/MonitorState'
+        tags:
+          description: Tags associated to your monitor.
+          items:
+            description: A Datadog tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/MonitorType'
+      type: object
     NoteWidgetDefinition:
       description: The notes and links widget is similar to free text widget, but
         allows for more formatting options.
@@ -4846,7 +4905,6 @@ components:
 
             field.
 
-
             Always included in service level objective responses for monitor service
             level
 
@@ -4900,8 +4958,118 @@ components:
           type: array
         type:
           $ref: '#/components/schemas/SLOType'
-        type_id:
-          $ref: '#/components/schemas/SLOTypeNumeric'
+      required:
+      - name
+      - thresholds
+      - type
+    ServiceLevelObjectiveRequest:
+      description: 'A service level objective object includes a service level indicator,
+        thresholds
+
+        for one or more timeframes, and metadata (`name`, `description`, `tags`, etc.).'
+      properties:
+        created_at:
+          description: 'Creation timestamp (UNIX time in seconds)
+
+
+            Always included in service level objective responses.'
+          format: int64
+          readOnly: true
+          type: integer
+        creator:
+          $ref: '#/components/schemas/Creator'
+        description:
+          description: 'A user-defined description of the service level objective.
+
+
+            Always included in service level objective responses (but may be `null`).
+
+            Optional in create/update requests.'
+          nullable: true
+          type: string
+        groups:
+          description: 'A list of (up to 20) monitor groups that narrow the scope
+            of a monitor service level objective.
+
+
+            Included in service level objective responses if it is not empty. Optional
+            in
+
+            create/update requests for monitor service level objectives, but may only
+            be
+
+            used when then length of the `monitor_ids` field is one.'
+          example:
+          - env:prod
+          - role:mysql
+          items:
+            description: A group name, for instance `env:prod`.
+            type: string
+          type: array
+        id:
+          description: 'A unique identifier for the service level objective object.
+
+
+            Always included in service level objective responses.'
+          readOnly: true
+          type: string
+        modified_at:
+          description: 'Modification timestamp (UNIX time in seconds)
+
+
+            Always included in service level objective responses.'
+          format: int64
+          readOnly: true
+          type: integer
+        monitor_ids:
+          description: 'A list of monitor ids that defines the scope of a monitor
+            service level
+
+            objective. **Required if type is `monitor`**.'
+          items:
+            description: A monitor ID.
+            format: int64
+            type: integer
+          type: array
+        name:
+          description: The name of the service level objective object.
+          type: string
+        query:
+          description: A metric SLI query. **Required if type is `metric`**.
+          properties:
+            denominator:
+              description: A Datadog metric query for total (valid) events.
+              type: string
+            numerator:
+              description: A Datadog metric query for good events.
+              type: string
+          required:
+          - numerator
+          - denominator
+          type: object
+        tags:
+          description: 'A list of tags associated with this service level objective.
+
+            Always included in service level objective responses (but may be empty).
+
+            Optional in create/update requests.'
+          example:
+          - env:prod
+          - app:core
+          items:
+            description: A tag to apply to your SLO.
+            type: string
+          type: array
+        thresholds:
+          description: 'The thresholds (timeframes and associated targets) for this
+            service level
+
+            objective object.'
+          items:
+            $ref: '#/components/schemas/SLOThreshold'
+          type: array
+        type:
+          $ref: '#/components/schemas/SLOType'
       required:
       - name
       - thresholds
@@ -12020,6 +12188,13 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: Delete the monitor even if it's referenced by other resources
+          (e.g. SLO, composite monitor).
+        in: query
+        name: force
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -12115,7 +12290,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Monitor'
+              $ref: '#/components/schemas/MonitorUpdateRequest'
         description: Edit a monitor request body.
         required: true
       responses:
@@ -12643,7 +12818,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ServiceLevelObjective'
+              $ref: '#/components/schemas/ServiceLevelObjectiveRequest'
         description: Service level objective request object.
         required: true
       responses:
@@ -12769,6 +12944,13 @@ paths:
         in: path
         name: slo_id
         required: true
+        schema:
+          type: string
+      - description: Delete the monitor even if it's referenced by other resources
+          (e.g. SLO, composite monitor).
+        in: query
+        name: force
+        required: false
         schema:
           type: string
       responses:
@@ -12935,6 +13117,9 @@ paths:
       summary: Get an SLO's history
       tags:
       - Service Level Objectives
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v1/synthetics/tests:
     get:
       description: Get the list of all Synthetic tests (can be filtered by type).
