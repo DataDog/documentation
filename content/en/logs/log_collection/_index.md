@@ -193,10 +193,9 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
 Use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog. More information is available in the [Datadog security documentation][19].
 
-Endpoints that can be used to send logs to Datadog:
-
 {{< site-region region="us" >}}
 
+Endpoints that can be used to send logs to Datadog US region:
 
 | Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
 |-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -217,6 +216,8 @@ Endpoints that can be used to send logs to Datadog:
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
+
+Endpoints that can be used to send logs to Datadog EU region:
 
 | Endpoints for SSL encrypted connections | Port  | Description                                                                                                                                                                 |
 |-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
