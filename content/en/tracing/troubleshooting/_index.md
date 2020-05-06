@@ -462,7 +462,6 @@ Max events per second reached (current=300.00/s, max=200.00/s). Some events are 
 
 ```
 
-This means that your application(s) are emitting more than the default 200 trace events per second allowed by APM. 
 
 To increase the APM rate limit for the Agent, configure the `max_events_per_second` attribute within the Agent's configuration file. For containerized deployments (Docker, Kubernetes, etc.), use the `DD_APM_MAX_EPS` environment variable.
 
