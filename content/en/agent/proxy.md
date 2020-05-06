@@ -177,11 +177,9 @@ frontend metrics-forwarder
     mode http
     default_backend datadog-metrics
     
-    acl dd-api path_beg -i  /api/v1/validate
-    use_backend datadog-api if dd-api
+    use_backend datadog-api if { path_beg -i  /api/v1/validate }
 
-    acl dd-flare path_beg -i  /support/flare/
-    use_backend datadog-flare if dd-flare
+    use_backend datadog-flare if { path_beg -i  /support/flare/ }
 
 # This declares the endpoint where your Agents connects for
 # sending traces (e.g. the value of "endpoint" in the APM
