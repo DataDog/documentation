@@ -284,7 +284,7 @@ Nous avons nous aussi été confrontés à un certain nombre de défis durant le
 [8]: https://github.com/DataDog/integrations-extras
 [9]: https://virtualenv.pypa.io/en/stable
 [10]: /fr/developers/integrations/#new-integration-documentation
-[11]: https://docs.datadoghq.com/fr/developers/agent_checks
+[11]: https://docs.datadoghq.com/fr/developers/agent_checks/
 [12]: https://github.com/DataDog/dd-agent/blob/master/tests/README.md#integration-tests
 [13]: https://github.com/DataDog/dd-agent/blob/master/ci/common.rb
 [14]: https://github.com/DataDog/dd-agent/blob/master/CONTRIBUTING.md#submitting-issues
