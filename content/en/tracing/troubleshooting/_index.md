@@ -466,7 +466,6 @@ This means that your application(s) are emitting more than the default 200 trace
 
 To increase the APM rate limit for the Agent, configure the `max_events_per_second` attribute within the Agent's configuration file. For containerized deployments (Docker, Kubernetes, etc.), use the `DD_APM_MAX_EPS` environment variable.
 
-<div class="alert alert-warning">
 **Note**: Increasing the APM rate limit could result in increased costs for App Analytics.
 
 ## Further Reading
