@@ -2,12 +2,12 @@
 title: Compose and the Datadog Agent
 kind: faq
 further_reading:
-- link: "https://github.com/DataDog/docker-compose-example"
-  tag: "Github"
-  text: "Using Docker Compose with Datadog Example"
-- link: "/agent/docker/"
-  tag: "Documentation"
-  text: "Datadog Docker Agent documentation"
+    - link: 'https://github.com/DataDog/docker-compose-example'
+      tag: 'Github'
+      text: 'Using Docker Compose with Datadog Example'
+    - link: '/agent/docker/'
+      tag: 'Documentation'
+      text: 'Datadog Docker Agent documentation'
 ---
 
 [Compose][1] is a Docker tool that simplifies building applications on Docker by allowing you to define, build and run multiple containers as a single application.
@@ -18,16 +18,17 @@ While the [single container installation instructions][2] gets the stock Datadog
 
 The following is an example of how you can monitor a Redis container using Compose. The file structure is:
 
-    |- docker-compose.yml
-    |- datadog
-        |- Dockerfile
-        |- conf.d
-           |-redisdb.yaml
+```text
+|- docker-compose.yml
+|- datadog
+  |- Dockerfile
+  |- conf.d
+    |-redisdb.yaml
+```
 
 The `docker-compose.yml` file describes how your containers work together and sets some of the configuration details for the containers.
 
-{{< tabs >}}
-{{% tab "US site" %}}
+{{< site-region region="us" >}}
 
 ```yaml
 version: '3'
@@ -46,8 +47,8 @@ services:
      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
 ```
 
-{{% /tab %}}
-{{% tab "EU site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```yaml
 version: '3'
@@ -67,16 +68,17 @@ services:
      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 The `redisdb.yaml` is patterned after the [redisdb.yaml.example file][3] and tells the Datadog Agent to look for Redis on the host named `redis` (defined in `docker-compose.yaml` above) and to use the standard Redis port:
 
-    init_config:
+```yaml
+init_config:
 
-    instances:
-      - host: redis
-        port: 6379
+instances:
+    - host: redis
+      port: 6379
+```
 
 ## Further Reading
 
