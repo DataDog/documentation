@@ -11,4 +11,4 @@ What's an integration? See [Introduction to Integrations][1].
 
 {{< integrations >}}
 
-[1]: /getting_started/integrations
+[1]: /getting_started/integrations/

@@ -65,4 +65,4 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 [3]: mailto:success@datadoghq.com
 [4]: https://app.datadoghq.com/account/usage
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
-[6]: /fr/help
+[6]: /fr/help/

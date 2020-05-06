@@ -260,13 +260,13 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/kubernetes/cluster
-[2]: /fr/agent/cluster_agent/clusterchecks
-[3]: /fr/agent/kubernetes/integrations
+[1]: /fr/agent/kubernetes/cluster/
+[2]: /fr/agent/cluster_agent/clusterchecks/
+[3]: /fr/agent/kubernetes/integrations/
 [4]: /fr/agent/kubernetes/cluster/#cluster-checks-autodiscovery
-[5]: /fr/agent/guide/agent-commands
+[5]: /fr/agent/guide/agent-commands/
 [6]: /fr/agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
 [7]: /fr/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
-[8]: /fr/integrations/http_check
-[9]: /fr/integrations/nginx
-[10]: /fr/agent/cluster_agent/troubleshooting
+[8]: /fr/integrations/http_check/
+[9]: /fr/integrations/nginx/
+[10]: /fr/agent/cluster_agent/troubleshooting/

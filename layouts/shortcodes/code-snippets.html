@@ -1,7 +1,7 @@
 {{ $dot := .}}
 
 <!-- this is the filename without its extension e.g api-monitor.py basename is api-monitor -->
-{{ $basename := (.Get "basename") }}
+{{/* $basename := (.Get "basename") }}
 
 <!-- static means it is immune to the language switching nav, it will always show -->
 {{- if .Get ("static") -}}
@@ -28,5 +28,5 @@
             <div class="code-block code-block-{{ $lang.pygments_name }}">{{- highlight $file_content $lang.pygments_name "" -}}</div>
         {{ end }}
     {{ end }}
-{{- end }}
+{{- end */}}
 

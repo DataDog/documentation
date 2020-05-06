@@ -68,4 +68,4 @@ Find below the list of out-of-the-box tracing metrics sent by the Datadog Agent 
 | `datadog.trace_agent.events.max_eps.current_rate`     | Gauge     | Count of APM Events per second received by the Agent                                                     |
 | `datadog.trace_agent.events.max_eps.sample_rate`      | Gauge     | Sample rate applied by the Agent to Events it received                                                   |
 
-[1]: /tracing/setup
+[1]: /tracing/setup/

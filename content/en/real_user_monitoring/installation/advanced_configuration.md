@@ -77,10 +77,10 @@ datadogRum.addRumGlobalContext('usr', {
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_RUM && DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CONTEXT_KEY>', <CONTEXT_VALUE>);
 
 // Code example
-datadogRum.addRumGlobalContext('usr', {
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('usr', {
     id: 123,
     plan: 'premium'
 });

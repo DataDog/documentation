@@ -9,7 +9,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
   tag: "Blog"
   text: "Network Performance Monitoring"
-- link: "/integrations/snmp"
+- link: "/integrations/snmp/"
   tag: "Documentation"
   text: "SNMP integration"
 ---

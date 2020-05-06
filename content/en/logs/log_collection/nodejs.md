@@ -4,19 +4,19 @@ kind: documentation
 aliases:
   - /logs/languages/nodejs
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "logs/explorer/analytics"
+- link: "/logs/explorer/analytics/"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---
@@ -135,7 +135,7 @@ You can stream your logs from your application to Datadog without installing an 
 {{< tabs >}}
 {{% tab "Winston 3.0" %}}
 
-Use [Winston HTTP transport][1] to send your logs directly through the [Datadog Log API][3].
+Use [Winston HTTP transport][1] to send your logs directly through the [Datadog Log API][2].
 In your bootstrap file or somewhere in your code, declare the logger as follow:
 
 ```js
@@ -166,12 +166,12 @@ logger.info('Hello log with metas',{color: 'blue' });
 
 **Note**: To send logs to Datadog EU site, set the host property to `http-intake.logs.datadoghq.eu`
 
-If you are using US site, you can also check the community supported [Datadog Transport][2].
+If you are using US site, you can also check the community supported [Datadog Transport][3].
+
 
 [1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
-[2]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
-[3]: /api/?lang=bash#send-logs-over-http
-
+[2]: /api/v1/logs/#send-logs
+[3]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -196,4 +196,4 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
-[3]: /tracing/connect_logs_and_traces/nodejs
+[3]: /tracing/connect_logs_and_traces/nodejs/

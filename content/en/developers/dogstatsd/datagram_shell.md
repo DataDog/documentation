@@ -42,8 +42,8 @@ Here are some example datagrams:
 
 
 [1]: /developers/metrics/#naming-metrics
-[2]: /developers/metrics/types
-[3]: /tagging
+[2]: /developers/metrics/types/
+[3]: /tagging/
 {{% /tab %}}
 {{% tab "Events" %}}
 
@@ -205,7 +205,7 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection ti
 {{% /tab %}}
 {{< /tabs >}}
 
-To send metrics, events, or service checks on containerized environments, refer to the [DogStatsD on Kubernetes][4] documentation, in conjunction with the instructions for [configuring APM on Kubernetes][5], depending on your installation. The [Docker APM][6] documentation may also be helpful.
+To send metrics, events, or service checks on containerized environments, refer to the [DogStatsD on Kubernetes][3] documentation, in conjunction with the instructions for [configuring APM on Kubernetes][4], depending on your installation. The [Docker APM][5] documentation may also be helpful.
 
 ## Further Reading
 
@@ -213,7 +213,6 @@ To send metrics, events, or service checks on containerized environments, refer 
 
 [1]: /developers/libraries/#api-and-dogstatsd-client-libraries
 [2]: https://github.com/joehack3r/powershell-statsd/blob/master/send-statsd.ps1
-[3]: /developers/dogstatsd
-[4]: /developers/dogstatsd/
-[5]: /agent/kubernetes/apm
-[6]: /agent/docker/apm
+[3]: /developers/dogstatsd/
+[4]: /agent/kubernetes/apm/
+[5]: /agent/docker/apm/

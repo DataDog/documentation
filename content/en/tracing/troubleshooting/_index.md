@@ -2,7 +2,7 @@
 title: APM Troubleshooting
 kind: documentation
 further_reading:
-- link: "/tracing/troubleshooting/agent_apm_metrics"
+- link: "/tracing/troubleshooting/agent_apm_metrics/"
   tag: "Documentation"
   text: "APM metrics sent by the Datadog Agent"
 ---
@@ -138,8 +138,8 @@ If neither of these log entries is present, then no request was sent to the Agen
 For more tracer settings, check out the [API documentation][5].
 
 [1]: https://datadog.github.io/dd-trace-js/Tracer.html#init
-[2]: /agent/troubleshooting
-[3]: /help
+[2]: /agent/troubleshooting/
+[3]: /help/
 [4]: /agent/troubleshooting/#send-a-flare
 [5]: https://datadog.github.io/dd-trace-js/#tracer-settings
 {{% /tab %}}
@@ -167,7 +167,7 @@ Logs files are saved in the following directories by default. The `DD_TRACE_LOG_
 For more details on how to configure the .NET Tracer, see the [Configuration][1] section.
 
 
-[1]: /tracing/setup/dotnet#configuration
+[1]: /tracing/setup/dotnet/#configuration
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -453,13 +453,27 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 {{% /tab %}}
 {{< /tabs >}}
 
+## APM rate limit
+
+If you encounter the following error message in your Agent logs, your application(s) are emitting more than the default 200 trace events per second allowed by APM.
+
+```
+Max events per second reached (current=300.00/s, max=200.00/s). Some events are now being dropped (sample rate=0.54). Consider adjusting event sampling rates.
+
+```
+
+
+To increase the APM rate limit for the Agent, configure the `max_events_per_second` attribute within the Agent's configuration file. For containerized deployments (Docker, Kubernetes, etc.), use the `DD_APM_MAX_EPS` environment variable.
+
+**Note**: Increasing the APM rate limit could result in increased costs for App Analytics.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /help/
 [2]: /tracing/setup/#agent-configuration
 [3]: /agent/troubleshooting/#get-more-logging-from-the-agent
-[4]: /agent/guide/agent-log-files
+[4]: /agent/guide/agent-log-files/
 [5]: /tracing/visualization/#trace
 [6]: /agent/troubleshooting/#send-a-flare

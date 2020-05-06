@@ -3,13 +3,13 @@ title: Pipelines
 kind: documentation
 description: "Parse your logs using the Grok Processor"
 further_reading:
-- link: "logs/processing/processors"
+- link: "/logs/processing/processors/"
   tag: "Documentation"
   text: "Consult the full list of available Processors"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without limit"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 - link: "https://learn.datadoghq.com/course/view.php?id=10"
@@ -132,10 +132,10 @@ Log events which do not comply with these limits might be transformed or truncat
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/processors
-[2]: /logs/explorer/search
+[1]: /logs/processing/processors/
+[2]: /logs/explorer/search/
 [3]: /logs/processing/#reserved-attributes
 [4]: /logs/processing/processors/#log-status-remapper
 [5]: /logs/processing/processors/#log-date-remapper
-[6]: /logs/faq/integration-pipeline-reference
-[7]: /help
+[6]: /logs/faq/integration-pipeline-reference/
+[7]: /help/

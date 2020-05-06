@@ -197,6 +197,10 @@ body > header {
       padding-bottom:7px;
     }
     .navbar-brand {
+      text-transform: capitalize;
+      font-size: 28px;
+      display: inline-flex;
+      align-items: center;
       img {
         height:39px;
       }
@@ -225,7 +229,7 @@ body > header {
       padding:0;
     }
   }
-  aside.sidenav {
+  .sidenav {
     padding-left:15px;
     padding-right:15px;
     background:transparent;

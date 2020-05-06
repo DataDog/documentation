@@ -119,7 +119,7 @@ Non. La fonctionnalité App Analytics est uniquement disponible avec l'APM, qui
 
 
 
-[1]: /fr/tracing
+[1]: /fr/tracing/
 [2]: /fr/tracing/app_analytics/?tab=java
 [3]: /fr/account_management/billing/pricing/#infrastructure-monitoring
 [4]: /fr/account_management/billing/pricing/#apm
@@ -127,5 +127,5 @@ Non. La fonctionnalité App Analytics est uniquement disponible avec l'APM, qui
 [6]: mailto:success@datadoghq.com
 [7]: https://docs.datadoghq.com/fr/account_management/billing/serverless/#serverless-functions
 [8]: /fr/tracing/send_traces/#datadog-agent
-[9]: /fr/account_management/billing
-[10]: /fr/tracing/visualization
+[9]: /fr/account_management/billing/
+[10]: /fr/tracing/visualization/

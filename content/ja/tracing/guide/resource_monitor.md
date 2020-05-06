@@ -34,10 +34,10 @@ APM の[サービス][3]および[リソース][4]ダッシュボードの各グ
 
 {{< img src="tracing/faq/top_level_monitor.png" alt="トップレベルモニター"  >}}
 
-[1]: /ja/tracing/visualization/service
-[2]: /ja/tracing/visualization/resource
+[1]: /ja/tracing/visualization/service/
+[2]: /ja/tracing/visualization/resource/
 [3]: /ja/tracing/visualization/#services
 [4]: /ja/tracing/visualization/#resources
 [5]: /ja/tracing/visualization/service/#export-to-timeboard
-[6]: /ja/monitors/monitor_types/apm
+[6]: /ja/monitors/monitor_types/apm/
 [7]: /ja/tracing/guide/setting_primary_tags_to_scope/#environment

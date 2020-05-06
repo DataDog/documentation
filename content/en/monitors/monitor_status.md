@@ -3,13 +3,13 @@ title: Monitor Status
 kind: documentation
 description: "Get an overview of your monitor status over time"
 further_reading:
-- link: "monitors/monitor_types"
+- link: "/monitors/monitor_types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime for a monitor"
 ---
@@ -100,11 +100,11 @@ Events generated from your monitor (alerts, warnings, recoveries, etc.) are show
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types
-[2]: /monitors/downtimes
-[3]: /api/?lang=python#monitors
-[4]: /dashboards/querying
-[5]: /monitors/notifications
-[6]: /dashboards
-[7]: /notebooks
-[8]: /events
+[1]: /monitors/monitor_types/
+[2]: /monitors/downtimes/
+[3]: /api/v1/monitors/
+[4]: /dashboards/querying/
+[5]: /monitors/notifications/
+[6]: /dashboards/
+[7]: /notebooks/
+[8]: /events/

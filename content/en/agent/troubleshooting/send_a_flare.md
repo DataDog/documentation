@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
-- link: "/agent/troubleshooting/debug_mode"
+- link: "/agent/troubleshooting/debug_mode/"
   tag: "Agent Troubleshooting"
   text: "Agent Debug Mode"
-- link: "/agent/troubleshooting/agent_check_status"
+- link: "/agent/troubleshooting/agent_check_status/"
   tag: "Agent Troubleshooting"
   text: "Get the Status of an Agent Check"
 ---
