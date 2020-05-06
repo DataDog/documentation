@@ -113,6 +113,9 @@
                         <h2 class="mb-2" id="{{ .action.summary | urlize }}">
                             <a href="#{{ .action.summary | urlize }}">{{- .action.summary -}}</a>
                         </h2>
+                        {{ with index .action "x-unstable"}}
+                        <p>{{ . | markdownify }}</p>
+                        {{ end }}
                         <p class="mb-0"><span style="padding: 3px" class="text-uppercase font-semibold text-api-{{ .actionType }} bg-bg-api-{{ .actionType }}">{{ .actionType }}</span>&nbsp;{{ range $.Scratch.Get "serverURLS" }}<span class="d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span>{{.pathKey}}</span>
                         </p>
                         <h3 class="mt-2">Overview</h3>
