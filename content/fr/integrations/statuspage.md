@@ -47,5 +47,5 @@ L'intégration StatusPage n'inclut aucun check de service.
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://status.pagerduty.com
-[2]: https://docs.datadoghq.com/fr/monitors/monitor_types/event
-[3]: https://docs.datadoghq.com/fr/help
+[2]: https://docs.datadoghq.com/fr/monitors/monitor_types/event/
+[3]: https://docs.datadoghq.com/fr/help/

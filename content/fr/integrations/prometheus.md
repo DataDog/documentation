@@ -95,12 +95,12 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 - [Configurer un check Prometheus][8]
 - [Écrire un check Prometheus personnalisé][9]
 
-[1]: https://docs.datadoghq.com/fr/integrations/openmetrics
+[1]: https://docs.datadoghq.com/fr/integrations/openmetrics/
 [2]: https://docs.datadoghq.com/fr/getting_started/integrations/prometheus/
 [3]: https://docs.datadoghq.com/fr/getting_started/integrations/prometheus?tab=docker#configuration
 [4]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/fr/help
+[6]: https://docs.datadoghq.com/fr/help/
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
-[8]: https://docs.datadoghq.com/fr/agent/prometheus
-[9]: https://docs.datadoghq.com/fr/developers/prometheus
+[8]: https://docs.datadoghq.com/fr/agent/prometheus/
+[9]: https://docs.datadoghq.com/fr/developers/prometheus/

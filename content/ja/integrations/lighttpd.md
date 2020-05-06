@@ -109,8 +109,8 @@ Lighttpd Web サーバーのメトリクスを監視する方法 (または理�
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations
+[6]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help
+[9]: https://docs.datadoghq.com/ja/help/
 [10]: https://www.datadoghq.com/blog/monitor-lighttpd-web-server-metrics

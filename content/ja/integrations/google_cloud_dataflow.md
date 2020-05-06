@@ -64,8 +64,8 @@ Google Cloud Dataflow インテグレーションには、サービスのチェ�
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform
+[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/?tab=datadogussite#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_dataflow/google_cloud_dataflow_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help
+[5]: https://docs.datadoghq.com/ja/help/

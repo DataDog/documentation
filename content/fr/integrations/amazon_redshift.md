@@ -89,7 +89,7 @@ L'intégration AWS Redshift n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_redshift.html
@@ -100,4 +100,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [9]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#collecting-logs-from-s3
 [10]: https://app.datadoghq.com/logs
 [11]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_redshift/amazon_redshift_metadata.csv
-[12]: https://docs.datadoghq.com/fr/help
+[12]: https://docs.datadoghq.com/fr/help/
