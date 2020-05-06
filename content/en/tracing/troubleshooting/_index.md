@@ -468,7 +468,6 @@ To increase the APM rate limit for the Agent, configure the `max_events_per_seco
 
 <div class="alert alert-warning">
 **Note**: Increasing the APM rate limit could result in increased costs for App Analytics.
-</div>
 
 ## Further Reading
 
