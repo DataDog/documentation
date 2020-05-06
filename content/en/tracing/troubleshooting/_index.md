@@ -430,7 +430,7 @@ ERROR | (pkg/trace/logutil/throttled.go:38 in log) | http.Server: http: Accept e
 ```
 
 
-To increase the APM connection limit for the Agent, configure the `connection_limit` attribute wiithin the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (Docker, Kubernetes, etc.), use the `DD_APM_CONNECTION_LIMIT` environment variable.
+To increase the APM connection limit for the Agent, configure the `connection_limit` attribute within the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (Docker, Kubernetes, etc.), use the `DD_APM_CONNECTION_LIMIT` environment variable.
 
 
 ## Further Reading
