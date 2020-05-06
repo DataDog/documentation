@@ -277,7 +277,9 @@ Dogstatsd server won't be able to load them completely in the buffer and some of
 be malformed. Please use the corresponding configuration field in your Dogstatsd clients.
 
 Note for UDP: as the UDP packets are most of the time going through the Ethernet and IP layer,
-they inherently have a size limited to 1472.
+it is be better to avoid IP packets fragmentation by limiting the packet size to a value lower
+than a single Ethernet frame on your network. Most of the time, IPv4 networks are configured with
+a MTU of 1500 bytes, in this situation the packet size of sent packets should be limited to 1472.
 
 Note for UDS: for the best performances, UDS packet should have a size of 8192 bytes.
 
@@ -292,7 +294,7 @@ This first thing to do to not have Dogstatsd reach its maximum memory usage is
 to avoid sending metrics in bursts in your application.
 
 Another thing to look at to limit the maximum memory usage is to reduce the buffering.
-The main buffer of Dogstatsd is configurable with the `dogstatsd_queue_size` field, its default value of `1024` induce an approximate maximum memory usage of 768MB. Note that reducing this
+The main buffer of Dogstatsd is configurable with the `dogstatsd_queue_size` field, its default value of `1024` induces an approximate maximum memory usage of 768MB. Note that reducing this
 buffer could have the caveat of increasing the number of packet drops.
 
 Find below an example decreasing the max memory usage of Dogstatsd to approximately 384MB:
