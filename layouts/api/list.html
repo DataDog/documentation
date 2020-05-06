@@ -155,9 +155,7 @@
                                                 <div class="col-12 first-column">
                                                 <div class="row first-row ">
                                                     <div class="col-4 column">
-                                                        <p>
-                                                            {{ .name }}{{ cond (eq .required false) "" "[<em>required</em>]" | safeHTML }}</em>
-                                                        </p>
+                                                        <p>{{- .name -}}{{- cond (eq .required false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}</em></p>
                                                     </div>
                                                     <div class="col-2 column">
                                                         <p>{{ .schema.type }}</p>
@@ -193,9 +191,7 @@
                                                 <div class="col-12 first-column">
                                                 <div class="row first-row ">
                                                     <div class="col-4 column">
-                                                        <p>
-                                                            {{ .name }}{{ cond (eq .required false) "" "[<em>required</em>]" | safeHTML }}</em>
-                                                        </p>
+                                                        <p>{{- .name -}}{{- cond (eq .required false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}</em></p>
                                                     </div>
                                                     <div class="col-2 column">
                                                         <p>{{ .schema.type }}</p>

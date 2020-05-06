@@ -564,9 +564,23 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
 
         // build markdown
         const toggleArrow = (childData) ? '<span class="toggle-arrow"><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z" fill="black"/></svg></span> ' : "" ;
-        const required = requiredFields.includes(key) ? '<span style="color:red;">*</span>' : "";
+        const required = requiredFields.includes(key) ? '&nbsp;[<em>required</em>]' : "";
         const readOnlyField = (isReadOnly) ? '' : '';
 
+        let newRequiredFields = [];
+
+        if (data.required) {
+          newRequiredFields = data.required;
+        } else if (data[key]["required"]){
+          newRequiredFields = data[key]["required"];
+        } else if (data[key]["items"]){
+            if (data[key]["items"]["required"]) {
+              newRequiredFields = data[key]["items"]["required"]
+            }
+        } else {
+          newRequiredFields = [];
+        }
+      
         // build html
         html += `
         <div class="row ${outerRowClasses}">
@@ -576,7 +590,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               ${typeColumn(key, value, readOnlyField)}
               ${descColumn(key, value)}
             </div>
-            ${(childData) ? rowRecursive(tableType, childData, true, data.required || [], (level + 1), newParentKey) : ''}
+            ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey) : ''}
           </div>
         </div>
         `.trim();
