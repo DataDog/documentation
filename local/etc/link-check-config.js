@@ -15,7 +15,7 @@ module.exports = {
         method: 'get',
         filterLevel: 3,
         // maxSocketsPerHost: 30,
-        maxSockets: 1,
+        maxSockets: 30,
         requestMethod: 'head',
         excludeExternalLinks: false,
         honorRobotExclusions: false,
