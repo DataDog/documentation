@@ -16,10 +16,9 @@ module.exports = {
         filterLevel: 3,
         // maxSocketsPerHost: 10,
         maxSockets: 100,
-        excludeExternalLinks: false,
+        excludeExternalLinks: true,
         honorRobotExclusions: false,
         brokenLinkSlackLimit: 10,
-        // cacheResponses: true,
         includedKeywords: ['*docs.datadoghq*', '*help.datadoghq*'],
         excludedKeywords: [
             '*ja/blog*',
