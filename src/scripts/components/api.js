@@ -44,7 +44,7 @@ function versionSelectHandler(event) {
         }
     } else if (event.target.value === 'v1') {
         // check if page exists on v1
-        
+
         fetch(`${window.location.href.replace('api/v2', 'api/v1')}`)
             .then((response) => {
                 // redirect to v2 page
