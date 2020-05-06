@@ -464,7 +464,7 @@ Max events per second reached (current=300.00/s, max=200.00/s). Some events are 
 
 This means that your application(s) are emitting more than the default 200 trace events per second allowed by APM. 
 
-It is possible to increase this limit on the agent by configuring the `max_events_per_second` attribute within your Datadog agent's configuration file. For containerized deployments (e.g. Kubernetes), use the `DD_APM_MAX_EPS` environment variable.
+To increase the APM rate limit for the Agent, configure the `max_events_per_second` attribute within the Agent's configuration file. For containerized deployments (Docker, Kubernetes, etc.), use the `DD_APM_MAX_EPS` environment variable.
 
 <div class="alert alert-warning">
 Please note that increasing this limit could result in increased costs for App Analytics.
