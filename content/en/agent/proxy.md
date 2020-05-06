@@ -176,9 +176,8 @@ frontend metrics-forwarder
     bind *:3834
     mode http
     default_backend datadog-metrics
-    
-    use_backend datadog-api if { path_beg -i  /api/v1/validate }
 
+    use_backend datadog-api if { path_beg -i  /api/v1/validate }
     use_backend datadog-flare if { path_beg -i  /support/flare/ }
 
 # This declares the endpoint where your Agents connects for
@@ -187,6 +186,7 @@ frontend metrics-forwarder
 frontend traces-forwarder
     bind *:3835
     mode tcp
+    option tcplog
     default_backend datadog-traces
 
 # This declares the endpoint where your agents connects for
@@ -195,6 +195,7 @@ frontend traces-forwarder
 frontend processes-forwarder
     bind *:3836
     mode tcp
+    option tcplog
     default_backend datadog-processes
 
 # This declares the endpoint where your Agents connects for
@@ -202,6 +203,7 @@ frontend processes-forwarder
 frontend logs_frontend
     bind *:10514
     mode tcp
+    option tcplog
     default_backend datadog-logs
 
 # This is the Datadog server. In effect any TCP request coming
@@ -229,7 +231,6 @@ backend datadog-flare
 backend datadog-traces
     balance roundrobin
     mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 trace.agent.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -238,7 +239,6 @@ backend datadog-traces
 backend datadog-processes
     balance roundrobin
     mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 process.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -247,7 +247,6 @@ backend datadog-processes
 backend datadog-logs
     balance roundrobin
     mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -311,12 +310,16 @@ frontend metrics-forwarder
     mode tcp
     default_backend datadog-metrics
 
+    use_backend datadog-api if { path_beg -i  /api/v1/validate }
+    use_backend datadog-flare if { path_beg -i  /support/flare/ }
+
 # This declares the endpoint where your Agents connects for
 # sending traces (e.g. the value of "endpoint" in the APM
 # configuration section).
 frontend traces-forwarder
     bind *:3835
     mode tcp
+    option tcplog
     default_backend datadog-traces
 
 # This declares the endpoint where your agents connects for
@@ -325,6 +328,7 @@ frontend traces-forwarder
 frontend processes-forwarder
     bind *:3836
     mode tcp
+    option tcplog
     default_backend datadog-processes
 
 # This declares the endpoint where your Agents connects for
@@ -332,6 +336,7 @@ frontend processes-forwarder
 frontend logs_frontend
     bind *:10514
     mode tcp
+    option tcplog
     default_backend datadog-logs
 
 # This is the Datadog server. In effect any TCP request coming
@@ -359,7 +364,6 @@ backend datadog-flare
 backend datadog-traces
     balance roundrobin
     mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 trace.agent.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -368,7 +372,6 @@ backend datadog-traces
 backend datadog-processes
     balance roundrobin
     mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 process.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -377,7 +380,6 @@ backend datadog-processes
 backend datadog-logs
     balance roundrobin
     mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
