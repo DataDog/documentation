@@ -416,7 +416,7 @@ Max events per second reached (current=300.00/s, max=200.00/s). Some events are 
 ```
 
 
-To increase the APM rate limit for the Agent, configure the `max_events_per_second` attribute within the Agent's configuration file (underneath the `apm_config:` sectoni). For containerized deployments (Docker, Kubernetes, etc.), use the `DD_APM_MAX_EPS` environment variable.
+To increase the APM rate limit for the Agent, configure the `max_events_per_second` attribute within the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (Docker, Kubernetes, etc.), use the `DD_APM_MAX_EPS` environment variable.
 
 **Note**: Increasing the APM rate limit could result in increased costs for App Analytics.
 
