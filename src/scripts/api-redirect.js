@@ -22,12 +22,12 @@ function redirectToAPIPage() {
             redirectUrls.some((redirectUrl) => {
                 if (window.location.hash === redirectUrl.anchor) {
 
-                    console.log(
+                    console.log( // eslint-disable-line no-console
                         'redirect to: ',
                         `${window.location.origin + previewPath}/${
                             redirectUrl.redirectURL
                         }`
-                    );
+                    ); 
 
                     window.location.href = `${window.location.origin + previewPath}/${
                         redirectUrl.redirectURL
