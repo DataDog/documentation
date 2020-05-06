@@ -423,7 +423,7 @@ To increase the APM rate limit for the Agent, configure the `max_events_per_seco
 
 ### Max connection limit
 
-If you encounter the following error message in your Agent logs, its likely that the default APM connection limit of 2000 has been exceeded:
+If you encounter the following error message in your Agent logs, the default APM connection limit of 2000 has been exceeded:
 
 ```
 ERROR | (pkg/trace/logutil/throttled.go:38 in log) | http.Server: http: Accept error: request has been rate-limited; retrying in 80ms
