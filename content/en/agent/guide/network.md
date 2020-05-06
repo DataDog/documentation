@@ -167,7 +167,7 @@ Open the following ports in order to benefit from all the Agent functionalities:
 
 ## Using Proxies
 
-For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][10].
+For a detailed configuration guide on proxy setup, see [Agent Proxy Configuration][4].
 
 ## Further Reading
 
@@ -176,4 +176,4 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 [1]: /tracing/
 [2]: /infrastructure/livecontainers/
 [3]: /logs/
-[10]: /agent/proxy/
+[4]: /agent/proxy/
