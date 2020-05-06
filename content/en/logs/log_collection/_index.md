@@ -75,7 +75,9 @@ Select your Cloud provider below to see how to automatically collect your logs a
 Any custom process or [logging library][18] able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs. Choose below which Datadog site you want to forward logs to:
 
 {{< tabs >}}
-{{% tab "HTTP US Site" %}}
+{{% tab "HTTP" %}}
+
+{{< site-region region="us" >}}
 
 The public endpoint is `http-intake.logs.datadoghq.com`. The API key must be added either in the path or as a header, for instance:
 
@@ -89,8 +91,9 @@ curl -X POST https://http-intake.logs.datadoghq.com/v1/input \
 For more examples with JSON formats, multiple logs per request, or the use of query parameters, refer to the [Datadog Log HTTP API documentation][1].
 
 [1]: /api/v1/logs/#send-logs
-{{% /tab %}}
-{{% tab "HTTP EU Site" %}}
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 The public endpoint is `http-intake.logs.datadoghq.eu`. The API key must be added either in the path or as a header, for instance:
 
@@ -104,8 +107,12 @@ curl -X POST https://http-intake.logs.datadoghq.eu/v1/input \
 For more examples with JSON formats, multiple logs per request, or the use of query parameters, refer to the [Datadog Log HTTP API documentation][1].
 
 [1]: /api/v1/logs/#send-logs
+
+{{< /site-region >}}
 {{% /tab %}}
-{{% tab "TCP US Site" %}}
+{{% tab "TCP" %}}
+
+{{< site-region region="us" >}}
 
 The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections).
 
@@ -139,8 +146,10 @@ telnet intake.logs.datadoghq.com 10514
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
-{{% /tab %}}
-{{% tab "TCP EU Site" %}}
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
 
 The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` for insecure connections).
 
@@ -174,6 +183,8 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
+
+{{< /site-region >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -182,10 +193,9 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
 Use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog. More information is available in the [Datadog security documentation][19].
 
-Endpoints that can be used to send logs to Datadog:
+{{< site-region region="us" >}}
 
-{{< tabs >}}
-{{% tab "US Site" %}}
+Endpoints that can be used to send logs to Datadog US region:
 
 | Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
 |-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -202,8 +212,12 @@ Endpoints that can be used to send logs to Datadog:
 | `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
 
 [1]: /agent/logs/#send-logs-over-https
-{{% /tab %}}
-{{% tab "EU Site" %}}
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+Endpoints that can be used to send logs to Datadog EU region:
 
 | Endpoints for SSL encrypted connections | Port  | Description                                                                                                                                                                 |
 |-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -220,8 +234,8 @@ Endpoints that can be used to send logs to Datadog:
 | `tcp-intake.logs.datadoghq.eu`       | `1883` | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection. |
 
 [1]: /agent/logs/#send-logs-over-https
-{{% /tab %}}
-{{< /tabs >}}
+
+{{< /site-region >}}
 
 ## Reserved attributes
 
