@@ -39,8 +39,18 @@ Since v6.1.0, the Agent also queries Datadog's API to provide non-critical funct
 
 All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at:
 
-- **[https://ip-ranges.datadoghq.com][4]** for Datadog US site.
-- **[https://ip-ranges.datadoghq.eu][5]** for Datadog EU site.
+{{< site-region region="us" >}}
+
+- **[https://ip-ranges.datadoghq.com][1]** for Datadog US region.
+
+[1]: https://ip-ranges.datadoghq.com
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+- **[https://ip-ranges.datadoghq.eu][1]** for Datadog EU region.
+
+[1]: https://ip-ranges.datadoghq.eu
+{{< /site-region >}}
 
 The information is structured as JSON following this schema:
 
@@ -65,12 +75,28 @@ The information is structured as JSON following this schema:
 }
 ```
 
-Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<SECTION>.json` or `https://ip-ranges.datadoghq.eu/<SECTION>.json`, for example:
+{{< site-region region="us" >}}
 
-- [https://ip-ranges.datadoghq.com/logs.json][6] for the IPs used to receive logs data over TCP
-- [https://ip-ranges.datadoghq.eu/logs.json][7] for the IPs used to receive logs data over TCP for Datadog EU
-- [https://ip-ranges.datadoghq.com/apm.json][8] for the IPs used to receive APM data
-- [https://ip-ranges.datadoghq.eu/apm.json][9] for the IPs used to receive APM data for Datadog EU
+Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.com/<SECTION>.json` for example:
+
+- [https://ip-ranges.datadoghq.com/logs.json][1] for the IPs used to receive logs data over TCP for Datadog US region.
+- [https://ip-ranges.datadoghq.com/apm.json][2] for the IPs used to receive APM data for Datadog US region.
+
+[1]: https://ip-ranges.datadoghq.com/logs.json
+[2]: https://ip-ranges.datadoghq.com/apm.json
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+Each section has a dedicated endpoint at `https://ip-ranges.datadoghq.eu/<SECTION>.json`, for example:
+
+- [https://ip-ranges.datadoghq.eu/logs.json][1] for the IPs used to receive logs data over TCP for Datadog EU region.
+- [https://ip-ranges.datadoghq.eu/apm.json][2] for the IPs used to receive APM data for Datadog EU region.
+
+[1]: https://ip-ranges.datadoghq.eu/logs.json
+[2]: https://ip-ranges.datadoghq.eu/apm.json
+
+{{< /site-region >}}
 
 ### Note
 
@@ -150,10 +176,4 @@ For a detailed configuration guide on proxy setup, see [Agent Proxy Configuratio
 [1]: /tracing/
 [2]: /infrastructure/livecontainers/
 [3]: /logs/
-[4]: https://ip-ranges.datadoghq.com
-[5]: https://ip-ranges.datadoghq.eu
-[6]: https://ip-ranges.datadoghq.com/logs.json
-[7]: https://ip-ranges.datadoghq.eu/logs.json
-[8]: https://ip-ranges.datadoghq.com/apm.json
-[9]: https://ip-ranges.datadoghq.eu/apm.json
 [10]: /agent/proxy/
