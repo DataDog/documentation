@@ -525,6 +525,7 @@ const descColumn = (key, value) => {
  */
 const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '') => {
   let html = '';
+  let newRequiredFields = data.required || requiredFields;
 
   // i've set a hard recurse limit of depth
   if(level > 10) return '';
@@ -540,6 +541,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           if(typeof value.items === 'object') {
             if (value.items.properties) {
               childData = value.items.properties;
+              newRequiredFields = (value.items.required) ? value.items.required : newRequiredFields;
             }
           } else if(typeof value.items === 'string') {
             if(value.items === '[Circular]') {
@@ -548,6 +550,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           }
         } else if(typeof value === 'object' && "properties" in value) {
           childData = value.properties;
+          newRequiredFields = (value.required) ? value.required : newRequiredFields;
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if(Object.keys(value.additionalProperties).length !== 0){
@@ -567,19 +570,6 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         const required = requiredFields.includes(key) ? '&nbsp;[<em>required</em>]' : "";
         const readOnlyField = (isReadOnly) ? '' : '';
 
-        let newRequiredFields = [];
-
-        if (data.required) {
-          newRequiredFields = data.required;
-        } else if (data[key]["required"]){
-          newRequiredFields = data[key]["required"];
-        } else if (data[key]["items"]){
-            if (data[key]["items"]["required"]) {
-              newRequiredFields = data[key]["items"]["required"]
-            }
-        } else {
-          newRequiredFields = [];
-        }
       
         // build html
         html += `
