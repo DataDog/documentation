@@ -35,22 +35,20 @@ The trigger endpoint provides the list of triggered checks alongside their resul
 
 The test triggering endpoint supports starting up to 50 tests in one request.
 
-{{< tabs >}}
-{{% tab "Datadog US site" %}}
+{{< site-region region="us" >}}
 
 * **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci`
 * **Method**: `POST`
 * **Argument**: A JSON object containing the list of all tests to trigger and their configuration override.
 
-{{% /tab %}}
-{{% tab "Datadog EU site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 * **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci`
 * **Method**: `POST`
 * **Argument**: A JSON object containing the list of all tests to trigger and their configuration override.
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 #### Request data structure
 
@@ -66,8 +64,7 @@ The public identifier of a test can be either the identifier of the test found i
 
 #### Example request
 
-{{< tabs >}}
-{{% tab "Datadog US site" %}}
+{{< site-region region="us" >}}
 
 ```bash
 #!/bin/sh
@@ -100,8 +97,9 @@ curl -X POST \
 }' "https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci"
 ```
 
-{{% /tab %}}
-{{% tab "Datadog EU site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
 
 ```bash
 #!/bin/sh
@@ -134,8 +132,8 @@ curl -X POST \
 }' "https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci"
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
+
 
 #### Example response
 
@@ -156,27 +154,24 @@ curl -X POST \
 
 ### Poll results endpoint
 
-{{< tabs >}}
-{{% tab "Datadog US site" %}}
+{{< site-region region="us" >}}
 
 * **Endpoint**: `https://api.datadoghq.com/api/v1/synthetics/tests/poll_results`
 * **Method**: `GET`
 * **Parameters**: A JSON array containing the list of result identifiers to obtain results from.
 
-{{% /tab %}}
-{{% tab "Datadog EU site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 * **Endpoint**: `https://api.datadoghq.eu/api/v1/synthetics/tests/poll_results`
 * **Method**: `GET`
 * **Parameters**: A JSON array containing the list of result identifiers to obtain results from.
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 #### Example request
 
-{{< tabs >}}
-{{% tab "Datadog US site" %}}
+{{< site-region region="us" >}}
 
 ```bash
 #!/bin/sh
@@ -191,8 +186,8 @@ curl -G \
     -d "result_ids=[%220123456789012345678%22]"
 ```
 
-{{% /tab %}}
-{{% tab "Datadog EU site" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```bash
 #!/bin/sh
@@ -207,8 +202,7 @@ curl -G \
     -d "result_ids=[%220123456789012345678%22]"
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 #### Example response
 
@@ -311,7 +305,7 @@ To setup your client, Datadog API and application keys need to be configured. Th
 
     * **apiKey**: The API key used to query the Datadog API.
     * **appKey**: The application key used to query the Datadog API.
-    * **datadogSite**: The Datadog instance to which request is sent (choices are datadoghq.com or datadoghq.eu).
+    * **datadogSite**: The Datadog instance to which request is sent (choices are `datadoghq.com` or `datadoghq.eu`).
     * **files**: Glob pattern to detect synthetics tests config files.
     * **global**: Overrides of synthetics tests applied to all tests ([see below for description of each field](#configure-tests)).
     * **timeout**: Duration after which synthetics tests are considered failed (in milliseconds).
