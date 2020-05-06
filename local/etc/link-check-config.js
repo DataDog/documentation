@@ -12,11 +12,11 @@ module.exports = {
         slackChannel: '#link-checker-test'
     },
     linkCheckOptions: {
-        method: 'get',
-        filterLevel: 3,
-        // maxSocketsPerHost: 30,
-        maxSockets: 30,
         requestMethod: 'head',
+        filterLevel: 3,
+        maxSocketsPerHost: 10,
+        maxSockets: 80,
+        rateLimit: 100, 
         excludeExternalLinks: false,
         honorRobotExclusions: false,
         brokenLinkSlackLimit: 10,
