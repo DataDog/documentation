@@ -14,9 +14,9 @@ module.exports = {
     linkCheckOptions: {
         requestMethod: 'head',
         filterLevel: 3,
-        maxSocketsPerHost: 10,
+        // maxSocketsPerHost: 10,
         maxSockets: 80,
-        rateLimit: 100, 
+        rateLimit: 10, 
         excludeExternalLinks: false,
         honorRobotExclusions: false,
         brokenLinkSlackLimit: 10,
