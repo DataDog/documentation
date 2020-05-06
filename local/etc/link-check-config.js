@@ -23,6 +23,8 @@ module.exports = {
         includedKeywords: ['*docs.datadoghq*', '*help.datadoghq*'],
         excludedKeywords: [
             '*ja/blog*',
+            '*ja*',
+            '*fr*',
             // '*blog*',
             // '*videos*',
             // '*legal*',
