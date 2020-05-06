@@ -287,10 +287,10 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 Grant the following permissions to manage read access on subsets of log data:
 
-* `logs_read_data`(Recommended) offers finer grained access control over log data thanks to restriction queries.
+* `logs_read_data`(Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries. 
 * `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis.
 
-Those two permissions are applied sequentially meaning that a user can be restricted to a subset of indexes and the restriction queries apply on top of it.
+These permissions can also be used together. A role can restrict the user to a subset of indexes and additionally apply a restriction query to limit access within these indexes.
 
 **Example**: User A has access to index `audit` and index `errors` and is restricted to the query `service:api`.
 When looking in Log Explorer, this user only sees logs from the `service:api` into the `audit` and `errors` indexes.
@@ -301,24 +301,24 @@ In addition, access to the Live Tail can be restricted with the `logs_live_tail`
 
 Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][4].
 
-If a user belongs to multiple roles, permissions combine one with another. 
+"Role combinations are permissive. Is a user belongs to multiple roles, the most permissive role is applied."
 
 **Example**:
 
 * If a user belongs to a role with log read data and also belongs to a role without log read data, then they have the permission to read data.
-* If a user has a restriction to `service:sandbox` through one role, and has another restriction to `env:staging` through another role, then that user can access all `env:staging` logs (even those that are not from `service:sandbox`, and conversely.
+* If a user is restricted to service:sandbox through one role, and has is restricted to env:staging through another role, then the user can access all env:staging and service:sandbox logs.
 
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-**Global access**:
+**Grant global read access to log data**:
 
 Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
 
 {{< img src="account_management/rbac/logs_read_data_access.png" alt="Read Data Access"  style="width:70%;">}}
 
-**Subset of Data**:
+**Restrict read access to a subset of logs**:
 
 This configuration is only supported through the API.
 [1]: https://app.datadoghq.com/access/roles
