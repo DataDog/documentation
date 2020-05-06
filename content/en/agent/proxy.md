@@ -508,13 +508,13 @@ http {
         listen 3834; #listen for metrics
 
         location /api/v1/validate {
-            proxy_pass      https://api.datadoghq.com:443/api/v1/validate;
+            proxy_pass https://api.datadoghq.com:443/api/v1/validate;
         }
         location /support/flare/ {
-            proxy_pass      https://flare.datadoghq.com:443/support/flare/;
+            proxy_pass https://flare.datadoghq.com:443/support/flare/;
         }
         location / {
-            proxy_pass      https://haproxy-app.agent.datadoghq.com:443/;
+            proxy_pass https://haproxy-app.agent.datadoghq.com:443/;
         }
     }
 }
@@ -558,13 +558,13 @@ http {
         listen 3834; #listen for metrics
 
         location /api/v1/validate {
-            proxy_pass      https://api.datadoghq.eu:443/api/v1/validate;
+            proxy_pass https://api.datadoghq.eu:443/api/v1/validate;
         }
         location /support/flare/ {
-            proxy_pass      https://flare.datadoghq.eu:443/support/flare/;
+            proxy_pass https://flare.datadoghq.eu:443/support/flare/;
         }
         location / {
-            proxy_pass      https://haproxy-app.agent.datadoghq.eu:443/;
+            proxy_pass https://haproxy-app.agent.datadoghq.eu:443/;
         }
     }
 }
