@@ -453,7 +453,7 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 {{% /tab %}}
 {{< /tabs >}}
 
-## Increasing the APM Rate Limit
+## APM rate limit
 
 If you happen to encounter this error message in your agent logs: 
 
