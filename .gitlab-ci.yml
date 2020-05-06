@@ -10,7 +10,6 @@ variables:
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
   FORCE_COLOR: '1'
-  GIT_DEPTH: 96
 
 # ================== copy scripts =============== #
 before_script:
