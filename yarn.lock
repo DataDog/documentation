@@ -7014,22 +7014,9 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-"link-checker@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.65.tgz":
-  version "1.0.65"
-  resolved "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.65.tgz#5824815d72c486e1f95da27fcf24372123476ed1"
-  dependencies:
-    axios "^0.19.2"
-    broken-link-checker "https://github.com/DataDog/broken-link-checker.git#zach/add-cookies"
-    chalk "^4.0.0"
-    char-spinner "^1.0.1"
-    https "^1.0.0"
-    humanize-duration "^3.22.0"
-    json2csv "^5.0.1"
-    yargs "^15.3.1"
-
-"link-checker@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.66.tgz":
-  version "1.0.66"
-  resolved "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.66.tgz#e89f763bca317bdaa92276c7491ff844e286a860"
+"link-checker@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.67.tgz":
+  version "1.0.67"
+  resolved "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.67.tgz#618f58fb630cecdaf2ff1ffe15ae166c9458848d"
   dependencies:
     axios "^0.19.2"
     broken-link-checker "https://github.com/DataDog/broken-link-checker.git#zach/add-cookies"
