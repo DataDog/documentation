@@ -251,7 +251,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_PRIORITY_SAMPLING`                    | `true`      | Whether to enable priority sampling                                                                                                            |
 | `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default). It was `DD_SAMPLING_RATE` before v0.36.0                                  |
 | `DD_SERVICE_NAME`                         | `none`      | The default app name                                                                                                                           |
-| `DD_SERVICE_MAPPING`                      | `none`      | Service renaming rules. E.g. `pdo:payments-db,host-10.10.10.10:internal-api`                                                                   |
+| `DD_SERVICE_MAPPING`                      | `none`      | Service renaming rules, for example: `pdo:payments-db,host-10.10.10.10:internal-api`                                                                   |
 | `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | IPC-based configurable circuit breaker retry time (in milliseconds)                                                                            |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)                                                                          |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | The Agent connection timeout (in milliseconds)                                                                                                 |
