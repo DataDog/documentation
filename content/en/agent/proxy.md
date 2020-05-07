@@ -348,14 +348,14 @@ frontend processes-forwarder
 
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
-# If sending logs with use_tcp: true
+# If sending logs with use_http: true
 frontend logs_http_frontend
     bind *:3837
     mode http
     option tcplog
     default_backend datadog-logs-http
 
-# If sending logs with use_http: true
+# If sending logs with use_tcp: true
 frontend logs_frontend
     bind *:10514
     mode tcp
