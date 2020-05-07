@@ -40,7 +40,7 @@ Here are setup examples for the following logging libraries:
 
 **Connect Logs and Traces**
 
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following following APM Python logging instructions][3] to add trace and span IDs to your logs.
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Python logging instructions][3] to add trace and span IDs to your logs.
 
 Once this is done, the log should have the following format:
 
