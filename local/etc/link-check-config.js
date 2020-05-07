@@ -11,12 +11,16 @@ module.exports = {
         serverUrl: 'https://docs-staging.datadoghq.com/',
         slackChannel: '#link-checker-test'
     },
+    local: {
+        serverUrl: 'http://localhost:1313/',
+        slackChannel: '#link-checker-test'
+    },
     linkCheckOptions: {
         requestMethod: 'head',
         filterLevel: 3,
         // maxSocketsPerHost: 10,
         maxSockets: 100,
-        excludeExternalLinks: true,
+        excludeExternalLinks: false,
         honorRobotExclusions: false,
         brokenLinkSlackLimit: 10,
         includedKeywords: ['*docs.datadoghq*', '*help.datadoghq*'],
