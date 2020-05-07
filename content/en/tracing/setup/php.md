@@ -320,7 +320,7 @@ To upgrade the PHP tracer, [download the latest release][7] and follow the same 
 
 To remove the PHP tracer:
 
-- if you are serving your app using php-fpm, stop the php-fpm service, otherwise stop Apache web server.
+1. For php-fpm, stop the php-fpm service, otherwise stop the Apache web server.
 - unlink files `98-ddtrace.ini` and `99-ddtrace-custom.ini` from your php configuration folder.
 - if you are using php-fpm, you only need to restart php-fpm service, otherwise restart Apache web server.
 - Note: if you are using second level caching in opcache (i.e. you have set the parameter `opcache.file_cache`) then you want to remove the cache folder.
