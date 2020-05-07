@@ -2410,6 +2410,7 @@ components:
       required:
       - target
       - expression
+      - type
       type: object
     LogsAttributeRemapper:
       description: 'The remapper processor remaps any source attribute(s) or tag to
@@ -2455,6 +2456,7 @@ components:
       required:
       - sources
       - target
+      - type
       type: object
     LogsCategoryProcessor:
       description: "Use the Category Processor to add a new attribute (without spaces\
@@ -2495,6 +2497,7 @@ components:
       required:
       - categories
       - target
+      - type
       type: object
     LogsDateRemapper:
       description: "As Datadog receives logs, it timestamps them using the value(s)\
@@ -2522,6 +2525,7 @@ components:
           type: string
       required:
       - sources
+      - type
       type: object
     LogsExclusion:
       description: Represents the index exclusion filter object from configuration
@@ -2596,6 +2600,7 @@ components:
       required:
       - sources
       - target
+      - type
       type: object
     LogsGrokParser:
       description: 'Create custom grok rules to parse the full message or [a specific
@@ -2625,6 +2630,7 @@ components:
       required:
       - source
       - grok
+      - type
       type: object
     LogsGrokParserRules:
       description: Set of rules for the grok parser.
@@ -2836,6 +2842,7 @@ components:
       - source
       - target
       - lookup_table
+      - type
       type: object
     LogsMessageRemapper:
       description: 'The message is a key attribute in Datadog.
@@ -2866,6 +2873,7 @@ components:
           type: string
       required:
       - sources
+      - type
       type: object
     LogsPipeline:
       description: 'Pipelines and processors operate on incoming logs,
@@ -2936,6 +2944,8 @@ components:
           description: Type of processor.
           readOnly: true
           type: string
+      required:
+      - type
       type: object
     LogsPipelinesOrder:
       description: Object containing the ordered list of pipeline IDs.
@@ -3039,6 +3049,7 @@ components:
           type: string
       required:
       - sources
+      - type
       type: object
     LogsSort:
       description: Time-ascending `asc` or time-descending `desc`results.
@@ -3079,6 +3090,7 @@ components:
           type: string
       required:
       - sources
+      - type
       type: object
     LogsStringBuilderProcessor:
       description: "Use the string builder processor to add a new attribute (without\
@@ -3114,6 +3126,7 @@ components:
       required:
       - target
       - template
+      - type
       type: object
     LogsTraceRemapper:
       description: "There are two ways to improve correlation between application\
@@ -3136,6 +3149,8 @@ components:
           description: Type of processor.
           readOnly: true
           type: string
+      required:
+      - type
       type: object
     LogsURLParser:
       description: This processor extracts query parameters and other important parameters
@@ -3167,6 +3182,7 @@ components:
       required:
       - sources
       - target
+      - type
       type: object
     LogsUserAgentParser:
       description: 'The User-Agent parser takes a User-Agent attribute and extracts
@@ -3199,6 +3215,7 @@ components:
       required:
       - sources
       - target
+      - type
       type: object
     MetricMetadata:
       description: Object with all metric related metadata.
@@ -4830,6 +4847,36 @@ components:
       items:
         $ref: '#/components/schemas/ServiceCheck'
       type: array
+    ServiceDependencies:
+      additionalProperties:
+        $ref: '#/components/schemas/ServiceDependency'
+      description: An object containing a list of services and their dependencies.
+      example:
+        servica_a:
+          calls:
+          - service_b
+          - service_c
+        service_b:
+          calls:
+          - service_o
+        service_c:
+          calls:
+          - service_o
+        service_o:
+          calls: []
+      type: object
+    ServiceDependency:
+      description: An object containing a service's dependencies.
+      properties:
+        calls:
+          description: A list of dependencies.
+          items:
+            description: Service names.
+            type: string
+          type: array
+      required:
+      - calls
+      type: object
     ServiceLevelObjective:
       description: 'A service level objective object includes a service level indicator,
         thresholds
@@ -12766,6 +12813,75 @@ paths:
       tags:
       - Metrics
       x-codegen-request-body-name: body
+  /api/v1/service_dependencies:
+    get:
+      description: 'Get a list of services and their dependencies. The services retrieved
+        are filtered by environment and a
+
+        primary tag, if one is defined.
+
+
+        This endpoint is in beta and is subject to changes.'
+      operationId: ListServiceDependencies
+      parameters:
+      - description: Specify what APM environment to query service dependencies by.
+        example: prod
+        in: query
+        name: env
+        required: true
+        schema:
+          example: env:production
+          type: string
+      - description: Specify what primary tag to query service dependencies by.
+        example: availability-zone:us1-east
+        in: query
+        name: primary_tag
+        required: false
+        schema:
+          example: availability-zone:us1-east
+          type: string
+      - description: Specify the start of the timeframe in epoch seconds to query
+          for.
+        example: 1588784247
+        in: query
+        name: start
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Specify the end of the timeframe in epoch seconds to query for.
+        example: 1588794247
+        in: query
+        name: end
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceDependencies'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+      summary: Get all service dependencies
+      tags:
+      - Service Dependencies
+      x-unstable: '**Note: This endpoint is in public beta. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).**'
   /api/v1/slo:
     get:
       description: Get multiple service level objective objects by their IDs.
@@ -15075,6 +15191,12 @@ tags:
 
     [4]: https://docs.datadoghq.com/monitors/monitor_types/custom_check/?tab=checkalert'
   name: Service Checks
+- description: 'APM Service Map API. For more information, visit
+
+    the [services map documentation](https://docs.datadoghq.com/tracing/visualization/services_map/).'
+  externalDocs:
+    url: https://docs.datadoghq.com/tracing/visualization/services_map/
+  name: Service Dependencies
 - description: '[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)
 
     (or SLOs) are a key part of the site reliability engineering toolkit.
