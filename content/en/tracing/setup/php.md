@@ -218,7 +218,7 @@ SetEnv DD_TRACE_DEBUG true
 
 ### NGINX
 
-You can use the `env` directory in the php-fpm's `www.conf` file. E.g.
+For NGINX, use the `env` directory in the php-fpm's `www.conf` file, for example:
 
 ```
 env[DD_AGENT_HOST] = $FROM_HOST_ENV
