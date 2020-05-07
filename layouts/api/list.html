@@ -408,21 +408,18 @@
                                             <code class="language-fallback" data-lang="fallback">
 {{- with $pathParams -}}
 {{- range . -}}
-export {{ .name }}="{{ .example | default "CHANGE_ME"}}"
+<span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default "CHANGE_ME"}}"</span>
 {{ end -}}
 {{- end -}}
-{{ if $context.action.requestBody -}}
-(cat << EOF
-{{ ($.Scratch.Get "jsonRequestBody") }}
-EOF
-) | curl -X <span class="text-uppercase">{{ $context.actionType }}</span> \
--d @- \
-{{- else -}}
-curl -X <span class="text-uppercase">{{ $context.actionType }}</span> \
-{{- end }}
--H "DD-API-KEY: ${DD_API_KEY}" \
--H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
-{{ range $.Scratch.Get "serverURLS" }}<span class="d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span>{{ replace $context.pathKey "{" "${" }}</span></code>
+<span class="n">curl</span> <span class="o">-X</span> <span class="s1 text-uppercase">{{ $context.actionType }}</span> {{ range $.Scratch.Get "serverURLS" }}<span class="kn d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span class="n">{{ replace $context.pathKey "{" "${" }}</span> \
+<span class="o">-H</span> <span class="s1">"DD-API-KEY: <span class="n">${DD_API_KEY}</span>"</span> \
+<span class="o">-H</span> <span class="s1">"DD-APPLICATION-KEY: <span class="n">${DD_APP_KEY}</span>"</span>
+{{- if $context.action.requestBody }} \
+<span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
+<span class="s1">{{ ($.Scratch.Get "jsonRequestBody") }}</span>
+<span class="n">EOF</span>
+{{- end -}}
+                                            </code>
                                         </pre>
                                     </div>
                                 </div>
