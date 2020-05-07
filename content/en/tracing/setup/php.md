@@ -323,7 +323,8 @@ To remove the PHP tracer:
 1. For php-fpm, stop the php-fpm service, otherwise stop the Apache web server.
 2. Unlink files `98-ddtrace.ini` and `99-ddtrace-custom.ini` from your php configuration folder.
 3. For php-fpm, restart php-fpm service, otherwise restart the Apache web server.
-- Note: if you are using second level caching in opcache (i.e. you have set the parameter `opcache.file_cache`) then you want to remove the cache folder.
+
+**Note**: If you are using second level caching in OPcache by setting the parameter `opcache.file_cache`, remove the cache folder.
 
 ## Further Reading
 
