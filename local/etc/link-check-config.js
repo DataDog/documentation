@@ -51,7 +51,8 @@ module.exports = {
             '*streaming-corpsite-collector.datadoghq*',
             '*app-sj16.marketo*',
             '*eoig7v0a2o-dsn.algolia*',
-            '*.txt'
+            '*.txt',
+            '*.yaml'
             // '*docs.datadoghq.com/integrations/*'
         ]
     }
