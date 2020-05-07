@@ -318,7 +318,7 @@ To upgrade the PHP tracer, [download the latest release][7] and follow the same 
 
 ## Removing
 
-In order to remove the PHP tracer:
+To remove the PHP tracer:
 
 - if you are serving your app using php-fpm, stop the php-fpm service, otherwise stop Apache web server.
 - unlink files `98-ddtrace.ini` and `99-ddtrace-custom.ini` from your php configuration folder.
