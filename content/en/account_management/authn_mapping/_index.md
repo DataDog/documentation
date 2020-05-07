@@ -16,10 +16,20 @@ If you are using Federated Authentication mechanisms, this API allows you to aut
 
 ## Requests
 
-All the API endpoints below can have two different host endpoints:
+{{< site-region region="us" >}}
 
-* If you are on the Datadog US site: `https://api.datadoghq.com/api/`
-* If you are on the Datadog EU site: `https://api.datadoghq.eu/api/`
+All the API endpoints below are using the following host endpoint:
+
+* `https://api.datadoghq.com/api/` for the Datadog US region.
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+All the API endpoints below are using the following host endpoint:
+
+* `https://api.datadoghq.eu/api/` for the Datadog EU region.
+
+{{< /site-region >}}
 
 ### Create a new Authentication mapping
 
@@ -41,6 +51,8 @@ Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Map
 
 {{< tabs >}}
 {{% tab "Example" %}}
+
+{{< site-region region="us" >}}
 
 ```sh
 curl -X POST \
@@ -66,6 +78,36 @@ curl -X POST \
             }
         }'
 ```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X POST \
+    "https://api.datadoghq.eu/api/v2/authn_mappings" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+    -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+    -d '{
+            "data": {
+                "type": "authn_mappings",
+                "attributes": {
+                    "attribute_key": "member-of",
+                    "attribute_value": "Development"
+                },
+                "relationships": {
+                    "role": {
+                        "data": {
+                            "id": "123e4567-e89b-12d3-a456-426655445555",
+                            "type": "roles"
+                        }
+                    }
+                }
+            }
+        }'
+```
+
+{{< /site-region >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
 
@@ -161,11 +203,24 @@ Returns a list of AuthN Mappings
 {{< tabs >}}
 {{% tab "Example" %}}
 
+{{< site-region region="us" >}}
+
 ```sh
 curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings" \
      -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X GET "https://api.datadoghq.eu/api/v2/authn_mappings" \
+     -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+     -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
+```
+
+{{< /site-region >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
 
@@ -259,11 +314,24 @@ Returns a specific AuthN Mapping by UUID.
 {{< tabs >}}
 {{% tab "Example" %}}
 
+{{< site-region region="us" >}}
+
 ```sh
 curl -X GET "https://api.datadoghq.com/api/v2/authn_mappings/{authn_mapping_id}" \
      -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X GET "https://api.datadoghq.eu/api/v2/authn_mappings/{authn_mapping_id}" \
+     -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+     -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
+```
+
+{{< /site-region >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
 
@@ -361,6 +429,8 @@ Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a 
 {{< tabs >}}
 {{% tab "Example" %}}
 
+{{< site-region region="us" >}}
+
 ```sh
 curl -X PATCH \
     "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
@@ -386,6 +456,37 @@ curl -X PATCH \
             }
         }'
 ```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X PATCH \
+    "https://api.datadoghq.eu/api/v2/authn_mappings/{UUID}" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+    -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+    -d '{
+            "data": {
+                "type": "authn_mappings",
+                "id": "{authn_mapping_id}",
+                "attributes": {
+                    "attribute_key": "member-of",
+                    "attribute_value": "Developer"
+                }
+                "relationships": {
+                "role": {
+                    "data": {
+                            "id": "123e4567-e89b-12d3-a456-426655440000",
+                            "type": "roles"
+                        }
+                    }
+                }
+            }
+        }'
+```
+
+{{< /site-region >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
 
@@ -473,12 +574,26 @@ Deletes a specific AuthN Mapping.
 {{< tabs >}}
 {{% tab "Example" %}}
 
+{{< site-region region="us" >}}
+
 ```sh
 curl -X DELETE "https://api.datadoghq.com/api/v2/authn_mappings/{UUID}" \
          -H "Content-Type: application/json" \
          -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X DELETE "https://api.datadoghq.eu/api/v2/authn_mappings/{UUID}" \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
+```
+
+{{< /site-region >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
 
@@ -504,6 +619,8 @@ Check whether Authn Mappings are enabled or disabled.
 {{< tabs >}}
 {{% tab "Example" %}}
 
+{{< site-region region="us" >}}
+
 ```sh
 curl -X GET \
          "https://api.datadoghq.com/api/v1/org_preferences" \
@@ -511,6 +628,19 @@ curl -X GET \
          -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
 ```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X GET \
+         "https://api.datadoghq.eu/api/v1/org_preferences" \
+         -H "Content-Type: application/json" \
+         -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+         -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+```
+
+{{< /site-region >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
 
@@ -556,6 +686,8 @@ Enables/disables the enforcement of all AuthN Mappings.
 {{< tabs >}}
 {{% tab "Example" %}}
 
+{{< site-region region="us" >}}
+
 ```sh
 curl -X POST \
     "https://api.datadoghq.com/api/v1/org_preferences" \
@@ -573,6 +705,29 @@ curl -X POST \
     }'
 `
 ```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```sh
+curl -X POST \
+    "https://api.datadoghq.eu/api/v1/org_preferences" \
+    -H "Content-Type: application/json" \
+    -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+    -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+    -d '{
+        "data": {
+            "type": "org_preferences",
+            "attributes": {
+                "preference_type": "saml_authn_mapping_roles",
+                "preference_data": true
+            }
+        }
+    }'
+`
+```
+
+{{< /site-region >}}
 
 Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeholders with the corresponding [API and application keys for your organization][1].
 

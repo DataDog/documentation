@@ -78,4 +78,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [1]: https://manage.dynect.net/login
 [2]: https://app.datadoghq.com/account/settings#integrations/dyn
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/dyn/dyn_metadata.csv
-[4]: https://docs.datadoghq.com/fr/help
+[4]: https://docs.datadoghq.com/fr/help/

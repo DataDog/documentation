@@ -85,7 +85,7 @@ L'intégration AWS SQS n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_sqs.html
@@ -94,4 +94,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [8]: https://app.datadoghq.com/logs
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sqs/amazon_sqs_metadata.csv
-[10]: https://docs.datadoghq.com/fr/help
+[10]: https://docs.datadoghq.com/fr/help/

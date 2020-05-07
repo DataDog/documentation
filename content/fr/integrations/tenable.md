@@ -106,4 +106,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 [2]: https://docs.datadoghq.com/fr/agent/guide/integration-management/#install
 [3]: https://github.com/DataDog/integrations-core/blob/master/tenable/datadog_checks/tenable/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/fr/help
+[5]: https://docs.datadoghq.com/fr/help/

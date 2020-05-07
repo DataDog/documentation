@@ -59,8 +59,8 @@ L'intégration Google Cloud Firestore n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
+[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_firestore/google_cloud_firestore_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help
+[5]: https://docs.datadoghq.com/fr/help/

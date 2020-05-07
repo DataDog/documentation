@@ -85,4 +85,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [3]: https://developer.lightbend.com/docs/monitoring/2.3.x/plugins/datadog/datadog.html
 [4]: https://developer.lightbend.com/docs/monitoring/2.3.x/home.html
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/lightbendrp/lightbendrp_metadata.csv
-[6]: https://docs.datadoghq.com/fr/help
+[6]: https://docs.datadoghq.com/fr/help/
