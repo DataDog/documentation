@@ -2,16 +2,16 @@
 title: Logging Without Limits™ Guide
 kind: guide
 further_reading:
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn more about Log Explorer"
-- link: "logs/explorer/patterns/"
+- link: "/logs/explorer/patterns/"
   tag: "Documentation"
   text: "Get familiar with the Logs pattern view"
-- link: "logs/live_tail"
+- link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Explore Live Tail"
-- link: "logs/logs_to_metrics"
+- link: "/logs/logs_to_metrics/"
   tag: "Documentation"
   text: "Learn how to generate metrics from ingested logs"
 ---
@@ -131,6 +131,6 @@ To learn more about Logging Without Limits™ and how to better utilize features
 [5]: /logs/live_tail/
 [6]: /logs/archives/
 [7]: /developers/metrics/
-[8]: /logs/logs_to_metrics
+[8]: /logs/logs_to_metrics/
 [9]: /monitors/monitor_types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

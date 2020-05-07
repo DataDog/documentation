@@ -6,7 +6,7 @@ aliases:
   - /developers/faq/characteristics-of-datadog-histograms/
   - /graphing/metrics/distributions/
 further_reading:
-  - link: "developers/metrics/dogstatsd_metrics_submission"
+  - link: "/developers/metrics/dogstatsd_metrics_submission/"
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
 ---
@@ -53,5 +53,5 @@ For more information on counting custom metrics created from gauge, count, histo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/types
-[2]: /developers/metrics/custom_metrics
+[1]: /developers/metrics/types/
+[2]: /developers/metrics/custom_metrics/

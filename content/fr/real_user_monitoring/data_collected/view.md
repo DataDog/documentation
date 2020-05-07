@@ -44,8 +44,8 @@ Pour les applications monopage (SPA), les métriques de performance sont uniquem
 
 [1]: /fr/real_user_monitoring/data_collected/error/
 [2]: /fr/real_user_monitoring/data_collected/resource/
-[3]: /fr/real_user_monitoring/data_collected/long_task
-[4]: /fr/real_user_monitoring/data_collected/user_action
+[3]: /fr/real_user_monitoring/data_collected/long_task/
+[4]: /fr/real_user_monitoring/data_collected/user_action/
 [5]: https://www.w3.org/TR/paint-timing/
 [6]: https://www.w3.org/TR/navigation-timing/#sec-navigation-timing
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/History

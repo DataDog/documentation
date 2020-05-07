@@ -2,13 +2,13 @@
 title: Docker Tag Extraction
 kind: documentation
 further_reading:
-- link: "tagging/"
+- link: "/tagging/"
   tag: "Documentation"
   text: "Getting started with tags"
-- link: "tagging/using_tags"
+- link: "/tagging/using_tags/"
   tag: "Documentation"
   text: "Using tags with Datadog"
-- link: "/agent/guide/autodiscovery-management"
+- link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Limit data collection to a subset of containers only"
 ---

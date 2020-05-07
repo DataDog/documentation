@@ -148,7 +148,7 @@ $http_request.responseText
 [その他のコード例については、ncracker/dd_metric GitHub リポジトリを参照してください][5]。
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /ja/developers/metrics/dogstatsd_metrics_submission
-[3]: /ja/api/#hosts
-[4]: /ja/api/#metrics
+[2]: /ja/developers/metrics/dogstatsd_metrics_submission/
+[3]: /ja/api/v1/hosts/
+[4]: /ja/api/v1/metrics/
 [5]: https://github.com/ncracker/dd_metric

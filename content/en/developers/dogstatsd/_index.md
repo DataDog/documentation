@@ -71,8 +71,8 @@ By default, DogStatsD listens on UDP port **8125**. If you need to change this, 
 
 
 [1]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
-[2]: /developers/dogstatsd/unix_socket
-[3]: /agent/guide/agent-commands
+[2]: /developers/dogstatsd/unix_socket/
+[3]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{% tab "Container Agent" %}}
 
@@ -168,7 +168,7 @@ To set [tag cardinality][5] for the metrics collected using origin detection, se
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
 [5]: /tagging/assigning_tags/#environment-variables
-[6]: /developers/metrics/custom_metrics
+[6]: /developers/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -204,7 +204,7 @@ To gather custom metrics with [DogStatsD][1] with helm:
 
      With this, any pod running your application is able to send DogStatsD metrics via port `8125` on `$DD_AGENT_HOST`.
 
-[1]: /developers/metrics/dogstatsd_metrics_submission
+[1]: /developers/metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
@@ -482,9 +482,9 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][7] section, which also explains how to send metrics and events straight from the command line.
 
 [1]: https://github.com/etsy/statsd
-[2]: /developers/metrics/dogstatsd_metrics_submission
-[3]: /developers/metrics/custom_metrics
-[4]: /developers/events/dogstatsd
-[5]: /developers/service_checks/dogstatsd_service_checks_submission
+[2]: /developers/metrics/dogstatsd_metrics_submission/
+[3]: /developers/metrics/custom_metrics/
+[4]: /developers/events/dogstatsd/
+[5]: /developers/service_checks/dogstatsd_service_checks_submission/
 [6]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[7]: /developers/metrics
+[7]: /developers/metrics/

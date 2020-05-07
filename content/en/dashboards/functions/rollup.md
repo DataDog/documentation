@@ -61,5 +61,5 @@ Rollups should usually be avoided in [monitor][4] queries, because of the possib
 
 [1]: /dashboards/functions/#proceed-to-time-aggregation
 [2]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[3]: /developers/metrics/type_modifiers
-[4]: /monitors/monitor_types/metric
+[3]: /developers/metrics/type_modifiers/
+[4]: /monitors/monitor_types/metric/

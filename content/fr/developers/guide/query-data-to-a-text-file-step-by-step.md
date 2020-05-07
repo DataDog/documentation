@@ -36,12 +36,12 @@ Si tout fonctionne, des données apparaissent dans le terminal et le `out.txt` e
 
 Pour voir d'autres exemples, consultez notre [documentation relative à l'API][1].
 
-[1]: /fr/api
+[1]: /fr/api/
 [2]: http://docs.python-guide.org/en/latest/starting/install/win
 [3]: /resources/python/api_query_data.py
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://app.datadoghq.com/infrastructure
-[7]: https://docs.datadoghq.com/fr/api/?lang=python#rate-limiting
+[7]: /fr/api/#rate-limiting
 [8]: https://virtualenv.pypa.io/en/stable
 [9]: https://pypi.org/project/datadog

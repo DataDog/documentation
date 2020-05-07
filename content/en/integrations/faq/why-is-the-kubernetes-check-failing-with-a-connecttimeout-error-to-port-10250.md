@@ -14,5 +14,5 @@ kind: faq
 
 See [this PR][2]
 
-[1]: /agent
+[1]: /agent/
 [2]: https://github.com/DataDog/dd-agent/pull/3051

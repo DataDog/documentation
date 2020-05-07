@@ -79,4 +79,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [1]: http://www.immun.io
 [2]: https://dashboard.immun.io/#/settings/integrations
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/immunio/immunio_metadata.csv
-[4]: https://docs.datadoghq.com/fr/help
+[4]: https://docs.datadoghq.com/fr/help/

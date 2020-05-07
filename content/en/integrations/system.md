@@ -137,9 +137,9 @@ The System Swap check does not include any events.
 
 The System Swap check does not include any service checks.
 
-[1]: /integrations/directory
-[2]: /integrations/disk
-[3]: /integrations/process
+[1]: /integrations/directory/
+[2]: /integrations/disk/
+[3]: /integrations/process/
 [4]: /agent/guide/agent-commands/#agent-status-and-information
 [5]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [6]: https://github.com/DataDog/integrations-core/blob/master/system_core/datadog_checks/system_core/data/conf.yaml.example

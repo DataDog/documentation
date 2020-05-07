@@ -18,7 +18,7 @@ col1:
     title: "APM"
   - name: network
     link: "https://www.datadoghq.com/network/"
-    title: "Network Performance"
+    title: "Network Monitoring"
   - name: synthetics
     link: "https://www.datadoghq.com/synthetics/"
     title: "Synthetic Monitoring"

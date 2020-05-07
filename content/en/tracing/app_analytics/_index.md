@@ -235,7 +235,7 @@ Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/setup/dotnet#integrations
+[1]: /tracing/setup/dotnet/#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -316,7 +316,7 @@ Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 
 Integration names can be found on the [integrations table][1].
 
-[1]: /tracing/setup/dotnet#integrations
+[1]: /tracing/setup/dotnet/#integrations
 {{% /tab %}}
 {{% tab "PHP" %}}
 

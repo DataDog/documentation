@@ -7,7 +7,7 @@ kind: documentation
 
 ## Python 2 か Python 3 か
 
-インテグレーションは、Agent の埋め込み Python 環境またはテスト環境のいずれかで動作します。埋め込み環境の現在のバージョンは、[Omnibus コード][1]に記録されています。Agent およびテスト環境は Python 2 ですが、いずれ Python 3 へのアップグレードは避けられないため、新しいインテグレーションは両方のバージョンと互換性がなければなりません。
+インテグレーションは、Agent の埋め込み Python 環境またはテスト環境のいずれかで動作します。埋め込み環境の現在のバージョンは、[Omnibus コード][1]に記録されています。Agent およびテスト環境は Agent v6 では Python 2 、Agent v7 の場合は Python 3 となります。お使いのインテグレーションが、両方のバージョンとの互換性を有することを確認してください。
 
 ## Python のインストール
 
@@ -15,22 +15,22 @@ Python は多くのオペレーティングシステムにプレインストー�
 
 ### macOS
 
-macOS の最新バージョンには Python がプレインストールされています。ただし、Agent で使用されているバージョンより古い可能性があり、必要なツールや依存関係が不足している可能性もあります。App Store なしで管理できる新しい専用 Python インタープリターをインストールする必要があります。
+macOS の最新バージョンには Python がプレインストールされています。ただし、Agent で使用されているバージョンより古かったり、必要なツールや依存関係が不足していたりする可能性もあります。そのため、App Store なしで管理できる専用の Python インタープリターを新しくインストールする必要があります。
 
 以下の選択肢があります。
 
-* [Homebrew][2]: Follow the "[Doing it Right][3]" instructions.
-* [Miniconda][4]: Follow the "[Conda installation][5]" instructions.
+- [Homebrew][2]: Follow the "[Doing it Right][3]" instructions.
+- [Miniconda][4]: Follow the "[Conda installation][5]" instructions.
 
-クリーンなシステム Python を維持するには、[環境マネージャー][6]のインストールをお勧めします。
+システム上でクリーンな Python 環境を維持するには、[環境マネージャー](#仮想環境マネージャー)のインストールをお勧めします。
 
 ### Linux
 
-主要な Linux ディストリビューションには、おそらく許容できるバージョンレベルの Python がプレインストールされています。クリーンなシステム Python を維持するには、[環境マネージャー][6]のインストールをお勧めします。詳細については、ディストリビューションのパッケージ管理ドキュメントを参照してください。
+主要な Linux ディストリビューションには、たいてい許容可能なバージョンレベルの Python がプレインストールされています。システム上でのクリーンな Python 環境を維持するには、[環境マネージャー](#仮想環境マネージャー)のインストールをお勧めします。詳細については、ディストリビューションのパッケージ管理ドキュメントを参照してください。
 
 ### Windows
 
-Windows には 、通常 Python 環境がありません。[Python 公式ドキュメント][7]に掲載されている、インストールの詳細な手順と、他のドキュメントやツールへのリンクを参照してください。
+Windows には 、通常 Python 環境がありません。[Python 公式ドキュメント][6]に掲載されている、インストールの詳細な手順と、他のドキュメントやツールへのリンクを参照してください。
 
 ## 仮想環境マネージャー
 
@@ -38,20 +38,19 @@ Windows には 、通常 Python 環境がありません。[Python 公式ドキ�
 
 ### Virtualenv と Virtualenvwrapper
 
-Python 仮想環境の管理には、[Virtualenv][8] の使用をお勧めします。さらに、円滑な処理のために [virtualenvwrapper][9] の使用をお勧めします。Hitchhiker's Guide to Python には、この 2 つのツールのセットアップ方法が[包括的に説明][10]されています。
+Python 仮想環境の管理には、[Virtualenv][7] の使用をお勧めします。さらに、円滑な処理のために [virtualenvwrapper][8] の使用をお勧めします。Hitchhiker's Guide to Python には、この 2 つのツールのセットアップ方法が[包括的に説明][9]されています。
 
 ### Miniconda
 
-Miniconda を使用している場合は、仮想環境を管理するツールが含まれています。詳細については、[公式ガイド][11]を参照してください。
+Miniconda を使用している場合は、仮想環境を管理するツールが含まれています。詳細については、[公式ガイド][10]を参照してください。
 
 [1]: https://github.com/DataDog/omnibus-software/blob/master/config/software/python.rb#L21
 [2]: https://brew.sh/#install
 [3]: https://docs.python-guide.org/en/latest/starting/install/osx/#doing-it-right
 [4]: https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh
 [5]: https://conda.io/docs/user-guide/install/macos.html
-[6]: #virtual-environment-manager
-[7]: https://docs.python.org/2.7/using/windows.html
-[8]: https://pypi.python.org/pypi/virtualenv
-[9]: https://virtualenvwrapper.readthedocs.io/en/latest/index.html
-[10]: https://docs.python-guide.org/en/latest/dev/virtualenvs/#lower-level-virtualenv
-[11]: https://conda.io/docs/user-guide/tasks/manage-environments.html
+[6]: https://docs.python.org/2.7/using/windows.html
+[7]: https://pypi.python.org/pypi/virtualenv
+[8]: https://virtualenvwrapper.readthedocs.io/en/latest/index.html
+[9]: https://docs.python-guide.org/en/latest/dev/virtualenvs/#lower-level-virtualenv
+[10]: https://conda.io/docs/user-guide/tasks/manage-environments.html

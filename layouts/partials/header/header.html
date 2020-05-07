@@ -111,14 +111,18 @@
     </div>
     <nav class="navbar d-lg-none navbar-expand-lg navbar-light bg-white rounded">
         <div class="container">
-            <a class="navbar-brand" href="{{ "" | absLangURL }}" title="DataDog">{{ partial "img.html" (dict "root" . "src" "dd_docs_logo.png" "alt" "DataDog" "disable_lazy" "true") }}</a>
+            <a class="navbar-brand text-primary" href="{{ "" | absLangURL }}" title="DataDog">{{ partial "img.html" (dict "root" . "src" "datadog_rbg_n_2x.png" "alt" "DataDog" "disable_lazy" "true") }} &nbsp; Docs {{ if eq .Section "api" }}<span class="font-semibold" style="font-size: 23px;">&nbsp; API</span>{{ end }}</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-sidenav" aria-controls="navbar-sidenav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
         <div class="collapse navbar-collapse" id="navbar-sidenav">
             <div class="container">
-                {{ partial "sidenav/sidenav-m.html" . }}
+                {{ if eq .Section "api"}}
+                {{ partial "nav/api-mobile-menu.html" . }}
+                {{ else }}
+                {{ partial "nav/main-mobile-menu.html" . }}
+                {{ end }}
             </div>
         </div>
     </nav>

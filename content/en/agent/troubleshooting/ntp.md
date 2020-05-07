@@ -34,5 +34,5 @@ Alternatively, use Datadog's [Check Summary page][3] and inspect the check `ntp.
 {{< /whatsnext >}}
 
 [1]: /agent/guide/agent-commands/#agent-status-and-information
-[2]: /integrations/ntp
+[2]: /integrations/ntp/
 [3]: https://app.datadoghq.com/check/summary

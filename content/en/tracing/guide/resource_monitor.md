@@ -35,10 +35,10 @@ Then the Monitor configuration would resemble the following:
 
 {{< img src="tracing/faq/top_level_monitor.png" alt="Top level monitor"  >}}
 
-[1]: /tracing/visualization/service
-[2]: /tracing/visualization/resource
+[1]: /tracing/visualization/service/
+[2]: /tracing/visualization/resource/
 [3]: /tracing/visualization/#services
 [4]: /tracing/visualization/#resources
 [5]: /tracing/visualization/service/#export-to-timeboard
-[6]: /monitors/monitor_types/apm
+[6]: /monitors/monitor_types/apm/
 [7]: /tracing/guide/setting_primary_tags_to_scope/#environment

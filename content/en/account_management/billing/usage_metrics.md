@@ -45,5 +45,5 @@ For technical questions, contact [Datadog support][2].
 For billing questions, contact your [Customer Success][3] Manager.
 
 [1]: /logs/logs_to_metrics/#recommended-usage-metrics
-[2]: /help
+[2]: /help/
 [3]: mailto:success@datadoghq.com

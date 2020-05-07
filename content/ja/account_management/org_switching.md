@@ -25,4 +25,4 @@ kind: documentation
 上記のトラブルシューティングで問題が解決しない場合は、[Datadog のサポートチーム][2]に連絡して、本来の動作と試した内容をお知らせください。
 
 [1]: /ja/account_management/saml/#saml-strict
-[2]: /ja/help
+[2]: /ja/help/

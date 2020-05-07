@@ -45,7 +45,7 @@ Run the Datadog Agent in your Kubernetes cluster directly in order to start coll
 To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog-agent`):
 
 1. [Install Helm][1].
-2. Download the [Datadog `value.yaml` configuration file][2].
+2. Download the [Datadog `values.yaml` configuration file][2].
 3. If this is a fresh install, add the Helm stable repo:
     ```bash
     helm repo add stable https://kubernetes-charts.storage.googleapis.com/ && helm repo update
@@ -55,13 +55,15 @@ To install the chart with a custom release name, `<RELEASE_NAME>` (e.g. `datadog
 - **Helm v3+**
 
     ```bash
-    helm install <RELEASE_NAME> -f datadog-values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+    helm install <RELEASE_NAME> -f values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog --set targetSystem=<TARGET_SYSTEM>
     ```
+
+    Replace `<TARGET_SYSTEM>` with the name of your OS: `linux` or `windows`.
 
 - **Helm v1/v2**
 
     ```bash
-    helm install -f datadog-values.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
+    helm install -f values.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> stable/datadog
     ```
 
 This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. It also optionally deploys the [kube-state-metrics chart][4] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
@@ -162,10 +164,10 @@ To install the Datadog Agent on your Kubernetes cluster:
 [7]: /resources/yaml/datadog-agent-npm.yaml
 [8]: /resources/yaml/datadog-agent-vanilla.yaml
 [9]: /agent/kubernetes/apm/#setup
-[10]: /agent/kubernetes/log
-[11]: /agent/kubernetes/apm
+[10]: /agent/kubernetes/log/
+[11]: /agent/kubernetes/apm/
 [12]: /infrastructure/process/?tab=kubernetes#installation
-[13]: /network_performance_monitoring/installation
+[13]: /network_performance_monitoring/installation/
 [14]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [15]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
@@ -252,22 +254,22 @@ Send custom metrics with [the StatsD protocol][9]:
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `["env:golden", "group:retrievers"]`. |
 
-Learn more about [DogStatsD over Unix Domain Sockets][14].
+Learn more about [DogStatsD over Unix Domain Sockets][10].
 
 ### Tagging
 
-Datadog automatically collects common tags from [Kubernetes][16]. To extract even more tags, use the following options:
+Datadog automatically collects common tags from Kubernetes. To extract even more tags, use the following options:
 
 | Env Variable                            | Description             |
 | --------------------------------------- | ----------------------- |
 | `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extract pod labels      |
 | `DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS` | Extract pod annotations |
 
-See the [Kubernetes Tag Extraction][10] documentation to learn more.
+See the [Kubernetes Tag Extraction][11] documentation to learn more.
 
 ### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][13].
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][12].
 
 ### Ignore containers
 
@@ -278,7 +280,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
 | `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
-Additional examples are available on the [Container Discover Management][11] page.
+Additional examples are available on the [Container Discover Management][13] page.
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
@@ -295,22 +297,23 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 
 ## Commands
 
-See the [Agent Commands guides][12] to discover all the Docker Agent commands.
+See the [Agent Commands guides][14] to discover all the Docker Agent commands.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/kubernetes-legacy
-[2]: /agent/kubernetes/integrations
+[1]: /agent/faq/kubernetes-legacy/
+[2]: /agent/kubernetes/integrations/
 [3]: https://github.com/helm/charts/tree/master/stable/datadog#all-configuration-options
 [4]: /agent/proxy/#agent-v6
-[5]: /agent/kubernetes/apm
-[6]: /agent/kubernetes/log
-[7]: /infrastructure/process
-[8]: /infrastructure/livecontainers
-[9]: /developers/dogstatsd
-[10]: /agent/kubernetes/tag
-[11]: /agent/guide/autodiscovery-management/
-[12]: /agent/guide/agent-commands/
-[13]: /security/agent/#secrets-management
+[5]: /agent/kubernetes/apm/
+[6]: /agent/kubernetes/log/
+[7]: /infrastructure/process/
+[8]: /infrastructure/livecontainers/
+[9]: /developers/dogstatsd/
+[10]: /developers/dogstatsd/unix_socket/
+[11]: /agent/kubernetes/tag/
+[12]: /security/agent/#secrets-management
+[13]: /agent/guide/autodiscovery-management/
+[14]: /agent/guide/agent-commands/

@@ -2,10 +2,10 @@
 title: Events
 kind: documentation
 further_reading:
-- link: "/events"
+- link: "/events/"
   tag: "Documentation"
   text: "Datadog events stream"
-- link: "/monitors/monitor_types/event"
+- link: "/monitors/monitor_types/event/"
   tag: "Documentation"
   text: "Event monitors"
 ---
@@ -16,7 +16,7 @@ An event represents any record of activity noteworthy for engineers (devs, ops, 
     {{< nextlink href="/developers/events/agent" >}}Custom Agent Check{{< /nextlink >}}
     {{< nextlink href="/developers/events/dogstatsd" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/developers/events/email" >}}Email{{< /nextlink >}}
-    {{< nextlink href="/api/#post-an-event" >}}Datadog API{{< /nextlink >}}
+    {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

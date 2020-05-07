@@ -12,16 +12,16 @@ further_reading:
     - link: '/integrations/amazon_ecs/#trace-collection'
       tag: 'Documentation'
       text: 'Trace your ECS applications'
-    - link: "agent/docker/log"
+    - link: "/agent/docker/log/"
       tag: "Documentation"
       text: "Collect your application logs"
-    - link: "/agent/docker/integrations"
+    - link: "/agent/docker/integrations/"
       tag: "Documentation"
       text: "Collect automatically your applications metrics and logs"
-    - link: "/agent/guide/autodiscovery-management"
+    - link: "/agent/guide/autodiscovery-management/"
       tag: "Documentation"
       text: "Limit data collection to a subset of containers only"
-    - link: "/agent/docker/tag"
+    - link: "/agent/docker/tag/"
       tag: "Documentation"
       text: "Assign tags to all data emitted by a container"
 ---
@@ -36,6 +36,9 @@ To make it available from _any host_, use `-p 8126:8126/tcp` instead.
 
 For example, the following command allows the Agent to receive traces from your host only:
 
+{{< tabs >}}
+{{% tab "Standard" %}}
+
 ```shell
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -v /proc/:/host/proc/:ro \
@@ -45,6 +48,19 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
               -e DD_APM_ENABLED=true \
               datadog/agent:latest
 ```
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+```shell
+docker run -d -p 127.0.0.1:8126:8126/tcp \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
+              -e DD_APM_ENABLED=true \
+              datadog/agent:latest
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Docker APM Agent Environment Variables
 
@@ -61,7 +77,7 @@ List of all environment variables available for tracing within the Docker Agent:
 | `DD_BIND_HOST`             | Set the StatsD & receiver hostname.                                                                                                                                                                                                                                                                                                                  |
 | `DD_LOG_LEVEL`             | Set the logging level. (`trace`/`debug`/`info`/`warn`/`error`/`critical`/`off`)                                                                                                                                                                                                                                                                      |
 | `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics.                                                                                                                                                                                                                                                                                         |
-| `DD_APM_CONNECTION_LIMIT`  | Sets the maximum connection limit for a 30 second time window.                                                                                                                                                                                                                                                                                       |
+| `DD_APM_CONNECTION_LIMIT`  | Sets the maximum connection limit for a 30 second time window. The default limit is 2000 connections.                                                                                                                                                                                                                                                    |
 | `DD_APM_DD_URL`            | Datadog API endpoint where traces are sent. For Datadog EU site, set `DD_APM_DD_URL` to `https://trace.agent.datadoghq.eu`                                                                                                                                                                                                                            |
 | `DD_APM_RECEIVER_PORT`     | Port that the Datadog Agent's trace receiver listens on. Default value is `8126`.                                                                                                                                                                                                                                                                    |
 | `DD_APM_NON_LOCAL_TRAFFIC` | Allow non-local traffic when [tracing from other containers](#tracing-from-other-containers).                                                                                                                                                                                                                                                        |
@@ -85,6 +101,9 @@ docker network create <NETWORK_NAME>
 
 Then start the Agent and the application container, connected to the network previously created:
 
+{{< tabs >}}
+{{% tab "Standard" %}}
+
 ```bash
 # Datadog Agent
 docker run -d --name datadog-agent \
@@ -102,6 +121,27 @@ docker run -d --name app \
               --network <NETWORK_NAME> \
               company/app:latest
 ```
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+```bash
+# Datadog Agent
+docker run -d --name datadog-agent \
+              --network "<NETWORK_NAME>" \
+              -e DD_API_KEY="<DATADOG_API_KEY>" \
+              -e DD_APM_ENABLED=true \
+              -e DD_APM_NON_LOCAL_TRAFFIC=true \
+              datadog/agent:latest
+
+# Application
+docker run -d --name app \
+              --network "<NETWORK_NAME>" \
+              company/app:latest
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 This exposes the hostname `datadog-agent` in your `app` container.
 If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.

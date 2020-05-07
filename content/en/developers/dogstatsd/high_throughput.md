@@ -342,7 +342,7 @@ Telemetry will soon be added to the .NET client.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
-[2]: /developers/dogstatsd/unix_socket
+[1]: /agent/
+[2]: /developers/dogstatsd/unix_socket/
 [3]: /developers/dogstatsd/#code
 [4]: /developers/metrics/dogstatsd_metrics_submission/#sample-rates

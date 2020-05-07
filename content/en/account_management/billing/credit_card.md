@@ -25,4 +25,4 @@ For billing questions, contact your [Customer Success][2] Manager.
 
 [1]: https://app.datadoghq.com/account/billing
 [2]: mailto:success@datadoghq.com
-[3]: /help
+[3]: /help/

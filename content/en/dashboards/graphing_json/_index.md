@@ -6,10 +6,10 @@ aliases:
   - /graphing/miscellaneous/graphingjson
   - /graphing/graphing_json/
 further_reading:
-- link: "/dashboards/widgets"
+- link: "/dashboards/widgets/"
   tag: "Documentation"
   text: "Widgets"
-- link: "/dashboards/graphing_json/request_json"
+- link: "/dashboards/graphing_json/request_json/"
   tag: "Documentation"
   text: "Request JSON schema"
 ---
@@ -74,7 +74,7 @@ TEMPLATE_VARIABLE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/timeboard
-[2]: /api/#dashboards
-[3]: /dashboards/graphing_json/widget_json
-[4]: /dashboards/template_variables
+[1]: /dashboards/timeboard/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/
+[4]: /dashboards/template_variables/

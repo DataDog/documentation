@@ -45,7 +45,7 @@ In a JSON-formatted Email, the subject of the Email doesn't appear in the event.
 
 **Note**: If you are testing the Email with a standard Email client, the body may be converted to HTML. This causes the body to no longer be pure JSON, resulting in an ignored Email.
 
-[1]: /api/#events
+[1]: /api/v1/events/
 {{% /tab %}}
 {{% tab "Plain text" %}}
 
@@ -62,6 +62,7 @@ With a plain text formatted Email, the following fields are controllable:
 | Body                 | No       | The body of the Email           |
 
 For example, the Email below is a valid submission:
+
 ```text
 Sender's Email: matt@datadog.com
 Subject: Env:Test - System at 50% CPU - #test
@@ -103,7 +104,7 @@ http://catchpoint.com/session_id:123456
 http://catchpoint.com/session_id%3A123456
 ```
 
-[1]: /integrations
-[2]: /agent/agent_checks
+[1]: /integrations/
+[2]: /agent/agent_checks/
 [3]: https://app.datadoghq.com
 [4]: http://daringfireball.net/projects/markdown/syntax#lin
