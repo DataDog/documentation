@@ -4,7 +4,7 @@ module.exports = {
         slackChannel: '#link-checker-test'
     },
     preview: {
-        serverUrl: 'https://docs-staging.datadoghq.com/zach/update-linkchecker/account_management/billing/',
+        serverUrl: 'https://docs-staging.datadoghq.com/',
         slackChannel: '#link-checker-test'
     },
     staging: {
