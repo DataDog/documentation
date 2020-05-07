@@ -204,7 +204,7 @@ The PHP tracer can be configured using environment variables.
 
 ### Apache
 
-If you are using Apache with php-fpm, you can use the `env` directory into your `www.conf` configuration file to configure the php tracer. E.g.
+For Apache with php-fpm, use the `env` directory in your `www.conf` configuration file to configure the php tracer, for example:
 
 ```
 env[DD_AGENT_HOST] = $FROM_HOST_ENV
