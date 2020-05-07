@@ -132,7 +132,7 @@ spec:
             ## Metric collection ##
             #######################
             - name: dockersocketdir
-              mountPath: /host/var/run
+              mountPath: /var/run
             - name: procdir
               mountPath: /host/proc
               readOnly: true

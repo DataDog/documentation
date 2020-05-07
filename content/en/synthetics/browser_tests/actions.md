@@ -3,7 +3,7 @@ title: Browser Test Actions
 kind: documentation
 description: Record Actions for a Synthetics Browser Test
 further_reading:
-- link: "synthetics/browser_tests/advanced_options"
+- link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
   text: "Learn how to configure advanced options for Actions"
 ---
@@ -30,7 +30,9 @@ Choose from:
 
 {{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Browser Test Assertion"  style="width:40%;">}}
 
-Assertions allow you to check whether an element, some content, or some text is available on the current page. You can also check whether a specific email was sent.
+Assertions allow you to validate that your browser test is in the state you expect it to be in, at any given point of a simulated user journey. This is why you must end your browser tests by an assertion to confirm it ended up in an expected state.
+
+Some assertions are performed on the **active page**. Active page refers to the page that has experienced the last interaction like using a click or an assertion on a given page element for instance.
 
 | Assertion                                                 | Description                                                                                                                                                                             |
 |-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -40,7 +42,8 @@ Assertions allow you to check whether an element, some content, or some text is 
 | `Test the content of the URL of the active page`          | Takes the URL of the last page that was interacted with, then asserts whether a specific value (`string`, `number`, `regex`) is present within it.                                      |
 | `Test that an element is present on the active page`      | Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is present on the current page.                                                                              |
 | `Test that an email was received`                         | Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages [email variables][4]. |
-| `Test a JavaScript assertion`                         | Test a custom assertion using your own JavaScript scripts. By default the assertion is done on the active page. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. |
+| `Test your UI with custom JavaScript`                         | Test a custom assertion using your own JavaScript scripts. By default the assertion is done on the active page. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. |
+| `Test a downloaded file`                         | Perform verifications on files downloaded in previous steps. You can check that a file was correctly downloaded and assert on: the file name, size, and MD5 value. |
 
 [Advanced options][1] are also available for assertions.
 
@@ -165,9 +168,9 @@ You can run browser tests within other browser tests, up to two levels of nestin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/advanced_options
+[1]: /synthetics/browser_tests/advanced_options/
 [2]: /synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [4]: /synthetics/browser_tests/#create-a-variable
-[5]: /synthetics/settings
+[5]: /synthetics/settings/
 [6]: /synthetics/browser_tests/advanced_options/#subtests

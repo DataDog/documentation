@@ -14,5 +14,5 @@ private: true
 
 Sign up for a trial account here: [https://app.datadoghq.com/signup][2]
 
-[1]: /tracing
+[1]: /tracing/
 [2]: https://app.datadoghq.com/signup

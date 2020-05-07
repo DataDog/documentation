@@ -79,4 +79,4 @@ Si l'agrégation temporelle **`avg`** avec **`.as_rate()`** convient généralem
 
 [Contactez l'équipe d'assistance Datadog][1] si vous avez des questions.
 
-[1]: /fr/help
+[1]: /fr/help/

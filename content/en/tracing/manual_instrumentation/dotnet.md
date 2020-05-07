@@ -35,6 +35,22 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 }
 ```
 
+
+### Setting Errors
+
+To recognize and mark errors that occur in your code, utilize the `Span.SetException(Exception)` method available to spans. The method marks the span as an error and adds [related span metadata][4] to provide insight into the exception.
+
+```csharp
+try
+{
+    // do work that can throw an exception
+}
+catch(Exception e)
+{
+    span.SetException(e);
+}
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -42,3 +58,4 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 [1]: /tracing/setup/dotnet/#integrations
 [2]: /tracing/visualization/#spans
 [3]: /tracing/visualization/#trace
+[4]: /tracing/visualization/trace/?tab=spantags#more-information

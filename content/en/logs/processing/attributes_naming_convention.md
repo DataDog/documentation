@@ -116,7 +116,7 @@ The following attributes are related to the data used in network communication. 
 | `network.bytes_read`       | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
 | `network.bytes_written`    | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
 
-Typical integrations relying on these attributes include [Apache][6], [Varnish][7], [AWS ELB][8], [Nginx][9], [HAProxy][10], etc.
+Typical integrations relying on these attributes include [Apache][2], [Varnish][6], [AWS ELB][7], [Nginx][8], [HAProxy][9], etc.
 
 ### Geolocation
 
@@ -125,18 +125,18 @@ The following attributes are related to the geolocation of IP addresses used in 
 | **Fullname**                                | **Type** | **Description**                                                                                                                      |
 | :------------------------------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------- |
 | `network.client.geoip.country.name`         | `string` | Name of the country                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | `string` | [ISO Code][11] of the country (example: `US` for the United States, `FR` for France)                                                  |
+| `network.client.geoip.country.iso_code`     | `string` | [ISO Code][10] of the country (example: `US` for the United States, `FR` for France)                                                  |
 | `network.client.geoip.continent.code`       | `string` | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
 | `network.client.geoip.continent.name`       | `string` | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
 | `network.client.geoip.subdivision.name`     | `string` | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
-| `network.client.geoip.subdivision.iso_code` | `string` | [ISO Code][11] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
+| `network.client.geoip.subdivision.iso_code` | `string` | [ISO Code][10] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
 | `network.client.geoip.city.name`            | `String` | The name of the city (example `Paris`, `New York`)                                                                                   |
 
 ### HTTP requests
 
 These attributes are related to the data commonly used in HTTP requests and accesses. All attributes are prefixed by `http`.
 
-Typical integrations relying on these attributes include [Apache][6], Rails, [AWS CloudFront][8], web applications servers, etc.
+Typical integrations relying on these attributes include [Apache][2], Rails, [AWS CloudFront][7], web applications servers, etc.
 
 #### Common attributes
 
@@ -152,7 +152,7 @@ Typical integrations relying on these attributes include [Apache][6], Rails, [AW
 
 #### URL details attributes
 
-These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][12]. All attributes are prefixed by `http.url_details`.
+These attributes provide details about the parsed parts of the HTTP URL. They are generally generated thanks to the [URL parser][11]. All attributes are prefixed by `http.url_details`.
 
 | **Fullname**                   | **Type** | **Description**                                                                         |
 | :----------------------------- | :------- | :-------------------------------------------------------------------------------------- |
@@ -164,7 +164,7 @@ These attributes provide details about the parsed parts of the HTTP URL. They ar
 
 #### User-Agent attributes
 
-These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][13]. All attributes are prefixed by `http.useragent_details`.
+These attributes provide details about the meanings of user-agents' attributes. They are generally generated thanks to the [User-Agent parser][12]. All attributes are prefixed by `http.useragent_details`.
 
 | **Fullname**                            | **Type** | **Description**                                |
 | :-------------------------------------- | :------- | :--------------------------------------------- |
@@ -199,7 +199,7 @@ Database related attributes are prefixed by `db`.
 | `db.operation` | `string` | The operation that was performed ("query", "update", "delete",...).                                                                   |
 | `db.user`      | `string` | User that performs the operation.                                                                                                     |
 
-Typical integrations relying on these attributes are: [Cassandra][14], [MySQL][15], [RDS][16], [Elasticsearch][17], etc.
+Typical integrations relying on these attributes are: [Cassandra][13], [MySQL][14], [RDS][15], [Elasticsearch][16], etc.
 
 ### Performance
 
@@ -209,7 +209,7 @@ Performance metrics attributes.
 | :----------- | :------- | :------------------------------------------------------------------------------------------------ |
 | `duration`   | `number` | A duration of any kind in **nanoseconds**: HTTP response time, database query time, latency, etc. |
 
-Datadog advises you to [remap][18] any durations within your logs on this attribute since Datadog displays and uses it as a default [measure][19] for [trace search][20].
+Datadog advises you to [remap][17] any durations within your logs on this attribute since Datadog displays and uses it as a default [measure][1] for [trace search][18].
 
 ### User related attributes
 
@@ -233,7 +233,7 @@ These attributes are related to the data added by a syslog or a log-shipper agen
 | `syslog.timestamp` | `string` | The log timestamp. Generally remapped to the `date` reserved attribute.       |
 | `syslog.env`       | `string` | The environment name where the source of logs come from.                      |
 
-Some integrations that rely on these are: [Rsyslog][21], [NxLog][22], [Syslog-ng][23], [Fluentd][24], [Logstash][25], etc.
+Some integrations that rely on these are: [Rsyslog][19], [NxLog][20], [Syslog-ng][21], [Fluentd][22], [Logstash][23], etc.
 
 ### DNS
 
@@ -243,14 +243,23 @@ All attributes and measures are prefixed by `dns`.
 | :------------------- | :------- | :------------------------------------------------------------------------ |
 | `dns.id`             | `string` | The DNS query identifier.                                                 |
 | `dns.question.name`  | `string` | The IP address URL that the DNS question wishes to find.                  |
-| `dns.question.type`  | `string` | A [two octet code][26] which specifies the DNS question type.             |
+| `dns.question.type`  | `string` | A [two octet code][24] which specifies the DNS question type.             |
 | `dns.question.class` | `string` | The class looked up by the DNS question (i.e IN when using the internet). |
 | `dns.question.size`  | `number` | The DNS question size in bytes.                                           |
 | `dns.answer.name`    | `string` | The queried domain name.                                                  |
-| `dns.answer.type`    | `string` | A [two octet code][26] which specifies the DNS answer type.               |
+| `dns.answer.type`    | `string` | A [two octet code][24] which specifies the DNS answer type.               |
 | `dns.answer.class`   | `string` | The class answered by the DNS.                                            |
 | `dns.answer.size`    | `number` | The DNS answer size in bytes.                                             |
 | `dns.flags.rcode`    | `string` | The DNS reply code.                                                       |
+
+### Events
+
+All attributes are prefixed by `evt`.
+
+| **Fullname** | **Type** | **Description**                                                                       |
+|:--------------|:---------|:-------------------------------------------------------------------------------------|
+| `evt.name`    | `string` | The shared name across events generated by the same activity (e.g.: authentication). |
+| `evt.outcome` | `string` | The result of the event (e.g. `success`, `failure`).                                     |
 
 ## Further Reading
 
@@ -261,24 +270,22 @@ All attributes and measures are prefixed by `dns`.
 [3]: /integrations/amazon_cloudfront/
 [4]: /logs/explorer/facets/#aliased-facets
 [5]: /logs/explorer/facets/#alias-facets
-[6]: /integrations/apache
-[7]: /integrations/varnish
-[8]: /integrations/amazon_elb
-[9]: /integrations/nginx
-[10]: /integrations/haproxy
-[11]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-[12]: /logs/processing/processors/#url-parser
-[13]: /logs/processing/processors/#user-agent-parser
-[14]: /integrations/cassandra
-[15]: /integrations/mysql
-[16]: /integrations/amazon_rds
-[17]: /integrations/elastic
-[18]: /logs/processing/processors/#remapper
-[19]: /logs/explorer/facets
-[20]: /tracing/app_analytics/search
-[21]: /integrations/rsyslog
-[22]: /integrations/nxlog
-[23]: /integrations/syslog_ng
-[24]: /integrations/fluentd
-[25]: /integrations/logstash
-[26]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+[6]: /integrations/varnish/
+[7]: /integrations/amazon_elb/
+[8]: /integrations/nginx/
+[9]: /integrations/haproxy/
+[10]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[11]: /logs/processing/processors/#url-parser
+[12]: /logs/processing/processors/#user-agent-parser
+[13]: /integrations/cassandra/
+[14]: /integrations/mysql/
+[15]: /integrations/amazon_rds/
+[16]: /integrations/elastic/
+[17]: /logs/processing/processors/#remapper
+[18]: /tracing/app_analytics/search/
+[19]: /integrations/rsyslog/
+[20]: /integrations/nxlog/
+[21]: /integrations/syslog_ng/
+[22]: /integrations/fluentd/
+[23]: /integrations/logstash/
+[24]: https://en.wikipedia.org/wiki/List_of_DNS_record_types

@@ -2,7 +2,7 @@
 title: My Azure VM is powered down. Why is it still listed in my infrastructure list?
 kind: faq
 further_reading:
-- link: "account_management/billing/azure/"
+- link: "/account_management/billing/azure/"
   tag: "FAQ"
   text: "Azure integration billing"
 - link: "/integrations/azure/#configuration"
@@ -20,4 +20,4 @@ If you destroy your Azure VM, it phases out of your infrastructure list within 3
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/billing
+[1]: /account_management/billing/

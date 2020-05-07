@@ -47,6 +47,6 @@ If you haven't already, create a [Datadog account][2].
 
 [1]: https://app.datadoghq.com/synthetics/list
 [2]: https://www.datadoghq.com/
-[3]: /getting_started/synthetics/private_location
-[4]: /getting_started/synthetics/browser_test
-[5]: /getting_started/synthetics/api_test
+[3]: /getting_started/synthetics/private_location/
+[4]: /getting_started/synthetics/browser_test/
+[5]: /getting_started/synthetics/api_test/

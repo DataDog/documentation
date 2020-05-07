@@ -4,9 +4,21 @@ kind: documentation
 aliases:
     - /agent/kubernetes/apm
 further_reading:
-- link: "agent/kubernetes/metrics"
-  tag: "documentation"
-  text: "Kubernetes Metrics"
+- link: "/agent/kubernetes/log/"
+  tag: "Documentation"
+  text: "Collect your application logs"
+- link: "/agent/kubernetes/prometheus/"
+  tag: "Documentation"
+  text: "Collect your Prometheus metrics"
+- link: "/agent/kubernetes/integrations/"
+  tag: "Documentation"
+  text: "Collect automatically your applications metrics and logs"
+- link: "/agent/guide/autodiscovery-management/"
+  tag: "Documentation"
+  text: "Limit data collection to a subset of containers only"
+- link: "/agent/kubernetes/tag/"
+  tag: "Documentation"
+  text: "Assign tags to all data emitted by a container"
 ---
 
 In order to start collecting your application traces you must be [running the Datadog Agent in your Kubernetes cluster][1].
@@ -16,32 +28,32 @@ In order to start collecting your application traces you must be [running the Da
 To enable trace collection with your Agent, follow the instructions below:
 
 1. **Configure the Datadog Agent to accept traces**:
-
-{{< tabs >}}
+    {{< tabs >}}
 {{% tab "Helm" %}}
 
-
 - If you haven't already, [install][1] the Helm chart.
-- Update your datadog-values.yaml file with the following APM configuration:
-    ```yaml	
-    datadog:	
-      ## @param apm - object - required	
-      ## Enable apm agent and provide custom configs	
-      #	
-      apm:	
-        ## @param enabled - boolean - optional - default: false	
-        ## Enable this to enable APM and tracing, on port 8126	
-        #	
-        enabled: true	
-    ```	
- - Then, upgrade your Datadog Helm chart using the following command : `helm upgrade -f datadog-values.yaml <RELEASE NAME> stable/datadog` (don't forget to set the API key in the yaml file)
+- Update your `values.yaml` file with the following APM configuration:
+    ```yaml
+    datadog:
+      ## @param apm - object - required
+      ## Enable apm agent and provide custom configs
+      #
+      apm:
+        ## @param enabled - boolean - optional - default: false
+        ## Enable this to enable APM and tracing, on port 8126
+        #
+        enabled: true
+    ```
 
+ - Set your operating system. Add `targetSystem: linux` or `targetSystem: windows` to the top of your `values.yaml`. 
+
+ - Then, upgrade your Datadog Helm chart using the following command: `helm upgrade -f values.yaml <RELEASE NAME> stable/datadog`. Don't forget to set the API key in the YAML file. If you did not set your operating system in `values.yaml`, add `--set targetSystem=linux` or `--set targetSystem=windows` to this command.
 
 [1]: /agent/kubernetes/?tab=helm
 {{% /tab %}}
-{{% tab "Daemonset" %}}
+{{% tab "DaemonSet" %}}
 
-To enable APM trace collection, open the Daemonset configuration file and edit the following:
+To enable APM trace collection, open the DaemonSet configuration file and edit the following:
 
 - Allow incoming data from port `8126` (forwarding traffic from the host to the agent):
 
@@ -68,10 +80,10 @@ To enable APM trace collection, open the Daemonset configuration file and edit t
               value: "true"
      # (...)
     ```
+
 {{% /tab %}}
 {{< /tabs >}}
-
-**Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
+   **Note**: On minikube, you may receive an `Unable to detect the kubelet URL automatically` error. In this case, set `DD_KUBELET_TLS_VERIFY=false`.
 
 2. **Configure your application pods to pull the host IP in order to communicate with the Datadog Agent**: Use the downward API to pull the host IP; the application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`.
 
@@ -114,8 +126,8 @@ List of all environment variables available for tracing within the Agent running
 | `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. i.e. <code>GET /ignore-me,(GET\|POST) /and-also-me</code>.                                                                                                                                                                          |
 | `DD_APM_ANALYZED_SPANS`    | Configure the spans to analyze for transactions. Format should be comma separated instances of <code>\<SERVICE_NAME>\|;\<OPERATION_NAME>=1</code>. i.e. <code>my-express-app\|;express.request=1,my-dotnet-app\|;aspnet_core_mvc.request=1</code>. You can also [enable it automatically][4] with the configuration parameter in the Tracing Client. |
 | `DD_APM_ENV`               | Sets the default [environment][5] for your traces.                                                                                                                                                                                                                                                                          |
-| `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second.                                                                                                                                                                                                                                                                                 |
-| `DD_APM_MAX_TPS`           | Sets the maximum traces per second.                                                                                                                                                                                                                                                                                         |
+| `DD_APM_MAX_EPS`           | Sets the maximum Analyzed Spans per second. Default is 200 events per second.                                                                                                                                                                                                                                               |
+| `DD_APM_MAX_TPS`           | Sets the maximum traces per second. Default is 10 traces per second.                                                                                                                                                                                                                                                        |
 
 ## Further Reading
 

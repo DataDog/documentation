@@ -1,8 +1,8 @@
-*           @DataDog/documentation
+*                         @DataDog/documentation
 
-# Websites
-data/*      @DataDog/corpweb @DataDog/documentation
-local/*     @DataDog/corpweb
-layouts/*   @DataDog/corpweb
-src/*       @DataDog/corpweb
-static/*    @DataDog/corpweb
+/data/                    @DataDog/corpweb @DataDog/documentation
+/local/                   @DataDog/corpweb @DataDog/documentation
+/layouts/                 @DataDog/corpweb @DataDog/documentation
+/src/                     @DataDog/corpweb @DataDog/documentation
+/config/                  @DataDog/corpweb @DataDog/documentation
+/config/_default/menus/   @DataDog/documentation

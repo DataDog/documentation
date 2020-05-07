@@ -3,16 +3,16 @@ title: Agent
 kind: documentation
 description: Install & configure the Agent to collect data
 further_reading:
-- link: "logs/"
+- link: "/logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "/infrastructure/process"
+- link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Collect your processes"
-- link: "tracing/"
+- link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
-- link: "agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
+- link: "/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
   tag: "Documentation"
   text: "Why install the Agent on cloud instances?"
 - link: "https://www.datadoghq.com/blog/dont-fear-the-agent/"
@@ -45,7 +45,6 @@ Packages are also available for 64-bit x86 and Arm v8 architectures. For other a
   {{< nextlink href="/agent/basic_agent_usage">}}<u>Basic Agent Usage</u>: Find out more about the Datadog Agent, including architecture details, CLI, overhead, and configuration management tools.{{< /nextlink >}}
   {{< nextlink href="/agent/docker">}}<u>Docker</u>: Install and configure the Datadog Agent on Docker. {{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u>: Install and configure the Datadog Agent on Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/autodiscovery">}}<u>Autodiscovery</u>: Autodiscovery enables you to automatically track which services are running where.{{< /nextlink >}}
   {{< nextlink href="/agent/logs">}}<u>Log Collection</u>: Enable and configure log collection in the Datadog Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/proxy">}}<u>Proxy</u>: If your network configuration restricts outbound traffic, use a proxy for Agent traffic.{{< /nextlink >}}
   {{< nextlink href="/agent/versions/upgrade_to_agent_v7">}}<u>Upgrade to Agent v7</u>: Agent 7 is the latest major version of the Datadog Agent. Find out how to upgrade.{{< /nextlink >}}

@@ -4,10 +4,10 @@ kind: faq
 aliases:
  - /agent/faq/agent-v6-changes
 further_reading:
-- link: "agent/versions/upgrade_to_agent_v6/"
+- link: "/agent/versions/upgrade_to_agent_v6/"
   tag: "Documentation"
   text: "Upgrade to Datadog Agent v6"
-- link: "agent/faq/how-datadog-agent-determines-the-hostname/"
+- link: "/agent/faq/how-datadog-agent-determines-the-hostname/"
   tag: "Documentation"
   text: "How does Datadog determine the Agent hostname?"
 ---
@@ -91,11 +91,11 @@ The following Agent configuration options were changed or removed in Agent v6. C
 | `collect_security_groups`    | Obsolete, feature is available with the [AWS integration][6].                                                         |
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/guide/upgrade-to-agent-v6
+[2]: /agent/guide/upgrade-to-agent-v6/
 [3]: /agent/proxy/
-[4]: /integrations/disk
-[5]: /logs
-[6]: /integrations/amazon_web_services
+[4]: /integrations/disk/
+[5]: /logs/
+[6]: /integrations/amazon_web_services/
 {{% /tab %}}
 {{% tab "Checks" %}}
 
@@ -135,7 +135,8 @@ Agent v6 supports the following options in a check's `instance` section:
 | `empty_default_hostname`  | Submit metrics, events, and service checks with no hostname when set to `true`.                                           |
 | `tags`                    | Send custom tags in addition to the tags sent by the check.                                                               |
 
-[1]: /agent/autodiscovery
+
+[1]: /getting_started/agent/autodiscovery/
 {{% /tab %}}
 {{% tab "Environment variables" %}}
 
@@ -261,7 +262,7 @@ The major changes for Agent v6 on Windows are:
 * The Windows service is now started as "Automatic-Delayed". It is started automatically on boot, but after all other services. This results in a small delay in reporting metrics after a reboot.
 * The Windows GUI and Windows system tray icon are now implemented separately. See the [Datadog Agent Manager for Windows][1] for more details.
 
-[1]: /agent/guide/datadog-agent-manager-windows
+[1]: /agent/guide/datadog-agent-manager-windows/
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
@@ -303,7 +304,7 @@ apm_config:
 
 For the Docker image, the APM Agent is disabled by default. Enable it by setting `DD_APM_ENABLED` to `true`. It listens to all interfaces by default. If you want to listen to non-local traffic on any other platform, set `DD_APM_NON_LOCAL_TRAFFIC` to `true`. For more details, see [Tracing Docker Applications][1].
 
-[1]: /agent/docker/apm
+[1]: /agent/docker/apm/
 {{% /tab %}}
 {{% tab "Process Agent" %}}
 
@@ -347,8 +348,8 @@ Some options have moved from `docker_daemon.yaml` to the main `datadog.yaml`:
 * `exclude_pause_container` was added to exclude pause containers on Kubernetes and Openshift (defaults to `true`).
 
 [1]: https://docs.docker.com/engine/reference/commandline/cli/#environment-variables
-[2]: /agent/autodiscovery/tag/#docker
-[3]: /agent/autodiscovery/management
+[2]: /agent/docker/tag/
+[3]: /agent/guide/autodiscovery-management/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -379,11 +380,11 @@ The following options and tags are deprecated:
 * `container_alias` tags are not collected.
 * `kube_replicate_controller` is only added if the pod is created by a replication controller. Instead, use the relevant creator tag (`kube_deployment`, `kube_daemon_set`, etc.).
 
-[1]: /integrations/kubelet
-[2]: /integrations/kube_apiserver_metrics
-[3]: /help
+[1]: /integrations/kubelet/
+[2]: /integrations/kube_apiserver_metrics/
+[3]: /help/
 [4]: /agent/kubernetes/
-[5]: /agent/autodiscovery/tag/#extract-node-labels-as-tags
+[5]: /agent/kubernetes/tag/#extract-node-labels-as-tags
 {{% /tab %}}
 {{% tab "JMX" %}}
 
@@ -434,7 +435,7 @@ When using Kubernetes, Autodiscovery sources information from the kubelet, inste
 
 When specifying [Autodiscovery templates][1] in pod annotations, the annotation name prefix is `ad.datadoghq.com/`. The previous annotation prefix (`service-discovery.datadoghq.com/`) is still supported for Agent v6 but support will be removed in future versions.
 
-[1]: /agent/autodiscovery/integrations/?tab=kubernetes
+[1]: /agent/kubernetes/integrations/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -442,7 +443,7 @@ When specifying [Autodiscovery templates][1] in pod annotations, the annotation 
 
 The identifier override label has been renamed from `com.datadoghq.sd.check.id` to `com.datadoghq.ad.check.id` for consistency. The previous name is still supported for Agent v6 but support will be removed in future versions.
 
-[1]: /agent/autodiscovery/integrations/?tab=docker
+[1]: /agent/docker/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -455,7 +456,7 @@ For Agent v6, all check-related Python code is imported from the `datadog_checks
 
 **Note**: All official integrations were updated to remove obsolete modules, so these changes only affect custom checks.
 
-A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. Fore more details, see the [development documentation][9].
+A lot of the `utils` directory was removed from Agent v6, but most of the removed content was not directly related to checks. The flare module, for example, was removed and reimplemented in Go, but is unlikely to have been used by anyone in a custom check. For more details, see the [development documentation][9].
 
 {{< tabs >}}
 {{% tab "Integrations" %}}
@@ -469,7 +470,7 @@ Even though Agent v6 fully supports Python checks, some of the official Agent v5
 {{% /tab %}}
 {{% tab "Check API" %}}
 
-The base class for Python checks (`AgentCheck`) is now imported from `datadog_checks.checks`. There are a number of things that have been removed or changed in the class API. In addition, each check instance is now its own instance of the class. So you cannot share state between them.
+The base class for Python checks (`AgentCheck`) is now imported from `datadog_checks.base.checks`. There are a number of things that have been removed or changed in the class API. In addition, each check instance is now its own instance of the class. So you cannot share state between them.
 
 The following methods in the `AgentCheck` class are not implemented:
 
@@ -562,10 +563,10 @@ Similarly, you may have added a PIP package to meet a requirement for a custom c
 
 [1]: /agent/proxy/#using-the-agent-as-a-proxy
 [2]: https://github.com/DataDog/dd-agent/wiki/Using-custom-emitters
-[3]: /agent/guide/dogstream
-[4]: /integrations/go-metro
+[3]: /agent/guide/dogstream/
+[4]: /integrations/go-metro/
 [5]: /agent/guide/agent-log-files/
 [6]: /agent/guide/agent-commands/
-[7]: /agent/autodiscovery
+[7]: /getting_started/agent/autodiscovery/
 [8]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base
 [9]: https://github.com/DataDog/datadog-agent/tree/master/docs/dev/checks

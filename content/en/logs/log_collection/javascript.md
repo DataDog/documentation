@@ -7,10 +7,10 @@ further_reading:
 - link: "https://www.npmjs.com/package/@datadog/browser-logs"
   tag: "NPM"
   text: "@datadog/browser-logs NPM package"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 ---
@@ -28,7 +28,7 @@ With the `datadog-logs` library, you can send logs directly to Datadog from JS c
 
 ## Setup
 
-1. **Get a Datadog Client Token**: For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. For more information about setting up a client tolken, see the [client token documentation][2].
+1. **Get a Datadog Client Token**: For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. For more information about setting up a client token, see the [client token documentation][2].
 2. **Configure the Datadog browser log library** [through NPM](#npm-setup) or paste the [bundle](#bundle-setup) into the head tag directly.
 
 ### NPM setup

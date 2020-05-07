@@ -23,19 +23,55 @@
             <div class="col">
                 <ul class="nav navbar-left">
                     {{ range $datafile.left }}
-                        <li class="nav-item {{ if .children }}dropdown{{ end }}">
-                            <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
-                            {{ if .children }}
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  {{ range .children }}
-                                    {{ if eq .link "https://www.datadoghq.com/solutions/cloud-migration/" }}
-                                      <hr class="my-1 mx-1 border-gray-light" />
-                                    {{ end }}
-                                    <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
-                                  {{ end }}
-                                </div>
-                            {{ end }}
-                        </li>
+                        {{ if eq .title "Solutions" }}
+                            <li class="nav-item {{ if .children }}dropdown{{ end }}">
+                                <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
+                                {{ if .children }}
+                                    <div class="dropdown-menu p-2 solutions-menu" aria-labelledby="navbarDropdown">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p class="text-gray-dark small text-uppercase font-semibold mb-0 no-event">Industry</p>
+                                                {{ range .children }}
+                                                    {{ if eq .category "industry" }}
+                                                    <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
+                                                    {{ end }}
+                                                {{ end }}
+                                            </div>
+                                            <div class="col-6">
+                                                <p class="text-gray-dark small text-uppercase font-semibold mb-0 no-event">Use-case</p>
+                                                {{ range .children }}
+                                                    {{ if eq .category "usecase" }}
+                                                    <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
+                                                    {{ end }}
+                                                {{ end }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{ end }}
+                            </li>
+                        {{ else if eq .title "Product" }}
+                            <li class="nav-item {{ if .children }}dropdown{{ end }}">
+                                <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
+                                {{ if .children }}
+                                    <div class="dropdown-menu p-2 product-menu" aria-labelledby="navbarDropdown">
+                                      {{ range .children }}
+                                        <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .pre | safeHTML }} {{ .title }}</a>
+                                      {{ end }}
+                                    </div>
+                                {{ end }}
+                            </li>
+                        {{ else }}
+                            <li class="nav-item {{ if .children }}dropdown{{ end }}">
+                                <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
+                                {{ if .children }}
+                                    <div class="dropdown-menu p-2" aria-labelledby="navbarDropdown">
+                                      {{ range .children }}
+                                        <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
+                                      {{ end }}
+                                    </div>
+                                {{ end }}
+                            </li>
+                        {{ end }}
                     {{ end }}
                 </ul>
             </div>
@@ -57,7 +93,7 @@
                         <li class="nav-item {{ if .children }}dropdown{{ end }}">
                             <a class="nav-link {{ if .children }}dropdown-toggle{{ end }}" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
                             {{ if .children }}
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu p-2" aria-labelledby="navbarDropdown">
                               {{ range .children }}
                                 <a class="dropdown-item" href="{{ if in .link "http"}}{{ .link }}{{ else }}{{ .link | absLangURL }}{{ end }}">{{ .title }}</a>
                               {{ end }}
@@ -75,14 +111,18 @@
     </div>
     <nav class="navbar d-lg-none navbar-expand-lg navbar-light bg-white rounded">
         <div class="container">
-            <a class="navbar-brand" href="{{ "" | absLangURL }}" title="DataDog">{{ partial "img.html" (dict "root" . "src" "dd_docs_logo.png" "alt" "DataDog" "disable_lazy" "true") }}</a>
+            <a class="navbar-brand text-primary" href="{{ "" | absLangURL }}" title="DataDog">{{ partial "img.html" (dict "root" . "src" "datadog_rbg_n_2x.png" "alt" "DataDog" "disable_lazy" "true") }} &nbsp; Docs {{ if eq .Section "api" }}<span class="font-semibold" style="font-size: 23px;">&nbsp; API</span>{{ end }}</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-sidenav" aria-controls="navbar-sidenav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
         <div class="collapse navbar-collapse" id="navbar-sidenav">
             <div class="container">
-                {{ partial "sidenav/sidenav-m.html" . }}
+                {{ if eq .Section "api"}}
+                {{ partial "nav/api-mobile-menu.html" . }}
+                {{ else }}
+                {{ partial "nav/main-mobile-menu.html" . }}
+                {{ end }}
             </div>
         </div>
     </nav>

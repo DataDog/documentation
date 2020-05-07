@@ -86,6 +86,10 @@ clean-integrations:  ## Remove built integrations files.
 clean-auto-doc: ##Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
 	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
+	@if [ content/en/agent/basic_agent_usage/ansible.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/ansible.md ;fi
+	@if [ content/en/agent/basic_agent_usage/chef.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/chef.md ;fi
 	@if [ content/en/agent/basic_agent_usage/heroku.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
 	@if [ content/en/agent/basic_agent_usage/puppet.md ]; then \
@@ -96,6 +100,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/developers/amazon_cloudformation.md ;fi
 	@if [ content/en/logs/log_collection/android.md ]; then \
 	rm -f content/en/logs/log_collection/android.md ;fi
+	@if [ content/en/logs/log_collection/ios.md ]; then \
+	rm -f content/en/logs/log_collection/ios.md ;fi
 	@if [ content/en/tracing/setup/android.md ]; then \
 	rm -f content/en/tracing/setup/android.md ;fi
 

@@ -281,8 +281,8 @@ Les logs au format JSON sont automatiquement parsés par Datadog. Si vous pouvez
 [11]: /fr/logs/processing/parsing
 [12]: /fr/logs/explorer/facets
 [13]: /fr/agent/docker/log
-[14]: /fr/agent/autodiscovery/management
-[15]: /fr/agent/autodiscovery/integrations
+[14]: /fr/agent/kubernetes/management
+[15]: /fr/agent/kubernetes/integrations
 [16]: /fr/agent/basic_agent_usage/kubernetes/#log-collection-setup
 [17]: /fr/integrations/amazon_lambda/#log-collection
 [18]: /fr/logs/log_collection/#how-to-get-the-most-of-your-application-logs

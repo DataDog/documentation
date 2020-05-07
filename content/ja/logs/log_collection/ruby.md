@@ -75,7 +75,7 @@ Lograge による書式設定が完了すると、以下のように重要な情
 
     # This is useful if you want to log query parameters
     config.lograge.custom_options = lambda do |event|
-        { :ddsource => ["ruby"],
+        { :ddsource => 'ruby',
           :params => event.payload[:params].reject { |k| %w(controller action).include? k }
         }
     end

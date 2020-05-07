@@ -13,5 +13,5 @@ At Datadog, we want to make sure you have all the tools you need to use and unde
 
 The videos are organized by keyword. Click on any of the keywords below to find a relevant video.
 
-[1]: /help
+[1]: /help/
 [2]: http://twitter.com/datadoghq

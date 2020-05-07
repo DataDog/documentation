@@ -27,4 +27,4 @@ For billing questions, contact your [Customer Success][3] Manager.
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
 [4]: https://www.datadoghq.com/pricing/#section-infrastructure
-[5]: /help
+[5]: /help/

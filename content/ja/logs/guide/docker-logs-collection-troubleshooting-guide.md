@@ -163,7 +163,7 @@ Docker のデフォルトのロギングドライバーは json-file であり�
 
 4. [Docker Agent のドキュメント][3]の説明に従って、YAML ファイルをコンテナにマウントする必要があります。Docker コンテナへのログドライバーの設定について詳しくは、[こちらのドキュメント][4]を参照してください。
 
-[1]: /ja/help
+[1]: /ja/help/
 [2]: /ja/integrations/journald/#setup
 [3]: /ja/agent/docker/?tab=standard#mounting-conf-d
 [4]: https://docs.docker.com/config/containers/logging/journald/

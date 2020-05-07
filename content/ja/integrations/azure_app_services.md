@@ -50,6 +50,6 @@ Azure App Service インテグレーションには、サービスのチェッ�
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_app_services/azure_app_services_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help
+[3]: https://docs.datadoghq.com/ja/help/

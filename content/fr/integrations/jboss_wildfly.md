@@ -39,9 +39,10 @@ Ce check surveille les applications [JBoss][1] et [WildFly][2].
 
 ### Installation
 
-Le check JBoss/WildFly est inclus avec le paquet de l'[Agent Datadog][3]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check JBoss/WildFly est inclus avec le paquet de l'[Agent Datadog][3]. Selon la configuration de votre serveur (notamment si vous utilisez le schéma JMX `remote+http`), il se peut que vous deviez spécifier un JAR personnalisé pour vous connecter au serveur. Placez le JAR sur la même machine que votre Agent et ajoutez le chemin dans l'option `custom_jar_paths`.
 
 ### Configuration
+
 #### Host
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
@@ -50,45 +51,46 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 1. Modifiez le fichier `jboss_wildfly.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir les données de performance de votre serveur d'applications JBoss ou WildFly. Consultez le [fichier d'exemple jboss_wildfly.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-  **Remarque** : ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué dans la page d'information. Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous. Pour découvrir comment modifier la liste des métriques recueillies, consultez la [documentation relative aux checks JMX][5] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller plus de 350 métriques, contactez [l'assistance Datadog][6].
+   **Remarque** : ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué dans la page d'information. Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous. Pour découvrir comment modifier la liste des métriques recueillies, consultez la [documentation relative aux checks JMX][5] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller plus de 350 métriques, contactez [l'assistance Datadog][6].
 
 2. [Redémarrez l'Agent][7].
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Modifiez ensuite `jboss_wildfly.d/conf.yaml` en supprimant la mise en commentaire des lignes `logs` en bas du fichier. Mettez à jour la ligne `path` en indiquant le bon chemin vers vos fichiers de log JBoss.
 
-    ```yaml
-      logs:
-        - type: file
-          path: /opt/jboss/wildfly/standalone/log/*.log
-          source: jboss_wildfly
-          service: <APPLICATION_NAME>
-    ```
+   ```yaml
+   logs:
+     - type: file
+       path: /opt/jboss/wildfly/standalone/log/*.log
+       source: jboss_wildfly
+       service: '<APPLICATION_NAME>'
+   ```
 
 3. [Redémarrez l'Agent][7].
 
 #### Environnement conteneurisé
+
 ##### Collecte de métriques
 
 Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][8].
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][9].
 
 | Paramètre      | Valeur                                                      |
-|----------------|------------------------------------------------------------|
+| -------------- | ---------------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "jboss_wildfly", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
@@ -107,7 +109,9 @@ L'intégration JBoss/WildFly n'inclut aucun événement.
 
 ### Checks de service
 
-L'intégration JBoss/WildFly n'inclut aucun check de service.
+**jboss.can_connect** :
+
+Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance JBoss/Wildfly qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

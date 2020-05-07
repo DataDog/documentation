@@ -18,7 +18,7 @@ Profiling libraries are shipped within the following tracing language libraries.
 {{< tabs >}}
 {{% tab "Java" %}}
 
-The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11, Oracle Java 11, and Zulu Java 8. All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
+The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
 1. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
 
@@ -26,13 +26,15 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
     wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
     ```
 
-     **Note**: Profiling is available in the `dd-java-agent.jar` library in versions above 0.44.
+     **Note**: Profiling is available in the `dd-java-agent.jar` library in versions 0.44+.
 
 2. Update your service invocation to look like:
 
     ```text
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.api-key-file=<API_KEY_FILE> -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
+
+    **Note**: With `dd-java-agent.jar` library versions 0.48+, if your organization is on Datadog EU site, add `-Ddd.site=datadoghq.eu` or set `DD_SITE=datadoghq.eu` as environment variable.
 
 3. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
@@ -56,6 +58,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 | `-Ddd.profiling.enabled`      | DD_PROFILING_ENABLED      | Set to `true` to enable profiling.                |
 | `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | File that should contain the API key as a string. |
 |                               | DD_PROFILING_API_KEY      | Datadog API key.                                  |
+| `-Ddd.site`                   | DD_SITE                   | Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. |
 
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
@@ -71,10 +74,10 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 1. Install `ddtrace` with the `profile` flavor, which contains both tracing and profiling:
 
     ```shell
-    pip install ddtrace[profile]
+    pip install ddtrace[profiling]
     ```
 
-     **Note**: Profiling is available in the `ddtrace` library for versions 0.35+.
+     **Note**: Profiling is available in the `ddtrace` library for versions 0.36+.
 
 2. Add a valid [Datadog API key][1] in your environment variable: `DD_PROFILING_API_KEY`.
 
@@ -87,24 +90,12 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 4. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
 
     ```python
-    import ddtrace.profile.auto
+    import ddtrace.profiling.auto
     ```
 
 5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
 **Note**:
-
-- If you want to control which part of your code should be profiled, use the `ddtrace.profile.profiler.Profiler` object:
-
-    ```python
-    from ddtrace.profile.profiler import Profiler
-
-    prof = Profiler()
-    prof.start()
-
-    # At shutdown
-    prof.stop()
-    ```
 
 - Alternatively, profile your service by running it with the wrapper `pyddprofile`:
 
@@ -116,14 +107,86 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][1] to use when uploading profiles.                                         |
-| `DD_PROFILING_TAGS`                              | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`.       |
-| `DD_SERVICE_NAME`                                | String        | The Datadog [service][3] name, which can be set here, or in `DD_PROFILING_TAGS`.                    |
+| `DD_API_KEY`                                     | String        | The [Datadog API key][1] to use when uploading profiles. New in version 0.37.                                        |
+| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][1] to use when uploading profiles. Changed in 0.37: deprecated in favor of DD_API_KEY.
+| `DD_SITE`                                        | String        | If your organization is on Datadog EU site, set this to `datadoghq.eu`.                          |
+| `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
+| `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="env:production"`. |
+| `DD_VERSION`                                     | String        | The version of your application, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="version:<APPLICATION_VERSION>"`                              |
+| `DD_PROFILING_TAGS`                              | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`.   |
 
+<div class="alert alert-info">
+Recommended for advanced usage only.
+</div>
+
+- If you want to manually control the lifecycle of the profiler, use the `ddtrace.profiling.profiler.Profiler` object:
+
+    ```python
+    from ddtrace.profiling import Profiler
+
+    prof = Profiler()
+    prof.start()
+
+    # At shutdown
+    prof.stop()
+    ```
 
 [1]: /account_management/api-app-keys/#api-keys
 [2]: https://app.datadoghq.com/profiling
 [3]: /tracing/visualization/#services
+[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
+{{% /tab %}}
+
+{{% tab "Go" %}}
+
+The Datadog Profiler requires Go 1.12+. To begin profiling applications:
+
+1. Get `dd-trace-go` using the command:
+
+    ```shell
+    go get gopkg.in/DataDog/dd-trace-go.v1/profiler
+    ```
+
+     **Note**: Profiling is available in the `dd-trace-go` library for versions 1.23.0+.
+
+2. Import the [profiler][1] at the start of your application:
+
+    ```Go
+    import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
+    ```
+
+3. To profile your code, add a [Datadog API key][2], set your environment, service, and version, then start the profiler:
+
+    ```Go
+    err := profiler.Start(
+        profiler.WithAPIKey("<DATADOG_API_KEY>")
+        profiler.WithService("<SERVICE_NAME>"),
+        profiler.WithEnv("<ENVIRONMENT>"),
+        profiler.WithTags("version:<APPLICATION_VERSION>"),
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer profiler.Stop()
+    ```
+
+4. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][3].
+
+Profiler configuration:
+
+|`profiler` method | Type          | Description                                                                                                  |
+| ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
+|  WithAPIKey      | String        | The Datadog [Datadog API key][2]                                                                             |
+|  WithService     | String        | The Datadog [service][4] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.             |
+|  WithEnv         | String        | The Datadog [environment][5] name, for example `production`, which can be set here, or in `DD_TAGS`.         |
+|  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
+
+
+[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
+[2]: /account_management/api-app-keys/#api-keys
+[3]: https://app.datadoghq.com/profiling
+[4]: /tracing/visualization/#services
+[5]: /tracing/guide/setting_primary_tags_to_scope/#environment
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -216,6 +279,21 @@ Once enabled, the following profile types are collected:
 | Lock                     | Shows the time each function spent waiting for a lock.                                                                                                                                                                                                                                               |
 
 {{% /tab %}}
+
+{{% tab "Go" %}}
+
+Once enabled, the following profile types are collected:
+
+| Profile type             | Definition                                                                                                                                                                                                                                                                                         |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU                      | Shows the time each function spent running on the CPU.                                                                          |
+| Allocation               | Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed. Go calls this `alloc_space`. This is useful for investigating garbage collection load.              |
+| Allocation Count         | Shows the number of objects allocated in heap memory by each function, including allocations which were subsequently freed. This is useful for investigating garbage collection load.     |
+| Heap                     | Shows the amount of heap memory allocated by each function that remained allocated. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service.               |
+| Heap Count               | Shows the number of objects allocated in heap memory by each function and that remained allocated. This is useful for investigating the overall memory usage of your service.                              |
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Troubleshooting
@@ -233,4 +311,4 @@ In case you have done all the necessary configuration steps and do not see profi
 [2]: /tracing/send_traces/#configure-your-environment
 [3]: /tracing/visualization/#services
 [4]: /tracing/troubleshooting/#tracer-debug-mode
-[5]: /help
+[5]: /help/

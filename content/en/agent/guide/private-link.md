@@ -85,12 +85,12 @@ To forward your metrics to Datadog using this new VPC endpoint, configure `pvtli
 1. Update the `dd_url` parameter in the [Agent `datadog.yaml` configuration file][1]:
 
     ```yaml
-    dd_url: pvtlink.agent.datadoghq.com
+    dd_url: https://pvtlink.agent.datadoghq.com
     ```
 
 2. [Restart your Agent][2] to send metrics to Datadog through AWS PrivateLink.
 
-**Note**: if you are using the container Agent, set the environment variable instead: `DD_DD_URL="pvtlink.agent.datadoghq.com"`
+**Note**: If you are using the container Agent, set the environment variable instead: `DD_DD_URL="https://pvtlink.agent.datadoghq.com"`. Configure this environment variable on _both_ the Cluster Agent & Node Agent if using the Cluster Agent to monitor a Kubernetes environment.
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
@@ -139,9 +139,20 @@ To send data to the Datadog API or consume data from it through this new endpoin
 {{% /tab %}}
 {{< /tabs >}}
 
+## Advanced Usage
+
+### Inter-region peering
+
+To route traffic to Datadog’s PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][3]. 
+
+Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses.
+
+For more information, see the [Amazon VPC peering documentation][3].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/privatelink/
-[2]: /help
+[2]: /help/
+[3]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html

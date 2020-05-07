@@ -3,13 +3,13 @@ title: Connecting Python Logs and Traces
 kind: documentation
 description: "Connect your Python logs and traces to correlate them in Datadog."
 further_reading:
-- link: "tracing/manual_instrumentation"
+- link: "/tracing/manual_instrumentation/"
   tag: 'Documentation'
   text: "Instrument manually your application to create traces."
-- link: "tracing/opentracing"
+- link: "/tracing/opentracing/"
   tag: 'Documentation'
   text: "Implement Opentracing across your applications."
-- link: "tracing/visualization/"
+- link: "/tracing/visualization/"
   tag: 'Documentation'
   text: "Explore your services, resources, and traces"
 - link: "https://www.datadoghq.com/blog/request-log-correlation/"
