@@ -26,6 +26,11 @@ Classic:
       dogstatsd: true
       notes: Also supports APM.
       authors: Yoshifumi Kawai
+    - name: DatadogStatsD
+      link: https://github.com/verdie-g/DatadogStatsD
+      dogstatsd: true
+      notes: High Performance DogStatsD Client for .NET Core
+      authors: Gregoire Verdier
   - Clojure:
     - name: clojure-statsd-client
       link: https://github.com/unbounce/clojure-dogstatsd-client
