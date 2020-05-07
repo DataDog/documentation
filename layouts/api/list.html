@@ -411,9 +411,19 @@
 {{ end -}}
 {{- end -}}
 <span class="n">curl</span> <span class="o">-X</span> <span class="s1 text-uppercase">{{ $context.actionType }}</span> {{ range $.Scratch.Get "serverURLS" }}<span class="kn d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span class="n">{{ replace $context.pathKey "{" "${" }}</span> \
-<span class="o">-H</span> <span class="s1">"DD-API-KEY: <span class="n">${DD_API_KEY}</span>"</span> \
-<span class="o">-H</span> <span class="s1">"DD-APPLICATION-KEY: <span class="n">${DD_APP_KEY}</span>"</span>
-{{- if $context.action.requestBody }} \
+{{- with $context.action.requestBody -}}
+{{- with .content -}}
+{{range $key, $val := . }}
+-H "Content-Type: {{ $key }}" \{{ end }}
+{{- end -}}
+{{- end -}}
+{{- range $context.action.security -}}
+{{- range $key, $val := . -}}
+{{ $authSchema := (index $d.components.securitySchemes $key) }}
+<span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{ index $authSchema "x-env-name" }} }</span>"</span>
+{{- end -}}
+{{- end -}}
+{{- if $context.action.requestBody -}} \
 <span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
 <span class="s1">{{ ($.Scratch.Get "jsonRequestBody") }}</span>
 <span class="n">EOF</span>
