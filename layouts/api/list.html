@@ -404,6 +404,7 @@
                                     {{ $pathParams := $.Scratch.Get "pathParams" }}
                                     <div class="highlight">
                                         <pre class="chroma">
+{{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
                                             <code class="language-fallback" data-lang="fallback">
 {{- with $pathParams -}}
 {{- range . -}}
@@ -429,6 +430,7 @@
 <span class="n">EOF</span>
 {{- end -}}
                                             </code>
+{{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
                                         </pre>
                                     </div>
                                 </div>
