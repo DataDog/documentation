@@ -140,7 +140,6 @@ For an ever growing number of web frameworks, Datadog provides more visibility i
 | Slim           | 2.x           | _Coming Soon_   |
 | Yii            | 1.1           | _Coming Soon_   |
 
-_Restrictions for specific supported web frameworks_
 
 | Module         | Versions      | Support Type    |
 |:---------------|:--------------|:----------------|
