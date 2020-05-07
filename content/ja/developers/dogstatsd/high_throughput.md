@@ -127,20 +127,16 @@ public class DogStatsdClient
 {
     public static void Main()
     {
-        var dogstatsdConfig = new StatsdConfig
-        {
-            StatsdServerName = "127.0.0.1",
-            StatsdPort = 8125,
-        };
+      StatsdUDP udp = new StatsdUDP("127.0.0.1", 8125);
 
-        using (var dogStatsdService = new DogStatsdService())
-        {
-            dogStatsdService.Configure(dogstatsdConfig);
+      // "udp" で転送を行う stats インスタンスを作成
+      Statsd s = new Statsd(udp);
+      s.Add<Statsd.Counting,int>("example_metric.count", 1, tags: new[] {"environment:dev"});
+      s.Add("event title", "content", priority: "low");
+      s.Add<Statsd.Counting,int>("example_metric.count", 1, tags: new[] {"environment:dev"});
 
-            // TODO !!!!
-            dogStatsdService.Counter("example_metric.count", 2, tags: new[] { "environment:dev" });
-            dogStatsdService.Gauge("example_metric.gauge", 100, tags: new[] { "environment:dev" });
-        }
+      // この呼び出しの前にバッファリングされた全メトリクスが 1 つのパケットで送信される
+      s.Send();
     }
 }
 ```

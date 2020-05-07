@@ -133,11 +133,9 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        using (var dogStatsdService = new DogStatsdService())
-        {
-            dogStatsdService.Configure(dogstatsdConfig);
-            dogStatsdService.ServiceCheck("Service.check.name", 0, message: "Application is OK.", tags: new[] { "env:dev" });
-        }
+        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
+
+        DogStatsd.ServiceCheck("Service.check.name", 0, message: "Application is OK." , tags: new[] { "env:dev" });
     }
 }
 {{< /code-block >}}
