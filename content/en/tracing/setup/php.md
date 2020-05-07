@@ -121,7 +121,7 @@ include spans for all the libraries we support, e.g. database and http clients.
 
 For an ever growing number of web frameworks we provide even more visibility into the framework internals.
 
-_Frameworks with enanched visibility_
+**Web frameworks with deeper visibility**:
 
 | Module         | Versions      | Support Type    |
 |:---------------|:--------------|:----------------|
