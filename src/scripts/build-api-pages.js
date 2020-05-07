@@ -515,6 +515,9 @@ const descColumn = (key, value) => {
   } else if((typeof(value) === "string") && key === 'description') {
     desc = value || '';
   }
+  if(value.deprecated) {
+    desc = `**DEPRECATED**: ${desc}`;
+  }
   return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}</div>`.trim();
 };
 
