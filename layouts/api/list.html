@@ -139,42 +139,6 @@
 
                             {{ $queryStrings := $.Scratch.Get "queryStrings" }}
                             {{ $pathParams := $.Scratch.Get "pathParams" }}
-                         
-                            {{ with $queryStrings }}
-                                <h4 class="text-capitalize">Query Strings</h4>
-                                <div class=" schema-table row">
-                                    <div class="col-12">
-                                      <div class="row table-header">
-                                        <div class="col-4 column">
-                                          <p class="font-semibold">Name</p>
-                                        </div>
-                                        <div class="col-2 column">
-                                          <p class="font-semibold">Type</p>
-                                        </div>
-                                        <div class="col-6 column">
-                                          <p class="font-semibold">Description</p>
-                                        </div>
-                                      </div>
-                                      {{ range . }}
-                                            <div class="row ">
-                                                <div class="col-12 first-column">
-                                                <div class="row first-row ">
-                                                    <div class="col-4 column">
-                                                        <p>{{- .name -}}{{- cond (eq .required false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}</em></p>
-                                                    </div>
-                                                    <div class="col-2 column">
-                                                        <p>{{ .schema.type }}</p>
-                                                    </div>
-                                                    <div class="col-6 column">
-                                                        <p>{{ .description | markdownify }}</p>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                            </div>
-                                      {{ end }}
-                                    </div>
-                                </div>
-                            {{ end }}
 
                             {{ with $pathParams }}
                                 <h4 class="text-capitalize">Path Parameters</h4>
@@ -210,7 +174,43 @@
                                       {{ end }}
                                     </div>
                                 </div>
-                            {{ end }}                            
+                            {{ end }}  
+                         
+                            {{ with $queryStrings }}
+                                <h4 class="text-capitalize">Query Strings</h4>
+                                <div class=" schema-table row">
+                                    <div class="col-12">
+                                      <div class="row table-header">
+                                        <div class="col-4 column">
+                                          <p class="font-semibold">Name</p>
+                                        </div>
+                                        <div class="col-2 column">
+                                          <p class="font-semibold">Type</p>
+                                        </div>
+                                        <div class="col-6 column">
+                                          <p class="font-semibold">Description</p>
+                                        </div>
+                                      </div>
+                                      {{ range . }}
+                                            <div class="row ">
+                                                <div class="col-12 first-column">
+                                                <div class="row first-row ">
+                                                    <div class="col-4 column">
+                                                        <p>{{- .name -}}{{- cond (eq .required false) "" "&nbsp;[<em>required</em>]" | safeHTML -}}</em></p>
+                                                    </div>
+                                                    <div class="col-2 column">
+                                                        <p>{{ .schema.type }}</p>
+                                                    </div>
+                                                    <div class="col-6 column">
+                                                        <p>{{ .description | markdownify }}</p>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                      {{ end }}
+                                    </div>
+                                </div>
+                            {{ end }}                          
                         {{ end }}
 
                         {{ if .action.requestBody }}
