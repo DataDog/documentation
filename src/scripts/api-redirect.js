@@ -5,31 +5,27 @@
 import redirectUrls from './config/testapi-map';
 
 function redirectToAPIPage() {
-    let previewPath = '';
+    let url = "";
 
-    if (window.location.href.includes('docs-staging')) {
-        previewPath = `${document.documentElement.dataset.commitRef}`;
+    const {env} = document.documentElement.dataset;
+    
+    if (env === "preview") {
+        url = `https://docs-staging.datadoghq.com/${document.documentElement.dataset.commitRef}/`
+    } else if (env === "live") {
+        url = "https://docs.datadoghq.com/"
+    } else {
+        url = "http://localhost:1313/"
     }
 
-    const currentURL =
-        window.location.origin + previewPath + window.location.pathname;
-
     // check if on main /api/ page
-    if (currentURL === `${window.location.origin + previewPath}/api/`) {
+    if (window.location.origin + window.location.pathname ===  `${url}api/`) {
 
         if (window.location.hash) {
 
             redirectUrls.some((redirectUrl) => {
                 if (window.location.hash === redirectUrl.anchor) {
 
-                    console.log( // eslint-disable-line no-console
-                        'redirect to: ',
-                        `${window.location.origin + previewPath}/${
-                            redirectUrl.redirectURL
-                        }`
-                    ); 
-
-                    window.location.href = `${window.location.origin + previewPath}/${
+                    window.location.href = `${url}${
                         redirectUrl.redirectURL
                     }`;
 
