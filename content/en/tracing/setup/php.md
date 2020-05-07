@@ -33,7 +33,7 @@ The PHP APM tracer sends trace data through the Datadog Agent.
 
 [Install and configure the Datadog Agent][3]. See the additional documentation for [tracing Docker applications][4] or [Kubernetes applications][5].
 
-For Agent version [7.18.0][6] and above APM is enabled by default in all environment without further action.
+For Agent version [7.18.0][6] and above, APM is enabled by default for all environments without further action.
 If you are running an older version of the agent, make sure the Agent has **[APM enabled][3]**.
 
 ### Install the extension
