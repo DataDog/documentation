@@ -411,6 +411,11 @@ const filterExampleJson = (actionType, data) => {
   const initialData = getInitialJsonData(data);
   const selectedExample = getInitialExampleJsonData(data);
 
+  // just return the example in additionalProperties cases with example
+  if(data.additionalProperties && data.example) {
+    return data.example;
+  }
+
   const output = `${prefix}
     ${filterJson(actionType, initialData, selectedExample)}
   ${suffix}`.trim();
@@ -454,7 +459,7 @@ const isReadOnlyRow = (value) => {
  */
 const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') => {
   let field = '';
-  if(['type'].includes(key) && (typeof value !== 'object')) {
+  if(['type'].includes(key) && (typeof value !== 'object') && (key !== "&lt;any-key&gt;")) {
     field = '';
   } else {
     field = (key || '');
@@ -551,7 +556,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if(Object.keys(value.additionalProperties).length !== 0){
-            childData = {"<any-key>": value.additionalProperties};
+            childData = {"&lt;any-key&gt;": value.additionalProperties};
             newParentKey = "additionalProperties";
           }
         }
@@ -623,7 +628,11 @@ const schemaTable = (tableType, data) => {
       extraClasses = 'd-none';
     }
   } else {
-    initialData = data.properties
+    if(data.additionalProperties) {
+      initialData = {"&lt;any-key&gt;": data.additionalProperties};
+    } else {
+      initialData = data.properties;
+    }
   }
   extraClasses = (initialData) ? extraClasses : 'd-none';
   const emptyRow = `
