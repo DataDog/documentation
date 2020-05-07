@@ -211,7 +211,7 @@ env[DD_AGENT_HOST] = $FROM_HOST_ENV
 env[DD_TRACE_DEBUG] = true
 ```
 
-Alternatively, you can use [`SetEnv`][13] from the server config, virtual host, directory, or **.htaccess** file.
+Alternatively, you can use [`SetEnv`][13] from the server config, virtual host, directory, or `.htaccess` file.
 
 ```text
 SetEnv DD_TRACE_DEBUG true
