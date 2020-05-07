@@ -173,8 +173,12 @@ resolvers my-dns
 # sending metrics (e.g. the value of "dd_url").
 frontend metrics-forwarder
     bind *:3834
-    mode tcp
+    mode http
+    option tcplog
     default_backend datadog-metrics
+
+    use_backend datadog-api if { path_beg -i  /api/v1/validate }
+    use_backend datadog-flare if { path_beg -i  /support/flare/ }
 
 # This declares the endpoint where your Agents connects for
 # sending traces (e.g. the value of "endpoint" in the APM
@@ -182,6 +186,7 @@ frontend metrics-forwarder
 frontend traces-forwarder
     bind *:3835
     mode tcp
+    option tcplog
     default_backend datadog-traces
 
 # This declares the endpoint where your agents connects for
@@ -190,51 +195,73 @@ frontend traces-forwarder
 frontend processes-forwarder
     bind *:3836
     mode tcp
+    option tcplog
     default_backend datadog-processes
 
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
+# If sending logs with use_http: true
+frontend logs_http_frontend
+    bind *:3837
+    mode http
+    option tcplog
+    default_backend datadog-logs-http
+
+# If sending logs with use_tcp: true
 frontend logs_frontend
     bind *:10514
     mode tcp
+    option tcplog
     default_backend datadog-logs
+
 
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
 backend datadog-metrics
     balance roundrobin
-    mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 haproxy-app.agent.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 haproxy-app.agent.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership haproxy-app.agent.datadoghq.com:443 check port 443
+    # server mothership haproxy-app.agent.datadoghq.com:443 check port 443 ssl verify none
+
+backend datadog-api
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 api.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership api.datadoghq.com:443 check port 443 ssl verify none
+
+backend datadog-flare
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 flare.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership flare.datadoghq.com:443 check port 443 ssl verify none
 
 backend datadog-traces
     balance roundrobin
-    mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 trace.agent.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 trace.agent.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership trace.agent.datadoghq.com:443 check port 443
+    # server mothership trace.agent.datadoghq.com:443 check port 443 ssl verify none
 
 backend datadog-processes
     balance roundrobin
-    mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 process.datadoghq.com:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 process.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership process.datadoghq.com:443 check port 443
+    # server mothership process.datadoghq.com:443 check port 443 ssl verify none
+
+backend datadog-logs-http
+    balance roundrobin
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 agent-http-intake.logs.datadoghq.com:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-http-intake.logs.datadoghq.com:443 check port 443 ssl verify none
 
 backend datadog-logs
     balance roundrobin
-    mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
@@ -293,8 +320,12 @@ resolvers my-dns
 # sending metrics (e.g. the value of "dd_url").
 frontend metrics-forwarder
     bind *:3834
-    mode tcp
+    mode http
+    option tcplog
     default_backend datadog-metrics
+
+    use_backend datadog-api if { path_beg -i  /api/v1/validate }
+    use_backend datadog-flare if { path_beg -i  /support/flare/ }
 
 # This declares the endpoint where your Agents connects for
 # sending traces (e.g. the value of "endpoint" in the APM
@@ -302,6 +333,7 @@ frontend metrics-forwarder
 frontend traces-forwarder
     bind *:3835
     mode tcp
+    option tcplog
     default_backend datadog-traces
 
 # This declares the endpoint where your agents connects for
@@ -310,53 +342,75 @@ frontend traces-forwarder
 frontend processes-forwarder
     bind *:3836
     mode tcp
+    option tcplog
     default_backend datadog-processes
 
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
+# If sending logs with use_http: true
+frontend logs_http_frontend
+    bind *:3837
+    mode http
+    option tcplog
+    default_backend datadog-logs-http
+
+# If sending logs with use_tcp: true
 frontend logs_frontend
     bind *:10514
     mode tcp
+    option tcplog
     default_backend datadog-logs
+
 
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
 backend datadog-metrics
     balance roundrobin
-    mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 haproxy-app.agent.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 haproxy-app.agent.datadoghq.eu:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership haproxy-app.agent.datadoghq.eu:443 check port 443
+    # server mothership haproxy-app.agent.datadoghq.eu:443 check port 443 ssl verify none
+
+backend datadog-api
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 api.datadoghq.eu:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership api.datadoghq.eu:443 check port 443 ssl verify none
+
+backend datadog-flare
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 flare.datadoghq.eu:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership flare.datadoghq.eu:443 check port 443 ssl verify none
 
 backend datadog-traces
     balance roundrobin
-    mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 trace.agent.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 trace.agent.datadoghq.eu:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership trace.agent.datadoghq.eu:443 check port 443
+    # server mothership trace.agent.datadoghq.eu:443 check port 443 ssl verify none
 
 backend datadog-processes
     balance roundrobin
-    mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 process.datadoghq.eu:443 check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 process.datadoghq.eu:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership process.datadoghq.eu:443 check port 443
+    # server mothership process.datadoghq.eu:443 check port 443 ssl verify none
+
+backend datadog-logs-http
+    balance roundrobin
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 agent-http-intake.logs.datadoghq.eu:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server datadog agent-http-intake.logs.datadoghq.eu:443 check port 443 ssl verify none
 
 backend datadog-logs
     balance roundrobin
-    mode tcp
-    option tcplog
     # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
+    # server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 443
 ```
 
 **Note**: Download the certificate with the following command:
@@ -379,16 +433,16 @@ If you are using older version of HAProxy, you have to reload or restart HAProxy
 Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`).
 This `dd_url` setting can be found in the `datadog.yaml` file.
 
-`dd_url: https://haproxy.example.com:3834`
+`dd_url: http://haproxy.example.com:3834`
 
 To send traces or processes through the proxy, setup the following in the `datadog.yaml` file:
 
 ```yaml
 apm_config:
-    apm_dd_url: https://haproxy.example.com:3835
+    apm_dd_url: http://haproxy.example.com:3835
 
 process_config:
-    process_dd_url: https://haproxy.example.com:3836
+    process_dd_url: http://haproxy.example.com:3836
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com` or `app.datadoghq.eu`) and your HAProxy hostname:
@@ -409,16 +463,16 @@ To verify that everything is working properly, review the HAProxy statistics at 
 Edit each Agent to point to HAProxy by setting its `dd_url` to the address of HAProxy (e.g. `haproxy.example.com`).
 This `dd_url` setting can be found in the `datadog.conf` file.
 
-`dd_url: https://haproxy.example.com:3834`
+`dd_url: http://haproxy.example.com:3834`
 
 To send traces or processes through the proxy, setup the following in the `datadog.conf` file:
 
 ```conf
 [trace.api]
-endpoint = https://haproxy.example.com:3835
+endpoint = http://haproxy.example.com:3835
 
 [process.api]
-endpoint = https://haproxy.example.com:3836
+endpoint = http://haproxy.example.com:3836
 ```
 
 Edit your supervisor configuration to disable SSL certificate verification. This is needed to prevent Python from complaining about the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com`) and your HAProxy hostname. The supervisor configuration found at:
@@ -474,26 +528,42 @@ pid /run/nginx.pid;
 events {
     worker_connections 1024;
 }
+# HTTP Proxy for Datadog Agent
+http {
+    server {
+        listen 3834; #listen for metrics
+        access_log off;
+
+        location /api/v1/validate {
+            proxy_pass https://api.datadoghq.com:443/api/v1/validate;
+        }
+        location /support/flare/ {
+            proxy_pass https://flare.datadoghq.com:443/support/flare/;
+        }
+        location / {
+            proxy_pass https://haproxy-app.agent.datadoghq.com:443/;
+        }
+    }
+}
 # TCP Proxy for Datadog Agent
 stream {
     server {
-        listen 3834; #listen for metrics
-        proxy_pass haproxy-app.agent.datadoghq.com:443;
-    }
-    server {
         listen 3835; #listen for traces
+        proxy_ssl on;
         proxy_pass trace.agent.datadoghq.com:443;
     }
     server {
         listen 3836; #listen for processes
+        proxy_ssl on;
         proxy_pass process.datadoghq.com:443;
     }
     server {
         listen 3837; #listen for logs with use_http: true
+        proxy_ssl on;
         proxy_pass agent-http-intake.logs.datadoghq.com:443;
     }
     server {
-        listen 10514; #listen for logs
+        listen 10514; #listen for logs with use_tcp: true
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.com:10516;
     }
@@ -513,26 +583,42 @@ pid /run/nginx.pid;
 events {
     worker_connections 1024;
 }
+# HTTP Proxy for Datadog Agent
+http {
+    server {
+        listen 3834; #listen for metrics
+        access_log off;
+
+        location /api/v1/validate {
+            proxy_pass https://api.datadoghq.eu:443/api/v1/validate;
+        }
+        location /support/flare/ {
+            proxy_pass https://flare.datadoghq.eu:443/support/flare/;
+        }
+        location / {
+            proxy_pass https://haproxy-app.agent.datadoghq.eu:443/;
+        }
+    }
+}
 # TCP Proxy for Datadog Agent
 stream {
     server {
-        listen 3834; #listen for metrics
-        proxy_pass haproxy-app.agent.datadoghq.eu:443;
-    }
-    server {
         listen 3835; #listen for traces
-        proxy_pass trace.agent.datadoghq.eu:44;
+        proxy_ssl on;
+        proxy_pass trace.agent.datadoghq.eu:443;
     }
     server {
         listen 3836; #listen for processes
+        proxy_ssl on;
         proxy_pass process.datadoghq.eu:443;
     }
     server {
         listen 3837; #listen for logs with use_http: true
+        proxy_ssl on;
         proxy_pass agent-http-intake.logs.datadoghq.eu:443;
     }
     server {
-        listen 10514; #listen for logs
+        listen 10514; #listen for logs with use_tcp: true
         proxy_ssl on;
         proxy_pass agent-intake.logs.datadoghq.eu:443;
     }
@@ -547,15 +633,15 @@ To use the Datadog Agent v6 as the logs collector, instruct the Agent to use the
 
 ```yaml
 logs_config:
-  logs_dd_url: myProxyServer.myDomain:10514
+  logs_no_ssl: true
+  logs_dd_url: "<PROXY_SERVER_DOMAIN>:10514"
 ```
-
-Do not change the `logs_no_ssl` parameter as NGINX is simply forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
 
 When choosing to send logs over HTTPS, use the following code block in `datadog.yaml` to configure Agent behavior:
 
 ```yaml
 logs_config:
+  logs_no_ssl: true
   logs_dd_url: "<PROXY_SERVER_DOMAIN>:3837"
   use_http: true
   use_compression: true
