@@ -1808,6 +1808,12 @@ api_v1:
   - name: Check if a monitor can be deleted
     parent: Monitors
     url: check-if-a-monitor-can-be-deleted
+  - name: Monitors group search
+    parent: Monitors
+    url: monitors-group-search
+  - name: Monitors search
+    parent: Monitors
+    url: monitors-search
   - name: Validate a monitor
     parent: Monitors
     url: validate-a-monitor
