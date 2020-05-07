@@ -1795,6 +1795,8 @@ tags:
   name: Screenboards
 - description: '[See API version 1](/api/v1/service-checks/).'
   name: Service Checks
+- description: '[See API version 1](/api/v1/service-dependencies/).'
+  name: Service Dependencies
 - description: '[See API version 1](/api/v1/service-level-objectives/).'
   name: Service Level Objectives
 - description: '[See API version 1](/api/v1/slack-integration/).'
