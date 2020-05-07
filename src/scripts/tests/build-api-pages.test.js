@@ -402,6 +402,79 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should show example data when additionalProperties with properties', () => {
+    const mockSchema = {
+      "type": "object",
+      "description": "An object containing a list of services and their dependencies.",
+      "example": {
+        "service-a": {
+          "calls": [
+            "service-b",
+            "service-c"
+          ]
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "description": "An object containing a service's dependencies.",
+        "required": [
+          "calls"
+        ],
+        "properties": {
+          "calls": {
+            "description": "A list of dependencies.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Service names."
+            }
+          }
+        }
+      }
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {"service-a": {"calls": ["service-b", "service-c"]}};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show example data when additionalProperties with items and no properties', () => {
+    const mockSchema = {
+      "additionalProperties": {
+        "description": "An array of all SLO timeframes.",
+        "items": {
+          "description": "The SLO time window options.",
+          "enum": [
+            "7d",
+            "30d",
+            "90d"
+          ],
+          "type": "string",
+          "x-enum-varnames": [
+            "SEVEN_DAYS",
+            "THIRTY_DAYS",
+            "NINETY_DAYS"
+          ]
+        },
+        "type": "array"
+      },
+      "description": "A map of service level objective object IDs to arrays of timeframes,\nwhich indicate the thresholds to delete for each ID.",
+      "example": {
+        "id1": [
+          "7d",
+          "30d"
+        ],
+        "id2": [
+          "7d",
+          "30d"
+        ]
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {"id1": ["7d", "30d"], "id2": ["7d", "30d"]};
+    expect(actual).toEqual(expected);
+  });
+
   it('should show array of array of objects', () => {
     const mockSchema = {
       "description": "An array of traces.",
