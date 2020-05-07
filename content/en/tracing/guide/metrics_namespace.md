@@ -47,6 +47,7 @@ With the following definitions:
   - *Metric type:* [GAUGE][5]
   - *Tags:* `env`, `service`, `resource`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
+#### Duration by
 - `trace.<SPAN_NAME>.duration.by_http_status`:
   - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
   - *Description:* Measure the total time for a collection of spans for each HTTP status. Specifically, it is the relative share of time spent by all spans over an interval and a given HTTP status - including time spent waiting on child processes.
@@ -77,7 +78,7 @@ With the following definitions:
   - *Metric type:* [GAUGE][5]
   - *Tags:* `env`, `service`, `resource`, `sublayer_service`, `http.status_class`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
-#### Duration.by
+##### Percentile aggregration
 
 - `trace.<SPAN_NAME>.duration.by.resource_<2ND_PRIM_TAG>_service.<PERCENTILE_AGGREGATION>`:
   - *Prerequisite:* This metric exists for any APM service.
@@ -135,7 +136,7 @@ With the following definitions:
   - *Metric type:* [COUNT][8]
   - *Tags:* `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
-### Span_count
+### Span count
 
 - `trace.<SPAN_NAME>.span_count`:
   - *Prerequisite:* This metric exists for any APM service.
