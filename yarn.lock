@@ -7027,6 +7027,19 @@ lines-and-columns@^1.1.6:
     json2csv "^5.0.1"
     yargs "^15.3.1"
 
+"link-checker@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.66.tgz":
+  version "1.0.66"
+  resolved "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.66.tgz#e89f763bca317bdaa92276c7491ff844e286a860"
+  dependencies:
+    axios "^0.19.2"
+    broken-link-checker "https://github.com/DataDog/broken-link-checker.git#zach/add-cookies"
+    chalk "^4.0.0"
+    char-spinner "^1.0.1"
+    https "^1.0.0"
+    humanize-duration "^3.22.0"
+    json2csv "^5.0.1"
+    yargs "^15.3.1"
+
 link-types@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/link-types/-/link-types-1.1.0.tgz#af65e59db52e70c1ffb18ac4c3cb056bfe796830"

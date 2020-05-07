@@ -59,6 +59,8 @@ module.exports = {
             '*.txt',
             '*.yaml'
             // '*docs.datadoghq.com/integrations/*'
-        ]
+        ],
+        csvUrl:
+            'https://origin-static-assets.s3.amazonaws.com/brokenlinks/documentation/'
     }
 };
