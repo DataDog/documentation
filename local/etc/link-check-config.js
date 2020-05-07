@@ -16,7 +16,7 @@ module.exports = {
         slackChannel: '#link-checker-test'
     },
     linkCheckOptions: {
-        requestMethod: 'GET',
+        // requestMethod: 'GET',
         filterLevel: 3,
         // maxSocketsPerHost: 10,
         maxSockets: 100,
