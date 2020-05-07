@@ -4,11 +4,11 @@ module.exports = {
         slackChannel: '#link-checker-test'
     },
     preview: {
-        serverUrl: 'https://docs-staging.datadoghq.com/',
+        serverUrl: 'https://docs-staging.datadoghq.com/zach/update-linkchecker/account_management/billing/',
         slackChannel: '#link-checker-test'
     },
     staging: {
-        serverUrl: 'https://docs-staging.datadoghq.com/',
+        serverUrl: 'https://docs-staging.datadoghq.com/zach/update-linkchecker/account_management/billing/',
         slackChannel: '#link-checker-test'
     },
     local: {
@@ -16,18 +16,19 @@ module.exports = {
         slackChannel: '#link-checker-test'
     },
     linkCheckOptions: {
-        requestMethod: 'head',
+        requestMethod: 'GET',
         filterLevel: 3,
         // maxSocketsPerHost: 10,
         maxSockets: 100,
         excludeExternalLinks: false,
         honorRobotExclusions: false,
         brokenLinkSlackLimit: 10,
-        includedKeywords: ['*docs.datadoghq*', '*help.datadoghq*'],
+        // includedKeywords: ['*docs.datadoghq*', '*help.datadoghq*'],
         excludedKeywords: [
             '*ja/blog*',
-            '*ja*',
-            '*fr*',
+            // '*ja*',
+            '**/fr*',
+            '**/ja*',
             '*wtime=*',
             // '*blog*',
             // '*videos*',
