@@ -168,6 +168,8 @@ You can run browser tests within other browser tests, up to two levels of nestin
 
 You can run HTTP requests as part of your Browser tests. 
 
+{{< img src="synthetics/browser_tests/recorder_http_requests.png" alt="HTTP Request step"  style="width:70%;" >}}
+
 ### Perform an HTTP request
 
 To define your HTTP request:
