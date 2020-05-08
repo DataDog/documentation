@@ -418,7 +418,8 @@
 {{range $key, $val := . }}
 -H "Content-Type: {{ $key }}" \{{ end }}
 {{- end -}}
-{{- end -}}
+{{ else }}
+-H "Content-Type: application/json" \{{- end -}}
 {{- with $context.action.security -}}
 {{- range . -}}
 {{- range $key, $val := . -}}
