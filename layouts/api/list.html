@@ -174,8 +174,8 @@
                                       {{ end }}
                                     </div>
                                 </div>
-                            {{ end }}  
-                         
+                            {{ end }}
+
                             {{ with $queryStrings }}
                                 <h4 class="text-capitalize">Query Strings</h4>
                                 <div class=" schema-table row">
@@ -408,24 +408,63 @@
 {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
                                             <code class="language-fallback" data-lang="fallback">
 {{- with $pathParams -}}
-{{- range . -}}
-<span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default "CHANGE_ME"}}"</span>
+    {{- range . -}}
+        <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default "CHANGE_ME"}}"</span>
+    {{- end }}
 {{ end -}}
+
+<span class="n">curl</span> <span class="o">-X</span> <span class="s1 text-uppercase">{{ $context.actionType }}</span> {{ range $.Scratch.Get "serverURLS" }}<span class="kn d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span class="n">{{ replace $context.pathKey "{" "${" }}</span>
+
+{{- /* Render authentication query parameters "?api_key=XXX" */ -}}
+{{- $i := 0 -}}
+{{- with $context.action.security -}}
+    {{- range . -}}
+        {{- range $key, $val := . -}}
+            {{ $authSchema := (index $d.components.securitySchemes $key) }}
+            {{- if eq $authSchema.in "query" -}}
+                <span class="o">{{- if eq $i 0 -}}?{{- else -}}&{{- end -}}</span><span class="n">{{ $authSchema.name }}</span><span class="o">=</span><span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>
+                {{- $i = add $count 1 -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
 {{- end -}}
-<span class="n">curl</span> <span class="o">-X</span> <span class="s1 text-uppercase">{{ $context.actionType }}</span> {{ range $.Scratch.Get "serverURLS" }}<span class="kn d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span class="n">{{ replace $context.pathKey "{" "${" }}</span> \
+
+{{- /* Content-Type header based on "requestBody" */ -}}
 {{- with $context.action.requestBody -}}
-{{- with .content -}}
-{{range $key, $val := . }}
--H "Content-Type: {{ $key }}" \{{ end }}
+    {{- with .content -}}
+        {{- range $key, $val := . -}}
+            &nbsp;\
+<span class="o">-H</span> <span class="s1">"Content-Type: {{ $key }}"</span>
+        {{- end -}}
+    {{- end -}}
+{{- else -}}
+&nbsp;\
+<span class="o">-H</span> <span class="s1">"Content-Type: application/json"</span>
 {{- end -}}
+
+{{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
+{{- with $context.action.security -}}
+    {{- /* Find authentication per operationId */ -}}
+    {{- range . -}}
+        {{- range $key, $val := . -}}
+            {{ $authSchema := (index $d.components.securitySchemes $key) }}
+            {{- if eq $authSchema.in "header" -}}
+                &nbsp;\
+<span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- else -}}
+    {{- /* Use global authentication */ -}}
+    {{- $securitySchemes := $d.components.securitySchemes -}}
+    &nbsp;\
+<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.apiKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.apiKeyAuth "x-env-name" -}} }</span>"</span> \
+<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span>
 {{- end -}}
-{{- range $context.action.security -}}
-{{- range $key, $val := . -}}
-{{ $authSchema := (index $d.components.securitySchemes $key) }}
-<span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{ index $authSchema "x-env-name" }} }</span>"</span>
-{{- end -}}
-{{- end -}}
-{{- if $context.action.requestBody -}} \
+
+{{- /* Render requestBody example JSON "-d @- << EOF ... EOF" */ -}}
+{{- if $context.action.requestBody -}}
+&nbsp;\
 <span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
 <span class="s1">{{ ($.Scratch.Get "jsonRequestBody") }}</span>
 <span class="n">EOF</span>
