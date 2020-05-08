@@ -411,6 +411,11 @@ const filterExampleJson = (actionType, data) => {
   const initialData = getInitialJsonData(data);
   const selectedExample = getInitialExampleJsonData(data);
 
+  // just return the example in additionalProperties cases with example
+  if(data.additionalProperties && data.example) {
+    return data.example;
+  }
+
   const output = `${prefix}
     ${filterJson(actionType, initialData, selectedExample)}
   ${suffix}`.trim();
@@ -454,7 +459,7 @@ const isReadOnlyRow = (value) => {
  */
 const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') => {
   let field = '';
-  if(['type'].includes(key) && (typeof value !== 'object')) {
+  if(['type'].includes(key) && (typeof value !== 'object') && (key !== "&lt;any-key&gt;")) {
     field = '';
   } else {
     field = (key || '');
@@ -510,6 +515,9 @@ const descColumn = (key, value) => {
   } else if((typeof(value) === "string") && key === 'description') {
     desc = value || '';
   }
+  if(value.deprecated) {
+    desc = `**DEPRECATED**: ${desc}`;
+  }
   return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}</div>`.trim();
 };
 
@@ -525,6 +533,7 @@ const descColumn = (key, value) => {
  */
 const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '') => {
   let html = '';
+  let newRequiredFields = data.required || requiredFields;
 
   // i've set a hard recurse limit of depth
   if(level > 10) return '';
@@ -540,6 +549,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           if(typeof value.items === 'object') {
             if (value.items.properties) {
               childData = value.items.properties;
+              newRequiredFields = (value.items.required) ? value.items.required : newRequiredFields;
             }
           } else if(typeof value.items === 'string') {
             if(value.items === '[Circular]') {
@@ -548,10 +558,11 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           }
         } else if(typeof value === 'object' && "properties" in value) {
           childData = value.properties;
+          newRequiredFields = (value.required) ? value.required : newRequiredFields;
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if(Object.keys(value.additionalProperties).length !== 0){
-            childData = {"<any-key>": value.additionalProperties};
+            childData = {"&lt;any-key&gt;": value.additionalProperties};
             newParentKey = "additionalProperties";
           }
         }
@@ -564,9 +575,10 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
 
         // build markdown
         const toggleArrow = (childData) ? '<span class="toggle-arrow"><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z" fill="black"/></svg></span> ' : "" ;
-        const required = requiredFields.includes(key) ? '<span style="color:red;">*</span>' : "";
+        const required = requiredFields.includes(key) ? '&nbsp;[<em>required</em>]' : "";
         const readOnlyField = (isReadOnly) ? '' : '';
 
+      
         // build html
         html += `
         <div class="row ${outerRowClasses}">
@@ -576,7 +588,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               ${typeColumn(key, value, readOnlyField)}
               ${descColumn(key, value)}
             </div>
-            ${(childData) ? rowRecursive(tableType, childData, true, data.required || [], (level + 1), newParentKey) : ''}
+            ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey) : ''}
           </div>
         </div>
         `.trim();
@@ -623,7 +635,11 @@ const schemaTable = (tableType, data) => {
       extraClasses = 'd-none';
     }
   } else {
-    initialData = data.properties
+    if(data.additionalProperties) {
+      initialData = {"&lt;any-key&gt;": data.additionalProperties};
+    } else {
+      initialData = data.properties;
+    }
   }
   extraClasses = (initialData) ? extraClasses : 'd-none';
   const emptyRow = `

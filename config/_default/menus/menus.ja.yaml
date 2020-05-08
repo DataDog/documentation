@@ -1846,6 +1846,12 @@ api_v1:
   - name: Check if a monitor can be deleted
     parent: Monitors
     url: check-if-a-monitor-can-be-deleted
+  - name: Monitors group search
+    parent: Monitors
+    url: monitors-group-search
+  - name: Monitors search
+    parent: Monitors
+    url: monitors-search
   - name: Validate a monitor
     parent: Monitors
     url: validate-a-monitor
@@ -1918,6 +1924,12 @@ api_v1:
   - name: Submit a Service Check
     parent: Service Checks
     url: submit-a-service-check
+  - name: Service Dependencies
+    url: /ja/api/v1/service-dependencies/
+    identifier: Service Dependencies
+  - name: Get all service dependencies
+    parent: Service Dependencies
+    url: get-all-service-dependencies
   - name: Service Level Objectives
     url: /ja/api/v1/service-level-objectives/
     identifier: Service Level Objectives
@@ -2244,6 +2256,9 @@ api_v2:
   - name: Service Checks
     url: /ja/api/v2/service-checks/
     identifier: Service Checks
+  - name: Service Dependencies
+    url: /ja/api/v2/service-dependencies/
+    identifier: Service Dependencies
   - name: Service Level Objectives
     url: /ja/api/v2/service-level-objectives/
     identifier: Service Level Objectives

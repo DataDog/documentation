@@ -592,6 +592,9 @@
             "type": "string"
           }
         },
+        "required": [
+          "type"
+        ],
         "type": "object"
       },
       "OrganizationAttributes": {
@@ -699,6 +702,9 @@
             "type": "string"
           }
         },
+        "required": [
+          "type"
+        ],
         "type": "object"
       },
       "PermissionAttributes": {
@@ -790,6 +796,9 @@
                   "type": "string"
                 }
               },
+              "required": [
+                "type"
+              ],
               "type": "object"
             },
             "type": "array"
@@ -1204,6 +1213,9 @@
             "type": "string"
           }
         },
+        "required": [
+          "type"
+        ],
         "type": "object"
       },
       "RoleAttributes": {
@@ -1605,6 +1617,9 @@
                 "type": "string"
               }
             },
+            "required": [
+              "type"
+            ],
             "type": "object"
           }
         },
@@ -1925,6 +1940,9 @@
                   "type": "string"
                 }
               },
+              "required": [
+                "type"
+              ],
               "type": "object"
             },
             "type": "array"
@@ -2866,6 +2884,9 @@
                       "type": "string"
                     }
                   },
+                  "required": [
+                    "type"
+                  ],
                   "type": "object"
                 },
                 {
@@ -2917,6 +2938,9 @@
                       "type": "string"
                     }
                   },
+                  "required": [
+                    "type"
+                  ],
                   "type": "object"
                 },
                 {
@@ -3059,6 +3083,9 @@
                       "type": "string"
                     }
                   },
+                  "required": [
+                    "type"
+                  ],
                   "type": "object"
                 }
               ],
@@ -3134,6 +3161,9 @@
                 "type": "string"
               }
             },
+            "required": [
+              "type"
+            ],
             "type": "object"
           },
           {
@@ -3185,6 +3215,9 @@
                 "type": "string"
               }
             },
+            "required": [
+              "type"
+            ],
             "type": "object"
           },
           {
@@ -3327,6 +3360,9 @@
                 "type": "string"
               }
             },
+            "required": [
+              "type"
+            ],
             "type": "object"
           }
         ],
@@ -3767,6 +3803,9 @@
                       "type": "string"
                     }
                   },
+                  "required": [
+                    "type"
+                  ],
                   "type": "object"
                 },
                 {
@@ -3818,6 +3857,9 @@
                       "type": "string"
                     }
                   },
+                  "required": [
+                    "type"
+                  ],
                   "type": "object"
                 },
                 {
@@ -3960,6 +4002,9 @@
                       "type": "string"
                     }
                   },
+                  "required": [
+                    "type"
+                  ],
                   "type": "object"
                 }
               ],
@@ -5312,6 +5357,9 @@
                             "type": "string"
                           }
                         },
+                        "required": [
+                          "type"
+                        ],
                         "type": "object"
                       },
                       "type": "array"
@@ -5593,6 +5641,9 @@
                             "type": "string"
                           }
                         },
+                        "required": [
+                          "type"
+                        ],
                         "type": "object"
                       },
                       "type": "array"
@@ -5899,6 +5950,9 @@
                           "type": "string"
                         }
                       },
+                      "required": [
+                        "type"
+                      ],
                       "type": "object"
                     }
                   },
@@ -6203,6 +6257,9 @@
                           "type": "string"
                         }
                       },
+                      "required": [
+                        "type"
+                      ],
                       "type": "object"
                     }
                   },
@@ -6467,6 +6524,9 @@
                           "type": "string"
                         }
                       },
+                      "required": [
+                        "type"
+                      ],
                       "type": "object"
                     }
                   },
@@ -6660,6 +6720,9 @@
                             "type": "string"
                           }
                         },
+                        "required": [
+                          "type"
+                        ],
                         "type": "object"
                       },
                       "type": "array"
@@ -6825,6 +6888,9 @@
                             "type": "string"
                           }
                         },
+                        "required": [
+                          "type"
+                        ],
                         "type": "object"
                       },
                       "type": "array"
@@ -6993,6 +7059,9 @@
                             "type": "string"
                           }
                         },
+                        "required": [
+                          "type"
+                        ],
                         "type": "object"
                       },
                       "type": "array"
@@ -7372,6 +7441,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -7423,6 +7495,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -7565,6 +7640,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -7980,6 +8058,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -8031,6 +8112,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -8173,6 +8257,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -8549,6 +8636,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -8600,6 +8690,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -8742,6 +8835,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -9478,6 +9574,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -9529,6 +9628,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -9671,6 +9773,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -10078,6 +10183,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -10129,6 +10237,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -10271,6 +10382,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -10671,6 +10785,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -10722,6 +10839,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -10864,6 +10984,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -11335,6 +11458,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -11386,6 +11512,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           },
                           {
@@ -11528,6 +11657,9 @@
                                 "type": "string"
                               }
                             },
+                            "required": [
+                              "type"
+                            ],
                             "type": "object"
                           }
                         ],
@@ -11673,6 +11805,9 @@
                             "type": "string"
                           }
                         },
+                        "required": [
+                          "type"
+                        ],
                         "type": "object"
                       },
                       "type": "array"
@@ -11869,6 +12004,10 @@
     {
       "description": "[See API version 1](/api/v1/service-checks/).",
       "name": "Service Checks"
+    },
+    {
+      "description": "[See API version 1](/api/v1/service-dependencies/).",
+      "name": "Service Dependencies"
     },
     {
       "description": "[See API version 1](/api/v1/service-level-objectives/).",

@@ -181,6 +181,8 @@ components:
           description: Organizations resource type.
           readOnly: true
           type: string
+      required:
+      - type
       type: object
     OrganizationAttributes:
       description: Attributes of the organization.
@@ -237,6 +239,8 @@ components:
           description: Permissions resource type.
           readOnly: true
           type: string
+      required:
+      - type
       type: object
     PermissionAttributes:
       description: Attributes of a permission.
@@ -405,6 +409,8 @@ components:
           description: Roles type.
           readOnly: true
           type: string
+      required:
+      - type
       type: object
     RoleAttributes:
       description: Attributes of the role.
@@ -1789,6 +1795,8 @@ tags:
   name: Screenboards
 - description: '[See API version 1](/api/v1/service-checks/).'
   name: Service Checks
+- description: '[See API version 1](/api/v1/service-dependencies/).'
+  name: Service Dependencies
 - description: '[See API version 1](/api/v1/service-level-objectives/).'
   name: Service Level Objectives
 - description: '[See API version 1](/api/v1/slack-integration/).'
