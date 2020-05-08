@@ -164,7 +164,7 @@ You can run browser tests within other browser tests, up to two levels of nestin
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
 
-## HTTP Requests
+## HTTP requests
 
 You can run HTTP requests as part of your Browser tests. 
 
