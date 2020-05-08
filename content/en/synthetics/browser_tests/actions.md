@@ -177,7 +177,7 @@ To define your HTTP request:
 1. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
 2. Optionally specify **Advanced Options**:
      * Follow redirects: Toggle to have the monitored endpoint follow up to ten redirects.
-     * Allow insecure certificates: Toggle to have your HTTP test go on with connection even if there is an error when validating the certificate.
+     * Allow insecure certificates: Toggle to have your HTTP test continue the connection even if there is an error when validating the certificate.
      * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
      * Authentication: HTTP basic authentication with username and password
      * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`). **Note**: The request body is limited to a maximum size of 50 kilobytes.
