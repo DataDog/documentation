@@ -71,7 +71,7 @@ Créez un [test API Synthetics][3] pour `http://example.com/` :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/synthetics
+[1]: /fr/synthetics/
 [2]: /fr/dashboards/widgets/slo/
 [3]: https://app.datadoghq.com/synthetics/list
 [4]: https://dd-corpsite.datadoghq.com/synthetics/create

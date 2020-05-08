@@ -9,10 +9,10 @@ further_reading:
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Create Dashboards in Datadog"
-- link: "/dashboards/sharing"
+- link: "/dashboards/sharing/"
   tag: "Documentation"
   text: "Share your Graphs outside of Datadog"
-- link: "/dashboards/widgets"
+- link: "/dashboards/widgets/"
   tag: "Documentation"
   text: "Discover Widgets for your Dashboard"
 ---
@@ -124,6 +124,6 @@ For example, enter `tags:$region` in the event overlays search box. This searche
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tagging/#defining-tags
-[2]: /logs/explorer/facets
+[2]: /logs/explorer/facets/
 [3]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
 [4]: /dashboards/timeboards/#events

@@ -76,11 +76,11 @@ Need help? Contact [Datadog support][11].
 [1]: https://docs.fluentbit.io/manual/output/datadog
 [2]: /integrations/ecs_fargate/#fluent-bit-and-firelens
 [3]: https://app.datadoghq.com/signup
-[4]: /account_management/api-app-keys
+[4]: /account_management/api-app-keys/
 [5]: https://app.datadoghq.com/logs/activation
 [6]: https://docs.fluentbit.io/manual/installation
 [7]: https://docs.fluentbit.io/manual/configuration
 [8]: https://docs.fluentbit.io/manual/configuration/file
 [9]: https://app.datadoghq.com/logs
-[10]: /tagging
-[11]: /help
+[10]: /tagging/
+[11]: /help/

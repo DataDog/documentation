@@ -12,13 +12,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/browser-tests/"
   tag: "Blog"
   text: "User experience monitoring with browser tests"
-- link: "synthetics/"
+- link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
-- link: "synthetics/api_tests"
+- link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
-- link: "synthetics/browser_tests/test_results"
+- link: "/synthetics/browser_tests/test_results/"
   tag: "Documentation"
   text: "Browser test results"
 ---
@@ -99,14 +99,14 @@ After saving a browser test, you can record [Actions][10] as a series of steps, 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/identify_synthetics_bots
-[2]: /api/?lang=bash#get-available-locations
-[3]: /synthetics/private_locations
-[4]: /help
-[5]: /synthetics/settings#global-variables
+[1]: /synthetics/identify_synthetics_bots/
+[2]: /api/#get-available-locations
+[3]: /synthetics/private_locations/
+[4]: /help/
+[5]: /synthetics/settings/#global-variables
 [6]: http://daringfireball.net/projects/markdown/syntax
 [7]: /integrations/#cat-notification
 [8]: https://www.google.com/chrome
 [9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[10]: /synthetics/browser_tests/actions
-[11]: /synthetics/browser_tests/advanced_options
+[10]: /synthetics/browser_tests/actions/
+[11]: /synthetics/browser_tests/advanced_options/

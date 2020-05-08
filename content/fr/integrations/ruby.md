@@ -56,6 +56,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/fr/developers/dogstatsd/?tab=ruby
-[2]: https://docs.datadoghq.com/fr/tracing/setup/ruby
-[3]: https://docs.datadoghq.com/fr/logs/log_collection/ruby
-[4]: https://docs.datadoghq.com/fr/help
+[2]: https://docs.datadoghq.com/fr/tracing/setup/ruby/
+[3]: https://docs.datadoghq.com/fr/logs/log_collection/ruby/
+[4]: https://docs.datadoghq.com/fr/help/

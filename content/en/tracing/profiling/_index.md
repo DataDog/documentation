@@ -149,13 +149,13 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
      **Note**: Profiling is available in the `dd-trace-go` library for versions 1.23.0+.
 
-2. Import the [profiler][5] at the start of your application:
+2. Import the [profiler][1] at the start of your application:
 
     ```Go
     import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
     ```
 
-3. To profile your code, add a [Datadog API key][1], set your environment, service, and version, then start the profiler:
+3. To profile your code, add a [Datadog API key][2], set your environment, service, and version, then start the profiler:
 
     ```Go
     err := profiler.Start(
@@ -170,23 +170,23 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
     defer profiler.Stop()
     ```
 
-4. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][2].
+4. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][3].
 
 Profiler configuration:
 
 |`profiler` method | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
-|  WithAPIKey      | String        | The Datadog [Datadog API key][1]                                                                             |
-|  WithService     | String        | The Datadog [service][3] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.             |
-|  WithEnv         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_TAGS`.         |
+|  WithAPIKey      | String        | The Datadog [Datadog API key][2]                                                                             |
+|  WithService     | String        | The Datadog [service][4] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.             |
+|  WithEnv         | String        | The Datadog [environment][5] name, for example `production`, which can be set here, or in `DD_TAGS`.         |
 |  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
 
-[1]: /account_management/api-app-keys/#api-keys
-[2]: https://app.datadoghq.com/profiling
-[3]: /tracing/visualization/#services
-[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[5]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
+[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
+[2]: /account_management/api-app-keys/#api-keys
+[3]: https://app.datadoghq.com/profiling
+[4]: /tracing/visualization/#services
+[5]: /tracing/guide/setting_primary_tags_to_scope/#environment
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -311,4 +311,4 @@ In case you have done all the necessary configuration steps and do not see profi
 [2]: /tracing/send_traces/#configure-your-environment
 [3]: /tracing/visualization/#services
 [4]: /tracing/troubleshooting/#tracer-debug-mode
-[5]: /help
+[5]: /help/

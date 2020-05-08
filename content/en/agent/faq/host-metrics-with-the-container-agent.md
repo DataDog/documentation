@@ -63,4 +63,4 @@ Ideally, you should only expose useful paths to the Agent's container. If needed
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/disk
+[1]: /integrations/disk/

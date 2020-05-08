@@ -3,13 +3,13 @@ title: Event Monitor
 kind: documentation
 description: "Monitor events gathered by Datadog"
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -77,5 +77,5 @@ The template variable is `{{event.tags.env}}`. The result of using this template
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/event
-[2]: /help
-[3]: /monitors/notifications
+[2]: /help/
+[3]: /monitors/notifications/

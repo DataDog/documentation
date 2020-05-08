@@ -67,7 +67,7 @@ Azure Event Hub インテグレーションには、サービスのチェック�
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://docs.datadoghq.com/ja/integrations/azure/#log-collection
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_event_hub/azure_event_hub_metadata.csv
-[4]: https://docs.datadoghq.com/ja/help
+[4]: https://docs.datadoghq.com/ja/help/

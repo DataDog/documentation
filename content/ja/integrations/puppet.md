@@ -51,4 +51,4 @@ Puppet インテグレーションには、サービスのチェック機能は�
 
 [1]: https://github.com/datadog/puppet-datadog-agent
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/puppet/puppet_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help
+[3]: https://docs.datadoghq.com/ja/help/

@@ -72,11 +72,11 @@ An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested
 <br>
 \*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /logs
+[1]: /logs/
 [2]: /logs/indexes/#exclusion-filters
 [3]: https://app.datadoghq.com/logs/pipelines
 [4]: https://app.datadoghq.com/logs/pipelines/generate-metrics
-[5]: /logs/search_syntax
-[6]: /tagging
-[7]: /developers/metrics/custom_metrics
+[5]: /logs/search_syntax/
+[6]: /tagging/
+[7]: /developers/metrics/custom_metrics/
 [8]: /developers/metrics/#naming-metrics

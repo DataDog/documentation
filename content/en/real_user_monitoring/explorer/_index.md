@@ -4,10 +4,10 @@ kind: documentation
 aliases:
 - /real_user_monitoring/rum_explorer
 further_reading:
-- link: "/real_user_monitoring/explorer/search"
+- link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/rum_explorer"
+- link: "/real_user_monitoring/rum_explorer/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
 ---
@@ -58,7 +58,7 @@ To start using an attribute as a facet or in the search, click on it and add it 
 Once this is done, the value of this attribute is stored **for all new views** and can be used in [the search bar][1], the facets panel, and in the [RUM Analytics query][2].
 
 [1]: /real_user_monitoring/explorer/search/#search
-[2]: /real_user_monitoring/rum_analytics
+[2]: /real_user_monitoring/rum_analytics/
 {{% /tab %}}
 {{% tab "Measures" %}}
 
@@ -79,7 +79,7 @@ Each measure has its own unit that is then used for display in the RUM Explorer 
 {{< img src="real_user_monitoring/explorer/edit_measure.png" alt="Edit a measure"  style="width:50%;">}}
 
 [1]: /real_user_monitoring/explorer/search/#search
-[2]: /real_user_monitoring/rum_analytics
+[2]: /real_user_monitoring/rum_analytics/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -88,6 +88,6 @@ Each measure has its own unit that is then used for display in the RUM Explorer 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/explorer/search/#search-syntax
-[2]: /real_user_monitoring/installation
-[3]: /real_user_monitoring/explorer/analytics
+[2]: /real_user_monitoring/installation/
+[3]: /real_user_monitoring/explorer/analytics/
 [4]: /logs/processing/attributes_naming_convention/

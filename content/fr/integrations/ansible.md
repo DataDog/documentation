@@ -80,4 +80,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [3]: https://app.datadoghq.com/account/settings#agent/ansible
 [4]: https://github.com/DataDog/ansible-datadog#example-playbooks
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/ansible/ansible_metadata.csv
-[6]: https://docs.datadoghq.com/fr/help
+[6]: https://docs.datadoghq.com/fr/help/

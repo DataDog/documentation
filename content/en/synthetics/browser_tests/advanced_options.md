@@ -3,7 +3,7 @@ title: Advanced Options for Browser Test Actions
 kind: documentation
 description: Configure advanced options for Browser Test Actions
 further_reading:
-- link: "synthetics/browser_tests/actions"
+- link: "/synthetics/browser_tests/actions/"
   tag: "Documentation"
   text: "Learn more about Browser Test Actions"
 ---
@@ -61,5 +61,5 @@ Opening your subtest in the main tab means that your subtest is the continuation
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/browser_tests/
-[2]: /synthetics/browser_tests/actions
+[2]: /synthetics/browser_tests/actions/
 [3]: /synthetics/browser_tests/actions/#subtests

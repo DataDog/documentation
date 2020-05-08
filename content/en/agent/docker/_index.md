@@ -7,22 +7,22 @@ aliases:
   - /agent/basic_agent_usage/docker/
   - /integrations/docker_daemon/
 further_reading:
-- link: "agent/docker/log"
+- link: "/agent/docker/log/"
   tag: "Documentation"
   text: "Collect your application logs"
-- link: "/agent/docker/apm"
+- link: "/agent/docker/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
-- link: "/agent/docker/prometheus"
+- link: "/agent/docker/prometheus/"
   tag: "Documentation"
   text: "Collect your Prometheus metrics"
-- link: "/agent/docker/integrations"
+- link: "/agent/docker/integrations/"
   tag: "Documentation"
   text: "Collect automatically your applications metrics and logs"
-- link: "/agent/guide/autodiscovery-management"
+- link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Limit data collection to a subset of containers only"
-- link: "/agent/docker/tag"
+- link: "/agent/docker/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
 ---
@@ -59,6 +59,15 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
                               -v /cgroup/:/host/sys/fs/cgroup:ro \
                               -e DD_API_KEY="<DATADOG_API_KEY>" \
                               datadog/agent:latest
+```
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+The Datadog Agent is supported in Windows Server 2019 (LTSC) and version 1909 (SAC).
+
+```shell
+docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine datadog/agent:latest
 ```
 
 {{% /tab %}}
@@ -201,27 +210,27 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
+[1]: /agent/
 [2]: https://hub.docker.com/r/datadog/agent
 [3]: https://app.datadoghq.com/account/settings#agent/docker
 [4]: /agent/basic_agent_usage/#supported-os-versions
 [5]: https://app.datadoghq.com/account/settings#api
-[6]: /integrations/faq/compose-and-the-datadog-agent
-[7]: /agent/docker/integrations
+[6]: /integrations/faq/compose-and-the-datadog-agent/
+[7]: /agent/docker/integrations/
 [8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [9]: /agent/proxy/#agent-v6
-[10]: /agent/docker/apm
-[11]: /agent/docker/log
-[12]: /infrastructure/process
-[13]: /infrastructure/livecontainers
-[14]: /developers/dogstatsd
-[15]: /developers/dogstatsd/unix_socket
+[10]: /agent/docker/apm/
+[11]: /agent/docker/log/
+[12]: /infrastructure/process/
+[13]: /infrastructure/livecontainers/
+[14]: /developers/dogstatsd/
+[15]: /developers/dogstatsd/unix_socket/
 [16]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [17]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [18]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[19]: /agent/docker/tag
+[19]: /agent/docker/tag/
 [20]: /agent/guide/secrets-management/?tab=linux
-[21]: /agent/guide/autodiscovery-management
+[21]: /agent/guide/autodiscovery-management/
 [22]: /agent/guide/agent-commands/
 [23]: /integrations/system/#metrics
 [24]: /integrations/disk/#metrics

@@ -124,5 +124,5 @@ If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to fa
 
 [1]: /agent/guide/agent-commands/#agent-status-and-information
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /api/#hosts
+[3]: /api/v1/hosts/
 [4]: https://app.datadoghq.com/infrastructure

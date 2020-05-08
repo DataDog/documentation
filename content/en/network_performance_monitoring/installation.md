@@ -253,7 +253,7 @@ If you already have the [Agent running with a manifest][3]:
 
 [1]: /resources/yaml/datadog-agent-npm.yaml
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /agent/kubernetes
+[3]: /agent/kubernetes/
 {{% /tab %}}
 {{% tab "Docker" %}}
 

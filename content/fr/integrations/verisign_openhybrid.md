@@ -36,4 +36,4 @@ Reportez-vous à ce guide pour définir votre `Account ID`, `API key` et `applic
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/verisign_openhybrid
-[2]: https://docs.datadoghq.com/fr/help
+[2]: https://docs.datadoghq.com/fr/help/

@@ -82,8 +82,8 @@ Pour télécharger un widget au format PNG, cliquez sur le bouton d'exportation 
 
 Pour exporter les données d'un widget Série temporelle, Tableau ou Top List au format CSV, cliquez sur le bouton d'exportation dans le coin supérieur droit du widget, puis sélectionnez l'option Download as CSV.
 
-[1]: /fr/dashboards/widgets/timeseries#full-screen
-[2]: /fr/dashboards
-[3]: /fr/notebooks
-[4]: /fr/tracing/visualization/service
-[5]: /fr/tracing/visualization/resource
+[1]: /fr/dashboards/widgets/timeseries/#full-screen
+[2]: /fr/dashboards/
+[3]: /fr/notebooks/
+[4]: /fr/tracing/visualization/service/
+[5]: /fr/tracing/visualization/resource/

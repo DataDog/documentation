@@ -13,5 +13,5 @@ Confirm that you have correctly configured these assertion attributes within you
 
 If you've confirmed these are set but continue to experience trouble, [contact Datadog support][2].
 
-[1]: /account_management/saml
-[2]: /help
+[1]: /account_management/saml/
+[2]: /help/

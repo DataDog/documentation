@@ -2,13 +2,13 @@
 title: Writing a custom OpenMetrics Check
 kind: documentation
 further_reading:
-- link: "agent/prometheus"
+- link: "/agent/prometheus/"
   tag: "Documentation"
   text: "Configuring an OpenMetrics Check"
-- link: "developers/agent_checks"
+- link: "/developers/agent_checks/"
   tag: "Documentation"
   text: "Write a Custom Check"
-- link: "developers/integrations/"
+- link: "/developers/integrations/"
   tag: "Documentation"
   text: "Create a new Integration"
 aliases:
@@ -224,8 +224,8 @@ Available types are: `counter`, `gauge`, `summary`, `untyped`, and `histogram`.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
-[2]: /agent/prometheus
+[2]: /agent/prometheus/
 [3]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
 [4]: /agent/agent_checks/#configuration
-[5]: /developers/metrics/custom_metrics
+[5]: /developers/metrics/custom_metrics/
 [6]: /agent/guide/agent-commands/#agent-status-and-information

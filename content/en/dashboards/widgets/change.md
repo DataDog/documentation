@@ -5,19 +5,19 @@ description: "Graph the change in a value over a chosen time period."
 aliases:
     - /graphing/widgets/change/
 further_reading:
-- link: "/dashboards/dashboards/timeboards/"
+- link: "/dashboards/timeboards/"
   tag: "Documentation"
   text: "Timeboards"
-- link: "/dashboards/dashboards/screenboards/"
+- link: "/dashboards/screenboards/"
   tag: "Documentation"
   text: "Screenboard"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboard using JSON"
-- link: "/dashboards/graphing_json/widget_json"
+- link: "/dashboards/graphing_json/widget_json/"
   tag: "Documentation"
   text: "Widget JSON schema"
-- link: "/dashboards/graphing_json/request_json"
+- link: "/dashboards/graphing_json/request_json/"
   tag: "Documentation"
   text: "Request JSON schema"
 ---
@@ -126,5 +126,5 @@ Additional properties allowed in the `request` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/graphing_json/widget_json
-[2]: /dashboards/graphing_json/request_json
+[1]: /dashboards/graphing_json/widget_json/
+[2]: /dashboards/graphing_json/request_json/

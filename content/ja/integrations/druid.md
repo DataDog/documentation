@@ -169,4 +169,4 @@ Druid チェックには イベントは含まれません。
 [9]: https://druid.apache.org/docs/latest/operations/including-extensions.html
 [10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/druid/metadata.csv
-[12]: https://docs.datadoghq.com/ja/help
+[12]: https://docs.datadoghq.com/ja/help/

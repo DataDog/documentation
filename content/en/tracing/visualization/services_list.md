@@ -2,16 +2,16 @@
 title: Services List
 kind: documentation
 further_reading:
-- link: "tracing/setup/"
+- link: "/tracing/setup/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "tracing/visualization/service"
+- link: "/tracing/visualization/service/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "tracing/visualization/resource"
+- link: "/tracing/visualization/resource/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "tracing/visualization/trace"
+- link: "/tracing/visualization/trace/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 ---
@@ -71,13 +71,13 @@ Choose what to display in your services list:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/send_traces
+[1]: /tracing/send_traces/
 [2]: /tracing/visualization/#services
 [3]: https://app.datadoghq.com/apm/services
-[4]: /tracing/visualization/service
+[4]: /tracing/visualization/service/
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[6]: /tracing/guide/setting_primary_tags_to_scope
+[6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: /tracing/visualization/trace/#spans
-[8]: /tracing/visualization/trace
-[9]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm
+[8]: /tracing/visualization/trace/
+[9]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm/
 [10]: /tracing/visualization/service/#service-monitor

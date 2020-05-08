@@ -11,10 +11,10 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
   text: "Source code"
-- link: "tracing/visualization/"
+- link: "/tracing/visualization/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
-- link: "tracing/"
+- link: "/tracing/"
   tag: "Documentation"
   text: "Advanced Usage"
 ---
@@ -241,6 +241,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"](#custom-url-to-resource-mapping) |
 | `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `false`     | Enable URL's as resource names; [see "Map Resource Names To Normalized URI"](#map-resource-names-to-normalized-uri)                            |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | Flag to enable app analytics for relevant spans in a specific integration                                                                      |
+| `DD_SERVICE_MAPPING`      | `null`     | Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db`                                                                      |
 
 #### Map Resource Names To Normalized URI
 
@@ -293,16 +294,16 @@ To upgrade the PHP tracer, [download the latest release][6] and follow the same 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization
+[1]: /tracing/visualization/
 [2]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
-[3]: /tracing/send_traces
-[4]: /tracing/setup/docker
+[3]: /tracing/send_traces/
+[4]: /tracing/setup/docker/
 [5]: /agent/kubernetes/apm/
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://app.datadoghq.com/apm/services
 [8]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
-[9]: /tracing/faq/php-tracer-manual-installation
+[9]: /tracing/faq/php-tracer-manual-installation/
 [10]: /tracing/setup/php/#environment-variable-configuration
-[11]: /help
+[11]: /help/
 [12]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [13]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param

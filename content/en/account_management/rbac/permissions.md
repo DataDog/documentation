@@ -7,7 +7,7 @@ further_reading:
     - link: '/account_management/rbac/'
       tag: 'Documentation'
       text: 'Learn how to create, update and delete a Role'
-    - link: '/api/#get-permissions'
+    - link: '/api/v2/roles/#list-permissions'
       tag: 'Documentation'
       text: 'Manage your permissions with the Permission API'
 ---
@@ -61,7 +61,8 @@ Find below the list of permissions for the log configuration assets and log data
 
 | Name                         | Description                                | Scopable |
 | ---------------------------- | ------------------------------------------ | -------- |
-| logs_read_index_data         | Read a subset of all log indexes           | true     |
+| logs_read_data               | Read access to log data. If granted, other restrictions then apply (like `logs_read_index_data` or with restriction queries).       | true     |
+| logs_read_index_data         | Read a subset log data (index based)       | true     |
 | logs_modify_indexes          | Update the definition of log indexes       | false    |
 | logs_live_tail               | Access the live tail feature               | false    |
 | logs_write_exclusion_filters | Update a subset of the exclusion filters   | true     |
@@ -74,28 +75,6 @@ Find below the list of permissions for the log configuration assets and log data
 More details about these permissions below.
 
 ### Log Configuration Access
-
-#### logs_live_tail
-
-Grants a role the ability to use the live tail feature.
-
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
-{{< img src="account_management/rbac/logs_livetail_access.png" alt="Create a custom Role"  style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-This permission can be granted or revoked from a role via [the Roles API][1].
-
-
-[1]: /api/#roles
-{{% /tab %}}
-{{< /tabs >}}
 
 #### logs_generate_metrics
 
@@ -115,7 +94,7 @@ Go to your [Datadog Roles page][1] and select the checkbox `other` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -144,7 +123,7 @@ Go to your [Datadog Roles page][1] and select the checkbox `other` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -177,7 +156,7 @@ Go to your [Datadog Roles Page][1] and select the checkbox `write` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -222,8 +201,8 @@ curl -X POST \
 ```
 
 
-[1]: /api/#roles
-[2]: /api/#get-permissions
+[1]: /api/v2/roles/
+[2]: /api/v2/roles/#list-permissions
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -256,7 +235,7 @@ Go to your [Datadog Roles page][1] and select the checkbox `write` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -278,7 +257,7 @@ Go to your [Datadog Roles page][1] and select the checkbox `other` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -300,13 +279,62 @@ Go to your [Datadog Roles page][1] and select the checkbox `other` as below for 
 This permission can be granted or revoked from a role via [the Roles API][1].
 
 
-[1]: /api/#roles
+[1]: /api/v2/roles/
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Log Data Access
 
-The following permissions can be granted to manage read access on subsets of log data:
+Grant the following permissions to manage read access on subsets of log data:
+
+* `logs_read_data`(Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries. 
+* `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis.
+
+These permissions can also be used together. A role can restrict the user to a subset of indexes and additionally apply a restriction query to limit access within these indexes.
+
+**Example**: User A has access to index `audit` and index `errors` and is restricted to the query `service:api`.
+When looking in Log Explorer, this user only sees logs from the `service:api` into the `audit` and `errors` indexes.
+
+In addition, access to the Live Tail can be restricted with the `logs_live_tail` permission regardless of the data access restriction of the user.
+
+#### logs_read_data
+
+Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][4].
+
+"Role combinations are permissive. Is a user belongs to multiple roles, the most permissive role is applied."
+
+**Example**:
+
+* If a user belongs to a role with log read data and also belongs to a role without log read data, then they have the permission to read data.
+* If a user is restricted to service:sandbox through one role, and has is restricted to env:staging through another role, then the user can access all env:staging and service:sandbox logs.
+
+
+{{< tabs >}}
+{{% tab "Datadog application" %}}
+
+**Grant global read access to log data**:
+
+Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
+
+{{< img src="account_management/rbac/logs_read_data_access.png" alt="Read Data Access"  style="width:70%;">}}
+
+**Restrict read access to a subset of logs**:
+
+This configuration is only supported through the API.
+[1]: https://app.datadoghq.com/access/roles
+{{% /tab %}}
+{{% tab "API" %}}
+
+Revoke or grant this permission from a role via [the Roles API][1]. 
+Use [Restriction Queries][2] to scope the permission to a subset of Log Data. 
+
+
+[1]: /api/#roles
+[2]: /api/?lang=bash#roles-restriction-queries-for-logs
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 #### logs_read_index_data
 
@@ -319,7 +347,7 @@ Grants a role read access on some number of log indexes. Can be set either globa
 
 Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
 
-{{< img src="account_management/rbac/logs_read_index_data_access.png" alt="Create a custom Role"  style="width:90%;">}}
+{{< img src="account_management/rbac/logs_read_index_data_access.png" alt="Read Index Data Access"  style="width:90%;">}}
 
 **Subset of Indexes**:
 
@@ -359,8 +387,31 @@ curl -X POST \
 ```
 
 
+[1]: /api/v2/roles/
+[2]: /api/v2/roles/#list-permissions
+{{% /tab %}}
+{{< /tabs >}}
+
+
+#### logs_live_tail
+
+Grants a role the ability to use the Live Tail feature.
+
+{{< tabs >}}
+{{% tab "Datadog application" %}}
+
+Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
+{{< img src="account_management/rbac/logs_livetail_access.png" alt="Create a custom Role"  style="width:90%;">}}
+
+
+[1]: https://app.datadoghq.com/access/roles
+{{% /tab %}}
+{{% tab "API" %}}
+
+This permission can be granted or revoked from a role via [the Roles API][1].
+
+
 [1]: /api/#roles
-[2]: /api/#get-permissions
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -369,4 +420,4 @@ curl -X POST \
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/users/#edit-a-user-s-roles
-[2]: /api/#get-permissions
+[2]: /api/v2/roles/#list-permissions
