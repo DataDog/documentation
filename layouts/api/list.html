@@ -416,11 +416,11 @@
 {{- with $context.action.requestBody -}}
 {{- with .content -}}
 {{range $key, $val := . }}
--H "Content-Type: {{ $key }}" \
+<span class="o">-H</span> <span class="s1">"Content-Type: {{ $key }}"</span> \
 {{- end -}}
 {{- end -}}
 {{ else }}
--H "Content-Type: application/json" \
+<span class="o">-H</span> <span class="s1">"Content-Type: application/json"</span> \
 {{- end -}}
 {{- with $context.action.security -}}
 {{- range . -}}
