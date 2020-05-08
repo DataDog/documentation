@@ -170,7 +170,7 @@ You can run HTTP requests as part of your browser tests.
 
 {{< img src="synthetics/browser_tests/recorder_http_requests.png" alt="HTTP Request step"  style="width:70%;" >}}
 
-### Perform an HTTP request
+### Setup
 
 To define your HTTP request:
 
