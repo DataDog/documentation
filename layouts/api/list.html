@@ -416,21 +416,23 @@
 {{- with $context.action.requestBody -}}
 {{- with .content -}}
 {{range $key, $val := . }}
--H "Content-Type: {{ $key }}" \{{ end }}
+-H "Content-Type: {{ $key }}" \
+{{- end -}}
 {{- end -}}
 {{ else }}
--H "Content-Type: application/json" \{{- end -}}
+-H "Content-Type: application/json" \
+{{- end -}}
 {{- with $context.action.security -}}
 {{- range . -}}
 {{- range $key, $val := . -}}
 {{ $authSchema := (index $d.components.securitySchemes $key) }}
-<span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{ index $authSchema "x-env-name" }} }</span>"</span>
+<span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
 {{- end -}}
 {{- end -}}
 {{- else -}}
 {{ $securitySchemes := $d.components.securitySchemes }}
-<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.apiKeyAuth.name }}: <span class="n">${ {{ index $securitySchemes.apiKeyAuth "x-env-name" }} }</span>"</span> \
-<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{ index $securitySchemes.appKeyAuth "x-env-name" }} }</span>"</span> 
+<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.apiKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.apiKeyAuth "x-env-name" -}} }</span>"</span> \
+<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span> 
 {{- end -}}
 {{- if $context.action.requestBody -}}&nbsp;\
 <span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
