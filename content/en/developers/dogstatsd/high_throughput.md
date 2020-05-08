@@ -100,7 +100,7 @@ end
 
 {{% tab "Java" %}}
 
-By using Datadog's official Java library [java-dogstatsd-client][1], the example below creates a buffered DogStatsD client instance with `256` maximum buffered metrics which means that all metrics sent from this instance of the client are buffered and sent in packets containing a maximum of `256` metrics:
+By using Datadog's official Java library [java-dogstatsd-client][1], the example below creates a buffered DogStatsD client instance with a maximum packet size of 1500 bytes, meaning all metrics sent from this instance of the client are buffered and sent in packets of `1500` packet-length at most:
 
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClient;
@@ -111,7 +111,12 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("namespace", "127.0.0.1", 8125, 256);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("namespace").
+            .hostname("127.0.0.1")
+            .port(8125)
+            .maxPacketSizeBytes(1500)
+            .build();
 
         Statsd.incrementCounter("example_metric.increment", ["environment:dev"]);
         Statsd.recordGaugeValue("example_metric.gauge", 100, ["environment:dev"]);
