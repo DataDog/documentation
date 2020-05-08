@@ -182,7 +182,7 @@ To define your HTTP request:
      * Authentication: HTTP basic authentication with username and password
      * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`). **Note**: The request body is limited to a maximum size of 50 kilobytes.
      * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
-3. Click on **Test URL** to try out your request configuration. You should see a response preview show up allowing you to confirm whether you are getting the expected response data.
+3. Click **Test URL** to test your request configuration. This results in a preview showing response data.
 
 {{< img src="synthetics/browser_tests/http_request.png" alt="Make HTTP Request"  style="width:80%;" >}}
 
