@@ -61,6 +61,6 @@ module.exports = {
             // '*docs.datadoghq.com/integrations/*'
         ],
         csvUrl:
-            'https://origin-static-assets.s3.amazonaws.com/brokenlinks/documentation/'
+            'https://origin-static-assets.s3.amazonaws.com/documentation/brokenlinks/'
     }
 };
