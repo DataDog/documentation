@@ -188,7 +188,7 @@ To define your HTTP request:
 
 ### Add assertions
 
-You can also optionally decide to base your step success on assertions about the defined HTTP request:
+Optionally, you can base your step success on assertions about the defined HTTP request:
 
 | Type          | Operator                                                                        | Value type                 |
 |---------------|---------------------------------------------------------------------------------|----------------------------|
