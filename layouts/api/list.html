@@ -174,8 +174,8 @@
                                       {{ end }}
                                     </div>
                                 </div>
-                            {{ end }}  
-                         
+                            {{ end }}
+
                             {{ with $queryStrings }}
                                 <h4 class="text-capitalize">Query Strings</h4>
                                 <div class=" schema-table row">
@@ -412,7 +412,22 @@
 <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default "CHANGE_ME"}}"</span>
 {{ end -}}
 {{- end -}}
-<span class="n">curl</span> <span class="o">-X</span> <span class="s1 text-uppercase">{{ $context.actionType }}</span> {{ range $.Scratch.Get "serverURLS" }}<span class="kn d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span class="n">{{ replace $context.pathKey "{" "${" }}</span> \
+<span class="n">curl</span> <span class="o">-X</span> <span class="s1 text-uppercase">{{ $context.actionType }}</span> {{ range $.Scratch.Get "serverURLS" }}<span class="kn d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span class="n">{{ replace $context.pathKey "{" "${" }}</span>
+
+{{- with $context.action.security -}}
+    {{- $i := 0 -}}
+    {{- range . -}}
+        {{- range $key, $val := . -}}
+            {{ $authSchema := (index $d.components.securitySchemes $key) }}
+            {{- if eq $authSchema.in "query" -}}
+                <span class="o">{{- if eq $i 0 -}}?{{- else -}}&{{- end -}}</span><span class="n">{{ $authSchema.name }}</span><span class="o">=</span><span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>
+                {{- $i = add $count 1 -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+&nbsp;\
+
 {{- with $context.action.requestBody -}}
 {{- with .content -}}
 {{range $key, $val := . }}
@@ -426,13 +441,15 @@
 {{- range . -}}
 {{- range $key, $val := . -}}
 {{ $authSchema := (index $d.components.securitySchemes $key) }}
+{{- if eq $authSchema.in "header" -}}
 <span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
+{{- end -}}
 {{- end -}}
 {{- end -}}
 {{- else -}}
 {{ $securitySchemes := $d.components.securitySchemes }}
 <span class="o">-H</span> <span class="s1">"{{ $securitySchemes.apiKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.apiKeyAuth "x-env-name" -}} }</span>"</span> \
-<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span> 
+<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span>
 {{- end -}}
 {{- if $context.action.requestBody -}}&nbsp;\
 <span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
