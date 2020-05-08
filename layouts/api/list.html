@@ -29,11 +29,11 @@
         {{ if eq $region "com"}}
             {{ $region = "us"}}
         {{ end }}
-        
+
         {{ $.Scratch.Add "serverURLS" (dict "url" $serverURL "region" $region ) }}
-        
+
     {{ end }}
-    
+
     {{ range $k, $v := (index $d "tags") }}
         {{ if eq $.Params.title $v.name }}
 
@@ -64,8 +64,8 @@
                             {{$v.externalDocs.description}} <a href="{{$v.externalDocs.url}}">{{$v.externalDocs.url}}</a>
                         </div>
                     {{ else }}
-                    
-                        
+
+
                         {{ $markdown := $v.description | markdownify }}
 
                         <!-- need this because hugo sometimes duplicates <p> when using markdownify -->
@@ -79,7 +79,7 @@
 
                 </div>
             </div>
-            
+
             {{/* sort by action summary */}}
             {{ range sort $tagObject ".action.summary" "asc"  }}
                 {{ $context := .}}
@@ -90,23 +90,23 @@
                     {{ $servers := index . 0 }}
 
                     {{ $.Scratch.Set "serverURLS" slice }}
-                    
+
                     {{ $serverURL := ""}}
-                
+
                     {{ range $servers.variables.site.enum }}
-                
+
                         {{ $serverURL = replace $servers.url "{subdomain}" $servers.variables.subdomain.default  }}
                         {{ $serverURL = replace $serverURL "{site}" .  }}
                         {{ $region := index (split . ".") 1 }}
                         {{ if eq $region "com"}}
                             {{ $region = "us"}}
                         {{ end }}
-                        
+
                         {{ $.Scratch.Add "serverURLS" (dict "url" $serverURL "region" $region ) }}
-                        
+
                     {{ end }}
                 {{ end }}
-               
+
                 <!-- endpoint section start -->
                 <div class="row">
                     <div class="col-12 col-lg-9">
@@ -128,7 +128,7 @@
 
                             {{ $.Scratch.Set "queryStrings" slice }}
                             {{ $.Scratch.Set "pathParams" slice }}
-               
+
                             {{ range . }}
                                 {{ if eq .in "query"}}
                                     {{ $.Scratch.Add "queryStrings" .  }}
@@ -210,13 +210,13 @@
                                       {{ end }}
                                     </div>
                                 </div>
-                            {{ end }}                          
+                            {{ end }}
                         {{ end }}
 
                         {{ if .action.requestBody }}
 
                             <h3 class="mt-2 mb-3">Request</h3>
-                            
+
                             <h4 class="text-capitalize mt-0 mb-1 py-0">Body Data <span class='text-capitalize'>{{ cond (eq .action.requestBody.required true) "(required)" "" }}</span></h4>
 
                             <p>{{ .action.requestBody.description | markdownify }}</p>
@@ -237,8 +237,9 @@
 
                                                   {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
                                                   {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
-                                                 
+
                                                   {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
+                                                  {{ $.Scratch.Set "jsonRequestBody" $jsonifiedData }}
                                                   {{ $dot.Scratch.Set "html" (index $req "html") }}
                                               {{ else }}
                                                   {{ warnf "Could not load html/json request for %q" $context.action.operationId }}
@@ -254,9 +255,9 @@
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">Example</a>
-                                            </li>                     
+                                            </li>
                                         </ul>
-                                      
+
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-request-model">
                                               {{ $html | safeHTML }}
@@ -279,7 +280,7 @@
 
                         {{ end }}
 
-                        <h3 class="mt-3 mb-2">Response</h3>                            
+                        <h3 class="mt-3 mb-2">Response</h3>
 
                         <ul class="nav nav-tabs border-none response-toggle" style="z-index: 10;">
                             {{ $count := 0}}
@@ -296,7 +297,7 @@
                             {{ range $response_code, $response := .action.responses }}
                                 <div role="tabpanel" class="tab-pane {{ if eq $count 0}} active {{end}}" id="{{ $context.action.operationId }}-{{ $response_code }}">
                                     {{ with $response.content }}
-                                        
+
                                         <p class="mb-2">{{$response.description}}</p>
 
                                         {{ range $content := . }}
@@ -321,19 +322,19 @@
                                                 {{ end }}
                                                 {{ $json := ($dot.Scratch.Get "json") }}
                                                 {{ $html := ($dot.Scratch.Get "html") }}
-                                                
+
                                                 <ul class="nav nav-tabs border-none response-toggle">
                                                     <li class="nav-item">
                                                         <a class="nav-link mr-1  js-model-link active"  href="#" data-toggle="tab">Model</a>
                                                     </li>
                                                     <li class="nav-item">
                                                         <a class="nav-link mr-1  js-example-link"  href="#" data-toggle="tab">Example</a>
-                                                    </li>                     
+                                                    </li>
                                                 </ul>
-                                            
+
                                                 <div class="tab-content">
                                                     <div role="tabpanel" class="tab-pane active js-tab-model" id="{{ $context.action.operationId }}-{{ $response_code }}-model">
-                                                    
+
                                                         {{ with $schema.description }}
                                                             <p>{{- . | markdownify -}}</p>
                                                         {{ end }}
@@ -369,30 +370,80 @@
 
                             <div class="code-snippet-wrapper js-code-snippet-wrapper" >
                                 <ul class="nav nav-tabs border-none response-toggle">
-                                    
                                     {{ $count := 0}}
-                                    {{ range . }}
-
-                                    {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-                                    {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+                                    {{ $lang := index $dot.Site.Data.highlighting.languages "sh" }}
 
                                     <li class="nav-item">
                                         <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}" data-code-lang="{{ $lang.pygments_name }}"  href="#" data-toggle="tab">{{ $lang.pygments_name }}</a>
                                     </li>
 
+                                    {{ $count := 1}}
+                                    {{ range . }}
+
+                                    {{ $file_extension := index (split (path.Ext .) ".") 1 }}
+                                    {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+
+                                    {{ if ne $file_extension "sh"}}
+                                    <li class="nav-item">
+                                        <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}" data-code-lang="{{ $lang.pygments_name }}"  href="#" data-toggle="tab">{{ $lang.pygments_name }}</a>
+                                    </li>
+
                                     {{ $count = add $count 1 }}
+                                    {{ end }}
 
                                     {{ end }}
 
                                 </ul>
 
-                                {{ $count := 0}}
+                                {{ $count := 0 }}
+                                {{ $file_extension := "sh" }}
+                                {{ $lang := index $dot.Site.Data.highlighting.languages "sh" }}
+                                <div class="code-snippet js-code-block {{if eq $file_extension "sh"}} default {{end }} {{ if eq $count 0}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
+                                    <div class="code-button-wrapper position-absolute">
+                                        <button class="btn text-primary js-copy-button">Copy</button>
+                                    </div>
+                                    {{ $pathParams := $.Scratch.Get "pathParams" }}
+                                    <div class="highlight">
+                                        <pre class="chroma">
+{{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
+                                            <code class="language-fallback" data-lang="fallback">
+{{- with $pathParams -}}
+{{- range . -}}
+<span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default "CHANGE_ME"}}"</span>
+{{ end -}}
+{{- end -}}
+<span class="n">curl</span> <span class="o">-X</span> <span class="s1 text-uppercase">{{ $context.actionType }}</span> {{ range $.Scratch.Get "serverURLS" }}<span class="kn d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span class="n">{{ replace $context.pathKey "{" "${" }}</span> \
+{{- with $context.action.requestBody -}}
+{{- with .content -}}
+{{range $key, $val := . }}
+-H "Content-Type: {{ $key }}" \{{ end }}
+{{- end -}}
+{{- end -}}
+{{- range $context.action.security -}}
+{{- range $key, $val := . -}}
+{{ $authSchema := (index $d.components.securitySchemes $key) }}
+<span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{ index $authSchema "x-env-name" }} }</span>"</span>
+{{- end -}}
+{{- end -}}
+{{- if $context.action.requestBody -}} \
+<span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
+<span class="s1">{{ ($.Scratch.Get "jsonRequestBody") }}</span>
+<span class="n">EOF</span>
+{{- end -}}
+                                            </code>
+{{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
+                                        </pre>
+                                    </div>
+                                </div>
+
+                                {{ $count := 1 }}
                                 {{ range . }}
 
                                     {{ $file_content := .Content }}
                                     {{ $file_extension := index (split (path.Ext .) ".") 1 }}
                                     {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
-                            
+
+                                    {{ if ne $file_extension "sh"}}
                                     <div class="code-snippet js-code-block {{if eq $file_extension "sh"}} default {{end }} {{ if eq $count 0}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
                                         <div class="code-button-wrapper position-absolute">
                                             <button class="btn text-primary js-copy-button">Copy</button>
@@ -400,6 +451,8 @@
                                         {{ highlight $file_content $lang.pygments_name "" }}
                                     </div>
                                     {{ $count = add $count 1 }}
+                                    {{ end }}
+
                                 {{ end }}
                             </div>
                         {{ end }}
