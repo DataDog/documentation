@@ -588,16 +588,16 @@ describe(`filterExampleJson`, () => {
     };
     const actual = bp.filterExampleJson("request", mockSchema);
     const expected = [[{
-      "duration": "integer",
-      "error": "integer",
+      "duration": 123,
+      "error": 123,
       "meta": {"<any-key>": "string"},
       "metrics": {"<any-key>": "number"},
       "name": "span_name",
-      "parent_id": "integer",
+      "parent_id": 123,
       "resource": "/home",
       "service": "service_name",
       "span_id": "987654321",
-      "start": "integer",
+      "start": 123,
       "trace_id": "123456789",
       "type": "web"
     }]];
@@ -698,7 +698,7 @@ describe(`filterExampleJson`, () => {
       "type": "object"
     };
     const actual = bp.filterExampleJson("request", mockSchema);
-    const expected =  {"data": [{"attributes": {"created": "string","description": "string","display_name": "string","display_type": "string","group_name": "string","name": "string","restricted": false},"id": "string"}]};
+    const expected =  {"data": [{"attributes": {"created": "2019-09-19T10:00:00.000Z","description": "string","display_name": "string","display_type": "string","group_name": "string","name": "string","restricted": false},"id": "string"}]};
     expect(actual).toEqual(expected);
   });
 
@@ -868,17 +868,12 @@ describe(`filterExampleJson`, () => {
         "revoked": {
           "description": "Boolean flag for whether or not the embed is revoked.",
           "type": "boolean"
-        },
-        "shared_by": {
-          "description": "ID of the use who shared the embed.",
-          "format": "int64",
-          "type": "integer"
         }
       },
       "type": "object"
     };
     const actual = bp.filterExampleJson('request', mockSchema);
-    const expected = {"revoked": false, "shared_by": "integer"};
+    const expected = {"revoked": false};
     expect(actual).toEqual(expected);
   });
 

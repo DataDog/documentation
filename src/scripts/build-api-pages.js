@@ -266,7 +266,7 @@ const filterJson = (actionType, data, parentExample = null) => {
           let ex = '';
           // bool causes us to not go in here so check for it
           ex = outputExample(chosenExample, key);
-          ex = ex || outputValueType(value.type);
+          ex = ex || outputValueType(value.type, value.format);
           jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
         }
       }
@@ -292,9 +292,11 @@ const filterJson = (actionType, data, parentExample = null) => {
  * Takes a value.type string and returns appropriate representation
  * e.g array should be []
  * @param {object} valueType - string of type
+ * @param {object} format - value type formatting e.g int32, int64, date-time
  * returns formatted string
  */
-const outputValueType = (valueType) => {
+const outputValueType = (valueType, format = "") => {
+  const ipoDate = new Date('19 September 2019 10:00 UTC');
   switch(valueType) {
     case "array":
       return "[]";
@@ -303,8 +305,10 @@ const outputValueType = (valueType) => {
     case "boolean":
       return "false";
     case "integer":
+      return "123";
+    case "string":
     default:
-      return `"${valueType}"`;
+      return (format === "date-time") ? `"${ipoDate.toISOString()}"` : `"${valueType}"`;
   }
 };
 
