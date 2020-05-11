@@ -16,32 +16,15 @@ module.exports = {
         slackChannel: '#link-checker-test'
     },
     linkCheckOptions: {
-        // requestMethod: 'GET',
         filterLevel: 3,
-        // maxSocketsPerHost: 10,
         maxSockets: 100,
         excludeExternalLinks: false,
         honorRobotExclusions: false,
-        brokenLinkSlackLimit: 10,
-        // includedKeywords: ['*docs.datadoghq*', '*help.datadoghq*'],
+        brokenLinkSlackLimit: 5,
         excludedKeywords: [
-            '*ja/blog*',
-            // '*ja*',
             '**/fr*',
             '**/ja*',
             '*wtime=*',
-            // '*blog*',
-            // '*videos*',
-            // '*legal*',
-            // '*log-management*',
-            // '*product*',
-            // '*solutions*',
-            // '*dashboards*',
-            // '*case-studies*',
-            // '*ja*',
-            // '*resources*',
-            // '*jobs-*',
-            // '*about*',
             '**/signup*',
             '*app.datadoghq*',
             '*corp-hugo/tree*',
@@ -58,7 +41,6 @@ module.exports = {
             '*eoig7v0a2o-dsn.algolia*',
             '*.txt',
             '*.yaml'
-            // '*docs.datadoghq.com/integrations/*'
         ],
         csvUrl:
             'https://origin-static-assets.s3.amazonaws.com/documentation/brokenlinks/'
