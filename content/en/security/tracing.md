@@ -40,7 +40,7 @@ For customers using release 6, the Agent can be configured to obfuscate Tags ass
 
 ## Resource Filtering
 
-For customers using release 6, the Agent can be configured to exclude a specific Resource from Traces sent by the Agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` [setting][3]. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out Traces based on their Resource name.
+For customers using release 6, the Agent can be configured to exclude a specific Resource from Traces sent by the Agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` [setting][8]. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out Traces based on their Resource name.
 
 ## Extending Tracers
 
@@ -65,3 +65,5 @@ If a customer requires tailored instrumentation for a specific application, they
 [5]: http://gems.datadoghq.com/trace/docs/#Processing_Pipeline
 [6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#trace-filtering
 [7]: /api/v1/tracing/
+[8]: https://github.com/DataDog/datadog-agent/blob/780caa2855a237fa731b78a1bb3ead5492f0e5c6/pkg/config/config_template.yaml#L492-L496
+
