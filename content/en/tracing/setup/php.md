@@ -125,12 +125,12 @@ For an ever growing number of web frameworks, Datadog provides more visibility i
 | Module         | Versions      | Support Type    |
 |:---------------|:--------------|:----------------|
 | CakePHP        | 2.x           | Fully Supported |
-| CodeIgniter    | 2.x           | PHP 7           |
+| CodeIgniter    | 2.x           | PHP 7+          |
 | Laravel        | 4.2, 5.x      | Fully Supported |
 | Lumen          | 5.2+          | Fully Supported |
 | Slim           | 3.x           | Fully Supported |
 | Symfony        | 3.3, 3.4, 4.x | Fully Supported |
-| WordPress      | 4.x           | PHP 7           |
+| WordPress      | 4.x           | PHP 7+          |
 | Zend Framework | 1.12          | Fully Supported |
 | Yii            | 2.0           | Fully Supported |
 | CodeIgniter    | 3.x           | _Coming Soon_   |
@@ -139,13 +139,6 @@ For an ever growing number of web frameworks, Datadog provides more visibility i
 | Phalcon        | 1.3, 3.4      | _Coming Soon_   |
 | Slim           | 2.x           | _Coming Soon_   |
 | Yii            | 1.1           | _Coming Soon_   |
-
-
-| Module         | Versions      | Support Type    |
-|:---------------|:--------------|:----------------|
-| CodeIgniter    | 2.x           | PHP 7+          |
-| WordPress      | 4.x           | PHP 7+          |
-
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][12] for help.
 
