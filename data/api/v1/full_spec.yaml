@@ -6040,7 +6040,7 @@ components:
           type: array
       type: object
     SyntheticsDeleteTestsResponse:
-      description: Response object for deleting Synthetic test.
+      description: Response object for deleting Synthetic tests.
       properties:
         deleted_tests:
           description: Array of objects containing a deleted Synthetic test ID with
@@ -13693,8 +13693,8 @@ paths:
       description: Get the list of all Synthetic tests (can be filtered by type).
       operationId: ListTests
       parameters:
-      - description: API or browser to filter the list by type, undefined to get the
-          unfiltered list.
+      - description: API or browser to filter the list by test type, undefined to
+          get the unfiltered list.
         in: query
         name: check_type
         required: false
@@ -13706,7 +13706,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SyntheticsListTestsResponse'
-          description: OK - Returns the list of all Synthetic test (properly filtered
+          description: OK - Returns the list of all Synthetic tests (properly filtered
             by type).
         '403':
           content:
@@ -13719,12 +13719,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Synthetic is not activated for the user.
-      summary: Get a list of all tests
+          description: Synthetics is not activated for the user.
+      summary: Get a list of tests
       tags:
       - Synthetics
     post:
-      description: Create (or clone) a Synthetics test.
+      description: Create a Synthetic test.
       operationId: CreateTest
       parameters:
       - description: Public ID of the test to clone, undefined if the test is newly
@@ -13747,7 +13747,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SyntheticsTestDetails'
-          description: OK - Returns the created/cloned test details.
+          description: OK - Returns the created test details.
         '400':
           content:
             application/json:
@@ -13755,7 +13755,7 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: '- JSON format is wrong
 
-            - Creation/cloning failed'
+            - Creation failed'
         '402':
           content:
             application/json:
@@ -13768,13 +13768,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-      summary: Create or clone a test
+      summary: Create a test
       tags:
       - Synthetics
       x-codegen-request-body-name: body
   /api/v1/synthetics/tests/browser/{public_id}/results:
     get:
-      description: Get the latest results (as summaries) from a given browser Synthetic
+      description: Get the last 50 test results summaries for a given Synthetics Browser
         test.
       operationId: GetBrowserTestLatestResults
       parameters:
@@ -13828,7 +13828,7 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get test latest results (as summaries)
+      summary: Get the test's latest results summaries (browser)
       tags:
       - Synthetics
       x-codegen-request-body-name: body
@@ -13871,7 +13871,7 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test or result is not owned by the user'
-      summary: Get test result (browser)
+      summary: Get a test result (browser)
       tags:
       - Synthetics
   /api/v1/synthetics/tests/delete:
@@ -13883,7 +13883,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SyntheticsDeleteTestsPayload'
-        description: Public ID list of the Synthetics tests to be deleted.
+        description: Public ID list of the Synthetic tests to be deleted.
         required: true
       responses:
         '200':
@@ -13917,13 +13917,13 @@ paths:
           description: '- Tests to be deleted can''t be found
 
             - Synthetics is not activated for the user'
-      summary: Delete multiple tests
+      summary: Delete tests
       tags:
       - Synthetics
       x-codegen-request-body-name: body
   /api/v1/synthetics/tests/{public_id}:
     get:
-      description: Get the details of a specific Synthetic test.
+      description: Get the detailed configuration associated with a Synthetics test.
       operationId: GetTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -13953,11 +13953,11 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get test
+      summary: Get a test configuration
       tags:
       - Synthetics
     put:
-      description: Update the details of a specific Synthetic test.
+      description: Edit the configuration of a Synthetic test.
       operationId: UpdateTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -14004,13 +14004,13 @@ paths:
             - Test is not owned by the user
 
             - Test can''t be found'
-      summary: Update test
+      summary: Edit a test
       tags:
       - Synthetics
       x-codegen-request-body-name: body
   /api/v1/synthetics/tests/{public_id}/results:
     get:
-      description: Get the latest results (as summaries) from a given API Synthetic
+      description: Get the last 50 test results summaries for a given Synthetics API
         test.
       operationId: GetAPITestLatestResults
       parameters:
@@ -14063,7 +14063,7 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get test latest results (as summaries)
+      summary: Get the test's latest results summaries (API)
       tags:
       - Synthetics
       x-codegen-request-body-name: body
@@ -14105,12 +14105,12 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test or result is not owned by the user'
-      summary: Get test result (API)
+      summary: Get a test result (API)
       tags:
       - Synthetics
   /api/v1/synthetics/tests/{public_id}/status:
     put:
-      description: Change pause/live status of a given Synthetic test.
+      description: Pause or start a Synthetics test by changing the status.
       operationId: UpdateTestPauseStatus
       parameters:
       - description: The public ID of the Synthetic test to update.
@@ -14124,7 +14124,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SyntheticsUpdateTestPauseStatusPayload'
-        description: Pause/live status to set the given Synthetic test to.
+        description: Status to set the given Synthetic test to.
         required: true
       responses:
         '200':
@@ -14153,7 +14153,7 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Change test pause/live status
+      summary: Pause or start a test
       tags:
       - Synthetics
       x-codegen-request-body-name: body
@@ -15677,13 +15677,10 @@ tags:
   name: Snapshots
 - description: "Datadog Synthetics uses simulated user requests and browser rendering\
     \ to help you ensure uptime,\nidentify regional issues, and track your application\
-    \ performance. You can use Datadog\u2019s API to\ncreate Synthetics API and browser\
-    \ tests programmatically. Synthetics tests are HTTP requests executed by Datadog\
-    \ to\nyour web properties or application endpoints at configurable periodic intervals\
-    \ from multiple\nlocations around the world. These tests verify that your applications\
-    \ are responding to requests,\nas well as that they meet any conditions you define\u2014\
-    such as response time, HTTP status code, and\nheader or body contents.\n\nFor\
-    \ more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
+    \ performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\n\
+    and [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You\
+    \ can use Datadog\u2019s API to\nmanage both test types programmatically.\n\n\
+    For more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
 - description: 'The tag endpoint allows you to tag hosts with keywords
 

@@ -1943,36 +1943,36 @@ api_v1:
   - name: Synthetics
     url: /fr/api/v1/synthetics/
     identifier: Synthetics
-  - name: Get a list of all tests
+  - name: Get a list of tests
     parent: Synthetics
-    url: get-a-list-of-all-tests
-  - name: Create or clone a test
+    url: get-a-list-of-tests
+  - name: Create a test
     parent: Synthetics
-    url: create-or-clone-a-test
-  - name: Get test latest results (as summaries)
+    url: create-a-test
+  - name: Get the test's latest results summaries (browser)
     parent: Synthetics
-    url: get-test-latest-results-as-summaries
-  - name: Get test result (browser)
+    url: get-the-tests-latest-results-summaries-browser
+  - name: Get a test result (browser)
     parent: Synthetics
-    url: get-test-result-browser
-  - name: Delete multiple tests
+    url: get-a-test-result-browser
+  - name: Delete tests
     parent: Synthetics
-    url: delete-multiple-tests
-  - name: Get test
+    url: delete-tests
+  - name: Get a test configuration
     parent: Synthetics
-    url: get-test
-  - name: Update test
+    url: get-a-test-configuration
+  - name: Edit a test
     parent: Synthetics
-    url: update-test
-  - name: Get test latest results (as summaries)
+    url: edit-a-test
+  - name: Get the test's latest results summaries (API)
     parent: Synthetics
-    url: get-test-latest-results-as-summaries
-  - name: Get test result (API)
+    url: get-the-tests-latest-results-summaries-api
+  - name: Get a test result (API)
     parent: Synthetics
-    url: get-test-result-api
-  - name: Change test pause/live status
+    url: get-a-test-result-api
+  - name: Pause or start a test
     parent: Synthetics
-    url: change-test-pause/live-status
+    url: pause-or-start-a-test
   - name: Tags
     url: /fr/api/v1/tags/
     identifier: Tags
