@@ -11,6 +11,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -47,6 +48,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -71,6 +73,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "service_hooks": [
           {
@@ -102,6 +105,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "channels": [
           {

@@ -28,6 +28,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "end": "1579098130",
         "message": "Muting this host for a test!",
@@ -65,6 +66,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -96,7 +98,7 @@
                 "iowait": "3.2",
                 "load": "0.5"
               },
-              "mute_timeout": 123,
+              "mute_timeout": "integer",
               "name": "i-hostname",
               "sources": [
                 "aws"
@@ -132,6 +134,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -140,8 +143,8 @@
     "responses": {
       "200": {
         "json": {
-          "total_active": 123,
-          "total_up": 123
+          "total_active": "integer",
+          "total_up": "integer"
         },
         "html": "<div class=\"table-response schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">total_active</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Total number of active host (UP and ???) reporting to Datadog.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">total_up</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Number of host that are UP and reporting to Datadog.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
       },
@@ -163,6 +166,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }

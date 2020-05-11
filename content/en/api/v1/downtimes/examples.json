@@ -45,6 +45,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -103,6 +104,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "disabled": false,
         "end": "1412793983",
@@ -168,6 +170,9 @@
       }
     },
     "request": {
+      "json_curl": {
+        "scope": "host:myserver"
+      },
       "json": {
         "scope": "host:myserver"
       },
@@ -194,6 +199,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -252,6 +258,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -318,6 +325,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "disabled": false,
         "end": "1412793983",

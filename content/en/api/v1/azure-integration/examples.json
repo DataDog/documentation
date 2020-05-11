@@ -23,6 +23,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
         "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
@@ -71,6 +72,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -99,6 +101,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
         "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
@@ -137,6 +140,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
         "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",
@@ -175,6 +179,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "client_id": "testc7f6-1234-5678-9101-3fcbf464test",
         "client_secret": "testingx./Sw*g/Y33t..R1cH+hScMDt",

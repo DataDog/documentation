@@ -39,6 +39,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -92,8 +93,8 @@
           ],
           "meta": {
             "page": {
-              "total_count": 123,
-              "total_filtered_count": 123
+              "total_count": "integer",
+              "total_filtered_count": "integer"
             }
           }
         },
@@ -109,6 +110,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -179,6 +181,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "attributes": {
@@ -225,6 +228,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -295,6 +299,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -373,6 +378,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "attributes": {
@@ -433,6 +439,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "id": "string"
@@ -481,6 +488,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -533,6 +541,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "id": "string"
@@ -597,8 +606,8 @@
           "included": [],
           "meta": {
             "page": {
-              "total_count": 123,
-              "total_filtered_count": 123
+              "total_count": "integer",
+              "total_filtered_count": "integer"
             }
           }
         },
@@ -630,6 +639,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "id": "string"
@@ -694,8 +704,8 @@
           "included": [],
           "meta": {
             "page": {
-              "total_count": 123,
-              "total_filtered_count": 123
+              "total_count": "integer",
+              "total_filtered_count": "integer"
             }
           }
         },
@@ -719,6 +729,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -779,8 +790,8 @@
           "included": [],
           "meta": {
             "page": {
-              "total_count": 123,
-              "total_filtered_count": 123
+              "total_count": "integer",
+              "total_filtered_count": "integer"
             }
           }
         },
@@ -812,6 +823,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "id": "string"

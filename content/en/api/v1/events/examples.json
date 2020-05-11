@@ -7,13 +7,13 @@
             {
               "aggregation_key": "string",
               "alert_type": "info",
-              "date_happened": 123,
+              "date_happened": "integer",
               "device_name": [],
               "host": "string",
-              "id": 123,
+              "id": "integer",
               "payload": "{}",
               "priority": "normal",
-              "related_event_id": 123,
+              "related_event_id": "integer",
               "source_type_name": "string",
               "tags": [
                 "environment:test"
@@ -45,6 +45,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -56,13 +57,13 @@
           "event": {
             "aggregation_key": "string",
             "alert_type": "info",
-            "date_happened": 123,
+            "date_happened": "integer",
             "device_name": [],
             "host": "string",
-            "id": 123,
+            "id": "integer",
             "payload": "{}",
             "priority": "normal",
-            "related_event_id": 123,
+            "related_event_id": "integer",
             "source_type_name": "string",
             "tags": [
               "environment:test"
@@ -85,14 +86,18 @@
       }
     },
     "request": {
+      "json_curl": {
+        "text": "Oh boy!",
+        "title": "Did you hear the news today?"
+      },
       "json": {
         "aggregation_key": "string",
         "alert_type": "info",
-        "date_happened": 123,
+        "date_happened": "integer",
         "device_name": [],
         "host": "string",
         "priority": "normal",
-        "related_event_id": 123,
+        "related_event_id": "integer",
         "source_type_name": "string",
         "tags": [
           "environment:test"
@@ -110,13 +115,13 @@
           "event": {
             "aggregation_key": "string",
             "alert_type": "info",
-            "date_happened": 123,
+            "date_happened": "integer",
             "device_name": [],
             "host": "string",
-            "id": 123,
+            "id": "integer",
             "payload": "{}",
             "priority": "normal",
-            "related_event_id": 123,
+            "related_event_id": "integer",
             "source_type_name": "string",
             "tags": [
               "environment:test"
@@ -147,6 +152,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }

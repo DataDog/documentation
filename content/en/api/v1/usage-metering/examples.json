@@ -5,9 +5,9 @@
         "json": {
           "usage": [
             {
-              "func_count": 123,
+              "func_count": "integer",
               "hour": "2019-09-19T10:00:00.000Z",
-              "invocations_sum": 123
+              "invocations_sum": "integer"
             }
           ]
         },
@@ -31,6 +31,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -42,7 +43,7 @@
           "usage": [
             {
               "hour": "2019-09-19T10:00:00.000Z",
-              "tasks_count": 123
+              "tasks_count": "integer"
             }
           ]
         },
@@ -66,6 +67,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -76,14 +78,14 @@
         "json": {
           "usage": [
             {
-              "agent_host_count": 123,
-              "alibaba_host_count": 123,
-              "apm_host_count": 123,
-              "aws_host_count": 123,
-              "azure_host_count": 123,
-              "container_count": 123,
-              "gcp_host_count": 123,
-              "host_count": 123,
+              "agent_host_count": "integer",
+              "alibaba_host_count": "integer",
+              "apm_host_count": "integer",
+              "aws_host_count": "integer",
+              "azure_host_count": "integer",
+              "container_count": "integer",
+              "gcp_host_count": "integer",
+              "host_count": "integer",
               "hour": "2019-09-19T10:00:00.000Z"
             }
           ]
@@ -108,6 +110,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -118,10 +121,10 @@
         "json": {
           "usage": [
             {
-              "billable_ingested_bytes": 123,
+              "billable_ingested_bytes": "integer",
               "hour": "2019-09-19T10:00:00.000Z",
-              "indexed_events_count": 123,
-              "ingested_events_bytes": 123
+              "indexed_events_count": "integer",
+              "ingested_events_bytes": "integer"
             }
           ]
         },
@@ -145,6 +148,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -155,11 +159,11 @@
         "json": {
           "usage": [
             {
-              "event_count": 123,
+              "event_count": "integer",
               "hour": "2019-09-19T10:00:00.000Z",
               "index_id": "string",
               "index_name": "string",
-              "retention": 123
+              "retention": "integer"
             }
           ]
         },
@@ -183,6 +187,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -194,7 +199,7 @@
           "usage": [
             {
               "hour": "2019-09-19T10:00:00.000Z",
-              "indexed_event_count": 123
+              "indexed_event_count": "integer"
             }
           ]
         },
@@ -218,6 +223,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -228,7 +234,7 @@
         "json": {
           "usage": [
             {
-              "host_count": 123,
+              "host_count": "integer",
               "hour": "2019-09-19T10:00:00.000Z"
             }
           ]
@@ -253,6 +259,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -264,7 +271,7 @@
           "usage": [
             {
               "hour": "2019-09-19T10:00:00.000Z",
-              "session_count": 123
+              "session_count": "integer"
             }
           ]
         },
@@ -288,6 +295,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -296,83 +304,83 @@
     "responses": {
       "200": {
         "json": {
-          "agent_host_top99p_sum": 123,
-          "apm_host_top99p_sum": 123,
-          "aws_host_top99p_sum": 123,
-          "aws_lambda_func_count": 123,
-          "aws_lambda_invocations_sum": 123,
-          "azure_host_top99p_sum": 123,
-          "billable_ingested_bytes_agg_sum": 123,
-          "container_avg_sum": 123,
-          "container_hwm_sum": 123,
-          "custom_ts_sum": 123,
+          "agent_host_top99p_sum": "integer",
+          "apm_host_top99p_sum": "integer",
+          "aws_host_top99p_sum": "integer",
+          "aws_lambda_func_count": "integer",
+          "aws_lambda_invocations_sum": "integer",
+          "azure_host_top99p_sum": "integer",
+          "billable_ingested_bytes_agg_sum": "integer",
+          "container_avg_sum": "integer",
+          "container_hwm_sum": "integer",
+          "custom_ts_sum": "integer",
           "end_date": "2019-09-19T10:00:00.000Z",
-          "fargate_tasks_count_avg_sum": 123,
-          "fargate_tasks_count_hwm_sum": 123,
-          "gcp_host_top99p_sum": 123,
-          "indexed_events_count_agg_sum": 123,
-          "infra_host_top99p_sum": 123,
-          "ingested_events_bytes_agg_sum": 123,
+          "fargate_tasks_count_avg_sum": "integer",
+          "fargate_tasks_count_hwm_sum": "integer",
+          "gcp_host_top99p_sum": "integer",
+          "indexed_events_count_agg_sum": "integer",
+          "infra_host_top99p_sum": "integer",
+          "ingested_events_bytes_agg_sum": "integer",
           "last_updated": "2019-09-19T10:00:00.000Z",
-          "netflow_indexed_events_count_agg_sum": 123,
-          "npm_host_top99p_sum": 123,
-          "rum_session_count_agg_sum": 123,
+          "netflow_indexed_events_count_agg_sum": "integer",
+          "npm_host_top99p_sum": "integer",
+          "rum_session_count_agg_sum": "integer",
           "start_date": "2019-09-19T10:00:00.000Z",
-          "synthetics_browser_check_calls_count_agg_sum": 123,
-          "synthetics_check_calls_count_agg_sum": 123,
-          "trace_search_indexed_events_count_agg_sum": 123,
+          "synthetics_browser_check_calls_count_agg_sum": "integer",
+          "synthetics_check_calls_count_agg_sum": "integer",
+          "trace_search_indexed_events_count_agg_sum": "integer",
           "usage": [
             {
-              "agent_host_top99p": 123,
-              "apm_host_top99p": 123,
-              "aws_host_top99p": 123,
-              "aws_lambda_func_count": 123,
-              "aws_lambda_invocations_sum": 123,
-              "billable_ingested_bytes_sum": 123,
-              "container_avg": 123,
-              "container_hwm": 123,
-              "custom_ts_avg": 123,
+              "agent_host_top99p": "integer",
+              "apm_host_top99p": "integer",
+              "aws_host_top99p": "integer",
+              "aws_lambda_func_count": "integer",
+              "aws_lambda_invocations_sum": "integer",
+              "billable_ingested_bytes_sum": "integer",
+              "container_avg": "integer",
+              "container_hwm": "integer",
+              "custom_ts_avg": "integer",
               "date": "2019-09-19T10:00:00.000Z",
-              "fargate_tasks_count_avg": 123,
-              "fargate_tasks_count_hwm": 123,
-              "gcp_host_top99p": 123,
-              "indexed_events_count_sum": 123,
-              "infra_host_top99p": 123,
-              "ingested_events_bytes_sum": 123,
-              "netflow_indexed_events_count_sum": 123,
-              "npm_host_top99p": 123,
+              "fargate_tasks_count_avg": "integer",
+              "fargate_tasks_count_hwm": "integer",
+              "gcp_host_top99p": "integer",
+              "indexed_events_count_sum": "integer",
+              "infra_host_top99p": "integer",
+              "ingested_events_bytes_sum": "integer",
+              "netflow_indexed_events_count_sum": "integer",
+              "npm_host_top99p": "integer",
               "orgs": [
                 {
-                  "agent_host_top99p": 123,
-                  "apm_host_top99p": 123,
-                  "aws_host_top99p": 123,
-                  "aws_lambda_func_count": 123,
-                  "aws_lambda_invocations_sum": 123,
-                  "billable_ingested_bytes_sum": 123,
-                  "container_avg": 123,
-                  "container_hwm": 123,
-                  "custom_ts_avg": 123,
-                  "fargate_tasks_count_avg": 123,
-                  "fargate_tasks_count_hwm": 123,
-                  "gcp_host_top99p": 123,
+                  "agent_host_top99p": "integer",
+                  "apm_host_top99p": "integer",
+                  "aws_host_top99p": "integer",
+                  "aws_lambda_func_count": "integer",
+                  "aws_lambda_invocations_sum": "integer",
+                  "billable_ingested_bytes_sum": "integer",
+                  "container_avg": "integer",
+                  "container_hwm": "integer",
+                  "custom_ts_avg": "integer",
+                  "fargate_tasks_count_avg": "integer",
+                  "fargate_tasks_count_hwm": "integer",
+                  "gcp_host_top99p": "integer",
                   "id": "string",
-                  "indexed_events_count_sum": 123,
-                  "infra_host_top99p": 123,
-                  "ingested_events_bytes_sum": 123,
+                  "indexed_events_count_sum": "integer",
+                  "infra_host_top99p": "integer",
+                  "ingested_events_bytes_sum": "integer",
                   "name": "string",
-                  "netflow_indexed_events_count_sum": 123,
-                  "npm_host_top99p": 123,
+                  "netflow_indexed_events_count_sum": "integer",
+                  "npm_host_top99p": "integer",
                   "public_id": "string",
-                  "rum_session_count_sum": 123,
-                  "synthetics_browser_check_calls_count_sum": 123,
-                  "synthetics_check_calls_count_sum": 123,
-                  "trace_search_indexed_events_count_sum": 123
+                  "rum_session_count_sum": "integer",
+                  "synthetics_browser_check_calls_count_sum": "integer",
+                  "synthetics_check_calls_count_sum": "integer",
+                  "trace_search_indexed_events_count_sum": "integer"
                 }
               ],
-              "rum_session_count_sum": 123,
-              "synthetics_browser_check_calls_count_sum": 123,
-              "synthetics_check_calls_count_sum": 123,
-              "trace_search_indexed_events_count_sum": 123
+              "rum_session_count_sum": "integer",
+              "synthetics_browser_check_calls_count_sum": "integer",
+              "synthetics_check_calls_count_sum": "integer",
+              "trace_search_indexed_events_count_sum": "integer"
             }
           ]
         },
@@ -396,6 +404,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -406,7 +415,7 @@
         "json": {
           "usage": [
             {
-              "check_calls_count": 123,
+              "check_calls_count": "integer",
               "hour": "2019-09-19T10:00:00.000Z"
             }
           ]
@@ -431,6 +440,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -441,7 +451,7 @@
         "json": {
           "usage": [
             {
-              "check_calls_count": 123,
+              "check_calls_count": "integer",
               "hour": "2019-09-19T10:00:00.000Z"
             }
           ]
@@ -466,6 +476,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -476,7 +487,7 @@
         "json": {
           "usage": [
             {
-              "browser_check_calls_count": 123,
+              "browser_check_calls_count": "integer",
               "hour": "2019-09-19T10:00:00.000Z"
             }
           ]
@@ -501,6 +512,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -512,9 +524,9 @@
           "usage": [
             {
               "hour": "2019-09-19T10:00:00.000Z",
-              "num_custom_input_timeseries": 123,
-              "num_custom_output_timeseries": 123,
-              "num_custom_timeseries": 123
+              "num_custom_input_timeseries": "integer",
+              "num_custom_output_timeseries": "integer",
+              "num_custom_timeseries": "integer"
             }
           ]
         },
@@ -538,6 +550,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -548,8 +561,8 @@
         "json": {
           "usage": [
             {
-              "avg_metric_hour": 123,
-              "max_metric_hour": 123,
+              "avg_metric_hour": "integer",
+              "max_metric_hour": "integer",
               "metric_category": "string",
               "metric_name": "string"
             }
@@ -575,6 +588,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -586,7 +600,7 @@
           "usage": [
             {
               "hour": "2019-09-19T10:00:00.000Z",
-              "indexed_events_count": 123
+              "indexed_events_count": "integer"
             }
           ]
         },
@@ -610,6 +624,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }

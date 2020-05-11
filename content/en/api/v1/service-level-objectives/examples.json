@@ -5,7 +5,7 @@
         "json": {
           "data": [
             {
-              "created_at": 123,
+              "created_at": "integer",
               "creator": {
                 "email": "string",
                 "handle": "string",
@@ -17,7 +17,7 @@
                 "role:mysql"
               ],
               "id": "string",
-              "modified_at": 123,
+              "modified_at": "integer",
               "monitor_ids": [],
               "monitor_tags": [],
               "name": "string",
@@ -71,6 +71,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -81,7 +82,7 @@
         "json": {
           "data": [
             {
-              "created_at": 123,
+              "created_at": "integer",
               "creator": {
                 "email": "string",
                 "handle": "string",
@@ -93,7 +94,7 @@
                 "role:mysql"
               ],
               "id": "string",
-              "modified_at": 123,
+              "modified_at": "integer",
               "monitor_ids": [],
               "monitor_tags": [],
               "name": "string",
@@ -139,6 +140,13 @@
       }
     },
     "request": {
+      "json_curl": {
+        "name": null,
+        "thresholds": [
+          {}
+        ],
+        "type": null
+      },
       "json": {
         "description": "string",
         "groups": [
@@ -205,6 +213,16 @@
       }
     },
     "request": {
+      "json_curl": {
+        "id1": [
+          "7d",
+          "30d"
+        ],
+        "id2": [
+          "7d",
+          "30d"
+        ]
+      },
       "json": {
         "id1": [
           "7d",
@@ -260,6 +278,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -302,6 +321,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -311,7 +331,7 @@
       "200": {
         "json": {
           "data": {
-            "created_at": 123,
+            "created_at": "integer",
             "creator": {
               "email": "string",
               "handle": "string",
@@ -323,7 +343,7 @@
               "role:mysql"
             ],
             "id": "string",
-            "modified_at": 123,
+            "modified_at": "integer",
             "monitor_ids": [],
             "monitor_tags": [],
             "name": "string",
@@ -368,6 +388,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -378,7 +399,7 @@
         "json": {
           "data": [
             {
-              "created_at": 123,
+              "created_at": "integer",
               "creator": {
                 "email": "string",
                 "handle": "string",
@@ -390,7 +411,7 @@
                 "role:mysql"
               ],
               "id": "string",
-              "modified_at": 123,
+              "modified_at": "integer",
               "monitor_ids": [],
               "monitor_tags": [],
               "name": "string",
@@ -444,6 +465,13 @@
       }
     },
     "request": {
+      "json_curl": {
+        "name": null,
+        "thresholds": [
+          {}
+        ],
+        "type": null
+      },
       "json": {
         "description": "string",
         "groups": [
@@ -480,7 +508,7 @@
       "200": {
         "json": {
           "data": {
-            "from_ts": 123,
+            "from_ts": "integer",
             "groups": {
               "history": [],
               "name": "string",
@@ -505,27 +533,27 @@
             },
             "series": {
               "denominator": {
-                "count": 123,
+                "count": "integer",
                 "metadata": {
                   "aggr": "string",
                   "expression": "string",
                   "metric": "string",
-                  "query_index": 123,
+                  "query_index": "integer",
                   "scope": "string",
                   "unit": "string"
                 },
                 "sum": "number",
                 "values": []
               },
-              "interval": 123,
+              "interval": "integer",
               "message": "string",
               "numerator": {
-                "count": 123,
+                "count": "integer",
                 "metadata": {
                   "aggr": "string",
                   "expression": "string",
                   "metric": "string",
-                  "query_index": 123,
+                  "query_index": "integer",
                   "scope": "string",
                   "unit": "string"
                 },
@@ -534,7 +562,7 @@
               },
               "query": "string",
               "res_type": "string",
-              "resp_version": 123,
+              "resp_version": "integer",
               "times": []
             },
             "thresholds": {
@@ -546,7 +574,7 @@
                 "warning_display": "string"
               }
             },
-            "to_ts": 123,
+            "to_ts": "integer",
             "type": "string",
             "type_id": "0"
           },
@@ -584,6 +612,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }

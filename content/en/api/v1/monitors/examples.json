@@ -10,7 +10,7 @@
             "name": "string"
           },
           "deleted": "2019-09-19T10:00:00.000Z",
-          "id": 123,
+          "id": "integer",
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
@@ -24,21 +24,21 @@
             "device_ids": [],
             "enable_logs_sample": false,
             "escalation_message": "string",
-            "evaluation_delay": 123,
+            "evaluation_delay": "integer",
             "include_tags": false,
             "locked": false,
-            "min_failure_duration": 123,
-            "min_location_failed": 123,
-            "new_host_delay": 123,
-            "no_data_timeframe": 123,
+            "min_failure_duration": "integer",
+            "min_location_failed": "integer",
+            "new_host_delay": "integer",
+            "no_data_timeframe": "integer",
             "notify_audit": false,
             "notify_no_data": false,
-            "renotify_interval": 123,
+            "renotify_interval": "integer",
             "require_full_window": false,
             "silenced": {
-              "<any-key>": 123
+              "<any-key>": "integer"
             },
-            "synthetics_check_id": 123,
+            "synthetics_check_id": "integer",
             "threshold_windows": {
               "recovery_window": "string",
               "trigger_window": "string"
@@ -51,17 +51,17 @@
               "warning": "number",
               "warning_recovery": "number"
             },
-            "timeout_h": 123
+            "timeout_h": "integer"
           },
           "overall_state": "string",
           "query": "string",
           "state": {
             "groups": {
               "<any-key>": {
-                "last_nodata_ts": 123,
-                "last_notified_ts": 123,
-                "last_resolved_ts": 123,
-                "last_triggered_ts": 123,
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
                 "name": "string",
                 "status": "string"
               }
@@ -90,6 +90,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -105,7 +106,7 @@
             "name": "string"
           },
           "deleted": "2019-09-19T10:00:00.000Z",
-          "id": 123,
+          "id": "integer",
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
@@ -119,21 +120,21 @@
             "device_ids": [],
             "enable_logs_sample": false,
             "escalation_message": "string",
-            "evaluation_delay": 123,
+            "evaluation_delay": "integer",
             "include_tags": false,
             "locked": false,
-            "min_failure_duration": 123,
-            "min_location_failed": 123,
-            "new_host_delay": 123,
-            "no_data_timeframe": 123,
+            "min_failure_duration": "integer",
+            "min_location_failed": "integer",
+            "new_host_delay": "integer",
+            "no_data_timeframe": "integer",
             "notify_audit": false,
             "notify_no_data": false,
-            "renotify_interval": 123,
+            "renotify_interval": "integer",
             "require_full_window": false,
             "silenced": {
-              "<any-key>": 123
+              "<any-key>": "integer"
             },
-            "synthetics_check_id": 123,
+            "synthetics_check_id": "integer",
             "threshold_windows": {
               "recovery_window": "string",
               "trigger_window": "string"
@@ -146,17 +147,17 @@
               "warning": "number",
               "warning_recovery": "number"
             },
-            "timeout_h": 123
+            "timeout_h": "integer"
           },
           "overall_state": "string",
           "query": "string",
           "state": {
             "groups": {
               "<any-key>": {
-                "last_nodata_ts": 123,
-                "last_notified_ts": 123,
-                "last_resolved_ts": 123,
-                "last_triggered_ts": 123,
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
                 "name": "string",
                 "status": "string"
               }
@@ -185,27 +186,28 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "message": "string",
         "name": "string",
         "options": {
           "enable_logs_sample": false,
           "escalation_message": "string",
-          "evaluation_delay": 123,
+          "evaluation_delay": "integer",
           "include_tags": false,
           "locked": false,
-          "min_failure_duration": 123,
-          "min_location_failed": 123,
-          "new_host_delay": 123,
-          "no_data_timeframe": 123,
+          "min_failure_duration": "integer",
+          "min_location_failed": "integer",
+          "new_host_delay": "integer",
+          "no_data_timeframe": "integer",
           "notify_audit": false,
           "notify_no_data": false,
-          "renotify_interval": 123,
+          "renotify_interval": "integer",
           "require_full_window": false,
           "silenced": {
-            "<any-key>": 123
+            "<any-key>": "integer"
           },
-          "synthetics_check_id": 123,
+          "synthetics_check_id": "integer",
           "threshold_windows": {
             "recovery_window": "string",
             "trigger_window": "string"
@@ -218,7 +220,7 @@
             "warning": "number",
             "warning_recovery": "number"
           },
-          "timeout_h": 123
+          "timeout_h": "integer"
         },
         "query": "string",
         "tags": [],
@@ -269,6 +271,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -280,13 +283,13 @@
           "counts": {
             "status": [
               {
-                "count": 123,
+                "count": "integer",
                 "name": "undefined"
               }
             ],
             "type": [
               {
-                "count": 123,
+                "count": "integer",
                 "name": "undefined"
               }
             ]
@@ -295,18 +298,18 @@
             {
               "group": "string",
               "group_tags": [],
-              "last_nodata_ts": 123,
-              "last_triggered_ts": 123,
-              "monitor_id": 123,
+              "last_nodata_ts": "integer",
+              "last_triggered_ts": "integer",
+              "monitor_id": "integer",
               "monitor_name": "string",
               "status": "string"
             }
           ],
           "metadata": {
-            "page": 123,
-            "page_count": 123,
-            "per_page": 123,
-            "total_count": 123
+            "page": "integer",
+            "page_count": "integer",
+            "per_page": "integer",
+            "total_count": "integer"
           }
         },
         "html": "<div class=\"table-response schema-table row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row  hasChildData isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> counts</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> status</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>Search facets.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">count</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The number of found monitors with the listed value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p></p></div>\n              <div class=\"col-6 column\"><p>The facet value.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> type</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"><p>Search facets.</p></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">count</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The number of found monitors with the listed value.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">name</p>\n    </div>\n              <div class=\"col-2 column\"><p></p></div>\n              <div class=\"col-6 column\"><p>The facet value.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div>\n          </div>\n        </div><div class=\"row  hasChildData isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> groups</p>\n    </div>\n              <div class=\"col-2 column\"><p>[object]</p></div>\n              <div class=\"col-6 column\"></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">group</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">group_tags</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">last_nodata_ts</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">last_triggered_ts</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Latest timestamp the monitor group triggered.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">monitor_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The ID of the monitor.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">monitor_name</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The name of the monitor.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">status</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The different states your monitor can be in. \nAllowed enum values: <code>Alert,Ignored,No Data,OK,Skipped,Unknown,Warn</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> metadata</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"></div>\n            </div>\n            <div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">page</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The page to start paginating from.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">page_count</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The number of pages.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">per_page</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The number of monitors to return per page.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  isReadOnly\">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  isReadOnly\">\n              <div class=\"col-4 column\">\n      <p class=\"key\">total_count</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>The total number of monitors.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div>\n    </div>  \n  </div>"
@@ -329,6 +332,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -340,34 +344,34 @@
           "count": {
             "muted": [
               {
-                "count": 123,
+                "count": "integer",
                 "name": "undefined"
               }
             ],
             "status": [
               {
-                "count": 123,
+                "count": "integer",
                 "name": "undefined"
               }
             ],
             "tag": [
               {
-                "count": 123,
+                "count": "integer",
                 "name": "undefined"
               }
             ],
             "type": [
               {
-                "count": 123,
+                "count": "integer",
                 "name": "undefined"
               }
             ]
           },
           "metadata": {
-            "page": 123,
-            "page_count": 123,
-            "per_page": 123,
-            "total_count": 123
+            "page": "integer",
+            "page_count": "integer",
+            "per_page": "integer",
+            "total_count": "integer"
           },
           "monitors": [
             {
@@ -377,8 +381,8 @@
                 "handle": "string",
                 "name": "string"
               },
-              "id": 123,
-              "last_triggered_ts": 123,
+              "id": "integer",
+              "last_triggered_ts": "integer",
               "metrics": [],
               "name": "string",
               "notifications": [
@@ -387,7 +391,7 @@
                   "name": "string"
                 }
               ],
-              "org_id": 123,
+              "org_id": "integer",
               "scopes": [
                 "host:app2",
                 "env:dev,env:prod"
@@ -418,6 +422,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -433,7 +438,7 @@
             "name": "string"
           },
           "deleted": "2019-09-19T10:00:00.000Z",
-          "id": 123,
+          "id": "integer",
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
@@ -447,21 +452,21 @@
             "device_ids": [],
             "enable_logs_sample": false,
             "escalation_message": "string",
-            "evaluation_delay": 123,
+            "evaluation_delay": "integer",
             "include_tags": false,
             "locked": false,
-            "min_failure_duration": 123,
-            "min_location_failed": 123,
-            "new_host_delay": 123,
-            "no_data_timeframe": 123,
+            "min_failure_duration": "integer",
+            "min_location_failed": "integer",
+            "new_host_delay": "integer",
+            "no_data_timeframe": "integer",
             "notify_audit": false,
             "notify_no_data": false,
-            "renotify_interval": 123,
+            "renotify_interval": "integer",
             "require_full_window": false,
             "silenced": {
-              "<any-key>": 123
+              "<any-key>": "integer"
             },
-            "synthetics_check_id": 123,
+            "synthetics_check_id": "integer",
             "threshold_windows": {
               "recovery_window": "string",
               "trigger_window": "string"
@@ -474,17 +479,17 @@
               "warning": "number",
               "warning_recovery": "number"
             },
-            "timeout_h": 123
+            "timeout_h": "integer"
           },
           "overall_state": "string",
           "query": "string",
           "state": {
             "groups": {
               "<any-key>": {
-                "last_nodata_ts": 123,
-                "last_notified_ts": 123,
-                "last_resolved_ts": 123,
-                "last_triggered_ts": 123,
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
                 "name": "string",
                 "status": "string"
               }
@@ -513,27 +518,28 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "message": "string",
         "name": "string",
         "options": {
           "enable_logs_sample": false,
           "escalation_message": "string",
-          "evaluation_delay": 123,
+          "evaluation_delay": "integer",
           "include_tags": false,
           "locked": false,
-          "min_failure_duration": 123,
-          "min_location_failed": 123,
-          "new_host_delay": 123,
-          "no_data_timeframe": 123,
+          "min_failure_duration": "integer",
+          "min_location_failed": "integer",
+          "new_host_delay": "integer",
+          "no_data_timeframe": "integer",
           "notify_audit": false,
           "notify_no_data": false,
-          "renotify_interval": 123,
+          "renotify_interval": "integer",
           "require_full_window": false,
           "silenced": {
-            "<any-key>": 123
+            "<any-key>": "integer"
           },
-          "synthetics_check_id": 123,
+          "synthetics_check_id": "integer",
           "threshold_windows": {
             "recovery_window": "string",
             "trigger_window": "string"
@@ -546,7 +552,7 @@
             "warning": "number",
             "warning_recovery": "number"
           },
-          "timeout_h": 123
+          "timeout_h": "integer"
         },
         "query": "string",
         "tags": [],
@@ -559,7 +565,7 @@
     "responses": {
       "200": {
         "json": {
-          "deleted_monitor_id": 123
+          "deleted_monitor_id": "integer"
         },
         "html": "<div class=\"table-response schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">deleted_monitor_id</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>ID of the deleted monitor.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
       },
@@ -597,6 +603,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -612,7 +619,7 @@
             "name": "string"
           },
           "deleted": "2019-09-19T10:00:00.000Z",
-          "id": 123,
+          "id": "integer",
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
@@ -626,21 +633,21 @@
             "device_ids": [],
             "enable_logs_sample": false,
             "escalation_message": "string",
-            "evaluation_delay": 123,
+            "evaluation_delay": "integer",
             "include_tags": false,
             "locked": false,
-            "min_failure_duration": 123,
-            "min_location_failed": 123,
-            "new_host_delay": 123,
-            "no_data_timeframe": 123,
+            "min_failure_duration": "integer",
+            "min_location_failed": "integer",
+            "new_host_delay": "integer",
+            "no_data_timeframe": "integer",
             "notify_audit": false,
             "notify_no_data": false,
-            "renotify_interval": 123,
+            "renotify_interval": "integer",
             "require_full_window": false,
             "silenced": {
-              "<any-key>": 123
+              "<any-key>": "integer"
             },
-            "synthetics_check_id": 123,
+            "synthetics_check_id": "integer",
             "threshold_windows": {
               "recovery_window": "string",
               "trigger_window": "string"
@@ -653,17 +660,17 @@
               "warning": "number",
               "warning_recovery": "number"
             },
-            "timeout_h": 123
+            "timeout_h": "integer"
           },
           "overall_state": "string",
           "query": "string",
           "state": {
             "groups": {
               "<any-key>": {
-                "last_nodata_ts": 123,
-                "last_notified_ts": 123,
-                "last_resolved_ts": 123,
-                "last_triggered_ts": 123,
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
                 "name": "string",
                 "status": "string"
               }
@@ -700,6 +707,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -715,7 +723,7 @@
             "name": "string"
           },
           "deleted": "2019-09-19T10:00:00.000Z",
-          "id": 123,
+          "id": "integer",
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
@@ -729,21 +737,21 @@
             "device_ids": [],
             "enable_logs_sample": false,
             "escalation_message": "string",
-            "evaluation_delay": 123,
+            "evaluation_delay": "integer",
             "include_tags": false,
             "locked": false,
-            "min_failure_duration": 123,
-            "min_location_failed": 123,
-            "new_host_delay": 123,
-            "no_data_timeframe": 123,
+            "min_failure_duration": "integer",
+            "min_location_failed": "integer",
+            "new_host_delay": "integer",
+            "no_data_timeframe": "integer",
             "notify_audit": false,
             "notify_no_data": false,
-            "renotify_interval": 123,
+            "renotify_interval": "integer",
             "require_full_window": false,
             "silenced": {
-              "<any-key>": 123
+              "<any-key>": "integer"
             },
-            "synthetics_check_id": 123,
+            "synthetics_check_id": "integer",
             "threshold_windows": {
               "recovery_window": "string",
               "trigger_window": "string"
@@ -756,17 +764,17 @@
               "warning": "number",
               "warning_recovery": "number"
             },
-            "timeout_h": 123
+            "timeout_h": "integer"
           },
           "overall_state": "string",
           "query": "string",
           "state": {
             "groups": {
               "<any-key>": {
-                "last_nodata_ts": 123,
-                "last_notified_ts": 123,
-                "last_resolved_ts": 123,
-                "last_triggered_ts": 123,
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
                 "name": "string",
                 "status": "string"
               }
@@ -811,27 +819,28 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "message": "string",
         "name": "string",
         "options": {
           "enable_logs_sample": false,
           "escalation_message": "string",
-          "evaluation_delay": 123,
+          "evaluation_delay": "integer",
           "include_tags": false,
           "locked": false,
-          "min_failure_duration": 123,
-          "min_location_failed": 123,
-          "new_host_delay": 123,
-          "no_data_timeframe": 123,
+          "min_failure_duration": "integer",
+          "min_location_failed": "integer",
+          "new_host_delay": "integer",
+          "no_data_timeframe": "integer",
           "notify_audit": false,
           "notify_no_data": false,
-          "renotify_interval": 123,
+          "renotify_interval": "integer",
           "require_full_window": false,
           "silenced": {
-            "<any-key>": 123
+            "<any-key>": "integer"
           },
-          "synthetics_check_id": 123,
+          "synthetics_check_id": "integer",
           "threshold_windows": {
             "recovery_window": "string",
             "trigger_window": "string"
@@ -844,7 +853,7 @@
             "warning": "number",
             "warning_recovery": "number"
           },
-          "timeout_h": 123
+          "timeout_h": "integer"
         },
         "query": "string",
         "tags": [],
@@ -864,7 +873,7 @@
             "name": "string"
           },
           "deleted": "2019-09-19T10:00:00.000Z",
-          "id": 123,
+          "id": "integer",
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
@@ -878,21 +887,21 @@
             "device_ids": [],
             "enable_logs_sample": false,
             "escalation_message": "string",
-            "evaluation_delay": 123,
+            "evaluation_delay": "integer",
             "include_tags": false,
             "locked": false,
-            "min_failure_duration": 123,
-            "min_location_failed": 123,
-            "new_host_delay": 123,
-            "no_data_timeframe": 123,
+            "min_failure_duration": "integer",
+            "min_location_failed": "integer",
+            "new_host_delay": "integer",
+            "no_data_timeframe": "integer",
             "notify_audit": false,
             "notify_no_data": false,
-            "renotify_interval": 123,
+            "renotify_interval": "integer",
             "require_full_window": false,
             "silenced": {
-              "<any-key>": 123
+              "<any-key>": "integer"
             },
-            "synthetics_check_id": 123,
+            "synthetics_check_id": "integer",
             "threshold_windows": {
               "recovery_window": "string",
               "trigger_window": "string"
@@ -905,17 +914,17 @@
               "warning": "number",
               "warning_recovery": "number"
             },
-            "timeout_h": 123
+            "timeout_h": "integer"
           },
           "overall_state": "string",
           "query": "string",
           "state": {
             "groups": {
               "<any-key>": {
-                "last_nodata_ts": 123,
-                "last_notified_ts": 123,
-                "last_resolved_ts": 123,
-                "last_triggered_ts": 123,
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
                 "name": "string",
                 "status": "string"
               }
@@ -952,6 +961,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -967,7 +977,7 @@
             "name": "string"
           },
           "deleted": "2019-09-19T10:00:00.000Z",
-          "id": 123,
+          "id": "integer",
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
@@ -981,21 +991,21 @@
             "device_ids": [],
             "enable_logs_sample": false,
             "escalation_message": "string",
-            "evaluation_delay": 123,
+            "evaluation_delay": "integer",
             "include_tags": false,
             "locked": false,
-            "min_failure_duration": 123,
-            "min_location_failed": 123,
-            "new_host_delay": 123,
-            "no_data_timeframe": 123,
+            "min_failure_duration": "integer",
+            "min_location_failed": "integer",
+            "new_host_delay": "integer",
+            "no_data_timeframe": "integer",
             "notify_audit": false,
             "notify_no_data": false,
-            "renotify_interval": 123,
+            "renotify_interval": "integer",
             "require_full_window": false,
             "silenced": {
-              "<any-key>": 123
+              "<any-key>": "integer"
             },
-            "synthetics_check_id": 123,
+            "synthetics_check_id": "integer",
             "threshold_windows": {
               "recovery_window": "string",
               "trigger_window": "string"
@@ -1008,17 +1018,17 @@
               "warning": "number",
               "warning_recovery": "number"
             },
-            "timeout_h": 123
+            "timeout_h": "integer"
           },
           "overall_state": "string",
           "query": "string",
           "state": {
             "groups": {
               "<any-key>": {
-                "last_nodata_ts": 123,
-                "last_notified_ts": 123,
-                "last_resolved_ts": 123,
-                "last_triggered_ts": 123,
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
                 "name": "string",
                 "status": "string"
               }
@@ -1055,6 +1065,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -1067,6 +1078,7 @@
       }
     },
     "request": {
+      "json_curl": [],
       "json": [],
       "html": "<div class=\"table-request schema-table has-no-expands row d-none\">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"></p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
     }
@@ -1082,7 +1094,7 @@
             "name": "string"
           },
           "deleted": "2019-09-19T10:00:00.000Z",
-          "id": 123,
+          "id": "integer",
           "message": "string",
           "modified": "2019-09-19T10:00:00.000Z",
           "multi": false,
@@ -1096,21 +1108,21 @@
             "device_ids": [],
             "enable_logs_sample": false,
             "escalation_message": "string",
-            "evaluation_delay": 123,
+            "evaluation_delay": "integer",
             "include_tags": false,
             "locked": false,
-            "min_failure_duration": 123,
-            "min_location_failed": 123,
-            "new_host_delay": 123,
-            "no_data_timeframe": 123,
+            "min_failure_duration": "integer",
+            "min_location_failed": "integer",
+            "new_host_delay": "integer",
+            "no_data_timeframe": "integer",
             "notify_audit": false,
             "notify_no_data": false,
-            "renotify_interval": 123,
+            "renotify_interval": "integer",
             "require_full_window": false,
             "silenced": {
-              "<any-key>": 123
+              "<any-key>": "integer"
             },
-            "synthetics_check_id": 123,
+            "synthetics_check_id": "integer",
             "threshold_windows": {
               "recovery_window": "string",
               "trigger_window": "string"
@@ -1123,17 +1135,17 @@
               "warning": "number",
               "warning_recovery": "number"
             },
-            "timeout_h": 123
+            "timeout_h": "integer"
           },
           "overall_state": "string",
           "query": "string",
           "state": {
             "groups": {
               "<any-key>": {
-                "last_nodata_ts": 123,
-                "last_notified_ts": 123,
-                "last_resolved_ts": 123,
-                "last_triggered_ts": 123,
+                "last_nodata_ts": "integer",
+                "last_notified_ts": "integer",
+                "last_resolved_ts": "integer",
+                "last_triggered_ts": "integer",
                 "name": "string",
                 "status": "string"
               }
@@ -1162,6 +1174,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -1178,6 +1191,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }

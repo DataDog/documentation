@@ -17,6 +17,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -59,6 +60,9 @@
       }
     },
     "request": {
+      "json_curl": {
+        "pipeline_ids": null
+      },
       "json": {
         "pipeline_ids": []
       },
@@ -96,6 +100,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -141,6 +146,9 @@
       }
     },
     "request": {
+      "json_curl": {
+        "name": null
+      },
       "json": {
         "filter": {
           "query": "source:python"
@@ -179,6 +187,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -224,6 +233,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -269,6 +279,9 @@
       }
     },
     "request": {
+      "json_curl": {
+        "name": null
+      },
       "json": {
         "filter": {
           "query": "source:python"

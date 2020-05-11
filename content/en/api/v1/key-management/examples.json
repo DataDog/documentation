@@ -24,6 +24,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -59,6 +60,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "name": "example user"
       },
@@ -104,6 +106,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -139,6 +142,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -182,6 +186,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "name": "example user"
       },
@@ -212,6 +217,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -254,6 +260,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "name": "example user"
       },
@@ -290,6 +297,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -324,6 +332,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -374,6 +383,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "name": "example user"
       },

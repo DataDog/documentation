@@ -27,6 +27,11 @@
       }
     },
     "request": {
+      "json_curl": {
+        "is_secret": null,
+        "name": "CUSTOM_VARIABLE_NAME",
+        "value": "CUSTOM_VARIABLE_VALUE"
+      },
       "json": {
         "is_secret": false,
         "name": "CUSTOM_VARIABLE_NAME",
@@ -55,6 +60,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -95,6 +101,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -135,6 +142,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "is_secret": false,
         "name": "CUSTOM_VARIABLE_NAME",
@@ -175,6 +183,10 @@
       }
     },
     "request": {
+      "json_curl": {
+        "name": "WEBHOOK_NAME",
+        "url": "https://example.com/webhook"
+      },
       "json": {
         "custom_headers": {
           "<any-key>": "string"
@@ -207,6 +219,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -251,6 +264,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -295,6 +309,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "custom_headers": {
           "<any-key>": "string"

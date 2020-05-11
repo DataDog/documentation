@@ -23,6 +23,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",
@@ -91,6 +92,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -121,6 +123,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",
@@ -167,6 +170,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",
@@ -209,6 +213,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -239,6 +244,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",

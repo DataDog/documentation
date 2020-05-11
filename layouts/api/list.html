@@ -238,8 +238,11 @@
                                                   {{ $jsonifiedData := (index $req "json") | jsonify (dict "indent" "  ") }}
                                                   {{ $jsonifiedData = replace (replace $jsonifiedData "\\u003c" "<") "\\u003e" ">"  }}
 
+                                                  {{ $json_curl := (index $req "json_curl") | jsonify (dict "indent" "  ") }}
+                                                  {{ $json_curl = replace (replace $json_curl "\\u003c" "<") "\\u003e" ">"  }}
+
                                                   {{ $dot.Scratch.Set "json" (highlight ($jsonifiedData) "json" "") }}
-                                                  {{ $.Scratch.Set "jsonRequestBody" $jsonifiedData }}
+                                                  {{ $.Scratch.Set "jsonRequestBody" $json_curl }}
                                                   {{ $dot.Scratch.Set "html" (index $req "html") }}
                                               {{ else }}
                                                   {{ warnf "Could not load html/json request for %q" $context.action.operationId }}

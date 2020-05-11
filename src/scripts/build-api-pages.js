@@ -131,8 +131,9 @@ const createResources = (apiYaml, deref, apiVersion) => {
         if(action.requestBody) {
           const requestSchema = getSchema(action.requestBody.content);
           const requestJson = filterExampleJson("request", requestSchema);
+          const requestCurlJson = filterExampleJson("curl", requestSchema);
           const requestHtml = schemaTable("request", requestSchema);
-          request = {"json": requestJson, "html": requestHtml};
+          request = {"json_curl": requestCurlJson, "json": requestJson, "html": requestHtml};
           console.log(`successfully wrote ${pageDir}${action.operationId} html`);
         }
 
@@ -149,7 +150,7 @@ const createResources = (apiYaml, deref, apiVersion) => {
         });
 
         // assign built up data for examples.json
-        jsonData[action.operationId] = {responses, "request": request || {"json": {}, "html": ""}};
+        jsonData[action.operationId] = {responses, "request": request || {"json_curl": {}, "json": {}, "html": ""}};
       });
     });
 
@@ -193,12 +194,13 @@ const isTagMatch = (pathObj, tag) => {
 
 /**
  * The recursively called filtering json function, will build up a json string
- * @param {string} actionType - string of 'request' or 'response'
+ * @param {string} actionType - string of 'request' or 'response' or 'curl'
  * @param {object} data - the schema object
  * @param {object} parentExample - the example object adjacent to data passed in
+ * @param {object} requiredKeys - []
  * returns string
  */
-const filterJson = (actionType, data, parentExample = null) => {
+const filterJson = (actionType, data, parentExample = null, requiredKeys = []) => {
   let jsondata = '';
 
   if (typeof data === 'object') {
@@ -206,6 +208,10 @@ const filterJson = (actionType, data, parentExample = null) => {
 
       if(actionType === "request" && value.readOnly) {
         // skip
+      } else if(actionType === "curl" && value.readOnly) {
+        // skip
+      } else if(actionType === "curl" && (requiredKeys.length <= 0 || !requiredKeys.includes(key))) {
+        // skip non required fields when curl
       } else {
 
         let prefixType = '';
@@ -261,12 +267,16 @@ const filterJson = (actionType, data, parentExample = null) => {
         }
 
         if (childData) {
-          jsondata += `"${key}": ${prefixType}${filterJson(actionType, childData, value.example)}${suffixType},`;
+          jsondata += `"${key}": ${prefixType}${filterJson(actionType, childData, value.example, requiredKeys)}${suffixType},`;
         } else {
           let ex = '';
           // bool causes us to not go in here so check for it
           ex = outputExample(chosenExample, key);
-          ex = ex || outputValueType(value.type, value.format);
+          if(actionType === 'curl') {
+            ex = ex || null;
+          } else {
+            ex = ex || outputValueType(value.type, value.format);
+          }
           jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
         }
       }
@@ -305,7 +315,6 @@ const outputValueType = (valueType, format = "") => {
     case "boolean":
       return "false";
     case "integer":
-      return "123";
     case "string":
     default:
       return (format === "date-time") ? `"${ipoDate.toISOString()}"` : `"${valueType}"`;
@@ -428,9 +437,32 @@ const getInitialExampleJsonData = (data) => {
   return selectedExample;
 };
 
+
 /**
  * Takes a data object and returns the initial child data to be passed for recursion to filterjson
- * @param {string} actionType - string of 'request' or 'response'
+ * @param {object} data - object schema
+ * returns initial data
+ */
+const getInitialRequiredData = (data) => {
+  let requiredKeys = [];
+  if(data) {
+    if (data.type === 'array') {
+      if (data.items.type === 'array') {
+        requiredKeys = data.items.items.required;
+      } else if (data.items.properties) {
+        requiredKeys = data.items.required;
+      }
+    } else {
+      requiredKeys = data.required;
+    }
+  }
+  return requiredKeys || [];
+};
+
+
+/**
+ * Takes a data object and returns the initial child data to be passed for recursion to filterjson
+ * @param {string} actionType - string of 'request' or 'response' or 'curl'
  * @param {object} data - the schema object
  * returns parsed json object from built string
  */
@@ -438,6 +470,7 @@ const filterExampleJson = (actionType, data) => {
   const [prefix, suffix] = getJsonWrapChars(data);
   const initialData = getInitialJsonData(data);
   const selectedExample = getInitialExampleJsonData(data);
+  const requiredKeys = getInitialRequiredData(data);
 
   // just return the example in additionalProperties cases with example
   if(data.additionalProperties && data.example) {
@@ -445,7 +478,7 @@ const filterExampleJson = (actionType, data) => {
   }
 
   const output = `${prefix}
-    ${filterJson(actionType, initialData, selectedExample)}
+    ${filterJson(actionType, initialData, selectedExample, requiredKeys)}
   ${suffix}`.trim();
   let parsed = '';
   try {

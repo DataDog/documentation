@@ -23,6 +23,10 @@
       }
     },
     "request": {
+      "json_curl": {
+        "account_id": "1234567",
+        "lambda_arn": "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
+      },
       "json": {
         "account_id": "1234567",
         "lambda_arn": "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
@@ -69,6 +73,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -97,6 +102,10 @@
       }
     },
     "request": {
+      "json_curl": {
+        "account_id": "1234567",
+        "lambda_arn": "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
+      },
       "json": {
         "account_id": "1234567",
         "lambda_arn": "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
@@ -136,6 +145,10 @@
       }
     },
     "request": {
+      "json_curl": {
+        "account_id": "1234567",
+        "lambda_arn": "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
+      },
       "json": {
         "account_id": "1234567",
         "lambda_arn": "arn:aws:lambda:us-east-1:1234567:function:LogsCollectionAPITest"
@@ -162,6 +175,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -190,6 +204,17 @@
       }
     },
     "request": {
+      "json_curl": {
+        "account_id": "1234567",
+        "services": [
+          "s3",
+          "elb",
+          "elbv2",
+          "cloudfront",
+          "redshift",
+          "lambda"
+        ]
+      },
       "json": {
         "account_id": "1234567",
         "services": [
@@ -236,6 +261,17 @@
       }
     },
     "request": {
+      "json_curl": {
+        "account_id": "1234567",
+        "services": [
+          "s3",
+          "elb",
+          "elbv2",
+          "cloudfront",
+          "redshift",
+          "lambda"
+        ]
+      },
       "json": {
         "account_id": "1234567",
         "services": [

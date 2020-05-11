@@ -53,6 +53,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -137,6 +138,11 @@
       }
     },
     "request": {
+      "json_curl": {
+        "billing": {},
+        "name": "New child org",
+        "subscription": {}
+      },
       "json": {
         "billing": {
           "type": "string"
@@ -209,6 +215,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -273,6 +280,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "billing": {
           "type": "string"
@@ -344,6 +352,9 @@
       }
     },
     "request": {
+      "json_curl": {
+        "idp_file": null
+      },
       "json": {
         "idp_file": "string"
       },

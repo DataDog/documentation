@@ -588,16 +588,16 @@ describe(`filterExampleJson`, () => {
     };
     const actual = bp.filterExampleJson("request", mockSchema);
     const expected = [[{
-      "duration": 123,
-      "error": 123,
+      "duration": "integer",
+      "error": "integer",
       "meta": {"<any-key>": "string"},
       "metrics": {"<any-key>": "number"},
       "name": "span_name",
-      "parent_id": 123,
+      "parent_id": "integer",
       "resource": "/home",
       "service": "service_name",
       "span_id": "987654321",
-      "start": 123,
+      "start": "integer",
       "trace_id": "123456789",
       "type": "web"
     }]];

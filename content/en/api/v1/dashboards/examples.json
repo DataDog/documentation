@@ -29,6 +29,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -68,12 +69,12 @@
           "widgets": [
             {
               "definition": {},
-              "id": 123,
+              "id": "integer",
               "layout": {
-                "height": 123,
-                "width": 123,
-                "x": 123,
-                "y": 123
+                "height": "integer",
+                "width": "integer",
+                "x": "integer",
+                "y": "integer"
               }
             }
           ]
@@ -98,6 +99,13 @@
       }
     },
     "request": {
+      "json_curl": {
+        "layout_type": null,
+        "title": null,
+        "widgets": [
+          {}
+        ]
+      },
       "json": {
         "description": "string",
         "is_read_only": false,
@@ -125,12 +133,12 @@
         "widgets": [
           {
             "definition": {},
-            "id": 123,
+            "id": "integer",
             "layout": {
-              "height": 123,
-              "width": 123,
-              "x": 123,
-              "y": 123
+              "height": "integer",
+              "width": "integer",
+              "x": "integer",
+              "y": "integer"
             }
           }
         ]
@@ -164,6 +172,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -203,12 +212,12 @@
           "widgets": [
             {
               "definition": {},
-              "id": 123,
+              "id": "integer",
               "layout": {
-                "height": 123,
-                "width": 123,
-                "x": 123,
-                "y": 123
+                "height": "integer",
+                "width": "integer",
+                "x": "integer",
+                "y": "integer"
               }
             }
           ]
@@ -233,6 +242,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -272,12 +282,12 @@
           "widgets": [
             {
               "definition": {},
-              "id": 123,
+              "id": "integer",
               "layout": {
-                "height": 123,
-                "width": 123,
-                "x": 123,
-                "y": 123
+                "height": "integer",
+                "width": "integer",
+                "x": "integer",
+                "y": "integer"
               }
             }
           ]
@@ -310,6 +320,13 @@
       }
     },
     "request": {
+      "json_curl": {
+        "layout_type": null,
+        "title": null,
+        "widgets": [
+          {}
+        ]
+      },
       "json": {
         "description": "string",
         "is_read_only": false,
@@ -337,12 +354,12 @@
         "widgets": [
           {
             "definition": {},
-            "id": 123,
+            "id": "integer",
             "layout": {
-              "height": 123,
-              "width": 123,
-              "x": 123,
-              "y": 123
+              "height": "integer",
+              "width": "integer",
+              "x": "integer",
+              "y": "integer"
             }
           }
         ]
