@@ -6,13 +6,13 @@
           "data": [
             {
               "attributes": {
-                "created": "string",
+                "created": "2019-09-19T10:00:00.000Z",
                 "description": "string",
                 "display_name": "string",
                 "display_type": "string",
                 "group_name": "string",
                 "name": "string",
-                "restricted": "boolean"
+                "restricted": false
               },
               "id": "string",
               "type": "string"
@@ -50,8 +50,8 @@
           "data": [
             {
               "attributes": {
-                "created_at": "string",
-                "modified_at": "string",
+                "created_at": "2019-09-19T10:00:00.000Z",
+                "modified_at": "2019-09-19T10:00:00.000Z",
                 "name": "string"
               },
               "id": "string",
@@ -92,8 +92,8 @@
           ],
           "meta": {
             "page": {
-              "total_count": "integer",
-              "total_filtered_count": "integer"
+              "total_count": 123,
+              "total_filtered_count": 123
             }
           }
         },
@@ -119,8 +119,8 @@
         "json": {
           "data": {
             "attributes": {
-              "created_at": "string",
-              "modified_at": "string",
+              "created_at": "2019-09-19T10:00:00.000Z",
+              "modified_at": "2019-09-19T10:00:00.000Z",
               "name": "string"
             },
             "id": "string",
@@ -235,8 +235,8 @@
         "json": {
           "data": {
             "attributes": {
-              "created_at": "string",
-              "modified_at": "string",
+              "created_at": "2019-09-19T10:00:00.000Z",
+              "modified_at": "2019-09-19T10:00:00.000Z",
               "name": "string"
             },
             "id": "string",
@@ -305,8 +305,8 @@
         "json": {
           "data": {
             "attributes": {
-              "created_at": "string",
-              "modified_at": "string",
+              "created_at": "2019-09-19T10:00:00.000Z",
+              "modified_at": "2019-09-19T10:00:00.000Z",
               "name": "string"
             },
             "id": "string",
@@ -392,13 +392,13 @@
           "data": [
             {
               "attributes": {
-                "created": "string",
+                "created": "2019-09-19T10:00:00.000Z",
                 "description": "string",
                 "display_name": "string",
                 "display_type": "string",
                 "group_name": "string",
                 "name": "string",
-                "restricted": "boolean"
+                "restricted": false
               },
               "id": "string",
               "type": "string"
@@ -448,13 +448,13 @@
           "data": [
             {
               "attributes": {
-                "created": "string",
+                "created": "2019-09-19T10:00:00.000Z",
                 "description": "string",
                 "display_name": "string",
                 "display_type": "string",
                 "group_name": "string",
                 "name": "string",
-                "restricted": "boolean"
+                "restricted": false
               },
               "id": "string",
               "type": "string"
@@ -492,13 +492,13 @@
           "data": [
             {
               "attributes": {
-                "created": "string",
+                "created": "2019-09-19T10:00:00.000Z",
                 "description": "string",
                 "display_name": "string",
                 "display_type": "string",
                 "group_name": "string",
                 "name": "string",
-                "restricted": "boolean"
+                "restricted": false
               },
               "id": "string",
               "type": "string"
@@ -548,15 +548,15 @@
           "data": [
             {
               "attributes": {
-                "created_at": "string",
-                "disabled": "boolean",
+                "created_at": "2019-09-19T10:00:00.000Z",
+                "disabled": false,
                 "email": "string",
                 "handle": "string",
                 "icon": "string",
                 "name": "string",
                 "status": "string",
                 "title": "string",
-                "verified": "boolean"
+                "verified": false
               },
               "id": "string",
               "relationships": {
@@ -594,11 +594,11 @@
               "type": "string"
             }
           ],
-          "included": "array",
+          "included": [],
           "meta": {
             "page": {
-              "total_count": "integer",
-              "total_filtered_count": "integer"
+              "total_count": 123,
+              "total_filtered_count": 123
             }
           }
         },
@@ -645,15 +645,15 @@
           "data": [
             {
               "attributes": {
-                "created_at": "string",
-                "disabled": "boolean",
+                "created_at": "2019-09-19T10:00:00.000Z",
+                "disabled": false,
                 "email": "string",
                 "handle": "string",
                 "icon": "string",
                 "name": "string",
                 "status": "string",
                 "title": "string",
-                "verified": "boolean"
+                "verified": false
               },
               "id": "string",
               "relationships": {
@@ -691,11 +691,11 @@
               "type": "string"
             }
           ],
-          "included": "array",
+          "included": [],
           "meta": {
             "page": {
-              "total_count": "integer",
-              "total_filtered_count": "integer"
+              "total_count": 123,
+              "total_filtered_count": 123
             }
           }
         },
@@ -730,15 +730,15 @@
           "data": [
             {
               "attributes": {
-                "created_at": "string",
-                "disabled": "boolean",
+                "created_at": "2019-09-19T10:00:00.000Z",
+                "disabled": false,
                 "email": "string",
                 "handle": "string",
                 "icon": "string",
                 "name": "string",
                 "status": "string",
                 "title": "string",
-                "verified": "boolean"
+                "verified": false
               },
               "id": "string",
               "relationships": {
@@ -776,11 +776,11 @@
               "type": "string"
             }
           ],
-          "included": "array",
+          "included": [],
           "meta": {
             "page": {
-              "total_count": "integer",
-              "total_filtered_count": "integer"
+              "total_count": 123,
+              "total_filtered_count": 123
             }
           }
         },

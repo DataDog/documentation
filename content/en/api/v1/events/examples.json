@@ -7,13 +7,13 @@
             {
               "aggregation_key": "string",
               "alert_type": "info",
-              "date_happened": "integer",
-              "device_name": "array",
+              "date_happened": 123,
+              "device_name": [],
               "host": "string",
-              "id": "integer",
+              "id": 123,
               "payload": "{}",
               "priority": "normal",
-              "related_event_id": "integer",
+              "related_event_id": 123,
               "source_type_name": "string",
               "tags": [
                 "environment:test"
@@ -56,13 +56,13 @@
           "event": {
             "aggregation_key": "string",
             "alert_type": "info",
-            "date_happened": "integer",
-            "device_name": "array",
+            "date_happened": 123,
+            "device_name": [],
             "host": "string",
-            "id": "integer",
+            "id": 123,
             "payload": "{}",
             "priority": "normal",
-            "related_event_id": "integer",
+            "related_event_id": 123,
             "source_type_name": "string",
             "tags": [
               "environment:test"
@@ -88,11 +88,11 @@
       "json": {
         "aggregation_key": "string",
         "alert_type": "info",
-        "date_happened": "integer",
-        "device_name": "array",
+        "date_happened": 123,
+        "device_name": [],
         "host": "string",
         "priority": "normal",
-        "related_event_id": "integer",
+        "related_event_id": 123,
         "source_type_name": "string",
         "tags": [
           "environment:test"
@@ -110,13 +110,13 @@
           "event": {
             "aggregation_key": "string",
             "alert_type": "info",
-            "date_happened": "integer",
-            "device_name": "array",
+            "date_happened": 123,
+            "device_name": [],
             "host": "string",
-            "id": "integer",
+            "id": 123,
             "payload": "{}",
             "priority": "normal",
-            "related_event_id": "integer",
+            "related_event_id": 123,
             "source_type_name": "string",
             "tags": [
               "environment:test"

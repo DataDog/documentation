@@ -5,8 +5,8 @@
       "json": [
         [
           {
-            "duration": "integer",
-            "error": "integer",
+            "duration": 123,
+            "error": 123,
             "meta": {
               "<any-key>": "string"
             },
@@ -14,11 +14,11 @@
               "<any-key>": "number"
             },
             "name": "span_name",
-            "parent_id": "integer",
+            "parent_id": 123,
             "resource": "/home",
             "service": "service_name",
             "span_id": "987654321",
-            "start": "integer",
+            "start": 123,
             "trace_id": "123456789",
             "type": "web"
           }

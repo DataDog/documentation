@@ -31,7 +31,7 @@
       "json": {
         "end": "1579098130",
         "message": "Muting this host for a test!",
-        "override": "false"
+        "override": false
       },
       "html": "<div class=\"table-request schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">end</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>POSIX timestamp in seconds when the host is unmuted. If omitted, the host remains muted until explicitly unmuted.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">message</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Message to associate with the muting of this host.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">override</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>If true and the host is already muted, replaces existing host mute settings.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
     }
@@ -84,7 +84,7 @@
               "aws_name": "mycoolhost-1",
               "host_name": "i-deadbeef",
               "id": "123456",
-              "is_muted": "false",
+              "is_muted": false,
               "last_reported_time": "1565000000",
               "meta": {
                 "nixV": [
@@ -96,7 +96,7 @@
                 "iowait": "3.2",
                 "load": "0.5"
               },
-              "mute_timeout": "integer",
+              "mute_timeout": 123,
               "name": "i-hostname",
               "sources": [
                 "aws"
@@ -106,7 +106,7 @@
                   "test.example.com.host"
                 ]
               },
-              "up": "true"
+              "up": true
             }
           ],
           "total_matching": "1",
@@ -140,8 +140,8 @@
     "responses": {
       "200": {
         "json": {
-          "total_active": "integer",
-          "total_up": "integer"
+          "total_active": 123,
+          "total_up": 123
         },
         "html": "<div class=\"table-response schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">total_active</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Total number of active host (UP and ???) reporting to Datadog.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">total_up</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Number of host that are UP and reporting to Datadog.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
       },
