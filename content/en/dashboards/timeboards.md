@@ -59,7 +59,7 @@ Left click on any dashboard timeseries graph to open an options menu:
 
 | Option                 | Description                                                   |
 |------------------------|---------------------------------------------------------------|
-| Annotate this graph    | Write a comment or notify members of your team about a graph. |
+| Annotate this graph    | Write a comment that will enter the event feed or notify members of your team about a graph. |
 | View in full screen    | View the graph in [full screen mode][12].                     |
 | Copy tags to clipboard | Copy the tags to your clipboard that display on hover.        |
 | View related processes | Jump to the [Live Processes][13] page scoped to your graph.   |
