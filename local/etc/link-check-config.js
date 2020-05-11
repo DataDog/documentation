@@ -1,19 +1,19 @@
 module.exports = {
     production: {
         serverUrl: 'https://docs.datadoghq.com/',
-        slackChannel: '#link-checker-test'
+        slackChannel: '#guac-ops'
     },
     preview: {
         serverUrl: 'https://docs-staging.datadoghq.com/',
-        slackChannel: '#link-checker-test'
+        slackChannel: '#guac-ops'
     },
     staging: {
-        serverUrl: 'https://docs-staging.datadoghq.com/zach/update-linkchecker/account_management/billing/',
-        slackChannel: '#link-checker-test'
+        serverUrl: 'https://docs-staging.datadoghq.com/',
+        slackChannel: '#guac-ops'
     },
     local: {
         serverUrl: 'http://localhost:1313/',
-        slackChannel: '#link-checker-test'
+        slackChannel: '#guac-ops'
     },
     linkCheckOptions: {
         filterLevel: 3,
@@ -22,8 +22,6 @@ module.exports = {
         honorRobotExclusions: false,
         brokenLinkSlackLimit: 5,
         excludedKeywords: [
-            '**/fr*',
-            '**/ja*',
             '*wtime=*',
             '**/signup*',
             '*app.datadoghq*',

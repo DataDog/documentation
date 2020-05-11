@@ -75,31 +75,31 @@ link_checks_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
-# missing_tms_preview:
-#   <<: *base_template
-#   stage: post-deploy
-#   environment: "preview"
-#   variables:
-#     GIT_STRATEGY: none
-#   dependencies:
-#     - build_preview
-#   script:
-#     - check_missing_tms
-#   only:
-#     - /.+?\/[a-zA-Z0-9_-]+/
+missing_tms_preview:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    GIT_STRATEGY: none
+  dependencies:
+    - build_preview
+  script:
+    - check_missing_tms
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
 
-# index_algolia_preview:
-#   <<: *base_template
-#   stage: post-deploy
-#   environment: "preview"
-#   script:
-#     - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docs_datadoghq_preview.json
-#     - index_docsearch_algolia_preview
-#   dependencies:
-#     - build_preview
-#   when: manual
-#   only:
-#     - /.+?\/[a-zA-Z0-9_-]+/
+index_algolia_preview:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  script:
+    - cp ./local/etc/algolia/docs_datadoghq_preview.json /etc/docs_datadoghq_preview.json
+    - index_docsearch_algolia_preview
+  dependencies:
+    - build_preview
+  when: manual
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
 
 # ================== live ================== #
 build_live:
@@ -155,7 +155,9 @@ test_live_link_checks:
   variables:
     URL: ${LIVE_DOMAIN}
   script:
-    - node /etc/node_modules/link-checker/dd-link-checker.js -e live -c ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+    - node /etc/node_modules/link-checker/dd-link-checker.js --env live --configFilePath ${CI_PROJECT_DIR}/local/etc/link-check-config.js
+  after_script:
+    - if [ -e ${CI_PROJECT_DIR}/broken-links.csv  ]; then aws s3 cp --content-type "text/csv; charset=utf-8" --acl "public-read" --cache-control "no-cache" ${CI_PROJECT_DIR}/broken-links.csv s3://origin-static-assets/documentation/brokenlinks/${CI_COMMIT_REF_NAME}/; fi
   only:
     - master
 
