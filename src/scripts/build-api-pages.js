@@ -300,6 +300,9 @@ const outputValueType = (valueType) => {
       return "[]";
     case "object":
       return "{}";
+    case "boolean":
+      return "false";
+    case "integer":
     default:
       return `"${valueType}"`;
   }

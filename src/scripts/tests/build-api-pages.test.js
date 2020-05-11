@@ -698,7 +698,7 @@ describe(`filterExampleJson`, () => {
       "type": "object"
     };
     const actual = bp.filterExampleJson("request", mockSchema);
-    const expected =  {"data": [{"attributes": {"created": "string","description": "string","display_name": "string","display_type": "string","group_name": "string","name": "string","restricted": "boolean"},"id": "string"}]};
+    const expected =  {"data": [{"attributes": {"created": "string","description": "string","display_name": "string","display_type": "string","group_name": "string","name": "string","restricted": false},"id": "string"}]};
     expect(actual).toEqual(expected);
   });
 
@@ -858,6 +858,27 @@ describe(`filterExampleJson`, () => {
     };
     const actual = bp.filterExampleJson('request', mockSchema);
     const expected = {'notify_list': []};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show boolean false when no example boolean to show', () => {
+    const mockSchema = {
+      "description": "Embeddable graph.",
+      "properties": {
+        "revoked": {
+          "description": "Boolean flag for whether or not the embed is revoked.",
+          "type": "boolean"
+        },
+        "shared_by": {
+          "description": "ID of the use who shared the embed.",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {"revoked": false, "shared_by": "integer"};
     expect(actual).toEqual(expected);
   });
 
