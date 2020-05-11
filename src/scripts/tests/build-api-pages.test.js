@@ -188,10 +188,10 @@ describe(`filterJson `, () => {
 
 describe(`outputExample `, () => {
 
-  it('should return false boolean as string with false', () => {
+  it('should show boolean without quotes', () => {
     const mockExample = false;
     const actual = bp.outputExample(mockExample);
-    const expected = '"false"';
+    const expected = 'false';
     expect(actual).toEqual(expected);
   });
 
@@ -378,7 +378,7 @@ describe(`filterExampleJson`, () => {
       "type": "object"
     };
     const actual = bp.filterExampleJson("request", mockSchema);
-    const expected = {"access_key_id": "string", "account_id": "1234567", "account_specific_namespace_rules": {"<any-key>": "false"}, "excluded_regions": ["us-east-1","us-west-2"], "filter_tags": ["<KEY>:<VALUE>"], "host_tags": ["<KEY>:<VALUE>"], "role_name": "DatadogAWSIntegrationRole", "secret_access_key": "string"};
+    const expected = {"access_key_id": "string", "account_id": "1234567", "account_specific_namespace_rules": {"<any-key>": false}, "excluded_regions": ["us-east-1","us-west-2"], "filter_tags": ["<KEY>:<VALUE>"], "host_tags": ["<KEY>:<VALUE>"], "role_name": "DatadogAWSIntegrationRole", "secret_access_key": "string"};
     expect(actual).toEqual(expected);
   });
 
@@ -631,7 +631,7 @@ describe(`filterExampleJson`, () => {
       "type": "object"
     };
     const actual = bp.filterExampleJson("request", mockSchema);
-    const expected = {"error": {"code": "string", "details": "array", "message": "string"}};
+    const expected = {"error": {"code": "string", "details": [], "message": "string"}};
     expect(actual).toEqual(expected);
   });
 
@@ -821,6 +821,43 @@ describe(`filterExampleJson`, () => {
     };
     const actual = bp.filterExampleJson('request', mockSchema);
     const expected = {'metric':'string', 'length': 'string'};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show boolean without quotes', () => {
+    const mockSchema = {
+      "description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure.",
+      "properties": {
+        "is_read_only": {
+          "default": false,
+          "description": "Whether this dashboard is read-only. If True, only the author and admins can make changes to it.",
+          "example": false,
+          "type": "boolean"
+        }
+      }
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {'is_read_only': false};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show array as []', () => {
+    const mockSchema = {
+      "description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure.",
+      "properties": {
+        "notify_list": {
+          "description": "List of handles of users to notify when changes are made to this dashboard.",
+          "items": {
+            "description": "User handles.",
+            "type": "string"
+          },
+          "nullable": true,
+          "type": "array"
+        }
+      }
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {'notify_list': []};
     expect(actual).toEqual(expected);
   });
 

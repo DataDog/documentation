@@ -266,7 +266,7 @@ const filterJson = (actionType, data, parentExample = null) => {
           let ex = '';
           // bool causes us to not go in here so check for it
           ex = outputExample(chosenExample, key);
-          ex = ex || `"${value.type}"`;
+          ex = ex || outputValueType(value.type);
           jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
         }
       }
@@ -285,6 +285,23 @@ const filterJson = (actionType, data, parentExample = null) => {
       return jsondata.slice(0, -1);
   } else {
       return jsondata;
+  }
+};
+
+/**
+ * Takes a value.type string and returns appropriate representation
+ * e.g array should be []
+ * @param {object} valueType - string of type
+ * returns formatted string
+ */
+const outputValueType = (valueType) => {
+  switch(valueType) {
+    case "array":
+      return "[]";
+    case "object":
+      return "{}";
+    default:
+      return `"${valueType}"`;
   }
 };
 
@@ -323,8 +340,12 @@ const outputExample = (chosenExample, inputkey) => {
         });
       }
     } else {
-      // string or bool
-      ex = `"${chosenExample}"`;
+      if (typeof chosenExample === "boolean"){
+        // we don't want quotes on a bool
+        ex = `${chosenExample}`;
+      } else {
+        ex = `"${chosenExample}"`;
+      }
     }
   }
   return ex;
