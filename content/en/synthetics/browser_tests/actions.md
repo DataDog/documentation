@@ -3,7 +3,7 @@ title: Browser Test Actions
 kind: documentation
 description: Record Actions for a Synthetics Browser Test
 further_reading:
-- link: "synthetics/browser_tests/advanced_options"
+- link: "/synthetics/browser_tests/advanced_options/"
   tag: "Documentation"
   text: "Learn how to configure advanced options for Actions"
 ---
@@ -164,13 +164,53 @@ You can run browser tests within other browser tests, up to two levels of nestin
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
 
+## HTTP requests
+
+You can run HTTP requests as part of your browser tests. 
+
+{{< img src="synthetics/browser_tests/recorder_http_requests.png" alt="HTTP Request step"  style="width:70%;" >}}
+
+### Setup
+
+To define your HTTP request:
+
+1. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
+2. Optionally specify **Advanced Options**:
+     * Follow redirects: Toggle to have the monitored endpoint follow up to ten redirects.
+     * Allow insecure certificates: Toggle to have your HTTP test continue the connection even if there is an error when validating the certificate.
+     * Headers: Defined headers override the default browser headers.
+     * Authentication: HTTP basic authentication with username and password
+     * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`). **Note**: The request body is limited to a maximum size of 50 kilobytes.
+     * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+3. Click **Test URL** to test your request configuration. This results in a preview showing response data.
+
+{{< img src="synthetics/browser_tests/http_request.png" alt="Make HTTP Request"  style="width:80%;" >}}
+
+### Add assertions
+
+Optionally, you can base your step success on assertions about the defined HTTP request:
+
+| Type          | Value type                 | Operator                                                                      |
+|---------------|----------------------------|-------------------------------------------------------------------------------|
+| Status Code   | _Integer_                  | `is`, `is not`                                                                 |
+| Response time | _Integer (ms)_             | `lessThan`                                                                     |
+| Headers       | _String_ <br> _[Regex][7]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
+| Body          | _String_ <br> _[Regex][7]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
+
+If you click on **Test URL**, then the basic assertions are automatically filled:
+
+- `Response time` _lessThan_ 2000 ms
+- `Header content-type` _is_ "returned value"
+- `Status code` _is_ "returned value"
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/advanced_options
+[1]: /synthetics/browser_tests/advanced_options/
 [2]: /synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [4]: /synthetics/browser_tests/#create-a-variable
-[5]: /synthetics/settings
+[5]: /synthetics/settings/
 [6]: /synthetics/browser_tests/advanced_options/#subtests
+[7]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

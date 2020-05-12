@@ -73,14 +73,14 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/amazon_eks/images/amazon_eks_dashboard.png
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html
-[3]: https://docs.datadoghq.com/fr/integrations/kubernetes
-[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
-[5]: https://docs.datadoghq.com/fr/integrations/amazon_ec2
-[6]: https://docs.datadoghq.com/fr/integrations/amazon_elb
+[3]: https://docs.datadoghq.com/fr/integrations/kubernetes/
+[4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
+[5]: https://docs.datadoghq.com/fr/integrations/amazon_ec2/
+[6]: https://docs.datadoghq.com/fr/integrations/amazon_elb/
 [7]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/kubernetes/#log-collection-setup
 [8]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/kubernetes/#container-installation
 [9]: https://docs.datadoghq.com/fr/logs/log_collection/docker/#option-2-container-installation
-[10]: https://docs.datadoghq.com/fr/help
+[10]: https://docs.datadoghq.com/fr/help/
 [11]: https://www.datadoghq.com/blog/announcing-eks
 [12]: https://www.datadoghq.com/blog/eks-cluster-metrics
 [13]: https://docs.datadoghq.com/fr/integrations/amazon_eks_fargate/

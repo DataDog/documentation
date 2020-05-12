@@ -99,5 +99,5 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/json/datadog_collection.json
 [4]: https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments
-[5]: /ja/api/#organizations
-[6]: /ja/api
+[5]: /ja/api/v1/organizations/
+[6]: /ja/api/

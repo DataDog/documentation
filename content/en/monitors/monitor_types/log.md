@@ -2,13 +2,13 @@
 title: Logs Monitor
 kind: documentation
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -84,9 +84,9 @@ Include a sample of 10 logs in the alert notification:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs
+[1]: /logs/
 [2]: https://app.datadoghq.com/monitors#create/log
-[3]: /logs/indexes
-[4]: /logs/explorer/search
-[5]: /logs/explorer/facets
-[6]: /monitors/notifications
+[3]: /logs/indexes/
+[4]: /logs/explorer/search/
+[5]: /logs/explorer/facets/
+[6]: /monitors/notifications/

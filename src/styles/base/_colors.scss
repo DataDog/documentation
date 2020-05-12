@@ -53,15 +53,18 @@ $blue-ribbon:           #3345FF;
 $onahau:                #D3ECFF;
 $mine-shaft:            #333333;
 
-// Custom colors for corpsite specific color coding
-$dept-engineering:      #fd6420;
-$dept-marketing:        #28ce74;
-$dept-sales:            #fc645e;
-$dept-ga:               #23d1d0;
-$dept-salesops:         #775cd0;
-$dept-solutions:        #1454c5;
-$timeline-blue:         #4F00FF;
+// Custom colors for API Actions
+$api-post:              #297A3F;
+$api-delete:            #B72A3A;
+$api-get:               #26759C;
+$api-put:               #5F3B83;
+$api-patch:             #906623;
 
+$bg-api-post:           #D9F3E0;
+$bg-api-delete:         #FBD6DB;
+$bg-api-get:            #EBF5FA;
+$bg-api-put:            #D6C9E3;
+$bg-api-patch:          #FFF0D4;
 
 // Color variables for helper classes
 $color-var: (
@@ -105,23 +108,20 @@ $color-var: (
   warning:              $brand-warning,
   danger:               $brand-danger,
   neue:                 $brand-neue,
-  docker-red:           #EF3A54,
-  docker-orange:        #FF6D23,
-  docker-yellow:        #FFC145,
-  docker-green:         #ADEB0A,
-  docker-emerald:       #00E6A7,
-  docker-blue:          #00D5DF,
-  docker-skyblue:       #1CAFFF,
-  docker-darkblue:      #4163FF,
-  docker-old-green:     #E3EF6A,
-  docker-old-emerald:   #3CE8BA,
-  docker-old-emerald-2: #2BE2D4,
-  docker-old-skyblue:   #1CAFFF,
-  docker-old-purple:    #4daee2,
   orch-green:           #9DDB16,
   white-translucent:    rgba(255, 255, 255, 0.3),
   black-translucent:    rgba(0, 0, 0, 0.3),
-  transparent:          transparent
+  transparent:          transparent,
+  api-post:             $api-post,
+  api-delete:           $api-delete,
+  api-get:              $api-get,
+  api-put:              $api-put,
+  api-patch:            $api-patch,
+  bg-api-post:          $bg-api-post,
+  bg-api-delete:        $bg-api-delete,
+  bg-api-get:           $bg-api-get,
+  bg-api-put:           $bg-api-put,
+  bg-api-patch:         $bg-api-patch,
 );
 
 @each $name, $color in $color-var {
@@ -145,17 +145,6 @@ $color-var: (
 @each $name, $color in $color-var {
   .bg-#{$name} {
     background-color: $color !important;
-  }
-}
-
-@each $name, $color in $color-var {
-  .docker-btn-#{$name} {
-    border-color: $color;
-    color: $color;
-    &:hover{
-        background: $color;
-        color: #fff;
-    }
   }
 }
 

@@ -264,4 +264,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/oracle/metadata.csv
-[11]: https://docs.datadoghq.com/fr/help
+[11]: https://docs.datadoghq.com/fr/help/

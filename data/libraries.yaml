@@ -26,6 +26,11 @@ Classic:
       dogstatsd: true
       notes: Also supports APM.
       authors: Yoshifumi Kawai
+    - name: DatadogStatsD
+      link: https://github.com/verdie-g/DatadogStatsD
+      dogstatsd: true
+      notes: High Performance DogStatsD Client for .NET Core
+      authors: Gregoire Verdier
   - Clojure:
     - name: clojure-statsd-client
       link: https://github.com/unbounce/clojure-dogstatsd-client
@@ -67,6 +72,12 @@ Classic:
       official: true
       dogstatsd: true
       authors: Datadog
+    - name: datadog-api-client-go
+      link: https://github.com/DataDog/datadog-api-client-go
+      official: true
+      api: true
+      authors: Datadog
+      notes: Client library in beta and subject to change.
     - name: godspeed
       link: https://github.com/theckman/godspeed
       dogstatsd: true
@@ -91,6 +102,12 @@ Classic:
       official: true
       dogstatsd: true
       authors: Datadog
+    - name: datadog-api-client-java
+      link: https://github.com/DataDog/datadog-api-client-java
+      official: true
+      api: true
+      authors: Datadog
+      notes: Client library in beta and subject to change.
     - name: Lassie
       link: https://github.com/bazaarvoice/lassie
       api: true
@@ -276,6 +293,10 @@ Tracing:
       official: true
       authors: Datadog
       notes: gem is called 'ddtrace'.
+    - name: ddtrace-rb-method-wrapper
+      link: https://github.com/brandfolder/ddtrace-rb-method-wrapper
+      authors: Brandfolder
+      notes: gem is called `ddtrace-method-wrapper`
   - Scala:
     - name: scala-opentracing
       link: https://github.com/Colisweb/scala-opentracing

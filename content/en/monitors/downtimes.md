@@ -1,96 +1,107 @@
 ---
 title: Downtimes
 kind: documentation
-description: "Schedule downtimes to ensure your Datadog monitors do not alert during specific time periods."
+description: "Schedule downtimes for your Datadog monitors to prevent alerts during specific time periods."
 further_reading:
-- link: "monitors/monitor_types"
+- link: "/monitors/monitor_types/"
   tag: "Documentation"
-  text: "Learn how to create a monitor"
-- link: "monitors/notifications"
+  text: "Create a monitor"
+- link: "/monitors/notifications/"
   tag: "Documentation"
-  text: "Configure your monitor notifications"
-- link: "monitors/manage_monitor"
+  text: "Configure monitor notifications"
+- link: "/monitors/manage_monitor/"
   tag: "Documentation"
-  text: "Manage your monitors"
+  text: "Manage monitors"
 ---
 
 Schedule downtimes for system shutdowns, off-line maintenance, or upgrades without triggering your monitors.
 
-## What happens to a monitor when it is muted (or has a scheduled downtime)?
+## Schedule
 
-You can schedule downtimes and/or mute your Datadog monitors so that they do not alert at specific times when you do not want them to.
+To schedule a [monitor downtime][1] in Datadog use the main navigation: _Monitors –> Manage Downtime_. Then, click the **Schedule Downtime** button in the upper right.
 
-Monitors trigger events when they change state between `ALERT`, `WARNING` (if enabled), `RESOLVED`, and `NO DATA` (if enabled). If a monitor has been silenced either by a downtime or muting, then any transition from `RESOLVED` to another state does **not** trigger an event or notifications.
+### Choose what to silence
 
-**Note**: Muting or un-muting a monitor with the UI does not delete scheduled downtimes associated with that monitor. For that, use the Manage Downtimes feature or the [API][1].
+{{< tabs >}}
+{{% tab "By Monitor Name" %}}
+
+Search or use the drop-down to choose monitors to silence. If the field is left empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag.
+
+{{% /tab %}}
+{{% tab "By Monitor Tags" %}}
+
+Schedule a downtime based on one or more [monitor tags][1]. You must select at least one tag with a limit of 32 tags. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
+
+[1]: /monitors/manage_monitor/#monitor-tags
+{{% /tab %}}
+{{< /tabs >}}
+
+If you choose to silence monitors constrained by scope, click **Preview affected monitors** to see the monitors included. Any monitors created or edited after the downtime is scheduled are automatically included in the downtime if they match the scope.
+
+**Note**: If a multi-alert monitor is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi-alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
+
+### Schedule
+
+{{< tabs >}}
+{{% tab "One Time" %}}
+
+Set a one time downtime by entering the start date, time, and time zone. Optionally, set an end date and time.
+
+{{% /tab %}}
+{{% tab "Recurring" %}}
+
+Recurring downtimes are useful for recurring maintenance windows.
+
+Set a recurring downtime by entering the start date, time, time zone, repeat, and duration. Optionally, specify an end date or number of occurrences.
+
+When a single downtime of a recurring downtime ends, the single downtime is cancelled and a new downtime is created with the same constraints and updated start and end times. **Note**: The original creator is associated to all the newly created downtimes.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Add a message
+
+Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting][2] and Datadog's `@-notification` syntax.
+
+### Notify your team
+
+Notify your team by specifying team members or send the message to a service [integration][3].
+
+## Manage
+
+The Manage Downtime page displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Use the _Filter downtimes_ text box to search your downtimes.
+
+### History
+
+Downtime history is viewable on the [Monitor Status][4] page as overlaid on the group transition history, and the [Event stream][5] by searching for `tags:audit,downtime`, or a specific downtime by ID with `tags:audit,downtime_id:<DOWNTIME_ID>`.
+
+### Muting
+
+Monitors trigger events when they change between possible states: `ALERT`, `WARNING`, `RESOLVED`, and `NO DATA`. When a monitor is muted or has a scheduled downtime, transitions from `RESOLVED` to another state do **not** trigger events or notifications.
 
 {{< img src="monitors/downtimes/downtime_on_alert.png" alt="downtime on alert"  style="width:80%;">}}
 
-If a monitor transitions states during a downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, it does **NOT** trigger a notification. However, it does trigger a recovery event once data returns for that scope or the monitor returns to an `OK` state.
+**Note**: Muting or un-muting a monitor with the UI does not delete scheduled downtimes associated with the monitor. To edit or delete a downtime, use the [Manage Downtimes][1] page or the [API][6].
 
-This behavior is designed to prevent spammy `NO DATA` state alerts when using the *Autoresolve* feature. If you would prefer that the monitor trigger a `NO DATA` state event at the time that the silencing expires, [reach out to the Datadog support team][2] to request that this feature is enabled for your account. This only affects instances when a monitor exits a downtime period in a `NO DATA` state.
+If a monitor transitions states during a downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`) and remains in that state once a scheduled downtime expires, it does **NOT** trigger a notification. However, it does trigger the recovery event when data returns for the scope or the monitor returns to an `OK` state.
+
+This behavior is designed to prevent `NO DATA` alerts when using the *Autoresolve* feature. If you prefer the monitor to trigger a `NO DATA` event at the time the silencing expires, reach out to the [Datadog support team][7] to have the feature enabled for your account. **Note**: This only affects instances when a monitor exits a downtime period in a `NO DATA` state.
 
 If a monitor triggers an alert **before** a downtime and recovers **during** that downtime, then a recovery event is sent during the downtime (if this is the first recovery during that downtime).
 
 ### Monitor report
 
-All alerted states are included on the [weekly monitor report][3] even if the monitor is in a downtime.
-
-## Manage Downtime
-
-Navigate to the [Manage Downtime][4] page by hovering over **Monitors** in the main menu, then select **Manage Downtime**.
-
-{{< img src="monitors/downtimes/downtime-nav.png" alt="downtime-nav"  >}}
-
-The Manage Downtime page displays a list of active and scheduled downtimes. Select a downtime to view more details about the host and monitors affected.
-
-{{< img src="monitors/downtimes/downtime-manage.png" alt="downtime-manage"  style="width:80%;">}}
-
-## Schedule Downtime
-
-To schedule downtime, click the "Schedule Downtime" button in the upper right.
-
-1. Choose what to silence.
-   {{< img src="monitors/downtimes/choose-what-to-silence.png" alt="downtime-silence"  style="width:80%;">}}
-   **Silencing by monitor name**
-   You must select at least one monitor. If you choose to leave the selection field empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag. Refer to the [scope section][5] of the Graphing Primer using JSON for further information about scope.
-   **Silencing by monitor tags**
-   You can select one or more [monitor tags][6] to schedule downtimes on, but you must select at least one using this method. There is a limit of 32 tags, and each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.  <br/><br/>
-   For either method, if you choose to silence all monitors constrained by a scope, clicking *Preview affected monitors* shows which monitors are affected. Any monitors within your scope that are created or edited after the downtime is scheduled are also silenced. Note that if a multi-alert is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi-alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
-
-2. Set a schedule.
-  {{< img src="monitors/downtimes/downtime-schedule.png" alt="downtime-schedule"  style="width:80%;">}}
-  You can set a start date and time or leave the field empty to immediately start the downtime. You may also set a [repeating schedule to accommodate regularly scheduled downtimes](#recurring-downtimes).
-
-3. Add an optional message to notify your team
-  {{< img src="monitors/downtimes/downtime-notify.png" alt="downtime-notify"  style="width:80%;">}}
-  Enter a message to notify your team about this downtime. The message field allows standard [markdown formatting][7] as well as Datadog's @-notification syntax. The *Notify your team* field allows you to specify team members or send the message to a service [integration][8].
-
-**Note**: Create the downtime before you create the monitor or before you mute the group.
-
-## Recurring Downtimes
-
-Recurring downtimes allow you to create a downtime that is started and stopped at a recurring interval or pattern.
-
-One use case for this would be if you have regularly scheduled maintenance windows and want to suppress what might become a noisy monitor due to your changes.
-
-When a recurring downtime ends, the downtime is cancelled and a new downtime with the same constraints (with updated start and end times) is created in a rolling pattern.
-
-**Note**: The original creator is associated to all of these newly created downtimes.
-
-## Searching Downtimes
-
-Downtime history can be seen both on the Monitor Status Page as overlaid on the group transition history, as well as in the Event Stream by searching for `tags:audit,downtime`, or a specific downtime by ID with `tags:audit,downtime_id:<DOWNTIME_ID>`
+All alerted states are included on the [weekly monitor report][8] even if the monitor is in a downtime.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/?lang=python#cancel-monitor-downtime
-[2]: /help
-[3]: /account_management/#preferences
-[4]: https://app.datadoghq.com/monitors#/downtime
-[5]: /dashboards/graphing_json/#scope
-[6]: /monitors/manage_monitor/#monitor-tags
-[7]: http://daringfireball.net/projects/markdown/syntax
-[8]: https://app.datadoghq.com/account/settings#integrations
+[1]: https://app.datadoghq.com/monitors#/downtime
+[2]: http://daringfireball.net/projects/markdown/syntax
+[3]: /integrations/#cat-notification
+[4]: /monitors/monitor_status/
+[5]: /events/#event-stream
+[6]: /api/v1/downtimes/#cancel-a-downtime
+[7]: /help/
+[8]: /account_management/#preferences

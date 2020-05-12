@@ -213,28 +213,100 @@
   z-index:3;
   transform: translateX(11px);
   margin-top: 15px;
-  margin-bottom: 7px;
+  margin-bottom: 13px;
+  @media (min-width: 992px) {
+    margin-top: 0;
+  }
 
-  .algolia-autocomplete{
-    width: 100%;
 
-    .docssearch-input, .docssearch-input-m{
-      border-radius:0;
-      transition-duration: 0.125s;
-      width: 90%;
-      background-color: transparent;
-      border: 0px;
-      border-bottom: 1px solid #ced4da;;
 
+  .search-input-container {
+    position: relative;
+
+    .docssearch-input, .docssearch-input-mobile {
+      height: 32px;
+      padding: 10px 18px 10px 35px;
+      border: none !important;
+      box-sizing: border-box;
+      appearance: none;
+      background-color: white !important;
+      
       &:focus{
-        border: 0px;
-        border-bottom: 1px solid #632CA6;
-        outline: none;
+          border: none;
+          outline: none;
+          box-shadow: none;
       }
+
       &:lang(ja) {
         font-size: 15px;
         line-height: 28px;
       }
     }
+
+    .docssearch-input {
+      width: 200px;
+      @media (min-width: 1200px) {
+        width: 250px;
+      }
+    }
+    .docssearch-input-mobile {
+      width: 100%;
+    }
+
+    .search-input-icon {
+      // height: 16px;
+      // width: 16px;
+      position: absolute;
+      top: 50%;
+      left: 16px;
+      transform: translateY(-50%);
+      fill: #e4e4e4;
+      pointer-events: none;
+      z-index: 1;
+    }
+
   }
+
+
+
+
+
+
+
+
+
+  .algolia-autocomplete{
+    width: 100%;
+  }
+
+  // overriding Algolias default styles
+  // .docssearch-input, .docssearch-input-m{
+
+  //     background-color: white !important;
+  //     border: none !important;
+  //     border-radius:0 !important;
+  //     width: 90%;
+  //     height: 32px;
+  //     font-size: 16px;
+  //     padding: 10px 10px 10px 14px;
+
+
+  //     // border-radius:0;
+  //     // transition-duration: 0.125s;
+  //     // width: 90%;
+  //     // background-color: transparent;
+  //     // border: 0px;
+  //     // border-bottom: 1px solid #ced4da;;
+
+  //     &:focus{
+  //       border: 0px;
+  //       border-bottom: 1px solid #632CA6;
+  //       outline: none;
+  //     }
+  //     &:lang(ja) {
+  //       font-size: 15px;
+  //       line-height: 28px;
+  //     }
+  //   }
+  // }
 }

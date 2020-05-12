@@ -10,22 +10,22 @@ aliases:
   - /tracing/trace_search_and_analytics/search/
   - /tracing/search
 further_reading:
-- link: "tracing/setup/"
+- link: "/tracing/setup/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "tracing/visualization/services_list/"
+- link: "/tracing/visualization/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "tracing/visualization/service"
+- link: "/tracing/visualization/service/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "tracing/visualization/resource"
+- link: "/tracing/visualization/resource/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "tracing/visualization/trace"
+- link: "/tracing/visualization/trace/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-- link: "tracing/app_analytics/analytics"
+- link: "/tracing/app_analytics/analytics/"
   tag: "Documentation"
   text: "Analytics on your APM data at infinite cardinality"
 ---
@@ -211,9 +211,9 @@ Use Facets to filter on your Traces. The search bar and url automatically reflec
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations
+[1]: /tracing/setup/java/#integrations
 [2]: /tagging/#tags-best-practices
-[3]: /dashboards/guide/custom_time_frames
+[3]: /dashboards/guide/custom_time_frames/
 [4]: /tracing/visualization/#services
 [5]: /tracing/guide/adding_metadata_to_spans/
 [6]: /tracing/app_analytics/#configure-additional-services-optional

@@ -85,7 +85,7 @@ To forward your metrics to Datadog using this new VPC endpoint, configure `pvtli
 1. Update the `dd_url` parameter in the [Agent `datadog.yaml` configuration file][1]:
 
     ```yaml
-    dd_url: pvtlink.agent.datadoghq.com
+    dd_url: https://pvtlink.agent.datadoghq.com
     ```
 
 2. [Restart your Agent][2] to send metrics to Datadog through AWS PrivateLink.
@@ -154,5 +154,5 @@ For more information, see the [Amazon VPC peering documentation][3].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/privatelink/
-[2]: /help
+[2]: /help/
 [3]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html

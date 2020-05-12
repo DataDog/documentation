@@ -12,7 +12,6 @@
 
 // vendor
 @import "vendor/chroma-styles.css";
-@import "vendor/pygments.scss";
 
 // docsearch
 @import "main_docsearch";
@@ -30,9 +29,11 @@
 @import "pages/404";
 @import "pages/home";
 @import "pages/help";
+@import "pages/security_monitoring";
 
 // Components
 @import "components/announcement_banner";
+@import "components/choice-select-box";
 @import "components/codenav";
 @import "components/footer";
 @import "components/global-modals";

@@ -95,14 +95,16 @@ Installing more than one integration is a matter of adding the configuration inf
 
 ## Autodetected integrations
 
-If you set up [process collection][27], Datadog autodetects technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][2].
+If you set up [process collection][27], Datadog autodetects technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][2]:
+
+{{< img src="getting_started/integrations/ad_integrations.png" alt="Autodetected integrations" >}}
 
 Each integration has one of two status types:
 
 - **+ Detected**: This integration is not enabled on any host(s) running it.
 - **✓ Partial Visibility**: This integration is enabled on some, but not all relevant hosts are running it.
 
-Hosts that are running the integration, but where the integration is not enabled, can be found in the Hosts tab of the integrations tile.
+Hosts that are running the integration, but where the integration is not enabled, can be found in the **Hosts** tab of the integrations tile.
 
 ## Security practices
 
@@ -141,45 +143,45 @@ If you continue to have problems, reach out to [our awesome Support team][36].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/new_check_howto
+[1]: /developers/integrations/new_check_howto/
 [2]: https://app.datadoghq.com/account/settings
-[3]: /integrations/slack
-[4]: /integrations/amazon_web_services
-[5]: /integrations/azure
-[6]: /integrations/pagerduty
-[7]: /api
-[8]: /integrations/node
-[9]: /integrations/python
+[3]: /integrations/slack/
+[4]: /integrations/amazon_web_services/
+[5]: /integrations/azure/
+[6]: /integrations/pagerduty/
+[7]: /api/
+[8]: /integrations/node/
+[9]: /integrations/python/
 [10]: /developers/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [13]: /developers/integrations/new_check_howto/#developer-toolkit
-[14]: /agent/guide/integration-management
+[14]: /agent/guide/integration-management/
 [15]: https://github.com/DataDog/dd-agent
-[16]: /account_management/api-app-keys
+[16]: /account_management/api-app-keys/
 [17]: https://app.datadoghq.com/account/settings#api
-[18]: /integrations
+[18]: /integrations/
 [19]: https://app.datadoghq.com/account/settings#agent
 [20]: https://app.datadoghq.com/account/settings#agent/docker
 [21]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [22]: /agent/guide/agent-commands/#restart-the-agent
 [23]: /developers/integrations/new_check_howto/#param-specification
 [24]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[25]: /tagging
+[25]: /tagging/
 [26]: /agent/guide/agent-commands/#agent-status-and-information
 [27]: /infrastructure/process/
-[28]: /security
-[29]: /metrics/explorer
-[30]: /dashboards
-[31]: /monitors
-[32]: /logs
-[33]: /tracing
-[34]: /synthetics
+[28]: /security/
+[29]: /metrics/explorer/
+[30]: /dashboards/
+[31]: /monitors/
+[32]: /logs/
+[33]: /tracing/
+[34]: /synthetics/
 [35]: /agent/troubleshooting/
-[36]: /help
+[36]: /help/
 [37]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [38]: https://app.datadoghq.com/event/stream
 [39]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
-[40]: /developers/metrics
-[41]: /developers/metrics/custom_metrics
-[42]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui
+[40]: /developers/metrics/
+[41]: /developers/metrics/custom_metrics/
+[42]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/

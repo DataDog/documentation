@@ -72,7 +72,7 @@ Create a new [Synthetics API test][3] upon `http://example.com/`:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics
+[1]: /synthetics/
 [2]: /dashboards/widgets/slo/
 [3]: https://app.datadoghq.com/synthetics/list
 [4]: https://dd-corpsite.datadoghq.com/synthetics/create

@@ -7,21 +7,21 @@ aliases:
   - /logs/languages
   - /integrations/windows_event_log/
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Discover how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/live_tail"
+- link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Datadog live tail functionality"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "See how to explore your logs"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
-  text: "Logging without limit"
+  text: "Logging Without Limits*"
 ---
 
 Follow the [Datadog Agent installation instructions][1] to start forwarding logs alongside your metrics and traces. The Agent can [tail log files][2] or [listen for logs sent over UDP / TCP][2], and you can configure it to [filter out logs][3], [scrub sensitive data][3], or  aggregate [multi line logs][4]. Finally choose your application language below in order to get dedicated logging best practices.
@@ -75,11 +75,13 @@ Select your Cloud provider below to see how to automatically collect your logs a
 Any custom process or [logging library][18] able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs. Choose below which Datadog site you want to forward logs to:
 
 {{< tabs >}}
-{{% tab "HTTP US Site" %}}
+{{% tab "HTTP" %}}
+
+{{< site-region region="us" >}}
 
 The public endpoint is `http-intake.logs.datadoghq.com`. The API key must be added either in the path or as a header, for instance:
 
-```
+```bash
 curl -X POST https://http-intake.logs.datadoghq.com/v1/input \
      -H "Content-Type: text/plain" \
      -H "DD-API-KEY: <API_KEY>" \
@@ -88,13 +90,14 @@ curl -X POST https://http-intake.logs.datadoghq.com/v1/input \
 
 For more examples with JSON formats, multiple logs per request, or the use of query parameters, refer to the [Datadog Log HTTP API documentation][1].
 
-[1]: https://docs.datadoghq.com/api/?lang=bash#send-logs-over-http
-{{% /tab %}}
-{{% tab "HTTP EU Site" %}}
+[1]: /api/v1/logs/#send-logs
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 The public endpoint is `http-intake.logs.datadoghq.eu`. The API key must be added either in the path or as a header, for instance:
 
-```
+```bash
 curl -X POST https://http-intake.logs.datadoghq.eu/v1/input \
      -H "Content-Type: text/plain" \
      -H "DD-API-KEY: <API_KEY>" \
@@ -103,9 +106,13 @@ curl -X POST https://http-intake.logs.datadoghq.eu/v1/input \
 
 For more examples with JSON formats, multiple logs per request, or the use of query parameters, refer to the [Datadog Log HTTP API documentation][1].
 
-[1]: https://docs.datadoghq.com/api/?lang=bash#send-logs-over-http
+[1]: /api/v1/logs/#send-logs
+
+{{< /site-region >}}
 {{% /tab %}}
-{{% tab "TCP US Site" %}}
+{{% tab "TCP" %}}
+
+{{< site-region region="us" >}}
 
 The secure TCP endpoint is `intake.logs.datadoghq.com:10516` (or port `10514` for insecure connections).
 
@@ -139,8 +146,10 @@ telnet intake.logs.datadoghq.com 10514
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
-{{% /tab %}}
-{{% tab "TCP EU Site" %}}
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
 
 The secure TCP endpoint is `tcp-intake.logs.datadoghq.eu:443` (or port `1883` for insecure connections).
 
@@ -174,6 +183,8 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://app.datadoghq.com/logs/livetail
+
+{{< /site-region >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -182,10 +193,9 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 Datadog provides logging endpoints for both SSL-encrypted connections and unencrypted connections.
 Use the encrypted endpoint when possible. The Datadog Agent uses the encrypted endpoint to send logs to Datadog. More information is available in the [Datadog security documentation][19].
 
-Endpoints that can be used to send logs to Datadog:
+{{< site-region region="us" >}}
 
-{{< tabs >}}
-{{% tab "US Site" %}}
+Endpoints that can be used to send logs to Datadog US region:
 
 | Endpoints for SSL encrypted connections | Port    | Description                                                                                                                                                                 |
 |-----------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -202,8 +212,12 @@ Endpoints that can be used to send logs to Datadog:
 | `intake.logs.datadoghq.com`          | `10514` | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an unecrypted TCP connection. |
 
 [1]: /agent/logs/#send-logs-over-https
-{{% /tab %}}
-{{% tab "EU Site" %}}
+
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+Endpoints that can be used to send logs to Datadog EU region:
 
 | Endpoints for SSL encrypted connections | Port  | Description                                                                                                                                                                 |
 |-----------------------------------------|-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -220,8 +234,8 @@ Endpoints that can be used to send logs to Datadog:
 | `tcp-intake.logs.datadoghq.eu`       | `1883` | Used by custom forwarders to send logs in raw, Syslog, or JSON format format over an unecrypted TCP connection. |
 
 [1]: /agent/logs/#send-logs-over-https
-{{% /tab %}}
-{{< /tabs >}}
+
+{{< /site-region >}}
 
 ## Reserved attributes
 
@@ -268,25 +282,27 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+<br>
+\*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /agent/logs
+[1]: /agent/logs/
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#multi-line-aggregation
-[5]: /integrations/rsyslog
-[6]: /integrations/syslog_ng
-[7]: /integrations/nxlog
+[5]: /integrations/rsyslog/
+[6]: /integrations/syslog_ng/
+[7]: /integrations/nxlog/
 [8]: /integrations/fluentd/#log-collection
 [9]: /integrations/logstash/#log-collection
-[10]: /logs/processing
-[11]: /logs/processing/parsing
-[12]: /logs/explorer/facets
-[13]: /agent/docker/log
-[14]: /agent/kubernetes/management
-[15]: /agent/kubernetes/integrations
+[10]: /logs/processing/
+[11]: /logs/processing/parsing/
+[12]: /logs/explorer/facets/
+[13]: /agent/docker/log/
+[14]: /agent/guide/autodiscovery-management/
+[15]: /agent/kubernetes/integrations/
 [16]: /agent/basic_agent_usage/kubernetes/#log-collection-setup
 [17]: /integrations/amazon_lambda/#log-collection
 [18]: /logs/log_collection/#how-to-get-the-most-of-your-application-logs
 [19]: /security/logs/#information-security
-[20]: /logs/explorer/patterns
-[21]: /logs/explore
+[20]: /logs/explorer/patterns/
+[21]: /logs/explore/

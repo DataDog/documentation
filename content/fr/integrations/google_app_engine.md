@@ -110,6 +110,6 @@ L'intégration Google App Engine n'inclut aucun check de service.
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 [1]: https://cloud.google.com/appengine/kb
-[2]: https://docs.datadoghq.com/fr/libraries
+[2]: https://docs.datadoghq.com/fr/libraries/
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/google_app_engine/google_app_engine_metadata.csv
-[4]: https://docs.datadoghq.com/fr/help
+[4]: https://docs.datadoghq.com/fr/help/

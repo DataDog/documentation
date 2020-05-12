@@ -2,19 +2,19 @@
 title: Docker Integrations Autodiscovery
 kind: documentation
 further_reading:
-- link: "agent/docker/log"
+- link: "/agent/docker/log/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "/agent/docker/apm"
+- link: "/agent/docker/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
-- link: "/agent/docker/prometheus"
+- link: "/agent/docker/prometheus/"
   tag: "Documentation"
   text: "Collect your Prometheus metrics"
-- link: "/agent/guide/autodiscovery-management"
+- link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Limit data collection to a subset of containers only"
-- link: "/agent/docker/tag"
+- link: "/agent/docker/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
 ---
@@ -48,6 +48,8 @@ Each tab in sections below shows a different way to apply integration templates 
 
 {{< tabs >}}
 {{% tab "Docker" %}}
+
+To automatically enable Autodiscovery over Docker containers, mount `/var/run/docker.sock` into the Containerized Agent. On Windows, mount `\\.\pipe\docker_engine`.
 
 Integrations templates can be stored as Docker labels. With Autodiscovery, the Agent detects if it's running on Docker and automatically searches all labels for integration templates. Autodiscovery expects labels to look like the following examples:
 
@@ -120,7 +122,7 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 
 **Note**: You don't need to set up the `<INTEGRATIONS_NAME>` since the Agent infers it from the file name directly.
 
-[1]: /agent/guide/ad_identifiers
+[1]: /agent/guide/ad_identifiers/
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
@@ -177,8 +179,8 @@ With the key-value store enabled as a template source, the Agent looks for templ
 
 **Note**: To apply a specific configuration to a given container, Autodiscovery identifies containers by **image** when using the key-value stores by trying to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].image`.
 
-[1]: /integrations/consul
-[2]: /agent/guide/agent-commands
+[1]: /integrations/consul/
+[2]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -239,8 +241,8 @@ instances:
 **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][3].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
-[2]: /agent/guide/ad_identifiers
-[3]: /agent/faq/template_variables
+[2]: /agent/guide/ad_identifiers/
+[3]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
@@ -259,7 +261,7 @@ Notice that each of the three values is a list. Autodiscovery assembles list ite
 
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `redis` OR `redis:latest`.
 
-[1]: /agent/faq/template_variables
+[1]: /agent/faq/template_variables/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -319,7 +321,7 @@ instances:
 * Finally, mount the host `conf.d/` folder to the containerized Agent `conf.d/` folder.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[2]: /agent/guide/ad_identifiers
+[2]: /agent/guide/ad_identifiers/
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
@@ -338,13 +340,13 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kubernetes/integrations
+[1]: /agent/kubernetes/integrations/
 [2]: /getting_started/integrations/#configuring-agent-integrations
 [3]: /integrations/#cat-autodiscovery
-[4]: /integrations/ceph
+[4]: /integrations/ceph/
 [5]: /integrations/varnish/#autodiscovery
-[6]: /integrations/postfix
+[6]: /integrations/postfix/
 [7]: /integrations/cassandra/#agent-check-cassandra-nodetool
-[8]: /integrations/gunicorn
+[8]: /integrations/gunicorn/
 [9]: /integrations/apache/#setup
 [10]: /integrations/http_check/#setup

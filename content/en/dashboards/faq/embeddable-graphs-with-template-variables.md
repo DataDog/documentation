@@ -4,7 +4,7 @@ kind: faq
 aliases:
     - /graphing/faq/embeddable-graphs-with-template-variables
 further_reading:
-- link: "/dashboards/sharing"
+- link: "/dashboards/sharing/"
   tag: "Documentation"
   text: "Shared Graphs"
 ---

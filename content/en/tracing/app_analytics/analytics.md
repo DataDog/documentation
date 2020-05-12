@@ -8,22 +8,22 @@ aliases:
   - /tracing/visualization/analytics
   - /tracing/trace_search_and_analytics/analytics/
 further_reading:
-- link: "tracing/setup/"
+- link: "/tracing/setup/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "tracing/visualization/services_list/"
+- link: "/tracing/visualization/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "tracing/visualization/service"
+- link: "/tracing/visualization/service/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "tracing/visualization/resource"
+- link: "/tracing/visualization/resource/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "tracing/visualization/trace"
+- link: "/tracing/visualization/trace/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-- link: "tracing/app_analytics/search"
+- link: "/tracing/app_analytics/search/"
   tag: "Documentation"
   text: "Global search of all your traces with tags"
 ---
@@ -133,11 +133,11 @@ Export [App Analytics][1] from the Trace search or build them directly in your [
 [2]: /tracing/visualization/#apm-event
 [3]: /tracing/visualization/#services
 [4]: /tracing/app_analytics/search/#facets
-[5]: /tagging
+[5]: /tagging/
 [6]: /tracing/app_analytics/search/#measures
 [7]: /tracing/visualization/#trace
-[8]: /monitors/monitor_types/apm
-[9]: /dashboards/timeboard
-[10]: /help
-[11]: /dashboards
-[12]: /dashboards/widgets/timeseries
+[8]: /monitors/monitor_types/apm/
+[9]: /dashboards/timeboard/
+[10]: /help/
+[11]: /dashboards/
+[12]: /dashboards/widgets/timeseries/
