@@ -1842,6 +1842,9 @@ api_v1:
   - name: Update a pipeline
     parent: Logs Pipelines
     url: update-a-pipeline
+  - name: Logs Restriction Queries
+    url: /api/v1/logs-restriction-queries/
+    identifier: Logs Restriction Queries
   - name: Metrics
     url: /api/v1/metrics/
     identifier: Metrics
@@ -2228,6 +2231,39 @@ api_v2:
   - name: Logs Pipelines
     url: /api/v2/logs-pipelines/
     identifier: Logs Pipelines
+  - name: Logs Restriction Queries
+    url: /api/v2/logs-restriction-queries/
+    identifier: Logs Restriction Queries
+  - name: List restriction queries
+    parent: Logs Restriction Queries
+    url: list-restriction-queries
+  - name: Create a restriction query
+    parent: Logs Restriction Queries
+    url: create-a-restriction-query
+  - name: Get restriction query for a given role
+    parent: Logs Restriction Queries
+    url: get-restriction-query-for-a-given-role
+  - name: Get all restriction queries for a given user
+    parent: Logs Restriction Queries
+    url: get-all-restriction-queries-for-a-given-user
+  - name: Delete a restriction query
+    parent: Logs Restriction Queries
+    url: delete-a-restriction-query
+  - name: Get a restriction query
+    parent: Logs Restriction Queries
+    url: get-a-restriction-query
+  - name: Update a restriction query
+    parent: Logs Restriction Queries
+    url: update-a-restriction-query
+  - name: Revoke role from a restriction query
+    parent: Logs Restriction Queries
+    url: revoke-role-from-a-restriction-query
+  - name: List roles for a restriction query
+    parent: Logs Restriction Queries
+    url: list-roles-for-a-restriction-query
+  - name: Grant role to a restriction query
+    parent: Logs Restriction Queries
+    url: grant-role-to-a-restriction-query
   - name: Metrics
     url: /api/v2/metrics/
     identifier: Metrics

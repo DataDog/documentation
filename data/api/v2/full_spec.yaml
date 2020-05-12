@@ -22,6 +22,27 @@ components:
         default: 10
         format: int64
         type: integer
+    RestrictionQueryID:
+      description: The ID of the restriction query.
+      in: path
+      name: restriction_query_id
+      required: true
+      schema:
+        type: string
+    RestrictionQueryRoleID:
+      description: The ID of the role.
+      in: path
+      name: role_id
+      required: true
+      schema:
+        type: string
+    RestrictionQueryUserID:
+      description: The ID of the user.
+      in: path
+      name: user_id
+      required: true
+      schema:
+        type: string
     RoleID:
       description: The ID of the role.
       in: path
@@ -341,6 +362,12 @@ components:
             $ref: '#/components/schemas/RelationshipToPermissionData'
           type: array
       type: object
+    RelationshipToRole:
+      description: Relationship to role.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToRoleData'
+      type: object
     RelationshipToRoleData:
       description: Relationship to role object.
       properties:
@@ -393,6 +420,172 @@ components:
       properties:
         page:
           $ref: '#/components/schemas/Pagination'
+      type: object
+    RestrictionQueryAttributes:
+      description: Attributes of the restriction query.
+      properties:
+        created_at:
+          description: Creation time of the restriction query.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last restriction query modification.
+          format: date-time
+          readOnly: true
+          type: string
+        restriction_query:
+          description: The query that defines the restriction. Only the content matching
+            the query can be returned.
+          type: string
+      type: object
+    RestrictionQueryCreateAttributes:
+      description: Attributes of the created restriction query.
+      properties:
+        restriction_query:
+          description: The restriction query.
+          type: string
+        type:
+          default: logs_restriction_queries
+          description: Restriction query resource type.
+          type: string
+      type: object
+    RestrictionQueryCreateData:
+      description: Data related to the creation of a restriction query.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RestrictionQueryCreateAttributes'
+      type: object
+    RestrictionQueryCreatePayload:
+      description: Create a restriction query.
+      properties:
+        data:
+          $ref: '#/components/schemas/RestrictionQueryCreateData'
+      type: object
+    RestrictionQueryListResponse:
+      description: Response containing information about multiple restriction queries.
+      properties:
+        data:
+          description: Array of returned restriction queries.
+          items:
+            $ref: '#/components/schemas/RestrictionQueryWithoutRelationships'
+          type: array
+      type: object
+    RestrictionQueryRelationships:
+      description: Relationships of the restriction query object.
+      properties:
+        roles:
+          $ref: '#/components/schemas/RelationshipToRoles'
+      type: object
+    RestrictionQueryResponseIncludedItem:
+      description: An object related to a restriction query.
+      discriminator:
+        mapping:
+          roles: '#/components/schemas/RestrictionQueryRole'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/RestrictionQueryRole'
+      type: object
+    RestrictionQueryRole:
+      description: Partial role object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RestrictionQueryRoleAttribute'
+        id:
+          description: ID of the role.
+          type: string
+        type:
+          default: roles
+          description: Role resource type.
+          readOnly: true
+          type: string
+      type: object
+    RestrictionQueryRoleAttribute:
+      description: Attributes of the role for a restriction query.
+      properties:
+        name:
+          description: The role name.
+          type: string
+      type: object
+    RestrictionQueryRolesResponse:
+      description: Response containing information about roles attached to a restriction
+        query.
+      properties:
+        data:
+          description: Array of roles.
+          items:
+            $ref: '#/components/schemas/RestrictionQueryRole'
+          type: array
+      type: object
+    RestrictionQueryUpdateAttributes:
+      description: Attributes of the edited restriction query.
+      properties:
+        restriction_query:
+          description: The restriction query.
+          type: string
+        type:
+          default: logs_restriction_queries
+          description: Restriction query resource type.
+          type: string
+      type: object
+    RestrictionQueryUpdateData:
+      description: Data related to the update of a restriction query.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RestrictionQueryUpdateAttributes'
+      type: object
+    RestrictionQueryUpdatePayload:
+      description: Update a restriction query.
+      properties:
+        data:
+          $ref: '#/components/schemas/RestrictionQueryUpdateData'
+      type: object
+    RestrictionQueryWithRelationships:
+      description: Restriction query object returned by the API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RestrictionQueryAttributes'
+        id:
+          description: ID of the restriction query.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/RestrictionQueryRelationships'
+        type:
+          default: logs_restriction_queries
+          description: Restriction queries type.
+          readOnly: true
+          type: string
+      type: object
+    RestrictionQueryWithRelationshipsResponse:
+      description: Response containing information about a single restriction query.
+      properties:
+        data:
+          $ref: '#/components/schemas/RestrictionQueryWithRelationships'
+        included:
+          description: Array of objects related to the restriction query.
+          items:
+            $ref: '#/components/schemas/RestrictionQueryResponseIncludedItem'
+          type: array
+      type: object
+    RestrictionQueryWithoutRelationships:
+      description: Restriction query object returned by the API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RestrictionQueryAttributes'
+        id:
+          description: ID of the restriction query.
+          type: string
+        type:
+          default: logs_restriction_queries
+          description: Restriction queries type.
+          readOnly: true
+          type: string
+      type: object
+    RestrictionQueryWithoutRelationshipsResponse:
+      description: Response containing information about a single restriction query.
+      properties:
+        data:
+          $ref: '#/components/schemas/RestrictionQueryWithoutRelationships'
       type: object
     Role:
       description: Role object returned by the API.
@@ -976,6 +1169,358 @@ paths:
       tags:
       - Dashboard Lists
       x-codegen-request-body-name: body
+  /api/v2/logs/config/restriction_queries:
+    get:
+      description: Returns all restriction queries, including their names and IDs.
+      operationId: ListRestrictionQueries
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryListResponse'
+          description: OK
+        '403':
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: List restriction queries
+      tags:
+      - Logs Restriction Queries
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new restriction query for your organization.
+      operationId: CreateRestrictionQuery
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestrictionQueryCreatePayload'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryWithoutRelationshipsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Create a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/restriction_queries/role/{role_id}:
+    get:
+      description: Get restriction query for a given role.
+      operationId: GetRoleRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryRoleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Get restriction query for a given role
+      tags:
+      - Logs Restriction Queries
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/restriction_queries/user/{user_id}:
+    get:
+      description: Get all restriction queries for a given user.
+      operationId: ListUserRestrictionQueries
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryUserID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Get all restriction queries for a given user
+      tags:
+      - Logs Restriction Queries
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/restriction_queries/{restriction_query_id}:
+    delete:
+      description: Deletes a restriction query.
+      operationId: DeleteRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Delete a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a restriction query in the organization specified by the restriction
+        query's `restriction_query_id`.
+      operationId: GetRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryWithRelationshipsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Edit a restriction query.
+      operationId: UpdateRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestrictionQueryUpdatePayload'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryWithoutRelationshipsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Update a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/restriction_queries/{restriction_query_id}/roles:
+    delete:
+      description: Removes a role from a restriction query.
+      operationId: RemoveRoleFromRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToRole'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Revoke role from a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Returns all roles that have a given restriction query.
+      operationId: ListRestrictionQueryRoles
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryRolesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: List roles for a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Adds a role to a restriction query.
+      operationId: AddRoleToRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToRole'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Grant role to a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -1768,6 +2313,26 @@ tags:
   name: Logs Indexes
 - description: '[See API version 1](/api/v1/logs-pipelines/).'
   name: Logs Pipelines
+- description: "**Note: This endpoint is in public beta. If you have any feedback,\
+    \ contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read\
+    \ access on log data at all, you must grant the `logs_read_data` permission.\n\
+    From there you can limit what data a role grants read access to by associating\
+    \ a Restriction Query with that role.\n\nA Restriction Query is a logs query that\
+    \ restricts which logs the `logs_read_data` permission grants read access to.\n\
+    For users whose roles have Restriction Queries, any log query they make only returns\
+    \ those log events that also match\none of their Restriction Queries. This is\
+    \ true whether the user queries log events from any log-related feature, including\n\
+    the log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction\
+    \ Queries currently only support use of the following components of log events:\n\
+    \n- Reserved attributes\n- The log message\n- Tags\n\nThe recommended way to manage\
+    \ restricted read access on log data for customers with large or complicated organizational\
+    \ structures\nis to add a team tag to log events to indicate which team(s) own(s)\
+    \ them, and then to scope Restriction Queries to the appropriate\nvalues of the\
+    \ team tag. Tags can be applied to log events in many ways, and a log event can\
+    \ have multiple tags with the same key (like team)\nand different values\u2014\
+    in this way the same log event can be visible to roles whose restriction queries\
+    \ are scoped to different team values."
+  name: Logs Restriction Queries
 - description: '[See API version 1](/api/v1/metrics/).'
   name: Metrics
 - description: '[See API version 1](/api/v1/monitors/).'
