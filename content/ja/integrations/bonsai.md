@@ -4,9 +4,9 @@ assets:
   monitors: {}
   service_checks: /assets/service_checks.json
 categories:
-  - データストア
+  - data store
 creates_events: false
-ddtype: クローラー
+ddtype: crawler
 dependencies:
   - 'https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md'
 display_name: Bonsai
@@ -32,9 +32,9 @@ supported_os:
 
 Bonsai クラスターのリクエストレベルのメトリクスを追跡すると、以下のことができます。
 
-* クラスターのパフォーマンスを視覚化できます。
-* 検索のパフォーマンスをアプリケーションのパフォーマンスと関連付けることができます。
-* アラートを生成できます。
+- クラスターのパフォーマンスを視覚化できます。
+- 検索のパフォーマンスをアプリケーションのパフォーマンスと関連付けることができます。
+- アラートを生成できます。
 
 ![スナップショット][1]
 
@@ -42,13 +42,11 @@ Bonsai クラスターのリクエストレベルのメトリクスを追跡す�
 
 クラスターを Datadog と統合するには、API キーを bonsai アプリに送信する必要があります。
 
-
 ### 手順 1 - API キーの取得
 
 Datadog で、[Integrations --> API][2] に移動して、API キーをコピーします。
 
 ![スナップショット][3]
-
 
 ### 手順 2 - API キーの送信
 
@@ -74,7 +72,7 @@ Datadog で、[Integrations --> API][2] に移動して、API キーをコピー
 
 メトリクスはクラスターごとにタグ付けされるため、クラスターに基づいて分割できます。タグは次のようになります。
 
-```
+```text
 cluster:my-cluster-slug
 ```
 
@@ -94,7 +92,6 @@ Bonsai インテグレーションには、サービスのチェック機能は�
 
 インフラストラクチャーの監視の詳細および Datadog の全インテグレーションについては、[ブログ記事][9]を参照してください。
 
-
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/snapshot.png
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/copy_key.png
@@ -102,5 +99,5 @@ Bonsai インテグレーションには、サービスのチェック機能は�
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/activate_datadog.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bonsai/images/datadog_activated.png
 [7]: https://github.com/DataDog/integrations-extras/blob/master/bonsai/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help
+[8]: https://docs.datadoghq.com/ja/help/
 [9]: https://www.datadoghq.com/blog
