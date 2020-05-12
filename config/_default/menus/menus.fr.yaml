@@ -1895,6 +1895,9 @@ api_v1:
   - name: Get all service dependencies
     parent: Service Dependencies
     url: get-all-service-dependencies
+  - name: Get one service's dependencies
+    parent: Service Dependencies
+    url: get-one-services-dependencies
   - name: Service Level Objectives
     url: /fr/api/v1/service-level-objectives/
     identifier: Service Level Objectives
