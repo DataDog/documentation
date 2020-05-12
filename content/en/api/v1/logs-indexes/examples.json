@@ -206,6 +206,14 @@
     },
     "request": {
       "json_curl": {
+        "exclusion_filters": [
+          {
+            "filter": {
+              "sample_rate": "1"
+            },
+            "name": null
+          }
+        ],
         "filter": {}
       },
       "json": {

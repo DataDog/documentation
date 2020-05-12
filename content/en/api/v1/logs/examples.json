@@ -47,7 +47,10 @@
     "request": {
       "json_curl": {
         "query": null,
-        "time": {}
+        "time": {
+          "from": null,
+          "to": null
+        }
       },
       "json": {
         "index": "string",

@@ -54,7 +54,10 @@
     "request": {
       "json_curl": {
         "dashboards": [
-          {}
+          {
+            "id": null,
+            "type": null
+          }
         ]
       },
       "json": {
@@ -179,7 +182,10 @@
     "request": {
       "json_curl": {
         "dashboards": [
-          {}
+          {
+            "id": null,
+            "type": null
+          }
         ]
       },
       "json": {
@@ -254,7 +260,10 @@
     "request": {
       "json_curl": {
         "dashboards": [
-          {}
+          {
+            "id": null,
+            "type": null
+          }
         ]
       },
       "json": {

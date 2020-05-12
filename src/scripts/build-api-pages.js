@@ -202,16 +202,24 @@ const isTagMatch = (pathObj, tag) => {
  */
 const filterJson = (actionType, data, parentExample = null, requiredKeys = []) => {
   let jsondata = '';
+  let iterationHasRequiredKeyMatches = false;
+  let childRequiredKeys = [];
 
   if (typeof data === 'object') {
     Object.entries(data).forEach(([key, value]) => {
+
+      if(actionType === "curl") {
+        if(requiredKeys.length <= 0 || !requiredKeys.includes(key)) {
+          iterationHasRequiredKeyMatches = false;
+        } else {
+          iterationHasRequiredKeyMatches = true;
+        }
+      }
 
       if(actionType === "request" && value.readOnly) {
         // skip
       } else if(actionType === "curl" && value.readOnly) {
         // skip
-      } else if(actionType === "curl" && (requiredKeys.length <= 0 || !requiredKeys.includes(key))) {
-        // skip non required fields when curl
       } else {
 
         let prefixType = '';
@@ -232,16 +240,19 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
           if (typeof value.items === 'object') {
             if (value.items.properties) {
               childData = value.items.properties;
+              childRequiredKeys = (value.items.required) ? value.items.required : [];
               prefixType = '[{';
               suffixType = '}]';
             }
           } else if (typeof value.items === 'string') {
+            childRequiredKeys = (value.items.required) ? value.items.required : [];
             if (value.items === '[Circular]') {
               childData = null;
             }
           }
         } else if (typeof value === 'object' && "properties" in value) {
           childData = value.properties;
+          childRequiredKeys = (value.required) ? value.required : [];
           prefixType = '{';
           suffixType = '}';
         } else if (typeof value === 'object' && "additionalProperties" in value) {
@@ -267,7 +278,13 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
         }
 
         if (childData) {
-          jsondata += `"${key}": ${prefixType}${filterJson(actionType, childData, value.example, requiredKeys)}${suffixType},`;
+          const [jstring, childRequiredKeyMatches] = filterJson(actionType, childData, value.example, childRequiredKeys);
+          iterationHasRequiredKeyMatches = iterationHasRequiredKeyMatches || childRequiredKeyMatches;
+          if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
+            // skip output
+          } else {
+            jsondata += `"${key}": ${prefixType}${jstring}${suffixType},`;
+          }
         } else {
           let ex = '';
           // bool causes us to not go in here so check for it
@@ -277,7 +294,11 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
           } else {
             ex = ex || outputValueType(value.type, value.format);
           }
-          jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
+          if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
+
+          } else {
+            jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
+          }
         }
       }
 
@@ -290,11 +311,14 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = []) =
     }
   }
 
+  if(jsondata.length > 0) {
+    iterationHasRequiredKeyMatches = true;
+  }
   const lastChar = jsondata.slice(-1);
   if (lastChar === ',') {
-      return jsondata.slice(0, -1);
+      return [jsondata.slice(0, -1), iterationHasRequiredKeyMatches];
   } else {
-      return jsondata;
+      return [jsondata, iterationHasRequiredKeyMatches];
   }
 };
 
@@ -477,8 +501,9 @@ const filterExampleJson = (actionType, data) => {
     return data.example;
   }
 
+  const [jString, b] = filterJson(actionType, initialData, selectedExample, requiredKeys);
   const output = `${prefix}
-    ${filterJson(actionType, initialData, selectedExample, requiredKeys)}
+    ${jString}
   ${suffix}`.trim();
   let parsed = '';
   try {

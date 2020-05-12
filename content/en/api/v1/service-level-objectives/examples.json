@@ -142,8 +142,15 @@
     "request": {
       "json_curl": {
         "name": null,
+        "query": {
+          "denominator": null,
+          "numerator": null
+        },
         "thresholds": [
-          {}
+          {
+            "target": null,
+            "timeframe": null
+          }
         ],
         "type": null
       },
@@ -467,8 +474,15 @@
     "request": {
       "json_curl": {
         "name": null,
+        "query": {
+          "denominator": null,
+          "numerator": null
+        },
         "thresholds": [
-          {}
+          {
+            "target": null,
+            "timeframe": null
+          }
         ],
         "type": null
       },

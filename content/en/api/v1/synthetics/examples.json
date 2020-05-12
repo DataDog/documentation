@@ -208,7 +208,28 @@
       }
     },
     "request": {
-      "json_curl": {},
+      "json_curl": {
+        "config": {
+          "assertions": [
+            {
+              "operator": null,
+              "type": null
+            }
+          ],
+          "request": {
+            "basicAuth": {
+              "password": null,
+              "username": null
+            }
+          },
+          "variables": [
+            {
+              "name": null,
+              "type": null
+            }
+          ]
+        }
+      },
       "json": {
         "config": {
           "assertions": [
@@ -722,7 +743,28 @@
       }
     },
     "request": {
-      "json_curl": {},
+      "json_curl": {
+        "config": {
+          "assertions": [
+            {
+              "operator": null,
+              "type": null
+            }
+          ],
+          "request": {
+            "basicAuth": {
+              "password": null,
+              "username": null
+            }
+          },
+          "variables": [
+            {
+              "name": null,
+              "type": null
+            }
+          ]
+        }
+      },
       "json": {
         "config": {
           "assertions": [

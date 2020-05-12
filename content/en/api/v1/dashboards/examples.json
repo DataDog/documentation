@@ -101,9 +101,22 @@
     "request": {
       "json_curl": {
         "layout_type": null,
+        "template_variables": [
+          {
+            "name": "host1"
+          }
+        ],
         "title": null,
         "widgets": [
-          {}
+          {
+            "definition": null,
+            "layout": {
+              "height": null,
+              "width": null,
+              "x": null,
+              "y": null
+            }
+          }
         ]
       },
       "json": {
@@ -322,9 +335,22 @@
     "request": {
       "json_curl": {
         "layout_type": null,
+        "template_variables": [
+          {
+            "name": "host1"
+          }
+        ],
         "title": null,
         "widgets": [
-          {}
+          {
+            "definition": null,
+            "layout": {
+              "height": null,
+              "width": null,
+              "x": null,
+              "y": null
+            }
+          }
         ]
       },
       "json": {
