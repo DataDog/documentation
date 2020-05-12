@@ -4132,7 +4132,7 @@ components:
       - SYNTHETICS_ALERT
       - TRACE_ANALYTICS_ALERT
     MonitorUpdateRequest:
-      description: Object describing a monitor.
+      description: Object describing a monitor update request.
       properties:
         created:
           description: Timestamp of the monitor creation.
@@ -4221,14 +4221,7 @@ components:
       description: Create, edit, and manage organizations.
       properties:
         billing:
-          description: A JSON array of billing type.
-          example:
-            type: parent_billing
-          properties:
-            type:
-              description: The type of billing. Only `parent_billing` is supported.
-              type: string
-          type: object
+          $ref: '#/components/schemas/OrganizationBilling'
         created:
           description: Date of the organization creation.
           example: '2019-09-26 17:28:28'
@@ -4327,43 +4320,29 @@ components:
               type: object
           type: object
         subscription:
-          description: A JSON array of subscription type.
-          example:
-            type: pro
-          properties:
-            type:
-              description: The subscription type. Types available are `trial`, `free`,
-                and `pro`.
-              type: string
-          type: object
+          $ref: '#/components/schemas/OrganizationSubscription'
+      type: object
+    OrganizationBilling:
+      description: A JSON array of billing type.
+      example:
+        type: parent_billing
+      properties:
+        type:
+          description: The type of billing. Only `parent_billing` is supported.
+          type: string
       type: object
     OrganizationCreateBody:
       description: Object describing an organization to create.
       properties:
         billing:
-          description: A JSON array of billing type.
-          example:
-            type: parent_billing
-          properties:
-            type:
-              description: The type of billing. Only `parent_billing` is supported.
-              type: string
-          type: object
+          $ref: '#/components/schemas/OrganizationBilling'
         name:
           description: The name of the new child-organization, limited to 32 characters.
           example: New child org
           maximum: 32
           type: string
         subscription:
-          description: A JSON array of subscription type.
-          example:
-            type: pro
-          properties:
-            type:
-              description: The subscription type. Types available are `trial`, `free`,
-                and `pro`.
-              type: string
-          type: object
+          $ref: '#/components/schemas/OrganizationSubscription'
       required:
       - name
       - subscription
@@ -4395,6 +4374,16 @@ components:
       properties:
         org:
           $ref: '#/components/schemas/Organization'
+      type: object
+    OrganizationSubscription:
+      description: Subscription definition.
+      example:
+        type: pro
+      properties:
+        type:
+          description: The subscription type. Types available are `trial`, `free`,
+            and `pro`.
+          type: string
       type: object
     PagerDutyService:
       description: The PagerDuty service that is available for integration with Datadog.
@@ -5268,18 +5257,7 @@ components:
           description: The name of the service level objective object.
           type: string
         query:
-          description: A metric SLI query. **Required if type is `metric`**.
-          properties:
-            denominator:
-              description: A Datadog metric query for total (valid) events.
-              type: string
-            numerator:
-              description: A Datadog metric query for good events.
-              type: string
-          required:
-          - numerator
-          - denominator
-          type: object
+          $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -5307,6 +5285,19 @@ components:
       - name
       - thresholds
       - type
+    ServiceLevelObjectiveQuery:
+      description: A metric SLI query. **Required if type is `metric`**.
+      properties:
+        denominator:
+          description: A Datadog metric query for total (valid) events.
+          type: string
+        numerator:
+          description: A Datadog metric query for good events.
+          type: string
+      required:
+      - numerator
+      - denominator
+      type: object
     ServiceLevelObjectiveRequest:
       description: 'A service level objective object includes a service level indicator,
         thresholds
@@ -5380,18 +5371,7 @@ components:
           description: The name of the service level objective object.
           type: string
         query:
-          description: A metric SLI query. **Required if type is `metric`**.
-          properties:
-            denominator:
-              description: A Datadog metric query for total (valid) events.
-              type: string
-            numerator:
-              description: A Datadog metric query for good events.
-              type: string
-          required:
-          - numerator
-          - denominator
-          type: object
+          $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -6903,16 +6883,7 @@ components:
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
-          description: Define widget style.
-          properties:
-            line_type:
-              $ref: '#/components/schemas/WidgetLineType'
-            line_width:
-              $ref: '#/components/schemas/WidgetLineWidth'
-            palette:
-              description: Color palette to apply to the widget.
-              type: string
-          type: object
+          $ref: '#/components/schemas/WidgetRequestStyle'
       type: object
     ToplistWidgetDefinition:
       description: The top list visualization enables you to display a list of Tag
@@ -6968,16 +6939,7 @@ components:
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
-          description: Define widget style.
-          properties:
-            line_type:
-              $ref: '#/components/schemas/WidgetLineType'
-            line_width:
-              $ref: '#/components/schemas/WidgetLineWidth'
-            palette:
-              description: Color palette to apply to the widget.
-              type: string
-          type: object
+          $ref: '#/components/schemas/WidgetRequestStyle'
       type: object
     UsageFargateHour:
       description: Number of Fargate tasks run and hourly usage.
@@ -7656,7 +7618,7 @@ components:
           type: array
       type: object
     UsageSyntheticsHour:
-      description: Number of Synthetics API tests run for each hour for a given organization.
+      description: The number of synthetics tests run for each hour for a given organization.
       properties:
         check_calls_count:
           description: Contains the number of Synthetics API tests run.
@@ -7837,15 +7799,7 @@ components:
           example: WEBHOOK_NAME
           type: string
         payload:
-          description: 'If `null`, uses default payload.
-
-            If given a JSON payload, the webhook will return the payload
-
-            specified by the given payload.
-
-            [Using those variables](https://docs.datadoghq.com/integrations/webhooks/#usage).'
-          nullable: true
-          type: object
+          $ref: '#/components/schemas/WebhooksIntegrationPayload'
         url:
           description: URL of the webhook.
           example: https://example.com/webhook
@@ -7911,6 +7865,16 @@ components:
       x-enum-varnames:
       - JSON
       - FORM
+    WebhooksIntegrationPayload:
+      description: 'If `null`, uses the default payload.
+
+        If given a JSON payload, the webhook returns the payload
+
+        specified by the given payload.
+
+        [Webhooks variable usage](https://docs.datadoghq.com/integrations/webhooks/#usage).'
+      nullable: true
+      type: object
     WebhooksIntegrationUpdateRequest:
       description: 'Update request of a Webhooks integration object.
 
@@ -7936,15 +7900,7 @@ components:
           example: WEBHOOK_NAME
           type: string
         payload:
-          description: 'If `null`, uses default payload.
-
-            If given a JSON payload, the webhook will return the payload
-
-            specified by the given payload.
-
-            [Using those variables](https://docs.datadoghq.com/integrations/webhooks/#usage).'
-          nullable: true
-          type: object
+          $ref: '#/components/schemas/WebhooksIntegrationPayload'
         url:
           description: URL of the webhook.
           example: https://example.com/webhook
@@ -8437,6 +8393,17 @@ components:
       - WHITE_ON_RED
       - WHITE_ON_YELLOW
       - YELLOW_ON_WHITE
+    WidgetRequestStyle:
+      description: Define request widget style.
+      properties:
+        line_type:
+          $ref: '#/components/schemas/WidgetLineType'
+        line_width:
+          $ref: '#/components/schemas/WidgetLineWidth'
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
+      type: object
     WidgetServiceSummaryDisplayFormat:
       description: Number of columns to display.
       enum:
