@@ -3,6 +3,8 @@ title: Monitor API Options
 kind: guide
 --- 
 
+## Common options 
+
 - **`silenced`** dictionary of scopes to timestamps or `None`. Each scope is muted until the given POSIX timestamp or forever if the value is `None`. Default: **None**
         Examples:
         - To mute the alert completely: `{'*': None}`
@@ -20,7 +22,7 @@ kind: guide
         - True: `[Triggered on {host:h1}] Monitor Title`
         - False: `[Triggered] Monitor Title`
 
-### Anomaly Options
+## Anomaly Options
 
 _These options only apply to anomaly monitors and are ignored for other monitor types._
 
@@ -31,7 +33,7 @@ _These options only apply to anomaly monitors and are ignored for other monitor 
 
 Example: `{'threshold_windows': {'recovery_window': 'last_15m', 'trigger_window': 'last_15m'}}`
 
-### Metric Alert Options
+## Metric Alert Options
 
 _These options only apply to metric alerts._
 
@@ -41,7 +43,7 @@ Example: `{'critical': 90, 'warning': 80,  'critical_recovery': 70, 'warning_rec
 
 - **`evaluation_delay`** Time (in seconds) to delay evaluation, as a non-negative integer. For example, if the value is set to 300 (5min), the timeframe is set to last_5m and the time is 7:00, the monitor evaluates data from 6:50 to 6:55. This is useful for AWS CloudWatch and other backfilled metrics to ensure the monitor always has data during evaluation.
 
-### Service Check Options
+## Service Check Options
 
 _These options only apply to service checks and are ignored for other monitor types._
 
@@ -49,7 +51,7 @@ _These options only apply to service checks and are ignored for other monitor ty
 
 Example: `{'ok': 1, 'critical': 1, 'warning': 1}`
     
-### Logs Alert Options
+## Logs Alert Options
     
 _These options only apply to logs alerts._
 
