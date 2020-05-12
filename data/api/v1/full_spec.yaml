@@ -15549,6 +15549,8 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/processing/
   name: Logs Pipelines
+- description: '[Check API version 2](/api/v2/logs-restriction-queries/).'
+  name: Logs Restriction Queries
 - description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can\
     \ be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period\n\
     \n**Note**: A graph can only contain a set number of points\nand as the timeframe\
