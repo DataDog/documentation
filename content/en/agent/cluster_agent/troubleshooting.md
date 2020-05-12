@@ -8,13 +8,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/autodiscovery/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks/"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
-- link: "agent/kubernetes/daemonset_setup"
+- link: "/agent/kubernetes/daemonset_setup/"
   tag: "Documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "agent/kubernetes/integrations"
+- link: "/agent/kubernetes/integrations/"
   tag: "Documentation"
   text: "Custom Integrations"
 - link: "https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting"
@@ -222,9 +222,9 @@ The flare command generates a zip file containing the `custom-metrics-provider.l
 
 If the metric's flag `Valid` is set to `false`, the metric is not considered in the HPA pipeline.
 
-### Describing the HPA manfest
+### Describing the HPA manifest
 
-If you see the following mesage when describing the HPA manifest:
+If you see the following message when describing the HPA manifest:
 
 ```text
 Conditions:

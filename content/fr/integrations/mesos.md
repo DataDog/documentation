@@ -15,23 +15,25 @@ Ce check recueille des métriques pour les masters Mesos. Si vous cherchez à re
 
 Ce check recueille des métriques des masters Mesos pour :
 
-* les ressources du cluster ;
-* les slaves enregistrés, actifs, inactifs, connectés, déconnectés, etc. ;
-* le nombre de tâches échouées, terminées, en cours d'exécution, etc. ;
-* le nombre de frameworks actifs, inactifs, connectés ou déconnectés ;
+- les ressources du cluster ;
+- les slaves enregistrés, actifs, inactifs, connectés, déconnectés, etc. ;
+- le nombre de tâches échouées, terminées, en cours d'exécution, etc. ;
+- le nombre de frameworks actifs, inactifs, connectés ou déconnectés ;
 
 et bien plus encore.
+
 ## Implémentation
 
 ### Installation
+
 L'installation se fait de la même façon que vous utilisiez Mesos avec ou sans DC/OS. Exécutez le conteneur datadog-agent sur chacun de vos nœuds Mesos Master :
 
-```
+```shell
 docker run -d --name datadog-agent \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v /proc/:/host/proc/:ro \
   -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-  -e DD_API_KEY=<VOTRE_CLÉ_API_DATADOG> \
+  -e DD_API_KEY= \
   -e MESOS_MASTER=true \
   -e MARATHON_URL=http://leader.mesos:8080 \
   datadog/agent:latest
@@ -51,19 +53,19 @@ L'Agent Datadog >6.0 recueille des logs à partir de vos conteneurs. Vous avez 
 
 Ajoutez ces variables supplémentaires à la commande de lancement de l'Agent Datadog pour activer la collecte de logs :
 
-* `-e DD_LOGS_ENABLED=true` : l'ajout de cette variable avec la valeur `true` active la collecte de logs. L'Agent recherche alors les instructions relatives aux logs dans les fichiers de configuration ou les étiquettes de conteneur.
-* `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` : active la collecte de logs pour tous les conteneurs.
-* `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` : monte le répertoire utilisé par l'Agent pour stocker les pointeurs de chaque log de conteneur, lui permettant ainsi de déterminer ce qui a été envoyé à Datadog ou non.
+- `-e DD_LOGS_ENABLED=true` : l'ajout de cette variable avec la valeur `true` active la collecte de logs. L'Agent recherche alors les instructions relatives aux logs dans les fichiers de configuration ou les étiquettes de conteneur.
+- `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true` : active la collecte de logs pour tous les conteneurs.
+- `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` : monte le répertoire utilisé par l'Agent pour stocker les pointeurs de chaque log de conteneur, lui permettant ainsi de déterminer ce qui a été envoyé à Datadog ou non.
 
 On obtient la commande suivante :
 
-```
+```shell
 docker run -d --name datadog-agent \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   -v /proc/:/host/proc/:ro \
   -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
   -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
-  -e DD_API_KEY=<VOTRE_CLÉ_API_DATADOG> \
+  -e DD_API_KEY= \
   -e MESOS_MASTER=true \
   -e MARATHON_URL=http://leader.mesos:8080 \
   -e DD_LOGS_ENABLED=true \
@@ -78,11 +80,13 @@ Utilisez la [fonction Autodiscovery][4] pour faire en sorte que les logs remplac
 Dans Datadog, recherchez `mesos.cluster` depuis la page Metrics Explorer.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "mesos_master" >}}
 
 
 ### Événements
+
 Le check Mesos-master n'inclut aucun événement.
 
 ### Checks de service
@@ -91,12 +95,12 @@ Le check Mesos-master n'inclut aucun événement.
 Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'API Master Mesos pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 ## Pour aller plus loin
 
-* [Installation de Datadog sur Mesos avec DC/OS][7]
-
+- [Installation de Datadog sur Mesos avec DC/OS][7]
 
 [1]: https://docs.datadoghq.com/fr/integrations/mesos/#mesos-slave-integration
 [2]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_master/images/mesos_dashboard.png
@@ -108,8 +112,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 
 
-
-
 ## Intégration Mesos_slave
 
 ![Dashboard Mesos Slave][101]
@@ -118,20 +120,22 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 Ce check de l'Agent recueille des métriques des slaves Mesos pour :
 
-* la charge système ;
-* le nombre de tâches échouées, terminées, en cours d'exécution, etc. ;
-* le nombre d'exécuteurs en cours d'exécution, terminés, etc. ;
+- la charge système ;
+- le nombre de tâches échouées, terminées, en cours d'exécution, etc. ;
+- le nombre d'exécuteurs en cours d'exécution, terminés, etc. ;
 
-et bien plus encore.
+Et bien plus encore.
 
 Ce check crée également un check de service pour chaque tâche d'exécuteur.
 
-## Implémentation
+## Configuration
+
 ### Installation
 
 Suivez les instructions décrites dans notre [article de blog][102] pour installer l'Agent Datadog sur chaque nœud slave Mesos via l'interface Web DC/OS.
 
 ### Configuration
+
 #### DC/OS
 
 1. Depuis l'interface Web DC/OS, cliquez sur l'onglet **Universe**. Recherchez le paquet **datadog** et cliquez sur le bouton d'installation.
@@ -152,7 +156,10 @@ Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'inte
   "mem": 256,
   "disk": 0,
   "instances": 1,
-  "constraints": [["hostname", "UNIQUE"], ["hostname", "GROUP_BY"]],
+  "constraints": [
+    ["hostname", "UNIQUE"],
+    ["hostname", "GROUP_BY"]
+  ],
   "acceptedResourceRoles": ["slave_public", "*"],
   "container": {
     "type": "DOCKER",
@@ -162,7 +169,7 @@ Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'inte
         "hostPath": "/var/run/docker.sock",
         "mode": "RO"
       },
-      {"containerPath": "/host/proc", "hostPath": "/proc", "mode": "RO"},
+      { "containerPath": "/host/proc", "hostPath": "/proc", "mode": "RO" },
       {
         "containerPath": "/host/sys/fs/cgroup",
         "hostPath": "/sys/fs/cgroup",
@@ -183,9 +190,9 @@ Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'inte
       ],
       "privileged": false,
       "parameters": [
-        {"key": "name", "value": "datadog-agent"},
-        {"key": "env", "value": "DD_API_KEY=<VOTRE_CLÉ_API_DATADOG>"},
-        {"key": "env", "value": "MESOS_SLAVE=true"}
+        { "key": "name", "value": "datadog-agent" },
+        { "key": "env", "value": "DD_API_KEY=" },
+        { "key": "env", "value": "MESOS_SLAVE=true" }
       ],
       "forcePullImage": false
     }
@@ -193,7 +200,7 @@ Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'inte
   "healthChecks": [
     {
       "protocol": "COMMAND",
-      "command": {"value": "/probe.sh"},
+      "command": { "value": "/probe.sh" },
       "gracePeriodSeconds": 300,
       "intervalSeconds": 60,
       "timeoutSeconds": 20,
@@ -201,8 +208,8 @@ Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'inte
     }
   ],
   "portDefinitions": [
-    {"port": 10000, "protocol": "tcp", "name": "default", "labels": {}},
-    {"port": 10001, "protocol": "tcp", "labels": {}}
+    { "port": 10000, "protocol": "tcp", "name": "default", "labels": {} },
+    { "port": 10001, "protocol": "tcp", "labels": {} }
   ]
 }
 ```
@@ -210,18 +217,23 @@ Si vous n'utilisez pas DC/OS, définissez l'application Agent Datadog via l'inte
 Vous n'avez rien d'autre à faire après avoir installé l'Agent, sauf si vous souhaitez modifier la configuration du fichier `mesos_slave.d/conf.yaml` (pour ajouter le paramètre `disable_ssl_validation: true`, par exemple).
 
 ### Validation
+
 #### DC/OS
+
 L'Agent Datadog devrait maintenant s'afficher dans l'onglet Services de l'interface Web DC/OS. Dans Datadog, recherchez `mesos.slave` depuis la page Metrics Explorer.
 
 #### Marathon
+
 Si vous n'utilisez pas DC/OS, vous trouverez datadog-agent dans la liste des applications en cours d'exécution avec un statut sain. Dans Datadog, recherchez `mesos.slave` depuis la page Metrics Explorer.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "mesos_slave" >}}
 
 
 ### Événements
+
 Le check Mesos-slave n'inclut aucun événement.
 
 ### Check de service
@@ -235,7 +247,7 @@ Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à l'endpoint des 
 Le check mesos_slave crée un check de service pour chaque tâche d'exécuteur, en lui attribuant l'un des statuts suivants :
 
 |               |                                |
-| ---           | ---                            |
+| ------------- | ------------------------------ |
 | Statut de la tâche   | Statut du check de service généré |
 | TASK_STARTING | AgentCheck.OK                  |
 | TASK_RUNNING  | AgentCheck.OK                  |
@@ -247,17 +259,15 @@ Le check mesos_slave crée un check de service pour chaque tâche d'exécuteur, 
 | TASK_ERROR    | AgentCheck.CRITICAL            |
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][105].
 
 ## Pour aller plus loin
 
-* [Installation de Datadog sur Mesos avec DC/OS][102]
-
+- [Installation de Datadog sur Mesos avec DC/OS][102]
 
 [101]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mesos_slave/images/mesos_dashboard.png
 [102]: https://www.datadoghq.com/blog/deploy-datadog-dcos
 [103]: https://hub.docker.com/r/datadog/agent/tags
 [104]: https://github.com/DataDog/integrations-core/blob/master/mesos_slave/metadata.csv
 [105]: https://docs.datadoghq.com/fr/help
-
-

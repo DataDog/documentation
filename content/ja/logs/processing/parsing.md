@@ -173,12 +173,7 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 * `characterWhiteList`: デフォルトの `\\w.\\-_@` に加え、追加の非エスケープ値文字を定義します。引用符で囲まれていない値 (例: `key=@valueStr`) にのみ使用します。
 * `quotingStr`: 引用符を定義し、デフォルトの引用符検出（`<>`、`""`、`''`）を置き換えます。
 
-**注**:
-
-* 値が空 (`key=`) または `null` (`key=null`) の場合、出力される JSON に表示されません。
-* `data` オブジェクトで *keyvalue* フィルターを定義する場合で、このフィルターが一致しない時は、空の JSON `{}` が返されます (例: 入力: `key:=valueStr`、パース規則: `rule_test %{data::keyvalue("=")}`、出力: `{}`)。
-
-**keyvalue** などのフィルターを使用すると、keyvalue または logfmt 形式の属性に文字列をより簡単にマップできます:
+**keyvalue** などのフィルターを使用すると、keyvalue または logfmt 形式の属性に文字列をより簡単にマップできます。
 
 ログ:
 
@@ -264,6 +259,11 @@ rule %{data::keyvalue("=","/:")}
     "key2": "/valueStr2"
   }
   ```
+
+**注**:
+
+* 値が空 (`key=`) または `null` (`key=null`) の場合、出力される JSON に表示されません。
+* `data` オブジェクトで *keyvalue* フィルターを定義する場合で、このフィルターが一致しない時は、空の JSON `{}` が返されます (例: 入力: `key:=valueStr`、パース規則: `rule_test %{data::keyvalue("=")}`、出力: `{}`)。
 
 ### 日付のパース
 
@@ -367,7 +367,7 @@ john_1a2b3c4 connected on 11/08/2017
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 
-{{< img src="logs/processing/parsing/regex_parsing.png" alt="パース 例 6" responsive="true" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/regex_parsing.png" alt="パース例 6" responsive="true" style="width:80%;" >}}
 
 ## その他の参考資料
 

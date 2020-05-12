@@ -134,7 +134,7 @@ App Analytics は、ユーザー定義のタグ（customer_id、error_type、app
 [5]: /ja/tracing/visualization/services_map
 [6]: /ja/tracing/visualization/service
 [7]: /ja/tracing/visualization/resource
-[8]: /ja/tracing/opentracing/?tab=java#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
+[8]: /ja/tracing/opentracing/java#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
 [9]: /ja/tracing/manual_instrumentation
 [10]: /ja/tracing/opentracing
 [11]: /ja/tracing/connect_logs_and_traces

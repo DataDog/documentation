@@ -1,0 +1,18 @@
+[
+    {
+        "agent_version": "5.8.0",
+        "check": "spark.resource_manager.can_connect",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Can Connect",
+        "description": "Agent が Spark インスタンスの ResourceManager に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    },
+    {
+        "agent_version": "5.8.0",
+        "check": "spark.application_master.can_connect",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Can Connect",
+        "description": "Agent が Spark インスタンスの ApplicationMaster に接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    }
+]

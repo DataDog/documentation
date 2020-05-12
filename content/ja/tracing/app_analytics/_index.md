@@ -334,7 +334,7 @@ Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 {{< tabs >}}
 {{% tab "Java" %}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、サービスルートスパンで `ANALYTICS_SAMPLE_RATE` タグを設定することで App Analytics を有効にすることができます。
+カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS_SAMPLE_RATE` タグを設定することで App Analytics を有効にできます。
 
 ```java
 import datadog.trace.api.DDTags;
@@ -358,7 +358,7 @@ class MyClass {
 {{% /tab %}}
 {{% tab "Python" %}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、サービスルートスパンで `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` タグを設定することで App Analytics を有効にすることができます。
+カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` タグを設定することで App Analytics を有効にできます。
 
 ```python
 from ddtrace import tracer
@@ -373,7 +373,7 @@ def my_method():
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、サービスルートスパンで `ANALYTICS_KEY` タグを設定することで App Analytics を有効にすることができます。
+カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS_KEY` タグを設定することで App Analytics を有効にできます。
 
 ```ruby
 Datadog.tracer.trace('my.task') do |span|
@@ -396,7 +396,7 @@ span.SetTag(ext.AnalyticsEvent, true)
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、サービスルートスパンで `ANALYTICS` タグを設定することで App Analytics を有効にすることができます。
+カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS` タグを設定することで App Analytics を有効にできます。
 
 ```javascript
 const { ANALYTICS } = require('dd-trace/ext/tags')
@@ -407,7 +407,7 @@ span.setTag(ANALYTICS, true)
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、サービスルートスパンで `Tags.Analytics` タグを設定することで App Analytics を有効にすることができます。
+カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `Tags.Analytics` タグを設定することで App Analytics を有効にできます。
 
 ```csharp
 using Datadog.Trace;
@@ -423,7 +423,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、サービスルートスパンで `ANALYTICS_KEY` タグを設定することで App Analytics を有効にすることができます:
+カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS_KEY` タグを設定することで App Analytics を有効にできます。
 
 ```php
 <?php
@@ -435,7 +435,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 {{% /tab %}}
 {{% tab "C++" %}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、サービスルートスパンで `analytics_event` タグを設定することで App Analytics を有効にすることができます。
+カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `analytics_event` タグを設定することで App Analytics を有効にできます。
 
 ```cpp
 ...
@@ -456,11 +456,11 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ## スパンのフィルタリング
 
-[分析スパン][2]は、メタデータを含む[サービス][4]の最上位の[スパン][3]を表します。有効にすると、デフォルトでは 100% のスループットで分析スパンが送信されます。例えば、各 `servlet.request` スパンが分析スパンを生成するため、100つのリクエストを持つ Java サービスは `servlet.request` スパンから100の分析スパンを生成します。[分析スパンのフィルタリング][5]は、請求可能な分析スパンの数を減らすという利点があり、[トレース][6]のサンプリングには影響しません。サービスのフィルタリング率が 100% 未満である場合、デフォルトでは分析スパンの分析は推定値を表示するようスケールアップされるため、ユーザーはフィルタリングされた値を表示することができます。
+[分析スパン][2]は、メタデータを含む[サービス][4]の最上位の[スパン][3]を表します。有効にすると、デフォルトでは 100% のスループットで分析スパンが送信されます。例えば、各 `servlet.request` スパンが分析スパンを生成するため、100 件のリクエストを持つ Java サービスは `servlet.request` スパンから 100 の分析スパンを生成します。[分析スパンのフィルタリング][5]は、請求可能な分析スパンの数を減らすという利点があり、[トレース][6]のサンプリングには影響しません。サービスのフィルタリング率が 100% 未満である場合、デフォルトでは分析スパンの生成メトリクス「総エラー数」と「総リクエスト数」は推定値を表示するようスケールアップされるため、ユーザーはフィルタリングされた値を表示することができます。
 
-{{< img src="tracing/app_analytics/analytics/apm_event_filtering.png" alt="分析スパンのフィルタリング" style="width:100%;">}}
+フィルターレートへの変更は、サービスおよび環境別にキューに配置されるため、全体的なスパンボリュームへの影響を予測できます。変更は、確認、編集、承認または拒否することが可能です。適用された変更は、直ちに有効となり[請求書にも反映されます][7]。
 
-**注**: 特定のサービスに対して[サンプリングの優先順位を][7] `MANUAL_KEEP` に手動で設定した場合。そのサービスに対して分析スパンのフィルタリングがオーバーライドされます。これは、そのスパンが請求可能なスパンであることを意味します。
+{{< img src="tracing/app_analytics/analytics/apm_event_filtering.gif" alt="分析スパンのフィルタリング" >}}
 
 [1]: https://app.datadoghq.com/apm/search/analytics
 [2]: /ja/tracing/visualization/#apm-event
@@ -468,4 +468,4 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 [4]: /ja/tracing/visualization/#services
 [5]: https://app.datadoghq.com/apm/settings
 [6]: /ja/tracing/visualization/#trace
-[7]: /ja/tracing/guide/trace_sampling_and_storage/#sampling-rules
+[7]: /ja/account_management/billing/apm_distributed_tracing/

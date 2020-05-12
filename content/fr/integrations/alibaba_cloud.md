@@ -14,11 +14,11 @@ has_logo: true
 integration_title: "Alibaba\_Cloud"
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: alibaba_cloud
 public_title: "Intégration Datadog/Alibaba\_Cloud"
 short_description: "Intégrez vos services Alibaba\_Cloud à Datadog."
-version: 1
+version: '1.0'
 ---
 ## Présentation
 
@@ -113,4 +113,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [5]: https://www.alibabacloud.com/help/doc-detail/26232.htm
 [6]: https://www.alibabacloud.com/help/doc-detail/27582.htm
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/alibaba_cloud/alibaba_cloud_metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/help/

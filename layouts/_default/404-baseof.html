@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}" data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}"
-  data-env="{{.Site.Params.environment}}" style="opacity:0"
+  data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0"
   class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
 
 <head>
@@ -44,7 +44,7 @@
   <div class="container h-100">
     <div class="row h-100">
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
-        {{ partial "sidenav/sidenav.html" . }}
+        {{ partial "sidenav/main-sidenav.html" . }}
       </div>
       <div class="col-12 col-lg-9 main">
         {{ block "main" . }}{{ end }}

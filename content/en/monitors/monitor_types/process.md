@@ -3,13 +3,13 @@ title: Live Process Monitor
 kind: documentation
 description: "Check if a process is running on a host"
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -53,8 +53,8 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /infrastructure/process
+[1]: /infrastructure/process/
 [2]: https://app.datadoghq.com/monitors#create/live_process
 [3]: /infrastructure/process/#search-syntax
 [4]: https://app.datadoghq.com/process
-[5]: /monitors/notifications
+[5]: /monitors/notifications/

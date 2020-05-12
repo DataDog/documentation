@@ -101,4 +101,4 @@ Kube Scheduler には、イベントは含まれません。
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#create-manifest
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help
+[8]: https://docs.datadoghq.com/ja/help/

@@ -6,7 +6,7 @@ aliases:
   - /developers/faq/characteristics-of-datadog-histograms/
   - /graphing/metrics/distributions/
 further_reading:
-  - link: "developers/metrics/dogstatsd_metrics_submission"
+  - link: "/developers/metrics/dogstatsd_metrics_submission/"
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
 ---
@@ -27,7 +27,7 @@ See the [Developer Tools section][1] for more implementation details. Please not
 
 Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics (with custom tags set in code) and are resolved to any host tag based on the host that reported the metric. You can also calculate percentile aggregations for a set of tags (up to ten) specified on the [Distribution Metrics][2] page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99`.
 
-{{< img src="metrics/distributions/global_metrics_selection.png" alt="Distribution Metric UI"  style="width:80%;">}}
+{{< img src="metrics/distributions/revised_global_metrics_selection.png" alt="Distribution Metric UI"  style="width:80%;">}}
 
 After electing to apply percentile aggregations on a distribution metric, these aggregations are automatically available in the graphing UI:
 
@@ -53,5 +53,5 @@ For more information on counting custom metrics created from gauge, count, histo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/types
-[2]: https://docs.datadoghq.com/developers/metrics/custom_metrics
+[1]: /developers/metrics/types/
+[2]: /developers/metrics/custom_metrics/

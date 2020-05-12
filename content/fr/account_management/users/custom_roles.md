@@ -28,7 +28,7 @@ Pour créer un rôle personnalisé :
 3. Attribuez un nom à votre rôle.
 4. Sélectionnez les autorisations associées à ce rôle.
 
-{{< img src="account_management/users/create_role.png" alt="Créer un rôle personnalisé" responsive="true" style="width:90%;">}}
+{{< img src="account_management/users/create_role.png" alt="Créer un rôle personnalisé"  style="width:90%;">}}
 
 Une fois votre rôle créé, vous pouvez l'[ajouter aux utilisateurs existants][2].
 
@@ -41,7 +41,7 @@ Pour modifier un rôle personnalisé :
 3. Modifiez les autorisations associées à ce rôle.
 4. Enregistrez vos modifications.
 
-{{< img src="account_management/users/edit_role.png" alt="Modifier un rôle" responsive="true" style="width:90%;">}}
+{{< img src="account_management/users/edit_role.png" alt="Modifier un rôle"  style="width:90%;">}}
 
 Une fois votre rôle modifié, les autorisations sont mises à jour pour tous les utilisateurs qui disposent de ce rôle.
 
@@ -53,8 +53,8 @@ Pour supprimer un rôle personnalisé :
 2. Sélectionnez le bouton de suppression pour le rôle de votre choix.
 3. Confirmez l'action.
 
-{{< img src="account_management/users/delete_role.png" alt="Supprimer un rôle" responsive="true" style="width:90%;">}}
-{{< img src="account_management/users/delete_role_confirmation.png" alt="Supprimer un rôle" responsive="true" style="width:90%;">}}
+{{< img src="account_management/users/delete_role.png" alt="Supprimer un rôle"  style="width:90%;">}}
+{{< img src="account_management/users/delete_role_confirmation.png" alt="Supprimer un rôle"  style="width:90%;">}}
 
 Une fois votre rôle supprimé, les autorisations sont mises à jour pour tous les utilisateurs qui disposent de ce rôle. Les utilisateurs sans autre rôle ne peuvent pas exploiter toutes les fonctionnalités de Datadog, mais conservent un accès limité. Vous devez toujours vous assurer que les utilisateurs possèdent un rôle, ou qu'ils sont désactivés s'ils n'ont pas besoin d'accéder à votre organisation.
 
@@ -62,5 +62,5 @@ Une fois votre rôle supprimé, les autorisations sont mises à jour pour tous l
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rbac
+[1]: https://app.datadoghq.com/access/roles
 [2]: /fr/account_management/users/#edit-a-user-roles

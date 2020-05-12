@@ -82,11 +82,11 @@ Si la `@notification` est supprimée de l'une de ces deux sections, elle est ég
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/monitors/monitor_types/metric
+[1]: /fr/monitors/monitor_types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
-[6]: /fr/integrations/disk
+[6]: /fr/integrations/disk/
 [7]: /fr/monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
 [8]: /fr/monitors/notifications/#conditional-variables

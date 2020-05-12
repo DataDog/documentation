@@ -8,7 +8,7 @@ categories:
   - data store
   - aws
   - log collection
-ddtype: 「クロール」
+ddtype: crawler
 dependencies: []
 description: Amazon RDS 関連の大量のメトリクスを追跡する。
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_rds/'
@@ -39,7 +39,7 @@ version: '1.0'
 
 Amazon Relational Database Service (RDS) は、クラウドでリレーショナルデータベースのセットアップ、運用、スケーリングに使用される Web サービスです。このインテグレーションを有効にすると、Datadog にすべての RDS メトリクスを表示できます。
 
-**注意**: このインテグレーションを EU に設定する場合は、環境変数 `DD_SITE` を `datadoghq.eu` に設定するコードの外部に設定するか、コードの内部に次のように設定します。
+**注**: このインテグレーションを EU 用に設定する場合、環境変数 `DD_SITE` を `datadoghq.eu` に設定するコードの外部に設定するか、コードの内部に次のように設定します。
 
 `DD_SITE = os.getenv("DD_SITE", default="datadoghq.eu")`
 
@@ -47,13 +47,13 @@ RDS インスタンスの監視には 3 つのオプションがあります。�
 
 - **標準 RDS インテグレーション**:
 
-  標準インテグレーションの場合、AWS インテグレーションタイルの左側で RDS を選択する必要があります。これにより、ご使用の CloudWatch インテグレーションで利用可能な回数だけ、インスタンスに関するメトリクスを受信できます。すべての RDS Engine タイプに対応しています。
+    標準インテグレーションの場合、AWS インテグレーションタイルの左側で RDS を選択する必要があります。これにより、ご使用の CloudWatch インテグレーションで利用可能な回数だけ、インスタンスに関するメトリクスを受信できます。すべての RDS エンジンタイプに対応しています。
 - **拡張 RDS インテグレーション**:
 
-  拡張インテグレーションの場合、構成を追加する必要あります。また、MySQL、Aurora、PostgreSQL、MariaDB エンジンでのみ使用できます。メトリクスを追加することができますが、追加したメトリクスを Datadog に送信するには、AWS Lambda が必要です。粒度が高く、追加のサービスが必要になると AWS の追加料金が発生します。
+    拡張インテグレーションの場合、構成を追加する必要があります。また、MySQL、Aurora、PostgreSQL、MariaDB エンジンでのみ使用できます。メトリクスを追加することができますが、追加したメトリクスを Datadog に送信するには、AWS Lambda が必要です。粒度が高く、追加のサービスが必要になると AWS の追加料金が発生します。
 - **RDS + ネイティブデータベースインテグレーション**:
 
-  ネイティブデータベースインテグレーションはオプションです。MySQL、Aurora、MariaDB、SQL Server、PostgreSQL の各エンジンタイプで使用できます。RDS とネイティブインテグレーションの両方からメトリクスを取得して照合するには、RDS インスタンスに割り当てる識別子に基づいて、ネイティブインテグレーションで `dbinstanceidentifier` タグを使用します。RDS インスタンスには自動的にタグが割り当てられます。
+    ネイティブデータベースインテグレーションはオプションです。MySQL、Aurora、MariaDB、SQL Server、PostgreSQL の各エンジンタイプで使用できます。RDS とネイティブインテグレーションの両方からメトリクスを取得して照合するには、RDS インスタンスに割り当てる識別子に基づいて、ネイティブインテグレーションで `dbinstanceidentifier` タグを使用します。RDS インスタンスには自動的にタグが割り当てられます。
 
 ## セットアップ
 
@@ -74,7 +74,7 @@ RDS インスタンスの拡張モニタリングを有効にするには、イ�
 1. KMS のホーム (https://console.aws.amazon.com/kms/home) を開きます。
 2. **Customer managed keys** に進みます。
 3. **Create Key** を選択します。
-4. キーのエイリアス (例: `lambda-datadog-key`) を入力します。注意: 「aws」で始まるエイリアスは使用できません。「aws」で始まるエイリアスは、ご使用のアカウントで AWS 管理の CMK を表すために Amazon Web Services によって予約されています。
+4. キーのエイリアス (例: `lambda-datadog-key`) を入力します。注: 「aws」で始まるエイリアスは使用できません。「aws」で始まるエイリアスは、ご使用のアカウントで AWS 管理の CMK を表すために Amazon Web Services によって予約されています。
 5. 適切な管理者を追加して、このキーを管理できるユーザーを指定します。
 6. ロールを追加する必要はありません。
 7. KMS キーを保存します。
@@ -87,8 +87,8 @@ RDS インスタンスの拡張モニタリングを有効にするには、イ�
 4. 前のセクションで作成したキーの ID を `KMSKeyId` パラメーターに貼り付け、デプロイします。
 5. アプリケーションがデプロイされたら、新しく作成された Lambda 関数を開きます (「Resource」の下にある関数をクリック)。
    {{< img src="integrations/awsrds/click-function.png" alt="Lambda 関数を開く" >}}
-6. `Environment variables` セクションまでスクロールダウンします。書式 `{"api_key":"2"}` で、`<YOUR_API_KEY>` を [Datadog API キー][2] に置換します。
-   {{< img src="integrations/awsrds/env-variables.png" alt="Environment Variables" >}}
+6. `Environment variables` セクションまでスクロールダウンします。書式 `{"api_key":"<API_キー>"}` で、`<API_キー>` を [Datadog API キー][2] に置換します。
+   {{< img src="integrations/awsrds/env-variables.png" alt="環境変数" >}}
 7. `Encryption configuration` セクションを開き、`Enable helpers for encryption in transit` を選択します。
 8. `KMS key to encrypt in transit` で、下の `KMS key to encrypt at rest` にあるキーと同じキーを選択します。
 9. 入力した JSON Blob の横にある Encrypt ボタンを押します。
@@ -136,7 +136,7 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 
 3. [Datadog - AWS RDS インテグレーション][6]をインストールします。
 
-#### ネイティブデータベースインテグレーション {#ネイティブデータベースインテグレーション}
+#### ネイティブデータベースインテグレーション {#ネイティブデータベースインテグレーションのコンフィギュレーション}
 
 conf.d ディレクトリ内の適切な yaml ファイルを編集することで Agent を構成し、RDS インスタンスに接続します。その後、Agent を再起動します。
 
@@ -150,11 +150,11 @@ init_config:
 instances:
     # AWS コンソールからのエンドポイント URL
     - server: 'mysqlrds.blah.us-east1-rds.amazonaws.com'
-      user: '<USERNAME>'
-      pass: '<PASSWORD>'
+      user: '<ユーザー名>'
+      pass: '<パスワード>'
       port: 3306
       tags:
-          - 'dbinstanceidentifier:<INSTANCE_NAME>'
+          - 'dbinstanceidentifier:<インスタンス名>'
 ```
 
 PostgreSQL を使用している場合は、`postgres.yaml` を編集します。
@@ -165,11 +165,11 @@ init_config:
 instances:
     - host: 'mysqlrds.blah.us-east1-rds.amazonaws.com'
       port: 5432
-      username: '<USERNAME>'
-      password: '<PASSWORD>'
-      dbname: '<DB_NAME>'
+      username: '<ユーザー名>'
+      password: '<パスワード>'
+      dbname: '<DB_名>'
       tags:
-          - 'dbinstanceidentifier:<DB_INSTANCE_NAME>'
+          - 'dbinstanceidentifier:<DB_インスタンス名>'
 ```
 
 Microsoft SQL Server を使用している場合は、`sqlserver.yaml` を編集します。
@@ -179,10 +179,10 @@ init_config:
 
 instances:
     - host: 'mysqlrds.blah.us-east1-rds.amazonaws.com,1433'
-      username: '<USERNAME>'
-      password: '<PASSWORD>'
+      username: '<ユーザー名>'
+      password: '<パスワード>'
       tags:
-          - 'dbinstanceidentifier:<DB_INSTANCE_NAME>'
+          - 'dbinstanceidentifier:<DB_インスタンス名>'
 ```
 
 ### 検証
@@ -203,8 +203,8 @@ Checks
 
 ### 使用方法
 
-数分後、RDS メトリクスと [MySQL、Aurora、MariaDB、SQL Server、PostgreSQL の各メトリクス][7]が Datadog のメトリクスエクスプローラー、[ダッシュボード][8]、[アラート][9]からアクセスできようになります。
-下記に RDS と MySQL 双方のインテグレーションから取得した多数のメトリクスを表示する Aurora ダッシュボードの例を示します。インスタンス `quicktestrds`  で双方のインテグレーションから取得したメトリクスを `dbinstanceidentifier` タグを使用して一つにまとめています。
+数分経つと、RDS メトリクスと [MySQL、Aurora、MariaDB、SQL Server、PostgreSQL の各メトリクス][7]が Datadog のメトリクスエクスプローラー、[ダッシュボード][8]、[アラート][9]からアクセスできようになります。
+下記に RDS と MySQL 双方のインテグレーションから取得した多数のメトリクスを表示する Aurora ダッシュボードの例を示します。インスタンス `quicktestrds` で双方のインテグレーションから取得したメトリクスを `dbinstanceidentifier` タグを使用して一つにまとめています。
 {{< img src="integrations/awsrds/aurora-rds-dash.png" alt="RDS Aurora" popup="true">}}
 
 これは、Amazon RDS 上の MySQL のデフォルトのダッシュボードです。
@@ -220,7 +220,7 @@ MySQL、MariaDB、Postgres のログを Amazon CloudWatch に転送できます�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
+1. [Datadog ログコレクション AWS Lambda 関数][12]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで、RDS ログを含む CloudWatch Logs グループに手動でトリガーを追加します。
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="CloudWatch Logs グループ" popup="true" style="width:70%;">}}
    対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。

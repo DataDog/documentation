@@ -17,7 +17,7 @@ further_reading:
   - link: tracing/visualization/
     tag: Utiliser l'UI de l'APM
     text: 'Explorer vos services, ressources et traces'
-  - link: tracing/advanced/
+  - link: tracing/
     tag: Utilisation avancée
     text: Utilisation avancée
 ---
@@ -51,17 +51,17 @@ Enfin, importez et initialisez le traceur :
 
 ```js
 // Cette ligne doit précéder l'importation des modules instrumentés.
-const tracer = require('dd-trace').init()
+const tracer = require('dd-trace').init();
 ```
 
 ##### TypeScript
 
 ```js
 // server.js
-import "./tracer"; // doit précéder l'importation des modules instrumentés.
+import './tracer'; // doit précéder l'importation des modules instrumentés.
 
 // tracer.js
-import tracer from "dd-trace";
+import tracer from 'dd-trace';
 tracer.init(); // initialisé dans un fichier différent pour empêcher l'accès aux variables avant leur définition.
 export default tracer;
 ```
@@ -72,26 +72,26 @@ Consultez les [paramètres du traceur][7] pour obtenir la liste des options d'in
 
 Les réglages du traceur peuvent être configurés en tant que paramètre de la méthode `init()` ou en tant que variables d'environnement.
 
-| Configuration         | Variable d'environnement         | Valeur par défaut     | Description                                                                                                                                                                              |
-|----------------|------------------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| enabled        | `DD_TRACE_ENABLED`           | `true`      | Indique si le traceur doit être activé.                                                                                                                                                            |
-| debug          | `DD_TRACE_DEBUG`             | `false`     | Active la journalisation de debugging dans le traceur.                                                                                                                                                      |
-| service        | `DD_SERVICE_NAME`            | `null`      | Le nom du service à utiliser pour ce programme.                                                                                                                                            |
-| url            | `DD_TRACE_AGENT_URL`         | `null`      | L'URL de l'Agent de trace auquel le traceur transmet des données. Lorsque ce paramètre est défini, il est utilisé à la place du hostname et du port.                                                                                    |
-| hostname       | `DD_TRACE_AGENT_HOSTNAME`    | `localhost` | L'adresse de l'Agent auquel le traceur transmet des données.                                                                                                                                     |
-| port           | `DD_TRACE_AGENT_PORT`        | `8126`      | Le port de l'Agent de trace auquel le traceur transmet des données.                                                                                                                                  |
-| dogstatsd.port | `DD_DOGSTATSD_PORT`          | `8125`      | Le port de l'Agent DogStatsD auquel les métriques sont transmises.                                                                                                                           |
-| env            | `DD_ENV`                     | `null`      | Définit l'environnement de l'application, p. ex. `prod`, `pre-prod` ou encore `stage`.                                                                                                                  |
-| logInjection   | `DD_LOGS_INJECTION`          | `false`     | Active l'injection automatique d'ID de trace dans les logs, pour les bibliothèques de journalisation prises en charge.                                                                                                         |
-| tags           | `DD_TAGS`                    | `{}`        | Définit des tags globaux qui doivent être appliqués à l'ensemble des spans et métriques. Lorsque ce paramètre est transmis en tant que variable d'environnement, son format correspond à `key:value, key:value`.                                           |
-| sampleRate     | -                            | `1`         | Pourcentage de spans à échantillonner. Valeur flottante comprise entre `0` et `1`.                                                                                                                            |
-| flushInterval  | -                            | `2000`      | Intervalle (en millisecondes) de transmission par le traceur des traces à l'Agent.                                                                                                              |
-| runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | Indique si l'enregistrement des métriques de runtime doit être activé. Le port `8125` (ou le port configuré avec `dogstatsd.port`) doit être ouvert sur l'Agent pour le transport UDP.                                                      |
-| reportHostname | `DD_TRACE_REPORT_HOSTNAME`   | `false`     | Indique si le hostname du système doit être transmis pour chaque trace. Lorsque cette option est désactivée, le hostname de l'Agent est transmis à la place.                                                                        |
-| experimental   | -                            | `{}`        | Les fonctionnalités expérimentales peuvent toutes être activées simultanément à l'aide de la valeur booléenne « true », ou individuellement à l'aide de paires key/value. [Contactez l'assistance][8] pour en savoir plus sur les fonctionnalités expérimentales disponibles. |
-| plugins        | -                            | `true`      | Indique si l'instrumentation automatique des bibliothèques externes à l'aide des plug-ins intégrés doit être activée.                                                                                     |
-| clientToken    | `DD_CLIENT_TOKEN`            | `null`      | Token client pour le tracing sur navigateur. Peut être généré dans Datadog en accédant à **Integrations** -> **APIs**.                                                                                           |
-| logLevel       | `DD_TRACE_LOG_LEVEL`         | `debug`     | Chaîne de caractères indiquant le niveau minimum des logs du traceur à utiliser lorsque la journalisation de debugging est activée. Exemple : `error` ou `debug`.                                                                           |
+| Configuration         | Variable d'environnement         | Valeur par défaut     | Description                                                                                                                                                                                                                                                                |
+| -------------- | ---------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| enabled        | `DD_TRACE_ENABLED`           | `true`      | Indique si le traceur doit être activé.                                                                                                                                                                                                                                              |
+| debug          | `DD_TRACE_DEBUG`             | `false`     | Active la journalisation de debugging dans le traceur.                                                                                                                                                                                                                                        |
+| service        | `DD_SERVICE_NAME`            | `null`      | Le nom du service à utiliser pour ce programme.                                                                                                                                                                                                                              |
+| url            | `DD_TRACE_AGENT_URL`         | `null`      | L'URL de l'Agent de trace auquel le traceur transmet des données. Lorsque ce paramètre est défini, il est utilisé à la place du hostname et du port. Prend en charge les sockets de domaine Unix grâce au paramètre `apm_config.receiver_socket` de votre fichier `datadog.yaml` ou à la variable d'environnement `DD_APM_RECEIVER_SOCKET`. |
+| hostname       | `DD_TRACE_AGENT_HOSTNAME`    | `localhost` | L'adresse de l'Agent auquel le traceur transmet des données.                                                                                                                                                                                                                       |
+| port           | `DD_TRACE_AGENT_PORT`        | `8126`      | Le port de l'Agent de trace auquel le traceur transmet des données.                                                                                                                                                                                                                    |
+| dogstatsd.port | `DD_DOGSTATSD_PORT`          | `8125`      | Le port de l'Agent DogStatsD auquel les métriques sont transmises.                                                                                                                                                                                                             |
+| env            | `DD_ENV`                     | `null`      | Définit l'environnement de l'application, p. ex. `prod`, `pre-prod` ou encore `stage`.                                                                                                                                                                                                    |
+| logInjection   | `DD_LOGS_INJECTION`          | `false`     | Active l'injection automatique d'ID de trace dans les logs, pour les bibliothèques de journalisation prises en charge.                                                                                                                                                                                           |
+| tags           | `DD_TAGS`                    | `{}`        | Définit des tags globaux qui doivent être appliqués à l'ensemble des spans et métriques. Lorsque ce paramètre est transmis en tant que variable d'environnement, son format correspond à `key:value, key:value`.                                                                                                                             |
+| sampleRate     | -                            | `1`         | Pourcentage de spans à échantillonner. Valeur flottante comprise entre `0` et `1`.                                                                                                                                                                                                              |
+| flushInterval  | -                            | `2000`      | Intervalle (en millisecondes) de transmission par le traceur des traces à l'Agent.                                                                                                                                                                                                |
+| runtimeMetrics | `DD_RUNTIME_METRICS_ENABLED` | `false`     | Indique si l'enregistrement des métriques de runtime doit être activé. Le port `8125` (ou le port configuré avec `dogstatsd.port`) doit être ouvert sur l'Agent pour le transport UDP.                                                                                                                                        |
+| reportHostname | `DD_TRACE_REPORT_HOSTNAME`   | `false`     | Indique si le hostname du système doit être transmis pour chaque trace. Lorsque cette option est désactivée, le hostname de l'Agent est transmis à la place.                                                                                                                                                          |
+| experimental   | -                            | `{}`        | Les fonctionnalités expérimentales peuvent toutes être activées simultanément à l'aide de la valeur booléenne « true », ou individuellement à l'aide de paires key/value. [Contactez l'assistance][8] pour en savoir plus sur les fonctionnalités expérimentales disponibles.                                                                                   |
+| plugins        | -                            | `true`      | Indique si l'instrumentation automatique des bibliothèques externes à l'aide des plug-ins intégrés doit être activée.                                                                                                                                                                       |
+| clientToken    | `DD_CLIENT_TOKEN`            | `null`      | Token client pour le tracing sur navigateur. Peut être généré dans Datadog en accédant à **Integrations** -> **APIs**.                                                                                                                                                                             |
+| logLevel       | `DD_TRACE_LOG_LEVEL`         | `debug`     | Chaîne de caractères indiquant le niveau minimum des logs du traceur à utiliser lorsque la journalisation de debugging est activée. Exemple : `error` ou `debug`.                                                                                                                                                             |
 
 ## Modifier le hostname de l'Agent
 
@@ -126,7 +126,7 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 #### Compatibilité des frameworks Web
 
 | Module           | Versions | Type de prise en charge    | Remarques                                      |
-|------------------|----------|-----------------|--------------------------------------------|
+| ---------------- | -------- | --------------- | ------------------------------------------ |
 | [connect][10]    | `>=2`    | Prise en charge complète |                                            |
 | [express][11]    | `>=4`    | Prise en charge complète | Prend en charge Sails, Loopback et [plus encore][12]   |
 | [fastify][13]    | `>=1`    | Prise en charge complète |                                            |
@@ -140,57 +140,58 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 #### Compatibilité des modules natifs
 
 | Module      | Type de prise en charge    |
-|-------------|-----------------|
+| ----------- | --------------- |
 | [dns][21]   | Prise en charge complète |
-| [http][22]  | Prise en charge complète |
-| [https][23] | Prise en charge complète |
-| [net][24]   | Prise en charge complète |
+| [fs][22]    | Prise en charge complète |
+| [http][23]  | Prise en charge complète |
+| [https][24] | Prise en charge complète |
+| [net][25]   | Prise en charge complète |
 
 #### Compatibilité des datastores
 
 | Module                 | Versions | Type de prise en charge    | Remarques                                            |
-|------------------------|----------|-----------------|--------------------------------------------------|
-| [cassandra-driver][25] | `>=3`    | Prise en charge complète |                                                  |
-| [couchbase][26]        | `^2.4.2` | Prise en charge complète |                                                  |
-| [elasticsearch][27]    | `>=10`   | Prise en charge complète | Prend en charge `@elastic/elasticsearch` versions `>=5` |
-| [ioredis][28]          | `>=2`    | Prise en charge complète |                                                  |
-| [knex][29]             | `>=0.8`  | Prise en charge complète | Cette intégration est uniquement pour la propagation en contexte |
-| [memcached][30]        | `>=2.2`  | Prise en charge complète |                                                  |
-| [mongodb-core][31]     | `>=2`    | Prise en charge complète | Prend en charge Mongoose                                |
-| [mysql][32]            | `>=2`    | Prise en charge complète |                                                  |
-| [mysql2][33]           | `>=1`    | Prise en charge complète |                                                  |
-| [pg][34]               | `>=4`    | Prise en charge complète | Prend en charge `pg-native` en cas d'utilisation conjointe avec `pg`         |
-| [redis][35]            | `>=0.12` | Prise en charge complète |                                                  |
-| [tedious][36]          | `>=1`    | Prise en charge complète | Pilote SQL Server pour `mssql` et `sequelize`    |
+| ---------------------- | -------- | --------------- | ------------------------------------------------ |
+| [cassandra-driver][26] | `>=3`    | Prise en charge complète |                                                  |
+| [couchbase][27]        | `^2.4.2` | Prise en charge complète |                                                  |
+| [elasticsearch][28]    | `>=10`   | Prise en charge complète | Prend en charge `@elastic/elasticsearch` versions `>=5` |
+| [ioredis][29]          | `>=2`    | Prise en charge complète |                                                  |
+| [knex][30]             | `>=0.8`  | Prise en charge complète | Cette intégration est uniquement pour la propagation en contexte |
+| [memcached][31]        | `>=2.2`  | Prise en charge complète |                                                  |
+| [mongodb-core][32]     | `>=2`    | Prise en charge complète | Prend en charge Mongoose                                |
+| [mysql][33]            | `>=2`    | Prise en charge complète |                                                  |
+| [mysql2][34]           | `>=1`    | Prise en charge complète |                                                  |
+| [pg][35]               | `>=4`    | Prise en charge complète | Prend en charge `pg-native` en cas d'utilisation conjointe avec `pg`         |
+| [redis][36]            | `>=0.12` | Prise en charge complète |                                                  |
+| [tedious][37]          | `>=1`    | Prise en charge complète | Pilote SQL Server pour `mssql` et `sequelize`    |
 
 #### Compatibilité des workers
 
 | Module             | Versions | Type de prise en charge    | Remarques                                                  |
-|--------------------|----------|-----------------|--------------------------------------------------------|
-| [amqp10][37]       | `>=3`    | Prise en charge complète | Prend en charge les agents AMQP 1.0 (p. ex. ActiveMQ, Apache Qpid) |
-| [amqplib][38]      | `>=0.5`  | Prise en charge complète | Prend en charge les agents AMQP 0.9 (p. ex. RabbitMQ, Apache Qpid) |
-| [generic-pool][39] | `>=2`    | Prise en charge complète |                                                        |
-| [kafka-node][40]   |          | Disponible prochainement     |                                                        |
-| [rhea][41]         |          | Disponible prochainement     |                                                        |
+| ------------------ | -------- | --------------- | ------------------------------------------------------ |
+| [amqp10][38]       | `>=3`    | Prise en charge complète | Prend en charge les agents AMQP 1.0 (p. ex. ActiveMQ, Apache Qpid) |
+| [amqplib][39]      | `>=0.5`  | Prise en charge complète | Prend en charge les agents AMQP 0.9 (p. ex. RabbitMQ, Apache Qpid) |
+| [generic-pool][40] | `>=2`    | Prise en charge complète |                                                        |
+| [kafka-node][41]   |          | Disponible prochainement     |                                                        |
+| [rhea][42]         | `>=1`    | Prise en charge complète |                                                        |
 
 #### Compatibilité des bibliothèques Promise
 
 | Module           | Versions  | Type de prise en charge    |
-|------------------|-----------|-----------------|
-| [bluebird][42]   | `>=2`     | Prise en charge complète |
-| [promise][43]    | `>=7`     | Prise en charge complète |
-| [promise-js][44] | `>=0.0.3` | Prise en charge complète |
-| [q][45]          | `>=1`     | Prise en charge complète |
-| [when][46]       | `>=3`     | Prise en charge complète |
+| ---------------- | --------- | --------------- |
+| [bluebird][43]   | `>=2`     | Prise en charge complète |
+| [promise][44]    | `>=7`     | Prise en charge complète |
+| [promise-js][45] | `>=0.0.3` | Prise en charge complète |
+| [q][46]          | `>=1`     | Prise en charge complète |
+| [when][47]       | `>=3`     | Prise en charge complète |
 
 #### Compatibilité des loggers
 
 | Module           | Versions  | Type de prise en charge    |
-|------------------|-----------|-----------------|
-| [bunyan][47]     | `>=1`     | Prise en charge complète |
-| [paperplane][48] | `>=2.3.2` | Prise en charge complète |
-| [pino][49]       | `>=2`     | Prise en charge complète |
-| [winston][50]    | `>=1`     | Prise en charge complète |
+| ---------------- | --------- | --------------- |
+| [bunyan][48]     | `>=1`     | Prise en charge complète |
+| [paperplane][49] | `>=2.3.2` | Prise en charge complète |
+| [pino][50]       | `>=2`     | Prise en charge complète |
+| [winston][51]    | `>=1`     | Prise en charge complète |
 
 ## Pour aller plus loin
 
@@ -217,32 +218,33 @@ Pour découvrir comment activer et configurer des plug-ins, consultez la [docume
 [19]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
 [20]: http://restify.com
 [21]: https://nodejs.org/api/dns.html
-[22]: https://nodejs.org/api/http.html
-[23]: https://nodejs.org/api/https.html
-[24]: https://nodejs.org/api/net.html
-[25]: https://github.com/datastax/nodejs-driver
-[26]: https://github.com/couchbase/couchnode
-[27]: https://github.com/elastic/elasticsearch-js
-[28]: https://github.com/luin/ioredis
-[29]: https://knexjs.org
-[30]: https://github.com/3rd-Eden/memcached
-[31]: http://mongodb.github.io/node-mongodb-native/core
-[32]: https://github.com/mysqljs/mysql
-[33]: https://github.com/sidorares/node-mysql2
-[34]: https://node-postgres.com
-[35]: https://github.com/NodeRedis/node_redis
-[36]: http://tediousjs.github.io/tedious
-[37]: https://github.com/noodlefrenzy/node-amqp10
-[38]: https://github.com/squaremo/amqp.node
-[39]: https://github.com/coopernurse/node-pool
-[40]: https://github.com/SOHU-Co/kafka-node
-[41]: https://github.com/amqp/rhea
-[42]: https://github.com/petkaantonov/bluebird
-[43]: https://github.com/then/promise
-[44]: https://github.com/kevincennis/promise
-[45]: https://github.com/kriskowal/q
-[46]: https://github.com/cujojs/when
-[47]: https://github.com/trentm/node-bunyan
-[48]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
-[49]: http://getpino.io
-[50]: https://github.com/winstonjs/winston
+[22]: https://nodejs.org/api/fs.html
+[23]: https://nodejs.org/api/http.html
+[24]: https://nodejs.org/api/https.html
+[25]: https://nodejs.org/api/net.html
+[26]: https://github.com/datastax/nodejs-driver
+[27]: https://github.com/couchbase/couchnode
+[28]: https://github.com/elastic/elasticsearch-js
+[29]: https://github.com/luin/ioredis
+[30]: https://knexjs.org
+[31]: https://github.com/3rd-Eden/memcached
+[32]: http://mongodb.github.io/node-mongodb-native/core
+[33]: https://github.com/mysqljs/mysql
+[34]: https://github.com/sidorares/node-mysql2
+[35]: https://node-postgres.com
+[36]: https://github.com/NodeRedis/node_redis
+[37]: http://tediousjs.github.io/tedious
+[38]: https://github.com/noodlefrenzy/node-amqp10
+[39]: https://github.com/squaremo/amqp.node
+[40]: https://github.com/coopernurse/node-pool
+[41]: https://github.com/SOHU-Co/kafka-node
+[42]: https://github.com/amqp/rhea
+[43]: https://github.com/petkaantonov/bluebird
+[44]: https://github.com/then/promise
+[45]: https://github.com/kevincennis/promise
+[46]: https://github.com/kriskowal/q
+[47]: https://github.com/cujojs/when
+[48]: https://github.com/trentm/node-bunyan
+[49]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
+[50]: http://getpino.io
+[51]: https://github.com/winstonjs/winston

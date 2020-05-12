@@ -18,7 +18,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:zach_update-hugo-68-3
   tags:
     - "runner:main"
     - "size:large"
@@ -106,7 +106,7 @@ build_live:
   variables:
     CONFIG: ${LIVE_CONFIG}
     URL: ${LIVE_DOMAIN}
-    UNTRACKED_EXTRAS: "data,content/en/integrations,content/en/agent/basic_agent_usage/heroku.md,content/en/developers/integrations,content/en/developers/amazon_cloudformation.md"
+    UNTRACKED_EXTRAS: "data,content/en/agent/basic_agent_usage/heroku.md,content/en/agent/basic_agent_usage/ansible.md,content/en/agent/basic_agent_usage/chef.md,content/en/agent/basic_agent_usage/puppet.md,content/en/agent/basic_agent_usage/saltstack.md,content/en/developers/integrations,content/en/developers/amazon_cloudformation.md,content/en/integrations,content/en/logs/log_collection/android.md,content/en/logs/log_collection/ios.md,content/en/tracing/setup/android.md,content/en/tracing/setup/ruby.md"
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config.yaml"
     LOCAL: "False"
   script:
@@ -126,9 +126,24 @@ build_live:
     paths:
       - ${ARTIFACT_RESOURCE}
       - ./integrations_data
+      - content/en
     expire_in: 1 week
   only:
     - master
+
+
+index_internal_doc:
+  stage: post-deploy
+  environment: "live"
+  image: registry.ddbuild.io/datadoc/webapp:prod-released
+  dependencies:
+    - build_live
+  only:
+    - master
+  except: [ tags, schedules ]
+  tags: [ "runner:docker", "size:large" ]
+  script:
+    - INDEXING_SERVICE=https://datadoc.ddbuild.io index-repository hugo https://docs.datadoghq.com/ "Datadog" "Public Documentation" --source_folder=content/en --tags="team:Documentation,source:hugo-website,visibility:public,github-repository:documentation"
 
 test_live_link_checks:
   <<: *base_template
@@ -146,7 +161,6 @@ index_algolia:
   stage: post-deploy
   environment: "live"
   script:
-    - chmod +x ./local/bin/py/algolia_index.py && ./local/bin/py/algolia_index.py -d "['config', 'api', 'error', 'examples', 'fonts', 'images', 'resources', 'static', 'videos']" -l "['ja']" -c "./local/etc/algolia/docs_datadoghq.json"
     - cp ./local/etc/algolia/docs_datadoghq.json /etc/docs_datadoghq.com
     - cat /etc/docs_datadoghq.com
     - index_docsearch_algolia

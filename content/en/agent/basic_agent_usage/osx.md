@@ -6,13 +6,13 @@ os: osx
 aliases:
     - /guides/basic_agent_usage/osx/
 further_reading:
-- link: "logs/"
+- link: "/logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "/infrastructure/process"
+- link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Collect your processes"
-- link: "tracing"
+- link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
 ---
@@ -72,7 +72,7 @@ Configuration files for [Integrations][1]:
 
 * `~/.datadog-agent/conf.d/`
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -84,7 +84,7 @@ Configuration files for [Integrations][1]:
 
 * `~/.datadog-agent/conf.d/`
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -103,5 +103,5 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/mac
-[2]: /agent/troubleshooting
-[3]: /developers/guide/custom-python-package
+[2]: /agent/troubleshooting/
+[3]: /developers/guide/custom-python-package/

@@ -58,10 +58,12 @@ For Java based producers and consumers, add the following to the `conf.yaml` and
 ```yaml
 - host: remotehost
   port: 9998 # Producer
-  kafka: producer0
+  tags:
+    - kafka: producer0
 - host: remotehost
   port: 9997 # Consumer
-  kafka: consumer0
+  tags:
+    - kafka: consumer0
 ```
 
 **Note**: This method does not work if you are using custom producer and consumer clients written in other languages or not exposing mBeans. To submit your metrics from your code, use [DogStatsD][10].
@@ -87,11 +89,11 @@ The number of partition contexts collection is limited to 200. If you require mo
 [1]: https://kafka.apache.org
 [2]: https://sookocheff.com/post/kafka/kafka-in-a-nutshell
 [3]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics
-[4]: /integrations/kafka
+[4]: /integrations/kafka/
 [5]: https://github.com/DataDog/jmxfetch
 [6]: /integrations/kafka/#agent-check-kafka-consumer
-[7]: /agent
+[7]: /agent/
 [8]: /agent/versions/upgrade_to_agent_v6/
 [9]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
-[10]: /developers/dogstatsd
-[11]: /help
+[10]: /developers/dogstatsd/
+[11]: /help/

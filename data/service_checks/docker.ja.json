@@ -1,0 +1,18 @@
+[
+    {
+        "agent_version": "5.1.0",
+        "check": "docker.service_up",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Can Connect",
+        "description": "Agent が Docker デーモンからコンテナのリストを収集できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    },
+    {
+        "agent_version": "5.13.0",
+        "check": "docker.exit",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト", "container_name"],
+        "name": "終了ステータス",
+        "description": "コンテナが 0 以外の終了コードで終了した場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    }
+]

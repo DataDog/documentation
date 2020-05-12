@@ -9,10 +9,10 @@ aliases:
     - /getting_started/tagging
     - /tagging/faq/
 further_reading:
-- link: "tagging/assigning_tags"
+- link: "/tagging/assigning_tags/"
   tag: "Documentation"
   text: "Learn how to assign tags"
-- link: "tagging/using_tags"
+- link: "/tagging/using_tags/"
   tag: "Documentation"
   text: "Learn how to use tags in Datadog"
 ---
@@ -100,16 +100,16 @@ After you have [assigned tags][3] at the host and [integration][10] level, start
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging/using_tags
+[1]: /tagging/using_tags/
 [2]: /developers/metrics/
-[3]: /tagging/assigning_tags
+[3]: /tagging/assigning_tags/
 [4]: /tagging/assigning_tags/#configuration-files
 [5]: /tagging/assigning_tags/#environment-variables
 [6]: /tagging/assigning_tags/#ui
 [7]: /tagging/assigning_tags/#api
 [8]: /tagging/assigning_tags/#dogstatsd
 [9]: /tagging/assigning_tags/#integration-inheritance
-[10]: /integrations
+[10]: /integrations/
 [11]: /tagging/using_tags/#events
 [12]: /tagging/using_tags/#dashboards
 [13]: /tagging/using_tags/#infrastructure

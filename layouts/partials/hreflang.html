@@ -11,7 +11,7 @@ The reason being for example we don't want to promote an english page on a japan
 */}}
 -->
 {{ $dot := . }}
-{{ $allowed := (slice "fr") }}
+{{ $allowed := (slice "fr" "ja") }}
 
 <!-- self reference the current page -->
 <link rel="alternate" hreflang="{{ $dot.Lang }}" href="{{ $dot.Permalink }}"/>

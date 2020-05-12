@@ -3,7 +3,6 @@ title: Corrélation de métriques
 kind: documentation
 aliases:
   - /fr/graphing/correlations/
-beta: true
 further_reading:
   - link: /dashboards
     tag: Documentation

@@ -11,22 +11,22 @@ To [create a monitor][1] in Datadog, hover over **Monitors** in the main menu an
 
 Select a monitor type:
 
-* [Host][4]
-* [Metric][5]
-* [Anomaly][6]
-* [Outlier][7]
-* [Forecast][8]
-* [Integration][9]
-* [Live Process][10]
-* [Process Check][11]
-* [Network][12]
-* [Custom Check][13]
-* [Event][14]
-* [Logs][15]
-* [APM][16]
-* [Real User Monitoring][17]
-* [Watchdog][18]
-* [Composite][19]
+* [Host][4] - Check if one or more hosts are reporting to Datadog.
+* [Metric][5] - Compare values of a metric with a user-defined threshold.
+* [Anomaly][6] - Detect anomalous behavior for a metric based on historical data.
+* [Outlier][7] - Alert on members of a group behaving differently than the others.
+* [Forecast][8] - Alert when a metric is projected to cross a threshold.
+* [Integration][9] - Monitor metric values or health status from a specific integration.
+* [Live Process][10] - Check if one or more processes are running on a host.
+* [Process Check][11] - Watch the status produced by the `process.up` service check.
+* [Network][12] - Check the status of TCP/HTTP endpoints.
+* [Custom Check][13] - Monitor the status of arbitrary custom checks.
+* [Event][14] - Monitor events gathered by Datadog.
+* [Logs][15] - Monitor logs gathered by Datadog.
+* [APM][16] - Compare an APM metric to a user-defined threshold.
+* [Real User Monitoring][17] - Monitor real user data gathered by Datadog.
+* [Watchdog][18] - Get notified when Watchdog detects anomalous behavior.
+* [Composite][19] - Alert on an expression combining multiple monitors.
 
 ## Import
 
@@ -49,23 +49,23 @@ Datadog also provides a notification option for changes to monitors you create. 
 The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor. The monitor audit event also appears in the [event stream][20].
 
 [1]: https://app.datadoghq.com/monitors#/create
-[2]: /api/#monitors
+[2]: /api/v1/monitors/
 [3]: /developers/libraries/#managing-monitors
-[4]: /monitors/monitor_types/host
-[5]: /monitors/monitor_types/metric
-[6]: /monitors/monitor_types/anomaly
-[7]: /monitors/monitor_types/outlier
-[8]: /monitors/monitor_types/forecasts
-[9]: /monitors/monitor_types/integration
-[10]: /monitors/monitor_types/process
-[11]: /monitors/monitor_types/process_check
-[12]: /monitors/monitor_types/network
-[13]: /monitors/monitor_types/custom_check
-[14]: /monitors/monitor_types/event
-[15]: /monitors/monitor_types/log
-[16]: /monitors/monitor_types/apm
-[17]: /monitors/monitor_types/real_user_monitoring
-[18]: /monitors/monitor_types/watchdog
-[19]: /monitors/monitor_types/composite
+[4]: /monitors/monitor_types/host/
+[5]: /monitors/monitor_types/metric/
+[6]: /monitors/monitor_types/anomaly/
+[7]: /monitors/monitor_types/outlier/
+[8]: /monitors/monitor_types/forecasts/
+[9]: /monitors/monitor_types/integration/
+[10]: /monitors/monitor_types/process/
+[11]: /monitors/monitor_types/process_check/
+[12]: /monitors/monitor_types/network/
+[13]: /monitors/monitor_types/custom_check/
+[14]: /monitors/monitor_types/event/
+[15]: /monitors/monitor_types/log/
+[16]: /monitors/monitor_types/apm/
+[17]: /monitors/monitor_types/real_user_monitoring/
+[18]: /monitors/monitor_types/watchdog/
+[19]: /monitors/monitor_types/composite/
 [20]: https://app.datadoghq.com/monitors#create/import
-[21]: /events
+[21]: /events/

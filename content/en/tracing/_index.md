@@ -8,10 +8,10 @@ further_reading:
 - link: "/tracing/connect_logs_and_traces/"
   tag: "Documentation"
   text: "Connect logs and traces"
-- link: "/tracing/guide/adding_metadata_to_spans"
+- link: "/tracing/guide/adding_metadata_to_spans/"
   tag: "Documentation"
   text: "Adding metadata to spans"
-- link: "/tracing/runtime_metrics"
+- link: "/tracing/runtime_metrics/"
   tag: "Documentation"
   text: "Runtime metrics"
 - link: "https://learn.datadoghq.com/enrol/index.php?id=17"
@@ -22,6 +22,7 @@ aliases:
   - /tracing/guide/terminology
   - /tracing/guide/distributed_tracing/
   - /tracing/advanced/
+  - /tracing/api
 ---
 
 {{< wistia 2kgmb9wbsr >}}

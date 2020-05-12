@@ -89,7 +89,7 @@ Exécutez le script suivant, avec le `<NOM_CHECK>` approprié :
 
 `<RÉPERTOIRE_INSTALLATION>/embedded/python.exe <RÉPERTOIRE_INSTALLATION>agent/agent.py check <NOM_CHECK>`
 
-Par exemple, pour exécuter le check de disque :
+Par exemple, pour exécuter le check Disk :
 
 ```powershell
 C:\Program' 'Files\Datadog\Datadog' 'Agent\embedded\python.exe C:\Program' 'Files\Datadog\Datadog' 'Agent\agent\agent.py check disk

@@ -2,9 +2,9 @@
 aliases:
   - /ja/integrations/azure_appserviceenvironment
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure App Service Environment のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_app_service_environment/'
@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure App Service Environment
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_app_service_environment
 public_title: Datadog-Microsoft Azure App Service Environment インテグレーション
 short_description: Azure App Service Environment のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

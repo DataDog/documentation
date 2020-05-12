@@ -55,20 +55,20 @@ Le check `nginx-ingress-controller` est inclus avec le paquet de l'[Agent Datado
 
 Rassemblez vos logs de NGINX Ingress Controller, y compris Weave NPC et Weave Kube, et envoyez-les à Datadog.
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans votre [configuration daemonSet][4] :
 
-    ```
-      (...)
-        env:
-          (...)
-          - name: DD_LOGS_ENABLED
-              value: "true"
-          - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-              value: "true"
-      (...)
-    ```
+   ```yaml
+       (...)
+       env:
+           (...)
+         - name: DD_LOGS_ENABLED
+             value: "true"
+         - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+             value: "true"
+       (...)
+   ```
 
 2. Assurez-vous que le socket Docker est monté sur l'Agent Datadog comme dans [ce manifeste][5].
 

@@ -2,9 +2,9 @@
 aliases:
   - /ja/integrations/azure_filestorage
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure File Storage のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_file_storage/'
@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure File Storage
 is_public: true
 kind: インテグレーション
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_file_storage
 public_title: Datadog-Microsoft Azure File Storage インテグレーション
 short_description: Azure File Storage のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

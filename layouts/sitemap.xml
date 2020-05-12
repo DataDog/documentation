@@ -1,8 +1,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  {{ $allowed := (slice "fr") }}
+  {{ $allowed := (slice "fr" "ja" ) }}
   {{ range where (where .Data.Pages "Params.beta" "!=" true) ".Params.is_public" "!=" false }}
     {{ $page := . }}
-    {{ if (and (not .Params.private) (not .Params.placeholder) (ne (.Language.Lang | default "en") "ja") ) }}
+    {{ if (and (not .Params.private) (not .Params.placeholder)) }}
 	  <url>
 	    <loc>{{ .Permalink }}</loc>
       {{ if not .Lastmod.IsZero }}

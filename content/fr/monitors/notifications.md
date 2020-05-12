@@ -15,225 +15,334 @@ further_reading:
     text: Gérer vos monitors
   - link: monitors/downtimes
     tag: Documentation
-    text: Planifier un downtime pour désactiver un monitor
+    text: Planifier un downtime pour votre monitor
   - link: monitors/monitor_status
     tag: Documentation
     text: Consulter le statut de votre monitor
 ---
 ## Présentation
 
-Les notifications sont un composant clé de n'importe quel [monitor][1]. En cas de problème, il est essentiel de prévenir les bonnes personnes afin d'accélérer le processus de résolution.
+Les notifications constituent un outil clé des monitors. Elles vous permettent de tenir votre équipe informée des problèmes et de faciliter leur résolution. Lorsque vous [créez un monitor][1], prenez le temps de remplir les sections **Say what's happening** et **Notify your team**.
 
-{{< img src="monitors/notifications/notification.png" alt="notification"  >}}
+## Say what's happening
 
-1. Donnez un **titre** à votre monitor. Il est souvent utile d'indiquer une courte
-   explication du monitor afin que les membres d'équipe qui reçoivent la notification comprennent rapidement
-   ce qu'il se passe.
+Cette section vous permet de configurer les notifications envoyées à votre équipe.
 
-2. Saisissez un **message** pour le monitor. Ce champ accepte l'utilisation du [format de mise en forme Markdown][2] standard ainsi que des [variables](#variables) inline et des variables de tags.
-  Utilisez des [variables conditionnelles](#variables-conditionnelles) pour ajuster le texte des notifications et les envoyer à différents contacts avec la [syntaxe **@-notification** de Datadog](#notification).
-  Le message du monitor inclut généralement des étapes détaillées permettant de résoudre le problème.
+### Titre
 
-3. Vous pouvez activer la fonction **monitor renotification**. Cette option vous permet de rappeler à votre équipe qu'un problème n'est pas résolu tant que le monitor n'est pas [résolu][3]. Si vous l'activez, un message de réaffectation peut être configuré et envoyé lorsque le monitor renvoie une notification. Le message d'origine est également inclus.
+Vous devez ajouter un titre unique à votre monitor. Pour les monitors à alertes multiples, certains tags permettant d'identifier votre contexte de déclenchement sont automatiquement ajoutés. Vous pouvez également utiliser des [variables de tags](#variables-de-tags). 
+
+### Message
+
+Le champ de message accepte l'utilisation du [format de mise en forme Markdown][2] standard ainsi que des [variables](#variables). Utilisez des [variables conditionnelles](#variables-conditionnelles) pour ajuster le texte de la notification envoyé aux différents contacts avec la [syntaxe @notifications](#notification).
+
+Le message du monitor inclut généralement des étapes détaillées permettant de résoudre le problème. Exemple :
+
+```text
+Étapes à suivre pour libérer de l'espace disque :
+1. Supprimer les paquets non utilisés
+2. Vider le cache APT
+3. Désinstaller les applications superflues
+4. Supprimer les fichiers en double
+```
+
+### Tags
+
+Vous pouvez choisir d'ajouter des tags à votre monitor. Les tags de monitors ne fonctionnent pas de la même manière que les tags de métriques. Ils servent à regrouper les monitors et à y effectuer des recherches depuis l'interface.
+
+### Renvoi de notifications
+
+Vous pouvez configurer le renvoi des notifications du monitor. Cette option vous permet de rappeler à votre équipe qu'un problème n'est pas résolu. Si vous activez cette fonction, vous pouvez choisir d'inclure un message de réaffectation à envoyer lorsque le monitor renvoie une notification. Le message d'origine est également inclus.
+
+## Notify your team
+
+Utilisez cette section pour envoyer des notifications à votre équipe par e-mail, Slack, PagerDuty, etc. La liste déroulante vous permet de rechercher des membres d'équipe et des intégrations connectées. Lorsqu'une `@notification` est ajoutée à cette section, celle-ci est automatiquement ajoutée au champ de [message](#message) :
+
+**Remarque** : vous devez inclure une espace entre le dernier caractère de la ligne et la `@notification`. Exemple :
+
+```text
+Espace disque faible @ops-team@company.com
+```
+
+### @notification
+
+Vous pouvez envoyer des `@notifications` de différentes façons :
+
+#### Par e-mail
+
+* Informez un utilisateur Datadog par e-mail en ajoutant `@<ADRESSE_EMAIL_UTILISATEUR_DD>`. **Remarque** : une adresse e-mail associée à une invitation utilisateur Datadog en attente est considérée comme inactive et ne reçoit aucune notification.
+* Pour informer par e-mail un utilisateur en dehors de Datadog, ajoutez `@<EMAIL>`.
+
+#### Via des intégrations
+
+Informez votre équipe par l'intermédiaire des intégrations connectées en utilisant la syntaxe `@<NOM_INTÉGRATION>-<VALEURS>`. Vous trouverez ci-dessous la liste des préfixes ainsi que des exemples de liens :
+
+| Intégration    | Préfixe       | Exemples       |
+|----------------|--------------|----------------|
+| [Jira][3]      | `@jira`      | [Exemples][4]  |
+| [PagerDuty][5] | `@pagerduty` | [Exemples][6]  |
+| [Slack][7]     | `@slack`     | [Exemples][8]  |
+| [Webhooks][9]  | `@webhook`   | [Exemples][10] |
+
+Consultez la [liste des intégrations][14] pouvant envoyer des notifications à votre équipe.
+
+### Via des modifications
+
+Chaque fois qu'un monitor est créé, modifié, désactivé ou supprimé, un [événement][11] est généré. Définissez l'option `Notify` pour envoyer des notifications aux membres de vos équipes ainsi qu'aux services de discussion à propos de ces événements.
+
+### Modifier des restrictions
+
+Si les modifications sont restreintes, seuls le créateur du monitor ou un administrateur peuvent le modifier. Sont considérées comme des modifications les mises à jour de la définition du monitor ainsi que toute désactivation du monitor, peu importe sa durée.
+
+**Remarque** : les limites s'appliquent à la fois à l'IU et à l'API.
 
 ## Variables
 
-Utilisez les variables pour personnaliser vos notifications de monitor. Voici les variables disponibles :
+### Template variables
 
-| Variable                      | Description                                                                                    |
-|-------------------------------|------------------------------------------------------------------------------------------------|
-| `{{value}}`                   | Affiche la valeur qui a déclenché l'alerte pour les monitors de requête basés sur des métriques.                    |
-| `{{threshold}}`               | Affiche le seuil d'alerte sélectionné dans la section *Set alert conditions* du monitor.          |
-| `{{warn_threshold}}`          | Affiche le seuil d'avertissement sélectionné dans la section *Set alert conditions* du monitor, le cas échéant. |
-| `{{ok_threshold}}`            | Affiche la valeur qui a rétabli l'état du monitor.                                                  |
-| `{{comparator}}`              | Affiche la valeur relationnelle sélectionnée dans la section *Set alert conditions* du monitor.         |
-| `{{last_triggered_at}}`       | Affiche la date et l'heure au format UTC du dernier déclenchement du monitor.                                     |
-| `{{last_triggered_at_epoch}}` | Affiche la date et l'heure UTC du dernier déclenchement du monitor, au format EPOCH en millisecondes.        |
+Utilisez des template variables pour personnaliser les notifications de votre monitor. Voici la liste des variables intégrées :
 
-**Remarque** : lorsque vous saisissez des valeurs décimales pour des seuils, si votre valeur est `<1`, ajoutez un `0` au début du nombre. Par exemple, utilisez `0.5` et non `,5`.
+| Variable                      | Description                                                                  |
+|-------------------------------|------------------------------------------------------------------------------|
+| `{{value}}`                   | La valeur qui a déclenché l'alerte pour les monitors de requête basés sur des métriques.           |
+| `{{threshold}}`               | La valeur du seuil d'alerte défini dans les conditions d'alerte du monitor.      |
+| `{{warn_threshold}}`          | La valeur du seuil d'avertissement défini dans les conditions d'alerte du monitor.    |
+| `{{ok_threshold}}`            | La valeur qui a rétabli l'état du monitor.                                        |
+| `{{comparator}}`              | La valeur relationnelle définie dans les conditions d'alerte du monitor.                  |
+| `{{last_triggered_at}}`       | La date et l'heure UTC du dernier déclenchement du monitor.                       |
+| `{{last_triggered_at_epoch}}` | La date et l'heure UTC du dernier déclenchement du monitor, au format EPOCH en millisecondes. |
+
+#### Évaluation
+
+Les template variables qui renvoient des valeurs numériques prennent en charge les opérations et les fonctions. Vous pouvez ainsi effectuer des opérations mathématiques ou mettre en forme les valeurs. Pour en savoir plus, consultez la rubrique [Évaluation des template variables][12].
 
 ### Variables de tags
 
-Pour les monitors à alertes multiples, ajoutez des variables de tags pour inclure des données dans votre message d'alerte spécifiques au contexte du tag qui a déclenché l'alerte. Ces données dépendent des tags que vous avez utilisés dans le champ *trigger a separate alert for each* de la section 1 de votre monitor.
+Vous pouvez utiliser des variables de tags dans des monitors à alertes multiples reposant sur les tags sélectionnés dans la section de regroupement de plusieurs alertes. Cette méthode fonctionne pour tous les tags, tant que vous suivez la syntaxe `key:value`.
 
-Par exemple, si vous déclenchez une alerte pour chaque tag **host**, alors un certain nombre de variables de tags associées à **host** sont disponibles dans la section 3 **Say what's happening**, comme `{{host.name}}`, `{{host.ip}}`, etc.
+Par exemple, si votre monitor déclenche une alerte pour chaque `host`, vous pouvez utiliser les variables de tags `{{host.name}}` et `{{host.ip}}`. Pour consulter la liste des variables de tags disponibles en fonction des tags sélectionnés, cliquez sur **Use message template variables** dans la section **Say what's happening**.
 
-Cette fonctionnalité fonctionne également pour les tags personnalisés. Si vous ajoutez un tag personnalisé avec la syntaxe `key:value`, vous pouvez alors regrouper les données en fonction des clés de tag. Cela permet de créer des alertes multiples (avec déclenchement distinct) pour chaque **value**. De plus, la variable `.name` du tag peut être utilisée dans votre message de monitor.
+**Remarques** :
 
-Remarque :
-
-* Le contenu des template variables est échappé par défaut. Si votre variable comporte du JSON ou du code que vous ne souhaitez PAS échapper, utilisez trois accolades plutôt que deux (par exemple, `{{{event.text}}}`).
-
-* Pour consulter la liste complète des template variables contextuelles disponibles pour votre monitor, cliquez sur le lien **Use message template variables** ou sur la liste de suggestions qui apparaît lorsque vous saisissez `{{` pour commencer le nom d'une template variable. Les variables disponibles varient en fonction de la combinaison de métriques, de tags et d'autres fonctionnalités du monitor sur lequel vous travaillez.
-
-* Les template variables de tags peuvent également être utilisées dans les titres de monitor (noms). Cependant, les variables sont uniquement insérées dans le texte des événements enfants de Datadog (et non pas dans le texte de l'événement parent, qui affiche un résumé des agrégations).
-
-* Certains tags qui identifient votre contexte de déclenchement sont automatiquement insérés dans le titre de vos alertes multiples.
-
-#### Exemples
-
-Dans cet exemple, un utilisateur a tagué un certain nombre de hosts avec différentes valeurs de `creator:` : par exemple, `creator:wes_anderson` et `creator:saint_exupéry`.
-
-L'utilisateur a pu configurer un monitor à alertes multiples afin de déclencher une alerte différente pour chaque tag `creator:`. Il a donc pu inclure le `{{creator.name}}` dans son message de monitor. Lorsque ce monitor se déclenche, le destinataire de la notification d'alerte voit si le monitor a été déclenché par **wes_anderson**, **saint_exupéry** ou une autre valeur de `creator:`.
-
-{{< img src="monitors/faq/multi_alert_templating_notification.png" alt="modèle_notification_alertes_multiples" style="width:80%;">}}
-
-Voici un exemple d'utilisation des template variables pour un monitor à alertes multiples :
-
-{{< img src="monitors/notifications/templatevareditor.png" alt="éditeur de template variable" style="width:80%;">}}
-
-Et la notification d'événement correspondante :
-
-{{< img src="monitors/notifications/templatevar.png" alt="template variable"  style="width:80%;">}}
+* Par défaut, le contenu des variables est échappé par défaut. Pour éviter que du contenu JSON ou du code soit échappé, utilisez trois accolades au lieu de deux. Exemple : `{{{event.text}}}`.
+* Les variables de tags sont uniquement insérées dans le texte des événements enfants de Datadog. L'événement parent affiche seulement un résumé des agrégations.
 
 #### Clé de tag avec un point
 
-Si la clé de votre groupe de tags contient un point, vous devez compléter vos template variables afin d'inclure des accolades autour de la clé complète.
-Par exemple, si vous envoyez une métrique avec le tag `dot.key.test:five` et que vous configurez ensuite un monitor à alertes multiples avec le tag de groupe `dot.ket.test`, vous devez appliquer la syntaxe suivante afin d'utiliser la variable de tag `dot.key.test.name` :
+Si la clé de votre tag contient un point, ajoutez des accolades autour de la clé complète pour utiliser une variable de tag.
+Par exemple, pour un tag `dot.key.test:five` et un monitor regroupé selon `dot.key.test`, utilisez :
 
-{{< img src="monitors/faq/template_with_dot.png" alt="template_avec_point" style="width:80%;">}}
+```text
+{{[dot.key.test].name}}
+```
 
-### Opérations arithmétiques des template variables
+### Variables conditionnelles
 
-Les template variables qui renvoient des valeurs numériques prennent en charge les opérations arithmétiques. Pour effectuer une opération arithmétique sur une template variable, utilisez la syntaxe `eval`, comme indiqué ci-dessous :
-
-`{{eval "<NOM_TEMPLATE_VARIABLE>+1-2*3/4"}}`
-
-Remarque : n'oubliez pas de placer des guillemets (`"`) autour du nom de la template variable et de l'expression arithmétique.
-
-Ainsi, pour soustraire 15 minutes (15 * 60 * 1 000 millisecondes) à la template variable `{{last_triggered_at_epoch}}`, ajoutez ce qui suit à votre message de notification : 
-
-`{{eval "last_triggered_at_epoch-15*60*1000"}}`
-
-## Variables conditionnelles
-
-Les variables conditionnelles permettent l'[envoi de différents textes à différents contacts](#notifications) en fonction de l'état du monitor et des détails de son déclenchement. Ces variables conditionnelles peuvent être utilisées dans le sujet ou dans le corps de la notification défini dans la section 3 du monitor.
-
-N'oubliez pas que lorsque vous utilisez des tags conditionnels, vous devez inclure une paire d'ouverture (par exemple : `{{#is_alert}}`) et de fermeture (par exemple : `{{/is_alert}}`) avec le texte souhaité et la **mention « @ ** entre les deux paires.
+Les variables conditionnelles reposent sur une logique `if-else` pour afficher un message personnalisé en fonction de l'état du monitor et des détails de son déclenchement. Ces variables peuvent être utilisées dans le sujet ou le corps du message de la notification.
 
 Voici la liste des variables conditionnelles disponibles :
 
-| Variable conditionnelle       | Description                                                         |
-|----------------------------|---------------------------------------------------------------------|
-| `{{#is_alert}}`            | S'affiche en cas d'alerte du monitor.                                            |
-| `{{^is_alert}}`            | S'affiche sauf en cas d'alerte du monitor.                                          |
-| `{{#is_match}}`            | S'affiche lorsque le contexte correspond à une chaîne.                              |
-| `{{^is_match}}`            | S'affiche sauf si le contexte correspond à une chaîne.                            |
-| `{{#is_exact_match}}`      | S'affiche lorsque le contexte correspond précisément à une chaîne.                      |
-| `{{^is_exact_match}}`      | S'affiche sauf si le contexte correspond précisément à une chaîne.                    |
-| `{{#is_no_data}}`          | S'affiche lorsque le monitor indique que des données sont manquantes.                          |
-| `{{^is_no_data}}`          | S'affiche sauf si le monitor indique que des données sont manquantes.                        |
-| `{{#is_warning}}`          | S'affiche en cas d'avertissement du monitor.                                             |
-| `{{^is_warning}}`          | S'affiche sauf en cas d'avertissement du monitor.                                           |
-| `{{#is_recovery}}`         | S'affiche lorsque le monitor est rétabli depuis un état WARNING, ALERT ou NO DATA.   |
-| `{{^is_recovery}}`         | S'affiche sauf si le monitor est rétabli depuis un état WARNING, ALERT ou NO DATA. |
-| `{{#is_warning_recovery}}` | S'affiche lorsque le monitor passe d'un état WARNING à OK.                     |
-| `{{^is_warning_recovery}}` | S'affiche sauf si le monitor passe d'un état WARNING à OK.                   |
-| `{{#is_alert_recovery}}`   | S'affiche lorsque le monitor passe d'un état ALERT à OK.                      |
-| `{{^is_alert_recovery}}`   | S'affiche sauf si le monitor passe d'un état ALERT à OK.                    |
-| `{{#is_alert_to_warning}}` | S'affiche lorsque le monitor passe d'un état ALERT à WARNING.                 |
-| `{{^is_alert_to_warning}}` | S'affiche sauf si le monitor passe d'un état ALERT à WARNING.               |
-| `{{#is_no_data_recovery}}` | S'affiche lorsque le monitor est rétabli depuis un état NO DATA.                             |
-| `{{^is_no_data_recovery}}` | S'affiche sauf si le monitor est rétabli depuis un état NO DATA.                           |
+| Variable conditionnelle       | Condition d'affichage du texte                                           |
+|----------------------------|--------------------------------------------------------------------|
+| `{{#is_alert}}`            | Le monitor génère une alerte.                                                 |
+| `{{^is_alert}}`            | Le monitor ne génère pas d'alerte.                                         |
+| `{{#is_match}}`            | Le contexte correspond à la sous-chaîne indiquée.                         |
+| `{{^is_match}}`            | Le contexte ne correspond pas à la sous-chaîne indiquée.                  |
+| `{{#is_exact_match}}`      | Le contexte correspond exactement à la chaîne indiquée.                    |
+| `{{^is_exact_match}}`      | Le contexte ne correspond pas exactement à la chaîne indiquée.             |
+| `{{#is_no_data}}`          | Le monitor se déclenche en raison de données manquantes.                          |
+| `{{^is_no_data}}`          | Le monitor apprend qu'il manque des données.                            |
+| `{{#is_warning}}`          | Le monitor génère un avertissement.                                                  |
+| `{{^is_warning}}`          | Le monitor ne génère pas d'avertissement.                                          |
+| `{{#is_recovery}}`         | Le monitor est rétabli depuis un état `ALERT`, `WARNING` ou `NO DATA`.         |
+| `{{^is_recovery}}`         | Le monitor n'est pas rétabli depuis un état `ALERT`, `WARNING` ou `NO DATA`. |
+| `{{#is_warning_recovery}}` | Le monitor passe d'un état `WARNING` à un état `OK`.                        |
+| `{{^is_warning_recovery}}` | Le monitor ne passe pas d'un état `WARNING` à un état `OK`.                |
+| `{{#is_alert_recovery}}`   | Le monitor passe d'un état `ALERT` à un état `OK`.                          |
+| `{{^is_alert_recovery}}`   | Le monitor ne passe pas d'un état ALERT à un état OK.                   |
+| `{{#is_alert_to_warning}}` | Le monitor passe d'un état `ALERT` à un état `WARNING`.                  |
+| `{{^is_alert_to_warning}}` | Le monitor ne passe pas d'un état `ALERT` à un état `WARNING`.          |
+| `{{#is_no_data_recovery}}` | Le monitor est rétabli depuis un état `NO DATA`.                                |
+| `{{^is_no_data_recovery}}` | Le monitor n'est pas rétabli depuis un état `NO DATA`.                        |
 
-Ces template variables apparaissent égalent dans la zone d'aide « Use message template variables »,
-à l'étape 3 de l'éditeur de monitors.
+#### Exemples
 
-Voici quelques exemples illustrant différentes utilisations possibles :
+La variable conditionnelle doit comporter un élément d'ouverture et un élément de fermeture entourant le texte et les **notifications « @ »**.
 
 {{< tabs >}}
-{{% tab "is_alert / is_warning" %}}
+{{% tab "is_alert" %}}
 
-Ces variables utilisent la logique simple `if/else` pour afficher un message qui varie en fonction du type d'événement (*warning*, *recovery*, *no data*, etc.).
+Pour envoyer un message de notification lorsqu'un monitor génère une alerte, utilisez le format suivant :
 
-{{< img src="monitors/notifications/conditionalvars.png" alt="variables conditionnelles" style="width:80%;">}}
-
-Voici un exemple dans l'éditeur :
-
-{{< img src="monitors/notifications/templateconditionaleditor.png" alt="éditeur template variable conditionnelle" style="width:80%;">}}
-
-Voici à quoi ressemble la notification d'événement déclenchée correspondante :
-
-{{< img src="monitors/notifications/templateconditionaltrigger.png" alt="déclenchement template variable conditionnelle" style="width:80%;">}}
-
-Et la notification de rétablissement :
-
-{{< img src="monitors/notifications/templateconditionalrecover.png" alt="rétablissement template variable conditionnelle"  style="width:80%;">}}
+```text
+{{#is_alert}}
+  <TEXTE_MESSAGE_ALERTE> <@-NOTIFICATION>
+{{/is_alert}}
+```
 
 {{% /tab %}}
-{{% tab "is_recovery / is_alert_recovery " %}}
+{{% tab "is_warning" %}}
 
-* `{{#is_recovery}}` se déclenche lorsqu'un monitor se rétablit depuis un état **WARNING** ou **ALERT**.
-* `{{#is_alert_recovery}}` se déclenche lorsqu'un monitor se rétablit et passe d'un état **ALERT** et à un état **OK**.
-* `{{#is_warning_recovery}}` se déclenche lorsqu'un monitor se rétablit et passe d'un état **WARNING** à un état **OK**
+Pour envoyer un message de notification lorsqu'un monitor génère un avertissement, utilisez le format suivant :
 
-Cela signifie que, si le monitor passe d'un état **ALERT** à un état **WARNING**, puis à un état **OK** :
-
-* `{{#is_recovery}}` est déclenché
-* `{{#is_alert_recovery}}` n'est pas déclenché
-* `{{#is_warning_recovery}}` est déclenché
+```text
+{{#is_warning}}
+  <TEXTE_MESSAGE_AVERTISSEMENT> <@-NOTIFICATION>
+{{/is_warning}}
+```
 
 {{% /tab %}}
-{{% tab "is_match / is_exact_match" %}}
+{{% tab "is_recovery" %}}
 
-La variable conditionnelle `{{is_match}}` vous permet d'associer le contexte déclencheur à toute chaîne donnée afin d'afficher un message unique dans vos notifications.
-Utilisez l'une des variables de tags disponibles dans votre déclaration conditionnelle. **Il y a correspondance si la chaîne de comparaison fait partie de la variable résolue**.
+Pour envoyer un message de notification lorsqu'un monitor est rétabli, utilisez le format suivant :
 
-Les variables de tags utilisent le format suivant :
+```text
+{{#is_recovery}}
+  <TEXTE_MESSAGE_RÉTABLISSEMENT> <@-NOTIFICATION>
+{{/is_recovery}}
+```
+
+{{% /tab %}}
+{{% tab "is_match" %}}
+
+Pour rechercher une sous-chaîne dans une variable de tag, utilisez le format suivant :
 
 ```text
 {{#is_match "<VARIABLE_TAG>.name" "<CHAÎNE_COMPARAISON>"}}
-  S'affiche si <CHAÎNE_COMPARAISON> est inclus dans <TAG_VARIABLE>
+  Cela s'affiche si <CHAÎNE_COMPARAISON> fait partie de <VARIABLE_TAG>.
 {{/is_match}}
 ```
 
-Par exemple, si vous souhaitez informer votre équipe DB qu'un host déclencheur dispose du tag `role:db_cassandra` ou `role:db_postgres`, utilisez le code suivant :
+Pour informer votre équipe DB qu'un host déclencheur dispose du tag `role:db_cassandra` ou `role:db_postgres`, utilisez le format suivant :
 
 ```text
 {{#is_match "role.name" "db"}}
-  S'affiche uniquement si le host qui a déclenché l'alerte dispose d'une variable de tag `role` comprenant `db`.
-  L'alerte se déclenche donc pour role:db_cassandra et role:db_postgres.
+  Cela s'affiche si le nom du rôle du host qui a déclenché l'alerte contient `db`. @db-team@company.com
 {{/is_match}}
 ```
 
-**Remarque** : pour vérifier que `<VARIABLE_TAG>` n'est **PAS** vide, utilisez la variable conditionnelle `{{is_match}}` avec une chaîne vide.
+**Remarque** : pour vérifier qu'une `<VARIABLE_TAG>` n'est **PAS** utilisez, indiquez une `<CHAÎNE_COMPARAISON>` vide.
+
+{{% /tab %}}
+{{% tab "is_exact_match" %}}
+
+Pour rechercher une chaîne exacte dans une variable de tag, utilisez le format suivant :
 
 ```text
-{{#is_match "<VARIABLE_TAG>.name" ""}}
-  S'affiche si <VARIABLE_TAG> n'est pas vide.
-{{/is_match}}
-```
-
-##### {{is_exact_match}}
-
-La variable conditionnelle `{{is_exact_match}}` recherche exactement la même chaîne dans la variable de tag, plutôt que de rechercher dans les sous-chaînes. La variable utilise le format suivant :
-
-```text
-{{#is_exact_match "<VARIABLE_TAG>.name" "<CHAINE_COMPARAISON>"}}
-  S'affiche si <CHAINE_COMPARAISON> correspond exactement à <VARIABLE_TAG>.
+{{#is_exact_match "<VARIABLE_TAG>.name" "<CHAÎNE_COMPARAISON>"}}
+  Cela s'affiche si <CHAÎNE_COMPARAISON> correspond exactement à <VARIABLE_TAG>.
 {{/is_exact_match}}
 ```
 
-Par exemple, si une alerte peut être déclenchée par deux hosts dotés des tags `role:production` et `role:production-1` :
+Pour informer votre équipe de développement lorsqu'un host déclencheur dispose du nom `production`, utilisez le format suivant :
 
-  ```text
-  {{#is_match "role.name" "production"}}
-    S'affiche uniquement si le host à l'origine du déclenchement de l'alerte comprend le tag role:production ou role:production-1.
-  {{/is_match}}
-
-  {{#is_exact_match "host.name" "production"}}
-    S'affiche uniquement si le host à l'origine du déclenchement comprend le tag role:production.
-  {{/is_exact_match}}
-  ```
+```text
+{{#is_exact_match "host.name" "production"}}
+  Cela s'affiche si le host qui a déclenché l'alerte s'intitule précisément « production ». @dev-team@company.com
+{{/is_exact_match}}
+```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Utilisation avancée des variables
+## Notifications de test
 
-Si votre message d'alerte doit envoyer deux accolades, par exemple `{{ <TEXTE> }}`, utilisez le formatage `{{{{r}aw}}}` :
+Les notifications de test sont prises en charge pour les [types de monitors][1] suivants : host, metric, anomaly, outlier, forecast, integration (check uniquement), process (check uniquement), network (check uniquement), custom check, event et composite.
 
-Le modèle suivant :
+### Effectuer le test
+
+1. Après avoir défini votre monitor, testez les notifications à l'aide du bouton **Test Notifications** situé en bas de la page du monitor.
+
+2. Dans la fenêtre contextuelle des notifications de test, choisissez le scénario de monitor à tester. Vous pouvez uniquement tester les états disponibles dans la configuration du monitor, pour les seuils indiqués dans les conditions d'alerte. Les [seuils de rétablissement][13] sont la seule exception. En effet, Datadog envoie une notification de rétablissement lorsque le monitor n'est plus en alerte ou lorsqu'il ne possède aucune condition d'avertissement.
+
+    {{< img src="monitors/notifications/test-notif-select.png" alt="Tester les notifications pour ce monitor"  style="width:70%;" >}}
+
+3. Cliquez sur **Run Test** pour envoyer des notifications aux personnes et services répertoriés dans le monitor.
+
+### Événements
+
+Les notifications de test créent des événements qui peuvent faire l'objet de recherches dans le flux d'événements. Ces notifications indiquent la personne à l'origine du test dans le corps du message. La mention `[TEST]` est ajoutée au titre de la notification.
+
+### Variables {#notification-test-variables}
+
+Les variables de message se remplissent automatiquement à partir d'un groupe disponible, sélectionné au hasard, en fonction du contexte de la définition de votre monitor. Exemple :
+
+```text
+{{#is_alert}}
+{{host.name}} <-- est fourni automatiquement
+{{/is_alert}}
+```
+
+## Réglages avancés
+
+### Liens dynamiques
+
+Utilisez des [variables de tags](#variables-de-tags) pour activer la création d'URL dynamiques. Celles-ci vous permettent de rediriger votre équipe vers la ressource adéquate. Par exemple, vous pouvez fournir des liens vers des pages de Datadog : dashboards, hostmap, monitors, etc.
+
+{{< tabs >}}
+{{% tab "Dashboards" %}}
+
+Utilisez la [variable de tag](#variables-de-tags) `{{host.name}}` pour fournir un lien vers un dashboard système :
+
+```text
+https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
+```
+
+Utilisez la [variable de tag](#variables-de-tags) `{{host.name}}` et la variable `<NOM_INTÉGRATION>` pour fournir un lien vers le dashboard d'une intégration :
+
+```text
+https://app.datadoghq.com/dash/integration/<NOM_INTÉGRATION>?tpl_var_scope=host:{{host.name}}
+```
+
+{{% /tab %}}
+{{% tab "Hostmap" %}}
+
+Utilisez une [variable de tag](#variables-de-tag) comme `{{service.name}}` pour fournir un lien vers la hostmap :
+
+```text
+https://app.datadoghq.com/infrastructure/map?filter=service:{{service.name}}
+```
+
+Vous pouvez personnaliser le lien vers la hostmap en définissant des paramètres supplémentaires. Voici les paramètres les plus utilisés :
+
+| Paramètre | Défini par               | Fonction                           |
+|-----------|----------------------------|--------------------------------------|
+| `fillby`  | `fillby=avg:<NOM_MÉTRIQUE>` | Détermine la couleur de remplissage des hexagones des hosts. |
+| `groupby` | `groupby=<CLÉ_TAG>`        | Détermine les groupes d'hexagones des hosts.        |
+| `sizeby`  | `sizeby=avg:<NOM_MÉTRIQUE>` | Détermine la taille des hexagones des hosts.       |
+
+{{% /tab %}}
+{{% tab "Monitors" %}}
+
+Utilisez la [variable de tag](#variables-de-tags) `{{host.name}}` pour fournir un lien vers tous les monitors associés à un certain host :
+
+```text
+https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
+```
+
+Vous pouvez personnaliser le lien vers les monitors en définissant des paramètres supplémentaires. Voici les paramètres les plus utilisés :
+
+| Paramètre | Exemple        | Contenu affiché                                                                        |
+|-----------|----------------|---------------------------------------------------------------------------------|
+| `status`  | `status:Alert` | Les monitors avec un état d'alerte (statuts supplémentaires : `WARN`, `NO DATA` et `OK`) |
+| `muted`   | `muted: true`  | Les monitors désactivés (indiquez `false` pour afficher les monitors qui ne sont pas désactivés)                             |
+| `type`    | `type:log`     | Les log monitors (découvrez les autres [types de monitors][1])                                     |
+
+[1]: /fr/monitors/monitor_types
+{{% /tab %}}
+{{< /tabs >}}
+
+### Commentaires
+
+Pour ajouter un commentaire dans le message qui s'affiche uniquement sur l'écran de modification du monitor, utilisez la syntaxe suivante :
+
+```text
+{{!-- ceci est un commentaire --}}
+```
+
+### Format brut
+
+Si votre message d'alerte doit envoyer deux accolades, par exemple `{{ <TEXTE> }}`, utilisez le format `{{{{raw}}}}`. Exemple :
 
 ```text
 {{{{raw}}}}
@@ -241,222 +350,41 @@ Le modèle suivant :
 {{{{/raw}}}}
 ```
 
-donne :
+Résultat :
 
 ```text
 {{ <TEXTE_1> }} {{ <TEXTE_2> }}
 ```
 
-Les auxiliaires `^|#` affichés dans la section [Variables conditionnelles](#variables-conditionnelles) ne peuvent pas être utilisés avec le formatage `{{{{raw}}}}` et doivent être supprimés. Par exemple, pour générer un texte brut de sortie avec la variable conditionnelle `{{is_match}}`, utilisez le modèle suivant :
+Les auxiliaires `^|#` utilisés dans les [variables conditionnelles](#variables-conditionnelles) ne peuvent pas être utilisés avec le format `{{{{raw}}}}` et doivent être supprimés. Par exemple, pour générer un texte brut de sortie avec la variable conditionnelle `{{is_match}}`, utilisez le modèle suivant :
 
 ```text
-{{{{is_match "host.name" "<NOM_HOST>"}}}}
+{{{{is_match "host.name" "<HOSTNAME>"}}}}
 {{ .matched }} le hostname
 {{{{/is_match}}}}
 ```
 
-Si `host.name` correspond à `<NOM_HOST>`, le modèle affiche :
+Si `host.name` correspond à `<HOSTNAME>`, le modèle affiche :
 
 ```text
 {{ .matched }} le hostname
-```
-
-## @notification
-
-Envoyez la notification de monitor à l'endpoint approprié :
-
-* Informez un utilisateur Datadog par e-mail en ajoutant `@<E-MAIL_UTILISATEUR_DD>` à votre message de notification.
-* Informez n'importe quel utilisateur en dehors de Datadog par e-mail en ajoutant `@<EMAIL>` au message de notification.
-* Installez l'intégration Slack pour envoyer vos notifications directement à la chaîne appropriée.
-
-**Remarques :**
-* Vous devez ajouter une espace entre le dernier caractère de la ligne et la **@mention** : `{{valeur}}@chaîne-slack` n'est pas valide, mais `{{valeur}} @chaîne-slack` l'est.
-* Une adresse email associée à une invitation utilisateur Datadog en attente est considérée comme inactive et ne reçoit aucune notification.
-
-### Intégrations
-
-{{< tabs >}}
-{{% tab "Slack" %}}
-
-Après avoir configuré l'[intégration Slack][1], saisissez `@slack` dans le message de votre notification pour afficher la liste des canaux auxquels vous pouvez envoyer votre notification.
-
-#### Mentions « @ » dans Slack depuis l'alerte d'un monitor
-
-Ajoutez `< >` de chaque côté de `@nomutilisateur` comme ci-dessous dans votre modèle de message pour vos monitors afin de prévenir l'utilisateur défini dans les notifications Slack à l'aide de la syntaxe **@ notify**.
-
-Par exemple, cette configuration :
-{{< img src="monitors/notifications/notification_template.png" alt="modèle_notification" style="width:50%;" >}}
-
-génère le message Slack suivant :
-{{< img src="monitors/notifications/notification_slack_preview.png" alt="aperçu_notification_slack" style="width:50%;" >}}
-
-**Remarque** : si vous ne parvenez pas à ping une personne, utilisez son `nom d'utilisateur` Slack plutôt que son nom d'affichage. Vous le trouverez dans les [paramètres de compte Slack][2], sous **Nom d'utilisateur**.
-
-Ajoutez la mention **@here** ou **@chaîne** en utilisant respectivement `<!here>` ou `<!chaîne>`.
-
-Pour les groupes d'utilisateurs, utilisez `<!subteam^ID_GROUPE|NOM_GROUPE>`. Pour trouver l'`ID_GROUPE`, [interrogez l'endpoint API de Slack `usergroups.list`][3]. Par exemple, pour un groupe d'utilisateurs `testers`, utilisez la syntaxe suivante :
-
-```text
-<!subteam^12345|testers>
-```
-
-Remarque : les caractères spéciaux à la fin du nom d'une chaîne ne sont pas pris en charge pour les @notifications Slack.
-Par exemple, `@----critical_alerts` fonctionne, mais `@--critical_alerts--` ne recevra aucune notification.
-
-### Utilisation des template variables de message pour créer des mentions « @ » dynamiques
-
-Utilisez les template variables de message dans un message de monitor pour créer des **mentions « @ »** dynamiques.
-
-Par exemple, si la variable affichée est configurée en tant que chaîne dans l'intégration Slack :
-
-* `@slack-{{nom.propriétaire}}` publie un message sur la chaîne du propriétaire pour ce monitor.
-
-* `@slack-{{host.name}}` publie un message dans la chaîne #host.name Slack.
-
-Vous pouvez également créer une **mention « @ »** transmise directement à une adresse e-mail spécifique :
-
-* `@team-{{nom.équipe}}@entreprise.com` envoie directement un e-mail à la liste de diffusion de l'équipe.
-
-[1]: /fr/integrations/slack
-[2]: http://slack.com/account/settings
-[3]: https://api.slack.com/methods/usergroups.list
-{{% /tab %}}
-{{% tab "Jira" %}}
-
-Après avoir configuré l'[intégration Jira][1], saisissez `@jira` dans le message de votre notification pour afficher la liste des options disponibles. Consultez les exemples de [cas d'utilisation][2] dans la documentation de l'intégration.
-
-[1]: /fr/integrations/jira
-[2]: /fr/integrations/jira/#use-cases
-{{% /tab %}}
-{{% tab "PagerDuty" %}}
-
-Après avoir configuré l'[intégration PagerDuty][1], saisissez `@pagerduty` dans le message de votre notification pour afficher la liste des noms de service auxquels vous pouvez envoyer votre notification.
-
-[1]: /fr/integrations/pagerduty
-{{% /tab %}}
-{{% tab "Webhooks" %}}
-
-Après avoir configuré l'[intégration Webhooks][1], saisissez `@webhook` dans le message de votre notification pour afficher la liste des webhooks qui peuvent être déclenchés. En cas d'alerte du monitor, une requête `POST` est envoyée à l'URL du webhook.
-
-[1]: /fr/integrations/webhooks
-{{% /tab %}}
-{{< /tabs >}}
-
-## Tester les notifications d'un monitor
-
-**Les notifications de test sont prises en charge pour les types de monitors suivants** : host, metric, anomaly, outlier, forecast, integration (check uniquement), process (check uniquement), network (check uniquement), custom check, event et composite.
-
-Après avoir défini votre monitor, testez la notification de votre monitor pour tous ses états avec le bouton *Test Notifications* en bas à droite de la page du monitor :
-
-1. Choisissez le cas de monitor que vous souhaitez tester dans la fenêtre contextuelle qui s'affiche. Vous pouvez uniquement tester les états disponibles dans la configuration du monitor, et seulement pour les seuils précisés dans les conditions d'alerte. Les [seuils de rétablissement][4] sont une exception, car Datadog envoie une notification de rétablissement soit lorsque le monitor n'est plus en alerte, soit s'il n'a pas de condition d'avertissement.
-
-    {{< img src="monitors/notifications/test-notif-select.png" alt="Tester les notifications pour ce monitor" style="width:50%;" >}}
-
-2. Cliquez sur **Run test** pour envoyer la notification à n'importe quel handle de notification disponible dans la zone de message.
-
-**Remarques :**
-
-* Les notifications de test créent des événements qui peuvent être recherchés dans le flux d'événements. Ces notifications indiquent également la personne à l'origine du test dans le corps du message. La mention `[TEST]` est ajoutée au titre de la notification de test.
-
-* Les variables de message remplissent automatiquement un groupe sélectionné au hasard en fonction du contexte de la définition de votre monitor.
-
-  {{< img src="monitors/notifications/test-notif-message.png" alt="Say what's happening" style="width:50%;" >}}
-
-## Configuration avancée de notifications
-
-### Inclure des liens vers certains dashboards
-
-De nombreuses organisations souhaitent inclure davantage de contexte dans leurs alertes. Des liens rapides vers des dashboards pertinents au sein d'une alerte accélèrent considérablement le processus de correction et le délai de résolution.
-
-Chaque monitor défini peut inclure des template variables de message. Ces variables permettent d'ajouter des URL dynamiques qui orientent les utilisateurs Datadog vers un dashboard approprié grâce au contexte du monitor.
-
-Voici quelques exemples d'ajout de liens vers des éléments comme des dashboards système, des dashboards d'intégration, des hostmaps et des pages Manage Monitors.
-
-Imaginons que vous souhaitez inclure un lien vers un dashboard système lorsque le monitor d'une métrique système spécifique dépasse un seuil défini. Vous pouvez utiliser la template variable de message `{{host.name}}`. Ajoutez l'URL suivante à la section « Say What's Happening » de votre monitor :
-
-```text
-https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{host.name}}
-```
-
-`{{host.name}}` est remplacé par le host ayant déclenché le monitor en question.
-
-{{< img src="monitors/notifications/system_dashboard_url.png" alt="url_dashboard_système" style="width:70%;" >}}
-
-Vous trouverez d'autres exemples ci-dessous de liens qui peuvent être ajoutés aux monitors pour proposer aux utilisateurs Datadog un accès rapide aux pages de base utilisées lors des processus de rupture, de réparation et de triage :
-
-{{< tabs >}}
-{{% tab "hostmap" %}}
-
-Pour inclure un lien vers la hostmap et comparer les métriques avec d'autres hosts similaires, ajoutez un lien comme celui ci-dessous à votre monitor :
-
-```text
-https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&sizeby=avg%3Anometric&filter=cassandra
-```
-
-Le lien ci-dessus dispose de davantage d'options personnalisables que votre dashboard système standard. Vous pouvez définir d'autres variables. Les variables les plus courantes transmises par cette URL sont **fillby, sizeby et filter** :
-
-* `fillby` est défini en ajoutant `fillby:avg:<NomMétrique>`.
-* `sizeby` est défini en ajoutant `sizeby:avg:<DeuxièmeNomMétrique>`.
-* `filter` sert à indiquer une intégration spécifique (Cassandra, mysql, apache, snmp, etc.) en ajoutant `filter=<NOM_INTÉGRATION>`.
-
-Dans l'exemple ci-dessous, les hexagones de la hostmap sont colorés en fonction de `system.cpu.system`. La taille des hexagones dépend de `system.cpu.stolen`. Ils sont filtrés de façon à inclure uniquement les hosts Cassandra.
-
-{{< img src="monitors/notifications/hostmap_url.png" alt="url_hostmap" style="width:70%;">}}
-
-{{% /tab %}}
-{{% tab "Page Manage Monitors" %}}
-
-Pour ajouter un lien vers une page « Manage Monitors » qui affiche tous les monitors du host en question, définissez un lien comme ci-dessous :
-
-```text
-https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
-```
-
-L'URL ci-dessus renvoie vers tous les monitors de ce host. D'autres options sont disponibles pour créer un lien encore plus précis.
-
-Par exemple, pour visualiser tous les monitors avec l'état Alert, ajoutez `status:Alert` (les autres statuts sont `WARN`, `NO%20DATA`, `OK` et `MUTED`). Voici un exemple :
-
-```text
-https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}&status:Alert
-```
-
-Si vous souhaitez afficher tous les monitors d'une application ou d'une intégration spécifique, ajoutez la requête suivante à l'URL `q=<NOM_INTÉGRATION>` :
-
-```text
-https://app.datadoghq.com/monitors/manage?q=cassandra
-```
-
-{{< img src="monitors/notifications/monitor_url.png" alt="url_monitor" style="width:70%;">}}
-
-{{% /tab %}}
-{{% tab "Dashboards d'intégration" %}}
-
-Si vous créez des monitors spécifiques à une application ou à une intégration, créez un lien vers ce dashboard d'intégration spécifique et ajoutez un contexte pour le host qui a déclenché le monitor.
-
-Dans l'exemple ci-dessous, il suffit de remplir `<NOM_INTÉGRATION>` pour Cassandra, Apache ou encore SNMP, et de fournir le contexte du host en cause :
-
-```text
-https://app.datadoghq.com/dash/integration/<NOM_INTÉGRATION>?tpl_var_scope=host:{{host.name}}
-```
-
-{{< img src="monitors/notifications/integration_url.png" alt="url_intégration" style="width:70%;">}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Commentaires
-
-Pour inclure un commentaire dans le message de monitor qui apparaîtra uniquement sur l'écran de modification de monitor, utilisez la syntaxe suivante :
-
-```text
-{{!-- ceci est un commentaire --}}
 ```
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/monitors
+[1]: /fr/monitors/monitor_types
 [2]: http://daringfireball.net/projects/markdown/syntax
-[3]: /fr/monitors/monitor_types/integration
-[4]: /fr/monitors/faq/what-are-recovery-thresholds
+[3]: /fr/integrations/jira
+[4]: /fr/integrations/jira/#use-cases
+[5]: /fr/integrations/pagerduty
+[6]: /fr/integrations/pagerduty/#troubleshooting
+[7]: /fr/integrations/slack
+[8]: /fr/integrations/slack/#mentions-in-slack-from-monitor-alert
+[9]: /fr/integrations/webhooks
+[10]: /fr/integrations/webhooks/#usage
+[11]: /fr/events
+[12]: /fr/monitors/guide/template-variable-evaluation
+[13]: /fr/monitors/faq/what-are-recovery-thresholds
+[14]: https://docs.datadoghq.com/fr/integrations/#cat-collaboration

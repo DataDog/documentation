@@ -2,22 +2,22 @@
 title: Tracing Python Applications
 kind: documentation
 aliases:
-- /tracing/python/
-- /tracing/languages/python/
-- /agent/apm/python/
+    - /tracing/python/
+    - /tracing/languages/python/
+    - /agent/apm/python/
 further_reading:
-- link: "https://github.com/DataDog/dd-trace-py"
-  tag: "GitHub"
-  text: "Source code"
-- link: "http://pypi.datadoghq.com/trace/docs/"
-  tag: "Pypi"
-  text: "API Docs"
-- link: "tracing/visualization/"
-  tag: "Documentation"
-  text: "Explore your services, resources and traces"
-- link: "tracing/"
-  tag: "Advanced Usage"
-  text: "Advanced Usage"
+    - link: 'https://github.com/DataDog/dd-trace-py'
+      tag: 'GitHub'
+      text: 'Source code'
+    - link: 'http://pypi.datadoghq.com/trace/docs/'
+      tag: 'Pypi'
+      text: 'API Docs'
+    - link: 'tracing/visualization/'
+      tag: 'Documentation'
+      text: 'Explore your services, resources and traces'
+    - link: 'tracing/'
+      tag: 'Advanced Usage'
+      text: 'Advanced Usage'
 ---
 
 <div class="alert alert-info">
@@ -40,25 +40,27 @@ Then to instrument your Python application use the included `ddtrace-run` comman
 
 For example, if your application is started with `python app.py` then:
 
-```sh
-$ ddtrace-run python app.py
+```shell
+ddtrace-run python app.py
 ```
 
 For more advanced usage, configuration, and fine-grain control, see Datadog's [API documentation][4].
 
-### Environment variable
+### Environment variables
 
 When using **ddtrace-run**, the following [environment variable options][5] can be used:
 
 | Environment Variable               | Default     | Description                                                                                                                                                                                                                                                                 |
-|------------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DATADOG_TRACE_ENABLED`            | `true`      | Enable web framework and library instrumentation. When `false`, your application code doesn't generate any traces.                                                                                                                                                          |
-| `DATADOG_ENV`                      | `null`      | Set an application’s environment e.g. `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][6].                                                                                                                                                   |
+| ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DD_ENV`                           |             | Set the application’s environment e.g. `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][6].                                                                                                                                                  |
+| `DD_VERSION`                       |             | Set the application’s version e.g. `1.2.3`, `6c44da20`, `2020.02.13`.                                                                                                                                                                                                       |
+| `DD_SERVICE`                       |             | The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations (e.g. Pylons, Flask, Django). For tracing without a web integration, it is recommended that you [set the service name in code](#integrations).      |
+| `DATADOG_TRACE_ENABLED`            | `true`      | Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.                                                                                                                                                           |
 | `DATADOG_TRACE_DEBUG`              | `false`     | Enable debug logging in the tracer. Note that this is [not available with Django][7].                                                                                                                                                                                       |
-| `DATADOG_SERVICE_NAME`             | `null`      | Override the service name to be used for this program. The value is passed through when setting up middleware for web framework integrations (e.g. pylons, flask, django). For tracing without a web integration, [prefer setting the service name in code](#integrations). |
-| `DATADOG_PATCH_MODULES`            | `none`      | Override the modules patched for this program execution. It should follow this format: `DATADOG_PATCH_MODULES=module:patch,module:patch...`.                                                                                                                                |
+| `DATADOG_PATCH_MODULES`            |             | Override the modules patched for this application execution. It should follow this format: `DATADOG_PATCH_MODULES=module:patch,module:patch...`.                                                                                                                            |
 | `DD_AGENT_HOST`                    | `localhost` | Override the address of the trace Agent host that the default tracer attempts to submit traces to.                                                                                                                                                                          |
 | `DATADOG_TRACE_AGENT_PORT`         | `8126`      | Override the port that the default tracer submit traces to.                                                                                                                                                                                                                 |
+| `DD_TRACE_AGENT_URL`               |             | The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.  |
 | `DATADOG_PRIORITY_SAMPLING`        | `true`      | Enable [Priority Sampling][8].                                                                                                                                                                                                                                              |
 | `DD_LOGS_INJECTION`                | `false`     | Enable [connecting logs and traces Injection][9].                                                                                                                                                                                                                           |
 | `DD_TRACE_ANALYTICS_ENABLED`       | `false`     | Enable App Analytics globally for [web integrations][10].                                                                                                                                                                                                                   |
@@ -89,7 +91,7 @@ Python versions `2.7` and `3.4` and onwards are supported.
 The `ddtrace` library includes support for a number of web frameworks, including:
 
 | Framework                 | Supported Version | PyPi Datadog Documentation                                         |
-|---------------------------|-------------------|--------------------------------------------------------------------|
+| ------------------------- | ----------------- | ------------------------------------------------------------------ |
 | [aiohttp][11]             | >= 1.2            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#aiohttp |
 | [Bottle][12]              | >= 0.11           | http://pypi.datadoghq.com/trace/docs/web_integrations.html#bottle  |
 | [Django][13]              | >= 1.8            | http://pypi.datadoghq.com/trace/docs/web_integrations.html#django  |
@@ -106,7 +108,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 The `ddtrace` library includes support for the following data stores:
 
 | Datastore                          | Supported Version | PyPi Datadog Documentation                                                                    |
-|------------------------------------|-------------------|-----------------------------------------------------------------------------------------------|
+| ---------------------------------- | ----------------- | --------------------------------------------------------------------------------------------- |
 | [Cassandra][20]                    | >= 3.5            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#cassandra                           |
 | [Elasticsearch][21]                | >= 1.6            | http://pypi.datadoghq.com/trace/docs/db_integrations.html#elasticsearch                       |
 | [Flask Cache][22]                  | >= 0.12           | http://pypi.datadoghq.com/trace/docs/db_integrations.html#flask-cache                         |
@@ -130,7 +132,7 @@ The `ddtrace` library includes support for the following data stores:
 The `ddtrace` library includes support for the following libraries:
 
 | Library           | Supported Version | PyPi Datadog Documentation                                               |
-|-------------------|-------------------|--------------------------------------------------------------------------|
+| ----------------- | ----------------- | ------------------------------------------------------------------------ |
 | [asyncio][40]     | Fully Supported   | http://pypi.datadoghq.com/trace/docs/async_integrations.html#asyncio     |
 | [gevent][41]      | >= 1.0            | http://pypi.datadoghq.com/trace/docs/async_integrations.html#gevent      |
 | [aiobotocore][42] | >= 0.2.3          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#aiobotocore |
@@ -149,15 +151,15 @@ The `ddtrace` library includes support for the following libraries:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/send_traces
-[2]: /tracing/setup/docker
-[3]: /agent/kubernetes/daemonset_setup/#trace-collection
+[1]: /tracing/send_traces/
+[2]: /tracing/setup/docker/
+[3]: /agent/kubernetes/apm/
 [4]: http://pypi.datadoghq.com/trace/docs
 [5]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtracerun
 [6]: /tracing/guide/setting_primary_tags_to_scope/
 [7]: http://pypi.datadoghq.com/trace/docs/web_integrations.html?highlight=django#django
 [8]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
-[9]: /tracing/connect_logs_and_traces/?tab=python
+[9]: /tracing/connect_logs_and_traces/python/
 [10]: /tracing/app_analytics/?tab=python#automatic-configuration
 [11]: https://aiohttp.readthedocs.io
 [12]: https://bottlepy.org

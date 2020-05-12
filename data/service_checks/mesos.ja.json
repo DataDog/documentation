@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "check": "mesos.can_connect",
+        "statuses": ["ok", "クリティカル"],
+        "name": "Can Connect",
+        "groups": ["ホスト", "url"],
+        "description": "Mesos インスタンス URL に ping した後のステータスを返します。収集した時点での応答ステータスに関する詳しい情報がチェックメッセージに記載されます。"
+    }
+]

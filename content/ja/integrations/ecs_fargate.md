@@ -80,9 +80,9 @@ Fargate の主要な作業単位はタスクで、これはタスク定義内で
 9. **Image** に `datadog/agent:latest` と入力します。
 10. **Memory Limits** に、ソフト制限として `256` を入力します。
 11. **Advanced container configuration** セクションまでスクロールし、**CPU units** に `10` と入力します。
-12. **Env Variables** に、**キー** `DD_API_KEY` を追加し、[Datadog API キー][5]を値として入力します。_シークレットを s3 に保存する場合は、[ECS 構成ガイド][6]を参照してください_。
+12. **Env Variables** に**キー** `DD_API_KEY` を追加し、[Datadog API キー][5]を値として入力します。_シークレットを s3 に保存する場合は、[ECS 構成ガイド][6]を参照してください_。
 13. **キー** `ECS_FARGATE` と値 `true` を使用して、もう 1 つ環境変数を追加します。**Add** をクリックしてコンテナを追加します。
-14. (任意) datadog.eu を利用されている場合は、**キー** `DD_SITE` と値 `datadoghq.eu` を使用して別の環境変数を追加します。
+14. (任意) datadog.eu をご利用の場合は、**キー** `DD_SITE` と値 `datadoghq.eu` を使用して別の環境変数を追加します。
 15. アプリなどの他のコンテナを追加します。インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][7]を参照してください。
 16. **Create** をクリックしてタスク定義を作成します。
 
@@ -94,7 +94,7 @@ Fargate の主要な作業単位はタスクで、これはタスク定義内で
 4. 次のコマンドを実行して ECS タスク定義を登録します。
 
 ```bash
-aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-ecs-fargate.json
+aws ecs register-task-definition --cli-input-json file://<ファイルへのパス>/datadog-agent-ecs-fargate.json
 ```
 
 #### IAM ポリシーの作成と修正
@@ -120,16 +120,16 @@ ECS Fargate では、タスクを [Replica サービス][11]として実行す�
 必要に応じてクラスターを作成します。
 
 ```bash
-aws ecs create-cluster --cluster-name "<CLUSTER_NAME>"
+aws ecs create-cluster --cluster-name "<クラスター名>"
 ```
 
 クラスターのサービスとしてタスクを実行します。
 
 ```bash
-aws ecs run-task --cluster <CLUSTER_NAME> \
---network-configuration "awsvpcConfiguration={subnets=["<PRIVATE_SUBNET>"],securityGroups=["<SECURITY_GROUP>"]}" \
---task-definition arn:aws:ecs:us-east-1:<AWS_ACCOUNT_NUMBER>:task-definition/<TASK_NAME>:1 \
---region <AWS_REGION> --launch-type FARGATE --platform-version 1.1.0
+aws ecs run-task --cluster <クラスター名> \
+--network-configuration "awsvpcConfiguration={subnets=["<プライベート_サブネット>"],securityGroups=["<セキュリティ_グループ>"]}" \
+--task-definition arn:aws:ecs:us-east-1:<AWS_アカウント番号>:task-definition/<タスク名>:1 \
+--region <AWS_リージョン> --launch-type FARGATE --platform-version 1.1.0
 ```
 
 ##### Web UI
@@ -174,7 +174,7 @@ Agent コンテナのフォーマット
 ```json
 {
   "name": "DD_DOCKER_LABELS_AS_TAGS",
-  "value": "{\"<LABEL_NAME_TO_COLLECT>\":\"<TAG_KEY_FOR_DATADOG>\"}"
+  "value": "{\"<収集するラベル名>\":\"<DATADOG_用タグキー>\"}"
 }
 ```
 
@@ -225,7 +225,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
    }
    ```
 
-   コンテナがシリアル化された JSON ログを stdout 上で公開している場合は、ログが Datadog 内で正しくパースされるよう、次の [追加 Firelens コンフィギュレーション][23]を使用する必要があります。
+    コンテナがシリアル化された JSON ログを stdout 上で公開している場合は、ログが Datadog 内で正しくパースされるよう、次の [追加 Firelens コンフィギュレーション][23]を使用する必要があります。
 
    ```json
    {
@@ -243,7 +243,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
    }
    ```
 
-   これにより、シリアル化された JSON が `log:` フィールドから上位レベルのフィールドに変換されます。詳細については、[JSON がシリアル化されたコンテナの stdout ログをパースしている][24] AWS サンプルを参照してください。
+    これにより、シリアル化された JSON が `log:` フィールドから上位レベルのフィールドに変換されます。詳細については、[JSON がシリアル化されたコンテナの stdout ログをパースしている][24] AWS サンプルを参照してください。
 
 2. 次に、同じ Fargate タスクで、AWS FireLens をログドライバーとして使用し、Fluent Bit にデータが出力されるようにログコンフィギュレーションを定義します。下記に、ログドライバーに FireLens が使用され、Fluent Bit にデータを出力しているタスク定義の例を示します。
 
@@ -291,7 +291,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
    }
    ```
 
-   タスク定義で awslogs ログドライバーを使用して、コンテナログを CloudWatch Logs に送信する方法については、[awslogs  ログドライバーを使用する][30]を参照してください。このドライバーは、コンテナが生成したログを収集し、CloudWatch に直接送信します。
+    タスク定義で awslogs ログドライバーを使用して、コンテナログを CloudWatch Logs に送信する方法については、[awslogs  ログドライバーを使用する][30]を参照してください。このドライバーは、コンテナが生成したログを収集し、CloudWatch に直接送信します。
 
 3. 最後に、[Lambda 関数][31]を使用して CloudWatch からログを収集し、Datadog に送信します。
 

@@ -8,13 +8,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/autodiscovery/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks/"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
-- link: "agent/kubernetes/daemonset_setup"
+- link: "/agent/kubernetes/daemonset_setup/"
   tag: "Documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "/agent/cluster_agent/troubleshooting"
+- link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
@@ -35,9 +35,8 @@ The Datadog Cluster Agent needs a proper RBAC to be up and running:
 2. To configure Cluster Agent RBAC permissions, apply the following manifests. (You may have done this already when setting up the [node Agent daemonset][2].)
 
   ```shell
-  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
-  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/serviceaccount.yaml"
-  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrolebinding.yaml"
+  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml"
+  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-cluster-agent.yaml"
   ```
 
   This creates the appropriate `ServiceAccount`, `ClusterRole`, and `ClusterRoleBinding` for the Cluster Agent.
@@ -173,7 +172,9 @@ After having set up the Datadog Cluster Agent, configure your Datadog Agent to c
 
 4. In the `agent.yaml` manifest, set the token from [Step 2 - Secure Cluster-Agent-to-Agent Communication](#step-2-secure-cluster-agent-to-agent-communication). The format depends on how you set up your secret; instructions can be found in the manifest directly.
 
-5. Create the DaemonSet with this command: `kubectl apply -f agent.yaml`
+5. In the `agent.yaml` manifest, add the environment variable `DD_CLUSTER_AGENT_ENABLED` and set it to `true`.
+
+6. Create the DaemonSet with this command: `kubectl apply -f agent.yaml`
 
 ### Verification
 
@@ -204,7 +205,7 @@ Kubernetes events are beginning to flow into your Datadog account, and relevant 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent/rbac
-[2]: /agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions
+[2]: /agent/kubernetes/
 [3]: /agent/faq/rbac-for-dca-running-on-aks-with-helm/
 [4]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml
 [5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/cluster-agent.yaml

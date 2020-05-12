@@ -48,22 +48,24 @@ Le check IBM Db2 est inclus avec le paquet de l'[Agent Datadog][3].
 
 La bibliothèque client [ibm_db][4] est requise. Pour l'installer, veillez à avoir un compilateur en fonctionnement et exécutez :
 
-##### Unix :
+##### Unix
 
-```
+```text
 /opt/datadog-agent/embedded/bin/pip install ibm_db==3.0.1
 ```
 
-##### Windows :
+##### Windows
 
 Pour les versions <= 6.11 de l'Agent :
-```
+
+```text
 "C:\Program Files\Datadog\Datadog Agent\embedded\Scripts\python.exe" -m pip install ibm_db==3.0.1
 ```
 
 Pour les versions >= 6.12 de l'Agent :
-```
-"C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\Scripts\python.exe" -m pip install ibm_db==3.0.1
+
+```text
+"C:\Program Files\Datadog\Datadog Agent\embedded<VERSION_MAJEURE_PYTHON>\Scripts\python.exe" -m pip install ibm_db==3.0.1
 ```
 
 Des fonctionnalités XML peuvent être requises sur Linux. Si vous rencontrez des erreurs durant
@@ -74,7 +76,7 @@ le processus de création, installez `libxslt-dev` (ou `libxslt-devel` pour RPM)
 Pour interroger les métriques de certains tableaux, des privilèges spécifiques doivent être attribués à l'utilisateur Db2 choisi.
 Basculez sur l'utilisateur principal de l'instance et exécutez ces commandes dans l'invite `db2` :
 
-```
+```text
 update dbm cfg using HEALTH_MON on
 update dbm cfg using DFT_MON_STMT on
 update dbm cfg using DFT_MON_LOCK on
@@ -84,7 +86,7 @@ update dbm cfg using DFT_MON_BUFPOOL on
 
 Si vous exécutez désormais `get dbm cfg`, voici ce qui s'affiche :
 
-```
+```text
  Default database monitor switches
    Buffer pool                         (DFT_MON_BUFPOOL) = ON
    Lock                                   (DFT_MON_LOCK) = ON
@@ -97,6 +99,7 @@ Si vous exécutez désormais `get dbm cfg`, voici ce qui s'affiche :
 ```
 
 ### Configuration
+
 #### Host
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
@@ -109,27 +112,27 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Ajoutez ce bloc de configuration à votre fichier `ibm_db2.d/conf.yaml` pour commencer à recueillir vos logs IBM Db2 :
 
-    ```yaml
-      logs:
-        - type: file
-          path: /home/db2inst1/sqllib/db2dump/db2diag.log
-          source: ibm_db2
-          service: db2sysc
-          log_processing_rules:
-            - type: multi_line
-              name: new_log_start_with_date
-              pattern: \d{4}\-(0?[1-9]|[12][0-9]|3[01])\-(0?[1-9]|1[012])
-    ```
+   ```yaml
+   logs:
+     - type: file
+       path: /home/db2inst1/sqllib/db2dump/db2diag.log
+       source: ibm_db2
+       service: db2sysc
+       log_processing_rules:
+         - type: multi_line
+           name: new_log_start_with_date
+           pattern: \d{4}\-(0?[1-9]|[12][0-9]|3[01])\-(0?[1-9]|1[012])
+   ```
 
 3. [Redémarrez l'Agent][6].
 
@@ -140,19 +143,19 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 ##### Collecte de métriques
 
 | Paramètre            | Valeur                                                                                                         |
-|----------------------|---------------------------------------------------------------------------------------------------------------|
+| -------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `<NOM_INTÉGRATION>` | `ibm_db2`                                                                                                     |
 | `<CONFIG_INIT>`      | vide ou `{}`                                                                                                 |
 | `<CONFIG_INSTANCE>`  | `{"db": "<NOM_BASEDEDONNÉES>", "username":"<NOMUTILISATEUR>", "password":"<MOTDEPASSE>", "host":"%%host%%", "port":"%%port%%"}` |
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][8].
 
 | Paramètre      | Valeur                                                                                                                                                                                                |
-|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "ibm_db2", "service": "<NOM_SERVICE>", "log_processing_rules": {"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-(0?[1-9]|[12][0-9]|3[01])\-(0?[1-9]|1[012])"}}` |
 
 ### Validation
@@ -186,7 +189,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 Documentation, liens et articles supplémentaires utiles :
 
 - [Surveiller IBM DB2 avec Datadog][12]
-
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ibm_db2/assets/images/dashboard_overview.png
 [2]: https://www.ibm.com/analytics/us/en/db2

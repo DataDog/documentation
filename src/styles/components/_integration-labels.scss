@@ -36,6 +36,9 @@ $labelcolors: (
       display:none;
     }
   }
+  a {
+    border-bottom:none !important;
+  }
   a:hover{
     opacity: .7;
   }

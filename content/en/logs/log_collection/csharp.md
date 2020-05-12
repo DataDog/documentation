@@ -7,19 +7,19 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/c-logging-guide/"
   tag: "Blog"
   text: "How to collect, customize, and analyze C# logs"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "logs/explorer/analytics"
+- link: "/logs/explorer/analytics/"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---
@@ -239,6 +239,10 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 {{% /tab %}}
 {{< /tabs >}}
 
+**Connect Logs and Traces**
+
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM .NET logging instructions][2] to add trace and span IDs in your logs.
+
 ## Configure your Datadog Agent
 
 Create a `csharp.d/conf.yaml` file in your `conf.d/` folder with the following content:
@@ -308,6 +312,33 @@ var log = new LoggerConfiguration()
 
 New logs are now directly sent to Datadog.
 
+Alternately, since `0.2.0`, you can configure the Datadog sink by using an `appsettings.json` file with the `Serilog.Setting.Configuration` package.
+
+In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is shown below:
+
+```json
+"Serilog": {
+  "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Datadog.Logs" ],
+  "MinimumLevel": "Debug",
+  "WriteTo": [
+    { "Name": "Console" },
+    {
+      "Name": "DatadogLogs",
+      "Args": {
+        "apiKey": "<API_KEY>",
+        "source": "<SOURCE_NAME>",
+        "host": "<HOST_NAME>",
+        "tags": ["<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"],
+      }
+    }
+  ],
+  "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+  "Properties": {
+    "Application": "Sample"
+  }
+}
+```
+
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /logs/#reserved-attributes
@@ -318,4 +349,5 @@ New logs are now directly sent to Datadog.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing
+[1]: /logs/processing/parsing/
+[2]: /tracing/connect_logs_and_traces/dotnet/

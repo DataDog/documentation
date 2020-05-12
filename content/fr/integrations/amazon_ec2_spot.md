@@ -12,11 +12,11 @@ has_logo: true
 integration_title: "Amazon\_EC2\_Spot"
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: amazon_ec2_spot
 public_title: "Intégration Datadog/Amazon\_EC2\_Spot"
 short_description: "Surveillez des métriques clés d'Amazon\_EC2\_Spot."
-version: 1
+version: '1.0'
 ---
 ## Présentation
 
@@ -57,10 +57,10 @@ L'intégration Amazon EC2 Spot n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-ec2-spot
-[4]: https://docs.datadoghq.com/fr/agent/logs
-[5]: https://docs.datadoghq.com/fr/integrations/rsyslog
+[4]: https://docs.datadoghq.com/fr/agent/logs/
+[5]: https://docs.datadoghq.com/fr/integrations/rsyslog/
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2_spot/amazon_ec2_spot_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
+[7]: https://docs.datadoghq.com/fr/help/

@@ -5,10 +5,10 @@ aliases:
   - /guides/livecontainers
   - /graphing/infrastructure/livecontainers/
 further_reading:
-- link: "/infrastructure/hostmap"
+- link: "/infrastructure/hostmap/"
   tag: "Graphing"
   text: "See all of your hosts together on one screen with the hostmap"
-- link: "/infrastructure/process"
+- link: "/infrastructure/process/"
   tag: "Graphing"
   text: "Understand what is going on at any level of your system"
 ---
@@ -90,7 +90,7 @@ volumes:
 
 * Logs are indexed by default, however [Exclusion Filters][2] are configurable for fine-grained controls over indexes and Live Tail data uniquely.
 
-[1]: /agent/kubernetes/daemonset_setup
+[1]: /agent/kubernetes/
 [2]: /logs/indexes/#exclusion-filters
 {{% /tab %}}
 {{< /tabs >}}
@@ -196,8 +196,6 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ## Include/Exclude containers
 
-*Note that Live Containers is not metered. Including or excluding containers does not affect billing.*
-
 It is possible to include and/or exclude containers from real-time collection:
 
 * Exclude containers either via passing the environment variable `DD_AC_EXCLUDE` or adding `ac_exclude:` in your `datadog.yaml` main configuration file.
@@ -226,11 +224,11 @@ ac_include: ["name:frontend.*"]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
-[2]: /integrations/docker_daemon
-[3]: /integrations/kubernetes
-[4]: /integrations/amazon_ecs
+[2]: /integrations/docker_daemon/
+[3]: /agent/kubernetes/
+[4]: /integrations/amazon_ecs/
 [5]: /agent/docker/#run-the-docker-agent
 [6]: /agent/docker/log/?tab=hostinstallation#activate-log-integrations
-[7]: /logs/live_tail
-[8]: /tagging
+[7]: /logs/live_tail/
+[8]: /tagging/
 [9]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237

@@ -2,13 +2,13 @@
 title: Community integration installation
 kind: guide
 further_reading:
-- link: "agent/troubleshooting/"
+- link: "/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
-- link: "agent/guide/agent-configuration-files/"
+- link: "/agent/guide/agent-configuration-files/"
   tag: "FAQ"
   text: "Agent configuration files"
-- link: "agent/guide/agent-commands/"
+- link: "/agent/guide/agent-commands/"
   tag: "FAQ"
   text: "Agent commands"
 ---
@@ -49,9 +49,9 @@ To install the `<INTEGRATION_NAME>` check on your host:
 7. Configure your integration like [any other packaged integration][3].
 8. [Restart the Agent][4].
 
-[1]: https://docs.datadoghq.com/developers/integrations/new_check_howto/#developer-toolkit
+[1]: /developers/integrations/new_check_howto/#developer-toolkit
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: /getting_started/integrations
+[3]: /getting_started/integrations/
 [4]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -68,12 +68,12 @@ RUN ddev -e release build <INTEGRATION_NAME>
 
 FROM datadog/agent:latest
 COPY --from=wheel_builder /wheels/integrations-extras/<INTEGRATION_NAME>/dist/ /dist
-RUN agent integration install -r -w /dist/*.whl
+RUN agent -c /etc/datadog-agent/datadog-docker.yaml integration install -r -w /dist/*.whl
 ```
 
 Then use this new Agent image in combination with [Autodiscovery][1] in order to enable the `<INTEGRATION_NAME>` check.
 
-[1]: /agent/autodiscovery
+[1]: /agent/autodiscovery/
 {{% /tab %}}
 {{% tab "Agent prior to 6.8" %}}
 
@@ -91,8 +91,8 @@ To install the `<INTEGRATION_NAME>` check on your host:
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/DataDog/integrations-extras
-[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: /getting_started/integrations
+[3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: /getting_started/integrations/
 [5]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}

@@ -14,11 +14,11 @@ has_logo: true
 integration_title: "AWS\_CodeBuild"
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: amazon_codebuild
 public_title: "Intégration Datadog/AWS\_CodeBuild"
 short_description: Surveillez vos déploiements en temps réel et mesurez leur durée.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 
@@ -76,11 +76,11 @@ L'intégration AWS_CodeBuild n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][8].
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-codebuild
 [4]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_codebuild/amazon_codebuild_metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/help/

@@ -3,13 +3,13 @@ title: Processors
 kind: documentation
 description: "Parse your logs using the Grok Processor"
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "/logs/processing/pipelines/"
   tag: "Documentation"
   text: "Discover Datadog Pipelines"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without limit"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 ---
@@ -29,7 +29,12 @@ Create custom grok rules to parse the full message or [a specific attribute of y
 
 Define the Grok processor in the [Datadog Log configuration page][1]:
 
-{{< img src="logs/processing/processors/parser.png" alt="Parser"  style="width:80%;" >}}
+
+{{< img src="logs/processing/processors/parser.png" alt="Parser" style="width:80%;" >}}
+
+Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample. Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
+
+Click **Parse my logs** to kickstart a set of three parsing rules for the logs flowing through the underlying pipeline. Fine tune attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -54,17 +59,14 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 | `name`               | String           | no       | Name of the processor.                                  |
 | `is_enabled`         | Boolean          | no       | If the processors is enabled or not, default: `false`.  |
 | `source`             | String           | yes      | Name of the log attribute to parse, default: `message`. |
-| `samples`            | Array of Strings | no       | List of sample logs for this grok parser.               |
+| `samples`            | Array of Strings | no       | List of (up to 5) sample logs for this grok parser.     |
 | `grok.support_rules` | String           | yes      | List of Support rules for your grok parser.             |
 | `grok.match_rules`   | String           | yes      | List of Match rules for your grok parser.               |
 
-[1]: /api/?lang=bash#logs-pipelines
+
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
-
-Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length.
-All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
-Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
 ## Log Date Remapper
 
@@ -83,8 +85,10 @@ If your logs put their dates in an attribute not in this list, use the log date 
 The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (the milliseconds EPOCH format)</a>, and <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
-**Note**:
 
+**Note**: 
+
+* **Log events can be submitted up to 6h in the past and 2h in the future**.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
 * If multiple log date remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
 
@@ -117,7 +121,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Date Remap
 | `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
 | `sources`    | Array of Strings | yes      | Array of source attributes.                           |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -176,7 +180,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Status Rem
 | `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
 | `sources`    | Array of Strings | yes      | Array of source attributes.                           |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -215,7 +219,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Service Re
 | `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
 | `sources`    | Array of Strings | yes      | Array of source attributes.                           |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -254,7 +258,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Log Message Re
 | `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false` |
 | `sources`    | Array of Strings | yes      | Array of source attributes, default: `msg`            |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -309,7 +313,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
 | `preserve_source`      | Boolean          | no       | Remove or preserve the remapped source element, default: `false`               |
 | `override_on_conflict` | Boolean          | no       | Override or not the target element if already set, default: `false`            |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -392,7 +396,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following User-Agent par
 | `target`     | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `http.useragent_details`. |
 | `is_encoded` | Boolean          | no       | Define if the source attribute is url encoded or not, default: `false`.                                                     |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -446,7 +450,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Category proce
 | `categories` | Array of Object | yes      | Array of filters to match or not a log and their corresponding `name` to assign a custom value to the log. |
 | `target`     | String          | yes      | Name of the target attribute which value is defined by the matching category.                              |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -500,7 +504,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Arithmetic pro
 | `target`             | String  | yes      | Name of the attribute that contains the result of the arithmetic operation.                                                                  |
 | `is_replace_missing` | Boolean | no       | If `true`, it replaces all missing attributes of `expression` by 0, `false` skip the operation if an attribute is missing. Default: `false`. |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -595,7 +599,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following string builder
 | `target`             | String  | Yes      | The name of the attribute that contains the result of the template.                                                                               |
 | `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false` (default), skips the operation for missing attributes. |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -640,7 +644,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Geo-IP parser 
 | `sources`    | Array of Strings | no       | Array of source attributes, default: `network.client.ip`                                                                  |
 | `target`     | String           | yes      | Name of the parent attribute that contains all the extracted details from the `sources`, default: `network.client.geoip`  |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -693,7 +697,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Lookup Process
 | `lookup_table`   | Array of strings | yes      | Mapping table of values for the source attribute and their associated target attribute values, formatted as [ "source_key1,target_value1", "source_key2,target_value2" ] |
 | `default_lookup` | String           | no       | Value to set the target attribute if the source value is not found in the list.                                                                                          |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -734,7 +738,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 | `is_enabled` | Boolean          | no       | If the processors is enabled or not, default: `false`. |
 | `sources`    | Array of Strings | no       | Array of source attributes, default: `dd.trace_id`.    |
 
-[1]: /api/?lang=bash#logs-pipelines
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -742,12 +746,12 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Trace remapper
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/pipelines
+[1]: /logs/processing/pipelines/
 [2]: /logs/processing/parsing/#advanced-settings
-[3]: /logs/processing/parsing
+[3]: /logs/processing/parsing/
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[5]: /logs/guide/log-parsing-best-practice
-[6]: /logs/explorer/search/#search-syntax
+[5]: /logs/guide/log-parsing-best-practice/
+[6]: /logs/search_syntax/
 [7]: /logs/processing/processors/?tab=ui#log-status-remapper
 [8]: /logs/processing/parsing/?tab=filter#matcher-and-filter
-[9]: /tracing/connect_logs_and_traces
+[9]: /tracing/connect_logs_and_traces/

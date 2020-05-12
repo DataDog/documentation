@@ -1,8 +1,8 @@
 ---
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Automation のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_automation/'
@@ -11,11 +11,11 @@ has_logo: true
 integration_title: Microsoft Azure Automation
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_automation
 public_title: Datadog-Microsoft Azure Automation インテグレーション
 short_description: Azure Automation のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

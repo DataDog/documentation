@@ -45,7 +45,7 @@ Par défaut, l'Agent ouvre 3 [ports][3] sur Linux et 4 sur Windows et OSX :
 
 | Port | Description                                                                                 |
 |------|---------------------------------------------------------------------------------------------|
-| 5000 | Expose les métriques de runtime à propos de l'Agent.                                                    |
+| 5000 | Expose les métriques runtime à propos de l'Agent.                                                    |
 | 5001 | Utilisé par l'interface de ligne de commande et l'interface graphique de l'Agent pour envoyer des commandes et récupérer des informations à partir de l'Agent actif. |
 | 5002 | Dessert le serveur graphique sur Windows et OSX.                                                   |
 | 8125 | Utilisé pour le serveur DogStatsD afin de recevoir des métriques externes.                                  |
@@ -78,7 +78,7 @@ L'Agent v5 est composé de quatre éléments majeurs, chacun écrit en Python et
 * **Collector** (`agent.py`) : le Collector exécute les checks sur la machine actuelle pour les [intégrations][1] configurées. Il enregistre également des métriques système, portant par exemple sur la mémoire et le processeur.
 * **DogStatsD** (`dogstatsd.py`) : il s'agit d'un serveur backend compatible avec StatsD auquel vous pouvez envoyer des [métriques custom][2] à partir de vos applications.
 * **Forwarder** (`ddagent.py`) : le Forwarder récupère les données de DogStatsD et du Collector, les met en attente et les envoie à Datadog.
-* **SupervisorD** : toute la solution est contrôlée par un unique processus de supervision. Celui-ci est séparé afin de limiter le traitement de chaque application si vous n'exécutez pas tous les éléments (peu conseillé).
+* **SupervisorD** : toute la solution est contrôlée par un unique processus de supervision. Celui-ci est séparé afin de limiter la charge système de chaque application si vous n'exécutez pas tous les éléments (peu conseillé).
 
 **Remarque** : pour les utilisateurs de Windows, les quatre processus de l'Agent apparaissent sous forme d'instances de `ddagent.exe`, avec la description `DevOps' best friend`.
 
