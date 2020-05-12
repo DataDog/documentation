@@ -329,9 +329,9 @@ Revoke or grant this permission from a role via [the Roles API][1].
 Use [Restriction Queries][2] to scope the permission to a subset of Log Data. 
 
 
-
 [1]: /api/#roles
 [2]: /api/?lang=bash#roles-restriction-queries-for-logs
+
 {{% /tab %}}
 {{< /tabs >}}
 
