@@ -146,7 +146,7 @@ main:
     url: agent/basic_agent_usage/redhat/
     weight: 111
     parent: basic_agent_usage
-  - name: "SaltStack"
+  - name: SaltStack
     identifier: basic_agent_usage_saltstack
     url: agent/basic_agent_usage/saltstack/
     weight: 112
@@ -1622,6 +1622,12 @@ api_v1:
   - name: Check permissions for log services
     parent: AWS Logs Integration
     url: check-permissions-for-log-services
+  - name: Authentication
+    url: /api/v1/authentication/
+    identifier: Authentication
+  - name: Validate API key
+    parent: Authentication
+    url: validate-api-key
   - name: Azure Integration
     url: /api/v1/azure-integration/
     identifier: Azure Integration
@@ -1967,6 +1973,9 @@ api_v1:
   - name: Get all service dependencies
     parent: Service Dependencies
     url: get-all-service-dependencies
+  - name: Get one service's dependencies
+    parent: Service Dependencies
+    url: get-one-services-dependencies
   - name: Service Level Objectives
     url: /api/v1/service-level-objectives/
     identifier: Service Level Objectives
@@ -2185,6 +2194,9 @@ api_v2:
   - name: AWS Logs Integration
     url: /api/v2/aws-logs-integration/
     identifier: AWS Logs Integration
+  - name: Authentication
+    url: /api/v2/authentication/
+    identifier: Authentication
   - name: Azure Integration
     url: /api/v2/azure-integration/
     identifier: Azure Integration
