@@ -1,7 +1,7 @@
 ---
 title: Run Synthetics Tests from Private Locations
 kind: documentation
-description: Run Synthetics API and Browser Tests from Private Locations
+description: Run Synthetics API and browser tests from private locations
 beta: true
 further_reading:
     - link: 'synthetics/'
