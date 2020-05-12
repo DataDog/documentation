@@ -405,7 +405,36 @@ See [DataDog/php-datadogstatsd](https://github.com/DataDog/php-datadogstatsd) fo
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Telemetry will soon be added to the .NET client.
+Starting with version `5.0.0` of the .NET client.
+
+| Metric name                                          | Metric Type | Description                                                                                                                                                     |
+| ---------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `datadog.dogstatsd.client.metrics`                   | count       | Number of `metrics` sent to the DogStatsD client by your application (before sampling).                                                                         |
+| `datadog.dogstatsd.client.events`                    | count       | Number of `events` sent to the DogStatsD client by your application.                                                                                            |
+| `datadog.dogstatsd.client.service_checks`            | count       | Number of `service_checks` sent to the DogStatsD client by your application.                                                                                    |
+| `datadog.dogstatsd.client.bytes_sent`                | count       | Number of bytes successfully sent to the Agent.                                                                                                                 |
+| `datadog.dogstatsd.client.bytes_dropped`             | count       | Number of bytes dropped by the DogStatsD client.                                                                                                                |
+| `datadog.dogstatsd.client.packets_sent`              | count       | Number of datagrams successfully sent to the Agent.                                                                                                             |
+| `datadog.dogstatsd.client.packets_dropped`           | count       | Number of datagrams dropped by the DogStatsD client.                                                                                                            |
+| `datadog.dogstatsd.client.packets_dropped_queue`     | count       | Number of datagrams dropped because the DogStatsD client queue was full.                                                                                        |
+
+To disable telemetry, set `TelemetryFlushInterval` at `null`:
+
+```csharp
+var dogstatsdConfig = new StatsdConfig
+{
+    StatsdServerName = "127.0.0.1",
+    StatsdPort = 8125,
+};
+
+// Disable Telemetry
+dogstatsdConfig.Advanced.TelemetryFlushInterval = null;
+```
+
+See [DataDog/dogstatsd-csharp-client][1] for more information about the client configuration.
+
+
+[1]: https://github.com/DataDog/dogstatsd-csharp-client
 
 {{% /tab %}}
 {{< /tabs >}}
