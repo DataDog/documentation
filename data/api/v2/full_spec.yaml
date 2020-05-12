@@ -2283,6 +2283,16 @@ tags:
   name: AWS Integration
 - description: '[See API version 1](/api/v1/aws-logs-integration/).'
   name: AWS Logs Integration
+- description: "All requests to Datadog\u2019s API must be authenticated.\nRequests\
+    \ that write data require reporting access and require an `API key`.\nRequests\
+    \ that read data require full access and also require an `application key`.\n\n\
+    **Note:** All Datadog API clients are configured by default to consume Datadog\
+    \ US site APIs.\nIf you are on the Datadog EU site, set the environment variable\
+    \ `DATADOG_HOST` to\n`https://api.datadoghq.eu` or override this value directly\
+    \ when creating your client.\n\n[Manage your account\u2019s API and application\
+    \ keys](https://app.datadoghq.com/account/settings#api).\n\n## Validate API key\n\
+    \n[See API version 1](/api/v1/authentication/#validate-api-key)."
+  name: Authentication
 - description: '[See API version 1](/api/v1/azure-integration/).'
   name: Azure Integration
 - description: '[Interact with your dashboard lists](https://docs.datadoghq.com/monitors/downtimes)

@@ -1588,6 +1588,12 @@ api_v1:
   - name: Check permissions for log services
     parent: AWS Logs Integration
     url: check-permissions-for-log-services
+  - name: Authentication
+    url: /ja/api/v1/authentication/
+    identifier: Authentication
+  - name: Validate API key
+    parent: Authentication
+    url: validate-api-key
   - name: Azure Integration
     url: /ja/api/v1/azure-integration/
     identifier: Azure Integration
@@ -2154,6 +2160,9 @@ api_v2:
   - name: AWS Logs Integration
     url: /ja/api/v2/aws-logs-integration/
     identifier: AWS Logs Integration
+  - name: Authentication
+    url: /ja/api/v2/authentication/
+    identifier: Authentication
   - name: Azure Integration
     url: /ja/api/v2/azure-integration/
     identifier: Azure Integration
