@@ -5,19 +5,19 @@ aliases:
   - /ja/tracing/terminology/
   - /ja/tracing/faq/what-is-the-difference-between-type-service-resource-and-name
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: アプリケーションで APM トレースをセットアップする方法
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Datadog に報告するサービスの一覧
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: Documentation
     text: Datadog のサービスについて
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: Documentation
     text: リソースのパフォーマンスとトレースの詳細
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Datadog トレースの読み方を理解する
 ---
@@ -128,19 +128,19 @@ App Analytics は、ユーザー定義のタグ（customer_id、error_type、app
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/monitors/monitor_types/apm/
-[2]: /ja/developers/faq/data-collection-resolution-retention
-[3]: /ja/tracing/setup
-[4]: /ja/tracing/visualization/services_list
-[5]: /ja/tracing/visualization/services_map
-[6]: /ja/tracing/visualization/service
-[7]: /ja/tracing/visualization/resource
-[8]: /ja/tracing/opentracing/java#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
-[9]: /ja/tracing/manual_instrumentation
-[10]: /ja/tracing/opentracing
-[11]: /ja/tracing/connect_logs_and_traces
-[12]: /ja/tracing/guide/adding_metadata_to_spans
-[13]: /ja/tracing/runtime_metrics
-[14]: /ja/tracing/app_analytics
+[2]: /ja/developers/faq/data-collection-resolution-retention/
+[3]: /ja/tracing/setup/
+[4]: /ja/tracing/visualization/services_list/
+[5]: /ja/tracing/visualization/services_map/
+[6]: /ja/tracing/visualization/service/
+[7]: /ja/tracing/visualization/resource/
+[8]: /ja/tracing/opentracing/java/#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
+[9]: /ja/tracing/manual_instrumentation/
+[10]: /ja/tracing/opentracing/
+[11]: /ja/tracing/connect_logs_and_traces/
+[12]: /ja/tracing/guide/adding_metadata_to_spans/
+[13]: /ja/tracing/runtime_metrics/
+[14]: /ja/tracing/app_analytics/
 [15]: https://app.datadoghq.com/metric/summary
 [16]: https://app.datadoghq.com/monitors#/create
 [17]: /ja/tracing/app_analytics/#automatic-configuration
