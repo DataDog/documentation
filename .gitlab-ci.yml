@@ -46,6 +46,7 @@ build_preview:
     - placehold_translations
     - update_preview_baseurl
     - build_hugo_site_new
+    - in-isolation deploy_preview
     - collect_static_assets
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
@@ -120,6 +121,7 @@ build_live:
     - sync_integration_metrics
     - placehold_translations
     - build_hugo_site_new
+    - in-isolation deploy_live
     - collect_static_assets
     - push_site_to_s3
     - create_artifact
