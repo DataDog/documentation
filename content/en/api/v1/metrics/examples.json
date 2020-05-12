@@ -4,7 +4,7 @@
       "200": {
         "json": {
           "from": "string",
-          "metrics": "array"
+          "metrics": []
         },
         "html": "<div class=\"table-response schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">from</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Time when the metrics were active, seconds since the Unix epoch.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">metrics</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>List of metric names.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
       },
@@ -26,6 +26,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -62,6 +63,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -106,6 +108,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "description": "string",
         "per_unit": "second",
@@ -123,7 +126,7 @@
         "json": {
           "error": "string",
           "from_date": "integer",
-          "group_by": "array",
+          "group_by": [],
           "message": "string",
           "query": "string",
           "res_type": "time_series",
@@ -176,6 +179,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -185,7 +189,7 @@
       "200": {
         "json": {
           "results": {
-            "metrics": "array"
+            "metrics": []
           }
         },
         "html": "<div class=\"table-response schema-table row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> results</p>\n    </div>\n              <div class=\"col-2 column\"><p>object</p></div>\n              <div class=\"col-6 column\"><p>Search result.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">metrics</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>List of metrics that match the search query.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div>\n    </div>  \n  </div>"
@@ -208,6 +212,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -254,6 +259,17 @@
       }
     },
     "request": {
+      "json_curl": {
+        "series": [
+          {
+            "metric": "system.load.1",
+            "points": [
+              "1575317847",
+              "0.5"
+            ]
+          }
+        ]
+      },
       "json": {
         "series": [
           {
@@ -264,7 +280,7 @@
               "1575317847",
               "0.5"
             ],
-            "tags": "array",
+            "tags": [],
             "type": "string"
           }
         ]

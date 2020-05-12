@@ -6,13 +6,13 @@
           "data": [
             {
               "attributes": {
-                "created": "string",
+                "created": "2019-09-19T10:00:00.000Z",
                 "description": "string",
                 "display_name": "string",
                 "display_type": "string",
                 "group_name": "string",
                 "name": "string",
-                "restricted": "boolean"
+                "restricted": false
               },
               "id": "string",
               "type": "string"
@@ -39,6 +39,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -50,8 +51,8 @@
           "data": [
             {
               "attributes": {
-                "created_at": "string",
-                "modified_at": "string",
+                "created_at": "2019-09-19T10:00:00.000Z",
+                "modified_at": "2019-09-19T10:00:00.000Z",
                 "name": "string"
               },
               "id": "string",
@@ -109,6 +110,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -119,8 +121,8 @@
         "json": {
           "data": {
             "attributes": {
-              "created_at": "string",
-              "modified_at": "string",
+              "created_at": "2019-09-19T10:00:00.000Z",
+              "modified_at": "2019-09-19T10:00:00.000Z",
               "name": "string"
             },
             "id": "string",
@@ -179,6 +181,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "attributes": {
@@ -225,6 +228,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -235,8 +239,8 @@
         "json": {
           "data": {
             "attributes": {
-              "created_at": "string",
-              "modified_at": "string",
+              "created_at": "2019-09-19T10:00:00.000Z",
+              "modified_at": "2019-09-19T10:00:00.000Z",
               "name": "string"
             },
             "id": "string",
@@ -295,6 +299,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -305,8 +310,8 @@
         "json": {
           "data": {
             "attributes": {
-              "created_at": "string",
-              "modified_at": "string",
+              "created_at": "2019-09-19T10:00:00.000Z",
+              "modified_at": "2019-09-19T10:00:00.000Z",
               "name": "string"
             },
             "id": "string",
@@ -373,6 +378,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "attributes": {
@@ -392,13 +398,13 @@
           "data": [
             {
               "attributes": {
-                "created": "string",
+                "created": "2019-09-19T10:00:00.000Z",
                 "description": "string",
                 "display_name": "string",
                 "display_type": "string",
                 "group_name": "string",
                 "name": "string",
-                "restricted": "boolean"
+                "restricted": false
               },
               "id": "string",
               "type": "string"
@@ -433,6 +439,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "id": "string"
@@ -448,13 +455,13 @@
           "data": [
             {
               "attributes": {
-                "created": "string",
+                "created": "2019-09-19T10:00:00.000Z",
                 "description": "string",
                 "display_name": "string",
                 "display_type": "string",
                 "group_name": "string",
                 "name": "string",
-                "restricted": "boolean"
+                "restricted": false
               },
               "id": "string",
               "type": "string"
@@ -481,6 +488,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -492,13 +500,13 @@
           "data": [
             {
               "attributes": {
-                "created": "string",
+                "created": "2019-09-19T10:00:00.000Z",
                 "description": "string",
                 "display_name": "string",
                 "display_type": "string",
                 "group_name": "string",
                 "name": "string",
-                "restricted": "boolean"
+                "restricted": false
               },
               "id": "string",
               "type": "string"
@@ -533,6 +541,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "id": "string"
@@ -548,15 +557,15 @@
           "data": [
             {
               "attributes": {
-                "created_at": "string",
-                "disabled": "boolean",
+                "created_at": "2019-09-19T10:00:00.000Z",
+                "disabled": false,
                 "email": "string",
                 "handle": "string",
                 "icon": "string",
                 "name": "string",
                 "status": "string",
                 "title": "string",
-                "verified": "boolean"
+                "verified": false
               },
               "id": "string",
               "relationships": {
@@ -594,7 +603,7 @@
               "type": "string"
             }
           ],
-          "included": "array",
+          "included": [],
           "meta": {
             "page": {
               "total_count": "integer",
@@ -630,6 +639,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "id": "string"
@@ -645,15 +655,15 @@
           "data": [
             {
               "attributes": {
-                "created_at": "string",
-                "disabled": "boolean",
+                "created_at": "2019-09-19T10:00:00.000Z",
+                "disabled": false,
                 "email": "string",
                 "handle": "string",
                 "icon": "string",
                 "name": "string",
                 "status": "string",
                 "title": "string",
-                "verified": "boolean"
+                "verified": false
               },
               "id": "string",
               "relationships": {
@@ -691,7 +701,7 @@
               "type": "string"
             }
           ],
-          "included": "array",
+          "included": [],
           "meta": {
             "page": {
               "total_count": "integer",
@@ -719,6 +729,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -730,15 +741,15 @@
           "data": [
             {
               "attributes": {
-                "created_at": "string",
-                "disabled": "boolean",
+                "created_at": "2019-09-19T10:00:00.000Z",
+                "disabled": false,
                 "email": "string",
                 "handle": "string",
                 "icon": "string",
                 "name": "string",
                 "status": "string",
                 "title": "string",
-                "verified": "boolean"
+                "verified": false
               },
               "id": "string",
               "relationships": {
@@ -776,7 +787,7 @@
               "type": "string"
             }
           ],
-          "included": "array",
+          "included": [],
           "meta": {
             "page": {
               "total_count": "integer",
@@ -812,6 +823,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "data": {
           "id": "string"

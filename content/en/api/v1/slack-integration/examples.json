@@ -11,6 +11,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -47,6 +48,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -71,6 +73,14 @@
       }
     },
     "request": {
+      "json_curl": {
+        "service_hooks": [
+          {
+            "account": "doghouse",
+            "url": "https://hooks.slack.com/services/2/2/2"
+          }
+        ]
+      },
       "json": {
         "service_hooks": [
           {
@@ -102,12 +112,20 @@
       }
     },
     "request": {
+      "json_curl": {
+        "channels": [
+          {
+            "account": null,
+            "channel_name": "#general"
+          }
+        ]
+      },
       "json": {
         "channels": [
           {
             "account": "string",
             "channel_name": "#general",
-            "transfer_all_user_comments": "boolean"
+            "transfer_all_user_comments": false
           }
         ]
       },

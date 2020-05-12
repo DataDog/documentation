@@ -2,6 +2,19 @@
   "SubmitTraces": {
     "responses": {},
     "request": {
+      "json_curl": [
+        [
+          {
+            "duration": null,
+            "name": "span_name",
+            "resource": "/home",
+            "service": "service_name",
+            "span_id": "987654321",
+            "start": null,
+            "trace_id": "123456789"
+          }
+        ]
+      ],
       "json": [
         [
           {

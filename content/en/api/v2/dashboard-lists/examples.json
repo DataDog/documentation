@@ -10,13 +10,13 @@
                 "handle": "string",
                 "name": "string"
               },
-              "created": "string",
+              "created": "2019-09-19T10:00:00.000Z",
               "icon": "string",
               "id": "string",
-              "is_favorite": "boolean",
-              "is_read_only": "boolean",
-              "is_shared": "boolean",
-              "modified": "string",
+              "is_favorite": false,
+              "is_read_only": false,
+              "is_shared": false,
+              "modified": "2019-09-19T10:00:00.000Z",
               "popularity": "integer",
               "title": "string",
               "type": "string",
@@ -52,6 +52,14 @@
       }
     },
     "request": {
+      "json_curl": {
+        "dashboards": [
+          {
+            "id": null,
+            "type": null
+          }
+        ]
+      },
       "json": {
         "dashboards": [
           {
@@ -79,13 +87,13 @@
                 "handle": "string",
                 "name": "string"
               },
-              "created": "string",
+              "created": "2019-09-19T10:00:00.000Z",
               "icon": "string",
               "id": "string",
-              "is_favorite": "boolean",
-              "is_read_only": "boolean",
-              "is_shared": "boolean",
-              "modified": "string",
+              "is_favorite": false,
+              "is_read_only": false,
+              "is_shared": false,
+              "modified": "2019-09-19T10:00:00.000Z",
               "popularity": "integer",
               "title": "string",
               "type": "string",
@@ -114,6 +122,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -129,13 +138,13 @@
                 "handle": "string",
                 "name": "string"
               },
-              "created": "string",
+              "created": "2019-09-19T10:00:00.000Z",
               "icon": "string",
               "id": "string",
-              "is_favorite": "boolean",
-              "is_read_only": "boolean",
-              "is_shared": "boolean",
-              "modified": "string",
+              "is_favorite": false,
+              "is_read_only": false,
+              "is_shared": false,
+              "modified": "2019-09-19T10:00:00.000Z",
               "popularity": "integer",
               "title": "string",
               "type": "string",
@@ -171,6 +180,14 @@
       }
     },
     "request": {
+      "json_curl": {
+        "dashboards": [
+          {
+            "id": null,
+            "type": null
+          }
+        ]
+      },
       "json": {
         "dashboards": [
           {
@@ -198,13 +215,13 @@
                 "handle": "string",
                 "name": "string"
               },
-              "created": "string",
+              "created": "2019-09-19T10:00:00.000Z",
               "icon": "string",
               "id": "string",
-              "is_favorite": "boolean",
-              "is_read_only": "boolean",
-              "is_shared": "boolean",
-              "modified": "string",
+              "is_favorite": false,
+              "is_read_only": false,
+              "is_shared": false,
+              "modified": "2019-09-19T10:00:00.000Z",
               "popularity": "integer",
               "title": "string",
               "type": "string",
@@ -241,6 +258,14 @@
       }
     },
     "request": {
+      "json_curl": {
+        "dashboards": [
+          {
+            "id": null,
+            "type": null
+          }
+        ]
+      },
       "json": {
         "dashboards": [
           {

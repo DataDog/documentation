@@ -23,10 +23,11 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-        "automute": "boolean",
+        "automute": false,
         "client_email": "api-dev@datadog-sandbox.iam.gserviceaccount.com",
         "client_id": "123456712345671234567",
         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
@@ -49,7 +50,7 @@
         "json": {
           "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
           "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-          "automute": "boolean",
+          "automute": false,
           "client_email": "api-dev@datadog-sandbox.iam.gserviceaccount.com",
           "client_id": "123456712345671234567",
           "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
@@ -83,6 +84,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -111,10 +113,11 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-        "automute": "boolean",
+        "automute": false,
         "client_email": "api-dev@datadog-sandbox.iam.gserviceaccount.com",
         "client_id": "123456712345671234567",
         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",
@@ -155,10 +158,11 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-        "automute": "boolean",
+        "automute": false,
         "client_email": "api-dev@datadog-sandbox.iam.gserviceaccount.com",
         "client_id": "123456712345671234567",
         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/<CLIENT_EMAIL>",

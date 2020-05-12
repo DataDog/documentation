@@ -10,11 +10,11 @@
                 "handle": "string",
                 "name": "string"
               },
-              "created": "string",
+              "created": "2019-09-19T10:00:00.000Z",
               "dashboard_count": "integer",
               "id": "integer",
-              "is_favorite": "boolean",
-              "modified": "string",
+              "is_favorite": false,
+              "modified": "2019-09-19T10:00:00.000Z",
               "name": "string",
               "type": "manual_dashboard_list"
             }
@@ -32,6 +32,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -45,11 +46,11 @@
             "handle": "string",
             "name": "string"
           },
-          "created": "string",
+          "created": "2019-09-19T10:00:00.000Z",
           "dashboard_count": "integer",
           "id": "integer",
-          "is_favorite": "boolean",
-          "modified": "string",
+          "is_favorite": false,
+          "modified": "2019-09-19T10:00:00.000Z",
           "name": "string",
           "type": "manual_dashboard_list"
         },
@@ -73,6 +74,9 @@
       }
     },
     "request": {
+      "json_curl": {
+        "name": null
+      },
       "json": {
         "name": "string"
       },
@@ -105,6 +109,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -118,11 +123,11 @@
             "handle": "string",
             "name": "string"
           },
-          "created": "string",
+          "created": "2019-09-19T10:00:00.000Z",
           "dashboard_count": "integer",
           "id": "integer",
-          "is_favorite": "boolean",
-          "modified": "string",
+          "is_favorite": false,
+          "modified": "2019-09-19T10:00:00.000Z",
           "name": "string",
           "type": "manual_dashboard_list"
         },
@@ -146,6 +151,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -159,11 +165,11 @@
             "handle": "string",
             "name": "string"
           },
-          "created": "string",
+          "created": "2019-09-19T10:00:00.000Z",
           "dashboard_count": "integer",
           "id": "integer",
-          "is_favorite": "boolean",
-          "modified": "string",
+          "is_favorite": false,
+          "modified": "2019-09-19T10:00:00.000Z",
           "name": "string",
           "type": "manual_dashboard_list"
         },
@@ -195,6 +201,9 @@
       }
     },
     "request": {
+      "json_curl": {
+        "name": null
+      },
       "json": {
         "name": "string"
       },

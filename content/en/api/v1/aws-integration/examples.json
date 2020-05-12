@@ -23,11 +23,12 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",
         "account_specific_namespace_rules": {
-          "<any-key>": "boolean"
+          "<any-key>": false
         },
         "excluded_regions": [
           "us-east-1",
@@ -54,7 +55,7 @@
               "access_key_id": "string",
               "account_id": "1234567",
               "account_specific_namespace_rules": {
-                "<any-key>": "boolean"
+                "<any-key>": false
               },
               "excluded_regions": [
                 "us-east-1",
@@ -91,6 +92,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -121,11 +123,12 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",
         "account_specific_namespace_rules": {
-          "<any-key>": "boolean"
+          "<any-key>": false
         },
         "excluded_regions": [
           "us-east-1",
@@ -167,11 +170,12 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",
         "account_specific_namespace_rules": {
-          "<any-key>": "boolean"
+          "<any-key>": false
         },
         "excluded_regions": [
           "us-east-1",
@@ -209,6 +213,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -239,11 +244,12 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
         "access_key_id": "string",
         "account_id": "1234567",
         "account_specific_namespace_rules": {
-          "<any-key>": "boolean"
+          "<any-key>": false
         },
         "excluded_regions": [
           "us-east-1",

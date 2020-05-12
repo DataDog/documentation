@@ -3,7 +3,7 @@
     "responses": {
       "200": {
         "json": {
-          "index_names": "array"
+          "index_names": []
         },
         "html": "<div class=\"table-response schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">index_names&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of strings identifying by their name(s) the index(es) of your organization.\nLogs are tested against the query filter of each index one by one, following the order of the array.\nLogs are eventually stored in the first matching index.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
       },
@@ -17,6 +17,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -25,7 +26,7 @@
     "responses": {
       "200": {
         "json": {
-          "index_names": "array"
+          "index_names": []
         },
         "html": "<div class=\"table-response schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">index_names&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of strings identifying by their name(s) the index(es) of your organization.\nLogs are tested against the query filter of each index one by one, following the order of the array.\nLogs are eventually stored in the first matching index.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
       },
@@ -33,7 +34,7 @@
         "json": {
           "error": {
             "code": "string",
-            "details": "array",
+            "details": [],
             "message": "string"
           }
         },
@@ -49,8 +50,11 @@
       }
     },
     "request": {
+      "json_curl": {
+        "index_names": null
+      },
       "json": {
-        "index_names": "array"
+        "index_names": []
       },
       "html": "<div class=\"table-request schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">index_names&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of strings identifying by their name(s) the index(es) of your organization.\nLogs are tested against the query filter of each index one by one, following the order of the array.\nLogs are eventually stored in the first matching index.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
     }
@@ -68,14 +72,14 @@
                     "query": "*",
                     "sample_rate": "1"
                   },
-                  "is_enabled": "boolean",
+                  "is_enabled": false,
                   "name": "string"
                 }
               ],
               "filter": {
                 "query": "source:python"
               },
-              "is_rate_limited": "boolean",
+              "is_rate_limited": false,
               "name": "string",
               "num_retention_days": "integer"
             }
@@ -93,6 +97,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -108,14 +113,14 @@
                 "query": "*",
                 "sample_rate": "1"
               },
-              "is_enabled": "boolean",
+              "is_enabled": false,
               "name": "string"
             }
           ],
           "filter": {
             "query": "source:python"
           },
-          "is_rate_limited": "boolean",
+          "is_rate_limited": false,
           "name": "string",
           "num_retention_days": "integer"
         },
@@ -133,7 +138,7 @@
         "json": {
           "error": {
             "code": "string",
-            "details": "array",
+            "details": [],
             "message": "string"
           }
         },
@@ -141,6 +146,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -156,14 +162,14 @@
                 "query": "*",
                 "sample_rate": "1"
               },
-              "is_enabled": "boolean",
+              "is_enabled": false,
               "name": "string"
             }
           ],
           "filter": {
             "query": "source:python"
           },
-          "is_rate_limited": "boolean",
+          "is_rate_limited": false,
           "name": "string",
           "num_retention_days": "integer"
         },
@@ -173,7 +179,7 @@
         "json": {
           "error": {
             "code": "string",
-            "details": "array",
+            "details": [],
             "message": "string"
           }
         },
@@ -191,7 +197,7 @@
         "json": {
           "error": {
             "code": "string",
-            "details": "array",
+            "details": [],
             "message": "string"
           }
         },
@@ -199,6 +205,17 @@
       }
     },
     "request": {
+      "json_curl": {
+        "exclusion_filters": [
+          {
+            "filter": {
+              "sample_rate": "1"
+            },
+            "name": null
+          }
+        ],
+        "filter": {}
+      },
       "json": {
         "exclusion_filters": [
           {
@@ -206,7 +223,7 @@
               "query": "*",
               "sample_rate": "1"
             },
-            "is_enabled": "boolean",
+            "is_enabled": false,
             "name": "string"
           }
         ],

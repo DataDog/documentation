@@ -188,10 +188,10 @@ describe(`filterJson `, () => {
 
 describe(`outputExample `, () => {
 
-  it('should return false boolean as string with false', () => {
+  it('should show boolean without quotes', () => {
     const mockExample = false;
     const actual = bp.outputExample(mockExample);
-    const expected = '"false"';
+    const expected = 'false';
     expect(actual).toEqual(expected);
   });
 
@@ -378,7 +378,7 @@ describe(`filterExampleJson`, () => {
       "type": "object"
     };
     const actual = bp.filterExampleJson("request", mockSchema);
-    const expected = {"access_key_id": "string", "account_id": "1234567", "account_specific_namespace_rules": {"<any-key>": "false"}, "excluded_regions": ["us-east-1","us-west-2"], "filter_tags": ["<KEY>:<VALUE>"], "host_tags": ["<KEY>:<VALUE>"], "role_name": "DatadogAWSIntegrationRole", "secret_access_key": "string"};
+    const expected = {"access_key_id": "string", "account_id": "1234567", "account_specific_namespace_rules": {"<any-key>": false}, "excluded_regions": ["us-east-1","us-west-2"], "filter_tags": ["<KEY>:<VALUE>"], "host_tags": ["<KEY>:<VALUE>"], "role_name": "DatadogAWSIntegrationRole", "secret_access_key": "string"};
     expect(actual).toEqual(expected);
   });
 
@@ -631,7 +631,7 @@ describe(`filterExampleJson`, () => {
       "type": "object"
     };
     const actual = bp.filterExampleJson("request", mockSchema);
-    const expected = {"error": {"code": "string", "details": "array", "message": "string"}};
+    const expected = {"error": {"code": "string", "details": [], "message": "string"}};
     expect(actual).toEqual(expected);
   });
 
@@ -698,7 +698,7 @@ describe(`filterExampleJson`, () => {
       "type": "object"
     };
     const actual = bp.filterExampleJson("request", mockSchema);
-    const expected =  {"data": [{"attributes": {"created": "string","description": "string","display_name": "string","display_type": "string","group_name": "string","name": "string","restricted": "boolean"},"id": "string"}]};
+    const expected =  {"data": [{"attributes": {"created": "2019-09-19T10:00:00.000Z","description": "string","display_name": "string","display_type": "string","group_name": "string","name": "string","restricted": false},"id": "string"}]};
     expect(actual).toEqual(expected);
   });
 
@@ -821,6 +821,133 @@ describe(`filterExampleJson`, () => {
     };
     const actual = bp.filterExampleJson('request', mockSchema);
     const expected = {'metric':'string', 'length': 'string'};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show boolean without quotes', () => {
+    const mockSchema = {
+      "description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure.",
+      "properties": {
+        "is_read_only": {
+          "default": false,
+          "description": "Whether this dashboard is read-only. If True, only the author and admins can make changes to it.",
+          "example": false,
+          "type": "boolean"
+        }
+      }
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {'is_read_only': false};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show array as []', () => {
+    const mockSchema = {
+      "description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure.",
+      "properties": {
+        "notify_list": {
+          "description": "List of handles of users to notify when changes are made to this dashboard.",
+          "items": {
+            "description": "User handles.",
+            "type": "string"
+          },
+          "nullable": true,
+          "type": "array"
+        }
+      }
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {'notify_list': []};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show boolean false when no example boolean to show', () => {
+    const mockSchema = {
+      "description": "Embeddable graph.",
+      "properties": {
+        "revoked": {
+          "description": "Boolean flag for whether or not the embed is revoked.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {"revoked": false};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show required fields when curl', () => {
+    const mockSchema = {
+      "description": "The metrics' payload.",
+      "properties": {
+        "series": {
+          "description": "A list of time series to submit to Datadog.",
+          "items": {
+            "description": "A metric to submit to Datadog.\nSee [Datadog metrics](https://docs.datadoghq.com/developers/metrics/#custom-metrics-properties).",
+            "properties": {
+              "host": {
+                "description": "The name of the host that produced the metric.",
+                "type": "string"
+              },
+              "interval": {
+                "default": null,
+                "description": "If the type of the metric is rate or count, define the corresponding interval.",
+                "format": "int64",
+                "nullable": true,
+                "type": "integer"
+              },
+              "metric": {
+                "description": "The name of the timeseries.",
+                "example": "system.load.1",
+                "type": "string"
+              },
+              "points": {
+                "description": "Points relating to a metric.",
+                "items": {
+                  "description": "Array of timeseries points.",
+                  "example": [
+                    1575317847,
+                    0.5
+                  ],
+                  "items": {
+                    "description": "Each point is of the form `[POSIX_timestamp, numeric_value]`.\nThe timestamp should be in seconds and current.\nThe numeric value format should be a 32bit float gauge-type value.\nCurrent is defined as not more than 10 minutes in the future or more than 1 hour in the past.",
+                    "format": "double",
+                    "type": "number"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              "tags": {
+                "description": "A list of tags associated with the metric.",
+                "items": {
+                  "description": "Individual tags.",
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "type": {
+                "default": "gauge",
+                "description": "The type of the metric.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "metric",
+              "points"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('curl', mockSchema);
+    const expected = {"series": [{"metric": "system.load.1", "points": ["1575317847", "0.5"]}]};
     expect(actual).toEqual(expected);
   });
 

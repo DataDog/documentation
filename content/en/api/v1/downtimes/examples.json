@@ -3,10 +3,10 @@
     "responses": {
       "200": {
         "json": {
-          "active": "true",
+          "active": true,
           "canceled": "1412799983",
           "creator_id": "123456",
-          "disabled": "false",
+          "disabled": false,
           "downtime_type": "2",
           "end": "1412793983",
           "id": "1625",
@@ -45,6 +45,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -53,10 +54,10 @@
     "responses": {
       "200": {
         "json": {
-          "active": "true",
+          "active": true,
           "canceled": "1412799983",
           "creator_id": "123456",
-          "disabled": "false",
+          "disabled": false,
           "downtime_type": "2",
           "end": "1412793983",
           "id": "1625",
@@ -103,8 +104,9 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
-        "disabled": "false",
+        "disabled": false,
         "end": "1412793983",
         "message": "Message on the downtime",
         "monitor_id": "123456",
@@ -168,6 +170,9 @@
       }
     },
     "request": {
+      "json_curl": {
+        "scope": "host:myserver"
+      },
       "json": {
         "scope": "host:myserver"
       },
@@ -194,6 +199,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -202,10 +208,10 @@
     "responses": {
       "200": {
         "json": {
-          "active": "true",
+          "active": true,
           "canceled": "1412799983",
           "creator_id": "123456",
-          "disabled": "false",
+          "disabled": false,
           "downtime_type": "2",
           "end": "1412793983",
           "id": "1625",
@@ -252,6 +258,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -260,10 +267,10 @@
     "responses": {
       "200": {
         "json": {
-          "active": "true",
+          "active": true,
           "canceled": "1412799983",
           "creator_id": "123456",
-          "disabled": "false",
+          "disabled": false,
           "downtime_type": "2",
           "end": "1412793983",
           "id": "1625",
@@ -318,8 +325,9 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {
-        "disabled": "false",
+        "disabled": false,
         "end": "1412793983",
         "message": "Message on the downtime",
         "monitor_id": "123456",

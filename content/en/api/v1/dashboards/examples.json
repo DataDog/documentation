@@ -6,12 +6,12 @@
           "dashboards": [
             {
               "author_handle": "string",
-              "created_at": "string",
+              "created_at": "2019-09-19T10:00:00.000Z",
               "description": "string",
               "id": "string",
-              "is_read_only": "boolean",
+              "is_read_only": false,
               "layout_type": "string",
-              "modified_at": "string",
+              "modified_at": "2019-09-19T10:00:00.000Z",
               "title": "string",
               "url": "string"
             }
@@ -29,6 +29,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -38,13 +39,13 @@
       "200": {
         "json": {
           "author_handle": "test@datadoghq.com",
-          "created_at": "string",
+          "created_at": "2019-09-19T10:00:00.000Z",
           "description": "string",
           "id": "123-abc-456",
-          "is_read_only": "false",
+          "is_read_only": false,
           "layout_type": "string",
-          "modified_at": "string",
-          "notify_list": "array",
+          "modified_at": "2019-09-19T10:00:00.000Z",
+          "notify_list": [],
           "template_variable_presets": [
             {
               "name": "string",
@@ -67,7 +68,7 @@
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": "object",
+              "definition": {},
               "id": "integer",
               "layout": {
                 "height": "integer",
@@ -98,11 +99,31 @@
       }
     },
     "request": {
+      "json_curl": {
+        "layout_type": null,
+        "template_variables": [
+          {
+            "name": "host1"
+          }
+        ],
+        "title": null,
+        "widgets": [
+          {
+            "definition": null,
+            "layout": {
+              "height": null,
+              "width": null,
+              "x": null,
+              "y": null
+            }
+          }
+        ]
+      },
       "json": {
         "description": "string",
-        "is_read_only": "false",
+        "is_read_only": false,
         "layout_type": "string",
-        "notify_list": "array",
+        "notify_list": [],
         "template_variable_presets": [
           {
             "name": "string",
@@ -124,7 +145,7 @@
         "title": "string",
         "widgets": [
           {
-            "definition": "object",
+            "definition": {},
             "id": "integer",
             "layout": {
               "height": "integer",
@@ -164,6 +185,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -173,13 +195,13 @@
       "200": {
         "json": {
           "author_handle": "test@datadoghq.com",
-          "created_at": "string",
+          "created_at": "2019-09-19T10:00:00.000Z",
           "description": "string",
           "id": "123-abc-456",
-          "is_read_only": "false",
+          "is_read_only": false,
           "layout_type": "string",
-          "modified_at": "string",
-          "notify_list": "array",
+          "modified_at": "2019-09-19T10:00:00.000Z",
+          "notify_list": [],
           "template_variable_presets": [
             {
               "name": "string",
@@ -202,7 +224,7 @@
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": "object",
+              "definition": {},
               "id": "integer",
               "layout": {
                 "height": "integer",
@@ -233,6 +255,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -242,13 +265,13 @@
       "200": {
         "json": {
           "author_handle": "test@datadoghq.com",
-          "created_at": "string",
+          "created_at": "2019-09-19T10:00:00.000Z",
           "description": "string",
           "id": "123-abc-456",
-          "is_read_only": "false",
+          "is_read_only": false,
           "layout_type": "string",
-          "modified_at": "string",
-          "notify_list": "array",
+          "modified_at": "2019-09-19T10:00:00.000Z",
+          "notify_list": [],
           "template_variable_presets": [
             {
               "name": "string",
@@ -271,7 +294,7 @@
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": "object",
+              "definition": {},
               "id": "integer",
               "layout": {
                 "height": "integer",
@@ -310,11 +333,31 @@
       }
     },
     "request": {
+      "json_curl": {
+        "layout_type": null,
+        "template_variables": [
+          {
+            "name": "host1"
+          }
+        ],
+        "title": null,
+        "widgets": [
+          {
+            "definition": null,
+            "layout": {
+              "height": null,
+              "width": null,
+              "x": null,
+              "y": null
+            }
+          }
+        ]
+      },
       "json": {
         "description": "string",
-        "is_read_only": "false",
+        "is_read_only": false,
         "layout_type": "string",
-        "notify_list": "array",
+        "notify_list": [],
         "template_variable_presets": [
           {
             "name": "string",
@@ -336,7 +379,7 @@
         "title": "string",
         "widgets": [
           {
-            "definition": "object",
+            "definition": {},
             "id": "integer",
             "layout": {
               "height": "integer",

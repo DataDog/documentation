@@ -3,7 +3,7 @@
     "responses": {
       "200": {
         "json": {
-          "pipeline_ids": "array"
+          "pipeline_ids": []
         },
         "html": "<div class=\"table-response schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">pipeline_ids&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Ordered Array of <code>&lt;PIPELINE_ID&gt;</code> strings, the order of pipeline IDs in the array\ndefine the overall Pipelines order for Datadog.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
       },
@@ -17,6 +17,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -25,7 +26,7 @@
     "responses": {
       "200": {
         "json": {
-          "pipeline_ids": "array"
+          "pipeline_ids": []
         },
         "html": "<div class=\"table-response schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">pipeline_ids&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Ordered Array of <code>&lt;PIPELINE_ID&gt;</code> strings, the order of pipeline IDs in the array\ndefine the overall Pipelines order for Datadog.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
       },
@@ -33,7 +34,7 @@
         "json": {
           "error": {
             "code": "string",
-            "details": "array",
+            "details": [],
             "message": "string"
           }
         },
@@ -51,7 +52,7 @@
         "json": {
           "error": {
             "code": "string",
-            "details": "array",
+            "details": [],
             "message": "string"
           }
         },
@@ -59,8 +60,11 @@
       }
     },
     "request": {
+      "json_curl": {
+        "pipeline_ids": null
+      },
       "json": {
-        "pipeline_ids": "array"
+        "pipeline_ids": []
       },
       "html": "<div class=\"table-request schema-table has-no-expands row \">\n    <p class=\"expand-all js-expand-all text-primary\">Expand All</p>\n    <div class=\"col-12\">\n      <div class=\"row table-header\">\n        <div class=\"col-4 column\">\n          <p class=\"font-semibold\">Field</p>\n        </div>\n        <div class=\"col-2 column\">\n          <p class=\"font-semibold\">Type</p>\n        </div>\n        <div class=\"col-6 column\">\n          <p class=\"font-semibold\">Description</p>\n        </div>\n      </div>\n      <div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">pipeline_ids&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Ordered Array of <code>&lt;PIPELINE_ID&gt;</code> strings, the order of pipeline IDs in the array\ndefine the overall Pipelines order for Datadog.</p></div>\n            </div>\n            \n          </div>\n        </div>\n    </div>  \n  </div>"
     }
@@ -73,12 +77,12 @@
             "query": "source:python"
           },
           "id": "string",
-          "is_enabled": "boolean",
-          "is_read_only": "boolean",
+          "is_enabled": false,
+          "is_read_only": false,
           "name": "string",
           "processors": [
             {
-              "is_enabled": "boolean",
+              "is_enabled": false,
               "name": "string"
             }
           ],
@@ -96,6 +100,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -108,12 +113,12 @@
             "query": "source:python"
           },
           "id": "string",
-          "is_enabled": "boolean",
-          "is_read_only": "boolean",
+          "is_enabled": false,
+          "is_read_only": false,
           "name": "string",
           "processors": [
             {
-              "is_enabled": "boolean",
+              "is_enabled": false,
               "name": "string"
             }
           ],
@@ -125,7 +130,7 @@
         "json": {
           "error": {
             "code": "string",
-            "details": "array",
+            "details": [],
             "message": "string"
           }
         },
@@ -141,15 +146,18 @@
       }
     },
     "request": {
+      "json_curl": {
+        "name": null
+      },
       "json": {
         "filter": {
           "query": "source:python"
         },
-        "is_enabled": "boolean",
+        "is_enabled": false,
         "name": "string",
         "processors": [
           {
-            "is_enabled": "boolean",
+            "is_enabled": false,
             "name": "string"
           }
         ]
@@ -163,7 +171,7 @@
         "json": {
           "error": {
             "code": "string",
-            "details": "array",
+            "details": [],
             "message": "string"
           }
         },
@@ -179,6 +187,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -191,12 +200,12 @@
             "query": "source:python"
           },
           "id": "string",
-          "is_enabled": "boolean",
-          "is_read_only": "boolean",
+          "is_enabled": false,
+          "is_read_only": false,
           "name": "string",
           "processors": [
             {
-              "is_enabled": "boolean",
+              "is_enabled": false,
               "name": "string"
             }
           ],
@@ -208,7 +217,7 @@
         "json": {
           "error": {
             "code": "string",
-            "details": "array",
+            "details": [],
             "message": "string"
           }
         },
@@ -224,6 +233,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
@@ -236,12 +246,12 @@
             "query": "source:python"
           },
           "id": "string",
-          "is_enabled": "boolean",
-          "is_read_only": "boolean",
+          "is_enabled": false,
+          "is_read_only": false,
           "name": "string",
           "processors": [
             {
-              "is_enabled": "boolean",
+              "is_enabled": false,
               "name": "string"
             }
           ],
@@ -253,7 +263,7 @@
         "json": {
           "error": {
             "code": "string",
-            "details": "array",
+            "details": [],
             "message": "string"
           }
         },
@@ -269,15 +279,18 @@
       }
     },
     "request": {
+      "json_curl": {
+        "name": null
+      },
       "json": {
         "filter": {
           "query": "source:python"
         },
-        "is_enabled": "boolean",
+        "is_enabled": false,
         "name": "string",
         "processors": [
           {
-            "is_enabled": "boolean",
+            "is_enabled": false,
             "name": "string"
           }
         ]
