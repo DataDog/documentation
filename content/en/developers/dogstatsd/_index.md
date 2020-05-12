@@ -286,7 +286,7 @@ Once your DogStatsD client is installed, instantiate it in your code:
 {{% tab "Python" %}}
 
 ```python
-from datadog import statsd
+from datadog import initialize, statsd
 
 options = {
     'statsd_host':'127.0.0.1',
