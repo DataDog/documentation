@@ -146,6 +146,11 @@ main:
     url: agent/basic_agent_usage/redhat/
     weight: 111
     parent: basic_agent_usage
+  - name: "SaltStack"
+    identifier: basic_agent_usage_saltstack
+    url: agent/basic_agent_usage/saltstack/
+    weight: 112
+    parent: basic_agent_usage
   - name: SUSE
     identifier: basic_agent_usage_suse
     url: agent/basic_agent_usage/suse/
