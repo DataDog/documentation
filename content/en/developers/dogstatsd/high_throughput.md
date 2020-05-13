@@ -261,19 +261,20 @@ Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number
 dogstatsd_so_rcvbuf: 4194304
 ```
 
-Please note that setting these values will need a reboot of the host.
-
 ### Ensure proper packet sizes
 
-Sending packets with an adequate size to Dogstatsd will avoid extra work to the server.
+Sending packets with an adequate size to the Dogstatsd server within the Agent
+will avoid extra CPU usage.
+The latest versions of the official Dogstatsd clients send packets with a size optimized
+for performance. You can skip this section if you are using them.
 
-If the packets sent are too small, Dogstatsd will have to pack several together in order
+If the packets sent are too small, the Agent will have to pack several together in order
 to process them in batches later in the pipeline. The official Dogstatsd clients are
 capable of grouping metrics to have the best ratio of the number of metrics per packet.
 
-If the clients properly send packets having a size close to `dogstatsd_buffer_size`, Dogstatsd
+If the Dogstatsd clients properly send packets having a size close to `dogstatsd_buffer_size`, the Agent
 will perform better. Be careful: the packets must not be larger than this size, otherwise, the
-Dogstatsd server won't be able to load them completely in the buffer and some of metrics will
+Agent won't be able to load them completely in the buffer and some of metrics will
 be malformed. Please use the corresponding configuration field in your Dogstatsd clients.
 
 Note for UDP: as the UDP packets are most of the time going through the Ethernet and IP layer,
@@ -285,17 +286,17 @@ Note for UDS: for the best performances, UDS packet should have a size of 8192 b
 
 ### Limit the maximum memory usage
 
-Dogstatsd tries to absorb burst of metrics sent by the clients but in order to do so,
+The Agent tries to absorb burst of metrics sent by the Dogstatsd clients but in order to do so,
 it needs to use memory. Even if this is for a short amount of time and even if this
 memory is quickly released to the OS, a spike happens and that could be an issue in
 containerized environments where limit on memory usage could evict pods or containers.
 
-This first thing to do to not have Dogstatsd reach its maximum memory usage is
-to avoid sending metrics in bursts in your application.
+This first thing to do to not have the Dogstatsd server within the agent to reach
+its maximum memory usage is to avoid sending metrics in bursts in your application.
 
 Another thing to look at to limit the maximum memory usage is to reduce the buffering.
-The main buffer of Dogstatsd is configurable with the `dogstatsd_queue_size` field, its default value of `1024` induces an approximate maximum memory usage of 768MB. Note that reducing this
-buffer could have the caveat of increasing the number of packet drops.
+The main buffer of the Dogstatsd server within the Agent is configurable with the `dogstatsd_queue_size` field (since Datadog Agent 6.1.0), its default value of `1024` induces an approximate maximum memory usage of 768MB.
+Note that reducing this buffer could have the caveat of increasing the number of packet drops.
 
 Find below an example decreasing the max memory usage of Dogstatsd to approximately 384MB:
 
