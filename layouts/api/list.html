@@ -412,19 +412,26 @@
 {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
                                             <code class="language-fallback" data-lang="fallback">
 {{- with $pathParams -}}
+    <span class="c1"># Path parameters</span><br/>
     {{- range . -}}
-        <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default (.schema.example | default "CHANGE_ME") }}"</span>
-    {{- end }}
-{{ end }}
+        <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default (.schema.example | default "CHANGE_ME") }}"</span><br/>
+    {{- end -}}
+{{- end -}}
 
 {{- with $queryStrings -}}
+    {{- $i := 0 -}}
     {{- range . -}}
         {{- if eq .required true -}}
-            <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default (.schema.example | default "CHANGE_ME") }}"</span>
+            {{- if eq $i 0 -}}
+                <span class="c1"># Required query arguments</span><br/>
+            {{- end -}}
+            <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default (.schema.example | default "CHANGE_ME") }}"</span><br/>
+            {{- $i = add $count 1 -}}
         {{- end -}}
-    {{- end }}
-{{- end }}
+    {{- end -}}
+{{- end -}}
 
+<span class="c1"># Curl command</span>
 <span class="n">curl</span> <span class="o">-X</span> <span class="s1 text-uppercase">{{ $context.actionType }}</span> {{ range $.Scratch.Get "serverURLS" }}<span class="kn d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span class="n">{{ replace $context.pathKey "{" "${" }}</span>
 {{- range $qi, $q := $queryStrings -}}
     {{- if eq .required true -}}
@@ -433,8 +440,8 @@
 {{- end -}}
 
 {{- /* Render authentication query parameters "?api_key=XXX" */ -}}
-{{- $i := 0 -}}
 {{- with $context.action.security -}}
+    {{- $i := 0 -}}
     {{- range . -}}
         {{- range $key, $val := . -}}
             {{ $authSchema := (index $d.components.securitySchemes $key) }}
