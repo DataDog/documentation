@@ -242,13 +242,3 @@
         - "*.json"
       options:
         dest_path: '/security_monitoring/default_rules/'
-
-  - repo_name: datadog-api-client-go
-    contents:
-    - action: go-examples
-      branch: master
-      globs:
-        - "api/v1/datadog/docs/*Api.md"
-        - "api/v2/datadog/docs/*Api.md"
-      options:
-        dest_path: '/api/v3/'

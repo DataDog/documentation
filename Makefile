@@ -34,6 +34,7 @@ clean-all: stop  ## Clean everything.
 	make clean-auto-doc
 	make clean-node
 	make clean-virt
+	make clean-examples
 
 clean-build:  ## Remove build artifacts.
 	@if [ -d public ]; then rm -r public; fi
@@ -85,10 +86,6 @@ clean-integrations:  ## Remove built integrations files.
 	@find ./content/en/security_monitoring/default_rules -type f -maxdepth 1 \
 		-a -not -name '_index.md' \
 		-exec rm -rf {} \;
-	@find ./content/en/api/v1 -type f -name '*.go' -maxdepth 2 \
-		-exec rm -rf {} \;
-	@find ./content/en/api/v2 -type f -name '*.go' -maxdepth 2 \
-		-exec rm -rf {} \;
 
 clean-auto-doc: ##Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
@@ -131,7 +128,7 @@ source-helpers: hugpython  ## Source the helper functions used in build, test, d
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 	@cp -r local/githooks/* .git/hooks
 
-start: clean source-helpers ## Build the documentation with all external content.
+start: clean source-helpers examples/go ## Build the documentation with all external content.
 	@echo "\033[35m\033[1m\nBuilding the documentation with ALL external content:\033[0m"
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
@@ -155,3 +152,23 @@ stop:  ## Stop wepack watch/hugo server.
 	@echo "stopping previous..."
 	@pkill -x webpack || true
 	@pkill -x hugo server --renderToDisk || true
+
+clean-examples:
+	@rm -rf examples
+	@git clean -df content/en/api/
+
+examples/datadog-api-client-go:
+	@git clone https://github.com/DataDog/datadog-api-client-go.git examples/datadog-api-client-go
+
+examples/datadog-api-client-java:
+	@git clone https://github.com/DataDog/datadog-api-client-java.git examples/datadog-api-client-java
+
+examples/go: examples/datadog-api-client-go
+	@ls examples/datadog-api-client-go/api/v1/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v1
+	@ls examples/datadog-api-client-go/api/v2/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v2
+
+	# for f in examples/content/en/api/v*/*/*.go ; do \
+	# 	echo gofmt -w $$f || rm $f; \
+	# done;
+
+	cp -R examples/content ./
