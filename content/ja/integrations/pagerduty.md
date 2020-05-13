@@ -74,4 +74,4 @@ Datadog では、PagerDuty に送信されるモニター通知の長さに上�
 
 [1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide
 [2]: https://app.datadoghq.com/report/pagerduty
-[3]: https://docs.datadoghq.com/ja/events
+[3]: https://docs.datadoghq.com/ja/events/

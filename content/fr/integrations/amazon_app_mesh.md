@@ -104,7 +104,7 @@ Sélectionnez l'espace de nommage pour déployer `datadog-agent` et le service, 
 Vous pouvez également déployer l'injecteur appmesh en suivant les instructions dans la documentation relative à [App Mesh avec EKS][3] et en utilisant l'option `enable-datadog-tracing=true` ou la variable d'environnement `ENABLE_DATADOG_TRACING=true`.
 
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_eks
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_eks/
 [2]: /fr/agent/kubernetes/daemonset_setup/#log-collection
 [3]: https://github.com/aws/aws-app-mesh-examples/blob/master/walkthroughs/eks/base.md#install-app-mesh--kubernetes-components
 {{% /tab %}}
@@ -154,8 +154,8 @@ Activez la collecte de logs en suivant les instructions détaillées dans la doc
 Les traces APM ne sont pas disponibles pour App Mesh. Contactez l'[assistance Datadog][4] pour en savoir plus.
 
 
-[1]: https://docs.datadoghq.com/fr/integrations/ecs_fargate
-[2]: https://docs.datadoghq.com/fr/integrations/faq/integration-setup-ecs-fargate
+[1]: https://docs.datadoghq.com/fr/integrations/ecs_fargate/
+[2]: https://docs.datadoghq.com/fr/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/fr/integrations/ecs_fargate/#log-collection
 [4]: /fr/help
 {{% /tab %}}
@@ -205,8 +205,8 @@ Activez la collecte de logs en suivant les instructions détaillées dans la doc
 Les traces APM ne sont pas disponibles pour App Mesh. Contactez l'[assistance Datadog][4] pour en savoir plus.
 
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_ecs
-[2]: https://docs.datadoghq.com/fr/integrations/faq/integration-setup-ecs-fargate
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_ecs/
+[2]: https://docs.datadoghq.com/fr/integrations/faq/integration-setup-ecs-fargate/
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_ecs/#log-collection
 [4]: /fr/help
 {{% /tab %}}
@@ -236,4 +236,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://aws.amazon.com/app-mesh
 [2]: https://docs.datadoghq.com/fr/integrations/envoy/#metrics
-[3]: https://docs.datadoghq.com/fr/help
+[3]: https://docs.datadoghq.com/fr/help/

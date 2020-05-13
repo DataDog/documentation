@@ -79,4 +79,4 @@ IMMUNIO インテグレーションには、サービスのチェック機能は
 [1]: http://www.immun.io
 [2]: https://dashboard.immun.io/#/settings/integrations
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/immunio/immunio_metadata.csv
-[4]: https://docs.datadoghq.com/ja/help
+[4]: https://docs.datadoghq.com/ja/help/

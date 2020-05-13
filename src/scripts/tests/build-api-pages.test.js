@@ -99,11 +99,11 @@ describe(`getTagSlug`, () => {
       expect(actual).toEqual(expected);
   });
 
-  it('should return lowercase and hyphenated together', () => {
+  it('should handle single quotes', () => {
     const expected = "get-a-monitors-details";
     const actual = bp.getTagSlug("Get a monitor's details");
     expect(actual).toEqual(expected);
-});
+  });
 
 });
 
@@ -181,9 +181,104 @@ describe(`isTagMatch `, () => {
   });
 });
 
+describe(`filterJson `, () => {
+
+
+});
+
+describe(`outputExample `, () => {
+
+  it('should show boolean without quotes', () => {
+    const mockExample = false;
+    const actual = bp.outputExample(mockExample);
+    const expected = 'false';
+    expect(actual).toEqual(expected);
+  });
+
+  it('should work with array of strings', () => {
+    const mockExample = ['foo', 'bar', 'baz'];
+    const actual = bp.outputExample(mockExample);
+    const expected = '"foo","bar","baz"';
+    expect(actual).toEqual(expected);
+  });
+
+  it('should work with array of objects', () => {
+    const mockExample = [
+      {
+        "account": "doghouse",
+        "url": "https://hooks.slack.com/services/2/2/2"
+      }
+    ];
+    const actual = bp.outputExample(mockExample, "account");
+    const expected = '"doghouse"';
+    expect(actual).toEqual(expected);
+  });
+
+  it('should work with object with single key of value containing array', () => {
+    const mockExample = {
+      "value": [
+        "namespace1",
+        "namespace2",
+        "namespace3"
+      ]
+    };
+    const actual = bp.outputExample(mockExample);
+    const expected = '"namespace1","namespace2","namespace3"';
+    expect(actual).toEqual(expected);
+  });
+
+});
+
+describe(`getJsonWrapChars `, () => {
+
+  it('should return array chars when data.items', () => {
+    const mockInput = {
+      "type": "array",
+      "items": {}
+    };
+    const expected = ['[', ']'];
+    const actual = bp.getJsonWrapChars(mockInput);
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return object chars when data.properties', () => {
+    const mockInput = {
+      "type": "object",
+      "items": {}
+    };
+    const expected = ['{', '}'];
+    const actual = bp.getJsonWrapChars(mockInput);
+    expect(actual).toEqual(expected);
+  });
+
+  it('should return nested array of object chars when items->items->properties', () => {
+    const mockInput = {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {}
+      }
+    };
+    const expected = ['[[{', '}]]'];
+    const actual = bp.getJsonWrapChars(mockInput);
+    expect(actual).toEqual(expected);
+  });
+
+});
+
+describe(`getInitialJsonData `, () => {
+
+
+});
+
+describe(`getInitialExampleJsonData `, () => {
+
+
+});
+
 describe(`filterExampleJson`, () => {
 
-  it('should show example array and object correctly', () => {
+  it('should show example properties->items correctly', () => {
     const mockSchema = {
       "description": "TODO.",
       "properties": {
@@ -202,19 +297,19 @@ describe(`filterExampleJson`, () => {
       ],
       "type": "object"
     };
-    const actual = bp.filterExampleJson(mockSchema);
+    const actual = bp.filterExampleJson("request", mockSchema);
     const expected = {"errors":["Bad Request"]};
     expect(actual).toEqual(expected);
   });
 
   it('should on empty request show {}', () => {
     const mockSchema = {"type": "object"};
-    const actual = bp.filterExampleJson(mockSchema);
+    const actual = bp.filterExampleJson("request", mockSchema);
     const expected = {};
     expect(actual).toEqual(expected);
   });
 
-  it('should show example data when comma seperated array', () => {
+  it('should handle examples with array of strings', () => {
     const mockSchema = {
       "description": "Returns the AWS account associated with this integration.",
       "properties": {
@@ -282,12 +377,13 @@ describe(`filterExampleJson`, () => {
       },
       "type": "object"
     };
-    const actual = bp.filterExampleJson(mockSchema);
-    const expected = {"access_key_id": "string", "account_id": "1234567", "account_specific_namespace_rules": {"&lt;any-key&gt;": "false"}, "excluded_regions": ["us-east-1","us-west-2"], "filter_tags": ["<KEY>:<VALUE>"], "host_tags": ["<KEY>:<VALUE>"], "role_name": "DatadogAWSIntegrationRole", "secret_access_key": "string"};
+    const actual = bp.filterExampleJson("request", mockSchema);
+    const expected = {"access_key_id": "string", "account_id": "1234567", "account_specific_namespace_rules": {"<any-key>": false}, "excluded_regions": ["us-east-1","us-west-2"], "filter_tags": ["<KEY>:<VALUE>"], "host_tags": ["<KEY>:<VALUE>"], "role_name": "DatadogAWSIntegrationRole", "secret_access_key": "string"};
     expect(actual).toEqual(expected);
   });
 
   it('should show example data when object', () => {
+    // 200 response on ListAvailableAWSNamespaces
     const mockSchema = {
       "example": {
         "value": [
@@ -301,8 +397,81 @@ describe(`filterExampleJson`, () => {
       },
       "type": "array"
     };
-    const actual = bp.filterExampleJson(mockSchema);
+    const actual = bp.filterExampleJson("response", mockSchema);
     const expected = ["namespace1", "namespace2", "namespace3"];
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show example data when additionalProperties with properties', () => {
+    const mockSchema = {
+      "type": "object",
+      "description": "An object containing a list of services and their dependencies.",
+      "example": {
+        "service-a": {
+          "calls": [
+            "service-b",
+            "service-c"
+          ]
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "description": "An object containing a service's dependencies.",
+        "required": [
+          "calls"
+        ],
+        "properties": {
+          "calls": {
+            "description": "A list of dependencies.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Service names."
+            }
+          }
+        }
+      }
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {"service-a": {"calls": ["service-b", "service-c"]}};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show example data when additionalProperties with items and no properties', () => {
+    const mockSchema = {
+      "additionalProperties": {
+        "description": "An array of all SLO timeframes.",
+        "items": {
+          "description": "The SLO time window options.",
+          "enum": [
+            "7d",
+            "30d",
+            "90d"
+          ],
+          "type": "string",
+          "x-enum-varnames": [
+            "SEVEN_DAYS",
+            "THIRTY_DAYS",
+            "NINETY_DAYS"
+          ]
+        },
+        "type": "array"
+      },
+      "description": "A map of service level objective object IDs to arrays of timeframes,\nwhich indicate the thresholds to delete for each ID.",
+      "example": {
+        "id1": [
+          "7d",
+          "30d"
+        ],
+        "id2": [
+          "7d",
+          "30d"
+        ]
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {"id1": ["7d", "30d"], "id2": ["7d", "30d"]};
     expect(actual).toEqual(expected);
   });
 
@@ -417,12 +586,12 @@ describe(`filterExampleJson`, () => {
       },
       "type": "array"
     };
-    const actual = bp.filterExampleJson(mockSchema);
+    const actual = bp.filterExampleJson("request", mockSchema);
     const expected = [[{
       "duration": "integer",
       "error": "integer",
-      "meta": {"&lt;any-key&gt;": "string"},
-      "metrics": {"&lt;any-key&gt;": "number"},
+      "meta": {"<any-key>": "string"},
+      "metrics": {"<any-key>": "number"},
       "name": "span_name",
       "parent_id": "integer",
       "resource": "/home",
@@ -461,8 +630,8 @@ describe(`filterExampleJson`, () => {
       },
       "type": "object"
     };
-    const actual = bp.filterExampleJson(mockSchema);
-    const expected = {"error": {"code": "string", "details": "array", "message": "string"}};
+    const actual = bp.filterExampleJson("request", mockSchema);
+    const expected = {"error": {"code": "string", "details": [], "message": "string"}};
     expect(actual).toEqual(expected);
   });
 
@@ -528,8 +697,8 @@ describe(`filterExampleJson`, () => {
       },
       "type": "object"
     };
-    const actual = bp.filterExampleJson(mockSchema);
-    const expected =  {"data": [{"attributes": {"created": "string","description": "string","display_name": "string","display_type": "string","group_name": "string","name": "string","restricted": "boolean"},"id": "string"}]};
+    const actual = bp.filterExampleJson("request", mockSchema);
+    const expected =  {"data": [{"attributes": {"created": "2019-09-19T10:00:00.000Z","description": "string","display_name": "string","display_type": "string","group_name": "string","name": "string","restricted": false},"id": "string"}]};
     expect(actual).toEqual(expected);
   });
 
@@ -556,13 +725,12 @@ describe(`filterExampleJson`, () => {
       },
       "type": "object"
     };
-    const actual = bp.filterExampleJson(mockSchema);
+    const actual = bp.filterExampleJson("request", mockSchema);
     const expected = {"data": {"id": "string"}};
     expect(actual).toEqual(expected);
   });
 
-
-  it('should map example keys', () => {
+  it('should map example keys when array of objects', () => {
     const mockSchema = {
       "description": "New Datadog-Slack integration.",
       "properties": {
@@ -601,8 +769,185 @@ describe(`filterExampleJson`, () => {
       },
       "type": "object"
     };
-    const actual = bp.filterExampleJson(mockSchema);
+    const actual = bp.filterExampleJson("request", mockSchema);
     const expected = {"service_hooks": [{"account": "Main_Account", "url": "https://hooks.slack.com/services/1/1/1"},{"account": "doghouse", "url": "https://hooks.slack.com/services/2/2/2"}]};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show readonly fields on response json', () => {
+    const mockSchema = {
+      "description": "This is a test with readonly",
+      "properties": {
+        "message": {
+          "description": "This is a read only field",
+          "readOnly": true,
+          "type": "string"
+        },
+        "metric": {
+          "description": "This is explicitly not readonly",
+          "readOnly": false,
+          "type": "string"
+        },
+        "length": {
+          "description": "This is implicitly by omission not readonly",
+          "type": "string"
+        }
+      }
+    }
+    const actual = bp.filterExampleJson("response", mockSchema);
+    const expected = {"message": "string", "metric": "string", "length": "string"};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should hide readonly fields on request json', () => {
+    const mockSchema = {
+      "description": "This is a test with readonly",
+      "properties": {
+        "message": {
+          "description": "This is a read only field",
+          "readOnly": true,
+          "type": "string"
+        },
+        "metric": {
+          "description": "This is explicitly not readonly",
+          "readOnly": false,
+          "type": "string"
+        },
+        "length": {
+          "description": "This is implicitly by omission not readonly",
+          "type": "string"
+        }
+      }
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {'metric':'string', 'length': 'string'};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show boolean without quotes', () => {
+    const mockSchema = {
+      "description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure.",
+      "properties": {
+        "is_read_only": {
+          "default": false,
+          "description": "Whether this dashboard is read-only. If True, only the author and admins can make changes to it.",
+          "example": false,
+          "type": "boolean"
+        }
+      }
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {'is_read_only': false};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show array as []', () => {
+    const mockSchema = {
+      "description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure.",
+      "properties": {
+        "notify_list": {
+          "description": "List of handles of users to notify when changes are made to this dashboard.",
+          "items": {
+            "description": "User handles.",
+            "type": "string"
+          },
+          "nullable": true,
+          "type": "array"
+        }
+      }
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {'notify_list': []};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show boolean false when no example boolean to show', () => {
+    const mockSchema = {
+      "description": "Embeddable graph.",
+      "properties": {
+        "revoked": {
+          "description": "Boolean flag for whether or not the embed is revoked.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('request', mockSchema);
+    const expected = {"revoked": false};
+    expect(actual).toEqual(expected);
+  });
+
+  it('should show required fields when curl', () => {
+    const mockSchema = {
+      "description": "The metrics' payload.",
+      "properties": {
+        "series": {
+          "description": "A list of time series to submit to Datadog.",
+          "items": {
+            "description": "A metric to submit to Datadog.\nSee [Datadog metrics](https://docs.datadoghq.com/developers/metrics/#custom-metrics-properties).",
+            "properties": {
+              "host": {
+                "description": "The name of the host that produced the metric.",
+                "type": "string"
+              },
+              "interval": {
+                "default": null,
+                "description": "If the type of the metric is rate or count, define the corresponding interval.",
+                "format": "int64",
+                "nullable": true,
+                "type": "integer"
+              },
+              "metric": {
+                "description": "The name of the timeseries.",
+                "example": "system.load.1",
+                "type": "string"
+              },
+              "points": {
+                "description": "Points relating to a metric.",
+                "items": {
+                  "description": "Array of timeseries points.",
+                  "example": [
+                    1575317847,
+                    0.5
+                  ],
+                  "items": {
+                    "description": "Each point is of the form `[POSIX_timestamp, numeric_value]`.\nThe timestamp should be in seconds and current.\nThe numeric value format should be a 32bit float gauge-type value.\nCurrent is defined as not more than 10 minutes in the future or more than 1 hour in the past.",
+                    "format": "double",
+                    "type": "number"
+                  },
+                  "maxItems": 2,
+                  "minItems": 2,
+                  "type": "array"
+                },
+                "type": "array"
+              },
+              "tags": {
+                "description": "A list of tags associated with the metric.",
+                "items": {
+                  "description": "Individual tags.",
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "type": {
+                "default": "gauge",
+                "description": "The type of the metric.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "metric",
+              "points"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    };
+    const actual = bp.filterExampleJson('curl', mockSchema);
+    const expected = {"series": [{"metric": "system.load.1", "points": ["1575317847", "0.5"]}]};
     expect(actual).toEqual(expected);
   });
 

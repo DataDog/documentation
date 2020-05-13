@@ -1550,6 +1550,12 @@ api_v1:
   - name: Check permissions for log services
     parent: AWS Logs Integration
     url: check-permissions-for-log-services
+  - name: Authentication
+    url: /fr/api/v1/authentication/
+    identifier: Authentication
+  - name: Validate API key
+    parent: Authentication
+    url: validate-api-key
   - name: Azure Integration
     url: /fr/api/v1/azure-integration/
     identifier: Azure Integration
@@ -1775,6 +1781,9 @@ api_v1:
   - name: Update a pipeline
     parent: Logs Pipelines
     url: update-a-pipeline
+  - name: Logs Restriction Queries
+    url: /fr/api/v1/logs-restriction-queries/
+    identifier: Logs Restriction Queries
   - name: Metrics
     url: /fr/api/v1/metrics/
     identifier: Metrics
@@ -1808,6 +1817,12 @@ api_v1:
   - name: Check if a monitor can be deleted
     parent: Monitors
     url: check-if-a-monitor-can-be-deleted
+  - name: Monitors group search
+    parent: Monitors
+    url: monitors-group-search
+  - name: Monitors search
+    parent: Monitors
+    url: monitors-search
   - name: Validate a monitor
     parent: Monitors
     url: validate-a-monitor
@@ -1868,6 +1883,9 @@ api_v1:
   - name: Update a single service object
     parent: PagerDuty Integration
     url: update-a-single-service-object
+  - name: Roles
+    url: /fr/api/v1/roles/
+    identifier: Roles
   - name: Screenboards
     url: /fr/api/v1/screenboards/
     identifier: Screenboards
@@ -1877,6 +1895,15 @@ api_v1:
   - name: Submit a Service Check
     parent: Service Checks
     url: submit-a-service-check
+  - name: Service Dependencies
+    url: /fr/api/v1/service-dependencies/
+    identifier: Service Dependencies
+  - name: Get all service dependencies
+    parent: Service Dependencies
+    url: get-all-service-dependencies
+  - name: Get one service's dependencies
+    parent: Service Dependencies
+    url: get-one-services-dependencies
   - name: Service Level Objectives
     url: /fr/api/v1/service-level-objectives/
     identifier: Service Level Objectives
@@ -1928,36 +1955,36 @@ api_v1:
   - name: Synthetics
     url: /fr/api/v1/synthetics/
     identifier: Synthetics
-  - name: Get a list of all tests
+  - name: Get a list of tests
     parent: Synthetics
-    url: get-a-list-of-all-tests
-  - name: Create or clone a test
+    url: get-a-list-of-tests
+  - name: Create a test
     parent: Synthetics
-    url: create-or-clone-a-test
-  - name: Get test latest results (as summaries)
+    url: create-a-test
+  - name: Get the test's latest results summaries (browser)
     parent: Synthetics
-    url: get-test-latest-results-as-summaries
-  - name: Get test result (browser)
+    url: get-the-tests-latest-results-summaries-browser
+  - name: Get a test result (browser)
     parent: Synthetics
-    url: get-test-result-browser
-  - name: Delete multiple tests
+    url: get-a-test-result-browser
+  - name: Delete tests
     parent: Synthetics
-    url: delete-multiple-tests
-  - name: Get test
+    url: delete-tests
+  - name: Get a test configuration
     parent: Synthetics
-    url: get-test
-  - name: Update test
+    url: get-a-test-configuration
+  - name: Edit a test
     parent: Synthetics
-    url: update-test
-  - name: Get test latest results (as summaries)
+    url: edit-a-test
+  - name: Get the test's latest results summaries (API)
     parent: Synthetics
-    url: get-test-latest-results-as-summaries
-  - name: Get test result (API)
+    url: get-the-tests-latest-results-summaries-api
+  - name: Get a test result (API)
     parent: Synthetics
-    url: get-test-result-api
-  - name: Change test pause/live status
+    url: get-a-test-result-api
+  - name: Pause or start a test
     parent: Synthetics
-    url: change-test-pause/live-status
+    url: pause-or-start-a-test
   - name: Tags
     url: /fr/api/v1/tags/
     identifier: Tags
@@ -2089,6 +2116,18 @@ api_v2:
   - name: Rate Limiting
     url: rate-limiting
     parent: API V2 overview
+  - name: AWS Integration
+    url: /fr/api/v2/aws-integration/
+    identifier: AWS Integration
+  - name: AWS Logs Integration
+    url: /fr/api/v2/aws-logs-integration/
+    identifier: AWS Logs Integration
+  - name: Authentication
+    url: /fr/api/v2/authentication/
+    identifier: Authentication
+  - name: Azure Integration
+    url: /fr/api/v2/azure-integration/
+    identifier: Azure Integration
   - name: Dashboard Lists
     url: /fr/api/v2/dashboard-lists/
     identifier: Dashboard Lists
@@ -2104,6 +2143,84 @@ api_v2:
   - name: Update items of a dashboard list
     parent: Dashboard Lists
     url: update-items-of-a-dashboard-list
+  - name: Dashboards
+    url: /fr/api/v2/dashboards/
+    identifier: Dashboards
+  - name: Downtimes
+    url: /fr/api/v2/downtimes/
+    identifier: Downtimes
+  - name: Embeddable Graphs
+    url: /fr/api/v2/embeddable-graphs/
+    identifier: Embeddable Graphs
+  - name: Events
+    url: /fr/api/v2/events/
+    identifier: Events
+  - name: GCP Integration
+    url: /fr/api/v2/gcp-integration/
+    identifier: GCP Integration
+  - name: Hosts
+    url: /fr/api/v2/hosts/
+    identifier: Hosts
+  - name: IP Ranges
+    url: /fr/api/v2/ip-ranges/
+    identifier: IP Ranges
+  - name: Key Management
+    url: /fr/api/v2/key-management/
+    identifier: Key Management
+  - name: Logs
+    url: /fr/api/v2/logs/
+    identifier: Logs
+  - name: Logs Indexes
+    url: /fr/api/v2/logs-indexes/
+    identifier: Logs Indexes
+  - name: Logs Pipelines
+    url: /fr/api/v2/logs-pipelines/
+    identifier: Logs Pipelines
+  - name: Logs Restriction Queries
+    url: /fr/api/v2/logs-restriction-queries/
+    identifier: Logs Restriction Queries
+  - name: List restriction queries
+    parent: Logs Restriction Queries
+    url: list-restriction-queries
+  - name: Create a restriction query
+    parent: Logs Restriction Queries
+    url: create-a-restriction-query
+  - name: Get restriction query for a given role
+    parent: Logs Restriction Queries
+    url: get-restriction-query-for-a-given-role
+  - name: Get all restriction queries for a given user
+    parent: Logs Restriction Queries
+    url: get-all-restriction-queries-for-a-given-user
+  - name: Delete a restriction query
+    parent: Logs Restriction Queries
+    url: delete-a-restriction-query
+  - name: Get a restriction query
+    parent: Logs Restriction Queries
+    url: get-a-restriction-query
+  - name: Update a restriction query
+    parent: Logs Restriction Queries
+    url: update-a-restriction-query
+  - name: Revoke role from a restriction query
+    parent: Logs Restriction Queries
+    url: revoke-role-from-a-restriction-query
+  - name: List roles for a restriction query
+    parent: Logs Restriction Queries
+    url: list-roles-for-a-restriction-query
+  - name: Grant role to a restriction query
+    parent: Logs Restriction Queries
+    url: grant-role-to-a-restriction-query
+  - name: Metrics
+    url: /fr/api/v2/metrics/
+    identifier: Metrics
+  - name: Monitors
+    url: /fr/api/v2/monitors/
+    identifier: Monitors
+  - name: Organizations
+    url: /fr/api/v2/organizations/
+    identifier: Organizations
+  - name: PagerDuty Integration
+    url: /fr/api/v2/pagerduty-integration/
+    identifier: PagerDuty Integration
   - name: Roles
     url: /fr/api/v2/roles/
     identifier: Roles
@@ -2143,6 +2260,39 @@ api_v2:
   - name: Add a user to a role
     parent: Roles
     url: add-a-user-to-a-role
+  - name: Screenboards
+    url: /fr/api/v2/screenboards/
+    identifier: Screenboards
+  - name: Service Checks
+    url: /fr/api/v2/service-checks/
+    identifier: Service Checks
+  - name: Service Dependencies
+    url: /fr/api/v2/service-dependencies/
+    identifier: Service Dependencies
+  - name: Service Level Objectives
+    url: /fr/api/v2/service-level-objectives/
+    identifier: Service Level Objectives
+  - name: Slack Integration
+    url: /fr/api/v2/slack-integration/
+    identifier: Slack Integration
+  - name: Snapshots
+    url: /fr/api/v2/snapshots/
+    identifier: Snapshots
+  - name: Synthetics
+    url: /fr/api/v2/synthetics/
+    identifier: Synthetics
+  - name: Tags
+    url: /fr/api/v2/tags/
+    identifier: Tags
+  - name: Timeboards
+    url: /fr/api/v2/timeboards/
+    identifier: Timeboards
+  - name: Tracing
+    url: /fr/api/v2/tracing/
+    identifier: Tracing
+  - name: Usage Metering
+    url: /fr/api/v2/usage-metering/
+    identifier: Usage Metering
   - name: Users
     url: /fr/api/v2/users/
     identifier: Users
@@ -2173,3 +2323,6 @@ api_v2:
   - name: Get a user permissions
     parent: Users
     url: get-a-user-permissions
+  - name: Webhooks Integration
+    url: /fr/api/v2/webhooks-integration/
+    identifier: Webhooks Integration

@@ -233,3 +233,12 @@
             - link: "logs/explorer"
               tag: "Documentation"
               text: "Learn how to explore your logs"
+
+  - repo_name: security-monitoring
+    contents:
+    - action: security-rules
+      branch: master
+      globs:
+        - "*.json"
+      options:
+        dest_path: '/security_monitoring/default_rules/'

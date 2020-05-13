@@ -8,7 +8,7 @@ function versionSelectHandler(event) {
     let previewPath = '';
 
     if (window.location.href.includes('docs-staging')) {
-        previewPath = window.location.pathname.split('/').slice(0, 3).join('/');
+        previewPath = `/${document.documentElement.dataset.commitRef}`;
     }
 
     if (event.target.value === 'v2') {

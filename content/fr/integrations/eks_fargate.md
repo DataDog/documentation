@@ -383,10 +383,10 @@ Besoin d'aide ? Contactez [l'assistance Datadog][20].
 [11]: https://app.datadoghq.com/account/settings#integrations/amazon-ec2
 [12]: http://docs.datadoghq.com/integrations/kubernetes
 [13]: https://app.datadoghq.com/account/settings#api
-[14]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations
+[14]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [15]: https://docs.datadoghq.com/fr/integrations/#cat-autodiscovery
-[16]: https://docs.datadoghq.com/fr/developers/dogstatsd
+[16]: https://docs.datadoghq.com/fr/developers/dogstatsd/
 [17]: http://docs.datadoghq.com/tracing/setup
 [18]: http://docs.datadoghq.com/agent/cluster_agent/setup
 [19]: http://docs.datadoghq.com/agent/cluster_agent/event_collection
-[20]: https://docs.datadoghq.com/fr/help
+[20]: https://docs.datadoghq.com/fr/help/

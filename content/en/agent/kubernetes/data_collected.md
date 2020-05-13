@@ -28,6 +28,8 @@ further_reading:
 
 Metrics collected by the Agent when deployed on your Kubernetes cluster:
 
+**Note**: The set of metrics collected by the Datadog Kubernetes integration may vary depending on the version of Kubernetes in use.
+
 ### Kubernetes
 
 {{< get-metrics-from-git "kubernetes" >}}

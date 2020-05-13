@@ -2,7 +2,7 @@
 title: データベースサービスの異常な p99 レイテンシーに関するアラート
 kind: ガイド
 further_reading:
-  - link: tracing/guide/week_over_week_p50_comparison/
+  - link: /tracing/guide/week_over_week_p50_comparison/
     tag: 2 分
     text: サービスのレイテンシーを前週と比較する
   - link: /tracing/guide/slowest_request_daily/
@@ -11,10 +11,10 @@ further_reading:
   - link: /tracing/guide/apm_dashboard/
     tag: 4 分
     text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
-  - link: tracing/guide/add_span_md_and_graph_it/
+  - link: /tracing/guide/add_span_md_and_graph_it/
     tag: 7 分
     text: スパンタグを追加し、アプリケーションのパフォーマンスを分類する
-  - link: tracing/guide/
+  - link: /tracing/guide/
     tag: ''
     text: すべてのガイド
 ---

@@ -130,9 +130,10 @@ const createResources = (apiYaml, deref, apiVersion) => {
         let request;
         if(action.requestBody) {
           const requestSchema = getSchema(action.requestBody.content);
-          const requestJson = filterExampleJson(requestSchema);
+          const requestJson = filterExampleJson("request", requestSchema);
+          const requestCurlJson = filterExampleJson("curl", requestSchema);
           const requestHtml = schemaTable("request", requestSchema);
-          request = {"json": requestJson, "html": requestHtml};
+          request = {"json_curl": requestCurlJson, "json": requestJson, "html": requestHtml};
           console.log(`successfully wrote ${pageDir}${action.operationId} html`);
         }
 
@@ -141,7 +142,7 @@ const createResources = (apiYaml, deref, apiVersion) => {
         Object.entries(action.responses).forEach(([responseCode, response]) => {
             if(response.content) {
               const responseSchema = getSchema(response.content);
-              const responseJson = filterExampleJson(responseSchema);
+              const responseJson = filterExampleJson("response", responseSchema);
               const responseHtml = schemaTable("response", responseSchema);
               responses[responseCode] = {"json": responseJson, "html": responseHtml};
               console.log(`successfully wrote ${pageDir}${action.operationId}_response_${responseCode} html`);
@@ -149,7 +150,7 @@ const createResources = (apiYaml, deref, apiVersion) => {
         });
 
         // assign built up data for examples.json
-        jsonData[action.operationId] = {responses, "request": request || {"json": {}, "html": ""}};
+        jsonData[action.operationId] = {responses, "request": request || {"json_curl": {}, "json": {}, "html": ""}};
       });
     });
 
@@ -192,42 +193,32 @@ const isTagMatch = (pathObj, tag) => {
 
 
 /**
- * Takes a schema requestBody or response and filters the data to be example worthy
- * It does this by order of preference of attributes "items" -> "example" -> "type"
- * @param {object} data - object schema
- * returns filtered data
+ * The recursively called filtering json function, will build up a json string
+ * @param {string} actionType - string of 'request' or 'response' or 'curl'
+ * @param {object} data - the schema object
+ * @param {object} parentExample - the example object adjacent to data passed in
+ * @param {object} requiredKeys - []
+ * returns string
  */
-/* const filterExampleJson = (data, adjacentExample = null, level = 0) => {
-  if("properties" in data) {
-    return Object.keys(data.properties)
-      .map((propKey) => {
-        const property = data.properties[propKey];
-        const ex = (property['example'] || typeof property['example'] === "boolean") ? `${property["example"]}` : property["example"];
-        return {[propKey]: (property.hasOwnProperty("items")) ? [filterExampleJson(property.items, property["example"], (level + 1))] : (ex || property["type"])};
-      })
-      .reduce((obj, item) => ({...obj, ...item}), {});
-  } else if ("items" in data) {
-    return filterExampleJson(data.items, data['example'], (level + 1));
-  } else {
-    const selectedExample = adjacentExample || data["example"];
-    const ex = (selectedExample || typeof selectedExample === "boolean") ? `${selectedExample}` : selectedExample;
-    const out = ex || data["type"] || {};
-    if(level === 0 && out === 'object') {
-      // return an actual object when we only have {type:"object"}
-      return {}
-    } else {
-      return out;
-    }
-  }
-}; */
-
-const filterJson = (data, parentExample = null) => {
+const filterJson = (actionType, data, parentExample = null, requiredKeys = []) => {
   let jsondata = '';
+  let iterationHasRequiredKeyMatches = false;
+  let childRequiredKeys = [];
 
   if (typeof data === 'object') {
     Object.entries(data).forEach(([key, value]) => {
 
-      if(value.readOnly) {
+      if(actionType === "curl") {
+        if(requiredKeys.length <= 0 || !requiredKeys.includes(key)) {
+          iterationHasRequiredKeyMatches = false;
+        } else {
+          iterationHasRequiredKeyMatches = true;
+        }
+      }
+
+      if(actionType === "request" && value.readOnly) {
+        // skip
+      } else if(actionType === "curl" && value.readOnly) {
         // skip
       } else {
 
@@ -249,16 +240,19 @@ const filterJson = (data, parentExample = null) => {
           if (typeof value.items === 'object') {
             if (value.items.properties) {
               childData = value.items.properties;
+              childRequiredKeys = (value.items.required) ? value.items.required : [];
               prefixType = '[{';
               suffixType = '}]';
             }
           } else if (typeof value.items === 'string') {
+            childRequiredKeys = (value.items.required) ? value.items.required : [];
             if (value.items === '[Circular]') {
               childData = null;
             }
           }
         } else if (typeof value === 'object' && "properties" in value) {
           childData = value.properties;
+          childRequiredKeys = (value.required) ? value.required : [];
           prefixType = '{';
           suffixType = '}';
         } else if (typeof value === 'object' && "additionalProperties" in value) {
@@ -284,13 +278,27 @@ const filterJson = (data, parentExample = null) => {
         }
 
         if (childData) {
-          jsondata += `"${key}": ${prefixType}${filterJson(childData, value.example)}${suffixType},`;
+          const [jstring, childRequiredKeyMatches] = filterJson(actionType, childData, value.example, childRequiredKeys);
+          iterationHasRequiredKeyMatches = iterationHasRequiredKeyMatches || childRequiredKeyMatches;
+          if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
+            // skip output
+          } else {
+            jsondata += `"${key}": ${prefixType}${jstring}${suffixType},`;
+          }
         } else {
           let ex = '';
           // bool causes us to not go in here so check for it
-          ex = outputExample(chosenExample);
-          ex = ex || `"${value.type}"`;
-          jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
+          ex = outputExample(chosenExample, key);
+          if(actionType === 'curl') {
+            ex = ex || null;
+          } else {
+            ex = ex || outputValueType(value.type, value.format);
+          }
+          if(actionType === "curl" && !iterationHasRequiredKeyMatches) {
+
+          } else {
+            jsondata += `"${key}": ${prefixType}${ex}${suffixType},`;
+          }
         }
       }
 
@@ -303,15 +311,47 @@ const filterJson = (data, parentExample = null) => {
     }
   }
 
+  if(jsondata.length > 0) {
+    iterationHasRequiredKeyMatches = true;
+  }
   const lastChar = jsondata.slice(-1);
   if (lastChar === ',') {
-      return jsondata.slice(0, -1);
+      return [jsondata.slice(0, -1), iterationHasRequiredKeyMatches];
   } else {
-      return jsondata;
+      return [jsondata, iterationHasRequiredKeyMatches];
   }
 };
 
-const outputExample = (chosenExample) => {
+/**
+ * Takes a value.type string and returns appropriate representation
+ * e.g array should be []
+ * @param {object} valueType - string of type
+ * @param {object} format - value type formatting e.g int32, int64, date-time
+ * returns formatted string
+ */
+const outputValueType = (valueType, format = "") => {
+  const ipoDate = new Date('19 September 2019 10:00 UTC');
+  switch(valueType) {
+    case "array":
+      return "[]";
+    case "object":
+      return "{}";
+    case "boolean":
+      return "false";
+    case "integer":
+    case "string":
+    default:
+      return (format === "date-time") ? `"${ipoDate.toISOString()}"` : `"${valueType}"`;
+  }
+};
+
+/**
+ * Takes a chosen example object and formats it appropriately
+ * @param {object} chosenExample - object schema
+ * @param {string} inputkey - string key
+ * returns formatted string
+ */
+const outputExample = (chosenExample, inputkey) => {
   let ex = '';
   if(typeof chosenExample !== 'undefined' && chosenExample !== null) {
     if(chosenExample instanceof Array) {
@@ -319,7 +359,10 @@ const outputExample = (chosenExample) => {
       // if array of objects try match keys
       chosenExample.forEach((item, key, arr) => {
         if(typeof item === 'object') {
-
+          // this needs to change, currently only output 1 level of example array
+          if(inputkey && inputkey in item) {
+            ex = `"${item[inputkey]}"`;
+          }
         } else {
           ex += `"${  item  }",`;
           if (Object.is(arr.length - 1, key)) {
@@ -337,39 +380,131 @@ const outputExample = (chosenExample) => {
         });
       }
     } else {
-      ex = `"${chosenExample}"`;
+      if (typeof chosenExample === "boolean"){
+        // we don't want quotes on a bool
+        ex = `${chosenExample}`;
+      } else {
+        ex = `"${chosenExample}"`;
+      }
     }
   }
   return ex;
 };
 
-const filterExampleJson = (data) => {
-  let initialData;
+/**
+ * Takes a data object and returns if we should wrap with [ ] or {} for jsons tring output
+ * @param {object} data - object schema
+ * returns array of 2 characters one for before one for after e.g ['{', '}'] or ['[', ']']
+ */
+const getJsonWrapChars = (data) => {
   let prefixType = "{";
   let suffixType = "}";
-  let selectedExample;
-  if(data.type === 'array') {
-    if(data.items.type === 'array') {
-      initialData = data.items.items.properties;
-      selectedExample = data.items.items.example;
-      prefixType = "[[{";
-      suffixType = "}]]";
-    } else if(data.items.properties) {
-        initialData = data.items.properties;
-        selectedExample = data.items.example;
+
+  if(data) {
+    if (data.type === 'array') {
+      if (data.items.type === 'array') {
+        prefixType = "[[{";
+        suffixType = "}]]";
+      } else if (data.items.properties) {
+        //
       } else {
-        // initialData = data.items;
-        selectedExample = data.example;
         prefixType = "[";
         suffixType = "]";
       }
-  } else {
-    initialData = data.properties;
-    selectedExample = data.example;
+    }
   }
-  const output = `${prefixType}
-    ${filterJson(initialData, selectedExample)}
-  ${suffixType}`.trim();
+  return [prefixType, suffixType];
+};
+
+
+/**
+ * Takes a data object and returns the initial child data to be passed for recursion to filterjson
+ * @param {object} data - object schema
+ * returns initial data
+ */
+const getInitialJsonData = (data) => {
+  let initialData;
+  if(data) {
+    if (data.type === 'array') {
+      if (data.items.type === 'array') {
+        initialData = data.items.items.properties;
+      } else if (data.items.properties) {
+        initialData = data.items.properties;
+      }
+    } else {
+      initialData = data.properties;
+    }
+  }
+  return initialData;
+};
+
+/**
+ * Takes a data object and returns the initial child data to be passed for recursion to filterjson
+ * @param {object} data - object schema
+ * returns initial data
+ */
+const getInitialExampleJsonData = (data) => {
+  let selectedExample;
+  if(data) {
+    if (data.type === 'array') {
+      if (data.items.type === 'array') {
+        selectedExample = data.items.items.example;
+      } else if (data.items.properties) {
+        selectedExample = data.items.example;
+      } else {
+        selectedExample = data.example;
+      }
+    } else {
+      selectedExample = data.example;
+    }
+  }
+  return selectedExample;
+};
+
+
+/**
+ * Takes a data object and returns the initial child data to be passed for recursion to filterjson
+ * @param {object} data - object schema
+ * returns initial data
+ */
+const getInitialRequiredData = (data) => {
+  let requiredKeys = [];
+  if(data) {
+    if (data.type === 'array') {
+      if (data.items.type === 'array') {
+        requiredKeys = data.items.items.required;
+      } else if (data.items.properties) {
+        requiredKeys = data.items.required;
+      }
+    } else {
+      requiredKeys = data.required;
+    }
+  }
+  return requiredKeys || [];
+};
+
+
+/**
+ * Takes a data object and returns the initial child data to be passed for recursion to filterjson
+ * @param {string} actionType - string of 'request' or 'response' or 'curl'
+ * @param {object} data - the schema object
+ * returns parsed json object from built string
+ */
+const filterExampleJson = (actionType, data) => {
+  const [prefix, suffix] = getJsonWrapChars(data);
+  const initialData = getInitialJsonData(data);
+  const selectedExample = getInitialExampleJsonData(data);
+  const requiredKeys = getInitialRequiredData(data);
+
+  // just return the example in additionalProperties cases with example
+  if(data.additionalProperties && data.example) {
+    return data.example;
+  }
+
+  const [jString, b] = filterJson(actionType, initialData, selectedExample, requiredKeys);
+  const output = `${prefix}
+    ${jString}
+  ${suffix}`.trim();
   let parsed = '';
   try {
       parsed = JSON.parse(output);
@@ -410,7 +545,7 @@ const isReadOnlyRow = (value) => {
  */
 const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') => {
   let field = '';
-  if(['type'].includes(key) && (typeof value !== 'object')) {
+  if(['type'].includes(key) && (typeof value !== 'object') && (key !== "&lt;any-key&gt;")) {
     field = '';
   } else {
     field = (key || '');
@@ -466,6 +601,9 @@ const descColumn = (key, value) => {
   } else if((typeof(value) === "string") && key === 'description') {
     desc = value || '';
   }
+  if(value.deprecated) {
+    desc = `**DEPRECATED**: ${desc}`;
+  }
   return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}</div>`.trim();
 };
 
@@ -481,6 +619,7 @@ const descColumn = (key, value) => {
  */
 const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '') => {
   let html = '';
+  let newRequiredFields = data.required || requiredFields;
 
   // i've set a hard recurse limit of depth
   if(level > 10) return '';
@@ -496,6 +635,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           if(typeof value.items === 'object') {
             if (value.items.properties) {
               childData = value.items.properties;
+              newRequiredFields = (value.items.required) ? value.items.required : newRequiredFields;
             }
           } else if(typeof value.items === 'string') {
             if(value.items === '[Circular]') {
@@ -504,10 +644,11 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
           }
         } else if(typeof value === 'object' && "properties" in value) {
           childData = value.properties;
+          newRequiredFields = (value.required) ? value.required : newRequiredFields;
         } else if (typeof value === 'object' && "additionalProperties" in value) {
           // check if `additionalProperties` is an empty object
           if(Object.keys(value.additionalProperties).length !== 0){
-            childData = {"<any-key>": value.additionalProperties};
+            childData = {"&lt;any-key&gt;": value.additionalProperties};
             newParentKey = "additionalProperties";
           }
         }
@@ -520,9 +661,10 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
 
         // build markdown
         const toggleArrow = (childData) ? '<span class="toggle-arrow"><svg width="6" height="9" viewBox="0 0 6 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z" fill="black"/></svg></span> ' : "" ;
-        const required = requiredFields.includes(key) ? '<span style="color:red;">*</span>' : "";
+        const required = requiredFields.includes(key) ? '&nbsp;[<em>required</em>]' : "";
         const readOnlyField = (isReadOnly) ? '' : '';
 
+      
         // build html
         html += `
         <div class="row ${outerRowClasses}">
@@ -532,7 +674,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
               ${typeColumn(key, value, readOnlyField)}
               ${descColumn(key, value)}
             </div>
-            ${(childData) ? rowRecursive(tableType, childData, true, data.required || [], (level + 1), newParentKey) : ''}
+            ${(childData) ? rowRecursive(tableType, childData, true, (newRequiredFields || []), (level + 1), newParentKey) : ''}
           </div>
         </div>
         `.trim();
@@ -579,7 +721,11 @@ const schemaTable = (tableType, data) => {
       extraClasses = 'd-none';
     }
   } else {
-    initialData = data.properties
+    if(data.additionalProperties) {
+      initialData = {"&lt;any-key&gt;": data.additionalProperties};
+    } else {
+      initialData = data.properties;
+    }
   }
   extraClasses = (initialData) ? extraClasses : 'd-none';
   const emptyRow = `
@@ -654,6 +800,8 @@ module.exports = {
   filterExampleJson,
   getSchema,
   getTagSlug,
-  addHasExpandClass
+  addHasExpandClass,
+  outputExample,
+  getJsonWrapChars
 };
 
