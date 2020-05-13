@@ -22,8 +22,8 @@ module.exports = {
         honorRobotExclusions: false,
         brokenLinkSlackLimit: 5,
         excludedKeywords: [
-            // '**/ja/**',
-            // '**/fr/**',
+            '**/ja/**',
+            '**/fr/**',
             '*wtime=*',
             '**/signup*',
             '*app.datadoghq*',
