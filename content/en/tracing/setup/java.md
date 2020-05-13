@@ -134,18 +134,18 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
 
-| Database                | Versions | Support Type    | Instrumentation Names (used for configuration)                                           |
-| ----------------------- | -------- | --------------- | ---------------------------------------------------------------------------------------- |
-| Couchbase               | 2.0+     | Fully Supported | `couchbase`                                                                              |
-| Cassandra               | 3.X      | Fully Supported | `cassandra`                                                                              |
-| Elasticsearch Transport | 2.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
-| Elasticsearch Rest      | 5.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
-| JDBC                    | N/A      | Fully Supported | `jdbc`, `jdbc-datasource`                                                                |
-| Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                         |
-| Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                             |
-| MongoDB                 | 3.0+     | Fully Supported | `mongo`                                                                                  |
-| RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
-| SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                           |
+| Database                | Versions | Support Type    | Instrumentation Names (used for configuration)                                            |
+| ----------------------- | -------- | --------------- | ----------------------------------------------------------------------------------------- |
+| Couchbase               | 2.0+     | Fully Supported | `couchbase`                                                                               |
+| Cassandra               | 3.X      | Fully Supported | `cassandra`                                                                               |
+| Elasticsearch Transport | 2.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one)  |
+| Elasticsearch Rest      | 5.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`     |
+| JDBC                    | N/A      | Fully Supported | `jdbc`, `jdbc-datasource`                                                                 |
+| Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                          |
+| Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4`, `lettuce-4-async`, `lettuce-5`, `lettuce-5-async`, `lettuce-5-rx` |
+| MongoDB                 | 3.0+     | Fully Supported | `mongo`                                                                                   |
+| RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                      |
+| SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                            |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
