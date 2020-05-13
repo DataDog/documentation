@@ -122,12 +122,13 @@
                         </p>
                         <h3 class="mt-2">Overview</h3>
                         <p>{{.action.description | markdownify }}</p>
+
+                        {{ $.Scratch.Set "queryStrings" slice }}
+                        {{ $.Scratch.Set "pathParams" slice }}
+
                         {{ with .action.parameters }}
 
                             <h3 class="mb-2">Arguments</h3>
-
-                            {{ $.Scratch.Set "queryStrings" slice }}
-                            {{ $.Scratch.Set "pathParams" slice }}
 
                             {{ range . }}
                                 {{ if eq .in "query"}}
