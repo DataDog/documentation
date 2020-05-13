@@ -153,9 +153,11 @@ stop:  ## Stop wepack watch/hugo server.
 	@pkill -x webpack || true
 	@pkill -x hugo server --renderToDisk || true
 
-clean-examples:
+clean-go-examples:
+	@git clean -xdf content/en/api/**/*.go
+
+clean-examples: clean-go-examples
 	@rm -rf examples
-	@git clean -df content/en/api/
 
 examples/datadog-api-client-go:
 	@git clone https://github.com/DataDog/datadog-api-client-go.git examples/datadog-api-client-go
@@ -163,12 +165,12 @@ examples/datadog-api-client-go:
 examples/datadog-api-client-java:
 	@git clone https://github.com/DataDog/datadog-api-client-java.git examples/datadog-api-client-java
 
-examples/go: examples/datadog-api-client-go
+examples/go: examples/datadog-api-client-go clean-go-examples
 	@ls examples/datadog-api-client-go/api/v1/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v1
 	@ls examples/datadog-api-client-go/api/v2/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v2
 
-	# for f in examples/content/en/api/v*/*/*.go ; do \
-	# 	echo gofmt -w $$f || rm $f; \
-	# done;
+	for f in examples/content/en/api/v*/*/*.go ; do \
+		echo gofmt -w $$f || rm $f; \
+	done;
 
-	cp -R examples/content ./
+	cp -Rn examples/content ./
