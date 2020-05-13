@@ -17,7 +17,7 @@ module.exports = {
     },
     linkCheckOptions: {
         filterLevel: 3,
-        maxSockets: 200,
+        maxSockets: 100,
         excludeExternalLinks: false,
         honorRobotExclusions: false,
         brokenLinkSlackLimit: 5,
