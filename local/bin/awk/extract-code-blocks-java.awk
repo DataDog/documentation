@@ -21,20 +21,20 @@ function slug(value) {
     return tolower(head) tail;
 }
 
-/^# \\.+Api/ {
-    tag = slug(substr($2, 2, length($2)-4));
+/^# .+Api/ {
+    tag = slug(substr($2, 0, length($2)-3));
 }
 /^## / {
-    operation_id = $2;
+    operation_id = toupper( substr( $2, 1, 1 ) ) substr( $2, 2 );
 }
-/^```go/ {
+/^```java/ {
     if (in_code_block == 0) {
         in_code_block = 1;
         if (out_file) {
             close(out_file);
         }
         system("mkdir -p " output "/" tag);
-        out_file=output "/" tag "/" operation_id ".go";
+        out_file=output "/" tag "/" operation_id ".java";
         print out_file;
     } else {
         in_code_block = 0;

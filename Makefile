@@ -128,7 +128,7 @@ source-helpers: hugpython  ## Source the helper functions used in build, test, d
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 	@cp -r local/githooks/* .git/hooks
 
-start: clean source-helpers examples/go ## Build the documentation with all external content.
+start: clean source-helpers examples ## Build the documentation with all external content.
 	@echo "\033[35m\033[1m\nBuilding the documentation with ALL external content:\033[0m"
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
@@ -156,7 +156,10 @@ stop:  ## Stop wepack watch/hugo server.
 clean-go-examples:
 	@git clean -xdf content/en/api/**/*.go
 
-clean-examples: clean-go-examples
+clean-java-examples:
+	@git clean -xdf content/en/api/**/*.java
+
+clean-examples: clean-go-examples clean-java-examples
 	@rm -rf examples
 
 examples/datadog-api-client-go:
@@ -169,8 +172,16 @@ examples/go: examples/datadog-api-client-go clean-go-examples
 	@ls examples/datadog-api-client-go/api/v1/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v1
 	@ls examples/datadog-api-client-go/api/v2/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v2
 
-	for f in examples/content/en/api/v*/*/*.go ; do \
-		echo gofmt -w $$f || rm $f; \
-	done;
+	#for f in examples/content/en/api/v*/*/*.go ; do \
+	#	gofmt -w $$f || rm $f; \
+	#done;
 
 	cp -Rn examples/content ./
+
+examples/java: examples/datadog-api-client-java clean-java-examples
+	@ls examples/datadog-api-client-java/api_docs/v1/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v1
+	@ls examples/datadog-api-client-java/api_docs/v2/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v2
+
+	cp -Rn examples/content ./
+
+examples: examples/go examples/java
