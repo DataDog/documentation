@@ -4,7 +4,6 @@ data/service_checks/
 integrations_data
 
 # Ignore generated examples
-/examples
 content/en/api/**/*.go
 
 # Ignoring all automated content
