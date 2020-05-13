@@ -82,6 +82,7 @@
       }
     },
     "request": {
+      "json_curl": {},
       "json": {},
       "html": ""
     }
