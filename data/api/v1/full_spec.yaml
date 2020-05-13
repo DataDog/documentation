@@ -15724,6 +15724,8 @@ tags:
     url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
   name: Screenboards
   x-deprecated: true
+- description: '[Check API version 2](/api/v2/security-monitoring/).'
+  name: Security Monitoring
 - description: 'The service check endpoint allows you to post check statuses for use
     with monitors.
 
