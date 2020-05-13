@@ -415,15 +415,15 @@
     {{- range . -}}
         <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default (.schema.example | default "CHANGE_ME") }}"</span>
     {{- end }}
-{{ end -}}
+{{ end }}
 
 {{- with $queryStrings -}}
     {{- range . -}}
         {{- if eq .required true -}}
             <span class="kn">export</span> <span class="n">{{ .name }}</span><span class="o">=</span><span class="s1">"{{ .example | default (.schema.example | default "CHANGE_ME") }}"</span>
-        {{- end }}
-    {{ end -}}
-{{- end -}}
+        {{- end -}}
+    {{- end }}
+{{- end }}
 
 <span class="n">curl</span> <span class="o">-X</span> <span class="s1 text-uppercase">{{ $context.actionType }}</span> {{ range $.Scratch.Get "serverURLS" }}<span class="kn d-none" data-region="{{ .region }}">{{ .url }}</span>{{ end }}<span class="n">{{ replace $context.pathKey "{" "${" }}</span>
 {{- range $qi, $q := $queryStrings -}}
