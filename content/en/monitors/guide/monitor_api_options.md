@@ -1,7 +1,7 @@
 ---
 title: Monitor API Options
 kind: guide
---- 
+---
 
 ## Common options 
 
