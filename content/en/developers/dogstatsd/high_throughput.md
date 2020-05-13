@@ -29,7 +29,7 @@ Most of the time the symptoms can be alleviated by tweaking some configuration o
 ### Use Datadog official clients
 
 Official Dogstatsd clients are provided by Datadog for every major programming language.
-Their features are optimized for usage with Dogstatsd, please use them if one exist
+Their features are optimized for usage with Dogstatsd, please use them if one exists
 for your favorite language and make sure that you are using the latest version available.
 
 ### Enable buffering on your client
@@ -265,7 +265,7 @@ Please note that setting these values will need a reboot of the host.
 
 ### Ensure proper packet sizes
 
-Sending packets with an adequate size to Dogstatsd will avoid extra work to the server.
+Sending packets with an adequate size to Dogstatsd will avoid extra work to the Agent.
 
 If the packets sent are too small, Dogstatsd will have to pack several together in order
 to process them in batches later in the pipeline. The official Dogstatsd clients are
@@ -283,7 +283,7 @@ a MTU of 1500 bytes, in this situation the packet size of sent packets should be
 
 Note for UDS: for the best performances, UDS packet should have a size of 8192 bytes.
 
-### Limit the maximum memory usage
+### Limit the maximum memory usage of the Agent
 
 Dogstatsd tries to absorb burst of metrics sent by the clients but in order to do so,
 it needs to use memory. Even if this is for a short amount of time and even if this
