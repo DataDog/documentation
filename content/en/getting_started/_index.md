@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< whatsnext desc="This section includes the following topics:">}}
-{{< nextlink href="/getting_started/agentndsakndasn" >}}<u>Agent</u>: Get Started with the Datadog Agent.{{< /nextlink >}}
+{{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: Get Started with the Datadog Agent.{{< /nextlink >}}
 {{< nextlink href="/getting_started/application" >}}<u>Datadog Application</u>: Discover how to use Datadog UI: Dashboards, infrastructure list, maps, etc.{{< /nextlink >}}
 {{< nextlink href="/getting_started/integrations" >}}<u>Integrations</u>: Learn how to collect metrics, traces, and logs with Datadog integrations.{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use Log processing to enrich them.{{< /nextlink >}}
