@@ -2,16 +2,16 @@
 title: Autodiscovery with JMX
 kind: guide
 further_reading:
-    - link: '/agent/kubernetes/integrations'
+    - link: '/agent/kubernetes/integrations/'
       tag: 'Documentation'
       text: 'Create and load an Autodiscovery integration template'
-    - link: '/agent/guide/ad_identifiers'
+    - link: '/agent/guide/ad_identifiers/'
       tag: 'Documentation'
       text: 'Match a container with the corresponding integration template'
-    - link: '/agent/kubernetes/management'
+    - link: '/agent/guide/autodiscovery-management/'
       tag: 'Documentation'
       text: 'Manage which container to include in the Agent Autodiscovery'
-    - link: '/agent/kubernetes/tag'
+    - link: '/agent/kubernetes/tag/'
       tag: 'Documentation'
       text: 'Dynamically assign and collect tags from your application'
 ---
@@ -207,33 +207,33 @@ If your Agent is running in your cluster and you want to autodiscover your conta
 
      Then use this new custom image as the regular containerized Agent.
 
-[1]: /integrations/activemq
+[1]: /integrations/activemq/
 [2]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [3]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
-[4]: /integrations/cassandra
+[4]: /integrations/cassandra/
 [5]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/metrics.yaml
 [6]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
-[7]: /integrations/confluent_platform
+[7]: /integrations/confluent_platform/
 [8]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/metrics.yaml
 [9]: https://github.com/DataDog/integrations-core/blob/master/confluent_platform/datadog_checks/confluent_platform/data/conf.yaml.example
-[10]: /integrations/hive
+[10]: /integrations/hive/
 [11]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/metrics.yaml
 [12]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
-[13]: /integrations/jboss_wildfly
+[13]: /integrations/jboss_wildfly/
 [14]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/metrics.yaml
 [15]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
-[16]: /integrations/tomcat
+[16]: /integrations/tomcat/
 [17]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/kafka/data/metrics.yaml
 [18]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/kafka/data/conf.yaml.example
-[19]: /integrations/solr
+[19]: /integrations/solr/
 [20]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/metrics.yaml
 [21]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
-[22]: /integrations/presto
+[22]: /integrations/presto/
 [23]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/metrics.yaml
 [24]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
 [25]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/metrics.yaml
 [26]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
-[27]: /agent/faq/template_variables
+[27]: /agent/faq/template_variables/
 [28]: /agent/guide/ad_identifiers/#short-image-container-identifiers
 {{% /tab %}}
 {{% tab "Host Agent" %}}
@@ -283,12 +283,11 @@ If your Agent is running on a host and you want to autodiscover your container t
     ```
 
      **Note**: The example above uses a custom `ad_identifers` value, but you can specify the [container short image][4] as `ad_identifiers` if needed.
-
 5. [Restart your Agent][5]
 
 [1]: /getting_started/agent/autodiscovery/#with-the-agent-on-a-host
 [2]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /agent/faq/template_variables
+[3]: /agent/faq/template_variables/
 [4]: /agent/guide/ad_identifiers/#short-image-container-identifiers
 [5]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
@@ -387,13 +386,13 @@ project:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/kubernetes/
-[2]: /integrations/activemq
-[3]: /integrations/cassandra
-[4]: /integrations/confluent_platform
-[5]: /integrations/hive
-[6]: /integrations/jboss_wildfly
-[7]: /integrations/kafka
-[8]: /integrations/solr
-[9]: /integrations/presto
-[10]: /integrations/tomcat
+[2]: /integrations/activemq/
+[3]: /integrations/cassandra/
+[4]: /integrations/confluent_platform/
+[5]: /integrations/hive/
+[6]: /integrations/jboss_wildfly/
+[7]: /integrations/kafka/
+[8]: /integrations/solr/
+[9]: /integrations/presto/
+[10]: /integrations/tomcat/
 [11]: /agent/guide/ad_identifiers/

@@ -32,7 +32,7 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 6. Define the maximum number of logs that should be rehydrated in this historical view, **from 1 million to 1 billion**
 
-7. (Optional) Define the retention period of the rehydrated logs. Choose `Decide Later` if you are unsure how long you will need the logs.
+7. Define the retention period of the rehydrated logs (available retentions are based on your contract, default is 15 days)
 
 {{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Reload from Archive"  style="width:75%;">}}
 
@@ -137,9 +137,9 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 
 *Log Rehydration is a trademark of Datadog, Inc.
 
-[1]: /logs/explorer
+[1]: /logs/explorer/
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
-[4]: /logs/explorer/search
+[4]: /logs/explorer/search/
 [5]: /logs/?tab=ussite#reserved-attributes
 [6]: /logs/archives/

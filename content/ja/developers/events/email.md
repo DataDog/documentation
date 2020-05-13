@@ -44,7 +44,7 @@ JSON 形式のメールでは、メールの件名はイベントに表示され
 
 **注**: 標準的なメールクライアントでメールをテストすると、本文が HTML に変換されることがあります。これにより本文が完全な JSON 形式ではなくなるため、メールが無視されます。
 
-[1]: /ja/api/#events
+[1]: /ja/api/v1/events/
 {{% /tab %}}
 {{% tab "Plain text" %}}
 
@@ -61,6 +61,7 @@ JSON 形式のメールでは、メールの件名はイベントに表示され
 | 本文                 | ✕       | メールの本文           |
 
 送信が有効なメールの例を以下に示します。
+
 ```text
 Sender's Email: matt@datadog.com
 Subject: Env:Test - System at 50% CPU - #test
@@ -102,7 +103,7 @@ http://catchpoint.com/session_id:123456
 http://catchpoint.com/session_id%3A123456
 ```
 
-[1]: /ja/integrations
-[2]: /ja/agent/agent_checks
+[1]: /ja/integrations/
+[2]: /ja/agent/agent_checks/
 [3]: https://app.datadoghq.com
 [4]: http://daringfireball.net/projects/markdown/syntax#lin

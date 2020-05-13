@@ -53,12 +53,12 @@ Pour en savoir plus, consultez la documentation relative à la [gestion des secr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/security
-[2]: /fr/agent
-[3]: /fr/api
-[4]: /fr/agent/faq/network
-[5]: /fr/agent/proxy
-[6]: /fr/agent/troubleshooting
+[1]: /fr/security/
+[2]: /fr/agent/
+[3]: /fr/api/
+[4]: /fr/agent/faq/network/
+[5]: /fr/agent/proxy/
+[6]: /fr/agent/troubleshooting/
 [7]: https://coreos.com/clair
 [8]: https://snyk.io
 [9]: https://docs.docker.com/v17.09/datacenter/dtr/2.4/guides
@@ -66,4 +66,4 @@ Pour en savoir plus, consultez la documentation relative à la [gestion des secr
 [11]: mailto:security@datadoghq.com
 [12]: https://www.datadoghq.com/8869756E.asc.txt
 [13]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
-[14]: /fr/agent/guide/secrets-management
+[14]: /fr/agent/guide/secrets-management/

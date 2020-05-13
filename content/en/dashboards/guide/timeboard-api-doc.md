@@ -7,7 +7,7 @@ aliases:
 ---
 
 <div class="alert alert-danger">
-This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/?lang=python#dashboards"> new Dashboard endpoint</a> instead.
+This endpoint is outdated. Use the <a href="https://docs.datadoghq.com/api/v1/dashboards/"> new Dashboard endpoint</a> instead.
 </div>
 
 The Timeboard endpoint allows you to programmatically create, update delete and query Timeboards. [Find more about Timeboard][1].
@@ -561,4 +561,4 @@ curl "https://api.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=$
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /dashboards/timeboard
+[1]: /dashboards/timeboard/

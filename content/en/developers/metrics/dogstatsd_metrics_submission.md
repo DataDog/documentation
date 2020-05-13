@@ -7,10 +7,10 @@ aliases:
   - /developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /developers/faq/dog-statsd-sample-rate-parameter-explained
 further_reading:
-- link: "developers/dogstatsd"
+- link: "/developers/dogstatsd/"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "developers/metrics/types"
+- link: "/developers/metrics/types/"
   tag: "Documentation"
   text: "Datadog Metric Types"
 ---
@@ -122,7 +122,7 @@ func main() {
 Run the following Java code to submit a DogStatsD `COUNT` metric to Datadog:
 
 {{< code-block lang="java" filename="count_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -130,7 +130,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev"});
             Statsd.decrementCounter("example_metric.decrement", new String[]{"environment:dev"});
@@ -299,7 +303,7 @@ func main() {
 Run the following Java code to submit a DogStatsD `GAUGE` metric to Datadog:
 
 {{< code-block lang="java" filename="gauge_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -307,7 +311,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
@@ -617,7 +625,7 @@ func main() {
 Run the following Java code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
 {{< code-block lang="java" filename="histogram_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -625,7 +633,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
@@ -896,7 +908,7 @@ func main() {
 Run the following Java code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
 {{< code-block lang="java" filename="distribution_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -904,7 +916,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
@@ -1112,12 +1128,12 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
+[1]: /developers/dogstatsd/
 [2]: /developers/metrics/types/?tab=count#definition
 [3]: /dashboards/functions/arithmetic/#cumulative-sum
 [4]: /dashboards/functions/arithmetic/#integral
 [5]: /developers/metrics/types/?tab=gauge#definition
 [6]: /developers/metrics/types/?tab=histogram#definition
 [7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[8]: /metrics/distributions
+[8]: /metrics/distributions/
 [9]: /developers/metrics/types/?tab=distribution#definition

@@ -1,30 +1,46 @@
 module.exports = {
-    "production": {
-        serverUrl: "https://docs.datadoghq.com/",
-        branches: ["master"],
-        slackChannel: "#guac-ops"
+    production: {
+        serverUrl: 'https://docs.datadoghq.com/',
+        slackChannel: '#guac-ops'
     },
-    "preview": {
-        serverUrl: "https://docs-staging.datadoghq.com/",
-        slackChannel: "#guac-ops"
+    preview: {
+        serverUrl: 'https://docs-staging.datadoghq.com/',
+        slackChannel: '#guac-ops'
     },
-    "staging": {
-        serverUrl: "https://docs-staging.datadoghq.com/",
-        slackChannel: "#guac-ops"
+    staging: {
+        serverUrl: 'https://docs-staging.datadoghq.com/',
+        slackChannel: '#guac-ops'
     },
-    "linkCheckOptions": {
+    local: {
+        serverUrl: 'http://localhost:1313/',
+        slackChannel: '#guac-ops'
+    },
+    linkCheckOptions: {
         filterLevel: 3,
-        maxSocketsPerHost: 90,
-        maxSockets: 250,
-        excludeExternalLinks: true,
+        maxSockets: 100,
+        excludeExternalLinks: false,
         honorRobotExclusions: false,
-        cacheResponses: true,
-        includedKeywords: [
-            '*imgix*'
-        ],
+        brokenLinkSlackLimit: 5,
         excludedKeywords: [
-            '**/signup*'
-        ]
-
+            '*wtime=*',
+            '**/signup*',
+            '*app.datadoghq*',
+            '*corp-hugo/tree*',
+            '*linkedin.com/*',
+            '*reddit.com/submit*',
+            '*twitter.com/share*',
+            '*mailto:*',
+            '*tel:*',
+            '*irc:*',
+            '*googletagmanager*',
+            '*munchkin.marketo*',
+            '*streaming-corpsite-collector.datadoghq*',
+            '*app-sj16.marketo*',
+            '*eoig7v0a2o-dsn.algolia*',
+            '*.txt',
+            '*.yaml'
+        ],
+        csvUrl:
+            'https://origin-static-assets.s3.amazonaws.com/documentation/brokenlinks/'
     }
 };

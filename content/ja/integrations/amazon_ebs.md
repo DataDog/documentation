@@ -80,14 +80,14 @@ AWS EBS インテグレーションには、サービスのチェック機能は
 - [Amazon EBS メトリクスの収集][10]
 - [Datadog で Amazon EBS ボリュームを監視][11]
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon_ebs
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ebs/amazon_ebs_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help
+[8]: https://docs.datadoghq.com/ja/help/
 [9]: https://www.datadoghq.com/blog/amazon-ebs-monitoring
 [10]: https://www.datadoghq.com/blog/collecting-amazon-ebs-metrics
 [11]: https://www.datadoghq.com/blog/monitoring-amazon-ebs-volumes-with-datadog

@@ -85,7 +85,7 @@ docker run --rm datadog/synthetics-private-location-worker --help and check
 {{< nextlink href="/synthetics/private_locations" tag="Documentation" >}}Learn more about Private Locations{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /getting_started/synthetics/api_test
+[1]: /getting_started/synthetics/api_test/
 [2]: https://app.vagrantup.com/ubuntu/boxes/xenial64
 [3]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
 [4]: https://app.datadoghq.com/synthetics/list

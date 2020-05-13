@@ -50,7 +50,7 @@ Clone your RUM dashboards and customize them to fit your needs. You can add widg
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/installation
-[2]: /real_user_monitoring/data_collected
+[1]: /real_user_monitoring/installation/
+[2]: /real_user_monitoring/data_collected/
 [3]: https://app.datadoghq.com/rum/list
-[4]: /dashboards
+[4]: /dashboards/

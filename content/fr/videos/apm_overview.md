@@ -12,5 +12,5 @@ private: true
 ---
 Inscrivez-vous pour obtenir un compte d'essai : [https://app.datadoghq.com/signup][2]
 
-[1]: /fr/tracing
+[1]: /fr/tracing/
 [2]: https://app.datadoghq.com/signup

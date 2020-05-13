@@ -95,7 +95,7 @@ To get multiple columns for metrics queries, you need multiple request objects, 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/querying/#configuring-a-graph
-[2]: /logs/search_syntax
-[3]: /dashboards/graphing_json/widget_json
-[4]: /dashboards/graphing_json/request_json
+[2]: /logs/search_syntax/
+[3]: /dashboards/graphing_json/widget_json/
+[4]: /dashboards/graphing_json/request_json/
 [5]: /dashboards/graphing_json/widget_json/#conditional-format-schema

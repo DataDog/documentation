@@ -16,7 +16,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in public beta and available for API Tests only.
+This feature is in public beta for API Tests. The equivalent feature for Browser Tests is in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to Datadog support</a> if you would like to test it.
 </div>
 
 ## Overview
@@ -189,6 +189,6 @@ The test configurations are encrypted asymmetrically. The private key is used to
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/api_tests
+[1]: /synthetics/api_tests/
 [2]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
 [3]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html

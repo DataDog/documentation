@@ -82,6 +82,9 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'tcprtt.md' \
 		-a -not -name 'uwsgi.md' \
 		-exec rm -rf {} \;
+	@find ./content/en/security_monitoring/default_rules -type f -maxdepth 1 \
+		-a -not -name '_index.md' \
+		-exec rm -rf {} \;
 
 clean-auto-doc: ##Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \

@@ -81,6 +81,6 @@ UsageCount=1
 
 [1]: https://app.datadoghq.com/account/settings#integrations/sql_server
 [2]: /integrations/sqlserver/#metrics
-[3]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration
+[3]: /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
 [4]: https://msdn.microsoft.com/en-us/library/ms177440.aspx
 [5]: https://msdn.microsoft.com/en-us/library/ms144284.aspx

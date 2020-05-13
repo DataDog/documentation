@@ -36,4 +36,4 @@ Verisign DDoS 防御サービスのユーザーには、Verisign OpenHybrid™ �
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/verisign_openhybrid
-[2]: https://docs.datadoghq.com/ja/help
+[2]: https://docs.datadoghq.com/ja/help/

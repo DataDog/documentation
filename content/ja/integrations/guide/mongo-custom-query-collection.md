@@ -58,7 +58,7 @@ custom_queries:
 **注**: 定義されているメトリクスタイプは `gauge` です。詳細については、[メトリクスタイプのドキュメント][2] を参照してください。
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
-[2]: /ja/developers/metrics/types
+[2]: /ja/developers/metrics/types/
 {{% /tab %}}
 {{% tab "Find" %}}
 
@@ -89,7 +89,7 @@ custom_queries:
 **注**: 定義されているメトリクスタイプは `gauge` です。詳細については、[メトリクスタイプのドキュメント][2] を参照してください。
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
-[2]: /ja/developers/metrics/types
+[2]: /ja/developers/metrics/types/
 {{% /tab %}}
 {{% tab "Aggregate" %}}
 
@@ -149,6 +149,6 @@ custom_queries:
 [2]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
 [3]: https://docs.mongodb.com/manual/reference/command
 [4]: /ja/agent/guide/agent-commands/#restart-the-agent
-[5]: /ja/metrics/explorer
+[5]: /ja/metrics/explorer/
 [6]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: /ja/agent/guide/agent-log-files
+[7]: /ja/agent/guide/agent-log-files/

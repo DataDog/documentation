@@ -69,4 +69,4 @@ Datadog で使用するすべてのルーティングキーをリストしてく
 
 このフィールドを空白にした場合、デフォルトのエンドポイントは 'https://alert.victorops.com/integrations/datadog/20140523/alert' になります。
 
-[1]: https://docs.datadoghq.com/ja/help
+[1]: https://docs.datadoghq.com/ja/help/

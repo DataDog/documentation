@@ -43,15 +43,15 @@ Use qualitative facets when you need:
 
 #### Types {#types-qualitative-facets}
 
-Qualitative facets can have a string or numerical (integer) type. While assigning string type to a dimension works in all case, using integer types on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search syntax][18] for reference.
+Qualitative facets can have a string or numerical (integer) type. While assigning string type to a dimension works in all case, using integer types on a dimension enables range filtering on top of all aforementioned capabilities. For instance, `http.status_code:[200 TO 299]` is a valid query to use on a integer-type dimension. See [search syntax][1] for reference.
 
 ### Quantitative facets: Measures
 
 Use measures when you need:
 
-- To **aggregate values** from multiple logs. For instance, create a measure on the size of tiles served by the [Varnish cache][19] of a map server and keep track of the **average** daily throughput, or top-most referrers per **sum** of tile size requested.
-- To **range filter** your logs. For instance, create a measure on the execution time of [Ansible][20] tasks, and see the list of servers having the most runs taking more than 10s.
-- To **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][21] microservice. You can then search all the logs, starting with the one with the highest amount.
+- To **aggregate values** from multiple logs. For instance, create a measure on the size of tiles served by the [Varnish cache][18] of a map server and keep track of the **average** daily throughput, or top-most referrers per **sum** of tile size requested.
+- To **range filter** your logs. For instance, create a measure on the execution time of [Ansible][19] tasks, and see the list of servers having the most runs taking more than 10s.
+- To **sort logs** against that value. For instance, create a measure on the amount of payments performed with your [Python][20] microservice. You can then search all the logs, starting with the one with the highest amount.
 
 #### Types{#types-qualitative-facets}
 
@@ -61,8 +61,8 @@ Measures come with either a (long) integer or double value, for equivalent capab
 
 Measures support units (time in `seconds` or size in `bytes`) for easier handling of orders of magnitude at query time and display time. Unit is a property of the measure itself, not of the field. For example, consider a `duration` measure in nanoseconds: you have logs from `service:A` where `duration:1000` stands for 1000 milliseconds, and other logs from `service:B` where `duration:500` stands for 500 microseconds:
 
-1. Scale duration into nanoseconds for all logs flowing in with the [arithmetic processor][22]. Use a `*1000000` multiplier on logs from `service:A`, and a `*1000` multiplier on logs from `service:B`.
-2. Use `duration:>20ms` (see [search syntax][18] for reference) to consistently query logs from both services at once, and see an aggregated result of max `1 min`.
+1. Scale duration into nanoseconds for all logs flowing in with the [arithmetic processor][21]. Use a `*1000000` multiplier on logs from `service:A`, and a `*1000` multiplier on logs from `service:B`.
+2. Use `duration:>20ms` (see [search syntax][1] for reference) to consistently query logs from both services at once, and see an aggregated result of max `1 min`.
 
 ## The facet panel
 
@@ -96,7 +96,7 @@ Hidden facets have no impact aside from the log explorer (for instance: live tai
 
 #### Hidden facets and teammates
 
-Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][23]. Hidden facets is part of the context saved in a saved view.
+Hiding facets is specific to your own troubleshooting context and won't impact your teammates' view, unless you update a [Saved View][22]. Hidden facets is part of the context saved in a saved view.
 
 ### Group facets
 
@@ -124,11 +124,6 @@ If you see an aliased facet in your facet list, consider using the _standard_ fa
 
 You may wish to keep the non-standard _aliased_ version of the facet if you are troubleshooting against old content (before the aliasing for this facet has been setup by your organization).
 
-### The Index Facet
-
-The index facet is a specific facet that appears only if your organization has [multiple indexes][24], and/or if you have active [historical views][25]. Use this facet if you want to scope down your query to a subset of your indexes.
-
-{{< img src="logs/explorer/facet/index_facet_.png" alt="Create Facet" style="width:30%;">}}
 
 ## Manage Facets
 
@@ -136,7 +131,15 @@ The index facet is a specific facet that appears only if your organization has [
 
 Most common facets such as `Host`, `Service`, `URL Path`, or `Duration` come out-of-the-box to start troubleshooting right away once your logs are flowing into log indexes.
 
-Facets on [Reserved Attributes][26] and most [Standard Attributes][27] are available by default.
+Facets on [Reserved Attributes][23] and most [Standard Attributes][24] are available by default.
+
+
+### The Index Facet
+
+The index facet is a specific facet that appears only if your organization has [multiple indexes][25], and/or if you have active [historical views][26]. Use this facet if you want to scope down your query to a subset of your indexes.
+
+{{< img src="logs/explorer/facet/index_facet_.png" alt="Create Facet" style="width:30%;">}}
+
 
 ### Create Facets
 
@@ -168,7 +171,7 @@ Autocomplete based on the content in logs of the current views helps you to defi
 
 ### Alias Facets
 
-Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting—see [Naming Convention][27] for reference.
+Gathering similar content under a unique facet enables cross-team analytics and eases cross-team troubleshooting—see [Naming Convention][24] for reference.
 
 Use aliasing as an option to smoothly realign teams that rely on inconsistent naming conventions. With aliasing, you can have them all using the standard facet emerging for your organization.
 
@@ -181,7 +184,7 @@ When aliasing an _aliased_ facet towards a _standard_ facet:
 - Users can use either aliased and standard facets for troubleshooting. You may prefer the standard one, which eases correlation of content flowing from diverse and possibly heterogeneous sources.
 - Users are nudged to use the standard facet in place of the aliased one.
 
-To alias a facet towards a standard one, select the `Alias to...` action item in the facet menu. Pick the destination facets from all the [standard][28] ones existing for your organization.
+To alias a facet towards a standard one, select the `Alias to...` action item in the facet menu. Pick the destination facets from all the [standard][27] ones existing for your organization.
 
 {{< img src="logs/explorer/facet/alias_modal.png" alt="alias modal" style="width:30%;">}}
 
@@ -201,25 +204,24 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [4]: /monitors/monitor_types/log/
 [5]: /dashboards/widgets/
 [6]: /notebooks/
-[7]: /logs/processing/processors
+[7]: /logs/processing/processors/
 [8]: /logs/live_tail/
 [9]: /logs/archives/
 [10]: /logs/logs_to_metrics/
 [11]: /logs/processing/pipelines/
-[12]: /logs/indexes#indexes-filters
-[13]: /logs/indexes#exclusion-filters
-[14]: /tagging/assigning_tags
+[12]: /logs/indexes/#indexes-filters
+[13]: /logs/indexes/#exclusion-filters
+[14]: /tagging/assigning_tags/
 [15]: /integrations/nginx/
 [16]: /logs/processing/processors/?tab=ui#geoip-parser
 [17]: /integrations/kong/
-[18]: /logs/search_syntax
-[19]: /integrations/varnish/
-[20]: /integrations/ansible/
-[21]: /integrations/python/
-[22]: /logs/processing/processors/?tab=ui#arithmetic-processor
-[23]: /logs/explorer/saved_views/
-[24]: /logs/indexes/#indexes
-[25]: /logs/archives/rehydrating
-[26]: /logs/processing/#reserved-attributes
-[27]: /logs/processing/attributes_naming_convention/
-[28]: /logs/processing/attributes_naming_convention/#standard-attribute-list
+[18]: /integrations/varnish/
+[19]: /integrations/ansible/
+[20]: /integrations/python/
+[21]: /logs/processing/processors/?tab=ui#arithmetic-processor
+[22]: /logs/explorer/saved_views/
+[23]: /logs/processing/#reserved-attributes
+[24]: /logs/processing/attributes_naming_convention/
+[25]: /logs/indexes/#indexes
+[26]: /logs/archives/rehydrating/
+[27]: /logs/processing/attributes_naming_convention/#standard-attribute-list

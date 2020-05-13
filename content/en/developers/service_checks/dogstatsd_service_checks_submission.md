@@ -3,10 +3,10 @@ title: "Service Checks Submission: DogStatsD"
 kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
 further_reading:
-- link: "developers/dogstatsd"
+- link: "/developers/dogstatsd/"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "developers/libraries"
+- link: "/developers/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
 - link: "https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd"
@@ -99,14 +99,18 @@ func main() {
 
 {{< code-block lang="java" filename="service_check.java" >}}
 import com.timgroup.statsd.ServiceCheck;
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 
 public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
 
         ServiceCheck sc = ServiceCheck.builder()
                           .withName("Service.check.name")
@@ -169,5 +173,5 @@ After a service check is reported, use it to trigger a [custom check monitor][2]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
-[2]: /monitors/monitor_types/custom_check
+[1]: /developers/dogstatsd/
+[2]: /monitors/monitor_types/custom_check/

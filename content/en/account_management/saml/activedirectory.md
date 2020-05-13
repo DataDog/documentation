@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:
-- link: "account_management/saml"
+- link: "/account_management/saml/"
   tag: "Documentation"
   text: "Configure SAML for your Datadog account"
-- link: "account_management/multi_organization"
+- link: "/account_management/multi_organization/"
   tag: "Documentation"
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
@@ -107,8 +107,8 @@ For any questions or help with this, reach out to [the Datadog support team][5]!
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/saml
+[1]: /account_management/saml/
 [2]: https://app.datadoghq.com/account/saml/metadata.xml
 [3]: https://app.datadoghq.com/account/team
 [4]: https://app.datadoghq.com/saml/saml_setup
-[5]: /help
+[5]: /help/

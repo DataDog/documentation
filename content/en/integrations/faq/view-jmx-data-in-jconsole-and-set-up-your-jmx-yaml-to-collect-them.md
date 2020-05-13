@@ -28,4 +28,4 @@ After the Datadog Agent is set up to submit JMX metrics, use the [Metrics Explor
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/explorer
+[1]: /metrics/explorer/
