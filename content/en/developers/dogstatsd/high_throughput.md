@@ -28,7 +28,7 @@ Most of the time the symptoms can be alleviated by tweaking some configuration o
 
 ### Use Datadog official clients
 
-Official Dogstatsd clients are provided by Datadog for every major programming language. Their features are optimized for usage with Dogstatsd, please use them if one exists for your favorite language and make sure that you are using the latest version available.
+We recommend that you use the latest version of the [official DogStatsD clients][] provided by Datadog for every major programming language.
 
 ### Enable buffering on your client
 
@@ -259,27 +259,29 @@ dogstatsd_so_rcvbuf: 4194304
 
 ### Ensure proper packet sizes
 
-Sending packets with an adequate size to the Dogstatsd server within the Agent will avoid extra CPU usage. The latest versions of the official Dogstatsd clients send packets with a size optimized for performance. You can skip this section if you are using them.
+Avoid extra CPU usage by sending packets with an adequate size to the DogStatsD server in the Datadog Agent. The latest versions of the official DogStatsD clients send packets with a size optimized for performance. 
 
-If the packets sent are too small, the Agent will have to pack several together in order to process them in batches later in the pipeline. The official Dogstatsd clients are capable of grouping metrics to have the best ratio of the number of metrics per packet.
+You can skip this section if you are using one of the latest Datadog DogStatsD clients.
 
-If the Dogstatsd clients properly send packets having a size close to `dogstatsd_buffer_size`, the Agent will perform better. Be careful: the packets must not be larger than this size, otherwise, the Agent won't be able to load them completely in the buffer and some of metrics will be malformed. Please use the corresponding configuration field in your Dogstatsd clients.
+If the packets sent are too small, the Datadog Agent packs several together to process them in batches later in the pipeline. The official DogStatsD clients are capable of grouping metrics to have the best ratio of the number of metrics per packet.
 
-Note for UDP: as the UDP packets are most of the time going through the Ethernet and IP layer, it is be better to avoid IP packets fragmentation by limiting the packet size to a value lower than a single Ethernet frame on your network. Most of the time, IPv4 networks are configured with a MTU of 1500 bytes, in this situation the packet size of sent packets should be limited to 1472.
+The Datadog Agent performs most optimally if the DogStatsD clients send packets the size of the `dogstatsd_buffer_size`. The packets must not be larger than the buffer size, otherwise, the Agent won't be able to load them completely in the buffer and some of metrics will be malformed. Use the corresponding configuration field in your DogStatsD clients.
+
+Note for UDP: since UDP packets usually go through the Ethernet and IP layer, avoid IP packets fragmentation by limiting the packet size to a value lower than a single Ethernet frame on your network. Most of the time, IPv4 networks are configured with a MTU of 1500 bytes, so in this situation the packet size of sent packets should be limited to 1472.
 
 Note for UDS: for the best performances, UDS packet should have a size of 8192 bytes.
 
 ### Limit the maximum memory usage of the Agent
 
-The Agent tries to absorb burst of metrics sent by the Dogstatsd clients but in order to do so, it needs to use memory. Even if this is for a short amount of time and even if this memory is quickly released to the OS, a spike happens and that could be an issue in containerized environments where limit on memory usage could evict pods or containers.
+The Agent tries to absorb the burst of metrics sent by the DogStatsD clients, but to do so, it needs to use memory. Even if this is for a short amount of time and even if this memory is quickly released to the OS, a spike happens and that could be an issue in containerized environments where limit on memory usage could evict pods or containers.
 
-This first thing to do to not have the Dogstatsd server within the agent to reach its maximum memory usage is to avoid sending metrics in bursts in your application.
+Avoid sending metrics in bursts in your application - this prevents the Datadog Agent from reaching its maximum memory usage.
 
-Another thing to look at to limit the maximum memory usage is to reduce the buffering. The main buffer of the Dogstatsd server within the Agent is configurable with the `dogstatsd_queue_size` field (since Datadog Agent 6.1.0), its default value of `1024` induces an approximate maximum memory usage of 768MB.
+Another thing to look at to limit the maximum memory usage is to reduce the buffering. The main buffer of the DogStatsD server within the Agent is configurable with the `dogstatsd_queue_size` field (since Datadog Agent 6.1.0), its default value of `1024` induces an approximate maximum memory usage of 768MB.
 
-Note that reducing this buffer could have the caveat of increasing the number of packet drops.
+**Note**: reducing this buffer could increase the number of packet drops.
 
-Find below an example decreasing the max memory usage of Dogstatsd to approximately 384MB:
+This example decreases the max memory usage of DogStatsD to approximately 384MB:
 
 ```yaml
 dogstatsd_queue_size: 512
@@ -287,7 +289,7 @@ dogstatsd_queue_size: 512
 
 ## Client side telemetry
 
-Dogstatsd clients send telemetry metrics by default to the Agent. This allows you to better troubleshoot where bottleneck exists. Each metric will be tagged with the client language and the client version. These metrics will not be counted as custom metrics and will not be billed.
+DogStatsD clients send telemetry metrics by default to the Agent. This allows you to better troubleshoot where bottlenecks exist. Each metric is tagged with the client language and the client version. These metrics are not counted as custom metrics.
 
 Each client shares a set of common tags.
 
