@@ -15,8 +15,8 @@ further_reading:
 
 Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface.
 
-Since agent version v6.14/v7.14 Datadog recommend to use and enforce HTTPS transport (see [agent Transport for Logs][2]). 
-If you are using the HTTPS transport for logs, please reffer to the [agent proxy documentation][1] and use the same set of proxy settings as other data types.
+As of Agent v6.14/v7.14, Datadog recommends the use of and enforcing HTTPS transport (see [agent Transport for Logs][2]). 
+If you are using the HTTPS transport for logs, please refer to the [agent proxy documentation][1] and use the same set of proxy settings as other data types.
 
 
 ## TCP log forwarding
@@ -143,7 +143,7 @@ backend datadog-logs
         * `yum install ca-certificates` (CentOS, Redhat)
 If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
-Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
+Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.com` fails over to another IP.
 
 
 {{< /site-region >}}
@@ -211,13 +211,13 @@ backend datadog-logs
 
 If successful, the file will be located at `/etc/ssl/certs/ca-bundle.crt` for CentOS, Redhat.
 
-Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (usually doing something like `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
+Once the HAProxy configuration is in place, you can reload it or restart HAProxy. **It is recommended to have a `cron` job that reloads HAProxy every 10 minutes** (for example, `service haproxy reload`) to force a refresh of HAProxy's DNS cache, in case `app.datadoghq.eu` fails over to another IP.
 
 {{< /site-region >}}
 
 #### Agent configuration
 
-Then edit the `datadog.yaml` Agent configuration file and set `logs_no_ssl` to `true`. This is needed as HAProxy does not simply forward the traffic and is not the Datadog backend so cannot use the same certificate.
+Edit the `datadog.yaml` Agent configuration file and set `logs_no_ssl` to `true`. This is needed as HAProxy does not forward the traffic and is not the Datadog backend, so you cannot use the same certificate.
 
 **Note**: `logs_no_ssl` might set to true because HAProxy is configured to encrypt the data. Do not set this parameter to `true` otherwise.
 
@@ -288,7 +288,7 @@ logs_config:
   logs_dd_url: myProxyServer.myDomain:10514
 ```
 
-**Note**: Do not change the `logs_no_ssl` parameter as NGINX is simply forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
+**Note**: Do not change the `logs_no_ssl` parameter as NGINX is forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
 
 ## Further Reading
 
