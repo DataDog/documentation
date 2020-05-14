@@ -86,15 +86,15 @@ Consider these useful resources & guides for more information or common advanced
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: tracing/send_traces/
-[2]: tracing/setup/
-[3]: tracing/app_analytics/
-[4]: tracing/connect_logs_and_traces/
-[5]: tracing/livetail/
-[6]: tracing/profiling/
-[7]: tracing/opentracing/
-[8]: tracing/visualization/
-[9]: tracing/guide/setting_primary_tags_to_scope/
-[10]: tracing/guide/add_span_md_and_graph_it/?tab=java
-[11]: tracing/guide/security/
-[12]: tracing/guide/metrics_namespace/
+[1]: /tracing/send_traces/
+[2]: /tracing/setup/
+[3]: /tracing/app_analytics/
+[4]: /tracing/connect_logs_and_traces/
+[5]: /tracing/livetail/
+[6]: /tracing/profiling/
+[7]: /tracing/opentracing/
+[8]: /tracing/visualization/
+[9]: /tracing/guide/setting_primary_tags_to_scope/
+[10]: /tracing/guide/add_span_md_and_graph_it/?tab=java
+[11]: /tracing/guide/security/
+[12]: /tracing/guide/metrics_namespace/
