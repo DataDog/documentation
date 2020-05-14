@@ -34,7 +34,7 @@ To check which transport is used by the Agent, run the [Agent status command][1]
 
 **Note**: For older Agent versions, TCP transport is used by default. Datadog strongly recommends you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+. 
 
-**Note**: If a proxy is used to forward logs, Datadog strongly recommends to overwrite this behaviour to enforce a specific Transport as described in next section.
+**Note**: If a proxy is used to forward logs, Datadog strongly recommends to overwrite this behaviour to enforce a specific transport as described in next section.
 
 ## Enforce a specific transport
 
