@@ -48,7 +48,7 @@
            playsinline
            autoplay
            loop >
-      <source src="{{ $img }}"
+      <source src="{{ (print "/images/" $src) | relURL }}"
               type="video/mp4"
               media="(min-width: 0px)" >
       <div class="play"></div>
