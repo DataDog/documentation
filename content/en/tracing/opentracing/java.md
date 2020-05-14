@@ -25,14 +25,14 @@ For Maven, add this to `pom.xml`:
 <dependency>
     <groupId>io.opentracing</groupId>
     <artifactId>opentracing-api</artifactId>
-    <version>0.31.0</version>
+    <version>0.32.0</version>
 </dependency>
 
 <!-- OpenTracing Util -->
 <dependency>
     <groupId>io.opentracing</groupId>
     <artifactId>opentracing-util</artifactId>
-    <version>0.31.0</version>
+    <version>0.32.0</version>
 </dependency>
 
 <!-- Datadog Tracer (only needed if you do not use dd-java-agent) -->
@@ -46,8 +46,8 @@ For Maven, add this to `pom.xml`:
 For Gradle, add:
 
 ```text
-compile group: 'io.opentracing', name: 'opentracing-api', version: "0.31.0"
-compile group: 'io.opentracing', name: 'opentracing-util', version: "0.31.0"
+compile group: 'io.opentracing', name: 'opentracing-api', version: "0.32.0"
+compile group: 'io.opentracing', name: 'opentracing-util', version: "0.32.0"
 compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.version}"
 ```
 
