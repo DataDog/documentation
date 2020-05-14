@@ -7,10 +7,10 @@ aliases:
   - /ja/developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /ja/developers/faq/dog-statsd-sample-rate-parameter-explained
 further_reading:
-  - link: developers/dogstatsd
+  - link: /developers/dogstatsd/
     tag: ドキュメント
     text: DogStatsD 入門
-  - link: developers/metrics/types
+  - link: /developers/metrics/types/
     tag: ドキュメント
     text: Datadog メトリクスタイプ
 ---
@@ -121,7 +121,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="count_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -129,7 +129,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev"});
             Statsd.decrementCounter("example_metric.decrement", new String[]{"environment:dev"});
@@ -298,7 +302,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="gauge_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -306,7 +310,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
@@ -616,7 +624,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="histogram_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -624,7 +632,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
@@ -895,7 +907,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="distribution_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -903,7 +915,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
@@ -1111,12 +1127,12 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/dogstatsd
+[1]: /ja/developers/dogstatsd/
 [2]: /ja/developers/metrics/types/?tab=count#definition
 [3]: /ja/dashboards/functions/arithmetic/#cumulative-sum
 [4]: /ja/dashboards/functions/arithmetic/#integral
 [5]: /ja/developers/metrics/types/?tab=gauge#definition
 [6]: /ja/developers/metrics/types/?tab=histogram#definition
 [7]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[8]: /ja/metrics/distributions
+[8]: /ja/metrics/distributions/
 [9]: /ja/developers/metrics/types/?tab=distribution#definition
