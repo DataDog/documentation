@@ -79,17 +79,16 @@ With the following configuration placeholder values:
 | `<METRIC_TO_FETCH>`                      | Prometheus metrics key to be fetched from the Prometheus endpoint.                                                                                                                                             |
 | `<NEW_METRIC_NAME>`                      | Optional parameter which, if set, transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog. If you choose not to use this option, pass a list of strings rather than `key:value` pairs. |
 
-**Note**: See the [sample openmetrics.d/conf.yaml][9] for all available configuration options.
+For a full list of available parameters for instances, including `namespace` and `metrics`, see the table in the [Prometheus host collection guide][9].
 
-For a full list of available parameters for instances, including `namespace` and `metrics`, see the table in the [Prometheus host collection guide][10].
 
 ## Getting Started
 
 ### Simple metric collection
 
-1. [Launch the Datadog Agent][11].
+1. [Launch the Datadog Agent][10].
 
-2. Use [this Prometheus DaemonSet `prometheus.yaml`][12] to launch a Prometheus pod with already the Autodiscovery configuration in it:
+2. Use [this Prometheus DaemonSet `prometheus.yaml`][11] to launch a Prometheus pod with already the Autodiscovery configuration in it:
 
     Autodiscovery configuration:
 
@@ -128,7 +127,7 @@ For a full list of available parameters for instances, including `namespace` and
     kubectl create -f prometheus.yaml
     ```
 
-3. Go into your [Metric summary][13] page to see the collected metrics: `prometheus_target_interval_length_seconds*`
+3. Go into your [Metric summary][12] page to see the collected metrics: `prometheus_target_interval_length_seconds*`
 
     {{< img src="integrations/guide/prometheus_kubernetes/prometheus_collected_metric_kubernetes.png" alt="Prometheus metric collected kubernetes">}}
 
@@ -136,7 +135,7 @@ For a full list of available parameters for instances, including `namespace` and
 
 By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][14] integration.
+Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][13] integration.
 
 ## Further Reading
 
@@ -150,9 +149,8 @@ Official integrations have their own dedicated directories. There's a default in
 [6]: /integrations/guide/prometheus-metrics
 [7]: /agent/kubernetes/#installation
 [8]: /tagging/
-[9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[10]: /integrations/guide/prometheus-host-collection/#parameters-available
-[11]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[12]: /resources/yaml/prometheus.yaml
-[13]: https://app.datadoghq.com/metric/summary
-[14]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
+[9]: /integrations/guide/prometheus-host-collection/#parameters-available
+[10]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[11]: /resources/yaml/prometheus.yaml
+[12]: https://app.datadoghq.com/metric/summary
+[13]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
