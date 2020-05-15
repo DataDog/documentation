@@ -3222,14 +3222,6 @@
         "properties": {
           "restriction_query": {
             "description": "The restriction query.",
-<<<<<<< HEAD
-=======
-            "type": "string"
-          },
-          "type": {
-            "default": "logs_restriction_queries",
-            "description": "Restriction query resource type.",
->>>>>>> master
             "type": "string"
           }
         },
