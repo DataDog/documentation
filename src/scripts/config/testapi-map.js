@@ -217,7 +217,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#post-a-check-run",
-      "redirectURL":"api/v1/service-checks/"
+      "redirectURL":"api/v1/service-checks/#post-a-check-run"
    },
    {
       "anchor":"#rate-limiting",
