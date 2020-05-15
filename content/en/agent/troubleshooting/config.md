@@ -40,8 +40,8 @@ sudo datadog-agent config get log_level
 
 The complete runtime configuration can also be show by using the `config` command.
 
-[1]: /agent/basic_agent_usage/windows/#agent-v6
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /agent/basic_agent_usage/windows/#agent-v6

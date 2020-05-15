@@ -732,16 +732,16 @@ components:
         restriction_query:
           description: The restriction query.
           type: string
-        type:
-          default: logs_restriction_queries
-          description: Restriction query resource type.
-          type: string
       type: object
     RestrictionQueryCreateData:
       description: Data related to the creation of a restriction query.
       properties:
         attributes:
           $ref: '#/components/schemas/RestrictionQueryCreateAttributes'
+        type:
+          default: logs_restriction_queries
+          description: Restriction query resource type.
+          type: string
       type: object
     RestrictionQueryCreatePayload:
       description: Create a restriction query.
@@ -810,16 +810,16 @@ components:
         restriction_query:
           description: The restriction query.
           type: string
-        type:
-          default: logs_restriction_queries
-          description: Restriction query resource type.
-          type: string
       type: object
     RestrictionQueryUpdateData:
       description: Data related to the update of a restriction query.
       properties:
         attributes:
           $ref: '#/components/schemas/RestrictionQueryUpdateAttributes'
+        type:
+          default: logs_restriction_queries
+          description: Restriction query resource type.
+          type: string
       type: object
     RestrictionQueryUpdatePayload:
       description: Update a restriction query.

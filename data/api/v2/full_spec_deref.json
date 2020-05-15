@@ -2197,6 +2197,10 @@
           "type",
           "integration"
         ],
+        "required": [
+          "type",
+          "integration"
+        ],
         "type": "object"
       },
       "LogsArchiveDestinationAzure": {
@@ -3219,11 +3223,6 @@
           "restriction_query": {
             "description": "The restriction query.",
             "type": "string"
-          },
-          "type": {
-            "default": "logs_restriction_queries",
-            "description": "Restriction query resource type.",
-            "type": "string"
           }
         },
         "type": "object"
@@ -3237,14 +3236,14 @@
               "restriction_query": {
                 "description": "The restriction query.",
                 "type": "string"
-              },
-              "type": {
-                "default": "logs_restriction_queries",
-                "description": "Restriction query resource type.",
-                "type": "string"
               }
             },
             "type": "object"
+          },
+          "type": {
+            "default": "logs_restriction_queries",
+            "description": "Restriction query resource type.",
+            "type": "string"
           }
         },
         "type": "object"
@@ -3261,14 +3260,14 @@
                   "restriction_query": {
                     "description": "The restriction query.",
                     "type": "string"
-                  },
-                  "type": {
-                    "default": "logs_restriction_queries",
-                    "description": "Restriction query resource type.",
-                    "type": "string"
                   }
                 },
                 "type": "object"
+              },
+              "type": {
+                "default": "logs_restriction_queries",
+                "description": "Restriction query resource type.",
+                "type": "string"
               }
             },
             "type": "object"
@@ -3471,11 +3470,6 @@
           "restriction_query": {
             "description": "The restriction query.",
             "type": "string"
-          },
-          "type": {
-            "default": "logs_restriction_queries",
-            "description": "Restriction query resource type.",
-            "type": "string"
           }
         },
         "type": "object"
@@ -3489,14 +3483,14 @@
               "restriction_query": {
                 "description": "The restriction query.",
                 "type": "string"
-              },
-              "type": {
-                "default": "logs_restriction_queries",
-                "description": "Restriction query resource type.",
-                "type": "string"
               }
             },
             "type": "object"
+          },
+          "type": {
+            "default": "logs_restriction_queries",
+            "description": "Restriction query resource type.",
+            "type": "string"
           }
         },
         "type": "object"
@@ -3513,14 +3507,14 @@
                   "restriction_query": {
                     "description": "The restriction query.",
                     "type": "string"
-                  },
-                  "type": {
-                    "default": "logs_restriction_queries",
-                    "description": "Restriction query resource type.",
-                    "type": "string"
                   }
                 },
                 "type": "object"
+              },
+              "type": {
+                "default": "logs_restriction_queries",
+                "description": "Restriction query resource type.",
+                "type": "string"
               }
             },
             "type": "object"
@@ -3961,6 +3955,9 @@
             "type": "string"
           }
         },
+        "required": [
+          "type"
+        ],
         "type": "object"
       },
       "RoleCreateAttributes": {
@@ -10970,14 +10967,14 @@
                           "restriction_query": {
                             "description": "The restriction query.",
                             "type": "string"
-                          },
-                          "type": {
-                            "default": "logs_restriction_queries",
-                            "description": "Restriction query resource type.",
-                            "type": "string"
                           }
                         },
                         "type": "object"
+                      },
+                      "type": {
+                        "default": "logs_restriction_queries",
+                        "description": "Restriction query resource type.",
+                        "type": "string"
                       }
                     },
                     "type": "object"
@@ -11710,14 +11707,14 @@
                           "restriction_query": {
                             "description": "The restriction query.",
                             "type": "string"
-                          },
-                          "type": {
-                            "default": "logs_restriction_queries",
-                            "description": "Restriction query resource type.",
-                            "type": "string"
                           }
                         },
                         "type": "object"
+                      },
+                      "type": {
+                        "default": "logs_restriction_queries",
+                        "description": "Restriction query resource type.",
+                        "type": "string"
                       }
                     },
                     "type": "object"
