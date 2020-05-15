@@ -221,7 +221,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#rate-limiting",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/#rate-limiting"
    },
    {
       "anchor":"#screenboards",
