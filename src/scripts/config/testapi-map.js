@@ -663,45 +663,57 @@ const redirectUrls = [
       "anchor":"#get-user",
       "redirectURL":"api/v1/"
    },
+      {
+      "anchor":"#get-a-user-invitation",
+      "redirectURL":"api/v2/users/#get-a-user-invitation"
+   },
+   {
+      "anchor":"#users",
+      "redirectURL":"api/v1/users/"
+   },
+   {
+      "anchor":"#get-user",
+      "redirectURL":"api/v1/users/#get-user-details"
+   },
    {
       "anchor":"#get-a-user-permission-set",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/users/#get-a-user-permissions"
    },
    {
       "anchor":"#get-a-user-organisation",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/users/#get-a-user-organization"
    },
    {
       "anchor":"#send-invitation-email-to-a-user",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/users/#send-invitation-email"
    },
    {
       "anchor":"#get-a-custom-variable-for-webhooks",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/webhooks-integration/#get-a-custom-variable"
    },
    {
       "anchor":"#create-a-custom-variable-for-webhooks",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/webhooks-integration/#create-a-custom-variable"
    },
    {
       "anchor":"#get-a-webhook-for-webhooks-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/webhooks-integration/#get-a-webhook-integration"
    },
    {
       "anchor":"#integration-webhooks",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/webhooks-integration/"
    },
    {
       "anchor":"#create-a-webhook-for-webhooks-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/webhooks-integration/#create-a-webhooks-integration"
    },
    {
       "anchor":"#update-a-custom-variable-for-webhooks-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/webhooks-integration/#update-a-custom-variable"
    },
    {
       "anchor":"#delete-a-custom-variable-for-webhooks-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/webhooks-integration/#delete-a-custom-variable"
    },
    {
       "anchor":"#update-a-webhook-for-webhooks-integration",
@@ -713,99 +725,91 @@ const redirectUrls = [
    },
    {
       "anchor":"#create-a-custom-variable-for-webhooks-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/webhooks-integration/#delete-a-custom-variable"
    },
    {
       "anchor":"#host-totals",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/hosts/#get-the-total-number-of-active-hosts"
    },
    {
       "anchor":"#unmute-a-host",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/hosts/#unmute-a-host"
    },
    {
       "anchor":"#search-hosts",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/hosts/#get-all-hosts-for-your-organization"
    },
    {
       "anchor":"#mute-a-host",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1//hosts/#mute-a-host"
    },
    {
       "anchor":"#hosts",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/hosts/"
    },
    {
       "anchor":"#graph-snapshot",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/snapshots/"
    },
    {
       "anchor":"#graphs",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/snapshots/"
    },
    {
       "anchor":"#delete-an-azure-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/azure-integration/#delete-an-azure-integration"
    },
    {
       "anchor":"#list-all-azure-integrations",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/azure-integration/#list-all-azure-integrations"
    },
    {
       "anchor":"#update-an-azure-integration-host-filters",
-      "redirectURL":"api/v1/"
-   },
-   {
-      "anchor":"#update-an azure-integration-host-filters",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/azure-integration/#update-azure-integration-host-filters"
    },
    {
       "anchor":"#update-azure-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/azure-integration/#update-an-azure-integration"
    },
    {
       "anchor":"#integration-azure",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/azure-integration/"
    },
    {
       "anchor":"#create-an-azure-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/azure-integration/#create-an-azure-integration"
    },
    {
       "anchor":"#revoke-embed",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/embeddable-graphs/#revoke-embed"
    },
    {
       "anchor":"#enable-embed",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/embeddable-graphs/#enable-embed"
    },
    {
       "anchor":"#get-all-embeds",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/embeddable-graphs/#get-all-embeds"
    },
    {
       "anchor":"#embeddable-graphs",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/embeddable-graphs/"
    },
    {
       "anchor":"#get-specific-embed",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/embeddable-graphs/#get-specific-embed"
    },
    {
       "anchor":"#create-embed",
-      "redirectURL":"api/v1/"
-   },
-   {
-      "anchor":"#success-and-errors",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/embeddable-graphs/#create-embed"
    },
    {
       "anchor":"#get-indexes-order",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-indexes/#get-indexes-order"
    },
    {
       "anchor":"#logs-indexes",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-indexes/"
    },
    {
       "anchor":"#get-all-indexes",
@@ -813,31 +817,31 @@ const redirectUrls = [
    },
    {
       "anchor":"#update-an-index",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-indexes/#update-an-index"
    },
    {
       "anchor":"#update-indexes-order",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-indexes/#update-indexes-order"
    },
    {
       "anchor":"#get-an-index",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-indexes/#get-an-index"
    },
    {
       "anchor":"#query-the-event-stream",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/events/#query-the-event-stream"
    },
    {
       "anchor":"#get-an-event",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/events/#get-an-event"
    },
    {
       "anchor":"#events",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/events/"
    },
    {
       "anchor":"#post-an-event",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/events/#post-an-event"
    },
    {
       "anchor":"#overview",
@@ -845,147 +849,143 @@ const redirectUrls = [
    },
    {
       "anchor":"#service-level-objectives",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/"
    },
    {
       "anchor":"#delete-a-service-level-objective",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#delete-a-slo"
    },
    {
       "anchor":"#edit-a-slo",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#update-a-slo"
    },
    {
       "anchor":"#bulk-delete-slo-timeframes",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#bulk-delete-slo-timeframes"
    },
    {
       "anchor":"#search-service-level-objectives",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#search-slos"
    },
    {
       "anchor":"#delete-a-slo",
-      "redirectURL":"api/v1/"
+      "redirectURL":"/v1/service-level-objectives/#delete-a-slo"
    },
    {
       "anchor":"#edit-a-service-level-objective",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#update-a-slo"
    },
    {
       "anchor":"#create-a-slo",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#create-a-slo-object"
    },
    {
       "anchor":"#get-a-slo-s-details",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#get-a-slos-details"
    },
    {
       "anchor":"#get-an-slo-s-history",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#get-an-slos-history"
    },
    {
       "anchor":"#create-a-service-level-objective",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#create-a-slo-object"
    },
    {
       "anchor":"#delete-many-service-level-objectives",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#delete-a-slo"
    },
    {
       "anchor":"#get-a-service-level-objective-s-details",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#get-a-slos-details"
    },
    {
       "anchor":"#get-a-service-level-objective-s-history",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#get-an-slos-history"
    },
    {
       "anchor":"#delete-multiple-slos",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#delete-a-slo"
    },
    {
       "anchor":"#bulk-delete-service-level-objectives-time-frames",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#bulk-delete-slo-timeframes"
    },
    {
       "anchor":"#can-delete-a-service-level-objective-s",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#check-if-slos-can-be-safely-deleted"
    },
    {
       "anchor":"#search-slo-s",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#search-slos"
    },
    {
       "anchor":"#check-if-a-slo-can-be-deleted",
-      "redirectURL":"api/v1/"
-   },
-   {
-      "anchor":"#delete-a-pagerduty-service#de",
-      "redirectURL":"api/v1/"
-   },
-   {
-      "anchor":"#update-a-pagerduty-service",
-      "redirectURL":"api/v1/"
-   },
-   {
-      "anchor":"#get-a-pagerduty-service",
-      "redirectURL":"api/v1/"
-   },
-   {
-      "anchor":"#integration-pagerduty",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-level-objectives/#check-if-slos-can-be-safely-deleted"
    },
    {
       "anchor":"#delete-a-pagerduty-service",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/pagerduty-integration/#delete-a-single-service-object"
+   },
+   {
+      "anchor":"#update-a-pagerduty-service",
+      "redirectURL":"api/v1/pagerduty-integration/#update-a-single-service-object"
+   },
+   {
+      "anchor":"#get-a-pagerduty-service",
+      "redirectURL":"api/v1/pagerduty-integration/#get-a-single-service-object"
+   },
+   {
+      "anchor":"#integration-pagerduty",
+      "redirectURL":"api/v1/pagerduty-integration/"
+   },
+   {
+      "anchor":"#delete-a-pagerduty-service",
+      "redirectURL":"api/v1/pagerduty-integration/#delete-a-single-service-object"
    },
    {
       "anchor":"#add-a-pagerduty-service",
-      "redirectURL":"api/v1/"
-   },
-   {
-      "anchor":"#authentication",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/pagerduty-integration/#create-a-new-service-object"
    },
    {
       "anchor":"#query-associated-to-a-role",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/logs-restriction-queries/#get-restriction-query-for-a-given-role"
    },
    {
       "anchor":"#query-associated-to-a-user",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/logs-restriction-queries/#get-all-restriction-queries-for-a-given-user"
    },
    {
       "anchor":"#get-one-restriction-query",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/logs-restriction-queries/#get-a-restriction-query"
    },
    {
       "anchor":"#remove-a-restriction-query-from-a-role",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/logs-restriction-queries/#revoke-role-from-a-restriction-query"
    },
    {
       "anchor":"#delete-a-restriction-query",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/logs-restriction-queries/#delete-a-restriction-query"
    },
    {
       "anchor":"#update-a-restriction-query",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/logs-restriction-queries/#update-a-restriction-query"
    },
    {
       "anchor":"#associate-a-role-with-a-restriction-query",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/logs-restriction-queries/#grant-role-to-a-restriction-query"
    },
    {
       "anchor":"#restriction-queries",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/logs-restriction-queries/"
    },
    {
       "anchor":"#create-a-restriction-query",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/logs-restriction-queries/#create-a-restriction-query"
    },
    {
       "anchor":"#get-all-restriction-queries",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/logs-restriction-queries/#get-all-restriction-queries-for-a-given-user"
    }
 ]
 
