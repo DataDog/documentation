@@ -333,7 +333,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#get-hourly-usage-for-fargate",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-fargate"
    },
    {
       "anchor":"#get-daily-usage-attribution-file-url",
@@ -341,7 +341,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#get-hourly-usage-for-network-flows",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-network-flows"
    },
    {
       "anchor":"#get-hourly-usage-for-app-analytics",
@@ -349,39 +349,39 @@ const redirectUrls = [
    },
    {
       "anchor":"#get-hourly-usage-for-hosts-and-containers",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-hosts-and-containers"
    },
    {
       "anchor":"#get-usage-across-your-multi-org-account",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-usage-across-your-multi-org-account"
    },
    {
       "anchor":"#get-hourly-usage-for-lambda",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-lambda"
    },
    {
       "anchor":"#get-hourly-usage-for-synthetics-browser",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-synthetics-browser-checks"
    },
    {
       "anchor":"#usage-metering",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/"
    },
    {
       "anchor":"#get-hourly-usage-for-rum-sessions",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-rum-sessions"
    },
    {
       "anchor":"#get-hourly-usage-for-custom-metrics",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-custom-metrics"
    },
    {
       "anchor":"#get-top-500-custom-metrics-by-hourly-average",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-top-500-custom-metrics-by-hourly-average"
    },
    {
       "anchor":"#get-hourly-usage-for-logs-by-index",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-logs-by-index"
    },
    {
       "anchor":"#get-hourly-usage-for-snmp-devices",
@@ -397,7 +397,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#get-hourly-usage-for-logs",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-logs"
    },
    {
       "anchor":"#get-monthly-usage-attribution-available-files",
@@ -405,7 +405,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#get-hourly-usage-for-synthetics-api",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-synthetics-api-checks"
    },
    {
       "anchor":"#get-hourly-usage-for-analyzed-logs",
@@ -413,7 +413,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#get-hourly-usage-for-network-hosts",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-network-hosts"
    },
    {
       "anchor":"#troubleshooting",
@@ -421,219 +421,219 @@ const redirectUrls = [
    },
    {
       "anchor":"#integration-aws-logs",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-logs-integration/"
    },
    {
       "anchor":"#check-aws-lambda",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-logs-integration/#check-that-an-aws-lambda-function-exists"
    },
    {
       "anchor":"#list-all-aws-logs-integrations",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-logs-integration/#list-all-aws-logs-integrations"
    },
    {
       "anchor":"#delete-an-aws-logs-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-logs-integration/#delete-an-aws-logs-integration"
    },
    {
       "anchor":"#get-list-of-aws-log-ready-services",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-logs-integration/#get-list-of-aws-log-ready-services"
    },
    {
       "anchor":"#add-aws-log-lambda-arn",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-logs-integration/#add-aws-log-lambda-arn"
    },
    {
       "anchor":"#enable-an-aws-logs-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-logs-integration/#enable-an-aws-logs-integration"
    },
    {
       "anchor":"#check-aws-services",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-logs-integration/#check-permissions-for-log-services"
    },
    {
       "anchor":"#add-aws-log-arn",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/ws-logs-integration/#add-aws-log-lambda-arn"
    },
    {
       "anchor":"#update-host-tags",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/tags/#update-host-tags"
    },
    {
       "anchor":"#get-tags",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/tags/#get-tags"
    },
    {
       "anchor":"#remove-host-tags",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/tags/#remove-host-tags"
    },
    {
       "anchor":"#add-tags-to-a-host",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/tags/#add-tags-to-a-host"
    },
    {
       "anchor":"#get-host-tags",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/tags/#get-host-tags"
    },
    {
       "anchor":"#tags",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/tags"
    },
    {
       "anchor":"#timeboards",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/timeboards"
    },
    {
       "anchor":"#edit-an-api-key",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/key-management/#edit-an-api-key"
    },
    {
       "anchor":"#key-management",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/key-management"
    },
    {
       "anchor":"#get-an-application-key",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/key-management/#get-an-application-key"
    },
    {
       "anchor":"#create-an-api-key",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/key-management/#create-an-application-key"
    },
    {
       "anchor":"#delete-an-api-key",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/key-management/#delete-an-application-key"
    },
    {
       "anchor":"#get-all-api-keys",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/key-management/#get-all-api-keys"
    },
    {
       "anchor":"#edit-an-application-key",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/key-management/#edit-an-application-key"
    },
    {
       "anchor":"#get-an-api-key",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/key-management/#get-api-key"
    },
    {
       "anchor":"#delete-an-application-key",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/key-management/#delete-an-application-key"
    },
    {
       "anchor":"#create-an-application-key",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/key-management/#create-an-application-key"
    },
    {
       "anchor":"#get-all-application-keys",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/key-management/#get-all-application-keys"
    },
    {
       "anchor":"#list-namespace-rules",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-integration/#list-namespace-rules"
    },
    {
       "anchor":"#create-an-aws-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-integration/#create-an-aws-integration"
    },
    {
       "anchor":"#list-all-aws-integrations",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-integration/#list-all-aws-integrations"
    },
    {
       "anchor":"#integration-aws",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-integration"
    },
    {
       "anchor":"#update-an-aws-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-integration/#update-an-aws-integration"
    },
    {
       "anchor":"#generate-external-ids",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-integration/#generate-a-new-external-id"
    },
    {
       "anchor":"#delete-an-aws-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/aws-integration/#delete-an-aws-integration"
    },
    {
       "anchor":"#logs",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs"
    },
    {
       "anchor":"#send-logs-over-http",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs/#send-logs"
    },
    {
       "anchor":"#list-logs",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs/#get-a-list-of-logs"
    },
    {
       "anchor":"#update-a-pipelines",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-pipelines/#update-a-pipeline"
    },
    {
       "anchor":"#get-all-pipelines",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-pipelines/#get-all-pipelines"
    },
    {
       "anchor":"#delete-a-pipeline",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-pipelines/#delete-a-pipeline"
    },
    {
       "anchor":"#create-a-pipeline",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-pipelines/#create-a-pipeline"
    },
    {
       "anchor":"#logs-pipelines",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-pipelines"
    },
    {
       "anchor":"#get-a-pipelines",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-pipelines/#get-a-pipeline"
    },
    {
       "anchor":"#get-pipelines-order",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-pipelines/#get-pipeline-order"
    },
    {
       "anchor":"#update-pipelines-order",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/logs-pipelines/#update-pipeline-order"
    },
    {
       "anchor":"#get-a-dashboard",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/dashboards/#get-a-dashboard"
    },
    {
       "anchor":"#create-a-dashboard",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/dashboards/#create-a-dashboard"
    },
    {
       "anchor":"#get-all-dashboards",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/dashboards/#get-all-dashboards"
    },
    {
       "anchor":"#dashboards",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/dashboards"
    },
    {
       "anchor":"#delete-a-dashboard",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/dashboards/#delete-a-dashboard"
    },
    {
       "anchor":"#update-a-dashboard",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/dashboards/#update-a-dashboard"
    },
    {
       "anchor":"#get-a-monitor-downtime",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/downtimes/#get-a-downtime"
    },
    {
       "anchor":"#schedule-monitor-downtime",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/downtimes/#schedule-a-downtime"
    },
    {
       "anchor":"#cancel-monitor-downtime-by-scope",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/downtimes/#cancel-downtime-by-scope"
    },
    {
       "anchor":"#downtimes",
@@ -641,15 +641,15 @@ const redirectUrls = [
    },
    {
       "anchor":"#get-all-monitor-downtimes",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/downtimes/#get-all-downtimes"
    },
    {
       "anchor":"#cancel-monitor-downtime",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/downtimes/#cancel-a-downtime"
    },
    {
       "anchor":"#update-monitor-downtime",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/downtimes/#update-a-downtime"
    },
    {
       "anchor":"#edit-a-user",
