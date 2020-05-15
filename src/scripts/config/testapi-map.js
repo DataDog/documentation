@@ -28,10 +28,6 @@ const redirectUrls = [
       "redirectURL":"api/v1/edit-metric-metadata"
    },
    {
-      "anchor":"",
-      "redirectURL":"api/v1/"
-   },
-   {
       "anchor":"#mute-all-monitors",
       "redirectURL":"api/v1/monitors/#mute-all-monitors"
    },
@@ -177,11 +173,11 @@ const redirectUrls = [
    },
    {
       "anchor":"#get-a-specific-result",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/synthetics/#get-a-test-result-api"
    },
    {
       "anchor":"#get-a-test",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/synthetics/#get-a-test-configuration"
    },
    {
       "anchor":"#edit-a-test",
@@ -189,7 +185,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#get-the-most-recent-results",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/synthetics/#get-the-tests-latest-results-summaries-api"
    },
    {
       "anchor":"#synthetics",
@@ -201,7 +197,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#get-devices-for-browser-checks",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/synthetics/"
    },
    {
       "anchor":"#delete-tests",
@@ -209,7 +205,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#get-available-locations",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/synthetics/"
    },
    {
       "anchor":"#start-or-pause-a-test",
@@ -221,7 +217,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#post-a-check-run",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-checks/"
    },
    {
       "anchor":"#rate-limiting",
@@ -316,32 +312,24 @@ const redirectUrls = [
       "redirectURL":"api/v2/roles/#revoke-permission"
    },
    {
-      "anchor":"#revoke-permissions",
-      "redirectURL":"api/v1/"
-   },
-   {
-      "anchor":"#get-one-roles",
-      "redirectURL":"api/v1/"
-   },
-   {
       "anchor":"#create-role",
       "redirectURL":"api/v2/roles/#create-role"
    },
    {
       "anchor":"#get-one-role",
-      "redirectURL":"api/roles/#get-a-role"
+      "redirectURL":"api/v2/roles/#get-a-role"
    },
    {
       "anchor":"#get-hourly-usage-for-fargate",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-fargate"
    },
    {
       "anchor":"#get-daily-usage-attribution-file-url",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering"
    },
    {
       "anchor":"#get-hourly-usage-for-network-flows",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-network-flows"
    },
    {
       "anchor":"#get-hourly-usage-for-app-analytics",
