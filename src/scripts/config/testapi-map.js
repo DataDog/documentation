@@ -1,31 +1,31 @@
 const redirectUrls = [
    {
       "anchor":"#post-time-series-points",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/metrics/#submit-metrics"
    },
    {
       "anchor":"#query-time-series-points",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/metrics/#query-timeseries-points"
    },
    {
       "anchor":"#get-list-of-active-metrics",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/metrics/#get-active-metrics-list"
    },
    {
       "anchor":"#search-metrics",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/metrics/#search-metrics"
    },
    {
       "anchor":"#view-metric-metadata",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/get-metric-metadata"
    },
    {
       "anchor":"#metrics",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/metrics/"
    },
    {
       "anchor":"#edit-metric-metadata",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/edit-metric-metadata"
    },
    {
       "anchor":"",
@@ -33,43 +33,43 @@ const redirectUrls = [
    },
    {
       "anchor":"#mute-all-monitors",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#mute-all-monitors"
    },
    {
       "anchor":"#delete-a-monitor",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#delete-a-monitor"
    },
    {
       "anchor":"#get-all-monitor-details",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#get-all-monitor-details"
    },
    {
       "anchor":"#check-if-a-monitor-can-be-deleted",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#check-if-a-monitor-can-be-deleted"
    },
    {
       "anchor":"#create-a-monitor",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#create-a-monitor"
    },
    {
       "anchor":"#monitors-group-search",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#monitors-group-search"
    },
    {
       "anchor":"#monitors-search",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#monitors-search"
    },
    {
       "anchor":"#get-a-monitor-s-details",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#get-a-monitors-details"
    },
    {
       "anchor":"#mute-a-monitor",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#mute-a-monitor"
    },
    {
       "anchor":"#unmute-a-monitor",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#unmute-a-monitor"
    },
    {
       "anchor":"#monitors",
@@ -77,19 +77,19 @@ const redirectUrls = [
    },
    {
       "anchor":"#resolve-monitor",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#resolve-monitor"
    },
    {
       "anchor":"#validate-a-monitor",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#validate-a-monitor"
    },
    {
       "anchor":"#unmute-all-monitors",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#unmute-all-monitors"
    },
    {
       "anchor":"#edit-a-monitor",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/monitors/#edit-a-monitor"
    },
    {
       "anchor":"#comments",
@@ -105,75 +105,75 @@ const redirectUrls = [
    },
    {
       "anchor":"#tracing",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/tracing/"
    },
    {
       "anchor":"#send-traces",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/tracing/#send-traces"
    },
    {
       "anchor":"#get-slack-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/slack-integration/#get-info-about-a-slack-integration"
    },
    {
       "anchor":"#delete-a-slack-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/slack-integration/#delete-a-slack-integration"
    },
    {
       "anchor":"#integration-slack",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/slack-integration/"
    },
    {
       "anchor":"#create-a-slack-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/slack-integration/#create-a-slack-integration"
    },
    {
       "anchor":"#add-channels-to-slack-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/slack-integration/#add-channels-to-slack-integration"
    },
    {
       "anchor":"#create-a-gcp-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/gcp-integration/#create-a-gcp-integration"
    },
    {
       "anchor":"#update-gcp-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/gcp-integration/#update-a-gcp-integration"
    },
    {
       "anchor":"#delete-a-gcp-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/gcp-integration/#delete-a-gcp-integration"
    },
    {
       "anchor":"#integration-gcp",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/gcp-integration/"
    },
    {
       "anchor":"#list-all-gcp-integrations",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/gcp-integration/#list-all-gcp-integrations"
    },
    {
       "anchor":"#create-child-organization",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/organizations/#create-a-child-organization"
    },
    {
       "anchor":"#get-organization",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/organizations/#get-organization-information"
    },
    {
       "anchor":"#update-organization",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/organizations/#update-your-organization"
    },
    {
       "anchor":"#upload-idp-metadata",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/organizations/#upload-idp-metadata"
    },
    {
       "anchor":"#organizations",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/organizations/"
    },
    {
       "anchor":"#create-a-test",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/synthetics/#create-a-test"
    },
    {
       "anchor":"#get-a-specific-result",
@@ -185,7 +185,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#edit-a-test",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/synthetics/#edit-a-test"
    },
    {
       "anchor":"#get-the-most-recent-results",
@@ -193,11 +193,11 @@ const redirectUrls = [
    },
    {
       "anchor":"#synthetics",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/synthetics/"
    },
    {
       "anchor":"#get-all-tests",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/synthetics/#get-a-list-of-tests"
    },
    {
       "anchor":"#get-devices-for-browser-checks",
@@ -205,7 +205,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#delete-tests",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/synthetics/#delete-tests"
    },
    {
       "anchor":"#get-available-locations",
@@ -213,11 +213,11 @@ const redirectUrls = [
    },
    {
       "anchor":"#start-or-pause-a-test",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/synthetics/#pause-or-start-a-test"
    },
    {
       "anchor":"#service-checks",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/service-checks/"
    },
    {
       "anchor":"#post-a-check-run",
@@ -229,91 +229,91 @@ const redirectUrls = [
    },
    {
       "anchor":"#screenboards",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/screenboards/"
    },
    {
       "anchor":"#add-items-to-a-dashboard-list",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/dashboard-lists/#add-items-to-a-dashboard-list"
    },
    {
       "anchor":"#delete-a-dashboard-list",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/dashboard-lists/#delete-a-dashboard-list"
    },
    {
       "anchor":"#update-a-dashboard-list",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/dashboard-lists/#update-a-dashboard-list"
    },
    {
       "anchor":"#create-a-dashboard-list",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/dashboard-lists/#create-a-dashboard-list"
    },
    {
       "anchor":"#delete-items-from-a-dashboard-list",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/dashboard-list/#delete-items-from-a-dashboard-list"
    },
    {
       "anchor":"#get-a-dashboard-list",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/dashboard-lists/#get-a-dashboard-list"
    },
    {
       "anchor":"#get-items-of-a-dashboard-list",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/dashboard-lists/#get-a-dashboard-list"
    },
    {
       "anchor":"#get-all-dashboard-lists",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/dashboard-lists/#get-all-dashboard-lists"
    },
    {
       "anchor":"#update-items-of-a-dashboard-list",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/dashboard-lists/#update-items-of-a-dashboard-list"
    },
    {
       "anchor":"#dashboard-lists",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/dashboard-lists"
    },
    {
       "anchor":"#update-role",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/roles/#update-a-role"
    },
    {
       "anchor":"#add-user-to-role",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/roles/#add-a-user-to-a-role"
    },
    {
       "anchor":"#roles",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/roles"
    },
    {
       "anchor":"#assign-permissions-to-a-role",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/roles/#grant-permission-to-a-role"
    },
    {
       "anchor":"#remove-user",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/roles/#remove-a-user-from-a-role"
    },
    {
       "anchor":"#get-permissions",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/roles/#list-permissions"
    },
    {
       "anchor":"#get-all-roles",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/roles/#list-roles"
    },
    {
       "anchor":"#get-permissions-role",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/roles/#list-permissions-for-a-role"
    },
    {
       "anchor":"#delete-role",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/roles/#delete-role"
    },
    {
       "anchor":"#get-all-users",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/roles/#get-all-users-of-a-role"
    },
    {
       "anchor":"#revoke-permission",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/roles/#revoke-permission"
    },
    {
       "anchor":"#revoke-permissions",
@@ -325,11 +325,11 @@ const redirectUrls = [
    },
    {
       "anchor":"#create-role",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/roles/#create-role"
    },
    {
       "anchor":"#get-one-role",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/roles/#get-a-role"
    },
    {
       "anchor":"#get-hourly-usage-for-fargate",
