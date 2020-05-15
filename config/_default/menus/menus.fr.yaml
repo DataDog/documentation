@@ -1739,6 +1739,9 @@ api_v1:
   - name: Send logs
     parent: Logs
     url: send-logs
+  - name: Logs Archives
+    url: /fr/api/v1/logs-archives/
+    identifier: Logs Archives
   - name: Logs Indexes
     url: /fr/api/v1/logs-indexes/
     identifier: Logs Indexes
@@ -2173,6 +2176,24 @@ api_v2:
   - name: Logs
     url: /fr/api/v2/logs/
     identifier: Logs
+  - name: Logs Archives
+    url: /fr/api/v2/logs-archives/
+    identifier: Logs Archives
+  - name: Get all archives
+    parent: Logs Archives
+    url: get-all-archives
+  - name: Create an archive
+    parent: Logs Archives
+    url: create-an-archive
+  - name: Delete an archive
+    parent: Logs Archives
+    url: delete-an-archive
+  - name: Get an archive
+    parent: Logs Archives
+    url: get-an-archive
+  - name: Update an archive
+    parent: Logs Archives
+    url: update-an-archive
   - name: Logs Indexes
     url: /fr/api/v2/logs-indexes/
     identifier: Logs Indexes
