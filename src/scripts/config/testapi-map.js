@@ -332,10 +332,6 @@ const redirectUrls = [
       "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-network-flows"
    },
    {
-      "anchor":"#get-hourly-usage-for-app-analytics",
-      "redirectURL":"api/v1/"
-   },
-   {
       "anchor":"#get-hourly-usage-for-hosts-and-containers",
       "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-hosts-and-containers"
    },
@@ -372,40 +368,16 @@ const redirectUrls = [
       "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-logs-by-index"
    },
    {
-      "anchor":"#get-hourly-usage-for-snmp-devices",
-      "redirectURL":"api/v1/"
-   },
-   {
-      "anchor":"#get-monthly-usage-attribution-file-url",
-      "redirectURL":"api/v1/"
-   },
-   {
-      "anchor":"#get-daily-usage-attribution-available-files",
-      "redirectURL":"api/v1/"
-   },
-   {
       "anchor":"#get-hourly-usage-for-logs",
       "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-logs"
-   },
-   {
-      "anchor":"#get-monthly-usage-attribution-available-files",
-      "redirectURL":"api/v1/"
    },
    {
       "anchor":"#get-hourly-usage-for-synthetics-api",
       "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-synthetics-api-checks"
    },
    {
-      "anchor":"#get-hourly-usage-for-analyzed-logs",
-      "redirectURL":"api/v1/"
-   },
-   {
       "anchor":"#get-hourly-usage-for-network-hosts",
       "redirectURL":"api/v1/usage-metering/#get-hourly-usage-for-network-hosts"
-   },
-   {
-      "anchor":"#troubleshooting",
-      "redirectURL":"api/v1/"
    },
    {
       "anchor":"#integration-aws-logs",
@@ -641,27 +613,27 @@ const redirectUrls = [
    },
    {
       "anchor":"#edit-a-user",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/users/#update-a-user"
    },
    {
       "anchor":"#create-user",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/users/#create-a-user"
    },
    {
       "anchor":"#disable-user",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/users/#disable-a-user"
    },
    {
       "anchor":"#get-a-user-invitation",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/users/#get-a-user-invitation"
    },
    {
       "anchor":"#users",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/users/"
    },
    {
       "anchor":"#get-user",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v2/users/#get-a-user"
    },
       {
       "anchor":"#get-a-user-invitation",
