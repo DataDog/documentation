@@ -91,9 +91,13 @@ Hitting **Open in a pop-up** and **Shift** opens the pop up in incognito mode. T
     **Note**: **Your last browser test step must be an Assertion**, otherwise there is nothing to check.
 5. Once you have finished your scenario, click on **Save and Launch Test**.
 
-## Actions
+## Steps
 
-After saving a browser test, you can record [Actions][10] as a series of steps, which you can then edit or build on. You can also configure actions with [advanced options][11].
+After saving a browser test, you can record [Steps][10] which you can then edit or build on.
+
+Steps are a series of actions that you can record for a browser test which you can then edit or build on. You can define the steps you want your browser test to go through either by directly recording them with the Datadog test recorder extension or by manually adding the step of interest. You can also configure certain steps with [advanced options][11].
+
+**Note**: The default timeout for each step is approximately 60 seconds. You can override the timeout with advance options.
 
 ## Further Reading
 

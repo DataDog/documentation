@@ -1156,7 +1156,7 @@ main:
     parent: synthetics
     identifier: synthetics_browser_tests
     weight: 2
-  - name: Actions
+  - name: Steps
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 201

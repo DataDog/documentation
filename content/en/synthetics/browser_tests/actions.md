@@ -89,10 +89,17 @@ Perform verifications on files downloaded in previous steps. You can check that 
 
 The navigation step allows you to:
 
-* Refresh the current page of the scenario.
-* Follow a specific link. In the **Enter link URL** box, you must prepend your URLs with `http` or `https`.
-* Go to an email and click on a link. This step allows you to access your Synthetics mail inbox after creating an [email variable][4].
-* Choose the email you are interested in and click the link you want your browser test to click on.
+#### Refresh a page
+
+Refresh the current page of the scenario.
+
+#### Follow a specific link
+
+In the **Enter link URL** box, you must prepend your URLs with `http` or `https`.
+
+#### Go to an email and click on a link
+
+This step allows you to access your Synthetics mail inbox after creating an [email variable][4]. Choose the email you are interested in and click the link you want your browser test to click on.
 
 ### Special Actions
 

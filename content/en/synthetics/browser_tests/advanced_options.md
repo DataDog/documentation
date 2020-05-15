@@ -1,11 +1,11 @@
 ---
-title: Advanced Options for Browser Test Actions
+title: Advanced Options for Browser Test Steps
 kind: documentation
-description: Configure advanced options for Browser Test Actions
+description: Configure advanced options for Browser Test Steps
 further_reading:
 - link: "/synthetics/browser_tests/actions/"
   tag: "Documentation"
-  text: "Learn more about Browser Test Actions"
+  text: "Learn more about Browser Test Steps"
 ---
 
 ## Custom selector
