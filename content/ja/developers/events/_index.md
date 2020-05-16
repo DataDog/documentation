@@ -2,10 +2,10 @@
 title: イベント
 kind: documentation
 further_reading:
-- link: /events
+- link: /events/
   tag: ドキュメント
   text: Datadog イベントストリーム
-- link: /monitors/monitor_types/event
+- link: /monitors/monitor_types/event/
   tag: ドキュメント
   text: イベントモニター
 ---
@@ -15,8 +15,8 @@ further_reading:
 {{< whatsnext desc="次の方法で Datadog にイベントを送信します。">}}
     {{< nextlink href="/developers/events/agent" >}}カスタム Agent チェック{{< /nextlink >}}
     {{< nextlink href="/developers/events/dogstatsd" >}}DogStatsD{{< /nextlink >}}
-    {{< nextlink href="/developers/events/email" >}}Email{{< /nextlink >}}
-    {{< nextlink href="/api/#post-an-event" >}}Datadog API{{< /nextlink >}}
+    {{< nextlink href="/developers/events/email" >}}メール{{< /nextlink >}}
+    {{< nextlink href="/api/v1/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## その他の参考資料

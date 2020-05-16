@@ -15665,6 +15665,8 @@ tags:
     **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log
     endpoint is `http-intake.logs.datadoghq.eu`.'
   name: Logs
+- description: '[Check API version 2](/api/v2/logs-archives/).'
+  name: Logs Archives
 - description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
 
     You need an API and application key with Admin rights to interact with this endpoint.'
