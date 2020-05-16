@@ -27,7 +27,7 @@ function slug(value) {
 /^## / {
     operation_id = $2;
 }
-/^```go/ {
+/^```/ {
     if (in_code_block == 0) {
         in_code_block = 1;
         if (out_file) {

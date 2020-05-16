@@ -27,7 +27,7 @@ function slug(value) {
 /^## / {
     operation_id = toupper( substr( $2, 1, 1 ) ) substr( $2, 2 );
 }
-/^```java/ {
+/^```/ {
     if (in_code_block == 0) {
         in_code_block = 1;
         if (out_file) {
