@@ -27,7 +27,7 @@ function slug(value) {
 /^## / {
     operation_id = $2;
 }
-/^```/ {
+/^```go/ {
     if (in_code_block == 0) {
         in_code_block = 1;
         if (out_file) {
@@ -37,10 +37,15 @@ function slug(value) {
         out_file=output "/" tag "/" operation_id ".go";
         print out_file;
     } else {
-        in_code_block = 0;
+        print "Can't parse " FILENAME > "/dev/stderr"
+        exit 1
     }
     next;
 }
+/^```/ {
+    in_code_block = 0;
+}
+
 in_code_block {
     # Make sure that the file is newly created
     if (in_code_block == 1) {

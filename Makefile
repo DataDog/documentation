@@ -1,5 +1,5 @@
 # make
-.PHONY: clean clean-all clean-build clean-exe clean-integrations clean-auto-doc clean-node clean-virt help start stop
+.PHONY: clean clean-all clean-build clean-examples clean-go-examples clean-java-examples clean-exe clean-integrations clean-auto-doc clean-node clean-virt help start stop
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -168,7 +168,9 @@ examples/datadog-api-client-go:
 examples/datadog-api-client-java:
 	@git clone https://github.com/DataDog/datadog-api-client-java.git examples/datadog-api-client-java
 
-examples/go: examples/datadog-api-client-go clean-go-examples
+.PHONY: examples/go examples/java examples
+
+examples/go: examples/datadog-api-client-go clean-go-examples local/bin/awk/extract-code-blocks-go.awk
 	@ls examples/datadog-api-client-go/api/v1/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v1
 	@ls examples/datadog-api-client-go/api/v2/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v2
 
@@ -178,7 +180,7 @@ examples/go: examples/datadog-api-client-go clean-go-examples
 
 	cp -Rn examples/content ./
 
-examples/java: examples/datadog-api-client-java clean-java-examples
+examples/java: examples/datadog-api-client-java clean-java-examples local/bin/awk/extract-code-blocks-java.awk
 	@ls examples/datadog-api-client-java/api_docs/v1/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v1
 	@ls examples/datadog-api-client-java/api_docs/v2/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v2
 
