@@ -2232,6 +2232,15 @@ api_v2:
   - name: Update an archive
     parent: Logs Archives
     url: update-an-archive
+  - name: Revoke role from an archive
+    parent: Logs Archives
+    url: revoke-role-from-an-archive
+  - name: List read roles for an archive
+    parent: Logs Archives
+    url: list-read-roles-for-an-archive
+  - name: Grant role to an archive
+    parent: Logs Archives
+    url: grant-role-to-an-archive
   - name: Logs Indexes
     url: /ja/api/v2/logs-indexes/
     identifier: Logs Indexes
