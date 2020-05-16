@@ -4,9 +4,9 @@ kind: documentation
 description: Run Synthetics API and browser tests from private locations
 beta: true
 further_reading:
-    - link: 'synthetics/'
+    - link: 'synthetics/#create-a-check'
       tag: 'Documentation'
-      text: 'Manage your checks'
+      text: 'Create an API or browser check'
     - link: 'synthetics/browser_tests'
       tag: 'Documentation'
       text: 'Configure a Browser Test'
@@ -29,68 +29,83 @@ Once you created a private location, configuring a [Synthetics API test][1] from
 
 ## Prerequisites
 
+To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints.
+
+| Datadog site    | Endpoint                                                                                             |
+| --------------- | ---------------------------------------------------------------------------------------------------- |
+| Datadog US site | `intake.synthetics.datadoghq.com` for version 0.1.6+, `api.datadoghq.com/api/` for versions <0.1.5   |
+| Datadog EU site | `api.datadoghq.eu/api/`                                                                              |
+
+Check if the endpoint corresponding to your Datadog `site` is available from the host running the worker:
+
+- For the Datadog US site: for version 0.1.6+ use `curl intake.synthetics.datadoghq.com` (`curl https://api.datadoghq.com` for versions <0.1.5).
+- For the Datadog EU site: `curl https://api.datadoghq.eu`.
+
+**Note**: You must allow outbound traffic on port `443` because test configurations are pulled and test results are pushed via HTTPS.
+
 ### Docker
 
 The private location worker is shipped as a Docker container. It can run on a Linux based OS or Windows OS if the [Docker engine][2] is available on your host and can run in Linux containers mode.
-
-### Proxy configurations
-
-Proxy configurations require you to create a private location first. To create a private location with proxy configurations, please follow the [setup](#setup) steps **in their exact order**.
-
-### Special-purpose IPv4 whitelisting
-
-If you are using private locations to monitor internal endpoints, some of your servers might be using [special-purpose IPv4][3]. These IPs are blacklisted by default, so if your private location needs to run a test on one of them, you first need to whitelist it using the `whitelistedRange` parameter.
 
 ## Setup
 
 ### Create a new private location
 
-1. Go in _Synthetics_ -> _Settings_ -> _Private Locations_ and create a new private location:
+Go in _Synthetics_ -> _Settings_ -> _Private Locations_ and create a new private location:
 
-    {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations"  style="width:70%;">}}
+{{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations"  style="width:90%;">}}
 
-2. Fill out the Location Details and click **Save and Generate** to generate the configuration file associated with your private location on your worker.
+Fill out the Location Details and click **Save and Generate** to generate the configuration file associated with your private location on your worker.
 
-    **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the Private Locations screen.
-    **You need to be able to reference these secrets again if you decide to add more workers, or to install workers on another host.**
+**Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the Private Locations screen. **You need to be able to reference these secrets again if you decide to add more workers, or to install workers on another host.**
 
-3. **Configure your private location.**
+### Configure your private location
 
-    The `synthetics-private-location-worker` comes with a number of options that can be set to configure your private locations through the launch command or the configuration file. Arguments set in the launch command have precedence over the configuration file. However, these options aren't stored and are consequently only prevalent for a given launch:
+The `synthetics-private-location-worker` comes with a number of options that can be set to configure your private locations through the launch command or the configuration file. Arguments set in the launch command have precedence over the configuration file. However, these options aren't stored and are consequently only prevalent for a given launch.
 
-    **Proxy configuration**
+| Option                   | Type             | Default                                              | Description                                                                                                                                                              |
+| ------------------------ | ---------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `dnsServer`              | Array of Strings | `["8.8.8.8","1.1.1.1"]`                              | DNS server IPs used in given order (`--dnsServer="1.1.1.1" --dnsServer="8.8.8.8"`)                                                                                       |
+| `dnsUseHost`             | Boolean          | `false`                                              | Use local DNS config in addition to --dnsServer (currently `["<DEFAULT_DNS_IN_HOST_CONFIG"]`)                                                                            |
+| `whitelistedRange.4`     | Array of Strings | `none`                                               | Grant access to IPv4 IP ranges (e.g. `--whitelistedRange.4="10.0.0.0/8"` or `--whitelistedRange.4={"10.0.0.0/8","0.0.0.0/8"}`, has precedence over `--blacklistedRange`) |
+| `whitelistedRange.6`     | Array of Strings | `none`                                               | Grant access to IPv6 IP ranges (e.g. `--whitelistedRange.6="::/128"` or `--whitelistedRange.6={"::/128","64:ff9b::/96"}`, has precedence over `--blacklistedRange`)      |
+| `blacklistedRange.4`     | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][3] | Deny access to IPv4 IP ranges (e.g. `--blacklistedRange.4="127.0.0.0/8" --blacklisted.4="100.64.0.0/10"`)                                                                |
+| `blacklistedRange.6`     | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][3] | Deny access to IPv6 IP ranges (e.g. `--blacklistedRange.6="::1/128"`)                                                                                                    |
+| `site`                   | String           | `datadoghq.com`                                      | Datadog site (`datadoghq.com` or `datadoghq.eu`)                                                                                                                         |
+| `proxy`                  | String           | `none`                                               | Proxy URL. Set the `proxy` option to your proxy URL in a curl-like way, for example:  `--proxy=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT> URL`                  |
+| `proxyIgnoreSSLErrors`   | Boolean          | `none`                                               | Disregard SSL errors when using a proxy.                                                                                                                                 |
+| `logFormat`              | String           | `pretty`                                             | Format log output [choices: `"pretty"`, `"json"`]. Setting your log format to `json` allows you to have these logs automatically parsed when collected by Datadog.      |
+| `concurrency`            | Integer          | `10`                                                 | Maximum number of tests executed in parallel.                                                                                                                            |
+| `maxTimeout`             | Integer          | `60000`                                              | Maximum test execution duration, in milliseconds.                                                                                                                        |
+| `maxBodySize`            | Integer          | `5e+6`                                               | Maximum HTTP body size for download, in bytes.                                                                                                                           |
+| `maxBodySizeIfProcessed` | Integer          | `5e+6`                                               | Maximum HTTP body size for the assertions, in bytes.                                                                                                               |
+| `regexTimeout`           | Integer          | `500`                                                | Maximum duration for regex execution, in milliseconds.                                                                                                        |
 
-    If the traffic has to go through a proxy, you need to set the `proxy` option to your proxy URL in a curl-like way (`--proxy=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT> URL` for instance). If you use this, no additional configuration on your proxy should be needed.
+**Note**: These options and more can be found by running the help command for the Datadog worker docker run --rm datadog/synthetics-private-location-worker --help.
 
-    **DNS configuration**
+#### Proxy configuration
 
-    By default, the Datadog workers use `8.8.8.8` to perform DNS resolution. If it fails, it makes a second attempt to communicate with `1.1.1.1`. If you are testing an internal URL and need to use an internal DNS server you can set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config from the `etc/resolv.conf` file.
+**Note**: Proxy configurations require you to create a private location first. To create a private location with proxy configurations, please follow the [setup](#setup) steps **in their exact order**.
 
-    **Note**: These options and more can be found by running the help command for the Datadog worker `docker run --rm datadog/synthetics-private-location-worker --help`.
+If the traffic has to go through a proxy, you need to set the `proxy` option to your proxy URL in a curl-like way (`--proxy=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT> URL` for instance). If you use this, no additional configuration on your proxy should be needed.
 
-    | Option                   | Type             | Default                                              | Description                                                                                                                                                              |
-    | ------------------------ | ---------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-    | `dnsServer`              | Array of Strings | `["8.8.8.8","1.1.1.1"]`                              | DNS server IPs used in given order (`--dnsServer="1.1.1.1" --dnsServer="8.8.8.8"`)                                                                                       |
-    | `dnsUseHost`             | Boolean          | `false`                                              | Use local DNS config in addition to --dnsServer (currently `["<DEFAULT_DNS_IN_HOST_CONFIG"]`)                                                                            |
-    | `whitelistedRange.4`     | Array of Strings | `none`                                               | Grant access to IPv4 IP ranges (e.g. `--whitelistedRange.4="10.0.0.0/8"` or `--whitelistedRange.4={"10.0.0.0/8","0.0.0.0/8"}`, has precedence over `--blacklistedRange`) |
-    | `whitelistedRange.6`     | Array of Strings | `none`                                               | Grant access to IPv6 IP ranges (e.g. `--whitelistedRange.6="::/128"` or `--whitelistedRange.6={"::/128","64:ff9b::/96"}`, has precedence over `--blacklistedRange`)      |
-    | `blacklistedRange.4`     | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][3] | Deny access to IPv4 IP ranges (e.g. `--blacklistedRange.4="127.0.0.0/8" --blacklisted.4="100.64.0.0/10"`)                                                                |
-    | `blacklistedRange.6`     | Array of Strings | [IANA IPv4/IPv6 Special-Purpose Address Registry][3] | Deny access to IPv6 IP ranges (e.g. `--blacklistedRange.6="::1/128"`)                                                                                                    |
-    | `site`                   | String           | `datadoghq.com`                                      | Datadog site (`datadoghq.com` or `datadoghq.eu`)                                                                                                                         |
-    | `proxy`                  | String           | `none`                                               | Proxy URL. Set the `proxy` option to your proxy URL in a curl-like way, for example:  `--proxy=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT> URL`                  |
-    | `proxyIgnoreSSLErrors`   | Boolean          | `none`                                               | Disregard SSL errors when using a proxy.                                                                                                                                 |
-    | `logFormat`              | String           | `pretty`                                             | Format log output [choices: `"pretty"`, `"json"`]. Setting your log format to `json` allows you to have these logs automatically parsed when collected by Datadog.      |
-    | `concurrency`            | Integer          | `10`                                                 | Maximum number of tests executed in parallel.                                                                                                                            |
-    | `maxTimeout`             | Integer          | `60000`                                              | Maximum test execution duration, in milliseconds.                                                                                                                        |
-    | `maxBodySize`            | Integer          | `5e+6`                                               | Maximum HTTP body size for download, in bytes.                                                                                                                           |
-    | `maxBodySizeIfProcessed` | Integer          | `5e+6`                                               | Maximum HTTP body size for the assertions, in bytes.                                                                                                               |
-    | `regexTimeout`           | Integer          | `500`                                                | Maximum duration for regex execution, in milliseconds.                                                                                                        |
+#### DNS configuration
 
-4. Launch your worker on:
+By default, the Datadog workers use `8.8.8.8` to perform DNS resolution. If it fails, it makes a second attempt to communicate with `1.1.1.1`. If you are testing an internal URL and need to use an internal DNS server you can set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config from the `etc/resolv.conf` file.
 
-    {{< tabs >}}
+**Note**: These options and more can be found by running the help command for the Datadog worker `docker run --rm datadog/synthetics-private-location-worker --help`.
 
-    {{% tab "Docker" %}}
+#### Special-purpose IPv4 whitelisting
+
+If you are using private locations to monitor internal endpoints, some of your servers might be using [special-purpose IPv4][3]. These IPs are blacklisted by default, so if your private location needs to run a test on one of them, you first need to whitelist it using the `whitelistedRange` parameter.
+
+### Install your private location worker
+
+Launch your worker on:
+
+{{< tabs >}}
+
+{{% tab "Docker" %}}
 
 Launch your worker as a standalone container using the Docker run command provided and the previously created configuration file:
 
@@ -98,9 +113,9 @@ Launch your worker as a standalone container using the Docker run command provid
 docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
 ```
 
-    {{% /tab %}}
+{{% /tab %}}
 
-    {{% tab "Kubernetes" %}}
+{{% tab "Kubernetes" %}}
 
 Create a Kubernetes ConfigMap with the previously created JSON file by executing the following:
 
@@ -151,31 +166,19 @@ kubectl apply -f private-worker-pod.yaml
 
 {{< /tabs >}}
 
-5. To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints:
+### Run tests from your worker
 
-    | Datadog site    | Endpoint                                                                                             |
-    | --------------- | ---------------------------------------------------------------------------------------------------- |
-    | Datadog US site | `intake.synthetics.datadoghq.com` for version 0.1.6+ ( `api.datadoghq.com/api/` for versions <0.1.5) |
-    | Datadog EU site | `api.datadoghq.eu/api/`                                                                              |
+If your private location reports correctly to Datadog you should see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 
-    Check if the endpoint corresponding to your Datadog `site` is available from the host running the worker:
+In your private locations list, in the Settings section:
 
-    - For the Datadog US site: for version 0.1.6+ use `curl intake.synthetics.datadoghq.com` (`curl https://api.datadoghq.com` for versions <0.1.5).
-    - For the Datadog EU site: `curl https://api.datadoghq.eu`.
+{{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills"  style="width:90%;">}}
 
-    **Note**: You must allow outbound traffic on port `443` because test configurations are pulled and test results are pushed via HTTPS.
+In the form when creating a test, below the Private locations section:
 
-6. If your private location reports correctly to Datadog you should see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
+{{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list"  style="width:90%;">}}
 
-    - In your private locations list, in the Settings section:
-
-      {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills"  style="width:70%;">}}
-
-    - In the form when creating a test, below the Private locations section:
-
-      {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list"  style="width:70%;">}}
-
-7. You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][1].
+You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][1].
 
 ## Scale your private location
 
