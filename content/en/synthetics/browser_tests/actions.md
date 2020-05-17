@@ -18,7 +18,7 @@ The following steps are automatically recorded with the [Datadog browser test re
 
 ### Click
 
-Datadog’s extension automatically records clicks on your page. Specify the type of click you want your browser test to perform at execution time:
+[Datadog browser test recorder extension][3] automatically records clicks on your page. Specify the type of click you want your browser test to perform at execution time:
 
 {{< img src="synthetics/browser_tests/browser_test_click_step.mp4" alt="Browser Test Click Step" video="true" width="60%">}}
 
@@ -28,7 +28,19 @@ Choose from:
 * Double click
 * Contextual click (corresponds to a right click)
 
-### Upload
+### Type text
+
+[Datadog browser test recorder extension][3] automatically records text inputted in any fields of your website (forms, text areas, etc.):
+
+{{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="60%">}}
+
+### Select option
+
+[Datadog browser test recorder extension][3] automatically records options being selected from `select` dropdown menu:
+
+{{< img src="synthetics/browser_tests/select_options.png" alt="Select options step"  style="width:60%;">}}
+
+### Upload file
 
 You can record the uploading of files as a step. To record an **Upload** step you can:
 
