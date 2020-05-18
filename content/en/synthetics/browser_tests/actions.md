@@ -8,17 +8,17 @@ further_reading:
   text: "Learn how to configure advanced options for steps"
 ---
 
-Steps are a series of actions that you can record for a browser test, which you can then edit or build on. You can define the steps you want your browser test to go through either by directly recording them with the Datadog test recorder extension or by manually adding the step of interest. You can also configure certain steps with [advanced options][1].
+Steps are a series of actions that you can record for a browser test, which you can then edit or build on. You can define the steps you want your browser test to go through either by directly recording them with the Datadog test recorder extension or by manually adding the step of interest. All steps come with a set of [advanced options][1] that you can configure.
 
-**Note**: The default timeout for each step is approximately 60 seconds. You can override the timeout with [advanced options][2].
+**Note**: The default timeout for each step is approximately 60 seconds. You can override this default timeout through the dedicated [advanced option][2].
 
 ## Automatically Recorded Steps
 
-The following steps are automatically recorded with the [browser extension][3]:
+The following steps are automatically recorded with the [Datadog browser test recorder extension][3]:
 
 ### Click
 
-Datadog’s extension automatically records clicks on your page. Specify the type of click you want your browser test to perform at execution time:
+[Datadog browser test recorder extension][3] automatically records clicks on your page. Specify the type of click you want your browser test to perform at execution time:
 
 {{< img src="synthetics/browser_tests/browser_test_click_step.mp4" alt="Browser Test Click Step" video="true" width="60%">}}
 
@@ -28,14 +28,26 @@ Choose from:
 * Double click
 * Contextual click (corresponds to a right click)
 
-### Upload
+### Type text
 
-You can record the uploading of files as a step. To record an upload step you can:
+[Datadog browser test recorder extension][3] automatically records text inputted in any fields of your website (forms, text areas, etc.):
+
+{{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="60%">}}
+
+### Select option
+
+[Datadog browser test recorder extension][3] automatically records options being selected from `select` dropdown menu:
+
+{{< img src="synthetics/browser_tests/select_options.png" alt="Select options step"  style="width:60%;">}}
+
+### Upload file
+
+You can record the uploading of files as a step. To record an **Upload** step you can:
 
 * Either open your desktop from the browser,
 * Or drag and drop your file in the recording iframe.
 
-{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step"  style="width:50%;">}}
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step"  style="width:60%;">}}
 
 This is limited to 10 files, with a limit of 5MB each.
 
@@ -45,17 +57,19 @@ The following steps can be manually added to a browser test by configuring them 
 
 ### Assertion
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Browser Test Assertion"  style="width:40%;">}}
+{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Browser Test Assertion"  style="width:60%;">}}
 
-Assertions allow you to validate that your browser test is in the state you expect it to be in, at any given point of a simulated user journey. This is why you must end your browser tests by an assertion to confirm it ended up in an expected state.
+Assertions allow you to validate that your browser test is in the state you expect it to be in, at any given point of a simulated user journey. This is why you must end your browser tests by an **Assertion** to confirm it ended up in an expected state.
 
-Some assertions are performed on the **active page**. Active page refers to the page that has experienced the last interaction like using a click or an assertion on a given page element for instance.
-
-**Note**: [Advanced options][1] are also available for assertions.
+Some assertions are performed on the **active page**. Active page refers to the page that has experienced the last interaction like using a **Click** or an **Assertion** on a given page element for instance.
 
 #### Test an element's content
 
 Selects an element and checks if it contains a specific value. For instance, you could select a `div` and check whether it contains the word "hello".
+
+#### Test an element's attribute
+
+Selects an element of your page and checks if one of its attributes matches the expected content. For instance, you could test that an `src` attribute value matches the path of the expected image.
 
 #### Test that some text is present on the active page
 
@@ -75,45 +89,51 @@ Asserts that an element (such as a specific `span`, `div`, `h`, `a`, etc.) is pr
 
 #### Test that an email was received
 
-Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages [email variables][4].
+Asserts that an email was sent and whether specific values (`string`, `number`, `regex`) are present within the email subject or body. This assertion leverages [email variables][4], you consequently first need to create an email variable to be able to use a `Test that an email was received` assertion.
 
 #### Test your UI with custom JavaScript
 
 Test a custom assertion using your own JavaScript scripts. By default the assertion is done on the active page. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function.
 
+**Note**: You can use [variables][5] as part of your JavaScript assertions.
+
 #### Test a downloaded file
 
 Perform verifications on files downloaded in previous steps. You can check that a file was correctly downloaded and assert on: the file name, size, and MD5 value.
 
+**Note**: You can find out more on how to test downloads on [this dedicated guide][6].
+
 ### Navigation
 
-The navigation step allows you to:
+{{< img src="synthetics/browser_tests/navigation_step.png" alt="Browser Test Navigation Step"  style="width:60%;">}}
 
 #### Refresh a page
 
 Refresh the current page of the scenario.
 
-#### Follow a specific link
-
-In the **Enter link URL** box, you must prepend your URLs with `http` or `https`.
-
 #### Go to an email and click on a link
 
-This step allows you to access your Synthetics mail inbox after creating an [email variable][4]. Choose the email you are interested in and click the link you want your browser test to click on.
+This step allows you to access unique Synthetics mail inboxes after creating an [email variable][4]. Choose the email you are interested in and click the link you want your browser test to click on. This step brings your test to the corresponding page and allows you to move on with the rest of your journey from that specific page.
+
+#### Follow a specific link
+
+Go to a specific page.
+
+**Note**: You must prepend your URLs with `http` or `https` in the **Enter link URL** box.
 
 ### Special Actions
 
-[The provided Datadog extension][3] records most steps. However, some steps—such as hover, press key, and scroll—are not recorded automatically. Explicitly add a step for them using the **Special Actions** menu located at the top left-hand corner of the recorder.
+The [Datadog browser test recorder extension][3] is able to record most steps associated to user journeys you might want to monitor. However, some steps—such as **Hover**, **Press Key**, and **Scroll**—are not recorded automatically. Explicitly add a step for them using the **Special Actions** menu located at the top left-hand corner of the recorder.
 
 #### Hover
 
-This browser test step isn’t added through an actual hovering mechanism (otherwise each element you are hovering would be added as a step) but using a dedicated step with a click.
+To avoid generating a step at each element hovering during recording, this browser test step is not added through an actual hovering mechanism but using a dedicated step with a click.
 
-After selecting the Hover step, click on the element you want to choose to create a new step.
+After selecting the **Hover** step, click on the element you want to choose to create a new step.
 
 #### Press key
 
-You can simulate users entering keystrokes using **Press Key** steps. The keys below can be recorded using the [Datadog extension][3]:
+You can simulate users entering keystrokes using **Press Key** steps. The keys below can be recorded using the [Datadog browser test recorder extension][3]:
 
 * Enter
 * Arrows (up, down, right, and left)
@@ -134,33 +154,35 @@ The below modifiers can also be applied to the inputted value:
 
 #### Scroll
 
-Your browser test automatically scrolls to the element it needs to interact with. Consequently, in most cases, you do not need to manually add a scroll step. The scroll step should only be added when needed to trigger an additional network request, such as in an infinite scroll.
+Browser tests automatically scroll to the element they need to interact with. Consequently, in most cases, you do not need to manually add a scroll step. The scroll step should only be added when needed to trigger an additional network request, such as in an infinite scroll.
 
 {{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="Browser Test Scroll Step"  style="width:60%;">}}
 
 You need to specify the number of pixels your browser test should scroll vertically or horizontally.
 
-By default, the scroll step scrolls on the whole page. If you need to scroll on a specific element (for instance a specific `<div>`), use the **Target Element** option to select the element you want your browser test to scroll on.
+By default, the **Scroll** step scrolls on the whole page. If you need to scroll on a specific element (for instance a specific `<div>`), use the **Target Element** option to select the element you want your browser test to scroll on.
 
 ### Variable
 
 #### Create a variable
 
-{{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Setup Variable" video="true"  width="60%">}}
+{{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables"  style="width:60%;">}}
 
 To create a variable, first give it a name then define its value from:
 
 * **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **JavaScript**: Generate custom variables using your own JavaScript scripts. By default the step is being performed at the page level. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function.
-* **A Global Variable**: Store and use global variables through [Synthetics Settings][5].
-* **An Email**: Generate a random Synthetics email address that can be used in your test steps to assert if an email was correctly sent or to perform steps over the sent email content (e.g. click a confirmation link).
+* **JavaScript**: Generate custom variables using your own JavaScript scripts. By default the step is being performed at the page level. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. 
+**Note**: You can use [variables][5] as part of your JavaScript assertions.
+* **A Global Variable**: Pick any global variables that was defined through [Synthetics Settings][7].
+* **An Email**: Generate a random Synthetics email address that can be used in your test steps to [assert if an email was correctly sent][8] or to [navigate to a link contained within the email][9] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
 * **A Pattern**:
 
-| Pattern                 | Description                                         |
-|-------------------------|-----------------------------------------------------|
-| `{{ numeric(n) }}`      | Generates a numeric string with n digits.           |
-| `{{ alphabetic(n) }}`   | Generates an alphabetic string with n letters.      |
-| `{{ alphanumeric(n) }}` | Generates an alphanumeric string with n characters. |
+| Pattern                 | Description                                                                                             |
+|-------------------------|---------------------------------------------------------------------------------------------------------|
+| `{{ numeric(n) }}`      | Generates a numeric string with n digits.                                                               |
+| `{{ alphabetic(n) }}`   | Generates an alphabetic string with n letters.                                                           |
+| `{{ alphanumeric(n) }}` | Generates an alphanumeric string with n characters.                                                     |
+| `{{ date(n, format) }}` | Generates a date in one of our accepted formats with a value of the date the test is initiated + n days. |
 
 #### Use the variable
 
@@ -168,19 +190,9 @@ Once created, use your variable to set an input text on a form or search bar. Us
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true"  width="80%" >}}
 
-You can also use your variables in some assertions, including:
+Alternatively, you can record a step inputting `{{ <YOUR_VARIABLE> }}` in the desired field:
 
-* Check an element’s content
-* Assert text is present on the page
-* Assert the page does not contain text
-* Check main page URL's content
-* Check that an email was received
-
-To use your variables in one of your assertions, hit *Use Variable* and select the variable you want to use:
-
-{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion"  style="width:40%;">}}
-
-Alternatively, you can record a step inputting `{{ <YOUR_VARIABLE> }}` in the desired field.
+{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion"  style="width:60%;">}}
 
 #### Use variables in JavaScript steps
 
@@ -194,7 +206,9 @@ By default, Datadog waits for a page to be fully loaded before performing a step
 
 ### Subtests
 
-You can run browser tests within other browser tests, up to two levels of nesting. [Advanced options][6] also allow you to choose where you want your subtest to be played.
+{{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest"  style="width:60%;">}}
+
+You can run browser tests within other browser tests in order to re-use existing workflows. This is particularly useful to reduce the number of points of maintenance among your test suite. Browser tests support up to two levels of nesting. [Advanced options][10] also allow you to choose the tab in which you want your subtest to be played.
 
 **Note**: If it does not make sense for you to run your subtest independently, you can pause it. It will continue to be called as part of your main test, but it will not be executed individually.
 
@@ -218,7 +232,7 @@ To define your HTTP request:
      * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 3. Click **Test URL** to test your request configuration. This results in a preview showing response data.
 
-{{< img src="synthetics/browser_tests/http_request.png" alt="Make HTTP Request"  style="width:80%;" >}}
+{{< img src="synthetics/browser_tests/http_request.png" alt="Make HTTP Request"  style="width:60%;" >}}
 
 #### Add assertions
 
@@ -228,8 +242,8 @@ Optionally, you can base your step success on assertions about the defined HTTP 
 |---------------|----------------------------|-------------------------------------------------------------------------------|
 | Status Code   | _Integer_                  | `is`, `is not`                                                                 |
 | Response time | _Integer (ms)_             | `lessThan`                                                                     |
-| Headers       | _String_ <br> _[Regex][7]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
-| Body          | _String_ <br> _[Regex][7]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
+| Headers       | _String_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
+| Body          | _String_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
 
 If you click on **Test URL**, then the basic assertions are automatically filled:
 
@@ -245,6 +259,10 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 [2]: /synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [4]: /synthetics/browser_tests/#create-a-variable
-[5]: /synthetics/settings/
-[6]: /synthetics/browser_tests/advanced_options/#subtests
-[7]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[5]: /synthetics/browser_tests/actions#use-variables-in-javascript-steps
+[6]: /synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
+[7]: /synthetics/settings/
+[8]: /synthetics/browser_tests/actions#test-that-an-email-was-received
+[9]: /synthetics/browser_tests/actions#go-to-an-email-and-click-on-a-link
+[10]: /synthetics/browser_tests/advanced_options/#subtests
+[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

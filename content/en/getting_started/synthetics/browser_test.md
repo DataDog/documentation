@@ -58,7 +58,7 @@ In this example, a browser test is configured to map a user's journey from addin
 
 Once the test configuration is saved, Datadog will prompt you to download the [Datadog test recorder][5] extension. Browser tests can be only recorded on **[Google Chrome][6]**. Download and install the extension.
 
-Once this extension is installed, begin recording your test steps by clicking the **Start Recording** button. Navigate your page in the iframe to the right of the recording options. When you select a div, image, or any area of your page, the steps are recorded and used to create steps within the browser test. Learn more about each action in the [browser test steps doc][7].
+Once this extension is installed, begin recording your test steps by clicking the **Start Recording** button. Navigate your page in the iframe to the right of the recording options. When you select a div, image, or any area of your page, the steps are recorded and used to create steps within the browser test. Learn more about each step in the [browser test steps doc][7].
 
 For example, to record test steps that map a user's journey from adding an item to cart to successful checkout:
 
