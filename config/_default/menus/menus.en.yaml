@@ -360,6 +360,10 @@ main:
     url: agent/troubleshooting/windows_containers
     weight: 909
     parent: agent_troubleshooting
+  - name: Agent Runtime Configuration
+    url: agent/troubleshooting/config
+    weight: 910
+    parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
