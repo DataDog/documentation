@@ -32,7 +32,7 @@ Choose from:
 
 [Datadog browser test recorder extension][3] automatically records text inputted in any fields of your website (forms, text areas, etc.):
 
-{{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="60%">}}
+{{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="80%">}}
 
 ### Select option
 
