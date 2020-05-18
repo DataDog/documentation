@@ -55,7 +55,7 @@ You can use the [global variables defined in the **settings**][3] in the URL as 
 
 You can customize alert conditions to define the circumstances under which you want a test to send a notification alert.
 
-* An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from any `<INSERT_NUMBER>` of `<NUMBER_OF_CHOSEN>` locations. This alerting rule allows you to specify for how much time and on how many locations a test needs to fail before triggering the notification using. 
+* An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from any `<INSERT_NUMBER>` of `<NUMBER_OF_CHOSEN>` locations. This alerting rule allows you to specify for how much time and on how many locations a test needs to fail before triggering the notification using.
 * Retry `<INSERT_NUMBER>` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][4].
 
 {{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule"  >}}
@@ -75,32 +75,32 @@ A notification is sent according to the set of alerting conditions. To configure
 
     Notification messages include the **message** defined in this section and information about the failing locations.
 
-2. Choose your [services][6] and/or team members to notify.
+2. Choose your [services][7] and/or team members to notify.
 3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 4. Click **Save Details and Record Test**.
 5. Record your test.
 
 ## Record test
 
-Tests can be only recorded from **[Google Chrome][7]**. To record your test, download the [Datadog Record Test extension for Google Chrome][8].
+Tests can be only recorded from **[Google Chrome][8]**. To record your test, download the [Datadog Record Test extension for Google Chrome][9].
 
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test"  >}}
 
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
 Hitting **Open in a pop-up** and **Shift** opens the pop up in incognito mode. This is useful to start recording your test from a fresh browser free from already logged in sessions, cookies from your existing browser, etc.
 2. Click on **Start recording** to begin recording your browser test.
-3. Your actions are recorded and used to create [steps][9] within your browser test scenario.
-4. Use the [steps][9] available in the upper left corner to enrich your scenario:
+3. Your actions are recorded and used to create [steps][10] within your browser test scenario.
+4. Use the [steps][10] available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps"  style="width:80%;">}}
 
-    **Note**: **Your last browser test step must be an [assertion][10]** to confirm the journey executed by the browser test resulted in the expected state. 
+    **Note**: **Your last browser test step must be an [assertion][11]** to confirm the journey executed by the browser test resulted in the expected state.
 5. Once you have finished your scenario, click on **Save and Launch Test**.
 
 ## Steps
 
-After saving a browser test, you can record [steps][9] which you can then edit or build on.
+After saving a browser test, you can record [steps][10] which you can then edit or build on.
 
-Steps are a series of actions that you can record for a browser test which you can then edit or build on. You can define the steps you want your browser test to go through either by directly recording them with the Datadog test recorder extension or by manually adding the step of interest. You can also configure certain steps with [advanced options][11].
+Steps are a series of actions that you can record for a browser test which you can then edit or build on. You can define the steps you want your browser test to go through either by directly recording them with the Datadog test recorder extension or by manually adding the step of interest. You can also configure certain steps with [advanced options][12].
 
 ## Further Reading
 
@@ -111,9 +111,10 @@ Steps are a series of actions that you can record for a browser test which you c
 [3]: /synthetics/settings/#global-variables
 [4]: /api/v1/synthetics/#create-or-clone-a-test
 [5]: http://daringfireball.net/projects/markdown/syntax
-[6]: /integrations/#cat-notification
-[7]: https://www.google.com/chrome
-[8]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[9]: /synthetics/browser_tests/actions/
-[10]: /synthetics/browser_tests/actions/#assertion
-[11]: /synthetics/browser_tests/advanced_options/
+[6]: /monitors/notifications/?tab=is_alert#integrations
+[7]: /integrations/#cat-notification
+[8]: https://www.google.com/chrome
+[9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[10]: /synthetics/browser_tests/actions/
+[11]: /synthetics/browser_tests/actions/#assertion
+[12]: /synthetics/browser_tests/advanced_options/
