@@ -5,7 +5,7 @@ components:
   links: {}
   parameters:
     ArchiveID:
-      description: The ID of the archive to get.
+      description: The ID of the archive.
       in: path
       name: archive_id
       required: true
@@ -158,6 +158,7 @@ components:
           type: string
         id:
           description: ID of the dashboard.
+          example: null
           type: string
         is_favorite:
           description: Whether or not the dashboard is in the favorites.
@@ -201,6 +202,7 @@ components:
       properties:
         dashboards:
           description: List of dashboards in the dashboard list.
+          example: null
           items:
             $ref: '#/components/schemas/DashboardListItem'
           type: array
@@ -349,6 +351,7 @@ components:
       properties:
         container:
           description: The container where the archive will be stored.
+          example: container-name
           type: string
         integration:
           $ref: '#/components/schemas/LogsArchiveIntegrationAzure'
@@ -360,10 +363,12 @@ components:
           type: string
         storage_account:
           description: The associated storage account.
+          example: account-name
           type: string
         type:
           default: azure
           description: The type of destination.
+          example: azure
           readOnly: true
           type: string
       required:
@@ -377,6 +382,7 @@ components:
       properties:
         bucket:
           description: The bucket where the archive will be stored.
+          example: bucket-name
           type: string
         integration:
           $ref: '#/components/schemas/LogsArchiveIntegrationGCS'
@@ -386,6 +392,7 @@ components:
         type:
           default: gcs
           description: The type of destination.
+          example: gcs
           readOnly: true
           type: string
       required:
@@ -398,6 +405,7 @@ components:
       properties:
         bucket:
           description: The bucket where the archive will be stored.
+          example: bucket-name
           type: string
         integration:
           $ref: '#/components/schemas/LogsArchiveIntegrationS3'
@@ -407,6 +415,7 @@ components:
         type:
           default: s3
           description: The type of destination.
+          example: s3
           readOnly: true
           type: string
       required:
@@ -419,9 +428,11 @@ components:
       properties:
         client_id:
           description: A client ID.
+          example: aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa
           type: string
         tenant_id:
           description: A tenant ID.
+          example: aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa
           type: string
       required:
       - tenant_id
@@ -432,9 +443,11 @@ components:
       properties:
         client_email:
           description: A client email.
+          example: youremail@example.com
           type: string
         project_id:
           description: A project ID.
+          example: project-id
           type: string
       required:
       - project_id
@@ -445,9 +458,11 @@ components:
       properties:
         account_id:
           description: The account ID for the integration.
+          example: '123456789012'
           type: string
         role_name:
           description: The path of the integration.
+          example: role-name
           type: string
       required:
       - role_name
@@ -487,6 +502,7 @@ components:
         type:
           default: orgs
           description: Organizations resource type.
+          example: orgs
           readOnly: true
           type: string
       required:
@@ -545,6 +561,7 @@ components:
         type:
           default: permissions
           description: Permissions resource type.
+          example: permissions
           readOnly: true
           type: string
       required:
@@ -660,10 +677,12 @@ components:
       properties:
         id:
           description: ID of the role.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
           type: string
         type:
           default: roles
-          description: Type of role.
+          description: The type of the resource. The value should always be roles.
+          example: roles
           type: string
       type: object
     RelationshipToRoles:
@@ -887,6 +906,7 @@ components:
         type:
           default: roles
           description: Roles type.
+          example: roles
           readOnly: true
           type: string
       required:
@@ -1053,27 +1073,35 @@ components:
       properties:
         cases:
           description: Cases for generating signals.
+          example: null
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
           type: array
         enabled:
           description: Whether the rule is enabled.
+          example: true
           type: boolean
         message:
           description: Message for generated signals.
+          example: null
           type: string
         name:
           description: The name of the rule
+          example: null
           type: string
         options:
           $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
         queries:
           description: Queries for selecting logs which are part of the rule.
+          example: null
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
           type: array
         tags:
           description: Tags for generated signals.
+          example:
+          - env:prod
+          - team:security
           items:
             description: Tag
             type: string
@@ -1901,6 +1929,120 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Not found
       summary: Update an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/archives/{archive_id}/readers:
+    delete:
+      description: Removes a role from an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))
+      operationId: RemoveRoleFromArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToRole'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Revoke role from an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Returns all read roles a given archive is restricted to.
+      operationId: ListArchiveReadRoles
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: List read roles for an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Adds a read role to an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))
+      operationId: AddReadRoleToArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToRole'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Grant role to an archive
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
