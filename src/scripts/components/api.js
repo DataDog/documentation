@@ -160,7 +160,9 @@ $('.hasChildData .js-collapse-trigger').click(function () {
 if (document.body.classList.contains('api')) {
     const apiSideNav = document.querySelector('.sidenav-api .sidenav-nav');
     const sideNavActiveMenuItem = apiSideNav.querySelector('li.active');
-    const distanceToTop = sideNavActiveMenuItem.offsetTop;
-
-    apiSideNav.scrollTop = distanceToTop - 100;
+    if (sideNavActiveMenuItem) {
+        const distanceToTop = sideNavActiveMenuItem.offsetTop;
+        apiSideNav.scrollTop = distanceToTop - 100;
+    }
+    
 }
