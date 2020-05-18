@@ -49,7 +49,7 @@ You can record the uploading of files as a step. To record an **Upload** step yo
 
 {{< img src="synthetics/browser_tests/upload_file_step.png" alt="Create an upload file step"  style="width:60%;">}}
 
-This is limited to 10 files, with a limit of 5MB each.
+This is limited to 10 files with a limit of 5MB each.
 
 ## Manually Added Steps
 
