@@ -155,3 +155,14 @@ $('.hasChildData .js-collapse-trigger').click(function () {
     $(this).closest('.row').siblings('.isNested').toggleClass('d-none');
     $(this).find('.toggle-arrow').toggleClass('expanded');
 });
+
+// Scroll the active top level nav item into view below Docs search input
+if (document.body.classList.contains('api')) {
+    const apiSideNav = document.querySelector('.sidenav-api .sidenav-nav');
+    const sideNavActiveMenuItem = apiSideNav.querySelector('li.active');
+    if (sideNavActiveMenuItem) {
+        const distanceToTop = sideNavActiveMenuItem.offsetTop;
+        apiSideNav.scrollTop = distanceToTop - 100;
+    }
+    
+}
