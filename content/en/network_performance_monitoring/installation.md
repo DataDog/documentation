@@ -37,7 +37,9 @@ The following provisioning systems are supported:
 
 ## Setup
 
-To enable network performance monitoring, configure it in your [Agent's main configuration file][6] based on your system setup:
+To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][6] based on your system setup. 
+
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, we recommend installing it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
 
 {{< tabs >}}
 {{% tab "Agent" %}}
