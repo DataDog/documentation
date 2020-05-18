@@ -114,7 +114,7 @@ With the following definitions:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Represent the count of errors for a given span.
   - *Metric type:* [COUNT][8]
-  - *Tags:* `env`, `service`, `resource`, all Datadog Agent tags, and [the second primary tag][4].
+  - *Tags:* `env`, `service`, `resource`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.errors.by_http_status`:
   - *Prerequisite:* This metric exists for any APM service.
@@ -128,7 +128,7 @@ With the following definitions:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Represent the count of hits for a given span.
   - *Metric type:* [COUNT][8]
-  - *Tags:* `env`, `service`, `resource`, all Datadog Agent tags, and [the second primary tag][4].
+  - *Tags:* `env`, `service`, `resource`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.hits.by_http_status`
   - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
