@@ -47,7 +47,7 @@ Define the configuration of your browser test.
 
 ### Use global variables
 
-You can use the [global variables defined in the `Settings`][3] in the URL, as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
+You can use the [global variables defined in the **settings**][3] in the URL, as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true"  width="80%" >}}
 
