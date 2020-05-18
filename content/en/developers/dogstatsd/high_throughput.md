@@ -137,16 +137,20 @@ public class DogStatsdClient
 {
     public static void Main()
     {
-      StatsdUDP udp = new StatsdUDP("127.0.0.1", 8125);
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
 
-      // Create a stats instance with "udp" as transport
-      Statsd s = new Statsd(udp);
-      s.Add<Statsd.Counting,int>("example_metric.count", 1, tags: new[] {"environment:dev"});
-      s.Add("event title", "content", priority: "low");
-      s.Add<Statsd.Counting,int>("example_metric.count", 1, tags: new[] {"environment:dev"});
+        using (var dogStatsdService = new DogStatsdService())
+        {
+            dogStatsdService.Configure(dogstatsdConfig);
 
-      // All metrics buffered before this call will be sent in one packet
-      s.Send();
+            // Counter and Gauge are sent in the same datagram
+            dogStatsdService.Counter("example_metric.count", 2, tags: new[] { "environment:dev" });
+            dogStatsdService.Gauge("example_metric.gauge", 100, tags: new[] { "environment:dev" });
+        }
     }
 }
 ```
