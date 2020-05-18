@@ -25,23 +25,23 @@ Private locations allow you to monitor internal-facing applications or any priva
 
 By default, every second, your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test depending on the frequency defined in the configuration of the test, and returns the test results to Datadog’s servers.
 
-Once you created a private location, configuring a [Synthetics API test][1] from a private location is completely identical to the one of Datadog managed locations.
+Once you created a private location, configuring a [Synthetics test][1] to run from a private location is completely identical to how you would assign tests to Datadog managed locations.
 
 ## Prerequisites
 
+### Datadog Private Locations Endpoints
+
 To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints.
 
-| Datadog site    | Endpoint                                                                                             |
-| --------------- | ---------------------------------------------------------------------------------------------------- |
-| Datadog US site | `intake.synthetics.datadoghq.com` for version 0.1.6+, `api.datadoghq.com/api/` for versions <0.1.5   |
-| Datadog EU site | `api.datadoghq.eu/api/`                                                                              |
+| Datadog site    | Port | Endpoint                                                                                             |
+| --------------- | ---- | ---------------------------------------------------------------------------------------------------- |
+| Datadog US site | 443  | `intake.synthetics.datadoghq.com` for version 0.1.6+, `api.datadoghq.com/api/` for versions <0.1.5   |
+| Datadog EU site | 443  | `api.datadoghq.eu/api/`                                                                               |
 
 Check if the endpoint corresponding to your Datadog `site` is available from the host running the worker:
 
 - For the Datadog US site: for version 0.1.6+ use `curl intake.synthetics.datadoghq.com` (`curl https://api.datadoghq.com` for versions <0.1.5).
 - For the Datadog EU site: `curl https://api.datadoghq.eu`.
-
-**Note**: You must allow outbound traffic on port `443` because test configurations are pulled and test results are pushed via HTTPS.
 
 ### Docker
 
@@ -81,19 +81,19 @@ The `synthetics-private-location-worker` comes with a number of options that can
 | `maxBodySizeIfProcessed` | Integer          | `5e+6`                                               | Maximum HTTP body size for the assertions, in bytes.                                                                                                               |
 | `regexTimeout`           | Integer          | `500`                                                | Maximum duration for regex execution, in milliseconds.                                                                                                        |
 
-**Note**: These options and more can be found by running the help command for the Datadog worker docker run --rm datadog/synthetics-private-location-worker --help.
+**Note**: These options and more can be found by running the help command for the Datadog worker:
+```shell
+docker run --rm datadog/synthetics-private-location-worker --help.
+```
 
 #### Proxy configuration
 
-**Note**: Proxy configurations require you to create a private location first. To create a private location with proxy configurations, please follow the [setup](#setup) steps **in their exact order**.
-
-If the traffic has to go through a proxy, you need to set the `proxy` option to your proxy URL in a curl-like way (`--proxy=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT> URL` for instance). If you use this, no additional configuration on your proxy should be needed.
+If traffic between your private location and Datadog has to go through a proxy, you need to set the `proxy` option to your proxy URL in a curl-like way (`--proxy=http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT> URL` for instance). If you use this, no additional configuration on your proxy should be needed.
 
 #### DNS configuration
 
-By default, the Datadog workers use `8.8.8.8` to perform DNS resolution. If it fails, it makes a second attempt to communicate with `1.1.1.1`. If you are testing an internal URL and need to use an internal DNS server you can set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config from the `etc/resolv.conf` file.
-
-**Note**: These options and more can be found by running the help command for the Datadog worker `docker run --rm datadog/synthetics-private-location-worker --help`.
+By default, the Datadog workers use `8.8.8.8` to perform DNS resolution. If it fails, it makes a second attempt to communicate with `1.1.1.1`.   
+If you are testing an internal URL and need to use an internal DNS server, you can set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config from the `etc/resolv.conf` file.
 
 #### Special-purpose IPv4 whitelisting
 
@@ -166,31 +166,33 @@ kubectl apply -f private-worker-pod.yaml
 
 {{< /tabs >}}
 
+**Note**: Make sure to specify the [configuration parameters][4] you need in your configuration file or at the command level before launching your worker.
+
 ### Run tests from your worker
 
 If your private location reports correctly to Datadog you should see the corresponding health status displayed if the private location polled your endpoint less than 5 seconds before loading the settings or create test pages:
 
-In your private locations list, in the Settings section:
+In your private locations list, in the **Settings** section:
 
 {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills"  style="width:90%;">}}
 
-In the form when creating a test, below the Private locations section:
+In the form when creating a test, below the **Private locations** section:
 
 {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list"  style="width:90%;">}}
 
-You should now be able to use your new private location as any other Datadog managed locations for your [Synthetics API tests][1].
+You should now be able to use your new private location as any other Datadog managed locations to run [Synthetics tests][1].
 
 ## Scale your private location
 
 To scale a private location:
 
 -   Change the `concurrency` parameter value to allow more parallel tests from one worker.
--   Add or remove workers on your host. It is possible to add several workers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots and when worker 1 is processing tests, worker 2 requests the following tests, etc.
+-   Add or remove workers associated to your private location. It is possible to run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
 ## Security
 
 The private location workers only pull data from Datadog servers. Datadog does not push data to the workers.
-The secret access key, used to authenticate your private location worker to the Datadog servers, uses an in-house protocol based on [AWS Signature Version 4 protocol][4].
+The secret access key, used to authenticate your private location worker to the Datadog servers, uses an in-house protocol based on [AWS Signature Version 4 protocol][5].
 
 The test configurations are encrypted asymmetrically. The private key is used to decrypt the test configurations pulled by the workers from Datadog servers. The public key is used to encrypt the test results that are sent from the workers to Datadog's servers.
 
@@ -198,7 +200,8 @@ The test configurations are encrypted asymmetrically. The private key is used to
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/api_tests/
+[1]: /synthetics/
 [2]: https://docs.docker.com/engine/install/
 [3]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+[4]: /synthetics/private_locations/?tab=docker#configure-your-private-location
+[5]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
