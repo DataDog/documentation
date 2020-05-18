@@ -17,7 +17,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#view-metric-metadata",
-      "redirectURL":"api/v1/get-metric-metadata"
+      "redirectURL":"api/v1/metrics/#get-metric-metadata"
    },
    {
       "anchor":"#metrics",
@@ -25,7 +25,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#edit-metric-metadata",
-      "redirectURL":"api/v1/edit-metric-metadata"
+      "redirectURL":"api/v1/metrics/#edit-metric-metadata"
    },
    {
       "anchor":"#mute-all-monitors",
@@ -413,7 +413,7 @@ const redirectUrls = [
    },
    {
       "anchor":"#add-aws-log-arn",
-      "redirectURL":"api/v1/ws-logs-integration/#add-aws-log-lambda-arn"
+      "redirectURL":"api/v1/aws-logs-integration/#add-aws-log-lambda-arn"
    },
    {
       "anchor":"#update-host-tags",
@@ -689,11 +689,11 @@ const redirectUrls = [
    },
    {
       "anchor":"#update-a-webhook-for-webhooks-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"/api/v1/webhooks-integration/#update-a-webhook"
    },
    {
       "anchor":"#delete-a-webhook-for-webhooks-integration",
-      "redirectURL":"api/v1/"
+      "redirectURL":"api/v1/webhooks-integration/#delete-a-webhook"
    },
    {
       "anchor":"#create-a-custom-variable-for-webhooks-integration",
