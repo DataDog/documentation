@@ -58,7 +58,9 @@ export function handleLanguageBasedRedirects() {
 		ex: /mybranch/myfeature/index.html => /mybranch/myfeature/ja/index.html
 	*/
 	if ( subdomain.includes('preview') || subdomain.includes('docs-staging') ) {
-		previewPath = uri.split('/').slice(0,3).join('/');
+		const commitRef = `/${document.documentElement.dataset.commitRef}`;
+
+		previewPath = commitRef || uri.split('/').slice(0,3).join('/');
 		uri = uri.replace(previewPath, '');
 		logMsg += `Preview path is ${ previewPath }, URI set to: ${ uri } `;
 	}
