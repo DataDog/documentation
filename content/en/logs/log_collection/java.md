@@ -483,7 +483,7 @@ Enrich your log events with contextual attributes.
 
 ### Using the Key/Value parser
 
-The [Key/Value parser][6] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
+The [Key/Value parser][5] extracts any `<KEY>=<VALUE>` pattern recognized in any log event.
 
 To enrich your log events in Java, you can re-write messages in your code and introduce `<KEY>=<VALUE>` sequences.
 
@@ -499,7 +499,7 @@ You can change it to:
 logger.info("Emitted quantity=1001 messages during the last durationInMs=93180 ms for customer scope=prod30");
 ```
 
-With the [Key/Value parser][6] enabled, **Datadog** automatically extracts each pair from your final JSON document:
+With the [Key/Value parser][5] enabled, **Datadog** automatically extracts each pair from your final JSON document:
 
 ```json
 {
@@ -544,5 +544,4 @@ To generate this final JSON document:
 [2]: /logs/processing/parsing/
 [3]: https://github.com/logstash/logstash-logback-encoder
 [4]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[5]: /logs/log_collection/#datadog-logs-endpoints
-[6]: /logs/processing/parsing/#key-value
+[5]: /logs/processing/parsing/#key-value

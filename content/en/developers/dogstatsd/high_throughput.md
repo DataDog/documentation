@@ -353,8 +353,8 @@ StatsDClient client = new NonBlockingStatsDClientBuilder()
 
 See [DataDog/java-dogstatsd-client][1] for more information about the client configuration.
 
-[1]: https://github.com/DataDog/java-dogstatsd-client
 
+[1]: https://github.com/DataDog/java-dogstatsd-client
 {{% /tab %}}
 {{% tab "PHP" %}}
 
@@ -404,8 +404,9 @@ $statsd = new BatchedDogStatsd(
   );
 ```
 
-See [DataDog/php-datadogstatsd](https://github.com/DataDog/php-datadogstatsd) for more information about the client configuration.
+See [DataDog/php-datadogstatsd][1] for more information about the client configuration.
 
+[1]: https://github.com/DataDog/php-datadogstatsd
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -438,8 +439,8 @@ dogstatsdConfig.Advanced.TelemetryFlushInterval = null;
 See [DataDog/dogstatsd-csharp-client][1] for more information about the client configuration.
 
 
-[1]: https://github.com/DataDog/dogstatsd-csharp-client
 
+[1]: https://github.com/DataDog/dogstatsd-csharp-client
 {{% /tab %}}
 {{< /tabs >}}
 
