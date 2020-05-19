@@ -272,10 +272,6 @@ components:
       description: Type of the alert graph widget.
       enum:
       - alert_graph
-<<<<<<< HEAD
-=======
-      example: alert_graph
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - ALERT_GRAPH
@@ -316,10 +312,6 @@ components:
       description: Type of the alert value widget.
       enum:
       - alert_value
-<<<<<<< HEAD
-=======
-      example: alert_value
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - ALERT_VALUE
@@ -537,10 +529,6 @@ components:
       description: Type of the change widget.
       enum:
       - change
-<<<<<<< HEAD
-=======
-      example: change
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - CHANGE
@@ -672,10 +660,6 @@ components:
       description: Type of the check status widget.
       enum:
       - check_status
-<<<<<<< HEAD
-=======
-      example: check_status
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - CHECK_STATUS
@@ -976,10 +960,6 @@ components:
       description: Type of the distribution widget.
       enum:
       - distribution
-<<<<<<< HEAD
-=======
-      example: distribution
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - DISTRIBUTION
@@ -1466,10 +1446,6 @@ components:
       description: Type of the event stream widget.
       enum:
       - event_stream
-<<<<<<< HEAD
-=======
-      example: event_stream
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - EVENT_STREAM
@@ -1506,10 +1482,6 @@ components:
       description: Type of the event timeline widget.
       enum:
       - event_timeline
-<<<<<<< HEAD
-=======
-      example: event_timeline
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - EVENT_TIMELINE
@@ -1541,10 +1513,6 @@ components:
       description: Type of the free text widget.
       enum:
       - free_text
-<<<<<<< HEAD
-=======
-      example: free_text
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - FREE_TEXT
@@ -1668,10 +1636,6 @@ components:
       description: Type of the group widget.
       enum:
       - group
-<<<<<<< HEAD
-=======
-      example: group
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - GROUP
@@ -1791,10 +1755,6 @@ components:
       description: Type of the heat map widget.
       enum:
       - heatmap
-<<<<<<< HEAD
-=======
-      example: heatmap
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - HEATMAP
@@ -2029,10 +1989,6 @@ components:
       description: Type of the host map widget.
       enum:
       - hostmap
-<<<<<<< HEAD
-=======
-      example: hostmap
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - HOSTMAP
@@ -2122,10 +2078,6 @@ components:
       description: Type of the iframe widget.
       enum:
       - iframe
-<<<<<<< HEAD
-=======
-      example: iframe
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - IFRAME
@@ -2313,10 +2265,6 @@ components:
       description: Type of the image widget.
       enum:
       - image
-<<<<<<< HEAD
-=======
-      example: image
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - IMAGE
@@ -2504,10 +2452,6 @@ components:
       description: Type of the log stream widget.
       enum:
       - log_stream
-<<<<<<< HEAD
-=======
-      example: log_stream
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - LOG_STREAM
@@ -2585,10 +2529,6 @@ components:
       description: Type of logs arithmetic processor.
       enum:
       - arithmetic-processor
-<<<<<<< HEAD
-=======
-      example: arithmetic-processor
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - ARITHMETIC_PROCESSOR
@@ -2651,10 +2591,6 @@ components:
       description: Type of logs attribute remapper.
       enum:
       - attribute-remapper
-<<<<<<< HEAD
-=======
-      example: attribute-remapper
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - ATTRIBUTE_REMAPPER
@@ -2710,10 +2646,6 @@ components:
       description: Type of logs category processor.
       enum:
       - category-processor
-<<<<<<< HEAD
-=======
-      example: category-processor
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - CATEGORY_PROCESSOR
@@ -2757,10 +2689,6 @@ components:
       description: Type of logs date remapper.
       enum:
       - date-remapper
-<<<<<<< HEAD
-=======
-      example: date-remapper
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - DATE_REMAPPER
@@ -2852,10 +2780,6 @@ components:
       description: Type of GeoIP parser.
       enum:
       - geo-ip-parser
-<<<<<<< HEAD
-=======
-      example: geo-ip-parser
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - GEO_IP_PARSER
@@ -2924,10 +2848,6 @@ components:
       description: Type of logs grok parser.
       enum:
       - grok-parser
-<<<<<<< HEAD
-=======
-      example: grok-parser
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - GROK_PARSER
@@ -3137,10 +3057,6 @@ components:
       description: Type of logs lookup processor.
       enum:
       - lookup-processor
-<<<<<<< HEAD
-=======
-      example: lookup-processor
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - LOOKUP_PROCESSOR
@@ -3186,10 +3102,6 @@ components:
       description: Type of logs message remapper.
       enum:
       - message-remapper
-<<<<<<< HEAD
-=======
-      example: message-remapper
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - MESSAGE_REMAPPER
@@ -3275,10 +3187,6 @@ components:
       description: Type of logs pipeline processor.
       enum:
       - pipeline
-<<<<<<< HEAD
-=======
-      example: pipeline
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - PIPELINE
@@ -3376,10 +3284,6 @@ components:
       description: Type of logs service remapper.
       enum:
       - service-remapper
-<<<<<<< HEAD
-=======
-      example: service-remapper
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - SERVICE_REMAPPER
@@ -3434,10 +3338,6 @@ components:
       description: Type of logs status remapper.
       enum:
       - status-remapper
-<<<<<<< HEAD
-=======
-      example: status-remapper
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - STATUS_REMAPPER
@@ -3488,10 +3388,6 @@ components:
       description: Type of logs string builder processor.
       enum:
       - string-builder-processor
-<<<<<<< HEAD
-=======
-      example: string-builder-processor
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - STRING_BUILDER_PROCESSOR
@@ -3528,10 +3424,6 @@ components:
       description: Type of logs trace remapper.
       enum:
       - trace-id-remapper
-<<<<<<< HEAD
-=======
-      example: trace-id-remapper
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - TRACE_ID_REMAPPER
@@ -3579,10 +3471,6 @@ components:
       description: Type of logs URL parser.
       enum:
       - url-parser
-<<<<<<< HEAD
-=======
-      example: url-parser
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - URL_PARSER
@@ -3631,10 +3519,6 @@ components:
       description: Type of logs User-Agent parser.
       enum:
       - user-agent-parser
-<<<<<<< HEAD
-=======
-      example: user-agent-parser
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - USER_AGENT_PARSER
@@ -4477,10 +4361,6 @@ components:
       description: Type of the monitor summary widget.
       enum:
       - manage_status
-<<<<<<< HEAD
-=======
-      example: manage_status
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - MANAGE_STATUS
@@ -4647,10 +4527,6 @@ components:
       description: Type of the note widget.
       enum:
       - note
-<<<<<<< HEAD
-=======
-      example: note
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - NOTE
@@ -4947,10 +4823,6 @@ components:
       description: Type of the query value widget.
       enum:
       - query_value
-<<<<<<< HEAD
-=======
-      example: query_value
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - QUERY_VALUE
@@ -5447,10 +5319,6 @@ components:
       description: Type of the SLO widget.
       enum:
       - slo
-<<<<<<< HEAD
-=======
-      example: slo
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - SLO
@@ -5522,10 +5390,6 @@ components:
       description: Type of the scatter plot widget.
       enum:
       - scatterplot
-<<<<<<< HEAD
-=======
-      example: scatterplot
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - SCATTERPLOT
@@ -5927,10 +5791,6 @@ components:
       description: Type of the service map widget.
       enum:
       - servicemap
-<<<<<<< HEAD
-=======
-      example: servicemap
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - SERVICEMAP
@@ -5995,10 +5855,6 @@ components:
       description: Type of the service summary widget.
       enum:
       - trace_service
-<<<<<<< HEAD
-=======
-      example: trace_service
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - TRACE_SERVICE
@@ -7306,10 +7162,6 @@ components:
       description: Type of the table widget.
       enum:
       - query_table
-<<<<<<< HEAD
-=======
-      example: query_table
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - QUERY_TABLE
@@ -7414,10 +7266,6 @@ components:
       description: Type of the timeseries widget.
       enum:
       - timeseries
-<<<<<<< HEAD
-=======
-      example: timeseries
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - TIMESERIES
@@ -7492,10 +7340,6 @@ components:
       description: Type of the top list widget.
       enum:
       - toplist
-<<<<<<< HEAD
-=======
-      example: toplist
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - TOPLIST

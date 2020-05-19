@@ -539,10 +539,6 @@ components:
       description: Organizations resource type.
       enum:
       - orgs
-<<<<<<< HEAD
-=======
-      example: orgs
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - ORGS
@@ -611,10 +607,6 @@ components:
       description: Permissions resource type.
       enum:
       - permissions
-<<<<<<< HEAD
-=======
-      example: permissions
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - PERMISSIONS
@@ -1039,10 +1031,6 @@ components:
       description: Roles type.
       enum:
       - roles
-<<<<<<< HEAD
-=======
-      example: roles
->>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - ROLES
