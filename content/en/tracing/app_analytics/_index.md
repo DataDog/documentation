@@ -233,7 +233,7 @@ Or in code:
 Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 ```
 
-Integration names can be found on the [integrations table][1]. **Note:** On Linux, the integration names are case sensitive.
+Integration names can be found on the [integrations table][1]. **Note:** On Linux, the names of environment variables are case-sensitive.
 
 [1]: /tracing/setup/dotnet/#integrations
 {{% /tab %}}
