@@ -46,7 +46,7 @@ Whether your apps are built as a monolith, microservices, or serverless function
 [Instrument Your Application][2]: Add a tracing library to your application to start sending traces to Datadog for monitoring.
 
 {{< partial name="apm/apm-languages.html" >}}
-
+<br>
 ### 3. View your data in the APM UI
 
 [Use the APM UI][3]: Once you’re sending traces to Datadog, you can begin to visualize your APM Data with out of the box dashboards, service pages, and [Live Tail][4]. Monitor on key metrics with end-to-end service views to follow individual user requests from browser to proxies, microservices, queues, caches, serverless functions and databases. Use [Live Tail][4] to search by any tag on 100% of your traces live with no sampling.
