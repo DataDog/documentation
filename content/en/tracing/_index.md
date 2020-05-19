@@ -37,19 +37,19 @@ Datadog collects traces across applications, browser sessions, mobile pageviews,
 
 Whether your apps are built as a monolith, microservices, or serverless functions, getting started takes just minutes. To quickly get started with Datadog APM, follow these steps:
 
-### 1. Enable Trace Collection
+### 1. Configure the Datadog Agent
 
-[Enable Trace Collection][1]:  Install and configure Datadog APM for  AWS, GCP, Azure, Kubernetes, ECS, PCF, Azure, Heroku, on-prem and more.
+[Enable Trace Collection][1]:  Install and configure Datadog APM for AWS, GCP, Azure, Kubernetes, ECS, PCF, Azure, Heroku, on-prem and more.
 
 ### 2. Instrument Your Application
 
-[Instrument Your Application][2]: Add a tracing library to your application to start  sending traces to Datadog for monitoring.
+[Instrument Your Application][2]: Add a tracing library to your application to start sending traces to Datadog for monitoring.
 
 {{< partial name="apm/apm-languages.html" >}}
 
 ### 3. View your data in the APM UI
 
-[Use the APM UI][3]: Once you’re sending traces to Datadog, you can begin to visualize your APM Data with out of the box dashboards and the [Live Tail][4]. Monitor on key metrics with end-to-end service views to follow individual user requests from browser to proxies, microservices, queues, caches, serverless functions and databases. Use the [Live Tail][4] to search by any tag on 100% of your traces live with no sampling.
+[Use the APM UI][3]: Once you’re sending traces to Datadog, you can begin to visualize your APM Data with out of the box dashboards, service pages, and [Live Tail][4]. Monitor on key metrics with end-to-end service views to follow individual user requests from browser to proxies, microservices, queues, caches, serverless functions and databases. Use [Live Tail][4] to search by any tag on 100% of your traces live with no sampling.
 
 {{< img src="tracing/index/apm-metric-query-loop.mp4" video="true" alt="Use the APM UI"  style="width:50%;">}}
 
@@ -59,7 +59,7 @@ Once you are sending traces to Datadog, you can optionally enable other APM func
 
 ### Set up App Analytics
 
-[App Analytics][5]: Once you’re sending traces to Datadog, you can query and monitor your data with business or infrastructure tags such as merchant, customer, cart value, availability zone, datacenter, user or domain.
+[App Analytics][5]: Query and monitor your data with business or infrastructure tags such as merchant, customer, cart value, availability zone, datacenter, user or domain.
 
 {{< img src="tracing/index/AppAnalytics.gif" alt="App Analytics"  style="width:50%;">}}
 
@@ -71,11 +71,11 @@ Once you are sending traces to Datadog, you can optionally enable other APM func
 
 ### Add Profiling
 
-[Profiling][7]: Profiles reveal which or lines of code consume the most resources, such as CPU and memory. By optimizing these, you can reduce both your end-user latency and cloud provider bill.
+[Profiling][7]: Datadog's lightweight, always-on in production profiling reveals which lines of code are consuming the most resources such as CPU, memory, or I/O.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:50%;">}}
 
-### Integrate OpenTracing
+### Integrate with OpenTracing
 
 [OpenTracing][8]: Integrate your instrumentation seamlessly between the Opentracing standard and Datadog APM tracers for Java, .NET, Node, Python, PHP, Ruby, Go and C++
 
