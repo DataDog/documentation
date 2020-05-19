@@ -317,7 +317,7 @@ To remove the PHP tracer:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/docs
+[1]: https://app.datadoghq.com/apm/install
 [2]: /tracing/visualization/
 [3]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
 [4]: /tracing/send_traces/

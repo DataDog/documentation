@@ -350,7 +350,7 @@ The following table lists configuration variables that are available only when u
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/apm/docs
+[1]: https://app.datadoghq.com/apm/install
 [2]: /tracing/send_traces/
 [3]: /tracing/setup/dotnet-framework/
 [4]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core

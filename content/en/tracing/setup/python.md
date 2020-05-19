@@ -151,7 +151,7 @@ The `ddtrace` library includes support for the following libraries:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/docs
+[1]: https://app.datadoghq.com/apm/install
 [2]: /tracing/send_traces/
 [3]: /tracing/setup/docker/
 [4]: /agent/kubernetes/apm/

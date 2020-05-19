@@ -209,7 +209,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/docs
+[1]: https://app.datadoghq.com/apm/install
 [2]: /tracing/visualization/
 [3]: https://datadog.github.io/dd-trace-js
 [4]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development

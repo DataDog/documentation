@@ -183,7 +183,7 @@ Configure your application level tracers to submit traces to a custom Agent host
 
 [1]: /tracing/setup/envoy/
 [2]: /tracing/setup/nginx/
-[3]: https://app.datadoghq.com/apm/docs
+[3]: https://app.datadoghq.com/apm/install
 [4]: /tracing/send_traces/
 [5]: https://github.com/opentracing/opentracing-cpp
 [6]: https://github.com/opentracing/opentracing-cpp/#cc98

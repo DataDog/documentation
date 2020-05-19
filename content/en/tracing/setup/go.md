@@ -225,7 +225,7 @@ func main() {
 [2]: /tracing/visualization/
 [3]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[5]: https://app.datadoghq.com/apm/docs
+[5]: https://app.datadoghq.com/apm/install
 [6]: /tracing/send_traces/
 [7]: /tracing/setup/docker/
 [8]: /agent/kubernetes/apm/
