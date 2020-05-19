@@ -16,9 +16,9 @@ further_reading:
 - link: "/tracing/guide/metrics_namespace/"
   tag: "Documentation"
   text: "Learn about trace metrics and their tags"
-  - link: "/tracing/visualization/"
-    tag: "Documentation"
-    text: "Learn to use the APM UI"
+- link: "/tracing/visualization/"
+  tag: "Documentation"
+  text: "Learn to use the APM UI"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
