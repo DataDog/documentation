@@ -218,12 +218,6 @@ env[DD_AGENT_HOST] = $FROM_HOST_ENV
 env[DD_TRACE_DEBUG] = true
 ```
 
-Alternatively you can use [`fastcgi_param`][14] from the `http`, `server`, or `location` contexts.
-
-```text
-fastcgi_param DD_TRACE_DEBUG true;
-```
-
 ### PHP CLI server
 
 Set in the command line to start the server.
@@ -336,4 +330,3 @@ To remove the PHP tracer:
 [11]: /tracing/setup/php/#environment-variable-configuration
 [12]: /help
 [13]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[14]: http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_param

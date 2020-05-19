@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-Browser tests are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These checks verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
+Browser tests are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, and from multiple devices. These tests verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
 
 ## Configuration
 
@@ -41,25 +41,30 @@ Define the configuration of your browser test.
 
 2. **Name**: The name of your browser test.
 3. **Select your tags**: The tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>` on the Synthetics page.
-4. **Devices**: The devices to run your check on. Available devices are `Laptop Large`, `Tablet`, and `Mobile Small`.
-5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. The full list is retrievable through the [Datadog API][2]. You can also set up a [Private Location][3] to run a Synthetics Browser test on a private URL not accessible from the public internet.
-6. **How often should Datadog run the test?** Intervals are available between every 15 minutes to once per week. [Contact support][4] to enable additional frequencies for your test.
+4. **Devices**: The devices to run your test on. Available devices are `Laptop Large`, `Tablet`, and `Mobile Small`.
+5. **Locations**: The Datadog managed locations to run the test from. Many AWS locations from around the world are available. You can also set up a [Private Location][2] to run a Synthetics Browser test on a private URL not accessible from the public internet.
+6. **How often should Datadog run the test?** Intervals are available between every 5 minutes to once per week.
 
 ### Use global variables
 
-You can use the [global variables defined in the `Settings`][5] in the URL, as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
+You can use the [global variables defined in the **settings**][3] in the URL as well as in the Advanced Options of your browser tests. To display your list of variables, type `{{` in your desired field.
 
 {{< img src="synthetics/browser_tests/using_variables_browser.mp4" alt="Using Variables in Browser Tests" video="true"  width="80%" >}}
 
-### Alert conditions
+### Define alert conditions
 
-An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from any `<INSERT_NUMBER>` of `<NUMBER_OF_CHOSEN>` locations.
+You can customize alert conditions to define the circumstances under which you want a test to send a notification alert.
+
+* An alert is triggered if any assertion fails for `<INSERT_NUMBER>` minutes from any `<INSERT_NUMBER>` of `<NUMBER_OF_CHOSEN>` locations. This alerting rule allows you to specify for how much time and on how many locations a test needs to fail before triggering the notification using.
+* Retry `<INSERT_NUMBER>` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured via the [API][4].
+
+{{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule"  >}}
 
 ### Notify your team
 
 A notification is sent according to the set of alerting conditions. To configure your notifications:
 
-1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
+1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -84,29 +89,32 @@ Tests can be only recorded from **[Google Chrome][8]**. To record your test, dow
 1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window in order to avoid sizing issues in the displayed window within Datadog's interface.
 Hitting **Open in a pop-up** and **Shift** opens the pop up in incognito mode. This is useful to start recording your test from a fresh browser free from already logged in sessions, cookies from your existing browser, etc.
 2. Click on **Start recording** to begin recording your browser test.
-3. Your actions are recorded and used to create steps within your browser test scenario.
-4. Use the actions available in the upper left corner to enrich your scenario:
+3. Your actions are recorded and used to create [steps][10] within your browser test scenario.
+4. Use the [steps][10] available in the upper left corner to enrich your scenario:
     {{< img src="synthetics/browser_tests/browser_test_step.png" alt="Browser Test steps"  style="width:80%;">}}
 
-    **Note**: **Your last browser test step must be an Assertion**, otherwise there is nothing to check.
+    **Note**: **Your last browser test step must be an [assertion][11]** to confirm the journey executed by the browser test resulted in the expected state.
 5. Once you have finished your scenario, click on **Save and Launch Test**.
 
-## Actions
+## Steps
 
-After saving a browser test, you can record [Actions][10] as a series of steps, which you can then edit or build on. You can also configure actions with [advanced options][11].
+After saving a browser test, you can record [steps][10] which you can then edit or build on.
+
+Steps are a series of actions that you can record for a browser test which you can then edit or build on. You can define the steps you want your browser test to go through either by directly recording them with the Datadog test recorder extension or by manually adding the step of interest. You can also configure certain steps with [advanced options][12].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/identify_synthetics_bots/
-[2]: /api/#get-available-locations
-[3]: /synthetics/private_locations/
-[4]: /help/
-[5]: /synthetics/settings/#global-variables
-[6]: http://daringfireball.net/projects/markdown/syntax
+[2]: /synthetics/private_locations/
+[3]: /synthetics/settings/#global-variables
+[4]: /api/v1/synthetics/#create-or-clone-a-test
+[5]: http://daringfireball.net/projects/markdown/syntax
+[6]: /monitors/notifications/?tab=is_alert#integrations
 [7]: /integrations/#cat-notification
 [8]: https://www.google.com/chrome
 [9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [10]: /synthetics/browser_tests/actions/
-[11]: /synthetics/browser_tests/advanced_options/
+[11]: /synthetics/browser_tests/actions/#assertion
+[12]: /synthetics/browser_tests/advanced_options/
