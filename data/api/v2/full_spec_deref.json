@@ -2952,7 +2952,6 @@
           "type": {
             "default": "permissions",
             "description": "Permissions resource type.",
-<<<<<<< HEAD
             "enum": [
               "permissions"
             ],
@@ -2960,11 +2959,6 @@
             "x-enum-varnames": [
               "PERMISSIONS"
             ]
-=======
-            "example": "permissions",
-            "readOnly": true,
-            "type": "string"
->>>>>>> master
           }
         },
         "required": [
@@ -3057,7 +3051,6 @@
                 "type": {
                   "default": "permissions",
                   "description": "Permissions resource type.",
-<<<<<<< HEAD
                   "enum": [
                     "permissions"
                   ],
@@ -3065,11 +3058,6 @@
                   "x-enum-varnames": [
                     "PERMISSIONS"
                   ]
-=======
-                  "example": "permissions",
-                  "readOnly": true,
-                  "type": "string"
->>>>>>> master
                 }
               },
               "required": [
@@ -4208,7 +4196,6 @@
           "type": {
             "default": "roles",
             "description": "Roles type.",
-<<<<<<< HEAD
             "enum": [
               "roles"
             ],
@@ -4216,11 +4203,6 @@
             "x-enum-varnames": [
               "ROLES"
             ]
-=======
-            "example": "roles",
-            "readOnly": true,
-            "type": "string"
->>>>>>> master
           }
         },
         "required": [
@@ -4672,7 +4654,6 @@
               "type": {
                 "default": "roles",
                 "description": "Roles type.",
-<<<<<<< HEAD
                 "enum": [
                   "roles"
                 ],
@@ -4680,11 +4661,6 @@
                 "x-enum-varnames": [
                   "ROLES"
                 ]
-=======
-                "example": "roles",
-                "readOnly": true,
-                "type": "string"
->>>>>>> master
               }
             },
             "required": [
@@ -5066,7 +5042,6 @@
                 "type": {
                   "default": "roles",
                   "description": "Roles type.",
-<<<<<<< HEAD
                   "enum": [
                     "roles"
                   ],
@@ -5074,11 +5049,6 @@
                   "x-enum-varnames": [
                     "ROLES"
                   ]
-=======
-                  "example": "roles",
-                  "readOnly": true,
-                  "type": "string"
->>>>>>> master
                 }
               },
               "required": [
@@ -7234,7 +7204,6 @@
                     "type": {
                       "default": "orgs",
                       "description": "Organizations resource type.",
-<<<<<<< HEAD
                       "enum": [
                         "orgs"
                       ],
@@ -7242,11 +7211,6 @@
                       "x-enum-varnames": [
                         "ORGS"
                       ]
-=======
-                      "example": "orgs",
-                      "readOnly": true,
-                      "type": "string"
->>>>>>> master
                     }
                   },
                   "required": [
@@ -7299,7 +7263,6 @@
                     "type": {
                       "default": "permissions",
                       "description": "Permissions resource type.",
-<<<<<<< HEAD
                       "enum": [
                         "permissions"
                       ],
@@ -7307,11 +7270,6 @@
                       "x-enum-varnames": [
                         "PERMISSIONS"
                       ]
-=======
-                      "example": "permissions",
-                      "readOnly": true,
-                      "type": "string"
->>>>>>> master
                     }
                   },
                   "required": [
@@ -7479,7 +7437,6 @@
                     "type": {
                       "default": "roles",
                       "description": "Roles type.",
-<<<<<<< HEAD
                       "enum": [
                         "roles"
                       ],
@@ -7487,11 +7444,6 @@
                       "x-enum-varnames": [
                         "ROLES"
                       ]
-=======
-                      "example": "roles",
-                      "readOnly": true,
-                      "type": "string"
->>>>>>> master
                     }
                   },
                   "required": [
@@ -7560,7 +7512,6 @@
               "type": {
                 "default": "orgs",
                 "description": "Organizations resource type.",
-<<<<<<< HEAD
                 "enum": [
                   "orgs"
                 ],
@@ -7568,11 +7519,6 @@
                 "x-enum-varnames": [
                   "ORGS"
                 ]
-=======
-                "example": "orgs",
-                "readOnly": true,
-                "type": "string"
->>>>>>> master
               }
             },
             "required": [
@@ -7625,7 +7571,6 @@
               "type": {
                 "default": "permissions",
                 "description": "Permissions resource type.",
-<<<<<<< HEAD
                 "enum": [
                   "permissions"
                 ],
@@ -7633,11 +7578,6 @@
                 "x-enum-varnames": [
                   "PERMISSIONS"
                 ]
-=======
-                "example": "permissions",
-                "readOnly": true,
-                "type": "string"
->>>>>>> master
               }
             },
             "required": [
@@ -7805,7 +7745,6 @@
               "type": {
                 "default": "roles",
                 "description": "Roles type.",
-<<<<<<< HEAD
                 "enum": [
                   "roles"
                 ],
@@ -7813,11 +7752,6 @@
                 "x-enum-varnames": [
                   "ROLES"
                 ]
-=======
-                "example": "roles",
-                "readOnly": true,
-                "type": "string"
->>>>>>> master
               }
             },
             "required": [
@@ -8300,7 +8234,6 @@
                     "type": {
                       "default": "orgs",
                       "description": "Organizations resource type.",
-<<<<<<< HEAD
                       "enum": [
                         "orgs"
                       ],
@@ -8308,11 +8241,6 @@
                       "x-enum-varnames": [
                         "ORGS"
                       ]
-=======
-                      "example": "orgs",
-                      "readOnly": true,
-                      "type": "string"
->>>>>>> master
                     }
                   },
                   "required": [
@@ -8365,7 +8293,6 @@
                     "type": {
                       "default": "permissions",
                       "description": "Permissions resource type.",
-<<<<<<< HEAD
                       "enum": [
                         "permissions"
                       ],
@@ -8373,11 +8300,6 @@
                       "x-enum-varnames": [
                         "PERMISSIONS"
                       ]
-=======
-                      "example": "permissions",
-                      "readOnly": true,
-                      "type": "string"
->>>>>>> master
                     }
                   },
                   "required": [
@@ -8545,7 +8467,6 @@
                     "type": {
                       "default": "roles",
                       "description": "Roles type.",
-<<<<<<< HEAD
                       "enum": [
                         "roles"
                       ],
@@ -8553,11 +8474,6 @@
                       "x-enum-varnames": [
                         "ROLES"
                       ]
-=======
-                      "example": "roles",
-                      "readOnly": true,
-                      "type": "string"
->>>>>>> master
                     }
                   },
                   "required": [
@@ -12594,7 +12510,6 @@
                           "type": {
                             "default": "roles",
                             "description": "Roles type.",
-<<<<<<< HEAD
                             "enum": [
                               "roles"
                             ],
@@ -12603,11 +12518,6 @@
                             "x-enum-varnames": [
                               "ROLES"
                             ]
-=======
-                            "example": "roles",
-                            "readOnly": true,
-                            "type": "string"
->>>>>>> master
                           }
                         },
                         "required": [
@@ -14394,7 +14304,6 @@
                           "type": {
                             "default": "permissions",
                             "description": "Permissions resource type.",
-<<<<<<< HEAD
                             "enum": [
                               "permissions"
                             ],
@@ -14402,11 +14311,6 @@
                             "x-enum-varnames": [
                               "PERMISSIONS"
                             ]
-=======
-                            "example": "permissions",
-                            "readOnly": true,
-                            "type": "string"
->>>>>>> master
                           }
                         },
                         "required": [
@@ -14713,7 +14617,6 @@
                           "type": {
                             "default": "roles",
                             "description": "Roles type.",
-<<<<<<< HEAD
                             "enum": [
                               "roles"
                             ],
@@ -14721,11 +14624,6 @@
                             "x-enum-varnames": [
                               "ROLES"
                             ]
-=======
-                            "example": "roles",
-                            "readOnly": true,
-                            "type": "string"
->>>>>>> master
                           }
                         },
                         "required": [
@@ -15067,7 +14965,6 @@
                         "type": {
                           "default": "roles",
                           "description": "Roles type.",
-<<<<<<< HEAD
                           "enum": [
                             "roles"
                           ],
@@ -15075,11 +14972,6 @@
                           "x-enum-varnames": [
                             "ROLES"
                           ]
-=======
-                          "example": "roles",
-                          "readOnly": true,
-                          "type": "string"
->>>>>>> master
                         }
                       },
                       "required": [
@@ -15409,7 +15301,6 @@
                         "type": {
                           "default": "roles",
                           "description": "Roles type.",
-<<<<<<< HEAD
                           "enum": [
                             "roles"
                           ],
@@ -15417,11 +15308,6 @@
                           "x-enum-varnames": [
                             "ROLES"
                           ]
-=======
-                          "example": "roles",
-                          "readOnly": true,
-                          "type": "string"
->>>>>>> master
                         }
                       },
                       "required": [
@@ -15717,7 +15603,6 @@
                         "type": {
                           "default": "roles",
                           "description": "Roles type.",
-<<<<<<< HEAD
                           "enum": [
                             "roles"
                           ],
@@ -15725,11 +15610,6 @@
                           "x-enum-varnames": [
                             "ROLES"
                           ]
-=======
-                          "example": "roles",
-                          "readOnly": true,
-                          "type": "string"
->>>>>>> master
                         }
                       },
                       "required": [
@@ -15954,7 +15834,6 @@
                           "type": {
                             "default": "permissions",
                             "description": "Permissions resource type.",
-<<<<<<< HEAD
                             "enum": [
                               "permissions"
                             ],
@@ -15962,11 +15841,6 @@
                             "x-enum-varnames": [
                               "PERMISSIONS"
                             ]
-=======
-                            "example": "permissions",
-                            "readOnly": true,
-                            "type": "string"
->>>>>>> master
                           }
                         },
                         "required": [
@@ -16133,7 +16007,6 @@
                           "type": {
                             "default": "permissions",
                             "description": "Permissions resource type.",
-<<<<<<< HEAD
                             "enum": [
                               "permissions"
                             ],
@@ -16141,11 +16014,6 @@
                             "x-enum-varnames": [
                               "PERMISSIONS"
                             ]
-=======
-                            "example": "permissions",
-                            "readOnly": true,
-                            "type": "string"
->>>>>>> master
                           }
                         },
                         "required": [
@@ -16320,7 +16188,6 @@
                           "type": {
                             "default": "permissions",
                             "description": "Permissions resource type.",
-<<<<<<< HEAD
                             "enum": [
                               "permissions"
                             ],
@@ -16328,11 +16195,6 @@
                             "x-enum-varnames": [
                               "PERMISSIONS"
                             ]
-=======
-                            "example": "permissions",
-                            "readOnly": true,
-                            "type": "string"
->>>>>>> master
                           }
                         },
                         "required": [
@@ -16727,7 +16589,6 @@
                               "type": {
                                 "default": "orgs",
                                 "description": "Organizations resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "orgs"
                                 ],
@@ -16735,11 +16596,6 @@
                                 "x-enum-varnames": [
                                   "ORGS"
                                 ]
-=======
-                                "example": "orgs",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -16792,7 +16648,6 @@
                               "type": {
                                 "default": "permissions",
                                 "description": "Permissions resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "permissions"
                                 ],
@@ -16800,11 +16655,6 @@
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
                                 ]
-=======
-                                "example": "permissions",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -16972,7 +16822,6 @@
                               "type": {
                                 "default": "roles",
                                 "description": "Roles type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "roles"
                                 ],
@@ -16980,11 +16829,6 @@
                                 "x-enum-varnames": [
                                   "ROLES"
                                 ]
-=======
-                                "example": "roles",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -17415,7 +17259,6 @@
                               "type": {
                                 "default": "orgs",
                                 "description": "Organizations resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "orgs"
                                 ],
@@ -17423,11 +17266,6 @@
                                 "x-enum-varnames": [
                                   "ORGS"
                                 ]
-=======
-                                "example": "orgs",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -17480,7 +17318,6 @@
                               "type": {
                                 "default": "permissions",
                                 "description": "Permissions resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "permissions"
                                 ],
@@ -17488,11 +17325,6 @@
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
                                 ]
-=======
-                                "example": "permissions",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -17660,7 +17492,6 @@
                               "type": {
                                 "default": "roles",
                                 "description": "Roles type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "roles"
                                 ],
@@ -17668,11 +17499,6 @@
                                 "x-enum-varnames": [
                                   "ROLES"
                                 ]
-=======
-                                "example": "roles",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -18064,7 +17890,6 @@
                               "type": {
                                 "default": "orgs",
                                 "description": "Organizations resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "orgs"
                                 ],
@@ -18072,11 +17897,6 @@
                                 "x-enum-varnames": [
                                   "ORGS"
                                 ]
-=======
-                                "example": "orgs",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -18129,7 +17949,6 @@
                               "type": {
                                 "default": "permissions",
                                 "description": "Permissions resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "permissions"
                                 ],
@@ -18137,11 +17956,6 @@
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
                                 ]
-=======
-                                "example": "permissions",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -18309,7 +18123,6 @@
                               "type": {
                                 "default": "roles",
                                 "description": "Roles type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "roles"
                                 ],
@@ -18317,11 +18130,6 @@
                                 "x-enum-varnames": [
                                   "ROLES"
                                 ]
-=======
-                                "example": "roles",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -20761,7 +20569,6 @@
                               "type": {
                                 "default": "orgs",
                                 "description": "Organizations resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "orgs"
                                 ],
@@ -20769,11 +20576,6 @@
                                 "x-enum-varnames": [
                                   "ORGS"
                                 ]
-=======
-                                "example": "orgs",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -20826,7 +20628,6 @@
                               "type": {
                                 "default": "permissions",
                                 "description": "Permissions resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "permissions"
                                 ],
@@ -20834,11 +20635,6 @@
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
                                 ]
-=======
-                                "example": "permissions",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -21006,7 +20802,6 @@
                               "type": {
                                 "default": "roles",
                                 "description": "Roles type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "roles"
                                 ],
@@ -21014,11 +20809,6 @@
                                 "x-enum-varnames": [
                                   "ROLES"
                                 ]
-=======
-                                "example": "roles",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -21453,7 +21243,6 @@
                               "type": {
                                 "default": "orgs",
                                 "description": "Organizations resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "orgs"
                                 ],
@@ -21461,11 +21250,6 @@
                                 "x-enum-varnames": [
                                   "ORGS"
                                 ]
-=======
-                                "example": "orgs",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -21518,7 +21302,6 @@
                               "type": {
                                 "default": "permissions",
                                 "description": "Permissions resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "permissions"
                                 ],
@@ -21526,11 +21309,6 @@
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
                                 ]
-=======
-                                "example": "permissions",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -21698,7 +21476,6 @@
                               "type": {
                                 "default": "roles",
                                 "description": "Roles type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "roles"
                                 ],
@@ -21706,11 +21483,6 @@
                                 "x-enum-varnames": [
                                   "ROLES"
                                 ]
-=======
-                                "example": "roles",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -22126,7 +21898,6 @@
                               "type": {
                                 "default": "orgs",
                                 "description": "Organizations resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "orgs"
                                 ],
@@ -22134,11 +21905,6 @@
                                 "x-enum-varnames": [
                                   "ORGS"
                                 ]
-=======
-                                "example": "orgs",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -22191,7 +21957,6 @@
                               "type": {
                                 "default": "permissions",
                                 "description": "Permissions resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "permissions"
                                 ],
@@ -22199,11 +21964,6 @@
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
                                 ]
-=======
-                                "example": "permissions",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -22371,7 +22131,6 @@
                               "type": {
                                 "default": "roles",
                                 "description": "Roles type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "roles"
                                 ],
@@ -22379,11 +22138,6 @@
                                 "x-enum-varnames": [
                                   "ROLES"
                                 ]
-=======
-                                "example": "roles",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -22900,7 +22654,6 @@
                               "type": {
                                 "default": "orgs",
                                 "description": "Organizations resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "orgs"
                                 ],
@@ -22908,11 +22661,6 @@
                                 "x-enum-varnames": [
                                   "ORGS"
                                 ]
-=======
-                                "example": "orgs",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -22965,7 +22713,6 @@
                               "type": {
                                 "default": "permissions",
                                 "description": "Permissions resource type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "permissions"
                                 ],
@@ -22973,11 +22720,6 @@
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
                                 ]
-=======
-                                "example": "permissions",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -23145,7 +22887,6 @@
                               "type": {
                                 "default": "roles",
                                 "description": "Roles type.",
-<<<<<<< HEAD
                                 "enum": [
                                   "roles"
                                 ],
@@ -23153,11 +22894,6 @@
                                 "x-enum-varnames": [
                                   "ROLES"
                                 ]
-=======
-                                "example": "roles",
-                                "readOnly": true,
-                                "type": "string"
->>>>>>> master
                               }
                             },
                             "required": [
@@ -23304,7 +23040,6 @@
                           "type": {
                             "default": "permissions",
                             "description": "Permissions resource type.",
-<<<<<<< HEAD
                             "enum": [
                               "permissions"
                             ],
@@ -23312,11 +23047,6 @@
                             "x-enum-varnames": [
                               "PERMISSIONS"
                             ]
-=======
-                            "example": "permissions",
-                            "readOnly": true,
-                            "type": "string"
->>>>>>> master
                           }
                         },
                         "required": [
