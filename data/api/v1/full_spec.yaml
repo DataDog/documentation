@@ -260,6 +260,11 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/AlertGraphWidgetDefinitionType'
+          default: alert_graph
+          description: Type of the widget.
+          example: alert_graph
+          readOnly: true
+          type: string
         viz_type:
           $ref: '#/components/schemas/WidgetVizType'
       required:
@@ -299,7 +304,15 @@ components:
           description: Size of value in the widget.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/AlertValueWidgetDefinitionType'
+=======
+          default: alert_value
+          description: Type of the widget.
+          example: alert_value
+          readOnly: true
+          type: string
+>>>>>>> master
         unit:
           description: Unit to display with the value.
           type: string
@@ -519,7 +532,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/ChangeWidgetDefinitionType'
+=======
+          default: change
+          description: Type of the widget.
+          example: change
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - requests
@@ -649,7 +670,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/CheckStatusWidgetDefinitionType'
+=======
+          default: check_status
+          description: Type of the widget.
+          example: check_status
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - check
@@ -950,7 +979,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/DistributionWidgetDefinitionType'
+=======
+          default: distribution
+          description: Type of the widget.
+          example: distribution
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - requests
@@ -1436,7 +1473,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/EventStreamWidgetDefinitionType'
+=======
+          default: event_stream
+          description: Type of the widget.
+          example: event_stream
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - query
@@ -1472,7 +1517,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/EventTimelineWidgetDefinitionType'
+=======
+          default: event_timeline
+          description: Type of the widget.
+          example: event_timeline
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - query
@@ -1503,7 +1556,15 @@ components:
         text_align:
           $ref: '#/components/schemas/WidgetTextAlign'
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/FreeTextWidgetDefinitionType'
+=======
+          default: free_text
+          description: Type of the widget.
+          example: free_text
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - text
@@ -1619,7 +1680,15 @@ components:
           description: Title of the widget.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/GroupWidgetDefinitionType'
+=======
+          default: group
+          description: Type of the widget.
+          example: group
+          readOnly: true
+          type: string
+>>>>>>> master
         widgets:
           description: List of widget groups.
           example: null
@@ -1743,7 +1812,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/HeatMapWidgetDefinitionType'
+=======
+          default: heatmap
+          description: Type of the widget.
+          example: heatmap
+          readOnly: true
+          type: string
+>>>>>>> master
         yaxis:
           $ref: '#/components/schemas/WidgetAxis'
       required:
@@ -1979,7 +2056,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/HostMapWidgetDefinitionType'
+=======
+          default: hostmap
+          description: Type of the widget.
+          example: hostmap
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - requests
@@ -2064,7 +2149,15 @@ components:
         page on your dashboard. Only available on FREE layout dashboards.
       properties:
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/IFrameWidgetDefinitionType'
+=======
+          default: iframe
+          description: Type of the widget.
+          example: iframe
+          readOnly: true
+          type: string
+>>>>>>> master
         url:
           description: URL of the iframe.
           example: null
@@ -2251,7 +2344,15 @@ components:
         sizing:
           $ref: '#/components/schemas/WidgetImageSizing'
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/ImageWidgetDefinitionType'
+=======
+          default: image
+          description: Type of the widget.
+          example: image
+          readOnly: true
+          type: string
+>>>>>>> master
         url:
           description: URL of the image.
           example: null
@@ -2443,7 +2544,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogStreamWidgetDefinitionType'
+=======
+          default: log_stream
+          description: Type of the widget.
+          example: log_stream
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       type: object
@@ -2518,7 +2627,15 @@ components:
           example: null
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsArithmeticProcessorType'
+=======
+          default: arithmetic-processor
+          description: Type of processor
+          example: arithmetic-processor
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - target
       - expression
@@ -2580,7 +2697,15 @@ components:
           description: Defines if the sources are from log `attribute` or `tag`.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsAttributeRemapperType'
+=======
+          default: attribute-remapper
+          description: Type of processor.
+          example: attribute-remapper
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - sources
       - target
@@ -2635,7 +2760,15 @@ components:
           example: null
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsCategoryProcessorType'
+=======
+          default: category-processor
+          description: Type of processor.
+          example: category-processor
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - categories
       - target
@@ -2679,7 +2812,15 @@ components:
             type: string
           type: array
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsDateRemapperType'
+=======
+          default: date-remapper
+          description: Type of processor.
+          example: date-remapper
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - sources
       - type
@@ -2769,7 +2910,15 @@ components:
           example: network.client.geoip
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsGeoIPParserType'
+=======
+          default: geo-ip-parser
+          description: Type of processor.
+          example: geo-ip-parser
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - sources
       - target
@@ -2812,7 +2961,15 @@ components:
           example: message
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsGrokParserType'
+=======
+          default: grok-parser
+          description: Type of processor.
+          example: grok-parser
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - source
       - grok
@@ -3045,7 +3202,15 @@ components:
           example: null
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsLookupProcessorType'
+=======
+          default: lookup-processor
+          description: Type of processor.
+          example: lookup-processor
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - source
       - target
@@ -3092,7 +3257,15 @@ components:
             type: string
           type: array
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsMessageRemapperType'
+=======
+          default: message-remapper
+          description: Type of processor.
+          example: message-remapper
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - sources
       - type
@@ -3178,7 +3351,15 @@ components:
             $ref: '#/components/schemas/LogsProcessor'
           type: array
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsPipelineProcessorType'
+=======
+          default: pipeline
+          description: Type of processor.
+          example: pipeline
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       type: object
@@ -3274,7 +3455,15 @@ components:
             type: string
           type: array
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsServiceRemapperType'
+=======
+          default: service-remapper
+          description: Type of processor.
+          example: service-remapper
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - sources
       - type
@@ -3328,7 +3517,15 @@ components:
             type: string
           type: array
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsStatusRemapperType'
+=======
+          default: status-remapper
+          description: Type of processor.
+          example: status-remapper
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - sources
       - type
@@ -3377,7 +3574,15 @@ components:
           example: null
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsStringBuilderProcessorType'
+=======
+          default: string-builder-processor
+          description: Type of processor.
+          example: string-builder-processor
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - target
       - template
@@ -3415,7 +3620,15 @@ components:
             type: string
           type: array
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsTraceRemapperType'
+=======
+          default: trace-id-remapper
+          description: Type of processor.
+          example: trace-id-remapper
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       type: object
@@ -3460,7 +3673,15 @@ components:
           example: http.url_details
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsURLParserType'
+=======
+          default: url-parser
+          description: Type of processor.
+          example: url-parser
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - sources
       - target
@@ -3508,7 +3729,15 @@ components:
           example: http.useragent_details
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/LogsUserAgentParserType'
+=======
+          default: user-agent-parser
+          description: Type of processor.
+          example: user-agent-parser
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - sources
       - target
@@ -4351,7 +4580,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/MonitorSummaryWidgetDefinitionType'
+=======
+          default: manage_status
+          description: Type of the widget.
+          example: manage_status
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - query
@@ -4517,7 +4754,15 @@ components:
           description: Where to position the tick on an edge.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/NoteWidgetDefinitionType'
+=======
+          default: note
+          description: Type of the widget.
+          example: note
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - content
@@ -4813,7 +5058,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/QueryValueWidgetDefinitionType'
+=======
+          default: query_value
+          description: Type of widget.
+          example: query_value
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - requests
@@ -5302,7 +5555,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/SLOWidgetDefinitionType'
+=======
+          default: slo
+          description: Type of the widget.
+          example: slo
+          readOnly: true
+          type: string
+>>>>>>> master
         view_mode:
           $ref: '#/components/schemas/WidgetViewMode'
         view_type:
@@ -5376,7 +5637,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/ScatterPlotWidgetDefinitionType'
+=======
+          default: scatterplot
+          description: Type of widget.
+          example: scatterplot
+          readOnly: true
+          type: string
+>>>>>>> master
         xaxis:
           $ref: '#/components/schemas/WidgetAxis'
         yaxis:
@@ -5780,7 +6049,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/ServiceMapWidgetDefinitionType'
+=======
+          default: servicemap
+          description: Type of the widget.
+          example: servicemap
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - filters
@@ -5843,7 +6120,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/ServiceSummaryWidgetDefinitionType'
+=======
+          default: trace_service
+          description: Type of the widget.
+          example: trace_service
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - env
@@ -7152,7 +7437,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/TableWidgetDefinitionType'
+=======
+          default: query_table
+          description: Type of the widget.
+          example: query_table
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - requests
@@ -7254,7 +7547,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/TimeseriesWidgetDefinitionType'
+=======
+          default: timeseries
+          description: Type of the widget.
+          example: timeseries
+          readOnly: true
+          type: string
+>>>>>>> master
         yaxis:
           $ref: '#/components/schemas/WidgetAxis'
       required:
@@ -7330,7 +7631,15 @@ components:
           description: Size of the title.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/ToplistWidgetDefinitionType'
+=======
+          default: toplist
+          description: Type of the widget.
+          example: toplist
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       - requests

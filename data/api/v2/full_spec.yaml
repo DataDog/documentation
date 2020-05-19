@@ -501,6 +501,11 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/OrganizationsType'
+          default: orgs
+          description: Organizations resource type.
+          example: orgs
+          readOnly: true
+          type: string
       required:
       - type
       type: object
@@ -563,7 +568,15 @@ components:
           description: ID of the permission.
           type: string
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/PermissionsType'
+=======
+          default: permissions
+          description: Permissions resource type.
+          example: permissions
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       type: object
@@ -903,7 +916,15 @@ components:
         relationships:
           $ref: '#/components/schemas/RoleResponseRelationships'
         type:
+<<<<<<< HEAD
           $ref: '#/components/schemas/RolesType'
+=======
+          default: roles
+          description: Roles type.
+          example: roles
+          readOnly: true
+          type: string
+>>>>>>> master
       required:
       - type
       type: object

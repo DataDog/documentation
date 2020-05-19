@@ -284,20 +284,33 @@ PM> Install-Package Serilog.Sinks.Datadog.Logs
 
 Then, initialize the logger directly in your application. Do not forget to [add your `<API_KEY>`][2].
 
+{{< site-region region="us" >}}
+
 ```csharp
-var log = new LoggerConfiguration()
+var log = new LoggerConfiguration(url: "http-intake.logs.datadoghq.com")
     .WriteTo.DatadogLogs("<API_KEY>")
     .CreateLogger();
 ```
 
-**Note**: To send logs to Datadog EU site, set the `url` property to `https://http-intake.logs.datadoghq.eu`
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```csharp
+var log = new LoggerConfiguration(url: "http-intake.logs.datadoghq.eu")
+    .WriteTo.DatadogLogs("<API_KEY>")
+    .CreateLogger();
+```
+
+{{< /site-region >}}
 
 You can also override the default behaviour and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. [Optionally, specify the `source`, `service`, `host`, and custom tags.][3]
 
-For instance to forward logs to the Datadog US site in TCP you would use the following sink configuration:
+{{< site-region region="us" >}}
+
+For instance to forward logs to the Datadog US region in TCP you would use the following sink configuration:
 
 ```csharp
-var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
+var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
 var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
         "<API_KEY>",
@@ -309,6 +322,27 @@ var log = new LoggerConfiguration()
     )
     .CreateLogger();
 ```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+For instance to forward logs to the Datadog EU region in TCP you would use the following sink configuration:
+
+```csharp
+var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
+var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs(
+        "<API_KEY>",
+        source: "<SOURCE_NAME>",
+        service: "<SERVICE_NAME>",
+        host: "<HOST_NAME>",
+        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
+        configuration: config
+    )
+    .CreateLogger();
+```
+
+{{< /site-region >}}
 
 New logs are now directly sent to Datadog.
 
