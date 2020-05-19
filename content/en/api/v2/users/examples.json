@@ -523,7 +523,7 @@
                 "restricted": false
               },
               "id": "string",
-              "type": "string"
+              "type": "permissions"
             }
           ]
         },

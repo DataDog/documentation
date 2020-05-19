@@ -320,7 +320,7 @@
                   ]
                 }
               },
-              "type": "string"
+              "type": "roles"
             }
           ],
           "meta": {
