@@ -11946,6 +11946,554 @@
         "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
       }
     },
+    "/api/v2/logs/config/archives/{archive_id}/readers": {
+      "delete": {
+        "description": "Removes a role from an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
+        "operationId": "RemoveRoleFromArchive",
+        "parameters": [
+          {
+            "description": "The ID of the archive.",
+            "in": "path",
+            "name": "archive_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Relationship to role.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to role object.",
+                    "properties": {
+                      "id": {
+                        "description": "ID of the role.",
+                        "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "roles",
+                        "description": "The type of the resource. The value should always be roles.",
+                        "example": "roles",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not found"
+          }
+        },
+        "summary": "Revoke role from an archive",
+        "tags": [
+          "Logs Archives"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+      },
+      "get": {
+        "description": "Returns all read roles a given archive is restricted to.",
+        "operationId": "ListArchiveReadRoles",
+        "parameters": [
+          {
+            "description": "The ID of the archive.",
+            "in": "path",
+            "name": "archive_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Response containing information about multiple roles.",
+                  "properties": {
+                    "data": {
+                      "description": "Array of returned roles.",
+                      "items": {
+                        "description": "Role object returned by the API.",
+                        "properties": {
+                          "attributes": {
+                            "description": "Attributes of the role.",
+                            "properties": {
+                              "created_at": {
+                                "description": "Creation time of the role.",
+                                "format": "date-time",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "modified_at": {
+                                "description": "Time of last role modification.",
+                                "format": "date-time",
+                                "readOnly": true,
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "Name of the role.",
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "id": {
+                            "description": "ID of the role.",
+                            "type": "string"
+                          },
+                          "relationships": {
+                            "description": "Relationships of the role object returned by the API.",
+                            "properties": {
+                              "org": {
+                                "description": "Relationship to an organization.",
+                                "properties": {
+                                  "data": {
+                                    "description": "Relationship to organization object.",
+                                    "properties": {
+                                      "id": {
+                                        "description": "ID of the organization.",
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "default": "orgs",
+                                        "description": "Organizations type.",
+                                        "readOnly": true,
+                                        "type": "string"
+                                      }
+                                    },
+                                    "type": "object"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "other_orgs": {
+                                "description": "Relationship to organizations.",
+                                "properties": {
+                                  "data": {
+                                    "description": "Relationships to organization objects.",
+                                    "items": {
+                                      "description": "Relationship to organization object.",
+                                      "properties": {
+                                        "id": {
+                                          "description": "ID of the organization.",
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "default": "orgs",
+                                          "description": "Organizations type.",
+                                          "readOnly": true,
+                                          "type": "string"
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "type": "array"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "other_roles": {
+                                "description": "Relationship to roles.",
+                                "properties": {
+                                  "data": {
+                                    "description": "An array containing type and ID of a role.",
+                                    "items": {
+                                      "description": "Relationship to role object.",
+                                      "properties": {
+                                        "id": {
+                                          "description": "ID of the role.",
+                                          "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "default": "roles",
+                                          "description": "The type of the resource. The value should always be roles.",
+                                          "example": "roles",
+                                          "type": "string"
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "type": "array"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "roles": {
+                                "description": "Relationship to roles.",
+                                "properties": {
+                                  "data": {
+                                    "description": "An array containing type and ID of a role.",
+                                    "items": {
+                                      "description": "Relationship to role object.",
+                                      "properties": {
+                                        "id": {
+                                          "description": "ID of the role.",
+                                          "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "default": "roles",
+                                          "description": "The type of the resource. The value should always be roles.",
+                                          "example": "roles",
+                                          "type": "string"
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "type": "array"
+                                  }
+                                },
+                                "type": "object"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": {
+                            "default": "roles",
+                            "description": "Roles type.",
+                            "readOnly": true,
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "meta": {
+                      "description": "Object describing meta attributes of response.",
+                      "properties": {
+                        "page": {
+                          "description": "Pagination object.",
+                          "properties": {
+                            "total_count": {
+                              "description": "Total count.",
+                              "format": "int64",
+                              "type": "integer"
+                            },
+                            "total_filtered_count": {
+                              "description": "Total count of elements matched by the filter.",
+                              "format": "int64",
+                              "type": "integer"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not found"
+          }
+        },
+        "summary": "List read roles for an archive",
+        "tags": [
+          "Logs Archives"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+      },
+      "post": {
+        "description": "Adds a read role to an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
+        "operationId": "AddReadRoleToArchive",
+        "parameters": [
+          {
+            "description": "The ID of the archive.",
+            "in": "path",
+            "name": "archive_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Relationship to role.",
+                "properties": {
+                  "data": {
+                    "description": "Relationship to role object.",
+                    "properties": {
+                      "id": {
+                        "description": "ID of the role.",
+                        "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+                        "type": "string"
+                      },
+                      "type": {
+                        "default": "roles",
+                        "description": "The type of the resource. The value should always be roles.",
+                        "example": "roles",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "API error response.",
+                  "properties": {
+                    "errors": {
+                      "description": "A list of errors.",
+                      "items": {
+                        "description": "A list of items.",
+                        "example": "Bad Request",
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "errors"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Not found"
+          }
+        },
+        "summary": "Grant role to an archive",
+        "tags": [
+          "Logs Archives"
+        ],
+        "x-codegen-request-body-name": "body",
+        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+      }
+    },
     "/api/v2/logs/config/restriction_queries": {
       "get": {
         "description": "Returns all restriction queries, including their names and IDs.",

@@ -18,7 +18,7 @@ further_reading:
 
 After [creating your monitor][1], use the monitor status page to view the status over time.
 
-The page sections are expanded by default. All sections (excpet the header) can be closed by using the toggle (&or;) icon to the left of each section name.
+The page sections are expanded by default. All sections (except the header) can be closed by using the toggle (&or;) icon to the left of each section name.
 
 {{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page"  >}}
 

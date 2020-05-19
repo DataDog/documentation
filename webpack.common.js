@@ -34,6 +34,7 @@ const commonConfig = env => {
             'main-dd-js': './scripts/main-dd-js.js',
             'lang-redirects': './scripts/lang-redirects.js',
             'region-redirects': './scripts/region-redirects.js',
+            'api-redirect': './scripts/api-redirect.js',
             'main-dd-css': './styles/style.scss',
             'dd-browser-logs-rum': './scripts/components/dd-browser-logs-rum.js'
         },
