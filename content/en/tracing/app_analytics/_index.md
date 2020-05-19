@@ -307,7 +307,7 @@ tracer.use('mysql', {
 Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example, to enable App Analytics for ADO.NET:
 
 * Windows: Environment Variable or AppSetting: `DD_ADONET_ANALYTICS_ENABLED=true`
-* Linux: Environment Variable or AppSetting: `DD_AdoNet_ANALYTICS_ENABLED=true`
+* Linux and Windows: Environment Variable or AppSetting: `DD_AdoNet_ANALYTICS_ENABLED=true`
 
 Or in code:
 
