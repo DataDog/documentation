@@ -116,14 +116,14 @@
                 "org": {
                   "data": {
                     "id": "string",
-                    "type": "string"
+                    "type": "orgs"
                   }
                 },
                 "other_orgs": {
                   "data": [
                     {
                       "id": "string",
-                      "type": "string"
+                      "type": "orgs"
                     }
                   ]
                 },
@@ -201,14 +201,14 @@
               "org": {
                 "data": {
                   "id": "string",
-                  "type": "string"
+                  "type": "orgs"
                 }
               },
               "other_orgs": {
                 "data": [
                   {
                     "id": "string",
-                    "type": "string"
+                    "type": "orgs"
                   }
                 ]
               },
@@ -323,14 +323,14 @@
               "org": {
                 "data": {
                   "id": "string",
-                  "type": "string"
+                  "type": "orgs"
                 }
               },
               "other_orgs": {
                 "data": [
                   {
                     "id": "string",
-                    "type": "string"
+                    "type": "orgs"
                   }
                 ]
               },
@@ -452,14 +452,14 @@
               "org": {
                 "data": {
                   "id": "string",
-                  "type": "string"
+                  "type": "orgs"
                 }
               },
               "other_orgs": {
                 "data": [
                   {
                     "id": "string",
-                    "type": "string"
+                    "type": "orgs"
                   }
                 ]
               },
@@ -525,7 +525,7 @@
                 "restricted": false
               },
               "id": "string",
-              "type": "string"
+              "type": "permissions"
             }
           ]
         },

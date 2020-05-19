@@ -246,6 +246,7 @@ components:
       properties:
         alert_id:
           description: ID of the alert to use in the widget.
+          example: null
           type: string
         time:
           $ref: '#/components/schemas/WidgetTime'
@@ -271,6 +272,10 @@ components:
       description: Type of the alert graph widget.
       enum:
       - alert_graph
+<<<<<<< HEAD
+=======
+      example: alert_graph
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - ALERT_GRAPH
@@ -280,6 +285,7 @@ components:
       properties:
         alert_id:
           description: ID of the alert to use in the widget.
+          example: null
           type: string
         precision:
           description: Number of decimal to show. If not defined, will use the raw
@@ -310,6 +316,10 @@ components:
       description: Type of the alert value widget.
       enum:
       - alert_value
+<<<<<<< HEAD
+=======
+      example: alert_value
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - ALERT_VALUE
@@ -527,6 +537,10 @@ components:
       description: Type of the change widget.
       enum:
       - change
+<<<<<<< HEAD
+=======
+      example: change
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - CHANGE
@@ -568,6 +582,7 @@ components:
       properties:
         data:
           description: Wrapper object with the list of monitor IDs.
+          example: null
           properties:
             ok:
               description: An array of of Monitor IDs that can be safely deleted.
@@ -615,6 +630,7 @@ components:
       properties:
         check:
           description: Name of the check to use in the widget.
+          example: null
           type: string
         group:
           description: Group reporting a single check.
@@ -656,6 +672,10 @@ components:
       description: Type of the check status widget.
       enum:
       - check_status
+<<<<<<< HEAD
+=======
+      example: check_status
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - CHECK_STATUS
@@ -752,6 +772,7 @@ components:
           type: array
         title:
           description: Title of the dashboard.
+          example: null
           type: string
         url:
           description: The URL of the dashboard.
@@ -760,6 +781,7 @@ components:
           type: string
         widgets:
           description: List of widgets to display on the dashboard.
+          example: null
           items:
             $ref: '#/components/schemas/Widget'
           type: array
@@ -815,6 +837,7 @@ components:
           type: string
         name:
           description: The name of the dashboard list.
+          example: My Dashboard
           type: string
         type:
           description: The type of dashboard list.
@@ -923,6 +946,7 @@ components:
           description: "Array of one request object to display in the widget.\n\n\
             See the dedicated [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)\n\
             \ to learn how to build the `REQUEST_SCHEMA`."
+          example: null
           items:
             $ref: '#/components/schemas/DistributionWidgetRequest'
           maxItems: 1
@@ -952,6 +976,10 @@ components:
       description: Type of the distribution widget.
       enum:
       - distribution
+<<<<<<< HEAD
+=======
+      example: distribution
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - DISTRIBUTION
@@ -1200,6 +1228,7 @@ components:
 
 
             Same format that is available on the JSON tab of the graph editor.'
+          example: null
           type: string
         legend:
           $ref: '#/components/schemas/EmbeddableGraphLegend'
@@ -1381,10 +1410,12 @@ components:
       properties:
         search:
           description: The query being made on the event.
+          example: null
           type: string
         tags_execution:
           description: The execution method for multi-value filters. Can be either
             and or or.
+          example: null
           type: string
       required:
       - search
@@ -1408,6 +1439,7 @@ components:
           $ref: '#/components/schemas/WidgetEventSize'
         query:
           description: Query to filter the event stream with.
+          example: null
           type: string
         tags_execution:
           description: The execution method for multi-value filters. Can be either
@@ -1434,6 +1466,10 @@ components:
       description: Type of the event stream widget.
       enum:
       - event_stream
+<<<<<<< HEAD
+=======
+      example: event_stream
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - EVENT_STREAM
@@ -1443,6 +1479,7 @@ components:
       properties:
         query:
           description: Query to filter the event timeline with.
+          example: null
           type: string
         tags_execution:
           description: The execution method for multi-value filters. Can be either
@@ -1469,6 +1506,10 @@ components:
       description: Type of the event timeline widget.
       enum:
       - event_timeline
+<<<<<<< HEAD
+=======
+      example: event_timeline
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - EVENT_TIMELINE
@@ -1485,6 +1526,7 @@ components:
           type: string
         text:
           description: Text to display.
+          example: null
           type: string
         text_align:
           $ref: '#/components/schemas/WidgetTextAlign'
@@ -1499,6 +1541,10 @@ components:
       description: Type of the free text widget.
       enum:
       - free_text
+<<<<<<< HEAD
+=======
+      example: free_text
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - FREE_TEXT
@@ -1608,6 +1654,7 @@ components:
           $ref: '#/components/schemas/GroupWidgetDefinitionType'
         widgets:
           description: List of widget groups.
+          example: null
           items:
             $ref: '#/components/schemas/Widget'
           type: array
@@ -1621,6 +1668,10 @@ components:
       description: Type of the group widget.
       enum:
       - group
+<<<<<<< HEAD
+=======
+      example: group
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - GROUP
@@ -1663,11 +1714,13 @@ components:
       properties:
         code:
           description: Error code.
+          example: null
           format: int32
           maximum: 2147483647
           type: integer
         message:
           description: Error message.
+          example: null
           type: string
       required:
       - code
@@ -1706,6 +1759,7 @@ components:
           $ref: '#/components/schemas/WidgetLegendSize'
         requests:
           description: List of widget types.
+          example: null
           items:
             $ref: '#/components/schemas/HeatMapWidgetRequest'
           maxItems: 1
@@ -1737,6 +1791,10 @@ components:
       description: Type of the heat map widget.
       enum:
       - heatmap
+<<<<<<< HEAD
+=======
+      example: heatmap
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - HEATMAP
@@ -1923,6 +1981,7 @@ components:
           type: string
         requests:
           description: List of definitions.
+          example: null
           properties:
             fill:
               $ref: '#/components/schemas/HostMapRequest'
@@ -1970,6 +2029,10 @@ components:
       description: Type of the host map widget.
       enum:
       - hostmap
+<<<<<<< HEAD
+=======
+      example: hostmap
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - HOSTMAP
@@ -2048,6 +2111,7 @@ components:
           $ref: '#/components/schemas/IFrameWidgetDefinitionType'
         url:
           description: URL of the iframe.
+          example: null
           type: string
       required:
       - type
@@ -2058,6 +2122,10 @@ components:
       description: Type of the iframe widget.
       enum:
       - iframe
+<<<<<<< HEAD
+=======
+      example: iframe
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - IFRAME
@@ -2205,6 +2273,7 @@ components:
       properties:
         idp_file:
           description: The path to the XML metadata file you wish to upload.
+          example: null
           format: binary
           type: string
       required:
@@ -2233,6 +2302,7 @@ components:
           $ref: '#/components/schemas/ImageWidgetDefinitionType'
         url:
           description: URL of the image.
+          example: null
           type: string
       required:
       - type
@@ -2243,6 +2313,10 @@ components:
       description: Type of the image widget.
       enum:
       - image
+<<<<<<< HEAD
+=======
+      example: image
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - IMAGE
@@ -2366,6 +2440,7 @@ components:
           properties:
             query:
               description: Search value to apply.
+              example: null
               type: string
           required:
           - query
@@ -2429,6 +2504,10 @@ components:
       description: Type of the log stream widget.
       enum:
       - log_stream
+<<<<<<< HEAD
+=======
+      example: log_stream
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - LOG_STREAM
@@ -2473,6 +2552,7 @@ components:
       properties:
         expression:
           description: Arithmetic operation between one or more log attributes.
+          example: null
           type: string
         is_enabled:
           default: false
@@ -2491,6 +2571,7 @@ components:
         target:
           description: Name of the attribute that contains the result of the arithmetic
             operation.
+          example: null
           type: string
         type:
           $ref: '#/components/schemas/LogsArithmeticProcessorType'
@@ -2504,6 +2585,10 @@ components:
       description: Type of logs arithmetic processor.
       enum:
       - arithmetic-processor
+<<<<<<< HEAD
+=======
+      example: arithmetic-processor
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - ARITHMETIC_PROCESSOR
@@ -2538,6 +2623,9 @@ components:
           type: string
         sources:
           description: Array of source attributes.
+          example:
+          - web
+          - gateway
           items:
             description: Attribute used as a source to remap its value to the target
               attribute.
@@ -2545,6 +2633,7 @@ components:
           type: array
         target:
           description: Final attribute or tag name to remap the sources to.
+          example: operation_id
           type: string
         target_type:
           default: attribute
@@ -2562,6 +2651,10 @@ components:
       description: Type of logs attribute remapper.
       enum:
       - attribute-remapper
+<<<<<<< HEAD
+=======
+      example: attribute-remapper
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - ATTRIBUTE_REMAPPER
@@ -2582,6 +2675,7 @@ components:
           description: 'Array of filters to match or not a log and their
 
             corresponding `name`to assign a custom value to the log.'
+          example: null
           items:
             description: Object describing the logs filter.
             properties:
@@ -2602,6 +2696,7 @@ components:
         target:
           description: Name of the target attribute which value is defined by the
             matching category.
+          example: null
           type: string
         type:
           $ref: '#/components/schemas/LogsCategoryProcessorType'
@@ -2615,6 +2710,10 @@ components:
       description: Type of logs category processor.
       enum:
       - category-processor
+<<<<<<< HEAD
+=======
+      example: category-processor
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - CATEGORY_PROCESSOR
@@ -2640,6 +2739,9 @@ components:
           type: string
         sources:
           description: Array of source attributes.
+          example:
+          - web
+          - gateway
           items:
             description: Attribute used as a source to define the log associated date.
             type: string
@@ -2655,6 +2757,10 @@ components:
       description: Type of logs date remapper.
       enum:
       - date-remapper
+<<<<<<< HEAD
+=======
+      example: date-remapper
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - DATE_REMAPPER
@@ -2669,6 +2775,7 @@ components:
           type: boolean
         name:
           description: Name of the index exclusion filter.
+          example: payment
           type: string
       required:
       - name
@@ -2721,6 +2828,8 @@ components:
           default:
           - network.client.ip
           description: Array of source attributes.
+          example:
+          - network.client.ip
           items:
             description: Attribute to geo-localize the IP from.
             type: string
@@ -2729,6 +2838,7 @@ components:
           default: network.client.geoip
           description: Name of the parent attribute that contains all the extracted
             details from the `sources`.
+          example: network.client.geoip
           type: string
         type:
           $ref: '#/components/schemas/LogsGeoIPParserType'
@@ -2742,6 +2852,10 @@ components:
       description: Type of GeoIP parser.
       enum:
       - geo-ip-parser
+<<<<<<< HEAD
+=======
+      example: geo-ip-parser
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - GEO_IP_PARSER
@@ -2771,6 +2885,7 @@ components:
         source:
           default: message
           description: Name of the log attribute to parse.
+          example: message
           type: string
         type:
           $ref: '#/components/schemas/LogsGrokParserType'
@@ -2809,6 +2924,10 @@ components:
       description: Type of logs grok parser.
       enum:
       - grok-parser
+<<<<<<< HEAD
+=======
+      example: grok-parser
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - GROK_PARSER
@@ -2873,6 +2992,10 @@ components:
             the order of the array.
 
             Logs are eventually stored in the first matching index.'
+          example:
+          - main
+          - payments
+          - web
           items:
             description: An index name.
             type: string
@@ -2895,6 +3018,7 @@ components:
           type: integer
         query:
           description: The search query - following the log search syntax.
+          example: service:web* AND @http.status_code:[200 TO 299]
           type: string
         sort:
           $ref: '#/components/schemas/LogsSort'
@@ -2914,6 +3038,7 @@ components:
           properties:
             from:
               description: Minimum timestamp for requested logs.
+              example: '2020-02-02T02:02:02+00:00'
               format: date-time
               type: string
             timezone:
@@ -2923,6 +3048,7 @@ components:
               type: string
             to:
               description: Maximum timestamp for requested logs.
+              example: '2020-02-20T20:20:20+00:00'
               format: date-time
               type: string
           required:
@@ -2978,6 +3104,7 @@ components:
             associated target attribute values,
 
             formatted as `["source_key1,target_value1", "source_key2,target_value2"]`'
+          example: null
           items:
             description: Mapping between a source and a value, it should follow the
               format `"<SOURCE>,<VALUE>"`.
@@ -2988,12 +3115,14 @@ components:
           type: string
         source:
           description: Source attribute used to perform the lookup.
+          example: null
           type: string
         target:
           description: 'Name of the attribute that contains the corresponding value
             in the mapping list
 
             or the `default_lookup` if not found in the mapping list.'
+          example: null
           type: string
         type:
           $ref: '#/components/schemas/LogsLookupProcessorType'
@@ -3008,6 +3137,10 @@ components:
       description: Type of logs lookup processor.
       enum:
       - lookup-processor
+<<<<<<< HEAD
+=======
+      example: lookup-processor
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - LOOKUP_PROCESSOR
@@ -3036,6 +3169,8 @@ components:
           default:
           - msg
           description: Array of source attributes.
+          example:
+          - msg
           items:
             description: Attribute used as a source to define the log associated message.
             type: string
@@ -3051,6 +3186,10 @@ components:
       description: Type of logs message remapper.
       enum:
       - message-remapper
+<<<<<<< HEAD
+=======
+      example: message-remapper
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - MESSAGE_REMAPPER
@@ -3079,6 +3218,7 @@ components:
           type: boolean
         name:
           description: Name of the pipeline.
+          example: null
           type: string
         processors:
           description: Ordered list of processors in this pipeline.
@@ -3135,6 +3275,10 @@ components:
       description: Type of logs pipeline processor.
       enum:
       - pipeline
+<<<<<<< HEAD
+=======
+      example: pipeline
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - PIPELINE
@@ -3146,6 +3290,10 @@ components:
             IDs in the array
 
             define the overall Pipelines order for Datadog.'
+          example:
+          - tags
+          - org_ids
+          - products
           items:
             description: A given pipeline ID.
             type: string
@@ -3210,6 +3358,9 @@ components:
           type: string
         sources:
           description: Array of source attributes.
+          example:
+          - web
+          - gateway
           items:
             description: Attribute used as a source to define the log associated service.
             type: string
@@ -3225,6 +3376,10 @@ components:
       description: Type of logs service remapper.
       enum:
       - service-remapper
+<<<<<<< HEAD
+=======
+      example: service-remapper
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - SERVICE_REMAPPER
@@ -3263,6 +3418,7 @@ components:
           type: string
         sources:
           description: Array of source attributes.
+          example: null
           items:
             description: Attribute used as a source to define the log associated status.
             type: string
@@ -3278,6 +3434,10 @@ components:
       description: Type of logs status remapper.
       enum:
       - status-remapper
+<<<<<<< HEAD
+=======
+      example: status-remapper
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - STATUS_REMAPPER
@@ -3310,9 +3470,11 @@ components:
           type: string
         target:
           description: The name of the attribute that contains the result of the template.
+          example: null
           type: string
         template:
           description: A formula with one or more attributes and raw text.
+          example: null
           type: string
         type:
           $ref: '#/components/schemas/LogsStringBuilderProcessorType'
@@ -3326,6 +3488,10 @@ components:
       description: Type of logs string builder processor.
       enum:
       - string-builder-processor
+<<<<<<< HEAD
+=======
+      example: string-builder-processor
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - STRING_BUILDER_PROCESSOR
@@ -3362,6 +3528,10 @@ components:
       description: Type of logs trace remapper.
       enum:
       - trace-id-remapper
+<<<<<<< HEAD
+=======
+      example: trace-id-remapper
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - TRACE_ID_REMAPPER
@@ -3385,6 +3555,8 @@ components:
           default:
           - http.url
           description: Array of source attributes.
+          example:
+          - http.url
           items:
             description: Attribute to extract the URL from.
             type: string
@@ -3393,6 +3565,7 @@ components:
           default: http.url_details
           description: Name of the parent attribute that contains all the extracted
             details from the `sources`.
+          example: http.url_details
           type: string
         type:
           $ref: '#/components/schemas/LogsURLParserType'
@@ -3406,6 +3579,10 @@ components:
       description: Type of logs URL parser.
       enum:
       - url-parser
+<<<<<<< HEAD
+=======
+      example: url-parser
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - URL_PARSER
@@ -3430,6 +3607,8 @@ components:
           default:
           - http.useragent
           description: Array of source attributes.
+          example:
+          - http.useragent
           items:
             description: Attribute to extract the User-Agent from.
             type: string
@@ -3438,6 +3617,7 @@ components:
           default: http.useragent_details
           description: Name of the parent attribute that contains all the extracted
             details from the `sources`.
+          example: http.useragent_details
           type: string
         type:
           $ref: '#/components/schemas/LogsUserAgentParserType'
@@ -3451,6 +3631,10 @@ components:
       description: Type of logs User-Agent parser.
       enum:
       - user-agent-parser
+<<<<<<< HEAD
+=======
+      example: user-agent-parser
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - USER_AGENT_PARSER
@@ -4259,6 +4443,7 @@ components:
           type: boolean
         query:
           description: Query to filter the monitors with.
+          example: null
           type: string
         show_last_triggered:
           description: Whether to show the time that has elapsed since the monitor/group
@@ -4292,6 +4477,10 @@ components:
       description: Type of the monitor summary widget.
       enum:
       - manage_status
+<<<<<<< HEAD
+=======
+      example: manage_status
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - MANAGE_STATUS
@@ -4432,6 +4621,7 @@ components:
           type: string
         content:
           description: Content of the note.
+          example: null
           type: string
         font_size:
           description: Size of the text.
@@ -4457,6 +4647,10 @@ components:
       description: Type of the note widget.
       enum:
       - note
+<<<<<<< HEAD
+=======
+      example: note
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - NOTE
@@ -4633,9 +4827,11 @@ components:
       properties:
         service_key:
           description: Your service key in PagerDuty.
+          example: null
           type: string
         service_name:
           description: Your service name associated with a service key in PagerDuty.
+          example: null
           type: string
       required:
       - service_name
@@ -4646,6 +4842,7 @@ components:
       properties:
         service_key:
           description: Your service key in PagerDuty.
+          example: null
           type: string
       required:
       - service_key
@@ -4655,6 +4852,7 @@ components:
       properties:
         service_name:
           description: Your service name associated service key in PagerDuty.
+          example: null
           type: string
       required:
       - service_name
@@ -4694,6 +4892,7 @@ components:
           type: integer
         metric:
           description: Your chosen metric.
+          example: null
           type: string
         search_by:
           description: Your chosen search term.
@@ -4748,6 +4947,10 @@ components:
       description: Type of the query value widget.
       enum:
       - query_value
+<<<<<<< HEAD
+=======
+      example: query_value
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - QUERY_VALUE
@@ -4838,9 +5041,11 @@ components:
                   with
 
                   this error.'
+                example: null
                 type: string
               message:
                 description: The error message.
+                example: null
                 type: string
               timeframe:
                 $ref: '#/components/schemas/SLOErrorTimeframe'
@@ -4892,6 +5097,7 @@ components:
         interval:
           description: The aggregated query interval for the series data. It's implicit
             based on the query time window.
+          example: null
           format: int64
           type: integer
         message:
@@ -4901,18 +5107,22 @@ components:
           $ref: '#/components/schemas/SLOHistoryMetricsSeries'
         query:
           description: The combined numerator and denominator query CSV.
+          example: null
           type: string
         res_type:
           description: The series result type. This mimics `batch_query` response
             type.
+          example: null
           type: string
         resp_version:
           description: The series response version type. This mimics `batch_query`
             response type.
+          example: null
           format: int64
           type: integer
         times:
           description: An array of query timestamps in EPOCH milliseconds
+          example: null
           items:
             description: A timestamp in EPOCH milliseconds.
             format: double
@@ -4935,10 +5145,12 @@ components:
       properties:
         count:
           description: Count of submitted metrics.
+          example: null
           format: int64
           type: integer
         metadata:
           description: Query metadata.
+          example: null
           properties:
             aggr:
               description: Query aggregator function.
@@ -4962,10 +5174,12 @@ components:
           type: object
         sum:
           description: Total sum of the query.
+          example: null
           format: double
           type: number
         values:
           description: The query values for each metric.
+          example: null
           items:
             description: A metric name and its value.
             format: double
@@ -5121,6 +5335,7 @@ components:
             corresponding
 
             timeframe.'
+          example: null
           format: double
           type: number
         target_display:
@@ -5221,6 +5436,7 @@ components:
         view_type:
           default: detail
           description: Type of view displayed by the widget.
+          example: detail
           type: string
       required:
       - type
@@ -5231,6 +5447,10 @@ components:
       description: Type of the SLO widget.
       enum:
       - slo
+<<<<<<< HEAD
+=======
+      example: slo
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - SLO
@@ -5267,6 +5487,7 @@ components:
           type: array
         requests:
           description: Widget definition.
+          example: null
           properties:
             x:
               $ref: '#/components/schemas/ScatterPlotRequest'
@@ -5301,6 +5522,10 @@ components:
       description: Type of the scatter plot widget.
       enum:
       - scatterplot
+<<<<<<< HEAD
+=======
+      example: scatterplot
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - SCATTERPLOT
@@ -5325,6 +5550,7 @@ components:
           type: string
         points:
           description: Points relating to a metric.
+          example: null
           items:
             $ref: '#/components/schemas/Point'
           type: array
@@ -5415,6 +5641,7 @@ components:
       properties:
         calls:
           description: A list of dependencies.
+          example: null
           items:
             description: Service names.
             type: string
@@ -5513,6 +5740,7 @@ components:
           type: array
         name:
           description: The name of the service level objective object.
+          example: null
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
@@ -5534,6 +5762,7 @@ components:
             service level
 
             objective object.'
+          example: null
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
@@ -5548,9 +5777,11 @@ components:
       properties:
         denominator:
           description: A Datadog metric query for total (valid) events.
+          example: null
           type: string
         numerator:
           description: A Datadog metric query for good events.
+          example: null
           type: string
       required:
       - numerator
@@ -5627,6 +5858,7 @@ components:
           type: array
         name:
           description: The name of the service level objective object.
+          example: null
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
@@ -5648,6 +5880,7 @@ components:
             service level
 
             objective object.'
+          example: null
           items:
             $ref: '#/components/schemas/SLOThreshold'
           type: array
@@ -5664,6 +5897,7 @@ components:
         filters:
           description: Your environment and primary tag (or * if enabled for your
             account).
+          example: null
           items:
             description: Filter name.
             type: string
@@ -5671,6 +5905,7 @@ components:
           type: array
         service:
           description: The ID of the service you want to map.
+          example: null
           type: string
         title:
           description: The title of your widget.
@@ -5692,6 +5927,10 @@ components:
       description: Type of the service map widget.
       enum:
       - servicemap
+<<<<<<< HEAD
+=======
+      example: servicemap
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - SERVICEMAP
@@ -5703,9 +5942,11 @@ components:
           $ref: '#/components/schemas/WidgetServiceSummaryDisplayFormat'
         env:
           description: APM environment.
+          example: null
           type: string
         service:
           description: APM service.
+          example: null
           type: string
         show_breakdown:
           description: Whether to show the latency breakdown or not.
@@ -5729,6 +5970,7 @@ components:
           $ref: '#/components/schemas/WidgetSizeFormat'
         span_name:
           description: APM span name.
+          example: null
           type: string
         time:
           $ref: '#/components/schemas/WidgetTime'
@@ -5753,6 +5995,10 @@ components:
       description: Type of the service summary widget.
       enum:
       - trace_service
+<<<<<<< HEAD
+=======
+      example: trace_service
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - TRACE_SERVICE
@@ -5788,6 +6034,7 @@ components:
       properties:
         account:
           description: Account to which the channel belongs to.
+          example: null
           type: string
         channel_name:
           description: Your channel name.
@@ -5843,9 +6090,11 @@ components:
       properties:
         account:
           description: Your Slack account name.
+          example: null
           type: string
         url:
           description: Your Slack service hook URL.
+          example: null
           type: string
       required:
       - account
@@ -5858,6 +6107,7 @@ components:
       properties:
         duration:
           description: The duration of the request in nanoseconds.
+          example: 12345
           format: int64
           type: integer
         error:
@@ -5914,6 +6164,7 @@ components:
         start:
           description: The start time of the request in nanoseconds from the UNIX
             epoch.
+          example: null
           format: int64
           type: integer
         trace_id:
@@ -6103,9 +6354,11 @@ components:
       properties:
         description:
           description: Description of the error.
+          example: null
           type: string
         name:
           description: Name of the error.
+          example: null
           type: string
         statusCode:
           description: Status Code of the error.
@@ -6253,6 +6506,7 @@ components:
           type: string
         name:
           description: Name of the variable.
+          example: null
           type: string
         pattern:
           description: Pattern of the variable.
@@ -6339,6 +6593,7 @@ components:
       properties:
         height:
           description: Screen height of the device.
+          example: null
           format: int64
           type: integer
         id:
@@ -6348,9 +6603,11 @@ components:
           type: boolean
         name:
           description: The device name.
+          example: null
           type: string
         width:
           description: Screen width of the device.
+          example: null
           format: int64
           type: integer
       required:
@@ -6644,6 +6901,7 @@ components:
             properties:
               message:
                 description: Message for the warning.
+                example: null
                 type: string
               type:
                 $ref: '#/components/schemas/SyntheticsWarningType'
@@ -6719,6 +6977,7 @@ components:
         assertions:
           default: []
           description: Array of assertions used for the test.
+          example: []
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
@@ -6896,9 +7155,11 @@ components:
           properties:
             password:
               description: Password to use for the basic authentication.
+              example: null
               type: string
             username:
               description: Username to use for the basic authentication.
+              example: null
               type: string
           required:
           - password
@@ -7045,6 +7306,10 @@ components:
       description: Type of the table widget.
       enum:
       - query_table
+<<<<<<< HEAD
+=======
+      example: query_table
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - QUERY_TABLE
@@ -7149,6 +7414,10 @@ components:
       description: Type of the timeseries widget.
       enum:
       - timeseries
+<<<<<<< HEAD
+=======
+      example: timeseries
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - TIMESERIES
@@ -7173,6 +7442,7 @@ components:
                 type: string
               expression:
                 description: Expression name.
+                example: null
                 type: string
             required:
             - expression
@@ -7197,6 +7467,7 @@ components:
       properties:
         requests:
           description: List of top list widget requests.
+          example: null
           items:
             $ref: '#/components/schemas/ToplistWidgetRequest'
           type: array
@@ -7221,6 +7492,10 @@ components:
       description: Type of the top list widget.
       enum:
       - toplist
+<<<<<<< HEAD
+=======
+      example: toplist
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
       type: string
       x-enum-varnames:
       - TOPLIST
@@ -8127,6 +8402,7 @@ components:
             If the custom variable is secret, it returns `null` for
 
             the `<CUSTOM_VARIABLE_VALUE>` in the response payload.'
+          example: true
           type: boolean
         name:
           description: The name of the webhook. It corresponds with `<CUSTOM_VARIABLE_NAME>`.
@@ -8348,6 +8624,7 @@ components:
           type: string
         value:
           description: Value for the comparator.
+          example: null
           format: double
           type: number
       required:
@@ -8404,6 +8681,7 @@ components:
       properties:
         q:
           description: Query definition.
+          example: null
           type: string
         tags_execution:
           description: The execution method for multi-value filters.
@@ -8425,6 +8703,7 @@ components:
       properties:
         column:
           description: Facet path for the column
+          example: null
           type: string
         order:
           $ref: '#/components/schemas/WidgetSort'
@@ -8457,23 +8736,27 @@ components:
       properties:
         height:
           description: The height of the widget. Should be a non-negative integer.
+          example: null
           format: int64
           minimum: 0
           type: integer
         width:
           description: The width of the widget. Should be a non-negative integer.
+          example: null
           format: int64
           minimum: 0
           type: integer
         x:
           description: The position of the widget on the x (horizontal) axis. Should
             be a non-negative integer.
+          example: null
           format: int64
           minimum: 0
           type: integer
         y:
           description: The position of the widget on the y (vertical) axis. Should
             be a non-negative integer.
+          example: null
           format: int64
           minimum: 0
           type: integer

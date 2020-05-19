@@ -5,7 +5,7 @@
       "json_curl": [
         [
           {
-            "duration": null,
+            "duration": "12345",
             "name": "span_name",
             "resource": "/home",
             "service": "service_name",
@@ -18,7 +18,7 @@
       "json": [
         [
           {
-            "duration": "integer",
+            "duration": "12345",
             "error": "integer",
             "meta": {
               "<any-key>": "string"

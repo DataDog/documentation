@@ -270,6 +270,7 @@
                 },
                 "id": {
                   "description": "ID of the dashboard.",
+                  "example": null,
                   "type": "string"
                 },
                 "is_favorite": {
@@ -379,6 +380,7 @@
                 },
                 "id": {
                   "description": "ID of the dashboard.",
+                  "example": null,
                   "type": "string"
                 },
                 "is_favorite": {
@@ -483,6 +485,7 @@
           },
           "id": {
             "description": "ID of the dashboard.",
+            "example": null,
             "type": "string"
           },
           "is_favorite": {
@@ -553,6 +556,7 @@
         "properties": {
           "dashboards": {
             "description": "List of dashboards in the dashboard list.",
+            "example": null,
             "items": {
               "description": "A dashboard within a list.",
               "properties": {
@@ -587,6 +591,7 @@
                 },
                 "id": {
                   "description": "ID of the dashboard.",
+                  "example": null,
                   "type": "string"
                 },
                 "is_favorite": {
@@ -710,6 +715,7 @@
                         "properties": {
                           "container": {
                             "description": "The container where the archive will be stored.",
+                            "example": "container-name",
                             "type": "string"
                           },
                           "integration": {
@@ -717,10 +723,12 @@
                             "properties": {
                               "client_id": {
                                 "description": "A client ID.",
+                                "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                 "type": "string"
                               },
                               "tenant_id": {
                                 "description": "A tenant ID.",
+                                "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                 "type": "string"
                               }
                             },
@@ -740,11 +748,13 @@
                           },
                           "storage_account": {
                             "description": "The associated storage account.",
+                            "example": "account-name",
                             "type": "string"
                           },
                           "type": {
                             "default": "azure",
                             "description": "The type of destination.",
+                            "example": "azure",
                             "readOnly": true,
                             "type": "string"
                           }
@@ -762,6 +772,7 @@
                         "properties": {
                           "bucket": {
                             "description": "The bucket where the archive will be stored.",
+                            "example": "bucket-name",
                             "type": "string"
                           },
                           "integration": {
@@ -769,10 +780,12 @@
                             "properties": {
                               "client_email": {
                                 "description": "A client email.",
+                                "example": "youremail@example.com",
                                 "type": "string"
                               },
                               "project_id": {
                                 "description": "A project ID.",
+                                "example": "project-id",
                                 "type": "string"
                               }
                             },
@@ -789,6 +802,7 @@
                           "type": {
                             "default": "gcs",
                             "description": "The type of destination.",
+                            "example": "gcs",
                             "readOnly": true,
                             "type": "string"
                           }
@@ -805,6 +819,7 @@
                         "properties": {
                           "bucket": {
                             "description": "The bucket where the archive will be stored.",
+                            "example": "bucket-name",
                             "type": "string"
                           },
                           "integration": {
@@ -812,10 +827,12 @@
                             "properties": {
                               "account_id": {
                                 "description": "The account ID for the integration.",
+                                "example": "123456789012",
                                 "type": "string"
                               },
                               "role_name": {
                                 "description": "The path of the integration.",
+                                "example": "role-name",
                                 "type": "string"
                               }
                             },
@@ -832,6 +849,7 @@
                           "type": {
                             "default": "s3",
                             "description": "The type of destination.",
+                            "example": "s3",
                             "readOnly": true,
                             "type": "string"
                           }
@@ -927,6 +945,7 @@
                 "properties": {
                   "container": {
                     "description": "The container where the archive will be stored.",
+                    "example": "container-name",
                     "type": "string"
                   },
                   "integration": {
@@ -934,10 +953,12 @@
                     "properties": {
                       "client_id": {
                         "description": "A client ID.",
+                        "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                         "type": "string"
                       },
                       "tenant_id": {
                         "description": "A tenant ID.",
+                        "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                         "type": "string"
                       }
                     },
@@ -957,11 +978,13 @@
                   },
                   "storage_account": {
                     "description": "The associated storage account.",
+                    "example": "account-name",
                     "type": "string"
                   },
                   "type": {
                     "default": "azure",
                     "description": "The type of destination.",
+                    "example": "azure",
                     "readOnly": true,
                     "type": "string"
                   }
@@ -979,6 +1002,7 @@
                 "properties": {
                   "bucket": {
                     "description": "The bucket where the archive will be stored.",
+                    "example": "bucket-name",
                     "type": "string"
                   },
                   "integration": {
@@ -986,10 +1010,12 @@
                     "properties": {
                       "client_email": {
                         "description": "A client email.",
+                        "example": "youremail@example.com",
                         "type": "string"
                       },
                       "project_id": {
                         "description": "A project ID.",
+                        "example": "project-id",
                         "type": "string"
                       }
                     },
@@ -1006,6 +1032,7 @@
                   "type": {
                     "default": "gcs",
                     "description": "The type of destination.",
+                    "example": "gcs",
                     "readOnly": true,
                     "type": "string"
                   }
@@ -1022,6 +1049,7 @@
                 "properties": {
                   "bucket": {
                     "description": "The bucket where the archive will be stored.",
+                    "example": "bucket-name",
                     "type": "string"
                   },
                   "integration": {
@@ -1029,10 +1057,12 @@
                     "properties": {
                       "account_id": {
                         "description": "The account ID for the integration.",
+                        "example": "123456789012",
                         "type": "string"
                       },
                       "role_name": {
                         "description": "The path of the integration.",
+                        "example": "role-name",
                         "type": "string"
                       }
                     },
@@ -1049,6 +1079,7 @@
                   "type": {
                     "default": "s3",
                     "description": "The type of destination.",
+                    "example": "s3",
                     "readOnly": true,
                     "type": "string"
                   }
@@ -1127,6 +1158,7 @@
                         "properties": {
                           "container": {
                             "description": "The container where the archive will be stored.",
+                            "example": "container-name",
                             "type": "string"
                           },
                           "integration": {
@@ -1134,10 +1166,12 @@
                             "properties": {
                               "client_id": {
                                 "description": "A client ID.",
+                                "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                 "type": "string"
                               },
                               "tenant_id": {
                                 "description": "A tenant ID.",
+                                "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                 "type": "string"
                               }
                             },
@@ -1157,11 +1191,13 @@
                           },
                           "storage_account": {
                             "description": "The associated storage account.",
+                            "example": "account-name",
                             "type": "string"
                           },
                           "type": {
                             "default": "azure",
                             "description": "The type of destination.",
+                            "example": "azure",
                             "readOnly": true,
                             "type": "string"
                           }
@@ -1179,6 +1215,7 @@
                         "properties": {
                           "bucket": {
                             "description": "The bucket where the archive will be stored.",
+                            "example": "bucket-name",
                             "type": "string"
                           },
                           "integration": {
@@ -1186,10 +1223,12 @@
                             "properties": {
                               "client_email": {
                                 "description": "A client email.",
+                                "example": "youremail@example.com",
                                 "type": "string"
                               },
                               "project_id": {
                                 "description": "A project ID.",
+                                "example": "project-id",
                                 "type": "string"
                               }
                             },
@@ -1206,6 +1245,7 @@
                           "type": {
                             "default": "gcs",
                             "description": "The type of destination.",
+                            "example": "gcs",
                             "readOnly": true,
                             "type": "string"
                           }
@@ -1222,6 +1262,7 @@
                         "properties": {
                           "bucket": {
                             "description": "The bucket where the archive will be stored.",
+                            "example": "bucket-name",
                             "type": "string"
                           },
                           "integration": {
@@ -1229,10 +1270,12 @@
                             "properties": {
                               "account_id": {
                                 "description": "The account ID for the integration.",
+                                "example": "123456789012",
                                 "type": "string"
                               },
                               "role_name": {
                                 "description": "The path of the integration.",
+                                "example": "role-name",
                                 "type": "string"
                               }
                             },
@@ -1249,6 +1292,7 @@
                           "type": {
                             "default": "s3",
                             "description": "The type of destination.",
+                            "example": "s3",
                             "readOnly": true,
                             "type": "string"
                           }
@@ -1319,6 +1363,7 @@
                 "properties": {
                   "container": {
                     "description": "The container where the archive will be stored.",
+                    "example": "container-name",
                     "type": "string"
                   },
                   "integration": {
@@ -1326,10 +1371,12 @@
                     "properties": {
                       "client_id": {
                         "description": "A client ID.",
+                        "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                         "type": "string"
                       },
                       "tenant_id": {
                         "description": "A tenant ID.",
+                        "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                         "type": "string"
                       }
                     },
@@ -1349,11 +1396,13 @@
                   },
                   "storage_account": {
                     "description": "The associated storage account.",
+                    "example": "account-name",
                     "type": "string"
                   },
                   "type": {
                     "default": "azure",
                     "description": "The type of destination.",
+                    "example": "azure",
                     "readOnly": true,
                     "type": "string"
                   }
@@ -1371,6 +1420,7 @@
                 "properties": {
                   "bucket": {
                     "description": "The bucket where the archive will be stored.",
+                    "example": "bucket-name",
                     "type": "string"
                   },
                   "integration": {
@@ -1378,10 +1428,12 @@
                     "properties": {
                       "client_email": {
                         "description": "A client email.",
+                        "example": "youremail@example.com",
                         "type": "string"
                       },
                       "project_id": {
                         "description": "A project ID.",
+                        "example": "project-id",
                         "type": "string"
                       }
                     },
@@ -1398,6 +1450,7 @@
                   "type": {
                     "default": "gcs",
                     "description": "The type of destination.",
+                    "example": "gcs",
                     "readOnly": true,
                     "type": "string"
                   }
@@ -1414,6 +1467,7 @@
                 "properties": {
                   "bucket": {
                     "description": "The bucket where the archive will be stored.",
+                    "example": "bucket-name",
                     "type": "string"
                   },
                   "integration": {
@@ -1421,10 +1475,12 @@
                     "properties": {
                       "account_id": {
                         "description": "The account ID for the integration.",
+                        "example": "123456789012",
                         "type": "string"
                       },
                       "role_name": {
                         "description": "The path of the integration.",
+                        "example": "role-name",
                         "type": "string"
                       }
                     },
@@ -1441,6 +1497,7 @@
                   "type": {
                     "default": "s3",
                     "description": "The type of destination.",
+                    "example": "s3",
                     "readOnly": true,
                     "type": "string"
                   }
@@ -1499,6 +1556,7 @@
                     "properties": {
                       "container": {
                         "description": "The container where the archive will be stored.",
+                        "example": "container-name",
                         "type": "string"
                       },
                       "integration": {
@@ -1506,10 +1564,12 @@
                         "properties": {
                           "client_id": {
                             "description": "A client ID.",
+                            "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                             "type": "string"
                           },
                           "tenant_id": {
                             "description": "A tenant ID.",
+                            "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                             "type": "string"
                           }
                         },
@@ -1529,11 +1589,13 @@
                       },
                       "storage_account": {
                         "description": "The associated storage account.",
+                        "example": "account-name",
                         "type": "string"
                       },
                       "type": {
                         "default": "azure",
                         "description": "The type of destination.",
+                        "example": "azure",
                         "readOnly": true,
                         "type": "string"
                       }
@@ -1551,6 +1613,7 @@
                     "properties": {
                       "bucket": {
                         "description": "The bucket where the archive will be stored.",
+                        "example": "bucket-name",
                         "type": "string"
                       },
                       "integration": {
@@ -1558,10 +1621,12 @@
                         "properties": {
                           "client_email": {
                             "description": "A client email.",
+                            "example": "youremail@example.com",
                             "type": "string"
                           },
                           "project_id": {
                             "description": "A project ID.",
+                            "example": "project-id",
                             "type": "string"
                           }
                         },
@@ -1578,6 +1643,7 @@
                       "type": {
                         "default": "gcs",
                         "description": "The type of destination.",
+                        "example": "gcs",
                         "readOnly": true,
                         "type": "string"
                       }
@@ -1594,6 +1660,7 @@
                     "properties": {
                       "bucket": {
                         "description": "The bucket where the archive will be stored.",
+                        "example": "bucket-name",
                         "type": "string"
                       },
                       "integration": {
@@ -1601,10 +1668,12 @@
                         "properties": {
                           "account_id": {
                             "description": "The account ID for the integration.",
+                            "example": "123456789012",
                             "type": "string"
                           },
                           "role_name": {
                             "description": "The path of the integration.",
+                            "example": "role-name",
                             "type": "string"
                           }
                         },
@@ -1621,6 +1690,7 @@
                       "type": {
                         "default": "s3",
                         "description": "The type of destination.",
+                        "example": "s3",
                         "readOnly": true,
                         "type": "string"
                       }
@@ -1685,6 +1755,7 @@
             "properties": {
               "container": {
                 "description": "The container where the archive will be stored.",
+                "example": "container-name",
                 "type": "string"
               },
               "integration": {
@@ -1692,10 +1763,12 @@
                 "properties": {
                   "client_id": {
                     "description": "A client ID.",
+                    "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                     "type": "string"
                   },
                   "tenant_id": {
                     "description": "A tenant ID.",
+                    "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                     "type": "string"
                   }
                 },
@@ -1715,11 +1788,13 @@
               },
               "storage_account": {
                 "description": "The associated storage account.",
+                "example": "account-name",
                 "type": "string"
               },
               "type": {
                 "default": "azure",
                 "description": "The type of destination.",
+                "example": "azure",
                 "readOnly": true,
                 "type": "string"
               }
@@ -1737,6 +1812,7 @@
             "properties": {
               "bucket": {
                 "description": "The bucket where the archive will be stored.",
+                "example": "bucket-name",
                 "type": "string"
               },
               "integration": {
@@ -1744,10 +1820,12 @@
                 "properties": {
                   "client_email": {
                     "description": "A client email.",
+                    "example": "youremail@example.com",
                     "type": "string"
                   },
                   "project_id": {
                     "description": "A project ID.",
+                    "example": "project-id",
                     "type": "string"
                   }
                 },
@@ -1764,6 +1842,7 @@
               "type": {
                 "default": "gcs",
                 "description": "The type of destination.",
+                "example": "gcs",
                 "readOnly": true,
                 "type": "string"
               }
@@ -1780,6 +1859,7 @@
             "properties": {
               "bucket": {
                 "description": "The bucket where the archive will be stored.",
+                "example": "bucket-name",
                 "type": "string"
               },
               "integration": {
@@ -1787,10 +1867,12 @@
                 "properties": {
                   "account_id": {
                     "description": "The account ID for the integration.",
+                    "example": "123456789012",
                     "type": "string"
                   },
                   "role_name": {
                     "description": "The path of the integration.",
+                    "example": "role-name",
                     "type": "string"
                   }
                 },
@@ -1807,6 +1889,7 @@
               "type": {
                 "default": "s3",
                 "description": "The type of destination.",
+                "example": "s3",
                 "readOnly": true,
                 "type": "string"
               }
@@ -1848,6 +1931,7 @@
                     "properties": {
                       "container": {
                         "description": "The container where the archive will be stored.",
+                        "example": "container-name",
                         "type": "string"
                       },
                       "integration": {
@@ -1855,10 +1939,12 @@
                         "properties": {
                           "client_id": {
                             "description": "A client ID.",
+                            "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                             "type": "string"
                           },
                           "tenant_id": {
                             "description": "A tenant ID.",
+                            "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                             "type": "string"
                           }
                         },
@@ -1878,11 +1964,13 @@
                       },
                       "storage_account": {
                         "description": "The associated storage account.",
+                        "example": "account-name",
                         "type": "string"
                       },
                       "type": {
                         "default": "azure",
                         "description": "The type of destination.",
+                        "example": "azure",
                         "readOnly": true,
                         "type": "string"
                       }
@@ -1900,6 +1988,7 @@
                     "properties": {
                       "bucket": {
                         "description": "The bucket where the archive will be stored.",
+                        "example": "bucket-name",
                         "type": "string"
                       },
                       "integration": {
@@ -1907,10 +1996,12 @@
                         "properties": {
                           "client_email": {
                             "description": "A client email.",
+                            "example": "youremail@example.com",
                             "type": "string"
                           },
                           "project_id": {
                             "description": "A project ID.",
+                            "example": "project-id",
                             "type": "string"
                           }
                         },
@@ -1927,6 +2018,7 @@
                       "type": {
                         "default": "gcs",
                         "description": "The type of destination.",
+                        "example": "gcs",
                         "readOnly": true,
                         "type": "string"
                       }
@@ -1943,6 +2035,7 @@
                     "properties": {
                       "bucket": {
                         "description": "The bucket where the archive will be stored.",
+                        "example": "bucket-name",
                         "type": "string"
                       },
                       "integration": {
@@ -1950,10 +2043,12 @@
                         "properties": {
                           "account_id": {
                             "description": "The account ID for the integration.",
+                            "example": "123456789012",
                             "type": "string"
                           },
                           "role_name": {
                             "description": "The path of the integration.",
+                            "example": "role-name",
                             "type": "string"
                           }
                         },
@@ -1970,6 +2065,7 @@
                       "type": {
                         "default": "s3",
                         "description": "The type of destination.",
+                        "example": "s3",
                         "readOnly": true,
                         "type": "string"
                       }
@@ -2059,6 +2155,7 @@
             "properties": {
               "container": {
                 "description": "The container where the archive will be stored.",
+                "example": "container-name",
                 "type": "string"
               },
               "integration": {
@@ -2066,10 +2163,12 @@
                 "properties": {
                   "client_id": {
                     "description": "A client ID.",
+                    "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                     "type": "string"
                   },
                   "tenant_id": {
                     "description": "A tenant ID.",
+                    "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                     "type": "string"
                   }
                 },
@@ -2089,11 +2188,13 @@
               },
               "storage_account": {
                 "description": "The associated storage account.",
+                "example": "account-name",
                 "type": "string"
               },
               "type": {
                 "default": "azure",
                 "description": "The type of destination.",
+                "example": "azure",
                 "readOnly": true,
                 "type": "string"
               }
@@ -2111,6 +2212,7 @@
             "properties": {
               "bucket": {
                 "description": "The bucket where the archive will be stored.",
+                "example": "bucket-name",
                 "type": "string"
               },
               "integration": {
@@ -2118,10 +2220,12 @@
                 "properties": {
                   "client_email": {
                     "description": "A client email.",
+                    "example": "youremail@example.com",
                     "type": "string"
                   },
                   "project_id": {
                     "description": "A project ID.",
+                    "example": "project-id",
                     "type": "string"
                   }
                 },
@@ -2138,6 +2242,7 @@
               "type": {
                 "default": "gcs",
                 "description": "The type of destination.",
+                "example": "gcs",
                 "readOnly": true,
                 "type": "string"
               }
@@ -2154,6 +2259,7 @@
             "properties": {
               "bucket": {
                 "description": "The bucket where the archive will be stored.",
+                "example": "bucket-name",
                 "type": "string"
               },
               "integration": {
@@ -2161,10 +2267,12 @@
                 "properties": {
                   "account_id": {
                     "description": "The account ID for the integration.",
+                    "example": "123456789012",
                     "type": "string"
                   },
                   "role_name": {
                     "description": "The path of the integration.",
+                    "example": "role-name",
                     "type": "string"
                   }
                 },
@@ -2181,6 +2289,7 @@
               "type": {
                 "default": "s3",
                 "description": "The type of destination.",
+                "example": "s3",
                 "readOnly": true,
                 "type": "string"
               }
@@ -2204,6 +2313,7 @@
         "properties": {
           "container": {
             "description": "The container where the archive will be stored.",
+            "example": "container-name",
             "type": "string"
           },
           "integration": {
@@ -2211,10 +2321,12 @@
             "properties": {
               "client_id": {
                 "description": "A client ID.",
+                "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                 "type": "string"
               },
               "tenant_id": {
                 "description": "A tenant ID.",
+                "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                 "type": "string"
               }
             },
@@ -2234,11 +2346,13 @@
           },
           "storage_account": {
             "description": "The associated storage account.",
+            "example": "account-name",
             "type": "string"
           },
           "type": {
             "default": "azure",
             "description": "The type of destination.",
+            "example": "azure",
             "readOnly": true,
             "type": "string"
           }
@@ -2256,6 +2370,7 @@
         "properties": {
           "bucket": {
             "description": "The bucket where the archive will be stored.",
+            "example": "bucket-name",
             "type": "string"
           },
           "integration": {
@@ -2263,10 +2378,12 @@
             "properties": {
               "client_email": {
                 "description": "A client email.",
+                "example": "youremail@example.com",
                 "type": "string"
               },
               "project_id": {
                 "description": "A project ID.",
+                "example": "project-id",
                 "type": "string"
               }
             },
@@ -2283,6 +2400,7 @@
           "type": {
             "default": "gcs",
             "description": "The type of destination.",
+            "example": "gcs",
             "readOnly": true,
             "type": "string"
           }
@@ -2299,6 +2417,7 @@
         "properties": {
           "bucket": {
             "description": "The bucket where the archive will be stored.",
+            "example": "bucket-name",
             "type": "string"
           },
           "integration": {
@@ -2306,10 +2425,12 @@
             "properties": {
               "account_id": {
                 "description": "The account ID for the integration.",
+                "example": "123456789012",
                 "type": "string"
               },
               "role_name": {
                 "description": "The path of the integration.",
+                "example": "role-name",
                 "type": "string"
               }
             },
@@ -2326,6 +2447,7 @@
           "type": {
             "default": "s3",
             "description": "The type of destination.",
+            "example": "s3",
             "readOnly": true,
             "type": "string"
           }
@@ -2342,10 +2464,12 @@
         "properties": {
           "client_id": {
             "description": "A client ID.",
+            "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
             "type": "string"
           },
           "tenant_id": {
             "description": "A tenant ID.",
+            "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
             "type": "string"
           }
         },
@@ -2360,10 +2484,12 @@
         "properties": {
           "client_email": {
             "description": "A client email.",
+            "example": "youremail@example.com",
             "type": "string"
           },
           "project_id": {
             "description": "A project ID.",
+            "example": "project-id",
             "type": "string"
           }
         },
@@ -2378,10 +2504,12 @@
         "properties": {
           "account_id": {
             "description": "The account ID for the integration.",
+            "example": "123456789012",
             "type": "string"
           },
           "role_name": {
             "description": "The path of the integration.",
+            "example": "role-name",
             "type": "string"
           }
         },
@@ -2436,6 +2564,7 @@
                           "properties": {
                             "container": {
                               "description": "The container where the archive will be stored.",
+                              "example": "container-name",
                               "type": "string"
                             },
                             "integration": {
@@ -2443,10 +2572,12 @@
                               "properties": {
                                 "client_id": {
                                   "description": "A client ID.",
+                                  "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                   "type": "string"
                                 },
                                 "tenant_id": {
                                   "description": "A tenant ID.",
+                                  "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                   "type": "string"
                                 }
                               },
@@ -2466,11 +2597,13 @@
                             },
                             "storage_account": {
                               "description": "The associated storage account.",
+                              "example": "account-name",
                               "type": "string"
                             },
                             "type": {
                               "default": "azure",
                               "description": "The type of destination.",
+                              "example": "azure",
                               "readOnly": true,
                               "type": "string"
                             }
@@ -2488,6 +2621,7 @@
                           "properties": {
                             "bucket": {
                               "description": "The bucket where the archive will be stored.",
+                              "example": "bucket-name",
                               "type": "string"
                             },
                             "integration": {
@@ -2495,10 +2629,12 @@
                               "properties": {
                                 "client_email": {
                                   "description": "A client email.",
+                                  "example": "youremail@example.com",
                                   "type": "string"
                                 },
                                 "project_id": {
                                   "description": "A project ID.",
+                                  "example": "project-id",
                                   "type": "string"
                                 }
                               },
@@ -2515,6 +2651,7 @@
                             "type": {
                               "default": "gcs",
                               "description": "The type of destination.",
+                              "example": "gcs",
                               "readOnly": true,
                               "type": "string"
                             }
@@ -2531,6 +2668,7 @@
                           "properties": {
                             "bucket": {
                               "description": "The bucket where the archive will be stored.",
+                              "example": "bucket-name",
                               "type": "string"
                             },
                             "integration": {
@@ -2538,10 +2676,12 @@
                               "properties": {
                                 "account_id": {
                                   "description": "The account ID for the integration.",
+                                  "example": "123456789012",
                                   "type": "string"
                                 },
                                 "role_name": {
                                   "description": "The path of the integration.",
+                                  "example": "role-name",
                                   "type": "string"
                                 }
                               },
@@ -2558,6 +2698,7 @@
                             "type": {
                               "default": "s3",
                               "description": "The type of destination.",
+                              "example": "s3",
                               "readOnly": true,
                               "type": "string"
                             }
@@ -2688,6 +2829,10 @@
             "enum": [
               "orgs"
             ],
+<<<<<<< HEAD
+=======
+            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
             "type": "string",
             "x-enum-varnames": [
               "ORGS"
@@ -2745,6 +2890,10 @@
         "enum": [
           "orgs"
         ],
+<<<<<<< HEAD
+=======
+        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
         "type": "string",
         "x-enum-varnames": [
           "ORGS"
@@ -2814,6 +2963,10 @@
             "enum": [
               "permissions"
             ],
+<<<<<<< HEAD
+=======
+            "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
             "type": "string",
             "x-enum-varnames": [
               "PERMISSIONS"
@@ -2913,6 +3066,10 @@
                   "enum": [
                     "permissions"
                   ],
+<<<<<<< HEAD
+=======
+                  "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                   "type": "string",
                   "x-enum-varnames": [
                     "PERMISSIONS"
@@ -2935,6 +3092,10 @@
         "enum": [
           "permissions"
         ],
+<<<<<<< HEAD
+=======
+        "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
         "type": "string",
         "x-enum-varnames": [
           "PERMISSIONS"
@@ -2969,6 +3130,10 @@
                 "enum": [
                   "orgs"
                 ],
+<<<<<<< HEAD
+=======
+                "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                 "type": "string",
                 "x-enum-varnames": [
                   "ORGS"
@@ -2993,6 +3158,10 @@
             "enum": [
               "orgs"
             ],
+<<<<<<< HEAD
+=======
+            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
             "type": "string",
             "x-enum-varnames": [
               "ORGS"
@@ -3019,6 +3188,10 @@
                   "enum": [
                     "orgs"
                   ],
+<<<<<<< HEAD
+=======
+                  "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                   "type": "string",
                   "x-enum-varnames": [
                     "ORGS"
@@ -3048,6 +3221,10 @@
                 "enum": [
                   "permissions"
                 ],
+<<<<<<< HEAD
+=======
+                "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                 "type": "string",
                 "x-enum-varnames": [
                   "PERMISSIONS"
@@ -3072,6 +3249,10 @@
             "enum": [
               "permissions"
             ],
+<<<<<<< HEAD
+=======
+            "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
             "type": "string",
             "x-enum-varnames": [
               "PERMISSIONS"
@@ -3098,6 +3279,10 @@
                   "enum": [
                     "permissions"
                   ],
+<<<<<<< HEAD
+=======
+                  "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                   "type": "string",
                   "x-enum-varnames": [
                     "PERMISSIONS"
@@ -3128,6 +3313,10 @@
                 "enum": [
                   "roles"
                 ],
+<<<<<<< HEAD
+=======
+                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                 "type": "string",
                 "x-enum-varnames": [
                   "ROLES"
@@ -3153,6 +3342,10 @@
             "enum": [
               "roles"
             ],
+<<<<<<< HEAD
+=======
+            "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
             "type": "string",
             "x-enum-varnames": [
               "ROLES"
@@ -3180,6 +3373,10 @@
                   "enum": [
                     "roles"
                   ],
+<<<<<<< HEAD
+=======
+                  "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                   "type": "string",
                   "x-enum-varnames": [
                     "ROLES"
@@ -3429,6 +3626,10 @@
                       "enum": [
                         "roles"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -3664,6 +3865,10 @@
                           "enum": [
                             "roles"
                           ],
+<<<<<<< HEAD
+=======
+                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -3743,6 +3948,10 @@
                               "enum": [
                                 "roles"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -3943,6 +4152,10 @@
                         "enum": [
                           "orgs"
                         ],
+<<<<<<< HEAD
+=======
+                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                         "type": "string",
                         "x-enum-varnames": [
                           "ORGS"
@@ -3972,6 +4185,10 @@
                           "enum": [
                             "orgs"
                           ],
+<<<<<<< HEAD
+=======
+                          "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                           "type": "string",
                           "x-enum-varnames": [
                             "ORGS"
@@ -4004,6 +4221,10 @@
                           "enum": [
                             "roles"
                           ],
+<<<<<<< HEAD
+=======
+                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -4036,6 +4257,10 @@
                           "enum": [
                             "roles"
                           ],
+<<<<<<< HEAD
+=======
+                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -4058,6 +4283,10 @@
             "enum": [
               "roles"
             ],
+<<<<<<< HEAD
+=======
+            "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
             "type": "string",
             "x-enum-varnames": [
               "ROLES"
@@ -4135,6 +4364,10 @@
                           "enum": [
                             "permissions"
                           ],
+<<<<<<< HEAD
+=======
+                          "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                           "type": "string",
                           "x-enum-varnames": [
                             "PERMISSIONS"
@@ -4183,6 +4416,10 @@
             "enum": [
               "roles"
             ],
+<<<<<<< HEAD
+=======
+            "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
             "type": "string",
             "x-enum-varnames": [
               "ROLES"
@@ -4228,6 +4465,10 @@
                               "enum": [
                                 "permissions"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "PERMISSIONS"
@@ -4276,6 +4517,10 @@
                 "enum": [
                   "roles"
                 ],
+<<<<<<< HEAD
+=======
+                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                 "type": "string",
                 "x-enum-varnames": [
                   "ROLES"
@@ -4308,6 +4553,10 @@
                       "enum": [
                         "permissions"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "PERMISSIONS"
@@ -4401,6 +4650,10 @@
                             "enum": [
                               "orgs"
                             ],
+<<<<<<< HEAD
+=======
+                            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                             "type": "string",
                             "x-enum-varnames": [
                               "ORGS"
@@ -4430,6 +4683,10 @@
                               "enum": [
                                 "orgs"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ORGS"
@@ -4462,6 +4719,10 @@
                               "enum": [
                                 "roles"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -4494,6 +4755,10 @@
                               "enum": [
                                 "roles"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -4516,6 +4781,10 @@
                 "enum": [
                   "roles"
                 ],
+<<<<<<< HEAD
+=======
+                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                 "type": "string",
                 "x-enum-varnames": [
                   "ROLES"
@@ -4549,6 +4818,10 @@
                     "enum": [
                       "orgs"
                     ],
+<<<<<<< HEAD
+=======
+                    "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                     "type": "string",
                     "x-enum-varnames": [
                       "ORGS"
@@ -4578,6 +4851,10 @@
                       "enum": [
                         "orgs"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "ORGS"
@@ -4610,6 +4887,10 @@
                       "enum": [
                         "roles"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -4642,6 +4923,10 @@
                       "enum": [
                         "roles"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -4691,6 +4976,10 @@
             "enum": [
               "roles"
             ],
+<<<<<<< HEAD
+=======
+            "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
             "type": "string",
             "x-enum-varnames": [
               "ROLES"
@@ -4725,6 +5014,10 @@
                 "enum": [
                   "roles"
                 ],
+<<<<<<< HEAD
+=======
+                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                 "type": "string",
                 "x-enum-varnames": [
                   "ROLES"
@@ -4789,6 +5082,10 @@
                               "enum": [
                                 "orgs"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ORGS"
@@ -4818,6 +5115,10 @@
                                 "enum": [
                                   "orgs"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -4850,6 +5151,10 @@
                                 "enum": [
                                   "roles"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -4882,6 +5187,10 @@
                                 "enum": [
                                   "roles"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -4904,6 +5213,10 @@
                   "enum": [
                     "roles"
                   ],
+<<<<<<< HEAD
+=======
+                  "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                   "type": "string",
                   "x-enum-varnames": [
                     "ROLES"
@@ -4969,6 +5282,10 @@
         "enum": [
           "roles"
         ],
+<<<<<<< HEAD
+=======
+        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
         "type": "string",
         "x-enum-varnames": [
           "ROLES"
@@ -5262,6 +5579,7 @@
         "properties": {
           "cases": {
             "description": "Cases for generating signals.",
+            "example": null,
             "items": {
               "description": "Case when signal is generated.",
               "properties": {
@@ -5306,14 +5624,17 @@
           },
           "enabled": {
             "description": "Whether the rule is enabled.",
+            "example": true,
             "type": "boolean"
           },
           "message": {
             "description": "Message for generated signals.",
+            "example": null,
             "type": "string"
           },
           "name": {
             "description": "The name of the rule",
+            "example": null,
             "type": "string"
           },
           "options": {
@@ -5407,6 +5728,7 @@
           },
           "queries": {
             "description": "Queries for selecting logs which are part of the rule.",
+            "example": null,
             "items": {
               "description": "Query for matching rule.",
               "properties": {
@@ -5433,6 +5755,10 @@
           },
           "tags": {
             "description": "Tags for generated signals.",
+            "example": [
+              "env:prod",
+              "team:security"
+            ],
             "items": {
               "description": "Tag",
               "type": "string"
@@ -6128,6 +6454,10 @@
                         "enum": [
                           "orgs"
                         ],
+<<<<<<< HEAD
+=======
+                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                         "type": "string",
                         "x-enum-varnames": [
                           "ORGS"
@@ -6157,6 +6487,10 @@
                           "enum": [
                             "orgs"
                           ],
+<<<<<<< HEAD
+=======
+                          "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                           "type": "string",
                           "x-enum-varnames": [
                             "ORGS"
@@ -6215,6 +6549,10 @@
                           "enum": [
                             "roles"
                           ],
+<<<<<<< HEAD
+=======
+                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -6349,6 +6687,10 @@
                           "enum": [
                             "roles"
                           ],
+<<<<<<< HEAD
+=======
+                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -6425,6 +6767,10 @@
                               "enum": [
                                 "roles"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -6794,6 +7140,10 @@
                       "enum": [
                         "roles"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -6882,6 +7232,10 @@
                             "enum": [
                               "orgs"
                             ],
+<<<<<<< HEAD
+=======
+                            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                             "type": "string",
                             "x-enum-varnames": [
                               "ORGS"
@@ -6911,6 +7265,10 @@
                               "enum": [
                                 "orgs"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ORGS"
@@ -6969,6 +7327,10 @@
                               "enum": [
                                 "roles"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -7057,6 +7419,10 @@
                       "enum": [
                         "orgs"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "ORGS"
@@ -7116,6 +7482,10 @@
                       "enum": [
                         "permissions"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "PERMISSIONS"
@@ -7175,6 +7545,10 @@
                                   "enum": [
                                     "orgs"
                                   ],
+<<<<<<< HEAD
+=======
+                                  "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "ORGS"
@@ -7204,6 +7578,10 @@
                                     "enum": [
                                       "orgs"
                                     ],
+<<<<<<< HEAD
+=======
+                                    "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ORGS"
@@ -7236,6 +7614,10 @@
                                     "enum": [
                                       "roles"
                                     ],
+<<<<<<< HEAD
+=======
+                                    "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ROLES"
@@ -7268,6 +7650,10 @@
                                     "enum": [
                                       "roles"
                                     ],
+<<<<<<< HEAD
+=======
+                                    "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ROLES"
@@ -7290,6 +7676,10 @@
                       "enum": [
                         "roles"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -7365,6 +7755,10 @@
                 "enum": [
                   "orgs"
                 ],
+<<<<<<< HEAD
+=======
+                "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                 "type": "string",
                 "x-enum-varnames": [
                   "ORGS"
@@ -7424,6 +7818,10 @@
                 "enum": [
                   "permissions"
                 ],
+<<<<<<< HEAD
+=======
+                "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                 "type": "string",
                 "x-enum-varnames": [
                   "PERMISSIONS"
@@ -7483,6 +7881,10 @@
                             "enum": [
                               "orgs"
                             ],
+<<<<<<< HEAD
+=======
+                            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                             "type": "string",
                             "x-enum-varnames": [
                               "ORGS"
@@ -7512,6 +7914,10 @@
                               "enum": [
                                 "orgs"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ORGS"
@@ -7544,6 +7950,10 @@
                               "enum": [
                                 "roles"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -7576,6 +7986,10 @@
                               "enum": [
                                 "roles"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -7598,6 +8012,10 @@
                 "enum": [
                   "roles"
                 ],
+<<<<<<< HEAD
+=======
+                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                 "type": "string",
                 "x-enum-varnames": [
                   "ROLES"
@@ -7631,6 +8049,10 @@
                     "enum": [
                       "orgs"
                     ],
+<<<<<<< HEAD
+=======
+                    "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                     "type": "string",
                     "x-enum-varnames": [
                       "ORGS"
@@ -7660,6 +8082,10 @@
                       "enum": [
                         "orgs"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "ORGS"
@@ -7718,6 +8144,10 @@
                       "enum": [
                         "roles"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -7910,6 +8340,10 @@
                               "enum": [
                                 "orgs"
                               ],
+<<<<<<< HEAD
+=======
+                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                               "type": "string",
                               "x-enum-varnames": [
                                 "ORGS"
@@ -7939,6 +8373,10 @@
                                 "enum": [
                                   "orgs"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -7997,6 +8435,10 @@
                                 "enum": [
                                   "roles"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -8087,6 +8529,10 @@
                       "enum": [
                         "orgs"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "ORGS"
@@ -8146,6 +8592,10 @@
                       "enum": [
                         "permissions"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "PERMISSIONS"
@@ -8205,6 +8655,10 @@
                                   "enum": [
                                     "orgs"
                                   ],
+<<<<<<< HEAD
+=======
+                                  "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "ORGS"
@@ -8234,6 +8688,10 @@
                                     "enum": [
                                       "orgs"
                                     ],
+<<<<<<< HEAD
+=======
+                                    "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ORGS"
@@ -8266,6 +8724,10 @@
                                     "enum": [
                                       "roles"
                                     ],
+<<<<<<< HEAD
+=======
+                                    "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ROLES"
@@ -8298,6 +8760,10 @@
                                     "enum": [
                                       "roles"
                                     ],
+<<<<<<< HEAD
+=======
+                                    "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ROLES"
@@ -8320,6 +8786,10 @@
                       "enum": [
                         "roles"
                       ],
+<<<<<<< HEAD
+=======
+                      "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -8426,6 +8896,7 @@
                 "properties": {
                   "dashboards": {
                     "description": "List of dashboards in the dashboard list.",
+                    "example": null,
                     "items": {
                       "description": "A dashboard within a list.",
                       "properties": {
@@ -8460,6 +8931,7 @@
                         },
                         "id": {
                           "description": "ID of the dashboard.",
+                          "example": null,
                           "type": "string"
                         },
                         "is_favorite": {
@@ -8587,6 +9059,7 @@
                           },
                           "id": {
                             "description": "ID of the dashboard.",
+                            "example": null,
                             "type": "string"
                           },
                           "is_favorite": {
@@ -8767,6 +9240,7 @@
                   "properties": {
                     "dashboards": {
                       "description": "List of dashboards in the dashboard list.",
+                      "example": null,
                       "items": {
                         "description": "A dashboard within a list.",
                         "properties": {
@@ -8801,6 +9275,7 @@
                           },
                           "id": {
                             "description": "ID of the dashboard.",
+                            "example": null,
                             "type": "string"
                           },
                           "is_favorite": {
@@ -8963,6 +9438,7 @@
                 "properties": {
                   "dashboards": {
                     "description": "List of dashboards in the dashboard list.",
+                    "example": null,
                     "items": {
                       "description": "A dashboard within a list.",
                       "properties": {
@@ -8997,6 +9473,7 @@
                         },
                         "id": {
                           "description": "ID of the dashboard.",
+                          "example": null,
                           "type": "string"
                         },
                         "is_favorite": {
@@ -9124,6 +9601,7 @@
                           },
                           "id": {
                             "description": "ID of the dashboard.",
+                            "example": null,
                             "type": "string"
                           },
                           "is_favorite": {
@@ -9303,6 +9781,7 @@
                 "properties": {
                   "dashboards": {
                     "description": "List of dashboards in the dashboard list.",
+                    "example": null,
                     "items": {
                       "description": "A dashboard within a list.",
                       "properties": {
@@ -9337,6 +9816,7 @@
                         },
                         "id": {
                           "description": "ID of the dashboard.",
+                          "example": null,
                           "type": "string"
                         },
                         "is_favorite": {
@@ -9430,6 +9910,7 @@
                   "properties": {
                     "dashboards": {
                       "description": "List of dashboards in the dashboard list.",
+                      "example": null,
                       "items": {
                         "description": "A dashboard within a list.",
                         "properties": {
@@ -9464,6 +9945,7 @@
                           },
                           "id": {
                             "description": "ID of the dashboard.",
+                            "example": null,
                             "type": "string"
                           },
                           "is_favorite": {
@@ -9666,6 +10148,7 @@
                                     "properties": {
                                       "container": {
                                         "description": "The container where the archive will be stored.",
+                                        "example": "container-name",
                                         "type": "string"
                                       },
                                       "integration": {
@@ -9673,10 +10156,12 @@
                                         "properties": {
                                           "client_id": {
                                             "description": "A client ID.",
+                                            "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                             "type": "string"
                                           },
                                           "tenant_id": {
                                             "description": "A tenant ID.",
+                                            "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                             "type": "string"
                                           }
                                         },
@@ -9696,11 +10181,13 @@
                                       },
                                       "storage_account": {
                                         "description": "The associated storage account.",
+                                        "example": "account-name",
                                         "type": "string"
                                       },
                                       "type": {
                                         "default": "azure",
                                         "description": "The type of destination.",
+                                        "example": "azure",
                                         "readOnly": true,
                                         "type": "string"
                                       }
@@ -9718,6 +10205,7 @@
                                     "properties": {
                                       "bucket": {
                                         "description": "The bucket where the archive will be stored.",
+                                        "example": "bucket-name",
                                         "type": "string"
                                       },
                                       "integration": {
@@ -9725,10 +10213,12 @@
                                         "properties": {
                                           "client_email": {
                                             "description": "A client email.",
+                                            "example": "youremail@example.com",
                                             "type": "string"
                                           },
                                           "project_id": {
                                             "description": "A project ID.",
+                                            "example": "project-id",
                                             "type": "string"
                                           }
                                         },
@@ -9745,6 +10235,7 @@
                                       "type": {
                                         "default": "gcs",
                                         "description": "The type of destination.",
+                                        "example": "gcs",
                                         "readOnly": true,
                                         "type": "string"
                                       }
@@ -9761,6 +10252,7 @@
                                     "properties": {
                                       "bucket": {
                                         "description": "The bucket where the archive will be stored.",
+                                        "example": "bucket-name",
                                         "type": "string"
                                       },
                                       "integration": {
@@ -9768,10 +10260,12 @@
                                         "properties": {
                                           "account_id": {
                                             "description": "The account ID for the integration.",
+                                            "example": "123456789012",
                                             "type": "string"
                                           },
                                           "role_name": {
                                             "description": "The path of the integration.",
+                                            "example": "role-name",
                                             "type": "string"
                                           }
                                         },
@@ -9788,6 +10282,7 @@
                                       "type": {
                                         "default": "s3",
                                         "description": "The type of destination.",
+                                        "example": "s3",
                                         "readOnly": true,
                                         "type": "string"
                                       }
@@ -9932,6 +10427,7 @@
                                 "properties": {
                                   "container": {
                                     "description": "The container where the archive will be stored.",
+                                    "example": "container-name",
                                     "type": "string"
                                   },
                                   "integration": {
@@ -9939,10 +10435,12 @@
                                     "properties": {
                                       "client_id": {
                                         "description": "A client ID.",
+                                        "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                         "type": "string"
                                       },
                                       "tenant_id": {
                                         "description": "A tenant ID.",
+                                        "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                         "type": "string"
                                       }
                                     },
@@ -9962,11 +10460,13 @@
                                   },
                                   "storage_account": {
                                     "description": "The associated storage account.",
+                                    "example": "account-name",
                                     "type": "string"
                                   },
                                   "type": {
                                     "default": "azure",
                                     "description": "The type of destination.",
+                                    "example": "azure",
                                     "readOnly": true,
                                     "type": "string"
                                   }
@@ -9984,6 +10484,7 @@
                                 "properties": {
                                   "bucket": {
                                     "description": "The bucket where the archive will be stored.",
+                                    "example": "bucket-name",
                                     "type": "string"
                                   },
                                   "integration": {
@@ -9991,10 +10492,12 @@
                                     "properties": {
                                       "client_email": {
                                         "description": "A client email.",
+                                        "example": "youremail@example.com",
                                         "type": "string"
                                       },
                                       "project_id": {
                                         "description": "A project ID.",
+                                        "example": "project-id",
                                         "type": "string"
                                       }
                                     },
@@ -10011,6 +10514,7 @@
                                   "type": {
                                     "default": "gcs",
                                     "description": "The type of destination.",
+                                    "example": "gcs",
                                     "readOnly": true,
                                     "type": "string"
                                   }
@@ -10027,6 +10531,7 @@
                                 "properties": {
                                   "bucket": {
                                     "description": "The bucket where the archive will be stored.",
+                                    "example": "bucket-name",
                                     "type": "string"
                                   },
                                   "integration": {
@@ -10034,10 +10539,12 @@
                                     "properties": {
                                       "account_id": {
                                         "description": "The account ID for the integration.",
+                                        "example": "123456789012",
                                         "type": "string"
                                       },
                                       "role_name": {
                                         "description": "The path of the integration.",
+                                        "example": "role-name",
                                         "type": "string"
                                       }
                                     },
@@ -10054,6 +10561,7 @@
                                   "type": {
                                     "default": "s3",
                                     "description": "The type of destination.",
+                                    "example": "s3",
                                     "readOnly": true,
                                     "type": "string"
                                   }
@@ -10140,6 +10648,7 @@
                                   "properties": {
                                     "container": {
                                       "description": "The container where the archive will be stored.",
+                                      "example": "container-name",
                                       "type": "string"
                                     },
                                     "integration": {
@@ -10147,10 +10656,12 @@
                                       "properties": {
                                         "client_id": {
                                           "description": "A client ID.",
+                                          "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                           "type": "string"
                                         },
                                         "tenant_id": {
                                           "description": "A tenant ID.",
+                                          "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                           "type": "string"
                                         }
                                       },
@@ -10170,11 +10681,13 @@
                                     },
                                     "storage_account": {
                                       "description": "The associated storage account.",
+                                      "example": "account-name",
                                       "type": "string"
                                     },
                                     "type": {
                                       "default": "azure",
                                       "description": "The type of destination.",
+                                      "example": "azure",
                                       "readOnly": true,
                                       "type": "string"
                                     }
@@ -10192,6 +10705,7 @@
                                   "properties": {
                                     "bucket": {
                                       "description": "The bucket where the archive will be stored.",
+                                      "example": "bucket-name",
                                       "type": "string"
                                     },
                                     "integration": {
@@ -10199,10 +10713,12 @@
                                       "properties": {
                                         "client_email": {
                                           "description": "A client email.",
+                                          "example": "youremail@example.com",
                                           "type": "string"
                                         },
                                         "project_id": {
                                           "description": "A project ID.",
+                                          "example": "project-id",
                                           "type": "string"
                                         }
                                       },
@@ -10219,6 +10735,7 @@
                                     "type": {
                                       "default": "gcs",
                                       "description": "The type of destination.",
+                                      "example": "gcs",
                                       "readOnly": true,
                                       "type": "string"
                                     }
@@ -10235,6 +10752,7 @@
                                   "properties": {
                                     "bucket": {
                                       "description": "The bucket where the archive will be stored.",
+                                      "example": "bucket-name",
                                       "type": "string"
                                     },
                                     "integration": {
@@ -10242,10 +10760,12 @@
                                       "properties": {
                                         "account_id": {
                                           "description": "The account ID for the integration.",
+                                          "example": "123456789012",
                                           "type": "string"
                                         },
                                         "role_name": {
                                           "description": "The path of the integration.",
+                                          "example": "role-name",
                                           "type": "string"
                                         }
                                       },
@@ -10262,6 +10782,7 @@
                                     "type": {
                                       "default": "s3",
                                       "description": "The type of destination.",
+                                      "example": "s3",
                                       "readOnly": true,
                                       "type": "string"
                                     }
@@ -10545,6 +11066,7 @@
                                   "properties": {
                                     "container": {
                                       "description": "The container where the archive will be stored.",
+                                      "example": "container-name",
                                       "type": "string"
                                     },
                                     "integration": {
@@ -10552,10 +11074,12 @@
                                       "properties": {
                                         "client_id": {
                                           "description": "A client ID.",
+                                          "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                           "type": "string"
                                         },
                                         "tenant_id": {
                                           "description": "A tenant ID.",
+                                          "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                           "type": "string"
                                         }
                                       },
@@ -10575,11 +11099,13 @@
                                     },
                                     "storage_account": {
                                       "description": "The associated storage account.",
+                                      "example": "account-name",
                                       "type": "string"
                                     },
                                     "type": {
                                       "default": "azure",
                                       "description": "The type of destination.",
+                                      "example": "azure",
                                       "readOnly": true,
                                       "type": "string"
                                     }
@@ -10597,6 +11123,7 @@
                                   "properties": {
                                     "bucket": {
                                       "description": "The bucket where the archive will be stored.",
+                                      "example": "bucket-name",
                                       "type": "string"
                                     },
                                     "integration": {
@@ -10604,10 +11131,12 @@
                                       "properties": {
                                         "client_email": {
                                           "description": "A client email.",
+                                          "example": "youremail@example.com",
                                           "type": "string"
                                         },
                                         "project_id": {
                                           "description": "A project ID.",
+                                          "example": "project-id",
                                           "type": "string"
                                         }
                                       },
@@ -10624,6 +11153,7 @@
                                     "type": {
                                       "default": "gcs",
                                       "description": "The type of destination.",
+                                      "example": "gcs",
                                       "readOnly": true,
                                       "type": "string"
                                     }
@@ -10640,6 +11170,7 @@
                                   "properties": {
                                     "bucket": {
                                       "description": "The bucket where the archive will be stored.",
+                                      "example": "bucket-name",
                                       "type": "string"
                                     },
                                     "integration": {
@@ -10647,10 +11178,12 @@
                                       "properties": {
                                         "account_id": {
                                           "description": "The account ID for the integration.",
+                                          "example": "123456789012",
                                           "type": "string"
                                         },
                                         "role_name": {
                                           "description": "The path of the integration.",
+                                          "example": "role-name",
                                           "type": "string"
                                         }
                                       },
@@ -10667,6 +11200,7 @@
                                     "type": {
                                       "default": "s3",
                                       "description": "The type of destination.",
+                                      "example": "s3",
                                       "readOnly": true,
                                       "type": "string"
                                     }
@@ -10870,6 +11404,7 @@
                                 "properties": {
                                   "container": {
                                     "description": "The container where the archive will be stored.",
+                                    "example": "container-name",
                                     "type": "string"
                                   },
                                   "integration": {
@@ -10877,10 +11412,12 @@
                                     "properties": {
                                       "client_id": {
                                         "description": "A client ID.",
+                                        "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                         "type": "string"
                                       },
                                       "tenant_id": {
                                         "description": "A tenant ID.",
+                                        "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                         "type": "string"
                                       }
                                     },
@@ -10900,11 +11437,13 @@
                                   },
                                   "storage_account": {
                                     "description": "The associated storage account.",
+                                    "example": "account-name",
                                     "type": "string"
                                   },
                                   "type": {
                                     "default": "azure",
                                     "description": "The type of destination.",
+                                    "example": "azure",
                                     "readOnly": true,
                                     "type": "string"
                                   }
@@ -10922,6 +11461,7 @@
                                 "properties": {
                                   "bucket": {
                                     "description": "The bucket where the archive will be stored.",
+                                    "example": "bucket-name",
                                     "type": "string"
                                   },
                                   "integration": {
@@ -10929,10 +11469,12 @@
                                     "properties": {
                                       "client_email": {
                                         "description": "A client email.",
+                                        "example": "youremail@example.com",
                                         "type": "string"
                                       },
                                       "project_id": {
                                         "description": "A project ID.",
+                                        "example": "project-id",
                                         "type": "string"
                                       }
                                     },
@@ -10949,6 +11491,7 @@
                                   "type": {
                                     "default": "gcs",
                                     "description": "The type of destination.",
+                                    "example": "gcs",
                                     "readOnly": true,
                                     "type": "string"
                                   }
@@ -10965,6 +11508,7 @@
                                 "properties": {
                                   "bucket": {
                                     "description": "The bucket where the archive will be stored.",
+                                    "example": "bucket-name",
                                     "type": "string"
                                   },
                                   "integration": {
@@ -10972,10 +11516,12 @@
                                     "properties": {
                                       "account_id": {
                                         "description": "The account ID for the integration.",
+                                        "example": "123456789012",
                                         "type": "string"
                                       },
                                       "role_name": {
                                         "description": "The path of the integration.",
+                                        "example": "role-name",
                                         "type": "string"
                                       }
                                     },
@@ -10992,6 +11538,7 @@
                                   "type": {
                                     "default": "s3",
                                     "description": "The type of destination.",
+                                    "example": "s3",
                                     "readOnly": true,
                                     "type": "string"
                                   }
@@ -11078,6 +11625,7 @@
                                   "properties": {
                                     "container": {
                                       "description": "The container where the archive will be stored.",
+                                      "example": "container-name",
                                       "type": "string"
                                     },
                                     "integration": {
@@ -11085,10 +11633,12 @@
                                       "properties": {
                                         "client_id": {
                                           "description": "A client ID.",
+                                          "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                           "type": "string"
                                         },
                                         "tenant_id": {
                                           "description": "A tenant ID.",
+                                          "example": "aaaaaaaa-1a1a-1a1a-1a1a-aaaaaaaaaaaa",
                                           "type": "string"
                                         }
                                       },
@@ -11108,11 +11658,13 @@
                                     },
                                     "storage_account": {
                                       "description": "The associated storage account.",
+                                      "example": "account-name",
                                       "type": "string"
                                     },
                                     "type": {
                                       "default": "azure",
                                       "description": "The type of destination.",
+                                      "example": "azure",
                                       "readOnly": true,
                                       "type": "string"
                                     }
@@ -11130,6 +11682,7 @@
                                   "properties": {
                                     "bucket": {
                                       "description": "The bucket where the archive will be stored.",
+                                      "example": "bucket-name",
                                       "type": "string"
                                     },
                                     "integration": {
@@ -11137,10 +11690,12 @@
                                       "properties": {
                                         "client_email": {
                                           "description": "A client email.",
+                                          "example": "youremail@example.com",
                                           "type": "string"
                                         },
                                         "project_id": {
                                           "description": "A project ID.",
+                                          "example": "project-id",
                                           "type": "string"
                                         }
                                       },
@@ -11157,6 +11712,7 @@
                                     "type": {
                                       "default": "gcs",
                                       "description": "The type of destination.",
+                                      "example": "gcs",
                                       "readOnly": true,
                                       "type": "string"
                                     }
@@ -11173,6 +11729,7 @@
                                   "properties": {
                                     "bucket": {
                                       "description": "The bucket where the archive will be stored.",
+                                      "example": "bucket-name",
                                       "type": "string"
                                     },
                                     "integration": {
@@ -11180,10 +11737,12 @@
                                       "properties": {
                                         "account_id": {
                                           "description": "The account ID for the integration.",
+                                          "example": "123456789012",
                                           "type": "string"
                                         },
                                         "role_name": {
                                           "description": "The path of the integration.",
+                                          "example": "role-name",
                                           "type": "string"
                                         }
                                       },
@@ -11200,6 +11759,10 @@
                                     "type": {
                                       "default": "s3",
                                       "description": "The type of destination.",
+<<<<<<< HEAD
+=======
+                                      "example": "s3",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                       "readOnly": true,
                                       "type": "string"
                                     }
@@ -11222,6 +11785,7 @@
                               "description": "The archive name.",
                               "example": "Nginx Archive",
                               "type": "string"
+<<<<<<< HEAD
                             },
                             "query": {
                               "description": "The archive query/filter. Logs matching this query are included in the archive.",
@@ -11676,6 +12240,8 @@
                                 },
                                 "type": "object"
                               }
+=======
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                             },
                             "type": "object"
                           },
@@ -11977,9 +12543,15 @@
                       },
                       "type": {
                         "default": "roles",
-                        "description": "The type of the resource. The value should always be roles.",
+                        "description": "Roles type.",
+                        "enum": [
+                          "roles"
+                        ],
                         "example": "roles",
-                        "type": "string"
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ROLES"
+                        ]
                       }
                     },
                     "type": "object"
@@ -12144,9 +12716,15 @@
                                       },
                                       "type": {
                                         "default": "orgs",
-                                        "description": "Organizations type.",
-                                        "readOnly": true,
-                                        "type": "string"
+                                        "description": "Organizations resource type.",
+                                        "enum": [
+                                          "orgs"
+                                        ],
+                                        "example": "orgs",
+                                        "type": "string",
+                                        "x-enum-varnames": [
+                                          "ORGS"
+                                        ]
                                       }
                                     },
                                     "type": "object"
@@ -12168,9 +12746,15 @@
                                         },
                                         "type": {
                                           "default": "orgs",
-                                          "description": "Organizations type.",
-                                          "readOnly": true,
-                                          "type": "string"
+                                          "description": "Organizations resource type.",
+                                          "enum": [
+                                            "orgs"
+                                          ],
+                                          "example": "orgs",
+                                          "type": "string",
+                                          "x-enum-varnames": [
+                                            "ORGS"
+                                          ]
                                         }
                                       },
                                       "type": "object"
@@ -12195,9 +12779,15 @@
                                         },
                                         "type": {
                                           "default": "roles",
-                                          "description": "The type of the resource. The value should always be roles.",
+                                          "description": "Roles type.",
+                                          "enum": [
+                                            "roles"
+                                          ],
                                           "example": "roles",
-                                          "type": "string"
+                                          "type": "string",
+                                          "x-enum-varnames": [
+                                            "ROLES"
+                                          ]
                                         }
                                       },
                                       "type": "object"
@@ -12222,9 +12812,15 @@
                                         },
                                         "type": {
                                           "default": "roles",
-                                          "description": "The type of the resource. The value should always be roles.",
+                                          "description": "Roles type.",
+                                          "enum": [
+                                            "roles"
+                                          ],
                                           "example": "roles",
-                                          "type": "string"
+                                          "type": "string",
+                                          "x-enum-varnames": [
+                                            "ROLES"
+                                          ]
                                         }
                                       },
                                       "type": "object"
@@ -12240,8 +12836,14 @@
                           "type": {
                             "default": "roles",
                             "description": "Roles type.",
-                            "readOnly": true,
-                            "type": "string"
+                            "enum": [
+                              "roles"
+                            ],
+                            "example": "roles",
+                            "type": "string",
+                            "x-enum-varnames": [
+                              "ROLES"
+                            ]
                           }
                         },
                         "required": [
@@ -12393,9 +12995,15 @@
                       },
                       "type": {
                         "default": "roles",
-                        "description": "The type of the resource. The value should always be roles.",
+                        "description": "Roles type.",
+                        "enum": [
+                          "roles"
+                        ],
                         "example": "roles",
-                        "type": "string"
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "ROLES"
+                        ]
                       }
                     },
                     "type": "object"
@@ -13189,6 +13797,10 @@
                                         "enum": [
                                           "roles"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -13564,6 +14176,10 @@
                         "enum": [
                           "roles"
                         ],
+<<<<<<< HEAD
+=======
+                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                         "type": "string",
                         "x-enum-varnames": [
                           "ROLES"
@@ -13862,6 +14478,10 @@
                         "enum": [
                           "roles"
                         ],
+<<<<<<< HEAD
+=======
+                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                         "type": "string",
                         "x-enum-varnames": [
                           "ROLES"
@@ -14025,6 +14645,10 @@
                             "enum": [
                               "permissions"
                             ],
+<<<<<<< HEAD
+=======
+                            "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                             "type": "string",
                             "x-enum-varnames": [
                               "PERMISSIONS"
@@ -14223,6 +14847,10 @@
                                         "enum": [
                                           "orgs"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -14252,6 +14880,10 @@
                                           "enum": [
                                             "orgs"
                                           ],
+<<<<<<< HEAD
+=======
+                                          "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ORGS"
@@ -14284,6 +14916,10 @@
                                           "enum": [
                                             "roles"
                                           ],
+<<<<<<< HEAD
+=======
+                                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -14316,6 +14952,10 @@
                                           "enum": [
                                             "roles"
                                           ],
+<<<<<<< HEAD
+=======
+                                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -14338,6 +14978,10 @@
                             "enum": [
                               "roles"
                             ],
+<<<<<<< HEAD
+=======
+                            "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                             "type": "string",
                             "x-enum-varnames": [
                               "ROLES"
@@ -14454,6 +15098,10 @@
                                       "enum": [
                                         "permissions"
                                       ],
+<<<<<<< HEAD
+=======
+                                      "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "PERMISSIONS"
@@ -14502,6 +15150,10 @@
                         "enum": [
                           "roles"
                         ],
+<<<<<<< HEAD
+=======
+                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                         "type": "string",
                         "x-enum-varnames": [
                           "ROLES"
@@ -14571,6 +15223,10 @@
                                       "enum": [
                                         "orgs"
                                       ],
+<<<<<<< HEAD
+=======
+                                      "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -14600,6 +15256,10 @@
                                         "enum": [
                                           "orgs"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -14632,6 +15292,10 @@
                                         "enum": [
                                           "roles"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -14664,6 +15328,10 @@
                                         "enum": [
                                           "roles"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -14686,6 +15354,10 @@
                           "enum": [
                             "roles"
                           ],
+<<<<<<< HEAD
+=======
+                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -14907,6 +15579,10 @@
                                       "enum": [
                                         "orgs"
                                       ],
+<<<<<<< HEAD
+=======
+                                      "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -14936,6 +15612,10 @@
                                         "enum": [
                                           "orgs"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -14968,6 +15648,10 @@
                                         "enum": [
                                           "roles"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -15000,6 +15684,10 @@
                                         "enum": [
                                           "roles"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -15022,6 +15710,10 @@
                           "enum": [
                             "roles"
                           ],
+<<<<<<< HEAD
+=======
+                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -15140,6 +15832,10 @@
                         "enum": [
                           "roles"
                         ],
+<<<<<<< HEAD
+=======
+                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                         "type": "string",
                         "x-enum-varnames": [
                           "ROLES"
@@ -15209,6 +15905,10 @@
                                       "enum": [
                                         "orgs"
                                       ],
+<<<<<<< HEAD
+=======
+                                      "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -15238,6 +15938,10 @@
                                         "enum": [
                                           "orgs"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -15270,6 +15974,10 @@
                                         "enum": [
                                           "roles"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -15302,6 +16010,10 @@
                                         "enum": [
                                           "roles"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -15324,6 +16036,10 @@
                           "enum": [
                             "roles"
                           ],
+<<<<<<< HEAD
+=======
+                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -15484,6 +16200,10 @@
                         "enum": [
                           "permissions"
                         ],
+<<<<<<< HEAD
+=======
+                        "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                         "type": "string",
                         "x-enum-varnames": [
                           "PERMISSIONS"
@@ -15555,6 +16275,10 @@
                             "enum": [
                               "permissions"
                             ],
+<<<<<<< HEAD
+=======
+                            "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                             "type": "string",
                             "x-enum-varnames": [
                               "PERMISSIONS"
@@ -15728,6 +16452,10 @@
                             "enum": [
                               "permissions"
                             ],
+<<<<<<< HEAD
+=======
+                            "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                             "type": "string",
                             "x-enum-varnames": [
                               "PERMISSIONS"
@@ -15838,6 +16566,10 @@
                         "enum": [
                           "permissions"
                         ],
+<<<<<<< HEAD
+=======
+                        "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                         "type": "string",
                         "x-enum-varnames": [
                           "PERMISSIONS"
@@ -15909,6 +16641,10 @@
                             "enum": [
                               "permissions"
                             ],
+<<<<<<< HEAD
+=======
+                            "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                             "type": "string",
                             "x-enum-varnames": [
                               "PERMISSIONS"
@@ -16133,6 +16869,10 @@
                                         "enum": [
                                           "orgs"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -16162,6 +16902,10 @@
                                           "enum": [
                                             "orgs"
                                           ],
+<<<<<<< HEAD
+=======
+                                          "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ORGS"
@@ -16220,6 +16964,10 @@
                                           "enum": [
                                             "roles"
                                           ],
+<<<<<<< HEAD
+=======
+                                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -16310,6 +17058,10 @@
                                 "enum": [
                                   "orgs"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -16369,6 +17121,10 @@
                                 "enum": [
                                   "permissions"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -16428,6 +17184,10 @@
                                             "enum": [
                                               "orgs"
                                             ],
+<<<<<<< HEAD
+=======
+                                            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -16457,6 +17217,10 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -16489,6 +17253,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -16521,6 +17289,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -16543,6 +17315,10 @@
                                 "enum": [
                                   "roles"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -16803,6 +17579,10 @@
                                         "enum": [
                                           "orgs"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -16832,6 +17612,10 @@
                                           "enum": [
                                             "orgs"
                                           ],
+<<<<<<< HEAD
+=======
+                                          "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ORGS"
@@ -16890,6 +17674,10 @@
                                           "enum": [
                                             "roles"
                                           ],
+<<<<<<< HEAD
+=======
+                                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -16980,6 +17768,10 @@
                                 "enum": [
                                   "orgs"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -17039,6 +17831,10 @@
                                 "enum": [
                                   "permissions"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -17098,6 +17894,10 @@
                                             "enum": [
                                               "orgs"
                                             ],
+<<<<<<< HEAD
+=======
+                                            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -17127,6 +17927,10 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -17159,6 +17963,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -17191,6 +17999,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -17213,6 +18025,10 @@
                                 "enum": [
                                   "roles"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -17434,6 +18250,10 @@
                                         "enum": [
                                           "orgs"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -17463,6 +18283,10 @@
                                           "enum": [
                                             "orgs"
                                           ],
+<<<<<<< HEAD
+=======
+                                          "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ORGS"
@@ -17521,6 +18345,10 @@
                                           "enum": [
                                             "roles"
                                           ],
+<<<<<<< HEAD
+=======
+                                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -17611,6 +18439,10 @@
                                 "enum": [
                                   "orgs"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -17670,6 +18502,10 @@
                                 "enum": [
                                   "permissions"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -17729,6 +18565,10 @@
                                             "enum": [
                                               "orgs"
                                             ],
+<<<<<<< HEAD
+=======
+                                            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -17758,6 +18598,10 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -17790,6 +18634,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -17822,6 +18670,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -17844,6 +18696,10 @@
                                 "enum": [
                                   "roles"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -18293,6 +19149,7 @@
                 "properties": {
                   "cases": {
                     "description": "Cases for generating signals.",
+                    "example": null,
                     "items": {
                       "description": "Case when signal is generated.",
                       "properties": {
@@ -18337,14 +19194,17 @@
                   },
                   "enabled": {
                     "description": "Whether the rule is enabled.",
+                    "example": true,
                     "type": "boolean"
                   },
                   "message": {
                     "description": "Message for generated signals.",
+                    "example": null,
                     "type": "string"
                   },
                   "name": {
                     "description": "The name of the rule",
+                    "example": null,
                     "type": "string"
                   },
                   "options": {
@@ -18438,6 +19298,7 @@
                   },
                   "queries": {
                     "description": "Queries for selecting logs which are part of the rule.",
+                    "example": null,
                     "items": {
                       "description": "Query for matching rule.",
                       "properties": {
@@ -18464,6 +19325,10 @@
                   },
                   "tags": {
                     "description": "Tags for generated signals.",
+                    "example": [
+                      "env:prod",
+                      "team:security"
+                    ],
                     "items": {
                       "description": "Tag",
                       "type": "string"
@@ -20104,6 +20969,10 @@
                                         "enum": [
                                           "orgs"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -20133,6 +21002,10 @@
                                           "enum": [
                                             "orgs"
                                           ],
+<<<<<<< HEAD
+=======
+                                          "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ORGS"
@@ -20191,6 +21064,10 @@
                                           "enum": [
                                             "roles"
                                           ],
+<<<<<<< HEAD
+=======
+                                          "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -20281,6 +21158,10 @@
                                 "enum": [
                                   "orgs"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -20340,6 +21221,10 @@
                                 "enum": [
                                   "permissions"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -20399,6 +21284,10 @@
                                             "enum": [
                                               "orgs"
                                             ],
+<<<<<<< HEAD
+=======
+                                            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -20428,6 +21317,10 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -20460,6 +21353,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -20492,6 +21389,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -20514,6 +21415,10 @@
                                 "enum": [
                                   "roles"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -20668,6 +21573,10 @@
                                       "enum": [
                                         "roles"
                                       ],
+<<<<<<< HEAD
+=======
+                                      "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ROLES"
@@ -20780,6 +21689,10 @@
                                       "enum": [
                                         "orgs"
                                       ],
+<<<<<<< HEAD
+=======
+                                      "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -20809,6 +21722,10 @@
                                         "enum": [
                                           "orgs"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -20867,6 +21784,10 @@
                                         "enum": [
                                           "roles"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -20955,6 +21876,10 @@
                                 "enum": [
                                   "orgs"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -21014,6 +21939,10 @@
                                 "enum": [
                                   "permissions"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -21073,6 +22002,10 @@
                                             "enum": [
                                               "orgs"
                                             ],
+<<<<<<< HEAD
+=======
+                                            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -21102,6 +22035,10 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -21134,6 +22071,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -21166,6 +22107,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -21188,6 +22133,10 @@
                                 "enum": [
                                   "roles"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -21435,6 +22384,10 @@
                                       "enum": [
                                         "orgs"
                                       ],
+<<<<<<< HEAD
+=======
+                                      "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -21464,6 +22417,10 @@
                                         "enum": [
                                           "orgs"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -21522,6 +22479,10 @@
                                         "enum": [
                                           "roles"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -21610,6 +22571,10 @@
                                 "enum": [
                                   "orgs"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -21669,6 +22634,10 @@
                                 "enum": [
                                   "permissions"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -21728,6 +22697,10 @@
                                             "enum": [
                                               "orgs"
                                             ],
+<<<<<<< HEAD
+=======
+                                            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -21757,6 +22730,10 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -21789,6 +22766,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -21821,6 +22802,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -21843,6 +22828,10 @@
                                 "enum": [
                                   "roles"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -22191,6 +23180,10 @@
                                       "enum": [
                                         "orgs"
                                       ],
+<<<<<<< HEAD
+=======
+                                      "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -22220,6 +23213,10 @@
                                         "enum": [
                                           "orgs"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -22278,6 +23275,10 @@
                                         "enum": [
                                           "roles"
                                         ],
+<<<<<<< HEAD
+=======
+                                        "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -22366,6 +23367,10 @@
                                 "enum": [
                                   "orgs"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -22425,6 +23430,10 @@
                                 "enum": [
                                   "permissions"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -22484,6 +23493,10 @@
                                             "enum": [
                                               "orgs"
                                             ],
+<<<<<<< HEAD
+=======
+                                            "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -22513,6 +23526,10 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "orgs",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -22545,6 +23562,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -22577,6 +23598,10 @@
                                               "enum": [
                                                 "roles"
                                               ],
+<<<<<<< HEAD
+=======
+                                              "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -22599,6 +23624,10 @@
                                 "enum": [
                                   "roles"
                                 ],
+<<<<<<< HEAD
+=======
+                                "example": "roles",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -22752,6 +23781,10 @@
                             "enum": [
                               "permissions"
                             ],
+<<<<<<< HEAD
+=======
+                            "example": "permissions",
+>>>>>>> 0a074fb3caea214e03efd7cabc3f1aac4e973305
                             "type": "string",
                             "x-enum-varnames": [
                               "PERMISSIONS"

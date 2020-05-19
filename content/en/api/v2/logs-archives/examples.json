@@ -292,14 +292,14 @@
                 "org": {
                   "data": {
                     "id": "string",
-                    "type": "string"
+                    "type": "orgs"
                   }
                 },
                 "other_orgs": {
                   "data": [
                     {
                       "id": "string",
-                      "type": "string"
+                      "type": "orgs"
                     }
                   ]
                 },
@@ -320,7 +320,7 @@
                   ]
                 }
               },
-              "type": "string"
+              "type": "roles"
             }
           ],
           "meta": {
