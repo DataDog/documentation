@@ -38,26 +38,36 @@ Datadog collects traces across applications, browser sessions, mobile pageviews,
 
 Whether your apps are built as a monolith, microservices or serverless functions, getting started takes just minutes. To quickly get started with Datadog APM, follow these steps:
 
-1) [Enable Trace Collection][1]:  Install and configure Datadog APM for  AWS, GCP, Azure, Kubernetes, ECS, PCF, Azure, Heroku, on-prem and more.
+### 1. Enable Trace Collection
 
-2) [Instrument Your Application][2]: Add a tracing library to your application to start  sending traces to Datadog for monitoring
+[Enable Trace Collection][1]:  Install and configure Datadog APM for  AWS, GCP, Azure, Kubernetes, ECS, PCF, Azure, Heroku, on-prem and more.
+
+### 2. Instrument Your Application
+
+[Instrument Your Application][2]: Add a tracing library to your application to start  sending traces to Datadog for monitoring.
 
 {{< partial name="apm/apm-languages.html" >}}
 
+### 3. Set up App Analytics
 
-3)  [App Analytics][3]: Once you’re sending traces to Datadog, you can query and monitor your data with business or infrastructure tags such as merchant, customer, cart value, availability zone, datacenter, user or domain.
+[App Analytics][3]: Once you’re sending traces to Datadog, you can query and monitor your data with business or infrastructure tags such as merchant, customer, cart value, availability zone, datacenter, user or domain.
 
 {{< img src="tracing/index/AppAnalytics.gif" alt="App Analytics"  style="width:50%;">}}
 
-4) [Connect Logs and Traces][4]: Connect your application logs across monoliths, microservices and serverless functions to visualize user data scoped to individual requests with automatic trace_id injection.
+### 4. Connect Logs and Traces
+
+[Connect Logs and Traces][4]: Connect your application logs across monoliths, microservices and serverless functions to visualize user data scoped to individual requests with automatic trace_id injection.
 
 {{< img src="tracing/index/ConnectLogsAndTraces.png" alt="Connect Logs And Traces"  style="width:50%;">}}
 
-5) [Live Tail][5]: Search by any tag on 100% of your traces live with no sampling.
+### 5. Enable the Live Tail
+
+[Live Tail][5]: Search by any tag on 100% of your traces live with no sampling.
 
 {{< img src="tracing/index/LiveTail.gif" alt="Live Tail"  style="width:50%;">}}
 
-6) [Profiling][6]: Increase code efficiency with lightweight always-on in production profiling, with insight into line of code CPU, Memory and I/O.
+### 6. 
+[Profiling][6]: Increase code efficiency with lightweight always-on in production profiling, with insight into line of code CPU, Memory and I/O.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:50%;">}}
 

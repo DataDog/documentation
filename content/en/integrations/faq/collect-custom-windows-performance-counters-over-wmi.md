@@ -53,4 +53,4 @@ instances:
       - [TestNameType, wmi.testnametype.count, gauge]
 ```
 
-[1]: /integrations/faq/how-to-retrieve-wmi-metrics
+[1]: /integrations/faq/how-to-retrieve-wmi-metrics/

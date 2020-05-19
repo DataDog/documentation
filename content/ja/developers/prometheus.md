@@ -2,13 +2,13 @@
 title: カスタム OpenMetrics チェックの書き方
 kind: documentation
 further_reading:
-  - link: agent/prometheus
+  - link: /agent/prometheus/
     tag: Documentation
     text: OpenMetrics チェックの構成
-  - link: developers/agent_checks
+  - link: /developers/agent_checks/
     tag: Documentation
     text: カスタムチェックの書き方
-  - link: developers/integrations/
+  - link: /developers/integrations/
     tag: Documentation
     text: 新しいインテグレーションの設定
 aliases:
@@ -65,7 +65,7 @@ instances:
 すべての OpenMetrics チェックは、`checks/openmetrics_check.py` にある `OpenMetricsBaseCheck` クラスを継承します。
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBasicCheck
+from datadog_checks.base import OpenMetricsBasicCheck
 
 class KubeDNSCheck(OpenMetricsBasicCheck):
 ```
@@ -75,7 +75,7 @@ class KubeDNSCheck(OpenMetricsBasicCheck):
 `NAMESPACE` は、メトリクスのプレフィックスです。これをチェッククラスでハードコードする必要があります。
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     def __init__(self, name, init_config, agentConfig, instances=None):
@@ -89,7 +89,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 これをオーバーライドするのは、OpenMetrics チェックによって報告されるメトリクスが[カスタムメトリクス][5]としてカウントされないようにするためです。
 
 ```python
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     def __init__(self, name, init_config, agentConfig, instances=None):
@@ -131,18 +131,18 @@ def check(self, instance):
 `CheckException` を使用して `check()` メソッドを補強します。
 
 ```python
-from datadog_checks.errors import CheckException
+from datadog_checks.base.errors import CheckException
 
 def check(self, instance):
     endpoint = instance.get('prometheus_endpoint')
     if endpoint is None:
-        raise CheckException("Unable to find prometheus_endpoint in config file.")
+        raise CheckException("コンフィギュレーションファイルで prometheus_endpoint が見つかりません。")
 ```
 
 次に、データを取得するとすぐにフラッシュします。
 
 ```python
-from datadog_checks.errors import CheckException
+from datadog_checks.base.errors import CheckException
 
 def check(self, instance):
     endpoint = instance.get('prometheus_endpoint')
@@ -160,8 +160,8 @@ def check(self, instance):
 ### ここまでのまとめ
 
 ```python
-from datadog_checks.errors import CheckException
-from datadog_checks.checks.openmetrics import OpenMetricsBaseCheck
+from datadog_checks.base import OpenMetricsBaseCheck
+from datadog_checks.base.errors import CheckException
 
 class KubeDNSCheck(OpenMetricsBaseCheck):
     """
@@ -183,7 +183,7 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
     def check(self, instance):
         endpoint = instance.get('prometheus_endpoint')
         if endpoint is None:
-            raise CheckException("Unable to find prometheus_endpoint in config file.")
+            raise CheckException("コンフィギュレーションファイルで prometheus_endpoint が見つかりません。")
 
         send_buckets = instance.get('send_histograms_buckets', True)
         # デフォルトでは、バケットを送信します。
@@ -223,8 +223,8 @@ class KubeDNSCheck(OpenMetricsBaseCheck):
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/kube_dns.py
-[2]: /ja/agent/prometheus
+[2]: /ja/agent/prometheus/
 [3]: https://github.com/DataDog/dd-agent/blob/master/checks/prometheus_check.py
 [4]: /ja/agent/agent_checks/#configuration
-[5]: /ja/developers/metrics/custom_metrics
+[5]: /ja/developers/metrics/custom_metrics/
 [6]: /ja/agent/guide/agent-commands/#agent-status-and-information

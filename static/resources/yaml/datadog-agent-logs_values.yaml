@@ -1,0 +1,13 @@
+datadog:
+  kubeStateMetricsEnabled: false
+  leaderElection: true
+  collectEvents: true
+  logs:
+    enabled: true
+    containerCollectAll: true
+  acExclude: "name:datadog-agent"
+  processAgent:
+    enabled: false
+agents:
+  rbac:
+    create: false

@@ -2,10 +2,10 @@
 title: Create an API Test for private website
 kind: faq
 further_reading:
-- link: "synthetics/"
+- link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
-- link: "synthetics/"
+- link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
 ---

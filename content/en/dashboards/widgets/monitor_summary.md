@@ -104,6 +104,6 @@ MANAGE_STATUS_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/manage_monitor
+[1]: /monitors/manage_monitor/
 [2]: /monitors/manage_monitor/#manage-triggered-monitors-with-group-level-granularity
-[3]: /dashboards/graphing_json/widget_json
+[3]: /dashboards/graphing_json/widget_json/

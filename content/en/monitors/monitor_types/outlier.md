@@ -5,13 +5,13 @@ aliases:
     - /guides/outliers
 description: "Alert on members of a group behaving differently than the others"
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -113,6 +113,6 @@ The outlier algorithms are set up to identify groups that are behaving different
 
 [1]: https://app.datadoghq.com/monitors#create/outlier
 [2]: /monitors/monitor_types/metric/#define-the-metric
-[3]: /monitors/notifications
-[4]: /api/#create-a-monitor
+[3]: /monitors/notifications/
+[4]: /api/v1/monitors/#create-a-monitor
 [5]: /monitors/monitor_status/#settings

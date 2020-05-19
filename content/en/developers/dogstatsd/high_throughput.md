@@ -100,7 +100,7 @@ end
 
 {{% tab "Java" %}}
 
-By using Datadog's official Java library [java-dogstatsd-client][1], the example below creates a buffered DogStatsD client instance with `256` maximum buffered metrics which means that all metrics sent from this instance of the client are buffered and sent in packets containing a maximum of `256` metrics:
+By using Datadog's official Java library [java-dogstatsd-client][1], the example below creates a buffered DogStatsD client instance with a maximum packet size of 1500 bytes, meaning all metrics sent from this instance of the client are buffered and sent in packets of `1500` packet-length at most:
 
 ```java
 import com.timgroup.statsd.NonBlockingStatsDClient;
@@ -111,7 +111,12 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("namespace", "127.0.0.1", 8125, 256);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("namespace").
+            .hostname("127.0.0.1")
+            .port(8125)
+            .maxPacketSizeBytes(1500)
+            .build();
 
         Statsd.incrementCounter("example_metric.increment", ["environment:dev"]);
         Statsd.recordGaugeValue("example_metric.gauge", 100, ["environment:dev"]);
@@ -132,16 +137,20 @@ public class DogStatsdClient
 {
     public static void Main()
     {
-      StatsdUDP udp = new StatsdUDP("127.0.0.1", 8125);
+        var dogstatsdConfig = new StatsdConfig
+        {
+            StatsdServerName = "127.0.0.1",
+            StatsdPort = 8125,
+        };
 
-      // Create a stats instance with "udp" as transport
-      Statsd s = new Statsd(udp);
-      s.Add<Statsd.Counting,int>("example_metric.count", 1, tags: new[] {"environment:dev"});
-      s.Add("event title", "content", priority: "low");
-      s.Add<Statsd.Counting,int>("example_metric.count", 1, tags: new[] {"environment:dev"});
+        using (var dogStatsdService = new DogStatsdService())
+        {
+            dogStatsdService.Configure(dogstatsdConfig);
 
-      // All metrics buffered before this call will be sent in one packet
-      s.Send();
+            // Counter and Gauge are sent in the same datagram
+            dogStatsdService.Counter("example_metric.count", 2, tags: new[] { "environment:dev" });
+            dogStatsdService.Gauge("example_metric.gauge", 100, tags: new[] { "environment:dev" });
+        }
     }
 }
 ```
@@ -227,11 +236,11 @@ counted as custom metrics and will not be billed.
 
 Each client shares a set of common tags.
 
-| Tag                | Description                                    | Example                |
-| ------------------ | ---------------------------------------------- | ---------------------- |
-| `client`           | The language of the client                     | `client:py`            |
-| `client_version`   | The version of the client                      | `client_version:1.2.3` |
-| `client_transport` | The transport byte the client (`udp` or `uds`) | `client_transport:uds` |
+| Tag                | Description                                       | Example                |
+| ------------------ | ------------------------------------------------- | ---------------------- |
+| `client`           | The language of the client                        | `client:py`            |
+| `client_version`   | The version of the client                         | `client_version:1.2.3` |
+| `client_transport` | The transport used by the client (`udp` or `uds`) | `client_transport:uds` |
 
 **Note**: When using UDP, network errors can't be detected by the client
 and the corresponding metrics will not reflect bytes/packets drop.
@@ -241,15 +250,15 @@ and the corresponding metrics will not reflect bytes/packets drop.
 
 Starting with version `0.34.0` of the Python client.
 
-| Metrics Name                               | Metric Type | Description                                                                             |
-| ------------------------------------------ | ----------- | --------------------------------------------------------------------------------------- |
-| `datadog.dogstatsd.client.metrics`         | count       | Number of `metrics` sent to the DogStatsD client by your application (before sampling). |
-| `datadog.dogstatsd.client.events`          | count       | Number of `events` sent to the DogStatsD client by your application.                    |
-| `datadog.dogstatsd.client.service_checks`  | count       | Number of `service_checks` sent to the DogStatsD client by your application.            |
-| `datadog.dogstatsd.client.bytes_sent`      | count       | Number of bytes successfully sent to the Agent.                                         |
-| `datadog.dogstatsd.client.bytes_dropped`   | count       | Number of bytes dropped by the DogStatsD client.                                        |
-| `datadog.dogstatsd.client.packets_sent`    | count       | Number of datagrams successfully sent to the Agent.                                     |
-| `datadog.dogstatsd.client.packets_dropped` | count       | Number of datagrams dropped by the DogStatsD client.                                    |
+| Metrics Name                               | Metric Type | Description                                                                                 |
+| ------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------- |
+| `datadog.dogstatsd.client.metrics`         | count       | The number of `metrics` sent to the DogStatsD client by your application (before sampling). |
+| `datadog.dogstatsd.client.events`          | count       | The number of `events` sent to the DogStatsD client by your application.                    |
+| `datadog.dogstatsd.client.service_checks`  | count       | The number of `service_checks` sent to the DogStatsD client by your application.            |
+| `datadog.dogstatsd.client.bytes_sent`      | count       | The number of bytes successfully sent to the Agent.                                         |
+| `datadog.dogstatsd.client.bytes_dropped`   | count       | The number of bytes dropped by the DogStatsD client.                                        |
+| `datadog.dogstatsd.client.packets_sent`    | count       | The number of datagrams successfully sent to the Agent.                                     |
+| `datadog.dogstatsd.client.packets_dropped` | count       | The number of datagrams dropped by the DogStatsD client.                                    |
 
 To disable telemetry, use the `disable_telemetry` method:
 
@@ -266,15 +275,15 @@ See [DataDog/datadogpy][1] for more information about the client configuration.
 
 Starting with version `4.6.0` of the Ruby client.
 
-| Metrics Name                               | Metric Type | Description                                                                             |
-| ------------------------------------------ | ----------- | --------------------------------------------------------------------------------------- |
-| `datadog.dogstatsd.client.metrics`         | count       | Number of `metrics` sent to the DogStatsD client by your application (before sampling). |
-| `datadog.dogstatsd.client.events`          | count       | Number of `events` sent to the DogStatsD client by your application.                    |
-| `datadog.dogstatsd.client.service_checks`  | count       | Number of `service_checks` sent to the DogStatsD client by your application.            |
-| `datadog.dogstatsd.client.bytes_sent`      | count       | Number of bytes successfully sent to the Agent.                                         |
-| `datadog.dogstatsd.client.bytes_dropped`   | count       | Number of bytes dropped by the DogStatsD client.                                        |
-| `datadog.dogstatsd.client.packets_sent`    | count       | Number of datagrams successfully sent to the Agent.                                     |
-| `datadog.dogstatsd.client.packets_dropped` | count       | Number of datagrams dropped by the DogStatsD client.                                    |
+| Metrics Name                               | Metric Type | Description                                                                                 |
+| ------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------- |
+| `datadog.dogstatsd.client.metrics`         | count       | The number of `metrics` sent to the DogStatsD client by your application (before sampling). |
+| `datadog.dogstatsd.client.events`          | count       | The number of `events` sent to the DogStatsD client by your application.                    |
+| `datadog.dogstatsd.client.service_checks`  | count       | The number of `service_checks` sent to the DogStatsD client by your application.            |
+| `datadog.dogstatsd.client.bytes_sent`      | count       | The number of bytes successfully sent to the Agent.                                         |
+| `datadog.dogstatsd.client.bytes_dropped`   | count       | The number of bytes dropped by the DogStatsD client.                                        |
+| `datadog.dogstatsd.client.packets_sent`    | count       | The number of datagrams successfully sent to the Agent.                                     |
+| `datadog.dogstatsd.client.packets_dropped` | count       | The number of datagrams dropped by the DogStatsD client.                                    |
 
 To disable telemetry, set the `disable_telemetry` parameter to `true`:
 
@@ -291,20 +300,20 @@ See [DataDog/dogstatsd-ruby][1] for more information about the client configurat
 
 Starting with version `3.4.0` of the Go client.
 
-| Metric name                                          | Metric Type | Description                                                                                                                                                     |
-| ---------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `datadog.dogstatsd.client.metrics`                   | count       | Number of `metrics` sent to the DogStatsD client by your application (before sampling).                                                                         |
-| `datadog.dogstatsd.client.events`                    | count       | Number of `events` sent to the DogStatsD client by your application.                                                                                            |
-| `datadog.dogstatsd.client.service_checks`            | count       | Number of `service_checks` sent to the DogStatsD client by your application.                                                                                    |
-| `datadog.dogstatsd.client.bytes_sent`                | count       | Number of bytes successfully sent to the Agent.                                                                                                                 |
-| `datadog.dogstatsd.client.bytes_dropped`             | count       | Number of bytes dropped by the DogStatsD client.                                                                                                                |
-| `datadog.dogstatsd.client.bytes_dropped_queue`       | count       | Number of bytes dropped because the DogStatsD client queue was full.                                                                                            |
-| `datadog.dogstatsd.client.bytes_dropped_writer`      | count       | Number of bytes dropped because of an error while writing to Datadog.                                                                                           |
-| `datadog.dogstatsd.client.packets_sent`              | count       | Number of datagrams successfully sent to the Agent.                                                                                                             |
-| `datadog.dogstatsd.client.packets_dropped`           | count       | Number of datagrams dropped by the DogStatsD client.                                                                                                            |
-| `datadog.dogstatsd.client.packets_dropped_queue`     | count       | Number of datagrams dropped because the DogStatsD client queue was full.                                                                                        |
-| `datadog.dogstatsd.client.packets_dropped_writer`    | count       | Number of datagrams dropped because of an error while writing to Datadog.                                                                                       |
-| `datadog.dogstatsd.client.metric_dropped_on_receive` | count       | Number of metrics dropped because the internal receiving channel is full (only when using `WithChannelMode()`). Starting with version `3.6.0` of the Go client. |
+| Metric name                                          | Metric Type | Description                                                                                                                                                         |
+| ---------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `datadog.dogstatsd.client.metrics`                   | count       | The number of `metrics` sent to the DogStatsD client by your application (before sampling).                                                                         |
+| `datadog.dogstatsd.client.events`                    | count       | The number of `events` sent to the DogStatsD client by your application.                                                                                            |
+| `datadog.dogstatsd.client.service_checks`            | count       | The number of `service_checks` sent to the DogStatsD client by your application.                                                                                    |
+| `datadog.dogstatsd.client.bytes_sent`                | count       | The number of bytes successfully sent to the Agent.                                                                                                                 |
+| `datadog.dogstatsd.client.bytes_dropped`             | count       | The number of bytes dropped by the DogStatsD client.                                                                                                                |
+| `datadog.dogstatsd.client.bytes_dropped_queue`       | count       | The number of bytes dropped because the DogStatsD client queue was full.                                                                                            |
+| `datadog.dogstatsd.client.bytes_dropped_writer`      | count       | The number of bytes dropped because of an error while writing to Datadog.                                                                                           |
+| `datadog.dogstatsd.client.packets_sent`              | count       | The number of datagrams successfully sent to the Agent.                                                                                                             |
+| `datadog.dogstatsd.client.packets_dropped`           | count       | The number of datagrams dropped by the DogStatsD client.                                                                                                            |
+| `datadog.dogstatsd.client.packets_dropped_queue`     | count       | The number of datagrams dropped because the DogStatsD client queue was full.                                                                                        |
+| `datadog.dogstatsd.client.packets_dropped_writer`    | count       | The number of datagrams dropped because of an error while writing to Datadog.                                                                                       |
+| `datadog.dogstatsd.client.metric_dropped_on_receive` | count       | The number of metrics dropped because the internal receiving channel is full (only when using `WithChannelMode()`). Starting with version `3.6.0` of the Go client. |
 
 To disable telemetry, use the `WithoutTelemetry` setting:
 
@@ -319,18 +328,119 @@ See [DataDog/datadog-go][1] for more information about the client configuration.
 {{% /tab %}}
 {{% tab "Java" %}}
 
-Telemetry will soon be added to the Java client.
+Starting with version `2.10.0` of the Java client.
 
+| Metric name                                      | Metric Type | Description                                                                                 |
+| ------------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------- |
+| `datadog.dogstatsd.client.metrics`               | count       | The number of `metrics` sent to the DogStatsD client by your application (before sampling). |
+| `datadog.dogstatsd.client.events`                | count       | The number of `events` sent to the DogStatsD client by your application.                    |
+| `datadog.dogstatsd.client.service_checks`        | count       | The number of `service_checks` sent to the DogStatsD client by your application.            |
+| `datadog.dogstatsd.client.bytes_sent`            | count       | The number of bytes successfully sent to the Agent.                                         |
+| `datadog.dogstatsd.client.bytes_dropped`         | count       | The number of bytes dropped by the DogStatsD client.                                        |
+| `datadog.dogstatsd.client.packets_sent`          | count       | The number of datagrams successfully sent to the Agent.                                     |
+| `datadog.dogstatsd.client.packets_dropped`       | count       | The number of datagrams dropped by the DogStatsD client.                                    |
+| `datadog.dogstatsd.client.packets_dropped_queue` | count       | The number of datagrams dropped because the DogStatsD client queue was full.                |
+
+To disable telemetry, use the `enableTelemetry(false)` builder option:
+
+```java
+StatsDClient client = new NonBlockingStatsDClientBuilder()
+    .hostname("localhost")
+    .port(8125)
+    .enableTelemetry(false)
+    .build();
+```
+
+See [DataDog/java-dogstatsd-client][1] for more information about the client configuration.
+
+
+[1]: https://github.com/DataDog/java-dogstatsd-client
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-Telemetry will soon be added to the PHP client.
+Starting with version `1.5.0` of the PHP client the telemetry is enabled by
+default for the `BatchedDogStatsd` client and disabled by default for the
+`DogStatsd` client.
 
+
+| Metrics Name                               | Metric Type | Description                                                                                 |
+| ------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------- |
+| `datadog.dogstatsd.client.metrics`         | count       | The number of `metrics` sent to the DogStatsD client by your application (before sampling). |
+| `datadog.dogstatsd.client.events`          | count       | The number of `events` sent to the DogStatsD client by your application.                    |
+| `datadog.dogstatsd.client.service_checks`  | count       | The number of `service_checks` sent to the DogStatsD client by your application.            |
+| `datadog.dogstatsd.client.bytes_sent`      | count       | The number of bytes successfully sent to the Agent.                                         |
+| `datadog.dogstatsd.client.bytes_dropped`   | count       | The number of bytes dropped by the DogStatsD client.                                        |
+| `datadog.dogstatsd.client.packets_sent`    | count       | The number of datagrams successfully sent to the Agent.                                     |
+| `datadog.dogstatsd.client.packets_dropped` | count       | The number of datagrams dropped by the DogStatsD client.                                    |
+
+To enable or disable telemetry use the `disable_telemetry` argument. Beware,
+using the telemetry with the `DogStatsd` client will increase network usage
+significantly, it is advise to use the `BatchedDogStatsd` when using the
+telemetry.
+
+To enable it on the `DogStatsd` client:
+
+```php
+use DataDog\DogStatsd;
+
+$statsd = new DogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+          'disable_telemetry' => false,
+      )
+  );
+```
+
+To disable telemetry on the `BatchedDogStatsd` client:
+
+```php
+use DataDog\BatchedDogStatsd;
+
+$statsd = new BatchedDogStatsd(
+    array('host' => '127.0.0.1',
+          'port' => 8125,
+          'disable_telemetry' => true,
+      )
+  );
+```
+
+See [DataDog/php-datadogstatsd][1] for more information about the client configuration.
+
+[1]: https://github.com/DataDog/php-datadogstatsd
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-Telemetry will soon be added to the .NET client.
+Starting with version `5.0.0` of the .NET client.
 
+| Metric name                                          | Metric Type | Description                                                                                                                                                     |
+| ---------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `datadog.dogstatsd.client.metrics`                   | count       | Number of `metrics` sent to the DogStatsD client by your application (before sampling).                                                                         |
+| `datadog.dogstatsd.client.events`                    | count       | Number of `events` sent to the DogStatsD client by your application.                                                                                            |
+| `datadog.dogstatsd.client.service_checks`            | count       | Number of `service_checks` sent to the DogStatsD client by your application.                                                                                    |
+| `datadog.dogstatsd.client.bytes_sent`                | count       | Number of bytes successfully sent to the Agent.                                                                                                                 |
+| `datadog.dogstatsd.client.bytes_dropped`             | count       | Number of bytes dropped by the DogStatsD client.                                                                                                                |
+| `datadog.dogstatsd.client.packets_sent`              | count       | Number of datagrams successfully sent to the Agent.                                                                                                             |
+| `datadog.dogstatsd.client.packets_dropped`           | count       | Number of datagrams dropped by the DogStatsD client.                                                                                                            |
+| `datadog.dogstatsd.client.packets_dropped_queue`     | count       | Number of datagrams dropped because the DogStatsD client queue was full.                                                                                        |
+
+To disable telemetry, set `TelemetryFlushInterval` at `null`:
+
+```csharp
+var dogstatsdConfig = new StatsdConfig
+{
+    StatsdServerName = "127.0.0.1",
+    StatsdPort = 8125,
+};
+
+// Disable Telemetry
+dogstatsdConfig.Advanced.TelemetryFlushInterval = null;
+```
+
+See [DataDog/dogstatsd-csharp-client][1] for more information about the client configuration.
+
+
+
+[1]: https://github.com/DataDog/dogstatsd-csharp-client
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -338,7 +448,7 @@ Telemetry will soon be added to the .NET client.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
-[2]: /developers/dogstatsd/unix_socket
+[1]: /agent/
+[2]: /developers/dogstatsd/unix_socket/
 [3]: /developers/dogstatsd/#code
 [4]: /developers/metrics/dogstatsd_metrics_submission/#sample-rates

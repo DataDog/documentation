@@ -4,16 +4,16 @@ kind: documentation
 aliases:
   - /tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
-- link: "tracing/connect_logs_and_traces"
+- link: "/tracing/connect_logs_and_traces/"
   tags: "Enrich Tracing"
   text: "Connect your Logs and Traces together"
-- link: "tracing/manual_instrumentation"
+- link: "/tracing/manual_instrumentation/"
   tags: "Enrich Tracing"
   text: "Instrument manually your application to create traces."
-- link: "tracing/opentracing"
+- link: "/tracing/opentracing/"
   tags: "Enrich Tracing"
   text: "Implement Opentracing across your applications."
-- link: "tracing/visualization/"
+- link: "/tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources, and traces"
 ---
@@ -76,7 +76,7 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/#trace
-[2]: /tagging
+[2]: /tagging/
 [3]: /agent/guide/agent-configuration-files/
 [4]: /tagging/assigning_tags/#traces
 [5]: https://app.datadoghq.com/apm/settings

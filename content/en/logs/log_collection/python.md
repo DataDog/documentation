@@ -7,16 +7,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/python-logging-best-practices/"
   tag: "Blog"
   text: "How to collect, customize, and centralize Python logs"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---
@@ -40,7 +40,7 @@ Here are setup examples for the following logging libraries:
 
 **Connect Logs and Traces**
 
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following following APM Python logging instructions][3] to add trace and span IDs to your logs.
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Python logging instructions][3] to add trace and span IDs to your logs.
 
 Once this is done, the log should have the following format:
 
@@ -165,5 +165,5 @@ logs:
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [2]: https://github.com/madzak/python-json-logger
-[3]: /tracing/connect_logs_and_traces/python
-[4]: /agent/guide/agent-commands
+[3]: /tracing/connect_logs_and_traces/python/
+[4]: /agent/guide/agent-commands/

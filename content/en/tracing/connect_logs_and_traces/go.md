@@ -56,7 +56,7 @@ The above example illustrates how to use the span's context in the standard libr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /help/
 [2]: /tracing/visualization/#trace
 [3]: /tracing/visualization/#spans
 [4]: /logs/log_collection/go/#configure-your-logger

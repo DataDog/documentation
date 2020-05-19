@@ -5,7 +5,7 @@ aliases:
     - /integrations/faq/are-my-aws-cloudwatch-metrics-delayed/
     - /integrations/faq/why-is-there-a-delay-in-receiving-my-data/
 further_reading:
-- link: "agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
+- link: "/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
   tag: "FAQ"
   text: "Why should I install the Datadog Agent on my cloud instances?"
 ---
@@ -60,5 +60,5 @@ On the Datadog side for the AWS, Azure, and GCP integrations, we may be able to 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
-[2]: /help
+[1]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+[2]: /help/

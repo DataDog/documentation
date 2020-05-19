@@ -78,10 +78,10 @@ Google Cloud Functions インテグレーションには、サービスのチェ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup
+[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/
 [3]: https://cloud.google.com/run/docs/audit-logging
 [4]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
 [5]: https://console.cloud.google.com/logs/viewer
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_run/google_cloud_run_metadata.csv
-[7]: https://docs.datadoghq.com/ja/help
+[7]: https://docs.datadoghq.com/ja/help/

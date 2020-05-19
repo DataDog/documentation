@@ -45,9 +45,9 @@ Additionally, some configuration options may be set as environment variables.
 
 After configuration is complete, [restart the Agent][2].
 
+
 [1]: /agent/guide/agent-configuration-files/
 [2]: /agent/guide/agent-commands/#restart-the-agent
-
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -63,8 +63,8 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 - To collect container information in the standard install, the `dd-agent` user must have permissions to access `docker.sock`.
 - Running the Agent as a container still allows you to collect host processes.
 
-[1]: /agent/docker/#run-the-docker-agent
 
+[1]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -88,10 +88,10 @@ Refer to the standard [Daemonset installation][2] and the [Docker Agent][3] info
 
 **Note**: Running the Agent as a container still allows you to collect host processes.
 
+
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [2]: /agent/kubernetes/
 [3]: /agent/docker/#run-the-docker-agent
-
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -105,8 +105,8 @@ datadog:
         processCollection: true
 ```
 
-[1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
 
+[1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -241,8 +241,8 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent
-[2]: /agent/faq/agent-5-process-collection
-[3]: /tagging
+[1]: /agent/
+[2]: /agent/faq/agent-5-process-collection/
+[3]: /tagging/
 [4]: https://app.datadoghq.com/process
-[5]: /infrastructure/livecontainers
+[5]: /infrastructure/livecontainers/

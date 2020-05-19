@@ -6,7 +6,7 @@ aliases:
     - /guides/markdown/
     - /graphing/event_stream/
 further_reading:
-- link: "/api/#events"
+- link: "/api/v1/events/"
   tag: "Documentation"
   text: "Datadog Events API"
 ---

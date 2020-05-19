@@ -2,13 +2,13 @@
 title: How do I run the kubernetes_state check as a cluster check?
 kind: faq
 further_reading:
-- link: "agent/kubernetes"
+- link: "/agent/kubernetes/"
   tag: "Documentation"
   text: "Kubernetes with Datadog"
-- link: "agent/autodiscovery"
+- link: "/agent/autodiscovery/"
   tag: "Documentation"
   text: "Using Autodiscovery with Kubernetes and Docker"
-- link: "agent/cluster_agent/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks/"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
 ---

@@ -110,6 +110,6 @@ HOSTMAP_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/infrastructure/hostmap
-[2]: /fr/dashboards/graphing_json/widget_json
-[3]: /fr/dashboards/graphing_json/request_json
+[1]: /fr/infrastructure/hostmap/
+[2]: /fr/dashboards/graphing_json/widget_json/
+[3]: /fr/dashboards/graphing_json/request_json/

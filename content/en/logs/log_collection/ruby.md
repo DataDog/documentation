@@ -7,10 +7,10 @@ further_reading:
 - link: "https://github.com/roidrage/lograge"
   tag: "Github"
   text: "Lograge Documentation"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "/logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---
@@ -197,6 +197,6 @@ end
 [2]: /logs/?tab=ussite#reserved-attributes
 [3]: https://www.datadoghq.com/blog/managing-rails-application-logs
 [4]: https://github.com/roidrage/lograge#installation
-[5]: /agent/logs
+[5]: /agent/logs/
 [6]: /agent/guide/agent-commands/#restart-the-agent
-[7]: /tracing/connect_logs_and_traces/ruby
+[7]: /tracing/connect_logs_and_traces/ruby/

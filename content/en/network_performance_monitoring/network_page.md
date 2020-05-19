@@ -80,7 +80,6 @@ The following network load metrics are available:
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Volume**      | The number of bytes sent or received over a period. Measured in bytes (or orders of magnitude thereof) bidirectional.                           |
 |  **Throughput** | The rate of bytes sent or received over a period. Measured in bytes per second, bidirectional.                                                  |
-| **Retransmits** | Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmitted frames from the `source`. |
 
 #### TCP
 
@@ -112,7 +111,15 @@ To view pre-NAT and post-NAT IPs, use the _Show pre-NAT IPs_ toggle in the table
 
 The network table breaks down the _Volume_, _Throughput_, _TCP Retransmits_, _Round-trip Time (RTT)_, and _RTT variance_ metrics between each _source_ and _destination_ defined by your query.
 
-{{< img src="network_performance_monitoring/network_page/data_table.png" alt="Data table" >}}
+{{< img src="network_performance_monitoring/network_page/network_table.png" alt="Data table" >}}
+
+You can configure the columns in your table using the `Customize` button at the top right of the table. 
+
+Congifure the traffic shown with the `Filter Traffic` button.
+
+{{< img src="network_performance_monitoring/network_page/filter_traffic_toggles.png" alt="Flow Details"  style="width:80%;">}}
+
+Datadog Agent traffic is shown by default. To narrow down your view to non-Datadog traffic _only_, toggle off `Show Datadog Traffic`.  
 
 ### Unresolved Traffic
 

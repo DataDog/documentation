@@ -5,19 +5,19 @@ aliases:
   - /ja/tracing/terminology/
   - /ja/tracing/faq/what-is-the-difference-between-type-service-resource-and-name
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: アプリケーションで APM トレースをセットアップする方法
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Datadog に報告するサービスの一覧
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: Documentation
     text: Datadog のサービスについて
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: Documentation
     text: リソースのパフォーマンスとトレースの詳細
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Datadog トレースの読み方を理解する
 ---
@@ -31,8 +31,8 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 | [トレース](#trace)                 | トレースは、アプリケーションがリクエストを処理するのにかかった時間とこのリクエストのステータスを追跡するために使用されます。各トレースは、1 つ以上のスパンで構成されます。                                                             |
 | [スパン](#spans)                  | スパンは、特定の期間における分散システムの論理的な作業単位を表します。複数のスパンでトレースが構成されます。                                                                                          |
 | [トレースメトリクス](#trace-metrics) | トレースメトリクスは自動的に収集され、他の [Datadog メトリクス][2]と同様の 15 か月の保持ポリシーで保持されます。これを使用して、ヒット、エラー、またはレイテンシーを特定し、アラートを発信することができます。                       |
-| [App Analytics](#app-analytics) | App Analytics は、ユーザー定義のタグ（customer_id、error_type、app_name など）またはインフラストラクチャータグで分析スパンをフィルターするために使用されます。                                                                                |
-| [分析スパン](#analyzed-span) | 分析スパンは、リクエストの 100% のスループットを表し、App Analytics での検索、クエリ、監視に使用できます。                                                                                                |
+| [App Analytics](#app-analytics) | App Analytics は、ユーザー定義のタグ（customer_id、error_type、app_name など）またはインフラストラクチャータグで Analyzed Span をフィルターするために使用されます。                                                                                |
+| [Analyzed Span](#analyzed-span) | Analyzed Span は、リクエストの 100% のスループットを表し、App Analytics での検索、クエリ、監視に使用できます。                                                                                                |
 | [スパンタグ](#span-tags)         | *Trace View* でリクエストを関連付けたり、*App Analytics* でフィルターしたりするためのキーと値のペアの形式のタグスパン。                                                                                                    |
 
 ## サービス
@@ -99,16 +99,16 @@ APM UI には、アプリケーションのパフォーマンスをトラブル�
 
 ## App Analytics
 
-App Analytics は、ユーザー定義のタグ（customer_id、error_type、app_name など）またはインフラストラクチャータグで[分析スパン](#analyzed-span)をフィルターするために使用されます。これにより、ヒット、エラー、レイテンシーの 100% スループットで検索、グラフ化、監視できるとともに、サービスを流れるウェブリクエストを詳細に調べることができます。この機能は、[自動構成][17]で有効にできます。
+App Analytics は、ユーザー定義のタグ（customer_id、error_type、app_name など）またはインフラストラクチャータグで [Analyzed Span](#analyzed-span) をフィルターするために使用されます。これにより、ヒット、エラー、レイテンシーの 100% スループットで検索、グラフ化、監視できるとともに、サービスを流れるウェブリクエストを詳細に調べることができます。この機能は、[自動構成][17]で有効にできます。
 
 {{< wistia vrmqr812sz >}}
 
-## 分析スパン
+## Analyzed Span
 
-分析スパンは、リクエストの 100% のスループットを表し、スパンに含まれる[タグ](#span-tags)による App Analytics の検索、クエリ、監視に使用できます。App Analytics を有効にすると、トレースクライアントは、デフォルトでウェブサービスのエントリポイントスパンを分析し、アプリケーションで[追加のサービスを構成][18]できるようになります。たとえば、100 個のリクエストを持つ Java サービスは、`servlet.request` スパンから 100 個の分析スパンを生成します。`DD_TRACE_ANALYTICS_ENABLED=true` を設定すると、`web-store` サービスはすべての `rack.request` スパンを分析し、App Analytics で利用できるようにします。この例では、99 パーセンタイルでレイテンシーが最も高い上位 10 マーチャントをグラフ化できます。`merchant_name` は、アプリケーションのスパンに適用されたユーザー定義のタグです。
+Analyzed Span は、リクエストの 100% のスループットを表し、スパンに含まれる[タグ](#span-tags)による App Analytics の検索、クエリ、監視に使用できます。App Analytics を有効にすると、トレースクライアントは、デフォルトでウェブサービスのエントリポイントスパンを分析し、アプリケーションで[追加のサービスを構成][18]できるようになります。たとえば、100 個のリクエストを持つ Java サービスは、`servlet.request` スパンから 100 個の Analyzed Span を生成します。`DD_TRACE_ANALYTICS_ENABLED=true` を設定すると、`web-store` サービスはすべての `rack.request` スパンを分析し、App Analytics で利用できるようにします。この例では、99 パーセンタイルでレイテンシーが最も高い上位 10 マーチャントをグラフ化できます。`merchant_name` は、アプリケーションのスパンに適用されたユーザー定義のタグです。
 
 <div class="alert alert-info">
-<a href="https://app.datadoghq.com/apm/docs/trace-search">Analyzed Span Estimator</a> を使用して、サービスから生成される分析スパンの数を見積もることができます。取り込み後、<a href="https://app.datadoghq.com/apm/settings">APM 設定</a>のサービス別レベルで、分析スパンを 100% からそれより低いパーセンテージまでフィルターできます。これにより、課金対象の分析スパンが減少します。
+<a href="https://app.datadoghq.com/apm/docs/trace-search">Analyzed Span Estimator</a> を使用して、サービスから生成される Analyzed Span の数を見積もることができます。取り込み後、<a href="https://app.datadoghq.com/apm/settings">APM 設定</a>のサービス別レベルで、Analyzed Span を 100% からそれより低いパーセンテージまでフィルターできます。これにより、課金対象の Analyzed Span が減少します。
 </div>
 
 ## スパンタグ
@@ -128,19 +128,19 @@ App Analytics は、ユーザー定義のタグ（customer_id、error_type、app
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/monitors/monitor_types/apm/
-[2]: /ja/developers/faq/data-collection-resolution-retention
-[3]: /ja/tracing/setup
-[4]: /ja/tracing/visualization/services_list
-[5]: /ja/tracing/visualization/services_map
-[6]: /ja/tracing/visualization/service
-[7]: /ja/tracing/visualization/resource
-[8]: /ja/tracing/opentracing/java#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
-[9]: /ja/tracing/manual_instrumentation
-[10]: /ja/tracing/opentracing
-[11]: /ja/tracing/connect_logs_and_traces
-[12]: /ja/tracing/guide/adding_metadata_to_spans
-[13]: /ja/tracing/runtime_metrics
-[14]: /ja/tracing/app_analytics
+[2]: /ja/developers/faq/data-collection-resolution-retention/
+[3]: /ja/tracing/setup/
+[4]: /ja/tracing/visualization/services_list/
+[5]: /ja/tracing/visualization/services_map/
+[6]: /ja/tracing/visualization/service/
+[7]: /ja/tracing/visualization/resource/
+[8]: /ja/tracing/opentracing/java/#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
+[9]: /ja/tracing/manual_instrumentation/
+[10]: /ja/tracing/opentracing/
+[11]: /ja/tracing/connect_logs_and_traces/
+[12]: /ja/tracing/guide/adding_metadata_to_spans/
+[13]: /ja/tracing/runtime_metrics/
+[14]: /ja/tracing/app_analytics/
 [15]: https://app.datadoghq.com/metric/summary
 [16]: https://app.datadoghq.com/monitors#/create
 [17]: /ja/tracing/app_analytics/#automatic-configuration

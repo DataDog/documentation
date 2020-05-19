@@ -5,10 +5,10 @@ aliases:
   - /guides/livecontainers
   - /graphing/infrastructure/livecontainers/
 further_reading:
-- link: "/infrastructure/hostmap"
+- link: "/infrastructure/hostmap/"
   tag: "Graphing"
   text: "See all of your hosts together on one screen with the hostmap"
-- link: "/infrastructure/process"
+- link: "/infrastructure/process/"
   tag: "Graphing"
   text: "Understand what is going on at any level of your system"
 ---
@@ -224,11 +224,11 @@ ac_include: ["name:frontend.*"]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
-[2]: /integrations/docker_daemon
-[3]: /agent/kubernetes
-[4]: /integrations/amazon_ecs
+[2]: /integrations/docker_daemon/
+[3]: /agent/kubernetes/
+[4]: /integrations/amazon_ecs/
 [5]: /agent/docker/#run-the-docker-agent
 [6]: /agent/docker/log/?tab=hostinstallation#activate-log-integrations
-[7]: /logs/live_tail
-[8]: /tagging
+[7]: /logs/live_tail/
+[8]: /tagging/
 [9]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237

@@ -94,4 +94,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [4]: https://docs.fastly.com/guides/streaming-logs/useful-variables-to-log
 [5]: https://app.datadoghq.com/logs
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/fastly/fastly_metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
+[7]: https://docs.datadoghq.com/fr/help/

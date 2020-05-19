@@ -75,4 +75,4 @@ Uptime チェックには、サービスのチェック機能は含まれませ�
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/uptime/images/snapshot.png
 [2]: https://uptime.com/push-notifications/manage
 [3]: https://github.com/DataDog/integrations-extras/blob/master/uptime/metadata.csv
-[4]: https://docs.datadoghq.com/ja/help
+[4]: https://docs.datadoghq.com/ja/help/

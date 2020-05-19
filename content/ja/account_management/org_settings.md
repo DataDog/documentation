@@ -31,8 +31,8 @@ Organization Account Settings ページの Plan タブからアカウントを�
 
 SAML の構成については、[SAML によるシングルサインオンのドキュメント][5]を参照してください。
 
-[1]: /ja/account_management/users/default_roles
+[1]: /ja/account_management/users/default_roles/
 [2]: https://app.datadoghq.com/account/billing
 [3]: mailto://success@datadoghq.com
-[4]: /ja/account_management/multi_organization
-[5]: /ja/account_management/saml
+[4]: /ja/account_management/multi_organization/
+[5]: /ja/account_management/saml/

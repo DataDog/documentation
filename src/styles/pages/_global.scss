@@ -23,12 +23,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-kerning: normal;
-  -moz-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
-  -moz-font-feature-settings: "lnum=1, frac=0, liga=1, clig=1, ss03=1, ss06=1";
-  -ms-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
-  -o-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
-  -webkit-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
-  font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1, "ss03" 1, "ss06" 1;
+  -moz-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1;
+  -moz-font-feature-settings: "lnum=1, frac=0, liga=1, clig=1";
+  -ms-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1;
+  -o-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1;
+  -webkit-font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1;
+  font-feature-settings: "lnum" 1, "frac" 0, "liga" 1, "clig" 1;
   /** "ss01" 1 is for the alternate 'a' character */
   /** "ss05" 1 is for alternate 'y' character */
   font-weight: 200;
@@ -118,7 +118,7 @@ a:focus {
 pre {
   display: block;
   padding: 10px;
-  margin: -0.8rem 0 10px;
+  margin: 0;
   position: relative;
   font-size: 14px;
   line-height: 1.428571429;
@@ -132,9 +132,9 @@ pre {
   word-wrap: normal;
   overflow: auto;
 
-  .api &{
-    border: 1px solid transparent;
-  }
+  // .api &{
+  //   border: 1px solid transparent;
+  // }
   code {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -276,7 +276,7 @@ h5{
   }
   z-index: 1;
   padding-left: 29px;
-  padding-top: 29px;
+  // padding-top: 29px;
   padding-bottom: 100px;
   h2 > a,
   h3 > a,

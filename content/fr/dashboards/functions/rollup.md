@@ -60,5 +60,5 @@ L'utilisation d'une fonction rollup dans une requête de [monitor][4] est géné
 
 [1]: /fr/dashboards/functions/#proceed-to-time-aggregation
 [2]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[3]: /fr/developers/metrics/type_modifiers
-[4]: /fr/monitors/monitor_types/metric
+[3]: /fr/developers/metrics/type_modifiers/
+[4]: /fr/monitors/monitor_types/metric/

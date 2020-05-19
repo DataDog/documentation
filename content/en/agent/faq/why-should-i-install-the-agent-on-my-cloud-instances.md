@@ -5,7 +5,7 @@ aliases:
     - /agent/faq/why-should-i-install-the-agent-on-my-aws-instances/
     - /integrations/faq/why-is-my-aws-error-count-metric-orders-of-magnitude-lower-in-datadog-than-cloudwatch/
 further_reading:
-- link: "integrations/faq/cloud-metric-delay"
+- link: "/integrations/faq/cloud-metric-delay/"
   tag: "FAQ"
   text: "Cloud Metric Delay"
 ---

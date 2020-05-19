@@ -1,0 +1,3385 @@
+components:
+  callbacks: {}
+  examples: {}
+  headers: {}
+  links: {}
+  parameters:
+    ArchiveID:
+      description: The ID of the archive.
+      in: path
+      name: archive_id
+      required: true
+      schema:
+        type: string
+    PageNumber:
+      description: Specific page number to return.
+      in: query
+      name: page[number]
+      required: false
+      schema:
+        default: 0
+        format: int64
+        type: integer
+    PageSize:
+      description: Size for a given page.
+      in: query
+      name: page[size]
+      required: false
+      schema:
+        default: 10
+        format: int64
+        type: integer
+    RestrictionQueryID:
+      description: The ID of the restriction query.
+      in: path
+      name: restriction_query_id
+      required: true
+      schema:
+        type: string
+    RestrictionQueryRoleID:
+      description: The ID of the role.
+      in: path
+      name: role_id
+      required: true
+      schema:
+        type: string
+    RestrictionQueryUserID:
+      description: The ID of the user.
+      in: path
+      name: user_id
+      required: true
+      schema:
+        type: string
+    RoleID:
+      description: The ID of the role.
+      in: path
+      name: role_id
+      required: true
+      schema:
+        type: string
+    SecurityMonitoringRuleID:
+      description: The ID of the rule.
+      in: path
+      name: rule_id
+      required: true
+      schema:
+        type: string
+    UserID:
+      description: The ID of the user.
+      in: path
+      name: user_id
+      required: true
+      schema:
+        type: string
+  requestBodies: {}
+  responses:
+    BadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Bad Request
+    ConcurrentModificationResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Concurrent Modification
+    NotAuthorizedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Not Authorized
+    NotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: Not Found
+  schemas:
+    APIErrorResponse:
+      description: API error response.
+      properties:
+        errors:
+          description: A list of errors.
+          items:
+            description: A list of items.
+            example: Bad Request
+            type: string
+          type: array
+      required:
+      - errors
+      type: object
+    Creator:
+      description: Creator of the object.
+      properties:
+        email:
+          description: Email of the creator.
+          type: string
+        handle:
+          description: Handle of the creator.
+          type: string
+        name:
+          description: Name of the creator.
+          type: string
+      type: object
+    DashboardListAddItemsResponse:
+      description: Response containing a list of added dashboards.
+      properties:
+        added_dashboards_to_list:
+          description: List of dashboards added to the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItem'
+          type: array
+      type: object
+    DashboardListDeleteItemsResponse:
+      description: Response containing a list of deleted dashboards.
+      properties:
+        deleted_dashboards_from_list:
+          description: List of dashboards deleted from the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItem'
+          type: array
+      type: object
+    DashboardListItem:
+      description: A dashboard within a list.
+      properties:
+        author:
+          $ref: '#/components/schemas/Creator'
+        created:
+          description: Date of creation of the dashboard.
+          format: date-time
+          readOnly: true
+          type: string
+        icon:
+          description: URL to the icon of the dashboard.
+          readOnly: true
+          type: string
+        id:
+          description: ID of the dashboard.
+          type: string
+        is_favorite:
+          description: Whether or not the dashboard is in the favorites.
+          readOnly: true
+          type: boolean
+        is_read_only:
+          description: Whether or not the dashboard is read only.
+          readOnly: true
+          type: boolean
+        is_shared:
+          description: Whether the dashboard is publicly shared or not.
+          readOnly: true
+          type: boolean
+        modified:
+          description: Date of last edition of the dashboard.
+          format: date-time
+          readOnly: true
+          type: string
+        popularity:
+          description: Popularity of the dashboard.
+          format: int32
+          maximum: 5
+          readOnly: true
+          type: integer
+        title:
+          description: Title of the dashboard.
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/DashboardType'
+        url:
+          description: URL path to the dashboard.
+          readOnly: true
+          type: string
+      required:
+      - type
+      - id
+      type: object
+    DashboardListItems:
+      description: Dashboards within a list.
+      properties:
+        dashboards:
+          description: List of dashboards in the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItem'
+          type: array
+        total:
+          description: Number of dashboards in the dashboard list.
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - dashboards
+      type: object
+    DashboardType:
+      description: The type of the dashboard.
+      enum:
+      - custom_timeboard
+      - custom_screenboard
+      - integration_screenboard
+      - integration_timeboard
+      - host_timeboard
+      type: string
+      x-enum-varnames:
+      - CUSTOM_TIMEBOARD
+      - CUSTOM_SCREENBOARD
+      - INTEGRATION_SCREENBOARD
+      - INTEGRATION_TIMEBOARD
+      - HOST_TIMEBOARD
+    LogsArchive:
+      description: The logs archive.
+      properties:
+        data:
+          $ref: '#/components/schemas/LogsArchiveDefinition'
+      type: object
+    LogsArchiveAttributes:
+      description: The attributes associated with the archive.
+      properties:
+        destination:
+          $ref: '#/components/schemas/LogsArchiveDestination'
+        name:
+          description: The archive name.
+          example: Nginx Archive
+          type: string
+        query:
+          description: The archive query/filter. Logs matching this query are included
+            in the archive.
+          example: source:nginx
+          type: string
+        state:
+          $ref: '#/components/schemas/LogsArchiveState'
+      required:
+      - name
+      - query
+      - destination
+      type: object
+    LogsArchiveCreateRequest:
+      description: The logs archive.
+      properties:
+        data:
+          $ref: '#/components/schemas/LogsArchiveCreateRequestDefinition'
+      type: object
+    LogsArchiveCreateRequestAttributes:
+      description: The attributes associated with the archive.
+      properties:
+        destination:
+          $ref: '#/components/schemas/LogsArchiveCreateRequestDestination'
+        name:
+          description: The archive name.
+          example: Nginx Archive
+          type: string
+        query:
+          description: The archive query/filter. Logs matching this query are included
+            in the archive.
+          example: source:nginx
+          type: string
+      required:
+      - name
+      - query
+      - destination
+      type: object
+    LogsArchiveCreateRequestDefinition:
+      description: The definition of an archive.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LogsArchiveCreateRequestAttributes'
+        type:
+          default: archives
+          description: The type of the resource. The value should always be archives.
+          example: archives
+          type: string
+      required:
+      - type
+      type: object
+    LogsArchiveCreateRequestDestination:
+      description: An archive's destination.
+      discriminator:
+        mapping:
+          azure: '#/components/schemas/LogsArchiveDestinationAzure'
+          gcs: '#/components/schemas/LogsArchiveDestinationGCS'
+          s3: '#/components/schemas/LogsArchiveDestinationS3'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
+      - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
+      - $ref: '#/components/schemas/LogsArchiveDestinationS3'
+      required:
+      - type
+      - integration
+      type: object
+    LogsArchiveDefinition:
+      description: The definition of an archive.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LogsArchiveAttributes'
+        id:
+          description: The archive ID.
+          example: a2zcMylnM4OCHpYusxIi3g
+          readOnly: true
+          type: string
+        type:
+          default: archives
+          description: The type of the resource. The value should always be archives.
+          example: archives
+          readOnly: true
+          type: string
+      required:
+      - type
+      type: object
+    LogsArchiveDestination:
+      description: An archive's destination.
+      discriminator:
+        mapping:
+          azure: '#/components/schemas/LogsArchiveDestinationAzure'
+          gcs: '#/components/schemas/LogsArchiveDestinationGCS'
+          s3: '#/components/schemas/LogsArchiveDestinationS3'
+        propertyName: type
+      nullable: true
+      oneOf:
+      - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
+      - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
+      - $ref: '#/components/schemas/LogsArchiveDestinationS3'
+      required:
+      - type
+      - integration
+      type: object
+    LogsArchiveDestinationAzure:
+      description: The Azure archive destination.
+      properties:
+        container:
+          description: The container where the archive will be stored.
+          type: string
+        integration:
+          $ref: '#/components/schemas/LogsArchiveIntegrationAzure'
+        path:
+          description: The archive path.
+          type: string
+        region:
+          description: The region where the archive will be stored.
+          type: string
+        storage_account:
+          description: The associated storage account.
+          type: string
+        type:
+          default: azure
+          description: The type of destination.
+          readOnly: true
+          type: string
+      required:
+      - storage_account
+      - container
+      - integration
+      - type
+      type: object
+    LogsArchiveDestinationGCS:
+      description: The GCS archive destination.
+      properties:
+        bucket:
+          description: The bucket where the archive will be stored.
+          type: string
+        integration:
+          $ref: '#/components/schemas/LogsArchiveIntegrationGCS'
+        path:
+          description: The archive path.
+          type: string
+        type:
+          default: gcs
+          description: The type of destination.
+          readOnly: true
+          type: string
+      required:
+      - bucket
+      - integration
+      - type
+      type: object
+    LogsArchiveDestinationS3:
+      description: The S3 archive destination.
+      properties:
+        bucket:
+          description: The bucket where the archive will be stored.
+          type: string
+        integration:
+          $ref: '#/components/schemas/LogsArchiveIntegrationS3'
+        path:
+          description: The archive path.
+          type: string
+        type:
+          default: s3
+          description: The type of destination.
+          readOnly: true
+          type: string
+      required:
+      - bucket
+      - integration
+      - type
+      type: object
+    LogsArchiveIntegrationAzure:
+      description: The Azure archive's integration destination.
+      properties:
+        client_id:
+          description: A client ID.
+          type: string
+        tenant_id:
+          description: A tenant ID.
+          type: string
+      required:
+      - tenant_id
+      - client_id
+      type: object
+    LogsArchiveIntegrationGCS:
+      description: The GCS archive's integration destination.
+      properties:
+        client_email:
+          description: A client email.
+          type: string
+        project_id:
+          description: A project ID.
+          type: string
+      required:
+      - project_id
+      - client_email
+      type: object
+    LogsArchiveIntegrationS3:
+      description: The S3 Archive's integration destination.
+      properties:
+        account_id:
+          description: The account ID for the integration.
+          type: string
+        role_name:
+          description: The path of the integration.
+          type: string
+      required:
+      - role_name
+      - account_id
+      type: object
+    LogsArchiveState:
+      description: The state of the archive.
+      enum:
+      - UNKNOWN
+      - WORKING
+      - FAILING
+      - WORKING_AUTH_LEGACY
+      example: WORKING
+      type: string
+      x-enum-varnames:
+      - UNKNOWN
+      - WORKING
+      - FAILING
+      - WORKING_AUTH_LEGACY
+    LogsArchives:
+      description: The available archives.
+      properties:
+        data:
+          description: A list of archives.
+          items:
+            $ref: '#/components/schemas/LogsArchiveDefinition'
+          type: array
+      type: object
+    Organization:
+      description: Organization object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrganizationAttributes'
+        id:
+          description: ID of the organization.
+          type: string
+        type:
+          default: orgs
+          description: Organizations resource type.
+          readOnly: true
+          type: string
+      required:
+      - type
+      type: object
+    OrganizationAttributes:
+      description: Attributes of the organization.
+      properties:
+        created_at:
+          description: Creation time of the organization.
+          format: date-time
+          type: string
+        description:
+          description: Description of the organization.
+          type: string
+        disabled:
+          description: Whether or not the organization is disabled.
+          type: boolean
+        modified_at:
+          description: Time of last organization modification.
+          format: date-time
+          type: string
+        name:
+          description: Name of the organization.
+          type: string
+        public_id:
+          description: Public ID of the organization.
+          type: string
+        sharing:
+          description: Sharing type of the organization.
+          type: string
+        url:
+          description: URL of the site that this organization exists at.
+          type: string
+      type: object
+    Pagination:
+      description: Pagination object.
+      properties:
+        total_count:
+          description: Total count.
+          format: int64
+          type: integer
+        total_filtered_count:
+          description: Total count of elements matched by the filter.
+          format: int64
+          type: integer
+      type: object
+    Permission:
+      description: Permission object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PermissionAttributes'
+        id:
+          description: ID of the permission.
+          type: string
+        type:
+          default: permissions
+          description: Permissions resource type.
+          readOnly: true
+          type: string
+      required:
+      - type
+      type: object
+    PermissionAttributes:
+      description: Attributes of a permission.
+      properties:
+        created:
+          description: Creation time of the permission.
+          format: date-time
+          type: string
+        description:
+          description: Description of the permission.
+          type: string
+        display_name:
+          description: Displayed name for the permission.
+          type: string
+        display_type:
+          description: Display type.
+          type: string
+        group_name:
+          description: Name of the permission group.
+          type: string
+        name:
+          description: Name of the permission.
+          type: string
+        restricted:
+          description: Whether or not the permission is restricted.
+          type: boolean
+      type: object
+    PermissionsResponse:
+      description: Payload with API-returned permissions.
+      properties:
+        data:
+          description: Array of permissions.
+          items:
+            $ref: '#/components/schemas/Permission'
+          type: array
+      type: object
+    QuerySortOrder:
+      default: desc
+      description: Direction of sort.
+      enum:
+      - asc
+      - desc
+      type: string
+      x-enum-varnames:
+      - ASC
+      - DESC
+    RelationshipToOrganization:
+      description: Relationship to an organization.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToOrganizationData'
+      type: object
+    RelationshipToOrganizationData:
+      description: Relationship to organization object.
+      properties:
+        id:
+          description: ID of the organization.
+          type: string
+        type:
+          default: orgs
+          description: Organizations type.
+          readOnly: true
+          type: string
+      type: object
+    RelationshipToOrganizations:
+      description: Relationship to organizations.
+      properties:
+        data:
+          description: Relationships to organization objects.
+          items:
+            $ref: '#/components/schemas/RelationshipToOrganizationData'
+          type: array
+      type: object
+    RelationshipToPermission:
+      description: Relationship to a permissions object.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToPermissionData'
+      type: object
+    RelationshipToPermissionData:
+      description: Relationship to permission object.
+      properties:
+        id:
+          description: ID of the permission.
+          type: string
+        type:
+          default: permissions
+          description: Permissions resource type.
+          readOnly: true
+          type: string
+      type: object
+    RelationshipToPermissions:
+      description: Relationship to multiple permissions objects.
+      properties:
+        data:
+          description: Relationships to permission objects.
+          items:
+            $ref: '#/components/schemas/RelationshipToPermissionData'
+          type: array
+      type: object
+    RelationshipToRole:
+      description: Relationship to role.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToRoleData'
+      type: object
+    RelationshipToRoleData:
+      description: Relationship to role object.
+      properties:
+        id:
+          description: ID of the role.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        type:
+          default: roles
+          description: The type of the resource. The value should always be roles.
+          example: roles
+          type: string
+      type: object
+    RelationshipToRoles:
+      description: Relationship to roles.
+      properties:
+        data:
+          description: An array containing type and ID of a role.
+          items:
+            $ref: '#/components/schemas/RelationshipToRoleData'
+          type: array
+      type: object
+    RelationshipToUser:
+      description: Relationship to user.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToUserData'
+      type: object
+    RelationshipToUserData:
+      description: Relationship to user object.
+      properties:
+        id:
+          description: ID of the user.
+          type: string
+        type:
+          default: users
+          description: Users type.
+          readOnly: true
+          type: string
+      type: object
+    RelationshipToUsers:
+      description: Relationship to users.
+      properties:
+        data:
+          description: Relationships to user objects.
+          items:
+            $ref: '#/components/schemas/RelationshipToUserData'
+          type: array
+      type: object
+    ResponseMetaAttributes:
+      description: Object describing meta attributes of response.
+      properties:
+        page:
+          $ref: '#/components/schemas/Pagination'
+      type: object
+    RestrictionQueryAttributes:
+      description: Attributes of the restriction query.
+      properties:
+        created_at:
+          description: Creation time of the restriction query.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last restriction query modification.
+          format: date-time
+          readOnly: true
+          type: string
+        restriction_query:
+          description: The query that defines the restriction. Only the content matching
+            the query can be returned.
+          type: string
+      type: object
+    RestrictionQueryCreateAttributes:
+      description: Attributes of the created restriction query.
+      properties:
+        restriction_query:
+          description: The restriction query.
+          type: string
+      type: object
+    RestrictionQueryCreateData:
+      description: Data related to the creation of a restriction query.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RestrictionQueryCreateAttributes'
+        type:
+          default: logs_restriction_queries
+          description: Restriction query resource type.
+          type: string
+      type: object
+    RestrictionQueryCreatePayload:
+      description: Create a restriction query.
+      properties:
+        data:
+          $ref: '#/components/schemas/RestrictionQueryCreateData'
+      type: object
+    RestrictionQueryListResponse:
+      description: Response containing information about multiple restriction queries.
+      properties:
+        data:
+          description: Array of returned restriction queries.
+          items:
+            $ref: '#/components/schemas/RestrictionQueryWithoutRelationships'
+          type: array
+      type: object
+    RestrictionQueryRelationships:
+      description: Relationships of the restriction query object.
+      properties:
+        roles:
+          $ref: '#/components/schemas/RelationshipToRoles'
+      type: object
+    RestrictionQueryResponseIncludedItem:
+      description: An object related to a restriction query.
+      discriminator:
+        mapping:
+          roles: '#/components/schemas/RestrictionQueryRole'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/RestrictionQueryRole'
+      type: object
+    RestrictionQueryRole:
+      description: Partial role object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RestrictionQueryRoleAttribute'
+        id:
+          description: ID of the role.
+          type: string
+        type:
+          default: roles
+          description: Role resource type.
+          readOnly: true
+          type: string
+      type: object
+    RestrictionQueryRoleAttribute:
+      description: Attributes of the role for a restriction query.
+      properties:
+        name:
+          description: The role name.
+          type: string
+      type: object
+    RestrictionQueryRolesResponse:
+      description: Response containing information about roles attached to a restriction
+        query.
+      properties:
+        data:
+          description: Array of roles.
+          items:
+            $ref: '#/components/schemas/RestrictionQueryRole'
+          type: array
+      type: object
+    RestrictionQueryUpdateAttributes:
+      description: Attributes of the edited restriction query.
+      properties:
+        restriction_query:
+          description: The restriction query.
+          type: string
+      type: object
+    RestrictionQueryUpdateData:
+      description: Data related to the update of a restriction query.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RestrictionQueryUpdateAttributes'
+        type:
+          default: logs_restriction_queries
+          description: Restriction query resource type.
+          type: string
+      type: object
+    RestrictionQueryUpdatePayload:
+      description: Update a restriction query.
+      properties:
+        data:
+          $ref: '#/components/schemas/RestrictionQueryUpdateData'
+      type: object
+    RestrictionQueryWithRelationships:
+      description: Restriction query object returned by the API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RestrictionQueryAttributes'
+        id:
+          description: ID of the restriction query.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/RestrictionQueryRelationships'
+        type:
+          default: logs_restriction_queries
+          description: Restriction queries type.
+          readOnly: true
+          type: string
+      type: object
+    RestrictionQueryWithRelationshipsResponse:
+      description: Response containing information about a single restriction query.
+      properties:
+        data:
+          $ref: '#/components/schemas/RestrictionQueryWithRelationships'
+        included:
+          description: Array of objects related to the restriction query.
+          items:
+            $ref: '#/components/schemas/RestrictionQueryResponseIncludedItem'
+          type: array
+      type: object
+    RestrictionQueryWithoutRelationships:
+      description: Restriction query object returned by the API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RestrictionQueryAttributes'
+        id:
+          description: ID of the restriction query.
+          type: string
+        type:
+          default: logs_restriction_queries
+          description: Restriction queries type.
+          readOnly: true
+          type: string
+      type: object
+    RestrictionQueryWithoutRelationshipsResponse:
+      description: Response containing information about a single restriction query.
+      properties:
+        data:
+          $ref: '#/components/schemas/RestrictionQueryWithoutRelationships'
+      type: object
+    Role:
+      description: Role object returned by the API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoleAttributes'
+        id:
+          description: ID of the role.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/RoleResponseRelationships'
+        type:
+          default: roles
+          description: Roles type.
+          readOnly: true
+          type: string
+      required:
+      - type
+      type: object
+    RoleAttributes:
+      description: Attributes of the role.
+      properties:
+        created_at:
+          description: Creation time of the role.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last role modification.
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          description: Name of the role.
+          type: string
+      type: object
+    RoleCreateAttributes:
+      description: Attributes of the created role.
+      properties:
+        name:
+          description: The name of the role.
+          type: string
+      type: object
+    RoleCreateData:
+      description: Data related to the creation of a role.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoleCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/RoleRelationships'
+        type:
+          default: roles
+          description: Roles resource type.
+          readOnly: true
+          type: string
+      type: object
+    RoleCreatePayload:
+      description: Create a role.
+      properties:
+        data:
+          $ref: '#/components/schemas/RoleCreateData'
+      type: object
+    RoleRelationships:
+      description: Relationships of the role object.
+      properties:
+        permissions:
+          $ref: '#/components/schemas/RelationshipToPermissions'
+        users:
+          $ref: '#/components/schemas/RelationshipToUsers'
+      type: object
+    RoleResponse:
+      description: Response containing information about a single role.
+      properties:
+        data:
+          $ref: '#/components/schemas/Role'
+      type: object
+    RoleResponseRelationships:
+      description: Relationships of the role object returned by the API.
+      properties:
+        org:
+          $ref: '#/components/schemas/RelationshipToOrganization'
+        other_orgs:
+          $ref: '#/components/schemas/RelationshipToOrganizations'
+        other_roles:
+          $ref: '#/components/schemas/RelationshipToRoles'
+        roles:
+          $ref: '#/components/schemas/RelationshipToRoles'
+      type: object
+    RoleUpdateAttributes:
+      description: Attributes of the edited role.
+      properties:
+        name:
+          description: The name of the role.
+          type: string
+      type: object
+    RoleUpdateData:
+      description: Data related to the update of a role.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RoleUpdateAttributes'
+        id:
+          description: ID of the role.
+          type: string
+        type:
+          default: roles
+          description: Type of role.
+          type: string
+      type: object
+    RoleUpdatePayload:
+      description: Update a role.
+      properties:
+        data:
+          $ref: '#/components/schemas/RoleUpdateData'
+      type: object
+    RolesResponse:
+      description: Response containing information about multiple roles.
+      properties:
+        data:
+          description: Array of returned roles.
+          items:
+            $ref: '#/components/schemas/Role'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetaAttributes'
+      type: object
+    RolesSort:
+      default: name
+      description: Sorting options for roles.
+      enum:
+      - name
+      - -name
+      - modified_at
+      - -modified_at
+      - user_count
+      - -user_count
+      type: string
+      x-enum-varnames:
+      - NAME_ASCENDING
+      - NAME_DESCENDING
+      - MODIFIED_AT_ASCENDING
+      - MODIFIED_AT_DESCENDING
+      - USER_COUNT_ASCENDING
+      - USER_COUNT_DESCENDING
+    SecurityMonitoringListRulesResponse:
+      description: List of rules
+      properties:
+        data:
+          description: TODO.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetaAttributes'
+      type: object
+    SecurityMonitoringRuleCase:
+      description: Case when signal is generated.
+      properties:
+        condition:
+          description: 'A rule case contains logical operations (>, >=, &&, ||) to
+            determine if a signal should be generated
+
+            based on the event counts in the previously defined queries.'
+          type: string
+        name:
+          description: Name of the case.
+          type: string
+        notifications:
+          description: Notification targets for each rule case
+          items:
+            description: Notification
+            type: string
+          type: array
+        status:
+          $ref: '#/components/schemas/SecurityMonitoringRuleSeverity'
+      type: object
+    SecurityMonitoringRuleCreatePayload:
+      description: Create a new rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+          type: array
+        enabled:
+          description: Whether the rule is enabled.
+          type: boolean
+        message:
+          description: Message for generated signals.
+          type: string
+        name:
+          description: The name of the rule
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            description: Tag
+            type: string
+          type: array
+      required:
+      - name
+      - enabled
+      - queries
+      - options
+      - cases
+      - message
+      - tags
+      type: object
+    SecurityMonitoringRuleEvaluationWindow:
+      description: 'A time window is specified to match when at least one of the cases
+        matches true. This is a sliding window
+
+        and evaluates in real time.'
+      enum:
+      - 0
+      - 60
+      - 300
+      - 600
+      - 900
+      - 1800
+      - 3600
+      - 7200
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ZERO_MINUTES
+      - ONE_MINUTE
+      - FIVE_MINUTES
+      - TEN_MINUTES
+      - FIFTEEN_MINUTES
+      - THIRTY_MINUTES
+      - ONE_HOUR
+      - TWO_HOURS
+    SecurityMonitoringRuleKeepAlive:
+      description: "Once a signal is generated, the signal will remain \u201Copen\u201D\
+        \ if a case is matched at least once within\nthis keep alive window."
+      enum:
+      - 0
+      - 60
+      - 300
+      - 600
+      - 900
+      - 1800
+      - 3600
+      - 7200
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ZERO_MINUTES
+      - ONE_MINUTE
+      - FIVE_MINUTES
+      - TEN_MINUTES
+      - FIFTEEN_MINUTES
+      - THIRTY_MINUTES
+      - ONE_HOUR
+      - TWO_HOURS
+    SecurityMonitoringRuleMaxSignalDuration:
+      description: "A signal will \u201Cclose\u201D regardless of the query being\
+        \ matched once the time exceeds the maximum duration.\nThis time is calculated\
+        \ from the first seen timestamp."
+      enum:
+      - 0
+      - 60
+      - 300
+      - 600
+      - 900
+      - 1800
+      - 3600
+      - 7200
+      - 10800
+      - 21600
+      - 43200
+      - 86400
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ZERO_MINUTES
+      - ONE_MINUTE
+      - FIVE_MINUTES
+      - TEN_MINUTES
+      - FIFTEEN_MINUTES
+      - THIRTY_MINUTES
+      - ONE_HOUR
+      - TWO_HOURS
+      - THREE_HOURS
+      - SIX_HOURS
+      - TWELVE_HOURS
+      - ONE_DAY
+    SecurityMonitoringRuleOptions:
+      description: Options on rules.
+      properties:
+        evaluationWindow:
+          $ref: '#/components/schemas/SecurityMonitoringRuleEvaluationWindow'
+        keepAlive:
+          $ref: '#/components/schemas/SecurityMonitoringRuleKeepAlive'
+        maxSignalDuration:
+          $ref: '#/components/schemas/SecurityMonitoringRuleMaxSignalDuration'
+      type: object
+    SecurityMonitoringRuleQuery:
+      description: Query for matching rule.
+      properties:
+        groupByFields:
+          description: Fields to group by.
+          items:
+            description: Field
+            type: string
+          type: array
+        name:
+          description: Name of the query
+          type: string
+        query:
+          description: Query to run on logs
+          type: string
+      type: object
+    SecurityMonitoringRuleResponse:
+      description: Detection rule
+      properties:
+        cases:
+          description: Cases for generating signals.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+          type: array
+        createdAt:
+          description: When the rule was created, timestamp in milliseconds.
+          format: int64
+          type: integer
+        creationAuthorId:
+          description: User ID of the user who created the rule.
+          format: int64
+          type: integer
+        id:
+          description: The ID of the rule.
+          type: string
+        isDefault:
+          description: Whether the rule is included by default.
+          type: boolean
+        isDeleted:
+          description: Whether the rule has been deleted.
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          type: boolean
+        message:
+          description: Message for generated signals.
+          type: string
+        name:
+          description: The name of the rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            description: Tag
+            type: string
+          type: array
+        version:
+          description: The version of the rule.
+          format: int64
+          type: integer
+    SecurityMonitoringRuleSeverity:
+      description: Severity of the Security Signal.
+      enum:
+      - info
+      - low
+      - medium
+      - high
+      - critical
+      type: string
+      x-enum-varnames:
+      - INFO
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+    SecurityMonitoringRuleUpdatePayload:
+      description: Update an existing rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCase'
+          type: array
+        enabled:
+          description: Whether the rule is enabled.
+          type: boolean
+        message:
+          description: Message for generated signals.
+          type: string
+        name:
+          description: Name of the rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          items:
+            description: Tag
+            type: string
+          type: array
+      type: object
+    User:
+      description: User object returned by the API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserAttributes'
+        id:
+          description: ID of the user.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/UserResponseRelationships'
+        type:
+          default: users
+          description: Users type.
+          readOnly: true
+          type: string
+      type: object
+    UserAttributes:
+      description: Attributes of user object returned by the API.
+      properties:
+        created_at:
+          description: Creation time of the user.
+          format: date-time
+          type: string
+        disabled:
+          description: Whether the user is disabled.
+          type: boolean
+        email:
+          description: Email of the user.
+          type: string
+        handle:
+          description: Handle of the user.
+          type: string
+        icon:
+          description: URL of the user's icon.
+          type: string
+        name:
+          description: Name of the user.
+          type: string
+        status:
+          description: Status of the user.
+          type: string
+        title:
+          description: Title of the user.
+          type: string
+        verified:
+          description: Whether the user is verified.
+          type: boolean
+      type: object
+    UserCreateAttributes:
+      description: Attributes of the created user.
+      properties:
+        email:
+          description: The email of the user.
+          type: string
+        name:
+          description: The name of the user.
+          type: string
+        title:
+          description: The title of the user.
+          type: string
+      type: object
+    UserCreateData:
+      description: Object to create a user.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/UserRelationships'
+        type:
+          default: users
+          description: Users resource type.
+          readOnly: true
+          type: string
+      type: object
+    UserCreatePayload:
+      description: Create a user.
+      properties:
+        data:
+          $ref: '#/components/schemas/UserCreateData'
+      type: object
+    UserInvitationData:
+      description: Object to create a user invitation.
+      properties:
+        relationships:
+          $ref: '#/components/schemas/UserInvitationRelationships'
+        type:
+          default: user_invitations
+          description: User invitations type.
+          type: string
+      type: object
+    UserInvitationDataAttributes:
+      description: Attributes of a user invitation.
+      properties:
+        created_at:
+          description: Creation time of the user invitation.
+          format: date-time
+          type: string
+        expires_at:
+          description: Time of invitation expiration.
+          format: date-time
+          type: string
+        invite_type:
+          description: Type of invitation.
+          type: string
+        uuid:
+          description: UUID of the user invitation.
+          type: string
+      type: object
+    UserInvitationPayload:
+      description: Object to invite users to join the organization.
+      properties:
+        data:
+          description: List of user invitations.
+          items:
+            $ref: '#/components/schemas/UserInvitationData'
+          type: array
+      type: object
+    UserInvitationRelationships:
+      description: Relationships data for user invitation.
+      properties:
+        user:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    UserInvitationResponse:
+      description: User invitation as returned by the API.
+      properties:
+        data:
+          $ref: '#/components/schemas/UserInvitationResponseData'
+      type: object
+    UserInvitationResponseData:
+      description: Object of a user invitation returned by the API.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserInvitationDataAttributes'
+        id:
+          description: ID of the user invitation.
+          type: string
+        type:
+          default: user_invitations
+          description: User invitations type.
+          type: string
+      type: object
+    UserInvitationsResponse:
+      description: User invitations as returned by the API.
+      properties:
+        data:
+          description: Array of user invitations.
+          items:
+            $ref: '#/components/schemas/UserInvitationResponseData'
+          type: array
+      type: object
+    UserRelationships:
+      description: Relationships of the user object.
+      properties:
+        roles:
+          $ref: '#/components/schemas/RelationshipToRoles'
+      type: object
+    UserResponse:
+      description: Response containing information about a single user.
+      properties:
+        data:
+          $ref: '#/components/schemas/User'
+        included:
+          description: Array of objects related to the user.
+          items:
+            $ref: '#/components/schemas/UserResponseIncludedItem'
+          type: array
+      type: object
+    UserResponseIncludedItem:
+      description: An object related to a user.
+      discriminator:
+        mapping:
+          orgs: '#/components/schemas/Organization'
+          permissions: '#/components/schemas/Permission'
+          roles: '#/components/schemas/Role'
+        propertyName: type
+      oneOf:
+      - $ref: '#/components/schemas/Organization'
+      - $ref: '#/components/schemas/Permission'
+      - $ref: '#/components/schemas/Role'
+      type: object
+    UserResponseRelationships:
+      description: Relationships of the user object returned by the API.
+      properties:
+        org:
+          $ref: '#/components/schemas/RelationshipToOrganization'
+        other_orgs:
+          $ref: '#/components/schemas/RelationshipToOrganizations'
+        other_users:
+          $ref: '#/components/schemas/RelationshipToUsers'
+        roles:
+          $ref: '#/components/schemas/RelationshipToRoles'
+      type: object
+    UserUpdateAttributes:
+      description: Attributes of the edited user.
+      properties:
+        disabled:
+          description: If the user is enabled or disabled.
+          type: boolean
+        email:
+          description: The email of the user.
+          type: string
+        name:
+          description: The name of the user.
+          type: string
+      type: object
+    UserUpdateData:
+      description: Object to update a user.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserUpdateAttributes'
+        id:
+          description: ID of the user.
+          type: string
+        type:
+          default: users
+          description: Users resource type.
+          readOnly: true
+          type: string
+      type: object
+    UserUpdatePayload:
+      description: Update a user.
+      properties:
+        data:
+          $ref: '#/components/schemas/UserUpdateData'
+      type: object
+    UsersResponse:
+      description: Response containing information about multiple users.
+      properties:
+        data:
+          description: Array of returned users.
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+        included:
+          description: Array of objects related to the users.
+          items:
+            $ref: '#/components/schemas/UserResponseIncludedItem'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetaAttributes'
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: Your Datadog API Key.
+      in: header
+      name: DD-API-KEY
+      type: apiKey
+      x-env-name: DD_CLIENT_API_KEY
+    appKeyAuth:
+      description: Your Datadog APP Key.
+      in: header
+      name: DD-APPLICATION-KEY
+      type: apiKey
+      x-env-name: DD_CLIENT_APP_KEY
+info:
+  contact:
+    email: support@datadoghq.com
+    name: Datadog Support
+    url: https://www.datadoghq.com/support/
+  description: Collection of all Datadog Public endpoints.
+  title: Datadog API Collection
+  version: '1.0'
+openapi: 3.0.0
+paths:
+  /api/v2/dashboard/lists/manual/{dashboard_list_id}/dashboards:
+    delete:
+      description: Delete dashboards from an existing dashboard list.
+      operationId: DeleteDashboardListItems
+      parameters:
+      - description: ID of the dashboard list to delete items from.
+        in: path
+        name: dashboard_list_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardListItems'
+        description: Dashboards to delete from the dashboard list.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardListDeleteItemsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Delete items from a dashboard list
+      tags:
+      - Dashboard Lists
+      x-codegen-request-body-name: body
+    get:
+      description: "Fetch the dashboard list\u2019s dashboard definitions."
+      operationId: GetDashboardListItems
+      parameters:
+      - description: ID of the dashboard list to get items from.
+        in: path
+        name: dashboard_list_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardListItems'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Get a Dashboard List
+      tags:
+      - Dashboard Lists
+    post:
+      description: Add dashboards to an existing dashboard list.
+      operationId: CreateDashboardListItems
+      parameters:
+      - description: ID of the dashboard list to add items to.
+        in: path
+        name: dashboard_list_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardListItems'
+        description: Dashboards to add to the dashboard list.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardListAddItemsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Add Items to a Dashboard List
+      tags:
+      - Dashboard Lists
+      x-codegen-request-body-name: body
+    put:
+      description: Update dashboards of an existing dashboard list.
+      operationId: UpdateDashboardListItems
+      parameters:
+      - description: ID of the dashboard list to update items from.
+        in: path
+        name: dashboard_list_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardListItems'
+        description: New dashboards of the dashboard list.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardListItems'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+      summary: Update items of a dashboard list
+      tags:
+      - Dashboard Lists
+      x-codegen-request-body-name: body
+  /api/v2/logs/config/archives:
+    get:
+      description: Get the list of configured logs archives with their definitions.
+      operationId: ListLogsArchives
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchives'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get all archives
+      tags:
+      - Logs Archives
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create an archive in your organization.
+      operationId: CreateLogsArchive
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsArchiveCreateRequest'
+        description: The definition of the new archive.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchive'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Create an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/archives/{archive_id}:
+    delete:
+      description: Delete a given archive from your organization.
+      operationId: DeleteLogsArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Delete an archive
+      tags:
+      - Logs Archives
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a specific archive from your organization.
+      operationId: GetLogsArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchive'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get an archive
+      tags:
+      - Logs Archives
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: 'Update a given archive configuration.
+
+
+        **Note**: Using this method updates your archive configuration by **replacing**
+
+        your current configuration with the new one sent to your Datadog organization.'
+      operationId: UpdateLogsArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogsArchiveCreateRequest'
+        description: New definition of the archive.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsArchive'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Update an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/archives/{archive_id}/readers:
+    delete:
+      description: Removes a role from an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))
+      operationId: RemoveRoleFromArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToRole'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Revoke role from an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Returns all read roles a given archive is restricted to.
+      operationId: ListArchiveReadRoles
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: List read roles for an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Adds a read role to an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))
+      operationId: AddReadRoleToArchive
+      parameters:
+      - $ref: '#/components/parameters/ArchiveID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToRole'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Grant role to an archive
+      tags:
+      - Logs Archives
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/restriction_queries:
+    get:
+      description: Returns all restriction queries, including their names and IDs.
+      operationId: ListRestrictionQueries
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryListResponse'
+          description: OK
+        '403':
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: List restriction queries
+      tags:
+      - Logs Restriction Queries
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new restriction query for your organization.
+      operationId: CreateRestrictionQuery
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestrictionQueryCreatePayload'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryWithoutRelationshipsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Create a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/restriction_queries/role/{role_id}:
+    get:
+      description: Get restriction query for a given role.
+      operationId: GetRoleRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryRoleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Get restriction query for a given role
+      tags:
+      - Logs Restriction Queries
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/restriction_queries/user/{user_id}:
+    get:
+      description: Get all restriction queries for a given user.
+      operationId: ListUserRestrictionQueries
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryUserID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Get all restriction queries for a given user
+      tags:
+      - Logs Restriction Queries
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/restriction_queries/{restriction_query_id}:
+    delete:
+      description: Deletes a restriction query.
+      operationId: DeleteRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Delete a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a restriction query in the organization specified by the restriction
+        query's `restriction_query_id`.
+      operationId: GetRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryWithRelationshipsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Edit a restriction query.
+      operationId: UpdateRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestrictionQueryUpdatePayload'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryWithoutRelationshipsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Update a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/logs/config/restriction_queries/{restriction_query_id}/roles:
+    delete:
+      description: Removes a role from a restriction query.
+      operationId: RemoveRoleFromRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToRole'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Revoke role from a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Returns all roles that have a given restriction query.
+      operationId: ListRestrictionQueryRoles
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestrictionQueryRolesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: List roles for a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Adds a role to a restriction query.
+      operationId: AddRoleToRestrictionQuery
+      parameters:
+      - $ref: '#/components/parameters/RestrictionQueryID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToRole'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Grant role to a restriction query
+      tags:
+      - Logs Restriction Queries
+      x-codegen-request-body-name: body
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/permissions:
+    get:
+      description: Returns a list of all permissions, including name, description,
+        and ID.
+      operationId: ListPermissions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsResponse'
+          description: OK
+        '400':
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: List permissions
+      tags:
+      - Roles
+  /api/v2/roles:
+    get:
+      description: Returns all roles, including their names and IDs.
+      operationId: ListRoles
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: 'Sort roles depending on the given field. Sort order is **ascending**
+          by default.
+
+          Sort order is **descending** if the field is prefixed by a negative sign,
+          for example:
+
+          `sort=-name`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/RolesSort'
+      - description: Filter all roles by the given string.
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RolesResponse'
+          description: OK
+        '403':
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: List roles
+      tags:
+      - Roles
+    post:
+      description: Create a new role for your organization.
+      operationId: CreateRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleCreatePayload'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Create role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+  /api/v2/roles/{role_id}:
+    delete:
+      description: Disables a role.
+      operationId: DeleteRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Delete role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+    get:
+      description: "Get a role in the organization specified by the role\u2019s `role_id`."
+      operationId: GetRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: OK for get role
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+    patch:
+      description: Edit a role. Can only be used with application keys belonging to
+        administrators.
+      operationId: UpdateRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleUpdatePayload'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+      summary: Update a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+  /api/v2/roles/{role_id}/permissions:
+    delete:
+      description: Removes a permission from a role.
+      operationId: RemovePermissionFromRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToPermission'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Revoke permission
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+    get:
+      description: Returns a list of all permissions for a single role.
+      operationId: ListRolePermissions
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: List permissions for a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+    post:
+      description: Adds a permission to a role.
+      operationId: AddPermissionToRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToPermission'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Grant permission to a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+  /api/v2/roles/{role_id}/users:
+    delete:
+      description: Removes a user from a role.
+      operationId: RemoveUserFromRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToUser'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Remove a user from a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+    get:
+      description: Gets all users of a role.
+      operationId: ListRoleUsers
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: 'User attribute to order results by. Sort order is **ascending**
+          by default.
+
+          Sort order is **descending** if the field is prefixed by a negative sign,
+
+          for example `sort=-name`. Options: `name`, `email`, `status`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: name
+          type: string
+      - description: Filter all users by the given string. Defaults to no filtering.
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get all users of a role
+      tags:
+      - Roles
+    post:
+      description: Adds a user to a role.
+      operationId: AddUserToRole
+      parameters:
+      - $ref: '#/components/parameters/RoleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RelationshipToUser'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Add a user to a role
+      tags:
+      - Roles
+      x-codegen-request-body-name: body
+  /api/v2/security_monitoring/rules:
+    get:
+      description: List rules.
+      operationId: ListSecurityMonitoringRules
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringListRulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+      summary: List rules
+      tags:
+      - Security Monitoring
+    post:
+      description: Create a detection rule.
+      operationId: CreateSecurityMonitoringRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+      summary: Create a detection rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+  /api/v2/security_monitoring/rules/{rule_id}:
+    delete:
+      description: Delete an existing rule. Default rules cannot be deleted.
+      operationId: DeleteSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Delete an existing rule
+      tags:
+      - Security Monitoring
+    get:
+      description: Get a rule's details.
+      operationId: GetSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
+          description: OK
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Get a rule's details
+      tags:
+      - Security Monitoring
+    put:
+      description: 'Update an existing rule. When updating `cases`, `queries` or `options`,
+        the whole field
+
+        must be included. For example, when modifying a query all queries must be
+        included.
+
+        Default rules can only be updated to be enabled and to change notifications.'
+      operationId: UpdateSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleUpdatePayload'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+      summary: Update an existing rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+  /api/v2/user_invitations:
+    post:
+      description: Sends emails to one or more users inviting them to join the organization.
+      operationId: SendInvitations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInvitationPayload'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInvitationsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Send invitation emails
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+  /api/v2/user_invitations/{user_invitation_uuid}:
+    get:
+      description: Returns a single user invitation by its UUID.
+      operationId: GetInvitation
+      parameters:
+      - description: The UUID of the user invitation.
+        in: path
+        name: user_invitation_uuid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInvitationResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get a user invitation
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+  /api/v2/users:
+    get:
+      description: Get the list of all users in the organization. This list includes
+        all users even if they are disabled or unverified.
+      operationId: ListUsers
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: 'User attribute to order results by. Sort order is ascending
+          by default. Sort order is descending if the field is prefixed by a negative
+          sign, for example `sort=-name`. Options: `name`, `modified_at`, `user_count`.'
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: name
+          type: string
+      - description: 'Direction of sort. Options: `asc`, `desc`.'
+        in: query
+        name: sort_dir
+        required: false
+        schema:
+          $ref: '#/components/schemas/QuerySortOrder'
+      - description: Filter all users by the given string. Defaults to no filtering.
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      - description: 'Filter on status attribute.
+
+          Comma separated list, with possible values `Active`, `Pending`, and `Disabled`.
+
+          Defaults to no filtering.'
+        in: query
+        name: filter[status]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsersResponse'
+          description: OK
+        '400':
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            applcation/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: List all users
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+    post:
+      description: Create a user for your organization.
+      operationId: CreateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreatePayload'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+      summary: Create a user
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+  /api/v2/users/{user_id}:
+    delete:
+      description: Disable a user. Can only be used with an application key belonging
+        to an administrator user.
+      operationId: DisableUser
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Disable a user
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+    get:
+      description: "Get a user in the organization specified by the user\u2019s `user_id`."
+      operationId: GetUser
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: OK for get user
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get a user
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+    patch:
+      description: Edit a user. Can only be used with an application key belonging
+        to an administrator user.
+      operationId: UpdateUser
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdatePayload'
+      responses:
+        '204':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Unprocessable Entity
+      summary: Update a user
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+  /api/v2/users/{user_id}/orgs:
+    get:
+      description: Get a user organization. Returns the user information and all organizations
+        joined by this user.
+      operationId: ListUserOrganizations
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get a user organization
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+  /api/v2/users/{user_id}/permissions:
+    get:
+      description: "Get a user permission set. Returns a list of the user\u2019s permissions\
+        \ granted by the associated user's roles."
+      operationId: ListUserPermissions
+      parameters:
+      - $ref: '#/components/parameters/UserID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionsResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not found
+      summary: Get a user permissions
+      tags:
+      - Users
+      x-codegen-request-body-name: body
+security:
+- apiKeyAuth: []
+  appKeyAuth: []
+servers:
+- url: https://{subdomain}.{site}
+  variables:
+    site:
+      default: datadoghq.com
+      description: The regional site for our customers.
+      enum:
+      - datadoghq.com
+      - datadoghq.eu
+    subdomain:
+      default: api
+      description: The subdomain where the API is deployed.
+- url: '{protocol}://{name}'
+  variables:
+    name:
+      default: api.datadoghq.com
+      description: Full site DNS name.
+    protocol:
+      default: https
+      description: The protocol for accessing the API.
+tags:
+- description: '[See API version 1](/api/v1/aws-integration/).'
+  name: AWS Integration
+- description: '[See API version 1](/api/v1/aws-logs-integration/).'
+  name: AWS Logs Integration
+- description: "All requests to Datadog\u2019s API must be authenticated.\nRequests\
+    \ that write data require reporting access and require an `API key`.\nRequests\
+    \ that read data require full access and also require an `application key`.\n\n\
+    **Note:** All Datadog API clients are configured by default to consume Datadog\
+    \ US site APIs.\nIf you are on the Datadog EU site, set the environment variable\
+    \ `DATADOG_HOST` to\n`https://api.datadoghq.eu` or override this value directly\
+    \ when creating your client.\n\n[Manage your account\u2019s API and application\
+    \ keys](https://app.datadoghq.com/account/settings#api).\n\n## Validate API key\n\
+    \n[See API version 1](/api/v1/authentication/#validate-api-key)."
+  name: Authentication
+- description: '[See API version 1](/api/v1/azure-integration/).'
+  name: Azure Integration
+- description: '[Interact with your dashboard lists](https://docs.datadoghq.com/monitors/downtimes)
+
+    through the API to make it easier to organize, find, and share all of your dashboards
+
+    with your team and organization.'
+  name: Dashboard Lists
+- description: '[See API version 1](/api/v1/dashboards/).'
+  name: Dashboards
+- description: '[See API version 1](/api/v1/downtimes/).'
+  name: Downtimes
+- description: '[See API version 1](/api/v1/embeddable-graphs/).'
+  name: Embeddable Graphs
+- description: '[See API version 1](/api/v1/events/).'
+  name: Events
+- description: '[See API version 1](/api/v1/gcp-integration/).'
+  name: GCP Integration
+- description: '[See API version 1](/api/v1/hosts/).'
+  name: Hosts
+- description: '[See API version 1](/api/v1/ip-ranges/).'
+  name: IP Ranges
+- description: '[See API version 1](/api/v1/key-management/).'
+  name: Key Management
+- description: '[See API version 1](/api/v1/logs/).'
+  name: Logs
+- description: 'Archives forward all the logs ingested to a cloud storage system.
+
+
+    See the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)
+
+    for a list of the archives currently configured in our UI.'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/logs/archives/
+  name: Logs Archives
+- description: '[See API version 1](/api/v1/logs-indexes/).'
+  name: Logs Indexes
+- description: '[See API version 1](/api/v1/logs-pipelines/).'
+  name: Logs Pipelines
+- description: "**Note: This endpoint is in public beta. If you have any feedback,\
+    \ contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read\
+    \ access on log data at all, you must grant the `logs_read_data` permission.\n\
+    From there you can limit what data a role grants read access to by associating\
+    \ a Restriction Query with that role.\n\nA Restriction Query is a logs query that\
+    \ restricts which logs the `logs_read_data` permission grants read access to.\n\
+    For users whose roles have Restriction Queries, any log query they make only returns\
+    \ those log events that also match\none of their Restriction Queries. This is\
+    \ true whether the user queries log events from any log-related feature, including\n\
+    the log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction\
+    \ Queries currently only support use of the following components of log events:\n\
+    \n- Reserved attributes\n- The log message\n- Tags\n\nThe recommended way to manage\
+    \ restricted read access on log data for customers with large or complicated organizational\
+    \ structures\nis to add a team tag to log events to indicate which team(s) own(s)\
+    \ them, and then to scope Restriction Queries to the appropriate\nvalues of the\
+    \ team tag. Tags can be applied to log events in many ways, and a log event can\
+    \ have multiple tags with the same key (like team)\nand different values\u2014\
+    in this way the same log event can be visible to roles whose restriction queries\
+    \ are scoped to different team values."
+  name: Logs Restriction Queries
+- description: '[See API version 1](/api/v1/metrics/).'
+  name: Metrics
+- description: '[See API version 1](/api/v1/monitors/).'
+  name: Monitors
+- description: '[See API version 1](/api/v1/organizations/).'
+  name: Organizations
+- description: '[See API version 1](/api/v1/pagerduty-integration/).'
+  name: PagerDuty Integration
+- description: 'The Roles API is used to create and manage Datadog roles, what
+
+    [global permissions](https://docs.datadoghq.com/account_management/rbac/)
+
+    they grant, and which users belong to them.
+
+
+    Permissions related to specific account assets can be granted to roles
+
+    in the Datadog application without using this API. For example, granting
+
+    read access on a specific log index to a role can be done in Datadog from the
+
+    [Pipelines page](https://app.datadoghq.com/logs/pipelines).'
+  name: Roles
+- description: '[See API version 1](/api/v1/screenboards/).'
+  name: Screenboards
+- description: Detection Rules for generating signals
+  name: Security Monitoring
+- description: '[See API version 1](/api/v1/service-checks/).'
+  name: Service Checks
+- description: '[See API version 1](/api/v1/service-dependencies/).'
+  name: Service Dependencies
+- description: '[See API version 1](/api/v1/service-level-objectives/).'
+  name: Service Level Objectives
+- description: '[See API version 1](/api/v1/slack-integration/).'
+  name: Slack Integration
+- description: '[See API version 1](/api/v1/snapshots/).'
+  name: Snapshots
+- description: '[See API version 1](/api/v1/synthetics/).'
+  name: Synthetics
+- description: '[See API version 1](/api/v1/tags/).'
+  name: Tags
+- description: '[See API version 1](/api/v1/timeboards/).'
+  name: Timeboards
+- description: '[See API version 1](/api/v1/tracing/).'
+  name: Tracing
+- description: '[See API version 1](/api/v1/usage-metering/).'
+  name: Usage Metering
+- description: Create, edit, and disable users.
+  externalDocs:
+    url: https://docs.datadoghq.com/account_management/users
+  name: Users
+- description: '[See API version 1](/api/v1/webhooks-integration/).'
+  name: Webhooks Integration
+x-group-parameters: true

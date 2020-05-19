@@ -57,10 +57,10 @@ Amazon EC2 Spot インテグレーションには、サービスのチェック�
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-ec2-spot
-[4]: https://docs.datadoghq.com/ja/agent/logs
-[5]: https://docs.datadoghq.com/ja/integrations/rsyslog
+[4]: https://docs.datadoghq.com/ja/agent/logs/
+[5]: https://docs.datadoghq.com/ja/integrations/rsyslog/
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ec2_spot/amazon_ec2_spot_metadata.csv
-[7]: https://docs.datadoghq.com/ja/help
+[7]: https://docs.datadoghq.com/ja/help/
