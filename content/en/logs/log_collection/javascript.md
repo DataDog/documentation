@@ -35,8 +35,7 @@ With the `datadog-logs` library, you can send logs directly to Datadog from JS c
 
 After adding [`@datadog/browser-logs`][3] to your `package.json` file, initialize it with:
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
@@ -49,8 +48,8 @@ datadogLogs.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
@@ -63,15 +62,13 @@ datadogLogs.init({
 });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 ### Bundle setup
 
 In order to not miss any logs or errors, you should load and configure the library at the beginning of the head section of your pages.
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```html
 <html>
@@ -89,8 +86,8 @@ In order to not miss any logs or errors, you should load and configure the libra
 </html>
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```html
 <html>
@@ -108,8 +105,7 @@ In order to not miss any logs or errors, you should load and configure the libra
 </html>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 **Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
 
