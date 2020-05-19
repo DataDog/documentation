@@ -419,12 +419,14 @@ To add Logback [logstash-logback-encoder][1] into your classpath, add the follow
 
 Configure the Logback logger to stream logs directly to Datadog by adding the following in your `logback.xml` file:
 
+{{< site-region region="us" >}}
+
 ```xml
 <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
     <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
 </appender>
 <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-    <remoteHost>intake.logs.datadoghq.com</remoteHost>
+    <remoteHost>tcp-intake.logs.datadoghq.com</remoteHost>
     <port>10514</port>
     <keepAliveDuration>1 minute</keepAliveDuration>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
@@ -441,11 +443,37 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
 </root>
 ```
 
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```xml
+<appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+</appender>
+<appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <remoteHost>tcp-intake.logs.datadoghq.eu</remoteHost>
+    <port>1883</port>
+    <keepAliveDuration>1 minute</keepAliveDuration>
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+        <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern><APIKEY> %mdc{keyThatDoesNotExist}</pattern>
+            </layout>
+          </prefix>
+    </encoder>
+</appender>
+<root level="debug">
+    <appender-ref ref="JSON_TCP" />
+    <appender-ref ref="JSON" />
+</root>
+```
+
+{{< /site-region >}}
+
 **Notes:**
 
 * Replace `<API_KEY>` with your Datadog API key value.
 * `%mdc{keyThatDoesNotExist}` is added because the XML configuration trims whitespace, as explained [here][4].
-* See the list of [available endpoints for the EU site][5].
 
 More information available on the prefix parameter in the [Logback documentation][4].
 

@@ -79,6 +79,7 @@ Beta integrations are disabled by default but can be enabled individually.
 | Akka-Http Server        | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                |
 | Finatra Web             | 2.9+       | Fully Supported | `finatra`                                      |
 | Grizzly                 | 2.0+       | [Beta][8]       | `grizzly`                                      |
+| Grizzly-HTTP            | 2.3.20+    | [Beta][8]       | `grizzly-filterchain`                          |
 | Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
 | Jetty (non-Servlet)     | 8+         | [Beta][8]       | `jetty`, `jetty-8`                             |
@@ -112,6 +113,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
 | Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
 | Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
+| Grizzly HTTP Client      | 1.9+        | Beta[8]         | `grizzly-client`                               |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
@@ -121,6 +123,8 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Jersey Client            | 1.9+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
+| Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
+| Ning HTTP Client         | 1.9.0+      | Beta[8]         | `ning`                                         |
 | OkHTTP                   | 2.2+        | Fully Supported | `okhttp`, `okhttp-2`,`okhttp-3`                |
 | Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |

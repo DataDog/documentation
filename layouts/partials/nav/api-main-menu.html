@@ -38,7 +38,7 @@
             </ul>
         </li>
     {{ else }}
-        <li>
+        <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) }}active{{ end }}">
             <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
                 <span>{{ .Name }}</span>
             </a>

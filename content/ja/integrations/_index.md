@@ -2,6 +2,8 @@
 title: インテグレーション
 kind: documentation
 disable_toc: true
+aliases:
+  - /ja/integrations/verisign_openhybrid/
 description: すべてのシステム、アプリケーション、およびサービスからデータを収集
 ---
 すべてのシステム、アプリケーション、サービスの横断的な監視を実現します。Datadog が提供する 400 以上の組み込みインテグレーションをご活用ください。

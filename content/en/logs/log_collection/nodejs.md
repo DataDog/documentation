@@ -138,8 +138,9 @@ You can stream your logs from your application to Datadog without installing an 
 Use [Winston HTTP transport][1] to send your logs directly through the [Datadog Log API][2].
 In your bootstrap file or somewhere in your code, declare the logger as follow:
 
-```js
+{{< site-region region="us" >}}
 
+```js
 const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
@@ -164,17 +165,44 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-**Note**: To send logs to Datadog EU site, set the host property to `http-intake.logs.datadoghq.eu`
+Note: you can also check the community supported [Datadog Transport][1].
 
-If you are using US site, you can also check the community supported [Datadog Transport][3].
+[1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
 
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```js
+const { createLogger, format, transports } = require('winston');
+
+const httpTransportOptions = {
+  host: 'http-intake.logs.datadoghq.eu',
+  path: '/v1/input/<APIKEY>?ddsource=nodejs&service=<APPLICATION_NAME>',
+  ssl: true
+};
+
+const logger = createLogger({
+  level: 'info',
+  exitOnError: false,
+  format: format.json(),
+  transports: [
+    new transports.Http(httpTransportOptions),
+  ],
+});
+
+module.exports = logger;
+
+// Example logs
+logger.log('info', 'Hello simple log!');
+logger.info('Hello log with metas',{color: 'blue' });
+```
+
+{{< /site-region >}}
 
 [1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
 [2]: /api/v1/logs/#send-logs
-[3]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
 {{% /tab %}}
 {{< /tabs >}}
-
 
 ## Troubleshooting
 
