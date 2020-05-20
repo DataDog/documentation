@@ -33,13 +33,13 @@ aliases:
 
 ## What is Datadog APM?
 
-* **Correlation with Datadog Platform**: Distributed Traces tied to browser sessions, mobile pageviews, logs, network, application code, databases, proxies, hosts & containers.
+* **Correlation with Datadog Platform**: Distributed Traces link browser sessions, mobile pageviews, logs, network, application code, databases, proxies, hosts & containers.
 * **Out-of-the box Dashboards**: Automatically generated service and database pages to monitor requests, errors and latency.
-* **Live search on 100% of your traces**: Search all traces live during na outage and intelligently retain important traces for bad user experiences like errors and high latency.
+* **Live search on 100% of your traces**: Search all traces live during an outage and intelligently retain important traces for bad user experiences like errors and high latency.
 
 ## Getting Started
 
-Whether your apps are built as a monolith, microservices, or serverless functions, getting started takes just minutes.
+Whether you're running a monolith, micro-services or anything in between, whether you're deploying on hosts, containers or serverless functions, setup takes just a few minutes to complete.
 
 ### 1. Configure the Datadog Agent
 
