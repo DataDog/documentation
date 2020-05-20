@@ -5669,10 +5669,10 @@ https@^1.0.0:
   resolved "https://registry.yarnpkg.com/https/-/https-1.0.0.tgz#3c37c7ae1a8eeb966904a2ad1e975a194b7ed3a4"
   integrity sha1-PDfHrhqO65ZpBKKtHpdaGUt+06Q=
 
-hugo-bin@0.57.0:
-  version "0.57.0"
-  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.57.0.tgz#6c2ec9625dafa2a8b8c2ee67e4f4dcc6fc9a8e31"
-  integrity sha512-WmI8SC25gRqBo/vPJ5vfEAWRB/4LWDnBwdpjwoVxx1d9fkEoJqnW2lcoGoa1rmVZTap1UefEUiDOyagT1BKyHw==
+hugo-bin@0.59.0:
+  version "0.59.0"
+  resolved "https://registry.yarnpkg.com/hugo-bin/-/hugo-bin-0.59.0.tgz#fd38850d55bcfb37d5dc2f64a30d10fb49c8651e"
+  integrity sha512-z70hcSlBHQAlVGILHQD72oDJ+E6eWSwPpj7HJdOCdSJIR70KSusE1zmxOjJIJKy8SiFeg9E3MGCCOXSYLo7aEg==
   dependencies:
     bin-wrapper "^4.1.0"
     pkg-conf "^3.1.0"
@@ -7014,19 +7014,6 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-"link-checker@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.72.tgz":
-  version "1.0.72"
-  resolved "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.72.tgz#17840327a953fb66f43d7d41f14a7a87a8d9f7c7"
-  dependencies:
-    axios "^0.19.2"
-    broken-link-checker "https://github.com/DataDog/broken-link-checker.git#zach/add-cookies"
-    chalk "^4.0.0"
-    char-spinner "^1.0.1"
-    https "^1.0.0"
-    humanize-duration "^3.22.0"
-    json2csv "^5.0.1"
-    yargs "^15.3.1"
-
 "link-checker@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.73.tgz":
   version "1.0.73"
   resolved "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/zach/update-linkchecker/link-checker-v1.0.73.tgz#53fa40bbbfc851bcb966b2b5999c132bc42dacb0"
@@ -7328,10 +7315,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-marked@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-1.0.0.tgz#d35784245a04871e5988a491e28867362e941693"
-  integrity sha512-Wo+L1pWTVibfrSr+TTtMuiMfNzmZWiOPeO7rZsQUY5bgsxpHesBEcIWJloWVTFnrMXnf/TL30eTFSGJddmQAng==
+marked@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-1.1.0.tgz#62504ad4d11550c942935ccc5e39d64e5a4c4e50"
+  integrity sha512-EkE7RW6KcXfMHy2PA7Jg0YJE1l8UPEZE8k45tylzmZM30/r1M1MUXWQfJlrSbsTeh7m/XTwHbWUENvAJZpp1YA==
 
 maybe-callback@^2.1.0:
   version "2.1.0"
