@@ -39,7 +39,7 @@ To pull test configurations and push test results, the private location worker n
 | --------------- | ---- | ---------------------------------------------------------------------------------------------------- |
 | Datadog US site | 443  | `intake.synthetics.datadoghq.com` for version 0.1.6+, `api.datadoghq.com/api/` for versions <0.1.5   |
 
-**Note**: For version 0.1.6+, use `curl intake.synthetics.datadoghq.com` (`curl https://api.datadoghq.com` for versions <0.1.5).
+**Note**: Check if the endpoint corresponding to your Datadog `site` is available from the host running the worker using `curl intake.synthetics.datadoghq.com` for version 0.1.6+ (`curl https://api.datadoghq.com` for versions <0.1.5).
 
 {{< /site-region >}}
 
@@ -49,7 +49,7 @@ To pull test configurations and push test results, the private location worker n
 | --------------- | ---- | ---------------------------------------------------------------------------------------------------- |
 | Datadog EU site | 443  | `api.datadoghq.eu/api/`                                                                              |
 
-**Note**: For version 0.1.6+, use `curl https://api.datadoghq.eu`.
+**Note**: Check if the endpoint corresponding to your Datadog `site` is available from the host running the worker using `curl https://api.datadoghq.eu`.
 
 {{< /site-region >}}
 
