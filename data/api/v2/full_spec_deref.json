@@ -2829,6 +2829,7 @@
             "enum": [
               "orgs"
             ],
+            "example": "orgs",
             "type": "string",
             "x-enum-varnames": [
               "ORGS"
@@ -2886,6 +2887,7 @@
         "enum": [
           "orgs"
         ],
+        "example": "orgs",
         "type": "string",
         "x-enum-varnames": [
           "ORGS"
@@ -2955,6 +2957,7 @@
             "enum": [
               "permissions"
             ],
+            "example": "permissions",
             "type": "string",
             "x-enum-varnames": [
               "PERMISSIONS"
@@ -3054,6 +3057,7 @@
                   "enum": [
                     "permissions"
                   ],
+                  "example": "permissions",
                   "type": "string",
                   "x-enum-varnames": [
                     "PERMISSIONS"
@@ -3076,6 +3080,7 @@
         "enum": [
           "permissions"
         ],
+        "example": "permissions",
         "type": "string",
         "x-enum-varnames": [
           "PERMISSIONS"
@@ -3110,6 +3115,7 @@
                 "enum": [
                   "orgs"
                 ],
+                "example": "orgs",
                 "type": "string",
                 "x-enum-varnames": [
                   "ORGS"
@@ -3134,6 +3140,7 @@
             "enum": [
               "orgs"
             ],
+            "example": "orgs",
             "type": "string",
             "x-enum-varnames": [
               "ORGS"
@@ -3160,6 +3167,7 @@
                   "enum": [
                     "orgs"
                   ],
+                  "example": "orgs",
                   "type": "string",
                   "x-enum-varnames": [
                     "ORGS"
@@ -3189,6 +3197,7 @@
                 "enum": [
                   "permissions"
                 ],
+                "example": "permissions",
                 "type": "string",
                 "x-enum-varnames": [
                   "PERMISSIONS"
@@ -3213,6 +3222,7 @@
             "enum": [
               "permissions"
             ],
+            "example": "permissions",
             "type": "string",
             "x-enum-varnames": [
               "PERMISSIONS"
@@ -3239,6 +3249,7 @@
                   "enum": [
                     "permissions"
                   ],
+                  "example": "permissions",
                   "type": "string",
                   "x-enum-varnames": [
                     "PERMISSIONS"
@@ -3269,6 +3280,7 @@
                 "enum": [
                   "roles"
                 ],
+                "example": "roles",
                 "type": "string",
                 "x-enum-varnames": [
                   "ROLES"
@@ -3294,6 +3306,7 @@
             "enum": [
               "roles"
             ],
+            "example": "roles",
             "type": "string",
             "x-enum-varnames": [
               "ROLES"
@@ -3321,6 +3334,7 @@
                   "enum": [
                     "roles"
                   ],
+                  "example": "roles",
                   "type": "string",
                   "x-enum-varnames": [
                     "ROLES"
@@ -3425,18 +3439,21 @@
         "properties": {
           "created_at": {
             "description": "Creation time of the restriction query.",
+            "example": "2020-03-17T21:06:44.944905+00:00",
             "format": "date-time",
             "readOnly": true,
             "type": "string"
           },
           "modified_at": {
             "description": "Time of last restriction query modification.",
+            "example": "2020-03-17T21:15:15.833683+00:00",
             "format": "date-time",
             "readOnly": true,
             "type": "string"
           },
           "restriction_query": {
             "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+            "example": "env:sandbox",
             "type": "string"
           }
         },
@@ -3447,6 +3464,7 @@
         "properties": {
           "restriction_query": {
             "description": "The restriction query.",
+            "example": "env:sandbox",
             "type": "string"
           }
         },
@@ -3460,6 +3478,7 @@
             "properties": {
               "restriction_query": {
                 "description": "The restriction query.",
+                "example": "env:sandbox",
                 "type": "string"
               }
             },
@@ -3484,6 +3503,7 @@
                 "properties": {
                   "restriction_query": {
                     "description": "The restriction query.",
+                    "example": "env:sandbox",
                     "type": "string"
                   }
                 },
@@ -3513,18 +3533,21 @@
                   "properties": {
                     "created_at": {
                       "description": "Creation time of the restriction query.",
+                      "example": "2020-03-17T21:06:44.944905+00:00",
                       "format": "date-time",
                       "readOnly": true,
                       "type": "string"
                     },
                     "modified_at": {
                       "description": "Time of last restriction query modification.",
+                      "example": "2020-03-17T21:15:15.833683+00:00",
                       "format": "date-time",
                       "readOnly": true,
                       "type": "string"
                     },
                     "restriction_query": {
                       "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+                      "example": "env:sandbox",
                       "type": "string"
                     }
                   },
@@ -3532,11 +3555,13 @@
                 },
                 "id": {
                   "description": "ID of the restriction query.",
+                  "example": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
                   "type": "string"
                 },
                 "type": {
                   "default": "logs_restriction_queries",
                   "description": "Restriction queries type.",
+                  "example": "logs_restriction_queries",
                   "readOnly": true,
                   "type": "string"
                 }
@@ -3570,6 +3595,7 @@
                       "enum": [
                         "roles"
                       ],
+                      "example": "roles",
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -3603,6 +3629,7 @@
                 "properties": {
                   "name": {
                     "description": "The role name.",
+                    "example": "Datadog Admin Role",
                     "type": "string"
                   }
                 },
@@ -3610,11 +3637,13 @@
               },
               "id": {
                 "description": "ID of the role.",
+                "example": "<ROLE_ID>",
                 "type": "string"
               },
               "type": {
                 "default": "roles",
                 "description": "Role resource type.",
+                "example": "roles",
                 "readOnly": true,
                 "type": "string"
               }
@@ -3632,6 +3661,7 @@
             "properties": {
               "name": {
                 "description": "The role name.",
+                "example": "Datadog Admin Role",
                 "type": "string"
               }
             },
@@ -3639,11 +3669,13 @@
           },
           "id": {
             "description": "ID of the role.",
+            "example": "<ROLE_ID>",
             "type": "string"
           },
           "type": {
             "default": "roles",
             "description": "Role resource type.",
+            "example": "roles",
             "readOnly": true,
             "type": "string"
           }
@@ -3655,6 +3687,7 @@
         "properties": {
           "name": {
             "description": "The role name.",
+            "example": "Datadog Admin Role",
             "type": "string"
           }
         },
@@ -3673,6 +3706,7 @@
                   "properties": {
                     "name": {
                       "description": "The role name.",
+                      "example": "Datadog Admin Role",
                       "type": "string"
                     }
                   },
@@ -3680,11 +3714,13 @@
                 },
                 "id": {
                   "description": "ID of the role.",
+                  "example": "<ROLE_ID>",
                   "type": "string"
                 },
                 "type": {
                   "default": "roles",
                   "description": "Role resource type.",
+                  "example": "roles",
                   "readOnly": true,
                   "type": "string"
                 }
@@ -3701,6 +3737,7 @@
         "properties": {
           "restriction_query": {
             "description": "The restriction query.",
+            "example": "env:sandbox",
             "type": "string"
           }
         },
@@ -3714,6 +3751,7 @@
             "properties": {
               "restriction_query": {
                 "description": "The restriction query.",
+                "example": "env:sandbox",
                 "type": "string"
               }
             },
@@ -3738,6 +3776,7 @@
                 "properties": {
                   "restriction_query": {
                     "description": "The restriction query.",
+                    "example": "env:sandbox",
                     "type": "string"
                   }
                 },
@@ -3762,18 +3801,21 @@
             "properties": {
               "created_at": {
                 "description": "Creation time of the restriction query.",
+                "example": "2020-03-17T21:06:44.944905+00:00",
                 "format": "date-time",
                 "readOnly": true,
                 "type": "string"
               },
               "modified_at": {
                 "description": "Time of last restriction query modification.",
+                "example": "2020-03-17T21:15:15.833683+00:00",
                 "format": "date-time",
                 "readOnly": true,
                 "type": "string"
               },
               "restriction_query": {
                 "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+                "example": "env:sandbox",
                 "type": "string"
               }
             },
@@ -3781,6 +3823,7 @@
           },
           "id": {
             "description": "ID of the restriction query.",
+            "example": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
             "type": "string"
           },
           "relationships": {
@@ -3805,6 +3848,7 @@
                           "enum": [
                             "roles"
                           ],
+                          "example": "roles",
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -3824,6 +3868,7 @@
           "type": {
             "default": "logs_restriction_queries",
             "description": "Restriction queries type.",
+            "example": "logs_restriction_queries",
             "readOnly": true,
             "type": "string"
           }
@@ -3841,18 +3886,21 @@
                 "properties": {
                   "created_at": {
                     "description": "Creation time of the restriction query.",
+                    "example": "2020-03-17T21:06:44.944905+00:00",
                     "format": "date-time",
                     "readOnly": true,
                     "type": "string"
                   },
                   "modified_at": {
                     "description": "Time of last restriction query modification.",
+                    "example": "2020-03-17T21:15:15.833683+00:00",
                     "format": "date-time",
                     "readOnly": true,
                     "type": "string"
                   },
                   "restriction_query": {
                     "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+                    "example": "env:sandbox",
                     "type": "string"
                   }
                 },
@@ -3860,6 +3908,7 @@
               },
               "id": {
                 "description": "ID of the restriction query.",
+                "example": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
                 "type": "string"
               },
               "relationships": {
@@ -3884,6 +3933,7 @@
                               "enum": [
                                 "roles"
                               ],
+                              "example": "roles",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -3903,6 +3953,7 @@
               "type": {
                 "default": "logs_restriction_queries",
                 "description": "Restriction queries type.",
+                "example": "logs_restriction_queries",
                 "readOnly": true,
                 "type": "string"
               }
@@ -3928,6 +3979,7 @@
                       "properties": {
                         "name": {
                           "description": "The role name.",
+                          "example": "Datadog Admin Role",
                           "type": "string"
                         }
                       },
@@ -3935,11 +3987,13 @@
                     },
                     "id": {
                       "description": "ID of the role.",
+                      "example": "<ROLE_ID>",
                       "type": "string"
                     },
                     "type": {
                       "default": "roles",
                       "description": "Role resource type.",
+                      "example": "roles",
                       "readOnly": true,
                       "type": "string"
                     }
@@ -3962,18 +4016,21 @@
             "properties": {
               "created_at": {
                 "description": "Creation time of the restriction query.",
+                "example": "2020-03-17T21:06:44.944905+00:00",
                 "format": "date-time",
                 "readOnly": true,
                 "type": "string"
               },
               "modified_at": {
                 "description": "Time of last restriction query modification.",
+                "example": "2020-03-17T21:15:15.833683+00:00",
                 "format": "date-time",
                 "readOnly": true,
                 "type": "string"
               },
               "restriction_query": {
                 "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+                "example": "env:sandbox",
                 "type": "string"
               }
             },
@@ -3981,11 +4038,13 @@
           },
           "id": {
             "description": "ID of the restriction query.",
+            "example": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
             "type": "string"
           },
           "type": {
             "default": "logs_restriction_queries",
             "description": "Restriction queries type.",
+            "example": "logs_restriction_queries",
             "readOnly": true,
             "type": "string"
           }
@@ -4003,18 +4062,21 @@
                 "properties": {
                   "created_at": {
                     "description": "Creation time of the restriction query.",
+                    "example": "2020-03-17T21:06:44.944905+00:00",
                     "format": "date-time",
                     "readOnly": true,
                     "type": "string"
                   },
                   "modified_at": {
                     "description": "Time of last restriction query modification.",
+                    "example": "2020-03-17T21:15:15.833683+00:00",
                     "format": "date-time",
                     "readOnly": true,
                     "type": "string"
                   },
                   "restriction_query": {
                     "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+                    "example": "env:sandbox",
                     "type": "string"
                   }
                 },
@@ -4022,11 +4084,13 @@
               },
               "id": {
                 "description": "ID of the restriction query.",
+                "example": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
                 "type": "string"
               },
               "type": {
                 "default": "logs_restriction_queries",
                 "description": "Restriction queries type.",
+                "example": "logs_restriction_queries",
                 "readOnly": true,
                 "type": "string"
               }
@@ -4084,6 +4148,7 @@
                         "enum": [
                           "orgs"
                         ],
+                        "example": "orgs",
                         "type": "string",
                         "x-enum-varnames": [
                           "ORGS"
@@ -4113,6 +4178,7 @@
                           "enum": [
                             "orgs"
                           ],
+                          "example": "orgs",
                           "type": "string",
                           "x-enum-varnames": [
                             "ORGS"
@@ -4145,6 +4211,7 @@
                           "enum": [
                             "roles"
                           ],
+                          "example": "roles",
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -4177,6 +4244,7 @@
                           "enum": [
                             "roles"
                           ],
+                          "example": "roles",
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -4199,6 +4267,7 @@
             "enum": [
               "roles"
             ],
+            "example": "roles",
             "type": "string",
             "x-enum-varnames": [
               "ROLES"
@@ -4276,6 +4345,7 @@
                           "enum": [
                             "permissions"
                           ],
+                          "example": "permissions",
                           "type": "string",
                           "x-enum-varnames": [
                             "PERMISSIONS"
@@ -4324,6 +4394,7 @@
             "enum": [
               "roles"
             ],
+            "example": "roles",
             "type": "string",
             "x-enum-varnames": [
               "ROLES"
@@ -4369,6 +4440,7 @@
                               "enum": [
                                 "permissions"
                               ],
+                              "example": "permissions",
                               "type": "string",
                               "x-enum-varnames": [
                                 "PERMISSIONS"
@@ -4417,6 +4489,7 @@
                 "enum": [
                   "roles"
                 ],
+                "example": "roles",
                 "type": "string",
                 "x-enum-varnames": [
                   "ROLES"
@@ -4449,6 +4522,7 @@
                       "enum": [
                         "permissions"
                       ],
+                      "example": "permissions",
                       "type": "string",
                       "x-enum-varnames": [
                         "PERMISSIONS"
@@ -4542,6 +4616,7 @@
                             "enum": [
                               "orgs"
                             ],
+                            "example": "orgs",
                             "type": "string",
                             "x-enum-varnames": [
                               "ORGS"
@@ -4571,6 +4646,7 @@
                               "enum": [
                                 "orgs"
                               ],
+                              "example": "orgs",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ORGS"
@@ -4603,6 +4679,7 @@
                               "enum": [
                                 "roles"
                               ],
+                              "example": "roles",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -4635,6 +4712,7 @@
                               "enum": [
                                 "roles"
                               ],
+                              "example": "roles",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -4657,6 +4735,7 @@
                 "enum": [
                   "roles"
                 ],
+                "example": "roles",
                 "type": "string",
                 "x-enum-varnames": [
                   "ROLES"
@@ -4690,6 +4769,7 @@
                     "enum": [
                       "orgs"
                     ],
+                    "example": "orgs",
                     "type": "string",
                     "x-enum-varnames": [
                       "ORGS"
@@ -4719,6 +4799,7 @@
                       "enum": [
                         "orgs"
                       ],
+                      "example": "orgs",
                       "type": "string",
                       "x-enum-varnames": [
                         "ORGS"
@@ -4751,6 +4832,7 @@
                       "enum": [
                         "roles"
                       ],
+                      "example": "roles",
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -4783,6 +4865,7 @@
                       "enum": [
                         "roles"
                       ],
+                      "example": "roles",
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -4832,6 +4915,7 @@
             "enum": [
               "roles"
             ],
+            "example": "roles",
             "type": "string",
             "x-enum-varnames": [
               "ROLES"
@@ -4866,6 +4950,7 @@
                 "enum": [
                   "roles"
                 ],
+                "example": "roles",
                 "type": "string",
                 "x-enum-varnames": [
                   "ROLES"
@@ -4930,6 +5015,7 @@
                               "enum": [
                                 "orgs"
                               ],
+                              "example": "orgs",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ORGS"
@@ -4959,6 +5045,7 @@
                                 "enum": [
                                   "orgs"
                                 ],
+                                "example": "orgs",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -4991,6 +5078,7 @@
                                 "enum": [
                                   "roles"
                                 ],
+                                "example": "roles",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -5023,6 +5111,7 @@
                                 "enum": [
                                   "roles"
                                 ],
+                                "example": "roles",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -5045,6 +5134,7 @@
                   "enum": [
                     "roles"
                   ],
+                  "example": "roles",
                   "type": "string",
                   "x-enum-varnames": [
                     "ROLES"
@@ -5110,6 +5200,7 @@
         "enum": [
           "roles"
         ],
+        "example": "roles",
         "type": "string",
         "x-enum-varnames": [
           "ROLES"
@@ -6278,6 +6369,7 @@
                         "enum": [
                           "orgs"
                         ],
+                        "example": "orgs",
                         "type": "string",
                         "x-enum-varnames": [
                           "ORGS"
@@ -6307,6 +6399,7 @@
                           "enum": [
                             "orgs"
                           ],
+                          "example": "orgs",
                           "type": "string",
                           "x-enum-varnames": [
                             "ORGS"
@@ -6365,6 +6458,7 @@
                           "enum": [
                             "roles"
                           ],
+                          "example": "roles",
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -6499,6 +6593,7 @@
                           "enum": [
                             "roles"
                           ],
+                          "example": "roles",
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -6575,6 +6670,7 @@
                               "enum": [
                                 "roles"
                               ],
+                              "example": "roles",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -6944,6 +7040,7 @@
                       "enum": [
                         "roles"
                       ],
+                      "example": "roles",
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -7032,6 +7129,7 @@
                             "enum": [
                               "orgs"
                             ],
+                            "example": "orgs",
                             "type": "string",
                             "x-enum-varnames": [
                               "ORGS"
@@ -7061,6 +7159,7 @@
                               "enum": [
                                 "orgs"
                               ],
+                              "example": "orgs",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ORGS"
@@ -7119,6 +7218,7 @@
                               "enum": [
                                 "roles"
                               ],
+                              "example": "roles",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -7207,6 +7307,7 @@
                       "enum": [
                         "orgs"
                       ],
+                      "example": "orgs",
                       "type": "string",
                       "x-enum-varnames": [
                         "ORGS"
@@ -7266,6 +7367,7 @@
                       "enum": [
                         "permissions"
                       ],
+                      "example": "permissions",
                       "type": "string",
                       "x-enum-varnames": [
                         "PERMISSIONS"
@@ -7325,6 +7427,7 @@
                                   "enum": [
                                     "orgs"
                                   ],
+                                  "example": "orgs",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "ORGS"
@@ -7354,6 +7457,7 @@
                                     "enum": [
                                       "orgs"
                                     ],
+                                    "example": "orgs",
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ORGS"
@@ -7386,6 +7490,7 @@
                                     "enum": [
                                       "roles"
                                     ],
+                                    "example": "roles",
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ROLES"
@@ -7418,6 +7523,7 @@
                                     "enum": [
                                       "roles"
                                     ],
+                                    "example": "roles",
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ROLES"
@@ -7440,6 +7546,7 @@
                       "enum": [
                         "roles"
                       ],
+                      "example": "roles",
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -7515,6 +7622,7 @@
                 "enum": [
                   "orgs"
                 ],
+                "example": "orgs",
                 "type": "string",
                 "x-enum-varnames": [
                   "ORGS"
@@ -7574,6 +7682,7 @@
                 "enum": [
                   "permissions"
                 ],
+                "example": "permissions",
                 "type": "string",
                 "x-enum-varnames": [
                   "PERMISSIONS"
@@ -7633,6 +7742,7 @@
                             "enum": [
                               "orgs"
                             ],
+                            "example": "orgs",
                             "type": "string",
                             "x-enum-varnames": [
                               "ORGS"
@@ -7662,6 +7772,7 @@
                               "enum": [
                                 "orgs"
                               ],
+                              "example": "orgs",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ORGS"
@@ -7694,6 +7805,7 @@
                               "enum": [
                                 "roles"
                               ],
+                              "example": "roles",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -7726,6 +7838,7 @@
                               "enum": [
                                 "roles"
                               ],
+                              "example": "roles",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ROLES"
@@ -7748,6 +7861,7 @@
                 "enum": [
                   "roles"
                 ],
+                "example": "roles",
                 "type": "string",
                 "x-enum-varnames": [
                   "ROLES"
@@ -7781,6 +7895,7 @@
                     "enum": [
                       "orgs"
                     ],
+                    "example": "orgs",
                     "type": "string",
                     "x-enum-varnames": [
                       "ORGS"
@@ -7810,6 +7925,7 @@
                       "enum": [
                         "orgs"
                       ],
+                      "example": "orgs",
                       "type": "string",
                       "x-enum-varnames": [
                         "ORGS"
@@ -7868,6 +7984,7 @@
                       "enum": [
                         "roles"
                       ],
+                      "example": "roles",
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -8060,6 +8177,7 @@
                               "enum": [
                                 "orgs"
                               ],
+                              "example": "orgs",
                               "type": "string",
                               "x-enum-varnames": [
                                 "ORGS"
@@ -8089,6 +8207,7 @@
                                 "enum": [
                                   "orgs"
                                 ],
+                                "example": "orgs",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -8147,6 +8266,7 @@
                                 "enum": [
                                   "roles"
                                 ],
+                                "example": "roles",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -8237,6 +8357,7 @@
                       "enum": [
                         "orgs"
                       ],
+                      "example": "orgs",
                       "type": "string",
                       "x-enum-varnames": [
                         "ORGS"
@@ -8296,6 +8417,7 @@
                       "enum": [
                         "permissions"
                       ],
+                      "example": "permissions",
                       "type": "string",
                       "x-enum-varnames": [
                         "PERMISSIONS"
@@ -8355,6 +8477,7 @@
                                   "enum": [
                                     "orgs"
                                   ],
+                                  "example": "orgs",
                                   "type": "string",
                                   "x-enum-varnames": [
                                     "ORGS"
@@ -8384,6 +8507,7 @@
                                     "enum": [
                                       "orgs"
                                     ],
+                                    "example": "orgs",
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ORGS"
@@ -8416,6 +8540,7 @@
                                     "enum": [
                                       "roles"
                                     ],
+                                    "example": "roles",
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ROLES"
@@ -8448,6 +8573,7 @@
                                     "enum": [
                                       "roles"
                                     ],
+                                    "example": "roles",
                                     "type": "string",
                                     "x-enum-varnames": [
                                       "ROLES"
@@ -8470,6 +8596,7 @@
                       "enum": [
                         "roles"
                       ],
+                      "example": "roles",
                       "type": "string",
                       "x-enum-varnames": [
                         "ROLES"
@@ -11638,589 +11765,6 @@
                         "enum": [
                           "roles"
                         ],
-                        "type": "string",
-                        "x-enum-varnames": [
-                          "ROLES"
-                        ]
-                      }
-                    },
-                    "type": "object"
-                  }
-                },
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "OK"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Forbidden"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Not found"
-          }
-        },
-        "summary": "Revoke role from an archive",
-        "tags": [
-          "Logs Archives"
-        ],
-        "x-codegen-request-body-name": "body",
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
-      },
-      "get": {
-        "description": "Returns all read roles a given archive is restricted to.",
-        "operationId": "ListArchiveReadRoles",
-        "parameters": [
-          {
-            "description": "The ID of the archive.",
-            "in": "path",
-            "name": "archive_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "Response containing information about multiple roles.",
-                  "properties": {
-                    "data": {
-                      "description": "Array of returned roles.",
-                      "items": {
-                        "description": "Role object returned by the API.",
-                        "properties": {
-                          "attributes": {
-                            "description": "Attributes of the role.",
-                            "properties": {
-                              "created_at": {
-                                "description": "Creation time of the role.",
-                                "format": "date-time",
-                                "readOnly": true,
-                                "type": "string"
-                              },
-                              "modified_at": {
-                                "description": "Time of last role modification.",
-                                "format": "date-time",
-                                "readOnly": true,
-                                "type": "string"
-                              },
-                              "name": {
-                                "description": "Name of the role.",
-                                "type": "string"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "id": {
-                            "description": "ID of the role.",
-                            "type": "string"
-                          },
-                          "relationships": {
-                            "description": "Relationships of the role object returned by the API.",
-                            "properties": {
-                              "org": {
-                                "description": "Relationship to an organization.",
-                                "properties": {
-                                  "data": {
-                                    "description": "Relationship to organization object.",
-                                    "properties": {
-                                      "id": {
-                                        "description": "ID of the organization.",
-                                        "type": "string"
-                                      },
-                                      "type": {
-                                        "default": "orgs",
-                                        "description": "Organizations resource type.",
-                                        "enum": [
-                                          "orgs"
-                                        ],
-                                        "type": "string",
-                                        "x-enum-varnames": [
-                                          "ORGS"
-                                        ]
-                                      }
-                                    },
-                                    "type": "object"
-                                  }
-                                },
-                                "type": "object"
-                              },
-                              "other_orgs": {
-                                "description": "Relationship to organizations.",
-                                "properties": {
-                                  "data": {
-                                    "description": "Relationships to organization objects.",
-                                    "items": {
-                                      "description": "Relationship to organization object.",
-                                      "properties": {
-                                        "id": {
-                                          "description": "ID of the organization.",
-                                          "type": "string"
-                                        },
-                                        "type": {
-                                          "default": "orgs",
-                                          "description": "Organizations resource type.",
-                                          "enum": [
-                                            "orgs"
-                                          ],
-                                          "type": "string",
-                                          "x-enum-varnames": [
-                                            "ORGS"
-                                          ]
-                                        }
-                                      },
-                                      "type": "object"
-                                    },
-                                    "type": "array"
-                                  }
-                                },
-                                "type": "object"
-                              },
-                              "other_roles": {
-                                "description": "Relationship to roles.",
-                                "properties": {
-                                  "data": {
-                                    "description": "An array containing type and ID of a role.",
-                                    "items": {
-                                      "description": "Relationship to role object.",
-                                      "properties": {
-                                        "id": {
-                                          "description": "ID of the role.",
-                                          "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
-                                          "type": "string"
-                                        },
-                                        "type": {
-                                          "default": "roles",
-                                          "description": "Roles type.",
-                                          "enum": [
-                                            "roles"
-                                          ],
-                                          "type": "string",
-                                          "x-enum-varnames": [
-                                            "ROLES"
-                                          ]
-                                        }
-                                      },
-                                      "type": "object"
-                                    },
-                                    "type": "array"
-                                  }
-                                },
-                                "type": "object"
-                              },
-                              "roles": {
-                                "description": "Relationship to roles.",
-                                "properties": {
-                                  "data": {
-                                    "description": "An array containing type and ID of a role.",
-                                    "items": {
-                                      "description": "Relationship to role object.",
-                                      "properties": {
-                                        "id": {
-                                          "description": "ID of the role.",
-                                          "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
-                                          "type": "string"
-                                        },
-                                        "type": {
-                                          "default": "roles",
-                                          "description": "Roles type.",
-                                          "enum": [
-                                            "roles"
-                                          ],
-                                          "type": "string",
-                                          "x-enum-varnames": [
-                                            "ROLES"
-                                          ]
-                                        }
-                                      },
-                                      "type": "object"
-                                    },
-                                    "type": "array"
-                                  }
-                                },
-                                "type": "object"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "type": {
-                            "default": "roles",
-                            "description": "Roles type.",
-                            "enum": [
-                              "roles"
-                            ],
-                            "type": "string",
-                            "x-enum-varnames": [
-                              "ROLES"
-                            ]
-                          }
-                        },
-                        "required": [
-                          "type"
-                        ],
-                        "type": "object"
-                      },
-                      "type": "array"
-                    },
-                    "meta": {
-                      "description": "Object describing meta attributes of response.",
-                      "properties": {
-                        "page": {
-                          "description": "Pagination object.",
-                          "properties": {
-                            "total_count": {
-                              "description": "Total count.",
-                              "format": "int64",
-                              "type": "integer"
-                            },
-                            "total_filtered_count": {
-                              "description": "Total count of elements matched by the filter.",
-                              "format": "int64",
-                              "type": "integer"
-                            }
-                          },
-                          "type": "object"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Forbidden"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Not found"
-          }
-        },
-        "summary": "List read roles for an archive",
-        "tags": [
-          "Logs Archives"
-        ],
-        "x-codegen-request-body-name": "body",
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
-      },
-      "post": {
-        "description": "Adds a read role to an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
-        "operationId": "AddReadRoleToArchive",
-        "parameters": [
-          {
-            "description": "The ID of the archive.",
-            "in": "path",
-            "name": "archive_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "description": "Relationship to role.",
-                "properties": {
-                  "data": {
-                    "description": "Relationship to role object.",
-                    "properties": {
-                      "id": {
-                        "description": "ID of the role.",
-                        "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
-                        "type": "string"
-                      },
-                      "type": {
-                        "default": "roles",
-                        "description": "Roles type.",
-                        "enum": [
-                          "roles"
-                        ],
-                        "type": "string",
-                        "x-enum-varnames": [
-                          "ROLES"
-                        ]
-                      }
-                    },
-                    "type": "object"
-                  }
-                },
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "204": {
-            "description": "OK"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "403": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Forbidden"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "description": "API error response.",
-                  "properties": {
-                    "errors": {
-                      "description": "A list of errors.",
-                      "items": {
-                        "description": "A list of items.",
-                        "example": "Bad Request",
-                        "type": "string"
-                      },
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "errors"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Not found"
-          }
-        },
-        "summary": "Grant role to an archive",
-        "tags": [
-          "Logs Archives"
-        ],
-        "x-codegen-request-body-name": "body",
-        "x-unstable": "**Note**: This endpoint is in public beta.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
-      }
-    },
-    "/api/v2/logs/config/archives/{archive_id}/readers": {
-      "delete": {
-        "description": "Removes a role from an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))",
-        "operationId": "RemoveRoleFromArchive",
-        "parameters": [
-          {
-            "description": "The ID of the archive.",
-            "in": "path",
-            "name": "archive_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "description": "Relationship to role.",
-                "properties": {
-                  "data": {
-                    "description": "Relationship to role object.",
-                    "properties": {
-                      "id": {
-                        "description": "ID of the role.",
-                        "example": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
-                        "type": "string"
-                      },
-                      "type": {
-                        "default": "roles",
-                        "description": "Roles type.",
-                        "enum": [
-                          "roles"
-                        ],
                         "example": "roles",
                         "type": "string",
                         "x-enum-varnames": [
@@ -12821,18 +12365,21 @@
                             "properties": {
                               "created_at": {
                                 "description": "Creation time of the restriction query.",
+                                "example": "2020-03-17T21:06:44.944905+00:00",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
                               },
                               "modified_at": {
                                 "description": "Time of last restriction query modification.",
+                                "example": "2020-03-17T21:15:15.833683+00:00",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
                               },
                               "restriction_query": {
                                 "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+                                "example": "env:sandbox",
                                 "type": "string"
                               }
                             },
@@ -12840,11 +12387,13 @@
                           },
                           "id": {
                             "description": "ID of the restriction query.",
+                            "example": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
                             "type": "string"
                           },
                           "type": {
                             "default": "logs_restriction_queries",
                             "description": "Restriction queries type.",
+                            "example": "logs_restriction_queries",
                             "readOnly": true,
                             "type": "string"
                           }
@@ -12909,6 +12458,7 @@
                         "properties": {
                           "restriction_query": {
                             "description": "The restriction query.",
+                            "example": "env:sandbox",
                             "type": "string"
                           }
                         },
@@ -12943,18 +12493,21 @@
                           "properties": {
                             "created_at": {
                               "description": "Creation time of the restriction query.",
+                              "example": "2020-03-17T21:06:44.944905+00:00",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
                             },
                             "modified_at": {
                               "description": "Time of last restriction query modification.",
+                              "example": "2020-03-17T21:15:15.833683+00:00",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
                             },
                             "restriction_query": {
                               "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+                              "example": "env:sandbox",
                               "type": "string"
                             }
                           },
@@ -12962,11 +12515,13 @@
                         },
                         "id": {
                           "description": "ID of the restriction query.",
+                          "example": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
                           "type": "string"
                         },
                         "type": {
                           "default": "logs_restriction_queries",
                           "description": "Restriction queries type.",
+                          "example": "logs_restriction_queries",
                           "readOnly": true,
                           "type": "string"
                         }
@@ -13071,18 +12626,21 @@
                             "properties": {
                               "created_at": {
                                 "description": "Creation time of the restriction query.",
+                                "example": "2020-03-17T21:06:44.944905+00:00",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
                               },
                               "modified_at": {
                                 "description": "Time of last restriction query modification.",
+                                "example": "2020-03-17T21:15:15.833683+00:00",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
                               },
                               "restriction_query": {
                                 "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+                                "example": "env:sandbox",
                                 "type": "string"
                               }
                             },
@@ -13090,11 +12648,13 @@
                           },
                           "id": {
                             "description": "ID of the restriction query.",
+                            "example": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
                             "type": "string"
                           },
                           "type": {
                             "default": "logs_restriction_queries",
                             "description": "Restriction queries type.",
+                            "example": "logs_restriction_queries",
                             "readOnly": true,
                             "type": "string"
                           }
@@ -13200,18 +12760,21 @@
                             "properties": {
                               "created_at": {
                                 "description": "Creation time of the restriction query.",
+                                "example": "2020-03-17T21:06:44.944905+00:00",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
                               },
                               "modified_at": {
                                 "description": "Time of last restriction query modification.",
+                                "example": "2020-03-17T21:15:15.833683+00:00",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
                               },
                               "restriction_query": {
                                 "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+                                "example": "env:sandbox",
                                 "type": "string"
                               }
                             },
@@ -13219,11 +12782,13 @@
                           },
                           "id": {
                             "description": "ID of the restriction query.",
+                            "example": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
                             "type": "string"
                           },
                           "type": {
                             "default": "logs_restriction_queries",
                             "description": "Restriction queries type.",
+                            "example": "logs_restriction_queries",
                             "readOnly": true,
                             "type": "string"
                           }
@@ -13428,18 +12993,21 @@
                           "properties": {
                             "created_at": {
                               "description": "Creation time of the restriction query.",
+                              "example": "2020-03-17T21:06:44.944905+00:00",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
                             },
                             "modified_at": {
                               "description": "Time of last restriction query modification.",
+                              "example": "2020-03-17T21:15:15.833683+00:00",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
                             },
                             "restriction_query": {
                               "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+                              "example": "env:sandbox",
                               "type": "string"
                             }
                           },
@@ -13447,6 +13015,7 @@
                         },
                         "id": {
                           "description": "ID of the restriction query.",
+                          "example": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
                           "type": "string"
                         },
                         "relationships": {
@@ -13471,6 +13040,7 @@
                                         "enum": [
                                           "roles"
                                         ],
+                                        "example": "roles",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -13490,6 +13060,7 @@
                         "type": {
                           "default": "logs_restriction_queries",
                           "description": "Restriction queries type.",
+                          "example": "logs_restriction_queries",
                           "readOnly": true,
                           "type": "string"
                         }
@@ -13515,6 +13086,7 @@
                                 "properties": {
                                   "name": {
                                     "description": "The role name.",
+                                    "example": "Datadog Admin Role",
                                     "type": "string"
                                   }
                                 },
@@ -13522,11 +13094,13 @@
                               },
                               "id": {
                                 "description": "ID of the role.",
+                                "example": "<ROLE_ID>",
                                 "type": "string"
                               },
                               "type": {
                                 "default": "roles",
                                 "description": "Role resource type.",
+                                "example": "roles",
                                 "readOnly": true,
                                 "type": "string"
                               }
@@ -13656,6 +13230,7 @@
                         "properties": {
                           "restriction_query": {
                             "description": "The restriction query.",
+                            "example": "env:sandbox",
                             "type": "string"
                           }
                         },
@@ -13690,18 +13265,21 @@
                           "properties": {
                             "created_at": {
                               "description": "Creation time of the restriction query.",
+                              "example": "2020-03-17T21:06:44.944905+00:00",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
                             },
                             "modified_at": {
                               "description": "Time of last restriction query modification.",
+                              "example": "2020-03-17T21:15:15.833683+00:00",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
                             },
                             "restriction_query": {
                               "description": "The query that defines the restriction. Only the content matching the query can be returned.",
+                              "example": "env:sandbox",
                               "type": "string"
                             }
                           },
@@ -13709,11 +13287,13 @@
                         },
                         "id": {
                           "description": "ID of the restriction query.",
+                          "example": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
                           "type": "string"
                         },
                         "type": {
                           "default": "logs_restriction_queries",
                           "description": "Restriction queries type.",
+                          "example": "logs_restriction_queries",
                           "readOnly": true,
                           "type": "string"
                         }
@@ -13846,6 +13426,7 @@
                         "enum": [
                           "roles"
                         ],
+                        "example": "roles",
                         "type": "string",
                         "x-enum-varnames": [
                           "ROLES"
@@ -14000,6 +13581,7 @@
                             "properties": {
                               "name": {
                                 "description": "The role name.",
+                                "example": "Datadog Admin Role",
                                 "type": "string"
                               }
                             },
@@ -14007,11 +13589,13 @@
                           },
                           "id": {
                             "description": "ID of the role.",
+                            "example": "<ROLE_ID>",
                             "type": "string"
                           },
                           "type": {
                             "default": "roles",
                             "description": "Role resource type.",
+                            "example": "roles",
                             "readOnly": true,
                             "type": "string"
                           }
@@ -14144,6 +13728,7 @@
                         "enum": [
                           "roles"
                         ],
+                        "example": "roles",
                         "type": "string",
                         "x-enum-varnames": [
                           "ROLES"
@@ -14307,6 +13892,7 @@
                             "enum": [
                               "permissions"
                             ],
+                            "example": "permissions",
                             "type": "string",
                             "x-enum-varnames": [
                               "PERMISSIONS"
@@ -14505,6 +14091,7 @@
                                         "enum": [
                                           "orgs"
                                         ],
+                                        "example": "orgs",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -14534,6 +14121,7 @@
                                           "enum": [
                                             "orgs"
                                           ],
+                                          "example": "orgs",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ORGS"
@@ -14566,6 +14154,7 @@
                                           "enum": [
                                             "roles"
                                           ],
+                                          "example": "roles",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -14598,6 +14187,7 @@
                                           "enum": [
                                             "roles"
                                           ],
+                                          "example": "roles",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -14620,6 +14210,7 @@
                             "enum": [
                               "roles"
                             ],
+                            "example": "roles",
                             "type": "string",
                             "x-enum-varnames": [
                               "ROLES"
@@ -14736,6 +14327,7 @@
                                       "enum": [
                                         "permissions"
                                       ],
+                                      "example": "permissions",
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "PERMISSIONS"
@@ -14784,6 +14376,7 @@
                         "enum": [
                           "roles"
                         ],
+                        "example": "roles",
                         "type": "string",
                         "x-enum-varnames": [
                           "ROLES"
@@ -14853,6 +14446,7 @@
                                       "enum": [
                                         "orgs"
                                       ],
+                                      "example": "orgs",
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -14882,6 +14476,7 @@
                                         "enum": [
                                           "orgs"
                                         ],
+                                        "example": "orgs",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -14914,6 +14509,7 @@
                                         "enum": [
                                           "roles"
                                         ],
+                                        "example": "roles",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -14946,6 +14542,7 @@
                                         "enum": [
                                           "roles"
                                         ],
+                                        "example": "roles",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -14968,6 +14565,7 @@
                           "enum": [
                             "roles"
                           ],
+                          "example": "roles",
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -15189,6 +14787,7 @@
                                       "enum": [
                                         "orgs"
                                       ],
+                                      "example": "orgs",
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -15218,6 +14817,7 @@
                                         "enum": [
                                           "orgs"
                                         ],
+                                        "example": "orgs",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -15250,6 +14850,7 @@
                                         "enum": [
                                           "roles"
                                         ],
+                                        "example": "roles",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -15282,6 +14883,7 @@
                                         "enum": [
                                           "roles"
                                         ],
+                                        "example": "roles",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -15304,6 +14906,7 @@
                           "enum": [
                             "roles"
                           ],
+                          "example": "roles",
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -15422,6 +15025,7 @@
                         "enum": [
                           "roles"
                         ],
+                        "example": "roles",
                         "type": "string",
                         "x-enum-varnames": [
                           "ROLES"
@@ -15491,6 +15095,7 @@
                                       "enum": [
                                         "orgs"
                                       ],
+                                      "example": "orgs",
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -15520,6 +15125,7 @@
                                         "enum": [
                                           "orgs"
                                         ],
+                                        "example": "orgs",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -15552,6 +15158,7 @@
                                         "enum": [
                                           "roles"
                                         ],
+                                        "example": "roles",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -15584,6 +15191,7 @@
                                         "enum": [
                                           "roles"
                                         ],
+                                        "example": "roles",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -15606,6 +15214,7 @@
                           "enum": [
                             "roles"
                           ],
+                          "example": "roles",
                           "type": "string",
                           "x-enum-varnames": [
                             "ROLES"
@@ -15766,6 +15375,7 @@
                         "enum": [
                           "permissions"
                         ],
+                        "example": "permissions",
                         "type": "string",
                         "x-enum-varnames": [
                           "PERMISSIONS"
@@ -15837,6 +15447,7 @@
                             "enum": [
                               "permissions"
                             ],
+                            "example": "permissions",
                             "type": "string",
                             "x-enum-varnames": [
                               "PERMISSIONS"
@@ -16010,6 +15621,7 @@
                             "enum": [
                               "permissions"
                             ],
+                            "example": "permissions",
                             "type": "string",
                             "x-enum-varnames": [
                               "PERMISSIONS"
@@ -16120,6 +15732,7 @@
                         "enum": [
                           "permissions"
                         ],
+                        "example": "permissions",
                         "type": "string",
                         "x-enum-varnames": [
                           "PERMISSIONS"
@@ -16191,6 +15804,7 @@
                             "enum": [
                               "permissions"
                             ],
+                            "example": "permissions",
                             "type": "string",
                             "x-enum-varnames": [
                               "PERMISSIONS"
@@ -16415,6 +16029,7 @@
                                         "enum": [
                                           "orgs"
                                         ],
+                                        "example": "orgs",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -16444,6 +16059,7 @@
                                           "enum": [
                                             "orgs"
                                           ],
+                                          "example": "orgs",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ORGS"
@@ -16502,6 +16118,7 @@
                                           "enum": [
                                             "roles"
                                           ],
+                                          "example": "roles",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -16592,6 +16209,7 @@
                                 "enum": [
                                   "orgs"
                                 ],
+                                "example": "orgs",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -16651,6 +16269,7 @@
                                 "enum": [
                                   "permissions"
                                 ],
+                                "example": "permissions",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -16710,6 +16329,7 @@
                                             "enum": [
                                               "orgs"
                                             ],
+                                            "example": "orgs",
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -16739,6 +16359,7 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+                                              "example": "orgs",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -16771,6 +16392,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -16803,6 +16425,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -16825,6 +16448,7 @@
                                 "enum": [
                                   "roles"
                                 ],
+                                "example": "roles",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -17085,6 +16709,7 @@
                                         "enum": [
                                           "orgs"
                                         ],
+                                        "example": "orgs",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -17114,6 +16739,7 @@
                                           "enum": [
                                             "orgs"
                                           ],
+                                          "example": "orgs",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ORGS"
@@ -17172,6 +16798,7 @@
                                           "enum": [
                                             "roles"
                                           ],
+                                          "example": "roles",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -17262,6 +16889,7 @@
                                 "enum": [
                                   "orgs"
                                 ],
+                                "example": "orgs",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -17321,6 +16949,7 @@
                                 "enum": [
                                   "permissions"
                                 ],
+                                "example": "permissions",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -17380,6 +17009,7 @@
                                             "enum": [
                                               "orgs"
                                             ],
+                                            "example": "orgs",
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -17409,6 +17039,7 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+                                              "example": "orgs",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -17441,6 +17072,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -17473,6 +17105,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -17495,6 +17128,7 @@
                                 "enum": [
                                   "roles"
                                 ],
+                                "example": "roles",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -17716,6 +17350,7 @@
                                         "enum": [
                                           "orgs"
                                         ],
+                                        "example": "orgs",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -17745,6 +17380,7 @@
                                           "enum": [
                                             "orgs"
                                           ],
+                                          "example": "orgs",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ORGS"
@@ -17803,6 +17439,7 @@
                                           "enum": [
                                             "roles"
                                           ],
+                                          "example": "roles",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -17893,6 +17530,7 @@
                                 "enum": [
                                   "orgs"
                                 ],
+                                "example": "orgs",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -17952,6 +17590,7 @@
                                 "enum": [
                                   "permissions"
                                 ],
+                                "example": "permissions",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -18011,6 +17650,7 @@
                                             "enum": [
                                               "orgs"
                                             ],
+                                            "example": "orgs",
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -18040,6 +17680,7 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+                                              "example": "orgs",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -18072,6 +17713,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -18104,6 +17746,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -18126,6 +17769,7 @@
                                 "enum": [
                                   "roles"
                                 ],
+                                "example": "roles",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -20395,6 +20039,7 @@
                                         "enum": [
                                           "orgs"
                                         ],
+                                        "example": "orgs",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -20424,6 +20069,7 @@
                                           "enum": [
                                             "orgs"
                                           ],
+                                          "example": "orgs",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ORGS"
@@ -20482,6 +20128,7 @@
                                           "enum": [
                                             "roles"
                                           ],
+                                          "example": "roles",
                                           "type": "string",
                                           "x-enum-varnames": [
                                             "ROLES"
@@ -20572,6 +20219,7 @@
                                 "enum": [
                                   "orgs"
                                 ],
+                                "example": "orgs",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -20631,6 +20279,7 @@
                                 "enum": [
                                   "permissions"
                                 ],
+                                "example": "permissions",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -20690,6 +20339,7 @@
                                             "enum": [
                                               "orgs"
                                             ],
+                                            "example": "orgs",
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -20719,6 +20369,7 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+                                              "example": "orgs",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -20751,6 +20402,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -20783,6 +20435,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -20805,6 +20458,7 @@
                                 "enum": [
                                   "roles"
                                 ],
+                                "example": "roles",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -20959,6 +20613,7 @@
                                       "enum": [
                                         "roles"
                                       ],
+                                      "example": "roles",
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ROLES"
@@ -21071,6 +20726,7 @@
                                       "enum": [
                                         "orgs"
                                       ],
+                                      "example": "orgs",
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -21100,6 +20756,7 @@
                                         "enum": [
                                           "orgs"
                                         ],
+                                        "example": "orgs",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -21158,6 +20815,7 @@
                                         "enum": [
                                           "roles"
                                         ],
+                                        "example": "roles",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -21246,6 +20904,7 @@
                                 "enum": [
                                   "orgs"
                                 ],
+                                "example": "orgs",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -21305,6 +20964,7 @@
                                 "enum": [
                                   "permissions"
                                 ],
+                                "example": "permissions",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -21364,6 +21024,7 @@
                                             "enum": [
                                               "orgs"
                                             ],
+                                            "example": "orgs",
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -21393,6 +21054,7 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+                                              "example": "orgs",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -21425,6 +21087,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -21457,6 +21120,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -21479,6 +21143,7 @@
                                 "enum": [
                                   "roles"
                                 ],
+                                "example": "roles",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -21726,6 +21391,7 @@
                                       "enum": [
                                         "orgs"
                                       ],
+                                      "example": "orgs",
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -21755,6 +21421,7 @@
                                         "enum": [
                                           "orgs"
                                         ],
+                                        "example": "orgs",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -21813,6 +21480,7 @@
                                         "enum": [
                                           "roles"
                                         ],
+                                        "example": "roles",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -21901,6 +21569,7 @@
                                 "enum": [
                                   "orgs"
                                 ],
+                                "example": "orgs",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -21960,6 +21629,7 @@
                                 "enum": [
                                   "permissions"
                                 ],
+                                "example": "permissions",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -22019,6 +21689,7 @@
                                             "enum": [
                                               "orgs"
                                             ],
+                                            "example": "orgs",
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -22048,6 +21719,7 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+                                              "example": "orgs",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -22080,6 +21752,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -22112,6 +21785,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -22134,6 +21808,7 @@
                                 "enum": [
                                   "roles"
                                 ],
+                                "example": "roles",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -22482,6 +22157,7 @@
                                       "enum": [
                                         "orgs"
                                       ],
+                                      "example": "orgs",
                                       "type": "string",
                                       "x-enum-varnames": [
                                         "ORGS"
@@ -22511,6 +22187,7 @@
                                         "enum": [
                                           "orgs"
                                         ],
+                                        "example": "orgs",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ORGS"
@@ -22569,6 +22246,7 @@
                                         "enum": [
                                           "roles"
                                         ],
+                                        "example": "roles",
                                         "type": "string",
                                         "x-enum-varnames": [
                                           "ROLES"
@@ -22657,6 +22335,7 @@
                                 "enum": [
                                   "orgs"
                                 ],
+                                "example": "orgs",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ORGS"
@@ -22716,6 +22395,7 @@
                                 "enum": [
                                   "permissions"
                                 ],
+                                "example": "permissions",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "PERMISSIONS"
@@ -22775,6 +22455,7 @@
                                             "enum": [
                                               "orgs"
                                             ],
+                                            "example": "orgs",
                                             "type": "string",
                                             "x-enum-varnames": [
                                               "ORGS"
@@ -22804,6 +22485,7 @@
                                               "enum": [
                                                 "orgs"
                                               ],
+                                              "example": "orgs",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ORGS"
@@ -22836,6 +22518,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -22868,6 +22551,7 @@
                                               "enum": [
                                                 "roles"
                                               ],
+                                              "example": "roles",
                                               "type": "string",
                                               "x-enum-varnames": [
                                                 "ROLES"
@@ -22890,6 +22574,7 @@
                                 "enum": [
                                   "roles"
                                 ],
+                                "example": "roles",
                                 "type": "string",
                                 "x-enum-varnames": [
                                   "ROLES"
@@ -23043,6 +22728,7 @@
                             "enum": [
                               "permissions"
                             ],
+                            "example": "permissions",
                             "type": "string",
                             "x-enum-varnames": [
                               "PERMISSIONS"
