@@ -33,15 +33,25 @@ Once you created a private location, configuring a [Synthetics test][1] to run f
 
 To pull test configurations and push test results, the private location worker needs access to one of the Datadog API endpoints.
 
+{{< site-region region="us" >}}
+
 | Datadog site    | Port | Endpoint                                                                                             |
 | --------------- | ---- | ---------------------------------------------------------------------------------------------------- |
 | Datadog US site | 443  | `intake.synthetics.datadoghq.com` for version 0.1.6+, `api.datadoghq.com/api/` for versions <0.1.5   |
-| Datadog EU site | 443  | `api.datadoghq.eu/api/`                                                                               |
 
-Check if the endpoint corresponding to your Datadog `site` is available from the host running the worker:
+**Note**: For version 0.1.6+, use `curl intake.synthetics.datadoghq.com` (`curl https://api.datadoghq.com` for versions <0.1.5).
 
-- For the Datadog US site: for version 0.1.6+ use `curl intake.synthetics.datadoghq.com` (`curl https://api.datadoghq.com` for versions <0.1.5).
-- For the Datadog EU site: `curl https://api.datadoghq.eu`.
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+
+| Datadog site    | Port | Endpoint                                                                                             |
+| --------------- | ---- | ---------------------------------------------------------------------------------------------------- |
+| Datadog EU site | 443  | `api.datadoghq.eu/api/`                                                                              |
+
+**Note**: For version 0.1.6+, use `curl https://api.datadoghq.eu`.
+
+{{< /site-region >}}
 
 ### Docker
 
@@ -92,7 +102,7 @@ If traffic between your private location and Datadog has to go through a proxy, 
 
 #### DNS configuration
 
-By default, the Datadog workers use `8.8.8.8` to perform DNS resolution. If it fails, it makes a second attempt to communicate with `1.1.1.1`.   
+By default, the Datadog workers use `8.8.8.8` to perform DNS resolution. If it fails, it makes a second attempt to communicate with `1.1.1.1`.
 If you are testing an internal URL and need to use an internal DNS server, you can set the `dnsServer` option to a specific DNS IP address. Alternatively leverage the `dnsUseHost` parameter to have your worker use your local DNS config from the `etc/resolv.conf` file.
 
 #### Special-purpose IPv4 whitelisting
