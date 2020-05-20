@@ -637,7 +637,7 @@ logs_config:
   use_http: true
 ```
 
-When choosing to send logs over TCP, refer to <a href="/agent/logs/proxy">TCP Proxy for Logs</a> page.
+When sending logs over TCP, refer to <a href="/agent/logs/proxy">TCP Proxy for Logs</a> page.
 
 
 ## Using the Agent as a Proxy
