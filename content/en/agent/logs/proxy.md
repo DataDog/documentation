@@ -75,6 +75,20 @@ This example explains how to configure the Datadog Agent to send logs in TCP to 
 
 The encryption is disabled between the Agent and HAProxy which is then configured to encrypt the data before sending it to Datadog.
 
+#### Agent configuration
+
+Edit the `datadog.yaml` Agent configuration file and set `logs_no_ssl` to `true`. This is needed as HAProxy does not forward the traffic and is not the Datadog backend, so you cannot use the same certificate.
+
+**Note**: `logs_no_ssl` might set to true because HAProxy is configured to encrypt the data. Do not set this parameter to `true` otherwise.
+
+```
+logs_config:
+  use_tcp: true
+  logs_dd_url: "<PROXY_SERVER_DOMAIN>:10514"
+  logs_no_ssl: true
+```
+
+
 #### HAProxy configuration
 
 HAProxy should be installed on a host that has connectivity to Datadog. Use the following configuration file if you do not already have it configured.
@@ -215,21 +229,19 @@ Once the HAProxy configuration is in place, you can reload it or restart HAProxy
 
 {{< /site-region >}}
 
+### Using NGINX as a TCP Proxy for logs
+
 #### Agent configuration
 
-Edit the `datadog.yaml` Agent configuration file and set `logs_no_ssl` to `true`. This is needed as HAProxy does not forward the traffic and is not the Datadog backend, so you cannot use the same certificate.
+Edit the `datadog.yaml` Agent configuration file and set `logs_config.logs_dd_url` to use the newly created proxy instead of establishing a connection directly with Datadog:
 
-**Note**: `logs_no_ssl` might set to true because HAProxy is configured to encrypt the data. Do not set this parameter to `true` otherwise.
-
-```
+```yaml
 logs_config:
   use_tcp: true
-  logs_dd_url: "<PROXY_SERVER_DOMAIN>:10514"
-  logs_no_ssl: true
+  logs_dd_url: myProxyServer.myDomain:10514
 ```
 
-
-### Using NGINX as a TCP Proxy for logs
+**Note**: Do not change the `logs_no_ssl` parameter as NGINX is forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
 
 #### NGINX configuration
 
@@ -278,17 +290,6 @@ stream {
 
 {{< /site-region >}}
 
-#### Agent configuration
-
-Edit the `datadog.yaml` Agent configuration file and set `logs_config.logs_dd_url` to use the newly created proxy instead of establishing a connection directly with Datadog:
-
-```yaml
-logs_config:
-  use_tcp: true
-  logs_dd_url: myProxyServer.myDomain:10514
-```
-
-**Note**: Do not change the `logs_no_ssl` parameter as NGINX is forwarding the traffic to Datadog and does not decrypt or encrypt the traffic.
 
 ## Further Reading
 
