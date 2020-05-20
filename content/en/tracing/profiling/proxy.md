@@ -36,6 +36,7 @@ All profiles collected by the Datadog profilers are sent to the following profil
 
 These domains are CNAME records pointing to a set of static IP addresses. These addresses can be found at [https://ip-ranges.datadoghq.com][1] for Datadog US site
 
+[1]: https://ip-ranges.datadoghq.com
 
 {{< /site-region >}}
 
@@ -47,6 +48,7 @@ These domains are CNAME records pointing to a set of static IP addresses. These 
 
 These domains are CNAME records pointing to a set of static IP addresses. These addresses can be found at [https://ip-ranges.datadoghq.eu][2] for Datadog EU site.
 
+[2]: https://ip-ranges.datadoghq.eu
 
 {{< /site-region >}}
 
@@ -56,6 +58,4 @@ See the [Agent Network Guide][3] to discover how the information is structured i
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://ip-ranges.datadoghq.com
-[2]: https://ip-ranges.datadoghq.eu
 [3]: /agent/guide/network/
