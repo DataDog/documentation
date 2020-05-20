@@ -81,7 +81,7 @@ Then check the `log.json` file to see the following event:
 
 - If using `RenderedCompactJsonFormatter()`
 
-```
+```json
 {
   "@t": "2020-05-20T04:15:28.6898801Z",
   "@m": "Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
