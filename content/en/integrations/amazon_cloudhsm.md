@@ -46,4 +46,4 @@ Need help? Contact [Datadog Support][3].
 
 [1]: /integrations/amazon_web_services/#create-a-new-lambda-function
 [2]: https://app.datadoghq.com/logs
-[3]: /help
+[3]: /help/

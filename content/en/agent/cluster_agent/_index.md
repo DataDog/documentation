@@ -10,13 +10,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/cluster_agent/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks/"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
-- link: "agent/kubernetes/daemonset_setup"
+- link: "/agent/kubernetes/daemonset_setup/"
   tag: "Documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "agent/kubernetes/integrations"
+- link: "/agent/kubernetes/integrations/"
   tag: "Documentation"
   text: "Custom Integrations"
 - link: "https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting"
@@ -45,7 +45,7 @@ Using the Datadog Cluster Agent allows you to:
     {{< nextlink href="/agent/cluster_agent/external_metrics" >}}<u>External Metrics</u>: Leverage the Cluster Agent Custom metrics server to auto-scale your applications thanks to all your Datadog Metrics.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>Cluster Checks</u>: The Cluster Check feature provides the ability to Autodiscover and perform checks on load-balanced cluster services like Kubernetes.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>Endpoints Checks</u>: Endpoints Checks extend Cluster Checks to monitor any endpoint behind cluster services.{{< /nextlink >}}
-    {{< nextlink href="/agent/autodiscovery/troubleshooting" >}}<u>Troubleshooting</u>: Solve common Autodiscovery issues.{{< /nextlink >}}
+    {{< nextlink href="/agent/troubleshooting/autodiscovery" >}}<u>Troubleshooting</u>: Solve common Autodiscovery issues.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Troubleshooting</u>: Find troubleshooting information for the Datadog Cluster Agent.{{< /nextlink >}}
 {{< /whatsnext >}}
 

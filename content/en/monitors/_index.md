@@ -12,7 +12,7 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
       tag: "Blog"
       text: "Monitoring 101: Alerting on what matters"
-    - link: "/api/#monitors"
+    - link: "/api/v1/monitors/"
       tag: "Documentation"
       text: "Datadog Monitors API"
 ---

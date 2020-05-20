@@ -52,5 +52,5 @@ Lorsqu'une nouvelle erreur se produit, elle apparaît dans votre [flux d'événe
 
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://docs.datadoghq.com/fr/events
-[2]: https://docs.datadoghq.com/fr/help
+[1]: https://docs.datadoghq.com/fr/events/
+[2]: https://docs.datadoghq.com/fr/help/

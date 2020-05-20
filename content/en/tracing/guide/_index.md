@@ -28,7 +28,7 @@ private: true
     {{< nextlink href="tracing/guide/trace_sampling_and_storage" >}}Trace Sampling and Storage{{< /nextlink >}}
     {{< nextlink href="tracing/guide/agent-obfuscation" >}}Agent Trace Obfuscation{{< /nextlink >}}
     {{< nextlink href="tracing/guide/metrics_namespace/" >}}Tracing Application Metrics{{< /nextlink >}}
-    {{< nextlink href="/api/?lang=python#tracing" >}}Trace API{{< /nextlink >}}
+    {{< nextlink href="/api/v1/tracing/" >}}Trace API{{< /nextlink >}}
     {{< nextlink href="/developers/libraries/#apm-distributed-tracing-client-libraries" >}}Tracing Client Libraries{{< /nextlink >}}
     {{< nextlink href="tracing/guide/adding_metadata_to_spans/" >}}Adding Span Tags{{< /nextlink >}}
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}

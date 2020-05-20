@@ -2,7 +2,7 @@
 title: Envoy
 kind: documentation
 further_reading:
-- link: "tracing/visualization/"
+- link: "/tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources and traces"
 - link: "https://www.envoyproxy.io/"
@@ -18,10 +18,12 @@ aliases:
   - /tracing/proxies/envoy
 ---
 
-Support for Datadog APM has been included in Envoy.
-It is available in the `envoyproxy/envoy:latest` docker container, and is included in the [1.9.0 release][1].
+Datadog APM is included in Envoy v1.9.0 and newer.
 
 ## Enabling Datadog APM
+
+**Note**: The example configuration below is for Envoy v1.14.
+Example configurations for older versions can be found [here][1]
 
 Three settings are required to enable Datadog APM in Envoy:
 
@@ -38,10 +40,15 @@ A cluster for submitting traces to the Datadog Agent needs to be added.
     connect_timeout: 1s
     type: strict_dns
     lb_policy: round_robin
-    hosts:
-    - socket_address:
-        address: localhost
-        port_value: 8126
+    load_assignment:
+      cluster_name: datadog_agent
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 8126
 ```
 
 The `address` value may need to be changed if Envoy is running in a container or orchestrated environment.
@@ -52,9 +59,10 @@ Envoy's tracing configuration needs to use the Datadog APM extension.
 tracing:
   http:
     name: envoy.tracers.datadog
-    config:
-      collector_cluster: datadog_agent
-      service_name: envoy
+    typed_config:
+      "@type": type.googleapis.com/envoy.config.trace.v2.DatadogConfig
+      collector_cluster: datadog_agent   # matched against the named cluster
+      service_name: envoy-example        # user-defined service name
 ```
 
 The `collector_cluster` value must match the name provided for the Datadog Agent cluster.
@@ -64,67 +72,32 @@ Finally, the `http_connection_manager` sections need to include additional confi
 
 ```yaml
       - name: envoy.http_connection_manager
-        config:
-          tracing:
-            operation_name: egress
+        typed_config:
+          "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
+          tracing: {}
 ```
 
 After completing this configuration, HTTP requests to Envoy will initiate and propagate Datadog traces, and will appear in the APM UI.
 
-## Example Envoy Configuration
+## Example Envoy Configuration (for Envoy v1.14)
 
 An example configuration is provided here to demonstrate the placement of items required to enable tracing using Datadog APM.
 
 ```yaml
-# Enables the datadog tracing extension
-tracing:
-  http:
-    name: envoy.tracers.datadog
-    config:
-      collector_cluster: datadog_agent
-      service_name: envoy
-
 static_resources:
-  clusters:
-  - name: service1
-    connect_timeout: 0.25s
-    type: strict_dns
-    lb_policy: round_robin
-    http2_protocol_options: {}
-    hosts:
-    - socket_address:
-        address: service1
-        port_value: 80
-  - name: service2
-    connect_timeout: 0.25s
-    type: strict_dns
-    lb_policy: round_robin
-    http2_protocol_options: {}
-    hosts:
-    - socket_address:
-        address: service2
-        port_value: 80
-  # The cluster to communicate with the Datadog Agent
-  - name: datadog_agent
-    connect_timeout: 1s
-    type: strict_dns
-    lb_policy: round_robin
-    hosts:
-    - socket_address:
-        address: localhost
-        port_value: 8126
   listeners:
   - address:
       socket_address:
         address: 0.0.0.0
         port_value: 80
+    traffic_direction: OUTBOUND
     filter_chains:
     - filters:
       - name: envoy.http_connection_manager
-        config:
-          # Enable tracing for this listener
-          tracing:
-            operation_name: egress
+        typed_config:
+          "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
+          generate_request_id: true
+          tracing: {}
           codec_type: auto
           stat_prefix: ingress_http
           route_config:
@@ -135,16 +108,61 @@ static_resources:
               - "*"
               routes:
               - match:
-                  prefix: "/service/1"
+                  prefix: "/"
                 route:
                   cluster: service1
-              - match:
-                  prefix: "/service/2"
-                route:
-                  cluster: service2
           http_filters:
-          - name: envoy.router
-            config: {}
+          # Traces for healthcheck requests should not be sampled.
+          - name: envoy.filters.http.health_check
+            typed_config:
+              "@type": type.googleapis.com/envoy.config.filter.http.health_check.v2.HealthCheck
+              pass_through_mode: false
+              headers:
+                - exact_match: /healthcheck
+                  name: :path
+          - name: envoy.filters.http.router
+            typed_config: {}
+          use_remote_address: true
+  clusters:
+  - name: service1
+    connect_timeout: 0.250s
+    type: strict_dns
+    lb_policy: round_robin
+    http2_protocol_options: {}
+    load_assignment:
+      cluster_name: service1
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: service1
+                port_value: 80
+  # Configure this cluster with the address of the datadog agent
+  # for sending traces.
+  - name: datadog_agent
+    connect_timeout: 1s
+    type: strict_dns
+    lb_policy: round_robin
+    load_assignment:
+      cluster_name: datadog_agent
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: localhost
+                port_value: 8126
+
+tracing:
+  # Use the datadog tracer
+  http:
+    name: envoy.tracers.datadog
+    typed_config:
+      "@type": type.googleapis.com/envoy.config.trace.v2.DatadogConfig
+      collector_cluster: datadog_agent   # matched against the named cluster
+      service_name: envoy-example        # user-defined service name
+
 admin:
   access_log_path: "/dev/null"
   address:
@@ -153,7 +171,9 @@ admin:
       port_value: 8001
 ```
 
-**Note**: If you are using Envoy's `dog_statsd` configuration to report metrics, you can _exclude_ activity from the `datadog_agent` cluster with this additional configuration.
+## Excluding Metrics 
+
+If you are using Envoy's `dog_statsd` configuration to report metrics, you can _exclude_ activity from the `datadog_agent` cluster with this additional configuration.
 
 ```yaml
 stats_config:
@@ -167,4 +187,4 @@ stats_config:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/envoyproxy/envoy/releases/tag/v1.9.0
+[1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing

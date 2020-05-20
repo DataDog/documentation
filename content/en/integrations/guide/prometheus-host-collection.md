@@ -127,13 +127,13 @@ Official integrations have their own dedicated directories. There's a default in
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/openmetrics
-[2]: /integrations/prometheus
+[1]: /integrations/openmetrics/
+[2]: /integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /developers/prometheus
+[5]: /developers/prometheus/
 [6]: https://app.datadoghq.com/account/settings#agent
-[7]: /tagging
+[7]: /tagging/
 [8]: /agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [10]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent

@@ -7,6 +7,7 @@ from pull_and_push_file import pull_and_push_file
 from pull_and_push_folder import pull_and_push_folder
 from content_manager import prepare_content
 from integrations import Integrations
+from security_rules import security_rules
 
 from collections import OrderedDict
 from optparse import OptionParser
@@ -38,10 +39,10 @@ class Build:
     # Loads the configurations in the configuration/ folder and attaches it to the Build Class
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path):
         self.build_configuration = yaml.load(
-            open(build_configuration_file_path))
+            open(build_configuration_file_path), Loader=yaml.FullLoader)
 
         self.integration_mutations = OrderedDict(yaml.load(
-            open(integration_merge_configuration_file_path))
+            open(integration_merge_configuration_file_path), Loader=yaml.FullLoader)
         )
 
     # Get the list of content to work with after it gets updated with the local globs or the
@@ -68,6 +69,8 @@ class Build:
 
                 elif content["action"] == "pull-and-push-file":
                     pull_and_push_file(content, self.content_dir)
+                elif content["action"] == "security-rules":
+                    security_rules(content, self.content_dir)
                 elif content["action"] == "Not Available":
                     if getenv("LOCAL") == 'True':
                         print("\x1b[33mWARNING\x1b[0m: Processing of {} canceled, since content is not available. Documentation is in degraded mode".format(
@@ -89,7 +92,8 @@ class Build:
         # configuration file. This needs to happen after all content is processed to avoid flacky integration merge
         try:
             Int.merge_integrations()
-        except:
+        except Exception as e:
+            print(e)
             if getenv("LOCAL") == 'True':
                 print(
                     "\x1b[33mWARNING\x1b[0m: Integration merge failed, documentation is now in degraded mode.")

@@ -63,4 +63,4 @@ Cloudhealth インテグレーションには、サービスのチェック機�
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 
 [1]: https://www.cloudhealthtech.com
-[2]: https://docs.datadoghq.com/ja/help
+[2]: https://docs.datadoghq.com/ja/help/

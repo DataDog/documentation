@@ -11,8 +11,6 @@ sources:
   dst: "content/{lang}/**/*.md"
 - src: "data/partials/*.yaml"
   dst: "*.{lang}.yaml"
-- src: "data/service_checks/*.json"
-  dst: "*.{lang}.json"
 - src: "i18n/en.json"
   dst: "{lang}.json"
 - src: "config/_default/params.en.yaml"
@@ -26,6 +24,10 @@ ignores:
   - "**/*.fr.yaml"
   - "**/*.fr.json"
   - "**/fr.json"
+  - "**/*.ja.md"
+  - "**/*.ja.yaml"
+  - "**/*.ja.json"
+  - "**/ja.json"
 filters:
 - src: "data/integrations/*.yaml"
   template: ".translate/templates/integrations.yaml"
@@ -49,4 +51,3 @@ reviewers:
   - name: 'David Jones'
     github_user: 'davidejones'
     slack_user: 'david.jones'
-  - github_user: 'l0k0ms'

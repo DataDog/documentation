@@ -141,7 +141,7 @@ datadog_agent_allow_downgrade: yes
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /agent/faq/agent-downgrade-major
+[1]: /agent/faq/agent-downgrade-major/
 [2]: https://github.com/DataDog/chef-datadog/tree/3.x
 [3]: https://github.com/DataDog/puppet-datadog-agent/tree/2.x
 [4]: https://github.com/DataDog/ansible-datadog/tree/3.x

@@ -2,13 +2,13 @@
 title: How do I run the kubernetes_state check as a cluster check?
 kind: faq
 further_reading:
-- link: "agent/kubernetes"
+- link: "/agent/kubernetes/"
   tag: "Documentation"
   text: "Kubernetes with Datadog"
-- link: "agent/autodiscovery"
+- link: "/agent/autodiscovery/"
   tag: "Documentation"
   text: "Using Autodiscovery with Kubernetes and Docker"
-- link: "agent/cluster_agent/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks/"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
 ---
@@ -113,6 +113,6 @@ If you use Autodiscovery from the DaemonSet, one of your Agents (the one running
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/autodiscovery
-[2]: /agent/cluster_agent/clusterchecks
+[1]: /getting_started/agent/autodiscovery/
+[2]: /agent/cluster_agent/clusterchecks/
 [3]: https://github.com/helm/charts/blob/master/stable/datadog/README.md

@@ -3,19 +3,19 @@ title: Advanced Log Collection
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Discover how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/live_tail"
+- link: "/logs/live_tail/"
   tag: "Documentation"
   text: "Datadog live tail functionality"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "See how to explore your logs"
-- link: "logs/logging_without_limits"
+- link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without Limits*"
 ---
@@ -35,14 +35,16 @@ To apply a processing rule to all logs collected by a Datadog Agent, see the [Gl
 
 To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
 
-{{< tabs >}}
-{{% tab "exclude_at_match" %}}
+### exclude_at_match
 
 | Parameter          | Description                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
 | `exclude_at_match` | If the specified pattern is contained in the message, the log is excluded and not sent to Datadog. |
 
-For example, filtering out logs that contain a Datadog email address:
+For example, to **filter OUT** logs that contain a Datadog email address, use the following `log_processing_rules`:
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs:
@@ -58,13 +60,78 @@ logs:
 ```
 
 {{% /tab %}}
-{{% tab "include_at_match" %}}
+{{% tab "Docker" %}}
+
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "cardpayment",
+        "log_processing_rules": [{
+          "type": "exclude_at_match",
+          "name": "exclude_datadoghq_users",
+          "pattern" : "\\w+@datadoghq.com"
+        }]
+      }]
+```
+
+**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: cardpayment
+spec:
+  selector:
+    matchLabels:
+      app: cardpayment
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/cardpayment.logs: >-
+          [{
+            "source": "java",
+            "service": "cardpayment",
+            "log_processing_rules": [{
+              "type": "exclude_at_match",
+              "name": "exclude_datadoghq_users",
+              "pattern" : "\\w+@datadoghq.com"
+            }]
+          }]
+      labels:
+        app: cardpayment
+      name: cardpayment
+    spec:
+      containers:
+        - name: cardpayment
+          image: cardpayment:latest
+```
+
+**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### include_at_match
 
 | Parameter          | Description                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
 | `include_at_match` | Only logs with a message that includes the specified pattern are sent to Datadog. |
 
-For example, sending only logs that contain a Datadog email address:
+
+For example, to **filter IN** logs that contain a Datadog email address, use the following `log_processing_rules`:
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs:
@@ -80,6 +147,65 @@ logs:
 ```
 
 {{% /tab %}}
+{{% tab "Docker" %}}
+
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "cardpayment",
+        "log_processing_rules": [{
+          "type": "include_at_match",
+          "name": "include_datadoghq_users",
+          "pattern" : "\\w+@datadoghq.com"
+        }]
+      }]
+```
+
+**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: cardpayment
+spec:
+  selector:
+    matchLabels:
+      app: cardpayment
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/cardpayment.logs: >-
+          [{
+            "source": "java",
+            "service": "cardpayment",
+            "log_processing_rules": [{
+              "type": "include_at_match",
+              "name": "include_datadoghq_users",
+              "pattern" : "\\w+@datadoghq.com"
+            }]
+          }]
+      labels:
+        app: cardpayment
+      name: cardpayment
+    spec:
+      containers:
+        - name: cardpayment
+          image: cardpayment:latest
+```
+
+**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Scrub sensitive data from your logs
@@ -89,6 +215,9 @@ If your logs contain sensitive information that need redacting, configure the Da
 This replaces all matched groups with the value of the `replace_placeholder` parameter.
 
 For example, redact credit card numbers:
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs:
@@ -104,124 +233,76 @@ logs:
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
-**Note**: With Agent version 7.17+, the `replace_placeholder` string can expand references to capture groups such as `$1`, `$2` and so forth. If you want a string to follow the capture group with no space in between, use the format `${<GROUP_NUMBER>}`. For instance, to scrub user information from the log `User email: foo.bar@example.com`, the following configuration:
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
 
 ```yaml
-# (...)
-pattern: "(User email: )[^@]*@(.*)"
-replace_placeholder: "$1 masked_user@${2}"
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "cardpayment",
+        "log_processing_rules": [{
+          "type": "mask_sequences",
+          "name": "mask_credit_cards",
+          "pattern" : "(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})"
+        }]
+      }]
 ```
 
-Would send the following log to Datadog: `User email: masked_user@example.com`
+**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
-### Commonly Used Log Processing Rules
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
 
-##### Generic String: "sensitive-info"
-
-Lines containing the string `sensitive-info` are not sent to Datadog.
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
 
 ```yaml
-  - type: exclude_at_match
-    name: exclude_sensitive_info
-    pattern: (?:sensitive\-info)
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: cardpayment
+spec:
+  selector:
+    matchLabels:
+      app: cardpayment
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/cardpayment.logs: >-
+          [{
+            "source": "java",
+            "service": "cardpayment",
+            "log_processing_rules": [{
+              "type": "mask_sequences",
+              "name": "mask_credit_cards",
+              "pattern" : "(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})"
+            }]
+          }]
+      labels:
+        app: cardpayment
+      name: cardpayment
+    spec:
+      containers:
+        - name: cardpayment
+          image: cardpayment:latest
 ```
 
-##### my_key=value
+**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
-When the string "my_key=" is found, letters, numbers, spaces, and underscores following the string are redacted with `my_key=[VALUE REDACTED]`.
+{{% /tab %}}
+{{< /tabs >}}
 
-```yaml
-- type: mask_sequences
-  name: redact_key_match_letters_numbers_spaces_unders
-  replace_placeholder: "my_key=[VALUE REDACTED]"
-  pattern: (?:my_key=[A-Za-z0-9\s_]*[A-Za-z0-9][A-Za-z0-9\s_])
-```
+With Agent version 7.17+, the `replace_placeholder` string can expand references to capture groups such as `$1`, `$2` and so forth. If you want a string to follow the capture group with no space in between, use the format `${<GROUP_NUMBER>}`.
 
-When the string "my_key=" is found, all characters following the string until the next period are redacted with `my_key=[VALUE REDACTED]`.
+For instance, to scrub user information from the log `User email: foo.bar@example.com`, use:
 
-```yaml
-- type: mask_sequences
-  name: redact_key_match_to_period
-  replace_placeholder: "my_key=[VALUE REDACTED]"
-  pattern: (?:my_key=[^.])
-```
+* `pattern: "(User email: )[^@]*@(.*)"`
+* `replace_placeholder: "$1 masked_user@${2}"`
 
-##### Social Ssecurity Numbers
-
-Redact Social Security Numbers.
-
-```yaml
-  - type: mask_sequences
-    name: social_security_number_basic
-    pattern: (?:\d{3}-?\d{2}-?\d{4})
-    replace_placeholder: "[SSN REDACTED]"
-```
-
-##### Email Address
-
-Redact email addresses using the RFC 5322 regex specification.
-
-```yaml
-  - type: mask_sequences
-    name: RFC_5322_email
-    pattern: (?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])
-    replace_placeholder: "[EMAIL REDACTED]"
-```
-
-##### Credit Card (Visa, MC, AMEX, DINERS, DISCOVER, JCB)
-
-Redact credit card numbers for Visa, Mastercard, American Express, Diner's Club, Discover Card, and JCB.
-
-```yaml
-- type: mask_sequences
-  name: visa_mc_amex_diners_discover_jcb_credit_card
-  replace_placeholder: "[CREDIT CARD REDACTED]"
-  pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
-```
-
-##### Postal Codes
-
-Redact postal codes (US).
-
-```yaml
-- type: mask_sequences
-  name: postal_codes
-  replace_placeholder: "[POSTAL CODE REDACTED]"
-  pattern: (?:\d{5}-\d{4}|\d{5}|[A-Z]\d[A-Z] \d[A-Z]\d)
-```
-
-##### Between Parentheses
-
-Redact characters after string `ExampleConfig(` until the closing paranthesis.
-
-```yaml
-- type: mask_sequences
-  name: Example_config_redaction
-  replace_placeholder: "ExampleConfig([REDACTED, REDACTED]"
-  pattern: (?:ExampleConfig\([^\)]+)
-```
-
-##### Between Brackets
-
-Redact characters after string `on Example [` until the closing bracket.
-
-```yaml
-- type: mask_sequences
-  name: on_Example_redaction
-  replace_placeholder: "on Example [Example REDACTED]"
-  pattern: (?:on Example\s?[^\s]+)
-```
-
-##### Class A IP Address
-
-Redact Class A IP Addresses, range 1.0.0.1 to 126.255.255.254.
-
-```yaml
-- type: mask_sequences
-  name: simple_ip_address
-  replace_placeholder: "[IP REDACTED]"
-  pattern: (?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)
-```
+This sends the following log to Datadog: `User email: masked_user@example.com`
 
 ## Multi-line aggregation
 
@@ -261,7 +342,16 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 ```yaml
  labels:
-    com.datadoghq.ad.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "postgresql",
+        "service": "database",
+        "log_processing_rules": [{
+          "type": "multi_line",
+          "name": "log_start_with_date",
+          "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"
+        }]
+      }]
 ```
 
 {{% /tab %}}
@@ -281,7 +371,16 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/postgres.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+        ad.datadoghq.com/postgres.logs: >-
+          [{
+            "source": "postgresql",
+            "service": "database",
+            "log_processing_rules": [{
+              "type": "multi_line",
+              "name": "log_start_with_date",
+              "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"
+            }]
+          }]
       labels:
         app: database
       name: postgres
@@ -306,6 +405,10 @@ More examples:
 | 20180228                 | `\d{8}`                                    |
 
 **Note**: Regex patterns for multi-line logs must start at the **beginning** of a log. Patterns cannot be matched mid-line.
+
+## Commonly Used Log Processing Rules
+
+See the dedicated [Commonly Used Log Processing Rules FAQ][1] to see a list of examples.
 
 ## Tail directories by using wildcards
 
@@ -339,7 +442,7 @@ The example above will match `/var/log/myapp/log/myfile.log` but `/var/log/myapp
 
 ## Global processing rules
 
-For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][1] or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][2] or through an environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -382,7 +485,7 @@ env:
 {{< /tabs >}}
 All the logs collected by the Datadog Agent are impacted by the global processing rules.
 
-**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][2] to troubleshoot any issues.
+**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][3] to troubleshoot any issues.
 
 ## Further Reading
 
@@ -391,5 +494,6 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/guide/agent-commands/#agent-information
+[1]: /agent/faq/commonly-used-log-processing-rules
+[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /agent/guide/agent-commands/#agent-information

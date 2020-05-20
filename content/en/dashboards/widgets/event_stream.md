@@ -74,6 +74,6 @@ EVENT_STREAM_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /events
-[2]: /dashboards/graphing_json/widget_json
+[1]: /events/
+[2]: /dashboards/graphing_json/widget_json/
 [3]: /dashboards/graphing_json/widget_json/#time-schema

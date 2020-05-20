@@ -79,4 +79,4 @@ sum(last_5m):total
 
 ご質問は、[Datadog のサポートチームまでお問い合わせください][1]。
 
-[1]: /ja/help
+[1]: /ja/help/

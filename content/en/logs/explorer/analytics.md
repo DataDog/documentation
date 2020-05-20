@@ -53,7 +53,7 @@ Use the query to control what's displayed in your Log Analytics:
 
     {{< img src="logs/explorer/analytics/agg_function_log_graph.png" alt="aggregation function for Log Analytics"  style="width:50%;">}}
 
-3. Use [Tag][1] or [Facet][1] to split your graph.
+3. Use a [Facet][1] to split your graph.
 
     {{< img src="logs/explorer/analytics/split_by_log_graph.png" alt="split by Log Analytics"  style="width:50%;">}}
 
@@ -99,7 +99,7 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 {{< img src="logs/explorer/analytics/timeserie_example.png" alt="timeserie example"  style="width:90%;">}}
 
 
-[1]: /logs/explorer/facets
+[1]: /logs/explorer/facets/
 {{% /tab %}}
 
 {{% tab "Top List" %}}
@@ -112,7 +112,7 @@ The evolution of the **top 5 URL Paths** according to the number of **unique Cli
 {{< img src="logs/explorer/analytics/top_list_example.png" alt="top list example"  style="width:90%;">}}
 
 
-[1]: /logs/explorer/facets
+[1]: /logs/explorer/facets/
 {{% /tab %}}
 
 {{% tab "Table" %}}
@@ -130,7 +130,7 @@ The following Table Log Analytics shows the evolution of the **top Status Codes*
 {{< img src="logs/explorer/analytics/logs_table_example.png" alt="table example"  style="width:90%;">}}
 
 
-[1]: /logs/explorer/facets
+[1]: /logs/explorer/facets/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -164,7 +164,7 @@ In the following example, each dot represents one log event. The X-axis is the t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/facets
-[2]: /monitors/monitor_types/log
+[1]: /logs/explorer/facets/
+[2]: /monitors/monitor_types/log/
 [3]: /dashboards/
 [4]: /logs/logs_to_metrics/

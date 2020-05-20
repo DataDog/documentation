@@ -224,7 +224,7 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 ## Datadog UI を活用してカスタムスパンタグを検索する
 
-2) **サービスページに移動**し、タグを追加した[サービス][5]をクリックします。[リソース][6]表でタグが追加されたところまで**スクロールダウンし、特定のリソースをクリック**します。**トレース表までスクロールダウンします**。
+2) **サービスページに移動**し、タグを追加した[サービス][5]をクリックします。[リソース][4]表でタグが追加されたところまで**スクロールダウンし、特定のリソースをクリック**します。**トレース表までスクロールダウンします**。
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="リソースページ"  style="width:90%;">}}
 
@@ -238,15 +238,15 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 ビューの下部にはトレースや選択したスパンの付加情報が表示されます。デフォルトタグや手作業で追加したタグのすべてをここで確認できます。さらに、ビューを切り替えて関連するホストとログの情報を表示することもできます。
 
-<div class="alert alert-info">このビューでログを有効化するためには、ログの収集を有効にした後、<a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/?tab=java" target=_blank>ログとトレースを紐付ける</a>必要があります。</div>
+<div class="alert alert-info">このビューでログを有効化するためには、ログの収集を有効にした後、<a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/" target=_blank>ログとトレースを紐付ける</a>必要があります。</div>
 
 ## カスタムスパンタグを App Analytics で活用する
 
 <div class="alert alert-info">このセクションでは<a href="https://docs.datadoghq.com/tracing/app_analytics/?tab=java" target=_blank>App Analytics が有効化</a>されていることを前提としています</div>
 
-4) **[トレース検索ページ][7]**に移動します。
+4) **[トレース検索ページ][6]**に移動します。
 
-トレース検索ページでは、関心のある特定の[トレース][8]と分析済みのスパンを特定できます。ここでは、時間によってデフォルトタグ (`Env`、`Service`、`Resource` など、[さまざまなタグ][9]) にフィルターをかけることができます。
+トレース検索ページでは、関心のある特定の[トレース][1]と分析済みのスパンを特定できます。ここでは、時間によってデフォルトタグ (`Env`、`Service`、`Resource` など、[さまざまなタグ][7]) にフィルターをかけることができます。
 
 5) **新しいタグが設定されたトレースを探す**。トレースを探すには、左側のファセット検索を使用して本ガイドの始めで設定したリソース名を見つけ、そのうちの 1 行をクリックします。
 
@@ -260,9 +260,9 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 これで、作成したファセットがファセット検索に表示されるようになります。`Search facets` ボックスを使用すると、ファセットを素早く見つけられます。
 
-6) **[App Analytics][10] ページに移動します**。
+6) **[App Analytics][8] ページに移動します**。
 
-App Analytics は、クエリを作成し無限濃度でトレースの調査を実施できる視覚的ツールです。ファセットを使用して、クエリにフィルターとスコープを設定します。詳細については、[App Analytics の概要][11]をご確認ください。
+App Analytics は、クエリを作成し無限濃度でトレースの調査を実施できる視覚的ツールです。ファセットを使用して、クエリにフィルターとスコープを設定します。詳細については、[App Analytics の概要][9]をご確認ください。
 
 7) サービスファセット一覧で作業中の**サービスを選択**し、ファセットのステータスで **Error を選択**したら、group by フィールドで **`customer_id`** (またはスパンに追加した他のタグ) を選択します。
 
@@ -270,7 +270,7 @@ App Analytics は、クエリを作成し無限濃度でトレースの調査を
 
 8) クエリから **Error を削除**し、**measure を `count *` から `Duration` に**、**グラフタイプを `Top List` に変更**します。
 
-これで、平均リクエストが最も遅いカスタマーが表示されます。**注**: カスタマーのパフォーマンスが今後一定の閾値を越えないようにする場合は、[このクエリをモニターにエクスポート][12]するか、この視覚的情報をダッシュボードに保存して長期的に監視します。
+これで、平均リクエストが最も遅いカスタマーが表示されます。**注**: カスタマーのパフォーマンスが今後一定の閾値を越えないようにする場合は、[このクエリをモニターにエクスポート][10]するか、この視覚的情報をダッシュボードに保存して長期的に監視します。
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="スパン md 7" video="true"  style="width:90%;">}}
 
@@ -286,12 +286,10 @@ App Analytics は、クエリを作成し無限濃度でトレースの調査を
 [1]: /ja/tracing/visualization/#trace
 [2]: /ja/tracing/visualization/#spans
 [3]: /ja/tracing/visualization/#span-tags
-[4]: https://docs.datadoghq.com/ja/tracing/visualization/#resources
+[4]: /ja/tracing/visualization/#resources
 [5]: /ja/tracing/visualization/#services
-[6]: /ja/tracing/visualization/#resources
-[7]: https://app.datadoghq.com/apm/search
-[8]: https://docs.datadoghq.com/ja/tracing/visualization/#trace
-[9]: https://docs.datadoghq.com/ja/tracing/app_analytics/search
-[10]: https://app.datadoghq.com/apm/search/analytics
-[11]: https://docs.datadoghq.com/ja/tracing/app_analytics/analytics
-[12]: https://docs.datadoghq.com/ja/tracing/guide/alert_anomalies_p99_database
+[6]: https://app.datadoghq.com/apm/search
+[7]: /ja/tracing/app_analytics/search
+[8]: https://app.datadoghq.com/apm/search/analytics
+[9]: /ja/tracing/app_analytics/analytics
+[10]: /ja/tracing/guide/alert_anomalies_p99_database

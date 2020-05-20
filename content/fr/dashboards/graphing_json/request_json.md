@@ -199,5 +199,5 @@ Voici un exemple qui utilise la fonction `week_before()` :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/functions
+[1]: /fr/dashboards/functions/
 [2]: https://app.datadoghq.com/metric/summary

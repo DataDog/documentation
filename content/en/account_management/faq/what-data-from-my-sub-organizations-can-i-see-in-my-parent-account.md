@@ -3,10 +3,10 @@ title: What data from my sub-organizations can I see in my parent account?
 kind: faq
 draft: true
 further_reading:
-- link: "account_management/saml"
+- link: "/account_management/saml/"
   tag: "Documentation"
   text: "Configure SAML for your Datadog account"
-- link: "account_management/multi_organization"
+- link: "/account_management/multi_organization/"
   tag: "Documentation"
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
@@ -21,6 +21,6 @@ Monitor alerts can also be forwarded to the parent account through the configura
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
-[2]: /integrations/webhooks
-[3]: /api
+[1]: /help/
+[2]: /integrations/webhooks/
+[3]: /api/

@@ -2,19 +2,19 @@
 title: Trace View
 kind: documentation
 further_reading:
-- link: "tracing/setup/"
+- link: "/tracing/setup/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "tracing/visualization/services_list/"
+- link: "/tracing/visualization/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "tracing/visualization/service"
+- link: "/tracing/visualization/service/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "tracing/visualization/resource"
+- link: "/tracing/visualization/resource/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "tracing/visualization/trace"
+- link: "/tracing/visualization/trace/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 ---
@@ -72,7 +72,17 @@ See logs related to your service at the time of the trace. When you hover over a
 
 {{< img src="tracing/visualization/trace/trace_logs.png" alt="Trace Logs"  style="width:90%;">}}
 
-[1]: /logs/explorer/search
+[1]: /logs/explorer/search/
+
+{{% /tab %}}
+{{% tab "Processes" %}}
+
+Click on a service’s span to see the processes running on its underlying infrastructure. A service’s span processes are correlated with the hosts or pods on which the service runs at the time of the request. You can analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process will bring you to the [Live Processes page][1]. To view span-specific processes, enable [process collection][2]. Related processes are not currently supported for serverless and browser traces. 
+
+{{< img src="tracing/visualization/trace/trace_processes.png" alt="Trace Processes"  style="width:90%;">}}
+
+[1]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows
+[2]: https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows#installation
 {{% /tab %}}
 {{< /tabs >}}
 

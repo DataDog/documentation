@@ -241,13 +241,13 @@ Notez que lorsque vous modifiez votre parser de log personnalisé, vous devez [r
 Si vous pensez que l'erreur n'est pas liée à la fonction de votre parser de log personnalisé, n'hésitez pas à [contacter l'assistance][10]. Toutefois, commencez par définir le niveau de log sur « DEBUG » avant de lancer l'Agent quelques minutes en vous assurant que de nouveaux logs sont ajoutés à vos fichiers. Ensuite, [exécutez la commande flare][11] à partir de votre Agent. L'équipe d'assistance aura ainsi accès aux informations nécessaires pour dépanner efficacement le problème.
 
 [1]: https://app.datadoghq.com/infrastructure#tags
-[2]: /fr/api/#tags
+[2]: /fr/api/v1/tags/
 [3]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
-[4]: /fr/events
+[4]: /fr/events/
 [5]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
-[6]: /fr/agent/guide/agent-log-files
+[6]: /fr/agent/guide/agent-log-files/
 [7]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211
-[8]: /fr/agent/guide/agent-commands
+[8]: /fr/agent/guide/agent-commands/
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
-[10]: /fr/help
-[11]: /fr/agent/troubleshooting/send_a_flare
+[10]: /fr/help/
+[11]: /fr/agent/troubleshooting/send_a_flare/

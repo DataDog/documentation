@@ -82,10 +82,17 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'tcprtt.md' \
 		-a -not -name 'uwsgi.md' \
 		-exec rm -rf {} \;
+	@find ./content/en/security_monitoring/default_rules -type f -maxdepth 1 \
+		-a -not -name '_index.md' \
+		-exec rm -rf {} \;
 
 clean-auto-doc: ##Remove all doc automatically created
 	@if [ -d content/en/developers/integrations ]; then \
 	find ./content/en/developers/integrations -type f -maxdepth 1 -exec rm -rf {} \; ;fi
+	@if [ content/en/agent/basic_agent_usage/ansible.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/ansible.md ;fi
+	@if [ content/en/agent/basic_agent_usage/chef.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/chef.md ;fi
 	@if [ content/en/agent/basic_agent_usage/heroku.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
 	@if [ content/en/agent/basic_agent_usage/puppet.md ]; then \

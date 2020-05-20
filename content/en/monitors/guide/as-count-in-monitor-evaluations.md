@@ -80,4 +80,4 @@ In general, **`avg`** time aggregation with **`.as_rate()`** is reasonable, but 
 
 [Reach out to the Datadog support team][1] if you have any questions.
 
-[1]: /help
+[1]: /help/

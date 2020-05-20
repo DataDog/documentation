@@ -3,32 +3,32 @@ title: Synthetics Troubleshooting
 kind: documentation
 description: Troubleshoot common Synthetics issues.
 further_reading:
-- link: "synthetics/"
+- link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your Synthetics tests"
-- link: "synthetics/browser_tests"
+- link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "synthetics/api_tests"
+- link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
 ---
 
 If you experience issues setting up or configuring Datadog Synthetics, use this information to begin troubleshooting. If you continue to have trouble, [contact our AWESOME support team][1].
 
-## API Tests
+## Browser Tests
 
-### Failed requests on a working endpoint
+### I don't see the login page in the recorder. What is happening?
 
-Sometimes you know you have a working endpoint because when you visit your website in a browser (or cURL it), you get `2xx` status code. But when setting an API test on this endpoints or when hitting `Test URL` to perform a fast test you get `5xx` or `4xx` status code.
+By default, the iframe/pop up of the recorder uses your own browser. This means that if you’re already logged into your application, the iframe/pop up might directly display a post login page, therefore preventing you from recording your login steps without logging out first.
 
-This happens because cURL automatically sets a `user-agent` as a request header (as your browser), but Datadog API tests don't automatically set one.
-This can be a problem because some websites ban requests that don't have a `user-agent` set, which causes Datadog API tests to return a `5xx` or `4xx` status code.
+To be able to record your steps without logging out from your application, just leverage the recorder’s **incognito mode**:
 
-The solution to this problem is to manually set a `user-agent` in your API tests. Set the `user-agent` in your API test under **Make a request** > **Advanced Options** > **Header** > **Request Header**. Set the **Name** to `user-agent` and set the **Value** to any valid `user-agent` value like `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9` which represents a Mac OS X-based computer using a Safari browser.
+{{< img src="synthetics/incognito_mode.mp4" alt="Using Incognito Mode Browser Tests" video="true"  width="90%" >}}
 
+**Opening a pop up in incognito mode** allows you to start your test’s recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. 
 
-{{< img src="synthetics/user-agent.gif" alt="Synthetics home page" >}}
+The freshly opened incognito pop up ignores all your previous browser history: cookies, local data, etc. You are consequently automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
 ## API & Browser Tests
 
@@ -42,5 +42,5 @@ Additionally, you might also have to whitelist [Datadog Synthetics IP ranges][2]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /help/
 [2]: https://ip-ranges.datadoghq.com/synthetics.json

@@ -1,0 +1,1 @@
+curl -X GET "https://api.datadoghq.com/"

@@ -2,15 +2,15 @@
 title: Docker Tag Extraction
 kind: documentation
 further_reading:
-- link: "tagging/"
+- link: "/tagging/"
   tag: "Documentation"
   text: "Getting started with tags"
-- link: "tagging/using_tags"
+- link: "/tagging/using_tags/"
   tag: "Documentation"
   text: "Using tags with Datadog"
-- link: "/agent/autodiscovery/management"
+- link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
-  text: "Manage which Container to include in the Agent Autodiscovery"
+  text: "Limit data collection to a subset of containers only"
 ---
 
 The Datadog Agent can create and assign tags to all metrics, traces, and logs emitted by a container based on its labels or environment variables.
@@ -35,6 +35,8 @@ For example, you could set up:
 ```shell
 DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
+
+**Note**: `<LABEL_NAME>` is not case-sensitive. For example, if you have labels named `foo` and `FOO`, and you set `DD_DOCKER_LABELS_AS_TAGS='{"foo": "bar"}'`, both `foo` and `FOO` are mapped to `bar`.
 
 {{% /tab %}}
 {{% tab "Agent" %}}

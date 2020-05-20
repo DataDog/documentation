@@ -14,6 +14,8 @@ code_languages:
   - display_name: Ruby
     key: ruby
 
+branch: ""
+
 header_scripts:
   - hotjar: false
   - google-tag-manager: false
@@ -24,3 +26,10 @@ header_scripts:
 footer_scripts:
   - snowplow: false
   - adroll: false
+
+# Docs allowed regions for redirecting
+allowedRegions: 
+  - name: US
+    value: us
+  - name: EU
+    value: eu 

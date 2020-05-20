@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /ja/getting_started/tagging/using_tags/
 further_reading:
-  - link: tagging/
+  - link: /tagging/
     tag: Documentation
     text: タグの概要
-  - link: tagging/assigning_tags
+  - link: /tagging/assigning_tags/
     tag: Documentation
     text: タグの割り当て方法
   - link: 'https://www.datadoghq.com/blog/tagging-best-practices/'
@@ -47,9 +47,9 @@ further_reading:
 
 {{< img src="tagging/using_tags/dashboardtemplatevariables.png" alt="ダッシュボードテンプレート変数"  style="width:80%;">}}
 
-[1]: /ja/dashboards
-[2]: /ja/events
-[3]: /ja/dashboards/template_variables
+[1]: /ja/dashboards/
+[2]: /ja/events/
+[3]: /ja/dashboards/template_variables/
 {{% /tab %}}
 {{% tab "Examples" %}}
 
@@ -113,11 +113,11 @@ further_reading:
 {{< tabs >}}
 {{% tab "Manage Monitors" %}}
 
-[割り当てられたタグ][1]によってモニターを絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<KEY>:<VALUE>` で、`tag:service:coffee-house` などです。**注**: モニター タグは、メトリクス タグとは別のもので、独立しています。
+[割り当てられたタグ][1]によってモニターを絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。**注**: モニター タグは、メトリクス タグとは別のもので、独立しています。
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="モニターの管理のタグ"  style="width:80%;">}}
 
-[1]: /ja/tagging/assigning_tags
+[1]: /ja/tagging/assigning_tags/
 {{% /tab %}}
 
 {{% tab "New Monitor" %}}
@@ -132,7 +132,7 @@ further_reading:
 
 {{< img src="tagging/using_tags/newmonitortags.png" alt="新しいモニタータグ"  style="width:80%;">}}
 
-[1]: /ja/monitors/monitor_types
+[1]: /ja/monitors/monitor_types/
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}
 
@@ -140,7 +140,7 @@ further_reading:
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="モニターの管理のタグ"  style="width:80%;">}}
 
-[1]: /ja/monitors/downtimes
+[1]: /ja/monitors/downtimes/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -221,7 +221,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 
 {{< img src="tagging/using_tags/tracesearchtags.png" alt="トレース検索タグ"  style="width:80%;">}}
 
-[1]: /ja/tracing/app_analytics/search
+[1]: /ja/tracing/app_analytics/search/
 [2]: /ja/tracing/app_analytics/search/#search-bar
 {{% /tab %}}
 {{% tab "Service Map" %}}
@@ -230,11 +230,11 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="サービスマップタグ"  style="width:80%;">}}
 
-[1]: /ja/tagging/assigning_tags
-[2]: /ja/tracing/app_analytics/search
-[3]: /ja/monitors/manage_monitor
-[4]: /ja/logs/explorer/search
-[5]: /ja/infrastructure/hostmap
+[1]: /ja/tagging/assigning_tags/
+[2]: /ja/tracing/app_analytics/search/
+[3]: /ja/monitors/manage_monitor/
+[4]: /ja/logs/explorer/search/
+[5]: /ja/infrastructure/hostmap/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -287,44 +287,40 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 * [モニターのダウンタイムのスケジューリング][16]
 * [イベントストリームのクエリ][17]
 * [ホストの検索][18]
-* [AWS][20] や [Google Cloud][21] の[インテグレーション][19] 
-* [時系列ポイントのクエリ][22]
-* [すべてのモニターの詳細を取得][23]
-* [モニターのミュート][24]
-* [モニターの検索][25]
-* [モニターグループの検索][26]
-* [スクリーンボードの作成][27]
-* [タイムボードの作成][28]
+* [AWS][19] や [Google Cloud][20] のインテグレーション
+* [時系列ポイントのクエリ][21]
+* [すべてのモニターの詳細を取得][22]
+* [モニターのミュート][23]
+* [モニターの検索][22]
+* [モニターグループの検索][22]
+* [スクリーンボードの作成][24]
+* [タイムボードの作成][24]
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tagging/assigning_tags
-[2]: /ja/events
-[3]: /ja/integrations
-[4]: /ja/infrastructure/hostmap
-[5]: /ja/infrastructure
-[6]: /ja/infrastructure/livecontainers
-[7]: /ja/infrastructure/process
-[8]: /ja/metrics/explorer
-[9]: /ja/notebooks
-[10]: /ja/logs/explorer/search
-[11]: /ja/logs/explorer/analytics
-[12]: /ja/logs/explorer/patterns
-[13]: /ja/logs/live_tail
-[14]: /ja/logs/processing/pipelines
-[15]: /ja/api
-[16]: /ja/api/?lang=python#schedule-monitor-downtime
-[17]: /ja/api/?lang=python#query-the-event-stream
-[18]: /ja/api/?lang=python#search-hosts
-[19]: /ja/api/?lang=python#integrations
-[20]: /ja/api/?lang=python#aws
-[21]: /ja/api/?lang=python#google-cloud-platform
-[22]: /ja/api/?lang=python#query-timeseries-points
-[23]: /ja/api/?lang=python#get-all-monitor-details
-[24]: /ja/api/?lang=python#mute-a-monitor
-[25]: /ja/api/?lang=python#monitors-search
-[26]: /ja/api/?lang=python#monitors-group-search
-[27]: /ja/api/?lang=python#create-a-screenboard
-[28]: /ja/api/?lang=python#create-a-dashboard
+[1]: /ja/tagging/assigning_tags/
+[2]: /ja/events/
+[3]: /ja/integrations/
+[4]: /ja/infrastructure/hostmap/
+[5]: /ja/infrastructure/
+[6]: /ja/infrastructure/livecontainers/
+[7]: /ja/infrastructure/process/
+[8]: /ja/metrics/explorer/
+[9]: /ja/notebooks/
+[10]: /ja/logs/explorer/search/
+[11]: /ja/logs/explorer/analytics/
+[12]: /ja/logs/explorer/patterns/
+[13]: /ja/logs/live_tail/
+[14]: /ja/logs/processing/pipelines/
+[15]: /ja/api/
+[16]: /ja/api/v1/downtimes/#schedule-a-downtime
+[17]: /ja/api/v1/events/#query-the-event-stream
+[18]: /ja/api/v1/hosts/
+[19]: /ja/api/v1/aws-integration/
+[20]: /ja/api/v1/gcp-integration/
+[21]: /ja/api/v1/metrics/#query-timeseries-points
+[22]: /ja/api/v1/monitors/#get-all-monitor-details
+[23]: /ja/api/v1/monitors/#mute-a-monitor
+[24]: /ja/api/v1/dashboards/#create-a-new-dashboard

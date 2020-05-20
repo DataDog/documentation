@@ -37,7 +37,7 @@ Using 5 hosts, sending 20 million Analyzed Spans, and have deployed APM on avera
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------------|-----------------------|
 | APM Hosts      | 5          | $31 per host                                                                                    | 5 * $31             | $155                  |
 | Fargate Tasks  | 20         | $2 per task                                                                                     | 20 * $2             | $40                   |
-| Analyzed Spans | 20 million | 5 million included with 5 APM hosts. $1.70 per million for additional 15 million Analyzed Spans | 25 * $1.70          | $25.50                |
+| Analyzed Spans | 20 million | 5 million included with 5 APM hosts. $1.70 per million for additional 15 million Analyzed Spans | 15 * $1.70          | $25.50                |
 | Total          |            |                                                                                                 | $155 + $40 + $25.50 | **$220.50 per month** |
 
 ### Case 3: Services, Containers and Analyzed Spans
@@ -56,9 +56,9 @@ App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 
 
 | Billable Unit | Quantity | Price        | Formula    | Subtotal           |
 |---------------|----------|--------------|------------|--------------------|
-| APM Hosts     | 7        | $31 per host | 7 * $31    | $252               |
-| Fargate Tasks | 28       | $2 per task  | 28 * $2    | $256               |
-| Total         |          |              | $252 + $56 | **$308 per month** |
+| APM Hosts     | 7        | $31 per host | 7 * $31    | $217               |
+| Fargate Tasks | 28       | $2 per task  | 28 * $2    | $56                |
+| Total         |          |              | $217 + $56 | **$273 per month** |
 
 Note that the container count will not matter if the deployed agent is on the EC2 instances.
 
@@ -68,9 +68,9 @@ Agent running on 20 worker nodes in Kubernetes sending 20 million Analyzed Spans
 
 | Billable Unit     | Quantity   | Price                                                                       | Formula   | Subtotal           |
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
-| APM Hosts (Nodes) | 20         | $31 per host                                                                | 20 * $31  | $720               |
+| APM Hosts (Nodes) | 20         | $31 per host                                                                | 20 * $31  | $620               |
 | Analyzed Spans    | 20 million | 20 million included with 20 APM hosts (nodes). No additional Analyzed Spans | 0 * $1.70 | 0                  |
-| Total             |            |                                                                             | $720 + $0 | **$720 per month** |
+| Total             |            |                                                                             | $720 + $0 | **$620 per month** |
 
 For Kubernetes, APM is priced by nodes not by pods.
 
@@ -120,7 +120,7 @@ No. App Analytics is an additional functionality available along with APM which 
 
 
 
-[1]: /tracing
+[1]: /tracing/
 [2]: /tracing/app_analytics/?tab=java
 [3]: /account_management/billing/pricing/#infrastructure-monitoring
 [4]: /account_management/billing/pricing/#apm
@@ -128,5 +128,5 @@ No. App Analytics is an additional functionality available along with APM which 
 [6]: mailto:success@datadoghq.com
 [7]: https://docs.datadoghq.com/account_management/billing/serverless/#serverless-functions
 [8]: /tracing/send_traces/#datadog-agent
-[9]: /account_management/billing
-[10]: /tracing/visualization
+[9]: /account_management/billing/
+[10]: /tracing/visualization/

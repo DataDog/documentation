@@ -30,5 +30,5 @@ Datadog では、Datadog [オープンソースプロジェクト](#オープン
 [1]: https://datadoghq.slack.com
 [2]: http://chat.datadoghq.com
 [3]: https://datadog.zoom.us/j/312430886
-[4]: /ja/help
+[4]: /ja/help/
 [5]: https://github.com/DataDog

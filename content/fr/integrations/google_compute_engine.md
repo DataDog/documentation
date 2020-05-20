@@ -88,14 +88,14 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 -   [Comment recueillir des métriques Google Compute Engine][10]
 -   [Comment surveiller Google Compute Engine avec Datadog][11]
 
-[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
+[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/?tab=datadogussite#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://app.datadoghq.com/account/settings#integrations/google_cloud_platform
 [5]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#configuration
 [6]: https://app.datadoghq.com/monitors#downtime
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/google_compute_engine/google_compute_engine_metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/help/
 [9]: https://www.datadoghq.com/blog/monitoring-google-compute-engine-performance
 [10]: https://www.datadoghq.com/blog/how-to-collect-gce-metrics
 [11]: https://www.datadoghq.com/blog/monitor-google-compute-engine-with-datadog

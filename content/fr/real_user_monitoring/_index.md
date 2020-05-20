@@ -19,12 +19,12 @@ further_reading:
 La fonctionnalité Real User Monitoring (RUM) de Datadog vous permet de visualiser et d'analyser les activités en temps réel ainsi que l'expérience de chaque utilisateur afin de focaliser vos efforts de développement sur les fonctionnalités ayant le plus fort impact métier. La bibliothèque `datadog-rum` prend en charge tous les navigateurs modernes pour ordinateurs et appareils mobiles. Sur IE10 et IE11, la collecte de ressources est limitée.
 
 {{< whatsnext desc="Prise en main de la fonctionnalité RUM :">}}
-  {{< nextlink href="/real_user_monitoring/installation">}}<u>Installation</u> : créez votre première application et configurez le SDK du navigateur.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards">}}<u>Dashboards</u> : visualisez toutes les données recueillies par défaut grâce à nos dashboards.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/installation">}}Installation : créez votre première application et configurez le SDK du navigateur.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards">}}Dashboards : visualisez toutes les données recueillies par défaut grâce à nos dashboards.{{< /nextlink >}}
 {{< /whatsnext >}}
 {{< whatsnext desc="Exploration de vos événements RUM :">}}
-  {{< nextlink href="/real_user_monitoring/explorer/">}}<u>Recherche RUM</u> : effectuez des recherches parmi vos vues de page.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/explorer/analytics">}}<u>RUM Analytics</u> : obtenez des informations exploitables à partir de l'ensemble de vos événements RUM.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/explorer/">}}Recherche RUM : effectuez des recherches parmi vos vues de page.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/explorer/analytics">}}RUM Analytics : obtenez des informations exploitables à partir de l'ensemble de vos événements RUM.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Pour aller plus loin

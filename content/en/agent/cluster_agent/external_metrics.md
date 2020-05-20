@@ -8,13 +8,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/cluster_agent/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks/"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
-- link: "agent/kubernetes/daemonset_setup"
+- link: "/agent/kubernetes/daemonset_setup/"
   tag: "Documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "/agent/cluster_agent/troubleshooting"
+- link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
@@ -117,6 +117,8 @@ Note in this manifest that:
 
 Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary. For advanced use cases, it is possible to have several metrics in the same HPA. As you can see [in the Kubernetes horizontal pod autoscaling documentation][9], the largest of the proposed values is the one chosen.
 
+**Note**: Running multiple Cluster Agents will raise API usage. The Datadog Cluster Agent completes 120 calls per hour for approximately 45 HPA objects in Kubernetes. Running more than 45 HPAs will increase the number of calls when fetching metrics from within the same org.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -124,7 +126,7 @@ Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value 
 [1]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#before-you-begin
 [2]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
 [3]: https://kubernetes.io/docs/tasks/access-kubernetes-api/configure-aggregation-layer
-[4]: /agent/cluster_agent/setup
+[4]: /agent/cluster_agent/setup/
 [5]: /agent/cluster_agent/setup/#step-3-create-the-cluster-agent-and-its-service
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml
