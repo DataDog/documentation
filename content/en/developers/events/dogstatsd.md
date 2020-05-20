@@ -173,7 +173,7 @@ $statsd->event('An error occurred.',
 
 {{< markdownify >}}
 With the DogStatsD-PHP library you can submit events via TCP directly to the Datadog API. It's slower but more reliable than using the Agent DogStatsD instance since events are forwarded from your application to the Agent using UDP.
-To use this, you must configure the library with your [Datadog API and application keys][3] instead of the local DogStatS instance:
+To use this, you must configure the library with your [Datadog API and application keys](https://app.datadoghq.com/account/settings#api) instead of the local DogStatS instance:
 {{< /markdownify >}}
 
 {{< code-block lang="php" filename="event_through_api.php" >}}
@@ -213,4 +213,3 @@ $statsd->event('An error occurred.',
 
 [1]: /developers/dogstatsd/
 [2]: /events/
-[3]: https://app.datadoghq.com/account/settings#api
