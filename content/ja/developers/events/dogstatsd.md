@@ -169,7 +169,9 @@ $statsd->event('An error occurred.',
 {{< /code-block >}}
 
 {{< markdownify >}}
-DogStatsD-PHP ライブラリを使用すると、イベントを TCP 経由で直接 Datadog API に送信できます。速度は遅くなりますが、イベントが UDP を使用してアプリケーションから Agent に転送されるため、Agent の DogStatsD インスタンスを使うよりも信頼性が高くなります。これを使用するには、ローカルの DogStatD インスタンスの代わりに [Datadog API とアプリケーションのキー](https://app.datadoghq.com/account/settings#api)を使用してライブラリを構成する必要があります。
+DogStatsD-PHP ライブラリを使用すると、イベントを TCP 経由で直接 Datadog API に送信できます。速度は遅くなりますが、イベントが UDP を使用してアプリケーションから Agent に転送されるため、Agent の DogStatsD インスタンスを使うよりも信頼性が高くなります。これを使用するには、ローカルの DogStatD インスタンスの代わりに [Datadog API とアプリケーションのキー][1] を使用してライブラリを構成する必要があります。
+
+[1]: https://app.datadoghq.com/account/settings#api
 {{< /markdownify >}}
 
 {{< code-block lang="php" filename="event_through_api.php" >}}
