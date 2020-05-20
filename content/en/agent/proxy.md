@@ -260,12 +260,6 @@ backend datadog-logs-http
     # Uncomment the following configuration for older HAProxy versions
     # server datadog agent-http-intake.logs.datadoghq.com:443 check port 443 ssl verify none
 
-# backend datadog-logs
-    # balance roundrobin
-    # The following configuration is for HAProxy 1.8 and newer
-    # server-template mothership 5 agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check resolvers my-dns init-addr none resolve-prefer ipv4
-    # Uncomment the following configuration for older HAProxy versions
-    # server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
 
 **Note**: Download the certificate with the following command:
@@ -399,12 +393,6 @@ backend datadog-logs-http
     # Uncomment the following configuration for older HAProxy versions
     # server datadog agent-http-intake.logs.datadoghq.eu:443 check port 443 ssl verify none
 
-backend datadog-logs
-    balance roundrobin
-    # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check resolvers my-dns init-addr none resolve-prefer ipv4
-    # Uncomment the following configuration for older HAProxy versions
-    # server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 443
 ```
 
 **Note**: Download the certificate with the following command:
