@@ -139,7 +139,7 @@
                   "data": [
                     {
                       "id": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
-                      "type": "string"
+                      "type": "roles"
                     }
                   ]
                 }
@@ -224,7 +224,7 @@
                 "data": [
                   {
                     "id": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
-                    "type": "string"
+                    "type": "roles"
                   }
                 ]
               }
@@ -266,7 +266,7 @@
               "data": [
                 {
                   "id": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
-                  "type": "string"
+                  "type": "roles"
                 }
               ]
             }
@@ -346,7 +346,7 @@
                 "data": [
                   {
                     "id": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
-                    "type": "string"
+                    "type": "roles"
                   }
                 ]
               }
@@ -475,7 +475,7 @@
                 "data": [
                   {
                     "id": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
-                    "type": "string"
+                    "type": "roles"
                   }
                 ]
               }

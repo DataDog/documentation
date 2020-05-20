@@ -260,11 +260,6 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/AlertGraphWidgetDefinitionType'
-          default: alert_graph
-          description: Type of the widget.
-          example: alert_graph
-          readOnly: true
-          type: string
         viz_type:
           $ref: '#/components/schemas/WidgetVizType'
       required:
@@ -277,6 +272,7 @@ components:
       description: Type of the alert graph widget.
       enum:
       - alert_graph
+      example: alert_graph
       type: string
       x-enum-varnames:
       - ALERT_GRAPH
@@ -317,6 +313,7 @@ components:
       description: Type of the alert value widget.
       enum:
       - alert_value
+      example: alert_value
       type: string
       x-enum-varnames:
       - ALERT_VALUE
@@ -534,6 +531,7 @@ components:
       description: Type of the change widget.
       enum:
       - change
+      example: change
       type: string
       x-enum-varnames:
       - CHANGE
@@ -665,6 +663,7 @@ components:
       description: Type of the check status widget.
       enum:
       - check_status
+      example: check_status
       type: string
       x-enum-varnames:
       - CHECK_STATUS
@@ -965,6 +964,7 @@ components:
       description: Type of the distribution widget.
       enum:
       - distribution
+      example: distribution
       type: string
       x-enum-varnames:
       - DISTRIBUTION
@@ -1451,6 +1451,7 @@ components:
       description: Type of the event stream widget.
       enum:
       - event_stream
+      example: event_stream
       type: string
       x-enum-varnames:
       - EVENT_STREAM
@@ -1487,6 +1488,7 @@ components:
       description: Type of the event timeline widget.
       enum:
       - event_timeline
+      example: event_timeline
       type: string
       x-enum-varnames:
       - EVENT_TIMELINE
@@ -1518,6 +1520,7 @@ components:
       description: Type of the free text widget.
       enum:
       - free_text
+      example: free_text
       type: string
       x-enum-varnames:
       - FREE_TEXT
@@ -1641,6 +1644,7 @@ components:
       description: Type of the group widget.
       enum:
       - group
+      example: group
       type: string
       x-enum-varnames:
       - GROUP
@@ -1760,6 +1764,7 @@ components:
       description: Type of the heat map widget.
       enum:
       - heatmap
+      example: heatmap
       type: string
       x-enum-varnames:
       - HEATMAP
@@ -1994,6 +1999,7 @@ components:
       description: Type of the host map widget.
       enum:
       - hostmap
+      example: hostmap
       type: string
       x-enum-varnames:
       - HOSTMAP
@@ -2083,6 +2089,7 @@ components:
       description: Type of the iframe widget.
       enum:
       - iframe
+      example: iframe
       type: string
       x-enum-varnames:
       - IFRAME
@@ -2270,6 +2277,7 @@ components:
       description: Type of the image widget.
       enum:
       - image
+      example: image
       type: string
       x-enum-varnames:
       - IMAGE
@@ -2457,6 +2465,7 @@ components:
       description: Type of the log stream widget.
       enum:
       - log_stream
+      example: log_stream
       type: string
       x-enum-varnames:
       - LOG_STREAM
@@ -2534,6 +2543,7 @@ components:
       description: Type of logs arithmetic processor.
       enum:
       - arithmetic-processor
+      example: arithmetic-processor
       type: string
       x-enum-varnames:
       - ARITHMETIC_PROCESSOR
@@ -2596,6 +2606,7 @@ components:
       description: Type of logs attribute remapper.
       enum:
       - attribute-remapper
+      example: attribute-remapper
       type: string
       x-enum-varnames:
       - ATTRIBUTE_REMAPPER
@@ -2651,6 +2662,7 @@ components:
       description: Type of logs category processor.
       enum:
       - category-processor
+      example: category-processor
       type: string
       x-enum-varnames:
       - CATEGORY_PROCESSOR
@@ -2694,6 +2706,7 @@ components:
       description: Type of logs date remapper.
       enum:
       - date-remapper
+      example: date-remapper
       type: string
       x-enum-varnames:
       - DATE_REMAPPER
@@ -2785,6 +2798,7 @@ components:
       description: Type of GeoIP parser.
       enum:
       - geo-ip-parser
+      example: geo-ip-parser
       type: string
       x-enum-varnames:
       - GEO_IP_PARSER
@@ -2853,6 +2867,7 @@ components:
       description: Type of logs grok parser.
       enum:
       - grok-parser
+      example: grok-parser
       type: string
       x-enum-varnames:
       - GROK_PARSER
@@ -3062,6 +3077,7 @@ components:
       description: Type of logs lookup processor.
       enum:
       - lookup-processor
+      example: lookup-processor
       type: string
       x-enum-varnames:
       - LOOKUP_PROCESSOR
@@ -3107,6 +3123,7 @@ components:
       description: Type of logs message remapper.
       enum:
       - message-remapper
+      example: message-remapper
       type: string
       x-enum-varnames:
       - MESSAGE_REMAPPER
@@ -3192,6 +3209,7 @@ components:
       description: Type of logs pipeline processor.
       enum:
       - pipeline
+      example: pipeline
       type: string
       x-enum-varnames:
       - PIPELINE
@@ -3289,6 +3307,7 @@ components:
       description: Type of logs service remapper.
       enum:
       - service-remapper
+      example: service-remapper
       type: string
       x-enum-varnames:
       - SERVICE_REMAPPER
@@ -3343,6 +3362,7 @@ components:
       description: Type of logs status remapper.
       enum:
       - status-remapper
+      example: status-remapper
       type: string
       x-enum-varnames:
       - STATUS_REMAPPER
@@ -3393,6 +3413,7 @@ components:
       description: Type of logs string builder processor.
       enum:
       - string-builder-processor
+      example: string-builder-processor
       type: string
       x-enum-varnames:
       - STRING_BUILDER_PROCESSOR
@@ -3429,6 +3450,7 @@ components:
       description: Type of logs trace remapper.
       enum:
       - trace-id-remapper
+      example: trace-id-remapper
       type: string
       x-enum-varnames:
       - TRACE_ID_REMAPPER
@@ -3476,6 +3498,7 @@ components:
       description: Type of logs URL parser.
       enum:
       - url-parser
+      example: url-parser
       type: string
       x-enum-varnames:
       - URL_PARSER
@@ -3524,6 +3547,7 @@ components:
       description: Type of logs User-Agent parser.
       enum:
       - user-agent-parser
+      example: user-agent-parser
       type: string
       x-enum-varnames:
       - USER_AGENT_PARSER
@@ -4366,6 +4390,7 @@ components:
       description: Type of the monitor summary widget.
       enum:
       - manage_status
+      example: manage_status
       type: string
       x-enum-varnames:
       - MANAGE_STATUS
@@ -4532,6 +4557,7 @@ components:
       description: Type of the note widget.
       enum:
       - note
+      example: note
       type: string
       x-enum-varnames:
       - NOTE
@@ -4828,6 +4854,7 @@ components:
       description: Type of the query value widget.
       enum:
       - query_value
+      example: query_value
       type: string
       x-enum-varnames:
       - QUERY_VALUE
@@ -5324,6 +5351,7 @@ components:
       description: Type of the SLO widget.
       enum:
       - slo
+      example: slo
       type: string
       x-enum-varnames:
       - SLO
@@ -5395,6 +5423,7 @@ components:
       description: Type of the scatter plot widget.
       enum:
       - scatterplot
+      example: scatterplot
       type: string
       x-enum-varnames:
       - SCATTERPLOT
@@ -5796,6 +5825,7 @@ components:
       description: Type of the service map widget.
       enum:
       - servicemap
+      example: servicemap
       type: string
       x-enum-varnames:
       - SERVICEMAP
@@ -5860,6 +5890,7 @@ components:
       description: Type of the service summary widget.
       enum:
       - trace_service
+      example: trace_service
       type: string
       x-enum-varnames:
       - TRACE_SERVICE
@@ -7167,6 +7198,7 @@ components:
       description: Type of the table widget.
       enum:
       - query_table
+      example: query_table
       type: string
       x-enum-varnames:
       - QUERY_TABLE
@@ -7271,6 +7303,7 @@ components:
       description: Type of the timeseries widget.
       enum:
       - timeseries
+      example: timeseries
       type: string
       x-enum-varnames:
       - TIMESERIES
@@ -7345,6 +7378,7 @@ components:
       description: Type of the top list widget.
       enum:
       - toplist
+      example: toplist
       type: string
       x-enum-varnames:
       - TOPLIST

@@ -501,11 +501,6 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/OrganizationsType'
-          default: orgs
-          description: Organizations resource type.
-          example: orgs
-          readOnly: true
-          type: string
       required:
       - type
       type: object
@@ -544,6 +539,7 @@ components:
       description: Organizations resource type.
       enum:
       - orgs
+      example: orgs
       type: string
       x-enum-varnames:
       - ORGS
@@ -612,6 +608,7 @@ components:
       description: Permissions resource type.
       enum:
       - permissions
+      example: permissions
       type: string
       x-enum-varnames:
       - PERMISSIONS
@@ -736,17 +733,20 @@ components:
       properties:
         created_at:
           description: Creation time of the restriction query.
+          example: '2020-03-17T21:06:44.944905+00:00'
           format: date-time
           readOnly: true
           type: string
         modified_at:
           description: Time of last restriction query modification.
+          example: '2020-03-17T21:15:15.833683+00:00'
           format: date-time
           readOnly: true
           type: string
         restriction_query:
           description: The query that defines the restriction. Only the content matching
             the query can be returned.
+          example: env:sandbox
           type: string
       type: object
     RestrictionQueryCreateAttributes:
@@ -754,6 +754,7 @@ components:
       properties:
         restriction_query:
           description: The restriction query.
+          example: env:sandbox
           type: string
       type: object
     RestrictionQueryCreateData:
@@ -803,10 +804,12 @@ components:
           $ref: '#/components/schemas/RestrictionQueryRoleAttribute'
         id:
           description: ID of the role.
+          example: <ROLE_ID>
           type: string
         type:
           default: roles
           description: Role resource type.
+          example: roles
           readOnly: true
           type: string
       type: object
@@ -815,6 +818,7 @@ components:
       properties:
         name:
           description: The role name.
+          example: Datadog Admin Role
           type: string
       type: object
     RestrictionQueryRolesResponse:
@@ -832,6 +836,7 @@ components:
       properties:
         restriction_query:
           description: The restriction query.
+          example: env:sandbox
           type: string
       type: object
     RestrictionQueryUpdateData:
@@ -857,12 +862,14 @@ components:
           $ref: '#/components/schemas/RestrictionQueryAttributes'
         id:
           description: ID of the restriction query.
+          example: 79a0e60a-644a-11ea-ad29-43329f7f58b5
           type: string
         relationships:
           $ref: '#/components/schemas/RestrictionQueryRelationships'
         type:
           default: logs_restriction_queries
           description: Restriction queries type.
+          example: logs_restriction_queries
           readOnly: true
           type: string
       type: object
@@ -884,10 +891,12 @@ components:
           $ref: '#/components/schemas/RestrictionQueryAttributes'
         id:
           description: ID of the restriction query.
+          example: 79a0e60a-644a-11ea-ad29-43329f7f58b5
           type: string
         type:
           default: logs_restriction_queries
           description: Restriction queries type.
+          example: logs_restriction_queries
           readOnly: true
           type: string
       type: object
@@ -1036,6 +1045,7 @@ components:
       description: Roles type.
       enum:
       - roles
+      example: roles
       type: string
       x-enum-varnames:
       - ROLES
