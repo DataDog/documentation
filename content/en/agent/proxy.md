@@ -356,14 +356,6 @@ frontend logs_http_frontend
     option tcplog
     default_backend datadog-logs-http
 
-# If sending logs with use_tcp: true
-# frontend logs_frontend
-#    bind *:10514
-#    mode tcp
-#    option tcplog
-#    default_backend datadog-logs
-
-
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
