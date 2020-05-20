@@ -46,9 +46,11 @@ StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は
 `RATE` メトリクスとして保存された `COUNT` メトリクスを Datadog に送信します。 `COUNT` タイプについては、[メトリクスのタイプ][2] に関するドキュメントを参照してください。
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
+{{< markdownify >}}
 以下の Python コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="count_metric.py" >}}
 from datadog import initialize, statsd
@@ -67,10 +69,12 @@ while(1):
   time.sleep(10)
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
+{{< markdownify >}}
 以下の Ruby コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="ruby" filename="count_metric.rb" >}}
 require 'datadog/statsd'
@@ -85,10 +89,12 @@ while true do
 end
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
+{{< markdownify >}}
 以下の Go コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="go" filename="count_metric.go" >}}
 package main
@@ -115,10 +121,12 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
+{{< markdownify >}}
 以下の Java コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="java" filename="count_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
@@ -144,10 +152,12 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
+{{< markdownify >}}
 以下の .NET コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="csharp" filename="count_metric.cs" >}}
 using StatsdClient;
@@ -178,10 +188,12 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 以下の PHP コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="count_metric.php" >}}
 <?php
@@ -203,7 +215,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
@@ -225,9 +237,11 @@ while (TRUE) {
 `GAUGE` メトリクスとして保存された `GAUGE` メトリクスを Datadog に送信します。 `GAUGE` タイプについては、[メトリクスのタイプ][5] に関するドキュメントを参照してください。
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
+{{< markdownify >}}
 以下の Python コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="gauge_metric.py" >}}
 from datadog import initialize, statsd
@@ -248,10 +262,12 @@ while(1):
   time.sleep(10)
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
+{{< markdownify >}}
 以下の Ruby コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="ruby" filename="gauge_metric.rb" >}}
 require 'datadog/statsd'
@@ -267,10 +283,12 @@ while true do
 end
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
+{{< markdownify >}}
 以下の Go コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="go" filename="gauge_metric.go" >}}
 package main
@@ -296,10 +314,12 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
+{{< markdownify >}}
 以下の Java コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="java" filename="gauge_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
@@ -323,10 +343,12 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
+{{< markdownify >}}
 以下の .NET コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="csharp" filename="gauge_metric.cs" >}}
 using StatsdClient;
@@ -355,10 +377,12 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 以下の PHP コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="gauge_metric.php" >}}
 <?php
@@ -381,7 +405,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
@@ -399,9 +423,12 @@ while (TRUE) {
 `GAUGE` メトリクスとして保存された `SET` メトリクスを Datadog に送信します。
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
+
+{{< markdownify >}}
 
 以下の Python コードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="set_metric.py" >}}
 from datadog import initialize, statsd
@@ -421,10 +448,12 @@ while(1):
   time.sleep(random.randint(0, 10))
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
+{{< markdownify >}}
 以下の Ruby コードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="ruby" filename="set_metric.rb" >}}
 require 'datadog/statsd'
@@ -439,10 +468,12 @@ while true do
 end
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
+{{< markdownify >}}
 以下の Go コードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="go" filename="set_metric.go" >}}
 package main
@@ -470,10 +501,12 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
+{{< markdownify >}}
 以下の .NET コードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="csharp" filename="set_metric.cs" >}}
 using StatsdClient;
@@ -502,10 +535,12 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 以下の PHP コードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="set_metric.php" >}}
 <?php
@@ -529,7 +564,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
@@ -552,9 +587,11 @@ while (TRUE) {
 `HISTOGRAM` メトリクスタイプは DogStatsD だけのものです。`GAUGE` および `RATE` メトリクスとして保存された `HISTOGRAM` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6]に関するドキュメントを参照してください。
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
+{{< markdownify >}}
 以下の Python コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="histogram_metric.py" >}}
 from datadog import initialize, statsd
@@ -573,10 +610,12 @@ while(1):
   time.sleep(2)
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
+{{< markdownify >}}
 以下の Ruby コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="ruby" filename="histogram_metric.rb" >}}
 require 'datadog/statsd'
@@ -589,10 +628,12 @@ while true do
 end
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
+{{< markdownify >}}
 以下の Go コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="go" filename="histogram_metric.go" >}}
 package main
@@ -618,10 +659,12 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
+{{< markdownify >}}
 以下の Java コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="java" filename="histogram_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
@@ -645,10 +688,12 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
+{{< markdownify >}}
 以下の .NET コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="csharp" filename="histogram_metric.cs" >}}
 using StatsdClient;
@@ -677,10 +722,12 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 以下の PHP コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="histogram_metric.php" >}}
 <?php
@@ -701,7 +748,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 上のインスツルメンテーションは、以下のメトリクスを生成します。
@@ -735,9 +782,11 @@ DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタ
 `GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6] に関するドキュメントを参照してください。
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
+{{< markdownify >}}
 Python では、タイマーはデコレーターで作成されます。
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="timers.py" >}}
 from datadog import initialize, statsd
@@ -759,7 +808,9 @@ while(1):
   my_function()
 {{< /code-block >}}
 
+{{< markdownify >}}
 または、コンテキストマネージャーを使用します。
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="context_manager.py" >}}
 from datadog import statsd
@@ -780,8 +831,8 @@ while(1):
   my_function()
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 {{< code-block lang="php" filename="timer.php" >}}
 <?php
@@ -807,7 +858,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 DogStatsD はタイマーメトリクスデータを受け取ると、レンダリング時間の統計的分布を計算し、次のメトリクスを Datadog に送信します。
@@ -835,9 +886,11 @@ DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使
 `DISTRIBUTION` メトリクスタイプは DogStatsD だけのものです。`DISTRIBUTION` メトリクスとして保存された `DISTRIBUTION` メトリクスを Datadog に送信します。 `DISTRIBUTION` タイプについては、[メトリクスのタイプ][9] に関するドキュメントを参照してください。
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
+{{< markdownify >}}
 以下の Python コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="distribution_metric.py" >}}
 from datadog import initialize, statsd
@@ -856,10 +909,12 @@ while(1):
   time.sleep(2)
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
+{{< markdownify >}}
 以下の Ruby コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="ruby" filename="distribution_metric.rb" >}}
 require 'datadog/statsd'
@@ -872,10 +927,12 @@ while true do
 end
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
+{{< markdownify >}}
 以下の Go コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="go" filename="distribution_metric.go" >}}
 package main
@@ -901,10 +958,12 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
+{{< markdownify >}}
 以下の Java コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="java" filename="distribution_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
@@ -928,10 +987,12 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
+{{< markdownify >}}
 以下の .NET コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="csharp" filename="distribution_metric.cs" >}}
 using StatsdClient;
@@ -960,10 +1021,12 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 以下の PHP コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="distribution_metric.php" >}}
 <?php
@@ -984,7 +1047,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 上のインスツルメンテーションは、`合計`、`カウント`、`平均`、`最小`、`最大`、`50 パーセンタイル` (中央値)、`75 パーセンタイル`、`90 パーセンタイル`、`95 パーセンタイル`、`99 パーセンタイル`の各データを計算します。ディストリビューションは、アップロードされたファイルのサイズ、教室でのテストの得点など、「あらゆる」種類の値の分布の測定に使用できます。
@@ -1011,49 +1074,49 @@ DogStatsD は Datadog にメトリクスを送信する前に、`<SAMPLE_RATE>` 
 以下のコードは、半分の時間だけポイントを送信します。
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
-```python
+{{< code-block lang="python" >}}
 statsd.increment('loop.count', sample_rate=0.5)
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
-```ruby
+{{< code-block lang="ruby" >}}
 statsd.increment('loop.count', :sample_rate => 0.5)
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
-```go
+{{< code-block lang="go" >}}
 statsd.Incr("example_metric.increment", []string{}, 0.5)
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
-```java
+{{< code-block lang="java" >}}
 Statsd.incrementCounter("example_metric.increment", sampleRate=0.5);
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
-```csharp
+{{< code-block lang="csharp" >}}
 DogStatsd.Increment("example_metric.increment", sampleRate: 0.5);
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
-```php
+{{< code-block lang="php" >}}
 <? php
 $statsd->increment('example_metric.increment', $sampleRate->0.5);
-```
+{{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### メトリクスのタグ付け
@@ -1065,58 +1128,61 @@ $statsd->increment('example_metric.increment', $sampleRate->0.5);
 以下のコードは、`environment:dev` および `account:local` タグのみを `example_metric.increment` メトリクスに追加します。
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
-```python
+{{< code-block lang="python" >}}
 statsd.increment('example_metric.increment', tags=["environment:dev","account:local"])
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
-```ruby
+{{< code-block lang="ruby" >}}
 statsd.increment('example_metric.increment', tags: ['environment:dev','account:local'])
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
-```go
+{{< code-block lang="go" >}}
 statsd.Incr("example_metric.increment", []string{"environment:dev","account:local"}, 1)
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
-```java
+{{< code-block lang="java" >}}
 Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev","account:local"});
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
-```csharp
+{{< code-block lang="csharp" >}}
 DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 `tags` 引数は文字列にすることができます。
+{{< /markdownify >}}
 
-```php
+{{< code-block lang="php" >}}
 $statsd->increment('example_metric.increment', "environment:dev,account:local");
-```
+{{< /code-block >}}
 
+{{< markdownify >}}
 または配列にすることができます。
+{{< /markdownify >}}
 
-```php
+{{< code-block lang="php" >}}
 <?php
 $statsd->increment('example_metric.increment', array('environment' => 'dev', 'account' => 'local'));
+{{< /code-block >}}
 
-```
-
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### ホストタグ

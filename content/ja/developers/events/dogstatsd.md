@@ -40,7 +40,7 @@ event(<タイトル>, <テキスト>, <タイムスタンプ>, <ホスト名>, <
 DogStatsD イベントによる Datadog 内でのエラーと例外を表示します。
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 {{< code-block lang="python" filename="event.py" >}}
 from datadog import initialize, statsd
@@ -55,8 +55,8 @@ initialize(**options)
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 {{< code-block lang="ruby" filename="event.rb" >}}
 require 'datadog/statsd'
@@ -66,8 +66,8 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 {{< code-block lang="go" filename="event.go" >}}
 package main
@@ -93,8 +93,8 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
 {{< code-block lang="java" filename="event.java" >}}
 import com.timgroup.statsd.Event;
@@ -122,8 +122,8 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 {{< code-block lang="csharp" filename="event.cs" >}}
 using StatsdClient;
@@ -145,8 +145,8 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 {{< code-block lang="php" filename="event.php" >}}
 <?php
@@ -168,7 +168,9 @@ $statsd->event('An error occurred.',
   );
 {{< /code-block >}}
 
-DogStatsD-PHP ライブラリを使用すると、イベントを TCP 経由で直接 Datadog API に送信できます。速度は遅くなりますが、イベントが UDP を使用してアプリケーションから Agent に転送されるため、Agent の DogStatsD インスタンスを使うよりも信頼性が高くなります。これを使用するには、ローカルの DogStatD インスタンスの代わりに [Datadog API とアプリケーションのキー][1]を使用してライブラリを構成する必要があります。
+{{< markdownify >}}
+DogStatsD-PHP ライブラリを使用すると、イベントを TCP 経由で直接 Datadog API に送信できます。速度は遅くなりますが、イベントが UDP を使用してアプリケーションから Agent に転送されるため、Agent の DogStatsD インスタンスを使うよりも信頼性が高くなります。これを使用するには、ローカルの DogStatD インスタンスの代わりに [Datadog API とアプリケーションのキー](https://app.datadoghq.com/account/settings#api)を使用してライブラリを構成する必要があります。
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="event_through_api.php" >}}
 <?php
@@ -190,13 +192,14 @@ $statsd->event('An error occurred.',
   );
 {{< /code-block >}}
 
+{{< markdownify >}}
 **注**:
 
 * この方法でイベントを送信する場合は、API リクエストに cURL を使用します。
 * Datadog API との通信の問題によって警告やエラーが出るのを避けるために、`try`/`catch` のコード ブロックを使用する必要があります。
 
-[1]: https://app.datadoghq.com/account/settings#api
-{{% /tab %}}
+{{< /markdownify >}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## その他の参考資料
