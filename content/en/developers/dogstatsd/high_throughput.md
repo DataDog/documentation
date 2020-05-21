@@ -50,7 +50,7 @@ import (
 )
 
 func main() {
-  // In this example, metrics will be buffered by default with the correct default configuration for UDP.
+  // In this example, metrics are buffered by default with the correct default configuration for UDP.
   statsd, err := statsd.New("127.0.0.1:8125")
   if err != nil {
     log.Fatal(err)
