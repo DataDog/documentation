@@ -681,7 +681,7 @@ main:
     pre: nav_tracing
     identifier: tracing
     weight: 120000
-  - name: Enable Trace Collection
+  - name: Agent Configuration
     url: tracing/send_traces/
     identifier: tracing_send_traces
     parent: tracing
