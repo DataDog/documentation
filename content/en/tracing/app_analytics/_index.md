@@ -233,7 +233,7 @@ Or in code:
 Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 ```
 
-Integration names can be found on the [integrations table][1].
+Integration names can be found on the [integrations table][1]. **Note:** On Linux, the names of environment variables are case-sensitive.
 
 [1]: /tracing/setup/dotnet/#integrations
 {{% /tab %}}
@@ -306,7 +306,7 @@ tracer.use('mysql', {
 
 Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example, to enable App Analytics for ADO.NET:
 
-* Environment Variable or AppSetting: `DD_ADONET_ANALYTICS_ENABLED=true`
+* Environment Variable or AppSetting: `DD_AdoNet_ANALYTICS_ENABLED=true`
 
 Or in code:
 
@@ -314,7 +314,7 @@ Or in code:
 Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 ```
 
-Integration names can be found on the [integrations table][1].
+Integration names can be found on the [integrations table][1]. **Note:** On Linux, the names of environment variables are case-sensitive.
 
 [1]: /tracing/setup/dotnet/#integrations
 {{% /tab %}}
