@@ -52,5 +52,5 @@ Airbrake インテグレーションのセットアップには、Webhook を使
 
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/events
-[2]: https://docs.datadoghq.com/ja/help
+[1]: https://docs.datadoghq.com/ja/events/
+[2]: https://docs.datadoghq.com/ja/help/

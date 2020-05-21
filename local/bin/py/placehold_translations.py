@@ -99,6 +99,7 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
         content = o_file.read()
         boundary = re.compile(r'^-{3,}$', re.MULTILINE)
         split = boundary.split(content, 2)
+        new_yml = {}
         if len(split) == 3:
             _, fm, content = split
             new_yml = yaml.load(fm, Loader=yaml.FullLoader)
@@ -109,6 +110,11 @@ def create_placeholder_file(template, new_glob, lang_as_dir, files_location):
         if new_yml.get('aliases', None):
             new_aliases = []
             for alias in new_yml.get('aliases'):
+                # if alias is relative e.g no leading slash we need to resolve its abs path to be able to prepend /lang/
+                # e.g alias 13a-810-14c in security_monitor/default_rules/file.md
+                # becomes /ja/security_monitor/default_rules/13a-810-14c/
+                if not alias.startswith("/"):
+                    alias = f"/{sub_path}{alias}"
                 new_aliases.append('/{0}{1}'.format(new_glob['name'], alias))
             new_yml['aliases'] = new_aliases
         if new_glob["disclaimer"]:

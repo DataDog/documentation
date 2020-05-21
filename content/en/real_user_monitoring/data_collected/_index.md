@@ -80,6 +80,6 @@ In addition to default attributes, you can add your [specific global context][3]
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/attributes_naming_convention
+[1]: /logs/processing/attributes_naming_convention/
 [2]: /logs/processing/attributes_naming_convention/#user-agent-attributes
-[3]: /real_user_monitoring/installation/advanced_configuration
+[3]: /real_user_monitoring/installation/advanced_configuration/

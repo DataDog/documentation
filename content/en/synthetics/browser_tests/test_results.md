@@ -65,5 +65,5 @@ Common failure reasons include:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/trace
-[2]: /help
+[1]: /tracing/visualization/trace/
+[2]: /help/

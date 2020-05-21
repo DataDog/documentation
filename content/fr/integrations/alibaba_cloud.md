@@ -113,4 +113,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][8].
 [5]: https://www.alibabacloud.com/help/doc-detail/26232.htm
 [6]: https://www.alibabacloud.com/help/doc-detail/27582.htm
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/alibaba_cloud/alibaba_cloud_metadata.csv
-[8]: https://docs.datadoghq.com/fr/help
+[8]: https://docs.datadoghq.com/fr/help/

@@ -69,4 +69,4 @@ Bugsnag インテグレーションには、サービスのチェック機能は
 ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 
 [1]: https://bugsnag.com
-[2]: https://docs.datadoghq.com/ja/help
+[2]: https://docs.datadoghq.com/ja/help/

@@ -23,4 +23,4 @@ Sélectionnez un langage ci-dessous pour découvrir comment instrumenter manuell
 
 {{< partial name="apm/apm-manual-instrumentation.html" >}}
 
-[1]: /fr/tracing/visualization
+[1]: /fr/tracing/visualization/

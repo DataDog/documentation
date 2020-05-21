@@ -33,5 +33,5 @@ Vous pouvez également accéder au [sommaire des checks][3] de Datadog et consul
 {{< /whatsnext >}}
 
 [1]: /fr/agent/guide/agent-commands/#agent-status-and-information
-[2]: /fr/integrations/ntp
+[2]: /fr/integrations/ntp/
 [3]: https://app.datadoghq.com/check/summary

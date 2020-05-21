@@ -30,4 +30,4 @@ For v6.15.0+ and v7.15.0+, the Agent supports the configuration option `ec2_use_
 * New hosts (enabling this option works immediately)
 * Hosts already reporting to Datadog. After enabling, message [Datadog support][1] to change the in-app hostname to the EC2 instance-id.
 
-[1]: /help
+[1]: /help/

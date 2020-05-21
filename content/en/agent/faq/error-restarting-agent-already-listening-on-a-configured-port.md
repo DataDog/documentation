@@ -2,7 +2,7 @@
 title: Error Restarting Agent, Already Listening on a Configured Port
 kind: faq
 further_reading:
-- link: "agent/"
+- link: "/agent/"
   tag: "Documentation"
   text: "Learn more about the Datadog Agent"
 ---
@@ -41,4 +41,4 @@ If this doesn't solve your issue, reach out to [Datadog Support][1].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: /help/

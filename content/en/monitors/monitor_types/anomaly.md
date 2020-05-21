@@ -5,13 +5,13 @@ aliases:
     - /guides/anomalies
 description: "Detects anomalous behavior for a metric based on historical data"
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -135,13 +135,13 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 [1]: https://app.datadoghq.com/monitors#create/anomaly
 [2]: /monitors/monitor_types/metric/#define-the-metric
 [3]: /dashboards/functions/algorithms/#anomalies
-[4]: /monitors/faq/how-to-update-anomaly-monitor-timezone
-[5]: /dashboards/functions/rollup
+[4]: /monitors/faq/how-to-update-anomaly-monitor-timezone/
+[5]: /dashboards/functions/rollup/
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
-[8]: /monitors/notifications
-[9]: /api/#monitor-create
+[8]: /monitors/notifications/
+[9]: /api/v1/monitors/#create-a-monitor
 [10]: /monitors/monitor_status/#settings
 [11]: mailto:billing@datadoghq.com
-[12]: /monitors/faq/anomaly-monitor
-[13]: /help
+[12]: /monitors/faq/anomaly-monitor/
+[13]: /help/

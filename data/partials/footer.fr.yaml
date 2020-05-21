@@ -79,6 +79,12 @@ col4:
   - name: instagram
     link: 'https://www.instagram.com/datadoghq/'
     title: Instagram
+  - name: linkedin
+    link: "https://www.LinkedIn.com/company/datadog/"
+    title: "LinkedIn"
   - name: twitter
-    link: 'https://twitter.com/datadoghq'
-    title: Twitter
+    link: "https://twitter.com/datadoghq"
+    title: "Twitter"
+  - name: youtube
+    link: "https://www.youtube.com/channel/UC3lHO0HAZHxPOCYw2edsdPg/"
+    title: "YouTube"

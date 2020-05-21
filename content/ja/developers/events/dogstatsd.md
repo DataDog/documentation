@@ -3,10 +3,10 @@ title: DogStatsD によるイベント
 kind: documentation
 description: データタイプ、タグ付けなど、DogStatsD の機能の概要
 further_reading:
-  - link: developers/dogstatsd
+  - link: /developers/dogstatsd/
     tag: ドキュメント
     text: DogStatsD 入門
-  - link: developers/libraries
+  - link: /developers/libraries/
     tag: ドキュメント
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
   - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
@@ -98,14 +98,18 @@ func main() {
 
 {{< code-block lang="java" filename="event.java" >}}
 import com.timgroup.statsd.Event;
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 
 public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
 
         Event event = Event.builder()
           .withTitle("An error occurred")
@@ -200,5 +204,5 @@ $statsd->event('An error occurred.',
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/developers/dogstatsd
-[2]: /ja/events
+[1]: /ja/developers/dogstatsd/
+[2]: /ja/events/

@@ -99,12 +99,12 @@ If you are using the [Datadog- Win 32 event log Integration][9], the Datadog use
 4. Click *Add* and enter `ddagentuser` -> *Check Names*.
 5. Click *OK* and *Apply*.
 
-[1]: /integrations/activemq
+[1]: /integrations/activemq/
 [2]: /integrations/activemq/#activemq-xml-integration
-[3]: /integrations/cassandra
-[4]: /integrations/java
-[5]: /integrations/presto
-[6]: /integrations/solr
-[7]: /integrations/tomcat
-[8]: /integrations/kafka
-[9]: /integrations/win32_event_log
+[3]: /integrations/cassandra/
+[4]: /integrations/java/
+[5]: /integrations/presto/
+[6]: /integrations/solr/
+[7]: /integrations/tomcat/
+[8]: /integrations/kafka/
+[9]: /integrations/win32_event_log/

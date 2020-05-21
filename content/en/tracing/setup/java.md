@@ -79,12 +79,13 @@ Beta integrations are disabled by default but can be enabled individually.
 | Akka-Http Server        | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                |
 | Finatra Web             | 2.9+       | Fully Supported | `finatra`                                      |
 | Grizzly                 | 2.0+       | [Beta][8]       | `grizzly`                                      |
+| Grizzly-HTTP            | 2.3.20+    | [Beta][8]       | `grizzly-filterchain`                          |
 | Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
-| Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`        |
+| Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
 | Jetty (non-Servlet)     | 8+         | [Beta][8]       | `jetty`, `jetty-8`                             |
 | Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
-| Play                    | 2.3-2.7    | Fully Supported | `play`                                         |
-| Ratpack                 | 1.4+       | Fully Supported | `ratpack`                                      |
+| Play                    | 2.3-2.7    | Fully Supported | `play`, `play-action`                          |
+| Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
 | Spark Java              | 2.3+       | [Beta][8]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
@@ -107,11 +108,12 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 | Framework                | Versions    | Support Type    | Instrumentation Names (used for configuration) |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
-| Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`                                   |
+| Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`, `apache-httpclient`, `apache-http-client` |
 | Apache HTTP Async Client | 4.0+        | Fully Supported | `httpasyncclient`, `apache-httpasyncclient`    |
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
 | Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
 | Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
+| Grizzly HTTP Client      | 1.9+        | Beta[8]         | `grizzly-client`                               |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
@@ -119,9 +121,11 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Java RMI                 | all         | Fully Supported | `rmi`, `rmi-client`, `rmi-server`              |
 | Jax RS Clients           | 2.0+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | Jersey Client            | 1.9+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
-| JMS                      | 1 and 2     | Fully Supported | `jms`                                          |
+| JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
-| OkHTTP                   | 3.0+        | Fully Supported | `okhttp`, `okhttp-3`                           |
+| Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
+| Ning HTTP Client         | 1.9.0+      | Beta[8]         | `ning`                                         |
+| OkHTTP                   | 2.2+        | Fully Supported | `okhttp`, `okhttp-2`,`okhttp-3`                |
 | Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
 | Spring WebClient         | 5.0+        | Fully Supported | `spring-webflux`, `spring-webflux-client`      |
@@ -140,10 +144,11 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Cassandra               | 3.X      | Fully Supported | `cassandra`                                                                              |
 | Elasticsearch Transport | 2.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6}` (pick one) |
 | Elasticsearch Rest      | 5.0-6.x  | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-5`, `elasticsearch-rest-6`    |
-| JDBC                    | N/A      | Fully Supported | `jdbc`                                                                                   |
-| Jedis                   | 1.4+     | Fully Supported | `redis`                                                                                  |
-| Lettuce                 | 5.0+     | Fully Supported | `lettuce`                                                                                |
+| JDBC                    | N/A      | Fully Supported | `jdbc`, `jdbc-datasource`                                                                |
+| Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                         |
+| Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                             |
 | MongoDB                 | 3.0+     | Fully Supported | `mongo`                                                                                  |
+| RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                           |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
@@ -167,15 +172,17 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 `dd-java-agent` includes support for automatically tracing the following other frameworks.
 
-| Framework        | Versions | Support Type    | Instrumentation Names (used for configuration) |
-| ---------------- | -------- | --------------- | ---------------------------------------------- |
-| Dropwizard Views | 0.7+     | Fully Supported | `dropwizard`, `dropwizard-view`                |
-| Hibernate        | 3.5+     | Fully Supported | `hibernate`                                    |
-| Hystrix          | 1.4+     | Fully Supported | `hystrix`                                      |
-| JSP Rendering    | 2.3+     | Fully Supported | `jsp`, `jsp-render`                            |
-| Spring Data      | 1.8+     | Fully Supported | `spring-data`                                  |
-| Spring Scheduling | 3.1+    | Fully Supported | `spring-scheduling`                            |
-| Twilio SDK       | 0+       | Fully Supported | `twilio-sdk`                                   |
+| Framework         | Versions | Support Type    | Instrumentation Names (used for configuration) |
+| ----------------- | -------- | --------------- | ---------------------------------------------- |
+| Dropwizard Views  | 0.7+     | Fully Supported | `dropwizard`, `dropwizard-view`                |
+| Hibernate         | 3.5+     | Fully Supported | `hibernate`, `hibernate-core`                  |
+| Hystrix           | 1.4+     | Fully Supported | `hystrix`                                      |
+| JSP Rendering     | 2.3+     | Fully Supported | `jsp`, `jsp-render`, `jsp-compile`             |
+| Slf4J MDC         | 1+       | Fully Supported | `mdc` (see also configuration for `dd.logs.injection`) |
+| Project Reactor   | 3.1+     | Fully Supported | `reactor-core`                                 |
+| Spring Data       | 1.8+     | Fully Supported | `spring-data`                                  |
+| Spring Scheduling | 3.1+     | Fully Supported | `spring-scheduling`                            |
+| Twilio SDK        | 0+       | Fully Supported | `twilio-sdk`                                   |
 
 Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
 
@@ -196,7 +203,7 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.tags`                              | `DD_TAGS`                              | `null`                            | (Example: `layer:api,team:intake`) A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it will override any env or version tag defined in DD_TAGS. |
 |`dd.env`                              | `DD_ENV`                              | `none`                            | Your application environment (e.g. production, staging, etc.). Available for versions 0.48+.                                                    |
 | `dd.version`                              | `DD_VERSION`                              | `null`                            | Your application version (e.g. 2.5, 202003181415, 1.3-alpha, etc.). Available for versions 0.48+.             |
-| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][11] for details                                   |
+| `dd.logs.injection`                    | `DD_LOGS_INJECTION`                    | false                             | Enabled automatic MDC key injection for Datadog trace and span ids. See [Advanced Usage][10] for details                                   |
 | `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service.name=<SERVICE_NAME>` |
 | `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`                            | (Example: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                                                                                                       |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`                   | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                       |
@@ -204,10 +211,9 @@ The tracer is configured using System Properties and Environment Variables as fo
 | `dd.trace.agent.port`                  | `DD_TRACE_AGENT_PORT`                  | `8126`                            | Port number the Agent is listening on for configured host.                                                                                |
 | `dd.trace.agent.unix.domain.socket`    | `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`    | `null`                            | This can be used to direct trace traffic to a proxy, to later be sent to a remote Datadog Agent.                                                            |
 | `dd.trace.header.tags`                 | `DD_TRACE_HEADER_TAGS`                 | `null`                            | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names. Automatically apply header values as tags on traces.                                                                                                               |
-| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([listed here][10])               | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                            |
+| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([listed here][11])               | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                            |
 | `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code.                                                                                       |
 | `dd.trace.partial.flush.min.spans`     | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`     | `1000`                            | Set a number of partial spans to flush on. Useful to reduce memory overhead when dealing with heavy traffic or long running traces.     |
-| `dd.trace.report-hostname`             | `DD_TRACE_REPORT_HOSTNAME`             | `false`                           | When enabled, it adds the detected hostname to trace metadata                                                                           |
 | `dd.trace.split-by-tags`               | `DD_TRACE_SPLIT_BY_TAGS`               | `null`                            | (Example: `aws.service`) Used to rename spans to be identified with the corresponding service tag                                       |
 | `dd.trace.db.client.split-by-instance` | `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` | `false`                           | When set to `true` db spans get assigned the instance name as the service name                                                                     |
 | `dd.trace.health.metrics.enabled`      | `DD_TRACE_HEALTH_METRICS_ENABLED`      | `false`                           | When set to `true` sends tracer health metrics                                                                                             |
@@ -459,17 +465,17 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/docker/apm
-[2]: /tracing/setup/docker
+[1]: /agent/docker/apm/
+[2]: /tracing/setup/docker/
 [3]: /agent/kubernetes/apm/
 [4]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [5]: https://github.com/DataDog/dd-trace-java/blob/master/CONTRIBUTING.md
 [6]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [7]: http://bytebuddy.net
-[8]: /help
+[8]: /help/
 [9]: https://github.com/DataDog/documentation#outside-contributors
-[10]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[11]: /tracing/connect_logs_and_traces/java
+[10]: /tracing/connect_logs_and_traces/java/
+[11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [12]: /developers/dogstatsd/#setup
 [13]: /agent/docker/#dogstatsd-custom-metrics
 [14]: /developers/dogstatsd/

@@ -64,8 +64,8 @@ If you have any questions about how the Log Management Service satisfies the app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security
-[2]: /logs/log_collection
+[1]: /security/
+[2]: /logs/log_collection/
 [3]: /agent/logs/advanced_log_collection/#filter-logs
 [4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /integrations/amazon_lambda/#log-collection

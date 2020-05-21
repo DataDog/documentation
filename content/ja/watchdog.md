@@ -5,13 +5,13 @@ description: アプリケーションとインフラストラクチャーの潜�
 aliases:
   - /ja/tracing/watchdog
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: ログの収集
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: プロセスの収集
-  - link: tracing
+  - link: /tracing/
     tag: Documentation
     text: トレースの収集
 ---
@@ -27,7 +27,7 @@ Watchdog は、アプリケーションやインフラストラクチャーの�
   * レイテンシー
 
 * インテグレーションによるインフラストラクチャーメトリクス
-  * [システム][1], ホストレベルのメモリ使用量（メモリリーク）、TCP 再送率、など。
+  * [システム][1]、ホストレベルのメモリ使用量（メモリリーク）、TCP 再送率。
   * [Redis][2]
   * [PostgreSQL][3]
   * [NGINX][4]
@@ -101,18 +101,18 @@ Watchdog ストーリーの絞り込みには、タイムレンジ、検索バ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/system
-[2]: /ja/integrations/redis
-[3]: /ja/integrations/postgres
-[4]: /ja/integrations/nginx
-[5]: /ja/integrations/amazon_web_services
-[6]: /ja/integrations/amazon_s3
-[7]: /ja/integrations/amazon_elb
-[8]: /ja/integrations/amazon_cloudfront
-[9]: /ja/integrations/amazon_dynamodb
+[1]: /ja/integrations/system/
+[2]: /ja/integrations/redis/
+[3]: /ja/integrations/postgres/
+[4]: /ja/integrations/nginx/
+[5]: /ja/integrations/amazon_web_services/
+[6]: /ja/integrations/amazon_s3/
+[7]: /ja/integrations/amazon_elb/
+[8]: /ja/integrations/amazon_cloudfront/
+[9]: /ja/integrations/amazon_dynamodb/
 [10]: https://app.datadoghq.com/apm/watchdog
 [11]: /ja/monitors/monitor_types/watchdog/
 [12]: /ja/tracing/send_traces/#configure-your-environment
 [13]: /ja/tracing/guide/setting_primary_tags_to_scope/
 [14]: /ja/tracing/visualization/#services
-[15]: /ja/tracing/visualization/services_list
+[15]: /ja/tracing/visualization/services_list/

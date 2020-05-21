@@ -116,15 +116,15 @@ Vérifiez que le paramètre `url` dans `portworx.yaml` est correctement configur
 
 Consultez [notre blog][12] pour en savoir plus sur la surveillance d'infrastructure et sur toutes les autres intégrations disponibles.
 
-[1]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[1]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
 [2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
 [4]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://docs.datadoghq.com/fr/getting_started/integrations
+[6]: https://docs.datadoghq.com/fr/getting_started/integrations/
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-extras/blob/master/portworx/datadog_checks/portworx/data/conf.yaml.example
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/fr/agent/faq/agent-status-and-information
+[10]: https://docs.datadoghq.com/fr/agent/faq/agent-status-and-information/
 [11]: https://github.com/DataDog/integrations-extras/blob/master/portworx/metadata.csv
 [12]: https://www.datadoghq.com/blog

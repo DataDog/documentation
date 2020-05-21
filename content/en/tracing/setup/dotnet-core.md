@@ -13,10 +13,10 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
     tag: "Blog"
     text: ".NET monitoring with Datadog APM and distributed tracing"
-  - link: "tracing/visualization/"
+  - link: "/tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources and traces"
-  - link: "tracing/"
+  - link: "/tracing/"
     tag: "Advanced Usage"
     text: "Advanced Usage"
 ---
@@ -286,7 +286,7 @@ On Linux:
 # Set environment variables
 export DD_TRACE_AGENT_URL=http://localhost:8126
 export DD_SERVICE_NAME=MyService
-export DD_ADONET_ENABLED=false
+export DD_AdoNet_ENABLED=false
 
 # Launch application
 dotnet example.dll
@@ -337,7 +337,7 @@ The following table lists configuration variables that are available only when u
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations](#integrations) section above.           |
 | `DD_TRACE_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`       | Shorthand that enables default App Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                                     |
 
-The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` propery to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations](#integrations) section above.
+The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` property to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations](#integrations) section above. **Note:** On Linux, the names of environment variables are case-sensitive.
 
 | Setting Name                                                            | Description                                                                                                           |
 |-------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -350,11 +350,11 @@ The following table lists configuration variables that are available only when u
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/send_traces
-[2]: /tracing/setup/dotnet-framework
+[1]: /tracing/send_traces/
+[2]: /tracing/setup/dotnet-framework/
 [3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
 [4]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
-[5]: /help
+[5]: /help/
 [6]: https://www.nuget.org/packages/Datadog.Trace
-[7]: /tracing/manual_instrumentation/dotnet
+[7]: /tracing/manual_instrumentation/dotnet/
 [8]: /tracing/guide/setting_primary_tags_to_scope/#environment

@@ -5,10 +5,10 @@ further_reading:
 - link: "logs/log_collection/#custom-log-collection"
   tag: "Documentation"
   text: "Learn more about Log collection with the Agent"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
 ---

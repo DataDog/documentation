@@ -5,13 +5,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetics"
-- link: "synthetics/api_tests"
+- link: "/synthetics/api_tests/"
   tag: "Documentation"
   text: "Configure an API Test"
-- link: "synthetics/browser_tests"
+- link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
-- link: "synthetics/identify_synthetics_bots"
+- link: "/synthetics/identify_synthetics_bots/"
   tag: "Documentation"
   text: "Identify Synthetics Bots"
 ---
@@ -83,7 +83,7 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/settings
-[2]: /synthetics/private_locations
+[2]: /synthetics/private_locations/
 [3]: /account_management/users/default_roles/
 [4]: /synthetics/api_tests/#use-global-variables
 [5]: /synthetics/browser_tests/#use-global-variables

@@ -12,7 +12,7 @@ To get started with Datadog Security Monitoring, follow these three steps:
 
 ## Ingest logs
 
-Datadog’s [Log Collection documentation][1] provides detailed information on collecting logs from many different sources into Datadog. All ingested logs are first parsed and enriched. In real time, Detection Rules apply to all processed logs to maximize detection coverage without any of the traditionally associated performance or cost concerns of indexing all of your log data. [Read more about Datadog’s Logging without Limits™][2]. 
+Datadog’s [Log Collection documentation][1] provides detailed information on collecting logs from many different sources into Datadog. All ingested logs are first parsed and enriched. In real time, Detection Rules apply to all processed logs to maximize detection coverage without any of the traditionally associated performance or cost concerns of indexing all of your log data. [Read more about Datadog’s Logging without Limits™][2].
 
 {{< img src="security_monitoring/getting_started/ingest_logs_overview.png" alt="Ingest Logs" >}}
 
@@ -22,13 +22,11 @@ Datadog provides out of the box [Detection Rules][3], which begin detecting thre
 
 ## Explore Security Signals
 
-When a threat is detected with a Detection Rule, a Security Signal is generated. The Security Signals can be correlated and triaged in the [Security Signals Explorer][5]. Refer to the [Security Signals Explorer][6] documentation for further details. 
+When a threat is detected with a Detection Rule, a Security Signal is generated. The Security Signals can be correlated and triaged in the [Security Signals Explorer][5]. Refer to the [Security Signals Explorer][6] documentation for further details.
 
-
-
-[1]: /logs/log_collection/?tab=tcpussite
+[1]: /logs/log_collection/
 [2]: https://www.datadoghq.com/blog/logging-without-limits/
-[3]: /security_monitoring/default_rules
-[4]: /security_monitoring/detection_rules
+[3]: /security_monitoring/default_rules/
+[4]: /security_monitoring/detection_rules/
 [5]: https://app.datadoghq.com/security
-[6]: /security_monitoring/explorer
+[6]: /security_monitoring/explorer/

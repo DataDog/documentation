@@ -67,4 +67,4 @@ aliases:
 | `datadog.trace_agent.events.max_eps.current_rate`     | ゲージ     | Agent が受信した 1 秒あたりの APM イベント数                                                     |
 | `datadog.trace_agent.events.max_eps.sample_rate`      | ゲージ     | Agent が受信したイベントに適用されるサンプルレート                                                   |
 
-[1]: /ja/tracing/setup
+[1]: /ja/tracing/setup/

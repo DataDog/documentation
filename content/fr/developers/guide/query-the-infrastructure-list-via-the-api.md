@@ -67,6 +67,6 @@ for host in iterate_all_hosts():
     print(host['host_name'])
 ```
 
-[1]: /fr/api
+[1]: /fr/api/
 [2]: https://app.datadoghq.com/infrastructure
 [3]: https://app.datadoghq.com/infrastructure/map

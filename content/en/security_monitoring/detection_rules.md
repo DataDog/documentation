@@ -2,7 +2,7 @@
 title: Threat Detection Rules
 kind: documentation
 further_reading:
-- link: "/security_monitoring/explorer"
+- link: "/security_monitoring/explorer/"
   tag: "Documentation"
   text: "Search through all of your security signals and perform Security Analytics"
 ---
@@ -133,8 +133,8 @@ Delete a rule by hovering over the rule and clicking the **Delete** button.
 
 
 [1]: /security_monitoring/default_rules/
-[2]: /logs/explorer/search
+[2]: /logs/explorer/search/
 [3]: /monitors/notifications/?tab=is_alert#integrations
-[4]: /monitors/notifications
+[4]: /monitors/notifications/
 [5]: https://app.datadoghq.com/security/configuration/rules
 [6]: https://app.datadoghq.com/security/configuration/rules/new

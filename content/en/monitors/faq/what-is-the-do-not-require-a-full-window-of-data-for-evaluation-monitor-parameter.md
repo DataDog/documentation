@@ -2,7 +2,7 @@
 title: What is the "Do (not) require a full window of data for evaluation" monitor parameter?
 kind: faq
 further_reading:
-- link: "monitors/monitor_types"
+- link: "/monitors/monitor_types/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 ---
@@ -41,4 +41,4 @@ For other scenarios, this **full window of data** doesn't have much influence on
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors
+[1]: /monitors/

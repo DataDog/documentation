@@ -142,11 +142,11 @@ cert_manager n'inclut aucun événement.
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 [1]: https://github.com/jetstack/cert-manager
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [3]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [4]: https://docs.datadoghq.com/fr/agent/kubernetes/daemonset_setup/?tab=k8sfile
 [5]: https://github.com/DataDog/integrations-extras/blob/master/cert_manager/datadog_checks/cert_manager/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/cert_manager/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help
+[9]: https://docs.datadoghq.com/fr/help/

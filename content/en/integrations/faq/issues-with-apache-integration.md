@@ -12,5 +12,5 @@ If it does not, change your permissions for the status URL to allow access from 
 If you still have issues, [reach out to us][2] with [a flare][3]
 
 [1]: http://httpd.apache.org/docs/2.2/mod/mod_status.html
-[2]: /help
-[3]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+[2]: /help/
+[3]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command/

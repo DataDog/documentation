@@ -73,8 +73,8 @@ L'intégration Azure Virtual Machine Scale Sets n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://docs.datadoghq.com/fr/integrations/azure
+[1]: https://docs.datadoghq.com/fr/integrations/azure/
 [2]: https://docs.datadoghq.com/fr/integrations/azure/#deploy-agents
 [3]: https://docs.datadoghq.com/fr/integrations/win32_event_log/#log-collection
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_vm_scale_set/azure_vm_scale_set_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help
+[5]: https://docs.datadoghq.com/fr/help/

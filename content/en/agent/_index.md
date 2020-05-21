@@ -3,16 +3,16 @@ title: Agent
 kind: documentation
 description: Install & configure the Agent to collect data
 further_reading:
-- link: "logs/"
+- link: "/logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "/infrastructure/process"
+- link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Collect your processes"
-- link: "tracing/"
+- link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
-- link: "agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
+- link: "/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
   tag: "Documentation"
   text: "Why install the Agent on cloud instances?"
 - link: "https://www.datadoghq.com/blog/dont-fear-the-agent/"

@@ -1,5 +1,5 @@
 ---
-title: Enable trace collection in Datadog
+title: Agent Configuration
 kind: Documentation
 aliases:
   - /tracing/setup/
@@ -9,10 +9,10 @@ aliases:
   - /tracing/getting_further/first_class_dimensions/
   - /agent/apm/
 further_reading:
-- link: "/tracing/troubleshooting/agent_apm_metrics"
+- link: "/tracing/troubleshooting/agent_apm_metrics/"
   tag: "Documentation"
   text: "APM metrics sent by the Datadog Agent"
-- link: "/agent/docker/apm"
+- link: "/agent/docker/apm/"
   tag: "Documentation"
   text: "Docker APM setup"
 - link: "/integrations/amazon_ecs/#trace-collection"
@@ -84,15 +84,15 @@ Next, [Instrument your application][13]. For the full overview of all of the ste
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/#trace
-[2]: /tracing
+[2]: /tracing/
 [3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[5]: /tracing/send_traces/agent-apm-metrics
-[6]: /agent
+[5]: /tracing/send_traces/agent-apm-metrics/
+[6]: /agent/
 [7]: /integrations/amazon_xray/#overview
 [8]: /agent/basic_agent_usage/heroku/#installation
 [9]: /integrations/cloud_foundry/#trace-collection
 [10]: /tracing/guide/setting_primary_tags_to_scope/#definition
 [11]: /tracing/visualization/#spans
 [12]: /tracing/guide/adding_metadata_to_spans/?tab=java
-[13]: /tracing/setup
+[13]: /tracing/setup/

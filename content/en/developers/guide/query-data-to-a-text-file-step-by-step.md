@@ -37,12 +37,12 @@ If successful, you will see data in the terminal and a file created in your fold
 
 To see additional examples, see our [API documentation][1].
 
-[1]: /api
+[1]: /api/
 [2]: http://docs.python-guide.org/en/latest/starting/install/win
 [3]: /resources/python/api_query_data.py
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://app.datadoghq.com/infrastructure
-[7]: https://docs.datadoghq.com/api/?lang=python#rate-limiting
+[7]: /api/#rate-limiting
 [8]: https://virtualenv.pypa.io/en/stable
 [9]: https://pypi.org/project/datadog

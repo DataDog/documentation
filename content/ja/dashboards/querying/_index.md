@@ -126,13 +126,13 @@ jvm.heap_memory / jvm.heap_memory_max
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/graphing_json
-[2]: /ja/dashboards/widgets
+[1]: /ja/dashboards/graphing_json/
+[2]: /ja/dashboards/widgets/
 [3]: https://app.datadoghq.com/metric/explorer
 [4]: https://app.datadoghq.com/notebook/list
 [5]: https://app.datadoghq.com/metric/summary
-[6]: /ja/tagging
-[7]: /ja/metrics/introduction
-[8]: /ja/dashboards/functions/rollup
+[6]: /ja/tagging/
+[7]: /ja/metrics/introduction/
+[8]: /ja/dashboards/functions/rollup/
 [9]: /ja/dashboards/functions/#apply-functions-optional
 [10]: /ja/events/#event-query-language

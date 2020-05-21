@@ -87,6 +87,6 @@ TRACE_SERVICE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/service
-[2]: /tracing/send_traces
+[1]: /tracing/visualization/service/
+[2]: /tracing/send_traces/
 [3]: /dashboards/graphing_json/widget_json/#time-schema
