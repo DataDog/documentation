@@ -28,17 +28,19 @@ Tagging binds different data types in Datadog, allowing for correlation and call
 | `host`    | Correlation between metrics, traces, processes, and logs              |
 | `device`  | Segregation of metrics, traces, processes, and logs by device or disk |
 | `source`  | Span filtering and automated pipeline creation for log management     |
-| `service` | Correlation between metrics, traces, and logs                         |
+| `service` | Scoping of application specific data across metrics, traces, and logs |
+| `env`     | Scoping of application specific data across metrics, traces, and logs |
+| `version` | Scoping of application specific data across metrics, traces, and logs |
 
 ## Why It Matters
 
-Typically, it's helpful to look at containers, VMs, and cloud infrastructure at the "service" level in aggregate. For example, it's more helpful to look at CPU usage across a collection of hosts that represents a service, rather than CPU usage for server A or server B separately.
+Typically, it's helpful to look at containers, VMs, and cloud infrastructure at the `service` level in aggregate. For example, it's more helpful to look at CPU usage across a collection of hosts that represents a service, rather than CPU usage for server A or server B separately.
 
 Containers and cloud environments regularly churn through hosts, so it is critical to tag these to allow for aggregation of the metrics you're getting.
 
 ## Defining Tags
 
-Below are Datadog's tagging restrictions, requirements, and suggestions:
+Below are Datadog's tagging requirements:
 
 1. Tags must **start with a letter** and after that may contain the characters listed below:
 
@@ -66,35 +68,43 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
 
 6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
 
-## Unified Tagging
+## Assigning Tags
 
-Tags may be assigned using any (or all) of the following methods. Refer to the dedicated [Assigning Tags documentation][3] to learn more:
+### Unified service tagging
+
+As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][3] documentation.
+
+**Note**: Unified service tagging is currently only available for **containerized environments**. For non-containerized environments or containerized environments that require custom or additional configuration, review the tagging methods below.
+
+### Tagging methods
+
+Tags may be assigned using any (or all) of the following methods. Refer to the dedicated [Assigning Tags documentation][4] to learn more:
 
 | Method                       | Assign tags                                                                                  |
 |------------------------------|----------------------------------------------------------------------------------------------|
-| [Configuration Files][4]     | Manually in your main Agent configuration files, or in your integrations configuration file. |
-| [Environment Variables][5]   | Using environment variables for the containerized Agent                                      |
-| [UI][6]                      | In your Datadog platform                                                                     |
-| [API][7]                     | Using Datadog's API                                                                          |
-| [DogStatsD][8]               | When submitting metrics via DogStatsD                                                        |
-| [Integration Inheritance][9] | Automatically with supported integrations after setup                                        |
+| [Configuration Files][5]     | Manually in your main Agent configuration files, or in your integrations configuration file. |
+| [Environment Variables][6]   | Using environment variables for the containerized Agent                                      |
+| [UI][7]                      | In your Datadog platform                                                                     |
+| [API][8]                     | Using Datadog's API                                                                          |
+| [DogStatsD][9]               | When submitting metrics via DogStatsD                                                        |
+| [Integration Inheritance][10] | Automatically with supported integrations after setup                                        |
 
 ## Using Tags
 
-After you have [assigned tags][3] at the host and [integration][10] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. Refer to the dedicated [Using Tags documentation][1] to learn more:
+After you have [assigned tags][4] at the host and [integration][11] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. Refer to the dedicated [Using Tags documentation][1] to learn more:
 
 | Area                 | Use Tags to                                                                                      |
 |----------------------|--------------------------------------------------------------------------------------------------|
-| [Events][11]         | Filter the event stream                                                                          |
-| [Dashboards][12]     | Filter and group metrics on graphs                                                               |
-| [Infrastructure][13] | Filter and group on the host map, infrastructure list, live containers, and live processes views |
-| [Monitors][14]       | Manage monitors, create monitors, or manage downtime                                             |
-| [Metrics][15]        | Filter and group with the metric explorer                                                        |
-| [Integrations][16]   | Optionally limit metrics for AWS, Google Cloud, and Azure                                        |
-| [APM][17]            | Filter App Analytics or jump to other areas with the service map                                 |
-| [Notebooks][18]      | Filter and group metrics on graphs                                                               |
-| [Logs][19]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
-| [Developers][20]     | Pull information or setup different areas in the UI with the API                                 |
+| [Events][12]         | Filter the event stream                                                                          |
+| [Dashboards][13]     | Filter and group metrics on graphs                                                               |
+| [Infrastructure][14] | Filter and group on the host map, infrastructure list, live containers, and live processes views |
+| [Monitors][15]       | Manage monitors, create monitors, or manage downtime                                             |
+| [Metrics][16]        | Filter and group with the metric explorer                                                        |
+| [Integrations][17]   | Optionally limit metrics for AWS, Google Cloud, and Azure                                        |
+| [APM][18]            | Filter App Analytics or jump to other areas with the service map                                 |
+| [Notebooks][19]      | Filter and group metrics on graphs                                                               |
+| [Logs][20]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
+| [Developers][21]     | Pull information or setup different areas in the UI with the API                                 |
 
 ### Further Reading
 
@@ -102,21 +112,22 @@ After you have [assigned tags][3] at the host and [integration][10] level, start
 
 [1]: /tagging/using_tags/
 [2]: /developers/metrics/
-[3]: /tagging/assigning_tags/
-[4]: /tagging/assigning_tags/#configuration-files
-[5]: /tagging/assigning_tags/#environment-variables
-[6]: /tagging/assigning_tags/#ui
-[7]: /tagging/assigning_tags/#api
-[8]: /tagging/assigning_tags/#dogstatsd
-[9]: /tagging/assigning_tags/#integration-inheritance
-[10]: /integrations/
-[11]: /tagging/using_tags/#events
-[12]: /tagging/using_tags/#dashboards
-[13]: /tagging/using_tags/#infrastructure
-[14]: /tagging/using_tags/#monitors
-[15]: /tagging/using_tags/#metrics
-[16]: /tagging/using_tags/#integrations
-[17]: /tagging/using_tags/#apm
-[18]: /tagging/using_tags/#notebooks
-[19]: /tagging/using_tags/#logs
-[20]: /tagging/using_tags/#developers
+[3]: /tagging/unified_service_tagging
+[4]: /tagging/assigning_tags/
+[5]: /tagging/assigning_tags/#configuration-files
+[6]: /tagging/assigning_tags/#environment-variables
+[7]: /tagging/assigning_tags/#ui
+[8]: /tagging/assigning_tags/#api
+[9]: /tagging/assigning_tags/#dogstatsd
+[10]: /tagging/assigning_tags/#integration-inheritance
+[11]: /integrations/
+[12]: /tagging/using_tags/#events
+[13]: /tagging/using_tags/#dashboards
+[14]: /tagging/using_tags/#infrastructure
+[15]: /tagging/using_tags/#monitors
+[16]: /tagging/using_tags/#metrics
+[17]: /tagging/using_tags/#integrations
+[18]: /tagging/using_tags/#apm
+[19]: /tagging/using_tags/#notebooks
+[20]: /tagging/using_tags/#logs
+[21]: /tagging/using_tags/#developers
