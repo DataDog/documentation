@@ -39,11 +39,7 @@ Here are a few examples for [official DogStatsD supported clients][3]:
 {{< tabs >}}
 {{% tab "Go" %}}
 
-By default the Datadog's official Golang library [DataDog/datadog-go][1] uses
-buffering. The size of each packets and number of messages in it will use a
-different default for `UDS` and `UDP`. See [DataDog/datadog-go][1] for more
-information about the client configuration.
-.
+By default, Datadog's official Golang library [DataDog/datadog-go][1] uses buffering. The size of each packet and the number of messages use different default values for `UDS` and `UDP`. See [DataDog/datadog-go][1] for more information about the client configuration.
 
 ```go
 package main
