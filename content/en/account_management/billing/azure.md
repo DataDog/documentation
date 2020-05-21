@@ -14,7 +14,7 @@ The Azure integration will collect metrics for all other Azure resources (Azure 
 
 Use the Datadog-Azure integration tile to filter your VMs monitored by Datadog. Go to the Configuration tab and edit an existing App Registration or add a new one. Each filter is controlled under “Optionally limit metrics collection to hosts with tag:”
 
-When adding limits to existing Azure tenants within the integration tile, the previously discovered VMs could stay in the Infrastructure List up to 2 hours. During the transition period, VMs display a status of `???`. This does not count towards your billing.
+When adding limits to existing Azure tenants within the integration tile, the previously discovered VMs could stay in the Infrastructure List up to two hours. During the transition period, VMs display a status of `???`. This does not count towards your billing.
 
 VMs with a running Agent still display and are included in billing. Using the limit option is only applicable to VMs without a running Agent.
 
