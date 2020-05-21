@@ -69,9 +69,7 @@ If you can't find your distribution, you can [manually install][10] the PHP exte
 
 Tracing is automatically enabled by default. Once the extension is installed, **ddtrace** traces your application and sends traces to the Agent.
 
-Datadog supports all web frameworks out of the box. For specific web frameworks listed below, more internal details are provided automatically.
-
-Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods in order to trace them. The PHP tracer supports automatic instrumentation for [several libraries](#library-compatibility).
+Datadog supports all web frameworks out of the box. Automatic instrumentation works by modifying PHP's runtime to wrap certain functions and methods in order to trace them. The PHP tracer supports automatic instrumentation for [several libraries](#library-compatibility).
 
 Automatic instrumentation captures:
 
@@ -116,31 +114,33 @@ PHP APM supports the following SAPI's:
 
 #### Web Framework Compatibility
 
-By default Datadog **supports all web frameworks** out of the box, which allows you to see traces for spans of supported libraries, for example: database and http clients.
+By default Datadog **supports all PHP web frameworks** out of the box, which allows you to see traces for spans of supported libraries, for example: database and http clients.
 
-For an ever growing number of web frameworks, Datadog provides more visibility into the framework internals.
+For an ever growing number of web frameworks, here is a brief extract of frameworks and versions Datadog succesfully traces.
 
-**Web frameworks with deeper visibility**:
+**Web frameworks**:
 
-| Module         | Versions      | Support Type    |
-|:---------------|:--------------|:----------------|
-| CakePHP        | 2.x           | Fully Supported |
-| CodeIgniter    | 2.x           | PHP 7+          |
-| Laravel        | 4.2, 5.x      | Fully Supported |
-| Lumen          | 5.2+          | Fully Supported |
-| Slim           | 3.x           | Fully Supported |
-| Symfony        | 3.3, 3.4, 4.x | Fully Supported |
-| WordPress      | 4.x           | PHP 7+          |
-| Zend Framework | 1.12          | Fully Supported |
-| Yii            | 2.0           | Fully Supported |
-| CodeIgniter    | 3.x           | _Coming Soon_   |
-| Drupal         |               | _Coming Soon_   |
-| Magento        | 2             | _Coming Soon_   |
-| Phalcon        | 1.3, 3.4      | _Coming Soon_   |
-| Slim           | 2.x           | _Coming Soon_   |
-| Yii            | 1.1           | _Coming Soon_   |
+| Module         | Versions      | Support Type               |
+|:---------------|:--------------|:---------------------------|
+| CakePHP        | 2.x           | All supported PHP versions |
+| CodeIgniter    | 2.x, 3.x      | PHP 7+                     |
+| Laravel        | 4.2, 5.x, 6.x | All supported PHP versions |
+| Lumen          | 5.2+          | All supported PHP versions |
+| Slim           | 3.x           | All supported PHP versions |
+| Symfony        | 3.3, 3.4, 4.x | All supported PHP versions |
+| WordPress      | 4.x, 5.x      | PHP 7+                     |
+| Zend Framework | 1.12          | All supported PHP versions |
+| Yii            | 1.1, 2.0      | All supported PHP versions |
+| Drupal         |               | All supported PHP versions |
+| Magento        | 2             | All supported PHP versions |
+| Phalcon        | 1.3, 3.4      | All supported PHP versions |
+| Slim           | 2.x           | All supported PHP versions |
+| Neos Flow      | 1.1           | All supported PHP versions |
+| FuelPHP        | 1.1           | PHP 7+                     |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. Check with the [Datadog team][12] for help.
+Note that even if you don't see your web framework in this list, it will be supported out-of-the-box with the latest release of tracer.
+
+Want to see more span metadata and framework internals? We're continously adding more support for in-depth tracing for PHP web-frameworks. Check with the [Datadog team][12] for help.
 
 #### CLI Library Compatibility
 
