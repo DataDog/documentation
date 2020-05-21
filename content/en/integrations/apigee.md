@@ -23,24 +23,25 @@ further_reading:
 
 ## Overview
 
-Collect Apigee proxy logs to track errors, request response time, duration, latency and monitor performance and issues of the proxies aggregated in one place.
+Collect Apigee proxy logs to track errors, request response time, duration, latency and monitor performance, and proxy issues aggregated in one place.
+
 ## Setup
 
 #### Log Collection
 
 
-Collect Apigee proxy logs to Datadog using Apigee [JavaScript policy](https://docs.apigee.com/api-platform/reference/policies/javascript-policy).
+Send Apigee proxy logs to Datadog using Apigee's [JavaScript policy][1].
 
-The JavaScript has been configured to capture the essential flow variables as log attributes in Datadog. The attributes are named according to the list of standard [attributes](https://docs.datadoghq.com/logs/processing/attributes_naming_convention/#naming-conventions).
+The JavaScript has been configured to capture the essential flow variables as log attributes in Datadog. The attributes are named according to the [list of standard attributes][2].
 
-##### Setup JavaScript policy to collect Apigee logs to datadog
+##### Set up JavaScript policy to send Apigee logs to Datadog
 1. Select the Apigee proxy from which you want to send logs to Datadog.
-2. In the selected proxy overview page click on 'DEVELOP' tab located in the top-right corner.
+2. In the selected proxy overview page, click on the 'DEVELOP' tab located in the top-right corner.
 
-![](https://p-qKFgO2.t2.n0.cdn.getcloudapp.com/items/yAu2BD0m/Image%202020-05-14%20at%202.00.05%20PM.png?v=97a327a0ac87aa84264599adbcff264b)
+{{< img src="integrations/apigee/apigee_develop.png" alt="Develop"  style="width:75%;">}}
 
-3. Under 'Navigator' add new JavaScript policy. Then edit the JavaScript file that has been created under 'Resources --> jsc' drop down.
-4. Add the following JavaScript code snippet in it (Make sure to set Datadog **API KEY** in `dd_api_url` variable) - 
+3. Under 'Navigator', go to add a new JavaScript policy. Then edit the JavaScript file that has been created under the 'Resources --> jsc' drop down.
+4. Add the following JavaScript code snippet in it. Make sure to set your Datadog **API KEY** in the `dd_api_url` variable.
 
 ```
 // Set the Datadog API URL here.
@@ -119,14 +120,17 @@ var myLoggingRequest = new Request(dd_api_url, "POST", headers, JSON.stringify(l
 httpClient.send(myLoggingRequest);
 ```
 
-**Note**: Add more Flow variables into JavaScript from official [Apigee Flow Variable documentation](https://docs.apigee.com/api-platform/reference/variables-reference).
+**Note**: Add more flow variables into JavaScript from official [Apigee flow variable documentation][3].
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][1].
+Need help? Contact [Datadog support][4].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
+[1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
+[2]: https://docs.datadoghq.com/logs/processing/attributes_naming_convention/#naming-conventions
+[3]: https://docs.apigee.com/api-platform/reference/variables-reference
+[4]: /help/
