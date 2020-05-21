@@ -66,7 +66,7 @@ Below are Datadog's tagging restrictions, requirements, and suggestions:
 
 6. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
 
-## Assigning Tags
+## Unified Tagging
 
 Tags may be assigned using any (or all) of the following methods. Refer to the dedicated [Assigning Tags documentation][3] to learn more:
 

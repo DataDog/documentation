@@ -17,13 +17,15 @@ further_reading:
 
 Tagging is used throughout Datadog to query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding problems in your environment and narrowing them down enough to discover the true causes could be difficult. Learn how to [define tags][1] in Datadog before going further.
 
-There are several places tags can be assigned: [configuration files](#configuration-files), [environment variables][2], your [traces](#traces), the Datadog [UI](#ui), [API][3], [DogStatsD][4], and inheriting from the [integrations][5]. It is recommended that you use configuration files and integration inheritance for most of your tagging needs.
+**It is recommended that you use [configuration files](#configuration-files) and [integration inheritance](#integration-inheritance) for most of your tagging needs.**
+
+However, there are several ways other ways tags can be assigned: through [environment variables][2], in your [traces](#traces), within the Datadog [UI](#ui), by using the [API][3], or [DogStatsD][4].
 
 ## Configuration Files
 
 ### Hostname
 
-The hostname (tag key `host`) is [assigned automatically][6] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
+The hostname (tag key `host`) is [assigned automatically][5] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
 
 ```yaml
 # Set the hostname (default: auto-detected)
@@ -36,7 +38,7 @@ hostname: mymachine.mydomain
 
 * The old hostname remains in the UI for 2 hours but does not show new metrics.
 * Any data from hosts with the old hostname can be queried with the API.
-* To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][7].
+* To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][6].
 
 ### Add tags
 
@@ -57,7 +59,7 @@ tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
 {{% /tab %}}
 {{< /tabs >}}
 
-Tags for the [integrations][5] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][8].
+Tags for the [integrations][7] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][8].
 
 #### YAML formats
 
@@ -80,7 +82,9 @@ It is recommended to assign tags as `<KEY>:<VALUE>` pairs, but tags only consist
 
 ## Environment Variables
 
-When installing the containerized Datadog Agent, set your host tags using the environment variable `DD_TAGS`. We automatically collect common tags from [Docker][9], [Kubernetes][10], [ECS][11], [Swarm, Mesos, Nomad, and Rancher][9]. To extract even more tags, use the following options:
+When installing the containerized Datadog Agent, set your host tags using the environment variable `DD_TAGS`. As a best practice, **Datadog recommends using [unified service tagging for containerized environments][9].**
+
+Datadog automatically collects common tags from [Docker][10], [Kubernetes][11], [ECS][12], [Swarm, Mesos, Nomad, and Rancher][10]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                    |
 |------------------------------------|------------------------------------------------|
@@ -111,7 +115,11 @@ When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker
 DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
-When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is very important. If the container needs to be labeled then place the `labels:` keyword **inside** the `services:` section **not** inside the `deploy:` section. Place the `labels:` keyword inside the `deploy:` section only when the service needs to be labeled. The Datadog Agent does not have any labels to extract from the containers without this placement. Below is a sample, working `docker-compose.yaml` file that shows this. In the example below, the labels in the `myapplication:` section, `my.custom.label.project` and `my.custom.label.version` each have unique values. Using the `DD_DOCKER_LABELS_AS_TAGS` environment variable in the `datadog:` section extracts the labels and produces these tags for the `myapplication` container:
+When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is very important. To avoid issues, follow the [Docker unified service tagging] documentation.
+
+ If the container needs to be labeled outside of this configuration, place the `labels:` keyword **inside** the `services:` section **not** inside the `deploy:` section. Place the `labels:` keyword inside the `deploy:` section only when the service needs to be labeled. The Datadog Agent does not have any labels to extract from the containers without this placement.
+
+Below is a sample, working `docker-compose.yaml` file that shows this. In the example below, the labels in the `myapplication:` section, `my.custom.label.project` and `my.custom.label.version` each have unique values. Using the `DD_DOCKER_LABELS_AS_TAGS` environment variable in the `datadog:` section extracts the labels and produces these tags for the `myapplication` container:
 
 Inside the `myapplication` container the labels are: `my.custom.label.project` and `my.custom.label.version`
 
@@ -160,9 +168,11 @@ Setting the variable to `high` additionally adds the following tags: `container_
 
 ## Traces
 
+**Note**: As a best practice for containerized environments, **Datadog recommends using [unified service tagging for traces][9].**
+
 When submitting a single trace, tag its spans to override Agent configuration tags and/or the host tags value (if any) for those traces:
 
-The following examples use the default [primary tag][12] `env:<ENVIRONMENT>` but you can use any `<KEY>:<VALUE>` tag instead.
+The following examples use the default [primary tag][13] `env:<ENVIRONMENT>` but you can use any `<KEY>:<VALUE>` tag instead.
 
 {{< tabs >}}
 {{% tab "Go" %}}
@@ -291,6 +301,8 @@ Tags can be assigned in various ways with the [Datadog API][1]. See the list bel
 * [Add][8] or [Update][9] host tags
 * [Send traces][10]
 
+As a best practice, **Datadog recommends using [unified service tagging for containerized environments][11].**
+
 [1]: /api/
 [2]: /api/v1/service-checks/#submit-a-service-check
 [3]: /api/v1/events/#post-an-event
@@ -301,6 +313,7 @@ Tags can be assigned in various ways with the [Datadog API][1]. See the list bel
 [8]: /api/v1/tags/#add-tags-to-a-host
 [9]: /api/v1/tags/#update-host-tags
 [10]: /api/v1/tracing/
+[11]: /tagging/unified_service_tagging
 {{% /tab %}}
 {{% tab "Example" %}}
 
@@ -348,17 +361,19 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-**Note**: Tagging is a [Datadog-specific extension][13] to StatsD.
+**Note**: Tagging is a [Datadog-specific extension][14] to StatsD.
 
-Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][14].
+Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][15].
 
 ## Integration inheritance
 
 The most efficient method for assigning tags is to rely on integration inheritance. Tags you assign to your AWS instances, Chef recipes, and other integrations are automatically inherited by hosts and metrics you send to Datadog.
 
+**As a best practice, it's recommended to set tags in your integration platform based on the guidelines for [unified service tagging for containerized environments][9].**
+
 ### Cloud integrations
 
-Cloud integrations are authentication based. Datadog recommends using the main cloud integration tile (AWS, Azure, Google Cloud, etc.) and [installing the Agent][15] where possible. **Note**: If you choose to use the Agent only, some integration tags are not available.
+Cloud integrations are authentication based. Datadog recommends using the main cloud integration tile (AWS, Azure, Google Cloud, etc.) and [installing the Agent][16] where possible. **Note**: If you choose to use the Agent only, some integration tags are not available.
 
 #### Amazon Web Services
 
@@ -367,42 +382,42 @@ The following tags are collected from AWS integrations. **Note**: Some tags only
 | Integration            | Datadog Tag Keys                                                                                                                                                                                              |
 |------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | All                    | `region`                                                                                                                                                                                                      |
-| [API Gateway][16]      | `apiid`, `apiname`, `method`, `resource`, `stage`                                                                                                                                                             |
-| [Auto Scaling][17]     | `autoscalinggroupname`, `autoscaling_group`                                                                                                                                                                   |
-| [Billing][18]          | `account_id`, `budget_name`, `budget_type`, `currency`, `servicename`, `time_unit`                                                                                                                            |
-| [CloudFront][19]       | `distributionid`                                                                                                                                                                                              |
+| [API Gateway][17]      | `apiid`, `apiname`, `method`, `resource`, `stage`                                                                                                                                                             |
+| [Auto Scaling][18]     | `autoscalinggroupname`, `autoscaling_group`                                                                                                                                                                   |
+| [Billing][19]          | `account_id`, `budget_name`, `budget_type`, `currency`, `servicename`, `time_unit`                                                                                                                            |
+| [CloudFront][20]       | `distributionid`                                                                                                                                                                                              |
 | CodeBuild              | `project_name`                                                                                                                                                                                                |
-| [CodeDeploy][20]       | `application`, `creator`, `deployment_config`, `deployment_group`, `deployment_option`, `deployment_type`, `status`                                                                                           |
-| [DirectConnect][21]    | `connectionid`                                                                                                                                                                                                |
-| [DynamoDB][22]         | `globalsecondaryindexname`, `operation`, `streamlabel`, `tablename`                                                                                                                                           |
-| [EBS][23]              | `volumeid`, `volume-name`, `volume-type`                                                                                                                                                                      |
-| [EC2][24]              | `autoscaling_group`, `availability-zone`, `image`, `instance-id`, `instance-type`, `kernel`, `name`, `security_group_name`                                                                                    |
-| [ECS][25]              | `clustername`, `servicename`, `instance_id`                                                                                                                                                                   |
-| [EFS][26]              | `filesystemid`                                                                                                                                                                                                |
-| [ElastiCache][27]      | `cachenodeid`, `cache_node_type`, `cacheclusterid`, `cluster_name`, `engine`, `engine_version`, `prefered_availability-zone`, `replication_group`                                                             |
-| [ElasticBeanstalk][28] | `environmentname`, `enviromentid`                                                                                                                                                                             |
-| [ELB][29]              | `availability-zone`, `hostname`, `loadbalancername`, `name`, `targetgroup`                                                                                                                                    |
-| [EMR][30]              | `cluster_name`, `jobflowid`                                                                                                                                                                                   |
-| [ES][31]               | `dedicated_master_enabled`, `ebs_enabled`, `elasticsearch_version`, `instance_type`, `zone_awareness_enabled`                                                                                                 |
-| [Firehose][32]         | `deliverystreamname`                                                                                                                                                                                          |
-| [Health][33]           | `event_category`, `status`, `service`                                                                                                                                                                         |
-| [IoT][34]              | `actiontype`, `protocol`, `rulename`                                                                                                                                                                          |
-| [Kinesis][35]          | `streamname`, `name`, `state`                                                                                                                                                                                 |
-| [KMS][36]              | `keyid`                                                                                                                                                                                                       |
-| [Lambda][37]           | `functionname`, `resource`, `executedversion`, `memorysize`, `runtime`                                                                                                                                        |
-| [Machine Learning][38] | `mlmodelid`, `requestmode`                                                                                                                                                                                    |
-| [MQ][39]               | `broker`, `queue`, `topic`                                                                                                                                                                                    |
-| [OpsWorks][40]         | `stackid`, `layerid`, `instanceid`                                                                                                                                                                            |
-| [Polly][41]            | `operation`                                                                                                                                                                                                   |
-| [RDS][42]              | `auto_minor_version_upgrade`, `dbinstanceclass`, `dbclusteridentifier`, `dbinstanceidentifier`, `dbname`, `engine`, `engineversion`, `hostname`, `name`, `publicly_accessible`, `secondary_availability-zone` |
-| [Redshift][43]         | `clusteridentifier`, `latency`, `nodeid`, `service_class`, `stage`, `wlmid`                                                                                                                                   |
-| [Route 53][44]         | `healthcheckid`                                                                                                                                                                                               |
-| [S3][45]               | `bucketname`, `filterid`, `storagetype`                                                                                                                                                                       |
-| [SES][46]              | Tag keys are custom set in AWS.                                                                                                                                                                               |
-| [SNS][47]              | `topicname`                                                                                                                                                                                                   |
-| [SQS][48]              | `queuename`                                                                                                                                                                                                   |
-| [VPC][49]              | `nategatewayid`, `vpnid`, `tunnelipaddress`                                                                                                                                                                   |
-| [WorkSpaces][50]       | `directoryid`, `workspaceid`                                                                                                                                                                                  |
+| [CodeDeploy][21]       | `application`, `creator`, `deployment_config`, `deployment_group`, `deployment_option`, `deployment_type`, `status`                                                                                           |
+| [DirectConnect][22]    | `connectionid`                                                                                                                                                                                                |
+| [DynamoDB][23]         | `globalsecondaryindexname`, `operation`, `streamlabel`, `tablename`                                                                                                                                           |
+| [EBS][24]              | `volumeid`, `volume-name`, `volume-type`                                                                                                                                                                      |
+| [EC2][25]              | `autoscaling_group`, `availability-zone`, `image`, `instance-id`, `instance-type`, `kernel`, `name`, `security_group_name`                                                                                    |
+| [ECS][26]              | `clustername`, `servicename`, `instance_id`                                                                                                                                                                   |
+| [EFS][27]              | `filesystemid`                                                                                                                                                                                                |
+| [ElastiCache][28]      | `cachenodeid`, `cache_node_type`, `cacheclusterid`, `cluster_name`, `engine`, `engine_version`, `prefered_availability-zone`, `replication_group`                                                             |
+| [ElasticBeanstalk][29] | `environmentname`, `enviromentid`                                                                                                                                                                             |
+| [ELB][30]              | `availability-zone`, `hostname`, `loadbalancername`, `name`, `targetgroup`                                                                                                                                    |
+| [EMR][31]              | `cluster_name`, `jobflowid`                                                                                                                                                                                   |
+| [ES][32]               | `dedicated_master_enabled`, `ebs_enabled`, `elasticsearch_version`, `instance_type`, `zone_awareness_enabled`                                                                                                 |
+| [Firehose][33]         | `deliverystreamname`                                                                                                                                                                                          |
+| [Health][34]           | `event_category`, `status`, `service`                                                                                                                                                                         |
+| [IoT][35]              | `actiontype`, `protocol`, `rulename`                                                                                                                                                                          |
+| [Kinesis][36]          | `streamname`, `name`, `state`                                                                                                                                                                                 |
+| [KMS][37]              | `keyid`                                                                                                                                                                                                       |
+| [Lambda][38]           | `functionname`, `resource`, `executedversion`, `memorysize`, `runtime`                                                                                                                                        |
+| [Machine Learning][39] | `mlmodelid`, `requestmode`                                                                                                                                                                                    |
+| [MQ][40]               | `broker`, `queue`, `topic`                                                                                                                                                                                    |
+| [OpsWorks][41]         | `stackid`, `layerid`, `instanceid`                                                                                                                                                                            |
+| [Polly][42]            | `operation`                                                                                                                                                                                                   |
+| [RDS][43]              | `auto_minor_version_upgrade`, `dbinstanceclass`, `dbclusteridentifier`, `dbinstanceidentifier`, `dbname`, `engine`, `engineversion`, `hostname`, `name`, `publicly_accessible`, `secondary_availability-zone` |
+| [Redshift][44]         | `clusteridentifier`, `latency`, `nodeid`, `service_class`, `stage`, `wlmid`                                                                                                                                   |
+| [Route 53][45]         | `healthcheckid`                                                                                                                                                                                               |
+| [S3][46]               | `bucketname`, `filterid`, `storagetype`                                                                                                                                                                       |
+| [SES][47]              | Tag keys are custom set in AWS.                                                                                                                                                                               |
+| [SNS][48]              | `topicname`                                                                                                                                                                                                   |
+| [SQS][49]              | `queuename`                                                                                                                                                                                                   |
+| [VPC][50]              | `nategatewayid`, `vpnid`, `tunnelipaddress`                                                                                                                                                                   |
+| [WorkSpaces][51]       | `directoryid`, `workspaceid`                                                                                                                                                                                  |
 
 #### Azure
 
@@ -422,7 +437,7 @@ Azure integration metrics, events, and service checks receive the following tags
 
 #### Google Cloud Platform
 
-See the [Google Cloud Platform integration][51] documentation.
+See the [Google Cloud Platform integration][52] documentation.
 
 ### Web integrations
 
@@ -436,50 +451,51 @@ Web integrations are authentication based. Metrics are collected with API calls.
 [2]: /agent/docker/#environment-variables
 [3]: /api/
 [4]: /developers/metrics/dogstatsd_metrics_submission/
-[5]: /integrations/
-[6]: /agent/faq/how-datadog-agent-determines-the-hostname/
-[7]: /dashboards/querying/#arithmetic-between-two-metrics
+[5]: /agent/faq/how-datadog-agent-determines-the-hostname/
+[6]: /dashboards/querying/#arithmetic-between-two-metrics
+[7]: /integrations/
 [8]: /agent/guide/agent-configuration-files/
-[9]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
-[10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
-[11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[12]: /tracing/guide/setting_primary_tags_to_scope/
-[13]: /libraries/
-[14]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
-[15]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-[16]: /integrations/amazon_api_gateway/
-[17]: /integrations/amazon_auto_scaling/
-[18]: /integrations/amazon_billing/
-[19]: /integrations/amazon_cloudfront/
-[20]: /integrations/amazon_codedeploy/
-[21]: /integrations/amazon_directconnect/
-[22]: /integrations/amazon_dynamodb/
-[23]: /integrations/amazon_ebs/
-[24]: /integrations/amazon_ec2/
-[25]: /integrations/amazon_ecs/
-[26]: /integrations/amazon_efs/
-[27]: /integrations/amazon_elasticache/
-[28]: /integrations/amazon_elasticbeanstalk/
-[29]: /integrations/amazon_elb/
-[30]: /integrations/amazon_emr/
-[31]: /integrations/amazon_es/
-[32]: /integrations/amazon_firehose/
-[33]: /integrations/amazon_health/
-[34]: /integrations/amazon_iot/
-[35]: /integrations/amazon_kinesis/
-[36]: /integrations/amazon_kms/
-[37]: /integrations/amazon_lambda/
-[38]: /integrations/amazon_machine_learning/
-[39]: /integrations/amazon_mq/
-[40]: /integrations/amazon_ops_works/
-[41]: /integrations/amazon_polly/
-[42]: /integrations/amazon_rds/
-[43]: /integrations/amazon_redshift/
-[44]: /integrations/amazon_route53/
-[45]: /integrations/amazon_s3/
-[46]: /integrations/amazon_ses/
-[47]: /integrations/amazon_sns/
-[48]: /integrations/amazon_sqs/
-[49]: /integrations/amazon_vpc/
-[50]: /integrations/amazon_workspaces/
-[51]: /integrations/google_cloud_platform/#tags-assigned
+[9]: /tagging/unified_service_tagging
+[10]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
+[11]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
+[12]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
+[13]: /tracing/guide/setting_primary_tags_to_scope/
+[14]: /libraries/
+[15]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[16]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+[17]: /integrations/amazon_api_gateway/
+[18]: /integrations/amazon_auto_scaling/
+[19]: /integrations/amazon_billing/
+[20]: /integrations/amazon_cloudfront/
+[21]: /integrations/amazon_codedeploy/
+[22]: /integrations/amazon_directconnect/
+[23]: /integrations/amazon_dynamodb/
+[24]: /integrations/amazon_ebs/
+[25]: /integrations/amazon_ec2/
+[26]: /integrations/amazon_ecs/
+[27]: /integrations/amazon_efs/
+[28]: /integrations/amazon_elasticache/
+[29]: /integrations/amazon_elasticbeanstalk/
+[30]: /integrations/amazon_elb/
+[31]: /integrations/amazon_emr/
+[32]: /integrations/amazon_es/
+[33]: /integrations/amazon_firehose/
+[34]: /integrations/amazon_health/
+[35]: /integrations/amazon_iot/
+[36]: /integrations/amazon_kinesis/
+[37]: /integrations/amazon_kms/
+[38]: /integrations/amazon_lambda/
+[39]: /integrations/amazon_machine_learning/
+[40]: /integrations/amazon_mq/
+[41]: /integrations/amazon_ops_works/
+[42]: /integrations/amazon_polly/
+[43]: /integrations/amazon_rds/
+[44]: /integrations/amazon_redshift/
+[45]: /integrations/amazon_route53/
+[46]: /integrations/amazon_s3/
+[47]: /integrations/amazon_ses/
+[48]: /integrations/amazon_sns/
+[49]: /integrations/amazon_sqs/
+[50]: /integrations/amazon_vpc/
+[51]: /integrations/amazon_workspaces/
+[52]: /integrations/google_cloud_platform/#tags-assigned
