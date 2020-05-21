@@ -39,30 +39,26 @@ Here are a few examples for [official DogStatsD supported clients][3]:
 {{< tabs >}}
 {{% tab "Go" %}}
 
-By using Datadog's official Golang library [datadog-go][1], the example below creates a buffered DogStatsD client instance with `256` maximum buffered metrics which means that all metrics sent from this instance of the client are buffered and sent in packets containing a maximum of `256` metrics:
+By default, Datadog's official Golang library [DataDog/datadog-go][1] uses buffering. The size of each packet and the number of messages use different default values for `UDS` and `UDP`. See [DataDog/datadog-go][1] for more information about the client configuration.
 
 ```go
 package main
 
 import (
-	"log"
-	"github.com/DataDog/datadog-go/statsd"
+        "log"
+        "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-
-  statsd, err := statsd.New("127.0.0.1:8125",
-                 statsd.Buffered(),
-                 statsd.WithMaxMessagesPerPayload(256),
-                )
-	if err != nil {
-    		log.Fatal(err)
-	}
+  // In this example, metrics are buffered by default with the correct default configuration for UDP.
+  statsd, err := statsd.New("127.0.0.1:8125")
+  if err != nil {
+    log.Fatal(err)
+  }
 
   statsd.Gauge("example_metric.gauge", 1, []string{"env:dev"}, 1)
 }
 ```
-
 
 [1]: https://github.com/DataDog/datadog-go
 {{% /tab %}}
