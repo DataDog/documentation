@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Collect Apigee proxy logs to track errors, request response time, duration, latency and monitor performance, and proxy issues aggregated in one place.
+Collect Apigee proxy logs to track errors, response time, duration, latency and monitor performance, and proxy issues aggregated in one place.
 
 ## Setup
 
@@ -40,7 +40,7 @@ The JavaScript has been configured to capture the essential flow variables as lo
 
 {{< img src="integrations/apigee/apigee_develop.png" alt="Develop"  style="width:75%;">}}
 
-3. Under 'Navigator', go to add a new JavaScript policy. Then edit the JavaScript file that has been created under the 'Resources --> jsc' drop down.
+3. Under 'Navigator', go to add a new JavaScript policy. Then edit the JavaScript file that has been created under the 'Resources --> jsc' dropdown.
 4. Add the following JavaScript code snippet in it. Make sure to set your Datadog **API KEY** in the `dd_api_url` variable.
 
 ```
