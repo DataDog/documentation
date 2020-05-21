@@ -55,7 +55,7 @@ Add a tracing library to your application to start sending traces to the Datadog
 
 [Slice & dice performance by tags][2] whether business or infrastructure tags such as merchant, customer, cart value, availability zone, datacenter, user or domain.
 
-{{< img src="tracing/index/AppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
+{{< img src="tracing/index/AppAnalyticsSearch.gif" alt="App Analytics"  style="width:100%;">}}
 
 ### Connect Logs and Traces
 
