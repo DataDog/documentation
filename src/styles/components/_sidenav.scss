@@ -239,7 +239,6 @@ body > header.scrolled ~ .container .sidenav .sticky {
     overflow-x: hidden;
     overflow-y: scroll;
     margin:0;
-    max-height: 800px;
     ul li.active{
       > a {
         background: transparent;
