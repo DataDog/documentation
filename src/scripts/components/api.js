@@ -158,11 +158,17 @@ $('.hasChildData .js-collapse-trigger').click(function () {
 
 // Scroll the active top level nav item into view below Docs search input
 if (document.body.classList.contains('api')) {
+    const headerHeight = $('body > header').height();
+    const padding = 200;
+    $('.sidenav-nav').css(
+        'maxHeight',
+        document.documentElement.clientHeight - headerHeight - padding
+    );
+
     const apiSideNav = document.querySelector('.sidenav-api .sidenav-nav');
     const sideNavActiveMenuItem = apiSideNav.querySelector('li.active');
     if (sideNavActiveMenuItem) {
         const distanceToTop = sideNavActiveMenuItem.offsetTop;
         apiSideNav.scrollTop = distanceToTop - 100;
     }
-    
 }
