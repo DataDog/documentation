@@ -33,13 +33,11 @@ aliases:
 
 ## What is Datadog APM?
 
-* **Correlation with Datadog Platform**: Distributed Traces link browser sessions, mobile pageviews, logs, network, application code, databases, proxies, hosts & containers.
-* **Out-of-the box Dashboards**: Automatically generated service and database pages to monitor requests, errors and latency.
-* **Live search on 100% of your traces**: Search all traces live during an outage and intelligently retain important traces for bad user experiences like errors and high latency.
+Distributed Tracing provides visibility into browser sessions, mobile pageviews, logs, networks, application code, database calls, proxies, hosts and containers, **correlated together within the Datadog platform**.  Measure your application's performance with **out-of-the-box dashboards** for services and databases to monitor requests, errors and latency.  During outages, view your incoming traces **live with no sampling**, while Datadog intelligently retains important traces for bad user experiences like errors and high latency.
 
 ## Getting Started
 
-Whether you're running a monolith, micro-services or anything in between, whether you're deploying on hosts, containers or serverless functions, setup takes just a few minutes to complete.
+Whether you're running a monolith, micro-services or anything in between, deployed on hosts, containers or serverless functions, setup takes just minutes.
 
 ### 1. Configure the Datadog Agent
 
@@ -52,27 +50,30 @@ Add a tracing library to your application to start sending traces to the Datadog
 {{< partial name="apm/apm-languages.html" >}}
 <br>
 ## Explore Datadog APM
+
 ### App Analytics
 
 [Slice & dice performance by tags][2] whether business or infrastructure tags such as merchant, customer, cart value, availability zone, datacenter, user or domain.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt=" span md 6"  video="true" style="width:100%;">}}
+{{< img src="tracing/index/AppAnalyticsRecording.gif" alt="App Analytics"  style="width:100%;">}}
+
 ### Connect Logs and Traces
 
 [View your application logs for a single request][3] across monoliths, microservices and serverless functions to visualize user data scoped to individual requests with automatic trace_id injection.
 
-{{< img src="tracing/index/ConnectLogsToTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
 
 ### Continuous Profiling
 
 [Improve code efficiency with always on production profiling][4] to pinpoint lines of code consuming the most CPU, memory, or I/O.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
+
 ### Live Tail
 
 [Search by any tag][5] on 100% of your traces live with no sampling.
 
-{{< img src="tracing/index/LiveSearch.gif" alt="LiveTail"  style="width:100%;">}}
+{{< img src="tracing/index/LiveTailSearch.gif" alt="LiveTail"  style="width:100%;">}}
 
 ### Integrate with OpenTracing
 
