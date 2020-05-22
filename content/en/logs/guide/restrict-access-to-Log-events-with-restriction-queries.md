@@ -45,7 +45,7 @@ But let’s go through the steps to create those through the API.
 
 ### 1. Create a role
 
-Use the [Role creation API] to add a `team-frontend` and `team-backend` role:
+Use the [Role creation API][4] to add a `team-frontend` and `team-backend` role:
 
 {{< tabs >}}
 {{% tab "Backend" %}}
@@ -136,7 +136,7 @@ The answer should be an array of permissions with each item of this array as bel
 
 **Note** that the permission IDs change if you are using the Datadog US or EU region so make sure to recover the IDs through this API call.
 
-There are two type of permissions:
+There are two types of permissions:
 
 * [General permissions][6] (Admin, Standard, Read-only)
 * [Advanced permissions][7]
@@ -148,7 +148,8 @@ But to access Logs within Datadog, there are a couple of those permissions that 
 * `logs_read_index_data`: Specific permission for indexed data (the one available in the log explorer)
 * `logs_live_tail`: Access to the livetail feature
 
-Users must have those 3 permissions activated to see logs in Datadog. Access would then be restricted with a restriction query as will see below.
+Users must have those 3 permissions activated to see both ingested and indexed logs. 
+Access would then be restricted with a restriction query as will see below.
 
 ### 3. Grant permissions to the role
 
@@ -329,13 +330,41 @@ curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/<
 
 ## Attach role to the user
 
-The only missing piece is to now give those roles to the users:
+The only missing piece is to now give those roles to the users.
 
-[Get the list of users](https://docs.datadoghq.com/api/v2/users/#list-all-users)
-For the targeted users, [assign the new role]
-[List of the roles of those users](https://docs.datadoghq.com/api/v2/roles/#remove-a-user-from-a-role) to make sure they don’t have any other roles that would grant them permissions
-And [Remove the unwanted roles for the users if any](https://docs.datadoghq.com/api/v2/roles/#remove-a-user-from-a-role)
+### Get the user IDs
 
+The first step is to [get the list of users][10]:
+
+```
+curl -X GET "https://api.datadoghq.com/api/v2/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
+```
+
+Focus on the `data` object within the response and extra the user IDs of the users that should belong to the `Backend` and `Frontend` role.
+Also check if they already have roles and their IDs.
+
+### Attach the role to the user
+
+For each user, [assign the created backend and frontend end role][11]:
+
+```
+curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
+```
+
+### Remove default roles
+
+Users have a default Datadog role (admin, standard, read only). If this is the first time you are creating custom roles and assigning users to it, users might still have their default Datadog role which would let them access the data.
+Otherwise feel free to ignore this part.
+
+When we got the list of users, we also got the list of their roles. For the other roles that your user belongs to, double check if this is a standard role or not:
+
+```
+curl -X GET "https://api.datadoghq.com/api/v2/roles/{role_id}" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
+```
+
+If the name of that role is Datadog Standard Role, or Datadog Admin Role, [remove it from that user][12] to make sure they only belong to the newly created role and not the default Datadog ones.
+
+Note that a user can be long to multiple roles.
 
 ## Further Reading
 
@@ -350,3 +379,6 @@ And [Remove the unwanted roles for the users if any](https://docs.datadoghq.com/
 [7]: /account_management/rbac/permissions?tab=datadogapplication#advanced-permissions
 [8]: /api/v2/roles/#grant-permission-to-a-role)
 [9]: /api/v2/logs-restriction-queries/#grant-role-to-a-restriction-query
+[10]: /api/v2/users/#list-all-users
+[11]: /api/v2/roles/#add-a-user-to-a-role
+[12]: /api/v2/roles/#remove-a-user-from-a-role
