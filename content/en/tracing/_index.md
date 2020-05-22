@@ -57,7 +57,7 @@ Add a tracing library to your application or proxy service to start sending trac
 
 ### Connect Logs and Traces
 
-[View your application logs][3] for a single distributed request with automatic trace_id injection.
+[View your application logs][3] side-by-side with the trace for a single distributed request with automatic trace-id injection.
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
 
