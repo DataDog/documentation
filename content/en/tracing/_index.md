@@ -49,6 +49,9 @@ Add a tracing library to your application or proxy service to start sending trac
 <br>
 ## Explore Datadog APM
 
+Now that you've configured your application to send traces to Datadog, start getting insights into your application performance:
+
+
 ### App Analytics
 
 [Analyze performance][2] by application, infrastructure or custom tags such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
