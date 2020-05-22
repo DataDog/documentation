@@ -40,7 +40,7 @@ Here are setup examples for the following logging libraries:
 
 ## Connect your service across Logs and APM
 
-If APM is enabled for this application, the APM Go tracer can help connect your logs with APM.
+If APM is enabled for this application, the APM tracer can help connect your logs with APM data.
 See [APM Python logging instructions][3] to learn more about adding trace IDs, span IDs, and even the
 `env`, `service`, and `version` to your logs.
 

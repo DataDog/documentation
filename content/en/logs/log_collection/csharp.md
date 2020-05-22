@@ -241,11 +241,11 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 
 ## Connect your service across Logs and APM
 
-If APM is enabled for this application, the APM Go tracer can help connect your logs with APM.
+If APM is enabled for this application, the APM tracer can help connect your logs with APM data.
 See [APM .NET logging instructions][2] to learn more about adding trace IDs, span IDs, and even the
 `env`, `service`, and `version` to your logs.
 
-**Note**: If the APM tracer injects `service` into your logs, there is no need to set a `service` field in your logs configuration.
+**Note**: If the tracer injects `service` into your logs, there is no need to set a `service` field in your logs configuration.
 
 ## Configure your Datadog Agent
 
