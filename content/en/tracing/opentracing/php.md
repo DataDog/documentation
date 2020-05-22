@@ -24,13 +24,16 @@ When [automatic instrumentation][2] is enabled, an OpenTracing-compatible tracer
 
 ```php
 <?php
-  $otTracer = \OpenTracing\GlobalTracer::get();
+  $otWrapper = new \DDTrace\OpenTracer\Tracer(\DDTrace\GlobalTracer::get());
+  \OpenTracing\GlobalTracer::set($otWrapper);
   $span = $otTracer->startActiveSpan('web.request')->getSpan();
   $span->setTag('span.type', 'web');
   $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
   // ...Use OpenTracing as expected
 ?>
 ```
+
+<div class="alert alert-info">Before ddtrace version 0.46.0, an OpenTracing compatible tracer was automatically returned from <code>OpenTracing\GlobalTracer::get()</code> without the need to set the global tracer manually.</div>
 
 ## Further Reading
 
