@@ -43,7 +43,7 @@ Note: After having instrumented your application, the tracing client sends trace
 
 ### AWS Lambda
 
-To set up native tracing in AWS Lambda, see the [Lambda integration documentation][7]. For more information setting up Lambda - X-Ray, see the [Amazon X-Ray integration documentation][8].
+To set up Datadog APM in AWS Lambda, see the [Lambda integration documentation][7]. Alternatively, you can use [AWS X-Ray][8] to trace your Lambda functions.
 
 ### Azure App Services 
 
