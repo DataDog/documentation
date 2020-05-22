@@ -51,19 +51,19 @@ Add a tracing library to your application or proxy service to start sending trac
 
 ### App Analytics
 
-[Analyze performance by application, infrastructure or custom tags][2] such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
+[Analyze performance][2] by application, infrastructure or custom tags such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
 
-{{< img src="tracing/index/AppAnalyticsSearch.gif" alt="App Analytics"  style="width:100%;">}}
+{{< img src="tracing/index/SearchAppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
 
 ### Connect Logs and Traces
 
-[View your application logs for a single distributed request][3] with automatic trace_id injection.
+[View your application logs][3] for a single distributed request with automatic trace_id injection.
 
 {{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
 
 ### Continuous Profiling
 
-[Improve code efficiency with always on production profiling][4] to pinpoint the lines of code consuming the most CPU, memory, or I/O.
+[Improve code efficiency][4] with always on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
@@ -71,11 +71,11 @@ Add a tracing library to your application or proxy service to start sending trac
 
 [Search by any tag][5] on 100% of your traces live with no sampling.
 
-{{< img src="tracing/index/LiveTailSearch.gif" alt="LiveTail"  style="width:100%;">}}
+{{< img src="tracing/index/SearchLiveTail.gif" alt="LiveTail"  style="width:100%;">}}
 
 ### Integrate with OpenTracing
 
-[Integrate your instrumentation seamlessly between Opentracing][6] and Datadog APM.
+[Integrate your instrumentation][6] seamlessly between Opentracing and Datadog APM.
 
 ## Further Reading
 
