@@ -68,6 +68,7 @@ logs:
       path: /var/log/apache2/error.log
       source: apache
       sourcecategory: http_web_access
+      service: apache
 ```
 
 To create multiple instances in the same Agent check to monitor two Apache services, create a new instance with a `-` in the `instances:` section:

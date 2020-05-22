@@ -38,9 +38,11 @@ Here are setup examples for the following logging libraries:
 * [JSON-log-formatter][1]
 * [Python-json-logger][2]
 
-**Connect Logs and Traces**
+**Connecting your service across Logs and APM**
 
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Python logging instructions][3] to add trace and span IDs to your logs.
+If APM is enabled for this application, the APM Go tracer can help connect your logs with APM.
+See [APM Python logging instructions][3] to learn more about adding trace IDs, span IDs, and even the
+`env`, `service`, and `version` to your logs.
 
 Once this is done, the log should have the following format:
 
@@ -48,7 +50,8 @@ Once this is done, the log should have the following format:
 2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
 ```
 
-Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect python logs from the file.
+Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect Python logs from the file.
+Note that if the APM tracer injects `service` into your logs, there is no need to set a `service` field in your logs configuration.
 
 ### Log into a file
 

@@ -187,6 +187,9 @@ Processeses in Kubernetes containers are tagged by:
 - `kube_deployment`
 - `Kube_cluster`
 
+If you have configuration for [Unified Service Tagging][6] in place, `env`, `service`, and `version` will also be picked up automatically.
+Having these tags available will let you tie together APM, logs, metrics, and process data.
+
 ### Filtering and Pivoting
 
 First, you can filter down to `role:McNulty-Query`, Datadog's front-end query service, in order to narrow the search. Then you can search for the NGINX master processes and pivot the table by availability zone to be confident about that service staying highly available.
@@ -246,3 +249,4 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [3]: /tagging/
 [4]: https://app.datadoghq.com/process
 [5]: /infrastructure/livecontainers/
+[6]: /tagging/unified_service_tagging

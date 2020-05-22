@@ -75,7 +75,11 @@ And in `trace-agent.log`:
 
 ### Environment name
 
-(Optional) - Name your environment by updating `datadog.yaml` to set `env` under `apm_config`, for example:
+For the best experience, we recommend using the environment variable `DD_ENV` to configure `env` through your service's tracer.
+Additionally, if your tracer has logs injection enabled then the `env` will be consistent across traces and logs.
+Read more about how this works in [Unified Service Tagging][14].
+
+Alternatively, name your environment by updating `datadog.yaml` to set `env` under `apm_config`, for example:
 
 ```yaml
 apm_config:
@@ -122,6 +126,7 @@ if __name__ == '__main__':
 Run `hello.py` with `ddtrace` which automatically instruments your application in Datadog:
 
 ```shell
+export DD_SERVICE=hello
 ddtrace-run python hello.py
 ```
 
@@ -148,7 +153,7 @@ This outputs:
 hello world
 ```
 
-After a few minutes, your trace displays in Datadog under the `flask` service. Check the [services page][12] or [trace list][13].
+After a few minutes, your trace displays in Datadog under the `hello` service. Check the [services page][12] or [trace list][13].
 
 {{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" >}}
 
@@ -169,3 +174,4 @@ After a few minutes, your trace displays in Datadog under the `flask` service. C
 [11]: /agent/guide/agent-commands/#restart-the-agent
 [12]: https://app.datadoghq.com/apm/services
 [13]: https://app.datadoghq.com/apm/traces
+[14]: /tagging/unified_service_tagging

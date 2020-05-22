@@ -158,6 +158,9 @@ Kubernetes containers are tagged by:
 * `kube_deployment`
 * `kube_cluster`
 
+If you have configuration for [Unified Service Tagging][10] in place, `env`, `service`, and `version` will also be picked up automatically.
+Having these tags available will let you tie together APM, logs, metrics, and live container data.
+
 ### Filtering and Pivoting
 
 The screenshot below displays a system that has been filtered down to a Kubernetes cluster of 9 nodes. RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist. Here, it is apparent that the containers in this cluster are over-provisioned. You could use tighter limits and bin packing to achieve better utilization of resources.
@@ -232,3 +235,4 @@ ac_include: ["name:frontend.*"]
 [7]: /logs/live_tail/
 [8]: /tagging/
 [9]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237
+[10]: /tagging/unified_service_tagging

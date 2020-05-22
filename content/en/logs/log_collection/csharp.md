@@ -239,9 +239,13 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 {{% /tab %}}
 {{< /tabs >}}
 
-**Connect Logs and Traces**
+**Connecting your service across Logs and APM**
 
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM .NET logging instructions][2] to add trace and span IDs in your logs.
+If APM is enabled for this application, the APM Go tracer can help connect your logs with APM.
+See [APM .NET logging instructions][2] to learn more about adding trace IDs, span IDs, and even the
+`env`, `service`, and `version` to your logs.
+
+Note that if the APM tracer injects `service` into your logs, there is no need to set a `service` field in your logs configuration.
 
 ## Configure your Datadog Agent
 
