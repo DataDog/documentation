@@ -43,7 +43,11 @@ Note: After having instrumented your application, the tracing client sends trace
 
 ### AWS Lambda
 
-For more information setting up Lambda - X-Ray, see the [Amazon X-Ray integration documentation][7]
+To set up Datadog APM in AWS Lambda, see the [Lambda integration documentation][7]. Alternatively, you can use [AWS X-Ray][8] to trace your Lambda functions.
+
+### Azure App Services 
+
+The Datadog extension for Azure App Services provides tracing capabilities for Azure Web Apps. For more information setting up tracing in Azure, see the [Azure App Services Extension documentation][9].
 
 ### Google App Engine, AAS
 
@@ -55,15 +59,15 @@ There are alternatives to the Agent and containers that you can use to collect t
 
 ### Heroku
 
-Tracing is enabled by default when monitoring with Heroku. For more information about configuring tracing for Heroku, see the [Heroku cloud documentation][8].
+Tracing is enabled by default when monitoring with Heroku. For more information about configuring tracing for Heroku, see the [Heroku cloud documentation][10].
 
 ### Cloud Foundry
 
-Tracing is enabled by default when monitoring with Cloud Foundry. For more information about configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][9].
+Tracing is enabled by default when monitoring with Cloud Foundry. For more information about configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][11].
 
 ## Configure your environment
 
-There are several ways to specify [an environment][10] when reporting data:
+There are several ways to specify [an environment][12] when reporting data:
 
 1. **Host tag**: Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
 2. **Agent configuration**: Override the default tag used by the Agent in the Agent configuration file. This tags all traces coming through the Agent, overriding the host tag value.
@@ -73,11 +77,11 @@ There are several ways to specify [an environment][10] when reporting data:
   env: <ENVIRONMENT>
   ```
 
-3. **Per trace**: When submitting a single [trace][1], specify an environment by tagging one of its [spans][11] with the metadata key `env`. This overrides the Agent configuration and the host tag’s value (if any). Consult the [trace tagging documentation][12] to learn how to assign a tag to your traces.
+3. **Per trace**: When submitting a single [trace][1], specify an environment by tagging one of its [spans][13] with the metadata key `env`. This overrides the Agent configuration and the host tag’s value (if any). Consult the [trace tagging documentation][14] to learn how to assign a tag to your traces.
 
 ## Next steps
 
-Next, [Instrument your application][13]. For the full overview of all of the steps to set up APM, see the [APM overview][2].
+Next, [Instrument your application][15]. For the full overview of all of the steps to set up APM, see the [APM overview][2].
 
 ## Further Reading
 
@@ -89,10 +93,12 @@ Next, [Instrument your application][13]. For the full overview of all of the ste
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [5]: /tracing/send_traces/agent-apm-metrics/
 [6]: /agent/
-[7]: /integrations/amazon_xray/#overview
-[8]: /agent/basic_agent_usage/heroku/#installation
-[9]: /integrations/cloud_foundry/#trace-collection
-[10]: /tracing/guide/setting_primary_tags_to_scope/#definition
-[11]: /tracing/visualization/#spans
-[12]: /tracing/guide/adding_metadata_to_spans/?tab=java
-[13]: /tracing/setup/
+[7]: /integrations/amazon_lambda/#trace-collection
+[8]: /integrations/amazon_xray/#overview
+[9]: /infrastructure/serverless/azure_app_services/#overview
+[10]: /agent/basic_agent_usage/heroku/#installation
+[11]: /integrations/cloud_foundry/#trace-collection
+[12]: /tracing/guide/setting_primary_tags_to_scope/#definition
+[13]: /tracing/visualization/#spans
+[14]: /tracing/guide/adding_metadata_to_spans/?tab=java
+[15]: /tracing/setup/
