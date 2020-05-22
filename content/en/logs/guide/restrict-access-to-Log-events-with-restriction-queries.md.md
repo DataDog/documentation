@@ -1,5 +1,5 @@
 ---
-title: Restrict access to log events (RBAC)
+title: Restrict access to log events with restriction queries
 kind: guide
 further_reading:
 - link: "/logs/explorer/"
@@ -15,18 +15,6 @@ further_reading:
   tag: "Documentation"
   text: "Learn how to generate metrics from ingested logs"
 ---
-
-{{< tabs >}}
-{{% tab "Backend" %}}
-
-{{% /tab %}}
-{{% tab "Frontend" %}}
-
-{{% /tab %}}
-{{% tab "Generic API" %}}
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Overview
 
