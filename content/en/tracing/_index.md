@@ -3,20 +3,22 @@
 title: APM & Distributed Tracing
 kind: documentation
 description: Instrument your code to improve performance
-disable_toc: true
 further_reading:
-- link: "/tracing/connect_logs_and_traces/"
+- link: "/tracing/guide/setting_primary_tags_to_scope/"
   tag: "Documentation"
-  text: "Connect logs and traces"
-- link: "/tracing/guide/adding_metadata_to_spans/"
+  text: "Add primary and secondary tags to your traces"
+- link: "/tracing/guide/add_span_md_and_graph_it/"
   tag: "Documentation"
-  text: "Adding metadata to spans"
-- link: "/tracing/runtime_metrics/"
+  text: "Add custom tags to your spans to slice and dice performance"
+- link: "/tracing/guide/security/"
   tag: "Documentation"
-  text: "Runtime metrics"
-- link: "https://learn.datadoghq.com/enrol/index.php?id=17"
-  tag: "Learning Center"
-  text: "Introduction to Application Performance Monitoring"
+  text: "Automatically scrub PII from your traces"
+- link: "/tracing/guide/metrics_namespace/"
+  tag: "Documentation"
+  text: "Learn about trace metrics and their tags"
+- link: "/tracing/visualization/"
+  tag: "Documentation"
+  text: "Learn to use the APM UI"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
@@ -29,27 +31,62 @@ aliases:
 
 </br>
 
-## What is Datadog APM?
+Datadog APM & Distributed Tracing gives deep visibility into your applications with **out-of-the-box performance dashboards** for web services, queues and databases to monitor requests, errors and latency. Distributed traces **seamlessly correlate** to Browser sessions, Logs, Network, Processes and Infrastructure metrics across hosts, containers, proxies and serverless functions. Search **100% of traces live with no sampling** during an outage, while Datadog intelligently retains traces that represent an error, high latency or unique code paths for analysis.
 
-Datadog Application Performance Monitoring (APM or tracing) provides you with deep insight into your application's performance - from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests - side by side with your logs and infrastructure monitoring. When a request is made to an application, Datadog can see the [traces][1] across a distributed system, and we can show you systematic data about precisely what is happening to this request.
+## Getting Started
 
-## Overview
+As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers or serverless functions takes just minutes.
 
-{{< whatsnext desc="This section includes the following topics:">}}
-    {{< nextlink href="/tracing/send_traces/" >}}<u>Enable trace collection</u>: Install and configure the latest Datadog Agent to start sending traces. See an overview of all the possible settings for APM, including setting up APM in containerized environments such as Docker or Kubernetes.{{< /nextlink >}}
-    {{< nextlink href="/tracing/setup/" >}}<u>Instrument your application</u>: Add a tracing library to your application.{{< /nextlink >}}
-    {{< nextlink href="/tracing/app_analytics/" >}}<u>App Analytics</u>: Filter application performance metrics and Analyzed Spans by user-defined tags.{{< /nextlink >}}
-    {{< nextlink href="/tracing/connect_logs_and_traces/" >}}<u>Connect Log and Traces</u>: Connect your logs and traces to correlate them in Datadog.{{< /nextlink >}}
-    {{< nextlink href="/tracing/runtime_metrics/" >}}<u>Runtime Metrics</u>: Gain additional insights into an application's performance with the runtime metrics associated to your traces.{{< /nextlink >}}
-    {{< nextlink href="/tracing/manual_instrumentation/" >}}<u>Manual Instrumentation</u>: Manually instrument your application to send custom traces to Datadog.{{< /nextlink >}}
-    {{< nextlink href="/tracing/opentracing/" >}}<u>OpenTracing</u>: Implement the Opentracing standard with Datadog APM tracers.{{< /nextlink >}}
-    {{< nextlink href="/tracing/visualization/" >}}<u>Use the APM UI</u>: Visualize your APM Data with out of the box dashboards and monitor on key metrics. {{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/" >}}<u>Guides</u>: Additional helpful articles about APM & Distributed Tracing.{{< /nextlink >}}
-    {{< nextlink href="/tracing/troubleshooting/" >}}<u>Troubleshooting</u>: Solve common tracing issues.{{< /nextlink >}}
-{{< /whatsnext >}}
+### 1. Configure the Datadog Agent
+
+[Install and configure the Datadog Agent][1] in AWS, GCP, Azure, Kubernetes, ECS, Fargate, PCF, Heroku, on-prem and more.
+
+### 2. Instrument Your Application
+
+Add a tracing library to your application or proxy service to start sending traces to the Datadog Agent.
+
+{{< partial name="apm/apm-languages.html" >}}
+<br>
+## Explore Datadog APM
+
+Now that you've configured your application to send traces to Datadog, start getting insights into your application performance:
+
+
+### App Analytics
+
+[Analyze performance][2] by application, infrastructure or custom tags such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
+
+{{< img src="tracing/index/SearchAppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
+
+### Connect Logs and Traces
+
+[View your application logs][3] side-by-side with the trace for a single distributed request with automatic trace-id injection.
+
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
+
+### Continuous Profiling
+
+[Improve code efficiency][4] with always on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
+
+{{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
+
+### Live Tail
+
+[Search by any tag][5] on 100% of your traces live with no sampling.
+
+{{< img src="tracing/index/SearchLiveTail.gif" alt="LiveTail"  style="width:100%;">}}
+
+### Integrate with OpenTracing
+
+[Integrate your instrumentation][6] seamlessly between Opentracing and Datadog APM.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
+[1]: /tracing/send_traces/
+[2]: /tracing/app_analytics/
+[3]: /tracing/connect_logs_and_traces/
+[4]: /tracing/profiling/
+[5]: /tracing/livetail/
+[6]: /tracing/opentracing/
