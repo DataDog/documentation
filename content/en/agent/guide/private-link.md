@@ -128,7 +128,7 @@ Add `DD_URL: pvtlink.logs.datadoghq.com` in your [Datadog Lambda function][4] en
 
 By default, the forwarder's API key is stored in Secrets Manager. The Secrets Manager endpoint needs to be added to the VPC. You can follow the instructions [here for adding AWS services to a VPC][5].
 
-When installing the forwarder via the CloudFormation template, enable 'DdUsePrivateLink' and set at least one Subnet Id and Security Group.
+When installing the forwarder with the CloudFormation template, enable 'DdUsePrivateLink' and set at least one subnet ID and security group.
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
