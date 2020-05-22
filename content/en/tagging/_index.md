@@ -70,26 +70,26 @@ Below are Datadog's tagging requirements:
 
 ## Assigning Tags
 
-### Unified service tagging
-
-As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][3] documentation.
-
-**Note**: Unified service tagging is currently only available for **containerized environments**. For non-containerized environments or containerized environments that require custom or additional configuration, review the tagging methods below.
-
 ### Tagging methods
 
-Tags may be assigned using any (or all) of the following methods. Refer to the dedicated [Assigning Tags documentation][4] to learn more:
+Tags may be assigned using any (or all) of the following methods. Refer to the dedicated [Assigning Tags documentation][3] to learn more:
 
 | Method                       | Assign tags                                                                                  |
 |------------------------------|----------------------------------------------------------------------------------------------|
-| [Configuration Files][5]     | Manually in your main Agent configuration files, or in your integrations configuration file. |
-| [UI][6]                      | In your Datadog platform                                                                     |
-| [API][7]                     | Using Datadog's API                                                                          |
-| [DogStatsD][8]               | When submitting metrics via DogStatsD                                                        |
+| [Configuration Files][4]     | Manually in your main Agent configuration files, or in your integrations configuration file. |
+| [UI][5]                      | In your Datadog platform                                                                     |
+| [API][6]                     | Using Datadog's API                                                                          |
+| [DogStatsD][7]               | When submitting metrics via DogStatsD                                                        |
+
+#### Unified service tagging
+
+As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][8] documentation.
+
+**Note**: Unified service tagging is currently only available for **containerized environments**. For non-containerized environments or containerized environments that require custom or additional configuration, review the tagging methods below.
 
 ## Using Tags
 
-After you have [assigned tags][4] at the host and [integration][9] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. Refer to the dedicated [Using Tags documentation][1] to learn more:
+After you have [assigned tags][3] at the host and [integration][9] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. Refer to the dedicated [Using Tags documentation][1] to learn more:
 
 | Area                 | Use Tags to                                                                                      |
 |----------------------|--------------------------------------------------------------------------------------------------|
@@ -110,12 +110,12 @@ After you have [assigned tags][4] at the host and [integration][9] level, start 
 
 [1]: /tagging/using_tags/
 [2]: /developers/metrics/
-[3]: /tagging/unified_service_tagging
-[4]: /tagging/assigning_tags/
-[5]: /tagging/assigning_tags/#configuration-files
-[6]: /tagging/assigning_tags/#ui
-[7]: /tagging/assigning_tags/#api
-[8]: /tagging/assigning_tags/#dogstatsd
+[3]: /tagging/assigning_tags/
+[4]: /tagging/assigning_tags/#configuration-files
+[5]: /tagging/assigning_tags/#ui
+[6]: /tagging/assigning_tags/#api
+[7]: /tagging/assigning_tags/#dogstatsd
+[8]: /tagging/unified_service_tagging
 [9]: /integrations/
 [10]: /tagging/using_tags/#events
 [11]: /tagging/using_tags/#dashboards
