@@ -5,6 +5,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tags: 'Blog'
       text: 'Introducing always-on production profiling in Datadog.'
+    - link: 'tracing/profiling/proxy'
+      tag: 'Documentation'
+      text: 'Configure your Proxy to forward your profiles to Datadog.'
 ---
 
 <div class="alert alert-info">

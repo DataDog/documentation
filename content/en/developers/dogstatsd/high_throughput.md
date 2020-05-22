@@ -26,6 +26,10 @@ Most of the time the symptoms can be alleviated by tweaking some configuration o
 
 ## General tips
 
+### Use Datadog official clients
+
+We recommend that you use the latest version of the [official DogStatsD clients][] provided by Datadog for every major programming language.
+
 ### Enable buffering on your client
 
 Some StatsD and DogStatsD clients, by default, send one metric per datagram. This adds considerable overhead on the client, the operating system, and the Agent. If your client supports buffering multiple metrics in one datagram, enabling this option brings noticeable improvements.
@@ -35,30 +39,26 @@ Here are a few examples for [official DogStatsD supported clients][3]:
 {{< tabs >}}
 {{% tab "Go" %}}
 
-By using Datadog's official Golang library [datadog-go][1], the example below creates a buffered DogStatsD client instance with `256` maximum buffered metrics which means that all metrics sent from this instance of the client are buffered and sent in packets containing a maximum of `256` metrics:
+By default, Datadog's official Golang library [DataDog/datadog-go][1] uses buffering. The size of each packet and the number of messages use different default values for `UDS` and `UDP`. See [DataDog/datadog-go][1] for more information about the client configuration.
 
 ```go
 package main
 
 import (
-	"log"
-	"github.com/DataDog/datadog-go/statsd"
+        "log"
+        "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
-
-  statsd, err := statsd.New("127.0.0.1:8125",
-                 statsd.Buffered(),
-                 statsd.WithMaxMessagesPerPayload(256),
-                )
-	if err != nil {
-    		log.Fatal(err)
-	}
+  // In this example, metrics are buffered by default with the correct default configuration for UDP.
+  statsd, err := statsd.New("127.0.0.1:8125")
+  if err != nil {
+    log.Fatal(err)
+  }
 
   statsd.Gauge("example_metric.gauge", 1, []string{"env:dev"}, 1)
 }
 ```
-
 
 [1]: https://github.com/DataDog/datadog-go
 {{% /tab %}}
@@ -227,12 +227,74 @@ Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number
 dogstatsd_so_rcvbuf: 26214400
 ```
 
+### Over UDS (Unix Domain Socket)
+
+#### Linux
+
+For UDS sockets, Linux is internally buffering datagrams in a queue if the reader is slower than the writer. The size of this queue represents the maximum number of datagrams that Linux will buffer per socket. This value can be queried with the following command:
+
+```bash
+sysctl net.unix.max_dgram_qlen
+```
+
+If the value is < 512, you can increase it to 512 or more using this command:
+
+```bash
+sysctl -w net.unix.max_dgram_qlen=512
+```
+
+Add the following configuration to `/etc/sysctl.conf` to make this change permanent:
+
+```conf
+net.unix.max_dgram_qlen = 512
+```
+
+In the same manner, the `net.core.wmem_max` could be incremented to 4MiB to improve
+client writing performances:
+
+```conf
+net.core.wmem_max = 4194304
+```
+
+Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number in `datadog.yaml`:
+
+```yaml
+dogstatsd_so_rcvbuf: 4194304
+```
+
+### Ensure proper packet sizes
+
+Avoid extra CPU usage by sending packets with an adequate size to the DogStatsD server in the Datadog Agent. The latest versions of the official DogStatsD clients send packets with a size optimized for performance. 
+
+You can skip this section if you are using one of the latest Datadog DogStatsD clients.
+
+If the packets sent are too small, the Datadog Agent packs several together to process them in batches later in the pipeline. The official DogStatsD clients are capable of grouping metrics to have the best ratio of the number of metrics per packet.
+
+The Datadog Agent performs most optimally if the DogStatsD clients send packets the size of the `dogstatsd_buffer_size`. The packets must not be larger than the buffer size, otherwise, the Agent won't be able to load them completely in the buffer and some of metrics will be malformed. Use the corresponding configuration field in your DogStatsD clients.
+
+Note for UDP: since UDP packets usually go through the Ethernet and IP layer, avoid IP packets fragmentation by limiting the packet size to a value lower than a single Ethernet frame on your network. Most of the time, IPv4 networks are configured with a MTU of 1500 bytes, so in this situation the packet size of sent packets should be limited to 1472.
+
+Note for UDS: for the best performances, UDS packet should have a size of 8192 bytes.
+
+### Limit the maximum memory usage of the Agent
+
+The Agent tries to absorb the burst of metrics sent by the DogStatsD clients, but to do so, it needs to use memory. Even if this is for a short amount of time and even if this memory is quickly released to the OS, a spike happens and that could be an issue in containerized environments where limit on memory usage could evict pods or containers.
+
+Avoid sending metrics in bursts in your application - this prevents the Datadog Agent from reaching its maximum memory usage.
+
+Another thing to look at to limit the maximum memory usage is to reduce the buffering. The main buffer of the DogStatsD server within the Agent is configurable with the `dogstatsd_queue_size` field (since Datadog Agent 6.1.0), its default value of `1024` induces an approximate maximum memory usage of 768MB.
+
+**Note**: reducing this buffer could increase the number of packet drops.
+
+This example decreases the max memory usage of DogStatsD to approximately 384MB:
+
+```yaml
+dogstatsd_queue_size: 512
+```
+
 ## Client side telemetry
 
-Dogstatsd clients send telemetry metrics by default to the Agent. This allows
-you to better troubleshoot where bottleneck exists. Each metric will be
-tagged with the client language and the client version. These metrics will not be
-counted as custom metrics and will not be billed.
+DogStatsD clients send telemetry metrics by default to the Agent. This allows you to better troubleshoot where bottlenecks exist. Each metric is tagged with the client language and the client version. These metrics are not counted as custom metrics.
 
 Each client shares a set of common tags.
 
