@@ -83,28 +83,26 @@ Tags may be assigned using any (or all) of the following methods. Refer to the d
 | Method                       | Assign tags                                                                                  |
 |------------------------------|----------------------------------------------------------------------------------------------|
 | [Configuration Files][5]     | Manually in your main Agent configuration files, or in your integrations configuration file. |
-| [Environment Variables][6]   | Using environment variables for the containerized Agent                                      |
-| [UI][7]                      | In your Datadog platform                                                                     |
-| [API][8]                     | Using Datadog's API                                                                          |
-| [DogStatsD][9]               | When submitting metrics via DogStatsD                                                        |
-| [Integration Inheritance][10] | Automatically with supported integrations after setup                                        |
+| [UI][6]                      | In your Datadog platform                                                                     |
+| [API][7]                     | Using Datadog's API                                                                          |
+| [DogStatsD][8]               | When submitting metrics via DogStatsD                                                        |
 
 ## Using Tags
 
-After you have [assigned tags][4] at the host and [integration][11] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. Refer to the dedicated [Using Tags documentation][1] to learn more:
+After you have [assigned tags][4] at the host and [integration][9] level, start using them to filter and group your metrics, traces, and logs. Tags are used in the following areas of your Datadog platform. Refer to the dedicated [Using Tags documentation][1] to learn more:
 
 | Area                 | Use Tags to                                                                                      |
 |----------------------|--------------------------------------------------------------------------------------------------|
-| [Events][12]         | Filter the event stream                                                                          |
-| [Dashboards][13]     | Filter and group metrics on graphs                                                               |
-| [Infrastructure][14] | Filter and group on the host map, infrastructure list, live containers, and live processes views |
-| [Monitors][15]       | Manage monitors, create monitors, or manage downtime                                             |
-| [Metrics][16]        | Filter and group with the metric explorer                                                        |
-| [Integrations][17]   | Optionally limit metrics for AWS, Google Cloud, and Azure                                        |
-| [APM][18]            | Filter App Analytics or jump to other areas with the service map                                 |
-| [Notebooks][19]      | Filter and group metrics on graphs                                                               |
-| [Logs][20]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
-| [Developers][21]     | Pull information or setup different areas in the UI with the API                                 |
+| [Events][10]         | Filter the event stream                                                                          |
+| [Dashboards][11]     | Filter and group metrics on graphs                                                               |
+| [Infrastructure][12] | Filter and group on the host map, infrastructure list, live containers, and live processes views |
+| [Monitors][13]       | Manage monitors, create monitors, or manage downtime                                             |
+| [Metrics][14]        | Filter and group with the metric explorer                                                        |
+| [Integrations][15]   | Optionally limit metrics for AWS, Google Cloud, and Azure                                        |
+| [APM][16]            | Filter App Analytics or jump to other areas with the service map                                 |
+| [Notebooks][17]      | Filter and group metrics on graphs                                                               |
+| [Logs][18]           | Filter logs search, analytics, patterns, live tail, and pipelines                                |
+| [Developers][19]     | Pull information or setup different areas in the UI with the API                                 |
 
 ### Further Reading
 
@@ -115,19 +113,17 @@ After you have [assigned tags][4] at the host and [integration][11] level, start
 [3]: /tagging/unified_service_tagging
 [4]: /tagging/assigning_tags/
 [5]: /tagging/assigning_tags/#configuration-files
-[6]: /tagging/assigning_tags/#environment-variables
-[7]: /tagging/assigning_tags/#ui
-[8]: /tagging/assigning_tags/#api
-[9]: /tagging/assigning_tags/#dogstatsd
-[10]: /tagging/assigning_tags/#integration-inheritance
-[11]: /integrations/
-[12]: /tagging/using_tags/#events
-[13]: /tagging/using_tags/#dashboards
-[14]: /tagging/using_tags/#infrastructure
-[15]: /tagging/using_tags/#monitors
-[16]: /tagging/using_tags/#metrics
-[17]: /tagging/using_tags/#integrations
-[18]: /tagging/using_tags/#apm
-[19]: /tagging/using_tags/#notebooks
-[20]: /tagging/using_tags/#logs
-[21]: /tagging/using_tags/#developers
+[6]: /tagging/assigning_tags/#ui
+[7]: /tagging/assigning_tags/#api
+[8]: /tagging/assigning_tags/#dogstatsd
+[9]: /integrations/
+[10]: /tagging/using_tags/#events
+[11]: /tagging/using_tags/#dashboards
+[12]: /tagging/using_tags/#infrastructure
+[13]: /tagging/using_tags/#monitors
+[14]: /tagging/using_tags/#metrics
+[15]: /tagging/using_tags/#integrations
+[16]: /tagging/using_tags/#apm
+[17]: /tagging/using_tags/#notebooks
+[18]: /tagging/using_tags/#logs
+[19]: /tagging/using_tags/#developers

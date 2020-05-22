@@ -17,18 +17,33 @@ further_reading:
 
 Tagging is used throughout Datadog to query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding problems in your environment and narrowing them down enough to discover the true causes could be difficult. Learn how to [define tags][1] in Datadog before going further.
 
-In [non-containerized environments](?tab=non-containerized-environments), the agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations. Tags can also be manually configured in the [Datadog Agent configuration file][2].
-
-In [containerized environments]... autodiscovery blurb. TK. If Autodiscovery is not in use, the agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations. Tags can also be manually configured in the [Datadog Agent configuration file][2].
-
-## Methods for Assigning Tags
-
 Tags can be configured in several different ways:
 
-- Within the Agent [configuration file](#configuration-file)
-- In the Datadog [UI](#ui)
-- With the Datadog [API][3]
-- With the [DogStatsD][4] extension
+- In the Datadog Agent [configuration file](#configuration-file)
+- Through the the Datadog [UI](#ui)
+- With the Datadog [API](#api)
+- With the [DogStatsD](#dogstatsd)
+
+{{< tabs >}}
+{{% tab "Non-containerized environments" %}}
+In non-containerized environments, the agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations. These tags, along with additional tags that you can manually add, are configured in the [Datadog Agent configuration file](#configuration-file).
+{{% /tab %}}
+
+{{% tab "Containerized environments" %}}
+In containerized environments, Datadog recommends using [Autodiscovery][1] as it allows for [unified service tagging][2], the recommended way to achieve a single point of configuration across all of your Datadog telemetry.
+
+The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. When using Autodiscovery, the Datadog Agent automatically identifies which services are running on this new container, looks for corresponding monitoring configuration, and starts to collect metrics. Tags can then be configured from within the Autodiscovery [configuration template][3].
+
+If Autodiscovery is not in use, the agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations the same as within a non-containerized environments. These tags, along with manually added tags are configured in the [Datadog Agent configuration file](#configuration-file).
+
+
+[1]: /getting_started/agent/autodiscovery/
+[2]: /tagging/unified_service_tagging
+[3]: /getting_started/agent/autodiscovery/?tab=docker#integration-templates
+{{% /tab %}}
+{{< /tabs >}}
+
+## Methods for Assigning Tags
 
 ### Configuration file
 
@@ -39,9 +54,9 @@ Tags can be configured in several different ways:
 
 The Agent configuration file (`datadog.yaml`) is used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent.
 
-Tags for the [integrations][10] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][2].
+Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][2].
 
-#### YAML formats
+#### YAML format
 
 In YAML files, use a list of strings under the `tags` key to assign a list of tags. In YAML, lists are defined with two different yet functionally equivalent forms:
 
@@ -58,11 +73,11 @@ tags:
     - "<KEY_3>:<VALUE_3>"
 ```
 
-It is recommended to assign tags as `<KEY>:<VALUE>` pairs, but tags only consisting of keys (`<KEY>`) are also accepted. See [defining tags][1] for more details.
+It is recommended to assign tags as `<KEY>:<VALUE>` pairs, but tags only consisting of keys (`<KEY>`) are also accepted. See [defining tags][3] for more details.
 
 #### Host tags
 
-The hostname (tag key `host`) is [assigned automatically][8] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
+The hostname (tag key `host`) is [assigned automatically][4] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
 
 ```yaml
 # Set the hostname (default: auto-detected)
@@ -75,8 +90,14 @@ hostname: mymachine.mydomain
 
 * The old hostname remains in the UI for 2 hours but does not show new metrics.
 * Any data from hosts with the old hostname can be queried with the API.
-* To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][9].
+* To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][5].
 
+
+[1]: /getting_started/integrations/
+[2]: /agent/guide/agent-configuration-files/
+[3]: /tagging/#defining-tags
+[4]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -84,9 +105,9 @@ hostname: mymachine.mydomain
 
 The Agent configuration file (`datadog.conf`) is used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent.
 
-Tags for the [integrations][10] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][2].
+Tags for the [integrations][1] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][2].
 
-#### YAML formats
+#### YAML format
 
 In YAML files, use a list of strings under the `tags` key to assign a list of tags. In YAML, lists are defined with two different yet functionally equivalent forms:
 
@@ -94,11 +115,11 @@ In YAML files, use a list of strings under the `tags` key to assign a list of ta
 tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
 ```
 
-It is recommended to assign tags as `<KEY>:<VALUE>` pairs, but tags only consisting of keys (`<KEY>`) are also accepted. See [defining tags][1] for more details.
+It is recommended to assign tags as `<KEY>:<VALUE>` pairs, but tags only consisting of keys (`<KEY>`) are also accepted. See [defining tags][3] for more details.
 
 #### Host tags
 
-The hostname (tag key `host`) is [assigned automatically][8] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.conf`:
+The hostname (tag key `host`) is [assigned automatically][4] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.conf`:
 
 ```yaml
 # Set the hostname (default: auto-detected)
@@ -111,8 +132,14 @@ hostname: mymachine.mydomain
 
 * The old hostname remains in the UI for 2 hours but does not show new metrics.
 * Any data from hosts with the old hostname can be queried with the API.
-* To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][9].
+* To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][5].
 
+
+[1]: /getting_started/integrations/
+[2]: /agent/guide/agent-configuration-files/
+[3]: /tagging/#defining-tags
+[4]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -120,94 +147,25 @@ hostname: mymachine.mydomain
 
 The most efficient method for assigning tags is to rely on integration inheritance. Tags you assign to your AWS instances, Chef recipes, and other integrations are automatically inherited by hosts and metrics you send to Datadog.
 
+For containerized environments that utilize Autodiscovery for integration inheritence, it is recommend to follow the [unified service tagging][2] documentation to achieve a single point of configuration across all of your Datadog telemetry.
+
 ##### Cloud integrations
 
-Cloud integrations are authentication based. Datadog recommends using the main cloud integration tile (AWS, Azure, Google Cloud, etc.) and [installing the Agent][5] where possible. **Note**: If you choose to use the Agent only, some integration tags are not available.
+[Cloud integrations][3] are authentication based. Datadog recommends using the main cloud integration tile (AWS, Azure, Google Cloud, etc.) and [installing the Agent][4] where possible. **Note**: If you choose to use the Agent only, some integration tags are not available.
 
 ##### Web integrations
 
-Web integrations are authentication based. Metrics are collected with API calls. **Note**: `CamelCase` tags are converted to underscores by Datadog, for example `TestTag` --> `test_tag`.
-
-#### Traces
-
-**Note**: As a best practice for containerized environments, **Datadog recommends using [unified service tagging][6] for traces.**
-
-{{< tabs >}}
-{{% tab "Go" %}}
-
-```go
-tracer.SetTag("env", "<ENVIRONMENT>")
-```
-
-For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
-
-{{% /tab %}}
-{{% tab "Java" %}}
-Via sysprop:
-
-```text
--Ddd.trace.span.tags=env:<ENVIRONMENT>
-```
-
-Via environment variables:
-
-```text
-DD_TRACE_SPAN_TAGS="env:<ENVIRONMENT>"
-```
-
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-```ruby
-Datadog.tracer.set_tags('env' => '<ENVIRONMENT>')
-```
-
-{{% /tab %}}
-{{% tab "Python" %}}
-
-```python
-from ddtrace import tracer
-tracer.set_tags({'env': '<ENVIRONMENT>'})
-```
-
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-```csharp
-using Datadog.Trace;
-Tracer.Instance.ActiveScope?.Span.SetTag("env", "<ENVIRONMENT>");
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-**Note**: Span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and a node can be of a single type: it can't be both an object (with sub-nodes) and a string for instance.
-
-So this example of span tags is invalid:
-
-```json
-{
-  "key": "value",
-  "key.subkey": "value_2"
-}
-```
+[Web integrations][5] are authentication based. Metrics are collected with API calls. **Note**: `CamelCase` tags are converted to underscores by Datadog, for example `TestTag` --> `test_tag`.
 
 #### Environment variables
 
-{{< tabs >}}
-{{% tab "Non-containerized environments" %}}
-
-TK
-
-{{% /tab %}}
-
-{{% tab "Containerized environments" %}}
+<div class="alert alert-info">
+In containerized environments, Datadog recommends the use of <a href="/tagging/unified_service_tagging">unified service tagging</a> to configure environment variables.
+</div>
 
 After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agents main configuration file.
 
-As a best practice, **Datadog recommends using [unified service tagging for containerized environments][9].** However, all tags can be assigned manually within the Datadog Agent configuration file.
-
-Datadog automatically collects common tags from [Docker][10], [Kubernetes][11], [ECS][12], [Swarm, Mesos, Nomad, and Rancher][10]. To extract even more tags, use the following options:
+Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                    |
 |------------------------------------|------------------------------------------------|
@@ -289,8 +247,77 @@ Setting the variable to `orchestrator` adds the following tags: `pod_name` (Kube
 
 Setting the variable to `high` additionally adds the following tags: `container_name` (Docker), `container_id` (Docker), `display_container_name` (Kubelet).
 
+#### Traces
+
+<div class="alert alert-info">
+In containerized environments, Datadog recommends the use of <a href="/tagging/unified_service_tagging">unified service tagging</a> for traces.
+</div>
+
+The Datadog tracer is configured using System Properties and Environment Variables. Trace tags require [configuration][7] based on language. Read the [Datadog tracing setup][8] documentation for more information.
+
+When submitting a single trace, tag its spans to override Agent configuration tags and/or the host tags value (if any) for those traces:
+
+The following examples use the default primary tag `env:<ENVIRONMENT>` but you can use any `<KEY>:<VALUE>` tag instead.
+
+{{< tabs >}}
+{{% tab "Go" %}}
+
+```go
+tracer.SetTag("env", "<ENVIRONMENT>")
+```
+
+For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
+
+{{% /tab %}}
+{{% tab "Java" %}}
+Via sysprop:
+
+```text
+-Ddd.trace.span.tags=env:<ENVIRONMENT>
+```
+
+Via environment variables:
+
+```text
+DD_TRACE_SPAN_TAGS="env:<ENVIRONMENT>"
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+Datadog.tracer.set_tags('env' => '<ENVIRONMENT>')
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+from ddtrace import tracer
+tracer.set_tags({'env': '<ENVIRONMENT>'})
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+```csharp
+using Datadog.Trace;
+Tracer.Instance.ActiveScope?.Span.SetTag("env", "<ENVIRONMENT>");
+```
+
 {{% /tab %}}
 {{< /tabs >}}
+
+**Note**: Span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and a node can be of a single type: it can't be both an object (with sub-nodes) and a string for instance.
+
+So this example of span tags is invalid:
+
+```json
+{
+  "key": "value",
+  "key.subkey": "value_2"
+}
+```
 
 ### UI
 
@@ -351,24 +378,23 @@ The [AWS][1] integration tile allows you to assign additional tags to all metric
 
 Tags can be assigned in various ways with the [Datadog API][1]. See the list below for links to those sections:
 
-* [Post a check run][2]
-* [Post an event][3]
-* [AWS Integration][4]
-* [Post timeseries point][5]
-* [Create][6] or [Edit][7] a monitor
-* [Add][8] or [Update][9] host tags
-* [Send traces][10]
+* [Post a check run][1]
+* [Post an event][2]
+* [AWS Integration][3]
+* [Post timeseries point][4]
+* [Create][5] or [Edit][6] a monitor
+* [Add][7] or [Update][8] host tags
+* [Send traces][9]
 
-[1]: /api/
-[2]: /api/v1/service-checks/#submit-a-service-check
-[3]: /api/v1/events/#post-an-event
-[4]: /api/v1/aws-integration/
-[5]: /api/v1/metrics/#submit-metrics
-[6]: /api/v1/monitors/#create-a-monitor
-[7]: /api/v1/monitors/#edit-a-monitor
-[8]: /api/v1/tags/#add-tags-to-a-host
-[9]: /api/v1/tags/#update-host-tags
-[10]: /api/v1/tracing/
+[1]: /api/v1/service-checks/#submit-a-service-check
+[2]: /api/v1/events/#post-an-event
+[3]: /api/v1/aws-integration/
+[4]: /api/v1/metrics/#submit-metrics
+[5]: /api/v1/monitors/#create-a-monitor
+[6]: /api/v1/monitors/#edit-a-monitor
+[7]: /api/v1/tags/#add-tags-to-a-host
+[8]: /api/v1/tags/#update-host-tags
+[9]: /api/v1/tracing/
 {{% /tab %}}
 {{% tab "Example" %}}
 
@@ -403,7 +429,7 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-Add tags to any metric, event, or service check you send to [DogStatsD][4]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+Add tags to any metric, event, or service check you send to [DogStatsD][9]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
 ```python
 
@@ -416,19 +442,22 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-**Note**: Tagging is a [Datadog-specific extension][7] to StatsD.
+**Note**: Tagging is a [Datadog-specific extension][10] to StatsD.
 
-Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][8].
+Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][11].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tagging/#defining-tags
-[2]: /agent/guide/agent-configuration-files/
-[3]: /api/
-[4]: /developers/metrics/dogstatsd_metrics_submission/
-[5]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-[6]: /dashboards/querying/#arithmetic-between-two-metrics
-[7]: /libraries/
-[8]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[2]: /tagging/unified_service_tagging
+[3]: /integrations/#cat-cloud
+[4]: /getting_started/agent/#setup
+[5]: /integrations/#cat-web
+[6]: /agent/docker/?tab=standard#tagging
+[7]: /tracing/setup/java/#configuration
+[8]: /tracing/setup/
+[9]: /developers/dogstatsd/
+[10]: /developers/libraries/
+[11]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
