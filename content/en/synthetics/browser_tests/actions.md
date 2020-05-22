@@ -93,9 +93,13 @@ Asserts that an email was sent and whether specific values (`string`, `number`, 
 
 #### Test your UI with custom JavaScript
 
-Test a custom assertion using your own JavaScript scripts. By default the assertion is done on the active page. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function.
+Test a custom assertion on the active page using your own JavaScript scripts. JavaScript assertions support all the JavaScript built-in methods. You can use JavaScript libraries if these are exposed in global variables or if you wrap their loading in a promise.
 
-**Note**: You can use [variables][5] as part of your JavaScript assertions.
+If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. 
+
+{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="90%">}}
+
+**Note**: You can also use [variables][5] as part of your JavaScript assertions.
 
 #### Test a downloaded file
 
@@ -170,12 +174,29 @@ By default, the **Scroll** step scrolls on the whole page. If you need to scroll
 
 To create a variable, first give it a name then define its value from:
 
-* **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **JavaScript**: Generate custom variables using your own JavaScript scripts. By default the step is being performed at the page level. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. 
-**Note**: You can use [variables][5] as part of your JavaScript assertions.
-* **A Global Variable**: Pick any global variables that was defined through [Synthetics Settings][7].
-* **An Email**: Generate a random Synthetics email address that can be used in your test steps to [assert if an email was correctly sent][8] or to [navigate to a link contained within the email][9] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
-* **A Pattern**:
+##### An Element
+
+Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
+
+##### JavaScript
+
+Generate custom variables using your own JavaScript scripts. By default the step is being performed at the page level. JavaScript assertions support all the JavaScript built-in methods. You can use JavaScript libraries if these are exposed in global variables or if you wrap their loading in a promise. 
+
+If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. 
+
+{{< img src="synthetics/browser_tests/js_variable.mp4" alt="Browser Test JavaScript Variable" video="true" width="90%">}}
+
+**Note**: You can also use [variables][5] as part of your JavaScript assertions.
+
+##### A Global Variable 
+
+Pick any global variables that was defined through [Synthetics Settings][7].
+
+##### An Email
+
+Generate a random Synthetics email address that can be used in your test steps to [assert if an email was correctly sent][8] or to [navigate to a link contained within the email][9] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
+
+##### A Pattern
 
 | Pattern                 | Description                                                                                             |
 |-------------------------|---------------------------------------------------------------------------------------------------------|
@@ -194,7 +215,7 @@ Alternatively, you can record a step inputting `{{ <YOUR_VARIABLE> }}` in the de
 
 {{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion"  style="width:60%;">}}
 
-#### Use variables in JavaScript steps
+##### Use variables in JavaScript steps
 
 If you need to use variables in JavaScript steps (assertion or variable), use `vars.<YOUR_VARIABLE>`.
 
