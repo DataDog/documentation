@@ -38,11 +38,13 @@ Here are setup examples for the following logging libraries:
 * [JSON-log-formatter][1]
 * [Python-json-logger][2]
 
-**Connecting your service across Logs and APM**
+## Connect your service across Logs and APM
 
 If APM is enabled for this application, the APM Go tracer can help connect your logs with APM.
 See [APM Python logging instructions][3] to learn more about adding trace IDs, span IDs, and even the
 `env`, `service`, and `version` to your logs.
+
+**Note**: If the APM tracer injects `service` into your logs, there is no need to set a `service` field in your logs configuration.
 
 Once this is done, the log should have the following format:
 
@@ -51,7 +53,6 @@ Once this is done, the log should have the following format:
 ```
 
 Then [configure the Datadog Agent](#configure-the-datadog-agent) to collect Python logs from the file.
-Note that if the APM tracer injects `service` into your logs, there is no need to set a `service` field in your logs configuration.
 
 ### Log into a file
 

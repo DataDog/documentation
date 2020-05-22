@@ -65,9 +65,11 @@ Add a new file appender to `log4j.xml`:
 </appender>
 ```
 
-**Inject trace IDs in your logs**
+## Connect your service across Logs and APM
 
 If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the [MDC (Mapped Diagnostic Contexts)][2] to then automatically add trace and span id in your logs.
+
+**Note**: If the APM tracer injects `service` into your logs, there is no need to set a `service` field in your logs configuration.
 
 Once this is done, the `ConversionPattern` to use becomes:
 

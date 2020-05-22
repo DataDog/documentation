@@ -17,7 +17,7 @@ Unified service tagging ties Datadog telemetry together through the use of three
 
 With unified service tagging, you can correlate related logs and traces by version of a service, trace a spike in CPU usage to corresponding areas of a service, and organize infrastructure more effectively.
 
-For all data sources emitted directly from your service's runtime (Traces, Logs, Statsd metrics}, use the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` tags. Where these tags are configured is based on your environment.
+For all data sources emitted directly from your service's runtime (Traces, Logs, Statsd metrics), use the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` tags. Where these tags are configured is based on your environment.
 
 {{< img src="tagging/unified_service_tagging/overview.gif" alt="Unified Service Tagging"  >}}
 
@@ -105,7 +105,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-To achieve a single point of configuration across all telemetry, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment. [As long as the agent can access your container's Docker socket], it will be able to detect the environment variables and map them to the standard tags.
+To achieve a single point of configuration across all telemetry, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment. As long as the agent can access your container's [Docker socket][8], it will be able to detect the environment variables and map them to the standard tags.
 
 If your service has no need for the DD environment variables (e.g., 3rd party software like Redis, PostgreSQL, Nginx, and applications not traced by APM), you can instead use Docker labels:
 
