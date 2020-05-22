@@ -10,20 +10,21 @@ has_logo: true
 integration_title: "Microsoft\_Teams"
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: microsoft_teams
 public_title: "Intégration Datadog/Microsoft\_Teams"
 short_description: "Soyez informé des événements et des alertes Datadog dans Microsoft\_Teams."
-version: 1
+version: '1.0'
 ---
 ## Présentation
 
 Intégrez Microsoft Teams pour :
 
-* Être informé des événements et des alertes Datadog dans Microsoft Teams
-* Partager des messages et des graphiques avec votre équipe Microsoft Teams
+- Soyez informé des événements et des alertes Datadog dans Microsoft Teams.
+- Partager des messages et des graphiques avec votre équipe Microsoft Teams
 
 ## Implémentation
+
 Pour intégrer Datadog à un canal Microsoft Teams :
 
 1. Cliquez sur le bouton `...` en regard du nom du canal dans la liste des canaux, puis choisissez `Connectors`.
@@ -34,21 +35,15 @@ Pour intégrer Datadog à un canal Microsoft Teams :
 
     {{< img src="integrations/microsoft_teams/microsoft_team_step_2.png" alt="Microsoft Teams (étape 2)" >}}
 
-3. Si vous disposez d'un sous-domaine, saisissez le sous-domaine de votre compte. Dans le cas contraire, saisissez `app`. Cliquez sur **Visit site to install** pour être redirigé vers Datadog.
+3. Sur la page `Configure`, copiez l'URL du webhook.
+4. Dans l'app Datadog, accédez à [Integrations > Microsoft teams][1].
+5. Dans l'onglet Configuration, cliquez sur **Add Channel**, nommez votre canal, puis collez l'URL du webhook.
+6. Depuis la page `Configure` de Microsoft, cliquez sur **Save**.
 
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_3.png" alt="Microsoft Teams (étape 3)" >}}
-
-4. Dans l'onglet de configuration du carré d'intégration de Microsoft Teams, cliquez sur le bouton `Connect to Office 365` pour effectuer l'installation.
-
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_4.png" alt="Microsoft Teams (étape 4)" >}}
-
-5. Remplacez le nom de l'équipe `auto-generated` par le nom de votre choix.
-
-    {{< img src="integrations/microsoft_teams/microsoft_team_step_5.png" alt="Microsoft Teams (étape 5)" >}}
-
-Vous pouvez maintenant utiliser la [syntaxe `@-notification`][1] avec le nom de votre équipe Microsoft.
+Vous pouvez maintenant utiliser la [syntaxe `@-notification`][2] avec le nom de votre équipe Microsoft.
 
 ## Données collectées
+
 ### Métriques
 
 L'intégration Microsoft Teams ne fournit aucune métrique.
@@ -58,10 +53,21 @@ L'intégration Microsoft Teams ne fournit aucune métrique.
 L'intégration Microsoft Teams ne fournit aucun événement.
 
 ### Checks de service
+
 L'intégration Microsoft Teams ne fournit aucun check de service.
 
 ## Dépannage
-Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
-[1]: https://docs.datadoghq.com/fr/monitors/notifications/#notification
-[2]: https://docs.datadoghq.com/fr/help
+### Utilisation de l'authentification unique
+
+Suivez les étapes suivantes pour définir de nouveaux connecteurs pour vos canaux :
+
+1. Connectez-vous à Datadog, puis suivez les étapes 1 et 2 de configuration.
+
+2. Pour l'étape 3, vous devez accéder à Datadog depuis la page Microsoft Teams. Ouvrez un nouvel onglet et connectez-vous à Datadog à l'aide du processus d'authentification unique. Effectuez ensuite l'étape 4 sur une autre page.
+
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
+
+[1]: https://app.datadoghq.com/account/settings#integrations/microsoft-teams
+[2]: https://docs.datadoghq.com/fr/monitors/notifications/#notification
+[3]: https://docs.datadoghq.com/fr/help/
