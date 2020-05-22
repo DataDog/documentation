@@ -31,7 +31,7 @@ further_reading:
 
 | 属性名   | 種類   | 説明                 |
 |------------------|--------|-----------------------------|
-| `application_id` | string | Datadog アプリケーション ID。 |
+| `application_id` | string | Datadog アプリケーション ID。 |
 | `session_id`     | string | セッション ID。             |
 
 ### ビュー属性
@@ -52,7 +52,7 @@ further_reading:
 
 | 属性名                           | 種類   | 説明                                     |
 |------------------------------------------|--------|-------------------------------------------------|
-| `http.useragent_details.os.family`       | string | User-Agent によって報告された OS ファミリー。       |
+| `http.useragent_details.os.family`       | string | User-Agent によって報告された OS ファミリー。       |
 | `http.useragent_details.browser.family`  | string | User-Agent によって報告されたブラウザファミリー。  |
 | `http.useragent_details.device.family`   | string | User-Agent によって報告されたデバイスファミリー。   |
 | `http.useragent_details.device.category` | string | User-Agent によって報告されたデバイスカテゴリ。 |
@@ -79,6 +79,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/processing/attributes_naming_convention
+[1]: /ja/logs/processing/attributes_naming_convention/
 [2]: /ja/logs/processing/attributes_naming_convention/#user-agent-attributes
-[3]: /ja/real_user_monitoring/installation/advanced_configuration
+[3]: /ja/real_user_monitoring/installation/advanced_configuration/

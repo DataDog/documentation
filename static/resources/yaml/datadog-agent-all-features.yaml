@@ -232,7 +232,7 @@ spec:
     spec:
       containers:
       - name: agent
-        image: "datadog/agent:7"
+        image: "datadog/agent:7.19.0"
         imagePullPolicy: IfNotPresent
         command: ["agent", "start"]
         resources: {}
@@ -252,6 +252,8 @@ spec:
               fieldPath: status.hostIP
         - name: KUBERNETES
           value: "yes"
+        - name: DOCKER_HOST
+          value: unix:///host/var/run/docker.sock
         - name: DD_LOG_LEVEL
           value: "INFO"
         - name: DD_DOGSTATSD_PORT
@@ -271,8 +273,8 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /etc/datadog-agent
-        - name: runtimesocket
-          mountPath: /var/run/docker.sock
+        - name: runtimesocketdir
+          mountPath: /host/var/run
           readOnly: true
         - name: sysprobe-socket-dir
           mountPath: /sysprobe/var/run
@@ -301,7 +303,7 @@ spec:
           successThreshold: 1
           timeoutSeconds: 5
       - name: trace-agent
-        image: "datadog/agent:7"
+        image: "datadog/agent:7.19.0"
         imagePullPolicy: IfNotPresent
         command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
         resources: {}
@@ -322,6 +324,8 @@ spec:
               fieldPath: status.hostIP
         - name: KUBERNETES
           value: "yes"
+        - name: DOCKER_HOST
+          value: unix:///host/var/run/docker.sock
         - name: DD_LOG_LEVEL
           value: "INFO"
         - name: DD_APM_ENABLED
@@ -333,8 +337,8 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /etc/datadog-agent
-        - name: runtimesocket
-          mountPath: /var/run/docker.sock
+        - name: runtimesocketdir
+          mountPath: /host/var/run
           readOnly: true
         livenessProbe:
           initialDelaySeconds: 15
@@ -343,7 +347,7 @@ spec:
             port: 8126
           timeoutSeconds: 5
       - name: process-agent
-        image: "datadog/agent:7"
+        image: "datadog/agent:7.19.0"
         imagePullPolicy: IfNotPresent
         command: ["process-agent", "-config=/etc/datadog-agent/datadog.yaml"]
         resources: {}
@@ -359,6 +363,8 @@ spec:
               fieldPath: status.hostIP
         - name: KUBERNETES
           value: "yes"
+        - name: DOCKER_HOST
+          value: unix:///host/var/run/docker.sock
         - name: DD_PROCESS_AGENT_ENABLED
           value: "true"
         - name: DD_LOG_LEVEL
@@ -368,8 +374,8 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /etc/datadog-agent
-        - name: runtimesocket
-          mountPath: /var/run/docker.sock
+        - name: runtimesocketdir
+          mountPath: /host/var/run
           readOnly: true
         - name: cgroups
           mountPath: /host/sys/fs/cgroup
@@ -383,7 +389,7 @@ spec:
           mountPath: /opt/datadog-agent/run
           readOnly: true
       - name: system-probe
-        image: "datadog/agent:7"
+        image: "datadog/agent:7.19.0"
         imagePullPolicy: IfNotPresent
         securityContext:
           capabilities:
@@ -405,7 +411,7 @@ spec:
           readOnly: true
       initContainers:
       - name: init-volume
-        image: "datadog/agent:7"
+        image: "datadog/agent:7.19.0"
         imagePullPolicy: IfNotPresent
         command: ["bash", "-c"]
         args:
@@ -415,7 +421,7 @@ spec:
           mountPath: /opt/datadog-agent
         resources: {}
       - name: init-config
-        image: "datadog/agent:7"
+        image: "datadog/agent:7.19.0"
         imagePullPolicy: IfNotPresent
         command: ["bash", "-c"]
         args:
@@ -427,8 +433,8 @@ spec:
         - name: procdir
           mountPath: /host/proc
           readOnly: true
-        - name: runtimesocket
-          mountPath: /var/run/docker.sock
+        - name: runtimesocketdir
+          mountPath: /host/var/run
           readOnly: true
         env:
         - name: DD_API_KEY
@@ -442,9 +448,11 @@ spec:
               fieldPath: status.hostIP
         - name: KUBERNETES
           value: "yes"
+        - name: DOCKER_HOST
+          value: unix:///host/var/run/docker.sock
         resources: {}
       - name: seccomp-setup
-        image: "datadog/agent:7"
+        image: "datadog/agent:7.19.0"
         command:
         - cp
         - /etc/config/system-probe-seccomp.json
@@ -454,12 +462,13 @@ spec:
           mountPath: /etc/config
         - name: seccomp-root
           mountPath: /host/var/lib/kubelet/seccomp
+        resources: {}
       volumes:
       - name: config
         emptyDir: {}
       - hostPath:
-          path: /var/run/docker.sock
-        name: runtimesocket
+          path: /var/run
+        name: runtimesocketdir
       - hostPath:
           path: /proc
         name: procdir

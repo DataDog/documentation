@@ -66,7 +66,7 @@ TEMPLATE_VARIABLE_SCHEMA = {
 |-----------|--------|-------------------------------------------|
 | `name`    | string | Name of your template variable.           |
 | `default` | string | Default value for your template variable. |
-| `prefix`  | string | Tag group for your template variable.     |
+| `prefix`  | string | Tag key for your template variable.       |
 
 [Learn more about template variable in the Datadog UI][4].
 

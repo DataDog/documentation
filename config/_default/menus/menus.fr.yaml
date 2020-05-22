@@ -2021,6 +2021,9 @@ api_v1:
   - name: Usage Metering
     url: /fr/api/v1/usage-metering/
     identifier: Usage Metering
+  - name: Get hourly usage for analyzed logs
+    parent: Usage Metering
+    url: get-hourly-usage-for-analyzed-logs
   - name: Get hourly usage for Lambda
     parent: Usage Metering
     url: get-hourly-usage-for-lambda
@@ -2045,6 +2048,9 @@ api_v1:
   - name: Get hourly usage for RUM Sessions
     parent: Usage Metering
     url: get-hourly-usage-for-rum-sessions
+  - name: Get hourly usage for SNMP devices
+    parent: Usage Metering
+    url: get-hourly-usage-for-snmp-devices
   - name: Get usage across your multi-org account
     parent: Usage Metering
     url: get-usage-across-your-multi-org-account

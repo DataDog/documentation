@@ -76,16 +76,16 @@
       "json_curl": {
         "service_hooks": [
           {
-            "account": "doghouse",
-            "url": "https://hooks.slack.com/services/2/2/2"
+            "account": null,
+            "url": null
           }
         ]
       },
       "json": {
         "service_hooks": [
           {
-            "account": "doghouse",
-            "url": "https://hooks.slack.com/services/2/2/2"
+            "account": "string",
+            "url": "string"
           }
         ]
       },
