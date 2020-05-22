@@ -4,18 +4,21 @@ title: APM & Distributed Tracing
 kind: documentation
 description: Instrument your code to improve performance
 further_reading:
-- link: "/tracing/manual_instrumentation/"
+- link: "/tracing/guide/setting_primary_tags_to_scope/"
   tag: "Documentation"
-  text: "Instrument and configure your application to send custom traces to Datadog"
-- link: "/tracing/runtime_metrics"
+  text: "Add primary and secondary tags to your traces"
+- link: "/tracing/guide/add_span_md_and_graph_it/"
   tag: "Documentation"
-  text: "Gain additional insights into an application's performance with the runtime metrics associated to your traces."
-- link: "/tracing/troubleshooting"
+  text: "Add custom tags to your spans to slice and dice performance"
+- link: "/tracing/guide/security/"
   tag: "Documentation"
-  text: "Solve common tracing issues"
-- link: "https://learn.datadoghq.com/enrol/index.php?id=17"
-  tag: "Learning Center"
-  text: "Introduction to Application Performance Monitoring"
+  text: "Automatically scrub PII from your traces"
+- link: "/tracing/guide/metrics_namespace/"
+  tag: "Documentation"
+  text: "Learn about trace metrics and their tags"
+- link: "/tracing/visualization/"
+  tag: "Documentation"
+  text: "Learn to use the APM UI"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
@@ -28,85 +31,62 @@ aliases:
 
 </br>
 
-## What is Datadog APM?
+Datadog APM & Distributed Tracing gives deep visibility into your applications with **out-of-the-box performance dashboards** for web services, queues and databases to monitor requests, errors and latency. Distributed traces **seamlessly correlate** to Browser sessions, Logs, Network, Processes and Infrastructure metrics across hosts, containers, proxies and serverless functions. Search **100% of traces live with no sampling** during an outage, while Datadog intelligently retains traces that represent an error, high latency or unique code paths for analysis.
 
-Datadog Application Performance Monitoring (APM or tracing) provides you with deep insight into your application’s performance - from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests - side by side with your logs and infrastructure monitoring via Datadog’s single pane of glass approach to monitoring.
-
-Datadog collects traces across applications, browser sessions, mobile pageviews, logs, network, application code, databases, proxies, hosts & containers, and offers **live search on 100% of distributed traces** while intelligently retaining traces mapping to bad user experiences like errors and high latency.
 ## Getting Started
 
-Whether your apps are built as a monolith, microservices, or serverless functions, getting started takes just minutes. To quickly get started with Datadog APM, follow these steps:
+As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers or serverless functions takes just minutes.
 
-### 1. Enable Trace Collection
+### 1. Configure the Datadog Agent
 
-[Enable Trace Collection][1]:  Install and configure Datadog APM for  AWS, GCP, Azure, Kubernetes, ECS, PCF, Azure, Heroku, on-prem and more.
+[Install and configure the Datadog Agent][1] in AWS, GCP, Azure, Kubernetes, ECS, Fargate, PCF, Heroku, on-prem and more.
 
 ### 2. Instrument Your Application
 
-[Instrument Your Application][2]: Add a tracing library to your application to start  sending traces to Datadog for monitoring.
+Add a tracing library to your application or proxy service to start sending traces to the Datadog Agent.
 
 {{< partial name="apm/apm-languages.html" >}}
+<br>
+## Explore Datadog APM
 
-### 3. View your data in the APM UI
+Now that you've configured your application to send traces to Datadog, start getting insights into your application performance:
 
-[Use the APM UI][3]: Once you’re sending traces to Datadog, you can begin to visualize your APM Data with out of the box dashboards and the [Live Tail][4]. Monitor on key metrics with end-to-end service views to follow individual user requests from browser to proxies, microservices, queues, caches, serverless functions and databases. Use the [Live Tail][4] to search by any tag on 100% of your traces live with no sampling.
 
-{{< img src="tracing/index/apm-metric-query-loop.mp4" video="true" alt="Use the APM UI"  style="width:50%;">}}
+### App Analytics
 
-## Additional APM functionality
+[Analyze performance][2] by application, infrastructure or custom tags such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
 
-Once you are sending traces to Datadog, you can optionally enable other APM functionality:
-
-### Set up App Analytics
-
-[App Analytics][5]: Once you’re sending traces to Datadog, you can query and monitor your data with business or infrastructure tags such as merchant, customer, cart value, availability zone, datacenter, user or domain.
-
-{{< img src="tracing/index/AppAnalytics.gif" alt="App Analytics"  style="width:50%;">}}
+{{< img src="tracing/index/SearchAppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
 
 ### Connect Logs and Traces
 
-[Connect Logs and Traces][6]: Connect your application logs across monoliths, microservices and serverless functions to visualize user data scoped to individual requests with automatic trace_id injection.
+[View your application logs][3] side-by-side with the trace for a single distributed request with automatic trace-id injection.
 
-{{< img src="tracing/index/ConnectLogsAndTraces.png" alt="Connect Logs And Traces"  style="width:50%;">}}
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
 
-### Add Profiling
+### Continuous Profiling
 
-[Profiling][7]: Profiles reveal which or lines of code consume the most resources, such as CPU and memory. By optimizing these, you can reduce both your end-user latency and cloud provider bill.
+[Improve code efficiency][4] with always on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
 
-{{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:50%;">}}
+{{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
-### Integrate OpenTracing
+### Live Tail
 
-[OpenTracing][8]: Integrate your instrumentation seamlessly between the Opentracing standard and Datadog APM tracers for Java, .NET, Node, Python, PHP, Ruby, Go and C++
+[Search by any tag][5] on 100% of your traces live with no sampling.
 
-{{< img src="tracing/index/OpenTracing.png" alt="Open Tracing"  style="width:8%;">}}
+{{< img src="tracing/index/SearchLiveTail.gif" alt="LiveTail"  style="width:100%;">}}
 
-##  Next Steps
+### Integrate with OpenTracing
 
-Consider these useful resources & guides for more information or common advanced usecases with Datadog APM & Distributed Tracing.
-
-[Set Primary Tags to Scope][9]
-
-[Add span tags and slice and dice your application performance][10]
-
-[Automatically scrub PII from your traces][11]
-
-[Trace Metrics][12]
-
+[Integrate your instrumentation][6] seamlessly between Opentracing and Datadog APM.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/send_traces/
-[2]: /tracing/setup/
-[3]: /tracing/visualization/
-[4]: /tracing/livetail/
-[5]: /tracing/app_analytics/
-[6]: /tracing/connect_logs_and_traces/
-[7]: /tracing/profiling/
-[8]: /tracing/opentracing/
-[9]: /tracing/guide/setting_primary_tags_to_scope/
-[10]: /tracing/guide/add_span_md_and_graph_it/?tab=java
-[11]: /tracing/guide/security/
-[12]: /tracing/guide/metrics_namespace/
+[2]: /tracing/app_analytics/
+[3]: /tracing/connect_logs_and_traces/
+[4]: /tracing/profiling/
+[5]: /tracing/livetail/
+[6]: /tracing/opentracing/
