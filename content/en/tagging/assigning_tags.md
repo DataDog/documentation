@@ -17,54 +17,31 @@ further_reading:
 
 Tagging is used throughout Datadog to query the machines and metrics you monitor. Without the ability to assign and filter based on tags, finding problems in your environment and narrowing them down enough to discover the true causes could be difficult. Learn how to [define tags][1] in Datadog before going further.
 
- In [non-containerized environments](#non-containerized-environments), the agent automatically assigns the [host tag](#host-tags) and uses integration inheritance . Other tags can be manually configured in the [Datadog Agent configuration file][2]. If you are using Datadog integrations, tags defined in the `datadog.yaml` or `datadog.conf` file are applied to all of your integrations data.
+In [non-containerized environments](?tab=non-containerized-environments), the agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations. Tags can also be manually configured in the [Datadog Agent configuration file][2].
 
- In [containerized environments](#containerized-environments), Datadog recommends using [Autodiscovery][3] to automatically identify services running on a specific container and gather data from those services. Once Autodiscovery is enabled, the Datadog Agent automatically attempts autodiscovery for a number of services, including Apache and Redis, based on default [Autodiscovery configuration files][4]. These files enable a list of tags to attach to every metric and service check, and are configured the same as tags in the Datadog Agent configuration file. Autodiscovery allows easier [unification of tags][5] to achieve a single point of configuration across all Datadog telemetry.
+In [containerized environments]... autodiscovery blurb. TK. If Autodiscovery is not in use, the agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations. Tags can also be manually configured in the [Datadog Agent configuration file][2].
 
-You can also configure tags:
+## Methods for Assigning Tags
+
+Tags can be configured in several different ways:
+
+- Within the Agent [configuration file](#configuration-file)
 - In the Datadog [UI](#ui)
-- With the Datadog [API][6]
-- With[DogStatsD][7]
+- With the Datadog [API][3]
+- With the [DogStatsD][4] extension
 
-### Host tags
-
-The hostname (tag key `host`) is [assigned automatically][8] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
-
-```yaml
-# Set the hostname (default: auto-detected)
-# Must comply with RFC-1123, which permits only:
-# "A" to "Z", "a" to "z", "0" to "9", and the hyphen (-)
-hostname: mymachine.mydomain
-```
-
-#### Changing the hostname
-
-* The old hostname remains in the UI for 2 hours but does not show new metrics.
-* Any data from hosts with the old hostname can be queried with the API.
-* To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][9].
-
-#### Adding additional tags
+### Configuration file
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-The Agent configuration file (`datadog.yaml`) is also used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent (see YAML formats below).
+#### File location
 
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-The Agent configuration file (`datadog.conf`) is also used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent. Tags within `datadog.conf` must be in the format:
-
-```text
-tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+The Agent configuration file (`datadog.yaml`) is used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent.
 
 Tags for the [integrations][10] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][2].
 
-##### YAML formats
+#### YAML formats
 
 In YAML files, use a list of strings under the `tags` key to assign a list of tags. In YAML, lists are defined with two different yet functionally equivalent forms:
 
@@ -83,93 +60,152 @@ tags:
 
 It is recommended to assign tags as `<KEY>:<VALUE>` pairs, but tags only consisting of keys (`<KEY>`) are also accepted. See [defining tags][1] for more details.
 
-## Methods For Assigning Tags
+#### Host tags
 
-### Integration inheritance
+The hostname (tag key `host`) is [assigned automatically][8] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.yaml`:
+
+```yaml
+# Set the hostname (default: auto-detected)
+# Must comply with RFC-1123, which permits only:
+# "A" to "Z", "a" to "z", "0" to "9", and the hyphen (-)
+hostname: mymachine.mydomain
+```
+
+##### Changing the hostname
+
+* The old hostname remains in the UI for 2 hours but does not show new metrics.
+* Any data from hosts with the old hostname can be queried with the API.
+* To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][9].
+
+{{% /tab %}}
+{{% tab "Agent v5" %}}
+
+#### File location
+
+The Agent configuration file (`datadog.conf`) is used to set host tags which apply to all metrics, traces, and logs forwarded by the Datadog Agent.
+
+Tags for the [integrations][10] installed with the Agent are configured with YAML files located in the **conf.d** directory of the Agent install. To locate the configuration files, refer to [Agent configuration files][2].
+
+#### YAML formats
+
+In YAML files, use a list of strings under the `tags` key to assign a list of tags. In YAML, lists are defined with two different yet functionally equivalent forms:
+
+```yaml
+tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
+```
+
+It is recommended to assign tags as `<KEY>:<VALUE>` pairs, but tags only consisting of keys (`<KEY>`) are also accepted. See [defining tags][1] for more details.
+
+#### Host tags
+
+The hostname (tag key `host`) is [assigned automatically][8] by the Datadog Agent. To customize the hostname, use the Agent configuration file, `datadog.conf`:
+
+```yaml
+# Set the hostname (default: auto-detected)
+# Must comply with RFC-1123, which permits only:
+# "A" to "Z", "a" to "z", "0" to "9", and the hyphen (-)
+hostname: mymachine.mydomain
+```
+
+##### Changing the hostname
+
+* The old hostname remains in the UI for 2 hours but does not show new metrics.
+* Any data from hosts with the old hostname can be queried with the API.
+* To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][9].
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Integration inheritance
 
 The most efficient method for assigning tags is to rely on integration inheritance. Tags you assign to your AWS instances, Chef recipes, and other integrations are automatically inherited by hosts and metrics you send to Datadog.
 
-#### Cloud integrations
+##### Cloud integrations
 
-Cloud integrations are authentication based. Datadog recommends using the main cloud integration tile (AWS, Azure, Google Cloud, etc.) and [installing the Agent][11] where possible. **Note**: If you choose to use the Agent only, some integration tags are not available.
+Cloud integrations are authentication based. Datadog recommends using the main cloud integration tile (AWS, Azure, Google Cloud, etc.) and [installing the Agent][5] where possible. **Note**: If you choose to use the Agent only, some integration tags are not available.
 
-##### Amazon Web Services
-
-The following tags are collected from AWS integrations. **Note**: Some tags only display on specific metrics.
-
-| Integration            | Datadog Tag Keys                                                                                                                                                                                              |
-|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| All                    | `region`                                                                                                                                                                                                      |
-| [API Gateway][12]      | `apiid`, `apiname`, `method`, `resource`, `stage`                                                                                                                                                             |
-| [Auto Scaling][13]     | `autoscalinggroupname`, `autoscaling_group`                                                                                                                                                                   |
-| [Billing][14]          | `account_id`, `budget_name`, `budget_type`, `currency`, `servicename`, `time_unit`                                                                                                                            |
-| [CloudFront][15]       | `distributionid`                                                                                                                                                                                              |
-| CodeBuild              | `project_name`                                                                                                                                                                                                |
-| [CodeDeploy][16]       | `application`, `creator`, `deployment_config`, `deployment_group`, `deployment_option`, `deployment_type`, `status`                                                                                           |
-| [DirectConnect][17]    | `connectionid`                                                                                                                                                                                                |
-| [DynamoDB][18]         | `globalsecondaryindexname`, `operation`, `streamlabel`, `tablename`                                                                                                                                           |
-| [EBS][19]              | `volumeid`, `volume-name`, `volume-type`                                                                                                                                                                      |
-| [EC2][20]              | `autoscaling_group`, `availability-zone`, `image`, `instance-id`, `instance-type`, `kernel`, `name`, `security_group_name`                                                                                    |
-| [ECS][21]              | `clustername`, `servicename`, `instance_id`                                                                                                                                                                   |
-| [EFS][22]              | `filesystemid`                                                                                                                                                                                                |
-| [ElastiCache][23]      | `cachenodeid`, `cache_node_type`, `cacheclusterid`, `cluster_name`, `engine`, `engine_version`, `prefered_availability-zone`, `replication_group`                                                             |
-| [ElasticBeanstalk][24] | `environmentname`, `enviromentid`                                                                                                                                                                             |
-| [ELB][25]              | `availability-zone`, `hostname`, `loadbalancername`, `name`, `targetgroup`                                                                                                                                    |
-| [EMR][26]              | `cluster_name`, `jobflowid`                                                                                                                                                                                   |
-| [ES][27]               | `dedicated_master_enabled`, `ebs_enabled`, `elasticsearch_version`, `instance_type`, `zone_awareness_enabled`                                                                                                 |
-| [Firehose][28]         | `deliverystreamname`                                                                                                                                                                                          |
-| [Health][29]           | `event_category`, `status`, `service`                                                                                                                                                                         |
-| [IoT][30]              | `actiontype`, `protocol`, `rulename`                                                                                                                                                                          |
-| [Kinesis][31]          | `streamname`, `name`, `state`                                                                                                                                                                                 |
-| [KMS][32]              | `keyid`                                                                                                                                                                                                       |
-| [Lambda][33]           | `functionname`, `resource`, `executedversion`, `memorysize`, `runtime`                                                                                                                                        |
-| [Machine Learning][34] | `mlmodelid`, `requestmode`                                                                                                                                                                                    |
-| [MQ][35]               | `broker`, `queue`, `topic`                                                                                                                                                                                    |
-| [OpsWorks][36]         | `stackid`, `layerid`, `instanceid`                                                                                                                                                                            |
-| [Polly][37]            | `operation`                                                                                                                                                                                                   |
-| [RDS][38]              | `auto_minor_version_upgrade`, `dbinstanceclass`, `dbclusteridentifier`, `dbinstanceidentifier`, `dbname`, `engine`, `engineversion`, `hostname`, `name`, `publicly_accessible`, `secondary_availability-zone` |
-| [Redshift][39]         | `clusteridentifier`, `latency`, `nodeid`, `service_class`, `stage`, `wlmid`                                                                                                                                   |
-| [Route 53][40]         | `healthcheckid`                                                                                                                                                                                               |
-| [S3][41]               | `bucketname`, `filterid`, `storagetype`                                                                                                                                                                       |
-| [SES][42]              | Tag keys are custom set in AWS.                                                                                                                                                                               |
-| [SNS][43]              | `topicname`                                                                                                                                                                                                   |
-| [SQS][44]              | `queuename`                                                                                                                                                                                                   |
-| [VPC][45]              | `nategatewayid`, `vpnid`, `tunnelipaddress`                                                                                                                                                                   |
-| [WorkSpaces][46]       | `directoryid`, `workspaceid`                                                                                                                                                                                  |
-
-##### Azure
-
-Azure integration metrics, events, and service checks receive the following tags:
-
-| Integration                                           | Namespace                                   | Datadog Tag Keys                                                                                                                                                                                                 |
-|-------------------------------------------------------|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| All Azure integrations                                | All                                         | `cloud_provider`, `region`, `kind`, `type`, `name`, `resource_group`, `tenant_name`, `subscription_name`, `subscription_id`, `status` (if applicable)                                                            |
-| Azure VM integrations                                 | `azure.vm.*`                                | `host`, `size`, `operating_system`, `availability_zone`                                                                                                                                                          |
-| Azure App Service Plans<sup>(1)</sup>                 | `azure.web_serverfarms.*`                   | `per_site_scaling`, `plan_size`, `plan_tier`, `operating_system`                                                                                                                                                 |
-| Azure App Services Web Apps & Functions<sup>(1)</sup> | `azure.app_services.*`, `azure.functions.*` | `operating_system`, `server_farm_id`, `reserved`, `usage_state`, `fx_version` (linux web apps only), `php_version`, `dot_net_framework_version`, `java_version`, `node_version`, `python_version`                |
-| Azure&nbsp;SQL&nbsp;DB<sup>(1)</sup>                  | `azure.sql_servers_databases.*`             | `license_type`, `max_size_mb`, `server_name`, `role`, `zone_redundant`. <br>For replication Links only:  `state` `primary_server_name` `primary_server_region` `secondary_server_name` `secondary_server_region` |
-| Azure Load Balancer<sup>(1)</sup>                     | `azure.network_loadbalancers.*`             | `sku_name`                                                                                                                                                                                                       |
-| Azure Usage and Quota<sup>(1)</sup>                   | `azure.usage.*`                             | `usage_category`, `usage_name`                                                                                                                                                                                   |
-
-<sup>(1)</sup>*Resource-specific tags are in beta.*
-
-##### Google Cloud Platform
-
-See the [Google Cloud Platform integration][47] documentation.
-
-#### Web integrations
+##### Web integrations
 
 Web integrations are authentication based. Metrics are collected with API calls. **Note**: `CamelCase` tags are converted to underscores by Datadog, for example `TestTag` --> `test_tag`.
 
-### Environment Variables
+#### Traces
+
+**Note**: As a best practice for containerized environments, **Datadog recommends using [unified service tagging][6] for traces.**
 
 {{< tabs >}}
-{{% tab "Containerized" %}}
+{{% tab "Go" %}}
 
-After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS`.
+```go
+tracer.SetTag("env", "<ENVIRONMENT>")
+```
 
-As a best practice, **Datadog recommends using [unified service tagging for containerized environments][9].**
-In containerized environments, the agent utilizes [Autodiscovery][53] to tag `env`, `service`, and `version` from standard labels and environment variables. Since the agent associates data collected with specific containers, the configuration for the standard tags is entirely within metadata attached to the containers themselves.
+For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
+
+{{% /tab %}}
+{{% tab "Java" %}}
+Via sysprop:
+
+```text
+-Ddd.trace.span.tags=env:<ENVIRONMENT>
+```
+
+Via environment variables:
+
+```text
+DD_TRACE_SPAN_TAGS="env:<ENVIRONMENT>"
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+Datadog.tracer.set_tags('env' => '<ENVIRONMENT>')
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+from ddtrace import tracer
+tracer.set_tags({'env': '<ENVIRONMENT>'})
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+```csharp
+using Datadog.Trace;
+Tracer.Instance.ActiveScope?.Span.SetTag("env", "<ENVIRONMENT>");
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: Span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and a node can be of a single type: it can't be both an object (with sub-nodes) and a string for instance.
+
+So this example of span tags is invalid:
+
+```json
+{
+  "key": "value",
+  "key.subkey": "value_2"
+}
+```
+
+#### Environment variables
+
+{{< tabs >}}
+{{% tab "Non-containerized environments" %}}
+
+TK
+
+{{% /tab %}}
+
+{{% tab "Containerized environments" %}}
+
+After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agents main configuration file.
+
+As a best practice, **Datadog recommends using [unified service tagging for containerized environments][9].** However, all tags can be assigned manually within the Datadog Agent configuration file.
 
 Datadog automatically collects common tags from [Docker][10], [Kubernetes][11], [ECS][12], [Swarm, Mesos, Nomad, and Rancher][10]. To extract even more tags, use the following options:
 
@@ -252,70 +288,6 @@ There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CAR
 Setting the variable to `orchestrator` adds the following tags: `pod_name` (Kubernetes), `oshift_deployment` (OpenShift), `task_arn` (ECS and Fargate), `mesos_task` (Mesos).
 
 Setting the variable to `high` additionally adds the following tags: `container_name` (Docker), `container_id` (Docker), `display_container_name` (Kubelet).
-
-#### Traces
-
-The APM tracer automatically configures itself from [environment variable][54].
-**Note**: As a best practice for containerized environments, **Datadog recommends using [unified service tagging for traces][9].**
-
-{{% /tab %}}
-
-{{% tab "Non-Containerized" %}}
-
-When submitting a single trace, tag its spans to override Agent configuration tags and/or the host tags value (if any) for those traces. The following examples use the default [primary tag][13] `env:<ENVIRONMENT>` but you can use any `<KEY>:<VALUE>` tag instead:
-
-## Go
-
-```go
-tracer.SetTag("env", "<ENVIRONMENT>")
-```
-
-For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
-
-## Java
-
-Via sysprop:
-
-```text
--Ddd.trace.span.tags=env:<ENVIRONMENT>
-```
-
-Via environment variables:
-
-```text
-DD_TRACE_SPAN_TAGS="env:<ENVIRONMENT>"
-```
-
-## Ruby
-
-```ruby
-Datadog.tracer.set_tags('env' => '<ENVIRONMENT>')
-```
-
-## Python
-
-```python
-from ddtrace import tracer
-tracer.set_tags({'env': '<ENVIRONMENT>'})
-```
-
-## .NET
-
-```csharp
-using Datadog.Trace;
-Tracer.Instance.ActiveScope?.Span.SetTag("env", "<ENVIRONMENT>");
-```
-
-**Note**: Span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and a node can be of a single type: it can't be both an object (with sub-nodes) and a string for instance.
-
-So this example of span tags is invalid:
-
-```json
-{
-  "key": "value",
-  "key.subkey": "value_2"
-}
-```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -431,7 +403,7 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-Add tags to any metric, event, or service check you send to [DogStatsD][7]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+Add tags to any metric, event, or service check you send to [DogStatsD][4]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
 ```python
 
@@ -444,9 +416,9 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-**Note**: Tagging is a [Datadog-specific extension][48] to StatsD.
+**Note**: Tagging is a [Datadog-specific extension][7] to StatsD.
 
-Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][49].
+Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][8].
 
 ## Further Reading
 
@@ -454,50 +426,9 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 
 [1]: /tagging/#defining-tags
 [2]: /agent/guide/agent-configuration-files/
-[3]: /getting_started/agent/autodiscovery
-[4]: /agent/faq/auto_conf/
-[5]: /tagging/unified_service_tagging
-[6]: /api/
-[7]: /developers/metrics/dogstatsd_metrics_submission/
-[8]: /agent/faq/how-datadog-agent-determines-the-hostname/
-[9]: /dashboards/querying/#arithmetic-between-two-metrics
-[10]: /integrations/
-[11]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-[12]: /integrations/amazon_api_gateway/
-[13]: /integrations/amazon_auto_scaling/
-[14]: /integrations/amazon_billing/
-[15]: /integrations/amazon_cloudfront/
-[16]: /integrations/amazon_codedeploy/
-[17]: /integrations/amazon_directconnect/
-[18]: /integrations/amazon_dynamodb/
-[19]: /integrations/amazon_ebs/
-[20]: /integrations/amazon_ec2/
-[21]: /integrations/amazon_ecs/
-[22]: /integrations/amazon_efs/
-[23]: /integrations/amazon_elasticache/
-[24]: /integrations/amazon_elasticbeanstalk/
-[25]: /integrations/amazon_elb/
-[26]: /integrations/amazon_emr/
-[27]: /integrations/amazon_es/
-[28]: /integrations/amazon_firehose/
-[29]: /integrations/amazon_health/
-[30]: /integrations/amazon_iot/
-[31]: /integrations/amazon_kinesis/
-[32]: /integrations/amazon_kms/
-[33]: /integrations/amazon_lambda/
-[34]: /integrations/amazon_machine_learning/
-[35]: /integrations/amazon_mq/
-[36]: /integrations/amazon_ops_works/
-[37]: /integrations/amazon_polly/
-[38]: /integrations/amazon_rds/
-[39]: /integrations/amazon_redshift/
-[40]: /integrations/amazon_route53/
-[41]: /integrations/amazon_s3/
-[42]: /integrations/amazon_ses/
-[43]: /integrations/amazon_sns/
-[44]: /integrations/amazon_sqs/
-[45]: /integrations/amazon_vpc/
-[46]: /integrations/amazon_workspaces/
-[47]: /integrations/google_cloud_platform/#tags-assigned
-[48]: /libraries/
-[49]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[3]: /api/
+[4]: /developers/metrics/dogstatsd_metrics_submission/
+[5]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+[6]: /dashboards/querying/#arithmetic-between-two-metrics
+[7]: /libraries/
+[8]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
