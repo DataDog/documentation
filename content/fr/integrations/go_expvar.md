@@ -7,7 +7,6 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - languages
-  - log collection
   - autodiscovery
 creates_events: false
 ddtype: check

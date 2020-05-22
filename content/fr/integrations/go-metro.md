@@ -5,7 +5,6 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - languages
-  - log collection
 creates_events: false
 ddtype: check
 dependencies:

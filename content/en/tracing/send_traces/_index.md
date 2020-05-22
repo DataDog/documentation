@@ -1,5 +1,5 @@
 ---
-title: Enable trace collection in Datadog
+title: Agent Configuration
 kind: Documentation
 aliases:
   - /tracing/setup/
