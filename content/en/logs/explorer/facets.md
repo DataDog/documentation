@@ -124,7 +124,6 @@ If you see an aliased facet in your facet list, consider using the _standard_ fa
 
 You may wish to keep the non-standard _aliased_ version of the facet if you are troubleshooting against old content (before the aliasing for this facet has been setup by your organization).
 
-
 ## Manage Facets
 
 ### Out-of-the-box facets
@@ -133,13 +132,11 @@ Most common facets such as `Host`, `Service`, `URL Path`, or `Duration` come out
 
 Facets on [Reserved Attributes][23] and most [Standard Attributes][24] are available by default.
 
-
 ### The Index Facet
 
 The index facet is a specific facet that appears only if your organization has [multiple indexes][25], and/or if you have active [historical views][26]. Use this facet if you want to scope down your query to a subset of your indexes.
 
 {{< img src="logs/explorer/facet/index_facet_.png" alt="Create Facet" style="width:30%;">}}
-
 
 ### Create Facets
 
@@ -162,7 +159,7 @@ In case finding a matching log is not an option, create a new facet directly fro
 
 Define the underlying field (key) name for this facet:
 
-- Use tag group name for tags.
+- Use tag key name for tags.
 - Use the attribute path for attributes, with `@` prefix.
 
 Autocomplete based on the content in logs of the current views helps you to define the proper field name. But you can use virtually any value here, specifically in the case that you don't yet have matching logs flowing in your indexes.
