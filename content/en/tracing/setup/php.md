@@ -4,6 +4,7 @@ kind: documentation
 aliases:
 - /tracing/languages/php
 - /agent/apm/php/
+- /tracing/php/
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-php-performance/"
   tag: "Blog"
