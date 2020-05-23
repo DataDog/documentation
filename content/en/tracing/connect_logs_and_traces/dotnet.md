@@ -17,11 +17,15 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatic Trace ID injection
+## Automatic log injection
 
-Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
+Enable injection in the .NET tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
 
-The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs into your application logs if you are using [Serilog][3], [NLog][4] (version 2.0.0.2000+), or [log4net][5]. Automatic injection only displays in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger (see examples below).
+The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs, span IDs, `env`, `service`, and `version` into your application logs.
+If you haven't done so already, we recommend configuring the .NET tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the smoothest
+experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][10] for more details).
+
+We support [Serilog][3], [NLog][4] (version 2.0.0.2000+), or [log4net][5]. Automatic injection only displays in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger (see examples below).
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
@@ -86,13 +90,17 @@ For NLog version 4.5:
 {{< /tabs >}}
 
 
-## Manual Trace ID injection
+## Manual log injection
 
-If you prefer to manually correlate your [traces][6] with your logs, leverage the Datadog API to retrieve correlation identifiers:
+If you prefer to manually correlate your [traces][6] with your logs and tie together data for your service,
+leverage the Datadog API to retrieve correlation identifiers:
 
-- Use `CorrelationIdentifier.TraceId` and `CorrelationIdentifier.SpanId` API methods to inject identifiers at the beginning and end of each [span][7] to log (see examples below).
+- Use `CorrelationIdentifier.<FIELD>` API methods to inject identifiers at the beginning and end of each [span][7] to log (see examples below).
 - Configure MDC to use the injected keys:
 
+    - `dd.env` Globally configured `env` for the tracer (or `""` if not set)
+    - `dd.service` Globally configured root service name (or `unnamed-dotnet-service` if not set)
+    - `dd.version` Globally configured `version` for the service (or `""` if not set)
     - `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
     - `dd.span_id` Active Span ID during the log statement (or `0` if no trace)
 
@@ -121,6 +129,9 @@ using log4net;
 // there must be spans started and active before this block.
 try
 {
+    LogicalThreadContext.Properties["dd.env"] = CorrelationIdentifier.Env.ToString();
+    LogicalThreadContext.Properties["dd.service"] = CorrelationIdentifier.Service.ToString();
+    LogicalThreadContext.Properties["dd.version"] = CorrelationIdentifier.Version.ToString();
     LogicalThreadContext.Properties["dd.trace_id"] = CorrelationIdentifier.TraceId.ToString();
     LogicalThreadContext.Properties["dd.span_id"] = CorrelationIdentifier.SpanId.ToString();
 
@@ -129,6 +140,9 @@ try
 }
 finally
 {
+    LogicalThreadContext.Properties.Remove("dd.env");
+    LogicalThreadContext.Properties.Remove("dd.service");
+    LogicalThreadContext.Properties.Remove("dd.version");
     LogicalThreadContext.Properties.Remove("dd.trace_id");
     LogicalThreadContext.Properties.Remove("dd.span_id");
 }
@@ -142,6 +156,9 @@ using Datadog.Trace;
 using NLog;
 
 // there must be spans started and active before this block.
+using (MappedDiagnosticsLogicalContext.SetScoped("dd.env", CorrelationIdentifier.Env.ToString()))
+using (MappedDiagnosticsLogicalContext.SetScoped("dd.service", CorrelationIdentifier.Service.ToString()))
+using (MappedDiagnosticsLogicalContext.SetScoped("dd.version", CorrelationIdentifier.Version.ToString()))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
 {
@@ -167,3 +184,4 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 [7]: /tracing/visualization/#spans
 [8]: /logs/log_collection/csharp/#configure-your-logger
 [9]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[10]: /tagging/unified_service_tagging

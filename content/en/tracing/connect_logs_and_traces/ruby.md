@@ -17,17 +17,20 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatic Trace ID injection
+## Automatic log injection
 
 Use one of the following options to inject Ruby trace information into your logs:
 
 - [Automatic Trace ID Injection for Rails Applications using Lograge is recommended](?tab=lograge).
 - [Automatic Trace ID Injection for default Rails Applications](?tab=default).
 
+If you haven't done so already, we recommend configuring the Java tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the smoothest
+experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][3] for more details).
+
 {{< tabs >}}
 {{% tab "Lograge" %}}
 
-After [setting up Lograge in a Rails application][1], modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs:
+After [setting up Lograge in a Rails application][1], modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs and other fields:
 
 ```ruby
 config.lograge.custom_options = lambda do |event|
@@ -37,6 +40,9 @@ config.lograge.custom_options = lambda do |event|
   {
     # Adds IDs as tags to log output
     :dd => {
+      :env => correlation.env,
+      :service => correlation.service,
+      :version => correlation.version,
       :trace_id => correlation.trace_id,
       :span_id => correlation.span_id
     },
@@ -50,7 +56,7 @@ end
 {{% /tab %}}
 {{% tab "Default" %}}
 
-Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append trace IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add trace tags.
+Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append `env`, `service`, `version`, trace IDs, and span IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add trace tags.
 
 In your Rails environment configuration file (e.g. `config/environments/production.rb`), add the following:
 
@@ -63,21 +69,24 @@ end
 This appends trace tags to web requests:
 
 ```text
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
+# [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
+# [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
+# [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
+# [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Manual Trace ID injection
+## Manual log injection
 
-To add trace IDs to your own logger, add a log formatter which retrieves the trace IDs with `Datadog.tracer.active_correlation`, then add the trace IDs to the message.
+To add `env`, `service`, `version`, trace IDs, and span IDs to your own logger, add a log formatter which retrieves the trace IDs with `Datadog.tracer.active_correlation`, then add the fields to the message.
 
 To ensure proper log correlation, verify the following is present in each message:
 
+- `dd.env=<ENV>`: Where `<ENV>` is equal to `Datadog.tracer.active_correlation.env`. Omit if no environment is configured.
+- `dd.service=<SERVICE>`: Where `<SERVICE>` is equal to `Datadog.tracer.active_correlation.service`. Omit if no default service name is configured.
+- `dd.version=<VERSION>`: Where `<VERSION>` is equal to `Datadog.tracer.active_correlation.version`. Omit if no application version is configured.
 - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `Datadog.tracer.active_correlation.trace_id` or `0` if no trace is active during logging.
 - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `Datadog.tracer.active_correlation.span_id` or `0` if no trace is active during logging.
 
@@ -97,11 +106,11 @@ end
 
 # When no trace is active
 logger.warn('This is an untraced operation.')
-# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=0 dd.span_id=0] This is an untraced operation.
+# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.1 dd.trace_id=0 dd.span_id=0] This is an untraced operation.
 
 # When a trace is active
 Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.') }
-# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
+# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.1 dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
 
 **Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][2].
@@ -114,3 +123,4 @@ See the [Ruby logging documentation][1] to verify the Ruby log integration is pr
 
 [1]: /logs/log_collection/ruby/#configure-the-datadog-agent
 [2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[3]: /tagging/unified_service_tagging
