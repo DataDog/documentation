@@ -520,6 +520,11 @@ main:
     parent: serverless
     identifier: app_services_extension
     weight: 701
+  - name: Datadog Lambda Layer
+    url: infrastructure/serverless/datadog_lambda_layer
+    parent: serverless
+    identifier: datadog_lambda_layer
+    weight: 701
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
