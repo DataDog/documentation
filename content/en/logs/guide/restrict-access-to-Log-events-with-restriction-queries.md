@@ -152,7 +152,6 @@ To access logs within Datadog, the following permissions are critical:
 * `logs_live_tail`: Access to the Live Tail feature.
 
 Users must have these three permissions activated to see both ingested and indexed logs. 
-
 Access is then restricted with a restriction query, as shown below.
 
 ### 3. Grant permissions to the role
@@ -195,8 +194,6 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 There are many ways to identify which logs correspond to each team. For example, you can use the service value, or add a `team` tag on your data.
 
 This guide assumes that there is a `team` tag associated with the backend and frontend logs.
-
-### Query for the backend team
 
 {{< tabs >}}
 {{% tab "Backend" %}}
