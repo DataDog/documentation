@@ -93,13 +93,13 @@ Asserts that an email was sent and whether specific values (`string`, `number`, 
 
 #### Test your UI with custom JavaScript
 
-Test a custom assertion on the active page using your own JavaScript scripts. JavaScript assertions support all the JavaScript built-in methods. You can use JavaScript libraries if these are exposed in global variables or if you wrap their loading in a promise.
+Test a custom assertion on the active page using your own JavaScript scripts. JavaScript assertions support both synchronous and asynchronous code. Since JavaScript assertions run in the context of the active page, it also means these steps can access all the objects defined in the active page (libraries, builtins, global variables, ...).
 
 If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. 
 
 {{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="90%">}}
 
-**Note**: You can also use [variables][5] as part of your JavaScript assertions.
+**Note**: You can also use browser tests' [variables][5] as part of your JavaScript assertions.
 
 #### Test a downloaded file
 
@@ -180,7 +180,7 @@ Create a variable out of a `span`, `div`, etc. content by extracting the text of
 
 ##### JavaScript
 
-Generate custom variables using your own JavaScript scripts. By default the step is being performed at the page level. JavaScript assertions support all the JavaScript built-in methods. You can use JavaScript libraries if these are exposed in global variables or if you wrap their loading in a promise. 
+Generate custom variables using your own JavaScript scripts. JavaScript steps support both synchronous and asynchronous code. By default the step is being performed on the active page, which means it can access all the objects defined at the active page level (libraries, builtins, global variables, ...).
 
 If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. 
 
