@@ -25,15 +25,13 @@ To create a [logs monitor][2] in Datadog, use the main navigation: *Monitors -->
 
 As you define the search query, the graph above the search fields updates.
 
-1. If you have [multiple log indexes][3], select the index to search.
-2. Construct a search query using the same logic as a [log explorer search][4].
-3. Choose to monitor over a log count, [facet][5], or [measure][5]:
+1. Construct a search query using the same logic as a [log explorer search][4].
+2. Choose to monitor over a log count, [facet][5], or [measure][5]:
     * **Monitor over a log count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of logs over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a facet**: If a [facet][5] is selected, the monitor alerts over the `Unique value count` of the facet.
     * **Monitor over measure**: If a [measure][5] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-4. Define the alert grouping (optional). **Note**: With or without alert grouping defined, you get **one** alert when the aggregated value meets the set conditions. Even if you split the query by host, a single notification is sent if several hosts meet the set conditions. This is done to reduce notification noise.
+3. Define the alert grouping (optional). **Note**: With or without alert grouping defined, you get **one** alert when the aggregated value meets the set conditions. Even if you split the query by host, a single notification is sent if several hosts meet the set conditions. This is done to reduce notification noise.
 
-{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="Below monitor for backend service"  style="width:60%;" >}}
 
 ### Set alert conditions
 
