@@ -90,7 +90,7 @@ var logObject = {
     "apiProduct": apiProduct,
     "apigee_proxy.name": apigeeProxyName,
     "apigee_proxy.revision": apigeeProxyRevision,
-    "appName": appName,
+    "service": appName,
     "http.method": httpMethod,
     "http.url": httpUrl,
     "http.status_code": httpStatusCode,
@@ -101,7 +101,7 @@ var logObject = {
     "totalLatency": totalLatency,
     "http.client.start_time_ms": request_start_time,
     "http.client.end_time_ms": request_end_time,
-    "user-agent": userAgent,
+    "http.useragent": userAgent,
     "message": messageContent,
 };
 
