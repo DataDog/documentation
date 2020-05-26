@@ -70,7 +70,7 @@ function codeTabs() {
             );
 
             // restore
-            $(document).scrollTop($(this).offset().top - currentOffset);
+            // $(document).scrollTop($(this).offset().top - currentOffset);
         });
 
         // mobile tabs trigger desktop ones

@@ -269,6 +269,15 @@ h5{
   padding-top: 14px;
 }
 
+.announcement_banner.open ~ .container .main {
+
+  h2,h3,h4,h5 {
+    margin-top: -110px;
+    padding-top: 110px;
+  }
+  
+}
+
 .main {
   &:lang(ja) {
     padding-left: 15px;
@@ -288,6 +297,24 @@ h5{
       border-bottom: 1px solid #000;
     }
   }
+
+  h2,h3,h4,h5 {
+    margin-top: -80px;
+    padding-top: 80px;
+    pointer-events: none;
+    background-clip: content-box;
+    margin-right: 0;
+    a {
+        pointer-events: initial;
+        border-bottom: 1px solid transparent;
+        &:hover {
+            color: #000;
+            border-bottom: 1px solid #000;
+        }
+    }
+}
+
+
   .tab-content a,
   & > a,
   & p a,

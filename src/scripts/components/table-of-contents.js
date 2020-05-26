@@ -29,7 +29,7 @@ export function updateTOC() {
             closeMobileTOC();
         }
         if (href.substr(0, 1) === '#') {
-            moveToAnchor(href.substr(1), true);
+            // moveToAnchor(href.substr(1), true);
             datadogLogs.logger.log(
                 'Toc used',
                 {
@@ -39,9 +39,9 @@ export function updateTOC() {
                 },
                 'info'
             );
-            return false;
+            // return false;
         }
-        return true;
+        // return true;
     });
 }
 
@@ -109,7 +109,7 @@ export function buildTOCMap() {
 
 export function onScroll() {
     const winTop = $(window).scrollTop();
-    const localOffset = 120;
+    const localOffset = 110;
 
     if ($(window).scrollTop() + $(window).height() === $(document).height()) {
         // we are at the bottom of the screen  just highlight the last item
