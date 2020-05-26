@@ -38,7 +38,7 @@ service_check(<SERVICE_CHECK_NAME>, <STATUS>, <TAGS>, <HOSTNAME>, <MESSAGE>)
 サービスチェックコードの例を表示するには言語を選んでください。
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 {{< code-block lang="python" filename="service_check.py" >}}
 from datadog import initialize, statsd
@@ -54,8 +54,8 @@ statsd.service_check(
 )
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 {{< code-block lang="ruby" filename="service_check.rb" >}}
 require 'datadog/statsd'
@@ -65,8 +65,8 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 statsd.service_check('application.service_check', 0, {'message' => 'Application is OK'})
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 {{< code-block lang="go" filename="service_check.go" >}}
 package main
@@ -93,8 +93,8 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
 {{< code-block lang="java" filename="service_check.java" >}}
 import com.timgroup.statsd.ServiceCheck;
@@ -121,8 +121,8 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 {{< code-block lang="csharp" filename="service_check.cs" >}}
 using StatsdClient;
@@ -144,8 +144,8 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 {{< code-block lang="php" filename="service_check.php" >}}
 <?php
@@ -163,7 +163,7 @@ $statsd = new DogStatsd(
 $statsd->service_check('Service.check.name', 0);
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 サービスチェックが報告されたら、それを使用して[カスタムチェックモニター][2]をトリガーできます。

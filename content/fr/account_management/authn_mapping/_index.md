@@ -70,7 +70,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
-{{% tab "Réponse" %}}
+{{< tab "Réponse" >}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
 {
@@ -135,7 +135,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Récupérer tous les mappages d'authentification
@@ -515,7 +515,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
-{{% tab "Réponse" %}}
+{{< tab "Réponse" >}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
 {
@@ -530,7 +530,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Activer/désactiver tous les mappages
@@ -577,7 +577,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
-{{% tab "Réponse" %}}
+{{< tab "Réponse" >}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
 {
@@ -592,7 +592,7 @@ Remplacez les paramètres fictifs `<VOTRE_CLÉ_API_DATADOG>` et `<VOTRE_CLÉ_APP
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Pour aller plus loin

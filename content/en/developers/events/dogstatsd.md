@@ -41,7 +41,7 @@ event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <
 View errors and exceptions in Datadog with a DogStatsD event:
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 {{< code-block lang="python" filename="event.py" >}}
 from datadog import initialize, statsd
@@ -56,8 +56,8 @@ initialize(**options)
 statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 {{< code-block lang="ruby" filename="event.rb" >}}
 require 'datadog/statsd'
@@ -67,8 +67,8 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 {{< code-block lang="go" filename="event.go" >}}
 package main
@@ -94,8 +94,8 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
 {{< code-block lang="java" filename="event.java" >}}
 import com.timgroup.statsd.Event;
@@ -123,8 +123,8 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 {{< code-block lang="csharp" filename="event.cs" >}}
 using StatsdClient;
@@ -148,8 +148,8 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 {{< code-block lang="php" filename="event.php" >}}
 <?php
@@ -171,8 +171,12 @@ $statsd->event('An error occurred.',
   );
 {{< /code-block >}}
 
+{{< markdownify >}}
 With the DogStatsD-PHP library you can submit events via TCP directly to the Datadog API. It's slower but more reliable than using the Agent DogStatsD instance since events are forwarded from your application to the Agent using UDP.
 To use this, you must configure the library with your [Datadog API and application keys][1] instead of the local DogStatS instance:
+
+[1]: https://app.datadoghq.com/account/settings#api
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="event_through_api.php" >}}
 <?php
@@ -194,13 +198,14 @@ $statsd->event('An error occurred.',
   );
 {{< /code-block >}}
 
+{{< markdownify >}}
 **Note**:
 
 * Sending events with this method uses cURL for API requests.
 * You should use a `try`/`catch` code block to avoid warnings or errors on communication issues with the Datadog API.
 
-[1]: https://app.datadoghq.com/account/settings#api
-{{% /tab %}}
+{{< /markdownify >}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further reading

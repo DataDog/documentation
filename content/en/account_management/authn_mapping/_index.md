@@ -113,7 +113,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
-{{% tab "Response" %}}
+{{< tab "Response" >}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
 {
@@ -178,7 +178,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Get all AuthN Mappings
@@ -646,7 +646,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
-{{% tab "Response" %}}
+{{< tab "Response" >}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
 {
@@ -661,7 +661,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Enable/Disable All Mappings
@@ -733,7 +733,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
-{{% tab "Response" %}}
+{{< tab "Response" >}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
 {
@@ -748,7 +748,7 @@ Replace the `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` placeh
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading

@@ -39,7 +39,7 @@ Service check function parameters:
 Choose your language for a service check code example:
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
 {{< code-block lang="python" filename="service_check.py" >}}
 from datadog import initialize, statsd
@@ -55,8 +55,8 @@ statsd.service_check(
 )
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
 {{< code-block lang="ruby" filename="service_check.rb" >}}
 require 'datadog/statsd'
@@ -66,36 +66,36 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 statsd.service_check('application.service_check', 0, {'message' => 'Application is OK'})
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
 {{< code-block lang="go" filename="service_check.go" >}}
 package main
 
 import (
-	"log"
-	"time"
+    "log"
+    "time"
 
-	"github.com/DataDog/datadog-go/statsd"
+    "github.com/DataDog/datadog-go/statsd"
 )
 
 func main() {
 
-	dogstatsdClient, err := statsd.New("127.0.0.1:8125")
+    dogstatsdClient, err := statsd.New("127.0.0.1:8125")
 
-	if err != nil {
-		log.Fatal(err)
-	}
+    if err != nil {
+        log.Fatal(err)
+    }
 
-	for {
-		dogstatsdClient.SimpleServiceCheck("application.service_check", 0)
-		time.Sleep(10 * time.Second)
-	}
+    for {
+        dogstatsdClient.SimpleServiceCheck("application.service_check", 0)
+        time.Sleep(10 * time.Second)
+    }
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
 {{< code-block lang="java" filename="service_check.java" >}}
 import com.timgroup.statsd.ServiceCheck;
@@ -122,8 +122,8 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
 {{< code-block lang="csharp" filename="service_check.cs" >}}
 using StatsdClient;
@@ -147,8 +147,8 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 {{< code-block lang="php" filename="service_check.php" >}}
 <?php
@@ -166,7 +166,7 @@ $statsd = new DogStatsd(
 $statsd->service_check('Service.check.name', 0);
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 After a service check is reported, use it to trigger a [custom check monitor][2].

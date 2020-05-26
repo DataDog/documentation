@@ -66,7 +66,7 @@ curl -X POST \
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
-{{% tab "Response" %}}
+{{< tab "Response" >}}
 
 {{< code-block lang="json" filename="response.json" disable_copy="true" >}}
 {
@@ -128,7 +128,7 @@ curl -X POST \
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### AuthN Mapping をすべて取得する

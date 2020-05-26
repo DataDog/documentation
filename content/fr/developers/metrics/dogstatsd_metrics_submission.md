@@ -46,9 +46,11 @@ Une fois [DogStatsD installé][1], les fonctions ci-dessous peuvent être utilis
 Dans cet exemple, une métrique `COUNT` stockée en tant que métrique `RATE` est envoyée à Datadog. Pour en savoir plus sur le type `COUNT`, consultez la documentation sur les [types de métrique][2].
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
+{{< markdownify >}}
 Exécutez le code Python suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="count_metric.py" >}}
 from datadog import initialize, statsd
@@ -67,10 +69,12 @@ while(1):
   time.sleep(10)
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
+{{< markdownify >}}
 Exécutez le code Ruby suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="ruby" filename="count_metric.rb" >}}
 require 'datadog/statsd'
@@ -85,10 +89,12 @@ while true do
 end
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
+{{< markdownify >}}
 Exécutez le code Go suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="go" filename="count_metric.go" >}}
 package main
@@ -115,10 +121,12 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
+{{< markdownify >}}
 Exécutez le code Java suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="java" filename="count_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
@@ -140,10 +148,12 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
+{{< markdownify >}}
 Exécutez le code .NET suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="csharp" filename="count_metric.cs" >}}
 using StatsdClient;
@@ -174,10 +184,12 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 Exécutez le code PHP suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="count_metric.php" >}}
 <?php
@@ -199,7 +211,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
@@ -221,9 +233,11 @@ La valeur étant envoyée en tant que `COUNT`, elle est stockée en tant que `RA
 Dans cet exemple, une métrique `GAUGE` stockée en tant que métrique `GAUGE` est envoyée à Datadog. Pour en savoir plus sur le type `GAUGE`, consultez la documentation sur les [types de métrique][5].
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
+{{< markdownify >}}
 Exécutez le code Python suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="gauge_metric.py" >}}
 from datadog import initialize, statsd
@@ -244,10 +258,12 @@ while(1):
   time.sleep(10)
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
+{{< markdownify >}}
 Exécutez le code Ruby suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="ruby" filename="gauge_metric.rb" >}}
 require 'datadog/statsd'
@@ -263,10 +279,13 @@ while true do
 end
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
+
+{{< markdownify >}}
 
 Exécutez le code Go suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="go" filename="gauge_metric.go" >}}
 package main
@@ -292,10 +311,12 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
+{{< markdownify >}}
 Exécutez le code Java suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="java" filename="gauge_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
@@ -315,10 +336,12 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
+{{< markdownify >}}
 Exécutez le code .NET suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="csharp" filename="gauge_metric.cs" >}}
 using StatsdClient;
@@ -347,10 +370,12 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 Exécutez le code PHP suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="gauge_metric.php" >}}
 <?php
@@ -373,7 +398,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Une fois le code ci-dessus exécuté, les données de votre métrique peuvent être représentées graphiquement dans Datadog :
@@ -391,9 +416,11 @@ Une fois le code ci-dessus exécuté, les données de votre métrique peuvent ê
 Envoyer une métrique `SET` stockée en tant que métrique `GAUGE` à Datadog.
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
+{{< markdownify >}}
 Exécutez le code Python suivant pour envoyer une métrique `SET` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="set_metric.py" >}}
 from datadog import initialize, statsd
@@ -413,10 +440,12 @@ while(1):
   time.sleep(random.randint(0, 10))
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
+{{< markdownify >}}
 Exécutez le code Ruby suivant pour envoyer une métrique `SET` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="ruby" filename="set_metric.rb" >}}
 require 'datadog/statsd'
@@ -431,10 +460,12 @@ while true do
 end
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
+{{< markdownify >}}
 Exécutez le code Go suivant pour envoyer une métrique `SET` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="go" filename="set_metric.go" >}}
 package main
@@ -462,10 +493,12 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
+{{< markdownify >}}
 Exécutez le code .NET suivant pour envoyer une métrique `SET` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="csharp" filename="set_metric.cs" >}}
 using StatsdClient;
@@ -494,10 +527,12 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 Exécutez le code PHP suivant pour envoyer une métrique `SET` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="set_metric.php" >}}
 <?php
@@ -521,7 +556,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
@@ -544,9 +579,11 @@ Une fois le code ci-dessus exécuté, les données de vos métriques peuvent êt
 Le type de métrique `HISTOGRAM` est spécifique à DogStatsD. Dans cet exemple, une métrique `HISTOGRAM` stockée en tant que métrique `GAUGE` et `RATE` est envoyée à Datadog. Pour en savoir plus sur le type `HISTOGRAM`, consultez la documentation sur les [types de métrique][6].
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
+{{< markdownify >}}
 Exécutez le code Python suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="histogram_metric.py" >}}
 from datadog import initialize, statsd
@@ -565,10 +602,12 @@ while(1):
   time.sleep(2)
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
+{{< markdownify >}}
 Exécutez le code Ruby suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="ruby" filename="histogram_metric.rb" >}}
 require 'datadog/statsd'
@@ -581,10 +620,12 @@ while true do
 end
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
+{{< markdownify >}}
 Exécutez le code Go suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="go" filename="histogram_metric.go" >}}
 package main
@@ -610,10 +651,12 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
+{{< markdownify >}}
 Exécutez le code Java suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="java" filename="histogram_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
@@ -633,10 +676,12 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
+{{< markdownify >}}
 Exécutez le code .NET suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="csharp" filename="histogram_metric.cs" >}}
 using StatsdClient;
@@ -665,10 +710,12 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 Exécutez le code PHP suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="histogram_metric.php" >}}
 <?php
@@ -689,7 +736,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 L'instrumentation ci-dessus génère les métriques suivantes :
@@ -723,9 +770,11 @@ Pour une métrique `TIMER`, les règles de [configuration](#configuration) des m
 Dans cet exemple, une métrique `TIMER` stockée en tant que métrique `GAUGE` et `RATE` est envoyée à Datadog. Pour en savoir plus sur le type `HISTOGRAM`, consultez la documentation sur les [types de métrique][6].
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
+{{< markdownify >}}
 Dans Python, les timers sont créés avec un décorateur :
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="timers.py" >}}
 from datadog import initialize, statsd
@@ -747,7 +796,9 @@ while(1):
   my_function()
 {{< /code-block >}}
 
+{{< markdownify >}}
 ou avec un gestionnaire de contexte :
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="context_manager.py" >}}
 from datadog import statsd
@@ -768,8 +819,8 @@ while(1):
   my_function()
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
 {{< code-block lang="php" filename="timer.php" >}}
 <?php
@@ -795,7 +846,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 Lorsque DogStatsD reçoit les données de la métrique timer, il calcule la distribution statistique des temps de rendu, puis envoie les métriques suivantes à Datadog :
@@ -823,9 +874,11 @@ DogStatsD traite les métriques `TIMER` en tant que métriques `HISTOGRAM`. Que 
 Le type de métrique `DISTRIBUTION` est spécifique à DogStatsD. Dans cet exemple, une métrique `DISTRIBUTION` stockée en tant que métrique `DISTRIBUTION` est envoyée à Datadog. Pour en savoir plus sur le type `DISTRIBUTION`, consultez la documentation sur les [types de métrique][9].
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
+{{< markdownify >}}
 Exécutez le code Python suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="python" filename="distribution_metric.py" >}}
 from datadog import initialize, statsd
@@ -844,10 +897,12 @@ while(1):
   time.sleep(2)
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
+{{< markdownify >}}
 Exécutez le code Ruby suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="ruby" filename="distribution_metric.rb" >}}
 require 'datadog/statsd'
@@ -860,10 +915,12 @@ while true do
 end
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
+{{< markdownify >}}
 Exécutez le code Go suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="go" filename="distribution_metric.go" >}}
 package main
@@ -889,10 +946,12 @@ func main() {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
+{{< markdownify >}}
 Exécutez le code Java suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="java" filename="distribution_metric.java" >}}
 import com.timgroup.statsd.NonBlockingStatsDClient;
@@ -912,10 +971,12 @@ public class DogStatsdClient {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
+{{< markdownify >}}
 Exécutez le code .NET suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="csharp" filename="distribution_metric.cs" >}}
 using StatsdClient;
@@ -944,10 +1005,12 @@ public class DogStatsdClient
 }
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 Exécutez le code PHP suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
+{{< /markdownify >}}
 
 {{< code-block lang="php" filename="distribution_metric.php" >}}
 <?php
@@ -968,7 +1031,7 @@ while (TRUE) {
 }
 {{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 L'instrumentation ci-dessus calcule les données suivantes : `somme`, `total`, `moyenne`, `minimum`, `maximum`, `50e centile` (médiane), `75e centile`, `90e centile`, `95e centile` et `99e centile`. Les distributions peuvent être utilisées pour mesurer la distribution de *tout* type de valeur, comme le poids de fichiers importés ou les notes d'une classe.
@@ -995,49 +1058,49 @@ Avant d'envoyer une métrique à Datadog, DogStatsD utilise le `<TAUX_ÉCHANTILL
 Le code suivant envoie des points de données 50 % du temps :
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
-```python
+{{< code-block lang="python" >}}
 statsd.increment('loop.count', sample_rate=0.5)
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
-```ruby
+{{< code-block lang="ruby" >}}
 statsd.increment('loop.count', :sample_rate => 0.5)
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
-```go
+{{< code-block lang="go" >}}
 statsd.Incr("exemple_metrique.increment", []string{}, 0.5)
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
-```java
+{{< code-block lang="java" >}}
 Statsd.incrementCounter("exemple_metrique.increment", sampleRate=0.5);
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
-```csharp
+{{< code-block lang="csharp" >}}
 DogStatsd.Increment("exemple_metrique.increment", sampleRate: 0.5);
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
-```php
+{{< code-block lang="php" >}}
 <? php
 $statsd->increment('exemple_metrique.increment', $sampleRate->0.5);
-```
+{{< /code-block >}}
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ### Tagging de métriques
@@ -1049,58 +1112,61 @@ Ajoutez des tags à n'importe quelle métrique envoyée à DogStatsD avec le par
 Le code suivant ajoute uniquement les tags `environment:dev` et `account:local` à la métrique `exemple_metrique.increment` :
 
 {{< tabs >}}
-{{% tab "Python" %}}
+{{< tab "Python" >}}
 
-```python
+{{< code-block lang="python" >}}
 statsd.increment('exemple_metrique.increment', tags=["environment:dev","account:local"])
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+{{< /tab >}}
+{{< tab "Ruby" >}}
 
-```ruby
+{{< code-block lang="ruby" >}}
 statsd.increment('exemple_metrique.increment', tags: ['environment:dev','account:local'])
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Go" %}}
+{{< /tab >}}
+{{< tab "Go" >}}
 
-```go
+{{< code-block lang="go" >}}
 statsd.Incr("exemple_metrique.increment", []string{"environment:dev","account:local"}, 1)
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Java" %}}
+{{< /tab >}}
+{{< tab "Java" >}}
 
-```java
+{{< code-block lang="java" >}}
 Statsd.incrementCounter("exemple_metrique.increment", new String[]{"environment:dev","account:local"});
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+{{< /tab >}}
+{{< tab ".NET" >}}
 
-```csharp
+{{< code-block lang="csharp" >}}
 DogStatsd.Increment("exemple_metrique.increment", tags: new[] {"environment:dev","account:local"})
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "PHP" %}}
+{{< /tab >}}
+{{< tab "PHP" >}}
 
+{{< markdownify >}}
 L'argument `tags` peut être une chaîne de caractères :
+{{< /markdownify >}}
 
-```php
+{{< code-block lang="php" >}}
 $statsd->increment('exemple_metrique.increment', "environment:dev,account:local");
-```
+{{< /code-block >}}
 
+{{< markdownify >}}
 ou un tableau :
+{{< /markdownify >}}
 
-```php
+{{< code-block lang="php" >}}
 <?php
 $statsd->increment('exemple_metrique.increment', array('environment' => 'dev', 'account' => 'local'));
+{{< /code-block >}}
 
-```
-
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 #### Tag host
