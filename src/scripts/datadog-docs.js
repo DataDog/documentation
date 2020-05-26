@@ -695,21 +695,7 @@ function updateMainContentAnchors() {
     // make header tags with ids and make clickable as anchors
     $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
         const id = $(this).attr('id');
-        $(this).wrapInner(`<a href="#${id}"></a>`).on('click', function(e) {
-            e.preventDefault();
-            moveToAnchor(id);
-            return false;
-        });
-    });
-
-    $(".main a[href^='#']").click(function (e) {
-        if (!e.target.parentElement.id) {
-            e.preventDefault();
-            const id = e.target.hash.split('#').join('');
-            if (id) {
-                moveToAnchor(id);
-            }
-        }
+        $(this).wrapInner(`<a href="#${id}"></a>`);
     });
 }
 
