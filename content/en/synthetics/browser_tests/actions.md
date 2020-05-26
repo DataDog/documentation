@@ -239,13 +239,19 @@ Generate a random Synthetics email address that can be used in your test steps t
 
 #### Use the variable
 
-Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step:
+Once created, you can use the little hand on your variable box to inject your variable on the website being tested: 
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true"  width="80%" >}}
 
-Alternatively, you can record a step inputting `{{ <YOUR_VARIABLE> }}` in the desired field:
+This generates an input text step with a content that is always replaced by `{{ <YOUR_VARIABLE> }}` value at test execution.
 
-{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion"  style="width:60%;">}}
+In some cases, your variable value only gets computed at runtime (e.g. when creating a variable from an HTTP request, when extracting a variable from a JavaScript step). You can inject your variable by using `{{ <YOUR_VARIABLE> }}` directly on your website at recording. The browser test automatically populates that field at test execution with the variable value generated in the previous steps.
+
+{{< img src="synthetics/browser_tests/variables_auto.mp4" alt="Variables autocompletion example" video="true"  width="80%" >}}
+
+**Note**: all fields with a `{{` indication support variables autocompletion.
+
+{{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator"  style="width:60%;">}}
 
 ##### Use variables in JavaScript steps
 
