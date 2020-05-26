@@ -14,8 +14,9 @@ further_reading:
 The Datadog Lambda Layer is responsible for:
 
 - Generating real-time [enhanced Lambda metrics][1] for invocations, errors, cold starts, etc.
-- Submitting custom metrics (synchronously and asynchronously)
+- Submitting custom metrics (synchronously and asynchronously).
 - Automatically propagating tracing headers from upstream requests to downstream services. This enables full distributed tracing across Lambda functions, hosts, containers, and other infrastructure running the Datadog Agent.
+- Packaging the `dd-trace` library, letting customers trace their Lambda functions with Datadog's tracing libraries, currently available for Node.js, Python, and Ruby with more runtimes coming soon.
 
 Datadog offers Lambda Layers for Python, Node.js, and Ruby. Go is also supported with a [package][7] to include in your project. Datadog is working on support for new languages and runtimes; if there is another runtime you would like Datadog to support, reach out to the [Datadog support team][8].
 
