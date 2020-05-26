@@ -114,7 +114,7 @@ The Go tracer supports additional environment variables and functions for config
 See all available options in the [configuration documentation][71].
 
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables.
+Check out the [Unified Service Tagging][73] documentation for recommendations on how to configure these environment variables.
 
 You may also elect to provide `env`, `service`, and `version` through the tracer's API:
 
@@ -259,3 +259,4 @@ extracted value is used.
 [70]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [71]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [72]: https://github.com/openzipkin/b3-propagation
+[73]: /tagging/unified_service_tagging
