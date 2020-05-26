@@ -14,6 +14,8 @@ further_reading:
 - link: "https://github.com/DataDog/dd-opentracing-cpp"
   tag: "Source Code"
   text: "Datadog OpenTracing C++ Client"
+aliases:
+- /tracing/istio/
 ---
 
 Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.

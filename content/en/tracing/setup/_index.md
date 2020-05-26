@@ -7,7 +7,7 @@ aliases:
 disable_toc: true
 ---
 
-After you have [enabled trace collection][1], configure your application to send [traces][2] using one of the following official Datadog tracing libraries:
+After you have [configured the Datadog Agent][1], set up your application to send [traces][2] using one of the following official Datadog tracing libraries:
 
 ### Language setup
 
