@@ -1,4 +1,4 @@
-import { moveToAnchor } from '../helpers/moveToAnchor';
+// import { moveToAnchor } from '../helpers/moveToAnchor';
 import datadogLogs from './dd-browser-logs-rum';
 
 let sidenavMapping = [];

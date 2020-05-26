@@ -39,8 +39,8 @@ function codeTabs() {
             e.preventDefault();
 
             // prepare
-            const currentOffset =
-                $(this).offset().top - $(document).scrollTop();
+            // const currentOffset =
+            //     $(this).offset().top - $(document).scrollTop();
 
             // find all
             const lang = $(this).data('lang');
