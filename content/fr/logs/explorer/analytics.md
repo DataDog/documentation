@@ -28,15 +28,15 @@ Vous pouvez accéder à la page d'analyse depuis n'importe quelle vue Log Explor
 
 Vous pouvez contrôler :
 
-* la requête qui permet de filtrer l'ensemble des logs à analyser ;
-* les dimensions selon lesquelles les données doivent être fractionnées ;
-* la méthode de visualisation des agrégats et des fractionnements.
+- la requête qui permet de filtrer l'ensemble des logs à analyser ;
+- les dimensions selon lesquelles les données doivent être fractionnées ;
+- la méthode de visualisation des données agrégées et fractionnées.
 
 À partir d'une visualisation analytique, vous pouvez également :
 
-* créer un widget dans un dashboard basé sur cette visualisation ;
-* créer un monitor à partir de cette requête ;
-* analyser précisément les sous-ensembles de la liste de logs en fonction des interactions que la visualisation permet de réaliser.
+- créer un widget dans un dashboard basé sur cette visualisation ;
+- créer un monitor à partir de cette requête ;
+- analyser précisément les sous-ensembles de la liste de logs en fonction des interactions que la visualisation permet de réaliser.
 
 Enregistrez une vue d'analyse de logs avec le bouton « Save As ». Vous pouvez charger les vues enregistrées par vos collègues depuis l'onglet « Saved Views ».
 
@@ -44,23 +44,24 @@ Enregistrez une vue d'analyse de logs avec le bouton « Save As ». Vous pouve
 
 Créez une requête pour contrôler le contenu affiché dans votre analyse de logs :
 
-1. Choisissez une [mesure][1] ou une [facette][2] à représenter graphiquement. Les [mesures][1] vous permettent de choisir une fonction d'agrégation, tandis que les [facettes][2] affichent le nombre de valeurs uniques.
+1. Choisissez une [mesure][1] ou une [facette][1] à représenter graphiquement. Les [mesures][1] vous permettent de choisir une fonction d'agrégation, tandis que les [facettes][1] affichent le nombre de valeurs uniques.
 
     {{< img src="logs/explorer/analytics/choose_measure_facet.png" alt="sélection mesure ou facette" style="width:50%;">}}
+
 2. Sélectionnez la fonction d'agrégation pour la [mesure][1] que vous souhaitez représenter :
 
     {{< img src="logs/explorer/analytics/agg_function_log_graph.png" alt="fonction d'agrégation pour l'analyse de logs" style="width:50%;">}}
 
-3. Utilisez un [tag][1] ou une [facette][2] pour fractionner votre graphique.
+3. Utilisez une [facette][1] pour fractionner votre graphique.
 
     {{< img src="logs/explorer/analytics/split_by_log_graph.png" alt="fractionner avec l'analyse de logs" style="width:50%;">}}
 
-4. Choisissez d'afficher les *X* valeurs les plus **élevées** ou **faibles** en fonction de la [mesure][1] sélectionnée.
+4. Choisissez d'afficher les _X_ valeurs les plus **élevées** ou **faibles** en fonction de la [mesure][1] sélectionnée.
 
     {{< img src="logs/explorer/analytics/top_bottom_button.png" alt="bouton top et bottom"  style="width:20%;">}}
 
 5. Sélectionnez les laps de temps du graphique.
-  Le changement de l'intervalle de temps global modifie la liste des laps de temps disponibles.
+   Le changement de l'intervalle de temps global modifie la liste des laps de temps disponibles.
 
     {{< img src="logs/explorer/analytics/timesteps.png" alt="Laps de temps"  style="width:30%;">}}
 
@@ -75,62 +76,61 @@ Visualisations disponibles :
 {{< tabs >}}
 {{% tab "Séries temporelles" %}}
 
-Visualisez l'évolution d'une seule [mesure][1] (ou d'une [facette][2] correspondant à un nombre unique de valeurs) pour un intervalle donné. Vous pouvez également fractionner le graphique en utilisant une [facette][2] disponible.
+Visualisez l'évolution d'une seule [mesure][1] (ou d'une [facette][1] correspondant à un nombre unique de valeurs) pour un intervalle donné. Vous pouvez également fractionner le graphique en utilisant une [facette][1] disponible.
 
 Vous disposez d'options supplémentaires pour les séries temporelles. Vous pouvez choisir :
 
-* d'afficher des graphiques en aires, à barres ou linéaires ;
-* de superposer des données, en fonction de leur valeur ou d'un pourcentage ;
-* d'utiliser un jeu de couleurs.
+- d'afficher des graphiques en aires, à barres ou linéaires ;
+- de superposer des données, en fonction de leur valeur ou d'un pourcentage ;
+- d'utiliser un jeu de couleurs.
 
 Voici des informations supplémentaires sur la superposition :
 
-* La superposition est seulement disponible pour des demandes de requêtes fractionnées.
-* Les options de superposition sont disponibles seulement pour les graphiques à barres ou en aires. L'affichage linéaire superpose toujours les données.
-* Lorsque vous utilisez une option de Top list qui masque une partie de vos données, la superposition n'affiche pas le total. Elle affiche seulement le sous-total pour les séries top/bottom.
-* La superposition ne convient pas pour des valeurs qui ne sont pas uniques dans la facette fractionnée.
-* La superposition peut ne pas être pertinente pour certaines méthodes d'agrégation de mesures.
+- La superposition est seulement disponible pour des demandes de requêtes fractionnées.
+- Les options de superposition sont disponibles seulement pour les graphiques à barres ou en aires. L'affichage linéaire superpose toujours les données.
+- Lorsque vous utilisez une option de Top list qui masque une partie de vos données, la superposition n'affiche pas le total. Elle affiche seulement le sous-total pour les séries top/bottom.
+- La superposition ne convient pas pour des valeurs qui ne sont pas uniques dans la facette fractionnée.
+- La superposition peut ne pas être pertinente pour certaines méthodes d'agrégation de mesures.
 
 L'analyse de logs avec une série temporelle suivante illustre :
 l'évolution des **5 principaux chemins URL** selon le nombre d'adresses **IP client uniques** au cours du dernier mois.
 
 {{< img src="logs/explorer/analytics/timeserie_example.png" alt="Exemple de série temporelle" style="width:90%;">}}
 
-[1]: /fr/logs/explorer/?tab=measures#setup
-[2]: /fr/logs/explorer/?tab=facets#setup
+
+[1]: /fr/logs/explorer/facets/
 {{% /tab %}}
 
 {{% tab "Top List" %}}
 
-Visualisez les valeurs les plus élevées d'une [facette][1] en fonction de la [mesure][2] choisie :
+Visualisez les valeurs les plus élevées d'une [facette][1] en fonction de la [mesure][1] choisie :
 
 L'analyse de logs avec une Top List suivante illustre :
 l'évolution des **5 principaux chemins URL** selon le nombre d'adresses **IP client uniques** au cours du dernier mois.
 
 {{< img src="logs/explorer/analytics/top_list_example.png" alt="Exemple de Top List" style="width:90%;">}}
 
-[1]: /fr/logs/explorer/?tab=facets#setup
-[2]: /fr/logs/explorer/?tab=measures#setup
+
+[1]: /fr/logs/explorer/facets/
 {{% /tab %}}
 
 {{% tab "Table" %}}
 
-Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonction de la [mesure][2] choisie (la première mesure que vous choisissez dans la liste), et affichez la valeur des autres mesures dans la liste. Mettez à jour la requête de recherche ou explorez les logs correspondant à l'une des dimensions.
+Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonction de la [mesure][1] choisie (la première mesure que vous choisissez dans la liste), et affichez la valeur des autres mesures dans la liste. Mettez à jour la requête de recherche ou explorez les logs correspondant à l'une des dimensions.
 
-* Lorsque plusieurs dimensions sont définies, les valeurs les plus élevées sont déterminées en fonction de la première dimension, puis de la seconde dans la fourchette des valeurs les plus élevées de la première dimension, puis de la troisième dans la fourchette des valeurs les plus élevées de la seconde dimension.
-* Lorsque plusieurs mesures sont définies, les valeurs les plus élevées ou faibles sont déterminées en fonction de la première mesure.
-* Le sous-total peut différer de la somme réelle des valeurs au sein d'un groupe, étant donné qu'un seul sous-ensemble (celui des valeurs les plus élevées ou des valeurs les plus faibles) s'affiche. Les événements associés à une valeur nulle ou vide pour cette dimension ne s'affichent pas en tant que sous-groupe.
+- Lorsque plusieurs dimensions sont définies, les valeurs les plus élevées sont déterminées en fonction de la première dimension, puis de la seconde dans la fourchette des valeurs les plus élevées de la première dimension, puis de la troisième dans la fourchette des valeurs les plus élevées de la seconde dimension.
+- Lorsque plusieurs mesures sont définies, les valeurs les plus élevées ou faibles sont déterminées en fonction de la première mesure.
+- Le sous-total peut différer de la somme réelle des valeurs au sein d'un groupe, étant donné qu'un seul sous-ensemble (celui des valeurs les plus élevées ou des valeurs les plus faibles) s'affiche. Les événements associés à une valeur nulle ou vide pour cette dimension ne s'affichent pas en tant que sous-groupe.
 
- **Remarque** : la visualisation d'une seule mesure et d'une seule dimension sous forme de tableau est identique à celle d'une top list. Seul l'affichage diffère.
+  **Remarque** : la visualisation d'une seule mesure et d'une seule dimension sous forme de tableau est identique à celle d'une top list. Seul l'affichage diffère.
 
- L'analyse de logs avec un tableau suivante illustre l'évolution des **premiers codes de statut** en fonction de leur **débit**, ainsi que le nombre moyen d'**IP client** uniques au cours des 15 dernières minutes :
+L'analyse de logs avec un tableau suivante illustre l'évolution des **premiers codes de statut** en fonction de leur **débit**, ainsi que le nombre moyen d'**IP client** uniques au cours des 15 dernières minutes :
 
 {{< img src="logs/explorer/analytics/logs_table_example.png" alt="exemple de tableau" style="width:90%;">}}
 
-[1]: /fr/logs/explorer/?tab=facets#setup
-[2]: /fr/logs/explorer/?tab=measures#setup
-{{% /tab %}}
 
+[1]: /fr/logs/explorer/facets/
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Logs associés
@@ -138,6 +138,16 @@ Visualisez la liste des valeurs les plus élevées d'une [facette][1] en fonctio
 Sélectionnez une section du graphique ou cliquez dessus pour l'agrandir ou consulter la liste des logs correspondant à votre sélection :
 
 {{< img src="logs/explorer/analytics/view_logs.mp4" alt="affichage des logs" video="true" width="80%" >}}
+
+## Share View
+
+Exportez votre visualisation de log actuelle grâce à la fonction de _partage_ :
+
+- Export to **Monitor** : exportez la requête appliquée à votre analyse de logs pour créer la requête de votre nouveau [log monitor][2].
+- Export to **Dashboard** : exportez l'analyse actuelle sous la forme d'un widget dans un nouveau [dashboard][3] ou un dashboard existant.
+- Generate new **Metric** : [générez une nouvelle métrique][4] à partir de la requête d'analyse actuelle.
+
+{{< img src="logs/explorer/analytics/analytics_share.png" alt="exemple de tableau"  style="width:90%;">}}
 
 ## Comment fonctionnent les agrégations
 
@@ -153,5 +163,7 @@ Dans l'exemple suivant, chaque point représente un événement de log. L'axe de
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/explorer/?tab=measures#setup
-[2]: /fr/logs/explorer/?tab=facets#setup
+[1]: /fr/logs/explorer/facets/
+[2]: /fr/monitors/monitor_types/log/
+[3]: /fr/dashboards/
+[4]: /fr/logs/logs_to_metrics/
