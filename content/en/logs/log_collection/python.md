@@ -169,4 +169,3 @@ logs:
 [3]: /tracing/connect_logs_and_traces/python/
 [4]: /agent/guide/agent-commands/
 [5]: https://pypi.org/project/django-datadog-logger/
-
