@@ -5,13 +5,13 @@ platform: SUSE
 aliases:
   - /fr/guides/basic_agent_usage/suse/
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: Recueillir vos logs
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: Recueillir vos processus
-  - link: tracing
+  - link: /tracing/
     tag: Documentation
     text: Recueillir vos traces
 ---
@@ -75,7 +75,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /fr/integrations
+[1]: /fr/integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -87,7 +87,7 @@ Fichiers de configuration pour les [intégrations][1] :
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /fr/integrations
+[1]: /fr/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -107,5 +107,5 @@ Pour en savoir plus, consultez les instructions relatives à l'[ajout de paquets
 
 [1]: https://app.datadoghq.com/account/settings#agent/suse
 [2]: /fr/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-[3]: /fr/agent/troubleshooting
-[4]: /fr/developers/guide/custom-python-package
+[3]: /fr/agent/troubleshooting/
+[4]: /fr/developers/guide/custom-python-package/
