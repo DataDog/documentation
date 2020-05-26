@@ -34,14 +34,14 @@ Kubernetes v1.2 では、[Horizontal Pod Autoscaling][1] が導入されまし�
 
 1. 適切な RBAC ルールを作成します。Datadog Cluster Agent は、API サーバーと Node Agent の間のプロキシとして機能し、一部のクラスターレベルのリソースにアクセスする必要があります。
 
-    `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-cluster-agent.yaml"`
+    `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-rbac.yaml"`
 
    次の出力が生成されます。
 
     ```
-    clusterrole.rbac.authorization.k8s.io "dca" created
-    clusterrolebinding.rbac.authorization.k8s.io "dca" created
-    serviceaccount "dca" created
+    clusterrole.rbac.authorization.k8s.io "datadog-cluster-agent" created
+    clusterrolebinding.rbac.authorization.k8s.io "datadog-cluster-agent" created
+    serviceaccount "datadog-cluster-agent" created
     ```
 
 2. Datadog Cluster Agent とそのサービスを作成します。Datadog Cluster Agent のデプロイマニフェストに `<API_キー>` と `<アプリキー>` を追加します。
@@ -49,9 +49,9 @@ Kubernetes v1.2 では、[Horizontal Pod Autoscaling][1] が導入されまし�
 3. `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` 変数を `true` に設定して HPA 処理を有効にします。
 
 4. リソースをスピンアップします。
-  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml"`
-  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/hpa-example/cluster-agent-hpa-svc.yaml"`
-  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent.yaml"`
+  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-services.yaml"`
+  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/hpa-example/cluster-agent-hpa-svc.yaml"`
+  * `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-deployment.yaml"`
 
 **注**: 最初のサービスは Node Agent と Datadog Cluster Agent 間の通信に使用されますが、2 番目のサービスは External Metrics Provider を登録するために Kubernetes によって使用されます。
 
@@ -75,7 +75,7 @@ default       datadog-cluster-agent           ClusterIP   192.168.254.197   <non
 
 Datadog Cluster Agent が起動して実行されたら、これをサービスに External Metrics Provider として登録し、ポート `443` を公開します。そのためには、次の RBAC ルールを適用します。
 
-`kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/hpa-example/rbac-hpa.yaml"`
+`kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/hpa-example/rbac-hpa.yaml"`
 
 次の結果が生成されます。
 
@@ -114,10 +114,10 @@ Kubernetes は 30 秒ごとに Datadog Cluster Agent にクエリを実行して
 高度なユースケースでは、[Kubernetes 水平ポッド自動スケーリングのドキュメント][8]で確認できるように、同じ HPA に複数のメトリクスを含めることができます。提案された値の最大値は選択された値です。
 
 1. NGINX デプロイを作成します。
-  `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/hpa-example/nginx.yaml"`
+  `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/hpa-example/nginx.yaml"`
 
 2. 次に、HPA マニフェストを適用します。
-  `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/hpa-example/hpa-manifest.yaml"`
+  `kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/hpa-example/hpa-manifest.yaml"`
 
 NGINX ポッドが対応するサービスで実行されていることが表示されているはずです。
 
@@ -187,6 +187,6 @@ default     nginxext   Deployment/nginx   30/9 (avg)     1         3         3  
 [4]: /ja/agent/kubernetes/integrations
 [5]: /ja/agent/cluster_agent/setup
 [6]: /ja/agent/kubernetes/cluster
-[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/hpa-example/hpa-manifest.yaml
+[7]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/hpa-example/hpa-manifest.yaml
 [8]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
 [9]: /ja/agent/kubernetes/#template-source-kubernetes-pod-annotations
