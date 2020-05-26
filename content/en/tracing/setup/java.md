@@ -487,3 +487,4 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [15]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 [16]: /integrations/java/?tab=host#metric-collection
 [17]: https://github.com/openzipkin/b3-propagation
+[18]: /tagging/unified_service_tagging

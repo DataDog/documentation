@@ -229,11 +229,63 @@ Manual instrumentation is supported on .NET Framework 4.5 and above on Windows a
 
 There are multiple ways to configure the .NET Tracer:
 
-* in .NET code
 * setting environment variables
+* in .NET code
 * creating a `datadog.json` file
 
 {{< tabs >}}
+
+{{% tab "Environment variables" %}}
+
+To configure the Tracer using environment variables, set the variables before launching the instrumented application.
+
+For example, on Windows:
+
+```cmd
+rem Set environment variables
+SET DD_TRACE_AGENT_URL=http://localhost:8126
+SET DD_ENV=prod
+SET DD_SERVICE=MyService
+SET DD_VERSION=abc123
+SET DD_ADONET_ENABLED=false
+
+rem Launch application
+example.exe
+```
+
+**Note:** To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
+
+On Linux:
+
+```bash
+# Set environment variables
+export DD_TRACE_AGENT_URL=http://localhost:8126
+export DD_ENV=prod
+export DD_SERVICE=MyService
+export DD_VERSION=abc123
+export DD_ADONET_ENABLED=false
+
+# Launch application
+dotnet example.dll
+```
+
+{{% /tab %}}
+
+{{% tab "JSON file" %}}
+
+To configure the Tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key/value pair for each setting. For example:
+
+```json
+{
+  "DD_TRACE_AGENT_URL": "http://localhost:8126",
+  "DD_ENV": "prod",
+  "DD_SERVICE": "MyService",
+  "DD_VERSION": "abc123",
+  "DD_ADONET_ENABLED": "false"
+}
+```
+
+{{% /tab %}}
 {{% tab "Code" %}}
 
 To configure the Tracer in application code, create a `TracerSettings` from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
@@ -245,7 +297,9 @@ using Datadog.Trace;
 var settings = TracerSettings.FromDefaultSources();
 
 // change some settings
+settings.Environment = "prod";
 settings.ServiceName = "MyService";
+settings.ServiceVersion = "abc123";
 settings.AgentUri = new Uri("http://localhost:8126/");
 
 // disable the AdoNet integration
@@ -262,69 +316,34 @@ Tracer.Instance = tracer;
 
 {{% /tab %}}
 
-{{% tab "Environment variables" %}}
-
-To configure the Tracer using environment variables, set the variables before launching the instrumented application.
-
-For example, on Windows:
-
-```cmd
-rem Set environment variables
-SET DD_TRACE_AGENT_URL=http://localhost:8126
-SET DD_SERVICE_NAME=MyService
-SET DD_ADONET_ENABLED=false
-
-rem Launch application
-example.exe
-```
-
-**Note:** To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
-
-On Linux:
-
-```bash
-# Set environment variables
-export DD_TRACE_AGENT_URL=http://localhost:8126
-export DD_SERVICE_NAME=MyService
-export DD_ADONET_ENABLED=false
-
-# Launch application
-dotnet example.dll
-```
-
-{{% /tab %}}
-
-{{% tab "JSON file" %}}
-
-To configure the Tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key/value pair for each setting. For example:
-
-```json
-{
-  "DD_TRACE_AGENT_URL": "http://localhost:8126",
-  "DD_SERVICE_NAME": "MyService",
-  "DD_ADONET_ENABLED": "false"
-}
-```
-
-{{% /tab %}}
-
 {{< /tabs >}}
 
 ### Configuration Variables
 
 The following tables list the supported configuration variables. Use the first name (e.g. `DD_TRACE_AGENT_URL`) when setting environment variables or configuration files. The second name, if present (e.g. `AgentUri`), indicates the name the `TracerSettings` propery to use when changing settings in the code.
 
-The first table below lists configuration variables that are available for both automatic and manual instrumentation.
+#### Tagging
+
+| Setting Name                                        | Description                                                                                                                                                                                                       |
+|-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.                                                              |
+| `DD_SERVICE`<br/><br/>`ServiceName`            | If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
+| `DD_VERSION`<br/><br/>`ServiceVersion`            | If specified, sets the version of the service.
+| `DD_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
+
+We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
+Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables.
+
+#### Instrumentation
+
+The following table below lists configuration variables that are available for both automatic and manual instrumentation.
 
 | Setting Name                                        | Description                                                                                                                                                                                                       |
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_TRACE_AGENT_URL`<br/><br/>`AgentUri`            | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
 | `DD_AGENT_HOST`                                     | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`                               | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
-| `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.                                                              |
-| `DD_SERVICE_NAME`<br/><br/>`ServiceName`            | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
-| `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
-| `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
+| `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of `env`, `service`, `version`, trace IDs, and spanIDs into application logs.                                                                                                                         |
 | `DD_TRACE_DEBUG`                                    | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
 
 The following table lists configuration variables that are available only when using automatic instrumentation.
@@ -358,3 +377,4 @@ The following table lists configuration variables that are available only when u
 [6]: https://www.nuget.org/packages/Datadog.Trace
 [7]: /tracing/manual_instrumentation/dotnet/
 [8]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[9]: /tagging/unified_service_tagging
