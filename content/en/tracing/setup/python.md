@@ -48,13 +48,24 @@ For more advanced usage, configuration, and fine-grain control, see Datadog's [A
 
 ### Environment variables
 
-When using **ddtrace-run**, the following [environment variable options][5] can be used:
+When using **ddtrace-run**, the following [environment variable options][5] can be used.
+
+#### Tagging
 
 | Environment Variable               | Default     | Description                                                                                                                                                                                                                                                                 |
 | ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DD_ENV`                           |             | Set the application’s environment e.g. `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][6].                                                                                                                                                  |
-| `DD_VERSION`                       |             | Set the application’s version e.g. `1.2.3`, `6c44da20`, `2020.02.13`.                                                                                                                                                                                                       |
 | `DD_SERVICE`                       |             | The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations (e.g. Pylons, Flask, Django). For tracing without a web integration, it is recommended that you [set the service name in code](#integrations).      |
+| `DD_VERSION`                       |             | Set the application’s version e.g. `1.2.3`, `6c44da20`, `2020.02.13`.                                                                                                                                                                                                       |
+| `DD_TAGS`                       |             | A list of default tags to be added to every span, profile, and runtime metric e.g. `layer:api,team:intake`.      |
+
+We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
+Check out the [Unified Service Tagging][51] documentation for recommendations on how to configure these environment variables.
+
+#### Instrumentation
+
+| Environment Variable               | Default     | Description                                                                                                                                                                                                                                                                 |
+| ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DATADOG_TRACE_ENABLED`            | `true`      | Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.                                                                                                                                                           |
 | `DATADOG_TRACE_DEBUG`              | `false`     | Enable debug logging in the tracer. Note that this is [not available with Django][7].                                                                                                                                                                                       |
 | `DATADOG_PATCH_MODULES`            |             | Override the modules patched for this application execution. It should follow this format: `DATADOG_PATCH_MODULES=module:patch,module:patch...`.                                                                                                                            |
@@ -65,7 +76,6 @@ When using **ddtrace-run**, the following [environment variable options][5] can 
 | `DD_LOGS_INJECTION`                | `false`     | Enable [connecting logs and traces Injection][9].                                                                                                                                                                                                                           |
 | `DD_TRACE_ANALYTICS_ENABLED`       | `false`     | Enable App Analytics globally for [web integrations][10].                                                                                                                                                                                                                   |
 | `DD_INTEGRATION_ANALYTICS_ENABLED` | `false`     | Enable App Analytics for a specific integration. Example: `DD_BOTO_ANALYTICS_ENABLED=true` .                                                                                                                                                                                |
-
 ## Change Agent Hostname
 
 Configure your application level tracers to submit traces to a custom Agent hostname. The Python Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
@@ -201,3 +211,4 @@ The `ddtrace` library includes support for the following libraries:
 [48]: https://kombu.readthedocs.io/en/latest
 [49]: https://www.makotemplates.org
 [50]: http://docs.python-requests.org/en/master
+[51]: /tagging/unified_service_tagging

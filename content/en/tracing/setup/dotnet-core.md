@@ -271,21 +271,6 @@ dotnet example.dll
 
 {{% /tab %}}
 
-{{% tab "JSON file" %}}
-
-To configure the Tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key/value pair for each setting. For example:
-
-```json
-{
-  "DD_TRACE_AGENT_URL": "http://localhost:8126",
-  "DD_ENV": "prod",
-  "DD_SERVICE": "MyService",
-  "DD_VERSION": "abc123",
-  "DD_ADONET_ENABLED": "false"
-}
-```
-
-{{% /tab %}}
 {{% tab "Code" %}}
 
 To configure the Tracer in application code, create a `TracerSettings` from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
@@ -316,6 +301,22 @@ Tracer.Instance = tracer;
 
 {{% /tab %}}
 
+{{% tab "JSON file" %}}
+
+To configure the Tracer using a JSON file, create `datadog.json` in the instrumented application's directory. The root JSON object must be a hash with a key/value pair for each setting. For example:
+
+```json
+{
+  "DD_TRACE_AGENT_URL": "http://localhost:8126",
+  "DD_ENV": "prod",
+  "DD_SERVICE": "MyService",
+  "DD_VERSION": "abc123",
+  "DD_ADONET_ENABLED": "false"
+}
+```
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Configuration Variables
@@ -329,7 +330,7 @@ The following tables list the supported configuration variables. Use the first n
 | `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][8] for more details about the `env` tag.                                                              |
 | `DD_SERVICE`<br/><br/>`ServiceName`            | If specified, sets the service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
 | `DD_VERSION`<br/><br/>`ServiceVersion`            | If specified, sets the version of the service.
-| `DD_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
+| `DD_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans (e.g., `layer:api,team:intake`).                                                                                                                                              |
 
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables.
