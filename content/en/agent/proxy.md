@@ -417,7 +417,7 @@ This `dd_url` setting can be found in the `datadog.yaml` file.
 
 `dd_url: http://haproxy.example.com:3834`
 
-To send traces or processes through the proxy, setup the following in the `datadog.yaml` file:
+To send traces, processes and logs through the proxy, setup the following in the `datadog.yaml` file:
 
 ```yaml
 apm_config:
@@ -425,12 +425,9 @@ apm_config:
 
 process_config:
     process_dd_url: http://haproxy.example.com:3836
-```
-
-To send logs through the proxy, setup the following in the `datadog.yaml` file:
-
-```yaml
+    
 logs_config:
+    use_http: true
     logs_dd_url: http://haproxy.example.com:3837
 ```
 
