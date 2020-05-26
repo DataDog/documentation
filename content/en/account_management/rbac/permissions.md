@@ -69,6 +69,7 @@ Find below the list of permissions for the log configuration assets and log data
 | logs_write_pipelines         | Update a subset of the log pipelines       | true     |
 | logs_write_processors        | Update the log processors in an index      | true     |
 | logs_write_archives          | Update the external archives configuration | false    |
+| logs_read_archives.          | Rehydrate logs from that archive. See archive configuration details | true    |
 | logs_public_config_api       | Access the Logs Public Config API (r/w)    | false    |
 | logs_generate_metrics        | Access the Generate Metrics feature        | false    |
 
@@ -258,6 +259,23 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 
 [1]: /api/v2/roles/
+{{% /tab %}}
+{{< /tabs >}}
+
+#### logs_read_archives
+
+Grants the ability to rehydrate from archives, and access the details of the archive configuration.
+
+{{< tabs >}}
+{{% tab "Datadog application" %}}
+
+todo
+
+{{% /tab %}}
+{{% tab "API" %}}
+
+todo
+
 {{% /tab %}}
 {{< /tabs >}}
 
