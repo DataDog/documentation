@@ -28,7 +28,7 @@ Most of the time the symptoms can be alleviated by tweaking some configuration o
 
 ### Use Datadog official clients
 
-We recommend that you use the latest version of the [official DogStatsD clients][] provided by Datadog for every major programming language.
+We recommend that you use the latest version of the [official DogStatsD clients][3] provided by Datadog for every major programming language.
 
 ### Enable buffering on your client
 
@@ -264,7 +264,7 @@ dogstatsd_so_rcvbuf: 4194304
 
 ### Ensure proper packet sizes
 
-Avoid extra CPU usage by sending packets with an adequate size to the DogStatsD server in the Datadog Agent. The latest versions of the official DogStatsD clients send packets with a size optimized for performance. 
+Avoid extra CPU usage by sending packets with an adequate size to the DogStatsD server in the Datadog Agent. The latest versions of the official DogStatsD clients send packets with a size optimized for performance.
 
 You can skip this section if you are using one of the latest Datadog DogStatsD clients.
 
