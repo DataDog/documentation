@@ -42,9 +42,9 @@ arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:11
 | Node.js  | `Node8-10`, `Node10-x`, `Node12-x`             | [Latest release][4] |
 | Ruby     | `Ruby`                                         | [Latest release][5] |
 
-**Golang:** Since Go binaries are statically-linked, Datadog offers a [package][7] you can import into your project. No Lambda layer is required.
+**Golang:** Since Go binaries are statically linked, Datadog offers a [package][7] you can import into your project. No Lambda Layer is required.
 
-**Java:** Datadog offers a [library][15] you can import into your project. No Lambda layer is required.
+**Java:** Datadog offers a [library][15] you can import into your project. No Lambda Layer is required.
 
 **Note:** The Datadog Lambda Layer and client libraries include the X-Ray SDK as a dependency, so you don't need to explicitly install it in your projects.
 
