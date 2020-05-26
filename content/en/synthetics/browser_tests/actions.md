@@ -304,6 +304,22 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 - `Header content-type` _is_ "returned value"
 - `Status code` _is_ "returned value"
 
+#### Extract a variable from the response
+
+You can also optionally extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable is updated each time the HTTP request step is being run.
+
+To parse your variable:
+
+1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
+2. Decide whether to extract your variable from the response headers, or from the response body:
+
+    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][11].
+    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][11] or a [JSONPath][LIEN].
+
+{{< img src="synthetics/browser_tests/browser_test_vft.mp4" alt="Create a variable from HTTP request in Browser test" video="true"  width="80%" >}}
+
+Once created this variable can be used in the following steps of your browser test.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
