@@ -31,7 +31,7 @@ Why did we exclude `HTTP 3xx`? - These are typically redirects and should not co
 
 ### Multi-group for metric-based SLIs
 
-Metric-based SLIs allows you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `partition`, `availability-zone`, `resource`, or any other relevant group:
+Metric-based SLIs allow you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `partition`, `availability-zone`, `resource`, or any other relevant group:
 
 {{< img src="monitors/service_level_objectives/metric_source.png" alt="example metric source"  >}}
 
