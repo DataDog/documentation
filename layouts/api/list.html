@@ -14,6 +14,16 @@
 
     {{ $apiVersion := .Scratch.Get "apiVersion"}}
 
+    {{ $.Scratch.Set "ParamTitleEn" ($.Params.title) }}
+    {{ if $dot.IsTranslated }}
+      {{ range $dot.Translations }}
+        {{ if eq .Lang "en" }}
+            {{ $.Scratch.Set "ParamTitleEn" (.Params.title) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ $ParamTitleEn := ($.Scratch.Get "ParamTitleEn") }}
+
     {{ $d := index $dot.Site.Data.api $apiVersion "full_spec_deref" }}
 
     <!-- Get the general API server url -->
@@ -35,7 +45,7 @@
     {{ end }}
 
     {{ range $k, $v := (index $d "tags") }}
-        {{ if eq $.Params.title $v.name }}
+        {{ if eq $ParamTitleEn $v.name }}
 
             {{ $.Scratch.Set "tagObject" (slice)}}
 
