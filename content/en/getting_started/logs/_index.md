@@ -6,6 +6,9 @@ further_reading:
       tag: 'Learning Center'
       text: 'Introduction to Logs in Datadog'
     - link: '/logs/log_collection/'
+    - link: /tagging/unified_service_tagging
+      tag: 'Documentation'
+      text: 'Learn how to configure unified service tagging for logs'
       tag: 'Documentation'
       text: 'Collect logs from your Applications, Containers, and Cloud providers'
 ---

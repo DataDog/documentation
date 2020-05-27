@@ -47,8 +47,6 @@ Each tab in sections below shows a different way to apply integration templates 
 
 ## Configuration
 
-**Note**: As a best practice, Datadog recommends using unified service tagging in containerized environments using Autodiscovery. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
-
 {{< tabs >}}
 {{% tab "Docker" %}}
 
@@ -72,6 +70,8 @@ labels:
   com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
   com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
 ```
+
+**Note**: As a best practice, Datadog recommends using unified service tagging in containerized environments. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][11] documentation.
 
 **docker run command**:
 

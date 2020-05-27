@@ -13,9 +13,13 @@ further_reading:
 ---
 
 ## Overview
-Unified service tagging ties Datadog telemetry together through the use of three standard, [reserved tags][1]: `env`, `service`, and `version`. These tags allow you to correlate related logs and traces by version of a service, trace a spike in CPU usage to corresponding areas of a service, and organize infrastructure more effectively.
+Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`. These tags allow you to correlate related logs and traces by version of a service, trace a spike in CPU usage to corresponding areas of a service, and organize infrastructure more effectively.
 
 The [environment variables][2] `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` form a single point of configuration for all telemetry emitted directly from your service's runtime: [traces][3], [logs][4], and [Statsd metrics][5]. These variables are specific to the runtime of your service. They allow you to define core tagging configuration within your application, rather than across your application and the agent.
+
+When spans are configured with `DD_VERSION`, the tracer will add version to all spans that fall under the service that "owns" the tracer (generally DD_SERVICE). This means that if your service creates spans with the name of an external service, those spans will not receive version as a tag. As long as version is present in spans, it will be added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the tracer.
+
+When available, version is added to logs like any other tag.
 
 At the very least they will be used by the APM and [Dogstatsd clients][6] to tag trace data and statsd metrics with `env`, `service`, and `version`. If enabled, the APM tracer will also inject the values of these variables into your logs.
 
@@ -114,7 +118,6 @@ spec:
                 fieldRef:
                   fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
-
 
 [1]: /agent/kubernetes/data_collected/#kube-state-metrics
 [2]: /tracing/send_traces/
@@ -216,9 +219,9 @@ logs:
 
 This configuration will allow existing configurations, such as log processing rules or other tags, to continue to work exactly the same.
 
-If you do not wish to use automatic log injection from the APM tracer, you also have the option of [manually injecting these fields into logs][2].
+If you do not wish to use automatic log injection from the APM tracer, you also have the option of [manually injecting these fields into logs][2]. To configure unified service tagging for manual log injection, modify your service's log configuration check:
 
-[EXAMPLE OF MANUAL INJECTION]
+[example of log configuration check]
 
 [1]: /tracing/connect_logs_and_traces/
 [2]: /tracing/connect_logs_and_traces/java?tab=log4j2#manual-trace-id-injection
@@ -229,7 +232,6 @@ If you do not wish to use automatic log injection from the APM tracer, you also 
 Tags are added in an append-only fashion for [custom statsd metrics][1]. For example, if you have two different values for env, the metrics will be tagged with both envs. There is no order in which one tag will override another of the same name.
 
 [EXAMPLE]
-
 
 [1]: /developers/metrics/
 {{% /tab %}}

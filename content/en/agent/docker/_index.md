@@ -85,7 +85,7 @@ The Agent's [main configuration file][8] is `datadog.yaml`. For the Docker Agent
 
 ### Unified service tagging
 
-As a best practice in containerized environments using Autodiscovery, Datadog recommends using unified service tagging when assigning tags and environment variables. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][9] documentation.
+As a best practice, Datadog recommends using unified service tagging when assigning tags and environment variables. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][9] documentation.
 
 ### Global options
 
@@ -93,7 +93,10 @@ As a best practice in containerized environments using Autodiscovery, Datadog re
 |--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`       | Your Datadog API key (**required**)                                                                                                                                                                                                                                                                                                              |
 | `DD_HOSTNAME`      | Hostname to use for metrics (if autodetection fails)                                                                                                                                                                                                                                                                                             |
-| `DD_TAGS`          | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
+| `DD_ENV` | Your service's environment. |
+| `DD_SERVICE` | Your service's name. |
+| `DD_VERSION` | The version of your service. |
+| `DD_TAGS` | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`. **Note**: We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables.                                                                                                                                              |
 | `DD_SITE`          | Destination site for your metrics, traces, and logs. Valid options are `datadoghq.com` for the Datadog US site, and `datadoghq.eu` for the Datadog EU site.                                                                                                                                                                                      |
 | `DD_DD_URL`        | Optional setting to override the URL for metric submission.                                                                                                                                                                                                                                                                                      |
 | `DD_CHECK_RUNNERS` | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks) the `collector-queue` component might fall behind and fail the healthcheck. You can increase the number of runners to run checks in parallel. |
@@ -137,7 +140,7 @@ Learn more about [DogStatsD over Unix Domain Sockets][16].
 
 ### Tagging
 
-**Note**: As a best practice in containerized environments using Autodiscovery, Datadog recommends using [unified service tagging](#unified-service-tagging) when assigning tags.
+**Note**: As a best practice, Datadog recommends using [unified service tagging](#unified-service-tagging) when assigning tags.
 
 Datadog automatically collects common tags from [Docker][17], [Kubernetes][18], [ECS][19], [Swarm, Mesos, Nomad, and Rancher][17]. To extract even more tags, use the following options:
 

@@ -84,7 +84,9 @@ instances:
 
 ### Tagging
 
-Tagging is a key part of filtering and aggregating the data coming into Datadog across many sources. You can assign tags in configuration files, in environment variables, in the UI, the API, and in DogStatsD. If you define tags in the `datadog.yaml` file, the tags are applied to all of your integrations data. Once you've defined the tag in `datadog.yaml`, all new integrations inherit it. If you use a tag environment variable, it applies to all integrations. If you define tags in the corresponding integrations configuration file, it only applies to that specific integration. If you use tags in containers, it applies only to that container. For more information about tagging, see [Getting started with tags][25].
+Tagging is a key part of filtering and aggregating the data coming into Datadog across many sources. For more information about tagging, see [Getting started with tags][25].
+
+As a best practice, Datadog recommends using unified service tagging when configuring tags and environment variables. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, refer to the dedicated [unified service tagging][12] documentation.
 
 ### Validation
 

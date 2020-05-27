@@ -75,9 +75,9 @@ And in `trace-agent.log`:
 
 ### Environment name
 
-For the best experience, we recommend using the environment variable `DD_ENV` to configure `env` through your service's tracer.
+For the best experience, it is recommended to use the the environment variable `DD_ENV` to configure `env` through your service's tracer.
 Additionally, if your tracer has logs injection enabled then the `env` will be consistent across traces and logs.
-Read more about how this works in [Unified Service Tagging][14].
+Read more about how this works in [Unified Service Tagging][11].
 
 Alternatively, name your environment by updating `datadog.yaml` to set `env` under `apm_config`, for example:
 
@@ -87,7 +87,7 @@ apm_config:
     env: hello_world
 ```
 
-Then, [restart][11] the Datadog Agent:
+Then, [restart][12] the Datadog Agent:
 
 ```shell
 sudo service datadog-agent restart
@@ -153,7 +153,7 @@ This outputs:
 hello world
 ```
 
-After a few minutes, your trace displays in Datadog under the `hello` service. Check the [services page][12] or [trace list][13].
+After a few minutes, your trace displays in Datadog under the `hello` service. Check the [services page][13] or [trace list][14].
 
 {{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" >}}
 
@@ -171,7 +171,7 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [8]: /agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/guide/agent-commands/#restart-the-agent
-[12]: https://app.datadoghq.com/apm/services
-[13]: https://app.datadoghq.com/apm/traces
-[14]: /tagging/unified_service_tagging
+[11]: /tagging/unified_service_tagging
+[12]: /agent/guide/agent-commands/#restart-the-agent
+[13]: https://app.datadoghq.com/apm/services
+[14]: https://app.datadoghq.com/apm/traces
