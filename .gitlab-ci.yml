@@ -46,6 +46,7 @@ build_preview:
     #- sync_integration_descriptions_cached
     - placehold_translations
     - update_preview_baseurl
+    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
     - yarn run build:preview
     # remove service_checks json as we don't need to s3 push that..
     - rm -rf data/service_checks
@@ -152,6 +153,7 @@ build_live:
     - sync_integration_descriptions
     - sync_integration_metrics
     - placehold_translations
+    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
     - yarn run build:live
     - in-isolation deploy_live
     - create_artifact
