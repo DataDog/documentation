@@ -33,11 +33,11 @@ Why did we exclude `HTTP 3xx`? - These are typically redirects and should not co
 
 Metric-based SLIs allow you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `partition`, `availability-zone`, `resource`, or any other relevant group:
 
-{{< img src="monitors/service_level_objectives/metric_source.png" alt="example metric source"  >}}
+{{< img src="monitors/service_level_objectives/metric_editor.png" alt="example metric-based SLO editor"  >}}
 
 By grouping these SLIs you can visualize each individual group’s status, good request counts, and remaining error budget on the detail panel:
 
-{{< img src="monitors/service_level_objectives/metric_source_results.png" alt="example metric source results"  >}}
+{{< img src="monitors/service_level_objectives/metric_results.png" alt="example metric-based SLO group results"  >}}
 
 **Note**: If you are using monitor-based SLIs, you can also [view monitor groups][3].
 
