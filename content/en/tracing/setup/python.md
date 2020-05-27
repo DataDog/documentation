@@ -44,13 +44,13 @@ For example, if your application is started with `python app.py` then:
 ddtrace-run python app.py
 ```
 
-For more advanced usage, configuration, and fine-grain control, see Datadog's [API documentation][4].
+For more advanced usage, configuration, and fine-grain control, see the Python tracer's [API documentation][4].
 
-### Environment variables
+## Configuration
 
 When using **ddtrace-run**, the following [environment variable options][5] can be used.
 
-#### Tagging
+### Tagging
 
 | Environment Variable               | Default     | Description                                                                                                                                                                                                                                                                 |
 | ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -62,7 +62,7 @@ When using **ddtrace-run**, the following [environment variable options][5] can 
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 Check out the [Unified Service Tagging][51] documentation for recommendations on how to configure these environment variables.
 
-#### Instrumentation
+### Instrumentation
 
 | Environment Variable               | Default     | Description                                                                                                                                                                                                                                                                 |
 | ---------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -76,6 +76,7 @@ Check out the [Unified Service Tagging][51] documentation for recommendations on
 | `DD_LOGS_INJECTION`                | `false`     | Enable [connecting logs and traces Injection][9].                                                                                                                                                                                                                           |
 | `DD_TRACE_ANALYTICS_ENABLED`       | `false`     | Enable App Analytics globally for [web integrations][10].                                                                                                                                                                                                                   |
 | `DD_INTEGRATION_ANALYTICS_ENABLED` | `false`     | Enable App Analytics for a specific integration. Example: `DD_BOTO_ANALYTICS_ENABLED=true` .                                                                                                                                                                                |
+
 ## Change Agent Hostname
 
 Configure your application level tracers to submit traces to a custom Agent hostname. The Python Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
