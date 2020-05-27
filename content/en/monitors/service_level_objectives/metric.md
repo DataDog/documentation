@@ -20,13 +20,26 @@ On the [SLO status page][1], select **New SLO +**. Then select [**Metric**][2].
 
 ### Define queries
 
-There are two queries to define. The first query defines the sum of the good events, while the second query defines the sum of the total events.
-
-Datadog recommends the `sum by` aggregator and to add all events.
+1. There are two queries to define. The first query defines the sum of the good events, while the second query defines the sum of the total events.
+2. Use the `FROM` field to include or exclude specific groups using tags.
+3. Use the `sum by` aggregator to sum up all request counts instead of averaging them, or taking the max or min of all of those requests.
+4. Optionally, break your SLI out by specific groups (for tracking and visualization) or report on an aggregation of everything included in your criteria from steps 1 and 2. 
 
 **Example:** If you are tracking HTTP return codes, and your metric includes a tag like `code:2xx` || `code:3xx` || `code:4xx`. The sum of good events would be `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}`. And the `total` events would be `sum:httpservice.hits{!code:3xx}`.
 
 Why did we exclude `HTTP 3xx`? - These are typically redirects and should not count for or against the SLI, but other non 3xx based error codes should. In the `total` case we want all types minus `HTTP 3xx`, in the `numerator` we only want `OK` type status codes.
+
+### Multi-group for metric-based SLIs
+
+Metric-based SLIs allow you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `partition`, `availability-zone`, `resource`, or any other relevant group:
+
+{{< img src="monitors/service_level_objectives/metric_source.png" alt="example metric source"  >}}
+
+By grouping these SLIs you can visualize each individual group’s status, good request counts, and remaining error budget on the detail panel:
+
+{{< img src="monitors/service_level_objectives/metric_source_results.png" alt="example metric source results"  >}}
+
+**Note**: If you are using monitor-based SLIs, you can also [view monitor groups][3].
 
 ### Set your SLO targets
 
@@ -46,3 +59,4 @@ Here we add contextual information about the purpose of the SLO, including any r
 
 [1]: https://app.datadoghq.com/slo
 [2]: https://app.datadoghq.com/slo/new/metric
+[3]: /monitors/service_level_objectives/monitor/
