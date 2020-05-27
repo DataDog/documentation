@@ -174,7 +174,9 @@ After having set up the Datadog Cluster Agent, configure your Datadog Agent to c
 
 5. In the `agent.yaml` manifest, add the environment variable `DD_CLUSTER_AGENT_ENABLED` and set it to `true`.
 
-6. Create the DaemonSet with this command: `kubectl apply -f agent.yaml`
+6. (Optional) If your cluster encompasses a single environment, you can also set `<DD_ENV>` in the `agent.yaml`.
+
+7. Create the DaemonSet with this command: `kubectl apply -f agent.yaml`
 
 ### Verification
 
