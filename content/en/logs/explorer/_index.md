@@ -77,6 +77,7 @@ Interact with the upper reserved attributes section:
 
 - with the **Host** section, to access the related [host dashboard][10] or [network page][11].
 - with the **Service** section, to see the [trace in APM][12] (both require a `trace_id` attribute in the log: refer to [trace injection in logs][13]) or the [service page][14].
+- Enhance your experience further with [Unified Service Tagging][18] to navigate to and from logs with `env`, `service`, and `version`.
 
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
@@ -150,3 +151,4 @@ Use saved views to automatically configure your log explorer with a preselected 
 [15]: /logs/explorer/facets/#overview
 [16]: /logs/processing/
 [17]: /logs/explorer/saved_views/
+[18]: /tagging/unified_service_tagging

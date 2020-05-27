@@ -37,7 +37,7 @@ As a best practice, Datadog recommends using unified service tagging when assign
 * Tags are converted to lowercase.
 * For optimal functionality, it is recommended to use the `key:value` syntax.
 
-Examples of commonly used metric tag keys are `env`, `instance`, `name`, and `role`.
+Examples of commonly used metric tag keys are `instance`, `name`, and `role`.
 
 ## Further Reading
 
