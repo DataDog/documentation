@@ -284,7 +284,7 @@ In the following example, assuming all roles but `Guest` have the logs_read_arch
 * Prod is accessible to all users belonging to `Customer Support`.
 * Security-Audit is not accessible to users who belong to `Customer Support`, unless they also belong to `Audit & Security`.
 
-{{< img src="account_management/rbac/logs_archive_list.png" alt="Create a custom Role"  style="width:90%;">}}
+{{< img src="account_management/rbac/logs_archives_list.png" alt="Create a custom Role"  style="width:90%;">}}
 
 
 {{% /tab %}}
