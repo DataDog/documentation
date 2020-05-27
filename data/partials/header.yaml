@@ -85,6 +85,10 @@ left:
         category: industry
         link: "https://www.datadoghq.com/solutions/media-entertainment/"
         title: "Media & Entertainment"
+      - name: solutions_technology
+        category: industry
+        link: "https://www.datadoghq.com/solutions/technology/"
+        title: "Technology"
       - name: solutions_gaming
         category: industry
         link: "https://www.datadoghq.com/solutions/gaming/"

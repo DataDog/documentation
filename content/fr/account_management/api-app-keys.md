@@ -26,7 +26,7 @@ Pour des raisons de sécurité, vous ne pouvez pas utiliser les clés d'API pour
 
 ## Ajouter une clé ou un token
 
-Pour ajouter une clé d'API, une clé d'application ou un token client Datadog, accédez à [Integration -> APIs][4], entrez un nom pour votre clé ou token, et cliquez sur **Create API key**, **Create Application Key** ou **Create Client Token**.
+Pour ajouter une clé d'API, une clé d'application ou un token client Datadog, accédez à [Integration -> APIs][1], entrez un nom pour votre clé ou token, et cliquez sur **Create API key**, **Create Application Key** ou **Create Client Token**.
 
 **Remarque** :
 
@@ -36,7 +36,7 @@ Pour ajouter une clé d'API, une clé d'application ou un token client Datadog, 
 
 ## Supprimer une clé ou un token
 
-Pour supprimer une clé d'API, une clé d'application ou un token client Datadog, accédez à [Integration -> APIs][4] et cliquez sur le bouton **Revoke** correspondant à la clé ou au token que vous souhaitez supprimer :
+Pour supprimer une clé d'API, une clé d'application ou un token client Datadog, accédez à [Integration -> APIs][1] et cliquez sur le bouton **Revoke** correspondant à la clé ou au token que vous souhaitez supprimer :
 
 {{< img src="account_management/api_app_keys/application_keys.png" alt="Clés d'application"  >}}
 
@@ -52,9 +52,9 @@ Par ailleurs, plusieurs organisations ont également demandé à créer un « c
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][1].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
-[1]: /fr/help
-[2]: https://docs.datadoghq.com/fr/logs/log_collection/javascript
-[3]: /fr/real_user_monitoring
-[4]: https://app.datadoghq.com/account/settings#api
+[1]: https://app.datadoghq.com/account/settings#api
+[2]: /fr/logs/log_collection/javascript/
+[3]: /fr/real_user_monitoring/
+[4]: /fr/help/
