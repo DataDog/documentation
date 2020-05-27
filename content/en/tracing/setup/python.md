@@ -78,15 +78,17 @@ Check out the [Unified Service Tagging][51] documentation for recommendations on
 | `DD_INTEGRATION_ANALYTICS_ENABLED` | `false`     | Enable App Analytics for a specific integration. Example: `DD_BOTO_ANALYTICS_ENABLED=true` .                                                                                                                                                                                |
 ## Change Agent Hostname
 
-Configure your application level tracers to submit traces to a custom Agent hostname. The Python Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
+Configure your application level tracers to submit traces to a custom Agent hostname. The Python Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
+
+But you can also set the hostname and port in code:
 
 ```python
 import os
 from ddtrace import tracer
 
 tracer.configure(
-    hostname=os.environ['DD_AGENT_HOST'],
-    port=os.environ['DD_TRACE_AGENT_PORT'],
+    hostname="custom-hostname",
+    port="1234",
 )
 ```
 

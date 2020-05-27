@@ -153,7 +153,7 @@ import (
 func main() {
     addr := net.JoinHostPort(
         "custom-hostname",
-        "8888",
+        "1234",
     )
     tracer.Start(tracer.WithAgentAddr(addr))
     defer tracer.Stop()
