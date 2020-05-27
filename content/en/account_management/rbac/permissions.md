@@ -264,17 +264,37 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 #### logs_read_archives
 
-Grants the ability to rehydrate from archives, and access the details of the archive configuration.
+Grants the ability to rehydrate from archives, and access the details of the archive configuration. This permission can be scoped to a subset of Archives. 
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-todo
+Go to your [Datadog Roles page][1] and select the checkbox `read` as below for the wanted role:
+{{< img src="account_management/rbac/logs_read_archive_access.png" alt="Create a custom Role"  style="width:90%;">}}
+
+Then, assign that role to the archive. Proceed at archive creation, or update at any moment editing the archive. 
+{{< img src="account_management/rbac/logs_archive_restriction.png" alt="Create a custom Role"  style="width:90%;">}}
+
+An archive with no restriction is accessible to anyone who belongs to a Role with logs_read_archives permission. An archive with restrictions is only accessible to the users who belongs to one of the registered roles, provided theses roles have the logs_read_archives permission.
+
+In the following example, assuming all roles but `Guest` have the logs_read_archive permission:
+
+* Staging is accessible to all users, except users that **only** belong to the `Guest` role.
+* Prod is accessible to all users belonging to `Customer Support`.
+* Security-Audit is not accessible to users who belong to `Customer Support`, unless they also belong to `Audit & Security`.
+
+{{< img src="account_management/rbac/logs_archive_restriction.png" alt="Create a custom Role"  style="width:90%;">}}
+
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-todo
+The logs_read_archive permission can be granted or revoked from a role via [the Roles API][1].
+
+An archive can be scoped to a subset of roles using the [Archive API][2].
+
+[1]: /api/v2/roles/
+[2]: /api/v2/logs-archives/
 
 {{% /tab %}}
 {{< /tabs >}}
