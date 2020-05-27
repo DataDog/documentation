@@ -299,7 +299,7 @@ In addition, access to the Live Tail can be restricted with the `logs_live_tail`
 
 #### logs_read_data
 
-Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][4].
+Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][3].
 
 "Role combinations are permissive. Is a user belongs to multiple roles, the most permissive role is applied."
 
@@ -422,4 +422,4 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 [1]: /account_management/users/#edit-a-user-s-roles
 [2]: /api/v2/roles/#list-permissions
-[4]: /api/v2/logs-restriction-queries/
+[3]: /api/v2/logs-restriction-queries/
