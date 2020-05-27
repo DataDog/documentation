@@ -1037,7 +1037,7 @@ main:
     identifier: log_collection_ruby
     weight: 110
   - name: Other Integrations
-    url: 'integrations/#cat-log-collection'
+    url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
     weight: 111
@@ -1121,7 +1121,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: Correlate Logs with Metrics
-    url: 'dashboards/timeboards/#graph-menu'
+    url: dashboards/timeboards/#graph-menu
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -1369,7 +1369,7 @@ main:
     identifier: dev_tools_metrics_powershell
     weight: 204
   - name: 'Submission - API '
-    url: 'api/v1/metrics/#submit-metrics'
+    url: api/v1/metrics/#submit-metrics
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_api
     weight: 205
@@ -1404,7 +1404,7 @@ main:
     identifier: dev_tools_events_mail
     weight: 303
   - name: API
-    url: 'api/v1/events/#post-an-event'
+    url: api/v1/events/#post-an-event
     parent: dev_tools_events
     identifier: dev_tools_events_api
     weight: 304
