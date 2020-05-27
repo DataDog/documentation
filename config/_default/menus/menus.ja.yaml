@@ -1005,7 +1005,7 @@ main:
     identifier: log_collection_ruby
     weight: 109
   - name: その他のインテグレーション
-    url: 'integrations/#cat-log-collection'
+    url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
     weight: 110
@@ -1089,7 +1089,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: ログとメトリクスの相関
-    url: 'dashboards/timeboards/#graph-menu'
+    url: dashboards/timeboards/#graph-menu
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -1332,7 +1332,7 @@ main:
     identifier: dev_tools_metrics_powershell
     weight: 204
   - name: '送信 - API '
-    url: 'api/#post-timeseries-points'
+    url: api/#post-timeseries-points
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_api
     weight: 205
@@ -1367,7 +1367,7 @@ main:
     identifier: dev_tools_events_mail
     weight: 303
   - name: API
-    url: 'api/#post-an-event'
+    url: api/#post-an-event
     parent: dev_tools_events
     identifier: dev_tools_events_api
     weight: 304
