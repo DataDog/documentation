@@ -64,7 +64,7 @@ body > header.scrolled ~ .container .sidenav .sticky {
   }
 
   h4 {
-    padding: 10px 0 10px 10px;
+    padding: 0 0 10px 10px;
     color:$ddpurple;
     font-size:24px;
     font-weight:200;
@@ -238,6 +238,18 @@ body > header.scrolled ~ .container .sidenav .sticky {
   .sidenav-nav {
     overflow-x: hidden;
     overflow-y: scroll;
+    &::-webkit-scrollbar {
+      appearance: none;
+      width: 7px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, .5);
+      box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    }
+
+    scrollbar-width: thin;
+    
     margin:0;
     ul li.active{
       > a {
