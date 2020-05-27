@@ -51,6 +51,8 @@ To enable Autodiscovery for these integrations, use the official Prometheus expo
 
 ## Configuration
 
+**Note:** As a best practice in containerized environments using Autodiscovery, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][9] documentation.
+
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
@@ -324,7 +326,7 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `httpd`. The Autodiscovery templates are configured to collect metrics from the Apache container and set up a Datadog-HTTP check with instances for testing two endpoints.
 
-Check names are `apache`, `http_check`, their `<INIT_CONFIG>`, and `<INSTANCE_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][9], [Datadog-HTTP check integration][10].
+Check names are `apache`, `http_check`, their `<INIT_CONFIG>`, and `<INSTANCE_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][10], [Datadog-HTTP check integration][11].
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -487,5 +489,6 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 [6]: /integrations/postfix/
 [7]: /integrations/cassandra/#agent-check-cassandra-nodetool
 [8]: /integrations/gunicorn/
-[9]: /integrations/apache/#setup
-[10]: /integrations/http_check/#setup
+[9]: /tagging/unified_service_tagging
+[10]: /integrations/apache/#setup
+[11]: /integrations/http_check/#setup

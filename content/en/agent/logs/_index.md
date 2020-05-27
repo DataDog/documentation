@@ -48,7 +48,6 @@ To collect logs for a given integration, uncomment the logs section in that inte
 Consult the <a href="/integrations/#cat-log-collection">list of supported integrations</a>  that include out of the box log configurations.
 </div>
 
-
 ## Custom log collection
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:

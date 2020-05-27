@@ -23,7 +23,8 @@ further_reading:
 <a href="/getting_started/agent/autodiscovery">Consult the Autodiscovery Getting Started documentation to discover the concepts behind this feature</a>.
 </div>
 
-This page covers how to configure integrations autodiscovery with Docker, if you are using Kubernetes, see the [Kubernetes Integrations Autodiscovery documentation][1].
+This page covers how to configure integrations autodiscovery with Docker. If you are using Kubernetes, see the [Kubernetes Integrations Autodiscovery documentation][1].
+
 The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][2] when running the Agent on a host for more context on this logic.
 
 To configure an integration with Autodiscovery, use the following parameters:
@@ -45,6 +46,8 @@ Each tab in sections below shows a different way to apply integration templates 
 **Note**: Some supported integrations don't work with standard Autodiscovery because they require either process tree data or filesystem access: [Ceph][4], [Varnish][5], [Postfix][6], [Cassandra Nodetools][7], and [Gunicorn][8]. To enable Autodiscovery for these integrations, use the official Prometheus exporter in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint.
 
 ## Configuration
+
+**Note**: As a best practice, Datadog recommends using unified service tagging in containerized environments using Autodiscovery. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
 
 {{< tabs >}}
 {{% tab "Docker" %}}

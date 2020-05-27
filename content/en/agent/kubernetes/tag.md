@@ -21,6 +21,8 @@ If you are running the Agent as a binary on a host, configure your tag extractio
 
 ## Tag Autodiscovery
 
+**Note:** As a best practice in containerized environments using Autodiscovery, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
+
 Starting with Agent v6.10+, the Agent can autodiscover tags from Pod annotations. It allows the Agent to associate tags to all data emitted by the entire pods or an individual container within this pod.
 
 To apply a `<TAG_KEY>:<TAG_VALUE>` tag to all data emitted by a given pod and collected by the Agent use the following annotation on your pod:
@@ -37,7 +39,7 @@ annotations:
   ad.datadoghq.com/<CONTAINER_IDENTIFIER>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
-Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without [modifying the Agent `datadog.yaml` file][1].
+Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without [modifying the Agent `datadog.yaml` file][2].
 
 ```yaml
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
@@ -186,4 +188,5 @@ kubernetes_pod_annotations_as_tags:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kubernetes/tag/?tab=agent#extract-labels-as-tags
+[1]: /tagging/unified_service_tagging
+[2]: /agent/kubernetes/tag/?tab=agent#extract-labels-as-tags
