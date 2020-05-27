@@ -288,7 +288,7 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 Grant the following permissions to manage read access on subsets of log data:
 
 * `logs_read_data`(Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries. 
-* `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission in order to access indexed data)
+* `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission to access indexed data).
 
 These permissions can also be used together. A role can restrict the user to a subset of indexes and additionally apply a restriction query to limit access within these indexes.
 
@@ -339,7 +339,7 @@ Use [Restriction Queries][2] to scope the permission to a subset of Log Data.
 #### logs_read_index_data
 
 Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
-When using `logs_read_data` and restriction queries, `logs_read_index_data` permission **must** be set globally in order to access indexed logs.
+When using `logs_read_data` and restriction queries, the `logs_read_index_data` permission **must** be set globally to access indexed logs.
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
