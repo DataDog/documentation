@@ -36,8 +36,6 @@ You can also track success rate and metric-based SLIs (Service Level Indicators)
 
 Once you have monitors set up, on the [Service Level Objectives status page][1], you can view the overall uptime percentage only—or the overall percentage, plus the uptime for each monitor.
 
-{{< img src="monitors/service_level_objectives/slo-overview.png" alt="slo main page"  >}}
-
 ## Edit an SLO
 
 To edit an SLO, hover over the SLO on the right, and click the edit pencil icon.
