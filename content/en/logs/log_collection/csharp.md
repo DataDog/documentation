@@ -53,7 +53,7 @@ var log = new LoggerConfiguration()  // using Serilog;
     .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
     
     // using Serilog.Formatting.Compact;
-    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")  // using Serilog.Formatting.Compact;
+    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
     
     .CreateLogger();
 
@@ -229,10 +229,10 @@ namespace Datadog
            // Load the configure fom App.config
            XmlConfigurator.Configure();
 
-             // Log a simple debug message
+           // Log a simple debug message
            logger.Debug("This is my first debug message");
 
-            // your code continues here ...
+           // your code continues here ...
         }
     }
 }
