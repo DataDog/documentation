@@ -24,8 +24,8 @@ La solution Log Management de Datadog permet de recueillir des logs en provenanc
 
 Une fois cette opération terminée, lisez les sections ci-dessous pour découvrir comment :
 
-* [Envoyer des logs manuellement](#sending-logs-manually)
-* [Utiliser l'Agent Datadog pour envoyer des logs à partir d'un fichier](#send-logs-from-a-file)
+- [Envoyer des logs manuellement](#sending-logs-manually)
+- [Utiliser l'Agent Datadog pour envoyer des logs à partir d'un fichier](#send-logs-from-a-file)
 
 ## Envoyer des logs manuellement
 
@@ -33,30 +33,29 @@ Pour envoyer des logs manuellement, utilisez la commande `telnet` avec votre [cl
 
 Les logs peuvent prendre la forme d'un message en texte intégral :
 
-{{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< site-region region="us" >}}
 
-L'endpoint TCP sécurisé est `intake.logs.datadoghq.com:10516` (utilisez le port `10514` pour les connexions non sécurisées).
+L'endpoint TCP sécurisé est {{< region-param key="tcp_endpoint" code="true" >}} (ou le port {{< region-param key="tcp_endpoint_port" code="true" >}} pour les connexions non sécurisées).
 
-```text
+{{< code-block lang="text" >}}
 telnet intake.logs.datadoghq.com 10514
 
 <CLÉ_API_DATADOG> Log en texte brut envoyé via TCP
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /site-region >}}
 
-L'endpoint TCP sécurisé est `tcp-intake.logs.datadoghq.eu:443` (utilisez le port `1883` pour les connexions non sécurisées).
+{{< site-region region="eu" >}}
 
-```text
+L'endpoint TCP sécurisé est {{< region-param key="tcp_endpoint" code="true" >}} (ou le port {{< region-param key="tcp_endpoint_port" code="true" >}} pour les connexions non sécurisées).
+
+{{< code-block lang="text" >}}
 telnet tcp-intake.logs.datadoghq.eu 1883
 
 <CLÉ_API_DATADOG> Log en texte brut envoyé via TCP
-```
+{{< /code-block >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 On obtient alors ce qui suit sur la [page Log Explorer][2] :
 
@@ -64,8 +63,7 @@ On obtient alors ce qui suit sur la [page Log Explorer][2] :
 
 ou un objet JSON qui est automatiquement parsé par Datadog :
 
-{{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< site-region region="us" >}}
 
 ```text
 telnet intake.logs.datadoghq.com 10514
@@ -73,8 +71,9 @@ telnet intake.logs.datadoghq.com 10514
 <CLÉ_API_DATADOG> {"message":"Log au format JSON envoyé via TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostname", "service":"user"}
 ```
 
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
 
 ```text
 telnet tcp-intake.logs.datadoghq.eu 1883
@@ -82,8 +81,7 @@ telnet tcp-intake.logs.datadoghq.eu 1883
 <CLÉ_API_DATADOG> {"message":"Log au format JSON envoyé via TCP", "ddtags":"env:dev", "ddsource":"terminal", "hostname":"gs-hostame", "service":"user"}
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 On obtient alors ce qui suit sur la [page Log Explorer][2] :
 
@@ -95,22 +93,21 @@ On obtient alors ce qui suit sur la [page Log Explorer][2] :
 
 Pour installer l'Agent Datadog sur votre host Vagrant, utilisez la [commande d'installation en une étape][6] en spécifiant votre [clé d'API Datadog][5] :
 
-{{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< site-region region="us" >}}
 
 ```text
-DD_API_KEY=<VOTRE_CLÉ_API_DD>  bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+DD_API_KEY=<CLÉ_API_DATADOG>  bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 ```
 
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
 
 ```text
-DD_API_KEY=<VOTRE_CLÉ_API_DD> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+DD_API_KEY=<CLÉ_API_DATADOG> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+```
 
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 #### Validation
 
@@ -138,6 +135,7 @@ logs_enabled: true
 ```
 
 ### Surveiller un fichier personnalisé
+
 #### Créer le fichier de log
 
 Pour recueillir des logs à partir d'un fichier personnalisé, créez le fichier puis ajoutez-y une ligne de log :
@@ -166,13 +164,13 @@ Pour indiquer à l'Agent de surveiller ce fichier de log :
 
 3. Copiez le contenu suivant et collez-le dans ce fichier `conf.yaml` :
 
-      ```yaml
-      logs:
+    ```yaml
+    logs:
         - type: file
           path: /home/ubuntu/log_file_to_monitor.log
           source: custom
           service: user
-      ```
+    ```
 
 4. Redémarrez l'Agent : `sudo service datadog-agent restart`
 

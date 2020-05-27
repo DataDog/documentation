@@ -20,14 +20,16 @@ short_description: 'Surveillez le nombre de requêtes, les temps d''exécution, 
 version: '1.0'
 ---
 ## Présentation
+
 BigQuery est l'entrepôt de données entièrement géré et à faible coût de Google qui stocke des pétaoctets de données à des fins d'analyse.
 
 Recueillez des métriques de Google BigQuery pour :
 
-* Visualiser les performances de vos requêtes BigQuery
-* Corréler les performances de vos requêtes BigQuery avec vos applications
+- Visualiser les performances de vos requêtes BigQuery
+- Corréler les performances de vos requêtes BigQuery avec vos applications
 
 ## Implémentation
+
 ### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
@@ -44,21 +46,25 @@ Une fois cette opération effectuée, exportez vos logs Google BigQuery depuis 
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "google_cloud_big_query" >}}
 
 
 ### Événements
+
 L'intégration Google BigQuery n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Google BigQuery n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
+[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_big_query/google_cloud_big_query_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help
+[5]: https://docs.datadoghq.com/fr/help/
