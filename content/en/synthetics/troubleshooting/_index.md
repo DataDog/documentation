@@ -34,7 +34,7 @@ The freshly opened incognito pop up ignores all your previous browser history: c
 
 ### Unauthorized errors
 
-If one of your Synthetic tests is throwing a 401, it most likely means that it is unable to authenticate on the endpoint. You should consequently think about the method you generally use to authenticate on that endpoint (outside of Datadog) and replicate it when configuring your Synthetics test.
+If one of your Synthetic tests is throwing a 401, it most likely means that it is unable to authenticate on the endpoint. You should use the method that you use to authenticate on that endpoint (outside of Datadog) and replicate it when configuring your Synthetics test.
 
 * Is your endpoint using header-based authentication?
   * Basic Authentication: specify the associated credentials in the **Advanced options** of your [HTTP][2] or [Browser test][3].
