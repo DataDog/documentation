@@ -15,8 +15,8 @@ further_reading:
 
 Log collection requires the Datadog Agent v6.0+. Older versions of the Agent do not include the `log collection` interface.
 
-As of Agent v6.14/v7.14, Datadog recommends the use of and enforcing **HTTPS** transport (see [agent Transport for Logs][2]). 
-If you are using the HTTPS transport for logs, please refer to the [agent proxy documentation][1] and use the same set of proxy settings as other data types.
+As of Agent v6.14/v7.14, Datadog recommends the use of and enforcing **HTTPS** transport (see [agent Transport for Logs][1]). 
+If you are using the HTTPS transport for logs, please refer to the [agent proxy documentation][2] and use the same set of proxy settings as other data types.
 
 
 ## TCP log forwarding
@@ -295,5 +295,5 @@ stream {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/proxy/
-[2]: /agent/logs/log_transport?tab=https
+[1]: /agent/logs/log_transport?tab=https
+[2]: /agent/proxy/

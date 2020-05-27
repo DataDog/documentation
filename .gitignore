@@ -3,6 +3,11 @@ public/
 data/service_checks/
 integrations_data
 
+# Ignore generated examples
+/examples
+content/en/api/**/*.go
+content/en/api/**/*.java
+
 # Ignoring all automated content
 # Developers/integrations
 content/en/developers/integrations/*.md
