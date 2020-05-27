@@ -36,12 +36,14 @@ The freshly opened incognito pop up ignores all your previous browser history: c
 
 If one of your Synthetic tests is throwing a 401, it most likely means that it is unable to authenticate on the endpoint. You should use the method that you use to authenticate on that endpoint (outside of Datadog) and replicate it when configuring your Synthetics test.
 
-* Is your endpoint using header-based authentication?
-  * Basic Authentication: specify the associated credentials in the **Advanced options** of your [HTTP][2] or [Browser test][3].
-  * Token based authentication: extract your token with a first [HTTP test][2], create a [global variable][4] by parsing the response of that first test, and re-inject that variable in a second [HTTP][5] or [Browser test][6] requiring the authentication token.
-  * Session based authentication: add the required headers or cookies in the **Advanced options** of your [HTTP][2] or [Browser test][3].
-* Is this endpoint using query parameters for authentication (e.g. do you need to add a specific API key in your URL parameters?)
-* Is this endpoint using IP-based authentication? If so, you might need to whitelist part or all of the [IPs from which Synthetics tests originate][7].
+* Is your endpoint using **header-based authentication**?
+  * **Basic Authentication**: specify the associated credentials in the **Advanced options** of your [HTTP][2] or [Browser test][3].
+  * **Token based authentication**: extract your token with a first [HTTP test][2], create a [global variable][4] by parsing the response of that first test, and re-inject that variable in a second [HTTP][5] or [Browser test][6] requiring the authentication token.
+  * **Session based authentication**: add the required headers or cookies in the **Advanced options** of your [HTTP][2] or [Browser test][3].
+  
+* Is this endpoint using **query parameters for authentication** (e.g. do you need to add a specific API key in your URL parameters?)
+
+* Is this endpoint using **IP-based authentication**? If so, you might need to whitelist part or all of the [IPs from which Synthetics tests originate][7].
 
 ### Forbidden errors
 
