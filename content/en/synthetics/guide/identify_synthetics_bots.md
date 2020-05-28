@@ -2,6 +2,8 @@
 title: Identify Synthetics Bots
 kind: documentation
 description: Identify incoming Synthetics requests
+aliases:
+- /synthetics/identify_synthetics_bots
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
@@ -24,7 +26,7 @@ Some parts of your system might not be available to robots without the right ide
 * The **Advanced options** configuration to set custom headers for your API and browser tests. You can also locally add **cookies, headers, or basic auth** to your API tests and **cookies and headers** to your browser tests.
 * The `window._DATADOG_SYNTHETICS_BROWSER` [JavaScript variable in your application code](#datadog-synthetics-browser-variable).
 
-#### Headers
+## Headers
 
 Use the header attached to Datadog robots to detect them for your API and browser tests:
 
@@ -47,11 +49,11 @@ The following header is attached to all Datadog browser tests robots:
 {{% /tab %}}
 {{< /tabs >}}
 
-##### APM headers
+### APM headers
 
 If APM is enabled, [**other APM specific headers**][2] such as `x-datadog-trace-id` are added to all the requests launched for API tests.
 
-#### _DATADOG_SYNTHETICS_BROWSER variable
+## Browser variable
 
 When a Datadog robot is rendering your application, the `window._DATADOG_SYNTHETICS_BROWSER` variable is set to `true`. To remove the robot actions from your analytics data, wrap your analytics tool code with the following test:
 

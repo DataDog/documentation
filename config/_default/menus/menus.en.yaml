@@ -1196,23 +1196,20 @@ main:
     parent: synthetics
     identifier: synthetics_apm
     weight: 4
-  - name: Identify Synthetics Bots
-    url: synthetics/identify_synthetics_bots/
-    parent: synthetics
-    weight: 5
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 6
-  - name: Guide
+    weight: 5
+  - name: Guides
     url: synthetics/guide/
     parent: synthetics
-    weight: 7
+    identifier: synthetics_guides
+    weight: 6
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 8
+    weight: 7
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: nav_rum
