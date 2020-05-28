@@ -2,7 +2,7 @@
 title: Using tags
 kind: documentation
 aliases:
-- /getting_started/tagging/using_tags/
+- /tagging/using_tags/
 further_reading:
 - link: "/tagging/"
   tag: "Documentation"

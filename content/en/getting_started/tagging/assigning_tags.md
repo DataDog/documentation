@@ -3,7 +3,7 @@ title: Assigning Tags
 kind: documentation
 aliases:
     - /agent/tagging
-    - /getting_started/tagging/assigning_tags
+    - /tagging/assigning_tags
 further_reading:
 - link: "/tagging/"
   tag: "Documentation"

@@ -8,6 +8,7 @@ aliases:
     - /developers/tagging/
     - /getting_started/tagging
     - /tagging/faq/
+    - /tagging/
 further_reading:
 - link: "/tagging/assigning_tags/"
   tag: "Documentation"

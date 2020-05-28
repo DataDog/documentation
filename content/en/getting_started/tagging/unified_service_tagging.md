@@ -2,7 +2,7 @@
 title: Unified Service Tagging
 kind: documentation
 aliases:
-- /getting_started/tagging/unified_service_tagging
+- /tagging/unified_service_tagging
 further_reading:
 - link: "/tagging/using_tags"
   tag: "Documentation"
