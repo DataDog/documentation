@@ -4,16 +4,16 @@ kind: documentation
 aliases:
   - /fr/tracing/advanced/adding_metadata_to_spans/
 further_reading:
-  - link: tracing/connect_logs_and_traces
+  - link: /tracing/connect_logs_and_traces/
     tags: Enrichir vos traces
     text: Associer vos logs à vos traces
-  - link: tracing/manual_instrumentation
+  - link: /tracing/manual_instrumentation/
     tags: Enrichir vos traces
     text: Instrumenter vos applications manuellement pour créer des traces
-  - link: tracing/opentracing
+  - link: /tracing/opentracing/
     tags: Enrichir vos traces
     text: Implémenter Opentracing dans vos applications
-  - link: tracing/visualization/
+  - link: /tracing/visualization/
     tag: Utiliser l'UI de l'APM
     text: 'Explorer vos services, ressources et traces'
 ---
@@ -251,7 +251,7 @@ Ajoutez des [tags][1] à l'ensemble des [spans][2] en configurant le traceur à 
 
 ```bash
 java -javaagent:<CHEMIN-AGENT-JAVA-DD>.jar \
-     -Ddd.trace.global.tags='env:dev,<CLÉ_TAG>:<VALEUR_TAG>' \
+     -Ddd.trace.global.tags=env:dev,<CLÉ_TAG>:<VALEUR_TAG> \
      -jar <CHEMIN_VOTRE_APPLICATION>.jar
 ```
 
@@ -374,4 +374,4 @@ Les valeurs correspondent au [type de variable][3] et peuvent être des objets c
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/visualization/#span-tags
-[2]: /fr/tagging
+[2]: /fr/tagging/

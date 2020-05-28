@@ -29,6 +29,7 @@ AWS Billing vous permet de surveiller vos prévisions et vos coûts de facturat
 Activez cette intégration pour visualiser dans Datadog vos métriques de facturation.
 
 ## Implémentation
+
 ### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon Web Services][1].
@@ -36,7 +37,6 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de métriques
 
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `Billing` est cochée dans la section concernant la collecte des métriques.
-
 2. Ajoutez l'autorisation suivante à votre [stratégie IAM Datadog][3] afin de recueillir des métriques AWS Billing. Pour en savoir plus sur les stratégies AWS Budgets, consultez [la documentation du site Web d'AWS][4].
 
     | Autorisation AWS       | Description                      |
@@ -44,27 +44,26 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
     | `budgets:ViewBudget` | utilisée pour afficher les métriques sur les budgets AWS |
 
 3. Activez les métriques Billing depuis la [console AWS][5].
-
 4. Installez l'[intégration Datadog/AWS Billing][6].
-
 5. [Créez un budget AWS][7] afin de commencer à recevoir des [métriques](#metriques).
 
 **Remarque** : les métriques AWS Budgets ne peuvent être recueillies qu'à partir du compte principal AWS.
 
 ### Collecte de logs
+
 #### Activer le logging
 
 Configurez AWS Billing de façon à ce que les logs soient envoyés vers un compartiment S3 ou vers Cloudwatch.
 
-**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_billing` est défini en tant que *Target prefix*.
+**Remarque** : si vous envoyez vos logs vers un compartiment S3, assurez-vous que `amazon_billing` est défini en tant que _Target prefix_.
 
 #### Envoyer des logs à Datadog
 
 1. Si vous ne l'avez pas déjà fait, configurez la [fonction Lambda de collecte de logs AWS avec Datadog][8].
 2. Une fois la fonction Lambda installée, ajoutez manuellement un déclencheur sur le compartiment S3 ou sur le groupe de logs Cloudwatch qui contient vos logs AWS Billing dans la console AWS :
 
-    * [Ajouter un déclencheur manuel sur le compartiment S3][9]
-    * [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][10]
+    - [Ajouter un déclencheur manuel sur le compartiment S3][9]
+    - [Ajouter un déclencheur manuel sur le groupe de logs Cloudwatch][10]
 
 ## Surveiller l'utilisation de CloudWatch
 
@@ -77,6 +76,7 @@ Dès que les métriques sont disponibles, consultez `aws.billing.estimated_charg
 AWS considère que la métrique `aws.billing.estimated_charges` représente la facture CloudWatch du mois en cours. La valeur est réinitialisée à 0 au début de chaque mois. La métrique `aws.billing.forecasted_charges` est l'estimation de votre facture à la fin du mois par CloudWatch, basée sur l'utilisation actuelle.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "amazon_billing" >}}
 
@@ -84,14 +84,17 @@ AWS considère que la métrique `aws.billing.estimated_charges` représente la f
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
 ### Événements
+
 L'intégration AWS Billing n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration AWS Billing n'inclut aucun check de service.
 
 ## Dépannage
 
 ### Aucune métrique n'est recueillie dans le cadre de l'intégration AWS Billing
+
 Vérifiez les éléments ci-dessous pour tenter de résoudre votre problème d'intégration :
 
 1. Assurez-vous que votre stratégie IAM dispose de l'autorisation `budgets:ViewBudget`.
@@ -100,11 +103,12 @@ Vérifiez les éléments ci-dessous pour tenter de résoudre votre problème d'i
 **Remarque** : les métriques AWS Billing sont recueillies toutes les 4 ou 8 heures par Datadog.
 
 ### Métriques manquantes
+
 Si les métriques `aws.billing.actual_spend`, `aws.billing.forecasted_spend` ou `aws.billing.budget_limit` sont manquantes, [créez un budget AWS][7] afin de commencer à recevoir ces métriques dans Datadog.
 
 **Remarque** : les métriques AWS Billing sont recueillies toutes les 4 ou 8 heures par Datadog.
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_budgets.html
