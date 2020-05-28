@@ -183,8 +183,6 @@ You may elect export the environment variables in the command for your executabl
 
 Or you might use [Chef][12], [Ansible][13], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it will have access to those variables.
 
-[Chef/Ansible example]
-
 #### Configure traces, logs, Statsd metrics
 
 {{< tabs >}}
@@ -193,8 +191,6 @@ Or you might use [Chef][12], [Ansible][13], or another orchestration tool to pop
 As a best practice, it is recommended to configure your [APM tracer][1] with `DD_ENV` as it keeps the definition of env closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
 
 **Note: There can only be one service per span.** Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag will show up on all trace metrics emitted from that host.
-
-[EXAMPLE]
 
 [1]: /tracing/send_traces/
 {{% /tab %}}
@@ -209,7 +205,6 @@ If you already have logs configuration checks defined similarly to the example b
 logs:
   - type: file
     path: "/path/to/your/log.log"
-    service: <SERVICE>
     source: python
     log_processing_rules:
       ...
@@ -219,9 +214,7 @@ logs:
 
 This configuration will allow existing configurations, such as log processing rules or other tags, to continue to work exactly the same.
 
-If you do not wish to use automatic log injection from the APM tracer, you also have the option of [manually injecting these fields into logs][2]. To configure unified service tagging for manual log injection, modify your service's log configuration check:
-
-[example of log configuration check]
+If you do not wish to use automatic log injection from the APM tracer, you also have the option of [manually injecting these fields into logs][2].
 
 [1]: /tracing/connect_logs_and_traces/
 [2]: /tracing/connect_logs_and_traces/java?tab=log4j2#manual-trace-id-injection
@@ -230,8 +223,6 @@ If you do not wish to use automatic log injection from the APM tracer, you also 
 {{% tab "Statsd" %}}
 
 Tags are added in an append-only fashion for [custom statsd metrics][1]. For example, if you have two different values for env, the metrics will be tagged with both envs. There is no order in which one tag will override another of the same name.
-
-[EXAMPLE]
 
 [1]: /developers/metrics/
 {{% /tab %}}
