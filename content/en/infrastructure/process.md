@@ -189,6 +189,7 @@ Processeses in Kubernetes containers are tagged by:
 
 If you have configuration for [Unified Service Tagging][6] in place, `env`, `service`, and `version` will also be picked up automatically.
 Having these tags available will let you tie together APM, logs, metrics, and process data.
+Note that this setup applies to containerized environments only.
 
 ### Filtering and Pivoting
 
