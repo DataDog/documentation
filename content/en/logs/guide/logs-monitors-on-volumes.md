@@ -10,19 +10,12 @@ further_reading:
   text: "Learn more about parsing"
 ---
 
-## Monitor indexed logs with fixed threshold
+The goal of this guide is to explain how to monitor your log usage thanks to estimated usage metrics. This guide goes through the following steps:
 
-Get notified if the indexed log volumes in any scope (`service`, `availability-zone`, etc...) of your infrastructure are growing unexpectedly:
-
-1. Go to the [Datadog Log Explorer][1] view
-2. Build a [search query][2] that represents the volume to monitor (keep the query empty to monitor all the logs from that index)
-3. Click on **Export to monitor**.
-4. Define the rate you would like to set as *warning* or *error*.
-5. Define an explicit notification: `The volume on this service just got too high. Define an additional exclusion filter or increase the sampling rate to get it back under control.`
-
-{{< img src="logs/guide/example_notification.png" alt=" example notification"  style="width:70%;">}}
-
-It is also possible to [setup a daily quota on indexes][3] to prevent indexing more than a given amount of logs per day. When doing this, Datadog recommends to setup the above monitor to alert when 80% of this quota is reached within the past 24h.
+* Activation of the estimated usage metrics
+* Alert on unexpected traffic spikes
+* Alert when you are getting close to a budget threshold on your indexed logs
+* Import the out of the box Log Management usage dashboard
 
 ## Alert on unexpected spikes
 
@@ -71,6 +64,20 @@ From log usage metrics, an estimated usage Dashboard can also be built to monito
 To import this dashboard, copy the [estimated usage dashboard JSON definition][9] and import it in a new Screenboard:
 
 {{< img src="logs/guide/dashboard_import.png" alt="Log estimated usage dashboard"  style="width:30%;">}}
+
+## Monitor indexed logs with fixed threshold
+
+Get notified if the indexed log volumes in any scope (`service`, `availability-zone`, etc...) of your infrastructure are growing unexpectedly:
+
+1. Go to the [Datadog Log Explorer][1] view.
+2. Build a [search query][2] that represents the volume to monitor. Keep the query empty to monitor all the logs from that index.
+3. Click on **Export to monitor**.
+4. Define the rate you would like to set as *warning* or *error*.
+5. Define an explicit notification: `The volume on this service just got too high. Define an additional exclusion filter or increase the sampling rate to get it back under control.`
+
+{{< img src="logs/guide/example_notification.png" alt=" example notification"  style="width:70%;">}}
+
+It is also possible to [set up a daily quota on indexes][3] to prevent indexing more than a given number of logs per day. When doing this, Datadog recommends that you set the above monitor to alert when 80% of this quota is reached within the past 24 hours.
 
 ## Further Reading
 
