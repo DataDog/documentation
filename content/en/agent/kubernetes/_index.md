@@ -154,9 +154,6 @@ To install the Datadog Agent on your Kubernetes cluster:
     kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
     ```
 
-**Note**: As a best practice in containerized environments setting up Kubernetes State metrics, Datadog recommends using unified service tagging to assign tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][16] documentation.
-
-
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/yaml/datadog-agent-all-features.yaml
@@ -172,7 +169,6 @@ To install the Datadog Agent on your Kubernetes cluster:
 [13]: /network_performance_monitoring/installation/
 [14]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
 [15]: /agent/kubernetes/data_collected/#kube-state-metrics
-[16]: /tagging/unified_service_tagging
 {{% /tab %}}
 {{% tab "Operator" %}}
 
@@ -205,13 +201,9 @@ If you want to collect events from your kubernetes cluster set the environment v
 
 Once the Agent is up and running in your cluster, use [Datadog's Autodiscovery feature][2] to collect metrics and logs automatically from your pods.
 
-### Unified service tagging
-
-As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][3] documentation.
-
 ## Environment variables
 
-Find below the list of environment variables available for the Datadog Agent. If you want to setup those with Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][4].
+Find below the list of environment variables available for the Datadog Agent. If you want to setup those with Helm, see the full list of configuration options for the `datadog-value.yaml` file in the [helm/charts Github repository][3].
 
 ### Global options
 
@@ -219,15 +211,8 @@ Find below the list of environment variables available for the Datadog Agent. If
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `DD_API_KEY`       | Your Datadog API key (**required**)                                                                                                                                                                                                                                                                                                              |
 | `DD_HOSTNAME`      | Hostname to use for metrics (if autodetection fails)                                                                                                                                                                                                                                                                                             |
-<<<<<<< HEAD
-| `DD_ENV` | Your service's environment. |
-| `DD_SERVICE` | Your service's name. |
-| `DD_VERSION` | The version of your service. |
-| `DD_TAGS` | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`. **Note**: We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Check out the [Unified Service Tagging][29] documentation for recommendations on how to configure these environment variables.                                                                                                                                              |
-=======
 | `DD_ENV`          | Sets the global `env` tag for all data emitted.                                                                                                                                                                                                                                                                 |
 | `DD_TAGS`          | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
->>>>>>> fac254310fb06b7ced0e094564d3b194f43ad9ae
 | `DD_SITE`          | Destination site for your metrics, traces, and logs. Valid options are `datadoghq.com` for the Datadog US site, and `datadoghq.eu` for the Datadog EU site.                                                                                                                                                                                      |
 | `DD_DD_URL`        | Optional setting to override the URL for metric submission.                                                                                                                                                                                                                                                                                      |
 | `DD_CHECK_RUNNERS` | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks) the `collector-queue` component might fall behind and fail the healthcheck. You can increase the number of runners to run checks in parallel. |
@@ -243,7 +228,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_PROXY_HTTPS`    | An HTTPS URL to use as a proxy for `https` requests.              |
 | `DD_PROXY_NO_PROXY` | A space-separated list of URLs for which no proxy should be used. |
 
-For more information about proxy settings, see the [Agent v6 Proxy documentation][5].
+For more information about proxy settings, see the [Agent v6 Proxy documentation][4].
 
 ### Optional collection Agents
 
@@ -251,14 +236,14 @@ Optional collection Agents are disabled by default for security or performance r
 
 | Env Variable               | Description                                                                                                                                                                                                                                                  |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_APM_ENABLED`           | Enable [trace collection][6] with the Trace Agent.                                                                                                                                                                                                           |
-| `DD_LOGS_ENABLED`          | Enable [log collection][7] with the Logs Agent.                                                                                                                                                                                                              |
-| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][8] with the Process Agent. The [live container view][9] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][8] and the [live container view][9] are disabled. |
+| `DD_APM_ENABLED`           | Enable [trace collection][5] with the Trace Agent.                                                                                                                                                                                                           |
+| `DD_LOGS_ENABLED`          | Enable [log collection][6] with the Logs Agent.                                                                                                                                                                                                              |
+| `DD_PROCESS_AGENT_ENABLED` | Enable [live process collection][7] with the Process Agent. The [live container view][8] is already enabled by default if the Docker socket is available. If set to `false`, the [live process collection][7] and the [live container view][9] are disabled. |
 | `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well. |
 
 ### DogStatsD (custom metrics)
 
-Send custom metrics with [the StatsD protocol][10]:
+Send custom metrics with [the StatsD protocol][9]:
 
 | Env Variable                     | Description                                                                                                                                                |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -269,7 +254,7 @@ Send custom metrics with [the StatsD protocol][10]:
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for unix socket metrics.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `["env:golden", "group:retrievers"]`. |
 
-Learn more about [DogStatsD over Unix Domain Sockets][11].
+Learn more about [DogStatsD over Unix Domain Sockets][10].
 
 ### Tagging
 
@@ -280,11 +265,11 @@ Datadog automatically collects common tags from Kubernetes. To extract even more
 | `DD_KUBERNETES_POD_LABELS_AS_TAGS`      | Extract pod labels      |
 | `DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS` | Extract pod annotations |
 
-See the [Kubernetes Tag Extraction][12] documentation to learn more.
+See the [Kubernetes Tag Extraction][11] documentation to learn more.
 
 ### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][13].
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][12].
 
 ### Ignore containers
 
@@ -295,7 +280,7 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 | `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
 | `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
-Additional examples are available on the [Container Discover Management][14] page.
+Additional examples are available on the [Container Discover Management][13] page.
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
@@ -312,7 +297,7 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 
 ## Commands
 
-See the [Agent Commands guides][15] to discover all the Docker Agent commands.
+See the [Agent Commands guides][14] to discover all the Docker Agent commands.
 
 ## Further Reading
 
@@ -320,16 +305,15 @@ See the [Agent Commands guides][15] to discover all the Docker Agent commands.
 
 [1]: /agent/faq/kubernetes-legacy/
 [2]: /agent/kubernetes/integrations/
-[3]: /tagging/unified_service_tagging
-[4]: https://github.com/helm/charts/tree/master/stable/datadog#all-configuration-options
-[5]: /agent/proxy/#agent-v6
-[6]: /agent/kubernetes/apm/
-[7]: /agent/kubernetes/log/
-[8]: /infrastructure/process/
-[9]: /infrastructure/livecontainers/
-[10]: /developers/dogstatsd/
-[11]: /developers/dogstatsd/unix_socket/
-[12]: /agent/kubernetes/tag/
-[13]: /security/agent/#secrets-management
-[14]: /agent/guide/autodiscovery-management/
-[15]: /agent/guide/agent-commands/
+[3]: https://github.com/helm/charts/tree/master/stable/datadog#all-configuration-options
+[4]: /agent/proxy/#agent-v6
+[5]: /agent/kubernetes/apm/
+[6]: /agent/kubernetes/log/
+[7]: /infrastructure/process/
+[8]: /infrastructure/livecontainers/
+[9]: /developers/dogstatsd/
+[10]: /developers/dogstatsd/unix_socket/
+[11]: /agent/kubernetes/tag/
+[12]: /security/agent/#secrets-management
+[13]: /agent/guide/autodiscovery-management/
+[14]: /agent/guide/agent-commands/
