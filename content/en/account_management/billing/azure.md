@@ -31,5 +31,5 @@ For technical questions, contact [Datadog support][2].
 For billing questions, contact your [Customer Success][3] Manager.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
-[2]: /getting_started/getting_started/tagging/using_tags/#integrations
+[2]: /getting_started/tagging/using_tags/#integrations
 [3]: /infrastructure/

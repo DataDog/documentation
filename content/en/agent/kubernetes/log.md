@@ -404,7 +404,7 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 [1]: /agent/faq/log-collection-with-docker-socket/
 [2]: /agent/kubernetes/
 [3]: /integrations/#cat-autodiscovery
-[4]: /getting_started/getting_started/tagging/unified_service_tagging
+[4]: /getting_started/tagging/unified_service_tagging
 [5]: /agent/logs/advanced_log_collection/?tab=kubernetes#filter-logs
 [6]: /agent/logs/advanced_log_collection/?tab=kubernetes#scrub-sensitive-data-from-your-logs
 [7]: /agent/logs/advanced_log_collection/?tab=kubernetes#multi-line-aggregation

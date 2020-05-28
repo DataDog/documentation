@@ -187,6 +187,6 @@ List of all available parameters for log collection:
 [7]: /agent/docker/log/#log-integrations
 [8]: /agent/guide/agent-commands/#agent-status-and-information
 [9]: /tracing/
-[10]: /getting_started/getting_started/tagging/unified_service_tagging
+[10]: /getting_started/tagging/unified_service_tagging
 [11]: /developers/metrics/custom_metrics/
 [12]: /getting_started/tagging/

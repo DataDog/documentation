@@ -314,6 +314,6 @@ The Agent `status` command should show the check instance running and reporting 
 [5]: /developers/write_agent_check/
 [6]: /integrations/mysql/
 [7]: /agent/faq/template_variables/
-[8]: /getting_started/getting_started/tagging/unified_service_tagging
+[8]: /getting_started/tagging/unified_service_tagging
 [9]: /integrations/http_check/
 [10]: /integrations/nginx/

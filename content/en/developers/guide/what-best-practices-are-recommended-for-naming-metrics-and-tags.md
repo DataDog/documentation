@@ -43,4 +43,4 @@ Examples of commonly used metric tag keys are `instance`, `name`, and `role`.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/getting_started/tagging/unified_service_tagging
+[1]: /getting_started/tagging/unified_service_tagging

@@ -234,5 +234,5 @@ ac_include: ["name:frontend.*"]
 [6]: /agent/docker/log/?tab=hostinstallation#activate-log-integrations
 [7]: /logs/live_tail/
 [8]: /getting_started/tagging/
-[9]: /getting_started/getting_started/tagging/unified_service_tagging
+[9]: /getting_started/tagging/unified_service_tagging
 [10]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237

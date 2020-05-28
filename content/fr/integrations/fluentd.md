@@ -237,7 +237,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][16].
 [8]: https://docs.datadoghq.com/fr/logs/processing/#edit-reserved-attributes
 [9]: https://docs.datadoghq.com/fr/integrations/#cat-log-collection
 [10]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
-[11]: https://docs.datadoghq.com/fr/getting_started/getting_started/getting_started/tagging/assigning_tags
+[11]: https://docs.datadoghq.com/fr/getting_started/tagging/assigning_tags
 [12]: https://app.datadoghq.com/infrastructure
 [13]: https://github.com/fabric8io/fluent-plugin-kubernetes_metadata_filter
 [14]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information

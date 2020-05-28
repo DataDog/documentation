@@ -2,12 +2,12 @@
 title: Using tags
 kind: documentation
 aliases:
-- /getting_started/getting_started/tagging/using_tags/
+- /getting_started/tagging/using_tags/
 further_reading:
 - link: "/getting_started/tagging/"
   tag: "Documentation"
   text: "Getting started with tags"
-- link: "/getting_started/getting_started/tagging/assigning_tags/"
+- link: "/getting_started/tagging/assigning_tags/"
   tag: "Documentation"
   text: "Learn how to assign tags"
 - link: "https://www.datadoghq.com/blog/tagging-best-practices/"
@@ -118,7 +118,7 @@ To filter monitors by [assigned tags][1], use the search bar or facet checkboxes
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Manage Monitors Tags"  style="width:80%;">}}
 
-[1]: /getting_started/getting_started/tagging/assigning_tags/
+[1]: /getting_started/tagging/assigning_tags/
 {{% /tab %}}
 
 {{% tab "New Monitor" %}}
@@ -231,7 +231,7 @@ After [assigning tags][1], use the Service Map to jump to different areas of the
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Service Map Tags"  style="width:80%;">}}
 
-[1]: /getting_started/getting_started/tagging/assigning_tags/
+[1]: /getting_started/tagging/assigning_tags/
 [2]: /tracing/app_analytics/search/
 [3]: /monitors/manage_monitor/
 [4]: /logs/explorer/search/
@@ -301,7 +301,7 @@ Tags can be used in various ways with the [API][15]. See the list below for link
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/getting_started/tagging/assigning_tags/
+[1]: /getting_started/tagging/assigning_tags/
 [2]: /events/
 [3]: /integrations/
 [4]: /infrastructure/hostmap/

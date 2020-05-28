@@ -257,5 +257,5 @@ extracted value is used.
 [69]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
 [70]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [71]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[72]: /getting_started/getting_started/tagging/unified_service_tagging
+[72]: /getting_started/tagging/unified_service_tagging
 [73]: https://github.com/openzipkin/b3-propagation

@@ -247,6 +247,6 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [1]: /agent/
 [2]: /agent/faq/agent-5-process-collection/
 [3]: /getting_started/tagging/
-[4]: /getting_started/getting_started/tagging/unified_service_tagging
+[4]: /getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
 [6]: /infrastructure/livecontainers/

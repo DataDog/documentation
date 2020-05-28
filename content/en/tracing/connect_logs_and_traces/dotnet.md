@@ -177,7 +177,7 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 
 [1]: /tracing/setup/dotnet/#configuration
 [2]: https://github.com/damianh/LibLog
-[3]: /getting_started/getting_started/tagging/unified_service_tagging
+[3]: /getting_started/tagging/unified_service_tagging
 [4]: http://serilog.net
 [5]: http://nlog-project.org
 [6]: https://logging.apache.org/log4net

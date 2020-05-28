@@ -308,4 +308,4 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [19]: /security/logs/#information-security
 [20]: /logs/explorer/patterns/
 [21]: /logs/explore/
-[22]: /getting_started/getting_started/tagging/unified_service_tagging
+[22]: /getting_started/tagging/unified_service_tagging

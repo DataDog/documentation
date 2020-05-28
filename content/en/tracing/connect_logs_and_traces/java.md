@@ -117,7 +117,7 @@ Then update your logger configuration to include `dd.env`, `dd.service`, `dd.ver
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/java/#configuration
-[2]: /getting_started/getting_started/tagging/unified_service_tagging
+[2]: /getting_started/tagging/unified_service_tagging
 [3]: /tracing/visualization/#trace
 [4]: /logs/log_collection/java/#raw-format
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

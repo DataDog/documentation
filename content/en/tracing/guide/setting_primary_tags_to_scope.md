@@ -96,6 +96,6 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 
 [1]: /tracing/visualization/#trace
 [2]: /getting_started/tagging/
-[3]: /getting_started/getting_started/tagging/unified_service_tagging
-[4]: /getting_started/getting_started/tagging/assigning_tags/#traces
+[3]: /getting_started/tagging/unified_service_tagging
+[4]: /getting_started/tagging/assigning_tags/#traces
 [5]: https://app.datadoghq.com/apm/settings

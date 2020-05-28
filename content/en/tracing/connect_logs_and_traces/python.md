@@ -103,7 +103,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/getting_started/tagging/unified_service_tagging
+[1]: /getting_started/tagging/unified_service_tagging
 [2]: /tracing/visualization/#trace
 [3]: /logs/log_collection/python/#configure-the-datadog-agent
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

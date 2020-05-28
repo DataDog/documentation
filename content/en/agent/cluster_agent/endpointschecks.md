@@ -282,7 +282,7 @@ State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
 [5]: /agent/guide/agent-commands/
 [6]: /agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
 [7]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
-[8]: /getting_started/getting_started/tagging/unified_service_tagging
+[8]: /getting_started/tagging/unified_service_tagging
 [9]: /integrations/http_check/
 [10]: /integrations/nginx/
 [11]: /agent/cluster_agent/troubleshooting/

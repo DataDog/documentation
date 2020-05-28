@@ -148,7 +148,7 @@ Use saved views to automatically configure your log explorer with a preselected 
 [12]: /tracing/app_analytics/search/#displaying-a-full-trace
 [13]: /tracing/connect_logs_and_traces/
 [14]: /tracing/visualization/service/#overview
-[15]: /getting_started/getting_started/tagging/unified_service_tagging
+[15]: /getting_started/tagging/unified_service_tagging
 [16]: /logs/explorer/facets/#overview
 [17]: /logs/processing/
 [18]: /logs/explorer/saved_views/

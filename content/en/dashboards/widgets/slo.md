@@ -78,4 +78,4 @@ Groups (or aggregated monitors in the case of multi-monitor SLOs) are sorted by 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo
-[2]: /getting_started/getting_started/tagging/using_tags/?tab=assignment#monitors
+[2]: /getting_started/tagging/using_tags/?tab=assignment#monitors

@@ -3,12 +3,12 @@ title: Assigner des tags
 kind: documentation
 aliases:
   - /fr/agent/tagging
-  - /fr/getting_started/getting_started/getting_started/tagging/assigning_tags
+  - /fr/getting_started/tagging/assigning_tags
 further_reading:
   - link: /getting_started/tagging/
     tag: Documentation
     text: Débuter avec les tags
-  - link: /getting_started/getting_started/tagging/using_tags/
+  - link: /getting_started/tagging/using_tags/
     tag: Documentation
     text: Apprendre à utiliser des tags dans Datadog
 ---
