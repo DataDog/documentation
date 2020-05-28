@@ -106,7 +106,7 @@ Datadog’s integration processing Pipelines are available for the certain sourc
 
 To see the full list of integration Pipelines, refer to the [Integration Pipelines Reference][6] page.
 
-## Processing limitations & guidelines
+## Pipelines limitations & guidelines
 
 To make sure the Log Management solution functions in an optimal way, we set the following technical limits and rules to your log events, as well as to some product features. These have been designed so that you may never reach them.
 
@@ -121,7 +121,8 @@ Log events which do not comply with these limits might be transformed or truncat
 
 ### Guidelines on processing configuration
 
-In order to have an experience of the platform with optimal performance and low ingestion latency, we recommend you to follow those guidelines:
+In order to have an experience of the platform with optimal performance and low ingestion latency, we recommend to follow those best practices:
+
 * Number of facets below 100.
 * Number of processing Pipelines on a platform below 100.
 * Number of Processors per Pipeline below 20.
