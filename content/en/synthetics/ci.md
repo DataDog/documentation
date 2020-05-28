@@ -91,7 +91,7 @@ curl -X POST \
             "locations": ["aws:us-west-1"],
             "retry": { "count": 2, "interval": 300 },
             "startUrl": "http://new.url/",
-            "variables": { "titleVariable": "new title" }
+            "variables": { "titleVariable": "new value" }
         }
     ]
 }' "https://api.datadoghq.com/api/v1/synthetics/tests/trigger/ci"
@@ -126,7 +126,7 @@ curl -X POST \
             "locations": ["aws:us-west-1"],
             "retry": { "count": 2, "interval": 300 },
             "startUrl": "http://new.url/",
-            "variables": { "titleVariable": "new title" }
+            "variables": { "titleVariable": "new value" }
         }
     ]
 }' "https://api.datadoghq.eu/api/v1/synthetics/tests/trigger/ci"
@@ -305,9 +305,11 @@ To setup your client, Datadog API and application keys need to be configured. Th
 
     * **apiKey**: The API key used to query the Datadog API.
     * **appKey**: The application key used to query the Datadog API.
-    * **datadogSite**: The Datadog instance to which request is sent (choices are `datadoghq.com` or `datadoghq.eu`).
+    * **datadogSite**: The Datadog instance to which request is sent (choices are `datadoghq.com` or `datadoghq.eu`). The default is `datadoghq.com`.
     * **files**: Glob pattern to detect synthetics tests config files.
     * **global**: Overrides of synthetics tests applied to all tests ([see below for description of each field](#configure-tests)).
+    * **proxy**: The proxy to be used for outgoing connections to Datadog. `host` and `port` keys are mandatory arguments, `protocol` key defaults to `http`. Supported values for `protocol` key are `http`, `https`, `socks`, `socks4`, `socks4a`, `socks5`, `socks5h`, `pac+data`, `pac+file`, `pac+ftp`, `pac+http`, `pac+https`. The library used to configure the proxy is [proxy-agent][3] library.
+    * **subdomain**: The name of the custom subdomain set to access your Datadog application. If the URL used to access Datadog is `myorg.datadoghq.com` the `subdomain` value then needs to be set to `myorg`.
     * **timeout**: Duration after which synthetics tests are considered failed (in milliseconds).
 
     **Example global configuration file**:
@@ -331,8 +333,18 @@ To setup your client, Datadog API and application keys need to be configured. Th
             "retry": { "count": 2, "interval": 300 },
             "executionRule": "skipped",
             "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-            "variables": { "titleVariable": "new title" }
+            "variables": { "titleVariable": "new value" }
         },
+        "proxy": {
+          "auth": {
+            "username": "login",
+            "password": "pwd"
+          },
+          "host": "127.0.0.1",
+          "port": 3128,
+          "protocol": "http"
+        },
+        "subdomain": "subdomainname",
         "timeout": 120000
     }
     ```
@@ -358,7 +370,7 @@ By default, the client automatically discovers and runs all tests specified in `
 
 #### Further configuration
 
-The default configurations used for the tests are the original tests' configurations (visible in the UI or when [getting your tests' configurations from the API][3]).
+The default configurations used for the tests are the original tests' configurations (visible in the UI or when [getting your tests' configurations from the API][4]).
 
 However, in the context of your CI deployment, you can optionally decide to override some (or all) of your tests parameters by using the below overrides. If you want to define overrides for all of your tests, these same parameters can be set at the [global configuration file](#setup-the-client) level.
 
@@ -405,7 +417,7 @@ However, in the context of your CI deployment, you can optionally decide to over
                 "retry": { "count": 2, "interval": 300 },
                 "executionRule": "skipped",
                 "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
-                "variables": { "titleVariable": "new title" }
+                "variables": { "titleVariable": "new value" }
             }
         }
     ]
@@ -506,4 +518,5 @@ You can also see the results of your tests listed on your Datadog test details p
 
 [1]: https://www.npmjs.com/login?next=/package/@datadog/datadog-ci
 [2]: /help/
-[3]: /api/v1/synthetics/#get-test
+[3]: https://github.com/TooTallNate/node-proxy-agent
+[4]: /api/v1/synthetics/#get-test

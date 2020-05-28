@@ -15,7 +15,8 @@ further_reading:
   tag: "Source Code"
   text: "Datadog OpenTracing C++ Client"
 aliases:
-  - /tracing/proxies/envoy
+- /tracing/proxies/envoy
+- /tracing/envoy/
 ---
 
 Datadog APM is included in Envoy v1.9.0 and newer.
@@ -171,7 +172,7 @@ admin:
       port_value: 8001
 ```
 
-## Excluding Metrics 
+## Excluding Metrics
 
 If you are using Envoy's `dog_statsd` configuration to report metrics, you can _exclude_ activity from the `datadog_agent` cluster with this additional configuration.
 

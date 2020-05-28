@@ -57,7 +57,7 @@ To pull test configurations and push test results, the private location worker n
 
 The private location worker is shipped as a Docker container. It can run on a Linux based OS or Windows OS if the [Docker engine][2] is available on your host and can run in Linux containers mode.
 
-## Setup
+## Private Location Setup
 
 ### Create a new private location
 

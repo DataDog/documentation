@@ -93,9 +93,29 @@ Asserts that an email was sent and whether specific values (`string`, `number`, 
 
 #### Test your UI with custom JavaScript
 
-Test a custom assertion using your own JavaScript scripts. By default the assertion is done on the active page. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function.
+Test a custom assertion on the active page using your own JavaScript scripts. JavaScript assertions support both synchronous and asynchronous code. Since JavaScript assertions run in the context of the active page, it also means these steps can access all the objects defined in the active page (libraries, builtins, global variables, ...).
 
-**Note**: You can use [variables][5] as part of your JavaScript assertions.
+If you need to load external libraries, you can wrap their loading in a promise like below:
+
+```javascript
+const script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = "https://code.jquery.com/jquery-3.5.1.slim.min.js";
+const promise = new Promise((r) => script.onload = r)
+document.head.appendChild(script)
+
+await promise
+
+// Script is now loaded
+
+return jQuery().jquery.startsWith('3.5.1')
+```
+
+If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. 
+
+{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="90%">}}
+
+**Note**: You can also use browser tests' [variables][5] as part of your JavaScript assertions.
 
 #### Test a downloaded file
 
@@ -170,12 +190,45 @@ By default, the **Scroll** step scrolls on the whole page. If you need to scroll
 
 To create a variable, first give it a name then define its value from:
 
-* **An Element**: Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
-* **JavaScript**: Generate custom variables using your own JavaScript scripts. By default the step is being performed at the page level. If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. 
-**Note**: You can use [variables][5] as part of your JavaScript assertions.
-* **A Global Variable**: Pick any global variables that was defined through [Synthetics Settings][7].
-* **An Email**: Generate a random Synthetics email address that can be used in your test steps to [assert if an email was correctly sent][8] or to [navigate to a link contained within the email][9] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
-* **A Pattern**:
+##### An Element
+
+Create a variable out of a `span`, `div`, etc. content by extracting the text of this element.
+
+##### JavaScript
+
+Generate custom variables using your own JavaScript scripts. JavaScript steps support both synchronous and asynchronous code. By default the step is being performed on the active page, which means it can access all the objects defined at the active page level (libraries, builtins, global variables, ...).
+
+If you need to load external libraries, you can wrap their loading in a promise like below:
+
+```javascript
+const script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = "https://code.jquery.com/jquery-3.5.1.slim.min.js";
+const promise = new Promise((r) => script.onload = r)
+document.head.appendChild(script)
+
+await promise
+
+// Script is now loaded
+
+return jQuery().jquery.startsWith('3.5.1')
+```
+
+If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. 
+
+{{< img src="synthetics/browser_tests/js_variable.mp4" alt="Browser Test JavaScript Variable" video="true" width="90%">}}
+
+**Note**: You can also use [variables][5] as part of your JavaScript assertions.
+
+##### A Global Variable 
+
+Pick any global variables that was defined through [Synthetics Settings][7].
+
+##### An Email
+
+Generate a random Synthetics email address that can be used in your test steps to [assert if an email was correctly sent][8] or to [navigate to a link contained within the email][9] (e.g. click a confirmation link). A unique mailbox is generated at each test execution to avoid any conflicts between test runs.
+
+##### A Pattern
 
 | Pattern                 | Description                                                                                             |
 |-------------------------|---------------------------------------------------------------------------------------------------------|
@@ -186,15 +239,21 @@ To create a variable, first give it a name then define its value from:
 
 #### Use the variable
 
-Once created, use your variable to set an input text on a form or search bar. Use the little hand on your variable box to create an input step:
+Once created, you can use the little hand on your variable box to inject your variable on the website being tested: 
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true"  width="80%" >}}
 
-Alternatively, you can record a step inputting `{{ <YOUR_VARIABLE> }}` in the desired field:
+This generates an input text step with a content that is always replaced by `{{ <YOUR_VARIABLE> }}` value at test execution.
 
-{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Use variable in assertion"  style="width:60%;">}}
+In some cases, your variable value only gets computed at runtime (e.g. when creating a variable from an HTTP request, when extracting a variable from a JavaScript step). You can inject your variable by using `{{ <YOUR_VARIABLE> }}` directly on your website at recording. The browser test automatically populates that field at test execution with the variable value generated in the previous steps.
 
-#### Use variables in JavaScript steps
+{{< img src="synthetics/browser_tests/variables_auto.mp4" alt="Variables autocompletion example" video="true"  width="80%" >}}
+
+**Note**: all fields with a `{{` indication support variables autocompletion.
+
+{{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator"  style="width:60%;">}}
+
+##### Use variables in JavaScript steps
 
 If you need to use variables in JavaScript steps (assertion or variable), use `vars.<YOUR_VARIABLE>`.
 
@@ -251,6 +310,22 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 - `Header content-type` _is_ "returned value"
 - `Status code` _is_ "returned value"
 
+#### Extract a variable from the response
+
+You can also optionally extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable is updated each time the HTTP request step is being run.
+
+To parse your variable:
+
+1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
+2. Decide whether to extract your variable from the response headers, or from the response body:
+
+    * Extract the value from **response header**: use the full response header of your HTTP request as variable value or parse it with a [regex][11].
+    * Extract the value from **response body**: use the full response body of your HTTP request as variable value, parse it with a [regex][11] or a [JSONPath][12].
+
+{{< img src="synthetics/browser_tests/browser_test_vft.mp4" alt="Create a variable from HTTP request in Browser test" video="true"  width="80%" >}}
+
+Once created this variable can be used in the following steps of your browser test.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -266,3 +341,4 @@ If you click on **Test URL**, then the basic assertions are automatically filled
 [9]: /synthetics/browser_tests/actions#go-to-an-email-and-click-on-a-link
 [10]: /synthetics/browser_tests/advanced_options/#subtests
 [11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[12]: https://restfulapi.net/json-jsonpath/

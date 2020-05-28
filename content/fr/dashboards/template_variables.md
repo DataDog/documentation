@@ -9,10 +9,10 @@ further_reading:
   - link: /dashboards/
     tag: Documentation
     text: Créer des dashboards dans Datadog
-  - link: /dashboards/sharing
+  - link: /dashboards/sharing/
     tag: Documentation
     text: Partager vos graphiques en dehors de Datadog
-  - link: /dashboards/widgets
+  - link: /dashboards/widgets/
     tag: Documentation
     text: Découvrir les widgets disponibles pour votre dashboard
 ---
@@ -27,7 +27,7 @@ Une template variable est définie par les éléments suivants :
 * **Name** : un nom unique pour la template variable. Ce nom est utilisé pour filtrer le contenu de votre dashboard.
 * **Tag or Attribute** :
     * Tag : si vos tags respectent le [format recommandé][1] (`<KEY>:<VALUE>`), le *Tag* est la `<KEY>`.
-    * Attribute : utilisez une [facette ou une mesure comme template variable](#requêtes-d-APM-et-de-log).
+    * Attribute : utilisez une [facette ou une mesure comme template variable](#requetes-rum-d-apm-et-de-log).
 * **Default Value** :
     la valeur par défaut pour le tag ou l'attribut de votre template variable.
 
@@ -37,12 +37,12 @@ Une fois votre template variable créée, Datadog affiche le nombre de sources q
 
 [Utilisez les template variables](#utilisation) dans des widgets individuels ou cliquez sur l'option **Add to All**. Pour supprimer une template variable de tous les widgets, cliquez sur l'option **Remove From All**.
 
-### Requêtes d'APM et de log
+### Requêtes RUM, d'APM et de log
 
-Étant donné que les métriques, les logs et l'APM partagent les mêmes tags, les template variables peuvent être utilisées dans les widgets basés sur des requêtes d'APM et de log.
-De plus, il est possible de définir des template variables de log ou d'APM basées sur vos facettes de [log][2] ou d'APM. Ces template variables commencent par le caractère `@`, par exemple : `@http.status_code`.
+Étant donné que les métriques, les logs, l'APM et RUM partagent les mêmes tags, les template variables peuvent être utilisées dans les widgets basés sur des requêtes RUM, d'APM et de log.
+De plus, il est possible de définir des template variables RUM, de log ou d'APM basées sur vos facettes [RUM][3], de [log][2] ou d'APM. Ces template variables commencent par le caractère `@`, par exemple : `@http.status_code`.
 
-**Remarque** : le bouton **Add to all** permet d'ajouter ce type de template variable à l'ensemble des widgets basés sur des requêtes d'APM et de log.
+**Remarque** : le bouton **Add to all** permet d'ajouter ce type de template variable à l'ensemble des widgets basés sur des requêtes RUM, d'APM et de log.
 
 ### Vues enregistrées
 
@@ -84,7 +84,7 @@ Pour les widgets à base de texte, vous avez la possibilité d'afficher le nom e
 
 ### Superposition d'événements
 
-Les template variables peuvent être utilisées lorsque vous recherchez des [événements à superposer][3] afin de trouver des événements qui partagent certains tags avec les métriques de votre dashboard. Les événements à superposer sont appliqués à l'ensemble d'un graphique individuel.
+Les template variables peuvent être utilisées lorsque vous recherchez des [événements à superposer][4] afin de trouver des événements qui partagent certains tags avec les métriques de votre dashboard. Les événements à superposer sont appliqués à l'ensemble d'un graphique individuel.
 
 Les valeurs des template variables de dashboard peuvent être directement récupérées en utilisant la syntaxe `$<CLÉ_TEMPLATE_VARIABLE>.value` dans le champ de recherche d'événement.
 
@@ -123,5 +123,6 @@ Par exemple, essayez d'entrer `tags:$region` dans la barre de recherche d'évén
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tagging/#defining-tags
-[2]: /fr/logs/explorer/?tab=facets#setup
-[3]: /fr/dashboards/timeboards/#events
+[2]: /fr/logs/explorer/facets/
+[3]: /fr/real_user_monitoring/explorer/?tab=facets#setup-facets-measures
+[4]: /fr/dashboards/timeboards/#events

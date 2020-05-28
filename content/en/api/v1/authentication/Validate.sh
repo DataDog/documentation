@@ -1,1 +1,0 @@
-curl -X GET -H "DD-API-KEY: [[apiKey]]" "https://api.datadoghq.com/api/v1/validate"

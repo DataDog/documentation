@@ -475,7 +475,7 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
         <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.PatternLayout">
-                <pattern><APIKEY> %mdc{keyThatDoesNotExist}</pattern>
+                <pattern><API_KEY> %mdc{keyThatDoesNotExist}</pattern>
             </layout>
           </prefix>
     </encoder>

@@ -47,8 +47,14 @@ Then, initialize the logger directly to your application:
 
 ```csharp
 // Instantiate the logger
-var log = new LoggerConfiguration()
-    .WriteTo.File(new JsonFormatter(), "log.json")
+var log = new LoggerConfiguration()  // using Serilog;
+
+    // using Serilog.Formatting.Json;
+    .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
+    
+    // using Serilog.Formatting.Compact;
+    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
+    
     .CreateLogger();
 
 // An example
@@ -60,13 +66,28 @@ log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedM
 
 Then check the `log.json` file to see the following event:
 
+- If using `JsonFormatter(renderMessage: true)`:
+
 ```json
 {
   "MessageTemplate": "Processed {@Position} in {Elapsed:000} ms.",
   "Level": "Information",
   "Timestamp": "2016-09-02T15:02:29.648Z",
   "Renderings": {"Elapsed": [{"Format": "000", "Rendering": "034"}]},
+  "RenderedMessage":"Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
   "Properties": {"Position": {"Latitude": 25, "Longitude": 134}, "Elapsed": 34}
+}
+```
+
+- If using `RenderedCompactJsonFormatter()`
+
+```json
+{
+  "@t": "2020-05-20T04:15:28.6898801Z",
+  "@m": "Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
+  "@i": "d1eb2146",
+  "Position": {"Latitude": 25, "Longitude": 134 },
+  "Elapsed": 34
 }
 ```
 
@@ -208,10 +229,10 @@ namespace Datadog
            // Load the configure fom App.config
            XmlConfigurator.Configure();
 
-             // Log a simple debug message
+           // Log a simple debug message
            logger.Debug("This is my first debug message");
 
-            // your code continues here ...
+           // your code continues here ...
         }
     }
 }

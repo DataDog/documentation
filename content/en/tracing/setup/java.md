@@ -16,9 +16,9 @@ further_reading:
 
 ## Installation and Getting Started
 
-<div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=java" target=_blank> host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=java" target=_blank>container-based</a> set ups.</div>
+If you already have a Datadog account you can find [step-by-step instructions][1] in our in-app guides for either host-based or container-based set ups.
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent][1], see the additional documentation for [tracing Docker applications][2] or [Kubernetes applications][3].
+Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][2], see the additional documentation for [tracing Docker applications][3] or [Kubernetes applications][4].
 
 Next, download `dd-java-agent.jar` that contains the Agent class files:
 
@@ -34,14 +34,14 @@ Finally, add the following JVM argument when starting your application in your I
 
 **Note**:
 
-- The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][4].
+- The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][5].
 
-- `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][5].
+- `dd-trace-java`'s artifacts (`dd-java-agent.jar`, `dd-trace-api.jar`, `dd-trace-ot.jar`) support all JVM-based languages, i.e. Scala, Groovy, Kotlin, Clojure, etc. If you need support for a particular framework, consider making an [open-source contribution][6].
 
 ## Automatic Instrumentation
 
-Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][6]. When a `java-agent` is registered, it has the ability to modify class files at load time.
-The `java-agent` uses the [Byte Buddy framework][7] to find the classes defined for instrumentation and modify those class bytes accordingly.
+Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][7]. When a `java-agent` is registered, it has the ability to modify class files at load time.
+The `java-agent` uses the [Byte Buddy framework][8] to find the classes defined for instrumentation and modify those class bytes accordingly.
 
 Instrumentation may come from auto-instrumentation, the OpenTracing api, or a mixture of both. Instrumentation generally captures the following info:
 
@@ -78,15 +78,15 @@ Beta integrations are disabled by default but can be enabled individually.
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- |
 | Akka-Http Server        | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                |
 | Finatra Web             | 2.9+       | Fully Supported | `finatra`                                      |
-| Grizzly                 | 2.0+       | [Beta][8]       | `grizzly`                                      |
-| Grizzly-HTTP            | 2.3.20+    | [Beta][8]       | `grizzly-filterchain`                          |
+| Grizzly                 | 2.0+       | [Beta][9]       | `grizzly`                                      |
+| Grizzly-HTTP            | 2.3.20+    | [Beta][9]       | `grizzly-filterchain`                          |
 | Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
-| Jetty (non-Servlet)     | 8+         | [Beta][8]       | `jetty`, `jetty-8`                             |
+| Jetty (non-Servlet)     | 8+         | [Beta][9]       | `jetty`, `jetty-8`                             |
 | Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
 | Play                    | 2.3-2.7    | Fully Supported | `play`, `play-action`                          |
 | Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
-| Spark Java              | 2.3+       | [Beta][8]       | `sparkjava` (requires `jetty`)                 |
+| Spark Java              | 2.3+       | [Beta][9]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
 
@@ -100,7 +100,7 @@ Beta Instrumentation is disabled by default. Add one of the following configurat
 - System Property: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
 - Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
-Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][9] if you need help.
 
 #### Networking Framework Compatibility
 
@@ -132,7 +132,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 
 **Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
 
-Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][9] if you need help.
 
 #### Data Store Compatibility
 
@@ -166,7 +166,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 
 **Datastore tracing provides:** timing request to response, query info (e.g. a sanitized query string), and error and stacktrace capturing.
 
-Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][9] if you need help.
 
 #### Other Framework Compatibility
 
@@ -184,13 +184,13 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Spring Scheduling | 3.1+     | Fully Supported | `spring-scheduling`                            |
 | Twilio SDK        | 0+       | Fully Supported | `twilio-sdk`                                   |
 
-Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][8] if you need help.
+Don't see your desired framework? Datadog is continually adding additional support. Contact [Datadog support][9] if you need help.
 
 To improve visibility into applications using unsupported frameworks, consider:
 
 - Adding custom instrumentation (with OpenTracing or the `@Trace` annotation).
-- [Submitting a pull request][9] with instrumentation for inclusion in a future release.
-- Contacting [Datadog support][8] and submitting a feature request.
+- [Submitting a pull request][10] with instrumentation for inclusion in a future release.
+- Contacting [Datadog support][9] and submitting a feature request.
 
 ## Configuration
 
@@ -208,7 +208,7 @@ System properties can be set as JVM flags.
 | `dd.tags`                              | `DD_TAGS`                              | `null`                            | (Example: `layer:api,team:intake`) A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it will override any env or version tag defined in DD_TAGS. |
 
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][18] documentation for recommendations on how to configure these environment variables.
+Check out the [Unified Service Tagging][11] documentation for recommendations on how to configure these environment variables.
 
 
 ### Instrumentation
@@ -220,14 +220,13 @@ Check out the [Unified Service Tagging][18] documentation for recommendations on
 | `dd.trace.config`                      | `DD_TRACE_CONFIG`                      | `null`                            | Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service.name=<SERVICE_NAME>` |
 | `dd.service.mapping`                   | `DD_SERVICE_MAPPING`                   | `null`                            | (Example: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`) Dynamically rename services via configuration. Useful for making databases have distinct names across different services.                                                                                                       |
 | `dd.writer.type`                       | `DD_WRITER_TYPE`                       | `DDAgentWriter`                   | Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.                       |
-| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][1] for more details.                                                                                                  |
+| `dd.agent.host`                        | `DD_AGENT_HOST`                        | `localhost`                       | Hostname for where to send traces to. If using a containerized environment, configure this to be the host IP. See [Tracing Docker Applications][2] for more details.                                                                                                  |
 | `dd.trace.agent.port`                  | `DD_TRACE_AGENT_PORT`                  | `8126`                            | Port number the Agent is listening on for configured host.                                                                                |
 | `dd.trace.agent.unix.domain.socket`    | `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`    | `null`                            | This can be used to direct trace traffic to a proxy, to later be sent to a remote Datadog Agent.                                                            |
 | `dd.trace.header.tags`                 | `DD_TRACE_HEADER_TAGS`                 | `null`                            | (Example: `CASE-insensitive-Header:my-tag-name,User-ID:userId`) A map of header keys to tag names. Automatically apply header values as tags on traces.                                                                                                               |
-| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([listed here][11])               | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                            |
+| `dd.trace.annotations`                 | `DD_TRACE_ANNOTATIONS`                 | ([listed here][12])               | (Example: `com.some.Trace;io.other.Trace`) A list of method annotations to treat as `@Trace`.                                            |
 | `dd.trace.methods`                     | `DD_TRACE_METHODS`                     | `null`                            | (Example: `package.ClassName[method1,method2,...];AnonymousClass$1[call]`) List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code.                                                                                       |
 | `dd.trace.partial.flush.min.spans`     | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`     | `1000`                            | Set a number of partial spans to flush on. Useful to reduce memory overhead when dealing with heavy traffic or long running traces.     |
-| `dd.trace.report-hostname`             | `DD_TRACE_REPORT_HOSTNAME`             | `false`                           | When enabled, it adds the detected hostname to trace metadata                                                                           |
 | `dd.trace.split-by-tags`               | `DD_TRACE_SPLIT_BY_TAGS`               | `null`                            | (Example: `aws.service`) Used to rename spans to be identified with the corresponding service tag                                       |
 | `dd.trace.db.client.split-by-instance` | `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` | `false`                           | When set to `true` db spans get assigned the instance name as the service name                                                                     |
 | `dd.trace.health.metrics.enabled`      | `DD_TRACE_HEALTH_METRICS_ENABLED`      | `false`                           | When set to `true` sends tracer health metrics                                                                                             |
@@ -378,7 +377,7 @@ See the [Java integration documentation][16] to learn more about Java metrics co
 
 ### B3 Headers Extraction and Injection
 
-Datadog APM tracer supports [B3 headers extraction][17] and injection for distributed tracing.
+Datadog APM tracer supports [B3 headers extraction][11] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
 
@@ -480,11 +479,9 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [8]: /help/
 [9]: https://github.com/DataDog/documentation#outside-contributors
 [10]: /tracing/connect_logs_and_traces/java/
-[11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[11]: /tagging/unified_service_tagging
 [12]: /developers/dogstatsd/#setup
 [13]: /agent/docker/#dogstatsd-custom-metrics
 [14]: /developers/dogstatsd/
 [15]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
-[16]: /integrations/java/?tab=host#metric-collection
-[17]: https://github.com/openzipkin/b3-propagation
-[18]: /tagging/unified_service_tagging
+[16]: https://github.com/openzipkin/b3-propagation

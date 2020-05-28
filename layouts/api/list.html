@@ -14,6 +14,16 @@
 
     {{ $apiVersion := .Scratch.Get "apiVersion"}}
 
+    {{ $.Scratch.Set "ParamTitleEn" ($.Params.title) }}
+    {{ if $dot.IsTranslated }}
+      {{ range $dot.Translations }}
+        {{ if eq .Lang "en" }}
+            {{ $.Scratch.Set "ParamTitleEn" (.Params.title) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ $ParamTitleEn := ($.Scratch.Get "ParamTitleEn") }}
+
     {{ $d := index $dot.Site.Data.api $apiVersion "full_spec_deref" }}
 
     <!-- Get the general API server url -->
@@ -35,7 +45,7 @@
     {{ end }}
 
     {{ range $k, $v := (index $d "tags") }}
-        {{ if eq $.Params.title $v.name }}
+        {{ if eq $ParamTitleEn $v.name }}
 
             {{ $.Scratch.Set "tagObject" (slice)}}
 
@@ -367,51 +377,53 @@
                             {{ end }}
                         </div>
 
-                        {{/* match all Page Resource code examples by operationId */}}
-                        {{ with $dot.Resources.Match (printf "%s%s" .action.operationId ".*" ) }}
 
-                            <h3 class="mb-2">Code Example</h3>
+                        <h3 class="mb-2">Code Example</h3>
 
-                            <div class="code-snippet-wrapper js-code-snippet-wrapper" >
-                                <ul class="nav nav-tabs border-none response-toggle">
-                                    {{ $count := 0}}
-                                    {{ $lang := index $dot.Site.Data.highlighting.languages "sh" }}
-
-                                    <li class="nav-item">
-                                        <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}" data-code-lang="{{ $lang.pygments_name }}"  href="#" data-toggle="tab">{{ $lang.pygments_name }}</a>
-                                    </li>
-
-                                    {{ $count := 1}}
-                                    {{ range . }}
-
-                                    {{ $file_extension := index (split (path.Ext .) ".") 1 }}
-                                    {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
-
-                                    {{ if ne $file_extension "sh"}}
-                                    <li class="nav-item">
-                                        <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}" data-code-lang="{{ $lang.pygments_name }}"  href="#" data-toggle="tab">{{ $lang.pygments_name }}</a>
-                                    </li>
-
-                                    {{ $count = add $count 1 }}
-                                    {{ end }}
-
-                                    {{ end }}
-
-                                </ul>
-
-                                {{ $count := 0 }}
-                                {{ $file_extension := "sh" }}
+                        <div class="code-snippet-wrapper js-code-snippet-wrapper" >
+                            <ul class="nav nav-tabs border-none response-toggle">
+                                {{ $count := 0}}
                                 {{ $lang := index $dot.Site.Data.highlighting.languages "sh" }}
-                                <div class="code-snippet js-code-block {{if eq $file_extension "sh"}} default {{end }} {{ if eq $count 0}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
-                                    <div class="code-button-wrapper position-absolute">
-                                        <button class="btn text-primary js-copy-button">Copy</button>
-                                    </div>
-                                    {{ $pathParams := $.Scratch.Get "pathParams" }}
-                                    {{ $queryStrings := $.Scratch.Get "queryStrings" }}
-                                    <div class="highlight">
-                                        <pre class="chroma">
+
+                                <li class="nav-item">
+                                    <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}" data-code-lang="{{ $lang.pygments_name }}"  href="#" data-toggle="tab">{{ $lang.pygments_name }}</a>
+                                </li>
+
+                            {{/* match all Page Resource code examples by operationId */}}
+                            {{ with $dot.Resources.Match (printf "%s%s" .action.operationId ".*" ) }}
+
+                                {{ $count := 1}}
+                                {{ range . }}
+
+                                {{ $file_extension := index (split (path.Ext .) ".") 1 }}
+                                {{ $lang := index $dot.Site.Data.highlighting.languages $file_extension }}
+
+                                {{ if ne $file_extension "sh"}}
+                                <li class="nav-item">
+                                    <a class="nav-link mr-1 js-code-example-link text-capitalize {{ if eq $count 0}} active {{end}}" data-code-lang="{{ $lang.pygments_name }}"  href="#" data-toggle="tab">{{ $lang.pygments_name }}</a>
+                                </li>
+
+                                {{ $count = add $count 1 }}
+                                {{ end }}
+
+                                {{ end }}
+                            {{ end }}
+
+                            </ul>
+
+                            {{ $count := 0 }}
+                            {{ $file_extension := "sh" }}
+                            {{ $lang := index $dot.Site.Data.highlighting.languages "sh" }}
+                            <div class="code-snippet js-code-block {{if eq $file_extension "sh"}} default {{end }} {{ if eq $count 0}}d-block{{else}}d-none{{end}} code-block-{{ $lang.pygments_name }}" >
+                                <div class="code-button-wrapper position-absolute">
+                                    <button class="btn text-primary js-copy-button">Copy</button>
+                                </div>
+                                {{ $pathParams := $.Scratch.Get "pathParams" }}
+                                {{ $queryStrings := $.Scratch.Get "queryStrings" }}
+                                <div class="highlight">
+                                    <pre class="chroma">
 {{/* Do not change indent of html below as it will change the indentation of the curl code block */}}
-                                            <code class="language-fallback" data-lang="fallback">
+                                        <code class="language-fallback" data-lang="fallback">
 {{- with $pathParams -}}
     <span class="c1"># Path parameters</span><br/>
     {{- range . -}}
@@ -500,6 +512,7 @@
                                     </div>
                                 </div>
 
+                            {{ with $dot.Resources.Match (printf "%s%s" .action.operationId ".*" ) }}
                                 {{ $count := 1 }}
                                 {{ range . }}
 
@@ -518,8 +531,8 @@
                                     {{ end }}
 
                                 {{ end }}
-                            </div>
-                        {{ end }}
+                            {{ end }}
+                        </div>
                     </div>
                 </div>
                 <!-- endpoint section end -->

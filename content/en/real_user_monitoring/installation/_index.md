@@ -112,6 +112,9 @@ Paste the generated code snippet into the head tag (in front of any other script
 | `applicationId`      | String  | Yes      | `` | The RUM application ID.                                                       |
 | `clientToken`        | String  | Yes      | `` | A [Datadog Client Token][5].                                                  |
 | `datacenter`         | String  | Yes      | `us`                                                                               | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.                   |
+| `service`            | String  | No       | `` | The service name for this application.                             |
+| `env`                | String  | No       | `` | The application’s environment e.g. prod, pre-prod, staging.                   |
+| `version`            | String  | No       | `` | The application’s version e.g. 1.2.3, 6c44da20, 2020.02.13.                   |
 | `resourceSampleRate` | Number  | No       | `100`                                                                              | Percentage of tracked sessions with resources collection. `100` for all, `0` for none of them.               |
 | `sampleRate`         | Number  | No       | `100`                                                                              | Percentage of sessions to track. Only tracked sessions send rum events. `100` for all, `0` for none of them. |
 | `silentMultipleInit` | Boolean | No       | `false`                                                                            | Initialization fails silently if Datadog's RUM is already initialized on the page                            |

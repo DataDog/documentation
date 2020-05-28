@@ -19,6 +19,7 @@ further_reading:
   text: "Datadog OpenTracing C++ Client"
 aliases:
   - /tracing/proxies/nginx
+  - /tracing/nginx/
 ---
 
 Support for Datadog APM is available for NGINX using a combination of plugins and configurations.

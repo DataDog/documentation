@@ -1,5 +1,5 @@
 # make
-.PHONY: clean clean-all clean-build clean-exe clean-integrations clean-auto-doc clean-node clean-virt help start stop
+.PHONY: clean clean-all clean-build clean-examples clean-go-examples clean-java-examples clean-exe clean-integrations clean-auto-doc clean-node clean-virt help start stop
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -34,6 +34,7 @@ clean-all: stop  ## Clean everything.
 	make clean-auto-doc
 	make clean-node
 	make clean-virt
+	make clean-examples
 
 clean-build:  ## Remove build artifacts.
 	@if [ -d public ]; then rm -r public; fi
@@ -61,6 +62,7 @@ clean-integrations:  ## Remove built integrations files.
 		-a -not -name 'alcide.md' \
 		-a -not -name 'amazon_guardduty.md' \
 		-a -not -name 'amazon_cloudhsm.md' \
+		-a -not -name 'apigee.md' \
 		-a -not -name 'pivotal_platform.md' \
 		-a -not -name 'carbon_black.md' \
 		-a -not -name 'cloudability.md' \
@@ -127,7 +129,7 @@ source-helpers: hugpython  ## Source the helper functions used in build, test, d
 	@find ${LOCALBIN}/*  -type f -exec cp {} ${EXEDIR} \;
 	@cp -r local/githooks/* .git/hooks
 
-start: clean source-helpers ## Build the documentation with all external content.
+start: clean source-helpers examples ## Build the documentation with all external content.
 	@echo "\033[35m\033[1m\nBuilding the documentation with ALL external content:\033[0m"
 	@if [ ${PY3} != "false" ]; then \
 		source ${VIRENV}/bin/activate;  \
@@ -151,3 +153,38 @@ stop:  ## Stop wepack watch/hugo server.
 	@echo "stopping previous..."
 	@pkill -x webpack || true
 	@pkill -x hugo server --renderToDisk || true
+
+clean-go-examples:
+	@git clean -xdf content/en/api/**/*.go
+
+clean-java-examples:
+	@git clean -xdf content/en/api/**/*.java
+
+clean-examples: clean-go-examples clean-java-examples
+	@rm -rf examples
+
+examples/datadog-api-client-go:
+	@git clone https://github.com/DataDog/datadog-api-client-go.git examples/datadog-api-client-go
+
+examples/datadog-api-client-java:
+	@git clone https://github.com/DataDog/datadog-api-client-java.git examples/datadog-api-client-java
+
+.PHONY: examples/go examples/java examples
+
+examples/go: examples/datadog-api-client-go clean-go-examples local/bin/awk/extract-code-blocks-go.awk
+	@ls examples/datadog-api-client-go/api/v1/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v1
+	@ls examples/datadog-api-client-go/api/v2/datadog/docs/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-go.awk -v output=examples/content/en/api/v2
+
+	#for f in examples/content/en/api/v*/*/*.go ; do \
+	#	gofmt -w $$f || rm $f; \
+	#done;
+
+	cp -Rn examples/content ./
+
+examples/java: examples/datadog-api-client-java clean-java-examples local/bin/awk/extract-code-blocks-java.awk
+	@ls examples/datadog-api-client-java/api_docs/v1/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v1
+	@ls examples/datadog-api-client-java/api_docs/v2/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v2
+
+	cp -Rn examples/content ./
+
+examples: examples/go examples/java

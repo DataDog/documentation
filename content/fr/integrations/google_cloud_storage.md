@@ -25,13 +25,18 @@ Google Cloud Storage est une solution unifiée de stockage d'objets destinée 
 
 Recueillez des métriques de Google Storage pour :
 
-* Visualiser les performances de vos services Storage
-* Corréler les performances de vos services Storage avec vos applications
+- Visualiser les performances de vos services Storage
+- Corréler les performances de vos services Storage avec vos applications
 
 ## Implémentation
+
 ### Installation
 
-Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
+Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
+
+#### Configuration
+
+Pour recueillir des étiquettes Cloud Storage personnalisées sous forme de tags, activez l'autorisation Cloud Asset Inventory.
 
 ### Collecte de logs
 
@@ -45,21 +50,25 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Storage d
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "google_cloud_storage" >}}
 
 
 ### Événements
+
 L'intégration Google Cloud Storage n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Google Cloud Storage n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
+[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_storage/google_cloud_storage_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help
+[5]: https://docs.datadoghq.com/fr/help/
