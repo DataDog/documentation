@@ -374,4 +374,4 @@ Les valeurs correspondent au [type de variable][3] et peuvent être des objets c
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/visualization/#span-tags
-[2]: /fr/tagging/
+[2]: /fr/getting_started/tagging/

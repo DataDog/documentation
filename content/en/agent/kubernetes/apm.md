@@ -137,7 +137,7 @@ List of all environment variables available for tracing within the Agent running
 
 [1]: /agent/kubernetes/
 [2]: /tracing/setup/
-[3]: /tagging/unified_service_tagging
+[3]: /getting_started/getting_started/tagging/unified_service_tagging
 [4]: /tracing/guide/security/#replace-rules
 [5]: /tracing/app_analytics/#automatic-configuration
 [6]: /tracing/guide/setting_primary_tags_to_scope/#environment

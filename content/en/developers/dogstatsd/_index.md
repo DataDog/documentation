@@ -169,7 +169,7 @@ To set [tag cardinality][5] for the metrics collected using origin detection, se
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
-[5]: /tagging/assigning_tags/#environment-variables
+[5]: /getting_started/getting_started/tagging/assigning_tags/#environment-variables
 [6]: /developers/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -495,5 +495,5 @@ If you're interested in learning more about the datagram format used by DogStats
 [4]: /developers/events/dogstatsd/
 [5]: /developers/service_checks/dogstatsd_service_checks_submission/
 [6]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[7]: /tagging/unified_service_tagging
+[7]: /getting_started/getting_started/tagging/unified_service_tagging
 [8]: /developers/metrics/

@@ -23,9 +23,9 @@ Enable injection in the .NET tracer’s [configuration][1] by setting `DD_LOGS_I
 
 The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs, span IDs, `env`, `service`, and `version` into your application logs.
 If you haven't done so already, we recommend configuring the .NET tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the smoothest
-experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][10] for more details).
+experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][3] for more details).
 
-We support [Serilog][3], [NLog][4] (version 2.0.0.2000+), or [log4net][5]. Automatic injection only displays in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger (see examples below).
+We support [Serilog][4], [NLog][5] (version 2.0.0.2000+), or [log4net][6]. Automatic injection only displays in the application logs after enabling `LogContext` enrichment in your `Serilog` logger or `Mapped Diagnostics Context` in your `NLog` or `log4net` logger (see examples below).
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
@@ -92,10 +92,10 @@ For NLog version 4.5:
 
 ## Manual log injection
 
-If you prefer to manually correlate your [traces][6] with your logs and tie together data for your service,
+If you prefer to manually correlate your [traces][7] with your logs and tie together data for your service,
 leverage the Datadog API to retrieve correlation identifiers:
 
-- Use `CorrelationIdentifier.<FIELD>` API methods to inject identifiers at the beginning and end of each [span][7] to log (see examples below).
+- Use `CorrelationIdentifier.<FIELD>` API methods to inject identifiers at the beginning and end of each [span][8] to log (see examples below).
 - Configure MDC to use the injected keys:
 
     - `dd.env` Globally configured `env` for the tracer (or `""` if not set)
@@ -169,7 +169,7 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you are not using a [Datadog Log Integration][8] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][9].
+**Note**: If you are not using a [Datadog Log Integration][9] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][10].
 
 ## Further Reading
 
@@ -177,11 +177,11 @@ using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdenti
 
 [1]: /tracing/setup/dotnet/#configuration
 [2]: https://github.com/damianh/LibLog
-[3]: http://serilog.net
-[4]: http://nlog-project.org
-[5]: https://logging.apache.org/log4net
-[6]: /tracing/visualization/#trace
-[7]: /tracing/visualization/#spans
-[8]: /logs/log_collection/csharp/#configure-your-logger
-[9]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
-[10]: /tagging/unified_service_tagging
+[3]: /getting_started/getting_started/tagging/unified_service_tagging
+[4]: http://serilog.net
+[5]: http://nlog-project.org
+[6]: https://logging.apache.org/log4net
+[7]: /tracing/visualization/#trace
+[8]: /tracing/visualization/#spans
+[9]: /logs/log_collection/csharp/#configure-your-logger
+[10]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

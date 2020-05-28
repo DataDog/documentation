@@ -21,7 +21,7 @@ further_reading:
 
 Enable injection in the Java tracer's [configuration][1] through the environment variable `DD_LOGS_INJECTION=true` or the jvm startup argument `-Ddd.logs.injection=true`.
 If you haven't done so already, we recommend configuring the Java tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the smoothest
-experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][6] for more details).
+experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][2] for more details).
 
 If your logs are raw formatted, update your formatter to include `dd.env`, `dd.service`, `dd.version`, `dd.trace_id`, and `dd.span_id` in your logger configuration:
 
@@ -33,7 +33,7 @@ If your logs are JSON formated and you are using Logback there is nothing left t
 
 ## Manual log injection
 
-If you prefer to manually correlate your [traces][2] with your logs and tie together data for your service,
+If you prefer to manually correlate your [traces][3] with your logs and tie together data for your service,
 leverage the Datadog API to retrieve correlation identifiers:
 
 - Use the `get` functions on the `CorrelationIdentifier` object to retrieve fields for log injection(see examples below).
@@ -117,8 +117,7 @@ Then update your logger configuration to include `dd.env`, `dd.service`, `dd.ver
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/java/#configuration
-[2]: /tracing/visualization/#trace
-[3]: /tracing/visualization/#spans
+[2]: /getting_started/getting_started/tagging/unified_service_tagging
+[3]: /tracing/visualization/#trace
 [4]: /logs/log_collection/java/#raw-format
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
-[6]: /tagging/unified_service_tagging

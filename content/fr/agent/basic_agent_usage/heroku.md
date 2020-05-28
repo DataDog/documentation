@@ -276,7 +276,7 @@ Une fois le buildpack ou l'Agent mis à jour, vous devez effacer le cache de bui
 [5]: https://github.com/lstoll/heroku-buildpack-monorepo
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: https://github.com/DataDog/heroku-buildpack-datadog/releases
-[8]: https://docs.datadoghq.com/fr/tagging/
+[8]: https://docs.datadoghq.com/fr/getting_started/tagging/
 [9]: https://docs.datadoghq.com/fr/dashboards/guide/how-to-graph-percentiles-in-datadog/
 [10]: https://docs.datadoghq.com/fr/agent
 [11]: https://devcenter.heroku.com/articles/dyno-metadata

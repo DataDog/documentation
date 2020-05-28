@@ -479,7 +479,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [8]: /help/
 [9]: https://github.com/DataDog/documentation#outside-contributors
 [10]: /tracing/connect_logs_and_traces/java/
-[11]: /tagging/unified_service_tagging
+[11]: /getting_started/getting_started/tagging/unified_service_tagging
 [12]: /developers/dogstatsd/#setup
 [13]: /agent/docker/#dogstatsd-custom-metrics
 [14]: /developers/dogstatsd/

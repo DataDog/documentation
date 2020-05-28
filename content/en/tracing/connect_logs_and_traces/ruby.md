@@ -121,6 +121,6 @@ See the [Ruby logging documentation][2] to verify the Ruby log integration is pr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging/unified_service_tagging
+[1]: /getting_started/getting_started/tagging/unified_service_tagging
 [2]: /logs/log_collection/ruby/#configure-the-datadog-agent
 [3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

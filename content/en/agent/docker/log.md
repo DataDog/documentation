@@ -241,7 +241,7 @@ For Kubernetes environements, refer to the [Kubernetes short lived container doc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/journald/
-[2]: /tagging/unified_service_tagging
+[2]: /getting_started/getting_started/tagging/unified_service_tagging
 [3]: /agent/docker/integrations/
 [4]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
 [5]: /agent/logs/#custom-log-collection

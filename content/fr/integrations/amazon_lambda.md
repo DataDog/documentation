@@ -593,7 +593,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][17].
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_lambda
 [6]: https://app.datadoghq.com/functions
 [7]: https://docs.datadoghq.com/fr/infrastructure/serverless
-[8]: https://docs.datadoghq.com/fr/tagging/
+[8]: https://docs.datadoghq.com/fr/getting_started/tagging/
 [9]: https://docs.datadoghq.com/fr/integrations/amazon_step_functions/
 [10]: https://docs.datadoghq.com/fr/metrics/distributions/
 [11]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#set-up-the-datadog-lambda-function

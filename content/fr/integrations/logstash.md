@@ -150,7 +150,7 @@ Pour tirer pleinement parti de vos logs dans Datadog, il est important de leur a
 
 ##### Source
 
-Configurez un filtre Logstash pour définir la source (nom d'intégration Datadog) sur vos logs. 
+Configurez un filtre Logstash pour définir la source (nom d'intégration Datadog) sur vos logs.
 
 ```conf
 filter {
@@ -235,7 +235,7 @@ Si vous avez besoin d'aide supplémentaire, contactez [l'assistance Datadog][23]
 [16]: https://docs.datadoghq.com/fr/agent/proxy/#proxy-for-logs
 [17]: /fr/logs/#edit-reserved-attributes
 [18]: /fr/logs/processing/#integration-pipelines
-[19]: /fr/getting_started/tagging/assigning_tags
+[19]: /fr/getting_started/getting_started/getting_started/tagging/assigning_tags
 [20]: https://app.datadoghq.com/infrastructure
 [21]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [22]: https://github.com/DataDog/integrations-extras/blob/master/logstash/metadata.csv

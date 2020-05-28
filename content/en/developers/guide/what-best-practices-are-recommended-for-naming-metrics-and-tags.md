@@ -5,7 +5,7 @@ further_reading:
 - link: "/developers/metrics/"
   tag: "Documentation"
   text: "Learn more about Datadog metrics"
-- link: "/tagging/"
+- link: "/getting_started/tagging/"
   tag: "Documentation"
   text: "Getting started with tags"
 aliases:
@@ -43,4 +43,4 @@ Examples of commonly used metric tag keys are `instance`, `name`, and `role`.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging/unified_service_tagging
+[1]: /getting_started/getting_started/tagging/unified_service_tagging

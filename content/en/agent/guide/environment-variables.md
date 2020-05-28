@@ -74,6 +74,6 @@ In general, use the following rules:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /tagging/unified_service_tagging
+[2]: /getting_started/getting_started/tagging/unified_service_tagging
 [3]: /agent/proxy/#environment-variables
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go
