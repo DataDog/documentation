@@ -2052,6 +2052,9 @@ api_v1:
   - name: Create a test
     parent: Synthetics
     url: create-a-test
+  - name: Get a browser test configuration
+    parent: Synthetics
+    url: get-a-browser-test-configuration
   - name: Get the test's latest results summaries (browser)
     parent: Synthetics
     url: get-the-tests-latest-results-summaries-browser
