@@ -6733,6 +6733,24 @@ components:
           format: date-time
           type: string
       type: object
+    SyntheticsStep:
+      description: The steps used in a Synthetics browser test.
+      properties:
+        allowFailure:
+          description: A boolean set to allow this step to fail.
+          type: boolean
+        name:
+          description: The name of the step.
+          type: string
+        params:
+          description: The parameters of the step.
+          type: object
+        timeout:
+          description: The time before declaring a step failed.
+          type: number
+        type:
+          $ref: '#/components/schemas/SyntheticsStepType'
+      type: object
     SyntheticsStepDetail:
       description: Object describing a step for a Synthetic test.
       properties:
@@ -6852,23 +6870,6 @@ components:
       - TYPE_TEXT
       - UPLOAD_FILES
       - WAIT
-    SyntheticsTestAuthor:
-      description: Object describing the author or a Synthetic test.
-      properties:
-        email:
-          description: Email of the author.
-          type: string
-        handle:
-          description: Handle of the author.
-          type: string
-        id:
-          description: Unique ID of the author.
-          format: int64
-          type: integer
-        name:
-          description: Name of the author.
-          type: string
-      type: object
     SyntheticsTestConfig:
       description: Configuration object for a Synthetic test.
       properties:
@@ -6895,11 +6896,6 @@ components:
       properties:
         config:
           $ref: '#/components/schemas/SyntheticsTestConfig'
-        created_at:
-          description: The test creation date.
-          type: string
-        created_by:
-          $ref: '#/components/schemas/SyntheticsTestAuthor'
         locations:
           description: Array of locations used to run the test.
           items:
@@ -6909,11 +6905,6 @@ components:
         message:
           description: Notification message associated with the test.
           type: string
-        modified_at:
-          description: Last timestamp the test was modified.
-          type: string
-        modified_by:
-          $ref: '#/components/schemas/SyntheticsTestAuthor'
         monitor_id:
           description: The associated monitor ID.
           format: int64
@@ -6928,6 +6919,11 @@ components:
           type: string
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+        steps:
+          description: The steps of the test (only for browser tests).
+          items:
+            $ref: '#/components/schemas/SyntheticsStep'
+          type: array
         subtype:
           $ref: '#/components/schemas/SyntheticsTestDetailsSubType'
         tags:
@@ -14258,14 +14254,6 @@ paths:
     post:
       description: Create a Synthetic test.
       operationId: CreateTest
-      parameters:
-      - description: Public ID of the test to clone, undefined if the test is newly
-          created.
-        in: query
-        name: from_test_id
-        required: false
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
@@ -14304,6 +14292,42 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
+  /api/v1/synthetics/tests/browser/{public_id}:
+    get:
+      description: Get the detailed configuration (including steps) associated with
+        a Synthetics browser test.
+      operationId: GetBrowserTest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTestDetails'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic is not activated for the user
+
+            - Test is not owned by the user'
+      summary: Get a browser test configuration
+      tags:
+      - Synthetics
   /api/v1/synthetics/tests/browser/{public_id}/results:
     get:
       description: Get the last 50 test results summaries for a given Synthetics Browser
