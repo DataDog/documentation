@@ -28,10 +28,7 @@ Once you create a private location, the process of configuring a [Synthetics API
 
 1. Set up a [Vagrant Ubuntu 16.04 virtual machine][2].
 2. Install [Docker][3] on that machine.
-3. In the Datadog app, hover over **[UX Monitoring][4]** and select **Settings** -> **Private Locations**. Add a new private location:
-
-    {{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations"  style="width:100%;">}}
-
+3. In the Datadog app, hover over **[UX Monitoring][4]** and select **Settings** -> **Private Locations**. Add a new private location.
 4. Fill out the Location Details and click **Save and Generate** to generate the configuration file associated with your private location on your worker.
 
 5. Copy and paste the first tooltip to create your private location configuration file.

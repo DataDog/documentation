@@ -41,11 +41,10 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 ### Collecte de métriques
 
 1. Dans le [carré d'intégration AWS][2], assurez-vous que l'option `ELB` est cochée dans la section concernant la collecte des métriques. Cochez également la case `ApplicationELB` pour les métriques ELB de l'application et la case `NetworkELB` pour les métriques ELB réseau.
-
 2. Ajoutez les autorisations suivantes à votre [stratégie IAM Datadog][3] afin de recueillir des métriques Amazon ELB. Pour en savoir plus sur les stratégies ELB, consultez [la documentation du site Web d'AWS][4].
 
     | Autorisation AWS                                | Description                                                        |
-    |-----------------------------------------------|--------------------------------------------------------------------|
+    | --------------------------------------------- | ------------------------------------------------------------------ |
     | `elasticloadbalancing:DescribeLoadBalancers`  | Énumérer les ELB et ajouter des tags et des métriques supplémentaires.                        |
     | `elasticloadbalancing:DescribeTags`           | Ajouter des tags ELB personnalisés aux métriques ELB.                                |
     | `elasticloadbalancing:DescribeInstanceHealth` | Ajouter le statut de vos instances.                                       |
@@ -76,10 +75,11 @@ Choisissez un intervalle de 5 minutes et saisissez vos compartiments S3 :
 Accédez ensuite à la [section Log de Datadog][9] pour commencer à explorer vos logs !
 
 ## Données collectées
+
 Les métriques sont recueillies sous les espaces de nommage suivants :
 
 | Espace de nommage Datadog    | Service AWS                    |
-|----------------------|--------------------------------|
+| -------------------- | ------------------------------ |
 | `aws.applicationelb` | Application Load Balancers     |
 | `aws.elb`            | Classic Elastic Load Balancing |
 | `aws.network.elb`    | Network Load Balancers         |
@@ -106,7 +106,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 Pour savoir comment surveiller les métriques de performance ELB, consultez [notre série d'articles à ce sujet][11]. Vous y trouverez des informations supplémentaires sur les principales métriques de performance, ainsi que des conseils pour les recueillir, et découvrirez comment utiliser Datadog afin de surveiller ELB.
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_elasticloadbalancing.html
@@ -115,5 +115,5 @@ Pour savoir comment surveiller les métriques de performance ELB, consultez [not
 [7]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-access-logs.html
 [8]: /fr/integrations/amazon_web_services/#create-a-new-lambda-function
 [9]: https://app.datadoghq.com/logs
-[10]: https://docs.datadoghq.com/fr/help
+[10]: https://docs.datadoghq.com/fr/help/
 [11]: https://www.datadoghq.com/blog/top-elb-health-and-performance-metrics

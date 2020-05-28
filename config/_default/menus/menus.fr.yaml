@@ -985,7 +985,7 @@ main:
     identifier: log_collection_ruby
     weight: 109
   - name: Autres intégrations
-    url: 'integrations/#collecte-de-logs-cat'
+    url: integrations/#collecte-de-logs-cat
     identifier: other_integrations
     parent: log_collection
     weight: 110
@@ -1066,7 +1066,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: Corrélation entre les logs et les métriques
-    url: 'dashboards/timeboards/#graph-menu'
+    url: dashboards/timeboards/#graph-menu
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -1294,7 +1294,7 @@ main:
     identifier: dev_tools_metrics_powershell
     weight: 204
   - name: Envoi de métriques - API
-    url: 'api/#envoyer-des-points-de-series-temporelles'
+    url: api/#envoyer-des-points-de-series-temporelles
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_api
     weight: 205
@@ -1329,7 +1329,7 @@ main:
     identifier: dev_tools_events_mail
     weight: 303
   - name: API
-    url: 'api/#envoyer-un-evenement'
+    url: api/#envoyer-un-evenement
     parent: dev_tools_events
     identifier: dev_tools_events_api
     weight: 304
@@ -1967,6 +1967,9 @@ api_v1:
   - name: Create a test
     parent: Synthetics
     url: create-a-test
+  - name: Get a browser test configuration
+    parent: Synthetics
+    url: get-a-browser-test-configuration
   - name: Get the test's latest results summaries (browser)
     parent: Synthetics
     url: get-the-tests-latest-results-summaries-browser
@@ -2021,6 +2024,9 @@ api_v1:
   - name: Usage Metering
     url: /fr/api/v1/usage-metering/
     identifier: Usage Metering
+  - name: Get hourly usage for analyzed logs
+    parent: Usage Metering
+    url: get-hourly-usage-for-analyzed-logs
   - name: Get hourly usage for Lambda
     parent: Usage Metering
     url: get-hourly-usage-for-lambda
@@ -2045,6 +2051,9 @@ api_v1:
   - name: Get hourly usage for RUM Sessions
     parent: Usage Metering
     url: get-hourly-usage-for-rum-sessions
+  - name: Get hourly usage for SNMP devices
+    parent: Usage Metering
+    url: get-hourly-usage-for-snmp-devices
   - name: Get usage across your multi-org account
     parent: Usage Metering
     url: get-usage-across-your-multi-org-account

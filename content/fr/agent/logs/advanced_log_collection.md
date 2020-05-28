@@ -3,19 +3,19 @@ title: Collecte de logs avancée
 kind: documentation
 description: Utiliser l'Agent Datadog pour recueillir vos logs et les envoyer à Datadog
 further_reading:
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: Découvrir comment traiter vos logs
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
-  - link: logs/live_tail
+  - link: /logs/live_tail/
     tag: Documentation
     text: "Fonctionnalité Live\_Tail de Datadog"
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Découvrir comment explorer vos logs
-  - link: logs/logging_without_limits
+  - link: /logs/logging_without_limits/
     tag: Documentation
     text: Logging without Limits*
 ---
@@ -34,14 +34,16 @@ Pour appliquer une règle de traitement à tous les logs recueillis par un Agent
 
 Pour envoyer uniquement un sous-ensemble spécifique de logs à Datadog, utilisez le paramètre `log_processing_rules` dans votre fichier de configuration avec le `type` **exclude_at_match** ou **include_at_match**.
 
-{{< tabs >}}
-{{% tab "exclude_at_match" %}}
+### exclude_at_match
 
 | Paramètre          | Description                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
 | `exclude_at_match` | Si l'expression spécifiée est incluse dans le message, le log est exclu et n'est pas envoyé à Datadog. |
 
-Par exemple, pour exclure les logs qui contiennent une adresse e-mail Datadog :
+Par exemple, pour **exclure** les logs qui contiennent une adresse e-mail Datadog, utilisez les paramètres `log_processing_rules` suivants :
+
+{{< tabs >}}
+{{% tab "Fichier de configuration" %}}
 
 ```yaml
 logs:
@@ -57,13 +59,78 @@ logs:
 ```
 
 {{% /tab %}}
-{{% tab "include_at_match" %}}
+{{% tab "Docker" %}}
+
+Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre conteneur pour indiquer les `log_processing_rules`, par exemple :
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "cardpayment",
+        "log_processing_rules": [{
+          "type": "exclude_at_match",
+          "name": "exclude_datadoghq_users",
+          "pattern" : "\\w+@datadoghq.com"
+        }]
+      }]
+```
+
+**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+Dans un environnement Kubernetes, utilisez l'annotation de pod `ad.datadoghq.com` sur votre pod pour indiquer les `log_processing_rules`, par exemple :
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: cardpayment
+spec:
+  selector:
+    matchLabels:
+      app: cardpayment
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/cardpayment.logs: >-
+          [{
+            "source": "java",
+            "service": "cardpayment",
+            "log_processing_rules": [{
+              "type": "exclude_at_match",
+              "name": "exclude_datadoghq_users",
+              "pattern" : "\\w+@datadoghq.com"
+            }]
+          }]
+      labels:
+        app: cardpayment
+      name: cardpayment
+    spec:
+      containers:
+        - name: cardpayment
+          image: cardpayment:latest
+```
+
+**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### include_at_match
 
 | Paramètre          | Description                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
 | `include_at_match` | Seuls les logs avec un message qui contient l'expression spécifiée sont envoyés à Datadog. |
 
-Par exemple, pour envoyer uniquement les logs qui contiennent une adresse e-mail Datadog :
+
+Par exemple, pour **inclure** les logs qui contiennent une adresse e-mail Datadog, utilisez les paramètres `log_processing_rules` suivants :
+
+{{< tabs >}}
+{{% tab "Fichier de configuration" %}}
 
 ```yaml
 logs:
@@ -79,6 +146,65 @@ logs:
 ```
 
 {{% /tab %}}
+{{% tab "Docker" %}}
+
+Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre conteneur pour indiquer les `log_processing_rules`, par exemple :
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "cardpayment",
+        "log_processing_rules": [{
+          "type": "include_at_match",
+          "name": "include_datadoghq_users",
+          "pattern" : "\\w+@datadoghq.com"
+        }]
+      }]
+```
+
+**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+Dans un environnement Kubernetes, utilisez l'annotation de pod `ad.datadoghq.com` sur votre pod pour indiquer les `log_processing_rules`, par exemple :
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: cardpayment
+spec:
+  selector:
+    matchLabels:
+      app: cardpayment
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/cardpayment.logs: >-
+          [{
+            "source": "java",
+            "service": "cardpayment",
+            "log_processing_rules": [{
+              "type": "include_at_match",
+              "name": "include_datadoghq_users",
+              "pattern" : "\\w+@datadoghq.com"
+            }]
+          }]
+      labels:
+        app: cardpayment
+      name: cardpayment
+    spec:
+      containers:
+        - name: cardpayment
+          image: cardpayment:latest
+```
+
+**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Nettoyer les données sensibles de vos logs
@@ -88,6 +214,9 @@ Si vos logs contiennent des informations confidentielles que vous souhaitez effa
 Cette action remplace tous les groupes correspondants par la valeur du paramètre `replace_placeholder`.
 
 Par exemple, pour effacer un numéro de carte bancaire :
+
+{{< tabs >}}
+{{% tab "Fichier de configuration" %}}
 
 ```yaml
 logs:
@@ -102,6 +231,77 @@ logs:
         ##Une expression qui contient des groupes d'enregistrement
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur votre conteneur pour indiquer les `log_processing_rules`, par exemple :
+
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "cardpayment",
+        "log_processing_rules": [{
+          "type": "mask_sequences",
+          "name": "mask_credit_cards",
+          "pattern" : "(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})"
+        }]
+      }]
+```
+
+**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des étiquettes. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+Dans un environnement Kubernetes, utilisez l'annotation de pod `ad.datadoghq.com` sur votre pod pour indiquer les `log_processing_rules`, par exemple :
+
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: cardpayment
+spec:
+  selector:
+    matchLabels:
+      app: cardpayment
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/cardpayment.logs: >-
+          [{
+            "source": "java",
+            "service": "cardpayment",
+            "log_processing_rules": [{
+              "type": "mask_sequences",
+              "name": "mask_credit_cards",
+              "pattern" : "(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})"
+            }]
+          }]
+      labels:
+        app: cardpayment
+      name: cardpayment
+    spec:
+      containers:
+        - name: cardpayment
+          image: cardpayment:latest
+```
+
+**Remarque** : échappez les caractères regex dans vos patterns lorsque vous utilisez des annotations. Par exemple, `\d` devient `\\d`, `\w` devient `\\w`, etc.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+À partir des versions 7.17+ de l'Agent, la chaîne `replace_placeholder` peut développer les références à des groupes de capture telles que `$1`, `$2`, etc. Pour faire en sorte qu'une chaîne suive le groupe de capture sans aucune espace entre les deux, utilisez le format `${<NUMÉRO_GROUPE>}`.
+
+Par exemple, pour supprimer les informations personnelles du log `User email: foo.bar@example.com`, utilisez :
+
+* `pattern: "(User email: )[^@]*@(.*)"`
+* `replace_placeholder: "$1 masked_user@${2}"`
+
+Le log suivant est alors envoyé à Datadog : `User email: masked_user@example.com`
 
 ## Agrégation multiligne
 
@@ -141,7 +341,16 @@ Dans un environnement Docker, utilisez l'étiquette `com.datadoghq.ad.logs` sur 
 
 ```yaml
  labels:
-    com.datadoghq.ad.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "postgresql",
+        "service": "database",
+        "log_processing_rules": [{
+          "type": "multi_line",
+          "name": "log_start_with_date",
+          "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"
+        }]
+      }]
 ```
 
 {{% /tab %}}
@@ -161,7 +370,16 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/postgres.logs: '[{"source": "postgresql", "service": "database", "log_processing_rules": [{"type": "multi_line", "name": "log_start_with_date", "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"}]}]'
+        ad.datadoghq.com/postgres.logs: >-
+          [{
+            "source": "postgresql",
+            "service": "database",
+            "log_processing_rules": [{
+              "type": "multi_line",
+              "name": "log_start_with_date",
+              "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"
+            }]
+          }]
       labels:
         app: database
       name: postgres
@@ -178,7 +396,7 @@ spec:
 
 Exemples supplémentaires :
 
-| **Chaîne brute**           | **Modèle**                                |
+| **Chaîne brute**           | **Pattern**                                |
 |--------------------------|--------------------------------------------|
 | 14:20:15                 | `\d{2}:\d{2}:\d{2}`                        |
 | 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                      |
@@ -187,9 +405,13 @@ Exemples supplémentaires :
 
 **Remarque** : les expressions régulières pour les logs multiligne doivent commencer au **début** d'un log. Les expressions ne peuvent pas être recherchées en milieu de ligne.
 
+## Règles de traitement des logs couramment utilisées
+
+Consultez la section [FAQ sur les règles de traitement des logs couramment utilisées][1] pour obtenir une liste d'exemples.
+
 ## Suivre des répertoires à l'aide de wildcards
 
-Si vos fichiers de log sont étiquetés par date ou tous stockés au sein d'un même répertoire, configurez votre Agent Datadog pour tous les surveiller et détecter automatiquement de nouveaux logs à l'aide de wildcards dans l'attribut `path`.
+Si vos fichiers de log sont étiquetés par date ou tous stockés au sein d'un même répertoire, configurez votre Agent Datadog pour tous les surveiller et détecter automatiquement de nouveaux logs à l'aide de wildcards dans l'attribut `path`. Si vous souhaitez exclure les fichiers correspondant à un certain `path`, énumérez-les dans l'attribut `exclude_paths`.
 
 * Utiliser `path: /var/log/myapp/*.log` :
   * Pour surveiller tous les fichiers `.log` dans le répertoire `/var/log/myapp/`
@@ -206,15 +428,20 @@ Exemple de configuration :
 logs:
  - type: file
    path: /var/log/myapp/*.log
+   exclude_paths:
+     - /var/log/myapp/debug.log
+     - /var/log/myapp/trace.log
    service: mywebapp
    source: go
 ```
+
+L'exemple ci-dessus permet de surveiller `/var/log/myapp/log/myfile.log`, mais `/var/log/myapp/log/debug.log` et `/var/log/myapp/log/trace.log` seront toujours exclus.
 
 **Remarque** : l'Agent nécessite les autorisations de lecture et d'exécution pour un répertoire afin d'énumérer tous les fichiers qui y figurent.
 
 ## Règles globales de traitement
 
-Depuis la version 6.10 de l'Agent Datadog, les règles de traitement `exclude_at_match`, `include_at_match` et `mask_sequences` peuvent être définies de façon globale dans le [fichier de configuration principal][1] de l'Agent, ou à l'aide d'une variable d'environnement :
+Depuis la version 6.10 de l'Agent Datadog, les règles de traitement `exclude_at_match`, `include_at_match` et `mask_sequences` peuvent être définies de façon globale dans le [fichier de configuration principal][2] de l'Agent, ou à l'aide d'une variable d'environnement :
 
 {{< tabs >}}
 {{% tab "Fichiers de configuration" %}}
@@ -226,7 +453,7 @@ logs_config:
   processing_rules:
      - type: exclude_at_match
        name: exclude_healthcheck
-       pattern: healtcheck
+       pattern: healthcheck
      - type: mask_sequences
        name: mask_user_email
        pattern: \w+@datadoghq.com
@@ -257,7 +484,7 @@ env:
 {{< /tabs >}}
 Ces règles globales de traitement s'appliquent à tous les logs recueillis par l'Agent Datadog.
 
-**Remarque** : l'Agent Datadog n'initie pas le processus de collecte de logs en cas de problème de format dans les règles globales de traitement. Exécutez la [sous-commande status][2] pour diagnostiquer les éventuels problèmes.
+**Remarque** : l'Agent Datadog n'initie pas le processus de collecte de logs en cas de problème de format dans les règles globales de traitement. Exécutez la [sous-commande status][3] pour diagnostiquer les éventuels problèmes.
 
 ## Pour aller plus loin
 
@@ -266,5 +493,6 @@ Ces règles globales de traitement s'appliquent à tous les logs recueillis par 
 <br>
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
-[1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /fr/agent/guide/agent-commands/#agent-information
+[1]: /fr/agent/faq/commonly-used-log-processing-rules
+[2]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /fr/agent/guide/agent-commands/#agent-information

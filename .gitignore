@@ -3,6 +3,11 @@ public/
 data/service_checks/
 integrations_data
 
+# Ignore generated examples
+/examples
+content/en/api/**/*.go
+content/en/api/**/*.java
+
 # Ignoring all automated content
 # Developers/integrations
 content/en/developers/integrations/*.md
@@ -41,6 +46,7 @@ data/integrations/
 !content/en/integrations/alcide.md
 !content/en/integrations/iam_access_analyzer.md
 !content/en/integrations/kubernetes_audit_logs.md
+!content/en/integrations/apigee.md
 
 # security rules
 content/en/security_monitoring/default_rules/*.md

@@ -7,10 +7,10 @@ further_reading:
   - link: 'https://www.npmjs.com/package/@datadog/browser-logs'
     tag: NPM
     text: Paquet NPM @datadog/browser-logs
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
 ---
@@ -34,8 +34,7 @@ Utilisez la bibliothèque `datadog-logs` pour envoyer des logs directement à Da
 
 Après avoir ajouté [`@datadog/browser-logs`][3] à votre fichier `package.json`, lancez la bibliothèque avec :
 
-{{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< site-region region="us" >}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
@@ -43,13 +42,13 @@ import { datadogLogs } from '@datadog/browser-logs';
 datadogLogs.init({
   clientToken: '<TOKEN_CLIENT_DATADOG>',
   datacenter: 'us',
-  isCollectingError: true,
+  forwardErrorsToLogs: true,
   sampleRate: 100
 });
 ```
 
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
@@ -57,20 +56,18 @@ import { datadogLogs } from '@datadog/browser-logs';
 datadogLogs.init({
   clientToken: '<TOKEN_CLIENT_DATADOG>',
   datacenter: 'eu',
-  isCollectingError: true,
+  forwardErrorsToLogs: true,
   sampleRate: 100
 });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 ### Configuration via bundle
 
 Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de configurer la bibliothèque au début de la section <head> de vos pages.
 
-{{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< site-region region="us" >}}
 
 ```html
 <html>
@@ -80,7 +77,7 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<TOKEN_CLIENT>',
-        isCollectingError: true,
+        forwardErrorsToLogs: true,
         sampleRate: 100
       });
     </script>
@@ -88,8 +85,8 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
 </html>
 ```
 
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```html
 <html>
@@ -99,7 +96,7 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
     <script>
       window.DD_LOGS && DD_LOGS.init({
         clientToken: '<TOKEN_CLIENT>',
-        isCollectingError: true,
+        forwardErrorsToLogs: true,
         sampleRate: 100
       });
     </script>
@@ -107,8 +104,7 @@ Afin de ne manquer aucun log ni aucune erreur, assurez-vous de charger et de con
 </html>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 **Remarque** : le check `window.DD_LOGS` est utilisé pour éviter tout problème si le chargement de la bibliothèque échoue.
 
@@ -118,7 +114,7 @@ Les paramètres suivants peuvent être utilisés pour configurer l'envoi des log
 
 | Paramètre             | Type    | Obligatoire | Valeur par défaut | Description                                                                                              |
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
-| `clientToken`         | Chaîne  | Oui      | `-`     | Un [token client Datadog][4].                                                                             |
+| `clientToken`         | Chaîne  | Oui      | `-`     | Un [token client Datadog][2].                                                                             |
 | `datacenter`          | Chaîne  | Oui      | `us`    | Le site Datadog associé à votre organisation. Choisissez `us` pour le site américain ou `eu` pour le site européen.               |
 | `forwardErrorsToLogs` | Booléen | non       | `true`  | Définissez ce paramètre sur `false` pour désactiver l'envoi des logs console.error, des exceptions non interceptées et des erreurs réseau à Datadog. |
 | `sampleRate`          | Numéro  | non       | `100`   | Le pourcentage de sessions à surveiller. Les logs sont uniquement envoyés pour les sessions surveillées. Choisissez une valeur entre `100` (toutes les sessions) et `0` (aucune session).   |
@@ -300,7 +296,7 @@ datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setLoggerGlobalContext("{'env', 'staging'}");
+window.DD_LOGS && DD_LOGS.setLoggerGlobalContext({env: 'staging'});
 
 window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer);
 ```
@@ -407,7 +403,6 @@ La bibliothèque `datadog-logs` prend en charge tous les navigateurs modernes po
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#api-keys
-[2]: https://docs.datadoghq.com/fr/account_management/api-app-keys/#client-tokens
+[1]: /fr/account_management/api-app-keys/#api-keys
+[2]: /fr/account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
-[4]: /fr/account_management/api-app-keys/#client-tokens

@@ -69,6 +69,7 @@ Find below the list of permissions for the log configuration assets and log data
 | logs_write_pipelines         | Update a subset of the log pipelines       | true     |
 | logs_write_processors        | Update the log processors in an index      | true     |
 | logs_write_archives          | Update the external archives configuration | false    |
+| logs_read_archives          | Rehydrate logs from that archive; see archive configuration details | true    |
 | logs_public_config_api       | Access the Logs Public Config API (r/w)    | false    |
 | logs_generate_metrics        | Access the Generate Metrics feature        | false    |
 
@@ -261,6 +262,45 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 {{% /tab %}}
 {{< /tabs >}}
 
+
+#### logs_read_archives
+
+Grants the ability to rehydrate from archives, and access the details of the archive configuration. This permission can be scoped to a subset of archives. 
+
+{{< tabs >}}
+{{% tab "Datadog application" %}}
+
+Go to your [Datadog Roles page][1] and select the checkbox `read`, as shown below, for the wanted role:
+{{< img src="account_management/rbac/logs_read_archive_access.png" alt="Create a custom Role"  style="width:90%;">}}
+
+Then assign that role to the archive. Proceed to archive creation, or update at any moment while editing the archive. 
+{{< img src="account_management/rbac/logs_archive_restriction.png" alt="Create a custom Role"  style="width:90%;">}}
+
+An archive with no restrictions is accessible to anyone who belongs to a role with the `logs_read_archives` permission. An archive with restrictions is only accessible to the users who belong to one of the registered roles, provided theses roles have the `logs_read_archives` permission.
+
+In the following example, assuming all roles but `Guest` have the `logs_read_archive` permission:
+
+* Staging is accessible to all users, except users that **only** belong to the `Guest` role.
+* Prod is accessible to all users belonging to `Customer Support`.
+* Security-Audit is not accessible to users who belong to `Customer Support`, unless they also belong to `Audit & Security`.
+
+{{< img src="account_management/rbac/logs_archives_list.png" alt="Create a custom Role"  style="width:90%;">}}
+
+
+[1]: https://app.datadoghq.com/access/roles
+{{% /tab %}}
+{{% tab "API" %}}
+
+The `logs_read_archive` permission can be granted or revoked from a role via [the Roles API][1].
+
+An archive can be scoped to a subset of roles using the [Archive API][2].
+
+
+[1]: /api/v2/roles/
+[2]: /api/v2/logs-archives/
+{{% /tab %}}
+{{< /tabs >}}
+
 #### logs_public_config_api
 
 Grants the ability to create or modify log configuration through the Datadog API.
@@ -288,7 +328,7 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 Grant the following permissions to manage read access on subsets of log data:
 
 * `logs_read_data`(Recommended) offers finer grained access control by restricting a role's access to logs matching a log restriction queries. 
-* `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis.
+* `logs_read_index_data` is the alternative approach to restrict data access to indexed log data on a per-index basis (it is still required to have this permission to access indexed data).
 
 These permissions can also be used together. A role can restrict the user to a subset of indexes and additionally apply a restriction query to limit access within these indexes.
 
@@ -299,7 +339,7 @@ In addition, access to the Live Tail can be restricted with the `logs_live_tail`
 
 #### logs_read_data
 
-Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][4].
+Read access to log data. If granted, other restrictions then apply such as `logs_read_index_data` or with [restriction query][3].
 
 "Role combinations are permissive. Is a user belongs to multiple roles, the most permissive role is applied."
 
@@ -329,9 +369,9 @@ Revoke or grant this permission from a role via [the Roles API][1].
 Use [Restriction Queries][2] to scope the permission to a subset of Log Data. 
 
 
+
 [1]: /api/#roles
 [2]: /api/?lang=bash#roles-restriction-queries-for-logs
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -339,6 +379,7 @@ Use [Restriction Queries][2] to scope the permission to a subset of Log Data.
 #### logs_read_index_data
 
 Grants a role read access on some number of log indexes. Can be set either globally or limited to a subset of log indexes.
+When using `logs_read_data` and restriction queries, the `logs_read_index_data` permission **must** be set globally to access indexed logs.
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
@@ -421,3 +462,4 @@ This permission can be granted or revoked from a role via [the Roles API][1].
 
 [1]: /account_management/users/#edit-a-user-s-roles
 [2]: /api/v2/roles/#list-permissions
+[3]: /api/v2/logs-restriction-queries/

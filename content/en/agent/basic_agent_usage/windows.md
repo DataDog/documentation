@@ -50,7 +50,7 @@ Optionally, install the Agent with the command line to add custom settings.
 
 Command prompt:
 
-```cmd
+```
 start /wait msiexec /qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"
 ```
 
@@ -202,7 +202,7 @@ Get more information on running checks in *Status* -> *Collector* and *Checks* -
 The status command is available for Powershell:
 
 ```powershell
-& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\agent.exe" status
+& "$env:Programfiles\Datadog\Datadog Agent\embedded\agent.exe" status
 ```
 
 or cmd.exe:
@@ -226,12 +226,12 @@ For the status of Agent v3.9.1 to v5.1, navigate to `http://localhost:17125/stat
 The info command is available for Powershell:
 
 ```powershell
-& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
+& "$env:Programfiles\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
 or cmd.exe:
 
-```shell
+```
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" info
 ```
 
@@ -303,12 +303,12 @@ To send Datadog support a copy of your Windows logs and configurations, do the f
 The flare command is available for Powershell:
 
 ```powershell
-& "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
+& "$env:Programfiles\Datadog\Datadog Agent\embedded\python.exe" "$env:Programfiles\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 
 or cmd.exe:
 
-```powershell
+```
 "%PROGRAMFILES%\Datadog\Datadog Agent\embedded\python.exe" "%PROGRAMFILES%\Datadog\Datadog Agent\agent\agent.py" flare <CASE_ID>
 ```
 

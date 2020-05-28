@@ -163,16 +163,18 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev"});
-            DogStatsd.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
-            DogStatsd.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(random.Next(100000));
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
+                dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
+                dogStatsdService.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(random.Next(100000));
+            }
         }
     }
 }
@@ -342,14 +344,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(100000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(100000);
+            }
         }
     }
 }
@@ -489,14 +493,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Set("example_metric.set", i, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(random.Next(100000));
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Set("example_metric.set", i, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(random.Next(100000));
+            }
         }
     }
 }
@@ -664,14 +670,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(2000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(2000);
+            }
         }
     }
 }
@@ -947,14 +955,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(2000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(2000);
+            }
         }
     }
 }
@@ -1042,7 +1052,7 @@ Statsd.incrementCounter("example_metric.increment", sampleRate=0.5);
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("example_metric.increment", sampleRate: 0.5);
+dogStatsdService.Increment("example_metric.increment", sampleRate: 0.5);
 ```
 
 {{% /tab %}}
@@ -1096,7 +1106,7 @@ Statsd.incrementCounter("example_metric.increment", new String[]{"environment:de
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
+dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
 ```
 
 {{% /tab %}}

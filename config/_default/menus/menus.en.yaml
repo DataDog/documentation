@@ -16,22 +16,22 @@ main:
     weight: 101
   - name: Tags
     identifier: tagging_
-    url: tagging/
+    url: getting_started/tagging/
     parent: getting_started
     weight: 2
   - name: Assigning Tags
     identifier: assigning_tags
-    url: tagging/assigning_tags
+    url: getting_started/tagging/assigning_tags
     parent: tagging_
     weight: 201
   - name: Unified Service Tagging
     identifier: unified_service_tagging
-    url: tagging/unified_service_tagging
+    url: getting_started/tagging/unified_service_tagging
     parent: tagging_
     weight: 202
   - name: Using Tags
     identifier: using_tags
-    url: tagging/using_tags
+    url: getting_started/tagging/using_tags
     parent: tagging_
     weight: 203
   - name: Integrations
@@ -527,6 +527,11 @@ main:
     parent: serverless
     identifier: app_services_extension
     weight: 701
+  - name: Datadog Lambda Layer
+    url: infrastructure/serverless/datadog_lambda_layer
+    parent: serverless
+    identifier: datadog_lambda_layer
+    weight: 701
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -688,7 +693,7 @@ main:
     pre: nav_tracing
     identifier: tracing
     weight: 120000
-  - name: Enable Trace Collection
+  - name: Agent Configuration
     url: tracing/send_traces/
     identifier: tracing_send_traces
     parent: tracing
@@ -850,15 +855,15 @@ main:
     parent: tracing
     identifier: profiling
     weight: 7
-  - name: "Proxy"
-    url: "tracing/profiling/proxy"
-    parent: "profiling"
-    identifier: "profiling_proxy"
+  - name: Proxy
+    url: tracing/profiling/proxy
+    parent: profiling
+    identifier: profiling_proxy
     weight: 701
-  - name: "Manual Instrumentation"
-    url: "tracing/manual_instrumentation/"
-    parent: "tracing"
-    identifier: "tracing_manual_instrumentation"
+  - name: Manual Instrumentation
+    url: tracing/manual_instrumentation/
+    parent: tracing
+    identifier: tracing_manual_instrumentation
     weight: 8
   - name: Java
     url: tracing/manual_instrumentation/java
@@ -1039,7 +1044,7 @@ main:
     identifier: log_collection_ruby
     weight: 110
   - name: Other Integrations
-    url: 'integrations/#cat-log-collection'
+    url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
     weight: 111
@@ -1123,7 +1128,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: Correlate Logs with Metrics
-    url: 'dashboards/timeboards/#graph-menu'
+    url: dashboards/timeboards/#graph-menu
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -1371,7 +1376,7 @@ main:
     identifier: dev_tools_metrics_powershell
     weight: 204
   - name: 'Submission - API '
-    url: 'api/v1/metrics/#submit-metrics'
+    url: api/v1/metrics/#submit-metrics
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_api
     weight: 205
@@ -1406,7 +1411,7 @@ main:
     identifier: dev_tools_events_mail
     weight: 303
   - name: API
-    url: 'api/v1/events/#post-an-event'
+    url: api/v1/events/#post-an-event
     parent: dev_tools_events
     identifier: dev_tools_events_api
     weight: 304
@@ -2054,6 +2059,9 @@ api_v1:
   - name: Create a test
     parent: Synthetics
     url: create-a-test
+  - name: Get a browser test configuration
+    parent: Synthetics
+    url: get-a-browser-test-configuration
   - name: Get the test's latest results summaries (browser)
     parent: Synthetics
     url: get-the-tests-latest-results-summaries-browser
@@ -2108,6 +2116,9 @@ api_v1:
   - name: Usage Metering
     url: /api/v1/usage-metering/
     identifier: Usage Metering
+  - name: Get hourly usage for analyzed logs
+    parent: Usage Metering
+    url: get-hourly-usage-for-analyzed-logs
   - name: Get hourly usage for Lambda
     parent: Usage Metering
     url: get-hourly-usage-for-lambda
@@ -2132,6 +2143,9 @@ api_v1:
   - name: Get hourly usage for RUM Sessions
     parent: Usage Metering
     url: get-hourly-usage-for-rum-sessions
+  - name: Get hourly usage for SNMP devices
+    parent: Usage Metering
+    url: get-hourly-usage-for-snmp-devices
   - name: Get usage across your multi-org account
     parent: Usage Metering
     url: get-usage-across-your-multi-org-account
