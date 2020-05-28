@@ -39,7 +39,7 @@ To enable Datadog APM, a [custom Istio installation][3] is required to set two e
 istioctl manifest apply --set values.global.proxy.tracer=datadog --set values.pilot.traceSampling=100.0
 ```
 
-Traces will be generated when the namespace for the pod has sidecar injection enabled. This is done by adding
+Traces are generated when the namespace for the pod has sidecar injection enabled. This is done by adding
 the `istio-injection=enabled` label.
 
 ```shell
@@ -47,7 +47,7 @@ kubectl label namespace example-ns istio-injection=enabled
 ```
 
 Traces are generated when Istio is able to determine the traffic is using an HTTP-based protocol.
-By default, it will try to automatically detect this. It can be manually configured by naming the ports in your
+By default, Istio tries to automatically detect this. It can be manually configured by naming the ports in your
 application's deployment and service. More information can be found in Istio's documentation for [Protocol Selection][4]
 
 By default, the service name used when creating traces is generated from the deployment name and namespace. This can be
@@ -64,12 +64,12 @@ The environment for traces can be set on a per-deployment basis using the `apm.d
 
 ### Running Agent as Deployment and Service
 
-If the Agents on your cluster are running as a Deployment and Service instead of the default DaemonSet, then an additional option is required, to specify the DNS address and port of the Agent.
+If the Agents on your cluster are running as a Deployment and Service instead of the default DaemonSet, then an additional option is required to specify the DNS address and port of the Agent.
 For a service named `datadog-agent` in the `default` namespace, that address would be `datadog-agent.default.svc.cluster.local:8126`.
 
 - `--set values.global.tracer.datadog.address=datadog-agent.default:8126`
 
-If Mutual TLS is enabled for the cluster, then the agent's deployment should disable sidecar injection, and add a traffic policy that disables TLS.
+If Mutual TLS is enabled for the cluster, then the Agent's deployment should disable sidecar injection, and you should add a traffic policy that disables TLS.
 
 This annotation is added to the Agent's Deployment template.
 ```
