@@ -106,7 +106,7 @@ Datadog’s integration processing Pipelines are available for the certain sourc
 
 To see the full list of integration Pipelines, refer to the [Integration Pipelines Reference][6] page.
 
-## Pipelines limitations
+## Processing limitations & guidelines
 
 To make sure the Log Management solution functions in an optimal way, we set the following technical limits and rules to your log events, as well as to some product features. These have been designed so that you may never reach them.
 
@@ -119,14 +119,13 @@ To make sure the Log Management solution functions in an optimal way, we set the
 
 Log events which do not comply with these limits might be transformed or truncated by the system-or simply not indexed if outside of the provided time range. However, Datadog always tries to do its best to preserve as much as possible to preserve provided user data.
 
-### Limits applied to provided features
+### Guidelines on processing configuration
 
-* The maximum number of facets is 100.
-* The maximum number of processing Pipelines on a platform is 100.
-* The maximum number of Processors per Pipeline is 20.
-* The maximum number of parsing rules within a grok Processor is 10. We reserve the right to disable underperforming parsing rules that might impact Datadog's service performance.
-
-[Contact support][7] if you reach one of these limits as Datadog might be able to provide you more.
+In order to have an experience of the platform with optimal performance and low ingestion latency, we recommend you to follow those guidelines:
+* Number of facets below 100.
+* Number of processing Pipelines on a platform below 100.
+* Number of Processors per Pipeline below 20.
+* Number of parsing rules within a grok Processor is 10. We reserve the right to disable underperforming parsing rules that might impact Datadog's service performance.
 
 ## Further Reading
 
