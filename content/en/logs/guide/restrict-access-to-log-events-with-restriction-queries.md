@@ -46,7 +46,7 @@ Roles can be created through Datadog, as shown in [the RBAC documentation][3].
 
 You can also use the API and the following steps to create a role.
 
-### 1. Create a role
+### Create a role
 
 Use the [Role creation API][4] to add a `team-frontend` and `team-backend` role:
 
@@ -155,7 +155,7 @@ To access logs within Datadog, the following permissions are critical:
 Users must have these three permissions activated to see both ingested and indexed logs. 
 Access is then restricted with a restriction query, as shown below.
 
-### 3. Grant permissions to the role
+### Grant permissions to the role
 
 Permissions are added one by one through the [Roles API][8]. 
 
