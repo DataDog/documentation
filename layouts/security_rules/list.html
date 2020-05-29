@@ -62,9 +62,9 @@
 
     filterRules = () => {
         const input = document.getElementById('keywords').value.toLowerCase();
-        window.history.pushState({}, '', `?q=${input}`);
+        window.history.replaceState({}, '', `?q=${input}`);
 
-        for (i = 0; i < group.length; i++) {
+        for (let i = 0; i < group.length; i++) {
             // Filtering individual rules
             const rules = Array.prototype.slice.call(document.querySelectorAll(`.js-group-${i} .js-page`));
             let count = 0;
@@ -88,12 +88,12 @@
         }
     };
 
+    document.getElementById("keywords").addEventListener('keyup', filterRules, false);
+
     if (keyword) {
         document.getElementById("keywords").value = keyword;
         filterRules();
     };
-
-    document.getElementById("keywords").addEventListener('keyup', filterRules, false);
 
     // Accordion js
     const ruleList = Array.prototype.slice.call(document.getElementsByClassName('rule-list'));
