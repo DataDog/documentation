@@ -19,7 +19,7 @@ further_reading:
 
 ## Automatic log injection
 
-Enable injection in the Java tracer's [configuration][1] through the environment variable `DD_LOGS_INJECTION=true` or the jvm startup argument `-Ddd.logs.injection=true`.
+Enable injection in the Java tracer's [configuration][1] through the environment variable `DD_LOGS_INJECTION=true` or the JVM startup argument `-Ddd.logs.injection=true`.
 If you haven't done so already, we recommend configuring the Java tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the smoothest
 experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][6] for more details).
 

@@ -82,7 +82,7 @@ Tracer settings can be configured as a parameter to the `init()` method or as en
 | version        | `DD_VERSION`            | `null`      | The version number of the application. Defaults to value of the version field in package.json.
 | tags           | `DD_TAGS`                    | `{}`        | Set global tags that should be applied to all spans and metrics. When passed as an environment variable, the format is `key:value, key:value`.                                                                                                                             |
 
-We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
+It is highly recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables.
 
 ### Instrumentation

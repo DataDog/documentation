@@ -38,7 +38,7 @@ If `DD_ENV` is exposed to your service's process, the tracer will use it automat
 
 You may also manually set `env` as a global tag for the tracer in code. See [assigning tags in APM][4] for more information.
 
-#### Setting the environment in the agent
+#### Setting the environment in the Agent
 
 The `env` tag can be set in your Agent configuration.
 **However, if `env` is already present in trace data then it will override any `env` set in the Agent.**

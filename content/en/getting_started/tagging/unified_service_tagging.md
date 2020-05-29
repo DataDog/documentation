@@ -99,7 +99,7 @@ spec:
 
 ##### APM Tracer / Statsd client
 
-[APM Tracer][2] and [statsd client][3] environment variables can be sourced from the same labels by using the [Kubernetes's downward API][4] in the format below:
+[APM Tracer][2] and [StatsD client][3] environment variables can be sourced from the same labels by using the [Kubernetes's downward API][4] in the format below:
 
 ```yaml
     containers:
@@ -126,9 +126,9 @@ spec:
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-To achieve a single point of configuration across all telemetry, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment. As long as the agent can access your container's [Docker socket][1], it will be able to detect the environment variables and map them to the standard tags.
+To achieve a single point of configuration across all telemetry, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment. As long as the Agent can access your container's [Docker socket][1], it will be able to detect the environment variables and map them to the standard tags.
 
-If your service has no need for the DD environment variables (e.g., 3rd party software like Redis, PostgreSQL, Nginx, and applications not traced by APM), you can instead use Docker labels:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM), you can instead use Docker labels:
 
 ```yaml
   LABEL com.datadoghq.tags.env="<ENV>"
@@ -183,7 +183,7 @@ You may elect export the environment variables in the command for your executabl
 
 Or you might use [Chef][12], [Ansible][13], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it will have access to those variables.
 
-#### Configure traces, logs, Statsd metrics
+#### Configure traces, logs, StatsD metrics
 
 {{< tabs >}}
 {{% tab "Traces" %}}
@@ -220,7 +220,7 @@ If you do not wish to use automatic log injection from the APM tracer, you also 
 [2]: /tracing/connect_logs_and_traces/java?tab=log4j2#manual-trace-id-injection
 {{% /tab %}}
 
-{{% tab "Statsd" %}}
+{{% tab "StatsD" %}}
 
 Tags are added in an append-only fashion for [custom statsd metrics][1]. For example, if you have two different values for env, the metrics will be tagged with both envs. There is no order in which one tag will override another of the same name.
 
