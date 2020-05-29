@@ -19,22 +19,20 @@ Pour envoyer tous ces logs à Datadog :
 * Connectez-vous à votre projet Heroku.
 * Configurez le drain HTTPS avec la commande suivante :
 
-{{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< site-region region="us" >}}
 
 ```text
 heroku drains:add 'https://http-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DD>?ddsource=heroku&service=<SERVICE>&host=<HOST>' -a <NOM_APPLICATION>
 ```
 
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```text
 heroku drains:add 'https://http-intake.logs.datadoghq.eu/v1/input/<CLÉ_API_DD>?ddsource=heroku&service=<SERVICE>&host=<HOST>' -a <NOM_APPLICATION>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 * Remplacez `<CLÉ_API_DD>` par votre [clé d'API Datadog][2].
 * Remplacez `<NOM_APPLICATION>` et `<SERVICE>`par le nom de votre application.
@@ -44,22 +42,20 @@ heroku drains:add 'https://http-intake.logs.datadoghq.eu/v1/input/<CLÉ_API_DD>?
 
 Ajoutez des attributs personnalisés aux logs depuis votre application en remplaçant l'URL dans le drain comme suit :
 
-{{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
+{{< site-region region="us" >}}
 
 ```text
 https://http-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DD>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALEUR>
 ```
 
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```text
 https://http-intake.logs.datadoghq.eu/v1/input/<CLÉ_API_DD>?ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALEUR>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 [1]: https://devcenter.heroku.com/articles/log-drains#https-drains
 [2]: https://app.datadoghq.com/account/settings#api
