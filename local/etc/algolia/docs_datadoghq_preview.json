@@ -2,7 +2,7 @@
     "index_name": "docsearch_docs_preview",
     "start_urls": [
         {
-            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/v1/",
+            "url": "https://docs-staging.datadoghq.com/andrew.ardito/manualinstrumentation(?P<localisation>.*?)/api/v1/",
             "selectors_key": "api_v1",
             "variables": {
                 "localisation": ["", "/fr", "/ja"]
@@ -11,7 +11,7 @@
             "page_rank": 0
         },
         {
-            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/v2/",
+            "url": "https://docs-staging.datadoghq.com/andrew.ardito/manualinstrumentation(?P<localisation>.*?)/api/v2/",
             "selectors_key": "api_v2",
             "variables": {
                 "localisation": ["", "/fr", "/ja"]
@@ -20,7 +20,7 @@
             "page_rank": 5
         },
         {
-            "url": "https://docs.datadoghq.com/(?P<section>.*?)/faq/",
+            "url": "https://docs-staging.datadoghq.com/andrew.ardito/manualinstrumentation/(?P<section>.*?)/faq/",
             "selectors_key": "faq",
             "variables": {
                 "section": [
@@ -41,7 +41,7 @@
             "page_rank": -100
         },
         {
-            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/guide/",
+            "url": "https://docs-staging.datadoghq.com/andrew.ardito/manualinstrumentation(?P<localisation>.*?)/(?P<section>.*?)/guide/",
             "selectors_key": "guide",
             "variables": {
                 "section": [
