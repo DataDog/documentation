@@ -140,9 +140,6 @@ var settings = TracerSettings.FromDefaultSources();
 settings.ServiceName = "MyService";
 settings.AgentUri = new Uri("http://localhost:8126/");
 
-// disable the AdoNet integration
-settings.Integrations["AdoNet"].Enabled = false;
-
 // create a new Tracer using these settings
 var tracer = new Tracer(settings);
 
@@ -164,7 +161,6 @@ For example:
 rem Set environment variables
 SET DD_TRACE_AGENT_URL=http://localhost:8126
 SET DD_SERVICE_NAME=MyService
-SET DD_ADONET_ENABLED=false
 
 rem Launch application
 example.exe
@@ -183,7 +179,6 @@ To configure the Tracer using an `app.config` or `web.config` file, use the `<ap
   <appSettings>
     <add key="DD_TRACE_AGENT_URL" value="http://localhost:8126"/>
     <add key="DD_SERVICE_NAME" value="MyService"/>
-    <add key="DD_ADONET_ENABLED" value="false"/>
   </appSettings>
 </configuration>
 ```
@@ -198,7 +193,6 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 {
     "DD_TRACE_AGENT_URL": "http://localhost:8126",
     "DD_SERVICE_NAME": "MyService",
-    "DD_ADONET_ENABLED": "false"
 }
 ```
 
