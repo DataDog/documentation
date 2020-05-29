@@ -4,13 +4,13 @@ kind: guide
 aliases:
   - /fr/logs/faq/integration-pipeline-reference
 further_reading:
-  - link: logs/processing/pipelines
+  - link: /logs/processing/pipelines/
     tag: Documentation
     text: Découvrir les pipelines de Datadog
-  - link: logs/logging_without_limits
+  - link: /logs/logging_without_limits/
     tag: Documentation
     text: Logging without limit
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
 ---
@@ -69,8 +69,8 @@ Les pipelines de processing d'intégration de Datadog sont disponibles pour la v
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/logs/processing/pipelines/#integration-pipelines
-[2]: /fr/logs/processing/attributes_naming_convention
-[3]: /fr/integrations/adobe_experience_manager
+[2]: /fr/logs/processing/attributes_naming_convention/
+[3]: /fr/integrations/adobe_experience_manager/
 [4]: /fr/integrations/adobe_experience_manager/#log-collection
 [5]: /fr/integrations/apache/#log-collection
 [6]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
@@ -85,7 +85,7 @@ Les pipelines de processing d'intégration de Datadog sont disponibles pour la v
 [15]: /fr/integrations/amazon_s3/#log-collection
 [16]: /fr/integrations/amazon_sns/#log-collection
 [17]: /fr/integrations/amazon_vpc/#log-collection
-[18]: /fr/logs/log_collection/csharp
+[18]: /fr/logs/log_collection/csharp/
 [19]: /fr/logs/log_collection/csharp/#configure-your-datadog-agent
 [20]: /fr/integrations/cassandra/#log-collection
 [21]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
@@ -93,13 +93,13 @@ Les pipelines de processing d'intégration de Datadog sont disponibles pour la v
 [23]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example
 [24]: /fr/integrations/couch/#log-collection
 [25]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/conf.yaml.example
-[26]: /fr/logs/log_collection/?tab=tailexistingfiles#custom-log-collection
-[27]: /fr/agent/docker/log
+[26]: /fr/logs/log_collection/#custom-log-collection
+[27]: /fr/agent/docker/log/
 [28]: /fr/agent/docker/log/?tab=environmentvariable#one-step-install-to-collect-all-the-container-logs
 [29]: /fr/agent/docker/log/?tab=hostinstallation#one-step-install-to-collect-all-the-container-logs
 [30]: /fr/integrations/elastic/#log-collection
 [31]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/conf.yaml.example
-[32]: /fr/logs/log_collection/go
+[32]: /fr/logs/log_collection/go/
 [33]: /fr/logs/log_collection/go/#configure-your-datadog-agent
 [34]: /fr/integrations/gunicorn/#log-collection
 [35]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/datadog_checks/gunicorn/data/conf.yaml.example
@@ -107,7 +107,7 @@ Les pipelines de processing d'intégration de Datadog sont disponibles pour la v
 [37]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example
 [38]: /fr/integrations/iis/#log-collection
 [39]: https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example
-[40]: /fr/logs/log_collection/java
+[40]: /fr/logs/log_collection/java/
 [41]: /fr/logs/log_collection/java/#configure-the-datadog-agent
 [42]: /fr/integrations/kafka/#log-collection
 [43]: https://github.com/DataDog/integrations-core/blob/master/kafka/datadog_checks/kafka/data/conf.yaml.example
@@ -119,13 +119,13 @@ Les pipelines de processing d'intégration de Datadog sont disponibles pour la v
 [49]: https://github.com/DataDog/integrations-core/blob/master/nginx/datadog_checks/nginx/data/conf.yaml.example
 [50]: /fr/integrations/postgres/#log-collection
 [51]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[52]: /fr/logs/log_collection/python
+[52]: /fr/logs/log_collection/python/
 [53]: /fr/logs/log_collection/python/#configure-the-datadog-agent
 [54]: /fr/integrations/rabbitmq/#log-collection
 [55]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/conf.yaml.example
 [56]: /fr/integrations/redisdb/#log-collection
 [57]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
-[58]: /fr/logs/log_collection/ruby
+[58]: /fr/logs/log_collection/ruby/
 [59]: /fr/logs/log_collection/ruby/#configure-your-datadog-agent
 [60]: /fr/integrations/stunnel/#log-collection
 [61]: /fr/integrations/stunnel/#configuration

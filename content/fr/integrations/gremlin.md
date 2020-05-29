@@ -34,8 +34,8 @@ Affichez, réexécutez et arrêtez des attaques Gremlin directement depuis Datad
 
 Intégrez Gremlin à vos [événements][1] Datadog pour fournir davantage de contexte relatif au testing de défaillance à vos workflows Datadog.
 
-* Superposez des événements d'attaque sur vos dashboards pour identifier précisément à quel point et à quel moment vos métriques sont perturbées par Gremlin.
-* Affichez, réexécutez et arrêtez des attaques Gremlin à partir de votre [flux d'événements][2] Datadog.
+- Superposez des événements d'attaque sur vos dashboards pour identifier précisément à quel point et à quel moment vos métriques sont perturbées par Gremlin.
+- Affichez, réexécutez et arrêtez des attaques Gremlin à partir de votre [flux d'événements][2] Datadog.
 
 ![snapshot][3]
 
@@ -45,7 +45,7 @@ Intégrez Gremlin à vos [événements][1] Datadog pour fournir davantage de con
 
 Pour activer cette intégration, vous devez transmettre votre clé d'API Datadog à Gremlin. Pour ce faire, accédez à la [page relative aux intégrations][4], cliquez sur le bouton **Add** sur la ligne correspondant à **Datadog**. Vous devez alors renseigner votre **clé d'API Datadog**. Une fois saisie, l'intégration s'initialise.
 
-* Clé d'API : <span class="hidden-api-key">${clé_api}</span>
+- API key : <span class="hidden-api-key">\${api_key}</span>
 
 Vous devriez commencer à voir des événements provenant de cette intégration dans votre [flux d'événements][2].
 
@@ -75,5 +75,5 @@ Consultez [notre blog][6] pour en savoir plus sur la surveillance d'infrastructu
 [2]: https://app.datadoghq.com/event/stream
 [3]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/gremlin/images/events-overlay.png
 [4]: https://app.gremlin.com/settings/integrations
-[5]: https://docs.datadoghq.com/fr/help
+[5]: https://docs.datadoghq.com/fr/help/
 [6]: https://www.datadoghq.com/blog

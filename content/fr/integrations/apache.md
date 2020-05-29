@@ -6,6 +6,11 @@ assets:
     spec: assets/configuration/spec.yaml
   dashboards: {}
   monitors: {}
+  saved_views:
+    4xx_errors: assets/saved_views/4xx_errors.json
+    5xx_errors: assets/saved_views/5xx_errors.json
+    bot_errors: assets/saved_views/bot_errors.json
+    status_code_overview: assets/saved_views/status_code_overview.json
   service_checks: assets/service_checks.json
 categories:
   - web
@@ -60,54 +65,50 @@ Le check Apache est fourni avec l'Agent. Pour commencer à recueillir vos logs e
 
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 
 1. Modifiez le fichier `apache.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos métriques Apache. Consultez le [fichier d'exemple apache.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
-    ```yaml
-      init_config:
+   ```yaml
+   init_config:
 
-      instances:
-
-          ## @param apache_status_url - string - required
-          ## Status url of your Apache server.
-          #
-        - apache_status_url: http://localhost/server-status?auto
-    ```
+   instances:
+     ## @param apache_status_url - string - required
+     ## Status url of your Apache server.
+     #
+     - apache_status_url: http://localhost/server-status?auto
+   ```
 
 2. [Redémarrez l'Agent][5].
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Ajoutez ce bloc de configuration à votre fichier `apache.d/conf.yaml` pour commencer à recueillir vos logs Apache :
 
-    ```yaml
-      logs:
-          - type: file
-            path: /var/log/apache2/access.log
-            source: apache
-            sourcecategory: http_web_access
-            service: apache
+   ```yaml
+   logs:
+     - type: file
+       path: /var/log/apache2/access.log
+       source: apache
+       service: apache
 
-          - type: file
-            path: /var/log/apache2/error.log
-            source: apache
-            sourcecategory: http_web_access
-            service: apache
-    ```
+     - type: file
+       path: /var/log/apache2/error.log
+       source: apache
+       service: apache
+   ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
-   Consultez le [fichier d'exemple apache.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple apache.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 
 3. [Redémarrez l'Agent][5].
 
@@ -117,20 +118,20 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de métriques
 
-| Paramètre            | Valeur                                                          |
-|----------------------|----------------------------------------------------------------|
-| `<NOM_INTÉGRATION>` | `apache`                                                       |
-| `<CONFIG_INIT>`      | vide ou `{}`                                                  |
+| Paramètre            | Valeur                                                         |
+| -------------------- | ------------------------------------------------------------- |
+| `<NOM_INTÉGRATION>` | `apache`                                                      |
+| `<CONFIG_INIT>`      | vide ou `{}`                                                 |
 | `<CONFIG_INSTANCE>`  | `{"apache_status_url": "http://%%host%%/server-status?auto"}` |
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][7].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][7].
 
 | Paramètre      | Valeur                                               |
-|----------------|-----------------------------------------------------|
+| -------------- | --------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "apache", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
@@ -138,44 +139,47 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [Lancez la sous-commande status de l'Agent][8] et cherchez `apache` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "apache" >}}
 
 
 ### Événements
+
 Le check Apache n'inclut aucun événement.
 
 ### Checks de service
 
 **apache.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'URL `apache_status_url` configurée. Si ce n'est pas le cas, renvoie OK.
+Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'URL `apache_status_url` configurée. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
 ### URL de statut Apache
+
 Si vous rencontrez des difficultés avec votre intégration Apache, il est fort probable que l'Agent ne soit pas en mesure d'accéder à votre URL de statut Apache. Tentez de faire un curl sur l'URL `apache_status_url` spécifiée dans [votre fichier `apache.d/conf.yaml`][4] (indiquez vos identifiants de connexion le cas échéant).
 
-* [Problèmes liés au certificat SSL Apache][10]
+- [Problèmes liés au certificat SSL Apache][10]
 
 ## Pour aller plus loin
+
 Documentation, liens et articles supplémentaires utiles :
 
-* [Déployer et configurer Datadog avec CloudFormation][11]
-* [Surveiller les performances du serveur Web Apache][12]
-* [Comment recueillir des métriques de performance Apache][13]
-* [Comment surveiller un serveur Web Apache avec Datadog][14]
-
+- [Déployer et configurer Datadog avec CloudFormation][11]
+- [Surveiller les performances du serveur Web Apache][12]
+- [Comment recueillir des métriques de performance Apache][13]
+- [Comment surveiller un serveur Web Apache avec Datadog][14]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/apache/images/apache_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[7]: https://docs.datadoghq.com/fr/agent/docker/log/
+[6]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[7]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/apache/metadata.csv
-[10]: https://docs.datadoghq.com/fr/integrations/faq/apache-ssl-certificate-issues
+[10]: https://docs.datadoghq.com/fr/integrations/faq/apache-ssl-certificate-issues/
 [11]: https://www.datadoghq.com/blog/deploying-datadog-with-cloudformation
 [12]: https://www.datadoghq.com/blog/monitoring-apache-web-server-performance
 [13]: https://www.datadoghq.com/blog/collect-apache-performance-metrics

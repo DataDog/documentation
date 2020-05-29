@@ -2,7 +2,7 @@
 title: "Envoi de métriques\_: check custom d'Agent"
 kind: documentation
 further_reading:
-  - link: developers/write_agent_check/
+  - link: /developers/write_agent_check/
     tag: Documentation
     text: Écrire un check custom d'Agent
 ---
@@ -229,8 +229,8 @@ Suivez les étapes ci-dessous pour créer un [check custom d'Agent][2] qui trans
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/write_agent_check
-[2]: /fr/developers/metrics/types
+[1]: /fr/developers/write_agent_check/
+[2]: /fr/developers/metrics/types/
 [3]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: /fr/agent/guide/agent-commands/#restart-the-agent
 [5]: /fr/agent/guide/agent-commands/#agent-information
