@@ -30,7 +30,7 @@ Here's a two-minute video walkthrough:
 1. After the feature is enabled, visit the [New Account Page][3].
 2. Enter the name of the child-organization you wish to create and click the **Create** button. **The child-organization name cannot exceed 32 characters.**
 
-The new child-organization will inherit the parent-organization's plan and be added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][5].
+The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][5].
 
 ### Content
 
