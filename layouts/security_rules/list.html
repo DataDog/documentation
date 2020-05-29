@@ -5,8 +5,6 @@
 
 <h1 id="pagetitle">{{ .Title }}</h1>
 
-test
-
 {{ .Content }}
 <form id="rules">
     <div class="form-group clearfix">
@@ -86,6 +84,8 @@ test
                 document.querySelector(`.js-group-${i}`).classList.remove('d-none');
                 document.querySelector(`.js-group-${i} > .rule-list`).classList.add('active');
             }
+
+            window.history.pushState(null, '', '?q=' + input);
         }
     };
 
