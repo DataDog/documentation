@@ -18,6 +18,7 @@ content/en/agent/basic_agent_usage/ansible.md
 content/en/agent/basic_agent_usage/chef.md
 content/en/agent/basic_agent_usage/heroku.md
 content/en/agent/basic_agent_usage/puppet.md
+content/en/agent/basic_agent_usage/saltstack.md
 
 # Tracing
 content/en/tracing/setup/ruby.md
