@@ -1,6 +1,8 @@
 ---
 title: Java Custom Instrumentation
 kind: documentation
+aliases:
+    - /tracing/opentracing/java
 description: 'Implement the OpenTracing standard with the Datadog Java APM tracer.'
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
