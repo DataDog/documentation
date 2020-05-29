@@ -125,7 +125,7 @@ To forward your logs to Datadog using this new VPC endpoint, configure `pvtlink.
 
 **Using the Lambda or a custom forwarder**:
 
-Add `DD_URL: pvtlink-api.logs.datadoghq.com` in your [Datadog Lambda function][4] environment variable to use the private link when forwarding AWS Service Logs to Datadog.
+Add `DD_URL: api-pvtlink.logs.datadoghq.com` in your [Datadog Lambda function][4] environment variable to use the private link when forwarding AWS Service Logs to Datadog.
 
 By default, the forwarder's API key is stored in Secrets Manager. The Secrets Manager endpoint needs to be added to the VPC. You can follow the instructions [here for adding AWS services to a VPC][5].
 
