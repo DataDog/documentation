@@ -904,7 +904,7 @@ main:
     identifier: tracing_opentracing
     weight: 9
   - name: Java
-    url: /tracing/manual_instrumentation/java/#open-tracing
+    url: tracing/manual_instrumentation/java
     parent: tracing_opentracing
     identifier: tracing_opentracing_java
     weight: 901
