@@ -231,6 +231,49 @@
         },
         "type": "object"
       },
+      "DashboardListAddItemsRequest": {
+        "description": "Request containing a list of dashboards to add.",
+        "properties": {
+          "dashboards": {
+            "description": "List of dashboards to add the dashboard list.",
+            "items": {
+              "description": "A dashboard within a list.",
+              "properties": {
+                "id": {
+                  "description": "ID of the dashboard.",
+                  "example": "q5j-nti-fv6",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "The type of the dashboard.",
+                  "enum": [
+                    "custom_timeboard",
+                    "custom_screenboard",
+                    "integration_screenboard",
+                    "integration_timeboard",
+                    "host_timeboard"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "CUSTOM_TIMEBOARD",
+                    "CUSTOM_SCREENBOARD",
+                    "INTEGRATION_SCREENBOARD",
+                    "INTEGRATION_TIMEBOARD",
+                    "HOST_TIMEBOARD"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "id"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
       "DashboardListAddItemsResponse": {
         "description": "Response containing a list of added dashboards.",
         "properties": {
@@ -239,70 +282,9 @@
             "items": {
               "description": "A dashboard within a list.",
               "properties": {
-                "author": {
-                  "description": "Creator of the object.",
-                  "properties": {
-                    "email": {
-                      "description": "Email of the creator.",
-                      "type": "string"
-                    },
-                    "handle": {
-                      "description": "Handle of the creator.",
-                      "type": "string"
-                    },
-                    "name": {
-                      "description": "Name of the creator.",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "created": {
-                  "description": "Date of creation of the dashboard.",
-                  "format": "date-time",
-                  "readOnly": true,
-                  "type": "string"
-                },
-                "icon": {
-                  "description": "URL to the icon of the dashboard.",
-                  "readOnly": true,
-                  "type": "string"
-                },
                 "id": {
                   "description": "ID of the dashboard.",
-                  "example": null,
-                  "type": "string"
-                },
-                "is_favorite": {
-                  "description": "Whether or not the dashboard is in the favorites.",
-                  "readOnly": true,
-                  "type": "boolean"
-                },
-                "is_read_only": {
-                  "description": "Whether or not the dashboard is read only.",
-                  "readOnly": true,
-                  "type": "boolean"
-                },
-                "is_shared": {
-                  "description": "Whether the dashboard is publicly shared or not.",
-                  "readOnly": true,
-                  "type": "boolean"
-                },
-                "modified": {
-                  "description": "Date of last edition of the dashboard.",
-                  "format": "date-time",
-                  "readOnly": true,
-                  "type": "string"
-                },
-                "popularity": {
-                  "description": "Popularity of the dashboard.",
-                  "format": "int32",
-                  "maximum": 5,
-                  "readOnly": true,
-                  "type": "integer"
-                },
-                "title": {
-                  "description": "Title of the dashboard.",
+                  "example": "q5j-nti-fv6",
                   "readOnly": true,
                   "type": "string"
                 },
@@ -323,11 +305,49 @@
                     "INTEGRATION_TIMEBOARD",
                     "HOST_TIMEBOARD"
                   ]
-                },
-                "url": {
-                  "description": "URL path to the dashboard.",
-                  "readOnly": true,
+                }
+              },
+              "required": [
+                "type",
+                "id"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "DashboardListDeleteItemsRequest": {
+        "description": "Request containing a list of dashboards to delete.",
+        "properties": {
+          "dashboards": {
+            "description": "List of dashboards to delete from the dashboard list.",
+            "items": {
+              "description": "A dashboard within a list.",
+              "properties": {
+                "id": {
+                  "description": "ID of the dashboard.",
+                  "example": "q5j-nti-fv6",
                   "type": "string"
+                },
+                "type": {
+                  "description": "The type of the dashboard.",
+                  "enum": [
+                    "custom_timeboard",
+                    "custom_screenboard",
+                    "integration_screenboard",
+                    "integration_timeboard",
+                    "host_timeboard"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "CUSTOM_TIMEBOARD",
+                    "CUSTOM_SCREENBOARD",
+                    "INTEGRATION_SCREENBOARD",
+                    "INTEGRATION_TIMEBOARD",
+                    "HOST_TIMEBOARD"
+                  ]
                 }
               },
               "required": [
@@ -349,70 +369,9 @@
             "items": {
               "description": "A dashboard within a list.",
               "properties": {
-                "author": {
-                  "description": "Creator of the object.",
-                  "properties": {
-                    "email": {
-                      "description": "Email of the creator.",
-                      "type": "string"
-                    },
-                    "handle": {
-                      "description": "Handle of the creator.",
-                      "type": "string"
-                    },
-                    "name": {
-                      "description": "Name of the creator.",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "created": {
-                  "description": "Date of creation of the dashboard.",
-                  "format": "date-time",
-                  "readOnly": true,
-                  "type": "string"
-                },
-                "icon": {
-                  "description": "URL to the icon of the dashboard.",
-                  "readOnly": true,
-                  "type": "string"
-                },
                 "id": {
                   "description": "ID of the dashboard.",
-                  "example": null,
-                  "type": "string"
-                },
-                "is_favorite": {
-                  "description": "Whether or not the dashboard is in the favorites.",
-                  "readOnly": true,
-                  "type": "boolean"
-                },
-                "is_read_only": {
-                  "description": "Whether or not the dashboard is read only.",
-                  "readOnly": true,
-                  "type": "boolean"
-                },
-                "is_shared": {
-                  "description": "Whether the dashboard is publicly shared or not.",
-                  "readOnly": true,
-                  "type": "boolean"
-                },
-                "modified": {
-                  "description": "Date of last edition of the dashboard.",
-                  "format": "date-time",
-                  "readOnly": true,
-                  "type": "string"
-                },
-                "popularity": {
-                  "description": "Popularity of the dashboard.",
-                  "format": "int32",
-                  "maximum": 5,
-                  "readOnly": true,
-                  "type": "integer"
-                },
-                "title": {
-                  "description": "Title of the dashboard.",
+                  "example": "q5j-nti-fv6",
                   "readOnly": true,
                   "type": "string"
                 },
@@ -433,11 +392,6 @@
                     "INTEGRATION_TIMEBOARD",
                     "HOST_TIMEBOARD"
                   ]
-                },
-                "url": {
-                  "description": "URL path to the dashboard.",
-                  "readOnly": true,
-                  "type": "string"
                 }
               },
               "required": [
@@ -485,7 +439,7 @@
           },
           "id": {
             "description": "ID of the dashboard.",
-            "example": null,
+            "example": "q5j-nti-fv6",
             "type": "string"
           },
           "is_favorite": {
@@ -551,6 +505,73 @@
         ],
         "type": "object"
       },
+      "DashboardListItemRequest": {
+        "description": "A dashboard within a list.",
+        "properties": {
+          "id": {
+            "description": "ID of the dashboard.",
+            "example": "q5j-nti-fv6",
+            "type": "string"
+          },
+          "type": {
+            "description": "The type of the dashboard.",
+            "enum": [
+              "custom_timeboard",
+              "custom_screenboard",
+              "integration_screenboard",
+              "integration_timeboard",
+              "host_timeboard"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "CUSTOM_TIMEBOARD",
+              "CUSTOM_SCREENBOARD",
+              "INTEGRATION_SCREENBOARD",
+              "INTEGRATION_TIMEBOARD",
+              "HOST_TIMEBOARD"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "id"
+        ],
+        "type": "object"
+      },
+      "DashboardListItemResponse": {
+        "description": "A dashboard within a list.",
+        "properties": {
+          "id": {
+            "description": "ID of the dashboard.",
+            "example": "q5j-nti-fv6",
+            "readOnly": true,
+            "type": "string"
+          },
+          "type": {
+            "description": "The type of the dashboard.",
+            "enum": [
+              "custom_timeboard",
+              "custom_screenboard",
+              "integration_screenboard",
+              "integration_timeboard",
+              "host_timeboard"
+            ],
+            "type": "string",
+            "x-enum-varnames": [
+              "CUSTOM_TIMEBOARD",
+              "CUSTOM_SCREENBOARD",
+              "INTEGRATION_SCREENBOARD",
+              "INTEGRATION_TIMEBOARD",
+              "HOST_TIMEBOARD"
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "id"
+        ],
+        "type": "object"
+      },
       "DashboardListItems": {
         "description": "Dashboards within a list.",
         "properties": {
@@ -591,7 +612,7 @@
                 },
                 "id": {
                   "description": "ID of the dashboard.",
-                  "example": null,
+                  "example": "q5j-nti-fv6",
                   "type": "string"
                 },
                 "is_favorite": {
@@ -669,6 +690,93 @@
         "required": [
           "dashboards"
         ],
+        "type": "object"
+      },
+      "DashboardListUpdateItemsRequest": {
+        "description": "Request containing the list of dashboards to update to.",
+        "properties": {
+          "dashboards": {
+            "description": "List of dashboards to update the dashboard list to.",
+            "items": {
+              "description": "A dashboard within a list.",
+              "properties": {
+                "id": {
+                  "description": "ID of the dashboard.",
+                  "example": "q5j-nti-fv6",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "The type of the dashboard.",
+                  "enum": [
+                    "custom_timeboard",
+                    "custom_screenboard",
+                    "integration_screenboard",
+                    "integration_timeboard",
+                    "host_timeboard"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "CUSTOM_TIMEBOARD",
+                    "CUSTOM_SCREENBOARD",
+                    "INTEGRATION_SCREENBOARD",
+                    "INTEGRATION_TIMEBOARD",
+                    "HOST_TIMEBOARD"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "id"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "DashboardListUpdateItemsResponse": {
+        "description": "Response containing a list of updated dashboards.",
+        "properties": {
+          "dashboards": {
+            "description": "List of dashboards in the dashboard list.",
+            "items": {
+              "description": "A dashboard within a list.",
+              "properties": {
+                "id": {
+                  "description": "ID of the dashboard.",
+                  "example": "q5j-nti-fv6",
+                  "readOnly": true,
+                  "type": "string"
+                },
+                "type": {
+                  "description": "The type of the dashboard.",
+                  "enum": [
+                    "custom_timeboard",
+                    "custom_screenboard",
+                    "integration_screenboard",
+                    "integration_timeboard",
+                    "host_timeboard"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "CUSTOM_TIMEBOARD",
+                    "CUSTOM_SCREENBOARD",
+                    "INTEGRATION_SCREENBOARD",
+                    "INTEGRATION_TIMEBOARD",
+                    "HOST_TIMEBOARD"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "id"
+              ],
+              "type": "object"
+            },
+            "type": "array"
+          }
+        },
         "type": "object"
       },
       "DashboardType": {
@@ -8699,79 +8807,16 @@
           "content": {
             "application/json": {
               "schema": {
-                "description": "Dashboards within a list.",
+                "description": "Request containing a list of dashboards to delete.",
                 "properties": {
                   "dashboards": {
-                    "description": "List of dashboards in the dashboard list.",
-                    "example": null,
+                    "description": "List of dashboards to delete from the dashboard list.",
                     "items": {
                       "description": "A dashboard within a list.",
                       "properties": {
-                        "author": {
-                          "description": "Creator of the object.",
-                          "properties": {
-                            "email": {
-                              "description": "Email of the creator.",
-                              "type": "string"
-                            },
-                            "handle": {
-                              "description": "Handle of the creator.",
-                              "type": "string"
-                            },
-                            "name": {
-                              "description": "Name of the creator.",
-                              "type": "string"
-                            }
-                          },
-                          "type": "object"
-                        },
-                        "created": {
-                          "description": "Date of creation of the dashboard.",
-                          "format": "date-time",
-                          "readOnly": true,
-                          "type": "string"
-                        },
-                        "icon": {
-                          "description": "URL to the icon of the dashboard.",
-                          "readOnly": true,
-                          "type": "string"
-                        },
                         "id": {
                           "description": "ID of the dashboard.",
-                          "example": null,
-                          "type": "string"
-                        },
-                        "is_favorite": {
-                          "description": "Whether or not the dashboard is in the favorites.",
-                          "readOnly": true,
-                          "type": "boolean"
-                        },
-                        "is_read_only": {
-                          "description": "Whether or not the dashboard is read only.",
-                          "readOnly": true,
-                          "type": "boolean"
-                        },
-                        "is_shared": {
-                          "description": "Whether the dashboard is publicly shared or not.",
-                          "readOnly": true,
-                          "type": "boolean"
-                        },
-                        "modified": {
-                          "description": "Date of last edition of the dashboard.",
-                          "format": "date-time",
-                          "readOnly": true,
-                          "type": "string"
-                        },
-                        "popularity": {
-                          "description": "Popularity of the dashboard.",
-                          "format": "int32",
-                          "maximum": 5,
-                          "readOnly": true,
-                          "type": "integer"
-                        },
-                        "title": {
-                          "description": "Title of the dashboard.",
-                          "readOnly": true,
+                          "example": "q5j-nti-fv6",
                           "type": "string"
                         },
                         "type": {
@@ -8791,11 +8836,6 @@
                             "INTEGRATION_TIMEBOARD",
                             "HOST_TIMEBOARD"
                           ]
-                        },
-                        "url": {
-                          "description": "URL path to the dashboard.",
-                          "readOnly": true,
-                          "type": "string"
                         }
                       },
                       "required": [
@@ -8805,17 +8845,8 @@
                       "type": "object"
                     },
                     "type": "array"
-                  },
-                  "total": {
-                    "description": "Number of dashboards in the dashboard list.",
-                    "format": "int64",
-                    "readOnly": true,
-                    "type": "integer"
                   }
                 },
-                "required": [
-                  "dashboards"
-                ],
                 "type": "object"
               }
             }
@@ -8835,70 +8866,9 @@
                       "items": {
                         "description": "A dashboard within a list.",
                         "properties": {
-                          "author": {
-                            "description": "Creator of the object.",
-                            "properties": {
-                              "email": {
-                                "description": "Email of the creator.",
-                                "type": "string"
-                              },
-                              "handle": {
-                                "description": "Handle of the creator.",
-                                "type": "string"
-                              },
-                              "name": {
-                                "description": "Name of the creator.",
-                                "type": "string"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "created": {
-                            "description": "Date of creation of the dashboard.",
-                            "format": "date-time",
-                            "readOnly": true,
-                            "type": "string"
-                          },
-                          "icon": {
-                            "description": "URL to the icon of the dashboard.",
-                            "readOnly": true,
-                            "type": "string"
-                          },
                           "id": {
                             "description": "ID of the dashboard.",
-                            "example": null,
-                            "type": "string"
-                          },
-                          "is_favorite": {
-                            "description": "Whether or not the dashboard is in the favorites.",
-                            "readOnly": true,
-                            "type": "boolean"
-                          },
-                          "is_read_only": {
-                            "description": "Whether or not the dashboard is read only.",
-                            "readOnly": true,
-                            "type": "boolean"
-                          },
-                          "is_shared": {
-                            "description": "Whether the dashboard is publicly shared or not.",
-                            "readOnly": true,
-                            "type": "boolean"
-                          },
-                          "modified": {
-                            "description": "Date of last edition of the dashboard.",
-                            "format": "date-time",
-                            "readOnly": true,
-                            "type": "string"
-                          },
-                          "popularity": {
-                            "description": "Popularity of the dashboard.",
-                            "format": "int32",
-                            "maximum": 5,
-                            "readOnly": true,
-                            "type": "integer"
-                          },
-                          "title": {
-                            "description": "Title of the dashboard.",
+                            "example": "q5j-nti-fv6",
                             "readOnly": true,
                             "type": "string"
                           },
@@ -8919,11 +8889,6 @@
                               "INTEGRATION_TIMEBOARD",
                               "HOST_TIMEBOARD"
                             ]
-                          },
-                          "url": {
-                            "description": "URL path to the dashboard.",
-                            "readOnly": true,
-                            "type": "string"
                           }
                         },
                         "required": [
@@ -9082,7 +9047,7 @@
                           },
                           "id": {
                             "description": "ID of the dashboard.",
-                            "example": null,
+                            "example": "q5j-nti-fv6",
                             "type": "string"
                           },
                           "is_favorite": {
@@ -9241,79 +9206,16 @@
           "content": {
             "application/json": {
               "schema": {
-                "description": "Dashboards within a list.",
+                "description": "Request containing a list of dashboards to add.",
                 "properties": {
                   "dashboards": {
-                    "description": "List of dashboards in the dashboard list.",
-                    "example": null,
+                    "description": "List of dashboards to add the dashboard list.",
                     "items": {
                       "description": "A dashboard within a list.",
                       "properties": {
-                        "author": {
-                          "description": "Creator of the object.",
-                          "properties": {
-                            "email": {
-                              "description": "Email of the creator.",
-                              "type": "string"
-                            },
-                            "handle": {
-                              "description": "Handle of the creator.",
-                              "type": "string"
-                            },
-                            "name": {
-                              "description": "Name of the creator.",
-                              "type": "string"
-                            }
-                          },
-                          "type": "object"
-                        },
-                        "created": {
-                          "description": "Date of creation of the dashboard.",
-                          "format": "date-time",
-                          "readOnly": true,
-                          "type": "string"
-                        },
-                        "icon": {
-                          "description": "URL to the icon of the dashboard.",
-                          "readOnly": true,
-                          "type": "string"
-                        },
                         "id": {
                           "description": "ID of the dashboard.",
-                          "example": null,
-                          "type": "string"
-                        },
-                        "is_favorite": {
-                          "description": "Whether or not the dashboard is in the favorites.",
-                          "readOnly": true,
-                          "type": "boolean"
-                        },
-                        "is_read_only": {
-                          "description": "Whether or not the dashboard is read only.",
-                          "readOnly": true,
-                          "type": "boolean"
-                        },
-                        "is_shared": {
-                          "description": "Whether the dashboard is publicly shared or not.",
-                          "readOnly": true,
-                          "type": "boolean"
-                        },
-                        "modified": {
-                          "description": "Date of last edition of the dashboard.",
-                          "format": "date-time",
-                          "readOnly": true,
-                          "type": "string"
-                        },
-                        "popularity": {
-                          "description": "Popularity of the dashboard.",
-                          "format": "int32",
-                          "maximum": 5,
-                          "readOnly": true,
-                          "type": "integer"
-                        },
-                        "title": {
-                          "description": "Title of the dashboard.",
-                          "readOnly": true,
+                          "example": "q5j-nti-fv6",
                           "type": "string"
                         },
                         "type": {
@@ -9333,11 +9235,6 @@
                             "INTEGRATION_TIMEBOARD",
                             "HOST_TIMEBOARD"
                           ]
-                        },
-                        "url": {
-                          "description": "URL path to the dashboard.",
-                          "readOnly": true,
-                          "type": "string"
                         }
                       },
                       "required": [
@@ -9347,17 +9244,8 @@
                       "type": "object"
                     },
                     "type": "array"
-                  },
-                  "total": {
-                    "description": "Number of dashboards in the dashboard list.",
-                    "format": "int64",
-                    "readOnly": true,
-                    "type": "integer"
                   }
                 },
-                "required": [
-                  "dashboards"
-                ],
                 "type": "object"
               }
             }
@@ -9377,70 +9265,9 @@
                       "items": {
                         "description": "A dashboard within a list.",
                         "properties": {
-                          "author": {
-                            "description": "Creator of the object.",
-                            "properties": {
-                              "email": {
-                                "description": "Email of the creator.",
-                                "type": "string"
-                              },
-                              "handle": {
-                                "description": "Handle of the creator.",
-                                "type": "string"
-                              },
-                              "name": {
-                                "description": "Name of the creator.",
-                                "type": "string"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "created": {
-                            "description": "Date of creation of the dashboard.",
-                            "format": "date-time",
-                            "readOnly": true,
-                            "type": "string"
-                          },
-                          "icon": {
-                            "description": "URL to the icon of the dashboard.",
-                            "readOnly": true,
-                            "type": "string"
-                          },
                           "id": {
                             "description": "ID of the dashboard.",
-                            "example": null,
-                            "type": "string"
-                          },
-                          "is_favorite": {
-                            "description": "Whether or not the dashboard is in the favorites.",
-                            "readOnly": true,
-                            "type": "boolean"
-                          },
-                          "is_read_only": {
-                            "description": "Whether or not the dashboard is read only.",
-                            "readOnly": true,
-                            "type": "boolean"
-                          },
-                          "is_shared": {
-                            "description": "Whether the dashboard is publicly shared or not.",
-                            "readOnly": true,
-                            "type": "boolean"
-                          },
-                          "modified": {
-                            "description": "Date of last edition of the dashboard.",
-                            "format": "date-time",
-                            "readOnly": true,
-                            "type": "string"
-                          },
-                          "popularity": {
-                            "description": "Popularity of the dashboard.",
-                            "format": "int32",
-                            "maximum": 5,
-                            "readOnly": true,
-                            "type": "integer"
-                          },
-                          "title": {
-                            "description": "Title of the dashboard.",
+                            "example": "q5j-nti-fv6",
                             "readOnly": true,
                             "type": "string"
                           },
@@ -9461,11 +9288,6 @@
                               "INTEGRATION_TIMEBOARD",
                               "HOST_TIMEBOARD"
                             ]
-                          },
-                          "url": {
-                            "description": "URL path to the dashboard.",
-                            "readOnly": true,
-                            "type": "string"
                           }
                         },
                         "required": [
@@ -9584,79 +9406,16 @@
           "content": {
             "application/json": {
               "schema": {
-                "description": "Dashboards within a list.",
+                "description": "Request containing the list of dashboards to update to.",
                 "properties": {
                   "dashboards": {
-                    "description": "List of dashboards in the dashboard list.",
-                    "example": null,
+                    "description": "List of dashboards to update the dashboard list to.",
                     "items": {
                       "description": "A dashboard within a list.",
                       "properties": {
-                        "author": {
-                          "description": "Creator of the object.",
-                          "properties": {
-                            "email": {
-                              "description": "Email of the creator.",
-                              "type": "string"
-                            },
-                            "handle": {
-                              "description": "Handle of the creator.",
-                              "type": "string"
-                            },
-                            "name": {
-                              "description": "Name of the creator.",
-                              "type": "string"
-                            }
-                          },
-                          "type": "object"
-                        },
-                        "created": {
-                          "description": "Date of creation of the dashboard.",
-                          "format": "date-time",
-                          "readOnly": true,
-                          "type": "string"
-                        },
-                        "icon": {
-                          "description": "URL to the icon of the dashboard.",
-                          "readOnly": true,
-                          "type": "string"
-                        },
                         "id": {
                           "description": "ID of the dashboard.",
-                          "example": null,
-                          "type": "string"
-                        },
-                        "is_favorite": {
-                          "description": "Whether or not the dashboard is in the favorites.",
-                          "readOnly": true,
-                          "type": "boolean"
-                        },
-                        "is_read_only": {
-                          "description": "Whether or not the dashboard is read only.",
-                          "readOnly": true,
-                          "type": "boolean"
-                        },
-                        "is_shared": {
-                          "description": "Whether the dashboard is publicly shared or not.",
-                          "readOnly": true,
-                          "type": "boolean"
-                        },
-                        "modified": {
-                          "description": "Date of last edition of the dashboard.",
-                          "format": "date-time",
-                          "readOnly": true,
-                          "type": "string"
-                        },
-                        "popularity": {
-                          "description": "Popularity of the dashboard.",
-                          "format": "int32",
-                          "maximum": 5,
-                          "readOnly": true,
-                          "type": "integer"
-                        },
-                        "title": {
-                          "description": "Title of the dashboard.",
-                          "readOnly": true,
+                          "example": "q5j-nti-fv6",
                           "type": "string"
                         },
                         "type": {
@@ -9676,11 +9435,6 @@
                             "INTEGRATION_TIMEBOARD",
                             "HOST_TIMEBOARD"
                           ]
-                        },
-                        "url": {
-                          "description": "URL path to the dashboard.",
-                          "readOnly": true,
-                          "type": "string"
                         }
                       },
                       "required": [
@@ -9690,17 +9444,8 @@
                       "type": "object"
                     },
                     "type": "array"
-                  },
-                  "total": {
-                    "description": "Number of dashboards in the dashboard list.",
-                    "format": "int64",
-                    "readOnly": true,
-                    "type": "integer"
                   }
                 },
-                "required": [
-                  "dashboards"
-                ],
                 "type": "object"
               }
             }
@@ -9713,78 +9458,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "description": "Dashboards within a list.",
+                  "description": "Response containing a list of updated dashboards.",
                   "properties": {
                     "dashboards": {
                       "description": "List of dashboards in the dashboard list.",
-                      "example": null,
                       "items": {
                         "description": "A dashboard within a list.",
                         "properties": {
-                          "author": {
-                            "description": "Creator of the object.",
-                            "properties": {
-                              "email": {
-                                "description": "Email of the creator.",
-                                "type": "string"
-                              },
-                              "handle": {
-                                "description": "Handle of the creator.",
-                                "type": "string"
-                              },
-                              "name": {
-                                "description": "Name of the creator.",
-                                "type": "string"
-                              }
-                            },
-                            "type": "object"
-                          },
-                          "created": {
-                            "description": "Date of creation of the dashboard.",
-                            "format": "date-time",
-                            "readOnly": true,
-                            "type": "string"
-                          },
-                          "icon": {
-                            "description": "URL to the icon of the dashboard.",
-                            "readOnly": true,
-                            "type": "string"
-                          },
                           "id": {
                             "description": "ID of the dashboard.",
-                            "example": null,
-                            "type": "string"
-                          },
-                          "is_favorite": {
-                            "description": "Whether or not the dashboard is in the favorites.",
-                            "readOnly": true,
-                            "type": "boolean"
-                          },
-                          "is_read_only": {
-                            "description": "Whether or not the dashboard is read only.",
-                            "readOnly": true,
-                            "type": "boolean"
-                          },
-                          "is_shared": {
-                            "description": "Whether the dashboard is publicly shared or not.",
-                            "readOnly": true,
-                            "type": "boolean"
-                          },
-                          "modified": {
-                            "description": "Date of last edition of the dashboard.",
-                            "format": "date-time",
-                            "readOnly": true,
-                            "type": "string"
-                          },
-                          "popularity": {
-                            "description": "Popularity of the dashboard.",
-                            "format": "int32",
-                            "maximum": 5,
-                            "readOnly": true,
-                            "type": "integer"
-                          },
-                          "title": {
-                            "description": "Title of the dashboard.",
+                            "example": "q5j-nti-fv6",
                             "readOnly": true,
                             "type": "string"
                           },
@@ -9805,11 +9488,6 @@
                               "INTEGRATION_TIMEBOARD",
                               "HOST_TIMEBOARD"
                             ]
-                          },
-                          "url": {
-                            "description": "URL path to the dashboard.",
-                            "readOnly": true,
-                            "type": "string"
                           }
                         },
                         "required": [
@@ -9819,17 +9497,8 @@
                         "type": "object"
                       },
                       "type": "array"
-                    },
-                    "total": {
-                      "description": "Number of dashboards in the dashboard list.",
-                      "format": "int64",
-                      "readOnly": true,
-                      "type": "integer"
                     }
                   },
-                  "required": [
-                    "dashboards"
-                  ],
                   "type": "object"
                 }
               }
@@ -22864,7 +22533,7 @@
       "name": "Azure Integration"
     },
     {
-      "description": "[Interact with your dashboard lists](https://docs.datadoghq.com/monitors/downtimes)\nthrough the API to make it easier to organize, find, and share all of your dashboards\nwith your team and organization.",
+      "description": "Interact with your dashboard lists through the API to make it easier to\norganize, find, and share all of your dashboards with your team and\norganization.",
       "name": "Dashboard Lists"
     },
     {
