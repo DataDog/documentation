@@ -109,7 +109,7 @@ Note: The span value is the number of data points. So `median_7()` uses the last
 
 | Function     | Description                      | Example                      |
 | :----        | :-------                         | :---------                   |
-| `median_9()` | Rolling median with a span of 9. | `median_3(<METRIC_NAME>{*})` |
+| `median_9()` | Rolling median with a span of 9. | `median_9(<METRIC_NAME>{*})` |
 
 Note: The span value is the number of data points. So `median_9()` uses the last 9 data points to calculate the median.
 
