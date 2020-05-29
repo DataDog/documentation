@@ -30,7 +30,7 @@ Here's a two-minute video walkthrough:
 1. After the feature is enabled, visit the [New Account Page][3].
 2. Enter the name of the child-organization you wish to create and click the **Create** button. **The child-organization name cannot exceed 32 characters.**
 
-The new child-organization is created as a 14-day free trial account. You can change the billing plan in the [Organization account settings][4]. If you want to add the child-organization's billing to your parent-organization's billing account, [contact your sales representative][5].
+The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][5].
 
 ### Content
 
