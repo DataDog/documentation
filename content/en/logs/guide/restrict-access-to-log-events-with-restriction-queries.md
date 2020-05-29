@@ -30,6 +30,7 @@ The following steps are covered for each team:
 * [Create the restriction query](#create-restriction-queries)
 * [Attach the restriction query to the role](#attach-queries-to-the-role)
 * [Attach roles to the users](#attach-role-to-the-user)
+* [Remove users from the default Datadog roles](#remove-default-roles)
 
 ## Prerequisites
 
@@ -261,7 +262,7 @@ Next, restrict access to the backend and frontend by [attaching the restriction 
 ## Attach queries to the role
 
 You have the role ID and query ID from the response of the creation call. Use them when attaching the query to the role.
-Note that the IDs are specific to this example; doing this on your account would give different role and query IDs.
+Note that the IDs are specific to this example; doing this on your account would give different role and query IDs. Check the [permission documentation][13] for more information about restrictions in Datadog.
 
 {{< tabs >}}
 {{% tab "Backend" %}}
@@ -387,3 +388,4 @@ Note that a user can belong to multiple roles.
 [10]: /api/v2/users/#list-all-users
 [11]: /api/v2/roles/#add-a-user-to-a-role
 [12]: /api/v2/roles/#remove-a-user-from-a-role
+[13]: /account_management/rbac/permissions?tab=datadogapplication#log-data-access
