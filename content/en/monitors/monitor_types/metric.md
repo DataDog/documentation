@@ -175,9 +175,11 @@ Notifications for missing data are useful if you expect a metric to always be re
 
 **Note**: It is recommended that you set the missing data window to at least two times the evaluation period.
 
-Alternatively, if you are monitoring a metric over an auto-scaling group of hosts that stop and start automatically, notifying for no data would produce a lot of notifications. For this case, you should not enable notifications for missing data.
+Alternatively, if you are monitoring a metric over an auto-scaling group of hosts that stop and start automatically, notifying for no data would produce a lot of notifications. For this case, you should not enable notifications for missing data. This option does not work if it is enabled at a time when data has not been reporting for a long period.
 
-This option does not work if it is enabled at a time when data has not been reporting for a long period. 
+##### Grouping
+
+For grouped alerts, if a tag has been absent for 24 hours the monitor starts to skip evaluations and the bar in the results page stays green. Likewise, when there is no data and groups start reporting again, then the green bar showing an `OK` status backfills to make it look like there was no interruption.
 
 #### Auto Resolve
 
