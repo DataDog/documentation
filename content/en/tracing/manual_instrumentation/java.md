@@ -12,56 +12,11 @@ further_reading:
 ---
 This page details common usecases for adding and customizing observability with Datadog APM.
 
-## Add and tag spans
+## Adding Tags
 
-If you aren’t using a [supported framework instrumentation][1], or you would like additional depth in your application’s [traces][2], you may want to add custom instrumentation to your code for complete flamegraphs, additional span tags for slicing and dicing within App Analytics by custom dimensions.
-
-If modifying application code is not possible, use the environment variable `dd.trace.methods`
-
-If you have existing `@Trace` or similar annotations, or want to quickly add them to complete any incomplete traces within Datadog, go to the Trace Annotations tab.
+Adding custom [span tags][11] to your [spans][12] is a great way to customize your observability within Datadog.  Your incoming traces will have these span tags applied, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user id.
 
 
-### Trace Annotations
-
-Add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`. If the Agent is not attached, this annotation has no effect on your application.
-
-Datadog’s Trace annotation is provided by the [dd-trace-api dependency][3].
-
-`@Trace` annotations have the default operation name `trace.annotation` and resource name of the traced method. These can be set as arguments of the `@Trace` annotation to better reflect what is being instrumented.  These are the only possible arguments that can be set for the `@Trace` annotation.
-
-```java
-import datadog.trace.api.Trace;
-
-public class SessionManager {
-
-  @Trace(operationName = "database.persist", resourceName = "SessionManager.saveSession")
-  public static void saveSession() {
-    // your method implementation here
-  }
-}
-```
-Note that through the `dd.trace.annotations` system property, other tracing method annotations can be recognized by Datadog as `@Trace`. You can find a list [here][4] if you have previously decorated your code.
-
-### DD Trace Methods
-
-Using the `dd.trace.methods` system property, you can get visibility into unsupported frameworks without changing application code.
-
-```text
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=prod -Ddd.service.name=db-app -Ddd.trace.methods=store.db.SessionManager[saveSession] -jar path/to/application.jar
-```
-
-The only difference between this approach and using `@Trace` annotations is the customization options for the operation and resource names.  As you can see above, with DD Trace Methods, `operationName` is `trace.annotation` and `resourceName` is `SessionManager.saveSession`.
-
-
-### Adding tags globally to all spans
-
-The `dd.tags` property allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, datacenters, or any other tags you would like to see within the Datadog UI.
-
-```text
-java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
-     -Ddd.tags=datacenter:njc,<TAG_KEY>:<TAG_VALUE> \
-     -jar <YOUR_APPLICATION_PATH>.jar
-```
 ### Add custom span tags
 
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
@@ -86,6 +41,19 @@ class ShoppingCartServlet extends AbstractHttpServlet {
   }
 }
 ```
+
+
+### Adding tags globally to all spans
+
+The `dd.tags` property allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, datacenters, or any other tags you would like to see within the Datadog UI.
+
+```text
+java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
+     -Ddd.tags=datacenter:njc,<TAG_KEY>:<TAG_VALUE> \
+     -jar <YOUR_APPLICATION_PATH>.jar
+```
+
+
 
 ### Set errors on a span
 
@@ -131,6 +99,86 @@ import java.io.StringWriter;
 
 Note: Any relevant error metadata explained in the Trace View docs can also be added. If the current span isn’t the root span, mark it as an error by using the dd-trace-api library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [setting tags & errors on a root span][9] section for more details.
 
+
+
+### Set tags & errors on a root span from a child span
+
+When an event or condition happens downstream, you may want that behavior or value reflected as a tag on the top level or root span.  This can be useful for count an error for measuring  performance, or setting a dynamic tag for observability.
+
+```java
+final Span span = tracer.buildSpan("<OPERATION_NAME>").start();
+try (final Scope scope = tracer.activateSpan(span)) {
+ 	// exception thrown here
+} catch (final Exception e) {
+ // Set error tag on span as normal
+ 	span.log(Collections.singletonMap(Fields.ERROR_OBJECT, e));
+
+ // Set error on root span
+ 	final MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
+ localRootSpan.setError(true);
+ 	localRootSpan.setTag("some.other.tag", "value");
+} finally {
+ // Close span in a finally block
+ 	span.finish();
+}
+```
+
+If you are not manually creating a span, you can still access the root span through the `GlobalTracer`:
+
+```java
+final Span span = GlobalTracer.get().activeSpan();
+if (span != null) {
+ MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
+ // do stuff with root span
+}
+```
+
+Note: Although, `MutableSpan` and `Span` share many similar methods, they are distinct types.  Notably, `MutableSpan` is Datadog specific and not part of the OpenTracing API.
+
+<br>
+
+## Adding Spans
+
+If you aren’t using a [supported framework instrumentation][1], or you would like additional depth in your application’s [traces][2], you may want to add custom instrumentation to your code for complete flamegraphs or to measure execution times for pieces of code.
+
+If modifying application code is not possible, use the environment variable `dd.trace.methods` to detail these methods.
+
+If you have existing `@Trace` or similar annotations, or prefer to use annotations to complete any incomplete traces within Datadog, use Trace Annotations.
+
+
+### DD Trace Methods
+
+Using the `dd.trace.methods` system property, you can get visibility into unsupported frameworks without changing application code.
+
+```text
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=prod -Ddd.service.name=db-app -Ddd.trace.methods=store.db.SessionManager[saveSession] -jar path/to/application.jar
+```
+
+The only difference between this approach and using `@Trace` annotations is the customization options for the operation and resource names.  With DD Trace Methods, `operationName` is `trace.annotation` and `resourceName` is `SessionManager.saveSession`.
+
+
+### Trace Annotations
+
+Add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`. If the Agent is not attached, this annotation has no effect on your application.
+
+Datadog’s Trace annotation is provided by the [dd-trace-api dependency][3].
+
+`@Trace` annotations have the default operation name `trace.annotation` and resource name of the traced method. These can be set as arguments of the `@Trace` annotation to better reflect what is being instrumented.  These are the only possible arguments that can be set for the `@Trace` annotation.
+
+```java
+import datadog.trace.api.Trace;
+
+public class SessionManager {
+
+  @Trace(operationName = "database.persist", resourceName = "SessionManager.saveSession")
+  public static void saveSession() {
+    // your method implementation here
+  }
+}
+```
+Note that through the `dd.trace.annotations` system property, other tracing method annotations can be recognized by Datadog as `@Trace`. You can find a list [here][4] if you have previously decorated your code.
+
+
 ### Manually creating a new span
 
 In addition to automatic instrumentation, the `@Trace` annotation, and `dd.trace.methods` configurations , you can customize your observability by programmatically creating spans around any block of code.  Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
@@ -163,39 +211,6 @@ span.finish();
 }
 ```
 
-### Set tags & errors on a root span from a child span
-
-We saw in the examples above how to set any number of custom tags on a span, as well as how to set an error on a span.  This section combines these actions to allow setting any dynamic tag or error status on the root span when the error occurs or value is available within the child span.
-
-```java
-final Span span = tracer.buildSpan("<OPERATION_NAME>").start();
-try (final Scope scope = tracer.activateSpan(span)) {
- 	// exception thrown here
-} catch (final Exception e) {
- // Set error tag on span as normal
- 	span.log(Collections.singletonMap(Fields.ERROR_OBJECT, e));
-
- // Set error on root span
- 	final MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
- localRootSpan.setError(true);
- 	localRootSpan.setTag("some.other.tag", "value");
-} finally {
- // Close span in a finally block
- 	span.finish();
-}
-```
-
-If you are not manually creating a span, you can still access the root span through the `GlobalTracer`:
-
-```java
-final Span span = GlobalTracer.get().activeSpan();
-if (span != null) {
- MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
- // do stuff with root span
-}
-```
-
-Note: Although, `MutableSpan` and `Span` share many similar methods, they are distinct types.  Notably, `MutableSpan` is Datadog specific and not part of the OpenTracing API.
 
 ### Extending Tracers
 
@@ -254,9 +269,12 @@ datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new FilteringIntercepto
 datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new PricingInterceptor());
 ```
 
+<br>
+
 ## Trace Client & Agent Configuration
 
 There are also additional custom configurations possible for both the tracing client and Datadog Agent that solve
+
 
 ### B3 Headers Extraction and Injection
 
@@ -295,9 +313,11 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 # ignore_resources: ["(GET|POST) /healthcheck"]
 ```
 
+<br>
+
 ## Open Tracing
 
-Datadog integrates seamlessly with the [OpenTracing API][7]. For instructions on how to add OpenTracing to your code, see below.
+Datadog integrates seamlessly with the [OpenTracing API][7].
 
 ### Setup
 
@@ -471,5 +491,7 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 [6]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/MutableSpan.java#L51
 [7]: https://github.com/opentracing/opentracing-java
 [8]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-ot/src/main/java/datadog/opentracing/DDTracer.java
-[9]: /tracing/manual_instrumentation/java/#Set-tags-&-errors-on-a-root-span-from-a-child-span
+[9]: /tracing/manual_instrumentation/java/#set-tags-errors-on-a-root-span-from-a-child-span
 [10]: https://github.com/openzipkin/b3-propagation
+[11]: /tracing/visualization/#span-tags
+[12]: /tracing/visualization/#spans
