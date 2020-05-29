@@ -24,7 +24,7 @@ Manual instrumentation allows programmatic creation of traces to send to Datadog
 
 Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM.
 
-If you’re already using OpenTracing [click here][3] for configuration instructions
+If you’re already using OpenTracing [click here][3] for configuration instructions.
 
 Select your language below to discover how to manually instrument your application:
 

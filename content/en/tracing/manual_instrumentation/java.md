@@ -12,11 +12,11 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
-This page details common usecases for adding and customizing observability with Datadog APM.
+This page details common use cases for adding and customizing observability with Datadog APM.
 
 ## Adding Tags
 
-Adding custom [span tags][11] to your [spans][12] is a great way to customize your observability within Datadog.  Your incoming traces will have these span tags applied, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user id.
+Add custom [span tags][11] to your [spans][12] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 
 ### Add custom span tags
@@ -75,7 +75,7 @@ import io.opentracing.log.Fields
     }
 ```
 
-Note: `Span.log()` is a generic OpenTracing mechanism for associating events to the current timestamp.  The Java Tracer only supports logging error events.
+**Note**: `Span.log()` is a generic OpenTracing mechanism for associating events to the current timestamp.  The Java Tracer only supports logging error events.
 Alternatively, you can set error tags directly on the span without `log()`:
 
 ```java
@@ -99,13 +99,13 @@ import java.io.StringWriter;
     }
 ```
 
-Note: Any relevant error metadata explained in the Trace View docs can also be added. If the current span isn’t the root span, mark it as an error by using the dd-trace-api library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [setting tags & errors on a root span][9] section for more details.
+**Note**: You can add any relevant error metadata listed in the [trace view docs][2]. If the current span isn’t the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [setting tags & errors on a root span][9] section for more details.
 
 
 
 ### Set tags & errors on a root span from a child span
 
-When an event or condition happens downstream, you may want that behavior or value reflected as a tag on the top level or root span.  This can be useful for count an error for measuring  performance, or setting a dynamic tag for observability.
+When an event or condition happens downstream, you may want that behavior or value reflected as a tag on the top level or root span. This can be useful to count an error or for measuring performance, or setting a dynamic tag for observability.
 
 ```java
 final Span span = tracer.buildSpan("<OPERATION_NAME>").start();
@@ -135,7 +135,7 @@ if (span != null) {
 }
 ```
 
-Note: Although, `MutableSpan` and `Span` share many similar methods, they are distinct types.  Notably, `MutableSpan` is Datadog specific and not part of the OpenTracing API.
+**Note**: Although `MutableSpan` and `Span` share many similar methods, they are distinct types. `MutableSpan` is Datadog specific and not part of the OpenTracing API.
 
 <br>
 
