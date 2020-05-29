@@ -124,7 +124,7 @@ Pour transmettre vos logs à Datadog à l'aide du nouvel endpoint de votre VPC, 
 
 **Avec le forwarder Lambda ou un custom forwarder** :
 
-Ajoutez `DD_URL: pvtlink-api.logs.datadoghq.com` à la variable d'environnement de votre [fonction Lambda Datadog][4] pour utiliser le PrivateLink lors de la transmission des logs des services AWS à Datadog.
+Ajoutez `DD_URL: api-pvtlink.logs.datadoghq.com` à la variable d'environnement de votre [fonction Lambda Datadog][4] pour utiliser le PrivateLink lors de la transmission des logs des services AWS à Datadog.
 
 
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
