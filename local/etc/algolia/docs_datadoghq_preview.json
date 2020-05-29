@@ -20,7 +20,7 @@
             "page_rank": 5
         },
         {
-            "url": "https://docs.datadoghq.com(?P<section>.*?)/faq/",
+            "url": "https://docs.datadoghq.com/(?P<section>.*?)/faq/",
             "selectors_key": "faq",
             "variables": {
                 "section": [
