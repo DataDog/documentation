@@ -275,7 +275,7 @@ datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new PricingInterceptor(
 
 ## Trace Client & Agent Configuration
 
-There are also additional custom configurations possible for both the tracing client and Datadog Agent that solve
+There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
 
 
 ### B3 Headers Extraction and Injection
