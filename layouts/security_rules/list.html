@@ -5,8 +5,9 @@
 
 <h1 id="pagetitle">{{ .Title }}</h1>
 
-{{ .Content }}
+test
 
+{{ .Content }}
 <form id="rules">
     <div class="form-group clearfix">
         <input type="input" class="form-control rule-search mb-3" id="keywords" placeholder="Search here" aria-label="keywords" />
@@ -54,12 +55,14 @@
 
 <script type="text/javascript">
     const group = Array.prototype.slice.call(document.getElementsByClassName('js-group'));
+    const urlParams = new URLSearchParams(window.location.search);
+    const keyword = urlParams.get('q');
 
     document.getElementById("rules").addEventListener("submit", function (event) {
-        event.preventDefault()
+        event.preventDefault();
     });
 
-    document.getElementById("keywords").addEventListener("keyup", function (event) {
+    filterRules = () => {
         const input = document.getElementById('keywords').value.toLowerCase();
 
         for (i = 0; i < group.length; i++) {
@@ -84,7 +87,14 @@
                 document.querySelector(`.js-group-${i} > .rule-list`).classList.add('active');
             }
         }
-    });
+    };
+
+    if (keyword) {
+        document.getElementById("keywords").value = keyword;
+        filterRules();
+    };
+
+    document.getElementById("keywords").addEventListener('keyup', filterRules, false);
 
     // Accordion js
     const ruleList = Array.prototype.slice.call(document.getElementsByClassName('rule-list'));
