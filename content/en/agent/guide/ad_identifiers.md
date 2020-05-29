@@ -50,7 +50,7 @@ When using short image names as Autodiscovery container identifiers, **the Agent
 
 ## Adding tags from standard labels
 
-Even if autodiscovery configuration is defined within a custom configuration file, the standard labels for tagging `env`, `service`, and `version` can be used in conjunction.
+Even if Autodiscovery configuration is defined within a custom configuration file, the standard labels for tagging `env`, `service`, and `version` can be used in conjunction.
 
 See [Unified Service Tagging][1] for more information on how to configure these labels on your containers.
 
