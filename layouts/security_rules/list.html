@@ -62,6 +62,7 @@
 
     filterRules = () => {
         const input = document.getElementById('keywords').value.toLowerCase();
+        window.history.pushState({}, '', `?q=${input}`);
 
         for (i = 0; i < group.length; i++) {
             // Filtering individual rules
@@ -84,8 +85,6 @@
                 document.querySelector(`.js-group-${i}`).classList.remove('d-none');
                 document.querySelector(`.js-group-${i} > .rule-list`).classList.add('active');
             }
-
-            window.history.pushState(null, '', '?q=' + input);
         }
     };
 
