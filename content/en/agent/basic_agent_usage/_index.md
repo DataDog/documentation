@@ -312,64 +312,27 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuration management tools
-
-Manage the Datadog Agent and [Integrations][6] using configuration management tools:
-
-{{< tabs >}}
-{{% tab "Chef Cookbook" %}}
-
-* [Chef GitHub project][1]
-* [Installing Datadog Agent with Chef][2]
-
-[1]: https://github.com/DataDog/chef-datadog
-[2]: https://app.datadoghq.com/account/settings#integrations/chef
-{{% /tab %}}
-{{% tab "Puppet" %}}
-
-* [Puppet GitHub project][1]
-* [Installing Datadog Agent with Puppet][2]
-
-[1]: https://github.com/DataDog/puppet-datadog-agent
-[2]: https://app.datadoghq.com/account/settings#integrations/puppet
-{{% /tab %}}
-{{% tab "Ansible" %}}
-
-* [Ansible GitHub project][1]
-* [Installing Datadog Agent with Ansible][2]
-
-[1]: https://github.com/DataDog/ansible-datadog
-[2]: https://app.datadoghq.com/account/settings#agent/ansible
-{{% /tab %}}
-{{% tab "SaltStack" %}}
-
-* [Installing Datadog Agent with Saltstack][1]
-
-[1]: https://github.com/DataDog/datadog-formula
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Getting further with the Datadog Agent
 
 ### Update the Agent
 
-To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][7].
+To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][6].
 
-Note: If you want to manually update one specific Agent integration refer to the [Integration Management guide][8].
+Note: If you want to manually update one specific Agent integration refer to the [Integration Management guide][7].
 
 ### Configuration files
 
-[See the dedicated documentation for Agent configuration files][9].
+[See the dedicated documentation for Agent configuration files][8].
 
 ### Datadog site
 
-To send your Agent data to the [Datadog EU site][10], edit your [Agent main configuration file][11] `datadog.yaml` and set the `site` parameter to:
+To send your Agent data to the [Datadog EU site][9], edit your [Agent main configuration file][10] `datadog.yaml` and set the `site` parameter to:
 
 `site: datadoghq.eu`
 
 ### Log location
 
-[See the dedicated documentation for Agent log files][12]
+[See the dedicated documentation for Agent log files][11]
 
 ## Further Reading
 
@@ -380,10 +343,9 @@ To send your Agent data to the [Datadog EU site][10], edit your [Agent main conf
 [3]: /agent/guide/agent-commands/#start-the-agent
 [4]: /agent/guide/agent-commands/#service-status
 [5]: /agent/guide/agent-commands/#stop-the-agent
-[6]: /integrations/
-[7]: https://app.datadoghq.com/account/settings#agent
-[8]: /agent/guide/integration-management/
-[9]: /agent/guide/agent-configuration-files/
-[10]: https://app.datadoghq.eu
-[11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[12]: /agent/guide/agent-log-files/
+[6]: https://app.datadoghq.com/account/settings#agent
+[7]: /agent/guide/integration-management/
+[8]: /agent/guide/agent-configuration-files/
+[9]: https://app.datadoghq.eu
+[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/guide/agent-log-files/
