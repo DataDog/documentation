@@ -55,7 +55,7 @@ The only difference between this approach and using `@Trace` annotations is the 
 
 ### Adding tags globally to all spans
 
-Similar to the `dd.trace.methods` system property, the `dd.tags` property allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, datacenters, or any other tags you would like to see within the Datadog UI.
+The `dd.tags` property allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, datacenters, or any other tags you would like to see within the Datadog UI.
 
 ```text
 java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
@@ -63,6 +63,8 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
      -jar <YOUR_APPLICATION_PATH>.jar
 ```
 ### Add custom span tags
+
+Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
 ```java
 import io.opentracing.Tracer;
@@ -131,7 +133,7 @@ Note: Any relevant error metadata explained in the Trace View docs can also be a
 
 ### Manually creating a new span
 
-In addition to automatic instrumentation, the `@Trace` annotation, and `dd.trace.methods` config, you can customize your observability by programmatically creating spans around any block of code.  Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
+In addition to automatic instrumentation, the `@Trace` annotation, and `dd.trace.methods` configurations , you can customize your observability by programmatically creating spans around any block of code.  Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
 
 ```java
 import datadog.trace.api.DDTags;
