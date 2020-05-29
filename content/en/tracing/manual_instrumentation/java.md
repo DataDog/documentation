@@ -305,6 +305,8 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 
 The Agent can be configured to exclude a specific Resource from Traces sent by the Agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out Traces based on their Resource name.
 
+If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. To learn more, [click here][13].
+
 This can be useful for excluding any Health Checks or otherwise simulated traffic from the calculation of metrics for your services.
 ```text
   ## @param ignore_resources - list of strings - optional
@@ -312,6 +314,8 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 ## all entries must be surrounded by double quotes and separated by commas.
 # ignore_resources: ["(GET|POST) /healthcheck"]
 ```
+
+
 
 <br>
 
@@ -495,3 +499,4 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 [10]: https://github.com/openzipkin/b3-propagation
 [11]: /tracing/visualization/#span-tags
 [12]: /tracing/visualization/#spans
+[13]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
