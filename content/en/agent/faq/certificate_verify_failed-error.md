@@ -32,7 +32,8 @@ rm /opt/datadog-agent/agent/datadog-cert.pem && service datadog-agent restart
 ```
 
 On Windows:
-On Windows using PowerShell, take the following actions:
+
+Using PowerShell, take the following actions:
 ```shell
 rm "C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem"
 net stop /y datadogagent ; net start /y datadogagent
