@@ -48,7 +48,7 @@ Once removed, simply restart the Datadog Service from the Windows Service Manage
 
 ### Fixing by upgrading the Agent                                                                   
 
-Upgrade to Agent 5.32.7 (when released).
+Upgrade to Agent 5.32.7.
 
 Upgrade to [Agent 7][2].
 
