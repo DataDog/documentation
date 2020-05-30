@@ -23,7 +23,7 @@ US Datacenter: `python3 find_agents_with_connectivity_problems.py --api-key API_
 EU Datacenter: `python3 find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site eu`  
 3. Find the CSV output in `hosts_agents.csv`.
 
-Get the API and APP key [here][4] (or [here](https://app.datadoghq.eu/account/settings#api) for EU site).
+Get the API and APP key [here][4] (`.eu` for EU site).
 
 ### Fixing without upgrading the Agent
 
