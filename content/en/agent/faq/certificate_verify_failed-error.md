@@ -43,7 +43,7 @@ net stop /y datadogagent ; net start /y datadogagent
 ```
 Or through the Windows GUI:
 
-Delete "datadog-cert.pem", you can locate this in: C:\Program Files (x86)\Datadog\Datadog Agent\files\ 
+Delete `datadog-cert.pem`. You can locate this in: `C:\Program Files (x86)\Datadog\Datadog Agent\files\`. 
 Once removed, simply restart the Datadog Service from the Windows Service Manager.
 
 ### Fixing by upgrading the Agent                                                                   
