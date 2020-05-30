@@ -8,7 +8,8 @@ kind: faq
 On Saturday May 30th, 2020, at 10:48 UTC, an SSL root certificate used to cross-sign some of the Datadog certificates expired, and caused some of your agents to lose connectivity with Datadog endpoints. Because this root certificate is embedded in certain agents versions, you will need to take action to restore connectivity.
 
 ### What versions of the agent are affected?
-Agent versions spanning 3.6.x to 5.32.6 embed the expired certificate and are affected
+Agent versions spanning 3.6.x to 5.32.6 embed the expired certificate and are affected.
+
 Agent versions 6.x and 7.x are fine and don’t need to be updated.
 
 ### How can I find a list of hosts running affected agent versions?
