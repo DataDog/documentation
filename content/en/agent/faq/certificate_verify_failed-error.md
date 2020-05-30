@@ -18,9 +18,9 @@ Agent versions 6.x and 7.x are fine and don’t need to be updated.
 We have published a [python script][1] that queries your Datadog account for hosts running impacted agent versions. It finds hosts that run Datadog Agent with version less than 5.32.7, and writes their hostnames to a file ordered by version.
 
 1. Down the [python script][1].
-2. Run it in your local terminal or shell.
-US Datacenter: `python3 find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site us`
-EU Datacenter: `python3 find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site eu`
+2. Run it in your local terminal or shell.  
+US Datacenter: `python3 find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site us`  
+EU Datacenter: `python3 find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site eu`  
 3. Find the CSV output in `hosts_agents.csv`.
 
 Get the API and APP key [here][4] (or [here][5] for EU site).
