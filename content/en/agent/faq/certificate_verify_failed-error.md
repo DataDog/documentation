@@ -48,7 +48,12 @@ Once removed, simply restart the Datadog Service from the Windows Service Manage
 
 ### Fixing by upgrading the Agent                                                                   
 
-Upgrade to [Agent 5.32.7][6].
+Upgrade to Agent 5.32.7.
+
+Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`  
+Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`  
+Windows: Download the Datadog [Agent installer][7]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`  
+More platforms and configuration management options detailed [here][8].
 
 Upgrade to [Agent 7][2].
 
@@ -70,4 +75,5 @@ Yes. The certificate is just a preset for the client to use and is not necessary
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://app.datadoghq.eu/account/settings#api
 [6]: https://github.com/DataDog/dd-agent/releases/tag/5.32.7
-
+[7]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
+[8]: https://app.datadoghq.com/account/settings?agent_version=5#agent
