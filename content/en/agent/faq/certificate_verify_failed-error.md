@@ -56,9 +56,9 @@ Upgrade to [Agent 6][3].
 
 **NOTE:** See Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.
 
-### Should I update my agent even if I deleted the certificate?
+### Should I upgrade my Agent even if I deleted the certificate?
 
-We recommend keeping up to date and updating to the latest version of the agent. Deployments set to auto-update will do so with 5.32.7.
+We recommend keeping up to date and updating to the latest version of the Agent. Deployments set to auto-update will do so with 5.32.7.
 
 ### Am I still encrypting traffic with SSL even if I delete the certificate?
 
