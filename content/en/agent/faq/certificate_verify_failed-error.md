@@ -15,7 +15,7 @@ Agent versions 6.x and 7.x are fine and don’t need to be updated.
 
 ### How can I find a list of hosts running affected agent versions?
 
-We have published a [python script][1] that queries your Datadog account for hosts running impacted agent versions. It finds hosts that run Datadog Agent with version less than 5.32.7, and writes their hostnames to a JSON-formatted file ordered by version.
+We have published a [python script][1] that queries your Datadog account for hosts running impacted agent versions. It finds hosts that run Datadog Agent with version less than 5.32.7, and writes their hostnames to a file ordered by version.
 
 1. Down the [python script][1].
 2. Run it in your local terminal or shell.
@@ -48,9 +48,12 @@ Once removed, simply restart the Datadog Service from the Windows Service Manage
 
 ### Fixing by upgrading the agent                                                                   
                                                                                                     
-Upgrade to [Agent 7][2].                                                                            
-                                                                                                    
-Upgrade to [Agent 6][3].                                                                            
+Upgrade to [Agent 7][2].
+
+Upgrade to [Agent 6][3].
+
+**NOTE:** See Agent CHANGELOG for backward incompatible changes.
+
 
 [1]: https://static.datadoghq.com/find_agents_with_connectivity_problems.py
 [2]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
