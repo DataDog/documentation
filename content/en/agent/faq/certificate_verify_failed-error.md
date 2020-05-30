@@ -17,7 +17,7 @@ Agent versions 6.x and 7.x are fine and don’t need to be updated.
 
 We have published a [python script][1] that queries your Datadog account for hosts running impacted agent versions. It finds hosts that run Datadog Agent with version less than 5.32.7, and writes their hostnames to a file ordered by version.
 
-1. Down the [python script][1].
+1. Download the [python script][1].
 2. Run it in your local terminal or shell.  
 US Datacenter: `python3 find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site us`  
 EU Datacenter: `python3 find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site eu`  
@@ -31,7 +31,7 @@ We’re actively working on a new version of agent 5 but if you’d like to addr
 
 On Linux:
 ```shell
-rm /opt/datadog-agent/agent/datadog-cert.pem && service datadog-agent restart
+sudo rm /opt/datadog-agent/agent/datadog-cert.pem && sudo service datadog-agent restart
 ```
 
 On Windows:
@@ -48,7 +48,7 @@ Once removed, simply restart the Datadog Service from the Windows Service Manage
 
 ### Fixing by upgrading the Agent                                                                   
 
-Upgrade to Agent 5.32.7.
+Upgrade to [Agent 5.32.7][6].
 
 Upgrade to [Agent 7][2].
 
@@ -69,4 +69,5 @@ Yes. The certificate is just a preset for the client to use and is not necessary
 [3]: /agent/versions/upgrade_to_agent_v6/?tab=linux
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://app.datadoghq.eu/account/settings#api
+[6]: https://github.com/DataDog/dd-agent/releases/tag/5.32.7
 
