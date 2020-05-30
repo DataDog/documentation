@@ -37,10 +37,8 @@ rm "C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem"
 net stop /y datadogagent ; net start /y datadogagent
 ```
 Or through the Windows GUI:
-```shell
 Delete "datadog-cert.pem", you can locate this in: C:\Program Files (x86)\Datadog\Datadog Agent\files\ 
 Once removed, simply restart the Datadog Service from the Windows Service Manager.
-```
 
 [1]: https://static.datadoghq.com/find_agents_with_connectivity_problems.py
 [2]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
