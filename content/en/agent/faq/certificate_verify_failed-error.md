@@ -52,7 +52,7 @@ Upgrade to Agent 5.32.7.
 
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`  
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`  
-Windows: Download the Datadog [Agent installer][7]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`  
+Windows (from versions > 5.12.0): Download the Datadog [Agent installer][7]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`  
 More platforms and configuration management options detailed [here][8].
 
 Upgrade to [Agent 7][2].
