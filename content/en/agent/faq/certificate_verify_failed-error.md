@@ -56,6 +56,13 @@ Upgrade to [Agent 6][3].
 
 **NOTE:** See Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.
 
+### Should I update my agent even if I deleted the certificate?
+
+We recommend keeping up to date and updating to the latest version of the agent. Deployments set to auto-update will do so with 5.32.7.
+
+### Am I still encrypting traffic with SSL even if I delete the certificate?
+
+Yes. The certificate is just a preset for the client to use and is not necessary to connect via SSL. Datadog agent endpoints only accept SSL traffic.
 
 [1]: https://static.datadoghq.com/find_agents_with_connectivity_problems.py
 [2]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
