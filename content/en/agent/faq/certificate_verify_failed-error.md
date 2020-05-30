@@ -46,13 +46,15 @@ Or through the Windows GUI:
 Delete "datadog-cert.pem", you can locate this in: C:\Program Files (x86)\Datadog\Datadog Agent\files\ 
 Once removed, simply restart the Datadog Service from the Windows Service Manager.
 
-### Fixing by upgrading the agent                                                                   
-                                                                                                    
+### Fixing by upgrading the Agent                                                                   
+
+Upgrade to Agent 5.32.7 (when released).
+
 Upgrade to [Agent 7][2].
 
 Upgrade to [Agent 6][3].
 
-**NOTE:** See Agent CHANGELOG for backward incompatible changes.
+**NOTE:** See Agent CHANGELOG for backward incompatible changes for Agent 6/7.
 
 
 [1]: https://static.datadoghq.com/find_agents_with_connectivity_problems.py
