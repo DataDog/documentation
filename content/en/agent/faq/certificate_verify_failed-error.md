@@ -54,7 +54,7 @@ Upgrade to [Agent 7][2].
 
 Upgrade to [Agent 6][3].
 
-**NOTE:** See Agent CHANGELOG for backward incompatible changes for Agent 6/7.
+**NOTE:** See Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.
 
 
 [1]: https://static.datadoghq.com/find_agents_with_connectivity_problems.py
