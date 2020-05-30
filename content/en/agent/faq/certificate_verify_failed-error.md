@@ -25,7 +25,7 @@ EU Datacenter: `python3 find_agents_with_connectivity_problems.py --api-key API_
 
 Get the API and APP key [here][4] (or [here](https://app.datadoghq.eu/account/settings#api) for EU site).
 
-### Fixing without updating the agent
+### Fixing without upgrading the agent
 
 We’re actively working on a new version of agent 5 but if you’d like to address this without an update, the following is the quickest path to resolution.
 
