@@ -69,3 +69,4 @@ Yes. The certificate is just a preset for the client to use and is not necessary
 [3]: /agent/versions/upgrade_to_agent_v6/?tab=linux
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://app.datadoghq.eu/account/settings#api
+
