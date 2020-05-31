@@ -18,23 +18,22 @@ Agent versions 6.x and 7.x are fine and don’t need to be updated.
 We have published a [python script][1] that queries your Datadog account for hosts running impacted agent versions. It finds hosts that run Datadog Agent with version less than 5.32.7, and writes their hostnames to a file ordered by version.
 
 1. Download the [python script][1].
-2. Run it in your local terminal or shell.  
-US Datacenter: `python3 find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site us`  
-EU Datacenter: `python3 find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site eu`  
+2. Run it in your local terminal or shell. The script works with Python 2 and 3.
+Datadog US: `python find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site us`  
+Datadog EU: `python find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site eu`  
 3. Find the CSV output in `hosts_agents.csv`.
 
 Get the API and APP key [here][4] (`.eu` for EU site).
 
 ### Fixing without upgrading the Agent
 
-We’re actively working on a new version of agent 5 but if you’d like to address this without an update, the following is the quickest path to resolution.
+*Linux*
 
-On Linux:
 ```shell
 sudo rm /opt/datadog-agent/agent/datadog-cert.pem && sudo service datadog-agent restart
 ```
 
-On Windows:
+*Windows CLI*
 
 Using PowerShell, take the following actions:
 
@@ -50,26 +49,32 @@ rm "C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
-Or through the Windows GUI:
+*Windows GUI*
 
 Delete `datadog-cert.pem`. You can locate this in: `C:\Program Files\Datadog\Datadog Agent\files\`. 
 (For Agent versions <= 5.10, the location is `C:\Program Files(x86)\Datadog\Datadog Agent\Files\`.)
 Once removed, simply restart the Datadog Service from the Windows Service Manager.
 
+*Verifying with the script*
+
+You can re-run the script describe above with `--check-old-agents-working` to see if those agents have started reporting again and which still need attention:
+
+```shell
+python find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site US_OR_EU --check-old-agents-working  
+```
+
+Please note that this can take a long time if you have many potentially affected hosts.
+
 ### Fixing by upgrading the Agent                                                                   
 
-Upgrade to Agent 5.32.7.
+We recommend upgrading to Agent 5.32.7 as the quickest solution.
 
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`  
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`  
 Windows (from versions > 5.12.0): Download the Datadog [Agent installer][7]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`  
 More platforms and configuration management options detailed [here][8].
 
-Upgrade to [Agent 7][2].
-
-Upgrade to [Agent 6][3].
-
-**NOTE:** See Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.
+You can also upgrade to [Agent 7][2] or [Agent 6][3] but *please see the Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.*
 
 ### Should I upgrade my Agent even if I deleted the certificate?
 
