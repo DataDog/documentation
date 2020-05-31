@@ -104,7 +104,7 @@ We recommend keeping up to date and updating to the latest version of the agent.
  
 ### Am I still encrypting traffic with SSL even if I delete the certificate?
 
-証明書を削除し後でも、SSL通信は暗号化されますか。
+証明書を削除した後でも、SSL通信は暗号化されますか。
 
 Yes. The certificate is just a preset for the client to use and is not necessary to connect via SSL. Datadog agent endpoints only accept SSL traffic.
 証明書を削除した後でも、Agentからの通信が暗号化されます。この証明書は、クライアントのデフォルト証明書で、SSL接続するには必須ではありません。Datadog AgentのエンドポイントはSSLでの通信のみを受信しています。
