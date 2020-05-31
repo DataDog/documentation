@@ -37,13 +37,23 @@ sudo rm /opt/datadog-agent/agent/datadog-cert.pem && sudo service datadog-agent 
 On Windows:
 
 Using PowerShell, take the following actions:
+
+```shell
+rm "C:\Program Files\Datadog\Datadog Agent\files\datadog-cert.pem"
+restart-service -Force datadogagent
+```
+
+Note that for Agent versions <= 5.10, when running on 64 bit windows, the steps will be:
+
 ```shell
 rm "C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem"
-net stop /y datadogagent ; net start /y datadogagent
+restart-service -Force datadogagent
 ```
+
 Or through the Windows GUI:
 
-Delete `datadog-cert.pem`. You can locate this in: `C:\Program Files (x86)\Datadog\Datadog Agent\files\`. 
+Delete `datadog-cert.pem`. You can locate this in: `C:\Program Files\Datadog\Datadog Agent\files\`. 
+(For Agent versions <= 5.10, the location is `C:\Program Files(x86)\Datadog\Datadog Agent\Files\`.)
 Once removed, simply restart the Datadog Service from the Windows Service Manager.
 
 ### Fixing by upgrading the Agent                                                                   
