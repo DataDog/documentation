@@ -179,7 +179,7 @@ Alternatively, if you are monitoring a metric over an auto-scaling group of host
 
 ##### Grouping
 
-For grouped alerts, if a tag has been absent for 24 hours the monitor starts to skip evaluations and the bar in the results page stays green. Likewise, when there is no data and groups start reporting again, then the green bar showing an `OK` status backfills to make it look like there was no interruption.
+For a monitor that does not notify on missing data, if a group does not report data, the monitor skip evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar showing an OK status and backfills to make it look like there was no interruption.
 
 #### Auto Resolve
 
