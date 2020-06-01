@@ -27,7 +27,7 @@ Get the API and APP key [here][4] (`.eu` for EU site).
 
 ### Fixing by upgrading to Agent 5.32.7
 
-We recommend upgrading to Agent 5.32.7. This ensures that the Agent continues to function in a variety of different scenarios, with the minimum amount of changes.
+If you are currently running Agent 5.x, we recommend upgrading to Agent 5.32.7+. This ensures that the Agent continues to function in a variety of different scenarios, with the minimum amount of changes.
 
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`  
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`  
