@@ -34,9 +34,11 @@ class ShoppingCartServlet extends AbstractHttpServlet {
         // Get the active span
         final Span span = GlobalTracer.get().activeSpan();
         if (span != null) {
-          // customer_id -> 254889, customer_tier -> platinum, cart_value -> 867
+          // customer_id -> 254889
+          // customer_tier -> platinum
+          // cart_value -> 867
           span.setTag("customer.id", customer_id);
-	        span.setTag("customer.tier", customer_tier);
+          span.setTag("customer.tier", customer_tier);
           span.setTag("cart.value", cart_value);
         }
         // [...]
