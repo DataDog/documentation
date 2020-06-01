@@ -44,25 +44,35 @@ sudo rm /opt/datadog-agent/agent/datadog-cert.pem && sudo service datadog-agent 
 
 *Windows CLI*
 
-Using PowerShell, take the following actions:
+Using PowerShell, take the following actions for Agent `>= 5.12.0`:
 
 ```shell
-rm "C:\Program Files\Datadog\Datadog Agent\files\datadog-cert.pem"
+rm "C:\Program Files\Datadog\Datadog Agent\agent\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
-Note that for Agent versions <= 5.10, when running on 64 bit windows, the steps are:
+Note that for Agent versions `<= 5.11`, the location will be different.
+For users on the 32-bit Agent `<= 5.11` on 64-bit Windows the steps are:
 
 ```shell
 rm "C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
+For all other users on Agent `<= 5.11` the steps are:
+
+```shell
+rm "C:\Program Files\Datadog\Datadog Agent\files\datadog-cert.pem"
+restart-service -Force datadogagent
+```
+
 *Windows GUI*
 
-Delete `datadog-cert.pem`. You can locate this in: `C:\Program Files\Datadog\Datadog Agent\files\`. 
-(For Agent versions <= 5.10, the location is `C:\Program Files(x86)\Datadog\Datadog Agent\Files\`.)
-Once removed, restart the Datadog Service from the Windows Service Manager.
+Delete `datadog-cert.pem`. You can locate this in: `C:\Program Files\Datadog\Datadog Agent\agent\`. 
+(For 32-bit Agent versions `<= 5.11` on 64-bit windows, the location will be 
+`C:\Program Files(x86)\Datadog\Datadog Agent\files\`. For all other Agent versions `<= 5.11`
+the location is `C:\Program Files\Datadog\Datadog Agent\files\`).  Once removed, restart
+the Datadog Service from the Windows Service Manager.
 
 *Verifying with the script*
 
