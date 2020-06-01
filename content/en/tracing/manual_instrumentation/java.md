@@ -29,18 +29,18 @@ import io.opentracing.util.GlobalTracer;
 
 @WebServlet
 class ShoppingCartServlet extends AbstractHttpServlet {
-  @Override
-  void doGet(HttpServletRequest req, HttpServletResponse resp) {
-    // Get the active span
-    final Span span = GlobalTracer.get().activeSpan();
-    if (span != null) {
-    // customer_id -> 254889, customer_tier -> platinum, cart_value -> 867
-      span.setTag("customer.id", customer_id);
-	span.setTag("customer.tier", customer_tier);
-      span.setTag("cart.value", cart_value);
+    @Override
+    void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        // Get the active span
+        final Span span = GlobalTracer.get().activeSpan();
+        if (span != null) {
+          // customer_id -> 254889, customer_tier -> platinum, cart_value -> 867
+          span.setTag("customer.id", customer_id);
+	        span.setTag("customer.tier", customer_tier);
+          span.setTag("cart.value", cart_value);
+        }
+        // [...]
     }
-    // [...]
-  }
 }
 ```
 
@@ -67,7 +67,7 @@ import io.opentracing.tag.Tags;
 import io.opentracing.util.GlobalTracer;
 import io.opentracing.log.Fields
 ...
-   // Get active span if not available in current method
+    // Get active span if not available in current method
     final Span span = GlobalTracer.get().activeSpan();
     if (span != null) {
       span.setTag(Tags.ERROR, true);
@@ -87,7 +87,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 ...
-   final Span span = GlobalTracer.get().activeSpan();
+    final Span span = GlobalTracer.get().activeSpan();
     if (span != null) {
       span.setTag(Tags.ERROR, true);
       span.setTag(DDTags.ERROR_MSG, ex.getMessage());
@@ -110,18 +110,18 @@ When an event or condition happens downstream, you may want that behavior or val
 ```java
 final Span span = tracer.buildSpan("<OPERATION_NAME>").start();
 try (final Scope scope = tracer.activateSpan(span)) {
- 	// exception thrown here
+ 	  // exception thrown here
 } catch (final Exception e) {
- // Set error tag on span as normal
- 	span.log(Collections.singletonMap(Fields.ERROR_OBJECT, e));
+    // Set error tag on span as normal
+ 	  span.log(Collections.singletonMap(Fields.ERROR_OBJECT, e));
 
- // Set error on root span
- 	final MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
- localRootSpan.setError(true);
- 	localRootSpan.setTag("some.other.tag", "value");
+    // Set error on root span
+ 	  final MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
+    localRootSpan.setError(true);
+ 	  localRootSpan.setTag("some.other.tag", "value");
 } finally {
- // Close span in a finally block
- 	span.finish();
+    // Close span in a finally block
+ 	  span.finish();
 }
 ```
 
@@ -130,8 +130,8 @@ If you are not manually creating a span, you can still access the root span thro
 ```java
 final Span span = GlobalTracer.get().activeSpan();
 if (span != null) {
- MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
- // do stuff with root span
+    MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
+    // do stuff with root span
 }
 ```
 
@@ -172,10 +172,10 @@ import datadog.trace.api.Trace;
 
 public class SessionManager {
 
-  @Trace(operationName = "database.persist", resourceName = "SessionManager.saveSession")
-  public static void saveSession() {
-    // your method implementation here
-  }
+    @Trace(operationName = "database.persist", resourceName = "SessionManager.saveSession")
+    public static void saveSession() {
+        // your method implementation here
+    }
 }
 ```
 Note that through the `dd.trace.annotations` system property, other tracing method annotations can be recognized by Datadog as `@Trace`. You can find a list [here][4] if you have previously decorated your code.
@@ -199,16 +199,16 @@ class SomeClass {
             .withTag(DDTags.SERVICE_NAME, "<SERVICE_NAME>")
             .start()
         try (Scope scope = tracer.activateSpan(span)) {
-// Tags can also be set after creation
-span.setTag("my.tag", "value");
-           // The code you’re tracing
-	     ...
+            // Tags can also be set after creation
+            span.setTag("my.tag", "value");
+            // The code you’re tracing
+	          ...
         } catch (Exception e) {
-		// Set error on span
-	  } finally {
-		// Close span in a finally block
-span.finish();
-	  }
+		        // Set error on span
+	      } finally {
+		        // Close span in a finally block
+            span.finish();
+	      }
     }
 }
 ```
@@ -220,48 +220,49 @@ The tracing libraries are designed to be extensible. Customers may consider writ
 
 ```java
 class FilteringInterceptor implements TraceInterceptor {
- @Override
- public Collection<? extends MutableSpan> onTraceComplete(
-     final Collection<? extends MutableSpan> trace) {
-   final List<MutableSpan> filteredTrace = new ArrayList<>();
-   for (final MutableSpan span : trace) {
-     final String orderId = (String) span.getTags().get("order.id");
+    @Override
+    public Collection<? extends MutableSpan> onTraceComplete(
+            Collection<? extends MutableSpan> trace) {
+        List<MutableSpan> filteredTrace = new ArrayList<>();
+        for (final MutableSpan span : trace) {
+          String orderId = (String) span.getTags().get("order.id");
 
-     // Drop spans when the order id starts with "TEST-"
-     if (orderId == null || !orderId.startsWith("TEST-")) {
-       filteredTrace.add(span);
-     }
-   }
+          // Drop spans when the order id starts with "TEST-"
+          if (orderId == null || !orderId.startsWith("TEST-")) {
+            filteredTrace.add(span);
+          }
+        }
 
-   return filteredTrace;
- }
+        return filteredTrace;
+    }
 
- @Override
- public int priority() {
-   return 100; // some high unique number so this interceptor is last
- }
+    @Override
+    public int priority() {
+        return 100; // some high unique number so this interceptor is last
+    }
 }
 
 class PricingInterceptor implements TraceInterceptor {
- @Override
- public Collection<? extends MutableSpan> onTraceComplete(
-     final Collection<? extends MutableSpan> trace) {
-   for (final MutableSpan span : trace) {
-     final Double originalPrice = (Double) span.getTags().get("order.price");
-     final Double discount = (Double) span.getTags().get("order.discount");
-     // Set a tag from a calculation from other tags
-     if (originalPrice != null && discount != null) {
-       span.setTag("order.value", originalPrice - discount);
-     }
-   }
+    @Override
+    public Collection<? extends MutableSpan> onTraceComplete(
+            Collection<? extends MutableSpan> trace) {
+        for (final MutableSpan span : trace) {
+          Double originalPrice = (Double) span.getTags().get("order.price");
+          Double discount = (Double) span.getTags().get("order.discount");
 
-   return trace;
- }
+          // Set a tag from a calculation from other tags
+          if (originalPrice != null && discount != null) {
+            span.setTag("order.value", originalPrice - discount);
+          }
+        }
 
- @Override
- public int priority() {
-   return 20; // some unique number
- }
+        return trace;
+    }
+
+    @Override
+    public int priority() {
+        return 20; // some unique number
+    }
 }
 ```
 
@@ -311,7 +312,7 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 
 This can be useful for excluding any Health Checks or otherwise simulated traffic from the calculation of metrics for your services.
 ```text
-  ## @param ignore_resources - list of strings - optional
+## @param ignore_resources - list of strings - optional
 ## A blacklist of regular expressions can be provided to disable certain traces based on their resource name
 ## all entries must be surrounded by double quotes and separated by commas.
 # ignore_resources: ["(GET|POST) /healthcheck"]
@@ -398,20 +399,20 @@ final Tracer tracer = GlobalTracer.get();
 final Span span = tracer.buildSpan("ServicehandlerSpan").start();
 
 try (final Scope scope = tracer.activateSpan(span)) {
- // submission thread impl...
+    // submission thread impl...
 
- submitAsyncTask(new Runnable() {
-       @Override
-       public void run() {
-         // Step 2: reactivate the Span in the worker thread
-         try (final Scope scope = tracer.activateSpan(span)) {
-           // worker thread impl
-         } finally {
-           // Step 3: Finish Span when work is complete
-           span.finish();
-         }
+    submitAsyncTask(new Runnable() {
+        @Override
+        public void run() {
+            // Step 2: reactivate the Span in the worker thread
+            try (final Scope scope = tracer.activateSpan(span)) {
+              // worker thread impl
+            } finally {
+              // Step 3: Finish Span when work is complete
+              span.finish();
+            }
        }
-  });
+    });
 }
 ```
 
@@ -433,21 +434,21 @@ try (Scope scope = tracer.buildSpan("httpClientSpan").startActive(true)) {
 }
 
 public static class MyHttpHeadersInjectAdapter implements TextMap {
-  private final HttpRequest httpRequest;
+    private final HttpRequest httpRequest;
 
-  public HttpHeadersInjectAdapter(final HttpRequest httpRequest) {
-    this.httpRequest = httpRequest;
-  }
+    public HttpHeadersInjectAdapter(final HttpRequest httpRequest) {
+        this.httpRequest = httpRequest;
+    }
 
-  @Override
-  public void put(final String key, final String value) {
-    httpRequest.addHeader(key, value);
-  }
+    @Override
+    public void put(final String key, final String value) {
+        httpRequest.addHeader(key, value);
+    }
 
-  @Override
-  public Iterator<Map.Entry<String, String>> iterator() {
-    throw new UnsupportedOperationException("This class should be used only with tracer#inject()");
-  }
+    @Override
+    public Iterator<Map.Entry<String, String>> iterator() {
+        throw new UnsupportedOperationException("This class should be used only with tracer#inject()");
+    }
 }
 
 // Step 2: Extract the Datadog headers in the server code
@@ -463,21 +464,21 @@ try (Scope scope = tracer.buildSpan("httpServerSpan").asChildOf(extractedContext
 }
 
 public class MyHttpRequestExtractAdapter implements TextMap {
-  private final HttpRequest request;
+    private final HttpRequest request;
 
-  public HttpRequestExtractAdapter(final HttpRequest request) {
-    this.request = request;
-  }
+    public HttpRequestExtractAdapter(final HttpRequest request) {
+        this.request = request;
+    }
 
-  @Override
-  public Iterator<Map.Entry<String, String>> iterator() {
-    return request.headers().iterator();
-  }
+    @Override
+    public Iterator<Map.Entry<String, String>> iterator() {
+        return request.headers().iterator();
+    }
 
-  @Override
-  public void put(final String key, final String value) {
-    throw new UnsupportedOperationException("This class should be used only with Tracer.extract()!");
-  }
+    @Override
+    public void put(final String key, final String value) {
+        throw new UnsupportedOperationException("This class should be used only with Tracer.extract()!");
+    }
 }
 ```
 
