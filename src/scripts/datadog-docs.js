@@ -962,7 +962,7 @@ function loadPage(newUrl) {
             }
 
             const newDocument = httpRequest.responseXML;
-
+            
             if (newDocument === null) {
                 return;
             }
@@ -1036,8 +1036,11 @@ function loadPage(newUrl) {
 
             const start = window.performance.now();
 
+            // check if loaded page has inline JS. if so, we want to return as script will not execute
+            const hasScript = newContent.getElementsByTagName('script').length;
+
             // if there is error finding the element, reload page at requested url
-            if (mainContent.parentElement) {
+            if (mainContent.parentElement && !hasScript) {
                 mainContent.parentElement.replaceChild(newContent, mainContent);
                 mainContent = newContent;
 
@@ -1188,7 +1191,7 @@ function navClickEventHandler(event) {
     } else if (loadViaAjax(event.target)) {
         loadPage(newUrl);
         event.preventDefault();
-        history.pushState({}, '' /* title */, newUrl);
+        history.pushState({}, '', newUrl);
         updateSidebar(event);
     } else {
         window.location.href = newUrl;
