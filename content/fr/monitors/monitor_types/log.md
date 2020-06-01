@@ -2,13 +2,13 @@
 title: Log Monitors
 kind: documentation
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: Configurer les notifications de vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: Vérifier le statut de votre monitor
 ---
@@ -24,15 +24,13 @@ Pour créer un [log monitor][2] dans Datadog, utilisez la navigation principale�
 
 À mesure que vous définissez votre requête de recherche, le graphique au-dessus des champs de recherche se met à jour.
 
-1. Si vous avez [plusieurs index de logs][3], sélectionnez l'index dans lequel la recherche doit être effectuée.
-2. Créez votre requête de recherche en utilisant la même logique que pour une [recherche dans le Log Explorer][4].
-3. Choisissez de surveiller un nombre de logs, une [facette][5] ou une [mesure][6] :
+1. Créez votre requête de recherche en utilisant la même logique que pour une [recherche dans le Log Explorer][1].
+2. Choisissez de surveiller un nombre de logs, une [facette][4] ou une [mesure][4] :
     * **Monitor over a log count** : utilisez la barre de recherche (facultatif) et ne sélectionnez **pas** une facette ou une mesure. Datadog évalue le nombre de logs sur une période sélectionnée, puis le compare aux conditions de seuil.
-    * **Monitor over a facet** : si vous sélectionnez une [facette][5], le monitor envoie une alerte en fonction du `Unique value count` (nombre de valeurs uniques) de la facette.
-    * **Monitor over a measure** : si vous sélectionnez une [mesure][6], le monitor envoie une alerte en fonction de la valeur numérique de la facette de log (comme le ferait un monitor de métrique). Vous devez simplement sélectionner l'agrégation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99` ou `max`).
-4. Définissez les groupes d'alertes (facultatif). **Remarque** : que vous définissiez ou non des groupes d'alertes, vous recevez **une seule** alerte lorsque la valeur agrégée remplit les conditions définies. Même si vous triez la requête par host, une seule notification est envoyée si plusieurs hosts remplissent les conditions définies définies. Ce système permet de réduire le nombre de notifications reçues.
+    * **Monitor over a facet** : si vous sélectionnez une [facette][4], le monitor envoie une alerte en fonction du `Unique value count` (nombre de valeurs uniques) de la facette.
+    * **Monitor over a measure** : si vous sélectionnez une [mesure][4], le monitor envoie une alerte en fonction de la valeur numérique de la facette de log (comme le ferait un monitor de métrique). Vous devez simplement sélectionner l'agrégation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99` ou `max`).
+3. Définissez les groupes d'alertes (facultatif). **Remarque** : que vous définissiez ou non des groupes d'alertes, vous recevez **une seule** alerte lorsque la valeur agrégée remplit les conditions définies. Même si vous triez la requête par host, une seule notification est envoyée si plusieurs hosts remplissent les conditions définies définies. Ce système permet de réduire le nombre de notifications reçues.
 
-{{< img src="monitors/monitor_types/log/define-the-search-query.png" alt="Monitor Below pour le service backend" style="width:60%;" >}}
 
 ### Définir vos conditions d'alerte
 
@@ -56,7 +54,7 @@ Lorsque vous répartissez le monitor par dimension (tag ou facette) tout en util
 
 ### Notifications
 
-Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][7].
+Pour obtenir des instructions détaillées sur l'utilisation des sections **Say what's happening** et **Notify your team**, consultez la page [Notifications][5].
 
 #### Exemples de log
 
@@ -83,10 +81,8 @@ Inclure 10 exemples de log dans la notification d'alerte :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs
+[1]: /fr/logs/
 [2]: https://app.datadoghq.com/monitors#create/log
-[3]: /fr/logs/indexes
-[4]: /fr/logs/explorer/search
-[5]: /fr/logs/explorer/?tab=facets#setup
-[6]: /fr/logs/explorer/?tab=measures#setup
-[7]: /fr/monitors/notifications
+[3]: /fr/logs/explorer/search/
+[4]: /fr/logs/explorer/facets/
+[5]: /fr/monitors/notifications/

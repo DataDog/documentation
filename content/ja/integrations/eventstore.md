@@ -33,8 +33,8 @@ supported_os:
 
 EventStore からメトリクスをリアルタイムに取得して、以下のことができます。
 
-- EventStore のキューを視覚化および監視できます。
-- 統計 API で使用可能なすべてのメトリクスをキャプチャできます。
+* EventStore のキューを視覚化および監視できます。
+* 以下の API エンドポイントで、使用可能なすべてのメトリクスをキャプチャします。統計、ノード情報、非過渡的な予測、サブスクリプション、クラスターゴシップ（スクレープするエンドポイントのリストは構成できます）
 
 ## セットアップ
 
@@ -103,12 +103,12 @@ eventstore チェックには、サービスのチェック機能は含まれま
 
 ご不明な点は、このインテグレーションの[メインテナー][12]までお問い合わせください。
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
+[1]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/
 [2]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [3]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
 [4]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/#developer-toolkit
 [5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://docs.datadoghq.com/ja/getting_started/integrations
+[6]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-extras/blob/master/eventstore/datadog_checks/eventstore/data/conf.yaml.example
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
