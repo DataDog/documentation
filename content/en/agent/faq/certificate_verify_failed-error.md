@@ -25,6 +25,15 @@ Datadog EU: `python find_agents_with_connectivity_problems.py --api-key API_KEY 
 
 Get the API and APP key [here][4] (`.eu` for EU site).
 
+### Fixing by upgrading to Agent 5.32.7
+
+We recommend upgrading to Agent 5.32.7. This ensures that the Agent continues to function in a variety of different scenarios, with the minimum amount of changes.
+
+Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`  
+Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`  
+Windows (from versions > 5.12.0): Download the Datadog [Agent installer][7]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`  
+More platforms and configuration management options detailed [here][8].
+
 ### Fixing without upgrading the Agent
 
 *Linux*
@@ -65,16 +74,9 @@ python find_agents_with_connectivity_problems.py --api-key API_KEY --application
 
 Please note that this can take a long time if you have many potentially affected hosts.
 
-### Fixing by upgrading the Agent                                                                   
+### Fixing by upgrading to Agent 6 or 7
 
-We recommend upgrading to Agent 5.32.7 as the quickest solution.
-
-Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`  
-Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`  
-Windows (from versions > 5.12.0): Download the Datadog [Agent installer][7]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`  
-More platforms and configuration management options detailed [here][8].
-
-You can also upgrade to [Agent 7][2] or [Agent 6][3] but *please see the Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.*
+You can upgrade to [Agent 7][2] or [Agent 6][3] to resolve this issue but *please see the Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.*
 
 ### Should I upgrade my Agent even if I deleted the certificate?
 
