@@ -209,7 +209,7 @@ class SomeClass {
             
         } catch (Exception e) {
             // Set error on span
-	      } finally {
+        } finally {
             // Close span in a finally block
             span.finish();
         }
