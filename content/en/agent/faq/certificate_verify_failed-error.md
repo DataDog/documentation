@@ -44,7 +44,7 @@ sudo rm /opt/datadog-agent/agent/datadog-cert.pem && sudo service datadog-agent 
 
 *Windows CLI*
 
-Using PowerShell, take the following actions for agent `>= 5.12.0`:
+Using PowerShell, take the following actions for Agent `>= 5.12.0`:
 
 ```shell
 rm "C:\Program Files\Datadog\Datadog Agent\agent\datadog-cert.pem"
@@ -52,14 +52,14 @@ restart-service -Force datadogagent
 ```
 
 Note that for Agent versions `<= 5.11`, the location will be different.
-For users on the 32-bit agent `<= 5.11` on 64-bit windows the steps are:
+For users on the 32-bit Agent `<= 5.11` on 64-bit Windows the steps are:
 
 ```shell
 rm "C:\Program Files (x86)\Datadog\Datadog Agent\files\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
-For all other users on agent `<= 5.11` agent the steps are:
+For all other users on Agent `<= 5.11` the steps are:
 
 ```shell
 rm "C:\Program Files\Datadog\Datadog Agent\files\datadog-cert.pem"
