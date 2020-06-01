@@ -70,7 +70,7 @@ restart-service -Force datadogagent
 
 Delete `datadog-cert.pem`. You can locate this in: `C:\Program Files\Datadog\Datadog Agent\agent\`. 
 (For 32-bit Agent versions `<= 5.11` on 64-bit windows, the location will be 
-`C:\Program Files(x86)\Datadog\Datadog Agent\files\`.  For all other Agent versions `<= 5.11`
+`C:\Program Files(x86)\Datadog\Datadog Agent\files\`. For all other Agent versions `<= 5.11`
 the location is `C:\Program Files\Datadog\Datadog Agent\files\`).  Once removed, restart
 the Datadog Service from the Windows Service Manager.
 
