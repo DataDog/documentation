@@ -2,6 +2,8 @@
 aliases:
   - /fr/integrations/dnscheck
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   monitors: {}
   service_checks: assets/service_checks.json
@@ -36,7 +38,7 @@ supported_os:
 
 Surveillez les délais de résolution et de correspondance des enregistrements DNS à l'aide des serveurs de noms de votre choix.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -47,19 +49,23 @@ Bien qu'il soit généralement préférable d'exécuter les checks axés sur des
 ### Configuration
 
 1. Modifiez le fichier `dns_check.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2] pour commencer à recueillir vos données DNS.
-    Consultez le [fichier d'exemple dns_check.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+   Consultez le [fichier d'exemple dns_check.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
 
-    ```yaml
-      init_config:
+   ```yaml
+   init_config:
 
-      instances:
-        - name: Example (com)
-          # nameserver: 8.8.8.8   # The nameserver to query, this must be an IP address
-          hostname: example.com # the record to fetch
-          # record_type: AAAA   # default is A
-        - name: Example (org)
-          hostname: example.org
-    ```
+   instances:
+     ## @param name - string - required
+     ## Name of your DNS check instance.
+     ## To create multiple DNS checks, create multiple instances with unique names.
+     #
+     - name: '<INSTANCE_NAME>'
+
+       ## @param hostname - string - required
+       ## Hostname to resolve.
+       #
+       hostname: '<HOSTNAME>'
+   ```
 
     Si vous ne définissez pas l'option `nameserver`, le check utilise le serveur de noms configuré dans les paramètres de réseau local.
 
@@ -76,13 +82,15 @@ Bien qu'il soit généralement préférable d'exécuter les checks axés sur des
 
 
 ### Événements
+
 Le check DNS n'inclut aucun événement.
 
 ### Checks de service
+
 Ce check d'Agent applique les tags suivants à l'ensemble des checks de service recueillis ;
 
-  * `nameserver:<serveurdenoms_en_yaml>`
-  * `resolved_hostname:<hostname_en_yaml>`
+- `nameserver:<serveurdenoms_en_yaml>`
+- `resolved_hostname:<hostname_en_yaml>`
 
 `dns.can_resolve` :
 
@@ -91,6 +99,7 @@ Renvoie CRITICAL si l'Agent ne parvient pas à résoudre la requête. Si ce n'es
 Tags appliqués : `hostname` et `record_type`.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://app.datadoghq.com/account/settings#agent
@@ -99,4 +108,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/dns_check/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
+[7]: https://docs.datadoghq.com/fr/help/

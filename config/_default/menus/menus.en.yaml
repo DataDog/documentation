@@ -146,6 +146,11 @@ main:
     url: agent/basic_agent_usage/redhat/
     weight: 111
     parent: basic_agent_usage
+  - name: SaltStack
+    identifier: basic_agent_usage_saltstack
+    url: agent/basic_agent_usage/saltstack/
+    weight: 112
+    parent: basic_agent_usage
   - name: SUSE
     identifier: basic_agent_usage_suse
     url: agent/basic_agent_usage/suse/
@@ -904,7 +909,7 @@ main:
     identifier: tracing_opentracing
     weight: 9
   - name: Java
-    url: tracing/opentracing/java
+    url: tracing/manual_instrumentation/java
     parent: tracing_opentracing
     identifier: tracing_opentracing_java
     weight: 901

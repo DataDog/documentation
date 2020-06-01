@@ -2,13 +2,13 @@
 title: Page de statut de l'Agent v6
 kind: guide
 further_reading:
-  - link: agent/troubleshooting/
+  - link: /agent/troubleshooting/
     tag: Documentation
     text: Dépannage de l'Agent
-  - link: agent/guide/agent-configuration-files/
+  - link: /agent/guide/agent-configuration-files/
     tag: Guide
     text: Fichiers de configuration de l'Agent
-  - link: agent/guide/agent-commands/
+  - link: /agent/guide/agent-commands/
     tag: Guide
     text: Commandes de l'Agent
 ---
@@ -268,5 +268,5 @@ Cette section affiche le nombre de paquets reçus par le serveur DogStatsD pour 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent/guide/agent-commands/#agent-information
-[2]: /fr/agent/troubleshooting/ntp
-[3]: /fr/agent/faq/how-datadog-agent-determines-the-hostname
+[2]: /fr/agent/troubleshooting/ntp/
+[3]: /fr/agent/faq/how-datadog-agent-determines-the-hostname/

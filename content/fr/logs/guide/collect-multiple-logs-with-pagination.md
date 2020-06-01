@@ -2,19 +2,19 @@
 title: Collecter plusieurs logs avec Pagination
 kind: guide
 further_reading:
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: Découvrir comment traiter vos logs
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
-  - link: logs/live_tail
+  - link: /logs/live_tail/
     tag: Documentation
     text: Fonctionnalité Live Tail de Datadog
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Découvrir comment explorer vos logs
-  - link: logs/logging_without_limits
+  - link: /logs/logging_without_limits/
     tag: Documentation
     text: Logging without Limits*
 ---
@@ -93,4 +93,4 @@ Pour voir toutes vos pages de logs, continuez à renvoyer votre requête avec le
 
 *Logging without Limits est une marque déposée de Datadog, Inc.
 
-[1]: /fr/api/?lang=bash#get-a-list-of-logs
+[1]: /fr/api/v1/logs/#get-a-list-of-logs

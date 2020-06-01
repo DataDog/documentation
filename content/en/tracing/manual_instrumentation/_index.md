@@ -16,12 +16,21 @@ further_reading:
       text: 'Implement Opentracing across your applications'
     - link: 'tracing/visualization/'
       text: 'Explore your services, resources, and traces'
+    - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
+      text: 'Learn More about Datadog and the OpenTelemetry initiative'
 ---
 
-Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation. Before instrumenting your application, review Datadog’s [APM Terminology][1] and familiarize yourself with the core concepts of Datadog APM.
+Manual instrumentation allows programmatic creation of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, as well as for providing deeper visibility and context into spans, including adding any desired [span tags][1].
+
+Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM.
+
+If you’re already using OpenTracing [click here][3] for configuration instructions.
 
 Select your language below to discover how to manually instrument your application:
 
 {{< partial name="apm/apm-manual-instrumentation.html" >}}
 
-[1]: /tracing/visualization/
+
+[1]: /tracing/guide/adding_metadata_to_spans/
+[2]: /tracing/visualization
+[3]: /tracing/opentracing

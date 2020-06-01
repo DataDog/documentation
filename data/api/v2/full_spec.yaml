@@ -124,13 +124,31 @@ components:
           description: Name of the creator.
           type: string
       type: object
+    DashboardListAddItemsRequest:
+      description: Request containing a list of dashboards to add.
+      properties:
+        dashboards:
+          description: List of dashboards to add the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItemRequest'
+          type: array
+      type: object
     DashboardListAddItemsResponse:
       description: Response containing a list of added dashboards.
       properties:
         added_dashboards_to_list:
           description: List of dashboards added to the dashboard list.
           items:
-            $ref: '#/components/schemas/DashboardListItem'
+            $ref: '#/components/schemas/DashboardListItemResponse'
+          type: array
+      type: object
+    DashboardListDeleteItemsRequest:
+      description: Request containing a list of dashboards to delete.
+      properties:
+        dashboards:
+          description: List of dashboards to delete from the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItemRequest'
           type: array
       type: object
     DashboardListDeleteItemsResponse:
@@ -139,7 +157,7 @@ components:
         deleted_dashboards_from_list:
           description: List of dashboards deleted from the dashboard list.
           items:
-            $ref: '#/components/schemas/DashboardListItem'
+            $ref: '#/components/schemas/DashboardListItemResponse'
           type: array
       type: object
     DashboardListItem:
@@ -158,7 +176,7 @@ components:
           type: string
         id:
           description: ID of the dashboard.
-          example: null
+          example: q5j-nti-fv6
           type: string
         is_favorite:
           description: Whether or not the dashboard is in the favorites.
@@ -197,6 +215,33 @@ components:
       - type
       - id
       type: object
+    DashboardListItemRequest:
+      description: A dashboard within a list.
+      properties:
+        id:
+          description: ID of the dashboard.
+          example: q5j-nti-fv6
+          type: string
+        type:
+          $ref: '#/components/schemas/DashboardType'
+      required:
+      - type
+      - id
+      type: object
+    DashboardListItemResponse:
+      description: A dashboard within a list.
+      properties:
+        id:
+          description: ID of the dashboard.
+          example: q5j-nti-fv6
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/DashboardType'
+      required:
+      - type
+      - id
+      type: object
     DashboardListItems:
       description: Dashboards within a list.
       properties:
@@ -213,6 +258,24 @@ components:
           type: integer
       required:
       - dashboards
+      type: object
+    DashboardListUpdateItemsRequest:
+      description: Request containing the list of dashboards to update to.
+      properties:
+        dashboards:
+          description: List of dashboards to update the dashboard list to.
+          items:
+            $ref: '#/components/schemas/DashboardListItemRequest'
+          type: array
+      type: object
+    DashboardListUpdateItemsResponse:
+      description: Response containing a list of updated dashboards.
+      properties:
+        dashboards:
+          description: List of dashboards in the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItemResponse'
+          type: array
       type: object
     DashboardType:
       description: The type of the dashboard.
@@ -1609,7 +1672,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DashboardListItems'
+              $ref: '#/components/schemas/DashboardListDeleteItemsRequest'
         description: Dashboards to delete from the dashboard list.
         required: true
       responses:
@@ -1689,7 +1752,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DashboardListItems'
+              $ref: '#/components/schemas/DashboardListAddItemsRequest'
         description: Dashboards to add to the dashboard list.
         required: true
       responses:
@@ -1736,7 +1799,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DashboardListItems'
+              $ref: '#/components/schemas/DashboardListUpdateItemsRequest'
         description: New dashboards of the dashboard list.
         required: true
       responses:
@@ -1744,7 +1807,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DashboardListItems'
+                $ref: '#/components/schemas/DashboardListUpdateItemsResponse'
           description: OK
         '400':
           content:
@@ -3307,11 +3370,12 @@ tags:
   name: Authentication
 - description: '[See API version 1](/api/v1/azure-integration/).'
   name: Azure Integration
-- description: '[Interact with your dashboard lists](https://docs.datadoghq.com/monitors/downtimes)
+- description: 'Interact with your dashboard lists through the API to make it easier
+    to
 
-    through the API to make it easier to organize, find, and share all of your dashboards
+    organize, find, and share all of your dashboards with your team and
 
-    with your team and organization.'
+    organization.'
   name: Dashboard Lists
 - description: '[See API version 1](/api/v1/dashboards/).'
   name: Dashboards

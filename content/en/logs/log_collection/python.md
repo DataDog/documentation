@@ -37,6 +37,7 @@ Here are setup examples for the following logging libraries:
 
 * [JSON-log-formatter][1]
 * [Python-json-logger][2]
+* [django-datadog-logger][5]
 
 **Connect Logs and Traces**
 
@@ -167,3 +168,4 @@ logs:
 [2]: https://github.com/madzak/python-json-logger
 [3]: /tracing/connect_logs_and_traces/python/
 [4]: /agent/guide/agent-commands/
+[5]: https://pypi.org/project/django-datadog-logger/
