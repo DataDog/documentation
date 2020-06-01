@@ -110,18 +110,18 @@ When an event or condition happens downstream, you may want that behavior or val
 ```java
 final Span span = tracer.buildSpan("<OPERATION_NAME>").start();
 try (final Scope scope = tracer.activateSpan(span)) {
- 	  // exception thrown here
+    // exception thrown here
 } catch (final Exception e) {
     // Set error tag on span as normal
- 	  span.log(Collections.singletonMap(Fields.ERROR_OBJECT, e));
+    span.log(Collections.singletonMap(Fields.ERROR_OBJECT, e));
 
     // Set error on root span
- 	  final MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
+    MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
     localRootSpan.setError(true);
- 	  localRootSpan.setTag("some.other.tag", "value");
+    localRootSpan.setTag("some.other.tag", "value");
 } finally {
     // Close span in a finally block
- 	  span.finish();
+    span.finish();
 }
 ```
 
@@ -194,6 +194,7 @@ import io.opentracing.util.GlobalTracer;
 class SomeClass {
     void someMethod() {
         Tracer tracer = GlobalTracer.get();
+
         // Tags can be set when creating the span
         Span span = tracer.buildSpan("<OPERATION_NAME>")
             .withTag(DDTags.SERVICE_NAME, "<SERVICE_NAME>")
@@ -201,14 +202,15 @@ class SomeClass {
         try (Scope scope = tracer.activateSpan(span)) {
             // Tags can also be set after creation
             span.setTag("my.tag", "value");
+
             // The code you’re tracing
-	          ...
+            
         } catch (Exception e) {
-		        // Set error on span
+            // Set error on span
 	      } finally {
-		        // Close span in a finally block
+            // Close span in a finally block
             span.finish();
-	      }
+        }
     }
 }
 ```
@@ -223,6 +225,7 @@ class FilteringInterceptor implements TraceInterceptor {
     @Override
     public Collection<? extends MutableSpan> onTraceComplete(
             Collection<? extends MutableSpan> trace) {
+
         List<MutableSpan> filteredTrace = new ArrayList<>();
         for (final MutableSpan span : trace) {
           String orderId = (String) span.getTags().get("order.id");
@@ -238,7 +241,8 @@ class FilteringInterceptor implements TraceInterceptor {
 
     @Override
     public int priority() {
-        return 100; // some high unique number so this interceptor is last
+        // some high unique number so this interceptor is last
+        return 100; 
     }
 }
 
@@ -246,9 +250,11 @@ class PricingInterceptor implements TraceInterceptor {
     @Override
     public Collection<? extends MutableSpan> onTraceComplete(
             Collection<? extends MutableSpan> trace) {
+
         for (final MutableSpan span : trace) {
-          Double originalPrice = (Double) span.getTags().get("order.price");
-          Double discount = (Double) span.getTags().get("order.discount");
+          Map<String, Object> tags = span.getTags();
+          Double originalPrice = (Double) tags.get("order.price");
+          Double discount = (Double) tags.get("order.discount");
 
           // Set a tag from a calculation from other tags
           if (originalPrice != null && discount != null) {
@@ -422,8 +428,8 @@ Create a distributed trace using manual instrumentation with OpenTracing:
 
 ```java
 // Step 1: Inject the Datadog headers in the client code
-try (Scope scope = tracer.buildSpan("httpClientSpan").startActive(true)) {
-    final Span span = scope.span();
+Span span = tracer.buildSpan("httpClientSpan").start();
+try (Scope scope = tracer.activate(span)) {
     HttpRequest request = /* your code here */;
 
     tracer.inject(span.context(),
@@ -431,6 +437,8 @@ try (Scope scope = tracer.buildSpan("httpClientSpan").startActive(true)) {
                   new MyHttpHeadersInjectAdapter(request));
 
     // http request impl...
+} finally {
+    span.finish();
 }
 
 public static class MyHttpHeadersInjectAdapter implements TextMap {
@@ -458,9 +466,12 @@ final SpanContext extractedContext =
   GlobalTracer.get().extract(Format.Builtin.HTTP_HEADERS,
                              new MyHttpRequestExtractAdapter(request));
 
-try (Scope scope = tracer.buildSpan("httpServerSpan").asChildOf(extractedContext).startActive(true)) {
-    final Span span = scope.span(); // is a child of http client span in step 1
+// is a child of http client span in step 1
+Span span = tracer.buildSpan("httpServerSpan").asChildOf(extractedContext).start();
+try (Scope scope = tracer.activateSpan(span)) {
     // http server impl...
+} finally {
+    span.finish();
 }
 
 public class MyHttpRequestExtractAdapter implements TextMap {
