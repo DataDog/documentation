@@ -65,7 +65,7 @@ Below are Datadog's tagging requirements:
     | `env:staging:east` | `env`         | `staging:east` |
     | `env_staging:east` | `env_staging` | `east`         |
 
-5. Tags shouldn't originate from unbounded sources, such as EPOCH timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
+5. Tags shouldn't originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
 
 ## Assigning Tags
 
@@ -84,7 +84,6 @@ Tags may be assigned using any (or all) of the following methods. Refer to the d
 
 As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][8] documentation.
 
-**Note**: Unified service tagging is currently only available for **containerized environments**. For non-containerized environments or containerized environments that require custom or additional configuration, review the tagging methods below.
 
 ## Using Tags
 
