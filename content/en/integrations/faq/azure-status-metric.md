@@ -13,8 +13,6 @@ The `azure.*.count` metric is an improvement over `azure.*.status`, which will b
 
 ## .count metric
 
-The `azure.*.count` metric is **currently in private beta**. Contact [Datadog support][2] to have it enabled for your account.
-
 The `azure.*.count` metric provides two fundamental pieces of information:
 
 - The number of resources of that type.
@@ -30,6 +28,20 @@ Use the `azure.*.count` metric to:
 - Create query widgets in dashboards to display the number of a given resource type. Use any available tags to scope the count to a relevant aggregation such as region, resource group, kind, or status.
 - Create monitors to alert you about the status of different Azure resources.
 
+**Note**: In some cases, the default visualization settings can make it appear as though resources are being double counted intermittently in charts or query widgets. This will not affect monitors or widgets scoped to a specific status.
+You can reduce this effect by turning off [interpolation][2] in charts or query widgets by setting Interpolation > none or using ‘.fill(null)’. 
+
+For most resource types, the possible statuses are running, unavailable, or unknown. Virtual machines have more detailed statuses, including:
+
+- `Running`
+- `Stopped_deallocated`
+- `Stopped`
+- `Unknown`
+- `Unavailable`
+- `Failed`
+
+If you see a status of `query_failed` you need to enable the [Resource Health provider](#troubleshooting) in Azure.
+
 ## .status metric
 
 The `azure.*.status` metric is the previous solution for this same type of information. It reports the number of available resources for each Azure resource type.
@@ -44,7 +56,7 @@ The key differences between the `.status` and `.count` metric:
 
 ## Troubleshooting
 
-If your Azure integration is reporting metrics but not `azure.*.status`, your Azure subscription needs to register the Azure Resource Health provider.
+If your Azure integration is reporting metrics but not `azure.*.status`, or `azure.*.count` is returning `status:query_failed`, your Azure subscription needs to register the Azure Resource Health provider.
 
 Using the Azure Command Line Interface:
 ```bash
@@ -56,4 +68,4 @@ azure provider register Microsoft.ResourceHealth
 The `azure.*.status` metric should show in Datadog within 5 - 10 minutes.
 
 [1]: /integrations/azure/
-[2]: /help/
+[2]: /dashboards/faq/interpolation-the-fill-modifier-explained/

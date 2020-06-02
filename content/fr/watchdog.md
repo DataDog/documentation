@@ -5,17 +5,17 @@ description: Détectez automatiquement les problèmes d'application et d'infrast
 aliases:
   - /fr/tracing/watchdog
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: Recueillir vos logs
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: Recueillir vos processus
-  - link: tracing
+  - link: /tracing/
     tag: Documentation
     text: Recueillir vos traces
 ---
-{{< img src="watchdog/watchdog_page.png" alt="page Watchdog" responsive="true" >}}
+{{< img src="watchdog/watchdog_page.png" alt="Page Watchdog"  >}}
 
 ## Présentation
 
@@ -27,7 +27,7 @@ Watchdog est une fonction à base d'algorithmes qui analyse les métriques d'inf
   * Latence
 
 * Métriques d'infrastructure issues des intégrations :
-  * [Système][1], pour l'utilisation de la mémoire (fuites de mémoire), le taux de retransmissions TCP, etc. au niveau du host
+  * [Système][1], pour l'utilisation de la mémoire (fuites de mémoire) et le taux de retransmissions TCP au niveau du host.
   * [Redis][2]
   * [PostgreSQL][3]
   * [NGINX][4]
@@ -59,7 +59,7 @@ Pour afficher les stories archivées, cochez la case « Show N archived stories
 
 Les monitors associés à vos stories sont affichés en bas. Pour chaque monitor affiché, la métrique de la story actuelle et ses tags associés sont appliqués en tant que contexte.
 
-{{< img src="watchdog/watchdog_monitors.png" alt="Monitors Watchdog" responsive="true" style="width:75%;">}}
+{{< img src="watchdog/watchdog_monitors.png" alt="Monitors Watchdog"  style="width:75%;">}}
 
 En outre, Watchdog suggère un ou plusieurs monitors qui seront activés si la story se répète. Cliquez sur le bouton **Enable Monitor** pour activer le monitor pour votre organisation. Consultez la [documentation sur les monitors Watchdog][11] pour découvrir comment créer un monitor Watchdog.
 
@@ -101,18 +101,18 @@ Si Watchdog a détecté une irrégularité dans un service spécifique, une sect
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/integrations/system
-[2]: /fr/integrations/redis
-[3]: /fr/integrations/postgres
-[4]: /fr/integrations/nginx
-[5]: /fr/integrations/amazon_web_services
-[6]: /fr/integrations/amazon_s3
-[7]: /fr/integrations/amazon_elb
-[8]: /fr/integrations/amazon_cloudfront
-[9]: /fr/integrations/amazon_dynamodb
+[1]: /fr/integrations/system/
+[2]: /fr/integrations/redis/
+[3]: /fr/integrations/postgres/
+[4]: /fr/integrations/nginx/
+[5]: /fr/integrations/amazon_web_services/
+[6]: /fr/integrations/amazon_s3/
+[7]: /fr/integrations/amazon_elb/
+[8]: /fr/integrations/amazon_cloudfront/
+[9]: /fr/integrations/amazon_dynamodb/
 [10]: https://app.datadoghq.com/apm/watchdog
 [11]: /fr/monitors/monitor_types/watchdog/
 [12]: /fr/tracing/send_traces/#configure-your-environment
 [13]: /fr/tracing/guide/setting_primary_tags_to_scope/
 [14]: /fr/tracing/visualization/#services
-[15]: /fr/tracing/visualization/services_list
+[15]: /fr/tracing/visualization/services_list/

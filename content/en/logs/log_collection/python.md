@@ -37,10 +37,11 @@ Here are setup examples for the following logging libraries:
 
 * [JSON-log-formatter][1]
 * [Python-json-logger][2]
+* [django-datadog-logger][3]
 
 **Connect Logs and Traces**
 
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Python logging instructions][3] to add trace and span IDs to your logs.
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Python logging instructions][4] to add trace and span IDs to your logs.
 
 Once this is done, the log should have the following format:
 
@@ -157,7 +158,7 @@ logs:
     #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
 ```
 
-[Restart the Agent][4] to apply the configuration changes.
+[Restart the Agent][5] to apply the configuration changes.
 
 ## Further Reading
 
@@ -165,5 +166,6 @@ logs:
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [2]: https://github.com/madzak/python-json-logger
-[3]: /tracing/connect_logs_and_traces/python/
-[4]: /agent/guide/agent-commands/
+[3]: https://pypi.org/project/django-datadog-logger/
+[4]: /tracing/connect_logs_and_traces/python/
+[5]: /agent/guide/agent-commands/

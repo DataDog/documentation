@@ -37,10 +37,10 @@ supported_os:
 
 ## Présentation
 
-Recueillez des métriques du service Cassandra en temps réel pour :
+Recueillez des métriques de Cassandra en temps réel pour :
 
-* Visualiser et surveiller les états de Cassandra
-* Être informé des failovers et des événements de Cassandra
+- Visualiser et surveiller les états de Cassandra
+- Être informé des failovers et des événements de Cassandra
 
 ## Implémentation
 
@@ -64,32 +64,30 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Ajoutez ce bloc de configuration à votre fichier `cassandra.d/conf.yaml` pour commencer à recueillir vos logs Cassandra :
 
-    ```yaml
-      logs:
-        - type: file
-          path: /var/log/cassandra/*.log
-          source: cassandra
-          sourcecategory: database
-          service: myapplication
-          log_processing_rules:
-             - type: multi_line
-               name: log_start_with_date
-               # pattern to match: DEBUG [ScheduledTasks:1] 2019-12-30
-               pattern: [A-Z]+ +\[[^\]]+\] +\d{4}-\d{2}-\d{2}
-    ```
+   ```yaml
+     logs:
+       - type: file
+         path: /var/log/cassandra/*.log
+         source: cassandra
+         service: myapplication
+         log_processing_rules:
+            - type: multi_line
+              name: log_start_with_date
+              # pattern to match: DEBUG [ScheduledTasks:1] 2019-12-30
+              pattern: '[A-Z]+ +\[[^\]]+\] +\d{4}-\d{2}-\d{2}'
+   ```
 
-    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
-    Consultez le [fichier d'exemple cassandra.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement. Consultez le [fichier d'exemple cassandra.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
     Pour vous assurer que les traces de pile sont bien agrégées en un seul log, vous pouvez ajouter une [règle de traitement multiligne][7].
 
@@ -105,12 +103,12 @@ Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec J
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][10].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][10].
 
 | Paramètre      | Valeur                                                  |
-|----------------|--------------------------------------------------------|
+| -------------- | ------------------------------------------------------ |
 | `<CONFIG_LOG>` | `{"source": "cassandra", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
@@ -138,66 +136,49 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 ## Pour aller plus loin
 
-* [Comment surveiller les métriques de performance Cassandra][13]
-* [Comment recueillir des métriques Cassandra][14]
-* [Surveillance de Cassandra avec Datadog][15]
-
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra/images/cassandra_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/fr/integrations/java
-[4]: https://docs.datadoghq.com/fr/help
-[5]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/logs/advanced_log_collection/?tab=exclude_at_match#multi-line-aggregation
-[8]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[9]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[10]: https://docs.datadoghq.com/fr/agent/docker/log/
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/cassandra/metadata.csv
-[13]: https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics
-[14]: https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics
-[15]: https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog
+- [Comment surveiller les métriques de performance Cassandra][12]
+- [Comment recueillir des métriques Cassandra][13]
+- [Surveillance de Cassandra avec Datadog][14]
 
 
 
 
 ## Check de l'Agent : Cassandra Nodetool
 
-![dashboard par défaut de Cassandra][111]
+![Dashboard par défaut Cassandra][15]
 
 ## Présentation
 
-Ce check recueille des métriques pour votre cluster Cassandra qui ne sont pas proposées par l'[intégration jmx][112]. Cette collecte repose sur l'utilitaire `nodetool`.
+Ce check recueille des métriques pour votre cluster Cassandra qui ne sont pas proposées par l'[intégration jmx][16]. Cette collecte repose sur l'utilitaire `nodetool`.
 
 ## Configuration
 
 ### Installation
 
-Le check Cassandra Nodetool est inclus avec le paquet de l'[Agent Datadog][113] : vous n'avez donc rien d'autre à installer sur vos nœuds Cassandra.
+Le check Cassandra Nodetool est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos nœuds Cassandra.
 
 ### Configuration
 
-1. Modifiez le fichier `cassandra_nodetool.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][114]. Consultez le [fichier d'exemple cassandra_nodetool.d/conf.yaml][115] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `cassandra_nodetool.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][17]. Consultez le [fichier d'exemple cassandra_nodetool.d/conf.yaml][18] pour découvrir toutes les options de configuration disponibles :
 
-    ```yaml
-      init_config:
+   ```yaml
+   init_config:
 
-      instances:
+   instances:
+     ## @param keyspaces - list of string - required
+     ## The list of keyspaces to monitor.
+     ## An empty list results in no metrics being sent.
+     #
+     - keyspaces:
+         - "<KEYSPACE_1>"
+         - "<KEYSPACE_2>"
+   ```
 
-          ## @param keyspaces - list of string - required
-          ## The list of keyspaces to monitor.
-          ## An empty list results in no metrics being sent.
-          #
-        - keyspaces:
-            - "<KEYSPACE_1>"
-            - "<KEYSPACE_2>"
-    ```
-
-2. [Redémarrez l'Agent][116].
+2. [Redémarrez l'Agent][6].
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][117] et cherchez `cassandra_nodetool` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][11] et cherchez `cassandra_nodetool` dans la section Checks.
 
 ## Données collectées
 
@@ -216,25 +197,30 @@ L'Agent envoie ce check de service pour chaque nœud du cluster surveillé. Renv
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][119].
+Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 ## Pour aller plus loin
 
-* [Comment surveiller les métriques de performance Cassandra][1110]
-* [Comment recueillir des métriques Cassandra][1111]
-* [Surveillance de Cassandra avec Datadog][1112]
-
-[111]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra_nodetool/images/cassandra_dashboard.png
-[112]: https://github.com/DataDog/integrations-core/tree/master/cassandra
-[113]: https://app.datadoghq.com/account/settings#agent
-[114]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[115]: https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/datadog_checks/cassandra_nodetool/data/conf.yaml.example
-[116]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[117]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[118]: https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/metadata.csv
-[119]: https://docs.datadoghq.com/fr/help
-[1110]: https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics
-[1111]: https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics
-[1112]: https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog
+- [Comment surveiller les métriques de performance Cassandra][12]
+- [Comment recueillir des métriques Cassandra][13]
+- [Surveillance de Cassandra avec Datadog][14]
 
 
+[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra/images/cassandra_dashboard.png
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://docs.datadoghq.com/fr/integrations/java/
+[4]: https://docs.datadoghq.com/fr/help/
+[5]: https://github.com/DataDog/integrations-core/blob/master/cassandra/datadog_checks/cassandra/data/conf.yaml.example
+[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/fr/agent/logs/advanced_log_collection/?tab=exclude_at_match#multi-line-aggregation
+[8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[9]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[10]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[12]: https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics
+[13]: https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics
+[14]: https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog
+[15]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra_nodetool/images/cassandra_dashboard.png
+[16]: https://github.com/DataDog/integrations-core/tree/master/cassandra
+[17]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[18]: https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/datadog_checks/cassandra_nodetool/data/conf.yaml.example

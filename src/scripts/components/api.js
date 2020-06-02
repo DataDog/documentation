@@ -44,7 +44,7 @@ function versionSelectHandler(event) {
         }
     } else if (event.target.value === 'v1') {
         // check if page exists on v1
-        
+
         fetch(`${window.location.href.replace('api/v2', 'api/v1')}`)
             .then((response) => {
                 // redirect to v2 page
@@ -155,3 +155,20 @@ $('.hasChildData .js-collapse-trigger').click(function () {
     $(this).closest('.row').siblings('.isNested').toggleClass('d-none');
     $(this).find('.toggle-arrow').toggleClass('expanded');
 });
+
+// Scroll the active top level nav item into view below Docs search input
+if (document.body.classList.contains('api')) {
+    const headerHeight = $('body > header').height();
+    const padding = 200;
+    $('.sidenav-nav').css(
+        'maxHeight',
+        document.documentElement.clientHeight - headerHeight - padding
+    );
+
+    const apiSideNav = document.querySelector('.sidenav-api .sidenav-nav');
+    const sideNavActiveMenuItem = apiSideNav.querySelector('li.active');
+    if (sideNavActiveMenuItem) {
+        const distanceToTop = sideNavActiveMenuItem.offsetTop;
+        apiSideNav.scrollTop = distanceToTop - 100;
+    }
+}

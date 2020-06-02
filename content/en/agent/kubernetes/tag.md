@@ -37,12 +37,6 @@ annotations:
   ad.datadoghq.com/<CONTAINER_IDENTIFIER>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
-Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without [modifying the Agent `datadog.yaml` file][1].
-
-```yaml
-com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
-```
-
 ## Node labels as tags
 
 Starting with Agent v6.0+, the Agent can collect labels for a given node and use them as tags to attach to all metrics emitted by all pods on this node:
@@ -186,4 +180,3 @@ kubernetes_pod_annotations_as_tags:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kubernetes/tag/?tab=agent#extract-labels-as-tags

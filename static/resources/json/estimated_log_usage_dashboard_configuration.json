@@ -171,7 +171,7 @@
                 "type": "query_value",
                 "requests": [
                     {
-                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index} by {service}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$index} by {service}.as_count()*100",
+                        "q": "sum:datadog.estimated_usage.logs.ingested_events{datadog_is_excluded:true,$service,$index}.as_count()/sum:datadog.estimated_usage.logs.ingested_events{$service,$index}.as_count()*100",
                         "aggregator": "sum"
                     }
                 ],

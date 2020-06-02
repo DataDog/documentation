@@ -9,7 +9,7 @@ further_reading:
   tag: "Documentation"
   text: "Azure App Service Environment"
 ---
-<div class="alert alert-warning"> This service is in public beta. If you have any feedback, please <a href="/help">contact Datadog support</a>.</div>
+<div class="alert alert-warning"> This service is in public beta. If you have any feedback, please <a href="/help">contact Datadog support</a>. During the beta period, the use of this extension is not metered for billing purposes.</div>
 
 ## Overview
 

@@ -177,6 +177,8 @@ Notifications for missing data are useful if you expect a metric to always be re
 
 Alternatively, if you are monitoring a metric over an auto-scaling group of hosts that stop and start automatically, notifying for no data would produce a lot of notifications. For this case, you should not enable notifications for missing data.
 
+This option does not work if it is enabled at a time when data has not been reporting for a long period. 
+
 #### Auto Resolve
 
 `[Never]`, `After 1 hour`, `After 2 hours`, etc. automatically resolve this event from a triggered state.

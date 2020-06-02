@@ -3,7 +3,7 @@
     "responses": {
       "201": {
         "json": {
-          "is_secret": false,
+          "is_secret": true,
           "name": "CUSTOM_VARIABLE_NAME",
           "value": "CUSTOM_VARIABLE_VALUE"
         },
@@ -28,12 +28,12 @@
     },
     "request": {
       "json_curl": {
-        "is_secret": null,
+        "is_secret": true,
         "name": "CUSTOM_VARIABLE_NAME",
         "value": "CUSTOM_VARIABLE_VALUE"
       },
       "json": {
-        "is_secret": false,
+        "is_secret": true,
         "name": "CUSTOM_VARIABLE_NAME",
         "value": "CUSTOM_VARIABLE_VALUE"
       },
@@ -69,7 +69,7 @@
     "responses": {
       "200": {
         "json": {
-          "is_secret": false,
+          "is_secret": true,
           "name": "CUSTOM_VARIABLE_NAME",
           "value": "CUSTOM_VARIABLE_VALUE"
         },
@@ -110,7 +110,7 @@
     "responses": {
       "200": {
         "json": {
-          "is_secret": false,
+          "is_secret": true,
           "name": "CUSTOM_VARIABLE_NAME",
           "value": "CUSTOM_VARIABLE_VALUE"
         },

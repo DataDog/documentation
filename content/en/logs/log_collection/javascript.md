@@ -35,8 +35,7 @@ With the `datadog-logs` library, you can send logs directly to Datadog from JS c
 
 After adding [`@datadog/browser-logs`][3] to your `package.json` file, initialize it with:
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
@@ -49,8 +48,8 @@ datadogLogs.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
@@ -63,15 +62,13 @@ datadogLogs.init({
 });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 ### Bundle setup
 
 In order to not miss any logs or errors, you should load and configure the library at the beginning of the head section of your pages.
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```html
 <html>
@@ -89,8 +86,8 @@ In order to not miss any logs or errors, you should load and configure the libra
 </html>
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```html
 <html>
@@ -108,8 +105,7 @@ In order to not miss any logs or errors, you should load and configure the libra
 </html>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 **Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
 
@@ -121,6 +117,9 @@ The following parameters can be used to configure the Datadog browser log librar
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
 | `clientToken`         | String  | Yes      | `-`     | A [Datadog Client Token][2].                                                                             |
 | `datacenter`          | String  | Yes      | `us`    | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.               |
+| `service`            | String  | No       | `` | The service name for this application.                             |
+| `env`                | String  | No       | `` | The application’s environment e.g. prod, pre-prod, staging.                   |
+| `version`            | String  | No       | `` | The application’s version e.g. 1.2.3, 6c44da20, 2020.02.13.                   |
 | `forwardErrorsToLogs` | Boolean | no       | `true`  | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog. |
 | `sampleRate`          | Number  | no       | `100`   | Percentage of sessions to track. Only tracked sessions send logs. `100` for all, `0` for none of them.   |
 
@@ -301,7 +300,7 @@ datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setLoggerGlobalContext("{'env', 'staging'}");
+window.DD_LOGS && DD_LOGS.setLoggerGlobalContext({env: 'staging'});
 
 window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer);
 ```

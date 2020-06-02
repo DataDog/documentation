@@ -8,6 +8,14 @@
 base_integrations_url: https://docs.datadoghq.com/integrations/
 image_map:
   - source:
+      - kubernetes
+    image: kube_apiserver_metrics
+    append: false
+  - source:
+      - azure
+    image: azure.active_directory
+    append: false
+  - source:
       - cloudtrail
       - ec2
       - ecs

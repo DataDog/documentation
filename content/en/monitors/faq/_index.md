@@ -11,7 +11,7 @@ private: true
     {{< nextlink href="monitors/faq/what-is-the-do-not-require-a-full-window-of-data-for-evaluation-monitor-parameter" >}}What is the "Do (not) require a full window of data for evaluation" monitor parameter?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/how-do-i-monitor-ephemeral-servers-for-reboots" >}}How do I monitor ephemeral servers for reboots?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/can-i-send-sms-notifications-in-datadog" >}}Can I send SMS notifications in Datadog?{{< /nextlink >}}
-    {{< nextlink href="monitors/faq/how-can-i-export-alert-history" >}}How can I export Monitor Alert History?{{< /nextlink >}}
+    {{< nextlink href="monitors/faq/how-can-i-export-alert-history" >}}Export Monitor Alerts to CSV{{< /nextlink >}}
     {{< nextlink href="monitors/faq/can-i-set-up-a-monitor-for-a-metric-that-hasn-t-been-reported-to-datadog-yet" >}}Can I set up a monitor for a metric that hasn't been reported to Datadog yet?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/how-can-i-configure-a-metric-monitor-to-alert-on-no-change-in-value" >}}How can I configure a metric monitor to alert on NO change in value?{{< /nextlink >}}
     {{< nextlink href="monitors/faq/why-am-i-getting-so-many-no-data-alerts-for-my-metric-monitor" >}}Why am I getting so many "No Data" Alerts for my Metric Monitor?{{< /nextlink >}}

@@ -30,7 +30,7 @@ dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> "<COMMAND>"
 * `<DATADOG_API_KEY>`: [オーガニゼーションに関連付けられた Datadog API キー][2]。
 * `<COMMAND>`: ラップしてイベントを生成するコマンド。呼び出されるコマンドは引用符で囲みます。これは、Python がこのコマンドラインの引数を、ラップされたコマンドの引数ではなく Python コマンドの引数と見なさないようにするためです。
 
-**注**: Dogwrap のヘルプコマンド `dogwrap help` を使用すると、使用可能なすべてのオプションが表示されます。
+**注**: Dogwrap のヘルプコマンド `dogwrap --help` を使用すると、使用可能なすべてのオプションが表示されます。
 
 実際の `dogwrap` の例として、`cron` を考えます。次のように、Postgres テーブルを毎日バキュームする cron スクリプトがあるとします。
 

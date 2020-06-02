@@ -578,15 +578,18 @@ $(document).ready(function () {
         $('.sidenav-search input[name="s"]').val(searchParam);
     }
 
-    $(window).on('resize scroll', function(e) {
-        const header_h = $('body > header').height();
-        const footer_h = $('body > footer').height();
-        const padding = 200;
-        $('.sidenav-nav').css(
-            'maxHeight',
-            document.documentElement.clientHeight - header_h - padding
-        );
-    });
+    if (!document.body.classList.contains('api')){
+        $(window).on('resize scroll', function(e) {
+            const header_h = $('body > header').height();
+            const footer_h = $('body > footer').height();
+            const padding = 200;
+            $('.sidenav-nav').css(
+                'maxHeight',
+                document.documentElement.clientHeight - header_h - padding
+            );
+        });
+    }
+    
 
     updateMainContentAnchors();
 
@@ -692,21 +695,7 @@ function updateMainContentAnchors() {
     // make header tags with ids and make clickable as anchors
     $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
         const id = $(this).attr('id');
-        $(this).wrapInner(`<a href="#${id}"></a>`).on('click', function(e) {
-            e.preventDefault();
-            moveToAnchor(id);
-            return false;
-        });
-    });
-
-    $(".main a[href^='#']").click(function (e) {
-        if (!e.target.parentElement.id) {
-            e.preventDefault();
-            const id = e.target.hash.split('#').join('');
-            if (id) {
-                moveToAnchor(id);
-            }
-        }
+        $(this).wrapInner(`<a href="#${id}"></a>`);
     });
 }
 
@@ -973,7 +962,7 @@ function loadPage(newUrl) {
             }
 
             const newDocument = httpRequest.responseXML;
-
+            
             if (newDocument === null) {
                 return;
             }
@@ -1047,8 +1036,11 @@ function loadPage(newUrl) {
 
             const start = window.performance.now();
 
+            // check if loaded page has inline JS. if so, we want to return as script will not execute
+            const hasScript = newContent.getElementsByTagName('script').length;
+
             // if there is error finding the element, reload page at requested url
-            if (mainContent.parentElement) {
+            if (mainContent.parentElement && !hasScript) {
                 mainContent.parentElement.replaceChild(newContent, mainContent);
                 mainContent = newContent;
 
@@ -1199,7 +1191,7 @@ function navClickEventHandler(event) {
     } else if (loadViaAjax(event.target)) {
         loadPage(newUrl);
         event.preventDefault();
-        history.pushState({}, '' /* title */, newUrl);
+        history.pushState({}, '', newUrl);
         updateSidebar(event);
     } else {
         window.location.href = newUrl;

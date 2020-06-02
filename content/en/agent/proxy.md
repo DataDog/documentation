@@ -34,7 +34,9 @@ Set different proxy servers for `https` and `http` requests in your Agent `datad
 The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file.
 
 <div class="alert alert-warning">
-Unless the Datadog Agent is configured to <a href="/agent/logs/#send-logs-over-https">forward logs in HTTPS</a>, the <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics can **not** be used to proxy logs. See the <a href="/agent/logs/proxy">Proxy for Logs</a> page.
+If log collection is enable, make sure that a specific transport is <a href="/agent/logs/log_transport?tab=https#enforce-a-specific-transport">enforced</a>.
+The recommended setup is to use HTTPS. In that case, the <code>&ltHOST&gt;:&ltPORT&gt;</code> used to proxy metrics is used to proxy logs.
+If you are using TCP transport, refere to <a href="/agent/logs/proxy">TCP Proxy for Logs</a> page.
 </div>
 
 Setting an HTTP proxy for all `https` requests:
@@ -122,7 +124,7 @@ This is the best option if you do not have a web proxy readily available in your
 
 `agent ---> haproxy ---> Datadog`
 
-### Proxy metric forwarding with HAProxy
+### Proxy forwarding with HAProxy
 
 #### HAProxy configuration
 
@@ -208,11 +210,11 @@ frontend logs_http_frontend
     default_backend datadog-logs-http
 
 # If sending logs with use_tcp: true
-frontend logs_frontend
-    bind *:10514
-    mode tcp
-    option tcplog
-    default_backend datadog-logs
+# frontend logs_frontend
+#    bind *:10514
+#    mode tcp
+#    option tcplog
+#    default_backend datadog-logs
 
 
 # This is the Datadog server. In effect any TCP request coming
@@ -258,12 +260,6 @@ backend datadog-logs-http
     # Uncomment the following configuration for older HAProxy versions
     # server datadog agent-http-intake.logs.datadoghq.com:443 check port 443 ssl verify none
 
-backend datadog-logs
-    balance roundrobin
-    # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check resolvers my-dns init-addr none resolve-prefer ipv4
-    # Uncomment the following configuration for older HAProxy versions
-    # server datadog agent-intake.logs.datadoghq.com:10516 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 10516
 ```
 
 **Note**: Download the certificate with the following command:
@@ -354,14 +350,6 @@ frontend logs_http_frontend
     option tcplog
     default_backend datadog-logs-http
 
-# If sending logs with use_tcp: true
-frontend logs_frontend
-    bind *:10514
-    mode tcp
-    option tcplog
-    default_backend datadog-logs
-
-
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -405,12 +393,6 @@ backend datadog-logs-http
     # Uncomment the following configuration for older HAProxy versions
     # server datadog agent-http-intake.logs.datadoghq.eu:443 check port 443 ssl verify none
 
-backend datadog-logs
-    balance roundrobin
-    # The following configuration is for HAProxy 1.8 and newer
-    server-template mothership 5 agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check resolvers my-dns init-addr none resolve-prefer ipv4
-    # Uncomment the following configuration for older HAProxy versions
-    # server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-certificates.crt check port 443
 ```
 
 **Note**: Download the certificate with the following command:
@@ -435,7 +417,7 @@ This `dd_url` setting can be found in the `datadog.yaml` file.
 
 `dd_url: http://haproxy.example.com:3834`
 
-To send traces or processes through the proxy, setup the following in the `datadog.yaml` file:
+To send traces, processes and logs through the proxy, setup the following in the `datadog.yaml` file:
 
 ```yaml
 apm_config:
@@ -443,6 +425,10 @@ apm_config:
 
 process_config:
     process_dd_url: http://haproxy.example.com:3836
+    
+logs_config:
+    use_http: true
+    logs_dd_url: http://haproxy.example.com:3837
 ```
 
 Then edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`. This is needed to make the Agent ignore the discrepancy between the hostname on the SSL certificate (`app.datadoghq.com` or `app.datadoghq.eu`) and your HAProxy hostname:
@@ -562,11 +548,6 @@ stream {
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.datadoghq.com:443;
     }
-    server {
-        listen 10514; #listen for logs with use_tcp: true
-        proxy_ssl on;
-        proxy_pass agent-intake.logs.datadoghq.com:10516;
-    }
 }
 ```
 
@@ -617,11 +598,6 @@ stream {
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.datadoghq.eu:443;
     }
-    server {
-        listen 10514; #listen for logs with use_tcp: true
-        proxy_ssl on;
-        proxy_pass agent-intake.logs.datadoghq.eu:443;
-    }
 }
 ```
 
@@ -629,24 +605,17 @@ stream {
 
 #### Datadog Agent configuration
 
-To use the Datadog Agent v6 as the logs collector, instruct the Agent to use the newly created proxy instead of establishing a connection directly with the logs intake by updating `datadog.yaml`:
-
-```yaml
-logs_config:
-  logs_no_ssl: true
-  logs_dd_url: "<PROXY_SERVER_DOMAIN>:10514"
-```
-
-When choosing to send logs over HTTPS, use the following code block in `datadog.yaml` to configure Agent behavior:
+To use the Datadog Agent v6/7.16+ as the logs collector, instruct the Agent to use the newly created proxy instead of establishing a connection directly with the logs intake by updating `datadog.yaml`:
 
 ```yaml
 logs_config:
   logs_no_ssl: true
   logs_dd_url: "<PROXY_SERVER_DOMAIN>:3837"
   use_http: true
-  use_compression: true
-  compression_level: 6
 ```
+
+When sending logs over TCP, refer to <a href="/agent/logs/proxy">TCP Proxy for Logs</a> page.
+
 
 ## Using the Agent as a Proxy
 

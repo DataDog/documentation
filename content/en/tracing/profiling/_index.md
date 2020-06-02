@@ -5,6 +5,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tags: 'Blog'
       text: 'Introducing always-on production profiling in Datadog.'
+    - link: 'tracing/profiling/proxy'
+      tag: 'Documentation'
+      text: 'Configure your Proxy to forward your profiles to Datadog.'
 ---
 
 <div class="alert alert-info">
@@ -108,12 +111,13 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_API_KEY`                                     | String        | The [Datadog API key][1] to use when uploading profiles. New in version 0.37.                                        |
-| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][1] to use when uploading profiles. Changed in 0.37: deprecated in favor of DD_API_KEY.
+| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][1] to use when uploading profiles. Changed in 0.37: deprecated in favor of `DD_API_KEY`. |
 | `DD_SITE`                                        | String        | If your organization is on Datadog EU site, set this to `datadoghq.eu`.                          |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="env:production"`. |
 | `DD_VERSION`                                     | String        | The version of your application, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="version:<APPLICATION_VERSION>"`                              |
-| `DD_PROFILING_TAGS`                              | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`.   |
+| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. New in version 0.38.   |
+| `DD_PROFILING_TAGS`                              | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. Changed in 0.38: deprecated in favor of `DD_TAGS`.|
 
 <div class="alert alert-info">
 Recommended for advanced usage only.
@@ -174,7 +178,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 Profiler configuration:
 
-|`profiler` method | Type          | Description                                                                                                  |
+| Method | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
 |  WithAPIKey      | String        | The Datadog [Datadog API key][2]                                                                             |
 |  WithService     | String        | The Datadog [service][4] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.             |

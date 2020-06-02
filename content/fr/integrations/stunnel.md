@@ -9,6 +9,8 @@ kind: integration
 name: Stunnel
 public_title: Intégration Datadog/Stunnel
 short_description: Recueillez les logs issus de votre proxy Stunnel et envoyez-les à Datadog.
+dependencies:
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/stunnel.md'
 ---
 ## Présentation
 
@@ -16,7 +18,7 @@ Stunnel est un proxy conçu pour ajouter la fonctionnalité de chiffrement TLS a
 
 Utilisez l'intégration Datadog/proxy Stunnel pour surveiller les potentiels problèmes de réseau ou attaques DDoS.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -28,26 +30,26 @@ Créez un fichier `stunnel.d/conf.yaml` dans le dossier `conf.d/` à la racine d
 
 #### Collecte de logs
 
-*Disponible uniquement pour l'Agent v6*
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans le fichier `datadog.yaml` :
 
-    ```
+    ```yaml
     logs_enabled: true
     ```
 
 2. Ajoutez ce bloc de configuration à votre fichier `stunnel.d/conf.yaml` pour commencer à recueillir vos logs Stunnel :
 
-    ```
-       logs:
-         - type: file
-           path: /var/log/stunnel.log
-           source: stunnel
-           service: <MY_SERVICE>
-           sourcecategory: proxy
+    ```yaml
+    logs:
+        - type: file
+          path: /var/log/stunnel.log
+          source: stunnel
+          service: '<MY_SERVICE>'
+          sourcecategory: proxy
     ```
 
-   Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
+    Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
 
 3. [Redémarrez l'Agent][3].
 

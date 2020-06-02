@@ -3,6 +3,11 @@ public/
 data/service_checks/
 integrations_data
 
+# Ignore generated examples
+/examples
+content/en/api/**/*.go
+content/en/api/**/*.java
+
 # Ignoring all automated content
 # Developers/integrations
 content/en/developers/integrations/*.md
@@ -13,6 +18,7 @@ content/en/agent/basic_agent_usage/ansible.md
 content/en/agent/basic_agent_usage/chef.md
 content/en/agent/basic_agent_usage/heroku.md
 content/en/agent/basic_agent_usage/puppet.md
+content/en/agent/basic_agent_usage/saltstack.md
 
 # Tracing
 content/en/tracing/setup/ruby.md
@@ -41,6 +47,7 @@ data/integrations/
 !content/en/integrations/alcide.md
 !content/en/integrations/iam_access_analyzer.md
 !content/en/integrations/kubernetes_audit_logs.md
+!content/en/integrations/apigee.md
 
 # security rules
 content/en/security_monitoring/default_rules/*.md

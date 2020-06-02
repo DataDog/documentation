@@ -37,7 +37,9 @@ The following provisioning systems are supported:
 
 ## Setup
 
-To enable network performance monitoring, configure it in your [Agent's main configuration file][6] based on your system setup:
+To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][6] based on your system setup. 
+
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommend to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
 
 {{< tabs >}}
 {{% tab "Agent" %}}
@@ -116,10 +118,10 @@ If you need to use Network Performance Monitoring on other systems with SELinux 
 
 If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
 
+
 [1]: /infrastructure/process/?tab=linuxwindows#installation
 [2]: /agent/guide/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
-
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 

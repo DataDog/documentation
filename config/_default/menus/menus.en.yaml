@@ -146,6 +146,11 @@ main:
     url: agent/basic_agent_usage/redhat/
     weight: 111
     parent: basic_agent_usage
+  - name: SaltStack
+    identifier: basic_agent_usage_saltstack
+    url: agent/basic_agent_usage/saltstack/
+    weight: 112
+    parent: basic_agent_usage
   - name: SUSE
     identifier: basic_agent_usage_suse
     url: agent/basic_agent_usage/suse/
@@ -360,6 +365,10 @@ main:
     url: agent/troubleshooting/windows_containers
     weight: 909
     parent: agent_troubleshooting
+  - name: Agent Runtime Configuration
+    url: agent/troubleshooting/config
+    weight: 910
+    parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
@@ -515,6 +524,11 @@ main:
     url: infrastructure/serverless/azure_app_services/
     parent: serverless
     identifier: app_services_extension
+    weight: 701
+  - name: Datadog Lambda Layer
+    url: infrastructure/serverless/datadog_lambda_layer
+    parent: serverless
+    identifier: datadog_lambda_layer
     weight: 701
   - name: Metrics
     url: metrics/
@@ -677,7 +691,7 @@ main:
     pre: nav_tracing
     identifier: tracing
     weight: 120000
-  - name: Enable Trace Collection
+  - name: Agent Configuration
     url: tracing/send_traces/
     identifier: tracing_send_traces
     parent: tracing
@@ -839,6 +853,11 @@ main:
     parent: tracing
     identifier: profiling
     weight: 7
+  - name: Proxy
+    url: tracing/profiling/proxy
+    parent: profiling
+    identifier: profiling_proxy
+    weight: 701
   - name: Manual Instrumentation
     url: tracing/manual_instrumentation/
     parent: tracing
@@ -890,7 +909,7 @@ main:
     identifier: tracing_opentracing
     weight: 9
   - name: Java
-    url: tracing/opentracing/java
+    url: tracing/manual_instrumentation/java
     parent: tracing_opentracing
     identifier: tracing_opentracing_java
     weight: 901
@@ -1023,7 +1042,7 @@ main:
     identifier: log_collection_ruby
     weight: 110
   - name: Other Integrations
-    url: 'integrations/#cat-log-collection'
+    url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
     weight: 111
@@ -1107,7 +1126,7 @@ main:
     identifier: logs_traces_connection
     weight: 8
   - name: Correlate Logs with Metrics
-    url: 'dashboards/timeboards/#graph-menu'
+    url: dashboards/timeboards/#graph-menu
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -1160,7 +1179,7 @@ main:
     parent: synthetics
     identifier: synthetics_browser_tests
     weight: 2
-  - name: Actions
+  - name: Steps
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 201
@@ -1182,23 +1201,20 @@ main:
     parent: synthetics
     identifier: synthetics_apm
     weight: 4
-  - name: Identify Synthetics Bots
-    url: synthetics/identify_synthetics_bots/
-    parent: synthetics
-    weight: 5
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 6
-  - name: Guide
+    weight: 5
+  - name: Guides
     url: synthetics/guide/
     parent: synthetics
-    weight: 7
+    identifier: synthetics_guides
+    weight: 6
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 8
+    weight: 7
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: nav_rum
@@ -1355,7 +1371,7 @@ main:
     identifier: dev_tools_metrics_powershell
     weight: 204
   - name: 'Submission - API '
-    url: 'api/v1/metrics/#submit-metrics'
+    url: api/v1/metrics/#submit-metrics
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_api
     weight: 205
@@ -1390,7 +1406,7 @@ main:
     identifier: dev_tools_events_mail
     weight: 303
   - name: API
-    url: 'api/v1/events/#post-an-event'
+    url: api/v1/events/#post-an-event
     parent: dev_tools_events
     identifier: dev_tools_events_api
     weight: 304
@@ -1810,6 +1826,9 @@ api_v1:
   - name: Send logs
     parent: Logs
     url: send-logs
+  - name: Logs Archives
+    url: /api/v1/logs-archives/
+    identifier: Logs Archives
   - name: Logs Indexes
     url: /api/v1/logs-indexes/
     identifier: Logs Indexes
@@ -2035,6 +2054,9 @@ api_v1:
   - name: Create a test
     parent: Synthetics
     url: create-a-test
+  - name: Get a browser test configuration
+    parent: Synthetics
+    url: get-a-browser-test-configuration
   - name: Get the test's latest results summaries (browser)
     parent: Synthetics
     url: get-the-tests-latest-results-summaries-browser
@@ -2089,6 +2111,9 @@ api_v1:
   - name: Usage Metering
     url: /api/v1/usage-metering/
     identifier: Usage Metering
+  - name: Get hourly usage for analyzed logs
+    parent: Usage Metering
+    url: get-hourly-usage-for-analyzed-logs
   - name: Get hourly usage for Lambda
     parent: Usage Metering
     url: get-hourly-usage-for-lambda
@@ -2113,6 +2138,9 @@ api_v1:
   - name: Get hourly usage for RUM Sessions
     parent: Usage Metering
     url: get-hourly-usage-for-rum-sessions
+  - name: Get hourly usage for SNMP devices
+    parent: Usage Metering
+    url: get-hourly-usage-for-snmp-devices
   - name: Get usage across your multi-org account
     parent: Usage Metering
     url: get-usage-across-your-multi-org-account
@@ -2244,6 +2272,33 @@ api_v2:
   - name: Logs
     url: /api/v2/logs/
     identifier: Logs
+  - name: Logs Archives
+    url: /api/v2/logs-archives/
+    identifier: Logs Archives
+  - name: Get all archives
+    parent: Logs Archives
+    url: get-all-archives
+  - name: Create an archive
+    parent: Logs Archives
+    url: create-an-archive
+  - name: Delete an archive
+    parent: Logs Archives
+    url: delete-an-archive
+  - name: Get an archive
+    parent: Logs Archives
+    url: get-an-archive
+  - name: Update an archive
+    parent: Logs Archives
+    url: update-an-archive
+  - name: Revoke role from an archive
+    parent: Logs Archives
+    url: revoke-role-from-an-archive
+  - name: List read roles for an archive
+    parent: Logs Archives
+    url: list-read-roles-for-an-archive
+  - name: Grant role to an archive
+    parent: Logs Archives
+    url: grant-role-to-an-archive
   - name: Logs Indexes
     url: /api/v2/logs-indexes/
     identifier: Logs Indexes
