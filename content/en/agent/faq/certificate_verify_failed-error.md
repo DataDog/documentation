@@ -27,12 +27,14 @@ Get the API and application key [from your account settings page][4]. If you are
 
 ### Fixing by upgrading to Agent 5.32.7
 
-If you are currently running Agent 5.x, Datadog recommends upgrading to Agent 5.32.7+. This ensures that the Agent continues to function in a variety of different scenarios, with the minimum amount of changes.
+If you are currently running Agent 5.x on a 64-bit host, Datadog recommends upgrading to Agent 5.32.7+. This ensures that the Agent continues to function in a variety of different scenarios, with the minimum amount of changes.
 
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`  
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`  
 Windows (from versions > 5.12.0): Download the Datadog [Agent installer][7]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`  
 More platforms and configuration management options detailed [here][8].
+
+The last compatible Agent released for 32-bit systems was 5.10.1. Please follow the `Fixing without upgrading the Agent` instructions for 32-bit hosts.
 
 ### Fixing without upgrading the Agent
 
