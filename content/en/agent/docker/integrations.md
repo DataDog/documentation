@@ -71,8 +71,6 @@ labels:
   com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-**Note**: As a best practice, Datadog recommends using unified service tagging in containerized environments. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][11] documentation.
-
 **docker run command**:
 
 ```shell
@@ -95,6 +93,8 @@ services:
       com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
 
 ```
+
+**Note**: When configuring autodiscovery, Datadog recommends using Docker labels to unify telemetry across your containerized environment. Read the [unified service tagging][11] documentation for more information.
 
 {{% /tab %}}
 {{% tab "File" %}}
