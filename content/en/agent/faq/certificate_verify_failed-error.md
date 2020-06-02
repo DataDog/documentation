@@ -34,7 +34,7 @@ Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`
 Windows (from versions > 5.12.0): Download the Datadog [Agent installer][7]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`  
 More platforms and configuration management options detailed [here][8].
 
-The last compatible Agent released for 32-bit systems was 5.10.1. Please follow the `Fixing without upgrading the Agent` instructions for 32-bit hosts.
+The last compatible Agent released for 32-bit systems was 5.10.1. Follow the `Fixing without upgrading the Agent` instructions for 32-bit hosts.
 
 ### Fixing without upgrading the Agent
 
