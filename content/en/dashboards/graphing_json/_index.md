@@ -39,7 +39,7 @@ DASHBOARD_SCHEMA = {
 |----------------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `title`              | string           | Title of your dashboard.                                                                                                                  |
 | `description`        | string           | Description of the dashboard.                                                                                                             |
-| `layout_type`        | enum             | Layout type of the dashboard. Available values are: `ordered` (previous timeboard) or `free` (previous screenboard layout)                |
+| `layout_type`        | enum             | Layout type of the dashboard. Available values are: `ordered` or `free`               |
 | `is_read_only`       | Boolean          | Whether this dashboard is read-only. If `true`, only the dashboard author and administrators can apply changes to it.                     |
 | `template_variables` | array of object  | List of template variables for this dashboard. See [the template variable schema documentation](#template-variable-schema) to learn more. |
 | `notify_list`        | array of strings | List of handles of users to notify when changes are made to this dashboard.                                                               |
