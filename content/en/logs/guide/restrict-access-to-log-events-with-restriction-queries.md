@@ -377,7 +377,7 @@ Note that a user can belong to multiple roles.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs)
-[2]: /account/settings#api
+[2]: https://app.datadoghq.com/account/settings#api
 [3]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
 [4]: /api/v2/roles/#create-role
 [5]: /api/v2/roles/#list-permissions
