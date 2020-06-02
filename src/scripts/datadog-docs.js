@@ -1039,6 +1039,8 @@ function loadPage(newUrl) {
             // check if loaded page has inline JS. if so, we want to return as script will not execute
             const hasScript = newContent.getElementsByTagName('script').length;
 
+            console.log('hasScript: ', hasScript)
+
             // if there is error finding the element, reload page at requested url
             if (mainContent.parentElement && !hasScript) {
                 mainContent.parentElement.replaceChild(newContent, mainContent);
@@ -1235,7 +1237,7 @@ function rulesListClickHandler(event, pathString) {
 }
 
 window.addEventListener('click', (event) => {
-    rulesListClickHandler(event, 'default_rules');
+    // rulesListClickHandler(event, 'default_rules');
 });
 
 window.onload = function () {
