@@ -505,7 +505,7 @@ spec:
         name: logdockercontainerpath
       tolerations:
       affinity: null
-      serviceAccountName: "default"
+      serviceAccountName: "datadog-agent"
       nodeSelector:
   updateStrategy:
     rollingUpdate:

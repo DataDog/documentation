@@ -189,7 +189,7 @@ spec:
         emptyDir: {}
       tolerations:
       affinity: null
-      serviceAccountName: "default"
+      serviceAccountName: "datadog-agent"
       nodeSelector:
   updateStrategy:
     rollingUpdate:
