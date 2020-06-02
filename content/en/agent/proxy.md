@@ -222,18 +222,21 @@ frontend logs_http_frontend
 # Datadog's public endpoints.
 backend datadog-metrics
     balance roundrobin
+    mode http
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 haproxy-app.agent.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership haproxy-app.agent.datadoghq.com:443 check port 443 ssl verify none
 
 backend datadog-api
+    mode http
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 api.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
     # server mothership api.datadoghq.com:443 check port 443 ssl verify none
 
 backend datadog-flare
+    mode http
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 flare.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -241,6 +244,7 @@ backend datadog-flare
 
 backend datadog-traces
     balance roundrobin
+    mode tcp
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 trace.agent.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -248,6 +252,7 @@ backend datadog-traces
 
 backend datadog-processes
     balance roundrobin
+    mode tcp
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 process.datadoghq.com:443 check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
@@ -255,6 +260,7 @@ backend datadog-processes
 
 backend datadog-logs-http
     balance roundrobin
+    mode http
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 agent-http-intake.logs.datadoghq.com:443  check port 443 ssl verify none check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
