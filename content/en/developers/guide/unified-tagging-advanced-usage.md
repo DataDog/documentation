@@ -40,7 +40,7 @@ You also have the ability to add custom fields to your logs in-code, which can b
 
 We recommend using both standard labels and environment variables. However, standard labels can be seen as an alternative to using environment variables, particularly for applications that will not benefit from using those variables in their runtime. 3rd party software like Redis, MySQL, and Nginx are a few examples. Since these services still generate infrastructure metrics and data from integration checks, it's valuable to have all of that data tagged with `env`, `service`, and `version`.
 
-If you would like to tag Kubernetes state metrics with `env`, `service`, and `version` then the standard labels offer the easiest way. The `DD environment variables of a container cannot be used by the Agent to tag these metrics, so the labels are a more natural option.
+If you would like to tag Kubernetes state metrics with `env`, `service`, and `version` then the standard labels offer the easiest way. The `DD` environment variables of a container cannot be used by the Agent to tag these metrics, so the labels are a more natural option.
 
 ### Declaring environment as a label
 
@@ -52,7 +52,7 @@ Kubernetes users can continue to use these general tags. However, using the spec
 - You can directly reference them for environment variable injection via the Kubernetes downward API.
 - The service standard label can simplify the definition of service for logs.
 
-## Using standard labels for specific containers
+### Using standard labels for specific containers
 Since the `DD` environment variables are injected at the container level, they can differ from container to container. However, if you want to use the standard labels as well for specific containers, then you will need to use their container-specific variants:
 
 ```yaml
