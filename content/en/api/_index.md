@@ -7,15 +7,13 @@ type: api
 
 Use the Datadog HTTP API to programmatically access the Datadog platform.
 
-**To get started on Datadog HTTP API, use our [Datadog Postman collection][1]**
+**To get started on Datadog HTTP API, use the following flow to determine which endpoints you need and checkout our [Datadog Postman collection][1]**
+
+{{< img src="api/api-flow.png" alt="Flow through Datadog" responsive="true" style="width:100%;">}}
 
 The Datadog API uses resource-oriented URLs, uses status codes to indicate the success or failure of requests and returns JSON from all requests.
 
 **Note**: cURL code examples assume usage of BASH and GNU coreutils. On macOS you can install coreutils via the [Homebrew package manager][2]: `brew install coreutils`
-
-To get started with Datadog, use the following flow to determine which endpoints you need:
-
-{{< img src="api/api-flow.png" alt="Flow through Datadog" responsive="true" style="width:100%;">}}
 
 {{< h2 >}}Install the Datadog Agent{{< /h2 >}}
 
@@ -25,7 +23,7 @@ Before you can use the API to send or view data, you need to [install the Datado
 
 Once you have the Datadog Agent set up, use the API to begin to send integrations data to Datadog. With some additional setup of the Agent, you can also use the API to send Synthetics, Logs and Traces to Datadog.
 
-{{< h3 >}}Integrations endpoints{{< /h3 >}}
+**Integrations endpoints**
 
 Available intgrations endpoints:
 
@@ -37,7 +35,7 @@ Available intgrations endpoints:
 - PagerDuty Integration
 - Webhooks Integration
 
-{{< h3 >}}Platform endpoints{{< /h3 >}}
+**Platform endpoints**
 
 Use these endpoints to post and fetch data to and from other parts of the Datadog platform: 
 
