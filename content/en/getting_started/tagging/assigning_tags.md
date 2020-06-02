@@ -159,10 +159,6 @@ For containerized environments that utilize Autodiscovery for integration inheri
 
 #### Environment variables
 
-<div class="alert alert-info">
-In containerized environments, Datadog recommends the use of <a href="/tagging/unified_service_tagging">unified service tagging</a> to configure environment variables.
-</div>
-
 After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agents main configuration file.
 
 Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
@@ -250,74 +246,21 @@ Setting the variable to `high` additionally adds the following tags: `container_
 #### Traces
 
 <div class="alert alert-info">
-In containerized environments, Datadog recommends the use of <a href="/tagging/unified_service_tagging">unified service tagging</a> for traces.
+Datadog recommends the use of <a href="/tagging/unified_service_tagging">unified service tagging</a> for configuring the standard tags env, service, and version in traces.
 </div>
 
-The Datadog tracer is configured using System Properties and Environment Variables. Trace tags require [configuration][7] based on language. Read the [Datadog tracing setup][8] documentation for more information.
+The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][7] documentation has information on tagging options and configuration for each tracer.
 
-When submitting a single trace, tag its spans to override Agent configuration tags and/or the host tags value (if any) for those traces:
+Regardless of the tracer used, span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and is of a single type.
 
-The following examples use the default primary tag `env:<ENVIRONMENT>` but you can use any `<KEY>:<VALUE>` tag instead.
-
-{{< tabs >}}
-{{% tab "Go" %}}
-
-```go
-tracer.SetTag("env", "<ENVIRONMENT>")
-```
-
-For OpenTracing use the `tracer.WithGlobalTag` start option to set the environment globally.
-
-{{% /tab %}}
-{{% tab "Java" %}}
-Via sysprop:
-
-```text
--Ddd.trace.span.tags=env:<ENVIRONMENT>
-```
-
-Via environment variables:
-
-```text
-DD_TRACE_SPAN_TAGS="env:<ENVIRONMENT>"
-```
-
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-```ruby
-Datadog.tracer.set_tags('env' => '<ENVIRONMENT>')
-```
-
-{{% /tab %}}
-{{% tab "Python" %}}
-
-```python
-from ddtrace import tracer
-tracer.set_tags({'env': '<ENVIRONMENT>'})
-```
-
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-```csharp
-using Datadog.Trace;
-Tracer.Instance.ActiveScope?.Span.SetTag("env", "<ENVIRONMENT>");
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-**Note**: Span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and a node can be of a single type: it can't be both an object (with sub-nodes) and a string for instance.
-
-So this example of span tags is invalid:
-
+For instance, a node can't be both an object (with sub-nodes) and a string:
 ```json
 {
   "key": "value",
   "key.subkey": "value_2"
 }
 ```
+The span metadata above is invalid since the value of `key` cannot refer to a string (`"value"`) and also a subtree (`{"subkey": "value_2"}`).
 
 ### UI
 
@@ -429,7 +372,7 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-Add tags to any metric, event, or service check you send to [DogStatsD][9]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
+Add tags to any metric, event, or service check you send to [DogStatsD][8]. For example, compare the performance of two algorithms by tagging a timer metric with the algorithm version:
 
 ```python
 
@@ -442,9 +385,9 @@ def algorithm_two():
     # Do fancy things (maybe faster?) here ...
 ```
 
-**Note**: Tagging is a [Datadog-specific extension][10] to StatsD.
+**Note**: Tagging is a [Datadog-specific extension][9] to StatsD.
 
-Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][11].
+Special consideration is necessary when assigning the `host` tag to DogStatsD metrics. For more information on the host tag key, see the [DogStatsD section][10].
 
 ## Further Reading
 
@@ -456,8 +399,7 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 [4]: /getting_started/agent/#setup
 [5]: /integrations/#cat-web
 [6]: /agent/docker/?tab=standard#tagging
-[7]: /tracing/setup/java/#configuration
-[8]: /tracing/setup/
-[9]: /developers/dogstatsd/
-[10]: /developers/libraries/
-[11]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
+[7]: /tracing/setup/
+[8]: /developers/dogstatsd/
+[9]: /developers/libraries/
+[10]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
