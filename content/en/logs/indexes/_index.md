@@ -29,7 +29,7 @@ You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][
 
 By default, each account has a single index representing a monolithic set of all your logs. Datadog also offers multiple indexes if you require:
 
-* Multiple [retention periods](#update-retention) 
+* Multiple [retention periods](#update-log-retention) 
 * Multiple [daily quotas](#set-daily-quota), for finer budget control.
 
 The Log Explorer supports [queries across multiple indexes][8].
