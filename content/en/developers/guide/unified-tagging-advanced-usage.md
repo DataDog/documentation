@@ -30,6 +30,7 @@ Trace metrics also have a specific [whitelist of tags][2]. Container tags are no
 Autodiscovered tags associated with containers are added to `container_info` in span metadata.
 
 #### Logs
+
 Similar to APM, service is a core tag that is used to help organize logs data. Additionally, it is not possible to link from a log to the related APM service without it.
 
 Similar to metrics, however, Autodiscovered tags for the container as well as host tags for the agent are added to all logs.
@@ -47,12 +48,14 @@ If you would like to tag Kubernetes state metrics with `env`, `service`, and `ve
 It's important to declare `env `as a label even if it's already defined in your agent. Configuring `env` closer to the source of the data (e.g., APM traces, logs) helps to avoid inconsistencies where the Agent `env` might be different. Making `env` part of the service's configuration guarantees a service-centric source of truth.
 
 ### Using standard labels with existing Kubernetes tags annotation
+
 Kubernetes users can continue to use these general tags. However, using the specific labels has a few benefits:
 
 - You can directly reference them for environment variable injection via the Kubernetes downward API.
 - The service standard label can simplify the definition of service for logs.
 
 ### Using standard labels for specific containers
+
 Since the `DD` environment variables are injected at the container level, they can differ from container to container. However, if you want to use the standard labels as well for specific containers, then you will need to use their container-specific variants:
 
 ```yaml
