@@ -51,21 +51,21 @@ Add a tracing library to your application or proxy service to start sending trac
 
 Now that you've configured your application to send traces to Datadog, start getting insights into your application performance:
 
-### Understand Service Dependencies
+### Service Map
 
-[View the service map][2] generated automatically from your application’s traces alongside service health metrics and monitor alert statuses.
+[Understand service dependencies][2] with an auto-generated service map from your traces alongside service performance metrics and monitor alert statuses.
 
-{{< img src="tracing/index/ServiceMap.gif" alt="Service Map"  style="width:100%;">}}
+{{< img src="tracing/index/ServiceMapInspect.gif" alt="Service Map"  style="width:100%;">}}
 
-### Service Health at-a-glance
+### Service Performance Dashboards
 
-[Monitor Service metrics][3] for requests, errors and latency.  Drill down into database queries or endpoints correlated with infrastructure.
+[Monitor Service metrics][3] for requests, errors and latency percentiles.  Drill down into database queries or endpoints correlated with infrastructure.
 
 {{< img src="tracing/index/ServicePage.gif" alt="Service Pages"  style="width:100%;">}}
 
 ### Live Tail
 
-[Search by any tag][4] on 100% of your traces live with no sampling.
+[Search by any tag][4] on 100% of your ingested traces live with no sampling.
 
 {{< img src="tracing/index/SearchLiveTail.gif" alt="LiveTail"  style="width:100%;">}}
 
@@ -83,7 +83,7 @@ Now that you've configured your application to send traces to Datadog, start get
 
 ### Connect Synthetics and Traces
 
-[Link simulated API tests][7] to traces to find the root cause of failures across frontend, network and backend
+[Link simulated API tests][7] to traces to find the root cause of failures across frontend, network and backend requests.
 
 {{< img src="tracing/index/Synthetics.gif" alt="Synthetics"  style="width:100%;">}}
 
