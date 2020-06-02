@@ -7,3 +7,4 @@ datadog:
 agents:
   rbac:
     create: false
+    serviceAccountName: datadog-agent
