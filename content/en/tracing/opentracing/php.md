@@ -24,8 +24,8 @@ When [automatic instrumentation][2] is enabled, an OpenTracing-compatible tracer
 
 ```php
 <?php
-  $otWrapper = new \DDTrace\OpenTracer\Tracer(\DDTrace\GlobalTracer::get());
-  \OpenTracing\GlobalTracer::set($otWrapper);
+  $otTracer = new \DDTrace\OpenTracer\Tracer(\DDTrace\GlobalTracer::get());
+  \OpenTracing\GlobalTracer::set($otTracer);
   $span = $otTracer->startActiveSpan('web.request')->getSpan();
   $span->setTag('span.type', 'web');
   $span->setTag('http.method', $_SERVER['REQUEST_METHOD']);
