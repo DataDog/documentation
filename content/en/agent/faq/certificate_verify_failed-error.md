@@ -128,6 +128,7 @@ restart-service -Force datadogagent
 * Windows Agent v5, `<= 5.11.x`: set the following option in `datadog.conf` using the `Datadog Agent Manager` program provided by the Agent or by directly editing the `datadog.conf` file:
   * 64-bit Windows: `ca_certs: C:\Program Files (x86)\Datadog\Datadog Agent\files\ca-certificates.crt`
   * 32-bit Windows: `ca_certs: C:\Program Files\Datadog\Datadog Agent\files\ca-certificates.crt`
+
   After `datadog.conf` has been updated, restart the Datadog Service from the Windows Service Manager.
 
 
