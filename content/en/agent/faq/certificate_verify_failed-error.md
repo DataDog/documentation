@@ -112,7 +112,7 @@ Yes. The certificate is just a preset for the client to use and is not necessary
 This section applies to the Windows Agent 5.x (`<= 5.32.6`), if the Agent is configured to either:
 
 * use a proxy with the `proxy_host` configuration option in `datadog.conf` or the `HTTPS_PROXY` environment variable, or
-* use the curl http client with the `use_curl_http_client: yes` configuration option in `datadog.conf`
+* use the curl HTTP client with the `use_curl_http_client: yes` configuration option in `datadog.conf`
 
 Note: `datadog.conf` is located in `C:\ProgramData\Datadog\datadog.conf`.
 
