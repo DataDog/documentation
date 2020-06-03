@@ -32,7 +32,7 @@ If you are currently running Agent 5.x on a 64-bit host, Datadog recommends upgr
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`
 Windows (from versions > 5.12.0): Download the Datadog [Agent installer][3]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`
-More platforms and configuration management options detailed [here][4].
+More platforms and configuration management options detailed [on the Agent install page][4].
 
 The last compatible Agent released for 32-bit systems was 5.10.1. Follow the `Fixing without upgrading the Agent` instructions for 32-bit hosts.
 
