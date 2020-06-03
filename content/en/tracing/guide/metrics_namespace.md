@@ -136,6 +136,22 @@ With the following definitions:
   - *Metric type:* [COUNT][8]
   - *Tags:* `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
+### Span count
+
+**Note**: This is a deprecated namespace.
+
+- `trace.<SPAN_NAME>.span_count`:
+  - *Prerequisite:* This metric exists for any APM service.
+  - *Description:* Represent the amount of spans collected on a given interval.
+  - *Metric type:* [COUNT][8]
+  - *Tags:* `env`, `service`, `resource`, all Datadog Agent tags, and [the second primary tag][4].
+
+- `trace.<SPAN_NAME>.span_count.by_http_status`:
+  - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
+  - *Description:* Represent the amount of spans collected on a given interval break down by HTTP status.
+  - *Metric type:* [COUNT][8]
+  - *Tags:* `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
+
 ### Apdex
 
 - `trace.<SPAN_NAME>.apdex.by.resource_<2ND_PRIM_TAG>_service`:

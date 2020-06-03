@@ -17,11 +17,11 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatic Trace ID injection
+## Automatic Injection into Logs
 
 Coming Soon. Reach out to [the Datadog support team][1] to learn more.
 
-## Manual Trace ID injection
+## Manual Injection into Logs
 
 The Go tracer exposes two API calls to allow printing [trace][2] and [span][3] identifiers along with log statements using exported methods from `SpanContext` type:
 
