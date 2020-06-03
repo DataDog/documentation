@@ -33,7 +33,7 @@
   {{- .Get "pop_param" | $.Scratch.Add "pop_param" -}}
 {{- else -}}
   {{- if eq $image_ext "gif" -}}
-     {{- $.Scratch.Add "pop_param" "?fit=max&fm=gif" -}}
+     {{- $.Scratch.Add "pop_param" "?fit=max" -}}
   {{- else -}}
      {{- $.Scratch.Add "pop_param" "?fit=max&auto=format" -}}
   {{- end -}}
@@ -64,7 +64,7 @@
     {{- if $wide -}}
       {{ $e := (print $img_resource "?auto=format" safeURL) }}
       {{- if eq $image_ext "gif" -}}
-        <img class="img-fluid" src="{{ (print $img_resource "?fm=gif" | safeURL) }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
+        <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
       {{- else -}}
         <picture {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }}>
           <img class="lazyload img-fluid" srcset="{{ $e }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
@@ -73,7 +73,7 @@
     {{- else -}}
         {{ $e := (print $img_resource "?auto=format" | safeURL) }}
         {{- if eq $image_ext "gif" -}}
-            <img class="img-fluid" src="{{ (print $img_resource "?fm=gif" | safeURL) }}" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}" {{ end }} {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
+            <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}" {{ end }} {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
         {{- else -}}
           <picture class="" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }} >
           <img class="lazyload img-fluid" srcset="{{ $e }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
