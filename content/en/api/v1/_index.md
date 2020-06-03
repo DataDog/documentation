@@ -9,10 +9,10 @@ Use the Datadog HTTP API to programmatically access the Datadog platform. The Da
 
 **To get started on the Datadog HTTP API, use the following flow to determine which endpoints you need and checkout our [Datadog Postman collection][1].**
 
-{{< img src="api/api-flow.png" alt="Flow through Datadog" responsive="true" style="width:100%;">}}
 
 **Note**: cURL code examples assume usage of BASH and GNU coreutils. On macOS you can install coreutils via the [Homebrew package manager][2]: `brew install coreutils`
 
+{{< img src="api/api-flow.png" alt="Flow through Datadog" responsive="true" style="width:100%;">}}
 {{< h2 >}}Install the Datadog Agent{{< /h2 >}}
 
 Before you can use the API to send or view data, you need to [install the Datadog Agent][3]. The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. 
@@ -63,12 +63,12 @@ Once you are sending data to Datadog, you can use the API to programatically bui
 You can also use the Datadog API to programatically manage your account:
 
 - Manage [Users][31]
-- Mange [Roles][32]
+- Manage [Roles][32]
 - Manage your [Organization][33]
 - Veirfy API and app keys with the [Authentication][34] endpoint
 - Grant specific logs access with the [Logs Restriction Queries][35]
-- Manage existing keys with[Key Management][36]
-- Get get hourly, daily, and monthly usage across multiple facets of Datadog with the[Usage Metering][37] endpoints
+- Manage existing keys with [Key Management][36]
+- Get get hourly, daily, and monthly usage across multiple facets of Datadog with the [Usage Metering][37] endpoints
 - See the list of IP prefixes belonging to Datadog with[IP Ranges][38]
 
 {{< h2 >}}Rate limiting{{< /h2 >}}
@@ -84,9 +84,9 @@ Regarding API rate limit policy:
 - Datadog **does not rate limit** on data point/metric submission (see [metrics section][11] for more info on how metric submission rate is handled). Limits encounter is dependent on the quantity of [custom metrics][40] based on your agreement.
 - The rate limit for metric **retrieval** is `100` per hour per organization.
 - The rate limit for event submission is `1000` per aggregate per day per organization. An aggregate is a group of similar events.
-- The rate limit for the [query_batch API][41] call is `600` per hour per organization. This can be extended on demand.
+- The rate limit for the [Query a Timeseries API][41] call is `600` per hour per organization. This can be extended on demand.
 - The rate limit for the [Log Query API][42] call is `300` per hour per organization. This can be extended on demand.
-- The rate limit for the [graph_snapshot API][22] call is `60` per hour per organization. This can be extended on demand.
+- The rate limit for the [Graph a Snapshot API][22] call is `60` per hour per organization. This can be extended on demand.
 - The rate limit for the [Log Configuration API][27] is `6000` per minute per organization. This can be extended on demand.
 
 | Rate Limit Headers      | Description                                              |
