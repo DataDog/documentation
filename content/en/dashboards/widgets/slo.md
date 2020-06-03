@@ -48,7 +48,7 @@ Select whether to show or hide remaining error budget by toggling the `Show erro
 
 Display a custom title for your widget by checking the `Show a title` check box:
 
-{{< img src="dashboards/widgets/slo/slo_summary-widget_title.png" alt="widget title"  >}}
+{{< img src="dashboards/widgets/slo/slo_summary-show_title.png" alt="widget title"  >}}
 
 You can optionally define the title’s size and alignment.
 
