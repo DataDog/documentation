@@ -15,7 +15,7 @@ You can continue to use the `env` `service` and `version` tags as they are confi
 
 **Note**: While some products support arbitrary tags, others have more specific expectations. As such, navigation between products might be difficult if one data source has a tag that another does not have or does not support.
 
-### Containerized Environments
+### Containerized environments
 
 #### Metrics
 
@@ -23,11 +23,10 @@ Since tags can be appended to data points, you have a lot of freedom in setting 
 
 #### APM
 
-`env` and `service` are core tags in APM, so it is not possible to replace them with differently named tags. However, APM does allow for data to be [aggregated along more primary tags] than just `env`. Since host tags are added to traces and trace metrics, they can be used as well (e.g., availability-zone).
+`env` and `service` are core tags in APM, so it is not possible to replace them with differently named tags. However, APM does allow for data to be [aggregated along more primary tags][4] than just `env`. Since host tags are added to traces and trace metrics, they can be used as well (e.g., availability-zone).
 
-Trace metrics also have a specific [whitelist of tags][2]. Container tags are not included.
+Autodiscovered tags associated with containers are added to `container_info` in span metadata. However, these container tags are not part of the [whitelisted tags][2] for trace metrics.
 
-Autodiscovered tags associated with containers are added to `container_info` in span metadata.
 
 #### Logs
 
@@ -45,7 +44,7 @@ If you would like to tag Kubernetes state metrics with `env`, `service`, and `ve
 
 ### Declaring environment as a label
 
-It's important to declare `env `as a label even if it's already defined in your agent. Configuring `env` closer to the source of the data (e.g., APM traces, logs) helps to avoid inconsistencies where the Agent `env` might be different. Making `env` part of the service's configuration guarantees a service-centric source of truth.
+Configuring `env` closer to the source of the data (e.g., APM traces, logs) helps to avoid inconsistencies where the Agent `env` might be different. Making `env` part of the service's configuration guarantees a service-centric source of truth.
 
 ### Using standard labels with existing Kubernetes tags annotation
 
@@ -67,3 +66,4 @@ tags.datadoghq.com/<container>.version
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /metrics/distributions/#customize-tagging
 [3]: /logs/processing/pipelines/
+[4]: /tracing/guide/setting_primary_tags_to_scope/
