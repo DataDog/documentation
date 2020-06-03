@@ -37,6 +37,7 @@ Select whether to show or hide remaining error budget by toggling the `Show erro
   - `Status`: displays the overall SLO status percentages and targets
   - `Groups`: displays a table of status percentages for each group
   - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each group
+
 - For monitor-based SLOs configured with multiple monitors, there are the following three view modes:
   - `Status`: displays the overall SLO status percentages and targets
   - `Groups`: displays a table of status percentages for each monitor
