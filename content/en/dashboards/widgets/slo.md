@@ -32,14 +32,15 @@ Use the SLO Summary widget to track your [SLOs (Service Level Objectives)][1] on
 #### Display preferences
 
 Select whether to show or hide remaining error budget by toggling the `Show error budget` option. If you are visualizing a monitor-based SLO with multiple groups or multiple monitors, select your `View mode`:
-  - For monitor-based SLOs configured with a single monitor broken into multiple groups, there are the following three view modes:
-    - `Status`: displays the overall SLO status percentages and targets
-    - `Groups`: displays a table of status percentages for each group
-    - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each group
-  - For monitor-based SLOs configured with multiple monitors, there are the follwoing three view modes:
-    - `Status`: displays the overall SLO status percentages and targets
-    - `Groups`: displays a table of status percentages for each monitor
-    - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
+  
+- For monitor-based SLOs configured with a single monitor broken into multiple groups, there are the following three view modes:
+  - `Status`: displays the overall SLO status percentages and targets
+  - `Groups`: displays a table of status percentages for each group
+  - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each group
+- For monitor-based SLOs configured with multiple monitors, there are the following three view modes:
+  - `Status`: displays the overall SLO status percentages and targets
+  - `Groups`: displays a table of status percentages for each monitor
+  - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
 
 {{< img src="dashboards/widgets/slo/slo_summary-view_mode.png" alt="view mode"  >}}
 
