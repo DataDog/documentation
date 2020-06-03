@@ -76,10 +76,10 @@ If your Agent is configured to use a proxy, see the additional step in the [dedi
 
 Delete `datadog-cert.pem`. You can locate this file in:
 
-* Agent >=5.12.x:
+* Agent `>=5.12.0`:
   * 64-bit Windows: `C:\Program Files\Datadog\Datadog Agent\agent\`
   * 32-bit Windows: The Datadog Agent was not available for 32-bit Windows systems starting in Agent 5.12
-* Agent <= 5.11.x:
+* Agent `<= 5.11.x`:
   * 64-bit Windows: `C:\Program Files (x86)\Datadog\Datadog Agent\files\`
   * 32-bit Windows: `C:\Program Files\Datadog\Datadog Agent\files\`
 
@@ -120,14 +120,14 @@ Note: `datadog.conf` is located in `C:\ProgramData\Datadog\datadog.conf`.
 
 In this case, take this additional action:
 
-* Windows Agent v5, >= 5.12.x: replace the datadog-cert.pem file with the version that is shipped in 5.32.7. Using the Powershell CLI:
+* Windows Agent v5, `>= 5.12.0`: replace the `datadog-cert.pem` file with the version that is shipped in 5.32.7. Using the Powershell CLI:
 
 ```shell
 Invoke-WebRequest -Uri f"https://raw.githubusercontent.com/DataDog/dd-agent/5.32.7/datadog-cert.pem" -OutFile "C:\Program Files\Datadog\Datadog Agent\agent\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
-* Windows Agent v5, <= 5.11.x: set the following option in `datadog.conf`:
+* Windows Agent v5, `<= 5.11.x`: set the following option in `datadog.conf`:
   * 64-bit Windows: `ca_certs: C:\Program Files (x86)\Datadog\Datadog Agent\files\ca-certificates.crt`
   * 32-bit Windows: `ca_certs: C:\Program Files\Datadog\Datadog Agent\files\ca-certificates.crt`
 
