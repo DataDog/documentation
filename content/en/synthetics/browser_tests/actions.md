@@ -198,6 +198,8 @@ Create a variable out of a `span`, `div`, etc. content by extracting the text of
 
 Generate custom variables using your own JavaScript scripts. JavaScript steps support both synchronous and asynchronous code. By default the step is being performed on the active page, which means it can access all the objects defined at the active page level (libraries, builtins, global variables, ...).
 
+If you are using JavaScript at the assertion level, write a code snippet that evaluates  truthiness or returns a boolean. If the evaluation is deemed truthy, the step will pass. if it evaluates to falsy, the step will fail. 
+
 If you need to load external libraries, you can wrap their loading in a promise like below:
 
 ```javascript
