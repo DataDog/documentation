@@ -42,35 +42,34 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 1. Installez le [kit de développement][5].
 2. Clonez le dépôt integrations-extras :
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. Pour générer le paquet `nextcloud`, exécutez :
 
-    ```
-    ddev -e release build nextcloud
-    ```
+   ```shell
+   ddev -e release build nextcloud
+   ```
 
 5. [Téléchargez et lancez l'Agent Datadog][6].
 6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
-    ```
-    datadog-agent integration install -w <PATH_OF_NEXTCLOUD_ARTIFACT_>/<NEXTCLOUD_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_NEXTCLOUD_ARTIFACT_>/<NEXTCLOUD_ARTIFACT_NAME>.whl
+   ```
 
 7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][7].
 
 ### Configuration
 
-1. Modifiez le fichier `nextcloud.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#metriques) Nextcloud.
-  Consultez le [fichier d'exemple nextcloud.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `nextcloud.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#metriques) Nextcloud. Consultez le [fichier d'exemple nextcloud.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][10].
 
@@ -90,9 +89,8 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 
 Le check renvoie :
 
-* `OK` si Nextcloud est accessible.
-* `CRITICAL` si Nextcloud est inaccessible.
-
+- `OK` si Nextcloud est accessible.
+- `CRITICAL` si Nextcloud est inaccessible.
 
 ### Événements
 
@@ -103,15 +101,15 @@ Nextcloud n'inclut aucun événement.
 Besoin d'aide ? Contactez [l'assistance Datadog][13].
 
 [1]: https://nextcloud.com
-[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
 [3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
 [5]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [6]: https://app.datadoghq.com/account/settings#agent
-[7]: https://docs.datadoghq.com/fr/getting_started/integrations
+[7]: https://docs.datadoghq.com/fr/getting_started/integrations/
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-extras/blob/master/nextcloud/datadog_checks/nextcloud/data/conf.yaml.example
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [12]: https://github.com/DataDog/integrations-extras/blob/master/nextcloud/metadata.csv
-[13]: https://docs.datadoghq.com/fr/help
+[13]: https://docs.datadoghq.com/fr/help/

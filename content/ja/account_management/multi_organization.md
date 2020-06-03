@@ -7,7 +7,7 @@ aliases:
   - /ja/account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
   - /ja/account_management/multi_organisations
 further_reading:
-  - link: account_management/saml
+  - link: /account_management/saml/
     tag: Documentation
     text: Datadog アカウントで SAML を設定
 ---
@@ -29,7 +29,7 @@ further_reading:
 1. 機能を有効にしたら、[New Account Page][3] にアクセスします。
 2. 作成する子オーガニゼーションの名前を入力し、**Create** ボタンをクリックします。**子オーガニゼーション名は最大 32 文字です。**
 
-新しい子オーガニゼーションは、14 日間無料トライアルアカウントとして作成されます。[オーガニゼーションのアカウント設定][4]で、課金プランを変更できます。子オーガニゼーションの課金を親オーガニゼーションの課金アカウントに追加する必要がある場合は、[営業担当者][5]にお問い合わせください。
+新しい子オーガニゼーションは、親オーガニゼーションのプランを継承し、親オーガニゼーションの請求アカウントに追加されます。子オーガニゼーションの請求を更新する場合は、[営業担当者][5]にお問い合わせください。
 
 ### 内容
 
@@ -56,11 +56,11 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/account_management/#managing-your-organizations
-[2]: /ja/help
+[2]: /ja/help/
 [3]: https://app.datadoghq.com/account/new_org
 [4]: https://app.datadoghq.com/account/billing
 [5]: mailto:success@datadoghq.com
-[6]: /ja/api
+[6]: /ja/api/
 [7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [8]: /ja/dashboards/screenboards/#backup-my-screenboard
-[9]: /ja/monitors/manage_monitor
+[9]: /ja/monitors/manage_monitor/

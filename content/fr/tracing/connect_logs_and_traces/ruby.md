@@ -45,7 +45,7 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-[1]: /fr/logs/log_collection/python/#configure-the-datadog-agent
+[1]: /fr/logs/log_collection/ruby/#configure-the-datadog-agent
 {{% /tab %}}
 {{% tab "Par défaut" %}}
 
