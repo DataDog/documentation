@@ -274,7 +274,7 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 
 **Log Collection**:
 
-The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][1] enabled. It shows the evolution of resource usage for the different compression levels available.
+The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][12] enabled. It shows the evolution of resource usage for the different compression levels available.
 
 {{< tabs >}}
 {{% tab "HTTP compression level 6" %}}
@@ -338,7 +338,7 @@ To send your Agent data to the [Datadog EU site][9], edit your [Agent main confi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
+[1]: /agent/troubleshooting/send_a_flare/
 [2]: /agent/guide/agent-commands/#restart-the-agent
 [3]: /agent/guide/agent-commands/#start-the-agent
 [4]: /agent/guide/agent-commands/#service-status
@@ -349,3 +349,4 @@ To send your Agent data to the [Datadog EU site][9], edit your [Agent main confi
 [9]: https://app.datadoghq.eu
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [11]: /agent/guide/agent-log-files/
+[12]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
