@@ -116,7 +116,7 @@ This section applies to the Windows Agent 5.x (`<= 5.32.6`), if the Agent is con
 
 Note: `datadog.conf` is located in `C:\ProgramData\Datadog\datadog.conf`.
 
-In this case, removing `datadog-cert.pem` will not allow the Agent to regain connectivity to Datadog. Instead, take this action:
+In this case, removing `datadog-cert.pem` does not allow the Agent to regain connectivity to Datadog. Instead, take this action:
 
 * Windows Agent v5, `>= 5.12.0`: replace the `datadog-cert.pem` file with the version that is shipped in 5.32.7. Using the Powershell CLI:
 
