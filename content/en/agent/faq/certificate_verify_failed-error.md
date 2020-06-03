@@ -46,6 +46,8 @@ sudo rm /opt/datadog-agent/agent/datadog-cert.pem && sudo service datadog-agent 
 
 #### Windows
 
+If your Agent is configured to use a proxy, follow the [dedicated section below](#windows-agent-5-x-configured-to-use-a-proxy-or-the-curl-http-client) instead.
+
 *Using the CLI*
 
 Using PowerShell, take the following actions for Agent `>= 5.12.0`:
@@ -70,8 +72,6 @@ rm "C:\Program Files\Datadog\Datadog Agent\files\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
-If your Agent is configured to use a proxy, see the additional step in the [dedicated section below](#additional-step-if-the-windows-agent-5-x-is-configured-to-use-a-proxy-or-the-curl-http-client).
-
 *Using the Windows GUI*
 
 Delete `datadog-cert.pem`. You can locate this file in:
@@ -84,8 +84,6 @@ Delete `datadog-cert.pem`. You can locate this file in:
   * 32-bit Windows: `C:\Program Files\Datadog\Datadog Agent\files\`
 
 Once the file is removed, restart the Datadog Service from the Windows Service Manager.
-
-If your Agent is configured to use a proxy, see the additional step in the [dedicated section below](#additional-step-if-the-windows-agent-5-x-is-configured-to-use-a-proxy-or-the-curl-http-client).
 
 #### Verifying with the script
 
@@ -109,16 +107,16 @@ Datadog recommends keeping up to date and updating to the latest version of the 
 
 Yes. The certificate is just a preset for the client to use and is not necessary to connect via SSL. Datadog Agent endpoints only accept SSL traffic.
 
-### Additional step if the Windows Agent 5.x is configured to use a proxy or the curl http client
+### Windows Agent 5.x configured to use a proxy or the curl http client
 
-On Windows, with Agent 5.x, removing the certificate file alone is not enough if the Agent is configured to either:
+This section applies to the Windows Agent 5.x (`<= 5.32.6`), if the Agent is configured to either:
 
 * use a proxy with the `proxy_host` configuration option in `datadog.conf` or the `HTTPS_PROXY` environment variable, or
 * use the curl http client with the `use_curl_http_client: yes` configuration option in `datadog.conf`
 
 Note: `datadog.conf` is located in `C:\ProgramData\Datadog\datadog.conf`.
 
-In this case, take this additional action:
+In this case, removing `datadog-cert.pem` will not allow the Agent to regain connectivity to Datadog. Instead, take this action:
 
 * Windows Agent v5, `>= 5.12.0`: replace the `datadog-cert.pem` file with the version that is shipped in 5.32.7. Using the Powershell CLI:
 
@@ -127,7 +125,7 @@ Invoke-WebRequest -Uri f"https://raw.githubusercontent.com/DataDog/dd-agent/5.32
 restart-service -Force datadogagent
 ```
 
-* Windows Agent v5, `<= 5.11.x`: set the following option in `datadog.conf`:
+* Windows Agent v5, `<= 5.11.x`: set the following option in `datadog.conf` using the `Datadog Agent Manager` program provided by the Agent or by directly editing the `datadog.conf` file:
   * 64-bit Windows: `ca_certs: C:\Program Files (x86)\Datadog\Datadog Agent\files\ca-certificates.crt`
   * 32-bit Windows: `ca_certs: C:\Program Files\Datadog\Datadog Agent\files\ca-certificates.crt`
 
