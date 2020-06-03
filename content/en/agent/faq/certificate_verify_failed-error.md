@@ -23,7 +23,7 @@ Datadog US: `python find_agents_with_connectivity_problems.py --api-key API_KEY 
 Datadog EU: `python find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site eu`
 3. Find the CSV output in `hosts_agents.csv`.
 
-Get the API and application key [from your account settings page][2]. If you are using the EU site, see your [EU account settings page][3].
+Get the API and application key [from your account settings page][2].
 
 ### Fixing by upgrading to Agent 5.32.7
 
@@ -31,8 +31,8 @@ If you are currently running Agent 5.x on a 64-bit host, Datadog recommends upgr
 
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`
-Windows (from versions > 5.12.0): Download the Datadog [Agent installer][4]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`
-More platforms and configuration management options detailed [here][5].
+Windows (from versions > 5.12.0): Download the Datadog [Agent installer][3]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`
+More platforms and configuration management options detailed [here][4].
 
 The last compatible Agent released for 32-bit systems was 5.10.1. Follow the `Fixing without upgrading the Agent` instructions for 32-bit hosts.
 
@@ -97,7 +97,7 @@ Note that this can take a long time if you have many potentially affected hosts.
 
 ### Fixing by upgrading to Agent 6 or 7
 
-You can upgrade to [Agent 7][6] or [Agent 6][7] to resolve this issue, but *see the Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.*
+You can upgrade to [Agent 7][5] or [Agent 6][6] to resolve this issue, but *see the Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.*
 
 ### Should I upgrade my Agent even if I deleted the certificate?
 
@@ -133,8 +133,7 @@ restart-service -Force datadogagent
 
 [1]: https://static.datadoghq.com/find_agents_with_connectivity_problems.py
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: https://app.datadoghq.eu/account/settings#api
-[4]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
-[5]: https://app.datadoghq.com/account/settings?agent_version=5#agent
-[6]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
-[7]: /agent/versions/upgrade_to_agent_v6/?tab=linux
+[3]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
+[4]: https://app.datadoghq.com/account/settings?agent_version=5#agent
+[5]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
+[6]: /agent/versions/upgrade_to_agent_v6/?tab=linux
