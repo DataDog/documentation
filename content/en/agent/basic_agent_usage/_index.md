@@ -338,7 +338,7 @@ To send your Agent data to the [Datadog EU site][9], edit your [Agent main confi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/troubleshooting/send_a_flare/
+[1]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
 [2]: /agent/guide/agent-commands/#restart-the-agent
 [3]: /agent/guide/agent-commands/#start-the-agent
 [4]: /agent/guide/agent-commands/#service-status
