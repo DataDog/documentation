@@ -103,7 +103,7 @@ The JavaScript assertion function comes with two parameters. You also need to ma
 
 {{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="100%">}}
 
-* The `return` statement needs to reflect the condition the assertion needs to meet for your browser test step to be successful.
+* The `return` statement needs to reflect the condition the assertion needs to meet for your browser test step to be successful. You can return any type, but the value is automatically casted as a boolean.
 
 Since JavaScript assertions run in the context of the active page, it also means these steps can access all the objects defined in the active page (libraries, builtins, global variables, ...). If you need to load external libraries, you can wrap their loading in a promise like below:
 
@@ -210,7 +210,7 @@ This JavaScript function comes with two parameters. You also need to make sure t
 
 {{< img src="synthetics/browser_tests/js_variable.mp4" alt="Browser Test JavaScript Variable" video="true" width="100%">}}
 
-* The `return` statement needs to reflect the condition the assertion needs to meet for your browser test step to be successful.
+* The `return` statement needs to reflect the condition the assertion needs to meet for your browser test step to be successful. You can return any type, but the value is automatically casted as a string.
 
 By default the step is being performed on the active page, which means it can access all the objects defined at the active page level (libraries, builtins, global variables, ...). If you need to load external libraries, you can wrap their loading in a promise like below:
 
