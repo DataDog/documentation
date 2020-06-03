@@ -70,7 +70,7 @@ rm "C:\Program Files\Datadog\Datadog Agent\files\datadog-cert.pem"
 restart-service -Force datadogagent
 ```
 
-If your Agent is configured to use a proxy, see the additional step in the [dedicated section below](#additional-step-if-the-windows-agent-5.x-is-configured-to-use-a-proxy-or-the-curl-http-client).
+If your Agent is configured to use a proxy, see the additional step in the [dedicated section below](#additional-step-if-the-windows-agent-5-x-is-configured-to-use-a-proxy-or-the-curl-http-client).
 
 *Using the Windows GUI*
 
@@ -85,7 +85,7 @@ Delete `datadog-cert.pem`. You can locate this file in:
 
 Once the file is removed, restart the Datadog Service from the Windows Service Manager.
 
-If your Agent is configured to use a proxy, see the additional step in the [dedicated section below](#additional-step-if-the-windows-agent-5.x-is-configured-to-use-a-proxy-or-the-curl-http-client).
+If your Agent is configured to use a proxy, see the additional step in the [dedicated section below](#additional-step-if-the-windows-agent-5-x-is-configured-to-use-a-proxy-or-the-curl-http-client).
 
 #### Verifying with the script
 
