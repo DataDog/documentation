@@ -4363,7 +4363,7 @@ components:
             triggered.
           type: boolean
         sort:
-          $ref: '#/components/schemas/WidgetSort'
+          $ref: '#/components/schemas/WidgetMonitorSummarySort'
         start:
           deprecated: true
           description: The start of the list. Typically 0.
@@ -8829,6 +8829,42 @@ components:
       - COUNTS
       - COUNTS_AND_LIST
       - LIST
+    WidgetMonitorSummarySort:
+      description: Widget sorting methods.
+      enum:
+      - name
+      - group
+      - status
+      - tags
+      - triggered
+      - group,asc
+      - group,desc
+      - name,asc
+      - name,desc
+      - status,asc
+      - status,desc
+      - tags,asc
+      - tags,desc
+      - triggered,asc
+      - triggered,desc
+      example: name,asc
+      type: string
+      x-enum-varnames:
+      - NAME
+      - GROUP
+      - STATUS
+      - TAGS
+      - TRIGGERED
+      - GROUP_ASCENDING
+      - GROUP_DESCENDING
+      - NAME_ASCENDING
+      - NAME_DESCENDING
+      - STATUS_ASCENDING
+      - STATUS_DESCENDING
+      - TAGS_ASCENDING
+      - TAGS_DESCENDING
+      - TRIGGERED_ASCENDING
+      - TRIGGERED_DESCENDING
     WidgetNodeType:
       description: Which type of node to use in the map.
       enum:
@@ -8904,10 +8940,12 @@ components:
       enum:
       - one_column
       - two_column
+      - three_column
       type: string
       x-enum-varnames:
       - ONE_COLUMN
       - TWO_COLUMN
+      - THREE_COLUMN
     WidgetSizeFormat:
       description: Size of the widget.
       enum:
