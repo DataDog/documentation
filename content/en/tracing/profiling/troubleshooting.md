@@ -19,7 +19,11 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog.'
 ---
 
+<<<<<<< HEAD
 If you've configured the profiler and don't see profiles in the [profile search page](#search-profiles), please turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+=======
+In case you have done all the necessary configuration steps and do not see profiles in the [profile search page](#search-profiles), turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+>>>>>>> Added updates to the profiling page
 
 - OS type and version (e.g Linux Ubuntu 14.04.3)
 - Runtime type, version and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)

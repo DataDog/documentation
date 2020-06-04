@@ -2,6 +2,18 @@
 title: Continuous Profiling
 kind: Documentation
 further_reading:
+    - link: 'tracing/profiling/getting_started'
+      tag: 'Documentation'
+      text: 'Enable continuous profiling for your application.'
+    - link: 'tracing/profiling/trace_profile'
+      tag: 'Documentation'
+      text: 'Connect traces and profiles.'
+    - link: 'tracing/profiling/code_level_metrics'
+      tag: 'Documentation'
+      text: 'View code level metrics.'  
+    - link: 'tracing/profiling/search_profiles'
+      tag: 'Documentation'
+      text: 'Learn more about available profile types.'
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tags: 'Blog'
       text: 'Introducing always-on production profiling in Datadog.'
@@ -40,6 +52,11 @@ Add a profiling library to your application to start sending profiles to the Dat
 Obtain key profiling metrics from services such as top CPU usage by method, top memory allocations by thread, and CPU usage by version to visualize in your dashboards.
 
 {{< img src="tracing/profiling/profiling-metric-dashboard.gif" alt="Add profiling metrics to your dashboards.">}}
+
+Find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, to significantly reduce end-user latency and infrastructure costs.
+
+[Enable Continuous Profiling][1] in your service to visualize all your stack traces in one place and get actionable insights for performance improvements.
+>>>>>>> Added updates to the profiling page
 
 ## Further Reading
 
