@@ -15,15 +15,9 @@ Agent versions 6.x and 7.x are fine and don’t need to be updated.
 
 ### How can I find a list of hosts running affected Agent versions?
 
-Datadog has published a [Python script][1] that queries your Datadog account for hosts running impacted Agent versions. It finds hosts that run the Datadog Agent with version less than 5.32.7, and writes their hostnames to a file ordered by version.
+Use the [Agent Versions list][2] in the Datadog UI to see the hostname, the Agent version that it's running, and the status of that host.
 
-1. Download the [Python script][1].
-2. Run it in your local terminal or shell. The script works with Python 2 and 3.
-Datadog US: `python find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site us`
-Datadog EU: `python find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site eu`
-3. Find the CSV output in `hosts_agents.csv`.
-
-Get the API and application key [from your account settings page][2].
+**Note**: The previously recommended [Python script][1] that queries your Datadog account for hosts running impacted Agent versions has been deprecated in favor of the list now available in the application.
 
 ### Fixing by upgrading to Agent 5.32.7
 
@@ -133,7 +127,7 @@ restart-service -Force datadogagent
 
 
 [1]: https://static.datadoghq.com/find_agents_with_connectivity_problems.py
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/agent-versions
 [3]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
 [4]: https://app.datadoghq.com/account/settings?agent_version=5#agent
 [5]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
