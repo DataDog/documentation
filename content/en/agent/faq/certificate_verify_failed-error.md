@@ -79,16 +79,6 @@ Delete `datadog-cert.pem`. You can locate this file in:
 
 Once the file is removed, restart the Datadog Service from the Windows Service Manager.
 
-#### Verifying with the script
-
-You can re-run the script described above with `--check-old-agents-working` to see if those Agents have started reporting again and which still need attention:
-
-```shell
-python find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site US_OR_EU --check-old-agents-working
-```
-
-Note that this can take a long time if you have many potentially affected hosts.
-
 ### Fixing by upgrading to Agent 6 or 7
 
 You can upgrade to [Agent 7][4] or [Agent 6][5] to resolve this issue, but *see the Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.*
