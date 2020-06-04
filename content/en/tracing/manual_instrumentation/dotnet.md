@@ -146,8 +146,7 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 
 ## OpenTracing
 
-It is recommended that you use the Datadog Tracer for the best trace visualizations. Datadog is also OpenTracing compliant.
-
+For the best possible tracing experience we recommend using the Datadog tracer for any custom instrumentation. In addition to our native support and B3 support we also support the OpenTracing standard.
 
 ### Setup
 For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][6] NuGet package to your application. During application start-up, initialize the OpenTracing library:
