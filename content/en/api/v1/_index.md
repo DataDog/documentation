@@ -1,9 +1,9 @@
 ---
-title: API Reference
+title: API Reference V1
 type: api
 ---
 
-{{< h2 >}}API Reference{{< /h2 >}}
+{{< h2 >}}API Reference V1{{< /h2 >}}
 
 Use the Datadog HTTP API to programmatically access the Datadog platform. The Datadog API uses resource-oriented URLs, uses status codes to indicate the success or failure of requests and returns JSON from all requests.
 
