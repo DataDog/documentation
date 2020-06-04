@@ -19,7 +19,7 @@ further_reading:
 
 ## Automatic Injection into Logs
 
-Enable injection in the .NET tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
+Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
 
 The .NET Tracer uses the [LibLog][2] library to automatically inject trace IDs, span IDs, `env`, `service`, and `version` into your application logs. If you haven't done so already, we recommend configuring the .NET tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the smoothest experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][3] for more details).
 
@@ -131,8 +131,8 @@ using log4net;
 try
 {
     LogicalThreadContext.Properties["dd.env"] = CorrelationIdentifier.Env.ToString();
-    LogicalThreadContext.Properties["dd.service"] = CorrelationIdentifier.Service.ToString();
-    LogicalThreadContext.Properties["dd.version"] = CorrelationIdentifier.Version.ToString();
+    LogicalThreadContext.Properties["dd.service"] = Tracer.Instance.DefaultServiceName;
+    LogicalThreadContext.Properties["dd.version"] = Tracer.Instance.Settings.ServiceVersion;
     LogicalThreadContext.Properties["dd.trace_id"] = CorrelationIdentifier.TraceId.ToString();
     LogicalThreadContext.Properties["dd.span_id"] = CorrelationIdentifier.SpanId.ToString();
 
@@ -157,9 +157,9 @@ using Datadog.Trace;
 using NLog;
 
 // there must be spans started and active before this block.
-using (MappedDiagnosticsLogicalContext.SetScoped("dd.env", CorrelationIdentifier.Env.ToString()))
-using (MappedDiagnosticsLogicalContext.SetScoped("dd.service", CorrelationIdentifier.Service.ToString()))
-using (MappedDiagnosticsLogicalContext.SetScoped("dd.version", CorrelationIdentifier.Version.ToString()))
+using (MappedDiagnosticsLogicalContext.SetScoped("dd.env", Tracer.Instance.Settings.Environment))
+using (MappedDiagnosticsLogicalContext.SetScoped("dd.service", Tracer.Instance.DefaultServiceName))
+using (MappedDiagnosticsLogicalContext.SetScoped("dd.version", Tracer.Instance.Settings.ServiceVersion))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
 {

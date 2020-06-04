@@ -136,9 +136,9 @@ For example:
 ```cmd
 rem Set environment variables
 SET DD_TRACE_AGENT_URL=http://localhost:8126
-export DD_ENV=prod
-export DD_SERVICE=MyService
-export DD_VERSION=abc123
+SET DD_ENV=prod
+SET DD_SERVICE=MyService
+SET DD_VERSION=abc123
 SET DD_ADONET_ENABLED=false
 
 rem Launch application

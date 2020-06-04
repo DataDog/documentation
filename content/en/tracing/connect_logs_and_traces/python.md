@@ -59,7 +59,7 @@ If you are not using the standard library `logging` module, you can use the `ddt
 As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:
 
 ``` python
-from ddtrace import config
+import ddtrace
 from ddtrace.helpers import get_correlation_ids
 
 import structlog
@@ -73,9 +73,9 @@ def tracer_injection(logger, log_method, event_dict):
     event_dict['dd.span_id'] = span_id or 0
 
     # add the env, service, and version configured for the tracer
-    event_dict['dd.env'] = config.Config().env or ""
-    event_dict['dd.service'] = config.Config().service or ""
-    event_dict['dd.version'] = config.Config().version or ""
+    event_dict['dd.env'] = ddtrace.config.env or ""
+    event_dict['dd.service'] = ddtrace.config.service or ""
+    event_dict['dd.version'] = ddtrace.config.version or ""
 
     return event_dict
 

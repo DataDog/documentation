@@ -134,7 +134,7 @@ Learn more about [DogStatsD over Unix Domain Sockets][15].
 
 ### Tagging
 
-**Note**: As a best practice, Datadog recommends using [unified service tagging](#unified-service-tagging) when assigning tags.
+As a best practice, Datadog recommends using [unified service tagging](#unified-service-tagging) when assigning tags.
 
 Datadog automatically collects common tags from [Docker][16], [Kubernetes][17], [ECS][18], [Swarm, Mesos, Nomad, and Rancher][16]. To extract even more tags, use the following options:
 
