@@ -93,7 +93,7 @@ Asserts that an email was sent and whether specific values (`string`, `number`, 
 
 #### Test your UI with custom JavaScript
 
-Test a custom assertion on the active page using your own JavaScript scripts. JavaScript assertions support both synchronous and asynchronous code. 
+Test a custom assertion on the active page using your own JavaScript code. JavaScript assertions support both synchronous and asynchronous code. 
 
 The JavaScript assertion function comes with two parameters. You also need to make sure to include a `return` statement in your JavaScript snippet.
 
