@@ -667,6 +667,15 @@ components:
       type: string
       x-enum-varnames:
       - CHECK_STATUS
+    ContentEncoding:
+      description: HTTP header used to compress the media-type
+      enum:
+      - gzip
+      - deflate
+      type: string
+      x-enum-varnames:
+      - gzip
+      - deflate
     Creator:
       description: Object describing the creator of the shared element.
       properties:
@@ -16055,10 +16064,19 @@ paths:
         truncates only logs larger than 256KB, and returns a 2xx.
 
 
+        We encourage you to send your logs compressed.
+
+
         **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`),
 
         the HTTP log endpoint is `http-intake.logs.datadoghq.eu`.'
       operationId: SubmitLog
+      parameters:
+      - in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/ContentEncoding'
       requestBody:
         content:
           application/json:
@@ -16277,6 +16295,9 @@ tags:
 
     - For a multi-logs request, the API processes all logs, truncates only logs larger
     than 256KB, and returns a 2xx.
+
+
+    We encourage you to send your logs compressed.
 
 
     **Note**: If you are in the Datadog EU site (`app.datadoghq.eu`), the HTTP log
