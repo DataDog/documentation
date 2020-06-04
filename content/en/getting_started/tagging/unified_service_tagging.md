@@ -13,49 +13,35 @@ further_reading:
 ---
 
 ## Overview
-Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`. These tags allow you to correlate related logs and traces by version of a service, trace a spike in CPU usage to corresponding areas of a service, and organize infrastructure more effectively.
+Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`. By adding these tags to your [Datadog Agent's][2] configuration file, you can troubleshoot issues and view data pertaining to your services, based on environment or version, in a unified fashion within the Datadog app. Once these tags are configured you'll be able to do things like filter your logs, traces, and metrics by `service` and `version` to see the total service requests and the errors by version.
 
-The [environment variables][2] `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` form a single point of configuration for all telemetry emitted directly from your service's runtime: [traces][3], [logs][4], and [StatsD metrics][5]. These variables are specific to the runtime of your service. They allow you to define core tagging configuration within your application, rather than across your application and the Agent.
+### Requirements
 
-When spans are configured with `DD_VERSION`, the tracer will add version to all spans that fall under the service that "owns" the tracer (generally DD_SERVICE). This means that if your service creates spans with the name of an external service, those spans will not receive version as a tag. As long as version is present in spans, it will be added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the tracer.
+- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][3] guide and [Assigning tags][4] documentation before proceeding to configuration.
 
-When available, version is added to logs like any other tag.
+- Unified service tagging requires the [Datadog Agent][5].
 
-At the very least they will be used by the APM and [Dogstatsd clients][6] to tag trace data and statsd metrics with `env`, `service`, and `version`. If enabled, the APM tracer will also inject the values of these variables into your logs.
+## Environment variables and labels
 
-Depending on your CI/CD pipeline and how you run your service (e.g., as a binary or through a Docker container), you may wish to set these environment variables depending on whether your environment is [containerized](#containerized-environment) or [non-containerized](#non-containerized-environment).
+With a basic [Datadog Agent][2] configuration, service name (`service: apache`) is configured in your agent configuration file at the individual application or integration level. This allows you to filter solely by service within the Datadog app. However, with unified service tagging, the `service` tag is configured with `env` and `version` at container or top-level to automatically apply these tags to all metrics, logs, and traces for all services.
+
+The Datadog Agent uses [environment variables][6], which are in `key:value` pairs, to configure tags for the Datadog app. In containerized environments using [Autodiscovery][7], the agent uses Kubernetes/Docker labels or environment variables to configure tags.
+
+To properly configure unified tagging, choose your environment: [containerized](#containerized-environment) or [non-containerized](#non-containerized-environment).
 
 {{< img src="tagging/unified_service_tagging/overview.gif" alt="Unified Service Tagging"  >}}
-
-## Requirements
-
-- Unified service tagging requires knowledge of tagging and assigning tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][7] guide and [Assigning tags][8] documentation before proceeding to configuration.
-
-- Unified service tagging requires setup of the [Datadog Agent][9].
-
-- This guide requires [Autodiscovery][10] for unified service tagging in a containerized environment.
-
-## Recommendations
-
-If you're using [connected Logs and Traces][11], it is recommended to enable automatic logs injection. The APM tracer will then automatically add these fields to your logs, thereby eliminating manual configuration for those fields elsewhere.
 
 ## Configuration
 
 ### Containerized environment
 
-#### Autodiscovery
+In containerized environments, `env`, `service`, and `versions` are unified through the use of standard labels and environment variables. Since the agent associates data collected with a specific container, the configuration for these tags can conveniently reside within the container's metadata.
 
-In containerized environments, [Autodiscovery][10] tags `env`, `service`, and `version` from standard labels and environment variables. Since the Agent associates data collected with specific containers, the configuration for the standard tags can conveniently reside within the container's metadata.
+[Autodiscovery][7] is recommended ensure consistent container monitoring when shifting from host to host. Autodiscovery also automatically identifies services running on a specific container and gathers data from those services. Adding standard labels for unified tagging in your Autodiscovery template will automatically assign `env`, `service`, and `versions` to all of your services.
 
-Additionally, the Autodiscovered tags for `env`, `service`, and `version` are added to all data generated by integration or logs checks. You will not need to add these tags to each check's configuration.
+**Note**: While `service` is generally "constant", `env` and `version` might be determined at build time or afterwards. If known at build time, these parameters can be set within a container's image. Since the environment variables become part of the image, they're available when the container is started. Consider this as an option if injecting the environment variables later on is not possible. Conversely, it might be more convenient to inject the `DD_*` environment variables at deploy time. If so, you can leverage the relevant [API][8] for your containerized infrastructure.
 
-#### Setting variables
-
-While service is generally "constant", `env` and `version` might be determined at build time or afterwards. If known at build time, these parameters could be "baked" into a container's image. Since the environment variables would become part of the image, they'd be available when the container is started. Consider this as an option if injecting the environment variables later on is not possible.
-
-Conversely, it might be more convenient to inject the `DD_*` environment variables at deploy time. If so, you can leverage the relevant API for your containerized infrastructure.
-
-**Note**: It's recommend to set **all three environment variables at the same time and place** if possible. This helps to control consistency across configuration files for all of your applications.
+#### Adding labels
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -174,67 +160,20 @@ If there are containers that will not benefit from using the environment variabl
 
 ### Non-containerized environment
 
-#### Setting variables
-Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. Since you may run one or more services per host, we recommend that these environment variables be scoped to a single process.
+Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, we recommend that these environment variables be scoped to a single process.
 
 You may elect export the environment variables in the command for your executable:
 
 `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
 
-Or you might use [Chef][12], [Ansible][13], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it will have access to those variables.
+Or you might use [Chef][9], [Ansible][10], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it will have access to those variables.
 
-#### Configuring traces, logs, and StatsD metrics
-
-{{< tabs >}}
-{{% tab "Traces" %}}
-
-As a best practice, it is recommended to configure your [APM tracer][1] with `DD_ENV` as it keeps the definition of `env` closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
-
-**Note: There can only be one service per span.** Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag will show up on all trace metrics emitted from that host.
-
-[1]: /tracing/send_traces/
-{{% /tab %}}
-
-{{% tab "Logs" %}}
-
-If you already have [traces enabled for logs injection][1], it will also inject `env`, `service`, and `version` into your logs.
-
-If you already have logs configuration checks defined similarly to the example below, you **do not** need to define `service`:
-
-```yaml
-logs:
-  - type: file
-    path: "/path/to/your/log.log"
-    source: python
-    log_processing_rules:
-      ...
-    tags:
-      ...
-```
-
-This configuration will allow existing configurations, such as log processing rules or other tags, to continue to work exactly the same.
-
-If you do not wish to use automatic log injection from the APM tracer, you also have the option of [manually injecting these fields into logs][2].
-
-[1]: /tracing/connect_logs_and_traces/
-[2]: /tracing/connect_logs_and_traces/java?tab=log4j2#manual-trace-id-injection
-{{% /tab %}}
-
-{{% tab "StatsD" %}}
-
-Tags are added in an append-only fashion for [custom statsd metrics][1]. For example, if you have two different values for env, the metrics will be tagged with both envs. There is no order in which one tag will override another of the same name.
-
-[1]: /developers/metrics/
-{{% /tab %}}
-
-{{< /tabs >}}
-
-#### Configuring integrations
-
-To unify telemetry across your environment based on integration, configure the `service` tag based on your agent version:
+To form a single point of configuration for all telemetry emitted directly from your service's runtime for [traces][11], [logs][12], and [StatsD metrics][13], configure based on integration or your application.
 
 {{< tabs >}}
-{{% tab "Agent > v7.18/v6.18" %}}
+{{% tab "Integrations" %}}
+
+## Agent > v7.18/v6.18
 
 Define `service` under `init_config` in your `conf.yaml` file:
 
@@ -243,9 +182,7 @@ init_config:
   service: apache
 ```
 
-{{% /tab %}}
-
-{{% tab "Agent < v7.18/v6.18" %}}
+## Agent < v7.18/v6.18
 
 Define `service` under `tags` within your instances in your `conf.yaml` file:
 
@@ -255,7 +192,53 @@ instances:
       tags:
         - "service: apache"
 ```
+{{% /tab %}}
 
+{{% tab "Application" %}}
+
+## APM
+
+[EXAMPLES NEEDED FOR CONFIGURATION]
+
+As a best practice, it is recommended to configure your [APM tracer][1] with `DD_ENV` as it keeps the definition of `env` closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
+
+When spans are configured with `DD_VERSION`, the tracer will add version to all spans that fall under the service that "owns" the tracer (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans will not receive `version` as a tag. As long as version is present in spans, it will be added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the tracer.
+
+At the very least they will be used by the APM and [Dogstatsd clients][2] to tag trace data and statsd metrics with `env`, `service`, and `version`. If enabled, the APM tracer will also inject the values of these variables into your logs.
+
+**Note: There can only be one service per span.** Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag will show up on all trace metrics emitted from that host.
+
+### Connected logs and traces
+
+If you're using [connected logs and traces][3], it is recommended to enable automatic logs injection for your APM . The APM tracer will then automatically inject `env`, `service`, and `version` into your logs, thereby eliminating manual configuration for those fields elsewhere.
+
+If you already have logs configuration checks defined similarly to the example below, you **do not** need to define `service`:
+
+```yaml
+logs:
+  - type: file
+    path: "/path/to/your/log.log"
+    source: python
+    service: service_name
+    log_processing_rules:
+      ...
+    tags:
+      ...
+```
+This configuration will allow existing configurations, such as log processing rules or other tags, to continue to work exactly the same.
+
+If you do not wish to use automatic log injection from the APM tracer, you also have the option of [manually injecting these fields into logs][4].
+
+## Custom metrics
+
+Tags are added in an append-only fashion for [custom statsd metrics][5]. For example, if you have two different values for `env`, the metrics will be tagged with both environments. There is no order in which one tag will override another of the same name.
+
+
+[1]: /tracing/send_traces/
+[2]: /developers/dogstatsd/
+[3]: /tracing/connect_logs_and_traces/
+[4]: /tracing/connect_logs_and_traces/java?tab=log4j2#manual-trace-id-injection
+[5]: /developers/metrics/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -264,15 +247,15 @@ instances:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tagging/#defining-tags
-[2]: /tagging/assigning_tags?tab=noncontainerizedenvironments#environment-variables
-[3]: getting_started/tracing/
-[4]: /getting_started/logs/
-[5]: /integrations/statsd/
-[6]: /developers/dogstatsd/
-[7]: /tagging/
-[8]: /tagging/assigning_tags
-[9]: /getting_started/agent/#setup
-[10]: /getting_started/agent/autodiscovery
-[11]: /tracing/connect_logs_and_traces/
-[12]: https://www.chef.io/
-[13]: https://www.ansible.com/
+[2]: /getting_started/agent
+[3]: /tagging/
+[4]: /tagging/assigning_tags
+[5]: /getting_started/agent/#setup
+[6]: /tagging/assigning_tags?tab=noncontainerizedenvironments#environment-variables
+[7]: /getting_started/agent/autodiscovery
+[8]: /api/
+[9]: https://www.chef.io/
+[10]: https://www.ansible.com/
+[11]: /getting_started/tracing/
+[12]: /getting_started/logs/
+[13]: /integrations/statsd/
