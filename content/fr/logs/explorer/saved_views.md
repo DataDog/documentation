@@ -46,7 +46,7 @@ Ajoutez une étoile aux vues enregistrées pour les ajouter à vos favoris. Vous
 
 Copiez-collez le lien simplifié de la vue enregistrée pour la partager avec vos collègues.
 
-{{< img src="logs/explorer/saved_views/saved_view_share.png" alt="Sélection d'une vue enregistrée style="width:30%;" >}}
+{{< img src="logs/explorer/saved_views/saved_view_share.png" alt="Sélection d'une vue enregistrée" style="width:30%;" >}}
 
 ### Gérer les vues enregistrées
 
