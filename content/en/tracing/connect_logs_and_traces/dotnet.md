@@ -130,7 +130,7 @@ using log4net;
 // there must be spans started and active before this block.
 try
 {
-    LogicalThreadContext.Properties["dd.env"] = CorrelationIdentifier.Env.ToString();
+    LogicalThreadContext.Properties["dd.env"] = Tracer.Instance.Settings.Environment;
     LogicalThreadContext.Properties["dd.service"] = Tracer.Instance.DefaultServiceName;
     LogicalThreadContext.Properties["dd.version"] = Tracer.Instance.Settings.ServiceVersion;
     LogicalThreadContext.Properties["dd.trace_id"] = CorrelationIdentifier.TraceId.ToString();
