@@ -175,9 +175,41 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 [The Datadog Operator][1] is in public beta. The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options. To get started, check out the [Getting Started page][2] in the [Datadog Operator repo][1] or install the operator from the [OperatorHub.io Datadog Operator page][3].
 
+Once the operator is installed, up and running, the Datadog agent can be deployed by creating a new `datadogagent` custom resource.
+
+Here are some examples of `datadogagent` custom resource:
+* [Vanilla deployment with just metrics collection enabled][4];
+* [Deployment with APM, process, metrics and Network Performance Monitoring enabled][5];
+* [Deployment with cluster agent][6];
+* [Deployment with cluster agent and cluster check runners][7];
+
+The custom resource can then be instantiated with:
+```shell
+kubectl apply -f datadog-agent.yaml
+```
+
+Here are all the parameters that can be set in the `datadogagent` custom resource:
+
+| Parameter                      | description                                                                                                                                                                                                                                                                                                        |
+| ---------                      | -----------                                                                                                                                                                                                                                                                                                        |
+| `apm.enabled`                  | Enable this to enable APM and tracing, on port 8126 ref: https://github.com/DataDog/docker-dd-agent#tracing-from-the-host                                                                                                                                                                                          |
+| `apm.env`                      | The Datadog Agent supports many environment variables Ref: https://docs.datadoghq.com/agent/docker/?tab=standard#environment-variables                                                                                                                                                                             |
+| `apm.hostPort`                 | Number of port to expose on the host. If specified, this must be a valid port number, 0 < x < 65536. If HostNetwork is specified, this must match ContainerPort. Most containers do not need this.                                                                                                                 |
+| `apm.resources.limits`         | Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/                                                                                                                                                 |
+| `apm.requests`                 | Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/ |
+| `config.checksd.configMapName` | ConfigMapName name of a ConfigMap used to mount a directory                                                                                                                                                                                                                                                        |
+| `config.collectEvents`         | Enables this to start event collection from the                                                                                                                                                                                                                                                                    |
+                        kubernetes API ref: https://docs.datadoghq.com/agent/kubernetes/event_collection/ |
+
+
+
 [1]: https://github.com/DataDog/datadog-operator/blob/master/docs/getting_started.md
 [2]: https://github.com/DataDog/datadog-operator
 [3]: https://operatorhub.io/operator/datadog-operator
+[4]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent.yaml
+[5]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-all.yaml
+[6]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-clusteragent.yaml
+[7]: https://github.com/DataDog/datadog-operator/blob/master/examples/datadog-agent-with-dca-clusterchecksrunner.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
