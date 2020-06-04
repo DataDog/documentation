@@ -359,12 +359,6 @@ components:
       type: object
     LogsArchiveCreateRequestDestination:
       description: An archive's destination.
-      discriminator:
-        mapping:
-          azure: '#/components/schemas/LogsArchiveDestinationAzure'
-          gcs: '#/components/schemas/LogsArchiveDestinationGCS'
-          s3: '#/components/schemas/LogsArchiveDestinationS3'
-        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
       - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
@@ -394,12 +388,6 @@ components:
       type: object
     LogsArchiveDestination:
       description: An archive's destination.
-      discriminator:
-        mapping:
-          azure: '#/components/schemas/LogsArchiveDestinationAzure'
-          gcs: '#/components/schemas/LogsArchiveDestinationGCS'
-          s3: '#/components/schemas/LogsArchiveDestinationS3'
-        propertyName: type
       nullable: true
       oneOf:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
@@ -429,17 +417,22 @@ components:
           example: account-name
           type: string
         type:
-          default: azure
-          description: The type of destination.
-          example: azure
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/LogsArchiveDestinationAzureType'
       required:
       - storage_account
       - container
       - integration
       - type
       type: object
+    LogsArchiveDestinationAzureType:
+      default: azure
+      description: Type of the Azure archive destination.
+      enum:
+      - azure
+      example: azure
+      type: string
+      x-enum-varnames:
+      - AZURE
     LogsArchiveDestinationGCS:
       description: The GCS archive destination.
       properties:
@@ -453,16 +446,21 @@ components:
           description: The archive path.
           type: string
         type:
-          default: gcs
-          description: The type of destination.
-          example: gcs
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/LogsArchiveDestinationGCSType'
       required:
       - bucket
       - integration
       - type
       type: object
+    LogsArchiveDestinationGCSType:
+      default: gcs
+      description: Type of the GCS archive destination.
+      enum:
+      - gcs
+      example: gcs
+      type: string
+      x-enum-varnames:
+      - GCS
     LogsArchiveDestinationS3:
       description: The S3 archive destination.
       properties:
@@ -476,16 +474,21 @@ components:
           description: The archive path.
           type: string
         type:
-          default: s3
-          description: The type of destination.
-          example: s3
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/LogsArchiveDestinationS3Type'
       required:
       - bucket
       - integration
       - type
       type: object
+    LogsArchiveDestinationS3Type:
+      default: s3
+      description: Type of the S3 archive destination.
+      enum:
+      - s3
+      example: s3
+      type: string
+      x-enum-varnames:
+      - S3
     LogsArchiveIntegrationAzure:
       description: The Azure archive's integration destination.
       properties:
@@ -1851,9 +1854,6 @@ paths:
       summary: Get all archives
       tags:
       - Logs Archives
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Create an archive in your organization.
       operationId: CreateLogsArchive
@@ -1887,9 +1887,6 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/logs/config/archives/{archive_id}:
     delete:
       description: Delete a given archive from your organization.
@@ -1920,9 +1917,6 @@ paths:
       summary: Delete an archive
       tags:
       - Logs Archives
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Get a specific archive from your organization.
       operationId: GetLogsArchive
@@ -1956,9 +1950,6 @@ paths:
       summary: Get an archive
       tags:
       - Logs Archives
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     put:
       description: 'Update a given archive configuration.
 
@@ -2005,9 +1996,6 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/logs/config/archives/{archive_id}/readers:
     delete:
       description: Removes a role from an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))
