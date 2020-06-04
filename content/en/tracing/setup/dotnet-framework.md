@@ -139,7 +139,6 @@ SET DD_TRACE_AGENT_URL=http://localhost:8126
 SET DD_ENV=prod
 SET DD_SERVICE=MyService
 SET DD_VERSION=abc123
-SET DD_ADONET_ENABLED=false
 
 rem Launch application
 example.exe
@@ -191,7 +190,6 @@ To configure the Tracer using an `app.config` or `web.config` file, use the `<ap
     <add key="DD_ENV" value="prod"/>
     <add key="DD_SERVICE" value="MyService"/>
     <add key="DD_VERSION" value="abc123"/>
-    <add key="DD_ADONET_ENABLED" value="false"/>
   </appSettings>
 </configuration>
 ```
@@ -208,7 +206,6 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
     "DD_ENV": "prod",
     "DD_SERVICE": "MyService",
     "DD_VERSION": "abc123",
-    "DD_ADONET_ENABLED": "false"
 }
 ```
 

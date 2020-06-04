@@ -96,11 +96,11 @@ leverage the Datadog API to retrieve correlation identifiers:
 - Use `CorrelationIdentifier.<FIELD>` API methods to inject identifiers at the beginning and end of each [span][8] to log (see examples below).
 - Configure MDC to use the injected keys:
 
-    - `dd.env` Globally configured `env` for the tracer (or `""` if not set)
-    - `dd.service` Globally configured root service name (or `unnamed-dotnet-service` if not set)
-    - `dd.version` Globally configured `version` for the service (or `""` if not set)
-    - `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
-    - `dd.span_id` Active Span ID during the log statement (or `0` if no trace)
+    - `dd.env` Globally configured `env` for the tracer (defaults to `""` if not set)
+    - `dd.service` Globally configured root service name (defaults to the name of the application or IIS site name if not set)
+    - `dd.version` Globally configured `version` for the service (defaults to `""` if not set)
+    - `dd.trace_id` Active Trace ID during the log statement (defaults to `0` if no trace)
+    - `dd.span_id` Active Span ID during the log statement (defaults to `0` if no trace)
 
 {{< tabs >}}
 {{% tab "Serilog" %}}

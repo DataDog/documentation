@@ -247,7 +247,6 @@ SET DD_TRACE_AGENT_URL=http://localhost:8126
 SET DD_ENV=prod
 SET DD_SERVICE=MyService
 SET DD_VERSION=abc123
-SET DD_ADONET_ENABLED=false
 
 rem Launch application
 example.exe
@@ -263,7 +262,6 @@ export DD_TRACE_AGENT_URL=http://localhost:8126
 export DD_ENV=prod
 export DD_SERVICE=MyService
 export DD_VERSION=abc123
-export DD_ADONET_ENABLED=false
 
 # Launch application
 dotnet example.dll
@@ -311,7 +309,6 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
   "DD_ENV": "prod",
   "DD_SERVICE": "MyService",
   "DD_VERSION": "abc123",
-  "DD_ADONET_ENABLED": "false"
 }
 ```
 
