@@ -66,9 +66,7 @@ DD_TRACE_GLOBAL_TAGS=datacenter:njc,key2:value2
 
 ### Set errors on a span
 
-To customize an error associated with one of your spans, set the error tag on the span and use `Span.log()` to set an “error event”.  The error event is a `Map<String,Object>` containing a `Fields.ERROR_OBJECT->Throwable` entry, a `Fields.MESSAGE->String`, or both.
-
-To recognize and mark errors that occur in your code, utilize the `Span.SetException(Exception)` method available to spans. The method marks the span as an error and adds [related span metadata][3] to provide insight into the exception.
+To recognize and mark errors that occur in your code, utilize the `span.SetException(Exception)` method available to spans. The method marks the span as an error and adds [related span metadata][3] to provide insight into the exception.
 
 ```csharp
 try
@@ -80,6 +78,8 @@ catch(Exception e)
     span.SetException(e);
 }
 ```
+
+This will set 3 tags on the span, `Trace.Tags.ErrorMsg : exception.Message`,   `Trace.Tags.ErrorStack : exception.ToString()` and `Trace.Tags.ErrorType : exception.GetType().ToString()`
 
 ### Manually creating a new span
 
