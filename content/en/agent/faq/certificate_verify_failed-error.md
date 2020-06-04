@@ -15,15 +15,9 @@ Agent versions 6.x and 7.x are fine and don’t need to be updated.
 
 ### How can I find a list of hosts running affected Agent versions?
 
-Datadog has published a [Python script][1] that queries your Datadog account for hosts running impacted Agent versions. It finds hosts that run the Datadog Agent with version less than 5.32.7, and writes their hostnames to a file ordered by version.
+Use the [Agent Versions list][1] in the Datadog UI to see the hostname, the Agent version that it's running, and the status of that host.
 
-1. Download the [Python script][1].
-2. Run it in your local terminal or shell. The script works with Python 2 and 3.
-Datadog US: `python find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site us`
-Datadog EU: `python find_agents_with_connectivity_problems.py --api-key API_KEY --application-key APPLICATION_KEY --site eu`
-3. Find the CSV output in `hosts_agents.csv`.
-
-Get the API and application key [from your account settings page][2].
+**Note**: The previously recommended Python script that queries your Datadog account for hosts running impacted Agent versions has been deprecated in favor of the list now available in the application.
 
 ### Fixing by upgrading to Agent 5.32.7
 
@@ -31,8 +25,8 @@ If you are currently running Agent 5.x on a 64-bit host, Datadog recommends upgr
 
 Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`
 Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`
-Windows (from versions > 5.12.0): Download the Datadog [Agent installer][3]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`
-More platforms and configuration management options detailed [on the Agent install page][4].
+Windows (from versions > 5.12.0): Download the Datadog [Agent installer][2]. `start /wait msiexec /qn /i ddagent-cli-latest.msi`
+More platforms and configuration management options detailed [on the Agent install page][3].
 
 The last compatible Agent released for 32-bit systems was 5.10.1. Follow the `Fixing without upgrading the Agent` instructions for 32-bit hosts.
 
@@ -97,7 +91,7 @@ Note that this can take a long time if you have many potentially affected hosts.
 
 ### Fixing by upgrading to Agent 6 or 7
 
-You can upgrade to [Agent 7][5] or [Agent 6][6] to resolve this issue, but *see the Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.*
+You can upgrade to [Agent 7][4] or [Agent 6][5] to resolve this issue, but *see the Agent CHANGELOG for backward incompatible changes for Agent 6 and 7.*
 
 ### Should I upgrade my Agent even if I deleted the certificate?
 
@@ -132,9 +126,8 @@ restart-service -Force datadogagent
   After `datadog.conf` has been updated, restart the Datadog Service from the Windows Service Manager.
 
 
-[1]: https://static.datadoghq.com/find_agents_with_connectivity_problems.py
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
-[4]: https://app.datadoghq.com/account/settings?agent_version=5#agent
-[5]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
-[6]: /agent/versions/upgrade_to_agent_v6/?tab=linux
+[1]: https://app.datadoghq.com/agent-versions
+[2]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
+[3]: https://app.datadoghq.com/account/settings?agent_version=5#agent
+[4]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
+[5]: /agent/versions/upgrade_to_agent_v6/?tab=linux
