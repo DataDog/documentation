@@ -146,9 +146,7 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 
 ## OpenTracing
 
-<div class="alert alert-warning">
-It is currently recommended that unless you are already using OpenTracing, you use the Datadog Tracer for the best trace visualizations.
-</div>
+It is recommended that you use the Datadog Tracer for the best trace visualizations. Datadog is also OpenTracing compliant.
 
 
 ### Setup
