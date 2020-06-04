@@ -41,7 +41,7 @@ In containerized environments, `env`, `service`, and `versions` are unified thro
 
 **Note**: While `service` is generally "constant", `env` and `version` might be determined at build time or afterwards. If known at build time, these parameters can be set within a container's image. Since the environment variables become part of the image, they're available when the container is started. Consider this as an option if injecting the environment variables later on is not possible. Conversely, it might be more convenient to inject the `DD_*` environment variables at deploy time. If so, you can leverage the relevant [API][8] for your containerized infrastructure.
 
-#### Adding labels
+#### Adding environment variables and labels
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
