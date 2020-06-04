@@ -934,7 +934,7 @@ main:
     identifier: tracing_opentracing_ruby
     weight: 905
   - name: .NET
-    url: tracing/opentracing/dotnet
+    url: tracing/manual_instrumentation/dotnet
     parent: tracing_opentracing
     identifier: tracing_opentracing_dotnet
     weight: 906
