@@ -17,7 +17,7 @@ further_reading:
 ---
 This page details common use cases for adding and customizing observability with Datadog APM.
 
-Add the `Datadog.Trace` [NuGet package][1] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+Add the `Datadog.Trace` [NuGet package][1] to your application. To create new spans, access the global tracer through the `Datadog.Trace.Tracer.Instance` property.
 
 This is supported on **.NET Framework 4.5** and above on Windows and on **.NET Core 2.1, 3.0, and 3.1** on Windows and Linux.
 
