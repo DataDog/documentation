@@ -115,7 +115,7 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 Excluding resources for traces from the calculation of metrics for your services is useful for health checks or simulated traffic .
 ```text
 ## @param ignore_resources - list of strings - optional
-## A blacklist of regular expressions can be provided to disable certain traces based on their resource name
+## A list of regular expressions can be provided to exclude certain traces based on their resource name.
 ## All entries must be surrounded by double quotes and separated by commas.
 # ignore_resources: ["(GET|POST) /healthcheck"]
 ```
