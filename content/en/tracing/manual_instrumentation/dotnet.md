@@ -156,7 +156,7 @@ Tracer.Instance.StartActive("manual.sortorders"))
 
 ### Asynchronous traces
 
-An asynchronous trace is when a span is started in one thread and finished in another. To instrument this behavior, a new scope must be used in each thread the span is active.
+To trace any code being run in an asynchronous task, create a new scope within the background task, just as you would wrap synchronous code.
 ```csharp
  Task.Run(
      () =>
