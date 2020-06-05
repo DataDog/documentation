@@ -24,7 +24,7 @@ Custom instrumentation is supported on **.NET Framework 4.5+** for Windows and o
 
 ## Adding Tags & Spans
 
-Add custom [span tags][2] to your [spans][3] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+To customize your observability within Datadog, add custom [span tags][2] to your [spans][3].  Span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, user ID, etc.
 
 
 ### Add custom span tags
