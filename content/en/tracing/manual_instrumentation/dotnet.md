@@ -140,7 +140,7 @@ public void ConfigureServices(IServiceCollection services)
     // Use the tracer with ASP.NET Core dependency injection
     services.AddSingleton<ITracer>(tracer);
 
-    // to use tracer with OpenTracing.GlobalTracer.Instance
+    // Use the tracer with OpenTracing.GlobalTracer.Instance
     GlobalTracer.Register(tracer);
 }
 ```
