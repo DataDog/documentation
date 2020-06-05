@@ -47,7 +47,7 @@ public class ShoppingCartController : Controller
 
         if (scope != null)
         {
-            // Add a tag to the span for use in the datadog web UI
+            // Add a tag to the span for use in the Datadog web UI
             scope.Span.SetTag("customer.id", customerId.ToString());
         }
 
