@@ -120,7 +120,6 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 # ignore_resources: ["(GET|POST) /healthcheck"]
 ```
 
-<br>
 
 ## OpenTracing
 
