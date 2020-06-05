@@ -98,7 +98,7 @@ using (var parentScope =
     using (var childScope =
            Tracer.Instance.StartActive("manual.sortorders.child"))
     {
-        // Nest using statements around code you would like to trace
+        // Nest using statements around the code to trace
         SortOrders();
     }
 }
