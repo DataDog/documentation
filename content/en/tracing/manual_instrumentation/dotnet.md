@@ -89,7 +89,7 @@ This will set 3 tags on the span: `"error.msg":exception.Message`,  `"error.stac
 
 ### Manually creating a new span
 
-Customize your observability by programmatically creating spans around any block of code.  Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
+Customize your observability by programmatically creating spans around any block of code. Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span has its caller as its parent span. Similarly, any traced methods called from the wrapped block of code have the manual span as its parent.
 
 ```csharp
 using (var parentScope =
