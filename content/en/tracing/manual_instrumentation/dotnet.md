@@ -159,7 +159,7 @@ using (var scope =
 
 ### Asynchronous traces
 
-To trace any code being run in an asynchronous task, create a new scope within the background task, just as you would wrap synchronous code.
+To trace code running in an asynchronous task, create a new scope within the background task, just as you would wrap synchronous code.
 ```csharp
  Task.Run(
      () =>
