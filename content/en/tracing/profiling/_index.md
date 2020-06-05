@@ -34,7 +34,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 2. Update your service invocation to look like:
 
     ```text
-    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.api-key-file=<API_KEY_FILE> -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
     **Note**: With `dd-java-agent.jar` library versions 0.48+, if your organization is on Datadog EU site, add `-Ddd.site=datadoghq.eu` or set `DD_SITE=datadoghq.eu` as environment variable.
@@ -77,26 +77,19 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 1. Install `ddtrace` with the `profile` flavor, which contains both tracing and profiling:
 
     ```shell
-    pip install ddtrace[profiling]
+    pip install ddtrace
     ```
 
-     **Note**: Profiling is available in the `ddtrace` library for versions 0.36+.
+     **Note**: Profiling is available in the `ddtrace` library for versions 0.37+.
 
-2. Add a valid [Datadog API key][1] in your environment variable: `DD_PROFILING_API_KEY`.
 
-3. Set `env`, `service`, and `version` as Datadog tags in your environment variables.
-
-    ```shell
-    export DD_PROFILING_TAGS=env:<YOUR_ENVIRONMENT>,service:<YOUR_SERVICE>,version:<YOUR_VERSION>
-    ```
-
-4. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
+2. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
 
     ```python
     import ddtrace.profiling.auto
     ```
 
-5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
+3. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
 **Note**:
 
@@ -148,7 +141,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 1. Get `dd-trace-go` using the command:
 
     ```shell
-    go get gopkg.in/DataDog/dd-trace-go.v1/profiler
+    go get gopkg.in/DataDog/dd-trace-go.v1
     ```
 
      **Note**: Profiling is available in the `dd-trace-go` library for versions 1.23.0+.
@@ -163,7 +156,6 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
     ```Go
     err := profiler.Start(
-        profiler.WithAPIKey("<DATADOG_API_KEY>")
         profiler.WithService("<SERVICE_NAME>"),
         profiler.WithEnv("<ENVIRONMENT>"),
         profiler.WithTags("version:<APPLICATION_VERSION>"),
