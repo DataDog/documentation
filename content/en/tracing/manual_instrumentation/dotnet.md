@@ -66,7 +66,7 @@ public class ShoppingCartController : Controller
 The `DD_TAGS` environment variable allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, datacenters, or any other tags you would like to see within the Datadog UI.
 
 ```ini
-DD_TRACE_GLOBAL_TAGS=datacenter:njc,key2:value2
+DD_TAGS=datacenter:njc,key2:value2
 ```
 
 ### Set errors on a span
