@@ -1586,25 +1586,11 @@ api_v1:
     url: /api/v1/
     identifier: API V1 overview
     weight: -10
-  - name: Install the Datadog Agent
-    url: install-the-datadog-agent
-    weight: 1
-    parent: API V1 overview
-  - name: Send data to Datadog
-    url: send-data-to-datadog
-    weight: 2
-    parent: API V1 overview
-  - name: Visualize your data
-    url: visualize-your-data
-    weight: 3
-    parent: API V1 overview
-  - name: Manage your account
-    url: manage-your-account
-    weight: 4
+  - name: Authentication
+    url: authentication
     parent: API V1 overview
   - name: Rate Limiting
     url: rate-limiting
-    weight: 5
     parent: API V1 overview
   - name: AWS Integration
     url: /api/v1/aws-integration/
@@ -2226,25 +2212,11 @@ api_v2:
     url: /api/v2/
     identifier: API V2 overview
     weight: -10
-  - name: Install the Datadog Agent
-    url: install-the-datadog-agent
-    weight: 1
-    parent: API V2 overview
-  - name: Send data to Datadog
-    url: send-data-to-datadog
-    weight: 2
-    parent: API V2 overview
-  - name: Visualize your data
-    url: visualize-your-data
-    weight: 3
-    parent: API V2 overview
-  - name: Manage your account
-    url: manage-your-account
-    weight: 4
+  - name: Authentication
+    url: authentication
     parent: API V2 overview
   - name: Rate Limiting
     url: rate-limiting
-    weight: 5
     parent: API V2 overview
   - name: AWS Integration
     url: /api/v2/aws-integration/

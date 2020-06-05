@@ -557,6 +557,15 @@ components:
             $ref: '#/components/schemas/LogsArchiveDefinition'
           type: array
       type: object
+    LogsRestrictionQueriesType:
+      default: logs_restriction_queries
+      description: Restriction query resource type.
+      enum:
+      - logs_restriction_queries
+      example: logs_restriction_queries
+      type: string
+      x-enum-varnames:
+      - LOGS_RESTRICTION_QUERIES
     Organization:
       description: Organization object.
       properties:
@@ -933,11 +942,7 @@ components:
         relationships:
           $ref: '#/components/schemas/RestrictionQueryRelationships'
         type:
-          default: logs_restriction_queries
-          description: Restriction queries type.
-          example: logs_restriction_queries
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/LogsRestrictionQueriesType'
       type: object
     RestrictionQueryWithRelationshipsResponse:
       description: Response containing information about a single restriction query.
