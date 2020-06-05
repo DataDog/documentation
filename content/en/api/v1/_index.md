@@ -73,9 +73,9 @@ You can also use the Datadog API to programatically manage your account:
 
 {{< h2 >}}Rate limiting{{< /h2 >}}
 
-Some of the API endpoints are rate limited. Once you exceed a certain number of requests in a certain time period we return an error.
+Some of the API endpoints are rate limited. Once you exceed a certain number of requests in a certain time period an error is returned.
 
-For rate limited API endpoints we return headers so you can know how close you are to your limit. If you exceed your limit, review these headers to determine when you are able to try again.
+Headers are returned for rate limited API endpoints so you can know how close you are to your limit. If you exceed your limit, review these headers to determine when you are able to try again.
 
 Rate limits can be increased from defaults by [contacting the Datadog support team][39].
 

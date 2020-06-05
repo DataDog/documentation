@@ -23,7 +23,7 @@ Once you have the Datadog Agent set up, use the API to begin to send integration
 
 **Integrations endpoints**
 
-Available intgrations endpoints:
+Available integrations endpoints:
 
 - [AWS Integration][4]
 - [AWS Logs Integration][5]
@@ -37,7 +37,7 @@ Available intgrations endpoints:
 
 Use these endpoints to post and fetch data to and from other parts of the Datadog platform: 
 
-- The [metrics][11] endpoints allow you to post [metrics][12] data so it can be graphed on Datadog’s dashboards and query metrics from any time period
+- The [metrics][11] endpoints allow you to post [metrics][12] data so it can be graphed on Datadog’s dashboards and query metrics from any time period.
 - The [events][13] endpoints allow you to post and fetch events to and from the [Datadog event stream][14].
 - Use the [Synthetics][15] endpoints to create, start, stop and see [Synthetics tests][16] results.
 - Use the [Tracing Agent API][17] to send traces to your Datadog Agent, which then forwards them to Datadog.
@@ -69,7 +69,7 @@ You can also use the Datadog API to programatically manage your account:
 - Grant specific logs access with the [Logs Restriction Queries][35]
 - Manage existing keys with [Key Management][36]
 - Get get hourly, daily, and monthly usage across multiple facets of Datadog with the [Usage Metering][37] endpoints
-- See the list of IP prefixes belonging to Datadog with[IP Ranges][38]
+- See the list of IP prefixes belonging to Datadog with [IP Ranges][38]
 
 {{< h2 >}}Rate limiting{{< /h2 >}}
 
