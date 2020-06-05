@@ -106,7 +106,7 @@ using (var parentScope =
 
 <br>
 
-## Resource Filtering for Health Checks & other endpoints
+## Resource filtering
 
 The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out traces based on their resource name.
 
