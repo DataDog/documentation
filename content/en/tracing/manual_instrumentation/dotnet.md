@@ -17,9 +17,14 @@ further_reading:
 ---
 This page details common use cases for adding and customizing observability with Datadog APM.
 
+Add the `Datadog.Trace` [NuGet package][1] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
+
+This is supported on **.NET Framework 4.5** and above on Windows and on **.NET Core 2.1, 3.0, and 3.1** on Windows and Linux.
+
+
 ## Adding Tags & Spans
 
-Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+Add custom [span tags][2] to your [spans][3] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 
 ### Add custom span tags
@@ -66,7 +71,7 @@ DD_TRACE_GLOBAL_TAGS=datacenter:njc,key2:value2
 
 ### Set errors on a span
 
-To recognize and mark errors that occur in your code, utilize the `span.SetException(Exception)` method available to spans. The method marks the span as an error and adds [related span metadata][3] to provide insight into the exception.
+To recognize and mark errors that occur in your code, utilize the `span.SetException(Exception)` method available to spans. The method marks the span as an error and adds [related span metadata][4] to provide insight into the exception.
 
 ```csharp
 try
@@ -105,7 +110,7 @@ There are additional configurations possible for both the tracing client and Dat
 
 ### B3 Headers Extraction and Injection
 
-Datadog APM tracer supports [B3 headers extraction][4] and injection for distributed tracing.
+Datadog APM tracer supports [B3 headers extraction][5] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
 
@@ -132,7 +137,7 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 
 The Agent can be configured to exclude a specific Resource from Traces sent by the Agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out Traces based on their Resource name.
 
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. To learn more, [click here][5].
+If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. To learn more, [click here][6].
 
 This can be useful for excluding any Health Checks or otherwise simulated traffic from the calculation of metrics for your services.
 ```text
@@ -149,7 +154,7 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 For the best possible tracing experience we recommend using the Datadog tracer for any custom instrumentation. In addition to our native support and B3 support we also support the OpenTracing standard.
 
 ### Setup
-For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][6] NuGet package to your application. During application start-up, initialize the OpenTracing library:
+For OpenTracing support, add the [`Datadog.Trace.OpenTracing`][7] NuGet package to your application. During application start-up, initialize the OpenTracing library:
 
 ```csharp
 using Datadog.Trace.OpenTracing;
@@ -194,17 +199,18 @@ An asynchronous trace is when a span is started in one thread and finished in an
 
 ```
 
-Check the [OpenTracing API][7] for more details and information.
+Check the [OpenTracing API][8] for more details and information.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/visualization/#span-tags
-[2]: /tracing/visualization/#spans
-[3]: /tracing/visualization/trace/?tab=spantags#more-information
-[4]: https://github.com/openzipkin/b3-propagation
-[5]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
-[6]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
-[7]: https://github.com/opentracing/opentracing-csharp
+[1]: https://www.nuget.org/packages/Datadog.Trace
+[2]: /tracing/visualization/#span-tags
+[3]: /tracing/visualization/#spans
+[4]: /tracing/visualization/trace/?tab=spantags#more-information
+[5]: https://github.com/openzipkin/b3-propagation
+[6]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[7]: https://www.nuget.org/packages/Datadog.Trace.OpenTracing
+[8]: https://github.com/opentracing/opentracing-csharp

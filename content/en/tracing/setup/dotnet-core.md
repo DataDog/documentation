@@ -217,14 +217,6 @@ The .NET Tracer can instrument the following libraries automatically:
 
 Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
-## Manual Instrumentation
-
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][7] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
-For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][8].
-
-Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1, 3.0, and 3.1 on Windows and Linux.
-
 ## Configuration
 
 There are multiple ways to configure the .NET Tracer:
@@ -315,7 +307,7 @@ The first table below lists configuration variables that are available for both 
 | `DD_TRACE_AGENT_URL`<br/><br/>`AgentUri`            | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
 | `DD_AGENT_HOST`                                     | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`                               | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
-| `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][9] for more details about the `env` tag.                                                              |
+| `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][7] for more details about the `env` tag.                                                              |
 | `DD_SERVICE_NAME`<br/><br/>`ServiceName`            | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
 | `DD_TRACE_GLOBAL_TAGS`<br/><br/>`GlobalTags`       | If specified, adds all of the specified tags to all generated spans.                                                                                                                                              |
@@ -350,6 +342,4 @@ The following table lists configuration variables that are available only when u
 [4]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
 [5]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
 [6]: /help/
-[7]: https://www.nuget.org/packages/Datadog.Trace
-[8]: /tracing/manual_instrumentation/dotnet/
-[9]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[7]: /tracing/guide/setting_primary_tags_to_scope/#environment
