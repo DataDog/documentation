@@ -84,7 +84,7 @@ catch(Exception e)
 }
 ```
 
-This will set 3 tags on the span, `"error.msg":exception.Message`,   `"error.stack":exception.ToString()` and `"error.type":exception.GetType().ToString()`
+This will set 3 tags on the span, `"error.msg":exception.Message`,   `"error.stack":exception.ToString()`, and `"error.type":exception.GetType().ToString()`.
 
 ### Manually creating a new span
 
