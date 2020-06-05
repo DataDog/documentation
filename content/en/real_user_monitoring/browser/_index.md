@@ -1,8 +1,9 @@
 ---
-title: RUM Get started
+title: Getting started
 kind: documentation
 aliases:
     - /real_user_monitoring/setup
+    - /real_user_monitoring/installation/
 further_reading:
     - link: 'https://www.npmjs.com/package/@datadog/browser-rum'
       tag: 'npm'

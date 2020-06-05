@@ -1,6 +1,8 @@
 ---
 title: RUM Advanced Configuration
 kind: documentation
+aliases:
+  - /real_user_monitoring/installation/advanced_configuration/
 further_reading:
     - link: 'https://www.npmjs.com/package/@datadog/browser-rum'
       tag: 'NPM'

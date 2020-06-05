@@ -1220,81 +1220,76 @@ main:
     pre: nav_rum
     identifier: rum
     weight: 150000
-  - name: Get Started
-    url: real_user_monitoring/installation/
+  - name: Browser Monitoring
+    url: real_user_monitoring/browser/
     parent: rum
-    identifier: rum_install
+    identifier: browser
     weight: 1
-  - name: Advanced Configuration
-    url: real_user_monitoring/installation/advanced_configuration/
-    parent: rum_install
-    identifier: rum_advanced
+  - name: Data Collected
+    url: real_user_monitoring/browser/data_collected/
+    parent: browser
+    identifier: rum_data_collected
     weight: 101
+  - name: Performance Metrics
+    url: real_user_monitoring/browser/performance_metrics/
+    parent: browser
+    identifier: rum_performance_metrics
+    weight: 102
+  - name: Advanced Configuration
+    url: real_user_monitoring/browser/advanced_configuration/
+    parent: browser
+    identifier: rum_advanced
+    weight: 103
+  - name: Android Monitoring
+    url: real_user_monitoring/android/
+    parent: rum
+    identifier: android
+    weight: 2
+  - name: Data Collected
+    url: real_user_monitoring/android/data_collected/
+    parent: android
+    identifier: rum_android_data_collected
+    weight: 201
+  - name: Crash Reporting
+    url: real_user_monitoring/android/crash_reporting/
+    parent: android
+    identifier: rum_android_advanced
+    weight: 202
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
     identifier: rum_dashboards
-    weight: 2
+    weight: 3
   - name: Performance Overview
     url: real_user_monitoring/dashboards/performance_overview_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_performance
-    weight: 201
+    weight: 301
   - name: Resources
     url: real_user_monitoring/dashboards/resources_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_resources
-    weight: 202
+    weight: 302
   - name: Errors
     url: real_user_monitoring/dashboards/errors_dashboard
     parent: rum_dashboards
     identifier: rum_dashboards_errors
-    weight: 203
+    weight: 303
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 3
+    weight: 4
   - name: Search
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
-    weight: 301
+    weight: 401
   - name: Analytics
     url: real_user_monitoring/explorer/analytics/
     parent: rum_explorer
     identifier: rum_explorer_analytics
-    weight: 302
-  - name: Data Collected
-    url: real_user_monitoring/data_collected/
-    parent: rum
-    identifier: rum_data_collected
-    weight: 4
-  - name: View
-    url: real_user_monitoring/data_collected/view
-    parent: rum_data_collected
-    identifier: rum_data_collected_views
-    weight: 401
-  - name: Resource
-    url: real_user_monitoring/data_collected/resource
-    parent: rum_data_collected
-    identifier: rum_data_collected_resource
     weight: 402
-  - name: Long Task
-    url: real_user_monitoring/data_collected/long_task
-    parent: rum_data_collected
-    identifier: rum_data_collected_long_task
-    weight: 403
-  - name: Error
-    url: real_user_monitoring/data_collected/error
-    parent: rum_data_collected
-    identifier: rum_data_collected_error
-    weight: 404
-  - name: User Action
-    url: real_user_monitoring/data_collected/user_action
-    parent: rum_data_collected
-    identifier: rum_data_collected_user_action
-    weight: 405
   - name: Network Monitoring
     url: network_performance_monitoring/
     pre: nav_network
