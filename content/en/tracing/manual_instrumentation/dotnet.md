@@ -112,7 +112,7 @@ The Agent can be configured to exclude a specific resource from traces sent by t
 
 If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][5] for details.
 
-This can be useful for excluding any Health Checks or otherwise simulated traffic from the calculation of metrics for your services.
+Excluding resources for traces from the calculation of metrics for your services is useful for health checks or simulated traffic .
 ```text
 ## @param ignore_resources - list of strings - optional
 ## A blacklist of regular expressions can be provided to disable certain traces based on their resource name
