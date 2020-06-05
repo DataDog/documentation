@@ -41,7 +41,8 @@ public class ShoppingCartController : Controller
     [HttpGet]
     public IActionResult Index(int customerId)
     {
-        // Access the active scope through the global tracer (can return null)
+        // Access the active scope through
+        // the global tracer (can return null)
         var scope = Tracer.Instance.ActiveScope;
 
         if (scope != null)
