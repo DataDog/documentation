@@ -371,31 +371,6 @@ Would produce the following result:
 
 See the [Java integration documentation][17] to learn more about Java metrics collection with JMX fetch.
 
-### B3 Headers Extraction and Injection
-
-Datadog APM tracer supports [B3 headers extraction][18] and injection for distributed tracing.
-
-Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
-
-- Datadog: `Datadog`
-- B3: `B3`
-
-Injection styles can be configured using:
-
-- System Property: `-Ddd.propagation.style.inject=Datadog,B3`
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
-
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
-
-Extraction styles can be configured using:
-
-- System Property: `-Ddd.propagation.style.extract=Datadog,B3`
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
-
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
-
-If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
-
 ## Trace Reporting
 
 To report a trace to Datadog the following happens:
@@ -482,4 +457,3 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [15]: /developers/dogstatsd/
 [16]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 [17]: /integrations/java/?tab=host#metric-collection
-[18]: https://github.com/openzipkin/b3-propagation
