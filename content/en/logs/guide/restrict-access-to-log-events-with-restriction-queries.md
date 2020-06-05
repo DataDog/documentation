@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Logs might contain sensitive information that could either get [scrubbed][1] or be accessible only to authorized users of your organization.
+Logs might contain sensitive information that could either get [scrubbed][1]) or be accessible only to authorized users of your organization.
 
 To limit access of a subset of logs for a given user or group of users, you can define restriction queries in Datadog.
 
@@ -157,7 +157,7 @@ Access is then restricted with a restriction query, as shown below.
 
 ### Grant permissions to the role
 
-Permissions are added one by one through the [Roles API][8]. 
+Permissions are added one by one through the [Roles API][8]). 
 
 For each permission ID obtained by listing all available permissions, grant them to each role as shown below:
 
@@ -262,7 +262,7 @@ Next, restrict access to the backend and frontend by [attaching the restriction 
 ## Attach queries to the role
 
 You have the role ID and query ID from the response of the creation call. Use them when attaching the query to the role.
-Note that the IDs are specific to this example; doing this on your account would give different role and query IDs. Check the [permission documentation][13] for more information about restrictions in Datadog.
+Note that the IDs are specific to this example; doing this on your account would give different role and query IDs. Check the [permission documentation][10] for more information about restrictions in Datadog.
 
 {{< tabs >}}
 {{% tab "Backend" %}}
@@ -273,7 +273,7 @@ API call:
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/76b2c0e6-98fa-11ea-93e6-775bd9258d59/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","id": "dcf7c550-99cb-11ea-93e6-376cebac897c"}}’
 ```
 
-Confirm that it is attached by [getting the list of roles attached to the query](https://docs.datadoghq.com/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query): 
+Confirm that it is attached by [getting the list of roles attached to the query][1]: 
 
 ```
 curl -X GET "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/76b2c0e6-98fa-11ea-93e6-775bd9258d59/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
@@ -293,6 +293,7 @@ Reponse:
 }
 ```
 
+[1]: https://docs.datadoghq.com/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
 {{% /tab %}}
 {{% tab "Frontend" %}}
 
@@ -302,7 +303,7 @@ API call:
 curl -X POST "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/b3228a0c-98fa-11ea-93e6-d30e1d2c52ee/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type": "roles","id": "63b970ea-99ca-11ea-93e6-e32eb84de6d6"}}’
 ```
 
-Confirm that it is attached by [getting the list of roles attached to the query](https://docs.datadoghq.com/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query): 
+Confirm that it is attached by [getting the list of roles attached to the query][1]: 
 
 ```
 curl -X GET "https://app.datadoghq.com/api/v2/logs/config/restriction_queries/b3228a0c-98fa-11ea-93e6-d30e1d2c52ee/roles" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
@@ -322,6 +323,7 @@ Reponse:
 }
 ```
 
+[1]: https://docs.datadoghq.com/api/v2/logs-restriction-queries/#list-roles-for-a-restriction-query
 {{% /tab %}}
 {{% tab "Generic API" %}}
 
@@ -340,7 +342,7 @@ Finally, now that your roles are configured with their permissions and restricti
 
 ### Get the user IDs
 
-The first step is to [get the list of users][10]:
+The first step is to [get the list of users][11]:
 
 ```
 curl -X GET "https://api.datadoghq.com/api/v2/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
@@ -352,7 +354,7 @@ Also, check if they already have roles and their IDs.
 
 ### Attach the role to the user
 
-For each user, [assign the created backend and frontend end role][11]:
+For each user, [assign the created backend and frontend end role][12]:
 
 ```
 curl -X POST "https://api.datadoghq.com/api/v2/roles/<ROLE_ID>/users" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" -d '{"data": {"type":"users","id":"<USER_ID>"}}'
@@ -368,7 +370,7 @@ When you got the list of users, you also got the list of their roles. For the ot
 curl -X GET "https://api.datadoghq.com/api/v2/roles/{role_id}" -H "Content-Type: application/json" -H "DD-API-KEY: <DATADOG_API_KEY>" -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 ```
 
-If the name of that role is Datadog Standard Role or Datadog Admin Role, [remove it from that user][12] to make sure they only belong to the newly created role and not the default Datadog ones.
+If the name of that role is Datadog Standard Role or Datadog Admin Role, [remove it from that user][13] to make sure they only belong to the newly created role and not the default Datadog ones.
 
 Note that a user can belong to multiple roles.
 
@@ -376,16 +378,16 @@ Note that a user can belong to multiple roles.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs)
+[1]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
 [4]: /api/v2/roles/#create-role
 [5]: /api/v2/roles/#list-permissions
 [6]: /account_management/rbac/permissions?tab=datadogapplication#general-permissions
 [7]: /account_management/rbac/permissions?tab=datadogapplication#advanced-permissions
-[8]: /api/v2/roles/#grant-permission-to-a-role)
+[8]: /api/v2/roles/#grant-permission-to-a-role
 [9]: /api/v2/logs-restriction-queries/#grant-role-to-a-restriction-query
-[10]: /api/v2/users/#list-all-users
-[11]: /api/v2/roles/#add-a-user-to-a-role
-[12]: /api/v2/roles/#remove-a-user-from-a-role
-[13]: /account_management/rbac/permissions?tab=datadogapplication#log-data-access
+[10]: /account_management/rbac/permissions?tab=datadogapplication#log-data-access
+[11]: /api/v2/users/#list-all-users
+[12]: /api/v2/roles/#add-a-user-to-a-role
+[13]: /api/v2/roles/#remove-a-user-from-a-role
