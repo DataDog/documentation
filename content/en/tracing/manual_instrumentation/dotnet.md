@@ -22,7 +22,7 @@ Add the `Datadog.Trace` [NuGet package][1] to your application. To create new sp
 Custom instrumentation is supported on **.NET Framework 4.5+** for Windows and on **.NET Core 2.1, 3.0, and 3.1** for Windows and Linux.
 
 
-## Adding Tags & Spans
+## Add tags and spans
 
 To customize your observability within Datadog, add custom [span tags][2] to your [spans][3].  Span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, user ID, etc.
 
