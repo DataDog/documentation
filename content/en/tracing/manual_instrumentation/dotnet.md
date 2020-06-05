@@ -64,7 +64,7 @@ public class ShoppingCartController : Controller
 
 ### Adding tags globally to all spans
 
-The `DD_TAGS` environment variable allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, datacenters, or any other tags you would like to see within the Datadog UI.
+Use the `DD_TAGS` environment variable to set tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, regions, etc. within the Datadog UI. For example:
 
 ```ini
 DD_TAGS=datacenter:njc,key2:value2
@@ -85,7 +85,7 @@ catch(Exception e)
 }
 ```
 
-This will set 3 tags on the span: `"error.msg":exception.Message`,  `"error.stack":exception.ToString()`, and `"error.type":exception.GetType().ToString()`.
+This sets three tags on the span: `"error.msg":exception.Message`,  `"error.stack":exception.ToString()`, and `"error.type":exception.GetType().ToString()`.
 
 ### Manually creating a new span
 
