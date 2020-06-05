@@ -1604,8 +1604,8 @@ api_v1:
     parent: API V1 overview
   - name: Rate Limiting
     url: rate-limiting
-    weight: 5
     parent: API V1 overview
+    weight: 5
   - name: AWS Integration
     url: /api/v1/aws-integration/
     identifier: AWS Integration
@@ -2244,8 +2244,8 @@ api_v2:
     parent: API V2 overview
   - name: Rate Limiting
     url: rate-limiting
-    weight: 5
     parent: API V2 overview
+    weight: 5
   - name: AWS Integration
     url: /api/v2/aws-integration/
     identifier: AWS Integration
