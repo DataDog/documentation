@@ -151,7 +151,7 @@ Use OpenTracing to create a span.
 
 ```csharp
 using (var scope =
-Tracer.Instance.StartActive("manual.sortorders"))
+       Tracer.Instance.StartActive("manual.sortorders"))
 {
     SortOrders();
 }
