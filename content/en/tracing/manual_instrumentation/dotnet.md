@@ -71,7 +71,7 @@ DD_TAGS=datacenter:njc,key2:value2
 
 ### Set errors on a span
 
-To recognize and mark errors that occur in your code, utilize the `span.SetException(Exception)` method available to spans. The method marks the span as an error and adds [related span metadata][4] to provide insight into the exception.
+To recognize and mark errors that occur in your code, utilize the `Span.SetException(Exception)` method available to spans. The method marks the span as an error and adds [related span metadata][4] to provide insight into the exception.
 
 ```csharp
 try
