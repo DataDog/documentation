@@ -40,11 +40,10 @@ Here are setup examples for the following logging libraries:
 
 ## Connect your service across Logs and APM
 
-If APM is enabled for this application, the APM tracer can help connect your logs with APM data.
-See [APM Python logging instructions][3] to learn more about adding trace IDs, span IDs, and even the
-`env`, `service`, and `version` to your logs.
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
+`env`, `service`, and `version` to your logs by [following the APM Python instructions][3].
 
-**Note**: If the APM tracer injects `service` into your logs, there is no need to set a `service` field in your logs configuration.
+**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
 Once this is done, the log should have the following format:
 

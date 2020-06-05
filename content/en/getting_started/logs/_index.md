@@ -8,7 +8,7 @@ further_reading:
     - link: '/logs/log_collection/'
     - link: /tagging/unified_service_tagging
       tag: 'Documentation'
-      text: 'Learn how to configure unified service tagging for logs'
+      text: 'Learn how to configure unified service tagging'
       tag: 'Documentation'
       text: 'Collect logs from your Applications, Containers, and Cloud providers'
 ---

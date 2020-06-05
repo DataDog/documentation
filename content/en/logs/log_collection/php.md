@@ -180,9 +180,10 @@ Configure the formatter in your Monolog configuration: declare the formatter fie
 
 ## Connect your service across Logs and APM
 
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM PHP logging instructions][2] to automatically add trace and span IDs in your logs.
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
+`env`, `service`, and `version` to your logs by [following the APM PHP instructions][2].
 
-Note that if the APM tracer injects `service` into your logs, there is no need to set a `service` field in your logs configuration.
+**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
 ### Agent Configuration
 

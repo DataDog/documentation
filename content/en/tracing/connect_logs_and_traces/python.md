@@ -30,7 +30,7 @@ If you have configured your tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`
 
 If you prefer to manually correlate your [traces][2] with your logs, patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
-Similarly, you can include ``env``, ``service``, and ``version`` as attributes for your log record.
+Similarly, include ``env``, ``service``, and ``version`` as attributes for your log record.
 
 The configuration below is used by the automatic injection method and is supported by default in the Python Log Integration:
 
@@ -92,7 +92,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 
 ```text
 >>> traced_func()
-{"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
+{"event": "In tracer context", "dd": {"trace_id": 9982398928418628468, "span_id": 10130028953923355146, "env": "dev", "service": "hello", "version": "abc123"}}
 ```
 
 **Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][4].
