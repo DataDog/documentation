@@ -92,7 +92,8 @@ This will set 3 tags on the span: `"error.msg":exception.Message`,  `"error.stac
 Customize your observability by programmatically creating spans around any block of code.  Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
 
 ```csharp
-using (var parentScope = Tracer.Instance.StartActive("manual.sortorders"))
+using (var parentScope =
+       Tracer.Instance.StartActive("manual.sortorders"))
 {
     using (var childScope = Tracer.Instance.StartActive("manual.sortorders.child"))
     {
