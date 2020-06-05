@@ -134,7 +134,7 @@ using Datadog.Trace.OpenTracing;
 
 public void ConfigureServices(IServiceCollection services)
 {
-    // create an OpenTracing ITracer with default setting
+    // Create an OpenTracing ITracer with the default setting
     OpenTracing.ITracer tracer = OpenTracingTracerFactory.CreateTracer();
 
     // Use the tracer with ASP.NET Core dependency injection
