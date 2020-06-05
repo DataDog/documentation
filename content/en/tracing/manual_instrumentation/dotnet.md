@@ -116,7 +116,7 @@ Excluding resources for traces from the calculation of metrics for your services
 ```text
 ## @param ignore_resources - list of strings - optional
 ## A blacklist of regular expressions can be provided to disable certain traces based on their resource name
-## all entries must be surrounded by double quotes and separated by commas.
+## All entries must be surrounded by double quotes and separated by commas.
 # ignore_resources: ["(GET|POST) /healthcheck"]
 ```
 
