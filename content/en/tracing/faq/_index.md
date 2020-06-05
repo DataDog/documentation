@@ -12,4 +12,5 @@ private: true
     {{< nextlink href="tracing/faq/php-tracer-manual-installation" >}}PHP tracer manual installation{{< /nextlink >}}
     {{< nextlink href="tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel" >}}Why can't I see my correlated logs in the Trace ID panel?{{< /nextlink >}}
     {{< nextlink href="tracing/faq/trace-agent-from-source" >}}Installing the trace Agent from source and on Windows{{< /nextlink >}}
+    {{< nextlink href="tracing/faq/profiling_migration" >}}Preparing your beta profiling for GA{{< /nextlink >}}
 {{< /whatsnext >}}
