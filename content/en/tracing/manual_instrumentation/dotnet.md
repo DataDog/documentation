@@ -164,7 +164,8 @@ To trace any code being run in an asynchronous task, create a new scope within t
  Task.Run(
      () =>
      {
-         using (var scope = Tracer.Instance.StartActive("manual.sortorders.async"))
+         using (var scope =
+                Tracer.Instance.StartActive("manual.sortorders.async"))
          {
              SortOrders();
          }
