@@ -95,7 +95,8 @@ Customize your observability by programmatically creating spans around any block
 using (var parentScope =
        Tracer.Instance.StartActive("manual.sortorders"))
 {
-    using (var childScope = Tracer.Instance.StartActive("manual.sortorders.child"))
+    using (var childScope =
+           Tracer.Instance.StartActive("manual.sortorders.child"))
     {
         // Nest using statements around code you would like to trace
         SortOrders();
