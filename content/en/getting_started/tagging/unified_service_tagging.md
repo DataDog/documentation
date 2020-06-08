@@ -116,7 +116,12 @@ metadata:
     tags.datadoghq.com/service: <SERVICE>
     tags.datadoghq.com/version: <VERSION>
 spec:
-  <Block from above>
+  template:
+    metadata:
+      labels:
+        tags.datadoghq.com/env: <ENV>
+        tags.datadoghq.com/service: <SERVICE>
+        tags.datadoghq.com/version: <VERSION>
 ```
 
 ###### APM Tracer / StatsD client
@@ -150,7 +155,9 @@ spec:
 
 {{% tab "Docker" %}}
 
-To achieve a single point of configuration across all telemetry, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment. As long as the agent can access your container's Docker socket, it will be able to detect the environment variables and map them to the standard tags. These variables can be set in the Docker image:
+To achieve a single point of configuration across all telemetry, it is recommended to set up [logs injection][1] first if you plan to connect logs, traces, and metrics. Once setup is complete, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment.
+
+As long as the agent can access your container's [Docker socket][2], it will be able to detect the environment variables and map them to the standard tags. The following variables can be set in the Docker image to implement unified tagging:
 
 ```yaml
 "environment": [
@@ -169,19 +176,25 @@ To achieve a single point of configuration across all telemetry, make `DD_ENV`, 
         ]
 ```
 
-If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM), you can instead use Docker labels:
+If you do not need to set up logs injection or your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM), you can instead use Docker labels:
 
 ```yaml
   LABEL com.datadoghq.tags.env="<ENV>"
   LABEL com.datadoghq.tags.service="<SERVICE>"
   LABEL com.datadoghq.tags.version="<VERSION>"
 ```
-[1]: https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option
+
+Or as an option to `docker run`:
+
+`docker run ... -l com.datadoghq.tags.service=<SERVICE>`
+
+[1]: /tracing/connect_logs_and_traces/
+[2]: https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option
 {{% /tab %}}
 
 {{% tab "ECS" %}}
 
-To achieve a single point of configuration across all telemetry, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment. These variables can be set in the ECS task's definition:
+To achieve a single point of configuration across all telemetry, it is recommended to set up [logs injection][1] first if you plan to connect logs, traces, and metrics. Once setup is complete, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment.
 
 ```yaml
         "environment": [
@@ -200,7 +213,7 @@ To achieve a single point of configuration across all telemetry, make `DD_ENV`, 
         ]
 ```
 
-If there are containers that will not benefit from using the environment variables in the application runtime, you can instead use Docker labels:
+If you do not need to set up logs injection or there are containers that will not benefit from using the environment variables in the application runtime, you can instead use Docker labels:
 
 ```yaml
         "dockerLabels": {
@@ -209,6 +222,12 @@ If there are containers that will not benefit from using the environment variabl
           "com.datadoghq.tags.version": "<VERSION>"
         }
 ```
+
+Or set the Docker label in the task definition of ECS:
+
+`"containerLabels": <JSON_MAPPING>`
+
+[1]: /tracing/connect_logs_and_traces/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -267,8 +286,6 @@ Tags are added in an append-only fashion for [custom statsd metrics][5]. For exa
 [3]: /tracing/connect_logs_and_traces/
 [4]: /tracing/connect_logs_and_traces/java?tab=log4j2#manual-trace-id-injection
 [5]: /developers/metrics/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Further Reading
 
