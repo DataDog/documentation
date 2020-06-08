@@ -26,7 +26,7 @@ For Single Page Applications (SPAs), the RUM SDK differentiates between `initial
 
 Datadog provides a unique performance metric, Loading Time, which calculates the time needed for a page to load. This metric works both for `initial_load` and `route_change` navigations.
 
-### How is Loading Time calculated?
+### How is loading time calculated?
 To account for modern web applications, Loading Time watches for network requests and long tasks.
 
 * **Initial Load**: Loading Time is equal to the difference between `navigationStart` and:
