@@ -505,7 +505,7 @@ spec:
         name: logdockercontainerpath
       tolerations:
       affinity: null
-      serviceAccountName: "default"
+      serviceAccountName: "datadog-agent"
       nodeSelector:
   updateStrategy:
     rollingUpdate:
@@ -515,5 +515,3 @@ spec:
 # Source: datadog/templates/containers-common-env.yaml
 # The purpose of this template is to define a minimal set of environment
 # variables required to operate dedicated containers in the daemonset.
----
-{}

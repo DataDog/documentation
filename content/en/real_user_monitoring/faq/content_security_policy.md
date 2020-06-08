@@ -43,11 +43,24 @@ connect-src https://*.logs.datadoghq.eu
 
 ## NPM Setup
 
-If you have the NPM setup for [Real User Monitoring][4] or [browser log collection][5], add only the `script-src` directive:
+If you have the NPM setup for [Real User Monitoring][4] or [browser log collection][5], add only the `connect-src` directive:
+
+{{< tabs >}}
+{{% tab "US" %}}
 
 ```txt
-script-src https://www.datadoghq-browser-agent.com
+connect-src https://*.logs.datadoghq.com
 ```
+
+{{% /tab %}}
+{{% tab "EU" %}}
+
+```txt
+connect-src https://*.logs.datadoghq.eu
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

@@ -12,7 +12,7 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/monitoring-101-alerting/'
     tag: ブログ
     text: モニター入門 重要事項をアラート
-  - link: '/api/#monitors'
+  - link: /api/v1/monitors/
     tag: Documentation
     text: Datadog モニター API
 ---

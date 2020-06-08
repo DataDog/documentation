@@ -38,11 +38,13 @@ supported_os:
 Ce check vous permet de suivre les métriques de performance node, vnode et ring de RiakKV ou RiakTS.
 
 ## Implémentation
+
 ### Installation
 
 Le check Riak est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos serveurs Riak.
 
 ### Configuration
+
 #### Host
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
@@ -51,56 +53,55 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 1. Modifiez le fichier `riak.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3]. Consultez le [fichier d'exemple riak.yaml][4] pour découvrir toutes les options de configuration disponibles :
 
-    ```yaml
-      init_config:
+   ```yaml
+   init_config:
 
-      instances:
-
-          ## @param url - string - required
-          ## Riak stats url to connect to.
-          #
-        - url: http://127.0.0.1:8098/stats
-    ```
+   instances:
+     ## @param url - string - required
+     ## Riak stats url to connect to.
+     #
+     - url: http://127.0.0.1:8098/stats
+   ```
 
 2. [Redémarrez l'Agent][5] pour commencer à envoyer des métriques Riak à Datadog.
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Ajoutez ce bloc de configuration à votre fichier `riak.d/conf.yaml` pour commencer à recueillir vos logs Riak :
 
-    ```
-      logs:
-        - type: file
-          path: /var/log/riak/console.log
-          source: riak
-          service: <SERVICE_NAME>
+   ```yaml
+     logs:
+       - type: file
+         path: /var/log/riak/console.log
+         source: riak
+         service: "<SERVICE_NAME>"
 
-        - type: file
-          path: /var/log/riak/error.log
-          source: riak
-          service: <SERVICE_NAME>
-          log_processing_rules:
-            - type: multi_line
-              name: new_log_start_with_date
-              pattern: \d{4}\-\d{2}\-\d{2}
+       - type: file
+         path: /var/log/riak/error.log
+         source: riak
+         service: "<SERVICE_NAME>"
+         log_processing_rules:
+           - type: multi_line
+             name: new_log_start_with_date
+             pattern: \d{4}\-\d{2}\-\d{2}
 
-        - type: file
-          path: /var/log/riak/crash.log
-          source: riak
-          service: <SERVICE_NAME>
-          log_processing_rules:
-            - type: multi_line
-              name: new_log_start_with_date
-              pattern: \d{4}\-\d{2}\-\d{2}
-    ```
+       - type: file
+         path: /var/log/riak/crash.log
+         source: riak
+         service: "<SERVICE_NAME>"
+         log_processing_rules:
+           - type: multi_line
+             name: new_log_start_with_date
+             pattern: \d{4}\-\d{2}\-\d{2}
+   ```
 
 3. [Redémarrez l'Agent][5].
 
@@ -110,17 +111,17 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 ##### Collecte de métriques
 
-| Paramètre            | Valeur                           |
-| -------------------- | ------------------------------- |
-| `<NOM_INTÉGRATION>` | `riak`                          |
-| `<CONFIG_INIT>`      | vide ou `{}`                   |
+| Paramètre            | Valeur                                  |
+| -------------------- | -------------------------------------- |
+| `<NOM_INTÉGRATION>` | `riak`                                 |
+| `<CONFIG_INIT>`      | vide ou `{}`                          |
 | `<CONFIG_INSTANCE>`  | `{"url":"http://%%host%%:8098/stats"}` |
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][7].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][7].
 
 | Paramètre      | Valeur                                                                                                                                                        |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -131,11 +132,13 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [Lancez la sous-commande status de l'Agent][8] et cherchez `riak` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "riak" >}}
 
 
 ### Événements
+
 Le check Riak n'inclut aucun événement.
 
 ### Checks de service
@@ -144,6 +147,7 @@ Le check Riak n'inclut aucun événement.
 Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'endpoint de statistiques Riak pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/riak/images/riak_graph.png
@@ -151,8 +155,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations/
-[7]: https://docs.datadoghq.com/fr/agent/docker/log/
+[6]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[7]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-core/blob/master/riak/metadata.csv
-[10]: https://docs.datadoghq.com/fr/help
+[10]: https://docs.datadoghq.com/fr/help/

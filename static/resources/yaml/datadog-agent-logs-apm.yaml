@@ -50,14 +50,14 @@ spec:
               fieldPath: status.hostIP
         - name: KUBERNETES
           value: "yes"
+        - name: DD_AC_EXCLUDE
+          value: "name:datadog-agent"
         - name: DOCKER_HOST
           value: unix:///host/var/run/docker.sock
         - name: DD_LOG_LEVEL
           value: "INFO"
         - name: DD_DOGSTATSD_PORT
           value: "8125"
-        - name: DD_AC_EXCLUDE
-          value: "name:datadog-agent"
         - name: DD_LEADER_ELECTION
           value: "true"
         - name: DD_COLLECT_KUBERNETES_EVENTS
@@ -123,6 +123,8 @@ spec:
               fieldPath: status.hostIP
         - name: KUBERNETES
           value: "yes"
+        - name: DD_AC_EXCLUDE
+          value: "name:datadog-agent"
         - name: DOCKER_HOST
           value: unix:///host/var/run/docker.sock
         - name: DD_LOG_LEVEL
@@ -184,6 +186,8 @@ spec:
               fieldPath: status.hostIP
         - name: KUBERNETES
           value: "yes"
+        - name: DD_AC_EXCLUDE
+          value: "name:datadog-agent"
         - name: DOCKER_HOST
           value: unix:///host/var/run/docker.sock
         - name: DD_LEADER_ELECTION
@@ -214,7 +218,7 @@ spec:
         name: logdockercontainerpath
       tolerations:
       affinity: null
-      serviceAccountName: "default"
+      serviceAccountName: "datadog-agent"
       nodeSelector:
   updateStrategy:
     rollingUpdate:
@@ -224,5 +228,3 @@ spec:
 # Source: datadog/templates/containers-common-env.yaml
 # The purpose of this template is to define a minimal set of environment
 # variables required to operate dedicated containers in the daemonset.
----
-{}

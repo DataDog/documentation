@@ -109,7 +109,8 @@ PHP APM supports the following SAPI's:
 |:---------------|:----------------|
 | apache2handler | Fully Supported |
 | cli            | Fully Supported |
-| fpm            | Fully Supported |
+| fpm-fcgi       | Fully Supported |
+| cgi-fcgi       | Fully Supported |
 
 ### Integrations
 
@@ -234,10 +235,10 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AGENT_HOST`                           | `localhost` | The Agent host name                                                                                                                            |
 | `DD_AUTOFINISH_SPANS`                     | `false`     | Whether spans are automatically finished when the tracer is flushed                                                                            |
 | `DD_DISTRIBUTED_TRACING`                  | `true`      | Whether to enable distributed tracing                                                                                                          |
-| `DD_INTEGRATIONS_DISABLED`                | `null`      | CSV list of disabled extensions; e.g., `curl,mysqli`                                                                                           |
+| `DD_INTEGRATIONS_DISABLED`                | `null`      | A CSV list of integrations to disable, for example: `curl,mysqli` (see [Integration names](#integration-names)).                                      |
 | `DD_PRIORITY_SAMPLING`                    | `true`      | Whether to enable priority sampling                                                                                                            |
-| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | The sampling rate for the traces. Between `0.0` and `1.0` (default). It was `DD_SAMPLING_RATE` before v0.36.0                                  |
-| `DD_SERVICE_NAME`                         | `none`      | The default app name                                                                                                                           |
+| `DD_SERVICE_NAME`                         | `null`      | The default app name                                                                                                                           |
+| `DD_SERVICE_MAPPING`                      | `null`      | Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)). |
 | `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | IPC-based configurable circuit breaker retry time (in milliseconds)                                                                            |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)                                                                          |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | The Agent connection timeout (in milliseconds)                                                                                                 |
@@ -245,19 +246,51 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_PORT`                     | `8126`      | The Agent port number                                                                                                                          |
 | `DD_TRACE_AGENT_TIMEOUT`                  | `500`       | The Agent request transfer timeout (in milliseconds)                                                                                           |
 | `DD_TRACE_ANALYTICS_ENABLED`              | `false`     | Flag to enable app analytics for relevant spans in web integrations                                                                            |
+| `DD_TRACE_AUTO_FLUSH_ENABLED`             | `false`     | Automatically flush the tracer when all the spans are closed; set to `true` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace long-running processes |
 | `DD_TRACE_CLI_ENABLED`                    | `false`     | Enable tracing of PHP scripts from the CLI                                                                                                     |
 | `DD_TRACE_DEBUG`                          | `false`     | Enable [debug mode](#custom-url-to-resource-mapping) for the tracer                                                                            |
 | `DD_TRACE_ENABLED`                        | `true`      | Enable the tracer globally                                                                                                                     |
-| `DD_TRACE_GLOBAL_TAGS`                    | `none`      | Tags to be set on all spans: e.g.: `key1:value1,key2:value2`                                                                                   |
+| `DD_TRACE_GENERATE_ROOT_SPAN`             | `true`      | Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace long-running processes    |
+| `DD_TRACE_GLOBAL_TAGS`                    | `null`      | Tags to be set on all spans, for example: `key1:value1,key2:value2`.                                                                                 |
+| `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`    | `false`     | Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_exec()` call to `https://datadoghq.com` has the service name `host-datadoghq.com` instead of the default service name of `curl`. |
 | `DD_TRACE_MEASURE_COMPILE_TIME`           | `true`      | Record the compile time of the request (in milliseconds) onto the top-level span                                                               |
 | `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable auto instrumentation for applications that do not use an autoloader                                                    |
 | `DD_TRACE_REPORT_HOSTNAME`                | `false`     | Enable hostname reporting on the root span                                                                                                     |
-| `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | CSV of URL-to-resource-name mapping rules; e.g., `/foo/*,/bar/$*/baz`; [see "Custom URL-To-Resource Mapping"](#custom-url-to-resource-mapping) |
-| `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `false`     | Enable URL's as resource names; [see "Map Resource Names To Normalized URI"](#map-resource-names-to-normalized-uri)                            |
-| `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | Flag to enable app analytics for relevant spans in a specific integration                                                                      |
-| `DD_SERVICE_MAPPING`      | `null`     | Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db`                                                                      |
+| `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | CSV of URL-to-resource-name mapping rules, for example: `/foo/*,/bar/$*/baz` (see ["Custom URL-To-Resource Mapping"](#custom-url-to-resource-mapping)) |
+| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For versions <0.36.0, this parameter is `DD_SAMPLING_RATE`.                                  |
+| `DD_TRACE_SAMPLING_RULES`                 | `null`      | A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `[{"sample_rate": 0.2}]`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]` (see [Integration names](#integration-names)). |
+| `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `true`      | Enable URL's as resource names (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).                            |
+| `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | A flag to enable app analytics for relevant spans in a specific integration (see [Integration names](#integration-names)).                       |
+| `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`  | `1.0`       | Set the app analytics sample rate for relevant spans in a specific integration (see [Integration names](#integration-names)).                  |
 
-#### Map Resource Names To Normalized URI
+#### Integration names
+
+The table below specifies the default service names for each integration. Change the service names with `DD_SERVICE_MAPPING`.
+
+Use the name when setting integration-specific configuration such as, `DD_<INTEGRATION>_ANALYTICS_ENABLED`, for example: Laravel is `DD_LARAVEL_ANALYTICS_ENABLED`.
+
+| Integration       | Service Name      |
+|-------------------|-------------------|
+| CakePHP           | `cakephp`         |
+| CodeIgniter       | `codeigniter`     |
+| cURL              | `curl`            |
+| ElasticSearch     | `elasticsearch`   |
+| Eloquent          | `eloquent`        |
+| Guzzle            | `guzzle`          |
+| Laravel           | `laravel`         |
+| Lumen             | `lumen`           |
+| Memcached         | `memcached`       |
+| Mongo             | `mongo`           |
+| Mysqli            | `mysqli`          |
+| PDO               | `pdo`             |
+| Predis            | `predis`          |
+| Slim              | `slim`            |
+| Symfony           | `symfony`         |
+| WordPress         | `wordpress`       |
+| Yii               | `yii`             |
+| ZendFramework     | `zendframework`   |
+
+#### Map resource names to normalized URI
 
 By default, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
 
