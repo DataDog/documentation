@@ -260,7 +260,7 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect your service across Logs and APM
+## Connect your service across logs and traces
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
 `env`, `service`, and `version` to your logs by [following the APM .NET instructions][2]

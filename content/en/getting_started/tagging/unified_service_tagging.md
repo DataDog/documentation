@@ -15,17 +15,18 @@ further_reading:
 ## Overview
 Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`. By adding these tags to your [Datadog Agent's][2] configuration file, you can troubleshoot issues and view data pertaining to your services, based on environment or version, in a unified fashion within the Datadog app. Once these tags are configured you'll be able to do things like filter your logs, traces, and metrics by `service` and `version` to see the total service requests and the errors by version.
 
+{{< img src="tagging/unified_service_tagging/overview.gif" alt="Unified Service Tagging"  >}}
+
 ### Requirements
 
 - Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][3] guide and [Assigning tags][4] documentation before proceeding to configuration.
 
 - Unified service tagging requires setup of the [Datadog Agent][5].
 
-{{< img src="tagging/unified_service_tagging/overview.gif" alt="Unified Service Tagging"  >}}
 
 ## Configuration
 
-With unified service tagging, the `service` tag is configured with `env` and `version` at container or top-level to automatically apply these tags to all metrics, logs, and traces for all services. The Datadog Agent uses [environment variables][6], which are in `key:value` pairs, to configure tags for the Datadog app. In containerized environments using [Autodiscovery][7], the agent uses Kubernetes/Docker labels or environment variables to configure tags.
+With unified service tagging, the `service` tag is configured with `env` and `version` at container or top-level to automatically apply these tags to all metrics, logs, and traces for all services. In containerized environments using [Autodiscovery][7], the agent uses Kubernetes/Docker labels or environment variables to configure tags.
 
 To properly configure unified tagging, choose your environment: [containerized](#containerized-environment) or [non-containerized](#non-containerized-environment).
 

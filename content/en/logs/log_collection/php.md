@@ -178,7 +178,7 @@ Configure the formatter in your Monolog configuration: declare the formatter fie
 {{% /tab %}}
 {{< /tabs >}}
 
-## Connect your service across Logs and APM
+## Connect your service across logs and traces
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
 `env`, `service`, and `version` to your logs by [following the APM PHP instructions][2].

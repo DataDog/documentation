@@ -167,8 +167,6 @@ Tracer.Instance = tracer;
 
 {{% /tab %}}
 
-<<<<<<< HEAD
-=======
 {{% tab "Environment variables" %}}
 
 To configure the Tracer using environment variables, set the variables before launching the instrumented application.
@@ -187,7 +185,6 @@ example.exe
 **Note:** To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
 
 {{% /tab %}}
->>>>>>> master
 
 {{% tab "web.config" %}}
 
@@ -213,13 +210,9 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 ```json
 {
     "DD_TRACE_AGENT_URL": "http://localhost:8126",
-<<<<<<< HEAD
     "DD_ENV": "prod",
     "DD_SERVICE": "MyService",
     "DD_VERSION": "abc123",
-=======
-    "DD_SERVICE_NAME": "MyService",
->>>>>>> master
 }
 ```
 
@@ -250,11 +243,8 @@ Check out the [Unified Service Tagging][9] documentation for recommendations on 
 | `DD_TRACE_AGENT_URL`<br/><br/>`AgentUri`            | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
 | `DD_AGENT_HOST`                                     | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`                               | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
-<<<<<<< HEAD
-=======
 | `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][7] for more details about the `env` tag.                                                              |
 | `DD_SERVICE_NAME`<br/><br/>`ServiceName`            | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
->>>>>>> master
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
 | `DD_TRACE_DEBUG`                                    | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                    |
 

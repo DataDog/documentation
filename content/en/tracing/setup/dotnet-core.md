@@ -226,8 +226,6 @@ There are multiple ways to configure the .NET Tracer:
 * creating a `datadog.json` file
 
 {{< tabs >}}
-<<<<<<< HEAD
-=======
 {{% tab "Code" %}}
 
 To configure the Tracer in application code, create a `TracerSettings` from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
@@ -252,7 +250,6 @@ Tracer.Instance = tracer;
 **Note:** Settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
 
 {{% /tab %}}
->>>>>>> master
 
 {{% tab "Environment variables" %}}
 
@@ -263,13 +260,9 @@ For example, on Windows:
 ```cmd
 rem Set environment variables
 SET DD_TRACE_AGENT_URL=http://localhost:8126
-<<<<<<< HEAD
 SET DD_ENV=prod
 SET DD_SERVICE=MyService
 SET DD_VERSION=abc123
-=======
-SET DD_SERVICE_NAME=MyService
->>>>>>> master
 
 rem Launch application
 example.exe
@@ -282,13 +275,9 @@ On Linux:
 ```bash
 # Set environment variables
 export DD_TRACE_AGENT_URL=http://localhost:8126
-<<<<<<< HEAD
 export DD_ENV=prod
 export DD_SERVICE=MyService
 export DD_VERSION=abc123
-=======
-export DD_SERVICE_NAME=MyService
->>>>>>> master
 
 # Launch application
 dotnet example.dll

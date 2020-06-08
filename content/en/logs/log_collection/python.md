@@ -39,7 +39,7 @@ Here are setup examples for the following logging libraries:
 * [Python-json-logger][2]
 * [django-datadog-logger][3]
 
-## Connect your service across Logs and APM
+## Connect your service across logs and traces
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][3].
 
