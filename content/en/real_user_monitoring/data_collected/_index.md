@@ -41,7 +41,7 @@ These five event categories have attributes attached by default:
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | string | Randomly generated ID for each page view.                                                                      |
 | `view.url`                     | string | The view URL.                                                                                                  |
-| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. [More information on Single Page Applications support.][1]|
+| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs][1].|
 | `view.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed.               |
 | `view.url_details.host`        | string | The HTTP host part of the URL.                                                                                 |
 | `view.url_details.path`        | string | The HTTP path part of the URL.                                                                                 |
