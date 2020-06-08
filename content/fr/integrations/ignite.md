@@ -19,7 +19,7 @@ git_integration_title: ignite
 guid: fd5a21d5-ddfe-4d04-855f-28492b4d270e
 integration_id: ignite
 integration_title: ignite
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
