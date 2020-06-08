@@ -16475,7 +16475,7 @@ tags:
     instead.
   externalDocs:
     description: Documentation for old endpoints is available in the
-    url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
+    url: https://docs.datadoghq.com/dashboards/guide/timeboard-api-doc/
   name: Timeboards
   x-deprecated: true
 - description: 'Learn more about [tracing with Datadog](https://docs.datadoghq.com/tracing)
