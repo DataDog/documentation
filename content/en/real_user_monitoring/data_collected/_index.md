@@ -75,7 +75,7 @@ The following attributes are related to the geolocation of IP addresses used in 
 
 ## Extra Attribute
 
-In addition to default attributes, you can add your [specific global context][4] to all events collected. This provides you the ability to analyze the data for a subset of users: group errors by user email, understand which customers have the worst performance, etc.
+In addition to default attributes, add [specific global context][4] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
 
 ## Further Reading
 
