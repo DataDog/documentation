@@ -27,12 +27,6 @@ Otherwise, to begin tracing applications written in any language, first [install
 
 Compile against [OpenTracing-cpp][5].
 
-## Compatibility
-
-`dd-opentracing-cpp` requires C++14 to build, but if you use [dynamic loading](#dynamic-loading) then you are instead only limited by OpenTracing's requirement for [C++11 or later][6].
-
-Supported platforms include Linux and Mac. If you need Windows support, [contact Datadog support][7].
-
 ## Installation
 
 Datadog tracing can be enabled in one of two ways:
@@ -186,5 +180,3 @@ Configure your application level tracers to submit traces to a custom Agent host
 [3]: https://app.datadoghq.com/apm/install
 [4]: /tracing/send_traces/
 [5]: https://github.com/opentracing/opentracing-cpp
-[6]: https://github.com/opentracing/opentracing-cpp/#cc98
-[7]: /help/
