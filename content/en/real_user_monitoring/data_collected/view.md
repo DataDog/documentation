@@ -32,9 +32,9 @@ To account for modern web applications, Loading Time watches for network request
 * **Initial Load**: Loading Time is equal to the difference between `navigationStart` and:
   * the load event end\
 *or, whichever comes last,*
-  *  the first time network is idle for more than 100 milliseconds and no long task is currently occuring
+  *  the first time the page is idle for more than 100ms (idle being defined as: no network requests, and no long tasks are currently occurring)
 
-* **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time network is idle for than 100 milliseconds and no long task is currently occuring
+* **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page is idle for more than 100ms (idle being defined as: no network requests, and no long tasks are currently occurring)
 
 ## Metrics collected
 
@@ -43,7 +43,7 @@ To account for modern web applications, Loading Time watches for network request
 | Attribute                              | Type        | Decription                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `duration`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
-| `view.loading_time`                             | number (ns) | Time until the page is ready and no network or long task activity is currently occuring. [Learn more][8]|
+| `view.loading_time`                             | number (ns) | Time until the page is ready and no network or long task activity is currently occurring. [Learn more][8]|
 | `view.measures.first_contentful_paint` | number (ns) | Time when the browser first rendered any text, image (including background images), non-white canvas, or SVG.[Learn more][9]                                                                                                |
 | `view.measures.dom_interactive`        | number (ns) | The moment when the parser finished its work on the main document. [More info from the MDN documentation][10]                                                                                                               |
 | `view.measures.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document has been completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][11]. |
