@@ -19,7 +19,7 @@ Unified service tagging ties Datadog telemetry together through the use of three
 
 - Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][3] guide and [Assigning tags][4] documentation before proceeding to configuration.
 
-- Unified service tagging requires the [Datadog Agent][5].
+- Unified service tagging requires setup of the [Datadog Agent][5].
 
 {{< img src="tagging/unified_service_tagging/overview.gif" alt="Unified Service Tagging"  >}}
 
@@ -196,8 +196,10 @@ Or as an option to `docker run`:
 
 To achieve a single point of configuration across all telemetry, it is recommended to set up [logs injection][1] first if you plan to connect logs, traces, and metrics. Once setup is complete, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment.
 
+As long as the agent can access your container's [Docker socket][2], it will be able to detect the environment variables and map them to the standard tags. The following variables can be set in the Docker image to implement unified tagging:
+
 ```yaml
-        "environment": [
+"environment": [
           {
             "name": "DD_ENV",
             "value": "<ENV>"
@@ -242,7 +244,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 1. Export the environment variables in the command for your executable:
 
-`DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
+  `DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service`
 
 2. Or use [Chef][9], [Ansible][10], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. That way when the service process is started it will have access to those variables.
 
