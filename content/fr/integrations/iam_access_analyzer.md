@@ -12,6 +12,8 @@ git_integration_title: amazon_iam_access_analyser
 has_logo: true
 integration_title: AWS Identity and Access Management (IAM) Access Analyzer
 is_public: true
+dependencies:
+  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/iam_access_analyzer.md'
 kind: integration
 manifest_version: 1
 name: iam_access_analyzer
@@ -32,11 +34,9 @@ Utilisez AWS Identity and Access Management (IAM) Access Analyzer sur votre comp
 
 3. Définissez un modèle d'événement personnalisé avec le bloc suivant :
 
-    ```
+    ```json
     {
-      "source": [
-        "aws.access-analyzer"
-      ]
+        "source": ["aws.access-analyzer"]
     }
     ```
 
@@ -46,5 +46,5 @@ Utilisez AWS Identity and Access Management (IAM) Access Analyzer sur votre comp
 
 6. Accédez ensuite à la section [Log Explorer][2] pour commencer à explorer vos logs.
 
-[1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[1]: /fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [2]: https://app.datadoghq.com/logs

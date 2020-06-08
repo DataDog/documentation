@@ -8,13 +8,13 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
     tag: Blog
     text: Mettre à l'échelle vos charges de travail Kubernetes en fonction d'une métrique Datadog
-  - link: /agent/autodiscovery/clusterchecks
+  - link: /agent/cluster_agent/clusterchecks/
     tag: Documentation
     text: Exécuter des checks de cluster avec Autodiscovery
-  - link: agent/kubernetes/daemonset_setup
+  - link: /agent/kubernetes/daemonset_setup/
     tag: Documentation
     text: Exécuter l'Agent avec un DaemonSet Kubernetes
-  - link: agent/kubernetes/integrations
+  - link: /agent/kubernetes/integrations/
     tag: Documentation
     text: Intégrations personnalisées
   - link: 'https://github.com/DataDog/datadog-agent/blob/master/docs/cluster-agent/GETTING_STARTED.md#troubleshooting'
@@ -169,7 +169,7 @@ Ou recherchez des logs d'erreur, par exemple :
 Si vous rencontrez des difficultés avec votre serveur de métriques custom :
 
 * Vérifiez que la couche agrégation et les certificats sont bien configurés.
-* Assurez-vous que les métriques utilisées pour l'autoscaling sont disponibles. Lorsque vous créez l'Autoscaler de pods horizontaux, l'Agent de cluster Datadog analyse le manifeste et envoie une requête à Datadog pour tenter de récupérer la métrique. Si le nom de  la métrique n'est pas correct ou que la métrique n'existe pas dans votre application Datadog, l'erreur suivante est générée :
+* Assurez-vous que les métriques utilisées pour l'autoscaling sont disponibles. Lorsque vous créez le HPA (Horizontal Pod Autoscaler), l'Agent de cluster Datadog analyse le manifeste et envoie une requête à Datadog pour tenter de récupérer la métrique. Si le nom de  la métrique n'est pas correct ou que la métrique n'existe pas dans votre application Datadog, l'erreur suivante est générée :
 
     ```shell
     2018-07-03 13:47:56 UTC | ERROR | (datadogexternal.go:45 in queryDatadogExternal) | Returned series slice empty
@@ -221,9 +221,9 @@ La commande flare génère un fichier zip contenant le fichier `custom-metrics-p
 
 Si le flag de la métrique `Valid` est défini sur `false`, la métrique n'est pas prise en compte dans le pipeline de l'Autoscaler de pods horizontaux.
 
-### Description du manifeste de l'Autoscaler de pods horizontaux
+### Description du manifeste du HPA
 
-Si le message suivant apparaît lorsque vous inspectez (commande describe) le manifeste de l'Autoscaler de pods horizontaux :
+Si le message suivant apparaît lors de la description du manifeste du HPA :
 
 ```text
 Conditions:
@@ -234,7 +234,7 @@ Conditions:
 
 ```
 
-Alors la configuration RBAC pour l'Autoscaler de pods horizontaux n'est probablement pas correcte. Assurez-vous que `kubectl api-versions` renvoie ceci :
+Alors la configuration RBAC pour le HPA n'est probablement pas correcte. Assurez-vous que `kubectl api-versions` renvoie ceci :
 
 ```text
 autoscaling/v2beta1
@@ -244,7 +244,7 @@ external.metrics.k8s.io/v1beta1
 
 Cette dernière ligne s'affiche si l'Agent de cluster Datadog est bien identifié en tant que fournisseur de métriques externes, et si le nom de service spécifié dans APIService pour le fournisseur de métriques externes est identique à celui du service qui expose l'Agent de cluster Datadog sur le port `443`. Assurez-vous également que vous avez créé les règles RBAC à l'étape [Enregistrer le fournisseur de métriques externes][1].
 
-Si l'erreur suivante s'affiche lorsque vous inspectez le manifeste de l'Autoscaler de pods horizontaux :
+Si l'erreur suivante s'affiche lorsque vous inspectez le manifeste du HPA :
 
 ```text
 Warning  FailedComputeMetricsReplicas  3s (x2 over 33s)  horizontal-pod-autoscaler  failed to get nginx.net.request_per_s external metric: unable to get external metric default/nginx.net.request_per_s/&LabelSelector{MatchLabels:map[string]string{kube_container_name: nginx,},MatchExpressions:[],}: unable to fetch metrics from external metrics API: the server is currently unable to handle the request (get nginx.net.request_per_s.external.metrics.k8s.io)
@@ -272,7 +272,7 @@ Exemple :
     value: 2472
 ```
 
-L'Agent de cluster a récupéré la valeur `2472`, mais l'Autoscaler de pods horizontaux indique :
+L'Agent de cluster a récupéré la valeur `2472`, mais le HPA indique :
 
 ```text
 NAMESPACE   NAME       REFERENCE          TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
@@ -281,7 +281,7 @@ default     nginxext   Deployment/nginx   824/9 (avg)   1         3         3   
 
 En effet, `824 * 3 réplicas = 2472`.
 
-*Remarque* : par défaut, l'Agent de cluster Datadog traite les métriques définies dans les différents manifestes d'Autoscaler de pods horizontaux et récupère les valeurs auprès de Datadog toutes les 30 secondes. De même, Kubernetes interroge l'Agent de cluster Datadog toutes les 30 secondes par défaut. Ce processus étant effectué de manière asynchrone, la règle ci-dessus ne s'applique pas systématiquement, en particulier si la métrique varie. Les deux fréquences sont toutefois paramétrables afin de limiter les problèmes éventuels.
+*Remarque* : par défaut, l'Agent de cluster Datadog traite les métriques définies dans les différents manifestes du HPA et récupère les valeurs auprès de Datadog toutes les 30 secondes. De même, Kubernetes interroge l'Agent de cluster Datadog toutes les 30 secondes par défaut. Ce processus étant effectué de manière asynchrone, la règle ci-dessus ne s'applique pas systématiquement, en particulier si la métrique varie. Les deux fréquences sont toutefois paramétrables afin de limiter les problèmes éventuels.
 
 ## Pour aller plus loin
 

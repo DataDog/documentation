@@ -153,6 +153,11 @@ main:
     url: agent/basic_agent_usage/redhat/
     weight: 111
     parent: basic_agent_usage
+  - name: SaltStack
+    identifier: basic_agent_usage_saltstack
+    url: agent/basic_agent_usage/saltstack/
+    weight: 112
+    parent: basic_agent_usage
   - name: SUSE
     identifier: basic_agent_usage_suse
     url: agent/basic_agent_usage/suse/
@@ -911,7 +916,7 @@ main:
     identifier: tracing_opentracing
     weight: 9
   - name: Java
-    url: tracing/opentracing/java
+    url: tracing/manual_instrumentation/java
     parent: tracing_opentracing
     identifier: tracing_opentracing_java
     weight: 901
@@ -936,7 +941,7 @@ main:
     identifier: tracing_opentracing_ruby
     weight: 905
   - name: .NET
-    url: tracing/opentracing/dotnet
+    url: tracing/manual_instrumentation/dotnet
     parent: tracing_opentracing
     identifier: tracing_opentracing_dotnet
     weight: 906
@@ -1203,23 +1208,20 @@ main:
     parent: synthetics
     identifier: synthetics_apm
     weight: 4
-  - name: Identify Synthetics Bots
-    url: synthetics/identify_synthetics_bots/
-    parent: synthetics
-    weight: 5
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 6
-  - name: Guide
+    weight: 5
+  - name: Guides
     url: synthetics/guide/
     parent: synthetics
-    weight: 7
+    identifier: synthetics_guides
+    weight: 6
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 8
+    weight: 7
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: nav_rum
@@ -1591,12 +1593,26 @@ api_v1:
     url: /api/v1/
     identifier: API V1 overview
     weight: -10
-  - name: Authentication
-    url: authentication
+  - name: Install the Datadog Agent
+    url: install-the-datadog-agent
+    weight: 1
+    parent: API V1 overview
+  - name: Send data to Datadog
+    url: send-data-to-datadog
+    weight: 2
+    parent: API V1 overview
+  - name: Visualize your data
+    url: visualize-your-data
+    weight: 3
+    parent: API V1 overview
+  - name: Manage your account
+    url: manage-your-account
+    weight: 4
     parent: API V1 overview
   - name: Rate Limiting
     url: rate-limiting
     parent: API V1 overview
+    weight: 5
   - name: AWS Integration
     url: /api/v1/aws-integration/
     identifier: AWS Integration
@@ -2217,12 +2233,26 @@ api_v2:
     url: /api/v2/
     identifier: API V2 overview
     weight: -10
-  - name: Authentication
-    url: authentication
+  - name: Install the Datadog Agent
+    url: install-the-datadog-agent
+    weight: 1
+    parent: API V2 overview
+  - name: Send data to Datadog
+    url: send-data-to-datadog
+    weight: 2
+    parent: API V2 overview
+  - name: Visualize your data
+    url: visualize-your-data
+    weight: 3
+    parent: API V2 overview
+  - name: Manage your account
+    url: manage-your-account
+    weight: 4
     parent: API V2 overview
   - name: Rate Limiting
     url: rate-limiting
     parent: API V2 overview
+    weight: 5
   - name: AWS Integration
     url: /api/v2/aws-integration/
     identifier: AWS Integration

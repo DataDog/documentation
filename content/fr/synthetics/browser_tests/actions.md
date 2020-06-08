@@ -1,21 +1,23 @@
 ---
-title: Actions des tests Browser
+title: Étapes des tests Browser
 kind: documentation
-description: Enregistrer des actions pour un test Browser Synthetics
+description: Enregistrer les étapes d'un test Browser Synthetics
 further_reading:
-  - link: synthetics/browser_tests/advanced_options
+  - link: /synthetics/browser_tests/advanced_options/
     tag: Documentation
-    text: Apprendre à configurer des options avancées pour des actions
+    text: Apprendre à configurer les options avancées d'une étape
 ---
-Les actions correspondent à une série d'étapes enregistrées pour un test Browser, que vous pouvez ensuite modifier ou enrichir. Vous pouvez également configurer certaines actions avec les [options avancées][1].
+Les étapes correspondent à une série d'actions enregistrées pour créer un test Browser, que vous pouvez ensuite modifier ou enrichir. Les étapes que votre test Browser doit exécuter peuvent être définies soit automatiquement à l'aide de l'extension d'enregistrement de test Datadog, soit manuellement en ajoutant vous-même l'étape de votre choix. Toutes les étapes proposent des [options avancées][1] que vous pouvez configurer.
 
-**Remarque** : le délai d'expiration par défaut pour chaque étape est d'environ 60 secondes. Vous pouvez modifier le délai d'expiration avec les [options avancées][2].
+**Remarque** : le délai d'expiration par défaut pour chaque étape est d'environ 60 secondes. Vous pouvez modifier ce délai via l'[option avancée][2] dédiée.
 
-## Click
+## Étapes enregistrées automatiquement
 
-L'[extension Datadog][3] enregistre automatiquement les clics sur votre page. 
+Les étapes suivantes sont enregistrées automatiquement via l'[extension d'enregistrement de test Browser Datadog][3] :
 
-Indiquez le type de clic que vous souhaitez que votre navigateur effectue lors de l'exécution du test :
+### Click
+
+[L'extension d'enregistrement de test Browser Datadog][3] peut automatiquement enregistrer les clics sur votre page. Indiquez le type de clic que vous souhaitez que votre test Browser effectue lors de son exécution :
 
 {{< img src="synthetics/browser_tests/browser_test_click_step.mp4" alt="Étape Click d'un test Browser" video="true" width="60%">}}
 
@@ -25,46 +27,132 @@ Choisissez parmi les options suivantes :
 * Double click
 * Contextual click (correspond à un clic droit)
 
-## Assertion
+### Type text
 
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Assertion de test Browser"  style="width:40%;">}}
+[L'extension d'enregistrement de test Browser Datadog][3] peut automatiquement enregistrer la saisie de texte dans n'importe quel champ de votre site (formulaire, zone de texte, etc.) :
 
-Les assertions vous permettent de vérifier si un élément, du contenu ou du texte est disponible sur la page en cours. Vous pouvez également vérifier si un e-mail spécifique a été envoyé.
+{{< img src="synthetics/browser_tests/input_text.mp4" alt="Étape Type text d'un test Browser" video="true" width="80%">}}
 
-| Assertion                                                 | Description                                                                                                                                                                             |
-|-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Test an element's content`                               | Sélectionne un élément et vérifie s'il contient une valeur spécifique. Il est par exemple possible de sélectionner un `div` et de vérifier s'il contient ou non le mot « hello ».                                   |
-| `Test that some text is present on the active page`       | Vérifie qu'un texte spécifique est présent sur la page actuelle.                                                                                                                         |
-| `Test that some text is not present on the active page` | Vérifie qu'une chaîne de texte spécifique est **ABSENTE** de la page actuelle.                                                                                                                 |
-| `Test the content of the URL of the active page`          | Récupère l'URL de la dernière page utilisée, puis vérifie si une valeur spécifique (`string`, `number`, `regex`) est présente dans l'URL.                                      |
-| `Test that an element is present on the active page`      | Vérifie qu'un élément spécifique (`span`, `div`, `h`, `a`, etc.) est présent sur la page actuelle.                                                                              |
-| `Test that an email was received`                         | Vérifie qu'un e-mail a été envoyé et si certaines valeurs spécifiques (`string`, `number`, `regex`) sont présentes dans l'objet ou le corps de cet e-mail. Cette assertion a recours aux [variables d'e-mail][4]. |
-| `Test a JavaScript assertion`                         | Permet de tester une assertion personnalisée à l'aide de vos propres scripts JavaScript. Par défaut, l'assertion est effectuée sur la page active. Si vous souhaitez que votre fonction JavaScript fasse appel à un élément de page spécifique, vous pouvez le sélectionner via l'option **Target Element**, puis l'appeler à l'aide du paramètre `element` dans votre fonction. |
+### Select option
 
-Des [options avancées][1] sont également disponibles pour les assertions.
+[L'extension d'enregistrement de test Browser Datadog][3] peut automatiquement enregistrer la sélection d'options depuis le menu déroulant `select` :
 
-## Navigation
+{{< img src="synthetics/browser_tests/select_options.png" alt="Étape Select option"  style="width:60%;">}}
 
-L'action Navigation vous permet d'effectuer les actions suivantes :
+### Upload file
 
-* Actualiser la page actuelle du scénario.
-* Suivre un lien spécifique. Dans la zone **Enter link URL**, vous devez ajouter le préfixe `http` ou `https` devant vos URL.
-* Accéder à un e-mail et cliquer sur un lien. Cette étape vous permet d'accéder à votre boîte de réception Synthetics une fois la [variable d'e-mail][4] créée.
-* Choisissez un e-mail et cliquez sur le lien sur lequel le test Browser doit cliquer.
+Vous pouvez enregistrer l'importation de fichiers en tant qu'étape. Pour enregistrer une étape **Upload**, vous disposez de deux options :
 
-## Actions spéciales
+* ouvrez votre bureau depuis votre navigateur ; ou
+* faites glisser votre fichier dans l'iframe d'enregistrement.
 
-[L'extension Datadog fournie][3] enregistre la plupart des actions. Toutefois, certaines actions (comme le passage du curseur sur un élément, la sélection d'une touche et le défilement) ne sont pas enregistrées automatiquement. Ajoutez explicitement une étape pour celles-ci à l'aide du menu **Special Actions** situé en haut à gauche de l'enregistreur.
+{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Créer une étape Upload file"  style="width:60%;">}}
 
-### Hover
+Une limite de 10 fichiers (et de 5 Mo par fichier) s'applique.
 
-Cette étape du test Browser n'est pas ajoutée en faisant passer le curseur sur un élément (sinon, chaque élément sur lequel vous passez le curseur serait ajouté comme une étape). Son ajout se fait via une action dédiée et un clic.
+## Étapes ajoutées manuellement
 
-Après avoir sélectionné l'action Hover, cliquez sur l'élément que vous souhaitez sélectionner pour créer une étape.
+Les étapes suivantes peuvent être ajoutées manuellement à un test Browser en les configurant depuis la page d'enregistrement d'un test Browser :
 
-### Press key
+### Assertion
 
-Vous pouvez simuler la sélection de touches par un utilisateur à l'aide d'étapes **Press Key**. Les touches suivantes peuvent être enregistrées à l'aide de l'[extension Datadog][3] :
+{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Assertion de test Browser"  style="width:60%;">}}
+
+Les assertions vous permettent de vérifier que votre test Browser se déroule correctement à n'importe quelle étape du parcours utilisateur simulé. C'est la raison pour laquelle vos tests Browser doivent se terminer par une **Assertion** afin de confirmer leur bonne exécution.
+
+Certaines assertions sont exécutées sur la **page active**. La page active désigne la page sur laquelle a été effectuée la dernière interaction, telle qu'un **Click** ou une **Assertion** sur un élément spécifique.
+
+#### Test an element's content
+
+Sélectionne un élément et vérifie s'il contient une valeur spécifique. Il est par exemple possible de sélectionner un `div` et de vérifier s'il contient ou non le mot « hello ».
+
+#### Test an element's attribute
+
+Sélectionne un élément de votre page et vérifie si l'un de ses attributs correspond au contenu attendu. Par exemple, il est possible de vérifier que la valeur d'un attribut `src` correspond au chemin de l'image attendue.
+
+#### Test that some text is present on the active page
+
+Vérifie qu'un texte spécifique est présent sur la page actuelle.
+
+#### Test that some text is not present on the active page
+
+Vérifie qu'une chaîne de texte spécifique est **ABSENTE** de la page actuelle.
+
+#### Test the content of the URL of the active page
+
+Récupère l'URL de la dernière page utilisée, puis vérifie si une valeur spécifique (`string`, `number`, `regex`) est présente dans l'URL.
+
+#### Test that an element is present on the active page
+
+Vérifie qu'un élément spécifique (`span`, `div`, `h`, `a`, etc.) est présent sur la page actuelle.
+
+#### Test that an email was received
+
+Vérifie qu'un e-mail a été envoyé et si certaines valeurs spécifiques (`string`, `number`, `regex`) sont présentes dans l'objet ou le corps de cet e-mail. Cette assertion a recours aux [variables d'e-mail][4] : vous devrez donc créer une variable d'e-mail avant de pouvoir exécuter une assertion `Test that an email was received`.
+
+#### Test your UI with custom JavaScript
+
+Testez une assertion personnalisée sur la page active en utilisant vos propres scripts JavaScript. Les assertions JavaScript prennent en charge le code synchrone et asynchrone. Étant donné que les assertions JavaScript s'exécutent dans le contexte de la page active, ces étapes peuvent également accéder à tous les objets définis dans la page active (bibliothèques, builtins, variables globales, etc.).
+
+Si vous avez besoin de charger une bibliothèque externe, vous pouvez incorporer le code de chargement dans une Promise, comme ci-dessous :
+
+```javascript
+const script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = "https://code.jquery.com/jquery-3.5.1.slim.min.js";
+const promise = new Promise((r) => script.onload = r)
+document.head.appendChild(script)
+
+await promise
+
+// Le script est maintenant chargé
+
+return jQuery().jquery.startsWith('3.5.1')
+```
+
+Si vous souhaitez que votre fonction JavaScript fasse appel à un élément de page spécifique, vous pouvez le sélectionner via l'option **Target Element**, puis l'appeler à l'aide du paramètre `element` dans votre fonction.
+
+{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Assertion JavaScript dans un test Browser" video="true" width="90%">}}
+
+**Remarque** : vous pouvez également utiliser des [variables][5] de test Browser au sein de vos assertions JavaScript.
+
+#### Test a downloaded file
+
+Effectuez des vérifications sur un fichier téléchargé lors des étapes précédentes. Il est possible de vérifier qu'un fichier a bien été téléchargé et d'exécuter une assertion sur son nom, sa taille et sa valeur MD5.
+
+**Remarque** : pour mieux comprendre comment tester des fichiers téléchargés, consultez [ce guide dédié][6].
+
+### Navigation
+
+{{< img src="synthetics/browser_tests/navigation_step.png" alt="Étape Navigation de test Browser"  style="width:60%;">}}
+
+#### Refresh this page
+
+Actualiser la page actuelle du scénario.
+
+#### Go to email and click link
+
+Cette étape vous permet d'accéder à des boîtes de messagerie Synthetics uniques après avoir créé une [variable d'e-mail][4]. Choisissez un e-mail et cliquez sur le lien sur lequel le test Browser doit cliquer. Votre test accèdera alors à la page correspondante, à partir de laquelle vous pourrez continuer le parcours utilisateur.
+
+#### Follow this link
+
+Accéder à une page spécifique.
+
+**Remarque** : vos URL doivent être précédées de `http` ou `https` dans le champ **Enter link URL**.
+
+### Actions spéciales
+
+[L'extension d'enregistrement de test Browser Datadog][3] permet d'enregistrer la plupart des étapes des parcours utilisateur que vous souhaitez surveiller. Toutefois, certaines étapes telles que **Hover**, **Press Key** et **Scroll** ne sont pas enregistrées automatiquement. Ajoutez-les manuellement à l'aide du menu **Special Actions** situé en haut à gauche de l'enregistreur.
+
+#### Hover
+
+Pour éviter de générer une étape à chaque fois que vous passez votre curseur sur un élément durant l'enregistrement, l'ajout de ce type d'étape se fait via une étape dédiée et un clic.
+
+Après avoir sélectionné l'étape **Hover**, cliquez sur l'élément que vous souhaitez sélectionner pour créer une étape.
+
+#### Press key
+
+Vous pouvez simuler la sélection de touches par un utilisateur à l'aide d'étapes **Press Key**. Les touches suivantes peuvent être enregistrées à l'aide de l'[extension d'enregistrement de test Browser Datadog][3] :
 
 * Entrée
 * Touches fléchées (haut, bas, droite et gauche)
@@ -72,7 +160,7 @@ Vous pouvez simuler la sélection de touches par un utilisateur à l'aide d'éta
 * Échap 
 * Retour arrière
 
-Pour appuyer sur des touches qui ne sont pas enregistrées automatiquement, indiquez les valeurs des touches qui doivent être sélectionnées dans le champ Value de l'action spéciale **Press Key** :
+Pour appuyer sur des touches qui ne sont pas enregistrées automatiquement, indiquez les valeurs des touches qui doivent être sélectionnées dans le champ Value de l'étape spéciale **Press Key** :
 
 {{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Action Press Key de test Browser"  style="width:60%;">}}
 
@@ -83,90 +171,173 @@ Les modificateurs ci-dessous peuvent également être appliqués à la valeur sa
 * Meta
 * Shift
 
-### Scroll
+#### Scroll
 
-Votre test Browser fait automatiquement défiler la page jusqu'à l'élément avec lequel il doit interagir. Par conséquent, dans la plupart des cas, il n'est pas nécessaire d'ajouter manuellement une étape de défilement. L'étape de défilement doit être ajoutée uniquement lorsque celle-ci est nécessaire pour déclencher une requête réseau supplémentaire, comme dans un défilement infini.
+Les tests Browser font automatiquement défiler la page jusqu'à l'élément avec lequel ils doivent interagir. Par conséquent, dans la plupart des cas, il n'est pas nécessaire d'ajouter manuellement une étape de défilement. L'étape de défilement doit être ajoutée uniquement lorsque celle-ci est nécessaire pour déclencher une requête réseau supplémentaire, comme dans un défilement infini.
 
 {{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="Étape Scroll de test Browser"  style="width:60%;">}}
 
 Vous devez indiquer le nombre de pixels que votre test Browser doit faire défiler dans le sens horizontal ou vertical.
 
-Par défaut, l'étape Scroll fait défiler l'ensemble de la page. Si vous souhaitez que votre test Browser fasse défiler un élément spécifique (par exemple, un `<div>` spécifique), utilisez l'option **Target Element** pour le sélectionner.
+Par défaut, l'étape **Scroll** fait défiler la page entière. Si vous souhaitez que votre test Browser fasse défiler un élément spécifique (tel qu'un `<div>` spécifique), utilisez l'option **Target Element** pour le sélectionner.
 
-## Upload
+### Variable
 
-Vous pouvez enregistrer l'importation de fichiers en tant qu'action. Pour enregistrer une étape Upload, vous disposez de deux options :
+#### Créer une variable
 
-* ouvrez votre bureau depuis votre navigateur ; ou
-* faites glisser votre fichier dans l'iframe d'enregistrement.
-
-{{< img src="synthetics/browser_tests/upload_file_step.png" alt="Créer une étape d'importation de fichiers"  style="width:50%;">}}
-
-Une limite de 10 fichiers (et de 5 Mo par fichier) s'applique.
-
-## Variable
-
-### Créer une variable
-
-{{< img src="synthetics/browser_tests/browser_test_variables.mp4" alt="Définir une variable" video="true"  width="60%">}}
+{{< img src="synthetics/browser_tests/variables.png" alt="Variables de test Browser"  style="width:60%;">}}
 
 Pour créer une variable, donnez-lui d'abord un nom, puis définissez sa valeur parmi les propositions suivantes :
 
-* **Element** : créez une variable à partir d'un `span`, `div`, ou d'un autre élément en extrayant le texte de cet élément.
-* **JavaScript** : générez des variables personnalisées à l'aide de vos propres scripts JavaScript. Par défaut, l'étape est effectuée au niveau de la page. Si vous souhaitez que votre fonction JavaScript fasse appel à un élément spécifique d'une page, vous pouvez le sélectionner via l'option **Target Element**, puis l'appeler à l'aide du paramètre `element` dans votre fonction.
-* **Global Variable** : stockez et utilisez des variables globales à l'aide des [paramètres Synthetics][5].
-* **Email** : générez une adresse e-mail Synthetics aléatoire pouvant être utilisée durant les différentes étapes de votre test pour vérifier si un e-mail a bien été envoyé ou pour effectuer des actions à partir de son contenu (p. ex., cliquer sur un lien de confirmation).
-* **Pattern** :
+##### Element
 
-| Pattern                 | Description                                         |
-|-------------------------|-----------------------------------------------------|
-| `{{ numeric(n) }}`      | Génère une chaîne numérique de n chiffres.           |
-| `{{ alphabetic(n) }}`   | Génère une chaîne alphabétique de n lettres.      |
-| `{{ alphanumeric(n) }}` | Génère une chaîne alphanumérique de n caractères. |
+Créez une variable à partir d'un `span`, `div`, ou d'un autre élément en extrayant le texte de cet élément.
 
-### Utiliser la variable
+##### JavaScript
 
-Une fois votre variable créée, utilisez-la pour définir un texte de saisie dans un formulaire ou une barre de recherche. Utilisez l'icône en forme de main dans la case de votre variable pour créer une étape de saisie :
+Générez des variables personnalisées en utilisant vos propres scripts JavaScript. Les étapes JavaScript prennent en charge le code synchrone et asynchrone. Étant donné que l'étape est effectuée sur la page active par défaut, elle peut également accéder à tous les objets définis au niveau de la page active (bibliothèques, builtins, variables globales, etc.).
+
+Si vous avez besoin de charger une bibliothèque externe, vous pouvez incorporer le code de chargement dans une Promise, comme ci-dessous :
+
+```javascript
+const script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = "https://code.jquery.com/jquery-3.5.1.slim.min.js";
+const promise = new Promise((r) => script.onload = r)
+document.head.appendChild(script)
+
+await promise
+
+// Le script est maintenant chargé
+
+return jQuery().jquery.startsWith('3.5.1')
+```
+
+Si vous souhaitez que votre fonction JavaScript fasse appel à un élément de page spécifique, vous pouvez le sélectionner via l'option **Target Element**, puis l'appeler à l'aide du paramètre `element` dans votre fonction.
+
+{{< img src="synthetics/browser_tests/js_variable.mp4" alt="Variable JavaScript de test Browser" video="true" width="90%">}}
+
+**Remarque** : vous pouvez également utiliser des [variables][5] au sein de vos assertions JavaScript.
+
+##### Global Variable
+
+Choisissez n'importe quelle variable globale définie à l'aide des [paramètres Synthetics][7].
+
+##### Email
+
+Générez une adresse e-mail Synthetics aléatoire et utilisez-la dans vos étapes de test pour [vérifier si un e-mail a bien été envoyé][8] ou pour [accéder à un lien présent dans l'e-mail][9] (par exemple, cliquer sur un lien de confirmation). Une boîte de messagerie unique est générée à chaque exécution du test pour éviter tout conflit d'une exécution à l'autre.
+
+##### Pattern
+
+| Pattern                 | Description                                                                                             |
+|-------------------------|---------------------------------------------------------------------------------------------------------|
+| `{{ numeric(n) }}`      | Génère une chaîne numérique de n chiffres.                                                               |
+| `{{ alphabetic(n) }}`   | Génère une chaîne alphabétique de n lettres.                                                           |
+| `{{ alphanumeric(n) }}` | Génère une chaîne alphanumérique de n caractères.                                                     |
+| `{{ date(n, format) }}` | Génère une date dans l'un de nos formats acceptés, sa valeur étant la date d'initiation du test + n jours. |
+
+#### Utiliser la variable
+
+Une fois votre variable créée, utilisez l'icône en forme de main dans la case de votre variable pour l'injecter sur le site Web testé :
 
 {{< img src="synthetics/browser_tests/variable_input.mp4" alt="Saisie via une variable" video="true"  width="80%" >}}
 
-Vous pouvez également utiliser vos variables dans certaines assertions, notamment les suivantes :
+Une étape de saisie de texte est alors générée, dont le contenu est toujours remplacé par la valeur de `{{ <VOTRE_VARIABLE> }}` à l'exécution du test.
 
-* Check an element’s content
-* Assert text is present on the page
-* Assert the page does not contain text
-* Check main page URL's content
-* Check that an email was received
+Dans certains cas, la valeur de votre variable n'est calculée qu'à l'exécution du test (par exemple lorsque la variable est créée à partir d'une requête HTTP ou extraite d'une étape JavaScript). Vous pouvez injecter votre variable en utilisant `{{ <VOTRE_VARIABLE> }}`  directement sur votre site Web lors de l'enregistrement. Lorsqu'il est exécuté, le test Browser ajoute automatiquement la valeur de la variable générée lors des étapes précédentes dans ce champ.
 
-Pour utiliser vos variables dans l'une de vos assertions, cliquez sur *Use Variable* et sélectionnez la variable que vous souhaitez utiliser :
+{{< img src="synthetics/browser_tests/variables_auto.mp4" alt="Exemple d'autocomplétion de variable" video="true"  width="80%" >}}
 
-{{< img src="synthetics/browser_tests/use_variable_in_assertion.png" alt="Utiliser une variable dans une assertion"  style="width:40%;">}}
+**Remarque** : tous les champs comportant l'indicateur `{{` prennent en charge l'autocomplétion des variables.
 
-Vous pouvez également enregistrer une étape en saisissant `{{ <VOTRE_VARIABLE> }}` dans le champ souhaité. 
+{{< img src="synthetics/browser_tests/autocomplete.png" alt="Indicateur d'autocomplétion de variable"  style="width:60%;">}}
 
-### Utiliser des variables dans des étapes JavaScript
+##### Utiliser des variables dans des étapes JavaScript
 
 Si vous avez besoin d'utiliser des variables dans des étapes JavaScript (assertion ou variable), utilisez `vars.<VOTRE_VARIABLE>`.
 
-## Wait
+### Wait
 
-Par défaut, Datadog attend que la page soit complètement chargée avant d'effectuer une action ou de passer à l'étape suivante, avec un délai d'expiration de 60 secondes. Toutefois, dans certains cas, il peut être préférable de définir un temps d'attente personnalisé. Par exemple, si vous savez que le chargement d'une page ou d'un élément d'une page peut prendre plus de 60 secondes, vous pouvez utiliser une étape Wait pour rallonger le délai d'expiration par défaut. Si vous choisissez d'utiliser cette fonctionnalité, la valeur de votre étape Wait ne doit pas dépasser 300 secondes. 
+Par défaut, Datadog attend que la page soit complètement chargée avant d'effectuer une étape ou de passer à l'étape suivante, avec un délai d'expiration de 60 secondes. Toutefois, dans certains cas, il peut être préférable de définir un temps d'attente personnalisé. Par exemple, si vous savez que le chargement d'une page ou d'un élément d'une page peut prendre plus de 60 secondes, vous pouvez utiliser une étape Wait pour rallonger le délai d'expiration par défaut. Si vous choisissez d'utiliser cette fonctionnalité, la valeur de votre étape Wait ne doit pas dépasser 300 secondes. 
 
 **Remarque** : le temps supplémentaire est rajouté de manière systématique à **chaque exécution** du scénario de votre test Browser.
 
-## Sous-tests
+### Sous-tests
 
-Vous pouvez exécuter des tests Browser dans d'autres tests Browser, jusqu'à deux niveaux d'imbrication. Les [options avancées][6] vous permettent également de définir l'endroit où le sous-test doit être exécuté.
+{{< img src="synthetics/browser_tests/subtest.png" alt="Sous-test de test Browser"  style="width:60%;">}}
+
+Vous pouvez exécuter des tests Browser au sein d'autres tests Browser afin de réutiliser des parcours existants. Cette fonctionnalité est particulièrement utile pour réduire le nombre le nombre de tests à maintenir. Les tests Browser prennent en charge jusqu'à deux niveaux d'imbrication. Vous pouvez également utiliser les [options avancées][10] pour sélectionner l'onglet dans lequel votre sous-test doit être exécuté.
 
 **Remarque** : si vous souhaitez exécuter un sous-test de façon indépendante, vous avez la possibilité de le mettre en pause. Il recevra toujours des appels dans le cadre du test principal, mais ne sera pas exécuté de façon individuelle.
+
+### Requêtes HTTP
+
+Vous pouvez exécuter des requêtes HTTP au sein de vos tests Browser.
+
+{{< img src="synthetics/browser_tests/recorder_http_requests.png" alt="Étape HTTP Request"  style="width:70%;" >}}
+
+#### Configuration
+
+Pour définir votre requête HTTP :
+
+1. Choisissez la **Method** et l'**URL** à interroger. Les méthodes disponibles sont les suivantes : `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE` et `OPTIONS`.
+2. Si vous le souhaitez, cliquez sur **Advanced Options** pour définir des options avancées :
+     * Follow redirects : activez cette fonction pour que l'endpoint surveillé suive jusqu'à dix redirections.
+     * Allow insecure certificates : activez cette fonction pour que votre test HTTP poursuive son processus de connexion même lorsqu'une erreur de validation du certificat survient.
+     * Headers : les en-têtes définis remplacent les en-têtes par défaut du navigateur.
+     * Authentication : authentification HTTP basique avec nom d'utilisateur et mot de passe.
+     * Body : corps de la requête et type de corps (`text/plain`, `application/json`, `text/xml`, `text/html` ou `None`). **Remarque** : la taille du corps de la requête est limitée à 50 Ko.
+     * Cookies : les cookies définis sont ajoutés aux cookies de navigateur par défaut. Définissez plusieurs cookies en suivant le format `<COOKIE_NOM1>=<COOKIE_VALEUR1>; <COOKIE_NOM2>=<COOKIE_VALEUR2>`.
+3. Cliquez sur **Test URL** pour tester la configuration de votre requête. Un aperçu des données de réponse s'affiche alors.
+
+{{< img src="synthetics/browser_tests/http_request.png" alt="Créer une requête HTTP"  style="width:60%;" >}}
+
+#### Ajouter des assertions
+
+Si vous le souhaitez, vous pouvez également évaluer la réussite de l'étape en fonction d'assertions exécutées sur la requête HTTP définie :
+
+| Type          | Type de valeur                 | Opérateur                                                                      |
+|---------------|----------------------------|-------------------------------------------------------------------------------|
+| Code de statut   | _Nombre entier_                  | `is`, `is not`                                                                 |
+| Temps de réponse | _Nombre entier (ms)_             | `lessThan`                                                                     |
+| En-têtes       | _Chaîne_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
+| Corps          | _Chaîne_ <br> _[Regex][11]_ | `contains`, `does not contain`, `is`, `is not` <br> `matches`, `does not match` |
+
+Si vous cliquez sur **Test URL**, les assertions de base sont automatiquement renseignées :
+
+- `Response time` _lessThan_ 2000 ms
+- `Header content-type` _is_ « valeur renvoyée »
+- `Status code` _is_ « valeur renvoyée »
+
+#### Extraire une variable depuis la réponse
+
+Vous pouvez également extraire une variable à partir de la réponse de votre requête HTTP en parsant les en-têtes ou le corps de la réponse. La valeur de la variable est mise à jour à chaque fois que l'étape de requête HTTP est exécutée.
+
+Pour parser votre variable :
+
+1. Donnez un nom à votre variable en renseignant le champ **Variable Name**. Ce nom doit comporter au moins trois caractères et peut uniquement contenir des lettres majuscules, des chiffres et des underscores.
+2. Indiquez si la variable doit être extraite à partir des en-têtes ou du corps de la réponse :
+
+    * Extraire la valeur à partir du **Response Header** : utiliser l'en-tête de réponse complet de votre requête HTTP comme valeur de variable, ou parsez l'en-tête à l'aide d'une [expression régulière][11].
+    * Extraire la valeur à partir du **Response Body** : utiliser le corps de réponse complet de votre requête HTTP comme valeur de variable, ou parser le corps avec une [expression régulière][11] ou une expression [JSONPath][12].
+
+{{< img src="synthetics/browser_tests/browser_test_vft.mp4" alt="Créer une variable à partir d'une requête HTTP dans un test Browser" video="true"  width="80%" >}}
+
+Une fois créée, cette variable peut être utilisée dans les étapes suivantes de votre test Browser.:
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/synthetics/browser_tests/advanced_options
+[1]: /fr/synthetics/browser_tests/advanced_options/
 [2]: /fr/synthetics/browser_tests/advanced_options/#timeout
 [3]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [4]: /fr/synthetics/browser_tests/#create-a-variable
-[5]: /fr/synthetics/settings
-[6]: /fr/synthetics/browser_tests/advanced_options/#subtests
+[5]: /fr/synthetics/browser_tests/actions#use-variables-in-javascript-steps
+[6]: /fr/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
+[7]: /fr/synthetics/settings/
+[8]: /fr/synthetics/browser_tests/actions#test-that-an-email-was-received
+[9]: /fr/synthetics/browser_tests/actions#go-to-an-email-and-click-on-a-link
+[10]: /fr/synthetics/browser_tests/advanced_options/#subtests
+[11]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[12]: https://restfulapi.net/json-jsonpath/

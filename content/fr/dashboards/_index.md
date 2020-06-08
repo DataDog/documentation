@@ -11,13 +11,13 @@ aliases:
   - /fr/graphing/
 description: Visualiser vos données pour mieux les comprendre
 further_reading:
-  - link: /dashboards/template_variables
+  - link: /dashboards/template_variables/
     tag: Documentation
     text: Améliorer vos dashboards avec les template variables
-  - link: /dashboards/sharing
+  - link: /dashboards/sharing/
     tag: Documentation
     text: Partager vos graphiques en dehors de Datadog
-  - link: /dashboards/widgets
+  - link: /dashboards/widgets/
     tag: Documentation
     text: Découvrir tous les widgets disponibles pour votre dashboard
 ---
@@ -123,6 +123,6 @@ Depuis un dashboard, Datadog vous propose des suggestions de dashboards pertinen
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
-[2]: /fr/help
-[3]: /fr/dashboards/timeboard
-[4]: /fr/dashboards/screenboard
+[2]: /fr/help/
+[3]: /fr/dashboards/timeboard/
+[4]: /fr/dashboards/screenboard/

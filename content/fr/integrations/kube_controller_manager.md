@@ -46,9 +46,7 @@ rien d'autre à installer sur votre serveur.
 Cette intégration nécessite l'accès au endpoint des métriques du gestionnaire de contrôleurs. Elle n'est généralement pas
 exposée dans les clusters Container-as-a-Service.
 
-1. Modifiez le fichier `kube_controller_manager.d/conf.yaml` dans le dossier `conf.d/` à la racine du
-   répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance kube_controller_manager.
-   Consultez le [fichier d'exemple kube_controller_manager.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `kube_controller_manager.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance kube_controller_manager. Consultez le [fichier d'exemple kube_controller_manager.d/conf.yaml][2] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][3].
 
@@ -66,12 +64,11 @@ exposée dans les clusters Container-as-a-Service.
 
 `kube_controller_manager.prometheus.health` :
 
-Renvoie CRITICAL si l'Agent ne peut pas accéder aux endpoints des métriques.
-
+Renvoie `CRITICAL` si l'Agent ne peut pas accéder aux endpoints des métriques.
 
 ### Événements
 
-Kube_controller_manager ne comprend aucun événement.
+Kube_controller_manager n'inclut aucun événement.
 
 ## Dépannage
 
@@ -82,4 +79,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][6].
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/metadata.csv
-[6]: https://docs.datadoghq.com/fr/help
+[6]: https://docs.datadoghq.com/fr/help/

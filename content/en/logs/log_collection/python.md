@@ -37,11 +37,11 @@ Here are setup examples for the following logging libraries:
 
 * [JSON-log-formatter][1]
 * [Python-json-logger][2]
+* [django-datadog-logger][3]
 
 ## Connect your service across Logs and APM
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM Python instructions][3].
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][3].
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
@@ -168,5 +168,5 @@ logs:
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/0.1.0
 [2]: https://github.com/madzak/python-json-logger
-[3]: /tracing/connect_logs_and_traces/python/
+[3]: https://pypi.org/project/django-datadog-logger/
 [4]: /agent/guide/agent-commands/

@@ -215,15 +215,7 @@ The .NET Tracer can instrument the following libraries automatically:
 
 **Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
-
-## Manual Instrumentation
-
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][7] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
-For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][8].
-
-Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1, 3.0, and 3.1 on Windows and Linux.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][6] for help. Alternatively, see the [custom instrumentation instructions][7].
 
 ## Configuration
 
@@ -234,6 +226,33 @@ There are multiple ways to configure the .NET Tracer:
 * creating a `datadog.json` file
 
 {{< tabs >}}
+<<<<<<< HEAD
+=======
+{{% tab "Code" %}}
+
+To configure the Tracer in application code, create a `TracerSettings` from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
+
+```csharp
+using Datadog.Trace;
+
+// read default configuration sources (env vars, web.config, datadog.json)
+var settings = TracerSettings.FromDefaultSources();
+
+// change some settings
+settings.ServiceName = "MyService";
+settings.AgentUri = new Uri("http://localhost:8126/");
+
+// create a new Tracer using these settings
+var tracer = new Tracer(settings);
+
+// set the global tracer
+Tracer.Instance = tracer;
+```
+
+**Note:** Settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
+
+{{% /tab %}}
+>>>>>>> master
 
 {{% tab "Environment variables" %}}
 
@@ -244,9 +263,13 @@ For example, on Windows:
 ```cmd
 rem Set environment variables
 SET DD_TRACE_AGENT_URL=http://localhost:8126
+<<<<<<< HEAD
 SET DD_ENV=prod
 SET DD_SERVICE=MyService
 SET DD_VERSION=abc123
+=======
+SET DD_SERVICE_NAME=MyService
+>>>>>>> master
 
 rem Launch application
 example.exe
@@ -259,9 +282,13 @@ On Linux:
 ```bash
 # Set environment variables
 export DD_TRACE_AGENT_URL=http://localhost:8126
+<<<<<<< HEAD
 export DD_ENV=prod
 export DD_SERVICE=MyService
 export DD_VERSION=abc123
+=======
+export DD_SERVICE_NAME=MyService
+>>>>>>> master
 
 # Launch application
 dotnet example.dll
@@ -366,6 +393,7 @@ The following table lists configuration variables that are available only when u
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<<<<<<< HEAD
 [1]: /tracing/send_traces/
 [2]: /tracing/setup/dotnet-framework/
 [3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
@@ -375,3 +403,14 @@ The following table lists configuration variables that are available only when u
 [7]: /tracing/manual_instrumentation/dotnet/
 [8]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [9]: /tagging/unified_service_tagging
+=======
+
+[1]: https://app.datadoghq.com/apm/install
+[2]: /tracing/send_traces/
+[3]: /tracing/setup/dotnet-framework/
+[4]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
+[5]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
+[6]: /help/
+[7]: /tracing/manual_instrumentation/dotnet
+[8]: /tracing/guide/setting_primary_tags_to_scope/#environment
+>>>>>>> master

@@ -33,7 +33,7 @@ further_reading:
       text: 'Assign tags to all data emitted by a container'
 ---
 
-Run the Datadog Agent in your Kubernetes cluster directly in order to start collecting your cluster and applications metrics, traces, and logs. You can deploy it with a [Helm chart](?tab=helm) or a [DaemonSet](?tab=daemonset).
+Run the Datadog Agent in your Kubernetes cluster as a DaemonSet in order to start collecting your cluster and applications metrics, traces, and logs. You can deploy it with a [Helm chart](?tab=helm) or directly with a [DaemonSet](?tab=daemonset) object YAML definition.
 
 **Note**: Agent version 6.0 and above only support versions of Kubernetes higher than 1.7.6. For prior versions of Kubernetes, consult the [Legacy Kubernetes versions section][1].
 

@@ -178,7 +178,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 Profiler configuration:
 
-|`profiler` method | Type          | Description                                                                                                  |
+| Method | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
 |  WithAPIKey      | String        | The Datadog [Datadog API key][2]                                                                             |
 |  WithService     | String        | The Datadog [service][4] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.             |

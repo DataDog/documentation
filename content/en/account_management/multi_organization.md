@@ -30,11 +30,11 @@ Here's a two-minute video walkthrough:
 1. After the feature is enabled, visit the [New Account Page][3].
 2. Enter the name of the child-organization you wish to create and click the **Create** button. **The child-organization name cannot exceed 32 characters.**
 
-The new child-organization is created as a 14-day free trial account. You can change the billing plan in the [Organization account settings][4]. If you want to add the child-organization's billing to your parent-organization's billing account, [contact your sales representative][5].
+The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][4].
 
 ### Content
 
-Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][6] and tools such as Terraform, see [Managing Datadog with Terraform][7]. Additionally, scripts can be used to backup existing [dashboards][8] and [monitors][9] as code.
+Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][5] and tools such as Terraform, see [Managing Datadog with Terraform][6]. Additionally, scripts can be used to backup existing [dashboards][7] and [monitors][8] as code.
 
 ### Custom sub-domains
 
@@ -59,9 +59,8 @@ To configure SAML for multi-organizations, use the following procedure:
 [1]: /account_management/#managing-your-organizations
 [2]: /help/
 [3]: https://app.datadoghq.com/account/new_org
-[4]: https://app.datadoghq.com/account/billing
-[5]: mailto:success@datadoghq.com
-[6]: /api/
-[7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
-[8]: /dashboards/screenboards/#backup-my-screenboard
-[9]: /monitors/manage_monitor/
+[4]: mailto:success@datadoghq.com
+[5]: /api/
+[6]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
+[7]: /dashboards/screenboards/#backup-my-screenboard
+[8]: /monitors/manage_monitor/

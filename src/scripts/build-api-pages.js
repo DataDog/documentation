@@ -29,14 +29,31 @@ const updateMenu = (apiYaml, apiVersion, languages) => {
         weight: -10
     },
     {
-        name: 'Authentication',
-        url: `authentication`,
+        name: 'Install the Datadog Agent',
+        url: 'install-the-datadog-agent',
+        weight: 1,
+        parent: `API ${apiVersion.toUpperCase()} overview`
+    },
+    {   name: 'Send data to Datadog',
+        url: 'send-data-to-datadog',
+        weight: 2,
+        parent: `API ${apiVersion.toUpperCase()} overview`
+    },
+    {   name: 'Visualize your data',
+        url: 'visualize-your-data',
+        weight: 3,
+        parent: `API ${apiVersion.toUpperCase()} overview`
+    },
+    {   name: 'Manage your account',
+        url: 'manage-your-account',
+        weight: 4,
         parent: `API ${apiVersion.toUpperCase()} overview`
     },
     {
         name: 'Rate Limiting',
         url: `rate-limiting`,
-        parent: `API ${apiVersion.toUpperCase()} overview`
+        parent: `API ${apiVersion.toUpperCase()} overview`,
+        weight: 5
     }
   ];
 
@@ -379,14 +396,12 @@ const outputExample = (chosenExample, inputkey) => {
           }
         });
       }
-    } else {
-      if (typeof chosenExample === "boolean"){
+    } else if (typeof chosenExample === "boolean"){
         // we don't want quotes on a bool
         ex = `${chosenExample}`;
       } else {
         ex = `"${chosenExample}"`;
       }
-    }
   }
   return ex;
 };
@@ -720,13 +735,11 @@ const schemaTable = (tableType, data) => {
       initialData = data.items;
       extraClasses = 'd-none';
     }
-  } else {
-    if(data.additionalProperties) {
+  } else if(data.additionalProperties) {
       initialData = {"&lt;any-key&gt;": data.additionalProperties};
     } else {
       initialData = data.properties;
     }
-  }
   extraClasses = (initialData) ? extraClasses : 'd-none';
   const emptyRow = `
     <div class="row">
@@ -770,11 +783,13 @@ const processSpecs = (specs) => {
         .then((deref) => {
           const version = spec.split('/')[3];
           const jsonString = safeJsonStringify(deref, null, 2);
-          fs.writeFileSync(
-              `./data/api/${version}/full_spec_deref.json`,
-              jsonString,
-              'utf8'
-          );
+          const pathToJson = `./data/api/${version}/full_spec_deref.json`;
+          fs.writeFileSync(pathToJson, jsonString, 'utf8');
+          // make a copy in static for postman
+          fs.copyFile(pathToJson, `./static/resources/json/full_spec_${version}.json`, (err) => {
+            if (err) throw err;
+            console.log(`full_spec_${version}.json copied to /static/resources/json/`);
+          });
           updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
           createResources(fileData, JSON.parse(jsonString), version);

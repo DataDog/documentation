@@ -2,7 +2,7 @@
 title: Configurer SafeNet en tant que fournisseur d'identité SAML
 kind: documentation
 further_reading:
-  - link: account_management/saml
+  - link: /account_management/saml/
     tag: Documentation
     text: Configurer SAML pour votre compte Datadog
 ---

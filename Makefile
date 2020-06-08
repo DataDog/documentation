@@ -99,6 +99,8 @@ clean-auto-doc: ##Remove all doc automatically created
 	rm -f content/en/agent/basic_agent_usage/heroku.md ;fi
 	@if [ content/en/agent/basic_agent_usage/puppet.md ]; then \
 	rm -f content/en/agent/basic_agent_usage/puppet.md ;fi
+	@if [ content/en/agent/basic_agent_usage/saltstack.md ]; then \
+	rm -f content/en/agent/basic_agent_usage/saltstack.md ;fi
 	@if [ content/en/tracing/setup/ruby.md ]; then \
 	rm -f content/en/tracing/setup/ruby.md ;fi
 	@if [ content/en/developers/amazon_cloudformation.md ]; then \
@@ -179,12 +181,12 @@ examples/go: examples/datadog-api-client-go clean-go-examples local/bin/awk/extr
 	#	gofmt -w $$f || rm $f; \
 	#done;
 
-	cp -Rn examples/content ./
+	-cp -Rn examples/content ./
 
 examples/java: examples/datadog-api-client-java clean-java-examples local/bin/awk/extract-code-blocks-java.awk
 	@ls examples/datadog-api-client-java/api_docs/v1/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v1
 	@ls examples/datadog-api-client-java/api_docs/v2/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v2
 
-	cp -Rn examples/content ./
+	-cp -Rn examples/content ./
 
 examples: examples/go examples/java
