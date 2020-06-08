@@ -577,7 +577,7 @@
         "properties": {
           "dashboards": {
             "description": "List of dashboards in the dashboard list.",
-            "example": null,
+            "example": [],
             "items": {
               "description": "A dashboard within a list.",
               "properties": {
@@ -3673,14 +3673,14 @@
         "properties": {
           "created_at": {
             "description": "Creation time of the restriction query.",
-            "example": "2020-03-17T21:06:44.944905+00:00",
+            "example": "2020-03-17T21:06:44Z",
             "format": "date-time",
             "readOnly": true,
             "type": "string"
           },
           "modified_at": {
             "description": "Time of last restriction query modification.",
-            "example": "2020-03-17T21:15:15.833683+00:00",
+            "example": "2020-03-17T21:15:15Z",
             "format": "date-time",
             "readOnly": true,
             "type": "string"
@@ -3767,14 +3767,14 @@
                   "properties": {
                     "created_at": {
                       "description": "Creation time of the restriction query.",
-                      "example": "2020-03-17T21:06:44.944905+00:00",
+                      "example": "2020-03-17T21:06:44Z",
                       "format": "date-time",
                       "readOnly": true,
                       "type": "string"
                     },
                     "modified_at": {
                       "description": "Time of last restriction query modification.",
-                      "example": "2020-03-17T21:15:15.833683+00:00",
+                      "example": "2020-03-17T21:15:15Z",
                       "format": "date-time",
                       "readOnly": true,
                       "type": "string"
@@ -4035,14 +4035,14 @@
             "properties": {
               "created_at": {
                 "description": "Creation time of the restriction query.",
-                "example": "2020-03-17T21:06:44.944905+00:00",
+                "example": "2020-03-17T21:06:44Z",
                 "format": "date-time",
                 "readOnly": true,
                 "type": "string"
               },
               "modified_at": {
                 "description": "Time of last restriction query modification.",
-                "example": "2020-03-17T21:15:15.833683+00:00",
+                "example": "2020-03-17T21:15:15Z",
                 "format": "date-time",
                 "readOnly": true,
                 "type": "string"
@@ -4125,14 +4125,14 @@
                 "properties": {
                   "created_at": {
                     "description": "Creation time of the restriction query.",
-                    "example": "2020-03-17T21:06:44.944905+00:00",
+                    "example": "2020-03-17T21:06:44Z",
                     "format": "date-time",
                     "readOnly": true,
                     "type": "string"
                   },
                   "modified_at": {
                     "description": "Time of last restriction query modification.",
-                    "example": "2020-03-17T21:15:15.833683+00:00",
+                    "example": "2020-03-17T21:15:15Z",
                     "format": "date-time",
                     "readOnly": true,
                     "type": "string"
@@ -4260,14 +4260,14 @@
             "properties": {
               "created_at": {
                 "description": "Creation time of the restriction query.",
-                "example": "2020-03-17T21:06:44.944905+00:00",
+                "example": "2020-03-17T21:06:44Z",
                 "format": "date-time",
                 "readOnly": true,
                 "type": "string"
               },
               "modified_at": {
                 "description": "Time of last restriction query modification.",
-                "example": "2020-03-17T21:15:15.833683+00:00",
+                "example": "2020-03-17T21:15:15Z",
                 "format": "date-time",
                 "readOnly": true,
                 "type": "string"
@@ -4306,14 +4306,14 @@
                 "properties": {
                   "created_at": {
                     "description": "Creation time of the restriction query.",
-                    "example": "2020-03-17T21:06:44.944905+00:00",
+                    "example": "2020-03-17T21:06:44Z",
                     "format": "date-time",
                     "readOnly": true,
                     "type": "string"
                   },
                   "modified_at": {
                     "description": "Time of last restriction query modification.",
-                    "example": "2020-03-17T21:15:15.833683+00:00",
+                    "example": "2020-03-17T21:15:15Z",
                     "format": "date-time",
                     "readOnly": true,
                     "type": "string"
@@ -5738,7 +5738,7 @@
         "properties": {
           "cases": {
             "description": "Cases for generating signals.",
-            "example": null,
+            "example": [],
             "items": {
               "description": "Case when signal is generated.",
               "properties": {
@@ -5788,12 +5788,12 @@
           },
           "message": {
             "description": "Message for generated signals.",
-            "example": null,
+            "example": "",
             "type": "string"
           },
           "name": {
             "description": "The name of the rule",
-            "example": null,
+            "example": "",
             "type": "string"
           },
           "options": {
@@ -5887,7 +5887,7 @@
           },
           "queries": {
             "description": "Queries for selecting logs which are part of the rule.",
-            "example": null,
+            "example": [],
             "items": {
               "description": "Query for matching rule.",
               "properties": {
@@ -9148,7 +9148,7 @@
                   "properties": {
                     "dashboards": {
                       "description": "List of dashboards in the dashboard list.",
-                      "example": null,
+                      "example": [],
                       "items": {
                         "description": "A dashboard within a list.",
                         "properties": {
@@ -12207,14 +12207,14 @@
                             "properties": {
                               "created_at": {
                                 "description": "Creation time of the restriction query.",
-                                "example": "2020-03-17T21:06:44.944905+00:00",
+                                "example": "2020-03-17T21:06:44Z",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
                               },
                               "modified_at": {
                                 "description": "Time of last restriction query modification.",
-                                "example": "2020-03-17T21:15:15.833683+00:00",
+                                "example": "2020-03-17T21:15:15Z",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
@@ -12335,14 +12335,14 @@
                           "properties": {
                             "created_at": {
                               "description": "Creation time of the restriction query.",
-                              "example": "2020-03-17T21:06:44.944905+00:00",
+                              "example": "2020-03-17T21:06:44Z",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
                             },
                             "modified_at": {
                               "description": "Time of last restriction query modification.",
-                              "example": "2020-03-17T21:15:15.833683+00:00",
+                              "example": "2020-03-17T21:15:15Z",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
@@ -12468,14 +12468,14 @@
                             "properties": {
                               "created_at": {
                                 "description": "Creation time of the restriction query.",
-                                "example": "2020-03-17T21:06:44.944905+00:00",
+                                "example": "2020-03-17T21:06:44Z",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
                               },
                               "modified_at": {
                                 "description": "Time of last restriction query modification.",
-                                "example": "2020-03-17T21:15:15.833683+00:00",
+                                "example": "2020-03-17T21:15:15Z",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
@@ -12602,14 +12602,14 @@
                             "properties": {
                               "created_at": {
                                 "description": "Creation time of the restriction query.",
-                                "example": "2020-03-17T21:06:44.944905+00:00",
+                                "example": "2020-03-17T21:06:44Z",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
                               },
                               "modified_at": {
                                 "description": "Time of last restriction query modification.",
-                                "example": "2020-03-17T21:15:15.833683+00:00",
+                                "example": "2020-03-17T21:15:15Z",
                                 "format": "date-time",
                                 "readOnly": true,
                                 "type": "string"
@@ -12835,14 +12835,14 @@
                           "properties": {
                             "created_at": {
                               "description": "Creation time of the restriction query.",
-                              "example": "2020-03-17T21:06:44.944905+00:00",
+                              "example": "2020-03-17T21:06:44Z",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
                             },
                             "modified_at": {
                               "description": "Time of last restriction query modification.",
-                              "example": "2020-03-17T21:15:15.833683+00:00",
+                              "example": "2020-03-17T21:15:15Z",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
@@ -13112,14 +13112,14 @@
                           "properties": {
                             "created_at": {
                               "description": "Creation time of the restriction query.",
-                              "example": "2020-03-17T21:06:44.944905+00:00",
+                              "example": "2020-03-17T21:06:44Z",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
                             },
                             "modified_at": {
                               "description": "Time of last restriction query modification.",
-                              "example": "2020-03-17T21:15:15.833683+00:00",
+                              "example": "2020-03-17T21:15:15Z",
                               "format": "date-time",
                               "readOnly": true,
                               "type": "string"
@@ -18066,7 +18066,7 @@
                 "properties": {
                   "cases": {
                     "description": "Cases for generating signals.",
-                    "example": null,
+                    "example": [],
                     "items": {
                       "description": "Case when signal is generated.",
                       "properties": {
@@ -18116,12 +18116,12 @@
                   },
                   "message": {
                     "description": "Message for generated signals.",
-                    "example": null,
+                    "example": "",
                     "type": "string"
                   },
                   "name": {
                     "description": "The name of the rule",
-                    "example": null,
+                    "example": "",
                     "type": "string"
                   },
                   "options": {
@@ -18215,7 +18215,7 @@
                   },
                   "queries": {
                     "description": "Queries for selecting logs which are part of the rule.",
-                    "example": null,
+                    "example": [],
                     "items": {
                       "description": "Query for matching rule.",
                       "properties": {

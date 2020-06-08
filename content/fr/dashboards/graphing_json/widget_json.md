@@ -7,7 +7,7 @@ further_reading:
   - link: /dashboards/graphing_json/
     tag: Documentation
     text: Créer des dashboards avec JSON
-  - link: /dashboards/graphing_json/request_json
+  - link: /dashboards/graphing_json/request_json/
     tag: Documentation
     text: Schéma JSON des requêtes
 ---
@@ -230,4 +230,4 @@ Par exemple, pour indiquer que vous souhaitez afficher un intervalle de temps de
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/dashboards/querying/#graphing-editor
-[2]: /fr/events
+[2]: /fr/events/

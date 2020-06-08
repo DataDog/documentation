@@ -6,8 +6,8 @@
           "data": [
             {
               "attributes": {
-                "created_at": "2020-03-17T21:06:44.944905+00:00",
-                "modified_at": "2020-03-17T21:15:15.833683+00:00",
+                "created_at": "2020-03-17T21:06:44Z",
+                "modified_at": "2020-03-17T21:15:15Z",
                 "restriction_query": "env:sandbox"
               },
               "id": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
@@ -38,8 +38,8 @@
         "json": {
           "data": {
             "attributes": {
-              "created_at": "2020-03-17T21:06:44.944905+00:00",
-              "modified_at": "2020-03-17T21:15:15.833683+00:00",
+              "created_at": "2020-03-17T21:06:44Z",
+              "modified_at": "2020-03-17T21:15:15Z",
               "restriction_query": "env:sandbox"
             },
             "id": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
@@ -85,8 +85,8 @@
           "data": [
             {
               "attributes": {
-                "created_at": "2020-03-17T21:06:44.944905+00:00",
-                "modified_at": "2020-03-17T21:15:15.833683+00:00",
+                "created_at": "2020-03-17T21:06:44Z",
+                "modified_at": "2020-03-17T21:15:15Z",
                 "restriction_query": "env:sandbox"
               },
               "id": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
@@ -126,8 +126,8 @@
           "data": [
             {
               "attributes": {
-                "created_at": "2020-03-17T21:06:44.944905+00:00",
-                "modified_at": "2020-03-17T21:15:15.833683+00:00",
+                "created_at": "2020-03-17T21:06:44Z",
+                "modified_at": "2020-03-17T21:15:15Z",
                 "restriction_query": "env:sandbox"
               },
               "id": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
@@ -199,8 +199,8 @@
         "json": {
           "data": {
             "attributes": {
-              "created_at": "2020-03-17T21:06:44.944905+00:00",
-              "modified_at": "2020-03-17T21:15:15.833683+00:00",
+              "created_at": "2020-03-17T21:06:44Z",
+              "modified_at": "2020-03-17T21:15:15Z",
               "restriction_query": "env:sandbox"
             },
             "id": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
@@ -257,8 +257,8 @@
         "json": {
           "data": {
             "attributes": {
-              "created_at": "2020-03-17T21:06:44.944905+00:00",
-              "modified_at": "2020-03-17T21:15:15.833683+00:00",
+              "created_at": "2020-03-17T21:06:44Z",
+              "modified_at": "2020-03-17T21:15:15Z",
               "restriction_query": "env:sandbox"
             },
             "id": "79a0e60a-644a-11ea-ad29-43329f7f58b5",
