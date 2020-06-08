@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Key Vault
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_key_vault
 public_title: Intégration Datadog/Microsoft Azure Key Vault
 short_description: Surveillez des métriques clés d'Azure Key Vault.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

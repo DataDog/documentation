@@ -32,4 +32,5 @@ site: datadoghq.eu
 
 {{% /tab %}}
 {{< /tabs >}}
+
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file

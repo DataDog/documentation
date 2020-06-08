@@ -11,11 +11,11 @@ has_logo: true
 integration_title: Pare-feu Microsoft Azure
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_firewall
 public_title: Intégration Datadog/Pare-feu Microsoft Azure
 short_description: Surveillez des métriques clés de vos pare-feux Azure.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

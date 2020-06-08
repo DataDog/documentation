@@ -2,13 +2,13 @@
 title: Configurer l'APM en C++
 kind: guide
 further_reading:
-  - link: /tracing/setup/cpp
+  - link: /tracing/setup/cpp/
     tag: Documentation
     text: En savoir plus sur le tracing des applications en C++
 ---
 ## Présentation
 
-Ce guide vient compléter la [documentation sur la configuration de l'APM en C++][1]. Les instructions qui y sont détaillées vous permettent de configurer une application simple en C++ avec l'APM sur votre VM, afin de diagnostiquer vos éventuels problèmes. Vous pouvez également lancer directement une box clé en main reprenant toutes les informations de cette configuration à partir du [référentiel sandbox][2] de Datadog.
+Ce guide vient compléter la [documentation sur la configuration de l'APM en C++][1]. Les instructions qui y sont détaillées vous permettent de configurer une application simple en C++ avec l'APM sur votre VM, afin de diagnostiquer vos éventuels problèmes.
 
 ## Configuration de votre solution
 
@@ -22,7 +22,7 @@ vagrant up
 vagrant ssh
 ```
 
-Installez ensuite l'Agent avec les [instructions de l'IU][3].
+Installez ensuite l'Agent avec les [instructions de l'IU][2].
 
 ### Préparation pour C++
 
@@ -154,16 +154,15 @@ Les données suivantes apparaissent alors sur l'onglet Trace Agent :
 
 Le service s'affiche ensuite sur la page de vos services APM dans Datadog.
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="Page des services APM" responsive="true" >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="Page des services APM"  >}}
 
 Cliquez sur le service pour afficher vos traces.
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="Interface des traces APM" responsive="true" >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="Interface des traces APM"  >}}
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/setup/cpp/#compile-against-dd-opentracing-cpp
-[2]: https://github.com/DataDog/sandbox
-[3]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[2]: https://app.datadoghq.com/account/settings#agent/ubuntu

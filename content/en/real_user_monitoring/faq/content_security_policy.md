@@ -2,12 +2,12 @@
 title: Content Security Policy (CSP)
 kind: faq
 further_reading:
-- link: "/real_user_monitoring/installation/"
-  tag: "FAQ"
-  text: "How to Send Logs to Datadog via External Log Shippers?"
-- link: "/logs/log_collection/javascript/"
-  tag: "FAQ"
-  text: "Browser Log Collection"
+    - link: '/real_user_monitoring/installation/'
+      tag: 'Get Started'
+      text: 'Real User Monitoring'
+    - link: '/logs/log_collection/javascript/'
+      tag: 'Get Started'
+      text: 'Browser Log Collection'
 ---
 
 If you are using [Content Security Policy (CSP)][1] on your websites, add the following URLs to your existing directives depending on how you setup your Real User Monitoring or browser log collection:
@@ -43,15 +43,29 @@ connect-src https://*.logs.datadoghq.eu
 
 ## NPM Setup
 
-If you have the NPM setup for [Real User Monitoring][4] or [browser log collection][5], add only the `script-src` directive:
+If you have the NPM setup for [Real User Monitoring][4] or [browser log collection][5], add only the `connect-src` directive:
+
+{{< tabs >}}
+{{% tab "US" %}}
 
 ```txt
-script-src https://www.datadoghq-browser-agent.com
+connect-src https://*.logs.datadoghq.com
 ```
+
+{{% /tab %}}
+{{% tab "EU" %}}
+
+```txt
+connect-src https://*.logs.datadoghq.eu
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
-{{< partial name="whats-next/whats-next.html" >}}[1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+{{< partial name="whats-next/whats-next.html" >}}
+[1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 [2]: /real_user_monitoring/installation/?tab=us#bundle-setup
 [3]: /logs/log_collection/javascript/?tab=us#bundle-setup
 [4]: /real_user_monitoring/installation/?tab=us#npm-setup

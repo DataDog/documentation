@@ -20,14 +20,16 @@ short_description: 'Surveillez les performances de lecture/écriture de Datastor
 version: '1.0'
 ---
 ## Présentation
+
 Cloud Datastore est une base de données NoSQL à haute évolutivité pour vos applications Web et mobiles.
 
 Recueillez des métriques de Google Datastore pour :
 
-* Visualiser les performances de vos entrepôts de données
-* Corréler les performances de vos entrepôts de données avec vos applications
+- Visualiser les performances de vos datastores
+- Corréler les performances de vos datastores avec vos applications
 
 ## Implémentation
+
 ### Installation
 
 Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Google Cloud Platform][1]. Aucune autre procédure d'installation n'est requise.
@@ -44,21 +46,25 @@ Une fois cette opération effectuée, exportez vos logs Google Cloud Datastore
 4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "google_cloud_datastore" >}}
 
 
 ### Événements
+
 L'intégration Google Cloud Datastore n'inclut aucun événement.
 
 ### Checks de service
+
 L'intégration Google Cloud Datastore n'inclut aucun check de service.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
+[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_datastore/google_cloud_datastore_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help
+[5]: https://docs.datadoghq.com/fr/help/

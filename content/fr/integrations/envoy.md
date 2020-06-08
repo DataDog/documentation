@@ -126,22 +126,20 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 1. Modifiez le fichier `envoy.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos données de performance Envoy. Consultez le [fichier d'exemple envoy.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
 
-  ```yaml
+    ```yaml
     init_config:
 
     instances:
-
-        ## @param stats_url - string - required
-        ## The admin endpoint to connect to. It must be accessible:
-        ## https://www.envoyproxy.io/docs/envoy/latest/operations/admin
-        ## Add a `?usedonly` on the end if you wish to ignore
-        ## unused metrics instead of reporting them as `0`.
-        #
+      ## @param stats_url - string - required
+      ## The admin endpoint to connect to. It must be accessible:
+      ## https://www.envoyproxy.io/docs/envoy/latest/operations/admin
+      ## Add a `?usedonly` on the end if you wish to ignore
+      ## unused metrics instead of reporting them as `0`.
+      #
       - stats_url: http://localhost:80/stats
-  ```
+    ```
 
 2. Vérifiez si l'Agent Datadog peut accéder à l'[endpoint admin][4] d'Envoy.
-
 3. [Redémarrez l'Agent][9].
 
 ###### Filtrer les métriques
@@ -173,23 +171,23 @@ Si seuls le nom de cluster et le service gRPC vous intéressent, ajoutez le code
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Modifiez ensuite `envoy.d/conf.yaml` en supprimant la mise en commentaire des lignes `logs` en bas du fichier. Mettez à jour la ligne `path` en indiquant le bon chemin vers vos fichiers de log Envoy.
 
-    ```yaml
-      logs:
-        - type: file
-          path: /var/log/envoy.log
-          source: envoy
-          service: envoy
-    ```
+   ```yaml
+   logs:
+     - type: file
+       path: /var/log/envoy.log
+       source: envoy
+       service: envoy
+   ```
 
 3. [Redémarrez l'Agent][9].
 
@@ -200,19 +198,19 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 ##### Collecte de métriques
 
 | Paramètre            | Valeur                                      |
-|----------------------|--------------------------------------------|
+| -------------------- | ------------------------------------------ |
 | `<NOM_INTÉGRATION>` | `envoy`                                    |
 | `<CONFIG_INIT>`      | vide ou `{}`                              |
 | `<CONFIG_INSTANCE>`  | `{"stats_url": "http://%%host%%:80/stats}` |
 
 ##### Collecte de logs
 
-**Disponible à partir des versions > 6.5 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][12].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][12].
 
 | Paramètre      | Valeur                                              |
-|----------------|----------------------------------------------------|
+| -------------- | -------------------------------------------------- |
 | `<CONFIG_LOG>` | `{"source": "envoy", "service": "<NOM_SERVICE>"}` |
 
 ### Validation
@@ -220,6 +218,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 [Lancez la sous-commande status de l'Agent][13] et recherchez `envoy` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "envoy" >}}
 
@@ -239,7 +238,6 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Envoy pour re
 
 Besoin d'aide ? Contactez [l'assistance Datadog][15].
 
-
 [1]: https://www.envoyproxy.io
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://istio.io
@@ -250,8 +248,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][15].
 [8]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/data/conf.yaml.example
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
-[11]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[12]: https://docs.datadoghq.com/fr/agent/docker/log/
+[11]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[12]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [14]: https://github.com/DataDog/integrations-core/blob/master/envoy/metadata.csv
-[15]: https://docs.datadoghq.com/fr/help
+[15]: https://docs.datadoghq.com/fr/help/

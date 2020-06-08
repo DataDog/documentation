@@ -1,0 +1,155 @@
+
+[
+    {
+        "agent_version": "5.0.0",
+        "check": "ceph.overall_status",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph Status",
+        "description": "Ceph クラスターのステータスが HEALTH_OK の場合は `OK` を、HEALTH_WARNING の場合は `WARNING` を、それ以外の場合は `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.osd_down",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph OSD Down",
+        "description": "ダウンした OSD がない場合は、`OK` を返します。それ以外の場合、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.osd_orphan",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph OSD Orphan",
+        "description": "孤立した OSD がない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.osd_full",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph OSD Orphan",
+        "description": "割当量に達している OSD がない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.osd_nearfull",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph OSD Near Full",
+        "description": "ほぼ割当量に達している OSD がない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.pool_full",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph Pool Full",
+        "description": "割当量に達しているプールがない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.pool_near_full",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph Pool Near Full",
+        "description": "ほぼ割当量に達しているプールがない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.pg_availability",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph PG Availability",
+        "description": "データ可用性が十分な場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.pg_degraded",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph PG Degraded",
+        "description": "データ冗長性が十分である場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.pg_degraded_full",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph PG Degraded Full",
+        "description": "クラスターにデータ冗長性のための十分なスペースがある場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.pg_damaged",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph PG Damaged",
+        "description": "データの整理後に不一致がない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.pg_not_scrubbed",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph PG Not Scrubbed",
+        "description": "最近整理した PG がある場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.pg_not_deep_scrubbed",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph PG Not Deep Scrubbed",
+        "description": "最近徹底的に整理した PG がある場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.cache_pool_near_full",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph Cache Pool Near Full",
+        "description": "ほぼ割当量に達しているキャッシュプールがない場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.too_few_pgs",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph Too Few PGs",
+        "description": "PG の数が最小しきい値を上回っている場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.too_many_pgs",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph Too Many PGs",
+        "description": "PG の数が最大しきい値を下回っている場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.object_unfound",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph Object Unfound",
+        "description": "すべてのオブジェクトが見つかった場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.request_slow",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph Request Slow",
+        "description": "リクエストが通常の時間で処理されている場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    },
+    {
+        "agent_version": "5.21.0",
+        "check": "ceph.request_stuck",
+        "statuses": ["ok", "警告", "クリティカル"],
+        "groups": ["ホスト"],
+        "name": "Ceph Request Stuck",
+        "description": "リクエストが通常の時間で処理されている場合は、`OK` を返します。それ以外の場合は、重大度が `HEALTH_WARN` なら `WARNING`、それ以外なら `CRITICAL` を返します。"
+    }
+]

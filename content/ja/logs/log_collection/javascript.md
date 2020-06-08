@@ -118,7 +118,7 @@ datadogLogs.init({
 
 | パラメーター             | 種類    | 必須 | デフォルト | 説明                                                                                              |
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
-| `clientToken`         | 文字列  | はい      | `-`     | [Datadog クライアントトークン][4]。                                                                             |
+| `clientToken`         | 文字列  | はい      | `-`     | [Datadog クライアントトークン][2]。                                                                             |
 | `datacenter`          | 文字列  | はい      | `us`    | 所属する組織の Datadog サイト。`us` はアメリカの Datadog のサイト、 `eu` は EU の Datadog サイト。               |
 | `forwardErrorsToLogs` | Boolean | いいえ       | `true`  | `false` に設定すると、console.error ログ、キャッチされない例外、ネットワークエラーは Datadog へ送信されません。 |
 | `sampleRate`          | 数値  | いいえ       | `100`   | 追跡するセッションの割合。追跡されたセッションのみログを送信します。`100` は全てを、`0` は皆無を意味します。   |
@@ -356,7 +356,7 @@ Datadog ブラウザのログライブラリが初期化されると、API を�
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setLevel('<LEVEL>');
+datadogLogs.logger.setLevel('<レベル>');
 ```
 
 {{% /tab %}}
@@ -384,14 +384,14 @@ Datadog ブラウザのログライブラリが初期化されると、ログを
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setHandler('<HANDLER>');
+datadogLogs.logger.setHandler('<ハンドラー>');
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setHandler('<HANDLER>');
+window.DD_LOGS && DD_LOGS.logger.setHandler('<ハンドラー>');
 ```
 
 **注**: `window.DD_LOGS` チェックは、ライブラリで読み込みエラーが起きた際に問題を防ぐために使用されます。
@@ -407,7 +407,6 @@ window.DD_LOGS && DD_LOGS.setHandler('<HANDLER>');
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
-[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
+[1]: /ja/account_management/api-app-keys/#api-keys
+[2]: /ja/account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
-[4]: /ja/account_management/api-app-keys/#client-tokens

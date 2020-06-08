@@ -6,7 +6,7 @@ aliases:
     - /agent/faq/start-stop-restart-the-datadog-agent
     - /agent/faq/agent-commands
 further_reading:
-- link: "/agent/troubleshooting"
+- link: "/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
 ---
@@ -34,8 +34,8 @@ List of commands to start the Datadog Agent:
 | Source   | `sudo service datadog-agent start`                             |
 | Windows  | [See the dedicated Windows documentation][2]                   |
 
-[1]: /agent/docker
-[2]: /agent/basic_agent_usage/windows
+[1]: /agent/docker/
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -48,7 +48,7 @@ List of commands to start the Datadog Agent:
 | Windows  | [See the dedicated Windows documentation][2] |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -69,8 +69,8 @@ List of commands to stop the Datadog Agent:
 | Source   | `sudo service datadog-agent stop`                             |
 | Windows  | [See the dedicated Windows documentation][2]                  |
 
-[1]: /agent/docker
-[2]: /agent/basic_agent_usage/windows
+[1]: /agent/docker/
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -83,7 +83,7 @@ List of commands to stop the Datadog Agent:
 | Windows  | [See the dedicated Windows documentation][2] |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -103,8 +103,8 @@ List of commands to restart the Datadog Agent:
 | Source   | *unsupported Platform*                            |
 | Windows  | [See the dedicated Windows documentation][2]      |
 
-[1]: /agent/docker
-[2]: /agent/basic_agent_usage/windows
+[1]: /agent/docker/
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -117,7 +117,7 @@ List of commands to restart the Datadog Agent:
 | Windows  | [See the dedicated Windows documentation][2] |
 
 [1]: https://github.com/DataDog/docker-dd-agent/blob/master/README.md
-[2]: /agent/basic_agent_usage/windows
+[2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -249,26 +249,29 @@ Some options have flags and options detailed under `--help`. For example, use he
 <AGENT_BINARY> check --help
 ```
 
-| Command           | Notes                                                                         |
-|-------------------|-------------------------------------------------------------------------------|
-| `check`           | Runs the specified check.                                                     |
-| `configcheck`     | Prints all configurations loaded and resolved of a running Agent.             |
-| `diagnose`        | Executes some connectivity diagnosis on your system.                          |
-| `flare`           | Collects a flare and send it to Datadog.                                      |
-| `health`          | Prints the current Agent health.                                              |
-| `help`            | Help about any command.                                                       |
-| `hostname`        | Prints the hostname used by the Agent.                                        |
-| `import`          | Imports and converts configuration files from previous versions of the Agent. |
-| `installservice`  | Installs the Agent within the service control manager.                        |
-| `launch-gui`      | Starts the Datadog Agent GUI.                                                 |
-| `regimport`       | Imports the registry settings into `datadog.yaml`.                            |
-| `remove-service`  | Removes the Agent from the service control manager.                           |
-| `restart-service` | Restarts the Agent within the service control manager.                        |
-| `start-service`   | Starts the Agent within the service control manager.                          |
-| `stopservice`     | Stops the Agent within the service control manager.                           |
-| `jmx`             | JMX troubleshooting.                                                          |
-| `version`         | Prints the version info.                                                      |
+| Subcommand        | Notes                                                                      |
+|-------------------|----------------------------------------------------------------------------|
+| `check`           | Run the specified check.                                                   |
+| `config`          | [Runtime configuration management][1].                                     |
+| `configcheck`     | Print all configurations loaded & resolved of a running Agent.             |
+| `diagnose`        | Execute connectivity diagnosis on your system.                             |
+| `flare`           | [Collect a flare and send it to Datadog][2].                               |
+| `health`          | Print the current Agent health.                                            |
+| `help`            | Help about any command.                                                    |
+| `hostname`        | Print the hostname used by the Agent.                                      |
+| `import`          | Import and convert configuration files from previous versions of the Agent.|
+| `installservice`  | Install the Agent within the service control manager. Windows only.        |
+| `jmx`             | JMX troubleshooting.                                                       |
+| `launch-gui`      | Start the Datadog Agent GUI.                                               |
+| `regimport`       | Import the registry settings into `datadog.yaml`. Windows only.            |
+| `remove-service`  | Remove the Agent from the service control manager. Windows only.           |
+| `restart-service` | Restart the Agent within the service control manager. Windows only.        |
+| `start-service`   | Start the Agent within the service control manager. Windows only.          |
+| `stopservice`     | Stop the Agent within the service control manager. Windows only.           |
+| `version`         | Print version info.                                                        |
 
+[1]: /agent/troubleshooting/config/
+[2]: /agent/troubleshooting/send_a_flare/
 {{% /tab %}}
 {{< /tabs >}}
 

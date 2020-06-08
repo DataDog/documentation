@@ -3,20 +3,20 @@ title: Custom Check Monitor
 kind: documentation
 description: "Monitor status of arbitrary custom checks."
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
 
 ## Overview
 
-Custom check monitors include any service check not reported by one of the [350+ integrations][1] included with the Agent. Custom service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4].
+Custom check monitors include any service check not reported by one of the [400+ integrations][1] included with the Agent. Custom service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4].
 
 ## Monitor creation
 
@@ -82,13 +82,13 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations
-[2]: /developers/write_agent_check
-[3]: /developers/dogstatsd
-[4]: /api/?lang=python#service-checks
+[1]: /integrations/
+[2]: /developers/write_agent_check/
+[3]: /developers/dogstatsd/
+[4]: /api/v1/service-checks/
 [5]: https://app.datadoghq.com/monitors#create/custom
-[6]: /monitors/monitor_types/metric
+[6]: /monitors/monitor_types/metric/
 [7]: /monitors/monitor_types/metric/#no-data
 [8]: /monitors/monitor_types/metric/#auto-resolve
 [9]: /monitors/monitor_types/metric/#evaluation-delay
-[10]: /monitors/notifications
+[10]: /monitors/notifications/

@@ -13,11 +13,11 @@ has_logo: true
 integration_title: AWS X-Ray
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: amazon_xray
 public_title: "Intégration Datadog/AWS\_X-Ray"
 short_description: Tracer les requêtes qui passent d'un service AWS à un autre
-version: 1
+version: '1.0'
 ---
 ## Présentation
 
@@ -27,9 +27,9 @@ AWS X-Ray permet aux développeurs de tracer des applications distribuées qui 
 
 ### Installation
 
-Pour commencer, [activez l'intégration AWS][3] et ajoutez les autorisations suivantes au document de stratégie dans votre rôle AWS/Datadog :
+Pour commencer, [activez l'intégration AWS][3] et assurez-vous que le document de stratégie de votre rôle AWS/Datadog comporte les autorisations suivantes :
 
-```
+```text
 xray:BatchGetTraces,
 xray:GetTraceSummaries
 ```
@@ -40,9 +40,11 @@ Ensuite, [activez l'intégration X-Ray dans Datadog][4].
 
 Si vous utilisez une clé principale client pour chiffrer les traces, ajoutez la méthode `kms:Decrypt` à la stratégie au sein de laquelle la ressource correspond à la clé principale client utilisée pour X-Ray.
 
+**Remarque** : l'activation de l'intégration AWS X-Ray augmente le nombre de spans analysées utilisées. Cela peut avoir une incidence sur votre facturation.
+
 ### Activer AWS X-Ray pour vos fonctions
 
-Pour tirer le meilleur parti de l'intégration AWS X-Ray, vous devez l'activer *pour* vos fonctions Lambda et vos instances d'API Gateway, **mais aussi** installer les bibliothèques de tracing *dans* vos fonctions Lambda.
+Pour tirer le meilleur parti de l'intégration AWS X-Ray, vous devez l'activer _pour_ vos fonctions Lambda et vos instances d'API Gateway, **mais aussi** installer les bibliothèques de tracing _dans_ vos fonctions Lambda.
 
 #### Utilisation du plug-in Serverless Framework (conseillé)
 
@@ -59,7 +61,6 @@ Enfin, [installez et importez la bibliothèque client X-Ray dans votre fonction 
 
 **Remarque :** la couche Lambda Datadog et les bibliothèques client intègrent le X-Ray SDK en tant que dépendance. Vous n'avez donc pas besoin de l'installer dans vos projets.
 
-
 Enfin, [installez et importez la bibliothèque client X-Ray dans votre fonction Lambda](#installer-les-bibliotheques-client-x-ray).
 
 ### Installer les bibliothèques client X-Ray
@@ -74,8 +75,11 @@ Installez la bibliothèque, importez-la dans vos projets Lambda, puis patchez le
 Installer la bibliothèque de tracing X-Ray :
 
 ```bash
-$ npm install aws-xray-sdk   # pour les utilisateurs de NPM
-$ yarn add aws-xray-sdk      # pour les utilisateurs de Yarn
+
+npm install aws-xray-sdk
+
+# pour les utilisateurs de Yarn
+yarn add aws-xray-sdk
 ```
 
 Pour instrumenter le SDK AWS :
@@ -106,20 +110,21 @@ Pour instrumenter les requêtes MySQL :
 ```js
 var AWSXRay = require('aws-xray-sdk');
 var mysql = AWSXRay.captureMySQL(require('mysql'));
-...
+//...
 var connection = mysql.createConnection(config);
 ```
 
 Pour en savoir plus sur la configuration, la création de sous-segments et l'enregistrement d'annotations, consultez la [documentation X-Ray pour Node.js][1].
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-nodejs.html
+
 {{% /tab %}}
 {{% tab "Python" %}}
 
 Installer la bibliothèque de tracing X-Ray :
 
 ```bash
-$ pip install aws-xray-sdk
+pip install aws-xray-sdk
 ```
 
 Pour patcher [toutes les bibliothèques][2] par défaut, ajoutez ce qui suit au fichier contenant vos gestionnaires de fonctions Lambda :
@@ -143,23 +148,25 @@ Pour en savoir plus sur la configuration, la création de sous-segments et l'enr
 
 Pour tout autre runtime, consultez la documentation sur X-Ray SDK :
 
- * [X-Ray SDK pour Go][1]
- * [X-Ray SDK pour Ruby][2]
- * [X-Ray SDK pour Java][3]
- * [X-Ray SDK pour .NET et Core][4]
+- [X-Ray SDK pour Go][1]
+- [X-Ray SDK pour Ruby][2]
+- [X-Ray SDK pour Java][3]
+- [X-Ray SDK pour .NET et Core][4]
 
 [1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-go.html
 [2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-ruby.html
 [3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-java.html
 [4]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-dotnet.html
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Données collectées
+
 L'intégration AWS X-Ray récupère les données de trace d'AWS et ne recueille aucune métrique ni aucun log.
 
 [1]: http://app.datadoghq.com/functions
-[2]: https://docs.datadoghq.com/fr/infrastructure/serverless_functions
+[2]: https://docs.datadoghq.com/fr/infrastructure/serverless/
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [4]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
 [5]: https://docs.aws.amazon.com/xray/latest/devguide/xray-sdk-python-patching.html

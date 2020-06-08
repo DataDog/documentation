@@ -6,6 +6,8 @@ canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
 
+publishDir: "./public"
+
 # taxonomies
 taxonomies:
   tag: "tags"
@@ -27,3 +29,6 @@ markup:
   defaultMarkdownHandler: blackfriday
   highlight:
     guessSyntax: true
+
+# so we can access images as resources
+assetDir: "static"

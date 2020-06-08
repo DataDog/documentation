@@ -12,7 +12,7 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-{{< img src="real_user_monitoring/rum_full_dashboard.png" alt="RUM Dashboard" responsive="true" >}}
+{{< img src="real_user_monitoring/rum_full_dashboard.png" alt="RUM Dashboard"  >}}
 
 ## What is Real User Monitoring?
 
@@ -20,7 +20,7 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 
 {{< whatsnext desc="Get started with RUM:">}}
   {{< nextlink href="/real_user_monitoring/installation">}}<u>Installation</u>: Create your first application and configure the browser SDK.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/data_collected">}}<u>Dashboards</u>: Discover all data collected out of the box within an out of the box Dashboard.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards">}}<u>Dashboards</u>: Discover all data collected out of the box within an out of the box Dashboard.{{< /nextlink >}}
 {{< /whatsnext >}}
 {{< whatsnext desc="Explore your RUM events:">}}
   {{< nextlink href="/real_user_monitoring/explorer/">}}<u>RUM Search</u>: Search through your page views.{{< /nextlink >}}

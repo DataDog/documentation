@@ -9,7 +9,7 @@ Datadog bills for hosts running the Agent and all GCE instances picked up by the
 
 Other Google Cloud resources (CloudSQL, Google App Engine, Pub/Sub, etc.) are not part of monthly billing.
 
-### Metric exclusion
+## Google Cloud Metric exclusion
 
 Use the [Google Cloud integration tile][1] to control your metric collection. Go to the **Configuration** tab and select a project or add a new one. Each project is controlled under **Optionally Limit Metrics Collection to hosts with tag**. Limit metrics by [host tag][2]:
 
@@ -27,6 +27,6 @@ For billing questions, contact your [Customer Success][5] Manager.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google_cloud_platform
 [2]: /tagging/using_tags/#integrations
-[3]: /infrastructure
-[4]: /help
+[3]: /infrastructure/
+[4]: /help/
 [5]: mailto:success@datadoghq.com

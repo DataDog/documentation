@@ -4,13 +4,13 @@ kind: guide
 aliases:
   - /fr/agent/faq/agent-log-files
 further_reading:
-  - link: agent/troubleshooting/
+  - link: /agent/troubleshooting/
     tag: Documentation
     text: Dépannage de l'Agent
-  - link: agent/guide/agent-configuration-files/
+  - link: /agent/guide/agent-configuration-files/
     tag: FAQ
     text: Fichiers de configuration de l'Agent
-  - link: agent/guide/agent-commands/
+  - link: /agent/guide/agent-commands/
     tag: FAQ
     text: Commandes de l'Agent
 ---

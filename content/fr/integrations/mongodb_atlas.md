@@ -11,11 +11,11 @@ has_logo: true
 integration_title: "MongoDB\_Atlas"
 is_public: true
 kind: intégration
-manifest_version: 1
+manifest_version: '1.0'
 name: mongodb_atlas
 public_title: "Intégration Datadog/MongoDB\_Atlas"
 short_description: "MongoDB\_Atlas peut transmettre des métriques calculées à Datadog"
-version: 1
+version: '1.0'
 ---
 ## Présentation
 
@@ -56,4 +56,4 @@ Besoin d'aide ? [Contactez l'assistance Datadog][4]
 [1]: https://app.datadoghq.com/account/settings#api
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/mongodb_atlas/mongodb_atlas_metadata.csv
 [3]: https://www.mongodb.com/blog/post/push-your-mongodb-atlas-alerts-to-datadog
-[4]: https://docs.datadoghq.com/fr/help
+[4]: https://docs.datadoghq.com/fr/help/

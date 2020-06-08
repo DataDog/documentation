@@ -51,7 +51,7 @@ custom_metrics:
   object_name: SQLServer:Plan Cache
 ```
 
-複数のインスタンスを持つカウンターのすべてのインスタンスを収集するには、`tag_by` パラメーターの値を**必要とする** `instance_name` パラメーターに特別な値 `ALL` を使用します。この例では、`db:mydb1`、`db:mydb2` とタグ付けされたメトリクスを取得します。
+複数のインスタンスを持つカウンターのすべてのインスタンスを収集するには、`tag_by` パラメーターの値を**必要とする** `instance_name` パラメーターに、大文字小文字を区別する特別な値 `ALL` を使用します。この例では、`db:mydb1`、`db:mydb2` とタグ付けされたメトリクスを取得します。
 
 ```yaml
 - name: sqlserver.db.commit_table_entries
@@ -194,7 +194,7 @@ GO
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/sqlserver
+[1]: /ja/integrations/sqlserver/
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
 [3]: /ja/developers/metrics/#metric-types
-[4]: /ja/developers/metrics/histograms
+[4]: /ja/developers/metrics/histograms/

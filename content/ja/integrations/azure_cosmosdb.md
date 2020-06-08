@@ -1,8 +1,8 @@
 ---
 categories:
-  - クラウド
+  - cloud
   - azure
-ddtype: クローラー
+ddtype: crawler
 dependencies: []
 description: Azure Cosmos DB のキーメトリクスを追跡
 doc_link: 'https://docs.datadoghq.com/integrations/azure_cosmosdb/'
@@ -11,11 +11,11 @@ has_logo: true
 integration_title: Microsoft Azure Cosmos DB
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_cosmosdb
 public_title: Datadog-Microsoft Azure Cosmos DB インテグレーション
 short_description: Azure Cosmos DB のキーメトリクスを追跡
-version: 1
+version: '1.0'
 ---
 ## 概要
 

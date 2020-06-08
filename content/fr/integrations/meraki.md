@@ -12,11 +12,11 @@ has_logo: true
 integration_title: Meraki
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: meraki
 public_title: Intégration Datadog/Meraki
 short_description: Recueillez des logs d'événement de Meraki.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

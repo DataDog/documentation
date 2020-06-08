@@ -122,7 +122,8 @@
         "browser": true,
         "es6": true,
         "jquery": true,
-        "node": true
+        "node": true,
+        "jest": true
     },
     // Some globals that we still use in our "strict" code
     // False mean that they are read-only https://eslint.org/docs/user-guide/configuring#specifying-globals

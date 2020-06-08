@@ -43,19 +43,17 @@ Le check KyotoTycoon est inclus avec le paquet de l'[Agent Datadog][1] : vous n
 
 ### Configuration
 
-1. Modifiez le fichier `kyototycoon.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2].
-    Consultez le [fichier d'exemple kyototycoon.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
+1. Modifiez le fichier `kyototycoon.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple kyototycoon.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles :
 
-    ```yaml
-        init_config:
+   ```yaml
+   init_config:
 
-        instances:
-
-            ## @param report_url - string - required
-            ## The report URL should be a URL to the Kyoto Tycoon "report" RPC endpoint.
-            #
-          - report_url: http://localhost:1978/rpc/report
-    ```
+   instances:
+     ## @param report_url - string - required
+     ## The report URL should be a URL to the Kyoto Tycoon "report" RPC endpoint.
+     #
+     - report_url: http://localhost:1978/rpc/report
+   ```
 
 2. [Redémarrez l'Agent][4].
 
@@ -64,11 +62,13 @@ Le check KyotoTycoon est inclus avec le paquet de l'[Agent Datadog][1] : vous n
 [Lancez la sous-commande `status` de l'Agent][5] et cherchez `kyototycoon` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "kyototycoon" >}}
 
 
 ### Événements
+
 Le check Kyoto Tycoon n'inclut aucun événement.
 
 ### Checks de service
@@ -78,6 +78,7 @@ Le check Kyoto Tycoon n'inclut aucun événement.
 Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à Kyoto Tycoon pour recueillir des métriques. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 
 [1]: https://app.datadoghq.com/account/settings#agent
@@ -86,4 +87,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][7].
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/metadata.csv
-[7]: https://docs.datadoghq.com/fr/help
+[7]: https://docs.datadoghq.com/fr/help/

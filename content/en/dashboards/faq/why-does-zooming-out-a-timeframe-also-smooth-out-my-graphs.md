@@ -5,7 +5,7 @@ further_reading:
 - link: "/developers/metrics/types/"
   tag: "Documentation"
   text: "Discover Datadog metrics types"
-- link: "/functions/rollup/"
+- link: "/dashboards/functions/rollup/"
   tag: "Documentation"
   text: "Learn more about the rollup function"
 aliases:
@@ -28,4 +28,4 @@ You can manually append the `.rollup()` function to your query to adjust the met
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/metrics/type_modifiers
+[1]: /developers/metrics/type_modifiers/

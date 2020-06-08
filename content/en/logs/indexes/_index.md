@@ -5,13 +5,13 @@ description: Control the volume of logs indexed by Datadog
 aliases:
   - /logs/dynamic_volume_control
 further_reading:
-- link: "logs/explorer/analytics"
+- link: "/logs/explorer/analytics/"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
@@ -19,22 +19,32 @@ further_reading:
   text: "Logging without Limits*"
 ---
 
-Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
+Log Indexes provide fine-grained control over your Log Management budget by allowing you to segment data into value groups for differing retention, quotas, usage monitoring, and billing. Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
 
 {{< img src="logs/indexes/index_details.png" alt="index details"  style="width:70%;">}}
 
 You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][4], [dashboarding][5], and [monitoring][6].
 
-## Indexes
+## Multiple indexes
 
-By default, Log Explorer have one unique Log Index, but datadog also offers multiple indexes if you require:
+By default, each account has a single index representing a monolithic set of all your logs. Datadog also offers multiple indexes if you require:
 
-* Multiple retention periods and/or multiple [daily quotas](#set-daily-quota), for finer budget control.
-* Multiple permissions, for finer user [role based access controls (RBAC)][7].
+* Multiple [retention periods](#update-log-retention) 
+* Multiple [daily quotas](#set-daily-quota), for finer budget control.
+
+The Log Explorer supports [queries across multiple indexes][7].
 
 <div class="alert alert-info">
-The multi-index feature is in private beta, <a href="/help">contact Datadog support</a> to turn it on for your account.
+<a href="/help">contact Datadog support</a> to enable multiple-indexes for your account.
 </div>
+
+### Add Indexes
+
+If multiple indexes is activated, use the "New Index" button to create a new index.
+
+{{< img src="logs/indexes/add-index.png" alt="Add index"  style="width:70%;">}}
+
+**Note**: Index names must start with a letter and can only contain lowercase letters, numbers, or the '-' character.
 
 ## Indexes Filters
 
@@ -88,10 +98,17 @@ Set up an exclusion filter applied to logs from your instrumented service (`serv
 
 {{< img src="logs/indexes/sample_trace_id.png" alt="enable index filters"  style="width:80%;">}}
 
+## Update log retention
+
+The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
+To add retentions that are not in your current contract contact [Datadog support][17].
+
+{{< img src="logs/indexes/log_retention.png" alt="index details"  style="width:70%;">}}
+
 ## Set daily quota
 
 You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e. after exclusion filters are applied).
-Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][17], [sent to your archives][18], and used to [generate metrics from logs][19].
+Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][9], and used to [generate metrics from logs][10].
 
 Update or remove this quota at any time when editing the Index:
 
@@ -105,22 +122,21 @@ Update or remove this quota at any time when editing the Index:
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /pipelines/indexes
-[2]: /logs/explorer/?tab=facets#visualization
-[3]: /logs/explorer/patterns
-[4]: /logs/explorer/analytics
+[1]: /logs/indexes/
+[2]: /logs/explorer/#visualization
+[3]: /logs/explorer/patterns/
+[4]: /logs/explorer/analytics/
 [5]: /logs/explorer/analytics/#dashboard
-[6]: /monitors/monitor_types/log
-[7]: /account_management/rbac
-[8]: /logs/live_tail
-[9]: /logs/archives
-[10]: /logs/logs_to_metrics
-[11]: /logs/explorer/search/
-[12]: /api/?lang=bash#update-an-index
+[6]: /monitors/monitor_types/log/
+[7]: /logs/explorer/facets/#the-index-facet
+[8]: /logs/live_tail/
+[9]: /logs/archives/
+[10]: /logs/logs_to_metrics/
+[11]: /logs/search_syntax/
+[12]: /api/v1/logs-indexes/#update-an-index
 [13]: /logs/processing/processors/?tab=ui#user-agent-parser
 [14]: /logs/processing/processors/?tab=ui#geoip-parser
 [15]: /tracing/connect_logs_and_traces/
 [16]: /logs/processing/processors/?tab=ui#trace-remapper
-[17]: https://docs.datadoghq.com/logs/live_tail/#overview
-[18]: https://docs.datadoghq.com/logs/archives/
-[19]: https://docs.datadoghq.com/logs/logs_to_metrics/
+[17]: /help/
+[18]: /logs/live_tail/#overview

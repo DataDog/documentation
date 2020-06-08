@@ -11,13 +11,13 @@ aliases:
   - /fr/graphing/
 description: Visualiser vos données pour mieux les comprendre
 further_reading:
-  - link: /dashboards/template_variables
+  - link: /dashboards/template_variables/
     tag: Documentation
     text: Améliorer vos dashboards avec les template variables
-  - link: /dashboards/sharing
+  - link: /dashboards/sharing/
     tag: Documentation
     text: Partager vos graphiques en dehors de Datadog
-  - link: /dashboards/widgets
+  - link: /dashboards/widgets/
     tag: Documentation
     text: Découvrir tous les widgets disponibles pour votre dashboard
 ---
@@ -61,13 +61,13 @@ Les listes prédéfinies correspondent à des listes de dashboards par défaut d
 | Created By You           | Rassemble les dashboards créés par l'utilisateur actuellement connecté.                |
 | Frequently Viewed By You | Rassemble tous les dashboards consultés régulièrement par l'utilisateur actuellement connecté.         |
 
-#### Listes de tableaux de bord partagés et modifiables
+#### Listes de dashboards partagés et modifiables
 
 Cette section affiche les listes de dashboards partagés et modifiables, ainsi que le nombre de dashboards dans chaque liste.
 
-### Tous les tableaux de bord
+### Tous les dashboards
 
-Tous les tableaux de bord répertoriés peuvent être triés à l'aide des en-têtes de colonne *Star*, *Name*, *Modified* et *Popularity*. Toutes les colonnes et leur description sont répertoriées ci-dessous :
+Tous les dashboards répertoriés peuvent être triés à l'aide des en-têtes de colonne *Star*, *Name*, *Modified* et *Popularity*. Toutes les colonnes et leur description sont répertoriées ci-dessous :
 
 | Colonne     | Description                                                                              |
 |------------|------------------------------------------------------------------------------------------|
@@ -75,7 +75,7 @@ Tous les tableaux de bord répertoriés peuvent être triés à l'aide des en-t�
 | Icon       | Une icône indiquant le type de dashboard (timeboard ou screenboard).                     |
 | Nom       | Le nom du dashboard personnalisé ou prédéfini.                                              |
 | Modified   | La date de dernière modification d'un dashboard personnalisé.                                            |
-| Popularity | La [popularité](#popularité) relative du tableau de bord au sein de votre organisation.           |
+| Popularity | La [popularité](#popularité) relative du dashboard au sein de votre organisation.           |
 | Creator    | L'icône de profil du créateur du dashboard. Les dashboards prédéfinis possèdent le logo de l'intégration. |
 
 #### Popularity
@@ -102,7 +102,7 @@ Datadog propose deux types de dashboards différents : les [screenboards][4] et
 
 ### Copier, importer et exporter
 
-Depuis un tableau de bord, vous pouvez copier, importer ou exporter son fichier JSON à l’aide de l’icône en forme d’engrenage (en haut à droite), qui affiche les options suivantes :
+Depuis un dashboard, vous pouvez copier, importer ou exporter son fichier JSON à l’aide de l’icône en forme d’engrenage (en haut à droite), qui affiche les options suivantes :
 
 | Option                          | Description                                                                                                                                                                |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -123,6 +123,6 @@ Depuis un dashboard, Datadog vous propose des suggestions de dashboards pertinen
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
-[2]: /fr/help
-[3]: /fr/dashboards/timeboard
-[4]: /fr/dashboards/screenboard
+[2]: /fr/help/
+[3]: /fr/dashboards/timeboard/
+[4]: /fr/dashboards/screenboard/

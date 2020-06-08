@@ -7,10 +7,10 @@ aliases:
   - /developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /developers/faq/dog-statsd-sample-rate-parameter-explained
 further_reading:
-- link: "developers/dogstatsd"
+- link: "/developers/dogstatsd/"
   tag: "Documentation"
   text: "Introduction to DogStatsD"
-- link: "developers/metrics/types"
+- link: "/developers/metrics/types/"
   tag: "Documentation"
   text: "Datadog Metric Types"
 ---
@@ -122,7 +122,7 @@ func main() {
 Run the following Java code to submit a DogStatsD `COUNT` metric to Datadog:
 
 {{< code-block lang="java" filename="count_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -130,7 +130,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev"});
             Statsd.decrementCounter("example_metric.decrement", new String[]{"environment:dev"});
@@ -160,16 +164,18 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev"});
-            DogStatsd.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
-            DogStatsd.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(random.Next(100000));
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
+                dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
+                dogStatsdService.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(random.Next(100000));
+            }
         }
     }
 }
@@ -299,7 +305,7 @@ func main() {
 Run the following Java code to submit a DogStatsD `GAUGE` metric to Datadog:
 
 {{< code-block lang="java" filename="gauge_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -307,7 +313,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
@@ -335,14 +345,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(100000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(100000);
+            }
         }
     }
 }
@@ -389,7 +401,7 @@ After running the code above, your metric data is available to graph in Datadog:
 
 #### Code examples
 
-Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `SET` type in the [metric types][6] documentation.
+Emit a `SET` metric-stored as a `GAUGE` metric-to Datadog.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -482,14 +494,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Set("example_metric.set", i, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(random.Next(100000));
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Set("example_metric.set", i, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(random.Next(100000));
+            }
         }
     }
 }
@@ -533,16 +547,16 @@ After running the code above, your metrics data is available to graph in Datadog
 
 | Method                                                            | Datadog Storage type                                                                                                                                              |
 |-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][7] documentation to learn more. |
+| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more. |
 
 #### Configuration
 
-* Configure the aggregation to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][8]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent.
-* Configure the percentile aggregation to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][8]. By default, only `95pc` percentile is sent.
+* Configure the aggregation to send to Datadog with the `histogram_aggregates` parameter in your [datadog.yaml configuration file][7]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent.
+* Configure the percentile aggregation to send to Datadog with the `histogram_percentiles` parameter in your [datadog.yaml configuration file][7]. By default, only `95pc` percentile is sent.
 
 #### Code examples
 
-The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][7] documentation.
+The `HISTOGRAM` metric type is specific to DogStatsD. Emit a `HISTOGRAM` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -617,7 +631,7 @@ func main() {
 Run the following Java code to submit a DogStatsD `HISTOGRAM` metric to Datadog:
 
 {{< code-block lang="java" filename="histogram_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -625,7 +639,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
@@ -653,14 +671,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(2000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(2000);
+            }
         }
     }
 }
@@ -713,7 +733,7 @@ After running the code above, your metrics data is available to graph in Datadog
 
 | Method                                                        | Datadog Storage type                                                                                                                                              |
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend of the metric. See the [HISTOGRAM metric type][7] documentation to learn more. |
+| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | Since multiple metrics are submitted, metric types stored (`GAUGE`, `RATE`) depend on the metric. See the [HISTOGRAM metric type][6] documentation to learn more. |
 
 ##### Configuration
 
@@ -721,7 +741,7 @@ For a `TIMER`, the `HISTOGRAM` [configuration](#configuration) rules apply.
 
 ##### Code examples
 
-Emit a `TIMER` metric-stored as a `GAUGE` and `RATE` metric-to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][7] documentation.
+Emit a `TIMER` metric—stored as a `GAUGE` and `RATE` metric—to Datadog. Learn more about the `HISTOGRAM` type in the [metric types][6] documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -817,11 +837,11 @@ DogStatsD treats `TIMER` as a `HISTOGRAM` metric. Whether you use the `TIMER` or
 
 | Method                                                | Datadog Storage type                                                                                         |
 |-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][9] to learn more. |
+| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Stored as a `DISTRIBUTION` type in Datadog. See the dedicated [Distribution documentation][8] to learn more. |
 
 #### Code examples
 
-The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][10] documentation.
+The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` metric-stored as a `DISTRIBUTION` metric-to Datadog. Learn more about the `DISTRIBUTION` type in the [metric types][9] documentation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -896,7 +916,7 @@ func main() {
 Run the following Java code to submit a DogStatsD `DISTRIBUTION` metric to Datadog:
 
 {{< code-block lang="java" filename="distribution_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -904,7 +924,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
@@ -932,14 +956,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(2000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(2000);
+            }
         }
     }
 }
@@ -1027,7 +1053,7 @@ Statsd.incrementCounter("example_metric.increment", sampleRate=0.5);
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("example_metric.increment", sampleRate: 0.5);
+dogStatsdService.Increment("example_metric.increment", sampleRate: 0.5);
 ```
 
 {{% /tab %}}
@@ -1081,7 +1107,7 @@ Statsd.incrementCounter("example_metric.increment", new String[]{"environment:de
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
+dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
 ```
 
 {{% /tab %}}
@@ -1112,13 +1138,12 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
-[2]: /developers/metrics/types/?tab=count#metric-type-definition
+[1]: /developers/dogstatsd/
+[2]: /developers/metrics/types/?tab=count#definition
 [3]: /dashboards/functions/arithmetic/#cumulative-sum
 [4]: /dashboards/functions/arithmetic/#integral
-[5]: /developers/metrics/types/?tab=gauge#metric-type-definition
-[6]: /developers/metrics/types/?tab=set#metric-type-definition
-[7]: /developers/metrics/types/?tab=histogram#metric-type-definition
-[8]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[9]: /metrics/distributions
-[10]: /developers/metrics/types/?tab=distribution#metric-type-definition
+[5]: /developers/metrics/types/?tab=gauge#definition
+[6]: /developers/metrics/types/?tab=histogram#definition
+[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[8]: /metrics/distributions/
+[9]: /developers/metrics/types/?tab=distribution#definition

@@ -16,10 +16,10 @@ Cet article explique comment utiliser [Postman][1] pour effectuer des appels d'A
 
 Vous avez :
 
-* Une implémentation Datadog active.
-* Accès à vos [clés d'API et d'application][2] Datadog.
-* Le [client API Postman installé][1].
-* Une connaissance de base de la structure d'API et du formatage JSON.
+- Une implémentation Datadog active.
+- Accès à vos [clés d'API et d'application][2] Datadog.
+- Le [client API Postman installé][1].
+- Une connaissance de base de la structure d'API et du formatage JSON.
 
 ## Implémentation
 
@@ -28,12 +28,12 @@ Vous avez :
 Une fois les prérequis établis :
 
 1. Téléchargez la [collection Postman Datadog][3] (modèles d'appel d'API préconfigurés).
-    Dans Postman, une collection est un répertoire d'appels d'API organisés pour faciliter leur modification, enregistrement et réutilisation.
+   Dans Postman, une collection est un répertoire d'appels d'API organisés pour faciliter leur modification, leur enregistrement et leur réutilisation.
 
 2. Importez la collection Postman Datadog :
-    * Ouvrez Postman
-    * Cliquez sur **Import**
-    * Sélectionnez le fichier [datadog_collection.json][3] téléchargé à l'étape 1.
+    - Ouvrez Postman
+    - Cliquez sur **Import**
+    - Sélectionnez le fichier [datadog_collection.json][3] téléchargé à l'étape 1.
 
 Vous disposez maintenant d'une collection Datadog contenant de nombreux exemples différents d'API.
 
@@ -92,12 +92,12 @@ Cet onglet remplace l'affichage de la structure `param1:value1&param2:value2` de
 
 **Remarques :**
 
-* L'esperluette (&) et les deux-points (:) ne sont pas nécessaires dans le tableau de paramètres. Postman les ajoute pour vous.
-* Tous les placeholders respectent le format : `<PLACEHOLDER>` . Ils doivent être remplacés avant de lancer une requête.
+- L'esperluette (&) et les deux-points (:) ne sont pas nécessaires dans le tableau de paramètres. Postman les ajoute pour vous.
+- Tous les placeholders respectent le format : `<PLACEHOLDER>` . Ils doivent être remplacés avant de lancer une requête.
 
 [1]: https://www.getpostman.com
 [2]: https://app.datadoghq.com/account/settings#api
 [3]: /resources/json/datadog_collection.json
-[4]: https://www.getpostman.com/docs/v6/postman/environments_and_globals/manage_environments
-[5]: /fr/api/#organizations
-[6]: /fr/api
+[4]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[5]: /fr/api/v1/organizations/
+[6]: /fr/api/

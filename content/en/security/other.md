@@ -25,7 +25,7 @@ Additionally, the following keywords are obfuscated as a baseline:
 
 ## Cloud Integrations Security
 
-Datadog enables customers to integrate with 3rd-party services. Some of Datadog's [350+ built-in integrations][4] are configured directly in the Datadog application, and might require customers to provide credentials that allow Datadog to connect to the 3rd-party service on their behalf. Credentials provided by customers are encrypted and stored by Datadog in a secure credential datastore, with strict security guarantees enforced. All data is encrypted at-rest and in-transit. Access to the secure credential datastore is tightly controlled and highly audited, and specific services or actions within those services are limited to only what is necessary.
+Datadog enables customers to integrate with 3rd-party services. Some of Datadog's [400+ built-in integrations][4] are configured directly in the Datadog application, and might require customers to provide credentials that allow Datadog to connect to the 3rd-party service on their behalf. Credentials provided by customers are encrypted and stored by Datadog in a secure credential datastore, with strict security guarantees enforced. All data is encrypted at-rest and in-transit. Access to the secure credential datastore is tightly controlled and highly audited, and specific services or actions within those services are limited to only what is necessary.
 Anomalous behavior detection continuously monitors for unauthorized access. Employee access for maintenance purposes is limited to a select subset of engineers.
 
 Due to their sensitive nature, additional security guarantees are implemented where possible when integrating with cloud providers, including relying on Datadog-dedicated credentials with limited permissions. For example:
@@ -38,11 +38,11 @@ Due to their sensitive nature, additional security guarantees are implemented wh
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security
-[2]: /infrastructure/process
+[1]: /security/
+[2]: /infrastructure/process/
 [3]: /infrastructure/process/#process-arguments-scrubbing
-[4]: /integrations
-[5]: /integrations/amazon_web_services
+[4]: /integrations/
+[5]: /integrations/amazon_web_services/
 [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
-[7]: /integrations/azure
-[8]: /integrations/google_cloud_platform
+[7]: /integrations/azure/
+[8]: /integrations/google_cloud_platform/

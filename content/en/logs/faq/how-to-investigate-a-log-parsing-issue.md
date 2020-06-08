@@ -2,13 +2,13 @@
 title: How to investigate a log parsing issue
 kind: faq
 further_reading:
-- link: "logs/faq/log-parsing-best-practice"
+- link: "/logs/faq/log-parsing-best-practice/"
   tag: "FAQ"
   text: "Log Parsing - Best Practice"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
 ---
@@ -85,7 +85,7 @@ Before you go ahead and troubleshoot your parser, it might be interesting for yo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing
-[2]: /logs/processing/parsing
-[3]: /logs/faq/log-parsing-best-practice
-[4]: /help
+[1]: /logs/processing/
+[2]: /logs/processing/parsing/
+[3]: /logs/faq/log-parsing-best-practice/
+[4]: /help/

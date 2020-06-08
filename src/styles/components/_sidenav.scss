@@ -1,17 +1,14 @@
 $ddpurple:    #632CA6;
 
-body > header.scrolled ~ .container aside.sidenav .sticky {
+body > header.scrolled ~ .container .sidenav .sticky {
   top:66px;
 }
 
-.announcement_banner.open ~ header.scrolled ~ .container aside.sidenav .sticky,
-.announcement_banner.open ~ header.scrolled ~ .container-fluid aside.sidenav-api .sticky {
+.announcement_banner.open ~ header.scrolled ~ .container .sidenav .sticky,
+.announcement_banner.open ~ header.scrolled ~ .container .sidenav-api .sticky {
   top:96px;
 }
 
-.mobilequicknav {
-  display:none;
-}
 
 .side {
   &:before,
@@ -28,16 +25,14 @@ body > header.scrolled ~ .container aside.sidenav .sticky {
     height:100%;
   }
   &:after {
-    background:#F2F2F2;
+    // background:#F2F2F2;
     height:50px;
   }
 }
 
-aside.sidenav {
+.sidenav {
   background:#F8F8F8;
   width:100%;
-  //height:100%;
-  //min-height:1000px;
   position:relative;
   z-index:2;
   padding-right:15px;
@@ -63,17 +58,23 @@ aside.sidenav {
       z-index:-1;
     }
     &:after {
-      background:#F2F2F2;
+      // background:#F2F2F2;
       height:50px;
     }
   }
 
   h4 {
-    padding:10px 0 10px 15px;
+    padding: 0 0 10px 10px;
     color:$ddpurple;
     font-size:24px;
     font-weight:200;
     text-transform: capitalize !important;
+
+    &:lang(ja) {
+      font-size: 20px;
+      font-weight: 200;
+      line-height: 37px;
+    }
   }
 
   .sidenav-search {
@@ -190,6 +191,16 @@ aside.sidenav {
           }
           img {
             margin-top:4px;
+            &:lang(ja) {
+              margin-top:0px;
+            }
+          }
+
+          &:lang(ja) {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 24px;
           }
         }
 
@@ -199,6 +210,12 @@ aside.sidenav {
             margin-left:5px;
             font-weight:200;
             line-height:24px;
+            &:lang(ja) {
+              font-style: normal;
+              font-weight: 300;
+              font-size: 14px;
+              line-height: 22px;
+            }
           }
 
           // 3rd level
@@ -206,6 +223,10 @@ aside.sidenav {
             margin-left:5px;
             font-size:15px;
             line-height:22px;
+            &:lang(ja) {
+              font-size: 11px;
+              line-height: 22px;
+            }
           }
         }
       }
@@ -213,11 +234,47 @@ aside.sidenav {
   }
 }
 
-aside.sidenav-api {
+.sidenav-api {
   .sidenav-nav {
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      appearance: none;
+      width: 7px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, .5);
+      box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    }
+
+    scrollbar-width: thin;
+    
     margin:0;
+    ul li.active{
+      > a {
+        background: transparent;
+              color: $ddpurple;
+              border-bottom: 1px solid transparent;
+      }
+      ul {
+        display: block;
+        li {
+          padding-left: 0;
+          &.active {
+            a {
+              background: transparent;
+              color: $ddpurple;
+              border-bottom: 1px solid transparent;
+              span {
+                border-bottom: 1px solid $ddpurple;
+              }
+            }
+          }
+          
+        }
+      }
+    } 
     ul li > ul {
       //display: block;
       list-style-type:none;
@@ -243,9 +300,7 @@ aside.sidenav-api {
   ul:first-of-type {
     margin-left: 3px;
   }
-  h4 {
-    padding-left: 10px;
-  }
+
   .toc_scrolled {
     background:transparent !important;
     color: $ddpurple !important;
@@ -263,7 +318,7 @@ aside.sidenav-api {
 //@include media-breakpoint-up(xs) { ... }
 @media (min-width: 576px) {
 
-  aside.sidenav {
+  .sidenav {
     ul {
       li {
         a {
@@ -288,7 +343,7 @@ aside.sidenav-api {
 }
 
 @media (max-width: 1199px) {
-  aside.sidenav {
+  .sidenav {
     ul {
       li {
         a {
@@ -300,7 +355,7 @@ aside.sidenav-api {
 }
 
 
-.fr aside.sidenav {
+.fr .sidenav {
   h4 {
     font-size:22px;
   }
@@ -308,7 +363,7 @@ aside.sidenav-api {
 
 @media (max-width: 1199px) {
   .fr {
-    aside.sidenav {
+    .sidenav {
       h4 {
         font-size:18px;
         padding-top: 15px;

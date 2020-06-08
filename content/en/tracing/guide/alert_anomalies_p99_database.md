@@ -2,7 +2,7 @@
 title: Alert on anomalous p99 latency of a database service
 kind: guide
 further_reading:
-- link: "tracing/guide/week_over_week_p50_comparison/"
+- link: "/tracing/guide/week_over_week_p50_comparison/"
   tag: "2 mins"
   text: "Compare a service’s latency to the previous week"
 - link: "/tracing/guide/slowest_request_daily/"
@@ -11,10 +11,10 @@ further_reading:
 - link: "/tracing/guide/apm_dashboard/"
   tag: "4 mins"
   text: "Create a Dashboard to track and correlate APM metrics"
-- link: "tracing/guide/add_span_md_and_graph_it/"
+- link: "/tracing/guide/add_span_md_and_graph_it/"
   tag: "7 mins"
   text: "Add span tags and slice and dice your application performance"
-- link: "tracing/guide/"
+- link: "/tracing/guide/"
   tag: ""
   text: "All guides"
 ---
@@ -77,12 +77,12 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/monitors/monitor_types/anomaly/
+[1]: /monitors/monitor_types/anomaly/
 [2]: https://app.datadoghq.com/monitors#/create
 [3]: https://app.datadoghq.com/monitors#create/apm
 [4]: /tracing/visualization/#resources
 [5]: /tracing/visualization/#services
-[6]: https://docs.datadoghq.com/monitors/monitor_types/anomaly/#faq
-[7]: https://docs.datadoghq.com/monitors/notifications/?tab=is_alertis_warning
+[6]: /monitors/monitor_types/anomaly/#faq
+[7]: /monitors/notifications/?tab=is_alertis_warning
 [8]: https://app.datadoghq.com/apm/services
 [9]: https://app.datadoghq.com/service/map

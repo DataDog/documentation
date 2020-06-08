@@ -435,7 +435,7 @@ Datadog Firehose Nozzle は、CounterEvent (イベントではなくメトリク
 [10]: https://cloudfoundry.datadoghq.com/datadog-cloudfoundry-buildpack/datadog-cloudfoundry-buildpack-latest.zip
 [11]: https://github.com/cf-platform-eng/meta-buildpack
 [12]: /ja/tracing/setup
-[13]: https://docs.datadoghq.com/ja/agent/logs/proxy
+[13]: /ja/agent/logs/proxy
 [14]: /ja/libraries
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install

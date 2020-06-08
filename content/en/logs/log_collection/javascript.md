@@ -7,10 +7,10 @@ further_reading:
 - link: "https://www.npmjs.com/package/@datadog/browser-logs"
   tag: "NPM"
   text: "@datadog/browser-logs NPM package"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 ---
@@ -28,15 +28,14 @@ With the `datadog-logs` library, you can send logs directly to Datadog from JS c
 
 ## Setup
 
-1. **Get a Datadog Client Token**: For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. For more information about setting up a client tolken, see the [client token documentation][2].
+1. **Get a Datadog Client Token**: For security reasons, [API keys][1] cannot be used to configure the `datadog-logs` library, as they would be exposed client-side in the JavaScript code. To collect logs from web browsers, a [client token][2] must be used. For more information about setting up a client token, see the [client token documentation][2].
 2. **Configure the Datadog browser log library** [through NPM](#npm-setup) or paste the [bundle](#bundle-setup) into the head tag directly.
 
 ### NPM setup
 
 After adding [`@datadog/browser-logs`][3] to your `package.json` file, initialize it with:
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
@@ -49,8 +48,8 @@ datadogLogs.init({
 });
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
@@ -63,15 +62,13 @@ datadogLogs.init({
 });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 ### Bundle setup
 
 In order to not miss any logs or errors, you should load and configure the library at the beginning of the head section of your pages.
 
-{{< tabs >}}
-{{% tab "US" %}}
+{{< site-region region="us" >}}
 
 ```html
 <html>
@@ -89,8 +86,8 @@ In order to not miss any logs or errors, you should load and configure the libra
 </html>
 ```
 
-{{% /tab %}}
-{{% tab "EU" %}}
+{{< /site-region >}}
+{{< site-region region="eu" >}}
 
 ```html
 <html>
@@ -108,8 +105,7 @@ In order to not miss any logs or errors, you should load and configure the libra
 </html>
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 **Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
 
@@ -119,8 +115,11 @@ The following parameters can be used to configure the Datadog browser log librar
 
 | Parameter             | Type    | Required | Default | Description                                                                                              |
 |-----------------------|---------|----------|---------|----------------------------------------------------------------------------------------------------------|
-| `clientToken`         | String  | Yes      | `-`     | A [Datadog Client Token][4].                                                                             |
+| `clientToken`         | String  | Yes      | `-`     | A [Datadog Client Token][2].                                                                             |
 | `datacenter`          | String  | Yes      | `us`    | The Datadog Site of your organization. `us` for Datadog US site, `eu` for Datadog EU site.               |
+| `service`            | String  | No       | `` | The service name for this application.                             |
+| `env`                | String  | No       | `` | The application’s environment e.g. prod, pre-prod, staging.                   |
+| `version`            | String  | No       | `` | The application’s version e.g. 1.2.3, 6c44da20, 2020.02.13.                   |
 | `forwardErrorsToLogs` | Boolean | no       | `true`  | Set to `false` to stop forwarding console.error logs, uncaught exceptions and network errors to Datadog. |
 | `sampleRate`          | Number  | no       | `100`   | Percentage of sessions to track. Only tracked sessions send logs. `100` for all, `0` for none of them.   |
 
@@ -301,7 +300,7 @@ datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setLoggerGlobalContext("{'env', 'staging'}");
+window.DD_LOGS && DD_LOGS.setLoggerGlobalContext({env: 'staging'});
 
 window.DD_LOGS && DD_LOGS.addLoggerGlobalContext('referrer', document.referrer);
 ```
@@ -345,7 +344,7 @@ window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer);
 
 ### Filter by status
 
-Once Datadog Browser log library is initialized, you can set the minimul log level for your logger with the API:
+Once Datadog Browser log library is initialized, you can set the minimal log level for your logger with the API:
 
 `setLevel (level?: 'debug' | 'info' | 'warn' | 'error')`
 
@@ -357,7 +356,7 @@ Only logs with a status equal to or higher than the specified level are sent.
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setLevel('<LEVEL>');
+datadogLogs.logger.setLevel('<LEVEL>');
 ```
 
 {{% /tab %}}
@@ -385,14 +384,14 @@ Once Datadog Browser log library is initialized, it is possible to configure the
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setHandler('<HANDLER>');
+datadogLogs.logger.setHandler('<HANDLER>');
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setHandler('<HANDLER>');
+window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>');
 ```
 
 **Note**: The `window.DD_LOGS` check is used to prevent issues if a loading failure occurs with the library.
@@ -408,7 +407,6 @@ The `datadog-logs` library supports all modern desktop and mobile browsers. IE10
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
+[1]: /account_management/api-app-keys/#api-keys
+[2]: /account_management/api-app-keys/#client-tokens
 [3]: https://www.npmjs.com/package/@datadog/browser-logs
-[4]: /account_management/api-app-keys/#client-tokens

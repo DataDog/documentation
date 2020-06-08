@@ -1,0 +1,59 @@
+# Maps security-monitoring rules to Integrations image files
+# rules are matched by `source` tag. if we have a `scope` and a `source` tag match, show the defined image
+#
+# In the template logic, scope will fallback to the source image if specific mapping is not defined
+#
+# If `append: true`, the scope or source should be appended to the defined image 
+# ex: for source and scope `cloudtrail`, the resulting image should be `amazon_cloudtail.png` 
+base_integrations_url: https://docs.datadoghq.com/integrations/
+image_map:
+  - source:
+      - kubernetes
+    image: kube_apiserver_metrics
+    append: false
+  - source:
+      - azure
+    image: azure.active_directory
+    append: false
+  - source:
+      - cloudtrail
+      - ec2
+      - ecs
+      - s3
+      - elb
+    image: amazon_
+    append: true
+  - source:
+      - gcp
+    image: google_cloud_platform
+    append: false
+  - source:
+      - aws
+      - amazon
+      - amazon-config
+    image: amazon_web_services
+    append: false
+  - source:
+      - guardduty
+    image: amazon_guardduty
+    append: false
+  - source:
+      - nginx-ingress-controller
+      - nginx
+    image: nginx
+    append: false
+  - source:
+      - eventbridge
+    image: amazon_event_bridge
+    append: false
+  - source:
+      - signal_sciences
+      - sigsci
+    image: sigsci_sm
+    link: sigsci
+    append: false
+  - source: 
+      - twistlock
+    image: twistlock_sm
+    link: twistlock
+    append: false

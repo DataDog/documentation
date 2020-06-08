@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.2.0",
+        "check": "marathon.can_connect",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト", "url"],
+        "name": "Can Connect",
+        "description": "API エンドポイントに接続できない、またはアプリケーションのインスタンスが動作していない場合に CRITICAL を、検出可能なアプリケーションがない場合に WARN を返します。収集した時点での応答ステータスに関する詳しい情報がチェックメッセージに記載されます。"
+    }
+]

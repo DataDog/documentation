@@ -5,10 +5,10 @@ aliases:
   - /fr/guides/livecontainers
   - /fr/graphing/infrastructure/livecontainers/
 further_reading:
-  - link: /infrastructure/hostmap
+  - link: /infrastructure/hostmap/
     tag: Graphiques
     text: Visualisez tous vos hosts sur un seul écran avec la hostmap
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Graphiques
     text: Découvrir ce qui se passe à tous les niveaux de votre système
 ---
@@ -89,7 +89,7 @@ volumes:
 
 * Par défaut, les logs sont indexés. Toutefois, vous pouvez configurer des [filtres d'exclusion][2] pour bénéficier d'un contrôle précis sur les index et les données Live Tail uniquement.
 
-[1]: /fr/agent/kubernetes/daemonset_setup
+[1]: /fr/agent/kubernetes/
 [2]: /fr/logs/indexes/#exclusion-filters
 {{% /tab %}}
 {{< /tabs >}}
@@ -195,8 +195,6 @@ Lorsque vous utilisez activement la page des conteneurs, les métriques sont rec
 
 ## Inclure ou exclure des conteneurs
 
-*Veuillez noter que l'utilisation des live containers n'est pas mesurée. L'inclusion ou l'exclusion de conteneurs n'a donc aucune incidence sur votre facturation.*
-
 Il est possible d'inclure et/ou d'exclure des conteneurs pour la collecte en temps réel :
 
 * Pour exclure des conteneurs, transmettez la variable d'environnement `DD_AC_EXCLUDE` ou ajoutez `ac_exclude:` dans le fichier de configuration principal `datadog.yaml`.
@@ -225,11 +223,11 @@ ac_include: ["name:frontend.*"]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
-[2]: /fr/integrations/docker_daemon
-[3]: /fr/integrations/kubernetes
-[4]: /fr/integrations/amazon_ecs
+[2]: /fr/integrations/docker_daemon/
+[3]: /fr/agent/kubernetes/
+[4]: /fr/integrations/amazon_ecs/
 [5]: /fr/agent/docker/#run-the-docker-agent
 [6]: /fr/agent/docker/log/?tab=hostinstallation#activate-log-integrations
-[7]: /fr/logs/live_tail
-[8]: /fr/tagging
+[7]: /fr/logs/live_tail/
+[8]: /fr/tagging/
 [9]: https://gist.github.com/hkaj/404385619e5908f16ea3134218648237

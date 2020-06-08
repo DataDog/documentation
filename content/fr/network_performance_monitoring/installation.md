@@ -17,12 +17,12 @@ La surveillance des performances réseau nécessite la [version 6.14+ de l'Agent
 
 Les plates-formes suivantes sont prises en charge :
 
-* Ubuntu 16.04+
-* Debian 9+
-* Fedora 26 et versions ultérieures
-* SUSE 15+
-* Amazon AMI 2016.03+
-* Amazon Linux 2
+- Ubuntu 16.04+
+- Debian 9+
+- Fedora 26 et versions ultérieures
+- SUSE 15+
+- Amazon AMI 2016.03+
+- Amazon Linux 2
 
 L'exigence de version pour le kernel Linux (4.4.0+) ne s'applique pas à [CentOS/RHEL 7.6+][2].
 
@@ -30,9 +30,9 @@ L'exigence de version pour le kernel Linux (4.4.0+) ne s'applique pas à [CentOS
 
 Les systèmes de provisionnement suivants sont pris en charge :
 
-* Daemonset/Helm 1.38.11+ : voir le [chart Helm Datadog][3]
-* Chef 12.7+ : voir la [recette Chef pour Datadog][4]
-* Ansible 2.6+ : voir le [rôle Ansible pour Datadog][5]
+- Daemonset/Helm 1.38.11+ : voir le [chart Helm Datadog][3]
+- Chef 12.7+ : voir la [recette Chef pour Datadog][4]
+- Ansible 2.6+ : voir le [rôle Ansible pour Datadog][5]
 
 ## Implémentation
 
@@ -46,22 +46,14 @@ Pour activer la surveillance des performances réseau avec l'Agent Datadog, util
 1. Si vous utilisez une version de l'Agent antérieure à la v6.14, activez d'abord la [collecte de live processes][1]. Si ce n'est pas le cas, passez à l'étape suivante.
 
 2. Copiez l'exemple de configuration system-probe :
-    ```
+
+    ```shell
     sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
-3. Modifiez le fichier de configuration system-probe pour définir le flag d'activation sur `true`.<br>
+3. Modifiez `/etc/datadog-agent/system-probe.yaml` en définissant le flag enable sur `true` :
 
-4. Si vous le souhaitez, supprimez la mise en commentaire du paramètre `system_probe_config` pour ajouter un objet custom :
-    ```
-    ## @param system_probe_config - custom object - optional
-    ## (...)
-    #
-    system_probe_config:
-    ```
-
-5. Entrez vos paramètres de configuration spécifiques pour la collecte de vos données System Probe :
-    ```
+    ```yaml
     system_probe_config:
         ## @param enabled - boolean - optional - default: false
         ## Set to true to enable the System Probe.
@@ -69,11 +61,23 @@ Pour activer la surveillance des performances réseau avec l'Agent Datadog, util
         enabled: true
     ```
 
-6. Démarrez le system-probe : `sudo service datadog-agent-sysprobe start`.
-**Remarque** : si le wrapper de service n'est pas disponible sur votre système, exécutez plutôt la commande suivante : `sudo initctl start datadog-agent-sysprobe`.
+4. Si vous exécutez un Agent antérieur à la version 6.18 ou 7.18, démarrez manuellement le system-probe et configurez-le de façon à ce qu'il se lance au démarrage. Pour les versions 6.18 et 7.18 , le system-probe se lance automatiquement en même temps que l'Agent :
 
-7. [[Redémarrez l'Agent][2] :]: `sudo service datadog-agent restart`
-8. Configurez le system-probe afin qu'il se lance au démarrage : `sudo service enable datadog-agent-sysprobe`.
+    ```shell
+    sudo systemctl start datadog-agent-sysprobe 
+    sudo systemctl enable datadog-agent-sysprobe
+    ```
+
+    **Remarque** : si vous ne pouvez pas utiliser la commande `systemctl` sur votre système, effectuez le démarrage à l'aide de la commande suivante : `sudo service datadog-agent-sysprobe start`. Configurez ensuite le system-probe de façon à ce qu'il se lance au démarrage, avant le démarrage de `datadog-agent`.
+
+5. [Redémarrez l'Agent][2].
+
+    ```shell
+    sudo systemctl restart datadog-agent
+    ```
+
+    **Remarque** : si vous ne pouvez pas utiliser la commande `systemctl` sur votre système, exécutez la commande suivante : `sudo service datadog-agent restart`.
+
 
 [1]: /fr/infrastructure/process/?tab=linuxwindows#installation
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
@@ -83,97 +87,139 @@ Pour activer la surveillance des performances réseau avec l'Agent Datadog, util
 Pour activer la surveillance des performances réseau avec Kubernetes, utilisez la configuration suivante :
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: datadog-agent
-  namespace: default
+    name: datadog-agent
+    namespace: default
 spec:
-  template:
-    metadata:
-      labels:
-        app: datadog-agent
-      name: datadog-agent
-      annotations:
-        container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
-    spec:
-      serviceAccountName: datadog-agent
-      containers:
-      - image: datadog/agent:latest
-        imagePullPolicy: Always
-        name: datadog-agent
-        ports:
-          - {containerPort: 8125, name: dogstatsdport, protocol: UDP}
-          - {containerPort: 8126, name: traceport, protocol: TCP}
-        env:
-          - {name: DD_API_KEY, value: <CLÉ_API_DATADOG>}
-          - {name: KUBERNETES, value: "true"}
-          - {name: DD_HEALTH_PORT, value: "5555"}
-          - {name: DD_PROCESS_AGENT_ENABLED, value: "true"}
-          - {name: DD_SYSTEM_PROBE_ENABLED, value: "true"}
-          # DD_SYSTEM_PROBE_EXTERNAL est défini sur true pour éviter de démarrer le system probe
-          # dans le conteneur principal de l'Agent Datadog lorsque le system probe s'exécute dans un
-          # conteneur dédié (configuration recommandée).
-          - {name: DD_SYSTEM_PROBE_EXTERNAL, value: "true"}
-          - {name: DD_SYSPROBE_SOCKET, value: "/var/run/s6/sysprobe.sock"}
-          - name: DD_KUBERNETES_KUBELET_HOST
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "200m"
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
-        volumeMounts:
-          - {name: dockersocket, mountPath: /var/run/docker.sock}
-          - {name: procdir, mountPath: /host/proc, readOnly: true}
-          - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
-          - {name: debugfs, mountPath: /sys/kernel/debug}
-          - {name: s6-run, mountPath: /var/run/s6}
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 5555
-          initialDelaySeconds: 15
-          periodSeconds: 15
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
-      - name: system-probe
-        image: datadog/agent:latest
-        imagePullPolicy: Always
-        securityContext:
-          capabilities:
-            add: ["SYS_ADMIN", "SYS_RESOURCE", "SYS_PTRACE", "NET_ADMIN"]
-        command:
-          - /opt/datadog-agent/embedded/bin/system-probe
-        env:
-          - {name: DD_SYSTEM_PROBE_ENABLED, value: "true"}
-          - {name: DD_SYSPROBE_SOCKET, value: "/var/run/s6/sysprobe.sock"}
-        resources:
-          requests:
-            memory: "150Mi"
-            cpu: "200m"
-          limits:
-            memory: "150Mi"
-            cpu: "200m"
-        volumeMounts:
-          - {name: procdir, mountPath: /host/proc, readOnly: true}
-          - {name: cgroups, mountPath: /host/sys/fs/cgroup, readOnly: true}
-          - {name: debugfs, mountPath: /sys/kernel/debug}
-          - {name: s6-run, mountPath: /var/run/s6}
-      volumes:
-        - {name: dockersocket, hostPath: {path: /var/run/docker.sock}}
-        - {name: procdir, hostPath: {path: /proc}}
-        - {name: cgroups, hostPath: {path: /sys/fs/cgroup}}
-        - {name: s6-run, emptyDir: {}}
-        - {name: debugfs, hostPath: {path: /sys/kernel/debug}}
+    template:
+        metadata:
+            labels:
+                app: datadog-agent
+            name: datadog-agent
+            annotations:
+                container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
+        spec:
+            serviceAccountName: datadog-agent
+            containers:
+                - image: 'datadog/agent:latest'
+                  imagePullPolicy: Always
+                  name: datadog-agent
+                  ports:
+                      - containerPort: 8125
+                        name: dogstatsdport
+                        protocol: UDP
+                      - containerPort: 8126
+                        name: traceport
+                        protocol: TCP
+                  env:
+                      - name: DD_API_KEY
+                        value: '<CLÉ_API_DATADOG>'
+                      - name: KUBERNETES
+                        value: 'true'
+                      - name: DD_HEALTH_PORT
+                        value: '5555'
+                      - name: DD_PROCESS_AGENT_ENABLED
+                        value: 'true'
+                      - name: DD_SYSTEM_PROBE_ENABLED
+                        value: 'true'
+                      - name: DD_SYSTEM_PROBE_EXTERNAL
+                        value: 'true'
+                      - name: DD_SYSPROBE_SOCKET
+                        value: /var/run/s6/sysprobe.sock
+                      - name: DD_KUBERNETES_KUBELET_HOST
+                        valueFrom:
+                            fieldRef:
+                                fieldPath: status.hostIP
+                      - name: DD_CRI_SOCKET_PATH
+                        value: /host/var/run/docker.sock
+                      - name: DOCKER_HOST,
+                        value: unix:///host/var/run/docker.sock
+                  resources:
+                      requests:
+                          memory: 256Mi
+                          cpu: 200m
+                      limits:
+                          memory: 256Mi
+                          cpu: 200m
+                  volumeMounts:
+                      - name: dockersocketdir
+                        mountPath: /host/var/run
+                      - name: procdir
+                        mountPath: /host/proc
+                        readOnly: true
+                      - name: cgroups
+                        mountPath: /host/sys/fs/cgroup
+                        readOnly: true
+                      - name: debugfs
+                        mountPath: /sys/kernel/debug
+                      - name: s6-run
+                        mountPath: /var/run/s6
+                  livenessProbe:
+                      httpGet:
+                          path: /health
+                          port: 5555
+                      initialDelaySeconds: 15
+                      periodSeconds: 15
+                      timeoutSeconds: 5
+                      successThreshold: 1
+                      failureThreshold: 3
+                - name: system-probe
+                  image: 'datadog/agent:latest'
+                  imagePullPolicy: Always
+                  securityContext:
+                      capabilities:
+                          add:
+                              - SYS_ADMIN
+                              - SYS_RESOURCE
+                              - SYS_PTRACE
+                              - NET_ADMIN
+                              - IPC_LOCK
+                  command:
+                      - /opt/datadog-agent/embedded/bin/system-probe
+                  env:
+                      - name: DD_SYSTEM_PROBE_ENABLED
+                        value: 'true'
+                      - name: DD_SYSPROBE_SOCKET
+                        value: /var/run/s6/sysprobe.sock
+                  resources:
+                      requests:
+                          memory: 150Mi
+                          cpu: 200m
+                      limits:
+                          memory: 150Mi
+                          cpu: 200m
+                  volumeMounts:
+                      - name: procdir
+                        mountPath: /host/proc
+                        readOnly: true
+                      - name: cgroups
+                        mountPath: /host/sys/fs/cgroup
+                        readOnly: true
+                      - name: debugfs
+                        mountPath: /sys/kernel/debug
+                      - name: s6-run
+                        mountPath: /var/run/s6
+            volumes:
+                - name: dockersocketdir
+                  hostPath:
+                      path: /var/run
+                - name: procdir
+                  hostPath:
+                      path: /proc
+                - name: cgroups
+                  hostPath:
+                      path: /sys/fs/cgroup
+                - name: s6-run
+                  emptyDir: {}
+                - name: debugfs
+                  hostPath:
+                      path: /sys/kernel/debug
 ```
 
 Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
+
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -183,21 +229,22 @@ Pour activer la surveillance des performances réseau dans Docker, utilisez la c
 
 ```shell
 $ docker run -e DD_API_KEY="<CLÉ_API_DATADOG>" \
-    -e DD_SYSTEM_PROBE_ENABLED=true \
-    -e DD_PROCESS_AGENT_ENABLED=true \
-        -v /var/run/docker.sock:/var/run/docker.sock:ro \
-        -v /proc/:/host/proc/:ro \
-        -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-    -v /sys/kernel/debug:/sys/kernel/debug \
-    --security-opt apparmor:unconfined \
-    --cap-add=SYS_ADMIN \
-    --cap-add=SYS_RESOURCE \
-    --cap-add=SYS_PTRACE \
-    --cap-add=NET_ADMIN \
-    datadog/agent:latest
-  ```
+-e DD_SYSTEM_PROBE_ENABLED=true \
+-e DD_PROCESS_AGENT_ENABLED=true \
+      -v /var/run/docker.sock:/var/run/docker.sock:ro \
+      -v /proc/:/host/proc/:ro \
+      -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+-v /sys/kernel/debug:/sys/kernel/debug \
+--security-opt apparmor:unconfined \
+--cap-add=SYS_ADMIN \
+--cap-add=SYS_RESOURCE \
+--cap-add=SYS_PTRACE \
+--cap-add=NET_ADMIN \
+datadog/agent:latest
+```
 
 Remplacez `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
+
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}

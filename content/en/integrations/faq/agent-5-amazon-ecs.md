@@ -127,4 +127,4 @@ Datadog's [Autodiscovery][10] can be used in conjunction with ECS and Docker to 
 [7]: /integrations/amazon_web_services/#installation
 [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html
 [9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
-[10]: /agent/autodiscovery
+[10]: /agent/docker/integrations/

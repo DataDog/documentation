@@ -9,10 +9,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"
   text: "Introducing Datadog Synthetics"
-- link: "synthetics/"
+- link: "/synthetics/"
   tag: "Documentation"
   text: "Manage your checks"
-- link: "synthetics/browser_tests"
+- link: "/synthetics/browser_tests/"
   tag: "Documentation"
   text: "Configure a Browser Test"
 ---
@@ -41,10 +41,10 @@ Define the request you want to be executed by Datadog:
 2. Choose the **Method** and **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
     * Advanced Options (optional): Use custom request headers, authentication credentials, body content, or cookies.
         * Follow redirects: Toggle to have the monitored endpoint follow up to ten redirects.
-        * Allow insecure certificates: Toggle to have your HTTP test go on with connection even if there is an error when validating the certificate. 
+        * Allow insecure certificates: Toggle to have your HTTP test go on with connection even if there is an error when validating the certificate.
         * Headers: Defined headers override the default browser headers. For example, set the User Agent in the header to [identify Datadog scripts][1].
         * Authentication: HTTP basic authentication with username and password
-        * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`)
+        * Body: Request body and body type (`text/plain`, `application/json`, `text/xml`, `text/html`, or `None`). **Note**: The request body is limited to a maximum size of 50 kilobytes.
         * Cookies: Defined cookies are added to the default browser cookies. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
 3. **Name**: The name of your API test.
@@ -53,10 +53,10 @@ Define the request you want to be executed by Datadog:
 6. **How often should Datadog run the test?** Intervals are available between every one minute to once per week.
 7. Click on **Test URL** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
-[1]: /synthetics/identify_synthetics_bots
-[2]: /synthetics
-[3]: /api/?lang=bash#get-available-locations
-[4]: /synthetics/private_locations
+[1]: /synthetics/identify_synthetics_bots/
+[2]: /synthetics/
+[3]: /api/#get-available-locations
+[4]: /synthetics/private_locations/
 {{% /tab %}}
 
 {{% tab "SSL Test" %}}
@@ -71,9 +71,9 @@ Define the request you want to be executed by Datadog:
 6. **How often should Datadog run the test?** Intervals are available between every five minutes to once per week.
 7. Click on **Test Connection** to try out the request configuration. You should see a response preview show up on the right side of your screen.
 
-[1]: /synthetics
-[2]: /api/?lang=bash#get-available-locations
-[3]: /synthetics/private_locations
+[1]: /synthetics/
+[2]: /api/#get-available-locations
+[3]: /synthetics/private_locations/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -169,9 +169,19 @@ You can use the [global variables defined in the `Settings`][3] in the URL, Adva
 
 A notification is sent according to the set of alerting conditions. To configure notifications:
 
-1. Select users and/or [services][4] to send the notifications to. Note that you can use the [`@-notification` feature][5] in the **message** field.
-2. Enter a **message** for the API test. This field allows standard [Markdown formatting][6]. Notification messages include the **message** defined in this section and information about which assertion failed and why.
-3. Click **Save** to save your API test.
+1. Select users and/or [services][4] to receive notifications. **Note**: [`@-notifications`][5] are available in the **message** field, similar to monitors.
+2. Enter a **message** for the API test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
+
+    | Conditional Variable       | Description                                                         |
+    |----------------------------|---------------------------------------------------------------------|
+    | `{{#is_alert}}`            | Show when monitor alerts                                            |
+    | `{{^is_alert}}`            | Show unless monitor alerts                                          |
+    | `{{#is_recovery}}`         | Show when monitor recovers from either ALERT   |
+    | `{{^is_recovery}}`         | Show unless monitor recovers from either ALERT |
+
+    Notification messages include the **message** defined in this section and information about which assertion failed and why.
+3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
+4. Click **Save**.
 
 Notifications example:
 
@@ -195,9 +205,10 @@ Response time is the sum of these network timings.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/?lang=bash#get-available-locations
-[2]: /synthetics/api_tests/errors#ssl-errors
-[3]: /synthetics/settings#global-variables
+[1]: /api/#get-available-locations
+[2]: /synthetics/api_tests/errors/#ssl-errors
+[3]: /synthetics/settings/#global-variables
 [4]: /integrations/#cat-notification
 [5]: /monitors/notifications/#notification
 [6]: http://daringfireball.net/projects/markdown/syntax
+[7]: /monitors/notifications/?tab=is_recoveryis_alert_recovery#conditional-variables

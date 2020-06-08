@@ -4,16 +4,16 @@ kind: documentation
 aliases:
   - /tracing/advanced/adding_metadata_to_spans/
 further_reading:
-- link: "tracing/connect_logs_and_traces"
+- link: "/tracing/connect_logs_and_traces/"
   tags: "Enrich Tracing"
   text: "Connect your Logs and Traces together"
-- link: "tracing/manual_instrumentation"
+- link: "/tracing/manual_instrumentation/"
   tags: "Enrich Tracing"
   text: "Instrument manually your application to create traces."
-- link: "tracing/opentracing"
+- link: "/tracing/opentracing/"
   tags: "Enrich Tracing"
   text: "Implement Opentracing across your applications."
-- link: "tracing/visualization/"
+- link: "/tracing/visualization/"
   tag: "Use the APM UI"
   text: "Explore your services, resources, and traces"
 ---
@@ -252,7 +252,7 @@ Add [tags][1] to all [spans][2] by configuring the tracer with the system proper
 
 ```bash
 java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
-     -Ddd.trace.global.tags='env:dev,<TAG_KEY>:<TAG_VALUE>' \
+     -Ddd.trace.global.tags=env:dev,<TAG_KEY>:<TAG_VALUE> \
      -jar <YOUR_APPLICATION_PATH>.jar
 ```
 
@@ -376,4 +376,4 @@ Values are of [variable type][3] and can be complex objects. Values are serializ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/#span-tags
-[2]: /tagging
+[2]: /tagging/

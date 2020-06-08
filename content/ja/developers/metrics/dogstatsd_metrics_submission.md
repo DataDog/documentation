@@ -7,10 +7,10 @@ aliases:
   - /ja/developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /ja/developers/faq/dog-statsd-sample-rate-parameter-explained
 further_reading:
-  - link: developers/dogstatsd
+  - link: /developers/dogstatsd/
     tag: ドキュメント
     text: DogStatsD 入門
-  - link: developers/metrics/types
+  - link: /developers/metrics/types/
     tag: ドキュメント
     text: Datadog メトリクスタイプ
 ---
@@ -121,7 +121,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="count_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -129,7 +129,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev"});
             Statsd.decrementCounter("example_metric.decrement", new String[]{"environment:dev"});
@@ -159,16 +163,18 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev"});
-            DogStatsd.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
-            DogStatsd.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(random.Next(100000));
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
+                dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
+                dogStatsdService.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(random.Next(100000));
+            }
         }
     }
 }
@@ -298,7 +304,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="gauge_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -306,7 +312,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
@@ -334,14 +344,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(100000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(100000);
+            }
         }
     }
 }
@@ -388,7 +400,7 @@ while (TRUE) {
 
 #### コード例
 
-`GAUGE` メトリクスとして保存された `SET` メトリクスを Datadog に送信します。 `SET` タイプについては、[メトリクスのタイプ][6] に関するドキュメントを参照してください。
+`GAUGE` メトリクスとして保存された `SET` メトリクスを Datadog に送信します。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -481,14 +493,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Set("example_metric.set", i, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(random.Next(100000));
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Set("example_metric.set", i, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(random.Next(100000));
+            }
         }
     }
 }
@@ -532,16 +546,16 @@ while (TRUE) {
 
 | メソッド                                                            | Datadog 保存タイプ                                                                                                                                              |
 |-------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][7]に関するドキュメントを参照してください。 |
+| `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。 |
 
 #### コンフィグレーション
 
-* Datadog に送信する集計を、[datadog.yaml 構成ファイル][8]の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の各集計だけが送信されます。
-* Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][8]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、`95pc` のパーセンタイルだけが送信されます。
+* Datadog に送信する集計を、[datadog.yaml 構成ファイル][7]の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の各集計だけが送信されます。
+* Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][7]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、`95pc` のパーセンタイルだけが送信されます。
 
 #### コード例
 
-`HISTOGRAM` メトリクスタイプは DogStatsD だけのものです。`GAUGE` および `RATE` メトリクスとして保存された `HISTOGRAM` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][7]に関するドキュメントを参照してください。
+`HISTOGRAM` メトリクスタイプは DogStatsD だけのものです。`GAUGE` および `RATE` メトリクスとして保存された `HISTOGRAM` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6]に関するドキュメントを参照してください。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -616,7 +630,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="histogram_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -624,7 +638,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
@@ -652,14 +670,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(2000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(2000);
+            }
         }
     }
 }
@@ -712,7 +732,7 @@ DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタ
 
 | メソッド                                                        | Datadog ストレージタイプ                                                                                                                                              |
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][7]に関するドキュメントを参照してください。 |
+| `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)` | 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。 |
 
 ##### コンフィグレーション
 
@@ -720,7 +740,7 @@ DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタ
 
 ##### コード例
 
-`GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][7] に関するドキュメントを参照してください。
+`GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスのタイプ][6] に関するドキュメントを参照してください。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -816,11 +836,11 @@ DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使
 
 | メソッド                                                | Datadog 保存タイプ                                                                                         |
 |-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
-| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Datadog に `DISTRIBUTION` タイプとして保存されます。詳細は、[ディストリビューションドキュメント][9]を参照してください。 |
+| `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>)` | Datadog に `DISTRIBUTION` タイプとして保存されます。詳細は、[ディストリビューションドキュメント][8]を参照してください。 |
 
 #### コード例
 
-`DISTRIBUTION` メトリクスタイプは DogStatsD だけのものです。`DISTRIBUTION` メトリクスとして保存された `DISTRIBUTION` メトリクスを Datadog に送信します。 `DISTRIBUTION` タイプについては、[メトリクスのタイプ][10] に関するドキュメントを参照してください。
+`DISTRIBUTION` メトリクスタイプは DogStatsD だけのものです。`DISTRIBUTION` メトリクスとして保存された `DISTRIBUTION` メトリクスを Datadog に送信します。 `DISTRIBUTION` タイプについては、[メトリクスのタイプ][9] に関するドキュメントを参照してください。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -895,7 +915,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="distribution_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -903,7 +923,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
@@ -931,14 +955,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(2000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(2000);
+            }
         }
     }
 }
@@ -1026,7 +1052,7 @@ Statsd.incrementCounter("example_metric.increment", sampleRate=0.5);
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("example_metric.increment", sampleRate: 0.5);
+dogStatsdService.Increment("example_metric.increment", sampleRate: 0.5);
 ```
 
 {{% /tab %}}
@@ -1080,7 +1106,7 @@ Statsd.incrementCounter("example_metric.increment", new String[]{"environment:de
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
+dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
 ```
 
 {{% /tab %}}
@@ -1111,13 +1137,12 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/dogstatsd
-[2]: /ja/developers/metrics/types/?tab=count#metric-type-definition
+[1]: /ja/developers/dogstatsd/
+[2]: /ja/developers/metrics/types/?tab=count#definition
 [3]: /ja/dashboards/functions/arithmetic/#cumulative-sum
 [4]: /ja/dashboards/functions/arithmetic/#integral
-[5]: /ja/developers/metrics/types/?tab=gauge#metric-type-definition
-[6]: /ja/developers/metrics/types/?tab=set#metric-type-definition
-[7]: /ja/developers/metrics/types/?tab=histogram#metric-type-definition
-[8]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[9]: /ja/metrics/distributions
-[10]: /ja/developers/metrics/types/?tab=distribution#metric-type-definition
+[5]: /ja/developers/metrics/types/?tab=gauge#definition
+[6]: /ja/developers/metrics/types/?tab=histogram#definition
+[7]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[8]: /ja/metrics/distributions/
+[9]: /ja/developers/metrics/types/?tab=distribution#definition

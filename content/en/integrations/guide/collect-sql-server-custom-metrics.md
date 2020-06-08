@@ -52,7 +52,7 @@ custom_metrics:
   object_name: SQLServer:Plan Cache
 ```
 
-To collect all instances of a counter with multiple instances use the special value `ALL` for the `instance_name` parameter which **requires** a value for the `tag_by` parameter. This example gets metrics tagged as `db:mydb1`, `db:mydb2`:
+To collect all instances of a counter with multiple instances use the special, case-sensitive value `ALL` for the `instance_name` parameter which **requires** a value for the `tag_by` parameter. This example gets metrics tagged as `db:mydb1`, `db:mydb2`:
 
 ```yaml
 - name: sqlserver.db.commit_table_entries
@@ -195,7 +195,7 @@ If your custom metrics are not appearing in Datadog, check the Agent log file. I
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/sqlserver
+[1]: /integrations/sqlserver/
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/performance-monitor/sql-server-databases-object
 [3]: /developers/metrics/#metric-types
-[4]: /developers/metrics/histograms
+[4]: /developers/metrics/histograms/

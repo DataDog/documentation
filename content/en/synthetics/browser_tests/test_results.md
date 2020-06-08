@@ -35,7 +35,7 @@ A resource corresponds to the combination of requests and assets. The Resources 
 | % Total Time | The resource duration over the total interaction time           |
 | Size         | The size of the request response                                |
 
-The maximum number of resources that can be displayed is 50. Typically, the resources with the longest duration (slowest to load) are displayed first.
+The maximum number of resources that can be displayed is 50. Resources are ordered by the time when they start and then are displayed in Datadog by the first 50.
 
 #### Filter and Search
 
@@ -65,5 +65,5 @@ Common failure reasons include:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/trace
-[2]: /help
+[1]: /tracing/visualization/trace/
+[2]: /help/

@@ -2,13 +2,13 @@
 title: Real User Monitoring Monitor
 kind: documentation
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
@@ -50,9 +50,9 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 **Examples**:
 
 * This monitor triggers if and only if there are no RUM events for all applications:
-  {{< img src="monitors/monitor_types/rum/rum_monitor_below_by_application.png" alt="Below monitor split by application"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_application_id.png" alt="Below monitor split by application"  style="width:70%;" >}}
 * This monitor triggers if there are no logs for the application `Shop.ist`:
-  {{< img src="monitors/monitor_types/rum/rum_monitor_below_condition.png" alt="Below monitor for given application"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="Below monitor for given application"  style="width:70%;" >}}
 
 ### Notifications
 
@@ -62,9 +62,9 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring
+[1]: /real_user_monitoring/
 [2]: https://app.datadoghq.com/monitors#create/rum
-[3]: /real_user_monitoring/explorer/search
+[3]: /real_user_monitoring/explorer/search/
 [4]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
 [5]: /real_user_monitoring/explorer/?tab=measures#setup-facets-measures
-[6]: /monitors/notifications
+[6]: /monitors/notifications/

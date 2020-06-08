@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Cognitive Services
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_cognitive_services
 public_title: Intégration Datadog/Microsoft Azure Cognitive Services
 short_description: Surveillez des métriques clés Azure Cognitive Services.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

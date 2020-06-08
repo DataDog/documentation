@@ -1,0 +1,10 @@
+[
+    {
+        "agent_version": "5.1.0",
+        "check": "mysql.can_connect",
+        "statuses": ["ok", "クリティカル"],
+        "groups": ["ホスト", "ポート"],
+        "name": "Can Connect",
+        "description": "Agent が監視対象の MySQL インスタンスに接続できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。"
+    }
+]

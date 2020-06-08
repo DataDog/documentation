@@ -126,13 +126,13 @@ Identifiez les corrélations avec vos événements à l'aide de la section **Eve
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/graphing_json
-[2]: /fr/dashboards/widgets
+[1]: /fr/dashboards/graphing_json/
+[2]: /fr/dashboards/widgets/
 [3]: https://app.datadoghq.com/metric/explorer
 [4]: https://app.datadoghq.com/notebook/list
 [5]: https://app.datadoghq.com/metric/summary
-[6]: /fr/tagging
-[7]: /fr/metrics/introduction
-[8]: /fr/dashboards/functions/rollup
+[6]: /fr/tagging/
+[7]: /fr/metrics/introduction/
+[8]: /fr/dashboards/functions/rollup/
 [9]: /fr/dashboards/functions/#apply-functions-optional
 [10]: /fr/events/#event-query-language

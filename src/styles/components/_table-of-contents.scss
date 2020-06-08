@@ -63,7 +63,11 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 }
 // Desktop TOC
 .toc-container {
-    padding-top: 50px;
+    display: none;
+    &:lang(ja) {
+      padding-left: 30px;
+    }
+    padding-top: 95px;
     &.mobile-open {
         top: 60px;
         position: sticky;
@@ -148,6 +152,12 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
                                 padding: 2px 0px 2px 10px;
                                 border-left: 2px solid $ddgray;
                                 font-size: 18px;
+                                &:lang(ja) {
+                                  font-style: normal;
+                                  font-weight: 300;
+                                  font-size: 14px;
+                                  line-height: 24px;
+                                }
                             }
                             // First level a tag
                             & > a:first-child:not(.toc_open) {
@@ -176,6 +186,9 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
             }
         }
     }
+    @media (min-width: 992px) {
+        display: block;
+    }
 }
 
 .toc-title {
@@ -189,6 +202,13 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     display: none;
     @media (min-width: 991px) {
         display: block;
+    }
+
+    a {
+      font-size:18px;
+      &:lang(ja) {
+        font-size: 14px;
+      }
     }
 }
 

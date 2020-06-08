@@ -4,24 +4,25 @@ kind: documentation
 aliases:
   - /logs/languages/nodejs
 further_reading:
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "logs/explorer/analytics"
+- link: "/logs/explorer/analytics/"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---
 
-## Overview
+
+## Configure your logger
 
 Using [Winston][1] to log from your NodeJS application gets you all the features you need to build up your logging strategy.
 
@@ -45,10 +46,6 @@ npm install --save winston
   }
 }
 ```
-
-## Setup
-
-**Inject trace IDs in your logs**:  If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow APM NodeJS logging instructions][3] to automatically add trace and span IDs in your logs.
 
 ### Log to file
 
@@ -109,6 +106,9 @@ Check the content of the `<FILE_NAME>.log` file to see that Winston already took
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
 
+**Connect Logs and Traces**
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM NodeJS logging instructions][3] to automatically add trace and span IDs in your logs.
+
 ## Configure your Datadog Agent
 
 Create a `nodejs.d/conf.yaml` file in your `conf.d/` folder with the following content:
@@ -127,6 +127,82 @@ logs:
     source: nodejs
     sourcecategory: sourcecode
 ```
+
+## Agentless Logging
+
+You can stream your logs from your application to Datadog without installing an Agent on your Host. Note that using an Agent to forward your logs is recommended as it provides a native connection management.
+
+{{< tabs >}}
+{{% tab "Winston 3.0" %}}
+
+Use [Winston HTTP transport][1] to send your logs directly through the [Datadog Log API][2].
+In your bootstrap file or somewhere in your code, declare the logger as follow:
+
+{{< site-region region="us" >}}
+
+```js
+const { createLogger, format, transports } = require('winston');
+
+const httpTransportOptions = {
+  host: 'http-intake.logs.datadoghq.com',
+  path: '/v1/input/<APIKEY>?ddsource=nodejs&service=<APPLICATION_NAME>',
+  ssl: true
+};
+
+const logger = createLogger({
+  level: 'info',
+  exitOnError: false,
+  format: format.json(),
+  transports: [
+    new transports.Http(httpTransportOptions),
+  ],
+});
+
+module.exports = logger;
+
+// Example logs
+logger.log('info', 'Hello simple log!');
+logger.info('Hello log with metas',{color: 'blue' });
+```
+
+Note: you can also check the community supported [Datadog Transport][1].
+
+[1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```js
+const { createLogger, format, transports } = require('winston');
+
+const httpTransportOptions = {
+  host: 'http-intake.logs.datadoghq.eu',
+  path: '/v1/input/<APIKEY>?ddsource=nodejs&service=<APPLICATION_NAME>',
+  ssl: true
+};
+
+const logger = createLogger({
+  level: 'info',
+  exitOnError: false,
+  format: format.json(),
+  transports: [
+    new transports.Http(httpTransportOptions),
+  ],
+});
+
+module.exports = logger;
+
+// Example logs
+logger.log('info', 'Hello simple log!');
+logger.info('Hello log with metas',{color: 'blue' });
+```
+
+{{< /site-region >}}
+
+[1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
+[2]: /api/v1/logs/#send-logs
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
 
@@ -148,4 +224,4 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
-[3]: /tracing/connect_logs_and_traces/?tab=nodejs
+[3]: /tracing/connect_logs_and_traces/nodejs/

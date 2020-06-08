@@ -6,13 +6,13 @@ aliases:
     - /agent/faq/where-is-the-configuration-file-for-the-agent/
     - /agent/faq/log-location
 further_reading:
-- link: "agent/faq/how-datadog-agent-determines-the-hostname"
+- link: "/agent/faq/how-datadog-agent-determines-the-hostname/"
   tag: "FAQ"
   text: "How does Datadog determine the Agent hostname?"
-- link: "agent/guide/agent-commands"
+- link: "/agent/guide/agent-commands/"
   tag: "FAQ"
   text: "List of all Agent commands"
-- link: "agent/guide/agent-configuration-files"
+- link: "/agent/guide/agent-configuration-files/"
   tag: "FAQ"
   text: "Location of all Agent configuration files"
 ---
@@ -64,11 +64,11 @@ The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents netwo
 In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][6].
 
 [1]: /developers/metrics/dogstatsd_metrics_submission/#metrics
-[2]: /tracing/guide/terminology
+[2]: /tracing/guide/terminology/
 [3]: /agent/guide/network/#open-ports
 [4]: /developers/write_agent_check/
 [5]: https://github.com/etsy/statsd
-[6]: /developers/metrics/dogstatsd_metrics_submission
+[6]: /developers/metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -104,11 +104,11 @@ The recommended number of open file descriptors is 1024. You can see this value 
 minfds = 100  # Your hard limit
 ```
 
-[1]: /integrations
-[2]: /developers/metrics/custom_metrics
+[1]: /integrations/
+[2]: /developers/metrics/custom_metrics/
 [3]: /agent/guide/network/?tab=agentv5v4#open-ports
 [4]: /agent/proxy/?tab=agentv5
-[5]: /agent/faq/network
+[5]: /agent/faq/network/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -147,21 +147,22 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [Fedora x86_64][8]                              | Fedora 26+                                        |
 | [macOS][9]                                      | macOS 10.12+                                      |
 | [Windows server 64-bit][10]                     | Windows Server 2008r2+ and Server Core (not Nano) |
+| [Windows server 64-bit][10]                     | Server Core (not Nano) |
 | [Windows 64-bit][10]                            | Windows 7+                                        |
 
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
 [1]: /agent/basic_agent_usage/amazonlinux/
-[2]: /agent/basic_agent_usage/deb
-[3]: /agent/basic_agent_usage/ubuntu
-[4]: /agent/basic_agent_usage/redhat
-[5]: /agent/docker
-[6]: /agent/basic_agent_usage/kubernetes
-[7]: /agent/basic_agent_usage/suse
-[8]: /agent/basic_agent_usage/fedora
-[9]: /agent/basic_agent_usage/osx
-[10]: /agent/basic_agent_usage/windows
-[11]: /agent/basic_agent_usage/source
+[2]: /agent/basic_agent_usage/deb/
+[3]: /agent/basic_agent_usage/ubuntu/
+[4]: /agent/basic_agent_usage/redhat/
+[5]: /agent/docker/
+[6]: /agent/basic_agent_usage/kubernetes/
+[7]: /agent/basic_agent_usage/suse/
+[8]: /agent/basic_agent_usage/fedora/
+[9]: /agent/basic_agent_usage/osx/
+[10]: /agent/basic_agent_usage/windows/
+[11]: /agent/basic_agent_usage/source/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -182,16 +183,16 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 
 [1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv5
-[2]: /agent/basic_agent_usage/deb
-[3]: /agent/basic_agent_usage/ubuntu
-[4]: /agent/basic_agent_usage/redhat
-[5]: /agent/docker
-[6]: /agent/basic_agent_usage/kubernetes
-[7]: /agent/basic_agent_usage/suse
-[8]: /agent/basic_agent_usage/fedora
-[9]: /agent/basic_agent_usage/osx
-[10]: /agent/basic_agent_usage/windows
-[11]: /agent/basic_agent_usage/source
+[2]: /agent/basic_agent_usage/deb/
+[3]: /agent/basic_agent_usage/ubuntu/
+[4]: /agent/basic_agent_usage/redhat/
+[5]: /agent/docker/
+[6]: /agent/basic_agent_usage/kubernetes/
+[7]: /agent/basic_agent_usage/suse/
+[8]: /agent/basic_agent_usage/fedora/
+[9]: /agent/basic_agent_usage/osx/
+[10]: /agent/basic_agent_usage/windows/
+[11]: /agent/basic_agent_usage/source/
 {{% /tab %}}
 {{% tab "Unix Agent" %}}
 
@@ -199,7 +200,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 |----------|-------------------------------------------|
 | [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
 
-[1]: /agent/basic_agent_usage/aix
+[1]: /agent/basic_agent_usage/aix/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -274,7 +275,7 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 
 **Log Collection**:
 
-The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][1] enabled. It shows the evolution of resource usage for the different compression levels available.
+The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][6] enabled. It shows the evolution of resource usage for the different compression levels available.
 
 {{< tabs >}}
 {{% tab "HTTP compression level 6" %}}
@@ -312,43 +313,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuration management tools
-
-Manage the Datadog Agent and [Integrations][6] using configuration management tools:
-
-{{< tabs >}}
-{{% tab "Chef Cookbook" %}}
-
-* [Chef GitHub project][1]
-* [Installing Datadog Agent with Chef][2]
-
-[1]: https://github.com/DataDog/chef-datadog
-[2]: https://app.datadoghq.com/account/settings#integrations/chef
-{{% /tab %}}
-{{% tab "Puppet" %}}
-
-* [Puppet GitHub project][1]
-* [Installing Datadog Agent with Puppet][2]
-
-[1]: https://github.com/DataDog/puppet-datadog-agent
-[2]: https://app.datadoghq.com/account/settings#integrations/puppet
-{{% /tab %}}
-{{% tab "Ansible" %}}
-
-* [Ansible GitHub project][1]
-* [Installing Datadog Agent with Ansible][2]
-
-[1]: https://github.com/DataDog/ansible-datadog
-[2]: https://app.datadoghq.com/account/settings#agent/ansible
-{{% /tab %}}
-{{% tab "SaltStack" %}}
-
-* [Installing Datadog Agent with Saltstack][1]
-
-[1]: https://github.com/DataDog/datadog-formula
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Getting further with the Datadog Agent
 
 ### Update the Agent
@@ -380,10 +344,10 @@ To send your Agent data to the [Datadog EU site][10], edit your [Agent main conf
 [3]: /agent/guide/agent-commands/#start-the-agent
 [4]: /agent/guide/agent-commands/#service-status
 [5]: /agent/guide/agent-commands/#stop-the-agent
-[6]: /integrations
+[6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
 [7]: https://app.datadoghq.com/account/settings#agent
-[8]: /agent/guide/integration-management
-[9]: /agent/guide/agent-configuration-files
+[8]: /agent/guide/integration-management/
+[9]: /agent/guide/agent-configuration-files/
 [10]: https://app.datadoghq.eu
 [11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[12]: /agent/guide/agent-log-files
+[12]: /agent/guide/agent-log-files/

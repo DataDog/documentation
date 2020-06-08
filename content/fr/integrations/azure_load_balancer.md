@@ -13,11 +13,11 @@ has_logo: true
 integration_title: Microsoft Azure Load Balancer
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_load_balancer
 public_title: Intégration Datadog/Microsoft Azure Load Balancer
 short_description: Surveillez des métriques clés d'Azure Load Balancer.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 

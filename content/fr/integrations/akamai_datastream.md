@@ -16,11 +16,11 @@ has_logo: true
 integration_title: "Akamai\_DataStream"
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: akamai_datastream
 public_title: "Datadog/Akamai\_DataStream"
 short_description: "Intégrez votre Akamai\_DataStream à Datadog."
-version: 1
+version: '1.0'
 ---
 ## Présentation
 
@@ -69,4 +69,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/akamai-datastream
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help
+[3]: https://docs.datadoghq.com/fr/help/

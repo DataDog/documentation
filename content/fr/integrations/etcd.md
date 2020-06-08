@@ -24,7 +24,9 @@ kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: etcd.
-metric_to_check: etcd.store.watchers
+metric_to_check:
+  - etcd.store.watchers
+  - etcd.server.has_leader
 name: etcd
 process_signatures:
   - etcd
@@ -42,20 +44,21 @@ supported_os:
 
 Recueillez des métriques d'etcd pour :
 
-* Surveiller la santé de votre cluster etcd
-* Savoir si des configurations de host sont potentiellement désynchronisées
-* Corréler les performances d'etcd avec le reste de vos applications
+- Surveiller la santé de votre cluster etcd
+- Savoir si des configurations de host sont potentiellement désynchronisées
+- Corréler les performances d'etcd avec le reste de vos applications
 
-## Implémentation
+## Configuration
 
 ### Installation
 
-Le check etcd est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos instances etcd.
+Le check Etcd est inclus avec le paquet de l'[Agent Datadog][2] : vous n'avez donc rien d'autre à installer sur vos instances etcd.
 
 ### Configuration
+
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 1. Modifiez le fichier `etcd.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] pour commencer à recueillir vos données de performance Etcd. Consultez le [fichier d'exemple etcd.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
 2. [Redémarrez l'Agent][5].
@@ -64,17 +67,18 @@ Suivez les instructions ci-dessous pour installer et configurer ce check lorsque
 
 Consultez la [documentation relative aux modèles d'intégration Autodiscovery][6] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
-| Paramètre            | Valeur                             |
-|----------------------|-----------------------------------|
-| `<NOM_INTÉGRATION>` | `etcd`                            |
-| `<CONFIG_INIT>`      | vide ou `{}`                     |
-| `<CONFIG_INSTANCE>`  | `{"url": "http://%%host%%:2379"}` |
+| Paramètre            | Valeur                                                |
+| -------------------- | ---------------------------------------------------- |
+| `<NOM_INTÉGRATION>` | `etcd`                                               |
+| `<CONFIG_INIT>`      | vide ou `{}`                                        |
+| `<CONFIG_INSTANCE>`  | `{"prometheus_url": "http://%%host%%:2379/metrics"}` |
 
 ### Validation
 
 [Lancez la sous-commande `status` de l'Agent][7] et cherchez `etcd` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "etcd" >}}
 
@@ -82,6 +86,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le tag `etcd_state:leader` ou `etcd_state:follower` est appliqué aux métriques etcd, en fonction du statut du nœud. Vous pouvez donc facilement agréger des métriques selon le statut.
 
 ### Événements
+
 Le check etcd n'inclut aucun événement.
 
 ### Checks de service
@@ -95,19 +100,20 @@ Renvoie « Critical » si l'Agent n'est pas capable de recueillir des métriqu
 Renvoie « Critical » si le nœud d'un membre n'est pas sain. Renvoie « Unknown » si l'Agent n'est pas capable d'atteindre l'endpoint `/health`, ou si le statut de santé est manquant.
 
 ## Dépannage
+
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
 ## Pour aller plus loin
-Pour mieux comprendre comment (ou pourquoi) intégrer etcd à Datadog, lisez notre [article de blog][10] à ce sujet.
 
+Pour mieux comprendre comment (ou pourquoi) intégrer Etcd à Datadog, lisez notre [article de blog][10] à ce sujet.
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/etcd/images/etcd_dashboard.png
 [2]: https://app.datadoghq.com/account/settings#agent
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
+[6]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/etcd/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help
+[9]: https://docs.datadoghq.com/fr/help/
 [10]: https://www.datadoghq.com/blog/monitor-etcd-performance

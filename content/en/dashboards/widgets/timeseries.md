@@ -78,6 +78,10 @@ Add events from related systems to add more context to your graph. For example, 
 | `tag:role:web`              | Shows all events with the tag `role:web`.                  |
 | `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [Template Variable][7]. |
 
+Once enabled, events are overlayed on your graphs with red bars:
+
+{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Event overlay"  style="width:75%;" >}}
+
 ##### Y-axis controls
 
 Y-axis controls are available via the UI and the JSON editor. They allow you to:
@@ -180,17 +184,17 @@ Additional properties allowed in each `request` object:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/timeboard
-[2]: /dashboards/screenboard
-[3]: /dashboards/querying
+[1]: /dashboards/timeboard/
+[2]: /dashboards/screenboard/
+[3]: /dashboards/querying/
 [4]: /tracing/app_analytics/search/#search-bar
-[5]: https://docs.datadoghq.com/logs/explorer/search/#search-syntax
-[6]: /events
-[7]: /dashboards/template_variables
+[5]: /logs/search_syntax/
+[6]: /events/
+[7]: /dashboards/template_variables/
 [8]: /dashboards/widgets/#full-screen
 [9]: https://www.datadoghq.com/blog/full-screen-graphs
-[10]: /dashboards/graphing_json/widget_json
-[11]: /dashboards/graphing_json/request_json
+[10]: /dashboards/graphing_json/widget_json/
+[11]: /dashboards/graphing_json/request_json/
 [12]: /dashboards/graphing_json/widget_json/#y-axis-schema
 [13]: /dashboards/graphing_json/widget_json/#events-schema
 [14]: /dashboards/graphing_json/widget_json/#markers-schema

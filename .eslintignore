@@ -5,6 +5,5 @@ src/scripts/helpers/moveToAnchor.js
 src/scripts/components/codenav.js
 src/scripts/components/global-modals.js
 src/scripts/components/header.js
-src/scripts/components/integrations.js
 src/scripts/components/platforms.js
 src/scripts/components/sidenav.js

@@ -1,5 +1,4 @@
 ---
-beta: false
 categories:
   - azure
   - source control
@@ -14,22 +13,23 @@ has_logo: true
 integration_title: Microsoft Azure DevOps
 is_public: true
 kind: integration
-manifest_version: 1
+manifest_version: '1.0'
 name: azure_devops
 public_title: Intégration Datadog/Microsoft Azure DevOps
 short_description: Surveillez des métriques clés d'Azure DevOps.
-version: 1
+version: '1.0'
 ---
 ## Présentation
 
 Intégrez Datadog à Azure DevOps pour :
 
-* Suivre les pull requests et les merges effectuées sur vos différents projets
-* Visualiser les publications de version et les opérations de build dans le contexte des autres données de votre pile
-* Suivre le temps passé à terminer un build ou un élément de travail
-* Gérer les éléments de travail et les mises à jour
+- Suivre les pull requests et les merges effectuées sur vos différents projets
+- Visualiser les publications de version et les opérations de build dans le contexte des autres données de votre pile
+- Suivre le temps passé à terminer un build ou un élément de travail
+- Gérer les éléments de travail et les mises à jour
 
 ## Configuration
+
 ### Installation
 
 Dans Datadog, cliquez sur le bouton d'installation visible sur le [carré d'intégration Azure DevOps][7].
@@ -60,14 +60,14 @@ Pour créer des abonnements de hook de service par programmation, utilisez la [d
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
 
-```
+```text
 https://app.datadoghq.com/intake/webhook/azuredevops?api_key=<CLÉ_API_DATADOG>
 ```
 
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
 
-```
+```text
 https://app.datadoghq.eu/intake/webhook/azuredevops?api_key=<CLÉ_API_DATADOG>
 ```
 
@@ -75,6 +75,7 @@ https://app.datadoghq.eu/intake/webhook/azuredevops?api_key=<CLÉ_API_DATADOG>
 {{< /tabs >}}
 
 ### Utiliser les monitors Datadog en tant que portes dans Azure Pipelines
+
 Vous pouvez également utiliser les monitors Datadog en tant que portes pour [contrôler le déploiement des versions][8] dans Azure Pipelines. Cette option vous permet d'arrêter automatiquement les déploiements problématiques si un état anormal est détecté dans Datadog.
 
 1. Ajoutez l'extension [Datadog Monitors as Deployment Gates][9] à votre organisation Azure DevOps.
@@ -97,6 +98,7 @@ Vous pouvez également utiliser les monitors Datadog en tant que portes pour [co
 Pour afficher le code source, consultez le [référentiel de l'extension Monitor Gate d'Azure Devops][11].
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "azure_devops" >}}
 
@@ -128,9 +130,9 @@ La latence totale dépend de nombreux facteurs. Dans la plupart des cas, les év
 Tout comme les autres types de métriques et d'événements dans Datadog, ils peuvent être utilisés pour créer des dashboards, configurer des monitors ou réaliser des opérations de dépannage.
 
 **Comment les métriques liées à la durée d'un build ou d'un élément de travail sont-elles générées ?**<br>
-La durée d'une opération de build est calculée à partir des événements *build completed*, en mesurant l'intervalle (en secondes) entre le début et la fin du build.
+La durée d'une opération de build est calculée à partir des événements _build completed_, en mesurant l'intervalle (en secondes) entre le début et la fin du build.
 
-La durée d'un élément de travail est calculée à partir des événements *work item updated*, en mesurant l'intervalle (en heures) entre la création de l'élément de travail et son passage au statut `Done`.
+La durée d'un élément de travail est calculée à partir des événements _work item updated_, en mesurant l'intervalle (en heures) entre la création de l'élément de travail et son passage au statut `Done`.
 
 **Remarque** : en cas de réouverture d'un élément de travail `Done`, un autre point de données est généré lors de son prochain passage au statut `Done`. Le point de données initial n'est pas modifié, et le nouveau point de données est comparé à la création initiale de l'élément de travail.
 

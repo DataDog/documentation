@@ -3,10 +3,10 @@ title: DogStatsD によるイベント
 kind: documentation
 description: データタイプ、タグ付けなど、DogStatsD の機能の概要
 further_reading:
-  - link: developers/dogstatsd
+  - link: /developers/dogstatsd/
     tag: ドキュメント
     text: DogStatsD 入門
-  - link: developers/libraries
+  - link: /developers/libraries/
     tag: ドキュメント
     text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
   - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
@@ -18,22 +18,22 @@ further_reading:
 [DogStatsD をインストール][1]した後、次の関数を使用して [Datadog のイベントストリーム][2]にイベントを送信できます。
 
 ```text
-event(<TITLE>, <TEXT>, <TIMESTAMP>, <HOSTNAME>, <AGGREGATION_KEY>, <PRIORITY>, <SOURCE_TYPE_NAME>, <ALERT_TYPE>, <TAGS>)
+event(<タイトル>, <テキスト>, <タイムスタンプ>, <ホスト名>, <集計キー>, <優先度>, <ソースタイプ名>, <アラートタイプ>, <タグ>)
 ```
 
 **定義**:
 
 | パラメーター            | 種類            | 必須 | 説明                                                                                |
 |----------------------|-----------------|----------|--------------------------------------------------------------------------------------------|
-| `<TITLE>`            | 文字列          | はい      | イベントのタイトル                                                                     |
-| `<TEXT>`             | 文字列          | はい      | イベントのテキスト本文                                                                 |
-| `<TIMESTAMP>`        | 整数         | はい      | イベントの Epoch タイムスタンプ (デフォルトで DogStatsD サーバーからの現在時刻が入力されます) |
-| `<HOSTNAME>`         | 文字列          | いいえ       | ホストの名前                                                                       |
-| `<AGGREGATION_KEY>`  | 文字列          | いいえ       | イベントを集計するために使用するキー                                                        |
-| `<PRIORITY>`         | 文字列          | いいえ       | イベントの優先度を指定します (`normal` または `low`)。                                   |
-| `<SOURCE_TYPE_NAME>` | 文字列          | いいえ       | [ソースタイプ][3]の名前                                                                  |
-| `<ALERT_TYPE>`       | 文字列          | いいえ       | `error`、`warning`、`success`、または `info` (デフォルトは `info`)                              |
-| `<TAGS>`             | 文字列のリスト | いいえ       | このイベントに関連付けられるタグのリスト                                                 |
+| `<タイトル>`            | 文字列          | はい      | イベントのタイトル                                                                     |
+| `<テキスト>`             | 文字列          | はい      | イベントのテキスト本文                                                                 |
+| `<タイムスタンプ>`        | 整数         | はい      | イベントの Epoch タイムスタンプ (デフォルトで DogStatsD サーバーからの現在時刻が入力されます) |
+| `<ホスト名>`         | 文字列          | いいえ       | ホストの名前                                                                       |
+| `<集計キー>`  | 文字列          | いいえ       | イベントを集計するために使用するキー                                                        |
+| `<優先度>`         | 文字列          | いいえ       | イベントの優先度を指定します (`normal` または `low`)。                                   |
+| `<ソースタイプ名>` | 文字列          | いいえ       | ソースタイプの名前                                                                  |
+| `<アラートタイプ>`       | 文字列          | いいえ       | `error`、`warning`、`success`、または `info` (デフォルトは `info`)                              |
+| `<タグ>`             | 文字列のリスト | いいえ       | このイベントに関連付けられるタグのリスト                                                 |
 
 ### 例
 
@@ -52,7 +52,7 @@ options = {
 
 initialize(**options)
 
-statsd.event('エラーが発生しました', 'エラーメッセージ', alert_type='error', tags=['env:dev'])
+statsd.event('An error occurred', 'Error message', alert_type='error', tags=['env:dev'])
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -63,7 +63,7 @@ require 'datadog/statsd'
 
 statsd = Datadog::Statsd.new('localhost', 8125)
 
-statsd.event('エラーが発生しました', "エラーメッセージ", alert_type: 'error', tags: ['env:dev'])
+statsd.event('An error occurred', "Error message", alert_type: 'error', tags: ['env:dev'])
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -87,7 +87,7 @@ func main() {
         log.Fatal(err)
     }
     for {
-        dogstatsdClient.SimpleEvent("エラーが発生しました", "エラーメッセージ")
+        dogstatsdClient.SimpleEvent("An error occurred", "Error message")
         time.Sleep(10 * time.Second)
     }
 }
@@ -98,18 +98,22 @@ func main() {
 
 {{< code-block lang="java" filename="event.java" >}}
 import com.timgroup.statsd.Event;
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 
 public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
 
         Event event = Event.builder()
-          .withTitle("エラーが発生しました")
-          .withText("エラーメッセージ")
+          .withTitle("An error occurred")
+          .withText("Error message")
           .withAlertType(Event.AlertType.ERROR)
           .build();
 
@@ -134,9 +138,11 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        DogStatsd.Event("エラーが発生しました", "エラーメッセージ", alertType: "error", tags: new[] { "env:dev" });
+        using (var dogStatsdService = new DogStatsdService())
+        {
+            dogStatsdService.Configure(dogstatsdConfig);
+            dogStatsdService.Event("An error occurred", "Error message", alertType: "error", tags: new[] { "env:dev" });
+        }
     }
 }
 {{< /code-block >}}
@@ -157,8 +163,8 @@ $statsd = new DogStatsd(
      )
   );
 
-$statsd->event('エラーが発生しました。',
-    array( 'text' => 'エラーメッセージ',
+$statsd->event('An error occurred.',
+    array( 'text' => 'Error message',
            'alert_type' => 'error'
     )
   );
@@ -179,8 +185,8 @@ $statsd = new DogStatsd(
      )
   );
 
-$statsd->event('エラーが発生しました。',
-    array( 'text' => 'エラーメッセージ',
+$statsd->event('An error occurred.',
+    array( 'text' => 'Error message',
            'alert_type' => 'error'
     )
   );
@@ -199,6 +205,6 @@ $statsd->event('エラーが発生しました。',
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/dogstatsd
-[2]: /ja/events
-[3]: /ja/integrations/faq/list-of-api-source-attribute-value
+
+[1]: /ja/developers/dogstatsd/
+[2]: /ja/events/

@@ -1,307 +1,276 @@
 {
-  "index_name": "docsearch_docs_prod",
-  "start_urls": [
-    {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/",
-      "selectors_key": "api",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ]
-      },
-      "tags": [
-        "api"
-      ],
-      "page_rank": 0
-    },
-    {
-      "url": "https://docs.datadoghq.com/(?P<section>.*?)/faq/",
-      "selectors_key": "faq",
-      "variables": {
-        "section": [
-          "agent",
-          "integrations",
-          "dashboards",
-          "monitors",
-          "tracing",
-          "logs",
-          "synthetics",
-          "real_user_monitoring",
-          "developers",
-          "account_management",
-          "synthetics"
-        ]
-      },
-      "tags": [
-        "faq"
-      ],
-      "page_rank": -100
-    },
-    {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/guide/",
-      "selectors_key": "guide",
-      "variables": {
-        "section": [
-          "agent",
-          "dashboards",
-          "integrations",
-          "monitors",
-          "tracing",
-          "logs",
-          "developers"
-        ],
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ]
-      },
-      "tags": [
-        "guide"
-      ],
-      "page_rank": 10
-    },
-    {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/getting_started/",
-      "selectors_key": "getting_started",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ]
-      },
-      "tags": [
-        "getting_started"
-      ],
-      "page_rank": 200
-    },
-    {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/integrations/",
-      "selectors_key": "integrations",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ]
-      },
-      "tags": [
-        "integrations"
-      ],
-      "page_rank": 90
-    },
-    {
-      "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/",
-      "selectors_key": "docs",
-      "variables": {
-        "localisation": [
-          "",
-          "/fr",
-          "/ja"
-        ],
-        "section": [
-          "account_management",
-          "agent",
-          "developers",
-          "dashboards",
-          "infrastructure",
-          "metrics",
-          "events",
-          "notebooks",
-          "logs",
-          "monitors",
-          "security",
-          "security_monitoring",
-          "synthetics",
-          "real_user_monitoring",
-          "network_performance_monitoring",
-          "tagging",
-          "tracing",
-          "watchdog"
-        ]
-      },
-      "tags": [
-        "docs"
-      ],
-      "page_rank": 100
-    }
-  ],
-  "stop_urls": [
-    "/api/.+",
-    "/faq/$",
-    "/guide/$",
-    "\\.json$",
-    "\\?",
-    "docs.datadoghq.com/integrations/$",
-    "docs.datadoghq.com/fr/integrations/$",
-    "docs.datadoghq.com/ja/integrations/$",
-    "docs.datadoghq.com/search/$",
-    "docs.datadoghq.com/fr/search/$",
-    "docs.datadoghq.com/ja/search/$",
-    "/videos/$",
-    "/agent/faq/agent-5-process-collection/$",
-    "/agent/guide/agent-5-autodiscovery/$",
-    "/agent/guide/agent-5-kubernetes-basic-agent-usage/$",
-    "/agent/guide/dogstream/$",
-    "/integrations/faq/agent-5-amazon-ecs/$",
-    "/integrations/faq/list-of-api-source-attribute-value/$",
-    "/logs/faq/how-to-set-up-only-logs/$",
-    "/tracing/guide/agent-5-tracing-setup/$",
-    "docs.datadoghq.com/fr/.*/faq/",
-    "docs.datadoghq.com/ja/.*/faq/",
-    "docs.datadoghq.com/resources/"
-  ],
-  "selectors": {
-    "getting_started": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-        "global": true,
-        "default_value": "Getting Started"
-      },
-      "lvl1": ".main h1",
-      "lvl2": ".main h2",
-      "lvl3": ".main h3",
-      "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "integrations": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-        "global": true,
-        "default_value": "Integrations"
-      },
-      "lvl1": ".main h1",
-      "lvl2": ".main h2",
-      "lvl3": ".main h3",
-      "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "faq": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-        "global": true,
-        "default_value": "FAQ"
-      },
-      "lvl1": ".main h1",
-      "lvl2": ".main h2",
-      "text": ".main p, table tbody tr td, code-tabs table tbody tr td, pre code",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "guide": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-        "global": true,
-        "default_value": "Guide"
-      },
-      "lvl1": ".main h1",
-      "lvl2": ".main h2",
-      "lvl3": ".main h3",
-      "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, pre code",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "api": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul > li > a.toc_open",
-        "global": true,
-        "default_value": "API"
-      },
-      "lvl1": ".main-api h2",
-      "text": ".main-api p, h5[id*='rate-limit'] + ul > li",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    },
-    "docs": {
-      "lvl0": {
-        "selector": ".h-100 .sidenav-nav > ul >li.open > a",
-        "global": true,
-        "default_value": "Documentation"
-      },
-      "lvl1": ".main h1",
-      "lvl2": ".main h2",
-      "lvl3": ".main h3",
-      "lvl4": ".main h4",
-      "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
-      "language": {
-        "selector": "/html/@lang",
-        "type": "xpath",
-        "global": true
-      }
-    }
-  },
-  "keep_tags": [
-    "code"
-  ],
-  "selectors_exclude": [
-    ".whatsnext",
-    "#en-apprendre-plus",
-    "#further-reading",
-    ".alert-info",
-    ".announcement_banner"
-  ],
-  "conversation_id": [
-    "620036890"
-  ],
-  "custom_settings": {
-    "separatorsToIndex": "_@.",
-    "attributeForDistinct": "url_without_anchor",
-    "attributesForFaceting": [
-      "language",
-      "tags"
+    "index_name": "docsearch_docs_prod",
+    "start_urls": [
+        {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/v1/",
+            "selectors_key": "api_v1",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["api_v1"],
+            "page_rank": 0
+        },
+        {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/api/v2/",
+            "selectors_key": "api_v2",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["api_v2"],
+            "page_rank": 5
+        },
+        {
+            "url": "https://docs.datadoghq.com/(?P<section>.*?)/faq/",
+            "selectors_key": "faq",
+            "variables": {
+                "section": [
+                    "agent",
+                    "integrations",
+                    "dashboards",
+                    "monitors",
+                    "tracing",
+                    "logs",
+                    "synthetics",
+                    "real_user_monitoring",
+                    "developers",
+                    "account_management",
+                    "synthetics"
+                ]
+            },
+            "tags": ["faq"],
+            "page_rank": -100
+        },
+        {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/guide/",
+            "selectors_key": "guide",
+            "variables": {
+                "section": [
+                    "agent",
+                    "dashboards",
+                    "integrations",
+                    "monitors",
+                    "tracing",
+                    "logs",
+                    "synthetics",
+                    "developers"
+                ],
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["guide"],
+            "page_rank": 10
+        },
+        {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/getting_started/",
+            "selectors_key": "getting_started",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["getting_started"],
+            "page_rank": 200
+        },
+        {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/integrations/",
+            "selectors_key": "integrations",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"]
+            },
+            "tags": ["integrations"],
+            "page_rank": 90
+        },
+        {
+            "url": "https://docs.datadoghq.com(?P<localisation>.*?)/(?P<section>.*?)/",
+            "selectors_key": "docs",
+            "variables": {
+                "localisation": ["", "/fr", "/ja"],
+                "section": [
+                    "account_management",
+                    "agent",
+                    "developers",
+                    "dashboards",
+                    "infrastructure",
+                    "metrics",
+                    "events",
+                    "notebooks",
+                    "logs",
+                    "monitors",
+                    "security",
+                    "security_monitoring",
+                    "synthetics",
+                    "real_user_monitoring",
+                    "network_performance_monitoring",
+                    "tagging",
+                    "tracing",
+                    "watchdog"
+                ]
+            },
+            "tags": ["docs"],
+            "page_rank": 100
+        }
     ],
-    "optionalWords": [
-      "the",
-      "without"
+    "stop_urls": [
+        "/faq/$",
+        "/guide/$",
+        "\\.json$",
+        "\\?",
+        "docs.datadoghq.com/integrations/$",
+        "docs.datadoghq.com/fr/integrations/$",
+        "docs.datadoghq.com/ja/integrations/$",
+        "docs.datadoghq.com/search/$",
+        "docs.datadoghq.com/fr/search/$",
+        "docs.datadoghq.com/ja/search/$",
+        "/videos/$",
+        "/agent/faq/agent-5-process-collection/$",
+        "/agent/guide/agent-5-autodiscovery/$",
+        "/agent/guide/agent-5-kubernetes-basic-agent-usage/$",
+        "/agent/guide/dogstream/$",
+        "/integrations/faq/agent-5-amazon-ecs/$",
+        "/integrations/faq/list-of-api-source-attribute-value/$",
+        "/logs/faq/how-to-set-up-only-logs/$",
+        "/tracing/guide/agent-5-tracing-setup/$",
+        "docs.datadoghq.com/fr/.*/faq/",
+        "docs.datadoghq.com/ja/.*/faq/",
+        "docs.datadoghq.com/resources/"
     ],
-    "synonyms": [
-      [
-        "agent",
-        "datadog agent"
-      ],
-      [
-        "microsoft azure",
-        "azure"
-      ],
-      [
-        "gcp",
-        "google cloud platform"
-      ],
-      [
-        "aws",
-        "amazon web service"
-      ],
-      [
-        "RUM",
-        "rum",
-        "real user monitoring"
-      ]
-    ]
-  },
-  "only_content_level": true,
-  "user_agent": "Googlebot",
-  "nb_hits": 94978
+    "selectors": {
+        "api_v1": {
+            "lvl0": {
+                "selector": "",
+                "global": true,
+                "default_value": "API V1"
+            },
+            "lvl1": ".main-api > h1",
+            "lvl2": ".main-api h2 a",
+            "lvl3": ".main-api h3",
+            "text": ".main-api p, .main-api ul > li",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "api_v2": {
+            "lvl0": {
+                "selector": "",
+                "global": true,
+                "default_value": "API V2"
+            },
+            "lvl1": ".main-api > h1",
+            "lvl2": ".main-api h2 a",
+            "lvl3": ".main-api h3",
+            "text": ".main-api p, .main-api ul > li",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "getting_started": {
+            "lvl0": {
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+                "global": true,
+                "default_value": "Getting Started"
+            },
+            "lvl1": ".main h1",
+            "lvl2": ".main h2",
+            "lvl3": ".main h3",
+            "lvl4": ".main h4",
+            "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "integrations": {
+            "lvl0": {
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+                "global": true,
+                "default_value": "Integrations"
+            },
+            "lvl1": ".main h1",
+            "lvl2": ".main h2",
+            "lvl3": ".main h3",
+            "lvl4": ".main h4",
+            "text": ".main p, .main ul > li, table tbody tr, .table-metrics tr, pre code",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "faq": {
+            "lvl0": {
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+                "global": true,
+                "default_value": "FAQ"
+            },
+            "lvl1": ".main h1",
+            "lvl2": ".main h2",
+            "text": ".main p, table tbody tr td, code-tabs table tbody tr td, pre code",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "guide": {
+            "lvl0": {
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+                "global": true,
+                "default_value": "Guide"
+            },
+            "lvl1": ".main h1",
+            "lvl2": ".main h2",
+            "lvl3": ".main h3",
+            "lvl4": ".main h4",
+            "text": ".main p, .main ul > li, table tbody tr td, code-tabs table tbody tr td, pre code",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        },
+        "docs": {
+            "lvl0": {
+                "selector": ".h-100 .sidenav-nav > ul >li.open > a",
+                "global": true,
+                "default_value": "Documentation"
+            },
+            "lvl1": ".main h1",
+            "lvl2": ".main h2",
+            "lvl3": ".main h3",
+            "lvl4": ".main h4",
+            "text": ".main p, .main ul > li, table tbody tr, code-tabs table tbody tr td, pre code",
+            "language": {
+                "selector": "/html/@lang",
+                "type": "xpath",
+                "global": true
+            }
+        }
+    },
+    "keep_tags": ["code"],
+    "selectors_exclude": [
+        ".whatsnext",
+        "#en-apprendre-plus",
+        "#further-reading",
+        ".alert-info",
+        ".announcement_banner"
+    ],
+    "conversation_id": ["620036890"],
+    "custom_settings": {
+        "separatorsToIndex": "_@.",
+        "attributeForDistinct": "url_without_anchor",
+        "attributesForFaceting": ["language", "tags"],
+        "optionalWords": ["the", "without"],
+        "synonyms": [
+            ["agent", "datadog agent"],
+            ["microsoft azure", "azure"],
+            ["gcp", "google cloud platform"],
+            ["aws", "amazon web service"],
+            ["RUM", "rum", "real user monitoring"]
+        ]
+    },
+    "only_content_level": true,
+    "user_agent": "Googlebot",
+    "nb_hits": 94978
 }

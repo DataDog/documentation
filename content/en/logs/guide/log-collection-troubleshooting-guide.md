@@ -4,10 +4,10 @@ kind: guide
 aliases:
   - /logs/faq/log-collection-troubleshooting-guide
 further_reading:
-- link: "/logs/log_collection"
+- link: "/logs/log_collection/"
   tag: "Documentation"
   text: "Learn how to collect your logs"
-- link: "/logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 - link: "/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/"
@@ -126,38 +126,25 @@ See the [Docker Log Collection Troubleshooting Guide][9]
 
 ## Serverless environment
 
-### Logs from lambda functions are not visible in Log Explorer page
-
-See the [Datadog-AWS Log integration][10] to configure your environment. If you still do not see your logs, double-check the following points:
-
-#### Lambda function configuration
-
-Check Datadog lambda configuration parameter:
-
-* `<API_KEY>` : Should be set with your [Datadog API key][11] either directly in the Python code, or alternatively as an environment variable. In case you manage several platforms, double-check that you are actually using the right `<API_KEY>` for the right platform.
-
-#### The lambda function is triggered
-
-Check that Datadog lambda function is actually triggered by leveraging `aws.lambda.invocations` and `aws.lambda.errors` metrics with the `functionname` tag of your Datadog lambda function within Datadog, or check for errors in Datadog lambda logs in Cloudwatch.
+See the [Lambda Log Collection Troubleshooting Guide][10]
 
 ## Expectedly dropping logs
 
-Check if logs appear in the [Datadog Live Tail][12]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][13] that could match your logs.
+Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs
-[2]: /help
+[1]: /logs/
+[2]: /help/
 [3]: /agent/guide/agent-commands/#restart-the-agent
-[4]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
+[4]: /agent/logs/#send-logs-over-https
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://en.wikipedia.org/wiki/Chmod
-[7]: https://docs.datadoghq.com/integrations/journald/
+[7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
-[9]: /logs/guide/docker-logs-collection-troubleshooting-guide
-[10]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[11]: https://app.datadoghq.com/account/settings#api
-[12]: https://app.datadoghq.com/logs/livetail
-[13]: /logs/indexes/#exclusion-filters
+[9]: /logs/guide/docker-logs-collection-troubleshooting-guide/
+[10]: /logs/guide/lambda-logs-collection-troubleshooting-guide/
+[11]: https://app.datadoghq.com/logs/livetail
+[12]: /logs/indexes/#exclusion-filters

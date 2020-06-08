@@ -6,7 +6,7 @@ assets:
   monitors: {}
   service_checks: assets/service_checks.json
 categories:
-  - クラウド
+  - cloud
   - AWS
   - ログの収集
 creates_events: false

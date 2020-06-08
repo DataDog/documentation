@@ -8,7 +8,7 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
     tag: Blog
     text: Mettre à l'échelle vos charges de travail Kubernetes avec n'importe quelle métrique Datadog
-  - link: /agent/autodiscovery/clusterchecks
+  - link: /agent/cluster_agent/clusterchecks
     tag: Documentation
     text: Exécuter des checks de cluster avec Autodiscovery
   - link: agent/kubernetes/daemonset_setup
@@ -34,9 +34,8 @@ L'Agent de cluster Datadog a besoin des autorisations RBAC adéquates pour fonct
 2. Pour configurer les autorisations RBAC de l'Agent de cluster, appliquez les manifestes suivants. Il se peut que vous ayez déjà effectué cette opération lors de la configuration du [daemonset de l'Agent de nœud][2].
 
   ```shell
-  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
-  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/serviceaccount.yaml"
-  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrolebinding.yaml"
+  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac.yaml"
+  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-rbac.yaml"
   ```
 
   Cela permet de créer les objets `ServiceAccount`, `ClusterRole` et `ClusterRoleBinding` appropriés pour l'Agent de cluster.
@@ -68,7 +67,9 @@ Si vous définissez la valeur sans utiliser de secret, le token est alors lisibl
     kubectl create secret generic datadog-auth-token --from-literal=token=<ThirtyX2XcharactersXlongXtoken>
     ```
 
-    Vous pouvez également spécifier le token dans le fichier `dca-secret.yaml` qui se trouve dans le [répertoire manifest/cluster-agent][1].
+    Vous pouvez également modifier la valeur du secret dans le fichier `dca-secret.yaml` qui se trouve dans le [répertoire manifest/cluster-agent][1] ou le créer avec :
+
+    `kubectl create -f Dockerfiles/manifests/cluster-agent/dca-secret.yaml`
 
 3. Utilisez ce secret avec la variable d'environnement `DD_CLUSTER_AGENT_AUTH_TOKEN` dans les manifestes de l'Agent de cluster. Consultez la section [Étape 3 : Créer l'Agent de cluster et son service](#etape-3-creer-l-agent-de-cluster-et-son-service) et la section [Étape 2 : Activer l'Agent Datadog](#etape-2-activer-l-agent-datadog).
 
@@ -170,7 +171,9 @@ Une fois l'Agent de cluster Datadog configuré, configurez votre Agent Datadog d
 
 4. Dans le manifeste `agent.yaml`, définissez le token conformément à la section [Étape 2 : Sécuriser les communications entre l'Agent de cluster et l'Agent](#etape-2-securiser-les-communications-entre-l-agent-de-cluster-et-l-agent). Le format dépend de la façon dont vous configurez votre secret ; les instructions se trouvent directement dans le manifeste.
 
-5. Créez le DaemonSet avec cette commande : `kubectl apply -f agent.yaml`.
+5. Dans le manifeste `agent.yaml`, ajoutez la variable d'environnement `DD_CLUSTER_AGENT_ENABLED` et définissez-la sur `true`.
+
+6. Créez le DaemonSet avec cette commande : `kubectl apply -f agent.yaml`.
 
 ### Vérification
 
@@ -201,7 +204,7 @@ La transmission des événements Kubernetes à votre compte Datadog commence alo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/manifests/cluster-agent/rbac
-[2]: /fr/agent/kubernetes/daemonset_setup/?tab=k8sfile#configure-rbac-permissions
+[2]: /fr/agent/kubernetes/
 [3]: /fr/agent/faq/rbac-for-dca-running-on-aks-with-helm/
 [4]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/datadog-cluster-agent_service.yaml
 [5]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/manifests/cluster-agent/cluster-agent.yaml

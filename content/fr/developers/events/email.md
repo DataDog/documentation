@@ -44,7 +44,7 @@ Avec un e-mail au format JSON, l'objet de l'e-mail n'apparaît pas dans l'évén
 
 **Remarque** : si vous testez l'e-mail avec un client de messagerie standard, le corps risque d'être converti en HTML. Le corps ne sera alors plus entièrement composé de JSON et l'e-mail sera ignoré.
 
-[1]: /fr/api/#events
+[1]: /fr/api/v1/events/
 {{% /tab %}}
 {{% tab "Texte brut" %}}
 
@@ -61,6 +61,7 @@ Les e-mails au format texte brut vous offrent la possibilité de définir les ch
 | Body                 | Non       | Le corps de l'e-mail           |
 
 L'e-mail ci-dessous est un exemple d'envoi valide :
+
 ```text
 Sender's Email: matt@datadog.com
 Subject: Env:Test - System at 50% CPU - #test
@@ -102,7 +103,7 @@ http://catchpoint.com/session_id:123456
 http://catchpoint.com/session_id%3A123456
 ```
 
-[1]: /fr/integrations
-[2]: /fr/agent/agent_checks
+[1]: /fr/integrations/
+[2]: /fr/agent/agent_checks/
 [3]: https://app.datadoghq.com
 [4]: http://daringfireball.net/projects/markdown/syntax#lin

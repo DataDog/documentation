@@ -2,14 +2,14 @@
 title: Setting Up APM with C++
 kind: guide
 further_reading:
-- link: "/tracing/setup/cpp"
+- link: "/tracing/setup/cpp/"
   tag: "Documentation"
   text: "Learn more about tracing applications with C++"
 ---
 
 ## Overview
 
-This guide expands on the [C++ APM docs][1] to provide step-by-step instructions on how to set up a simple C++ app with APM on your VM for troubleshooting. You can also directly spin up a ready-to-go box with all of this set up from Datadog's [sandbox repo][2].
+This guide expands on the [C++ APM docs][1] to provide step-by-step instructions on how to set up a simple C++ app with APM on your VM for troubleshooting.
 
 ## Setting up your box
 
@@ -23,7 +23,7 @@ vagrant up
 vagrant ssh
 ```
 
-Next, install the agent with the [instructions in the UI][3].
+Next, install the agent with the [instructions in the UI][2].
 
 ### Prepping for C++
 
@@ -155,16 +155,15 @@ On the Trace Agent tab, you will see something similar to:
 
 The service then shows up in your APM services page in Datadog.
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services Page" responsive="true" >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services Page"  >}}
 
 Click on the service to view your traces.
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM Traces UI" responsive="true" >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM Traces UI"  >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/cpp/#compile-against-dd-opentracing-cpp
-[2]: https://github.com/DataDog/sandbox
-[3]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[2]: https://app.datadoghq.com/account/settings#agent/ubuntu

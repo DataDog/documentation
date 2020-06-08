@@ -5,7 +5,7 @@ aliases:
     - /integrations/faq/are-my-aws-cloudwatch-metrics-delayed/
     - /integrations/faq/why-is-there-a-delay-in-receiving-my-data/
 further_reading:
-- link: "agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
+- link: "/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
   tag: "FAQ"
   text: "Why should I install the Datadog Agent on my cloud instances?"
 ---
@@ -18,6 +18,7 @@ When using any Datadog cloud integration (AWS, Azure, GCP, etc.), metrics are pu
 
 | Provider   | Default crawler  |
 |------------|------------------|
+| Alibaba    | Every 10 minutes |
 | AWS        | Every 10 minutes |
 | Azure      | Every 5 minutes  |
 | Cloudflare | Every 15 minutes |
@@ -26,6 +27,10 @@ When using any Datadog cloud integration (AWS, Azure, GCP, etc.), metrics are pu
 ## Cloud providers
 
 These are specifics related to particular cloud providers.
+
+## Alibaba
+
+Alibaba emits metrics with one-minute granularity. Therefore, expect metric delays of ~7-8 minutes.
 
 ### AWS
 
@@ -55,5 +60,5 @@ On the Datadog side for the AWS, Azure, and GCP integrations, we may be able to 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances
-[2]: /help
+[1]: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+[2]: /help/
