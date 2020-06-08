@@ -34,7 +34,7 @@ To account for modern web applications, Loading Time watches for network request
 *or, whichever comes last,*
   *  the first time the page is idle for more than 100ms (idle being defined as: no network requests, and no long tasks are currently occurring)
 
-* **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page is idle for more than 100ms (idle being defined as: no network requests, and no long tasks are currently occurring)
+* **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page is idle for more than 100ms (idle being defined as no network requests, and no long tasks are currently occurring)
 
 ## Metrics collected
 
