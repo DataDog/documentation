@@ -22,7 +22,7 @@ For page views, loading performance metrics are collected from both the [Paint T
 
 ## Single Page Applications
 
-For Single Page Applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigations with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK will start a new View event with `loading_type:route_change`. RUM is able to track page changes using the [History API][7].
+For Single Page Applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigations with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][7].
 
 Datadog provides a unique performance metric, Loading Time, which calculates the time needed for a page to load. This metric works both for `initial_load` and `route_change` navigations.
 
