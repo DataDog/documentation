@@ -17,7 +17,7 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Manual Injection into Logs
+## Manually Inject Trace and Span IDs
 
 Use one of the following options to inject Ruby trace information into your logs:
 

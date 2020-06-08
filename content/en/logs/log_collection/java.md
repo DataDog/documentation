@@ -65,7 +65,7 @@ Add a new file appender to `log4j.xml`:
 </appender>
 ```
 
-## Connect your service across Logs and APM
+## Connect your service across logs and traces
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
 `env`, `service`, and `version` to your logs by [following the APM Java instructions][1]
@@ -95,7 +95,7 @@ Edit your `log4j2.xml` file:
 </Loggers>
 ```
 
-## Connect your service across Logs and APM
+## Connect your service across logs and traces
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
 `env`, `service`, and `version` to your logs by [following the APM Java instructions][1].

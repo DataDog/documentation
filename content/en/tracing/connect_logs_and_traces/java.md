@@ -17,7 +17,7 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatic Injection into Logs
+## Automatically Inject Trace and Span IDs
 
 Enable injection in the Java tracer's [configuration][1] through the environment variable `DD_LOGS_INJECTION=true` or the JVM startup argument `-Ddd.logs.injection=true`.
 If you haven't done so already, we recommend configuring the Java tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the smoothest
@@ -31,7 +31,7 @@ If your logs are raw formatted, update your formatter to include `dd.env`, `dd.s
 
 If your logs are JSON formated and you are using Logback there is nothing left to do. Otherwise with other logging libraries you need to activate MDC attributes autoinjection into your logs.
 
-## Manual Injection into Logs
+## Manually Inject Trace and Span IDs
 
 If you prefer to manually correlate your [traces][3] with your logs and tie together data for your service,
 leverage the Datadog API to retrieve correlation identifiers:

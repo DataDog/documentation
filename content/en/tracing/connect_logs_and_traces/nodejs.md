@@ -17,7 +17,7 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatic Injection into Logs
+## Automatically Inject Trace and Span IDs
 
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
 
@@ -34,7 +34,7 @@ experience for adding `env`, `service`, and `version` (see [Unified Service Tagg
 
 **Note**: Automatic injection only works for logs formatted as JSON.
 
-## Manual Injection into Logs
+## Manually Inject Trace and Span IDs
 
 If you are using a logging library not supported for automatic injection but are using JSON format, it's possible to do manual injection directly in your code.
 

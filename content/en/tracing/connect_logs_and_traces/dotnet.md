@@ -17,7 +17,7 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatic Injection into Logs
+## Automatically Inject Trace and Span IDs
 
 Enable injection in the .NET Tracer’s [configuration][1] by setting `DD_LOGS_INJECTION=true` through environment variables or the configuration files.
 
@@ -88,7 +88,7 @@ For NLog version 4.5:
 {{< /tabs >}}
 
 
-## Manual Injection into Logs
+## Manually Inject Trace and Span IDs
 
 If you prefer to manually correlate your [traces][7] with your logs and tie together data for your service,
 leverage the Datadog API to retrieve correlation identifiers:

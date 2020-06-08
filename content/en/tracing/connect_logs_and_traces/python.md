@@ -17,14 +17,14 @@ further_reading:
   text: "Correlate request logs with traces automatically"
 ---
 
-## Automatic Injection into Logs
+## Automatically Inject Trace and Span IDs
 
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 If you have configured your tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then `env`, `service`, and `version` will also be added automatically. Learn more about [unified service tagging][1].
 
 **Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application must modify the root logger and handler directly.
 
-## Manual Injection into Logs
+## Manually Inject Trace and Span IDs
 
 ### With Standard Library Logging
 
