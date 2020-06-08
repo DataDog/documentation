@@ -247,7 +247,7 @@ components:
       properties:
         dashboards:
           description: List of dashboards in the dashboard list.
-          example: null
+          example: []
           items:
             $ref: '#/components/schemas/DashboardListItem'
           type: array
@@ -557,6 +557,15 @@ components:
             $ref: '#/components/schemas/LogsArchiveDefinition'
           type: array
       type: object
+    LogsRestrictionQueriesType:
+      default: logs_restriction_queries
+      description: Restriction query resource type.
+      enum:
+      - logs_restriction_queries
+      example: logs_restriction_queries
+      type: string
+      x-enum-varnames:
+      - LOGS_RESTRICTION_QUERIES
     Organization:
       description: Organization object.
       properties:
@@ -799,13 +808,13 @@ components:
       properties:
         created_at:
           description: Creation time of the restriction query.
-          example: '2020-03-17T21:06:44.944905+00:00'
+          example: '2020-03-17T21:06:44Z'
           format: date-time
           readOnly: true
           type: string
         modified_at:
           description: Time of last restriction query modification.
-          example: '2020-03-17T21:15:15.833683+00:00'
+          example: '2020-03-17T21:15:15Z'
           format: date-time
           readOnly: true
           type: string
@@ -933,11 +942,7 @@ components:
         relationships:
           $ref: '#/components/schemas/RestrictionQueryRelationships'
         type:
-          default: logs_restriction_queries
-          description: Restriction queries type.
-          example: logs_restriction_queries
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/LogsRestrictionQueriesType'
       type: object
     RestrictionQueryWithRelationshipsResponse:
       description: Response containing information about a single restriction query.
@@ -1152,7 +1157,7 @@ components:
       properties:
         cases:
           description: Cases for generating signals.
-          example: null
+          example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
           type: array
@@ -1162,17 +1167,17 @@ components:
           type: boolean
         message:
           description: Message for generated signals.
-          example: null
+          example: ''
           type: string
         name:
           description: The name of the rule
-          example: null
+          example: ''
           type: string
         options:
           $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
         queries:
           description: Queries for selecting logs which are part of the rule.
-          example: null
+          example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
           type: array
