@@ -56,6 +56,7 @@ logs:
 ```
 
 **Note**: With Agent 7.17+ if `container_mode` is set to `true`, the `source` attribute of your logs is automatically set to the corresponding short image name of the container instead of simply `docker`.
+Indeed by default, the source and service are set to the unit name in journald which by default is `docker` for all logs coming from containers.
 
 Finally, [restart the agent][2].
 
