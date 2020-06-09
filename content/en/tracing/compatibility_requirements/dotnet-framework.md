@@ -8,7 +8,7 @@ further_reading:
       text: 'Instrument Your Application'
 ---
 
-The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][3].
+The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][1].
 
 ## Integrations
 
@@ -33,10 +33,11 @@ The .NET Tracer can instrument the following libraries automatically:
 
 **Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][1] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
+[1]: /tracing/compatibility_requirements/dotnet-core/
+[2]: /help/
