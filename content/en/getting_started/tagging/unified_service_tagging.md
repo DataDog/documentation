@@ -13,7 +13,10 @@ further_reading:
 ---
 
 ## Overview
-Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`. By adding these tags to your [Datadog Agent's][2] configuration file, you can troubleshoot issues and view data pertaining to your services, based on environment or version, in a unified way within the Datadog app.
+Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`. With these three tags you can:
+- Identify deployment impact with trace and container metrics filtered by version
+- Navigate seamlessly across traces, metrics, and logs with consistent tags
+- View service data based on environment or version in a unified fashion within the Datadog app
 
 {{< img src="tagging/unified_service_tagging/overview.gif" alt="Unified Service Tagging"  >}}
 
