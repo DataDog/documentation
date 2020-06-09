@@ -147,7 +147,7 @@ hostname: mymachine.mydomain
 
 The most efficient method for assigning tags is to rely on integration inheritance. Tags you assign to your AWS instances, Chef recipes, and other integrations are automatically inherited by hosts and metrics you send to Datadog.
 
-For containerized environments that utilize Autodiscovery for integration inheritence, it is recommend to follow the [unified service tagging][2] documentation to achieve a single point of configuration across all of your Datadog telemetry.
+For containerized environments, it is recommend to follow the [unified service tagging][2] documentation to achieve a single point of configuration across all of your Datadog telemetry.
 
 ##### Cloud integrations
 
@@ -192,7 +192,7 @@ When using the `DD_DOCKER_LABELS_AS_TAGS` variable within a Docker Swarm `docker
 DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
-When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is very important. To avoid issues, follow the [Docker unified service tagging] documentation.
+When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is very important. To avoid issues, follow the [Docker unified service tagging][2] documentation.
 
  If the container needs to be labeled outside of this configuration, place the `labels:` keyword **inside** the `services:` section **not** inside the `deploy:` section. Place the `labels:` keyword inside the `deploy:` section only when the service needs to be labeled. The Datadog Agent does not have any labels to extract from the containers without this placement.
 
@@ -245,11 +245,7 @@ Setting the variable to `high` additionally adds the following tags: `container_
 
 #### Traces
 
-<div class="alert alert-info">
-Datadog recommends the use of <a href="/tagging/unified_service_tagging">unified service tagging</a> for configuring the standard tags env, service, and version in traces.
-</div>
-
-The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][7] documentation has information on tagging options and configuration for each tracer.
+The Datadog tracer can be configured with environment variables, system properties, or through configuration in code. The [Datadog tracing setup][7] documentation has information on tagging options and configuration for each tracer. You can also follow the [unified service tagging][2] documentation to configure your tracer for unified service tagging.
 
 Regardless of the tracer used, span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and is of a single type.
 
