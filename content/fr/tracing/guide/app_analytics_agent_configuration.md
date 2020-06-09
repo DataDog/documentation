@@ -61,7 +61,7 @@ Par exemple, pour un service Python intitulé `python-api` qui exécute Flask (n
 [1]: https://app.datadoghq.com/apm/services
 [2]: /fr/tracing/app_analytics/#automatic-configuration
 [3]: /fr/tracing/app_analytics/#custom-instrumentation
-[4]: /fr/tracing/send_traces
+[4]: /fr/tracing/send_traces/
 [5]: https://app.datadoghq.com/apm/docs/trace-search
 [6]: /fr/tracing/visualization/#services
 [7]: /fr/tracing/visualization/#resources

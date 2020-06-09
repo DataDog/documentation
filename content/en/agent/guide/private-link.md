@@ -41,9 +41,10 @@ The overall process consists of configuring an internal endpoint in your VPC tha
 {{% /tab %}}
 {{% tab "Logs" %}}
 
-| Datadog Log Service Name                                  |
-| --------------------------------------------------------- |
-| `com.amazonaws.vpce.us-east-1.vpce-svc-0a2aef8496ee043bf` |
+| Forwarder | Datadog Logs Service Name |
+| --------- | ------------------------- |
+| Datadog Agent | `com.amazonaws.vpce.us-east-1.vpce-svc-0a2aef8496ee043bf` |
+| Lambda or custom forwarder | `com.amazonaws.vpce.us-east-1.vpce-svc-06394d10ccaf6fb97` |
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -85,7 +86,7 @@ To forward your metrics to Datadog using this new VPC endpoint, configure `pvtli
 1. Update the `dd_url` parameter in the [Agent `datadog.yaml` configuration file][1]:
 
     ```yaml
-    dd_url: pvtlink.agent.datadoghq.com
+    dd_url: https://pvtlink.agent.datadoghq.com
     ```
 
 2. [Restart your Agent][2] to send metrics to Datadog through AWS PrivateLink.
@@ -122,15 +123,19 @@ To forward your logs to Datadog using this new VPC endpoint, configure `pvtlink.
 - `DD_LOGS_CONFIG_USE_HTTP=true`
 - `DD_LOGS_CONFIG_LOGS_DD_URL="pvtlink.logs.datadoghq.com:443"`
 
-**Using the Lambda forwarder**:
+**Using the Lambda or a custom forwarder**:
 
-Add `DD_URL: pvtlink.logs.datadoghq.com` in your [Datadog Lambda function][4] environment variable to use the private link when forwarding AWS Service Logs to Datadog.
+Add `DD_URL: api-pvtlink.logs.datadoghq.com` in your [Datadog Lambda function][4] environment variable to use the private link when forwarding AWS Service Logs to Datadog.
 
+By default, the forwarder's API key is stored in Secrets Manager. The Secrets Manager endpoint needs to be added to the VPC. You can follow the instructions [here for adding AWS services to a VPC][5].
+
+When installing the forwarder with the CloudFormation template, enable 'DdUsePrivateLink' and set at least one subnet ID and security group.
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /integrations/amazon_web_services/#set-up-the-datadog-lambda-function
+[5]: https://docs.aws.amazon.com/vpc/latest/userguide/vpce-interface.html#create-interface-endpoint
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -139,9 +144,20 @@ To send data to the Datadog API or consume data from it through this new endpoin
 {{% /tab %}}
 {{< /tabs >}}
 
+## Advanced Usage
+
+### Inter-region peering
+
+To route traffic to Datadog’s PrivateLink offering in `us-east-1` from other regions, use inter-region [Amazon VPC peering][3]. 
+
+Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses.
+
+For more information, see the [Amazon VPC peering documentation][3].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/privatelink/
-[2]: /help
+[2]: /help/
+[3]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html

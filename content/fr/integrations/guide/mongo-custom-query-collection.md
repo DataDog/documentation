@@ -58,7 +58,7 @@ Cela génère une métrique `gauge` `mongo.users` avec le tag `user:active`.
 **Remarque** : le type de métrique défini est `gauge`. Consultez la [documentation relative aux types de métriques][2] pour en savoir plus.
 
 [1]: https://docs.mongodb.com/manual/reference/command/count/#dbcmd.count
-[2]: /fr/developers/metrics/types
+[2]: /fr/developers/metrics/types/
 {{% /tab %}}
 {{% tab "Find" %}}
 
@@ -89,7 +89,7 @@ Cela génère une métrique `gauge` `mongo.example2.user.age` avec deux tags : 
 **Remarque** : le type de métrique défini est `gauge`. Consultez la [documentation relative aux types de métriques][2] pour en savoir plus.
 
 [1]: https://docs.mongodb.com/manual/reference/command/find/#dbcmd.find
-[2]: /fr/developers/metrics/types
+[2]: /fr/developers/metrics/types/
 {{% /tab %}}
 {{% tab "Aggregate" %}}
 
@@ -149,6 +149,6 @@ Pour vérifier le résultat, recherchez les métriques à l'aide du [Metrics Exp
 [2]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
 [3]: https://docs.mongodb.com/manual/reference/command
 [4]: /fr/agent/guide/agent-commands/#restart-the-agent
-[5]: /fr/metrics/explorer
+[5]: /fr/metrics/explorer/
 [6]: /fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: /fr/agent/guide/agent-log-files
+[7]: /fr/agent/guide/agent-log-files/

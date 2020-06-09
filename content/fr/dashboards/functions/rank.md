@@ -51,4 +51,4 @@ Par exemple, `bottom10_min()` récupère les 10 séries de plus faible valeur a
     {{< nextlink href="/dashboards/functions/timeshift" >}}Décalage temporel : modifiez la période d'un point de données de votre métrique. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: http://en.wikipedia.org/wiki/Norm_(mathematics
+[1]: http://en.wikipedia.org/wiki/Norm_(mathematics)

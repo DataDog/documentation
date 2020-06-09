@@ -3,16 +3,16 @@ title: Agent
 kind: documentation
 description: Agent をインストールおよび構成してデータを収集する
 further_reading:
-  - link: logs/
+  - link: /logs/
     tag: Documentation
     text: ログの収集
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: プロセスの収集
-  - link: tracing/
+  - link: /tracing/
     tag: Documentation
     text: トレースの収集
-  - link: agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+  - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
     tag: Documentation
     text: クラウドインスタンスに Agent をインストールするのはなぜですか？
   - link: 'https://www.datadoghq.com/blog/dont-fear-the-agent/'
@@ -44,13 +44,12 @@ Datadog Agent は、ホストで実行されるソフトウェアです。ホス
   {{< nextlink href="/agent/basic_agent_usage">}}<u>基本的なエージェントの利用方法</u>: アーキテクチャの詳細、CLI、オーバーヘッド、構成管理ツールなど、Datadog Agent について詳しく説明します。{{< /nextlink >}}
   {{< nextlink href="/agent/docker">}}<u>Docker</u>: Datadog Agent を Docker にインストールして構成します。{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u>: Datadog Agent を Kubernetes にインストールして構成します。{{< /nextlink >}}
-  {{< nextlink href="/agent/autodiscovery">}}<u>オートディスカバリー</u>: オートディスカバリーを使用すると、どのサービスがどこで稼働しているかを自動的に追跡できます。{{< /nextlink >}}
-  {{< nextlink href="/agent/logs">}}<u>ログ収集</u>: Datadog Agent でのログ収集を有効にし、構成します。{{< /nextlink >}}
+  {{< nextlink href="/agent/logs">}}<u>ログの収集</u>: Datadog Agent でのログの収集を有効にし、構成します。{{< /nextlink >}}
   {{< nextlink href="/agent/proxy">}}<u>プロキシ</u>: ネットワーク構成によってアウトバウンドトラフィックが制限される場合は、Agent トラフィックにプロキシを使用します。{{< /nextlink >}}
   {{< nextlink href="/agent/versions/upgrade_to_agent_v7">}}<u>Agent v7 へのアップグレード</u>: Agent 7 は Datadog Agent の最新メジャーバージョンです。アップグレードの方法について説明します。{{< /nextlink >}}
   {{< nextlink href="/agent/troubleshooting">}}<u>トラブルシューティング</u>: Datadog Agent のトラブルシューティング情報をご紹介します。{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>ガイド</u>: Agent の使用に関するステップバイステップの詳細なチュートリアルです。{{< /nextlink >}}
-  {{< nextlink href="/agent/security">}}<u>セキュリティ</u>: 安全な環境を維持するためにお客様が利用できる主なセキュリティ機能について説明します。{{< /nextlink >}}
+  {{< nextlink href="/agent/security">}}<u>セキュリティ:</u> 安全な環境を維持するためにお客様が利用できる主なセキュリティ機能について説明します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## その他の参考資料

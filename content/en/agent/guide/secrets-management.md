@@ -2,7 +2,7 @@
 title: Secrets Management
 kind: documentation
 further_reading:
-- link: "agent/autodiscovery"
+- link: "/agent/autodiscovery/"
   tag: "Documentation"
   text: "Autodiscovery"
 ---
@@ -250,7 +250,7 @@ Kubernetes supports [exposing secrets as files][5] inside a pod.
 If your secrets are mounted in `/etc/secret-volume`, use the following environment variables:
 
 ```
-DD_SECRET_BACKEND_COMMAND=/readsecret.py
+DD_SECRET_BACKEND_COMMAND=/readsecret.sh
 DD_SECRET_BACKEND_ARGUMENTS=/etc/secret-volume
 ```
 
@@ -433,7 +433,7 @@ If you have secrets in `datadog.yaml` and the Agent refuses to start:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/kubernetes/integrations
+[1]: /agent/kubernetes/integrations/
 [2]: https://github.com/DataDog/datadog-agent/blob/master/Dockerfiles/agent/secrets-helper/readsecret.py
 [3]: https://github.com/DataDog/datadog-agent/blob/6.4.x/Dockerfiles/agent/OPENSHIFT.md#restricted-scc-operations
 [4]: https://docs.docker.com/engine/swarm/secrets/

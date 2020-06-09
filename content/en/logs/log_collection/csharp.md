@@ -7,19 +7,19 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/c-logging-guide/"
   tag: "Blog"
   text: "How to collect, customize, and analyze C# logs"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "logs/explorer/analytics"
+- link: "/logs/explorer/analytics/"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---
@@ -47,8 +47,14 @@ Then, initialize the logger directly to your application:
 
 ```csharp
 // Instantiate the logger
-var log = new LoggerConfiguration()
-    .WriteTo.File(new JsonFormatter(), "log.json")
+var log = new LoggerConfiguration()  // using Serilog;
+
+    // using Serilog.Formatting.Json;
+    .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
+    
+    // using Serilog.Formatting.Compact;
+    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
+    
     .CreateLogger();
 
 // An example
@@ -60,13 +66,28 @@ log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedM
 
 Then check the `log.json` file to see the following event:
 
+- If using `JsonFormatter(renderMessage: true)`:
+
 ```json
 {
   "MessageTemplate": "Processed {@Position} in {Elapsed:000} ms.",
   "Level": "Information",
   "Timestamp": "2016-09-02T15:02:29.648Z",
   "Renderings": {"Elapsed": [{"Format": "000", "Rendering": "034"}]},
+  "RenderedMessage":"Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
   "Properties": {"Position": {"Latitude": 25, "Longitude": 134}, "Elapsed": 34}
+}
+```
+
+- If using `RenderedCompactJsonFormatter()`
+
+```json
+{
+  "@t": "2020-05-20T04:15:28.6898801Z",
+  "@m": "Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
+  "@i": "d1eb2146",
+  "Position": {"Latitude": 25, "Longitude": 134 },
+  "Elapsed": 34
 }
 ```
 
@@ -208,10 +229,10 @@ namespace Datadog
            // Load the configure fom App.config
            XmlConfigurator.Configure();
 
-             // Log a simple debug message
+           // Log a simple debug message
            logger.Debug("This is my first debug message");
 
-            // your code continues here ...
+           // your code continues here ...
         }
     }
 }
@@ -238,6 +259,10 @@ If, despite the benefits of logging in JSON, you wish to log in raw string forma
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**Connect Logs and Traces**
+
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM .NET logging instructions][2] to add trace and span IDs in your logs.
 
 ## Configure your Datadog Agent
 
@@ -280,20 +305,33 @@ PM> Install-Package Serilog.Sinks.Datadog.Logs
 
 Then, initialize the logger directly in your application. Do not forget to [add your `<API_KEY>`][2].
 
+{{< site-region region="us" >}}
+
 ```csharp
-var log = new LoggerConfiguration()
+var log = new LoggerConfiguration(url: "http-intake.logs.datadoghq.com")
     .WriteTo.DatadogLogs("<API_KEY>")
     .CreateLogger();
 ```
 
-**Note**: To send logs to Datadog EU site, set the `url` property to `https://http-intake.logs.datadoghq.eu`
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```csharp
+var log = new LoggerConfiguration(url: "http-intake.logs.datadoghq.eu")
+    .WriteTo.DatadogLogs("<API_KEY>")
+    .CreateLogger();
+```
+
+{{< /site-region >}}
 
 You can also override the default behaviour and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. [Optionally, specify the `source`, `service`, `host`, and custom tags.][3]
 
-For instance to forward logs to the Datadog US site in TCP you would use the following sink configuration:
+{{< site-region region="us" >}}
+
+For instance to forward logs to the Datadog US region in TCP you would use the following sink configuration:
 
 ```csharp
-var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
+var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
 var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs(
         "<API_KEY>",
@@ -306,7 +344,55 @@ var log = new LoggerConfiguration()
     .CreateLogger();
 ```
 
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+For instance to forward logs to the Datadog EU region in TCP you would use the following sink configuration:
+
+```csharp
+var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
+var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs(
+        "<API_KEY>",
+        source: "<SOURCE_NAME>",
+        service: "<SERVICE_NAME>",
+        host: "<HOST_NAME>",
+        tags: new string[] {"<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"},
+        configuration: config
+    )
+    .CreateLogger();
+```
+
+{{< /site-region >}}
+
 New logs are now directly sent to Datadog.
+
+Alternately, since `0.2.0`, you can configure the Datadog sink by using an `appsettings.json` file with the `Serilog.Setting.Configuration` package.
+
+In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is shown below:
+
+```json
+"Serilog": {
+  "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Datadog.Logs" ],
+  "MinimumLevel": "Debug",
+  "WriteTo": [
+    { "Name": "Console" },
+    {
+      "Name": "DatadogLogs",
+      "Args": {
+        "apiKey": "<API_KEY>",
+        "source": "<SOURCE_NAME>",
+        "host": "<HOST_NAME>",
+        "tags": ["<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"],
+      }
+    }
+  ],
+  "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+  "Properties": {
+    "Application": "Sample"
+  }
+}
+```
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api
@@ -318,4 +404,5 @@ New logs are now directly sent to Datadog.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/parsing
+[1]: /logs/processing/parsing/
+[2]: /tracing/connect_logs_and_traces/dotnet/

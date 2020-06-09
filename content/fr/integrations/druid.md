@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards:
     Druid Overview: assets/dashboards/overview.json
   monitors: {}
@@ -7,6 +9,7 @@ assets:
 categories:
   - processing
   - data store
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -37,9 +40,9 @@ supported_os:
 
 L'Agent Datadog recueille des métriques en provenance de Druid via [DogStatsD][2]. DogStatsD recueille des métriques sur les requêtes Druid ainsi que sur les données d'ingestion et de coordination. Pour en savoir plus, consultez la [documentation relative aux métriques Druid][3].
 
-Outre la collecte de métriques, l'Agent envoie également un check de service relatif à la santé de Druid.
+En plus de recueillir des métriques, l'Agent envoie également un check de service relatif à la santé de Druid.
 
-## Implémentation
+## Configuration
 
 ### Prérequis
 
@@ -54,7 +57,6 @@ Les étapes décrites ci-dessous sont toutes les deux nécessaires pour faire fo
 Configurez le check Druid inclus avec le paquet de l'[Agent Datadog][5] pour recueillir ses métriques de santé et ses checks de service.
 
 1. Modifiez le fichier `druid.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos checks de service Druid. Consultez le [fichier d'exemple druid.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
-
 2. [Redémarrez l'Agent][7].
 
 #### Étape 2 : connectez Druid à DogStatsD (inclus avec l'Agent Datadog) à l'aide de l'extension `statsd-emitter` pour recueillir des métriques.
@@ -63,39 +65,39 @@ Pour configurer l'extension `statsd-emitter` et recueillir la plupart des [métr
 
 1. Installez l'extension Druid [`statsd-emitter`][8].
 
-    ```shell
-    $ java \
-      -cp "lib/*" \
-      -Ddruid.extensions.directory="./extensions" \
-      -Ddruid.extensions.hadoopDependenciesDir="hadoop-dependencies" \
-      org.apache.druid.cli.Main tools pull-deps \
-      --no-default-hadoop \
-      -c "org.apache.druid.extensions.contrib:statsd-emitter:0.15.0-incubating"
-    ```
+   ```shell
+   $ java \
+     -cp "lib/*" \
+     -Ddruid.extensions.directory="./extensions" \
+     -Ddruid.extensions.hadoopDependenciesDir="hadoop-dependencies" \
+     org.apache.druid.cli.Main tools pull-deps \
+     --no-default-hadoop \
+     -c "org.apache.druid.extensions.contrib:statsd-emitter:0.15.0-incubating"
+   ```
 
    Pour une explication plus détaillée de cette étape, consultez le [guide officiel relatif au chargement d'extensions Druid][9] (en anglais).
 
 2. Mettez à jour les propriétés Java de Druid en ajoutant les configurations suivantes :
 
-    ```conf
-    # Add `statsd-emitter` to the extensions list to be loaded
-    druid.extensions.loadList=[..., "statsd-emitter"]
+   ```conf
+   # Add `statsd-emitter` to the extensions list to be loaded
+   druid.extensions.loadList=[..., "statsd-emitter"]
 
-    # By default druid emission period is 1 minute (PT1M).
-    # We recommend using 15 seconds instead:
-    druid.monitoring.emissionPeriod=PT15S
+   # By default druid emission period is 1 minute (PT1M).
+   # We recommend using 15 seconds instead:
+   druid.monitoring.emissionPeriod=PT15S
 
-    # Use `statsd-emitter` extension as metric emitter
-    druid.emitter=statsd
+   # Use `statsd-emitter` extension as metric emitter
+   druid.emitter=statsd
 
-    # Configure `statsd-emitter` endpoint
-    druid.emitter.statsd.hostname=127.0.0.1
-    druid.emitter.statsd.port:8125
+   # Configure `statsd-emitter` endpoint
+   druid.emitter.statsd.hostname=127.0.0.1
+   druid.emitter.statsd.port:8125
 
-    # Configure `statsd-emitter` to use dogstatsd format. Must be set to true, otherwise tags are not reported correctly to Datadog.
-    druid.emitter.statsd.dogstatsd=true
-    druid.emitter.statsd.dogstatsdServiceAsTag=true
-    ```
+   # Configure `statsd-emitter` to use dogstatsd format. Must be set to true, otherwise tags are not reported correctly to Datadog.
+   druid.emitter.statsd.dogstatsd=true
+   druid.emitter.statsd.dogstatsdServiceAsTag=true
+   ```
 
 3. Redémarrez Druid pour commencer à envoyer vos métriques Druid à l'Agent via DogStatsD.
 
@@ -105,27 +107,27 @@ Utilisez la configuration par défaut de votre fichier `druid.d/conf.yaml` pour 
 
 #### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans datadog.yaml :
 
-    ```yaml
-      logs_enabled: true
-    ```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Supprimez la mise en commentaire du bloc de configuration suivant en bas de votre fichier `redisdb.d/conf.yaml`, puis modifiez-le :
 
-    ```yaml
-      logs:
-        - type: file
-          path: <PATH_TO_DRUID_DIR>/var/sv/*.log
-          source: druid
-          service: <SERVICE_NAME>
-          log_processing_rules:
-            - type: multi_line
-              name: new_log_start_with_date
-              pattern: \d{4}\-\d{2}\-\d{2}
-    ```
+   ```yaml
+   logs:
+     - type: file
+       path: '<PATH_TO_DRUID_DIR>/var/sv/*.log'
+       source: druid
+       service: '<SERVICE_NAME>'
+       log_processing_rules:
+         - type: multi_line
+           name: new_log_start_with_date
+           pattern: \d{4}\-\d{2}\-\d{2}
+   ```
 
     Modifiez les valeurs des paramètres `path` et `service` et configurez-les pour votre environnement.
 
@@ -170,4 +172,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [9]: https://druid.apache.org/docs/latest/operations/including-extensions.html
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/druid/metadata.csv
-[12]: https://docs.datadoghq.com/fr/help
+[12]: https://docs.datadoghq.com/fr/help/

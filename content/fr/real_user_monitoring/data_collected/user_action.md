@@ -27,4 +27,4 @@ Une action utilisateur personnalisée correspond à un événement personnalisé
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring/installation/advanced_configuration
+[1]: /fr/real_user_monitoring/installation/advanced_configuration/

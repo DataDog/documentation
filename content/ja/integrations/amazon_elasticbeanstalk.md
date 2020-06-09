@@ -185,19 +185,19 @@ AWS Elastic Beanstalk インテグレーションには、サービスのチェ�
 
 - ブログ記事: [AWS Elastic Beanstalk への Datadog のデプロイ][16]
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
 [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-cloudwatch.html#health-enhanced-cloudwatch-console
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_v2config.html
 [6]: https://hub.docker.com/r/datadog/agent/tags
 [7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html
-[8]: https://docs.datadoghq.com/ja/integrations/faq/dogstatsd-and-docker
+[8]: https://docs.datadoghq.com/ja/integrations/faq/dogstatsd-and-docker/
 [9]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/ebextensions.html
 [10]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-sourcebundle.html
 [11]: https://docs.datadoghq.com/ja/config/99datadog.config
 [12]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-console-ebextensions
 [13]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli-ebextensions
 [14]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticbeanstalk/amazon_elasticbeanstalk_metadata.csv
-[15]: https://docs.datadoghq.com/ja/help
+[15]: https://docs.datadoghq.com/ja/help/
 [16]: https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk

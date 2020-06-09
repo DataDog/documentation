@@ -73,13 +73,13 @@ Datadog Agent の詳細については、[専用ドキュメントページ][9]�
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-macos
 [2]: https://github.com/DataDog/datadog-agent/tree/master/docs/trace-agent#run-on-windows
-[3]: /ja/agent/faq/where-is-the-configuration-file-for-the-agent
+[3]: /ja/agent/faq/where-is-the-configuration-file-for-the-agent/
 [4]: /ja/tracing/visualization/#trace-metrics
 [5]: https://app.datadoghq.com/account/settings#agent
 [6]: https://hub.docker.com/r/datadog/docker-dd-agent
-[7]: /ja/tracing/docker
-[8]: /ja/api/?lang=console#traces
-[9]: /ja/agent
+[7]: /ja/tracing/docker/
+[8]: /ja/api/v1/tracing/
+[9]: /ja/agent/
 [10]: https://github.com/DataDog/dd-agent/blob/master/datadog.conf.example
 [11]: /ja/tracing/setup/?tab=agent5250#trace-search
-[12]: /ja/help
+[12]: /ja/help/

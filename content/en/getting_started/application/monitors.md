@@ -83,11 +83,11 @@ Removing the `@notification` from either section removes it from both sections.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/monitor_types/metric
+[1]: /monitors/monitor_types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
-[6]: /integrations/disk
+[6]: /integrations/disk/
 [7]: /monitors/monitor_types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notifications/#conditional-variables

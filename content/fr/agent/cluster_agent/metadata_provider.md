@@ -8,13 +8,13 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
     tag: Blog
     text: Mettre à l'échelle vos charges de travail Kubernetes en fonction d'une métrique Datadog
-  - link: /agent/autodiscovery/clusterchecks
+  - link: /agent/cluster_agent/clusterchecks/
     tag: Documentation
     text: Exécuter des checks de cluster avec Autodiscovery
-  - link: agent/kubernetes/daemonset_setup
+  - link: /agent/kubernetes/daemonset_setup/
     tag: Documentation
     text: Exécuter l'Agent avec un DaemonSet Kubernetes
-  - link: /agent/cluster_agent/troubleshooting
+  - link: /agent/cluster_agent/troubleshooting/
     tag: Documentation
     text: Dépanner l'Agent de cluster Datadog
 ---
@@ -32,5 +32,5 @@ Pour activer la fonction Fournisseur de métadonnées sur le cluster :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/cluster_agent/troubleshooting
+[1]: /fr/agent/cluster_agent/troubleshooting/
 [2]: /fr/agent/cluster_agent/setup/#step-3-create-the-cluster-agent-and-its-service

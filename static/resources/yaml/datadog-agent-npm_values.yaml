@@ -1,0 +1,10 @@
+datadog:
+  kubeStateMetricsEnabled: false
+  processAgent:
+    enabled: true
+  systemProbe:
+    enabled: true
+agents:
+  rbac:
+    create: false
+    serviceAccountName: datadog-agent

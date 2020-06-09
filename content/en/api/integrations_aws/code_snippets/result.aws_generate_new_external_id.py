@@ -1,1 +1,0 @@
-{u'external_id': u'<NEW_EXTERNAL_ID>'}

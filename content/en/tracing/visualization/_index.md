@@ -5,19 +5,19 @@ aliases:
   - /tracing/terminology/
   - /tracing/faq/what-is-the-difference-between-type-service-resource-and-name
 further_reading:
-- link: "tracing/setup/"
+- link: "/tracing/setup/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "tracing/visualization/services_list/"
+- link: "/tracing/visualization/services_list/"
   tag: "Documentation"
   text: "Discover the list of services reporting to Datadog"
-- link: "tracing/visualization/service"
+- link: "/tracing/visualization/service/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
-- link: "tracing/visualization/resource"
+- link: "/tracing/visualization/resource/"
   tag: "Documentation"
   text: "Dive into your resource performance and traces"
-- link: "tracing/visualization/trace"
+- link: "/tracing/visualization/trace/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
 ---
@@ -25,7 +25,7 @@ The APM UI provides many tools to troubleshoot application performance and corre
 
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Service](#services)            | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances.                                         |
+| [Service](#services)            | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application.                                  |
 | [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                              |
 | [Monitors][1]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
@@ -128,19 +128,19 @@ After a tag has been added to a span, search and query on the tag in App Analyti
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/monitor_types/apm/
-[2]: /developers/faq/data-collection-resolution-retention
-[3]: /tracing/setup
-[4]: /tracing/visualization/services_list
-[5]: /tracing/visualization/services_map
-[6]: /tracing/visualization/service
-[7]: /tracing/visualization/resource
-[8]: /tracing/opentracing/java#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
-[9]: /tracing/manual_instrumentation
-[10]: /tracing/opentracing
-[11]: /tracing/connect_logs_and_traces
-[12]: /tracing/guide/adding_metadata_to_spans
-[13]: /tracing/runtime_metrics
-[14]: /tracing/app_analytics
+[2]: /developers/faq/data-collection-resolution-retention/
+[3]: /tracing/setup/
+[4]: /tracing/visualization/services_list/
+[5]: /tracing/visualization/services_map/
+[6]: /tracing/visualization/service/
+[7]: /tracing/visualization/resource/
+[8]: /tracing/opentracing/java/#create-a-distributed-trace-using-manual-instrumentation-with-opentracing
+[9]: /tracing/manual_instrumentation/
+[10]: /tracing/opentracing/
+[11]: /tracing/connect_logs_and_traces/
+[12]: /tracing/guide/adding_metadata_to_spans/
+[13]: /tracing/runtime_metrics/
+[14]: /tracing/app_analytics/
 [15]: https://app.datadoghq.com/metric/summary
 [16]: https://app.datadoghq.com/monitors#/create
 [17]: /tracing/app_analytics/#automatic-configuration

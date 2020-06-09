@@ -7,19 +7,19 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/go-logging/"
   tag: "Blog"
   text: "How to collect, standardize, and centralize Golang logs"
-- link: "logs/processing"
+- link: "/logs/processing/"
   tag: "Documentation"
   text: "Learn how to process your logs"
-- link: "logs/processing/parsing"
+- link: "/logs/processing/parsing/"
   tag: "Documentation"
   text: "Learn more about parsing"
-- link: "logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "logs/explorer/analytics"
+- link: "/logs/explorer/analytics/"
   tag: "Documentation"
   text: "Perform Log Analytics"
-- link: "logs/faq/log-collection-troubleshooting-guide"
+- link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
 ---
@@ -78,6 +78,10 @@ func main() {
 }
 ```
 
+**Connect Logs and Traces**
+
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Go logging instructions][3] to automatically add trace and span IDs in your logs.
+
 ## Configure your Datadog Agent
 
 Create a `go.d/conf.yaml` file in your `conf.d/` folder with the following content:
@@ -107,4 +111,5 @@ Here are some little advices:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/sirupsen/logrus
-[2]: /logs/processing/parsing
+[2]: /logs/processing/parsing/
+[3]: /tracing/connect_logs_and_traces/go/

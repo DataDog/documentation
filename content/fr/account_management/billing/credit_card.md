@@ -24,4 +24,4 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 
 [1]: https://app.datadoghq.com/account/billing
 [2]: mailto:success@datadoghq.com
-[3]: /fr/help
+[3]: /fr/help/

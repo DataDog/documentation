@@ -38,10 +38,10 @@
     - action: integrations
       branch: prod
       globs:
-      - integration/**/*_metadata.csv
-      - integration/**/manifest.json
-      - integration/**/service_checks.json
-      - integration/**/README.md
+      - integration/*/*_metadata.csv
+      - integration/*/manifest.json
+      - integration/*/service_checks.json
+      - integration/*/README.md
 
   - repo_name: integrations-core
     contents:
@@ -134,6 +134,21 @@
           title: Puppet
           kind: documentation
           dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/master/README.md"]
+
+  - repo_name: datadog-formula
+    contents:
+
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - README.md
+      options:
+        dest_path: '/agent/basic_agent_usage/'
+        file_name: 'saltstack.md'
+        front_matters:
+          title: SaltStack
+          kind: documentation
+          dependencies: ["https://github.com/DataDog/datadog-formula/blob/master/README.md"]
 
   - repo_name: dd-trace-rb
     contents:
@@ -233,3 +248,13 @@
             - link: "logs/explorer"
               tag: "Documentation"
               text: "Learn how to explore your logs"
+
+  - repo_name: security-monitoring
+    contents:
+    - action: security-rules
+      branch: master
+      globs:
+        - "*.json"
+      options:
+        dest_path: '/security_monitoring/default_rules/'
+

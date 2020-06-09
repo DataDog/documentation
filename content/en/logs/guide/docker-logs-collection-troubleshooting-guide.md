@@ -177,7 +177,7 @@ logs_config:
   docker_client_read_timeout: 60
 ```
 
-[1]: /help
+[1]: /help/
 [2]: /integrations/journald/#setup
 [3]: /agent/docker/?tab=standard#mounting-conf-d
 [4]: https://docs.docker.com/config/containers/logging/journald/

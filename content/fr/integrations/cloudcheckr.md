@@ -5,11 +5,12 @@ kind: integration
 newhlevel: true
 is_public: true
 public_title: Intégration Datadog/CloudCheckr
-short_description: "Optimisez votre extension Cloudcheckr : offrez-lui vos métriques mémoire par instance depuis Datadog."
+short_description: 'Optimisez votre extension Cloudcheckr : offrez-lui vos métriques mémoire par instance depuis Datadog.'
+dependencies:
+    ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md']
 categories:
-- cloud
-- configuration & deployment
-- aws
+    - cloud
+    - configuration & deployment
 ddtype: crawler
 ---
 
@@ -19,12 +20,12 @@ ddtype: crawler
 
 Prenez rapidement des décisions éclairées en fonction des données actuelles et historiques de votre consommation de ressources afin de conserver une infrastructure flexible et rentable grâce à l'intégration Datadog/CloudCheckr.
 
-## Implémentation
+## Configuration
 
 Pour connecter votre application Datadog à votre compte CloudCheckr :
 
-* Cliquez sur vos extensions CloudCheckr.
-* [Ajoutez vos clés d'API et d'application Datadog][1].
+- Cliquez sur vos extensions CloudCheckr.
+- [Ajoutez vos clés d'API et d'application Datadog][1].
 
 ## Pour aller plus loin
 

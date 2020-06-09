@@ -2,7 +2,7 @@
 title: Configuring SafeNet as a SAML IdP
 kind: documentation
 further_reading:
-- link: "account_management/saml"
+- link: "/account_management/saml/"
   tag: "Documentation"
   text: "Configure SAML for your Datadog account"
 ---

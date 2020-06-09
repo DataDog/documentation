@@ -13,19 +13,19 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/net-monitoring-apm/"
     tag: "Blog"
     text: ".NET monitoring with Datadog APM and distributed tracing"
-  - link: "tracing/visualization/"
+  - link: "/tracing/visualization/"
     tag: "Documentation"
     text: "Explore your services, resources and traces"
-  - link: "tracing/"
+  - link: "/tracing/"
     tag: "Advanced Usage"
     text: "Advanced Usage"
 ---
 
 ## Getting Started
 
-<div class="alert alert-info">If you already have a Datadog account you can find step-by-step instructions in our in-app guides for <a href="https://app.datadoghq.com/apm/docs?architecture=host-based&language=net" target="_blank">host-based</a> and <a href="https://app.datadoghq.com/apm/docs?architecture=container-based&language=net" target="_blank">container-based</a> set ups.</div>
+If you already have a Datadog account you can find [step-by-step instructions][1] in our in-app guides for either host-based or container-based set ups.
 
-To begin tracing applications written in any language, first [install and configure the Datadog Agent][1]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
+Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][2]. The .NET Tracer runs in-process to instrument your applications and sends traces from your application to the Agent.
 
 **Note**: The .NET Tracer supports all .NET-based languages (C#, F#, Visual Basic, etc).
 
@@ -40,11 +40,11 @@ Automatic instrumentation captures:
 - Unhandled exceptions, including stacktraces if available
 - A total count of traces (e.g. web requests) flowing through the system
 
-The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.1. It also supports [.NET Framework][2].
+The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.1. It also supports [.NET Framework][3].
 
-**Note:** The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1.
+**Note:** The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][4] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1.
 
-**Note:** Older versions of .NET Core on Linux/x64 have JIT compiler bugs that can cause applications to throw exceptions when using automatic instrumentation. If your application is running on .NET Core 2.0, 2.1.0-2.1.11, or 2.2.0-2.2.5, we strongly recommend you update your .NET Core runtime. If you cannot update, you may need to set the environment variable `DD_CLR_DISABLE_OPTIMIZATIONS=true` to work around the issue. See [DataDog/dd-trace-dotnet/issues/302][4] for more details.
+**Note:** Older versions of .NET Core on Linux/x64 have JIT compiler bugs that can cause applications to throw exceptions when using automatic instrumentation. If your application is running on .NET Core 2.0, 2.1.0-2.1.11, or 2.2.0-2.2.5, we strongly recommend you update your .NET Core runtime. If you cannot update, you may need to set the environment variable `DD_CLR_DISABLE_OPTIMIZATIONS=true` to work around the issue. See [DataDog/dd-trace-dotnet/issues/302][5] for more details.
 
 ### Installation
 
@@ -215,15 +215,7 @@ The .NET Tracer can instrument the following libraries automatically:
 
 **Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
-
-## Manual Instrumentation
-
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][6] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
-For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][7].
-
-Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1, 3.0, and 3.1 on Windows and Linux.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][6] for help. Alternatively, see the [custom instrumentation instructions][7].
 
 ## Configuration
 
@@ -248,9 +240,6 @@ var settings = TracerSettings.FromDefaultSources();
 settings.ServiceName = "MyService";
 settings.AgentUri = new Uri("http://localhost:8126/");
 
-// disable the AdoNet integration
-settings.Integrations["AdoNet"].Enabled = false;
-
 // create a new Tracer using these settings
 var tracer = new Tracer(settings);
 
@@ -272,7 +261,6 @@ For example, on Windows:
 rem Set environment variables
 SET DD_TRACE_AGENT_URL=http://localhost:8126
 SET DD_SERVICE_NAME=MyService
-SET DD_ADONET_ENABLED=false
 
 rem Launch application
 example.exe
@@ -286,7 +274,6 @@ On Linux:
 # Set environment variables
 export DD_TRACE_AGENT_URL=http://localhost:8126
 export DD_SERVICE_NAME=MyService
-export DD_ADONET_ENABLED=false
 
 # Launch application
 dotnet example.dll
@@ -302,7 +289,6 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
 {
   "DD_TRACE_AGENT_URL": "http://localhost:8126",
   "DD_SERVICE_NAME": "MyService",
-  "DD_ADONET_ENABLED": "false"
 }
 ```
 
@@ -337,7 +323,7 @@ The following table lists configuration variables that are available only when u
 | `DD_DISABLED_INTEGRATIONS`<br/><br/>`DisabledIntegrationNames` | Sets a list of integrations to disable. All other integrations remain enabled. If not set, all integrations are enabled. Supports multiple values separated with semicolons. Valid values are the integration names listed in the [Integrations](#integrations) section above.           |
 | `DD_TRACE_ANALYTICS_ENABLED`<br/><br/>`AnalyticsEnabled`       | Shorthand that enables default App Analytics settings for web framework integrations. Valid values are: `true` or `false` (default).                                                                                                                                                     |
 
-The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` propery to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations](#integrations) section above.
+The following table lists configuration variables that are available only when using automatic instrumentation and can be set for each integration. Use the first name (e.g. `DD_<INTEGRATION>_ENABLED`) when setting environment variables or configuration files. The second name (e.g. `Enabled`), indicates the name the `IntegrationSettings` property to use when changing settings in the code. Access these properties through the `TracerSettings.Integrations[]` indexer. Integration names are listed in the [Integrations](#integrations) section above. **Note:** On Linux, the names of environment variables are case-sensitive.
 
 | Setting Name                                                            | Description                                                                                                           |
 |-------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -350,11 +336,11 @@ The following table lists configuration variables that are available only when u
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/send_traces
-[2]: /tracing/setup/dotnet-framework
-[3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
-[4]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
-[5]: /help
-[6]: https://www.nuget.org/packages/Datadog.Trace
+[1]: https://app.datadoghq.com/apm/install
+[2]: /tracing/send_traces/
+[3]: /tracing/setup/dotnet-framework/
+[4]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
+[5]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
+[6]: /help/
 [7]: /tracing/manual_instrumentation/dotnet
 [8]: /tracing/guide/setting_primary_tags_to_scope/#environment

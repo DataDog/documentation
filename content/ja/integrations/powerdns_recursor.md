@@ -155,7 +155,7 @@ Agent が Recursor の統計 API に接続できない場合は、CRITICAL を�
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/datadog_checks/powerdns_recursor/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/autodiscovery/integrations/
+[5]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/metadata.csv
-[8]: https://docs.datadoghq.com/ja/help
+[8]: https://docs.datadoghq.com/ja/help/

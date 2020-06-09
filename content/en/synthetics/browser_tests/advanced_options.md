@@ -1,14 +1,14 @@
 ---
-title: Advanced Options for Browser Test Actions
+title: Advanced Options for Browser Test Steps
 kind: documentation
-description: Configure advanced options for Browser Test Actions
+description: Configure advanced options for Browser Test Steps
 further_reading:
-- link: "synthetics/browser_tests/actions"
+- link: "/synthetics/browser_tests/actions/"
   tag: "Documentation"
-  text: "Learn more about Browser Test Actions"
+  text: "Learn more about Browser Test Steps"
 ---
 
-## Custom selector
+## User specified locator
 
 By default, [browser tests][1] use the Datadog locator system. It is recommended to only use custom selectors in edge cases as the Datadog locator system is what allows tests to be self-maintaining.
 
@@ -16,9 +16,8 @@ Custom selectors are created by performing a step of interest in the recorder (*
 
 To specify your custom locator:
 
-* Choose an [action][2] and complete this action in the Browser Test scenario panel.
-* Once the action is recorded in the left panel, click on the recorded action.
-* Click **Advanced options**.
+* Record or manually add a [step][2] to your recording.
+* Click on the recorded step and click **Advanced options**.
 * The HTML element can then be selected either with an X-path or with a CSS class/ID, for example: `div`, `h1`, or `.hero-body`.
 * Once you have defined an element, click **Test** to highlight the element in the recording on the right.
 
@@ -32,7 +31,7 @@ You can decide to fall back on the regular browser test algorithm by deselecting
 
 ## Timeout
 
-If a browser test is not able to locate an element, by default it retries the action for 60 seconds.
+If a browser test is not able to locate an element, by default it retries the step for 60 seconds.
 
 You can decide to decrease or increase this time out up to 300 seconds if you want your test to wait for less or more time to be able to find the step targeted element.
 
@@ -61,5 +60,5 @@ Opening your subtest in the main tab means that your subtest is the continuation
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/browser_tests/
-[2]: /synthetics/browser_tests/actions
+[2]: /synthetics/browser_tests/actions/
 [3]: /synthetics/browser_tests/actions/#subtests

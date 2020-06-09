@@ -36,8 +36,6 @@ You can also track success rate and metric-based SLIs (Service Level Indicators)
 
 Once you have monitors set up, on the [Service Level Objectives status page][1], you can view the overall uptime percentage only—or the overall percentage, plus the uptime for each monitor.
 
-{{< img src="monitors/service_level_objectives/slo-overview.png" alt="slo main page"  >}}
-
 ## Edit an SLO
 
 To edit an SLO, hover over the SLO on the right, and click the edit pencil icon.
@@ -139,4 +137,4 @@ After creating your SLO, you can use the SLO dashboard widget to visualize the s
 [1]: https://app.datadoghq.com/slo
 [2]: /monitors/service_level_objectives/metric/
 [3]: /monitors/service_level_objectives/monitor/
-[4]: /dashboards/widgets/slo
+[4]: /dashboards/widgets/slo/

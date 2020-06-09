@@ -59,4 +59,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 [2]: https://app.datadoghq.com/screen/integration/desk
 [3]: https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/desk/desk_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help
+[5]: https://docs.datadoghq.com/fr/help/

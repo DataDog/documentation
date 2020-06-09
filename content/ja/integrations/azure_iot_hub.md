@@ -52,6 +52,6 @@ Azure IoT Hub インテグレーションには、サービスのチェック機
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure
+[1]: https://docs.datadoghq.com/ja/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_iot_hub/azure_iot_hub_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help
+[3]: https://docs.datadoghq.com/ja/help/

@@ -8,13 +8,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/cluster_agent/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks/"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
-- link: "agent/kubernetes/daemonset_setup"
+- link: "/agent/kubernetes/daemonset_setup/"
   tag: "Documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "/agent/cluster_agent/troubleshooting"
+- link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
@@ -67,5 +67,5 @@ The following environment variables are supported:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /agent/cluster_agent/event_collection
+[2]: /agent/cluster_agent/event_collection/
 [3]: https://golang.org/pkg/expvar

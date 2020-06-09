@@ -2,7 +2,7 @@
 title: Windows 用 Datadog Agent Manager
 kind: ガイド
 further_reading:
-  - link: /agent/basic_agent_usage/windows
+  - link: /agent/basic_agent_usage/windows/
     tag: ドキュメント
     text: Windows Agent の基本的なエージェントの利用方法
 ---
@@ -132,6 +132,6 @@ Agent に問題がある場合、フレアページは [Datadog サポート][4]
 
 [1]: /ja/agent/basic_agent_usage/windows/#installation
 [2]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[3]: /ja/integrations
-[4]: /ja/help
-[5]: /ja/agent/troubleshooting/send_a_flare
+[3]: /ja/integrations/
+[4]: /ja/help/
+[5]: /ja/agent/troubleshooting/send_a_flare/

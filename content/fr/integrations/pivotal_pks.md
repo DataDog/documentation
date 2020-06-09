@@ -55,8 +55,8 @@ Suivez les [étapes de collecte de logs de conteneur][5] pour en savoir plus sur
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 
 [1]: https://pivotal.io/platform/pivotal-container-service
-[2]: https://docs.datadoghq.com/fr/integrations/kubernetes
+[2]: https://docs.datadoghq.com/fr/integrations/kubernetes/
 [3]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/kubernetes/#log-collection-setup
 [4]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/kubernetes/#container-installation
 [5]: https://docs.datadoghq.com/fr/logs/log_collection/docker/#option-2-container-installation
-[6]: https://docs.datadoghq.com/fr/help
+[6]: https://docs.datadoghq.com/fr/help/

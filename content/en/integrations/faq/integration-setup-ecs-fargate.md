@@ -8,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-aws-fargate/"
   tag: "Blog"
   text: "Monitor AWS Fargate applications with Datadog"
-- link: "/agent/docker/integrations"
+- link: "/agent/docker/integrations/"
   tag: "Documentation"
   text: "Autodiscovery"
 ---
@@ -28,11 +28,11 @@ If you already [set up the Container Agent][3] in ECS Fargate, follow these step
 5. Enter the **Container name**, **Image**, and any additional preference settings.
 6. Under **Docker labels** add the following:
 
-  | Key                           | Value                                           |
-  |-------------------------------|-------------------------------------------------|
-  | com.datadoghq.ad.instances    | `[{"host": "%%host%%", "port": <PORT_NUMBER>}]` |
-  | com.datadoghq.ad.check_names  | `["<CHECK_NAME>"]`                              |
-  | com.datadoghq.ad.init_configs | `[{}]`                                          |
+| Key                           | Value                                           |
+|-------------------------------|-------------------------------------------------|
+| com.datadoghq.ad.instances    | `[{"host": "%%host%%", "port": <PORT_NUMBER>}]` |
+| com.datadoghq.ad.check_names  | `["<CHECK_NAME>"]`                              |
+| com.datadoghq.ad.init_configs | `[{}]`                                          |
 
 7. Click the **Add** button, then click the **Create** button.
 
@@ -88,7 +88,7 @@ Use the following JSON under `containerDefinitions` to create a Redis container 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/ecs_fargate
+[1]: /integrations/ecs_fargate/
 [2]: /agent/docker/integrations/?tab=dockerlabel#configuration
 [3]: /integrations/ecs_fargate/#container-agent-setup
 [4]: https://aws.amazon.com/console

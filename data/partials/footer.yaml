@@ -7,15 +7,30 @@ col1:
   - name: integrations
     link: "https://www.datadoghq.com/product/integrations/"
     title: "Integrations"
-  - name: apm
-    link: "https://www.datadoghq.com/apm/"
-    title: "APM"
-  - name: logs
-    link: "https://www.datadoghq.com/log-management/"
-    title: "Log Management"
   - name: dashboards
     link: "https://www.datadoghq.com/dashboarding/"
     title: "Dashboards"
+  - name: logs
+    link: "https://www.datadoghq.com/log-management/"
+    title: "Log Management" 
+  - name: apm
+    link: "https://www.datadoghq.com/apm/"
+    title: "APM"
+  - name: network
+    link: "https://www.datadoghq.com/network/"
+    title: "Network Monitoring"
+  - name: synthetics
+    link: "https://www.datadoghq.com/synthetics/"
+    title: "Synthetic Monitoring"
+  - name: rum
+    link: "https://www.datadoghq.com/rum/"
+    title: "Real User Monitoring"
+  - name: serverless
+    link: "https://www.datadoghq.com/serverless/"
+    title: "Serverless"
+  - name: alerts
+    link: "https://www.datadoghq.com/alerts/"
+    title: "Alerts"
   - name: synthetics
     link: "https://www.datadoghq.com/synthetics/"
     title: "Synthetics"
@@ -79,6 +94,12 @@ col4:
   - name: instagram
     link: "https://www.instagram.com/datadoghq/"
     title: "Instagram"
+  - name: linkedin
+    link: "https://www.LinkedIn.com/company/datadog/"
+    title: "LinkedIn"
   - name: twitter
     link: "https://twitter.com/datadoghq"
     title: "Twitter"
+  - name: youtube
+    link: "https://www.youtube.com/user/DatadogHQ/"
+    title: "YouTube"

@@ -111,15 +111,15 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de recevoir la valeur 200 depuis
 
 Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
-[1]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[1]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
 [2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
 [4]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [5]: https://app.datadoghq.com/account/settings#agent
-[6]: https://docs.datadoghq.com/fr/getting_started/integrations
+[6]: https://docs.datadoghq.com/fr/getting_started/integrations/
 [7]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-extras/blob/master/gnatsd/datadog_checks/gnatsd/data/conf.yaml.example
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [11]: https://github.com/DataDog/datadog-sdk-testing/blob/master/lib/config/metadata.csv
-[12]: https://docs.datadoghq.com/fr/help
+[12]: https://docs.datadoghq.com/fr/help/

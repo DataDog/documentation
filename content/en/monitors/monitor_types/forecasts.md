@@ -4,13 +4,13 @@ kind: documentation
 aliases:
 - /guides/forecasts/
 further_reading:
-- link: "monitors/notifications"
+- link: "/monitors/notifications/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "monitors/downtimes"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule downtime to mute a monitor"
-- link: "monitors/monitor_status"
+- link: "/monitors/monitor_status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 ---
@@ -113,9 +113,9 @@ The following functions cannot be nested inside calls to the `forecast()` functi
 
 [1]: https://app.datadoghq.com/monitors#create/forecast
 [2]: /monitors/monitor_types/metric/#define-the-metric
-[3]: /monitors/faq/what-are-recovery-thresholds
-[4]: /monitors/faq/how-to-update-anomaly-monitor-timezone
-[5]: /dashboards/functions/rollup
-[6]: /monitors/notifications
-[7]: /api/#create-a-monitor
+[3]: /monitors/faq/what-are-recovery-thresholds/
+[4]: /monitors/faq/how-to-update-anomaly-monitor-timezone/
+[5]: /dashboards/functions/rollup/
+[6]: /monitors/notifications/
+[7]: /api/v1/monitors/#create-a-monitor
 [8]: /monitors/monitor_status/#settings

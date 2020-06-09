@@ -5,13 +5,13 @@ platform: Source
 aliases:
     - /guides/basic_agent_usage/source/
 further_reading:
-- link: "logs/"
+- link: "/logs/"
   tag: "Documentation"
   text: "Collect your logs"
-- link: "/infrastructure/process"
+- link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Collect your processes"
-- link: "tracing"
+- link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
 ---
@@ -62,7 +62,7 @@ Configuration files for [Integrations][1]:
 
 * `/etc/datadog-agent/conf.d/`
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -74,7 +74,7 @@ Configuration files for [Integrations][1]:
 
 * `/etc/dd-agent/conf.d/`
 
-[1]: /integrations
+[1]: /integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -87,4 +87,4 @@ Configuration files for [Integrations][1]:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent/source
-[2]: /agent/troubleshooting
+[2]: /agent/troubleshooting/

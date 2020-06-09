@@ -5,16 +5,16 @@ further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
   text: "Alert on anomalous p99 latency of a database service"
-- link: "tracing/guide/week_over_week_p50_comparison/"
+- link: "/tracing/guide/week_over_week_p50_comparison/"
   tag: "2 mins"
   text: "Compare a service’s latency to the previous week"
 - link: "/tracing/guide/apm_dashboard/"
   tag: "4 mins"
   text: "Create a Dashboard to track and correlate APM metrics"
-- link: "tracing/guide/add_span_md_and_graph_it/"
+- link: "/tracing/guide/add_span_md_and_graph_it/"
   tag: "7 mins"
   text: "Add span tags and slice and dice your application performance"
-- link: "tracing/guide/"
+- link: "/tracing/guide/"
   tag: ""
   text: "All guides"
 ---
@@ -69,5 +69,5 @@ Datadog APM seamlessly integrates with the other Datadog metrics and information
 [4]: /tracing/visualization/#resources
 [5]: /tracing/visualization/#spans
 [6]: /tracing/visualization/trace/?tab=spanmetadata
-[7]: /tracing/guide/adding_metadata_to_spans
-[8]: /tracing/connect_logs_and_traces
+[7]: /tracing/guide/adding_metadata_to_spans/
+[8]: /tracing/connect_logs_and_traces/
