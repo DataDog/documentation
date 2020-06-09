@@ -229,6 +229,19 @@ body > header {
       img {
         height: 39px;
       }
+
+      picture.logo-text {
+        @include media-breakpoint-down(lg) {
+          display: block;
+          height: auto;
+          margin-left: 5px;
+          margin-top: -2px;
+
+          .logo-text {
+            height: 16px;
+          }
+        }
+      }
     }
   }
 
