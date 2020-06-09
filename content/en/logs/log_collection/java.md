@@ -67,8 +67,7 @@ Add a new file appender to `log4j.xml`:
 
 ## Connect your service across logs and traces
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM Java instructions][1]
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][1]
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
@@ -97,8 +96,7 @@ Edit your `log4j2.xml` file:
 
 ## Connect your service across logs and traces
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM Java instructions][1].
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][1].
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
@@ -134,8 +132,7 @@ Edit your `logback.xml` file:
 
 ## Connect your service across logs and traces
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM Java instructions][1].
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][1].
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
@@ -186,8 +183,7 @@ Once that done, edit your `logback.xml` file as described in the below `Slf4j` s
 
 ## Connect your service across logs and traces
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM Java instructions][1]
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][1]
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
@@ -253,8 +249,7 @@ There is a default log4j2 JSON Layout that can be used. Add the following Append
 
 ## Connect your service across logs and traces
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM Java instructions][1].
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][1].
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
@@ -293,8 +288,7 @@ Then edit your `logback.xml` file and update the encoder:
 
 ## Connect your service across logs and traces
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM Java instructions][2].
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][2].
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.configuration.
 

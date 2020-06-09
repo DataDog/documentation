@@ -159,30 +159,28 @@ spec:
 
 To achieve a single point of configuration across all telemetry, it is recommended to set up [logs injection][1] first if you plan to connect logs, traces, and metrics. Once setup is complete, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment.
 
-As long as the agent can access your container's [Docker socket][2], it will be able to detect the environment variables and map them to the standard tags. The following variables can be set in the Docker image to implement unified tagging:
+As long as the agent can access your container's [Docker socket][2], it will be able to detect the environment variables and map them to the standard tags. Set service and version through environment variables in your Dockerfile:
 
-```json
-"environment": [
-  {
-    "name": "DD_ENV",
-    "value": "<ENV>"
-  },
-  {
-    "name": "DD_SERVICE",
-    "value": "<SERVICE>"
-  },
-  {
-    "name": "DD_VERSION",
-    "value": "<VERSION>"
-  }
-]
 ```
+ENV DD_SERVICE <SERVICE>
+ENV DD_VERSION <VERSION
+
+LABEL com.datadoghq.tags.env="<ENV>"
+LABEL com.datadoghq.tags.service="<SERVICE>"
+LABEL com.datadoghq.tags.version="<VERSION>"
+```
+
+Since `env` is generally determined at deploy or run time, you can inject it later:
+
+`docker run ... -e DD_ENV=<ENV>`
+
+You may also inject `DD_SERVICE` and `DD_VERSION` at this time as well if you prefer.
 
 ##### Partial configuration
 
 If you do not need to set up logs injection or your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM), you can instead use Docker labels:
 
-```json
+```
   LABEL com.datadoghq.tags.env="<ENV>"
   LABEL com.datadoghq.tags.service="<SERVICE>"
   LABEL com.datadoghq.tags.version="<VERSION>"
@@ -199,11 +197,9 @@ Or as an option to `docker run`:
 {{% tab "ECS" %}}
 ##### Full configuration
 
-To achieve a single point of configuration across all telemetry, it is recommended to set up [logs injection][1] first if you plan to connect logs, traces, and metrics. Once setup is complete, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment.
+To achieve a single point of configuration across all telemetry, it is recommended to set up [logs injection][1] first if you plan to connect logs, traces, and metrics. Once setup is complete, make `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` available within your container's runtime environment. For instance, you can add these environment variables in one place through your ECS task definition:
 
-As long as the agent can access your container's [Docker socket][2], it will be able to detect the environment variables and map them to the standard tags. The following variables can be set in the Docker image to implement unified tagging:
-
-```json
+```
 "environment": [
   {
     "name": "DD_ENV",
@@ -218,13 +214,18 @@ As long as the agent can access your container's [Docker socket][2], it will be 
     "value": "<VERSION>"
   }
 ]
+
+"dockerLabels": {
+  "com.datadoghq.tags.env": "<ENV>",
+  "com.datadoghq.tags.service": "<SERVICE>",
+  "com.datadoghq.tags.version": "<VERSION>"
 ```
 
 ##### Partial configuration
 
-If you do not need to set up logs injection or there are containers that will not benefit from using the environment variables in the application runtime, you can instead use Docker labels:
+If you do not need to set up logs injection or there are containers that will not benefit from using the environment variables in the application runtime, you can instead use Docker labels in your ECS task definition:
 
-```json
+```
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
   "com.datadoghq.tags.service": "<SERVICE>",
@@ -232,17 +233,13 @@ If you do not need to set up logs injection or there are containers that will no
 }
 ```
 
-Or set the Docker label in the task definition of ECS:
-
-`"containerLabels": <JSON_MAPPING>`
-
-
 [1]: /tracing/connect_logs_and_traces/
-[2]: https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Non-containerized environment
+
+<div class="alert alert-warning">Unified service tagging for non-containerized environments is in public beta. Contact <a href="/help/">Datadog Support</a> if you have questions or feedback.</div>
 
 Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, it is recommended that these environment variables be scoped to a single process.
 
@@ -272,34 +269,16 @@ At the very least they will be used by the APM and [Dogstatsd clients][2] to tag
 
 {{% tab "Logs" %}}
 
-If you're using [connected logs and traces][1], it is recommended to enable automatic logs injection for your APM Tracer. The APM Tracer will then automatically inject `env`, `service`, and `version` into your logs, thereby eliminating manual configuration for those fields elsewhere.
+If you're using [connected logs and traces][1], it is recommended to enable automatic logs injection if supported for your APM Tracer. The APM Tracer will then automatically inject `env`, `service`, and `version` into your logs, thereby eliminating manual configuration for those fields elsewhere.
 
-If you already have logs configuration checks defined similarly to the example below, you **do not** need to define `service`:
-
-```yaml
-logs:
-  - type: file
-    path: "/path/to/your/log.log"
-    source: python
-    service: service_name
-    log_processing_rules:
-      ...
-    tags:
-      ...
-```
-This configuration will allow existing configurations, such as log processing rules or other tags, to continue to work exactly the same.
-
-If you do not wish to use automatic log injection from the APM tracer, you also have the option of [manually injecting these fields into logs][2].
-
+**Note**: The Java, Ruby, and PHP Tracer do not currently support configuration of unified service tagging for logs.
 
 [1]: /tracing/connect_logs_and_traces/
-[2]: /tracing/connect_logs_and_traces/java?tab=log4j2#manual-trace-id-injection
 {{% /tab %}}
 
 {{% tab "Custom Metrics" %}}
 
 Tags are added in an append-only fashion for [custom statsd metrics][1]. For example, if you have two different values for `env`, the metrics will be tagged with both environments. There is no order in which one tag will override another of the same name.
-
 
 [1]: /developers/metrics/
 {{% /tab %}}
