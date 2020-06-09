@@ -7,6 +7,9 @@ further_reading:
       tag: 'Documentation'
       text: 'Instrument Your Application'
 ---
+
+The .NET Tracer supports automatic instrumentation on .NET Framework 4.5 and above. It also supports [.NET Core][3].
+
 ## Integrations
 
 The .NET Tracer can instrument the following libraries automatically:
