@@ -266,9 +266,7 @@ dogstatsd_so_rcvbuf: 4194304
 
 #### Note on sysctl in Kubernetes
 
-If you are using Kubernetes to deploy the Agent and/or DogStatsD, setting the `sysctl` values will need to be done for their container.
-
-The `net.*` sysctls being namespaced, you will be able to set them per pod: see [the official Kubernetes documentation][6] on how to allow access to the sysctl in the containers and how to set their value.
+If you are using Kubernetes to deploy the Agent and/or DogStatsD and you want to configure the sysctls as mentioned above, setting their value will have to be done per container. The `net.*` sysctls being namespaced, you will be able to set them per pod: see [the official Kubernetes documentation][6] on how to allow the access to the sysctls in the containers and how to set their value.
 
 ### Ensure proper packet sizes
 
