@@ -33,7 +33,7 @@ The .NET Tracer can instrument the following libraries automatically:
 
 **Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][2] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
 
 ## Further Reading
 
