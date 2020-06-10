@@ -39,48 +39,55 @@ main:
     url: getting_started/tracing/
     parent: getting_started
     weight: 5
+  - name: Tags
+    identifier: tagging_
+    url: getting_started/tagging/
+    parent: getting_started
+    weight: 6
+  - name: Assigning Tags
+    identifier: assigning_tags
+    url: getting_started/tagging/assigning_tags
+    parent: tagging_
+    weight: 601
+  - name: Unified Service Tagging
+    identifier: unified_service_tagging
+    url: getting_started/tagging/unified_service_tagging
+    parent: tagging_
+    weight: 602
+  - name: Using Tags
+    identifier: using_tags
+    url: getting_started/tagging/using_tags
+    parent: tagging_
+    weight: 603
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 6
+    weight: 7
   - name: Synthetics
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 7opl
+    weight: 8
   - name: Private Location
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 701
+    weight: 801
   - name: Browser Test
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 702
+    weight: 802
   - name: API Test
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 703
+    weight: 803
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 8
-  - name: Tagging
-    url: tagging/
-    pre: nav_tagging
-    identifier: tagging_
-    weight: 20000
-  - name: Assigning tags
-    url: tagging/assigning_tags/
-    parent: tagging_
-    weight: 1
-  - name: Using tags
-    url: tagging/using_tags/
-    parent: tagging_
-    weight: 2
+    weight: 9
   - name: Agent
     url: agent/
     pre: nav_agent

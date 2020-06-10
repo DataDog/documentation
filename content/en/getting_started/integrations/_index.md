@@ -54,6 +54,7 @@ For example, this is the minimum `conf.yaml` configuration file needed to collec
 
 ```yaml
 init_config:
+  service: apache
 
 instances:
     - apache_status_url: http://localhost/server-status?auto
@@ -63,7 +64,6 @@ logs:
       path: /var/log/apache2/access.log
       source: apache
       sourcecategory: http_web_access
-      service: apache
     - type: file
       path: /var/log/apache2/error.log
       source: apache
@@ -76,18 +76,26 @@ To create multiple instances in the same Agent check to monitor two Apache servi
 init_config:
 
 instances:
-    - apache_status_url: "http://localhost/server-status?auto"
+    - apache_stats_url: "http://localhost/server-status?auto"
+      service: local-apache
 
     - apache_status_url: "http://<REMOTE_APACHE_ENDPOINT>/server-status?auto"
+      service: remote-apache
 ```
 
 ### Tagging
 
-Tagging is a key part of filtering and aggregating the data coming into Datadog across many sources. You can assign tags in configuration files, in environment variables, in the UI, the API, and in DogStatsD. If you define tags in the `datadog.yaml` file, the tags are applied to all of your integrations data. Once you've defined the tag in `datadog.yaml`, all new integrations inherit it. If you use a tag environment variable, it applies to all integrations. If you define tags in the corresponding integrations configuration file, it only applies to that specific integration. If you use tags in containers, it applies only to that container. For more information about tagging, see [Getting started with tags][25].
+Tagging is a key part of filtering and aggregating the data coming into Datadog across many sources. For more information about tagging, see [Getting started with tags][25].
+
+If you define tags in the `datadog.yaml` file, the tags are applied to all of your integrations data. Once you've defined a tag in `datadog.yaml`, all new integrations inherit it.
+
+For example, setting `service` in your config file is the recommended [agent setup][26] for monitoring separate, independent systems.
+
+To better unify your environment, it is also recommended to configure the `env` tag in the Agent. To learn more about unified service tagging, refer to the dedicated [unified service tagging][12] documentation.
 
 ### Validation
 
-To validate your Agent and integrations configuration, [run the Agent's `status` subcommand][26], and look for new configuration under the Checks section.
+To validate your Agent and integrations configuration, [run the Agent's `status` subcommand][27], and look for new configuration under the Checks section.
 
 ## Installing multiple integrations
 
@@ -95,7 +103,7 @@ Installing more than one integration is a matter of adding the configuration inf
 
 ## Autodetected integrations
 
-If you set up [process collection][27], Datadog autodetects technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][2]:
+If you set up [process collection][28], Datadog autodetects technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][2]:
 
 {{< img src="getting_started/integrations/ad_integrations.png" alt="Autodetected integrations" >}}
 
@@ -108,35 +116,35 @@ Hosts that are running the integration, but where the integration is not enabled
 
 ## Security practices
 
-For information on how Datadog handles your data, and other security considerations, see our [Security documentation][28].
+For information on how Datadog handles your data, and other security considerations, see our [Security documentation][29].
 
 ## What's next?
 
-Now that you have your first integrations set up, you can start [exploring all of the metrics][29] being sent to Datadog by your application, and use these metrics to begin setting up [dashboards][30] and [alerts][31] to monitor your data.
+Now that you have your first integrations set up, you can start [exploring all of the metrics][30] being sent to Datadog by your application, and use these metrics to begin setting up [dashboards][31] and [alerts][32] to monitor your data.
 
-Also check out our [Logs management][32], [APM][33], and [Synthetics][34] solutions.
+Also check out our [Logs management][33], [APM][34], and [Synthetics][35] solutions.
 
 ## Troubleshooting
 
-The first step to troubleshooting an integration is to use a plugin in your code editor or use one of the many online tools to verify that the YAML is valid. The next step is to run through all of the [Agent troubleshooting][35] steps.
+The first step to troubleshooting an integration is to use a plugin in your code editor or use one of the many online tools to verify that the YAML is valid. The next step is to run through all of the [Agent troubleshooting][36] steps.
 
-If you continue to have problems, reach out to [our awesome Support team][36].
+If you continue to have problems, reach out to [our awesome Support team][37].
 
 ## Key terms
 
 | Term                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **conf.yaml**          | You create the `conf.yaml` in the `conf.d/<INTEGRATION_NAME>.d` folder at the root of your [Agent's configuration directory][37]. Use this file to connect integrations to your system, as well as configure their settings.                                                                                                                                                                                                                                       |
+| **conf.yaml**          | You create the `conf.yaml` in the `conf.d/<INTEGRATION_NAME>.d` folder at the root of your [Agent's configuration directory][38]. Use this file to connect integrations to your system, as well as configure their settings.                                                                                                                                                                                                                                       |
 | **custom check**       | If you have a unique system that you want to monitor, or if you're going to expand the metrics already sent by an integration, you can build a [custom check][10] to define and send metrics to Datadog. However, if you want to monitor a generally available application, public service, or an open source project, and we don't have an integration that already exists for it, you should consider [building a new integration][1] instead of a custom check. |
 | **datadog.yaml**       | This is the main configuration file where you're defining how the Agent as a whole interacts with its own integrations and with your system. Use this file to update API keys, Proxys, host tags, and other global settings.                                                                                                                                                                                                                                       |
-| **event**              | Events are informational messages about your system that are consumed by [the events stream][38] so that you can build monitors on them.                                                                                                                                                                                                                                                                                                                           |
-| **instance**           | You define and map the instance of whatever you are monitoring in the `conf.yaml` file. For example, in the [`http_check` integration][39], you're defining the name associated with the instance of the HTTP endpoint you are monitoring up and downtime. You can monitor **multiple instances** in the same integration, and you do that by defining all of the instances in the `conf.yaml` file.                                                               |
+| **event**              | Events are informational messages about your system that are consumed by [the events stream][39] so that you can build monitors on them.                                                                                                                                                                                                                                                                                                                           |
+| **instance**           | You define and map the instance of whatever you are monitoring in the `conf.yaml` file. For example, in the [`http_check` integration][40], you're defining the name associated with the instance of the HTTP endpoint you are monitoring up and downtime. You can monitor **multiple instances** in the same integration, and you do that by defining all of the instances in the `conf.yaml` file.                                                               |
 | **integration_name.d** | If you have a complex configuration, you can break it down into multiple `YAML` files, and then store them all in the `<INTEGRATION_NAME>.d` folder to define the configuration. The Agent loads any valid `YAML` file in the `<INTEGRATION_NAME>.d` folder.                                                                                                                                                                                                       |
-| **logging**            | If the system you are monitoring has logs, you can customize the logs you are sending to Datadog and use our [Logging Management solution][32] to manage and analyze them.                                                                                                                                                                                                                                                                                         |
+| **logging**            | If the system you are monitoring has logs, you can customize the logs you are sending to Datadog and use our [Logging Management solution][33] to manage and analyze them.                                                                                                                                                                                                                                                                                         |
 | **metadata.csv**       | The file that lists and stores the metrics collected by each integration.                                                                                                                                                                                                                                                                                                                                                                                          |
-| **metrics**            | The list of what is collected from your system by each integration. You can find the metrics for each integration in that integrations `metadata.csv` file. For more information about metrics, see the [Metrics][40] developer page. You can also set up [custom metrics][41], so if the integration doesn't offer a metric out of the box, you can usually add it.                                                                                               |
+| **metrics**            | The list of what is collected from your system by each integration. You can find the metrics for each integration in that integrations `metadata.csv` file. For more information about metrics, see the [Metrics][41] developer page. You can also set up [custom metrics][42], so if the integration doesn't offer a metric out of the box, you can usually add it.                                                                                               |
 | **parameters**         | Use the parameters in the `conf.yaml` file to control accesses between your integration data source and the Agent. The individual integrations `conf.yaml.example` file has all of the required and not required parameters listed.                                                                                                                                                                                                                                |
-| **service check**      | Service checks are a type of monitor used to track the uptime status of the service. For more information, see the [Service checks guide][42].                                                                                                                                                                                                                                                                                                                     |
+| **service check**      | Service checks are a type of monitor used to track the uptime status of the service. For more information, see the [Service checks guide][43].                                                                                                                                                                                                                                                                                                                     |
 | **tagging**            | [Tags][25] are a way to add customization to metrics so that you can filter and visualize them in the most useful way to you.                                                                                                                                                                                                                                                                                                                                      |
 
 ## Further Reading
@@ -167,21 +175,22 @@ If you continue to have problems, reach out to [our awesome Support team][36].
 [22]: /agent/guide/agent-commands/#restart-the-agent
 [23]: /developers/integrations/new_check_howto/#param-specification
 [24]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[25]: /tagging/
-[26]: /agent/guide/agent-commands/#agent-status-and-information
-[27]: /infrastructure/process/
-[28]: /security/
-[29]: /metrics/explorer/
-[30]: /dashboards/
-[31]: /monitors/
-[32]: /logs/
-[33]: /tracing/
-[34]: /synthetics/
-[35]: /agent/troubleshooting/
-[36]: /help/
-[37]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[38]: https://app.datadoghq.com/event/stream
-[39]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
-[40]: /developers/metrics/
-[41]: /developers/metrics/custom_metrics/
-[42]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/
+[25]: /getting_started/tagging/
+[26]: /getting_started/agent/#setup
+[27]: /agent/guide/agent-commands/#agent-status-and-information
+[28]: /infrastructure/process/
+[29]: /security/
+[30]: /metrics/explorer/
+[31]: /dashboards/
+[32]: /monitors/
+[33]: /logs/
+[34]: /tracing/
+[35]: /synthetics/
+[36]: /agent/troubleshooting/
+[37]: /help/
+[38]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[39]: https://app.datadoghq.com/event/stream
+[40]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example#L13
+[41]: /developers/metrics/
+[42]: /developers/metrics/custom_metrics/
+[43]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/

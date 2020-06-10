@@ -25,7 +25,7 @@ Agent が実行されているホストは引き続き表示され、課金対�
 課金に関するご質問は、[カスタマーサクセス][5]マネージャーにお問い合わせください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google_cloud_platform
-[2]: /ja/tagging/using_tags/#integrations
+[2]: /ja/getting_started/tagging/using_tags/#integrations
 [3]: /ja/infrastructure/
 [4]: /ja/help/
 [5]: mailto:success@datadoghq.com

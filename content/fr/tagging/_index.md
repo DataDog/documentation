@@ -4,10 +4,10 @@ kind: documentation
 description: Apprenez à assigner et utiliser des tags dans Datadog.
 aliases:
   - /fr/getting_started/getting_started_with_tags
-  - /fr/guides/tagging/
-  - /fr/developers/tagging/
+  - /fr/guides/getting_started/tagging/
+  - /fr/developers/getting_started/tagging/
   - /fr/getting_started/tagging
-  - /fr/tagging/faq/
+  - /fr/getting_started/tagging/faq/
 further_reading:
   - link: tagging/assigning_tags
     tag: Documentation
@@ -98,23 +98,23 @@ Vous pouvez utiliser l'une (ou l'ensemble) des méthodes suivantes pour assigner
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tagging/using_tags
+[1]: /fr/getting_started/tagging/using_tags
 [2]: /fr/developers/metrics/
-[3]: /fr/tagging/assigning_tags
-[4]: /fr/tagging/assigning_tags/#configuration-files
-[5]: /fr/tagging/assigning_tags/#environment-variables
-[6]: /fr/tagging/assigning_tags/#ui
-[7]: /fr/tagging/assigning_tags/#api
-[8]: /fr/tagging/assigning_tags/#dogstatsd
-[9]: /fr/tagging/assigning_tags/#integration-inheritance
+[3]: /fr/getting_started/tagging/assigning_tags
+[4]: /fr/getting_started/tagging/assigning_tags/#configuration-files
+[5]: /fr/getting_started/tagging/assigning_tags/#environment-variables
+[6]: /fr/getting_started/tagging/assigning_tags/#ui
+[7]: /fr/getting_started/tagging/assigning_tags/#api
+[8]: /fr/getting_started/tagging/assigning_tags/#dogstatsd
+[9]: /fr/getting_started/tagging/assigning_tags/#integration-inheritance
 [10]: /fr/integrations
-[11]: /fr/tagging/using_tags/#events
-[12]: /fr/tagging/using_tags/#dashboards
-[13]: /fr/tagging/using_tags/#infrastructure
-[14]: /fr/tagging/using_tags/#monitors
-[15]: /fr/tagging/using_tags/#metrics
-[16]: /fr/tagging/using_tags/#integrations
-[17]: /fr/tagging/using_tags/#apm
-[18]: /fr/tagging/using_tags/#notebooks
-[19]: /fr/tagging/using_tags/#logs
-[20]: /fr/tagging/using_tags/#developers
+[11]: /fr/getting_started/tagging/using_tags/#events
+[12]: /fr/getting_started/tagging/using_tags/#dashboards
+[13]: /fr/getting_started/tagging/using_tags/#infrastructure
+[14]: /fr/getting_started/tagging/using_tags/#monitors
+[15]: /fr/getting_started/tagging/using_tags/#metrics
+[16]: /fr/getting_started/tagging/using_tags/#integrations
+[17]: /fr/getting_started/tagging/using_tags/#apm
+[18]: /fr/getting_started/tagging/using_tags/#notebooks
+[19]: /fr/getting_started/tagging/using_tags/#logs
+[20]: /fr/getting_started/tagging/using_tags/#developers

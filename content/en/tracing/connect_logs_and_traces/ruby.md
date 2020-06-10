@@ -17,12 +17,12 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatic Trace ID injection
+## Manually Inject Trace and Span IDs
 
 Use one of the following options to inject Ruby trace information into your logs:
 
-- [Automatic Trace ID Injection for Rails Applications using Lograge is recommended](?tab=lograge).
-- [Automatic Trace ID Injection for default Rails Applications](?tab=default).
+- [Trace ID Injection for Rails Applications using Lograge is recommended](?tab=lograge).
+- [Trace ID Injection for default Rails Applications](?tab=default).
 
 {{< tabs >}}
 {{% tab "Lograge" %}}
@@ -37,8 +37,8 @@ config.lograge.custom_options = lambda do |event|
   {
     # Adds IDs as tags to log output
     :dd => {
-      :trace_id => correlation.trace_id,
-      :span_id => correlation.span_id
+      :trace_id => correlation.trace_id.to_s,
+      :span_id => correlation.span_id.to_s
     },
     :ddsource => ["ruby"],
     :params => event.payload[:params].reject { |k| %w(controller action).include? k }
@@ -65,14 +65,12 @@ This appends trace tags to web requests:
 ```text
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
-# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Article Load (0.5ms)  SELECT "articles".* FROM "articles"
 # [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Manual Trace ID injection
 
 To add trace IDs to your own logger, add a log formatter which retrieves the trace IDs with `Datadog.tracer.active_correlation`, then add the trace IDs to the message.
 

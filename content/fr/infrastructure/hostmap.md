@@ -121,5 +121,5 @@ La capture d'écran ci-dessous illustre un problème récent rencontré par Data
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tagging/
+[1]: /fr/getting_started/tagging/
 [2]: /fr/integrations/

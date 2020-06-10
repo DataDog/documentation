@@ -43,4 +43,4 @@ Example: `count_not_null(system.cpu.user{*} by {host})` returns a timeseries rep
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /tagging/
+[1]: /getting_started/tagging/

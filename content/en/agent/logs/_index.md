@@ -48,7 +48,6 @@ To collect logs for a given integration, uncomment the logs section in that inte
 Consult the <a href="/integrations/#cat-log-collection">list of supported integrations</a>  that include out of the box log configurations.
 </div>
 
-
 ## Custom log collection
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
@@ -163,7 +162,7 @@ List of all available parameters for log collection:
 | `port`           | Yes      | If `type` is **tcp** or **udp**, set the port for listening to logs.                                                                                                                                                                                                                                                                                    |
 | `path`           | Yes      | If `type` is **file** or **journald**, set the file path for gathering logs.                                                                                                                                                                                                                                                                            |
 | `channel_path`   | Yes      | If `type` is **windows_event**, list the Windows event channels for collecting logs.                                                                                                                                                                                                                                                                    |
-| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][10], this must be the same service name.                                                                                                                                                                                                                     |
+| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][9], this must be the same service name. Check the [unified service tagging][10] instructions when configuring `service` across multiple data types.                                                                                                                                                                                                                      |
 | `source`         | Yes      | The attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][11] you are collecting, for example: `myapp` from `myapp.request.count`. |
 | `include_units`  | No       | If `type` is **journald**, list of the specific journald units to include.                                                                                                                                                                                                                                                                              |
 | `exclude_path`   | No       | If `type` is **file**, and `path` contains a wildcard character, list the matching file that should be excluded from log collection. It is available for Agent version >= 6.18.                                                                                                                                                                                                                                                                                                                                                                                |
@@ -171,7 +170,6 @@ List of all available parameters for log collection:
 | `sourcecategory` | No       | A multiple value attribute used to refine the source attribute, for example: `source:mongodb, sourcecategory:db_slow_logs`.                                                                                                                                                                                                                             |
 | `start_position` | No       | If `type` is **file**, set the position for the Agent to start reading the file. Valid values are `beginning` and `end` (default: `end`). If `path` contains a wildcard character, `beginning` is not supported. _Added in Agent v6.19/v7.19_                                                                                                                                                  |
 | `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][11]).                                                                                                                                                                                                                                                                             |
-
 
 ## Further Reading
 
@@ -186,5 +184,5 @@ List of all available parameters for log collection:
 [7]: /agent/docker/log/#log-integrations
 [8]: /agent/guide/agent-commands/#agent-status-and-information
 [9]: /tracing/
-[10]: /developers/metrics/custom_metrics/
-[11]: /tagging/
+[10]: /getting_started/tagging/unified_service_tagging
+[11]: /getting_started/tagging/

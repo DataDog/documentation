@@ -81,7 +81,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][10].
 [1]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-step-functions
-[4]: /fr/tagging/
+[4]: /fr/getting_started/tagging/
 [5]: /fr/graphing/infrastructure/serverless/
 [6]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets

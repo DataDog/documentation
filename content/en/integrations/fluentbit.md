@@ -82,5 +82,5 @@ Need help? Contact [Datadog support][11].
 [7]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit
 [8]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/configuration-file
 [9]: https://app.datadoghq.com/logs
-[10]: /tagging/
+[10]: /getting_started/tagging/
 [11]: /help/

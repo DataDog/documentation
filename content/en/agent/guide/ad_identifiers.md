@@ -48,6 +48,12 @@ This matches **ANY** `httpd` container image on your host. Suppose you have one 
 
 When using short image names as Autodiscovery container identifiers, **the Agent cannot distinguish between identically named images from different sources or with different tags**.
 
+## Adding tags from standard labels
+
+Even if Autodiscovery configuration is defined within a custom configuration file, the standard labels for tagging `env`, `service`, and `version` can be used in conjunction.
+
+See [Unified Service Tagging][1] for more information on how to configure these labels on your containers.
+
 ### Multiple identifiers
 
 Specify multiple image names by adding to the `ad_identifiers` list, for example:
@@ -84,3 +90,5 @@ com.datadoghq.ad.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /getting_started/tagging/unified_service_tagging

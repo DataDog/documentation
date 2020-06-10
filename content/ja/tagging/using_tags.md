@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /ja/getting_started/tagging/using_tags/
 further_reading:
-  - link: /tagging/
+  - link: /getting_started/tagging/
     tag: Documentation
     text: タグの概要
-  - link: /tagging/assigning_tags/
+  - link: /getting_started/tagging/assigning_tags/
     tag: Documentation
     text: タグの割り当て方法
   - link: 'https://www.datadoghq.com/blog/tagging-best-practices/'
@@ -25,7 +25,7 @@ further_reading:
 
 {{< img src="tagging/using_tags/eventtags.png" alt="イベントリストとタグ" style="width:80%;">}}
 
-## ダッシュボード  
+## ダッシュボード
 
 {{< tabs >}}
 {{% tab "Assignment" %}}
@@ -117,7 +117,7 @@ further_reading:
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="モニターの管理のタグ"  style="width:80%;">}}
 
-[1]: /ja/tagging/assigning_tags/
+[1]: /ja/getting_started/tagging/assigning_tags/
 {{% /tab %}}
 
 {{% tab "New Monitor" %}}
@@ -230,7 +230,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="サービスマップタグ"  style="width:80%;">}}
 
-[1]: /ja/tagging/assigning_tags/
+[1]: /ja/getting_started/tagging/assigning_tags/
 [2]: /ja/tracing/app_analytics/search/
 [3]: /ja/monitors/manage_monitor/
 [4]: /ja/logs/explorer/search/
@@ -300,7 +300,7 @@ GCP ラベリングに関する詳細は、[GCP ドキュメント][2]を参照�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tagging/assigning_tags/
+[1]: /ja/getting_started/tagging/assigning_tags/
 [2]: /ja/events/
 [3]: /ja/integrations/
 [4]: /ja/infrastructure/hostmap/
