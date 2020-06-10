@@ -49,7 +49,7 @@ To set up Datadog APM in AWS Lambda, see the [Lambda integration documentation][
 
 The Datadog extension for Azure App Services provides tracing capabilities for Azure Web Apps. For more information setting up tracing in Azure, see the [Azure App Services Extension documentation][9].
 
-### Google App Engine, AAS
+### Google App Engine
 
 Datadog APM requires sending trace data to a running Agent. A workaround for enabling trace collection for a serverless setup is to configure a separate VM that accepts trace traffic externally.
 
