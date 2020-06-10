@@ -10,7 +10,7 @@ aliases:
   - /tracing/compatibility
 ---
 
-Choose your language below to see the compatibility requirements and supported integrations for Datadog APM.
+Choose your language to see the compatibility requirements and supported integrations for Datadog APM.
 
 {{< partial name="apm/apm-compatibility.html" >}}
 
@@ -19,5 +19,4 @@ Choose your language below to see the compatibility requirements and supported i
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
