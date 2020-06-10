@@ -17,31 +17,25 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatic log injection
+## Automatically Inject Trace and Span IDs
 
-Enable injection in the Java tracer's [configuration][1] through the environment variable `DD_LOGS_INJECTION=true` or the jvm startup argument `-Ddd.logs.injection=true`.
-If you haven't done so already, we recommend configuring the Java tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the smoothest
-experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][2] for more details).
+Enable injection in the Java tracer's [configuration][1] by adding `-Ddd.logs.injection=true` as a jvm startup argument or through environment variable `DD_LOGS_INJECTION=true`.
 
-If your logs are raw formatted, update your formatter to include `dd.env`, `dd.service`, `dd.version`, `dd.trace_id`, and `dd.span_id` in your logger configuration:
+If your logs are raw formatted, update your formatter to include `dd.trace_id` and `dd.span_id` in your logger configuration:
 
 ```xml
-<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.env} %X{dd.service} %X{dd.version} %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
 If your logs are JSON formated and you are using Logback there is nothing left to do. Otherwise with other logging libraries you need to activate MDC attributes autoinjection into your logs.
 
-## Manual log injection
+## Manually Inject Trace and Span IDs
 
-If you prefer to manually correlate your [traces][3] with your logs and tie together data for your service,
-leverage the Datadog API to retrieve correlation identifiers:
+If you prefer to manually correlate your [traces][2] with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
-- Use the `get` functions on the `CorrelationIdentifier` object to retrieve fields for log injection(see examples below).
+- Use `CorrelationIdentifier#getTraceId()` and `CorrelationIdentifier#getSpanId()` API methods to inject identifiers at the beginning and end of each [span][3] to log (see examples below).
 - Configure MDC to use the injected Keys:
 
-    - `dd.env` Globally configured `env` for the tracer (or `""` if not set)
-    - `dd.service` Globally configured root service name (or `unnamed-java-service` if not set)
-    - `dd.version` Globally configured `version` for the service (or `""` if not set)
     - `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
     - `dd.span_id` Active Span ID during the log statement (or `0` if no trace)
 
@@ -54,9 +48,6 @@ import datadog.trace.api.CorrelationIdentifier;
 
 // there must be spans started and active before this block.
 try {
-    ThreadContext.put("dd.env", String.valueOf(CorrelationIdentifier.getEnv()));
-    ThreadContext.put("dd.service", String.valueOf(CorrelationIdentifier.getService()));
-    ThreadContext.put("dd.version", String.valueOf(CorrelationIdentifier.getVersion()));
     ThreadContext.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
     ThreadContext.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
 }
@@ -64,9 +55,6 @@ try {
 // Log something
 
 finally {
-    ThreadContext.remove("dd.env");
-    ThreadContext.remove("dd.service");
-    ThreadContext.remove("dd.version");
     ThreadContext.remove("dd.trace_id");
     ThreadContext.remove("dd.span_id");
 }
@@ -81,9 +69,6 @@ import datadog.trace.api.CorrelationIdentifier;
 
 // there must be spans started and active before this block.
 try {
-    MDC.put("dd.env", String.valueOf(CorrelationIdentifier.getEnv()));
-    MDC.put("dd.service", String.valueOf(CorrelationIdentifier.getService()));
-    MDC.put("dd.version", String.valueOf(CorrelationIdentifier.getVersion()));
     MDC.put("dd.trace_id", String.valueOf(CorrelationIdentifier.getTraceId()));
     MDC.put("dd.span_id", String.valueOf(CorrelationIdentifier.getSpanId()));
 }
@@ -91,18 +76,15 @@ try {
 // Log something
 
 finally {
-    MDC.remove("dd.env");
-    MDC.remove("dd.service");
-    MDC.remove("dd.version");
     MDC.remove("dd.trace_id");
     MDC.remove("dd.span_id");
 }
 ```
 
-Then update your logger configuration to include `dd.env`, `dd.service`, `dd.version`, `dd.trace_id`, and `dd.span_id` in your log pattern:
+Then update your logger configuration to include `dd.trace_id` and `dd.span_id` in your log pattern:
 
 ```xml
-<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.env} %X{dd.service} %X{dd.version} %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id:-0} %X{dd.span_id:-0} - %m%n"</Pattern>
 ```
 
 {{% /tab %}}
@@ -117,7 +99,7 @@ Then update your logger configuration to include `dd.env`, `dd.service`, `dd.ver
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/java/#configuration
-[2]: /getting_started/tagging/unified_service_tagging
+[2]: /tracing/connect_logs_and_traces/
 [3]: /tracing/visualization/#trace
 [4]: /logs/log_collection/java/#raw-format
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

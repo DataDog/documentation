@@ -28,6 +28,8 @@ for values in *_values.yaml; do
     type=${values%%_values.yaml}
     helm template --namespace default datadog-agent "${HELM_DATADOG_CHART:-stable/datadog}" --values "$values" \
         | yq write -d'*' --script "$TMPDIR/cleanup_instructions.yaml" - \
-        | sed 's/\(api-key: \)".*"/\1PUT_YOUR_BASE64_ENCODED_API_KEY_HERE/; s/\(token: \).*/\1PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE/' \
+        | sed 's/\(api-key: \)".*"/\1PUT_YOUR_BASE64_ENCODED_API_KEY_HERE/;
+               s/\(token: \).*/\1PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE/;
+               /---/{N;/---\n{}/d;}' \
               > "$type".yaml
 done

@@ -82,8 +82,7 @@ Tracer settings can be configured as a parameter to the `init()` method or as en
 | version        | `DD_VERSION`            | `null`      | The version number of the application. Defaults to value of the version field in package.json.
 | tags           | `DD_TAGS`                    | `{}`        | Set global tags that should be applied to all spans and metrics. When passed as an environment variable, the format is `key:value, key:value`.                                                                                                                             |
 
-We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables.
+It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][9] documentation for recommendations on how to configure these environment variables.
 
 ### Instrumentation
 
@@ -213,7 +212,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [bunyan][56]     | `>=1`     | Fully supported |
 | [paperplane][57] | `>=2.3.2` | Fully supported |
 | [pino][58]       | `>=2`     | Fully supported |
-| [winston][9]    | `>=1`     | Fully supported |
+| [winston][59]    | `>=1`     | Fully supported |
 
 ## Further Reading
 
@@ -227,7 +226,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 [6]: /tracing/setup/docker/
 [7]: /agent/kubernetes/apm/
 [8]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[9]: https://github.com/winstonjs/winston
+[9]: /getting_started/unified_service_tagging
 [10]: /help/
 [11]: https://datadog.github.io/dd-trace-js/#integrations
 [12]: https://github.com/senchalabs/connect
@@ -277,3 +276,4 @@ For details about how to how to toggle and configure plugins, check out the [API
 [56]: https://github.com/trentm/node-bunyan
 [57]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
 [58]: http://getpino.io
+[59]: https://github.com/winstonjs/winston

@@ -17,20 +17,17 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatic log injection
+## Manually Inject Trace and Span IDs
 
 Use one of the following options to inject Ruby trace information into your logs:
 
-- [Automatic Trace ID Injection for Rails Applications using Lograge is recommended](?tab=lograge).
-- [Automatic Trace ID Injection for default Rails Applications](?tab=default).
-
-If you haven't done so already, we recommend configuring the Java tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the smoothest
-experience for adding `env`, `service`, and `version`. See [Unified Service Tagging][1] for more details.
+- [Trace ID Injection for Rails Applications using Lograge is recommended](?tab=lograge).
+- [Trace ID Injection for default Rails Applications](?tab=default).
 
 {{< tabs >}}
 {{% tab "Lograge" %}}
 
-After [setting up Lograge in a Rails application][1], modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs and other fields:
+After [setting up Lograge in a Rails application][1], modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs:
 
 ```ruby
 config.lograge.custom_options = lambda do |event|
@@ -40,11 +37,8 @@ config.lograge.custom_options = lambda do |event|
   {
     # Adds IDs as tags to log output
     :dd => {
-      :env => correlation.env,
-      :service => correlation.service,
-      :version => correlation.version,
-      :trace_id => correlation.trace_id,
-      :span_id => correlation.span_id
+      :trace_id => correlation.trace_id.to_s,
+      :span_id => correlation.span_id.to_s
     },
     :ddsource => ["ruby"],
     :params => event.payload[:params].reject { |k| %w(controller action).include? k }
@@ -52,11 +46,11 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-[1]: /logs/log_collection/python/#configure-the-datadog-agent
+[1]: /logs/log_collection/ruby/#configure-the-datadog-agent
 {{% /tab %}}
 {{% tab "Default" %}}
 
-Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append `env`, `service`, `version`, trace IDs, and span IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add trace tags.
+Rails applications which are configured with a `ActiveSupport::TaggedLogging` logger can append trace IDs as tags to log output. The default Rails logger implements this tagged logging, making it easier to add trace tags.
 
 In your Rails environment configuration file (e.g. `config/environments/production.rb`), add the following:
 
@@ -69,24 +63,19 @@ end
 This appends trace tags to web requests:
 
 ```text
-# [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
-# [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
-# [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206]   Article Load (0.5ms)  SELECT "articles".* FROM "articles"
-# [dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Started GET "/articles" for 172.22.0.1 at 2019-01-16 18:50:57 +0000
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Processing by ArticlesController#index as */*
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Article Load (0.5ms)  SELECT "articles".* FROM "articles"
+# [dd.trace_id=7110975754844687674 dd.span_id=7518426836986654206] Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.5ms)
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Manual log injection
-
-To add `env`, `service`, `version`, trace IDs, and span IDs to your own logger, add a log formatter which retrieves the trace IDs with `Datadog.tracer.active_correlation`, then add the fields to the message.
+To add trace IDs to your own logger, add a log formatter which retrieves the trace IDs with `Datadog.tracer.active_correlation`, then add the trace IDs to the message.
 
 To ensure proper log correlation, verify the following is present in each message:
 
-- `dd.env=<ENV>`: Where `<ENV>` is equal to `Datadog.tracer.active_correlation.env`. Omit if no environment is configured.
-- `dd.service=<SERVICE>`: Where `<SERVICE>` is equal to `Datadog.tracer.active_correlation.service`. Omit if no default service name is configured.
-- `dd.version=<VERSION>`: Where `<VERSION>` is equal to `Datadog.tracer.active_correlation.version`. Omit if no application version is configured.
 - `dd.trace_id=<TRACE_ID>`: Where `<TRACE_ID>` is equal to `Datadog.tracer.active_correlation.trace_id` or `0` if no trace is active during logging.
 - `dd.span_id=<SPAN_ID>`: Where `<SPAN_ID>` is equal to `Datadog.tracer.active_correlation.span_id` or `0` if no trace is active during logging.
 
@@ -106,21 +95,20 @@ end
 
 # When no trace is active
 logger.warn('This is an untraced operation.')
-# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.1 dd.trace_id=0 dd.span_id=0] This is an untraced operation.
+# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=0 dd.span_id=0] This is an untraced operation.
 
 # When a trace is active
 Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.') }
-# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.1 dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
+# [2019-01-16 18:38:41 +0000][my_app][WARN][dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][3].
+**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][2].
 
-See the [Ruby logging documentation][2] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
+See the [Ruby logging documentation][1] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging
-[2]: /logs/log_collection/ruby/#configure-the-datadog-agent
-[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[1]: /logs/log_collection/ruby/#configure-the-datadog-agent
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

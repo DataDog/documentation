@@ -26,18 +26,21 @@ platforms:
   - name: heroku
     link: "agent/basic_agent_usage/heroku/"
     image: "platform_heroku.png"
-  - name: puppet
-    link: "agent/basic_agent_usage/puppet/"
-    image: "platform_puppet.png"
   - name: kubernetes
     link: "agent/kubernetes/"
     image: "platform_kubernetes.png"
   - name: osx
     link: "agent/basic_agent_usage/osx/"
     image: "platform_macosx.png"
+  - name: puppet
+    link: "agent/basic_agent_usage/puppet/"
+    image: "platform_puppet.png"
   - name: redhat
     link: "agent/basic_agent_usage/redhat/"
     image: "platform_redhat.png"
+  - name: salt
+    link: "agent/basic_agent_usage/saltstack/"
+    image: "platform_saltstack.png"
   - name: suse
     link: "agent/basic_agent_usage/suse/"
     image: "platform_suse.png"
@@ -105,8 +108,11 @@ gs:
   - name: cloud_foundry
     link: "https://app.datadoghq.com/account/settings#agent/cloud_foundry"
     image: "platform_cloud_foundry.png"
+  - name: salt
+    link: "https://app.datadoghq.com/account/settings#agent/saltstack"
+    image: "platform_saltstack.png"
   - name: heroku
-    link: "agent/basic_agent_usage/heroku/"
+    link: "https://app.datadoghq.com/account/settings#agent/heroku"
     image: "platform_heroku.png"
   - name: source
     link: "https://app.datadoghq.com/account/settings#agent/source"

@@ -297,7 +297,7 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
 
 ### トレースの収集
 
-1. [上の手順](#installation)に従って、タスク定義に Datadog Agent コンテナを追加し、追加の環境変数 `DD_APM_ENABLED` を `true` に設定します。
+1. [上の手順](#installation)に従ってタスク定義に Datadog Agent コンテナを追加し、追加の環境変数 `DD_APM_ENABLED` を `true` に設定し、ポートマッピングでホストポート（**8126** と **tcp** プロトコルを使用）を設定します。
 
 2. 現在のセットアップに基づいて[アプリケーションをインスツルメント][32]します。
 
@@ -340,13 +340,13 @@ Agent が Fargate に接続できない場合は `CRITICAL` を返します。�
 [10]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_ecs.html
 [11]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_replica
 [12]: https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/datadog_checks/ecs_fargate/data/conf.yaml.example
-[13]: https://docs.datadoghq.com/ja/developers/dogstatsd
+[13]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [14]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=docker#installation
 [15]: https://docs.datadoghq.com/ja/agent/docker/#environment-variables
 [16]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/task_definition_parameters.html#container_definition_labels
 [17]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-metrics.html
 [18]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/#data-collected
-[19]: https://docs.datadoghq.com/ja/help
+[19]: https://docs.datadoghq.com/ja/help/
 [20]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
 [21]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definitions
 [22]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-using-fluentbit
@@ -359,6 +359,6 @@ Agent が Fargate に接続できない場合は `CRITICAL` を返します。�
 [29]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
 [31]: https://docs.datadoghq.com/ja/integrations/amazon_lambda/#log-collection
-[32]: https://docs.datadoghq.com/ja/tracing/setup
+[32]: https://docs.datadoghq.com/ja/tracing/setup/
 [33]: https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/metadata.csv
 [34]: https://www.datadoghq.com/blog/monitor-aws-fargate

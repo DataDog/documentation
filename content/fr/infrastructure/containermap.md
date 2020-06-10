@@ -5,10 +5,10 @@ aliases:
   - /fr/graphing/infrastructure/containermap/
   - /fr/guides/hostmap
 further_reading:
-  - link: /infrastructure/livecontainers
+  - link: /infrastructure/livecontainers/
     tag: Graphiques
     text: Consulter en temps réel tous les conteneurs de votre environnement
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Graphiques
     text: Découvrir ce qui se passe à tous les niveaux de votre système
 ---
@@ -28,8 +28,8 @@ Une fois l'[Agent][4] déployé, aucune autre configuration n'est requise. Pour 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/infrastructure/hostmap
+[1]: /fr/infrastructure/hostmap/
 [2]: https://app.datadoghq.com/infrastructure/map?node_type=container
-[3]: /fr/agent/kubernetes/integrations
-[4]: /fr/agent
-[5]: /fr/agent/docker
+[3]: /fr/agent/kubernetes/integrations/
+[4]: /fr/agent/
+[5]: /fr/agent/docker/

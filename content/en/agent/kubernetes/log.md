@@ -140,7 +140,7 @@ Each tab in sections below shows a different way to apply integration templates 
 
 ### Configuration
 
-**Note:** As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry, including logs, together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][4] documentation.
+**Note**: When configuring the `service` value through pod annotations, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][4] documentation.
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}

@@ -27,7 +27,7 @@ aliases:
   - /tracing/api
 ---
 
-{{< wistia 2kgmb9wbsr >}}
+{{< vimeo 381554158 >}}
 
 </br>
 
@@ -51,42 +51,62 @@ Add a tracing library to your application or proxy service to start sending trac
 
 Now that you've configured your application to send traces to Datadog, start getting insights into your application performance:
 
+### Service Map
 
-### App Analytics
+[Understand service dependencies][2] with an auto-generated service map from your traces alongside service performance metrics and monitor alert statuses.
 
-[Analyze performance][2] by application, infrastructure or custom tags such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
+{{< img src="tracing/index/ServiceMapInspect.gif" alt="Service Map"  style="width:100%;">}}
 
-{{< img src="tracing/index/SearchAppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
+### Service Performance Dashboards
 
-### Connect Logs and Traces
+[Monitor Service metrics][3] for requests, errors and latency percentiles.  Drill down into database queries or endpoints correlated with infrastructure.
 
-[View your application logs][3] side-by-side with the trace for a single distributed request with automatic trace-id injection.
-
-{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
-
-### Continuous Profiling
-
-[Improve code efficiency][4] with always on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
-
-{{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
+{{< img src="tracing/index/ServicePage.gif" alt="Service Pages"  style="width:100%;">}}
 
 ### Live Tail
 
-[Search by any tag][5] on 100% of your traces live with no sampling.
+[Search by any tag][4] on 100% of your ingested traces live with no sampling.
 
 {{< img src="tracing/index/SearchLiveTail.gif" alt="LiveTail"  style="width:100%;">}}
 
+### Connect Logs and Distributed Traces
+
+[View your application logs][5] side-by-side with the trace for a single distributed request with automatic trace-id injection.
+
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
+
+### App Analytics
+
+[Analyze performance][6] by application, infrastructure or custom tags such as datacenter, availability zone, deployment version, domain, user, checkout amount, customer and more.
+
+{{< img src="tracing/index/SearchAppAnalytics.gif" alt="App Analytics"  style="width:100%;">}}
+
+### Connect Synthetics and Traces
+
+[Link simulated API tests][7] to traces to find the root cause of failures across frontend, network and backend requests.
+
+{{< img src="tracing/index/Synthetics.gif" alt="Synthetics"  style="width:100%;">}}
+
+### Continuous Profiling
+
+[Improve code efficiency][8] with always on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
+
+{{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
+
 ### Integrate with OpenTracing
 
-[Integrate your instrumentation][6] seamlessly between Opentracing and Datadog APM.
+[Integrate your instrumentation][9] seamlessly between Opentracing and Datadog APM.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/send_traces/
-[2]: /tracing/app_analytics/
-[3]: /tracing/connect_logs_and_traces/
-[4]: /tracing/profiling/
-[5]: /tracing/livetail/
-[6]: /tracing/opentracing/
+[2]: /tracing/visualization/services_map/
+[3]: /tracing/visualization/service/
+[4]: /tracing/livetail/
+[5]: /tracing/connect_logs_and_traces/
+[6]: /tracing/app_analytics/
+[7]: /synthetics/apm/
+[8]: /tracing/profiling/
+[9]: /tracing/opentracing/

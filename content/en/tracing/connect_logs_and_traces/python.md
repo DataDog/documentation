@@ -17,20 +17,20 @@ further_reading:
   text: "Correlate request logs with traces automatically"
 ---
 
-## Automatic log injection
+## Automatically Inject Trace and Span IDs
 
 Enable injection with the environment variable `DD_LOGS_INJECTION=true` when using `ddtrace-run`.
 If you have configured your tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then `env`, `service`, and `version` will also be added automatically. Learn more about [unified service tagging][1].
 
 **Note**: The standard library `logging` is supported for auto-injection. Any libraries, such as `json_log_formatter`, that extend the standard library module are also supported for auto-injection. `ddtrace-run` calls `logging.basicConfig` before executing your application. If the root logger has a handler configured, your application must modify the root logger and handler directly.
 
-## Manual injection
+## Manually Inject Trace and Span IDs
 
 ### With Standard Library Logging
 
 If you prefer to manually correlate your [traces][2] with your logs, patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
-Similarly, you can include ``env``, ``service``, and ``version`` as attributes for your log record.
+Similarly, include ``dd.env``, ``dd.service``, and ``dd.version`` as attributes for your log record.
 
 The configuration below is used by the automatic injection method and is supported by default in the Python Log Integration:
 
@@ -59,7 +59,7 @@ If you are not using the standard library `logging` module, you can use the `ddt
 As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:
 
 ``` python
-from ddtrace import config
+import ddtrace
 from ddtrace.helpers import get_correlation_ids
 
 import structlog
@@ -73,9 +73,9 @@ def tracer_injection(logger, log_method, event_dict):
     event_dict['dd.span_id'] = span_id or 0
 
     # add the env, service, and version configured for the tracer
-    event_dict['dd.env'] = config.Config().env or ""
-    event_dict['dd.service'] = config.Config().service or ""
-    event_dict['dd.version'] = config.Config().version or ""
+    event_dict['dd.env'] = ddtrace.config.env or ""
+    event_dict['dd.service'] = ddtrace.config.service or ""
+    event_dict['dd.version'] = ddtrace.config.version or ""
 
     return event_dict
 
@@ -92,7 +92,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 
 ```text
 >>> traced_func()
-{"event": "In tracer context", "dd.trace_id": 9982398928418628468, "dd.span_id": 10130028953923355146, "dd.env": "dev", "dd.service": "hello", "dd.version": "abc123"}
+{"event": "In tracer context", "dd": {"trace_id": 9982398928418628468, "span_id": 10130028953923355146, "env": "dev", "service": "hello", "version": "abc123"}}
 ```
 
 **Note**: If you are not using a [Datadog Log Integration][3] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][4].

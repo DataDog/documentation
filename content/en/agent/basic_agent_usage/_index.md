@@ -146,6 +146,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [SUSE Enterprise Linux x86_64][7] with SysVinit | SUSE 11 SP4 in Agent 7.16.0+                      |
 | [Fedora x86_64][8]                              | Fedora 26+                                        |
 | [macOS][9]                                      | macOS 10.12+                                      |
+| [Windows server 64-bit][10]                     | Windows Server 2008r2+ and Server Core (not Nano) |
 | [Windows server 64-bit][10]                     | Server Core (not Nano) |
 | [Windows 64-bit][10]                            | Windows 7+                                        |
 
@@ -274,7 +275,7 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 
 **Log Collection**:
 
-The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][1] enabled. It shows the evolution of resource usage for the different compression levels available.
+The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][6] enabled. It shows the evolution of resource usage for the different compression levels available.
 
 {{< tabs >}}
 {{% tab "HTTP compression level 6" %}}
@@ -312,43 +313,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuration management tools
-
-Manage the Datadog Agent and [Integrations][6] using configuration management tools:
-
-{{< tabs >}}
-{{% tab "Chef Cookbook" %}}
-
-* [Chef GitHub project][1]
-* [Installing Datadog Agent with Chef][2]
-
-[1]: https://github.com/DataDog/chef-datadog
-[2]: https://app.datadoghq.com/account/settings#integrations/chef
-{{% /tab %}}
-{{% tab "Puppet" %}}
-
-* [Puppet GitHub project][1]
-* [Installing Datadog Agent with Puppet][2]
-
-[1]: https://github.com/DataDog/puppet-datadog-agent
-[2]: https://app.datadoghq.com/account/settings#integrations/puppet
-{{% /tab %}}
-{{% tab "Ansible" %}}
-
-* [Ansible GitHub project][1]
-* [Installing Datadog Agent with Ansible][2]
-
-[1]: https://github.com/DataDog/ansible-datadog
-[2]: https://app.datadoghq.com/account/settings#agent/ansible
-{{% /tab %}}
-{{% tab "SaltStack" %}}
-
-* [Installing Datadog Agent with Saltstack][1]
-
-[1]: https://github.com/DataDog/datadog-formula
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Getting further with the Datadog Agent
 
 ### Update the Agent
@@ -380,7 +344,7 @@ To send your Agent data to the [Datadog EU site][10], edit your [Agent main conf
 [3]: /agent/guide/agent-commands/#start-the-agent
 [4]: /agent/guide/agent-commands/#service-status
 [5]: /agent/guide/agent-commands/#stop-the-agent
-[6]: /integrations/
+[6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
 [7]: https://app.datadoghq.com/account/settings#agent
 [8]: /agent/guide/integration-management/
 [9]: /agent/guide/agent-configuration-files/

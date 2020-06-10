@@ -31,8 +31,6 @@ Apply log processing rules to a specific log collection configurations to:
 
 To apply a processing rule to all logs collected by a Datadog Agent, see the [Global processing rules](#global-processing-rules) section.
 
-**Note:** As a best practice, Datadog recommends using unified service tagging when applying Docker labels and Kubernetes pod annotations. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][28] documentation.
-
 ## Filter logs
 
 To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.

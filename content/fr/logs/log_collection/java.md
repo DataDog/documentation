@@ -4,19 +4,19 @@ kind: documentation
 aliases:
   - /fr/logs/languages/java
 further_reading:
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: logs/explorer/analytics
+  - link: /logs/explorer/analytics/
     tag: Documentation
     text: Effectuer des analyses de logs
-  - link: logs/faq/log-collection-troubleshooting-guide
+  - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: Dépannage pour la collecte de logs
   - link: 'https://www.datadoghq.com/blog/java-logging-guide/'
@@ -74,7 +74,7 @@ Une fois cette opération effectuée, le `ConversionPattern` à utiliser devient
 <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /fr/tracing/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -102,7 +102,7 @@ Une fois cette opération terminée, le `PatternLayout` à utiliser devient :
 <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
-[1]: /fr/tracing/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Slf4j" %}}
@@ -137,7 +137,7 @@ Une fois cette opération terminée, le `Pattern` à utiliser devient :
 <Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
-[1]: /fr/tracing/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -181,7 +181,7 @@ Modifiez ensuite votre fichier `logback.xml` comme décrit dans la section `Slf4
 
 Si l'APM est activé pour cette application et que vous souhaitez améliorer la corrélation entre les traces et les logs d'application, [suivez ces instructions][1] pour définir les identifiants de trace et de span avec les [MDC (contextes de diagnostic mappés)][2]. Ils seront ensuite automatiquement ajoutés aux logs JSON.
 
-[1]: /fr/tracing/connect_logs_and_traces/?tab=java
+[1]: /fr/tracing/connect_logs_and_traces/java/
 [2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
@@ -285,7 +285,7 @@ Modifiez ensuite votre fichier `logback.xml` et mettez à jour l'encodeur :
 Si l'APM est activé pour cette application et que vous souhaitez améliorer la corrélation entre les traces et les logs d'application, [suivez ces instructions][2] pour définir les identifiants de trace et de span avec les [MDC (contextes de diagnostic mappés)][3]. Ils seront ensuite automatiquement ajoutés aux logs JSON.
 
 [1]: https://github.com/logstash/logstash-logback-encoder
-[2]: /fr/tracing/connect_logs_and_traces/?tab=java
+[2]: /fr/tracing/connect_logs_and_traces/java/
 [3]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
@@ -296,22 +296,15 @@ Créez un fichier `java.yaml` dans le répertoire `conf.d/` de l'Agent avec le c
 
 ```yaml
 
-##Section Log
+#Section des logs
 logs:
 
-    ## - type (obligatoire) : type de fichier de la source d'entrée de log (tcp/udp/file).
-    ##   port / path (obligatoire) : définit le type tcp ou udp du port. Choisit le chemin si le type est défini sur file.
-    ##   service (obligatoire) : nom du service propriétaire du log.
-    ##   source (obligatoire) : attribut qui définit l'intégration qui envoie les logs.
-    ##   sourcecategory (facultatif) : attribut à valeur multiple. Il peut être utilisé pour préciser l'attribut source.
-    ##   tags (facultatif) : ajoute des tags à chaque log recueilli.
-
-  - type: fichier
-    path: /chemin/vers/votre/log/java.log
+  - type: file
+    path: "/chemin/vers/votre/log/java.log"
     service: java
     source: java
     sourcecategory: sourcecode
-    # Pour les logs multiligne, s'ils commencent par la date au format aaaa-mm-jj, supprimez la mise en commentaire de la règle de traitement suivante.
+    # Si des logs multiligne commencent par la date au format aaaa-mm-jj, supprimer la mise en commentaire de la règle de traitement suivante
     #log_processing_rules:
     #  - type: multi_line
     #    name: new_log_start_with_date
@@ -425,18 +418,20 @@ Pour ajouter Logback [logstash-logback-encoder][1] à votre classpath, ajoutez l
 
 Configurez le logger Logback de façon à diffuser les logs directement à Datadog en ajoutant le code suivant à votre fichier `logback.xml` :
 
+{{< site-region region="us" >}}
+
 ```xml
 <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
     <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
 </appender>
 <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-    <remoteHost>intake.logs.datadoghq.com</remoteHost>
+    <remoteHost>tcp-intake.logs.datadoghq.com</remoteHost>
     <port>10514</port>
-    <keepAliveDuration>1 minute</keepAliveDuration>
+    <keepAliveDuration>1 minute</keepAliveDuration>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
         <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.PatternLayout">
-                <pattern><CLÉAPI> %mdc{cléNonExistante}</pattern>
+                <pattern><CLÉ_API> %mdc{keyThatDoesNotExist}</pattern>
             </layout>
           </prefix>
     </encoder>
@@ -447,11 +442,37 @@ Configurez le logger Logback de façon à diffuser les logs directement à Datad
 </root>
 ```
 
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```xml
+<appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+</appender>
+<appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <remoteHost>tcp-intake.logs.datadoghq.eu</remoteHost>
+    <port>1883</port>
+    <keepAliveDuration>1 minute</keepAliveDuration>
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+        <prefix class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern><CLÉ_API> %mdc{keyThatDoesNotExist}</pattern>
+            </layout>
+          </prefix>
+    </encoder>
+</appender>
+<root level="debug">
+    <appender-ref ref="JSON_TCP" />
+    <appender-ref ref="JSON" />
+</root>
+```
+
+{{< /site-region >}}
+
 **Remarques :**
 
-* Remplacez `<CLÉAPI>` par la valeur de votre clé d'API Datadog.
+* Remplacez `<CLÉ_API>` par la valeur de votre clé d'API Datadog.
 * `%mdc{cléNonExistante}` est ajouté, car la configuration XML supprime les espaces, comme expliqué [ici][4].
-* Consultez la liste des [endpoints disponibles pour le site européen][5].
 
 Découvrez plus de détails sur le paramètre de préfixe dans la [documentation Logback][4] (en anglais).
 
@@ -461,14 +482,14 @@ Enrichissez vos événements de log avec des attributs contextuels.
 
 ### Utilisation du parser key/value
 
-Le [parser key/value][6] extrait n'importe quelle expression `<KEY>=<VALUE>` identifiée dans un événement de log.
+Le [parser key/value][5] extrait n'importe quelle expression `<KEY>=<VALUE>` identifiée dans un événement de log.
 
 Pour enrichir vos événements de log dans Java, vous pouvez réécrire les messages dans votre code et y ajouter des séquences `<KEY>=<VALUE>`.
 
 Par exemple, si vous avez :
 
 ```java
-logger.info("A généré 1 001 messages lors des 93 dernières secondes pour customer scope prod30");
+logger.info("A généré 1 001 messages lors des 93 dernières secondes pour le client scope prod30");
 ```
 
 Vous pouvez le remplacer par :
@@ -477,7 +498,7 @@ Vous pouvez le remplacer par :
 logger.info("A généré quantity=1001 messages lors des dernières durationInMs=93180 ms pour le client scope=prod30");
 ```
 
-Lorsque le [parser key/value][6] est activé, **Datadog** extrait automatiquement chaque paire de votre document JSON final :
+Lorsque le [parser key/value][5] est activé, **Datadog** extrait automatiquement chaque paire de votre document JSON final :
 
 ```json
 {
@@ -488,13 +509,13 @@ Lorsque le [parser key/value][6] est activé, **Datadog** extrait automatiquemen
 }
 ```
 
-Vous pouvez donc exploiter *scope* en tant que champ, et *durationInMs* et *quantity* en tant que mesures de log.
+Vous pouvez donc utiliser *scope* en tant que champ, et *durationInMs* et *quantity* en tant que mesures de log.
 
 ### MDC (contextes de diagnostics mappés)
 
 Pour enrichir vos logs, vous pouvez également utiliser des [MDC (contextes de diagnostics mappés)][1] dans Java.
 
-Si vous utilisez Logback, utilisez le code Java suivant :
+Si vous utilisez Logback, exécutez le code Java suivant :
 
 ```java
 ...
@@ -519,8 +540,7 @@ Pour générer ce document JSON final :
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://logback.qos.ch/manual/mdc.html
-[2]: /fr/logs/processing/parsing
+[2]: /fr/logs/processing/parsing/
 [3]: https://github.com/logstash/logstash-logback-encoder
 [4]: https://github.com/logstash/logstash-logback-encoder#prefixsuffix
-[5]: /fr/logs/log_collection/?tab=eusite#datadog-logs-endpoints
-[6]: /fr/logs/processing/parsing/#key-value
+[5]: /fr/logs/processing/parsing/#key-value

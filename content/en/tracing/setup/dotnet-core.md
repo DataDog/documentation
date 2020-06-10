@@ -215,15 +215,7 @@ The .NET Tracer can instrument the following libraries automatically:
 
 **Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
-
-## Manual Instrumentation
-
-To manually instrument your code, add the `Datadog.Trace` [NuGet package][7] to your application. In your code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
-For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][8].
-
-Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1, 3.0, and 3.1 on Windows and Linux.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][6] for help. Alternatively, see the [custom instrumentation instructions][7].
 
 ## Configuration
 
@@ -247,7 +239,6 @@ SET DD_TRACE_AGENT_URL=http://localhost:8126
 SET DD_ENV=prod
 SET DD_SERVICE=MyService
 SET DD_VERSION=abc123
-SET DD_ADONET_ENABLED=false
 
 rem Launch application
 example.exe
@@ -263,7 +254,6 @@ export DD_TRACE_AGENT_URL=http://localhost:8126
 export DD_ENV=prod
 export DD_SERVICE=MyService
 export DD_VERSION=abc123
-export DD_ADONET_ENABLED=false
 
 # Launch application
 dotnet example.dll
@@ -311,7 +301,6 @@ To configure the Tracer using a JSON file, create `datadog.json` in the instrume
   "DD_ENV": "prod",
   "DD_SERVICE": "MyService",
   "DD_VERSION": "abc123",
-  "DD_ADONET_ENABLED": "false"
 }
 ```
 
@@ -344,7 +333,7 @@ The following table below lists configuration variables that are available for b
 | `DD_TRACE_AGENT_URL`<br/><br/>`AgentUri`            | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
 | `DD_AGENT_HOST`                                     | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`                               | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
-| `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of `env`, `service`, `version`, trace IDs, and spanIDs into application logs.                                                                                                                         |
+| `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of `env`, `service`, `version`, trace IDs, and span IDs into application logs.                                                                                                                         |
 | `DD_TRACE_DEBUG`                                    | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                 |
 
 The following table lists configuration variables that are available only when using automatic instrumentation.
@@ -369,12 +358,12 @@ The following table lists configuration variables that are available only when u
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/send_traces/
-[2]: /tracing/setup/dotnet-framework/
-[3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
-[4]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
-[5]: /help/
-[6]: https://www.nuget.org/packages/Datadog.Trace
-[7]: /tracing/manual_instrumentation/dotnet/
+[1]: https://app.datadoghq.com/apm/install
+[2]: /tracing/send_traces/
+[3]: /tracing/setup/dotnet-framework/
+[4]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
+[5]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
+[6]: /help/
+[7]: /tracing/manual_instrumentation/dotnet
 [8]: /tracing/guide/setting_primary_tags_to_scope/#environment
 [9]: /getting_started/tagging/unified_service_tagging

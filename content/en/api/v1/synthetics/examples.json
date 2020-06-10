@@ -16,8 +16,8 @@
                 ],
                 "request": {
                   "basicAuth": {
-                    "password": "string",
-                    "username": "string"
+                    "password": "",
+                    "username": ""
                   },
                   "body": "string",
                   "headers": {
@@ -34,7 +34,7 @@
                   {
                     "example": "string",
                     "id": "string",
-                    "name": "string",
+                    "name": "",
                     "pattern": "string",
                     "type": "string"
                   }
@@ -114,8 +114,8 @@
             ],
             "request": {
               "basicAuth": {
-                "password": "string",
-                "username": "string"
+                "password": "",
+                "username": ""
               },
               "body": "string",
               "headers": {
@@ -132,7 +132,7 @@
               {
                 "example": "string",
                 "id": "string",
-                "name": "string",
+                "name": "",
                 "pattern": "string",
                 "type": "string"
               }
@@ -208,13 +208,13 @@
           ],
           "request": {
             "basicAuth": {
-              "password": null,
-              "username": null
+              "password": "",
+              "username": ""
             }
           },
           "variables": [
             {
-              "name": null,
+              "name": "",
               "type": null
             }
           ]
@@ -232,8 +232,8 @@
           ],
           "request": {
             "basicAuth": {
-              "password": "string",
-              "username": "string"
+              "password": "",
+              "username": ""
             },
             "body": "string",
             "headers": {
@@ -250,7 +250,7 @@
             {
               "example": "string",
               "id": "string",
-              "name": "string",
+              "name": "",
               "pattern": "string",
               "type": "string"
             }
@@ -306,8 +306,8 @@
             ],
             "request": {
               "basicAuth": {
-                "password": "string",
-                "username": "string"
+                "password": "",
+                "username": ""
               },
               "body": "string",
               "headers": {
@@ -324,7 +324,7 @@
               {
                 "example": "string",
                 "id": "string",
-                "name": "string",
+                "name": "",
                 "pattern": "string",
                 "type": "string"
               }
@@ -398,11 +398,11 @@
               "probe_dc": "string",
               "result": {
                 "device": {
-                  "height": "integer",
+                  "height": "0",
                   "id": "string",
                   "isMobile": false,
-                  "name": "string",
-                  "width": "integer"
+                  "name": "",
+                  "width": "0"
                 },
                 "duration": "number",
                 "errorCount": "integer",
@@ -455,8 +455,8 @@
               ],
               "request": {
                 "basicAuth": {
-                  "password": "string",
-                  "username": "string"
+                  "password": "",
+                  "username": ""
                 },
                 "body": "string",
                 "headers": {
@@ -473,7 +473,7 @@
                 {
                   "example": "string",
                   "id": "string",
-                  "name": "string",
+                  "name": "",
                   "pattern": "string",
                   "type": "string"
                 }
@@ -487,11 +487,11 @@
             "browserType": "string",
             "browserVersion": "string",
             "device": {
-              "height": "integer",
+              "height": "0",
               "id": "string",
               "isMobile": false,
-              "name": "string",
-              "width": "integer"
+              "name": "",
+              "width": "0"
             },
             "duration": "number",
             "error": "string",
@@ -502,8 +502,8 @@
               {
                 "browserErrors": [
                   {
-                    "description": "string",
-                    "name": "string",
+                    "description": "",
+                    "name": "",
                     "statusCode": "integer",
                     "type": "string"
                   }
@@ -536,7 +536,7 @@
                 "value": {},
                 "warnings": [
                   {
-                    "message": "string",
+                    "message": "",
                     "type": "string"
                   }
                 ]
@@ -634,8 +634,8 @@
             ],
             "request": {
               "basicAuth": {
-                "password": "string",
-                "username": "string"
+                "password": "",
+                "username": ""
               },
               "body": "string",
               "headers": {
@@ -652,7 +652,7 @@
               {
                 "example": "string",
                 "id": "string",
-                "name": "string",
+                "name": "",
                 "pattern": "string",
                 "type": "string"
               }
@@ -730,8 +730,8 @@
             ],
             "request": {
               "basicAuth": {
-                "password": "string",
-                "username": "string"
+                "password": "",
+                "username": ""
               },
               "body": "string",
               "headers": {
@@ -748,7 +748,7 @@
               {
                 "example": "string",
                 "id": "string",
-                "name": "string",
+                "name": "",
                 "pattern": "string",
                 "type": "string"
               }
@@ -824,13 +824,13 @@
           ],
           "request": {
             "basicAuth": {
-              "password": null,
-              "username": null
+              "password": "",
+              "username": ""
             }
           },
           "variables": [
             {
-              "name": null,
+              "name": "",
               "type": null
             }
           ]
@@ -848,8 +848,8 @@
           ],
           "request": {
             "basicAuth": {
-              "password": "string",
-              "username": "string"
+              "password": "",
+              "username": ""
             },
             "body": "string",
             "headers": {
@@ -866,7 +866,7 @@
             {
               "example": "string",
               "id": "string",
-              "name": "string",
+              "name": "",
               "pattern": "string",
               "type": "string"
             }
@@ -975,8 +975,8 @@
               ],
               "request": {
                 "basicAuth": {
-                  "password": "string",
-                  "username": "string"
+                  "password": "",
+                  "username": ""
                 },
                 "body": "string",
                 "headers": {
@@ -993,7 +993,7 @@
                 {
                   "example": "string",
                   "id": "string",
-                  "name": "string",
+                  "name": "",
                   "pattern": "string",
                   "type": "string"
                 }

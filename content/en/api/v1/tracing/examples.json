@@ -10,7 +10,7 @@
             "resource": "/home",
             "service": "service_name",
             "span_id": "987654321",
-            "start": null,
+            "start": "0",
             "trace_id": "123456789"
           }
         ]
@@ -31,7 +31,7 @@
             "resource": "/home",
             "service": "service_name",
             "span_id": "987654321",
-            "start": "integer",
+            "start": "0",
             "trace_id": "123456789",
             "type": "web"
           }

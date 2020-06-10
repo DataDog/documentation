@@ -32,9 +32,9 @@ supported_os:
 
 Recueillez des métriques du service [Sortdb][1] en temps réel pour :
 
-* Visualiser et surveiller les statistiques Sortdb
-* Être informé des failovers Sortdb
-* Obtenez des statistiques concernant plusieurs instances et vérifiez leur santé
+- Visualiser et surveiller les statistiques Sortdb
+- Être informé des failovers Sortdb
+- Obtenez des statistiques concernant plusieurs instances et vérifiez leur santé
 
 ## Installation
 
@@ -43,35 +43,34 @@ Si vous utilisez la version 6.8 ou ultérieure de l'Agent, suivez les instructi
 1. Installez le [kit de développement][5].
 2. Clonez le dépôt integrations-extras :
 
-    ```
-    git clone https://github.com/DataDog/integrations-extras.git.
-    ```
+   ```shell
+   git clone https://github.com/DataDog/integrations-extras.git.
+   ```
 
 3. Mettez à jour votre configuration `ddev` avec le chemin `integrations-extras/` :
 
-    ```
-    ddev config set extras ./integrations-extras
-    ```
+   ```shell
+   ddev config set extras ./integrations-extras
+   ```
 
 4. Pour générer le paquet `sortdb`, exécutez :
 
-    ```
-    ddev -e release build sortdb
-    ```
+   ```shell
+   ddev -e release build sortdb
+   ```
 
 5. [Téléchargez et lancez l'Agent Datadog][6].
 6. Exécutez la commande suivante pour installer le wheel de l'intégration à l'aide de l'Agent :
 
-    ```
-    datadog-agent integration install -w <PATH_OF_SORTDB_ARTIFACT_>/<SORTDB_ARTIFACT_NAME>.whl
-    ```
+   ```shell
+   datadog-agent integration install -w <PATH_OF_SORTDB_ARTIFACT_>/<SORTDB_ARTIFACT_NAME>.whl
+   ```
 
 7. Configurez votre intégration comme [n'importe quelle autre intégration du paquet][7].
 
 ## Configuration
 
-1. Modifiez le fichier `sortdb.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][7] pour commencer à recueillir vos [métriques](#collecte-de-metriques) Sortdb.
-  Consultez le [fichier d'exemple sortdb.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `sortdb.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][8] pour commencer à recueillir vos [métriques](#collecte-de-metriques) Sortdb. Consultez le [fichier d'exemple sortdb.d/conf.yaml][9] pour découvrir toutes les options de configuration disponibles.
 
 2. [Redémarrez l'Agent][10].
 
@@ -98,12 +97,12 @@ Le check SortDB n'inclut aucun check de service pour le moment.
 Le check SortDB n'inclut aucun événement pour le moment.
 
 [1]: https://github.com/jehiah/sortdb
-[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
 [3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
 [5]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [6]: https://app.datadoghq.com/account/settings#agent
-[7]: https://docs.datadoghq.com/fr/getting_started/integrations
+[7]: https://docs.datadoghq.com/fr/getting_started/integrations/
 [8]: https://docs.datadoghq.com/fr/agent/faq/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/integrations-extras/blob/master/sortdb/datadog_checks/sortdb/data/conf.yaml.example
 [10]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent

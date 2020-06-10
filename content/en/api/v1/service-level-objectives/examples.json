@@ -20,10 +20,10 @@
               "modified_at": "integer",
               "monitor_ids": [],
               "monitor_tags": [],
-              "name": "string",
+              "name": "",
               "query": {
-                "denominator": "string",
-                "numerator": "string"
+                "denominator": "",
+                "numerator": ""
               },
               "tags": [
                 "env:prod",
@@ -31,7 +31,7 @@
               ],
               "thresholds": [
                 {
-                  "target": "number",
+                  "target": "0",
                   "target_display": "99.9",
                   "timeframe": "string",
                   "warning": "number",
@@ -97,10 +97,10 @@
               "modified_at": "integer",
               "monitor_ids": [],
               "monitor_tags": [],
-              "name": "string",
+              "name": "",
               "query": {
-                "denominator": "string",
-                "numerator": "string"
+                "denominator": "",
+                "numerator": ""
               },
               "tags": [
                 "env:prod",
@@ -108,7 +108,7 @@
               ],
               "thresholds": [
                 {
-                  "target": "number",
+                  "target": "0",
                   "target_display": "99.9",
                   "timeframe": "string",
                   "warning": "number",
@@ -141,14 +141,14 @@
     },
     "request": {
       "json_curl": {
-        "name": null,
+        "name": "",
         "query": {
-          "denominator": null,
-          "numerator": null
+          "denominator": "",
+          "numerator": ""
         },
         "thresholds": [
           {
-            "target": null,
+            "target": "0",
             "timeframe": null
           }
         ],
@@ -161,10 +161,10 @@
           "role:mysql"
         ],
         "monitor_ids": [],
-        "name": "string",
+        "name": "",
         "query": {
-          "denominator": "string",
-          "numerator": "string"
+          "denominator": "",
+          "numerator": ""
         },
         "tags": [
           "env:prod",
@@ -172,7 +172,7 @@
         ],
         "thresholds": [
           {
-            "target": "number",
+            "target": "0",
             "target_display": "99.9",
             "timeframe": "string",
             "warning": "number",
@@ -194,8 +194,8 @@
           },
           "errors": [
             {
-              "id": "string",
-              "message": "string",
+              "id": "",
+              "message": "",
               "timeframe": "string"
             }
           ]
@@ -353,10 +353,10 @@
             "modified_at": "integer",
             "monitor_ids": [],
             "monitor_tags": [],
-            "name": "string",
+            "name": "",
             "query": {
-              "denominator": "string",
-              "numerator": "string"
+              "denominator": "",
+              "numerator": ""
             },
             "tags": [
               "env:prod",
@@ -364,7 +364,7 @@
             ],
             "thresholds": [
               {
-                "target": "number",
+                "target": "0",
                 "target_display": "99.9",
                 "timeframe": "string",
                 "warning": "number",
@@ -421,10 +421,10 @@
               "modified_at": "integer",
               "monitor_ids": [],
               "monitor_tags": [],
-              "name": "string",
+              "name": "",
               "query": {
-                "denominator": "string",
-                "numerator": "string"
+                "denominator": "",
+                "numerator": ""
               },
               "tags": [
                 "env:prod",
@@ -432,7 +432,7 @@
               ],
               "thresholds": [
                 {
-                  "target": "number",
+                  "target": "0",
                   "target_display": "99.9",
                   "timeframe": "string",
                   "warning": "number",
@@ -473,14 +473,14 @@
     },
     "request": {
       "json_curl": {
-        "name": null,
+        "name": "",
         "query": {
-          "denominator": null,
-          "numerator": null
+          "denominator": "",
+          "numerator": ""
         },
         "thresholds": [
           {
-            "target": null,
+            "target": "0",
             "timeframe": null
           }
         ],
@@ -494,10 +494,10 @@
         ],
         "monitor_ids": [],
         "monitor_tags": [],
-        "name": "string",
+        "name": "",
         "query": {
-          "denominator": "string",
-          "numerator": "string"
+          "denominator": "",
+          "numerator": ""
         },
         "tags": [
           "env:prod",
@@ -505,7 +505,7 @@
         ],
         "thresholds": [
           {
-            "target": "number",
+            "target": "0",
             "target_display": "99.9",
             "timeframe": "string",
             "warning": "number",
@@ -547,7 +547,7 @@
             },
             "series": {
               "denominator": {
-                "count": "integer",
+                "count": "0",
                 "metadata": {
                   "aggr": "string",
                   "expression": "string",
@@ -556,13 +556,15 @@
                   "scope": "string",
                   "unit": "string"
                 },
-                "sum": "number",
-                "values": []
+                "sum": "0",
+                "values": [
+                  []
+                ]
               },
-              "interval": "integer",
+              "interval": "0",
               "message": "string",
               "numerator": {
-                "count": "integer",
+                "count": "0",
                 "metadata": {
                   "aggr": "string",
                   "expression": "string",
@@ -571,17 +573,21 @@
                   "scope": "string",
                   "unit": "string"
                 },
-                "sum": "number",
-                "values": []
+                "sum": "0",
+                "values": [
+                  []
+                ]
               },
-              "query": "string",
-              "res_type": "string",
-              "resp_version": "integer",
-              "times": []
+              "query": "",
+              "res_type": "",
+              "resp_version": "0",
+              "times": [
+                []
+              ]
             },
             "thresholds": {
               "<any-key>": {
-                "target": "number",
+                "target": "0",
                 "target_display": "99.9",
                 "timeframe": "string",
                 "warning": "number",
