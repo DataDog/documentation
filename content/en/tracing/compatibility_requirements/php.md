@@ -1,5 +1,5 @@
 ---
-title: Php Compatibility Requirements
+title: PHP Compatibility Requirements
 kind: documentation
 description: 'Compatibility Requirements for the PHP tracer'
 further_reading:
@@ -8,6 +8,8 @@ further_reading:
       text: 'Instrument Your Application'
 ---
 ## Compatibility
+
+The PHP Datadog Trace library is open source - view the [Github repository][1] for more information.
 
 PHP APM supports the following PHP versions:
 
@@ -30,13 +32,14 @@ PHP APM supports the following SAPI's:
 | fpm-fcgi       | Fully Supported |
 | cgi-fcgi       | Fully Supported |
 
+
 ### Integrations
 
 #### Web Framework Compatibility
 
 By default, Datadog **supports all PHP web frameworks** out of the box, which allows you to see traces for spans of supported libraries—for example: database and HTTP clients.
 
-The following table enumerates some of the frameworks and versions Datadog succesfully traces.
+The following table enumerates some of the frameworks and versions Datadog successfully traces.
 
 **Web frameworks**:
 
@@ -60,7 +63,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 
 Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
 
-Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks.  To request support for additional span metadata and framework internals, contact our awesome [support team][1].
+Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks.  To request support for additional span metadata and framework internals, contact our awesome [support team][2].
 
 #### CLI Library Compatibility
 
@@ -72,7 +75,7 @@ Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI s
 | Laravel Artisan | 5.x      | Fully Supported |
 | Symfony Console |          | _Coming Soon_   |
 
-To request support for additional CLI libraries, contact our awesome [support team][1].
+To request support for additional CLI libraries, contact our awesome [support team][2].
 
 #### Datastore Compatibility
 
@@ -94,7 +97,7 @@ To request support for additional CLI libraries, contact our awesome [support te
 | PHPredis                         | 4                          | _Coming Soon_   |
 | Solarium                         | 4.2                        | _Coming Soon_   |
 
-To request support for additional datastores, contact our awesome [support team][1].
+To request support for additional datastores, contact our awesome [support team][2].
 
 #### Library Compatibility
 
@@ -106,10 +109,11 @@ To request support for additional datastores, contact our awesome [support team]
 | Beanstalkd |                       | _Coming Soon_   |
 | ReactPHP   |                       | _Coming Soon_   |
 
-To request support for additional libraries, contact our awesome [support team][1].
+To request support for additional libraries, contact our awesome [support team][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help
+[1]: https://github.com/DataDog/dd-trace-php
+[2]: /help

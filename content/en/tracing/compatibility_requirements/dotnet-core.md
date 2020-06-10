@@ -8,11 +8,11 @@ further_reading:
       text: 'Instrument Your Application'
 ---
 
-The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.1. It also supports [.NET Framework][1].
+The .NET Datadog Trace library is open source - view the [Github repository][1] for more information.
 
-**Note:** The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][2] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1.
+The .NET Tracer supports automatic instrumentation on .NET Core 2.1, 3.0, and 3.1. It also supports [.NET Framework][2].
 
-**Note:** Older versions of .NET Core on Linux/x64 have JIT compiler bugs that can cause applications to throw exceptions when using automatic instrumentation. If your application is running on .NET Core 2.0, 2.1.0-2.1.11, or 2.2.0-2.2.5, we strongly recommend you update your .NET Core runtime. If you cannot update, you may need to set the environment variable `DD_CLR_DISABLE_OPTIMIZATIONS=true` to work around the issue. See [DataDog/dd-trace-dotnet/issues/302][3] for more details.
+The .NET Tracer works on .NET Core 2.0, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. We recommend using the latest patch version of .NET Core 2.1 or 3.1.  Older versions of .NET Core on Linux/x64 have JIT compiler bugs that can cause applications to throw exceptions when using automatic instrumentation. If your application is running on .NET Core 2.0, 2.1.0-2.1.11, or 2.2.0-2.2.5, we strongly recommend you update your .NET Core runtime. If you cannot update, you may need to set the environment variable `DD_CLR_DISABLE_OPTIMIZATIONS=true` to work around the issue. See [DataDog/dd-trace-dotnet/issues/302][4] for more details.
 
 ## Integrations
 
@@ -32,13 +32,14 @@ The .NET Tracer can instrument the following libraries automatically:
 
 **Note:** The ADO.NET integration instruments calls made through the `DbCommand` abstract class or the `IDbCommand` interface, regardless of the underlying implementation. It also instruments direct calls to `SqlCommand`.
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][4] for help.
+Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/compatibility_requirements/dotnet-framework/
-[2]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
-[3]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
-[4]: /help/
+[1]: https://github.com/DataDog/dd-trace-dotnet
+[2]: /tracing/compatibility_requirements/dotnet-framework/
+[3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
+[4]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
+[5]: /help/

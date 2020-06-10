@@ -10,29 +10,18 @@ further_reading:
 
 ## Compatibility
 
+The Java Datadog Trace library is open source - view the [Github repository][1] for more information.
+
 Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and OpenJDK. Datadog does not officially support any early-access versions of Java.
 
-Beta integrations are disabled by default but can be enabled individually.
+Beta integrations are disabled by default but can be enabled individually:
+
+- System Property: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
+- Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true
 
 ### Web Framework Compatibility
 
 `dd-java-agent` includes support for automatically tracing the following web frameworks.
-
-| Server                  | Versions   | Support Type    | Instrumentation Names (used for configuration) |
-| ----------------------- | ---------- | --------------- | ---------------------------------------------- |
-| Akka-Http Server        | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                |
-| Finatra Web             | 2.9+       | Fully Supported | `finatra`                                      |
-| Grizzly                 | 2.0+       | [Beta][1]       | `grizzly`                                      |
-| Grizzly-HTTP            | 2.3.20+    | [Beta][1]       | `grizzly-filterchain`                          |
-| Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
-| Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
-| Jetty (non-Servlet)     | 8+         | [Beta][1]       | `jetty`, `jetty-8`                             |
-| Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
-| Play                    | 2.3-2.7    | Fully Supported | `play`, `play-action`                          |
-| Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
-| Spark Java              | 2.3+       | [Beta][1]       | `sparkjava` (requires `jetty`)                 |
-| Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
-| Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
 
 **Web Framework tracing provides:**
 
@@ -41,19 +30,38 @@ Beta integrations are disabled by default but can be enabled individually.
 - error and stacktrace capturing
 - linking work created within a web request and Distributed Tracing
 
+| Server                  | Versions   | Support Type    | Instrumentation Names (used for configuration) |
+| ----------------------- | ---------- | --------------- | ---------------------------------------------- |
+| Akka-Http Server        | 10.0+      | Fully Supported | `akka-http`, `akka-http-server`                |
+| Finatra Web             | 2.9+       | Fully Supported | `finatra`                                      |
+| Grizzly                 | 2.0+       | [Beta][2]       | `grizzly`                                      |
+| Grizzly-HTTP            | 2.3.20+    | [Beta][2]       | `grizzly-filterchain`                          |
+| Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
+| Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
+| Jetty (non-Servlet)     | 8+         | [Beta][2]       | `jetty`, `jetty-8`                             |
+| Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
+| Play                    | 2.3-2.7    | Fully Supported | `play`, `play-action`                          |
+| Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
+| Spark Java              | 2.3+       | [Beta][2]       | `sparkjava` (requires `jetty`)                 |
+| Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
+| Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
+
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot inherently work because it usually uses a supported embedded application server (Tomcat/Jetty/Netty).
 
-Beta Instrumentation is disabled by default. Add one of the following configurations to enable it:
-
-- System Property: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
-- Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
-
-Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][1] if you need help.
+Don't see your desired web frameworks? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
 ### Networking Framework Compatibility
 
 `dd-java-agent` includes support for automatically tracing the following networking frameworks.
+
+**Networking tracing provides:**
+
+- timing request to response
+- tags for the request (e.g. response code)
+- error and stacktrace capturing
+- distributed tracing
+
 
 | Framework                | Versions    | Support Type    | Instrumentation Names (used for configuration) |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
@@ -62,7 +70,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
 | Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
 | Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
-| Grizzly HTTP Client      | 1.9+        | [Beta][2]         | `grizzly-client`                               |
+| Grizzly HTTP Client      | 1.9+        | [Beta][3]         | `grizzly-client`                               |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
@@ -73,19 +81,23 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
 | Netty HTTP Client        | 4.0+        | Fully Supported | `netty`, `netty-4.0`, `netty-4.1`              |
-| Ning HTTP Client         | 1.9.0+      | [Beta][2]         | `ning`                                         |
+| Ning HTTP Client         | 1.9.0+      | [Beta][3]         | `ning`                                         |
 | OkHTTP                   | 2.2+        | Fully Supported | `okhttp`, `okhttp-2`,`okhttp-3`                |
 | Play WSClient            | 1.0+        | Fully Supported | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | Fully Supported | `amqp`, `rabbitmq`                             |
 | Spring WebClient         | 5.0+        | Fully Supported | `spring-webflux`, `spring-webflux-client`      |
 
-**Networking tracing provides:** timing request to response, tags for the request (e.g. response code), error and stacktrace capturing, and distributed tracing.
-
-Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][1] if you need help.
+Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
 ### Data Store Compatibility
 
 `dd-java-agent` includes support for automatically tracing the following database frameworks/drivers.
+
+**Datastore tracing provides:**
+
+- timing request to response
+- query info (e.g. a sanitized query string)
+- error and stacktrace capturing
 
 | Database                | Versions | Support Type    | Instrumentation Names (used for configuration)                                           |
 | ----------------------- | -------- | --------------- | ---------------------------------------------------------------------------------------- |
@@ -113,9 +125,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 - Oracle
 - Postgres SQL
 
-**Datastore tracing provides:** timing request to response, query info (e.g. a sanitized query string), and error and stacktrace capturing.
-
-Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][1] if you need help.
+Don't see your desired datastores? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
 ### Other Framework Compatibility
 
@@ -133,13 +143,13 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Spring Scheduling | 3.1+     | Fully Supported | `spring-scheduling`                            |
 | Twilio SDK        | 0+       | Fully Supported | `twilio-sdk`                                   |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][1].
+Don’t see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
 
 To improve visibility into applications using unsupported frameworks, consider:
 
-- [Adding custom instrumentation][3].
-- [Submitting a pull request][4] with instrumentation for inclusion in a future release.
-- Contacting [Datadog support][1] and submitting a feature request.
+- [Adding custom instrumentation][4].
+- [Submitting a pull request][5] with instrumentation for inclusion in a future release.
+- Contacting [Datadog support][2] and submitting a feature request.
 
 ### Disabling Integrations
 
@@ -160,7 +170,8 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
-[2]: http://bytebuddy.net
-[3]: /tracing/manual_instrumentation/java
-[4]: https://github.com/DataDog/documentation#outside-contributors
+[1]: https://github.com/DataDog/dd-trace-java
+[2]: /help/
+[3]: http://bytebuddy.net
+[4]: /tracing/manual_instrumentation/java
+[5]: https://github.com/DataDog/documentation#outside-contributors
