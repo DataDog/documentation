@@ -13,7 +13,9 @@ further_reading:
 ---
 
 ## Overview
-Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`. With these three tags you can:
+Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`.
+
+With these three tags you can:
 
 - Identify deployment impact with trace and container metrics filtered by version
 - Navigate seamlessly across traces, metrics, and logs with consistent tags
@@ -94,12 +96,12 @@ template:
 To configure pod-level metrics, add the following standard labels (`tags.datadoghq.com`) to the pod spec of a Deployment, StatefulSet, or Job:
 
 ```yaml
-  template:
-    metadata:
-      labels:
-        tags.datadoghq.com/env: <ENV>
-        tags.datadoghq.com/service: <SERVICE>
-        tags.datadoghq.com/version: <VERSION>
+template:
+  metadata:
+    labels:
+      tags.datadoghq.com/env: <ENV>
+      tags.datadoghq.com/service: <SERVICE>
+      tags.datadoghq.com/version: <VERSION>
 ```
 These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][1].
 
@@ -137,21 +139,21 @@ spec:
 To configure [APM Tracer][3] and [StatsD client][4] environment variables, use the [Kubernetes's downward API][1] in the format below:
 
 ```yaml
-    containers:
-    -  ...
-       env:
-            - name: DD_ENV
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/env']
-            - name: DD_SERVICE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/service']
-            - name: DD_VERSION
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.labels['tags.datadoghq.com/version']
+containers:
+-  ...
+    env:
+        - name: DD_ENV
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/env']
+        - name: DD_SERVICE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/service']
+        - name: DD_VERSION
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
 [1]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#the-downward-api
@@ -213,7 +215,7 @@ As explained in the full configuration, these labels can be set in a Dockerfile 
 
 Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in your container's runtime environment to your get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
 
-```json
+```
 "environment": [
   {
     "name": "DD_ENV",
@@ -227,19 +229,20 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corre
     "name": "DD_VERSION",
     "value": "<VERSION>"
   }
-]
 
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
   "com.datadoghq.tags.service": "<SERVICE>",
   "com.datadoghq.tags.version": "<VERSION>"
+  }
+]
 ```
 
 ##### Partial configuration
 
 If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels in your ECS task definition:
 
-```json
+```
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
   "com.datadoghq.tags.service": "<SERVICE>",
