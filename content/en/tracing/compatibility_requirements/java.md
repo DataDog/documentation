@@ -34,7 +34,12 @@ Beta integrations are disabled by default but can be enabled individually.
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
 
-**Web Framework tracing provides:** timing HTTP request to response, tags for the HTTP request (status code, method, etc), error and stacktrace capturing, linking work created within a web request and Distributed Tracing.
+**Web Framework tracing provides:**
+
+- timing HTTP request to response
+- tags for the HTTP request (status code, method, etc)
+- error and stacktrace capturing
+- linking work created within a web request and Distributed Tracing
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Tomcat, Jetty, Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot inherently work because it usually uses a supported embedded application server (Tomcat/Jetty/Netty).
