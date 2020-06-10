@@ -13,14 +13,17 @@ further_reading:
 - link: "/tagging/assigning_tags/"
   tag: "Documentation"
   text: "Learn how to assign tags"
+- link: "/getting_started/tagging/unified_service_tagging/"
+  tag: "Documentation"
+  text: "Configure unified service tagging"
 - link: "/tagging/using_tags/"
   tag: "Documentation"
-  text: "Learn how to use tags in Datadog"
+  text: "Explore how to use tags in the Datadog app"
 ---
 
 ## Introduction
 
-Tags are a way of adding dimensions to metrics, so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across a number of hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate data points.
+Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across a number of hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate data points.
 
 Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys. Here are some examples:
 
@@ -75,9 +78,9 @@ Tags may be assigned using any (or all) of the following methods. Refer to the d
 
 | Method                       | Assign tags                                                                                  |
 |------------------------------|----------------------------------------------------------------------------------------------|
-| [Configuration Files][4]     | Manually in your main Agent configuration files, or in your integrations configuration file. |
-| [UI][5]                      | In your Datadog platform                                                                     |
-| [API][6]                     | Using Datadog's API                                                                          |
+| [Configuration Files][4]     | Manually in your main Agent or integration configuration files. |
+| [UI][5]                      | In the Datadog App                                                                     |
+| [API][6]                     | When using Datadog's API                                                                          |
 | [DogStatsD][7]               | When submitting metrics via DogStatsD                                                        |
 
 #### Unified service tagging

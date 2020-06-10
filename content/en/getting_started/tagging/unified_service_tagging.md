@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/tagging/using_tags"
   tag: "Documentation"
-  text: "Learn how to use tags in the Datadog UI"
+  text: "Learn how to use tags in the Datadog app"
 - link: "/blog/autodiscovery-docker-monitoring"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
@@ -14,6 +14,7 @@ further_reading:
 
 ## Overview
 Unified service tagging ties Datadog telemetry together through the use of three [reserved tags][1]: `env`, `service`, and `version`. With these three tags you can:
+
 - Identify deployment impact with trace and container metrics filtered by version
 - Navigate seamlessly across traces, metrics, and logs with consistent tags
 - View service data based on environment or version in a unified fashion within the Datadog app
@@ -24,11 +25,11 @@ Unified service tagging ties Datadog telemetry together through the use of three
 
 - Unified service tagging requires setup of the [Datadog Agent][2].
 
-- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][3] guide and [Assigning Tags][4] documentation before proceeding to configuration.
+- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][3] and [Assigning Tags][4] documentation before proceeding to configuration.
 
 ## Configuration
 
-To configure unified tagging, choose your environment:
+To begin configuration of unified service tagging, choose your environment:
 
 - [Containerized](#containerized-environment)
 - [Non-Containerized](#non-containerized-environment)
@@ -37,7 +38,7 @@ To configure unified tagging, choose your environment:
 
 In containerized environments, `env`, `service`, and `versions` are set through environment variables or standard labels in your Datadog Agent configuration file. Since the agent associates data collected with a specific container, the configuration for these tags can reside within the container's metadata.
 
-To configure unified service tagging:
+To setup unified service tagging in a containerized environment:
 
 1. Enable [Autodiscovery][5]. This allows the Datadog Agent to automatically identify services running on a specific container and gathers data from those services to map environment variables to the `env`, `service,` and `version` tags.
 
@@ -52,7 +53,7 @@ To configure unified service tagging:
 
 ##### Full configuration
 
-For get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
+To get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
 
 ```yaml
 apiVersion: apps/v1
@@ -162,28 +163,28 @@ To configure [APM Tracer][3] and [StatsD client][4] environment variables, use t
 {{% tab "Docker" %}}
 ##### Full configuration
 
-1. Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to your get the full range of unified service tagging.
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to your get the full range of unified service tagging.
 
 The values for `service` and `version` can be provided in the Dockerfile:
 
-    ```
-      ENV DD_SERVICE <SERVICE>
-      ENV DD_VERSION <VERSION
+```yaml
+ENV DD_SERVICE <SERVICE>
+ENV DD_VERSION <VERSION
 
-      LABEL com.datadoghq.tags.env="<ENV>"
-      LABEL com.datadoghq.tags.service="<SERVICE>"
-      LABEL com.datadoghq.tags.version="<VERSION>"
-    ```
+LABEL com.datadoghq.tags.env="<ENV>"
+LABEL com.datadoghq.tags.service="<SERVICE>"
+LABEL com.datadoghq.tags.version="<VERSION>"
+```
 
 Since `env` is likely determined at deploy time, you can inject the environment variable and label later:
 
-```
-  docker run -e DD_ENV=<ENV> -l com.datadoghq.tags.env=<ENV> ...
+```shell
+docker run -e DD_ENV=<ENV> -l com.datadoghq.tags.env=<ENV> ...
 ```
 
 You may also prefer to set everything at deploy time:
 
-```
+```shell
 docker run -e DD_ENV=<ENV> \
            -e DD_SERVICE=<SERVICE> \
            -e DD_VERSION=<VERSION> \
@@ -197,13 +198,13 @@ docker run -e DD_ENV=<ENV> \
 
 If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels:
 
-```
+```yaml
 com.datadoghq.tags.env
 com.datadoghq.tags.service
 com.datadoghq.tags.version
 ```
 
-As explained in the full configuration(?tab=Docker), these labels can be set in a Dockerfile or as arguments for launching the container.
+As explained in the full configuration, these labels can be set in a Dockerfile or as arguments for launching the container.
 
 {{% /tab %}}
 
@@ -212,7 +213,7 @@ As explained in the full configuration(?tab=Docker), these labels can be set in 
 
 Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in your container's runtime environment to your get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
 
-```
+```json
 "environment": [
   {
     "name": "DD_ENV",
@@ -238,7 +239,7 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corre
 
 If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels in your ECS task definition:
 
-```
+```json
 "dockerLabels": {
   "com.datadoghq.tags.env": "<ENV>",
   "com.datadoghq.tags.service": "<SERVICE>",

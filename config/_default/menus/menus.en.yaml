@@ -14,51 +14,51 @@ main:
     url: getting_started/agent/autodiscovery
     parent: getting_started_agent
     weight: 101
-  - name: Tags
-    identifier: tagging_
-    url: getting_started/tagging/
-    parent: getting_started
-    weight: 2
-  - name: Assigning Tags
-    identifier: assigning_tags
-    url: getting_started/tagging/assigning_tags
-    parent: tagging_
-    weight: 201
-  - name: Unified Service Tagging
-    identifier: unified_service_tagging
-    url: getting_started/tagging/unified_service_tagging
-    parent: tagging_
-    weight: 202
-  - name: Using Tags
-    identifier: using_tags
-    url: getting_started/tagging/using_tags
-    parent: tagging_
-    weight: 203
   - name: Integrations
     identifier: getting_started_integrations
     url: getting_started/integrations/
     parent: getting_started
-    weight: 3
+    weight: 2
   - name: Datadog
     identifier: getting_started_datadog
     url: getting_started/application/
     parent: getting_started
-    weight: 4
+    weight: 3
   - name: Monitors
     identifier: getting_started_monitors
     url: getting_started/application/monitors
     parent: getting_started_datadog
-    weight: 401
+    weight: 301
   - name: Logs
     identifier: getting_started_logs
     url: getting_started/logs/
     parent: getting_started
-    weight: 5
+    weight: 4
   - name: Tracing
     identifier: getting_started_collect_traces
     url: getting_started/tracing/
     parent: getting_started
+    weight: 5
+  - name: Tags
+    identifier: tagging_
+    url: getting_started/tagging/
+    parent: getting_started
     weight: 6
+  - name: Assigning Tags
+    identifier: assigning_tags
+    url: getting_started/tagging/assigning_tags
+    parent: tagging_
+    weight: 601
+  - name: Unified Service Tagging
+    identifier: unified_service_tagging
+    url: getting_started/tagging/unified_service_tagging
+    parent: tagging_
+    weight: 602
+  - name: Using Tags
+    identifier: using_tags
+    url: getting_started/tagging/using_tags
+    parent: tagging_
+    weight: 603
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
