@@ -6,9 +6,7 @@ aliases:
     - /getting_started/getting_started_with_tags
     - /guides/getting_started/tagging/
     - /developers/getting_started/tagging/
-    - /getting_started/tagging
-    - /getting_started/tagging/faq/
-    - /getting_started/tagging/
+    - /tagging
 further_reading:
 - link: "/getting_started/tagging/assigning_tags/"
   tag: "Documentation"
