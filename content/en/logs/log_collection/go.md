@@ -78,12 +78,9 @@ func main() {
 }
 ```
 
-## Connect your service across logs and traces
+**Connect Logs and Traces**
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM Go instructions][3]
-
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Go logging instructions][3] to automatically add trace and span IDs in your logs.
 
 ## Configure your Datadog Agent
 
