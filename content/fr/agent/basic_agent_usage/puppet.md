@@ -277,7 +277,7 @@ Ces variables peuvent être définies dans la classe `datadog_agent` afin de con
 | `logs_enabled`                          | Une valeur booléenne permettant d'activer l'Agent de logs (valeur par défaut : false).                                                                                                                                          |
 | `container_collect_all`                 | Une valeur booléenne permettant d'activer la collecte de logs pour tous les conteneurs.                                                                                                                                          |
 | `agent_extra_options`<sup>1</sup>       | Un hash permettant de fournir des options de configuration supplémentaires (Agent v6 et v7 uniquement).                                                                                                                       |
-| `hostname_extraction_regex`<sup>2</sup> | Une expression régulière utilisée pour extraire le groupe de hostnames capturés, afin de transmettre les résultats de l'exécution dans Datadog, plutôt que de transmettre le nom du nœud Puppet. Exemple :<br>`'^(?<hostname>.*\.datadoghq\.com)(\.i-\w{8}\..*)?$'` |
+| `hostname_extraction_regex`<sup>2</sup> | Une expression régulière utilisée pour extraire le groupe de capture associé au hostname, afin de transmettre les résultats de l'exécution dans Datadog, plutôt que de transmettre le nom du nœud Puppet. Exemple :<br>`'^(?<hostname>.*\.datadoghq\.com)(\.i-\w{8}\..*)?$'` |
 
 (1) La variable `agent_extra_options` est utilisée pour contrôler précisément des options de configuration supplémentaires de l'Agent v6 ou v7. Le deep merge effectué est susceptible de remplacer les options des paramètres de la classe `datadog_agent`.
 
