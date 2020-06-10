@@ -280,7 +280,7 @@ When configuring your traces for unified service tagging:
 
     **Note: There can only be one service per span.** Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag will show up on all trace metrics emitted from that host.
 
-[1]: /tracing/tracing/setup
+[1]: /tracing/setup/
 [2]: /developers/dogstatsd/
 {{% /tab %}}
 
