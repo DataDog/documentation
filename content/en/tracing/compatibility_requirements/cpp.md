@@ -10,7 +10,7 @@ further_reading:
 
 ## Compatibility
 
-`dd-opentracing-cpp` requires C++14 to build, but if you use [dynamic loading][1] then you are instead only limited by OpenTracing's requirement for [C++11 or later][2].
+The Datadog C++ SDK, `dd-opentracing-cpp`, requires C++14 to build, but if you use [dynamic loading][1], then  OpenTracing requires [C++11 or later][2].
 
 Supported platforms include Linux and Mac. If you need Windows support, [contact Datadog support][3].
 
