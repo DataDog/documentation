@@ -72,7 +72,7 @@ Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI s
 | Laravel Artisan | 5.x      | Fully Supported |
 | Symfony Console |          | _Coming Soon_   |
 
-Don’t see your desired CLI library? Datadog is continually adding additional support. Check with the [Datadog team][1] for help.
+To request support for additional CLI libraries, contact our awesome [support team][1].
 
 #### Datastore Compatibility
 
@@ -94,7 +94,7 @@ Don’t see your desired CLI library? Datadog is continually adding additional s
 | PHPredis                         | 4                          | _Coming Soon_   |
 | Solarium                         | 4.2                        | _Coming Soon_   |
 
-Don’t see your desired datastores? Datadog is continually adding additional support. Check with the [Datadog team][1] for help.
+To request support for additional datastores, contact our awesome [support team][1].
 
 #### Library Compatibility
 
@@ -106,7 +106,7 @@ Don’t see your desired datastores? Datadog is continually adding additional su
 | Beanstalkd |                       | _Coming Soon_   |
 | ReactPHP   |                       | _Coming Soon_   |
 
-Don’t see your desired libraries? Datadog is continually adding additional support. Check with the [Datadog team][1] for help.
+To request support for additional libraries, contact our awesome [support team][1].
 
 ## Further Reading
 
