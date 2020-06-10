@@ -12,7 +12,7 @@ Node `>=8` is supported by this library. Only even versions like 8.x and 10.x ar
 
 ## Supported Integrations
 
-APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system. If you would like support for a module that is not listed, [contact support][1] to share a request.
+APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system. To request support for a module that is not listed, contact our awesome [support team][1].
 
 For details about how to how to toggle and configure plugins, check out the [API documentation][2].
 
