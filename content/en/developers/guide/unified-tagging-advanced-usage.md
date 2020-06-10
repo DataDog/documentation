@@ -11,7 +11,7 @@ This guide suggests ways to configure and migrate to [unified service tagging][1
 
 ## Using Custom Tags
 
-You can continue to use the `env` `service` and `version` tags as they are configured for unified service tagging. However, if you'd like to achieve a unified tagging experience with your own custom tags, there are some options available to you:
+You can continue to use the `env` `service` and `version` tags as they are configured for unified service tagging. However, if you'd like to achieve a unified tagging experience with your own custom tags, there are several options available which are listed below.
 
 **Note**: While some products support arbitrary tags, others have more specific expectations. As such, navigation between products might be difficult if one data source has a tag that another does not have or does not support.
 
@@ -30,7 +30,7 @@ Autodiscovered tags associated with containers are added to `container_info` in 
 
 #### Logs
 
-Similar to APM, service is a core tag that is used to help organize logs data. Additionally, it is not possible to link from a log to the related APM service without it.
+Similar to APM, `service` is a core tag that is used to help organize logs data. Additionally, it is not possible to link from a log to the related APM service without it.
 
 Similar to metrics, however, Autodiscovered tags for the container as well as host tags for the agent are added to all logs.
 
