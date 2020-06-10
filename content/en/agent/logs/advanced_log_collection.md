@@ -31,7 +31,6 @@ Apply log processing rules to a specific log collection configurations to:
 
 To apply a processing rule to all logs collected by a Datadog Agent, see the [Global processing rules](#global-processing-rules) section.
 
-
 ## Filter logs
 
 To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.

@@ -19,7 +19,7 @@ Tagging is used throughout Datadog to query the machines and metrics you monitor
 
 Tags can be configured in several different ways:
 
-- In the Datadog Agent [configuration file](#configuration-file)
+- In the Datadog Agent [configuration file](#configuration-file) or each individual integration configuration file
 - Through the the Datadog [UI](#ui)
 - With the Datadog [API](#api)
 - With the [DogStatsD](#dogstatsd)
@@ -88,9 +88,9 @@ hostname: mymachine.mydomain
 
 ##### Changing the hostname
 
-* The old hostname remains in the UI for 2 hours but does not show new metrics.
+* The old hostname remains in the UI for two hours but does not show new metrics.
 * Any data from hosts with the old hostname can be queried with the API.
-* To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][5].
+* To graph metrics with the old and new hostname in one graph, use [arithmetic between two metrics][5].
 
 
 [1]: /getting_started/integrations/
@@ -132,7 +132,7 @@ hostname: mymachine.mydomain
 
 * The old hostname remains in the UI for 2 hours but does not show new metrics.
 * Any data from hosts with the old hostname can be queried with the API.
-* To graph metrics with the old and new hostname in one graph, use [Arithmetic between two metrics][5].
+* To graph metrics with the old and new hostname in one graph, use [arithmetic between two metrics][5].
 
 
 [1]: /getting_started/integrations/
@@ -291,7 +291,7 @@ When creating a monitor, assign monitor tags under step 4 *Say what's happening*
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
-Create percentile aggregations within [Distribution Metrics][1] by applying a whitelist of up to ten tags to a metric -  this creates a timeseries for every potentially queryable combination of tag values. For more information on counting custom metrics and timeseries emitted from distribution metrics, see [Custom Metrics][2].
+Create percentile aggregations within [Distribution Metrics][1] by applying a whitelist of up to ten tags to a metric. This creates a timeseries for every potentially queryable combination of tag values. For more information on counting custom metrics and timeseries emitted from distribution metrics, see [Custom Metrics][2].
 
 **Apply up to ten tags. Exclusionary tags will not be accepted**:
 

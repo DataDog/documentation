@@ -109,7 +109,7 @@ To configure pod-level metrics, add the following standard labels (`tags.datadog
         tags.datadoghq.com/service: <SERVICE>
         tags.datadoghq.com/version: <VERSION>
 ```
-These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and are used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container.
+These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][4].
 
 If you have multiple containers per pod, you can specify standard labels by container:
 
@@ -198,13 +198,12 @@ To configure [APM Tracer][2] and [StatsD client][3] environment variables, use t
 
 2. You can also use these labels as an option to `docker run`: `docker run ... -l com.datadoghq.tags.service=<SERVICE>`
 
-[1]: https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option
 {{% /tab %}}
 
 {{% tab "ECS" %}}
 ##### Full configuration
 
-Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in your container's runtime environment to your get the full range of unified service tagging. For instance, you can add these environment variables in one place through your ECS task definition:
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in your container's runtime environment to your get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
 
 ```
 "environment": [
@@ -230,7 +229,7 @@ Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corre
 
 ##### Partial configuration
 
-If you do not need to set up logs injection or there are containers that will not benefit from using the environment variables in the application runtime, you can instead use Docker labels in your ECS task definition:
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels in your ECS task definition:
 
 ```
 "dockerLabels": {

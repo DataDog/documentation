@@ -30,7 +30,7 @@ If you have configured your tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`
 
 If you prefer to manually correlate your [traces][2] with your logs, patch your `logging` module by updating your log formatter to include the ``dd.trace_id`` and ``dd.span_id`` attributes from the log record.
 
-Similarly, include ``env``, ``service``, and ``version`` as attributes for your log record.
+Similarly, include ``dd.env``, ``dd.service``, and ``dd.version`` as attributes for your log record.
 
 The configuration below is used by the automatic injection method and is supported by default in the Python Log Integration:
 
