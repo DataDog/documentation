@@ -161,6 +161,6 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [9]: https://app.datadoghq.com/infrastructure
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [11]: /getting_started/tagging/unified_service_tagging
-[12]: /tracing/guide/setting_primary_tags_to_scope.
+[12]: /tracing/guide/setting_primary_tags_to_scope/
 [13]: https://app.datadoghq.com/apm/services
 [14]: https://app.datadoghq.com/apm/traces

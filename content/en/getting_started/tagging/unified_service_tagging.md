@@ -7,7 +7,7 @@ further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
   text: "Learn how to use tags in the Datadog app"
-- link: "/blog/autodiscovery-docker-monitoring"
+- link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
 ---

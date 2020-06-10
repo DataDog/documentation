@@ -226,7 +226,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 [6]: /tracing/setup/docker/
 [7]: /agent/kubernetes/apm/
 [8]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[9]: /getting_started/unified_service_tagging
+[9]: /getting_started/tagging/unified_service_tagging
 [10]: /help/
 [11]: https://datadog.github.io/dd-trace-js/#integrations
 [12]: https://github.com/senchalabs/connect
