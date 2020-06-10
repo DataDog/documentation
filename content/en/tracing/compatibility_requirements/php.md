@@ -34,7 +34,7 @@ PHP APM supports the following SAPI's:
 
 #### Web Framework Compatibility
 
-By default Datadog **supports all PHP web frameworks** out of the box, which allows you to see traces for spans of supported libraries—for example: database and HTTP clients.
+By default, Datadog **supports all PHP web frameworks** out of the box, which allows you to see traces for spans of supported libraries—for example: database and HTTP clients.
 
 The following table enumerates some of the frameworks and versions Datadog succesfully traces.
 
