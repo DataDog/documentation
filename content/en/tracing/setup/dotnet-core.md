@@ -226,30 +226,6 @@ There are multiple ways to configure the .NET Tracer:
 * creating a `datadog.json` file
 
 {{< tabs >}}
-{{% tab "Code" %}}
-
-To configure the Tracer in application code, create a `TracerSettings` from the default configuration sources. Set properties on this `TracerSettings` instance before passing it to a `Tracer` constructor. For example:
-
-```csharp
-using Datadog.Trace;
-
-// read default configuration sources (env vars, web.config, datadog.json)
-var settings = TracerSettings.FromDefaultSources();
-
-// change some settings
-settings.ServiceName = "MyService";
-settings.AgentUri = new Uri("http://localhost:8126/");
-
-// create a new Tracer using these settings
-var tracer = new Tracer(settings);
-
-// set the global tracer
-Tracer.Instance = tracer;
-```
-
-**Note:** Settings must be set on `TracerSettings` _before_ creating the `Tracer`. Changes made to `TracerSettings` properies after the `Tracer` is created are ignored.
-
-{{% /tab %}}
 
 {{% tab "Environment variables" %}}
 
@@ -382,18 +358,6 @@ The following table lists configuration variables that are available only when u
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<<<<<<< HEAD
-[1]: /tracing/send_traces/
-[2]: /tracing/setup/dotnet-framework/
-[3]: https://dotnet.microsoft.com/platform/support/policy/dotnet-core
-[4]: https://github.com/DataDog/dd-trace-dotnet/issues/302#issuecomment-603269367
-[5]: /help/
-[6]: https://www.nuget.org/packages/Datadog.Trace
-[7]: /tracing/manual_instrumentation/dotnet/
-[8]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[9]: /tagging/unified_service_tagging
-=======
-
 [1]: https://app.datadoghq.com/apm/install
 [2]: /tracing/send_traces/
 [3]: /tracing/setup/dotnet-framework/
@@ -402,4 +366,4 @@ The following table lists configuration variables that are available only when u
 [6]: /help/
 [7]: /tracing/manual_instrumentation/dotnet
 [8]: /tracing/guide/setting_primary_tags_to_scope/#environment
->>>>>>> master
+[9]: /tagging/unified_service_tagging

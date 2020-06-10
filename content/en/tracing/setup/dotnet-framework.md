@@ -167,25 +167,6 @@ Tracer.Instance = tracer;
 
 {{% /tab %}}
 
-{{% tab "Environment variables" %}}
-
-To configure the Tracer using environment variables, set the variables before launching the instrumented application.
-
-For example:
-
-```cmd
-rem Set environment variables
-SET DD_TRACE_AGENT_URL=http://localhost:8126
-SET DD_SERVICE_NAME=MyService
-
-rem Launch application
-example.exe
-```
-
-**Note:** To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
-
-{{% /tab %}}
-
 {{% tab "web.config" %}}
 
 To configure the Tracer using an `app.config` or `web.config` file, use the `<appSettings>` section. For example:
