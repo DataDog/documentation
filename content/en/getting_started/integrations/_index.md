@@ -175,7 +175,7 @@ If you continue to have problems, reach out to [our awesome Support team][37].
 [22]: /agent/guide/agent-commands/#restart-the-agent
 [23]: /developers/integrations/new_check_howto/#param-specification
 [24]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[25]: /tagging/
+[25]: /getting_started/tagging/
 [26]: /getting_started/agent/#setup
 [27]: /agent/guide/agent-commands/#agent-status-and-information
 [28]: /infrastructure/process/

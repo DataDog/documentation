@@ -104,7 +104,7 @@ If you define your Kubernetes pods directly with `kind: Pod`, add each pod's ann
 **Note:** As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
 
 
-[1]: /tagging/unified_service_tagging
+[1]: /getting_started/tagging/unified_service_tagging
 {{% /tab %}}
 {{% tab "File" %}}
 

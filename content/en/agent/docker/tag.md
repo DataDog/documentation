@@ -2,10 +2,10 @@
 title: Docker Tag Extraction
 kind: documentation
 further_reading:
-- link: "/tagging/"
+- link: "/getting_started/tagging/"
   tag: "Documentation"
   text: "Getting started with tags"
-- link: "/tagging/using_tags/"
+- link: "/getting_started/tagging/using_tags/"
   tag: "Documentation"
   text: "Using tags with Datadog"
 - link: "/agent/guide/autodiscovery-management/"
@@ -108,4 +108,4 @@ docker_env_as_tags:
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-[1]: /tagging/unified_service_tagging
+[1]: /getting_started/tagging/unified_service_tagging

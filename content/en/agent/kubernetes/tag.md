@@ -4,10 +4,10 @@ kind: documentation
 aliases:
 - /agent/autodiscovery/tag/
 further_reading:
-- link: "/tagging/"
+- link: "/getting_started/tagging/"
   tag: "Documentation"
   text: "Getting started with tags"
-- link: "/tagging/using_tags/"
+- link: "/getting_started/tagging/using_tags/"
   tag: "Documentation"
   text: "Using tags with Datadog"
 - link: "/agent/guide/autodiscovery-management/"
@@ -188,5 +188,5 @@ kubernetes_pod_annotations_as_tags:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging/unified_service_tagging
+[1]: /getting_started/tagging/unified_service_tagging
 [2]: /agent/kubernetes/tag/?tab=agent#extract-labels-as-tags

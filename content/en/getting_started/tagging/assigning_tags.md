@@ -3,12 +3,12 @@ title: Assigning Tags
 kind: documentation
 aliases:
     - /agent/tagging
-    - /tagging/assigning_tags
+    - /getting_started/tagging/assigning_tags
 further_reading:
-- link: "/tagging/"
+- link: "/getting_started/tagging/"
   tag: "Documentation"
   text: "Getting started with tags"
-- link: "/tagging/using_tags/"
+- link: "/getting_started/tagging/using_tags/"
   tag: "Documentation"
   text: "Learn how to use tags in Datadog"
 ---
@@ -38,7 +38,7 @@ If Autodiscovery is not in use, the Agent automatically assigns the [host tag](#
 
 
 [1]: /getting_started/agent/autodiscovery/
-[2]: /tagging/unified_service_tagging
+[2]: /getting_started/tagging/unified_service_tagging
 [3]: /getting_started/agent/autodiscovery/?tab=docker#integration-templates
 {{% /tab %}}
 {{< /tabs >}}
@@ -95,7 +95,7 @@ hostname: mymachine.mydomain
 
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
-[3]: /tagging/#defining-tags
+[3]: /getting_started/tagging/#defining-tags
 [4]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -137,7 +137,7 @@ hostname: mymachine.mydomain
 
 [1]: /getting_started/integrations/
 [2]: /agent/guide/agent-configuration-files/
-[3]: /tagging/#defining-tags
+[3]: /getting_started/tagging/#defining-tags
 [4]: /developers/metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -389,8 +389,8 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging/#defining-tags
-[2]: /tagging/unified_service_tagging
+[1]: /getting_started/tagging/#defining-tags
+[2]: /getting_started/tagging/unified_service_tagging
 [3]: /integrations/#cat-cloud
 [4]: /getting_started/agent/#setup
 [5]: /integrations/#cat-web

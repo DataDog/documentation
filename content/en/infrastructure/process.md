@@ -187,7 +187,7 @@ Processeses in Kubernetes containers are tagged by:
 - `kube_deployment`
 - `Kube_cluster`
 
-If you have configuration for [Unified Service Tagging][6] in place, `env`, `service`, and `version` will also be picked up automatically.
+If you have configuration for [Unified Service Tagging][4] in place, `env`, `service`, and `version` will also be picked up automatically.
 Having these tags available will let you tie together APM, logs, metrics, and process data.
 Note that this setup applies to containerized environments only.
 
@@ -211,7 +211,7 @@ Perhaps this one is less exciting after redaction.
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-To access the scatter plot analytic [in the Processes page][4] click on the _Show Summary graph_ button the select the "Scatter Plot" tab:
+To access the scatter plot analytic [in the Processes page][5] click on the _Show Summary graph_ button the select the "Scatter Plot" tab:
 
 {{< img src="infrastructure/process/scatterplot_selection.png" alt="scatterplot selection"  style="width:60%;">}}
 
@@ -227,7 +227,7 @@ The query at the top of the scatter plot analytic allows you to control your sca
 
 ## Enriched Live Containers view
 
-Live Processes adds extra visibility to your container deployments. The [Live Containers][5] feature gives you a similarly comprehensive view of your container and orchestrator environment. When Live Processes is enabled, the process tree for each container is included in the container inspection panel on that page.
+Live Processes adds extra visibility to your container deployments. The [Live Containers][6] feature gives you a similarly comprehensive view of your container and orchestrator environment. When Live Processes is enabled, the process tree for each container is included in the container inspection panel on that page.
 
 {{< img src="infrastructure/process/containerinspect.png" alt="container inspect"  style="width:80%;">}}
 
@@ -247,7 +247,7 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 [1]: /agent/
 [2]: /agent/faq/agent-5-process-collection/
-[3]: /tagging/
-[4]: https://app.datadoghq.com/process
-[5]: /infrastructure/livecontainers/
-[6]: /tagging/unified_service_tagging
+[3]: /getting_started/tagging/
+[4]: /getting_started/tagging/unified_service_tagging
+[5]: https://app.datadoghq.com/process
+[6]: /infrastructure/livecontainers/

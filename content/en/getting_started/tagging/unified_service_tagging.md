@@ -2,9 +2,9 @@
 title: Unified Service Tagging
 kind: documentation
 aliases:
-- /tagging/unified_service_tagging
+- /getting_started/tagging/unified_service_tagging
 further_reading:
-- link: "/tagging/using_tags"
+- link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
   text: "Learn how to use tags in the Datadog app"
 - link: "/blog/autodiscovery-docker-monitoring"
@@ -309,15 +309,16 @@ If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging/#defining-tags
-[2]: /getting_started/agent/#setup
-[3]: /tagging/
-[4]: /tagging/assigning_tags
-[5]: /getting_started/agent/autodiscovery
-[6]: /agent/docker/integrations/?tab=docker
-[7]: /agent/docker/?tab=standard#optional-collection-agents
-[8]: /getting_started/tracing/
-[9]: /getting_started/logs/
-[10]: /integrations/statsd/
-[11]: https://www.chef.io/
-[12]: https://www.ansible.com/
+[1]: /getting_started/tagging/#defining-tags
+[2]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#environment-variables
+[3]: /getting_started/tracing/
+[4]: /getting_started/logs/
+[5]: /integrations/statsd/
+[6]: /developers/dogstatsd/
+[7]: /getting_started/tagging/
+[8]: /getting_started/tagging/assigning_tags
+[9]: /getting_started/agent/#setup
+[10]: /getting_started/agent/autodiscovery
+[11]: /tracing/connect_logs_and_traces/
+[12]: https://www.chef.io/
+[13]: https://www.ansible.com/

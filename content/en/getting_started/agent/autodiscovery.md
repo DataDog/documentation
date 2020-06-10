@@ -200,6 +200,6 @@ To use Autodiscovery with other services, define templates for the services you 
 
 [1]: /agent/guide/ad_identifiers/
 [2]: /agent/faq/template_variables/
-[3]: /tagging/unified_service_tagging
+[3]: /getting_started/tagging/unified_service_tagging
 [4]: /agent/faq/auto_conf/
 [5]: /agent/kubernetes/integrations/

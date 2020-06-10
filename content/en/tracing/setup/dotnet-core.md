@@ -366,4 +366,4 @@ The following table lists configuration variables that are available only when u
 [6]: /help/
 [7]: /tracing/manual_instrumentation/dotnet
 [8]: /tracing/guide/setting_primary_tags_to_scope/#environment
-[9]: /tagging/unified_service_tagging
+[9]: /getting_started/tagging/unified_service_tagging

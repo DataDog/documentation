@@ -4,19 +4,19 @@ kind: documentation
 description: "Learn how to assign and use Tags with Datadog."
 aliases:
     - /getting_started/getting_started_with_tags
-    - /guides/tagging/
-    - /developers/tagging/
+    - /guides/getting_started/tagging/
+    - /developers/getting_started/tagging/
     - /getting_started/tagging
-    - /tagging/faq/
-    - /tagging/
+    - /getting_started/tagging/faq/
+    - /getting_started/tagging/
 further_reading:
-- link: "/tagging/assigning_tags/"
+- link: "/getting_started/tagging/assigning_tags/"
   tag: "Documentation"
   text: "Learn how to assign tags"
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
   text: "Configure unified service tagging"
-- link: "/tagging/using_tags/"
+- link: "/getting_started/tagging/using_tags/"
   tag: "Documentation"
   text: "Explore how to use tags in the Datadog app"
 ---
@@ -109,22 +109,22 @@ After you have [assigned tags][3] at the host and [integration][9] level, start 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging/using_tags/
+[1]: /getting_started/tagging/using_tags/
 [2]: /developers/metrics/
-[3]: /tagging/assigning_tags/
-[4]: /tagging/assigning_tags/#configuration-files
-[5]: /tagging/assigning_tags/#ui
-[6]: /tagging/assigning_tags/#api
-[7]: /tagging/assigning_tags/#dogstatsd
-[8]: /tagging/unified_service_tagging
+[3]: /getting_started/tagging/assigning_tags/
+[4]: /getting_started/tagging/assigning_tags/#configuration-files
+[5]: /getting_started/tagging/assigning_tags/#ui
+[6]: /getting_started/tagging/assigning_tags/#api
+[7]: /getting_started/tagging/assigning_tags/#dogstatsd
+[8]: /getting_started/tagging/unified_service_tagging
 [9]: /integrations/
-[10]: /tagging/using_tags/#events
-[11]: /tagging/using_tags/#dashboards
-[12]: /tagging/using_tags/#infrastructure
-[13]: /tagging/using_tags/#monitors
-[14]: /tagging/using_tags/#metrics
-[15]: /tagging/using_tags/#integrations
-[16]: /tagging/using_tags/#apm
-[17]: /tagging/using_tags/#notebooks
-[18]: /tagging/using_tags/#logs
-[19]: /tagging/using_tags/#developers
+[10]: /getting_started/tagging/using_tags/#events
+[11]: /getting_started/tagging/using_tags/#dashboards
+[12]: /getting_started/tagging/using_tags/#infrastructure
+[13]: /getting_started/tagging/using_tags/#monitors
+[14]: /getting_started/tagging/using_tags/#metrics
+[15]: /getting_started/tagging/using_tags/#integrations
+[16]: /getting_started/tagging/using_tags/#apm
+[17]: /getting_started/tagging/using_tags/#notebooks
+[18]: /getting_started/tagging/using_tags/#logs
+[19]: /getting_started/tagging/using_tags/#developers

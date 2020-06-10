@@ -65,4 +65,4 @@ module.exports = Logger;
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tagging/unified_service_tagging
+[1]: /getting_started/tagging/unified_service_tagging

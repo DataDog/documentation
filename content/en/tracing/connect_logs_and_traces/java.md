@@ -99,7 +99,7 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/java/#configuration
-[2]: /tracing/visualization/#trace
-[3]: /tracing/visualization/#spans
+[2]: /tracing/connect_logs_and_traces/
+[3]: /tracing/visualization/#trace
 [4]: /logs/log_collection/java/#raw-format
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
