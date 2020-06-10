@@ -26,7 +26,7 @@ Tags can be configured in several different ways:
 
 {{< tabs >}}
 {{% tab "Non-containerized environments" %}}
-In non-containerized environments, the agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations. These tags, along with additional tags that you can manually add, are configured in the [Datadog Agent configuration file](#configuration-file).
+In non-containerized environments, the Agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations. These tags, along with additional tags that you can manually add, are configured in the [Datadog Agent configuration file](#configuration-file).
 {{% /tab %}}
 
 {{% tab "Containerized environments" %}}
@@ -34,7 +34,7 @@ In containerized environments, Datadog recommends using [Autodiscovery][1] as it
 
 The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. When using Autodiscovery, the Datadog Agent automatically identifies which services are running on this new container, looks for corresponding monitoring configuration, and starts to collect metrics. Tags can then be configured from within the Autodiscovery [configuration template][3].
 
-If Autodiscovery is not in use, the agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations the same as within a non-containerized environments. These tags, along with manually added tags are configured in the [Datadog Agent configuration file](#configuration-file).
+If Autodiscovery is not in use, the Agent automatically assigns the [host tag](#host-tags) and inherits tags from integrations the same as within a non-containerized environments. These tags, along with manually added tags are configured in the [Datadog Agent configuration file](#configuration-file).
 
 
 [1]: /getting_started/agent/autodiscovery/
