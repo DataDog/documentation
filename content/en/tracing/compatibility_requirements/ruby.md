@@ -46,7 +46,7 @@ further_reading:
 
 *Deprecated* indicates support will transition to *Maintenance* in a future release.
 
-*Maintenance* indicates only critical bugfixes are backported until EOL.
+*Maintenance* indicates that only critical bugfixes are being made.
 
 *EOL* indicates support is no longer provided.
 
