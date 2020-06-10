@@ -228,7 +228,7 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [13]: /infrastructure/livecontainers/
 [14]: /developers/dogstatsd/
 [15]: /developers/dogstatsd/unix_socket/
-[16]: /getitng-started/unified-service-tagging
+[16]: /getting_started/tagging/unified_service_tagging/
 [17]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
 [18]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
 [19]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
