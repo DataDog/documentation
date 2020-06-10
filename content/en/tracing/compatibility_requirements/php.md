@@ -60,7 +60,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 
 Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
 
-Want to see more span metadata and framework internals? Datadog is continously adding more support for in-depth tracing for PHP web-frameworks. Check with the [Datadog team][1] for help.
+Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks.  To request support for additional span metadata and framework internals, contact our awesome [support team][1].
 
 #### CLI Library Compatibility
 
