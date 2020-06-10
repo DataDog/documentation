@@ -29,7 +29,7 @@ Datadog provides a unique performance metric, `loading_time`, which calculates t
 ### How is loading time calculated?
 To account for modern web applications, loading time watches for network requests and long tasks.
 
-* **Initial Load**: Loading Time is equal to *whichever comes last*:
+* **Initial Load**: Loading Time is equal to *whichever is longer*:
 
     - The difference between `navigationStart` and `loadEventEnd`.
     - Or the difference between `navigationStart` and the first time the page is idle for more than 100ms (idle being defined as no network requests, and no long tasks are currently occurring).
