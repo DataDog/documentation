@@ -66,8 +66,15 @@ docker_labels_as_tags:
 {{< /tabs >}}
 
 ## Extract Environment Variables as Tags
+Starting with Agent v7.20+, a containerized Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container without modifying the Agent `datadog.yaml` file.
 
-Starting with Agent v6.0+, the Agent can collect environment variables for a given container and use them as tags to attach to all data emitted by this container.
+Tags should be added using the following format:
+
+```yaml
+com.datadoghq.ad.tags: '["<TAG_KEY_1>:<TAG_VALUE_1>", "<TAG_KEY_2>:<TAG_VALUE_2>"]'
+```
+
+With Agent v6.0+, the Agent can collect environment variables for a given container and use them as tags to attach to all data emitted by this container.
 
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
