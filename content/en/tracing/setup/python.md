@@ -57,8 +57,7 @@ When using **ddtrace-run**, the following [environment variable options][6] can 
 | `DD_VERSION`                       |             | Set the application’s version e.g. `1.2.3`, `6c44da20`, `2020.02.13`.                                                                                                                                                                                                       |
 | `DD_TAGS`                       |             | A list of default tags to be added to every span, profile, and runtime metric e.g. `layer:api,team:intake`.      |
 
-We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][8] documentation for recommendations on how to configure these environment variables.
+It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][8] documentation for recommendations on how to configure these environment variables.
 
 ### Instrumentation
 
@@ -156,7 +155,7 @@ The `ddtrace` library includes support for the following libraries:
 | [Jinja2][49]      | >= 2.7            | http://pypi.datadoghq.com/trace/docs/other_integrations.html#jinja2      |
 | [Kombu][50]       | >= 4.0            | http://pypi.datadoghq.com/trace/docs/other_integrations.html#kombu       |
 | [Mako][51]        | >= 0.1.0          | http://pypi.datadoghq.com/trace/docs/other_integrations.html#mako        |
-| [Requests][8]    | >= 2.08           | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests    |
+| [Requests][52]    | >= 2.08           | http://pypi.datadoghq.com/trace/docs/other_integrations.html#requests    |
 
 ## Further Reading
 
@@ -169,7 +168,7 @@ The `ddtrace` library includes support for the following libraries:
 [5]: http://pypi.datadoghq.com/trace/docs
 [6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtracerun
 [7]: /tracing/guide/setting_primary_tags_to_scope/
-[8]: http://docs.python-requests.org/en/master
+[8]: /getting_started/unified_service_tagging
 [9]: http://pypi.datadoghq.com/trace/docs/web_integrations.html?highlight=django#django
 [10]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
 [11]: /tracing/connect_logs_and_traces/python/
@@ -213,3 +212,4 @@ The `ddtrace` library includes support for the following libraries:
 [49]: http://jinja.pocoo.org
 [50]: https://kombu.readthedocs.io/en/latest
 [51]: https://www.makotemplates.org
+[52]: http://docs.python-requests.org/en/master

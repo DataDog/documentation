@@ -65,19 +65,18 @@ Add a new file appender to `log4j.xml`:
 </appender>
 ```
 
-## Connect your service across logs and traces
+**Inject trace IDs in your logs**
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][1]
-
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the [MDC (Mapped Diagnostic Contexts)][2] to then automatically add trace and span id in your logs.
 
 Once this is done, the `ConversionPattern` to use becomes:
 
 ```xml
-<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.env} %X{dd.service} %X{dd.version} %X{dd.trace_id} %X{dd.span_id} - %m%n" />
+<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
 [1]: /tracing/connect_logs_and_traces/java/
+[2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
 
@@ -94,19 +93,18 @@ Edit your `log4j2.xml` file:
 </Loggers>
 ```
 
-## Connect your service across logs and traces
+**Inject trace IDs in your logs**
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][1].
-
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the [MDC (Mapped Diagnostic Contexts)][2] to then automatically add trace and span id in your logs.
 
 Once this is done, the `PatternLayout` to use becomes:
 
 ```xml
-<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.env} %X{dd.service} %X{dd.version} %X{dd.trace_id} %X{dd.span_id} - m%n" />
+<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n" />
 ```
 
 [1]: /tracing/connect_logs_and_traces/java/
+[2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Slf4j" %}}
 
@@ -130,19 +128,18 @@ Edit your `logback.xml` file:
 </configuration>
 ```
 
-## Connect your service across logs and traces
+**Inject trace IDs in your logs**
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][1].
-
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the [MDC (Mapped Diagnostic Contexts)][2] to then automatically add trace and span id in your logs.
 
 Once this is done, the `Pattern` to use becomes:
 
 ```xml
-<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.env} %X{dd.service} %X{dd.version} %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
+<Pattern>"%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"</Pattern>
 ```
 
 [1]: /tracing/connect_logs_and_traces/java/
+[2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -181,13 +178,12 @@ Edit your `pom.xml` file:
 
 Once that done, edit your `logback.xml` file as described in the below `Slf4j` section.
 
-## Connect your service across logs and traces
+**Inject trace IDs in your logs**
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][1]
-
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][2] that are then automatically added in the JSON logs.
 
 [1]: /tracing/connect_logs_and_traces/java/
+[2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Log4j2" %}}
 
@@ -247,13 +243,12 @@ There is a default log4j2 JSON Layout that can be used. Add the following Append
 </project>
 ```
 
-## Connect your service across logs and traces
+**Inject trace IDs in your logs**
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][1].
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][1] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][2] that are then automatically added in the JSON logs.
 
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
-
-[1]: /tracing/connect_logs_and_traces/java/
+[1]: https://gist.github.com/NBParis/8bda7aea745987dd3261d475c613cf66
+[2]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{% tab "Slf4j" %}}
 
@@ -286,14 +281,13 @@ Then edit your `logback.xml` file and update the encoder:
     </appender>
 ```
 
-## Connect your service across logs and traces
+**Inject trace IDs in your logs**
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Java instructions][2].
-
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.configuration.
+If APM is enabled for this application and you wish to improve the correlation between application logs and traces, [follow these instructions][2] to set the trace and span ids with [MDC (Mapped Diagnostic Contexts)][3] that are then automatically added in the JSON logs.
 
 [1]: https://github.com/logstash/logstash-logback-encoder
 [2]: /tracing/connect_logs_and_traces/java/
+[3]: http://logback.qos.ch/manual/mdc.html
 {{% /tab %}}
 {{< /tabs >}}
 

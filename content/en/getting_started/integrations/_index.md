@@ -74,12 +74,13 @@ To create multiple instances in the same Agent check to monitor two Apache servi
 
 ```yaml
 init_config:
-  service: apache
 
 instances:
-    - apache_status_url: "http://localhost/server-status?auto"
+    - apache_stats_url: "http://localhost/server-status?auto"
+      service: local-apache
 
     - apache_status_url: "http://<REMOTE_APACHE_ENDPOINT>/server-status?auto"
+      service: remote-apache
 ```
 
 ### Tagging

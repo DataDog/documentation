@@ -107,15 +107,11 @@ This section describe the minimum setup required in order to forward your Rails 
 
 ## Getting further
 
-### Connect your service across logs and traces
+### Connect Logs and Traces
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM Ruby instructions][7].
+If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM Ruby logging instructions][7] to automatically add trace and span IDs in your logs.
 
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
-
-Then [configure the Datadog Agent](#configure-your-datadog-agent) to collect Ruby logs from the file.
-Note that if the APM tracer injects `service` into your logs, there is no need to set a `service` field in your logs configuration.
+Then [configure the Datadog Agent](#configure-your-datadog-agent) to collect ruby logs from the file.
 
 ### Good logging practices in your application
 

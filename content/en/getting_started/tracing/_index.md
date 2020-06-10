@@ -76,22 +76,11 @@ And in `trace-agent.log`:
 ### Environment name
 
 For the best experience, it is recommended to use the the environment variable `DD_ENV` to configure `env` through your service's tracer.
+
 Additionally, if your tracer has logs injection enabled then the `env` will be consistent across traces and logs.
 Read more about how this works in [Unified Service Tagging][11].
 
-Alternatively, name your environment by updating `datadog.yaml` to set `env` under `apm_config`, for example:
-
-```yaml
-apm_config:
-    enabled: true
-    env: hello_world
-```
-
-Then, [restart][12] the Datadog Agent:
-
-```shell
-sudo service datadog-agent restart
-```
+Alternatively, name your environment by updating `datadog.yaml` to set `env` under `apm_config`. To learn more about setting `env` for APM, see the [setting primary tags to scope guide][12].
 
 ## APM application
 
@@ -172,6 +161,6 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [9]: https://app.datadoghq.com/infrastructure
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [11]: /tagging/unified_service_tagging
-[12]: /agent/guide/agent-commands/#restart-the-agent
+[12]: /tracing/guide/setting_primary_tags_to_scope.
 [13]: https://app.datadoghq.com/apm/services
 [14]: https://app.datadoghq.com/apm/traces
