@@ -6605,6 +6605,26 @@ components:
             $ref: '#/components/schemas/SyntheticsTestDetails'
           type: array
       type: object
+    SyntheticsLocation:
+      description: Synthetics location that can be used when creating or editing a
+        test.
+      properties:
+        id:
+          description: Unique identifier of the location.
+          type: string
+        name:
+          description: Name of the location.
+          type: string
+      type: object
+    SyntheticsLocations:
+      description: List of Synthetics locations.
+      properties:
+        locations:
+          description: List of Synthetics locations.
+          items:
+            $ref: '#/components/schemas/SyntheticsLocation'
+          type: array
+      type: object
     SyntheticsPlayingTab:
       description: Navigate between different tabs for your browser test.
       enum:
@@ -14287,6 +14307,21 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v1/synthetics/locations:
+    get:
+      description: Get the list of public and private locations available for Synthetics
+        tests. No arguments required.
+      operationId: ListLocations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsLocations'
+          description: OK
+      summary: Get all locations (public and private)
+      tags:
+      - Synthetics
   /api/v1/synthetics/tests:
     get:
       description: Get the list of all Synthetic tests (can be filtered by type).
@@ -14396,7 +14431,7 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get a browser test configuration
+      summary: Get a test configuration (browser)
       tags:
       - Synthetics
   /api/v1/synthetics/tests/browser/{public_id}/results:
@@ -14580,7 +14615,7 @@ paths:
           description: '- Synthetic is not activated for the user
 
             - Test is not owned by the user'
-      summary: Get a test configuration
+      summary: Get a test configuration (API)
       tags:
       - Synthetics
     put:
