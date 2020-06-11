@@ -20,10 +20,6 @@ further_reading:
       text: 'Advanced Usage'
 ---
 
-<div class="alert alert-info">
-For Python Django applications, note that tracing is disabled when your application is launched in <code>DEBUG</code> mode. Find more <a href="http://pypi.datadoghq.com/trace/docs/web_integrations.html#django">here</a>.
-</div>
-
 ## Installation and Getting Started
 
 If you already have a Datadog account you can find [step-by-step instructions][1] in our in-app guides for either host-based or container-based set ups.
