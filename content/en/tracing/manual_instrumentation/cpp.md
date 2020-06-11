@@ -15,6 +15,14 @@ further_reading:
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
+C++ tracing uses "common tags".  These tags can be sourced from both [Datadog specific tags][3] or [OpenTracing tags][4], and included via the below:
+
+```cpp
+#include <opentracing/ext/tags.h>
+#include <datadog/tags.h>
+```
+
+Note that the Datadog tags are necessary for [unified service tagging][5].
 
 ### Add custom span tags
 
@@ -27,7 +35,7 @@ span->SetTag("key must be string", "Values are variable types");
 span->SetTag("key must be string", 1234);
 ```
 
-Values are of [variable type][3] and can be complex objects. Values are serialized as JSON, with the exception of a string value being serialized bare (without extra quotation marks).
+Values are of [variable type][6] and can be complex objects. Values are serialized as JSON, with the exception of a string value being serialized bare (without extra quotation marks).
 
 ### Adding tags globally to all spans
 
@@ -42,13 +50,19 @@ The `dd.tags` property allows setting tags across all generated spans for an app
 
 ### Set errors on a span
 
-To customize an error associated with one of your spans
+To customize an error associated with one of your spans, use the below:
+
+```cpp
+span->SetTag(opentracing::ext::error, true);
+```
+
+Feel free to set any additional tags for metadata on the same span as well.
 
 ## Adding Spans
 
 ### Manually instrument a method
 
-To manually instrument your code, install the tracer as in the [setup examples][4], and then use the tracer object to create [spans][2].
+To manually instrument your code, install the tracer as in the [setup examples][7], and then use the tracer object to create [spans][2].
 
 ```cpp
 {
@@ -65,7 +79,7 @@ To manually instrument your code, install the tracer as in the [setup examples][
 
 ### Inject & Extract context for Distributed Tracing
 
-Distributed tracing can be accomplished by [using the `Inject` and `Extract` methods on the tracer][5], which accept [generic `Reader` and `Writer` types][6]. Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
+Distributed tracing can be accomplished by [using the `Inject` and `Extract` methods on the tracer][8], which accept [generic `Reader` and `Writer` types][9]. Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
 
 ```cpp
 // Allows writing propagation headers to a simple map<string, string>.
@@ -110,7 +124,7 @@ There are additional configurations possible for both the tracing client and Dat
 
 ### B3 Headers Extraction and Injection
 
-Datadog APM tracer supports [B3 headers extraction][7] and injection for distributed tracing.
+Datadog APM tracer supports [B3 headers extraction][10] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
 
@@ -119,17 +133,15 @@ Distributed headers injection and extraction is controlled by configuring inject
 
 Injection styles can be configured using:
 
-- System Property: `-Ddd.propagation.style.inject=Datadog,B3`
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
+- Environment Variable: `DD_PROPAGATION_STYLE_INJECT="Datadog B3"`
 
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
+The value of the environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
 
 Extraction styles can be configured using:
 
-- System Property: `-Ddd.propagation.style.extract=Datadog,B3`
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
+- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT="Datadog B3"`
 
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
+The value of the environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
@@ -137,7 +149,7 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 
 The Agent can be configured to exclude a specific resource from traces sent by the Agent to Datadog. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out traces based on their resource name.
 
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][8] for details.
+If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][11] for details.
 
 Excluding resources for traces from the calculation of metrics for your services is useful for health checks or simulated traffic .
 
@@ -154,9 +166,12 @@ Excluding resources for traces from the calculation of metrics for your services
 
 [1]: /tracing/visualization/#span-tags
 [2]: /tracing/visualization/#spans
-[3]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h
-[4]: /tracing/setup/cpp/#installation
-[5]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
-[6]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
-[7]: https://github.com/openzipkin/b3-propagation
-[8]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[3]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/include/datadog/tags.h
+[4]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/ext/tags.h
+[5]: /getting_started/tagging/unified_service_tagging
+[6]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h
+[7]: /tracing/setup/cpp/#installation
+[8]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
+[9]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
+[10]: https://github.com/openzipkin/b3-propagation
+[11]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
