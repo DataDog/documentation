@@ -1008,12 +1008,27 @@ components:
         name:
           description: Name of the role.
           type: string
+        user_count:
+          description: Number of users with that role.
+          format: int64
+          readOnly: true
+          type: integer
       type: object
     RoleCreateAttributes:
       description: Attributes of the created role.
       properties:
+        created_at:
+          description: Creation time of the role.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last role modification.
+          format: date-time
+          readOnly: true
+          type: string
         name:
-          description: The name of the role.
+          description: Name of the role.
           type: string
       type: object
     RoleCreateData:
@@ -1026,11 +1041,30 @@ components:
         type:
           $ref: '#/components/schemas/RolesType'
       type: object
-    RoleCreatePayload:
+    RoleCreateRequest:
       description: Create a role.
       properties:
         data:
           $ref: '#/components/schemas/RoleCreateData'
+      type: object
+    RoleCreateResponse:
+      description: Response containing information about a created role.
+      properties:
+        data:
+          description: Role object returned by the API.
+          properties:
+            attributes:
+              $ref: '#/components/schemas/RoleCreateAttributes'
+            id:
+              description: ID of the role.
+              type: string
+            relationships:
+              $ref: '#/components/schemas/RoleResponseRelationships'
+            type:
+              $ref: '#/components/schemas/RolesType'
+          required:
+          - type
+          type: object
       type: object
     RoleRelationships:
       description: Relationships of the role object.
@@ -1049,20 +1083,24 @@ components:
     RoleResponseRelationships:
       description: Relationships of the role object returned by the API.
       properties:
-        org:
-          $ref: '#/components/schemas/RelationshipToOrganization'
-        other_orgs:
-          $ref: '#/components/schemas/RelationshipToOrganizations'
-        other_roles:
-          $ref: '#/components/schemas/RelationshipToRoles'
-        roles:
-          $ref: '#/components/schemas/RelationshipToRoles'
+        permissions:
+          $ref: '#/components/schemas/RelationshipToPermissions'
       type: object
     RoleUpdateAttributes:
-      description: Attributes of the edited role.
+      description: Attributes of the role.
       properties:
+        created_at:
+          description: Creation time of the role.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last role modification.
+          format: date-time
+          readOnly: true
+          type: string
         name:
-          description: The name of the role.
+          description: Name of the role.
           type: string
       type: object
     RoleUpdateData:
@@ -1076,11 +1114,30 @@ components:
         type:
           $ref: '#/components/schemas/RolesType'
       type: object
-    RoleUpdatePayload:
+    RoleUpdateRequest:
       description: Update a role.
       properties:
         data:
           $ref: '#/components/schemas/RoleUpdateData'
+      type: object
+    RoleUpdateResponse:
+      description: Response containing information about an updated role.
+      properties:
+        data:
+          description: Role object returned by the API.
+          properties:
+            attributes:
+              $ref: '#/components/schemas/RoleUpdateAttributes'
+            id:
+              description: ID of the role.
+              type: string
+            relationships:
+              $ref: '#/components/schemas/RoleResponseRelationships'
+            type:
+              $ref: '#/components/schemas/RolesType'
+          required:
+          - type
+          type: object
       type: object
     RolesResponse:
       description: Response containing information about multiple roles.
@@ -2542,13 +2599,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RoleCreatePayload'
+              $ref: '#/components/schemas/RoleCreateRequest'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoleResponse'
+                $ref: '#/components/schemas/RoleCreateResponse'
           description: OK
         '400':
           content:
@@ -2629,13 +2686,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RoleUpdatePayload'
+              $ref: '#/components/schemas/RoleUpdateRequest'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoleResponse'
+                $ref: '#/components/schemas/RoleUpdateResponse'
           description: OK
         '400':
           content:
