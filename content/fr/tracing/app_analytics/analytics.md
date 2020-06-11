@@ -131,7 +131,7 @@ Exportez votre analyse [App Analytics][1] depuis la recherche de traces ou crée
 [2]: /fr/tracing/visualization/#apm-event
 [3]: /fr/tracing/visualization/#services
 [4]: /fr/tracing/app_analytics/search/#facets
-[5]: /fr/tagging/
+[5]: /fr/getting_started/tagging/
 [6]: /fr/tracing/app_analytics/search/#measures
 [7]: /fr/tracing/visualization/#trace
 [8]: /fr/monitors/monitor_types/apm/
