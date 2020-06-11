@@ -56,7 +56,7 @@ To customize an error associated with one of your spans, use the below:
 span->SetTag(opentracing::ext::error, true);
 ```
 
-Feel free to set any additional tags for metadata on the same span as well.
+Error metadata may be set as additional tags on the same span as well.
 
 ## Adding Spans
 
