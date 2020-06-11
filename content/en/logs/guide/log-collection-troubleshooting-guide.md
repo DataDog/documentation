@@ -128,7 +128,7 @@ See the [Docker Log Collection Troubleshooting Guide][9]
 
 See the [Lambda Log Collection Troubleshooting Guide][10]
 
-## Expectedly dropping logs
+## Unexpectedly dropping logs
 
 Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
 
