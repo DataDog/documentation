@@ -17,7 +17,7 @@ Datadog officially supports the Java JRE 1.7 and higher of both Oracle JDK and O
 Beta integrations are disabled by default but can be enabled individually:
 
 - System Property: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
-- Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true
+- Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
 
 ### Web Framework Compatibility
 
