@@ -39,14 +39,7 @@ Values are of [variable type][6] and can be complex objects. Values are serializ
 
 ### Adding tags globally to all spans
 
-The `dd.tags` property allows setting tags across all generated spans for an application. This can be useful for grouping stats for your applications, datacenters, or any other tags you would like to see within the Datadog UI.
-
-```text
-// Read in the tracer's configuration.
-  std::string tracer_config = R"({
-      "dd_tags": "datacenter:njc"
-    })";
-```
+To set tags across all your spans, set the `DD_TAGS` environment variable as a list of `key:value` pairs separated by commas.
 
 ### Set errors on a span
 
