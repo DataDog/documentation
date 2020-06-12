@@ -1,17 +1,13 @@
 ---
-title: Python Manual Instrumentation
+title: Python Custom Instrumentation
 kind: documentation
+aliases:
+    - /tracing/opentracing/python
 decription: 'Manually instrument your Python application to send custom traces to Datadog.'
 further_reading:
-    - link: 'tracing/guide/instrument_custom_method'
-      tag: 'Guide'
-      text: 'Instrument a custom method to get deep visibility into your business logic'
     - link: 'tracing/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Connect your Logs and Traces together'
-    - link: 'tracing/opentracing'
-      tag: 'Documentation'
-      text: 'Implement Opentracing across your applications'
     - link: 'tracing/visualization/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
@@ -55,14 +51,14 @@ def make_sandwich_request(request):
       return
 ```
 
-API details for the decorator can be found at [`ddtrace.Tracer.wrap()`][1]
+API details for the decorator can be found for `ddtrace.Tracer.wrap()` [here][1].
 
 
 [1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Tracer.wrap
 {{% /tab %}}
 {{% tab "Context Manager" %}}
 
-To trace an arbitrary block of code, you can use the [`ddtrace.Span`][1] context manager:
+To trace an arbitrary block of code, use the `ddtrace.Span` context manager as below, or view the [advanced usage documentation][1].
 
 ```python
 from ddtrace import tracer
@@ -83,8 +79,7 @@ def assemble_sandwich_request(request):
             sandwich = assemble_sandwich(ingredients)
 ```
 
-Full API details can be found at [`ddtrace.Tracer()`][2]
-
+Full API details for `ddtrace.Tracer()` can be found [here][2]
 
 [1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
@@ -102,7 +97,7 @@ def make_sandwich_request(request):
     span.finish()  # remember to finish the span
 ```
 
-API details of the decorator can be found here:
+API details of the decorator can be found below:
 
 - [`ddtrace.Tracer.trace`][2]
 - [`ddtrace.Span.finish`][3]
