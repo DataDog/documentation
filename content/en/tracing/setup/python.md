@@ -92,7 +92,7 @@ tracer.configure(
 
 ## Compatibility
 
-Python versions `2.7` and `3.4` and onwards are supported.
+Python versions `2.7` and `3.5` and onwards are supported.
 
 ### Integrations
 
