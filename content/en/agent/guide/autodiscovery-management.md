@@ -192,7 +192,37 @@ container_include: [kube_namespace:<NAMESPACE>]
 
 **Note**: If you are using Kubernetes, the container `<NAME>` is the one in your manifest `.spec.containers[0].name`.
 
-### Pause containers
+## Inclusion and exclusion behavior
+
+Inclusion always takes precedence, whether the rule is global or only applies to metrics or logs.
+
+You cannot mix cross-category include/exclude rules. For instance, if you want to include a container with the image name `<IMAGE_NAME_1>` and exclude only metrics from a container with the image name `<IMAGE_NAME_2>`, use the following:
+
+{{< tabs >}}
+{{% tab "Containerized Agent" %}}
+```shell
+DD_CONTAINER_INCLUDE_METRICS = "image:<IMAGE_NAME_1>"
+DD_CONTAINER_INCLUDE_LOGS = "image:<IMAGE_NAME_1>"
+DD_CONTAINER_EXCLUDE_METRICS = "image:<IMAGE_NAME_2>"
+```
+
+That is, setting `DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME_1>"` is not sufficient.
+
+{{% /tab %}}
+{{% tab "Agent" %}}
+```yaml
+container_include_metrics: [image:<IMAGE_NAME_1>]
+container_include_logs: [image:<IMAGE_NAME_1>]
+container_exclude_metrics: [image:<IMAGE_NAME_2>]
+```
+
+That is, setting `container_include: [image:<IMAGE_NAME_1>]` is not sufficient.
+{{% /tab %}}
+{{< /tabs >}}
+
+There is no interaction between the global lists and the selective (logs and metrics) lists. In other words, you cannot exclude a container globally and then include it with `container_include_logs` and `container_include_metrics`.
+
+## Pause containers
 
 Datadog Agent excludes Kubernetes and OpenShift pause containers by default. They are still counted in the container count like excluded containers.
 
