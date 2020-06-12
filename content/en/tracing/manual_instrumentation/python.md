@@ -63,13 +63,13 @@ To trace an arbitrary block of code, use the `ddtrace.Span` context manager as b
 ```python
 from ddtrace import tracer
 
-def assemble_sandwich_request(request):
+def make_sandwich_request(request):
     # Capture both operations in a span
     with tracer.trace("sandwich.make"):
         ingredients = get_ingredients()
         sandwich = assemble_sandwich(ingredients)
 
-def assemble_sandwich_request(request):
+def make_sandwich_request(request):
     # Capture both operations in a span
     with tracer.trace("sandwich.create") as outer_span:
         with tracer.trace("get_ingredients") as span:
@@ -131,7 +131,7 @@ def make_sandwich_request(request):
 def get_ingredients():
     # Get the active span
     span = tracer.current_span()
-    # this span is my_span
+    # this span is my_span from make_sandwich_request above
 ```
 
 {{% /tab %}}
@@ -140,9 +140,10 @@ def get_ingredients():
 
 ```python
 def assemble_sandwich(ingredients):
-    # Get the active root span
-    span = tracer.current_root_span()
-    # this span is my_span
+    with tracer.trace("another.operation") as another_span:
+        # Get the active root span
+        span = tracer.current_root_span()
+        # this span is my_span from make_sandwich_request above
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -153,11 +154,12 @@ def assemble_sandwich(ingredients):
 {{< tabs >}}
 {{% tab "Locally" %}}
 
+Tags can be added to a span using the `set_tag` method on a span:
+
 ```python
 from ddtrace import tracer
 
 def make_sandwich_request(request):
-    # Capture both operations in a span
     with tracer.trace("sandwich.make") as span:
         ingredients = get_ingredients()
         span.set_tag("num_ingredients", len(ingredients))
