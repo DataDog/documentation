@@ -28,33 +28,45 @@ Exclude containers from the Agent Autodiscovery perimeter with an exclude rule b
 To remove a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
 ```shell
-DD_AC_EXCLUDE = "image:<IMAGE_NAME>"
+DD_CONTAINER_EXCLUDE = "image:<IMAGE_NAME>"
 ```
 
 To remove a given Docker container with the name `<NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
 ```shell
-DD_AC_EXCLUDE = "name:<NAME>"
+DD_CONTAINER_EXCLUDE = "name:<NAME>"
 ```
 
 For instance, use this excluding rule to exclude the Agent container itself:
 
 ```shell
-DD_AC_EXCLUDE = "name:dd-agent"
+DD_CONTAINER_EXCLUDE = "name:dd-agent"
 ```
 
 Another example: the following configuration instructs the Agent to ignore some containers from Docker Cloud:
 
 ```shell
-DD_AC_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
+DD_CONTAINER_EXCLUDE = "image:dockercloud/network-daemon image:dockercloud/cleanup image:dockercloud/logrotate image:dockercloud/events image:dockercloud/ntpd"
 ```
 
-You can also use a regex to ignore them all: `DD_AC_EXCLUDE = "image:dockercloud/*"`
+You can use a regex to ignore them all: `DD_CONTAINER_EXCLUDE = "image:dockercloud/*"`
+
+In Agent v7.2+, you can also use exclusion rules to exclude only logs or only metrics. For instance, to exclude logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
+
+```shell
+DD_CONTAINER_EXCLUDE_LOGS = "image:<IMAGE_NAME>"
+```
+
+Similarly, to exclude metrics:
+
+```shell
+DD_CONTAINER_EXCLUDE_METRICS = "image:<IMAGE_NAME>"
+```
 
 On Kubernetes, to remove all containers of pods inside namespace `<NAMESPACE>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
 ```shell
-DD_AC_EXCLUDE = "kube_namespace:<NAMESPACE>"
+DD_CONTAINER_EXCLUDE = "kube_namespace:<NAMESPACE>"
 ```
 
 {{% /tab %}}
@@ -63,19 +75,31 @@ DD_AC_EXCLUDE = "kube_namespace:<NAMESPACE>"
 To remove a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
-ac_exclude: [image:<IMAGE_NAME>]
+container_exclude: [image:<IMAGE_NAME>]
 ```
 
 To remove a given Docker container with the name `<NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
-ac_exclude: [name:<NAME>]
+container_exclude: [name:<NAME>]
+```
+
+In Agent v7.2+, you can also use exclusion rules to exclude only logs or only metrics. For instance, to exclude logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
+
+```shell
+container_exclude_logs: [image:<IMAGE_NAME>]
+```
+
+Similarly, to exclude metrics:
+
+```shell
+container_exclude_metrics: [image:<IMAGE_NAME>]
 ```
 
 On Kubernetes, to remove all containers of pods inside namespace `<NAMESPACE>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
-ac_exclude: [kube_namespace:<NAMESPACE>]
+container_exclude: [kube_namespace:<NAMESPACE>]
 ```
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
@@ -96,26 +120,37 @@ Include containers from the Agent Autodiscovery perimeter with an include rule b
 To include a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
 ```shell
-DD_AC_INCLUDE = "image:<IMAGE_NAME>"
+DD_CONTAINER_INCLUDE = "image:<IMAGE_NAME>"
 ```
 
 To include a given Docker container with the name `<NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
 
 ```shell
-DD_AC_INCLUDE = "name:<NAME>"
+DD_CONTAINER_INCLUDE = "name:<NAME>"
 ```
 
 For example, if you only want to monitor `ubuntu` or `debian` images, and exclude the rest, specify:
 
 ```shell
-DD_AC_EXCLUDE = "image:.*"
-DD_AC_INCLUDE = "image:ubuntu image:debian"
+DD_CONTAINER_EXCLUDE = "image:.*"
+DD_CONTAINER_INCLUDE = "image:ubuntu image:debian"
+```
+In Agent v7.2+, you can also use inclusion rules to include only logs or only metrics. For instance, to include logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
+
+```shell
+DD_CONTAINER_INCLUDE_LOGS = "image:<IMAGE_NAME>"
+```
+
+Similarly, to include metrics:
+
+```shell
+DD_CONTAINER_INCLUDE_METRICS = "image:<IMAGE_NAME>"
 ```
 
 On Kubernetes, to include all containers of pods inside namespace <NAMESPACE> from Autodiscovery, add the following environment variable to the Datadog Agent:
 
 ```shell
-DD_AC_INCLUDE = "kube_namespace:<NAMESPACE>"
+DD_CONTAINER_INCLUDE = "kube_namespace:<NAMESPACE>"
 ```
 
 {{% /tab %}}
@@ -124,19 +159,31 @@ DD_AC_INCLUDE = "kube_namespace:<NAMESPACE>"
 To include a given Docker container with the image `<IMAGE_NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
-ac_include: [image:<IMAGE_NAME>]
+container_include: [image:<IMAGE_NAME>]
 ```
 
 To include a given Docker container with the name `<NAME>` from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
-ac_include: [name:<NAME>]
+container_include: [name:<NAME>]
+```
+
+In Agent v7.2+, you can also use inclusion rules to include only logs or only metrics. For instance, to include logs from a container with the image `<IMAGE_NAME>`, add the following environment variable to the Datadog Agent:
+
+```shell
+container_include_logs: [image:<IMAGE_NAME>]
+```
+
+Similarly, to include metrics:
+
+```shell
+container_include_metrics: [image:<IMAGE_NAME>]
 ```
 
 On Kubernetes, to include all containers of pods inside namespace <NAMESPACE> from Autodiscovery, add the following configuration block in the [Agent `datadog.yaml` configuration file][1]:
 
 ```yaml
-ac_include: [kube_namespace:<NAMESPACE>]
+container_include: [kube_namespace:<NAMESPACE>]
 ```
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
