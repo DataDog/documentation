@@ -41,24 +41,15 @@ If you haven’t installed the Docker Agent, follow the [in-app installation ins
 {{% tab "Standard" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
-docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
-              -v /proc/:/host/proc/:ro \
-              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
-              datadog/agent:latest
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> datadog/agent:7
 ```
 
+
 {{% /tab %}}
-{{% tab "Amazon Linux version <2" %}}
+{{% tab "Amazon Linux < v2" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
-                              -v /proc/:/host/proc/:ro \
-                              -v /cgroup/:/host/sys/fs/cgroup:ro \
-                              -e DD_API_KEY="<DATADOG_API_KEY>" \
-                              datadog/agent:latest
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> datadog/agent:7
 ```
 
 {{% /tab %}}
@@ -68,6 +59,15 @@ The Datadog Agent is supported in Windows Server 2019 (LTSC) and version 1909 (S
 
 ```shell
 docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine datadog/agent:latest
+```
+
+{{% /tab %}}
+{{% tab "Unprivileged" %}}
+
+(Optional) To run an unprivileged installation, add `--group-add=<DOCKER_GROUP_ID>` to the install command, for example:
+
+```shell
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> datadog/agent:7 --group-add=<DOCKER_GROUP_ID>
 ```
 
 {{% /tab %}}
