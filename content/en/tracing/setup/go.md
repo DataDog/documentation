@@ -160,28 +160,6 @@ func main() {
 }
 ```
 
-### B3 Headers Extraction and Injection
-
-The Datadog APM tracer supports [B3 headers extraction][74] and injection for distributed tracing.
-
-Distributed headers injection and extraction is controlled by
-configuring injection/extraction styles. Two styles are
-supported: `Datadog` and `B3`.
-
-Configure injection styles using the environment variable
-`DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
-
-Configure extraction styles using the environment variable
-`DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
-
-The values of these environment variables are comma separated lists of
-header styles that are enabled for injection or extraction. By default only
-the `Datadog` extraction style is enabled.
-
-If multiple extraction styles are enabled, extraction attempts are made
-in the order that those styles are specified. The first successfully
-extracted value is used.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -259,4 +237,3 @@ extracted value is used.
 [71]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [72]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
 [73]: /getting_started/tagging/unified_service_tagging
-[74]: https://github.com/openzipkin/b3-propagation
