@@ -235,9 +235,10 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AGENT_HOST`                           | `localhost` | The Agent host name                                                                                                                            |
 | `DD_AUTOFINISH_SPANS`                     | `false`     | Whether spans are automatically finished when the tracer is flushed                                                                            |
 | `DD_DISTRIBUTED_TRACING`                  | `true`      | Whether to enable distributed tracing                                                                                                          |
+| `DD_ENV`                                  | `null`      | Set an application’s environment e.g. `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.                                                  |
 | `DD_INTEGRATIONS_DISABLED`                | `null`      | A CSV list of integrations to disable, for example: `curl,mysqli` (see [Integration names](#integration-names)).                                      |
 | `DD_PRIORITY_SAMPLING`                    | `true`      | Whether to enable priority sampling                                                                                                            |
-| `DD_SERVICE_NAME`                         | `null`      | The default app name                                                                                                                           |
+| `DD_SERVICE`                              | `null`      | The default app name                                                                                                                           |
 | `DD_SERVICE_MAPPING`                      | `null`      | Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)). |
 | `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | IPC-based configurable circuit breaker retry time (in milliseconds)                                                                            |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)                                                                          |
@@ -251,7 +252,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_DEBUG`                          | `false`     | Enable [debug mode](#custom-url-to-resource-mapping) for the tracer                                                                            |
 | `DD_TRACE_ENABLED`                        | `true`      | Enable the tracer globally                                                                                                                     |
 | `DD_TRACE_GENERATE_ROOT_SPAN`             | `true`      | Automatically generate a top-level span; set to `false` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace long-running processes    |
-| `DD_TRACE_GLOBAL_TAGS`                    | `null`      | Tags to be set on all spans, for example: `key1:value1,key2:value2`.                                                                                 |
+| `DD_TAGS`                                 | `null`      | Tags to be set on all spans, e.g.: `key1:value1,key2:value2`.                                                                                  |
 | `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`    | `false`     | Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_exec()` call to `https://datadoghq.com` has the service name `host-datadoghq.com` instead of the default service name of `curl`. |
 | `DD_TRACE_MEASURE_COMPILE_TIME`           | `true`      | Record the compile time of the request (in milliseconds) onto the top-level span                                                               |
 | `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable auto instrumentation for applications that do not use an autoloader                                                    |
@@ -262,6 +263,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `true`      | Enable URL's as resource names (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).                            |
 | `DD_<INTEGRATION>_ANALYTICS_ENABLED`      | `false`     | A flag to enable app analytics for relevant spans in a specific integration (see [Integration names](#integration-names)).                       |
 | `DD_<INTEGRATION>_ANALYTICS_SAMPLE_RATE`  | `1.0`       | Set the app analytics sample rate for relevant spans in a specific integration (see [Integration names](#integration-names)).                  |
+| `DD_VERSION`                              | `null`      | Set an application’s version in traces and logs e.g. `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.                             |
 
 #### Integration names
 
