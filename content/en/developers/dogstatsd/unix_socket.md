@@ -34,6 +34,8 @@ Instead of using an `IP:port` pair to establish connections, Unix Domain Sockets
 
 To set up DogStatsD with Unix Domain Socket, enable the DogStatsD server through the `dogstatsd_socket` parameter. Then, configure the [DogStatsD client](#dogstatsd-client-configuration) in your code.
 
+**Note**: Go does not support the `dogstatsd_socket` for unixgram, so this does not work on Windows.
+
 To enable the Agent DogStatsD UDS:
 
 {{< tabs >}}
@@ -235,3 +237,4 @@ For guidelines on creating additional implementation options, refer to the [data
 [7]: https://github.com/DataDog/php-datadogstatsd
 [8]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
 [9]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
+[10]: https://github.com/DataDog/datadog-agent/blob/c9588a61e1fef100c61deb39a5145f3b471d107a/pkg/dogstatsd/listeners/uds_common_test.go#L7
