@@ -277,8 +277,14 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 
 | Env Variable    | Description                                                                                                                                                                                                        |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
-| `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
+| `DD_CONTAINER_INCLUDE` | Allowed list of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  |
+| `DD_CONTAINER_EXCLUDE` | Disallowed list of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
+| `DD_CONTAINER_INCLUDE_METRICS` | Allowed list of containers whose metrics you wish to include.  |
+| `DD_CONTAINER_EXCLUDE_METRICS` | Disallowed list of containers whose metrics you wish to exclude. |
+| `DD_CONTAINER_INCLUDE_LOGS` | Allowed list of containers whose logs you wish to include.  |
+| `DD_CONTAINER_EXCLUDE_LOGS` | Disallowed list of containers whose logs you wish to exclude. |
+| `DD_AC_INCLUDE` | **Deprecated**. Allowed list of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  |                                              
+| `DD_AC_EXCLUDE` | **Deprecated**. Disallowed list of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
 Additional examples are available on the [Container Discover Management][13] page.
 
