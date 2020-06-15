@@ -17,15 +17,17 @@ The Log Management product supports multiple [environments and formats][2], allo
 
 ## Information Security
 
-The Datadog Agent submits logs to Datadog over a TLS-encrypted TCP connection, requiring an outbound communication over port `10516`. The Datadog Agent can also be configured to send logs over secured HTTPS requests, requiring an outbound communication over port `443`. Datadog uses symmetric encryption at rest (AES-256) for indexed logs. Indexed logs are deleted from the Datadog platform once their retention period, as defined by the customer, expires.
+The Datadog Agent submits logs to datadog either through HTTPS or through TLS-encrypted TCP connection on port 10516, requiring outbound communication (see [Agent Transport for logs][3]).
+
+Datadog uses symmetric encryption at rest (AES-256) for indexed logs. Indexed logs are deleted from the Datadog platform once their retention period, as defined by the customer, expires.
 
 ## Logs Filtering
 
-For customers using release 6, the Agent can be configured to filter logs sent by the Agent to the Datadog application. To prevent the submission of specific logs, use the `log_processing_rules` [setting][3], with the **exclude_at_match** or **include_at_match** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out logs based on a whitelist or blacklist.
+For customers using release 6, the Agent can be configured to filter logs sent by the Agent to the Datadog application. To prevent the submission of specific logs, use the `log_processing_rules` [setting][4], with the **exclude_at_match** or **include_at_match** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out logs based on a whitelist or blacklist.
 
 ## Logs Obfuscation
 
-For customers using release 6, the Agent can be configured to obfuscate specific patterns within logs sent by the Agent to the Datadog application. To mask sensitive sequences within your logs, use the `log_processing_rules` [setting][4], with the  **mask_sequences** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to redact sensitive data within your logs.
+For customers using release 6, the Agent can be configured to obfuscate specific patterns within logs sent by the Agent to the Datadog application. To mask sensitive sequences within your logs, use the `log_processing_rules` [setting][5], with the  **mask_sequences** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to redact sensitive data within your logs.
 
 ## Configuration Requirements for HIPAA-enabled Customers
 
@@ -34,8 +36,8 @@ Datadog will sign a Business Associate Agreement (BAA) with customers that trans
 Prior to executing a BAA, customers transmitting ePHI to the Datadog Log Management Service must implement the following configurations:
 
 * The Datadog Agent must be configured to submit logs to `tcp-encrypted-intake.logs.datadoghq.com`
-* The Datadog [log collection AWS Lambda function][5] must be configured to submit logs to `lambda-tcp-encrypted-intake.logs.datadoghq.com` by setting the `DD_URL` environment variable as well as setting `DD_USE_TCP` to `true`
-* The [GCP push forwarder][6] must be configured to submit logs to `gcp-encrypted-intake.logs.datadoghq.com`
+* The Datadog [log collection AWS Lambda function][6] must be configured to submit logs to `lambda-tcp-encrypted-intake.logs.datadoghq.com` by setting the `DD_URL` environment variable as well as setting `DD_USE_TCP` to `true`
+* The [GCP push forwarder][7] must be configured to submit logs to `gcp-encrypted-intake.logs.datadoghq.com`
 * Other log sources besides the Datadog Agent must be configured to submit logs to `http-encrypted-intake.logs.datadoghq.com`
 
 The following sample configuration can be used with the Datadog Agent to submit logs to a HIPAA-ready endpoint directly (i.e. without a proxy):
@@ -56,7 +58,7 @@ Additionally, certain features are not available at the moment to customers who 
 * Generation of metrics from logs is disabled
 * Notifications from Log Monitors cannot include log samples
 * Log Monitors cannot be configured with a `group-by` clause
-* You cannot [share][7] logs (nor traces) from the explorer through web integrations.
+* You cannot [share][8] logs (nor traces) from the explorer through web integrations.
 
 If you have any questions about how the Log Management Service satisfies the applicable requirements under HIPAA, please contact your account manager.
 
@@ -66,8 +68,9 @@ If you have any questions about how the Log Management Service satisfies the app
 
 [1]: /security/
 [2]: /logs/log_collection/
-[3]: /agent/logs/advanced_log_collection/#filter-logs
-[4]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
-[5]: /integrations/amazon_lambda/#log-collection
-[6]: /integrations/google_cloud_platform/?tab=datadogussite#log-collection
-[7]: /logs/explorer/#share-views
+[3]: /agent/logs/log_transport
+[4]: /agent/logs/advanced_log_collection/#filter-logs
+[5]: /agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
+[6]: /integrations/amazon_lambda/#log-collection
+[7]: /integrations/google_cloud_platform/?tab=datadogussite#log-collection
+[8]: /logs/explorer/#share-views

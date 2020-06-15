@@ -140,6 +140,8 @@ Each tab in sections below shows a different way to apply integration templates 
 
 ### Configuration
 
+**Note**: When configuring the `service` value through pod annotations, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][4] documentation.
+
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
@@ -381,13 +383,13 @@ Unlike auto-conf files, **key-value stores may use the short OR long image name 
 
 Use Autodiscovery log labels to apply advanced log collection processing logic, for example:
 
-* [Filter logs before sending them to Datadog][4].
-* [Scrub sensitive data from your logs][5].
-* [Proceed to multi-line aggregation][6].
+* [Filter logs before sending them to Datadog][5].
+* [Scrub sensitive data from your logs][6].
+* [Proceed to multi-line aggregation][7].
 
 ## Filter containers
 
-It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs. See the [Container Discovery Management][7] to learn more.
+It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs. See the [Container Discovery Management][8] to learn more.
 
 ## Short lived containers
 
@@ -402,7 +404,8 @@ For Agent v6.12+, short lived container logs (stopped or crashed) are automatica
 [1]: /agent/faq/log-collection-with-docker-socket/
 [2]: /agent/kubernetes/
 [3]: /integrations/#cat-autodiscovery
-[4]: /agent/logs/advanced_log_collection/?tab=kubernetes#filter-logs
-[5]: /agent/logs/advanced_log_collection/?tab=kubernetes#scrub-sensitive-data-from-your-logs
-[6]: /agent/logs/advanced_log_collection/?tab=kubernetes#multi-line-aggregation
-[7]: /agent/guide/autodiscovery-management/
+[4]: /getting_started/tagging/unified_service_tagging
+[5]: /agent/logs/advanced_log_collection/?tab=kubernetes#filter-logs
+[6]: /agent/logs/advanced_log_collection/?tab=kubernetes#scrub-sensitive-data-from-your-logs
+[7]: /agent/logs/advanced_log_collection/?tab=kubernetes#multi-line-aggregation
+[8]: /agent/guide/autodiscovery-management/

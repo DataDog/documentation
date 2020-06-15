@@ -39,6 +39,8 @@ For installs on a domain controller, the `<USERNAME>` and `<PASSWORD>` supplied 
 
 **Note**: When upgrading the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you need to supply the `<DDAGENTUSER_NAME>` but not the `<DDAGENTUSER_PASSWORD>`:
 
+**Note**: If encountering permission issues with system and winproc checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitoring and Event Log Viewer groups.
+
 ```shell
 Msiexec /i ddagent.msi <DDAGENTUSER_NAME>=<DOMAIN>\<USERNAME>
 ```

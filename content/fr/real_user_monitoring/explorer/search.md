@@ -2,7 +2,7 @@
 title: Recherche RUM
 kind: documentation
 further_reading:
-  - link: /real_user_monitoring/explorer/analytics
+  - link: /real_user_monitoring/explorer/analytics/
     tag: Documentation
     text: Générez des analyses à partir de vos événements.
 ---

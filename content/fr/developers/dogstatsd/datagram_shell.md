@@ -42,7 +42,7 @@ Voici quelques exemples de datagrammes :
 
 [1]: /fr/developers/metrics/#naming-metrics
 [2]: /fr/developers/metrics/types/
-[3]: /fr/tagging/
+[3]: /fr/getting_started/tagging/
 {{% /tab %}}
 {{% tab "Événements" %}}
 
