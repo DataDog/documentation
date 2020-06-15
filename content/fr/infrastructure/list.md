@@ -72,7 +72,7 @@ L'exportation au format JSON permet également d'obtenir la liste des instances 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent/faq/how-datadog-agent-determines-the-hostname/
-[2]: /fr/tagging/
+[2]: /fr/getting_started/tagging/
 [3]: /fr/logs/
 [4]: /fr/api/v1/hosts/#get-the-total-number-of-active-hosts
 [5]: /fr/developers/guide/query-the-infrastructure-list-via-the-api/

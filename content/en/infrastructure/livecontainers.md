@@ -201,16 +201,16 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 It is possible to include and/or exclude containers from real-time collection:
 
-* Exclude containers either via passing the environment variable `DD_AC_EXCLUDE` or adding `ac_exclude:` in your `datadog.yaml` main configuration file.
-* Include containers either via passing the environment variable `DD_AC_INCLUDE` or adding `ac_include:` in your `datadog.yaml` main configuration file.
+* Exclude containers either via passing the environment variable `DD_CONTAINER_EXCLUDE` or adding `container_exclude:` in your `datadog.yaml` main configuration file.
+* Include containers either via passing the environment variable `DD_CONTAINER_INCLUDE` or adding `container_include:` in your `datadog.yaml` main configuration file.
 
 Both arguments take an **image name** as value; regular expressions are also supported.
 
 For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml` file:
 
 ```shell
-ac_exclude: ["image:debian"]
-ac_include: ["name:frontend.*"]
+container_exclude: ["image:debian"]
+container_include: ["name:frontend.*"]
 ```
 
 **Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
