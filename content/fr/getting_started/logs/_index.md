@@ -212,7 +212,7 @@ On obtient alors ce qui suit sur la [page Log Explorer][2] :
 [1]: https://www.datadoghq.com
 [2]: https://app.datadoghq.com/logs
 [3]: https://app.vagrantup.com/ubuntu/boxes/xenial64
-[4]: https://www.vagrantup.com/intro/getting-started/index.html
+[4]: https://www.vagrantup.com/intro/getting-started
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [7]: /fr/agent/guide/agent-commands/#agent-information

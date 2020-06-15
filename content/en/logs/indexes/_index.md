@@ -58,7 +58,7 @@ Index filters allow dynamic control over which logs flow into which indexes.  Fo
 
 By default, logs indexes have no exclusion filter: that is to say all logs matching the Index Filter are indexed.
 
-But because your logs are not all and equally valuable, exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][8] and can be used to [generate metrics][9] and [archived][10].
+But because your logs are not all and equally valuable, exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][8] and can be used to [generate metrics][10] and [archived][9].
 
 Exclusion filters are defined by a query, a sampling rule, and a active/inactive toggle:
 

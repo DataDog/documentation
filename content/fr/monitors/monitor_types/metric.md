@@ -203,7 +203,7 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/metric
-[2]: /fr/tagging/using_tags/?tab=assignment
+[2]: /fr/getting_started/tagging/using_tags/?tab=assignment
 [3]: /fr/dashboards/querying/#advanced-graphing
-[4]: /fr/monitors/faq/what-are-recovery-thresholds/
-[5]: /fr/monitors/notifications/
+[4]: /fr/monitors/faq/what-are-recovery-thresholds
+[5]: /fr/monitors/notifications

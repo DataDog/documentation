@@ -45,11 +45,11 @@ Note: After having instrumented your application, the tracing client sends trace
 
 To set up Datadog APM in AWS Lambda, see the [Lambda integration documentation][7]. Alternatively, you can use [AWS X-Ray][8] to trace your Lambda functions.
 
-### Azure App Services 
+### Azure App Services
 
 The Datadog extension for Azure App Services provides tracing capabilities for Azure Web Apps. For more information setting up tracing in Azure, see the [Azure App Services Extension documentation][9].
 
-### Google App Engine, AAS
+### Google App Engine
 
 Datadog APM requires sending trace data to a running Agent. A workaround for enabling trace collection for a serverless setup is to configure a separate VM that accepts trace traffic externally.
 
@@ -67,21 +67,11 @@ Tracing is enabled by default when monitoring with Cloud Foundry. For more infor
 
 ## Configure your environment
 
-There are several ways to specify [an environment][12] when reporting data:
-
-1. **Host tag**: Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
-2. **Agent configuration**: Override the default tag used by the Agent in the Agent configuration file. This tags all traces coming through the Agent, overriding the host tag value.
-
-  ```
-  apm_config:
-  env: <ENVIRONMENT>
-  ```
-
-3. **Per trace**: When submitting a single [trace][1], specify an environment by tagging one of its [spans][13] with the metadata key `env`. This overrides the Agent configuration and the host tag’s value (if any). Consult the [trace tagging documentation][14] to learn how to assign a tag to your traces.
+See our guide on setting the [`env` tag and an additional primary tag for scoping APM data][12].
 
 ## Next steps
 
-Next, [Instrument your application][15]. For the full overview of all of the steps to set up APM, see the [APM overview][2].
+Next, [Instrument your application][13]. For the full overview of all of the steps to set up APM, see the [APM overview][2].
 
 ## Further Reading
 
@@ -99,6 +89,4 @@ Next, [Instrument your application][15]. For the full overview of all of the ste
 [10]: /agent/basic_agent_usage/heroku/#installation
 [11]: /integrations/cloud_foundry/#trace-collection
 [12]: /tracing/guide/setting_primary_tags_to_scope/#definition
-[13]: /tracing/visualization/#spans
-[14]: /tracing/guide/adding_metadata_to_spans/?tab=java
-[15]: /tracing/setup/
+[13]: /tracing/setup/

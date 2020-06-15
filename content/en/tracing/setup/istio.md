@@ -28,6 +28,7 @@ Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.
 2. [Make sure APM is enabled for your Agent][2].
 3. Uncomment the `hostPort` setting so that Istio sidecars can connect to the Agent and submit traces.
 
+
 ### Istio Configuration and Installation
 
 To enable Datadog APM, a [custom Istio installation][3] is required to set two extra options when installing Istio.
@@ -55,12 +56,26 @@ set manually by adding an `app` label to the deployment's pod template.
 For [CronJobs][5], the `app` label should be added to the job template, as the generated name comes from the `Job` instead
 of the higher-level `CronJob`.
 
-The environment for traces can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation.
+### Environment Variables
+
+Environment variables for Istio sidecars can be set on a per-deployment basis using the `apm.datadoghq.com/env` annotation.
 ```yaml
     metadata:
       annotations:
-        apm.datadoghq.com/env: '{ "DD_ENV": "test" }'
+        apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_TRACE_ANALYTICS_ENABLED": "true" }'
 ```
+
+The available [environment variables][6] depend on the version of the C++ tracer embedded in the Istio sidecar's proxy.
+
+| Istio Version | C++ Tracer Version |
+|---------------|--------------------|
+| v1.6.x | v1.1.3 |
+| v1.5.x | v1.1.1 |
+| v1.4.x | v1.1.1 |
+| v1.3.x | v1.1.1 |
+| v1.2.x | v0.4.2 |
+| v1.1.3 | v0.4.2 |
+
 
 ### Running Agent as Deployment and Service
 
@@ -94,7 +109,7 @@ spec:
 ```
 
 Automatic Protocol Selection may determine that traffic between the sidecar and Agent is HTTP, and enable tracing.
-This can be disabled using [manual protocol selection][6] for this specific service. The port name in the `datadog-agent` Service can be changed to `tcp-traceport`.
+This can be disabled using [manual protocol selection][7] for this specific service. The port name in the `datadog-agent` Service can be changed to `tcp-traceport`.
 If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specification.
 
 ## Further Reading
@@ -106,4 +121,5 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [3]: https://istio.io/docs/setup/install/istioctl/
 [4]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/
 [5]: https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
-[6]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[6]: /tracing/setup/cpp/#environment-variables
+[7]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection

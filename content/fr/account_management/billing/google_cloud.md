@@ -25,7 +25,7 @@ Pour toute question technique, contactez [l'assistance Datadog][4].
 Pour toute question concernant la facturation, contactez votre [chargé de compte][5].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google_cloud_platform
-[2]: /fr/tagging/using_tags/#integrations
+[2]: /fr/getting_started/tagging/using_tags/#integrations
 [3]: /fr/infrastructure
 [4]: /fr/help
 [5]: mailto:success@datadoghq.com

@@ -81,7 +81,6 @@ The commands related to log collection are:
 | `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Prevents the Datadog Agent from collecting and sending its own logs and metrics. Remove this parameter if you want to collect the Datadog Agent logs or metrics. |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Logs are collected from container `stdout/stderr` from the Docker socket.                                                                                        |
 
-
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [2]: https://hub.docker.com/r/datadog/agent/tags
 {{% /tab %}}
@@ -123,7 +122,7 @@ logs_config:
 
 In Datadog Agent 6.8+, `source` and `service` default to the `short_image` tag value. This allows Datadog to identify the log source for each container and automatically install the corresponding integration.
 
-The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][2] and [pod annotations in Kubernetes][3] or container labels.
+The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][3] and [pod annotations in Kubernetes][4] or container labels.
 
 Autodiscovery expects labels to follow this format, depending on the file type:
 
@@ -158,7 +157,9 @@ Add the following label as a run command:
 {{% /tab %}}
 {{< /tabs >}}
 
-Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][4]
+Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][5].
+
+**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][2] documentation.
 
 ### Examples
 
@@ -218,13 +219,13 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 
 Use Autodiscovery log labels to apply advanced log collection processing logic, for example:
 
-- [Filter logs before sending them to Datadog][5].
-- [Scrub sensitive data from your logs][6].
-- [Proceed to multi-line aggregation][7].
+- [Filter logs before sending them to Datadog][6].
+- [Scrub sensitive data from your logs][7].
+- [Proceed to multi-line aggregation][8].
 
 ## Filter containers
 
-It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][8] to learn more.
+It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][9] to learn more.
 
 ## Short Lived containers
 
@@ -232,18 +233,19 @@ For a Docker environment, the Agent receives container updates in real time thro
 
 Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 
-For Kubernetes environements, refer to the [Kubernetes short lived container documentation][9]
+For Kubernetes environements, refer to the [Kubernetes short lived container documentation][10]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/journald/
-[2]: /agent/docker/integrations/
-[3]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
-[4]: /agent/logs/#custom-log-collection
-[5]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
-[6]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
-[7]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
-[8]: /agent/guide/autodiscovery-management/
-[9]: /agent/kubernetes/log/#short-lived-containers
+[2]: /getting_started/tagging/unified_service_tagging
+[3]: /agent/docker/integrations/
+[4]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
+[5]: /agent/logs/#custom-log-collection
+[6]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
+[7]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
+[8]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[9]: /agent/guide/autodiscovery-management/
+[10]: /agent/kubernetes/log/#short-lived-containers
