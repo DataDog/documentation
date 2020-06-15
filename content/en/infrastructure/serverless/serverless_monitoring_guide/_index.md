@@ -3,7 +3,11 @@ title: End-to-end Serverless Monitoring Guide
 kind: guide
 ---
 
-This startup guide will walk you through all the steps to power visibility across metrics, traces and logs in your serverless ecosystem. First, we’ll set up **Datadog Lambda Enhanced Metrics** to illustrate how to graph cold starts across your Lambda infrastructure. Second, we’ll enable Lambda **logs ingestion** and show you how to navigate Lambda error logs. Third, we’ll demonstrate some tools for fast root cause analysis by enabling Lambda **distributed tracing**. Last, we’ll demonstrate how to monitor **custom metrics** and services across your serverless ecosystem.
+Use this guide to set up metrics, traces and logs in your serverless ecosystem. 
+
+- First, we’ll set up **Datadog Lambda Enhanced Metrics** to illustrate how to graph cold starts across your Lambda infrastructure. 
+- Second, we’ll enable Lambda **logs ingestion** and show you how to navigate Lambda error logs. Third, we’ll demonstrate some tools for fast root cause analysis by enabling Lambda **distributed tracing**. 
+- Last, we’ll demonstrate how to monitor **custom metrics** and services across your serverless ecosystem.
 
 # Pick your Language
 
