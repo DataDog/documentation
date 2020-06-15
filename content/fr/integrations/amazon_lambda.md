@@ -733,8 +733,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][19].
 [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_lambda.html
 [5]: https://app.datadoghq.com/account/settings#integrations/amazon_lambda
 [6]: https://app.datadoghq.com/functions
-[7]: https://docs.datadoghq.com/fr/infrastructure/serverless/
-[8]: https://docs.datadoghq.com/fr/tagging/
+[7]: https://docs.datadoghq.com/fr/infrastructure/serverless
+[8]: https://docs.datadoghq.com/fr/getting_started/tagging/
 [9]: https://docs.datadoghq.com/fr/integrations/amazon_step_functions/
 [10]: https://docs.datadoghq.com/fr/metrics/distributions/
 [11]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#installation

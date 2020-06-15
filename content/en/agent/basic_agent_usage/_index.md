@@ -146,6 +146,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [SUSE Enterprise Linux x86_64][7] with SysVinit | SUSE 11 SP4 in Agent 7.16.0+                      |
 | [Fedora x86_64][8]                              | Fedora 26+                                        |
 | [macOS][9]                                      | macOS 10.12+                                      |
+| [Windows server 64-bit][10]                     | Windows Server 2008r2+ and Server Core (not Nano) |
 | [Windows server 64-bit][10]                     | Server Core (not Nano) |
 | [Windows 64-bit][10]                            | Windows 7+                                        |
 
@@ -274,7 +275,7 @@ Enabling JMX Checks forces the Agent to use more memory depending on the number 
 
 **Log Collection**:
 
-The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][12] enabled. It shows the evolution of resource usage for the different compression levels available.
+The results below are obtained from a collection of *110KB of logs per seconds* from a file with the [HTTP forwarder][6] enabled. It shows the evolution of resource usage for the different compression levels available.
 
 {{< tabs >}}
 {{% tab "HTTP compression level 6" %}}
@@ -316,23 +317,23 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 
 ### Update the Agent
 
-To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][6].
+To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][7].
 
-Note: If you want to manually update one specific Agent integration refer to the [Integration Management guide][7].
+Note: If you want to manually update one specific Agent integration refer to the [Integration Management guide][8].
 
 ### Configuration files
 
-[See the dedicated documentation for Agent configuration files][8].
+[See the dedicated documentation for Agent configuration files][9].
 
 ### Datadog site
 
-To send your Agent data to the [Datadog EU site][9], edit your [Agent main configuration file][10] `datadog.yaml` and set the `site` parameter to:
+To send your Agent data to the [Datadog EU site][10], edit your [Agent main configuration file][11] `datadog.yaml` and set the `site` parameter to:
 
 `site: datadoghq.eu`
 
 ### Log location
 
-[See the dedicated documentation for Agent log files][11]
+[See the dedicated documentation for Agent log files][12]
 
 ## Further Reading
 
@@ -343,10 +344,10 @@ To send your Agent data to the [Datadog EU site][9], edit your [Agent main confi
 [3]: /agent/guide/agent-commands/#start-the-agent
 [4]: /agent/guide/agent-commands/#service-status
 [5]: /agent/guide/agent-commands/#stop-the-agent
-[6]: https://app.datadoghq.com/account/settings#agent
-[7]: /agent/guide/integration-management/
-[8]: /agent/guide/agent-configuration-files/
-[9]: https://app.datadoghq.eu
-[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/guide/agent-log-files/
-[12]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
+[6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
+[7]: https://app.datadoghq.com/account/settings#agent
+[8]: /agent/guide/integration-management/
+[9]: /agent/guide/agent-configuration-files/
+[10]: https://app.datadoghq.eu
+[11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[12]: /agent/guide/agent-log-files/

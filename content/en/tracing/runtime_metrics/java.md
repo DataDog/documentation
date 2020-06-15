@@ -36,6 +36,7 @@ If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL
 
 - For the runtime UI, `dd-trace-java` >= [`0.24.0`][6] is supported.
 - To associate JVM metrics within flame graphs, ensure the `env: tag` (case-sensitive) is set and matching across your environment.
+- For JVM metrics to appear on the service page when using Fargate, ensure that `DD_DOGSTATSD_TAGS` is set on your Agent task, and matches the `env: tag` of that service.
 
 ## Data Collected
 

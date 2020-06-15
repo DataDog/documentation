@@ -238,7 +238,7 @@ Heroku ビルドパックは Docker イメージと共に使用することは�
 [5]: https://github.com/lstoll/heroku-buildpack-monorepo
 [6]: https://app.datadoghq.com/account/settings#api
 [7]: https://github.com/DataDog/heroku-buildpack-datadog/releases
-[8]: https://docs.datadoghq.com/ja/tagging/
+[8]: https://docs.datadoghq.com/ja/getting_started/tagging/
 [9]: https://docs.datadoghq.com/ja/dashboards/guide/how-to-graph-percentiles-in-datadog/
 [10]: https://docs.datadoghq.com/ja/agent
 [11]: https://devcenter.heroku.com/articles/dyno-metadata

@@ -35,7 +35,7 @@ The last compatible Agent released for 32-bit systems was 5.10.1. Follow the `Fi
 #### Linux
 
 ```shell
-sudo rm /opt/datadog-agent/agent/datadog-cert.pem && sudo service datadog-agent restart
+sudo rm -f /opt/datadog-agent/agent/datadog-cert.pem && sudo /etc/init.d/datadog-agent restart
 ```
 
 #### Windows

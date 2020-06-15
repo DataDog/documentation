@@ -227,6 +227,8 @@ Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number
 dogstatsd_so_rcvbuf: 26214400
 ```
 
+See the [Note on sysctl in Kubernetes][5] section if you are deploying the Agent or DogStatsD in Kubernetes.
+
 ### Over UDS (Unix Domain Socket)
 
 #### Linux
@@ -261,6 +263,10 @@ Then set the Agent `dogstatsd_so_rcvbuf` configuration option to the same number
 ```yaml
 dogstatsd_so_rcvbuf: 4194304
 ```
+
+#### Note on sysctl in Kubernetes
+
+If you are using Kubernetes to deploy the Agent and/or DogStatsD and you want to configure the sysctls as mentioned above, setting their value will have to be done per container. The `net.*` sysctls being namespaced, you will be able to set them per pod: see [the official Kubernetes documentation][6] on how to allow the access to the sysctls in the containers and how to set their value.
 
 ### Ensure proper packet sizes
 
@@ -514,3 +520,5 @@ See [DataDog/dogstatsd-csharp-client][1] for more information about the client c
 [2]: /developers/dogstatsd/unix_socket/
 [3]: /developers/dogstatsd/#code
 [4]: /developers/metrics/dogstatsd_metrics_submission/#sample-rates
+[5]: /developers/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
+[6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/

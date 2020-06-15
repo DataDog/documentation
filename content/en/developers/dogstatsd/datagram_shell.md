@@ -43,7 +43,7 @@ Here are some example datagrams:
 
 [1]: /developers/metrics/#naming-metrics
 [2]: /developers/metrics/types/
-[3]: /tagging/
+[3]: /getting_started/tagging/
 {{% /tab %}}
 {{% tab "Events" %}}
 

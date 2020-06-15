@@ -164,6 +164,19 @@ Docker's default is the json-file logging driver so the Container Agent tries to
 
 4. Mount the YAML file into your container following the instructions in the [Docker Agent documentation][3]. For more information on setting log drivers for Docker containers, [see this documentation][4].
 
+## Agent doesn't send logs from containers that have persisted a large volume of logs (> 1GB)
+
+The Docker daemon can have performances issues while it is trying to retrieve logs for containers for which it has already stored large logs files on disk. This could lead to read timeouts when the Datadog Agent is gathering the containers' logs from the Docker daemon. 
+
+When it occurs, the Datadog Agent outputs a log containing `Restarting reader after a read timeout` for a given container every 30 seconds and stops sending logs from that container while it is actually logging messages.
+
+The default read timeout is set to 30 seconds, increasing this value gives more time to the Docker daemon to reply to the Datadog Agent. This value can be set in `datadog.yaml` using the `logs_config.docker_client_read_timeout` parameter or by using the environment variable `DD_LOGS_CONFIG_DOCKER_CLIENT_READ_TIMEOUT`. This value is a duration in seconds, find below an example increasing it to 60 seconds:
+
+```yaml
+logs_config:
+  docker_client_read_timeout: 60
+```
+
 [1]: /help/
 [2]: /integrations/journald/#setup
 [3]: /agent/docker/?tab=standard#mounting-conf-d

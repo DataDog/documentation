@@ -4,10 +4,10 @@ kind: documentation
 aliases:
 - /agent/autodiscovery/tag/
 further_reading:
-- link: "/tagging/"
+- link: "/getting_started/tagging/"
   tag: "Documentation"
   text: "Getting started with tags"
-- link: "/tagging/using_tags/"
+- link: "/getting_started/tagging/using_tags/"
   tag: "Documentation"
   text: "Using tags with Datadog"
 - link: "/agent/guide/autodiscovery-management/"
@@ -23,6 +23,8 @@ If you are running the Agent as a binary on a host, configure your tag extractio
 
 Starting with Agent v6.10+, the Agent can autodiscover tags from Pod annotations. It allows the Agent to associate tags to all data emitted by the entire pods or an individual container within this pod.
 
+As a best practice in containerized environments, Datadog recommends using unified service tagging to help unify tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
+
 To apply a `<TAG_KEY>:<TAG_VALUE>` tag to all data emitted by a given pod and collected by the Agent use the following annotation on your pod:
 
 ```yaml
@@ -35,6 +37,12 @@ If you want to apply a `<TAG_KEY>":<TAG_VALUE>` tag to an individual container `
 ```yaml
 annotations:
   ad.datadoghq.com/<CONTAINER_IDENTIFIER>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
+```
+
+Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without [modifying the Agent `datadog.yaml` file][2].
+
+```yaml
+com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 ```
 
 ## Node labels as tags
@@ -180,3 +188,5 @@ kubernetes_pod_annotations_as_tags:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /getting_started/tagging/unified_service_tagging
+[2]: /agent/kubernetes/tag/?tab=agent#extract-labels-as-tags

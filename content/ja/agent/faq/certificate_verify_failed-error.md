@@ -24,16 +24,17 @@ Agent 6.x および 7.x は影響を受けず、アップデートの必要が�
 
 現状 Agent 5.x を使用している場合、Agent 5.32.7+ へのアップグレードを推奨します。新しいバージョンの Agent を使用することにより、様々な場面におけるより安定した稼働を期待できます。
 
-Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`  
-Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`  
-Windows (5.12.0より新しいバージョン): Datadog [Agent installer][7]をダウンロードする. `start /wait msiexec /qn /i ddagent-cli-latest.msi`  
+Centos/Red Hat: `sudo yum check-update && sudo yum install datadog-agent`
+Debian/Ubuntu: `sudo apt-get update && sudo apt-get install datadog-agent`
+Windows (5.12.0より新しいバージョン): Datadog [Agent installer][7]をダウンロードする. `start /wait msiexec /qn /i ddagent-cli-latest.msi`
 その他のプラットフォームや構成については、[こちら][8]に詳細があります。
 
 ### Agent をアップグレードせずに対応する方法
 
 *Linux*
+
 ```shell
-sudo rm /opt/datadog-agent/agent/datadog-cert.pem && sudo service datadog-agent restart
+sudo rm -f /opt/datadog-agent/agent/datadog-cert.pem && sudo /etc/init.d/datadog-agent restart
 ```
 
 *Windows CLI*
@@ -72,7 +73,7 @@ restart-service -Force datadogagent
 ### 証明書を削除した後でも、Agentをアップグレードする必要はありますか。
 
 最新のAgentバージョンにアップグレードすることを推奨します。自動更新が設定されているデプロイメントについては、自動的に Agent 5.32.7 にアップグレードします。
- 
+
 ### 証明書を削除し後でも、SSL通信は暗号化されますか。
 
 証明書を削除した後でも、Agent からの通信が暗号化されます。この証明書は、クライアントのデフォルト証明書で、SSL 接続するには必須ではありません。Datadog Agent のエンドポイントは SSL での通信のみを受信しています。

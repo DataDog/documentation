@@ -18,36 +18,18 @@ const updateMenu = (apiYaml, apiVersion, languages) => {
 
   languages.forEach((language) => {
     const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/menus.${language}.yaml`, 'utf8'));
-  const newMenuArray = [];
 
-  // need to add hardcoded menu items
-  const mainOverviewSections = [
-    {
-        name: 'Overview',
-        url: (language === 'en' ? `/api/${apiVersion}/` : `/${language}/api/${apiVersion}/`),
-        identifier: `API ${apiVersion.toUpperCase()} overview`,
-        weight: -10
-    },
-    {
-        name: 'Authentication',
-        url: `authentication`,
-        parent: `API ${apiVersion.toUpperCase()} overview`
-    },
-    {
-        name: 'Rate Limiting',
-        url: `rate-limiting`,
-        parent: `API ${apiVersion.toUpperCase()} overview`
-    }
-  ];
+  // filter out auto generated menu items so we just have hardcoded ones
+  const newMenuArray = currentMenuYaml[`api_${apiVersion}`].filter((entry => !entry.hasOwnProperty("generated")));
 
-  newMenuArray.push(...mainOverviewSections);
-
+  // now add back in all the auto generated menu items from specs
   apiYaml.tags.forEach((tag) => {
 
     newMenuArray.push({
       name: tag.name,
       url: (language === 'en' ? `/api/${apiVersion}/${getTagSlug(tag.name)}/` : `/${language}/api/${apiVersion}/${getTagSlug(tag.name)}/` ),
-      identifier: tag.name
+      identifier: tag.name,
+      generated: true
     });
 
     // just get this sections data
@@ -59,7 +41,8 @@ const updateMenu = (apiYaml, apiVersion, languages) => {
         newMenuArray.push({
           name: action.summary,
           parent: tag.name,
-          url: getTagSlug(action.summary)
+          url: getTagSlug(action.summary),
+          generated: true
         });
     });
 
@@ -379,14 +362,12 @@ const outputExample = (chosenExample, inputkey) => {
           }
         });
       }
-    } else {
-      if (typeof chosenExample === "boolean"){
+    } else if (typeof chosenExample === "boolean"){
         // we don't want quotes on a bool
         ex = `${chosenExample}`;
       } else {
         ex = `"${chosenExample}"`;
       }
-    }
   }
   return ex;
 };
@@ -720,13 +701,11 @@ const schemaTable = (tableType, data) => {
       initialData = data.items;
       extraClasses = 'd-none';
     }
-  } else {
-    if(data.additionalProperties) {
+  } else if(data.additionalProperties) {
       initialData = {"&lt;any-key&gt;": data.additionalProperties};
     } else {
       initialData = data.properties;
     }
-  }
   extraClasses = (initialData) ? extraClasses : 'd-none';
   const emptyRow = `
     <div class="row">
@@ -770,11 +749,13 @@ const processSpecs = (specs) => {
         .then((deref) => {
           const version = spec.split('/')[3];
           const jsonString = safeJsonStringify(deref, null, 2);
-          fs.writeFileSync(
-              `./data/api/${version}/full_spec_deref.json`,
-              jsonString,
-              'utf8'
-          );
+          const pathToJson = `./data/api/${version}/full_spec_deref.json`;
+          fs.writeFileSync(pathToJson, jsonString, 'utf8');
+          // make a copy in static for postman
+          fs.copyFile(pathToJson, `./static/resources/json/full_spec_${version}.json`, (err) => {
+            if (err) throw err;
+            console.log(`full_spec_${version}.json copied to /static/resources/json/`);
+          });
           updateMenu(fileData, version, supportedLangs);
           createPages(fileData, deref, version);
           createResources(fileData, JSON.parse(jsonString), version);
