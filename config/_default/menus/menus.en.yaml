@@ -1302,6 +1302,11 @@ main:
     parent: rum_data_collected
     identifier: rum_data_collected_user_action
     weight: 405
+  - name: Guides
+    url: real_user_monitoring/guide
+    parent: rum
+    identifier: rum_guides
+    weight: 4
   - name: Network Monitoring
     url: network_performance_monitoring/
     pre: nav_network
