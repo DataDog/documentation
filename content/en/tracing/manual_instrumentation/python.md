@@ -99,8 +99,6 @@ def make_sandwich_request(request):
 
 API details of the decorator can be found in the `ddtrace.Tracer.trace` [documentation][2] or the `ddtrace.Span.finish`[documentation][3].
 
-- [`ddtrace.Tracer.trace`][2]
-- [`ddtrace.Span.finish`][3]
 
 
 [1]: /tracing/visualization/#spans
