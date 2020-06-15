@@ -16,6 +16,9 @@ col1:
   - name: apm
     link: "https://www.datadoghq.com/product/apm/"
     title: "APM"
+  - name: security-monitoring
+    link: "https://www.datadoghq.com/product/security-monitoring/"
+    title: "Security Monitoring"
   - name: network
     link: "https://www.datadoghq.com/product/network-performance-monitoring/"
     title: "Network Monitoring"
