@@ -16,8 +16,7 @@ This page details common use cases for adding and customizing observability with
 
 ## Adding Tags
 
-Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
-
+Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 ### Add custom span tags
 
@@ -213,7 +212,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 ## Trace Client & Agent Configuration
 
-There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
+There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as excluding specific resources from sending traces to Datadog in the event these traces are not wanted in metrics calculated, such as Health Checks.
 
 ### B3 Headers Extraction and Injection
 
@@ -223,14 +222,14 @@ Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
 supported: `Datadog` and `B3`.
 
-Configure injection styles using the environment variable
+Configure injection styles using the environment variable:
 `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
 
-Configure extraction styles using the environment variable
+Configure extraction styles using the environment variable:
 `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
 
 The values of these environment variables are comma separated lists of
-header styles that are enabled for injection or extraction. By default only
+header styles that are enabled for injection or extraction. By default,
 the `Datadog` extraction style is enabled.
 
 If multiple extraction styles are enabled, extraction attempts are made
@@ -239,11 +238,12 @@ extracted value is used.
 
 ### Resource filtering
 
-The Agent can be configured to exclude a specific Resource from Traces sent by the Agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out Traces based on their Resource name.
+The Agent can be configured to exclude a specific resource from traces sent by the Agent to the Datadog application. To prevent the submission of specific resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out traces based on their resource name.
 
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. To learn more, [click here][13].
+If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. To learn more, [view the documentation here][13].
 
 This can be useful for excluding any Health Checks or otherwise simulated traffic from the calculation of metrics for your services.
+
 ```text
 ## @param ignore_resources - list of strings - optional
 ## A blacklist of regular expressions can be provided to disable certain traces based on their resource name
@@ -254,7 +254,6 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 ## OpenTracing
 
 Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][7], or see the setup information below.
-
 
 ### Setup
 
@@ -288,7 +287,6 @@ func main() {
 ```
 
 **Note**: Using the [OpenTracing API][7] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][8] for more examples and details.
-
 
 ## Further Reading
 
