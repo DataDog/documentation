@@ -21,7 +21,7 @@ sources:
   dst: "content/{lang}/agent/faq/agent_v6_changes.md"
 
 ignores:
-  - "content/en/**/faq/*.md"
+  - "content/en/**/faq/!(agent_v6_changes).md"
   - "**/*.fr.md"
   - "**/*.fr.yaml"
   - "**/*.fr.json"
