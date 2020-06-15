@@ -44,5 +44,5 @@ Pour toute question technique, contactez [l'assistance Datadog][2].
 Pour toute question concernant la facturation, contactez votre [chargé de compte][3].
 
 [1]: /fr/logs/logs_to_metrics/#recommended-usage-metrics
-[2]: /fr/help
+[2]: /fr/help/
 [3]: mailto:success@datadoghq.com

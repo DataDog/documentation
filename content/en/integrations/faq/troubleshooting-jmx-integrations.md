@@ -42,7 +42,7 @@ If you're able to connect using the command above, run: `beans` and send to the 
 
 **Note**: if you're able to see some metrics (`jvm.heap_memory`, `jvm.non_heap_memory`, etc.) it is a sign that JMXFetch is properly running. If you're targeting another application and not seeing related metrics, the likely issue is a misconfiguration in your YAML.
 
-[1]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+[1]: /agent/faq/send-logs-and-configs-to-datadog-via-flare-command/
 [2]: /agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
 {{< /tabs >}}
@@ -249,8 +249,8 @@ instances:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.oracle.com/javase/8/docs/technotes/guides/management/faq.html
-[2]: /help
-[3]: /tracing/runtime_metrics/java
+[2]: /help/
+[3]: /tracing/runtime_metrics/java/
 [4]: /agent/guide/agent-commands/#restart-the-agent
 [5]: https://tomcat.apache.org/tomcat-7.0-doc/config/listeners.html#JMX_Remote_Lifecycle_Listener_-_org.apache.catalina.mbeans.JmxRemoteLifecycleListener
 [6]: https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#SSL_and_Tomcat

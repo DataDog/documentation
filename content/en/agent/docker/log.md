@@ -9,19 +9,19 @@ further_reading:
     - link: 'logs/explorer'
       tag: 'Documentation'
       text: 'Learn how to explore your logs'
-    - link: "/agent/docker/apm"
+    - link: "/agent/docker/apm/"
       tag: "Documentation"
       text: "Collect your application traces"
-    - link: "/agent/docker/prometheus"
+    - link: "/agent/docker/prometheus/"
       tag: "Documentation"
       text: "Collect your Prometheus metrics"
-    - link: "/agent/docker/integrations"
+    - link: "/agent/docker/integrations/"
       tag: "Documentation"
       text: "Collect automatically your applications metrics and logs"
-    - link: "/agent/guide/autodiscovery-management"
+    - link: "/agent/guide/autodiscovery-management/"
       tag: "Documentation"
       text: "Limit data collection to a subset of containers only"
-    - link: "/agent/docker/tag"
+    - link: "/agent/docker/tag/"
       tag: "Documentation"
       text: "Assign tags to all data emitted by a container"
 ---
@@ -57,6 +57,18 @@ docker run -d --name datadog-agent \
            datadog/agent:latest
 ```
 
+**Note**: On Windows systems, run this command without volume mounts. That is:
+
+```shell
+docker run -d --name datadog-agent \
+           -e DD_API_KEY="<DATADOG_API_KEY>" \
+           -e DD_LOGS_ENABLED=true \
+           -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
+           -e DD_AC_EXCLUDE="name:datadog-agent" \
+           -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
+           datadog/agent:latest
+```
+
 It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on Docker Hub.
 
 The commands related to log collection are:
@@ -68,7 +80,6 @@ The commands related to log collection are:
 | `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` | To prevent loss of container logs during restarts or network issues, the last log line collected for each container in this directory is stored on the host.     |
 | `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Prevents the Datadog Agent from collecting and sending its own logs and metrics. Remove this parameter if you want to collect the Datadog Agent logs or metrics. |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Logs are collected from container `stdout/stderr` from the Docker socket.                                                                                        |
-
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [2]: https://hub.docker.com/r/datadog/agent/tags
@@ -93,7 +104,7 @@ logs_config:
 [Restart the Agent][3] to see all your container logs in Datadog.
 
 
-[1]: /agent/basic_agent_usage
+[1]: /agent/basic_agent_usage/
 [2]: /agent/logs/#custom-log-collection
 [3]: /agent/guide/agent-commands/#restart-the-agent
 {{% /tab %}}
@@ -146,7 +157,9 @@ Add the following label as a run command:
 {{% /tab %}}
 {{< /tabs >}}
 
-Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][4]
+Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][4].
+
+**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][5] documentation.
 
 ### Examples
 
@@ -202,9 +215,17 @@ See the [multi-line processing rule documentation][1] to get more pattern exampl
 - Use the environment variable to collect logs from all containers and then override the default `source` and `service` values.
 - Add processing rules for the wanted subset of containers.
 
+## Advanced log collection
+
+Use Autodiscovery log labels to apply advanced log collection processing logic, for example:
+
+- [Filter logs before sending them to Datadog][6].
+- [Scrub sensitive data from your logs][7].
+- [Proceed to multi-line aggregation][8].
+
 ## Filter containers
 
-It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][5] to learn more.
+It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs for instance. See the [Container Discovery Management][9] to learn more.
 
 ## Short Lived containers
 
@@ -212,15 +233,19 @@ For a Docker environment, the Agent receives container updates in real time thro
 
 Since Agent v6.14+, the Agent collects logs for all containers (running or stopped) which means that short lived containers logs that have started and stopped in the past second are still collected as long as they are not removed.
 
-For Kubernetes environements, refer to the [Kubernetes short lived container documentation][6]
+For Kubernetes environements, refer to the [Kubernetes short lived container documentation][10]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/journald
-[2]: /agent/docker/integrations
+[1]: /integrations/journald/
+[2]: /agent/docker/integrations/
 [3]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
 [4]: /agent/logs/#custom-log-collection
-[5]: /agent/guide/autodiscovery-management
-[6]: /agent/kubernetes/log#short-lived-containers
+[5]: /getting_started/tagging/unified_service_tagging
+[6]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
+[7]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
+[8]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[9]: /agent/guide/autodiscovery-management/
+[10]: /agent/kubernetes/log/#short-lived-containers

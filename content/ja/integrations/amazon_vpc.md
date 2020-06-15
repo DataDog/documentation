@@ -85,9 +85,9 @@ AWS VPC インテグレーションには、サービスのチェック機能は
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services
+[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:464622532012:applications~Datadog-VPC-Flow-Logs
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#create-a-new-lambda-function
-[4]: https://docs.datadoghq.com/ja/logs/explorer
+[4]: https://docs.datadoghq.com/ja/logs/explorer/
 [5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpc/amazon_vpc_metadata.csv
-[6]: https://docs.datadoghq.com/ja/help
+[6]: https://docs.datadoghq.com/ja/help/

@@ -77,5 +77,5 @@ Les tags primaires apparaissent en haut des pages APM. Utilisez ces sélecteurs 
 [1]: /fr/tracing/visualization/#trace
 [2]: /fr/tagging
 [3]: /fr/agent/guide/agent-configuration-files/
-[4]: /fr/tagging/assigning_tags/#traces
+[4]: /fr/getting_started/tagging/assigning_tags/#traces
 [5]: https://app.datadoghq.com/apm/settings

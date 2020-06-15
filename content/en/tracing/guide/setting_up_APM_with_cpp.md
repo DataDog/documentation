@@ -2,7 +2,7 @@
 title: Setting Up APM with C++
 kind: guide
 further_reading:
-- link: "/tracing/setup/cpp"
+- link: "/tracing/setup/cpp/"
   tag: "Documentation"
   text: "Learn more about tracing applications with C++"
 ---
@@ -23,7 +23,7 @@ vagrant up
 vagrant ssh
 ```
 
-Next, install the agent with the [instructions in the UI][3].
+Next, install the agent with the [instructions in the UI][2].
 
 ### Prepping for C++
 
@@ -166,5 +166,4 @@ Click on the service to view your traces.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/cpp/#compile-against-dd-opentracing-cpp
-[2]: https://github.com/DataDog/sandbox
-[3]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[2]: https://app.datadoghq.com/account/settings#agent/ubuntu

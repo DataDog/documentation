@@ -75,4 +75,4 @@ L'intégration Fabric n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][1].
 
-[1]: https://docs.datadoghq.com/fr/help
+[1]: https://docs.datadoghq.com/fr/help/

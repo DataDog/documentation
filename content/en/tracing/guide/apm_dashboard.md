@@ -5,16 +5,16 @@ further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
   tag: "3 mins"
   text: "Alert on anomalous p99 latency of a database service"
-- link: "tracing/guide/week_over_week_p50_comparison/"
+- link: "/tracing/guide/week_over_week_p50_comparison/"
   tag: "2 mins"
   text: "Compare a service’s latency to the previous week"
 - link: "/tracing/guide/slowest_request_daily/"
   tag: "3 mins"
   text: "Debug the slowest trace on the slowest endpoint of a web service"
-- link: "tracing/guide/add_span_md_and_graph_it/"
+- link: "/tracing/guide/add_span_md_and_graph_it/"
   tag: "7 mins"
   text: "Add span tags and slice and dice your application performance"
-- link: "tracing/guide/"
+- link: "/tracing/guide/"
   tag: ""
   text: "All guides"
 ---
@@ -128,7 +128,7 @@ This guides walks you through adding trace metrics to a dashboard, correlating t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /dashboards/widgets/timeseries
-[3]: /tracing/guide/metrics_namespace
+[2]: /dashboards/widgets/timeseries/
+[3]: /tracing/guide/metrics_namespace/
 [4]: https://app.datadoghq.com/apm/search/analytics
-[5]: /events
+[5]: /events/

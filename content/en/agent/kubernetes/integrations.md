@@ -6,19 +6,19 @@ aliases:
   - /guides/autodiscovery/
 kind: documentation
 further_reading:
-- link: "agent/kubernetes/log"
+- link: "/agent/kubernetes/log/"
   tag: "Documentation"
   text: "Collect your application logs"
-- link: "/agent/kubernetes/apm"
+- link: "/agent/kubernetes/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
-- link: "/agent/kubernetes/prometheus"
+- link: "/agent/kubernetes/prometheus/"
   tag: "Documentation"
   text: "Collect your Prometheus metrics"
-- link: "/agent/guide/autodiscovery-management"
+- link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Limit data collection to a subset of containers only"
-- link: "/agent/kubernetes/tag"
+- link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
 ---
@@ -99,8 +99,12 @@ spec:
 # (...)
 ```
 
-**Note**: If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, replica sets, or deployments, add pod annotations under `.spec.template.metadata`.
+If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, replica sets, or deployments, add pod annotations under `.spec.template.metadata`.
 
+**Note:** As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
+
+
+[1]: /getting_started/tagging/unified_service_tagging
 {{% /tab %}}
 {{% tab "File" %}}
 
@@ -130,7 +134,7 @@ See the [Autodiscovery Container Identifiers][1] documentation for information o
 
 **Note**: You don't need to set up the `<INTEGRATIONS_NAME>` since the Agent infers it from the file name directly.
 
-[1]: /agent/guide/ad_identifiers
+[1]: /agent/guide/ad_identifiers/
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -155,8 +159,8 @@ data:
 See the [Autodiscovery Container Identifiers][3] documentation for information on the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
 
 [1]: /agent/kubernetes/integrations/#configmap
-[2]: /agent/kubernetes/integrations
-[3]: /agent/guide/ad_identifiers
+[2]: /agent/kubernetes/integrations/
+[3]: /agent/guide/ad_identifiers/
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
@@ -199,6 +203,8 @@ Then [restart the Agent][2] to apply the configuration change.
 
 **Configure in environment variables**:
 
+**Note:** As a best practice in containerized environments, Datadog recommends using unified service tagging when configuring tags and environment variables. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][9] documentation.
+
 With the key-value store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like this:
 
 ```yaml
@@ -213,8 +219,8 @@ With the key-value store enabled as a template source, the Agent looks for templ
 
 **Note**: To apply a specific configuration to a given container, Autodiscovery identifies containers by **image** when using the key-value stores by trying to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].image`.
 
-[1]: /integrations/consul
-[2]: /agent/guide/agent-commands
+[1]: /integrations/consul/
+[2]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -255,7 +261,7 @@ spec:
 
 **Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be passed to the Agent. See the [Autodiscovery template variable documentation][1].
 
-[1]: /agent/faq/template_variables
+[1]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -316,7 +322,7 @@ Notice that each of the three values is a list. Autodiscovery assembles list ite
 
 Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, e.g. `redis` OR `redis:latest`.
 
-[1]: /agent/faq/template_variables
+[1]: /agent/faq/template_variables/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -407,7 +413,7 @@ instances:
 * Finally, mount the host `conf.d/` folder to the containerized Agent `conf.d/` folder.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[2]: /agent/guide/ad_identifiers
+[2]: /agent/guide/ad_identifiers/
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -479,13 +485,13 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/docker/integrations
+[1]: /agent/docker/integrations/
 [2]: /getting_started/integrations/#configuring-agent-integrations
 [3]: /integrations/#cat-autodiscovery
-[4]: /integrations/ceph
+[4]: /integrations/ceph/
 [5]: /integrations/varnish/#autodiscovery
-[6]: /integrations/postfix
+[6]: /integrations/postfix/
 [7]: /integrations/cassandra/#agent-check-cassandra-nodetool
-[8]: /integrations/gunicorn
+[8]: /integrations/gunicorn/
 [9]: /integrations/apache/#setup
 [10]: /integrations/http_check/#setup

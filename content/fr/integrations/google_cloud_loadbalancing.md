@@ -39,10 +39,10 @@ Les logs d'équilibreur de charge HTTP Google Cloud sont recueillis avec Stackd
 Une fois cette opération effectuée, exportez vos logs d'équilibreur de charge HTTP Google Cloud depuis Stackdriver vers le Pub/Sub :
 
 1. Accédez à la [page Stackdriver][5] et filtrez les logs d'équilibreur de charge HTTP Google Cloud.
-2. Cliquez sur **Create Export** et nommez le récepteur.
+2. Cliquez sur **Create Sink** et nommez le récepteur.
 3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-   {{< img src="integrations/google_cloud_loadbalancing/export_http_lb.png" alt="Exporter les logs d'équilibreur de charge HTTP Google Cloud vers le Pub Sub" >}}
+    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
 4. Cliquez sur **Create** et patientez jusqu'à ce que le message de confirmation apparaisse.
 
@@ -64,8 +64,8 @@ L'intégration Google Cloud Load Balancing n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
+[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_loadbalancing/google_cloud_loadbalancing_metadata.csv
-[5]: https://docs.datadoghq.com/fr/help
+[5]: https://docs.datadoghq.com/fr/help/

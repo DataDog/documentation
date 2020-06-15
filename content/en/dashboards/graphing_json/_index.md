@@ -6,10 +6,10 @@ aliases:
   - /graphing/miscellaneous/graphingjson
   - /graphing/graphing_json/
 further_reading:
-- link: "/dashboards/widgets"
+- link: "/dashboards/widgets/"
   tag: "Documentation"
   text: "Widgets"
-- link: "/dashboards/graphing_json/request_json"
+- link: "/dashboards/graphing_json/request_json/"
   tag: "Documentation"
   text: "Request JSON schema"
 ---
@@ -39,7 +39,7 @@ DASHBOARD_SCHEMA = {
 |----------------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `title`              | string           | Title of your dashboard.                                                                                                                  |
 | `description`        | string           | Description of the dashboard.                                                                                                             |
-| `layout_type`        | enum             | Layout type of the dashboard. Available values are: `ordered` (previous timeboard) or `free` (previous screenboard layout)                |
+| `layout_type`        | enum             | Layout type of the dashboard. Available values are: `ordered` or `free`               |
 | `is_read_only`       | Boolean          | Whether this dashboard is read-only. If `true`, only the dashboard author and administrators can apply changes to it.                     |
 | `template_variables` | array of object  | List of template variables for this dashboard. See [the template variable schema documentation](#template-variable-schema) to learn more. |
 | `notify_list`        | array of strings | List of handles of users to notify when changes are made to this dashboard.                                                               |
@@ -66,7 +66,7 @@ TEMPLATE_VARIABLE_SCHEMA = {
 |-----------|--------|-------------------------------------------|
 | `name`    | string | Name of your template variable.           |
 | `default` | string | Default value for your template variable. |
-| `prefix`  | string | Tag group for your template variable.     |
+| `prefix`  | string | Tag key for your template variable.       |
 
 [Learn more about template variable in the Datadog UI][4].
 
@@ -74,7 +74,7 @@ TEMPLATE_VARIABLE_SCHEMA = {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/timeboard
-[2]: /api/#dashboards
-[3]: /dashboards/graphing_json/widget_json
-[4]: /dashboards/template_variables
+[1]: /dashboards/timeboard/
+[2]: /api/v1/dashboards/
+[3]: /dashboards/graphing_json/widget_json/
+[4]: /dashboards/template_variables/

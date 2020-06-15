@@ -4,10 +4,10 @@ kind: guide
 aliases:
   - /logs/faq/log-collection-troubleshooting-guide
 further_reading:
-- link: "/logs/log_collection"
+- link: "/logs/log_collection/"
   tag: "Documentation"
   text: "Learn how to collect your logs"
-- link: "/logs/explorer"
+- link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
 - link: "/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/"
@@ -128,7 +128,7 @@ See the [Docker Log Collection Troubleshooting Guide][9]
 
 See the [Lambda Log Collection Troubleshooting Guide][10]
 
-## Expectedly dropping logs
+## Unexpectedly dropping logs
 
 Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
 
@@ -136,15 +136,15 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs
-[2]: /help
+[1]: /logs/
+[2]: /help/
 [3]: /agent/guide/agent-commands/#restart-the-agent
 [4]: /agent/logs/#send-logs-over-https
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://en.wikipedia.org/wiki/Chmod
 [7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
-[9]: /logs/guide/docker-logs-collection-troubleshooting-guide
-[10]: /logs/guide/lambda-logs-collection-troubleshooting-guide
+[9]: /logs/guide/docker-logs-collection-troubleshooting-guide/
+[10]: /logs/guide/lambda-logs-collection-troubleshooting-guide/
 [11]: https://app.datadoghq.com/logs/livetail
 [12]: /logs/indexes/#exclusion-filters

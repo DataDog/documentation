@@ -166,7 +166,7 @@ Pour définir la [cardinalité des tags][5] pour les métriques recueillies avec
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /fr/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
-[5]: /fr/tagging/assigning_tags/#environment-variables
+[5]: /fr/getting_started/tagging/assigning_tags/#environment-variables
 [6]: /fr/developers/metrics/custom_metrics
 {{% /tab %}}
 {{% tab "Helm" %}}

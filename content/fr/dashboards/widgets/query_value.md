@@ -28,7 +28,7 @@ Le widget peut afficher la dernière valeur transmise, ou une agrégation calcul
 1. Choisissez les données à représenter :
     * Métrique : consultez la documentation sur les [requêtes][1] pour configurer une requête de métrique.
     * Spans analysées : consultez la [documentation sur la recherche de traces][2] pour configurer une requête de span analysée.
-    * Événements de log : consultez la [documentation sur la recherche de logs][1] pour configurer une requête d'événement de log.
+    * Événements de log : consultez la [documentation sur la recherche de logs][3] pour configurer une requête d'événement de log.
 2. Choisissez les unités et la mise en forme.
 3. Facultatif : configurez une mise en forme conditionnelle en fonction de la valeur affichée.
 
@@ -48,7 +48,7 @@ Définissez sa taille et son alignement si vous le souhaitez.
 
 ## API
 
-Le [schéma JSON][3] utilisé pour le widget Valeur de requête est le suivant :
+Le [schéma JSON][4] utilisé pour le widget Valeur de requête est le suivant :
 
 ```text
 QUERY_VALUE_SCHEMA = {
@@ -75,7 +75,7 @@ QUERY_VALUE_SCHEMA = {
 | Paramètre     | Type             | Obligatoire | Description                                                                                                                                                  |
 |---------------|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `type`        | chaîne           | oui      | Type de widget (utilisez `query_value` pour le widget Valeur de requête)                                                                                                |
-| `requests`    | tableau d'objets | oui      | Tableau d'un objet `request` à afficher dans le widget. Consultez la [documentation relative au schéma JSON des requêtes][4] pour apprendre à élaborer le `REQUEST_SCHEMA`. |
+| `requests`    | tableau d'objets | oui      | Tableau d'un objet `request` à afficher dans le widget. Consultez la [documentation relative au schéma JSON des requêtes][5] pour apprendre à élaborer le `REQUEST_SCHEMA`. |
 | `autoscale`   | Booléen          | non       | Indique si la mise à l'échelle automatique doit être utilisée ou non.                                                                                                                           |
 | `custom_unit` | chaîne           | non       | Affichez une unité au choix sur le widget.                                                                                                                 |
 | `precision`   | nombre entier          | non       | Nombre de décimales à afficher. Si vous ne définissez pas ce paramètre, le widget utilise une valeur brute.                                                                                   |
@@ -93,15 +93,16 @@ Propriétés supplémentaires autorisées dans l'objet `request` :
 
 | Paramètre             | Type   | Obligatoire | Description                                                                                                                                                     |
 |-----------------------|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `conditional_formats` | objet | non       | Options de commande de mise en forme conditionnelle. Consultez la [documentation relative au schéma JSON de format conditionnel][5] pour apprendre à élaborer le `CONDITIONAL_FORMATS_SCHEMA`. |
+| `conditional_formats` | objet | non       | Options de commande de mise en forme conditionnelle. Consultez la [documentation relative au schéma JSON de mise en forme conditionnelle][6] pour apprendre à élaborer le `CONDITIONAL_FORMATS_SCHEMA`. |
 | `aggregator`          | enum   | non       | Agrégateur utilisé pour la requête. Valeurs disponibles : `avg`, `last`, `max`, `min` ou `sum`.                                                                   |
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/explorer/search/#search-syntax
+[1]: /fr/dashboards/querying/#overview
 [2]: /fr/tracing/app_analytics/search/#search-bar
-[3]: /fr/dashboards/graphing_json/widget_json
-[4]: /fr/dashboards/graphing_json/request_json
-[5]: /fr/dashboards/graphing_json/widget_json/#conditional-format-schema
+[3]: /fr/logs/search_syntax/
+[4]: /fr/dashboards/graphing_json/widget_json/
+[5]: /fr/dashboards/graphing_json/request_json/
+[6]: /fr/dashboards/graphing_json/widget_json/#conditional-format-schema

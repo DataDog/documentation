@@ -60,7 +60,7 @@ Here's an example of one such widget (although in this example, the check's name
 
 {{< img src="developers/faq/check_status_editor.png" alt="check_status_editor"  >}}
 
-[1]: /integrations/webhooks
+[1]: /integrations/webhooks/
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
-[3]: /api
-[4]: /dashboards/screenboard
+[3]: /api/
+[4]: /dashboards/screenboard/

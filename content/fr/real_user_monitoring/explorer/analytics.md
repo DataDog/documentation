@@ -6,7 +6,7 @@ aliases:
   - /fr/real_user_monitoring/rum_analytics
   - /fr/real_user_monitoring/analytics
 further_reading:
-  - link: /real_user_monitoring/explorer/search
+  - link: /real_user_monitoring/explorer/search/
     tag: Documentation
     text: Explorez vos vues dans Datadog
 ---
@@ -29,7 +29,7 @@ Créez une requête pour contrôler les données affichées dans votre analyse R
 
 1. Choisissez une [mesure][1] ou une [facette][2] à représenter graphiquement. Les [mesures][1] vous permettent de choisir une fonction d'agrégation, tandis que les [facettes][2] affichent le nombre de valeurs uniques.
 
-    {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="Sélectionner une mesure" style="width:50%;">}}
+    {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="Sélectionner une mesure"  style="width:50%;">}}
 2. Sélectionnez la fonction d'agrégation pour la [mesure][1] que vous souhaitez représenter :
 
     {{< img src="real_user_monitoring/explorer/analytics/aggregation.png" alt="fonction d'agrégation pour l'analyse RUM Analytics" style="width:50%;">}}

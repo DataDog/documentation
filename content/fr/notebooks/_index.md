@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /fr/graphing/notebooks/
 further_reading:
-  - link: /dashboards/screenboard
+  - link: /dashboards/screenboard/
     tag: Documentation
     text: Créer un screenboard
-  - link: /dashboards/timeboard
+  - link: /dashboards/timeboard/
     tag: Documentation
     text: Créer un timeboard
 ---
@@ -107,8 +107,8 @@ Pour supprimer un notebook depuis son éditeur ou à partir de la page Notebook 
 
 [1]: https://app.datadoghq.com/notebook/list
 [2]: https://app.datadoghq.com/notebook
-[3]: /fr/dashboards/widgets/timeseries
-[4]: /fr/dashboards/widgets/heat_map
-[5]: /fr/dashboards/widgets/distribution
-[6]: /fr/dashboards/widgets/log_stream
+[3]: /fr/dashboards/widgets/timeseries/
+[4]: /fr/dashboards/widgets/heat_map/
+[5]: /fr/dashboards/widgets/distribution/
+[6]: /fr/dashboards/widgets/log_stream/
 [7]: /fr/dashboards/widgets/#full-screen

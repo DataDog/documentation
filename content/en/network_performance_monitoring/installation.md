@@ -37,7 +37,9 @@ The following provisioning systems are supported:
 
 ## Setup
 
-To enable network performance monitoring, configure it in your [Agent's main configuration file][6] based on your system setup:
+To enable Network Performance Monitoring, configure it in your [Agent's main configuration file][6] based on your system setup. 
+
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommend to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
 
 {{< tabs >}}
 {{% tab "Agent" %}}
@@ -79,9 +81,47 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
     **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
+### SELinux-enabled systems
+
+On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.
+
+The Datadog Agent RPM package for CentOS-based systems bundles [an SELinux policy][3] to grant these permissions to the system-probe binary.
+
+If you need to use Network Performance Monitoring on other systems with SELinux enabled, do the following:
+
+1. Modify the base [SELinux policy][3] to match your SELinux configuration.
+    Depending on your system, some types or attributes may not exist (or have different names).
+
+2. Compile the policy into a module; assuming your policy file is named `system_probe_policy.te`:
+
+    ```shell
+    checkmodule -M -m -o system_probe_policy.mod system_probe_policy.te
+    semodule_package -o system_probe_policy.pp -m system_probe_policy.mod
+    ```
+
+3. Apply the module to your SELinux system:
+
+    ```shell
+    semodule -v -i system_probe_policy.pp
+    ```
+
+4. Change the system-probe binary type to use the one defined in the policy; assuming your Agent installation directory is `system_probe_policy.te`:
+
+    ```shell
+    semanage fcontext -a -t system_probe_t /opt/datadog-agent/embedded/bin/system-probe
+    restorecon -v /opt/datadog-agent/embedded/bin/system-probe
+    ```
+
+5. [Restart the Agent][2]
+
+**Note**: these instructions require to have some SELinux utilities installed on the system (`checkmodule`, `semodule`, `semodule_package`, `semanage` and `restorecon`) that are available on most standard distributions (Ubuntu, Debian, RHEL, CentOS, SUSE). Check your distribution for details on how to install them.
+
+If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
+
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
 [2]: /agent/guide/agent-commands/#restart-the-agent
+[3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -215,7 +255,7 @@ If you already have the [Agent running with a manifest][3]:
 
 [1]: /resources/yaml/datadog-agent-npm.yaml
 [2]: https://app.datadoghq.com/account/settings#api
-[3]: /agent/kubernetes
+[3]: /agent/kubernetes/
 {{% /tab %}}
 {{% tab "Docker" %}}
 

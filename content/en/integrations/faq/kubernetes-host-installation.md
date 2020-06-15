@@ -54,17 +54,16 @@ logs_config:
 
 [Restart the Agent][6].
 
-Use [Autodiscovery with Pod Annotations][7] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
+Use [Autodiscovery with Pod Annotations][4] to configure log collection to add multiline processing rules, or to customize the `source` and `service` attributes.
 
 ## Further Reading
 
-To get a better idea of how (or why) to integrate your Kubernetes service, see the related series of [Datadog blog posts][8].
+To get a better idea of how (or why) to integrate your Kubernetes service, see the related series of [Datadog blog posts][7].
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[3]: /agent
-[4]: /agent/kubernetes/integrations
+[3]: /agent/
+[4]: /agent/kubernetes/integrations/
 [5]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: /agent/kubernetes/integrations/
-[8]: https://www.datadoghq.com/blog/monitoring-kubernetes-era
+[7]: https://www.datadoghq.com/blog/monitoring-kubernetes-era

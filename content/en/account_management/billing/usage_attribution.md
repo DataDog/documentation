@@ -60,7 +60,7 @@ This section provides daily reports at an hourly granularity to dig into timefra
 
 {{< img src="account_management/billing/advanced-usage-reporting-04.png" alt="Download data" >}}
 
-Data can also be pulled using the tool's public API. (See the [API endpoint documentation][2].
+Data can also be pulled using the tool's public API. (See the [API endpoint documentation][1].
 
 ### Interpreting the data
 
@@ -76,11 +76,11 @@ The table below shows a sample daily report for Custom Metrics usage two tags: `
 * An `<empty>` value means the resource was tagged with the respective tag but did not have a value.
 * No value means the resource was not tagged with that particular tag.
 * | (pipe) separated values (for example, `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
-* A valid tag value (see the [Defining Tags documentation][1]) refers to the actual value of the respective tag.
+* A valid tag value (see the [Defining Tags documentation][2]) refers to the actual value of the respective tag.
 
 #### Further Data Analysis
 
 When using multiple tags, both the Daily and Monthly Usage Attribution reports contain data for all possible combinations of those tags, and are suitable to use as base datasets for further data analysis tasks. For instance, you can use grouping or pivoting to produce views focused on a subset of the tags, or to perform aggregations across custom date ranges.
 
-[1]: https://docs.datadoghq.com/tagging/#defining-tags
-[2]: https://docs.datadoghq.com/api/#get-daily-usage-attribution-available-files
+[1]: https://docs.datadoghq.com/api/#get-daily-usage-attribution-available-files
+[2]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags

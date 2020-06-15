@@ -17,7 +17,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 * A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Infrastructure service. Datadog charges monthly based on the fractional hours of monitored containers.
 * A [**custom metric**][2] is a single, unique combination of a metric name, host ID and any tags. Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour.
 * A **device** is a physical sensor comprising one or more single-board computers in a frame. Datadog records and charges for the number of devices and hosts you are concurrently monitoring in the Datadog Infrastructure service.
-* A **cloud function** is application code setup to execute on a cloud platform’s serverless compute service in response to defined events or actions (for example, AWS Lambda, Google Cloud Function, and Azure Function). The Datadog Infrastructure service records the number of functions executed or invoked one or more times each hour. Datadog charges based on the average number of functions across all hours in a month.
+* A **serverless function** is application code setup to execute on a cloud platform’s serverless compute service in response to defined events or actions (for example, AWS Lambda, Google Cloud Function, and Azure Function). The Datadog Infrastructure service records the number of functions executed or invoked one or more times each hour. Datadog charges based on the average number of functions across all hours in a month.
 * An AWS **Fargate task** is a collection of containers setup through AWS’s ECS container orchestration platform. Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored.
 
 ## APM
@@ -60,7 +60,7 @@ For technical questions, contact [Datadog support][3].
 Contact [Sales][4] or your [Customer Success][5] Manager to discuss hourly pricing or billing for your account.
 
 [1]: https://www.datadoghq.com/pricing
-[2]: /developers/metrics/custom_metrics
-[3]: /help
+[2]: /developers/metrics/custom_metrics/
+[3]: /help/
 [4]: mailto:sales@datadoghq.com
 [5]: mailto:success@datadoghq.com

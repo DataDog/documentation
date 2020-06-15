@@ -32,7 +32,9 @@ To check which transport is used by the Agent, run the [Agent status command][1]
 
 {{< img src="agent/logs/agent-status.png" alt="Agent status"  style="width:70%;">}}
 
-**Note**: For older Agent versions, TCP transport is used by default. Datadog strongly recommends you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+. 
+**Notes**:
+* For older Agent versions, TCP transport is used by default. Datadog strongly recommends you to enforce HTTPS transport if you are running v6.14+/v7.14+ and HTTPS compression if you are running v6.16+/v7.16+. 
+* Always enforce a specific transport (either TCP or HTTPS) when using a proxy to forwards logs to Datadog
 
 ## Enforce a specific transport
 
@@ -55,7 +57,7 @@ To send logs with environment variables, configure the following:
 * `DD_LOGS_CONFIG_USE_HTTP=true`
 
 
-[1]: /agent/guide/agent-configuration-files
+[1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
 {{% tab "TCP" %}}
 
@@ -73,13 +75,13 @@ To send logs with environment variables, configure the following:
 
 By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication (on port `10516` for Datadog US site and port `443`for Datadog EU site).
 
-[1]: /agent/guide/agent-configuration-files
 
 
+[1]: /agent/guide/agent-configuration-files/
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Setting up a [SOCKS5 proxy][4] server enforces TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
+**Note**: Setting up a [SOCKS5 proxy][2] server enforces TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
 
 ## HTTPS Transport
 
@@ -97,7 +99,7 @@ Using HTTP, the Agent sends log batches with the following limits:
 
 The `compression_level` parameter (or `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) accepts values from `0` (no compression) to `9` (maximum compression but higher resource usage). The default value is `6`.
 
-See the [Datadog Agent overhead section][2] for more information about Agent resource usage when compression is enabled.
+See the [Datadog Agent overhead section][3] for more information about Agent resource usage when compression is enabled.
 
 For Agent versions prior to 6.19 / 7.19, you need to enforce compression by updating the Agent's [main configuration file][1] (`datadog.yaml`) with:
 
@@ -124,10 +126,10 @@ Or use the `DD_LOGS_CONFIG_BATCH_WAIT=2` environment variable. The unit is in se
 
 ### HTTPS Proxy configuration
 
-When logs are sent through HTTPS, use the same [set of proxy settings][3] as the other data types to send logs through a web proxy.
+When logs are sent through HTTPS, use the same [set of proxy settings][4] as the other data types to send logs through a web proxy.
 
 
-[1]: /agent/guide/agent-configuration-files
-[2]: /agent/basic_agent_usage/#agent-overhead
-[3]: /agent/proxy
-[4]: /agent/logs/proxy/?tab=socks5
+[1]: /agent/guide/agent-configuration-files/
+[2]: /agent/logs/proxy/?tab=socks5
+[3]: /agent/basic_agent_usage/#agent-overhead
+[4]: /agent/proxy/

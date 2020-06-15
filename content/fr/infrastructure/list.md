@@ -5,13 +5,13 @@ aliases:
   - /fr/hostnames
   - /fr/graphing/infrastructure/list/
 further_reading:
-  - link: /infrastructure/hostmap
+  - link: /infrastructure/hostmap/
     tag: Documentation
     text: Hostmap
-  - link: /infrastructure/livecontainers
+  - link: /infrastructure/livecontainers/
     tag: Documentation
     text: Container map
-  - link: /infrastructure/process
+  - link: /infrastructure/process/
     tag: Documentation
     text: Surveillance des Live Processes
 ---
@@ -71,10 +71,10 @@ L'exportation au format JSON permet également d'obtenir la liste des instances 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/faq/how-datadog-agent-determines-the-hostname
-[2]: /fr/tagging
-[3]: /fr/logs
-[4]: /fr/api/?lang=bash#search-hosts
-[5]: /fr/developers/guide/query-the-infrastructure-list-via-the-api
+[1]: /fr/agent/faq/how-datadog-agent-determines-the-hostname/
+[2]: /fr/getting_started/tagging/
+[3]: /fr/logs/
+[4]: /fr/api/v1/hosts/#get-the-total-number-of-active-hosts
+[5]: /fr/developers/guide/query-the-infrastructure-list-via-the-api/
 [6]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [7]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38

@@ -211,7 +211,7 @@ Utilisez les facettes pour filtrer vos traces. La barre de recherche et l'URL s'
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/integrations
-[2]: /fr/tagging/#tags-best-practices
+[2]: /fr/getting_started/tagging/#tags-best-practices
 [3]: /fr/dashboards/guide/custom_time_frames
 [4]: /fr/tracing/visualization/#services
 [5]: /fr/tracing/guide/adding_metadata_to_spans/

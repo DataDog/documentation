@@ -7,10 +7,10 @@ aliases:
   - /ja/developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /ja/developers/faq/dog-statsd-sample-rate-parameter-explained
 further_reading:
-  - link: developers/dogstatsd
+  - link: /developers/dogstatsd/
     tag: ドキュメント
     text: DogStatsD 入門
-  - link: developers/metrics/types
+  - link: /developers/metrics/types/
     tag: ドキュメント
     text: Datadog メトリクスタイプ
 ---
@@ -121,7 +121,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="count_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -129,7 +129,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev"});
             Statsd.decrementCounter("example_metric.decrement", new String[]{"environment:dev"});
@@ -159,16 +163,18 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev"});
-            DogStatsd.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
-            DogStatsd.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(random.Next(100000));
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
+                dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
+                dogStatsdService.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(random.Next(100000));
+            }
         }
     }
 }
@@ -298,7 +304,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="gauge_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -306,7 +312,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
@@ -334,14 +344,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(100000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(100000);
+            }
         }
     }
 }
@@ -481,14 +493,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Set("example_metric.set", i, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(random.Next(100000));
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Set("example_metric.set", i, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(random.Next(100000));
+            }
         }
     }
 }
@@ -616,7 +630,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="histogram_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -624,7 +638,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
@@ -652,14 +670,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(2000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(2000);
+            }
         }
     }
 }
@@ -895,7 +915,7 @@ func main() {
 以下の Java コードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。
 
 {{< code-block lang="java" filename="distribution_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -903,7 +923,11 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
             Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
@@ -931,14 +955,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(2000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(2000);
+            }
         }
     }
 }
@@ -1026,7 +1052,7 @@ Statsd.incrementCounter("example_metric.increment", sampleRate=0.5);
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("example_metric.increment", sampleRate: 0.5);
+dogStatsdService.Increment("example_metric.increment", sampleRate: 0.5);
 ```
 
 {{% /tab %}}
@@ -1080,7 +1106,7 @@ Statsd.incrementCounter("example_metric.increment", new String[]{"environment:de
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
+dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
 ```
 
 {{% /tab %}}
@@ -1111,12 +1137,12 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/dogstatsd
+[1]: /ja/developers/dogstatsd/
 [2]: /ja/developers/metrics/types/?tab=count#definition
 [3]: /ja/dashboards/functions/arithmetic/#cumulative-sum
 [4]: /ja/dashboards/functions/arithmetic/#integral
 [5]: /ja/developers/metrics/types/?tab=gauge#definition
 [6]: /ja/developers/metrics/types/?tab=histogram#definition
 [7]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[8]: /ja/metrics/distributions
+[8]: /ja/metrics/distributions/
 [9]: /ja/developers/metrics/types/?tab=distribution#definition

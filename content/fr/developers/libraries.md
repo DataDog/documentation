@@ -161,9 +161,9 @@ Un [transport][60] Winston/Datadog.
 
 Si vous avez rédigé une bibliothèque Datadog et que vous souhaitez l'ajouter à cette page, contactez-nous par e-mail à l'adresse [code@datadoghq.com][63].
 
-[1]: /fr/developers/metrics/dogstatsd_metrics_submission
-[2]: /fr/tracing
-[3]: /fr/api
+[1]: /fr/developers/metrics/dogstatsd_metrics_submission/
+[2]: /fr/tracing/
+[3]: /fr/api/
 [4]: https://github.com/brightcove/dog-watcher
 [5]: https://www.brightcove.com
 [6]: https://github.com/Shopify/doggy
@@ -194,7 +194,7 @@ Si vous avez rédigé une bibliothèque Datadog et que vous souhaitez l'ajouter 
 [31]: https://github.com/wimactel
 [32]: https://github.com/bithauschile/datadog-ga
 [33]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog
-[34]: /fr/logs/guide/collect-heroku-logs
+[34]: /fr/logs/guide/collect-heroku-logs/
 [35]: https://github.com/ozinc/heroku-datadog-drain
 [36]: https://corp.oz.com
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
@@ -205,7 +205,7 @@ Si vous avez rédigé une bibliothèque Datadog et que vous souhaitez l'ajouter 
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
 [43]: https://github.com/brigade/logstash-output-dogstatsd
 [44]: https://docs.moogsoft.com/display/060102/Datadog+Solution+Pak
-[45]: /fr/developers/metrics/custom_metrics
+[45]: /fr/developers/metrics/custom_metrics/
 [46]: https://github.com/simplifi/ngx_lua_datadog
 [47]: https://github.com/mediba-system/lua-resty-dogstatsd
 [48]: http://www.mediba.jp

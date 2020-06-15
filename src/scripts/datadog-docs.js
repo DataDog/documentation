@@ -1,11 +1,76 @@
 import Stickyfill from 'stickyfilljs';
 import algoliasearch from 'algoliasearch';
+import Choices from 'choices.js';
 
 import { initializeIntegrations } from './components/integrations';
 import { updateTOC, buildTOCMap, buildAPIMap, onScroll, closeMobileTOC, } from './components/table-of-contents';
 import codeTabs from './components/codetabs';
 import datadogLogs from './components/dd-browser-logs-rum';
 import { moveToAnchor } from './helpers/moveToAnchor';
+import { redirectToRegion } from './region-redirects';
+import configDocs from './config/config-docs';
+
+const { env } = document.documentElement.dataset;
+const { img_url } = configDocs[env];
+
+// custom region and API version selector dropdown
+const versionSelect = document.querySelector('.js-api-version-select');
+const regionSelect = document.querySelector('.js-region-selector');
+
+const regionChoiceOptions = {
+    searchEnabled: false,
+    placeholder: false,
+    shouldSort: false,
+    itemSelectText: '',
+    renderSelectedChoices: false,
+    callbackOnCreateTemplates: function (template){
+        return {
+            item: (classNames, data) => {
+              return template(`
+                <div class="${classNames.item} ${
+                data.highlighted
+                  ? classNames.highlightedState
+                  : classNames.itemSelectable
+              } ${
+                data.placeholder ? classNames.placeholder : ''
+              }" data-item data-id="${data.id}" data-value="${data.value}" ${
+                data.active ? 'aria-selected="true"' : ''
+              } ${data.disabled ? 'aria-disabled="true"' : ''}>
+                   ${data.label}<img alt="${data.value} region selector icon" src="${img_url}images/icons/region-flag-${data.value}.png">
+                </div>
+              `);
+            },
+            choice: (classNames, data) => {
+              return template(`
+                <div class="${classNames.item} ${classNames.itemChoice} ${
+                data.disabled ? classNames.itemDisabled : classNames.itemSelectable
+              }" data-select-text="${this.config.itemSelectText}" data-choice ${
+                data.disabled
+                  ? 'data-choice-disabled aria-disabled="true"'
+                  : 'data-choice-selectable'
+              } data-id="${data.id}" data-value="${data.value}" ${
+                data.groupId > 0 ? 'role="treeitem"' : 'role="option"'
+              }>
+                   ${data.label}
+                </div>
+              `);
+            },
+          };
+    }
+}
+
+const versionChoiceOptions = {
+    searchEnabled: false,
+    placeholder: false,
+    itemSelectText: '',
+    renderSelectedChoices: false,
+}
+if (versionSelect) {
+    const choices = new Choices(versionSelect, versionChoiceOptions);
+}
+if (regionSelect) {
+    const regionChoices = new Choices(regionSelect, regionChoiceOptions);
+}
 
 // Setup for large screen ToC
 
@@ -34,8 +99,6 @@ gtag('config', gaTag);
 $(document).ready(function () {
     window.history.replaceState({}, '', window.location.href);
 
-    const sidenavHTML = $('.container .sidenav-nav').clone();
-    $('header .sidenav-nav').html(sidenavHTML);
 
     // ie
     document.createElement('picture');
@@ -494,75 +557,42 @@ $(document).ready(function () {
     }
 
     // docs on mobile dropdown trigger move to anchor
-    $('.api-nav .dropdown-menu .dropdown-item').on('click', function (e) {
-        const href = $(this).attr('href');
-        if (href.substr(0, 1) === '#') {
-            moveToAnchor(href.substr(1), false);
-            return false;
-        }
-    });
+    // $('.api-nav .dropdown-menu .dropdown-item').on('click', function(e) {
+    //     const href = $(this).attr('href');
+    //     if(href.substr(0, 1) === '#') {
+    //         moveToAnchor(href.substr(1), false);
+    //         return false;
+    //     }
+    // });
 
-    $('.sidenav-api a').on('click', function (e) {
-        const href = $(this).attr('href');
-        if (href.substr(0, 1) === '#') {
-            moveToAnchor(href.substr(1), false);
-            return false;
-        }
-    });
-
-    // api dropdown select
-    $('.api-select').on('change', function (e) {
-        const href = $(this).val();
-        if (href.substr(0, 1) === '#') {
-            moveToAnchor(href.substr(1), false);
-            return false;
-        }
-    });
+    // $('.sidenav-api a').on('click', function(e) {
+    //     const href = $(this).attr('href');
+    //     if(href.substr(0, 1) === '#') {
+    //         moveToAnchor(href.substr(1), false);
+    //         return false;
+    //     }
+    // });
 
     const searchParam = getParameterByName('s');
     if (searchParam) {
         $('.sidenav-search input[name="s"]').val(searchParam);
     }
 
-    if ($('.sidenav-api').length) {
-        $(window)
-            .on('resize scroll', function (e) {
-                onScroll();
-            })
-            .trigger('scroll');
-
-        $('.sidenav-api ul').each(function () {
-            if ($(this).children().length === 0) {
-                $(this).remove();
-            }
+    if (!document.body.classList.contains('api')){
+        $(window).on('resize scroll', function(e) {
+            const header_h = $('body > header').height();
+            const footer_h = $('body > footer').height();
+            const padding = 200;
+            $('.sidenav-nav').css(
+                'maxHeight',
+                document.documentElement.clientHeight - header_h - padding
+            );
         });
-
-        buildAPIMap();
-        onScroll();
     }
-
-    // $('.side').addClass('side-condensed');
-    $(window).on('resize scroll', function (e) {
-        const header_h = $('body > header').height();
-        const footer_h = $('body > footer').height();
-        const padding = 105;
-        $('.sidenav-nav').css(
-            'maxHeight',
-            document.documentElement.clientHeight - header_h - padding
-        );
-    });
+    
 
     updateMainContentAnchors();
 
-    $('.api-content h2[id]').each(function () {
-        const id = $(this).attr('id');
-        $(this)
-            .wrapInner(`<a href="#${id}"></a>`)
-            .on('click', function (e) {
-                moveToAnchor(id, false);
-                return false;
-            });
-    });
 
     // sticky polyfill trigger
     const elements = document.querySelectorAll('.sticky');
@@ -602,60 +632,54 @@ $(document).ready(function () {
     if ($('.api').length) {
         // When language buttons are clicked, show all the code snippets
         // from that language.
-        const code_blocks = $('.code-block');
-        const lang_blocks = $('.lang-specific');
-        const hs = $('h2[id]');
-        $('.lang-btn').on('click', function (e) {
-            const el = $(this);
+        // const code_blocks = $('.code-block');
+        // const lang_blocks = $('.lang-specific');
+        // const hs = $('h2[id]');
+        // $('.lang-btn').on('click', function (e) {
+        //     const el = $(this);
 
-            // Find the element currently in the view port
-            let scrollElement;
-            hs.each(function () {
-                if ($(this).offset().top >= window.scrollY) {
-                    scrollElement = $(this);
-                    return false;
-                }
-            });
+        //     // Find the element currently in the view port
+        //     let scrollElement;
+        //     hs.each(function () {
+        //         if ($(this).offset().top >= window.scrollY) {
+        //             scrollElement = $(this);
+        //             return false;
+        //         }
+        //     });
 
-            // Show this language's code blocks and language-specific elements
-            const lang = el.data('lang');
-            code_blocks.hide();
-            $(`.code-block-${lang}`).show();
-            lang_blocks.hide();
-            $(`.lang-specific-${lang}`).show();
+        //     // Show this language's code blocks and language-specific elements
+        //     // const lang = el.data('lang');
+        //     // code_blocks.hide();
+        //     // $(`.code-block-${  lang}`).show();
+        //     // lang_blocks.hide();
+        //     // $(`.lang-specific-${  lang}`).show();
 
-            // Highlight the active button.
-            $('.lang-btn').removeClass('active');
-            el.addClass('active');
+        //     // // Highlight the active button.
+        //     // $('.lang-btn').removeClass('active');
+        //     // el.addClass('active');
 
-            // Scroll to the element that was in the viewport (ie retain location).
-            if (scrollElement) {
-                const id = scrollElement.attr('id');
-                moveToAnchor(id, false);
-            }
+        //     // Scroll to the element that was in the viewport (ie retain location).
+        //     if(scrollElement) {
+        //         const id = scrollElement.attr('id');
+        //         moveToAnchor(id, false);
+        //     }
 
-            // Add the language selection to the current URL.
-            if (history.pushState) {
-                const url = window.location.href
-                    .replace(window.location.hash, '')
-                    .replace(window.location.search, '');
-                history.pushState(
-                    null,
-                    null,
-                    `${url}?lang=${lang}${window.location.hash}`
-                );
-            }
+        //     // Add the language selection to the current URL.
+        //     if (history.pushState) {
+        //         const url = window.location.href.replace(window.location.hash, '').replace(window.location.search, '');
+        //         history.pushState(null, null, `${url  }?lang=${  lang  }${window.location.hash}`)
+        //     }
 
-            return false;
-        });
-    } else if (window.location.hash) {
-        moveToAnchor(window.location.hash.substr(1), true);
+        //     return false;
+        // });
+    } else if(window.location.hash) {
+        // moveToAnchor(window.location.hash.substr(1), true);
     }
 
     // For sidenav links with anchor tag refs
-    $(".sidenav-nav a[href^='#']").click(function () {
-        moveToAnchor($(this).attr('href').substr(1), true);
-    });
+    // $(".sidenav-nav a[href^='#']").click(function(){
+    //     moveToAnchor($(this).attr('href').substr(1), true);
+    // });
 
     // ------------- TODO: move TOC js back to own file when webpack migration complete and can import js modules
 
@@ -669,27 +693,9 @@ $(document).ready(function () {
 
 function updateMainContentAnchors() {
     // make header tags with ids and make clickable as anchors
-    $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(
-        function () {
-            const id = $(this).attr('id');
-            $(this)
-                .wrapInner(`<a href="#${id}"></a>`)
-                .on('click', function (e) {
-                    e.preventDefault();
-                    moveToAnchor(id);
-                    return false;
-                });
-        }
-    );
-
-    $(".main a[href^='#']").click(function (e) {
-        if (!e.target.parentElement.id) {
-            e.preventDefault();
-            const id = e.target.hash.split('#').join('');
-            if (id) {
-                moveToAnchor(id);
-            }
-        }
+    $('.main h2[id], .main h3[id], .main h4[id], .main h5[id]').each(function() {
+        const id = $(this).attr('id');
+        $(this).wrapInner(`<a href="#${id}"></a>`);
     });
 }
 
@@ -707,9 +713,10 @@ function getParameterByName(name, url) {
 function hasParentLi(el) {
     const els = [];
     while (el) {
-        if (el.classList) {
-            if (el.classList.contains('sidenav-nav')) {
-                break;
+        if(el.classList){
+
+            if(el.classList.contains('sidenav-nav-main')){
+            break;
             }
 
             // Add open class to li if the li has a child ul
@@ -738,9 +745,7 @@ function hasParentLi(el) {
 function getPathElement() {
     const domain = window.location.origin;
     let path = window.location.pathname;
-    const activeMenus = document.querySelectorAll(
-        '.side .sidenav-nav .active, header .sidenav-nav .active'
-    );
+    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
 
     for (let i = 0; i < activeMenus.length; i++) {
         activeMenus[i].classList.remove('active');
@@ -873,15 +878,11 @@ function getPathElement() {
 }
 
 // remove open class from li elements and active class from a elements
-function closeNav() {
-    const activeMenus = document.querySelectorAll(
-        '.side .sidenav-nav .active, header .sidenav-nav .active'
-    );
-    const openMenus = document.querySelectorAll(
-        '.side .sidenav-nav .open, header .sidenav-nav .open'
-    );
+function closeNav(){
+    const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
+    const openMenus = document.querySelectorAll('.side .sidenav-nav-main .open, header .sidenav-nav-main .open');
 
-    for (let i = 0; i < activeMenus.length; i++) {
+    for(let i = 0; i < activeMenus.length; i++){
         activeMenus[i].classList.remove('active');
     }
 
@@ -961,7 +962,7 @@ function loadPage(newUrl) {
             }
 
             const newDocument = httpRequest.responseXML;
-
+            
             if (newDocument === null) {
                 return;
             }
@@ -1035,8 +1036,11 @@ function loadPage(newUrl) {
 
             const start = window.performance.now();
 
+            // check if loaded page has inline JS. if so, we want to return as script will not execute
+            const hasScript = newContent.getElementsByTagName('script').length;
+
             // if there is error finding the element, reload page at requested url
-            if (mainContent.parentElement) {
+            if (mainContent.parentElement && !hasScript) {
                 mainContent.parentElement.replaceChild(newContent, mainContent);
                 mainContent = newContent;
 
@@ -1081,6 +1085,11 @@ function loadPage(newUrl) {
             // sets query params if code tabs are present
 
             codeTabs();
+
+            const regionSelector = document.querySelector('.js-region-selector');
+            if (regionSelector) {
+                redirectToRegion(regionSelector.value);
+            }
 
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
@@ -1131,8 +1140,8 @@ function reloadWistiaVidScripts(vidId) {
     }
 }
 
-const sideNav = document.querySelector('.side .sidenav-nav');
-const mobileNav = document.querySelector('header .sidenav-nav');
+const sideNav = document.querySelector('.side .sidenav-nav-main');
+const mobileNav = document.querySelector('header .sidenav-nav-main');
 
 if (sideNav) {
     sideNav.addEventListener('click', navClickEventHandler);
@@ -1182,7 +1191,7 @@ function navClickEventHandler(event) {
     } else if (loadViaAjax(event.target)) {
         loadPage(newUrl);
         event.preventDefault();
-        history.pushState({}, '' /* title */, newUrl);
+        history.pushState({}, '', newUrl);
         updateSidebar(event);
     } else {
         window.location.href = newUrl;

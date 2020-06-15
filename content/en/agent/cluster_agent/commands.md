@@ -8,13 +8,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/"
   tag: "Blog"
   text: "Autoscale your Kubernetes workloads with any Datadog metric"
-- link: "/agent/cluster_agent/clusterchecks"
+- link: "/agent/cluster_agent/clusterchecks/"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
-- link: "agent/kubernetes/daemonset_setup"
+- link: "/agent/kubernetes/daemonset_setup/"
   tag: "Documentation"
   text: "Kubernetes DaemonSet Setup"
-- link: "/agent/cluster_agent/troubleshooting"
+- link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
@@ -37,6 +37,8 @@ The following environment variables are supported:
 |-----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`                                  | Your [Datadog API key][1].                                                                                                                                             |
 | `DD_HOSTNAME`                                 | Hostname to use for the Datadog Cluster Agent.                                                                                                                         |
+| `DD_ENV`                                      | Sets the `env` tag for data emitted by the Cluster Agent. Recommended only if the Cluster Agent monitors services within a single environment.
+                                                                                                                        |
 | `DD_CLUSTER_AGENT_CMD_PORT`                   | Port for the Datadog Cluster Agent to serve. Defaults to `5005`.                                                                                                       |
 | `DD_USE_METADATA_MAPPER`                      | Enables cluster level metadata mapping. Defaults to `true`.                                                                                                            |
 | `DD_COLLECT_KUBERNETES_EVENTS`                | Configures the Agent to collect Kubernetes events. Defaults to `false`. See the [Event collection documentation][2] for more details.                                  |
@@ -67,5 +69,5 @@ The following environment variables are supported:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /agent/cluster_agent/event_collection
+[2]: /agent/cluster_agent/event_collection/
 [3]: https://golang.org/pkg/expvar

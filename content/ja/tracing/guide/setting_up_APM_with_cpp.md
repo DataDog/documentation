@@ -2,13 +2,13 @@
 title: C++ による APM の設定
 kind: ガイド
 further_reading:
-  - link: /tracing/setup/cpp
+  - link: /tracing/setup/cpp/
     tag: ドキュメント
     text: C++ によるトレースアプリケーションの詳細
 ---
 ## 概要
 
-このガイドは、[C++ APM ドキュメント][1]の内容を拡張したものです。C++ による簡単な APM アプリを、トラブルシューティングの目的で VM にセットアップする方法について、手順を追って説明します。これらがすべてセットアップされた、すぐに使えるボックスを、Datadog の [sandbox リポジトリ][2]から直接スピンアップすることもできます。
+このガイドは、[C++ APM ドキュメント][1]の内容を拡張したものです。C++ による簡単な APM アプリを、トラブルシューティングの目的で VM にセットアップする方法について、手順を追って説明します。
 
 ## ボックスをセットアップする
 
@@ -22,7 +22,7 @@ vagrant up
 vagrant ssh
 ```
 
-次に、[UI の指示][3]に従って Agent をインストールします。
+次に、[UI の指示][2]に従って Agent をインストールします。
 
 ### C++ の準備
 
@@ -165,5 +165,4 @@ LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/setup/cpp/#compile-against-dd-opentracing-cpp
-[2]: https://github.com/DataDog/sandbox
-[3]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[2]: https://app.datadoghq.com/account/settings#agent/ubuntu

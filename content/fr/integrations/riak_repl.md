@@ -95,15 +95,15 @@ riak_repl n'inclut aucun événement.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
-[1]: https://docs.datadoghq.com/fr/integrations/riak_repl
-[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent
+[1]: https://docs.datadoghq.com/fr/integrations/riak_repl/
+[2]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/
 [3]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=agentpriorto68
 [4]: https://docs.datadoghq.com/fr/agent/guide/community-integrations-installation-with-docker-agent/?tab=docker
 [5]: https://docs.datadoghq.com/fr/developers/integrations/new_check_howto/#developer-toolkit
 [6]: https://app.datadoghq.com/account/settings#agent
-[7]: https://docs.datadoghq.com/fr/getting_started/integrations
+[7]: https://docs.datadoghq.com/fr/getting_started/integrations/
 [8]: https://github.com/DataDog/integrations-extras/blob/master/riak_repl/datadog_checks/riak_repl/data/conf.yaml.example
 [9]: https://docs.datadoghq.com/fr/agent/faq/agent-commands/#start-stop-restart-the-agent
 [10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#service-status
 [11]: https://github.com/DataDog/integrations-extras/blob/master/riak_repl/metadata.csv
-[12]: https://docs.datadoghq.com/fr/help
+[12]: https://docs.datadoghq.com/fr/help/

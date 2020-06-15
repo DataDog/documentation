@@ -69,4 +69,4 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /fr/agent/guide/agent-commands/#restart-the-agent
-[4]: /fr/help
+[4]: /fr/help/

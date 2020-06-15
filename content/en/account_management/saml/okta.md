@@ -4,10 +4,10 @@ kind: documentation
 aliases:
   - /account_management/faq/how-do-i-configure-okta-as-a-saml-idp/
 further_reading:
-- link: "account_management/saml"
+- link: "/account_management/saml/"
   tag: "Documentation"
   text: "Configure SAML for your Datadog account"
-- link: "account_management/multi_organization"
+- link: "/account_management/multi_organization/"
   tag: "Documentation"
   text: "Configuring Teams & Organizations with Multiple Accounts"
 ---
@@ -57,5 +57,5 @@ In the event that you need to upload an `IDP.XML` file to Datadog before being a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/saml/saml_setup
-[2]: /account_management/saml
+[2]: /account_management/saml/
 [3]: https://support.okta.com/help/s/article/How-do-we-download-the-IDP-XML-metadata-file-from-a-SAML-Template-App

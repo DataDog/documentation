@@ -8,22 +8,22 @@ aliases:
   - /fr/tracing/visualization/analytics
   - /fr/tracing/trace_search_and_analytics/analytics/
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: Découvrir comment configurer le tracing d'APM avec votre application
-  - link: tracing/visualization/services_list/
+  - link: /tracing/visualization/services_list/
     tag: Documentation
     text: Découvrir la liste des services transmettant des données à Datadog
-  - link: tracing/visualization/service
+  - link: /tracing/visualization/service/
     tag: Documentation
     text: En savoir plus sur les services dans Datadog
-  - link: tracing/visualization/resource
+  - link: /tracing/visualization/resource/
     tag: Documentation
     text: Plonger au cœur des traces et des performances de vos ressources
-  - link: tracing/visualization/trace
+  - link: /tracing/visualization/trace/
     tag: Documentation
     text: Comprendre comment lire une trace Datadog
-  - link: tracing/app_analytics/search
+  - link: /tracing/app_analytics/search/
     tag: Documentation
     text: Recherche globale sur toutes vos traces avec des tags
 ---
@@ -113,8 +113,7 @@ Sélectionnez une section du graphique ou cliquez dessus pour l'agrandir ou cons
 
 Exportez votre analyse App Analytics :
 
-* Pour créer un nouveau [monitor d'APM][8] :
-    (cette fonctionnalité n'est pas encore disponible).
+* Vers un nouveau [monitor d'APM][8]
 * Vers un [timeboard][9] existant :
     cette fonctionnalité est en version bêta : [contactez l'assistance Datadog][10] afin de l'activer pour votre organisation.
 
@@ -132,11 +131,11 @@ Exportez votre analyse [App Analytics][1] depuis la recherche de traces ou crée
 [2]: /fr/tracing/visualization/#apm-event
 [3]: /fr/tracing/visualization/#services
 [4]: /fr/tracing/app_analytics/search/#facets
-[5]: /fr/tagging
+[5]: /fr/getting_started/tagging/
 [6]: /fr/tracing/app_analytics/search/#measures
 [7]: /fr/tracing/visualization/#trace
-[8]: /fr/monitors/monitor_types/apm
-[9]: /fr/dashboards/timeboard
-[10]: /fr/help
-[11]: /fr/dashboards
-[12]: /fr/dashboards/widgets/timeseries
+[8]: /fr/monitors/monitor_types/apm/
+[9]: /fr/dashboards/timeboard/
+[10]: /fr/help/
+[11]: /fr/dashboards/
+[12]: /fr/dashboards/widgets/timeseries/

@@ -77,6 +77,10 @@ Intégrez des événements de systèmes associés pour ajouter plus de contexte 
 | `tag:role:web`              | Affiche tous les événements avec le tag `role:web`.                  |
 | `tags:$<TEMPLATE_VARIABLE>` | Affiche tous les événements provenant de la [template variable][7] sélectionnée. |
 
+Une fois activés, les événements s'affichent en superposition sur vos graphiques avec des barres rouges :
+
+{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Superposition d'événements"  style="width:75%;" >}}
+
 ##### Commandes de l'axe des ordonnées
 
 Les commandes de l'axe des ordonnées sont disponibles via l'interface utilisateur et l'éditeur JSON. Grâce à ces commandes, vous pouvez :
@@ -179,17 +183,17 @@ Propriétés supplémentaires autorisées dans chaque objet `request` :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/timeboard
-[2]: /fr/dashboards/screenboard
-[3]: /fr/dashboards/querying
+[1]: /fr/dashboards/timeboard/
+[2]: /fr/dashboards/screenboard/
+[3]: /fr/dashboards/querying/
 [4]: /fr/tracing/app_analytics/search/#search-bar
-[5]: https://docs.datadoghq.com/fr/logs/explorer/search/#search-syntax
-[6]: /fr/events
-[7]: /fr/dashboards/template_variables
+[5]: /fr/logs/search_syntax/
+[6]: /fr/events/
+[7]: /fr/dashboards/template_variables/
 [8]: /fr/dashboards/widgets/#full-screen
 [9]: https://www.datadoghq.com/blog/full-screen-graphs
-[10]: /fr/dashboards/graphing_json/widget_json
-[11]: /fr/dashboards/graphing_json/request_json
+[10]: /fr/dashboards/graphing_json/widget_json/
+[11]: /fr/dashboards/graphing_json/request_json/
 [12]: /fr/dashboards/graphing_json/widget_json/#y-axis-schema
 [13]: /fr/dashboards/graphing_json/widget_json/#events-schema
 [14]: /fr/dashboards/graphing_json/widget_json/#markers-schema

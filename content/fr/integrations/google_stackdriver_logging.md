@@ -65,8 +65,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform
+[1]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/
 [2]: https://docs.datadoghq.com/fr/integrations/google_cloud_platform/#log-collection
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/google_stackdriver_loggin/google_stackdriver_logging_metadata.csv
 [4]: https://cloud.google.com/logging/docs/logs-based-metrics/#user-defined_metrics_interface
-[5]: https://docs.datadoghq.com/fr/help
+[5]: https://docs.datadoghq.com/fr/help/

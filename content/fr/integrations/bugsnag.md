@@ -69,4 +69,4 @@ L'intégration Bugsnag n'inclut aucun check de service.
 Besoin d'aide ? Contactez [l'assistance Datadog][2].
 
 [1]: https://bugsnag.com
-[2]: https://docs.datadoghq.com/fr/help
+[2]: https://docs.datadoghq.com/fr/help/
