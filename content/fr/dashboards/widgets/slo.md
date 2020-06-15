@@ -77,4 +77,4 @@ Les groupes (ou les monitors agrégés dans le cas des SLO avec plusieurs monito
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo
-[2]: /fr/tagging/using_tags/?tab=assignment#monitors
+[2]: /fr/getting_started/tagging/using_tags/?tab=assignment#monitors

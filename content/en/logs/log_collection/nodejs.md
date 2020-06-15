@@ -106,8 +106,12 @@ Check the content of the `<FILE_NAME>.log` file to see that Winston already took
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
 
-**Connect Logs and Traces**
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM NodeJS logging instructions][3] to automatically add trace and span IDs in your logs.
+## Connect your service across logs and traces
+
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
+`env`, `service`, and `version` to your logs by [following the APM NodeJS instructions][3].
+
+**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
 ## Configure your Datadog Agent
 

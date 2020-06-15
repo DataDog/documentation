@@ -18,53 +18,18 @@ const updateMenu = (apiYaml, apiVersion, languages) => {
 
   languages.forEach((language) => {
     const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/menus.${language}.yaml`, 'utf8'));
-  const newMenuArray = [];
 
-  // need to add hardcoded menu items
-  const mainOverviewSections = [
-    {
-        name: 'Overview',
-        url: (language === 'en' ? `/api/${apiVersion}/` : `/${language}/api/${apiVersion}/`),
-        identifier: `API ${apiVersion.toUpperCase()} overview`,
-        weight: -10
-    },
-    {
-        name: 'Install the Datadog Agent',
-        url: 'install-the-datadog-agent',
-        weight: 1,
-        parent: `API ${apiVersion.toUpperCase()} overview`
-    },
-    {   name: 'Send data to Datadog',
-        url: 'send-data-to-datadog',
-        weight: 2,
-        parent: `API ${apiVersion.toUpperCase()} overview`
-    },
-    {   name: 'Visualize your data',
-        url: 'visualize-your-data',
-        weight: 3,
-        parent: `API ${apiVersion.toUpperCase()} overview`
-    },
-    {   name: 'Manage your account',
-        url: 'manage-your-account',
-        weight: 4,
-        parent: `API ${apiVersion.toUpperCase()} overview`
-    },
-    {
-        name: 'Rate Limiting',
-        url: `rate-limiting`,
-        parent: `API ${apiVersion.toUpperCase()} overview`,
-        weight: 5
-    }
-  ];
+  // filter out auto generated menu items so we just have hardcoded ones
+  const newMenuArray = currentMenuYaml[`api_${apiVersion}`].filter((entry => !entry.hasOwnProperty("generated")));
 
-  newMenuArray.push(...mainOverviewSections);
-
+  // now add back in all the auto generated menu items from specs
   apiYaml.tags.forEach((tag) => {
 
     newMenuArray.push({
       name: tag.name,
       url: (language === 'en' ? `/api/${apiVersion}/${getTagSlug(tag.name)}/` : `/${language}/api/${apiVersion}/${getTagSlug(tag.name)}/` ),
-      identifier: tag.name
+      identifier: tag.name,
+      generated: true
     });
 
     // just get this sections data
@@ -76,7 +41,8 @@ const updateMenu = (apiYaml, apiVersion, languages) => {
         newMenuArray.push({
           name: action.summary,
           parent: tag.name,
-          url: getTagSlug(action.summary)
+          url: getTagSlug(action.summary),
+          generated: true
         });
     });
 

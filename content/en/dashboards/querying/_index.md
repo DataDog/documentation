@@ -132,7 +132,7 @@ View event correlations by using the **Event Overlays** section in the graphing 
 [3]: https://app.datadoghq.com/metric/explorer
 [4]: https://app.datadoghq.com/notebook/list
 [5]: https://app.datadoghq.com/metric/summary
-[6]: /tagging/
+[6]: /getting_started/tagging/
 [7]: /metrics/introduction/
 [8]: /dashboards/functions/rollup/
 [9]: /dashboards/functions/#apply-functions-optional

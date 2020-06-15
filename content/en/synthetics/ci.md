@@ -1,7 +1,7 @@
 ---
 title: Synthetics CI
 kind: documentation
-description: Run Synthetics test in your on-demand in your CI.
+description: Run Synthetics tests on-demand in your CI.
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
   tag: "Blog"

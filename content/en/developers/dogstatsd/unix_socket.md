@@ -34,6 +34,8 @@ Instead of using an `IP:port` pair to establish connections, Unix Domain Sockets
 
 To set up DogStatsD with Unix Domain Socket, enable the DogStatsD server through the `dogstatsd_socket` parameter. Then, configure the [DogStatsD client](#dogstatsd-client-configuration) in your code.
 
+**Note**: Go does not support the [`dogstatsd_socket` for unixgram][10], so this does not work on Windows.
+
 To enable the Agent DogStatsD UDS:
 
 {{< tabs >}}
@@ -153,7 +155,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /tagging/assigning_tags/#environment-variables
+[2]: /getting_started/tagging/assigning_tags/#environment-variables
 [3]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -165,7 +167,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 When running inside a container, DogStatsD needs to run in the host's PID namespace for origin detection to work reliably. Enable this in Docker with `--pid=host` flag. This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container. This option is not supported in Fargate. For more information, see the [AWS documentation][2].
 
 [2]:
-[1]: /tagging/assigning_tags/#environment-variables
+[1]: /getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -191,7 +193,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
     ```
 
 
-[1]: /tagging/assigning_tags/#environment-variables
+[1]: /getting_started/tagging/assigning_tags/#environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -235,3 +237,4 @@ For guidelines on creating additional implementation options, refer to the [data
 [7]: https://github.com/DataDog/php-datadogstatsd
 [8]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
 [9]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
+[10]: https://github.com/DataDog/datadog-agent/blob/c9588a61e1fef100c61deb39a5145f3b471d107a/pkg/dogstatsd/listeners/uds_common_test.go#L7

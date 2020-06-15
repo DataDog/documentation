@@ -29,21 +29,40 @@ Primary tags must follow a different set of rules from those of conventional [Da
 ### Environment
 
 The default and mandatory primary tag is the environment your traces are collected from. Its tag key is `env`, and its default value for un-tagged data is `env:none`.
-There are several ways to specify an environment when reporting data:
 
-1. Host tag:
-  Use a host tag with the format `env:<ENVIRONMENT>` to tag all traces from that Agent accordingly.
+#### Setting the environment in the tracer
 
-2. Agent configuration:
-  Override the default tag used by the Agent in [the Agent configuration file][3]. This tags all traces coming through the Agent, overriding the host tag value.
+We recommend having the tracer set `env`. It also allows for greater flexibility because the definition of `env` lives within the actual runtime of the service.
+
+If `DD_ENV` is exposed to your service's process, the tracer will use it automatically. See [Unified Service Tagging][3] to learn about setting `DD_ENV` and other standard service environment variables.
+
+You may also manually set `env` as a global tag for the tracer in code. See [assigning tags in APM][4] for more information.
+
+#### Setting the environment in the Agent
+
+The `env` tag can be set in your Agent configuration.
+**However, if `env` is already present in trace data then it will override any `env` set in the Agent.**
+
+Options:
+
+1. Top-level Agent configuration:
 
     ```yaml
-    apm_config:
-      env: "<ENVIRONMENT>"
+    env: <ENVIRONMENT>
+    ...
     ```
 
-3. Per trace:
-  When submitting a single trace, specify an environment by tagging one of its spans with the metadata key `env`. This overrides the Agent configuration and the host tag's value (if any). Consult the [trace tagging documentation][4] to learn how to assign a tag to your traces.
+    **Containerized environments**: The Agent also supports configuration of the top-level `env` through the environment variable `DD_ENV`.
+
+2. Agent host tag:
+
+    ```yaml
+    tags:
+        env: <ENVIRONMENT>
+        ...
+    ```
+
+    **Containerized environments**: The Agent also supports configuration of top-level `tags` through the environment variable `DD_TAGS`.
 
 #### Viewing Data by Environment
 
@@ -76,7 +95,7 @@ Primary tags appear at the top of APM pages. Use these selectors to slice the da
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/#trace
-[2]: /tagging/
-[3]: /agent/guide/agent-configuration-files/
-[4]: /tagging/assigning_tags/#traces
+[2]: /getting_started/tagging/
+[3]: /getting_started/tagging/unified_service_tagging
+[4]: /getting_started/tagging/assigning_tags/#traces
 [5]: https://app.datadoghq.com/apm/settings

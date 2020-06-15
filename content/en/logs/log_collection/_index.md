@@ -239,6 +239,8 @@ Endpoints that can be used to send logs to Datadog EU region:
 
 ## Reserved attributes
 
+**Note**: As a best practice for log collection, Datadog recommends using unified service tagging when assigning tags and environment variables. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][22] documentation.
+
 Here are some key attributes you should pay attention to when setting up your project:
 
 | Attribute | Description                                                                                                                                                                                                                                |
@@ -306,3 +308,4 @@ Datadog automatically parses JSON-formatted logs. For this reason, if you have c
 [19]: /security/logs/#information-security
 [20]: /logs/explorer/patterns/
 [21]: /logs/explore/
+[22]: /getting_started/tagging/unified_service_tagging
