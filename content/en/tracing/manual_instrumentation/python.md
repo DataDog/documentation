@@ -97,7 +97,7 @@ def make_sandwich_request(request):
     span.finish()  # remember to finish the span
 ```
 
-API details of the decorator can be found below:
+API details of the decorator can be found in the `ddtrace.Tracer.trace` [documentation][2] or the `ddtrace.Span.finish`[documentation][3].
 
 - [`ddtrace.Tracer.trace`][2]
 - [`ddtrace.Span.finish`][3]
