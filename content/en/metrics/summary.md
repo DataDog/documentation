@@ -82,7 +82,7 @@ The collection interval for the metric in seconds.
 [2]: /metrics/explorer/
 [3]: /dashboards/
 [4]: /developers/metrics/custom_metrics/
-[5]: /tagging/
+[5]: /getting_started/tagging/
 [6]: /api/v1/metrics/#edit-metric-metadata
 [7]: /integrations/
 [8]: /developers/metrics/units/

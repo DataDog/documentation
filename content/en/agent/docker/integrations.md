@@ -23,7 +23,8 @@ further_reading:
 <a href="/getting_started/agent/autodiscovery">Consult the Autodiscovery Getting Started documentation to discover the concepts behind this feature</a>.
 </div>
 
-This page covers how to configure integrations autodiscovery with Docker, if you are using Kubernetes, see the [Kubernetes Integrations Autodiscovery documentation][1].
+This page covers how to configure Autodiscovery for integrations with Docker. If you are using Kubernetes, see the [Kubernetes Integrations Autodiscovery documentation][1].
+
 The goal of Autodiscovery is to apply a Datadog integration configuration when running an Agent check against a given container. See how to [configure Agent integrations][2] when running the Agent on a host for more context on this logic.
 
 To configure an integration with Autodiscovery, use the following parameters:
@@ -92,6 +93,8 @@ services:
       com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
 
 ```
+
+**Note**: When configuring autodiscovery, Datadog recommends using Docker labels to unify telemetry across your containerized environment. Read the [unified service tagging][11] documentation for more information.
 
 {{% /tab %}}
 {{% tab "File" %}}

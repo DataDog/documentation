@@ -65,10 +65,10 @@
     },
     "request": {
       "json_curl": {
-        "graph_json": null
+        "graph_json": ""
       },
       "json": {
-        "graph_json": "string",
+        "graph_json": "",
         "legend": "string",
         "size": "string",
         "timeframe": "string",

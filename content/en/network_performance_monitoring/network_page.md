@@ -49,7 +49,7 @@ Aggregate and filter your traffic data by any tags in Datadog network page. A wh
 
 {{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Drop down menu"  style="width:90%;">}}
 
-Whitelisted tags include `service`, `availability zone`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
+Whitelisted tags include `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
 1. Select the `+` button on the top right of the facet panels.
 2. Enter the relevant tag you want to create a custom facet upon.
@@ -101,7 +101,7 @@ Starting with Agent 7.17+, the Agent resolves IP’s to human-readable domain na
 
 ### pre-NAT IPs
 
-The Network Address Translation (NAT) is a tool used by Kubernetes and other systems to route traffic between containers. When investigating a specific dependency (for example, service to service), you can use the presence or absence of pre-NAT IPs to distinguish between Kubernetes-native services, which do their own routing, and services that rely on external clients for routing. This feature does not currently include resolution of NAT gateways.  
+The Network Address Translation (NAT) is a tool used by Kubernetes and other systems to route traffic between containers. When investigating a specific dependency (for example, service to service), you can use the presence or absence of pre-NAT IPs to distinguish between Kubernetes-native services, which do their own routing, and services that rely on external clients for routing. This feature does not currently include resolution of NAT gateways.
 
 To view pre-NAT and post-NAT IPs, use the _Show pre-NAT IPs_ toggle in the table settings. When this setting is toggled off, IPs shown in the Source IP and Dest IP columns are by default post-NAT IPs. In cases where you have multiple pre-NAT IPs for one post-NAT IP, the top 5 most common pre-NAT IPs will be displayed. `pre_nat.ip` is a tag like any other in the product, so you can use it to aggregate and filter traffic.
 
@@ -113,13 +113,13 @@ The network table breaks down the _Volume_, _Throughput_, _TCP Retransmits_, _Ro
 
 {{< img src="network_performance_monitoring/network_page/network_table.png" alt="Data table" >}}
 
-You can configure the columns in your table using the `Customize` button at the top right of the table. 
+You can configure the columns in your table using the `Customize` button at the top right of the table.
 
 Congifure the traffic shown with the `Filter Traffic` button.
 
 {{< img src="network_performance_monitoring/network_page/filter_traffic_toggles.png" alt="Flow Details"  style="width:80%;">}}
 
-Datadog Agent traffic is shown by default. To narrow down your view to non-Datadog traffic _only_, toggle off `Show Datadog Traffic`.  
+Datadog Agent traffic is shown by default. To narrow down your view to non-Datadog traffic _only_, toggle off `Show Datadog Traffic`.
 
 ### Unresolved Traffic
 

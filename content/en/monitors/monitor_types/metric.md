@@ -171,7 +171,7 @@ This setting allows you to change when the alerting engine considers a monitor a
 
 `Do not notify` if data is missing or `Notify` if data is missing for more than `N` minutes.
 
-Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data. 
+Notifications for missing data are useful if you expect a metric to always be reporting data under normal circumstances. For example, if a host with the Agent must be up continuously, you can expect the metric `system.cpu.idle` to always report data. For this case, you should enable notifications for missing data.
 
 **Note**: It is recommended that you set the missing data window to at least two times the evaluation period.
 
@@ -206,7 +206,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/metric
-[2]: /tagging/using_tags/?tab=assignment
+[2]: /getting_started/tagging/using_tags/?tab=assignment
 [3]: /dashboards/querying/#advanced-graphing
 [4]: /monitors/faq/what-are-recovery-thresholds/
 [5]: /monitors/notifications/

@@ -17,6 +17,7 @@ further_reading:
 {{< nextlink href="/getting_started/integrations" >}}<u>Integrations</u>: Learn how to collect metrics, traces, and logs with Datadog integrations.{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use Log processing to enrich them.{{< /nextlink >}}
 {{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u>: Learn about tracing by setting up the Agent to trace a small application.{{< /nextlink >}}
+{{< nextlink href="/getting_started/tagging" >}}<u>Tagging</u>: Start tagging your metrics, logs, and traces.{{< /nextlink >}}
 {{< nextlink href="/getting_started/api" >}}<u>API</u>: Get started on Datadog HTTP API.{{< /nextlink >}}
 {{< nextlink href="/getting_started/synthetics" >}}<u>Synthetics</u>: Start monitoring your API endpoints and key business journeys with Synthetics tests.{{< /nextlink >}}
 {{< /whatsnext >}}

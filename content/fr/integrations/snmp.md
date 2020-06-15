@@ -206,7 +206,7 @@ Documentation, liens et articles supplémentaires utiles :
 [3]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/fr/agent
 [5]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
-[6]: https://docs.datadoghq.com/fr/tagging/
+[6]: https://docs.datadoghq.com/fr/getting_started/tagging/
 [7]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-router.yaml
 [8]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/f5-big-ip.yaml
 [9]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/idrac.yaml
