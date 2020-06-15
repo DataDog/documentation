@@ -8,13 +8,13 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/'
     tag: Blog
     text: Mettre à l'échelle vos charges de travail Kubernetes avec n'importe quelle métrique Datadog
-  - link: /agent/autodiscovery/clusterchecks
+  - link: /agent/cluster_agent/clusterchecks/
     tag: Documentation
     text: Exécuter des checks de cluster avec Autodiscovery
-  - link: agent/kubernetes/daemonset_setup
+  - link: /agent/kubernetes/daemonset_setup/
     tag: Documentation
     text: Exécuter l'Agent avec un DaemonSet Kubernetes
-  - link: /agent/cluster_agent/troubleshooting
+  - link: /agent/cluster_agent/troubleshooting/
     tag: Documentation
     text: Dépannage de l'Agent de cluster Datadog
 ---
@@ -37,4 +37,4 @@ L'activation de l'élection de leader de cette façon garantit la collecte des �
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/cluster_agent/setup
+[1]: /fr/agent/cluster_agent/setup/

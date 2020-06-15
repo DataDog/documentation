@@ -17,12 +17,12 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatic Trace ID injection
+## Automatically Inject Trace and Span IDs
 
 Given the many different ways to implement logging in PHP<span class="x x-first x-last">,</span> with some completely circumventing PHP's built-in error-logging API, the Datadog PHP tracing library cannot reliably inject trace and span <span class="x x-first x-last">IDs</span> into logs automatically.
 See the section below to learn how to connect your PHP Logs and traces manually.
 
-## Manual Trace ID injection
+## Manually Inject Trace and Span IDs
 
 To connect your logs and traces together, your logs must contain the `dd.trace_id` and `dd.span_id` attributes that respectively contain your trace ID and your span ID.
 

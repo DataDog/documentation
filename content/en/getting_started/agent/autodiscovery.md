@@ -43,6 +43,10 @@ In the figure above, there is a host node with three pods, including a Redis pod
 The Redis spec in this example includes the following annotations:
 
 ```yaml
+labels:
+  tags.datadoghq.com/redis.env: "prod"
+  tags.datadoghq.com/redis.service: "my-redis"
+  tags.datadoghq.com/redis.version: "6.0.3"
 annotations:
   ad.datadoghq.com/redis.check_names: '["redisdb"]'
   ad.datadoghq.com/redis.init_configs: '[{}]'
@@ -54,10 +58,12 @@ annotations:
         "password":"%%env_REDIS_PASSWORD%%"
       }
     ]
-  ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis"}]'
+  ad.datadoghq.com/redis.logs: '[{"source":"redis"}]'
 ```
 
-In the above example, `check_names` includes the names of the check to run, and `init_configs` contains some configuration parameters, such as minimum collection interval. Each item in `instances` represents the configuration to run for one instance of a check. Note that in this example, `%%host%%` is a template variable that is dynamically populated with your container's IP.
+In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, and even `version` as tags for all logs and metrics emitted for the Redis pod. These standard labels are part of [Unified Service Tagging][3]. As a best practice, Datadog recommends using unified service tagging when configuring tags and environment variables.
+
+`check_names` includes the names of the check to run, and `init_configs` contains some configuration parameters, such as minimum collection interval. Each item in `instances` represents the configuration to run for one instance of a check. Note that in this example, `%%host%%` is a template variable that is dynamically populated with your container's IP.
 
 From this, the Agent generates a static check configuration.
 
@@ -66,7 +72,7 @@ From this, the Agent generates a static check configuration.
 Setting up Autodiscovery for your infrastructure requires the following two steps:
 
 1. [Enable Autodiscovery](#enable-autodiscovery) for your Datadog Agent.
-2. Create [integration-specific configuration templates](#integration-templates) for each service you wish to monitor. Note that Datadog provides auto-configuration templates for [some common containerized services][3], including Apache and Redis.
+2. Create [integration-specific configuration templates](#integration-templates) for each service you wish to monitor. Note that Datadog provides auto-configuration templates for [some common containerized services][4], including Apache and Redis.
 
 ### Enable Autodiscovery
 
@@ -143,18 +149,25 @@ ECS_FARGATE=true
 
 ### Integration Templates
 
-Once Autodiscovery is enabled, the Datadog Agent automatically attempts Autodiscovery [for a number of services][3], including Apache and Redis, based on default Autodiscovery configuration files.
+Once Autodiscovery is enabled, the Datadog Agent automatically attempts Autodiscovery [for a number of services][4], including Apache and Redis, based on default Autodiscovery configuration files.
 
 You can define an integration template in multiple forms: as Kubernetes pod annotations, Docker labels, a configuration file mounted within the Agent, a ConfigMap, and key-value stores.
 
-The following is an example of a Redis integration template defined in Kubernetes pod annotations. It contains a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
+In the following example, the `tags.datadoghq.com` Kubernetes labels are used to tag pod's data with `env`, `service`, and `version`.
+
+The Redis integration template is defined through Kubernetes pod annotations. It contains a custom `password` parameter and tags all its logs with the correct `source`.
 
 ```yaml
 apiVersion: v1
 kind: Pod
 metadata:
   ## name of your Pod
-  name: redis
+  name: my-redis
+  labels:
+    ## set standard labels for unified service tagging
+    tags.datadoghq.com/redis.env: prod
+    tags.datadoghq.com/redis.service: my-redis
+    tags.datadoghq.com/redis.version: "6.0.3"
   annotations:
     ## names of check; matches name in integrations_core repo
     ad.datadoghq.com/redis.check_names: '["redisdb"]'
@@ -170,9 +183,7 @@ metadata:
         }
       ]
     ## setup for logs collection
-    ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis"}]'
-  labels:
-    name: redis
+    ad.datadoghq.com/redis.logs: '[{"source":"redis"}]'
 spec:
   containers:
     - name: redis
@@ -181,7 +192,7 @@ spec:
         - containerPort: 80
 ```
 
-To use Autodiscovery with other services, define templates for the services you wish to monitor. See the [Autodiscovery Integration Templates][4] documentation for further details.
+To use Autodiscovery with other services, define templates for the services you wish to monitor. See the [Autodiscovery Integration Templates][5] documentation for further details.
 
 ## Further Reading
 
@@ -189,5 +200,6 @@ To use Autodiscovery with other services, define templates for the services you 
 
 [1]: /agent/guide/ad_identifiers/
 [2]: /agent/faq/template_variables/
-[3]: /agent/faq/auto_conf/
-[4]: /agent/kubernetes/integrations/
+[3]: /getting_started/tagging/unified_service_tagging
+[4]: /agent/faq/auto_conf/
+[5]: /agent/kubernetes/integrations/

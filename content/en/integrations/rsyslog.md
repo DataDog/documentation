@@ -101,11 +101,10 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - [metas ddsource=\"<MY_SOURCE_NAME>\" ddtags=\"env:dev,<KEY:VALUE>\"] %msg%\n"
     ```
 
-8. (Optional) Datadog cuts inactive connections after a period of inactivity. Some Rsyslog versions are not able to reconnect properly when necessary. To mitigate this issue, use time markers so the connection never stops. To achieve this, add the following 2 lines in your Rsyslog configuration:
+8. (Optional) Datadog cuts inactive connections after a period of inactivity. Some Rsyslog versions are not able to reconnect properly when necessary. To mitigate this issue, use time markers so the connection never stops. To achieve this, add the following line in your Rsyslog configuration:
 
     ```conf
-    $ModLoad immark
-    $MarkMessagePeriod 20
+    module(load="immark" interval="20")
     ```
 
     And don't forget to restart:
@@ -186,11 +185,10 @@ Configure Rsyslog to gather logs from your host, containers, & services.
     ```
 
 8. (Optional) Datadog cuts inactive connections after a period of inactivity.
-   Some Rsyslog versions are not able to reconnect properly when necessary. To mitigate this issue, use time markers so the connection never stops. To achieve this, add the following 2 lines in your Rsyslog configuration:
+   Some Rsyslog versions are not able to reconnect properly when necessary. To mitigate this issue, use time markers so the connection never stops. To achieve this, add the following line in your Rsyslog configuration:
 
     ```conf
-    $ModLoad immark
-    $MarkMessagePeriod 20
+    module(load="immark" interval="20")
     ```
 
     And don't forget to restart:

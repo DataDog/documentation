@@ -10,9 +10,11 @@ Built with [hugo][1], a static website generation tool.
 
 2. [Install Python3][3] (you can also use [pyenv][4])
 
-3. Install yarn: `npm install -g yarn`
+3. [Install hugo][12]
 
-4. Download the documentation repo `git clone https://github.com/DataDog/documentation.git`
+4. Install yarn: `npm install -g yarn`
+
+5. Download the documentation repo `git clone https://github.com/DataDog/documentation.git`
 
 ### Run the server
 
@@ -94,3 +96,4 @@ Within 5 minutes of merging to master, it deploys automatically.
 [9]: https://github.com/yuin/goldmark
 [10]: https://spec.commonmark.org/0.29/
 [11]: https://docs.datadoghq.com/developers/integrations
+[12]: https://gohugo.io/getting-started/installing/

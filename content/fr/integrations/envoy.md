@@ -207,7 +207,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][12].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][12].
 
 | Paramètre      | Valeur                                              |
 | -------------- | -------------------------------------------------- |
@@ -248,8 +248,8 @@ Besoin d'aide ? Contactez [l'assistance Datadog][15].
 [8]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/data/conf.yaml.example
 [9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [10]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/metrics.py
-[11]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[12]: https://docs.datadoghq.com/fr/agent/docker/log/
+[11]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[12]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
 [14]: https://github.com/DataDog/integrations-core/blob/master/envoy/metadata.csv
-[15]: https://docs.datadoghq.com/fr/help
+[15]: https://docs.datadoghq.com/fr/help/

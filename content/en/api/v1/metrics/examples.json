@@ -263,7 +263,9 @@
         "series": [
           {
             "metric": "system.load.1",
-            "points": null
+            "points": [
+              null
+            ]
           }
         ]
       },
@@ -273,7 +275,9 @@
             "host": "string",
             "interval": "integer",
             "metric": "system.load.1",
-            "points": [],
+            "points": [
+              []
+            ],
             "tags": [],
             "type": "string"
           }

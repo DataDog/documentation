@@ -124,4 +124,4 @@ Monitor tags are independent of tags sent by the Agent or integrations. Add tags
 [6]: /monitors/monitor_status/#resolve
 [7]: https://app.datadoghq.com/monitors/triggered
 [8]: https://app.datadoghq.com/monitors#downtime
-[9]: /tagging/assigning_tags/?tab=monitors#ui
+[9]: /getting_started/tagging/assigning_tags/?tab=monitors#ui

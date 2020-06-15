@@ -77,6 +77,7 @@ Interact with the upper reserved attributes section:
 
 - with the **Host** section, to access the related [host dashboard][10] or [network page][11].
 - with the **Service** section, to see the [trace in APM][12] (both require a `trace_id` attribute in the log: refer to [trace injection in logs][13]) or the [service page][14].
+- Enhance your experience further with [Unified Service Tagging][15] to navigate to and from logs with `env`, `service`, and `version`.
 
 The **View in context** button updates the search request in order to show you the log lines dated just before and after a selected log—even if they don't match your filter. This context is different according to the situation, as Datadog uses the `Hostname`, `Service`, `filename`, and `container_id` attributes, along with tags, in order find the appropriate context for your logs.
 
@@ -91,7 +92,7 @@ Interact with the attributes names and values in the lower JSON section to:
 
 {{< img src="logs/explorer/side_panel_context.gif" alt="Side Panel context"  style="width:60%;">}}
 
-- Build or edit a facet or measure from an attribute. See [Log Facets][15].
+- Build or edit a facet or measure from an attribute. See [Log Facets][16].
 
 {{< img src="logs/explorer/side_panel_facets.gif" alt="Side Panel Facets"  style="width:60%;">}}
 
@@ -100,7 +101,7 @@ Interact with the attributes names and values in the lower JSON section to:
 Use the **Share** button to share the log opened in side panel to other contexts.
 
 - **Copy to clipboard** or `Ctrl+C` / `Cmd+C` copies the log JSON to your clipboard.
-- **Share Event** shares the log (along with the underlying view) with teammates through email, Slack, and more. See all [Datadog notification integrations][16] available.
+- **Share Event** shares the log (along with the underlying view) with teammates through email, Slack, and more. See all [Datadog notification integrations][17] available.
 
 {{< img src="logs/explorer/upper_log_panel.png" alt="Upper Log Panel"  style="width:50%;">}}
 
@@ -127,7 +128,7 @@ Follow the [guide to search your logs][1] for a detailed explanation of all the 
 
 ### Saved views
 
-Use saved views to automatically configure your log explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][17] to learn more.
+Use saved views to automatically configure your log explorer with a preselected set of facets, measures, searches, time ranges, and visualizations. Check the dedicated [saved views documentation][18] to learn more.
 
 ## Further Reading
 
@@ -147,6 +148,7 @@ Use saved views to automatically configure your log explorer with a preselected 
 [12]: /tracing/app_analytics/search/#displaying-a-full-trace
 [13]: /tracing/connect_logs_and_traces/
 [14]: /tracing/visualization/service/#overview
-[15]: /logs/explorer/facets/#overview
-[16]: /logs/processing/
-[17]: /logs/explorer/saved_views/
+[15]: /getting_started/tagging/unified_service_tagging
+[16]: /logs/explorer/facets/#overview
+[17]: /logs/processing/
+[18]: /logs/explorer/saved_views/

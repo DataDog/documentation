@@ -5,13 +5,15 @@ assets:
   dashboards:
     Vault - Overview: assets/dashboards/vault_overview.json
   monitors: {}
+  saved_views:
+    error_warning_status: assets/saved_views/error_warning_status.json
+    service_name_overview: assets/saved_views/service_name_overview.json
+    vault_patern: assets/saved_views/vault_patern.json
   service_checks: assets/service_checks.json
 categories:
   - security
   - configuration & deployment
-  - aws
-  - google cloud
-  - azure
+  - log collection
   - autodiscovery
 creates_events: true
 ddtype: check
@@ -42,71 +44,178 @@ supported_os:
 Ce check surveille la santé du cluster [Vault][1] et les changements de leader.
 
 ## Configuration
+
 ### Installation
 
-Le check Vault est inclus avec le paquet de l'[Agent Datadog][3]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+Le check Vault est inclus avec le paquet de l'[Agent Datadog][2]. Vous n'avez donc rien d'autre à installer sur votre serveur.
+
+#### Prérequis
+
+Pour garantir le bon fonctionnement du check Vault, vous devez : a) activer l'accès non authentifié aux métriques Vault ; ou b) fournir un token client Vault.
+
+a) Définissez le paramètre de configuration Vault [`unauthenticated_metrics_access`][3] sur `true`.
+
+Cela autorise l'accès non authentifié au endpoint `/v1/sys/metrics`.
+
+b) Utilisez un token client Vault.
+
+Vous trouverez ci-dessous un exemple reposant sur la méthode d'authentification JWT. Vous pouvez toutefois utiliser d'autres [méthodes d'authentification][4].
+
+Voici les fonctionnalités requises pour que l'intégration Vault fonctionne correctement :
+
+Contenu de `metrics_policy.hcl` :
+```text
+path "sys/metrics*" {
+  capabilities = ["read", "list"]
+}
+```
+
+Rôle et stratégie de configuration :
+
+```text
+$ vault policy write metrics /chemin/vers/strategie_metriques.hcl
+$ vault auth enable jwt
+$ vault write auth/jwt/config jwt_supported_algs=RS256 jwt_validation_pubkeys=@<CHEMIN_VERS_PEM_PUBLIC>
+$ vault write auth/jwt/role/datadog role_type=jwt bound_audiences=<AUDIENCE> user_claim=name token_policies=metrics
+$ vault agent -config=/chemin/vers/config_agent.hcl
+```
+
+Contenu de `agent_config.hcl` :
+```
+exit_after_auth = true
+pid_file = "/tmp/agent_pid"
+
+auto_auth {
+  method "jwt" {
+    config = {
+      path = "<CHEMIN_REVENDICATION_JWT>"
+      role = "datadog"
+    }
+  }
+
+  sink "file" {
+    config = {
+      path = "<CHEMIN_TOKEN_CLIENT>"
+    }
+  }
+}
+
+vault {
+  address = "http://0.0.0.0:8200"
+}
+```
 
 ### Configuration
+
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
-1. Modifiez le fichier `vault.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][4] pour commencer à recueillir vos données de performance Vault. Consultez le [fichier d'exemple vault.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `vault.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][5] pour commencer à recueillir vos données de performance Vault. Consultez le [fichier d'exemple vault.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
 
-2. [Redémarrez l'Agent][6].
+    Configuration pour faire fonctionner l'intégration sans token (avec le paramètre de configuration Vault `unauthenticated_metrics_access` défini sur true) :
+
+    ```yaml
+    init_config:
+
+    instances:
+        ## @param api_url - string - required
+        ## URL of the Vault to query.
+        #
+      - api_url: http://localhost:8200/v1
+
+        ## @param no_token - boolean - optional - default: false
+        ## Attempt metric collection without a token.
+        #
+        no_token: true
+    ```
+
+    Configuration pour faire fonctionner l'intégration avec un token client :
+
+    ```yaml
+    init_config:
+
+    instances:
+        ## @param api_url - string - required
+        ## URL of the Vault to query.
+        #
+      - api_url: http://localhost:8200/v1
+
+        ## @param client_token - string - optional
+        ## Client token necessary to collect metrics.
+        #
+        client_token: <CLIENT_TOKEN>
+
+        ## @param client_token_path - string - optional
+        ## Path to a file containing the client token. Overrides `client_token`.
+        ## The token will be re-read after every authorization error.
+        #
+        # client_token_path: <CLIENT_TOKEN_PATH>
+    ```
+
+2. [Redémarrez l'Agent][7].
 
 #### Environnement conteneurisé
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][2] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][8] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 | Paramètre            | Valeur                                    |
-|----------------------|------------------------------------------|
+| -------------------- | ---------------------------------------- |
 | `<NOM_INTÉGRATION>` | `vault`                                  |
 | `<CONFIG_INIT>`      | vide ou `{}`                            |
 | `<CONFIG_INSTANCE>`  | `{"api_url": "http://%%host%%:8200/v1"}` |
 
+`INSTANCE_CONFIG` doit être personnalisé en fonction de votre configuration d'authentification Vault. Pour consulter un exemple de configuration, reportez-vous à la section Host ci-dessus.
+
 #### Collecte de logs
 
-**Disponible à partir des versions > 6.0 de l'Agent**
+_Disponible à partir des versions > 6.0 de l'Agent_
 
 1. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
-```
-logs_enabled: true
-```
+   ```yaml
+   logs_enabled: true
+   ```
 
 2. Configurez Vault de façon à activer les logs d'audit et serveur.
-    * Les logs d'audit doivent être activés par un utilisateur disposant des privilèges et des politiques nécessaires. Consultez la documentation [Activer des audit devices][11] (en anglais) pour en savoir plus.
-        ```
-        $ vault audit enable file file_path=/vault/vault-audit.log
-        ```
-    *  Assurez-vous que les [logs serveur][12] sont écrits dans un fichier. Vous pouvez configurer les logs serveur statiques dans le [script de lancement systemd de Vault][13].
-        Le script suivant permet d'écrire les logs dans `/var/log/vault.log`.
-        ```
-        ...
-        [Service]
-        ...
-        ExecStart=/bin/sh -c '/home/vagrant/bin/vault server -config=/home/vagrant/vault_nano/config/vault -log-level="trace" > /var/log/vault.log
-        ...
-        ```
+
+   - Les logs d'audit doivent être activés par un utilisateur disposant des privilèges et des stratégies nécessaires. Consultez la section [Enabling audit devices][9] (en anglais) de la documentation Vault pour en savoir plus.
+
+     ```shell
+     vault audit enable file file_path=/vault/vault-audit.log
+     ```
+
+   - Assurez-vous que les [logs serveur][10] sont écrits dans un fichier. Vous pouvez configurer les logs serveur statiques dans le [script de lancement systemd de Vault][11].
+     Le script suivant permet d'écrire les logs dans `/var/log/vault.log`.
+
+     ```text
+     ...
+     [Service]
+     ...
+     ExecStart=/bin/sh -c '/home/vagrant/bin/vault server -config=/home/vagrant/vault_nano/config/vault -log-level="trace" > /var/log/vault.log
+     ...
+     ```
 
 3. Ajoutez ce bloc de configuration à votre fichier `vault.d/conf.yaml` pour commencer à recueillir vos logs Vault :
-    ````yaml
-    logs:
-    - type: file
-      path: /vault/vault-audit.log
-      source: vault
-      service: <SERVICE_NAME>
-    - type: file
-      path: /var/log/vault.log
-      source: vault
-      service: <SERVICE_NAME>
-    ```
+
+   ```yaml
+   logs:
+     - type: file
+       path: /vault/vault-audit.log
+       source: vault
+       service: "<SERVICE_NAME>"
+     - type: file
+       path: /var/log/vault.log
+       source: vault
+       service: "<SERVICE_NAME>"
+   ```
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `vault` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][12] et cherchez `vault` dans la section Checks.
 
 ## Données collectées
+
 ### Métriques
 {{< get-metrics-from-git "vault" >}}
 
@@ -132,23 +241,26 @@ Renvoie CRITICAL si le check ne parvient pas à se connecter à l'endpoint de m�
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][14].
 
 ## Pour aller plus loin
+
 Documentation, liens et articles supplémentaires utiles :
 
-* [Surveiller HashiCorp Vault avec Datadog][10]
+- [Surveiller HashiCorp Vault avec Datadog][15]
 
 [1]: https://www.vaultproject.io
-[2]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://github.com/DataDog/integrations-core/blob/master/vault/datadog_checks/vault/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/vault/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help
-[10]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog
-[11]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#enabling-audit-devices
-[12]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#vault-server-logs
-[13]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#not-finding-the-server-logs
+[2]: https://app.datadoghq.com/account/settings#agent
+[3]: https://www.vaultproject.io/docs/configuration/listener/tcp#unauthenticated_metrics_access
+[4]: https://www.vaultproject.io/docs/auth
+[5]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[6]: https://github.com/DataDog/integrations-core/blob/master/vault/datadog_checks/vault/data/conf.yaml.example
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
+[8]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[9]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#enabling-audit-devices
+[10]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#vault-server-logs
+[11]: https://learn.hashicorp.com/vault/operations/troubleshooting-vault#not-finding-the-server-logs
+[12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[13]: https://github.com/DataDog/integrations-core/blob/master/vault/metadata.csv
+[14]: https://docs.datadoghq.com/fr/help/
+[15]: https://www.datadoghq.com/blog/monitor-hashicorp-vault-with-datadog

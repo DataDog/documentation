@@ -24,5 +24,5 @@ Then, to [graph][4] the number of web page visitors, there are a variety of poss
 
 [1]: /monitors/monitor_types/event/
 [2]: /dashboards/timeboards/#events
-[3]: /tagging/
+[3]: /getting_started/tagging/
 [4]: /dashboards/querying/#graphing-editor

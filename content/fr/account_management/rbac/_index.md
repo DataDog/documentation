@@ -11,7 +11,7 @@ further_reading:
   - link: /api/v2/roles/
     tag: Documentation
     text: Gérer les rôles et les autorisations avec l’API Roles
-  - link: '/api/v2/roles/#autorisations-de-liste'
+  - link: '/api/v2/roles/#enumerer-les-autorisations'
     tag: Documentation
     text: Gérer vos autorisations avec l'API Permission
   - link: /account_management/rbac/permissions

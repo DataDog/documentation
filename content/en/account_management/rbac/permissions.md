@@ -286,8 +286,8 @@ In the following example, assuming all roles but `Guest` have the `logs_read_arc
 
 {{< img src="account_management/rbac/logs_archives_list.png" alt="Create a custom Role"  style="width:90%;">}}
 
-[1]: https://app.datadoghq.com/access/roles
 
+[1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -295,9 +295,9 @@ The `logs_read_archive` permission can be granted or revoked from a role via [th
 
 An archive can be scoped to a subset of roles using the [Archive API][2].
 
+
 [1]: /api/v2/roles/
 [2]: /api/v2/logs-archives/
-
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -57,7 +57,7 @@ Logs consist of messages collected [by the Agent or by integrations][9], and ass
 [3]: /integrations/
 [4]: https://www.datadoghq.com/security
 [5]: https://www.datadoghq.com/legal/privacy
-[6]: /tagging/
+[6]: /getting_started/tagging/
 [7]: /tracing/visualization/
 [8]: /security/tracing/
 [9]: /logs/log_collection/

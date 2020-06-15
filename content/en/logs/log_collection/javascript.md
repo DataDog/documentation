@@ -241,7 +241,7 @@ Assume that there is a `signupLogger` logger, defined with all the other loggers
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.createLogger('signupLogger', 'info', 'http', {'env', 'staging'})
+datadogLogs.createLogger('signupLogger', 'info', 'http', {'env': 'staging'})
 ```
 
 It can now be used in a different part of the code with:
@@ -258,7 +258,7 @@ signupLogger.info('Test sign up completed')
 
 ```javascript
 if (window.DD_LOGS) {
-    const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', {'env', 'staging'})
+    const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', {'env': 'staging'})
 }
 ```
 
@@ -291,7 +291,7 @@ Once Datadog Browser log library is initialized, it is possible to:
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setLoggerGlobalContext("{'env', 'staging'}");
+datadogLogs.setLoggerGlobalContext("{'env': 'staging'}");
 
 datadogLogs.addLoggerGlobalContext('referrer', document.referrer);
 ```
@@ -323,7 +323,7 @@ Once a logger is created, it is possible to:
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.setContext("{'env', 'staging'}");
+datadogLogs.setContext("{'env': 'staging'}");
 
 datadogLogs.addContext('referrer', document.referrer);
 ```
@@ -332,7 +332,7 @@ datadogLogs.addContext('referrer', document.referrer);
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setContext("{'env', 'staging'}");
+window.DD_LOGS && DD_LOGS.setContext("{'env': 'staging'}");
 
 window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer);
 ```

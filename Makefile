@@ -181,12 +181,12 @@ examples/go: examples/datadog-api-client-go clean-go-examples local/bin/awk/extr
 	#	gofmt -w $$f || rm $f; \
 	#done;
 
-	cp -Rn examples/content ./
+	-cp -Rn examples/content ./
 
 examples/java: examples/datadog-api-client-java clean-java-examples local/bin/awk/extract-code-blocks-java.awk
 	@ls examples/datadog-api-client-java/api_docs/v1/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v1
 	@ls examples/datadog-api-client-java/api_docs/v2/*Api.md | xargs -n1 local/bin/awk/extract-code-blocks-java.awk -v output=examples/content/en/api/v2
 
-	cp -Rn examples/content ./
+	-cp -Rn examples/content ./
 
 examples: examples/go examples/java

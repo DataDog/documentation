@@ -37,6 +37,8 @@ The following environment variables are supported:
 |-----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`                                  | Your [Datadog API key][1].                                                                                                                                             |
 | `DD_HOSTNAME`                                 | Hostname to use for the Datadog Cluster Agent.                                                                                                                         |
+| `DD_ENV`                                      | Sets the `env` tag for data emitted by the Cluster Agent. Recommended only if the Cluster Agent monitors services within a single environment.
+                                                                                                                        |
 | `DD_CLUSTER_AGENT_CMD_PORT`                   | Port for the Datadog Cluster Agent to serve. Defaults to `5005`.                                                                                                       |
 | `DD_USE_METADATA_MAPPER`                      | Enables cluster level metadata mapping. Defaults to `true`.                                                                                                            |
 | `DD_COLLECT_KUBERNETES_EVENTS`                | Configures the Agent to collect Kubernetes events. Defaults to `false`. See the [Event collection documentation][2] for more details.                                  |

@@ -99,8 +99,12 @@ spec:
 # (...)
 ```
 
-**Note**: If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, replica sets, or deployments, add pod annotations under `.spec.template.metadata`.
+If you define your Kubernetes pods directly with `kind: Pod`, add each pod's annotations directly under its `metadata` section. If you define pods indirectly with replication controllers, replica sets, or deployments, add pod annotations under `.spec.template.metadata`.
 
+**Note:** As a best practice in containerized environments, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
+
+
+[1]: /getting_started/tagging/unified_service_tagging
 {{% /tab %}}
 {{% tab "File" %}}
 
@@ -198,6 +202,8 @@ In the `datadog.yaml` file, set the `<KEY_VALUE_STORE_IP>` address and `<KEY_VAL
 Then [restart the Agent][2] to apply the configuration change.
 
 **Configure in environment variables**:
+
+**Note:** As a best practice in containerized environments, Datadog recommends using unified service tagging when configuring tags and environment variables. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][9] documentation.
 
 With the key-value store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like this:
 
