@@ -44,11 +44,9 @@ Les volets des facettes reflètent les tags définis dans la requête de la barr
 
 #### Facettes personnalisées
 
-Agrégez et filtrez vos données de trafic à l'aide de n'importe quel tag dans la page Network de Datadog. Une liste de tags autorisés est fournie par défaut. Elle figure dans le menu déroulant de la barre de recherche.
+Agrégez et filtrez vos données de trafic à l'aide de n'importe quel tag dans la page Network de Datadog. Une liste de tags autorisés est fournie par défaut. Elle figure dans le menu déroulant de la barre de recherche :
 
 {{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Menu déroulant"  style="width:90%;">}}
-
-Une liste de tags autorisés est fournie par défaut. Elle figure dans le menu déroulant de la barre de recherche.
 
 Parmi les tags autorisés figurent `service`, `availability zone`, `environment`, `pod`, `host`, `ip` ou encore `port`. Si vous souhaitez agréger ou filtrer le trafic en fonction d'un tag qui n'est pas répertorié dans la liste, ajoutez-le en tant que facette personnalisée :
 
@@ -81,7 +79,6 @@ Les métriques relatives à la charge réseau suivantes sont disponibles :
 | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Volume**      | Nombre d'octets envoyés ou reçus sur une période donnée. Mesuré en octets (ou en l'un de ses multiples) dans les deux directions.                           |
 |  **Throughput** | Le taux de transfert des octets envoyés ou reçus sur une période donnée. Mesuré en octets par seconde, dans les deux directions.                                                  |
-| **Retransmits** | Une retransmission signifie qu'un échec a été détecté et que la transmission a été renouvelée pour garantir la bonne livraison des données. Cette métrique représente le nombre de trames retransmises à partir de la `source`. |
 
 #### TCP
 
@@ -95,17 +92,33 @@ TCP est un protocole orienté connexion qui assure la transmission des paquets d
 
 ### Résolution DNS
 
-Depuis la version 7.17 de l'Agent, grâce à un processus d'inspection approfondie des paquets, l'Agent convertit les adresses IP en des noms de domaine lisibles pour le trafic interne et externe. Le DNS vous permet de surveiller les endpoints de vos fournisseurs de solutions cloud sur lesquelles il n'est pas possible d'installer un Agent Datadog. Il peut s'agir par exemple d'équilibreurs de charge d'application, d'API ou de compartiments S3. Les noms de domaines ne pouvant pas être identifiés, tels que ceux générés par un algorithme depuis un centre de contrôle, peuvent générer des menaces de sécurité réseau. **Le DNS est encodé sous la forme d'un tag dans Datadog**. Vous pouvez l'ajouter dans les requêtes de la barre de recherche et dans les volets de facettes afin d'agréger et de filtrer le trafic.
+Depuis la version 7.17, l'Agent convertit les adresses IP en noms de domaine lisibles pour le trafic interne et externe. Le DNS vous permet de surveiller les endpoints de vos fournisseurs de solutions cloud sur lesquelles il n'est pas possible d'installer un Agent Datadog. Il peut s'agir par exemple d'équilibreurs de charge d'application, d'API ou de compartiments S3. Les noms de domaines ne pouvant pas être identifiés, tels que ceux générés par un algorithme depuis un serveur C&C, peuvent être le signe d'une menace pour la sécurité réseau. **Le DNS est encodé sous la forme d'un tag dans Datadog**. Vous pouvez l'ajouter dans les requêtes de la barre de recherche et dans les volets de facettes afin d'agréger et de filtrer le trafic.
 
 {{< img src="network_performance_monitoring/network_page/dns_aggregation.png" alt="Agrégation DNS" >}}
 
 **Remarque** : la résolution DNS fonctionne sur les hosts pour lesquels le system probe s'exécute sur l'espace de nommage réseau à la racine. Cela se produit généralement lorsque le system probe est exécuté dans un conteneur, sans passer par le réseau host.
 
+### Adresses IP pré-NAT
+
+Le NAT (Network Address Translation) est un outil utilisé par Kubernetes et d'autres systèmes pour acheminer le trafic entre les conteneurs. Lorsque vous analysez une dépendance spécifique (par exemple entre deux services), la présence ou l'absence d'IP pré-NAT peut vous permettre de faire la distinction entre les services natifs à Kubernetes, qui font leur propre routage, et les services qui dépendent de clients externes pour le routage. Cette fonctionnalité ne prend pas en compte la résolution des passerelles NAT pour le moment.
+
+Pour afficher les IP pré-NAT et post-NAT, utilisez le paramètre _Show pre-NAT IPs_ dans les paramètres du tableau. Lorsque ce paramètre est désactivé, les IP affichées dans les colonnes Source IP et Dest IP correspondent aux IP post-NAT par défaut. Si plusieurs IP pré-NAT existent pour une même IP post-NAT, les 5 IP pré-NAT les plus courantes s'affichent. Le tag `pre_nat.ip` fonctionne comme n'importe quel autre tag : vous pouvez donc l'utiliser pour agréger et filtrer le trafic.
+
+{{< img src="network_performance_monitoring/network_page/prenat_ip.png" alt="IP pré-NAT" >}}
+
 ## Tableau
 
 Le tableau Network présente les métriques _Volume_, _Throughput_, _TCP Retransmits_, _Round-trip Time (RTT)_ et _RTT variance_ entre chaque _source_ et chaque _destination_ définies dans votre requête.
 
-{{< img src="network_performance_monitoring/network_page/data_table.png" alt="Tableau de données" >}}
+{{< img src="network_performance_monitoring/network_page/network_table.png" alt="Tableau de données" >}}
+
+Pour configurer les colonnes de votre tableau, utilisez le bouton `Customize` en haut à droite.
+
+Configurez le trafic affiché à l'aide du bouton `Filter Traffic`.
+
+{{< img src="network_performance_monitoring/network_page/filter_traffic_toggles.png" alt="Détails d'un flux"  style="width:80%;">}}
+
+Le trafic de l'Agent Datadog est affiché par défaut. Pour afficher le trafic hors Datadog _uniquement_, désactivez l'option `Show Datadog Traffic`.  
 
 ### Trafic non résolu
 

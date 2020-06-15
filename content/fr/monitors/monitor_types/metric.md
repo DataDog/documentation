@@ -3,13 +3,13 @@ title: Monitor de métrique
 kind: documentation
 description: Comparer les valeurs d'une métrique avec un seuil défini par un utilisateur
 further_reading:
-  - link: monitors/notifications
+  - link: /monitors/notifications/
     tag: Documentation
     text: Configurer les notifications de vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour désactiver un monitor
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: Consulter le statut de votre monitor
 ---
@@ -50,7 +50,7 @@ Les alertes d'anomalie calculent la plage de valeurs attendues pour une série e
 
 Pour en savoir plus, consultez la page [Monitor d'anomalies][1].
 
-[1]: /fr/monitors/monitor_types/anomaly
+[1]: /fr/monitors/monitor_types/anomaly/
 {{% /tab %}}
 {{% tab "Singularités" %}}
 
@@ -60,7 +60,7 @@ Les monitors de singularité envoient une alerte lorsqu'un membre d'un groupe (h
 
 Pour en savoir plus, consultez la page [Monitor de singularité][1].
 
-[1]: /fr/monitors/monitor_types/outlier
+[1]: /fr/monitors/monitor_types/outlier/
 {{% /tab %}}
 {{% tab "Prévision" %}}
 
@@ -70,7 +70,7 @@ Une alerte de prévision prédit le comportement futur d'une métrique et le com
 
 Pour en savoir plus, consultez la page [Monitor de prévision][1].
 
-[1]: /fr/monitors/monitor_types/forecasts
+[1]: /fr/monitors/monitor_types/forecasts/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -119,7 +119,7 @@ Les conditions d'alerte varient légèrement en fonction de la méthode de déte
 
 **Remarque** : trois comportements différents peuvent être appliqués lorsque vous utilisez `as_count()`. Consultez [as_count() dans les évaluations de monitors][1] pour en savoir plus.
 
-[1]: /fr/monitors/guide/as-count-in-monitor-evaluations
+[1]: /fr/monitors/guide/as-count-in-monitor-evaluations/
 {{% /tab %}}
 {{% tab "Changement" %}}
 
@@ -154,6 +154,8 @@ Datadog peut envoyer des notifications d'alerte et des notifications d'avertisse
 
 Lorsque vous modifiez un seuil, l'aperçu du graphique dans l'éditeur affiche un indicateur symbolisant la limite.
 
+**Remarque** : lorsque vous saisissez des valeurs décimales pour des seuils, si votre valeur est `<1`, ajoutez un `0` au début du nombre. Par exemple, utilisez `0.5` et non `,5`.
+
 #### Data window
 
 Utilisez les options `Require` et `Do not require` pour définir si l'intervalle de mesure entier doit être comblé avant d'évaluer le monitor.
@@ -168,9 +170,13 @@ Ce paramètre vous permet de choisir à quel moment un monitor doit être évalu
 
 Utilisez l'option `Do not notify` pour ne pas être notifié en cas d'absence de données ou `Notify` pour être  notifié en cas d'absence de données pendant plus de `N` minutes.
 
-Les notifications d'absence de données sont particulièrement utiles si une métrique est supposée envoyer des données en permanence. Par exemple, si un host sur lequel l'Agent est installé doit être disponible en continu, la métrique `system.cpu.idle` doit toujours envoyer des données. Dans ce cas, nous vous conseillons d'activer ces notifications. **Remarque** : l'intervalle d'absence de données doit être deux fois supérieur à l'intervalle d'évaluation.
+Les notifications d'absence de données sont particulièrement utiles si une métrique est supposée envoyer des données en permanence. Par exemple, si un host sur lequel l'Agent est installé doit être disponible en continu, la métrique `system.cpu.idle` doit toujours envoyer des données. Dans ce cas, nous vous conseillons d'activer ces notifications.
+
+**Remarque** : l'intervalle d'absence de données doit être au moins deux fois supérieur à l'intervalle d'évaluation.
 
 En revanche, si vous surveillez une métrique pour un groupe de hosts avec mise à l'échelle automatique où les hosts s'arrêtent et démarrent automatiquement, vous risqueriez de recevoir un trop grand nombre de notifications. Dans ce cas, nous vous conseillons de ne pas les activer.
+
+Cette option ne fonctionne pas si vous l'activez alors qu'aucune donnée n'a été transmise pendant une longue période.
 
 #### Auto Resolve
 
@@ -197,7 +203,7 @@ Pour obtenir des instructions détaillées sur l'utilisation des sections **Say 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/metric
-[2]: /fr/tagging/using_tags/?tab=assignment
+[2]: /fr/getting_started/tagging/using_tags/?tab=assignment
 [3]: /fr/dashboards/querying/#advanced-graphing
 [4]: /fr/monitors/faq/what-are-recovery-thresholds
 [5]: /fr/monitors/notifications

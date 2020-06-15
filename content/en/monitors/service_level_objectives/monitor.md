@@ -24,12 +24,6 @@ To start, you need to be using Datadog monitors. To set up a new monitor, go to 
 2. Select multiple monitors (up to 20) or,
 3. Select a single multi-alert monitor and select specific monitor groups (up to 20) to be included in SLO calculation.
 
-**Supported monitor types**:
-
-- metric monitor types - including metric, anomaly, APM, forecast, outlier, and integration metrics
-- synthetics
-- service checks (beta)
-
 **Example:** You might be tracking the uptime of a physical device. You have already configured a metric monitor on `host:foo` using a custom metric. This monitor might also ping your on-call team if it's no longer reachable. To avoid burnout you want to track how often this host is down.
 
 ### Set your SLO targets

@@ -5,7 +5,7 @@ description: "La Service\_Map permet de visualiser les données recueillies par 
 aliases:
   - /fr/tracing/servicemap
 further_reading:
-  - link: tracing/setup/
+  - link: /tracing/setup/
     tag: Documentation
     text: Découvrir comment configurer le tracing d'APM avec votre application
   - link: 'https://www.datadoghq.com/blog/service-map/'
@@ -31,7 +31,7 @@ La Service Map a été conçue pour fournir un aperçu de vos services et de le
 
 La Service Map peut être filtrée en fonction du type de service (webserver, database, cache, etc.) ou d'une correspondance de chaîne approximative. Cette fonctionnalité est particulièrement utile dans un environnement de micro-services composé de centaines de milliers de nœuds.
 
-Les services sont également filtrés en fonction de leur `env` et d'une [dimension primaire][2] (facultative). Lorsque vous utilisez les menus déroulants pour sélectionner un contexte différent, une nouvelle carte illustrant les services correspondants à ce contexte est alors générée. Ces services ne peuvent pas appeler ni être appelés par des services dans d'autres environnements.
+Les services sont également filtrés en fonction de leur `env` et d'un [deuxième tag primaire][2] (facultatif). Lorsque vous utilisez les menus déroulants pour sélectionner un contexte différent, une nouvelle carte illustrant les services correspondants à ce contexte est alors générée. Ces services ne peuvent pas appeler ni être appelés par des services dans d'autres environnements.
 
 ## Inspection
 
@@ -86,6 +86,6 @@ Les monitors ne se limitent pas aux monitors d'APM. Le tag service décrit ci-de
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/visualization/#services
-[2]: /fr/tracing/setup/first_class_dimensions
+[2]: /fr/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [3]: https://app.datadoghq.com/apm/services
 [4]: /fr/tracing/visualization/#trace

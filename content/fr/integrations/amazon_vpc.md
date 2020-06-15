@@ -56,7 +56,7 @@ Sélectionnez le filtre `All` pour afficher les connexions acceptées et refusé
 
     {{< img src="integrations/amazon_vpc/s3_trigger_configuration.png" alt="Configuration du déclencheur S3" style="width:75%;" >}}
 
-   Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs AWS VPC et remplacez le _type d'événement_ par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
+    Configurez votre déclencheur en choisissant le compartiment S3 qui contient vos logs AWS VPC et remplacez le _type d'événement_ par `Object Created (All)`. Cliquez ensuite sur le bouton Add.
 
     {{< img src="integrations/amazon_vpc/s3_lambda_trigger_configuration.png" alt="Déclencheur Lambda S3" style="width:75%;" >}}
 

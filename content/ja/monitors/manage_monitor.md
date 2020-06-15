@@ -123,4 +123,4 @@ further_reading:
 [6]: /ja/monitors/monitor_status/#resolve
 [7]: https://app.datadoghq.com/monitors/triggered
 [8]: https://app.datadoghq.com/monitors#downtime
-[9]: /ja/tagging/assigning_tags/?tab=monitors#ui
+[9]: /ja/getting_started/tagging/assigning_tags/?tab=monitors#ui

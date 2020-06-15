@@ -148,7 +148,7 @@ Official integrations have their own dedicated directories. There's a default in
 [5]: /developers/prometheus/
 [6]: /integrations/guide/prometheus-metrics
 [7]: /agent/kubernetes/#installation
-[8]: /tagging/
+[8]: /getting_started/tagging/
 [9]: /integrations/guide/prometheus-host-collection/#parameters-available
 [10]: https://app.datadoghq.com/account/settings#agent/kubernetes
 [11]: /resources/yaml/prometheus.yaml

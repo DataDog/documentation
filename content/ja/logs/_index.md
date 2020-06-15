@@ -7,7 +7,7 @@ aliases:
   - /ja/guides/logs/
   - /ja/logs/logging_without_limits
 further_reading:
-  - link: /logs/guide
+  - link: /logs/guide/
     tag: ガイド
     text: ログの収集および処理に役立つその他の記事
   - link: 'https://learn.datadoghq.com'
@@ -47,4 +47,4 @@ Datadog のログ管理は、ログの取り込みをインデックスの作成
 <br>
 \*Logging without Limits は Datadog, Inc. の商標です。
 
-[1]: /ja/security_monitoring
+[1]: /ja/security_monitoring/

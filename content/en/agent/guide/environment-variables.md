@@ -24,6 +24,10 @@ For Agent v5, reference the <a href="https://github.com/DataDog/docker-dd-agent#
 
 For Agent v6, most of the configuration options in the [Agent's main configuration file][1] (`datadog.yaml`) can be set through environment variables.
 
+## Recommendations
+
+As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][2] documentation.
+
 ## General use
 
 In general, use the following rules:
@@ -32,10 +36,10 @@ In general, use the following rules:
 
 * List values should be separated by spaces:
    ```yaml
-      ac_include:
+      container_include:
         - "image:cp-kafka"
         - "image:k8szk"
-      # DD_AC_INCLUDE="image:cp-kafka image:k8szk"
+      # DD_CONTAINER_INCLUDE="image:cp-kafka image:k8szk"
    ```
 
 * The nesting of config options with **predefined** keys should be separated with an underscore:
@@ -52,7 +56,7 @@ In general, use the following rules:
       # DD_DOCKER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
-**Note**: Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][2] for more details.
+**Note**: Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details.
 
 ### Exceptions
 
@@ -63,12 +67,13 @@ In general, use the following rules:
       # DD_APM_ENABLED=true
     ```
 
-* Not all `datadog.yaml` options are available with environment variables. Refer to [config.go][3] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
+* Not all `datadog.yaml` options are available with environment variables. Refer to [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/proxy/#environment-variables
-[3]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go
+[2]: /getting_started/tagging/unified_service_tagging
+[3]: /agent/proxy/#environment-variables
+[4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go

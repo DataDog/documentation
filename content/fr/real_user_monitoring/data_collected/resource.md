@@ -20,7 +20,7 @@ Toutes les ressources de votre site Web sont recueillies par défaut : images, 
 
 L'[API Performance Resource Timing][2] recueille des données réseau temporelles détaillées sur le changement des ressources d'une application.
 
-{{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Métriques de ressource" >}}
+{{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="Métriques de ressource"  >}}
 
 ## Mesure collectée
 

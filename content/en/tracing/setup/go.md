@@ -64,7 +64,7 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 | [Gorilla Mux][11] | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux][12]                |
 | [gRPC][13]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc][14]     |
 | [gRPC v1.2][13]   | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][15] |
-| [chi][16]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12][17] |
+| [chi][16]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi][17] |
 | [echo][18]        | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo][19]              |
 
 #### Library Compatibility
@@ -85,7 +85,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [SQL][38]               | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql][39]                      |
 | [SQLx][40]              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx][41]                      |
 | [MongoDB][42]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo][43] |
-| [MongoDB (mgo)[73]      | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/globalsign/mgo][44]                    |
+| [MongoDB (mgo)      | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/globalsign/mgo][44]                    |
 | [BuntDB][45]            | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb][46]                    |
 | [LevelDB][47]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][48]          |
 | [miekg/dns][49]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][50]                         |
@@ -110,45 +110,59 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 
 ## Configuration
 
-The tracer is configured with options parameters when the `Start` function is called. An example for generating a trace using the HTTP library:
+The Go tracer supports additional environment variables and functions for configuration.
+See all available options in the [configuration documentation][72].
+
+We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
+Check out the [Unified Service Tagging][73] documentation for recommendations on how to configure these environment variables.
+
+You may also elect to provide `env`, `service`, and `version` through the tracer's API:
 
 ```go
 package main
 
 import (
-    "log"
-    "net/http"
-    "strings"
-
-    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
-func sayHello(w http.ResponseWriter, r * http.Request) {
-    msg := "Hello " + strings.TrimPrefix(r.URL.Path, "/")
-    w.Write([] byte(msg))
-}
-
 func main() {
-    // start the tracer with zero or more options
-    tracer.Start(tracer.WithServiceName("test-go"))
+    tracer.Start(
+        tracer.WithEnv("prod"),
+        tracer.WithService("test-go"),
+        tracer.WithVersion("abc123"),
+    )
     defer tracer.Stop()
-
-    mux := httptrace.NewServeMux() // init the http tracer
-    mux.HandleFunc("/", sayHello) // use the tracer to handle the urls
-
-    err := http.ListenAndServe(":9090", mux) // set listen port
-    if err != nil {
-        log.Fatal("ListenAndServe: ", err)
-    }
 }
 ```
 
-For more tracer settings, see available options in the [configuration documentation][72].
+### Change Agent Hostname
+
+The Go Tracing Module automatically looks for and initializes with the environment variables `DD_AGENT_HOST` and `DD_AGENT_APM_PORT`.
+
+But you can also set a custom hostname and port in code:
+
+```go
+package main
+
+import (
+    "net"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    addr := net.JoinHostPort(
+        "custom-hostname",
+        "1234",
+    )
+    tracer.Start(tracer.WithAgentAddr(addr))
+    defer tracer.Stop()
+}
+```
 
 ### B3 Headers Extraction and Injection
 
-The Datadog APM tracer supports [B3 headers extraction][73] and injection for distributed tracing.
+The Datadog APM tracer supports [B3 headers extraction][74] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
@@ -168,55 +182,6 @@ If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully
 extracted value is used.
 
-## Change Agent Hostname
-
-Configure your application level tracers to submit traces to a custom Agent hostname:
-
-The Go Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
-
-```go
-package main
-
-import (
-    "net"
-    "os"
-
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func main() {
-    addr := net.JoinHostPort(
-        os.Getenv("DD_AGENT_HOST"),
-        os.Getenv("DD_TRACE_AGENT_PORT"),
-    )
-    tracer.Start(tracer.WithAgentAddr(addr))
-    defer tracer.Stop()
-}
-
-```
-
-## Configure APM Environment Name
-
-The [APM environment name][74] may be configured [in the agent][75] or using the [WithEnv][76] start option of the tracer.
-
-```go
-package main
-
-import (
-    "os"
-
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func main() {
-    tracer.Start(tracer.WithEnv("<ENVIRONMENT>"))
-    defer tracer.Stop()
-
-    // ...
-}
-```
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -225,8 +190,8 @@ func main() {
 [2]: /tracing/visualization/
 [3]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[5]: https://app.datadoghq.com/apm/install
-[6]: /tracing/send_traces/
+[5]: /tracing/send_traces/
+[6]: https://app.datadoghq.com/apm/install
 [7]: /tracing/setup/docker/
 [8]: /agent/kubernetes/apm/
 [9]: https://gin-gonic.com
@@ -234,7 +199,7 @@ func main() {
 [11]: http://www.gorillatoolkit.org/pkg/mux
 [12]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux
 [13]: https://github.com/grpc/grpc-go
-[14]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc
+[14]: https://godoc.org/****gopkg****.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc
 [15]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc.v12
 [16]: https://github.com/go-chi/chi
 [17]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi
@@ -293,7 +258,5 @@ func main() {
 [70]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
 [71]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [72]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[73]: https://github.com/openzipkin/b3-propagation
-[74]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[75]: /getting_started/tracing/#environment-name
-[76]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithEnv
+[73]: /getting_started/tagging/unified_service_tagging
+[74]: https://github.com/openzipkin/b3-propagation

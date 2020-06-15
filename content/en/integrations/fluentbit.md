@@ -31,7 +31,7 @@ Find below instructions to configure Fluent bit on a host, if you want to config
 
 Before you begin, you need to have a [Datadog account][3], a [Datadog API key][4], and you need to [activate Datadog Logs Management][5].
 
-1. [Install][6] and [configure][7] Fluent Bit by using their reccomended method of a configuration file.
+1. [Install][6] and [configure][7] Fluent Bit by using their recommended method of a configuration file.
 2. Update your [Fluent Bit configuration file][8] to add Datadog as an output plugin. For more information on the configuration parameters, see the [Configuration parameters table](#configuration-parameters). For an example `[OUTPUT]` configuration section, see the [Configuration file example](#configuration-file-example).
 3. Once you start sending logs from Fluent Bit, verify the logs on the [Datadog Logs Explorer page][9].
 
@@ -78,9 +78,9 @@ Need help? Contact [Datadog support][11].
 [3]: https://app.datadoghq.com/signup
 [4]: /account_management/api-app-keys/
 [5]: https://app.datadoghq.com/logs/activation
-[6]: https://docs.fluentbit.io/manual/installation
-[7]: https://docs.fluentbit.io/manual/configuration
-[8]: https://docs.fluentbit.io/manual/configuration/file
+[6]: https://docs.fluentbit.io/manual/installation/sources/build-and-install
+[7]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit
+[8]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/configuration-file
 [9]: https://app.datadoghq.com/logs
-[10]: /tagging/
+[10]: /getting_started/tagging/
 [11]: /help/

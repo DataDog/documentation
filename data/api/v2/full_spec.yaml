@@ -124,13 +124,31 @@ components:
           description: Name of the creator.
           type: string
       type: object
+    DashboardListAddItemsRequest:
+      description: Request containing a list of dashboards to add.
+      properties:
+        dashboards:
+          description: List of dashboards to add the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItemRequest'
+          type: array
+      type: object
     DashboardListAddItemsResponse:
       description: Response containing a list of added dashboards.
       properties:
         added_dashboards_to_list:
           description: List of dashboards added to the dashboard list.
           items:
-            $ref: '#/components/schemas/DashboardListItem'
+            $ref: '#/components/schemas/DashboardListItemResponse'
+          type: array
+      type: object
+    DashboardListDeleteItemsRequest:
+      description: Request containing a list of dashboards to delete.
+      properties:
+        dashboards:
+          description: List of dashboards to delete from the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItemRequest'
           type: array
       type: object
     DashboardListDeleteItemsResponse:
@@ -139,7 +157,7 @@ components:
         deleted_dashboards_from_list:
           description: List of dashboards deleted from the dashboard list.
           items:
-            $ref: '#/components/schemas/DashboardListItem'
+            $ref: '#/components/schemas/DashboardListItemResponse'
           type: array
       type: object
     DashboardListItem:
@@ -158,7 +176,7 @@ components:
           type: string
         id:
           description: ID of the dashboard.
-          example: null
+          example: q5j-nti-fv6
           type: string
         is_favorite:
           description: Whether or not the dashboard is in the favorites.
@@ -197,12 +215,39 @@ components:
       - type
       - id
       type: object
+    DashboardListItemRequest:
+      description: A dashboard within a list.
+      properties:
+        id:
+          description: ID of the dashboard.
+          example: q5j-nti-fv6
+          type: string
+        type:
+          $ref: '#/components/schemas/DashboardType'
+      required:
+      - type
+      - id
+      type: object
+    DashboardListItemResponse:
+      description: A dashboard within a list.
+      properties:
+        id:
+          description: ID of the dashboard.
+          example: q5j-nti-fv6
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/DashboardType'
+      required:
+      - type
+      - id
+      type: object
     DashboardListItems:
       description: Dashboards within a list.
       properties:
         dashboards:
           description: List of dashboards in the dashboard list.
-          example: null
+          example: []
           items:
             $ref: '#/components/schemas/DashboardListItem'
           type: array
@@ -213,6 +258,24 @@ components:
           type: integer
       required:
       - dashboards
+      type: object
+    DashboardListUpdateItemsRequest:
+      description: Request containing the list of dashboards to update to.
+      properties:
+        dashboards:
+          description: List of dashboards to update the dashboard list to.
+          items:
+            $ref: '#/components/schemas/DashboardListItemRequest'
+          type: array
+      type: object
+    DashboardListUpdateItemsResponse:
+      description: Response containing a list of updated dashboards.
+      properties:
+        dashboards:
+          description: List of dashboards in the dashboard list.
+          items:
+            $ref: '#/components/schemas/DashboardListItemResponse'
+          type: array
       type: object
     DashboardType:
       description: The type of the dashboard.
@@ -296,12 +359,6 @@ components:
       type: object
     LogsArchiveCreateRequestDestination:
       description: An archive's destination.
-      discriminator:
-        mapping:
-          azure: '#/components/schemas/LogsArchiveDestinationAzure'
-          gcs: '#/components/schemas/LogsArchiveDestinationGCS'
-          s3: '#/components/schemas/LogsArchiveDestinationS3'
-        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
       - $ref: '#/components/schemas/LogsArchiveDestinationGCS'
@@ -331,12 +388,6 @@ components:
       type: object
     LogsArchiveDestination:
       description: An archive's destination.
-      discriminator:
-        mapping:
-          azure: '#/components/schemas/LogsArchiveDestinationAzure'
-          gcs: '#/components/schemas/LogsArchiveDestinationGCS'
-          s3: '#/components/schemas/LogsArchiveDestinationS3'
-        propertyName: type
       nullable: true
       oneOf:
       - $ref: '#/components/schemas/LogsArchiveDestinationAzure'
@@ -366,17 +417,22 @@ components:
           example: account-name
           type: string
         type:
-          default: azure
-          description: The type of destination.
-          example: azure
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/LogsArchiveDestinationAzureType'
       required:
       - storage_account
       - container
       - integration
       - type
       type: object
+    LogsArchiveDestinationAzureType:
+      default: azure
+      description: Type of the Azure archive destination.
+      enum:
+      - azure
+      example: azure
+      type: string
+      x-enum-varnames:
+      - AZURE
     LogsArchiveDestinationGCS:
       description: The GCS archive destination.
       properties:
@@ -390,16 +446,21 @@ components:
           description: The archive path.
           type: string
         type:
-          default: gcs
-          description: The type of destination.
-          example: gcs
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/LogsArchiveDestinationGCSType'
       required:
       - bucket
       - integration
       - type
       type: object
+    LogsArchiveDestinationGCSType:
+      default: gcs
+      description: Type of the GCS archive destination.
+      enum:
+      - gcs
+      example: gcs
+      type: string
+      x-enum-varnames:
+      - GCS
     LogsArchiveDestinationS3:
       description: The S3 archive destination.
       properties:
@@ -413,16 +474,21 @@ components:
           description: The archive path.
           type: string
         type:
-          default: s3
-          description: The type of destination.
-          example: s3
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/LogsArchiveDestinationS3Type'
       required:
       - bucket
       - integration
       - type
       type: object
+    LogsArchiveDestinationS3Type:
+      default: s3
+      description: Type of the S3 archive destination.
+      enum:
+      - s3
+      example: s3
+      type: string
+      x-enum-varnames:
+      - S3
     LogsArchiveIntegrationAzure:
       description: The Azure archive's integration destination.
       properties:
@@ -491,6 +557,15 @@ components:
             $ref: '#/components/schemas/LogsArchiveDefinition'
           type: array
       type: object
+    LogsRestrictionQueriesType:
+      default: logs_restriction_queries
+      description: Restriction query resource type.
+      enum:
+      - logs_restriction_queries
+      example: logs_restriction_queries
+      type: string
+      x-enum-varnames:
+      - LOGS_RESTRICTION_QUERIES
     Organization:
       description: Organization object.
       properties:
@@ -733,13 +808,13 @@ components:
       properties:
         created_at:
           description: Creation time of the restriction query.
-          example: '2020-03-17T21:06:44.944905+00:00'
+          example: '2020-03-17T21:06:44Z'
           format: date-time
           readOnly: true
           type: string
         modified_at:
           description: Time of last restriction query modification.
-          example: '2020-03-17T21:15:15.833683+00:00'
+          example: '2020-03-17T21:15:15Z'
           format: date-time
           readOnly: true
           type: string
@@ -867,11 +942,7 @@ components:
         relationships:
           $ref: '#/components/schemas/RestrictionQueryRelationships'
         type:
-          default: logs_restriction_queries
-          description: Restriction queries type.
-          example: logs_restriction_queries
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/LogsRestrictionQueriesType'
       type: object
     RestrictionQueryWithRelationshipsResponse:
       description: Response containing information about a single restriction query.
@@ -937,12 +1008,27 @@ components:
         name:
           description: Name of the role.
           type: string
+        user_count:
+          description: Number of users with that role.
+          format: int64
+          readOnly: true
+          type: integer
       type: object
     RoleCreateAttributes:
       description: Attributes of the created role.
       properties:
+        created_at:
+          description: Creation time of the role.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last role modification.
+          format: date-time
+          readOnly: true
+          type: string
         name:
-          description: The name of the role.
+          description: Name of the role.
           type: string
       type: object
     RoleCreateData:
@@ -955,11 +1041,30 @@ components:
         type:
           $ref: '#/components/schemas/RolesType'
       type: object
-    RoleCreatePayload:
+    RoleCreateRequest:
       description: Create a role.
       properties:
         data:
           $ref: '#/components/schemas/RoleCreateData'
+      type: object
+    RoleCreateResponse:
+      description: Response containing information about a created role.
+      properties:
+        data:
+          description: Role object returned by the API.
+          properties:
+            attributes:
+              $ref: '#/components/schemas/RoleCreateAttributes'
+            id:
+              description: ID of the role.
+              type: string
+            relationships:
+              $ref: '#/components/schemas/RoleResponseRelationships'
+            type:
+              $ref: '#/components/schemas/RolesType'
+          required:
+          - type
+          type: object
       type: object
     RoleRelationships:
       description: Relationships of the role object.
@@ -978,20 +1083,24 @@ components:
     RoleResponseRelationships:
       description: Relationships of the role object returned by the API.
       properties:
-        org:
-          $ref: '#/components/schemas/RelationshipToOrganization'
-        other_orgs:
-          $ref: '#/components/schemas/RelationshipToOrganizations'
-        other_roles:
-          $ref: '#/components/schemas/RelationshipToRoles'
-        roles:
-          $ref: '#/components/schemas/RelationshipToRoles'
+        permissions:
+          $ref: '#/components/schemas/RelationshipToPermissions'
       type: object
     RoleUpdateAttributes:
-      description: Attributes of the edited role.
+      description: Attributes of the role.
       properties:
+        created_at:
+          description: Creation time of the role.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last role modification.
+          format: date-time
+          readOnly: true
+          type: string
         name:
-          description: The name of the role.
+          description: Name of the role.
           type: string
       type: object
     RoleUpdateData:
@@ -1005,11 +1114,30 @@ components:
         type:
           $ref: '#/components/schemas/RolesType'
       type: object
-    RoleUpdatePayload:
+    RoleUpdateRequest:
       description: Update a role.
       properties:
         data:
           $ref: '#/components/schemas/RoleUpdateData'
+      type: object
+    RoleUpdateResponse:
+      description: Response containing information about an updated role.
+      properties:
+        data:
+          description: Role object returned by the API.
+          properties:
+            attributes:
+              $ref: '#/components/schemas/RoleUpdateAttributes'
+            id:
+              description: ID of the role.
+              type: string
+            relationships:
+              $ref: '#/components/schemas/RoleResponseRelationships'
+            type:
+              $ref: '#/components/schemas/RolesType'
+          required:
+          - type
+          type: object
       type: object
     RolesResponse:
       description: Response containing information about multiple roles.
@@ -1086,7 +1214,7 @@ components:
       properties:
         cases:
           description: Cases for generating signals.
-          example: null
+          example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
           type: array
@@ -1096,17 +1224,17 @@ components:
           type: boolean
         message:
           description: Message for generated signals.
-          example: null
+          example: ''
           type: string
         name:
           description: The name of the rule
-          example: null
+          example: ''
           type: string
         options:
           $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
         queries:
           description: Queries for selecting logs which are part of the rule.
-          example: null
+          example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
           type: array
@@ -1609,7 +1737,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DashboardListItems'
+              $ref: '#/components/schemas/DashboardListDeleteItemsRequest'
         description: Dashboards to delete from the dashboard list.
         required: true
       responses:
@@ -1689,7 +1817,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DashboardListItems'
+              $ref: '#/components/schemas/DashboardListAddItemsRequest'
         description: Dashboards to add to the dashboard list.
         required: true
       responses:
@@ -1736,7 +1864,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DashboardListItems'
+              $ref: '#/components/schemas/DashboardListUpdateItemsRequest'
         description: New dashboards of the dashboard list.
         required: true
       responses:
@@ -1744,7 +1872,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DashboardListItems'
+                $ref: '#/components/schemas/DashboardListUpdateItemsResponse'
           description: OK
         '400':
           content:
@@ -1788,9 +1916,6 @@ paths:
       summary: Get all archives
       tags:
       - Logs Archives
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: Create an archive in your organization.
       operationId: CreateLogsArchive
@@ -1824,9 +1949,6 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/logs/config/archives/{archive_id}:
     delete:
       description: Delete a given archive from your organization.
@@ -1857,9 +1979,6 @@ paths:
       summary: Delete an archive
       tags:
       - Logs Archives
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     get:
       description: Get a specific archive from your organization.
       operationId: GetLogsArchive
@@ -1893,9 +2012,6 @@ paths:
       summary: Get an archive
       tags:
       - Logs Archives
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     put:
       description: 'Update a given archive configuration.
 
@@ -1942,9 +2058,6 @@ paths:
       tags:
       - Logs Archives
       x-codegen-request-body-name: body
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/logs/config/archives/{archive_id}/readers:
     delete:
       description: Removes a role from an archive. ([Roles API](https://docs.datadoghq.com/api/v2/roles/))
@@ -2486,13 +2599,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RoleCreatePayload'
+              $ref: '#/components/schemas/RoleCreateRequest'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoleResponse'
+                $ref: '#/components/schemas/RoleCreateResponse'
           description: OK
         '400':
           content:
@@ -2573,13 +2686,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RoleUpdatePayload'
+              $ref: '#/components/schemas/RoleUpdateRequest'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoleResponse'
+                $ref: '#/components/schemas/RoleUpdateResponse'
           description: OK
         '400':
           content:
@@ -3307,11 +3420,12 @@ tags:
   name: Authentication
 - description: '[See API version 1](/api/v1/azure-integration/).'
   name: Azure Integration
-- description: '[Interact with your dashboard lists](https://docs.datadoghq.com/monitors/downtimes)
+- description: 'Interact with your dashboard lists through the API to make it easier
+    to
 
-    through the API to make it easier to organize, find, and share all of your dashboards
+    organize, find, and share all of your dashboards with your team and
 
-    with your team and organization.'
+    organization.'
   name: Dashboard Lists
 - description: '[See API version 1](/api/v1/dashboards/).'
   name: Dashboards

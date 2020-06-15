@@ -153,7 +153,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 
 
 [1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /tagging/assigning_tags/#environment-variables
+[2]: /getting_started/tagging/assigning_tags/#environment-variables
 [3]: /agent/guide/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -165,7 +165,7 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 When running inside a container, DogStatsD needs to run in the host's PID namespace for origin detection to work reliably. Enable this in Docker with `--pid=host` flag. This is supported by ECS with the parameter `"pidMode": "host"` in the task definition of the container. This option is not supported in Fargate. For more information, see the [AWS documentation][2].
 
 [2]:
-[1]: /tagging/assigning_tags/#environment-variables
+[1]: /getting_started/tagging/assigning_tags/#environment-variables
 [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_pidmode
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -191,7 +191,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
     ```
 
 
-[1]: /tagging/assigning_tags/#environment-variables
+[1]: /getting_started/tagging/assigning_tags/#environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 

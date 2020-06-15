@@ -35,8 +35,8 @@ The Datadog Cluster Agent needs a proper RBAC to be up and running:
 2. To configure Cluster Agent RBAC permissions, apply the following manifests. (You may have done this already when setting up the [node Agent daemonset][2].)
 
   ```shell
-  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac.yaml"
-  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/agent-rbac.yaml"
+  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-agent.yaml"
+  kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac/rbac-cluster-agent.yaml"
   ```
 
   This creates the appropriate `ServiceAccount`, `ClusterRole`, and `ClusterRoleBinding` for the Cluster Agent.
@@ -174,7 +174,9 @@ After having set up the Datadog Cluster Agent, configure your Datadog Agent to c
 
 5. In the `agent.yaml` manifest, add the environment variable `DD_CLUSTER_AGENT_ENABLED` and set it to `true`.
 
-6. Create the DaemonSet with this command: `kubectl apply -f agent.yaml`
+6. (Optional) If your cluster encompasses a single environment, you can also set `<DD_ENV>` in the `agent.yaml`.
+
+7. Create the DaemonSet with this command: `kubectl apply -f agent.yaml`
 
 ### Verification
 

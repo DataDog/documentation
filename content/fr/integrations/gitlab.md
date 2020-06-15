@@ -62,16 +62,19 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
 
 1. Modifiez le fichier `gitlab.d/conf.yaml` dans le dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][3] afin de spécifier l'[endpoint][4] de métriques de Gitlab. Consultez le [fichier d'exemple gitlab.d/conf.yaml][5] pour découvrir toutes les options de configuration disponibles.
 
-    **Remarque** : les métriques dans [metrics.py][6] sont collectées par défaut. L'option de configuration `allowed_metrics` dans `init_config` collecte des métriques antérieures spécifiques. Selon la version et la configuration de votre instance Gitlab, il se peut que certaines métriques ne soient pas collectées. Consultez la [documentation de Gitlab][7] pour en savoir plus sur la collecte de ses métriques.
+2. Sur la page des paramètres Gitlab, assurez-vous que l'option `Enable Prometheus Metrics` est activée. Vous devrez disposer des droits administrateur. Pour en savoir plus sur l'activation de la collecte de métriques, consultez la [documentation de Gitlab][6].
 
-2. Autorisez l'accès aux endpoints de surveillance en mettant à jour `/etc/gitlab/gitlab.rb` pour y ajouter la ligne suivante :
+3. Autorisez l'accès aux endpoints de surveillance en mettant à jour `/etc/gitlab/gitlab.rb` pour y ajouter la ligne suivante :
 
     ```
     gitlab_rails['monitoring_whitelist'] = ['127.0.0.0/8', '192.168.0.1']
     ```
-    **Remarque** : enregistrez et reconfigurez Gitlab pour voir les modifications.
+    **Remarque** : enregistrez et redémarrez Gitlab pour voir les modifications.
 
-2. [Redémarrez l'Agent][8].
+4. [Redémarrez l'Agent][7].
+
+**Remarque** : les métriques dans [gitlab/metrics.py][8] sont collectées par défaut. L'option de configuration `allowed_metrics` dans `init_config` collecte des métriques antérieures spécifiques. Selon la version et la configuration de votre instance Gitlab, il se peut que certaines métriques ne soient pas collectées. Consultez la [documentation de Gitlab][6] pour en savoir plus sur la collecte de ses métriques.
+
 
 ##### Collecte de logs
 
@@ -99,7 +102,7 @@ Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est 
          source: gitlab
    ```
 
-3. [Redémarrez l'Agent][8].
+3. [Redémarrez l'Agent][7].
 
 #### Environnement conteneurisé
 
@@ -119,7 +122,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 | Paramètre      | Valeur                                       |
 | -------------- | ------------------------------------------- |
-| `<CONFIG_LOG>` | `{"source": "gitlab", "service": "gitlab"}` |
+| `<LOG_CONFIG>` | `{"source": "gitlab", "service": "gitlab"}` |
 
 ### Validation
 
@@ -207,9 +210,9 @@ Besoin d'aide ? Contactez [l'assistance Datadog][12].
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://docs.gitlab.com/ee/administration/monitoring/prometheus/gitlab_metrics.html#collecting-the-metrics
 [5]: https://github.com/DataDog/integrations-core/blob/master/gitlab/datadog_checks/gitlab/data/conf.yaml.example
-[6]: https://github.com/DataDog/integrations-core/blob/master/gitlab/datadog_checks/gitlab/metrics.py
-[7]: https://docs.gitlab.com/ee/administration/monitoring/prometheus/gitlab_metrics.html
-[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.gitlab.com/ee/administration/monitoring/prometheus/gitlab_metrics.html
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://github.com/DataDog/integrations-core/blob/master/gitlab/datadog_checks/gitlab/metrics.py
 [9]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [10]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
 [11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
