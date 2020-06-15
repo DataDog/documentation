@@ -45,11 +45,11 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-[1]: /fr/logs/log_collection/python/#configure-the-datadog-agent
+[1]: /fr/logs/log_collection/ruby/#configure-the-datadog-agent
 {{% /tab %}}
 {{% tab "Par défaut" %}}
 
-Les applications Rails qui sont configurées avec un logger `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags à la sortie du log. L'logger Rails par défaut applique cette journalisation avec des tags, ce qui simplifie l'ajout de tags de trace. 
+Les applications Rails qui sont configurées avec un logger `ActiveSupport::TaggedLogging` peuvent ajouter des ID de trace en tant que tags aux logs générés. Le logger Rails par défaut applique ce logging avec tags, ce qui simplifie l'ajout de tags de trace. 
 
 Dans le fichier de configuration de votre environnement Rails (p. ex., `config/environments/production.rb`), ajoutez le code suivant :
 
@@ -73,7 +73,7 @@ Cela ajoute les tags de trace aux requêtes Web :
 
 ## Injection manuelle d'ID de trace
 
-Pour ajouter des ID de trace à votre propre enregistreur, ajoutez un formateur de log qui récupère les ID de trace avec `Datadog.tracer.active_correlation`, puis ajoutez les ID de trace au message.
+Pour ajouter des ID de trace à votre propre logger, ajoutez un formateur de log qui récupère les ID de trace avec `Datadog.tracer.active_correlation`, puis ajoutez les ID de trace au message.
 
 Pour s'assurer du bon fonctionnement de la corrélation des logs, vérifiez que les éléments suivants sont inclus dans chaque message :
 

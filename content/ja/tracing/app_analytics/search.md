@@ -190,7 +190,7 @@ further_reading:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations
-[2]: /ja/tagging/#tags-best-practices
+[2]: /ja/getting_started/tagging/#tags-best-practices
 [3]: /ja/tracing/visualization/#services
 [4]: /ja/tracing/guide/adding_metadata_to_spans/
 [5]: /ja/tracing/app_analytics/#configure-additional-services-optional

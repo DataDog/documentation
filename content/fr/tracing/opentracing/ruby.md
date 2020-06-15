@@ -13,7 +13,7 @@ further_reading:
     tag: Documentation
     text: 'Explorer vos services, ressources et traces'
 ---
-Pour configurer Datadog avec OpenTracing, consultez la section [Prise en main d'OpenTracing][1] de Ruby pour obtenir plus de détails.
+Pour en savoir plus sur la configuration de Datadog avec OpenTracing, consultez la section [Démarrage rapide pour OpenTracing][1] de la documentation dédiée à Ruby.
 
 ## Configuration des paramètres du traceur Datadog
 

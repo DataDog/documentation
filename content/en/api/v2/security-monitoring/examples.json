@@ -121,8 +121,8 @@
           {}
         ],
         "enabled": true,
-        "message": null,
-        "name": null,
+        "message": "",
+        "name": "",
         "options": {},
         "queries": [
           {}
@@ -142,8 +142,8 @@
           }
         ],
         "enabled": true,
-        "message": "string",
-        "name": "string",
+        "message": "",
+        "name": "",
         "options": {
           "evaluationWindow": "integer",
           "keepAlive": "integer",

@@ -20,7 +20,7 @@ La surveillance de processus de Datadog permet de visualiser en temps réel les 
 
 ## Installation
 
-Les processus d'installation suivants sont valables pour l'[Agent version 6 uniquement][1]. Si vous utilisez l'Agent version 5, [suivez le processus d'installation correspondant][2].
+Les processus d'installation suivants sont valables pour l'[Agent version 6 et 7][1]. Si vous utilisez l'Agent version 5, [suivez le processus d'installation correspondant][2].
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
@@ -29,20 +29,21 @@ Une fois l'installation de l'Agent Datadog effectuée, activez la collecte Live 
 
 ```yaml
 process_config:
-  enabled: "true"
+    enabled: 'true'
 ```
 
 La valeur `enabled` est une chaîne avec les options suivantes :
 
-* `"true"` : activer la collecte des processus et des conteneurs par l'Agent de processus.
-* `"false"` (par défaut) : recueillir les conteneurs uniquement (lorsque cela est possible).
-* `"disabled"` : ne pas exécuter l'Agent de processus.
+- `"true"` : activer la collecte des processus et des conteneurs par l'Agent de processus.
+- `"false"` (par défaut) : recueillir les conteneurs uniquement (lorsque cela est possible).
+- `"disabled"` : ne pas exécuter l'Agent de processus.
 
 En outre, certaines options de configuration peuvent être définies en tant que variables d'environnement.
 
 **Remarque** : les options définies en tant que variables d'environnement remplacent les paramètres définis dans le fichier de configuration.
 
 Une fois la configuration effectuée, [redémarrez l'Agent][2].
+
 
 [1]: /fr/agent/guide/agent-configuration-files/
 [2]: /fr/agent/guide/agent-commands/#restart-the-agent
@@ -58,8 +59,9 @@ Suivez les instructions pour l'[Agent Docker][1], en transmettant, en plus de to
 
 **Remarques** :
 
-* Pour recueillir des informations relatives aux conteneurs dans l'installation standard, l'utilisateur `dd-agent` doit disposer des autorisations d'accès à `docker.sock`.
-* Il est possible de recueillir des processus de host même lorsque l'Agent est exécuté en tant que conteneur.
+- Pour recueillir des informations relatives aux conteneurs dans l'installation standard, l'utilisateur `dd-agent` doit disposer des autorisations d'accès à `docker.sock`.
+- Il est possible de recueillir des processus de host même lorsque l'Agent est exécuté en tant que conteneur.
+
 
 [1]: /fr/agent/docker/#run-the-docker-agent
 {{% /tab %}}
@@ -85,10 +87,27 @@ Reportez-vous à l'[installation de Daemonset][2] standard et aux pages d'inform
 
 **Remarque** : il est possible de recueillir des processus de host même lorsque l'Agent est exécuté en tant que conteneur.
 
+
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[2]: /fr/integrations/kubernetes/#installation-via-daemonsets-kubernetes-110
+[2]: /fr/agent/kubernetes/
 [3]: /fr/agent/docker/#run-the-docker-agent
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+Mettez à jour votre fichier [datadog-values.yaml][1] avec la configuration de collecte de processus suivante, puis mettez à niveau votre chart Helm Datadog :
+
+```yaml
+datadog:
+    # (...)
+    processAgent:
+        enabled: true
+        processCollection: true
+```
+
+
+[1]: https://github.com/helm/charts/blob/master/stable/datadog/values.yaml
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Nettoyage des arguments de processus
@@ -105,13 +124,13 @@ Pour définir votre propre liste à fusionner avec celle par défaut, utilisez l
 
 ```yaml
 process_config:
-  scrub_args: true
-  custom_sensitive_words: ['personal_key', '*token', 'sql*', '*pass*d*']
+    scrub_args: true
+    custom_sensitive_words: ['personal_key', '*token', 'sql*', '*pass*d*']
 ```
 
 **Remarque** : les termes inclus dans le champ `custom_sensitive_words` peuvent uniquement contenir des caractères alphanumériques, des underscores et des wildcards (`'*'`). Un mot sensible ne peut pas être composé d'un wildcard uniquement.
 
-L'image suivante montre un processus sur la page Live Processes dont les arguments ont été masqués à l'aide de la configuration ci-dessus.
+L'image suivante illustre un processus sur la page Live Processes dont les arguments ont été masqués à l'aide de la configuration ci-dessus.
 
 {{< img src="infrastructure/process/process_arg_scrubbing.png" alt="nettoyage des arguments de processus" style="width:100%;">}}
 
@@ -121,23 +140,23 @@ Vous pouvez également nettoyer **tous** les arguments des processus en activant
 
 ```yaml
 process_config:
-  strip_proc_arguments: true
+    strip_proc_arguments: true
 ```
 
 ## Recherche, filtrage et pivotement
 
 ### Syntaxe de recherche
 
-Les processus et les conteneurs sont, de par leur nature, des objets avec une très forte cardinalité. La recherche de chaîne approximative vous permet d'afficher des informations pertinentes. L'image ci-dessous illustre l'environnement de démonstration de Datadog filtré avec la chaîne `postgres /9.`.
+Les processus et les conteneurs sont, de par leur nature, des objets avec une très forte cardinalité. La recherche de chaîne approximative vous permet d'afficher des informations pertinentes. Saisissez une chaîne composée de deux caractères ou plus pour afficher des résultats. L'image ci-dessous présente l'environnement de démonstration de Datadog filtré avec la chaîne `postgres /9.`.
 
-**Remarque** : `/9.` correspond au chemin de commande, et `postgres` correspond à la commande elle-même.
+**Remarque** : `/9.` génère une correspondance dans le chemin de commande, tandis que `postgres` génère une correspondance dans la commande.
 
 {{< img src="infrastructure/process/postgres.png" alt="Postgres"  style="width:80%;">}}
 
 Pour combiner plusieurs recherches textuelles au sein d'une requête complexe, utilisez l'un des opérateurs booléens suivants :
 
 |              |                                                                                                                                  |                                                                 |
-|:-------------|:---------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- |
 | **Opérateur** | **Description**                                                                                                                  | **Exemple**                                                     |
 | `AND`        | **Intersection** : les deux termes figurent dans les événements sélectionnés (si aucun opérateur n'est ajouté, AND est utilisé par défaut).                           | java AND elasticsearch                                          |
 | `OR`         | **Union** : un des deux termes figure dans les événements sélectionnés.                                                                       | java OR python                                                  |
@@ -151,21 +170,21 @@ Le [tagging][3] améliore la navigation. En plus de tous les tags de host exista
 
 En outre, les processus des conteneurs ECS se voient appliquer les tags suivants :
 
-* `task_name`
-* `task_version`
-* `ecs_cluster`
+- `task_name`
+- `task_version`
+- `ecs_cluster`
 
 Les processus des conteneurs Kubernetes se voient appliquer les tags suivants :
 
-* `pod_name`
-* `kube_pod_ip`
-* `kube_service`
-* `kube_namespace`
-* `kube_replica_set`
-* `kube_daemon_set`
-* `kube_job`
-* `kube_deployment`
-* `Kube_cluster`
+- `pod_name`
+- `kube_pod_ip`
+- `kube_service`
+- `kube_namespace`
+- `kube_replica_set`
+- `kube_daemon_set`
+- `kube_job`
+- `kube_deployment`
+- `Kube_cluster`
 
 ### Filtrage et pivotement
 
@@ -187,17 +206,17 @@ Cet exemple est peut-être moins passionnant qu'on aurait pu l'espérer.
 
 Utilisez l'analyse de nuage de points pour comparer deux métriques entre elles et ainsi mieux comprendre les performances de vos conteneurs.
 
-Pour accéder à l'analyse de nuage de points [dans la page Processes][4], cliquez sur le bouton *Show Summary graph* puis sélectionnez l'onglet « Scatter Plot » :
+Pour accéder à l'analyse de nuage de points [dans la page Processes][4], cliquez sur le bouton _Show Summary graph_, puis sélectionnez l'onglet « Scatter Plot » :
 
-{{< img src="infrastructure/process/scatterplot_selection.png" alt="sélection nuage de points"  style="width:60%;">}}
+{{< img src="infrastructure/process/scatterplot_selection.png" alt="sélection de nuage de points"  style="width:60%;">}}
 
 Par défaut, le graphique regroupe la clé de tag `command`. La taille de chaque point représente le nombre de processus dans ce groupe. Lorsque vous cliquez sur un point, les PID et les conteneurs qui contribuent au groupe s'affichent.
 
 La requête en haut de la fenêtre vous permet de contrôler les différentes options de l'analyse de nuage de points :
 
-* Choisissez les métriques à afficher.
-* Choisissez la méthode d'agrégation des deux métriques.
-* Choisissez l'échelle pour l'axe des X et des Y (*Linear* ou *Log*).
+- Choisissez les métriques à afficher.
+- Choisissez la méthode d'agrégation des deux métriques.
+- Choisissez l'échelle pour l'axe des X et des Y (_Linear_ ou _Log_).
 
 {{< img src="infrastructure/process/scatterplot.png" alt="inspection de conteneur" style="width:80%;">}}
 
@@ -213,16 +232,16 @@ Lorsque vous utilisez activement la fonctionnalité Live Processes, les métriqu
 
 ## Remarques et questions fréquemment posées
 
-* La collecte de fichiers ouverts et du répertoire de travail actuel est limitée en fonction du niveau du privilège de l'utilisateur qui exécute `dd-process-agent`. Si `dd-process-agent` n'est pas en mesure d'accéder à ces champs, ils sont recueillis automatiquement.
-* La collecte de données en temps réel (toutes les 2 s) est désactivée après 30 minutes. Pour reprendre la collecte en temps réel, actualisez la page.
-* En cas de déploiement sur des conteneurs, le fichier `/etc/passwd` monté dans `docker-dd-agent` est nécessaire pour recueillir les noms d'utilisateur pour chaque processus. Il s'agit d'un fichier public, et l'Agent de processus n'utilise aucun autre champ que celui du nom d'utilisateur. Toutes les fonctionnalités, à l'exception du champ de métadonnées `user`, fonctionnent sans l'accès à ce fichier. **Remarque** : Live Processes utilise uniquement le fichier `passwd` du host et ne récupère pas le nom d'utilisateur pour les utilisateurs créés dans des conteneurs.
+- La collecte de fichiers ouverts et du répertoire de travail actuel est limitée en fonction du niveau du privilège de l'utilisateur qui exécute `dd-process-agent`. Si `dd-process-agent` n'est pas en mesure d'accéder à ces champs, ils sont recueillis automatiquement.
+- La collecte de données en temps réel (toutes les 2 s) est désactivée après 30 minutes. Pour reprendre la collecte en temps réel, actualisez la page.
+- En cas de déploiement sur des conteneurs, le fichier `/etc/passwd` monté dans `docker-dd-agent` est nécessaire pour recueillir les noms d'utilisateur de chaque processus. Il s'agit d'un fichier public, et l'Agent de processus n'utilise aucun autre champ que celui du nom d'utilisateur. Toutes les fonctionnalités, à l'exception du champ de métadonnées `user`, fonctionnent sans accéder à ce fichier. **Remarque** : la fonctionnalité Live Processes utilise uniquement le fichier `passwd` du host et ne récupère pas le nom d'utilisateur pour les utilisateurs créés dans des conteneurs.
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent
-[2]: /fr/agent/faq/agent-5-process-collection
-[3]: /fr/tagging
+[1]: /fr/agent/
+[2]: /fr/agent/faq/agent-5-process-collection/
+[3]: /fr/tagging/
 [4]: https://app.datadoghq.com/process
-[5]: /fr/infrastructure/livecontainers
+[5]: /fr/infrastructure/livecontainers/

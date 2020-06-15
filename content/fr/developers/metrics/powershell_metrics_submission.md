@@ -12,7 +12,7 @@ Datadog peut recueillir des métriques via l'Agent ou via l'API, et ce quel que 
 Cette méthode ne nécessite pas l'installation de l'Agent sur le système qui exécute le script PowerShell. Vous devez directement transmettre votre clé d'API ainsi qu'une clé d'application lors de l'envoi de votre requête POST. Commencez par [récupérer votre clé d'API depuis l'application Datadog][1].
 
 ```powershell
-# Testé sous Windows Server 2012 R2 avec PS version 4.0
+# Testé sous Windows Server 2012 R2 avec PS version 4.0
 
 function unixTime() {
   Return (Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
@@ -20,7 +20,7 @@ function unixTime() {
 
 function postMetric($metric,$tags) {
   $currenttime = unixTime
-  $host_name = $env:COMPUTERNAME # paramètre facultatif
+  $host_name = $env:COMPUTERNAME #paramètre facultatif
 
   # Construire le JSON
   $points = ,@($currenttime, $metric.amount)
@@ -35,8 +35,8 @@ function postMetric($metric,$tags) {
 }
 
 # Compte Datadog, détails de l'API et paramètres facultatifs
-$app_key = "<VOTRE_CLÉ_APP_ICI>" # spécifier une clé d'application valide
-$api_key = "<VOTRE_CLÉ_API_ICI>" # spécifier une clé d'API valide
+$app_key = "<CLÉ_APPLICATION_DATADOG>" # spécifier une clé d'application valide
+$api_key = "<CLÉ_API_DATADOG>" # spécifier une clé d'api valide
 $url_base = "https://app.datadoghq.com/"
 $url_signature = "api/v1/series"
 $url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
@@ -95,8 +95,8 @@ $http_request.responseText
 1. Spécifiez votre clé d'API et votre clé d'application :
 
     ```powershell
-    $api_key = "<YOUR_API_KEY>"
-    $app_key = "<YOUR_APP_KEY>"
+    $api_key = "<DATADOG_API_KEY>"
+    $app_key = "<DATADOG_APPLICATION_KEY>"
     ```
 
 2. Définissez vos paramètres selon la [description de l'API Hosts][3] :
@@ -120,8 +120,8 @@ $http_request.responseText
 1. Spécifiez votre clé d'API et votre clé d'application :
 
     ```powershell
-    $api_key = "<YOUR_API_KEY>"
-    $app_key = "<YOUR_APP_KEY>"
+    $api_key = "<DATADOG_API_KEY>"
+    $app_key = "<DATADOG_APPLICATION_KEY>"
     ```
 
 2. Définissez vos paramètres selon la [description de l'API Metrics][4] :
@@ -148,7 +148,7 @@ $http_request.responseText
 [Consultez le référentiel GitHub ncracker/dd_metric pour découvrir d'autres exemples de code][5].
 
 [1]: https://app.datadoghq.com/account/settings#api
-[2]: /fr/developers/metrics/dogstatsd_metrics_submission
-[3]: /fr/api/#hosts
-[4]: /fr/api/#metrics
+[2]: /fr/developers/metrics/dogstatsd_metrics_submission/
+[3]: /fr/api/v1/hosts/
+[4]: /fr/api/v1/metrics/
 [5]: https://github.com/ncracker/dd_metric
