@@ -19,9 +19,9 @@ You may also want to extend the functionality of the `ddtrace` library or gain f
 
 ## Creating spans
 
-The `ddtrace` library will create spans automatically with `ddtrace-run` for [many libraries and frameworks][1]. However, you may want to gain visibility into your own code and this is achieved using spans.
+The `ddtrace` library creates spans automatically with `ddtrace-run` for [many libraries and frameworks][1]. However, you may want to gain visibility into your own code and this is achieved by using spans.
 
-For instance, within your make sandwich web request you may perform several operations, `get_ingredients()` and `assemble_sandwich()`  which would be useful to measure.
+Within your web request (for example, `make_sandwich_request`), you may perform several operations, like `get_ingredients()` and `assemble_sandwich()`, which are useful to measure.
 
 ```python
 def make_sandwich_request(request):
@@ -204,7 +204,7 @@ span.finish()
 
 ## OpenTracing
 
-OpenTracing support is included in the `ddtrace` package. Use `pip` to install the required `opentracing` package :
+OpenTracing support is included in the `ddtrace` package. Use `pip` to install the required `opentracing` package:
 
 ```sh
 pip install ddtrace[opentracing]
@@ -236,7 +236,7 @@ init_tracer("<SERVICE_NAME>")
 my_operation()
 ```
 
-The tracer can now be used just like in any other OpenTracing application. See [opentracing.io][2] for OpenTracing Python usage.
+The tracer can now be used like in any other OpenTracing application. See [opentracing.io][2] for OpenTracing Python usage.
 
 
 ## Further Reading
