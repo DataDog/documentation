@@ -122,7 +122,7 @@ Par exemple, essayez d'entrer `tags:$region` dans la barre de recherche d'évén
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tagging/#defining-tags
+[1]: /fr/getting_started/tagging/#defining-tags
 [2]: /fr/logs/explorer/facets/
 [3]: /fr/real_user_monitoring/explorer/?tab=facets#setup-facets-measures
 [4]: /fr/dashboards/timeboards/#events
