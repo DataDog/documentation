@@ -42,4 +42,4 @@ Exemple : `count_not_null(system.cpu.user{*} by {host})` renvoie une série tem
     {{< nextlink href="/dashboards/functions/timeshift" >}}Décalage temporel : modifiez la période d'un point de données de votre métrique. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /fr/tagging/
+[1]: /fr/getting_started/tagging/
