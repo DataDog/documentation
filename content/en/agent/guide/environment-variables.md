@@ -36,10 +36,10 @@ In general, use the following rules:
 
 * List values should be separated by spaces:
    ```yaml
-      ac_include:
+      container_include:
         - "image:cp-kafka"
         - "image:k8szk"
-      # DD_AC_INCLUDE="image:cp-kafka image:k8szk"
+      # DD_CONTAINER_INCLUDE="image:cp-kafka image:k8szk"
    ```
 
 * The nesting of config options with **predefined** keys should be separated with an underscore:
