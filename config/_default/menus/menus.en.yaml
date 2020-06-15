@@ -768,6 +768,11 @@ main:
     identifier: tracing_setup_istio
     parent: tracing_setup
     weight: 213
+  - name: Android
+    url: tracing/setup/android/
+    identifier: tracing_setup_android
+    parent: tracing_setup
+    weight: 214
   - name: App Analytics
     url: tracing/app_analytics/
     parent: tracing
