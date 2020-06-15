@@ -34,7 +34,7 @@ Utilisez des tags pour filtrer les métriques à afficher dans un [graphique de 
 
 {{< img src="tagging/using_tags/dashboardtags_1.png" alt="Tags dans des dashboards avec la zone de texte from"  style="width:80%;">}}
 
-Pour créer un groupe agrégé à l'aide de tags, saisissez la clé du tag dans la zone de texte **avg by**. Par exemple, si vous disposez d'un graphique de séries temporelles présentant une métrique taguée avec la clé `service`, comme `service:coffee-house`, saisissez `service` dans la zone de texte **avg by** pour afficher une ligne pour chaque valeur de tag `service`. Chaque ligne représente la valeur moyenne de la métrique pour l'ensemble des sources qui partagent la valeur de tag `service`. 
+Pour créer un groupe agrégé à l'aide de tags, saisissez la clé du tag dans la zone de texte **avg by**. Par exemple, si vous disposez d'un graphique de séries temporelles présentant une métrique taguée avec la clé `service`, comme `service:coffee-house`, saisissez `service` dans la zone de texte **avg by** pour afficher une ligne pour chaque valeur de tag `service`. Chaque ligne représente la valeur moyenne de la métrique pour l'ensemble des sources qui partagent la valeur de tag `service`.
 
 {{< img src="tagging/using_tags/dashboardtags.png" alt="Tags dans des dashboards avec la zone de texte avg by" style="width:80%;">}}
 
@@ -117,7 +117,7 @@ Pour filtrer des monitors en leur [assignant des tags][1], utilisez la barre de 
 
 {{< img src="tagging/using_tags/managemonitorstags.png" alt="Gérer les tags de monitor"  style="width:80%;">}}
 
-[1]: /fr/tagging/assigning_tags
+[1]: /fr/getting_started/tagging/assigning_tags
 {{% /tab %}}
 
 {{% tab "Nouveau monitor" %}}
@@ -230,7 +230,7 @@ Après avoir [assigné des tags][1], utilisez la Service Map pour accéder facil
 
 {{< img src="tagging/using_tags/servicemaptags.png" alt="Tags service map" style="width:80%;">}}
 
-[1]: /fr/tagging/assigning_tags
+[1]: /fr/getting_started/tagging/assigning_tags
 [2]: /fr/tracing/app_analytics/search
 [3]: /fr/monitors/manage_monitor
 [4]: /fr/logs/explorer/search
@@ -300,7 +300,7 @@ Les tags peuvent être utilisés de diverses façons avec l'[API][15]. Cliquez s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tagging/assigning_tags
+[1]: /fr/getting_started/tagging/assigning_tags
 [2]: /fr/events
 [3]: /fr/integrations
 [4]: /fr/infrastructure/hostmap

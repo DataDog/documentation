@@ -244,6 +244,9 @@ p {
 h1 {
   line-height: 42px;
   padding-bottom: 15.5px;
+  @media (min-width: 992px) {
+    width: 80%;
+  }
   /*&~ p {
     padding-top:10px;
   }*/

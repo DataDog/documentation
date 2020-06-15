@@ -143,6 +143,8 @@ env:
 
 With this, any pod running your application is able to send DogStatsD metrics via port `8125` on `$DD_AGENT_HOST`.
 
+**Note**: As a best practice, Datadog recommends using unified service tagging when assigning attributes. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, refer to the dedicated [unified service tagging][8] documentation.
+
 #### Origin detection over UDP
 
 Origin detection is supported in Agent 6.10.0+ and allows DogStatsD to detect where the container metrics come from, and tag metrics automatically. When this mode is enabled, all metrics received via UDP are tagged by the same container tags as Autodiscovery metrics.
@@ -161,13 +163,13 @@ env:
 
 To set [tag cardinality][5] for the metrics collected using origin detection, set the environment variable `DD_DOGSTATSD_TAG_CARDINALITY` to either `low` (default) or `orchestrator`.
 
-**Note:** For UDP, `pod_name` tags are not added by default to avoid creating too many [custom metrics][6]. 
+**Note:** For UDP, `pod_name` tags are not added by default to avoid creating too many [custom metrics][6].
 
 [1]: /developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
-[5]: /tagging/assigning_tags/#environment-variables
+[5]: /getting_started/tagging/assigning_tags/#environment-variables
 [6]: /developers/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -247,7 +249,7 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
-    <version>2.8</version>
+    <version>2.10.1</version>
 </dependency>
 ```
 
@@ -392,6 +394,8 @@ using (var dogStatsdService = new DogStatsdService())
 
 ### Client instantiation parameters
 
+**Note**: As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to unify your environment, refer to the dedicated [unified service tagging][7] documentation.
+
 In addition to the required DogStatsD configuration (`url` and `port`), the following optional parameters are available for your DogStatsD client:
 
 {{< tabs >}}
@@ -483,7 +487,7 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][7] section, which also explains how to send metrics and events straight from the command line.
+If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][8] section, which also explains how to send metrics and events straight from the command line.
 
 [1]: https://github.com/etsy/statsd
 [2]: /developers/metrics/dogstatsd_metrics_submission/
@@ -491,4 +495,5 @@ If you're interested in learning more about the datagram format used by DogStats
 [4]: /developers/events/dogstatsd/
 [5]: /developers/service_checks/dogstatsd_service_checks_submission/
 [6]: /developers/libraries/#api-and-dogstatsd-client-libraries
-[7]: /developers/metrics/
+[7]: /getting_started/tagging/unified_service_tagging
+[8]: /developers/metrics/

@@ -6,6 +6,9 @@ further_reading:
       tag: 'Learning Center'
       text: 'Introduction to Logs in Datadog'
     - link: '/logs/log_collection/'
+    - link: /getting_started/tagging/unified_service_tagging
+      tag: 'Documentation'
+      text: 'Learn how to configure unified service tagging'
       tag: 'Documentation'
       text: 'Collect logs from your Applications, Containers, and Cloud providers'
 ---
@@ -213,7 +216,7 @@ This produces the following result in the [Log Explorer Page][2]:
 [1]: https://www.datadoghq.com
 [2]: https://app.datadoghq.com/logs
 [3]: https://app.vagrantup.com/ubuntu/boxes/xenial64
-[4]: https://www.vagrantup.com/intro/getting-started/index.html
+[4]: https://www.vagrantup.com/intro/getting-started
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [7]: /agent/guide/agent-commands/#agent-information

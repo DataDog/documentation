@@ -35,7 +35,7 @@ With the following definitions:
 | `<SPAN_NAME>`                | The name of the operation or `span.name` (examples: `redis.command`, `pylons.request`, `rails.request`, `mysql.query`).                                                                                            |
 | `<METRIC_SUFFIX>`       | The name of the metric (examples: `duration`, `hits`, `span_count`). See the section below.                                                                                                                                               |
 | `<2ND_PRIM_TAG>` | If the metric name accounts for the [second primary tag][4], this tag is part of the metric name.                                                                                                                       |
-| `<TAGS>`                | Trace metrics tags, possible tags are: `env`, `service`, `resource`, `sublayer_type`, `sublayer_service`, `http.status_code`, `http.status_class`, Datadog Agent tags (including the host and second primary tag). |
+| `<TAGS>`                | Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `sublayer_type`, `sublayer_service`, `http.status_code`, `http.status_class`, Datadog Agent tags (including the host and second primary tag). |
 
 ## Metric Suffix
 
@@ -114,13 +114,13 @@ With the following definitions:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Represent the count of errors for a given span.
   - *Metric type:* [COUNT][8]
-  - *Tags:* `env`, `service`, `resource`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
+  - *Tags:* `env`, `service`, `version`, `resource`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.errors.by_http_status`:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Represent the count of errors for a given span.
   - *Metric type:* [COUNT][8]
-  - *Tags:* `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
+  - *Tags:* `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
 ### Hits
 
@@ -128,15 +128,17 @@ With the following definitions:
   - *Prerequisite:* This metric exists for any APM service.
   - *Description:* Represent the count of hits for a given span.
   - *Metric type:* [COUNT][8]
-  - *Tags:* `env`, `service`, `resource`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
+  - *Tags:* `env`, `service`, `version`, `resource`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
 - `trace.<SPAN_NAME>.hits.by_http_status`
   - *Prerequisite:* This metric exists for HTTP/WEB APM services if http metadata exists.
   - *Description:* Represent the count of hits for a given span break down by HTTP status code.
   - *Metric type:* [COUNT][8]
-  - *Tags:* `env`, `service`, `resource`, `http.status_class`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
+  - *Tags:* `env`, `service`, `version`, `resource`, `http.status_class`, `http.status_code`, all Datadog Agent tags, and [the second primary tag][4].
 
 ### Span count
+
+**Note**: This is a deprecated namespace.
 
 - `trace.<SPAN_NAME>.span_count`:
   - *Prerequisite:* This metric exists for any APM service.

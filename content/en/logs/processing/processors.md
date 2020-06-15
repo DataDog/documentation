@@ -274,6 +274,8 @@ Into this log:
 
 Constraints on the tag/attribute name are explained in the [Tagging documentation][5]. Some additional constraints are applied as `:` or `,` are not allowed in the target tag/attribute name.
 
+If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Long` or `Double`). If the cast is not possible, the original type is kept (note: The decimal separator for `Double` need to be `.`) 
+
 {{< tabs >}}
 {{% tab "UI" %}}
 
@@ -296,6 +298,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
   "sources": ["<SOURCE_ATTRIBUTE>"],
   "target": "<TARGET_ATTRIBUTE>",
   "target_type": "tag",
+  "target_format": "long",
   "preserve_source": false,
   "override_on_conflict": false
 }
@@ -310,6 +313,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
 | `sources`              | Array of Strings | yes      | Array of source attributes or tags                                             |
 | `target`               | String           | yes      | Final attribute or tag name to remap the sources to.                           |
 | `target_type`          | String           | no       | Defines if the target is a log `attribute` or a `tag`, default: `attribute`    |
+| `target_format`        | String           | no       | Defines if the attribute value should be cast to another type. possible value: `auto`, `string`, `long`  or `double`, default: `auto`. When set to `auto`, no cast is applied.  |
 | `preserve_source`      | Boolean          | no       | Remove or preserve the remapped source element, default: `false`               |
 | `override_on_conflict` | Boolean          | no       | Override or not the target element if already set, default: `false`            |
 

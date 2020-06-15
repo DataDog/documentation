@@ -41,24 +41,15 @@ If you haven’t installed the Docker Agent, follow the [in-app installation ins
 {{% tab "Standard" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
-docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
-              -v /proc/:/host/proc/:ro \
-              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY="<DATADOG_API_KEY>" \
-              datadog/agent:latest
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> datadog/agent:7
 ```
 
+
 {{% /tab %}}
-{{% tab "Amazon Linux version <2" %}}
+{{% tab "Amazon Linux < v2" %}}
 
 ```shell
-DOCKER_CONTENT_TRUST=1 \
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
-                              -v /proc/:/host/proc/:ro \
-                              -v /cgroup/:/host/sys/fs/cgroup:ro \
-                              -e DD_API_KEY="<DATADOG_API_KEY>" \
-                              datadog/agent:latest
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> datadog/agent:7
 ```
 
 {{% /tab %}}
@@ -68,6 +59,15 @@ The Datadog Agent is supported in Windows Server 2019 (LTSC) and version 1909 (S
 
 ```shell
 docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine datadog/agent:latest
+```
+
+{{% /tab %}}
+{{% tab "Unprivileged" %}}
+
+(Optional) To run an unprivileged installation, add `--group-add=<DOCKER_GROUP_ID>` to the install command, for example:
+
+```shell
+DOCKER_CONTENT_TRUST=1 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> datadog/agent:7 --group-add=<DOCKER_GROUP_ID>
 ```
 
 {{% /tab %}}
@@ -88,6 +88,7 @@ The Agent's [main configuration file][8] is `datadog.yaml`. For the Docker Agent
 | Env Variable       | Description                                                                                                                                                                                                                                                                                                                                      |
 |--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_API_KEY`       | Your Datadog API key (**required**)                                                                                                                                                                                                                                                                                                              |
+| `DD_ENV`          | Sets the global `env` tag for all data emitted.                                                                                                                                                                                                                                                                 |
 | `DD_HOSTNAME`      | Hostname to use for metrics (if autodetection fails)                                                                                                                                                                                                                                                                                             |
 | `DD_TAGS`          | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
 | `DD_SITE`          | Destination site for your metrics, traces, and logs. Valid options are `datadoghq.com` for the Datadog US site, and `datadoghq.eu` for the Datadog EU site.                                                                                                                                                                                      |
@@ -133,7 +134,9 @@ Learn more about [DogStatsD over Unix Domain Sockets][15].
 
 ### Tagging
 
-Datadog automatically collects common tags from [Docker][16], [Kubernetes][17], [ECS][18], [Swarm, Mesos, Nomad, and Rancher][16]. To extract even more tags, use the following options:
+As a best practice, Datadog recommends using [unified service tagging][16] when assigning tags.
+
+Datadog automatically collects common tags from [Docker][17], [Kubernetes][18], [ECS][19], [Swarm, Mesos, Nomad, and Rancher][17]. To extract even more tags, use the following options:
 
 | Env Variable                            | Description                                               |
 |-----------------------------------------|-----------------------------------------------------------|
@@ -141,11 +144,11 @@ Datadog automatically collects common tags from [Docker][16], [Kubernetes][17], 
 | `DD_DOCKER_ENV_AS_TAGS`                 | Extract Docker container environment variables            |
 | `DD_COLLECT_EC2_TAGS`                   | Extract custom EC2 tags without using the AWS integration |
 
-See the [Docker Tag Extraction][19] documentation to learn more.
+See the [Docker Tag Extraction][20] documentation to learn more.
 
 ### Using secret files
 
-Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][20].
+Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see the [Secrets Management documentation][21].
 
 ### Ignore containers
 
@@ -153,10 +156,16 @@ Exclude containers from logs collection, metrics collection, and Autodiscovery. 
 
 | Env Variable    | Description                                                                                                                                                                                                        |
 |-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_AC_INCLUDE` | Whitelist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`                                                              |
-| `DD_AC_EXCLUDE` | Blacklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
+| `DD_CONTAINER_INCLUDE` | Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  |
+| `DD_CONTAINER_EXCLUDE` | Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
+| `DD_CONTAINER_INCLUDE_METRICS` | Allowlist of containers whose metrics you wish to include.  |
+| `DD_CONTAINER_EXCLUDE_METRICS` | Blocklist of containers whose metrics you wish to exclude. |
+| `DD_CONTAINER_INCLUDE_LOGS` | Allowlist of containers whose logs you wish to include.  |
+| `DD_CONTAINER_EXCLUDE_LOGS` | Blocklist of containers whose logs you wish to exclude. |
+| `DD_AC_INCLUDE` | **Deprecated**. Allowlist of containers to include (separated by spaces). Use `.*` to include all. For example: `"image:image_name_1 image:image_name_2"`, `image:.*`  |                                              
+| `DD_AC_EXCLUDE` | **Deprecated**. Blocklist of containers to exclude (separated by spaces). Use `.*` to exclude all. For example: `"image:image_name_3 image:image_name_4"` (**Note**: This variable is only honored for Autodiscovery.), `image:.*` |
 
-Additional examples are available on the [Container Discover Management][21] page.
+Additional examples are available on the [Container Discover Management][22] page.
 
 **Note**: The `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted. This does not affect your per-container billing.
 
@@ -173,7 +182,7 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 
 ## Commands
 
-See the [Agent Commands guides][22] to discover all the Docker Agent commands.
+See the [Agent Commands guides][23] to discover all the Docker Agent commands.
 
 ## Data collected
 
@@ -183,16 +192,16 @@ By default, the Docker Agent collects metrics with the following core checks. To
 
 | Check       | Metrics       |
 |-------------|---------------|
-| CPU         | [System][23]  |
-| Disk        | [Disk][24]    |
-| Docker      | [Docker][25]  |
-| File Handle | [System][23]  |
-| IO          | [System][23]  |
-| Load        | [System][23]  |
-| Memory      | [System][23]  |
-| Network     | [Network][26] |
-| NTP         | [NTP][27]     |
-| Uptime      | [System][23]  |
+| CPU         | [System][24]  |
+| Disk        | [Disk][25]    |
+| Docker      | [Docker][26]  |
+| File Handle | [System][24]  |
+| IO          | [System][24]  |
+| Load        | [System][24]  |
+| Memory      | [System][24]  |
+| Network     | [Network][27] |
+| NTP         | [NTP][28]     |
+| Uptime      | [System][24]  |
 
 ### Events
 
@@ -225,15 +234,16 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [13]: /infrastructure/livecontainers/
 [14]: /developers/dogstatsd/
 [15]: /developers/dogstatsd/unix_socket/
-[16]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
-[17]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
-[18]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
-[19]: /agent/docker/tag/
-[20]: /agent/guide/secrets-management/?tab=linux
-[21]: /agent/guide/autodiscovery-management/
-[22]: /agent/guide/agent-commands/
-[23]: /integrations/system/#metrics
-[24]: /integrations/disk/#metrics
-[25]: /agent/docker/data_collected/#metrics
-[26]: /integrations/network/#metrics
-[27]: /integrations/ntp/#metrics
+[16]: /getting_started/tagging/unified_service_tagging/
+[17]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/docker_extract.go
+[18]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/kubelet_extract.go
+[19]: https://github.com/DataDog/datadog-agent/blob/master/pkg/tagger/collectors/ecs_extract.go
+[20]: /agent/docker/tag/
+[21]: /agent/guide/secrets-management/?tab=linux
+[22]: /agent/guide/autodiscovery-management/
+[23]: /agent/guide/agent-commands/
+[24]: /integrations/system/#metrics
+[25]: /integrations/disk/#metrics
+[26]: /agent/docker/data_collected/#metrics
+[27]: /integrations/network/#metrics
+[28]: /integrations/ntp/#metrics

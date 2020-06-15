@@ -20,20 +20,35 @@ A page view represents a user visiting a page from your website. During that pag
 
 For page views, loading performance metrics are collected from both the [Paint Timing API][5] and the [Navigation Timing API][6].
 
-For Single Page Applications (SPAs), performance metrics will only be available for the first accessed page. Modern web frameworks like ReactJS, AngularJS, or VueJS update a website’s content without reloading the page, preventing Datadog from collecting traditional performance metrics. RUM is able to track page changes using the [History API][7].
+## Single Page Applications
 
-## Measures collected
+For Single Page Applications (SPAs), the RUM SDK differentiates between `initial_load` and `route_change` navigations with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][7].
+
+Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works both for `initial_load` and `route_change` navigations.
+
+### How is loading time calculated?
+To account for modern web applications, loading time watches for network requests and DOM mutations.
+
+* **Initial Load**: Loading Time is equal to *whichever is longer*:
+
+    - The difference between `navigationStart` and `loadEventEnd`.
+    - Or the difference between `navigationStart` and the first time the page has no activity for more than 100ms (activity being defined as ongoing network requests, or DOM mutations are currently occurring).
+
+* **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity for more than 100ms (activity being defined as ongoing network requests, or DOM mutations are currently occurring)
+
+## Metrics collected
 
 {{< img src="real_user_monitoring/data_collected/view/timing_overview.png" alt="Timing overview"  >}}
 
 | Attribute                              | Type        | Decription                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `duration`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
-| `view.measures.first_contentful_paint` | number (ns) | Time when the browser first rendered any text, image (including background images), non-white canvas, or SVG.[Learn more][8]                                                                                                |
-| `view.measures.dom_interactive`        | number (ns) | The moment when the parser finished its work on the main document. [More info from the MDN documentation][9]                                                                                                               |
-| `view.measures.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document has been completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][10]. |
-| `view.measures.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][11]                                                                             |
-| `view.measures.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][12]                                                                                   |
+| `view.loading_time`                             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from the data collected documentation][8]|
+| `view.measures.first_contentful_paint` | number (ns) | Time when the browser first rendered any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3 definition][9].                                                                                            |
+| `view.measures.dom_interactive`        | number (ns) | The moment when the parser finished its work on the main document. [More info from the MDN documentation][10]                                                                                                               |
+| `view.measures.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document has been completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][11]. |
+| `view.measures.dom_complete`           | number (ns) | The page and all the subresources are ready. For the user, the loading spinner has stopped spinning. [More info from the MDN documentation][12]                                                                             |
+| `view.measures.load_event_end`         | number (ns) | Event fired when the page is fully loaded. Usually a trigger for additional application logic. [More info from the MDN documentation][13]                                                                                   |
 | `view.measures.error_count`            | number      | Count of all errors collected so far for this view.                                                                                                                                                                        |
 | `view.measures.long_task_count`        | number      | Count of all long tasks collected for this view.                                                                                                                                                                           |
 | `view.measures.resource_count`         | number      | Count of all resources collected for this view.                                                                                                                                                                            |
@@ -50,8 +65,9 @@ For Single Page Applications (SPAs), performance metrics will only be available 
 [5]: https://www.w3.org/TR/paint-timing/
 [6]: https://www.w3.org/TR/navigation-timing/#sec-navigation-timing
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[8]: https://www.w3.org/TR/paint-timing/#sec-terminology
-[9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
-[10]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
-[11]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
-[12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
+[8]: /real_user_monitoring/data_collected/view/#how-is-loading-time-calculated
+[9]: https://www.w3.org/TR/paint-timing/#sec-terminology
+[10]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
+[11]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event
+[12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
+[13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event

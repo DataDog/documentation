@@ -20,7 +20,7 @@ further_reading:
 
 アプリケーションリソースのロードに関して、ネットワークの詳細なタイミングデータが、[Performance Resource Timing API][2] を使用して収集されます。
 
-{{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="リソースメトリクス" responsive="true" >}}
+{{< img src="real_user_monitoring/data_collected/resource/resource_metric.png" alt="リソースメトリクス"  >}}
 
 ## 収集されるメジャー
 

@@ -78,6 +78,6 @@ An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested
 [4]: https://app.datadoghq.com/logs/pipelines/generate-metrics
 [5]: /logs/search_syntax/
 [6]: /logs/explorer/facets/#quantitative-facets-measures
-[7]: /tagging/
+[7]: /getting_started/tagging/
 [8]: /developers/metrics/custom_metrics/
 [9]: /developers/metrics/#naming-metrics

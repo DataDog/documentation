@@ -41,6 +41,7 @@ These five event categories have attributes attached by default:
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | string | Randomly generated ID for each page view.                                                                      |
 | `view.url`                     | string | The view URL.                                                                                                  |
+| `view.loading_type`                     | string | The type of page load: `initial_load` or `route_change`. For more information, see the [single page applications support docs][1].|
 | `view.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed.               |
 | `view.url_details.host`        | string | The HTTP host part of the URL.                                                                                 |
 | `view.url_details.path`        | string | The HTTP path part of the URL.                                                                                 |
@@ -49,7 +50,7 @@ These five event categories have attributes attached by default:
 
 ### User Agent
 
-The following contexts—following the [Datadog Standard Attributes][1] logic—are attached automatically to all events sent to Datadog:
+The following contexts—following the [Datadog Standard Attributes][2] logic—are attached automatically to all events sent to Datadog:
 
 | Attribute name                           | Type   | Description                                     |
 |------------------------------------------|--------|-------------------------------------------------|
@@ -65,21 +66,22 @@ The following attributes are related to the geolocation of IP addresses used in 
 | Fullname                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
 | `network.client.geoip.country.name`         | string | Name of the country                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | string | [ISO Code][2] of the country (example: `US` for the United States, `FR` for France)                                                  |
+| `network.client.geoip.country.iso_code`     | string | [ISO Code][3] of the country (example: `US` for the United States, `FR` for France)                                                  |
 | `network.client.geoip.continent.code`       | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
 | `network.client.geoip.continent.name`       | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
 | `network.client.geoip.subdivision.name`     | string | Name of the first subdivision level of the country (example: `California` in the United States or the `Sarthe` department in France) |
-| `network.client.geoip.subdivision.iso_code` | string | [ISO Code][2] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
+| `network.client.geoip.subdivision.iso_code` | string | [ISO Code][3] of the first subdivision level of the country (example: `CA` in the United States or the `SA` department in France)    |
 | `network.client.geoip.city.name`            | string | The name of the city (example `Paris`, `New York`)                                                                                   |
 
 ## Extra Attribute
 
-In addition to default attributes, you can add your [specific global context][3] to all events collected. This provides you the ability to analyze the data for a subset of users: group errors by user email, understand which customers have the worst performance, etc.
+In addition to default attributes, add [specific global context][4] to all events collected. This provides the ability to analyze the data for a subset of users. For example, group errors by user email, or understand which customers have the worst performance.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/processing/attributes_naming_convention/
-[2]: /logs/processing/attributes_naming_convention/#user-agent-attributes
-[3]: /real_user_monitoring/installation/advanced_configuration/
+[1]: /real_user_monitoring/data_collected/view#single-page-applications
+[2]: /logs/processing/attributes_naming_convention/
+[3]: /logs/processing/attributes_naming_convention/#user-agent-attributes
+[4]: /real_user_monitoring/installation/advanced_configuration/

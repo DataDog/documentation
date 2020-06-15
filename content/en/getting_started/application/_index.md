@@ -134,7 +134,7 @@ Datadog [Security Monitoring][24] automatically detects threats to your applicat
 [6]: /logs/
 [7]: /tracing/
 [8]: /infrastructure/
-[9]: /tagging/
+[9]: /getting_started/tagging/
 [10]: /infrastructure/hostmap/
 [11]: /events/
 [12]: /account_management/users/

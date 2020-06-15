@@ -196,8 +196,8 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/search_syntax/
-[2]: /logs/explorer/analytics/
-[3]: /logs/explorer/patterns/
+[2]: /logs/explorer/patterns/
+[3]: /logs/explorer/analytics/
 [4]: /monitors/monitor_types/log/
 [5]: /dashboards/widgets/
 [6]: /notebooks/
@@ -208,7 +208,7 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 [11]: /logs/processing/pipelines/
 [12]: /logs/indexes/#indexes-filters
 [13]: /logs/indexes/#exclusion-filters
-[14]: /tagging/assigning_tags/
+[14]: /getting_started/tagging/assigning_tags/
 [15]: /integrations/nginx/
 [16]: /logs/processing/processors/?tab=ui#geoip-parser
 [17]: /integrations/kong/

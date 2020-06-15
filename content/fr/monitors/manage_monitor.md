@@ -123,4 +123,4 @@ Les tags de monitor sont séparés des tags envoyés par l'Agent ou les intégra
 [6]: /fr/monitors/monitor_status/#resolve
 [7]: https://app.datadoghq.com/monitors/triggered
 [8]: https://app.datadoghq.com/monitors#downtime
-[9]: /fr/tagging/assigning_tags/?tab=monitors#ui
+[9]: /fr/getting_started/tagging/assigning_tags/?tab=monitors#ui

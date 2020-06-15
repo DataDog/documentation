@@ -184,8 +184,24 @@ stats_config:
       - prefix: "cluster.datadog_agent."
 ```
 
+## Environment Variables
+
+The available [environment variables][2] depend on the version of the C++ tracer embedded in Envoy.
+
+**Note**: The variables `DD_AGENT_HOST`, `DD_TRACE_AGENT_PORT` and `DD_TRACE_AGENT_URL` do not apply to Envoy, as the address of the Datadog Agent is configured using the `cluster` settings.
+
+| Envoy Version | C++ Tracer Version |
+|---------------|--------------------|
+| v1.14 | v1.1.3 |
+| v1.13 | v1.1.1 |
+| v1.12 | v1.1.1 |
+| v1.11 | v0.4.2 |
+| v1.10 | v0.4.2 |
+| v1.9 | v0.3.6 |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
+[2]: /tracing/setup/cpp/#environment-variables
