@@ -52,6 +52,11 @@ In full screen mode, you can:
 
 Additional options are available for [timeseries widgets][1].
 
+## Custom Links
+Most widgets have the ability to have custom links in the on-click context menu. To add this functionality, click edit and select the Custom Link tab.
+
+Custom links support template variables as well as any tags/attributes that you've grouped by. 
+
 ## Copy / paste widgets
 
 Widgets can be copied on [Dashboards][2], [Notebooks][3], [APM Service][4], and the [APM resource][5] page by using `Ctrl + C` (`Cmd + C` for Mac), or by selecting the share icon and choosing "Copy".

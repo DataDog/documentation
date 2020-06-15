@@ -17,7 +17,7 @@ further_reading:
       text: 'Correlate request logs with traces automatically'
 ---
 
-## Automatic Trace ID injection
+## Automatically Inject Trace and Span IDs
 
 Enable injection in the Java tracer's [configuration][1] by adding `-Ddd.logs.injection=true` as a jvm startup argument or through environment variable `DD_LOGS_INJECTION=true`.
 
@@ -29,7 +29,7 @@ If your logs are raw formatted, update your formatter to include `dd.trace_id` a
 
 If your logs are JSON formated and you are using Logback there is nothing left to do. Otherwise with other logging libraries you need to activate MDC attributes autoinjection into your logs.
 
-## Manual Trace ID injection
+## Manually Inject Trace and Span IDs
 
 If you prefer to manually correlate your [traces][2] with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
@@ -99,7 +99,7 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/java/#configuration
-[2]: /tracing/visualization/#trace
-[3]: /tracing/visualization/#spans
+[2]: /tracing/connect_logs_and_traces/
+[3]: /tracing/visualization/#trace
 [4]: /logs/log_collection/java/#raw-format
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

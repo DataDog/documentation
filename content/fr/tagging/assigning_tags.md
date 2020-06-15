@@ -5,10 +5,10 @@ aliases:
   - /fr/agent/tagging
   - /fr/getting_started/tagging/assigning_tags
 further_reading:
-  - link: /tagging/
+  - link: /getting_started/tagging/
     tag: Documentation
     text: Débuter avec les tags
-  - link: /tagging/using_tags/
+  - link: /getting_started/tagging/using_tags/
     tag: Documentation
     text: Apprendre à utiliser des tags dans Datadog
 ---
@@ -317,7 +317,7 @@ Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:e
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
 ```
 
-Grâce au tag `domain:example.com`, vous pouvez calculer le total des vues de pages pour l'ensemble des hosts : 
+Grâce au tag `domain:example.com`, vous pouvez calculer le total des vues de pages pour l'ensemble des hosts :
 
 ```text
 sum:page.views{domain:example.com}
@@ -431,7 +431,7 @@ Les intégrations web sont basées sur un système d'authentification. Les métr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/tagging/#defining-tags
+[1]: /fr/getting_started/tagging/#defining-tags
 [2]: /fr/agent/docker/#environment-variables
 [3]: /fr/api/
 [4]: /fr/developers/metrics/dogstatsd_metrics_submission/

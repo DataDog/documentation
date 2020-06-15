@@ -131,7 +131,7 @@ Identifiez les corrélations avec vos événements à l'aide de la section **Eve
 [3]: https://app.datadoghq.com/metric/explorer
 [4]: https://app.datadoghq.com/notebook/list
 [5]: https://app.datadoghq.com/metric/summary
-[6]: /fr/tagging/
+[6]: /fr/getting_started/tagging/
 [7]: /fr/metrics/introduction/
 [8]: /fr/dashboards/functions/rollup/
 [9]: /fr/dashboards/functions/#apply-functions-optional

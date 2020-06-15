@@ -76,16 +76,16 @@
       "json_curl": {
         "service_hooks": [
           {
-            "account": null,
-            "url": null
+            "account": "",
+            "url": ""
           }
         ]
       },
       "json": {
         "service_hooks": [
           {
-            "account": "string",
-            "url": "string"
+            "account": "",
+            "url": ""
           }
         ]
       },
@@ -115,7 +115,7 @@
       "json_curl": {
         "channels": [
           {
-            "account": null,
+            "account": "",
             "channel_name": "#general"
           }
         ]
@@ -123,7 +123,7 @@
       "json": {
         "channels": [
           {
-            "account": "string",
+            "account": "",
             "channel_name": "#general",
             "transfer_all_user_comments": false
           }

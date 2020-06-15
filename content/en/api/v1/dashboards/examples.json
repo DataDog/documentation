@@ -64,17 +64,17 @@
               "prefix": "host"
             }
           ],
-          "title": "string",
+          "title": "",
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": {},
+              "definition": "[object Object]",
               "id": "integer",
               "layout": {
-                "height": "integer",
-                "width": "integer",
-                "x": "integer",
-                "y": "integer"
+                "height": "0",
+                "width": "0",
+                "x": "0",
+                "y": "0"
               }
             }
           ]
@@ -106,15 +106,15 @@
             "name": "host1"
           }
         ],
-        "title": null,
+        "title": "",
         "widgets": [
           {
-            "definition": null,
+            "definition": "[object Object]",
             "layout": {
-              "height": null,
-              "width": null,
-              "x": null,
-              "y": null
+              "height": "0",
+              "width": "0",
+              "x": "0",
+              "y": "0"
             }
           }
         ]
@@ -142,16 +142,16 @@
             "prefix": "host"
           }
         ],
-        "title": "string",
+        "title": "",
         "widgets": [
           {
-            "definition": {},
+            "definition": "[object Object]",
             "id": "integer",
             "layout": {
-              "height": "integer",
-              "width": "integer",
-              "x": "integer",
-              "y": "integer"
+              "height": "0",
+              "width": "0",
+              "x": "0",
+              "y": "0"
             }
           }
         ]
@@ -220,17 +220,17 @@
               "prefix": "host"
             }
           ],
-          "title": "string",
+          "title": "",
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": {},
+              "definition": "[object Object]",
               "id": "integer",
               "layout": {
-                "height": "integer",
-                "width": "integer",
-                "x": "integer",
-                "y": "integer"
+                "height": "0",
+                "width": "0",
+                "x": "0",
+                "y": "0"
               }
             }
           ]
@@ -290,17 +290,17 @@
               "prefix": "host"
             }
           ],
-          "title": "string",
+          "title": "",
           "url": "/dashboard/123-abc-456/example-dashboard-title",
           "widgets": [
             {
-              "definition": {},
+              "definition": "[object Object]",
               "id": "integer",
               "layout": {
-                "height": "integer",
-                "width": "integer",
-                "x": "integer",
-                "y": "integer"
+                "height": "0",
+                "width": "0",
+                "x": "0",
+                "y": "0"
               }
             }
           ]
@@ -340,15 +340,15 @@
             "name": "host1"
           }
         ],
-        "title": null,
+        "title": "",
         "widgets": [
           {
-            "definition": null,
+            "definition": "[object Object]",
             "layout": {
-              "height": null,
-              "width": null,
-              "x": null,
-              "y": null
+              "height": "0",
+              "width": "0",
+              "x": "0",
+              "y": "0"
             }
           }
         ]
@@ -376,16 +376,16 @@
             "prefix": "host"
           }
         ],
-        "title": "string",
+        "title": "",
         "widgets": [
           {
-            "definition": {},
+            "definition": "[object Object]",
             "id": "integer",
             "layout": {
-              "height": "integer",
-              "width": "integer",
-              "x": "integer",
-              "y": "integer"
+              "height": "0",
+              "width": "0",
+              "x": "0",
+              "y": "0"
             }
           }
         ]

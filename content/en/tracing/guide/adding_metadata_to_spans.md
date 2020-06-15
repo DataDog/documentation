@@ -376,4 +376,4 @@ Values are of [variable type][3] and can be complex objects. Values are serializ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/visualization/#span-tags
-[2]: /tagging/
+[2]: /getting_started/tagging/
