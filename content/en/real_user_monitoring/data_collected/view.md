@@ -27,14 +27,14 @@ For Single Page Applications (SPAs), the RUM SDK differentiates between `initial
 Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works both for `initial_load` and `route_change` navigations.
 
 ### How is loading time calculated?
-To account for modern web applications, loading time watches for network requests and long tasks.
+To account for modern web applications, loading time watches for network requests and DOM mutations.
 
 * **Initial Load**: Loading Time is equal to *whichever is longer*:
 
     - The difference between `navigationStart` and `loadEventEnd`.
-    - Or the difference between `navigationStart` and the first time the page is idle for more than 100ms (idle being defined as no network requests, and no long tasks are currently occurring).
+    - Or the difference between `navigationStart` and the first time the page has no activity for more than 100ms (activity being defined as ongoing network requests, or DOM mutations are currently occurring).
 
-* **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page is idle for more than 100ms (idle being defined as no network requests, and no long tasks are currently occurring)
+* **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity for more than 100ms (activity being defined as ongoing network requests, or DOM mutations are currently occurring)
 
 ## Metrics collected
 
@@ -43,7 +43,7 @@ To account for modern web applications, loading time watches for network request
 | Attribute                              | Type        | Decription                                                                                                                                                                                                                 |
 |----------------------------------------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `duration`                             | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
-| `view.loading_time`                             | number (ns) | Time until the page is ready and no network or long task activity is currently occurring. [More info from the data collected documentation][8]|
+| `view.loading_time`                             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from the data collected documentation][8]|
 | `view.measures.first_contentful_paint` | number (ns) | Time when the browser first rendered any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3 definition][9].                                                                                            |
 | `view.measures.dom_interactive`        | number (ns) | The moment when the parser finished its work on the main document. [More info from the MDN documentation][10]                                                                                                               |
 | `view.measures.dom_content_loaded`     | number (ns) | Event fired when the initial HTML document has been completely loaded and parsed, without waiting for non-render blocking stylesheets, images, and subframes to finish loading. [More info from the MDN documentation][11]. |

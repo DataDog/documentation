@@ -2165,6 +2165,10 @@ api_v1:
     url: /ja/api/v1/synthetics/
     identifier: Synthetics
     generated: true
+  - name: Get all locations (public and private)
+    parent: Synthetics
+    url: get-all-locations-public-and-private
+    generated: true
   - name: Get a list of tests
     parent: Synthetics
     url: get-a-list-of-tests
@@ -2173,9 +2177,9 @@ api_v1:
     parent: Synthetics
     url: create-a-test
     generated: true
-  - name: Get a browser test configuration
+  - name: Get a test configuration (browser)
     parent: Synthetics
-    url: get-a-browser-test-configuration
+    url: get-a-test-configuration-browser
     generated: true
   - name: Get the test's latest results summaries (browser)
     parent: Synthetics
@@ -2189,9 +2193,9 @@ api_v1:
     parent: Synthetics
     url: delete-tests
     generated: true
-  - name: Get a test configuration
+  - name: Get a test configuration (API)
     parent: Synthetics
-    url: get-a-test-configuration
+    url: get-a-test-configuration-api
     generated: true
   - name: Edit a test
     parent: Synthetics
