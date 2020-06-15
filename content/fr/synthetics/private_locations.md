@@ -4,7 +4,7 @@ kind: documentation
 description: Exécuter des tests API et Browser Synthetics à partir d'emplacements privés
 beta: true
 further_reading:
-  - link: 'https://www.datadoghq.com/synthetics/'
+  - link: 'https://www.datadoghq.com/product/synthetics-monitoring/'
     tag: Documentation
     text: Gérer vos checks
   - link: synthetics/browser_tests
