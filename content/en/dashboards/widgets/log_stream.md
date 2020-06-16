@@ -68,9 +68,9 @@ LOG_STREAM_SCHEMA = {
 
 | Parameter             | Type    | Required | Description                                                                                |
 |-----------------------|---------|----------|--------------------------------------------------------------------------------------------|
-| `type`                | String  | Yes      | Type of the widget, for the log stream widget use `log_stream`                             |
+| `type`                | String  | Yes      | Type of the widget, for the log stream widget use `log_stream`.                            |
 | `logset`              | String  | No       | (Deprecated) Use 'indexes' instead. The ID of the index to query in the stream.            |
-| `indexes`             | Array   | No       | An array of index names to query in the stream. Use [] to query all indexes at once.       |
+| `indexes`             | Array   | No       | An array of index names to query in the stream. Use `[]` to query all indexes at once.       |
 | `query`               | String  | No       | The query to filter the log stream.                                                        |
 | `columns`             | Array   | No       | The columns to display on the widget.                                                      |
 | `show_date_column`    | Boolean | No       | Whether to show the date column or not.                                                    |
