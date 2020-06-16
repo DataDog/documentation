@@ -30,9 +30,9 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 5. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
 
-6. Define the maximum number of logs that should be rehydrated in this historical view, **from 1 million to 1 billion**
+6. Define the maximum number of logs that should be rehydrated in this historical view, **from 1 million to 1 billion**.
 
-7. Define the retention period of the rehydrated logs (available retentions are based on your contract, default is 15 days)
+7. Define the retention period of the rehydrated logs (available retentions are based on your contract, default is 15 days).
 
 8. (Optional) **Notify** trigger notifications on rehydration completion through [integrations][7] with the @handle syntax.
 
