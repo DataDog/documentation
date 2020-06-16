@@ -143,6 +143,6 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
 [4]: /logs/explorer/search/
-[5]: /logs/?tab=ussite#reserved-attributes
+[5]: /logs/processing/#reserved-attributes
 [6]: /logs/archives/
 [7]: /integrations/#cat-notification
