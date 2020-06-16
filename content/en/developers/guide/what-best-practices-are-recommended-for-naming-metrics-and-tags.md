@@ -5,14 +5,14 @@ further_reading:
 - link: "/developers/metrics/"
   tag: "Documentation"
   text: "Learn more about Datadog metrics"
-- link: "/tagging/"
+- link: "/getting_started/tagging/"
   tag: "Documentation"
   text: "Getting started with tags"
 aliases:
   - /developers/faq/what-best-practices-are-recommended-for-naming-metrics-and-tags
 ---
 
-Datadog recommends certain best practices for naming metrics and tags.
+Datadog recommends certain best practices for naming metrics, tags, and services.
 
 ## Rules and best practices for naming metrics
 
@@ -28,6 +28,8 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 
 ## Rules and best practices for naming tags
 
+As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][1] documentation.
+
 * Tags must start with a letter.
 * May contain alphanumerics, underscores, minuses, colons, periods, and slashes. Other characters are converted to underscores.
 * Any trailing underscore will get removed, whether if it originated from a converted character or if it was in the original tag value.
@@ -35,8 +37,10 @@ Metrics reported by the Agent are in a pseudo-hierarchical dotted format (e.g. `
 * Tags are converted to lowercase.
 * For optimal functionality, it is recommended to use the `key:value` syntax.
 
-Examples of commonly used metric tag keys are `env`, `instance`, `name`, and `role`.
+Examples of commonly used metric tag keys are `instance`, `name`, and `role`.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /getting_started/tagging/unified_service_tagging

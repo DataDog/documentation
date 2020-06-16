@@ -247,7 +247,7 @@ components:
       properties:
         dashboards:
           description: List of dashboards in the dashboard list.
-          example: null
+          example: []
           items:
             $ref: '#/components/schemas/DashboardListItem'
           type: array
@@ -557,6 +557,15 @@ components:
             $ref: '#/components/schemas/LogsArchiveDefinition'
           type: array
       type: object
+    LogsRestrictionQueriesType:
+      default: logs_restriction_queries
+      description: Restriction query resource type.
+      enum:
+      - logs_restriction_queries
+      example: logs_restriction_queries
+      type: string
+      x-enum-varnames:
+      - LOGS_RESTRICTION_QUERIES
     Organization:
       description: Organization object.
       properties:
@@ -799,13 +808,13 @@ components:
       properties:
         created_at:
           description: Creation time of the restriction query.
-          example: '2020-03-17T21:06:44.944905+00:00'
+          example: '2020-03-17T21:06:44Z'
           format: date-time
           readOnly: true
           type: string
         modified_at:
           description: Time of last restriction query modification.
-          example: '2020-03-17T21:15:15.833683+00:00'
+          example: '2020-03-17T21:15:15Z'
           format: date-time
           readOnly: true
           type: string
@@ -933,11 +942,7 @@ components:
         relationships:
           $ref: '#/components/schemas/RestrictionQueryRelationships'
         type:
-          default: logs_restriction_queries
-          description: Restriction queries type.
-          example: logs_restriction_queries
-          readOnly: true
-          type: string
+          $ref: '#/components/schemas/LogsRestrictionQueriesType'
       type: object
     RestrictionQueryWithRelationshipsResponse:
       description: Response containing information about a single restriction query.
@@ -1003,12 +1008,27 @@ components:
         name:
           description: Name of the role.
           type: string
+        user_count:
+          description: Number of users with that role.
+          format: int64
+          readOnly: true
+          type: integer
       type: object
     RoleCreateAttributes:
       description: Attributes of the created role.
       properties:
+        created_at:
+          description: Creation time of the role.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last role modification.
+          format: date-time
+          readOnly: true
+          type: string
         name:
-          description: The name of the role.
+          description: Name of the role.
           type: string
       type: object
     RoleCreateData:
@@ -1021,11 +1041,30 @@ components:
         type:
           $ref: '#/components/schemas/RolesType'
       type: object
-    RoleCreatePayload:
+    RoleCreateRequest:
       description: Create a role.
       properties:
         data:
           $ref: '#/components/schemas/RoleCreateData'
+      type: object
+    RoleCreateResponse:
+      description: Response containing information about a created role.
+      properties:
+        data:
+          description: Role object returned by the API.
+          properties:
+            attributes:
+              $ref: '#/components/schemas/RoleCreateAttributes'
+            id:
+              description: ID of the role.
+              type: string
+            relationships:
+              $ref: '#/components/schemas/RoleResponseRelationships'
+            type:
+              $ref: '#/components/schemas/RolesType'
+          required:
+          - type
+          type: object
       type: object
     RoleRelationships:
       description: Relationships of the role object.
@@ -1044,20 +1083,24 @@ components:
     RoleResponseRelationships:
       description: Relationships of the role object returned by the API.
       properties:
-        org:
-          $ref: '#/components/schemas/RelationshipToOrganization'
-        other_orgs:
-          $ref: '#/components/schemas/RelationshipToOrganizations'
-        other_roles:
-          $ref: '#/components/schemas/RelationshipToRoles'
-        roles:
-          $ref: '#/components/schemas/RelationshipToRoles'
+        permissions:
+          $ref: '#/components/schemas/RelationshipToPermissions'
       type: object
     RoleUpdateAttributes:
-      description: Attributes of the edited role.
+      description: Attributes of the role.
       properties:
+        created_at:
+          description: Creation time of the role.
+          format: date-time
+          readOnly: true
+          type: string
+        modified_at:
+          description: Time of last role modification.
+          format: date-time
+          readOnly: true
+          type: string
         name:
-          description: The name of the role.
+          description: Name of the role.
           type: string
       type: object
     RoleUpdateData:
@@ -1071,11 +1114,30 @@ components:
         type:
           $ref: '#/components/schemas/RolesType'
       type: object
-    RoleUpdatePayload:
+    RoleUpdateRequest:
       description: Update a role.
       properties:
         data:
           $ref: '#/components/schemas/RoleUpdateData'
+      type: object
+    RoleUpdateResponse:
+      description: Response containing information about an updated role.
+      properties:
+        data:
+          description: Role object returned by the API.
+          properties:
+            attributes:
+              $ref: '#/components/schemas/RoleUpdateAttributes'
+            id:
+              description: ID of the role.
+              type: string
+            relationships:
+              $ref: '#/components/schemas/RoleResponseRelationships'
+            type:
+              $ref: '#/components/schemas/RolesType'
+          required:
+          - type
+          type: object
       type: object
     RolesResponse:
       description: Response containing information about multiple roles.
@@ -1152,7 +1214,7 @@ components:
       properties:
         cases:
           description: Cases for generating signals.
-          example: null
+          example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleCase'
           type: array
@@ -1162,17 +1224,17 @@ components:
           type: boolean
         message:
           description: Message for generated signals.
-          example: null
+          example: ''
           type: string
         name:
           description: The name of the rule
-          example: null
+          example: ''
           type: string
         options:
           $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
         queries:
           description: Queries for selecting logs which are part of the rule.
-          example: null
+          example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringRuleQuery'
           type: array
@@ -2537,13 +2599,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RoleCreatePayload'
+              $ref: '#/components/schemas/RoleCreateRequest'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoleResponse'
+                $ref: '#/components/schemas/RoleCreateResponse'
           description: OK
         '400':
           content:
@@ -2624,13 +2686,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RoleUpdatePayload'
+              $ref: '#/components/schemas/RoleUpdateRequest'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RoleResponse'
+                $ref: '#/components/schemas/RoleUpdateResponse'
           description: OK
         '400':
           content:

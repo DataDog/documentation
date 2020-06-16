@@ -5,38 +5,38 @@ col1:
     link: "https://www.datadoghq.com/product/"
     title: "Features"
   - name: integrations
-    link: "https://www.datadoghq.com/product/integrations/"
+    link: "https://www.datadoghq.com/product/platform/integrations/"
     title: "Integrations"
   - name: dashboards
-    link: "https://www.datadoghq.com/dashboarding/"
+    link: "https://www.datadoghq.com/product/platform/dashboards/"
     title: "Dashboards"
   - name: logs
-    link: "https://www.datadoghq.com/log-management/"
+    link: "https://www.datadoghq.com/product/log-management/"
     title: "Log Management" 
   - name: apm
-    link: "https://www.datadoghq.com/apm/"
+    link: "https://www.datadoghq.com/product/apm/"
     title: "APM"
+  - name: security-monitoring
+    link: "https://www.datadoghq.com/product/security-monitoring/"
+    title: "Security Monitoring"
   - name: network
-    link: "https://www.datadoghq.com/network/"
+    link: "https://www.datadoghq.com/product/network-performance-monitoring/"
     title: "Network Monitoring"
   - name: synthetics
-    link: "https://www.datadoghq.com/synthetics/"
+    link: "https://www.datadoghq.com/product/synthetics-monitoring/"
     title: "Synthetic Monitoring"
   - name: rum
-    link: "https://www.datadoghq.com/rum/"
+    link: "https://www.datadoghq.com/product/real-user-monitoring/"
     title: "Real User Monitoring"
   - name: serverless
-    link: "https://www.datadoghq.com/serverless/"
+    link: "https://www.datadoghq.com/product/serverless-monitoring/"
     title: "Serverless"
   - name: alerts
-    link: "https://www.datadoghq.com/alerts/"
+    link: "https://www.datadoghq.com/product/platform/alerts/"
     title: "Alerts"
   - name: synthetics
-    link: "https://www.datadoghq.com/synthetics/"
+    link: "https://www.datadoghq.com/product/synthetics-monitoring/"
     title: "Synthetics"
-  - name: alerts
-    link: "https://www.datadoghq.com/alerts/"
-    title: "Alerts"
 col2:
   - name: pricing
     link: "https://www.datadoghq.com/pricing/"

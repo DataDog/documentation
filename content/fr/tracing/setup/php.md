@@ -108,7 +108,8 @@ L'APM PHP prend en charge les SAPI suivants :
 |:---------------|:----------------|
 | apache2handler | Prise en charge complète |
 | cli            | Prise en charge complète |
-| fpm            | Prise en charge complète |
+| fpm-fcgi       | Prise en charge complète |
+| cgi-fcgi       | Prise en charge complète |
 
 ### Intégrations
 
@@ -233,10 +234,10 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_AGENT_HOST`                           | `localhost` | Nom du host de l'Agent                                                                                                                            |
 | `DD_AUTOFINISH_SPANS`                     | `false`     | Définit si les spans doivent être automatiquement finalisées ou non lorsque le traceur est vidé                                                                            |
 | `DD_DISTRIBUTED_TRACING`                  | `true`      | Définit si le tracing distribué doit être activé ou non                                                                                                          |
-| `DD_INTEGRATIONS_DISABLED`                | `null`      | Liste au format CSV des extensions désactivées, p. ex. `curl,mysqli`                                                                                           |
+| `DD_INTEGRATIONS_DISABLED`                | `null`      | Liste au format CSV des intégrations à désactiver, p. ex. : `curl,mysqli` (voir la section [Noms des intégrations](#noms-des-integrations)).                                      |
 | `DD_PRIORITY_SAMPLING`                    | `true`      | Active ou désactive l'échantillonnage prioritaire                                                                                                            |
-| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | Le taux d'échantillonnage des traces. Entre `0.0` et `1.0` (par défaut). La variable était nommée `DD_SAMPLING_RATE` avant la v0.36.0.                                  |
-| `DD_SERVICE_NAME`                         | `none`      | Nom par défaut de l'application                                                                                                                           |
+| `DD_SERVICE_NAME`                         | `null`      | Nom par défaut de l'application                                                                                                                           |
+| `DD_SERVICE_MAPPING`                      | `null`      | Modifie le nom par défaut d'une intégration APM. Vous pouvez remplacer le nom de plusieurs intégrations à la fois. Utilisez par exemple `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (voir la section [Noms des intégrations](#noms-des-integrations)). |
 | `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | Délai de nouvelle tentative du disjoncteur configurable basé sur IPC (en millisecondes)                                                                            |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Délai maximum autorisé pour la configuration de la connexion de l'Agent (en millisecondes)                                                                          |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Délai d'expiration de la connexion de l'Agent (en millisecondes)                                                                                                 |
@@ -244,19 +245,51 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_AGENT_PORT`                     | `8126`      | Port de l'Agent                                                                                                                          |
 | `DD_TRACE_AGENT_TIMEOUT`                  | `500`       | Délai d'expiration du transfert de la requête de l'Agent (en millisecondes)                                                                                           |
 | `DD_TRACE_ANALYTICS_ENABLED`              | `false`     | Flag pour activer la fonction App Analytics pour les spans pertinentes dans les intégrations Web                                                                            |
+| `DD_TRACE_AUTO_FLUSH_ENABLED`             | `false`     | Vider automatiquement le traceur lorsque toutes les spans sont finalisées ; définir sur `true` conjointement à `DD_TRACE_GENERATE_ROOT_SPAN=0` pour tracer les processus à exécution longue |
 | `DD_TRACE_CLI_ENABLED`                    | `false`     | Active le tracing de scripts PHP depuis le CLI                                                                                                     |
 | `DD_TRACE_DEBUG`                          | `false`     | Active le [mode debugging](#mappage-personnalisé-de-l-URL-a-la-ressource) pour le traceur                                                                            |
 | `DD_TRACE_ENABLED`                        | `true`      | Active le traceur partout                                                                                                                     |
-| `DD_TRACE_GLOBAL_TAGS`                    | `none`      | Tags à appliquer à toutes les spans : p. ex. `key1:value1,key2:value2`                                                                                   |
+| `DD_TRACE_GENERATE_ROOT_SPAN`             | `true`      | Générer automatiquement une span de premier niveau ; définir sur `false` conjointement à `DD_TRACE_AUTO_FLUSH_ENABLED=1` pour tracer les processus à exécution longue    |
+| `DD_TRACE_GLOBAL_TAGS`                    | `null`      | Tags à appliquer à toutes les spans, p. ex. : `key1:value1,key2:value2`.                                                                                 |
+| `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`    | `false`     | Définir le nom de service des requêtes HTTP sur `host-<hostname>`. Par exemple, un appel `curl_exec()` vers `https://datadoghq.com` prendra le nom de service `host-datadoghq.com` au lieu du nom de service par défaut `curl`. |
 | `DD_TRACE_MEASURE_COMPILE_TIME`           | `true`      | Enregistre la durée de compilation de la requête (en millisecondes) dans la span de premier niveau                                                               |
 | `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Définissez cette variable d'environnement sur `true` afin d'activer l'instrumentation automatique pour les applications qui n'utilisent pas de chargeur automatique                                                    |
 | `DD_TRACE_REPORT_HOSTNAME`                | `false`     | Active la transmission du hostname sur la span racine                                                                                                     |
-| `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | Fichier CSV comprenant les règles de mappage de l'URL au nom de la ressource, p. ex. :  `/foo/*,/bar/$*/baz` ; [voir la section Mappage personnalisé de l'URL à la ressource](#mappage-personnalise-de-l-URL-a-la-ressource) |
-| `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `false`     | Active les URL en tant que noms de ressources ; [voir la section Mappage des noms de ressources aux URI normalisées](#mappage-des-noms-de-ressources-aux-uri-normalisees)                            |
-| `DD_<INTÉGRATION>_ANALYTICS_ENABLED`      | `false`     | Flag pour activer la fonction App Analytics pour les spans pertinentes dans une intégration spécifique                                                                      |
-| `DD_SERVICE_MAPPING`      | `null`     | Modifie le nom par défaut d'une intégration APM. Vous pouvez remplacer le nom de plusieurs intégrations à la fois. Utilisez par exemple `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db`.                                                                      |
+| `DD_TRACE_RESOURCE_URI_MAPPING`           | `null`      | Règles de mappage de l'URL au nom de la ressource au format CSV, par exemple : `/foo/*,/bar/$*/baz` (voir la section [Mappage personnalisé de l'URL à la ressource](#mappage-personnalise-de-l-URL-a-la-ressource)) |
+| `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | Taux d'échantillonnage des traces (entre `0.0` et `1.0` par défaut). Pour les versions inférieures à 0.36.0, ce paramètre est `DD_SAMPLING_RATE`.                                  |
+| `DD_TRACE_SAMPLING_RULES`                 | `null`      | Chaîne encodée au format JSON pour configurer le taux d'échantillonnage. Exemples : définir le taux d'échantillonnage sur 20 % : `[{"sample_rate": 0.2}]`. Définir le taux d'échantillonnage sur 10 % pour les services commençant par « a » et pour les noms de span commençant par « b » et définir le taux d'échantillonnage sur 20 % pour tous les autres services : `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]` (voir la section [Noms des intégrations](#noms-des-integrations)). |
+| `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `true`      | Activer les URL en tant que noms de ressources (voir la section [Mapper les noms de ressources à une URL normalisée](#mapper-les-noms-de-ressources-a-une-url-normalisee)).                            |
+| `DD_<INTÉGRATION>_ANALYTICS_ENABLED`      | `false`     | Flag pour activer App Analytics pour les spans pertinentes dans une intégration spécifique (voir la section [Noms des intégrations](#noms-des-integrations)).                       |
+| `DD_<INTÉGRATION>_ANALYTICS_SAMPLE_RATE`  | `1.0`       | Définir le taux d'échantillonnage App Analytics pour les spans pertinentes dans une intégration spécifique (voir la section [Noms des intégrations](#noms-des-integrations)).                  |
 
-#### Mappage des noms de ressources aux URI normalisées
+#### Noms des intégrations
+
+Le tableau ci-dessous répertorie les noms de service par défaut pour chaque intégration. Modifiez les noms de service avec `DD_SERVICE_MAPPING`.
+
+Utilisez ces noms lorsque vous définissez un paramètre pour une intégration spécifique, tel que `DD_<INTÉGRATION>_ANALYTICS_ENABLED`. Exemple pour Laravel : `DD_LARAVEL_ANALYTICS_ENABLED`.
+
+| Intégration       | Service Name      |
+|-------------------|-------------------|
+| CakePHP           | `cakephp`         |
+| CodeIgniter       | `codeigniter`     |
+| cURL              | `curl`            |
+| ElasticSearch     | `elasticsearch`   |
+| Eloquent          | `eloquent`        |
+| Guzzle            | `guzzle`          |
+| Laravel           | `laravel`         |
+| Lumen             | `lumen`           |
+| Memcached         | `memcached`       |
+| Mongo             | `mongo`           |
+| Mysqli            | `mysqli`          |
+| PDO               | `pdo`             |
+| Predis            | `predis`          |
+| Slim              | `slim`            |
+| Symfony           | `symfony`         |
+| WordPress         | `wordpress`       |
+| Yii               | `yii`             |
+| ZendFramework     | `zendframework`   |
+
+#### Mapper les noms de ressources à une URL normalisée
 
 Par défaut, l'URL est utilisée afin de créer le nom de ressource de la trace, en suivant le format `<MÉTHODE_REQUÊTE_HTTP> <URL_NORMALISÉE>`. La chaîne de requête est supprimée de l'URL. Cela vous permet de gagner en visibilité sur les frameworks personnalisés qui ne sont pas instrumentés automatiquement en normalisant les URL et en regroupant les endpoints génériques sous une unique ressource.
 

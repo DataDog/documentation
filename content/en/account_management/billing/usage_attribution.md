@@ -83,4 +83,4 @@ The table below shows a sample daily report for Custom Metrics usage two tags: `
 When using multiple tags, both the Daily and Monthly Usage Attribution reports contain data for all possible combinations of those tags, and are suitable to use as base datasets for further data analysis tasks. For instance, you can use grouping or pivoting to produce views focused on a subset of the tags, or to perform aggregations across custom date ranges.
 
 [1]: https://docs.datadoghq.com/api/#get-daily-usage-attribution-available-files
-[2]: https://docs.datadoghq.com/tagging/#defining-tags
+[2]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags

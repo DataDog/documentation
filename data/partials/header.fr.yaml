@@ -7,28 +7,28 @@ left:
         link: 'https://www.datadoghq.com/product/'
         title: Fonctionnalités
       - name: product_integrations
-        link: 'https://www.datadoghq.com/product/integrations/'
+        link: 'https://www.datadoghq.com/product/platform/integrations/'
         title: Intégrations
       - name: product_dashboards
-        link: 'https://www.datadoghq.com/dashboarding/'
+        link: 'https://www.datadoghq.com/product/platform/dashboards/'
         title: Dashboards
       - name: product_logs
-        link: 'https://www.datadoghq.com/log-management/'
+        link: 'https://www.datadoghq.com/product/log-management/'
         title: Log Management
       - name: product_apm
-        link: 'https://www.datadoghq.com/apm/'
+        link: 'https://www.datadoghq.com/product/apm/'
         title: APM
       - name: product_network
-        link: 'https://www.datadoghq.com/network/'
+        link: 'https://www.datadoghq.com/product/network-performance-monitoring/'
         title: Réseau
       - name: product_synthetics
-        link: 'https://www.datadoghq.com/synthetics/'
+        link: 'https://www.datadoghq.com/product/synthetics-monitoring/'
         title: Synthetics
       - name: product_rum
-        link: 'https://www.datadoghq.com/rum/'
+        link: 'https://www.datadoghq.com/product/real-user-monitoring/'
         title: RUM
       - name: product_alerts
-        link: 'https://www.datadoghq.com/alerts/'
+        link: 'https://www.datadoghq.com/product/platform/alerts/'
         title: Alertes
       - name: product_api
         link: api

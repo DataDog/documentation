@@ -1,3 +1,4 @@
+
 ---
 title: Tracing Go Applications
 kind: documentation
@@ -49,45 +50,63 @@ Datadog has a series of pluggable packages which provide out-of-the-box support 
 
 ## Configuration
 
-The tracer is configured with options parameters when the `Start` function is called. An example for generating a trace using the HTTP library:
+The Go tracer supports additional environment variables and functions for configuration.
+See all available options in the [configuration documentation][72].
+
+We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
+Check out the [Unified Service Tagging][73] documentation for recommendations on how to configure these environment variables.
+
+You may also elect to provide `env`, `service`, and `version` through the tracer's API:
 
 ```go
 package main
 
 import (
-    "log"
-    "net/http"
-    "strings"
-
-    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
     "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
-func sayHello(w http.ResponseWriter, r * http.Request) {
-    msg := "Hello " + strings.TrimPrefix(r.URL.Path, "/")
-    w.Write([] byte(msg))
-}
-
 func main() {
-    // start the tracer with zero or more options
-    tracer.Start(tracer.WithServiceName("test-go"))
+    tracer.Start(
+        tracer.WithEnv("prod"),
+        tracer.WithService("test-go"),
+        tracer.WithVersion("abc123"),
+    )
     defer tracer.Stop()
-
-    mux := httptrace.NewServeMux() // init the http tracer
-    mux.HandleFunc("/", sayHello) // use the tracer to handle the urls
-
-    err := http.ListenAndServe(":9090", mux) // set listen port
-    if err != nil {
-        log.Fatal("ListenAndServe: ", err)
-    }
 }
 ```
 
-For more tracer settings, see available options in the [configuration documentation][9].
+### Change Agent Hostname
+
+The Go Tracing Module automatically looks for and initializes with the environment variables `DD_AGENT_HOST` and `DD_AGENT_APM_PORT`.
+
+But you can also set a custom hostname and port in code:
+
+```go
+package main
+
+import (
+    "net"
+
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+func main() {
+    addr := net.JoinHostPort(
+        "custom-hostname",
+        "1234",
+    )
+    tracer.Start(tracer.WithAgentAddr(addr))
+    defer tracer.Stop()
+}
+```
+
+## Configure APM Environment Name
+
+The [APM environment name][9] may be configured [in the agent][10] or using the [WithEnv][11] start option of the tracer.
 
 ### B3 Headers Extraction and Injection
 
-The Datadog APM tracer supports [B3 headers extraction][10] and injection for distributed tracing.
+The Datadog APM tracer supports [B3 headers extraction][74] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
@@ -107,55 +126,6 @@ If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully
 extracted value is used.
 
-## Change Agent Hostname
-
-Configure your application level tracers to submit traces to a custom Agent hostname:
-
-The Go Tracing Module automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`
-
-```go
-package main
-
-import (
-    "net"
-    "os"
-
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func main() {
-    addr := net.JoinHostPort(
-        os.Getenv("DD_AGENT_HOST"),
-        os.Getenv("DD_TRACE_AGENT_PORT"),
-    )
-    tracer.Start(tracer.WithAgentAddr(addr))
-    defer tracer.Stop()
-}
-
-```
-
-## Configure APM Environment Name
-
-The [APM environment name][11] may be configured [in the agent][12] or using the [WithEnv][13] start option of the tracer.
-
-```go
-package main
-
-import (
-    "os"
-
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-)
-
-func main() {
-    tracer.Start(tracer.WithEnv("<ENVIRONMENT>"))
-    defer tracer.Stop()
-
-    // ...
-}
-```
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -164,12 +134,10 @@ func main() {
 [2]: /tracing/visualization/
 [3]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
 [4]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[5]: https://app.datadoghq.com/apm/install
-[6]: /tracing/send_traces/
+[5]: /tracing/send_traces/
+[6]: https://app.datadoghq.com/apm/install
 [7]: /tracing/setup/docker/
 [8]: /agent/kubernetes/apm/
-[9]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartOption
-[10]: https://github.com/openzipkin/b3-propagation
-[11]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[12]: /getting_started/tracing/#environment-name
-[13]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithEnv
+[9]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[10]: /getting_started/tracing/#environment-name
+[11]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithEnv

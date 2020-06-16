@@ -172,6 +172,7 @@ Some examples demonstrating how to use parsers:
 * [Optional attribute](#optional-attribute)
 * [Nested JSON](#nested-json)
 * [Regex](#regex)
+* [List and Arrays](#list-and-arrays)
 
 ### Key value or logfmt
 
@@ -379,6 +380,37 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 ```
 
 {{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
+
+### List and Arrays
+
+Use the `array` matcher to extract a list into an array in a single attribute.
+
+**Log**:
+
+```text
+Users [John, Oliver, Marc, Tom] have been added to the database
+```
+
+**Rule**:
+
+```text
+myParsingRule Users %{data:users:array(“[]“,”,“)} have been added to the database
+```
+
+{{< img src="logs/processing/parsing/array_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
+
+
+**Log**:
+
+```text
+Users {John-Oliver-Marc-Tom} have been added to the database
+```
+
+**Rule**:
+
+```text
+myParsingRule Users %{data:users:array("{}","-")} have been added to the database
+```
 
 ## Further Reading
 
