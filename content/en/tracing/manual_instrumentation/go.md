@@ -73,7 +73,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 ### Adding tags globally to all spans
 
-Add [tags][1] to all [spans][2] by configuring the tracer with the `tags` option:
+Add [tags][1] to all [spans][2] by configuring the tracer with the `WithGlobalTag` option:
 
 ```go
 package main
