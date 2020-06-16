@@ -67,7 +67,7 @@ Historical views stay in Datadog until you opt to delete them. You can mark a hi
 
 ### Define a Datadog archive
 
-An external archive must be configured in order to rehydrate data from it. [Follow the guide][6] to archive your logs in the available destinations.
+An external archive must be configured in order to rehydrate data from it. [Follow the guide][6] to archive your logs in the available destinations. 
 
 ### Permissions
 
