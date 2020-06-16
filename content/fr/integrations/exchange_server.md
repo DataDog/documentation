@@ -1,6 +1,7 @@
 ---
 assets:
-  dashboards: {}
+  dashboards:
+    Exchange Server Overview: assets/dashboards/overview.json
   monitors: {}
   service_checks: assets/service_checks.json
 categories:

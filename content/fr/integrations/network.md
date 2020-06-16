@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   monitors: {}
   service_checks: assets/service_checks.json
@@ -36,7 +38,7 @@ supported_os:
 
 Le check Network recueille des statistiques TCP/IP à partir du système d'exploitation du host.
 
-## Implémentation
+## Configuration
 
 Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host.
 
