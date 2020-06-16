@@ -1,6 +1,8 @@
 ---
 title: Query to the Graph
 kind: documentation
+aliases:
+    - /dashboards/faq/query-to-the-graph
 ---
 
 This page focuses on describing the steps performed by Datadog's graphing system from the query to the graph, so that you get a good idea how to choose your graph settings.
