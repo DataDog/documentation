@@ -205,11 +205,7 @@ Check out the [Unified Service Tagging][9] documentation for recommendations on 
 | `DD_TRACE_AGENT_URL`<br/><br/>`AgentUri`            | Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Default value is `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.                                         |
 | `DD_AGENT_HOST`                                     | Sets the host where traces are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Default is value `localhost`.                                       |
 | `DD_TRACE_AGENT_PORT`                               | Sets the port where traces are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Default value is `8126`.                                                     |
-<<<<<<< HEAD
 | `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][6] for more details about the `env` tag.                                                              |
-=======
-| `DD_ENV`<br/><br/>`Environment`                     | If specified, adds the `env` tag with the specified value to all generated spans. See [Agent configuration][7] for more details about the `env` tag.                                                              |
->>>>>>> master
 | `DD_SERVICE_NAME`<br/><br/>`ServiceName`            | If specified, sets the default service name. Otherwise, the .NET Tracer tries to determine service name automatically from application name (e.g. IIS application name, process entry assembly, or process name). |
 | `DD_LOGS_INJECTION`<br/><br/>`LogsInjectionEnabled` | Enables or disables automatic injection of correlation identifiers into application logs.                                                                                                                         |
 | `DD_TRACE_DEBUG`                                    | Enables or disables debug logging. Valid values are: `true` or `false` (default).                                                                                                                                    |
@@ -237,15 +233,7 @@ The following table lists configuration variables that are available only when u
 
 [1]: https://app.datadoghq.com/apm/install
 [2]: /tracing/send_traces/
-<<<<<<< HEAD
 [3]: https://github.com/DataDog/dd-trace-dotnet/releases
 [4]: https://www.nuget.org/packages/Datadog.Trace
 [5]: /tracing/manual_instrumentation/dotnet/
 [6]: /tracing/guide/setting_primary_tags_to_scope/#environment
-=======
-[3]: /tracing/setup/dotnet-core/
-[4]: https://github.com/DataDog/dd-trace-dotnet/releases
-[5]: /help/
-[6]: /tracing/manual_instrumentation/dotnet
-[7]: /tracing/guide/setting_primary_tags_to_scope/#environment
->>>>>>> master
