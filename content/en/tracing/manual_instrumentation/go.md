@@ -104,44 +104,20 @@ If you aren't using supported library instrumentation (see [Library compatibilit
 
 ### Manually creating a new span
 
-```go
-package main
-
-import (
-	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-
-	"github.com/opentracing/opentracing-go"
-)
-
-func main() {
-	// configure and initialize the Datadog Tracer
-	tracer := ddtracer.New(tracer.WithService("api-intake"))
-
-	// Set it as a Global Tracer
-	opentracing.SetGlobalTracer(tracer)
-}
-```
-
 To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][4]:
 
+There are two functions available to create spans. API details are available for `StartSpan` [here][5] and for `StartSpanFromContext` [here][6].
+
 ```go
-package main
+//Create a span
+span := tracer.StartSpan(“mainOp”, tracer.ResourceName("/user"), tracer.ChildOf(parentSpan))
 
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+//Create a span with a resource name, which is the child of parentSpan.
+span := tracer.StartSpan(“mainOp”, tracer.ResourceName("/user"), tracer.ChildOf(parentSpan))
 
-func main() {
-    // Start the tracer with zero or more options.
-    tracer.Start(tracer.WithServiceName("<SERVICE_NAME>"))
-    defer tracer.Stop()
-
-    // Create a span for a web request at the /posts URL.
-    span := tracer.StartSpan("web.request", tracer.ResourceName("/posts"))
-    defer span.Finish()
-
-    // Set metadata
-    span.SetTag("<TAG_KEY>", "<TAG_VALUE>")
-}
+// Create a span which will be the child of the span in the Context ctx, if there is a span in the context.
+// Returns the new span, and a new context containing the new span.
+span, ctx := tracer.StartSpanFromContext(ctx, “mainOp”, tracer.ResourceName("/user"))
 ```
 
 ### Asynchronous Traces
@@ -161,7 +137,7 @@ func main() {
 
 ### Distributed Tracing
 
-Create a distributed [trace][5] by manually propagating the tracing context:
+Create a distributed [trace][7] by manually propagating the tracing context:
 
 ```go
 package main
@@ -216,7 +192,7 @@ There are additional configurations possible for both the tracing client and Dat
 
 ### B3 Headers Extraction and Injection
 
-The Datadog APM tracer supports [B3 headers extraction][6] and injection for distributed tracing.
+The Datadog APM tracer supports [B3 headers extraction][8] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Two styles are
@@ -253,11 +229,11 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 
 ## OpenTracing
 
-Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][7], or see the setup information below.
+Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][9], or see the setup information below.
 
 ### Setup
 
-Import the [`opentracer` package][8] to expose the Datadog tracer as an [OpenTracing][9] compatible tracer.
+Import the [`opentracer` package][10] to expose the Datadog tracer as an [OpenTracing][11] compatible tracer.
 
 A basic usage example:
 
@@ -286,7 +262,7 @@ func main() {
 }
 ```
 
-**Note**: Using the [OpenTracing API][7] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][8] for more examples and details.
+**Note**: Using the [OpenTracing API][9] in parallel with the regular API or Datadog integrations is fully supported. Under the hood, all of them make use of the same tracer. See the [API documentation][10] for more examples and details.
 
 ## Further Reading
 
@@ -296,8 +272,10 @@ func main() {
 [2]: /tracing/visualization/#spans
 [3]: /tracing/setup/go/#compatibility
 [4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-[5]: /tracing/visualization/#trace
-[6]: https://github.com/openzipkin/b3-propagation
-[7]: https://github.com/opentracing/opentracing-go
-[8]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
-[9]: http://opentracing.io
+[5]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
+[6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
+[7]: /tracing/visualization/#trace
+[8]: https://github.com/openzipkin/b3-propagation
+[9]: https://github.com/opentracing/opentracing-go
+[10]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[11]: http://opentracing.io
