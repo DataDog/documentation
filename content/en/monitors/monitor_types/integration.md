@@ -35,7 +35,7 @@ Create an integration metric monitor by following the instructions in the [metri
 
 If the integration has a service check, the **Integration Status** tab is active.
 
-**Note**: If the integration does not submit metrics or service checks, it will show up as "Misconfigured" 
+**Note**: If the integration does not submit metrics or service checks, it will show up as "Misconfigured".
 
 #### Pick a check
 
