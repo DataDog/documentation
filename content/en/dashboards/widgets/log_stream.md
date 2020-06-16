@@ -66,17 +66,21 @@ LOG_STREAM_SCHEMA = {
 }
 ```
 
-| Parameter     | Type   | Required | Description                                                                                                                |
-|---------------|--------|----------|----------------------------------------------------------------------------------------------------------------------------|
-| `type`        | string | yes      | Type of the widget, for the log stream widget use `log_stream`                                                             |
-| `indexes`     | string | no       | An array of index names to query in the stream.                                                                            |
-| `logset`      | string | no       | Deprecated: Use 'indexes' instead. The ID of the index to query in the stream.                                             |
-| `query`       | string | no       | Query to filter the log stream with                                                                                        |
-| `columns`     | array  | no       | Which columns to display on the widget                                                                                     |
-| `title`       | string | no       | Title of the widget                                                                                                        |
-| `title_size`  | string | no       | Size of the title                                                                                                          |
-| `title_align` | string | no       | How to align the title. Available values are: `center`, `left`, or `right`                                                 |
-| `time`        | object | no       | Time setting for the widget. See the dedicated [Time JSON schema documentation][4] to learn how to build the `TIME_SCHEMA` |
+| Parameter             | Type    | Required | Description                                                                                |
+|-----------------------|---------|----------|--------------------------------------------------------------------------------------------|
+| `type`                | String  | Yes      | Type of the widget, for the log stream widget use `log_stream`                             |
+| `logset`              | String  | No       | (Deprecated) Use 'indexes' instead. The ID of the index to query in the stream.            |
+| `indexes`             | Array   | No       | An array of index names to query in the stream. Use [] to query all indexes at once.       |
+| `query`               | String  | No       | The query to filter the log stream.                                                        |
+| `columns`             | Array   | No       | The columns to display on the widget.                                                      |
+| `show_date_column`    | Boolean | No       | Whether to show the date column or not.                                                    |
+| `show_message_column` | Boolean | No       | Whether to show the message column or not.                                                 |
+| `message_display`     | String  | No       | The amount of log lines to display.                                                        |
+| `sort`                | Object  | No       | The column and order to sort by.                                                           |
+| `title`               | String  | No       | The title of the widget.                                                                   |
+| `title_size`          | String  | No       | The size of the title.                                                                     |
+| `title_align`         | String  | No       | How to align the title. The available values are `center`, `left`, or `right`.             |
+| `time`                | Object  | No       | The time setting for the widget. For details, see the [Time JSON schema documentation][4]. |
 
 ## Further Reading
 
