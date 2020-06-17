@@ -206,7 +206,7 @@ The JavaScript assertion function comes with the following parameters and requir
 
 * `vars`: A string containing your browser test [variables][5]. Use `vars.<YOUR_VARIABLE>` to refer to a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
 
-* `element`: Locator of the element on the page. This element can be selected and updated with the `Select` and `Update` target element buttons of the step. The selected element automatically leverages Datadog browser test multi locating algorithm.
+* `element`: The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
 
 {{< img src="synthetics/browser_tests/js_variable.mp4" alt="Browser Test JavaScript Variable" video="true" width="100%">}}
 
