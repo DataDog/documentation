@@ -4,23 +4,23 @@ kind: documentation
 aliases:
   - /fr/logs/languages/nodejs
 further_reading:
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: logs/explorer/analytics
+  - link: /logs/explorer/analytics/
     tag: Documentation
     text: Effectuer des analyses de logs
-  - link: logs/faq/log-collection-troubleshooting-guide
+  - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: Dépannage pour la collecte de logs
 ---
-## Présentation
+## Configurer votre logger
 
 Utilisez [Winston][1] pour la création de logs depuis votre application NodeJS afin de profiter de toutes les fonctionnalités dont vous avez besoin pour élaborer votre stratégie de journalisation. 
 
@@ -44,10 +44,6 @@ npm install --save winston
   }
 }
 ```
-
-## Implémentation
-
-**Ajouter des identifiants de trace à vos logs** : si l'APM est activé pour cette application et que vous souhaitez améliorer la corrélation entre les traces et les logs d'application, [suivez les instructions de journalisation NodeJS pour l'APM][3] afin d'ajouter automatiquement des identifiants de trace et de span à vos logs.
 
 ### Journalisation dans un fichier
 
@@ -108,6 +104,12 @@ Vérifiez le contenu du fichier `<NOM_FICHIER>.log` pour vous assurer que Winsto
 {"color":"blue","level":"info","message":"Voici un log avec des métadonnées","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
 
+## Associer votre service à l'ensemble des logs et traces
+
+Si l'APM est activé pour cette application, associez vos logs et vos traces en ajoutant automatiquement l'ID des traces, l'ID des spans et les paramètres `env`, `service` et `version` à vos logs. Pour ce faire, [suivez les instructions relatives à l'utilisation de NodeJS pour l'APM][3] (en anglais).
+
+**Remarque** : si le traceur de l'APM injecte `service` dans vos logs, cela remplace la valeur définie dans la configuration de l'Agent.
+
 ## Configurer votre Agent Datadog
 
 Créez un fichier `nodejs.d/conf.yaml` dans votre dossier `conf.d/` avec le contenu suivant :
@@ -126,6 +128,82 @@ logs:
     source: nodejs
     sourcecategory: sourcecode
 ```
+
+## Logging sans agent
+
+Vous pouvez transmettre vos logs depuis votre application à Datadog sans installer d'Agent sur votre host. Veuillez cependant noter qu'il est conseillé d'utiliser un Agent pour l'envoi de vos logs, en raison de ses capacités natives de gestion de la connexion.
+
+{{< tabs >}}
+{{% tab "Winston 3.0" %}}
+
+Utilisez le [transport HTTP Winston][1] pour envoyer vos logs directement via l'[API Log Datadog][2].
+Dans votre fichier Bootstrap ou dans votre code, déclarez le logger comme suit :
+
+{{< site-region region="us" >}}
+
+```js
+const { createLogger, format, transports } = require('winston');
+
+const httpTransportOptions = {
+  host: 'http-intake.logs.datadoghq.com',
+  path: '/v1/input/<CLÉ_API>?ddsource=nodejs&service=<NOM_APPLICATION>',
+  ssl: true
+};
+
+const logger = createLogger({
+  level: 'info',
+  exitOnError: false,
+  format: format.json(),
+  transports: [
+    new transports.Http(httpTransportOptions),
+  ],
+});
+
+module.exports = logger;
+
+// Exemples de log
+logger.log('info', 'Voici un log simple !');
+logger.info('Voici un log avec des métadonnées',{color: 'blue' });
+```
+
+Remarque : vous pouvez également tester le [transport Datadog][1] créé par la communauté.
+
+[1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```js
+const { createLogger, format, transports } = require('winston');
+
+const httpTransportOptions = {
+  host: 'http-intake.logs.datadoghq.eu',
+  path: '/v1/input/<CLÉ_API>?ddsource=nodejs&service=<NOM_APPLICATION>',
+  ssl: true
+};
+
+const logger = createLogger({
+  level: 'info',
+  exitOnError: false,
+  format: format.json(),
+  transports: [
+    new transports.Http(httpTransportOptions),
+  ],
+});
+
+module.exports = logger;
+
+// Exemples de log
+logger.log('info', 'Voici un log simple !');
+logger.info('Voici un log avec des métadonnées',{color: 'blue' });
+```
+
+{{< /site-region >}}
+
+[1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
+[2]: /fr/api/v1/logs/#send-logs
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Dépannage
 
@@ -147,4 +225,4 @@ Assurez-vous de ne pas définir le paramètre `max_connect_retries` sur `1` (val
 
 [1]: https://github.com/winstonjs/winston
 [2]: https://www.npmjs.com
-[3]: /fr/tracing/connect_logs_and_traces/nodejs
+[3]: /fr/tracing/connect_logs_and_traces/nodejs/
