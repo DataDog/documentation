@@ -23,9 +23,9 @@ Since tags can be appended to data points, you have a lot of freedom in setting 
 
 #### APM
 
-`env` and `service` are core tags in APM, so it is not possible to replace them with differently named tags. However, APM does allow for data to be [aggregated along more primary tags][4] than just `env`. Since host tags are added to traces and trace metrics, they can be used as well (e.g., availability-zone).
+`env` and `service` are core tags in APM, so it is not possible to replace them with differently named tags. However, APM does allow for data to be [aggregated along more primary tags][2] than just `env`. Since host tags are added to traces and trace metrics, they can be used as well (e.g., availability-zone).
 
-Autodiscovered tags associated with containers are added to `container_info` in span metadata. However, these container tags are not part of the [whitelisted tags][2] for trace metrics.
+Autodiscovered tags associated with containers are added to `container_info` in span metadata. However, these container tags are not part of the [whitelisted tags][3] for trace metrics.
 
 
 #### Logs
@@ -34,7 +34,7 @@ Similar to APM, `service` is a core tag that is used to help organize logs data.
 
 Similar to metrics, however, Autodiscovered tags for the container as well as host tags for the agent are added to all logs.
 
-You also have the ability to add custom fields to your logs in-code, which can be mapped to tags or attributes downstream in a [Datadog log processing pipeline][3].
+You also have the ability to add custom fields to your logs in-code, which can be mapped to tags or attributes downstream in a [Datadog log processing pipeline][4].
 
 ## Using Standard Labels
 
@@ -64,6 +64,6 @@ tags.datadoghq.com/<container>.version
 ```
 
 [1]: /getting_started/tagging/unified_service_tagging
-[2]: /metrics/distributions/#customize-tagging
-[3]: /logs/processing/pipelines/
-[4]: /tracing/guide/setting_primary_tags_to_scope/
+[2]: /tracing/guide/setting_primary_tags_to_scope/
+[3]: /metrics/distributions/#customize-tagging
+[4]: /logs/processing/pipelines/

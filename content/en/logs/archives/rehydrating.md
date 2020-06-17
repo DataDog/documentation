@@ -34,7 +34,7 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 7. Define the retention period of the rehydrated logs (available retentions are based on your contract, default is 15 days).
 
-8. (Optional) **Notify** trigger notifications on rehydration completion through [integrations][7] with the @handle syntax.
+8. (Optional) **Notify** trigger notifications on rehydration completion through [integrations][6] with the @handle syntax.
 
 {{< img src="logs/archives/log_rehydration_setup.png" alt="Reload from Archive"  style="width:75%;">}}
 
@@ -69,7 +69,7 @@ Historical views stay in Datadog until you opt to delete them. You can mark a hi
 
 ### Define a Datadog archive
 
-An external archive must be configured in order to rehydrate data from it. [Follow the guide][6] to archive your logs in the available destinations.
+An external archive must be configured in order to rehydrate data from it. [Follow the guide][7] to archive your logs in the available destinations.
 
 ### Permissions
 
@@ -144,5 +144,5 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
 [4]: /logs/explorer/search/
 [5]: /logs/processing/#reserved-attributes
-[6]: /logs/archives/
-[7]: /integrations/#cat-notification
+[6]: /integrations/#cat-notification
+[7]: /logs/archives/

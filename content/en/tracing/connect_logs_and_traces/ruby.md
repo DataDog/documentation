@@ -46,7 +46,7 @@ correlation.version # => '2.5.17' (derived from DD_VERSION)
 
 #### For logging in Rails applications using Lograge (recommended)
 
-After [setting up Lograge in a Rails application](https://docs.datadoghq.com/logs/log_collection/ruby/), modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs:
+After [setting up Lograge in a Rails application][1], modify the `custom_options` block in your environment configuration file (e.g. `config/environments/production.rb`) to add the trace IDs:
 
 ```ruby
 config.lograge.custom_options = lambda do |event|
@@ -133,13 +133,14 @@ Datadog.tracer.trace('my.operation') { logger.warn('This is a traced operation.'
 # [2019-01-16 18:38:41 +0000][my_app][WARN][dd.env=production dd.service=billing-api dd.version=2.5.17 dd.trace_id=8545847825299552251 dd.span_id=3711755234730770098] This is a traced operation.
 ```
 
-**Note**: If you are not using a [Datadog Log Integration][1] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][2].
+**Note**: If you are not using a [Datadog Log Integration][2] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][3].
 
-See the [Ruby logging documentation][1] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
+See the [Ruby logging documentation][2] to verify the Ruby log integration is properly configured and your ruby logs are automatically parsed.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/log_collection/ruby/#configure-the-datadog-agent
-[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[1]: https://docs.datadoghq.com/logs/log_collection/ruby/
+[2]: /logs/log_collection/ruby/#configure-the-datadog-agent
+[3]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

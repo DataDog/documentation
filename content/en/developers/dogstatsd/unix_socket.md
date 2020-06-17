@@ -34,7 +34,7 @@ Instead of using an `IP:port` pair to establish connections, Unix Domain Sockets
 
 To set up DogStatsD with Unix Domain Socket, enable the DogStatsD server through the `dogstatsd_socket` parameter. Then, configure the [DogStatsD client](#dogstatsd-client-configuration) in your code.
 
-**Note**: Go does not support the [`dogstatsd_socket` for unixgram][10], so this does not work on Windows.
+**Note**: Go does not support the [`dogstatsd_socket` for unixgram][2], so this does not work on Windows.
 
 To enable the Agent DogStatsD UDS:
 
@@ -197,7 +197,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note:** `container_id`, `container_name`, and `pod_name` tags are not added by default to avoid creating too many [custom metrics][2].
+**Note:** `container_id`, `container_name`, and `pod_name` tags are not added by default to avoid creating too many [custom metrics][3].
 
 ## DogStatsD client configuration
 
@@ -207,12 +207,12 @@ The following official DogStatsD client libraries natively support UDS traffic. 
 
 | Language | Library                              |
 | -------- | ------------------------------------ |
-| Golang   | [DataDog/datadog-go][3]              |
-| Java     | [DataDog/java-dogstatsd-client][4]   |
-| Python   | [DataDog/datadogpy][5]               |
-| Ruby     | [DataDog/dogstatsd-ruby][6]          |
-| PHP      | [DataDog/php-datadogstatsd][7]       |
-| C#       | [DataDog/dogstatsd-csharp-client][8] |
+| Golang   | [DataDog/datadog-go][4]              |
+| Java     | [DataDog/java-dogstatsd-client][5]   |
+| Python   | [DataDog/datadogpy][6]               |
+| Ruby     | [DataDog/dogstatsd-ruby][7]          |
+| PHP      | [DataDog/php-datadogstatsd][8]       |
+| C#       | [DataDog/dogstatsd-csharp-client][9] |
 
 ### socat proxy
 
@@ -222,19 +222,19 @@ If an application or a client library does not support UDS traffic, run `socat` 
 socat -s -u UDP-RECV:8125 UNIX-SENDTO:/var/run/datadog/dsd.socket
 ```
 
-For guidelines on creating additional implementation options, refer to the [datadog-agent github wiki][9].
+For guidelines on creating additional implementation options, refer to the [datadog-agent github wiki][10].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/metrics/dogstatsd_metrics_submission/
-[2]: /developers/metrics/custom_metrics/
-[3]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
-[4]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
-[5]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds
-[6]: https://github.com/DataDog/dogstatsd-ruby#configuration
-[7]: https://github.com/DataDog/php-datadogstatsd
-[8]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
-[9]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
-[10]: https://github.com/DataDog/datadog-agent/blob/c9588a61e1fef100c61deb39a5145f3b471d107a/pkg/dogstatsd/listeners/uds_common_test.go#L7
+[2]: https://github.com/DataDog/datadog-agent/blob/c9588a61e1fef100c61deb39a5145f3b471d107a/pkg/dogstatsd/listeners/uds_common_test.go#L7
+[3]: /developers/metrics/custom_metrics/
+[4]: https://github.com/DataDog/datadog-go#unix-domain-sockets-client
+[5]: https://github.com/DataDog/java-dogstatsd-client#unix-domain-socket-support
+[6]: https://github.com/DataDog/datadogpy#instantiate-the-dogstatsd-client-with-uds
+[7]: https://github.com/DataDog/dogstatsd-ruby#configuration
+[8]: https://github.com/DataDog/php-datadogstatsd
+[9]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
+[10]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support

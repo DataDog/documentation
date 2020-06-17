@@ -122,7 +122,7 @@ logs_config:
 
 In Datadog Agent 6.8+, `source` and `service` default to the `short_image` tag value. This allows Datadog to identify the log source for each container and automatically install the corresponding integration.
 
-The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][3] and [pod annotations in Kubernetes][4] or container labels.
+The container short image name might not match the integration name for custom images, and can be overwritten to better reflect the name of your application. This can be done with [Datadog Autodiscovery][2] and [pod annotations in Kubernetes][3] or container labels.
 
 Autodiscovery expects labels to follow this format, depending on the file type:
 
@@ -157,9 +157,9 @@ Add the following label as a run command:
 {{% /tab %}}
 {{< /tabs >}}
 
-Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][5].
+Where `<LOG_CONFIG>` is the log collection configuration you would find inside an integration configuration file. [See log collection configuration to learn more][4].
 
-**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][2] documentation.
+**Note**: When configuring the `service` value through docker labels, Datadog recommends using unified service tagging as a best practice. Unified service tagging ties all Datadog telemetry together, including logs, through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][5] documentation.
 
 ### Examples
 
@@ -240,10 +240,10 @@ For Kubernetes environements, refer to the [Kubernetes short lived container doc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/journald/
-[2]: /getting_started/tagging/unified_service_tagging
-[3]: /agent/docker/integrations/
-[4]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
-[5]: /agent/logs/#custom-log-collection
+[2]: /agent/docker/integrations/
+[3]: /agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
+[4]: /agent/logs/#custom-log-collection
+[5]: /getting_started/tagging/unified_service_tagging
 [6]: /agent/logs/advanced_log_collection/?tab=docker#filter-logs
 [7]: /agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
 [8]: /agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation

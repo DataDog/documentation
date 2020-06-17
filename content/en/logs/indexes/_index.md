@@ -58,7 +58,7 @@ Index filters allow dynamic control over which logs flow into which indexes.  Fo
 
 By default, logs indexes have no exclusion filter: that is to say all logs matching the Index Filter are indexed.
 
-But because your logs are not all and equally valuable, exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][8] and can be used to [generate metrics][10] and [archived][9].
+But because your logs are not all and equally valuable, exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][8] and can be used to [generate metrics][9] and [archived][10].
 
 Exclusion filters are defined by a query, a sampling rule, and a active/inactive toggle:
 
@@ -83,7 +83,7 @@ You might not need your DEBUG logs until you actually need them when your platfo
 #### Keep an eye on trends
 
 Let's say now you don't want to keep all logs from your web access server requests. You could choose to index all 3xx, 4xx, and 5xx logs, but exclude 95% of the 2xx logs: `source:nginx AND http.status_code:[200 TO 299]` to keep track of the trends.
-**Tip**: Transform web access logs into meaningful KPIs with a [metric generated from your logs][10], counting number of requests and tagged by status code, [browser][13] and [country][14].
+**Tip**: Transform web access logs into meaningful KPIs with a [metric generated from your logs][9], counting number of requests and tagged by status code, [browser][13] and [country][14].
 
 {{< img src="logs/indexes/sample_200.png" alt="enable index filters"  style="width:80%;">}}
 
@@ -108,7 +108,7 @@ To add retentions that are not in your current contract contact [Datadog support
 ## Set daily quota
 
 You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e. after exclusion filters are applied).
-Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][9], and used to [generate metrics from logs][10].
+Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][10], and used to [generate metrics from logs][9].
 
 Update or remove this quota at any time when editing the Index:
 
@@ -130,8 +130,8 @@ Update or remove this quota at any time when editing the Index:
 [6]: /monitors/monitor_types/log/
 [7]: /logs/explorer/facets/#the-index-facet
 [8]: /logs/live_tail/
-[9]: /logs/archives/
-[10]: /logs/logs_to_metrics/
+[9]: /logs/logs_to_metrics/
+[10]: /logs/archives/
 [11]: /logs/search_syntax/
 [12]: /api/v1/logs-indexes/#update-an-index
 [13]: /logs/processing/processors/?tab=ui#user-agent-parser
