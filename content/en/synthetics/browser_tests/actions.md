@@ -200,7 +200,7 @@ Create a variable out of a `span`, `div`, etc. content by extracting the text of
 
 ##### JavaScript
 
-Generate custom variables using your own JavaScript scripts. JavaScript steps support both synchronous and asynchronous code.
+Generate custom variables using your own JavaScript code. JavaScript steps support both synchronous and asynchronous code.
 
 The JavaScript assertion function comes with the following parameters and requires a return statement.
 
