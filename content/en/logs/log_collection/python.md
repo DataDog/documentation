@@ -41,7 +41,7 @@ Here are setup examples for the following logging libraries:
 
 ## Connect your service across logs and traces
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][3].
+If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][5].
 
 **Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
 
@@ -170,3 +170,4 @@ logs:
 [2]: https://github.com/madzak/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
 [4]: /agent/guide/agent-commands/
+[5]: /tracing/connect_logs_and_traces/python
