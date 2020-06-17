@@ -49,7 +49,7 @@ Les administrateurs de votre organisation peuvent ajuster la liste des attributs
 
 L'application d'un alias entre un attribut source et un attribut cible permet aux logs disposant de l'attribut source de transmettre à la fois l'attribut source et cible, avec la même valeur.
 
-Les utilisateurs peuvent choisir d'interagir entre l'attribut à facette avec alias (l'attribut source) ou standard (l'attribut cible). Les utilisateurs sont cependant [invités][4] à utiliser la facette standard plutôt que celle avec un alias. Cela les incite à respecter la convention de nommage et réduit la création de ressources (comme des vues enregistrées ou des tableaux de bord) à partir de contenu atypique.
+Les utilisateurs peuvent choisir d'interagir entre l'attribut à facette avec alias (l'attribut source) ou standard (l'attribut cible). Les utilisateurs sont cependant [invités][4] à utiliser la facette standard plutôt que celle avec un alias. Cela les incite à respecter la convention de nommage et réduit la création de ressources (comme des vues enregistrées ou des dashboards) à partir de contenu atypique.
 
 Voici quelques informations supplémentaires concernant l'utilisation d'alias :
 
@@ -115,7 +115,7 @@ Les attributs suivants sont liés aux données de communication réseau. Tous le
 | `network.bytes_read`       | `number` | Le nombre total d'octets transmis depuis le client vers le serveur lorsque le log est envoyé. |
 | `network.bytes_written`    | `number` | Le nombre total d'octets transmis depuis le serveur vers le client lorsque le log est envoyé. |
 
-Des intégrations comme [Apache][6], [Varnish][7], [AWS ELB][8], [Nginx][9] ou encore [HAProxy][10] reposent sur ces attributs.
+Des intégrations comme [Apache][2], [Varnish][6], [AWS ELB][7], [Nginx][8] ou encore [HAProxy][9] reposent sur ces attributs.
 
 ### Géolocalisation
 
@@ -124,18 +124,18 @@ Les attributs suivants sont liés à la géolocalisation des adresses IP utilis�
 | **Nom complet**                                | **Type** | **Description**                                                                                                                      |
 | :------------------------------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------- |
 | `network.client.geoip.country.name`         | `string` | Nom du pays                                                                                                                  |
-| `network.client.geoip.country.iso_code`     | `string` | [Code ISO][11] du pays (par exemple : `US` pour les États-Unis, `FR` pour la France)                                                  |
+| `network.client.geoip.country.iso_code`     | `string` | [Code ISO][10] du pays (par exemple : `US` pour les États-Unis, `FR` pour la France)                                                  |
 | `network.client.geoip.continent.code`       | `string` | Code ISO du continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`)                                                                 |
 | `network.client.geoip.continent.name`       | `string` | Nom du continent (`Europe`, `Australia`, `North America`, `Africa`, `Antartica`, `South America`, `Oceania`)                    |
 | `network.client.geoip.subdivision.name`     | `string` | Nom du premier niveau de division du pays (par exemple : `California` aux États-Unis ou le département de la `Sarthe` en France) |
-| `network.client.geoip.subdivision.iso_code` | `string` | [Code ISO][11] du premier niveau de division du pays (par exemple : `CA` aux États-Unis ou le département `SA` en France)    |
+| `network.client.geoip.subdivision.iso_code` | `string` | [Code ISO][10] du premier niveau de division du pays (par exemple : `CA` aux États-Unis ou le département `SA` en France)    |
 | `network.client.geoip.city.name`            | `string` | Le nom de la ville (par exemple : `Paris`, `New York`)                                                                                   |
 
 ### Requêtes HTTP
 
 Ces attributs sont liés aux données couramment utilisées dans les accès et requêtes HTTP. Tous les attributs sont précédés par `http`.
 
-Des intégrations comme [Apache][6], Rails, [AWS CloudFront][8] ou encore des serveurs d'application Web reposent sur ces attributs.
+Des intégrations comme [Apache][2], Rails, [AWS CloudFront][7] ou encore des serveurs d'application Web reposent sur ces attributs.
 
 #### Attributs courants
 
@@ -151,7 +151,7 @@ Des intégrations comme [Apache][6], Rails, [AWS CloudFront][8] ou encore des s
 
 #### Attributs liés aux détails de l'URL
 
-Ces attributs fournissent des informations sur les éléments parsés de l'URL HTTP. Ils sont généralement générés à l'aide du [parser d'URL][12]. Tous les attributs sont précédés par `http.url_details`.
+Ces attributs fournissent des informations sur les éléments parsés de l'URL HTTP. Ils sont généralement générés à l'aide du [parser d'URL][11]. Tous les attributs sont précédés par `http.url_details`.
 
 | **Nom complet**                   | **Type** | **Description**                                                                         |
 | :----------------------------- | :------- | :-------------------------------------------------------------------------------------- |
@@ -163,7 +163,7 @@ Ces attributs fournissent des informations sur les éléments parsés de l'URL H
 
 #### Attributs user-agent
 
-Ces attributs fournissent des informations sur la signification des attributs user-agent. Ils sont généralement générés à l'aide du [parser de user-agent][13]. Tous les attributs sont précédés par `http.useragent_details`.
+Ces attributs fournissent des informations sur la signification des attributs user-agent. Ils sont généralement générés à l'aide du [parser de user-agent][12]. Tous les attributs sont précédés par `http.useragent_details`.
 
 | **Nom complet**                            | **Type** | **Description**                                |
 | :-------------------------------------- | :------- | :--------------------------------------------- |
@@ -198,7 +198,7 @@ Les attributs liés à une base de données sont précédés par `db`.
 | `db.operation` | `string` | L'opération effectuée (« query », « update », « delete », etc.).                                                                   |
 | `db.user`      | `string` | L'utilisateur à l'origine de l'opération.                                                                                                     |
 
-Des intégrations comme [Cassandra][14], [MySQL][15], [RDS][16] ou encore [Elasticsearch][17] reposent sur ces attributs.
+Des intégrations comme [Cassandra][13], [MySQL][14], [RDS][15] ou encore [Elasticsearch][16] reposent sur ces attributs.
 
 ### Performances
 
@@ -208,7 +208,7 @@ Attributs des métriques de performance.
 | :----------- | :------- | :------------------------------------------------------------------------------------------------ |
 | `duration`   | `number` | Toute durée en **nanosecondes** : le délai de réponse HTTP, le délai d'interrogation d'une base de données, la latence, etc. |
 
-Étant donné que cet attribut est affiché et utilisé comme [mesure][19] par défaut pour la [recherche de traces][20], nous vous conseillons de [remapper][18] toutes les durées de vos logs sur cet attribut.
+Étant donné que cet attribut est affiché et utilisé comme [mesure][1] par défaut pour la [recherche de traces][18], nous vous conseillons de [remapper][17] toutes les durées de vos logs sur cet attribut.
 
 ### Attributs associés à l'utilisateur
 
@@ -232,7 +232,7 @@ Ces attributs sont liés aux données ajoutées par un Agent syslog-shipper ou l
 | `syslog.timestamp` | `string` | Le timestamp du log. Généralement remappé vers l'attribut réservé `date`.       |
 | `syslog.env`       | `string` | Le nom de l'environnement d'où provient la source des logs.                      |
 
-Des intégrations comme [Rsyslog][21], [NxLog][22], [Syslog-ng][23], [Fluentd][24] ou encore [Logstash][25] reposent sur ces attributs.
+Des intégrations comme [Rsyslog][19], [NxLog][20], [Syslog-ng][21], [Fluentd][22] ou encore [Logstash][23] reposent sur ces attributs.
 
 ### DNS
 
@@ -242,14 +242,23 @@ Tous les attributs et toutes les mesures sont précédés par `dns`.
 | :------------------- | :------- | :------------------------------------------------------------------------ |
 | `dns.id`             | `string` | L'identificateur de la question DNS.                                                 |
 | `dns.question.name`  | `string` | L'URL de l'adresse IP que la requête DNS souhaite trouver.                  |
-| `dns.question.type`  | `string` | Un [code de deux octets][26] spécifiant le type de question DNS.             |
+| `dns.question.type`  | `string` | Un [code de deux octets][24] spécifiant le type de question DNS.             |
 | `dns.question.class` | `string` | La classe recherchée par la question DNS (p. ex. IN lorsque vous utilisez Internet). |
 | `dns.question.size`  | `number` | La taille de la question DNS en octets.                                           |
 | `dns.answer.name`    | `string` | Le nom de domaine interrogé.                                                  |
-| `dns.answer.type`    | `string` | Un [code de deux octets][26] spécifiant le type de réponse DNS.               |
+| `dns.answer.type`    | `string` | Un [code de deux octets][24] spécifiant le type de réponse DNS.               |
 | `dns.answer.class`   | `string` | La classe correspondant à la réponse du DNS.                                            |
 | `dns.answer.size`    | `number` | La taille de la réponse du DNS en octets.                                             |
 | `dns.flags.rcode`    | `string` | Le code de réponse du DNS.                                                       |
+
+### Événements
+
+Tous les attributs sont précédés par `evt`.
+
+| **Nom complet** | **Type** | **Description**                                                                       |
+|:--------------|:---------|:-------------------------------------------------------------------------------------|
+| `evt.name`    | `string` | Le nom partagé entre les événements générés par une même activité (p. ex., authentification). |
+| `evt.outcome` | `string` | Le résultat de l'événement (p. ex., `success`, `failure`).                                     |
 
 ## Pour aller plus loin
 
@@ -260,24 +269,22 @@ Tous les attributs et toutes les mesures sont précédés par `dns`.
 [3]: /fr/integrations/amazon_cloudfront/
 [4]: /fr/logs/explorer/facets/#aliased-facets
 [5]: /fr/logs/explorer/facets/#alias-facets
-[6]: /fr/integrations/apache
-[7]: /fr/integrations/varnish
-[8]: /fr/integrations/amazon_elb
-[9]: /fr/integrations/nginx
-[10]: /fr/integrations/haproxy
-[11]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-[12]: /fr/logs/processing/processors/#url-parser
-[13]: /fr/logs/processing/processors/#user-agent-parser
-[14]: /fr/integrations/cassandra
-[15]: /fr/integrations/mysql
-[16]: /fr/integrations/amazon_rds
-[17]: /fr/integrations/elastic
-[18]: /fr/logs/processing/processors/#remapper
-[19]: /fr/logs/explorer/facets
-[20]: /fr/tracing/app_analytics/search
-[21]: /fr/integrations/rsyslog
-[22]: /fr/integrations/nxlog
-[23]: /fr/integrations/syslog_ng
-[24]: /fr/integrations/fluentd
-[25]: /fr/integrations/logstash
-[26]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+[6]: /fr/integrations/varnish/
+[7]: /fr/integrations/amazon_elb/
+[8]: /fr/integrations/nginx/
+[9]: /fr/integrations/haproxy/
+[10]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+[11]: /fr/logs/processing/processors/#url-parser
+[12]: /fr/logs/processing/processors/#user-agent-parser
+[13]: /fr/integrations/cassandra/
+[14]: /fr/integrations/mysql/
+[15]: /fr/integrations/amazon_rds/
+[16]: /fr/integrations/elastic/
+[17]: /fr/logs/processing/processors/#remapper
+[18]: /fr/tracing/app_analytics/search/
+[19]: /fr/integrations/rsyslog/
+[20]: /fr/integrations/nxlog/
+[21]: /fr/integrations/syslog_ng/
+[22]: /fr/integrations/fluentd/
+[23]: /fr/integrations/logstash/
+[24]: https://en.wikipedia.org/wiki/List_of_DNS_record_types

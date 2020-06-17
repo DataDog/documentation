@@ -72,13 +72,13 @@ L'intégration Google Cloud <> Datadog utilise des comptes de service pour crée
 
     {{< img src="integrations/google_cloud_platform/SelectServiceAccount.png" alt="paramètres" popup="true" style="width:80%;">}}
 
-3. Dans la liste déroulante _Service account_, sélectionnez _New service account_.
+3. Dans la liste déroulante _Service account_, sélectionnez _Service account_.
 4. Saisissez un nom unique pour le compte de service.
-5. Pour _Role_, sélectionnez Compute Engine —> Compute Viewer, Monitoring —> Monitoring Viewer et Cloud Asset —> Cloud Asset Viewer.
+5. Pour _Role_, sélectionnez Compute engine —> Compute Viewer, Monitoring —> Monitoring Viewer et Cloud Asset —> Cloud Asset Viewer. Appuyez sur Continue.
 
    **Remarque** : vous devez être un administrateur clé de compte de service pour sélectionner les rôles Compute Engin et Cloud Asset. Tous les rôles sélectionnés permettent à Datadog de recueillir des métriques, des tags, des événements et des étiquettes utilisateur à votre place.
 
-6. Sélectionnez _JSON_ comme type de clé, puis cliquez sur _create_. Notez l'emplacement de sauvegarde du fichier : vous en aurez besoin par la suite.
+6. Appuyez sur **CREATE KEY**, sélectionnez _JSON_ comme type de clé, puis appuyez sur _create_. Notez l'emplacement de sauvegarde du fichier : vous en aurez besoin pour la suite.
 7. Accédez au [carré d'intégration Datadog/Google Cloud][30].
 8. Dans l'onglet **Configuration**, sélectionnez _Upload Key File_ pour intégrer ce projet à Datadog.
 9. Si vous le souhaitez, vous pouvez utiliser des tags pour exclure des hosts de cette intégration. Vous trouverez des instructions détaillées à ce sujet [ci-dessous](#configuration).
@@ -91,7 +91,7 @@ L'intégration Google Cloud <> Datadog utilise des comptes de service pour crée
     - Répétez les étapes ci-dessus pour utiliser plusieurs comptes de service.
     - Utilisez le même compte de service en modifiant la valeur de `project_id` dans le fichier JSON téléchargé à l'étape 6. Importez ensuite le fichier dans Datadog, tel que décrit aux étapes 7 à 10.
 
-Vous devez avoir activé [Google Cloud Billing][31], l'[API Stackdriver Monitoring][32], l'[API Compute Engine][33] et l'[API Cloud Asset][43] pour le ou les projets que vous souhaitez surveiller.
+Vous devez avoir activé [Google Cloud Billing][31], l'[API Stackdriver Monitoring][32], l'[API Compute Engine][33] et l'[API Cloud Asset][34] pour le ou les projets que vous souhaitez surveiller.
 
 #### Configuration
 
@@ -110,11 +110,11 @@ Pour les applications s'exécutant sur GCE ou GKE, l'Agent Datadog peut être ut
 3. [Configurer le Pub/Sub pour transmettre les logs à Datadog](#configurer-le-pub-sub-pour-transmettre-les-logs-a-datadog)
 4. [Configurer les exportations depuis les logs Stackdriver vers le Pub/Sub](#exporter-les-logs-de-stackdriver-vers-le-pub-sub).
 
-**Avertissement** : les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][34]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs abonnements. Consultez la [section Surveiller la redirection de log](#surveiller-la-redirection-de-log) pour découvrir comment configurer un monitor de manière à être automatiquement notifié lorsque vous approchez ces limites.
+**Avertissement** : les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][35]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs sujets. Consultez la [section Surveiller la redirection de logs](#surveiller-la-redirection-de-logs) pour découvrir comment configurer un monitor de manière à être automatiquement notifié lorsque vous approchez ces limites.
 
 #### Créer un Cloud Pub/Sub
 
-1. Accédez à la [console Cloud Pub/Sub][35] et créez un sujet.
+1. Accédez à la [console Cloud Pub/Sub][36] et créez un sujet.
 
     {{< img src="integrations/google_cloud_platform/create_a_topic.png" alt="Créer un sujet" style="width:80%;">}}
 
@@ -125,57 +125,53 @@ Pour les applications s'exécutant sur GCE ou GKE, l'Agent Datadog peut être ut
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
 
-1. Revenez sur le Pub/Sub créé plus tôt et ajoutez un `subscription` :
+1. Revenez à la page de présentation des sujets Pub/Sub, puis sélectionnez `Subscriptions` dans le menu de navigation de gauche. Sélectionnez `Create Subscription`.
+2. Créez un ID d'abonnement et sélectionnez le sujet que vous venez de créer.
+3. Sélectionnez la méthode `Push` et saisissez `https://gcp-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DATADOG>/`.
 
-    {{< img src="integrations/google_cloud_platform/create_new_subscription.png" alt="Créer un abonnement" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/select_push_method.png" alt="Méthode Push" style="width:80%;">}}
 
-2. Sélectionnez la méthode `Push` et saisissez `https://gcp-intake.logs.datadoghq.com/v1/input/<CLÉ_API_DATADOG>/`.
-
-    {{< img src="integrations/google_cloud_platform/push_method.png" alt="Méthode Push" style="width:80%;">}}
-
-3. Cliquez sur `Create` en bas.
+4. Configurez n'importe quelle option supplémentaire, telle que **Subscription expiration**, **Acknowledgement deadline**, **Message retention duration** ou **Dead lettering**.
+5. Cliquez sur `Create` en bas.
 
 Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre à Datadog.
 
 {{% /tab %}}
 {{% tab "Site européen de Datadog" %}}
 
-1. Revenez sur le Pub/Sub créé plus tôt et ajoutez un `subscription` :
+1. Revenez à la page de présentation des sujets Pub/Sub, puis sélectionnez `Subscriptions` dans le menu de navigation de gauche. Sélectionnez `Create Subscription`.
+2. Créez un ID d'abonnement et sélectionnez le sujet que vous venez de créer.
+3. Sélectionnez la méthode `Push` et saisissez `https://gcp-intake.logs.datadoghq.eu/v1/input/<CLÉ_API_DATADOG>/`.
 
-    {{< img src="integrations/google_cloud_platform/create_new_subscription.png" alt="Créer un abonnement" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_platform/select_push_method.png" alt="Méthode Push" style="width:80%;">}}
 
-2. Sélectionnez la méthode `Push` et saisissez `https://gcp-intake.logs.datadoghq.eu/v1/input/<CLÉ_API_DATADOG>/`.
-
-    {{< img src="integrations/google_cloud_platform/push_method.png" alt="Méthode Push" style="width:80%;">}}
-
-3. Cliquez sur `Create` en bas.
-
-Le Pub/Sub peut désormais recevoir des logs de Stackdriver et les transmettre à Datadog.
+4. Configurez n'importe quelle option supplémentaire, telle que **Subscription expiration**, **Acknowledgement deadline**, **Message retention duration** ou **Dead lettering**.
+5. Cliquez sur `Create` en bas.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 #### Exporter les logs de Stackdriver vers le Pub/Sub
 
-1. Accédez à la [page Stackdriver][36] et filtrez les logs à exporter.
-2. Cliquez sur `Create Export` et nommez le récepteur.
-3. Choisissez `Cloud Pub/Sub` comme destination et sélectionnez le Pub/Sub créé à cette fin. Le Pub/Sub peut se situer dans un autre projet.
+1. Accédez à la [page Stackdriver][37] et filtrez les logs à exporter.
+2. Cliquez sur **Create Sink** et nommez le récepteur.
+3. Choisissez Cloud Pub/Sub comme destination et sélectionnez le Pub/Sub créé à cette fin. **Remarque** : le Pub/Sub peut se situer dans un autre projet.
 
-    {{< img src="integrations/google_cloud_platform/export_log_from_stackdriver.png" alt="Exporter un log de Stackdriver" style="width:80%;">}}
+    {{< img src="integrations/google_cloud_pubsub/create_sink.png" alt="Exporter les logs Google Cloud Pub/Sub vers le Pub Sub" >}}
 
-4. Cliquez sur `Create` et attendez que le message de confirmation s'affiche.
+4. Cliquez sur **Create** et attendez que le message de confirmation s'affiche.
 
 **Remarque** : il est possible de créer plusieurs exportations de Stackdriver vers le même Pub/Sub en utilisant plusieurs récepteurs.
 
-**Avertissement** : les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][34]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs abonnements. Consultez la [section Surveiller la redirection de log](#surveiller-la-redirection-de-log) pour découvrir comment configurer un monitor de manière à être automatiquement notifié lorsque vous approchez ces limites.
+**Avertissement** : les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][35]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs sujets. Consultez la [section Surveiller la redirection de logs](#surveiller-la-redirection-de-logs) pour découvrir comment configurer un monitor de manière à être automatiquement notifié lorsque vous approchez ces limites.
 
-#### Surveiller la redirection de log
+#### Surveiller la redirection de logs
 
-Les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][45]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs abonnements.
+Les Pub/Sub sont sujets aux [quotas et aux limitations de Google Cloud][35]. Si votre nombre de logs est supérieur à ces limitations, nous vous conseillons de les décomposer sur plusieurs sujets, en utilisant différents filtres.
 
-Pour être automatiquement notifié lorsque vous atteignez ces quotas, activez [l'intégration Métriques Pub/Sub][37] et configurez un monitor sur la métrique `gcp.pubsub.subscription.backlog_bytes`. Filtrez ce monitor sur l'abonnement qui exporte les logs vers Datadog. L'exemple ci-dessous permet de s'assurer que les logs ne dépassent jamais 1 Mo :
+Pour être automatiquement notifié lorsque vous atteignez ces quotas, activez [l'intégration Métriques Pub/Sub][24] et configurez un monitor sur la métrique `gcp.pubsub.subscription.num_outstanding_messages`. Filtrez ce monitor sur l'abonnement qui exporte les logs vers Datadog. L'exemple ci-dessous permet de s'assurer que les logs ne dépassent jamais 1 Mo :
 
-{{< img src="integrations/google_cloud_platform/log_pubsub_monitoring.png" alt="Surveillance Pub Sub" style="width:80%;">}}
+{{< img src="integrations/google_cloud_platform/log_pubsub_monitoring-v2.png" alt="Surveillance Pub Sub" style="width:80%;">}}
 
 ## Données collectées
 
@@ -191,21 +187,7 @@ Tous les événements de service générés par votre Google Cloud Platform sont
 
 L'intégration Google Cloud Platform n'inclut aucun check de service.
 
-## Dépannage
-
-### Mes métadonnées sont incorrectes pour les métriques _gcp.logging_ définies par l'utilisateur
-
-Pour les métriques _gcp.logging_ non standard (c'est-à-dire les métriques qui ne correspondent pas aux [métriques de journalisation Datadog par défaut][40]), les métadonnées appliquées peuvent différer de celles de Stackdriver.
-
-Dans ce cas, les métadonnées doivent être définies manuellement sur la [page de résumé de la métrique][41] : recherchez et sélectionnez la métrique en question, puis cliquez sur l'icône en forme de crayon à côté des métadonnées.
-
-Besoin d'aide ? Contactez l'[assistance Datadog][42].
-
-## Pour aller plus loin
-
-### Base de connaissances
-
-#### Tags attribués
+### Tags
 
 Les tags sont automatiquement attribués selon différentes options de configuration relatives à Google Cloud Platform et Google Compute Engine. Voici la liste des tags automatiquement attribués :
 
@@ -218,48 +200,60 @@ Les tags sont automatiquement attribués selon différentes options de configura
 - Numeric_project_id
 - Nom
 
-En outre, tous les hosts avec des étiquettes `<key>:<value>` se voient attribuer les tags correspondants.
+En outre, Datadog recueille les éléments suivants en tant que tags :
 
-[1]: https://docs.datadoghq.com/fr/integrations/google_app_engine
-[2]: https://docs.datadoghq.com/fr/integrations/google_cloud_big_query
-[3]: https://docs.datadoghq.com/fr/integrations/google_cloud_bigtable
-[4]: https://docs.datadoghq.com/fr/integrations/google_cloudsql
-[5]: https://docs.datadoghq.com/fr/integrations/google_cloud_apis
-[6]: https://docs.datadoghq.com/fr/integrations/google_cloud_composer
-[7]: https://docs.datadoghq.com/fr/integrations/google_cloud_dataproc
-[8]: https://docs.datadoghq.com/fr/integrations/google_cloud_filestore
-[9]: https://docs.datadoghq.com/fr/integrations/google_cloud_firestore
-[10]: https://docs.datadoghq.com/fr/integrations/google_cloud_interconnect
-[11]: https://docs.datadoghq.com/fr/integrations/google_cloud_iot
-[12]: https://docs.datadoghq.com/fr/integrations/google_cloud_loadbalancing
-[13]: https://docs.datadoghq.com/fr/integrations/google_cloud_redis
-[14]: https://docs.datadoghq.com/fr/integrations/google_cloud_router
-[15]: https://docs.datadoghq.com/fr/integrations/google_cloud_run
-[16]: https://docs.datadoghq.com/fr/integrations/google_cloud_tasks
-[17]: https://docs.datadoghq.com/fr/integrations/google_cloud_tpu
-[18]: https://docs.datadoghq.com/fr/integrations/google_compute_engine
-[19]: https://docs.datadoghq.com/fr/integrations/google_container_engine
-[20]: https://docs.datadoghq.com/fr/integrations/google_cloud_datastore
-[21]: https://docs.datadoghq.com/fr/integrations/google_cloud_firebase
-[22]: https://docs.datadoghq.com/fr/integrations/google_cloud_functions
-[23]: https://docs.datadoghq.com/fr/integrations/google_cloud_ml
-[24]: https://docs.datadoghq.com/fr/integrations/google_cloud_pubsub
-[25]: https://docs.datadoghq.com/fr/integrations/google_cloud_spanner
-[26]: https://docs.datadoghq.com/fr/integrations/google_stackdriver_logging
-[27]: https://docs.datadoghq.com/fr/integrations/google_cloud_storage
-[28]: https://docs.datadoghq.com/fr/integrations/google_cloud_vpn
+- Les hosts avec les étiquettes `<key>:<value>`.
+- Les étiquettes personnalisées de Google Pub/Sub, GCE, CloudSQL et Cloud Storage.
+
+## Dépannage
+
+### Mes métadonnées sont incorrectes pour les métriques _gcp.logging_ définies par l'utilisateur
+
+Pour les métriques _gcp.logging_ non standard (c'est-à-dire les métriques qui ne correspondent pas aux [métriques de journalisation Datadog par défaut][39]), les métadonnées appliquées peuvent différer de celles de Stackdriver.
+
+Dans ce cas, les métadonnées doivent être définies manuellement sur la [page de résumé de la métrique][40] : recherchez et sélectionnez la métrique en question, puis cliquez sur l'icône en forme de crayon à côté des métadonnées.
+
+Besoin d'aide ? Contactez [l'assistance Datadog][41].
+
+
+[1]: https://docs.datadoghq.com/fr/integrations/google_app_engine/
+[2]: https://docs.datadoghq.com/fr/integrations/google_cloud_big_query/
+[3]: https://docs.datadoghq.com/fr/integrations/google_cloud_bigtable/
+[4]: https://docs.datadoghq.com/fr/integrations/google_cloudsql/
+[5]: https://docs.datadoghq.com/fr/integrations/google_cloud_apis/
+[6]: https://docs.datadoghq.com/fr/integrations/google_cloud_composer/
+[7]: https://docs.datadoghq.com/fr/integrations/google_cloud_dataproc/
+[8]: https://docs.datadoghq.com/fr/integrations/google_cloud_filestore/
+[9]: https://docs.datadoghq.com/fr/integrations/google_cloud_firestore/
+[10]: https://docs.datadoghq.com/fr/integrations/google_cloud_interconnect/
+[11]: https://docs.datadoghq.com/fr/integrations/google_cloud_iot/
+[12]: https://docs.datadoghq.com/fr/integrations/google_cloud_loadbalancing/
+[13]: https://docs.datadoghq.com/fr/integrations/google_cloud_redis/
+[14]: https://docs.datadoghq.com/fr/integrations/google_cloud_router/
+[15]: https://docs.datadoghq.com/fr/integrations/google_cloud_run/
+[16]: https://docs.datadoghq.com/fr/integrations/google_cloud_tasks/
+[17]: https://docs.datadoghq.com/fr/integrations/google_cloud_tpu/
+[18]: https://docs.datadoghq.com/fr/integrations/google_compute_engine/
+[19]: https://docs.datadoghq.com/fr/integrations/google_container_engine/
+[20]: https://docs.datadoghq.com/fr/integrations/google_cloud_datastore/
+[21]: https://docs.datadoghq.com/fr/integrations/google_cloud_firebase/
+[22]: https://docs.datadoghq.com/fr/integrations/google_cloud_functions/
+[23]: https://docs.datadoghq.com/fr/integrations/google_cloud_ml/
+[24]: https://docs.datadoghq.com/fr/integrations/google_cloud_pubsub/
+[25]: https://docs.datadoghq.com/fr/integrations/google_cloud_spanner/
+[26]: https://docs.datadoghq.com/fr/integrations/google_stackdriver_logging/
+[27]: https://docs.datadoghq.com/fr/integrations/google_cloud_storage/
+[28]: https://docs.datadoghq.com/fr/integrations/google_cloud_vpn/
 [29]: https://console.cloud.google.com/apis/credentials
 [30]: http://app.datadoghq.com/account/settings#integrations/google_cloud_platform
 [31]: https://support.google.com/cloud/answer/6293499?hl=en
 [32]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
 [33]: https://console.cloud.google.com/apis/library/compute.googleapis.com
-[34]: https://cloud.google.com/pubsub/quotas#quotas
-[35]: https://console.cloud.google.com/cloudpubsub/topicList
-[36]: https://console.cloud.google.com/logs/viewer
-[37]: https://docs.datadoghq.com/fr/integrations/google_cloud_pubsub/
+[34]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview
+[35]: https://cloud.google.com/pubsub/quotas#quotas
+[36]: https://console.cloud.google.com/cloudpubsub/topicList
+[37]: https://console.cloud.google.com/logs/viewer
 [38]: https://app.datadoghq.com/event/stream
-[39]: https://docs.datadoghq.com/fr/logs
-[40]: https://docs.datadoghq.com/fr/integrations/google_stackdriver_logging/#metrics
-[41]: https://app.datadoghq.com/metric/summary
-[42]: https://docs.datadoghq.com/fr/help
-[43]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview
+[39]: https://docs.datadoghq.com/fr/integrations/google_stackdriver_logging/#metrics
+[40]: https://app.datadoghq.com/metric/summary
+[41]: https://docs.datadoghq.com/fr/help/
