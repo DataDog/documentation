@@ -202,7 +202,7 @@ Create a variable out of a `span`, `div`, etc. content by extracting the text of
 
 Generate custom variables using your own JavaScript scripts. JavaScript steps support both synchronous and asynchronous code.
 
-This JavaScript function comes with two parameters. You also need to make sure to include a `return` statement in your JavaScript snippet.
+The JavaScript assertion function comes with the following parameters and requires a return statement.
 
 * `vars`: String containing your browser test [variables][5]. Use `vars.<YOUR_VARIABLE>` to refer to your browser test variable in your JavaScript snippet. Example: If your browser test contains a `USERNAME` variable, you can call it in your JavaScript snippet using `vars.USERNAME`.
 
