@@ -204,7 +204,7 @@ Generate custom variables using your own JavaScript scripts. JavaScript steps su
 
 The JavaScript assertion function comes with the following parameters and requires a return statement.
 
-* `vars`: String containing your browser test [variables][5]. Use `vars.<YOUR_VARIABLE>` to refer to your browser test variable in your JavaScript snippet. Example: If your browser test contains a `USERNAME` variable, you can call it in your JavaScript snippet using `vars.USERNAME`.
+* `vars`: A string containing your browser test [variables][5]. Use `vars.<YOUR_VARIABLE>` to refer to a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
 
 * `element`: Locator of the element on the page. This element can be selected and updated with the `Select` and `Update` target element buttons of the step. The selected element automatically leverages Datadog browser test multi locating algorithm.
 
