@@ -100,7 +100,7 @@ If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a mo
 
 ### Installation Log Files
 
-You can find agent installation log files at `%TEMP%\MSI*.LOG`.
+You can find Agent installation log files at `%TEMP%\MSI*.LOG`.
 
 ### Validation
 
