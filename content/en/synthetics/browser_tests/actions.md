@@ -95,7 +95,7 @@ Asserts that an email was sent and whether specific values (`string`, `number`, 
 
 Test a custom assertion on the active page using your own JavaScript code. JavaScript assertions support both synchronous and asynchronous code. 
 
-The JavaScript assertion function comes with two parameters. You also need to make sure to include a `return` statement in your JavaScript snippet.
+The JavaScript assertion function comes with the following parameters and requires a return statement.
 
 * `vars`: String containing your browser test [variables][5]. Use `vars.<YOUR_VARIABLE>` to refer to your browser test variable in your JavaScript snippet. Example: If your browser test contains a `USERNAME` variable, you can call it in your JavaScript snippet using `vars.USERNAME`.
 
