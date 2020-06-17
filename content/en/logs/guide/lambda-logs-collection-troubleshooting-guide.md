@@ -3,18 +3,18 @@ title: Lambda Function Log Collection Troubleshooting Guide
 kind: documentation
 ---
 
-If you don't see logs forwarded from a lambda function in the Log Explorer, see the [Datadog-AWS Log integration][1] to configure your environment. If you still do not see your logs, double-check the following points:
+If you don't see logs forwarded from a Lambda function in the Log Explorer, see the [Datadog-AWS Log integration][1] to configure your environment. If you still do not see your logs, double-check the following points:
 
 There are some common issues that can come up when configuring the AWS Lambda function to forward logs to Datadog. Below are some troubleshooting steps to try if you are using the Lambda function and your logs aren't reaching Datadog. If you continue to have trouble after following these steps, [contact Datadog support][2] for further assistance.
 
 ## Are your logs sent to Datadog?
 
-1. Navigate to the [Log Explorer's Live Tail View][3].
-2. In the Search Bar, use a filter to limit the Live Tail View to just the logs coming from your lambda function. Some common search queries are:
+1. Navigate to the [Log Explorer's Live Tail view][3].
+2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
     * By source: the source is often set to `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][4]. 
-    * By forwarder name: the Lambda function adds a forwardername tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FUNCTION_NAME>`.
-3. If you don't see the logs in the livetail, the logs are not reaching Datadog this could be due to one of the following common configuration issues:
-    * Logs are too far in the past: Datadog only accepts logs with a timestamp older than 6 hours in the past or 1h in the future.
+    * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FUNCTION_NAME>`.
+3. If you don't see the logs in the Live Tail, the logs are not reaching Datadog. This could be due to one of the following common configuration issues:
+    * Logs are too far in the past: Datadog only accepts logs with a timestamp between six hours in the past and one hour in the future.
     * If your index has any [exclusion filters][5] set up, they may be filtering out your logs.
 
 ## Check the Lambda function monitoring tab
@@ -32,8 +32,8 @@ There are some common issues that can come up when configuring the AWS Lambda fu
     * errors
     * logs
 
-4. If you don't see any data points on the **Invocations** graph, there may be a problem with the triggers you set for your function. See [Manage Your Function Triggers](#manage-your-function-triggers). To get insight into your lambda invocations without using the monitoring tab, see [Viewing Lambda metrics in Datadog](#viewing-lambda-metrics-in-datadog).
-5. If you see data points on the "Error count and success rate" graph, [Check the Lambda function logs](#check-the-lambda-function-logs) to see what error messages are being reported.
+4. If you don't see any data points on the **Invocations** graph, there may be a problem with the triggers you set for your function. See [Manage Your Function Triggers](#manage-your-function-triggers). To get insight into your Lambda invocations without using the monitoring tab, see [Viewing Lambda metrics in Datadog](#viewing-lambda-metrics-in-datadog).
+5. If you see data points on the "Error count and success rate" graph, [check the Lambda function logs](#check-the-lambda-function-logs) to see what error messages are being reported.
 
 ### Viewing Lambda metrics in Datadog
 
@@ -41,7 +41,7 @@ If you have enabled AWS Lambda metrics, you can view metrics related to Lambda i
 
 | Metric                        | Description                                                                                        |
 |-------------------------------|----------------------------------------------------------------------------------------------------|
-| `aws.lambda.invocations `     | Count of times the Lambda function has been triggered / invoked                                    |
+| `aws.lambda.invocations `     | Count of times the Lambda function has been triggered/invoked                                    |
 | `aws.lambda.errors `          | Count of errors that occurred when the function was invoked                                        |
 | `aws.lambda.duration `        | Average amount of time (in milliseconds) that it took for the Lambda function to finish executing  |
 | `aws.lambda.duration.maximum` | Maximum amount of time (in milliseconds) that it took for the Lambda function to finish executing  |
@@ -117,7 +117,7 @@ This means you didn't set the API key. Places you can set the API key are:
 module initialization error: The API key is not valid.
 ```
 
-The API key you provided doesn't match any key Datadog recognizes. Double-check the spelling and make sure that your key corresponds to the org you are sending data to. If you are in Datadog's EU site, you need to specify a `DD_SITE` variable with the value `datadoghq.eu` in order for the API key to be properly matched with your account.
+The API key you provided doesn't match any key Datadog recognizes. Double-check the spelling and make sure that your key corresponds to the org you are sending data to. If you are in Datadog's EU site, you need to specify a `DD_SITE` variable with the value `datadoghq.eu` for the API key to be properly matched with your account.
 
 ```
 module initialization error: The API key is not the expected length. Please confirm that your API key is correct
