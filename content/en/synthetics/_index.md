@@ -42,7 +42,7 @@ Use [Synthetics Private Locations][3] to monitor internal APIs and websites - pr
 
 ### Connect Synthetics and Traces
 
-[Link simulated API tests][7] to traces to find the root cause of failures across frontend, network and backend requests.
+[Link simulated API tests][4] to traces to find the root cause of failures across frontend, network and backend requests.
 
 {{< img src="synthetics/traces.gif" alt="Synthetics"  style="width:100%;">}}
 
@@ -50,6 +50,7 @@ Use [Synthetics Private Locations][3] to monitor internal APIs and websites - pr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/getting_started/synthetics/api_test
-[2]: https://docs.datadoghq.com/getting_started/synthetics/browser_test
-[3]: https://docs.datadoghq.com/getting_started/synthetics/private_location
+[1]: /getting_started/synthetics/api_test
+[2]: /getting_started/synthetics/browser_test
+[3]: /getting_started/synthetics/private_location
+[4]: /synthetics/apm/
