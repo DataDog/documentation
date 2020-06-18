@@ -61,7 +61,7 @@ Sinon, consultez la documentation de docker-dd-agent pour obtenir des instructio
 
 **Si vous souhaitez que l'Agent découvre automatiquement les checks basés sur JMX** :
 
-1. Utilisez l'image `datadog/docker-dd-agent:latest-jmx`. Elle est basée sur `latest` mais comprend un JVM, dont l'Agent a besoin pour exécuter [jmxfetch][7].
+1. Utilisez l'image `datadog/docker-dd-agent:latest-jmx`. Elle est basée sur `latest` mais comprend une JVM, dont l'Agent a besoin pour exécuter [jmxfetch][7].
 2. Envoyez la variable d'environnement `SD_JMX_ENABLE=yes` au démarrage de `datadog/docker-dd-agent:latest-jmx`.
 
 ## Configuration des modèles de checks
