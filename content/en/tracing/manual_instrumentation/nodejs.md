@@ -32,9 +32,13 @@ Synchronous code can be traced with `tracer.trace()` which will automatically fi
 ```javascript
 app.get('/make-sandwich', (req, res) => {
   const sandwich = tracer.trace('sandwich.make', () => {
-    const ingredients = tracer.trace('get_ingredients', () => getIngredients())
+    const ingredients = tracer.trace('get_ingredients', () => {
+      return getIngredients()
+    })
 
-    return tracer.trace('assemble_sandwich', () => assembleSandwich(ingredients))
+    return tracer.trace('assemble_sandwich', () => {
+      assembleSandwich(ingredients)
+    })
   })
 
   res.end(sandwich)
@@ -56,7 +60,9 @@ app.get('/make-sandwich', (req, res) => {
   return tracer.trace('sandwich.make', () => {
     return tracer.trace('get_ingredients', () => getIngredients())
       .then(() => {
-        tracer.trace('assemble_sandwich', () => assembleSandwich(ingredients))
+        return tracer.trace('assemble_sandwich', () => {
+          return assembleSandwich(ingredients)
+        })
       })
   }).then(sandwich => res.end(sandwich))
 })
@@ -75,9 +81,13 @@ Async/await can be traced with `tracer.trace()` which will automatically finish 
 ```javascript
 app.get('/make-sandwich', async (req, res) => {
   const sandwich = await tracer.trace('sandwich.make', async () => {
-    const ingredients = await tracer.trace('get_ingredients', () => getIngredients())
+    const ingredients = await tracer.trace('get_ingredients', () => {
+      return getIngredients()
+    })
 
-    return tracer.trace('assemble_sandwich', () => assembleSandwich(ingredients))
+    return tracer.trace('assemble_sandwich', () => {
+      return assembleSandwich(ingredients)
+    })
   })
 
   res.end(sandwich)
@@ -96,8 +106,8 @@ It's also possible to wrap an existing function without changing its code. This 
 
 ```javascript
 app.get('/make-sandwich', (req, res) => {
-  const getIngredientsWithTrace = tracer.wrap('get_ingredients', getIngredients)
-  const assembleSandwichWithTrace = tracer.wrap('assemble_sandwich', assembleSandwich)
+  getIngredients = tracer.wrap('get_ingredients', getIngredients)
+  assembleSandwich = tracer.wrap('assemble_sandwich', assembleSandwich)
 
   const sandwich = tracer.trace('sandwich.make', () => {
     const ingredients = getIngredients()
@@ -213,7 +223,7 @@ Some of our integrations support span hooks that can be used to update the span 
 ```javascript
 // at the top of the entry point right after tracer.init()
 tracer.use('express', {
-  // hook will be executed on res.end right before the request span is finished
+  // hook will be executed right before the request span is finished
   request: (span, req res) => {
     span.setTag('customer.id', req.query.customer_id)
   }
