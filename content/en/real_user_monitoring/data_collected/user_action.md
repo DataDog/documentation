@@ -42,7 +42,7 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 
 | Attribute    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `user_action.id` | string | UUID of the user action. |
+| `user_action.id` | string | UUID of the user action (not set for [Custom User Actions][5]). |
 | `user_action.type` | string | Type of the user action. For [Custom User Actions][5], it is set to `custom`. |
 | `event.name` | string | Name of the user action. For automatically collected User Actions, the element which the user interacted with. |
 
