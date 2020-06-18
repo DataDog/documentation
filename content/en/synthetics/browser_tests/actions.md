@@ -32,7 +32,7 @@ Choose from:
 
 [Datadog browser test recorder extension][3] automatically records text inputted in any fields of your website (forms, text areas, etc.):
 
-{{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="80%">}}
+{{< img src="synthetics/browser_tests/input_text.mp4" alt="Browser Test Input Text Step" video="true" width="100%">}}
 
 ### Select option
 
@@ -93,9 +93,19 @@ Asserts that an email was sent and whether specific values (`string`, `number`, 
 
 #### Test your UI with custom JavaScript
 
-Test a custom assertion on the active page using your own JavaScript scripts. JavaScript assertions support both synchronous and asynchronous code. Since JavaScript assertions run in the context of the active page, it also means these steps can access all the objects defined in the active page (libraries, builtins, global variables, ...).
+Test a custom assertion on the active page using your own JavaScript code. JavaScript assertions support both synchronous and asynchronous code. 
 
-If you need to load external libraries, you can wrap their loading in a promise like below:
+The JavaScript assertion function comes with the following parameters and requires a return statement.
+
+* `vars`: A string containing your browser test [variables][5]. Use `vars.<YOUR_VARIABLE>` to refer to a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
+
+* `element`: The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
+
+{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="100%">}}
+
+* The `return` statement should reflect the condition the assertion needs to meet for your browser test step to be successful. Any type can be returned, but the value is automatically casted as a boolean.
+
+Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (libraries, built-ins, global variables, etc.). To load external libraries, use a promise, for example:
 
 ```javascript
 const script = document.createElement('script');
@@ -110,12 +120,6 @@ await promise
 
 return jQuery().jquery.startsWith('3.5.1')
 ```
-
-If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. 
-
-{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="90%">}}
-
-**Note**: You can also use browser tests' [variables][5] as part of your JavaScript assertions.
 
 #### Test a downloaded file
 
@@ -196,9 +200,19 @@ Create a variable out of a `span`, `div`, etc. content by extracting the text of
 
 ##### JavaScript
 
-Generate custom variables using your own JavaScript scripts. JavaScript steps support both synchronous and asynchronous code. By default the step is being performed on the active page, which means it can access all the objects defined at the active page level (libraries, builtins, global variables, ...).
+Generate custom variables using your own JavaScript code. JavaScript steps support both synchronous and asynchronous code.
 
-If you need to load external libraries, you can wrap their loading in a promise like below:
+The JavaScript function comes with the following parameters and requires a return statement.
+
+* `vars`: A string containing your browser test [variables][5]. Use `vars.<YOUR_VARIABLE>` to refer to a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
+
+* `element`: The locator of the element on the page. To set this up, use the **Select** and **Update** target element buttons. The selected element automatically leverages Datadog's browser test multi-locating algorithm.
+
+{{< img src="synthetics/browser_tests/js_variable.mp4" alt="Browser Test JavaScript Variable" video="true" width="100%">}}
+
+* The `return` statement should return the value associated to your JavaScript variable. Any type can be returned, but the value is automatically casted as a string.
+
+Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (libraries, built-ins, global variables, etc.). To load external libraries, use a promise, for example:
 
 ```javascript
 const script = document.createElement('script');
@@ -213,12 +227,6 @@ await promise
 
 return jQuery().jquery.startsWith('3.5.1')
 ```
-
-If you want your JavaScript function to leverage a specific page element, you can select it using **Target Element** and then refer to it as the `element` parameter in your function. 
-
-{{< img src="synthetics/browser_tests/js_variable.mp4" alt="Browser Test JavaScript Variable" video="true" width="90%">}}
-
-**Note**: You can also use [variables][5] as part of your JavaScript assertions.
 
 ##### A Global Variable 
 
@@ -241,21 +249,17 @@ Generate a random Synthetics email address that can be used in your test steps t
 
 Once created, you can use the little hand on your variable box to inject your variable on the website being tested: 
 
-{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true"  width="80%" >}}
+{{< img src="synthetics/browser_tests/variable_input.mp4" alt="Variable Input" video="true"  width="100%" >}}
 
 This generates an input text step with a content that is always replaced by `{{ <YOUR_VARIABLE> }}` value at test execution.
 
 In some cases, your variable value only gets computed at runtime (e.g. when creating a variable from an HTTP request, when extracting a variable from a JavaScript step). You can inject your variable by using `{{ <YOUR_VARIABLE> }}` directly on your website at recording. The browser test automatically populates that field at test execution with the variable value generated in the previous steps.
 
-{{< img src="synthetics/browser_tests/variables_auto.mp4" alt="Variables autocompletion example" video="true"  width="80%" >}}
+{{< img src="synthetics/browser_tests/variables_auto.mp4" alt="Variables autocompletion example" video="true"  width="100%" >}}
 
 **Note**: all fields with a `{{` indication support variables autocompletion.
 
-{{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator"  style="width:60%;">}}
-
-##### Use variables in JavaScript steps
-
-If you need to use variables in JavaScript steps (assertion or variable), use `vars.<YOUR_VARIABLE>`.
+{{< img src="synthetics/browser_tests/autocomplete.png" alt="Variable autocompletion indicator"  style="width:70%;">}}
 
 ### Wait
 
