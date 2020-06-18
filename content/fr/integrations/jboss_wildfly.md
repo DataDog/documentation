@@ -1,5 +1,7 @@
 ---
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   monitors: {}
   service_checks: assets/service_checks.json
@@ -39,21 +41,30 @@ Ce check surveille les applications [JBoss][1] et [WildFly][2].
 
 ### Installation
 
-Le check JBoss/WildFly est inclus avec le paquet de l'[Agent Datadog][3]. Selon la configuration de votre serveur (notamment si vous utilisez le schéma JMX `remote+http`), il se peut que vous deviez spécifier un JAR personnalisé pour vous connecter au serveur. Placez le JAR sur la même machine que votre Agent et ajoutez le chemin dans l'option `custom_jar_paths`.
+Le check JBoss/WildFly est inclus avec le paquet de l'[Agent Datadog][3] : vous n'avez donc rien d'autre à installer sur votre host JBoss/WildFly.
 
 ### Configuration
 
+Ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué dans la page d'information. Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous. Pour découvrir comment modifier la liste des métriques recueillies, consultez la [documentation relative aux checks JMX][4] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller plus de 350 métriques, contactez [l'assistance Datadog][5].
+
 #### Host
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 ##### Collecte de métriques
 
-1. Modifiez le fichier `jboss_wildfly.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir les données de performance de votre serveur d'applications JBoss ou WildFly. Consultez le [fichier d'exemple jboss_wildfly.d/conf.yaml][4] pour découvrir toutes les options de configuration disponibles.
+1. Modifiez le fichier `jboss_wildfly.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir les données de performance de votre serveur d'applications JBoss ou WildFly. Consultez le [fichier d'exemple jboss_wildfly.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
 
-   **Remarque** : ce check prévoit une limite de 350 métriques par instance. Le nombre de métriques renvoyées est indiqué dans la page d'information. Vous pouvez choisir des métriques pertinentes en modifiant la configuration ci-dessous. Pour découvrir comment modifier la liste des métriques recueillies, consultez la [documentation relative aux checks JMX][5] afin d'obtenir des instructions détaillées. Si vous souhaitez surveiller plus de 350 métriques, contactez [l'assistance Datadog][6].
+    Selon la configuration de votre serveur (notamment si vous utilisez le schéma JMX `remote+http`), il se peut que vous deviez spécifier un JAR personnalisé pour vous connecter au serveur. Placez le JAR sur la même machine que votre Agent et spécifiez le chemin via l'option `custom_jar_paths` dans votre fichier `jboss_wildfly.d/conf.yaml`.
 
-2. [Redémarrez l'Agent][7].
+    **Remarque** : le format des URL JMX est différent selon votre version de WildFly :
+
+   - Wildfly 9 et versions antérieures : `service:jmx:http-remoting-jmx://<HOST>:<PORT>`
+   - Wildfly 10+ : `service:jmx:remote+http://<HOST>:<PORT>`
+
+    Référez-vous à la [page de configuration du sous-système JMX pour WildFly][7] pour en savoir plus.
+
+2. [Redémarrez l'Agent][8].
 
 ##### Collecte de logs
 
@@ -75,19 +86,19 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        service: '<APPLICATION_NAME>'
    ```
 
-3. [Redémarrez l'Agent][7].
+3. [Redémarrez l'Agent][8].
 
 #### Environnement conteneurisé
 
 ##### Collecte de métriques
 
-Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][8].
+Pour les environnements conteneurisés, consultez le guide [Autodiscovery avec JMX][9].
 
 ##### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Docker][9].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][10].
 
 | Paramètre      | Valeur                                                      |
 | -------------- | ---------------------------------------------------------- |
@@ -95,7 +106,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][10] et cherchez `jboss_wildfly` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][11] et cherchez `jboss_wildfly` dans la section Checks.
 
 ## Données collectées
 
@@ -115,16 +126,17 @@ Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance JB
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][6].
+Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
 [1]: https://developers.redhat.com/products/eap/overview
 [2]: http://wildfly.org
 [3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/fr/integrations/java
-[6]: https://docs.datadoghq.com/fr/help
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
-[8]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
-[9]: https://docs.datadoghq.com/fr/agent/docker/log/
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/metadata.csv
+[4]: https://docs.datadoghq.com/fr/integrations/java/
+[5]: https://docs.datadoghq.com/fr/help/
+[6]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
+[7]: https://docs.jboss.org/author/display/WFLY9/JMX%20subsystem%20configuration.html
+[8]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-restart-the-agent
+[9]: https://docs.datadoghq.com/fr/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[10]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[12]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/metadata.csv

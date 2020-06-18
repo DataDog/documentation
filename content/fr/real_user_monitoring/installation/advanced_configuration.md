@@ -27,10 +27,10 @@ Par défaut, aucun échantillonnage n'est appliqué sur le nombre de sessions re
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
-  applicationId: '<ID_APPLICATION_DATADOG>',
-  clientToken: '<TOKEN_CLIENT_DATADOG>',
-  datacenter: 'us',
-  sampleRate: 90
+    applicationId: '<ID_APPLICATION_DATADOG>',
+    clientToken: '<TOKEN_CLIENT_DATADOG>',
+    datacenter: 'us',
+    sampleRate: 90,
 });
 ```
 
@@ -38,11 +38,12 @@ datadogRum.init({
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_RUM && window.DD_RUM.init({
-  clientToken: '<TOKEN_CLIENT>',
-  applicationId: '<ID_APPLICATION>',
-  sampleRate: 90
-});
+window.DD_RUM &&
+    window.DD_RUM.init({
+        clientToken: '<TOKEN_CLIENT>',
+        applicationId: '<ID_APPLICATION>',
+        sampleRate: 90,
+    });
 ```
 
 {{% /tab %}}
@@ -52,9 +53,9 @@ window.DD_RUM && window.DD_RUM.init({
 
 ## API disponible
 
-### Ajouter des métadonnées globales
+### Ajouter un contexte global
 
-Une fois le Real User Monitoring (RUM) lancé, ajoutez des métadonnées supplémentaires à l'ensemble des événements RUM recueillis depuis de votre application avec l'API `addRumGlobalContext(key: string, value: any)` :
+Une fois le Real User Monitoring (RUM) lancé, ajoutez des données de contexte supplémentaires à l'ensemble des événements RUM recueillis depuis de votre application avec l'API `addRumGlobalContext(key: string, value: any)` :
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -62,15 +63,26 @@ Une fois le Real User Monitoring (RUM) lancé, ajoutez des métadonnées supplé
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addRumGlobalContext('<CLÉ_MÉTA>', <VALEUR_MÉTA>);
+datadogRum.addRumGlobalContext('<CLÉ_CONTEXTE>', <VALEUR_CONTEXTE>);
+
+// Exemple de code
+datadogRum.addRumGlobalContext('usr', {
+    id: 123,
+    plan: 'premium'
+});
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-// Ajouter un attribut de métadonnées global. Un seul attribut peut être ajouté à la fois.
-window.DD_RUM && DD_RUM.addRumGlobalContext('<CLÉ_MÉTA>', <VALEUR_MÉTA>);
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('<CLÉ_CONTEXTE>', <VALEUR_CONTEXTE>);
+
+// Exemple de code
+window.DD_RUM && window.DD_RUM.addRumGlobalContext('usr', {
+    id: 123,
+    plan: 'premium'
+});
 ```
 
 {{% /tab %}}
@@ -78,9 +90,9 @@ window.DD_RUM && DD_RUM.addRumGlobalContext('<CLÉ_MÉTA>', <VALEUR_MÉTA>);
 
 **Remarque** : respectez la [convention de nommage Datadog][2] pour améliorer la corrélation de vos données sur l'ensemble de la solution.
 
-### Remplacer le contexte par défaut
+### Remplacer le contexte global
 
-Une fois le Real User Monitoring (RUM) lancé, vous pouvez remplacer le contexte par défaut de tous vos événements RUM avec l'API `setRumGlobalContext(context: Context)` :
+Une fois le Real User Monitoring (RUM) lancé, remplacez le contexte par défaut de tous vos événements RUM avec l'API `setRumGlobalContext(context: Context)` :
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -88,15 +100,26 @@ Une fois le Real User Monitoring (RUM) lancé, vous pouvez remplacer le contexte
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.setRumGlobalContext({"<CLÉ_CONTEXTE>":"<VALEUR_CONTEXTE>"});
+datadogRum.setRumGlobalContext({ '<CLÉ_CONTEXTE>': '<VALEUR_CONTEXTE>' });
+
+// Exemple de code
+datadogRum.setRumGlobalContext({
+    codeVersion: 34,
+});
 ```
 
 {{% /tab %}}
 {{% tab "Bundle" %}}
 
 ```javascript
-// Remplacer entièrement le contexte par défaut pour toutes vos vues
-window.DD_RUM && DD_RUM.setRumGlobalContext({"<CLÉ_CONTEXTE>":"<VALEUR_CONTEXTE>"});
+window.DD_RUM &&
+    DD_RUM.setRumGlobalContext({ '<CLÉ_CONTEXTE>': '<VALEUR_CONTEXTE>' });
+
+// Exemple de code
+window.DD_RUM &&
+    DD_RUM.setRumGlobalContext({
+        codeVersion: 34,
+    });
 ```
 
 {{% /tab %}}
@@ -114,35 +137,16 @@ Une fois le Real User Monitoring (RUM) lancé, générez des actions utilisateur
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-datadogRum.addUserAction("<NOM>","<OBJET_JSON>");
-```
+datadogRum.addUserAction('<NOM>', '<OBJET_JSON>');
 
-{{% /tab %}}
-{{% tab "Bundle" %}}
-
-```javascript
-// Attribuer à l'action un nom et un objet contenant toutes les données
-window.DD_RUM && DD_RUM.addUserAction("<NOM>","<OBJET_JSON>");
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-Par exemple, pour recueillir le nombre d'articles dans un panier, déterminer leur nature et calculer la valeur globale du panier, vous pouvez rédiger du code similaire à ce qui suit :
-
-{{< tabs >}}
-{{% tab "NPM" %}}
-
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.addUserAction("Cart Payed", {
-  "cart": {
-    "amount": 42,
-    "currency": "$",
-    "nb_items": 2,
-    "items": ["socks", "t-shirt"]
-  }
+// Exemple de code
+datadogRum.addUserAction('checkout', {
+    cart: {
+        amount: 42,
+        currency: '$',
+        nb_items: 2,
+        items: ['socks', 't-shirt'],
+    },
 });
 ```
 
@@ -150,18 +154,24 @@ datadogRum.addUserAction("Cart Payed", {
 {{% tab "Bundle" %}}
 
 ```javascript
-window.DD_RUM && DD_RUM.addUserAction("Cart Payed", {
-  "cart": {
-    "amount": 42,
-    "currency": "$",
-    "nb_items": 2,
-    "items": ["socks", "t-shirt"]
-  }
-});
+window.DD_RUM && DD_RUM.addUserAction('<NOM>', '<OBJET_JSON>');
+
+// Exemple de code
+window.DD_RUM &&
+    DD_RUM.addUserAction('checkout', {
+        cart: {
+            amount: 42,
+            currency: '$',
+            nb_items: 2,
+            items: ['socks', 't-shirt'],
+        },
+    });
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+Dans l'exemple ci-dessus, le SDK RUM recueille le nombre d'articles dans un panier, la nature de ces articles, ainsi que le montant total du panier.
 
 ## Pour aller plus loin
 

@@ -33,7 +33,7 @@ Le mode debugging est désactivé par défaut. Pour l'activer, suivez les instru
 {{< tabs >}}
 {{% tab "Java" %}}
 
-Pour activer le mode debugging pour le traceur Java Datadog, définissez le flag `-Ddd.trace.debug=true` au démarrage du JVM ou ajoutez la variable d'environnement `DD_TRACE_DEBUG=true`.
+Pour activer le mode debugging pour le traceur Java Datadog, définissez le flag `-Ddd.trace.debug=true` au démarrage de la JVM ou ajoutez la variable d'environnement `DD_TRACE_DEBUG=true`.
 
 **Remarque** : le traceur Java Datadog implémente SL4J SimpleLogger. [Tous ses paramètres peuvent donc être appliqués][1], comme l'enregistrement dans un fichier de log dédié : `-Ddatadog.slf4j.simpleLogger.logFile=<NOUVEAU_CHEMIN_FICHIER_LOG>`
 

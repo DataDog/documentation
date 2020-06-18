@@ -42,7 +42,7 @@ L'intégration Java vous permet de recueillir des métriques, des traces et des 
 
 ### Collecte de métriques
 
-Si votre application expose des métriques [JMX][1], l'Agent Datadog appelle un petit plug-in Java appelé JMXFetch (compatible uniquement avec Java >= 1.7.) afin de se connecter à MBean Server et de recueillir les métriques de votre application. Il envoie également des checks de service afin de déterminer le statut des instances que vous surveillez. Ce plug-in envoie les métriques à l'Agent Datadog via le serveur DogStatsD, qui s'exécute au sein de l'Agent. Les intégrations suivantes utilisent également les métriques JMX :
+Si votre application expose des métriques [JMX][1], l'Agent Datadog appelle un petit plug-in Java du nom de JMXFetch (compatible uniquement avec Java >= 1.7) afin de se connecter à MBean Server et de recueillir les métriques de votre application. Il envoie également des checks de service afin de déterminer le statut des instances que vous surveillez. Ce plug-in envoie les métriques à l'Agent Datadog via le serveur [DogStatsD][2], qui s'exécute au sein de l'Agent. Les intégrations suivantes utilisent également les métriques JMX :
 
 - ActiveMQ
 - Cassandra
@@ -50,15 +50,15 @@ Si votre application expose des métriques [JMX][1], l'Agent Datadog appelle un 
 - Tomcat
 - Kafka
 
-**Remarque** : par défaut, les checks JMX sont limités à 350 métriques par instance. Si vous souhaitez recueillir davantage de métriques, contactez l'[assistance Datadog][2].
+**Remarque** : par défaut, les checks JMX sont limités à 350 métriques par instance. Si vous souhaitez utiliser davantage de métriques, contactez l'[assistance Datadog][3].
 
 #### Installation
 
-Vérifiez que vous pouvez ouvrir une [connexion JMX distante][3]. L'Agent Datadog nécessite une connexion distante pour se connecter au JVM, même s'ils sont tous les deux sur le même host.
+Vérifiez que vous pouvez ouvrir une [connexion JMX distante][4]. L'Agent Datadog nécessite une connexion distante pour se connecter à la JVM, même s'ils sont tous les deux sur le même host. Pour des raisons de sécurité, il est recommandé de ne pas utiliser l'adresse d'écoute `0.0.0.0`. Utilisez plutôt `com.sun.management.jmxremote.host=127.0.0.1` pour un déploiement avec la JVM et l'Agent.
 
 #### Configuration
 
-Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre check JMX comme n'importe quelle [intégration de l'Agent][4]. Si vous exécutez l'Agent en tant que DaemonSet dans Kubernetes, configurez votre check JMX avec [Autodiscovery](?tab=docker#configuration).
+Si vous exécutez l'Agent en tant que binaire sur un host, configurez votre check JMX comme n'importe quelle [intégration de l'Agent][5]. Si vous exécutez l'Agent en tant que DaemonSet dans Kubernetes, configurez votre check JMX avec [Autodiscovery](?tab=docker#configuration).
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -85,12 +85,15 @@ instances:
     trust_store_path: "<CHEMIN_TRUST_STORE>.jks"
     trust_store_password: "<MOTDEPASSE>"
 
+    rmi_connection_timeout: 20
+    rmi_client_timeout: 15000
+
     process_name_regex: ".*<NOM_PROCESSUS>.*"
     tools_jar_path: /usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
     refresh_beans: 600
     tags:
       env: dev
-      "<TAG_KEY>":"<TAG_VALUE>"
+      "<KEY_TAG>":"<VALUE_TAG>"
 
     conf:
       - include:
@@ -130,7 +133,7 @@ instances:
               metric_type: gauge
               alias: "jmx.<NOM_ATTRIBUT_AVEC_TAG_REGEX>"
 
-          ## Les lignes suivantes envoient le bean jmx.<NOM_ATTRIBUT_AVEC_TAG_REGEX> avec les tags :
+          ## Les lignes suivantes envoient le bean <NOM_ATTRIBUT_AVEC_TAG_REGEX> avec les tags :
           ## `hostregex:<paramètreBean>`
           ## `typeregex:<paramètreBean>`
           ## `contextregex<paramètreBean>`
@@ -147,7 +150,7 @@ instances:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-JMX n'est pas installé sur l'image standard `datadog/agent:latest` servant à exécuter le [conteneur de l'Agent Datadog][1]. **Utilisez plutôt l'image `datadog/agent:latest-jmx`** : celle-ci est basée sur `datadog/agent:latest` mais comprend un JVM, dont l'Agent a besoin pour exécuter [jmxfetch][2].
+JMX n'est pas installé sur l'image standard `datadog/agent:latest` servant à exécuter le [conteneur de l'Agent Datadog][1]. **Utilisez plutôt l'image `datadog/agent:latest-jmx`** : celle-ci est basée sur `datadog/agent:latest` mais comprend une JVM, dont l'Agent a besoin pour exécuter [jmxfetch][2].
 
 Pour lancer un check JMX sur l'un de vos conteneurs :
 
@@ -189,6 +192,8 @@ Pour lancer un check JMX sur l'un de vos conteneurs :
 | `process_name_regex`                          | Non       | Au lieu de spécifier un host et un port ou `jmx_url`, l'Agent peut se connecter à l'aide de l'API Attach. Pour ce faire, vous devez avoir installé le JDK et avoir défini le chemin vers `tools.jar`.                                                                                                                                                              |
 | `tools_jar_path`                              | Non       | À définir lorsque `process_name_regex` est défini.                                                                                                                                                                                                                                                                                               |
 | `refresh_beans`                               | Non       | Fréquence d'actualisation de la liste des Mbeans correspondants. Valeur par défaut : 600 s. Toute valeur inférieure peut entraîner une augmentation de la charge processeur.                                                                                                                                                                                                  |
+| `rmi_connection_timeout`                      | Non       | Le délai d'expiration, en secondes, d'une connexion à la JVM à l'aide du `host` et du `port` ou d'une `jmx_url`.                                                                                                                                                                                                                                      |
+| `rmi_client_timeout`                          | Non       | Spécifie la durée, en millisecondes, sans réponse de la JVM connectée après laquelle l'Agent abandonne une connexion existante et réessaie de se connecter.                                                                                                                                                                                        |
 
 Le paramètre `conf` correspond à une liste de dictionnaires. Seules deux clés sont autorisées dans ce dictionnaire :
 
@@ -197,7 +202,7 @@ Le paramètre `conf` correspond à une liste de dictionnaires. Seules deux clés
 | `include` | Oui      | Dictionnaire de filtres. Tout attribut qui correspond à ces filtres est recueilli, sauf s'il correspond également aux filtres « exclude » (voir ci-dessous). |
 | `exclude` | Non       | Dictionnaire de filtres. Les attributs qui correspondent à ces filtres ne sont pas recueillis.                                                           |
 
-Les tags sont automatiquement ajoutés aux métriques en fonction du nom actuel du MBean. Vous pouvez spécifier explicitement des tags supplémentaires. Par exemple, si le MBean suivant est exposé par votre application surveillée :
+Les tags sont automatiquement ajoutés aux métriques en fonction du nom du MBean. Vous pouvez spécifier explicitement des tags supplémentaires. Par exemple, si le MBean suivant est exposé par votre application surveillée :
 
 ```text
 mydomain:attr0=val0,attr1=val1
@@ -219,7 +224,7 @@ Chaque dictionnaire `include` ou `exclude` prend en charge les clés suivantes 
 | `bean_regex`          | Liste des expressions régulières pour les noms de bean complets (p. ex., `java\.lang.*[,:]type=Compilation.*`). Vous pouvez utiliser des groupes de capture dans votre expression régulière afin de fournir des valeurs de tag. Référez-vous à l'exemple de configuration ci-dessus. |
 | `attribute`           | Liste ou dictionnaire de noms d'attributs (voir ci-dessous pour plus de détails).                                                                                                                  |
 
-Les expressions régulières définies dans `domain_regex` et `bean_regex` doivent respecter le [format des expressions régulières Java][5].
+Les expressions régulières définies dans `domain_regex` et `bean_regex` doivent respecter le [format des expressions régulières Java][6].
 
 Les filtres `domain_regex` et `bean_regex` ont été ajoutés dans la version 5.5.0.
 
@@ -299,19 +304,19 @@ init_config:
 
 #### Validation
 
-[Lancez la sous-commande status de l'Agent][6] et cherchez votre check JMX dans la section JMXFetch.
+[Lancez la sous-commande status de l'Agent][7] et cherchez votre check JMX dans la section JMXFetch.
 
-Les checks JMX possèdent également une configuration par défaut qui recueille 11 métriques depuis votre application. Consultez le [Metrics Explorer][7] pour : `jvm.heap_memory`, `jvm.non_heap_memory` ou `jvm.gc.cms.count`.
+Les checks JMX possèdent également une configuration par défaut qui recueille 11 métriques depuis votre application JMX. Reportez-vous au [Metrics Explorer][8] pour consulter les métriques suivantes : `jvm.heap_memory`, `jvm.non_heap_memory` ou `jvm.gc.cms.count`.
 
 ### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-Consultez la documentation relative à la [configuration de la collecte de logs Java][8] pour transmettre vos logs à Datadog.
+Consultez la documentation relative à la [configuration de la collecte de logs Java][9] pour transmettre vos logs à Datadog.
 
 ### Collecte de traces
 
-Après l'[activation de la collecte de traces avec votre Agent][9], consultez la documentation relative à l'[instrumentation de votre application Java][10] pour envoyer ses traces à Datadog.
+Après avoir [activé la collecte de traces avec votre Agent][10], consultez la documentation relative à l'[instrumentation de votre application Java][11] pour envoyer ses traces à Datadog.
 
 ## Données collectées
 
@@ -319,7 +324,7 @@ Après l'[activation de la collecte de traces avec votre Agent][9], consultez la
 
 {{< get-metrics-from-git >}}
 
-**Remarque** : définissez `new_gc_metrics: true` dans votre fichier [jmx.d/conf.yaml][11] pour remplacer les métriques suivantes :
+**Remarque** : définissez `new_gc_metrics: true` dans votre fichier [jmx.d/conf.yaml][12] pour remplacer les métriques suivantes :
 
 ```text
 jvm.gc.cms.count   => jvm.gc.minor_collection_count
@@ -330,21 +335,22 @@ jvm.gc.parnew.time => jvm.gc.minor_collection_time
 
 ## Dépannage
 
-Consultez la liste des [commandes et la FAQ de dépannage JMX][12].
+Consultez la liste des [commandes de dépannage JMX et la FAQ dédiée][13].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html
-[2]: https://docs.datadoghq.com/fr/help
-[3]: http://docs.oracle.com/javase/1.5.0/docs/guide/management/agent.html
-[4]: https://docs.datadoghq.com/fr/getting_started/integrations/#setting-up-an-integration
-[5]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/fr/metrics/explorer
-[8]: https://docs.datadoghq.com/fr/logs/log_collection/java/
-[9]: https://docs.datadoghq.com/fr/tracing/send_traces/
-[10]: https://docs.datadoghq.com/fr/tracing/setup/java/
-[11]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/jmx.d/conf.yaml.example
-[12]: https://docs.datadoghq.com/fr/integrations/faq/troubleshooting-jmx-integrations
+[2]: https://docs.datadoghq.com/fr/developers/dogstatsd
+[3]: https://docs.datadoghq.com/fr/help/
+[4]: https://docs.oracle.com/en/java/javase/14/management/monitoring-and-management-using-jmx-technology.html
+[5]: https://docs.datadoghq.com/fr/getting_started/integrations/#setting-up-an-integration
+[6]: http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
+[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/fr/metrics/explorer/
+[9]: https://docs.datadoghq.com/fr/logs/log_collection/java/
+[10]: https://docs.datadoghq.com/fr/tracing/send_traces/
+[11]: https://docs.datadoghq.com/fr/tracing/setup/java/
+[12]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/jmx.d/conf.yaml.example
+[13]: https://docs.datadoghq.com/fr/integrations/faq/troubleshooting-jmx-integrations/
