@@ -19,7 +19,7 @@ further_reading:
 ## Automatic Collection of User Actions
 Real User Monitoring (RUM) SDKs automatically detect User Actions performed during a user journey. Set the `trackInteractions` [initialization parameter][1] to `true` to enable this feature.
 
-**Note**:  The trackInteractions initialization parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
+**Note**:  The `trackInteractions` [initialization parameter][1] enables the automatic collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
 
 Once an interaction is detected, all new RUM events are attached to the ongoing user action until it is considered as finished. The user action also benefits from its parent view attributes: browser information, geolocation data, [global context][2], etc.
 
@@ -36,7 +36,7 @@ Custom User Actions are User Actions declared and sent manually via the [`addUse
 | `duration` | number (ns) | The length of the user action. See how it is calculated in the [User Action documentation][4]. |
 | `user_action.measures.long_task_count`        | number      | Count of all long tasks collected for this user action. |
 | `user_action.measures.resource_count`         | number      | Count of all resources collected for this user action. |
-| `user_action.measures.user_action_count`      | number      | Count of all user actions collected for this user action.|
+| `user_action.measures.error_count`      | number      | Count of all errors collected for this user action.|
 
 ## Facet Collected
 
