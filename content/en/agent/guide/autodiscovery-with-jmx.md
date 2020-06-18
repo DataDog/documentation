@@ -32,7 +32,7 @@ The autodiscovery annotations logic consists in applying the JMX check configura
     metadata:
         name: <POD_NAME>
         annotations:
-            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.names: >-
+            ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: >-
               '["<INTEGRATION_NAME>"]'
             ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: >-
               '[{"is_jmx": true, "collect_default_metrics": true}]'
@@ -90,7 +90,7 @@ kind: Pod
 metadata:
     name: tomcat-test
     annotations:
-        ad.datadoghq.com/tomcat.check.names: >-
+        ad.datadoghq.com/tomcat.check_names: >-
           '["tomcat"]'
         ad.datadoghq.com/tomcat.init_configs: >-
           '[{"is_jmx": true, "collect_default_metrics": true}]'
