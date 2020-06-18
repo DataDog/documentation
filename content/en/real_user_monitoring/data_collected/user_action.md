@@ -17,7 +17,7 @@ further_reading:
 ---
 
 ## Automatic Collection of User Actions
-Real User Monitoring (RUM) SDKs automatically detect user interactions performed during a user journey. Set the `trackInteractions` [initialization parameter][1] to `true` to enable this feature.
+Real User Monitoring (RUM) SDKs automatically detect User Actions performed during a user journey. Set the `trackInteractions` [initialization parameter][1] to `true` to enable this feature.
 
 **Note**:  The trackInteractions initialization parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained on your pages may be included to identify the elements interacted with.
 
