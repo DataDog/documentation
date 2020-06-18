@@ -262,7 +262,7 @@ The following tags are available to override Datadog specific options:
 * `resource.name`: The resource name to be used for the span. The operation name will be used if this is not provided.
 * `span.type`: The span type to be used for the span. Will fallback to `custom` if not provided.
 
-See [opentracing.io] for OpenTracing NodeJS usage.
+See [opentracing.io][8] for OpenTracing NodeJS usage.
 
 ## Further Reading
 
