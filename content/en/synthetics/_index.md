@@ -18,31 +18,31 @@ further_reading:
 
 {{< img src="synthetics/synthetics_home_page.png" alt="Synthetics home page" >}}
 
-Synthetic tests allow you to observe how all your systems are performing as experienced by your users from around the globe -  Datadog tracks the performance of your applications and API endpoints using simulated user requests and browser rendering. Synthetics helps you ensure uptime, identify regional issues, compute error budgets, automate tests, and track application performance. By unifying Synthetics with your metrics, traces, and logs, you can test your production environment end-to-end.
+Synthetic tests allow you to observe how all your systems are performing using simulated user requests from around the globe. Datadog tracks the performance of your webpages and APIs at all network levels (HTTP, TCP, SSL) in a controlled and stable way, alerting you in case of faulty behavior (high response time, unexpected status code, etc.). Computing SLOs on your key endpoints and user journeys makes it easier to stick to your application performance targets and ultimately provide a consistent customer experience. By end-to-end testing both your production and CI environments, you can increase your development teams’ speed and stop fearing defective code might make it to production.
 
 ## Getting Started
-
+Create your first Synthetic test and start monitoring web applications to improve their performance in just a few minutes.
 ### Set up API tests
 
-Monitor how your customers from around the world experience your http API endpoints using [Synthetics API tests][1].
+API tests allow you to launch requests and perform verifications on your web applications at various network levels: HTTP, TCP, DNS. Create your first [HTTP test][1] and get started with API monitoring.
 
 {{< img src="synthetics/api.png" alt="API tests"  style="width:100%;">}}
 
-### Set up Browser tests
+### Record Browser tests
 
-Monitor how your customers from around the world experience your webpage using [Synthetics Browser tests][2].
+Record end-to-end tests to monitor how your customers experience your webpages from around the world using [Synthetics Browser tests][2].
 
 {{< img src="synthetics/browser.gif" alt="Browser tests"  style="width:100%;">}}
 
-### Set up Private Locations
+### Launch Private Locations
 
-Use [Synthetics Private Locations][3] to monitor internal APIs and websites - private URLs that aren’t accessible from the public internet.
+Use [Synthetics Private Locations][3] to monitor internal APIs and websites or to create custom locations in areas that are mission-critical to your business.
 
 {{< img src="synthetics/private_locations.png" alt="Private locations"  style="width:100%;">}}
 
 ### Connect Synthetics and Traces
 
-[Link simulated API tests][4] to traces to find the root cause of failures across frontend, network and backend requests.
+Use the [out of the box integration between Synthetic tests and APM traces][4] to find the root cause of failures across frontend, network and backend requests.
 
 {{< img src="synthetics/traces.gif" alt="Synthetics"  style="width:100%;">}}
 
