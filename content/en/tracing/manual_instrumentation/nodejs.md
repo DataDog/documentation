@@ -1,6 +1,8 @@
 ---
 title: NodeJS Custom Instrumentation
 kind: documentation
+aliases:
+    - /tracing/opentracing/nodejs
 decription: 'Manually instrument your NodeJS application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
@@ -47,8 +49,8 @@ app.get('/make-sandwich', (req, res) => {
 
 API details for `tracer.trace()` can be found [here][1].
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
 
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Promises" %}}
@@ -70,8 +72,8 @@ app.get('/make-sandwich', (req, res) => {
 
 API details for `tracer.trace()` can be found [here][1].
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
 
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Async/await" %}}
@@ -96,8 +98,8 @@ app.get('/make-sandwich', async (req, res) => {
 
 API details for `tracer.trace()` can be found [here][1].
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
 
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Wrapper" %}}
@@ -121,8 +123,8 @@ app.get('/make-sandwich', (req, res) => {
 
 API details for `tracer.trace()` can be found [here][1].
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
 
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
 {{% /tab %}}
 
 {{% tab "Manual" %}}
@@ -149,8 +151,8 @@ app.get('/make-sandwich', (req, res) => {
 
 API details for `tracer.startSpan()` can be found [here][1].
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#startspan
 
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#startspan
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -232,8 +234,8 @@ tracer.use('express', {
 
 API details for individual plugins can be found [here][1].
 
-[1]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
 
+[1]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
 {{% /tab %}}
 
 {{% tab "Errors" %}}
