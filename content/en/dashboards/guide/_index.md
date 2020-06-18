@@ -8,6 +8,7 @@ aliases:
 
 {{< whatsnext desc="General Guides:" >}}
     {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Graphing percentiles in Datadog{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/query-to-the-graph" >}}Query to the Graph{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Deprecated APIs:" >}}
