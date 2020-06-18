@@ -41,7 +41,9 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-API details for `tracer.trace()` can be found [here][4].
+API details for `tracer.trace()` can be found [here][1].
+
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
 
 {{% /tab %}}
 
@@ -60,7 +62,9 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-API details for `tracer.trace()` can be found [here][4].
+API details for `tracer.trace()` can be found [here][1].
+
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
 
 {{% /tab %}}
 
@@ -80,7 +84,9 @@ app.get('/make-sandwich', async (req, res) => {
 })
 ```
 
-API details for `tracer.trace()` can be found [here][4].
+API details for `tracer.trace()` can be found [here][1].
+
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
 
 {{% /tab %}}
 
@@ -103,7 +109,9 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-API details for `tracer.wrap()` can be found [here][5].
+API details for `tracer.trace()` can be found [here][1].
+
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
 
 {{% /tab %}}
 
@@ -129,7 +137,9 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-API details for `tracer.wrap()` can be found [here][5].
+API details for `tracer.startSpan()` can be found [here][1].
+
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#startspan
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -149,7 +159,7 @@ tracer.trace('sandwich.make', () => {
 })
 ```
 
-API details for `Scope` can be found [here][6].
+API details for `Scope` can be found [here][3].
 
 ## Adding tags
 
@@ -210,7 +220,9 @@ tracer.use('express', {
 })
 ```
 
-API details for individual plugins can be found [here][8].
+API details for individual plugins can be found [here][1].
+
+[1]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
 
 {{% /tab %}}
 
@@ -262,7 +274,7 @@ The following tags are available to override Datadog specific options:
 * `resource.name`: The resource name to be used for the span. The operation name will be used if this is not provided.
 * `span.type`: The span type to be used for the span. Will fallback to `custom` if not provided.
 
-See [opentracing.io][8] for OpenTracing NodeJS usage.
+See [opentracing.io][4] for OpenTracing NodeJS usage.
 
 ## Further Reading
 
@@ -270,9 +282,5 @@ See [opentracing.io][8] for OpenTracing NodeJS usage.
 
 [1]: /tracing/compatibility_requirements/nodejs/
 [2]: /tracing/visualization/#spans
-[3]: https://datadoghq.dev/dd-trace-js/#manual-instrumentation
-[4]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-[5]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
-[6]: https://datadoghq.dev/dd-trace-js/interfaces/scope.html
-[7]: https://opentracing.io/guides/javascript/
-[8]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
+[3]: https://datadoghq.dev/dd-trace-js/interfaces/scope.html
+[4]: https://opentracing.io/guides/javascript/
