@@ -103,7 +103,7 @@ The JavaScript assertion function comes with the following parameters and requir
 
 {{< img src="synthetics/browser_tests/js_assertion.mp4" alt="Browser Test JavaScript Assertion" video="true" width="100%">}}
 
-* The `return` statement should return a value indicating your browser test step was successful. Any type can be returned, but the value is automatically casted as a boolean.
+* The `return` statement needs to reflect the condition the assertion needs to meet for your browser test step to be successful. Any type can be returned, but the value is automatically casted as a boolean.
 
 Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (libraries, built-ins, global variables, etc.). To load external libraries, use a promise, for example:
 
@@ -202,7 +202,7 @@ Create a variable out of a `span`, `div`, etc. content by extracting the text of
 
 Generate custom variables using your own JavaScript code. JavaScript steps support both synchronous and asynchronous code.
 
-The JavaScript assertion function comes with the following parameters and requires a return statement.
+The JavaScript function comes with the following parameters and requires a return statement.
 
 * `vars`: A string containing your browser test [variables][5]. Use `vars.<YOUR_VARIABLE>` to refer to a browser test variable in your JavaScript snippet. For example, if your browser test contains a `USERNAME` variable, call it in your JavaScript snippet using `vars.USERNAME`.
 
@@ -210,7 +210,7 @@ The JavaScript assertion function comes with the following parameters and requir
 
 {{< img src="synthetics/browser_tests/js_variable.mp4" alt="Browser Test JavaScript Variable" video="true" width="100%">}}
 
-* The `return` statement should return a value indicating your browser test step was successful. Any type can be returned, but the value is automatically casted as a boolean.
+* The `return` statement should return the value associated to your JavaScript variable. Any type can be returned, but the value is automatically casted as a string.
 
 Since JavaScript assertions run in the context of the active page, these steps can access all the objects defined in the active page (libraries, built-ins, global variables, etc.). To load external libraries, use a promise, for example:
 
