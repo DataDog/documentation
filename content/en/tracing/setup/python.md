@@ -97,7 +97,8 @@ tracer.configure(
 [5]: http://pypi.datadoghq.com/trace/docs
 [6]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtracerun
 [7]: /tracing/guide/setting_primary_tags_to_scope/
-[8]: http://pypi.datadoghq.com/trace/docs/web_integrations.html?highlight=django#django
-[9]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
-[10]: /tracing/connect_logs_and_traces/python/
-[11]: /tracing/app_analytics/?tab=python#automatic-configuration
+[8]: /getting_started/tagging/unified_service_tagging
+[9]: http://pypi.datadoghq.com/trace/docs/web_integrations.html?highlight=django#django
+[10]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
+[11]: /tracing/connect_logs_and_traces/python/
+[12]: /tracing/app_analytics/?tab=python#automatic-configuration
