@@ -23,7 +23,10 @@ Profiling libraries are shipped within the following tracing language libraries.
 
 The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
-1. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
+1. If you are already using Datadog, please upgrade your agent to version 7.20.2 or 6.20.2. 
+
+
+2. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
 
     ```shell
     wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
@@ -31,15 +34,15 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 
      **Note**: Profiling is available in the `dd-java-agent.jar` library in versions 0.44+.
 
-2. Update your service invocation to look like:
+3. Update your service invocation to look like:
 
     ```text
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-    **Note**: From `dd-java-agent.jar` library [versions 0.55][6]+ profiles are sent through the Datadog agent, deprecating the need to specify `-Ddd.profiling.api-key-file` and `-Ddd.site` (requires **[Agent 7.20.2][5]**+ or **6.20.2**+). With `dd-java-agent.jar` library versions 0.48-0.54, if your organization is on Datadog EU site, add `-Ddd.site=datadoghq.eu` or set `DD_SITE=datadoghq.eu` as environment variable.
+    **Notes**: From `dd-java-agent.jar` library [versions 0.55][6]+ profiles are sent through the Datadog agent, deprecating the need to specify `-Ddd.profiling.api-key-file` and `-Ddd.site` (requires **[Agent 7.20.2][5]**+ or **6.20.2**+). With `dd-java-agent.jar` library versions 0.48-0.54, if your organization is on Datadog EU site, add `-Ddd.site=datadoghq.eu` or set `DD_SITE=datadoghq.eu` as environment variable.
 
-3. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
+4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
 **Note**:
 
@@ -59,9 +62,9 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 | Arguments                     | Environment variable      | Description                                       |
 | ----------------------------- | ------------------------- | ------------------------------------------------- |
 | `-Ddd.profiling.enabled`      | DD_PROFILING_ENABLED      | Set to `true` to enable profiling.                |
-| `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | Deprecated from versions 0.55+. File that should contain the API key as a string. |
+| `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | Deprecated in versions 0.55. File that should contain the API key as a string. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. |
 |                               | DD_PROFILING_API_KEY      | Datadog API key.                                  |
-| `-Ddd.site`                   | DD_SITE                   | Deprecated from versions 0.55+. Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. |
+| `-Ddd.site`                   | DD_SITE                   | Deprecated in versions 0.55. Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. |
 
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
