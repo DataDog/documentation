@@ -13848,7 +13848,7 @@ paths:
           example: availability-zone:us1-east
           type: string
       - description: Specify the start of the timeframe in epoch seconds to query
-          for.
+          for. (defaults to 1 hour before end parameter)
         in: query
         name: start
         required: false
@@ -13857,6 +13857,7 @@ paths:
           format: int64
           type: integer
       - description: Specify the end of the timeframe in epoch seconds to query for.
+          (defaults to current time)
         in: query
         name: end
         required: false
@@ -13919,7 +13920,7 @@ paths:
           example: availability-zone:us1-east
           type: string
       - description: Specify the start of the timeframe in epoch seconds to query
-          for.
+          for. (defaults to 1 hour before end parameter)
         in: query
         name: start
         required: false
@@ -13928,6 +13929,7 @@ paths:
           format: int64
           type: integer
       - description: Specify the end of the timeframe in epoch seconds to query for.
+          (defaults to current time)
         in: query
         name: end
         required: false
