@@ -40,7 +40,7 @@ docker run -d --name datadog-agent \
            -e DD_API_KEY="<DATADOG_API_KEY>" \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-           -e DD_AC_EXCLUDE="name:datadog-agent" \
+           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -e DD_ENABLE_PAYLOADS_EVENTS=false
            -e DD_ENABLE_PAYLOADS_SERIES=false
            -e DD_ENABLE_PAYLOADS_SERVICE_CHECKS=false
@@ -131,7 +131,7 @@ spec:
           ## Enable Log collection
           - {name: DD_LOGS_ENABLED, value: "true"}
           - {name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL, value: "true"}
-          - {name: DD_AC_EXCLUDE, value: "name:datadog-agent"}
+          - {name: DD_CONTAINER_EXCLUDE, value: "name:datadog-agent"}
 
           ## Send logs only
           - {name: DD_ENABLE_PAYLOADS_EVENTS, value: "false"}

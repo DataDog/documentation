@@ -46,7 +46,7 @@ docker run -d --name datadog-agent \
            -e DD_API_KEY="<DATADOG_API_キー>" \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
-           -e DD_AC_EXCLUDE="name:datadog-agent" \
+           -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
@@ -63,7 +63,7 @@ docker run -d --name datadog-agent \
 | `-e DD_LOGS_ENABLED=true`                             | `true` に設定すると、ログ収集が有効になります。Agent は構成ファイルのログ命令を探します。                                                          |
 | `-e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true`        | すべてのコンテナのログ収集を有効にするログコンフィギュレーションを追加します。                                                                                         |
 | `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` | 再起動の際やネットワークで問題が生じた際でもコンテナログを紛失しないよう、このディレクトリ内の各コンテナのために収集された最後のログ行は、ホストに保存されます。     |
-| `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Datadog Agent が自身のログやメトリクスを収集したり送信するのを防ぎます。Datadog Agent ログやメトリクスを収集したい場合は、このパラメータを削除します。 |
+| `-e DD_CONTAINER_EXCLUDE="name:datadog-agent"`               | Datadog Agent が自身のログやメトリクスを収集したり送信するのを防ぎます。Datadog Agent ログやメトリクスを収集したい場合は、このパラメータを削除します。 |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | ログは Docker ソケットの `stdout/stderr` コンテナから収集されます。                                                                                        |
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
@@ -242,14 +242,14 @@ spec:
 このオプションは、スペース区切り文字列形式です。たとえば、2 つのイメージのみをモニターして残りを除外したい場合、以下のようにします。
 
 ```text
-DD_AC_EXCLUDE = "image:.*"
-DD_AC_INCLUDE = "image:cp-kafka image:k8szk"
+DD_CONTAINER_EXCLUDE = "image:.*"
+DD_CONTAINER_INCLUDE = "image:cp-kafka image:k8szk"
 ```
 
 特定のコンテナ名を除外するには、以下のようにします。
 
 ```text
-DD_AC_EXCLUDE = "name:datadog-agent"
+DD_CONTAINER_EXCLUDE = "name:datadog-agent"
 ```
 
 {{% /tab %}}
