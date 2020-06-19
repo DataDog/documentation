@@ -79,29 +79,23 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 
 The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python 3.5+. To begin profiling applications:
 
-1. Install `ddtrace` with the `profile` flavor, which contains both tracing and profiling:
+1. If you are already using Datadog, please upgrade your agent to version [7.20.2][4] or [6.20.2][4].
+
+2. Install `ddtrace` which contains both tracing and profiling:
 
     ```shell
-    pip install ddtrace[profiling]
+    pip install ddtrace
     ```
 
      **Note**: Profiling is available in the `ddtrace` library for versions 0.36+.
 
-2. Add a valid [Datadog API key][1] in your environment variable: `DD_PROFILING_API_KEY`.
-
-3. Set `env`, `service`, and `version` as Datadog tags in your environment variables.
-
-    ```shell
-    export DD_PROFILING_TAGS=env:<YOUR_ENVIRONMENT>,service:<YOUR_SERVICE>,version:<YOUR_VERSION>
-    ```
-
-4. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
+3. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
 
     ```python
     import ddtrace.profiling.auto
     ```
 
-5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
+4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][1].
 
 **Note**:
 
@@ -115,14 +109,14 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_API_KEY`                                     | String        | The [Datadog API key][1] to use when uploading profiles. New in version 0.37.                                        |
-| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][1] to use when uploading profiles. Changed in 0.37: deprecated in favor of `DD_API_KEY`. |
-| `DD_SITE`                                        | String        | If your organization is on Datadog EU site, set this to `datadoghq.eu`.                          |
-| `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
-| `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="env:production"`. |
+| `DD_SERVICE`                                     | String        | The Datadog [service][2] name.     |
+| `DD_ENV`                                         | String        | The Datadog [environment][3] name, for example `production`, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="env:production"`. |
 | `DD_VERSION`                                     | String        | The version of your application, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="version:<APPLICATION_VERSION>"`                              |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. New in version 0.38.   |
-| `DD_PROFILING_TAGS`                              | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. Changed in 0.38: deprecated in favor of `DD_TAGS`.|
+| `DD_API_KEY`                                     | String        | Deprecated in version 0.55. The [Datadog API key][1] to use when uploading profiles. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. Supported in version 0.37.                                        |
+| `DD_PROFILING_API_KEY`                           | String        | Deprecated in version 0.37. The [Datadog API key][1] to use when uploading profiles. |
+| `DD_SITE`                                        | String        | Deprecated in version 0.55. If your organization is on Datadog EU site, set this to `datadoghq.eu`. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead.                          |
+| `DD_PROFILING_TAGS`                              | String        | Deprecated in 0.38 in favor of `DD_TAGS`. Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
 <div class="alert alert-info">
 Recommended for advanced usage only.
@@ -140,10 +134,10 @@ Recommended for advanced usage only.
     prof.stop()
     ```
 
-[1]: /account_management/api-app-keys/#api-keys
-[2]: https://app.datadoghq.com/profiling
-[3]: /tracing/visualization/#services
-[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[1]: https://app.datadoghq.com/profiling
+[2]: /tracing/visualization/#services
+[3]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[4]: https://app.datadoghq.com/account/settings#agent/overview
 {{% /tab %}}
 
 {{% tab "Go" %}}
