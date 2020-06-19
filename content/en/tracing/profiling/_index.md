@@ -59,9 +59,9 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 | Arguments                     | Environment variable      | Description                                       |
 | ----------------------------- | ------------------------- | ------------------------------------------------- |
 | `-Ddd.profiling.enabled`      | DD_PROFILING_ENABLED      | Set to `true` to enable profiling.                |
-| `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | Deprecated from 0.55+. File that should contain the API key as a string. |
+| `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | Deprecated from versions 0.55+. File that should contain the API key as a string. |
 |                               | DD_PROFILING_API_KEY      | Datadog API key.                                  |
-| `-Ddd.site`                   | DD_SITE                   | Deprecated from 0.55+. Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. |
+| `-Ddd.site`                   | DD_SITE                   | Deprecated from versions 0.55+. Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. |
 
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
