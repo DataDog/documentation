@@ -426,7 +426,7 @@ Configure the Logback logger to stream logs directly to Datadog by adding the fo
     <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
 </appender>
 <appender name="JSON_TCP" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-    <remoteHost>tcp-intake.logs.datadoghq.com</remoteHost>
+    <remoteHost>intake.logs.datadoghq.com</remoteHost>
     <port>10514</port>
     <keepAliveDuration>1 minute</keepAliveDuration>
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
