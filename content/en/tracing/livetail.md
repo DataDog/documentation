@@ -49,7 +49,7 @@ Customize the Live Tail column view to better highlight the relevant information
 
 1. Move column to the right or left.
 2. Insert column to the right or left from span tags.
-3. Remove or replace column column.
+3. Remove or replace column.
 
 ## Filtering the trace Stream
 
