@@ -5473,7 +5473,8 @@ components:
           example: system.load.1
           type: string
         points:
-          description: Points relating to a metric.
+          description: Points relating to a metric. All points must be tuples with
+            timestamp and a scalar value (cannot be a string).
           example: []
           items:
             $ref: '#/components/schemas/Point'
@@ -7046,8 +7047,10 @@ components:
           format: int64
           type: integer
         retry:
-          description: Object describing the retry strategy to apply to a Synthetic
+          description: 'Object describing the retry strategy to apply to a Synthetic
             test.
+
+            By default, there is a 300ms wait before retrying a test that has failed.'
           properties:
             count:
               description: The amount of location that needs to fail for the test
@@ -13848,7 +13851,7 @@ paths:
           example: availability-zone:us1-east
           type: string
       - description: Specify the start of the timeframe in epoch seconds to query
-          for.
+          for. (defaults to 1 hour before end parameter)
         in: query
         name: start
         required: false
@@ -13857,6 +13860,7 @@ paths:
           format: int64
           type: integer
       - description: Specify the end of the timeframe in epoch seconds to query for.
+          (defaults to current time)
         in: query
         name: end
         required: false
@@ -13919,7 +13923,7 @@ paths:
           example: availability-zone:us1-east
           type: string
       - description: Specify the start of the timeframe in epoch seconds to query
-          for.
+          for. (defaults to 1 hour before end parameter)
         in: query
         name: start
         required: false
@@ -13928,6 +13932,7 @@ paths:
           format: int64
           type: integer
       - description: Specify the end of the timeframe in epoch seconds to query for.
+          (defaults to current time)
         in: query
         name: end
         required: false

@@ -3721,7 +3721,14 @@
           "type": {
             "default": "logs_restriction_queries",
             "description": "Restriction query resource type.",
-            "type": "string"
+            "enum": [
+              "logs_restriction_queries"
+            ],
+            "example": "logs_restriction_queries",
+            "type": "string",
+            "x-enum-varnames": [
+              "LOGS_RESTRICTION_QUERIES"
+            ]
           }
         },
         "type": "object"
@@ -3746,7 +3753,14 @@
               "type": {
                 "default": "logs_restriction_queries",
                 "description": "Restriction query resource type.",
-                "type": "string"
+                "enum": [
+                  "logs_restriction_queries"
+                ],
+                "example": "logs_restriction_queries",
+                "type": "string",
+                "x-enum-varnames": [
+                  "LOGS_RESTRICTION_QUERIES"
+                ]
               }
             },
             "type": "object"
@@ -3994,7 +4008,14 @@
           "type": {
             "default": "logs_restriction_queries",
             "description": "Restriction query resource type.",
-            "type": "string"
+            "enum": [
+              "logs_restriction_queries"
+            ],
+            "example": "logs_restriction_queries",
+            "type": "string",
+            "x-enum-varnames": [
+              "LOGS_RESTRICTION_QUERIES"
+            ]
           }
         },
         "type": "object"
@@ -4019,7 +4040,14 @@
               "type": {
                 "default": "logs_restriction_queries",
                 "description": "Restriction query resource type.",
-                "type": "string"
+                "enum": [
+                  "logs_restriction_queries"
+                ],
+                "example": "logs_restriction_queries",
+                "type": "string",
+                "x-enum-varnames": [
+                  "LOGS_RESTRICTION_QUERIES"
+                ]
               }
             },
             "type": "object"
@@ -6770,7 +6798,7 @@
         },
         "type": "object"
       },
-      "UserCreatePayload": {
+      "UserCreateRequest": {
         "description": "Create a user.",
         "properties": {
           "data": {
@@ -6919,61 +6947,6 @@
         },
         "type": "object"
       },
-      "UserInvitationPayload": {
-        "description": "Object to invite users to join the organization.",
-        "properties": {
-          "data": {
-            "description": "List of user invitations.",
-            "items": {
-              "description": "Object to create a user invitation.",
-              "properties": {
-                "relationships": {
-                  "description": "Relationships data for user invitation.",
-                  "properties": {
-                    "user": {
-                      "description": "Relationship to user.",
-                      "properties": {
-                        "data": {
-                          "description": "Relationship to user object.",
-                          "properties": {
-                            "id": {
-                              "description": "ID of the user.",
-                              "type": "string"
-                            },
-                            "type": {
-                              "default": "users",
-                              "description": "Users type.",
-                              "readOnly": true,
-                              "type": "string"
-                            }
-                          },
-                          "type": "object"
-                        }
-                      },
-                      "type": "object"
-                    }
-                  },
-                  "type": "object"
-                },
-                "type": {
-                  "default": "user_invitations",
-                  "description": "User invitations type.",
-                  "enum": [
-                    "user_invitations"
-                  ],
-                  "type": "string",
-                  "x-enum-varnames": [
-                    "USER_INVITATIONS"
-                  ]
-                }
-              },
-              "type": "object"
-            },
-            "type": "array"
-          }
-        },
-        "type": "object"
-      },
       "UserInvitationRelationships": {
         "description": "Relationships data for user invitation.",
         "properties": {
@@ -7094,6 +7067,61 @@
             "x-enum-varnames": [
               "USER_INVITATIONS"
             ]
+          }
+        },
+        "type": "object"
+      },
+      "UserInvitationsRequest": {
+        "description": "Object to invite users to join the organization.",
+        "properties": {
+          "data": {
+            "description": "List of user invitations.",
+            "items": {
+              "description": "Object to create a user invitation.",
+              "properties": {
+                "relationships": {
+                  "description": "Relationships data for user invitation.",
+                  "properties": {
+                    "user": {
+                      "description": "Relationship to user.",
+                      "properties": {
+                        "data": {
+                          "description": "Relationship to user object.",
+                          "properties": {
+                            "id": {
+                              "description": "ID of the user.",
+                              "type": "string"
+                            },
+                            "type": {
+                              "default": "users",
+                              "description": "Users type.",
+                              "readOnly": true,
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "default": "user_invitations",
+                  "description": "User invitations type.",
+                  "enum": [
+                    "user_invitations"
+                  ],
+                  "type": "string",
+                  "x-enum-varnames": [
+                    "USER_INVITATIONS"
+                  ]
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
           }
         },
         "type": "object"
@@ -8028,7 +8056,7 @@
         },
         "type": "object"
       },
-      "UserUpdatePayload": {
+      "UserUpdateRequest": {
         "description": "Update a user.",
         "properties": {
           "data": {
@@ -11859,7 +11887,14 @@
                       "type": {
                         "default": "logs_restriction_queries",
                         "description": "Restriction query resource type.",
-                        "type": "string"
+                        "enum": [
+                          "logs_restriction_queries"
+                        ],
+                        "example": "logs_restriction_queries",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "LOGS_RESTRICTION_QUERIES"
+                        ]
                       }
                     },
                     "type": "object"
@@ -12636,7 +12671,14 @@
                       "type": {
                         "default": "logs_restriction_queries",
                         "description": "Restriction query resource type.",
-                        "type": "string"
+                        "enum": [
+                          "logs_restriction_queries"
+                        ],
+                        "example": "logs_restriction_queries",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "LOGS_RESTRICTION_QUERIES"
+                        ]
                       }
                     },
                     "type": "object"
