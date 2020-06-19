@@ -93,11 +93,11 @@ Le check etcd n'inclut aucun événement.
 
 `etcd.can_connect` :
 
-Renvoie « Critical » si l'Agent n'est pas capable de recueillir des métriques à partir du endpoint de votre API etcd.
+Renvoie « Critical » si l'Agent ne parvient pas à recueillir des métriques à partir du endpoint de votre API etcd.
 
 `etcd.healthy` :
 
-Renvoie « Critical » si le nœud d'un membre n'est pas sain. Renvoie « Unknown » si l'Agent n'est pas capable d'atteindre l'endpoint `/health`, ou si le statut de santé est manquant.
+Renvoie « Critical » si le nœud d'un membre n'est pas sain. Renvoie « Unknown » si l'Agent ne parvient pas à atteindre l'endpoint `/health`, ou si le statut de santé est manquant.
 
 ## Dépannage
 

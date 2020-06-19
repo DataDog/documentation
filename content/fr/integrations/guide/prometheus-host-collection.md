@@ -53,7 +53,7 @@ Pour recueillir vos métriques exposées :
     | `<ENDPOINT>`            | L'URL pour les métriques fournies par le conteneur, au format Prometheus.                                                                                                                                                     |
     | `<NAMESPACE>`           | L'espace de nommage spécifié ici sera ajouté comme préfixe à chaque métrique lors de son affichage dans Datadog.                                                                                                                                                    |
     | `<METRIC_TO_FETCH>`     | La clé de métrique Prometheus à récupérer à partir de l'endpoint Prometheus.                                                                                                                                                    |
-    | `<DATADOG_METRIC_NAME>` | Lorsque ce paramètre facultatif est défini, la clé de métrique `<METRIC_TO_FETCH>` est remplacée par `<DATADOG_METRIC_NAME>` dans Datadog. <br>Si vous choisissez de ne pas utiliser cette option, transmettez une liste de chaînes plutôt que des paires `key:value`. |
+    | `<DATADOG_METRIC_NAME>` | Lorsque ce paramètre facultatif est défini, la clé de métrique `<METRIC_TO_FETCH>` est remplacée par `<DATADOG_METRIC_NAME>` dans Datadog. <br>Si vous choisissez de ne pas utiliser cette option, passez une liste de chaînes plutôt que des paires `key:value`. |
 
 2. [Redémarrez l'Agent][10] pour commencer à recueillir vos métriques.
 
