@@ -110,8 +110,8 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_SERVICE`                                     | String        | The Datadog [service][2] name.     |
-| `DD_ENV`                                         | String        | The Datadog [environment][3] name, for example `production`, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="env:production"`. |
-| `DD_VERSION`                                     | String        | The version of your application, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="version:<APPLICATION_VERSION>"`                              |
+| `DD_ENV`                                         | String        | The Datadog [environment][3] name, for example `production`, which can be set here, or in `DD_TAGS` with `DD_TAGS="env:production"`. |
+| `DD_VERSION`                                     | String        | The version of your application, which can be set here, or in `DD_TAGS` with `DD_TAGS="version:<APPLICATION_VERSION>"`                              |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. New in version 0.38.   |
 | `DD_API_KEY`                                     | String        | Deprecated in version 0.55. The [Datadog API key][1] to use when uploading profiles. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. Supported in version 0.37.                                        |
 | `DD_PROFILING_API_KEY`                           | String        | Deprecated in version 0.37. The [Datadog API key][1] to use when uploading profiles. |
