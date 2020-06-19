@@ -1267,20 +1267,24 @@ main:
     url: synthetics/search/
     parent: synthetics
     weight: 6
-    - name: Settings
+  - name: Metrics
+    url: synthetics/metrics/
+    parent: synthetics
+    weight: 7  
+  - name: Settings
     url: synthetics/settings/
     parent: synthetics
-    weight: 7
+    weight: 8
   - name: Guides
     url: synthetics/guide/
     parent: synthetics
     identifier: synthetics_guides
-    weight: 8
+    weight: 9
   - name: Troubleshooting
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 9
+    weight: 10
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: nav_rum
