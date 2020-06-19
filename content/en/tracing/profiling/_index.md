@@ -34,10 +34,10 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 2. Update your service invocation to look like:
 
     ```text
-    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.api-key-file=<API_KEY_FILE> -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-    **Note**: With `dd-java-agent.jar` library versions 0.48+, if your organization is on Datadog EU site, add `-Ddd.site=datadoghq.eu` or set `DD_SITE=datadoghq.eu` as environment variable.
+    **Note**: From `dd-java-agent.jar` library versions [0.55][6]+ profiles are sent through the Datadog agent, deprecating the need to specify `-Ddd.profiling.api-key-file` and `-Ddd.site`. Please ensure that your agent version is **[7.20.2][5]+ or 6.20.2**+. With `dd-java-agent.jar` library versions 0.48-0.54, if your organization is on Datadog EU site, add `-Ddd.site=datadoghq.eu` or set `DD_SITE=datadoghq.eu` as environment variable.
 
 3. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
@@ -59,15 +59,17 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 | Arguments                     | Environment variable      | Description                                       |
 | ----------------------------- | ------------------------- | ------------------------------------------------- |
 | `-Ddd.profiling.enabled`      | DD_PROFILING_ENABLED      | Set to `true` to enable profiling.                |
-| `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | File that should contain the API key as a string. |
+| `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | Deprecated from 0.55+. File that should contain the API key as a string. |
 |                               | DD_PROFILING_API_KEY      | Datadog API key.                                  |
-| `-Ddd.site`                   | DD_SITE                   | Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. |
+| `-Ddd.site`                   | DD_SITE                   | Deprecated from 0.55+. Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. |
 
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [2]: https://app.datadoghq.com/profiling
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: /account_management/api-app-keys/#api-keys
+[5]: https://docs.datadoghq.com/agent/versions/upgrade_to_agent_v7/?tab=linux
+[6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.55.1
 {{% /tab %}}
 
 {{% tab "Python" %}}
