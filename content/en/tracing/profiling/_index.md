@@ -23,7 +23,7 @@ Profiling libraries are shipped within the following tracing language libraries.
 
 The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
-1. If you are already using Datadog, please upgrade your agent to version 7.20.2 or 6.20.2. 
+1. If you are already using Datadog, please upgrade your agent to version [7.20.2][7] or [6.20.2][7]. 
 
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
@@ -73,6 +73,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 [4]: /account_management/api-app-keys/#api-keys
 [5]: https://docs.datadoghq.com/agent/versions/upgrade_to_agent_v7/?tab=linux
 [6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.55.1
+[7]: https://app.datadoghq.com/account/settings#agent/overview
 {{% /tab %}}
 
 {{% tab "Python" %}}
