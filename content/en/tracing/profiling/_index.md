@@ -37,7 +37,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-    **Note**: From `dd-java-agent.jar` library versions [0.55][6]+ profiles are sent through the Datadog agent, deprecating the need to specify `-Ddd.profiling.api-key-file` and `-Ddd.site`. Please ensure that your agent version is **[7.20.2][5]+ or 6.20.2**+. With `dd-java-agent.jar` library versions 0.48-0.54, if your organization is on Datadog EU site, add `-Ddd.site=datadoghq.eu` or set `DD_SITE=datadoghq.eu` as environment variable.
+    **Note**: From `dd-java-agent.jar` library [versions 0.55][6]+ profiles are sent through the Datadog agent, deprecating the need to specify `-Ddd.profiling.api-key-file` and `-Ddd.site` (requires **[Agent 7.20.2][5]**+ or **6.20.2**+). With `dd-java-agent.jar` library versions 0.48-0.54, if your organization is on Datadog EU site, add `-Ddd.site=datadoghq.eu` or set `DD_SITE=datadoghq.eu` as environment variable.
 
 3. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
