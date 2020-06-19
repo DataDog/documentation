@@ -838,9 +838,7 @@ components:
         attributes:
           $ref: '#/components/schemas/RestrictionQueryCreateAttributes'
         type:
-          default: logs_restriction_queries
-          description: Restriction query resource type.
-          type: string
+          $ref: '#/components/schemas/LogsRestrictionQueriesType'
       type: object
     RestrictionQueryCreatePayload:
       description: Create a restriction query.
@@ -920,9 +918,7 @@ components:
         attributes:
           $ref: '#/components/schemas/RestrictionQueryUpdateAttributes'
         type:
-          default: logs_restriction_queries
-          description: Restriction query resource type.
-          type: string
+          $ref: '#/components/schemas/LogsRestrictionQueriesType'
       type: object
     RestrictionQueryUpdatePayload:
       description: Update a restriction query.

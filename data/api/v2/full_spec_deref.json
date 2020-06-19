@@ -3721,7 +3721,14 @@
           "type": {
             "default": "logs_restriction_queries",
             "description": "Restriction query resource type.",
-            "type": "string"
+            "enum": [
+              "logs_restriction_queries"
+            ],
+            "example": "logs_restriction_queries",
+            "type": "string",
+            "x-enum-varnames": [
+              "LOGS_RESTRICTION_QUERIES"
+            ]
           }
         },
         "type": "object"
@@ -3746,7 +3753,14 @@
               "type": {
                 "default": "logs_restriction_queries",
                 "description": "Restriction query resource type.",
-                "type": "string"
+                "enum": [
+                  "logs_restriction_queries"
+                ],
+                "example": "logs_restriction_queries",
+                "type": "string",
+                "x-enum-varnames": [
+                  "LOGS_RESTRICTION_QUERIES"
+                ]
               }
             },
             "type": "object"
@@ -3994,7 +4008,14 @@
           "type": {
             "default": "logs_restriction_queries",
             "description": "Restriction query resource type.",
-            "type": "string"
+            "enum": [
+              "logs_restriction_queries"
+            ],
+            "example": "logs_restriction_queries",
+            "type": "string",
+            "x-enum-varnames": [
+              "LOGS_RESTRICTION_QUERIES"
+            ]
           }
         },
         "type": "object"
@@ -4019,7 +4040,14 @@
               "type": {
                 "default": "logs_restriction_queries",
                 "description": "Restriction query resource type.",
-                "type": "string"
+                "enum": [
+                  "logs_restriction_queries"
+                ],
+                "example": "logs_restriction_queries",
+                "type": "string",
+                "x-enum-varnames": [
+                  "LOGS_RESTRICTION_QUERIES"
+                ]
               }
             },
             "type": "object"
@@ -11859,7 +11887,14 @@
                       "type": {
                         "default": "logs_restriction_queries",
                         "description": "Restriction query resource type.",
-                        "type": "string"
+                        "enum": [
+                          "logs_restriction_queries"
+                        ],
+                        "example": "logs_restriction_queries",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "LOGS_RESTRICTION_QUERIES"
+                        ]
                       }
                     },
                     "type": "object"
@@ -12636,7 +12671,14 @@
                       "type": {
                         "default": "logs_restriction_queries",
                         "description": "Restriction query resource type.",
-                        "type": "string"
+                        "enum": [
+                          "logs_restriction_queries"
+                        ],
+                        "example": "logs_restriction_queries",
+                        "type": "string",
+                        "x-enum-varnames": [
+                          "LOGS_RESTRICTION_QUERIES"
+                        ]
                       }
                     },
                     "type": "object"
