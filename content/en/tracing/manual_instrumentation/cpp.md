@@ -11,6 +11,10 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
+<div class="alert alert-info">
+If you have not yet read the setup instructions, please start with the <a href="https://docs.datadoghq.com/tracing/setup/cpp/">C++ Setup Instructions</a>.
+</div>
+
 ## Add tags
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.

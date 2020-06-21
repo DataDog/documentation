@@ -12,6 +12,9 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
+<div class="alert alert-info">
+If you have not yet read the instructions for auto-instrumentation and setup, please start with the <a href="https://docs.datadoghq.com/tracing/setup/python/">Python Setup Instructions</a>.
+</div>
 
 If you aren't using supported library instrumentation (see [library compatibility][1]), you may want to manually instrument your code.
 
