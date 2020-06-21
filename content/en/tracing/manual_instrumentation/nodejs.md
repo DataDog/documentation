@@ -13,6 +13,10 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
+<div class="alert alert-info">
+If you have not yet read the instructions for auto-instrumentation and setup, please start with the <a href="https://docs.datadoghq.com/tracing/setup/nodejs/">NodeJS Setup Instructions</a>.
+</div>
+
 If you aren’t using supported library instrumentation (see [library compatibility][1]), you may want to manually instrument your code.
 
 You may also want to extend the functionality of the `dd-trace` library or gain finer control over instrumenting your application. Several techniques are provided by the library to accomplish this.
