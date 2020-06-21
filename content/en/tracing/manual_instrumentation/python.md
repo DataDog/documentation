@@ -246,5 +246,5 @@ The tracer can now be used like in any other OpenTracing application. See [opent
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup/python/#compatibility
+[1]: /tracing/compatibility_requirements/python
 [2]: https://opentracing.io/guides/python/
