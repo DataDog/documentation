@@ -1253,7 +1253,7 @@ main:
     parent: synthetics
     identifier: synthetics_private_location
     weight: 3
-  - name: CI Pipelines
+  - name: CI Integration
     url: /synthetics/ci/
     parent: synthetics
     identifier: synthetics_ci
