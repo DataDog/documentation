@@ -128,7 +128,7 @@ Nous partons du principe que vous avez déjà installé le dernier ensemble de m
 Les notifications Datadog mentionnant @servicenow remplissent les tables intermédiaires sélectionnées dans votre carré ServiceNow. Veuillez noter que pour les étapes décrites ci-dessous, nous partons du principe que vous avez déjà configuré le carré d'intégration dans la page d'intégrations Datadog. Procédez ainsi comme suit :
 
 1. Depuis la liste déroulante, sélectionnez la table intermédiaire vers laquelle vous souhaitez envoyer les notifications.
-2. Pour vérifier que l'intégration est correctement configurée, ajoutez `@servicenow` dans une notification de monitor ou d'événement. Les données brutes remplissent les lignes dans la table temporaire et sont transmises à la table ServiceNow spécifiée dans les mappings et les transformations que vous avez créés.
+2. Pour vérifier que l'intégration est correctement configurée, ajoutez `@servicenow` dans une notification de monitor ou d'événement. Les données brutes remplissent les lignes dans la table temporaire et sont transmises à la table ServiceNow spécifiée dans les mappages et les transformations que vous avez créés.
 3. [Utilisez des transform maps](#personnaliser-les-donnees-avec-des-transform-maps) pour personnaliser le format des données envoyées aux tables.
 4. [Configurer le carré d'intégration ServiceNow dans Datadog](#configure-the-servicenow-tile-in-datadog)
 
@@ -162,7 +162,7 @@ La table « Import hosts » possède deux transform maps, une pour chaque prof
 
 {{< img src="integrations/servicenow/servicenow-cmdb-transform-maps.png" alt="Transform maps" >}}
 
-Pour en savoir plus sur la modification ou la création de mappings et de transformations supplémentaires, consultez la section [Définir des mappings personnalisés](#definir-des-mappings-personnalises).
+Pour en savoir plus sur la modification ou la création de mappages et de transformations supplémentaires, consultez la section [Définir des mappages personnalisés](#definir-des-mappages-personnalises).
 
 **Pour ITOM et ITSM**
 
@@ -180,7 +180,7 @@ Si aucun événement n'apparaît dans vos tables ServiceNow, et que :
 
 - L'intégration est configurée, une alerte se déclenche, mais aucun ticket n'est créé :
 
-  - Vérifiez que la table temporaire contient bien les données. Si c'est bien le cas, le problème est lié aux mappings et aux transformations. Vous pouvez débuguer davantage vos mappings et scripts en accédant à **Transform Errors** dans ServiceNow.
+  - Vérifiez que la table temporaire contient bien les données. Si c'est bien le cas, le problème est lié aux mappages et aux transformations. Vous pouvez débuguer davantage vos mappages et scripts en accédant à **Transform Errors** dans ServiceNow.
   - Vérifiez que vous utilisez la table intermédiaire spécifiée dans le carré.
 
   L'utilisateur ServiceNow doit posséder les rôles `rest_service` et `x_datad_datadog.user` afin de pouvoir accéder aux tables d'importation. Si vous utilisez l'ancienne méthode consistant à envoyer les notifications directement à la table Incident ou Event, les autorisations `itil` et `evt_mgmt_integration` sont alors nécessaires.
@@ -201,9 +201,9 @@ Une fois que ServiceNow est connecté à votre compte Datadog, les alertes reçu
 
 {{< img src="integrations/servicenow/servicenow-02-monitor-page.png" alt="ServiceNow" >}}
 
-### Utiliser des variables dans la charge utile des tickets et les mappings de champ
+### Utiliser des variables dans la charge utile des tickets et les mappages de champ
 
-Des variables peuvent être utilisées dans le corps de vos alertes ou dans les mappings de champ pour s'assurer que les détails de l'événement sont inclus dans ServiceNow. Par exemple, il est possible d'inclure le titre et la sévérité dans le champ ServiceNow approprié, ou encore d'ajouter un lien permettant de revenir vers l'incident spécifique dans Datadog directement depuis le ticket ServiceNow.
+Des variables peuvent être utilisées dans le corps de vos alertes ou dans les mappages de champ pour s'assurer que les détails de l'événement sont inclus dans ServiceNow. Par exemple, il est possible d'inclure le titre et la sévérité dans le champ ServiceNow approprié, ou encore d'ajouter un lien permettant de revenir vers l'incident spécifique dans Datadog directement depuis le ticket ServiceNow.
 
 {{< img src="integrations/servicenow/servicenow-variables.png" alt="Variables ServiceNow" >}}
 
@@ -219,13 +219,13 @@ Outre l'automatisation de la création et de la résolution de tickets, vous pou
 
 {{< img src="integrations/servicenow/servicenow-04-mention-servicenow.png" alt="annotation" >}}
 
-### Définir des mappings personnalisés
+### Définir des mappages personnalisés
 
 Cliquez sur **Datadog Incident Tables** (par exemple) et accédez au lien vers la transform map associée en bas de la page :
 
 {{< img src="integrations/servicenow/servicenow-datadog-incident-table.png" alt="intégration servicenow" >}}
 
-### Comprendre le mapping
+### Comprendre le mappage
 
 Cliquez sur le nom de la transform map pour en afficher les détails :
 
@@ -238,15 +238,15 @@ Deux champs importants se trouvent en haut de la page : `Source table` et `Targ
 **Remarques** :
 
 - La source désigne la table Import Set que vous avez sélectionnée (tables Datadog Incident), tandis que la cible (target) correspond à la table Incident (ou la table Event) dans laquelle les événements sont réellement stockés.
-- Les mappings de champ se trouvent en bas de la page. Certains mappings de base sont compris. C'est à cet endroit que vous pouvez sélectionner les champs à inclure, définir le format et sélectionner les champs cibles dans votre instance ServiceNow.
+- Les mappages de champ se trouvent en bas de la page. Certains mappages de base sont compris. C'est à cet endroit que vous pouvez sélectionner les champs à inclure, définir le format et sélectionner les champs cibles dans votre instance ServiceNow.
 
-### Ajouter un nouveau mapping de champ
+### Ajouter un nouveau mappage de champ
 
 Cliquez sur **New** :
 
 {{< img src="integrations/servicenow/servicenow-click-new.png" alt="intégration servicenow" >}}
 
-Sélectionnez les champs source et cible pour les mappings un à un :
+Sélectionnez les champs source et cible pour les mappages un à un :
 
 {{< img src="integrations/servicenow/servicenow-select-source-target.png" alt="intégration servicenow" >}}
 
@@ -254,7 +254,7 @@ Sinon, cochez la case **Use source script** et définissez les transformations 
 
 {{< img src="integrations/servicenow/servicenow-script-example.png" alt="intégration servicenow" >}}
 
-### Définir plusieurs mappings
+### Définir plusieurs mappages
 
 Utilisez **Mapping Assist** (sous Related Links) pour mapper plusieurs champs source et cible :
 
@@ -262,7 +262,7 @@ Utilisez **Mapping Assist** (sous Related Links) pour mapper plusieurs champs so
 
 ### Validation
 
-Pour vérifier que l'intégration est correctement configurée, ajoutez `@servicenow` dans une notification de monitor ou d'événement. Les données brutes remplissent les lignes dans la table temporaire et sont transmises à la table ServiceNow spécifiée dans les mappings et les transformations que vous avez créés.
+Pour vérifier que l'intégration est correctement configurée, ajoutez `@servicenow` dans une notification de monitor ou d'événement. Les données brutes remplissent les lignes dans la table temporaire et sont transmises à la table ServiceNow spécifiée dans les mappages et les transformations que vous avez créés.
 
 ## Pour aller plus loin
 

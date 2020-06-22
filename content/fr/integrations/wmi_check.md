@@ -2,6 +2,8 @@
 aliases:
   - /fr/integrations/wmi
 assets:
+  configuration:
+    spec: assets/configuration/spec.yaml
   dashboards: {}
   monitors: {}
   service_checks: assets/service_checks.json
@@ -37,9 +39,9 @@ Recevez des métriques de vos applications/serveurs Windows avec Windows Managem
 - Visualiser leurs performances
 - Corréler leur activité avec le reste de vos applications
 
-**Remarque** : il est recommandé d'utiliser plutôt le [check PDH][14] dans tous les cas, car il est moins coûteux et donc plus évolutif.
+**Remarque** : nous vous conseillons de privilégier le [check PDH][14] dans tous les cas, car sa charge système réduite le rend plus efficace à grande échelle.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -48,7 +50,7 @@ Si vous recueillez uniquement des métriques standard à partir de Microsoft Win
 1. Envoyez des compteurs de performance avec System.Diagnostics dans .NET, puis accédez-y via WMI.
 2. Implémentez un fournisseur WMI basé sur un objet COM pour votre application. Cette méthode est conseillée si vous utilisez un langage non pris en charge par .NET.
 
-Pour en savoir plus sur System.Diagnostics, consultez la [documentation MSDN][2]. Après avoir ajouté votre métrique, vous devriez être en mesure de la retrouver dans WMI. Pour parcourir les espaces de nommage WMI, vous pouvez utiliser cet outil pratique : [WMI Explorer][3]. Les mêmes informations peuvent être obtenues avec Powershell [ici][4]. Consultez également les informations fournies dans cet [article de la base de connaissances Datadog][5].
+Pour en savoir plus sur System.Diagnostics, consultez la [documentation MSDN][3]. Après avoir ajouté votre métrique, vous devriez être en mesure de la retrouver dans WMI. Pour parcourir les espaces de nommage WMI, vous pouvez utiliser cet outil pratique : [WMI Explorer][4]. Les mêmes informations peuvent être obtenues avec Powershell [ici][5]. Consultez également les informations fournies dans cet [article de la base de connaissances Datadog][6].
 
 Si vous attribuez la catégorie Ma_Nouvelle_Métrique à une nouvelle métrique, le chemin WMI correspond à ce qui suit :
 `\\<NomOrdinateur>\ROOT\CIMV2:Win32_PerfFormattedData_Ma_Nouvelle_Métrique`
@@ -98,7 +100,7 @@ _Cette fonction est disponible à partir de la version 5.3 de l'Agent._
 
 Chaque requête WMI a deux options obligatoires, `class` et `metrics`, ainsi que six options facultatives : `host`, `namespace`, `filters`, `provider`, `tag_by`, `constant_tags` et `tag_queries`.
 
-- `class` est le nom de la classe WMI, par exemple `Win32_OperatingSystem` ou `Win32_PerfFormattedData_PerfProc_Process`. De nombreux noms de classe standard sont disponibles dans la [documentation MSDN][6]. Les classes `Win32_FormattedData_*` fournissent par défaut de nombreux compteurs de performances utiles.
+- `class` est le nom de la classe WMI, par exemple `Win32_OperatingSystem` ou `Win32_PerfFormattedData_PerfProc_Process`. De nombreux noms de classe standard sont disponibles dans la [documentation MSDN][7]. Les classes `Win32_FormattedData_*` fournissent par défaut de nombreux compteurs de performances utiles.
 
 - `metrics` est la liste des métriques que vous souhaitez capturer, chaque élément de la
   liste étant un ensemble `[<NOM_PROPRIÉTÉ_WMI>, <NOM_MÉTRIQUE>, <TYPE_MÉTRIQUE>]` : 
@@ -107,14 +109,14 @@ Chaque requête WMI a deux options obligatoires, `class` et `metrics`, ainsi que
   - `<NOM_MÉTRIQUE>` est le nom que vous souhaitez voir apparaître dans Datadog.
   - `<TYPE_MÉTRIQUE>` correspond à l'une des options standards pour tous les checks de l'Agent, comme gauge, rate, histogram ou counter.
 
-- `host` est la cible facultative de la requête WMI, `localhost` étant utilisé par défaut. Si vous définissez cette option, assurez-vous que la gestion à distance est activée sur le host cible. [Cliquez ici][7] pour en savoir plus.
+- `host` est la cible facultative de la requête WMI, `localhost` étant utilisé par défaut. Si vous définissez cette option, assurez-vous que la gestion à distance est activée sur le host cible. [Cliquez ici][8] pour en savoir plus.
 
 - `namespace` est l'espace de nommage WMI facultatif sur lequel se connecter (`cimv2` par défaut).
 
 - `filters` est une liste de filtres à votre disposition pour la requête WMI. Par exemple, pour une classe WMI basée sur un processus, il peut être souhaitable de recueillir uniquement les métriques associées à certains processus exécutés sur votre machine. Vous pourriez donc ajouter un filtre pour chaque nom de processus. Il est également possible d'utiliser le caractère % comme wildcard.
 
 - `provider` est le fournisseur WMI facultatif (défini sur `32` par défaut pour l'Agent Datadog 32 bits ou `64` pour la version 64 bits). Il est utilisé pour demander des données WMI auprès du fournisseur choisi. Options disponibles : `32` ou `64`.
-  Consultez la [documentation MSDN][8] pour en savoir plus.
+  Consultez la [documentation MSDN][9] pour en savoir plus.
 
 - `tag_by` est facultatif et vous permet de taguer chaque métrique avec une propriété de la classe WMI que vous utilisez. Cela est uniquement utile lorsque vous avez plusieurs valeurs pour votre requête WMI.
 
@@ -136,17 +138,17 @@ Le paramètre `[IDProcess, Win32_Process, Handle, CommandLine]` applique à chaq
 
 #### Collecte de métriques
 
-Le check WMI peut potentiellement générer des [métriques custom][9], ce qui peut avoir une incidence sur votre [facturation][10]. 
+Le check WMI peut potentiellement générer des [métriques custom][9], ce qui peut avoir une incidence sur votre [facture][11]. 
 
 ### Validation
 
-[Lancez la sous-commande `status` de l'Agent][11] et cherchez `wmi_check` dans la section Checks.
+[Lancez la sous-commande `status` de l'Agent][12] et cherchez `wmi_check` dans la section Checks.
 
 ## Données collectées
 
 ### Métriques
 
-Consultez [metadata.csv][12] pour découvrir la liste complète des métriques fournies par cette intégration.
+Consultez [metadata.csv][13] pour découvrir la liste complète des métriques fournies par cette intégration.
 
 ### Événements
 
@@ -158,19 +160,19 @@ Le check WMI n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][13].
+Besoin d'aide ? Contactez [l'assistance Datadog][14].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/wmi_check/images/wmimetric.png
-[2]: https://msdn.microsoft.com/en-us/library/system.diagnostics.performancecounter(v=vs.110.aspx)
-[3]: https://wmie.codeplex.com
-[4]: https://msdn.microsoft.com/en-us/powershell/scripting/getting-started/cookbooks/getting-wmi-objects--get-wmiobject-
-[5]: https://docs.datadoghq.com/fr/integrations/faq/how-to-retrieve-wmi-metrics
-[6]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa394084.aspx
-[7]: https://technet.microsoft.com/en-us/library/Hh921475.aspx
-[8]: https://msdn.microsoft.com/en-us/library/aa393067.aspx
-[9]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics
-[10]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics
-[11]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[12]: https://github.com/DataDog/integrations-core/blob/master/wmi_check/metadata.csv
-[13]: https://docs.datadoghq.com/fr/help
-[14]: https://docs.datadoghq.com/fr/integrations/pdh_check/
+[2]: https://docs.datadoghq.com/fr/integrations/pdh_check/
+[3]: https://msdn.microsoft.com/en-us/library/system.diagnostics.performancecounter(v=vs.110.aspx
+[4]: https://wmie.codeplex.com
+[5]: https://msdn.microsoft.com/en-us/powershell/scripting/getting-started/cookbooks/getting-wmi-objects--get-wmiobject-
+[6]: https://docs.datadoghq.com/fr/integrations/faq/how-to-retrieve-wmi-metrics/
+[7]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa394084.aspx
+[8]: https://technet.microsoft.com/en-us/library/Hh921475.aspx
+[9]: https://msdn.microsoft.com/en-us/library/aa393067.aspx
+[10]: https://docs.datadoghq.com/fr/developers/metrics/custom_metrics/
+[11]: https://docs.datadoghq.com/fr/account_management/billing/custom_metrics/
+[12]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[13]: https://github.com/DataDog/integrations-core/blob/master/wmi_check/metadata.csv
+[14]: https://docs.datadoghq.com/fr/help/

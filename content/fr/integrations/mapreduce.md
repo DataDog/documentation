@@ -83,12 +83,12 @@ Le check Mapreduce n'inclut aucun événement.
 
 **mapreduce.resource_manager.can_connect**
 
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Resource Manager.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Resource Manager.
 Si ce n'est pas le cas, renvoie `OK`.
 
 **mapreduce.application_master.can_connect**
 
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Application Master.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Application Master.
 Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage

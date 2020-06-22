@@ -1,6 +1,9 @@
 ---
 assets:
-  dashboards: {}
+  configuration:
+    spec: assets/configuration/spec.yaml
+  dashboards:
+    Flink Overview: assets/dashboards/overview.json
   monitors: {}
   saved_views: {}
   service_checks: assets/service_checks.json
@@ -8,6 +11,7 @@ categories:
   - processing
   - data streams
   - dataflow
+  - log collection
 creates_events: false
 ddtype: check
 dependencies:
@@ -17,7 +21,7 @@ git_integration_title: flink
 guid: 8b3e5591-533e-4504-aabb-e697f07461ca
 integration_id: flink
 integration_title: Flink
-is_public: false
+is_public: true
 kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
@@ -34,22 +38,22 @@ supported_os:
 ---
 ## Présentation
 
-Ce check surveille [Flink][1]. Datadog recueille des métriques Flink via le [HTTP Reporter Datadog][4] de Flink, qui repose sur l'[API HTTP de Datadog][2].
+Ce check surveille [Flink][1]. Datadog recueille des métriques Flink via le [HTTP Reporter Datadog][2] de Flink, qui repose sur l'[API HTTP de Datadog][3].
 
 ## Configuration
 
 ### Installation
 
-Le check Flink est inclus avec le paquet de l'[Agent Datadog][3].
+Le check Flink est inclus avec le paquet de l'[Agent Datadog][4].
 Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 ### Configuration
 
 #### Collecte de métriques
 
-1. Configurez le [HTTP Reporter Datadog][4] dans Flink.
+1. Configurez le [HTTP Reporter Datadog][2] dans Flink.
 
-     Copiez `<RÉPERTOIRE_FLINK>/opt/flink-metrics-datadog-1.9.2.jar` dans votre dossier `<RÉPERTOIRE_FLINK>/lib`. Ajoutez les lignes suivantes dans votre fichier `<RÉPERTOIRE_FLINK>/conf/flink-conf.yaml`, en remplaçant `<DATADOG_API_KEY>` par votre [clé d'API][10] Datadog :
+     Copiez `<RÉPERTOIRE_FLINK>/opt/flink-metrics-datadog-<VERSION_REPORTER_DATADOG>.jar` dans votre dossier `<RÉPERTOIRE_FLINK>/lib`. Ajoutez les lignes suivantes dans votre fichier `<RÉPERTOIRE_FLINK>/conf/flink-conf.yaml`, en remplaçant `<DATADOG_API_KEY>` par votre [clé d'API][5] Datadog :
 
     ```yaml
     metrics.reporter.dghttp.class: org.apache.flink.metrics.datadog.DatadogHttpReporter
@@ -69,7 +73,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
      **Remarque** : vous devez remapper les contextes système pour envoyer des métriques Flink. Sans cela, les données sont envoyées sous la forme de métriques custom.
 
-3. Configurez des [tags][4] supplémentaires dans le fichier `<RÉPERTOIRE_FLINK>/conf/flink-conf.yaml`. L'exemple ci-dessous définit des tags personnalisés :
+3. Configurez des [tags][2] supplémentaires dans le fichier `<RÉPERTOIRE_FLINK>/conf/flink-conf.yaml`. L'exemple ci-dessous définit des tags personnalisés :
 
     ```yaml
     metrics.reporter.dghttp.tags: <KEY1>:<VALUE1>, <KEY1>:<VALUE2>
@@ -83,7 +87,7 @@ Vous n'avez donc rien d'autre à installer sur votre serveur.
 
 _Disponible à partir de la version > 6.0 de l'Agent_
 
-1. Flink utilise le logger `log4j` par défaut. Pour activer la journalisation dans un fichier et personnaliser le format, modifiez le fichier `log4j.properties`, `log4j-cli.properties`, `log4j-yarn-session.properties` ou `log4j-console.properties` file. Consultez la [documentation de Flink][13] (en anglais) pour obtenir les configurations par défaut. Voici la configuration par défaut de `log4j.properties` :
+1. Flink utilise le logger `log4j` par défaut. Pour activer la journalisation dans un fichier et personnaliser le format, modifiez le fichier `log4j.properties`, `log4j-cli.properties`, `log4j-yarn-session.properties` ou `log4j-console.properties`. Consultez la [documentation de Flink][6] (en anglais) pour obtenir les configurations par défaut. Voici la configuration par défaut de `log4j.properties` :
 
    ```conf
    log4j.appender.file=org.apache.log4j.FileAppender
@@ -101,7 +105,7 @@ _Disponible à partir de la version > 6.0 de l'Agent_
 
      `2020-02-03 18:43:12,251` est un exemple d'horodatage valide.
 
-     Dupliquez et modifiez le [pipeline d'intégration][11] si vous utilisez un autre format.
+     Dupliquez et modifiez le [pipeline d'intégration][7] si vous utilisez un autre format.
 
 3. La collecte de logs est désactivée par défaut dans l'Agent Datadog. Vous devez l'activer dans `datadog.yaml` :
 
@@ -109,7 +113,7 @@ _Disponible à partir de la version > 6.0 de l'Agent_
    logs_enabled: true
    ```
 
-4. Supprimez la mise en commentaire du bloc de configuration des logs du fichier `flink.d/conf.yaml` et modifiez les paramètres. Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple flink.d/conf.yaml][12] pour découvrir toutes les options de configuration disponibles.
+4. Supprimez la mise en commentaire du bloc de configuration des logs du fichier `flink.d/conf.yaml` et modifiez les paramètres. Modifiez les valeurs des paramètres `path` et `service` en fonction de votre environnement. Consultez le [fichier d'exemple flink.d/conf.yaml][8] pour découvrir toutes les options de configuration disponibles.
 
    ```yaml
    logs:
@@ -124,11 +128,11 @@ _Disponible à partir de la version > 6.0 de l'Agent_
        #    name: new_log_start_with_date
    ```
 
-5. [Redémarrez l'Agent][6].
+5. [Redémarrez l'Agent][9].
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][7] et cherchez `flink` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][10] et cherchez `flink` dans la section Checks.
 
 ## Données collectées
 
@@ -146,18 +150,17 @@ Flink n'inclut aucun événement.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][9].
+Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
 [1]: https://flink.apache.org/
-[2]: https://docs.datadoghq.com/fr/api/?lang=bash#api-reference
-[3]: https://app.datadoghq.com/account/settings#agent
-[4]: https://ci.apache.org/projects/flink/flink-docs-release-1.9/monitoring/metrics.html#datadog-orgapacheflinkmetricsdatadogdatadoghttpreporter
-[5]: https://ci.apache.org/projects/flink/flink-docs-stable/monitoring/metrics.html#system-scope
-[6]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-core/blob/master/flink/metadata.csv
-[9]: https://docs.datadoghq.com/fr/help
-[10]: https://app.datadoghq.com/account/settings#api
-[11]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
-[12]: https://github.com/DataDog/integrations-core/blob/master/flink/datadog_checks/flink/data/conf.yaml.example
-[13]: https://github.com/apache/flink/tree/master/flink-dist/src/main/flink-bin/conf
+[2]: https://ci.apache.org/projects/flink/flink-docs-release-1.9/monitoring/metrics.html#datadog-orgapacheflinkmetricsdatadogdatadoghttpreporter
+[3]: https://docs.datadoghq.com/fr/api/?lang=bash#api-reference
+[4]: https://app.datadoghq.com/account/settings#agent
+[5]: https://app.datadoghq.com/account/settings#api
+[6]: https://github.com/apache/flink/tree/master/flink-dist/src/main/flink-bin/conf
+[7]: https://docs.datadoghq.com/fr/logs/processing/#integration-pipelines
+[8]: https://github.com/DataDog/integrations-core/blob/master/flink/datadog_checks/flink/data/conf.yaml.example
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://github.com/DataDog/integrations-core/blob/master/flink/metadata.csv
+[12]: https://docs.datadoghq.com/fr/help/

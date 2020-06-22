@@ -63,13 +63,13 @@ Activez le fournisseur de configuration `clusterchecks` dans l'Agent Datadog ex�
           polling: true
     ```
 
-[Redémarrez l'Agent][4] pour prendre en compte le changement de configuration.
+[Redémarrez l'Agent][11] pour prendre en compte le changement de configuration.
 
-**Remarque** : le [chart Helm Datadog][6] offre la possibilité de déployer, via le champ `clusterChecksRunner`, un ensemble d'Agents Datadog configurés pour exécuter des checks de cluster uniquement.
+**Remarque** : le [chart Helm Datadog][4] offre la possibilité de déployer, via le champ `clusterChecksRunner`, un ensemble d'Agents Datadog configurés pour exécuter des checks de cluster uniquement.
 
 ### Checks custom
 
-L'exécution de [checks custom de l'Agent][7] en tant que checks de cluster est prise en charge, tant que tous les Agents de nœud sont en mesure de l'exécuter. Cela signifie que le code de vos checks :
+L'exécution de [checks custom de l'Agent][5] en tant que checks de cluster est prise en charge, tant que tous les Agents de nœud sont en mesure de les exécuter. Cela signifie que le code de vos checks :
 
 - Doit être installé sur tous les Agents de nœud où le fournisseur de configuration `clusterchecks` est activé.
 - Ne doit **pas** dépendre de ressources locales qui ne sont pas accessibles par tous les Agents.
@@ -104,7 +104,7 @@ Lorsque l'IP d'une ressource donnée est fixe (endpoint de service externe, URL 
 
 #### Exemple : check MySQL sur une base de données CloudSQL
 
-Après avoir configuré une instance CloudSQL et un [utilisateur Datadog][8], montez un fichier `/conf.d/mysql.yaml` dans le conteneur de l'Agent de cluster avec le contenu suivant :
+Après avoir configuré une instance CloudSQL et un [utilisateur Datadog][6], montez un fichier `/conf.d/mysql.yaml` dans le conteneur de l'Agent de cluster avec le contenu suivant :
 
 ```yaml
 cluster_check: true
@@ -120,7 +120,7 @@ Le champ `cluster_check` informe l'Agent de cluster qu'il doit déléguer ce che
 
 ### Source du modèle : Annotations de service Kubernetes
 
-Vous pouvez annoter des services avec la syntaxe suivante, qui est similaire à la syntaxe pour l'[annotation de pods Kubernetes][9] :
+Vous pouvez annoter des services avec la syntaxe suivante, similaire à celle utilisée pour l'[annotation de pods Kubernetes][1] :
 
 ```yaml
 ad.datadoghq.com/service.check_names: '[<NOM_INTÉGRATION>]'
@@ -128,11 +128,22 @@ ad.datadoghq.com/service.init_configs: '[<CONFIG_INIT>]'
 ad.datadoghq.com/service.instances: '[<CONFIG_INSTANCE>]'
 ```
 
-La [template variable][10] `%%host%%` est prise en charge et remplacée par l'IP du service. Les tags `kube_namespace` et `kube_service` sont automatiquement ajoutés à l'instance.
+La [template variable][7] `%%host%%` est prise en charge et remplacée par l'IP du service. Les tags `kube_namespace` et `kube_service` sont automatiquement ajoutés à l'instance.
+
+### Source du modèle : Étiquettes standard
+
+```yaml
+tags.datadoghq.com/env: "<ENV>"
+tags.datadoghq.com/service: "<SERVICE>"
+tags.datadoghq.com/version: "<VERSION>"
+```
+
+Les étiquettes `tags.datadoghq.com` définissent `env`, `service` et même `version` en tant que tags sur les données générées par le check.
+Ces étiquettes standard font partie du [tagging de service unifié][8].
 
 #### Exemple : check HTTP sur un service basé sur NGINX
 
-La définition de service suivante expose les pods du déploiement `my-nginx` et exécute un [check HTTP][11] pour mesurer la latence du service à charge équilibrée :
+La définition de service suivante expose les pods du déploiement `my-nginx` et exécute un [check HTTP][9] pour mesurer la latence du service à équilibrage de charge :
 
 ```yaml
 apiVersion: v1
@@ -141,6 +152,9 @@ metadata:
     name: my-nginx
     labels:
         run: my-nginx
+        tags.datadoghq.com/env: "prod"
+        tags.datadoghq.com/service: "my-nginx"
+        tags.datadoghq.com/version: "1.19.0"
     annotations:
         ad.datadoghq.com/service.check_names: '["http_check"]'
         ad.datadoghq.com/service.init_configs: '[{}]'
@@ -160,7 +174,7 @@ spec:
         run: my-nginx
 ```
 
-De plus, chaque pod doit être surveillé avec le [check NGINX][12] pour permettre la surveillance de chaque worker ainsi que du service agrégé.
+De plus, chaque pod doit être surveillé avec le [check NGINX][10] pour permettre la surveillance de chaque worker ainsi que du service agrégé.
 
 ## Dépannage
 
@@ -209,8 +223,8 @@ Auto-discovery IDs:
 
 La commande `clusterchecks` vous permet d'inspecter l'état de la logique de distribution, notamment :
 
-- Les Agents de nœud qui communiquent activement avec l'Agent de cluster.
-- Les checks qui sont distribués sur chaque nœud.
+- les Agents de nœud qui communiquent activement avec l'Agent de cluster ; et
+- les checks qui sont distribués sur chaque nœud.
 
 ```text
 # kubectl exec <NOM_POD_AGENT_CLUSTER> agent clusterchecks
@@ -292,15 +306,13 @@ La commande `status` de l'Agent devrait indiquer que l'instance de check est en 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/kubernetes/integrations
-[2]: /fr/agent/cluster_agent
-[3]: /fr/agent/cluster_agent/setup
-[4]: /fr/agent/kubernetes/integrations
-[5]: /fr/agent/guide/agent-commands
-[6]: https://github.com/helm/charts/tree/master/stable/datadog
-[7]: /fr/developers/write_agent_check
-[8]: /fr/integrations/mysql
-[9]: /fr/agent/kubernetes/integrations/
-[10]: /fr/agent/faq/template_variables
-[11]: /fr/integrations/http_check
-[12]: /fr/integrations/nginx
+[1]: /fr/agent/kubernetes/integrations/
+[2]: /fr/agent/cluster_agent/
+[3]: /fr/agent/cluster_agent/setup/
+[4]: https://github.com/helm/charts/tree/master/stable/datadog
+[5]: /fr/developers/write_agent_check/
+[6]: /fr/integrations/mysql/
+[7]: /fr/agent/faq/template_variables/
+[8]: /fr/getting_started/tagging/unified_service_tagging
+[9]: /fr/integrations/http_check/
+[10]: /fr/integrations/nginx/

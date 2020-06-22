@@ -34,7 +34,7 @@ aliases:
 |:---------|:-------------------------------|:-------------------------|
 | `diff()` | Crée un graphique illustrant le delta de la métrique. | `diff(<NOM_MÉTRIQUE>{*})` |
 
-## Valeur du delta monolithique
+## Valeur du delta monotone
 
 | Fonction           | Description                                                                     | Exemple                            |
 |:-------------------|:--------------------------------------------------------------------------------|:-----------------------------------|

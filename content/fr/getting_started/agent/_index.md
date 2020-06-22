@@ -109,10 +109,10 @@ L'Agent envoie des événements à Datadog lorsqu'un Agent est démarré ou red�
 ### Checks de service
 
 **datadog.agent.up** : 
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Datadog. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Datadog. Si ce n'est pas le cas, renvoie `OK`.
 
 **datadog.agent.check_status** : 
-Renvoie `CRITICAL` si un check de l'Agent n'est pas capable d'envoyer des métriques à Datadog. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si un check de l'Agent ne parvient pas à envoyer des métriques à Datadog. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

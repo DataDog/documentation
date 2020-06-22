@@ -1,11 +1,10 @@
 ---
 categories:
-- configuration & deployment
+  - configuration & deployment
 dependencies:
-- https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
-description: Transmettez automatiquement vos métriques, événements et checks de service Jenkins à Datadog.
-  to Datadog.
-doc_link: https://docs.datadoghq.com/integrations/jenkins/
+  - 'https://github.com/jenkinsci/datadog-plugin/blob/master/README.md'
+description: 'Transmettez automatiquement vos métriques, événements et checks de service Jenkins à Datadog. to Datadog.'
+doc_link: 'https://docs.datadoghq.com/integrations/jenkins/'
 git_integration_title: jenkins
 has_logo: true
 integration_title: Jenkins
@@ -13,11 +12,8 @@ is_public: true
 kind: integration
 name: jenkins
 public_title: Intégration Datadog/Jenkins
-short_description: Transmettez automatiquement vos métriques, événements et checks de service Jenkins à Datadog.
-  checks to Datadog.
+short_description: 'Transmettez automatiquement vos métriques, événements et checks de service Jenkins à Datadog. checks to Datadog.'
 ---
-
-
 Ce plug-in Jenkins transmet automatiquement des métriques, des événements et des checks de service à un compte Datadog.
 
 **Remarque** : la [page du plug-in d'intégration continue Jenkins][1] (disponible en anglais) reprend les informations de cette page.
@@ -26,13 +22,24 @@ Ce plug-in Jenkins transmet automatiquement des métriques, des événements et 
 
 ### Installation
 
-_Ce plug-in nécessite [Jenkins 1.580.1][2] ou une version ultérieure._
+_Ce plug-in nécessite [Jenkins 2.164.1][2] ou une version ultérieure._
 
 Installez le plug-in depuis l'[Update Center][3] (disponible en accédant à `Manage Jenkins -> Manage Plugins`) dans votre installation Jenkins :
 
 1. Sélectionnez l'onglet `Available`, cherchez `Datadog`, puis cochez la case en regard de l'option `Datadog Plugin`.
 2. Installez le plug-in en cliquant sur l'un des deux boutons en bas de l'écran.
-3. Pour vérifier que le plug-in est installé, cherchez `Datadog Plugin` dans l'onglet `Installed`. Si c'est bien le cas, passez à la section Configuration ci-dessous.
+3. Pour vérifier que le plug-in est installé, cherchez `Datadog Plugin` dans l'onglet `Installed`.
+4. Créez un [fichier source de collecte de logs personnalisé][13]. Pour ce faire, créez un fichier `conf.yaml` au sein de `conf.d/jenkins.d` avec le contenu suivant :
+  ```
+  logs:
+
+    -type: tcp 
+     port: 10518 
+     service: <SERVICE>
+     source: jenkins
+  ```
+
+  Poursuivez votre lecture pour découvrir comment configurer le plug-in.
 
 **Remarque** : si une version inattendue de `Datadog Plugin` s'affiche, accédez à `Manage Jenkins`, puis exécutez la commande `Check Now` depuis l'écran `Manage Plugins`.
 
@@ -135,7 +142,7 @@ La journalisation repose sur l'utilisation de `java.util.Logger`, un logger qui 
 
 ### Personnalisation globale
 
-Depuis la page de configuration globale, accédez à `Manage Jenkins -> Configure System` pour personnaliser votre configuration avec les éléments suivants :
+Pour personnaliser votre configuration globale, dans Jenkins, accédez à `Manage Jenkins -> Configure System`, puis cliquez sur le bouton **Advanced**. Voici la liste des options disponibles :
 
 | Personnalisation              | Description                                                                                                                                                                                                                                 | Variable d'environnement                          |
 |----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
@@ -165,84 +172,85 @@ Ce plug-in recueille les [événements](#evenements), [métriques](#metriques) e
 
 #### Type d'événement par défaut
 
-| Nom de l'événement      | Déclenché par              | Tags par défaut                                      | Métrique RATE associée  |
-|-----------------|---------------------------|---------------------------------------------------|-------------------------|
-| Build started   | `RunListener#onStarted`   | `jenkins_url`, `job`, `node`, `user_id`           | `jenkins.job.started`   |
-| Build aborted   | `RunListener#onDeleted`   | `jenkins_url`, `job`, `node`, `user_id`           | `jenkins.job.aborted`   |
-| Build completed | `RunListener#onCompleted` | `jenkins_url`, `job`, `node`, `result`, `user_id` | `jenkins.job.completed` |
+| Nom de l'événement      | Déclenché par              | Tags par défaut                                                              | Métrique RATE associée  |
+|-----------------|---------------------------|---------------------------------------------------------------------------|-------------------------|
+| Build started   | `RunListener#onStarted`   | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `user_id`           | `jenkins.job.started`   |
+| Build aborted   | `RunListener#onDeleted`   | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `user_id`           | `jenkins.job.aborted`   |
+| Build completed | `RunListener#onCompleted` | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `result`, `user_id` | `jenkins.job.completed` |
+| SCM checkout    | `SCMListener#onCheckout`  | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `user_id`           | `jenkins.scm.checkout`  |
 
-#### Type des événements de gestion des commandes source
-
-| Nom de l'événement   | Déclenché par             | Tags par défaut                             | Métrique RATE associée |
-|--------------|--------------------------|-----------------------------------------|------------------------|
-| SCM checkout | `SCMListener#onCheckout` | `jenkins_url`, `job`, `node`, `user_id` | `jenkins.scm.checkout` |
+REMARQUE : `event_type` est toujours défini sur `default` pour les métriques et événements ci-dessus.
 
 #### Type des événements système
 
-| Nom de l'événement                   | Déclenché par                            | Tags par défaut                       | Métrique RATE associée                 |
-|------------------------------|-----------------------------------------|------------------------------------|----------------------------------------|
-| Computer Online              | `ComputerListener#onOnline`             | `jenkins_url`                      | `jenkins.computer.online`              |
-| Computer Offline             | `ComputerListener#onOffline`            | `jenkins_url`                      | `jenkins.computer.online`              |
-| Computer TemporarilyOnline   | `ComputerListener#onTemporarilyOnline`  | `jenkins_url`                      | `jenkins.computer.temporarily_online`  |
-| Computer TemporarilyOffline  | `ComputerListener#onTemporarilyOffline` | `jenkins_url`                      | `jenkins.computer.temporarily_offline` |
-| Computer LaunchFailure       | `ComputerListener#onLaunchFailure`      | `jenkins_url`                      | `jenkins.computer.launch_failure`      |
-| Item Created                 | `ItemListener#onCreated`                | `jenkins_url`, `user_id`           | `jenkins.item.created`                 |
-| Item Deleted                 | `ItemListener#onDeleted`                | `jenkins_url`, `user_id`           | `jenkins.item.deleted`                 |
-| Item Updated                 | `ItemListener#onUpdated`                | `jenkins_url`, `user_id`           | `jenkins.item.updated`                 |
-| Item Copied                  | `ItemListener#onCopied`                 | `jenkins_url`, `user_id`           | `jenkins.item.copied`                  |
-| Item Location Changed        | `ItemListener#onLocationChanged`        | `jenkins_url`, `user_id`           | `jenkins.item.location_changed`        |
-| Config Changed               | `SaveableListener#onChange`             | `jenkins_url`, `user_id`           | `jenkins.config.changed`               |
+| Nom de l'événement                   | Déclenché par                            | Tags par défaut                                                            | Métrique RATE associée                 |
+|------------------------------|-----------------------------------------|-------------------------------------------------------------------------|----------------------------------------|
+| Computer Online              | `ComputerListener#onOnline`             | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.online`              |
+| Computer Offline             | `ComputerListener#onOffline`            | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.offline`             |
+| Computer TemporarilyOnline   | `ComputerListener#onTemporarilyOnline`  | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.temporarily_online`  |
+| Computer TemporarilyOffline  | `ComputerListener#onTemporarilyOffline` | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.temporarily_offline` |
+| Computer LaunchFailure       | `ComputerListener#onLaunchFailure`      | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.launch_failure`      |
+| Item Created                 | `ItemListener#onCreated`                | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.created`                 |
+| Item Deleted                 | `ItemListener#onDeleted`                | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.deleted`                 |
+| Item Updated                 | `ItemListener#onUpdated`                | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.updated`                 |
+| Item Copied                  | `ItemListener#onCopied`                 | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.copied`                  |
+| Item Location Changed        | `ItemListener#onLocationChanged`        | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.location_changed`        |
+| Config Changed               | `SaveableListener#onChange`             | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.config.changed`               |
+
+REMARQUE : `event_type` est toujours défini sur `system` pour les métriques et événements ci-dessus.
 
 #### Type des événements de sécurité
 
-| Nom de l'événement                  | Déclenché par                            | Tags par défaut                       | Métrique RATE associée       |
-|-----------------------------|-----------------------------------------|------------------------------------|------------------------------|
-| User Authenticated          | `SecurityListener#authenticated`        | `jenkins_url`, `user_id`           | `jenkins.user.authenticated` |
-| User failed To Authenticate | `SecurityListener#failedToAuthenticate` | `jenkins_url`, `user_id`           | `jenkins.user.access_denied` |
-| User loggedOut              | `SecurityListener#loggedOut`            | `jenkins_url`, `user_id`           | `jenkins.user.logout`        |
+| Nom de l'événement                  | Déclenché par                            | Tags par défaut                                     | Métrique RATE associée       |
+|-----------------------------|-----------------------------------------|--------------------------------------------------|------------------------------|
+| User Authenticated          | `SecurityListener#authenticated`        | `event_type`, `jenkins_url`, `user_id`           | `jenkins.user.authenticated` |
+| User failed To Authenticate | `SecurityListener#failedToAuthenticate` | `event_type`, `jenkins_url`, `user_id`           | `jenkins.user.access_denied` |
+| User loggedOut              | `SecurityListener#loggedOut`            | `event_type`, `jenkins_url`, `user_id`           | `jenkins.user.logout`        |
+
+REMARQUE : `event_type` est toujours défini sur `security` pour les métriques et événements ci-dessus.
 
 ### Métriques
 
-| Nom de la métrique                            | Description                                                    | Tags par défaut                                              |
-|----------------------------------------|----------------------------------------------------------------|-----------------------------------------------------------|
-| `jenkins.computer.launch_failure`      | Taux d'échec des lancements d'ordinateur.                              | `jenkins_url`                                             |
-| `jenkins.computer.offline`             | Taux d'ordinateurs en cours de déconnexion.                                | `jenkins_url`                                             |
-| `jenkins.computer.online`              | Taux d'ordinateurs en cours de connexion.                                 | `jenkins_url`                                             |
-| `jenkins.computer.temporarily_offline` | Taux d'ordinateurs en cours de déconnexion temporaire.                    | `jenkins_url`                                             |
-| `jenkins.computer.temporarily_online`  | Taux d'ordinateurs en cours de connexion temporaire.                     | `jenkins_url`                                             |
-| `jenkins.config.changed`               | Taux de configurations en cours de modification.                                 | `jenkins_url`, `user_id`                                  |
-| `jenkins.executor.count`               | Nombre d'exécuteurs.                                                | `jenkins_url`, `node_hostname`, `node_name`, `node_label` |
-| `jenkins.executor.free`                | Nombre d'exécuteurs non utilisés.                                     | `jenkins_url`, `node_hostname`, `node_name`, `node_label` |
-| `jenkins.executor.in_use`              | Nombre d'exécuteurs inactifs.                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label` |
-| `jenkins.item.copied`                  | Taux d'éléments en cours de copie.                                    | `jenkins_url`, `user_id`                                  |
-| `jenkins.item.created`                 | Taux d'éléments en cours de création.                                   | `jenkins_url`, `user_id`                                  |
-| `jenkins.item.deleted`                 | Taux d'éléments en cours de suppression.                                   | `jenkins_url`, `user_id`                                  |
-| `jenkins.item.location_changed`        | Taux d'éléments en cours de déplacement.                                     | `jenkins_url`, `user_id`                                  |
-| `jenkins.item.updated`                 | Taux d'éléments en cours de mise à jour.                                   | `jenkins_url`, `user_id`                                  |
-| `jenkins.job.aborted`                  | Taux de tâches abandonnées.                                          | `jenkins_url`, `job`, `node`, `user_id`                   |
-| `jenkins.job.completed`                | Taux de tâches terminées.                                        | `jenkins_url`, `job`, `node`, `result`, `user_id`         |
-| `jenkins.job.cycletime`                | Durée du cycle de conception.                                              | `jenkins_url`, `job`, `node`, `result`, `user_id`         |
-| `jenkins.job.duration`                 | Durée de la conception (en secondes).                                   | `jenkins_url`, `job`, `node`, `result`, `user_id`         |
-| `jenkins.job.feedbacktime`             | Durée de retour entre le commit du code et l'échec d'une tâche.                 | `jenkins_url`, `job`, `node`, `result`, `user_id`         |
-| `jenkins.job.leadtime`                 | Délai de conception.                                               | `jenkins_url`, `job`, `node`, `result`, `user_id`         |
-| `jenkins.job.mtbf`                     | MTBF : durée entre la dernière réussite de tâche et l'échec de la tâche actuelle. | `jenkins_url`, `job`, `node`, `result`, `user_id`         |
-| `jenkins.job.mttr`                     | MTTR : durée entre le dernier échec de tâche et la réussite de tâche actuelle. | `jenkins_url`, `job`, `node`, `result`, `user_id`         |
-| `jenkins.job.started`                  | Taux de tâches commencées.                                          | `jenkins_url`, `job`, `node`, `user_id`                   |
-| `jenkins.job.waiting`                  | Délai d'attente d'exécution de la tâche (en millisecondes).           | `jenkins_url`, `job`, `node`, `user_id`                   |
-| `jenkins.node.count`                   | Nombre total de nœuds.                                           | `jenkins_url`                                             |
-| `jenkins.node.offline`                 | Nombre de nœuds hors ligne.                                           | `jenkins_url`                                             |
-| `jenkins.node.online`                  | Nombre de nœuds en ligne.                                            | `jenkins_url`                                             |
-| `jenkins.plugin.count`                 | Nombre de plug-ins.                                                 | `jenkins_url`                                             |
-| `jenkins.project.count`                | Nombre de projets.                                                 | `jenkins_url`                                             |
-| `jenkins.queue.size`                   | Taille de la file d'attente.                                                    | `jenkins_url`                                             |
-| `jenkins.queue.buildable`              | Nombre d'éléments pouvant être conçus dans la file d'attente.                             | `jenkins_url`                                             |
-| `jenkins.queue.pending`                | Nombre d'éléments en attente dans la file d'attente.                               | `jenkins_url`                                             |
-| `jenkins.queue.stuck`                  | Nombre d'éléments coincés dans la file d'attente.                                 | `jenkins_url`                                             |
-| `jenkins.queue.blocked`                | Nombre d'éléments bloqués dans la file d'attente.                               | `jenkins_url`                                             |
-| `jenkins.scm.checkout`                 | Taux de basculements SCM.                                         | `jenkins_url`, `job`, `node`, `user_id`                   |
-| `jenkins.user.access_denied`           | Taux d'échecs de l'authentification d'utilisateurs.                         | `jenkins_url`, `user_id`                                  |
-| `jenkins.user.authenticated`           | Taux d'utilisateurs en cours d'authentification.                                  | `jenkins_url`, `user_id`                                  |
-| `jenkins.user.logout`                  | Taux d'utilisateurs en cours de déconnexion.                                     | `jenkins_url`, `user_id`                                  |
+| Nom de la métrique                            | Description                                                    | Tags par défaut                                                |
+|----------------------------------------|----------------------------------------------------------------|-------------------------------------------------------------|
+| `jenkins.computer.launch_failure`      | Taux d'échec des lancements d'ordinateur.                              | `jenkins_url`                                               |
+| `jenkins.computer.offline`             | Taux d'ordinateurs en cours de déconnexion.                                | `jenkins_url`                                               |
+| `jenkins.computer.online`              | Taux d'ordinateurs en cours de connexion.                                 | `jenkins_url`                                               |
+| `jenkins.computer.temporarily_offline` | Taux d'ordinateurs en cours de déconnexion temporaire.                    | `jenkins_url`                                               |
+| `jenkins.computer.temporarily_online`  | Taux d'ordinateurs en cours de connexion temporaire.                     | `jenkins_url`                                               |
+| `jenkins.config.changed`               | Taux de configurations en cours de modification.                                 | `jenkins_url`, `user_id`                                    |
+| `jenkins.executor.count`               | Nombre d'exécuteurs.                                                | `jenkins_url`, `node_hostname`, `node_name`, `node_label`   |
+| `jenkins.executor.free`                | Nombre d'exécuteurs non utilisés.                                     | `jenkins_url`, `node_hostname`, `node_name`, `node_label`   |
+| `jenkins.executor.in_use`              | Nombre d'exécuteurs inactifs.                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`   |
+| `jenkins.item.copied`                  | Taux d'éléments en cours de copie.                                    | `jenkins_url`, `user_id`                                    |
+| `jenkins.item.created`                 | Taux d'éléments en cours de création.                                   | `jenkins_url`, `user_id`                                    |
+| `jenkins.item.deleted`                 | Taux d'éléments en cours de suppression.                                   | `jenkins_url`, `user_id`                                    |
+| `jenkins.item.location_changed`        | Taux d'éléments en cours de déplacement.                                     | `jenkins_url`, `user_id`                                    |
+| `jenkins.item.updated`                 | Taux d'éléments en cours de mise à jour.                                   | `jenkins_url`, `user_id`                                    |
+| `jenkins.job.aborted`                  | Taux de tâches abandonnées.                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
+| `jenkins.job.completed`                | Taux de tâches terminées.                                        | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
+| `jenkins.job.cycletime`                | Durée du cycle de conception.                                              | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
+| `jenkins.job.duration`                 | Durée de la conception (en secondes).                                   | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
+| `jenkins.job.feedbacktime`             | Durée de retour entre le commit du code et l'échec d'une tâche.                 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
+| `jenkins.job.leadtime`                 | Délai de conception.                                               | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
+| `jenkins.job.mtbf`                     | MTBF : durée entre la dernière réussite de tâche et l'échec de la tâche actuelle. | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
+| `jenkins.job.mttr`                     | MTTR : durée entre le dernier échec de tâche et la réussite de tâche actuelle. | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id` |
+| `jenkins.job.started`                  | Taux de tâches commencées.                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
+| `jenkins.job.waiting`                  | Délai d'attente d'exécution de la tâche (en millisecondes).           | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
+| `jenkins.node.count`                   | Nombre total de nœuds.                                           | `jenkins_url`                                               |
+| `jenkins.node.offline`                 | Nombre de nœuds hors ligne.                                           | `jenkins_url`                                               |
+| `jenkins.node.online`                  | Nombre de nœuds en ligne.                                            | `jenkins_url`                                               |
+| `jenkins.plugin.count`                 | Nombre de plug-ins.                                                 | `jenkins_url`                                               |
+| `jenkins.project.count`                | Nombre de projets.                                                 | `jenkins_url`                                               |
+| `jenkins.queue.size`                   | Taille de la file d'attente.                                                    | `jenkins_url`                                               |
+| `jenkins.queue.buildable`              | Nombre d'éléments pouvant être conçus dans la file d'attente.                             | `jenkins_url`                                               |
+| `jenkins.queue.pending`                | Nombre d'éléments en attente dans la file d'attente.                               | `jenkins_url`                                               |
+| `jenkins.queue.stuck`                  | Nombre d'éléments coincés dans la file d'attente.                                 | `jenkins_url`                                               |
+| `jenkins.queue.blocked`                | Nombre d'éléments bloqués dans la file d'attente.                               | `jenkins_url`                                               |
+| `jenkins.scm.checkout`                 | Taux de basculements SCM.                                         | `branch`, `jenkins_url`, `job`, `node`, `user_id`           |
+| `jenkins.user.access_denied`           | Taux d'échecs de l'authentification d'utilisateurs.                         | `jenkins_url`, `user_id`                                    |
+| `jenkins.user.authenticated`           | Taux d'utilisateurs en cours d'authentification.                                  | `jenkins_url`, `user_id`                                    |
+| `jenkins.user.logout`                  | Taux d'utilisateurs en cours de déconnexion.                                     | `jenkins_url`, `user_id`                                    |
 
 ### Checks de service
 
@@ -268,7 +276,7 @@ Consultez le [document relatif au développement][12] (en anglais) pour obtenir 
 
 
 [1]: https://plugins.jenkins.io/datadog
-[2]: http://updates.jenkins-ci.org/download/war/1.580.1/jenkins.war
+[2]: http://updates.jenkins-ci.org/download/war/1.632/jenkins.war
 [3]: https://wiki.jenkins-ci.org/display/JENKINS/Plugins#Plugins-Howtoinstallplugins
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://github.com/jenkinsci/docker
@@ -279,3 +287,4 @@ Consultez le [document relatif au développement][12] (en anglais) pour obtenir 
 [10]: https://github.com/jenkinsci/datadog-plugin/blob/master/CHANGELOG.md
 [11]: https://github.com/jenkinsci/datadog-plugin/blob/master/CONTRIBUTING.md
 [12]: https://github.com/jenkinsci/datadog-plugin/blob/master/DEVELOPMENT.md
+[13]: https://docs.datadoghq.com/fr/agent/logs/?tab=tcpudp#custom-log-collection
