@@ -54,8 +54,6 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
     java -jar my-service.jar -javaagent:dd-java-agent.jar ...
     ```
 
-- Because profiles are sent directly to Datadog without using the Datadog Agent, you must pass a valid [Datadog API key][4].
-
 - As an alternative to passing arguments, you can use environment variable to set those parameters:
 
 | Arguments                     | Environment variable      | Description                                       |
