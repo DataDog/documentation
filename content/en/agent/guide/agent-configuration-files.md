@@ -81,7 +81,7 @@ An example for each Agent check configuration file is found in the `conf.yaml.ex
 └── frontend.yaml
 ```
 
-A special case are YAML files with the suffix `.default`.  These files will be loaded by the Agent automatically and help define the core set of checks that are always enabled.  To turn off one of these checks, simply change the suffix to `.disabled` or remove the file altogether.
+A special case are YAML files with the suffix `.default`. These files are loaded by the Agent automatically and help define the core set of checks that are always enabled. To turn off one of these checks, change the suffix to `.disabled` or remove the file altogether.
 
 Autodiscovery template files are stored in the configuration folder with the `auto_conf.yaml` file. For example, for the Redis check, here is the configuration in `redisdb.d/`:
 
