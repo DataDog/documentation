@@ -197,8 +197,8 @@ Lorsque vous utilisez activement la page des conteneurs, les métriques sont rec
 
 Il est possible d'inclure et/ou d'exclure des conteneurs pour la collecte en temps réel :
 
-* Pour exclure des conteneurs, transmettez la variable d'environnement `DD_AC_EXCLUDE` ou ajoutez `ac_exclude:` dans le fichier de configuration principal `datadog.yaml`.
-* Pour inclure des conteneurs, transmettez la variable d'environnement `DD_AC_INCLUDE` ou ajoutez `ac_include:` dans le fichier de configuration principal `datadog.yaml`.
+* Pour exclure des conteneurs, transmettez la variable d'environnement `DD_CONTAINER_EXCLUDE` ou ajoutez `ac_exclude:` dans le fichier de configuration principal `datadog.yaml`.
+* Pour inclure des conteneurs, transmettez la variable d'environnement `DD_CONTAINER_INCLUDE` ou ajoutez `ac_include:` dans le fichier de configuration principal `datadog.yaml`.
 
 Ces deux arguments ont pour valeur un **nom d'image**. Les expressions régulières sont également prises en charge.
 
