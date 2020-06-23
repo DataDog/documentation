@@ -145,7 +145,7 @@ Le check PowerDNS n'inclut aucun événement.
 
 **`powerdns.recursor.can_connect`** :
 
-Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à l'API de statistiques du recursor. Si ce n'est pas le cas, renvoie OK.
+Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à l'API de statistiques du recursor. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
 

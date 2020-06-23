@@ -7,16 +7,16 @@ aliases:
   - /fr/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
   - /fr/developers/faq/what-do-notifications-do-in-datadog
 further_reading:
-  - link: monitors/monitor_types
+  - link: /monitors/monitor_types/
     tag: Documentation
     text: Apprendre à créer un monitor
-  - link: monitors/manage_monitor
+  - link: /monitors/manage_monitor/
     tag: Documentation
     text: Gérer vos monitors
-  - link: monitors/downtimes
+  - link: /monitors/downtimes/
     tag: Documentation
     text: Planifier un downtime pour votre monitor
-  - link: monitors/monitor_status
+  - link: /monitors/monitor_status/
     tag: Documentation
     text: Consulter le statut de votre monitor
 ---
@@ -84,11 +84,11 @@ Informez votre équipe par l'intermédiaire des intégrations connectées en uti
 | [Slack][7]     | `@slack`     | [Exemples][8]  |
 | [Webhooks][9]  | `@webhook`   | [Exemples][10] |
 
-Consultez la [liste des intégrations][14] pouvant envoyer des notifications à votre équipe.
+Consultez la [liste des intégrations][11] pouvant envoyer des notifications à votre équipe.
 
 ### Via des modifications
 
-Chaque fois qu'un monitor est créé, modifié, désactivé ou supprimé, un [événement][11] est généré. Définissez l'option `Notify` pour envoyer des notifications aux membres de vos équipes ainsi qu'aux services de discussion à propos de ces événements.
+Chaque fois qu'un monitor est créé, modifié, désactivé ou supprimé, un [événement][12] est généré. Définissez l'option `Notify` pour envoyer des notifications aux membres de vos équipes ainsi qu'aux services de discussion à propos de ces événements.
 
 ### Modifier des restrictions
 
@@ -114,7 +114,7 @@ Utilisez des template variables pour personnaliser les notifications de votre mo
 
 #### Évaluation
 
-Les template variables qui renvoient des valeurs numériques prennent en charge les opérations et les fonctions. Vous pouvez ainsi effectuer des opérations mathématiques ou mettre en forme les valeurs. Pour en savoir plus, consultez la rubrique [Évaluation des template variables][12].
+Les template variables qui renvoient des valeurs numériques prennent en charge les opérations et les fonctions. Vous pouvez ainsi effectuer des opérations mathématiques ou mettre en forme les valeurs. Pour en savoir plus, consultez la rubrique [Évaluation des template variables][13].
 
 ### Variables de tags
 
@@ -150,8 +150,8 @@ Voici la liste des variables conditionnelles disponibles :
 | `{{^is_match}}`            | Le contexte ne correspond pas à la sous-chaîne indiquée.                  |
 | `{{#is_exact_match}}`      | Le contexte correspond exactement à la chaîne indiquée.                    |
 | `{{^is_exact_match}}`      | Le contexte ne correspond pas exactement à la chaîne indiquée.             |
-| `{{#is_no_data}}`          | Le monitor se déclenche en raison de données manquantes.                          |
-| `{{^is_no_data}}`          | Le monitor apprend qu'il manque des données.                            |
+| `{{#is_no_data}}`          | Le monitor s'est déclenché en raison de données manquantes.                          |
+| `{{^is_no_data}}`          | Le monitor ne s'est pas déclenché en raison de données manquantes.                      |
 | `{{#is_warning}}`          | Le monitor génère un avertissement.                                                  |
 | `{{^is_warning}}`          | Le monitor ne génère pas d'avertissement.                                          |
 | `{{#is_recovery}}`         | Le monitor est rétabli depuis un état `ALERT`, `WARNING` ou `NO DATA`.         |
@@ -253,7 +253,7 @@ Les notifications de test sont prises en charge pour les [types de monitors][1] 
 
 1. Après avoir défini votre monitor, testez les notifications à l'aide du bouton **Test Notifications** situé en bas de la page du monitor.
 
-2. Dans la fenêtre contextuelle des notifications de test, choisissez le scénario de monitor à tester. Vous pouvez uniquement tester les états disponibles dans la configuration du monitor, pour les seuils indiqués dans les conditions d'alerte. Les [seuils de rétablissement][13] sont la seule exception. En effet, Datadog envoie une notification de rétablissement lorsque le monitor n'est plus en alerte ou lorsqu'il ne possède aucune condition d'avertissement.
+2. Dans la fenêtre contextuelle des notifications de test, choisissez le scénario de monitor à tester. Vous pouvez uniquement tester les états disponibles dans la configuration du monitor, pour les seuils indiqués dans les conditions d'alerte. Les [seuils de rétablissement][14] sont la seule exception. En effet, Datadog envoie une notification de rétablissement lorsque le monitor n'est plus en alerte ou lorsqu'il ne possède aucune condition d'avertissement.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Tester les notifications pour ce monitor"  style="width:70%;" >}}
 
@@ -324,11 +324,11 @@ Vous pouvez personnaliser le lien vers les monitors en définissant des paramèt
 
 | Paramètre | Exemple        | Contenu affiché                                                                        |
 |-----------|----------------|---------------------------------------------------------------------------------|
-| `status`  | `status:Alert` | Les monitors avec un état d'alerte (statuts supplémentaires : `WARN`, `NO DATA` et `OK`) |
+| `status`  | `status:Alert` | Les monitors avec un état d'alerte (statuts supplémentaires : `WARN`, `NO DATA` et `OK`)   |
 | `muted`   | `muted: true`  | Les monitors désactivés (indiquez `false` pour afficher les monitors qui ne sont pas désactivés)                             |
 | `type`    | `type:log`     | Les log monitors (découvrez les autres [types de monitors][1])                                     |
 
-[1]: /fr/monitors/monitor_types
+[1]: /fr/monitors/monitor_types/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -374,17 +374,17 @@ Si `host.name` correspond à `<HOSTNAME>`, le modèle affiche :
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/monitors/monitor_types
+[1]: /fr/monitors/monitor_types/
 [2]: http://daringfireball.net/projects/markdown/syntax
-[3]: /fr/integrations/jira
+[3]: /fr/integrations/jira/
 [4]: /fr/integrations/jira/#use-cases
-[5]: /fr/integrations/pagerduty
+[5]: /fr/integrations/pagerduty/
 [6]: /fr/integrations/pagerduty/#troubleshooting
-[7]: /fr/integrations/slack
+[7]: /fr/integrations/slack/
 [8]: /fr/integrations/slack/#mentions-in-slack-from-monitor-alert
-[9]: /fr/integrations/webhooks
+[9]: /fr/integrations/webhooks/
 [10]: /fr/integrations/webhooks/#usage
-[11]: /fr/events
-[12]: /fr/monitors/guide/template-variable-evaluation
-[13]: /fr/monitors/faq/what-are-recovery-thresholds
-[14]: https://docs.datadoghq.com/fr/integrations/#cat-collaboration
+[11]: https://docs.datadoghq.com/fr/integrations/#cat-collaboration
+[12]: /fr/events/
+[13]: /fr/monitors/guide/template-variable-evaluation/
+[14]: /fr/monitors/faq/what-are-recovery-thresholds/

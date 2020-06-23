@@ -32,7 +32,7 @@ Intégrez Datadog à Azure DevOps pour :
 
 ### Installation
 
-Dans Datadog, cliquez sur le bouton d'installation visible sur le [carré d'intégration Azure DevOps][7].
+Dans Datadog, cliquez sur le bouton d'installation visible sur le [carré d'intégration Azure DevOps][1].
 
 ### Configuration
 
@@ -44,18 +44,18 @@ Utilisez un hook de service pour créer des événements et des métriques Datad
 2. Cliquez sur **Créer un abonnement**.
 3. Sélectionnez le service Datadog.
 4. Configurez l'événement déclencheur Visual Studio.
-5. Saisissez votre [clé d'API Datadog][4] dans le champ adéquat.
+5. Saisissez votre [clé d'API Datadog][2] dans le champ adéquat.
 6. Indiquez si votre organisation utilise le site américain (`US`) ou européen (`EU`) de Datadog.
 7. Testez l'abonnement de votre hook de service, puis terminez la configuration.
 8. Répétez les étapes 4 à 7 pour chaque type d'événement que vous souhaitez envoyer à Datadog. Tous les types d'événement sont acceptés.
 
 Une fois vos hooks de service configurés, accédez à Datadog pour visualiser les événements et les métriques d'Azure DevOps.
 
-Documentation de référence Azure supplémentaire : [Créer un hook de service pour Azure DevOps Services et TFS avec Datadog][6] (en anglais)
+Documentation de référence Azure supplémentaire : [Créer un hook de service pour Azure DevOps Services et TFS avec Datadog][3] (en anglais)
 
 #### Créer un hook de service par programmation
 
-Pour créer des abonnements de hook de service par programmation, utilisez la [documentation Azure][5] et l'endpoint de Datadog :
+Pour créer des abonnements de hook de service par programmation, utilisez la [documentation Azure][4] et l'endpoint de Datadog :
 
 {{< tabs >}}
 {{% tab "Site américain de Datadog" %}}
@@ -76,9 +76,9 @@ https://app.datadoghq.eu/intake/webhook/azuredevops?api_key=<CLÉ_API_DATADOG>
 
 ### Utiliser les monitors Datadog en tant que portes dans Azure Pipelines
 
-Vous pouvez également utiliser les monitors Datadog en tant que portes pour [contrôler le déploiement des versions][8] dans Azure Pipelines. Cette option vous permet d'arrêter automatiquement les déploiements problématiques si un état anormal est détecté dans Datadog.
+Vous pouvez également utiliser les monitors Datadog en tant que portes pour [contrôler le déploiement des versions][5] dans Azure Pipelines. Cette option vous permet d'arrêter automatiquement les déploiements problématiques si un état anormal est détecté dans Datadog.
 
-1. Ajoutez l'extension [Datadog Monitors as Deployment Gates][9] à votre organisation Azure DevOps.
+1. Ajoutez l'extension [Datadog Monitors as Deployment Gates][6] à votre organisation Azure DevOps.
 
     {{< img src="integrations/azure_devops/extension-service-connection.gif" alt="Association de services d'extension" >}}
 
@@ -93,9 +93,9 @@ Vous pouvez également utiliser les monitors Datadog en tant que portes pour [co
 
 8. Répétez les étapes 5 à 7 pour ajouter d'autres portes dans votre pipeline de déploiement.
 
-**Remarque** : utilisez les [monitors composites][10] pour surveiller plusieurs conditions pour les portes de votre pipeline via un seul état d'intégrité pour chaque phase.
+**Remarque** : utilisez les [monitors composites][7] pour surveiller plusieurs conditions pour les portes de votre pipeline via un seul état d'intégrité pour chaque phase.
 
-Pour afficher le code source, consultez le [référentiel de l'extension Monitor Gate d'Azure Devops][11].
+Pour afficher le code source, consultez le [référentiel de l'extension Monitor Gate d'Azure Devops][8].
 
 ## Données collectées
 
@@ -113,7 +113,7 @@ L'intégration Azure DevOps n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][3].
+Besoin d'aide ? Contactez [l'assistance Datadog][10].
 
 ### FAQ
 
@@ -136,14 +136,13 @@ La durée d'un élément de travail est calculée à partir des événements _wo
 
 **Remarque** : en cas de réouverture d'un élément de travail `Done`, un autre point de données est généré lors de son prochain passage au statut `Done`. Le point de données initial n'est pas modifié, et le nouveau point de données est comparé à la création initiale de l'élément de travail.
 
-[1]: https://docs.datadoghq.com/fr/integrations/azure/
-[2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_dev_ops/azure_dev_ops_metadata.csv
-[3]: https://docs.datadoghq.com/fr/help/
-[4]: https://app.datadoghq.com/account/settings#api
-[5]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/create-subscription?view=azure-devops
-[6]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/datadog?view=azure-devops
-[7]: https://app.datadoghq.com/account/settings#integrations/azuredevops
-[8]: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops
-[9]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-monitors
-[10]: /fr/monitors/monitor_types/composite/
-[11]: https://github.com/DataDog/azure-devops-monitor-gate-extension
+[1]: https://app.datadoghq.com/account/settings#integrations/azuredevops
+[2]: https://app.datadoghq.com/account/settings#api
+[3]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/services/datadog?view=azure-devops
+[4]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/create-subscription?view=azure-devops
+[5]: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops
+[6]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-monitors
+[7]: /fr/monitors/monitor_types/composite/
+[8]: https://github.com/DataDog/azure-devops-monitor-gate-extension
+[9]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_dev_ops/azure_dev_ops_metadata.csv
+[10]: https://docs.datadoghq.com/fr/help/

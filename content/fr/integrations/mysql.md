@@ -2,6 +2,10 @@
 assets:
   dashboards: {}
   monitors: {}
+  saved_views:
+    operations: assets/saved_views/operations.json
+    operations_overview: assets/saved_views/operations_overview.json
+    slow_operations: assets/saved_views/slow_operations.json
   service_checks: assets/service_checks.json
 categories:
   - data store
@@ -48,7 +52,7 @@ Vous pouvez également créer vos propres métriques à l'aide de requêtes SQL 
 
 **Remarque :** cette intégration est également compatible avec [MariaDB][2], car elle sert de [« remplacement »][3] pour MySQL.
 
-## Implémentation
+## Configuration
 
 ### Installation
 
@@ -103,7 +107,7 @@ mysql> ALTER USER 'datadog'@'localhost' WITH MAX_USER_CONNECTIONS 5;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-Si cette option est activée, les métriques peuvent être recueillies dans la base de données `performance_schema` grâce à un privilège supplémentaire :
+Si cette option est activée, les métriques peuvent être recueillies à partir de la base de données `performance_schema` en accordant un privilège supplémentaire :
 
 ```shell
 mysql> show databases like 'performance_schema';
@@ -120,7 +124,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ### Configuration
 
-Suivez les instructions ci-dessous pour installer et configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
+Suivez les instructions ci-dessous pour configurer ce check lorsque l'Agent est exécuté sur un host. Consultez la section [Environnement conteneurisé](#environnement-conteneurise) pour en savoir plus sur les environnements conteneurisés.
 
 #### Host
 
@@ -154,15 +158,15 @@ Pour recueillir d'autres métriques de performances (`extra_performance_metrics`
 
 Notez que l'utilisateur `datadog` doit être défini dans la configuration de l'intégration MySQL en tant que `host: 127.0.0.1` au lieu de `localhost`. Vous pouvez également utiliser `sock`.
 
-Consultez notre [fichier d'exemple mysql.yaml][9] pour découvrir toutes les options de configuration disponibles, notamment pour les métriques custom.
+Consultez notre [exemple de fichier mysql.yaml][7] pour découvrir toutes les options de configuration disponibles, y compris celles pour les métriques custom.
 
-[Redémarrez l'Agent][10] pour commencer à envoyer des métriques MySQL à Datadog.
+[Redémarrez l'Agent][9] pour commencer à envoyer des métriques MySQL à Datadog.
 
 ##### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-1. Par défaut, MySQL enregistre toutes les données dans `/var/log/syslog`, dont la lecture nécessite un accès racine. Pour rendre les logs plus accessibles, voici les étapes à suivre :
+1. Par défaut, MySQL enregistre tous ses logs dans `/var/log/syslog`, dont la lecture nécessite un accès root. Pour rendre les logs plus accessibles, voici les étapes à suivre :
 
    - Modifiez `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` et supprimez ou commentez les lignes.
    - Modifiez `/etc/mysql/my.cnf` et ajoutez les lignes suivantes pour activer les logs généraux, d'erreurs et de requêtes lentes :
@@ -232,13 +236,13 @@ _Disponible à partir des versions > 6.0 de l'Agent_
        #     pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
    ```
 
-    Consultez notre [fichier d'exemple mysql.yaml][9] pour découvrir toutes les options de configuration disponibles, notamment pour les métriques custom.
+    Consultez notre [exemple de fichier mysql.yaml][7] pour découvrir toutes les options de configuration disponibles, y compris celles pour les métriques custom.
 
-4. [Redémarrez l'Agent][10].
+4. [Redémarrez l'Agent][9].
 
 #### Environnement conteneurisé
 
-Consultez la [documentation relative aux modèles d'intégration Autodiscovery][11] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
+Consultez la [documentation relative aux modèles d'intégration Autodiscovery][10] pour découvrir comment appliquer les paramètres ci-dessous à un environnement conteneurisé.
 
 ##### Collecte de métriques
 
@@ -248,13 +252,13 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 | `<CONFIG_INIT>`      | vide ou `{}`                                                          |
 | `<CONFIG_INSTANCE>`  | `{"server": "%%host%%", "user": "datadog","pass": "<MOTDEPASSEUNIQUE>"}` |
 
-Consultez la [documentation relative aux template variables Autodiscovery][12] pour découvrir comment transmettre `<MOTDEPASSEUNIQUE>` en tant que variable d'environnement plutôt que sous forme d'étiquette.
+Consultez la [documentation relative aux template variables Autodiscovery][11] pour découvrir comment transmettre `<MOTDEPASSEUNIQUE>` en tant que variable d'environnement plutôt que sous forme d'étiquette.
 
 ##### Collecte de logs
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [collecte de logs avec Docker][13].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][12].
 
 | Paramètre      | Valeur                                     |
 | -------------- | ----------------------------------------- |
@@ -262,7 +266,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][14] et cherchez `mysql` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][13] et cherchez `mysql` dans la section Checks.
 
 ## Données collectées
 
@@ -270,11 +274,11 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 {{< get-metrics-from-git "mysql" >}}
 
 
-Par défaut, le check ne recueille pas toutes les métriques. Définissez les options de configuration booléennes suivantes sur `true` pour activer les métriques respectives :
+Par défaut, le check ne recueille pas toutes les métriques. Définissez les options de configuration booléennes suivantes sur `true` pour activer les métriques correspondantes :
 
 `extra_status_metrics` ajoute les métriques suivantes :
 
-| Nom de la métrique                                  | Type de métrique |
+| Le nom de la métrique                                  | Type de métrique |
 | -------------------------------------------- | ----------- |
 | mysql.binlog.cache_disk_use                  | GAUGE       |
 | mysql.binlog.cache_use                       | GAUGE       |
@@ -312,7 +316,7 @@ Par défaut, le check ne recueille pas toutes les métriques. Définissez les op
 
 `extra_innodb_metrics` ajoute les métriques suivantes :
 
-| Nom de la métrique                                 | Type de métrique |
+| Le nom de la métrique                                 | Type de métrique |
 | ------------------------------------------- | ----------- |
 | mysql.innodb.active_transactions            | GAUGE       |
 | mysql.innodb.buffer_pool_data               | GAUGE       |
@@ -402,14 +406,14 @@ Par défaut, le check ne recueille pas toutes les métriques. Définissez les op
 
 `extra_performance_metrics` ajoute les métriques suivantes :
 
-| Nom de la métrique                                     | Type de métrique |
+| Le nom de la métrique                                     | Type de métrique |
 | ----------------------------------------------- | ----------- |
 | mysql.performance.query_run_time.avg            | GAUGE       |
 | mysql.performance.digest_95th_percentile.avg_us | GAUGE       |
 
 `schema_size_metrics` ajoute les métriques suivantes :
 
-| Nom de la métrique            | Type de métrique |
+| Le nom de la métrique            | Type de métrique |
 | ---------------------- | ----------- |
 | mysql.info.schema.size | GAUGE       |
 
@@ -419,51 +423,50 @@ Le check MySQL n'inclut aucun événement.
 
 ### Checks de service
 
-**mysql.replication.slave_running**:<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance MySQL qu'il surveille. Si ce n'est pas le cas, renvoie `OK`. Consultez [cette page][16] pour en savoir plus.
+**mysql.replication.slave_running** :<br>
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance MySQL qu'il surveille. Si ce n'est pas le cas, renvoie `OK`. Consultez [cette page][15] pour en savoir plus.
 
 **mysql.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à MySQL pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à MySQL pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-- [Problèmes de connexion avec l'intégration SQL Server][17]
-- [Erreur de connexion à MySQL sur localhost – Localhost vs 127.0.0.1][18]
-- [Est-il possible d'utiliser une instance nommée au sein de l'intégration SQL Server ?][19]
-- [Est-il possible de configurer le check dd-agent/MySQL sur mon Google Cloud SQL ?][20]
-- [Comment recueillir des métriques à partir de requêtes MySQL personnalisées][21]
-- [Vous souhaitez recueillir des métriques de performance SQL Server autres que celles disponibles dans la table sys.dm_os_performance_counters ? Essayez WMI.][22]
-- [Comment recueillir des métriques supplémentaires à partir de mon intégration SQL Server ?][23]
-- [L'utilisateur de la base de données n'a pas les droits d'accès nécessaires][24]
-- [Comment recueillir des métriques avec une procédure stockée SQL ?][25]
+- [Problèmes de connexion avec l'intégration SQL Server][16]
+- [Erreur de connexion à MySQL sur localhost – Localhost vs 127.0.0.1][17]
+- [Est-il possible d'utiliser une instance nommée au sein de l'intégration SQL Server ?][18]
+- [Est-il possible de configurer le check dd-agent/MySQL sur mon Google Cloud SQL ?][19]
+- [Comment recueillir des métriques à partir de requêtes MySQL personnalisées][20]
+- [Vous souhaitez recueillir des métriques de performance SQL Server autres que celles disponibles dans la table sys.dm_os_performance_counters ? Essayez WMI.][21]
+- [Comment recueillir des métriques supplémentaires à partir de mon intégration SQL Server ?][22]
+- [L'utilisateur de la base de données n'a pas les droits d'accès nécessaires][23]
+- [Comment recueillir des métriques avec une procédure stockée SQL ?][24]
 
 ## Pour aller plus loin
 
-Lisez notre [série d'articles de blog][26] (en anglais) à propos de la surveillance MySQL avec Datadog.
+Lisez notre [série d'articles de blog][25] (en anglais) à propos de la surveillance MySQL avec Datadog.
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mysql/images/mysql-dash-dd.png
 [2]: https://mariadb.org
 [3]: https://mariadb.com/kb/en/library/mariadb-vs-mysql-compatibility
 [4]: https://app.datadoghq.com/account/settings#agent
-[5]: https://dev.mysql.com/doc/refman/5.7/en/adding-users.html
+[5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [7]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [8]: https://dev.mysql.com/doc/refman/5.7/en/performance-schema-quick-start.html
-[9]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[11]: https://docs.datadoghq.com/fr/agent/autodiscovery/integrations
-[12]: https://docs.datadoghq.com/fr/agent/autodiscovery/template_variables
-[13]: https://docs.datadoghq.com/fr/agent/docker/log
-[14]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[15]: https://github.com/DataDog/integrations-core/blob/master/mysql/metadata.csv
-[16]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/SERVICE_CHECK_CLARIFICATION.md
-[17]: https://docs.datadoghq.com/fr/integrations/faq/connection-issues-with-the-sql-server-integration
-[18]: https://docs.datadoghq.com/fr/integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1
-[19]: https://docs.datadoghq.com/fr/integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration
-[20]: https://docs.datadoghq.com/fr/integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql
-[21]: https://docs.datadoghq.com/fr/integrations/faq/how-to-collect-metrics-from-custom-mysql-queries
-[22]: https://docs.datadoghq.com/fr/integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi
-[23]: https://docs.datadoghq.com/fr/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration
-[24]: https://docs.datadoghq.com/fr/integrations/faq/database-user-lacks-privileges
-[25]: https://docs.datadoghq.com/fr/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure
-[26]: https://www.datadoghq.com/blog/monitoring-mysql-performance-metrics
+[9]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
+[11]: https://docs.datadoghq.com/fr/agent/faq/template_variables/
+[12]: https://docs.datadoghq.com/fr/agent/kubernetes/log/
+[13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[14]: https://github.com/DataDog/integrations-core/blob/master/mysql/metadata.csv
+[15]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/SERVICE_CHECK_CLARIFICATION.md
+[16]: https://docs.datadoghq.com/fr/integrations/faq/connection-issues-with-the-sql-server-integration/
+[17]: https://docs.datadoghq.com/fr/integrations/faq/mysql-localhost-error-localhost-vs-127-0-0-1/
+[18]: https://docs.datadoghq.com/fr/integrations/faq/can-i-use-a-named-instance-in-the-sql-server-integration/
+[19]: https://docs.datadoghq.com/fr/integrations/faq/can-i-set-up-the-dd-agent-mysql-check-on-my-google-cloudsql/
+[20]: https://docs.datadoghq.com/fr/integrations/faq/how-to-collect-metrics-from-custom-mysql-queries/
+[21]: https://docs.datadoghq.com/fr/integrations/faq/can-i-collect-sql-server-performance-metrics-beyond-what-is-available-in-the-sys-dm-os-performance-counters-table-try-wmi/
+[22]: https://docs.datadoghq.com/fr/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration/
+[23]: https://docs.datadoghq.com/fr/integrations/faq/database-user-lacks-privileges/
+[24]: https://docs.datadoghq.com/fr/integrations/guide/collect-sql-server-custom-metrics/#collecting-metrics-from-a-custom-procedure
+[25]: https://www.datadoghq.com/blog/monitoring-mysql-performance-metrics
