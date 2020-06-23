@@ -25,31 +25,43 @@ Datadog Browser Tests allow you to:
 
 To perform email validation inside a Datadog Browser test:
 
-1. First, create an email variable using the dedicated variable type:
+## Create an email variable
 
-    {{< img src="synthetics/guide/email-validation/adding-variable.mov" alt="Create an email variable" video="true"  width="100%">}}
+After creating your browser test, navigate to **Edit Recording**, select **Variables** and then select **Email** from the email variable dropdown list:
 
-    In the above example, an email variable called `EMAIL` is created. The newly created email variable generates a unique mailbox maintained by Datadog at every test execution. This is key to avoid any conflicts among your Browser test runs.
+{{< img src="synthetics/guide/email-validation/adding-variable.mp4" alt="Create an email variable" video="true"  width="100%">}}
 
-2. Record the steps leading to the email being triggered using your freshly created email variable.
+In the above example, an email variable called `EMAIL` is created. The newly created email variable generates a unique mailbox maintained by Datadog at every test execution. This is key to avoid any conflicts among your Browser test runs.
 
-    {{< img src="synthetics/guide/email-validation/record-steps.mov" alt="Record your steps" video="true"  width="100%">}}
+## Record steps
 
-    The steps to fill the form are recorded and the click on the `Sign up` button triggers the email. An email is sent to the Datadog mailbox that was created for this recording session as a result (ie. 838-n3q-q2y.6238933596@synthetics.dtdg.co in this example).
+In the upper left corner of the UI, hit the **Start Recording** button and record the steps leading to the email being triggered using your freshly created email variable. Use the hand icon to record these steps.
 
-3. You can now confirm that an email was sent simply by adding a `Test that an email was received` assertion in your journey.
+{{< img src="synthetics/guide/email-validation/record-steps.mp4" alt="Record your steps" video="true"  width="100%">}}
 
-    {{< img src="synthetics/guide/email-validation/assertion-step.mp4" alt="Add an assertion" video="true"  width="100%">}}
+The steps to fill the form are recorded and the click on the `Sign up` button triggers the email. An email is sent to the Datadog mailbox that was created for this recording session as a result (for example, `838-n3q-q2y.6238933596@synthetics.dtdg.co` in this example).
 
-    If you want to make sure your email respects certain specific guidelines for its content, you can add more verifications against its subject and body.
+## Confirm the email was sent
 
-    In the above example, the assertion is set to be successful if the email subject is `Welcome to Shopist!` and if its body contains the sentence `Your verification code is` and a verification code matching the `\d{1,6}` regex pattern.
+You can now confirm that an email was sent. Click the **Assertion** button and select the `Test that an email was received` assertion.
 
-5. You can now go even further and have your Browser test navigate to links contained inside the freshly sent emails. To do that, create a Navigation step, choose `Go to email and click link`, pick the email containing the links you want to test, and choose the link you want your Browser test to navigate to. The iframe’s or pop up’s URL is immediately set to the chosen link and you can keep on recording your steps normally.
+{{< img src="synthetics/guide/email-validation/assertion-step.mp4" alt="Add an assertion" video="true"  width="100%">}}
 
-    {{< img src="synthetics/guide/email-validation/navigation-step.mov" alt="Add a navigation step" video="true"  width="100%">}}
+If you want to make sure your email respects specific guidelines for its content, you can add more verifications against its subject and body.
 
-    We want the Browser test to look into the “Welcome to Shopist” email to hit a verification link in order to confirm the user registration mechanism is working as expected from end to end. We consequently pick the “Welcome to Shopist” email and choose the “Verify your email by clicking here” link. As soon as we save the step, the iframe is redirected to the associated page. We can now go ahead and create a final assertion to make sure this triggered a proper account verification (page contains `Your account is now verified.`).
+In the above example, the assertion is set to be successful if the email subject is `Welcome to Shopist!` and if its body contains the sentence `Your verification code is` and a verification code matches the `\d{1,6}` regex pattern.
+
+## Navigate links in email
+
+You can now go even further and have your browser test navigate to links contained inside the newly sent emails.
+
+To do this, create a **Navigation** step, choose `Go to email and click link`, pick the email containing the links you want to test. Choose the link you want your browser test to navigate to. The iframe’s or pop up’s URL is immediately set to the chosen link and you can keep on recording your steps normally.
+
+{{< img src="synthetics/guide/email-validation/navigation-step.mp4" alt="Add a navigation step" video="true"  width="100%">}}
+
+In the above example, the browser test looks into the “Welcome to Shopist” email to hit a verification link in order to confirm the user registration mechanism is working as expected. The “Welcome to Shopist” email is selected and the “Verify your email by clicking here” link is chosen. As soon as the step is saved, the iframe is redirected to the associated page.
+
+You can now go ahead and create a final assertion to test the `div` content to make sure this triggered a proper account verification (page contains `Your account is now verified.`).
 
 ## Further Reading
 
