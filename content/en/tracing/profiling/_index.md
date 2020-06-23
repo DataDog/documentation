@@ -132,6 +132,21 @@ Recommended for advanced usage only.
     prof.stop()
     ```
 
+-  When your process forks using `os.fork`, the profiler is stopped in the
+   child process.
+
+   For Python 3.7+ on POSIX platforms, a new profiler is started
+   if you enabled the profiler via `pyddprofile` or `ddtrace.profiling.auto`.
+
+   If you manually instrument the profiler, or if you rely on Python < 3.6 or a
+   non-POSIX platform, manually restart the profiler in your
+   child with:
+
+   ```python
+   ddtrace.profiling.auto.start_profiler()
+   ```
+
+
 [1]: https://app.datadoghq.com/profiling
 [2]: /tracing/visualization/#services
 [3]: /tracing/guide/setting_primary_tags_to_scope/#environment
