@@ -12,7 +12,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-If you have not yet read the setup instructions, please start with the <a href="https://docs.datadoghq.com/tracing/setup/cpp/">C++ Setup Instructions</a>.
+If you have not yet read the setup instructions, start with the <a href="https://docs.datadoghq.com/tracing/setup/cpp/">C++ Setup Instructions</a>.
 </div>
 
 ## Add tags
