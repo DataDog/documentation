@@ -3,13 +3,13 @@ title: Processeurs
 kind: documentation
 description: Analyser vos logs à l'aide du processeur Grok
 further_reading:
-  - link: logs/processing/pipelines
+  - link: /logs/processing/pipelines/
     tag: Documentation
     text: Découvrir les pipelines de Datadog
-  - link: logs/logging_without_limits
+  - link: /logs/logging_without_limits/
     tag: Documentation
     text: Collecte illimitée de logs
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
 ---
@@ -28,7 +28,12 @@ Créez des règles grok personnalisées pour parser l'intégralité du message o
 
 Définissez le processeur Grok depuis la [page de configuration des logs Datadog][1] :
 
+
 {{< img src="logs/processing/processors/parser.png" alt="Parser" style="width:80%;" >}}
+
+Jusqu'à cinq échantillons peuvent être enregistrés avec le processeur, chacun pouvant contenir jusqu'à 5 000 caractères. Tous les échantillons affichent un statut (`match` ou `no match`) qui indique si l'une des règles de parsing du parser Grok correspond à l'échantillon. Cliquez sur un échantillon pour le sélectionner et déclencher son évaluation par rapport à la règle de parsing. Le résultat s'affiche alors en bas de l'écran.
+
+Cliquez sur **Parse my logs** pour appliquer un ensemble de trois règles de parsing aux logs qui transitent par le pipeline sous-jacent. De là, vous pouvez ajuster le nommage des attributs et ajouter d'autres règles pour les autres types de logs si vous le souhaitez. Cette fonctionnalité nécessite que les logs correspondants soient indexés et transitent réellement par le pipeline : vous pouvez désactiver ou ajuster vos filtres d'exclusion temporairement pour répondre à ces exigences.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -43,7 +48,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
   "is_enabled": true,
   "source": "message",
   "samples": ["sample log 1", "sample log 2"],
-  "grok": {"support_rules": "<RÈGLES_PRISEENCHARGE>", "match_rules": "<RÈGLES_CORRESPONDANCE>"}
+  "grok": {"support_rules": "<RÈGLES_SUPPORT>", "match_rules": "<RÈGLES_CORRESPONDANCE>"}
 }
 ```
 
@@ -53,17 +58,14 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `name`               | Chaîne           | non       | Le nom du processeur.                                  |
 | `is_enabled`         | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.  |
 | `source`             | Chaîne           | oui      | Le nom de l'attribut de log à parser. Valeur par défaut : `message`. |
-| `samples`            | Tableau de chaînes | non       | Liste des logs d'échantillon pour ce parser Grok.               |
+| `samples`            | Tableau de chaînes | non       | Liste d'exemples de log (5 maximum) pour ce parser grok.     |
 | `grok.support_rules` | Chaîne           | oui      | Une liste de règles de prise en charge pour votre parser grok.             |
 | `grok.match_rules`   | Chaîne           | oui      | Une liste de règles de correspondance pour votre parser Grok.               |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
-
-Jusqu'à cinq échantillons peuvent être enregistrés avec le processeur. Chaque peut contenir jusqu'à 5 000 caractères.
-Tous les échantillons sont dotés d'un statut (`match` or `no match`) qui indique si l'une des règles de parsing du parser Grok correspond à l'échantillon.
-Cliquez sur un échantillon pour le sélectionner et déclencher son évaluation par rapport à la règle de parsing. Cela affiche le résultat en bas de l'écran.
 
 ## Remappeur de dates de log
 
@@ -82,8 +84,10 @@ Si la date de vos logs est spécifiée dans un attribut ne figurant pas dans cet
 Les formats de date reconnus sont : <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (le format EPOCH en millisecondes)</a> et <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a>.
 </div>
 
-**Remarques** :
 
+**Remarque** :
+
+* **Les événements de log peuvent être envoyés jusqu'à 6 h avant ou 2 h après la réalisation de l'événement.**
 * Si vos logs ne comprennent aucun des attributs par défaut et que vous n'avez pas défini votre propre attribut date, Datadog utilise la date de réception des logs comme timestamp.
 * Si plusieurs processeurs de remappage de dates de log peuvent être appliqués à un log donné, seul le premier (selon la séquence des pipelines) est pris en compte.
 
@@ -103,7 +107,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 ```json
 {
   "type": "date-remapper",
-  "name": "Définir <SATTRIBUT_SOURCE> comme date officielle du log",
+  "name": "Définir <ATTRIBUT_SOURCE> comme date officielle du log",
   "is_enabled": false,
   "sources": ["<ATTRIBUT_SOURCE_1>"]
 }
@@ -113,10 +117,10 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 |--------------|------------------|----------|-------------------------------------------------------|
 | `type`       | Chaîne           | oui      | Le type du processeur.                                |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                |
-| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false` |
+| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`. |
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources.                           |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -172,10 +176,10 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 |--------------|------------------|----------|-------------------------------------------------------|
 | `type`       | Chaîne           | oui      | Le type du processeur.                                |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                |
-| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false` |
+| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`. |
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources.                           |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -211,10 +215,10 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 |--------------|------------------|----------|-------------------------------------------------------|
 | `type`       | Chaîne           | oui      | Le type du processeur.                                |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                |
-| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false` |
+| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`. |
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources.                           |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -250,10 +254,10 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 |--------------|------------------|----------|-------------------------------------------------------|
 | `type`       | Chaîne           | oui      | Le type du processeur.                                |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                |
-| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false` |
+| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`. |
 | `sources`    | Tableau de chaînes | oui      | Tableau des attributs sources. Valeur par défaut : `msg`            |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -267,7 +271,9 @@ En ce log :
 
 {{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribut après remappage"  style="width:40%;">}}
 
-Les contraintes de nom du tag ou de l'attribut sont expliquées dans les [recommandations relatives aux tags][5]. Certaines contraintes supplémentaires sont appliquées, car les caractères `:` ou `,` ne sont pas autorisés dans le nom du tag ou de l'attribut cible.
+Les contraintes relatives aux noms de tag ou d'attribut sont expliquées dans la [documentation sur le tagging][5]. Certaines contraintes supplémentaires sont appliquées, car les caractères `:` ou `,` ne sont pas autorisés dans le nom du tag ou de l'attribut cible.
+
+Si la cible du remappeur est un attribut, le remappeur peut également tenter de convertir l'attribut en un attribut d'un autre type (`String`, `Long` ou `Double`). Si la conversion est impossible, le type d'attribut reste le même (remarque : le séparateur décimal pour `Double` doit être un `.`) 
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -285,12 +291,13 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 ```json
 {
   "type": "attribute-remapper",
-  "name": "Remapper <ATTRIBUT_SOURCE> en <ATTRIBUT_CIBLE>",
+  "name": "Convertir <ATTRIBUT_SOURCE> en <ATTRIBUT_CIBLE>",
   "is_enabled": true,
   "source_type": "attribute",
   "sources": ["<ATTRIBUT_SOURCE>"],
   "target": "<ATTRIBUT_CIBLE>",
   "target_type": "tag",
+  "target_format": "long",
   "preserve_source": false,
   "override_on_conflict": false
 }
@@ -300,15 +307,16 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 |------------------------|------------------|----------|--------------------------------------------------------------------------------|
 | `type`                 | Chaîne           | oui      | Le type du processeur.                                                         |
 | `name`                 | Chaîne           | non       | Le nom du processeur.                                                         |
-| `is_enabled`           | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`                          |
+| `is_enabled`           | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.                          |
 | `source_type`          | Chaîne           | non       | Définit si les sources sont de type `attribute` ou `tag`. Valeur par défaut : `attribute` |
 | `sources`              | Tableau de chaînes | oui      | Tableau des tags ou attributs sources.                                             |
 | `target`               | Chaîne           | oui      | Le nom final de l'attribut ou du tag pour le remappage des sources.                           |
 | `target_type`          | Chaîne           | non       | Définit si la cible est de type `attribute` ou `tag`. Valeur par défaut : `attribute`    |
+| `target_format`        | Chaîne           | non       | Définit si la valeur de l'attribut doit être convertie en valeur d'un autre type. Valeurs possibles : `auto`, `string`, `long` et `double`. Valeur par défaut : `auto`. Lorsque défini sur `auto`, aucune conversion n'est effectuée.  |
 | `preserve_source`      | Booléen          | non       | Indique si l'élément source remappé doit être préservé ou supprimé. Valeur par défaut : `false`               |
 | `override_on_conflict` | Booléen          | non       | Indique si l'élément cible est remplacé ou non si celui-ci est déjà défini. Valeur par défaut : `false`.            |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -343,7 +351,7 @@ Définissez le processeur de parsing d'URL depuis la [page de configuration des 
 |--------------|------------------|----------|----------------------------------------------------------------------------------------------------------------------|
 | `type`       | Chaîne           | oui      | Le type du processeur.                                                                                               |
 | `name`       | Chaîne           | non       | Le nom du processeur.                                                                                               |
-| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`                                                                |
+| `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.                                                                |
 | `sources`    | Tableau de chaînes | non       | Tableau des attributs sources. Valeur par défaut : `http.url`.                                                                      |
 | `target`     | Chaîne           | oui      | Le nom de l'attribut parent qui contient tous les détails extraits des `sources`. Valeur par défaut : `http.url_details`. |
 
@@ -374,7 +382,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 ```json
 {
   "type": "user-agent-parser",
-  "name": "Analyse <ATTRIBUT_SOURCE> pour extraire toutes les informations sur le User-Agent",
+  "name": "Parse <ATTRIBUT_SOURCE> pour en extraire toutes les informations sur le User-Agent",
   "is_enabled": true,
   "sources": ["http.useragent"],
   "target": "http.useragent_details",
@@ -391,7 +399,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `target`     | Chaîne           | oui      | Le nom de l'attribut parent qui contient tous les détails extraits des `sources`. Valeur par défaut : `http.useragent_details`. |
 | `is_encoded` | Booléen          | non       | Définit si l'attribut source est encodé dans une URL ou non. Valeur par défaut : `false`.                                                     |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -405,7 +413,7 @@ Utilisez les catégories pour créer des groupes à des fins d'analyse (tels que
 * La syntaxe de la requête est identique à celle de la barre de recherche du [Log Explorer][6]. La requête peut être effectuée sur n'importe quel tag ou attribut de log, qu'il s'agisse d'une facette ou non. Votre requête peut également contenir des wildcards.
 * Une fois que l'une des requêtes du processeur a renvoyé un log, celle-ci s'arrête. Assurez-vous de spécifier les requêtes dans l'ordre adéquat si un log correspond à plusieurs requêtes.
 * Les catégories doivent avoir un nom unique.
-* Une fois le processeur de catégories défini, vous pouvez mapper les catégories au statut de log à l'aide du [remappeur de statuts de log][7].
+* Une fois le processeur de catégories défini, vous pouvez mapper les catégories à des statuts de log à l'aide du [remappeur de statuts de log][7].
 
 {{< tabs >}}
 {{% tab "IU" %}}
@@ -441,11 +449,11 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 |--------------|-----------------|----------|------------------------------------------------------------------------------------------------------------|
 | `type`       | Chaîne          | oui      | Le type du processeur.                                                                                     |
 | `name`       | Chaîne          | non       | Le nom du processeur.                                                                                     |
-| `is_enabled` | Booléen         | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`                                                      |
+| `is_enabled` | Booléen         | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`.                                                      |
 | `categories` | Tableau d'objets | oui      | Un tableau de filtres pour inclure ou exclure un log et son attribut `name` correspondant pour attribuer une valeur personnalisée au log. |
 | `target`     | Chaîne          | oui      | Le nom de l'attribut cible dont la valeur est définie par la catégorie correspondante.                              |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -459,7 +467,7 @@ Cette formule peut utiliser des parenthèses et les opérateurs arithmétiques d
 Par défaut, le calcul est ignoré s'il manque un attribut. Sélectionnez « Replace missing attribute by 0 » pour remplacer automatiquement les valeurs d'attribut manquantes par 0 et ainsi garantir la réalisation du calcul.
 Un attribut est considéré comme manquant s'il est introuvable dans les attributs de log, ou s'il ne peut pas être converti en chiffre.
 
-**Remarques :**
+**Remarques** :
 
 * L'opérateur `-` doit être séparé par une espace dans la formule, car il peut également être présent dans les noms d'attributs.
 * Si l'attribut cible existe déjà, il est remplacé par le résultat de la formule.
@@ -499,7 +507,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `target`             | Chaîne  | oui      | Le nom de l'attribut qui contient le résultat de l'opération arithmétique.                                                                  |
 | `is_replace_missing` | Booléen | non       | Définir sur `true` pour remplacer tous les attributs manquants dans `expression` par 0. Définir sur `false` pour annuler l'opération si un attribut est manquant. Valeur par défaut : `false`. |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -510,7 +518,7 @@ Cela permet d'agréger différents attributs de chaînes bruts au sein d'un attr
 
 Le modèle est défini par du texte brut et des blocs, avec la syntaxe `%{chemin_attribut}`.
 
-**Remarques :**
+**Remarques** :
 
 * Le processeur accepte uniquement les attributs avec des valeurs ou un tableau de valeurs dans les blocs (consultez les exemples dans la [section IU](?tab=ui#processeur-de-generateur-de-chaines)).
 * Si un attribut ne peut pas être utilisé (s'il s'agit d'un objet ou d'un tableau d'objets), il est remplacé par une chaîne vide ou toute l'opération est ignorée, selon l'option choisie.
@@ -594,7 +602,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `target`             | Chaîne  | Oui      | Le nom de l'attribut qui contient le résultat du modèle.                                                                               |
 | `is_replace_missing` | Booléen | Non       | Si ce paramètre est défini sur `true`, il remplace tous les attributs manquants dans `template` par une chaîne vide. S'il est défini sur `false` (valeur par défaut), l'opération est annulée en cas d'attribut manquant. |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -613,7 +621,7 @@ Un exemple de parser GeoIP se trouve ci-dessous. Il extrait la géolocalisation 
 
 {{< img src="logs/processing/processors/geoip_example.png" alt="Exemple de GeoIP" style="width:60%;">}}
 
-**Remarque** : ce processeur utilise les données GeoLite2 créées par [MaxMind][1].
+**Remarque** : ce processeur utilise la base de données GeoLite2 créée par [MaxMind][1].
 
 [1]: https://www.maxmind.com
 {{% /tab %}}
@@ -639,7 +647,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `sources`    | Tableau de chaînes | non       | Un tableau des attributs sources. Valeur par défaut : `network.client.ip`.                                                                  |
 | `target`     | Chaîne           | oui      | Le nom de l'attribut parent qui contient tous les détails extraits des `sources`. Valeur par défaut : `network.client.geoip`.  |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -692,7 +700,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `lookup_table`   | Tableau de chaînes | oui      | Table de mappage contenant les valeurs des attributs sources et les valeurs des attributs cibles associées. Format : [ "source_key1,target_value1", "source_key2,target_value2" ] |
 | `default_lookup` | Chaîne           | non       | Valeur à définir pour l'attribut cible si la valeur source ne figure pas dans la liste.                                                                                          |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -733,7 +741,7 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 | `is_enabled` | Booléen          | non       | Indique si le processeur est activé ou non. Valeur par défaut : `false`. |
 | `sources`    | Tableau de chaînes | non       | Tableau des attributs sources. Valeur par défaut : `dd.trace_id`.    |
 
-[1]: /fr/api/?lang=bash#logs-pipelines
+[1]: /fr/api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -741,12 +749,12 @@ Utilisez l'[endpoint d'API de pipeline de logs Datadog][1] avec la charge utile 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/processing/pipelines
+[1]: /fr/logs/processing/pipelines/
 [2]: /fr/logs/processing/parsing/#advanced-settings
-[3]: /fr/logs/processing/parsing
+[3]: /fr/logs/processing/parsing/
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[5]: /fr/logs/guide/log-parsing-best-practice
-[6]: /fr/logs/explorer/search/#search-syntax
+[5]: /fr/logs/guide/log-parsing-best-practice/
+[6]: /fr/logs/search_syntax/
 [7]: /fr/logs/processing/processors/?tab=ui#log-status-remapper
 [8]: /fr/logs/processing/parsing/?tab=filter#matcher-and-filter
-[9]: /fr/tracing/connect_logs_and_traces
+[9]: /fr/tracing/connect_logs_and_traces/

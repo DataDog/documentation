@@ -200,7 +200,7 @@ Le check Logstash n'inclut aucun événement.
 
 `logstash.can_connect` :
 
-Renvoie `Critical` si l'Agent n'est pas capable de se connecter à Logstash pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `Critical` si l'Agent ne parvient pas à se connecter à Logstash pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

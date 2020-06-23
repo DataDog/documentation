@@ -168,7 +168,7 @@ Le check Solr n'inclut aucun événement.
 ### Checks de service
 
 **solr.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance SolR qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance SolR qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

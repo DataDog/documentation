@@ -133,7 +133,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ### Checks de service
 
 **ibm_was.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter au PerfServlet pour une raison quelconque. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter au PerfServlet pour une raison quelconque. Si ce n'est pas le cas, renvoie `OK`.
 
 ### Événements
 

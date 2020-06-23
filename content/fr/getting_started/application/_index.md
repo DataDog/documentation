@@ -98,11 +98,11 @@ Les [monitors][20] fournissent des alertes et notifications basées sur des seui
 
 {{< img src="getting_started/application/metric_monitor.png" alt="configuration d'alerte" >}}
 
-## Surveillance des performances réseau
+## Network Performance Monitoring
 
 {{< img src="getting_started/npm.png" alt="npm"  >}}
 
-La solution de [surveillance des performances réseau][21] (NPM) de Datadog vous permet de visualiser votre trafic réseau sur n'importe quel objet tagué dans Datadog : conteneurs, hosts, services ou encore zones de disponibilité. Vous pouvez utiliser n'importe quel élément, que ce soit des datacenters, des équipes ou des conteneurs spécifiques, pour regrouper vos données. Les tags vous aident à filtrer le trafic en fonction de la source et de la destination. Les filtres sont ensuite agrégés sous la forme de flux, qui représentent chacun le trafic entre une source et une destination, via une page et une carte réseau personnalisables. Chaque flux contient les métriques réseau, telles que le débit, la bande passante, le nombre de retransmissions et les informations sur la source/destination, avec des détails pouvant aller jusqu'à l'adresse IP, le port et le PID. Les flux renvoient ensuite des métriques clés, telles que le volume du trafic et les retransmissions TCP.
+La solution [Network Performance Monitoring][21] (NPM) de Datadog vous permet de visualiser votre trafic réseau sur n'importe quel objet tagué dans Datadog : conteneurs, hosts, services ou encore zones de disponibilité. Vous pouvez utiliser n'importe quel élément, que ce soit des datacenters, des équipes ou des conteneurs spécifiques, pour regrouper vos données. Les tags vous aident à filtrer le trafic en fonction de la source et de la destination. Les filtres sont ensuite agrégés sous la forme de flux, qui représentent chacun le trafic entre une source et une destination, via une page et une carte réseau personnalisables. Chaque flux contient les métriques réseau, telles que le débit, la bande passante, le nombre de retransmissions et les informations sur la source/destination, avec des détails pouvant aller jusqu'à l'adresse IP, le port et le PID. Les flux renvoient ensuite des métriques clés, telles que le volume du trafic et les retransmissions TCP.
 
 ## Real User Monitoring
 
