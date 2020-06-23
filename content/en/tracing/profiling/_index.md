@@ -135,11 +135,11 @@ Recommended for advanced usage only.
 -  When your process forks using `os.fork`, the profiler is stopped in the
    child process.
 
-   For Python 3.7+ on POSIX platforms, a new profiler will be started
+   For Python 3.7+ on POSIX platforms, a new profiler is started
    if you enabled the profiler via `pyddprofile` or `ddtrace.profiling.auto`.
 
    If you manually instrument the profiler, or if you rely on Python < 3.6 or a
-   non-POSIX platform, you'll have to manually restart the profiler in your
+   non-POSIX platform, manually restart the profiler in your
    child with:
 
    ```python
