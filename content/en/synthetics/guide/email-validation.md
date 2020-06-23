@@ -13,14 +13,14 @@ further_reading:
 
 ## Overview
 
-Classic web application journeys often involve emails being triggered and sent to a users’ mailbox: Email verification after account creation, email sent to reset forgotten passwords, order confirmations, mail confirmation after contact form submission, etc.
+Classic web application journeys often involve emails being triggered and sent to a users’ mailbox, such as email verification after account creation, email sent to reset forgotten passwords, order confirmations, or mail confirmation after contact form submission.
 
 Making sure your application’s email mechanisms are working as expected is key to ensuring a great user experience on your website.
 
 Datadog Browser Tests allow you to:
 
 - Confirm an email was correctly sent following up on an in-app trigger
-- Check its content
+- Check an email's content
 - Click on the links located within the sent emails in order to navigate to other URLs and validate your whole flows, including web and email steps
 
 To perform email validation inside a Datadog Browser test:
