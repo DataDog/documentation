@@ -105,7 +105,7 @@ System properties can be set as JVM flags.
 
 ### Integrations
 
-See integration specific config in the [integrations](#integrations) section above.
+See how to disable integrations in the [integrations][17] compatability section.
 
 ### Examples
 
@@ -337,3 +337,4 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [14]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
 [15]: /integrations/java/?tab=host#metric-collection
 [16]: https://github.com/openzipkin/b3-propagation
+[17]: /tracing/compatibility_requirements/java#disabling-integrations
