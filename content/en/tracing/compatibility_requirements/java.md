@@ -40,7 +40,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
 | Jetty (non-Servlet)     | 8+         | [Beta][2]       | `jetty`, `jetty-8`                             |
 | Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
-| Play                    | 2.3-2.7    | Fully Supported | `play`, `play-action`                          |
+| Play                    | 2.3-2.8+   | Fully Supported | `play`, `play-action`                          |
 | Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
 | Spark Java              | 2.3+       | [Beta][2]       | `sparkjava` (requires `jetty`)                 |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
