@@ -25,6 +25,7 @@ aliases:
   - /tracing/guide/distributed_tracing/
   - /tracing/advanced/
   - /tracing/api
+  - /tracing/faq/distributed-tracing/
 ---
 
 {{< vimeo 381554158 >}}

@@ -46,16 +46,18 @@ Dans cet exemple, un test Browser est créé pour simuler le parcours utilisateu
         Retry 1 time before location is marked as failed
         ```
 
-    - Saisissez un message d'alerte et indiquez les adresses e-mails auxquelles cette alerte doit être envoyée en cas de déclenchement. Aucune autre configuration n'est requise pour commencer à recevoir des e-mails de Datadog. Vous pouvez recevoir les notifications sur d'autres services en configurant des [intégrations][3] telles que Slack, PagerDuty, Webhooks, etc.
+        **Remarque** : le temps d'attente entre chaque nouvelle tentative est de 300 ms par défaut. Cet intervalle peut être configuré via l'[API][3].
+
+    - Saisissez un message d'alerte et indiquez les adresses e-mails auxquelles cette alerte doit être envoyée en cas de déclenchement. Aucune autre configuration n'est requise pour commencer à recevoir des e-mails de Datadog. Vous pouvez recevoir les notifications sur d'autres services en configurant des [intégrations][4] telles que Slack, PagerDuty, Webhooks, etc.
     - Cliquez sur **Save & Edit Recording**.
 
 {{< img src="getting_started/synthetics/configured-browser-test.gif" alt="Test Browser configuré" style="width:90%;">}}
 
 ## Enregistrer les étapes de votre test
 
-Une fois la configuration de votre test enregistrée, vous serez invité à télécharger l'extension [Datadog test recorder][4]. Les tests Browser peuvent uniquement être enregistrés à partir de **[Google Chrome][5]**. Téléchargez et installez l'extension.
+Une fois la configuration de votre test enregistrée, vous serez invité à télécharger l'extension [Datadog test recorder][5]. Les tests Browser peuvent uniquement être enregistrés à partir de **[Google Chrome][6]**. Téléchargez et installez l'extension.
 
-Une fois l'extension installée, commencez à enregistrer les étapes de votre test en cliquant sur le bouton **Start Recording**. Parcourez la page affichée dans l'iframe visible à droite des options d'enregistrement. Lorsque vous sélectionnez une div, une image ou toute autre zone, les actions sont enregistrées et utilisées pour créer les étapes de votre test Browser. Pour en savoir plus sur chaque action, consultez la [documentation sur les actions de test Browser][6].
+Une fois l'extension installée, commencez à enregistrer les étapes de votre test en cliquant sur le bouton **Start Recording**. Parcourez la page affichée dans l'iframe visible à droite des options d'enregistrement. Lorsque vous sélectionnez une div, une image ou toute autre zone, les étapes sont enregistrées et utilisées pour créer les étapes de votre test Browser. Pour en savoir plus sur chaque étape, consultez la [documentation sur les étapes de test Browser][7].
 
 Par exemple, pour enregistrer en tant qu'étapes les actions effectuées entre l'ajout d'un article au panier et la validation de la commande :
 
@@ -79,7 +81,7 @@ L'onglet **Errors & Warnings** affiche la liste des erreurs réseau et Javascrip
 
 {{< img src="getting_started/synthetics/browser-test-failure.png" alt="Échec du test Browser" style="width:100%;">}}
 
-L'onglet **Traces** est accessible une fois l'[intégration de l'APM avec Synthetics][7] configurée. Il vous permet ensuite d'identifier la cause de l'échec du test en visualisant les traces générées durant son exécution. Pour lier les résultats des tests Browser à l'APM, spécifiez les URL auxquelles vous souhaitez que les en-têtes d'intégration de l'APM soient ajoutées. Vous pouvez utiliser le wildcard `*` : `https://*.datadoghq.com/*`
+L'onglet **Traces** est accessible une fois l'[intégration de l'APM avec Synthetics][8] configurée. Il vous permet ensuite d'identifier la cause de l'échec du test en visualisant les traces générées durant son exécution. Pour lier les résultats des tests Browser à l'APM, spécifiez les URL auxquelles vous souhaitez que les en-têtes d'intégration de l'APM soient ajoutés. Vous pouvez utiliser le wildcard `*` : `https://*.datadoghq.com/*`.
 
 {{< whatsnext desc="Après avoir configuré votre premier test Browser :">}}
 {{< nextlink href="/synthetics/browser_tests" tag="Documentation" >}}En savoir plus sur les tests Browser{{< /nextlink >}}
@@ -89,8 +91,9 @@ L'onglet **Traces** est accessible une fois l'[intégration de l'APM avec Synthe
 
 [1]: /fr/synthetics/browser_tests/
 [2]: https://app.datadoghq.com/synthetics/list
-[3]: /fr/integrations/
-[4]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[5]: https://www.google.com/chrome/
-[6]: /fr/synthetics/browser_tests/#actions
-[7]: /fr/synthetics/apm/
+[3]: /fr/api/v1/synthetics/#create-or-clone-a-test
+[4]: /fr/integrations/
+[5]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
+[6]: https://www.google.com/chrome/
+[7]: /fr/synthetics/browser_tests/#actions
+[8]: /fr/synthetics/apm/

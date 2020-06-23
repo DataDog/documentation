@@ -57,7 +57,7 @@ Pour recueillir les métriques relatives aux consommateurs de Kafka, consultez l
 
 Le check Kafka de l'Agent est inclus avec le paquet de l'[Agent Datadog][4] : vous n'avez donc rien d'autre à installer sur vos nœuds Kafka.
 
-Le check recueille des métriques via JMX, un JVM est donc nécessaire sur chaque nœud Kafka pour que l'Agent puisse faire un fork de [jmxfetch][5]. Vous pouvez utiliser le même JVM que Kafka.
+Le check recueille des métriques via JMX, une JVM est donc nécessaire sur chaque nœud Kafka pour que l'Agent puisse faire un fork de [jmxfetch][5]. Vous pouvez utiliser la même JVM que Kafka.
 
 ### Configuration
 
@@ -166,7 +166,7 @@ Le check Kafka n'inclut aucun événement.
 ### Checks de service
 
 **kafka.can_connect**:<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à l'instance Kafka qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à l'instance Kafka qu'il surveille et d'y recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

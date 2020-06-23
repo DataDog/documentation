@@ -2,7 +2,7 @@
 assets:
   dashboards: {}
   monitors: {}
-  service_checks: /assets/service_checks.json
+  service_checks: assets/service_checks.json
 categories:
   - monitoring
 creates_events: true
@@ -104,7 +104,7 @@ Ce check gnatsd_streaming applique les tags suivants à l'ensemble des checks de
 - `url:<host_en_yaml>`
 
 `gnatsd_streaming.can_connect` :
-Renvoie `CRITICAL` si l'Agent n'est pas capable de recevoir la valeur 200 depuis l'endpoint de _surveillance_. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à recevoir la valeur 200 depuis l'endpoint de _surveillance_. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

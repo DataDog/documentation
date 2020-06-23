@@ -115,10 +115,11 @@ Paste the generated code snippet into the head tag (in front of any other script
 | `service`            | String  | No       | `` | The service name for this application.                             |
 | `env`                | String  | No       | `` | The application’s environment e.g. prod, pre-prod, staging.                   |
 | `version`            | String  | No       | `` | The application’s version e.g. 1.2.3, 6c44da20, 2020.02.13.                   |
+| `trackInteractions`          | Boolean  | No       | `false` | Enables [automatic collection of Users Actions][6] |
 | `resourceSampleRate` | Number  | No       | `100`                                                                              | Percentage of tracked sessions with resources collection. `100` for all, `0` for none of them.               |
 | `sampleRate`         | Number  | No       | `100`                                                                              | Percentage of sessions to track. Only tracked sessions send rum events. `100` for all, `0` for none of them. |
 | `silentMultipleInit` | Boolean | No       | `false`                                                                            | Initialization fails silently if Datadog's RUM is already initialized on the page                            |
-| `proxyHost`          | String  | No       | `` | Optional proxy URL. See the full [proxy setup guide][6] for more information. |
+| `proxyHost`          | String  | No       | `` | Optional proxy URL. See the full [proxy setup guide][7] for more information. |
 
 ## Further Reading
 
@@ -129,4 +130,5 @@ Paste the generated code snippet into the head tag (in front of any other script
 [3]: /real_user_monitoring/dashboards/
 [4]: https://www.npmjs.com/package/@datadog/browser-rum
 [5]: /account_management/api-app-keys/#client-tokens
-[6]: /real_user_monitoring/faq/proxy_rum_data/
+[6]: /real_user_monitoring/data_collected/user_action/#automatic-collection-of-user-actions
+[7]: /real_user_monitoring/faq/proxy_rum_data/

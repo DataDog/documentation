@@ -160,10 +160,10 @@ Le check Redis n'inclut aucun événement.
 ### Checks de service
 
 **redis.can_connect** :<br>
-Renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter à Redis pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter à Redis pour recueillir des métriques. Si ce n'est pas le cas, renvoie `OK`.
 
 **redis.replication.master_link_status** :<br>
-Renvoie `CRITICAL` si cette instance Redis n'est pas capable de se connecter à son instance principale. Si ce n'est pas le cas, renvoie `OK`.
+Renvoie `CRITICAL` si cette instance Redis ne parvient pas à se connecter à son instance principale. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 

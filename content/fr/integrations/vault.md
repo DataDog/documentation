@@ -228,7 +228,7 @@ Cet événement se déclenche en cas de changement de leader du cluster.
 ### Checks de service
 
 `vault.can_connect` :
-Renvoie CRITICAL si l'Agent n'est pas capable de se connecter à Vault. Si ce n'est pas le cas, renvoie OK.
+Renvoie CRITICAL si l'Agent ne parvient pas à se connecter à Vault. Si ce n'est pas le cas, renvoie OK.
 
 `vault.unsealed` :
 Renvoie CRITICAL si Vault est scellé. Si ce n'est pas le cas, renvoie OK.

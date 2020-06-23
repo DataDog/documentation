@@ -23,7 +23,9 @@ Profiling libraries are shipped within the following tracing language libraries.
 
 The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling library is supported in OpenJDK 11+, Oracle Java 11+, and Zulu Java 8+ (minor version 1.8.0_212+). All JVM-based languages, such as Scala, Groovy, Kotlin, Clojure, etc. are supported. To begin profiling applications:
 
-1. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
+1. If you are already using Datadog, please upgrade your agent to version [7.20.2][7] or [6.20.2][7]. 
+
+2. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
 
     ```shell
     wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
@@ -31,15 +33,15 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 
      **Note**: Profiling is available in the `dd-java-agent.jar` library in versions 0.44+.
 
-2. Update your service invocation to look like:
+3. Update your service invocation to look like:
 
     ```text
-    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.profiling.api-key-file=<API_KEY_FILE> -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
+    java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-    **Note**: With `dd-java-agent.jar` library versions 0.48+, if your organization is on Datadog EU site, add `-Ddd.site=datadoghq.eu` or set `DD_SITE=datadoghq.eu` as environment variable.
+    **Notes**: From `dd-java-agent.jar` library [versions 0.55][6]+ profiles are sent through the Datadog agent, deprecating the need to specify `-Ddd.profiling.api-key-file` and `-Ddd.site` (requires **[Agent 7.20.2][5]**+ or **6.20.2**+). With `dd-java-agent.jar` library versions 0.48-0.54, if your organization is on Datadog EU site, add `-Ddd.site=datadoghq.eu` or set `DD_SITE=datadoghq.eu` as environment variable.
 
-3. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
+4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
 
 **Note**:
 
@@ -52,51 +54,46 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
     java -jar my-service.jar -javaagent:dd-java-agent.jar ...
     ```
 
-- Because profiles are sent directly to Datadog without using the Datadog Agent, you must pass a valid [Datadog API key][4].
-
 - As an alternative to passing arguments, you can use environment variable to set those parameters:
 
 | Arguments                     | Environment variable      | Description                                       |
 | ----------------------------- | ------------------------- | ------------------------------------------------- |
 | `-Ddd.profiling.enabled`      | DD_PROFILING_ENABLED      | Set to `true` to enable profiling.                |
-| `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | File that should contain the API key as a string. |
+| `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | Deprecated in version 0.55. File that should contain the API key as a string. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. |
 |                               | DD_PROFILING_API_KEY      | Datadog API key.                                  |
-| `-Ddd.site`                   | DD_SITE                   | Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. |
+| `-Ddd.site`                   | DD_SITE                   | Deprecated in version 0.55. Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. |
 
 
 [1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [2]: https://app.datadoghq.com/profiling
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: /account_management/api-app-keys/#api-keys
+[5]: https://docs.datadoghq.com/agent/versions/upgrade_to_agent_v7/?tab=linux
+[6]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.55.1
+[7]: https://app.datadoghq.com/account/settings#agent/overview
 {{% /tab %}}
 
 {{% tab "Python" %}}
 
 The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python 3.5+. To begin profiling applications:
 
-1. Install `ddtrace` with the `profile` flavor, which contains both tracing and profiling:
+1. If you are already using Datadog, please upgrade your agent to version [7.20.2][4] or [6.20.2][4].
+
+2. Install `ddtrace` which contains both tracing and profiling:
 
     ```shell
-    pip install ddtrace[profiling]
+    pip install ddtrace
     ```
 
      **Note**: Profiling is available in the `ddtrace` library for versions 0.36+.
 
-2. Add a valid [Datadog API key][1] in your environment variable: `DD_PROFILING_API_KEY`.
-
-3. Set `env`, `service`, and `version` as Datadog tags in your environment variables.
-
-    ```shell
-    export DD_PROFILING_TAGS=env:<YOUR_ENVIRONMENT>,service:<YOUR_SERVICE>,version:<YOUR_VERSION>
-    ```
-
-4. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
+3. To automatically profile your code, import `ddtrace.profile.auto`. After import, the profiler starts:
 
     ```python
     import ddtrace.profiling.auto
     ```
 
-5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
+4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][1].
 
 **Note**:
 
@@ -110,14 +107,14 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_API_KEY`                                     | String        | The [Datadog API key][1] to use when uploading profiles. New in version 0.37.                                        |
-| `DD_PROFILING_API_KEY`                           | String        | The [Datadog API key][1] to use when uploading profiles. Changed in 0.37: deprecated in favor of `DD_API_KEY`. |
-| `DD_SITE`                                        | String        | If your organization is on Datadog EU site, set this to `datadoghq.eu`.                          |
-| `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
-| `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="env:production"`. |
-| `DD_VERSION`                                     | String        | The version of your application, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="version:<APPLICATION_VERSION>"`                              |
+| `DD_SERVICE`                                     | String        | The Datadog [service][2] name.     |
+| `DD_ENV`                                         | String        | The Datadog [environment][3] name, for example `production`, which can be set here, or in `DD_TAGS` with `DD_TAGS="env:production"`. |
+| `DD_VERSION`                                     | String        | The version of your application, which can be set here, or in `DD_TAGS` with `DD_TAGS="version:<APPLICATION_VERSION>"`                              |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. New in version 0.38.   |
-| `DD_PROFILING_TAGS`                              | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. Changed in 0.38: deprecated in favor of `DD_TAGS`.|
+| `DD_API_KEY`                                     | String        | Deprecated in version 0.39. The [Datadog API key][1] to use when uploading profiles. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. Supported in version 0.37.                                        |
+| `DD_PROFILING_API_KEY`                           | String        | Deprecated in version 0.39. The [Datadog API key][1] to use when uploading profiles. |
+| `DD_SITE`                                        | String        | Deprecated in version 0.39. If your organization is on Datadog EU site, set this to `datadoghq.eu`. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead.                          |
+| `DD_PROFILING_TAGS`                              | String        | Deprecated in 0.38 in favor of `DD_TAGS`. Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
 <div class="alert alert-info">
 Recommended for advanced usage only.
@@ -135,10 +132,25 @@ Recommended for advanced usage only.
     prof.stop()
     ```
 
-[1]: /account_management/api-app-keys/#api-keys
-[2]: https://app.datadoghq.com/profiling
-[3]: /tracing/visualization/#services
-[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
+-  When your process forks using `os.fork`, the profiler is stopped in the
+   child process.
+
+   For Python 3.7+ on POSIX platforms, a new profiler is started
+   if you enabled the profiler via `pyddprofile` or `ddtrace.profiling.auto`.
+
+   If you manually instrument the profiler, or if you rely on Python < 3.6 or a
+   non-POSIX platform, manually restart the profiler in your
+   child with:
+
+   ```python
+   ddtrace.profiling.auto.start_profiler()
+   ```
+
+
+[1]: https://app.datadoghq.com/profiling
+[2]: /tracing/visualization/#services
+[3]: /tracing/guide/setting_primary_tags_to_scope/#environment
+[4]: https://app.datadoghq.com/account/settings#agent/overview
 {{% /tab %}}
 
 {{% tab "Go" %}}

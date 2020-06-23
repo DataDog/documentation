@@ -20,21 +20,23 @@ Index exclusion filters do not apply to historical views, so there is no need to
 
 ### Add new historical views
 
-1. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
+1. **Choose the time period** for which you wish to rehydrate log events.
 
-2. **Choose the time period** for which you wish to rehydrate log events.
+2. **Input the query**. The query syntax is the same as that of the [log explorer search][4], but is limited to log attributes, [reserved attributes][5], and free text search on the message.
 
-3. **Input the query**. The query syntax is the same as that of the [log explorer search][4], but is limited to log attributes, [reserved attributes][5], and free text search on the message.
+3. **Select the archive** from which you wish to rehydrate log events. Only archives that are [configured to use role delegation](#permissions) are available for rehydrating.
 
-4. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
+4. (Optional) **estimate scan size** and get the total amount of compressed data that is contained in your archive for the selected timeframe.
 
-5. (Optional) **Add a description** to give your team context about the purpose of the historical view.
+5. **Name your historical view**. Names must begin with a lowercase letter and can only contain lowercase letters, numbers, and the `-` character.
 
-6. Define the maximum number of logs that should be rehydrated in this historical view, **from 1 million to 1 billion**
+6. Define the maximum number of logs that should be rehydrated in this historical view, **from 1 million to 1 billion**.
 
-7. Define the retention period of the rehydrated logs (available retentions are based on your contract, default is 15 days)
+7. Define the retention period of the rehydrated logs (available retentions are based on your contract, default is 15 days).
 
-{{< img src="logs/archives/log_archives_rehydrate_reload.png" alt="Reload from Archive"  style="width:75%;">}}
+8. (Optional) **Notify** trigger notifications on rehydration completion through [integrations][6] with the @handle syntax.
+
+{{< img src="logs/archives/log_rehydration_setup.png" alt="Reload from Archive"  style="width:75%;">}}
 
 #### Rehydrate by Query
 
@@ -67,7 +69,7 @@ Historical views stay in Datadog until you opt to delete them. You can mark a hi
 
 ### Define a Datadog archive
 
-An external archive must be configured in order to rehydrate data from it. [Follow the guide][6] to archive your logs in the available destinations.
+An external archive must be configured in order to rehydrate data from it. [Follow the guide][7] to archive your logs in the available destinations.
 
 ### Permissions
 
@@ -141,5 +143,6 @@ In order to rehydrate log events from your archives, Datadog uses a service acco
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: https://app.datadoghq.com/logs/pipelines/historical-views
 [4]: /logs/explorer/search/
-[5]: /logs/?tab=ussite#reserved-attributes
-[6]: /logs/archives/
+[5]: /logs/processing/#reserved-attributes
+[6]: /integrations/#cat-notification
+[7]: /logs/archives/

@@ -90,7 +90,6 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 | -------------- | ---------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enabled        | `DD_TRACE_ENABLED`           | `true`      | Whether to enable the tracer.                                                                                                                                                                                                                                              |
 | debug          | `DD_TRACE_DEBUG`             | `false`     | Enable debug logging in the tracer.                                                                                                                                                                                                                                        |
-                                                                               |
 | url            | `DD_TRACE_AGENT_URL`         | `null`      | The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable. |
 | hostname       | `DD_TRACE_AGENT_HOSTNAME`    | `localhost` | The address of the Agent that the tracer submits to.                                                                                                                                                                                                                       |
 | port           | `DD_TRACE_AGENT_PORT`        | `8126`      | The port of the Trace Agent that the tracer submits to.                                                                                                                                                                                                                    |
@@ -102,6 +101,7 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 | reportHostname | `DD_TRACE_REPORT_HOSTNAME`   | `false`     | Whether to report the system's hostname for each trace. When disabled, the hostname of the Agent is used instead.                                                                                                                                                          |
 | experimental   | -                            | `{}`        | Experimental features can be enabled all at once using Boolean true or individually using key/value pairs. [Contact support][10] to learn more about the available experimental features.                                                                                   |
 | plugins        | -                            | `true`      | Whether or not to enable automatic instrumentation of external libraries using the built-in plugins.                                                                                                                                                                       |
+| - | `DD_TRACE_DISABLED_PLUGINS` | - | A comma-separated string of integration names automatically disabled when tracer is initialized. Environment variable only e.g. `DD_TRACE_DISABLED_PLUGINS=express,dns`. |
 | clientToken    | `DD_CLIENT_TOKEN`            | `null`      | Client token for browser tracing. Can be generated in Datadog in **Integrations** -> **APIs**.                                                                                                                                                                             |
 | logLevel       | `DD_TRACE_LOG_LEVEL`         | `debug`     | A string for the minimum log level for the tracer to use when debug logging is enabled, e.g. `error`, `debug`.                                                                                                                                                             |
 
@@ -121,99 +121,6 @@ To use a different protocol such as UDS, specify the entire URL as a single ENV 
 DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
 ```
 
-## Compatibility
-
-Node `>=8` is supported by this library. Only even versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported.
-
-Node 4 or Node 6 versions are supported by version 0.13 of the `dd-trace-js` tracer. This version will be supported until **April 30th, 2020**, but no new feature will be added.
-
-**Note**: The global policy is that the Datadog JS tracer supports (only for bug fixes) a Node version until 1 year after its release reached its end-of-life.
-
-### Integrations
-
-APM provides out-of-the-box instrumentation for many popular frameworks and libraries by using a plugin system. If you would like support for a module that is not listed, [contact support][10] to share a request.
-
-For details about how to how to toggle and configure plugins, check out the [API documentation][11].
-
-#### Web Framework Compatibility
-
-| Module                  | Versions | Support Type    | Notes                                      |
-| ----------------------- | -------- | --------------- | ------------------------------------------ |
-| [connect][12]           | `>=2`    | Fully supported |                                            |
-| [express][13]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][14]   |
-| [fastify][15]           | `>=1`    | Fully supported |                                            |
-| [graphql][16]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
-| [gRPC][17]              | `>=1.13` | Fully supported |                                            |
-| [hapi][18]              | `>=2`    | Fully supported | Supports [@hapi/hapi] versions `>=17.9`    |
-| [koa][19]               | `>=2`    | Fully supported |                                            |
-| [microgateway-core][20] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][21] CLI requires static patching using [@datadog/cli][22]. |
-| [paperplane][23]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][24]     |
-| [restify][25]           | `>=3`    | Fully supported |                                            |
-
-#### Native Module Compatibility
-
-| Module      | Support Type        | Notes |
-| ----------- | ------------------- | ------------------------------------------ |
-| [dns][26]   | Fully supported     |       |
-| [fs][27]    | Fully supported     |       |
-| [http][28]  | Fully supported     |       |
-| [https][29] | Fully supported     |       |
-| [http2][30] | Partially supported | Only HTTP2 clients are currently supported and not servers. |
-| [net][31]   | Fully supported     |       |
-
-#### Data Store Compatibility
-
-| Module                 | Versions | Support Type    | Notes                                            |
-| ---------------------- | -------- | --------------- | ------------------------------------------------ |
-| [cassandra-driver][32] | `>=3`    | Fully supported |                                                  |
-| [couchbase][33]        | `^2.4.2` | Fully supported |                                                  |
-| [elasticsearch][34]    | `>=10`   | Fully supported | Supports `@elastic/elasticsearch` versions `>=5` |
-| [ioredis][35]          | `>=2`    | Fully supported |                                                  |
-| [knex][36]             | `>=0.8`  | Fully supported | This integration is only for context propagation |
-| [memcached][37]        | `>=2.2`  | Fully supported |                                                  |
-| [mongodb-core][38]     | `>=2`    | Fully supported | Supports Mongoose                                |
-| [mysql][39]            | `>=2`    | Fully supported |                                                  |
-| [mysql2][40]           | `>=1`    | Fully supported |                                                  |
-| [pg][41]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
-| [redis][42]            | `>=0.12` | Fully supported |                                                  |
-| [tedious][43]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
-
-#### Worker Compatibility
-
-| Module                     | Versions | Support Type    | Notes                                                  |
-| -------------------------- | -------- | --------------- | ------------------------------------------------------ |
-| [@google-cloud/pubsub][44] | `>=1.2`  | Fully supported |                                                        |
-| [amqp10][45]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (i.e. ActiveMQ, Apache Qpid) |
-| [amqplib][46]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (i.e. RabbitMQ, Apache Qpid) |
-| [generic-pool][47]         | `>=2`    | Fully supported |                                                        |
-| [kafka-node][48]           |          | Coming Soon     |                                                        |
-| [rhea][49]                 | `>=1`    | Fully supported |                                                        |
-
-#### SDK Compatibility
-
-| Module             | Versions   | Support Type    | Notes                                                  |
-| ------------------ | ---------- | --------------- | ------------------------------------------------------ |
-| [aws-sdk][50]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
-
-#### Promise Library Compatibility
-
-| Module           | Versions  | Support Type    |
-| ---------------- | --------- | --------------- |
-| [bluebird][51]   | `>=2`     | Fully supported |
-| [promise][52]    | `>=7`     | Fully supported |
-| [promise-js][53] | `>=0.0.3` | Fully supported |
-| [q][54]          | `>=1`     | Fully supported |
-| [when][55]       | `>=3`     | Fully supported |
-
-#### Logger Compatibility
-
-| Module           | Versions  | Support Type    |
-| ---------------- | --------- | --------------- |
-| [bunyan][56]     | `>=1`     | Fully supported |
-| [paperplane][57] | `>=2.3.2` | Fully supported |
-| [pino][58]       | `>=2`     | Fully supported |
-| [winston][59]    | `>=1`     | Fully supported |
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -226,54 +133,3 @@ For details about how to how to toggle and configure plugins, check out the [API
 [6]: /tracing/setup/docker/
 [7]: /agent/kubernetes/apm/
 [8]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[9]: /getting_started/tagging/unified_service_tagging
-[10]: /help/
-[11]: https://datadog.github.io/dd-trace-js/#integrations
-[12]: https://github.com/senchalabs/connect
-[13]: https://expressjs.com
-[14]: https://expressjs.com/en/resources/frameworks.html
-[15]: https://www.fastify.io
-[16]: https://github.com/graphql/graphql-js
-[17]: https://grpc.io/
-[18]: https://hapijs.com
-[19]: https://koajs.com
-[20]: https://github.com/apigee/microgateway-core
-[21]: https://github.com/apigee-internal/microgateway
-[22]: https://www.npmjs.com/package/@datadog/cli
-[23]: https://github.com/articulate/paperplane
-[24]: https://github.com/articulate/paperplane/blob/master/docs/API.md#serverless-deployment
-[25]: http://restify.com
-[26]: https://nodejs.org/api/dns.html
-[27]: https://nodejs.org/api/fs.html
-[28]: https://nodejs.org/api/http.html
-[29]: https://nodejs.org/api/https.html
-[30]: https://nodejs.org/api/http2.html
-[31]: https://nodejs.org/api/net.html
-[32]: https://github.com/datastax/nodejs-driver
-[33]: https://github.com/couchbase/couchnode
-[34]: https://github.com/elastic/elasticsearch-js
-[35]: https://github.com/luin/ioredis
-[36]: https://knexjs.org
-[37]: https://github.com/3rd-Eden/memcached
-[38]: http://mongodb.github.io/node-mongodb-native/core
-[39]: https://github.com/mysqljs/mysql
-[40]: https://github.com/sidorares/node-mysql2
-[41]: https://node-postgres.com
-[42]: https://github.com/NodeRedis/node_redis
-[43]: http://tediousjs.github.io/tedious
-[44]: https://github.com/googleapis/nodejs-pubsub
-[45]: https://github.com/noodlefrenzy/node-amqp10
-[46]: https://github.com/squaremo/amqp.node
-[47]: https://github.com/coopernurse/node-pool
-[48]: https://github.com/SOHU-Co/kafka-node
-[49]: https://github.com/amqp/rhea
-[50]: https://github.com/aws/aws-sdk-js
-[51]: https://github.com/petkaantonov/bluebird
-[52]: https://github.com/then/promise
-[53]: https://github.com/kevincennis/promise
-[54]: https://github.com/kriskowal/q
-[55]: https://github.com/cujojs/when
-[56]: https://github.com/trentm/node-bunyan
-[57]: https://github.com/articulate/paperplane/blob/master/docs/API.md#logger
-[58]: http://getpino.io
-[59]: https://github.com/winstonjs/winston

@@ -5,22 +5,22 @@ col1:
     link: 'https://www.datadoghq.com/product/'
     title: Fonctionnalités
   - name: integrations
-    link: 'https://www.datadoghq.com/product/integrations/'
+    link: 'https://www.datadoghq.com/product/platform/integrations/'
     title: Intégrations
   - name: apm
-    link: 'https://www.datadoghq.com/apm/'
+    link: 'https://www.datadoghq.com/product/apm/'
     title: APM
   - name: logs
-    link: 'https://www.datadoghq.com/log-management/'
+    link: 'https://www.datadoghq.com/product/log-management/'
     title: Log Management
   - name: dashboards
-    link: 'https://www.datadoghq.com/dashboarding/'
+    link: 'https://www.datadoghq.com/product/platform/dashboards/'
     title: Dashboards
   - name: synthetics
-    link: 'https://www.datadoghq.com/synthetics/'
+    link: 'https://www.datadoghq.com/product/synthetics-monitoring/'
     title: Synthetics
   - name: alerts
-    link: 'https://www.datadoghq.com/alerts/'
+    link: 'https://www.datadoghq.com/product/platform/alerts/'
     title: Alertes
 col2:
   - name: pricing

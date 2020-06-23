@@ -9,16 +9,16 @@ main:
     url: getting_started/agent/
     parent: getting_started
     weight: 1
+  - name: Autodiscovery
+    identifier: getting_started_agent_autodiscovery
+    url: getting_started/agent/autodiscovery
+    parent: getting_started_agent
+    weight: 101
   - name: Intégrations
     identifier: getting_started_integrations
     url: getting_started/integrations/
     parent: getting_started
     weight: 2
-  - name: Prometheus/Openmetrics
-    identifier: getting_started_prometheus
-    url: getting_started/integrations/prometheus
-    parent: getting_started_integrations
-    weight: 201
   - name: Datadog
     identifier: getting_started_datadog
     url: getting_started/application/
@@ -39,48 +39,55 @@ main:
     url: getting_started/tracing/
     parent: getting_started
     weight: 5
+  - name: Tags
+    identifier: tagging_
+    url: getting_started/tagging/
+    parent: getting_started
+    weight: 6
+  - name: Assigner des tags
+    identifier: assigning_tags
+    url: getting_started/tagging/assigning_tags
+    parent: tagging_
+    weight: 601
+  - name: Tagging de service unifié
+    identifier: unified_service_tagging
+    url: getting_started/tagging/unified_service_tagging
+    parent: tagging_
+    weight: 602
+  - name: Utiliser les tags
+    identifier: using_tags
+    url: getting_started/tagging/using_tags
+    parent: tagging_
+    weight: 603
   - name: API
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 6
+    weight: 7
   - name: Synthetics
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 7opl
+    weight: 8
   - name: Emplacements privés
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 701
+    weight: 801
   - name: Test Browser
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 702
+    weight: 802
   - name: Test API
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 703
+    weight: 803
   - name: Centre d'apprentissage
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 8
-  - name: Tagging
-    url: tagging/
-    pre: nav_tagging
-    identifier: tagging_
-    weight: 20000
-  - name: Assigner des tags
-    url: tagging/assigning_tags/
-    parent: tagging_
-    weight: 1
-  - name: Utiliser les tags
-    url: tagging/using_tags/
-    parent: tagging_
-    weight: 2
+    weight: 9
   - name: Agent
     url: agent/
     pre: nav_agent
@@ -101,77 +108,117 @@ main:
     url: agent/basic_agent_usage/amazonlinux/
     weight: 102
     parent: basic_agent_usage
+  - name: Ansible
+    identifier: basic_agent_usage_ansible
+    url: agent/basic_agent_usage/ansible/
+    parent: basic_agent_usage
+    weight: 103
   - name: CentOS
     identifier: basic_agent_usage_centos
     url: agent/basic_agent_usage/centos/
-    weight: 103
+    weight: 104
+    parent: basic_agent_usage
+  - name: Chef
+    identifier: basic_agent_usage_chef
+    url: agent/basic_agent_usage/chef/
+    weight: 105
     parent: basic_agent_usage
   - name: Debian
     identifier: basic_agent_usage_deb
     url: agent/basic_agent_usage/deb/
-    weight: 104
+    weight: 106
     parent: basic_agent_usage
   - name: Fedora
     identifier: basic_agent_usage_fedora
     url: agent/basic_agent_usage/fedora/
-    weight: 106
+    weight: 107
     parent: basic_agent_usage
   - name: Heroku
     identifier: basic_agent_usage_heroku
     url: agent/basic_agent_usage/heroku/
-    weight: 107
+    weight: 108
     parent: basic_agent_usage
   - name: Mac OS X
     identifier: basic_agent_usage_osx
     url: agent/basic_agent_usage/osx/
-    weight: 108
+    weight: 109
+    parent: basic_agent_usage
+  - name: Puppet
+    identifier: basic_agent_usage_puppet
+    url: agent/basic_agent_usage/puppet/
+    weight: 110
     parent: basic_agent_usage
   - name: "Red\_Hat"
     identifier: basic_agent_usage_redhat
     url: agent/basic_agent_usage/redhat/
-    weight: 109
+    weight: 111
+    parent: basic_agent_usage
+  - name: SaltStack
+    identifier: basic_agent_usage_saltstack
+    url: agent/basic_agent_usage/saltstack/
+    weight: 112
     parent: basic_agent_usage
   - name: SUSE
     identifier: basic_agent_usage_suse
     url: agent/basic_agent_usage/suse/
-    weight: 110
+    weight: 113
     parent: basic_agent_usage
   - name: Ubuntu
     identifier: basic_agent_usage_ubuntu
     url: agent/basic_agent_usage/ubuntu/
-    weight: 111
+    weight: 114
     parent: basic_agent_usage
   - name: Windows
     identifier: basic_agent_usage_windows
     url: agent/basic_agent_usage/windows/
-    weight: 112
+    weight: 115
     parent: basic_agent_usage
   - name: Depuis les sources
     identifier: basic_agent_usage_source
     url: agent/basic_agent_usage/source/
-    weight: 113
+    weight: 116
     parent: basic_agent_usage
   - name: Docker
     url: agent/docker/
     parent: agent
     identifier: agent_docker
     weight: 2
+  - name: Autodiscovery
+    url: agent/docker/integrations/
+    parent: agent_docker
+    identifier: agent_docker_integrations
+    weight: 201
   - name: APM
-    identifier: agent_docker_apm
     url: agent/docker/apm/
     parent: agent_docker
+    identifier: agent_docker_apm
     weight: 201
   - name: Collecte de logs
-    identifier: agent_docker_log
     url: agent/docker/log/
     parent: agent_docker
+    identifier: agent_docker_log
     weight: 203
+  - name: Extraction de tag
+    url: agent/docker/tag/
+    parent: agent_docker
+    identifier: agent_docker_tag
+    weight: 204
+  - name: Prometheus
+    url: agent/docker/prometheus/
+    parent: agent_docker
+    identifier: agent_docker_prometheus
+    weight: 205
+  - name: Données collectées
+    url: agent/docker/data_collected/
+    parent: agent_docker
+    identifier: agent_docker_data_collected
+    weight: 206
   - name: Kubernetes
     url: agent/kubernetes/
     parent: agent
     identifier: agent_kubernetes
     weight: 3
-  - name: Log
+  - name: Collecte de logs
     url: agent/kubernetes/log/
     parent: agent_kubernetes
     identifier: agent_kubernetes_log
@@ -181,16 +228,26 @@ main:
     parent: agent_kubernetes
     identifier: agent_kubernetes_apm
     weight: 302
-  - name: Intégrations
+  - name: Autodiscovery
     url: agent/kubernetes/integrations/
     parent: agent_kubernetes
     identifier: agent_kubernetes_integrations
     weight: 303
+  - name: Prometheus
+    url: agent/kubernetes/prometheus/
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_prometheus
+    weight: 304
+  - name: Extraction de tag
+    url: agent/kubernetes/tag/
+    parent: agent_kubernetes
+    identifier: agent_kubernetes_tag
+    weight: 305
   - name: Données collectées
     url: agent/kubernetes/data_collected/
     parent: agent_kubernetes
     identifier: agent_kubernetes_data_collected
-    weight: 304
+    weight: 306
   - name: Agent de cluster
     url: agent/cluster_agent/
     parent: agent
@@ -229,7 +286,7 @@ main:
     identifier: cluster_agent_metadata_provider
     parent: agent_cluster
     weight: 407
-  - name: Générer le buildpack
+  - name: Créer l'image
     url: agent/cluster_agent/build/
     identifier: cluster_agent_build
     parent: agent_cluster
@@ -239,43 +296,6 @@ main:
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
     weight: 409
-  - name: Autodiscovery
-    url: agent/autodiscovery/
-    identifier: agent_autodiscovery
-    parent: agent
-    weight: 5
-  - name: Autodiscovery basique
-    url: agent/autodiscovery/basic_autodiscovery
-    parent: agent_autodiscovery
-    weight: 500
-  - name: Configuration automatique
-    url: agent/autodiscovery/auto_conf/
-    parent: agent_autodiscovery
-    weight: 502
-  - name: Modèles d'intégration
-    url: agent/autodiscovery/integrations/
-    parent: agent_autodiscovery
-    weight: 502
-  - name: Identificateur de conteneur
-    url: agent/autodiscovery/ad_identifiers/
-    parent: agent_autodiscovery
-    weight: 503
-  - name: Template variables
-    url: agent/autodiscovery/template_variables/
-    parent: agent_autodiscovery
-    weight: 504
-  - name: Extraction de tag
-    url: agent/autodiscovery/tag/
-    parent: agent_autodiscovery
-    weight: 505
-  - name: Gestion de découverte
-    url: agent/autodiscovery/management/
-    parent: agent_autodiscovery
-    weight: 506
-  - name: Dépannage
-    url: agent/autodiscovery/troubleshooting/
-    parent: agent_autodiscovery
-    weight: 509
   - name: Collecte de logs
     url: agent/logs/
     identifier: agent_logs
@@ -289,6 +309,10 @@ main:
     url: agent/logs/proxy
     parent: agent_logs
     weight: 602
+  - name: Transport
+    url: agent/logs/log_transport
+    parent: agent_logs
+    weight: 603
   - name: Proxy
     url: agent/proxy/
     parent: agent
@@ -340,6 +364,18 @@ main:
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
     weight: 907
+  - name: Problèmes relatifs à Autodiscovery
+    url: agent/troubleshooting/autodiscovery/
+    parent: agent_troubleshooting
+    weight: 908
+  - name: Problèmes relatifs aux conteneurs Windows
+    url: agent/troubleshooting/windows_containers
+    weight: 909
+    parent: agent_troubleshooting
+  - name: Configuration du runtime de l'Agent
+    url: agent/troubleshooting/config
+    weight: 910
+    parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
@@ -474,22 +510,33 @@ main:
     url: infrastructure/hostmap/
     parent: infrastructure
     weight: 3
-  - name: Container map
+  - name: Container Map
     url: infrastructure/containermap/
     parent: infrastructure
     weight: 4
-  - name: Live processes
+  - name: Live Processes
     url: infrastructure/process/
     parent: infrastructure
     weight: 5
-  - name: Live containers
+  - name: Live Containers
     url: infrastructure/livecontainers/
     parent: infrastructure
     weight: 6
   - name: Environnement sans serveur
     url: infrastructure/serverless/
     parent: infrastructure
+    identifier: serverless
     weight: 7
+  - name: Extension Azure App Services
+    url: infrastructure/serverless/azure_app_services/
+    parent: serverless
+    identifier: app_services_extension
+    weight: 701
+  - name: Couche Lambda Datadog
+    url: infrastructure/serverless/datadog_lambda_layer
+    parent: serverless
+    identifier: datadog_lambda_layer
+    weight: 701
   - name: Métriques
     url: metrics/
     identifier: metrics_top_level
@@ -557,7 +604,7 @@ main:
     parent: monitor_types
     identifier: monitor_types_integration
     weight: 106
-  - name: Live process
+  - name: Live Process
     url: monitors/monitor_types/process/
     parent: monitor_types
     identifier: monitor_types_process
@@ -632,14 +679,16 @@ main:
     weight: 7
     parent: alerting
     identifier: slos
-  - name: SLO basé sur des monitors
+  - name: SLO basés sur des monitors
     url: monitors/service_level_objectives/monitor/
     parent: slos
-    weight: 7.1
-  - name: SLO basé sur des événements
-    url: monitors/service_level_objectives/event/
+    identifier: slos_monitor
+    weight: 701
+  - name: SLO basés sur des métriques
+    url: monitors/service_level_objectives/metric/
     parent: slos
-    weight: 7.2
+    identifier: slos_metric
+    weight: 702
   - name: Guides
     url: monitors/guide/
     weight: 100
@@ -649,288 +698,348 @@ main:
     pre: nav_tracing
     identifier: tracing
     weight: 120000
-  - name: Activer la collecte de traces
+  - name: Compatibilité
+    url: tracing/compatibility_requirements/
+    identifier: tracing_compatibility_requirements
+    parent: tracing
+    weight: 1
+  - name: Java
+    url: tracing/compatibility_requirements/java
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_java
+    weight: 101
+  - name: Python
+    url: tracing/compatibility_requirements/python
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_python
+    weight: 102
+  - name: Ruby
+    url: tracing/compatibility_requirements/ruby
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_ruby
+    weight: 103
+  - name: Go
+    url: tracing/compatibility_requirements/go
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/compatibility_requirements/nodejs
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/compatibility_requirements/php
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_php
+    weight: 106
+  - name: C++
+    url: tracing/compatibility_requirements/cpp
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_cpp
+    weight: 107
+  - name: .NET Core
+    url: tracing/compatibility_requirements/dotnet-core
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_dotnet_core
+    weight: 108
+  - name: .NET Framework
+    url: tracing/compatibility_requirements/dotnet-framework
+    parent: tracing_compatibility_requirements
+    identifier: tracing_compatibility_requirements_dotnet_framework
+    weight: 109
+  - name: Configuration de l'Agent
     url: tracing/send_traces/
     identifier: tracing_send_traces
     parent: tracing
-    weight: 1
+    weight: 2
   - name: Instrumenter votre application
     url: tracing/setup/
     parent: tracing
     identifier: tracing_setup
-    weight: 2
+    weight: 3
   - name: Java
     url: tracing/setup/java/
     parent: tracing_setup
     identifier: tracing_setup_java
-    weight: 201
+    weight: 301
   - name: Python
     url: tracing/setup/python/
     parent: tracing_setup
     identifier: tracing_setup_python
-    weight: 202
+    weight: 302
   - name: Ruby
     url: tracing/setup/ruby/
     parent: tracing_setup
     identifier: tracing_setup_ruby
-    weight: 203
+    weight: 303
   - name: Go
     url: tracing/setup/go/
     parent: tracing_setup
     identifier: tracing_setup_go
-    weight: 204
+    weight: 304
   - name: Node.js
     url: tracing/setup/nodejs/
     parent: tracing_setup
     identifier: tracing_setup_nodejs
-    weight: 205
+    weight: 305
   - name: .NET Framework
     url: tracing/setup/dotnet-framework/
     parent: tracing_setup
     identifier: tracing_setup_dotnet_framework
-    weight: 206
-  - name: Core .NET
+    weight: 306
+  - name: .NET Core
     url: tracing/setup/dotnet-core/
     parent: tracing_setup
     identifier: tracing_setup_dotnet_core
-    weight: 207
+    weight: 307
   - name: PHP
     url: tracing/setup/php/
     parent: tracing_setup
     identifier: tracing_setup_php
-    weight: 208
+    weight: 308
   - name: C++
     url: tracing/setup/cpp/
     parent: tracing_setup
     identifier: tracing_setup_cpp
-    weight: 209
+    weight: 309
   - name: Envoy
     url: tracing/setup/envoy/
     parent: tracing_setup
     identifier: tracing_setup_envoy
-    weight: 211
+    weight: 311
   - name: NGINX
     url: tracing/setup/nginx/
     parent: tracing_setup
     identifier: tracing_setup_nginx
-    weight: 212
+    weight: 312
   - name: Istio
     url: tracing/setup/istio/
     identifier: tracing_setup_istio
     parent: tracing_setup
-    weight: 213
+    weight: 313
   - name: App Analytics
     url: tracing/app_analytics/
     parent: tracing
     identifier: app_analytics
-    weight: 3
+    weight: 4
   - name: Visualiser les analyses
     url: tracing/app_analytics/analytics/
     parent: app_analytics
-    weight: 303
+    weight: 403
   - name: Recherche de traces
     url: tracing/app_analytics/search/
     parent: app_analytics
-    weight: 304
-  - name: Monitorez App Analytics
+    weight: 404
+  - name: Monitors App Analytics
     url: monitors/monitor_types/apm/?tab=appanalytics
     parent: app_analytics
-    weight: 305
+    weight: 405
+  - name: "Live\_Tail"
+    url: tracing/livetail/
+    parent: tracing
+    identifier: live tailing
+    weight: 5
   - name: Associer vos logs à vos traces
     url: tracing/connect_logs_and_traces/
     parent: tracing
     identifier: tracing_connect_logs_and_traces
-    weight: 4
+    weight: 6
   - name: Java
     url: tracing/connect_logs_and_traces/java
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_java
-    weight: 401
+    weight: 601
   - name: Python
     url: tracing/connect_logs_and_traces/python
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_python
-    weight: 402
+    weight: 602
   - name: Go
     url: tracing/connect_logs_and_traces/go
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_go
-    weight: 403
+    weight: 603
   - name: Ruby
     url: tracing/connect_logs_and_traces/ruby
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_ruby
-    weight: 404
+    weight: 604
   - name: PHP
     url: tracing/connect_logs_and_traces/php
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_php
-    weight: 405
+    weight: 605
   - name: NodeJS
     url: tracing/connect_logs_and_traces/nodejs
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_nodejs
-    weight: 406
+    weight: 606
   - name: .NET
     url: tracing/connect_logs_and_traces/dotnet
     parent: tracing_connect_logs_and_traces
     identifier: tracing_connect_logs_and_traces_dotnet
-    weight: 407
+    weight: 607
   - name: Métriques runtime
     url: tracing/runtime_metrics/
     parent: tracing
     identifier: tracing_runtime_metrics
-    weight: 5
+    weight: 7
   - name: Java
     url: tracing/runtime_metrics/java
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_java
-    weight: 501
+    weight: 701
   - name: Python
     url: tracing/runtime_metrics/python
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_python
-    weight: 502
+    weight: 702
   - name: Ruby
     url: tracing/runtime_metrics/ruby
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_ruby
-    weight: 503
+    weight: 703
   - name: NodeJS
     url: tracing/runtime_metrics/nodejs
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_nodejs
-    weight: 504
+    weight: 704
   - name: Profiling
     url: tracing/profiling/
     parent: tracing
     identifier: profiling
-    weight: 6
+    weight: 8
+  - name: Proxy
+    url: tracing/profiling/proxy
+    parent: profiling
+    identifier: profiling_proxy
+    weight: 801
   - name: Instrumentation manuelle
     url: tracing/manual_instrumentation/
     parent: tracing
     identifier: tracing_manual_instrumentation
-    weight: 7
+    weight: 9
   - name: Java
     url: tracing/manual_instrumentation/java
     parent: tracing_manual_instrumentation
     identifier: tracing_manual_instrumentation_java
-    weight: 701
+    weight: 901
   - name: Python
     url: tracing/manual_instrumentation/python
     parent: tracing_manual_instrumentation
     identifier: tracing_manual_instrumentation_python
-    weight: 702
+    weight: 902
   - name: Ruby
     url: tracing/manual_instrumentation/ruby
     parent: tracing_manual_instrumentation
     identifier: tracing_manual_instrumentation_ruby
-    weight: 703
+    weight: 903
   - name: Go
     url: tracing/manual_instrumentation/go
     parent: tracing_manual_instrumentation
     identifier: tracing_manual_instrumentation_go
-    weight: 704
+    weight: 904
   - name: NodeJS
     url: tracing/manual_instrumentation/nodejs
     parent: tracing_manual_instrumentation
     identifier: tracing_manual_instrumentation_nodejs
-    weight: 705
+    weight: 905
   - name: PHP
     url: tracing/manual_instrumentation/php
     parent: tracing_manual_instrumentation
     identifier: tracing_manual_instrumentation_php
-    weight: 706
+    weight: 906
   - name: C++
     url: tracing/manual_instrumentation/cpp
     parent: tracing_manual_instrumentation
     identifier: tracing_manual_instrumentation_cpp
-    weight: 707
+    weight: 907
   - name: .NET
     url: tracing/manual_instrumentation/dotnet
     parent: tracing_manual_instrumentation
     identifier: tracing_manual_instrumentation_dotnet
-    weight: 708
+    weight: 908
   - name: OpenTracing
     url: tracing/opentracing/
     parent: tracing
     identifier: tracing_opentracing
-    weight: 8
+    weight: 10
   - name: Java
-    url: tracing/opentracing/java
+    url: tracing/manual_instrumentation/java
     parent: tracing_opentracing
     identifier: tracing_opentracing_java
-    weight: 801
+    weight: 1001
   - name: Python
     url: tracing/opentracing/python
     parent: tracing_opentracing
     identifier: tracing_opentracing_python
-    weight: 802
+    weight: 1002
   - name: Go
     url: tracing/opentracing/go
     parent: tracing_opentracing
     identifier: tracing_opentracing_go
-    weight: 803
+    weight: 1003
   - name: PHP
     url: tracing/opentracing/php
     parent: tracing_opentracing
     identifier: tracing_opentracing_php
-    weight: 804
+    weight: 1004
   - name: Ruby
     url: tracing/opentracing/ruby
     parent: tracing_opentracing
     identifier: tracing_opentracing_ruby
-    weight: 805
+    weight: 1005
   - name: .NET
-    url: tracing/opentracing/dotnet
+    url: tracing/manual_instrumentation/dotnet
     parent: tracing_opentracing
     identifier: tracing_opentracing_dotnet
-    weight: 806
+    weight: 1006
   - name: NodeJS
     url: tracing/opentracing/nodejs
     parent: tracing_opentracing
     identifier: tracing_opentracing_nodejs
-    weight: 807
+    weight: 1007
   - name: Glossaire de l'APM
     url: tracing/visualization/
     parent: tracing
     identifier: tracing_vis
-    weight: 9
+    weight: 11
   - name: Liste des services
     url: tracing/visualization/services_list/
     parent: tracing_vis
-    weight: 901
+    weight: 1101
   - name: Page Service
     url: tracing/visualization/service/
     parent: tracing_vis
-    weight: 902
-  - name: Page Resource
+    weight: 1102
+  - name: Page Ressource
     url: tracing/visualization/resource/
     parent: tracing_vis
-    weight: 903
+    weight: 1103
   - name: Vue Trace
     url: tracing/visualization/trace/
     parent: tracing_vis
-    weight: 904
+    weight: 1104
   - name: Service Map
     url: tracing/visualization/services_map/
     parent: tracing_vis
-    weight: 905
+    weight: 1105
   - name: Guides
     url: tracing/guide/
     identifier: tracing_guides
     parent: tracing
-    weight: 10
+    weight: 12
   - name: Dépannage
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
     parent: tracing
-    weight: 11
+    weight: 13
   - name: Métriques APM de l'Agent
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 12
+    weight: 14
   - name: Log Management
     url: logs/
     pre: nav_logs
@@ -951,45 +1060,50 @@ main:
     url: logs/log_collection/android/
     parent: log_collection
     weight: 102
+  - name: iOS
+    identifier: log_ios
+    url: logs/log_collection/ios/
+    parent: log_collection
+    weight: 103
   - name: Csharp
     url: logs/log_collection/csharp/
     parent: log_collection
-    weight: 103
+    weight: 104
   - name: Go
     identifier: log_go
     url: logs/log_collection/go/
     parent: log_collection
-    weight: 104
+    weight: 105
   - name: Java
     url: logs/log_collection/java/
     parent: log_collection
     identifier: log_collection_java
-    weight: 105
+    weight: 106
   - name: Nodejs
     url: logs/log_collection/nodejs/
     parent: log_collection
-    weight: 106
+    weight: 107
   - name: PHP
     identifier: log_php
     url: logs/log_collection/php/
     parent: log_collection
-    weight: 107
+    weight: 108
   - name: Python
     identifier: log_python
     url: logs/log_collection/python/
     parent: log_collection
-    weight: 108
+    weight: 109
   - name: Ruby
     url: logs/log_collection/ruby/
     parent: log_collection
     identifier: log_collection_ruby
-    weight: 109
+    weight: 110
   - name: Autres intégrations
-    url: integrations/#collecte-de-logs-cat
+    url: 'integrations/#collecte-de-logs-cat'
     identifier: other_integrations
     parent: log_collection
-    weight: 110
-  - name: Traitement
+    weight: 111
+  - name: Processing
     url: logs/processing/
     parent: log_management
     identifier: log_processing
@@ -1011,62 +1125,65 @@ main:
     url: logs/processing/attributes_naming_convention/
     parent: log_processing
     weight: 204
-  - name: "Live\_Tail"
-    url: logs/live_tail/
-    parent: log_management
-    identifier: log_live_tail
-    weight: 3
   - name: Générer des métriques
     url: logs/logs_to_metrics/
     parent: log_management
     identifier: log_to_metrics
-    weight: 4
+    weight: 3
   - name: Archives
     url: logs/archives/
     parent: log_management
     identifier: log_archives
-    weight: 5
+    weight: 4
   - name: Réintégration à partir des archives
     url: logs/archives/rehydrating
     parent: log_archives
-    weight: 501
+    weight: 401
   - name: Index
     url: logs/indexes
     parent: log_management
     identifier: log_indexes
-    weight: 6
+    weight: 5
   - name: Log Explorer
     url: logs/explorer/
     parent: log_management
     identifier: log_explorer
-    weight: 7
-  - name: Recherche
-    url: logs/explorer/search/
+    weight: 6
+  - name: "Live\_Tail"
+    url: logs/explorer/live_tail/
     parent: log_explorer
-    weight: 701
-  - name: Analyse de logs
-    url: logs/explorer/analytics/
+    weight: 601
+  - name: Liste de logs
+    url: logs/explorer/list/
     parent: log_explorer
-    weight: 702
+    weight: 602
   - name: Log Patterns
     url: logs/explorer/patterns/
     parent: log_explorer
-    weight: 703
+    weight: 603
+  - name: Analyse de logs
+    url: logs/explorer/analytics/
+    parent: log_explorer
+    weight: 604
   - name: Vues enregistrées
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 704
+    weight: 605
   - name: Facettes
     url: logs/explorer/facets/
     parent: log_explorer
-    weight: 705
+    weight: 606
+  - name: Syntaxe de recherche
+    url: logs/search_syntax/
+    parent: log_management
+    weight: 7
   - name: Associer vos logs à vos traces
     url: tracing/connect_logs_and_traces/?tab=java
     parent: log_management
     identifier: logs_traces_connection
     weight: 8
-  - name: Corrélation entre les logs et les métriques
-    url: dashboards/timeboards/#graph-menu
+  - name: Mettre en corrélation vos logs et vos métriques
+    url: 'dashboards/timeboards/#graph-menu'
     parent: log_management
     identifier: logs_metrics_correlation
     weight: 9
@@ -1094,11 +1211,16 @@ main:
     parent: security_monitoring
     identifier: security_monitoring_explorer
     weight: 2
-  - name: Règles de détection
+  - name: Règles de détection des menaces
     url: security_monitoring/detection_rules
     parent: security_monitoring
     identifier: security_monitoring_detection_rules
     weight: 3
+  - name: Règles par défaut
+    url: security_monitoring/default_rules/
+    parent: security_monitoring
+    identifier: security_monitoring_default_detection_rules
+    weight: 4
   - name: Synthetics
     url: synthetics/
     pre: nav_synthetics
@@ -1114,7 +1236,7 @@ main:
     parent: synthetics
     identifier: synthetics_browser_tests
     weight: 2
-  - name: Actions
+  - name: Étapes
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 201
@@ -1136,23 +1258,20 @@ main:
     parent: synthetics
     identifier: synthetics_apm
     weight: 4
-  - name: Identifier les bots Synthetics
-    url: synthetics/identify_synthetics_bots/
-    parent: synthetics
-    weight: 5
   - name: Paramètres
     url: synthetics/settings/
     parent: synthetics
-    weight: 6
-  - name: Guide
+    weight: 5
+  - name: Guides
     url: synthetics/guide/
     parent: synthetics
-    weight: 7
+    identifier: synthetics_guides
+    weight: 6
   - name: Dépannage
     url: synthetics/troubleshooting/
     parent: synthetics
     identifier: synthetics_troubleshooting
-    weight: 8
+    weight: 7
   - name: Real User Monitoring
     url: real_user_monitoring/
     pre: nav_rum
@@ -1173,6 +1292,21 @@ main:
     parent: rum
     identifier: rum_dashboards
     weight: 2
+  - name: Vue d'ensemble des performances
+    url: real_user_monitoring/dashboards/performance_overview_dashboard
+    parent: rum_dashboards
+    identifier: rum_dashboards_performance
+    weight: 201
+  - name: Ressources
+    url: real_user_monitoring/dashboards/resources_dashboard
+    parent: rum_dashboards
+    identifier: rum_dashboards_resources
+    weight: 202
+  - name: Erreurs
+    url: real_user_monitoring/dashboards/errors_dashboard
+    parent: rum_dashboards
+    identifier: rum_dashboards_errors
+    weight: 203
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
@@ -1208,7 +1342,7 @@ main:
     parent: rum_data_collected
     identifier: rum_data_collected_long_task
     weight: 403
-  - name: Error
+  - name: Erreur
     url: real_user_monitoring/data_collected/error
     parent: rum_data_collected
     identifier: rum_data_collected_error
@@ -1218,6 +1352,11 @@ main:
     parent: rum_data_collected
     identifier: rum_data_collected_user_action
     weight: 405
+  - name: Guides
+    url: real_user_monitoring/guide
+    parent: rum
+    identifier: rum_guides
+    weight: 4
   - name: Surveillance réseau
     url: network_performance_monitoring/
     pre: nav_network
@@ -1278,12 +1417,12 @@ main:
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_metrics_type
     weight: 201
-  - name: Envoi de métriques - Check de l'Agent
+  - name: Envoi - Check de l'Agent
     url: developers/metrics/agent_metrics_submission/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_agent
     weight: 202
-  - name: Envoi de métriques - DogStatsD
+  - name: Envoi - DogStatsD
     url: developers/metrics/dogstatsd_metrics_submission/
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_dogstatsd
@@ -1294,7 +1433,7 @@ main:
     identifier: dev_tools_metrics_powershell
     weight: 204
   - name: Envoi de métriques - API
-    url: api/#envoyer-des-points-de-series-temporelles
+    url: 'api/v1/metrics/#envoyer-des-metriques'
     parent: dev_tools_metrics
     identifier: dev_tools_metrics_api
     weight: 205
@@ -1329,7 +1468,7 @@ main:
     identifier: dev_tools_events_mail
     weight: 303
   - name: API
-    url: api/#envoyer-un-evenement
+    url: 'api/v1/events/#envoyer-un-evenement'
     parent: dev_tools_events
     identifier: dev_tools_events_api
     weight: 304
@@ -1338,18 +1477,18 @@ main:
     parent: dev_tools
     identifier: dev_tools_service_check
     weight: 4
-  - name: Envoi de métriques - Check de l'Agent
+  - name: Envoi - Check de l'Agent
     url: developers/service_checks/agent_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_agent_check
     weight: 401
-  - name: Envoi de métriques - DogStatsD
+  - name: Envoi - DogStatsD
     url: developers/service_checks/dogstatsd_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_dogstatsd
     weight: 402
-  - name: Envoi de checks de service - API
-    url: 'https://docs.datadoghq.com/api/#service-checks'
+  - name: Envoi - API
+    url: api/v1/service-checks/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
     weight: 403
@@ -1374,18 +1513,22 @@ main:
     parent: dev_tools
     identifier: dev_tools_integrations
     weight: 9
-  - name: Créer une intégration
+  - name: Créer une nouvelle intégration
     url: developers/integrations/new_check_howto/
     parent: dev_tools_integrations
     weight: 901
+  - name: Références pour les ressources d'intégration
+    url: developers/integrations/check_references/
+    parent: dev_tools_integrations
+    weight: 902
   - name: Python
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 902
+    weight: 903
   - name: Anciennes intégrations
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 903
+    weight: 904
   - name: Amazon CloudFormation
     url: developers/amazon_cloudformation/
     parent: dev_tools
@@ -1411,65 +1554,71 @@ main:
     parent: account_management
     identifier: account_management_users
     weight: 1
-  - name: Rôle Datadog par défaut
-    url: account_management/users/default_roles/
-    parent: account_management_users
-    weight: 101
+  - name: RBAC
+    url: account_management/rbac/
+    parent: account_management
+    identifier: account_management_rbac
+    weight: 2
+  - name: Autorisations
+    url: account_management/rbac/permissions
+    parent: account_management_rbac
+    identifier: account_management_rbac_permissions
+    weight: 201
   - name: Paramètres d'organisation
     url: account_management/org_settings/
     parent: account_management
-    weight: 2
+    weight: 3
   - name: SSO avec SAML
     url: account_management/saml/
     identifier: account_management_saml
     parent: account_management
-    weight: 3
+    weight: 4
   - name: "Active\_Directory"
     url: account_management/saml/activedirectory/
     parent: account_management_saml
-    weight: 301
+    weight: 401
   - name: Auth0
     url: account_management/saml/auth0/
     parent: account_management_saml
-    weight: 302
+    weight: 402
   - name: Azure
     url: account_management/saml/azure/
     parent: account_management_saml
-    weight: 303
+    weight: 403
   - name: Google
     url: account_management/saml/google/
     parent: account_management_saml
-    weight: 304
+    weight: 404
   - name: NoPassword
     url: account_management/saml/nopassword/
     parent: account_management_saml
-    weight: 305
+    weight: 405
   - name: Okta
     url: account_management/saml/okta/
     parent: account_management_saml
-    weight: 306
+    weight: 406
   - name: SafeNet
     url: account_management/saml/safenet/
     parent: account_management_saml
-    weight: 307
+    weight: 407
   - name: Comptes multi-org
     url: account_management/multi_organization/
     parent: account_management
-    weight: 4
+    weight: 5
   - name: Changer d'organisation
     url: account_management/org_switching/
     parent: account_management
-    weight: 5
+    weight: 6
   - name: Facturation
     url: account_management/billing/
     parent: account_management
-    weight: 6
+    weight: 7
   - name: Clés d'API et d'application
     url: account_management/api-app-keys/
     parent: account_management
-    weight: 7
+    weight: 8
   - name: Sécurité
-    url: /security/
+    url: security/
     pre: nav_security
     identifier: security
     weight: 200000
@@ -1495,1216 +1644,1190 @@ main:
     identifier: help_top_level
     weight: 210000
 api_v1:
-  - name: Overview
-    url: /fr/api/v1/
-    identifier: API V1 overview
+  - name: Présentation
+    url: /api/v1/
+    identifier: Présentation de l'API V1
     weight: -10
-  - name: Install the Datadog Agent
-    url: install-the-datadog-agent
-    weight: 1
-    parent: API V1 overview
-  - name: Send data to Datadog
-    url: send-data-to-datadog
-    weight: 2
-    parent: API V1 overview
-  - name: Visualize your data
-    url: visualize-your-data
-    weight: 3
-    parent: API V1 overview
-  - name: Manage your account
-    url: manage-your-account
-    weight: 4
-    parent: API V1 overview
-  - name: Rate Limiting
+  - name: Authentification
+    url: authentification
+    parent: Présentation de l'API V1
+  - name: Limites de débit
     url: rate-limiting
-    parent: API V1 overview
+    parent: Présentation de l'API V1
     weight: 5
-  - name: AWS Integration
-    url: /fr/api/v1/aws-integration/
-    identifier: AWS Integration
+  - name: Intégration AWS
+    url: /api/v1/aws-integration/
+    identifier: Intégration AWS
     generated: true
-  - name: Delete an AWS integration
-    parent: AWS Integration
+  - name: Supprimer une intégration AWS
+    parent: Intégration AWS
     url: delete-an-aws-integration
     generated: true
-  - name: List all AWS integrations
-    parent: AWS Integration
+  - name: Énumérer toutes les intégrations AWS
+    parent: Intégration AWS
     url: list-all-aws-integrations
     generated: true
-  - name: Create an AWS integration
-    parent: AWS Integration
+  - name: Créer une intégration AWS
+    parent: Intégration AWS
     url: create-an-aws-integration
     generated: true
-  - name: Update an AWS integration
-    parent: AWS Integration
+  - name: Mettre à jour une intégration AWS
+    parent: Intégration AWS
     url: update-an-aws-integration
     generated: true
-  - name: List namespace rules
-    parent: AWS Integration
+  - name: Énumérer les règles d'espace de nommage
+    parent: Intégration AWS
     url: list-namespace-rules
     generated: true
-  - name: Generate a new external ID
-    parent: AWS Integration
+  - name: Générer un nouvel ID externe
+    parent: Intégration AWS
     url: generate-a-new-external-id
     generated: true
-  - name: AWS Logs Integration
-    url: /fr/api/v1/aws-logs-integration/
-    identifier: AWS Logs Integration
+  - name: Intégration de logs AWS
+    url: /api/v1/aws-logs-integration/
+    identifier: Intégration de logs AWS
     generated: true
-  - name: Delete an AWS Logs integration
-    parent: AWS Logs Integration
+  - name: Supprimer une intégration de logs AWS
+    parent: Intégration de logs AWS
     url: delete-an-aws-logs-integration
     generated: true
-  - name: List all AWS Logs integrations
-    parent: AWS Logs Integration
+  - name: Énumérer toutes les intégrations de logs AWS
+    parent: Intégration de logs AWS
     url: list-all-aws-logs-integrations
     generated: true
-  - name: Add AWS Log Lambda ARN
-    parent: AWS Logs Integration
+  - name: Ajouter l'ARN de Lambda aux logs AWS
+    parent: Intégration de logs AWS
     url: add-aws-log-lambda-arn
     generated: true
-  - name: Check that an AWS Lambda Function exists
-    parent: AWS Logs Integration
+  - name: Vérifier qu'une fonction Lambda AWS existe
+    parent: Intégration de logs AWS
     url: check-that-an-aws-lambda-function-exists
     generated: true
-  - name: Get list of AWS log ready services
-    parent: AWS Logs Integration
+  - name: Obtenir la liste des services AWS compatibles avec la collecte de logs
+    parent: Intégration de logs AWS
     url: get-list-of-aws-log-ready-services
     generated: true
-  - name: Enable an AWS Logs integration
-    parent: AWS Logs Integration
+  - name: Activer une intégration de logs AWS
+    parent: Intégration de logs AWS
     url: enable-an-aws-logs-integration
     generated: true
-  - name: Check permissions for log services
-    parent: AWS Logs Integration
+  - name: Vérifier les autorisations pour les services qui génèrent des logs
+    parent: Intégration de logs AWS
     url: check-permissions-for-log-services
     generated: true
-  - name: Authentication
-    url: /fr/api/v1/authentication/
-    identifier: Authentication
+  - name: Authentification
+    url: /api/v1/authentication/
+    identifier: Authentification
     generated: true
-  - name: Validate API key
-    parent: Authentication
+  - name: Valider la clé d'API
+    parent: Authentification
     url: validate-api-key
     generated: true
-  - name: Azure Integration
-    url: /fr/api/v1/azure-integration/
-    identifier: Azure Integration
+  - name: Intégration Azure
+    url: /api/v1/azure-integration/
+    identifier: Intégration Azure
     generated: true
-  - name: Delete an Azure integration
-    parent: Azure Integration
+  - name: Supprimer une intégration Azure
+    parent: Intégration Azure
     url: delete-an-azure-integration
     generated: true
-  - name: List all Azure integrations
-    parent: Azure Integration
+  - name: Énumérer toutes les intégrations Azure
+    parent: Intégration Azure
     url: list-all-azure-integrations
     generated: true
-  - name: Create an Azure integration
-    parent: Azure Integration
+  - name: Créer une intégration Azure
+    parent: Intégration Azure
     url: create-an-azure-integration
     generated: true
-  - name: Update an Azure integration
-    parent: Azure Integration
+  - name: Mettre à jour une intégration Azure
+    parent: Intégration Azure
     url: update-an-azure-integration
     generated: true
-  - name: Update Azure integration host filters
-    parent: Azure Integration
+  - name: Mettre à jour les filtres de host d'une intégration Azure
+    parent: Intégration Azure
     url: update-azure-integration-host-filters
     generated: true
-  - name: Dashboard Lists
-    url: /fr/api/v1/dashboard-lists/
-    identifier: Dashboard Lists
+  - name: Listes de dashboards
+    url: /api/v1/dashboard-lists/
+    identifier: Listes de dashboards
     generated: true
-  - name: Get all dashboard lists
-    parent: Dashboard Lists
+  - name: Récupérer toutes les listes de dashboards
+    parent: Listes de dashboards
     url: get-all-dashboard-lists
     generated: true
-  - name: Create a dashboard list
-    parent: Dashboard Lists
+  - name: Créer une liste de dashboards
+    parent: Listes de dashboards
     url: create-a-dashboard-list
     generated: true
-  - name: Delete a dashboard list
-    parent: Dashboard Lists
+  - name: Supprimer une liste de dashboards
+    parent: Listes de dashboards
     url: delete-a-dashboard-list
     generated: true
-  - name: Get a dashboard list
-    parent: Dashboard Lists
+  - name: Récupérer une liste de dashboards
+    parent: Listes de dashboards
     url: get-a-dashboard-list
     generated: true
-  - name: Update a dashboard list
-    parent: Dashboard Lists
+  - name: Mettre à jour une liste de dashboards
+    parent: Listes de dashboards
     url: update-a-dashboard-list
     generated: true
   - name: Dashboards
-    url: /fr/api/v1/dashboards/
+    url: /api/v1/dashboards/
     identifier: Dashboards
     generated: true
-  - name: Get all dashboards
+  - name: Récupérer tous les dashboards
     parent: Dashboards
     url: get-all-dashboards
     generated: true
-  - name: Create a new dashboard
+  - name: Créer un dashboard
     parent: Dashboards
     url: create-a-new-dashboard
     generated: true
-  - name: Delete a dashboard
+  - name: Supprimer un dashboard
     parent: Dashboards
     url: delete-a-dashboard
     generated: true
-  - name: Get a dashboard
+  - name: Récupérer un dashboard
     parent: Dashboards
     url: get-a-dashboard
     generated: true
-  - name: Update a dashboard
+  - name: Mettre à jour un dashboard
     parent: Dashboards
     url: update-a-dashboard
     generated: true
   - name: Downtimes
-    url: /fr/api/v1/downtimes/
+    url: /api/v1/downtimes/
     identifier: Downtimes
     generated: true
-  - name: Get all downtimes
+  - name: Récupérer tous les downtimes
     parent: Downtimes
     url: get-all-downtimes
     generated: true
-  - name: Schedule a downtime
+  - name: Planifier un downtime
     parent: Downtimes
     url: schedule-a-downtime
     generated: true
-  - name: Cancel downtimes by scope
+  - name: Annuler les downtimes selon le contexte
     parent: Downtimes
     url: cancel-downtimes-by-scope
     generated: true
-  - name: Cancel a downtime
+  - name: Annuler un downtime
     parent: Downtimes
     url: cancel-a-downtime
     generated: true
-  - name: Get a downtime
+  - name: Récupérer un downtime
     parent: Downtimes
     url: get-a-downtime
     generated: true
-  - name: Update a downtime
+  - name: Mettre à jour un downtime
     parent: Downtimes
     url: update-a-downtime
     generated: true
-  - name: Embeddable Graphs
-    url: /fr/api/v1/embeddable-graphs/
-    identifier: Embeddable Graphs
+  - name: Graphiques intégrables
+    url: /api/v1/embeddable-graphs/
+    identifier: Graphiques intégrables
     generated: true
-  - name: Get all embeds
-    parent: Embeddable Graphs
+  - name: Récupérer tous les embeds
+    parent: Graphiques intégrables
     url: get-all-embeds
     generated: true
-  - name: Create embed
-    parent: Embeddable Graphs
+  - name: Créer un embed
+    parent: Graphiques intégrables
     url: create-embed
     generated: true
-  - name: Get specific embed
-    parent: Embeddable Graphs
+  - name: Récupérer un embed spécifique
+    parent: Graphiques intégrables
     url: get-specific-embed
     generated: true
-  - name: Enable embed
-    parent: Embeddable Graphs
+  - name: Activer un embed
+    parent: Graphiques intégrables
     url: enable-embed
     generated: true
-  - name: Revoke embed
-    parent: Embeddable Graphs
+  - name: Révoquer un embed
+    parent: Graphiques intégrables
     url: revoke-embed
     generated: true
-  - name: Events
-    url: /fr/api/v1/events/
-    identifier: Events
+  - name: Événements
+    url: /api/v1/events/
+    identifier: Événements
     generated: true
-  - name: Query the event stream
-    parent: Events
+  - name: Interroger le flux d'événements
+    parent: Événements
     url: query-the-event-stream
     generated: true
-  - name: Post an event
-    parent: Events
+  - name: Envoyer un événement
+    parent: Événements
     url: post-an-event
     generated: true
-  - name: Get an event
-    parent: Events
+  - name: Récupérer un événement
+    parent: Événements
     url: get-an-event
     generated: true
-  - name: GCP Integration
-    url: /fr/api/v1/gcp-integration/
-    identifier: GCP Integration
+  - name: Intégration GCP
+    url: /api/v1/gcp-integration/
+    identifier: Intégration GCP
     generated: true
-  - name: Delete a GCP integration
-    parent: GCP Integration
+  - name: Supprimer une intégration GCP
+    parent: Intégration GCP
     url: delete-a-gcp-integration
     generated: true
-  - name: List all GCP integrations
-    parent: GCP Integration
+  - name: Énumérer toutes les intégrations GCP
+    parent: Intégration GCP
     url: list-all-gcp-integrations
     generated: true
-  - name: Create a GCP integration
-    parent: GCP Integration
+  - name: Créer une intégration GCP
+    parent: Intégration GCP
     url: create-a-gcp-integration
     generated: true
-  - name: Update a GCP integration
-    parent: GCP Integration
+  - name: Mettre à jour une intégration GCP
+    parent: Intégration GCP
     url: update-a-gcp-integration
     generated: true
   - name: Hosts
-    url: /fr/api/v1/hosts/
+    url: /api/v1/hosts/
     identifier: Hosts
     generated: true
-  - name: Mute a host
+  - name: Désactiver un host
     parent: Hosts
     url: mute-a-host
     generated: true
-  - name: Unmute a host
+  - name: Réactiver un host
     parent: Hosts
     url: unmute-a-host
     generated: true
-  - name: Get all hosts for your organization
+  - name: Récupérer tous les hosts de votre organisation
     parent: Hosts
     url: get-all-hosts-for-your-organization
     generated: true
-  - name: Get the total number of active hosts
+  - name: Récupérer le nombre total de hosts actifs
     parent: Hosts
     url: get-the-total-number-of-active-hosts
     generated: true
-  - name: IP Ranges
-    url: /fr/api/v1/ip-ranges/
-    identifier: IP Ranges
+  - name: Plages d'IP
+    url: /api/v1/ip-ranges/
+    identifier: Plages d'IP
     generated: true
-  - name: List IP Ranges
-    parent: IP Ranges
+  - name: Énumérer les plages d'IP
+    parent: Plages d'IP
     url: list-ip-ranges
     generated: true
-  - name: Key Management
-    url: /fr/api/v1/key-management/
-    identifier: Key Management
+  - name: Gestion des clés
+    url: /api/v1/key-management/
+    identifier: Gestion des clés
     generated: true
-  - name: Get all API keys
-    parent: Key Management
+  - name: Obtenir toutes les clés d'API
+    parent: Gestion des clés
     url: get-all-api-keys
     generated: true
-  - name: Create an API key
-    parent: Key Management
+  - name: Créer une clé d'API
+    parent: Gestion des clés
     url: create-an-api-key
     generated: true
-  - name: Delete an API key
-    parent: Key Management
+  - name: Supprimer une clé d'API
+    parent: Gestion des clés
     url: delete-an-api-key
     generated: true
-  - name: Get API key
-    parent: Key Management
+  - name: Obtenir la clé d'API
+    parent: Gestion des clés
     url: get-api-key
     generated: true
-  - name: Edit an API key
-    parent: Key Management
+  - name: Modifier une clé d'API
+    parent: Gestion des clés
     url: edit-an-api-key
     generated: true
-  - name: Get all application keys
-    parent: Key Management
+  - name: Obtenir toutes les clés d'application
+    parent: Gestion des clés
     url: get-all-application-keys
     generated: true
-  - name: Create an application key
-    parent: Key Management
+  - name: Créer une clé d'application
+    parent: Gestion des clés
     url: create-an-application-key
     generated: true
-  - name: Delete an application key
-    parent: Key Management
+  - name: Supprimer une clé d'application
+    parent: Gestion des clés
     url: delete-an-application-key
     generated: true
-  - name: Get an application key
-    parent: Key Management
+  - name: Obtenir une clé d'application
+    parent: Gestion des clés
     url: get-an-application-key
     generated: true
-  - name: Edit an application key
-    parent: Key Management
+  - name: Modifier une clé d'application
+    parent: Gestion des clés
     url: edit-an-application-key
     generated: true
   - name: Logs
-    url: /fr/api/v1/logs/
+    url: /api/v1/logs/
     identifier: Logs
     generated: true
-  - name: Get a list of logs
+  - name: Récupérer la liste des logs
     parent: Logs
     url: get-a-list-of-logs
     generated: true
-  - name: Send logs
+  - name: Envoyer des logs
     parent: Logs
     url: send-logs
     generated: true
-  - name: Logs Archives
-    url: /fr/api/v1/logs-archives/
-    identifier: Logs Archives
+  - name: Archives de logs
+    url: /api/v1/logs-archives/
+    identifier: Archives de logs
     generated: true
-  - name: Logs Indexes
-    url: /fr/api/v1/logs-indexes/
-    identifier: Logs Indexes
+  - name: Index de logs
+    url: /api/v1/logs-indexes/
+    identifier: Index de logs
     generated: true
-  - name: Get indexes order
-    parent: Logs Indexes
+  - name: Récupérer la séquence des index
+    parent: Index de logs
     url: get-indexes-order
     generated: true
-  - name: Update indexes order
-    parent: Logs Indexes
+  - name: Mettre à jour la séquence des index
+    parent: Index de logs
     url: update-indexes-order
     generated: true
-  - name: Get all indexes
-    parent: Logs Indexes
+  - name: Récupérer tous les index
+    parent: Index de logs
     url: get-all-indexes
     generated: true
-  - name: Get an index
-    parent: Logs Indexes
+  - name: Obtenir un index
+    parent: Index de logs
     url: get-an-index
     generated: true
-  - name: Update an index
-    parent: Logs Indexes
+  - name: Mettre à jour un index
+    parent: Index de logs
     url: update-an-index
     generated: true
-  - name: Logs Pipelines
-    url: /fr/api/v1/logs-pipelines/
-    identifier: Logs Pipelines
+  - name: Pipelines de logs
+    url: /api/v1/logs-pipelines/
+    identifier: Pipelines de logs
     generated: true
-  - name: Get pipeline order
-    parent: Logs Pipelines
+  - name: Récupérer la séquence des pipelines
+    parent: Pipelines de logs
     url: get-pipeline-order
     generated: true
-  - name: Update pipeline order
-    parent: Logs Pipelines
+  - name: Mettre à jour la séquence des pipelines
+    parent: Pipelines de logs
     url: update-pipeline-order
     generated: true
-  - name: Get all pipelines
-    parent: Logs Pipelines
+  - name: Récupérer tous les pipelines
+    parent: Pipelines de logs
     url: get-all-pipelines
     generated: true
-  - name: Create a pipeline
-    parent: Logs Pipelines
+  - name: Créer un pipeline
+    parent: Pipelines de logs
     url: create-a-pipeline
     generated: true
-  - name: Delete a pipeline
-    parent: Logs Pipelines
+  - name: Supprimer un pipeline
+    parent: Pipelines de logs
     url: delete-a-pipeline
     generated: true
-  - name: Get a pipeline
-    parent: Logs Pipelines
+  - name: Récupérer un pipeline
+    parent: Pipelines de logs
     url: get-a-pipeline
     generated: true
-  - name: Update a pipeline
-    parent: Logs Pipelines
+  - name: Mettre à jour un pipeline
+    parent: Pipelines de logs
     url: update-a-pipeline
     generated: true
-  - name: Logs Restriction Queries
-    url: /fr/api/v1/logs-restriction-queries/
-    identifier: Logs Restriction Queries
+  - name: Requêtes de restriction de logs
+    url: /api/v1/logs-restriction-queries/
+    identifier: Requêtes de restriction de logs
     generated: true
-  - name: Metrics
-    url: /fr/api/v1/metrics/
-    identifier: Metrics
+  - name: Métriques
+    url: /api/v1/metrics/
+    identifier: Métriques
     generated: true
-  - name: Get active metrics list
-    parent: Metrics
+  - name: Obtenir la liste des métriques actives
+    parent: Métriques
     url: get-active-metrics-list
     generated: true
-  - name: Get metric metadata
-    parent: Metrics
+  - name: Obtenir les métadonnées d'une métrique
+    parent: Métriques
     url: get-metric-metadata
     generated: true
-  - name: Edit metric metadata
-    parent: Metrics
+  - name: Modifier les métadonnées d'une métrique
+    parent: Métriques
     url: edit-metric-metadata
     generated: true
-  - name: Query timeseries points
-    parent: Metrics
+  - name: Interroger les points de séries temporelles
+    parent: Métriques
     url: query-timeseries-points
     generated: true
-  - name: Search metrics
-    parent: Metrics
+  - name: Rechercher des métriques
+    parent: Métriques
     url: search-metrics
     generated: true
-  - name: Submit metrics
-    parent: Metrics
+  - name: Envoyer des métriques
+    parent: Métriques
     url: submit-metrics
     generated: true
   - name: Monitors
-    url: /fr/api/v1/monitors/
+    url: /api/v1/monitors/
     identifier: Monitors
     generated: true
-  - name: Get all monitor details
+  - name: Récupérer tous les détails d'un monitor
     parent: Monitors
     url: get-all-monitor-details
     generated: true
-  - name: Create a monitor
+  - name: Créer un monitor
     parent: Monitors
     url: create-a-monitor
     generated: true
-  - name: Check if a monitor can be deleted
+  - name: Vérifier si un monitor peut être supprimé
     parent: Monitors
     url: check-if-a-monitor-can-be-deleted
     generated: true
-  - name: Monitors group search
+  - name: Rechercher des groupes de monitors
     parent: Monitors
     url: monitors-group-search
     generated: true
-  - name: Monitors search
+  - name: Rechercher des monitors
     parent: Monitors
     url: monitors-search
     generated: true
-  - name: Validate a monitor
+  - name: Valider un monitor
     parent: Monitors
     url: validate-a-monitor
     generated: true
-  - name: Delete a monitor
+  - name: Supprimer un monitor
     parent: Monitors
     url: delete-a-monitor
     generated: true
-  - name: Get a monitor's details
+  - name: Récupérer les détails d'un monitor
     parent: Monitors
     url: get-a-monitors-details
     generated: true
-  - name: Edit a monitor
+  - name: Modifier un monitor
     parent: Monitors
     url: edit-a-monitor
     generated: true
-  - name: Mute a monitor
+  - name: Désactiver un monitor
     parent: Monitors
     url: mute-a-monitor
     generated: true
-  - name: Unmute a monitor
+  - name: Réactiver un monitor
     parent: Monitors
     url: unmute-a-monitor
     generated: true
-  - name: Resolve Monitor
+  - name: Résoudre un monitor
     parent: Monitors
     url: resolve-monitor
     generated: true
-  - name: Mute all monitors
+  - name: Désactiver tous les monitors
     parent: Monitors
     url: mute-all-monitors
     generated: true
-  - name: Unmute all monitors
+  - name: Réactiver tous les monitors
     parent: Monitors
     url: unmute-all-monitors
     generated: true
-  - name: Organizations
-    url: /fr/api/v1/organizations/
-    identifier: Organizations
+  - name: Organisations
+    url: /api/v1/organizations/
+    identifier: Organisations
     generated: true
-  - name: List your managed organizations
-    parent: Organizations
+  - name: Énumérer les organisations que vous gérez
+    parent: Organisations
     url: list-your-managed-organizations
     generated: true
-  - name: Create a child organization
-    parent: Organizations
+  - name: Créer une organisation enfant
+    parent: Organisations
     url: create-a-child-organization
     generated: true
-  - name: Get organization information
-    parent: Organizations
+  - name: Récupérer les informations sur une organisation
+    parent: Organisations
     url: get-organization-information
     generated: true
-  - name: Update your organization
-    parent: Organizations
+  - name: Mettre à jour votre organisation
+    parent: Organisations
     url: update-your-organization
     generated: true
-  - name: Upload IdP metadata
-    parent: Organizations
+  - name: Importer les métadonnées IdP
+    parent: Organisations
     url: upload-idp-metadata
     generated: true
-  - name: PagerDuty Integration
-    url: /fr/api/v1/pagerduty-integration/
-    identifier: PagerDuty Integration
+  - name: Intégration PagerDuty
+    url: /api/v1/pagerduty-integration/
+    identifier: Intégration PagerDuty
     generated: true
-  - name: Create a new service object
-    parent: PagerDuty Integration
+  - name: Créer un objet de service
+    parent: Intégration PagerDuty
     url: create-a-new-service-object
     generated: true
-  - name: Delete a single service object
-    parent: PagerDuty Integration
+  - name: Supprimer un objet de service unique
+    parent: Intégration PagerDuty
     url: delete-a-single-service-object
     generated: true
-  - name: Get a single service object
-    parent: PagerDuty Integration
+  - name: Récupérer un objet de service unique
+    parent: Intégration PagerDuty
     url: get-a-single-service-object
     generated: true
-  - name: Update a single service object
-    parent: PagerDuty Integration
+  - name: Mettre à jour un objet de service unique
+    parent: Intégration PagerDuty
     url: update-a-single-service-object
     generated: true
-  - name: Roles
-    url: /fr/api/v1/roles/
-    identifier: Roles
+  - name: Rôles
+    url: /api/v1/roles/
+    identifier: Rôles
     generated: true
   - name: Screenboards
-    url: /fr/api/v1/screenboards/
+    url: /api/v1/screenboards/
     identifier: Screenboards
     generated: true
   - name: Security Monitoring
-    url: /fr/api/v1/security-monitoring/
+    url: /api/v1/security-monitoring/
     identifier: Security Monitoring
     generated: true
-  - name: Service Checks
-    url: /fr/api/v1/service-checks/
-    identifier: Service Checks
+  - name: Checks de service
+    url: /api/v1/service-checks/
+    identifier: Checks de service
     generated: true
-  - name: Submit a Service Check
-    parent: Service Checks
+  - name: Envoyer un check de service
+    parent: Checks de service
     url: submit-a-service-check
     generated: true
-  - name: Service Dependencies
-    url: /fr/api/v1/service-dependencies/
-    identifier: Service Dependencies
+  - name: Dépendances de service
+    url: /api/v1/service-dependencies/
+    identifier: Dépendances de service
     generated: true
-  - name: Get all service dependencies
-    parent: Service Dependencies
+  - name: Récupérer toutes les dépendances de service
+    parent: Dépendances de service
     url: get-all-service-dependencies
     generated: true
-  - name: Get one service's dependencies
-    parent: Service Dependencies
+  - name: Récupérer les dépendances d'un service
+    parent: Dépendances de service
     url: get-one-services-dependencies
     generated: true
   - name: Service Level Objectives
-    url: /fr/api/v1/service-level-objectives/
+    url: /api/v1/service-level-objectives/
     identifier: Service Level Objectives
     generated: true
-  - name: Search SLOs
+  - name: Rechercher des SLO
     parent: Service Level Objectives
     url: search-slos
     generated: true
-  - name: Create a SLO object
+  - name: Créer un objet SLO
     parent: Service Level Objectives
     url: create-a-slo-object
     generated: true
-  - name: Bulk Delete SLO Timeframes
+  - name: Supprimer plusieurs intervalles de SLO
     parent: Service Level Objectives
     url: bulk-delete-slo-timeframes
     generated: true
-  - name: Check if SLOs can be safely deleted
+  - name: Vérifier si des SLO peuvent être supprimés
     parent: Service Level Objectives
     url: check-if-slos-can-be-safely-deleted
     generated: true
-  - name: Delete a SLO
+  - name: Supprimer un SLO
     parent: Service Level Objectives
     url: delete-a-slo
     generated: true
-  - name: Get a SLO's details
+  - name: Récupérer les détails d'un SLO
     parent: Service Level Objectives
     url: get-a-slos-details
     generated: true
-  - name: Update a SLO
+  - name: Mettre à jour un SLO
     parent: Service Level Objectives
     url: update-a-slo
     generated: true
-  - name: Get an SLO's history
+  - name: Récupérer l'historique d'un SLO
     parent: Service Level Objectives
     url: get-an-slos-history
     generated: true
-  - name: Slack Integration
-    url: /fr/api/v1/slack-integration/
-    identifier: Slack Integration
+  - name: Intégration Slack
+    url: /api/v1/slack-integration/
+    identifier: Intégration Slack
     generated: true
-  - name: Delete a Slack integration
-    parent: Slack Integration
+  - name: Supprimer une intégration Slack
+    parent: Intégration Slack
     url: delete-a-slack-integration
     generated: true
-  - name: Get info about a Slack integration
-    parent: Slack Integration
+  - name: Récupérer les informations sur une intégration Slack
+    parent: Intégration Slack
     url: get-info-about-a-slack-integration
     generated: true
-  - name: Create a Slack integration
-    parent: Slack Integration
+  - name: Créer une intégration Slack
+    parent: Intégration Slack
     url: create-a-slack-integration
     generated: true
-  - name: Add channels to Slack integration
-    parent: Slack Integration
+  - name: Ajouter des canaux à l'intégration Slack
+    parent: Intégration Slack
     url: add-channels-to-slack-integration
     generated: true
   - name: Snapshots
-    url: /fr/api/v1/snapshots/
+    url: /api/v1/snapshots/
     identifier: Snapshots
     generated: true
-  - name: Take graph snapshots
+  - name: Prendre des snapshots de graphiques
     parent: Snapshots
     url: take-graph-snapshots
     generated: true
   - name: Synthetics
-    url: /fr/api/v1/synthetics/
+    url: /api/v1/synthetics/
     identifier: Synthetics
     generated: true
-  - name: Get all locations (public and private)
+  - name: Récupérer tous les emplacements (publics et privés)
     parent: Synthetics
     url: get-all-locations-public-and-private
     generated: true
-  - name: Get a list of tests
+  - name: Récupérer la liste des tests
     parent: Synthetics
     url: get-a-list-of-tests
     generated: true
-  - name: Create a test
+  - name: Créer un test
     parent: Synthetics
     url: create-a-test
     generated: true
-  - name: Get a test configuration (browser)
+  - name: Récupérer une configuration de test (Browser)
     parent: Synthetics
     url: get-a-test-configuration-browser
     generated: true
-  - name: Get the test's latest results summaries (browser)
+  - name: Récupérer les résumés des derniers résultats de test (Browser)
     parent: Synthetics
     url: get-the-tests-latest-results-summaries-browser
     generated: true
-  - name: Get a test result (browser)
+  - name: Récupérer un résultat de test (Browser)
     parent: Synthetics
     url: get-a-test-result-browser
     generated: true
-  - name: Delete tests
+  - name: Supprimer des tests
     parent: Synthetics
     url: delete-tests
     generated: true
-  - name: Get a test configuration (API)
+  - name: Récupérer une configuration de test (API)
     parent: Synthetics
     url: get-a-test-configuration-api
     generated: true
-  - name: Edit a test
+  - name: Modifier un test
     parent: Synthetics
     url: edit-a-test
     generated: true
-  - name: Get the test's latest results summaries (API)
+  - name: Récupérer les résumés des derniers résultats de test (API)
     parent: Synthetics
     url: get-the-tests-latest-results-summaries-api
     generated: true
-  - name: Get a test result (API)
+  - name: Récupérer un résultat de test (API)
     parent: Synthetics
     url: get-a-test-result-api
     generated: true
-  - name: Pause or start a test
+  - name: Interrompre ou démarrer un test
     parent: Synthetics
     url: pause-or-start-a-test
     generated: true
   - name: Tags
-    url: /fr/api/v1/tags/
+    url: /api/v1/tags/
     identifier: Tags
     generated: true
-  - name: Get Tags
+  - name: Récupérer des tags
     parent: Tags
     url: get-tags
     generated: true
-  - name: Remove host tags
+  - name: Supprimer les tags d'un host
     parent: Tags
     url: remove-host-tags
     generated: true
-  - name: Get host tags
+  - name: Récupérer les tags d'un host
     parent: Tags
     url: get-host-tags
     generated: true
-  - name: Add tags to a host
+  - name: Ajouter des tags à un host
     parent: Tags
     url: add-tags-to-a-host
     generated: true
-  - name: Update host tags
+  - name: Mettre à jour les tags d'un host
     parent: Tags
     url: update-host-tags
     generated: true
   - name: Timeboards
-    url: /fr/api/v1/timeboards/
+    url: /api/v1/timeboards/
     identifier: Timeboards
     generated: true
   - name: Tracing
-    url: /fr/api/v1/tracing/
+    url: /api/v1/tracing/
     identifier: Tracing
     generated: true
-  - name: Send traces
+  - name: Envoyer des traces
     parent: Tracing
     url: send-traces
     generated: true
-  - name: Usage Metering
-    url: /fr/api/v1/usage-metering/
-    identifier: Usage Metering
+  - name: Mesure de l'utilisation
+    url: /api/v1/usage-metering/
+    identifier: Mesure de l'utilisation
     generated: true
-  - name: Get hourly usage for analyzed logs
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les logs analysés
+    parent: Mesure d'utilisation
     url: get-hourly-usage-for-analyzed-logs
     generated: true
-  - name: Get hourly usage for Lambda
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour Lambda
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-lambda
     generated: true
-  - name: Get hourly usage for Fargate
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour Fargate
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-fargate
     generated: true
-  - name: Get hourly usage for hosts and containers
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les hosts et conteneurs
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-hosts-and-containers
     generated: true
-  - name: Get hourly usage for Logs
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les logs
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-logs
     generated: true
-  - name: Get hourly usage for Logs by Index
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les logs par index
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-logs-by-index
     generated: true
-  - name: Get hourly usage for Network Flows
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les flux réseau
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-network-flows
     generated: true
-  - name: Get hourly usage for Network Hosts
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les hosts réseau
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-network-hosts
     generated: true
-  - name: Get hourly usage for RUM Sessions
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les sessions RUM
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-rum-sessions
     generated: true
-  - name: Get hourly usage for SNMP devices
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les appareils SNMP
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-snmp-devices
     generated: true
-  - name: Get usage across your multi-org account
-    parent: Usage Metering
+  - name: Obtenir l'utilisation de votre compte multi-org
+    parent: Mesure de l'utilisation
     url: get-usage-across-your-multi-org-account
     generated: true
-  - name: Get hourly usage for Synthetics API Checks
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les API checks Synthetics
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-synthetics-api-checks
     generated: true
-  - name: Get hourly usage for Synthetics API Checks
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les API checks Synthetics
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-synthetics-api-checks
     generated: true
-  - name: Get hourly usage for Synthetics Browser Checks
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les browser checks Synthetics
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-synthetics-browser-checks
     generated: true
-  - name: Get hourly usage for custom metrics
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour les métriques custom
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-custom-metrics
     generated: true
-  - name: Get top 500 custom metrics by hourly average
-    parent: Usage Metering
+  - name: "Obtenir les 500\_principales métriques custom selon la moyenne horaire"
+    parent: Mesure de l'utilisation
     url: get-top-500-custom-metrics-by-hourly-average
     generated: true
-  - name: Get hourly usage for Trace Search
-    parent: Usage Metering
+  - name: Obtenir l'utilisation horaire pour la recherche de traces
+    parent: Mesure de l'utilisation
     url: get-hourly-usage-for-trace-search
     generated: true
-  - name: Users
-    url: /fr/api/v1/users/
-    identifier: Users
+  - name: Utilisateurs
+    url: /api/v1/users/
+    identifier: Utilisateurs
     generated: true
-  - name: Get all users
-    parent: Users
+  - name: Récupérer tous les utilisateurs
+    parent: Utilisateurs
     url: get-all-users
     generated: true
-  - name: Create a user
-    parent: Users
+  - name: Créer un utilisateur
+    parent: Utilisateurs
     url: create-a-user
     generated: true
-  - name: Disable a user
-    parent: Users
+  - name: Désactiver un utilisateur
+    parent: Utilisateurs
     url: disable-a-user
     generated: true
-  - name: Get user details
-    parent: Users
+  - name: Récupérer les détails d'un utilisateur
+    parent: Utilisateurs
     url: get-user-details
     generated: true
-  - name: Update a user
-    parent: Users
+  - name: Mettre à jour un utilisateur
+    parent: Utilisateurs
     url: update-a-user
     generated: true
-  - name: Webhooks Integration
-    url: /fr/api/v1/webhooks-integration/
-    identifier: Webhooks Integration
+  - name: Intégration Webhooks
+    url: /api/v1/webhooks-integration/
+    identifier: Intégration Webhooks
     generated: true
-  - name: Create a custom variable
-    parent: Webhooks Integration
+  - name: Créer une variable personnalisée
+    parent: Intégration Webhooks
     url: create-a-custom-variable
     generated: true
-  - name: Delete a custom variable
-    parent: Webhooks Integration
+  - name: Supprimer une variable personnalisée
+    parent: Intégration Webhooks
     url: delete-a-custom-variable
     generated: true
-  - name: Get a custom variable
-    parent: Webhooks Integration
+  - name: Récupérer une variable personnalisée
+    parent: Intégration Webhooks
     url: get-a-custom-variable
     generated: true
-  - name: Update a custom variable
-    parent: Webhooks Integration
+  - name: Mettre à jour une variable personnalisée
+    parent: Intégration Webhooks
     url: update-a-custom-variable
     generated: true
-  - name: Create a webhooks integration
-    parent: Webhooks Integration
+  - name: Créer une intégration Webhooks
+    parent: Intégration Webhooks
     url: create-a-webhooks-integration
     generated: true
-  - name: Delete a webhook
-    parent: Webhooks Integration
+  - name: Supprimer un webhook
+    parent: Intégration Webhooks
     url: delete-a-webhook
     generated: true
-  - name: Get a webhook integration
-    parent: Webhooks Integration
+  - name: Obtenir une intégration Webhook
+    parent: Intégration Webhooks
     url: get-a-webhook-integration
     generated: true
-  - name: Update a webhook
-    parent: Webhooks Integration
+  - name: Mettre à jour un webhook
+    parent: Intégration Webhooks
     url: update-a-webhook
     generated: true
 api_v2:
-  - name: Overview
-    url: /fr/api/v2/
-    identifier: API V2 overview
+  - name: Présentation
+    url: /api/v2/
+    identifier: Présentation de l'API V2
     weight: -10
-  - name: Install the Datadog Agent
-    url: install-the-datadog-agent
-    weight: 1
-    parent: API V2 overview
-  - name: Send data to Datadog
-    url: send-data-to-datadog
-    weight: 2
-    parent: API V2 overview
-  - name: Visualize your data
-    url: visualize-your-data
-    weight: 3
-    parent: API V2 overview
-  - name: Manage your account
-    url: manage-your-account
-    weight: 4
-    parent: API V2 overview
-  - name: Rate Limiting
-    url: rate-limiting
-    parent: API V2 overview
+  - name: Authentification
+    url: authentification
+    parent: Présentation de l'API V2
+  - name: Limites de débit
+    url: limites de débit
+    parent: Présentation de l'API V2
     weight: 5
-  - name: AWS Integration
-    url: /fr/api/v2/aws-integration/
-    identifier: AWS Integration
+  - name: Intégration AWS
+    url: /api/v2/aws-integration/
+    identifier: Intégration AWS
     generated: true
-  - name: AWS Logs Integration
-    url: /fr/api/v2/aws-logs-integration/
-    identifier: AWS Logs Integration
+  - name: Intégration de logs AWS
+    url: /api/v2/aws-logs-integration/
+    identifier: Intégration de logs AWS
     generated: true
-  - name: Authentication
-    url: /fr/api/v2/authentication/
-    identifier: Authentication
+  - name: Authentification
+    url: /api/v2/authentication/
+    identifier: Authentification
     generated: true
-  - name: Azure Integration
-    url: /fr/api/v2/azure-integration/
-    identifier: Azure Integration
+  - name: Intégration Azure
+    url: /api/v2/azure-integration/
+    identifier: Intégration Azure
     generated: true
-  - name: Dashboard Lists
-    url: /fr/api/v2/dashboard-lists/
-    identifier: Dashboard Lists
+  - name: Listes de dashboards
+    url: /api/v2/dashboard-lists/
+    identifier: Listes de dashboards
     generated: true
-  - name: Delete items from a dashboard list
-    parent: Dashboard Lists
+  - name: Supprimer des éléments d'une liste de dashboards
+    parent: Listes de dashboards
     url: delete-items-from-a-dashboard-list
     generated: true
-  - name: Get a Dashboard List
-    parent: Dashboard Lists
+  - name: Récupérer une liste de dashboards
+    parent: Listes de dashboards
     url: get-a-dashboard-list
     generated: true
-  - name: Add Items to a Dashboard List
-    parent: Dashboard Lists
+  - name: Ajouter des éléments à une liste de dashboards
+    parent: Listes de dashboards
     url: add-items-to-a-dashboard-list
     generated: true
-  - name: Update items of a dashboard list
-    parent: Dashboard Lists
+  - name: Mettre à jour les éléments d'une liste de dashboards
+    parent: Listes de dashboards
     url: update-items-of-a-dashboard-list
     generated: true
   - name: Dashboards
-    url: /fr/api/v2/dashboards/
+    url: /api/v2/dashboards/
     identifier: Dashboards
     generated: true
   - name: Downtimes
-    url: /fr/api/v2/downtimes/
+    url: /api/v2/downtimes/
     identifier: Downtimes
     generated: true
-  - name: Embeddable Graphs
-    url: /fr/api/v2/embeddable-graphs/
-    identifier: Embeddable Graphs
+  - name: Graphiques intégrables
+    url: /api/v2/embeddable-graphs/
+    identifier: Graphiques intégrables
     generated: true
-  - name: Events
-    url: /fr/api/v2/events/
-    identifier: Events
+  - name: Événements
+    url: /api/v2/events/
+    identifier: Événements
     generated: true
-  - name: GCP Integration
-    url: /fr/api/v2/gcp-integration/
-    identifier: GCP Integration
+  - name: Intégration GCP
+    url: /api/v2/gcp-integration/
+    identifier: Intégration GCP
     generated: true
   - name: Hosts
-    url: /fr/api/v2/hosts/
+    url: /api/v2/hosts/
     identifier: Hosts
     generated: true
-  - name: IP Ranges
-    url: /fr/api/v2/ip-ranges/
-    identifier: IP Ranges
+  - name: Plages d'IP
+    url: /api/v2/ip-ranges/
+    identifier: Plages d'IP
     generated: true
-  - name: Key Management
-    url: /fr/api/v2/key-management/
-    identifier: Key Management
+  - name: Gestion des clés
+    url: /api/v2/key-management/
+    identifier: Gestion des clés
     generated: true
   - name: Logs
-    url: /fr/api/v2/logs/
+    url: /api/v2/logs/
     identifier: Logs
     generated: true
-  - name: Logs Archives
-    url: /fr/api/v2/logs-archives/
-    identifier: Logs Archives
+  - name: Archives de logs
+    url: /api/v2/logs-archives/
+    identifier: Archives de logs
     generated: true
-  - name: Get all archives
-    parent: Logs Archives
+  - name: Récupérer toutes les archives
+    parent: Archives de logs
     url: get-all-archives
     generated: true
-  - name: Create an archive
-    parent: Logs Archives
+  - name: Créer une archive
+    parent: Archives de logs
     url: create-an-archive
     generated: true
-  - name: Delete an archive
-    parent: Logs Archives
+  - name: Supprimer une archive
+    parent: Archives de logs
     url: delete-an-archive
     generated: true
-  - name: Get an archive
-    parent: Logs Archives
+  - name: Récupérer une archive
+    parent: Archives de logs
     url: get-an-archive
     generated: true
-  - name: Update an archive
-    parent: Logs Archives
+  - name: Mettre à jour une archive
+    parent: Archives de logs
     url: update-an-archive
     generated: true
-  - name: Revoke role from an archive
-    parent: Logs Archives
+  - name: Révoquer le rôle d'une archive
+    parent: Archives de logs
     url: revoke-role-from-an-archive
     generated: true
-  - name: List read roles for an archive
-    parent: Logs Archives
+  - name: Énumérer les rôles de lecture pour une archive
+    parent: Archives de logs
     url: list-read-roles-for-an-archive
     generated: true
-  - name: Grant role to an archive
-    parent: Logs Archives
+  - name: Accorder un rôle à une archive
+    parent: Archives de logs
     url: grant-role-to-an-archive
     generated: true
-  - name: Logs Indexes
-    url: /fr/api/v2/logs-indexes/
-    identifier: Logs Indexes
+  - name: Index de logs
+    url: /api/v2/logs-indexes/
+    identifier: Index de logs
     generated: true
-  - name: Logs Pipelines
-    url: /fr/api/v2/logs-pipelines/
-    identifier: Logs Pipelines
+  - name: Pipelines de logs
+    url: /api/v2/logs-pipelines/
+    identifier: Pipelines de logs
     generated: true
-  - name: Logs Restriction Queries
-    url: /fr/api/v2/logs-restriction-queries/
-    identifier: Logs Restriction Queries
+  - name: Requêtes de restriction de logs
+    url: /api/v2/logs-restriction-queries/
+    identifier: Requêtes de restriction de logs
     generated: true
-  - name: List restriction queries
-    parent: Logs Restriction Queries
+  - name: Énumérer les requêtes de restriction
+    parent: Requêtes de restriction de logs
     url: list-restriction-queries
     generated: true
-  - name: Create a restriction query
-    parent: Logs Restriction Queries
+  - name: Créer une requête de restriction
+    parent: Requêtes de restriction de logs
     url: create-a-restriction-query
     generated: true
-  - name: Get restriction query for a given role
-    parent: Logs Restriction Queries
+  - name: Récupérer une requête de restriction pour un rôle donné
+    parent: Requêtes de restriction de logs
     url: get-restriction-query-for-a-given-role
     generated: true
-  - name: Get all restriction queries for a given user
-    parent: Logs Restriction Queries
+  - name: Récupérer toutes les requêtes de restriction pour un utilisateur donné
+    parent: Requêtes de restriction de logs
     url: get-all-restriction-queries-for-a-given-user
     generated: true
-  - name: Delete a restriction query
-    parent: Logs Restriction Queries
+  - name: Supprimer une requête de restriction
+    parent: Requêtes de restriction de logs
     url: delete-a-restriction-query
     generated: true
-  - name: Get a restriction query
-    parent: Logs Restriction Queries
+  - name: Récupérer une requête de restriction
+    parent: Requêtes de restriction de logs
     url: get-a-restriction-query
     generated: true
-  - name: Update a restriction query
-    parent: Logs Restriction Queries
+  - name: Mettre à jour une requête de restriction
+    parent: Requêtes de restriction de logs
     url: update-a-restriction-query
     generated: true
-  - name: Revoke role from a restriction query
-    parent: Logs Restriction Queries
+  - name: Révoquer un rôle d'une requête de restriction
+    parent: Requêtes de restriction de logs
     url: revoke-role-from-a-restriction-query
     generated: true
-  - name: List roles for a restriction query
-    parent: Logs Restriction Queries
+  - name: Énumérer les rôles d'une requête de restriction
+    parent: Requêtes de restriction de logs
     url: list-roles-for-a-restriction-query
     generated: true
-  - name: Grant role to a restriction query
-    parent: Logs Restriction Queries
+  - name: Accorder un rôle à une requête de restriction
+    parent: Requêtes de restriction de logs
     url: grant-role-to-a-restriction-query
     generated: true
-  - name: Metrics
-    url: /fr/api/v2/metrics/
-    identifier: Metrics
+  - name: Métriques
+    url: /api/v2/metrics/
+    identifier: Métriques
     generated: true
   - name: Monitors
-    url: /fr/api/v2/monitors/
+    url: /api/v2/monitors/
     identifier: Monitors
     generated: true
-  - name: Organizations
-    url: /fr/api/v2/organizations/
-    identifier: Organizations
+  - name: Organisations
+    url: /api/v2/organizations/
+    identifier: Organisations
     generated: true
-  - name: PagerDuty Integration
-    url: /fr/api/v2/pagerduty-integration/
-    identifier: PagerDuty Integration
+  - name: Intégration PagerDuty
+    url: /api/v2/pagerduty-integration/
+    identifier: Intégration PagerDuty
     generated: true
-  - name: Roles
-    url: /fr/api/v2/roles/
-    identifier: Roles
+  - name: Rôles
+    url: /api/v2/roles/
+    identifier: Rôles
     generated: true
-  - name: List permissions
-    parent: Roles
+  - name: Énumérer les autorisations
+    parent: Rôles
     url: list-permissions
     generated: true
-  - name: List roles
-    parent: Roles
+  - name: Énumérer les rôles
+    parent: Rôles
     url: list-roles
     generated: true
-  - name: Create role
-    parent: Roles
+  - name: Créer un rôle
+    parent: Rôles
     url: create-role
     generated: true
-  - name: Delete role
-    parent: Roles
+  - name: Supprimer un rôle
+    parent: Rôles
     url: delete-role
     generated: true
-  - name: Get a role
-    parent: Roles
+  - name: Récupérer un rôle
+    parent: Rôles
     url: get-a-role
     generated: true
-  - name: Update a role
-    parent: Roles
+  - name: Mettre à jour un rôle
+    parent: Rôles
     url: update-a-role
     generated: true
-  - name: Revoke permission
-    parent: Roles
+  - name: Révoquer une autorisation
+    parent: Rôles
     url: revoke-permission
     generated: true
-  - name: List permissions for a role
-    parent: Roles
+  - name: Énumérer les autorisations d'un rôle
+    parent: Rôles
     url: list-permissions-for-a-role
     generated: true
-  - name: Grant permission to a role
-    parent: Roles
+  - name: Accorder une autorisation à un rôle
+    parent: Rôles
     url: grant-permission-to-a-role
     generated: true
-  - name: Remove a user from a role
-    parent: Roles
+  - name: Supprimer un utilisateur d'un rôle
+    parent: Rôles
     url: remove-a-user-from-a-role
     generated: true
-  - name: Get all users of a role
-    parent: Roles
+  - name: Récupérer tous les utilisateurs associés à un rôle
+    parent: Rôles
     url: get-all-users-of-a-role
     generated: true
-  - name: Add a user to a role
-    parent: Roles
+  - name: Ajouter un utilisateur à un rôle
+    parent: Rôles
     url: add-a-user-to-a-role
     generated: true
   - name: Screenboards
-    url: /fr/api/v2/screenboards/
+    url: /api/v2/screenboards/
     identifier: Screenboards
     generated: true
   - name: Security Monitoring
-    url: /fr/api/v2/security-monitoring/
+    url: /api/v2/security-monitoring/
     identifier: Security Monitoring
     generated: true
-  - name: List rules
+  - name: Énumérer les règles
     parent: Security Monitoring
     url: list-rules
     generated: true
-  - name: Create a detection rule
+  - name: Créer une règle de détection
     parent: Security Monitoring
     url: create-a-detection-rule
     generated: true
-  - name: Delete an existing rule
+  - name: Supprimer une règle existante
     parent: Security Monitoring
     url: delete-an-existing-rule
     generated: true
-  - name: Get a rule's details
+  - name: Récupérer les détails d'une règle
     parent: Security Monitoring
     url: get-a-rules-details
     generated: true
-  - name: Update an existing rule
+  - name: Mettre à jour une règle existante
     parent: Security Monitoring
     url: update-an-existing-rule
     generated: true
-  - name: Service Checks
-    url: /fr/api/v2/service-checks/
-    identifier: Service Checks
+  - name: Checks de service
+    url: /api/v2/service-checks/
+    identifier: Checks de service
     generated: true
-  - name: Service Dependencies
-    url: /fr/api/v2/service-dependencies/
-    identifier: Service Dependencies
+  - name: Dépendances de service
+    url: /api/v2/service-dependencies/
+    identifier: Dépendances de service
     generated: true
   - name: Service Level Objectives
-    url: /fr/api/v2/service-level-objectives/
+    url: /api/v2/service-level-objectives/
     identifier: Service Level Objectives
     generated: true
-  - name: Slack Integration
-    url: /fr/api/v2/slack-integration/
-    identifier: Slack Integration
+  - name: Intégration Slack
+    url: /api/v2/slack-integration/
+    identifier: Intégration Slack
     generated: true
   - name: Snapshots
-    url: /fr/api/v2/snapshots/
+    url: /api/v2/snapshots/
     identifier: Snapshots
     generated: true
   - name: Synthetics
-    url: /fr/api/v2/synthetics/
+    url: /api/v2/synthetics/
     identifier: Synthetics
     generated: true
   - name: Tags
-    url: /fr/api/v2/tags/
+    url: /api/v2/tags/
     identifier: Tags
     generated: true
   - name: Timeboards
-    url: /fr/api/v2/timeboards/
+    url: /api/v2/timeboards/
     identifier: Timeboards
     generated: true
   - name: Tracing
-    url: /fr/api/v2/tracing/
+    url: /api/v2/tracing/
     identifier: Tracing
     generated: true
-  - name: Usage Metering
-    url: /fr/api/v2/usage-metering/
-    identifier: Usage Metering
+  - name: Mesure de l'utilisation
+    url: /api/v2/usage-metering/
+    identifier: Mesure de l'utilisation
     generated: true
-  - name: Users
-    url: /fr/api/v2/users/
-    identifier: Users
+  - name: Utilisateurs
+    url: /api/v2/users/
+    identifier: Utilisateurs
     generated: true
-  - name: Send invitation emails
-    parent: Users
+  - name: Envoyer des invitations par e-mail
+    parent: Utilisateurs
     url: send-invitation-emails
     generated: true
-  - name: Get a user invitation
-    parent: Users
+  - name: Récupérer une invitation d'utilisateur
+    parent: Utilisateurs
     url: get-a-user-invitation
     generated: true
-  - name: List all users
-    parent: Users
+  - name: Énumérer tous les utilisateurs
+    parent: Utilisateurs
     url: list-all-users
     generated: true
-  - name: Create a user
-    parent: Users
+  - name: Créer un utilisateur
+    parent: Utilisateurs
     url: create-a-user
     generated: true
-  - name: Disable a user
-    parent: Users
+  - name: Désactiver un utilisateur
+    parent: Utilisateurs
     url: disable-a-user
     generated: true
-  - name: Get a user
-    parent: Users
+  - name: Récupérer un utilisateur
+    parent: Utilisateurs
     url: get-a-user
     generated: true
-  - name: Update a user
-    parent: Users
+  - name: Mettre à jour un utilisateur
+    parent: Utilisateurs
     url: update-a-user
     generated: true
-  - name: Get a user organization
-    parent: Users
+  - name: Récupérer l'organisation d'un utilisateur
+    parent: Utilisateurs
     url: get-a-user-organization
     generated: true
-  - name: Get a user permissions
-    parent: Users
+  - name: Récupérer les autorisations d'un utilisateur
+    parent: Utilisateurs
     url: get-a-user-permissions
     generated: true
-  - name: Webhooks Integration
-    url: /fr/api/v2/webhooks-integration/
-    identifier: Webhooks Integration
+  - name: Intégration Webhooks
+    url: /api/v2/webhooks-integration/
+    identifier: Intégration Webhooks
     generated: true
