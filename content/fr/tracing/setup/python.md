@@ -101,4 +101,3 @@ tracer.configure(
 [10]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#priority-sampling
 [11]: /fr/tracing/connect_logs_and_traces/python/
 [12]: /fr/tracing/app_analytics/?tab=python#automatic-configuration
-
