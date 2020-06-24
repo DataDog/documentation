@@ -63,7 +63,7 @@ The private location worker is shipped as a Docker container. It can run on a Li
 
 Go in _Synthetics_ -> _Settings_ -> _Private Locations_ and create a new private location:
 
-{{< img src="synthetics/private_locations/create_private_location.png" alt="create a private locations"  style="width:90%;">}}
+{{< img src="synthetics/private_locations/add_private_location.png" alt="create a private locations"  style="width:90%;">}}
 
 Fill out the Location Details and click **Save and Generate** to generate the configuration file associated with your private location on your worker.
 
@@ -184,11 +184,11 @@ If your private location reports correctly to Datadog you should see the corresp
 
 In your private locations list, in the **Settings** section:
 
-{{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills"  style="width:90%;">}}
+{{< img src="synthetics/private_locations/pill.png" alt="private locations pills"  style="width:90%;">}}
 
 In the form when creating a test, below the **Private locations** section:
 
-{{< img src="synthetics/private_locations/private_locations_in_list.png" alt="private locations in list"  style="width:90%;">}}
+{{< img src="synthetics/private_locations/list.png" alt="private locations in list"  style="width:90%;">}}
 
 You should now be able to use your new private location as any other Datadog managed locations to run [Synthetics tests][1].
 

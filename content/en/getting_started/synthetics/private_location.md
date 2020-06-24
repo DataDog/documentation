@@ -45,11 +45,11 @@ Once you create a private location, the process of configuring a [Synthetics API
 
     In your private locations list, in the **Settings** section:
 
-    {{< img src="synthetics/private_locations/private_location_pill.png" alt="private locations pills"  style="width:100%;">}}
+    {{< img src="synthetics/private_locations/pill.png" alt="private locations pills"  style="width:100%;">}}
 
     In the form when creating a test, below the private locations section:
 
-    {{< img src="synthetics/private_locations/private_locations_in_list.png" alt="Private locations in list"  style="width:75%;">}}
+    {{< img src="synthetics/private_locations/list.png" alt="Private locations in list"  style="width:75%;">}}
 
     You will also see private location logs populating similar to this example:
 
