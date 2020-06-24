@@ -147,7 +147,6 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [Fedora x86_64][8]                              | Fedora 26+                                        |
 | [macOS][9]                                      | macOS 10.12+                                      |
 | [Windows server 64-bit][10]                     | Windows Server 2008r2+ and Server Core (not Nano) |
-| [Windows server 64-bit][10]                     | Server Core (not Nano) |
 | [Windows 64-bit][10]                            | Windows 7+                                        |
 
 **Note**: [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.

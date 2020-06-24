@@ -31,14 +31,23 @@ Use the `azure.*.count` metric to:
 **Note**: In some cases, the default visualization settings can make it appear as though resources are being double counted intermittently in charts or query widgets. This will not affect monitors or widgets scoped to a specific status.
 You can reduce this effect by turning off [interpolation][2] in charts or query widgets by setting Interpolation > none or using ‘.fill(null)’. 
 
-For most resource types, the possible statuses are running, unavailable, or unknown. Virtual machines have more detailed statuses, including:
+For most resource types, the possible statuses are:
 
-- `Running`
-- `Stopped_deallocated`
-- `Stopped`
-- `Unknown`
-- `Unavailable`
-- `Failed`
+- Running
+- Unavailable
+- Unknown
+- Degraded
+- Failed
+
+Virtual machines have more detailed statuses, including:
+
+- Running
+- Stopped_deallocated
+- Stopped
+- Unknown
+- Unavailable
+- Degraded
+- Failed
 
 If you see a status of `query_failed` you need to enable the [Resource Health provider](#troubleshooting) in Azure.
 

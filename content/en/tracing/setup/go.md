@@ -44,7 +44,7 @@ You are now ready to import the tracer and start instrumenting your code.
 
 ## Automatic Instrumentation
 
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. Find the list of supported [integrations](#integrations) below.
+Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. The list of supported integrations is in the [compatibility section](https://docs.datadoghq.com/tracing/compatibility_requirements/go/). Note that packages must be imported.
 
 
 
