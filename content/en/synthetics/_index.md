@@ -53,7 +53,7 @@ Leverage your Synthetic tests as [canaries][4] or run them directly within your 
 
  {{< img src="synthetics/ci.png" alt="CI tests"  style="width:100%;">}}
 
-### Connect Synthetics and Traces
+### Connect Synthetics and traces
 
 Use the [out of the box integration between Synthetic tests and APM traces][5] to find the root cause of failures across frontend, network and backend requests.
 
