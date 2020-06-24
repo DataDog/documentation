@@ -19,7 +19,7 @@ before_script:
 
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:master
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/corp-ci:david.jones_error-tracking
   tags:
     - "runner:main"
     - "size:large"
@@ -135,6 +135,19 @@ index_algolia_preview:
   only:
     - /.+?\/[a-zA-Z0-9_-]+/
 
+sourcemaps_preview:
+  <<: *base_template
+  stage: post-deploy
+  environment: "preview"
+  script:
+    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
+    - upload_sourcemaps
+  dependencies:
+    - build_preview
+  allow_failure: true
+  only:
+    - /.+?\/[a-zA-Z0-9_-]+/
+
 # ================== live ================== #
 build_live:
   <<: *base_template
@@ -244,6 +257,19 @@ index_algolia:
     - build_live
   only:
     - schedules
+
+sourcemaps_live:
+  <<: *base_template
+  stage: post-deploy
+  environment: "live"
+  script:
+    - test -d "node_modules" || (echo "cp missing node_modules from /etc/node_modules"; cp -r /etc/node_modules .)
+    - upload_sourcemaps
+  dependencies:
+    - build_live
+  allow_failure: true
+  only:
+    - master
 
 evaluate_missing_metrics:
   <<: *base_template

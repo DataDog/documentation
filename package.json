@@ -45,7 +45,7 @@
         "@apidevtools/json-schema-ref-parser": "^8.0.0",
         "@babel/polyfill": "^7.4.4",
         "@datadog/browser-logs": "^1.12.4",
-        "@datadog/browser-rum": "^1.12.4",
+        "@datadog/browser-rum": "^1.12.6",
         "a11y": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz",
         "algoliasearch": "^4.1.0",
         "bootstrap": "4.3.1",
