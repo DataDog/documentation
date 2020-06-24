@@ -100,8 +100,10 @@ The PHP tracer can be configured using environment variables.
 For Apache with php-fpm, use the `env` directory in your `www.conf` configuration file to configure the php tracer, for example:
 
 ```
-env[DD_AGENT_HOST] = $FROM_HOST_ENV
-env[DD_TRACE_DEBUG] = true
+; Both actual values (e.g. localhost) and references
+; to env variables (e.g. $SOME_ENV) can be used here
+env[DD_AGENT_HOST] = $SOME_ENV
+env[DD_SERVICE] = my-app
 ```
 
 Alternatively, you can use [`SetEnv`][13] from the server config, virtual host, directory, or `.htaccess` file.
@@ -112,12 +114,16 @@ SetEnv DD_TRACE_DEBUG true
 
 ### NGINX
 
-For NGINX, use the `env` directory in the php-fpm's `www.conf` file, for example:
+For NGINX, use the `env` directive in the php-fpm's `www.conf` file, for example:
 
 ```
-env[DD_AGENT_HOST] = $FROM_HOST_ENV
-env[DD_TRACE_DEBUG] = true
+; Both actual values (e.g. localhost) and references
+; to env variables (e.g. $SOME_ENV) can be used here
+env[DD_AGENT_HOST] = $SOME_ENV
+env[DD_SERVICE] = my-app
 ```
+
+**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][14] for more details.
 
 ### PHP CLI server
 
@@ -263,3 +269,4 @@ To remove the PHP tracer:
 [11]: /tracing/faq/php-tracer-manual-installation
 [12]: /tracing/setup/php/#environment-variable-configuration
 [13]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[14]: /tracing/setup/nginx/#nginx-configuration
