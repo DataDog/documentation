@@ -1099,11 +1099,18 @@ components:
           description: Name of the role.
           type: string
       type: object
+    RoleUpdateRelationships:
+      description: Relationships of role object to update
+      properties:
+        permissions:
+          $ref: '#/componetns/schemas/RelationshipToPermissions'
     RoleUpdateData:
       description: Data related to the update of a role.
       properties:
         attributes:
           $ref: '#/components/schemas/RoleUpdateAttributes'
+        relationships:
+          $ref: '#/componetns/schemas/RoleUpdateRelationships'
         id:
           description: ID of the role.
           type: string
