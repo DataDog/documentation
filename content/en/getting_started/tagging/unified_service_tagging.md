@@ -255,8 +255,6 @@ If your service has no need for the Datadog environment variables (for example, 
 
 ### Non-containerized environment
 
-<div class="alert alert-warning">Unified service tagging for non-containerized environments is in public beta. Contact <a href="/help/">Datadog Support</a> if you have questions or feedback.</div>
-
 Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, it is recommended that these environment variables be scoped to a single process.
 
 To form a single point of configuration for all telemetry emitted directly from your service's runtime for [traces][8], [logs][9], and [StatsD metrics][10], you can either:
@@ -302,6 +300,53 @@ If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the
 **Note**: The Datadog DogStatsD clients for .NET and PHP do not yet support this functionality.
 
 [1]: /developers/metrics/
+{{% /tab %}}
+
+{{% tab "System Metrics" %}}
+
+`env` and `service` can also be added to your infrastructure metrics.
+
+The tagging configuration for service metrics lives closer to the Agent in non-containerized contexts.
+Given that this configuration does not change per each invocation of a service's process, adding `version`
+to the configuration is not recommended.
+
+##### Single service per host
+
+Set the following configuration in the Agent's [main configuration file][1]:
+
+```yaml
+env: <ENV>
+  tags:
+    - service: <SERVICE>
+```
+
+This setup guarantees consistent tagging of `env` and `service` for all data emitted by the Agent.
+
+##### Multiple services per host
+
+Set the following configuration in the Agent's [main configuration file][1]:
+
+```yaml
+env: <ENV>
+```
+
+To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, you can configure a [process check][2]:
+
+```yaml
+init_config:
+instances:
+    - name: web-app
+      search_string: ["/bin/web-app"]
+      exact_match: false
+      service: web-app
+    - name: nginx
+      search_string: ["nginx"]
+      exact_match: false
+      service: nginx-web-app
+```
+
+[1]: /agent/guide/agent-configuration-files
+[2]: /integrations/process
 {{% /tab %}}
 {{< /tabs >}}
 
