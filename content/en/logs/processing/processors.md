@@ -146,7 +146,7 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **n** (case-insensitive) map to **notice (5)**
 * Strings beginning with **i** (case-insensitive) map to **info (6)**
 * Strings beginning with **d**, **trace** or **verbose** (case-insensitive) map to **debug (7)**
-* Strings beginning with **o** or **s** or matching **OK** or **Success** (case-insensitive) map to **OK**
+* Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
 **Note**: If multiple log status remapper processors can be applied to a given log, only the first one (according to the pipelines order) is taken into account.
