@@ -103,7 +103,7 @@
 
                     {{ $serverURL := ""}}
 
-                    {{ if isset $servers.variables.site.enum }}
+                    {{ if isset $servers.variables.site "enum" }}
                         <!-- If we have an enum for the site variable, we have several regions -->
                         {{ range $servers.variables.site.enum }}
 
