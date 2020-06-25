@@ -100,9 +100,11 @@ The PHP tracer can be configured using environment variables.
 For Apache with php-fpm, use the `env` directory in your `www.conf` configuration file to configure the php tracer, for example:
 
 ```
-; Both actual values (e.g. localhost) and references
-; to env variables (e.g. $SOME_ENV) can be used here
+; Example of passing the host environment variable SOME_ENV
+; to the PHP process as DD_AGENT_HOST
 env[DD_AGENT_HOST] = $SOME_ENV
+; Example of passing the value 'my-app' to the PHP
+; process as DD_SERVICE
 env[DD_SERVICE] = my-app
 ```
 
@@ -117,9 +119,11 @@ SetEnv DD_TRACE_DEBUG true
 For NGINX, use the `env` directive in the php-fpm's `www.conf` file, for example:
 
 ```
-; Both actual values (e.g. localhost) and references
-; to env variables (e.g. $SOME_ENV) can be used here
+; Example of passing the host environment variable SOME_ENV
+; to the PHP process as DD_AGENT_HOST
 env[DD_AGENT_HOST] = $SOME_ENV
+; Example of passing the value 'my-app' to the PHP
+; process as DD_SERVICE
 env[DD_SERVICE] = my-app
 ```
 
