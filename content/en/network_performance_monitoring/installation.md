@@ -280,7 +280,7 @@ datadog/agent:latest
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
-If using `docker-compose`, make the following additions to the datadog agent service.
+If using `docker-compose`, make the following additions to the Datadog Agent service.
 
 ```
 version: '3'
