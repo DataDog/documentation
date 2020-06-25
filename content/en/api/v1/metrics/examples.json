@@ -150,7 +150,7 @@
                   "family": "time",
                   "name": "minute",
                   "plural": "minutes",
-                  "scale_factor": "60",
+                  "scale_factor": 60,
                   "short_name": "min"
                 }
               ]

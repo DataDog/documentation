@@ -362,9 +362,9 @@ const outputExample = (chosenExample, inputkey) => {
           }
         });
       }
-    } else if (typeof chosenExample === "boolean"){
-        // we don't want quotes on a bool
-        ex = `${chosenExample}`;
+    } else if (typeof chosenExample === "boolean" || typeof chosenExample === "number") {
+      // we don't want quotes on a bool
+      ex = `${chosenExample}`;
       } else {
         ex = `"${chosenExample}"`;
       }

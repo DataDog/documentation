@@ -418,11 +418,11 @@
               "probe_dc": "string",
               "result": {
                 "device": {
-                  "height": "0",
+                  "height": 0,
                   "id": "string",
                   "isMobile": false,
                   "name": "",
-                  "width": "0"
+                  "width": 0
                 },
                 "duration": "number",
                 "errorCount": "integer",
@@ -507,11 +507,11 @@
             "browserType": "string",
             "browserVersion": "string",
             "device": {
-              "height": "0",
+              "height": 0,
               "id": "string",
               "isMobile": false,
               "name": "",
-              "width": "0"
+              "width": 0
             },
             "duration": "number",
             "error": "string",
