@@ -39,8 +39,8 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 | Option | Type | Default | Description |
 | ------ | ---- | ------- | ----------- |
-| `dnsUseHost` | Boolean | `true` | Use host local DNS configuration first (e.g., the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter if any |
-| `dnsServer` | Array of Strings | `["8.8.8.8","1.1.1.1"]` | DNS servers IPs to use in given order (e.g., `--dnsServer="8.8.4.4" --dnsServer="8.8.8.8"`) |
+| `dnsUseHost` | Boolean | `true` | Use host local DNS configuration first (e.g., the configuration from your `etc/resolv.conf` file), then DNS servers specified in the `dnsServer` parameter if any. |
+| `dnsServer` | Array of Strings | `["8.8.8.8","1.1.1.1"]` | DNS servers IPs to use in given order (e.g., `--dnsServer="8.8.4.4" --dnsServer="8.8.8.8"`). |
 
 ### Reserved IPs Configuration
 
@@ -48,7 +48,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 | -------| ---- | ------- | ----------- |
 | `enableDefaultBlockedIpRanges`| Boolean | `false` | Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][1] and [IPv6][2] Special-Purpose Address Registry), unless for those explicitly set with the `allowedIPRanges` parameter. |
 | `allowedIPRanges` | Array of Strings | `none` | Grant access to specific IPs and/or CIDR among IP ranges blocked through `enableDefaultBlockedIpRanges` or `blockedIPRanges` (e.g., `"allowedIPRanges.4": "10.0.0.0/8"`). **Note:** `allowedIPRanges` has precedence over `blockedIPRanges`.
-| `blockedIPRanges` | Array of Strings | `none` | Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `enableDefaultBlockedIpRanges` parameter to `true` (e.g. `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`)
+| `blockedIPRanges` | Array of Strings | `none` | Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `enableDefaultBlockedIpRanges` parameter to `true` (e.g. `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.)
 
 **Note:** The `whitelistedRange` and `blacklistedRange` parameters are now deprecated and should be replaced by the above listed ones.
 
@@ -62,11 +62,12 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 **Note:** The `proxy` parameter is now deprecated and should be replaced by `proxyDatadog`.
 
-### Parallelization Configuration
+### Advanced Configuration
 
 | Option | Type | Default | Description |
 | -------| ---- | ------- | ----------- |
 | `concurrency` | Number | `10` | Maximum number of tests executed in parallel. |
+| `maxTimeout` | Number | `60000` | Maximum test execution duration for API tests (in milliseconds). |
 
 ## Private Locations Admin
 
