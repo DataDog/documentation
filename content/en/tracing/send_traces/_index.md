@@ -65,6 +65,10 @@ Tracing is enabled by default when monitoring with Heroku. For more information 
 
 Tracing is enabled by default when monitoring with Cloud Foundry. For more information about configuring tracing for Cloud Foundry, see the [Cloud Foundry documentation][11].
 
+### AWS Elastic Beanstalk
+
+Tracing is enabled by default when monitoring with AWS Elastic Beanstalk. For more information about configuring tracing for AWS Elastic Beanstalk, see the [AWS Elastic Beanstalk documentation][14].
+
 ## Configure your environment
 
 See our guide on setting the [`env` tag and an additional primary tag for scoping APM data][12].
@@ -90,3 +94,4 @@ Next, [Instrument your application][13]. For the full overview of all of the ste
 [11]: /integrations/cloud_foundry/#trace-collection
 [12]: /tracing/guide/setting_primary_tags_to_scope/#definition
 [13]: /tracing/setup/
+[14]: /integrations/amazon_elasticbeanstalk/
