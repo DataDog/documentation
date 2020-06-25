@@ -280,6 +280,32 @@ datadog/agent:latest
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
+If using `docker-compose`, make the following additions to the datadog agent service.
+
+```
+version: '3'
+services:
+  ..
+  datadog:
+    image: "datadog/agent:latest"
+    environment:
+       DD_SYSTEM_PROBE_ENABLED: 'true'
+       DD_PROCESS_AGENT_ENABLED: 'true'
+       DD_API_KEY: 'todo'
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - /proc/:/host/proc/:ro
+    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    - /sys/kernel/debug:/sys/kernel/debug
+    cap_add:
+    - SYS_ADMIN
+    - SYS_RESOURCE
+    - SYS_PTRACE
+    - NET_ADMIN
+    - IPC_LOCK
+    security_opt:
+    - apparmor:unconfined
+```
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
