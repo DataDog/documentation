@@ -86,7 +86,7 @@
                 {
                   "filter": {
                     "query": "*",
-                    "sample_rate": "1"
+                    "sample_rate": 1
                   },
                   "is_enabled": false,
                   "name": "payment"
@@ -127,7 +127,7 @@
             {
               "filter": {
                 "query": "*",
-                "sample_rate": "1"
+                "sample_rate": 1
               },
               "is_enabled": false,
               "name": "payment"
@@ -176,7 +176,7 @@
             {
               "filter": {
                 "query": "*",
-                "sample_rate": "1"
+                "sample_rate": 1
               },
               "is_enabled": false,
               "name": "payment"
@@ -225,7 +225,7 @@
         "exclusion_filters": [
           {
             "filter": {
-              "sample_rate": "1"
+              "sample_rate": 1
             },
             "name": "payment"
           }
@@ -237,7 +237,7 @@
           {
             "filter": {
               "query": "*",
-              "sample_rate": "1"
+              "sample_rate": 1
             },
             "is_enabled": false,
             "name": "payment"
