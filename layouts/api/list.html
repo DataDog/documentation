@@ -119,7 +119,7 @@
                         {{ end }}
                     {{ else }}
                         <!-- If not, we're in a case where we talk to the local agent endpoint, like for tracing -->
-                        {{ $serverURL = replace $serverURL "{site}" $servers.variables.site.default }}
+                        {{ $serverURL = replace $servers.url "{site}" $servers.variables.site.default }}
                         {{ $.Scratch.Add "serverURLS" (dict "url" $serverURL "region" "local" ) }}
                     {{ end }}
                 {{ end }}
