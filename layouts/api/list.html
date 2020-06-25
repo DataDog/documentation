@@ -523,9 +523,9 @@
 {{- end -}}
 
 {{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
-{{- with $context.action.security -}}
+{{- if isset $context.action "security" -}}
     {{- /* Find authentication per operationId */ -}}
-    {{- range . -}}
+    {{- range $context.action.security -}}
         {{- range $key, $val := . -}}
             {{ $authSchema := (index $d.components.securitySchemes $key) }}
             {{- if eq $authSchema.in "header" -}}
