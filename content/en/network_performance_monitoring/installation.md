@@ -291,7 +291,7 @@ services:
     environment:
        DD_SYSTEM_PROBE_ENABLED: 'true'
        DD_PROCESS_AGENT_ENABLED: 'true'
-       DD_API_KEY: 'todo'
+       DD_API_KEY: '<DATADOG_API_KEY>'
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - /proc/:/host/proc/:ro
