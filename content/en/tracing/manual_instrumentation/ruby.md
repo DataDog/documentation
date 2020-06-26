@@ -3,7 +3,7 @@ title: Ruby Custom Instrumentation
 kind: documentation
 aliases:
     - /tracing/opentracing/ruby
-description: 'Implement the OpenTracing standard with the Datadog Java APM tracer.'
+description: 'Manually instrument your Ruby application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
       tag: 'Documentation'
@@ -81,15 +81,83 @@ Add [tags][1] to all [spans][2] by configuring the tracer with the `tags` option
 
 ```ruby
 Datadog.configure do |c|
-  c.tracer tags: { 'env' => 'dev' }
+  c.tags = { 'team' => 'qa' }
 end
 ```
 
 You can also use the `DD_TAGS` environment variable to set tags on all spans for an application. For more information on Ruby environment variables, refer to the [setup documentation][3].
 
-### Set errors on a span
+### Setting Errors on a Span
 
-TODO
+There are two ways to set an error on a span
+
+- The first is to simply call `span.set_error` and pass in the Exception Object.
+- This will automatically extract the error type, message, and backtrace.
+
+```ruby
+require 'ddtrace'
+require 'timeout'
+
+def example_method
+  span = Datadog.tracer.trace('example.trace')
+  puts 'some work'
+  sleep(1)
+  raise StandardError.new "This is an exception"
+rescue StandardError => error
+  span = Datadog.tracer.active_span
+  span.set_error(error) unless span.nil?
+  raise error
+ensure
+  span.finish
+end
+
+example_method()
+```
+
+- The second is to use `tracer.trace` which will by default set the error type, message, and backtrace.
+- To configure this behavior you can use the `on_error` option, which is the Handler invoked when a block is provided to `trace`, and the block raises an error.
+- The Proc is provided `span` and `error` as arguments.
+- By default, `on_error` Sets error on the span.
+
+Default Behavior: `on_error`
+
+```ruby
+require 'ddtrace'
+require 'timeout'
+
+def example_method
+  puts 'some work'
+  sleep(1)
+  raise StandardError.new "This is a exception"
+end
+
+Datadog.tracer.trace('example.trace', on_error: custom_error_handler) do |span|
+  example_method()
+end
+```
+
+Custom Behavior: `on_error`
+
+```ruby
+require 'ddtrace'
+require 'timeout'
+
+def example_method
+  puts 'some work'
+  sleep(1)
+  raise StandardError.new "This is a special exception"
+end
+
+custom_error_handler = proc do |span, error|
+  span.set_tag('custom_tag', 'custom_value')
+  span.set_error(error) unless error.message.include?("a special exception")
+end
+
+Datadog.tracer.trace('example.trace', on_error: custom_error_handler) do |span|
+  example_method()
+end
+```
+
 
 ## Adding Spans
 
