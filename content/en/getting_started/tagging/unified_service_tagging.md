@@ -307,7 +307,7 @@ If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the
 `env` and `service` can also be added to your infrastructure metrics.
 
 The tagging configuration for service metrics lives closer to the Agent in non-containerized contexts.
-Given that this configuration does not change per each invocation of a service's process, adding `version`
+Given that this configuration does not change for each invocation of a service's process, adding `version`
 to the configuration is not recommended.
 
 ##### Single service per host
