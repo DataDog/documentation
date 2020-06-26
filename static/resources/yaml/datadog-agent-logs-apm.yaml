@@ -50,7 +50,7 @@ spec:
               fieldPath: status.hostIP
         - name: KUBERNETES
           value: "yes"
-        - name: DD_AC_EXCLUDE
+        - name: DD_CONTAINER_EXCLUDE
           value: "name:datadog-agent"
         - name: DOCKER_HOST
           value: unix:///host/var/run/docker.sock
@@ -123,7 +123,7 @@ spec:
               fieldPath: status.hostIP
         - name: KUBERNETES
           value: "yes"
-        - name: DD_AC_EXCLUDE
+        - name: DD_CONTAINER_EXCLUDE
           value: "name:datadog-agent"
         - name: DOCKER_HOST
           value: unix:///host/var/run/docker.sock
@@ -186,7 +186,7 @@ spec:
               fieldPath: status.hostIP
         - name: KUBERNETES
           value: "yes"
-        - name: DD_AC_EXCLUDE
+        - name: DD_CONTAINER_EXCLUDE
           value: "name:datadog-agent"
         - name: DOCKER_HOST
           value: unix:///host/var/run/docker.sock

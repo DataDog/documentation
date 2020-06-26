@@ -112,7 +112,8 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `decodeuricomponent`                                           | Decodes URI components. For instance, it transforms `%2Fservice%2Ftest` into `/service/test`.                                                              |
 | `lowercase`                                                    | Returns the lower-cased string.                                                                                                                            |
 | `uppercase`                                                    | Returns the upper-cased string.                                                                                                                            |
-| `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value).                                                         |
+| `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value-or-logfmt).                                                         |
+| `xml`                                                    |  Parses properly formatted XML. [See XML filter examples](#xml).                                                                                          |  
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                             |
 | `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].               |
@@ -276,6 +277,67 @@ The key-value always matches inputs without any quoting characters, regardless o
 * Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
 * If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (e.g. input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
 * Defining `""` as `quotingStr` keeps the default configuration for quoting.
+
+### Parsing XML
+
+The XML parser transforms XML formatted messages into JSON. 
+
+**Log:**
+
+```text
+<bookstore>  
+  <book category="COOKING">  
+    <title lang="en">Everyday Italian</title>  
+    <author>Giada De Laurentiis</author>  
+    <year>2005</year>  
+  </book>  
+  <book category="CHILDREN">  
+    <title lang="en">Harry Potter</title>  
+    <author>J K. Rowling</author>  
+    <year>2005</year>  
+  </book>
+</bookstore> 
+```
+
+**Rule:**
+
+```text
+rule %{data::xml}
+```
+
+**Result:**
+
+  ```json
+  {
+  "bookstore": {
+    "book": [
+      {
+        "year": "2005",
+        "author": "Giada De Laurentiis",
+        "category": "COOKING",
+        "title": {
+          "lang": "en",
+          "value": "Everyday Italian"
+        }
+      },
+      {
+        "year": "2005",
+        "author": "J K. Rowling",
+        "category": "CHILDREN",
+        "title": {
+          "lang": "en",
+          "value": "Harry Potter"
+        }
+      }
+    ]
+  }
+}
+  ```
+
+**Note**:
+
+* If the XML contains tags that have both an attribute and a sting value between the two tags, a `value` attribute is generated. For example: `<item attr="Attribute">Item</item>` is converted as `{"item": {"attr": "Attribute", "value": "Item" } }`
+* Repeated tags are automatically converted to arrays. For example: `<root><item>Item 1</item><item>Item 2</item></root>` is converted as `{ "root": { "item": [ "Item 1", "Item 2" ] } }`
 
 ### Parsing dates
 

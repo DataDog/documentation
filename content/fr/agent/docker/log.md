@@ -11,19 +11,19 @@ further_reading:
     text: Apprendre à explorer vos logs
   - link: /agent/docker/apm/
     tag: Documentation
-    text: Recueillez les traces de votre application
+    text: Recueillir les traces de votre application
   - link: /agent/docker/prometheus/
     tag: Documentation
-    text: Recueillez vos métriques Prometheus
+    text: Recueillir vos métriques Prometheus
   - link: /agent/docker/integrations/
     tag: Documentation
-    text: Recueillez automatiquement les métriques et les logs de vos applications
+    text: Recueillir automatiquement les métriques et les logs de vos applications
   - link: /agent/guide/autodiscovery-management/
     tag: Documentation
-    text: Limitez la collecte de données à un sous-ensemble de conteneurs
+    text: Limiter la collecte de données à un sous-ensemble de conteneurs
   - link: /agent/docker/tag/
     tag: Documentation
-    text: Attribuez des tags à toutes les données envoyées par un conteneur
+    text: Attribuer des tags à toutes les données envoyées par un conteneur
 ---
 ## Présentation
 
@@ -79,7 +79,6 @@ Voici les commandes associées à la collecte de logs :
 | `-v /opt/datadog-agent/run:/opt/datadog-agent/run:rw` | Pour éviter de perdre des logs de conteneur lors des redémarrages ou des problèmes de réseau, la dernière ligne de log recueillie pour chaque conteneur dans ce répertoire est stockée sur le host.     |
 | `-e DD_AC_EXCLUDE="name:datadog-agent"`               | Empêche l'Agent Datadog de recueillir et d'envoyer ses propres logs et métriques. Supprimez ce paramètre si vous souhaitez recueillir les logs et les métriques de l'Agent Datadog. |
 | `-v /var/run/docker.sock:/var/run/docker.sock:ro`     | Les logs sont recueillis à partir du `stdout/stderr` du conteneur via le socket Docker.                                                                                        |
-
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
 [2]: https://hub.docker.com/r/datadog/agent/tags
@@ -157,7 +156,9 @@ Ajoutez l'étiquette suivante en tant que commande Exécuter :
 {{% /tab %}}
 {{< /tabs >}}
 
-Lorsque `<CONFIG_LOG>` est la configuration de collecte de logs, vous trouverez à l'intérieur un fichier de configuration d'intégration. [Consultez la section relative à la configuration de la collecte de logs pour en savoir plus][4].
+Lorsque `<CONFIG_LOGS>` est la configuration de collecte de logs, vous trouverez à l'intérieur un fichier de configuration d'intégration. [Consultez la section relative à la configuration de la collecte de logs pour en savoir plus][4].
+
+**Remarque **: lorsque vous configurez la valeur `service` via les étiquettes Docker, Datadog vous conseille d'utiliser le tagging de service unifié. Le tagging de service unifié permet de lier toutes les données de télémétrie Datadog entre elles, y compris les logs, via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la documentation dédiée au [tagging de service unifié][5].
 
 ### Exemples
 
@@ -217,13 +218,13 @@ Consultez la [documentation relative aux règles de traitement multiligne][1] po
 
 Utilisez des étiquettes de log Autodiscovery afin d'appliquer une logique de traitement avancée pour la collecte de logs. Par exemple :
 
-- [Filtrer les logs avant de les envoyer à Datadog][5].
-- [Nettoyer les données sensibles de vos logs][6].
-- [Effectuer une agrégation multiligne][7].
+- [Filtrez les logs avant de les envoyer à Datadog][6].
+- [Nettoyez les données sensibles de vos logs][7].
+- [Effectuez une agrégation multiligne][8].
 
 ## Filtrer les conteneurs
 
-Il est possible de spécifier les conteneurs à partir desquels vous souhaitez recueillir les logs. Ce filtrage peut par exemple vous servir à empêcher la collecte de logs de l'Agent Datadog. Consultez [Gestion de la découverte de conteneurs][8] pour en savoir plus.
+Il est possible de spécifier les conteneurs à partir desquels vous souhaitez recueillir les logs. Ce filtrage peut par exemple vous servir à empêcher la collecte de logs de l'Agent Datadog. Consultez [Gestion de la découverte de conteneurs][9] pour en savoir plus.
 
 ## Conteneurs de courte durée
 
@@ -231,7 +232,7 @@ Dans un environnement Docker, l'Agent reçoit les mises à jour des conteneurs e
 
 À partir de l'Agent v6.14+, l'Agent recueille les logs de tous les conteneurs (qu'ils soient exécutés ou arrêtés). Par conséquent, les logs des conteneurs de courte durée qui ont été lancés ou arrêtés il y a moins d'une seconde sont également recueillis tant qu'ils ne sont pas supprimés.
 
-Pour les environnements Kubernetes, consultez la [documentation relative aux conteneurs de courte durée Kubernetes][9].
+Pour les environnements Kubernetes, consultez la [documentation relative aux conteneurs de courte durée Kubernetes][10].
 
 ## Pour aller plus loin
 
@@ -241,8 +242,9 @@ Pour les environnements Kubernetes, consultez la [documentation relative aux con
 [2]: /fr/agent/docker/integrations/
 [3]: /fr/agent/kubernetes/integrations/?tab=kubernetespodannotations#configuration
 [4]: /fr/agent/logs/#custom-log-collection
-[5]: /fr/agent/logs/advanced_log_collection/?tab=docker#filter-logs
-[6]: /fr/agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
-[7]: /fr/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
-[8]: /fr/agent/guide/autodiscovery-management/
-[9]: /fr/agent/kubernetes/log/#short-lived-containers
+[5]: /fr/getting_started/tagging/unified_service_tagging
+[6]: /fr/agent/logs/advanced_log_collection/?tab=docker#filter-logs
+[7]: /fr/agent/logs/advanced_log_collection/?tab=docker#scrub-sensitive-data-from-your-logs
+[8]: /fr/agent/logs/advanced_log_collection/?tab=docker#multi-line-aggregation
+[9]: /fr/agent/guide/autodiscovery-management/
+[10]: /fr/agent/kubernetes/log/#short-lived-containers

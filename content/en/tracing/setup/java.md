@@ -105,7 +105,7 @@ System properties can be set as JVM flags.
 
 ### Integrations
 
-See integration specific config in the [integrations](#integrations) section above.
+See how to disable integrations in the [integrations][15] compatability section.
 
 ### Examples
 
@@ -225,11 +225,11 @@ Would produce the following result:
 
 {{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example"  >}}
 
-See the [Java integration documentation][15] to learn more about Java metrics collection with JMX fetch.
+See the [Java integration documentation][16] to learn more about Java metrics collection with JMX fetch.
 
 ### B3 Headers Extraction and Injection
 
-Datadog APM tracer supports [B3 headers extraction][16] and injection for distributed tracing.
+Datadog APM tracer supports [B3 headers extraction][17] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
 
@@ -335,5 +335,6 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 [12]: /agent/docker/#dogstatsd-custom-metrics
 [13]: /developers/dogstatsd/
 [14]: /integrations/amazon_ecs/?tab=python#create-an-ecs-task
-[15]: /integrations/java/?tab=host#metric-collection
-[16]: https://github.com/openzipkin/b3-propagation
+[15]: /tracing/compatibility_requirements/java#disabling-integrations
+[16]: /integrations/java/?tab=host#metric-collection
+[17]: https://github.com/openzipkin/b3-propagation

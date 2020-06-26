@@ -249,6 +249,27 @@
               tag: "Documentation"
               text: "Learn how to explore your logs"
 
+    - action: pull-and-push-file
+      branch: master
+      globs:
+      - 'docs/trace_collection.md'
+      options:
+        dest_path: '/tracing/setup/'
+        file_name: 'ios.md'
+        front_matters:
+          title: iOS Trace Collection
+          kind: documentation
+          beta: true
+          description: "Collect traces from your iOS applications."
+          dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md"]
+          further_reading:
+            - link: "https://github.com/DataDog/dd-sdk-ios"
+              tag: "Github"
+              text: "dd-sdk-ios Source code"
+            - link: "tracing/visualization/"
+              tag: "Documentation"
+              text: "Explore your services, resources and traces"
+
   - repo_name: security-monitoring
     contents:
     - action: security-rules

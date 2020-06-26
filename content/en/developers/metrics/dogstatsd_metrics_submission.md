@@ -200,8 +200,8 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->increment('example_metric.increment', array('environment'=>'dev'));
-    $statsd->decrement('example_metric.decrement', array('environment'=>'dev'));
+    $statsd->increment('example_metric.increment', 1, array('environment'=>'dev'));
+    $statsd->decrement('example_metric.decrement', 1, array('environment'=>'dev'));
     sleep(10);
 }
 {{< /code-block >}}

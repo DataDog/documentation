@@ -2,6 +2,8 @@
 integration_title: Pivotal Platform
 name: pivotal_platform
 kind: integration
+aliases:
+  - /integrations/cloud_foundry/
 git_integration_title: pivotal_platform
 newhlevel: true
 updated_for_agent: 6.0

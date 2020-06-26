@@ -170,7 +170,7 @@ Le check PHP-FPM n'inclut aucun événement.
 
 `php_fpm.can_ping` :
 
-Renvoie CRITICAL si l'Agent n'est pas capable de ping PHP-FPM sur le `ping_url` configuré. Si ce n'est pas le cas, renvoie OK.
+Renvoie CRITICAL si l'Agent ne parvient pas à ping PHP-FPM sur le `ping_url` configuré. Si ce n'est pas le cas, renvoie OK.
 
 ## Dépannage
 
