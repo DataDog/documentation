@@ -291,11 +291,16 @@ main:
     identifier: cluster_agent_build
     parent: agent_cluster
     weight: 408
+  - name: Cluster Checks Runner
+    url: agent/cluster_agent/clusterchecksrunner
+    identifier: cluster_agent_clcr
+    parent: agent_cluster
+    weight: 409
   - name: Troubleshooting
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 409
+    weight: 410
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
