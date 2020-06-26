@@ -7,19 +7,19 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/c-logging-guide/'
     tag: Blog
     text: "Comment recueillir, personnaliser et analyser des logs\_C#"
-  - link: logs/processing
+  - link: /logs/processing/
     tag: Documentation
     text: Apprendre à traiter vos logs
-  - link: logs/processing/parsing
+  - link: /logs/processing/parsing/
     tag: Documentation
     text: En savoir plus sur le parsing
-  - link: logs/explorer
+  - link: /logs/explorer/
     tag: Documentation
     text: Apprendre à explorer vos logs
-  - link: logs/explorer/analytics
+  - link: /logs/explorer/analytics/
     tag: Documentation
     text: Effectuer des analyses de logs
-  - link: logs/faq/log-collection-troubleshooting-guide
+  - link: /logs/faq/log-collection-troubleshooting-guide/
     tag: FAQ
     text: Dépannage pour la collecte de logs
 ---
@@ -46,18 +46,26 @@ Lancez ensuite le logger directement sur votre application :
 
 ```csharp
 // Instancier le logger
-var log = new LoggerConfiguration()
-    .WriteTo.File(new JsonFormatter(), "log.json")
+var log = new LoggerConfiguration()  // avec Serilog ;
+
+    // avec Serilog.Formatting.Json ;
+    .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
+
+    // avec Serilog.Formatting.Compact ;
+    // .WriteTo.File(new RenderedCompactJsonFormatter(), "log.json")
+
     .CreateLogger();
 
 // Exemple
 var position = new { Latitude = 25, Longitude = 134 };
 var elapsedMs = 34;
 
-log.Information("Traité {@Position} en {Elapsed:000} ms.", position, elapsedMs);
+log.Information("Processed {@Position} in {Elapsed:000} ms.", position, elapsedMs);
 ```
 
 Consultez ensuite le fichier `log.json` pour voir l'événement suivant :
+
+- Si vous utilisez `JsonFormatter(renderMessage: true)` :
 
 ```json
 {
@@ -65,7 +73,20 @@ Consultez ensuite le fichier `log.json` pour voir l'événement suivant :
   "Level": "Information",
   "Timestamp": "2016-09-02T15:02:29.648Z",
   "Renderings": {"Elapsed": [{"Format": "000", "Rendering": "034"}]},
+  "RenderedMessage":"Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
   "Properties": {"Position": {"Latitude": 25, "Longitude": 134}, "Elapsed": 34}
+}
+```
+
+- Si vous utilisez `RenderedCompactJsonFormatter()` :
+
+```json
+{
+  "@t": "2020-05-20T04:15:28.6898801Z",
+  "@m": "Processed { Latitude: 25, Longitude: 134 } in 034 ms.",
+  "@i": "d1eb2146",
+  "Position": {"Latitude": 25, "Longitude": 134 },
+  "Elapsed": 34
 }
 ```
 
@@ -192,7 +213,7 @@ Une fois la bibliothèque dans votre classpath, ajoutez la disposition suivante 
 Instanciez votre logger et commencez à déclencher vos événements :
 
 ```csharp
-using log4net;
+avec log4net ;
 
 namespace Datadog
 {
@@ -207,10 +228,10 @@ namespace Datadog
            // Charger la configuration depuis App.config
            XmlConfigurator.Configure();
 
-             // Loguer un message de debugging simple
+           // Loguer un message de debugging simple
            logger.Debug("Mon premier message de debugging");
 
-            // Indiquer le reste de votre code ici…
+           // Indiquer le reste de votre code ici…
         }
     }
 }
@@ -238,6 +259,12 @@ Si, malgré les avantages de la journalisation en JSON, vous souhaitez activer l
 {{% /tab %}}
 {{< /tabs >}}
 
+## Associer les logs et les traces de votre service
+
+Si l'APM est activé pour cette application, associez vos logs et vos traces en ajoutant automatiquement l'ID des traces, l'ID des spans et les paramètres `env`, `service` et `version` à vos logs. Pour ce faire, [suivez les instructions relatives à l'utilisation de .NET pour l'APM][2].
+
+**Remarque** : si le traceur de l'APM injecte `service` dans vos logs, cela remplace la valeur définie dans la configuration de l'Agent.
+
 ## Configurer votre Agent Datadog
 
 Créez un fichier `csharp.d/conf.yaml` dans votre dossier `conf.d/` avec le contenu suivant :
@@ -264,7 +291,7 @@ logs:
 
 Et voilà ! Désormais, tous vos logs seront automatiquement au format JSON compatible avec votre application Datadog.
 
-## Journalisation sans agent
+## Logging sans agent
 
 Il est possible de transmettre des logs depuis votre application vers Datadog ou directement vers l'Agent Datadog. Il ne s'agit pas de la configuration recommandée, car la gestion des problèmes de connexion ne doit pas se faire directement dans votre application, mais il peut arriver qu'il soit impossible d'enregistrer un log dans un fichier lorsque votre application est utilisée sur une machine hors d'accès.
 {{< tabs >}}
@@ -279,17 +306,30 @@ PM> Install-Package Serilog.Sinks.Datadog.Logs
 
 Initialisez ensuite directement le logger dans votre application. N'oubliez pas d'[ajouter votre `<CLÉ_API>`][2].
 
+{{< site-region region="us" >}}
+
 ```csharp
-var log = new LoggerConfiguration()
+var log = new LoggerConfiguration(url: "http-intake.logs.datadoghq.com")
     .WriteTo.DatadogLogs("<CLÉ_API>")
     .CreateLogger();
 ```
 
-**Remarque** : pour envoyer des logs au site européen de Datadog, définissez la propriété `url` sur `https://http-intake.logs.datadoghq.eu`.
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```csharp
+var log = new LoggerConfiguration(url: "http-intake.logs.datadoghq.eu")
+    .WriteTo.DatadogLogs("<CLÉ_API>")
+    .CreateLogger();
+```
+
+{{< /site-region >}}
 
 Vous pouvez également remplacer le comportement par défaut et transférer des logs via TCP en précisant manuellement les propriétés requises suivantes : `url`, `port`, `useSSL` et `useTCP`. [Si vous le souhaitez, vous pouvez préciser les paramètres `source`, `service` et `host` et ajouter des tags personnalisés][3].
 
-Par exemple, pour transférer des logs vers le site américain de Datadog via TCP, utilisez la configuration de récepteur suivante :
+{{< site-region region="us" >}}
+
+Par exemple, pour transférer des logs vers la région américaine de Datadog via TCP, utilisez la configuration de récepteur suivante :
 
 ```csharp
 var config = new DatadogConfiguration(url: "intake.logs.datadoghq.com", port: 10516, useSSL: true, useTCP: true);
@@ -305,7 +345,55 @@ var log = new LoggerConfiguration()
     .CreateLogger();
 ```
 
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+Par exemple, pour transférer des logs vers la région européenne de Datadog via TCP, utilisez la configuration de récepteur suivante :
+
+```csharp
+var config = new DatadogConfiguration(url: "tcp-intake.logs.datadoghq.eu", port: 443, useSSL: true, useTCP: true);
+var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs(
+        "<CLÉ_API>",
+        source: "<NOM_SOURCE>",
+        service: "<NOM_SERVICE>",
+        host: "<HOSTNAME>",
+        tags: new string[] {"<TAG_1>:<VALEUR_1>", "<TAG_2>:<VALEUR_2>"},
+        configuration: config
+    )
+    .CreateLogger();
+```
+
+{{< /site-region >}}
+
 Désormais, les nouveaux logs sont directement envoyés à Datadog.
+
+Par ailleurs, depuis la version `0.2.0`, vous pouvez configurer le récepteur Datadog à l'aide d'un fichier `appsettings.json` pour le package `Serilog.Setting.Configuration`.
+
+Dans la matrice `Serilog.WriteTo`, ajoutez une entrée pour `DatadogLogs`. Voici un exemple :
+
+```json
+"Serilog": {
+  "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Datadog.Logs" ],
+  "MinimumLevel": "Debug",
+  "WriteTo": [
+    { "Name": "Console" },
+    {
+      "Name": "DatadogLogs",
+      "Args": {
+        "apiKey": "<CLÉ_API>",
+        "source": "<NOM_SOURCE>",
+        "host": "<HOSTNAME>",
+        "tags": ["<TAG_1>:<VALEUR_1>", "<TAG_2>:<VALEUR_2>"],
+      }
+    }
+  ],
+  "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
+  "Properties": {
+    "Application": "Sample"
+  }
+}
+```
 
 [1]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
 [2]: https://app.datadoghq.com/account/settings#api
@@ -317,4 +405,5 @@ Désormais, les nouveaux logs sont directement envoyés à Datadog.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/logs/processing/parsing
+[1]: /fr/logs/processing/parsing/
+[2]: /fr/tracing/connect_logs_and_traces/dotnet/
