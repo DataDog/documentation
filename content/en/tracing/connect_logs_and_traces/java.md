@@ -29,7 +29,7 @@ If your logs are raw formatted, update your formatter to include `dd.trace_id` a
 
 If your logs are JSON formated and you are using Logback there is nothing left to do. Otherwise with other logging libraries you need to activate MDC attributes autoinjection into your logs.
 
-**Note**: If the attribute.path for your Trace ID is not dd.trace_id, ensure your Trace ID reserved attribute settings account for the attribute.path. More information can be found in the [FAQ on this topic][2].
+**Note**: If the `attribute.path` for your trace ID is **not** `dd.trace_id`, ensure your trace ID reserved attribute settings account for the `attribute.path`. More information can be found in the [FAQ on this topic][2].
 
 ## Manually Inject Trace and Span IDs
 
