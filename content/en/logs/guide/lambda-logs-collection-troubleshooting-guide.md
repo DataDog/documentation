@@ -48,7 +48,7 @@ For more information on these and other AWS Lambda metrics, see [Amazon Lambda M
 
 ### Manage your function triggers
 
-The forwarder Lambda function needs to have triggers (CloudWatch Logs or S3) set up in order for logs to be forwarded. Follow the steps below to ensure the triggers are set up correctly.
+For logs to be forwarded, the forwarder Lambda function needs to have triggers (CloudWatch Logs or S3) set up. Follow the steps below to ensure the triggers are set up correctly.
 
 1. Does the source of your log (CloudWatch log group or S3 bucket) show up in the "Triggers" list in the forwarder Lambda console? If yes, ensure it's enabled. Otherwise, follow the steps below to check in the S3 or CloudWatch log group console, because the "Triggers" list displayed in the Lambda console is known to be incomprehensive.
 
