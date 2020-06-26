@@ -3,25 +3,22 @@ title: Lambda Function Log Collection Troubleshooting Guide
 kind: documentation
 ---
 
-If you don't see logs forwarded from a Lambda function in the Log Explorer, see the [Datadog-AWS Log integration][1] to configure your environment. If you still do not see your logs, double-check the following points:
-
-There are some common issues that can come up when configuring the AWS Lambda function to forward logs to Datadog. Below are some troubleshooting steps to try if you are using the Lambda function and your logs aren't reaching Datadog. If you continue to have trouble after following these steps, [contact Datadog support][2] for further assistance.
+If you don't see logs forwarded from a Datadog forwarder Lambda function in the Log Explorer, follow the troubleshooting steps below. If you continue to have trouble after following these steps, [contact Datadog support][2] for further assistance.
 
 ## Are your logs sent to Datadog?
 
 1. Navigate to the [Log Explorer's Live Tail view][3].
 2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
-    * By source: the source is often set to `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][4]. 
-    * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FUNCTION_NAME>`.
-3. If you don't see the logs in the Live Tail, the logs are not reaching Datadog. This could be due to one of the following common configuration issues:
-    * Logs are too far in the past: Datadog only accepts logs with a timestamp between six hours in the past and one hour in the future.
-    * If your index has any [exclusion filters][5] set up, they may be filtering out your logs.
+    * By source: the source is often set to `source:lambda`, `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][4]. 
+    * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FORWARDER_FUNCTION_NAME>`.
+3. If you do see the logs in the Live Tail, but not in the Log Explorer, that means your log index has some [exclusion filters][5] setup, they are filtering out your logs.
+4. If you don't see the logs in the Live Tail, the logs are not reaching Datadog.
 
 ## Check the Lambda function monitoring tab
 
 [From the AWS console][6]
 
-1. Open your Lambda function.
+1. Open your forwarder Lambda function.
 
 2. Click the Monitoring tab.
 
@@ -41,7 +38,7 @@ If you have enabled AWS Lambda metrics, you can view metrics related to Lambda i
 
 | Metric                        | Description                                                                                        |
 |-------------------------------|----------------------------------------------------------------------------------------------------|
-| `aws.lambda.invocations `     | Count of times the Lambda function has been triggered/invoked                                    |
+| `aws.lambda.invocations `     | Count of times the Lambda function has been triggered/invoked                                      |
 | `aws.lambda.errors `          | Count of errors that occurred when the function was invoked                                        |
 | `aws.lambda.duration `        | Average amount of time (in milliseconds) that it took for the Lambda function to finish executing  |
 | `aws.lambda.duration.maximum` | Maximum amount of time (in milliseconds) that it took for the Lambda function to finish executing  |
@@ -51,79 +48,39 @@ For more information on these and other AWS Lambda metrics, see [Amazon Lambda M
 
 ### Manage your function triggers
 
-The Lambda function needs to have triggers set up in order for logs to be forwarded. If you see [in your Lambda function's monitoring tab](#check-the-lambda-function-monitoring-tab) that the function is never invoked, it may not have any triggers set up. There are two ways to set triggers for the Lambda function: manual and automatic.
+The forwarder Lambda function needs to have triggers (CloudWatch Logs or S3) set up in order for logs to be forwarded. Follow the steps below to ensure the triggers are set up correctly.
 
-{{< tabs >}}
-{{% tab "Manual trigger" %}}
-You can see if there are [manual triggers][1] set up for your Lambda function by looking directly in the Lambda function's Configuration tab as in the screenshot below:
+1. Does the source of your log (CloudWatch log group or S3 bucket) shows up in the "Triggers" list in the forwarder Lambda console? If yes, ensure it's enabled. Otherwise follow the steps below to check in the S3 or CloudWatch log group console, because the "Triggers" list displayed in the Lambda console is known to be incomprehensive.
 
-{{< img src="logs/guide/manual-triggers-example.png" alt="Example of manual triggers location"  style="width:80%;" >}}
+2. For S3 bucket, navigate to the bucket's "Properties" tab and scroll down to the "Advanced settings" and "Events" tile, or make a query using the AWS CLI `aws s3api get-bucket-notification-configuration --bucket <BUCKET_NAME>`. Do you see any event notification configured to trigger the forwarder Lambda function? If not, you need to configure a trigger.
 
-**Note** If you have triggers on your Lambda function but it still isn't being invoked, there may be a conflict with another resource already subscribed to the same log source. When you add a manual trigger, an error message informs you if a resource is already subscribed to the log source:
+3. For CloudWatch log group, navigate to the log group's console's "Subscriptions" field under the "Log group details" section. Alternatively, you can make a query using AWS CLI `aws logs describe-subscription-filters --log-group-name <LOG_GROUP_NAME>`. If the log group is not subscribed by the forwarder Lambda function, you need to configure a trigger.
 
-{{< img src="logs/guide/creating-trigger-error-example.png" alt="Example of error when creating trigger with subscription"  style="width:80%;" >}}
+4. Set triggers [automatically][8] or [manually][9].
 
-See [Check for conflicting subscriptions](#check-for-conflicting-subscriptions) for more information on removing subscriptions.
+Note, AWS doesn't allow for more than one resource to be subscribed to a log source. If your log source is already subscribed by a different resource, you need to remove that subscription first.
 
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#manually-setup-triggers
-{{% /tab %}}
-{{% tab "Automatic trigger" %}}
+For CloudWatch log group, you can use the following metrics within the Datadog platform to confirm whether logs are delivered from the log group to the forwarder Lambda function. Use the "log_group" tag to filter the data when viewing the metrics.
 
-You can see if there are [automatic triggers][1] set up for your Lambda function with the following steps:
-
-1. Navigate to the [Cloudwatch console][2].
-2. Click **Log Groups** in the left sidebar here you will see a list of Log Groups. There is a **subscriptions** column on the right that shows what resources (if any) are currently subscribed to the log source.
-
-{{< img src="logs/guide/log-group-subscriptions-example.png" alt="Log Group subcriptions example"  style="width:80%;" >}}
-
-3. If your Lambda function isn't listed as the subscriber for the Log Group you want to monitor, redo the steps from the [automatic trigger setup documentation][1].
-4. If the Log Group you want to monitor already has a different resource subscribed to it, see [Check for conflicting subscriptions](#check-for-conflicting-subscriptions) below.
-
-[1]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#automatically-setup-triggers
-[2]: https://console.aws.amazon.com/cloudwatch/
-{{% /tab %}}
-{{< /tabs >}}
-
-### Check for conflicting subscriptions
-
-AWS doesn't allow for more than one resource to be subscribed to a log source. If you have triggers on your Lambda function but it still isn't being invoked, there may be a conflict with another resource already subscribed to the same log source. The log source needs to be freed up so the Datadog Lambda function can collect logs from it.
-
-If something is already subscribing to a Log Group that you want to monitor with the Datadog Lambda Function, you can remove it: 
-
-* Select the log source 
-* Select **Remove Subscription Filter** in the **Actions** pulldown
+| Metric                          | Description                                                                                        |
+|---------------------------------|----------------------------------------------------------------------------------------------------|
+| `aws.logs.incoming_log_events`  | The number of log events uploaded to Cloudwatch Logs                                               |
+| `aws.logs.forwarded_log_events` | The number of log events forwarded to the subscription destination                                 |
+| `aws.logs.delivery_errors`      | The number of log events failed to be delivered to the subscription destination                    |
+| `aws.logs.delivery_throttling`  | The number of log events throttled for delivering to the subscription destination                  |
 
 ## Check the Lambda function logs
 
-From the monitoring tab, click **View logs in Cloudwatch**.
+1. From the monitoring tab, click **View logs in Cloudwatch**.
 
 {{< img src="logs/guide/lambda-logs-cloudwatch.png" alt="Lambda logs in Cloudwatch"  style="width:80%;" >}}
 
-### API key
+2. Find the most recent log stream.
 
-If you see one of the following log lines it means that your API key isn't set correctly.
+3. Do you see any error? Try search "?ERROR ?Error ?error".
 
-```
-module initialization error: Missing Datadog API key
-```
+4. Set environment variable "DD_LOG_LEVEL" to "debug" on the forwarder Lambda function to enable the debugging logs for further debugging. The debugging logs are quite verbose, remember to disable it after debugging.
 
-This means you didn't set the API key. Places you can set the API key are:
-
-* Directly in the Python code of your Lambda function
-* As an environment variable under the name `DD_API_KEY`
-* As a KMS Encrypted key under the name `DD_KMS_API_KEY`
-
-```
-module initialization error: The API key is not valid.
-```
-
-The API key you provided doesn't match any key Datadog recognizes. Double-check the spelling and make sure that your key corresponds to the org you are sending data to. If you are in Datadog's EU site, you need to specify a `DD_SITE` variable with the value `datadoghq.eu` for the API key to be properly matched with your account.
-
-```
-module initialization error: The API key is not the expected length. Please confirm that your API key is correct
-```
-
-The API key is either too short or too long. Double-check that you copied it over correctly.
 
 [1]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [2]: https://docs.datadoghq.com/help
@@ -132,3 +89,6 @@ The API key is either too short or too long. Double-check that you copied it ove
 [5]: https://docs.datadoghq.com/logs/indexes/#exclusion-filters
 [6]: https://console.aws.amazon.com/lambda/home
 [7]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=awsconsole#metrics
+[8]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#automatically-setup-triggers
+[9]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#manually-setup-triggers
+
