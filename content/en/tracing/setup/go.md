@@ -44,7 +44,7 @@ You are now ready to import the tracer and start instrumenting your code.
 
 ## Automatic Instrumentation
 
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. The list of supported integrations is in the [compatibility section](https://docs.datadoghq.com/tracing/compatibility_requirements/go/). Note that packages must be imported.
+Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. The list of supported integrations is in the [compatibility section][9]. Note that packages must be imported.
 
 
 
@@ -102,7 +102,7 @@ func main() {
 
 ## Configure APM Environment Name
 
-The [APM environment name][9] may be configured [in the agent][10] or using the [WithEnv][11] start option of the tracer.
+The [APM environment name][10] may be configured [in the agent][11] or using the [WithEnv][12] start option of the tracer.
 
 ### B3 Headers Extraction and Injection
 
@@ -138,6 +138,7 @@ extracted value is used.
 [6]: https://app.datadoghq.com/apm/install
 [7]: /tracing/setup/docker/
 [8]: /agent/kubernetes/apm/
-[9]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[10]: /getting_started/tracing/#environment-name
-[11]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithEnv
+[9]: https://docs.datadoghq.com/tracing/compatibility_requirements/go/
+[10]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[11]: /getting_started/tracing/#environment-name
+[12]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithEnv
