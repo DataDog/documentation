@@ -11,7 +11,7 @@ If you don't see logs forwarded from a Datadog forwarder Lambda function in the 
 2. In the search bar, use a filter to limit the Live Tail view to just the logs coming from your Lambda function. Some common search queries are:
     * By source: the source is often set to `source:lambda`, `source:aws` or `source:cloudwatch` but you can find other possible sources in the `parse_event_source` function in the [Lambda function][4]. 
     * By forwarder name: the Lambda function adds a `forwardername` tag to all the logs it forwards. You can filter on this tag by searching for `forwardername:*` or `forwardername:<FORWARDER_FUNCTION_NAME>`.
-3. If you do see the logs in the Live Tail, but not in the Log Explorer, that means your log index has some [exclusion filters][5] setup, they are filtering out your logs.
+3. If you do see the logs in the Live Tail, but not in the Log Explorer, that means your log index has some [exclusion filters][5] set up. These filters are filtering out your logs.
 4. If you don't see the logs in the Live Tail, the logs are not reaching Datadog.
 
 ## Check the Lambda function monitoring tab
@@ -50,7 +50,7 @@ For more information on these and other AWS Lambda metrics, see [Amazon Lambda M
 
 The forwarder Lambda function needs to have triggers (CloudWatch Logs or S3) set up in order for logs to be forwarded. Follow the steps below to ensure the triggers are set up correctly.
 
-1. Does the source of your log (CloudWatch log group or S3 bucket) shows up in the "Triggers" list in the forwarder Lambda console? If yes, ensure it's enabled. Otherwise follow the steps below to check in the S3 or CloudWatch log group console, because the "Triggers" list displayed in the Lambda console is known to be incomprehensive.
+1. Does the source of your log (CloudWatch log group or S3 bucket) show up in the "Triggers" list in the forwarder Lambda console? If yes, ensure it's enabled. Otherwise, follow the steps below to check in the S3 or CloudWatch log group console, because the "Triggers" list displayed in the Lambda console is known to be incomprehensive.
 
 2. For S3 bucket, navigate to the bucket's "Properties" tab and scroll down to the "Advanced settings" and "Events" tile, or make a query using the AWS CLI command below. Do you see any event notification configured to trigger the forwarder Lambda function? If not, you need to configure a trigger.
    ```
@@ -70,7 +70,7 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 
 | Metric                          | Description                                                                                        |
 |---------------------------------|----------------------------------------------------------------------------------------------------|
-| `aws.logs.incoming_log_events`  | The number of log events uploaded to Cloudwatch Logs                                               |
+| `aws.logs.incoming_log_events`  | The number of log events uploaded to CloudWatch Logs                                               |
 | `aws.logs.forwarded_log_events` | The number of log events forwarded to the subscription destination                                 |
 | `aws.logs.delivery_errors`      | The number of log events failed to be delivered to the subscription destination                    |
 | `aws.logs.delivery_throttling`  | The number of log events throttled for delivering to the subscription destination                  |
@@ -83,9 +83,9 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 
 2. Find the most recent log stream.
 
-3. Do you see any error? Try search "?ERROR ?Error ?error".
+3. Do you see any errors? Try searching "?ERROR ?Error ?error".
 
-4. Set environment variable "DD_LOG_LEVEL" to "debug" on the forwarder Lambda function to enable the debugging logs for further debugging. The debugging logs are quite verbose, remember to disable it after debugging.
+4. Set environment variable "DD_LOG_LEVEL" to "debug" on the forwarder Lambda function to enable the debugging logs for further debugging. The debugging logs are quite verbose; remember to disable it after debugging.
 
 
 [1]: /integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
@@ -97,4 +97,3 @@ For CloudWatch log group, you can use the following metrics within the Datadog p
 [7]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=awsconsole#metrics
 [8]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#automatically-setup-triggers
 [9]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#manually-setup-triggers
-
