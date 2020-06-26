@@ -52,15 +52,21 @@ The forwarder Lambda function needs to have triggers (CloudWatch Logs or S3) set
 
 1. Does the source of your log (CloudWatch log group or S3 bucket) shows up in the "Triggers" list in the forwarder Lambda console? If yes, ensure it's enabled. Otherwise follow the steps below to check in the S3 or CloudWatch log group console, because the "Triggers" list displayed in the Lambda console is known to be incomprehensive.
 
-2. For S3 bucket, navigate to the bucket's "Properties" tab and scroll down to the "Advanced settings" and "Events" tile, or make a query using the AWS CLI `aws s3api get-bucket-notification-configuration --bucket <BUCKET_NAME>`. Do you see any event notification configured to trigger the forwarder Lambda function? If not, you need to configure a trigger.
+2. For S3 bucket, navigate to the bucket's "Properties" tab and scroll down to the "Advanced settings" and "Events" tile, or make a query using the AWS CLI command below. Do you see any event notification configured to trigger the forwarder Lambda function? If not, you need to configure a trigger.
+   ```
+   aws s3api get-bucket-notification-configuration --bucket <BUCKET_NAME>
+   ```
 
-3. For CloudWatch log group, navigate to the log group's console's "Subscriptions" field under the "Log group details" section. Alternatively, you can make a query using AWS CLI `aws logs describe-subscription-filters --log-group-name <LOG_GROUP_NAME>`. If the log group is not subscribed by the forwarder Lambda function, you need to configure a trigger.
+3. For CloudWatch log group, navigate to the log group's console's "Subscriptions" field under the "Log group details" section. Alternatively, you can make a query using AWS CLI command below. If the log group is not subscribed by the forwarder Lambda function, you need to configure a trigger.
+   ```
+   aws logs describe-subscription-filters --log-group-name <LOG_GROUP_NAME>
+   ```
 
 4. Set triggers [automatically][8] or [manually][9].
 
 Note, AWS doesn't allow for more than one resource to be subscribed to a log source. If your log source is already subscribed by a different resource, you need to remove that subscription first.
 
-For CloudWatch log group, you can use the following metrics within the Datadog platform to confirm whether logs are delivered from the log group to the forwarder Lambda function. Use the "log_group" tag to filter the data when viewing the metrics.
+For CloudWatch log group, you can use the following metrics within the Datadog platform to confirm whether logs are delivered from the log group to the forwarder Lambda function. Use the `log_group` tag to filter the data when viewing the metrics.
 
 | Metric                          | Description                                                                                        |
 |---------------------------------|----------------------------------------------------------------------------------------------------|
