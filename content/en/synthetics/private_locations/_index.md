@@ -16,15 +16,15 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The access to this feature is restricted. <a href="https://docs.datadoghq.com/help/">Reach out to Datadog support</a> if you would like to test it.
+This feature is in private beta. Reach out to the <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to request access.
 </div>
 
 ## Overview
 
 Private locations allow you to **monitor internal-facing applications or any private URLs** that aren’t accessible from the public internet. They can also be used to:
 
-* **Create new custom Synthetics locations** in areas that are mission-critical to your business;
-* **Verify application performance in your internal CI environment** before you release new features to production with [Synthetics CI integration][1];
+* **Create new custom Synthetics locations** in areas that are mission-critical to your business.
+* **Verify application performance in your internal CI environment** before you release new features to production with [Synthetics CI integration][1].
 * **Compare application performance** from both inside & outside your internal network.
 
 Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any regular managed location.
@@ -359,7 +359,7 @@ Once at least one private location container starts reporting to Datadog the pri
 
 You can then start testing your first internal endpoint by launching a fast test on one of your internal endpoints and see if you get the expected response:
 
-{{< img src="synthetics/browser_tests/pl_fast_test.mp4" alt="Fast test on private location" video="true" width="80%">}}
+{{< img src="synthetics/private_locations/pl_fast_test.mp4" alt="Fast test on private location" video="true" width="80%">}}
 
 ## Launch Synthetic tests from your private locations
 
@@ -375,7 +375,7 @@ Your private locations can be used just like any other Datadog managed locations
 
 ## Scale your private locations
 
-You can easily **horizontally scale** your private locations by adding or removing workers to it. It is indeed possible to run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
+You can easily **horizontally scale** your private locations by adding or removing workers to it. You can run several containers for one private location with one single configuration file. Each worker would then request `N` tests to run depending on its number of free slots: when worker 1 is processing tests, worker 2 requests the following tests, etc.
 
 You can also leverage the [`concurrency` parameter][10] value to adjust the number of tests your private location workers can run in parallel.
 
