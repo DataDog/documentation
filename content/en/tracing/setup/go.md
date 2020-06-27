@@ -20,19 +20,23 @@ further_reading:
   tag: "Advanced Usage"
   text: "Advanced Usage"
 ---
+## Compatibilty Requirements
+
+The Go Tracer requires Go `1.12+` and Datadog Agent `>= 5.21.1`.  For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
+
 ## Installation and Getting Started
 
-For configuration instructions and details about using the API, see the Datadog [API documentation][1]. For manual instrumentation, use the [integrations section](#integrations) below for Go libraries and frameworks supporting automatic instrumentation.
+For configuration instructions and details about using the API, see the Datadog [API documentation][2]. For manual instrumentation, use the [integrations section](#integrations) below for Go libraries and frameworks supporting automatic instrumentation.
 
-For a description of the terminology used in APM, see the [Getting started with APM section][2]. For details about contributing, check the official repository [README.md][3].
+For a description of the terminology used in APM, see the [Getting started with APM section][3]. For details about contributing, check the official repository [README.md][4].
 
-Consult the [migration document][4] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to the newest version.
+Consult the [migration document][5] if you need to migrate from an older version of the tracer (e.g. v<0.6.x) to the newest version.
 
 ### Installation
 
-If you already have a Datadog account you can find [step-by-step instructions][5] in our in-app guides for either host-based or container-based set ups.
+If you already have a Datadog account you can find [step-by-step instructions][6] in our in-app guides for either host-based or container-based set ups.
 
-First [install and configure the Datadog Agent][6]. See the additional documentation for [tracing Docker applications][7] or [Kubernetes applications][8].
+First [install and configure the Datadog Agent][7]. See the additional documentation for [tracing Docker applications][8] or [Kubernetes applications][9].
 
 Next, install the Go tracer from its canonical import path:
 
@@ -44,7 +48,7 @@ You are now ready to import the tracer and start instrumenting your code.
 
 ## Automatic Instrumentation
 
-Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. The list of supported integrations is in the [compatibility section][9]. Note that packages must be imported.
+Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of libraries and frameworks. The list of supported integrations is in the [compatibility section][10]. Note that packages must be imported.
 
 
 
@@ -102,7 +106,7 @@ func main() {
 
 ## Configure APM Environment Name
 
-The [APM environment name][10] may be configured [in the agent][11] or using the [WithEnv][12] start option of the tracer.
+The [APM environment name][11] may be configured [in the agent][12] or using the [WithEnv][13] start option of the tracer.
 
 ### B3 Headers Extraction and Injection
 
@@ -130,15 +134,16 @@ extracted value is used.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[2]: /tracing/visualization/
-[3]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
-[4]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[5]: /tracing/send_traces/
-[6]: https://app.datadoghq.com/apm/install
-[7]: /tracing/setup/docker/
-[8]: /agent/kubernetes/apm/
-[9]: https://docs.datadoghq.com/tracing/compatibility_requirements/go/
-[10]: /tracing/advanced/setting_primary_tags_to_scope/#environment
-[11]: /getting_started/tracing/#environment-name
-[12]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithEnv
+[1]: /tracing/compatibility_requirements/go
+[2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[3]: /tracing/visualization/
+[4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
+[5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
+[6]: /tracing/send_traces/
+[7]: https://app.datadoghq.com/apm/install
+[8]: /tracing/setup/docker/
+[9]: /agent/kubernetes/apm/
+[10]: https://docs.datadoghq.com/tracing/compatibility_requirements/go/
+[11]: /tracing/advanced/setting_primary_tags_to_scope/#environment
+[12]: /getting_started/tracing/#environment-name
+[13]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithEnv
