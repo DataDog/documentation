@@ -15,11 +15,11 @@ further_reading:
 
 ## Overview
 
-Maintaining service level agreements with external or internal customers often requires measuring uptime percentage. This guide shows you how to achieve this using Datadog's [Synthetics][1] and the [SLO widget][2]. It uses `http://example.com/` website as an example.
+Maintaining service level agreements with external or internal customers often requires measuring uptime percentage. This guide shows you how to achieve this using Datadog's [Synthetics Monitoring][1] and the [SLO widget][2]. It uses `http://example.com/` website as an example.
 
 ## Synthetics test creation
 
-Create a new [Synthetics API test][3] upon `http://example.com/`:
+Create a new [Synthetics Monitoring API test][3] upon `http://example.com/`:
 
 1. [Go to the new Synthetics API test page][4].
 2. Enter `http://example.com/` in the **URL** field.
