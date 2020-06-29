@@ -30,8 +30,7 @@ Traditional web proxies are supported natively by the Agent. If you need to conn
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-Set different proxy servers for `https` and `http` requests in your Agent `datadog.yaml` configuration file.
-The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file.
+Set different proxy servers for `https` and `http` requests in your Agent `datadog.yaml` configuration file. The Agent uses `https` to send data to Datadog, but integrations might use `http` to gather metrics. No matter the proxied requests, you can activate SSL on your proxy server. Below are some configuration examples for your `datadog.yaml` file.
 
 <div class="alert alert-warning">
 If log collection is enable, make sure that a specific transport is <a href="/agent/logs/log_transport?tab=https#enforce-a-specific-transport">enforced</a>.
@@ -75,6 +74,8 @@ proxy:
       - host2
 ```
 
+**Note**: All integrations that make HTTP(S) requests default back to proxy settings defined in `datadog.yaml` configuration file if none are specified at the integration level. If this is undesired, set `skip_proxy` to true in every instance config or in the `init_config` fallback for your integration.
+
 ##### NO_PROXY accepted values
 
 * A domain name matches that name and all subdomains.
@@ -88,6 +89,7 @@ proxy:
   - e.g. `169.254.169.254`
 * A hostname
   - e.g. `webserver1`
+
 
 #### Environment variables
 
@@ -445,7 +447,7 @@ apm_config:
 
 process_config:
     process_dd_url: http://haproxy.example.com:3836
-    
+
 logs_config:
     use_http: true
     logs_dd_url: http://haproxy.example.com:3837
