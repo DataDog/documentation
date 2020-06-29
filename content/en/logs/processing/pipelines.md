@@ -104,7 +104,19 @@ Datadog’s integration processing Pipelines are available for the certain sourc
 
 {{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline"  style="width:80%;">}}
 
-To see the full list of integration Pipelines, refer to the [Integration Pipelines Reference][6] page.
+### Integration Pipeline Library
+
+To see the full list of Integration Pipelines that Datadog offers, browse the [Integration Pipeline Library][8].
+
+[insert Image]
+
+Visit the Pipeline Library to check how Datadog processes different formats of logs by default.
+
+To use one of those, Datadog recommends to install the integration by configuring the corresponding log `source`. Once Datadog received the first log with this source, the installation will be automatically triggered and the Integration Pipeline will be added to the processing pipelines list. To configure the log source, please refer to the corresponding [Integration documentation][9].
+
+It's also possible to copy an integration pipeline using the copy button. 
+[insert image]
+
 
 ## Pipelines limitations
 
@@ -139,3 +151,5 @@ Log events which do not comply with these limits might be transformed or truncat
 [5]: /logs/processing/processors/#log-date-remapper
 [6]: /logs/faq/integration-pipeline-reference/
 [7]: /help/
+[8]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[9]: /integrations/#cat-log-collection
