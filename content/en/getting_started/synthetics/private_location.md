@@ -11,7 +11,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in private beta. Reach out to the <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to request access.
+Reach out to the <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to request access to this feature.
 </div>
 
 ## Overview
