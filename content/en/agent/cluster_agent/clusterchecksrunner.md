@@ -76,6 +76,8 @@ You can update the relevant sections of the chart, as shown below, to enable clu
 
 Use `podAntiAffinity` to avoid having multiple Cluster Checks Runners on the same node.
 
+**Note**: The Datadog Operator and the Helm chart use `podAntiAffinity` to avoid having multiple Cluster Checks Runners on the same node. This is important because the Cluster Agent identifies the Cluster Checks Runners by their node names, using `podAntiAffinity` avoids having name collisions.
+
 
 [1]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
 [2]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
