@@ -19,6 +19,8 @@ further_reading:
   text: "Configure an API Test"
 ---
 
+## Overview
+
 Some parts of your system might not be available to robots without the right identification, or you might want to avoid collecting analytics from Datadog robots. To detect Datadog robots, use:
 
 * The [headers](#headers) attached to all Datadog robot requests.
