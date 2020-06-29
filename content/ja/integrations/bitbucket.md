@@ -78,7 +78,7 @@ Bitbucket インテグレーションには、メトリクスは含まれませ�
 
 ### イベント
 
-Bitbucket インテグレーションには、イベントは含まれません。
+Bitbucket Cloud と Bitbucket Server の両方からのコミットとプルリクエストを含む Bitbucket イベントは、Datadog アプリケーションに転送されます。
 
 ### サービスのチェック
 
