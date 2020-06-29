@@ -16,7 +16,13 @@ further_reading:
 
 ## What is Real User Monitoring?
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time activities and experiences of individual users to prioritize engineering work on the features with the highest business impact. The `datadog-rum` library supports all modern desktop and mobile browsers. Resources collection is limited on IE10 and IE11.
+
+Datadog's Real User Monitoring (RUM) gives you end-to-end visibility into the real-time activity and experience of individual users. It is designed to solve 4 types of use cases for web and mobile applications:
+
+* **Performance**: track the performance of web pages, application screens, but also of user actions, network requests, and the performance of your front-end code
+* **Error Management**: monitor the ongoing bugs and issues and track them over time
+* **Analytics / Usage**: understand who is using your application (country, device, OS…), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, feature usage…)
+* **Support**: retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, errors…)
 
 {{< whatsnext desc="Get started with RUM:">}}
   {{< nextlink href="/real_user_monitoring/installation">}}<u>Installation</u>: Create your first application and configure the browser SDK.{{< /nextlink >}}
