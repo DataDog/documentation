@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /agent/tagging
     - /getting_started/tagging/assigning_tags
+    - /tagging/assigning_tags/
 further_reading:
 - link: "/getting_started/tagging/"
   tag: "Documentation"

@@ -217,7 +217,6 @@ container_include: ["name:frontend.*"]
 
 ## Notes/known issues
 
-* This feature does not support Windows containers at this time.
 * Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 * RBAC settings can restrict Kubernetes metadata collection. Refer to the [RBAC entites for the Datadog Agent][10].
 * In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.

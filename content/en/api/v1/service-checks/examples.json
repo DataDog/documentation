@@ -43,13 +43,13 @@
     "request": {
       "json_curl": {
         "check": "app.ok",
-        "status": "0"
+        "status": 0
       },
       "json": {
         "check": "app.ok",
         "host_name": "app.host1",
         "message": "app is running",
-        "status": "0",
+        "status": 0,
         "tags": [],
         "timestamp": "integer"
       },

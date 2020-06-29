@@ -3,6 +3,8 @@ import time
 
 options = {
     'api_key': '<DATADOG_API_KEY>'
+    ## EU costumers need to define 'api_host' as below
+    #'api_host': 'https://api.datadoghq.eu/'
 }
 
 initialize(**options)

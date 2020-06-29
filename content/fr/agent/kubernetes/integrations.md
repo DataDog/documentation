@@ -202,7 +202,7 @@ Dans le fichier `datadog.yaml`, définissez l'adresse `<IP_STOCKAGE_CLÉ_VALEUR>
 
 **Configurer dans les variables d'environnement** :
 
-**Remarque :** Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous configurer des tags et des variables d'environnement dans des environnements conteneurisés. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la documentation dédiée au [tagging de service unifié][9].
+**Remarque :** Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous configurez des tags et des variables d'environnement dans des environnements conteneurisés. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la documentation dédiée au [tagging de service unifié][9].
 
 Lorsque le stockage clé-valeur est activé en tant que source de modèle, l'Agent recherche des modèles à partir de la clé `/datadog/check_configs`. Autodiscovery s'attend à une hiérarchie clé-valeur comme suit :
 
@@ -450,19 +450,25 @@ Dans le manifeste, définissez les paramètres `volumeMounts` et `volumes` :
 # [...]
         volumeMounts:
         # [...]
-          - name: httpd-config-map
-            mountPath: /conf.d
+          - name: apache-auto-config
+            mountPath: /conf.d/apache.d/
+          - name: http-auto-config
+            mountPath: /conf.d/http_check.d/
         # [...]
       volumes:
       # [...]
-        - name: httpd-config-map
+        - name: apache-auto-config
           configMap:
             name: httpd-config-map
             items:
               - key: apache-config
-                path: /apache.d/conf.yaml
+                path: auto_conf.yaml
+        - name: http-auto-config
+          configMap:
+            name: httpd-config-map
+            items:
               - key: http-check-config
-                path: /http_check.d/conf.yaml
+                path: auto_conf.yaml
 # [...]
 ```
 

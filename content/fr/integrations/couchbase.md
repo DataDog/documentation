@@ -104,7 +104,7 @@ Le check Couchbase envoie un événement à Datadog à chaque rééquilibrage de
 
 - `couchbase.can_connect` :
 
-Renvoie `Critical` si l'Agent n'est pas capable de se connecter à Couchbase pour recueillir des métriques.
+Renvoie `Critical` si l'Agent ne parvient pas à se connecter à Couchbase pour recueillir des métriques.
 
 - `couchbase.by_node.cluster_membership` :
 

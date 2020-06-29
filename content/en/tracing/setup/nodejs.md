@@ -21,16 +21,19 @@ further_reading:
       tag: 'Advanced Usage'
       text: 'Advanced Usage'
 ---
+## Compatibilty Requirements
+
+The NodeJS Tracer officially supports versions `>=8`. Only even versions like 8.x and 10.x are officially supported. Odd versions like 9.x and 11.x should work but are not officially supported. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
 ## Installation And Getting Started
 
-If you already have a Datadog account you can find [step-by-step instructions][1] in our in-app guides for either host-based or container-based set ups.
+If you already have a Datadog account you can find [step-by-step instructions][2] in our in-app guides for either host-based or container-based set ups.
 
-For descriptions of terminology used in APM, take a look at the [official documentation][2].
+For descriptions of terminology used in APM, take a look at the [official documentation][3].
 
-For details about configuration and using the API, see Datadog's [API documentation][3].
+For details about configuration and using the API, see Datadog's [API documentation][4].
 
-For details about contributing, check out the [development guide][4].
+For details about contributing, check out the [development guide][5].
 
 ### Quickstart
 
@@ -38,7 +41,7 @@ For details about contributing, check out the [development guide][4].
 This library <strong>MUST</strong> be imported and initialized before any instrumented module. When using a transpiler, you <strong>MUST</strong> import and initialize the tracer library in an external file and then import that file as a whole when building your application. This prevents hoisting and ensures that the tracer library gets imported and initialized before importing any other instrumented module.
 </div>
 
-To begin tracing Node.js applications, first [install and configure the Datadog Agent][5], see the additional documentation for [tracing Docker applications][6] or [Kubernetes applications][7].
+To begin tracing Node.js applications, first [install and configure the Datadog Agent][6], see the additional documentation for [tracing Docker applications][7] or [Kubernetes applications][8].
 
 Next, install the Datadog Tracing library using npm:
 
@@ -67,7 +70,7 @@ tracer.init(); // initialized in a different file to avoid hoisting.
 export default tracer;
 ```
 
-See the [tracer settings][8] for the list of initialization options.
+See the [tracer settings][9] for the list of initialization options.
 
 ## Configuration
 
@@ -125,11 +128,12 @@ DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/install
-[2]: /tracing/visualization/
-[3]: https://datadog.github.io/dd-trace-js
-[4]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
-[5]: /tracing/send_traces/
-[6]: /tracing/setup/docker/
-[7]: /agent/kubernetes/apm/
-[8]: https://datadog.github.io/dd-trace-js/#tracer-settings
+[1]: /tracing/compatibility_requirements/nodejs
+[2]: https://app.datadoghq.com/apm/install
+[3]: /tracing/visualization/
+[4]: https://datadog.github.io/dd-trace-js
+[5]: https://github.com/DataDog/dd-trace-js/blob/master/README.md#development
+[6]: /tracing/send_traces/
+[7]: /tracing/setup/docker/
+[8]: /agent/kubernetes/apm/
+[9]: https://datadog.github.io/dd-trace-js/#tracer-settings

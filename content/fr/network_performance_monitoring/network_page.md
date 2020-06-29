@@ -48,7 +48,7 @@ Agrégez et filtrez vos données de trafic à l'aide de n'importe quel tag dans 
 
 {{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Menu déroulant"  style="width:90%;">}}
 
-Parmi les tags autorisés figurent `service`, `availability zone`, `environment`, `pod`, `host`, `ip` ou encore `port`. Si vous souhaitez agréger ou filtrer le trafic en fonction d'un tag qui n'est pas répertorié dans la liste, ajoutez-le en tant que facette personnalisée :
+Parmi les tags autorisés figurent `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip` ou encore `port`. Si vous souhaitez agréger ou filtrer le trafic en fonction d'un tag qui n'est pas répertorié dans la liste, ajoutez-le en tant que facette personnalisée :
 
 1. Cliquez sur le bouton `+` en haut à droite des volets de facettes.
 2. Saisissez le tag à partir duquel vous souhaitez créer une facette personnalisée.
@@ -118,7 +118,7 @@ Configurez le trafic affiché à l'aide du bouton `Filter Traffic`.
 
 {{< img src="network_performance_monitoring/network_page/filter_traffic_toggles.png" alt="Détails d'un flux"  style="width:80%;">}}
 
-Le trafic de l'Agent Datadog est affiché par défaut. Pour afficher le trafic hors Datadog _uniquement_, désactivez l'option `Show Datadog Traffic`.  
+Le trafic de l'Agent Datadog est affiché par défaut. Pour afficher le trafic externe à Datadog _uniquement_, désactivez l'option `Show Datadog Traffic`.
 
 ### Trafic non résolu
 
