@@ -49,7 +49,7 @@ def security_rules(content, content_dir):
             scope_tag = get_tag(json_data.get('tags', []), "scope")
 
             # delete file or skip if staged
-            if json_data.get('isStaged', False):
+            if json_data.get('isStaged', False) or json_data.get('isDeleted', False):
                 if p.exists():
                     logger.info(f"removing file {p.name}")
                     p.unlink()

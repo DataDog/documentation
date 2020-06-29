@@ -76,6 +76,21 @@ proxy:
 
 **Note**: All integrations that make HTTP(S) requests default back to proxy settings defined in `datadog.yaml` configuration file if none are specified at the integration level. If this is undesired, set `skip_proxy` to true in every instance config or in the `init_config` fallback for your integration.
 
+##### NO_PROXY accepted values
+
+* A domain name matches that name and all subdomains.
+  - e.g. `datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, `datadoghq.com`, but **not** `www.notdatadoghq.com`
+  - e.g. `datadoghq` matches `frontend.datadoghq`, `backend.datadoghq`, but **not** `www.datadoghq.com` nor `www.datadoghq.eu`
+* A domain name with a leading "." matches subdomains only.
+  - e.g. `.datadoghq.com` matches `app.agent.datadoghq.com`, `www.datadoghq.com`, but **not** `datadoghq.com`
+* A CIDR range will match an IP address within the subnet.
+  - e.g. `192.168.1.0/24` matches IP range `192.168.1.1` through `192.168.1.254`
+* An exact IP address
+  - e.g. `169.254.169.254`
+* A hostname
+  - e.g. `webserver1`
+
+
 #### Environment variables
 
 Starting with Agent v6.4, you can set your proxy settings through environment variables:

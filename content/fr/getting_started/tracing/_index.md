@@ -35,7 +35,7 @@ vagrant ssh
 Pour installer l'Agent Datadog sur un host, utilisez la [commande d'installation en une ligne][5] mise à jour avec votre [clé d'API Datadog][6] :
 
 ```shell
-DD_API_KEY=<VOTRE_CLÉ_D_API_DD> bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+DD_API_KEY=<VOTRE_CLÉ_D_API_DD> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
 
 ### Validation

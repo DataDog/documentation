@@ -16,16 +16,15 @@ further_reading:
   tag: "Advanced Usage"
   text: "Advanced Usage"
 ---
-
-**Note**: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2].
+**Note**: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2]. For compatibility requirements for the C++ Tracer, visit the [Compatibility Requirements][3] page.
 
 ## Getting Started
 
-If you already have a Datadog account you can find [step-by-step instructions][3] in our in-app guides for either host-based or container-based set ups.
+If you already have a Datadog account you can find [step-by-step instructions][4] in our in-app guides for either host-based or container-based set ups.
 
-Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][4].
+Otherwise, to begin tracing applications written in any language, first [install and configure the Datadog Agent][5].
 
-Compile against [OpenTracing-cpp][5].
+Compile against [OpenTracing-cpp][6].
 
 ## Installation
 
@@ -197,6 +196,7 @@ To connect to the agent using Unix Domain Sockets, `DD_TRACE_AGENT_URL` can be u
 
 [1]: /tracing/setup/envoy/
 [2]: /tracing/setup/nginx/
-[3]: https://app.datadoghq.com/apm/install
-[4]: /tracing/send_traces/
-[5]: https://github.com/opentracing/opentracing-cpp
+[3]: /tracing/compatibility_requirements/cpp
+[4]: https://app.datadoghq.com/apm/install
+[5]: /tracing/send_traces/
+[6]: https://github.com/opentracing/opentracing-cpp

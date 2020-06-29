@@ -1253,6 +1253,11 @@ main:
     parent: synthetics
     identifier: synthetics_private_location
     weight: 3
+  - name: Configuration
+    url: synthetics/private_locations/configuration
+    parent: synthetics_private_location
+    identifier: synthetics_private_location_configuration
+    weight: 301
   - name: CI Integration
     url: /synthetics/ci/
     parent: synthetics
