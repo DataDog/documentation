@@ -19,7 +19,7 @@ Maintaining service level agreements with external or internal customers often r
 
 ## Synthetics test creation
 
-Create a new [Synthetics Monitoring API test][3] upon `http://example.com/`:
+Create a new [Synthetics API test][3] upon `http://example.com/`:
 
 1. [Go to the new Synthetics API test page][4].
 2. Enter `http://example.com/` in the **URL** field.

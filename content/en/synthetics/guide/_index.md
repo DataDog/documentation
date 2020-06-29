@@ -1,5 +1,5 @@
 ---
-title: Synthetics Guides
+title: Synthetics Monitoring Guides
 kind: guide
 private: true
 ---
