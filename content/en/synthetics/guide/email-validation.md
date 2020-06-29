@@ -17,7 +17,7 @@ Classic web application journeys often involve emails being triggered and sent t
 
 Making sure your application’s email mechanisms are working as expected is key to ensuring a great user experience on your website.
 
-Datadog Browser Tests allow you to:
+Datadog [Browser Tests][1] allow you to:
 
 - Confirm an email was correctly sent following up on an in-app trigger
 - Check an email's content
@@ -27,7 +27,7 @@ To perform email validation inside a Datadog Browser test:
 
 ## Create an email variable
 
-After creating your browser test, navigate to **Edit Recording**, select **Variables** and then select **Email** from the email variable dropdown list:
+After filling your Browser test details (start URL, devices, locations, frequency, notification), navigate to **Save Details & Record Test**, select **Variables** and then select **Email** from the email variable dropdown list:
 
 {{< img src="synthetics/guide/email-validation/adding-variable.mp4" alt="Create an email variable" video="true"  width="100%">}}
 
@@ -35,7 +35,7 @@ In the above example, an email variable called `EMAIL` is created. The newly cre
 
 ## Record steps
 
-In the upper left corner of the UI, hit the **Start Recording** button and record the steps leading to the email being triggered using your freshly created email variable. Use the hand icon to record these steps.
+In the upper left corner of the UI, hit the **Start Recording** button and record the steps leading to the email being triggered using your freshly created email variable. Use the hand icon to input variables in the text inputs of the form.
 
 {{< img src="synthetics/guide/email-validation/record-steps.mp4" alt="Record your steps" video="true"  width="100%">}}
 
@@ -49,7 +49,7 @@ You can now confirm that an email was sent. Click the **Assertion** button and s
 
 If you want to make sure your email respects specific guidelines for its content, you can add more verifications against its subject and body.
 
-In the above example, the assertion is set to be successful if the email subject is `Welcome to Shopist!` and if its body contains the sentence `Your verification code is` and a verification code matches the `\d{1,6}` regex pattern.
+In the above example, the assertion is set to be successful if the email subject is `Welcome to Shopist!` and if its body contains the sentence `Your verification code is` and a verification code matches the `\d{1,6}` [regex pattern][2].
 
 ## Navigate links in email
 
@@ -63,6 +63,9 @@ In the above example, the browser test looks into the “Welcome to Shopist” e
 
 You can now go ahead and create a final assertion to test the `div` content to make sure this triggered a proper account verification (page contains `Your account is now verified.`).
 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /synthetics/browser_tests
+[2]: 2
