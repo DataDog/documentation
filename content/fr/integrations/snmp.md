@@ -54,7 +54,7 @@ Le check SNMP est inclus avec le paquet de l'[Agent Datadog][1]. Vous n'avez don
 
 Le check SNMP Datadog découvre automatiquement les périphériques réseau d'un sous-réseau donné et recueille des métriques à l'aide des profils de périphériques mappés avec un sysOID de Datadog.
 
-Modifiez le sous-réseau, la version SNMP et les profils dans le fichier `snmp.d/conf.yaml` du dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple snmp.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
+Modifiez le sous-réseau et la version SNMP dans le fichier `snmp.d/conf.yaml` du dossier `conf.d/` à la racine du [répertoire de configuration de votre Agent][2]. Consultez le [fichier d'exemple snmp.d/conf.yaml][3] pour découvrir toutes les options de configuration disponibles.
 
 #### Autodiscovery
 
@@ -66,7 +66,7 @@ Pour utiliser la fonctionnalité Autodiscovery avec le check SNMP :
 
 | Paramètre                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 |------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `profiles`                   | La liste des profils à utiliser. Un profil est un ensemble d'OID à partir desquels l'Agent Datadog recueille des métriques et les tags associés. La liste complète des profils pris en charge par Datadog est disponible sur [Github][5]. Vous pouvez spécifier des profils en indiquant leur fichier, sous `definition_file`, ou en les incorporant à `definition`. Tous les profils Datadog OOTB peuvent être répertoriés en indiquant leur nom. Pour indiquer des profils personnalisés supplémentaires, indiquez le chemin de leur fichier. **Remarque** : le profil générique `generic_router.yaml` fonctionne pour les routeurs, les commutateurs, etc. |
+| `profiles`                   | La liste des profils à utiliser. Un profil est un ensemble d'OID à partir desquels l'Agent Datadog recueille des métriques et les tags associés. La liste complète des profils pris en charge par Datadog est disponible sur [Github][5]. Par défaut, tous les profils transmis par l'Agent et dans le répertoire de configuration sont chargés. Pour personnaliser les profils spécifiques à recueillir, spécifiez leur nom de fichier sous `definition_file`, ou incorporez-les à `definition`. Tous les profils Datadog OOTB peuvent être répertoriés en indiquant leur nom. Pour fournir des profils personnalisés supplémentaires, indiquez leur chemin dans la configuration, ou ajoutez-les directement au répertoire de configuration. **Remarque** : le profil générique `generic_router.yaml` fonctionne pour les routeurs, les commutateurs, etc. |
 | `network_address`            | Le sous-réseau et le masque rédigés au format IPv4 sur lesquels l'Agent recherche et découvre les appareils.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `community_string`           | Utilisé pour SNMPv1 et SNMPv2.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `snmp_version`               | La version SNMP utilisée.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -75,52 +75,47 @@ Pour utiliser la fonctionnalité Autodiscovery avec le check SNMP :
 | `retries`                    | Le nombre de nouvelles tentatives avant l'échec du processus.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `discovery_interval`         | L'intervalle entre chaque recherche.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `discovery_allowed_failures` | Le nombre maximal d'échecs de la part d'un host découvert avant que celui-ci ne soit retiré de la liste des périphériques découverts.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `bulk_threshold`             | Le nombre de symboles d'une table nécessaire au déclenchement d'une requête BULK. Ce paramètre ne sert que pour les configurations SNMPV > 1.                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `bulk_threshold`             | Le nombre de symboles d'une table nécessaire au déclenchement d'une requête BULK. Ce paramètre ne sert que pour les configurations SNMPv > 1.                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | `tags`                       | La liste des tags globaux à ajouter à l'ensemble des métriques SNMP. Pour en savoir plus, consultez la section relative au [tagging dans Datadog][6].                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ##### Exemple de configuration
 
 ```yaml
 init_config:
-  profiles:
-    f5-big-ip:
-      definition_file: f5-big-ip.yaml
-    router:
-      definition_file: generic-router.yaml
 
 instances:
   -
-    ## @paramètre network_address - chaîne, facultatif
+    ## @param network_address - chaîne, facultatif
     network_address: "<ADRESSE_RÉSEAU>"
 
-    ## @@@paramètre port - nombre entier, facultatif, valeur par défaut : 161
+    ## @param port - nombre entier, facultatif, valeur par défaut : 161
     port: 161
 
-    ## @@paramètre community_string - chaîne, facultatif
+    ## @param community_string - chaîne, facultatif
     community_string: public
 
-    ## @paramètre snmp_version - nombre entier, facultatif, valeur par défaut : 2
+    ## @param snmp_version - nombre entier, facultatif, valeur par défaut : 2
     snmp_version: 2
 
-    ## @paramètre timeout - nombre entier, facultatif, valeur par défaut : 1
+    ## @param timeout - nombre entier, facultatif, valeur par défaut : 1
     timeout: 1
 
-    ## @paramètre retries - nombre entier, facultatif, valeur par défaut : 5
+    ## @param retries - nombre entier, facultatif, valeur par défaut : 5
     retries: 5
 
-    ## @paramètre discovery_interval - nombre entier, facultatif, valeur par défaut : 3600
+    ## @param discovery_interval - nombre entier, facultatif, valeur par défaut : 3600
     discovery_interval: 3600
 
-    ## @paramètre discovery_allowed_failures - nombre entier, facultatif, valeur par défaut : 3
+    ## @param discovery_allowed_failures - nombre entier, facultatif, valeur par défaut : 3
     discovery_allowed_failures: 3
 
-    ## @paramètre enforce_mib_constraints - booléen, facultatif, valeur par défaut : true
+    ## @param enforce_mib_constraints - booléen, facultatif, valeur par défaut : true
     enforce_mib_constraints: true
 
-    ## @paramètre bulk_threshold - nombre entier, facultatif, valeur par défaut : 5
+    ## @param bulk_threshold - nombre entier, facultatif, valeur par défaut : 5
     bulk_threshold: 5
 
-    ## @paramètre tags - liste d'éléments key:value, facultatif
+    ## @param tags - liste d'éléments key:value, facultatif
     tags:
        - "<KEY_1>:<VALUE_1>"
        - "<KEY_2>:<VALUE_2>"
@@ -163,15 +158,28 @@ Si besoin, vous pouvez définir d'autres métriques dans les instances. Ces mét
 Les profils sont interchangeables. Ainsi, les périphériques qui partagent des dépendances MIB peuvent réutiliser les mêmes profils. Par exemple, le profil Cisco c3850 peut être utilisé pour de nombreux commutateurs Cisco.
 
 * [Generic router][7]
-* [F5 Big IP][8]
-* [Dell iDRAC][9]
+* [Cisco ASA 5525][8]
+* [Cisco c3850][9]
 * [Cisco Nexus][10]
-* [Cisco c3850][11]
-* [Cisco Meraki][12]
+* [Cisco Meraki][11]
+* [Cisco UC Virtual Machine][12]
+* [Cisco ICM][13]
+* [Cisco ISR 4431][14]
+* [Dell iDRAC][15]
+* [Dell Poweredge][16]
+* [F5 Big IP][17]
+* [Fortinet FortiGate][18]
+* [HP iLO4][19]
+* [HPE Proliant][20]
+* [NetApp][21]
+* [Palo Alto][22]
+* [Pare-feu Checkpoint][23]
+* [Isilon][24]
+* [APC UPS][25]
 
 ### Validation
 
-[Lancez la sous-commande status de l'Agent][13] et cherchez `snmp` dans la section Checks.
+[Lancez la sous-commande status de l'Agent][26] et cherchez `snmp` dans la section Checks.
 
 ## Données collectées
 
@@ -192,29 +200,42 @@ Renvoie `CRITICAL` si l'Agent ne parvient pas à recueillir les métriques SNMP.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][15].
+Besoin d'aide ? Contactez [l'assistance Datadog][28].
 
 ## Pour aller plus loin
 
 Documentation, liens et articles supplémentaires utiles :
 
-* [Une liste des OID compatibles/couramment utilisés avec Datadog est-elle disponible pour SNMP ?][16]
-* [Surveiller des appareils Unifi avec SNMP et Datadog][17]
+* [Une liste des OID compatibles/couramment utilisés avec Datadog est-elle disponible pour SNMP ?][29]
+* [Surveiller des appareils Unifi avec SNMP et Datadog][30]
 
 [1]: https://app.datadoghq.com/account/settings#agent
 [2]: https://docs.datadoghq.com/fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/fr/agent
+[4]: https://docs.datadoghq.com/fr/agent/
 [5]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
-[6]: https://docs.datadoghq.com/fr/getting_started/tagging/
+[6]: https://docs.datadoghq.com/fr/tagging/
 [7]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-router.yaml
-[8]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/f5-big-ip.yaml
-[9]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/idrac.yaml
+[8]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco-asa-5525.yaml
+[9]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco-3850.yaml
 [10]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco-nexus.yaml
-[11]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco-3850.yaml
-[12]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/meraki-cloud-controller.yaml
-[13]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[14]: https://github.com/DataDog/integrations-core/blob/master/snmp/metadata.csv
-[15]: https://docs.datadoghq.com/fr/help
-[16]: https://docs.datadoghq.com/fr/integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
-[17]: https://medium.com/server-guides/monitoring-unifi-devices-using-snmp-and-datadog-c8093a7d54ca
+[11]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/meraki-cloud-controller.yaml
+[12]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco_uc_virtual_machine.yaml
+[13]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco_icm.yaml
+[14]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/cisco_isr_4431.yaml
+[15]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/idrac.yaml
+[16]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/dell-poweredge.yaml
+[17]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/f5-big-ip.yaml
+[18]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/fortinet-fortigate.yaml
+[19]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/hp-ilo4.yaml
+[20]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/hpe-proliant.yaml
+[21]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/netapp.yaml
+[22]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/palo-alto.yaml
+[23]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/checkpoint-firewall.yaml
+[24]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/isilon.yaml
+[25]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/apc-ups.yaml
+[26]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[27]: https://github.com/DataDog/integrations-core/blob/master/snmp/metadata.csv
+[28]: https://docs.datadoghq.com/fr/help/
+[29]: https://docs.datadoghq.com/fr/integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids/
+[30]: https://medium.com/server-guides/monitoring-unifi-devices-using-snmp-and-datadog-c8093a7d54ca
