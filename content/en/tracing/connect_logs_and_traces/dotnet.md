@@ -110,9 +110,9 @@ using Datadog.Trace;
 using Serilog.Context;
 
 // there must be spans started and active before this block.
-using (LogContext.PushProperty("dd.env", Tracer.Instance.Settings.Environment))
-using (LogContext.PushProperty("dd.service", Tracer.Instance.DefaultServiceName))
-using (LogContext.PushProperty("dd.version", Tracer.Instance.Settings.ServiceVersion))
+using (LogContext.PushProperty("dd.env", CorrelationIdentifier.Env))
+using (LogContext.PushProperty("dd.service", CorrelationIdentifier.Service))
+using (LogContext.PushProperty("dd.version", CorrelationIdentifier.Version))
 using (LogContext.PushProperty("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
 using (LogContext.PushProperty("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
 {
@@ -130,9 +130,9 @@ using log4net;
 // there must be spans started and active before this block.
 try
 {
-    LogicalThreadContext.Properties["dd.env"] = Tracer.Instance.Settings.Environment;
-    LogicalThreadContext.Properties["dd.service"] = Tracer.Instance.DefaultServiceName;
-    LogicalThreadContext.Properties["dd.version"] = Tracer.Instance.Settings.ServiceVersion;
+    LogicalThreadContext.Properties["dd.env"] = CorrelationIdentifier.Env;
+    LogicalThreadContext.Properties["dd.service"] = CorrelationIdentifier.Service;
+    LogicalThreadContext.Properties["dd.version"] = CorrelationIdentifier.Version;
     LogicalThreadContext.Properties["dd.trace_id"] = CorrelationIdentifier.TraceId.ToString();
     LogicalThreadContext.Properties["dd.span_id"] = CorrelationIdentifier.SpanId.ToString();
 
@@ -157,9 +157,9 @@ using Datadog.Trace;
 using NLog;
 
 // there must be spans started and active before this block.
-using (MappedDiagnosticsLogicalContext.SetScoped("dd.env", Tracer.Instance.Settings.Environment))
-using (MappedDiagnosticsLogicalContext.SetScoped("dd.service", Tracer.Instance.DefaultServiceName))
-using (MappedDiagnosticsLogicalContext.SetScoped("dd.version", Tracer.Instance.Settings.ServiceVersion))
+using (MappedDiagnosticsLogicalContext.SetScoped("dd.env", CorrelationIdentifier.Env))
+using (MappedDiagnosticsLogicalContext.SetScoped("dd.service", CorrelationIdentifier.Service))
+using (MappedDiagnosticsLogicalContext.SetScoped("dd.version", CorrelationIdentifier.Version))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
 {
