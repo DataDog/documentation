@@ -1,5 +1,5 @@
 ---
-title: Activer la collecte de traces dans Datadog
+title: Configuration de l'Agent
 kind: Documentation
 aliases:
   - /fr/tracing/setup/
@@ -9,10 +9,10 @@ aliases:
   - /fr/tracing/getting_further/first_class_dimensions/
   - /fr/agent/apm/
 further_reading:
-  - link: tracing/troubleshooting/
+  - link: /tracing/troubleshooting/agent_apm_metrics/
     tag: Documentation
     text: Métriques APM envoyées par l'Agent Datadog
-  - link: /agent/docker/apm
+  - link: /agent/docker/apm/
     tag: Documentation
     text: Configuration de l'APM Docker
   - link: '/integrations/amazon_ecs/#collecte-de-traces'
@@ -42,9 +42,13 @@ Remarque : après avoir instrumenté votre application, par défaut, le client 
 
 ### AWS Lambda
 
-Pour en savoir plus sur la configuration de Lambda - X-Ray, consultez la [documentation sur l'intégration Amazon X-Ray][7].
+Pour configurer l'APM Datadog dans AWS Lambda, consultez la [documentation sur l'intégration Lambda][7]. Vous pouvez également utiliser [AWS X-Ray][8] pour tracer vos fonctions Lambda.
 
-### Google App Engine, AAS
+### Azure App Service
+
+L'extension Datadog pour Azure App Service vous permet de tracer vos applications Web Azure. Pour en savoir plus sur la configuration du tracing dans Azure, consultez la [documentation sur l'extension Azure App Service][9].
+
+### Google App Engine
 
 L'APM Datadog requiert l'envoi de données de trace à un Agent en cours d'exécution. Pour activer la collecte de trace dans un environnement sans serveur, il est possible de configurer une machine virtuelle distincte qui accepte le trafic de traces de manière externe.
 
@@ -54,25 +58,15 @@ Vous pouvez utiliser d'autres composants que l'Agent et les conteneurs pour recu
 
 ### Heroku
 
-Le tracing est activé par défaut lors de la surveillance avec Heroku. Pour en savoir plus sur la configuration du tracing pour Heroku, consultez la [documentation sur la plateforme cloud Heroku][8].
+Le tracing est activé par défaut lors de la surveillance avec Heroku. Pour en savoir plus sur la configuration du tracing pour Heroku, consultez la [documentation sur la plateforme cloud Heroku][10].
 
 ### Cloud Foundry
 
-Le tracing est activé par défaut lors de la surveillance avec Cloud Foundry. Pour en savoir plus sur la configuration du tracing pour Cloud Foundry, consultez la [documentation Cloud Foundry][9].
+Le tracing est activé par défaut lors de la surveillance avec Cloud Foundry. Pour en savoir plus sur la configuration du tracing pour Cloud Foundry, consultez la [documentation Cloud Foundry][11].
 
 ## Configurer votre environnement
 
-Il existe plusieurs manières de spécifier [un environnement][10] lors de l'envoi de données :
-
-1. **Tag de host** : utilisez un tag de host au format `env:<ENVIRONNEMENT>` pour appliquer le tag correspondant à l'ensemble des traces de l'Agent.
-2. **Configuration de l'Agent** : remplacez le tag par défaut utilisé par l'Agent dans le fichier de configuration de l'Agent. Cela permet de taguer l'ensemble des traces transmises à l'Agent en ignorant la valeur du tag de host.
-
-  ```
-  apm_config:
-  env: <ENVIRONMENT>
-  ```
-
-3. **Par trace** : lorsque vous envoyez une seule [trace][1], spécifiez un environnement en taguant l'une de ses [spans][11] avec la clé de métadonnées `env`. Ce tag remplace alors la configuration de l'Agent et la valeur du tag de host (le cas échéant). Consultez la [documentation relative au tagging de traces][12] pour découvrir comment assigner un tag à vos traces.
+Pour découvrir comment définir le tag `env` ainsi qu'un tag primaire supplémentaire et filtrer vos données APM, consultez [notre guide dédié][12].
 
 ## Étapes suivantes
 
@@ -83,15 +77,15 @@ Ensuite, [instrumentez votre application][13]. Pour consulter l'ensemble des ét
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/visualization/#trace
-[2]: /fr/tracing
+[2]: /fr/tracing/
 [3]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[5]: /fr/tracing/send_traces/agent-apm-metrics
-[6]: /fr/agent
-[7]: /fr/integrations/amazon_xray/#overview
-[8]: /fr/agent/basic_agent_usage/heroku/#installation
-[9]: /fr/integrations/cloud_foundry/#trace-collection
-[10]: /fr/tracing/guide/setting_primary_tags_to_scope/#definition
-[11]: /fr/tracing/visualization/#spans
-[12]: /fr/tracing/guide/adding_metadata_to_spans/?tab=java
-[13]: /fr/tracing/setup
+[5]: /fr/tracing/send_traces/agent-apm-metrics/
+[6]: /fr/agent/
+[7]: /fr/integrations/amazon_lambda/#trace-collection
+[8]: /fr/integrations/amazon_xray/#overview
+[9]: /fr/infrastructure/serverless/azure_app_services/#overview
+[10]: /fr/agent/basic_agent_usage/heroku/#installation
+[11]: /fr/integrations/cloud_foundry/#trace-collection
+[12]: /fr/tracing/guide/setting_primary_tags_to_scope/#definition
+[13]: /fr/tracing/setup/

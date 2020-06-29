@@ -13,7 +13,9 @@ further_reading:
       text: 'Synthetics'
 ---
 
-Maintaining service level agreements with external or internal customers often requires measuring uptime percentage. This guide shows you how to achieve this using Datadog's [Synthetics][1] and the [SLO widget][2]. It uses `http://example.com/` website as an example.
+## Overview
+
+Maintaining service level agreements with external or internal customers often requires measuring uptime percentage. This guide shows you how to achieve this using Datadog's [Synthetics Monitoring][1] and the [SLO widget][2]. It uses `http://example.com/` website as an example.
 
 ## Synthetics test creation
 

@@ -596,9 +596,9 @@ describe(`filterExampleJson`, () => {
       "parent_id": "integer",
       "resource": "/home",
       "service": "service_name",
-      "span_id": "987654321",
+      "span_id": 987654321,
       "start": "integer",
-      "trace_id": "123456789",
+      "trace_id": 123456789,
       "type": "web"
     }]];
     expect(actual).toEqual(expected);

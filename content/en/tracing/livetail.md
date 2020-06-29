@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-The APM [Live Tail][1] gives you the ability to see all trace spans in near real-time from anywhere in the Datadog UI. It displays spans as soon as they get out of the Datadog Agent section and before they are indexed by Datadog. All trace spans ingested by Datadog are displayed (tracing without Limits\*) after being processed. With the APM Live tail page you can:
+The APM [Live Tail][1] gives you the ability to see all trace spans in near real-time from anywhere in the Datadog UI. It displays spans as soon as they get out of the Datadog Agent section and before they are indexed by Datadog. All trace spans ingested by Datadog are displayed (Tracing without Limits\*) after being processed. With the APM Live tail page you can:
 
 - Write search parameters to refine the stream of traces.
 - View distributed trace in real-time.
@@ -49,7 +49,7 @@ Customize the Live Tail column view to better highlight the relevant information
 
 1. Move column to the right or left.
 2. Insert column to the right or left from span tags.
-3. Remove or replace column column.
+3. Remove or replace column.
 
 ## Filtering the trace Stream
 

@@ -51,6 +51,7 @@
                     "monitors",
                     "tracing",
                     "logs",
+                    "real_user_monitoring",
                     "synthetics",
                     "developers"
                 ],

@@ -6,7 +6,7 @@ categories:
   - containers
   - aws
   - log collection
-ddtype: crawler
+ddtype: check
 dependencies: []
 description: 'Surveillez les statuts des conteneurs, mesurez l''utilisation des ressources, et plus encore.'
 doc_link: 'https://docs.datadoghq.com/integrations/amazon_ecs/'
@@ -14,20 +14,23 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/amazon-ecs-metrics'
     tag: Blog
     text: Key ECS metrics to monitor
+  - link: 'https://docs.datadoghq.com/integrations/ecs_fargate'
+    tag: Documentation
+    text: "Intégration Datadog/ECS\_Fargate"
 git_integration_title: amazon_ecs
 has_logo: true
-integration_title: Amazon Elastic Container Service (ECS)
+integration_title: Amazon ECS sur EC2
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_ecs
-public_title: "Intégration Datadog/Amazon\_Elastic\_Container\_Service (ECS)"
+public_title: "Intégration Datadog/Amazon\_ECS sur EC2"
 short_description: 'Surveillez les statuts des conteneurs, mesurez l''utilisation des ressources, et plus encore.'
 version: '1.0'
 ---
 ## Présentation
 
-Amazon Elastic Container Service (ECS) est un service d'orchestration de conteneurs hautement évolutif et à hautes performances pour des conteneurs Docker s'exécutant sur des instances EC2.
+Amazon ECS sur EC2 est un service d'orchestration de conteneurs hautement évolutif et à hautes performances pour les conteneurs Docker s'exécutant sur des instances EC2.
 
 Cette page aborde la configuration d'AWS ECS avec l'[Agent de conteneur Datadog v6][1]. Pour d'autres configurations, consultez les pages suivantes :
 
@@ -50,7 +53,7 @@ Si vous n'avez pas encore configuré un cluster EC2 Container Service, consultez
 
 Cette tâche lance le conteneur Datadog. Si vous devez modifier la configuration, changez la définition de cette tâche en suivant les instructions indiquées plus loin dans ce guide. Si vous utilisez l'APM, DogStatsD ou des logs, définissez les flags appropriés dans la définition de la tâche :
 
-- Si vous utilisez l'APM, définissez `portMappings` afin que vos conteneurs en aval puissent transmettre des traces au service de l'Agent. L'APM reçoit les traces avec les ports `8126` et `TCP`. Configurez donc ces ports sur `hostPort` dans la définition de la tâche. Attention : pour activer la collecte de traces à partir d'autres conteneurs, vous devez vous assurer que la variable d'environnement `DD_APM_NON_LOCAL_TRAFFIC` est définie sur `true`. En savoir plus sur [l'utilisation de l'APM avec des conteneurs][5].
+- Si vous utilisez l'APM, définissez `portMappings` afin que vos conteneurs en aval puissent transmettre des traces au service de l'Agent. L'APM reçoit les traces sur le port `8126` via `TCP`. Utilisez donc ces paramètres pour configurer un `hostPort` dans la définition de la tâche. Attention : pour activer la collecte de traces à partir d'autres conteneurs, vous devez vous assurer que la variable d'environnement `DD_APM_NON_LOCAL_TRAFFIC` est définie sur `true`. En savoir plus sur [l'utilisation de l'APM avec des conteneurs][5].
 - Si vous utilisez DogStatsD, configurez un `hostPort` de `8125` en tant que `UDP` dans la définition de la tâche. Pour activer la collecte de métriques avec DogStatsD à partir d'autres conteneurs, vous devez vous assurer que la variable d'environnement `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` est définie sur `true`.
 - Si vous utilisez des logs, consultez la [documentation relative à la collecte de logs](#collecte-de-logs).
 
@@ -64,13 +67,14 @@ Vous pouvez configurer la tâche à l'aide des [outils AWS CLI][6] ou de la con
 1. Téléchargez [datadog-agent-ecs.json][1] ([datadog-agent-ecs1.json][2] si vous utilisez une AMI Amazon Linux d'origine).
 2. Modifiez `datadog-agent-ecs.json` et remplacez `<YOUR_DATADOG_API_KEY>` par la [clé d'API Datadog][3] de votre compte.
 3. Facultatif : ajoutez un [check de santé de l'Agent](#check-de-sante-de-l-agent).
-4. Si vous êtes sur le site européen de Datadog, vous pouvez également modifier `datadog-agent-ecs.json` et remplacer `DD_SITE` par `DD_SITE:datadoghq.eu`.
-5. Vous pouvez activer la collecte de logs en consultant la [rubrique dédiée](#collecte-de-logs).
-6. Enfin, vous pouvez activer la collecte de processus en consultant la [rubrique dédiée](#collecte-de-processus).
-7. Exécutez la commande suivante :
+4. Facultatif : si vous êtes sur le site européen de Datadog, modifiez `datadog-agent-ecs.json` et définissez `DD_SITE` sur `DD_SITE:datadoghq.eu`.
+5. Facultatif : activez la collecte de logs en consultant la [rubrique dédiée](#collecte-de-logs).
+6. Facultatif : activez la collecte de processus en consultant la [rubrique dédiée](#collecte-de-processus).
+7. Facultatif : activez la collecte de traces (APM) en consultant la [rubrique dédiée](#collecte-de-traces).
+8. Exécutez la commande suivante :
 
 ```shell
-aws ecs register-task-definition --cli-input-json file://path/to/datadog-agent-ecs.json
+aws ecs register-task-definition --cli-input-json file://chemin/vers/datadog-agent-ecs.json
 ```
 
 ##### Check de santé de l'Agent
@@ -279,12 +283,45 @@ Pour recueillir des informations sur les processus pour l'ensemble de vos conten
 
 ### Collecte de traces
 
-Après avoir installé l'Agent Datadog, activez la collecte de traces via l'une des méthodes suivantes :
+Après avoir installé l'Agent Datadog, activez la collecte de traces (facultatif) :
 
-1. En configurant les paramètres suivants dans la définition de tâche pour le conteneur `datadog/agent` :
+1. Configurez les paramètres suivants dans la définition de tâche pour le conteneur `datadog/agent` :
 
     - Mappage de port : host/conteneur port `8126`, protocole `tcp`
-    - Variables d'environnement : `DD_APM_ENABLED=true`, `DD_APM_NON_LOCAL_TRAFFIC=true` (cela active la collecte de traces depuis d'autres conteneurs).
+    ```json
+    containerDefinitions": [
+    {
+      "name": "datadog-agent",
+      "image": "datadog/agent:latest",
+      "cpu": 10,
+      "memory": 256,
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 8126,
+          "protocol": "tcp",
+          "containerPort": 8126
+        }
+      ],
+      ...
+    ```
+    - Si vous utilisez l'**Agent v7.17 ou une version inférieure**, ajoutez les variables d'environnement suivantes :
+    ```json
+    ...
+          "environment": [
+            ...
+          {
+            "name": "DD_APM_ENABLED",
+            "value": "true"
+          },
+          {
+            "name": "DD_APM_NON_LOCAL_TRAFFIC",
+            "value": "true"
+          },
+          ...
+          ]
+    ...
+    ```
 
      [Consulter l'ensemble des variables d'environnement disponibles pour la collecte de traces via l'Agent][17].
 
@@ -352,6 +389,29 @@ end
 ```
 
 {{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+package main
+
+import (
+    "net/http"
+    "io/ioutil"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
+
+resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
+        bodyBytes, err := ioutil.ReadAll(resp.Body)
+        host := string(bodyBytes)
+   if err == nil {
+        // définir la sortie de la commande curl sur l'env DD_Agent_host
+        os.Setenv("DD_AGENT_HOST", host)
+         // indiquer à l'Agent de trace le host défini
+        tracer.Start(tracer.WithAgentAddr(host))
+        defer tracer.Stop()
+```
+
+{{% /tab %}}
 {{% tab "Java" %}}
 
 Copiez ce script dans le champ `entryPoint` de votre définition de tâche ECS en mettant à jour les valeurs avec le fichier JAR et les flags d'argument de votre application.
@@ -389,36 +449,38 @@ Pour découvrir comment définir le hostname de l'Agent dans d'autres langages, 
 
 Chacune des métriques récupérées à partir d'AWS se voit assigner les mêmes tags que ceux qui apparaissent dans la console AWS, y compris, mais sans s'y limiter, le hostname et les groupes de sécurité.
 
+**Remarque** : les métriques commençant par `ecs.containerinsights.*` proviennent de l'[agent CloudWatch d'AWS][20].
+
 ### Événements
 
 Pour réduire les données parasites, l'intégration AWS ECS est automatiquement configurée de façon à inclure les événements qui contiennent les termes suivants : `drain`, `error`, `fail`, `insufficient memory`, `pending`, `reboot` et `terminate`. Vous trouverez ci-dessous des exemples d'événement :
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Événements AWS ECS" >}}
 
-Pour supprimer ce filtre et recevoir tous les événements de votre intégration Datadog/AWS ECS, contactez [l'assistance Datadog][20].
+Pour supprimer ce filtre et recevoir tous les événements de votre intégration Datadog/AWS ECS, contactez [l'assistance Datadog][21].
 
 ### Checks de service
 
-- **aws.ecs.agent_connected** : renvoie `CRITICAL` si l'Agent n'est pas capable de se connecter. Si ce n'est pas le cas, renvoie `OK`.
+- **aws.ecs.agent_connected** : renvoie `CRITICAL` si l'Agent ne parvient pas à se connecter. Si ce n'est pas le cas, renvoie `OK`.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][20].
+Besoin d'aide ? Contactez [l'assistance Datadog][21].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles/agent
-[2]: https://docs.datadoghq.com/fr/integrations/faq/agent-5-amazon-ecs
+[2]: https://docs.datadoghq.com/fr/integrations/faq/agent-5-amazon-ecs/
 [3]: https://docs.datadoghq.com/fr/agent/autodiscovery/?tab=docker#how-to-set-it-up
 [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_GetStarted_EC2.html
-[5]: https://docs.datadoghq.com/fr/tracing/setup/docker
+[5]: https://docs.datadoghq.com/fr/tracing/setup/docker/
 [6]: https://aws.amazon.com/cli
 [7]: https://docs.datadoghq.com/fr/integrations/amazon_web_services/#datadog-aws-iam-policy
 [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonelasticcontainerservice.html
 [9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html#service_scheduler_daemon
-[10]: https://docs.datadoghq.com/fr/agent/autodiscovery
+[10]: https://docs.datadoghq.com/fr/agent/autodiscovery/
 [11]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_instances.html
 [12]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs.json
 [13]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs1.json
@@ -428,4 +490,5 @@ Besoin d'aide ? Contactez [l'assistance Datadog][20].
 [17]: /fr/agent/docker/apm/#docker-apm-agent-environment-variables
 [18]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
 [19]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/amazon_ecs_metadata.csv
-[20]: https://docs.datadoghq.com/fr/help
+[20]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/deploy-container-insights-ECS-instancelevel.html
+[21]: https://docs.datadoghq.com/fr/help/

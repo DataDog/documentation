@@ -52,6 +52,7 @@
                     "tracing",
                     "logs",
                     "synthetics",
+                    "real_user_monitoring",
                     "developers"
                 ],
                 "localisation": ["", "/fr", "/ja"]

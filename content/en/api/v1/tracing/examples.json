@@ -5,20 +5,20 @@
       "json_curl": [
         [
           {
-            "duration": "12345",
+            "duration": 12345,
             "name": "span_name",
             "resource": "/home",
             "service": "service_name",
-            "span_id": "987654321",
-            "start": "0",
-            "trace_id": "123456789"
+            "span_id": 987654321,
+            "start": 0,
+            "trace_id": 123456789
           }
         ]
       ],
       "json": [
         [
           {
-            "duration": "12345",
+            "duration": 12345,
             "error": "integer",
             "meta": {
               "<any-key>": "string"
@@ -30,9 +30,9 @@
             "parent_id": "integer",
             "resource": "/home",
             "service": "service_name",
-            "span_id": "987654321",
-            "start": "0",
-            "trace_id": "123456789",
+            "span_id": 987654321,
+            "start": 0,
+            "trace_id": 123456789,
             "type": "web"
           }
         ]

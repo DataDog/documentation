@@ -29,11 +29,13 @@ If your logs are raw formatted, update your formatter to include `dd.trace_id` a
 
 If your logs are JSON formated and you are using Logback there is nothing left to do. Otherwise with other logging libraries you need to activate MDC attributes autoinjection into your logs.
 
+**Note**: If the `attribute.path` for your trace ID is **not** `dd.trace_id`, ensure your trace ID reserved attribute settings account for the `attribute.path`. More information can be found in the [FAQ on this topic][2].
+
 ## Manually Inject Trace and Span IDs
 
-If you prefer to manually correlate your [traces][2] with your logs, leverage the Datadog API to retrieve correlation identifiers:
+If you prefer to manually correlate your [traces][3] with your logs, leverage the Datadog API to retrieve correlation identifiers:
 
-- Use `CorrelationIdentifier#getTraceId()` and `CorrelationIdentifier#getSpanId()` API methods to inject identifiers at the beginning and end of each [span][3] to log (see examples below).
+- Use `CorrelationIdentifier#getTraceId()` and `CorrelationIdentifier#getSpanId()` API methods to inject identifiers at the beginning and end of each [span][4] to log (see examples below).
 - Configure MDC to use the injected Keys:
 
     - `dd.trace_id` Active Trace ID during the log statement (or `0` if no trace)
@@ -90,7 +92,7 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you are not using a [Datadog Log Integration][4] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][5].
+**Note**: If you are not using a [Datadog Log Integration][5] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. More information can be found in the [FAQ on this topic][6].
 
 [See the Java logging documentation][4] for more details about specific logger implementation or to learn how to log in JSON.
 
@@ -99,7 +101,8 @@ Then update your logger configuration to include `dd.trace_id` and `dd.span_id` 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/java/#configuration
-[2]: /tracing/connect_logs_and_traces/
-[3]: /tracing/visualization/#trace
-[4]: /logs/log_collection/java/#raw-format
-[5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom
+[2]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=jsonlogs#trace-id-option
+[3]: /tracing/connect_logs_and_traces/
+[4]: /tracing/visualization/#trace
+[5]: /logs/log_collection/java/#raw-format
+[6]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel/?tab=custom

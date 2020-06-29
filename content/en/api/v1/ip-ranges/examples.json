@@ -28,7 +28,7 @@
             "prefixes_ipv4": [],
             "prefixes_ipv6": []
           },
-          "version": "11",
+          "version": 11,
           "webhooks": {
             "prefixes_ipv4": [],
             "prefixes_ipv6": []

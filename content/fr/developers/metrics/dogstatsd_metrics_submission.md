@@ -7,10 +7,10 @@ aliases:
   - /fr/developers/faq/why-is-my-counter-metric-showing-decimal-values
   - /fr/developers/faq/dog-statsd-sample-rate-parameter-explained
 further_reading:
-  - link: developers/dogstatsd
+  - link: /developers/dogstatsd/
     tag: Documentation
     text: Présentation de DogStatsD
-  - link: developers/metrics/types
+  - link: /developers/metrics/types/
     tag: Documentation
     text: Types de métrique Datadog
 ---
@@ -62,8 +62,8 @@ options = {
 initialize(**options)
 
 while(1):
-  statsd.increment('exemple_metrique.increment', tags=["environment:dev"])
-  statsd.decrement('exemple_metrique.decrement', tags=["environment:dev"])
+  statsd.increment('example_metric.increment', tags=["environment:dev"])
+  statsd.decrement('example_metric.decrement', tags=["environment:dev"])
   time.sleep(10)
 {{< /code-block >}}
 
@@ -78,9 +78,9 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.increment('exemple_metrique.increment', tags: ['environment:dev'])
-    statsd.decrement('exemple_metrique.decrement', tags: ['environment:dev'])
-    statsd.count('exemple_metrique.count', 2, tags: ['environment:dev'])
+    statsd.increment('example_metric.increment', tags: ['environment:dev'])
+    statsd.decrement('example_metric.decrement', tags: ['environment:dev'])
+    statsd.count('example_metric.count', 2, tags: ['environment:dev'])
     sleep 10
 end
 {{< /code-block >}}
@@ -107,9 +107,9 @@ func main() {
     }
     for {
 
-        statsd.Incr("exemple_metrique.increment", []string{"environment:dev"}, 1)
-        statsd.Decr("exemple_metrique.decrement", []string{"environment:dev"}, 1)
-        statsd.Count("exemple_metrique.count", 2, []string{"environment:dev"}, 1)
+        statsd.Incr("example_metric.increment", []string{"environment:dev"}, 1)
+        statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 1)
+        statsd.Count("example_metric.count", 2, []string{"environment:dev"}, 1)
         time.Sleep(10 * time.Second)
     }
 }
@@ -121,7 +121,7 @@ func main() {
 Exécutez le code Java suivant pour envoyer une métrique `COUNT` DogStatsD à Datadog :
 
 {{< code-block lang="java" filename="count_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -129,11 +129,15 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
-            Statsd.incrementCounter("exemple_metrique.increment", new String[]{"environment:dev"});
-            Statsd.decrementCounter("exemple_metrique.decrement", new String[]{"environment:dev"});
-            Statsd.count("exemple_metrique.count", 2, new String[]{"environment:dev"});
+            Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev"});
+            Statsd.decrementCounter("example_metric.decrement", new String[]{"environment:dev"});
+            Statsd.count("example_metric.count", 2, new String[]{"environment:dev"});
             Thread.sleep(100000);
         }
     }
@@ -159,16 +163,18 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Increment("exemple_metrique.increment", tags: new[] {"environment:dev"});
-            DogStatsd.Decrement("exemple_metrique.decrement", tags: new[] {"environment:dev"});
-            DogStatsd.Counter("exemple_metrique.count", 2, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(random.Next(100000));
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
+                dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
+                dogStatsdService.Counter("example_metric.count", 2, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(random.Next(100000));
+            }
         }
     }
 }
@@ -193,8 +199,8 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->increment('exemple_metrique.increment', array('environment'=>'dev'));
-    $statsd->decrement('exemple_metrique.decrement', array('environment'=>'dev'));
+    $statsd->increment('example_metric.increment', 1, array('environment'=>'dev'));
+    $statsd->decrement('example_metric.decrement', 1, array('environment'=>'dev'));
     sleep(10);
 }
 {{< /code-block >}}
@@ -240,7 +246,7 @@ i = 0
 
 while(1):
   i += 1
-  statsd.gauge('exemple_metrique.gauge', i, tags=["environment:dev"])
+  statsd.gauge('example_metric.gauge', i, tags=["environment:dev"])
   time.sleep(10)
 {{< /code-block >}}
 
@@ -258,7 +264,7 @@ i = 0
 
 while true do
     i += 1
-    statsd.gauge('exemple_metrique.gauge', i, tags: ['environment:dev'])
+    statsd.gauge('example_metric.gauge', i, tags: ['environment:dev'])
     sleep 10
 end
 {{< /code-block >}}
@@ -286,7 +292,7 @@ func main() {
     var i float64
     for {
         i += 1
-        statsd.Gauge("exemple_metrique.gauge", i, []string{"environment:dev"}, 1)
+        statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
         time.Sleep(10 * time.Second)
     }
 }
@@ -298,7 +304,7 @@ func main() {
 Exécutez le code Java suivant pour envoyer une métrique `GAUGE` DogStatsD à Datadog :
 
 {{< code-block lang="java" filename="gauge_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -306,9 +312,13 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
-            Statsd.recordGaugeValue("exemple_metrique.gauge", i, new String[]{"environment:dev"});
+            Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
         }
     }
@@ -334,14 +344,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Gauge("exemple_metrique.gauge", i, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(100000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(100000);
+            }
         }
     }
 }
@@ -368,7 +380,7 @@ $statsd = new DogStatsd(
 $i = 0;
 while (TRUE) {
     $i++;
-    $statsd->gauge('exemple_metrique.gauge', $i, array('environment'=>'dev'));
+    $statsd->gauge('example_metric.gauge', $i, array('environment'=>'dev'));
     sleep(10);
 }
 {{< /code-block >}}
@@ -409,7 +421,7 @@ initialize(**options)
 i = 0
 while(1):
   i += 1
-  statsd.set('exemple_metrique.set', i, tags=["environment:dev"])
+  statsd.set('example_metric.set', i, tags=["environment:dev"])
   time.sleep(random.randint(0, 10))
 {{< /code-block >}}
 
@@ -426,7 +438,7 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 i = 0
 while true do
     i += 1
-    statsd.set('exemple_metrique.gauge', i, tags: ['environment:dev'])
+    statsd.set('example_metric.gauge', i, tags: ['environment:dev'])
     sleep rand 10
 end
 {{< /code-block >}}
@@ -456,7 +468,7 @@ func main() {
     var i float64
     for {
         i += 1
-        statsd.Set("exemple_metrique.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
+        statsd.Set("example_metric.set", strconv.Itoa(i), []string{"environment:dev"}, 1)
         time.Sleep(rand.Intn(10) * time.Second)
     }
 }
@@ -481,14 +493,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Set("exemple_metrique.set", i, tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(random.Next(100000));
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Set("example_metric.set", i, tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(random.Next(100000));
+            }
         }
     }
 }
@@ -516,7 +530,7 @@ $i = 0;
 
 while (TRUE) {
     $i++;
-    $statsd->set('exemple_metrique.set', i, array('environment'=>'dev'));
+    $statsd->set('example_metric.set', i, array('environment'=>'dev'));
     sleep(rand(0, 10));
 }
 {{< /code-block >}}
@@ -561,7 +575,7 @@ options = {
 initialize(**options)
 
 while(1):
-  statsd.histogram('exemple_metrique.histogram', random.randint(0, 20), tags=["environment:dev"])
+  statsd.histogram('example_metric.histogram', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
 {{< /code-block >}}
 
@@ -576,7 +590,7 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.set('exemple_metrique.histogram', rand 20, tags: ['environment:dev'])
+    statsd.set('example_metric.histogram', rand 20, tags: ['environment:dev'])
     sleep 2
 end
 {{< /code-block >}}
@@ -604,7 +618,7 @@ func main() {
     }
 
     for {
-        statsd.Histogram("exemple_metrique.histogram", rand.Intn(20), []string{"environment:dev"}, 1)
+        statsd.Histogram("example_metric.histogram", rand.Intn(20), []string{"environment:dev"}, 1)
         time.Sleep(2 * time.Second)
     }
 }
@@ -616,7 +630,7 @@ func main() {
 Exécutez le code Java suivant pour envoyer une métrique `HISTOGRAM` DogStatsD à Datadog :
 
 {{< code-block lang="java" filename="histogram_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -624,9 +638,13 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
-            Statsd.recordHistogramValue("exemple_metrique.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
+            Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
     }
@@ -652,14 +670,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Histogram("exemple_metrique.histogram", random.Next(20), tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(2000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(2000);
+            }
         }
     }
 }
@@ -684,7 +704,7 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->histogram('exemple_metrique.histogram', rand(0, 20), array('environment'=>'dev'));
+    $statsd->histogram('example_metric.histogram', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
 {{< /code-block >}}
@@ -696,11 +716,11 @@ L'instrumentation ci-dessus génère les métriques suivantes :
 
 | Métrique                                  | Description                             |
 |-----------------------------------------|-----------------------------------------|
-| `exemple_metrique.histogram.count`        | Le nombre d'échantillonnages de cette métrique |
-| `exemple_metrique.histogram.avg`          | La durée moyenne des valeurs échantillonnées      |
-| `exemple_metrique.histogram.median`       | La valeur échantillonnée médiane                    |
-| `exemple_metrique.histogram.max`          | La valeur échantillonnée maximale                   |
-| `exemple_metrique.histogram.95percentile` | Le 95e centile des valeurs échantillonnées           |
+| `example_metric.histogram.count`        | Le nombre d'échantillonnages de cette métrique |
+| `example_metric.histogram.avg`          | La durée moyenne des valeurs échantillonnées      |
+| `example_metric.histogram.median`       | La valeur échantillonnée médiane                    |
+| `example_metric.histogram.max`          | La valeur échantillonnée maximale                   |
+| `example_metric.histogram.95percentile` | Le 95e centile des valeurs échantillonnées           |
 
 Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
 
@@ -739,7 +759,7 @@ options = {
 
 initialize(**options)
 
-@statsd.timed('exemple_metrique.timer', tags=["environment:dev,function:my_function"])
+@statsd.timed('example_metric.timer', tags=["environment:dev,function:my_function"])
 def my_function():
   time.sleep(random.randint(0, 10))
 
@@ -760,7 +780,7 @@ def my_function():
   sleep(1)
 
   # Démarrer le timer
-  with statsd.timed('exemple_metrique.timer', tags=["environment:dev"]):
+  with statsd.timed('example_metric.timer', tags=["environment:dev"]):
     # Ce que vous souhaitez mesurer
     sleep(random.randint(0, 10))
 
@@ -791,7 +811,7 @@ function runfunction() {
 while (TRUE) {
   $start_time = microtime(TRUE);
   runfunction();
-  $statsd->microtiming('exemple_metrique.timer', microtime(TRUE) - $start_time);
+  $statsd->microtiming('example_metric.timer', microtime(TRUE) - $start_time);
 }
 {{< /code-block >}}
 
@@ -802,11 +822,11 @@ Lorsque DogStatsD reçoit les données de la métrique timer, il calcule la dist
 
 | Métrique                              | Description                             |
 |-------------------------------------|-----------------------------------------|
-| `exemple_metrique.timer.count`        | Le nombre d'échantillonnages de cette métrique |
-| `exemple_metrique.timer.avg`          | La durée moyenne des valeurs échantillonnées      |
-| `exemple_metrique.timer.median`       | La valeur échantillonnée médiane                    |
-| `exemple_metrique.timer.max`          | La valeur échantillonnée maximale                   |
-| `exemple_metrique.timer.95percentile` | Le 95e centile des valeurs échantillonnées           |
+| `example_metric.timer.count`        | Le nombre d'échantillonnages de cette métrique |
+| `example_metric.timer.avg`          | La durée moyenne des valeurs échantillonnées      |
+| `example_metric.timer.median`       | La valeur échantillonnée médiane                    |
+| `example_metric.timer.max`          | La valeur échantillonnée maximale                   |
+| `example_metric.timer.95percentile` | Le 95e centile des valeurs échantillonnées           |
 
 DogStatsD traite les métriques `TIMER` en tant que métriques `HISTOGRAM`. Que vous utilisiez le type de métrique `TIMER` ou `HISTOGRAM`, vous envoyez les mêmes données à Datadog. Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
 
@@ -840,7 +860,7 @@ options = {
 initialize(**options)
 
 while(1):
-  statsd.distribution('exemple_metrique.distribution', random.randint(0, 20), tags=["environment:dev"])
+  statsd.distribution('example_metric.distribution', random.randint(0, 20), tags=["environment:dev"])
   time.sleep(2)
 {{< /code-block >}}
 
@@ -855,7 +875,7 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 
 while true do
-    statsd.distribution('exemple_metrique.gauge', rand 20, tags: ['environment:dev'])
+    statsd.distribution('example_metric.gauge', rand 20, tags: ['environment:dev'])
     sleep 2
 end
 {{< /code-block >}}
@@ -883,7 +903,7 @@ func main() {
     }
 
     for {
-        statsd.Distribution("exemple_metrique.distribution", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
+        statsd.Distribution("example_metric.distribution", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
         time.Sleep(2 * time.Second)
     }
 }
@@ -895,7 +915,7 @@ func main() {
 Exécutez le code Java suivant pour envoyer une métrique `DISTRIBUTION` DogStatsD à Datadog :
 
 {{< code-block lang="java" filename="distribution_metric.java" >}}
-import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 import java.util.Random;
 
@@ -903,9 +923,13 @@ public class DogStatsdClient {
 
     public static void main(String[] args) throws Exception {
 
-        StatsDClient Statsd = new NonBlockingStatsDClient("statsd", "localhost", 8125);
+        StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .prefix("statsd").
+            .hostname("localhost")
+            .port(8125)
+            .build();
         for (int i = 0; i < 10; i++) {
-            Statsd.recordDistributionValue("exemple_metrique.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
+            Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
     }
@@ -931,14 +955,16 @@ public class DogStatsdClient
             StatsdPort = 8125,
         };
 
-        StatsdClient.DogStatsd.Configure(dogstatsdConfig);
-
-        var random = new Random(0);
-
-        for (int i = 0; i < 10; i++)
+        using (var dogStatsdService = new DogStatsdService())
         {
-            DogStatsd.Distribution("exemple_metrique.distribution", random.Next(20), tags: new[] {"environment:dev"});
-            System.Threading.Thread.Sleep(2000);
+            dogStatsdService.Configure(dogstatsdConfig);
+            var random = new Random(0);
+
+            for (int i = 0; i < 10; i++)
+            {
+                dogStatsdService.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
+                System.Threading.Thread.Sleep(2000);
+            }
         }
     }
 }
@@ -963,7 +989,7 @@ $statsd = new DogStatsd(
   );
 
 while (TRUE) {
-    $statsd->distribution('exemple_metrique.distribution', rand(0, 20), array('environment'=>'dev'));
+    $statsd->distribution('example_metric.distribution', rand(0, 20), array('environment'=>'dev'));
     sleep(2);
 }
 {{< /code-block >}}
@@ -1012,21 +1038,21 @@ statsd.increment('loop.count', :sample_rate => 0.5)
 {{% tab "Go" %}}
 
 ```go
-statsd.Incr("exemple_metrique.increment", []string{}, 0.5)
+statsd.Incr("example_metric.increment", []string{}, 0.5)
 ```
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 ```java
-Statsd.incrementCounter("exemple_metrique.increment", sampleRate=0.5);
+Statsd.incrementCounter("example_metric.increment", sampleRate=0.5);
 ```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("exemple_metrique.increment", sampleRate: 0.5);
+dogStatsdService.Increment("example_metric.increment", sampleRate: 0.5);
 ```
 
 {{% /tab %}}
@@ -1034,7 +1060,7 @@ DogStatsd.Increment("exemple_metrique.increment", sampleRate: 0.5);
 
 ```php
 <? php
-$statsd->increment('exemple_metrique.increment', $sampleRate->0.5);
+$statsd->increment('example_metric.increment', $sampleRate->0.5);
 ```
 
 {{% /tab %}}
@@ -1046,41 +1072,41 @@ Ajoutez des tags à n'importe quelle métrique envoyée à DogStatsD avec le par
 
 #### Exemples de code
 
-Le code suivant ajoute uniquement les tags `environment:dev` et `account:local` à la métrique `exemple_metrique.increment` :
+Le code suivant ajoute uniquement les tags `environment:dev` et `account:local` à la métrique `example_metric.increment` :
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 ```python
-statsd.increment('exemple_metrique.increment', tags=["environment:dev","account:local"])
+statsd.increment('example_metric.increment', tags=["environment:dev","account:local"])
 ```
 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
 ```ruby
-statsd.increment('exemple_metrique.increment', tags: ['environment:dev','account:local'])
+statsd.increment('example_metric.increment', tags: ['environment:dev','account:local'])
 ```
 
 {{% /tab %}}
 {{% tab "Go" %}}
 
 ```go
-statsd.Incr("exemple_metrique.increment", []string{"environment:dev","account:local"}, 1)
+statsd.Incr("example_metric.increment", []string{"environment:dev","account:local"}, 1)
 ```
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 ```java
-Statsd.incrementCounter("exemple_metrique.increment", new String[]{"environment:dev","account:local"});
+Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev","account:local"});
 ```
 
 {{% /tab %}}
 {{% tab ".NET" %}}
 
 ```csharp
-DogStatsd.Increment("exemple_metrique.increment", tags: new[] {"environment:dev","account:local"})
+dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev","account:local"})
 ```
 
 {{% /tab %}}
@@ -1089,14 +1115,14 @@ DogStatsd.Increment("exemple_metrique.increment", tags: new[] {"environment:dev"
 L'argument `tags` peut être une chaîne de caractères :
 
 ```php
-$statsd->increment('exemple_metrique.increment', "environment:dev,account:local");
+$statsd->increment('example_metric.increment', "environment:dev,account:local");
 ```
 
 ou un tableau :
 
 ```php
 <?php
-$statsd->increment('exemple_metrique.increment', array('environment' => 'dev', 'account' => 'local'));
+$statsd->increment('example_metric.increment', array('environment' => 'dev', 'account' => 'local'));
 
 ```
 
@@ -1111,12 +1137,12 @@ Le tag host est attribué automatiquement par l'Agent Datadog chargé de l'agré
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/developers/dogstatsd
+[1]: /fr/developers/dogstatsd/
 [2]: /fr/developers/metrics/types/?tab=count#definition
 [3]: /fr/dashboards/functions/arithmetic/#cumulative-sum
 [4]: /fr/dashboards/functions/arithmetic/#integral
 [5]: /fr/developers/metrics/types/?tab=gauge#definition
 [6]: /fr/developers/metrics/types/?tab=histogram#definition
 [7]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[8]: /fr/metrics/distributions
+[8]: /fr/metrics/distributions/
 [9]: /fr/developers/metrics/types/?tab=distribution#definition
