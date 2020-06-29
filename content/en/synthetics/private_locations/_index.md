@@ -2,7 +2,7 @@
 title: Run Synthetics Tests from Private Locations
 kind: documentation
 description: Run Synthetics API and browser tests from private locations
-beta: true
+beta: false
 further_reading:
     - link: /getting_started/synthetics/private_location
       tag: 'Documentation'
@@ -14,10 +14,6 @@ further_reading:
       tag: 'Documentation'
       text: 'Configure an API Test'
 ---
-
-<div class="alert alert-warning">
-This feature is in private beta. Reach out to the <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to request access.
-</div>
 
 ## Overview
 
