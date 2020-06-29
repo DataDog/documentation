@@ -108,14 +108,15 @@ Datadog’s integration processing Pipelines are available for the certain sourc
 
 To see the full list of Integration Pipelines that Datadog offers, browse the [Integration Pipeline Library][8].
 
-[insert Image]
+{{< img src="logs/processing/pipelines/integration-pipeline-library.png" alt="Integration Pipeline Library"  style="width:80%;">}}
 
 Visit the Pipeline Library to check how Datadog processes different formats of logs by default.
 
 To use one of those, Datadog recommends to install the integration by configuring the corresponding log `source`. Once Datadog received the first log with this source, the installation will be automatically triggered and the Integration Pipeline will be added to the processing pipelines list. To configure the log source, please refer to the corresponding [Integration documentation][9].
 
 It's also possible to copy an integration pipeline using the copy button. 
-[insert image]
+
+{{< img src="logs/processing/pipelines/clone-pipeline-from-library." alt="Cloning pipeline from Library"  style="width:80%;">}}
 
 
 ## Pipelines limitations
