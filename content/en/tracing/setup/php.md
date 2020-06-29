@@ -19,27 +19,30 @@ further_reading:
   tag: "Documentation"
   text: "Advanced Usage"
 ---
+## Compatibilty Requirements
+
+For a full list of supported libraries and language versions, visit the [Compatibility Requirements][1] page.
 
 ## Installation and Getting Started
 
-If you already have a Datadog account you can find [step-by-step instructions][1] in our in-app guides for either host-based or container-based set ups.
+If you already have a Datadog account you can find [step-by-step instructions][2] in our in-app guides for either host-based or container-based set ups.
 
-For descriptions of terminology used in APM, take a look at the [official documentation][2].
+For descriptions of terminology used in APM, take a look at the [official documentation][3].
 
-For details about open-source contributions to the PHP tracer, refer to the [contributing guide][3].
+For details about open-source contributions to the PHP tracer, refer to the [contributing guide][4].
 
 ### Setup the Datadog Agent
 
 The PHP APM tracer sends trace data through the Datadog Agent.
 
-[Install and configure the Datadog Agent][4]. See the additional documentation for [tracing Docker applications][5] or [Kubernetes applications][6].
+[Install and configure the Datadog Agent][5]. See the additional documentation for [tracing Docker applications][6] or [Kubernetes applications][7].
 
-For Agent version [7.18.0][7] and above, APM is enabled by default for all environments without further action.
-If you are running an older version of the agent, make sure the Agent has **[APM enabled][4]**.
+For Agent version [7.18.0][8] and above, APM is enabled by default for all environments without further action.
+If you are running an older version of the agent, make sure the Agent has **[APM enabled][5]**.
 
 ### Install the extension
 
-Install the PHP extension using one of the [precompiled packages for supported distributions][8].
+Install the PHP extension using one of the [precompiled packages for supported distributions][9].
 
 Once downloaded, install the package with one of the commands below.
 
@@ -60,11 +63,11 @@ The extension will be installed for the default PHP version. To install the exte
 export DD_TRACE_PHP_BIN=$(which php-fpm7)
 ```
 
-Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][9] to see the traces.
+Restart PHP (PHP-FPM or the Apache SAPI) and then visit a tracing-enabled endpoint of your application. View the [APM UI][10] to see the traces.
 
-**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [run the dd-doctor.php diagnostic script][10] from the host machine to help identify any issues.
+**Note**: It might take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, [run the dd-doctor.php diagnostic script][11] from the host machine to help identify any issues.
 
-If you can't find your distribution, you can [manually install][11] the PHP extension.
+If you can't find your distribution, you can [manually install][12] the PHP extension.
 
 ## Automatic Instrumentation
 
@@ -87,7 +90,7 @@ Configure your application level tracers to submit traces to a custom Agent host
 
 The PHP tracer automatically looks for and initializes with the ENV variables `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`.
 
-See [tracer configuration][12] for more information on how to set these variables.
+See [tracer configuration][13] for more information on how to set these variables.
 
 ## Configuration
 
@@ -104,7 +107,7 @@ env[DD_AGENT_HOST] = $FROM_HOST_ENV
 env[DD_TRACE_DEBUG] = true
 ```
 
-Alternatively, you can use [`SetEnv`][13] from the server config, virtual host, directory, or `.htaccess` file.
+Alternatively, you can use [`SetEnv`][14] from the server config, virtual host, directory, or `.htaccess` file.
 
 ```text
 SetEnv DD_TRACE_DEBUG true
@@ -232,7 +235,7 @@ The `$*` wildcard matches without replacement.
 
 ## Upgrading
 
-To upgrade the PHP tracer, [download the latest release][8] and follow the same steps as [installing the extension](#install-the-extension).
+To upgrade the PHP tracer, [download the latest release][9] and follow the same steps as [installing the extension](#install-the-extension).
 
 **Note**: If you are using second level caching in OPcache by setting the parameter `opcache.file_cache`, remove the cache folder.
 
@@ -250,16 +253,17 @@ To remove the PHP tracer:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/install
-[2]: /tracing/visualization/
-[3]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
-[4]: /tracing/send_traces/
-[5]: /tracing/setup/docker/
-[6]: /agent/kubernetes/apm/
-[7]: https://github.com/DataDog/datadog-agent/releases/tag/7.18.0
-[8]: https://github.com/DataDog/dd-trace-php/releases/latest
-[9]: https://app.datadoghq.com/apm/services
-[10]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
-[11]: /tracing/faq/php-tracer-manual-installation
-[12]: /tracing/setup/php/#environment-variable-configuration
-[13]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[1]: /tracing/compatibility_requirements/php
+[2]: https://app.datadoghq.com/apm/install
+[3]: /tracing/visualization/
+[4]: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
+[5]: /tracing/send_traces/
+[6]: /tracing/setup/docker/
+[7]: /agent/kubernetes/apm/
+[8]: https://github.com/DataDog/datadog-agent/releases/tag/7.18.0
+[9]: https://github.com/DataDog/dd-trace-php/releases/latest
+[10]: https://app.datadoghq.com/apm/services
+[11]: https://raw.githubusercontent.com/DataDog/dd-trace-php/master/src/dd-doctor.php
+[12]: /tracing/faq/php-tracer-manual-installation
+[13]: /tracing/setup/php/#environment-variable-configuration
+[14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
