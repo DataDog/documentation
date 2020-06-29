@@ -112,7 +112,7 @@ To see the full list of Integration Pipelines that Datadog offers, browse the [I
 
 Visit the Pipeline Library to check how Datadog processes different formats of logs by default.
 
-To use one of those, Datadog recommends to install the integration by configuring the corresponding log `source`. Once Datadog received the first log with this source, the installation will be automatically triggered and the Integration Pipeline will be added to the processing pipelines list. To configure the log source, please refer to the corresponding [Integration documentation][9].
+To use one of those, Datadog recommends to install the integration by configuring the corresponding log `source`. Once Datadog receives the first log with this source, the installation will be automatically triggered and the Integration Pipeline will be added to the processing pipelines list. To configure the log source, please refer to the corresponding [Integration documentation][9].
 
 It's also possible to copy an integration pipeline using the copy button. 
 
