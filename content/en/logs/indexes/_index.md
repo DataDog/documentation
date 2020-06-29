@@ -129,7 +129,7 @@ You will be presented with a modal containing two options:
 
 {{< img src="logs/indexes/delete_modal.png" alt="index details"  style="width:70%;">}}
 
-When you request the deletion of data, a support ticket will be automatically be generated on your behalf to support@datadoghq.com. Someone
+When you request the deletion of data, a support ticket is automatically generated on your behalf to support@datadoghq.com. Someone
 from Datadog may follow up with you to confirm the request and learn more about the data that you need removed.
 
 ## Further Reading
