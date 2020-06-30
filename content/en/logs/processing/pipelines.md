@@ -112,19 +112,18 @@ To make sure the Log Management solution functions in an optimal way, we set the
 
 ### Limits applied to ingested log events
 
-* The size of a log event should not exceed 25K bytes.
-* Log events can be submitted up to 6h in the past and 2h in the future.
-* A log event once converted to JSON format should contain less than 256 attributes. Each of those attribute's key should be less than 50 characters, be nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
+* For an optimal use of the platform, we recommend that the size of a log event should not exceed 25K bytes. When using the Datadog Agent, log events larger than 256KB are split into several entries. When using the Datadog TCP or HTTP API directly, log events up to 1MB are accepted by the API.
+* Log events can be submitted up to 18h in the past and 2h in the future.
+* A log event once converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, be nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
 * A log event should not have more than 100 tags and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
 
 Log events which do not comply with these limits might be transformed or truncated by the system-or simply not indexed if outside of the provided time range. However, Datadog always tries to do its best to preserve as much as possible to preserve provided user data.
 
 ### Limits applied to provided features
 
-* The maximum number of facets is 100.
-* The maximum number of processing Pipelines on a platform is 100.
-* The maximum number of Processors per Pipeline is 20.
-* The maximum number of parsing rules within a grok Processor is 10. We reserve the right to disable underperforming parsing rules that might impact Datadog's service performance.
+* The maximum number of facets is 1000.
+* We recommend using at most 20 Processors per Pipeline.
+* We recommend using at most 10 parsing rules within a grok Processor. We reserve the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
 [Contact support][7] if you reach one of these limits as Datadog might be able to provide you more.
 
