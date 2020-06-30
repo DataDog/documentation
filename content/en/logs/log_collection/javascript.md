@@ -38,11 +38,12 @@ After adding [`@datadog/browser-logs`][3] to your `package.json` file, initializ
 {{< site-region region="us" >}}
 
 ```javascript
+import { Datacenter } from '@datadog/browser-core';
 import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: 'us',
+  datacenter: Datacenter.US,
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
@@ -52,11 +53,12 @@ datadogLogs.init({
 {{< site-region region="eu" >}}
 
 ```javascript
+import { Datacenter } from '@datadog/browser-core';
 import { datadogLogs } from '@datadog/browser-logs';
 
 datadogLogs.init({
   clientToken: '<DATADOG_CLIENT_TOKEN>',
-  datacenter: 'eu',
+  datacenter: Datacenter.EU,
   forwardErrorsToLogs: true,
   sampleRate: 100
 });
