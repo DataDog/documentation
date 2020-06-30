@@ -154,7 +154,7 @@ If you already have the [Agent running with a manifest][3]:
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
 
-2. Enable process collection and the system prob for the Agent container with the following environment variables:
+2. Enable process collection and the system probe for the Agent container with the following environment variables:
 
     ```yaml
       # (...)
@@ -280,6 +280,32 @@ datadog/agent:latest
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
+If using `docker-compose`, make the following additions to the Datadog Agent service.
+
+```
+version: '3'
+services:
+  ..
+  datadog:
+    image: "datadog/agent:latest"
+    environment:
+       DD_SYSTEM_PROBE_ENABLED: 'true'
+       DD_PROCESS_AGENT_ENABLED: 'true'
+       DD_API_KEY: '<DATADOG_API_KEY>'
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - /proc/:/host/proc/:ro
+    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+    - /sys/kernel/debug:/sys/kernel/debug
+    cap_add:
+    - SYS_ADMIN
+    - SYS_RESOURCE
+    - SYS_PTRACE
+    - NET_ADMIN
+    - IPC_LOCK
+    security_opt:
+    - apparmor:unconfined
+```
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}

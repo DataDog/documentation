@@ -1,18 +1,14 @@
 ---
-title: Règles sécuritaires de détection
+title: Règles de détection des menaces
 kind: documentation
 further_reading:
-  - link: /security_monitoring/explorer
+  - link: /security_monitoring/explorer/
     tag: Documentation
     text: Faire des recherches sur l'ensemble de vos signaux de sécurité et effectuer une analyse de la sécurité
 ---
-<div class="alert alert-warning">
-Les règles de détection des menaces de Security Monitoring sont en version bêta privée.
-</div>
-
 ## Présentation
 
-Les règles de détection définissent la logique conditionnelle appliquée à l'ensemble des logs ingérés. Lorsqu'un scénario d'une règle se réalise lors d'une période donnée, Datadog génère un signal de sécurité.
+Les règles de détection définissent la logique conditionnelle appliquée à l'ensemble des logs ingérés. Lorsque les conditions d'une règle sont remplies pendant un intervalle donné, Datadog génère un signal de sécurité. Datadog propose des [règles de détection par défaut][1], vous permettant ainsi de détecter immédiatement les menaces dans votre environnement.
 
 ## Créer des règles de détection
 
@@ -22,7 +18,7 @@ Pour créer une règle de détection dans Datadog, utilisez la navigation princi
 
 {{< img src="security_monitoring/detection_rules/define_search_query.png" alt="Définir la requête de recherche" >}}
 
-Rédigez une requête de recherche en suivant la même logique que pour les [recherches dans le Log Explorer][1]. Chaque requête possède une étiquette, qui correspond à une lettre minuscule ASCII. Vous pouvez modifier le nom d'une requête en cliquant sur l'icône en forme de crayon.
+Créez une requête de recherche en appliquant la même logique que pour les [recherches dans le Log Explorer][2]. Chaque requête possède un libellé, qui correspond à une lettre minuscule ASCII. Vous pouvez modifier le nom d'une requête en cliquant sur l'icône en forme de crayon.
 
 Si vous le souhaitez, vous pouvez mettre en place un regroupement des signaux. Le critère de regroupement génère un signal pour chaque groupe en fonction de sa valeur. Le critère de regroupement correspond généralement à une entité (p. ex., un utilisateur, une adresse IP, etc.). Il peut également être utilisé pour [rassembler des requêtes](#rassemblement-de-requetes).
 
@@ -33,6 +29,8 @@ Ajoutez des requêtes supplémentaires à l'aide du bouton Add Query.
 
 
 ### Définir les scénarios de la règle
+
+{{< img src="security_monitoring/detection_rules/define_rule_case.png" alt="Définir les scénarios de la règle" >}}
 
 #### Nom et déclencheur des scénarios de la règle
 
@@ -48,21 +46,23 @@ Renommez chaque scénario de règle sous le champ **name**, par exemple « Scén
 
 Choisissez la sévérité du signal de sécurité en sélectionnant le niveau approprié dans la liste déroulante, parmi les valeurs suivantes : `INFO`, `LOW`, `MEDIUM`, `HIGH` et `CRITICAL`.
 
-Dans la section « Notify », vous pouvez définir une ou plusieurs personnes à prévenir pour chaque scénario de règle.
+Dans la section « Notify », vous pouvez définir une ou plusieurs [cibles de notification][3] pour chaque scénario de règle.
 
 #### Intervalle de temps
 
-Vous devez spécifier un intervalle de temps à appliquer en cas de réalisation d'un scénario. Il s'agit d'une période glissante évaluée en temps réel.
+Vous devez spécifier un intervalle de temps (`evaluation window`) à appliquer en cas de réalisation d'un scénario. Il s'agit d'une période glissante évaluée en temps réel.
 
-Une fois le signal généré, il demeure ouvert tant que le scénario se réalise au moins une fois dans cet intervalle de conservation. Chaque fois qu'un nouvel événement correspond à l'un des scénarios, le timestamp *last updated* (dernière mise à jour) du signal s'actualise.
+Une fois le signal généré, il demeure ouvert tant que le scénario se réalise au moins une fois dans cet intervalle `keep alive`. Chaque fois qu'un nouvel événement correspond à l'un des scénarios, le timestamp *last updated* (dernière mise à jour) du signal s'actualise.
 
-Un signal se ferme dès lors que sa durée dépasse la valeur maximale, peu importe si la requête entraîne ou non des résultats. Cette durée est calculée à partir du timestamp de la première réalisation du scénario.
+Un signal se ferme dès lors que sa durée dépasse la valeur spécifiée pour `maximum signal duration`, peu importe si la requête entraîne ou non des résultats. Cette durée est calculée à partir du timestamp de la première réalisation du scénario.
 
 Vous pouvez ajouter des scénarios supplémentaires en cliquant sur le bouton **Add Case**.
 
+**Remarque** : l'intervalle `evaluation window` doit être inférieur ou égal aux intervalles `keep alive` et `maximum signal duration`. 
+
 ### Message du signal de sécurité
 
-Tout comme les [notifications de monitor][2], la zone de notification prend en charge le format Markdown et vous permet de visualiser un aperçu du message.
+Tout comme les [notifications de monitor][4], la zone de notification prend en charge le format Markdown et vous permet de visualiser un aperçu du message.
 
 Définissez dans la section **Rule name** le nom de la règle qui apparaît dans la liste des règles, ainsi que le titre du signal de sécurité.
 
@@ -90,7 +90,7 @@ Dans l'exemple ci-dessus, dès que l'utilisateur `@usr.name` enregistre cinq ten
 
 ## Gérer les règles de détection
 
-Depuis la page [Security Configuration Detection Rules][3], vous pouvez effectuer des recherches sur l'ensemble de vos règles de détection. Vous pouvez ainsi activer, désactiver, modifier, supprimer, dupliquer ou consulter en quelques secondes les signaux générés par l'une de vos règles. Cette vue vous permet également de [créer une règle][4] de A à Z.
+Depuis la page [Security Configuration Detection Rules][5], vous pouvez effectuer des recherches sur l'ensemble de vos règles de détection. Vous pouvez ainsi activer, désactiver, modifier, supprimer, dupliquer ou consulter en quelques secondes les signaux générés par l'une de vos règles. Cette vue vous permet également de [créer une règle][6] de A à Z.
 
 ### Isoler des règles
 
@@ -131,7 +131,9 @@ Passez le curseur sur une règle et appuyez sur le bouton **Delete** pour la sup
 
 
 
-[1]: /fr/logs/explorer/search
-[2]: /fr/monitors/notifications
-[3]: https://app.datadoghq.com/security/configuration/rules
-[4]: https://app.datadoghq.com/security/configuration/rules/new
+[1]: /fr/security_monitoring/default_rules/
+[2]: /fr/logs/explorer/search/
+[3]: /fr/monitors/notifications/?tab=is_alert#integrations
+[4]: /fr/monitors/notifications/
+[5]: https://app.datadoghq.com/security/configuration/rules
+[6]: https://app.datadoghq.com/security/configuration/rules/new

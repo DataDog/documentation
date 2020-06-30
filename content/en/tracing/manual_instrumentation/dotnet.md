@@ -15,6 +15,10 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
+<div class="alert alert-info">
+If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/dotnet/">.NET Setup Instructions</a>.
+</div>
+
 This page details common use cases for adding and customizing observability with Datadog APM.
 
 Add the `Datadog.Trace` [NuGet package][1] to your application. To create new spans, access the global tracer through the `Datadog.Trace.Tracer.Instance` property.

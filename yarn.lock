@@ -942,33 +942,27 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@datadog/browser-core@1.11.4":
-  version "1.11.4"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-1.11.4.tgz#3a304498b2019aecfd262040f30db5127dd24ed4"
-  integrity sha512-yHrEhMzwWsHxgAodSlB3Rjnlxk4yrlJnKbpwUU/40SGHPtehmHw0N2fsIpRKIuCZYSshL3IjW0ZLO+odGzt0Cg==
+"@datadog/browser-core@1.12.6":
+  version "1.12.6"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-1.12.6.tgz#1cd3c3b6d44e0e698a0890fd97841f39efd33d57"
+  integrity sha512-H7Fah/5YElfh7E16xjUbXZSqxGMHmIat4OJqc9TpzlOduajPbcSiimf0jm0nJbx89feiEgTpAgNNfJMknBp4nw==
   dependencies:
-    lodash.assign "4.2.0"
-    lodash.merge "4.6.2"
     tslib "1.10.0"
 
-"@datadog/browser-logs@^1.7.5":
-  version "1.11.4"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-logs/-/browser-logs-1.11.4.tgz#25dc87567f265d985d425aa97028ffc6f7039dfc"
-  integrity sha512-3/TGNH3pnuY/ymVtnIRBbZBEq890wVCQfjkJ7PfWQwPX/sfeJmeUrhDz9SxUnpIW4HB2V4K7FqiF2c7YkEM9sg==
+"@datadog/browser-logs@^1.12.4":
+  version "1.12.6"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-logs/-/browser-logs-1.12.6.tgz#326bb264fc913f98e50121b1931234067c079732"
+  integrity sha512-QCuChTvws97fRr78HrwNZCsKrIOHgcjWq2/imJOzrzBWDZDb99xLt1HtjChpCJJ9E+LOBrBWX+jQMPRayviH8A==
   dependencies:
-    "@datadog/browser-core" "1.11.4"
-    lodash.assign "4.2.0"
-    lodash.merge "4.6.2"
+    "@datadog/browser-core" "1.12.6"
     tslib "1.10.0"
 
-"@datadog/browser-rum@^1.7.5":
-  version "1.11.4"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-rum/-/browser-rum-1.11.4.tgz#cb7200f7a56cda8411cfef3985a59406f8613689"
-  integrity sha512-HyN8wutk/pFexEiKtGW2GCn0psPXy8Rqu5HKv7gj0GsE0idHgxVwC5IX9H8MnXd9DOq4+e2rsEE3miWxS75vXQ==
+"@datadog/browser-rum@^1.12.6":
+  version "1.12.6"
+  resolved "https://registry.yarnpkg.com/@datadog/browser-rum/-/browser-rum-1.12.6.tgz#9b4c09bacc0c899d6fe31c95ebd2c777402ef3ad"
+  integrity sha512-cCOx1cdql2SB5VLs3kCdPi09j9uE73uUeMiJ/iaIUocz+EgR7zeoAznbu9EQuu01Bned5DgWuF6W6JQGllTnRw==
   dependencies:
-    "@datadog/browser-core" "1.11.4"
-    lodash.assign "4.2.0"
-    lodash.merge "4.6.2"
+    "@datadog/browser-core" "1.12.6"
     tslib "1.10.0"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
@@ -7146,11 +7140,6 @@ lodash._reinterpolate@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
 
-lodash.assign@4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
-  integrity sha1-DZnzzNem0mHRm9rrkkUAXShYCOc=
-
 lodash.get@^4.0, lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
@@ -7166,7 +7155,7 @@ lodash.memoize@^4.1.2:
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
 
-lodash.merge@4.6.2, lodash.merge@^4.6.1:
+lodash.merge@^4.6.1:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
