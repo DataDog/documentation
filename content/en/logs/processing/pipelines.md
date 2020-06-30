@@ -106,12 +106,12 @@ Datadog’s integration processing Pipelines are available for the certain sourc
 
 ### Integration Pipeline Library
 
-To see the full list of Integration Pipelines that Datadog offers, browse the [Integration Pipeline Library][8].
+To see the full list of Integration Pipelines that Datadog offers, browse the [Integration Pipeline Library][6].
 The Pipeline Library shows how Datadog processes different log formats by default.
 
 {{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="Integration Pipeline Library"  style="width:80%;">}}
 
-To use one of Integration Pipeline, Datadog recommends to install the integration by configuring the corresponding log `source`. Once Datadog receives the first log with this source, the installation will be automatically triggered and the Integration Pipeline will be added to the processing pipelines list. To configure the log source, please refer to the corresponding [Integration documentation][9].
+To use one Integration Pipeline, Datadog recommends to install the integration by configuring the corresponding log `source`. Once Datadog receives the first log with this source, the installation will be automatically triggered and the Integration Pipeline will be added to the processing pipelines list. To configure the log source, please refer to the corresponding [Integration documentation][7].
 
 It's also possible to copy an integration pipeline using the copy button. 
 
@@ -138,7 +138,7 @@ Log events which do not comply with these limits might be transformed or truncat
 * The maximum number of Processors per Pipeline is 20.
 * The maximum number of parsing rules within a grok Processor is 10. We reserve the right to disable underperforming parsing rules that might impact Datadog's service performance.
 
-[Contact support][7] if you reach one of these limits as Datadog might be able to provide you more.
+[Contact support][8] if you reach one of these limits as Datadog might be able to provide you more.
 
 ## Further Reading
 
@@ -149,7 +149,7 @@ Log events which do not comply with these limits might be transformed or truncat
 [3]: /logs/processing/#reserved-attributes
 [4]: /logs/processing/processors/#log-status-remapper
 [5]: /logs/processing/processors/#log-date-remapper
-[6]: /logs/faq/integration-pipeline-reference/
-[7]: /help/
-[8]: https://app.datadoghq.com/logs/pipelines/pipeline/library
-[9]: /integrations/#cat-log-collection
+
+[6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[7]: /integrations/#cat-log-collection
+[8]: /help/
