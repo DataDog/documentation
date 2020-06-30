@@ -108,7 +108,7 @@ Datadog’s integration processing Pipelines are available for the certain sourc
 
 To see the full list of Integration Pipelines that Datadog offers, browse the [Integration Pipeline Library][8].
 
-{{< img src="logs/processing/pipelines/integration-pipeline-library.png" alt="Integration Pipeline Library"  style="width:80%;">}}
+{{< img src="logs/processing/pipelines/integration-pipeline-library.gig" alt="Integration Pipeline Library"  style="width:80%;">}}
 
 Visit the Pipeline Library to check how Datadog processes different formats of logs by default.
 
@@ -116,7 +116,7 @@ To use one of those, Datadog recommends to install the integration by configurin
 
 It's also possible to copy an integration pipeline using the copy button. 
 
-{{< img src="logs/processing/pipelines/clone-pipeline-from-library." alt="Cloning pipeline from Library"  style="width:80%;">}}
+{{< img src="logs/processing/pipelines/clone-pipeline-from-library.gif" alt="Cloning pipeline from Library"  style="width:80%;">}}
 
 
 ## Pipelines limitations
