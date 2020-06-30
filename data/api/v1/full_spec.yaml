@@ -12730,8 +12730,7 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: The time (in seconds) to delay the monitor evaluation compared
-          to the latest data timestamp received.
+      - description: Monitor ID offset.
         in: query
         name: id_offset
         required: false
