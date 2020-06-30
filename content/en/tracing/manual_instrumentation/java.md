@@ -510,7 +510,6 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 [2]: /tracing/visualization/#trace
 [3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [4]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[4]: /tracing/setup/java/#configuration
 [5]: /tracing/visualization/trace/?tab=spantags#more-information
 [6]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/MutableSpan.java#L51
 [7]: https://github.com/opentracing/opentracing-java
