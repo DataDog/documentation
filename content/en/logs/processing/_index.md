@@ -117,13 +117,14 @@ Using the Datadog Agent or the RFC5424 format automatically sets the host value 
 
 ### *source* attribute
 
-If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Reference][16].
+If a JSON formatted log file includes the `ddsource` attribute, Datadog interprets its value as the log's source. To use the same source names Datadog uses, see the [Integration Pipeline Library][16].
 
 **Note**: Logs coming from a containerized environment require the use of an [environment variable][17] to override the default source and service values.
 
 ### *service* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's service:
+Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog 
+rprets its value as the log's service:
 
 * `service`
 * `syslog.appname`
@@ -164,6 +165,6 @@ To change the default values for each of the reserved attributes, go to the [Con
 [13]: /logs/explorer/?tab=logstream#visualization
 [14]: /logs/explorer/search/
 [15]: /logs/processing/processors/#log-status-remapper
-[16]: /logs/faq/integration-pipeline-reference/
+[16]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [17]: /agent/docker/log/#examples
 [18]: /tracing/connect_logs_and_traces/
