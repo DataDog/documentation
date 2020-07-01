@@ -5472,11 +5472,13 @@ components:
       properties:
         host:
           description: The name of the host that produced the metric.
+          example: test.example.com
           type: string
         interval:
           default: null
           description: If the type of the metric is rate or count, define the corresponding
             interval.
+          example: 20
           format: int64
           nullable: true
           type: integer
@@ -5487,12 +5489,16 @@ components:
         points:
           description: Points relating to a metric. All points must be tuples with
             timestamp and a scalar value (cannot be a string).
-          example: []
+          example:
+          - - 1575317847
+            - 0.5
           items:
             $ref: '#/components/schemas/Point'
           type: array
         tags:
           description: A list of tags associated with the metric.
+          example:
+          - environment:test
           items:
             description: Individual tags.
             type: string
@@ -5500,6 +5506,7 @@ components:
         type:
           default: gauge
           description: The type of the metric.
+          example: rate
           type: string
       required:
       - metric
@@ -5524,6 +5531,8 @@ components:
           $ref: '#/components/schemas/ServiceCheckStatus'
         tags:
           description: Tags related to a check.
+          example:
+          - environment:test
           items:
             description: Items related to a check.
             type: string
@@ -5535,6 +5544,8 @@ components:
       required:
       - check
       - status
+      - tags
+      - host_name
       type: object
     ServiceCheckStatus:
       description: The status of a service check.
@@ -11483,7 +11494,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/GCPAccount'
-        description: Create a Datadog-Azure integration.
+        description: Create a Datadog-GCP integration.
         required: true
       responses:
         '200':
