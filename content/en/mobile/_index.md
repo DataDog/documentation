@@ -32,7 +32,7 @@ The Datadog On-call App is currently in beta, so it's not available generally in
 
 ### Logging in
 
-You can login using standard and Google authentication.
+You can login using standard and Google authentication. If you would like to log in using [SAML][4], contact [Datadog support][10].
 
 
 ## Monitors
@@ -55,7 +55,6 @@ Switch organizations and log out from the Account page.
 
 ## Troubleshooting and Known Issues
 
-- If you would like to log in using [SAML][4], contact [Datadog support][10].
 - Switching orgs does not always work correctly, especially if the new org requires Google OAuth.
 
 ## Feedback
