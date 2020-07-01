@@ -2,7 +2,6 @@
 title: Guides de tracing
 kind: guide
 private: true
-disable_toc: true
 ---
 
 
@@ -21,7 +20,7 @@ disable_toc: true
     {{< nextlink href="videos/apm_dashboards_trace_metrics/" >}}Dashboards Datadog et métriques de traces{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
-{{< whatsnext desc="Pour aller plus loin" >}}
+{{< whatsnext desc="Guides avancés" >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}Configurer un score Apdex par service{{< /nextlink >}}
     {{< nextlink href="tracing/guide/security" >}}Nettoyer les informations sensibles de vos traces{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}Opérations primaires dans les services {{< /nextlink >}}
@@ -31,4 +30,8 @@ disable_toc: true
     {{< nextlink href="tracing/guide/metrics_namespace/" >}}Métriques d'application de tracing{{< /nextlink >}}
     {{< nextlink href="/api/?lang=python#tracing" >}}API des traces{{< /nextlink >}}
     {{< nextlink href="/developers/libraries/#apm-distributed-tracing-client-libraries" >}}Bibliothèques du client de tracing{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/adding_metadata_to_spans/" >}}Ajouter des tags de span{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Configurer les tags primaires{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/app_analytics_agent_configuration/" >}}Configurer App Analytics avec l'Agent{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Configurer l'APM en C++{{< /nextlink >}}
 {{< /whatsnext >}}
