@@ -141,7 +141,7 @@ Perform following steps to migrate your service to send profiles directly throug
     import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
     ```
 
-5. To profile your code, add a [Datadog API key][2], set your environment, service, and version, then start the profiler:
+5. To profile your code, set your environment, service, and version, then start the profiler:
 
     ```Go
     err := profiler.Start()
