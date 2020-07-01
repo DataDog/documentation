@@ -9613,7 +9613,12 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/dashboard:
     get:
-      description: Get all dashboards.
+      description: 'Get all dashboards.
+
+
+        **Note**: This query will only return custom created or cloned dashboards.
+
+        This query will not return preset dashboards.'
       operationId: ListDashboards
       responses:
         '200':
@@ -16329,9 +16334,10 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/azure
   name: Azure Integration
-- description: Interact with your dashboard lists through the API to make it easier
-    to organize, find, and share all of your dashboards with your team and organization.
+- description: This endpoint is deprecated. Use the [new dashboard list endpoint](https://docs.datadoghq.com/api/v2/dashboard-lists/)
+    instead.
   name: Dashboard Lists
+  x-deprecated: true
 - description: 'Interact with your dashboard lists through the API to make it easier
     to organize,
 
