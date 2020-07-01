@@ -11494,7 +11494,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/GCPAccount'
-        description: Create a Datadog-Azure integration.
+        description: Create a Datadog-GCP integration.
         required: true
       responses:
         '200':
