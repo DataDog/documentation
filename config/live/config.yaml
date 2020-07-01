@@ -10,6 +10,7 @@ deployment:
       - ".jpg$"
       - ".png$"
       - ".gif$"
+      - ".mp4$"
 
     targets: 
     - name: "live"
