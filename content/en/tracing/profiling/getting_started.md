@@ -184,12 +184,15 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 |  WithEnv         | String        | The Datadog [environment][5] name, for example `production`, which can be set here, or in `DD_TAGS`.         |
 |  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
+
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
 [3]: https://app.datadoghq.com/profiling
 [4]: /tracing/visualization/#services
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
 {{% /tab %}}
+
+{{< /tabs >}}
 
 ## Further Reading
 
