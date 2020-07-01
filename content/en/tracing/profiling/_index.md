@@ -33,7 +33,7 @@ Pivot seamlessly between [distributed traces and profiles][1] to find the line o
 
 ### Search profiles by tags
 
-[Slice and dice your profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination
+[Slice and dice your profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
 
 {{< img src="tracing/profiling/search_profiles.gif" alt="Search profiles by tags">}}
 

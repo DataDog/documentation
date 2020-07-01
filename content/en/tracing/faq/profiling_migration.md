@@ -55,7 +55,7 @@ Perform following steps to migrate your service to send profiles directly throug
 | Arguments                       | Environment variable        | Description                                      |
 | ------------------------------- | --------------------------- | ------------------------------------------------ |
 | `-Ddd.profiling.api-key-file` | DD_PROFILING_API_KEY_FILE | Deprecated in version 0.55. File that should contain the API key as a string. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. |
-|                               | DD_PROFILING_API_KEY      | Datadog API key.                                  |
+| N/A                           | DD_PROFILING_API_KEY      | Deprecated in version 0.55. Datadog API key.                                  |
 | `-Ddd.site`                   | DD_SITE                   | Deprecated in version 0.55. Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. |
 | `-Ddd.profiling.proxy.host`     | DD_PROFILING_PROXY_HOST     | Deprecated in version 0.55. Host for your proxy (`my-proxy.example.com`).    |
 | `-Ddd.profiling.proxy.port`     | DD_PROFILING_PROXY_PORT     | Deprecated in version 0.55. Port used by your proxy. Default port is `8080`. |
