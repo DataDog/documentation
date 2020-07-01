@@ -1148,6 +1148,21 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        rrule:
+          description: 'The `RRULE` standard for defining recurring events. For example,
+            to have a recurring event on the first day of each month,
+
+            select a type of `rrule` and set the `FREQ` to `MONTHLY` and `BYMONTHDAY`
+            to `1`.
+
+            Most common `rrule` options from the [iCalendar Spec](https://tools.ietf.org/html/rfc5545)
+            are supported.
+
+
+            **Note**: Attributes specifying the duration in `RRULE` are not supported
+            (for example, `DTSTART`, `DTEND`, `DURATION`).'
+          example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
+          type: string
         type:
           description: The type of recurrence. Choose from `days`, `weeks`, `months`,
             `years`.
@@ -5472,11 +5487,13 @@ components:
       properties:
         host:
           description: The name of the host that produced the metric.
+          example: test.example.com
           type: string
         interval:
           default: null
           description: If the type of the metric is rate or count, define the corresponding
             interval.
+          example: 20
           format: int64
           nullable: true
           type: integer
@@ -5487,12 +5504,16 @@ components:
         points:
           description: Points relating to a metric. All points must be tuples with
             timestamp and a scalar value (cannot be a string).
-          example: []
+          example:
+          - - 1575317847
+            - 0.5
           items:
             $ref: '#/components/schemas/Point'
           type: array
         tags:
           description: A list of tags associated with the metric.
+          example:
+          - environment:test
           items:
             description: Individual tags.
             type: string
@@ -5500,6 +5521,7 @@ components:
         type:
           default: gauge
           description: The type of the metric.
+          example: rate
           type: string
       required:
       - metric
@@ -5524,6 +5546,8 @@ components:
           $ref: '#/components/schemas/ServiceCheckStatus'
         tags:
           description: Tags related to a check.
+          example:
+          - environment:test
           items:
             description: Items related to a check.
             type: string
@@ -5535,6 +5559,8 @@ components:
       required:
       - check
       - status
+      - tags
+      - host_name
       type: object
     ServiceCheckStatus:
       description: The status of a service check.
@@ -9602,7 +9628,12 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/dashboard:
     get:
-      description: Get all dashboards.
+      description: 'Get all dashboards.
+
+
+        **Note**: This query will only return custom created or cloned dashboards.
+
+        This query will not return preset dashboards.'
       operationId: ListDashboards
       responses:
         '200':
@@ -11483,7 +11514,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/GCPAccount'
-        description: Create a Datadog-Azure integration.
+        description: Create a Datadog-GCP integration.
         required: true
       responses:
         '200':
@@ -16318,9 +16349,10 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/azure
   name: Azure Integration
-- description: Interact with your dashboard lists through the API to make it easier
-    to organize, find, and share all of your dashboards with your team and organization.
+- description: This endpoint is deprecated. Use the [new dashboard list endpoint](https://docs.datadoghq.com/api/v2/dashboard-lists/)
+    instead.
   name: Dashboard Lists
+  x-deprecated: true
 - description: 'Interact with your dashboard lists through the API to make it easier
     to organize,
 
