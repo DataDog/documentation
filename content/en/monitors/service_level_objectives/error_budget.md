@@ -1,0 +1,52 @@
+---
+title: Error Budget Monitors
+kind: documentation
+description: "Use Monitors to define the Service Level Objective"
+beta: true
+---
+
+<div class="alert alert-warning">
+This feature is in closed beta. Email <a href="mailto:slo-help@datadoghq.com">slo-help@datadoghq.com</a> to request access, to ask questions, or to provide feedback on this feature.
+</div>
+
+## Overview
+
+SLO error budget monitors are threshold based and notify you when a certain percentage of your SLO’s error budget has been consumed. For example, alert me if 75% of the error budget for my 7-day target is consumed. Warn me if 50% is consumed (optional).
+
+
+**Note:** Error budget monitors are only available for [metric-based SLOs][1].
+
+
+## Monitor Creation
+
+1. Navigate to the [SLO status page][2].
+2. Create a new metric-based SLO or edit an existing one, then click the ‘Save and Set Alert’ button. For existing SLOs, you can also click the “Enable Alerts” link in the SLO detail side panel to take you directly to the alert configuration.
+3. Set an alert to trigger when the percentage of the error budget consumed is above the `threshold`
+over the past `target` number of days.
+4. Add [Notification information][3] into the **Say what’s happening** and **Notify your team** sections.
+5. Click the ‘Save and Set Alert’ button on the SLO configuration page.
+
+**Note:** Clicking the `New Condition` button adds an optional warning condition. The warning threshold must be less than the alert threshold.
+
+{{< img src="monitors/service_level_objectives/error_budget_alert.png" alt="setting up an error budget alert">}}
+
+### API
+
+You can create SLO error budget monitors using the [create-monitor API endpoint][4]. Below is an example query for an SLO monitor, which alerts when more than 75% of the error budget of an SLO is consumed:
+
+```
+error_budget("slo_id").over("time_window") > 75
+```
+
+Replace `slo_id` with the alphanumeric ID of the metric-based SLO you wish to configure an error budget monitor on and replace `time_window` with one of `7d`, `30d` or `90d`- depending on which target is used to configure your metric-based SLO.
+
+## Beta Restrictions
+
+- Alerting is available for only metric-based SLOs.
+- The alert status of an SLO monitor is available in the **Alerts** tab in the SLO’s detail panel.
+- You can only set one alert per SLO (target + time window) in the UI, but you can set multiple alerts per SLO using the API or Terraform.
+
+[1]: /monitors/service_level_objectives/metric/
+[2]: https://app.datadoghq.com/slo
+[3]: /monitors/notifications/
+[4]: /api/v1/monitors/#create-a-monitor
