@@ -154,7 +154,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
     err := profiler.Start(
         profiler.WithService("<SERVICE_NAME>"),
         profiler.WithEnv("<ENVIRONMENT>"),
-        profiler.WithTags("version:<APPLICATION_VERSION>"),
+        profiler.WithVersion("<APPLICATION_VERSION>"),
     )
     if err != nil {
         log.Fatal(err)
