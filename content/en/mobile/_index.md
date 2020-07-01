@@ -11,7 +11,7 @@ further_reading:
   text: "Dashboards"
 ---
 
-<div class="alert alert-warning"> This service is in public beta. To join the beta, follow the installation instructions. The beta is not currently available to customers using SAML authentication. If you have any feedback, <a href="/help">contact Datadog support</a>.</div>
+<div class="alert alert-warning"> This service is in public beta. To join the beta, follow the installation instructions. If you would like to log in using SAML, or if you have any feedback, <a href="/help">contact Datadog support</a>.</div>
 
 The Datadog On-call app enables on-call engineers to view alerts from Datadog on their mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
 
@@ -32,7 +32,7 @@ The Datadog On-call App is currently in beta, so it's not available generally in
 
 ### Logging in
 
-You can login using standard and Google authentication. [SAML login][4] is not currently supported. If you have SAML enabled but not strictly, you can access the mobile app by creating a new standard email account. An org admin needs to approve the newly created account.
+You can login using standard and Google authentication.
 
 
 ## Monitors
@@ -55,7 +55,7 @@ Switch organizations and log out from the Account page.
 
 ## Troubleshooting and Known Issues
 
-- [SAML login][4] is not currently supported. You can login using standard and Google authentication. If you have SAML enabled but not strictly, you can access the mobile app by creating a new standard email account. An org admin needs to approve the newly created account.
+- If you would like to log in using [SAML][4], contact [Datadog support][10].
 - Switching orgs does not always work correctly, especially if the new org requires Google OAuth.
 
 ## Feedback
