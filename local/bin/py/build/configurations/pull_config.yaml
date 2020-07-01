@@ -273,7 +273,7 @@
   - repo_name: security-monitoring
     contents:
     - action: security-rules
-      branch: master
+      branch: main
       globs:
         - "*.json"
       options:
