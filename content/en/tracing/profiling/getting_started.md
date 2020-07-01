@@ -55,7 +55,6 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiling.               |
-| `DD_SITE`                                        | String        | Destination site for your profiles (versions 0.48+). Valid options are `datadoghq.com` for Datadog US site (default), and `datadoghq.eu` for the Datadog EU site. |
 | `DD_SERVICE`                                     | String        | The Datadog [service][2] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`.|
 | `DD_VERSI0ON`                                     | String        | The version of your application.                             |
@@ -102,7 +101,6 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_SITE`                                        | String        | If your organization is on Datadog EU site, set this to `datadoghq.eu`.                          |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`, which can be set here, or in `DD_PROFILING_TAGS` with `DD_PROFILING_TAGS="env:production"`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
@@ -168,7 +166,6 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_SITE`                                        | String        | If your organization is on Datadog EU site, set this to `datadoghq.eu`.                          |
 | `DD_SERVICE`                                     | String        | The Datadog [service][4] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][5] name, for example `production`.|
 | `DD_VERSION`                                     | String        | The version of your application.                              |
@@ -211,7 +208,6 @@ The Datadog Profiler requires Node 10.5+. To begin profiling applications:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_SITE`                                        | String        | If your organization is on Datadog EU site, set this to `datadoghq.eu`.                          |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`.|
 | `DD_VERSION`                                     | String        | The version of your application.                              |

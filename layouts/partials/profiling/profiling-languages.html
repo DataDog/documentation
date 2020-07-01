@@ -1,11 +1,28 @@
 {{ $dot := . }}
 <div class="profiling-languages">
-    <div class="container cards-dd">
-        <a class="card" href="java" style="width: 25%" >
-            <div class="card-body text-center py-2 px-1">
-                {{ partial "img.html" (dict "root" . "src" "integrations_logos/java.png" "class" "img-fluid" "alt" "Java" "width" "400") }}
-            </div>
-        </a>
+  <div class="container cards-dd">
+    <div class="card-deck">
+      <a class="card" href="getting_started?tab=java">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/java.png" "class" "img-fluid" "alt" "Java" "width" "400") }}
+        </div>
+      </a>
+      <a class="card" href="getting_started?tab=python">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/python.png" "class" "img-fluid" "alt" "Python" "width" "400") }}
+        </div>
+      </a>
+      <a class="card" href="getting_started?tab=go">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/golang.png" "class" "img-fluid" "alt" "Go" "width" "400") }}
+        </div>
+      </a>
+      <a class="card" href="getting_started?tab=node">
+        <div class="card-body text-center py-2 px-1">
+          {{ partial "img.html" (dict "root" . "src" "integrations_logos/nodejs.png" "class" "img-fluid" "alt" "Node.js" "width" "400") }}
+        </div>
+      </a>
+      </div>
+    </br>
     </div>
 </div>
-<br>
