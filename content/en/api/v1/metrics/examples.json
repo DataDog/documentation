@@ -272,14 +272,16 @@
       "json": {
         "series": [
           {
-            "host": "string",
-            "interval": "integer",
+            "host": "test.example.com",
+            "interval": 20,
             "metric": "system.load.1",
             "points": [
               []
             ],
-            "tags": [],
-            "type": "string"
+            "tags": [
+              "environment:test"
+            ],
+            "type": "rate"
           }
         ]
       },
