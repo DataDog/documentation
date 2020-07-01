@@ -24,7 +24,6 @@ Datadog Profiling is in beta. Reach out to <a href="/help/">Datadog Support</a> 
 </div>
 
 {{< img src="tracing/profiling/profiling_flamegraph.gif" alt="Exploring profiling flame graph">}}
-<<<<<<< HEAD
 
 Find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, to significantly reduce end-user latency and infrastructure costs.
 
@@ -53,8 +52,6 @@ Add a profiling library to your application to start sending profiles to the Dat
 Obtain key profiling metrics from services such as top CPU usage by method, top memory allocations by thread, and CPU usage by version to visualize in your dashboards.
 
 {{< img src="tracing/profiling/profiling-metric-dashboard.gif" alt="Add profiling metrics to your dashboards.">}}
-=======
->>>>>>> Update index
 
 Find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, to significantly reduce end-user latency and infrastructure costs.
 
