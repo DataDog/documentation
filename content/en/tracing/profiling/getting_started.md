@@ -57,7 +57,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 | `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiling.               |
 | `DD_SERVICE`                                     | String        | The Datadog [service][2] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`.|
-| `DD_VERSI0ON`                                     | String        | The version of your application.                             |
+| `DD_VERSION`                                     | String        | The version of your application.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
 
