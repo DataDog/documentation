@@ -104,10 +104,6 @@ Perform following steps to migrate your service to send profiles directly throug
 | `DD_PROFILING_API_KEY`                           | String        | Deprecated in version 0.39. The [Datadog API key][1] to use when uploading profiles. |
 | `DD_SITE`                                        | String        | Deprecated in version 0.39. If your organization is on Datadog EU site, set this to `datadoghq.eu`. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead.                          |
 | `DD_PROFILING_TAGS`                              | String        | Deprecated in 0.38 in favor of `DD_TAGS`. Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
-| DD_PROFILING_PROXY_HOST                          | String        | Deprecated in version 0.39. Host for your proxy (`my-proxy.example.com`).    |
-| DD_PROFILING_PROXY_PORT                          | String        | Deprecated in version 0.39. Port used by your proxy. Default port is `8080`. |
-| DD_PROFILING_PROXY_USERNAME                      | String        | Deprecated in version 0.39. Username used by your proxy.                     |
-| DD_PROFILING_PROXY_PASSWORD                      | String        | Deprecated in version 0.39. Password used by your proxy.                     |
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/apm/install
@@ -144,14 +140,18 @@ Perform following steps to migrate your service to send profiles directly throug
 5. To profile your code, set your environment, service, and version, then start the profiler:
 
     ```Go
-    err := profiler.Start()
+    err := profiler.Start(
+        profiler.WithService("<SERVICE_NAME>"),
+        profiler.WithEnv("<ENVIRONMENT>"),
+        profiler.WithTags("version:<APPLICATION_VERSION>"),
+    )
     if err != nil {
         log.Fatal(err)
     }
     defer profiler.Stop()
     ```
 
-    **NOTE** Profilers must now be configured through environment variables instead of code. See below for deprecated methods in the tracer version 1.25.0.
+    **NOTE** See below for deprecated methods in the tracer version 1.25.0.
 
 5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][1].
 
@@ -173,9 +173,6 @@ Deprecated code level Profiler configuration:
 | Method | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
 |  WithAPIKey      | String        | Deprecated in version 0.39. The Datadog [Datadog API key][2]                                                                             |
-|  WithService     | String        | Deprecated in version 0.39. The Datadog [service][4] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.             |
-|  WithEnv         | String        | Deprecated in version 0.39. The Datadog [environment][5] name, for example `production`, which can be set here, or in `DD_TAGS`.         |
-|  WithTags        | String        | Deprecated in version 0.39. The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/apm/install

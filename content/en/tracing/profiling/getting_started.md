@@ -122,6 +122,16 @@ Recommended for advanced usage only.
     prof.stop()
     ```
 
+- When your process forks using `os.fork`, the profiler is stopped in the child process.
+
+  For Python 3.7+ on POSIX platforms, a new profiler is started if you enabled the profiler via `pyddprofile` or `ddtrace.profiling.auto`.
+
+  If you manually instrument the profiler, or if you rely on Python < 3.6 or a non-POSIX platform, manually restart the profiler in your child with:
+
+   ```python
+   ddtrace.profiling.auto.start_profiler()
+   ```
+
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/profiling
 [3]: /tracing/visualization/#services
@@ -180,49 +190,6 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 [4]: /tracing/visualization/#services
 [5]: /tracing/guide/setting_primary_tags_to_scope/#environment
 {{% /tab %}}
-
-{{% tab "Node" %}}
-
-The Datadog Profiler requires Node 10.5+. To begin profiling applications:
-
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][1] or [6.20.2][1].  
-
-2. Install `ddtrace` which contains both tracing and profiling:
-
-    ```shell
-    npm install --save dd-trace
-    ```
-
-    **Note**: Profiling is available in the `dd-trace` library in versions 0.23+.
-
-3. To automatically profile your code, import and initialize `dd-trace` with profiling enabled:
-
-    ```javascript
-    require('dd-trace').init({
-      profiling: true
-    })
-    ```
-
-4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][2].
-
-**Note**:
-
-- It is strongly recommended to add tags like `service` or `version` as it provides the ability to slice and dice your profiles across these dimensions, enhancing your overall product experience. Use environment variables to set the parameters:
-
-| Environment variable                             | Type          | Description                                                                                      |
-| ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
-| `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`.|
-| `DD_VERSION`                                     | String        | The version of your application.                              |
-| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
-
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/profiling
-[3]: /tracing/visualization/#services
-[4]: /tracing/guide/setting_primary_tags_to_scope/#environment
-{{% /tab %}}
-
-{{< /tabs >}}
 
 ## Further Reading
 

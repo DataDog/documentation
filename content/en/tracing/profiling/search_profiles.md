@@ -53,7 +53,7 @@ Four tabs are below the profile header:
 | Tab          | Definition                                                                                                                                  |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | Profiles     | Flame graph and summary table of the profile you are looking at. You can switch between multiple profile types (`CPU`, `Memory allocation`) |
-| Analysis     | A set of heuristics that suggest potential issues or areas of improvement in your code                                                      |
+| Analysis     | A set of heuristics that suggest potential issues or areas of improvement in your code. Currently only available for Java                   |
 | Metrics      | Profiling metrics coming from all profiles of the same service                                                                              |
 | Runtime Info | Text dump of all the runtime properties                                                                                                     |
 
@@ -81,11 +81,9 @@ Once enabled, the following profile types are collected:
 | Wall Time in Native Code | Shows the elapsed time spent in native code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running. This profile does not include time spent running JVM bytecode, which is typically most of your application code. |
 | Class load               | Shows the number of classes loaded by each method.                                                                                                                                                                                                                                                 |
 | Error                    | Shows the number of errors thrown by each method.                                                                                                                                                                                                                                                  |
-| File I/O                 | Shows the time each method spent reading and writing files.                                                                                                                                                                                                                                        |
-| Lock                     | Shows the time each method spent waiting for a lock.                                                                                                                                                                                                                                               |
+| File I/O                 | Shows the time each method spent reading and writing to files.                                                                                                                                                                                                                                        |
+| Lock                     | Shows the time each function spent waiting for a lock.                                                                                                                                                                                                                                                                                                                           |
 | Socket I/O               | Shows the time each method spent handling socket I/O.                                                                                                                                                                                                                                              |
-
-
 {{% /tab %}}
 
 {{% tab "Python" %}}
@@ -96,9 +94,12 @@ Once enabled, the following profile types are collected:
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | CPU         | Shows the time each function spent running on the CPU. It includes CPython bytecode, including native code called from within Python.                                                                                                                                                                     |
 | Allocation               | Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed. Only supported on Python 3.                                                                                                                                                                                    |
-| Wall | Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running. |
-| Exceptions               | Shows the number of caught or uncaught exceptions raised by each function.                                                                                                                                                                                                                                                 |
-| Lock                     | Shows the time each function spent waiting for a lock.                                                                                                                                                                                                                                               |
+| Allocation Count         | Shows the number of heap allocations made by each function, including allocations which were subsequently freed.     |
+| Wall Time | Shows the elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running. |
+| Exceptions               | Shows the number of caught or uncaught exceptions raised by each function.                                                                                           |
+| Lock                     | Shows the time each function spent in locking (waiting for or holding a lock) or the number of times a function was observed locking/unlocking a lock. |
+| Uncaught Exceptions      | Shows the exceptions that were not caught by any try/except block. |
+| Exceptions              | Shows the exceptions that were raised during program execution. |
 
 {{% /tab %}}
 
@@ -109,10 +110,10 @@ Once enabled, the following profile types are collected:
 | Profile type             | Definition                                                                                                                                                                                                                                                                                         |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | CPU                      | Shows the time each function spent running on the CPU.                                                                          |
-| Allocation               | Shows the amount of heap memory allocated by each function, including allocations which were subsequently freed. Go calls this `alloc_space`. This is useful for investigating garbage collection load.              |
-| Allocation Count         | Shows the number of objects allocated in heap memory by each function, including allocations which were subsequently freed. This is useful for investigating garbage collection load.     |
-| Heap                     | Shows the amount of heap memory allocated by each function that remained allocated. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service.               |
-| Heap Count               | Shows the number of objects allocated in heap memory by each function and that remained allocated. This is useful for investigating the overall memory usage of your service.                              |
+| Allocation               | Shows the amount of heap memory allocated by each function since the start of the application, including allocations which were subsequently freed. Go calls this `alloc_space`. This is useful for investigating garbage collection load.              |
+| Allocation Count         | Shows the number of objects allocated in heap memory by each function since the start of the application, including allocations which were subsequently freed. This is useful for investigating garbage collection load.     |
+| Heap                     | Shows the amount of heap memory allocated by each function that remained allocated since the start of the application and lived since the last garbage collection. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service.               |
+| Heap Count               | Shows the number of objects allocated in heap memory by each function and that remained allocated since the start of the application and lived since the last garbage collection. This is useful for investigating the overall memory usage of your service.                              |
 
 {{% /tab %}}
 
