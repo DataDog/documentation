@@ -17,8 +17,7 @@ When you set the `proxyHost` [initialization parameter][1], all RUM data is sent
 {{% tab "NPM" %}}
 
 ```javascript
-import { Datacenter } from '@datadog/browser-core';
-import { datadogRum } from '@datadog/browser-rum';
+import { Datacenter, datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
