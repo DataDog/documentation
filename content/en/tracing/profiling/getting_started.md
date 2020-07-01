@@ -33,7 +33,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 
      **Note**: Profiling is available in the `dd-java-agent.jar` library in versions 0.44+.
 
-3. Set `Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Update to your service invocation should look like:
+3. Set `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable to `true`. Update to your service invocation should look like:
 
     ```diff
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
