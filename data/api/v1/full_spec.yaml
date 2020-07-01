@@ -1148,6 +1148,21 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        rrule:
+          description: 'The `RRULE` standard for defining recurring events. For example,
+            to have a recurring event on the first day of each month,
+
+            select a type of `rrule` and set the `FREQ` to `MONTHLY` and `BYMONTHDAY`
+            to `1`.
+
+            Most common `rrule` options from the [iCalendar Spec](https://tools.ietf.org/html/rfc5545)
+            are supported.
+
+
+            **Note**: Attributes specifying the duration in `RRULE` are not supported
+            (for example, `DTSTART`, `DTEND`, `DURATION`).'
+          example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
+          type: string
         type:
           description: The type of recurrence. Choose from `days`, `weeks`, `months`,
             `years`.
