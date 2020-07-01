@@ -113,7 +113,30 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 ## API
 
-Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][9]. Datadog recommends [exporting a monitor's JSON][10] to build the query for the API.
+Enterprise-level customers can create anomaly detection monitors using the [create-monitor API endpoint][9]. Datadog **strongly recommends** [exporting a monitor's JSON][10] to build the query for the API. By using the monitor creation page in the app, customers have a better chance of selecting the best monitor options for their metric; the page includes a preview graph and has a built-in automatic parameter tuner.
+
+**Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][11].
+
+Anomaly monitors are managed via the [same API][12] as other monitors. However, there are some fields in the request that are unique for anomaly monitors and are discussed in more detail below.
+
+### `query`
+
+The `query` property in the request body should contain a query string in the following format:
+
+```text
+avg($query_window):anomalies($metric_query, ‘$algorithm’, $deviations, direction=’$direction’, alert_window=’$alert_window’, interval=$interval, count_default_zero=’$default_zero’ [, seasonality=’$seasonality’]) >= $threshold
+```
+
+* `$query_window`: a timeframe like `last_4h` or `last_7d`; the time window displayed in graphs in notifications; must be at least as large as the `$alert_window` and is recommended to be around 5 times the `$alert_window`
+* `$metric_query`: a standard Datadog metric query (e.g., `sum:trace.flask.request.hits{service:web-app}.as_count()`)
+* `$algorithm`: `basic`, `agile`, or `robust`
+* `$deviations`: a positive number; controls the sensitivity of the anomaly detection
+* `$direction`: the directionality of anomalies that should trigger an alert; `above`, `below`, or `both`
+* `$alert_window`: the timeframe which will be checked for anomalies (e.g., `last_5m`, `last_1h`)
+* `$interval`: a positive integer representing the number of seconds in the rollup interval; ideally, not more than a fifth of the `$alert_window` duration
+* `$default_zero`: use `true` for most monitors; only set to `false` if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero
+* `$seasonality`: `hourly`, `daily`, or `weekly`; if unsure, we recommend `weekly`; exclude this parameter if using the `basic` algorithm
+* `$threshold`: a positive number no larger than 1; this corresponds to the critical threshold and represents the fraction of points in the `$alert_window` that must be anomalous in order for a critical alert to trigger
 
 Below is an example query for an anomaly detection monitor, which alerts when the average Cassandra node's CPU is three standard deviations above the ordinary value over the last 5 minutes:
 
@@ -121,12 +144,40 @@ Below is an example query for an anomaly detection monitor, which alerts when th
 avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
 ```
 
-**Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][11].
+### `options`
+
+Most of the properties in `options` property in the request body are the same as for other query alerts, but special attention should be given to `thresholds` and `threshold_windows`.
+
+#### `thresholds`
+
+Anomaly monitors support `critical`, `critical_recovery`, `warning`, and `warning_recovery` thresholds. Thresholds are expressed as numbers from 0 to 1, and are interpreted as the fraction of the associated window that is anomalous. For example, an `critical` threshold value of `0.9` would mean that a critical alert triggers when at least 90% of the points in the `trigger_window` (described below) are anomalous. Or, a `warning_recovery` value of 0 would mean that the monitor recovers from the warning state only when 0% of the points in the `recovery_window` are anomalous.
+
+#### `threshold_windows`
+
+Anomaly monitors also have a `threshold_windows` element in options. This element must include both a `trigger_window` and a `recovery_window`. These windows are expressed as timeframe strings, like `last_10m` or `last_1h`. The `trigger_window` should match the `$alert_window` from the query string and controls the time range which is checked for anomalies when determining whether or not a monitor should trigger an alert or warning. The `recovery_window` represents the time range that is checked for anomalies when determining whether or not a monitor should recover (from either a critical or warning state).
+
+The selected combination of `thresholds` and `threshold_windows` must be selected so that it is not possible for a trigger condition and a recovery condition to be met simultaneously.
+
+A standard configuration of thresholds and threshold window would look like this:
+
+```json
+"options": {
+  ...
+  "thresholds": {
+    "critical": 1,
+    "critical_recovery": 0
+  },
+  "threshold_windows": {
+    "trigger_window": "last_30m",
+    "recovery_window": "last_30m"
+  }
+}
+```
 
 ## Troubleshooting
 
-* [Anomaly Monitor FAQ][12]
-* [Contact Datadog support][13]
+* [Anomaly Monitor FAQ][13]
+* [Contact Datadog support][14]
 
 ## Further Reading
 
@@ -143,5 +194,6 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 [9]: /api/v1/monitors/#create-a-monitor
 [10]: /monitors/monitor_status/#settings
 [11]: mailto:billing@datadoghq.com
-[12]: /monitors/faq/anomaly-monitor/
-[13]: /help/
+[12]: /api/v1/monitors/
+[13]: /monitors/faq/anomaly-monitor/
+[14]: /help/
