@@ -17,11 +17,7 @@ Find CPU, memory, and IO bottlenecks, broken down by method name, class name, an
 
 ### Low impact in production
 
-<<<<<<< HEAD
 Continuous profiling is designed to run in production across all services by leveraging technologies such as [Java Flight Recorder][1] to have minimal impact on your host's CPU and memory usage.
-=======
-Enable Continuous Profiling in your service to visualize all your stack traces in one place and get actionable insights for performance improvements. To quickly get started, select your language:
->>>>>>> Update content/en/tracing/profiling/_index.md
 
 ## Getting Started
 
