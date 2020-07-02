@@ -16,7 +16,7 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog.'
 ---
 
-Profiling libraries are shipped within the following tracing language libraries. Select your language below to learn how to enable profiling for your application:
+Profiling is shipped within the following tracing libraries. Select your language below to learn how to enable profiling for your application:
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -41,7 +41,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 
 **Note**:
 
-- The `-javaagent` needs to be run before the `-jar` file, adding it as a JVM option, not as an application argument. For more information, see the [Oracle documentation][3]:
+- The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][3]:
 
     ```shell
     # Good:
@@ -50,13 +50,13 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
     java -jar my-service.jar -javaagent:dd-java-agent.jar ...
     ```
 
-- It is strongly recommended to add tags like `service` or `version` as it provides the ability to slice and dice your profiles across these dimensions, enhancing your overall product experience. Use environment variables to set the parameters:
+- We strongly recommend that you specify the `service` and `version` as this gives you the ability to slice and dice your profiles across these dimensions. Use environment variables to set the parameters:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiling.               |
-| `DD_SERVICE`                                     | String        | The Datadog [service][2] name.     |
-| `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`.|
+| `DD_SERVICE`                                     | String        | Your [service][2] name, for example `web-backend`.     |
+| `DD_ENV`                                         | String        | Your [environment][4] name, for example `production`.|
 | `DD_VERSION`                                     | String        | The version of your application.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
@@ -69,7 +69,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 
 {{% tab "Python" %}}
 
-The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python 3.5+. To begin profiling applications:
+The Datadog Profiler requires Python 2.7+. Memory profiling is available on Python 3.5+. To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][1] or [6.20.2][1].
 
@@ -126,7 +126,7 @@ Recommended for advanced usage only.
 
   For Python 3.7+ on POSIX platforms, a new profiler is started if you enabled the profiler via `pyddprofile` or `ddtrace.profiling.auto`.
 
-  If you manually instrument the profiler, or if you rely on Python < 3.6 or a non-POSIX platform, manually restart the profiler in your child with:
+  If you manually create a `Profiler()`, use Python < 3.6, or run on a non-POSIX platform, manually restart the profiler in your child with:
 
    ```python
    ddtrace.profiling.auto.start_profiler()

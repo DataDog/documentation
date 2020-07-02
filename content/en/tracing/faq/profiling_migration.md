@@ -110,7 +110,7 @@ The following arguments and environment variables have been deprecated:
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_API_KEY`                                     | String        | Deprecated in version 0.39. The [Datadog API key][1] to use when uploading profiles. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. Supported in version 0.37.                                        |
 | `DD_PROFILING_API_KEY`                           | String        | Deprecated in version 0.39. The [Datadog API key][1] to use when uploading profiles. |
-| `DD_SITE`                                        | String        | Deprecated in version 0.39. If your organization is on Datadog EU site, set this to `datadoghq.eu`. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead.                          |
+| `DD_SITE`                                        | String        | Deprecated in version 0.39. If your organization is on the Datadog EU site, set this to `datadoghq.eu`. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead.                          |
 | `DD_PROFILING_TAGS`                              | String        | Deprecated in 0.38 in favor of `DD_TAGS`. Tags to apply to an uploaded profile. Must be a list a `key:value` comma-separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
@@ -121,9 +121,9 @@ The following arguments and environment variables have been deprecated:
 
 Perform the following steps to migrate your service to send profiles directly through the Datadog Agent:
 
-1. Upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+
+1. Upgrade your Agent to version [7.20.2][1]+ or [6.20.2][1]+.
 
-3. Clear `DD_API_KEY` or `DD_PROFILING_API_KEY` environment variables as they were deprecated in version 0.55:
+3. Clear the `DD_API_KEY` or `DD_PROFILING_API_KEY` environment variable. The API key files are deprecated as of version 0.55:
 
     ```shell
     unset DD_PROFILING_API_KEY
