@@ -310,7 +310,7 @@ services:
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "ECS" %}}
-Please see specific setup instructions on our [AWS ECS][7] documentation page.
+To set up on AWS ECS, see the [AWS ECS][7] documentation page.
 
 {{% /tab %}}
 {{< /tabs >}}
