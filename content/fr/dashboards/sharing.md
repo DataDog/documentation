@@ -9,10 +9,10 @@ further_reading:
   - link: /dashboards/
     tag: Documentation
     text: Créer des dashboards dans Datadog
-  - link: /dashboards/template_variables
+  - link: /dashboards/template_variables/
     tag: Documentation
     text: Améliorer vos dashboards avec les template variables
-  - link: /dashboards/widgets
+  - link: /dashboards/widgets/
     tag: Documentation
     text: Découvrir les widgets disponibles pour votre dashboard
 ---
@@ -56,13 +56,13 @@ Partagez un dashboard entier en générant une URL publique :
 
 L'URL créée permet un accès en lecture seule au contenu de ce dashboard spécifique, mis à jour en temps réel.
 
-**Remarque **: les sélecteurs de [template variable][5] sont uniquement disponibles pour les dashboards lorsque vous configurez des tags visibles. Les valeurs par défaut des template variables sont les valeurs par défaut définies dans Datadog. En outre, les données des widgets basés sur des requêtes de traces APM ne sont pas visibles sur les dashboards publics. Tous les logs basés sur des requêtes affichent des données, sauf le widget Flux de logs.
+**Remarque **: les sélecteurs de [template variable][4] sont uniquement disponibles pour les dashboards lorsque vous configurez des tags visibles. Les valeurs par défaut des template variables sont les valeurs par défaut définies dans Datadog. En outre, les données des widgets basés sur des requêtes de traces APM ne sont pas visibles sur les dashboards publics. Tous les logs basés sur des requêtes affichent des données, sauf le widget Flux de logs.
 
 ### Révoquer
 
 Pour révoquer un dashboard partagé :
 
-1. Accédez à la [liste des dashboards][6].
+1. Accédez à la [liste des dashboards][5].
 2. Sélectionnez le dashboard dont vous souhaitez révoquer l'accès.
 3. Cliquez sur l'icône des paramètres en forme d'engrenage en haut à droite.
 4. Cliquez sur **Configure sharing**.
@@ -70,7 +70,7 @@ Pour révoquer un dashboard partagé :
 
 ### Appliquer des restrictions
 
-Vous pouvez restreindre l'accès à votre dashboard en fonction de l'adresse IP. Envoyez un e-mail à [l'équipe d'assistance Datadog][7] pour activer la fonctionnalité d'ajout d'adresses IP à la liste blanche et ainsi permettre aux administrateurs de spécifier les adresses IP autorisées à accéder aux dashboards partagés. Une fois cette fonctionnalité activée, vous pourrez gérer vos restrictions sur la [page des paramètres de sécurité][8] pour votre organisation.
+Vous pouvez restreindre l'accès à votre dashboard en fonction de l'adresse IP. Envoyez un e-mail à [l'équipe d'assistance Datadog][6] pour activer la fonctionnalité d'ajout d'adresses IP à la liste blanche et ainsi permettre aux administrateurs de spécifier les adresses IP autorisées à accéder aux dashboards partagés. Une fois cette fonctionnalité activée, vous pourrez gérer vos restrictions sur la [page des paramètres de sécurité][7] pour votre organisation.
 
 ### Mode sombre
 
@@ -82,31 +82,30 @@ Le mode TV est disponible sur les screenboards publics. Utilisez le raccourci cl
 
 ## API
 
-Datadog propose une [API dédiée][9] qui vous permet d'interagir avec vos graphiques partagés (embeds) :
+Datadog propose une [API dédiée][8] qui vous permet d'interagir avec vos graphiques partagés (embeds) :
 
 | Endpoint                 | Description                                                             |
 |--------------------------|-------------------------------------------------------------------------|
-| [Récupérer tous les embeds][10]     | Récupère la liste des graphiques intégrables précédemment créés.                     |
-| [Créer un embed][11]       | Crée un nouveau graphique intégrable.                                         |
-| [Récupérer un embed spécifique][12] | Récupère le fragment HTML d'un embed généré précédemment avec `embed_id`. |
-| [Activer un embed][13]       | Active l'embed spécifié.                                             |
-| [Révoquer un embed][14]       | Révoque l'embed spécifié.                                             |
+| [Récupérer tous les embeds][9]     | Récupère la liste des graphiques intégrables précédemment créés.                     |
+| [Créer un embed][10]       | Crée un nouveau graphique intégrable.                                         |
+| [Récupérer un embed spécifique][11] | Récupère le fragment HTML d'un embed généré précédemment avec `embed_id`. |
+| [Activer un embed][12]       | Active l'embed spécifié.                                             |
+| [Révoquer un embed][13]       | Révoque l'embed spécifié.                                             |
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/timeboard
-[2]: /fr/dashboards/screenboard
+[1]: /fr/dashboards/timeboard/
+[2]: /fr/dashboards/screenboard/
 [3]: https://app.datadoghq.com/account/settings#embeds
-[4]: /fr/dashboards/screenboards/#global-time-selector
-[5]: /fr/dashboards/template_variables
-[6]: https://app.datadoghq.com/dashboard/lists
-[7]: /fr/help
-[8]: https://app.datadoghq.com/account/org_security
-[9]: /fr/api/?lang=python#embeddable-graphs
-[10]: /fr/api/?lang=python#get-all-embeds
-[11]: /fr/api/?lang=python#create-embed
-[12]: /fr/api/?lang=python#get-specific-embed
-[13]: /fr/api/?lang=python#enable-embed
-[14]: /fr/api/?lang=python#revoke-embed
+[4]: /fr/dashboards/template_variables/
+[5]: https://app.datadoghq.com/dashboard/lists
+[6]: /fr/help/
+[7]: https://app.datadoghq.com/account/org_security
+[8]: /fr/api/v1/embeddable-graphs/
+[9]: /fr/api/v1/embeddable-graphs/#get-all-embeds
+[10]: /fr/api/v1/embeddable-graphs/#create-embed
+[11]: /fr/api/v1/embeddable-graphs/#get-specific-embed
+[12]: /fr/api/v1/embeddable-graphs/#enable-embed
+[13]: /fr/api/v1/embeddable-graphs/#revoke-embed
