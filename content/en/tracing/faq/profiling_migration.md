@@ -72,7 +72,7 @@ The following arguments and environment variables have been deprecated:
 
 {{% tab "Python" %}}
 
-Perform following steps to migrate your service to send profiles directly through the agent:
+Perform the following steps to migrate your service to send profiles directly through the Datadog Agent:
 
 1. Upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+
 
