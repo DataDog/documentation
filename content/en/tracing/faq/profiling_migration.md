@@ -8,7 +8,7 @@ kind: faq
 </div>
 ****
 
-As we get closer to Continuous Profiling general availability, we have made changes so onboarding your services is even easier than before. Notably, will now send profiles through the Datadog Agent, removing the need for an API key or an upload endpoint. In summary here are the benefits of switching to agent mode:
+Benefits of switching to agent mode:
 
 - Deprecated having to specify an API key: `DD_PROFILING_API_KEY`, `DD_API_KEY`, `DD_PROFILING_API_KEY_FILE`.
 - Deprecated having to specify the uploading endpoint: `DD_SITE`.
