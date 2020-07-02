@@ -157,7 +157,9 @@ Perform following steps to migrate your service to send profiles directly throug
 
 Within a few minutes of migrating, you can see the data on the [Datadog APM > Profiling page][1].
 
-**NOTE** The following environment variables and methods have been deprecated:
+### Deprecated arguments
+
+The following arguments and environment variables have been deprecated:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
