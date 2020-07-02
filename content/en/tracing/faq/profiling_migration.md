@@ -42,7 +42,7 @@ Perform the following steps to migrate your service to send profiles directly th
 
     **Note** The `-Ddd.profiling.api-key-file` flag is also deprecated as of version 0.55.
 
-4. Ensure `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable is set to `true`. Update to your service invocation should look like:
+4. Ensure the `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable is set to `true`. For example, you can run:
 
     ```shell
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
