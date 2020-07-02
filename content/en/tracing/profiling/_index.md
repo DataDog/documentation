@@ -15,31 +15,29 @@ Datadog Profiling is in beta. Reach out to <a href="/help/">Datadog Support</a> 
 
 Find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, to significantly reduce end-user latency and infrastructure costs.
 
-### Getting Started
+### Low impact in production
 
-Enable Continuous Profiling in your service to visualize all your stack traces in one place and get actionable insights for performance improvements.
+Continuous profiling is designed to run in production across all services by leveraging technologies such as [Java Flight Recorder][1] to have minimal impact on your host's CPU and memory usage.
+
+## Getting Started
+
+Profiling in your service to visualize all your stack traces in one place takes just minutes.
+
+### 1. Instrument Your Application
+
+Add a profiling library to your application to start sending profiles to the Datadog Agent.
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-### Low impact in production
-
-Continuous profiling is designed to run in production across all services by leveraging technologies such as Java Flight Recorder to have very minimal impact on your application.
-
-### Correlate profiles and traces
-
-Pivot seamlessly between [distributed traces and profiles][1] to find the line of code responsible for a slow request.
-
-{{< img src="tracing/profiling/trace-profile.gif" alt="Connect profiles and traces.">}}
-
-### Search profiles by tags
+## Search profiles by tags
 
 [Slice and dice your profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
 
 {{< img src="tracing/profiling/search_profiles.gif" alt="Search profiles by tags">}}
 
-### Track method performance over deployments
+## Track function performance over deployments
 
-[Obtain key profiling metrics][3] from services such as top CPU usage by method, top memory allocations by thread, and CPU usage by version to visualize in your dashboards and alert with monitors.
+Obtain key profiling metrics from services such as top CPU usage by method, top memory allocations by thread, and CPU usage by version to visualize in your dashboards.
 
 {{< img src="tracing/profiling/profiling-metric-dashboard.gif" alt="Add profiling metrics to your dashboards.">}}
 
@@ -47,6 +45,5 @@ Pivot seamlessly between [distributed traces and profiles][1] to find the line o
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/profiling/trace_profile
+[1]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm#JFRUH170
 [2]: /tracing/profiling/search_profiles
-[3]: /tracing/profiling/code_level_metrics

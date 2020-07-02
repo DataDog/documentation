@@ -925,21 +925,6 @@ main:
     parent: profiling
     identifier: profiling_search_profiles
     weight: 702
-  - name: Connect Profiles & Traces
-    url: tracing/profiling/trace_profile
-    parent: profiling
-    identifier: profiling_trace_profile
-    weight: 703
-  - name: Code Level Metrics
-    url: tracing/profiling/code_level_metrics
-    parent: profiling
-    identifier: profiling_code_level_metrics
-    weight: 704
-  - name: Troubleshooting
-    url: tracing/profiling/troubleshooting
-    parent: profiling
-    identifier: profiling_troubleshooting
-    weight: 705
   - name: Manual Instrumentation
     url: tracing/manual_instrumentation/
     parent: tracing

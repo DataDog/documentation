@@ -104,11 +104,21 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
-| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.   |
+| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 
 <div class="alert alert-info">
 Recommended for advanced usage only.
 </div>
+
+- When your process forks using `os.fork`, the profiler is stopped in the child process.
+
+  For Python 3.7+ on POSIX platforms, a new profiler is started if you enabled the profiler via `pyddprofile` or `ddtrace.profiling.auto`.
+
+  If you manually create a `Profiler()`, use Python < 3.6, or run on a non-POSIX platform, manually restart the profiler in your child with:
+
+   ```python
+   ddtrace.profiling.auto.start_profiler()
+   ```
 
 - If you want to manually control the lifecycle of the profiler, use the `ddtrace.profiling.profiler.Profiler` object:
 
@@ -121,16 +131,6 @@ Recommended for advanced usage only.
     # At shutdown
     prof.stop()
     ```
-
-- When your process forks using `os.fork`, the profiler is stopped in the child process.
-
-  For Python 3.7+ on POSIX platforms, a new profiler is started if you enabled the profiler via `pyddprofile` or `ddtrace.profiling.auto`.
-
-  If you manually create a `Profiler()`, use Python < 3.6, or run on a non-POSIX platform, manually restart the profiler in your child with:
-
-   ```python
-   ddtrace.profiling.auto.start_profiler()
-   ```
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/profiling
@@ -165,7 +165,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
         profiler.WithService("<SERVICE_NAME>"),
         profiler.WithEnv("<ENVIRONMENT>"),
         profiler.WithVersion("<APPLICATION_VERSION>"),
-        profiler.WithTags("<KEY1>:<VALUE1>, <KEY2>:<VALUE2>"),
+        profiler.WithTags("<KEY1>:<VALUE1>,<KEY2>:<VALUE2>"),
     )
     if err != nil {
         log.Fatal(err)
@@ -193,7 +193,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 | `DD_SERVICE`                                     | String        | The Datadog [service][4] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][5] name, for example `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
-| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.   |
+| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
@@ -204,6 +204,21 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 {{< /tabs >}}
 
+## Troubleshooting
+
+If you've configured the profiler and don't see profiles in the [profile search page](#search-profiles), please turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+
+- OS type and version (e.g Linux Ubuntu 14.04.3)
+- Runtime type, version and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
+
+If you've configured the profiler and don't see profiles in the [profile search page](#search-profiles), please turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+
+- OS type and version (e.g Linux Ubuntu 14.04.3)
+- Runtime type, version and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /tracing/troubleshooting/#tracer-debug-mode
+[2]: /help/
