@@ -47,9 +47,9 @@ If one of your Synthetic tests is throwing a 401, it most likely means that it i
 
 ### Forbidden errors
 
-When creating Synthetics tests, you might get `403 Forbidden` errors at first. It's coming from the `Sec-Datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <TEST_ID>` header that is automatically being sent by Datadog.
-Make sure this header is not blacklisted by your servers in order to remove this error.
-Additionally, you might also have to whitelist [Datadog Synthetics IP ranges][7] to make sure Datadog servers are allowed to send requests to your infrastructure.
+If you observe `403 Forbidden` errors returned by Synthetic tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header.  This header is added to each Synthetics request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
+
+Additionally, you might also have to ensure [Datadog Synthetics' IP ranges][7] are allowed as traffic sources by your firewalls.
 
 ## Further Reading
 
