@@ -4,7 +4,7 @@ kind: faq
 ---
 
 <div class="alert alert-warning">
-<b>You must migrate your current setup as the agentless mode will no longer be supported when Continuous Profiling is generally available.</b>
+<b>Agentless profiling will no longer be supported when Continuous Profiling is generally available.</b>
 </div>
 ****
 
