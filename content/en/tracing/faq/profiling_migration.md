@@ -30,7 +30,7 @@ Perform the following steps to migrate your service to send profiles directly th
     wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
     ```
 
-3. Clear `DD_PROFILING_API_KEY_FILE` or `DD_PROFILING_API_KEY` environment variable alongside the API key file as they were deprecated in version 0.55.
+3. Clear the `DD_PROFILING_API_KEY_FILE` or `DD_PROFILING_API_KEY` environment variable. The API key files are deprecated as of version 0.55.
 
     ```shell
     unset DD_PROFILING_API_KEY_FILE
