@@ -165,6 +165,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
         profiler.WithService("<SERVICE_NAME>"),
         profiler.WithEnv("<ENVIRONMENT>"),
         profiler.WithVersion("<APPLICATION_VERSION>"),
+        profiler.WithTags("<KEY1>:<VALUE1>, <KEY2>:<VALUE2>"),
     )
     if err != nil {
         log.Fatal(err)
@@ -180,10 +181,19 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 | Method | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
-|  WithService     | String        | The Datadog [service][4] name, for example `my-web-app`, which can be set here, or in `DD_TAGS`.             |
-|  WithEnv         | String        | The Datadog [environment][5] name, for example `production`, which can be set here, or in `DD_TAGS`.         |
+|  WithService     | String        | The Datadog [service][4] name, for example `my-web-app`.             |
+|  WithEnv         | String        | The Datadog [environment][5] name, for example `production`.         |
+|  WithVersion     | String        | The version of your application.                                                                             |  
 |  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
+- Alternatively you can also set the profiler configuration using environment variables:
+
+| Environment variable                             | Type          | Description                                                                                      |
+| ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
+| `DD_SERVICE`                                     | String        | The Datadog [service][4] name.     |
+| `DD_ENV`                                         | String        | The Datadog [environment][5] name, for example `production`. |
+| `DD_VERSION`                                     | String        | The version of your application.                             |
+| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.   |
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
