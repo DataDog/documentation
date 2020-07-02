@@ -41,13 +41,17 @@ Add a profiling library to your application to start sending profiles to the Dat
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-## Search profiles by tags
+## Explore Datadog Profiling
+
+Now that you've configured your application to send profiles to Datadog, start getting insights into your code performance:
+
+### Search profiles by tags
 
 [Slice and dice your profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
 
 {{< img src="tracing/profiling/search_profiles.gif" alt="Search profiles by tags">}}
 
-## Track function performance over deployments
+### Track function performance over deployments
 
 Obtain key profiling metrics from services such as top CPU usage by method, top memory allocations by thread, and CPU usage by version to visualize in your dashboards.
 
