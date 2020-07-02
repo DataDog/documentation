@@ -9,7 +9,7 @@
       "mountPoints": [
         {
           "containerPath": "\\\\.\\pipe\\docker_engine",
-          "sourceVolume": "docker_pipe",
+          "sourceVolume": "docker_sock",
           "readOnly": true
         }
       ],
@@ -30,7 +30,7 @@
       "host": {
         "sourcePath": "\\\\.\\pipe\\docker_engine"
       },
-      "name": "docker_pipe"
+      "name": "docker_sock"
     }
   ],
   "family": "datadog-agent-task"
