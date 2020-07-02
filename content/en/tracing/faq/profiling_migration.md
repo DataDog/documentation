@@ -40,7 +40,7 @@ Perform the following steps to migrate your service to send profiles directly th
     unset DD_PROFILING_API_KEY
     ```
 
-    **Note** If you are using `-Ddd.profiling.api-key-file` flag, do not specify it during service invocation as it is also deprecated in version 0.55.
+    **Note** The `-Ddd.profiling.api-key-file` flag is also deprecated as of version 0.55.
 
 4. Ensure `-Ddd.profiling.enabled` flag or `DD_PROFILING_ENABLED` environment variable is set to `true`. Update to your service invocation should look like:
 
