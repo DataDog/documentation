@@ -27,7 +27,7 @@ You can filter according to infrastructure tags or application tags set up from 
 | Env      | The environment your application is running on (`prod`, `staging`).                                    |
 | Service  | The name of the [service][2] your code is running.                                                     |
 | Version  | The version of your code.                                                                              |
-| Host     | The host name your profiled process is running on. If running in Kubernetes, it's the name of the pod. |
+| Host     | The host name your profiled process is running on. |
 | Runtime  | The type of runtime the profiled process is running (`JVM`, `CPython`).                                |
 | Language | The language of your code (`Java`, `Python`).                                                          |
 
