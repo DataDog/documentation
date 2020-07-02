@@ -82,7 +82,7 @@ Perform the following steps to migrate your service to send profiles directly th
     pip install ddtrace
     ```
 
-3. Clear `DD_PROFILING_API_KEY` or `DD_API_KEY` environment variable as they were deprecated in version 0.39:
+3. Clear the `DD_PROFILING_API_KEY` or `DD_API_KEY` environment variable. The API key files are deprecated as of version 0.39:
 
     ```shell
     unset DD_PROFILING_API_KEY
