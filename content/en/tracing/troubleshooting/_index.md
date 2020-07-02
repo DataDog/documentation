@@ -39,11 +39,11 @@ If you see any `DIAGNOSTICS` log lines, please confirm from the indicated log th
 
 The most common `DIAGNOSTICS` error output will be that the tracer is unable to send traces to the Datadog Agent.
 
-In this case, please confirm you have followed
+In this case, please confirm your tracer has been set up correctly to receive traces for [ECS][2], [Kubernetes][3], [Docker][4] or [any other option][5].
 
 ### Double check your configuration settings
 
-If your logs only contain `CONFIGURATION` lines, please confirm that the settings output by the tracer match your expected settings from your deployment and configuration of the Datadog Tracer.  Additionally, if you are not seeing specific traces in Datadog, please review the [Compatibility Requirements][2] section of the documentation to confirm these integrations are supported.  If there is an integration you are using that is not supported, or if everything looks fine, proceed to step 4 and open a support ticket.
+If your logs only contain `CONFIGURATION` lines, please confirm that the settings output by the tracer match your expected settings from your deployment and configuration of the Datadog Tracer.  Additionally, if you are not seeing specific traces in Datadog, please review the [Compatibility Requirements][6] section of the documentation to confirm these integrations are supported.  If there is an integration you are using that is not supported, or if everything looks fine, proceed to step 4 and open a support ticket.
 
 #### Open a Support ticket
 
@@ -53,7 +53,7 @@ Open a [ticket][1] with our awesome support team explaining your issue or unsupp
 
 After having [enabled tracer debug mode](#tracer-debug-mode), check your Agent logs to see if there is more info about your issue.
 
-If there are errors that you don't understand, or [traces][3] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][4].
+If there are errors that you don't understand, or [traces][7] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][8].
 
 ## Tracer debug mode
 
@@ -468,6 +468,10 @@ To increase the APM connection limit for the Agent, configure the `connection_li
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
-[2]: /tracing/compatibility_requirements/
-[3]: /tracing/visualization/#trace
-[4]: /agent/troubleshooting/#send-a-flare
+[2]: /integrations/amazon_ecs/?tab=python#trace-collection
+[3]: /agent/kubernetes/?tab=helm
+[4]: /agent/docker/apm/?tab=java
+[5]: /tracing/send_traces/
+[6]: /tracing/compatibility_requirements/
+[7]: /tracing/visualization/#trace
+[8]: /agent/troubleshooting/#send-a-flare
