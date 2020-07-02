@@ -9,21 +9,51 @@ further_reading:
 
 When experiencing unexpected behavior with Datadog APM, there are a few common issues you can look for before reaching out to [Datadog support][1]:
 
-1. **Make sure the Agent has APM enabled**:
+## Tracer startup logs
 
-    Run the following command on the Agent host: `netstat -van | grep 8126`.
+Check your application logs for tracer logs emitted during application startup.  These logs will contain either `DATADOG TRACER CONFIGURATION` or `DATADOG TRACER DIAGNOSTICS`.
 
-    If you don't see an entry, then the Agent is not listening on port `8126`, which usually means either that the Agent is not running or that APM is not enabled in your `datadog.yaml` file. See the [APM Agent setup documentation][2] for more information.
+`DIAGNOSTICS` log lines appear when the tracer encountered an error during application startup, while  `CONFIGURATION` logs are a JSON or raw-formatted representation of important settings applied to your tracer.
 
-2. **Ensure that the Agent is functioning properly**:
+If you see any `DIAGNOSTICS` log lines, please confirm from the indicated log that settings and configurations have been applied correctly.  If you do not see logs at all, please ensure that your application logs are not silenced and that your log level is at least `INFO` where applicable.
 
-    In some cases the Agent may have issues sending traces to Datadog. [Enable Agent debug mode][3] and check the [Trace Agent logs][4] to see if there are any errors.
+{{< tabs >}}
+{{% tab ".NET" %}}
 
-3. **Verify that your tracer is running correctly**:
+```text
+2020-06-29 12:26:39.572 +02:00 [INF] DATADOG TRACER CONFIGURATION -
+{"date":"2020-06-29T12:26:39.5615724+02:00","os_name":"Windows",
+"os_version":"Microsoft Windows NT 6.2.9200.0","version":"1.17.1.0",
+"platform":"x64","lang":".NET Framework","lang_version":"4.8+",
+"env":null,"enabled":true,"service":"git-credential-manager",
+"agent_url":"http://localhost:8126","debug":false,
+"analytics_enabled":false,"sample_rate":null,"sampling_rules":null,
+"tags":[],"log_injection_enabled":false,
+"runtime_metrics_enabled":false,"disabled_integrations":[]}
+```
 
-    After having [enabled tracer debug mode](#tracer-debug-mode), check your Agent logs to see if there is more info about your issue.
+{{% /tab %}}
+{{< /tabs >}}
 
-If there are errors that you don't understand, or [traces][5] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][6].
+### Agent connectivity errors
+
+The most common `DIAGNOSTICS` error output will be that the tracer is unable to send traces to the Datadog Agent.
+
+In this case, please confirm you have followed
+
+### Double check your configuration settings
+
+If your logs only contain `CONFIGURATION` lines, please confirm that the settings output by the tracer match your expected settings from your deployment and configuration of the Datadog Tracer.  Additionally, if you are not seeing specific traces in Datadog, please review the [Compatibility Requirements][2] section of the documentation to confirm these integrations are supported.  If there is an integration you are using that is not supported, or if everything looks fine, proceed to step 4 and open a support ticket.
+
+#### Open a Support ticket
+
+Open a [ticket][1] with our awesome support team explaining your issue or unsupported integration to create a feature request, and include the `DATADOG TRACER CONFIGURATION` output of your logs to assist us with faster resolution.
+
+#### [Optional] Run your tracer in debug mode to collect logs
+
+After having [enabled tracer debug mode](#tracer-debug-mode), check your Agent logs to see if there is more info about your issue.
+
+If there are errors that you don't understand, or [traces][3] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][4].
 
 ## Tracer debug mode
 
@@ -438,8 +468,6 @@ To increase the APM connection limit for the Agent, configure the `connection_li
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
-[2]: /tracing/setup/#agent-configuration
-[3]: /agent/troubleshooting/#get-more-logging-from-the-agent
-[4]: /agent/guide/agent-log-files/
-[5]: /tracing/visualization/#trace
-[6]: /agent/troubleshooting/#send-a-flare
+[2]: /tracing/compatibility_requirements/
+[3]: /tracing/visualization/#trace
+[4]: /agent/troubleshooting/#send-a-flare
