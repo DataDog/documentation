@@ -1,8 +1,8 @@
 ---
-title: Référence sur les API V1
+title: Références sur les API V2
 type: api
 ---
-{{< h2 >}}Référence sur les API V1{{< /h2 >}}
+{{< h2 >}}Références sur les API V2{{< /h2 >}}
 
 Utilisez l'API HTTP Datadog pour accéder automatiquement à la plateforme Datadog. L'API Datadog utilise des URL axées sur les ressources ainsi que des codes de statut afin d'indiquer la réussite ou l'échec des requêtes. Elle renvoie également un objet JSON pour toutes les requêtes.
 
@@ -20,12 +20,12 @@ Avant de pouvoir utiliser l'API pour envoyer ou consulter des données, vous dev
 
 Une fois l'Agent Datadog configuré, utilisez l'API pour commencer à envoyer les données des intégrations à Datadog. Les options de configuration supplémentaire de l'Agent vous offrent également la possibilité d'utiliser l'API pour envoyer des données Synthetics, des logs et des traces à Datadog.
 
-**Endpoints d'intégrations**
+**Endpoints d'intégration**
 
-Endpoints d'intégrations disponibles :
+Endpoints d'intégration disponibles :
 
 - [Intégration AWS][4]
-- [Intégration de logs AWS][5]
+- [Intégration Logs AWS][5]
 - [Intégration Azure][6]
 - [Intégration GCP][7]
 - [Intégration Slack][8]
@@ -72,7 +72,7 @@ Vous pouvez également utiliser l'API Datadog pour gérer automatiquement votre 
 
 {{< h2 >}}Limites de débit{{< /h2 >}}
 
-Certains endpoints d'API possèdent une limite de débit. Lorsque vous dépassez un certain nombre de requêtes pendant une certaine durée, une erreur est renvoyée.
+Certains endpoints d'API possèdent une limite de débit. Lorsque vous dépassez un certain nombre de requêtes dans un intervalle donné, une erreur est renvoyée.
 
 Pour les endpoints d'API à débit limité, les en-têtes sont renvoyés afin que vous puissiez vérifier où vous vous situez par rapport à votre limite. Si vous dépassez votre limite, consultez ces en-têtes afin de déterminer à quel moment vous pourrez renvoyer ces données.
 
@@ -82,7 +82,7 @@ Quelques précisions concernant la politique de limitation de débit des API :
 
 - Datadog **n'applique pas de limite de débit** lors de l'envoi de points de données/métriques (consultez la [section relative aux métriques][11] pour en savoir plus sur le traitement du débit d'envoi des métriques). Les limites appliquées dépendent de la quantité de [métriques custom][40] prévue dans votre contrat.
 - La limite de débit pour la **récupération** de métriques est de `100` par heure et par organisation.
-- La limite de débit pour l'envoi d'événements est de `1000` par agrégat, par jour et par organisation. Un agrégat désigne un groupe d'événements similaires.
+- La limite de débit pour l'envoi d'événements est fixée à `1000` par agrégat, par jour et par organisation. Un agrégat désigne un groupe d'événements similaires.
 - La limite de débit pour les appels de l'[API permettant d'interroger une série temporelle][41] est de `600` par heure et par organisation. Cette limite peut être augmentée sur demande.
 - La limite de débit pour les appels de l'[API permettant d'interroger des logs][42] est de `300` par heure et par organisation. Cette limite peut être augmentée sur demande.
 - La limite de débit pour les appels de l'[API permettant de représenté un snapshot][22] est de `60` par heure et par organisation. Cette limite peut être augmentée sur demande.
