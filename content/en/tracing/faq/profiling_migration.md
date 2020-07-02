@@ -176,7 +176,7 @@ Deprecated code level Profiler configuration:
 
 | Method | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
-|  WithAPIKey      | String        | Deprecated in version 0.39. The Datadog [Datadog API key][2]                                                                             |
+|  WithAPIKey      | String        | Deprecated in version 0.39. The Datadog [Datadog API key][2].                                                                             |
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/apm/install
