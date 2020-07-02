@@ -26,7 +26,7 @@ Otherwise, to begin tracing applications written in any language, first [install
 Next, download `dd-java-agent.jar` that contains the Agent class files:
 
 ```shell
-wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
 ```
 
 Finally, add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
