@@ -36,7 +36,7 @@
     contents:
 
     - action: integrations
-      branch: prod
+      branch: albertvaka/windows-ecs
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
