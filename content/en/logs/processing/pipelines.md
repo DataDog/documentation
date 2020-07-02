@@ -104,7 +104,19 @@ Datadog’s integration processing Pipelines are available for the certain sourc
 
 {{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline"  style="width:80%;">}}
 
-To see the full list of integration Pipelines, refer to the [Integration Pipelines Reference][6] page.
+### Integration Pipeline Library
+
+To see the full list of Integration Pipelines that Datadog offers, browse the [Integration Pipeline Library][6].
+The Pipeline Library shows how Datadog processes different log formats by default.
+
+{{< img src="logs/processing/pipelines/integration-pipeline-library.gif" alt="Integration Pipeline Library"  style="width:80%;">}}
+
+To use one Integration Pipeline, Datadog recommends to install the integration by configuring the corresponding log `source`. Once Datadog receives the first log with this source, the installation will be automatically triggered and the Integration Pipeline will be added to the processing pipelines list. To configure the log source, please refer to the corresponding [Integration documentation][7].
+
+It's also possible to copy an integration pipeline using the copy button. 
+
+{{< img src="logs/processing/pipelines/clone-pipeline-from-library.gif" alt="Cloning pipeline from Library"  style="width:80%;">}}
+
 
 ## Pipelines limitations
 
@@ -125,7 +137,7 @@ Log events which do not comply with these limits might be transformed or truncat
 * We recommend using at most 20 Processors per Pipeline.
 * We recommend using at most 10 parsing rules within a grok Processor. We reserve the right to disable underperforming parsing rules, processors, or pipelines that might impact Datadog's service performance.
 
-[Contact support][7] if you reach one of these limits as Datadog might be able to provide you more.
+[Contact support][8] if you reach one of these limits as Datadog might be able to provide you more.
 
 ## Further Reading
 
@@ -136,5 +148,7 @@ Log events which do not comply with these limits might be transformed or truncat
 [3]: /logs/processing/#reserved-attributes
 [4]: /logs/processing/processors/#log-status-remapper
 [5]: /logs/processing/processors/#log-date-remapper
-[6]: /logs/faq/integration-pipeline-reference/
-[7]: /help/
+
+[6]: https://app.datadoghq.com/logs/pipelines/pipeline/library
+[7]: /integrations/#cat-log-collection
+[8]: /help/
