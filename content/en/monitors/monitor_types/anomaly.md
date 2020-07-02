@@ -117,7 +117,7 @@ Enterprise-level customers can create anomaly detection monitors using the [crea
 
 **Note**: Anomaly detection monitors are only available to enterprise-level customers. Pro-level customers interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][11].
 
-Anomaly monitors are managed via the [same API][12] as other monitors. However, there are some fields in the request that are unique for anomaly monitors and are discussed in more detail below.
+Anomaly monitors are managed using the [same API][12] as other monitors. These fields are unique for anomaly monitors:
 
 ### `query`
 
@@ -146,15 +146,15 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 
 ### `options`
 
-Most of the properties in `options` property in the request body are the same as for other query alerts, but special attention should be given to `thresholds` and `threshold_windows`.
+Most of the properties under `options` in the request body are the same as for other query alerts, except for `thresholds` and `threshold_windows`.
 
-#### `thresholds`
+**`thresholds`**
 
 Anomaly monitors support `critical`, `critical_recovery`, `warning`, and `warning_recovery` thresholds. Thresholds are expressed as numbers from 0 to 1, and are interpreted as the fraction of the associated window that is anomalous. For example, an `critical` threshold value of `0.9` means that a critical alert triggers when at least 90% of the points in the `trigger_window` (described below) are anomalous. Or, a `warning_recovery` value of 0 means that the monitor recovers from the warning state only when 0% of the points in the `recovery_window` are anomalous.
 
 The `critical` `threshold` should match the `threshold` used in the `query`.
 
-#### `threshold_windows`
+**`threshold_windows`**
 
 Anomaly monitors have a `threshold_windows` property in `options`. `threshold_windows` must include both two properties—`trigger_window` and `recovery_window`. These windows are expressed as timeframe strings, such as `last_10m` or `last_1h`. The `trigger_window` must match the `alert_window` from the `query`. The `trigger_window` is the time range which is analyzed for anomalies when evaluating whether a monitor should trigger. The `recovery_window` is the time range that analyzed for anomalies when evaluating whether a triggered monitor should recover.
 
