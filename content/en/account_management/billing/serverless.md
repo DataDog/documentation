@@ -5,13 +5,13 @@ kind: documentation
 
 ## Overview
 
-Purchase Serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the average number of active functions per hour across the month for your accounts. Pro and Enterprise plans include 150,000 analyzed spans and 5 custom metrics per billed function. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
+Purchase Serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the average number of functions per hour across the month for your accounts. Pro and Enterprise plans include 150,000 analyzed spans and 5 custom metrics per billed function. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
 
 ## Serverless Functions
 
 Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded.
 
-The billed number of functions is almost always significantly lower than the number you see on the Serverless page or in your AWS Console because of the average hourly metering of active functions. Functions that run infrequently are less likely to affect your bill, and sudden spikes in traffic won't cost you extra.
+The billed number of functions is almost always significantly lower than the number you see on the Serverless page or in your AWS Console because of the average hourly metering. Functions that run infrequently are less likely to affect your bill, and sudden spikes in traffic won't cost you extra.
 
 For Serverless pricing information, see the infrastructure section in [Datadog's pricing page][1].
 
