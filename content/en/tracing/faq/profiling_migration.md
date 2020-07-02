@@ -48,7 +48,9 @@ Perform the following steps to migrate your service to send profiles directly th
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-5. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][1].
+### Results
+
+Within a few minutes of migrating, you can see the data on the [Datadog APM > Profiling page][1].
 
 **NOTE** The following arguments and environment variables have been deprecated:
 
