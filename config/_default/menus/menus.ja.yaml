@@ -2478,6 +2478,14 @@ api_v2:
     url: /ja/api/v2/logs/
     identifier: Logs
     generated: true
+  - name: Get a quick list of logs
+    parent: Logs
+    url: get-a-quick-list-of-logs
+    generated: true
+  - name: Get a list of logs
+    parent: Logs
+    url: get-a-list-of-logs
+    generated: true
   - name: Logs Archives
     url: /ja/api/v2/logs-archives/
     identifier: Logs Archives

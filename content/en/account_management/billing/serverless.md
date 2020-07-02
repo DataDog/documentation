@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-Purchase Serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the average number of functions per hour across the month for your accounts. Pro and Enterprise plans include 40 custom metrics per billed function. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
+Purchase Serverless functions on [Datadog Pro and Enterprise plans][1]. Datadog bills based on the average number of functions per hour across the month for your accounts. Pro and Enterprise plans include 150,000 analyzed spans and 5 custom metrics per billed function. Contact [Sales][2] or your [Customer Success Manager][3] for more information about adding Serverless to your account.
 
 ## Serverless Functions
 
@@ -23,9 +23,9 @@ To control the number of functions Datadog is monitoring, filter out particular 
 
 ### UI
 
-To use the UI to control the number of functions Datadog is monitoring, navigate to the [AWS Integration page][5] and add tags as `key:value` sets to the **to Lambdas with tag:** field.
+To use the UI to control limit which functions Datadog is monitoring, navigate to the [AWS Integration page][5] and add tags as `key:value` sets to the **to Lambdas with tag:** field.
 
-To add a blacklisted tag, include a `!` before the tag key. For example:
+To exclude functions with a given tag, add a `!` before the tag key. For example:
 
 `!env:staging,!env:test1`
 

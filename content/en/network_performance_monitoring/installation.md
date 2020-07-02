@@ -309,10 +309,13 @@ services:
 
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
+{{% tab "ECS" %}}
+To set up on AWS ECS, see the [AWS ECS][7] documentation page.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
-
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#agent
