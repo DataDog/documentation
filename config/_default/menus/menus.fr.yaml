@@ -2359,6 +2359,10 @@ api_v1:
     parent: Usage Metering
     url: get-hourly-usage-for-lambda
     generated: true
+  - name: Get monthly billable summary
+    parent: Usage Metering
+    url: get-monthly-billable-summary
+    generated: true
   - name: Get hourly usage for Fargate
     parent: Usage Metering
     url: get-hourly-usage-for-fargate
