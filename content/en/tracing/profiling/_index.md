@@ -28,7 +28,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
 
     ```shell
-    wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
+    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
     ```
 
      **Note**: Profiling is available in the `dd-java-agent.jar` library in versions 0.44+.
