@@ -74,7 +74,7 @@ The following arguments and environment variables have been deprecated:
 
 Perform the following steps to migrate your service to send profiles directly through the Datadog Agent:
 
-1. Upgrade your agent to version [7.20.2][1]+ or [6.20.2][1]+
+1. Upgrade your Agent to version [7.20.2][1]+ or [6.20.2][1]+.
 
 2. Upgrade the tracing library to [version 0.39][2]+ or run the following command to get the latest tracer version::
 
