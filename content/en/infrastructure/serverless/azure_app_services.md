@@ -33,7 +33,7 @@ The Datadog extension for Azure App Services provides additional monitoring capa
 
 The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows instances (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][5].
 
-- .NET Framework 4.7 (AAS does not support more recent versions)
+- .NET Framework 4.7 and later
 - .NET Core 2.1
 - .NET Core 2.2 (Microsoft support ended 2019-12-23)
 - .NET Core 3.0 (Microsoft support ended 2020-03-03)
