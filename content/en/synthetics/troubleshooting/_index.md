@@ -43,7 +43,7 @@ If one of your Synthetic tests is throwing a 401, it most likely means that it i
   
 * Is this endpoint using **query parameters for authentication** (e.g. do you need to add a specific API key in your URL parameters?)
 
-* Is this endpoint using **IP-based authentication**? If so, you might need to whitelist part or all of the [IPs from which Synthetics tests originate][7].
+* Is this endpoint using **IP-based authentication**? If so, you might need to allow part or all of the [IPs from which Synthetics tests originate][7].
 
 ### Forbidden errors
 
