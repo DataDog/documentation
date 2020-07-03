@@ -32,8 +32,8 @@ As you define the search query, the graph above the search fields updates.
     * **Monitor over measure**: If a [measure][4] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Define the alert grouping (optional). **Note**: With or without alert grouping defined, you get **one** alert when the aggregated value meets the set conditions. Even if you split the query by host, a single notification is sent if several hosts meet the set conditions. This is done to reduce notification noise.
 4. Configure the alerting strategy:
-    - Simple-Alert: A single alert event is generated to summarize all groups that breaches the alerting thresholds during the evaluation window. Even if you split the query by host, for example, a single notification is sent even if several hosts meet the set conditions. This strategy is selected to reduce notification noise.
-    - Multi-Alert: An alert event is generated for every group that breaches the alerting thresholds during the evaluation window. Use this strategy when you want to get one alert event for every group.
+    - Simple-Alert: A single alert event is generated to summarize the top 100 groups that breach the alerting thresholds during the evaluation window. Even if you split the query by host, for example, a single notification is sent even if several hosts meet the alerting conditions. This strategy may be selected to reduce notification noise.
+    - Multi-Alert: An alert event is generated for every group that breach the alerting thresholds during the evaluation window, up to alerting groups. Use this strategy when you want to trigger an individual alert event per group.
 
 ### Set alert conditions
 
