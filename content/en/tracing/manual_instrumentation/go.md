@@ -226,7 +226,7 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 
 ```text
 ## @param ignore_resources - list of strings - optional
-## A blacklist of regular expressions can be provided to disable certain traces based on their resource name
+## A list regular expressions can be provided to disable certain traces based on their resource name
 ## all entries must be surrounded by double quotes and separated by commas.
 # ignore_resources: ["(GET|POST) /healthcheck"]
 ```
