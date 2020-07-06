@@ -14,7 +14,6 @@ Evaluation operators allow you to perform basic arithmetic operations on a numer
 ```
 
 The following operators are supported:
-
 | Operator | Description    |
 |----------|----------------|
 | +        | Addition       |
@@ -43,11 +42,10 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*100
 The value of a numerical template variable can be used as the input for evaluation functions to change the formatting of the template variable or perform a mathematical operation on the value. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
 
 ```text
-{{eval “function(TEMPLATE_VARIABLE_NAME)”}}
+{{eval "function(TEMPLATE_VARIABLE_NAME)"}}
 ```
 
 The following functions change how the value of a numerical template variable is formatted:
-
 | Function            | Description|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | humanize_bytes(var) | Returns a human readable formatting of var bytes|
@@ -57,9 +55,7 @@ The following functions change how the value of a numerical template variable is
 | float(var)          | Returns var as a float|
 | trunc(var)          | Returns var as an integer, an alias of the int function|
 | dec(var)            | Returns the numbers to the right of the decimal point, for example if var = 12.345 then dec(var) returns 0.345.|
-
 The following functions use the value of a numerical template variable as the input to a mathematical function:
-
 | Function            | Description|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | round(var)          | Returns var rounded to the nearest integer|
@@ -88,16 +84,14 @@ The following functions use the value of a numerical template variable as the in
 If the decimal places of the `{{value}}` template variable are unnecessary for your particular use case, use the int function to evaluate `{{value}}` as an integer to improve readability and remove the decimals:
 
 ```
-{{eval “int(value)”}}
+{{eval "int(value)"}}
 ```
 
 If `{{value}}` is evaluating to a large number of bytes or bits, use the `humanize_bytes` or `humanize_bits` function to convert the number to a different higher order memory unit like GB or MB to improve readability:
 
 ```
-{{eval “humanize_bytes(value)”}}
-
-{{eval “humanize_bits(value)”}}
+{{eval "humanize_bytes(value)"}}
+{{eval "humanize_bits(value)"}}
 ```
-
 
 [1]: /logs/explorer/
