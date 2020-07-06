@@ -421,18 +421,11 @@ The XML parser transforms XML formatted messages into JSON.
 **Log:**
 
 ```text
-<bookstore>  
-  <book category="COOKING">  
-    <title lang="en">Everyday Italian</title>  
-    <author>Giada De Laurentiis</author>  
-    <year>2005</year>  
-  </book>  
-  <book category="CHILDREN">  
-    <title lang="en">Harry Potter</title>  
-    <author>J K. Rowling</author>  
-    <year>2005</year>  
-  </book>
-</bookstore> 
+<book category="CHILDREN">  
+  <title lang="en">Harry Potter</title>  
+  <author>J K. Rowling</author>  
+  <year>2005</year>  
+</book>
 ```
 
 **Rule:**
@@ -444,28 +437,15 @@ rule %{data::xml}
 **Result:**
 
   ```json
-  {
-  "bookstore": {
-    "book": [
-      {
-        "year": "2005",
-        "author": "Giada De Laurentiis",
-        "category": "COOKING",
-        "title": {
-          "lang": "en",
-          "value": "Everyday Italian"
-        }
-      },
-      {
-        "year": "2005",
-        "author": "J K. Rowling",
-        "category": "CHILDREN",
-        "title": {
-          "lang": "en",
-          "value": "Harry Potter"
-        }
-      }
-    ]
+{
+  "book": {
+    "year": "2005",
+    "author": "Giada De Laurentiis",
+    "category": "COOKING",
+    "title": {
+      "lang": "en",
+      "value": "Everyday Italian"
+    }
   }
 }
   ```
