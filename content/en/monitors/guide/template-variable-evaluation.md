@@ -14,6 +14,7 @@ Evaluation operators allow you to perform basic arithmetic operations on a numer
 ```
 
 The following operators are supported:
+
 | Operator | Description    |
 |----------|----------------|
 | +        | Addition       |
@@ -46,6 +47,7 @@ The value of a numerical template variable can be used as the input for evaluati
 ```
 
 The following functions change how the value of a numerical template variable is formatted:
+
 | Function            | Description|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | humanize_bytes(var) | Returns a human readable formatting of var bytes|
@@ -55,7 +57,9 @@ The following functions change how the value of a numerical template variable is
 | float(var)          | Returns var as a float|
 | trunc(var)          | Returns var as an integer, an alias of the int function|
 | dec(var)            | Returns the numbers to the right of the decimal point, for example if var = 12.345 then dec(var) returns 0.345.|
+
 The following functions use the value of a numerical template variable as the input to a mathematical function:
+
 | Function            | Description|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | round(var)          | Returns var rounded to the nearest integer|
@@ -91,6 +95,7 @@ If `{{value}}` is evaluating to a large number of bytes or bits, use the `humani
 
 ```
 {{eval "humanize_bytes(value)"}}
+
 {{eval "humanize_bits(value)"}}
 ```
 
