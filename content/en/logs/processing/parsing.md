@@ -174,6 +174,7 @@ Some examples demonstrating how to use parsers:
 * [Nested JSON](#nested-json)
 * [Regex](#regex)
 * [List and Arrays](#list-and-arrays)
+* [XML](#parsing-xml)
 
 ### Key value or logfmt
 
