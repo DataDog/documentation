@@ -112,8 +112,8 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 | `decodeuricomponent`                                           | Decodes URI components. For instance, it transforms `%2Fservice%2Ftest` into `/service/test`.                                                              |
 | `lowercase`                                                    | Returns the lower-cased string.                                                                                                                            |
 | `uppercase`                                                    | Returns the upper-cased string.                                                                                                                            |
-| `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extracts key value pattern and returns a JSON object. [See key-value Filter examples](#key-value-or-logfmt).                                                         |
-| `xml`                                                    |  Parses properly formatted XML. [See XML filter examples](#xml).                                                                                          |  
+| `keyvalue([separatorStr[, characterWhiteList[, quotingStr[, delimiter]]]])` | Extracts the key value pattern and returns a JSON object. See the [key-value filter examples](#key-value-or-logfmt).                                                         |
+| `xml`                                                    |  Parses properly formatted XML. See the [XML filter examples](#xml).                                                                                          |  
 | `scale(factor)`                                                | Multiplies the expected numerical value by the provided factor.                                                                                            |
 | `array([[openCloseStr, ] separator][, subRuleOrFilter)`        | Parses a string sequence of tokens and returns it as an array.                                                                                             |
 | `url`                                                          | Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].               |
@@ -450,10 +450,10 @@ rule %{data::xml}
 }
   ```
 
-**Note**:
+**Notes**:
 
-* If the XML contains tags that have both an attribute and a sting value between the two tags, a `value` attribute is generated. For example: `<title lang="en">Everyday Italian</title>` is converted as `{"title": {"lang": "en", "value": "Everyday Italian" } }`
-* Repeated tags are automatically converted to arrays. For example: `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` is converted as `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
+* If the XML contains tags that have both an attribute and a sting value between the two tags, a `value` attribute is generated. For example: `<title lang="en">Everyday Italian</title>` is converted to `{"title": {"lang": "en", "value": "Everyday Italian" } }`
+* Repeated tags are automatically converted to arrays. For example: `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` is converted to `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
 
 ## Further Reading
 
