@@ -36,7 +36,7 @@
     contents:
 
     - action: integrations
-      branch: albertvaka/windows-ecs
+      branch: wantsui/apm-elastic-beanstalk
       globs:
       - integration/*/*_metadata.csv
       - integration/*/manifest.json
