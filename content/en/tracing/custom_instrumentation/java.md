@@ -3,6 +3,7 @@ title: Java Custom Instrumentation
 kind: documentation
 aliases:
     - /tracing/opentracing/java
+    - /tracing/manual_instrumentation/java
 description: 'Implement the OpenTracing standard with the Datadog Java APM tracer.'
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
@@ -20,7 +21,7 @@ This page details common use cases for adding and customizing observability with
 
 ## Adding Tags
 
-Add custom [span tags][11] to your [spans][12] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 
 ### Add custom span tags
@@ -105,7 +106,7 @@ import java.io.StringWriter;
     }
 ```
 
-**Note**: You can add any relevant error metadata listed in the [trace view docs][2]. If the current span isn’t the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [setting tags & errors on a root span][9] section for more details.
+**Note**: You can add any relevant error metadata listed in the [trace view docs][3]. If the current span isn’t the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [setting tags & errors on a root span][4] section for more details.
 
 
 
@@ -147,7 +148,7 @@ if (span != null) {
 
 ## Adding Spans
 
-If you aren’t using a [supported framework instrumentation][1], or you would like additional depth in your application’s [traces][2], you may want to add custom instrumentation to your code for complete flamegraphs or to measure execution times for pieces of code.
+If you aren’t using a [supported framework instrumentation][5], or you would like additional depth in your application’s [traces][3], you may want to add custom instrumentation to your code for complete flamegraphs or to measure execution times for pieces of code.
 
 If modifying application code is not possible, use the environment variable `dd.trace.methods` to detail these methods.
 
@@ -169,7 +170,7 @@ The only difference between this approach and using `@Trace` annotations is the 
 
 Add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`. If the Agent is not attached, this annotation has no effect on your application.
 
-Datadog’s Trace annotation is provided by the [dd-trace-api dependency][3].
+Datadog’s Trace annotation is provided by the [dd-trace-api dependency][6].
 
 `@Trace` annotations have the default operation name `trace.annotation` and resource name of the traced method. These can be set as arguments of the `@Trace` annotation to better reflect what is being instrumented.  These are the only possible arguments that can be set for the `@Trace` annotation.
 
@@ -184,7 +185,7 @@ public class SessionManager {
     }
 }
 ```
-Note that through the `dd.trace.annotations` system property, other tracing method annotations can be recognized by Datadog as `@Trace`. You can find a list [here][4] if you have previously decorated your code.
+Note that through the `dd.trace.annotations` system property, other tracing method annotations can be recognized by Datadog as `@Trace`. You can find a list [here][7] if you have previously decorated your code.
 
 
 ### Manually creating a new span
@@ -293,7 +294,7 @@ There are additional configurations possible for both the tracing client and Dat
 
 ### B3 Headers Extraction and Injection
 
-Datadog APM tracer supports [B3 headers extraction][10] and injection for distributed tracing.
+Datadog APM tracer supports [B3 headers extraction][8] and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
 
@@ -320,7 +321,7 @@ If multiple extraction styles are enabled extraction attempt is done on the orde
 
 The Agent can be configured to exclude a specific Resource from Traces sent by the Agent to the Datadog application. To prevent the submission of specific Resources, use the `ignore_resources` setting in the `datadog.yaml` file . This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out Traces based on their Resource name.
 
-If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. To learn more, [click here][13].
+If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. To learn more, [click here][9].
 
 This can be useful for excluding any Health Checks or otherwise simulated traffic from the calculation of metrics for your services.
 ```text
@@ -336,7 +337,7 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 
 ## Open Tracing
 
-Datadog integrates seamlessly with the [OpenTracing API][7].
+Datadog integrates seamlessly with the [OpenTracing API][10].
 
 ### Setup
 
@@ -399,7 +400,7 @@ public class Application {
 }
 ```
 
-Aside from environment variables and system properties, there are additional configuration options as part of the `DDTracer.Builder` interface.  Consult the [Javadoc][8] for a full listing.
+Aside from environment variables and system properties, there are additional configuration options as part of the `DDTracer.Builder` interface.  Consult the [Javadoc][11] for a full listing.
 
 
 ### Asynchronous traces
@@ -499,23 +500,21 @@ public class MyHttpRequestExtractAdapter implements TextMap {
 }
 ```
 
-Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][7] for more details and information.
+Notice the above examples only use the OpenTracing classes. Check the [OpenTracing API][10] for more details and information.
 
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup/java/#compatibility
-[2]: /tracing/visualization/#trace
-[3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
-[4]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[5]: /tracing/visualization/trace/?tab=spantags#more-information
-[6]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/MutableSpan.java#L51
-[7]: https://github.com/opentracing/opentracing-java
-[8]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-ot/src/main/java/datadog/opentracing/DDTracer.java
-[9]: /tracing/manual_instrumentation/java/#set-tags-errors-on-a-root-span-from-a-child-span
-[10]: https://github.com/openzipkin/b3-propagation
-[11]: /tracing/visualization/#span-tags
-[12]: /tracing/visualization/#spans
-[13]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[1]: /tracing/visualization/#span-tags
+[2]: /tracing/visualization/#spans
+[3]: /tracing/visualization/#trace
+[4]: /tracing/manual_instrumentation/java/#set-tags-errors-on-a-root-span-from-a-child-span
+[5]: /tracing/setup/java/#compatibility
+[6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[8]: https://github.com/openzipkin/b3-propagation
+[9]: /agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[10]: https://github.com/opentracing/opentracing-java
+[11]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-ot/src/main/java/datadog/opentracing/DDTracer.java

@@ -1,7 +1,9 @@
 ---
 title: PHP Manual Instrumentation
 kind: documentation
-decription: 'Manually instrument your PHP application to send custom traces to Datadog.'
+aliases:
+    - /tracing/manual_instrumentation/php
+description: 'Manually instrument your PHP application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       tag: 'Guide'

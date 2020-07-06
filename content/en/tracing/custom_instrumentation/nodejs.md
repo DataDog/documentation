@@ -3,7 +3,8 @@ title: NodeJS Custom Instrumentation
 kind: documentation
 aliases:
     - /tracing/opentracing/nodejs
-decription: 'Manually instrument your NodeJS application to send custom traces to Datadog.'
+    - /tracing/manual_instrumentation/nodejs
+description: 'Manually instrument your NodeJS application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
       tag: 'Documentation'
