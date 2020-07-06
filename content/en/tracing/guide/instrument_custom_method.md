@@ -286,7 +286,7 @@ This example adds a span to the `BackupLedger.write` method, which adds new rows
     }
   }
 
-  // For ddtrace < v0.47.0 use dd_trace_method()
+  // For ddtrace < v0.47.0 use \dd_trace_method()
   \DDTrace\trace_method('BackupLedger', 'write', function (\DDTrace\SpanData $span) {
     // SpanData::$name defaults to 'ClassName.methodName' if not set (>= v0.47.0)
     $span->name = 'BackupLedger.write';
@@ -322,7 +322,7 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
     }
   }
 
-  // For ddtrace < v0.47.0 use dd_trace_method()
+  // For ddtrace < v0.47.0 use \dd_trace_method()
   \DDTrace\trace_method('BackupLedger', 'write', function (\DDTrace\SpanData $span) {
     // SpanData::$name defaults to 'ClassName.methodName' if not set (>= v0.47.0)
     $span->name = 'BackupLedger.write';
