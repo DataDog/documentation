@@ -41,8 +41,8 @@
                     </div>
                     <div class="col-4 col-lg-4 px-0">
                         <div class="d-flex justify-content-start justify-content-lg-end">
-                            <select class="js-region-selector d-none" placeholder="Region">
-                                <option value="" disabled>Region</option>
+                            <select class="js-region-selector d-none" placeholder="Site">
+                                <option value="" disabled>Site</option>
                                 {{ range sort .Site.Params.allowedRegions ".name" "desc" }}
                                     <option value="{{ .value }}">{{ .name }}</option>
                                 {{ end }}
