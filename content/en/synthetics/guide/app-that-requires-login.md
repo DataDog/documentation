@@ -10,7 +10,6 @@ further_reading:
       text: 'Configure a Browser Test'
 ---
 
-<<<<<<< HEAD:content/en/synthetics/guide/app-that-requires-login.md
 The key to recording an application that has a login is to record the login. There are two ways to do this:
 
 - [Include the login in your recording](#include-the-login-in-your-recording)
@@ -19,11 +18,6 @@ The key to recording an application that has a login is to record the login. The
 ## Include the login in your recording
 
 When you set up the new browser test, be sure to [start the test recording][2] by logging into your application. By default, the iframe pop up of the recorder uses your browser. If you start the recording already logged into your application, the iframe pop up might directly display a post-login page, which prevents you from recording your login steps without logging out first.
-=======
-## Including the login in your recording
-
-When you set up the new browser test, be sure to [start the test recording][2] by logging into your application. By default, the iframe pop up of the recorder uses your browser. If you start the recording already logged into your application, the iframe pop up might directly display a post-login page, which prevents you from recording your login steps without logging out first. An easy way to trigger a new login in session is to use the private browser recorder - this forces a log out.
->>>>>>> origin/kaylyn/synthetics-login:content/en/synthetics/guide/app_that_requires_login.md
 
 {{< img src="synthetics/guide/app_that_requires_login/login_test.mp4" video="true" alt="Demo of recording a login">}}
 
@@ -45,7 +39,6 @@ Some MFA providers might detect our Browser tests as bots and prevent them from 
 
 If your MFA process involves steps outside of the browser, such as voice, text message, or opening a mobile application, it is not possible to set up a browser test. If this is your case, consider reaching out to your MFA provider to see if it is possible to turn off bot detection for a specific set of credentials for testing purposes.
 
-<<<<<<< HEAD:content/en/synthetics/guide/app-that-requires-login.md
 ## Record browser tests in incognito mode
 
 To record your steps without logging out of your application, use the recorder's incognito mode.
@@ -54,8 +47,6 @@ To record your steps without logging out of your application, use the recorder's
 
 Opening a pop up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop up ignores all your previous browser history: cookies, local data, etc. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
-=======
->>>>>>> origin/kaylyn/synthetics-login:content/en/synthetics/guide/app_that_requires_login.md
 ## Account security
 
 ### Using global variables
