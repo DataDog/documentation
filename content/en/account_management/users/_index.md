@@ -42,7 +42,7 @@ To add members to your organization:
 
 The new user will receive an email with a link to log in. The user is marked with status `Invite Pending` until they log in. To cancel their invite before they log in, click the *Delete Invite* button on the right of the user line in list view, or on the user box in grid view. 
 
-{{< img src="account_management/users/delete_invite_grid.png" alt="Delete invite on the grid view"  style="width:80%;">}}
+{{< img src="account_management/users/delete_invite_grid.png" alt="Delete invite on the grid view"  style="width:50%;">}}
 
 To resend an invite in list view, click the user to open the user side panel, and click **Resend Invite**:
 
@@ -50,7 +50,7 @@ To resend an invite in list view, click the user to open the user side panel, an
 
 In grid view, hover over the user box and click **Resend Invite**:
 
-{{< img src="account_management/users/resend_invite_grid.png" alt="Resend invite on the grid view"  style="width:80%;">}}
+{{< img src="account_management/users/resend_invite_grid.png" alt="Resend invite on the grid view"  style="width:50%;">}}
 
 ## Edit a user's roles
 
