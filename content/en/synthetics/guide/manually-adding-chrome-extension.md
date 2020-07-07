@@ -12,12 +12,16 @@ further_reading:
 
 If you’re unable to download applications directly from the Chrome Web Store for security reasons, you can still record Browser tests by leveraging our smart extension detection system (available starting from extension version 3.1.6).
 
-1. Download the [Datadog test recorder extension crx file][1].
+1. Download the [Datadog test recorder extension][1] crx file.
 2. Upload this CRX file to your internal application store and repackage it. The icon of your new extension should appear in your Chrome browser, next to your other Chrome extensions.
   {{< img src="synthetics/guide/manually_adding_chrome_extension/icon.png" alt="the icon that appears in your browser">}}
 3. Start creating your [Browser test][2]: define your test configuration (test name, tags, locations, frequency, etc.), then hit `Save Details & Record Test`. This is the recorder page: you should see a message asking you to download the Datadog test recorder extension to get started with your recording.
+<<<<<<< HEAD:content/en/synthetics/guide/manually-adding-chrome-extension.md
 4. Click the icon that just appeared at the top right hand corner of your browser. Datadog Browser test’s recorder automatically detects the extension that was uploaded to your internal application store and you’re now able to start recording your Browser test’ steps.
   {{< img src="synthetics/guide/manually_adding_chrome_extension/record_test.png" alt="record your browser tests">}}
+=======
+4. Click the Datadog icon that just appeared at the top right-hand corner of your browser. Datadog Browser test’s recorder automatically detects the extension that was uploaded to your internal application store and you’re now able to start recording your Browser test’ steps.
+>>>>>>> origin/kaylyn/synthetics-login:content/en/synthetics/guide/browser_tests_without_chrome_extension.md
 
 **Note:** Manually update your internal extension when Datadog releases test recorder extension updates.
 
