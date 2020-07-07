@@ -47,7 +47,7 @@ Now that you've configured your application to send profiles to Datadog, start g
 
 ### Search profiles by tags
 
-[Slice and dice your profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
+[Use tags to search profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
 
 {{< img src="tracing/profiling/search_profiles.gif" alt="Search profiles by tags">}}
 
@@ -56,11 +56,6 @@ Now that you've configured your application to send profiles to Datadog, start g
 Obtain key profiling metrics from services such as top CPU usage by method, top memory allocations by thread, and CPU usage by version to visualize in your dashboards.
 
 {{< img src="tracing/profiling/profiling-metric-dashboard.gif" alt="Add profiling metrics to your dashboards.">}}
-
-Find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, to significantly reduce end-user latency and infrastructure costs.
-
-[Enable Continuous Profiling][1] in your service to visualize all your stack traces in one place and get actionable insights for performance improvements.
->>>>>>> Added updates to the profiling page
 
 ## Further Reading
 
