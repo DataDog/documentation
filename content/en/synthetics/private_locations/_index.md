@@ -200,8 +200,9 @@ docker-compose -f docker-compose.yml up
                 - name: datadog-private-location-worker
                   image: datadog/synthetics-private-location-worker
                   volumeMounts:
-                      - mountPath: /etc/datadog/
+                      - mountPath: /etc/datadog/synthetics-check-runner.json
                         name: worker-config
+                        subPath: synthetics-check-runner.json
             volumes:
                 - name: worker-config
                   configMap:
