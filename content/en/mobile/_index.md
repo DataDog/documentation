@@ -32,7 +32,7 @@ The Datadog On-call App is currently in beta, so it's not available generally in
 
 ### Logging in
 
-You can login using standard and Google authentication. If you would like to log in using [SAML][4], contact [Datadog support][10].
+You can login using standard and Google authentication. If you would like to log in using SAML, refer to the [Mobile App SAML Instructions][4]
 
 
 ## Monitors
@@ -68,7 +68,7 @@ If you have feedback on the beta, [contact Datadog support][10]. You can also se
 [1]: https://apps.apple.com/us/app/testflight/id899247664
 [2]: https://apple.co/2xEC5ke
 [3]: https://play.google.com/apps/testing/com.datadog.app
-[4]: /account_management/saml/#pagetitle
+[4]: https://docs.google.com/document/d/15KXrteQ3hvcxLuxCmaKnUhm-OTQTEHJw4Kwz_NlzxjM/edit#
 [5]: /monitors/manage_monitor/#search
 [6]: https://app.datadoghq.com/monitors
 [7]: /monitors/monitor_types/
