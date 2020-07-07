@@ -10803,6 +10803,20 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: Include whether or not hosts are muted and when they will be unmuted
+          your hosts.
+        in: query
+        name: include_muted_hosts_data
+        required: false
+        schema:
+          type: boolean
+      - description: Include host metadata
+          your hosts.
+        in: query
+        name: include_hosts_metadata
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
