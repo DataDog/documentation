@@ -286,7 +286,7 @@ When configuring your traces for unified service tagging:
 
 If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. The APM Tracer will then automatically inject `env`, `service`, and `version` into your logs, thereby eliminating manual configuration for those fields elsewhere.
 
-**Note**: The Java and PHP Tracers do not support configuration of unified service tagging for logs.
+**Note**: The PHP Tracer does not support configuration of unified service tagging for logs.
 
 [1]: /tracing/connect_logs_and_traces/
 {{% /tab %}}
