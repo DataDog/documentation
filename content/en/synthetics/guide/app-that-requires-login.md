@@ -10,11 +10,10 @@ further_reading:
       text: 'Configure a Browser Test'
 ---
 
-There are three ways to use Browser tests to monitor a journey that is behind a login:
+The key to recording an application that has a login is to record the login. There are two ways to do this:
 
 - [Include the login in your recording](#include-the-login-in-your-recording)
 - [Record browser tests in incognito mode][1]
-- [Bypass login by using specific configurations](#bypass-login-by-using-specific-configurations)
 
 ## Include the login in your recording
 
@@ -46,17 +45,7 @@ To record your steps without logging out of your application, use the recorder's
 
 {{< img src="synthetics/guide/app_that_requires_login/incognito.mp4" video="true" alt="Demo of recording a login in incognito">}}
 
-Opening a pop up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop up ignores all your previous browser history: cookies, local data, etc. You are consequently automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
-
-## Bypass login by using specific configurations
-
-Another way to allow your Browser tests to log into your application is to leverage one or several of the available browser test configurations. These configurations are set at every test execution and allow you to start recording your steps after login: 
-
-- Specific headers
-- Cookies 
-- Basic auth credentials
-
-{{< img src="synthetics/guide/app_that_requires_login/configs.png" alt="using specific configurations">}}
+Opening a pop up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop up ignores all your previous browser history: cookies, local data, etc. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
 ## Account security
 
@@ -71,8 +60,6 @@ Once you create the secure variables, you can then import these global variables
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
 
 [1]: /#record-browser-tests-in-incognito-mode
 [2]: /synthetics/browser_tests/actions
