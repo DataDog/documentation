@@ -31,10 +31,10 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 
 | Description                        | Command                                                |
 |------------------------------------|--------------------------------------------------------|
-| Start Agent as a service           | `sudo service datadog-agent start`                     |
-| Stop Agent running as a service    | `sudo service datadog-agent stop`                      |
-| Restart Agent running as a service | `sudo service datadog-agent restart`                   |
-| Status of Agent service            | `sudo service datadog-agent status`                    |
+| Start Agent as a service           | `sudo systemctl start datadog-agent`                   |
+| Stop Agent running as a service    | `sudo systemctl stop datadog-agent`                    |
+| Restart Agent running as a service | `sudo systemctl restart datadog-agent`                 |
+| Status of Agent service            | `sudo systemctl status datadog-agent`                  |
 | Status page of running Agent       | `sudo datadog-agent status`                            |
 | Send flare                         | `sudo datadog-agent flare`                             |
 | Display command usage              | `sudo datadog-agent --help`                            |
