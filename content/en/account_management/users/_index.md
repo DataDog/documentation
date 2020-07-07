@@ -19,10 +19,6 @@ further_reading:
   text: "Manage your users with the USER API"
 ---
 
-<div class="alert alert-warning">
-The new user management interface is in private beta. <a href="/help">Contact Datadog support</a> to have it enabled for your account.
-</div>
-
 Datadog's **User Management** section allows you to manage your users and their associated roles. Switch between list and grid views by clicking **List View** or **Grid View** on the right:
 
 {{< img src="account_management/users/user_page_list.png" alt="User Management Page in list view" >}}
