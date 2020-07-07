@@ -28,7 +28,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files, and add the `dd-trace-java` version to your `pom.xml` or equivalent:
 
     ```shell
-    wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
+    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
     ```
 
      **Note**: Profiling is available in the `dd-java-agent.jar` library in versions 0.44+.
@@ -112,7 +112,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling only works on Python
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. New in version 0.38.   |
 | `DD_API_KEY`                                     | String        | Deprecated in version 0.39. The [Datadog API key][2] to use when uploading profiles. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead. Supported in version 0.37.                                        |
 | `DD_PROFILING_API_KEY`                           | String        | Deprecated in version 0.39. The [Datadog API key][2] to use when uploading profiles. |
-| `DD_SITE`                                        | String        | Deprecated in version 0.39. If your organization is on Datadog EU site, set this to `datadoghq.eu`. See above for how to configure dd-trace-java.jar to upload profiles via the Datadog Agent instead.                          |
+| `DD_SITE`                                        | String        | Deprecated in version 0.39. If your organization is on Datadog EU site, set this to `datadoghq.eu`. See above for how to configure dd-trace-py to upload profiles via the Datadog Agent instead.                          |
 | `DD_PROFILING_TAGS`                              | String        | Deprecated in 0.38 in favor of `DD_TAGS`. Tags to apply to an uploaded profile. Must be a list a `key:value` comma separated list like: `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
 <div class="alert alert-info">

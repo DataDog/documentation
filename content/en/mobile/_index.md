@@ -11,7 +11,7 @@ further_reading:
   text: "Dashboards"
 ---
 
-<div class="alert alert-warning"> This service is in public beta. To join the beta, follow the installation instructions. The beta is not currently available to customers using SAML authentication. If you have any feedback, <a href="/help">contact Datadog support</a>.</div>
+<div class="alert alert-warning"> This service is in public beta. To join the beta, follow the installation instructions. If you would like to log in using SAML, or if you have any feedback, <a href="/help">contact Datadog support</a>.</div>
 
 The Datadog On-call app enables on-call engineers to view alerts from Datadog on their mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
 
@@ -32,7 +32,7 @@ The Datadog On-call App is currently in beta, so it's not available generally in
 
 ### Logging in
 
-You can login using standard and Google authentication. [SAML login][4] is not currently supported. If you have SAML enabled but not strictly, you can access the mobile app by creating a new standard email account. An org admin needs to approve the newly created account.
+You can login using standard and Google authentication. If you would like to log in using [SAML][4], contact [Datadog support][10].
 
 
 ## Monitors
@@ -41,7 +41,7 @@ You can login using standard and Google authentication. [SAML login][4] is not c
 
 On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][5]. For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries.
 
-**Note:** To set up or edit monitors and notifications, you need to do it in the [Datadog web app][6]. All monitor set up in the web app are visible in the mobile app. For more information, see [Creating monitors][7].
+**Note:** To set up or edit monitors and notifications, you need to do it in the [Datadog web app][6]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][7].
 
 ## Dashboards
 
@@ -55,7 +55,6 @@ Switch organizations and log out from the Account page.
 
 ## Troubleshooting and Known Issues
 
-- [SAML login][4] is not currently supported. You can login using standard and Google authentication. If you have SAML enabled but not strictly, you can access the mobile app by creating a new standard email account. An org admin needs to approve the newly created account.
 - Switching orgs does not always work correctly, especially if the new org requires Google OAuth.
 
 ## Feedback

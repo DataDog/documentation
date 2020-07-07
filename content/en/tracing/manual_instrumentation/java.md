@@ -12,6 +12,10 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
+<div class="alert alert-info">
+If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/java/">Java Setup Instructions</a>.
+</div>
+
 This page details common use cases for adding and customizing observability with Datadog APM.
 
 ## Adding Tags
@@ -206,7 +210,7 @@ class SomeClass {
             span.setTag("my.tag", "value");
 
             // The code you’re tracing
-            
+
         } catch (Exception e) {
             // Set error on span
         } finally {
@@ -244,7 +248,7 @@ class FilteringInterceptor implements TraceInterceptor {
     @Override
     public int priority() {
         // some high unique number so this interceptor is last
-        return 100; 
+        return 100;
     }
 }
 
@@ -321,7 +325,7 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 This can be useful for excluding any Health Checks or otherwise simulated traffic from the calculation of metrics for your services.
 ```text
 ## @param ignore_resources - list of strings - optional
-## A blacklist of regular expressions can be provided to disable certain traces based on their resource name
+## A list of regular expressions can be provided to disable certain traces based on their resource name
 ## all entries must be surrounded by double quotes and separated by commas.
 # ignore_resources: ["(GET|POST) /healthcheck"]
 ```
@@ -506,7 +510,6 @@ Notice the above examples only use the OpenTracing classes. Check the [OpenTraci
 [2]: /tracing/visualization/#trace
 [3]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [4]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[4]: /tracing/setup/java/#configuration
 [5]: /tracing/visualization/trace/?tab=spantags#more-information
 [6]: https://github.com/DataDog/dd-trace-java/blob/master/dd-trace-api/src/main/java/datadog/trace/api/interceptor/MutableSpan.java#L51
 [7]: https://github.com/opentracing/opentracing-java

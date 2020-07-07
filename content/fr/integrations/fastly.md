@@ -43,14 +43,23 @@ Si vous utilisez plusieurs Service ID provenant d'un compte unique, saisissez un
 
 #### Collecte de logs
 
-Configurez l'endpoint Syslog de façon à transmettre des logs Fastly à votre application Datadog.
+Configurez l'endpoint Datadog de façon à transmettre les logs Fastly à votre application Datadog. Vous pouvez choisir l'endpoint `Datadog` ou `Datadog (via Syslog)`. Nous vous conseillons d'utiliser l'endpoint `Datadog` pour une transmission plus fiable des logs via Syslog.
 
 ##### Sélectionner l'endpoint de journalisation
 
 1. Connectez-vous à l'interface Web de Fastly et cliquez sur **Configure link**.
 2. Depuis le menu **Service**, sélectionnez le service approprié.
 3. Cliquez sur le bouton **Configuration**, puis sélectionnez **Clone active**. La page Domains s'affiche.
-4. Cliquez sur le lien **Logging**. La page des endpoints de journalisation s'affiche. Sélectionnez l'endpoint **Syslog**.
+4. Cliquez sur le lien **Logging**. La page des endpoints de journalisation s'affiche. Cliquez sur **Create Endpoint** sous **Datadog** ou sous les options **Datadog (via Syslog)**.
+
+##### Configurer l’endpoint Datadog (conseillé)
+
+1. Attribuez un nom à l'endpoint, p. ex. `Datadog`.
+2. Configurez le format de log. Par défaut, **[le format de log Datadog/Fastly conseillé][2]** est déjà fourni et peut être personnalisé.
+3. Indiquez si vous utilisez un compte Datadog américain ou européen. Si une page `datadoghq.com` s'ouvre lorsque vous vous connectez, vous utilisez un compte américain ; si une page `datadoghq.eu` s'ouvre lorsque vous vous connectez, vous utilisez un compte européen.
+4. Ajoutez votre [clé d'API Datadog][3].
+5. Cliquez sur **Create** en bas.
+6. Cliquez sur **Activate** en haut à droite pour activer la nouvelle configuration. Patientez quelques minutes pour que votre compte commence à recevoir des logs.
 
 ##### Configurer l'endpoint Syslog
 

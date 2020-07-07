@@ -12,6 +12,10 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
+<div class="alert alert-info">
+If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/go/">Go Setup Instructions</a>.
+</div>
+
 This page details common use cases for adding and customizing observability with Datadog APM.
 
 ## Adding Tags
@@ -222,7 +226,7 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 
 ```text
 ## @param ignore_resources - list of strings - optional
-## A blacklist of regular expressions can be provided to disable certain traces based on their resource name
+## A list regular expressions can be provided to disable certain traces based on their resource name
 ## all entries must be surrounded by double quotes and separated by commas.
 # ignore_resources: ["(GET|POST) /healthcheck"]
 ```

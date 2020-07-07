@@ -947,7 +947,7 @@ describe(`filterExampleJson`, () => {
       "type": "object"
     };
     const actual = bp.filterExampleJson('curl', mockSchema);
-    const expected = {"series": [{"metric": "system.load.1", "points": ["1575317847", "0.5"]}]};
+    const expected = {"series": [{"metric": "system.load.1", "points": [1575317847, 0.5]}]};
     expect(actual).toEqual(expected);
   });
 

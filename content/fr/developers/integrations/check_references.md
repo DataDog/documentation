@@ -56,13 +56,13 @@ Les variables `list` et `object` couvrent plusieurs lignes et font l'objet de r�
 
 ### Paramètres facultatifs
 
-Un paramètre facultatif doit être mis en commentaire par défaut. Au début de chaque ligne couverte par le paramètre, ajoutez `#` (notez l'espace) en appliquant la même indentation que pour la spécification `@param`.
+Un paramètre facultatif doit être mis en commentaire par défaut. Au début de chaque ligne couverte par le paramètre, ajoutez `#` en appliquant la même indentation que pour la spécification `@param`.
 
 ### Commentaires de bloc
 
 Vous pouvez ajouter un commentaire de bloc n'importe où dans le fichier de configuration. Les règles suivantes doivent être appliquées :
 
-- Les commentaires doivent commencer par `##` (notez l'espace).
+- Les commentaires doivent commencer par `##`.
 - Les commentaires doivent être indentés comme les variables (le trait d'union ne compte pas).
 
 Pour en savoir plus sur la syntaxe YAML, consultez l'article [Wikipedia][2]. Et n'hésitez pas à faire bon usage du parser en ligne [Online YAML Parser][3] !

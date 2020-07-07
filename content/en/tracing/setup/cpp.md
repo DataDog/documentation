@@ -177,7 +177,6 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 | `DD_SERVICE` | v1.1.4 | | If specified, sets the default service name. Otherwise the service name must be provided via TracerOptions or JSON configuration. |
 | `DD_TRACE_ANALYTICS_ENABLED` | v1.1.3 | `false` | Enable App Analytics globally for the application. |
 | `DD_TRACE_ANALYTICS_SAMPLE_RATE` | v1.1.3 | | Sets the App Analytics sampling rate. Overrides `DD_TRACE_ANALYTICS_ENABLED` if set. A floating point number between `0.0` and `1.0`. |
-| `DD_TRACE_REPORT_HOSTNAME` | v1.1.3 | `false` | Whether to report the system's hostname for each trace. When disabled, the hostname of the Agent is used instead. |
 | `DD_TRACE_SAMPLING_RULES` | v1.1.4 | `[{"sample_rate": 1.0}]` | A JSON array of objects. Each object must have a "sample_rate", and the "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate. |
 | `DD_VERSION` | v1.1.4 | | If specified, adds the `version` tag with the specified value to all generated spans. |
 | `DD_TAGS` | v1.1.4 | | If specified, will add tags to all generated spans. A comma-separated list of `key:value` pairs. |

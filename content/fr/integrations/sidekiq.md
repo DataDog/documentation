@@ -9,7 +9,6 @@ assets:
   service_checks: assets/service_checks.json
 categories:
   - Collecte de logs
-  - dogstatsd
 creates_events: false
 ddtype: check
 dependencies:

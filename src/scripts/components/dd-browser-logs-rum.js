@@ -28,7 +28,10 @@ datadogLogs.init({
 if (env === 'preview' || env === 'live') {
     datadogRum.init({
         applicationId: ddApplicationId,
-        clientToken: ddClientToken
+        clientToken: ddClientToken,
+        env,
+        service: 'docs',
+        version: CI_COMMIT_SHORT_SHA
     });
 }
 

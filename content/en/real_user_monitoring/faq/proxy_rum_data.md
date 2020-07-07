@@ -17,12 +17,12 @@ When you set the `proxyHost` [initialization parameter][1], all RUM data is sent
 {{% tab "NPM" %}}
 
 ```javascript
-import { datadogRum } from '@datadog/browser-rum';
+import { Datacenter, datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
-    datacenter: 'us',
+    datacenter: Datacenter.US,
     proxyHost: '<YOUR_PROXY_URL>',
 });
 ```

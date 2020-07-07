@@ -291,11 +291,16 @@ main:
     identifier: cluster_agent_build
     parent: agent_cluster
     weight: 408
+  - name: Cluster Checks Runner
+    url: agent/cluster_agent/clusterchecksrunner
+    identifier: cluster_agent_clcr
+    parent: agent_cluster
+    weight: 409
   - name: Troubleshooting
     url: agent/cluster_agent/troubleshooting/
     identifier: cluster_agent_troubleshooting
     parent: agent_cluster
-    weight: 409
+    weight: 410
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
@@ -1262,7 +1267,7 @@ main:
     url: /synthetics/ci/
     parent: synthetics
     identifier: synthetics_ci
-    weight: 4  
+    weight: 4
   - name: APM Integration
     url: synthetics/apm/
     parent: synthetics
@@ -1275,7 +1280,7 @@ main:
   - name: Metrics
     url: synthetics/metrics/
     parent: synthetics
-    weight: 7  
+    weight: 7
   - name: Settings
     url: synthetics/settings/
     parent: synthetics
@@ -2377,6 +2382,10 @@ api_v1:
     parent: Usage Metering
     url: get-hourly-usage-for-lambda
     generated: true
+  - name: Get monthly billable summary
+    parent: Usage Metering
+    url: get-monthly-billable-summary
+    generated: true
   - name: Get hourly usage for Fargate
     parent: Usage Metering
     url: get-hourly-usage-for-fargate
@@ -2580,6 +2589,14 @@ api_v2:
   - name: Logs
     url: /api/v2/logs/
     identifier: Logs
+    generated: true
+  - name: Get a quick list of logs
+    parent: Logs
+    url: get-a-quick-list-of-logs
+    generated: true
+  - name: Get a list of logs
+    parent: Logs
+    url: get-a-list-of-logs
     generated: true
   - name: Logs Archives
     url: /api/v2/logs-archives/

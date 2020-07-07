@@ -1148,6 +1148,21 @@ components:
           format: int32
           maximum: 2147483647
           type: integer
+        rrule:
+          description: 'The `RRULE` standard for defining recurring events. For example,
+            to have a recurring event on the first day of each month,
+
+            select a type of `rrule` and set the `FREQ` to `MONTHLY` and `BYMONTHDAY`
+            to `1`.
+
+            Most common `rrule` options from the [iCalendar Spec](https://tools.ietf.org/html/rfc5545)
+            are supported.
+
+
+            **Note**: Attributes specifying the duration in `RRULE` are not supported
+            (for example, `DTSTART`, `DTEND`, `DURATION`).'
+          example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
+          type: string
         type:
           description: The type of recurrence. Choose from `days`, `weeks`, `months`,
             `years`.
@@ -5472,11 +5487,13 @@ components:
       properties:
         host:
           description: The name of the host that produced the metric.
+          example: test.example.com
           type: string
         interval:
           default: null
           description: If the type of the metric is rate or count, define the corresponding
             interval.
+          example: 20
           format: int64
           nullable: true
           type: integer
@@ -5487,12 +5504,16 @@ components:
         points:
           description: Points relating to a metric. All points must be tuples with
             timestamp and a scalar value (cannot be a string).
-          example: []
+          example:
+          - - 1575317847
+            - 0.5
           items:
             $ref: '#/components/schemas/Point'
           type: array
         tags:
           description: A list of tags associated with the metric.
+          example:
+          - environment:test
           items:
             description: Individual tags.
             type: string
@@ -5500,6 +5521,7 @@ components:
         type:
           default: gauge
           description: The type of the metric.
+          example: rate
           type: string
       required:
       - metric
@@ -5524,6 +5546,8 @@ components:
           $ref: '#/components/schemas/ServiceCheckStatus'
         tags:
           description: Tags related to a check.
+          example:
+          - environment:test
           items:
             description: Items related to a check.
             type: string
@@ -5535,6 +5559,8 @@ components:
       required:
       - check
       - status
+      - tags
+      - host_name
       type: object
     ServiceCheckStatus:
       description: The status of a service check.
@@ -7510,6 +7536,117 @@ components:
           description: Get hourly usage for analyzed logs.
           items:
             $ref: '#/components/schemas/UsageAnalyzedLogsHour'
+          type: array
+      type: object
+    UsageBillableSummaryBody:
+      description: Response with properties for each aggregated usage type.
+      properties:
+        account_billable_usage:
+          description: The total account usage.
+          format: int64
+          type: integer
+        elapsed_usage_hours:
+          description: Elapsed usage hours for some billable product.
+          format: int64
+          type: integer
+        first_billable_usage_hour:
+          description: The first billable hour for the org.
+          format: date-time
+          type: string
+        last_billable_usage_hour:
+          description: The last billable hour for the org.
+          format: date-time
+          type: string
+        org_billable_usage:
+          description: The number of units used within the billable timeframe.
+          format: int64
+          type: integer
+        percentage_in_account:
+          description: The percentage of account usage the org represents.
+          format: double
+          type: number
+        usage_unit:
+          description: Units pertaining to the usage.
+          type: string
+      type: object
+    UsageBillableSummaryHour:
+      description: Response with monthly summary of data billed by Datadog.
+      properties:
+        billing_plan:
+          description: The billing plan.
+          type: string
+        end_date:
+          description: Shows the last date of usage.
+          format: date-time
+          type: string
+        num_orgs:
+          description: The number of organizations.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        ratio_in_month:
+          description: Shows usage aggregation for a billing period.
+          format: int64
+          type: integer
+        start_date:
+          description: Shows the first date of usage.
+          format: date-time
+          type: string
+        usage:
+          $ref: '#/components/schemas/UsageBillableSummaryKeys'
+      type: object
+    UsageBillableSummaryKeys:
+      description: Response with aggregated usage types.
+      properties:
+        apm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_trace_search_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        iot_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        lambda_function_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_ingested_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        npm_flow_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        npm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        rum_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        siem_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_api_tests_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_browser_checks_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        timeseries_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+      type: object
+    UsageBillableSummaryResponse:
+      description: Response with monthly summary of data billed by Datadog.
+      properties:
+        usage:
+          description: An array of objects regarding usage of billable summary.
+          items:
+            $ref: '#/components/schemas/UsageBillableSummaryHour'
           type: array
       type: object
     UsageFargateHour:
@@ -9602,7 +9739,12 @@ paths:
       x-codegen-request-body-name: body
   /api/v1/dashboard:
     get:
-      description: Get all dashboards.
+      description: 'Get all dashboards.
+
+
+        **Note**: This query will only return custom created or cloned dashboards.
+
+        This query will not return preset dashboards.'
       operationId: ListDashboards
       responses:
         '200':
@@ -11483,7 +11625,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/GCPAccount'
-        description: Create a Datadog-Azure integration.
+        description: Create a Datadog-GCP integration.
         required: true
       responses:
         '200':
@@ -12730,8 +12872,7 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: The time (in seconds) to delay the monitor evaluation compared
-          to the latest data timestamp received.
+      - description: Monitor ID offset.
         in: query
         name: id_offset
         required: false
@@ -15155,6 +15296,41 @@ paths:
       summary: Get hourly usage for Lambda
       tags:
       - Usage Metering
+  /api/v1/usage/billable-summary:
+    get:
+      description: Get the monthly billable summary.
+      operationId: GetUsageBillableSummary
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage starting this month.'
+        in: query
+        name: month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageBillableSummaryResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get monthly billable summary
+      tags:
+      - Usage Metering
   /api/v1/usage/fargate:
     get:
       description: Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
@@ -16319,9 +16495,10 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/azure
   name: Azure Integration
-- description: Interact with your dashboard lists through the API to make it easier
-    to organize, find, and share all of your dashboards with your team and organization.
+- description: This endpoint is deprecated. Use the [new dashboard list endpoint](https://docs.datadoghq.com/api/v2/dashboard-lists/)
+    instead.
   name: Dashboard Lists
+  x-deprecated: true
 - description: 'Interact with your dashboard lists through the API to make it easier
     to organize,
 
