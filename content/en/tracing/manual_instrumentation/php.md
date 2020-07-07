@@ -200,7 +200,7 @@ Add tags to a span via the `DDTrace\SpanData::$meta` array.
 {{% /tab %}}
 {{% tab "Globally" %}}
 
-Set the `DD_TAGS` environment variable to automatically apply tags to every span that is created. This was named `DD_TRACE_GLOBAL_TAGS` before version **0.47.0**; see [environment variable configuration][1].
+Set the `DD_TAGS` environment variable (version 0.47.0+) to automatically apply tags to every span that is created. This was previously `DD_TRACE_GLOBAL_TAGS`. For more information about configuring the older version, see [environment variable configuration][1].
 
 ```
 DD_TAGS=key1:value1,<TAG_KEY>:<TAG_VALUE>
@@ -510,7 +510,7 @@ use DDTrace\SpanData;
 );
 ```
 
-## Digging deeper
+## Advanced Configurations
 
 ### Tracing internal functions and methods
 
@@ -555,7 +555,7 @@ Done.
 */
 ```
 
-Whereas this is handy behavior in production, it can make it a bit tricky to debug when things go wrong. Set the environment variable `DD_TRACE_DEBUG=1` to expose any exceptions or errors that may have occurred in a tracing closure.
+To debug, set the environment variable `DD_TRACE_DEBUG=1` to expose any exceptions or errors that may have occurred in a tracing closure.
 
 ```php
 /*
@@ -585,7 +585,7 @@ While this [has been deprecated][10] if you are using PHP 7.x, you still may use
 
 ## Legacy API upgrade guide
 
-Custom instrumentations implemented using the legacy `dd_trace()` API should be updated soon to work with future releases of ddtrace.
+Datadog recommends that you update custom instrumentations implemented using the legacy `dd_trace()` API.
 
 There is an important paradigm distinction to understand between the legacy API and the "sandbox" API. The legacy API forwards the instrumented call from inside the tracing closure using `dd_trace_forward_call()`.
 
