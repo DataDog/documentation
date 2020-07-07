@@ -55,8 +55,8 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiling.               |
-| `DD_SERVICE`                                     | String        | Your [service][2] name, for example `web-backend`.     |
-| `DD_ENV`                                         | String        | Your [environment][4] name, for example `production`.|
+| `DD_SERVICE`                                     | String        | Your [service][2] name, for example, `web-backend`.     |
+| `DD_ENV`                                         | String        | Your [environment][4] name, for example, `production`.|
 | `DD_VERSION`                                     | String        | The version of your service.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
@@ -102,7 +102,7 @@ The Datadog Profiler requires Python 2.7+. Memory profiling is available on Pyth
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
-| `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`. |
+| `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example, `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 
@@ -182,7 +182,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 | Method | Type          | Description                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
 |  WithService     | String        | The Datadog [service][4] name, for example `my-web-app`.             |
-|  WithEnv         | String        | The Datadog [environment][5] name, for example `production`.         |
+|  WithEnv         | String        | The Datadog [environment][5] name, for example, `production`.         |
 |  WithVersion     | String        | The version of your application.                                                                             |  
 |  WithTags        | String        | The tags to apply to an uploaded profile. Must be a list of in the format `<KEY1>:<VALUE1>,<KEY2>:<VALUE2>`. |
 
@@ -191,7 +191,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_SERVICE`                                     | String        | The Datadog [service][4] name.     |
-| `DD_ENV`                                         | String        | The Datadog [environment][5] name, for example `production`. |
+| `DD_ENV`                                         | String        | The Datadog [environment][5] name, for example, `production`. |
 | `DD_VERSION`                                     | String        | The version of your application.                             |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 
@@ -209,7 +209,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 If you've configured the profiler and don't see profiles in the [profile search page](#search-profiles), please turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
 
 - OS type and version (e.g Linux Ubuntu 14.04.3)
-- Runtime type, version and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
+- Runtime type, version, and vendor (e.g Java OpenJDK 11 AdoptOpenJDK)
 
 If you've configured the profiler and don't see profiles in the [profile search page](#search-profiles), please turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
 
