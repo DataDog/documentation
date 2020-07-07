@@ -1,5 +1,5 @@
 ---
-title: Migrate your Profiling Setup
+title: Migrate your Profiling Setup for GA
 kind: faq
 ---
 
