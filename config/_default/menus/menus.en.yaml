@@ -918,138 +918,93 @@ main:
   - name: Getting Started
     url: tracing/profiling/getting_started
     parent: profiling
-    identifier: profiling_getting_started
-    weight: 701
-  - name: Search Profiles
-    url: tracing/profiling/search_profiles
-    parent: profiling
-    identifier: profiling_search_profiles
-    weight: 702
-  - name: Manual Instrumentation
-    url: tracing/manual_instrumentation/
+    identifier: profiling_proxy
+    weight: 801
+  - name: Custom Instrumentation
+    url: tracing/custom_instrumentation/
     parent: tracing
-    identifier: tracing_manual_instrumentation
+    identifier: tracing_custom_instrumentation
     weight: 9
   - name: Java
-    url: tracing/manual_instrumentation/java
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_java
+    url: tracing/custom_instrumentation/java
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_java
     weight: 901
   - name: Python
-    url: tracing/manual_instrumentation/python
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_python
+    url: tracing/custom_instrumentation/python
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_python
     weight: 902
   - name: Ruby
-    url: tracing/manual_instrumentation/ruby
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_ruby
+    url: tracing/custom_instrumentation/ruby
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_ruby
     weight: 903
   - name: Go
-    url: tracing/manual_instrumentation/go
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_go
+    url: tracing/custom_instrumentation/go
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_go
     weight: 904
   - name: NodeJS
-    url: tracing/manual_instrumentation/nodejs
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_nodejs
+    url: tracing/custom_instrumentation/nodejs
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_nodejs
     weight: 905
   - name: PHP
-    url: tracing/manual_instrumentation/php
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_php
+    url: tracing/custom_instrumentation/php
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_php
     weight: 906
   - name: C++
-    url: tracing/manual_instrumentation/cpp
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_cpp
+    url: tracing/custom_instrumentation/cpp
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_cpp
     weight: 907
   - name: .NET
-    url: tracing/manual_instrumentation/dotnet
-    parent: tracing_manual_instrumentation
-    identifier: tracing_manual_instrumentation_dotnet
+    url: tracing/custom_instrumentation/dotnet
+    parent: tracing_custom_instrumentation
+    identifier: tracing_custom_instrumentation_dotnet
     weight: 908
-  - name: OpenTracing
-    url: tracing/opentracing/
-    parent: tracing
-    identifier: tracing_opentracing
-    weight: 10
-  - name: Java
-    url: tracing/manual_instrumentation/java
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_java
-    weight: 1001
-  - name: Python
-    url: tracing/opentracing/python
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_python
-    weight: 1002
-  - name: Go
-    url: tracing/opentracing/go
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_go
-    weight: 1003
-  - name: PHP
-    url: tracing/opentracing/php
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_php
-    weight: 1004
-  - name: Ruby
-    url: tracing/opentracing/ruby
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_ruby
-    weight: 1005
-  - name: .NET
-    url: tracing/manual_instrumentation/dotnet
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_dotnet
-    weight: 1006
-  - name: NodeJS
-    url: tracing/opentracing/nodejs
-    parent: tracing_opentracing
-    identifier: tracing_opentracing_nodejs
-    weight: 1007
   - name: APM Glossary
     url: tracing/visualization/
     parent: tracing
     identifier: tracing_vis
-    weight: 11
+    weight: 10
   - name: Services List
     url: tracing/visualization/services_list/
     parent: tracing_vis
-    weight: 1101
+    weight: 1001
   - name: Service Page
     url: tracing/visualization/service/
     parent: tracing_vis
-    weight: 1102
+    weight: 1002
   - name: Resource Page
     url: tracing/visualization/resource/
     parent: tracing_vis
-    weight: 1103
+    weight: 1003
   - name: Trace View
     url: tracing/visualization/trace/
     parent: tracing_vis
-    weight: 1104
+    weight: 1004
   - name: Service Map
     url: tracing/visualization/services_map/
     parent: tracing_vis
-    weight: 1105
+    weight: 1005
   - name: Guides
     url: tracing/guide/
     identifier: tracing_guides
     parent: tracing
-    weight: 12
+    weight: 11
   - name: Troubleshooting
     url: tracing/troubleshooting/
     identifier: tracing_troubleshooting
     parent: tracing
-    weight: 13
+    weight: 12
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 14
+    weight: 13
   - name: Log Management
     url: logs/
     pre: nav_logs

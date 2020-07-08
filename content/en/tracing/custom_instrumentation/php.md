@@ -2,8 +2,9 @@
 title: PHP Custom Instrumentation
 kind: documentation
 aliases:
+    - /tracing/manual_instrumentation/php
     - /tracing/opentracing/php
-decription: 'Manually instrument your PHP application to send custom traces to Datadog.'
+description: 'Manually instrument your PHP application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       tag: 'Guide'

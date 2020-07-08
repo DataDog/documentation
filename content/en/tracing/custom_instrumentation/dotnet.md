@@ -3,7 +3,8 @@ title: .NET Custom Instrumentation
 kind: documentation
 aliases:
     - /tracing/opentracing/dotnet
-decription: 'Manually instrument your .NET application to send custom traces to Datadog.'
+    - /tracing/manual_instrumentation/dotnet
+description: 'Manually instrument your .NET application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       tag: 'Guide'

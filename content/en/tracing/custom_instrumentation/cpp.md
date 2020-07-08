@@ -1,7 +1,9 @@
 ---
 title: C++ Custom Instrumentation
 kind: documentation
-decription: 'Manually instrument your C++ application to send custom traces to Datadog.'
+aliases:
+    - /tracing/manual_instrumentation/cpp
+description: 'Manually instrument your C++ application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
       tag: 'Documentation'

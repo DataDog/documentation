@@ -3,6 +3,7 @@ title: Python Custom Instrumentation
 kind: documentation
 aliases:
     - /tracing/opentracing/python
+    - /tracing/manual_instrumentation/python
 decription: 'Manually instrument your Python application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/connect_logs_and_traces'

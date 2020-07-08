@@ -3,6 +3,7 @@ title: Ruby Custom Instrumentation
 kind: documentation
 aliases:
     - /tracing/opentracing/ruby
+    - /tracing/manual_instrumentation/ruby
 description: 'Manually instrument your Ruby application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/connect_logs_and_traces'
