@@ -27,7 +27,7 @@ With these three tags you can:
 
 - Unified service tagging requires setup of the [Datadog Agent][2].
 
-- Unified service tagging requires a tracer version that supports the [reserved tags][1]. More information can be found per language in the [setup insructions][3].
+- Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][3].
 
 - Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][4] and [Assigning Tags][5] documentation before proceeding to configuration.
 
