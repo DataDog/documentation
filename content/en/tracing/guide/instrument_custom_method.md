@@ -269,9 +269,9 @@ public void Write(List<Transaction> transactions)
 
 In PHP, Datadog APM allows you to instrument your code to generate custom spans—either by using method wrappers, or by instrumenting specific code blocks.
 
-**Instument a method with a wrapper**:
+**Instrument a method with a wrapper**:
 
-This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit by using the `dd_trace()` function.
+This example adds a span to the `BackupLedger.write` method, which adds new rows to a transaction ledger. One span is added to track all posted transactions as a single unit by using the `DDTrace\trace_method()` function.
 
 ```php
 <?php
@@ -286,13 +286,13 @@ This example adds a span to the `BackupLedger.write` method, which adds new rows
     }
   }
 
-  // Use dd_trace() to trace custom methods
-  dd_trace('BackupLedger', 'write', function () {
-    $tracer = \DDTrace\GlobalTracer::get();
-    $scope = $tracer->startActiveSpan('BackupLedger.write');
-    dd_trace_forward_call();
-    $scope->close();
-    return $result;
+  // For ddtrace < v0.47.0 use \dd_trace_method()
+  \DDTrace\trace_method('BackupLedger', 'write', function (\DDTrace\SpanData $span) {
+    // SpanData::$name defaults to 'ClassName.methodName' if not set (>= v0.47.0)
+    $span->name = 'BackupLedger.write';
+    // SpanData::$resource defaults to SpanData::$name if not set (>= v0.47.0)
+    $span->resource = 'BackupLedger.write';
+    $span->service = 'php';
   });
 ?>
 ```
@@ -322,13 +322,13 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
     }
   }
 
-  // Use dd_trace() to trace custom methods
-  dd_trace('BackupLedger', 'write', function () {
-    $tracer = \DDTrace\GlobalTracer::get();
-    $scope = $tracer->startActiveSpan('BackupLedger.write');
-    dd_trace_forward_call();
-    $scope->close();
-    return $result;
+  // For ddtrace < v0.47.0 use \dd_trace_method()
+  \DDTrace\trace_method('BackupLedger', 'write', function (\DDTrace\SpanData $span) {
+    // SpanData::$name defaults to 'ClassName.methodName' if not set (>= v0.47.0)
+    $span->name = 'BackupLedger.write';
+    // SpanData::$resource defaults to SpanData::$name if not set (>= v0.47.0)
+    $span->resource = 'BackupLedger.write';
+    $span->service = 'php';
   });
 ?>
 ```
