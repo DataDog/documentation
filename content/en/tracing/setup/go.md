@@ -58,7 +58,7 @@ The Go tracer supports additional environment variables and functions for config
 See all available options in the [configuration documentation][11].
 
 We highly recommend using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
-Check out the [Unified Service Tagging][12] documentation for recommendations on how to configure these environment variables. These variables are available for version 1.24.0+ of the Go tracer.
+Check out the [Unified Service Tagging][12] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
 
 You may also elect to provide `env`, `service`, and `version` through the tracer's API:
 
