@@ -49,14 +49,6 @@ Some MFA providers might detect our Browser tests as bots and prevent them from 
 If your MFA process involves steps performed outside of the browser, such as voice, text message, or opening a mobile application, consider reaching out to your MFA provider to ask if your MFA settings could be modified or if MFA could be turned off for a specific set of credentials for testing purposes.
 Depending on the type of MFA leveraged by your application, [JavaScript steps][3] could help to work around that.
 
-## Record browser tests in incognito mode
-
-To record your steps without logging out of your application, use the recorder's incognito mode.
-
-{{< img src="synthetics/guide/app_that_requires_login/incognito.mp4" video="true" alt="Demo of recording a login in incognito">}}
-
-Opening a pop up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop up ignores all your previous browser history: cookies, local data, etc. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
-
 ## Account security
 
 ### Secure your authentication data
