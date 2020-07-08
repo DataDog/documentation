@@ -55,6 +55,8 @@ DATADOG TRACER DIAGNOSTICS - Error fetching configuration {exception}
 
 #### Diagnostics
 
+The Diagnostics for the PHP tracer will print if the tracer is in DEBUG mode. They will be available through the other options below.
+
 ```text
 [2020-07-01T17:35:25Z] DATADOG TRACER DIAGNOSTICS - agent_error: Couldn't connect to server
 [2020-07-01T17:35:25Z] DATADOG TRACER DIAGNOSTICS - ddtrace.request_init_hook_reachable: false
