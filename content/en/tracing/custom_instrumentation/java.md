@@ -335,7 +335,7 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 
 <br>
 
-## Open Tracing
+## OpenTracing
 
 Datadog integrates seamlessly with the [OpenTracing API][10].
 

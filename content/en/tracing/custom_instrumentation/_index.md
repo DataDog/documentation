@@ -9,7 +9,7 @@ aliases:
     - /tracing/advanced/manual_instrumentation/
     - /tracing/advanced/opentracing/
     - /tracing/opentracing/
-    - /tracing/manual-instrumentation/
+    - /tracing/manual_instrumentation/
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'

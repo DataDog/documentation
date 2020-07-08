@@ -325,7 +325,7 @@ This can be useful for excluding any Health Checks or otherwise simulated traffi
 ```
 
 
-## Open Tracing
+## OpenTracing
 
 To set up Datadog with OpenTracing, see the Ruby [Quickstart for OpenTracing][7] for details.
 
