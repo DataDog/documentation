@@ -100,8 +100,11 @@ The JSON string can also be accessed at runtime from `\DDTrace\startup_logs()`.
 echo \DDTrace\startup_logs() . PHP_EOL;
 ```
 {{% /tab %}}
+
 {{% tab "Go" %}}
+
 {{% /tab %}}
+
 {{% tab "NodeJS" %}}
 
 ```text
@@ -119,6 +122,19 @@ DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent
 {{% tab "Python" %}}
 {{% /tab %}}
 {{% tab "Ruby" %}}
+
+#### Configuration
+
+```text
+W, [2020-07-08T21:14:25.281615 #137]  WARN -- ddtrace: [ddtrace] DATADOG TRACER CONFIGURATION - {"date":"2020-07-08T21:14:25+00:00","os_name":"x86_64-pc-linux-gnu","version":"0.37.0","lang":"ruby","lang_version":"2.7.0","enabled":true,"agent_url":"http://ddagent:8126?timeout=1","debug":false,"analytics_enabled":false,"runtime_metrics_enabled":false,"vm":"ruby-2.7.0","partial_flushing_enabled":false,"priority_sampling_enabled":false,"health_metrics_enabled":false}
+```
+
+#### Diagnostics
+
+```text
+W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG TRACER DIAGNOSTIC - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to ddagent:9127 (Connection refused - connect(2) for "ddagent" port 9127)
+```
+
 {{% /tab %}}
 {{% tab "C++" %}}
 {{% /tab %}}
