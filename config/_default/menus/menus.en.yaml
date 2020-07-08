@@ -1044,7 +1044,12 @@ main:
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 14
+    weight: 1301
+  - name: Tracer Startup Logs
+    url: tracing/troubleshooting/tracer_startup_logs
+    identifier: tracing_troubleshooting_startup_logs
+    parent: tracing_troubleshooting
+    weight: 1302
   - name: Log Management
     url: logs/
     pre: nav_logs
