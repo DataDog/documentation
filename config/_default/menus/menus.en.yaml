@@ -1040,16 +1040,21 @@ main:
     identifier: tracing_troubleshooting
     parent: tracing
     weight: 13
-  - name: Agent APM metrics
-    url: tracing/troubleshooting/agent_apm_metrics
-    identifier: tracing_troubleshooting_apm_metrics
-    parent: tracing_troubleshooting
-    weight: 1301
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
+    weight: 1301
+  - name: Tracer Debug Logs
+    url: tracing/troubleshooting/tracer_debug_logs
+    identifier: tracing_troubleshooting_debug_logs
+    parent: tracing_troubleshooting
     weight: 1302
+  - name: Agent APM metrics
+    url: tracing/troubleshooting/agent_apm_metrics
+    identifier: tracing_troubleshooting_apm_metrics
+    parent: tracing_troubleshooting
+    weight: 1303
   - name: Log Management
     url: logs/
     pre: nav_logs
