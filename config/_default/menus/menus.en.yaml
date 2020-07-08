@@ -909,14 +909,14 @@ main:
     url: tracing/runtime_metrics/nodejs
     parent: tracing_runtime_metrics
     identifier: tracing_runtime_metrics_nodejs
-    weight: 704
-  - name: Profiling
+    weight: 604
+  - name: Continuous Profiling
     url: tracing/profiling/
     parent: tracing
     identifier: profiling
-    weight: 8
-  - name: Proxy
-    url: tracing/profiling/proxy
+    weight: 7
+  - name: Getting Started
+    url: tracing/profiling/getting_started
     parent: profiling
     identifier: profiling_proxy
     weight: 801

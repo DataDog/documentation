@@ -440,11 +440,11 @@ rule %{data::xml}
 {
   "book": {
     "year": "2005",
-    "author": "Giada De Laurentiis",
-    "category": "COOKING",
+    "author": "J K. Rowling",
+    "category": "CHILDREN",
     "title": {
       "lang": "en",
-      "value": "Everyday Italian"
+      "value": "Harry Potter"
     }
   }
 }
@@ -452,7 +452,7 @@ rule %{data::xml}
 
 **Notes**:
 
-* If the XML contains tags that have both an attribute and a sting value between the two tags, a `value` attribute is generated. For example: `<title lang="en">Everyday Italian</title>` is converted to `{"title": {"lang": "en", "value": "Everyday Italian" } }`
+* If the XML contains tags that have both an attribute and a sting value between the two tags, a `value` attribute is generated. For example: `<title lang="en">Harry Potter</title>` is converted to `{"title": {"lang": "en", "value": "Harry Potter" } }`
 * Repeated tags are automatically converted to arrays. For example: `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` is converted to `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
 
 ## Further Reading
