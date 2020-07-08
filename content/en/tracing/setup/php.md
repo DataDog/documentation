@@ -238,7 +238,7 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_ENV`                                  | `null`      | Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.                                         |
 | `DD_INTEGRATIONS_DISABLED`                | `null`      | A CSV list of integrations to disable, for example: `curl,mysqli` (see [Integration names](#integration-names)).                               |
 | `DD_PRIORITY_SAMPLING`                    | `true`      | Whether to enable priority sampling                                                                                                            |
-| `DD_SERVICE`                              | `null`      | The default app name                                                                                                                           |
+| `DD_SERVICE`                              | `null`      | The default app name. For versions <0.47.0 this is `DD_SERVICE_NAME`.                                                                          |
 | `DD_SERVICE_MAPPING`                      | `null`      | Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)). |
 | `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`  | `5000`      | IPC-based configurable circuit breaker retry time (in milliseconds)                                                                            |
 | `DD_TRACE_AGENT_CONNECT_TIMEOUT`          | `100`       | Maximum time the allowed for Agent connection setup (in milliseconds)                                                                          |
