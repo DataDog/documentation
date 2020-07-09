@@ -184,29 +184,29 @@ docker-compose -f docker-compose.yml up
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-        name: datadog-private-location-worker
-        namespace: default
+      name: datadog-private-location-worker
+      namespace: default
     spec:
-        selector:
-            matchLabels:
-                app: private-location
-        template:
-            metadata:
-                name: datadog-private-location-worker
-                labels:
-                    app: private-location
+      selector:
+        matchLabels:
+          app: private-location
+      template:
+        metadata:
+          name: datadog-private-location-worker
+          labels:
+            app: private-location
         spec:
-            containers:
-                - name: datadog-private-location-worker
-                  image: datadog/synthetics-private-location-worker
-                  volumeMounts:
-                      - mountPath: /etc/datadog/synthetics-check-runner.json
-                        name: worker-config
-                        subPath: synthetics-check-runner.json
-            volumes:
-                - name: worker-config
-                  configMap:
-                      name: private-location-worker-config
+          containers:
+          - name: datadog-private-location-worker
+            image: datadog/synthetics-private-location-worker
+            volumeMounts:
+            - mountPath: /etc/datadog/synthetics-check-runner.json
+              name: worker-config
+              subPath: <MY_WORKER_CONFIG_FILE_NAME>
+          volumes:
+          - name: worker-config
+            configMap:
+              name: private-location-worker-config
     ```
 
     **Note:** If you blocked reserved IPs, make sure to add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
@@ -346,6 +346,99 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
     ```
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+#### Set up healthchecks
+
+You can add a healthcheck mechanism to have your orchestrator ensure your workers are always running correctly.
+
+The `/tmp/liveness.date` file of private location containers gets updated after every successful poll from Datadog (every 500ms by default). The container can be considered unhealthy if no poll has been performed in a while (e.g., no fetch in the last minute).
+
+Use the below configuration to set up healthchecks on your containers with:
+
+{{< tabs >}}
+
+{{% tab "Docker Compose" %}}
+
+```yaml
+healthcheck:
+  retries: 3
+  test: [
+    "CMD", "/bin/sh", "-c", "'[ $$(expr $$(cat /tmp/liveness.date) + 300000) -gt $$(date +%s%3N) ]'"
+  ]
+  timeout: 2s
+  interval: 10s
+  start_period: 30s
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+
+```yaml
+livenessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
+
+```json
+"healthCheck": {
+  "retries": 3,
+  "command": [
+    "/bin/sh", "-c", "'[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
+  ],
+  "timeout": 2,
+  "interval": 10,
+  "startPeriod": 30
+}
+```
+
+{{% /tab %}}
+
+{{% tab "Fargate" %}}
+
+```json
+"healthCheck": {
+  "retries": 3,
+  "command": [
+    "/bin/sh", "-c", "'[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'"
+  ],
+  "timeout": 2,
+  "interval": 10,
+  "startPeriod": 30
+}
+```
+
+{{% /tab %}}
+
+{{% tab "EKS" %}}
+
+```yaml
+livenessProbe:
+  exec:
+    command:
+      - /bin/sh
+      - -c
+      - '[ $(expr $(cat /tmp/liveness.date) + 300000) -gt $(date +%s%3N) ]'
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 3
+```
 
 {{% /tab %}}
 
