@@ -914,12 +914,17 @@ main:
     url: tracing/profiling/
     parent: tracing
     identifier: profiling
-    weight: 7
+    weight: 8
   - name: Getting Started
     url: tracing/profiling/getting_started
     parent: profiling
-    identifier: profiling_proxy
+    identifier: profiling_getting_started
     weight: 801
+  - name: Search Profiles
+    url: tracing/profiling/search_profiles
+    parent: profiling
+    identifier: profiling_search_profiles
+    weight: 802
   - name: Custom Instrumentation
     url: tracing/custom_instrumentation/
     parent: tracing
