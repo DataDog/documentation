@@ -154,7 +154,7 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [2]: https://docs.datadoghq.com/tracing/setup/
 [3]: https://www.datadoghq.com
 [4]: https://app.vagrantup.com/ubuntu/boxes/xenial64
-[5]: https://www.vagrantup.com/intro/getting-started/index.html
+[5]: https://www.vagrantup.com/intro/getting-started
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [7]: https://app.datadoghq.com/account/settings#api
 [8]: /agent/guide/agent-commands/#agent-information
