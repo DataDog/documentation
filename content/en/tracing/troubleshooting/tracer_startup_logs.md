@@ -21,7 +21,7 @@ If you see any `DIAGNOSTICS` log lines, please confirm from the indicated log th
 
 #### Diagnostics
 
-
+The Java tracer does not currently output any Diagnostics logs.  For this check, please run the tracer in [debug mode][7].
 
 {{% /tab %}}
 {{% tab ".NET" %}}
@@ -123,6 +123,23 @@ echo \DDTrace\startup_logs() . PHP_EOL;
 {{% /tab %}}
 
 {{% tab "Go" %}}
+
+#### Configuration
+
+```text
+2020/07/09 15:57:07 Datadog Tracer v1.26.0 INFO: DATADOG TRACER CONFIGURATION {"date":"2020-07-09T15:57:07-05:00","os_name":"darwin","os_version":"10.15.4","version":"v1.26.0","lang":"Go","lang_version":"go1.14.2","env":"","service":"splittest2","agent_url":"http://127.0.0.1:8126/v0.4/traces","agent_error":"","debug":true,"analytics_enabled":false,"sample_rate":"NaN","sampling_rules":null,"sampling_rules_error":"","tags":{"runtime-id":"d269781c-b1bf-4d7b-9a55-a8174930554f"},"runtime_metrics_enabled":false,"health_metrics_enabled":false,"dd_version":"","architecture":"amd64","global_service":""}
+```
+
+#### Diagnostics
+
+The NodeJS Tracer has two possible diagnostic lines it may print, one in the case the agent cannot be reached, and the other in the case of trace sampling errors.
+
+```text
+2020/07/09 15:57:07 Datadog Tracer v1.26.0 WARN: DIAGNOSTICS Unable to reach agent: [Reason for error]
+2020/07/09 15:57:07 Datadog Tracer v1.26.0 WARN: DIAGNOSTICS Error(s) parsing DD_TRACE_SAMPLING_RULES:
+    at index 1 ...
+    at index 4 ....
+```
 
 {{% /tab %}}
 
