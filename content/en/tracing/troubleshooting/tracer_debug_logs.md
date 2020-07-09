@@ -1,3 +1,7 @@
+---
+title: Tracer Debug Logs
+kind: Documentation
+---
 ## Tracer debug mode
 
 Datadog debug settings are used to diagnose issues or audit trace data. Enabling debug mode in production systems is not recommended, as it increases the number of events that are sent to your loggers. Use it sparingly, for debugging purposes only.
