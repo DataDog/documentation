@@ -210,7 +210,7 @@ The Datadog Profiler requires Go 1.12+. To begin profiling applications:
 
 The Datadog Profiler requires Node 10.5+. To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][1] or [6.20.2][1].  
+1. If you are already using Datadog, upgrade your Agent to version [7.20.2][1] or [6.20.2][1].  
 
 2. Install `ddtrace` which contains both tracing and profiling:
 
