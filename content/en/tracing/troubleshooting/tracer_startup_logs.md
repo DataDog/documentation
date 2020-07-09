@@ -22,8 +22,17 @@ If you see any `DIAGNOSTICS` log lines, please confirm from the indicated log th
 #### Diagnostics
 
 
+
 {{% /tab %}}
 {{% tab ".NET" %}}
+
+#### File Location
+
+Log files will be located within `%PROGRAMDATA%\Datadog .NET Tracer\logs`.
+
+- `dotnet-tracer-{processName}-{timestamp}.log` contains the Configuration log.
+
+- `dotnet-profiler.log` contains the Diagnostics logs, if any are generated.
 
 #### Configuration
 
@@ -117,6 +126,8 @@ echo \DDTrace\startup_logs() . PHP_EOL;
 
 {{% tab "NodeJS" %}}
 
+#### Configuration
+
 ```text
 [2020-07-02 14:51:16.421] [INFO] app - host:port==localhost:9080
 [2020-07-02 14:51:16.423] [INFO] app - db type==mongo
@@ -125,6 +136,13 @@ echo \DDTrace\startup_logs() . PHP_EOL;
 [2020-07-02 14:51:16.600] [INFO] app - Initialized database connections
 [2020-07-02 14:51:16.601] [INFO] app - Express server listening on port 9080
 DATADOG TRACER CONFIGURATION - {"date":"2020-07-02T18:51:18.294Z","os_name":"Darwin","os_version":"19.2.0","architecture":"x64","version":"0.22.0","lang":"nodejs","lang_version":"12.18.1","enabled":true,"service":"acmeair","agent_url":"http://localhost:8126","agent_error":"Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126","debug":false,"analytics_enabled":false,"sample_rate":1,"sampling_rules":[],"tags":{"service":"acmeair","version":"0.0.4"},"dd_version":"0.0.4","log_injection_enabled":false,"runtime_metrics_enabled":false,"integrations_loaded":["http","fs","net","dns","express@4.17.1"]}
+```
+
+#### Diagnostics
+
+The NodeJS Tracer has one diagnostic line it may print, in the case the agent cannot be reached.
+
+```text
 DATADOG TRACER DIAGNOSTIC - Agent Error: Network error trying to reach the agent: connect ECONNREFUSED 127.0.0.1:8126
 ```
 
@@ -140,6 +158,8 @@ W, [2020-07-08T21:14:25.281615 #137]  WARN -- ddtrace: [ddtrace] DATADOG TRACER 
 ```
 
 #### Diagnostics
+
+The Ruby Tracer has one diagnostic line it may print, in the case the agent cannot be reached.
 
 ```text
 W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG TRACER DIAGNOSTIC - Agent Error: Datadog::Transport::InternalErrorResponse ok?: unsupported?:, not_found?:, client_error?:, server_error?:, internal_error?:true, payload:, error_type:Errno::ECONNREFUSED error:Failed to open TCP connection to ddagent:9127 (Connection refused - connect(2) for "ddagent" port 9127)
