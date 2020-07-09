@@ -76,6 +76,10 @@ To increase the APM connection limit for the Agent, configure the `connection_li
 
 When you open a [support ticket][1], our support team may ask for a combination of the below information:
 
+1. How you are confirming the issue (links to a trace, screenshots, etc) and what you expect to see
+
+    This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
+
 1. [Tracer Startup Logs](#tracer-startup-logs)
 
     Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent.  By comparing the configuration that the tracer sees to the one set within the application or container, we can identify any areas where a setting is not being properly applied.
@@ -88,9 +92,9 @@ When you open a [support ticket][1], our support team may ask for a combination 
 
     Agent flares allow us to see what is happening within the Datadog Agent, if any traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, as well as identifying any metric discrepancies.
 
-1. Links to traces within your Datadog account showing the anomalous behavior
+1. A description of your environment
 
-    This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
+    Knowing how your application is deployed helps us identify likely issues for tracer-agent communication problems or misconfigurations.  For difficult issues, we may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
 1. Any automatic or [custom instrumentation][6], along with any configurations
 
