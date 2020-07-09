@@ -30,17 +30,11 @@ All Datadog tracing libraries emit logs during startup by default to reflect the
 | Ruby | 0.38 (once available)  |
 | C++ | 1.1.6 (once available)  |
 
-If your tracer version includes these startup logs, they are a great place to begin troubleshooting, including steps for self-triage.
-
-### Datadog tracer configuration
-
-View the detailed instructions per language on the [tracer startup logs page][2] to find these logs prefixed with `DATADOG TRACER CONFIGURATION`.
-
-If your tracer version is behind the required version and you're having trouble seeing traces or configuring the tracer, consider upgrading to the latest version.
+If your tracer version includes these [startup logs][2], they are the recommended place to begin troubleshooting.
 
 ## Tracer debug logs
 
-In order to capture full details on the Datadog tracer, debug mode can be enabled on your tracer via the environment variable `DATADOG_TRACE_DEBUG=true`.  This may be recommended by Datadog support for triaging issues or for self-triage, but it is not recommended to be always enabled due to logging overhead.
+In order to capture full details on the Datadog tracer, debug mode can be enabled on your tracer via the environment variable `DATADOG_TRACE_DEBUG`.  This may be done for your own investigation or recommended by Datadog support for triage purposes. However, it is not recommended to have debug mode always enabled due to logging overhead.
 
 These logs can surface instrumentation errors or integration-specific errors.  To see further details on how to enable and capture these debug logs, please see the [debug mode troubleshooting page][3].
 
