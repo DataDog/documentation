@@ -170,7 +170,7 @@ If you already have the [Agent running with a manifest][3]:
                             value: /var/run/s6/sysprobe.sock
     ```
 
-If the Process Agent is running as a separate container then the above environmental variables need to be set in that container instead.
+    If the Process Agent is running as a separate container then the above environmental variables need to be set in that container instead.
 
 3. Mount the following extra volumes into the `datadog-agent` container:
 
