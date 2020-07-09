@@ -15,7 +15,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Reach out to the <a href="https://docs.datadoghq.com/help/">Datadog support team</a> to request access to this feature.
+The access to this feature is restricted - if you don't have access, reach out to the <a href="https://docs.datadoghq.com/help/">Datadog support team</a>.
 </div>
 
 ## Overview
