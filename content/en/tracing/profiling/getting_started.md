@@ -39,7 +39,7 @@ The Datadog Profiler requires [Java Flight Recorder][1]. The Datadog Profiling l
     java -javaagent:dd-java-agent.jar -Ddd.profiling.enabled=true -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
     ```
 
-4. After a minute or two, visualize your profiles in the [Datadog APM > Profiling page][3].
+4. After a minute or two, visualize your profiles on the [Datadog APM > Profiling page][3].
 
 
 **Note**:
