@@ -37,7 +37,7 @@ The IoT Agent does not include the Python interpreter and other integrations pre
 
 ### Requirements
 
-The IoT Agent is available on Debian and RPM for both 64-bit x86 and Arm v8 devices.
+The IoT Agent is available on Debian and RPM-based systems for both 64-bit x86 and Arm v8 devices.
 
 #### Resources
 
