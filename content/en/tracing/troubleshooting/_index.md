@@ -42,7 +42,7 @@ If your tracer version is behind the required version and you're having trouble 
 
 In order to capture full details on the Datadog tracer, debug mode can be enabled on your tracer via the environment variable `DATADOG_TRACE_DEBUG=true`.  This may be recommended by Datadog support for triaging issues or for self-triage, but it is not recommended to be always enabled due to logging overhead.
 
-These logs can surface instrumentation errors or integration-specific errors.  To see further details on how to enable and capture these debug logs, please see the [dedicated debug mode troubleshooting page][3].
+These logs can surface instrumentation errors or integration-specific errors.  To see further details on how to enable and capture these debug logs, please see the [debug mode troubleshooting page][3].
 
 ## APM rate limits
 
