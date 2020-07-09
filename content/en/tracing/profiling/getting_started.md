@@ -239,7 +239,7 @@ The Datadog Profiler requires Node 10.5+. To begin profiling applications:
 | `DD_SERVICE`                                     | String        | The Datadog [service][3] name.     |
 | `DD_ENV`                                         | String        | The Datadog [environment][4] name, for example `production`.|
 | `DD_VERSION`                                     | String        | The version of your application.                              |
-| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
+| `DD_TAGS`                                        | String        | The tags to apply to an uploaded profile. This must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://app.datadoghq.com/profiling
