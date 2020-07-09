@@ -21,8 +21,8 @@ All Datadog tracing libraries emit logs during startup by default to reflect the
 
 | Language | Version |
 |----------|---------|
-| Java    |  0.58 (once available)  |
-| .NET | 1.18.1 (once available)  |
+| Java    |  0.59 (once available)  |
+| .NET | 1.18.2+  |
 | PHP | 0.47.0+  |
 | Go | 1.26.0 (once available)  |
 | NodeJS | 0.23.0 (once available)  |
