@@ -4,7 +4,7 @@ kind: Documentation
 ---
 ## Startup Logs
 
-Tracer startup logs will capture all obtainable information at startup and log it either as `DATADOG TRACER CONFIGURATION` or `DATADOG TRACER DIAGNOSTICS`.
+Tracer startup logs will capture all obtainable information at startup and log it either as `DATADOG TRACER CONFIGURATION` or `DATADOG TRACER DIAGNOSTICS` for easy searching within your logs.  Note some languages may log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent.  In those cases, the location of logs will be noted in the respective language tab below.
 
 `DIAGNOSTICS` log lines appear when the tracer encountered an error during application startup, while  `CONFIGURATION` logs are a JSON or raw-formatted representation of settings applied to your tracer.
 
@@ -12,6 +12,16 @@ If you see any `DIAGNOSTICS` log lines, please confirm from the indicated log th
 
 {{< tabs >}}
 {{% tab "Java" %}}
+
+#### Configuration
+
+```text
+{"os_name":"Mac OS X","os_version":"10.15.4","architecture":"x86_64","lang":"jvm","lang_version":"11.0.6","jvm_vendor":"AdoptOpenJDK","jvm_version":"11.0.6+10","java_class_version":"55.0","enabled":true,"service":"unnamed-java-app","agent_url":"http://localhost:8126","agent_error":false,"debug":false,"analytics_enabled":false,"sampling_rules":[{},{}],"priority_sampling_enabled":true,"logs_correlation_enabled":false,"profiling_enabled":false,"dd_version":"null","health_checks_enabled":false,"configuration_file":"no config file present","runtime_id":"b69deb26-8bc3-4c00-8952-d42bf8c2123b"}
+```
+
+#### Diagnostics
+
+
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -137,31 +147,46 @@ W, [2020-07-08T21:19:05.765994 #143]  WARN -- ddtrace: [ddtrace] DATADOG TRACER 
 
 {{% /tab %}}
 {{% tab "C++" %}}
+
+#### File Location
+
+In C++, the startup log file is created under the location `/var/tmp/dd-opentracing-cpp` e.g. `/var/tmp/dd-opentracing-cpp/startup_options-1593737077369521386.json`
+
+#### Configuration
+
+```text
+
+{"agent_url":"http://localhost:8126","analytics_enabled":false,"analytics_sample_rate":null,"date":"2020-07-03T00:44:37+0000","dd_version":"","enabled":true,"env":"test-env","lang":"cpp","lang_version":"201402","operation_name_override":"","report_hostname":false,"sampling_rules":"[{\"sample_rate\": 1.0}]","service":"service_name","tags":{},"version":"v1.2.0"}
+
+```
+
+#### Diagnostics
+
+For C++, there are no `DATADOG TRACER DIAGNOSTICS` lines output to the tracer logs. However, if the Agent is not reachable, there should be error logs available, or in Envoy, an increase in the metrics `tracing.datadog.reports_failed` and `tracing.datadog.reports_dropped`.
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Diagnostics Errors
 
-The most common `DIAGNOSTICS` error output will be that the tracer is unable to send traces to the Datadog Agent.
+The most insightful `DIAGNOSTICS` error output will be that the tracer is unable to send traces to the Datadog Agent.
 
-In this case, please confirm your tracer has been set up correctly to receive traces for [ECS][1], [Kubernetes][2], [Docker][3] or [any other option][4].
+In this case, please confirm your tracer has been set up correctly to receive traces for [ECS][1], [Kubernetes][2], [Docker][3] or [any other option][4], or [contact support][5] who will be happy to review your Tracer & Agent configuration.
 
 ## Configuration Settings
 
-If your logs only contain `CONFIGURATION` lines, please confirm that the settings output by the tracer match your expected settings from your deployment and configuration of the Datadog Tracer.  Additionally, if you are not seeing specific traces in Datadog, please review the [Compatibility Requirements][5] section of the documentation to confirm these integrations are supported.  If there is an integration you are using that is not supported, or if everything looks fine, proceed to step 4 and open a support ticket.
+If your logs only contain `CONFIGURATION` lines, a useful troubleshooting step is to confirm that the settings output by the tracer match the settings from your deployment and configuration of the Datadog Tracer.  Additionally, if you are not seeing specific traces in Datadog, please review the [Compatibility Requirements][6] section of the documentation to confirm these integrations are supported.
 
-## Open a Support ticket
-
-Open a [ticket][6] with our support team explaining your issue or unsupported integration to create a feature request, and include the `DATADOG TRACER CONFIGURATION` output of your logs to assist us with faster resolution.
+If there is an integration you are using that is not supported, or you want a fresh pair of eyes on your configuration output to understand why traces are not appearing as expected in Datadog, [contact support][5] who can help you diagnose and create a Feature Request for a new integration if needed.
 
 ## Disabling Startup Logs
 
 Per language, startup logs can be disabled if required via the environment variable setting `DD_TRACE_STARTUP_LOGS=false`.  It is not recommended to do this unless the logs emitted are posing a problem, and if [debug][7] logs are later sent, please make sure to enable startup logs and send all relevant logs together to speed up your support case triage.
 
-[1]: /integrations/amazon_ecs/?tab=python#trace-collection
+[1]: /integrations/amazon_ecs/?tab=java#trace-collection
 [2]: /agent/kubernetes/?tab=helm
 [3]: /agent/docker/apm/?tab=java
 [4]: /tracing/send_traces/
-[5]: /tracing/compatibility_requirements/
-[6]: /help/
+[5]: /help/
+[6]: /tracing/compatibility_requirements/
 [7]: /tracing/troubleshooting/tracer_debug_logs/

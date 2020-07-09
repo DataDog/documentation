@@ -13,7 +13,7 @@ further_reading:
   text: "APM metrics sent by the Datadog Agent"
 ---
 
-When experiencing unexpected behavior with Datadog APM, there are a few common issues you can look for before reaching out to [Datadog support][1]:
+When experiencing unexpected behavior with Datadog APM, there are a few common issues you may wish to investigate internally and this guide may help resolve issues quickly, but please feel free to reach out to [Datadog support][1] for further assistance.
 
 ## Tracer startup logs
 
@@ -21,14 +21,14 @@ All Datadog tracing libraries emit logs during startup by default to reflect the
 
 | Language | Version |
 |----------|---------|
-| Java    |  0.58+   |
-| .NET | 1.18.1+ |
-| PHP | 0.47.0+ |
-| Go | 1.26.0+ |
-| NodeJS | 0.23.0+ |
-| Python | 0.41+ |
-| Ruby | 0.38+ |
-| C++ | 1.1.6+ |
+| Java    |  0.58 (once available)  |
+| .NET | 1.18.1 (once available)  |
+| PHP | 0.47.0+  |
+| Go | 1.26.0 (once available)  |
+| NodeJS | 0.23.0 (once available)  |
+| Python | 0.41 (once available)  |
+| Ruby | 0.38 (once available)  |
+| C++ | 1.1.6 (once available)  |
 
 If your tracer version includes these startup logs, they are a great place to begin troubleshooting, including steps for self-triage.
 
@@ -72,6 +72,21 @@ ERROR | (pkg/trace/logutil/throttled.go:38 in log) | http.Server: http: Accept e
 
 To increase the APM connection limit for the Agent, configure the `connection_limit` attribute within the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (Docker, Kubernetes, etc.), use the `DD_APM_CONNECTION_LIMIT` environment variable.
 
+## What to expect from Datadog support
+
+When you open a [support ticket][1], our support team may ask for a combination of the below information:
+
+- [Tracer Startup Logs](#tracer-startup-logs)
+
+- [Tracer Debug Logs](#tracer-debug-logs)
+
+- An [agent flare][4] from your agent in [debug mode][5]
+
+- Links to traces within your Datadog account showing the anomalous behavior
+
+- Any automatic or [custom instrumentation][6], along with any configurations
+
+- Versions of languages, frameworks, the Datadog Agent and Tracing Library being used
 
 ## Further Reading
 
@@ -80,3 +95,6 @@ To increase the APM connection limit for the Agent, configure the `connection_li
 [1]: /help/
 [2]: /tracing/troubleshooting/tracer_startup_logs/
 [3]: /tracing/troubleshooting/tracer_debug_logs/
+[4]: /agent/troubleshooting/#send-a-flare
+[5]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
+[6]: /tracing/custom_instrumentation/
