@@ -13,7 +13,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
 ---
-## Compatibilty Requirements
+## Compatibility requirements
 
 The Java Tracer requires Java JRE 1.7 and higher for either Oracle JDK and OpenJDK. Datadog does not officially support any early-access versions of Java. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
