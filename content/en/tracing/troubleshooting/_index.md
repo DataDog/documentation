@@ -76,17 +76,29 @@ To increase the APM connection limit for the Agent, configure the `connection_li
 
 When you open a [support ticket][1], our support team may ask for a combination of the below information:
 
-- [Tracer Startup Logs](#tracer-startup-logs)
+1. [Tracer Startup Logs](#tracer-startup-logs)
 
-- [Tracer Debug Logs](#tracer-debug-logs)
+    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent.  By comparing the configuration that the tracer sees to the one set within the application or container, we can identify any areas where a setting is not being properly applied.
 
-- An [agent flare][4] from your agent in [debug mode][5]
+1. [Tracer Debug Logs](#tracer-debug-logs)
 
-- Links to traces within your Datadog account showing the anomalous behavior
+    Tracer Debug logs go one step deeper than startup logs, and will help us to identify if integrations are instrumenting properly in a manner that we aren't able to necessarily check until traffic flows through the application.
 
-- Any automatic or [custom instrumentation][6], along with any configurations
+1. An [agent flare][4] from your agent in [debug mode][5]
 
-- Versions of languages, frameworks, the Datadog Agent and Tracing Library being used
+    Agent flares allow us to see what is happening within the Datadog Agent, if any traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, as well as identifying any metric discrepancies.
+
+1. Links to traces within your Datadog account showing the anomalous behavior
+
+    This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
+
+1. Any automatic or [custom instrumentation][6], along with any configurations
+
+    Custom instrumentation can be a very powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so we ask about this to rule it out as a suspect.  Additionally, asking for your automatic instrumentation and configuration allows us to confirm if this matches what we are seeing in both tracer startup and debug logs to look for discrepancies.
+
+1. Versions of languages, frameworks, the Datadog Agent and Tracing Library being used
+
+    Versions allow us to ensure integrations are supported, as well as check against any known issues or recommend a tracer or language version upgrade if it will address the problem.
 
 ## Further Reading
 
