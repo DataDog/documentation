@@ -40,7 +40,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 | Windows    | Consult the dedicated [Windows documentation][2]        |
 | Heroku     | Consult the dedicated [Heroku documentation][3]         |
 
-## Sending flares from dedicated containers
+## Dedicated containers
 
 When using Agent v7.19+ and using the Datadog Helm Chart with the [latest version][4] or a DaemonSet where the Datadog agent and trace-agent are in separate containers, you will deploy an Agent Pod containing:
 
