@@ -1,5 +1,5 @@
 ---
-title: APM Rate Limits
+title: Agent Rate Limits
 kind: Documentation
 ---
 
