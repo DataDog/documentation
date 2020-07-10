@@ -9362,7 +9362,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IPRanges'
-          description: List of IP ranges.
+          description: OK
       security: []
       servers:
       - url: https://{subdomain}.{site}
@@ -10846,6 +10846,20 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: Include information on the muted status of hosts and when the
+          mute expires.
+        in: query
+        name: include_muted_hosts_data
+        required: false
+        schema:
+          type: boolean
+      - description: Include additional metadata about the hosts (agent_version, machine,
+          platform, processor, etc.).
+        in: query
+        name: include_hosts_metadata
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -15785,7 +15799,7 @@ paths:
   /api/v1/usage/synthetics:
     get:
       deprecated: true
-      description: Get hourly usage for [Synthetics API checks](https://docs.datadoghq.com/synthetics/).
+      description: Get hourly usage for [Synthetics checks](https://docs.datadoghq.com/synthetics/).
       operationId: GetUsageSynthetics
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -15823,7 +15837,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-      summary: Get hourly usage for Synthetics API Checks
+      summary: Get hourly usage for Synthetics Checks
       tags:
       - Usage Metering
   /api/v1/usage/synthetics_api:
@@ -16738,13 +16752,15 @@ tags:
     \ can use Datadog\u2019s API to\nmanage both test types programmatically.\n\n\
     For more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
-- description: 'The tag endpoint allows you to tag hosts with keywords
+- description: 'The tag endpoint allows you to assign tags to hosts,
 
-    meaningful to you, like `role:database`. All metrics sent
+    for example: `role:database`. Those tags are applied to
 
-    from a host have its tags applied. When fetching and applying
+    all metrics sent by the host. Refer to hosts by name
 
-    tags to a particular host, refer to hosts by name (`yourhost.example.com`).
+    (`yourhost.example.com`) when fetching and applying
+
+    tags to a particular host.
 
 
     The component of your infrastructure responsible for a tag is identified
