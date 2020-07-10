@@ -38,7 +38,7 @@ These logs can surface instrumentation errors or integration-specific errors.  F
 
 ## APM rate limits
 
-Within Datadog Agent logs, if you see error messages about rate limits or max events per second, these limits can be adjust with instructions [here][4].  Please feel free to consult with our [support team][1] if there are any questions before changing limits.
+Within Datadog Agent logs, if you see error messages about rate limits or max events per second, these limits can be adjusted by following  [these instructions][4].  For any questions before changing limits, consult with our [support team][1].
 
 ## Troubleshooting data requested by Datadog Support
 
