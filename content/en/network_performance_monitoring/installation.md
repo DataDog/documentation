@@ -154,7 +154,7 @@ If you already have the [Agent running with a manifest][3]:
                     container.apparmor.security.beta.kubernetes.io/system-probe: unconfined
     ```
 
-2. Enable process collection and the system probe with the following environment variables in the Agent container if all agents are running in a single container:
+2. Enable process collection and the system probe with the following environment variables in the Agent container. If all Agents are running in a single container, use:
 
     ```yaml
       # (...)
