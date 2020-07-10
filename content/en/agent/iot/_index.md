@@ -37,7 +37,7 @@ The IoT Agent does not include the Python interpreter and other integrations pre
 
 ### Requirements
 
-The IoT Agent is available on Debian and RPM-based systems for both 64-bit x86 and Arm v8 devices.
+The IoT Agent is available as DEB and RPM packages for Linux devices running on x64, arm64 (ARMv8), and ARMv7 architectures.
 
 #### Resources
 
@@ -63,7 +63,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_AGENT_MAJOR_VERSION=7 DD_AGENT_FLAVOR=iot-agent 
 #### Manual
 
 {{< tabs >}}
-{{% tab "Debian" %}}
+{{% tab "DEB" %}}
 
 To manually install the IoT Agent on Debian-based operating systems, run the following commands:
 
