@@ -6,7 +6,7 @@ kind: Documentation
 
 Tracer startup logs will capture all obtainable information at startup and log it either as `DATADOG TRACER CONFIGURATION` or `DATADOG TRACER DIAGNOSTICS` for easy searching within your logs.  Note some languages may log to a separate file depending on language conventions and the safety of accessing `Stdout` or equivalent.  In those cases, the location of logs will be noted in the respective language tab below.
 
-`DIAGNOSTICS` log lines appear when the tracer encountered an error during application startup, while  `CONFIGURATION` logs are a JSON or raw-formatted representation of settings applied to your tracer.
+`DIAGNOSTICS` log lines appear when the tracer encountered an error during application startup, while  `CONFIGURATION` logs are a JSON or raw-formatted representation of settings applied to your tracer. In languages where an Agent connectivity check can be performed, the configuration JSON will also include a key 'agent_error', which can also be checked to see if the Agent is reachable.
 
 If you see any `DIAGNOSTICS` log lines, please confirm from the indicated log that settings and configurations have been applied correctly.  If you do not see logs at all, please ensure that your application logs are not silenced and that your log level is at least `INFO` where applicable.
 
@@ -21,8 +21,10 @@ If you see any `DIAGNOSTICS` log lines, please confirm from the indicated log th
 
 #### Diagnostics
 
-The Java tracer does not currently output any Diagnostics logs.  For this check, please run the tracer in [debug mode][7].
+The Java tracer does not currently output any Diagnostics logs.  For this check, please run the tracer in [debug mode][1].
 
+
+[1]: /tracing/troubleshooting/tracer_debug_logs/
 {{% /tab %}}
 {{% tab ".NET" %}}
 

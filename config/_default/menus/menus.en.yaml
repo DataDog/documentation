@@ -1050,11 +1050,16 @@ main:
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
     weight: 1302
+  - name: Agent Rate Limits
+    url: tracing/troubleshooting/agent_rate_limits
+    identifier: tracing_troubleshooting_rate_limits
+    parent: tracing_troubleshooting
+    weight: 1303
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1303
+    weight: 1304
   - name: Log Management
     url: logs/
     pre: nav_logs

@@ -15,9 +15,9 @@ further_reading:
 
 When experiencing unexpected behavior with Datadog APM, there are a few common issues you may wish to investigate internally and this guide may help resolve issues quickly, but please feel free to reach out to [Datadog support][1] for further assistance.
 
-## Tracer startup logs
+## Confirm APM setup and Agent status
 
-All Datadog tracing libraries emit logs during startup by default to reflect the configurations applied, as well as any errors encountered during startup.  These startup logs are available from the minimum versions of the tracer indicated in the below table:
+All Datadog tracing libraries past the versions listed below emit [tracer startup logs][2] by default on startup, and output a JSON object that reflects the configurations applied, as well as any errors encountered, including if the Agent can be reached in languages this is possible.  These startup logs are a good way to confirm your configuration is being applied as expected. Additionally, providing these logs with your initial support request will help expedite our support process.
 
 | Language | Version |
 |----------|---------|
@@ -30,8 +30,6 @@ All Datadog tracing libraries emit logs during startup by default to reflect the
 | Ruby | 0.38 (once available)  |
 | C++ | 1.1.6 (once available)  |
 
-If your tracer version includes these [startup logs][2], they are the recommended place to begin troubleshooting.
-
 ## Tracer debug logs
 
 In order to capture full details on the Datadog tracer, debug mode can be enabled on your tracer via the environment variable `DATADOG_TRACE_DEBUG`.  This may be done for your own investigation or recommended by Datadog support for triage purposes. However, it is not recommended to have debug mode always enabled due to logging overhead.
@@ -40,63 +38,45 @@ These logs can surface instrumentation errors or integration-specific errors.  T
 
 ## APM rate limits
 
-### Max events per second limit
-
-If you encounter the following error message in your Agent logs, your application(s) are emitting more than the default 200 trace events per second allowed by APM.
-
-```
-Max events per second reached (current=300.00/s, max=200.00/s). Some events are now being dropped (sample rate=0.54). Consider adjusting event sampling rates.
-
-```
-
-
-To increase the APM rate limit for the Agent, configure the `max_events_per_second` attribute within the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (Docker, Kubernetes, etc.), use the `DD_APM_MAX_EPS` environment variable.
-
-**Note**: Increasing the APM rate limit could result in increased costs for App Analytics.
-
-
-### Max connection limit
-
-If you encounter the following error message in your Agent logs, the default APM connection limit of 2000 has been exceeded:
-
-```
-ERROR | (pkg/trace/logutil/throttled.go:38 in log) | http.Server: http: Accept error: request has been rate-limited; retrying in 80ms
-```
-
-
-To increase the APM connection limit for the Agent, configure the `connection_limit` attribute within the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (Docker, Kubernetes, etc.), use the `DD_APM_CONNECTION_LIMIT` environment variable.
+Within Datadog Agent logs, if you see error messages about rate limits or max events per second, these limits can be adjust with instructions [here][4].  Please feel free to consult with our [support team][1] if there are any questions before changing limits.
 
 ## Troubleshooting data requested by Datadog Support
 
 When you open a [support ticket][1], our support team may ask for a combination of the below information:
 
-1. How you are confirming the issue (links to a trace, screenshots, etc) and what you expect to see
+1. **How you are confirming the issue (links to a trace, screenshots, etc) and what you expect to see**
 
     This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
 
-1. [Tracer Startup Logs](#tracer-startup-logs)
+1. **[Tracer Startup Logs](#tracer-startup-logs)**
 
     Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent.  By comparing the configuration that the tracer sees to the one set within the application or container, we can identify any areas where a setting is not being properly applied.
 
-1. [Tracer Debug Logs](#tracer-debug-logs)
+1. **[Tracer Debug Logs](#tracer-debug-logs)**
 
-    Tracer Debug logs go one step deeper than startup logs, and will help us to identify if integrations are instrumenting properly in a manner that we aren't able to necessarily check until traffic flows through the application.
+    Tracer Debug logs go one step deeper than startup logs, and will help us to identify if integrations are instrumenting properly in a manner that we aren't able to necessarily check until traffic flows through the application.  Debug logs can be extremely useful for viewing the contents of spans created by the tracer and can surface an error if there is a connection issue when attempting to send spans to the agent. Tracer debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
 
-1. An [agent flare][4] from your agent in [debug mode][5]
+1. **An [agent flare][5] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your agent while in [debug mode][6]**
 
     Agent flares allow us to see what is happening within the Datadog Agent, if any traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, as well as identifying any metric discrepancies.
 
-1. A description of your environment
+1. **A description of your environment**
 
     Knowing how your application is deployed helps us identify likely issues for tracer-agent communication problems or misconfigurations.  For difficult issues, we may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
-1. Any automatic or [custom instrumentation][6], along with any configurations
+1. **Any automatic or [custom instrumentation][7], along with any configurations**
 
     Custom instrumentation can be a very powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so we ask about this to rule it out as a suspect.  Additionally, asking for your automatic instrumentation and configuration allows us to confirm if this matches what we are seeing in both tracer startup and debug logs to look for discrepancies.
 
-1. Versions of languages, frameworks, the Datadog Agent and Tracing Library being used
+1. **Versions of languages, frameworks, the Datadog Agent, and Tracing Library being used**
 
     Versions allow us to ensure integrations are supported, as well as check against any known issues or recommend a tracer or language version upgrade if it will address the problem.
+
+1. **Confirm Agent configurations, including if APM is enabled**
+
+    While APM is enabled for Agent 6+, in containerized environments there is an additional configuration step for [non local traffic][8] and can be the solution to traces not being received.
+
+    You can check this by running the command `netstat -van | grep 8126` on your Agent host. If you don't see an entry, this means you should check if your Agent is running or the configuration of your `datadog.yaml` file. Instructions can be found on the [Agent Configuration page][8].
 
 ## Further Reading
 
@@ -105,6 +85,8 @@ When you open a [support ticket][1], our support team may ask for a combination 
 [1]: /help/
 [2]: /tracing/troubleshooting/tracer_startup_logs/
 [3]: /tracing/troubleshooting/tracer_debug_logs/
-[4]: /agent/troubleshooting/#send-a-flare
-[5]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
-[6]: /tracing/custom_instrumentation/
+[4]: /tracing/troubleshooting/apm_rate_limits
+[5]: /agent/troubleshooting/#send-a-flare
+[6]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
+[7]: /tracing/custom_instrumentation/
+[8]: /tracing/send_traces/#datadog-agent
