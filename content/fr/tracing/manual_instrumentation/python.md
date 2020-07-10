@@ -82,7 +82,7 @@ def make_sandwich_request(request):
             sandwich = assemble_sandwich(ingredients)
 ```
 
-Cliquez [ici][2] pour obtenir tous les détails sur l'API pour `ddtrace.Tracer()`.
+Cliquez [ici][2] pour consulter tous les détails sur l'API pour `ddtrace.Tracer()`.
 
 [1]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#ddtrace.Span
 [2]: http://pypi.datadoghq.com/trace/docs/advanced_usage.html#tracer
@@ -207,7 +207,7 @@ span.finish()
 
 ## OpenTracing
 
-La prise en charge d'OpenTracing est incluse dans le paquet `ddtrace`. Utilisez `pip` pour installer le paquet `opentracing` requis :
+La prise en charge d'OpenTracing est incluse dans le package `ddtrace`. Utilisez `pip` pour installer le package `opentracing` requis :
 
 ```sh
 pip install ddtrace[opentracing]

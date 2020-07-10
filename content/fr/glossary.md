@@ -22,7 +22,7 @@ Notez que le terme « check » sans majuscule fait référence à la prise gé
 
 ## Bibliothèque client
 
-Vous disposez d'un certain nombre de bibliothèques dans une variété de langues pour instrumenter vos applications directement avec Datadog. Nous vous proposons des bibliothèques officielles pour C#, Golang, Java, PHP, Python et Ruby. Les bibliothèques dans d'autres langues sont fournies par la communauté et sont entretenues dans la mesure du possible.
+Vous disposez d'un certain nombre de bibliothèques dans une variété de langages pour instrumenter vos applications directement avec Datadog. Nous vous proposons des bibliothèques officielles pour C#, Golang, Java, PHP, Python et Ruby. Les bibliothèques dans d'autres langages sont fournies par la communauté et sont entretenues dans la mesure du possible.
 
 Les bibliothèques sont conçues pour interagir avec l'API ou DogStatsD, bien que certaines d'entre elles les prennent tous les deux en charge.
 
