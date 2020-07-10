@@ -245,7 +245,7 @@ For more visibility, include `DD_LOGGING_RATE_LIMIT=0`.
 ```
 
 
-### Traces are sent to the Datadog Agent
+### Traces were sent to the Datadog Agent
 
 ```shell
 <YYYY-MM-DD> 16:01:11,637 DEBUG [ddtrace.api] [api.py:236] - reported 1 traces in 0.00207s
