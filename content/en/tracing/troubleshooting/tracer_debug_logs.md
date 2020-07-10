@@ -4,7 +4,7 @@ kind: Documentation
 ---
 ## Tracer debug mode
 
-Datadog debug settings are used to diagnose issues or audit trace data. Enabling debug mode in production systems is not recommended, as it increases the number of events that are sent to your loggers. Use it sparingly, for debugging purposes only.
+Use Datadog debug settings to diagnose issues or audit trace data. We don't recommend enabling debug mode in production systems, because it increases the number of events that are sent to your loggers. Use it sparingly, for debugging purposes only.
 
 Debug mode is disabled by default. To enable it, follow the corresponding language tracer instructions:
 
@@ -13,7 +13,7 @@ Debug mode is disabled by default. To enable it, follow the corresponding langua
 
 To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug=true` when starting the JVM or add `DD_TRACE_DEBUG=true` as environment variable.
 
-**Note**: Datadog Java Tracer implements SL4J SimpleLogger. As such, [all of its settings can be applied][1] like logging to a dedicated log file: `-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
+**Note**: Datadog Java Tracer implements SL4J SimpleLogger, so [all of its settings can be applied][1], for example, logging to a dedicated log file: `-Ddatadog.slf4j.simpleLogger.logFile=<NEW_LOG_FILE_PATH>`
 
 [1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
 {{% /tab %}}
@@ -38,7 +38,7 @@ By default, all logs are processed by the default Ruby logger. When using Rails,
 
 Datadog client log messages are marked with `[ddtrace]`, so you can isolate them from other messages.
 
-Additionally, it is possible to override the default logger and replace it with a custom one. This is done using the ``log`` attribute of the tracer.
+You can override the default logger and replace it with a custom one by using the tracer's `log` attribute:
 
 ```ruby
 f = File.new("<FILENAME>.log", "w+")           # Log messages should go there
@@ -82,9 +82,9 @@ const tracer = require('dd-trace').init({
 
 **Application Logs**:
 
-By default, logging from this library is disabled. In order to get debbuging information and errors sent to logs, the `debug` options should be set to `true` in the [init()][1] method.
+By default, logging from this library is disabled. In order to get debugging information and errors sent to logs, set the `debug` options to `true` in the [init()][1] method.
 
-The tracer will then log debug information to `console.log()` and errors to `console.error()`. This behavior can be changed by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
+The tracer will then log debug information to `console.log()` and errors to `console.error()`. You can change this behavior by passing a custom logger to the tracer. The logger should contain `debug()` and `error()` methods that can handle messages and errors, respectively.
 
 For example:
 
@@ -106,7 +106,7 @@ const tracer = require('dd-trace').init({
 
 Then check the Agent logs to see if there is more info about your issue:
 
-* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, therefore the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][2] for more information.
+* If the trace was sent to the Agent properly, you should see `Response from the Agent: OK` log entries. This indicates that the tracer is working properly, so the problem may be with the Agent itself. Refer to the [Agent troubleshooting guide][2] for more information.
 
 * If an error was reported by the Agent (or the Agent could not be reached), you will see `Error from the Agent` log entries. In this case, validate your network configuration to ensure the Agent can be reached. If you are confident the network is functional and that the error is coming from the Agent, refer to the [Agent troubleshooting guide][2].
 
@@ -122,7 +122,7 @@ For more tracer settings, check out the [API documentation][5].
 {{% /tab %}}
 {{% tab ".NET" %}}
 
-To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), or in a `datadog.json` file. Debug mode can also be enabled in code by calling `GlobalSettings.SetDebugEnabled(true)`:
+To enable debug mode for the Datadog .NET Tracer, set the `DD_TRACE_DEBUG` configuration setting to `true`. This setting can be set as an environment variable, in the `web.config` or `app.config` file (.NET Framework only), or in a `datadog.json` file. Alternatively, you can enable debug mode by calling `GlobalSettings.SetDebugEnabled(true)`:
 
 ```csharp
 using Datadog.Trace;
@@ -132,7 +132,7 @@ GlobalSettings.SetDebugEnabled(true);
 
 ```
 
-Logs files are saved in the following directories by default. The `DD_TRACE_LOG_PATH` setting can be used to change these paths.
+Logs files are saved in the following directories by default. Use the `DD_TRACE_LOG_PATH` setting to change these paths.
 
 | Platform | Path                                      |
 |----------|-------------------------------------------|
@@ -150,7 +150,7 @@ For more details on how to configure the .NET Tracer, see the [Configuration][1]
 
 To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
 
-In order to tell PHP where it should put `error_log` messages, you can either set it at the server level, or as a PHP `ini` parameter, which is the standard way to configure PHP behavior.
+You can specify where PHP should put `error_log` messages either at the server level, or as a PHP `ini` parameter, which is the standard way to configure PHP behavior.
 
 If you are using an Apache server, use the `ErrorLog` directive.
 If you are using an NGINX server, use the `error_log` directive.
@@ -160,7 +160,7 @@ If you are configuring instead at the PHP level, use PHP's `error_log` ini param
 {{% /tab %}}
 {{% tab "C++" %}}
 
-The release binary libraries are all compiled with debug symbols added to the optimized release. It is possible to use gdb or lldb to debug the library and to read core dumps. If you are building the library from source, pass the argument `-DCMAKE_BUILD_TYPE=RelWithDebInfo` to cmake to compile an optimized build with debug symbols.
+The release binary libraries are all compiled with debug symbols added to the optimized release. You can use GDB or LLDB to debug the library and to read core dumps. If you are building the library from source, pass the argument `-DCMAKE_BUILD_TYPE=RelWithDebInfo` to cmake to compile an optimized build with debug symbols.
 
 ```bash
 cd .build
@@ -174,13 +174,13 @@ make install
 
 ### Run your tracer in debug mode to collect logs
 
-After having [enabled tracer debug mode](#tracer-debug-mode), check your application logs to see if there is more info about your issue.
+After [enabling tracer debug mode](#tracer-debug-mode), check your application logs to see if there is more info about your issue.
 
-If there are errors that you don't understand, or [traces][7] are reported to be flushed to Datadog and you still cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][8].
+If there are errors that you don't understand, or if [traces][7] are reported as flushed to Datadog but you cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][8].
 
 ### Tracer debug logs
 
-If you have successfully enabled debug mode for your tracer, you should see tracer specific log messages telling you how the tracer was initialized and whether traces were sent to the Agent. **These logs do not get sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. Find below log examples that you may found in your log file.
+When debug mode for your tracer is enabled, tracer-specific log messages report how the tracer was initialized and whether traces were sent to the Agent. **These logs are not sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. The following log examples show what might appear in your log file.
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -299,7 +299,7 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size
 ```
 
 
-###  Trace failed to sent to the Agent
+###  Trace failed to send to the Agent
 
 ```shell
 2019/08/07 16:12:27 Datadog Tracer <version> ERROR: lost <number of traces> traces: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused, 4 additional messages skipped (first occurrence: DD MM YY 16:11 UTC)

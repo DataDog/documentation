@@ -13,7 +13,7 @@ further_reading:
   text: "APM metrics sent by the Datadog Agent"
 ---
 
-When experiencing unexpected behavior with Datadog APM, there are a few common issues you may wish to investigate internally and this guide may help resolve issues quickly, but please feel free to reach out to [Datadog support][1] for further assistance.
+If you experience unexpected behavior with Datadog APM, there are a few common issues you can investigate and this guide may help resolve issues quickly. Reach out to [Datadog support][1] for further assistance.
 
 ## Confirm APM setup and Agent status
 
@@ -32,9 +32,9 @@ All Datadog tracing libraries past the versions listed below emit [tracer startu
 
 ## Tracer debug logs
 
-In order to capture full details on the Datadog tracer, debug mode can be enabled on your tracer via the environment variable `DATADOG_TRACE_DEBUG`.  This may be done for your own investigation or recommended by Datadog support for triage purposes. However, it is not recommended to have debug mode always enabled due to logging overhead.
+To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DATADOG_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because  Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
 
-These logs can surface instrumentation errors or integration-specific errors.  To see further details on how to enable and capture these debug logs, please see the [debug mode troubleshooting page][3].
+These logs can surface instrumentation errors or integration-specific errors.  For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][3].
 
 ## APM rate limits
 
@@ -42,7 +42,7 @@ Within Datadog Agent logs, if you see error messages about rate limits or max ev
 
 ## Troubleshooting data requested by Datadog Support
 
-When you open a [support ticket][1], our support team may ask for a combination of the below information:
+When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
 
 1. **How you are confirming the issue (links to a trace, screenshots, etc) and what you expect to see**
 
@@ -50,7 +50,7 @@ When you open a [support ticket][1], our support team may ask for a combination 
 
 1. **[Tracer Startup Logs](#tracer-startup-logs)**
 
-    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent.  By comparing the configuration that the tracer sees to the one set within the application or container, we can identify any areas where a setting is not being properly applied.
+    Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent. By comparing the configuration that the tracer sees to the one set within the application or container, we can identify areas where a setting is not being properly applied.
 
 1. **[Tracer Debug Logs](#tracer-debug-logs)**
 
@@ -58,19 +58,19 @@ When you open a [support ticket][1], our support team may ask for a combination 
 
 1. **An [agent flare][5] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your agent while in [debug mode][6]**
 
-    Agent flares allow us to see what is happening within the Datadog Agent, if any traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, as well as identifying any metric discrepancies.
+    Agent flares allow us to see what is happening within the Datadog Agent, or if traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, or any metric discrepancies.
 
 1. **A description of your environment**
 
-    Knowing how your application is deployed helps us identify likely issues for tracer-agent communication problems or misconfigurations.  For difficult issues, we may ask to a see a Kubernetes manifest or an ECS task definition, for example.
+    Knowing how your application is deployed helps us identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, we may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
 1. **Any automatic or [custom instrumentation][7], along with any configurations**
 
-    Custom instrumentation can be a very powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so we ask about this to rule it out as a suspect.  Additionally, asking for your automatic instrumentation and configuration allows us to confirm if this matches what we are seeing in both tracer startup and debug logs to look for discrepancies.
+    Custom instrumentation can be a very powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so we ask about this to rule it out as a suspect.  Additionally, asking for your automatic instrumentation and configuration allows us to confirm if this matches what we are seeing in both tracer startup and debug logs.
 
 1. **Versions of languages, frameworks, the Datadog Agent, and Tracing Library being used**
 
-    Versions allow us to ensure integrations are supported, as well as check against any known issues or recommend a tracer or language version upgrade if it will address the problem.
+    Knowing what versions are being used allows us to ensure integrations are supported, to check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
 
 1. **Confirm Agent configurations, including if APM is enabled**
 
