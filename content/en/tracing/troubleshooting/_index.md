@@ -17,7 +17,7 @@ If you experience unexpected behavior with Datadog APM, there are a few common i
 
 ## Confirm APM setup and Agent status
 
-All Datadog tracing libraries past the versions listed below emit [tracer startup logs][2] by default on startup, and output a JSON object that reflects the configurations applied, as well as any errors encountered, including if the Agent can be reached in languages where this is possible.  These startup logs are a good way to confirm your configuration is being applied as expected. Additionally, providing these logs with your initial support request will help expedite our support process.
+During startup, all Datadog tracing libraries past the versions listed below emit logs that reflect the configurations applied in a JSON object, as well as any errors encountered, including if the Agent can be reached in languages where this is possible.  If your tracer version includes these [startup logs][2], start your troubleshooting there.
 
 | Language | Version |
 |----------|---------|
@@ -44,7 +44,7 @@ Within Datadog Agent logs, if you see error messages about rate limits or max ev
 
 When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
 
-1. **How you are confirming the issue (links to a trace, screenshots, etc) and what you expect to see**
+1. **How are you confirming the issue? Provide links to a trace or screenshots, for example, and tell us what you expect to see**
 
     This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
 
