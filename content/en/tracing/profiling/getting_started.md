@@ -232,7 +232,7 @@ The Datadog Profiler requires Node 10.5+. To begin profiling applications:
 
 **Note**:
 
-- It is strongly recommended to add tags like `service` or `version` as it provides the ability to slice and dice your profiles across these dimensions, enhancing your overall product experience. Use environment variables to set the parameters:
+- Tags such as `service` or `version` are also avaiable for you to set. Use environment variables to set the parameters:
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
