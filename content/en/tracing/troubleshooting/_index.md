@@ -85,7 +85,7 @@ When you open a [support ticket][1], our support team may ask for some combinati
 [1]: /help/
 [2]: /tracing/troubleshooting/tracer_startup_logs/
 [3]: /tracing/troubleshooting/tracer_debug_logs/
-[4]: /tracing/troubleshooting/apm_rate_limits
+[4]: /tracing/troubleshooting/agent_rate_limits
 [5]: /agent/troubleshooting/#send-a-flare
 [6]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
 [7]: /tracing/custom_instrumentation/
