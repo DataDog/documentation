@@ -32,7 +32,7 @@ During startup, all Datadog tracing libraries past the versions listed below emi
 
 ## Tracer debug logs
 
-To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DATADOG_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because  Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
+To capture full details on the Datadog tracer, enable debug mode on your tracer by using the `DD_TRACE_DEBUG` environment variable. You might enable it for your own investigation or because  Datadog support recommended it for triage purposes. However, don't leave debug mode always enabled because of the logging overhead it introduces.
 
 These logs can surface instrumentation errors or integration-specific errors.  For details on enabling and capturing these debug logs, see the [debug mode troubleshooting page][3].
 
@@ -85,7 +85,7 @@ When you open a [support ticket][1], our support team may ask for some combinati
 [1]: /help/
 [2]: /tracing/troubleshooting/tracer_startup_logs/
 [3]: /tracing/troubleshooting/tracer_debug_logs/
-[4]: /tracing/troubleshooting/apm_rate_limits
+[4]: /tracing/troubleshooting/agent_rate_limits
 [5]: /agent/troubleshooting/#send-a-flare
 [6]: /agent/troubleshooting/debug_mode/?tab=agentv6v7
 [7]: /tracing/custom_instrumentation/
