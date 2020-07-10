@@ -100,38 +100,33 @@ To manually install the IoT Agent on Debian-based operating systems, run the fol
 
 To manually install the IoT Agent on RPM-based operating systems, run the following commands:
 
-1. On an x86_64 host, set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
+1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
     ```
     [datadog]
     name = Datadog, Inc.
-    baseurl = https://yum.datadoghq.com/stable/7/x86_64/
+    baseurl = https://yum.datadoghq.com/stable/7/<HOST_OS>
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
+    
+    The `baseurl` is dependent on your host OS:
+    - x86_64 - `https://yum.datadoghq.com/stable/7/x86_64/`
+    - arm64 - `https://yum.datadoghq.com/stable/7/aarch64/`
+    - ARMv7 - `https://yum.datadoghq.com/stable/7/armv7hl/`
 
-2. On an arm64 host, set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
-    ```
-    [datadog]
-    name = Datadog, Inc.
-    baseurl = https://yum.datadoghq.com/stable/7/aarch64/
-    enabled=1
-    gpgcheck=1
-    gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-    ```
-
-3. Update your local yum repo and install the Agent:
+2. Update your local yum repo and install the Agent:
     ```
     sudo yum makecache
     sudo yum install datadog-iot-agent
     ```
 
-4. Copy the example config and plug in your API key
+3. Copy the example config and plug in your API key
     ```bash
     DD_API_KEY=<YOUR KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-5. Start the IoT Agent:
+4. Start the IoT Agent:
     ```bash
     sudo systemctl restart datadog-agent.service
     ```
