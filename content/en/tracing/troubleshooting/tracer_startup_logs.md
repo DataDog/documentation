@@ -86,7 +86,7 @@ Diagnostics for the PHP tracer print if the tracer is in DEBUG mode. They are al
 ```
 
 #### PHP Info
-The JSON string can also be obtained from the PHP info page and the diagnostic information will be displayed in a separate table to help diagnose common issues.
+Obtain the JSON string from the PHP info page. Diagnostic information is be displayed in a separate table to help diagnose common issues.
 
 {{< img src="tracing/troubleshooting/PHPInfo.png" alt="PHP Info"  >}}
 
