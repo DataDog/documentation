@@ -2,7 +2,8 @@
 title: Tracer Debug Logs
 kind: Documentation
 ---
-## Tracer debug mode
+
+### Enable Tracer debug mode
 
 Use Datadog debug settings to diagnose issues or audit trace data. We don't recommend enabling debug mode in production systems, because it increases the number of events that are sent to your loggers. Use it sparingly, for debugging purposes only.
 
@@ -172,15 +173,12 @@ make install
 {{% /tab %}}
 {{< /tabs >}}
 
-### Run your tracer in debug mode to collect logs
-
-After [enabling tracer debug mode](#tracer-debug-mode), check your application logs to see if there is more info about your issue.
-
-If there are errors that you don't understand, or if [traces][7] are reported as flushed to Datadog but you cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][8].
-
-### Tracer debug logs
+### Review Tracer debug logs
 
 When debug mode for your tracer is enabled, tracer-specific log messages report how the tracer was initialized and whether traces were sent to the Agent. **These logs are not sent to the Datadog Agent in the flare and are stored in a separate path depending on your logging configuration**. The following log examples show what might appear in your log file.
+
+If there are errors that you don't understand, or if traces are reported as flushed to Datadog but you cannot see them in the Datadog UI, [contact Datadog support][1] and provide the relevant log entries with [a flare][2].
+
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -385,3 +383,7 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 {{% /tab %}}
 {{< /tabs >}}
+
+
+[1]: /help/
+[2]: /agent/troubleshooting/#send-a-flare
