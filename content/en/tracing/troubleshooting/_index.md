@@ -74,7 +74,7 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
 1. **Confirm Agent configurations, including if APM is enabled**
 
-    While APM is enabled for Agent 6+, in containerized environments there is an additional configuration step for [non local traffic][8] and can be the solution to traces not being received.
+    While APM is enabled by default for Agent 6+, in containerized environments there is an additional configuration step for [non local traffic][8] that can be the solution to traces not being received.
 
     You can check this by running the command `netstat -van | grep 8126` on your Agent host. If you don't see an entry, this means you should check that your Agent is running and check the configuration in your `datadog.yaml` file. Instructions can be found on the [Agent Configuration page][8].
 
