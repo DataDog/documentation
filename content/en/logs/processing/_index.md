@@ -123,8 +123,7 @@ If a JSON formatted log file includes the `ddsource` attribute, Datadog interpre
 
 ### *service* attribute
 
-Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog 
-rprets its value as the log's service:
+Using the Datadog Agent or the RFC5424 format automatically sets the service value on your logs. However, if a JSON formatted log file includes the following attribute, Datadog interprets its value as the log's service:
 
 * `service`
 * `syslog.appname`
