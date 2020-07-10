@@ -44,35 +44,41 @@ Within Datadog Agent logs, if you see error messages about rate limits or max ev
 
 When you open a [support ticket][1], our support team may ask for some combination of the following types of information:
 
-1. **How are you confirming the issue? Provide links to a trace or screenshots, for example, and tell us what you expect to see**
+1. **How are you confirming the issue? Provide links to a trace or screenshots, for example, and tell us what you expect to see.**
 
     This allows us to confirm errors and attempt to reproduce your issues within our testing environments.
 
-1. **[Tracer Startup Logs](#tracer-startup-logs)**
+2. **[Tracer Startup Logs](#tracer-startup-logs)**
 
     Startup logs are a great way to spot misconfiguration of the tracer, or the inability for the tracer to communicate with the Datadog Agent. By comparing the configuration that the tracer sees to the one set within the application or container, we can identify areas where a setting is not being properly applied.
 
-1. **[Tracer Debug Logs](#tracer-debug-logs)**
+3. **[Tracer Debug Logs](#tracer-debug-logs)**
 
     Tracer Debug logs go one step deeper than startup logs, and will help us to identify if integrations are instrumenting properly in a manner that we aren't able to necessarily check until traffic flows through the application.  Debug logs can be extremely useful for viewing the contents of spans created by the tracer and can surface an error if there is a connection issue when attempting to send spans to the agent. Tracer debug logs are typically the most informative and reliable tool for confirming nuanced behavior of the tracer.
 
-1. **An [agent flare][5] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your agent while in [debug mode][6]**
+4. **An [agent flare][5] (snapshot of logs and configs) that captures a representative log sample of a time period when traces are sent to your agent while in [debug mode][6]**
 
     Agent flares allow us to see what is happening within the Datadog Agent, or if traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, or any metric discrepancies.
 
-1. **A description of your environment**
+    **Note**: If you are using Agent v7.19+ and using the Datadog Helm Chart with the [latest version][4] or a DaemonSet where the Datadog agent and trace-agent are in separate containers, you will need to run the following command to get a flare from the trace-agent:
+
+    {{< code-block lang="bash" filename="trace-agent.sh" >}}
+kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
+    {{< /code-block >}}
+
+5. **A description of your environment**
 
     Knowing how your application is deployed helps us identify likely issues for tracer-agent communication problems or misconfigurations. For difficult issues, we may ask to a see a Kubernetes manifest or an ECS task definition, for example.
 
-1. **Any automatic or [custom instrumentation][7], along with any configurations**
+6. **Any automatic or [custom instrumentation][7], along with any configurations**
 
     Custom instrumentation can be a very powerful tool, but also can have unintentional side effects on your trace visualizations within Datadog, so we ask about this to rule it out as a suspect.  Additionally, asking for your automatic instrumentation and configuration allows us to confirm if this matches what we are seeing in both tracer startup and debug logs.
 
-1. **Versions of languages, frameworks, the Datadog Agent, and Tracing Library being used**
+7. **Versions of languages, frameworks, the Datadog Agent, and Tracing Library being used**
 
     Knowing what versions are being used allows us to ensure integrations are supported, to check for known issues, or to recommend a tracer or language version upgrade if it will address the problem.
 
-1. **Confirm Agent configurations, including if APM is enabled**
+8. **Confirm Agent configurations, including if APM is enabled**
 
     While APM is enabled by default for Agent 6+, in containerized environments there is an additional configuration step for [non local traffic][8] that can be the solution to traces not being received.
 
