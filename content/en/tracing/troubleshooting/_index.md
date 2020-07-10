@@ -17,7 +17,7 @@ When experiencing unexpected behavior with Datadog APM, there are a few common i
 
 ## Confirm APM setup and Agent status
 
-All Datadog tracing libraries past the versions listed below emit [tracer startup logs][2] by default on startup, and output a JSON object that reflects the configurations applied, as well as any errors encountered, including if the Agent can be reached in languages this is possible.  These startup logs are a good way to confirm your configuration is being applied as expected. Additionally, providing these logs with your initial support request will help expedite our support process.
+All Datadog tracing libraries past the versions listed below emit [tracer startup logs][2] by default on startup, and output a JSON object that reflects the configurations applied, as well as any errors encountered, including if the Agent can be reached in languages where this is possible.  These startup logs are a good way to confirm your configuration is being applied as expected. Additionally, providing these logs with your initial support request will help expedite our support process.
 
 | Language | Version |
 |----------|---------|
