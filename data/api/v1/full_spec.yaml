@@ -6256,16 +6256,38 @@ components:
     SyntheticsAssertion:
       description: 'Object describing the assertions type, their associated operator,
 
-        which property they apply , and upon which target.'
+        which property they apply, and upon which target.'
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsAssertionTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
+      type: object
+    SyntheticsAssertionJSONPathOperator:
+      description: Assertion operator to apply.
+      enum:
+      - validatesJSONPath
+      type: string
+      x-enum-varnames:
+      - VALIDATES_JSON_PATH
+    SyntheticsAssertionJSONPathTarget:
+      description: An assertion for the `validatesJSONPath` operator.
       properties:
         operator:
-          $ref: '#/components/schemas/SyntheticsAssertionOperator'
+          $ref: '#/components/schemas/SyntheticsAssertionJSONPathOperator'
         property:
           description: The associated assertion property.
           type: string
         target:
-          description: Target to apply the assertion to. It can be a string, a number,
-            or a Date.
+          description: Composed target for `validatesJSONPath` operator.
+          properties:
+            jsonPath:
+              description: The JSON path to assert.
+              type: string
+            operator:
+              description: The specific operator to use on the path.
+              type: string
+            targetValue:
+              description: The path target value to compare to.
+              type: object
           type: object
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
@@ -6281,10 +6303,12 @@ components:
       - is
       - isNot
       - lessThan
+      - moreThan
       - matches
       - doesNotMatch
       - validates
       - isInMoreThan
+      - isInLessThan
       type: string
       x-enum-varnames:
       - CONTAINS
@@ -6292,10 +6316,29 @@ components:
       - IS
       - IS_NOT
       - LESS_THAN
+      - MORE_THAN
       - MATCHES
       - DOES_NOT_MATCH
       - VALIDATES
       - IS_IN_MORE_DAYS_THAN
+      - IS_IN_LESS_DAYS_THAN
+    SyntheticsAssertionTarget:
+      description: An assertion which uses a simple target.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionOperator'
+        property:
+          description: The associated assertion property.
+          type: string
+        target:
+          description: Value used by the operator.
+          type: object
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionType'
+      required:
+      - type
+      - operator
+      type: object
     SyntheticsAssertionType:
       description: Type of the assertion.
       enum:
@@ -7536,6 +7579,117 @@ components:
           description: Get hourly usage for analyzed logs.
           items:
             $ref: '#/components/schemas/UsageAnalyzedLogsHour'
+          type: array
+      type: object
+    UsageBillableSummaryBody:
+      description: Response with properties for each aggregated usage type.
+      properties:
+        account_billable_usage:
+          description: The total account usage.
+          format: int64
+          type: integer
+        elapsed_usage_hours:
+          description: Elapsed usage hours for some billable product.
+          format: int64
+          type: integer
+        first_billable_usage_hour:
+          description: The first billable hour for the org.
+          format: date-time
+          type: string
+        last_billable_usage_hour:
+          description: The last billable hour for the org.
+          format: date-time
+          type: string
+        org_billable_usage:
+          description: The number of units used within the billable timeframe.
+          format: int64
+          type: integer
+        percentage_in_account:
+          description: The percentage of account usage the org represents.
+          format: double
+          type: number
+        usage_unit:
+          description: Units pertaining to the usage.
+          type: string
+      type: object
+    UsageBillableSummaryHour:
+      description: Response with monthly summary of data billed by Datadog.
+      properties:
+        billing_plan:
+          description: The billing plan.
+          type: string
+        end_date:
+          description: Shows the last date of usage.
+          format: date-time
+          type: string
+        num_orgs:
+          description: The number of organizations.
+          format: int64
+          type: integer
+        org_name:
+          description: The organization name.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        ratio_in_month:
+          description: Shows usage aggregation for a billing period.
+          format: int64
+          type: integer
+        start_date:
+          description: Shows the first date of usage.
+          format: date-time
+          type: string
+        usage:
+          $ref: '#/components/schemas/UsageBillableSummaryKeys'
+      type: object
+    UsageBillableSummaryKeys:
+      description: Response with aggregated usage types.
+      properties:
+        apm_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_trace_search_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        fargate_container_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_container_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        iot_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        lambda_function_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_ingested_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        npm_flow_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        npm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        rum_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        siem_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_api_tests_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_browser_checks_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        timeseries_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+      type: object
+    UsageBillableSummaryResponse:
+      description: Response with monthly summary of data billed by Datadog.
+      properties:
+        usage:
+          description: An array of objects regarding usage of billable summary.
+          items:
+            $ref: '#/components/schemas/UsageBillableSummaryHour'
           type: array
       type: object
     UsageFargateHour:
@@ -15183,6 +15337,41 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
       summary: Get hourly usage for Lambda
+      tags:
+      - Usage Metering
+  /api/v1/usage/billable-summary:
+    get:
+      description: Get the monthly billable summary.
+      operationId: GetUsageBillableSummary
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for usage starting this month.'
+        in: query
+        name: month
+        required: false
+        schema:
+          format: date-time
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/UsageBillableSummaryResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+      summary: Get monthly billable summary
       tags:
       - Usage Metering
   /api/v1/usage/fargate:

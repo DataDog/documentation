@@ -14,6 +14,10 @@ further_reading:
   text: "Introduction to Service Level Objectives (SLOs)"
 ---
 
+{{< vimeo 382481078 >}}
+
+<br />
+
 ## Overview
 
 Service Level Objectives, or SLOs, are a key part of the site reliability engineering toolkit. SLOs provide a
@@ -50,7 +54,7 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 * `time window` - *, 7d, 30d, 90d
 * `type` - metric, monitor
 * `creator`
-* `tags` - datacenter, env, service, team, etc. 
+* `tags` - datacenter, env, service, team, etc.
 
 To run a search, use the checkboxes on the left and the search bar. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
 
@@ -64,13 +68,13 @@ When you create or edit an SLO, you can add tags for filtering on the [SLO statu
 
 {{< img src="monitors/service_level_objectives/overall_uptime_calculation.png" alt="overall uptime calculation"  >}}
 
-The overall uptime can be considered as a percentage of the time where **all** monitors are in the `OK` state. It is not the average of the aggregated monitors. 
+The overall uptime can be considered as a percentage of the time where **all** monitors are in the `OK` state. It is not the average of the aggregated monitors.
 
 Consider the following example for 3 monitors:
 
 | Monitor            | t1 | t2 | t3    | t4 | t5    | t6 | t7 | t8 | t9    | t10 | Uptime |
 |--------------------|----|----|-------|----|-------|----|----|----|-------|-----|--------|
-| Monitor 1          | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK    | OK  | 90%    | 
+| Monitor 1          | OK | OK | OK    | OK | ALERT | OK | OK | OK | OK    | OK  | 90%    |
 | Monitor 2          | OK | OK | OK    | OK | OK    | OK | OK | OK | ALERT | OK  | 90%    |
 | Monitor 3          | OK | OK | ALERT | OK | ALERT | OK | OK | OK | OK    | OK  | 80%    |
 | **Overall Uptime** | OK | OK | ALERT | OK | ALERT | OK | OK | OK | ALERT | OK  | 70%    |
@@ -83,12 +87,12 @@ You can view, edit your SLO and its properties and see the status over time and 
 
 ### SLO Default View
 
-The default SLO view is loaded when you land on the SLO list view. 
+The default SLO view is loaded when you land on the SLO list view.
 
 The default view includes:
 
 - An empty search query
-- A list of all defined SLOs in your organization 
+- A list of all defined SLOs in your organization
 - A list of available facets in left side facet list
 
 ### Saved Views
@@ -98,19 +102,19 @@ Saved views allow you to save and share customized searches in the SLO list view
 - A search query
 - A selected subset of facets
 
-After you query for a subset of SLOs on the list view, you can now add that query as a saved view. 
+After you query for a subset of SLOs on the list view, you can now add that query as a saved view.
 
 #### Add a saved view
 
 To add a saved view:
 
-1. Query for your SLOs. 
-2. Click *Save View* at the top. 
+1. Query for your SLOs.
+2. Click *Save View* at the top.
 3. Name your view and save.
 
 #### Load a Saved View
 
-To load a saved view, open the *Saved Views* panel at the top of the page and select. You can also search for views in the *Filter Saved Views* search box. 
+To load a saved view, open the *Saved Views* panel at the top of the page and select. You can also search for views in the *Filter Saved Views* search box.
 
 #### Saved Views selection
 

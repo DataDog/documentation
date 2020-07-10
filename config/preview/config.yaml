@@ -4,6 +4,13 @@ builddrafts: true
 enableGitInfo: true
 
 deployment: 
+    order: 
+      - ".css$"
+      - ".js$"
+      - ".jpg$"
+      - ".png$"
+      - ".gif$"
+      - ".mp4$"
 
     targets: 
     - name: "preview"

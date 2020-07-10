@@ -6,33 +6,51 @@ left:
       - name: product_features
         link: 'https://www.datadoghq.com/product/'
         title: Fonctionnalités
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/features.svg'' alt=''icône fonctionnalités''>'
       - name: product_integrations
         link: 'https://www.datadoghq.com/product/platform/integrations/'
         title: Intégrations
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/integrations.svg'' alt=''icône intégrations''>'
       - name: product_dashboards
         link: 'https://www.datadoghq.com/product/platform/dashboards/'
         title: Dashboards
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg'' alt=''icône dashboard''>'
       - name: product_logs
         link: 'https://www.datadoghq.com/product/log-management/'
         title: Log Management
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''icône log''>'
       - name: product_apm
         link: 'https://www.datadoghq.com/product/apm/'
         title: APM
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''icône apm''>'
+      - name: product_security
+        link: 'https://www.datadoghq.com/product/security-monitoring/'
+        title: Security Monitoring
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''icône sécurité''>'
       - name: product_network
         link: 'https://www.datadoghq.com/product/network-performance-monitoring/'
-        title: Réseau
+        title: Surveillance réseau
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''icône réseau''>'
       - name: product_synthetics
         link: 'https://www.datadoghq.com/product/synthetics-monitoring/'
-        title: Synthetics
+        title: Surveillance Synthetics
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''icône synthetics''>'
       - name: product_rum
         link: 'https://www.datadoghq.com/product/real-user-monitoring/'
-        title: RUM
+        title: Real User Monitoring
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''icône rum''>'
+      - name: product_serverless
+        link: 'https://www.datadoghq.com/product/serverless-monitoring/'
+        title: Environnement sans serveur
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''icône informatique sans serveur''>'
       - name: product_alerts
         link: 'https://www.datadoghq.com/product/platform/alerts/'
         title: Alertes
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''icône alerte''>'
       - name: product_api
         link: api
         title: API
+        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''icône api''>'
   - name: customers
     link: 'https://www.datadoghq.com/customers/'
     title: Clients
@@ -44,41 +62,69 @@ left:
     title: Solutions
     children:
       - name: solutions_financial
+        category: secteur
         link: 'https://www.datadoghq.com/solutions/financial-services/'
         title: Services financiers
       - name: solutions_manufacturing
+        category: secteur
         link: 'https://www.datadoghq.com/solutions/manufacturing-logistics/'
         title: Production et logistique
       - name: solutions_healthcare
+        category: secteur
         link: 'https://www.datadoghq.com/solutions/healthcare/'
         title: Santé et sciences de la vie
       - name: solutions_retail
+        category: secteur
         link: 'https://www.datadoghq.com/solutions/retail-ecommerce/'
         title: Commerce de détail et électronique
+      - name: solutions_publicsector
+        category: secteur
+        link: 'https://www.datadoghq.com/solutions/public-sector'
+        title: Secteur public
       - name: solutions_media
+        category: secteur
         link: 'https://www.datadoghq.com/solutions/media-entertainment/'
         title: Médias et divertissement
+      - name: solutions_technology
+        category: secteur
+        link: 'https://www.datadoghq.com/solutions/technology/'
+        title: Technologies
       - name: solutions_gaming
+        category: secteur
         link: 'https://www.datadoghq.com/solutions/gaming/'
         title: Jeux vidéo
       - name: solutions_cloudmigration
+        category: cas d'utilisation
         link: 'https://www.datadoghq.com/solutions/cloud-migration/'
         title: Migration vers le cloud
       - name: solutions_monitoringconsolidation
+        category: cas d'utilisation
         link: 'https://www.datadoghq.com/solutions/monitoring-consolidation/'
         title: Unification de la surveillance
       - name: solutions_devops
+        category: cas d'utilisation
         link: 'https://www.datadoghq.com/solutions/devops/'
         title: DevOps
+      - name: solutions_securityanalytics
+        category: cas d'utilisation
+        link: 'https://www.datadoghq.com/solutions/security-analytics/'
+        title: Analyse de la sécurité
       - name: solutions_hybridcloudmonitoring
+        category: cas d'utilisation
         link: 'https://www.datadoghq.com/solutions/hybrid-cloud-monitoring/'
         title: Surveillance Cloud hybride
       - name: solutions_iotmonitoring
+        category: cas d'utilisation
         link: 'https://www.datadoghq.com/solutions/iot-monitoring/'
         title: Surveillance IoT
       - name: solutions_machinelearning
+        category: cas d'utilisation
         link: 'https://www.datadoghq.com/solutions/machine-learning/'
         title: Apprentissage automatique
+      - name: solutions_businessanalytics
+        category: cas d'utilisation
+        link: 'https://www.datadoghq.com/solutions/business-analytics/'
+        title: BI en temps réel
 right:
   - name: about
     link: 'https://www.datadoghq.com/about/'

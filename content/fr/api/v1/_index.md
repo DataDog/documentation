@@ -34,19 +34,19 @@ Endpoints d'intégrations disponibles :
 
 **Endpoints de plateforme**
 
-Utilisez ces endpoints pour envoyer des données depuis différents composants de la plateforme Datadog et y récupérer des données :
+Utilisez ces endpoints pour envoyer et récupérer des données dans Datadog :
 
 - Les endpoints de [métriques][11] vous permettent d'envoyer des données de [métriques][12] afin de les représenter graphiquement sur les dashboards de Datadog et de les interroger sur l'intervalle de votre choix.
 - Les endpoints d'[événements][13] vous permettent d'envoyer des événements au [flux d'événements Datadog][14] et d'y récupérer des événements.
-- Utilisez les endpoints [Synthetics][15] pour créer, lancer et interrompre et consulter les résultats des [tests Synthetics][16].
+- Utilisez les endpoints [Synthetics][15] pour créer, lancer et interrompre des [tests Synthetics][16], ou visualiser leurs résultats.
 - Utilisez l'[API de tracing de l'Agent][17] pour envoyer des traces à l'Agent Datadog afin de les transmettre par la suite à Datadog.
 
 {{< h2 >}}Visualiser vos données{{< /h2 >}}
 
 Lorsque vous envoyez des données à Datadog, vous pouvez utiliser l'API pour créer automatiquement des représentations visuelles de ces données :
 
-- Créez des [dashboards][18] et consultez les [listes de dashboard][19].
-- Gérez [les tags de host][20]/
+- Créez des [dashboards][18] et consultez les [listes de dashboards][19].
+- Gérez [les tags de host][20].
 - Créez des [graphiques intégrables][21].
 - Prenez un [snapshot de graphique][22].
 - [Dépendances de service][23] : consultez la liste de vos services APM et de leurs dépendances.
@@ -88,7 +88,7 @@ Quelques précisions concernant la politique de limitation de débit des API :
 - La limite de débit pour les appels de l'[API permettant de représenté un snapshot][22] est de `60` par heure et par organisation. Cette limite peut être augmentée sur demande.
 - La limite de débit pour les appels de l'[API permettant de configurer des logs][27] est de `6000` par minute et par organisation. Cette limite peut être augmentée sur demande.
 
-| En-têtes des limites de débit      | Description                                              |
+| En-têtes de limites de débit      | Description                                              |
 | ----------------------- | -------------------------------------------------------- |
 | `X-RateLimit-Limit`     | Nombre de requêtes autorisées sur une période donnée             |
 | `X-RateLimit-Period`    | Durée en secondes pour les réinitialisations (alignées sur le calendrier) |

@@ -2359,6 +2359,10 @@ api_v1:
     parent: Usage Metering
     url: get-hourly-usage-for-lambda
     generated: true
+  - name: Get monthly billable summary
+    parent: Usage Metering
+    url: get-monthly-billable-summary
+    generated: true
   - name: Get hourly usage for Fargate
     parent: Usage Metering
     url: get-hourly-usage-for-fargate
@@ -2562,6 +2566,14 @@ api_v2:
   - name: Logs
     url: /fr/api/v2/logs/
     identifier: Logs
+    generated: true
+  - name: Get a quick list of logs
+    parent: Logs
+    url: get-a-quick-list-of-logs
+    generated: true
+  - name: Get a list of logs
+    parent: Logs
+    url: get-a-list-of-logs
     generated: true
   - name: Logs Archives
     url: /fr/api/v2/logs-archives/

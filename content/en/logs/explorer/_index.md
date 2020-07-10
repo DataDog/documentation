@@ -90,7 +90,7 @@ In case logs comes from a serverless source, the Host Section is replaced with a
 
 #### Correlation with APM data
 
-Make sure you enable [trace injection in logs][13]) and follow our [Unified Service Tagging][15] best practices to benefit from all the capabilities of Logs and APM correlation.
+Make sure you enable [trace injection in logs][13] and follow our [Unified Service Tagging][15] best practices to benefit from all the capabilities of Logs and APM correlation.
 
 Click on the **APM Tab** and see the log in the context of its whole trace, with upstream and downstream services running. Deep dive in the APM data and the [trace in APM][12]. 
 

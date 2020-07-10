@@ -13,7 +13,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
 ---
-## Compatibilty Requirements
+## Compatibility requirements
 
 The Java Tracer requires Java JRE 1.7 and higher for either Oracle JDK and OpenJDK. Datadog does not officially support any early-access versions of Java. For a full list of supported libraries, visit the [Compatibility Requirements][1] page.
 
@@ -26,7 +26,7 @@ Otherwise, to begin tracing applications written in any language, first [install
 Next, download `dd-java-agent.jar` that contains the Agent class files:
 
 ```shell
-wget -O dd-java-agent.jar 'https://repository.sonatype.org/service/local/artifact/maven/redirect?r=central-proxy&g=com.datadoghq&a=dd-java-agent&v=LATEST'
+wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
 ```
 
 Finally, add the following JVM argument when starting your application in your IDE, Maven or Gradle application script, or `java -jar` command:
