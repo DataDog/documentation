@@ -152,7 +152,7 @@ Après quelques minutes, votre trace s'affiche dans Datadog sous le service `hel
 [2]: https://docs.datadoghq.com/fr/tracing/setup/
 [3]: https://www.datadoghq.com
 [4]: https://app.vagrantup.com/ubuntu/boxes/xenial64
-[5]: https://www.vagrantup.com/intro/getting-started
+[5]: https://www.vagrantup.com/intro/getting-started/index.html
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [7]: https://app.datadoghq.com/account/settings#api
 [8]: /fr/agent/guide/agent-commands/#agent-information
