@@ -118,7 +118,7 @@ To load a saved view, open the *Saved Views* panel at the top of the page and se
 
 #### Saved Views selection
 
-Star saved views to mark them as favorites. Starred saved views are available directly from the main navigation menu.
+Star saved views to mark them as favorites.
 
 #### Share a Saved View
 
