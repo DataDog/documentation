@@ -106,6 +106,8 @@ Complete examples:
 
 After completing this configuration, HTTP requests to NGINX will initiate and propagate Datadog traces, and will appear in the APM UI.
 
+#### NGINX and FastCGI
+
 When the location is serving a FastCGI backend instead of HTTP, the `location` block should use `opentracing_fastcgi_propagate_context` instead of `opentracing_propagate_context`.
 
 ## NGINX Ingress Controller for Kubernetes
