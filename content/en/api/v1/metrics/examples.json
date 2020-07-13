@@ -264,7 +264,7 @@
           {
             "metric": "system.load.1",
             "points": [
-              null
+              []
             ]
           }
         ]
