@@ -6256,16 +6256,38 @@ components:
     SyntheticsAssertion:
       description: 'Object describing the assertions type, their associated operator,
 
-        which property they apply , and upon which target.'
+        which property they apply, and upon which target.'
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsAssertionTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
+      type: object
+    SyntheticsAssertionJSONPathOperator:
+      description: Assertion operator to apply.
+      enum:
+      - validatesJSONPath
+      type: string
+      x-enum-varnames:
+      - VALIDATES_JSON_PATH
+    SyntheticsAssertionJSONPathTarget:
+      description: An assertion for the `validatesJSONPath` operator.
       properties:
         operator:
-          $ref: '#/components/schemas/SyntheticsAssertionOperator'
+          $ref: '#/components/schemas/SyntheticsAssertionJSONPathOperator'
         property:
           description: The associated assertion property.
           type: string
         target:
-          description: Target to apply the assertion to. It can be a string, a number,
-            or a Date.
+          description: Composed target for `validatesJSONPath` operator.
+          properties:
+            jsonPath:
+              description: The JSON path to assert.
+              type: string
+            operator:
+              description: The specific operator to use on the path.
+              type: string
+            targetValue:
+              description: The path target value to compare to.
+              type: object
           type: object
         type:
           $ref: '#/components/schemas/SyntheticsAssertionType'
@@ -6281,10 +6303,12 @@ components:
       - is
       - isNot
       - lessThan
+      - moreThan
       - matches
       - doesNotMatch
       - validates
       - isInMoreThan
+      - isInLessThan
       type: string
       x-enum-varnames:
       - CONTAINS
@@ -6292,10 +6316,29 @@ components:
       - IS
       - IS_NOT
       - LESS_THAN
+      - MORE_THAN
       - MATCHES
       - DOES_NOT_MATCH
       - VALIDATES
       - IS_IN_MORE_DAYS_THAN
+      - IS_IN_LESS_DAYS_THAN
+    SyntheticsAssertionTarget:
+      description: An assertion which uses a simple target.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionOperator'
+        property:
+          description: The associated assertion property.
+          type: string
+        target:
+          description: Value used by the operator.
+          type: object
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionType'
+      required:
+      - type
+      - operator
+      type: object
     SyntheticsAssertionType:
       description: Type of the assertion.
       enum:
@@ -9319,7 +9362,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IPRanges'
-          description: List of IP ranges.
+          description: OK
       security: []
       servers:
       - url: https://{subdomain}.{site}
@@ -15742,7 +15785,7 @@ paths:
   /api/v1/usage/synthetics:
     get:
       deprecated: true
-      description: Get hourly usage for [Synthetics API checks](https://docs.datadoghq.com/synthetics/).
+      description: Get hourly usage for [Synthetics checks](https://docs.datadoghq.com/synthetics/).
       operationId: GetUsageSynthetics
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh]
@@ -15780,7 +15823,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Forbidden
-      summary: Get hourly usage for Synthetics API Checks
+      summary: Get hourly usage for Synthetics Checks
       tags:
       - Usage Metering
   /api/v1/usage/synthetics_api:
@@ -16695,13 +16738,15 @@ tags:
     \ can use Datadog\u2019s API to\nmanage both test types programmatically.\n\n\
     For more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
-- description: 'The tag endpoint allows you to tag hosts with keywords
+- description: 'The tag endpoint allows you to assign tags to hosts,
 
-    meaningful to you, like `role:database`. All metrics sent
+    for example: `role:database`. Those tags are applied to
 
-    from a host have its tags applied. When fetching and applying
+    all metrics sent by the host. Refer to hosts by name
 
-    tags to a particular host, refer to hosts by name (`yourhost.example.com`).
+    (`yourhost.example.com`) when fetching and applying
+
+    tags to a particular host.
 
 
     The component of your infrastructure responsible for a tag is identified

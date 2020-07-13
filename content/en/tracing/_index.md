@@ -94,9 +94,9 @@ Now that you've configured your application to send traces to Datadog, start get
 
 {{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
 
-### Integrate with OpenTracing
+### Customize your Instrumentation or add OpenTracing
 
-[Integrate your instrumentation][9] seamlessly between Opentracing and Datadog APM.
+[Seamlessly connect your instrumentation][9] between automatic instrumentation, dd-trace-api, and OpenTracing.
 
 ## Further Reading
 
@@ -110,4 +110,4 @@ Now that you've configured your application to send traces to Datadog, start get
 [6]: /tracing/app_analytics/
 [7]: /synthetics/apm/
 [8]: /tracing/profiling/
-[9]: /tracing/opentracing/
+[9]: /tracing/manual_instrumentation/
