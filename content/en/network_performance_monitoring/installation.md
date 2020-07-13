@@ -310,7 +310,9 @@ services:
 [1]: https://app.datadoghq.com/account/settings#api
 {{% /tab %}}
 {{% tab "ECS" %}}
-To set up on AWS ECS, see the [AWS ECS][7] documentation page.
+To set up on AWS ECS, see the [AWS ECS][1] documentation page.
+
+[1]: /integrations/amazon_ecs/#network-performance-monitoring-collection-linux-only
 
 {{% /tab %}}
 {{< /tabs >}}
