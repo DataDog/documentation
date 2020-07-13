@@ -67,7 +67,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_AGENT_MAJOR_VERSION=7 DD_AGENT_FLAVOR=iot-agent 
 
 To manually install the IoT Agent on Debian-based operating systems, run the following commands:
 
-1. Update `apt` and install `apt-transport-https` to download through https:
+1. Update `apt` and install `apt-transport-https` to download through HTTPS:
     ```bash
     sudo apt-get update
     sudo apt-get install apt-transport-https
@@ -104,7 +104,7 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
     ```
     [datadog]
     name = Datadog, Inc.
-    baseurl = https://yum.datadoghq.com/stable/7/<HOST_OS>
+    baseurl = https://yum.datadoghq.com/stable/7/<HOST_ARCHITECTURE>
     enabled=1
     gpgcheck=1
     gpgkey=https://yum.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -121,7 +121,7 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
     sudo yum install datadog-iot-agent
     ```
 
-3. Copy the example config and plug in your API key
+3. Copy the example config and plug in your API key:
     ```bash
     DD_API_KEY=<YOUR KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
