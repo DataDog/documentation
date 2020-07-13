@@ -60,7 +60,7 @@ That's alot of missing data - check first to see if there is an AWS outage?
 {{/is_alert_recovery}}
 ```
 
-**Note**: Recovery notifications are not currently triggered if a monitor transitions through a `NO_DATA` state. For example, `Alert` -> `No Data` -> `OK`.
+**Note**: Recovery notifications are not triggered if a monitor transitions through a `NO_DATA` state. For example, `Alert` -> `No Data` -> `OK`.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
