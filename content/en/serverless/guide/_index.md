@@ -1,9 +1,11 @@
 ---
-title: End-to-end Serverless Monitoring Guide
+title: Serverless Monitoring Guides
+aliases:
+  - /infrastructure/serverless/azure_app_services/
 kind: guide
 ---
 
-Use this guide to set up metrics, traces and logs in your serverless ecosystem. 
+Use these guides to set up metrics, traces and logs in your serverless ecosystem. 
 
 - First, we’ll set up **Datadog Lambda Enhanced Metrics** to illustrate how to graph cold starts across your Lambda infrastructure. 
 - Second, we’ll enable Lambda **logs ingestion** and show you how to navigate Lambda error logs. Third, we’ll demonstrate some tools for fast root cause analysis by enabling Lambda **distributed tracing**. 

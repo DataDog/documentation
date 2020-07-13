@@ -1,5 +1,7 @@
 ---
-title: End-to-end Serverless Monitoring Guide
+title: End-to-end Node JS Serverless Monitoring Guide
+aliases:
+  - /infrastructure/serverless/azure_app_services/nodejs
 kind: guide
 ---
 

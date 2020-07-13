@@ -5,6 +5,7 @@ aliases:
   - /graphing/infrastructure/cloudfunctions
   - /graphing/infrastructure/serverless_functions
   - /graphing/infrastructure/serverless/
+  - /infrastructure/serverless/
 further_reading:
 - link: "/integrations/amazon_xray/"
   tag: "X-Ray Integration"

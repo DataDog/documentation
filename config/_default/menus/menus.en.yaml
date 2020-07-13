@@ -527,21 +527,6 @@ main:
     url: infrastructure/livecontainers/
     parent: infrastructure
     weight: 6
-  - name: Serverless
-    url: infrastructure/serverless/
-    parent: infrastructure
-    identifier: serverless
-    weight: 7
-  - name: Azure App Services Extension
-    url: infrastructure/serverless/azure_app_services/
-    parent: serverless
-    identifier: app_services_extension
-    weight: 701
-  - name: Datadog Lambda Layer
-    url: infrastructure/serverless/datadog_lambda_layer
-    parent: serverless
-    identifier: datadog_lambda_layer
-    weight: 701
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -1380,11 +1365,51 @@ main:
     parent: npm
     identifier: npm_map
     weight: 3
+  - name: Serverless
+    url: serverless
+    pre: nav_serverless
+    identifier: serverless
+    weight: 170000
+  - name: Installation
+    url: serverless/installation
+    parent: serverless
+    identifier: serverless_installation
+    weight: 1
+  - name: Python
+    url: serverless/installation/python
+    parent: serverless_installation
+    weight: 101
+  - name: Node
+    url: serverless/installation/nodejs
+    parent: serverless_installation
+    weight: 102
+  - name: Ruby
+    url: serverless/installation/ruby
+    parent: serverless_installation
+    weight: 103
+  - name: Troubleshooting
+    url: serverless/troubleshooting
+    parent: serverless
+    identifier: serverless_troubleshooting
+    weight: 2
+  - name: Forwarder
+    url: serverless/troubleshooting/installing_the_forwarder
+    parent: serverless_troubleshooting
+    weight: 201
+  - name: Layer
+    url: serverless/troubleshooting/installing_the_layer
+    parent: serverless_troubleshooting
+    weight: 202
+  - name: Azure App Services Extension
+    url: serverless/azure_app_services
+    parent: serverless
+    identifier: serverless_app_services
+    weight: 5
   - name: Developer Tools
     url: developers/
     pre: nav_developers
     identifier: dev_tools
-    weight: 170000
+    weight: 180000
   - name: DogStatsD
     url: developers/dogstatsd/
     parent: dev_tools
@@ -1546,12 +1571,12 @@ main:
     url: api/
     pre: nav_api
     identifier: api
-    weight: 180000
+    weight: 190000
   - name: Account Management
     url: account_management/
     pre: nav_account
     identifier: account_management
-    weight: 190000
+    weight: 200000
   - name: User management
     url: account_management/users/
     parent: account_management
@@ -1624,7 +1649,7 @@ main:
     url: security/
     pre: nav_security
     identifier: security
-    weight: 200000
+    weight: 210000
   - name: Agent
     url: security/agent/
     parent: security
@@ -1645,7 +1670,7 @@ main:
     url: help/
     pre: nav_help
     identifier: help_top_level
-    weight: 210000
+    weight: 220000
 api_v1:
   - name: Overview
     url: /api/v1/

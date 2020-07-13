@@ -1,6 +1,8 @@
 ---
 title: Microsoft Azure App Services Extension
 kind: documentation
+aliases:
+  - /infrastructure/serverless/azure_app_services/
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
