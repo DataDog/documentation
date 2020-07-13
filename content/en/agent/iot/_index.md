@@ -18,7 +18,7 @@ The IoT Agent is currently available for private beta. Request access by complet
 
 ## Capabilities
 
-The IoT Agent includes the following system checks. Configuration is identical to the full Agent.
+The IoT Agent includes the following system checks. Configuration for IoT devices is identical to other types of hosts.
 
 - [System][1] (includes CPU, IO, load, memory, swap, and uptime)
 - [Disk][2]
@@ -31,7 +31,7 @@ The IoT Agent also supports:
 - Custom metric collection using an embedded [DogStatsD][6] server
 - Log collection using [tailing files][7], [TCP/UDP][8], and [journald][9]
 
-The IoT Agent does not include the Python interpreter and other integrations pre-packaged with the full Agent. It also doesn’t support tracing for APM, live process monitoring, or network performance monitoring.
+The IoT Agent does not include the Python interpreter and other integrations pre-packaged with the standard Agent. It also doesn’t support tracing for APM, live process monitoring, or network performance monitoring.
 
 ## Setup
 
@@ -136,7 +136,7 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
 
 ## CLI
 
-The IoT Agent supports the same [CLI commands][10] as the full Agent.
+The IoT Agent supports the same [CLI commands][10] as the standard Agent.
 
 ## Further Reading
 
