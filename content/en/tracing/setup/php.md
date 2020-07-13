@@ -277,4 +277,4 @@ To remove the PHP tracer:
 [12]: /tracing/faq/php-tracer-manual-installation
 [13]: /tracing/setup/php/#environment-variable-configuration
 [14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
-[15]: /tracing/setup/nginx/#nginx-configuration
+[15]: /tracing/setup/nginx/#nginx-and-fastcgi
