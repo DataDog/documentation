@@ -130,7 +130,7 @@ env[DD_AGENT_HOST] = $SOME_ENV
 env[DD_SERVICE] = my-app
 ```
 
-**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][14] for more details.
+**Note**: If you have enabled APM for your NGINX server, make sure you have properly configured the `opentracing_fastcgi_propagate_context` setting for distributed tracing to properly work. See [NGINX APM configuration][15] for more details.
 
 ### PHP CLI server
 
@@ -277,3 +277,4 @@ To remove the PHP tracer:
 [12]: /tracing/faq/php-tracer-manual-installation
 [13]: /tracing/setup/php/#environment-variable-configuration
 [14]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
+[15]: /tracing/setup/nginx/#nginx-configuration
