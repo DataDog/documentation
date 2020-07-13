@@ -10846,6 +10846,20 @@ paths:
         schema:
           format: int64
           type: integer
+      - description: Include information on the muted status of hosts and when the
+          mute expires.
+        in: query
+        name: include_muted_hosts_data
+        required: false
+        schema:
+          type: boolean
+      - description: Include additional metadata about the hosts (agent_version, machine,
+          platform, processor, etc.).
+        in: query
+        name: include_hosts_metadata
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
