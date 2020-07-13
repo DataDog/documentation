@@ -161,7 +161,7 @@ Le check Druid n'inclut aucun événement.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][12].
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/druid/assets/images/druid_dashboard_overview.png
+[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/druid/images/druid_dashboard_overview.png
 [2]: https://docs.datadoghq.com/fr/developers/dogstatsd/
 [3]: https://druid.apache.org/docs/latest/operations/metrics.html
 [4]: https://docs.datadoghq.com/fr/agent/
