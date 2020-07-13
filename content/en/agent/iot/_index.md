@@ -13,7 +13,7 @@ further_reading:
 The Datadog IoT Agent is a version of the Agent optimized for monitoring IoT devices and embedded applications. Customers use the IoT Agent to monitor a wide variety of devices from digital displays to security devices running image detection algorithms.
 
 <div class="alert alert-warning">
-The IoT Agent is currently available for private beta. Request access by completing the <a href="https://www.datadoghq.com/">form</a>.
+The IoT Agent is currently available for private beta. Request access by completing the <a href="https://docs.google.com/forms/d/e/1FAIpQLSfaoqr9Pgievq7f2WE6wcQMF1YjsOwiXHbmO2FehUlQwmNu0A/viewform?usp=sf_link">form</a>.
 </div>
 
 ## Capabilities
