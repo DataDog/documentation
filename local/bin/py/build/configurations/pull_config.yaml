@@ -275,6 +275,6 @@
     - action: security-rules
       branch: main
       globs:
-        - "*.json"
+        - "security_monitoring/*.json"
       options:
         dest_path: '/security_monitoring/default_rules/'
