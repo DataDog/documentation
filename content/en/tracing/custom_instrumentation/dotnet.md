@@ -17,8 +17,10 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 <div class="alert alert-info">
-If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/dotnet/">.NET Setup Instructions</a>.
+If you have not yet read the instructions for auto-instrumentation and setup and are looking for those, you can find them here: <a href="https://docs.datadoghq.com/tracing/setup/dotnet/">.NET Setup Instructions</a>.
 </div>
+
+When using both custom and automatic instrumentation, it is important to keep the msi installer and NuGet package versions in sync.
 
 This page details common use cases for adding and customizing observability with Datadog APM.
 
