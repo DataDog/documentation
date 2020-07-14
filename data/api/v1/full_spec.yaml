@@ -1421,7 +1421,7 @@ components:
       - NORMAL
       - LOW
     EventQueryDefinition:
-      description: List of events
+      description: The event query.
       properties:
         search:
           description: The query being made on the event.
@@ -2383,7 +2383,7 @@ components:
           type: string
       type: object
     LogQueryDefinition:
-      description: List of logs.
+      description: The log query.
       properties:
         compute:
           $ref: '#/components/schemas/LogsQueryCompute'
