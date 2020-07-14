@@ -168,9 +168,9 @@ DD_TRACE_DEBUG=true php -S localhost:8888
 | `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`    | `false`     | Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_exec()` call to `https://datadoghq.com` has the service name `host-datadoghq.com` instead of the default service name of `curl`. |
 | `DD_TRACE_MEASURE_COMPILE_TIME`           | `true`      | Record the compile time of the request (in milliseconds) onto the top-level span                                                               |
 | `DD_TRACE_NO_AUTOLOADER`                  | `false`     | Set to `true` to enable auto instrumentation for applications that do not use an autoloader                                                    |
-| `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`    | `null`      | CSV of regexes that identifies path fragments corresponding to ids (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)). |
-| `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`  | `null`      | CSV of uri mappings to normalize resource naming for incoming requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)). |
-| `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`  | `null`      | CSV of uri mappings to normalize resource naming for outgoing requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)). |
+| `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`    | `null`      | CSV of regexes that identifies path fragments corresponding to IDs (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)). |
+| `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`  | `null`      | CSV of URI mappings to normalize resource naming for incoming requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)). |
+| `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`  | `null`      | CSV of URI mappings to normalize resource naming for outgoing requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)). |
 | `DD_TRACE_SAMPLE_RATE`                    | `1.0`       | The sampling rate for the traces (defaults to: between `0.0` and `1.0`). For versions <0.36.0, this parameter is `DD_SAMPLING_RATE`.           |
 | `DD_TRACE_SAMPLING_RULES`                 | `null`      | A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `[{"sample_rate": 0.2}]`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]` (see [Integration names](#integration-names)). |
 | `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`  | `true`      | Enable URL's as resource names (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).                            |
@@ -208,12 +208,12 @@ Use the name when setting integration-specific configuration such as, `DD_<INTEG
 #### Map resource names to normalized URI
 
 <div class="alert alert-warning">
-<strong>Deprecation notice:</strong> As of version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.47.0">0.47.0</a> the legacy setting <code>DD_TRACE_RESOURCE_URI_MAPPING</code> is deprecated. It still works for the forseable future but we strongly encourage you to use the new settings outlined in this paragraph to be ready once we remove the legacy support.
+<strong>Deprecation notice:</strong> As of version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.47.0">0.47.0</a> the legacy setting <code>DD_TRACE_RESOURCE_URI_MAPPING</code> is deprecated. It still works for the foreseeable future but it is strongly encouraged that you use the new settings outlined in this paragraph to avoid issues when legacy support is removed.
 
-Note the setting any of <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, and <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> will opt-in to the new resource normalization approach and any value in <code>DD_TRACE_RESOURCE_URI_MAPPING</code> will be ignored.
+Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, and <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> will opt-in to the new resource normalization approach and any value in <code>DD_TRACE_RESOURCE_URI_MAPPING</code> will be ignored.
 </div>
 
-For http server and client integrations, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
+For HTTP server and client integrations, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
 
 | HTTP Request                       | Resource Name |
 |:-----------------------------------|:--------------|
@@ -242,7 +242,7 @@ There are a few cases that are not covered by the automatic normalization that i
 | `/cities/new-york/rivers`        | `GET /cities/?/rivers`        |
 | `/nested/cities/new-york/rivers` | `GET /nested/cities/?/rivers` |
 
-We can identify two classes of scenarios that are not covered by automatic normalization:
+There are two classes of scenarios that are not covered by automatic normalization:
 
   - The path fragment to normalize has a reproducible patter nand can be present in any part of the url, for example `id<number>` in the example above. This scenario is covered by the setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` below.
   - The path fragment can be anything, and the previous path fragment indicates that a value has to be normalized. For example `/cities/new-york` tells us that `new-york` has to be normalized as it is the name of a city. This scenario is covered by settings `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` and `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` for incoming and outgoing requests respectively.
@@ -251,11 +251,11 @@ We can identify two classes of scenarios that are not covered by automatic norma
 
 This setting is a CSV of regex that are applied to every path fragment independently. For example setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for the first example `/using/prefix/id123/for/id` would apply the regex to all framents `using`, `prefix`, `id123`, `for`, and `id`. The final normalized resorce name would be `GET /using/prefix/?/for/id`.
 
-Note that multiple regular expressions separate by comma can be added `^id\d+$,code\d+$` and that the comma character `,` is not escaped, hence cannot be used in the regular expression.
+Note that multiple regular expressions separated by a comma can be added `^id\d+$,code\d+$` and that the comma character `,` is not escaped, hence it cannot be used in the regular expression.
 
 ###### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` and `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
 
-This setting is a CSV of patterns that can contain a wildcard `*`. For example, adding the pattern `cities/*` means that everytime the fragment `cities` is found while analyzing a url, then the next fragment, if any, will be replaced with `?`. Patterns are applied at any depth, so applying the following rule will both normalize `/cities/new-york` and `/nested/cities/new-york` in the table above.
+This setting is a CSV of patterns that can contain a wildcard `*`. For example, adding the pattern `cities/*` means that everytime the fragment `cities` is found while analyzing a URL, then the next fragment, if any, will be replaced with `?`. Patterns are applied at any depth, so applying the following rule will both normalize `/cities/new-york` and `/nested/cities/new-york` in the table above.
 
 Patterns can be applied to a part of a specific fragment. For example `path/*-fix` would normalize the url `/some/path/changing-fix/nested` to `/some/path/?-fix/nested`
 
