@@ -17,7 +17,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 <div class="alert alert-info">
-If you have not yet read the instructions for auto-instrumentation and setup and are looking for those, you can find them here: <a href="https://docs.datadoghq.com/tracing/setup/dotnet/">.NET Setup Instructions</a>.
+For instructions on how to setup the .NET Tracer and enable automatic instrumentation, see the <a href="https://docs.datadoghq.com/tracing/setup/dotnet/">.NET Setup Instructions</a>.
 </div>
 
 **Note:** When using both custom and automatic instrumentation, it is important to keep the msi installer and NuGet package versions in sync.
