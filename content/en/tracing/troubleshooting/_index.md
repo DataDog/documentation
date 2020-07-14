@@ -60,7 +60,7 @@ When you open a [support ticket][1], our support team may ask for some combinati
 
     Agent flares allow us to see what is happening within the Datadog Agent, or if traces are being rejected or malformed within the Agent.  This will not help if traces are not reaching the Agent, but does help us identify the source of an issue, or any metric discrepancies.
 
-    **Note**: If you are using Agent v7.19+ and using the Datadog Helm Chart with the [latest version][4] or a DaemonSet where the Datadog agent and trace-agent are in separate containers, you will need to run the following command to get a flare from the trace-agent:
+    **Note**: If you are using Agent v7.19+ and using the Datadog Helm Chart with the [latest version][4] or a DaemonSet where the Datadog agent and trace-agent are in separate containers, you will need to run the following command with `log_level: DEBUG` set in your `datadog.yaml` to get a flare from the trace-agent:
 
     {{< code-block lang="bash" filename="trace-agent.sh" >}}
 kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
