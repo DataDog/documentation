@@ -140,10 +140,8 @@ To automatically instrument a Windows Service, set the required environment vari
 * Key: HKLM\System\CurrentControlSet\Services\<Service Name>
 * Value Name: Environment
 * Value Data:
-```text
  CORECLR_ENABLE_PROFILING=1
  CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-```
 
 
 This can be done either through the Registry Editor as in the image below, or through a PowerShell snippet:
