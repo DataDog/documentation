@@ -64,25 +64,44 @@ If your application runs in IIS, skip the rest of this section.
 
 For Windows applications **not** running in IIS, set these two environment variables before starting your application to enable automatic instrumentation:
 
+
+**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started with these environment variables are set. You should limit instrumentation only to the applications that need to be traced. **We do not recommend setting these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
+
 | Name                   | Value                                    |
 | ---------------------- | ---------------------------------------- |
 | `COR_ENABLE_PROFILING` | `1`                                      |
 | `COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 
-For example, to set the environment variables from a batch file before starting your application:
+#### Console Apps
+
+Set the environment variables from a batch file before starting your application:
 
 ```bat
 rem Set environment variables
-SET COR_ENABLE_PROFILING=1
-SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+SET CORECLR_ENABLE_PROFILING=1
+SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
-example.exe
+dotnet.exe example.dll
 ```
 
-To set environment variables for a Windows Service, use the multi-string key `HKLM\System\CurrentControlSet\Services\{service name}\Environment` in the Windows Registry.
+#### Windows Services
 
-**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started with these environment variables are set. You should limit instrumentation only to the applications that need to be traced. **We do not recommend setting these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
+To automatically instrument a Windows Service, set the required environment variables using a multi-string value in the Windows Registry:
+
+{{< code-block lang="dotnet">}}
+Key: HKLM\System\CurrentControlSet\Services\{service name}
+Value Name: Environment
+Value Data:
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+{{< /code-block >}}
+
+```text
+[String[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+
+Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
+```
 
 ## Manual Instrumentation
 
@@ -91,6 +110,8 @@ To manually instrument your code, add the `Datadog.Trace` [NuGet package][5] to 
 For more details on manual instrumentation and custom tagging, see [Manual instrumentation documentation][6].
 
 Manual instrumentation is supported on .NET Framework 4.5 and above on Windows and on .NET Core 2.1, 3.0, and 3.1 on Windows and Linux.
+
+**Note:** When using both manual and automatic instrumentation, it is important to keep the msi installer and NuGet package versions in sync.
 
 ## Configuration
 
