@@ -72,6 +72,26 @@ For Windows applications **not** running in IIS, set these two environment varia
 | `COR_ENABLE_PROFILING` | `1`                                      |
 | `COR_PROFILER`         | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 
+#### Windows Services
+
+To automatically instrument a Windows Service, set the required environment variables using a multi-string value in the Windows Registry:
+
+- Key: HKLM\System\CurrentControlSet\Services\<Service Name>
+- Value Name: Environment
+- Value Data:
+CORECLR_ENABLE_PROFILING=1
+CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+
+This can be done either through the Registry Editor as in the image below, or through a PowerShell snippet:
+
+{{< img src="tracing/setup/dotnet/RegistryEditor.png" alt="Registry Editor"  >}}
+
+{{< code-block lang="dotnet" filename="PowerShell" >}}
+[String[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+
+Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
+{{< /code-block >}}
+
 #### Console Apps
 
 Set the environment variables from a batch file before starting your application:
@@ -83,24 +103,6 @@ SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
 dotnet.exe example.dll
-```
-
-#### Windows Services
-
-To automatically instrument a Windows Service, set the required environment variables using a multi-string value in the Windows Registry:
-
-{{< code-block lang="dotnet">}}
-Key: HKLM\System\CurrentControlSet\Services\{service name}
-Value Name: Environment
-Value Data:
-CORECLR_ENABLE_PROFILING=1
-CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-{{< /code-block >}}
-
-```text
-[String[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
-
-Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
 ```
 
 ## Manual Instrumentation
