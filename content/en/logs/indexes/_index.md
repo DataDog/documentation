@@ -29,7 +29,7 @@ You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][
 
 By default, each account has a single index representing a monolithic set of all your logs. Datadog also offers multiple indexes if you require:
 
-* Multiple [retention periods](#update-log-retention)
+* Multiple [retention periods](#update-log-retention) 
 * Multiple [daily quotas](#set-daily-quota), for finer budget control.
 
 The Log Explorer supports [queries across multiple indexes][7].
@@ -107,7 +107,7 @@ To add retentions that are not in your current contract contact [Datadog support
 
 ## Set daily quota
 
-You can set a daily quota to hard-limit the number of logs that are stored within an index per day. This quota is applied for all logs that should have been stored (i.e. after exclusion filters are applied).
+You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (i.e. after exclusion filters are applied).
 Once the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][10], and used to [generate metrics from logs][9].
 
 Update or remove this quota at any time when editing the Index:
@@ -115,22 +115,6 @@ Update or remove this quota at any time when editing the Index:
 {{< img src="logs/indexes/index_quota.png" alt="index details"  style="width:70%;">}}
 
 **Note**: Indexes daily quotas reset automatically at 2:00pm UTC (4:00pm CET, 10:00am EDT, 7:00am PDT).
-
-## Data and index deletion
-
-You can request deletion of data within a time frame, or an entire index, by clicking on the deletion icon next to an index name.
-
-{{< img src="logs/indexes/delete_button.png" alt="index details"  style="width:70%;">}}
-
-You will be presented with a modal containing two options:
-
-  - Delete data within a specific time frame
-  - Delete an entire index, along with all of its contained data
-
-{{< img src="logs/indexes/delete_modal.png" alt="index details"  style="width:70%;">}}
-
-When you request the deletion of data, a support ticket is automatically generated on your behalf to support@datadoghq.com. Someone
-from Datadog may follow up with you to confirm the request and learn more about the data that you need removed.
 
 ## Further Reading
 
