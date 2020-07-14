@@ -148,7 +148,6 @@ This can be done either through the Registry Editor as in the image below, or th
 
 {{< code-block lang="powershell" filename="add-env-var.ps1" >}}
 [String[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
-
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<NAME> -Name Environment -Value $v
 {{< /code-block >}}
 
@@ -158,11 +157,11 @@ Set the environment variables from a batch file before starting your application
 
 ```bat
 rem Set environment variables
-SET CORECLR_ENABLE_PROFILING=1
-SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+SET COR_ENABLE_PROFILING=1
+SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
-dotnet.exe example.dll
+example.exe
 ```
 
 {{% /tab %}}
@@ -214,7 +213,7 @@ CMD ["dotnet", "example.dll"]
 
 {{< /tabs >}}
 
-**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started with these environment variables are set. You should limit instrumentation only to the applications that need to be traced. **We do not recommend setting these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
+**Note:** The .NET runtime tries to load a profiler into _any_ .NET process that is started with these environment variables set. You should limit instrumentation only to the applications that need to be traced. **We do not recommend setting these environment variables globally as this causes _all_ .NET processes on the host to load the profiler.**
 
 ## Manual Instrumentation
 
