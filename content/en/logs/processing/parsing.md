@@ -50,6 +50,33 @@ After processing, the following structured log is generated:
 
 {{< img src="logs/processing/processors/_parser.png" alt="Parsing example 1"  style="width:80%;">}}
 
+Another example, parsing the `glog` format that Kubernetes uses (via the Kube Scheduler item in the Pipeline Library):
+
+```text
+W0424 11:47:41.605188       1 authorization.go:47] Authorization is disabled
+```
+
+Parsing rule:
+
+```text
+kube_scheduler %{regex("\\w"):level}%{date("MMdd HH:mm:ss.SSSSSS"):timestamp}\s+%{number:logger.thread_id} %{notSpace:logger.name}:%{number:lineno}\] %{data:msg}
+```
+
+And extracted JSON:
+
+```json
+{
+  "level": "W",
+  "timestamp": 1587728861605,
+  "logger": {
+    "thread_id": 1,
+    "name": "authorization.go"
+  },
+  "lineno": 47,
+  "msg": "Authorization is disabled"
+}
+```
+
 **Note**:
 
 * If you have multiple parsing rules in a single Grok parser:
