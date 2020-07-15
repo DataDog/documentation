@@ -2213,6 +2213,18 @@ api_v1:
     parent: Synthetics
     url: pause-or-start-a-test
     generated: true
+  - name: Create a global variable
+    parent: Synthetics
+    url: create-a-global-variable
+    generated: true
+  - name: Delete a global variable
+    parent: Synthetics
+    url: delete-a-global-variable
+    generated: true
+  - name: Edit a global variable
+    parent: Synthetics
+    url: edit-a-global-variable
+    generated: true
   - name: Tags
     url: /ja/api/v1/tags/
     identifier: Tags
