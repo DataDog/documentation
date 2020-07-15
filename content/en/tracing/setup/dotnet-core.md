@@ -161,7 +161,7 @@ SET CORECLR_ENABLE_PROFILING=1
 SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Start application
-example.exe
+dotnet.exe example.dll
 ```
 
 {{% /tab %}}
