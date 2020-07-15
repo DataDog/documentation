@@ -56,9 +56,20 @@ Exact resource requirements depend on usage. Datadog found the following when te
 
 To automatically download and install the correct IoT Agent for your operating system and chipset architecture, use the following command:
 
+{{< site-region region="us" >}}
+
 ```shell
 DD_API_KEY=<YOUR_DD_API_KEY> DD_AGENT_MAJOR_VERSION=7 DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 ```
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+```shell
+DD_API_KEY=<YOUR_DD_API_KEY> DD_AGENT_MAJOR_VERSION=7 DD_AGENT_FLAVOR=datadog-iot-agent DD_SITE="datadoghq.eu" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+```
+
+{{< /site-region >}}
 
 #### Manual
 
@@ -85,15 +96,30 @@ To manually install the IoT Agent on Debian-based operating systems, run the fol
     sudo apt-get install datadog-iot-agent
     ```
 
-4. Copy the example config and plug in your API key:
-    ```bash
-    DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
-    ```
+{{< site-region region="us" >}}
 
-5. Start the IoT Agent:
-    ```bash
-    sudo systemctl restart datadog-agent.service
-    ```
+<ol start="4">
+  <li><p>Copy the example config and plug in your API key:</p>
+  <pre><code>DD_API_KEY=&lt;YOUR_DD_API_KEY&gt; ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
+  </li>
+</ol>
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+<ol start="4">
+  <li><p>Copy the example config and plug in your API key:</p>
+  <pre><code>DD_API_KEY=&lt;YOUR_DD_API_KEY&gt; DD_SITE="datadoghq.eu" ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
+  </li>
+</ol>
+
+{{< /site-region >}}
+
+<ol start="5">
+  <li><p>Start the IoT Agent:</p>
+  <pre><code>sudo systemctl restart datadog-agent.service</code></pre>
+  </li>
+</ol>
 
 {{% /tab %}}
 {{% tab "RPM" %}}
@@ -121,15 +147,30 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
     sudo yum install datadog-iot-agent
     ```
 
-3. Copy the example config and plug in your API key:
-    ```bash
-    DD_API_KEY=<YOUR KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
-    ```
+{{< site-region region="us" >}}
 
-4. Start the IoT Agent:
-    ```bash
-    sudo systemctl restart datadog-agent.service
-    ```
+<ol start="3">
+  <li><p>Copy the example config and plug in your API key:</p>
+  <pre><code>DD_API_KEY=&lt;YOUR_DD_API_KEY&gt; ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
+  </li>
+</ol>
+
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+
+<ol start="3">
+  <li><p>Copy the example config and plug in your API key:</p>
+  <pre><code>DD_API_KEY=&lt;YOUR_DD_API_KEY&gt; DD_SITE="datadoghq.eu" ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"</code></pre>
+  </li>
+</ol>
+
+{{< /site-region >}}
+
+<ol start="4">
+  <li><p>Start the IoT Agent:</p>
+  <pre><code>sudo systemctl restart datadog-agent.service</code></pre>
+  </li>
+</ol>
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -137,6 +178,25 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
 ## CLI
 
 The IoT Agent supports the same [CLI commands][10] as the standard Agent.
+
+## Uninstall
+
+```shell
+sudo apt-get remove datadog-iot-agent -y
+```
+
+This command removes the Agent, but does not remove:
+
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/datadog-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+
+If you also want to remove those elements, use this command instead:
+
+```shell
+sudo apt-get remove --purge datadog-iot-agent -y
+```
 
 ## Further Reading
 
